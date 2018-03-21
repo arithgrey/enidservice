@@ -1,0 +1,76 @@
+.acceder_btn{
+    padding: 10px;
+    background: #1040A1;
+    color: white !important;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.acceso_a_cuenta{
+  background: blue;
+  padding: 10px!important;
+}
+.acceso_a_cuenta:hover{
+  cursor: pointer;
+}
+.seccion_registro_nuevo_usuario_enid_service{
+  display: none;
+}
+.btn_soy_nuevo{
+  padding:15px;background:#1040A1;
+  color: white!important;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+.contenedor-info-ventas{display: none;}
+.error_login{
+  padding: 10px;
+  font-weight: bold;
+  font-size: 1em;
+  background: #e99587;
+  color: white;
+}
+.recupara-pass{
+  margin-top: 30px;
+}
+.recupara-pass:hover{
+  cursor: pointer;
+  padding: 10px;
+}
+footer, .footer-extra{display: none;  }
+.menu_completo_enid_service{
+  display: none;
+}
+form {
+  padding: 20px 0;
+  position: relative;
+  z-index: 2;
+}
+.wrapper_login form input {  
+  
+  width: 250px;
+  border-radius: 3px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+  font-size: 18px;  
+  font-weight: 300;
+}
+.wrapper_login form button {
+
+  background-color: white;
+  border: 0;
+  padding: 10px 15px;
+  background: black;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 3px;
+  width: 250px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-transition-duration: 0.25s;
+          transition-duration: 0.25s;
+}
+form button:hover {
+  background-color: #0d20ed;
+}

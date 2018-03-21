@@ -1,0 +1,1 @@
+[15-Dec-2017 06:03:56 UTC] PHP Fatal error:  Call to undefined function get_cotizaciones_btn() in /home/enidserv/public_html/inicio/view_tema/footer_template.php on line 104

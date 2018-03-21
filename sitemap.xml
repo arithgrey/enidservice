@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">            
+<url>
+  <loc>http://enidservice.com/inicio/nosotros/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/paginas_web/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/adwords/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/tienda_en_linea/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/crm/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/ultimos_proyectos/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/contacto/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/login/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/formas_de_pago/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/documentacion/preguntasfrecuentes.pdf</loc>
+  <lastmod>2017-06-06T00:56:56+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/documentacion/preguntas_frecuentes_crm.pdf</loc>
+  <lastmod>2017-06-06T00:56:40+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/documentacion/preguntas_frecuenrtes_tienda_linea.pdf</loc>
+  <lastmod>2017-06-06T00:56:58+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/documentacion/precios_y_preguntas_frecuentes_google_adwords.pdf</loc>
+  <lastmod>2017-06-06T00:56:56+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/formas_de_pago/?q=1</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://enidservice.com/inicio/formas_de_pago/?q=2</loc>
+  <changefreq>weekly</changefreq>
+</url>
+</urlset>

@@ -1,0 +1,29 @@
+.texto_ventas_titulo{
+	font-weight: bold;
+	color: black;
+}
+.url_youtube_alert{
+	background: red;
+	padding: 10px;
+	color: white;
+}
+.text_articulos_disponibles{
+	background: #2a5790 !important;
+	padding: 5px;
+	color: white;
+}
+.text_numero_existencia{
+	margin-top: 10px;
+}
+.mjs_articulo_no_disponible{
+	background: red;
+	padding: 3px;
+	color: white;
+}
+.mensaje_imagenes_visible{
+	background: orange;
+	padding: 3px;
+	color: black;
+	font-weight: bold;
+	
+}

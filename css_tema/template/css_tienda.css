@@ -1,0 +1,37 @@
+.card{position:relative;display:-webkit-box;
+	display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:
+	vertical;-webkit-box-direction:normal;
+	-webkit-flex-direction:column;-ms-flex-direction:column;
+	flex-direction:column;background-color:#fff;border:1px solid rgba(0,0,0,.125);
+	border-radius:.25rem;
+	height: 400px!important;
+}
+.card .card-imagen{
+	height: 250px;
+}
+.card-block{
+	-webkit-box-flex:1;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;
+	padding:1.2rem; border-top-style: solid;border-top-width: .9px;margin-top: 0px;
+	margin-left: 10px;
+
+
+	}
+.contenedor-articulo:hover{        
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(15,51,158,0.1);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(15,51,158,0.1);
+        box-shadow: 10px 10px 5px 0px rgba(15,51,158,0.1);
+}
+.categoria_text:hover{
+        text-decoration: block!important;
+        color: black!important;
+}
+.pagination > li > a, .pagination > li > span{
+	color: white!important;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+	background: black!important;
+	padding: 7px;
+}
+.texto_existencia{
+	font-size: 1.3em;
+}

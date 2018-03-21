@@ -1,0 +1,3 @@
+[19-Jul-2017 22:13:45 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/enidserv/public_html/inicio/ventas/system/database/DB.php on line 103
+[19-Jul-2017 22:13:51 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/enidserv/public_html/inicio/ventas/system/database/DB.php on line 103
+[03-Aug-2017 04:09:45 UTC] PHP Fatal error:  Call to undefined function get_cotizaciones_btn() in /home/enidserv/public_html/inicio/view_tema/footer_template.php on line 97

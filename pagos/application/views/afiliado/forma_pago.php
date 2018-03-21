@@ -1,0 +1,1 @@
+<?=print_r($forma_pago)?>

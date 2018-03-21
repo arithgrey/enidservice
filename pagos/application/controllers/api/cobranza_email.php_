@@ -1,0 +1,111 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'/libraries/REST_Controller.php';
+require 'Request.php';
+
+class Cobranza_email extends REST_Controller{      
+    function __construct(){
+        parent::__construct();                          
+        $this->load->helper("proyectos");            
+        $this->load->model("cobranzamodel");                      
+        $this->load->library("sessionclass");            
+    } 
+    /**/    
+    function carga_infor_a_mensualidades($data , $param){
+
+        $id_proyecto = $data["ciclo_facturacion_proyecto_persona"][0]["id_proyecto"];
+        $data["info_proyecto"] = $this->cobranzamodel->get_proyecto($id_proyecto);        
+        $id_servicio  = $data["info_proyecto"][0]["id_servicio"];
+        $data["servicio"]=
+        $this->cobranzamodel->get_servicio_por_id_servicio($id_servicio);
+        $data["recibo"] =   $param["id_proyecto_persona_forma_pago"];
+        $this->load->view("cobranza_email/resumen_pago_email" , $data);                   
+    }
+    /**/
+    function carga_infor_no_aplica($data , $param){
+
+        $id_proyecto = $data["ciclo_facturacion_proyecto_persona"][0]["id_proyecto"];        
+        $data["info_proyecto"] = $this->cobranzamodel->get_proyecto($id_proyecto);        
+        $id_servicio  = $data["info_proyecto"][0]["id_servicio"];
+        
+        $data["servicio"]=$this->cobranzamodel->get_servicio_por_id_servicio($id_servicio);
+        $data["recibo"] =   $param["id_proyecto_persona_forma_pago"];
+
+        $this->load->view("cobranza/resumen_no_aplica" , $data);
+
+    }    
+    /**/
+    function carga_info_pago_por_ciclo($data , $param){
+
+        $id_proyecto = $data["ciclo_facturacion_proyecto_persona"][0]["id_proyecto"];
+        $data["info_proyecto"] = $this->cobranzamodel->get_proyecto($id_proyecto);        
+        $id_servicio  = $data["info_proyecto"][0]["id_servicio"];
+        $data["servicio"]=  
+        $this->cobranzamodel->get_servicio_por_id_servicio($id_servicio);
+        $data["recibo"] =   $param["id_proyecto_persona_forma_pago"];
+        $this->load->view("cobranza_email/resumen_pago" , $data);                   
+    }
+    /*
+    function resumen_desglose_pago_GET(){
+
+        $param =  $this->get();        
+        $data["info_anticipos"] = $this->cobranzamodel->get_anticipos($param);        
+      
+        $ciclo_facturacion =  
+        $this->cobranzamodel->get_ciclo_facturacion_por_id_proyecto_persona($param);
+      
+        $data["ciclo_facturacion_proyecto_persona"] = $ciclo_facturacion;
+        $ciclo_facturacion =  $ciclo_facturacion[0]["ciclo_facturacion"];  
+      
+        $data["info_proyecto_persona_forma_pago"] = 
+        $this->cobranzamodel->get_info_proyecto_persona_forma_pago($param);
+        
+       
+
+        switch ($ciclo_facturacion){
+
+            case 1:                
+                    $this->carga_info_pago_por_ciclo($data , $param);    
+                break;
+            
+            case 2:                
+                    $this->carga_info_pago_por_ciclo($data , $param);    
+                break;
+            
+
+            case 3:                
+                    $this->carga_info_pago_por_ciclo($data , $param);    
+                break;
+            
+
+            case 4:                
+                    $this->carga_info_pago_por_ciclo($data , $param);    
+                break;
+            
+
+            case 5:                
+                    $this->carga_infor_no_aplica($data , $param);    
+                break;
+            
+            case 6:                
+                    $this->carga_infor_a_mensualidades($data , $param);    
+                break;
+            
+            case 7:                
+                    $this->carga_infor_a_mensualidades($data , $param);    
+                break;
+            
+            case 8:                
+                    $this->carga_infor_a_mensualidades($data , $param);    
+                break;
+            
+            default:
+                $this->load->view("cobranza/test" , $data);
+                break;
+        }
+        
+    }   
+    */
+    
+    
+    /**/
+}?>

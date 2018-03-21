@@ -1,0 +1,234 @@
+            th:hover{
+                cursor: pointer;
+            }
+            .notificacion_tareas_pendientes_enid_service{
+                background: #0a399b;
+                padding: 5px;
+                color: white;
+                font-size: .8em!important;
+            }
+            .alerta_notificacion_ok{
+                background: #0a399b;
+                padding: 5px;
+                color: white;
+                font-size: .8em!important;
+            }
+            .alerta_notificacion_fail{
+                background: red;
+                padding: 5px;
+                color: white;
+                font-size: .8em!important;
+            }
+            .li_menu{
+                font-size: .85em!important;
+            }
+            .contenedor_listado_info{
+                overflow-x:auto; 
+                overflow-y:auto; 
+            }
+            /*
+            .contenedor_movil{
+                overflow: scroll;
+                height: 400px;                
+            }
+            */
+            .contenedor_central_modal{
+                height: 400px;
+                overflow: auto;
+                overflow-x: hidden;
+            }
+            .color_linkeding{
+                color: #006FA6 !important;
+            }
+            .blue_linkeding_background{
+                background: #006FA6 !important;
+            }
+            .tel_contacto_btn{
+                display: none;
+            }
+            .demo_ejemplo:hover{
+                cursor: pointer;
+            }
+            .red_enid{                
+                color: #F94206!important;
+            }
+            .blue_enid{
+                color: #0656F9!important;
+            }
+            .blue_enid2{
+                background:#0052E1;
+            }.blue_enid3{
+                background:#05378D;
+            }
+            .blue_enid_background{
+                
+                background: #0656F9!important;
+            }
+            .blue_enid_background2{
+                background: #02587a!important;
+            }
+            .red_enid_background{                
+                background: #F94206!important;
+            }
+
+            .strong{
+                font-weight: bold !important;
+            }
+            .btn{
+                background: #E62303!important;
+                color: white;
+            }
+
+            .portfolio-modal .modal-dialog{margin:0;height:100%;width:auto}
+            .portfolio-modal .modal-content{border-radius:0;
+            background-clip:border-box;-webkit-box-shadow:none;box-shadow:none;border:none;min-height:100%;
+            padding:100px 0;text-align:center}.portfolio-modal .modal-content 
+            h2{margin-bottom:15px;font-size:3em}.portfolio-modal .modal-content 
+            p{margin-bottom:30px}
+            .portfolio-modal .modal-content p.item-intro{margin:20px 0 30px;font-family:"Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;font-style:italic;font-size:16px}.portfolio-modal .modal-content ul.list-inline{margin-bottom:30px;margin-top:0}.portfolio-modal .modal-content img{margin-bottom:30px}.portfolio-modal .close-modal{position:absolute;width:75px;height:75px;background-color:transparent;top:25px;right:25px;cursor:pointer}.portfolio-modal .close-modal:hover{opacity:.3}.portfolio-modal .close-modal .lr{height:75px;width:1px;margin-left:35px;background-color:#166781;transform:rotate(45deg);-ms-transform:rotate(45deg);-webkit-transform:rotate(45deg);z-index:1051}.portfolio-modal .close-modal .lr .rl{height:75px;width:1px;background-color:#166781;transform:rotate(90deg);-ms-transform:rotate(90deg);-webkit-transform:rotate(90deg);z-index:1052}
+            .portfolio-modal .modal-backdrop{opacity:0;display:none}::-moz-selection{text-shadow:none;background:#038798;}::selection{text-shadow:none;background:#038798;}img::selection{background:0 0}img::-moz-selection{background:0 0}
+            
+            a:hover{
+                cursor: pointer;
+            }
+            .fa:hover{
+                cursor: pointer;   
+            }
+            .img-icon-enid:hover{
+                cursor: pointer; 
+            }.modal-enid {            
+                margin: 0px;
+            }.modal-enid .modal-content {
+                //margin-top: 5%;
+                border-radius: 0px;
+                border-left-width: 0px;
+                border-right-width: 0px;
+                height: 80%;
+                overflow: auto;
+            }.modal-enid .modal-title {
+                font-size: 34px;
+                font-weight: bold;
+            }.tab_enid:hover{
+                cursor: pointer;
+                text-decoration: none;
+                color: black;
+            }.tab_enid{
+                font-size: .8em;
+                text-decoration: underline;
+                color: black;
+            }.titulo-enid{
+                color: #166781 !important;
+                font-size: 24px !important;
+                font-weight: bold !important;
+                margin: 0px 0px 5px !important;
+                text-transform: uppercase !important;
+           }.titulo-enid-sm{
+                color: #166781 !important;
+                font-size: 18px;
+                font-weight: bold;
+                margin: 0px 0px 5px;
+                text-transform: uppercase;
+            }.error_enid{
+                background: red;
+                color: white;
+            }.response_ok_enid{            
+                background: #357ebd !important;
+                width: 25%;
+                padding: 2px;
+                color: white !important;
+            }.alerta_enid{
+                background: #ba6d78;
+                width: 25%;
+                padding: 2px;
+                color: white;   
+                font-size: .9em;
+                border-radius: 1px;
+            }
+
+            .white{
+                color: white !important;
+            }
+            .black{
+                color: black !important;
+            }
+            .ver-public-lg-emp{
+                background: #244684 !important;
+                padding: 10px !important;
+            }
+
+            
+            li{
+              list-style: none !important;
+            }
+
+            /*Todo lo que pertenece a medios*/
+            @media only screen and (max-width: 991px) {
+                
+
+                /**/
+                .btn_whatsApp{
+                    display: block!important;
+                }
+                /**/
+                .tel_contacto_btn{
+                    display: block;
+                }
+                
+                
+            }        
+            @media (min-width: 992px) {
+                .modal-enid .modal-header,
+                .modal-enid .modal-body,
+                .modal-enid .modal-footer {
+                    width: 900px;
+                }
+                .btn_whatsApp{
+                    display: none;!important;
+                }
+            }
+            @media (min-width: 768px) {
+                .modal-enid .modal-header,
+                .modal-enid .modal-body,
+                .modal-enid .modal-footer {
+                    width: 600px;
+                    margin: 30px auto;
+                }
+            }
+            /**/
+            @media only screen and (max-width: 991px) {
+             .text-l{    
+                font-size: .5em;
+            }
+            .text-l:hover{
+                text-decoration: none;
+            }
+
+               
+}
+.custom-select{display:inline-block;max-width:100%;height:calc(2.25rem + 2px);padding:.375rem 1.75rem .375rem .75rem;line-height:1.25;color:#464a4c;vertical-align:middle;background:#fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center;-webkit-background-size:8px 10px;background-size:8px 10px;border:1px solid rgba(0,0,0,.15);border-radius:.25rem;-moz-appearance:none;-webkit-appearance:none}
+.a_enid_blue{
+    background: #015ec8!important;
+    padding: 10px!important;
+    color: white!important;
+    font-weight: bold!important;
+}
+.a_enid_black{
+
+    background: black!important;
+    padding: 10px!important;
+    color: white!important;
+    font-weight: bold!important;   
+}
+.a_enid_blue_sm{
+    background: #015ec8!important;
+    padding: 5px!important;
+    color: white!important;
+    font-weight: bold!important;
+}
+.a_enid_black_sm{
+
+    background: black!important;
+    padding: 5px!important;
+    color: white!important;
+    font-weight: bold!important;   
+}
