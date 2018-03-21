@@ -5,6 +5,33 @@ class valoracion_model extends CI_Model{
       $this->load->database();      
   	} 
     /**/
+    private function get_limit($param){
+        /**/
+        $page = (isset($param['page'])&& !empty($param['page']))?
+        $param['page']:1;
+        $per_page = $param["resultados_por_pagina"]; //la cantidad de registros que desea mostrar
+        $adjacents  = 4; //brecha entre páginas después de varios adyacentes
+        $offset = ($page - 1) * $per_page;    
+        return " LIMIT $offset , $per_page ";
+    }
+    /**/
+    function get_desglose_valoraciones_vendedor($param){
+
+      $_num =  get_random();
+      $this->create_tmp_servicios_usuario($_num , 1 , $param);
+        $limit =  $this->get_limit($param);
+        $query_get =  "SELECT v.* FROM  valoracion v 
+                            INNER JOIN tmp_servicios_usuario_$_num u 
+                            ON v.id_servicio =  u.id_servicio
+                            ORDER BY valoracion DESC $limit";   
+        $result =  $this->db->query($query_get);
+        $data_complete["data"] =  $result->result_array();
+        $data_complete["sql"] =  $result->result_array();
+      $this->create_tmp_servicios_usuario($_num , 0 , $param);
+      return $data_complete;
+        
+    }
+    /**/
     function set_visto_pregunta($param){
 
       $campo ="leido_cliente";
@@ -231,7 +258,7 @@ class valoracion_model extends CI_Model{
 
   	}
   	/**/
-  	function create_tmp_servicios_usuario($_num , $flag , $param){
+  	private function create_tmp_servicios_usuario($_num , $flag , $param){
 
   		$query_drop = "DROP TABLE IF EXISTS tmp_servicios_usuario_$_num";
   		$this->db->query($query_drop);

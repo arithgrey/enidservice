@@ -7,9 +7,9 @@
 			VALORACIONES Y RESEÑAS
 		</h3>
 		<a
-		href="../resumen" 
-		style="text-decoration: underline;color: white;padding: 4px;" 
-		class='blue_enid2'>
+		href="../recomendacion/?q=<?=$id_usuario?>" 
+		style="text-decoration: underline;color: white;padding: 4px;color: white!important;" 
+		class='blue_enid_background2'>
 			Más valoraciones sobre este vendedor
 		</a>
 	</center>

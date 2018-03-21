@@ -10,17 +10,44 @@ class Valoracion extends REST_Controller{
         $this->load->library("sessionclass");
     }
     /**/
+    function resumen_valoraciones_vendedor_GET(){
+        
+        $param =  $this->get();
+        $comentarios =  $this->valoracion_model->get_desglose_valoraciones_vendedor($param);
+        $data_comentarios  =  crea_resumen_valoracion_comentarios($comentarios["data"] , "");
+        if(count($comentarios["data"])> 0 ){
+            
+            $data_comentarios = "<hr><div class='text_resumen'> RESEÑAS HECHAS POR OTROS CLIENTES </div><hr>".$data_comentarios;          
+        }
+        $this->response($data_comentarios);        
+    }
+    /**/
     function usuario_GET(){
 
         $param =  $this->get();
         $valoraciones = $this->valoracion_model->get_valoraciones_usuario($param);    
         if(count($valoraciones) > 0){
             $info_valoraciones =  crea_resumen_valoracion($valoraciones , 1);
-            $this->response($info_valoraciones);
+
+            $data["info_valoraciones"] =  $info_valoraciones;
+            $data["data"] = $valoraciones;
+
+            $this->response($data);
         }else{
             $this->response("");    
         }
         
+    }
+
+    private function get_usuario_por_servicio($param){
+        
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("usuario/id_usuario_por_id_servicio/format/json/",$param);
+        $response =  $result->response;        
+        return json_decode($response , true);
     }
     /**/
     function articulo_GET(){
@@ -29,11 +56,16 @@ class Valoracion extends REST_Controller{
         $valoraciones = $this->valoracion_model->get_valoraciones_articulo($param);    
         $data["servicio"] =$param["servicio"];
         
+
         if($valoraciones[0]["num_valoraciones"] > 0){
             /*Cargamos los comentarios*/
             $data["comentarios"]=  $this->valoracion_model->get_valoraciones($param);    
             $data["numero_valoraciones"] = $valoraciones;
             $data["respuesta_valorada"]=  $param["respuesta_valorada"];
+            
+            $usuario =  $this->get_usuario_por_servicio($data);
+            $id_usuario=  $usuario[0]["id_usuario"];
+            $data["id_usuario"] = $id_usuario;
             $this->load->view("valoraciones/articulo", $data);        
         }else{
             $this->load->view("valoraciones/se_el_primero", $data);        

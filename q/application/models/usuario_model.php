@@ -4,6 +4,15 @@
         parent::__construct();        
         $this->load->database();
     }
+
+    /********/
+    function get_usuario_por_servicio($param){
+      /**/  
+      $id_servicio =  $param["servicio"];
+      $query_get ="SELECT id_usuario FROM servicio WHERE id_servicio = $id_servicio LIMIT 1";
+      $result = $this->db->query($query_get);
+      return $result->result_array();
+    }
     /**/
     function nombre_usuario($param){
             
@@ -35,7 +44,9 @@
         
         $query_get =    "SELECT 
                         idusuario id_usuario, 
-                        nombre, apellido_paterno, apellido_materno 
+                        nombre , 
+                        apellido_paterno , 
+                        apellido_materno 
                         FROM usuario 
                         WHERE idusuario = $id_usuario LIMIT 1"; 
         $result =  $this->db->query($query_get);

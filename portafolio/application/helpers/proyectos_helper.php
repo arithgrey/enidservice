@@ -457,7 +457,7 @@ if(!function_exists('invierte_date_time')){
     
       $mensaje_final ="de los consumidores recomiendan este producto";
       if($persona == 1){
-          $mensaje_final ="de los consumidores te recomiendan";          
+          $mensaje_final ="de los consumidores recomiendan";          
       }
       $valoraciones =  $numero_valoraciones[0];
       $num_valoraciones =  $valoraciones["num_valoraciones"];

@@ -15,8 +15,9 @@ class Home extends CI_Controller{
         $this->principal->crea_historico(48);            
         $data["servicios"] = $this->principal->get_servicios();         
         $data["action"] =valida_valor_variable($this->input->get() , "action");    
-        
-        $data["valoraciones"] = $this->resumen_valoraciones($this->sessionclass->getidusuario());
+            
+        $valoraciones=  $this->resumen_valoraciones($this->sessionclass->getidusuario());
+        $data["valoraciones"] =$valoraciones["info_valoraciones"]; 
         /**/
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;        
@@ -79,9 +80,9 @@ class Home extends CI_Controller{
         $url = "portafolio/index.php/api/";         
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
-        $this->restclient->set_option('format', "html");        
-        $result = $this->restclient->get("valoracion/usuario/format/html/" , $q);
-        return $result->response;
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("valoracion/usuario/format/json/" , $q);
+        return json_decode($result->response , true);
     }
     /**/    
 
