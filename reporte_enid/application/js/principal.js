@@ -1,49 +1,26 @@
 var incidencia = 0;
 $(document).ready(function(){
-	//$("footer").ready(carga_objetivos_dia );
+	set_option("page" , 0);
 	$("#nuevos_miembros").click(carga_nuevos_miembros);
-	$("#seccion_bugs").click(carga_bugs_enid);
-	$("#form-calificacion-incidencia").submit(modifica_inicidencia);
-	$("#estado_incidencia").change(carga_bugs_enid);
 	$(".mail_marketing").click(carga_metricas_mail_marketing);
 	$(".form_busqueda_mail_enid").submit(carga_metricas_mail_marketing);
 	$(".usabilidad_btn").click(carga_uso_sistema);
 	$(".cotizaciones").ready(carga_metricas_cotizaciones);
 	$(".cotizaciones").click(carga_metricas_cotizaciones);
 	$(".form_busqueda_global_enid").submit(carga_metricas_cotizaciones);
-	$(".btn_mensajeria_camp").click(lanzar_mensajeria);	
 	$('.datetimepicker4').datepicker();
 	$('.datetimepicker5').datepicker();	
 	$(".form_busqueda_actividad_enid").submit(busqueda_actividad_enid);
-	$(".productividad_usuario").click(carga_metricas_por_usuario);
-	$(".form_busqueda_productividad_usuario").submit(carga_metricas_por_usuario);
 	$(".presentaciones").click(carga_presentaciones);
-	$(".form_presentaciones").submit(carga_presentaciones);
-	
+	$(".form_presentaciones").submit(carga_presentaciones);	
 	$("#form_metas").submit(registra_metas);
 	$(".cargar_perfiles_disponibles").click(cargar_perfiles_disponibles);
-
-	$("#form_busqueda_tipo_negocio").submit(cargar_perfiles_disponibles);
-	$(".mostrar_servicio_sw").click(mostrar_servicio_sw);
-	$(".mostrar_adw").click(mostrar_servicio_adw);
-	$(".mostrar_tl").click(mostrar_servicio_tl);
-	$(".mostrar_crm").click(mostrar_servicio_crm);
-	
-	/**/
-	$(".form_busqueda_blog").submit(carga_metricas_blog);
-
-	$(".btn_repo_blog").click(function(){
-		$(".form_busqueda_blog").submit();
-	});
-	/**/
+	$("#form_busqueda_tipo_negocio").submit(cargar_perfiles_disponibles);	
 	$(".form_busqueda_desarrollo").submit(carga_metricas_desarrollo);
 	$(".form_busqueda_desarrollo_solicitudes").submit(carga_solicitudes_cliente);
-
 	$(".comparativa").click(carga_comparativas);
-
 	$(".form_busqueda_afiliacion").submit(carga_repo_afiliacion);
-	$(".form_busqueda_afiliacion_productividad").submit(carga_repo_afiliacion_productividad);
-	
+	$(".form_busqueda_afiliacion_productividad").submit(carga_repo_afiliacion_productividad);	
 	/**/
 	$(".btn_repo_afiliacion").click(carga_productos_mas_solicitados);
 	/**/
@@ -58,21 +35,20 @@ function set_inicidencia(new_inicidencia){
 /**/
 function get_inicidencia(){
 	return incidencia;
-
 }
 /**/
 function carga_uso_sistema(){
-
 
 	url =  "../q/index.php/api/enid/usabilidad_landing_pages/format/json/";
 	$.ajax({
 		url : url , 
 		type : "GET" ,
-		data: {} , 
+		data: $(".form_busqueda_actividad_enid").serialize(), 
 		beforeSend: function(){
 			show_load_enid( ".place_usabilidad" , "Cargando ..." , 1 );
 		}
 	}).done(function(data){
+
 
 		//console.log(data);		
 		llenaelementoHTML(".place_usabilidad" , data);
@@ -227,7 +203,7 @@ function carga_nuevos_miembros(){
 
 
 }
-/**/
+/*
 function carga_bugs_enid(){
 	
 	url =  "../q/index.php/api/enid/bugs/format/json/";	
@@ -248,15 +224,15 @@ function carga_bugs_enid(){
 	});
 
 }
-
+*/
 /**/
 function evaluar(e){
 
 	incidencia = e.target.id;
 	set_inicidencia(incidencia);
 }
-/**/
-function modifica_inicidencia(e){
+/*
+//function modifica_inicidencia(e){
 	
 	data_send = $("#form-calificacion-incidencia").serialize()+ "&"+$.param({"id_incidencia" : get_inicidencia()}); 	
 	url =  $("#form-calificacion-incidencia").attr("action");	
@@ -279,12 +255,12 @@ function modifica_inicidencia(e){
 	
 	e.preventDefault();
 }
+*/
 /**/
 function carga_metricas_mail_marketing(e){
 	
 	data_send = $(".form_busqueda_mail_enid").serialize(); 	
 	url =  "../q/index.php/api/mail/reporte_mail_marketing/format/json/";	
-
 	$.ajax({
 		url : url , 
 		type : "GET", 
@@ -314,12 +290,21 @@ function carga_metricas_cotizaciones(e){
 		}  
 	}).done(function(data){			
 
-		llenaelementoHTML(".place_usabilidad", data ); 			
+		llenaelementoHTML(".place_usabilidad", data ); 		
+
+		$(".usuarios").click(resumen_usuarios);		
+		$(".contactos").click(resumen_mensajes);	
+		$(".solicitudes").click(resumen_compras);	
+
+
+
+
+
 		$(".proyectos_registrados").click(carga_info_proyectos);		
 		$(".cotizaciones_registradas").click(carga_info_cotizaciones);	
 
 		/**/		
-			$(".contactos_registrados").click(carga_info_contactos);				
+			
 
 			$(".clientes_info").click(cargar_info_clientes);
 			$(".posibles_clientes_contacto").click(cargar_info_clientes_prospecto);
@@ -397,30 +382,7 @@ function carga_info_cotizaciones(e){
 }
 
 /**/
-function carga_info_contactos(e){
 
-	num_contactos = $(this).attr("num_contactos"); 
-	if (num_contactos > 0 ) {
-
-		$("#mas_info").modal("show");
-		fecha =  e.target.id;
-		data_send = {"fecha" : fecha}; 	
-		url =  "../q/index.php/api/cotizaciones/contactos/format/json/";	
-		$.ajax({
-			url : url , 
-			type : "GET", 
-			data :  data_send , 
-			beforeSend: function(){
-				show_load_enid(".place_mas_info" , "Cargando..." );
-			}  
-		}).done(function(data){			
-			llenaelementoHTML(".place_mas_info", data ); 					
-		}).fail(function(){
-			show_error_enid(".place_mas_info", "Error al actualizar incidencia");
-		});	
-	}
-	
-}
 /**/
 function carga_info_descarga_paginas_web(e){
 
@@ -602,7 +564,7 @@ function carga_info_blogs(e){
 }
 
 }
-/**/
+/*
 function lanzar_mensajeria(){
 
 	url =  "../msj/index.php/api/marketing/blaster/format/json/";	
@@ -621,6 +583,7 @@ function lanzar_mensajeria(){
 			show_error_enid(".place_envios", "Error al actualizar incidencia");
 		});	
 }
+*/
 /**/
 function busqueda_actividad_enid(e){
 
@@ -794,63 +757,6 @@ function limpia_perfiles_disponibles(){
 	}).fail(function(){
 			show_error_enid(".place_perfiles_disponibles" , "Error ... al cargar portafolio.");
 	});	
-}
-/**/
-function mostrar_servicio_sw(e){
-
-	if (e.target.checked) {
-		$(".part_resument_sw").show();
-	}else{
-		$(".part_resument_sw").hide();		
-	}
-}
-/**/
-function mostrar_servicio_adw(e){
-
-	if (e.target.checked) {
-		$(".part_resumen_awd").show();
-	}else{
-		$(".part_resumen_awd").hide();		
-	}
-}
-/**/
-function mostrar_servicio_tl(e){
-
-	if (e.target.checked) {
-		$(".part_resumen_tl").show();
-	}else{
-		$(".part_resumen_tl").hide();		
-	}
-}
-function mostrar_servicio_crm(e){
-
-	if (e.target.checked) {
-		$(".part_resumen_crm").show();
-	}else{
-		$(".part_resumen_crm").hide();		
-	}
-}
-/**/
-function carga_metricas_blog(e){
-
-		data_send = $(".form_busqueda_blog").serialize(); 	
-		url =  "../q/index.php/api/productividad/faq/format/json/";	
-
-		$.ajax({
-			url : url , 
-			type : "GET", 
-			data :  data_send , 
-			beforeSend: function(){
-				show_load_enid(".place_repo_faq" , "Cargando..." );
-			}  
-		}).done(function(data){			
-			llenaelementoHTML(".place_repo_faq", data ); 					
-			$('th').click(ordena_table_general);
-		}).fail(function(){
-			show_error_enid(".place_repo_faq", "Error al actualizar incidencia");			
-		});	
-
-	e.preventDefault();
 }
 /**/
 function cargar_info_clientes(e){
@@ -1150,4 +1056,89 @@ function carga_productos_mas_solicitados(e){
 		show_error_enid(".place_keywords" , "Error al cargar ..."); 
 	});	
 	e.preventDefault();	
+}
+/**/
+function resumen_usuarios(){
+
+	fecha_inicio =  $(this).attr("fecha_inicio"); 
+	fecha_termino = $(this).attr("fecha_termino"); 
+	
+	url =  "../persona/index.php/api/equipo/usuarios/format/json/";	
+	data_send =  {"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino ,  "page" : get_option("page")};
+
+	$.ajax({
+		url : url , 
+		type : "GET" ,
+		data: data_send , 
+		beforeSend: function(){
+			show_load_enid( ".place_reporte" , "Cargando ..." , 1 );
+		}
+	}).done(function(data){			
+		llenaelementoHTML(".place_reporte" , data);
+		$(".pagination > li > a, .pagination > li > span").css("color" , "white");
+		
+		/**/
+		$(".pagination > li > a, .pagination > li > span").click(function(e){				
+
+				var page_html =   $(this);				
+				num_paginacion =  $(page_html).attr("data-ci-pagination-page");
+				/**/
+				
+				if (validar_si_numero(num_paginacion) ==  true){
+					set_option("page", num_paginacion);	
+				}else{
+					num_paginacion =  $(this).text();					
+					set_option("page", num_paginacion);	
+				}				
+				resumen_usuarios();
+				e.preventDefault();				
+		});
+
+		
+		
+	}).fail(function(){
+		show_error_enid(".place_reporte" , "Error al cargar ..."); 
+	});	
+}
+/**/
+function resumen_mensajes(){
+
+	fecha_inicio =  $(this).attr("fecha_inicio"); 
+	fecha_termino = $(this).attr("fecha_termino"); 	
+	data_send =  {"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino};
+	url =  "../q/index.php/api/cotizaciones/contactos/format/json/";	
+	$.ajax({
+			url : url , 
+			type : "GET", 
+			data :  data_send , 
+			beforeSend: function(){
+				show_load_enid(".place_reporte" , "Cargando..." );
+			}  
+	}).done(function(data){			
+			llenaelementoHTML(".place_reporte", data ); 					
+	}).fail(function(){
+			show_error_enid(".place_reporte", "Error al actualizar incidencia");
+	});		
+}
+/**/
+function resumen_compras(){
+
+	fecha_inicio =  $(this).attr("fecha_inicio"); 
+	fecha_termino = $(this).attr("fecha_termino"); 	
+	tipo =  $(this).attr("tipo_compra");
+	data_send =  {"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino , "tipo" : tipo};
+	url =  "../pagos/index.php/api/tickets/compras/format/json/";	
+
+	$.ajax({
+			url : url , 
+			type : "GET", 
+			data :  data_send , 
+			beforeSend: function(){
+				show_load_enid(".place_reporte" , "Cargando..." );
+			}  
+	}).done(function(data){			
+			llenaelementoHTML(".place_reporte", data ); 					
+	}).fail(function(){
+			show_error_enid(".place_reporte", "Error al actualizar incidencia");
+	});			
 }

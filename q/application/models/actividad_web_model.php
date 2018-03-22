@@ -204,13 +204,13 @@
       switch ($tipo){
         case 1:          
           /**/
-          return " fecha_registro
+          return " DATE(fecha_registro)
                    BETWEEN 
                    '".$fecha_inicio."' AND  '".$fecha_termino."' ";
           break;
         case 2:
           /**/
-          return " fecha_termino
+          return " (fecha_termino)
                    BETWEEN 
                    '".$fecha_inicio."' AND  '".$fecha_termino."' ";
           break;
@@ -330,6 +330,7 @@
     }
     /**/
     function crea_reporte_enid_service($param){
+        
         /**/
         $_num = get_random();     
         $sql_visitas  =  $this->crea_visitas_por_periodo($param);
@@ -427,12 +428,12 @@
     /**/
     function get_registros_venta_fecha($fecha , $tabla){      
       $query_get = "SELECT 
-                    total
-                    ,compras_efectivas
-                    ,solicitudes
-                    ,envios
-                    ,cancelaciones
-                    FROM $tabla WHERE fecha = '".$fecha."' ";
+                    SUM(total)total
+                    ,SUM(compras_efectivas)compras_efectivas
+                    ,SUM(solicitudes)solicitudes
+                    ,SUM(envios)envios
+                    ,SUM(cancelaciones)cancelaciones
+                    FROM $tabla ";
       $result =  $this->db->query($query_get);      
       return $result->result_array();            
     }

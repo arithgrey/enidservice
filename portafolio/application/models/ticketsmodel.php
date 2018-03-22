@@ -6,6 +6,7 @@ class ticketsmodel extends CI_Model{
       $id_proyecto_persona_forma_pago = 0; 
   }   
   /**/
+  /**/
   function get_ticket_id($id_ticket){
     
     $query_get ="SELECT

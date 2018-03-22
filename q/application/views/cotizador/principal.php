@@ -23,20 +23,77 @@
 	$total_valoraciones = "";
 	$si_recomendarian =  "";
 	$no_recomendarian =  "";
+	$fecha_inicio =  $envio_usuario["fecha_inicio"];  
+	$fecha_termino =  $envio_usuario["fecha_termino"];  
+
+		$extra_td_usuarios =  "class='usuarios' 
+			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
+			href='#reporte' data-toggle='tab' 
+			title='Personas que se registran en el sistema' ";
+
+
+		$extra_td_contacto =  " 
+			class='contactos' 
+			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
+			href='#reporte' 
+			data-toggle='tab' 
+			title='Mensajes enviados por personas a Enid Service'  ";
+		
+		$extra_td_solicitudes =  " 
+			class='solicitudes' 
+			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
+			tipo_compra = '6'
+			href='#reporte' 
+			data-toggle='tab' 
+
+			title='Solicitudes de compra'  ";
+			
+
+		$extra_td_cancelaciones =  " 
+			class='solicitudes' 
+			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
+			tipo_compra = '10'
+			href='#reporte' 
+			data-toggle='tab' 
+
+			title='Solicitudes de compra'  ";
+		
+
+
+		$extra_td_efectivas =  " 
+			class='solicitudes' 
+			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
+			tipo_compra = '9'
+			href='#reporte' 
+			data-toggle='tab' 
+			title='COMPRAS SATISFACTORIAS'  ";
+
+
+
+		$extra_td_envios =  " 
+			class='solicitudes' 
+			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
+			tipo_compra = '7'
+			href='#reporte' 
+			data-toggle='tab' 
+			title='Se han enviado'  ";
 
 
 	foreach($actividad_enid_service as $row){
 	
 		
 		
+
+		$extra_td_usablidad = "title ='Personas que acceden al sistema para emplearlo' "; 
+
 		/**/
 		$table ="<table width='100%' border=1  style='text-align: center;'>";
 			$table .="<tr>";	
-				$table .=get_td("Usuarios");						
-				$table .=get_td("Usabilidad");											
+				$table .=get_td("Usuarios"  , "class='strong' ");						
+				$table .=get_td("Usabilidad" , $extra_td_usablidad);											
 				$table .="</tr>";	
 				$table .="<tr>";	
-				$table .=get_td($row["usuarios"]);						
+				$table .=get_td($row["usuarios"] , $extra_td_usuarios);						
 				$table .=get_td($row["accesos_area_cliente"]);										
 			$table .="</tr>";	
 		$table .="</table>";
@@ -46,17 +103,20 @@
 		$accesos = $row["accesos"];				
 		$accesos_a_intento_compra = $row["accesos_a_intento_compra"];		
 		$accesos_contacto = $row["accesos_contacto"];		
+		$contacto = $row["contacto"];		
 		
 			$table ="<table width='100%' border=1  style='text-align: center;'>";
 				$table .="<tr>";	
 					$table .=get_td("Total");						
-					$table .=get_td("Intento de compra");						
-					$table .=get_td("Contacto");					
+					$table .=get_td("Acesso a procesar compra");						
+					$table .=get_td("Accesos a contacto");					
+					$table .=get_td("Mensajes recibidos");					
 				$table .="</tr>";	
 				$table .="<tr>";	
 					$table .=get_td($accesos);						
 					$table .=get_td($accesos_a_intento_compra);						
-					$table .=get_td($accesos_contacto);						
+					$table .=get_td($accesos_contacto );						
+					$table .=get_td($contacto , $extra_td_contacto);						
 				$table .="</tr>";	
 			$table .="</table>";			
 			$accesos .=  get_td($table);
@@ -83,10 +143,10 @@
 				$table .="</tr>";	
 				$table .="<tr>";	
 					$table .=get_td($num_transacciones);						
-					$table .=get_td($compras_efectivas);						
-					$table .=get_td($cancelaciones);	
-					$table .=get_td($solicitudes );	
-					$table .=get_td($envios);	
+					$table .=get_td($compras_efectivas , $extra_td_efectivas);						
+					$table .=get_td($cancelaciones , $extra_td_cancelaciones);	
+					$table .=get_td($solicitudes , $extra_td_solicitudes);	
+					$table .=get_td($envios , $extra_td_envios);	
 				$table .="</tr>";	
 			$table .="</table>";			
 			$transacciones .=  get_td($table);
@@ -175,7 +235,7 @@
 <table width="100%" border="1">
 	<tr>
 		<?=get_td("Periodo" , $extra_periodo )?> 
-		<?=get_td($envio_usuario["fecha_inicio"] . " al " . $envio_usuario["fecha_termino"] , 
+		<?=get_td($fecha_inicio  . " al " . $fecha_termino , 
 		$extra_periodo)?> 
 	</tr>
 	<tr>

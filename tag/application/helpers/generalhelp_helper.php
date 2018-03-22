@@ -14,11 +14,10 @@ if(!function_exists('invierte_date_time')){
     }else{
 
         if($in_session == 1){
-            return "<span 
-                    class='white'
-                    style='margin-right:10px;padding:2px;background:red;'>
-                    Producto oculto
-                </span>";
+            return "<span class='white'
+                          style='margin-right:10px;padding:2px;background:red;'>
+                        INVENTARIO LIMITADO
+                    </span>";
         }
           
     }

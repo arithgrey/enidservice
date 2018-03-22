@@ -39,8 +39,28 @@ class Equipo extends REST_Controller{
         /********************/
         $paginacion =  $this->create_pagination($config_paginacion);        
         $data["paginacion"] =  $paginacion;
+        $data["modo_edicion"] = 1;
+        $this->load->view("equipo/miembros" , $data);                
+    }
+    /**/
+    function usuarios_GET(){
+        
+        $param = $this->get();
+    
+        $total =  $this->equipomodel->get_total_usuarios_periodo($param);        
+        $per_page = 10;
+        $param["resultados_por_pagina"] = $per_page;
 
-
+        $data["miembros"] =  $this->equipomodel->get_usuarios_periodo($param);            
+        $config_paginacion["page"] = get_info_variable($param , "page" );
+        $config_paginacion["totales_elementos"] =  $total;
+        $config_paginacion["per_page"] = $per_page;        
+        $config_paginacion["q"] = "";            
+        $config_paginacion["q2"] = "";                   
+        
+        $paginacion =  $this->create_pagination($config_paginacion);        
+        $data["paginacion"] =  $paginacion;        
+        $data["modo_edicion"] = 0;
         $this->load->view("equipo/miembros" , $data);                
     }
     /**/

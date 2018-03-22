@@ -17,77 +17,7 @@
                     </div>   
                 <?=end_row()?>             
             </div>                    
-            <div class="tab-pane" id='tab_default_2'>                
-                   <?=n_row_12()?>             
-                    <div class="container">
-                        <div class="row">
-                            <div class='col-lg-6' 
-                                style='padding:10px;background: black;display: none;'>
-                              <div class="col-md-12">
-                                <label  for="checkboxes-0">
-                                  <input name="checkboxes" 
-                                  id="checkboxes-0" 
-                                  class='mostrar_servicio_sw' 
-                                  value="1" 
-                                  type="checkbox" 
-                                  checked>
-                                    <span 
-                                    class='white'
-                                    style="font-size: .9em!important;">
-                                        Páginas web
-                                    </span>
-                                </label>
-                                <label  for="checkboxes-1">
-                                  <input name="checkboxes" 
-                                  id="checkboxes-1" 
-                                  class='mostrar_adw' 
-                                  value="2" 
-                                  type="checkbox" 
-                                  checked>
-                                  <span 
-                                  style="font-size: .9em!important;"
-                                  class='white'>
-                                    Adwords
-                                  </span>
-                                </label>
-                                <label  for="checkboxes-2">
-                                  <input name="checkboxes" 
-                                  id="checkboxes-2" 
-                                  class='mostrar_tl'  
-                                  value="3" 
-                                  type="checkbox" 
-                                  checked>
-                                    <span 
-                                    class='white'
-                                    style="font-size: .9em!important;">
-                                        Tiendas en línea
-                                    </span>
-                                </label>
-                                <label  for="checkboxes-3">
-                                  <input name="checkboxes" 
-                                  id="checkboxes-3" 
-                                  class='mostrar_crm' 
-                                  value="4" 
-                                  type="checkbox" 
-                                  checked>
-                                    <span 
-                                    class='white'
-                                    style="font-size: .9em!important;">
-                                        CRM
-                                    </span>
-                                </label>
-                              </div>
-                            </div>
-                            
-                            <form class='form_busqueda_actividad_enid'>                    
-                                    <?=$this->load->view("../../../view_tema/inputs_fecha_busqueda")?>
-                            </form>
-
-                        </div>
-                    </div>
-
-                <?=end_row()?>
-
+            <div class="tab-pane" id='tab_default_2'>                                  
                 <?=n_row_12()?>
                     <div class='place_usabilidad' >
                     </div>     
@@ -122,7 +52,13 @@
                     <div class='place_repo_faq'>                      
                     </div>                    
                 <?=end_row()?>   
-            </div>            
+            </div> 
+            <div class="tab-pane" id='reporte'>                                  
+                <?=n_row_12()?>
+                  <div class="place_reporte">
+                  </div>
+                <?=end_row()?>  
+            </div>           
             <div class="tab-pane" id="tab_atencion_cliente">                
                 <?=$this->load->view("secciones/atencion_cliente" );?>
             </div>
@@ -223,5 +159,15 @@
     }
     .table_enid_service{
       font-size: .8em!important;
+    }
+    .usuarios,.contactos,.solicitudes{
+        color: blue!important;
+        font-weight: bold;
+    }
+    .usuarios:hover{
+        cursor: pointer;
+    }
+    .contactos:hover,.solicitudes:hover{
+        cursor: pointer;
     }
 </style>

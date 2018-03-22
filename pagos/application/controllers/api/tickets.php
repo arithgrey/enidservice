@@ -9,6 +9,18 @@ class Tickets extends REST_Controller{
         $this->load->library("sessionclass");            
     } 
     /**/
+    function compras_GET(){
+
+        $param =  $this->get();
+        /**/
+        $db_response =  $this->tickets_model->get_compras_tipo_periodo($param);
+        $data["compras"]=  $db_response;
+        $data["tipo"] =  $param["tipo"];
+        $data["status_enid_service"] =  $this->tickets_model->get_status_enid_service($param);
+        $this->load->view("ventas/compras" , $data);
+
+    }
+    /**/
     function costos_envios_por_recibo_GET(){
         
         $param =  $this->get();

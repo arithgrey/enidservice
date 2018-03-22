@@ -49,8 +49,6 @@ class Enid extends REST_Controller{
     /**/
     function metricas_cotizaciones_GET(){        
 
-        if($this->input->is_ajax_request()){ 
-
             $param = $this->get();        
             $inicio =  $this->microtime_float();         
             $data =  $this->actividad_web_model->crea_reporte_enid_service($param);
@@ -65,17 +63,12 @@ class Enid extends REST_Controller{
             }else{
                 /*Regresamos data para reporte agradable*/
                 $this->response($data);
-            }
-        }else{
-            $this->response("Error");
-        }
+            }       
     }
     /**/
     function microtime_float(){
         list($useg, $seg) = explode(" ", microtime());
         return ((float)$useg + (float)$seg);
     }
-    /**/
-    
     /**/ 
 }?>

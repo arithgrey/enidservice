@@ -3,7 +3,39 @@
     function __construct(){      
         parent::__construct();        
         $this->load->database();
-    }           
+    }   
+    /**/
+    function get_status_enid_service($param){
+        $query_get ="select id_estatus_enid_service , nombre  from status_enid_service";
+        $result=  $this->db->query($query_get);
+        return $result->result_array();
+
+    }        
+    /**/
+    function get_compras_tipo_periodo($param){
+
+      $fecha_inicio =  $param["fecha_inicio"];
+      $fecha_termino =  $param["fecha_termino"];
+      $tipo =  $param["tipo"];
+
+      $query_get = "SELECT 
+                      * 
+                    FROM 
+                      proyecto_persona_forma_pago 
+                    WHERE 
+                      status =  $tipo 
+                    AND 
+                      DATE(fecha_registro) 
+                    BETWEEN 
+                      '".$fecha_inicio."' 
+                    AND  
+                      '".$fecha_termino."'
+                      ORDER BY fecha_registro DESC ";
+                    
+                    $result =  $this->db->query($query_get);
+                    return $result->result_array();
+
+    }
     /**/
     function carga_actividad_pendiente($param){
 

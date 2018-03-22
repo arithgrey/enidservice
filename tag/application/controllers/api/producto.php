@@ -76,7 +76,7 @@ class producto extends REST_Controller{
         }
         return $nueva_data;
     }    
-    /**/
+    /********************************************************/
     function q_GET(){
         
         $param =  $this->get();         

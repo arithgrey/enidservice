@@ -56,8 +56,7 @@ class Areacliente extends REST_Controller{
             $hoy =  $result["hoy"];
             $menos_7 =  $result["menos_7"];
 
-        
-            $extra = array('fecha_inicio' =>  $menos_7 ,  'fecha_termino' => $hoy);
+            $extra = array('fecha_inicio' =>  $menos_7 ,  'fecha_termino' => $hoy, "vista" =>  1);
             $url = "q/index.php/api/";    
             $url_request=  $this->get_url_request($url);
             $this->restclient->set_option('base_url', $url_request);

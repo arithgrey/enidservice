@@ -10,12 +10,14 @@
                     </a>
                 </li> 
 
+                
+                
                 <li class="active"> 
-                    <a  href="#tab_default_1" 
+                    <a  
+                        href="#tab_default_1" 
                         data-toggle="tab" 
                         class='btn_menu_tab cotizaciones'> 
-                        <i class="fa fa-globe">
-                          
+                        <i class="fa fa-globe">                          
                         </i>
                         Global
                     </a> 
@@ -44,18 +46,7 @@
                         </span>
                     </a>
                 </li> 
-
-                <li  
-                    class='li_menu'>
-                    <a  id='btn_repo_blog'
-                        href="#tab_default_faq" 
-                        data-toggle="tab"                         
-                        class='black strong  btn_repo_blog '>
-                        <i class="fa fa-check" >
-                        </i>
-                        Blog                        
-                    </a>
-                </li>                                                
+                                               
                 <li  
                     class='li_menu'>
                     <a  id='btn_repo_atencion_cliente'

@@ -36,9 +36,9 @@ class usuario extends REST_Controller{
     }
     /**/
     function id_usuario_por_id_servicio_GET(){
-
         $param = $this->get();
         $db_response = $this->usuario_model->get_usuario_por_servicio($param);
         $this->response($db_response);
-    }
+    }    
+    /**/
 }?>

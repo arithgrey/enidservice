@@ -484,13 +484,33 @@
     $result =  $this->db->query($query_get);
     return $result->result_array();
   }
+  function get_usuarios_periodo($param){      
+        
+      $fecha_inicio =  $param["fecha_inicio"];
+      $fecha_termino =  $param["fecha_termino"];
+      $limit  =  $this->get_limit_usuarios($param);
+      $query_get ="SELECT 
+                    idusuario id_usuario
+                    ,nombre
+                    ,email
+                    ,apellido_paterno
+                    ,apellido_materno
+                    , fecha_registro 
+                    FROM usuario 
+                    WHERE DATE(fecha_registro) 
+                    BETWEEN 
+                    '".$fecha_inicio."' AND  '".$fecha_termino."' ".$limit;
+      $result =  $this->db->query($query_get);
+      return $result->result_array();      
+   }
   /**/
   function get_equipo_enid_service($param){
       /**/
       $_num =  get_random();
       $this->create_usuarios_enid_service(0, $_num , $param);      
       $query_get ="SELECT 
-                    u.* , d.nombre nombre_departamento                        
+                    u.* , 
+                    d.nombre nombre_departamento                        
                    FROM 
                     tmp_usuarios_enid_service_$_num u
                    INNER JOIN departamento d 
@@ -517,7 +537,8 @@
                               u.apellido_paterno ,                 
                               u.apellido_materno,                                    
                               u.email,                              
-                              u.id_departamento 
+                              u.id_departamento ,
+                              u.fecha_registro
                             FROM 
                               usuario u
                             ".$where;     
@@ -528,6 +549,21 @@
    function get_total_usuarios($param){
       $where =  $this->get_where_usuarios_total($param);
       $query_get = "SELECT COUNT(0)num FROM usuario" .$where;
+      $result =  $this->db->query($query_get);
+      return $result->result_array()[0]["num"];
+   }
+   /**/
+   function get_total_usuarios_periodo($param){
+
+      $fecha_inicio =  $param["fecha_inicio"];  
+      $fecha_termino =  $param["fecha_termino"];
+
+      
+      $query_get = "SELECT COUNT(0)num FROM usuario 
+                    WHERE 
+                    DATE(fecha_registro) 
+                    BETWEEN 
+                    '".$fecha_inicio."' AND  '".$fecha_termino."' ";
       $result =  $this->db->query($query_get);
       return $result->result_array()[0]["num"];
    }

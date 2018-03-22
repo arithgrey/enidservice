@@ -1,26 +1,34 @@
-<h3 style="font-weight: bold;font-size: 3em;">    
-  USUARIOS
+<h3 style="font-weight: bold;font-size: 2em;">    
+  SOLICITUDES -
+  <?php 
+      foreach ($status_enid_service as $row){
+        if($row["id_estatus_enid_service"] ==  $tipo ) {
+            echo strtoupper($row["nombre"]);
+            break;
+        }          
+      }
+  ?>
 </h3>
-<?=$paginacion?>
 <?php	
-	$l ="";
-	foreach($miembros as $row) {
-	
-		$id_usuario=  $row["id_usuario"]; 
-		$nombre=  $row["nombre"]; 
-		$email=  $row["email"]; 
-		$apellido_paterno=  $row["apellido_paterno"]; 
-		$apellido_materno=  $row["apellido_materno"]; 
-		$tel_contacto=  ""; 
-		$afiliado = $nombre . " " . $apellido_paterno ." " . $apellido_materno;		
-        $url_imagen =  "../imgs/index.php/enid/imagen_usuario/".$id_usuario;
 
-    $editar_datos_usuario = 
-      "class='usuario_enid_service' 
-      data-toggle='tab' href='#tab_mas_info_usuario' 
-            id='".$id_usuario."' ";
-            
-    $fecha_registro =  $row["fecha_registro"];
+	$l ="";
+	foreach($compras as $row) {
+	
+		$saldo_cubierto                 =  $row["saldo_cubierto"];
+		$fecha_registro                 =  $row["fecha_registro"];
+		$status                         =  $row["status"];		
+		$monto_a_pagar                  =  $row["monto_a_pagar"];		
+		$num_email_recordatorio         =  $row["num_email_recordatorio"];						
+		$costo_envio_cliente            =  $row["costo_envio_cliente"];
+		$id_usuario_venta               =  $row["id_usuario_venta"];		
+		$num_ciclos_contratados         =  $row["num_ciclos_contratados"];
+		$id_usuario                     =  $row["id_usuario"];
+		$precio                         =  $row["precio"];
+		$costo_envio_vendedor           =  $row["costo_envio_vendedor"];
+		$id_servicio                    =  $row["id_servicio"];
+		$resumen_pedido                 =  $row["resumen_pedido"];
+
+    $url_imagen =  "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
     ?>
     <div  
         class="popup-box chat-popup" id="qnimate" 
@@ -28,46 +36,33 @@
             <div class="popup-head">
               <div class="popup-head-left pull-left">
                 <img 
-                  src="<?=$url_imagen?>" style='width: 44px;'
-                   onerror="this.src='../img_tema/user/user.png'"> 
+                  src="<?=$url_imagen?>" 
+                  style='width: 44px;'
+                  onerror="this.src='../img_tema/portafolio/producto.png'" > 
+
                   <span class="black">
-                    <?=$afiliado;?>                    
+                    <a href="../producto/?producto=<?=$id_servicio?>">
+                      <?=$resumen_pedido?>
+                    </a>
                   </span>          
+                  <div style="font-size: .6em!important;">
+                    PRECIO <?=$monto_a_pagar?> MXN | COSTO DE ENVIO AL CLIENTE <?=$costo_envio_cliente?> 
+                    | COSTO DE ENVIO AL VENDEDOR <?=$costo_envio_vendedor?>MXN                 
+                  </div>
+                  <div style="font-size: .6em!important;">
+                    ARTICULOS SOLICITADOS <?=$num_ciclos_contratados?> |  
+                    SALDO CUBIERTO <?=$saldo_cubierto?>MXN
+                  </div>
+                  <div style="font-size: .6em!important;">
+                    LABOR DE COBRANZA 
+                    <i class="fa fa-envelope"></i>
+                    <?=$num_email_recordatorio?>
+
+                  </div>
                   <div style="font-size: .6em!important;">
                     <?=$fecha_registro?>        
                   </div>
-              </div>
-              
-                
-
-                <?php if ($modo_edicion == 1):?>
-                  <div class="popup-head-right pull-right">                
-                    <span style="font-size: .7em!important" title="Email de recordatorio enviados">
-                      <i class="fa fa-envelope"></i>                  
-                    </span>
-                    <div class="btn-group">
-                            <button 
-                              class="chat-header-button" 
-                              data-toggle="dropdown" 
-                              type="button" 
-                              aria-expanded="false">
-                             <i class="fa fa-plus">                        
-                             </i> 
-                            </button>
-                            <ul role="menu" class="dropdown-menu pull-right">
-                              <li>                          
-                                <a style="font-size: 1.3em;" <?=$editar_datos_usuario?> >
-                                  
-                                  <i class='fa fa-pencil'></i>
-                                  Editar información
-                                </a>
-                              </li>                      
-                            </ul>
-                    </div>  
-                  </div>
-                <?php endif; ?>
-
-              
+              </div>              
           </div>
         </div> 
         <?php 

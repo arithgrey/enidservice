@@ -421,7 +421,12 @@ class Portafolio extends REST_Controller{
             $data_ventas_compras["status"] =  $param["status"];
             $data_ventas_compras["anteriores"] = $this->verifica_anteriores($prm);
             $this->load->view("proyecto/lista_version_cliente" , $data_ventas_compras);
-    }   
+    } 
+    /**/
+    function solicitudes_GET(){
+
+        $this->response("ok");
+    }  
     /**/
     function verifica_anteriores($param){
 
