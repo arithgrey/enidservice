@@ -6,6 +6,7 @@
 					RESEÑAS Y VALORACIONES SOBRE 
 					<a 	href="../search/?q3=<?=entrega_data_campo($usuario , "id_usuario" )?>"
 						class='go-usuario'>
+						<i class="fa fa-shopping-cart"></i>
 						<?=entrega_data_campo($usuario , "nombre" )?>
 					</a>
 				</h3>	

@@ -232,3 +232,6 @@
     color: white!important;
     font-weight: bold!important;   
 }
+.link_menu_footer{
+    text-decoration: underline!important;
+}

@@ -8,18 +8,10 @@
 
             <ul class="nav tabs">       
                 <br>        
-                <!--No borrar -->                
-                <li style='background:white;display:none;' class='li_menu'>
-                    <a  
-                        id='btn_renovar_servicio'
-                        href="#tab_renovar_servicio" 
-                        data-toggle="tab" 
-                        class='btn_renovar_servicio'>
-                        
-                    </a>
-                </li>
                 
-                <li class='black li_menu active' style='background:white;'>
+                
+                <li class='black li_menu <?=valida_seccion_activa(2 , $activa )?>' 
+                    style='background:white;'>
                     <a  
                         href="#tab_charts" 
                         data-toggle="tab"                         
@@ -29,7 +21,7 @@
                     </a>
                 </li>                 
                  
-                <li class='black li_menu ' 
+                <li class='black li_menu <?=valida_seccion_activa(1 , $activa )?>' 
                     style='background:white;'>
                     <a                          
                         href="#tab_abrir_ticket" 
@@ -50,86 +42,22 @@
     </div>
 </div>
 <div class='col-lg-10'>
-    <div class="tab-content">
-
-        <input type='hidden' class='id_usuario' value='<?=$id_usuario;?>'>        
-        <div class="tab-pane " id='tab_clientes'>
-            <?=$this->load->view("secciones/clientes")?>                              
-        </div>
-        <div class="tab-pane " id='tab_clientes_info'>
-            <?=$this->load->view("secciones/clientes_info")?>                              
-        </div>
-
-        <div class="tab-pane" id='tab_posibles_clientes'>
-            <?=$this->load->view("secciones/posibles_clientes")?>                              
-        </div>
-        <div class="tab-pane" id="tab9">
-            <?=$this->load->view("secciones/agendados")?>                              
-        </div>        
-        
-        <div class="tab-pane" id="tab_form_persona">
-            <?=$this->load->view("secciones/form_persona")?>                              
-        </div>
-        <div class="tab-pane" id='tab_agendar_llamada'>
-            <?=$this->load->view("secciones/agendar_llamada")?>                              
-        </div>
-        <div class='tab-pane' 
-             id='tab_agregar_comentario'>
-            <?=$this->load->view("secciones/agregar_comentario")?>                              
-        </div>
-        <div class='tab-pane ' id='tab_agendar_llamada_recicle'>
-            <?=$this->load->view("secciones/agendar_llamada_recicle")?>
-                
-        </div>
-        <div class='tab-pane ' id='tab_convertir'>
-            <?=$this->load->view("secciones/seccion_convertir")?>                              
-        </div>
-        <div class="tab-pane" 
+    <div class="tab-content">        
+        <input type='hidden' class='id_usuario' value='<?=$id_usuario;?>'>                
+        <div 
+            class="tab-pane <?=valida_seccion_activa(1 , $activa)?>" 
             id='tab_abrir_ticket'>
             <?=$this->load->view("tickets/principal")?>                              
         </div>
-        <div class="tab-pane active" id='tab_charts'>
+        <div 
+            class="tab-pane  <?=valida_seccion_activa(2 , $activa)?>" 
+            id='tab_charts'>
             <?=$this->load->view("tickets/charts")?>                              
         </div>
-        <div class="tab-pane" id='tab_agendar_correo'>
-            <?=$this->load->view("secciones/form_correo_electronico");?>
-        </div>
-
-        <div class="tab-pane" id='tab_info_validacion'>
-            <?=$this->load->view("secciones/informacion_base_validacion");?>
-        </div>
-
-        <div class="tab-pane" id='tab_registrar_servicio'>
-            <?=$this->load->view("proyecto/principal");?>
-        </div>
-
-        <div class="tab-pane" id='tab_renovar_servicio'>
-            <?=$this->load->view("proyecto/renovar_servicio");?>
-        </div>
-
-        <div class='tab-pane' id='tab_liquidar_servicio'>
-            <?=$this->load->view("proyecto/registrar_pago_vencido");?>
-        </div>
-
-        <div class='tab-pane' id='tab_renovar_servicio_form'>
-            <?=$this->load->view("proyecto/form_renovar_servicio");?>
-        </div>
-
-
-        <div class='tab-pane' id='tab_mover_departamento'>
-            <?=$this->load->view("proyecto/mov_depto");?>
-        </div>
-
-
-
     </div>
 </div>
-
-
 </div>        
-
 <?=$this->load->view("modal/principal")?>
-
 <main>
     
     <br>

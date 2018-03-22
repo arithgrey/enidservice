@@ -29,6 +29,7 @@ var flag_en_servicio = 0;
 
 $(document).ready(function(){	
 	
+		
 	num_departamento = $(".num_departamento").val(); 
 	set_modulo(2);
 	/***/

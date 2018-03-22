@@ -276,17 +276,13 @@ if(!function_exists('invierte_date_time')){
                                       >".$flag_notificaciones."
                                     </span>"; 
     }
-
     $data_complete["num_tareas_pendientes_text"] = $flag_notificaciones;  
     $data_complete["num_tareas_pendientes"] = $new_flag_notificaciones;
     $data_complete["lista_pendientes"] = $lista_pendientes;
-    return $data_complete;
-  
-  /*end*/
+    return $data_complete;  
   }  
   /**/
   function get_tareas_pendienetes_usuario($info){
-
 
     $info_notificaciones = $info["info_notificaciones"];
     $lista_pendientes ="";  
@@ -306,17 +302,9 @@ if(!function_exists('invierte_date_time')){
     $ventas_enid_service = $info_notificaciones["ventas_enid_service"];
     $envios_a_validar = $info_notificaciones["envios_a_validar_enid_service"];
     $email_enviados_enid_service = $info_notificaciones["email_enviados_enid_service"];
-    //$llamadas_enid_service =  $info_notificaciones["llamadas_enid_service"];
-    //$contactos_enid_service =  $info_notificaciones["contactos_enid_service"];
     $accesos_enid_service =  $info_notificaciones["accesos_enid_service"];
     $tareas_enid_service =  $info_notificaciones["tareas_enid_service"];
-    //$correos_registrados_enid_service = $info_notificaciones["correos_registrados_enid_service"];  
-    //$tareas_enid_service_marketing = $info_notificaciones["tareas_enid_service_marketing"];
     
-    //$tareas_enid_service_temas_ayuda = $info_notificaciones["blogs_enid_service"];
-
-    /**/
-    $tareas_enid_service_direccion = $info_notificaciones["num_pendientes_direccion"];
     
 
     $style_pedientes ="style='padding:4px;background:red!important;color:white!important;'";
@@ -372,58 +360,7 @@ if(!function_exists('invierte_date_time')){
 
         break;
 
-        /*
-      case "Llamadas":
-        $meta_llamadas = $row["cantidad"];  
-
-        
-          if($meta_llamadas  > $llamadas_enid_service){           
-
-              $llamadas_restantes = ($meta_llamadas - $llamadas_enid_service);
-
-              $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-              $lista_pendientes .= "<a href='../ventas/'>
-                                    <i class='fa fa-mobile'></i> ";
-              $lista_pendientes .= "<span $style_pedientes>
-                                    ".
-                                    $llamadas_restantes
-                                    ."</span>"; 
-              $lista_pendientes .= "Llamadas
-                                    </a>";
-             
-              $lista_pendientes .= "</li>";    
-              $flag_notificaciones ++;                      
-          }
-
-
-
-        break;    
-      */
-        /*
-      case "contactos":
-        $meta_contactos = $row["cantidad"];       
-
-        if($meta_contactos  > $contactos_enid_service){           
-            
-            $contactos_restantes  = ($meta_contactos - $contactos_enid_service);
-
-            $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-            $lista_pendientes .= "<a href='../ventas/'>
-                                  <i class='fa fa-user'></i> ";
-            $lista_pendientes .=  "<span $style_pedientes>".
-                                    $contactos_restantes
-                                   ."</span>"; 
-            $lista_pendientes .= "Contactos
-                                  </a>";
-            
-            $lista_pendientes .= "</li>";    
-            $flag_notificaciones ++;                       
-        }
-
-
-
-        break;    
-        */
+       
 
       case "Email":
         $meta_email = $row["cantidad"];       
@@ -483,136 +420,14 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' style='font-size:.8em;'>
                                     <a href='../desarrollo'> ";
-                $lista_pendientes .= "<i class='fa fa-code' ></i> ";
+                $lista_pendientes .= "<i class='fa fa-bell-o' ></i> ";
                 $lista_pendientes .= "<span $style_pedientes>".$tareas_restantes."</span>";                
-                $lista_pendientes .= "Desarrollo";
+                $lista_pendientes .= "TAREAS PENDIENTES";
                 $lista_pendientes .= "</a>
                                     </li>";           
               $flag_notificaciones ++;                
         }
-
-
-
         break;
-
-        /*
-        case "email_registrados":
-        $meta_email_registrados = $row["cantidad"];       
-
-        if ($meta_email_registrados  > $correos_registrados_enid_service){            
-
-          $correos_pendientes  = 
-          ($meta_email_registrados - $correos_registrados_enid_service);
-          
-
-              $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-              $lista_pendientes .= "<a href='../cargar_base/'>
-                                      <i class='fa fa-database'></i> ";
-              $lista_pendientes .= "<span $style_pedientes>
-                            ". $correos_pendientes
-                            ."
-                        </span>"; 
-              $lista_pendientes .= "Registros
-                              </a>";
-              
-              $lista_pendientes .= "</li>";  
-              $flag_notificaciones ++;                         
-        }
-
-
-
-        break;
-        */
-
-    
-
-
-        case "marketing":
-        $meta_marketing = $row["cantidad"];       
-
-        /*
-        if ($meta_marketing  > $tareas_enid_service_marketing){            
-
-          $tareas_restantes_marketing  = 
-          ($meta_marketing - $tareas_enid_service_marketing);
-          
-
-              $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-              $lista_pendientes .= "<a href='../desarrollo/'>
-                                    <i class='fa fa-flag'></i> ";
-              $lista_pendientes .= "<span $style_pedientes>
-                                      ". $tareas_restantes_marketing
-                                      ."
-                                  </span>"; 
-              $lista_pendientes .= "Marketing";
-              
-              $lista_pendientes .= "</a>
-                                    </li>";  
-              $flag_notificaciones ++;                         
-        }
-
-
-
-        break;
-        */
-       case "direccion":
-        $meta_direccion = $row["cantidad"];       
-
-        if ($meta_direccion  > $tareas_enid_service_direccion){            
-
-          $tareas_restantes_direccion  = ($meta_direccion - $tareas_enid_service_direccion);
-          
-
-              $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-              $lista_pendientes .= "<a href='../desarrollo/'>
-                                    <i class='fa fa-building'></i> ";
-              $lista_pendientes .= "<span $style_pedientes>
-                                      ". 
-                                      $tareas_restantes_direccion
-                                      ."
-                                  </span>"; 
-              $lista_pendientes .= "Dirección";
-              
-              $lista_pendientes .= "</a>
-                                    </li>";  
-              $flag_notificaciones ++;                         
-        }
-
-
-
-        break;
-        
-        /*
-        case "Temas de ayuda":
-        $meta_temas_de_ayuda = $row["cantidad"];       
-
-        if ($meta_temas_de_ayuda  > $tareas_enid_service_temas_ayuda){            
-
-          $tareas_enid_service_temas_ayuda1  = ($meta_temas_de_ayuda - $tareas_enid_service_temas_ayuda);
-          
-
-              $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-              $lista_pendientes .= "<a href='../faq/'>
-                                    <i class='fa fa-television' ></i> ";
-              $lista_pendientes .= "<span $style_pedientes>
-                                      ". 
-                                      $tareas_enid_service_temas_ayuda1
-                                      ."
-                                  </span>"; 
-
-              $lista_pendientes .= "Temas de ayuda";              
-              $lista_pendientes .= "</a>
-                                    </li>";  
-              $flag_notificaciones ++;                         
-        }
-
-
-
-        break;
-        */
-      
- 
-
       default:
         
         break;

@@ -14,14 +14,8 @@ class Inicio extends CI_Controller {
         
         $data["num_departamento"]= 
         $this->principal->get_id_departamento_by_id_perfil($num_perfil);
-//        $data["tipos_negocios"]= $this->principal->get_tipos_negocios();
-  //            $data["tipos_negocios_base_telefonica"]= $this->principal->get_tipos_negocios_base_telefonica();
-
-        //$data["tipos_negocios_enid"]= $this->principal->get_tipos_negocios_enid();    
   
         $data["servicios"] = $this->principal->get_servicios();
-        //$data["fuentes"] = $this->principal->get_fuentes();
-        //$data["tipos_negocio_templates"] = $this->principal->get_tipo_proyectos();
         $data["departamentos"] =  $this->principal->get_departamentos();
 
         $num_perfil =  $this->sessionclass->getperfiles()[0]["idperfil"];
@@ -30,7 +24,12 @@ class Inicio extends CI_Controller {
         } 
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-            
+        /**/        
+        $activa =  valida_valor_variable($this->input->get() , "q");
+        if($activa === "" ){
+            $activa = 1;
+        }
+        $data["activa"] = $activa;
         $this->principal->show_data_page( $data , 'empresas_enid');         
         $this->principal->crea_historico(29 , 0 , $this->sessionclass->getidusuario());
         

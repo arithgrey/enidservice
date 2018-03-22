@@ -31,22 +31,38 @@ class Home extends CI_Controller{
             /*Creamos la vista de recomendaciones*/
             $data_recomendacion =  $this->busqueda_recomendacion($prm);
             $data["usuario"] =  $this->busqueda_datos_basicos_vendedor($prm);            
-            $data["resumen_recomendacion"] =  $data_recomendacion["info_valoraciones"];    
-            /**/             
-            $prm["page"] = get_info_valor_variable($this->input->get() , "page");
+            
+            if( count($data["usuario"]) > 0){
+                $data["resumen_recomendacion"] =  $data_recomendacion["info_valoraciones"];    
+                /*Se crea la data*/             
+                $prm["page"] = get_info_valor_variable($this->input->get() , "page");
+                $prm["resultados_por_pagina"] =  5;
+                $data["resumen_valoraciones_vendedor"] =  $this->resumen_valoraciones_vendedor($prm);
+                $prm["totales_elementos"] = $data_recomendacion["data"][0]["num_valoraciones"];
 
-            $prm["resultados_por_pagina"] =  5;
-            $data["resumen_valoraciones_vendedor"] =  $this->resumen_valoraciones_vendedor($prm);
-            $prm["totales_elementos"] = $data_recomendacion["data"][0]["num_valoraciones"];
-            $prm["per_page"] =  5; 
-            $prm["q"] = $id_usuario;
-            $data["paginacion"] =  $this->get_paginacion($prm);            
-            $this->principal->show_data_page($data, 'home');                          
-
+                $data["paginacion"] = "";
+                if($prm["totales_elementos"] > $prm["resultados_por_pagina"]){
+                    /*Mandamos a crear paginación cuando es más grande el resultado que lo que se 
+                    solicita*/
+                    $prm["per_page"] =  5; 
+                    $prm["q"] = $id_usuario;
+                    $data["paginacion"] =  $this->get_paginacion($prm);                
+                }
+                
+                $this->principal->show_data_page($data, 'home');                          
+            
+            }else{
+                /*Se envia a otro al home*/            
+                $this->go_home();
+            }
         }else{
-            /*Se envia a otro lado*/            
-            redirect("../../", 'POST');
+            /*Se envia a otro al home*/            
+            $this->go_home();    
         }            
+    }
+    /**/
+    function go_home(){
+        redirect("../../", 'POST');
     }
     /**/
     function logout(){                      

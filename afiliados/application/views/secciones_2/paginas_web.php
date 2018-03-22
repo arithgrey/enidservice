@@ -28,7 +28,7 @@
             id="" 
             name="nombre" 
             placeholder="Nombre" 
-            class="form-control input-sm  nombre"
+            class="form-control input-sm  nombre nombre_persona"
             type="text"
             value="" 
             required>  

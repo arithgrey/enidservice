@@ -10,7 +10,10 @@ $(document).on("ready", function(){
 	/**/
 	$(".recupara-pass").click(muestra_contenedor_recuperacion);
 	$(".btn_acceder_cuenta_enid").click(muestra_seccion_acceso);
-
+	$(".nombre_persona").keyup(function(){
+		transforma_mayusculas(this);
+	});
+	carga_logo_enid();
 });
 /*****************************/
 function inicio_session(){
@@ -221,4 +224,8 @@ function valida_seccion_inicial(){
 	    	break;    
 	    default:	    	
 	} 
+}
+/**/
+function carga_logo_enid(){
+	$(".extra_menu_simple").show();	
 }

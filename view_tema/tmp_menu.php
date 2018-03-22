@@ -1,6 +1,4 @@
-<?php     
-    if ($in_session == 1){
-?>
+<?php if ($in_session ==  1): ?>
 
 <li class="dropdown pull-right blue_enid_background menu_notificaciones_progreso_dia" 
     style="padding: 3px;" >
@@ -27,21 +25,21 @@
         </tr>
     </table>
     
-    <ul class="dropdown-menu">                   
+    <ul class="dropdown-menu">                           
         <span class="place_notificaciones_usuario">            
         </span>
 
         <span style="font-size: .8em;">
             <?=$menu;?>    
         </span>        
-        <li>
-            <a href="../administracion_cuenta/" style="font-size: .8em;">
-                <i class="fa fa-cog"></i>
-                Mi cuenta
+        <li class="row">
+            <a href="../administracion_cuenta/" style="font-size: .85em;">
+                <i class="fa fa-user"></i>
+                MIS DATOS
             </a>
         </li>        
-        <li>
-            <a href="../login/index.php/startsession/logout">
+        <li class="row">
+            <a href="../login/index.php/startsession/logout" style="font-size: .85em;">
                 <i class="fa fa-sign-out">
                 </i>  
                 Salir
@@ -49,19 +47,4 @@
         </li>        
     </ul>
 </li>
-
-
-
-<?php if ($in_session ==  0 ){?>
-    <li class="dropdown">
-        <a href="../login" class="dropdown-toggle" >
-            Login
-        </a>
-    </li>
-<?php
-  }
-?>
-
-    <?php
-    }
-?>
+<?php endif; ?>

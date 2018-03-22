@@ -3,6 +3,10 @@ $(document).ready(function(){
 	$(".inicia_registro").click(inicia_registro_afiliado);
 	$(".form-miembro-enid-service").submit(registra_afiliado);
 	$(".afiliar_usuario").submit(afilia_usuario_registrado);
+	$(".nombre_persona").keyup(function(){
+		transforma_mayusculas(this);
+	});
+
 });
 /**/
 function inicia_registro_afiliado(){

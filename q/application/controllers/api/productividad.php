@@ -82,16 +82,12 @@ class productividad extends REST_Controller{
             case 4:                
                 $this->response(get_tareas_pendienetes_usuario($db_response));
                 break;
-
             case 5:                
                 $this->response(get_tareas_pendienetes_usuario_soporte($db_response));
                 break;                
-
             case 6:                                        
-                $this->response(get_tareas_pendientes_vendedor($db_response));
-                
-                break;    
-                    
+                $this->response(get_tareas_pendientes_vendedor($db_response));                
+                break;                        
             case 20:                                        
                 $this->response(get_tareas_pendienetes_usuario_cliente($db_response));
                 break;    

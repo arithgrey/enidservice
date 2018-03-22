@@ -4,10 +4,9 @@
 	<div class="row">
 		<ul class="thumbnails">
             <li class="span4">
-              <div class="thumbnail">
-                
+              <div class="thumbnail">                
                 <div class="caption">
-                  <h3 class="black">
+                  <h3 style="background: black; color: white;">
 					           No hay productos que coincidan con tu búsqueda. 
                   </h3>
                   <ul>
@@ -15,12 +14,12 @@
                   		- Revisa la <strong> ortografía de la palabra.</strong>
                   	</li>
                   	<li>
-						- Utiliza palabras 
-							<strong>
-							más simples o 
-							menos palabras.                  		
-							</strong>
-                  	</li>
+        						- Utiliza palabras 
+        							<strong>
+        							más simples o 
+        							menos palabras.                  		
+        							</strong>
+                    </li>
                   	<li>
                   		- Navega por categorías
                   	</li>

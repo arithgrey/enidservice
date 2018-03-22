@@ -18,66 +18,29 @@
         switch ($id_perfil){
             case 3:            
                 /**/                                  
-                $data_complete["ventas_enid_service"]= $this->ventas_enid_service();
-                /**/                    
+                $data_complete["ventas_enid_service"]= $this->ventas_enid_service();                
                 $data_complete["envios_a_validar_enid_service"] = 
-                $this->envios_a_validar_enid_service();
-                /**/    
-                $data_complete["email_enviados_enid_service"] = $this->email_enviados_enid_service();
-                /**/    
-                //$data_complete["llamadas_enid_service"] = $this->llamadas_enid_service();
-                /**/    
-                //$data_complete["contactos_enid_service"] = $this->contactos_enid_service();
-                /**/    
-                $data_complete["accesos_enid_service"] = $this->accesos_enid_service();
-                
-                //$data_complete["blogs_enid_service"] = $this->blogs_enid_service();
-
-                /**/    
+                $this->envios_a_validar_enid_service();                
+                $data_complete["email_enviados_enid_service"] = $this->email_enviados_enid_service();                
+                $data_complete["accesos_enid_service"] = $this->accesos_enid_service();                
                 $data_complete["tareas_enid_service"] = 
                 $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];    
                 /**/                    
-                /*
-                    $data_complete["tareas_enid_service_marketing"] = 
-                    $this->tareas_enid_service()[0]["num_pendientes_marketing"];    
-                */
                 
                 $data_complete["num_pendientes_direccion"] = 
                 $this->tareas_enid_service()[0]["num_pendientes_direccion"];        
-                
-                /**/    
-                //$data_complete["correos_registrados_enid_service"] = $this->correos_electronicos();  
-
+                                
             break;
             
          case 4:            
-                $data_complete["ventas_enid_service"]= $this->ventas_enid_service();
-                /**/                    
-                $data_complete["envios_a_validar_enid_service"] = $this->envios_a_validar_enid_service();
-                /**/    
-                $data_complete["email_enviados_enid_service"] = $this->email_enviados_enid_service();
-                /**/    
-                //$data_complete["llamadas_enid_service"] = $this->llamadas_enid_service();
-                /**/    
-                //$data_complete["contactos_enid_service"] = $this->contactos_enid_service();
-                /**/    
-                $data_complete["accesos_enid_service"] = $this->accesos_enid_service();
                 
-                //$data_complete["blogs_enid_service"] = $this->blogs_enid_service();
-
-                /**/    
+                $data_complete["ventas_enid_service"]= $this->ventas_enid_service();                
+                $data_complete["envios_a_validar_enid_service"] = $this->envios_a_validar_enid_service();
+                $data_complete["email_enviados_enid_service"] = $this->email_enviados_enid_service();
+                $data_complete["accesos_enid_service"] = $this->accesos_enid_service();                
                 $data_complete["tareas_enid_service"] = 
-                $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];    
-                /**/                    
-                /*
-                $data_complete["tareas_enid_service_marketing"] = 
-                    $this->tareas_enid_service()[0]["num_pendientes_marketing"];    
-                */
-                $data_complete["num_pendientes_direccion"] = 
-                $this->tareas_enid_service()[0]["num_pendientes_direccion"];        
-                /**/    
-                $data_complete["correos_registrados_enid_service"] = 
-                $this->correos_electronicos();    
+                $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];                
+                
 
             break;
 
@@ -93,8 +56,6 @@
                 /**/
                 
                 $data_complete["ventas_usuario"] = $this->ventas_enid_service_vendedor($param);  
-                //$data_complete["contactos_enid_service"] = $this->contactos_enid_usuario($param);
-                //$data_complete["llamadas_enid_service"] = $this->llamadas_enid_service_usuario($param);
                 $data_complete["contactos_promociones_enid_service"] = 
                 $this->contactos_enid_promociones($param);
 

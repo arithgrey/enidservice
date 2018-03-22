@@ -1,7 +1,7 @@
 <br>
 <?php
 	$id_perfil =  $perfil[0]["idperfil"];
-	$extra_estilos ="class='blue_enid_background white' style='font-size:.8em;' ";
+	$extra_estilos ="class='blue_enid_background white' style='font-size:1.1em;' ";
 ?>
 <?=n_row_12()?>
 	<div class="col-lg-10 col-lg-offset-1">
@@ -98,7 +98,7 @@
 															<div class='col-lg-10 col-lg-offset-1'>
 																<div class='col-lg-7'>
 
-																	<span style='font-size:.8em;'>
+																	<span style='font-size:1.1em;'>
 
 																		".$nombre_usuario_registro."
 																		|| 
@@ -109,7 +109,7 @@
 																	
 																		
 																	<div 
-																		style='font-size:.8em;'
+																		style='font-size:1.1em;'
 																		class='white'>
 																		".$fecha_registro."
 																		".$input."
@@ -137,7 +137,7 @@
 										
 										$ltareas .= "
 													<div>
-														<span style='font-size:.8em!important;'> 
+														<span style='font-size:1.1em!important;'> 
 															".$row["descripcion"] ."
 														</span>
 													</div>";
@@ -161,7 +161,7 @@
 									<tr>
 										<td>
 										<span 
-											style ='font-size:.8em;' 
+											style ='font-size:1.1em;' 
 											class='strong comentarios_tarea' 
 											id='".$id_tarea."'> 									
 											Ver comentarios(".$num_comentarios.")
@@ -169,7 +169,7 @@
 										</td>
 										<td class='text-right'>
 										<span 
-											style ='font-size:.8em;' 
+											style ='font-size:1.1em;' 
 											class='strong agregar_respuesta' 
 											id='".$id_tarea."'> 
 											+ agregar 

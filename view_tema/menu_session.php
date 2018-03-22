@@ -1,16 +1,6 @@
       <div class="row ">
 
-            <ul class="largenav pull-right">                            
-            <!--
-            <li class="upper-links">
-                <a class="links white" href="../notificar">
-                    <i class="fa fa-money">
-                    </i>
-                    Notificar compra
-                </a>
-            </li>
-                            
-            -->
+            <ul class="largenav pull-right">                                                    
             <li class="upper-links">
                 <a  class="links white" 
                     href="../login/?action=nuevo">

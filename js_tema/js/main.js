@@ -8,7 +8,7 @@ var tipo_negocio =0;
 var option = [];
 $("footer").ready(function(){
 	now = $(".now").val();
-	in_session =  $(".in_session").val();
+	in_session =  $(".in_session").val();	
 	key_enid =  "AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4";
 	$(".text-filtro-enid").click(show_fields_mov);
 	$(".more-info-f").click(carga_contenido);
@@ -37,7 +37,7 @@ $("footer").ready(function(){
 	$(".precio").keyup(quita_espacios_input_precio);
 	/**/
 	$(".correo_electrionico_lead").keyup(muestra_campos_adicionales_lead);
-
+	$("footer").ready(valida_menu_superior);
 });
 function get_alerta_enid(place ,  msj ){
 	llenaelementoHTML( place ,  "<span class='alerta_enid'>" + msj + "</span>");
@@ -1229,4 +1229,22 @@ function bloquea_form(form){
 /**/
 function desbloqueda_form(form){
 	$("*", form).prop('disabled',false);
+}
+/**/
+function transforma_mayusculas(x){
+	var text =  x.value; 
+	text.trim();
+	text_mayusculas =  text.toUpperCase();  	
+	x.value =  text_mayusculas;
+}
+/**/
+function valida_menu_superior(){
+	if(in_session == 0 ){	
+		width_dispositivo =  $(window).width();
+		if (width_dispositivo< 800){
+			$(".contenedor_busqueda_global_enid_service").hide();
+		}
+
+
+	}
 }

@@ -14,31 +14,30 @@
                             <?php } ?>
                             <?=$this->load->view("../../../view_tema/tmp_menu")?>
 
-                       
-                            <div class="row menu_completo_enid_service">
-                                    <div class="col-lg-3 col-sm-12">
+                            <div class="extra_menu_simple" style="display: none;">
 
-                                       <?php if($in_session ==  0){?>
-                                        <h2 style="margin:0px;">
-                                            <span 
-                                                class="smallnav menu white" 
-                                                  onclick="openNav()">☰ 
-                                                <a href="../" class="white">                                
+                                <a href="../">
+                                    <img src="../img_tema/enid_service_logo.jpg" 
+                                    style="width: 50px;">
+                                </a>                                        
+                            </div>
+                            <div class="menu_completo_enid_service">
+                                    <div class="col-lg-3">
+                                       <?php if ($in_session === 0):?>             
+                                            <span class="smallnav menu white"
+                                                style="font-size: 1.5em;font-weight: bold;" 
+                                                onclick="openNav()">☰ 
+                                                <a  class="white" style="color: white!important;">
+                                                    Enid Service                                
                                                 </a>
-                                            </span>
-                                        </h2>
-
-                                        <?php } ?>
-
-                                        <h1 style="margin:0px;font-size: 1.2em!important;">
-                                                <a href="../" 
-                                                    style="color: white!important;"
-                                                    class="largenav">
-                                                    <img 
-                                                    src="../img_tema/enid_service_logo.jpg" 
-                                                    style="width: 40px;">
-                                                </a>
-                                        </h1>
+                                            </span>                                            
+                                        <?php endif; ?>                                        
+                                        <a  
+                                            class="largenav">
+                                            <img 
+                                            src="../img_tema/enid_service_logo.jpg" 
+                                            style="width: 50px;">
+                                        </a>                                        
                                     </div>
                                     
                                     
@@ -68,12 +67,8 @@
                                             </div>
                                         </form>
                                     </div>
-                                
-
-                                    
-
-                                
                             </div>
+                            
 
 
     </div>
