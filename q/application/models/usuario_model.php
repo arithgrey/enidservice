@@ -48,7 +48,6 @@
                         apellido_paterno , 
                         apellido_materno ,
                         email
-
                         FROM 
                         usuario 
                         WHERE idusuario = $id_usuario LIMIT 1"; 

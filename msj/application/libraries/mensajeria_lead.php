@@ -374,8 +374,7 @@
                     </html>"; 
          
          $headers =  $this->get_headers_mail($email);
-         mail($destinatario , '=?UTF-8?B?'.base64_encode($asunto).'?=' , $cuerpo , $headers);
-         
+         mail($destinatario , '=?UTF-8?B?'.base64_encode($asunto).'?=' , $cuerpo , $headers);         
          return $cuerpo;
 
       }

@@ -16,14 +16,15 @@ class Pregunta extends REST_Controller{
     function pregunta_vendedor_GET(){
 
         $param =  $this->get();
-        $prm =  $this->get_info_usuario($param["usuario"]);
+
+        $prm =  $this->get_info_vendedor_por_servicio($param["servicio"]);
         if(count($prm)>0){        
             /**/
             $email_vendedor =  $prm[0]["email"];                
             $prm_email["info_correo"] =  $this->crea_vista_notificacion_pregunta($prm);    
-            $prm_email["asunto"] =  "Notificación, un nuevo cliente te ha enviado una pregunta, presúrate!";
+            $prm_email["asunto"] ="Notificación, un nuevo cliente te ha enviado una pregunta, apresúrate!";
             $this->envia_email($prm_email , $email_vendedor); 
-            $this->response(1);
+            $this->response($prm_email["info_correo"]);
             
         }else{
             $this->response("No se envió el mensaje");
@@ -41,14 +42,14 @@ class Pregunta extends REST_Controller{
         return $result->response;
     }
     /**/
-    private function get_info_usuario($id_usuario){
+    private function get_info_vendedor_por_servicio($id_servicio){
 
-        $param["id_usuario"] =  $id_usuario;
+        $param["servicio"] =  $id_servicio;
         $url = "q/index.php/api/";         
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
         $this->restclient->set_option('format', "json");        
-        $result = $this->restclient->get("usuario/q/format/json/" , $param);        
+        $result = $this->restclient->get("usuario/usuario_servicio/format/json/" , $param);        
         $data =  $result->response;
         return json_decode($data , true);  
     }

@@ -1,9 +1,8 @@
 <?php 
-	
-	$vendedor =  $vendedor[0]; 
-	$nombre =  strtoupper(trim($vendedor["nombre"])); 
-	$apellido_paterno =  strtoupper(trim($vendedor["apellido_paterno"])); 
-	$apellido_materno =  strtoupper(trim($vendedor["apellido_materno"])); 
+	/**/
+	$nombre =  strtoupper(trim( entrega_data_campo($vendedor , "nombre"  ))); 
+	$apellido_paterno =  strtoupper(trim(entrega_data_campo($vendedor , "apellido_paterno"))); 
+	$apellido_materno =  strtoupper(trim(entrega_data_campo($vendedor , "apellido_materno"  ))); 
 	$nombre_vendedor = $nombre . " ".$apellido_paterno ." " .$apellido_materno;
 
 ?>
@@ -17,7 +16,7 @@
   		<a 	class="btn btn-primary btn-lg" 
 	    	href="http://enidservice.com/" 
 	    	target="_blank" 
-	    	style="background: #015ec8;padding: 10px;color: white;font-weight: bold;margin-top: 20px;">
+	    	style="background: #015ec8;padding: 5px;color: white;font-weight: bold;margin-top: 23px;">
   			Enid Service
   		</a>
 	</p>
@@ -29,8 +28,13 @@
     <a 	class="btn btn-primary btn-lg" 
     	href="http://enidservice.com/inicio/login/" 
     	target="_blank" 
-    	style="background: #015ec8;padding: 10px;color: white;font-weight: bold;margin-top: 20px;">
+    	style="background: #015ec8;padding: 5px;color: white;font-weight: bold;margin-top: 23px;">
     	Responde a tu cliente aquí!
 	</a>
   </p>
+</div>
+
+
+<div style="width: 30%;margin: 0 auto;">
+    <img src="http://enidservice.com/inicio/img_tema/enid_service_logo.jpg" style="width: 100%">
 </div>

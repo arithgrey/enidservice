@@ -16,7 +16,7 @@ function registra_valoracion(e){
 	if (flag == 1) {
 		url ="../portafolio/index.php/api/valoracion/pregunta/format/json/";
 		data_send =  $(".form_valoracion").serialize();		
-
+		console.log(data_send);
 		/**/
 			$.ajax({
 					url : url , 
@@ -26,10 +26,8 @@ function registra_valoracion(e){
 						show_load_enid(".place_registro_valoracion" ,  "Validando datos " , 1 );						
 						bloquea_form(".form_valoracion");
 					}
-			}).done(function(data){			
-
-				console.log(data);
-				alert(data);											
+			}).done(function(data){
+									
 				if (data ==  1 ){
 					$(".registro_pregunta").show();		
 					$(".place_registro_valoracion").empty();

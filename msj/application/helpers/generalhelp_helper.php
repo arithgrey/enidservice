@@ -1,5 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+  function entrega_data_campo($param , $key , $label="", $add_label=0 ){        
+      if($add_label == 1){      
+        return $label ."  ". $param[0][$key];    
+      }else{
+        if(isset($param[0][$key])){
+          return $param[0][$key];
+        }else{
+          return " ";
+        }
+        
+      }    
+  }
   /**/
   function get_valor_variable($param ,  $variable){
 
