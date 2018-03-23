@@ -202,7 +202,22 @@ class Valoracion extends REST_Controller{
         $param =  $this->post();
         $param["id_usuario"] = $this->sessionclass->getidusuario();
         $db_response =  $this->valoracion_model->registra_respuesta($param);
+        if($param["modalidad"] ==  1){
+            /*Notifica al cliente la respuesta por correo*/
+            $db_response =  $this->notifica_respuesta_email($param);
+        }
         $this->response($db_response);
+    }
+    /**/
+    private function notifica_respuesta_email($param){
+
+        $url = "msj/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("pregunta/respuesta_vendedor/format/json/",$param);
+        $response =  $result->response;        
+        return json_decode($response , true);
     }
     /**/ 
 }?>

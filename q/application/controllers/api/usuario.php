@@ -7,6 +7,15 @@ class usuario extends REST_Controller{
         $this->load->library('sessionclass');
     }   
     /**/
+    function usuario_por_pregunta_GET(){
+
+        $param = $this->get();                        
+        $usuario = $this->usuario_model->get_usuario_por_id_pregunta($param);
+        $id_usuario =  $usuario[0]["id_usuario"];     
+        $prm["id_usuario"] = $id_usuario;        
+        $this->response($this->usuario_model->get_usuario_cliente($prm));        
+    }
+    /**/
     function usuario_servicio_GET(){
         $param = $this->get();                        
         $usuario = $this->usuario_model->get_usuario_por_servicio($param);

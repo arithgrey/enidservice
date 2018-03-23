@@ -325,11 +325,7 @@
                     $sql_considera_imagenes = " ";
                     $extra_empresa = " AND id_usuario = " . $param["id_usuario"];      
             }
-            /**/
            
-            /**/
-
-
             /**/
             if($num_q >0 ){
                 
@@ -357,6 +353,7 @@
                     AND 
                         status = 1                     
                         ".$extra_clasificacion." 
+                        ".$extra_empresa."
                     ORDER BY 
                     id_servicio DESC ".$limit;
 
@@ -369,6 +366,7 @@
                         AND 
                             id_usuario =  '".$param["vendedor"]."'
                         AND 
+                        ".$extra_empresa."
                         status = 1                                             
                     ORDER BY 
                     id_servicio DESC ".$limit;

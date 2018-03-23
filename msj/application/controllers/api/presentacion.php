@@ -11,6 +11,13 @@ class Presentacion extends REST_Controller{
         $data["vendedor"] = $param;        
         $this->load->view("ventas/notificacion_pregunta" , $data);
     }
+    /**/
+    function notificacion_respuesta_a_cliente_GET(){
+    	
+    	$param = $this->get();
+        $data["cliente"] = $param;        
+        $this->load->view("ventas/notificacion_respuesta" , $data);	
+    }
     
 
 }?>

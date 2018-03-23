@@ -5,6 +5,14 @@
         $this->load->database();
     }
 
+    /**/
+    function get_usuario_por_id_pregunta($param){
+        /**/  
+      $id_pregunta =  $param["id_pregunta"];
+      $query_get ="SELECT id_usuario FROM pregunta WHERE id_pregunta = $id_pregunta LIMIT 1";
+      $result = $this->db->query($query_get);
+      return $result->result_array();
+    }
     /********/
     function get_usuario_por_servicio($param){
       /**/  
