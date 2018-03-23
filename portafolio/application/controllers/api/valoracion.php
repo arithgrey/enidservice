@@ -108,6 +108,7 @@ class Valoracion extends REST_Controller{
         /**/
         $prm["key"] =  "email";
         $prm["value"] =  $param["email"];        
+        /*Al registrar pregunta envía notificación al vendedor*/
         $data_complete["existencia_usuario"] =  $this->valida_existencia_usuario($prm);        
         $this->response($data_complete);        
     }
@@ -131,6 +132,7 @@ class Valoracion extends REST_Controller{
     }
     /**/
     function pregunta_consumudor_form_GET(){
+        
         /**/     
         $param =  $this->get();              
         $data["id_servicio"] =  $param["id_servicio"];
@@ -143,8 +145,28 @@ class Valoracion extends REST_Controller{
     function pregunta_POST(){
 
         $param =  $this->post();
-        $db_response =  $this->valoracion_model->registra_pregunta($param);
-        $this->response($db_response);
+        $db_response =  $this->valoracion_model->registra_pregunta($param);        
+        /**/
+        if($db_response == true ){
+            
+            /**/                        
+            $respuesta_notificacion = $this->envia_pregunta_a_vendedor($param);
+
+        }
+        
+        $this->response($respuesta_notificacion);
+        /**/
+
+    }
+    private function envia_pregunta_a_vendedor($param){
+
+        $url = "msj/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("pregunta/pregunta_vendedor/format/json/",$param);
+        $response =  $result->response;        
+        return json_decode($response , true);
     }
     /**/
     function preguntas_GET(){

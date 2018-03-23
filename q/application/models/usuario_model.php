@@ -46,8 +46,11 @@
                         idusuario id_usuario, 
                         nombre , 
                         apellido_paterno , 
-                        apellido_materno 
-                        FROM usuario 
+                        apellido_materno ,
+                        email
+
+                        FROM 
+                        usuario 
                         WHERE idusuario = $id_usuario LIMIT 1"; 
         $result =  $this->db->query($query_get);
         return $result->result_array();

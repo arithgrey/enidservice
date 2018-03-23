@@ -94,8 +94,6 @@ class Areacliente extends REST_Controller{
         for ($i=0; $i <count($lista_correo_dirigido_a) ; $i++){                         
             $this->mensajeria_lead->notificacion_email($param , $lista_correo_dirigido_a[$i]);                 
         }
-
-        
         $this->response($param["asunto"]);
 
     }

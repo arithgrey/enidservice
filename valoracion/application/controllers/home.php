@@ -1,5 +1,4 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-//require 'restclient.php';   
 class Home extends CI_Controller{
     function __construct(){        
         parent::__construct();                            

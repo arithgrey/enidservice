@@ -15,8 +15,9 @@ function registra_valoracion(e){
 	flag =  valida_text_form("#pregunta" , ".place_area_pregunta" , 5 , "Pregunta" );
 	if (flag == 1) {
 		url ="../portafolio/index.php/api/valoracion/pregunta/format/json/";
-		data_send =  $(".form_valoracion").serialize();	
-				
+		data_send =  $(".form_valoracion").serialize();		
+
+		/**/
 			$.ajax({
 					url : url , 
 					type : "POST" , 
@@ -25,12 +26,13 @@ function registra_valoracion(e){
 						show_load_enid(".place_registro_valoracion" ,  "Validando datos " , 1 );						
 						bloquea_form(".form_valoracion");
 					}
-			}).done(function(data){														
+			}).done(function(data){			
+
+				console.log(data);
+				alert(data);											
 				if (data ==  1 ){
 					$(".registro_pregunta").show();		
 					$(".place_registro_valoracion").empty();
-
-
 				}
 				/**/
 			}).fail(function(){							
