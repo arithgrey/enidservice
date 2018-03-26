@@ -106,8 +106,6 @@
 </script>
 <script type="text/javascript" src="<?=base_url('application/js/principal.js')?>">
 </script>
-<script type="text/javascript" src="<?=base_url('application/js/secciones/usuario.js')?>">
-</script>
 
 
 
@@ -160,14 +158,14 @@
     .table_enid_service{
       font-size: .8em!important;
     }
-    .usuarios,.contactos,.solicitudes{
+    .usuarios,.contactos,.solicitudes,.valoraciones{
         color: blue!important;
         font-weight: bold;
     }
     .usuarios:hover{
         cursor: pointer;
     }
-    .contactos:hover,.solicitudes:hover{
+    .contactos:hover,.solicitudes:hover,.valoraciones:hover{
         cursor: pointer;
     }
 </style>

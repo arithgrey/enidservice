@@ -34,6 +34,9 @@
 						<h3 style="font-weight: bold;font-size: 3em;">			
 							BUZÓN
 						</h3>
+						<p style="font-size: 1.5em;">
+							TUS PREGUNTAS
+						</p>
 						<hr>
 						<?=n_row_12()?>
 							<table>
@@ -41,13 +44,13 @@
 									<td>
 										<a 	class="a_enid_blue preguntas btn_preguntas_compras" 
 											id='0' style="color: white!important">
-											TUS PREGUNTAS
+											HECHAS A VENDEDORES
 										</a>
 										<a 
 											class="a_enid_black preguntas btn_preguntas_ventas" 
 											id="1" 
 											style="color: white!important">
-											SOBRE TUS VENTAS
+											LO QUE CLIENTES TE PREGUNTAN
 										</a>
 									</td>
 								</tr>

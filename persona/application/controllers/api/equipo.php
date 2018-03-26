@@ -107,21 +107,11 @@ class Equipo extends REST_Controller{
         $db_response = $this->equipomodel->registra_recurso($param);
         $this->response($db_response);        
     }
-    /**/
+    /*Se registra prospecto desde el buzón de noticias*/
     function prospecto_subscrito_POST(){
     
-        $param =  $this->post();     
-        /**/   
-        $db_response =  $this->equipomodel->registrar_prospecto($param);            
-
-
-        if($db_response["usuario_existe"] == 0 ){
-
-            $param["id_usuario_enid_service"] =  $db_response["id_usuario"];
-            $db_response["extra"] =  $this->equipomodel->crea_persona_subscrito($param);
-
-        }
-
+        $param =  $this->post();             
+        $db_response =  $this->equipomodel->registrar_prospecto($param);                    
         $this->response($db_response);    
     }
 

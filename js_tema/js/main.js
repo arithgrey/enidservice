@@ -8,13 +8,10 @@ var tipo_negocio =0;
 var option = [];
 $("footer").ready(function(){
 	now = $(".now").val();
-	in_session =  $(".in_session").val();	
-	key_enid =  "AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4";
-	$(".text-filtro-enid").click(show_fields_mov);
-	$(".more-info-f").click(carga_contenido);
-		
-	$("#form_contacto").submit(envia_comentario);	
-	
+	in_session =  $(".in_session").val();		
+	//$(".text-filtro-enid").click(show_fields_mov);
+	//$(".more-info-f").click(carga_contenido);		
+	$("#form_contacto").submit(envia_comentario);		
 	$(".btn_enviar_email_prospecto").click(function(){
 		$(".form_enid_contacto").submit();
 	});
@@ -22,13 +19,13 @@ $("footer").ready(function(){
 
 	
 	/**/
-	$(".menu_notificaciones_progreso_dia").click(carga_metrigas_perfil_usuario);
-	carga_metrigas_perfil_usuario();
+	$(".menu_notificaciones_progreso_dia").click(metricas_perfil);
+	metricas_perfil();
 	set_titulo_web($(".titulo_web").val());					
 
 	/**/
-	$(".btn_ejemplos_disponibles").click(carga_ejemplos_disponibles);
-	$(".tipo_negocio_ej").change(carga_ejemplos_disponibles);	
+	//$(".btn_ejemplos_disponibles").click(carga_ejemplos_disponibles);
+	//$(".tipo_negocio_ej").change(carga_ejemplos_disponibles);	
 	
 	
 
@@ -42,10 +39,10 @@ $("footer").ready(function(){
 function get_alerta_enid(place ,  msj ){
 	llenaelementoHTML( place ,  "<span class='alerta_enid'>" + msj + "</span>");
 }
-/**/
+/*
 function carga_data_empresa(){	
 	
-	/**/
+	
 	url  =  "../enid/index.php/api/emp/nombre_empresa/format/json/";		
 	id_empresa =  $(".id_empresa").val();
 	$.ajax({
@@ -67,6 +64,7 @@ function carga_data_empresa(){
 		show_error_enid(".place_nombre_empresa" , "Error al cargar, reporte al administrado.");   			
 	});
 }
+*/
 /**/
 function existeFecha2(fecha){
         var fechaf = fecha.split("-");
@@ -80,8 +78,7 @@ function existeFecha2(fecha){
 
         return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
 }
-
-/**/
+/*
 function valida_format_date(fecha_inicio , fecha_termino , place ,  mensaje ){
 
 	fecha_inicio =  $(fecha_inicio).val();
@@ -89,7 +86,7 @@ function valida_format_date(fecha_inicio , fecha_termino , place ,  mensaje ){
 	var fecha_actual =  new Date();
 
 
-	/**/
+
 	año_inicio =  fecha_inicio.substring(0 ,4);
 	año_inicio = parseInt(año_inicio);
 
@@ -117,16 +114,16 @@ function valida_format_date(fecha_inicio , fecha_termino , place ,  mensaje ){
 	año =  fecha_actual.getFullYear();
 	año =  parseInt(año);
 
-	/**/
+
 	mensaje_cliente =  ""; 
 	flag_fecha = 0; 
 	flag2 = 0;
 
-	/*Validamos año*/
+
 	if (año_inicio >=  año &&  año_termino >= año){
-		/*Validamos mes */
+
 		if (mes_inicio >=  mes && mes_termino >= mes  ||   año_inicio < año_termino  ){
-			/*Validamos día*/			
+
 		}else{			
 			flag_fecha  ++;  				
 		}
@@ -134,12 +131,12 @@ function valida_format_date(fecha_inicio , fecha_termino , place ,  mensaje ){
 		flag_fecha  ++;  
 		
 	}
-	/**/
+
 	if (flag_fecha > 0 ){		
 		llenaelementoHTML(place , "<span class='alerta_enid'>"+mensaje+"</span>");							
 	}
 
-	/**/
+
 	if(existeFecha2(fecha_inicio) ==  true){		
 	}else{
 		flag_fecha ++;
@@ -157,17 +154,12 @@ function valida_format_date(fecha_inicio , fecha_termino , place ,  mensaje ){
 		flag_fecha ++;
 		llenaelementoHTML(place , "<span class='alerta_enid'>La fecha inicio no puede ser mayor a la de termino </span>");								
 	}
-
-
-
-
 	if (flag_fecha == 0 ) {
 		$(place).empty();
 	}
-	return flag_fecha;
-
-	
+	return flag_fecha;	
 }
+*/
 /**/
 function validate_format_num_pass( input , place , num  ){
 
@@ -277,8 +269,7 @@ function valida_url_form( place , input  ,  msj ){
     }else{
         return false;
     }
-}
-	
+}	
 /**/	
 function valida_email_form(input ,  place_msj ){
 
@@ -343,10 +334,6 @@ function valida_tel_form(input ,  place_msj ){
 function limpia_inputs(){
 	$(".form-control").val("");
 }
-function outsystem(){
-	urlnext = $(".now").val()+"index.php/sessioncontroller/logout/";		
-	redirect(urlnext);	
-}
 function llenaelementoHTML(idelement , data ){	
 	$(idelement).html(data);
 } 
@@ -359,10 +346,8 @@ function set_text_element(text_tag , texto ){
 function redirect(url){
 	window.location.replace(url);
 }
-function recorrepage(idrecorrer){	
-	
+function recorrepage(idrecorrer){		
 	$('html, body').animate({scrollTop: $(idrecorrer).offset().top -100 }, 'slow');
-
 }
 function get_td(val , extra ){ 
 	return "<td>" + val + "</td>";
@@ -380,7 +365,7 @@ function showonehideone( elementomostrar , elementoocultar  ){
 	$(elementomostrar).show();
 	$(elementoocultar).hide();
 }
-/*saca el id del elemento */
+/*
 function getidstringanddinamicelement(completa, elementomostrar , elementoocultar){
 
 	bandera =0; 
@@ -397,14 +382,15 @@ function getidstringanddinamicelement(completa, elementomostrar , elementooculta
 			}
 
 
-	}/*Termina el ciclo*/
+	}
 	
 	dinamicinput =  elementomostrar + id;
 	dinamicpnombre =  elementoocultar+ id;
 	showonehideone( dinamicinput , dinamicpnombre  );
 	return id;
 }
-/*saca el id del elemento */
+**/
+/*
 function getidstringcadena(completa){
 
 	bandera =0; 
@@ -419,9 +405,10 @@ function getidstringcadena(completa){
 			if (completa[x] == "_") {
 				bandera++;
 			}
-	}/*Termina el ciclo*/
+	}
 	return id;
 }
+*/
 /**/
 function valEmail(valor){
     re=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/
@@ -482,39 +469,30 @@ function show_section_dinamic_button(seccion){
 		$(seccion).show();
 	}	
 }
-/**/
+/*
 function show_section_dinamic_arrow(dinamic_section , id_section , new_class_up , new_class_down){
-
-	if ($(dinamic_section).is(":visible")) {
-		
-		
+	if ($(dinamic_section).is(":visible")) {		
 		$(id_section).removeClass(new_class_down);		
-		$(id_section).addClass(new_class_up);	
-		
-		
-	
-	}else{		
-		
-		
+		$(id_section).addClass(new_class_up);				
+	}else{			
 		$(id_section).removeClass(new_class_up);		
 		$(id_section).addClass(new_class_down);		
 	}
 }
-/**/
+*/
+/*
 function show_section_dinamic_on_click(dinamic_section){
 
-
 	if ($(dinamic_section).is(":visible")) {
-
 		$(dinamic_section).hide();
-
 	}else{
 
 		$(dinamic_section).show();
 	}
 
 }
-/**************************************************************************************/
+*/
+/*
 function updates_send(url , data_send ){
 
 	$.post(url , data_send ).done(function(data){
@@ -524,7 +502,7 @@ function updates_send(url , data_send ){
 	});
 
 }
-/**************************************************************************************/
+
 function updates_send_test(url , data_send ){
 
 	$.post(url , data_send ).done(function(data){
@@ -534,7 +512,6 @@ function updates_send_test(url , data_send ){
 		
 	});
 }
-/**/
 function actualiza_data_test(url , data_send ){
 	$.ajax({
 	   url: url,
@@ -555,7 +532,7 @@ function actualiza_data(url , data_send ){
 	   	
 	});
 }
-/**/
+
 function registra_data(url , data_send ){
 
 	$.post(url , data_send ).done(function(data){
@@ -564,7 +541,8 @@ function registra_data(url , data_send ){
 		
 	});
 }
-/***/
+
+
 function registra_data_test(url , data_send ){
 
 	$.post(url , data_send ).done(function(data){
@@ -573,8 +551,6 @@ function registra_data_test(url , data_send ){
 		
 	});
 }
-
-/**/
 function eliminar_data(url , data_send ){
 	$.ajax({
 	   url: url,
@@ -595,7 +571,7 @@ function eliminar_data_test(url , data_send ){
 	   		
 	});
 }
-
+*/
 function exporta_excel(){
 	
     $("#datos_a_enviar").val( $("<div>").append( $("#print-section").eq(0).clone()).html());
@@ -603,7 +579,6 @@ function exporta_excel(){
 }
 /**/
 function reset_fields(fields){
-
 	for(var x in fields ){
 		$(fields[x]).val("");
 	}
@@ -613,8 +588,6 @@ function reset_checks(inputs){
 		document.getElementById(inputs[x]).checked = false;
 	}
 }
-
-
 /**/
 function ocualta_elementos_array(data){
 		
@@ -628,29 +601,11 @@ function muestra_alert_segundos(seccion){
         $(seccion).fadeOut(1500);
     }, 1500);
 }
-/**/
-function complete_alert_ok_modal(e,  f){
 
-	$(f).modal('hide');
-	$(e).show();
-	muestra_alert_segundos(e);
-	
-
-}
 function complete_alert(e){
 	
 	$(e).show();
 	muestra_alert_segundos(e);
-}
-
-function resumen_event(muestra, botona , botonb ){
-
-	$(muestra).show();
-	showonehideone(botona , botonb);
-}
-function dinamic_section(){    
-    $(".menos-info").show();
-    showonehideone(".dinamic_campo_tb" , ".mas-info");
 }
 /******/
 function dinamic_section_info(){
@@ -686,11 +641,7 @@ function dinamic_t(){
 
 
 	if ($("#in_session").val() != 1 ) {
-
-	
-
-	  $(".left-side").getNiceScroll().hide();
-       
+	  $(".left-side").getNiceScroll().hide();       
        if ($('body').hasClass('left-side-collapsed')) {
            $(".left-side").getNiceScroll().hide();
        }
@@ -715,7 +666,7 @@ function dinamic_t(){
     }  
 }
 
-/**/
+/*
 function show_fields_mov(){	
 	seccion =  ".hidden-field-mov";
 	if ($(seccion).is(":visible")) {		
@@ -726,7 +677,8 @@ function show_fields_mov(){
 		$(".text-filtro-enid").text(" - Filtros");
 	}	
 }
-/**/
+*/
+/*
 function carga_contenido(){
 	
 	seccion =  ".show_descripcion";
@@ -744,6 +696,7 @@ function carga_contenido(){
 		$(".show_descripcion").show();
 	}
 }
+*/
 /**/
 function envia_comentario(e){	
 
@@ -854,7 +807,7 @@ function showonehideone( elementomostrar , elementoocultar  ){
 function selecciona_select(class_select , valor_a_seleccionar){
 	$( class_select +' > option[value="'+ valor_a_seleccionar +'"]').attr('selected', 'selected');				
 }
-function carga_metrigas_perfil_usuario(){
+function metricas_perfil(){
 	
 	if (in_session ==  1) {
 		url =  "../q/index.php/api/productividad/notificaciones/format/json/";	
@@ -888,11 +841,6 @@ function carga_metrigas_perfil_usuario(){
 				llenaelementoHTML(".tareas_pendientes_productividad" , "<span class='alerta_notificacion_fail' >"+ num_tareas_pendientes +"</span>");	
 			}
 			
-			
-
-			
-
-			
 		}).fail(function(){				
 			show_error_enid(".place_notificaciones_usuario"  , "Error al cargar la sección de artistas"); 		
 		});	
@@ -901,11 +849,9 @@ function carga_metrigas_perfil_usuario(){
 /**/
 function notifica_usuario_pendientes(num_pendientes){
 	if(document.visibilityState == 'hidden'){
-		if (num_pendientes > 0 ){
-			
+		if (num_pendientes > 0 ){			
 			set_flag_activa_notificaciones(1);
-			rotulo_title();
-			
+			rotulo_title();			
 		}
 			        
 	}else {
@@ -1003,7 +949,7 @@ function quitar_espacios_numericos(nuevo_valor){
 /************************comentarios a persona*************/
 /************************comentarios a persona*************/
 
-/**/
+/*
 function carga_ejemplos_disponibles(e){	
 	url =  "../portafolio/index.php/api/portafolio/proyecto/labor_venta/format/json/";	
 	data_send =  $(".form_busqueda_proyectos").serialize();	
@@ -1021,7 +967,7 @@ function carga_ejemplos_disponibles(e){
 	});
 	e.preventDefault();	
 }
-/**/
+*/
 function quita_espacios_input(){		
 
 	valor = $(".telefono_info_contacto").val();
@@ -1086,15 +1032,17 @@ function ordena_table_general(){
 function  muestra_campos_adicionales_lead(){
 	$(".parte_oculta_lead").show();	
 }
-/**/
+/*
 function set_flag_carga_preferencias(n_flag){
 
 	flag_carga_preferencias =  n_flag;
 }
-/**/
+*/
+/*
 function get_flag_carga_preferencias(){
 	return flag_carga_preferencias;
 }
+*/
 /*
 function verifica_tipo_negocio(e){
 
@@ -1152,7 +1100,7 @@ function carga_tipo_negocio(){
 	});	
 }
 */
-/**/
+/*
 function registrar_posiblie_cliente(){
 
 		url =  "../base/index.php/api/ventas/prospecto/format/json/";		
@@ -1169,7 +1117,7 @@ function registrar_posiblie_cliente(){
 			}
 		}).done(function(data){						
 																			
-			/*Cuando se registra como contacto*/		
+
 			if (data.num_usuario == 0){	
 					
 				$("#btn_agendar_llamada_base_marcacion").tab("show");
@@ -1178,23 +1126,15 @@ function registrar_posiblie_cliente(){
 
 					
 			}else{
-				/*Notificar que el usuario está ya registrado*/
+
 				llenaelementoHTML(".place_registro_prospecto" , "<span class='alerta_enid'> El usuario ya se encuentra registrado, prueba con otro!</span>");
 			}
-			/**/
+
 		}).fail(function(){		
 			show_error_enid(".place_registro_prospecto" , "Error ... ");
 		});		
 }
-/**/
-function set_tipo_negocio(n_tipo){
-	tipo_negocio =  n_tipo;
-	$(".tipo_negocio").val(n_tipo);
-}
-/**/
-function get_tipo_negocio(){
-	return tipo_negocio;
-}
+*/
 /**/
 function muestra_cargando_proceso_enid(){
 	if($(".procesando_solicutud_enid_service").is(":visible")) {
@@ -1239,12 +1179,8 @@ function transforma_mayusculas(x){
 }
 /**/
 function valida_menu_superior(){
-	if(in_session == 0 ){	
-		width_dispositivo =  $(window).width();
-		if (width_dispositivo< 800){
-			$(".contenedor_busqueda_global_enid_service").hide();
-		}
-
-
+	width_dispositivo =  $(window).width();
+	if (width_dispositivo< 800){
+		$(".contenedor_busqueda_global_enid_service").hide();
 	}
 }

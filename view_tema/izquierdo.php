@@ -24,28 +24,11 @@
                                     </i>Envia tu mensaje
                                 </a>
                                 </div>
-                                <div  class="btn_whatsApp">
-                                    <a class=" strong blue_enid_background white" 
-                                        style="text-decoration:none !important;font-size: .9em; padding: 5px;color:white!important;"
-                                         href="https://api.whatsapp.com/send?phone=+525552967027&amp;text=Hola quiero más información sobre ...">
-
-                                        <i class="black fa fa-whatsapp  white" 
-                                            style="color:white!important;">
-                                        </i>
-                                        Click para enviar                                         
-                                        WhatsApp
-                                    </a>
-                                </div>
+                              
                                 
                             </div>
                             
-                            <div>
-                                <span style="font-size: .85em;">
-                                    Lunes a Viernes 
-                                    de 08:00 a 19:00 y 
-                                    Sábados de 09:00 a 18:00
-                                </span>
-                            </div>
+                            
                         </p>
                         
                         <?=n_row_12()?>
@@ -58,7 +41,7 @@
                             </i>
                         </a>
                         <a target="_blank" href="https://www.instagram.com/enid_service/">        
-                            <i class=" fa fa-instagram black strong" aria-hidden="true">
+                            <i class=" fa fa-instagram black strong" >
                             </i>
                         </a>
                         <a target = '_blank' href="https://twitter.com/enidservice">
@@ -70,27 +53,17 @@
                             </i>
                         </a>                        
                         <a target = '_blank' href="https://es.pinterest.com/enid_service">
-                            <i class="fa fa-pinterest-p black " aria-hidden="true"></i>
+                            <i class="fa fa-pinterest-p black " ></i>
                         </a>
                         <a target="_blank" href="https://plus.google.com/u/0/117684782897236574265">
-                            <i class="fa fa-google-plus-square black" aria-hidden="true">
+                            <i class="fa fa-google-plus-square black" >
                             </i>
                         </a>
                         <a target="_blank" href="https://enidservice.tumblr.com/">
-                            <i class="fa fa-tumblr-square black" aria-hidden="true">
+                            <i class="fa fa-tumblr-square black" >
                             </i>
                         </a>
                         
-                        <?=n_row_12()?>
-                            <a href="../documentacion/presentacion/folleto.pdf" target="_blank">
-                                <strong style="font-size: .9em;padding: 3px;" 
-                                    class="blue_enid_background white" >
-                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
-
-                                    Descarga un folleto
-                                </strong>
-                            </a>
-                        <?=end_row()?>
                     </li>
                     </ul>
                 </nav>

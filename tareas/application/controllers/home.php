@@ -29,7 +29,14 @@ class Home extends CI_Controller{
         
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-             
+        
+        /**/
+        $activa =  valida_valor_variable($this->input->get() , "q");
+        if($activa === "" ){
+            $activa = 1;
+        }
+        $data["activa"] = $activa;
+
         $this->principal->show_data_page($data, 'home');                          
     }
     function logout(){                      

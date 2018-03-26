@@ -1,169 +1,94 @@
-<?php
+<?php 
+
   $q =  $info["q"];  
   $nombre =  $q["nombre"];
   $email =  $q["email"];
   $password_legible =  $q["password_legible"];  
   $telefono=  $q["telefono"];  
+
 ?>
+<div class="jumbotron" 
+  style="padding: 2rem 1rem;margin-bottom: 2rem;background-color: #fbfbfb;border-radius: .3rem;">
+    <h1 class="display-4">
+    Buen día <?=$nombre?>
+  </h1>
+    <p class="lead">
+      Te notificamos que desde este momento puedes consultar más productos y servicios a través de 
+      <a  class="btn btn-primary btn-lg" 
+        href="http://enidservice.com/" 
+        target="_blank" 
+        style="background: #015ec8;padding: 5px;color: white;font-weight: bold;margin-top: 23px;">
+        Enid Service
+      </a>
+  </p>
+  <hr class="my-4">
+  <p>
+    Desde ahora podrás comprar y vender tus productos o servicios 
+  </p>
+  <p class="lead">
+    <a  class="btn btn-primary btn-lg" 
+      href="http://enidservice.com/inicio/login/" 
+      target="_blank" 
+      style="background: #015ec8;padding: 5px;color: white;font-weight: bold;margin-top: 23px;">
+      Accede a tu cuenta aquí!
+  </a>
+  </p>
+</div>
 
 <div>
-  <span>
-    Equipo <br>
-    Enid Service
-  </span>
-</div>
-
-<div style="margin-top: 20px;">
-  <span>
-    Buen día <?=$nombre?> - <?=$email?>
-  </span>
-</div>
-
-<div style="margin-top: 20px;">
-    <span>
-
-      Primero que nada un cordial saludo, espero te encuentres bien, el motivo por el cual me estoy poniendo en contacto contigo, es con el propósito de hacerte saber, que desde ahora te hemos agregado en nuestra base de clientes especiales, por lo cual recibirás las ultimas noticas, descuentos y promociones que tenemos disponible para ti. 
-    </span>
-</div>
-
-<div style="margin-top: 20px;">
-    <span>
-        Tanto para consultar precios como para tener acceso a los descuentos, te recomiendo lo hagas desde tu cuenta Enid Service 
-        <a href="http://enidservice.com/inicio/login/" style="background: blue; padding: 5px;color: white;">
-          ingresando aquí 
-        </a>
-    </span>
-</div>
-
-<div style="margin-top: 30px;">
-  <table>
-    <tr>
-
+  <table style="width: 100%">
       <tr>
-        <td>
-          <strong>
-            Usuario:
-          </strong>
-        </td>
-        <td>
-          <?=$email?>
-        </td>
-        
+        <td colspan="2">
+          Info
+        </td>        
       </tr>
       <tr>
         <td>
-          <strong>
-            Credenciales solicitadas:
-          </strong>
+          Usuario
+        </td>
+        <td>
+          Información de acceso
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <?=$email?>
         </td>
         <td>
           <?=$password_legible?>
         </td>
       </tr>
-
-    </tr>
   </table>
+</div>
 
-  <span style="color:red;font-weight: bold; ">
-    Se te recomienda modificar estas al ingresar a tu cuenta.
-  </span>
+<div style="width: 30%;margin: 0 auto;">
+    <img src="http://enidservice.com/inicio/img_tema/enid_service_logo.jpg" style="width: 100%">
 </div>
 
 
-<div style="margin-top: 30px;">
-    <span>
-        No me despido sin antes comentar que realizamos artículos enfocados a mejorar los procesos de negocio periódicamente, si 
-
-        <a href="http://enidservice.com/inicio/faq/" 
-           style="background: blue;color: white;padding: 5px;">         
-            quisiera saber más puede acceder 
-            aquí.
-        </a>
-    </span>
-</div>
 
 
-<div style="margin-top: 20px;">
-    <h3>
-        Medios de contacto
-    </h3>
 
-</div>
 
-<div style="margin-top: 20px;">
 
-    <table>
-         
-            <tr style="background: #0633a1;font-size:.8em;padding: 15px;">
-              
-              <td>
-                <a href="http://enidservice.com/inicio/contacto" 
-                  style="color: white;">
-                  Contacto
-                </a>
-              </td>
-              <td>
-                <a href="http://enidservice.com/" 
-                  style="color: white;">
-                  Página web
-                </a>
-              </td>
-              <td>
-                <a style="color: white;">
-                  ventas@enidservice.com
-                </a>
-              </td>
 
-              <td>
-                        <a target="_blank" href="tel:5552967027" style="color: white;">
-                            <i class="icon-mobile contact">
-                            </i>
-                            (55)5296-7027
-                        </a>
-              </td>
 
-              <td>
-                        <a target="_blank" href="tel:5532693811" style="color: white;">
-                        <i class="icon-mobile contact">
-                        </i>
-                        (55)3269-3811 
-                    </a>
-              </td>
 
-              
-            </tr>           
-          </table>
-</div>
 
-<a href="http://enidservice.com/">
-    <img src="http://enidservice.com/inicio/img_tema/enid_service_logo.jpg" width="300px">
-</a>
 
-    <table>
-            <tr style="background: #0633a1;font-size:.8em;padding: 15px;">
-              <td>
-                <a href="http://enidservice.com/inicio/tareas_complejas/?q=5" 
-                  style="color: white;">
-                  Desarrollo de software a la medida
-                </a>
-              </td>
-              <td>
-                <a href="http://enidservice.com/inicio/paginas_web/?q=5" 
-                  style="color: white;">
-                  Sitios en Internet
-                </a>
-              </td>
-              <td>
-                <a href="http://enidservice.com/inicio/correo_para_negocios/?q=5" 
-                  style="color: white;">
-                  Correo para negocios
-                </a>
-              </td>
-              <td>
-                <a href="http://enidservice.com/inicio/adwords/?q=5" 
-                  style="color: white;">
-                  Google Adwords
-                </a>
-              </td>             
-            </tr>           
-          </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

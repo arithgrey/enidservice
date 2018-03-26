@@ -1,6 +1,6 @@
         <nav class="nav-sidebar">
-            <ul class="nav tabs">                
-                <li class='black li_menu' 
+            <ul class="nav tabs ">                
+                <li class='black li_menu <?=valida_seccion_activa(1 , $activa )?>' 
                     style='background:white;'>
                     <a  
                         title="Publicidad en redes sociales" 
@@ -15,7 +15,7 @@
                         </span>      
                     </a>
                 </li>                      
-                <li class='black li_menu' 
+                <li class='black li_menu <?=valida_seccion_activa(2 , $activa )?>' 
                     style='background:white;'>
                     <a  
                         title="Email marketing" 

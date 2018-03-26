@@ -81,7 +81,7 @@
             $this->db->query($query_create);  
         }
     }
-    /**/
+    /*
     function get_info_persona($param){
 
       $id_persona = $param["id_persona"];
@@ -101,6 +101,7 @@
       $result=  $this->db->query($query_get); 
       return $result->result_array();
     }
+    */
     function get_usuario_ventas(){
     
       $query_insert = "SELECT idusuario FROM usuario WHERE email ='ventas@enidservice.com' LIMIT 1"; 
@@ -143,9 +144,9 @@
         return $data;
 
     }
-    /**/    
+    /*
     function create_tmp_personas($_num , $flag , $param ){
-      /**/
+      
       $query_drop ="DROP TABLE IF EXISTS tmp_personas_$_num";
       $status =  $this->db->query($query_drop);
       $id_usuario =  $param["id_usuario"];
@@ -189,7 +190,9 @@
       }
       return $status;
     }
-    /******************************************/
+    */
+    /**************************
+    ****************/
     function get_posibles_clientes_usuario_campo($param){
         
         $_num =  get_random();
@@ -219,16 +222,15 @@
         return $data;
 
     }
-    /**/
-    function create_tmp_personas_posibles_clientes_campo($_num , $flag  ,$param){
-      /**/
+    /*
+    function create_tmp_personas_posibles_clientes_campo($_num , $flag  ,$param){      
       $query_drop ="DROP TABLE IF EXISTS tmp_personas_$_num";
       $status =  $this->db->query($query_drop);
     
       $id_usuario =  $param["id_usuario"];      
       $nombre_persona  =  $param["nombre"];
       $telefono =  $param["telefono"];            
-      /**/
+      
       $sql_extra_telefono = "";                        
       if( strlen(trim($telefono)) > 0 ){
         $sql_extra_telefono = "AND p.tel like '%".$telefono."%' ";
@@ -273,7 +275,7 @@
       }
       return $status;
     }
-    
+    */
     /**/
 
     function get_posibles_clientes_tipificacion($param){
@@ -306,9 +308,9 @@
         return $data_complete;
 
     }
-    /**/
+    /*
     function create_tmp_personas_tipificacion($_num , $flag  ,$param){
-      /**/
+      
       $query_drop ="DROP TABLE IF EXISTS tmp_personas_$_num";
       $status =  $this->db->query($query_drop);
     
@@ -327,7 +329,7 @@
                       OR
                       DATE(p.fecha_cambio_tipo ) = '".$fecha_registro."' 
                     )";
-      /**/
+      
       if ($flag == 0){
 
             $query_create ="CREATE TABLE tmp_personas_$_num 
@@ -357,9 +359,10 @@
              $query_create_2 =  $query_create;              
             $this->db->query($query_create);
       }
-      /**/      
+      
       return $query_create_2;
     }
+    */
     /**/
     
 }

@@ -6,11 +6,10 @@
 		<h3 style="font-size: 2em;" class="black">										
 			VALORACIONES Y RESEÑAS
 		</h3>
-		<a
-		href="../recomendacion/?q=<?=$id_usuario?>" 
-		style="text-decoration: underline;color: white;padding: 4px;color: white!important;" 
-		class='blue_enid_background2'>
-			Más valoraciones sobre este vendedor
+		<a class="a_enid_black" href="../recomendacion/?q=<?=$id_usuario?>" 
+			style="color: white!important">
+			VE MÁS VALORACIONES DEl VENDEDOR
+			<i class="fa fa-chevron-right ir"></i>
 		</a>
 	</center>
 </div>

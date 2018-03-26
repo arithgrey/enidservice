@@ -66,7 +66,7 @@ class Base extends REST_Controller{
     /**/
     $num_correos_dia=  $this->enidmodel->get_num_correos_por_usuario_dia($param);
     
-    if($num_correos_dia < 500 ){
+    if($num_correos_dia < 2500 ){
 
       $data["info_registros"] =  $this->enidmodel->get_registros_disponibles($param);
       $this->load->view("prospectos/contactos_disponibles" , $data);  

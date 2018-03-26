@@ -79,6 +79,14 @@
 			title='Se han enviado'  ";
 
 
+		$extra_td_total =  " 
+			class='valoraciones' 
+			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'			
+			href='#reporte' 
+			data-toggle='tab' 
+			title='Valoraciones que se han hecho en Enid Service'  ";
+
+
 	foreach($actividad_enid_service as $row){
 	
 		
@@ -94,7 +102,7 @@
 				$table .="</tr>";	
 				$table .="<tr>";	
 				$table .=get_td($row["usuarios"] , $extra_td_usuarios);						
-				$table .=get_td($row["accesos_area_cliente"]);										
+				$table .=get_td($row["accesos_area_cliente"] , "title='Personas que acceden a Enid Service desde su área de cliente'");										
 			$table .="</tr>";	
 		$table .="</table>";
 		$nuevos_usuarios = get_td($table);
@@ -176,8 +184,32 @@
 
 		}
 		/**/
-		$contacto .= get_td($row["contacto"]);
-		$labores_resueltas .=  get_td($row["labores_resueltas"]);
+		$contacto .= get_td($row["contacto"]);		
+		/**/
+		$table ="<table width='100%' border=1  style='text-align: center;'>";
+				$table .="<tr>";	
+					$table .=get_td("Labores");						
+					$table .=get_td("Prospección email");											
+				$table .="</tr>";	
+				$table .="<tr>";	
+					$table .=get_td("<a href='../desarrollo/' 
+										target='_blank' 
+										class='strong'
+										style='color:blue !important;'>
+										".$row["labores_resueltas"]."
+									</a>");						
+
+					
+					if(count($row["correos"][0]["correos_enviados"])>0){
+						$table .=get_td($row["correos"][0]["correos_enviados"]);			
+					}else{
+						$table .=get_td(0);				
+					}
+
+					
+				$table .="</tr>";	
+			$table .="</table>";
+		$labores_resueltas .=  get_td($table);
 
 
 		if(count($row["valoraciones"]) > 0){
@@ -187,7 +219,7 @@
 			$si_recomendarian  = $valoraciones["si_recomendarian"];
 			$no_recomendarian  = $valoraciones["no_recomendarian"];
 
-			$extra_total =" title ='Personas que han valorado ' ";			
+				
 			$extra_si_recomendaria =" title ='Personas que SI recomendarían la compra 
 										$si_recomendarian ' ";
 			$extra_no_recomendaria =  " title ='Personas que NO recondarían la compra 
@@ -202,7 +234,7 @@
 					$table .=get_td("NO recomendarían");	
 				$table .="</tr>";	
 				$table .="<tr>";	
-					$table .=get_td($total_val , $extra_total);						
+					$table .=get_td($total_val , $extra_td_total);						
 					$table .=get_td($porcentaje_si."%" , $extra_si_recomendaria);			
 					$table .=get_td($porcentaje_no."%"  , $extra_no_recomendaria);	
 				$table .="</tr>";	

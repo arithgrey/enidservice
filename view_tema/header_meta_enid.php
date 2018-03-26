@@ -3,7 +3,6 @@
     header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
     $enlace_actual = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 ?>    
-
     <title>
         <?=$titulo?> 
         Compra y vende tus productos aquí!
@@ -60,9 +59,7 @@
     <meta name="twitter:creator" content="@enidservice">
     <meta name="twitter:image" content="<?=$url_img_post?>">
     <meta name="twitter:image:src" content="<?=$url_img_post?>">
-
         
-    
     <meta itemprop="name" content="Enid Service">
     <meta itemprop="description" content="<?=$desc_web;?>">
     <meta itemprop="image logo" content="<?=$url_img_post?>">

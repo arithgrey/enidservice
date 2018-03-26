@@ -15,3 +15,9 @@ Banamex estarbucks
 Pantalon  - eliza 
 
 UPDATE servicio set nombre_servicio =  UPPER(nombre_servicio);
+delete from llamada;
+delete from propuesta;
+drop table  propuesta;
+delete from usuario_persona_correo;
+drop table  usuario_persona_correo;
+delete from persona;

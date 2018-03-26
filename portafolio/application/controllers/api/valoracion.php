@@ -22,6 +22,18 @@ class Valoracion extends REST_Controller{
         $this->response($data_comentarios);        
     }
     /**/
+    function resumen_valoraciones_periodo_GET(){
+
+        $param =  $this->get();
+        $comentarios =  $this->valoracion_model->get_desglose_valoraciones_periodo($param);
+        $data_comentarios  =  crea_resumen_valoracion_comentarios($comentarios["data"] , "");
+        if(count($comentarios["data"])> 0 ){
+            
+            $data_comentarios = "<div class='col-lg-6 col-lg-offset-3'><hr><div class='text_resumen'> RESEÑAS HECHAS POR OTROS CLIENTES </div><hr>".$data_comentarios."</div>";          
+        }
+        $this->response($data_comentarios);        
+    }
+    /**/
     function usuario_GET(){
 
         $param =  $this->get();
@@ -56,16 +68,17 @@ class Valoracion extends REST_Controller{
         $valoraciones = $this->valoracion_model->get_valoraciones_articulo($param);    
         $data["servicio"] =$param["servicio"];
         
-
+        $usuario =  $this->get_usuario_por_servicio($data);
+        $id_usuario=  $usuario[0]["id_usuario"];
+        $data["id_usuario"] = $id_usuario;
         if($valoraciones[0]["num_valoraciones"] > 0){
             /*Cargamos los comentarios*/
             $data["comentarios"]=  $this->valoracion_model->get_valoraciones($param);    
             $data["numero_valoraciones"] = $valoraciones;
             $data["respuesta_valorada"]=  $param["respuesta_valorada"];
             
-            $usuario =  $this->get_usuario_por_servicio($data);
-            $id_usuario=  $usuario[0]["id_usuario"];
-            $data["id_usuario"] = $id_usuario;
+            
+            
             $this->load->view("valoraciones/articulo", $data);        
         }else{
             $this->load->view("valoraciones/se_el_primero", $data);        

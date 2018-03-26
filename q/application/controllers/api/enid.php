@@ -43,19 +43,18 @@ class Enid extends REST_Controller{
             $this->load->view("enid/uso_sistema" , $data );        
         }else{
             $this->response("Error");
-        }
-    
+        }    
     }        
     /**/
     function metricas_cotizaciones_GET(){        
 
-            $param = $this->get();        
-            $inicio =  $this->microtime_float();         
-            $data =  $this->actividad_web_model->crea_reporte_enid_service($param);
-            $fin  =  $this->microtime_float();         
-            $db_response["envio_usuario"] = $param;
-            $db_response["tiempo_empleado"] =($inicio - $fin); 
-            $db_response["actividad_enid_service"] =$data["resumen"];        
+        $param = $this->get();        
+        $inicio =  $this->microtime_float();         
+        $data =  $this->actividad_web_model->crea_reporte_enid_service($param);
+        $fin  =  $this->microtime_float();         
+        $db_response["envio_usuario"] = $param;
+        $db_response["tiempo_empleado"] =($inicio - $fin); 
+        $db_response["actividad_enid_service"] =$data["resumen"];        
 
             if ($param["vista"] == 1){
                 /*Reporte 1 */

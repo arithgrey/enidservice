@@ -11,7 +11,7 @@
       $result =  $this->db->query($query_get);
       return $result->result_array()[0]["idusuario"];
     }
-    /**/
+    /*
     function update_persona_q($param){
 
       $id_persona = $param["id_persona"];
@@ -36,6 +36,7 @@
       }
       
     }
+    */
     /**/
     /*
     function registra_persona_tipo_negocio($id_persona , $id_tipo_negocio){

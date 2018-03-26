@@ -9,13 +9,11 @@
 
 <div id="flipkart-navbar">
     <div class="container">        
-                        <?php if($in_session ==  0){?>
-                                <?=$this->load->view("../../../view_tema/menu_session")?>
-                            <?php } ?>
+                        
+                            <?=$this->load->view("../../../view_tema/menu_session")?>
                             <?=$this->load->view("../../../view_tema/tmp_menu")?>
 
                             <div class="extra_menu_simple" style="display: none;">
-
                                 <a href="../">
                                     <img src="../img_tema/enid_service_logo.jpg" 
                                     style="width: 50px;">
@@ -23,15 +21,13 @@
                             </div>
                             <div class="menu_completo_enid_service">
                                     <div class="col-lg-3">
-                                       <?php if ($in_session === 0):?>             
-                                            <span class="smallnav menu white"
+                                        <span class="smallnav menu white"
                                                 style="font-size: 1.5em;font-weight: bold;" 
                                                 onclick="openNav()">☰ 
                                                 <a  class="white" style="color: white!important;">
                                                     Enid Service                                
                                                 </a>
-                                            </span>                                            
-                                        <?php endif; ?>                                        
+                                        </span>           
                                         <a  
                                             class="largenav">
                                             <img 
@@ -41,7 +37,9 @@
                                     </div>
                                     
                                     
-                                    <div class="col-lg-9 col-sm-12 contenedor_busqueda_global_enid_service">
+                                    <div 
+                                    class="col-lg-9 col-sm-12 
+                                    contenedor_busqueda_global_enid_service">
                                         <form action="../search">
                                             <div class="row">
                                                 
@@ -74,9 +72,8 @@
     </div>
 </div>
 
-    <?php if($in_session ==  0){?>
-    <?=$this->load->view("../../../view_tema/menu_session_movil")?>
-    <?php }?>  
+<?=$this->load->view("../../../view_tema/menu_session_movil")?>
+
        
 
 

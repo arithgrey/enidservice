@@ -5,8 +5,12 @@ $(document).ready(function(){
 	$(".mail_marketing").click(carga_metricas_mail_marketing);
 	$(".form_busqueda_mail_enid").submit(carga_metricas_mail_marketing);
 	$(".usabilidad_btn").click(carga_uso_sistema);
-	$(".cotizaciones").ready(carga_metricas_cotizaciones);
-	$(".cotizaciones").click(carga_metricas_cotizaciones);
+	
+	$("footer").ready(function(){
+		$(".form_busqueda_global_enid").submit();
+	});	
+
+	
 	$(".form_busqueda_global_enid").submit(carga_metricas_cotizaciones);
 	$('.datetimepicker4').datepicker();
 	$('.datetimepicker5').datepicker();	
@@ -27,16 +31,15 @@ $(document).ready(function(){
 	$(".form_busqueda_productos_solicitados").submit(carga_productos_mas_solicitados);
 
 });
-/**/
+/*
 function set_inicidencia(new_inicidencia){	
 	incidencia =  new_inicidencia;
 
 }
-/**/
 function get_inicidencia(){
 	return incidencia;
 }
-/**/
+*/
 function carga_uso_sistema(){
 
 	url =  "../q/index.php/api/enid/usabilidad_landing_pages/format/json/";
@@ -295,38 +298,30 @@ function carga_metricas_cotizaciones(e){
 		$(".usuarios").click(resumen_usuarios);		
 		$(".contactos").click(resumen_mensajes);	
 		$(".solicitudes").click(resumen_compras);	
+		$(".valoraciones").click(resumen_valoracion);
 
 
 
-
-
+		/*
 		$(".proyectos_registrados").click(carga_info_proyectos);		
 		$(".cotizaciones_registradas").click(carga_info_cotizaciones);	
-
-		/**/		
-			
 
 			$(".clientes_info").click(cargar_info_clientes);
 			$(".posibles_clientes_contacto").click(cargar_info_clientes_prospecto);
 			$(".num_prospectos_sistema").click(cargar_info_sistema);
-
-			/***/
-			$(".num_afiliados").click(cargar_info_afiliados);
-			/**/
+			$(".num_afiliados").click(cargar_info_afiliados);		
 			$(".num_contactos_promociones").click(cargar_contactos_promociones);
 			
-
 		$(".base_registrada").click(carga_info_registros);
 		$(".base_enviados").click(carga_info_enviados);
-		$(".blogs_creados").click(carga_info_blogs);
-		/**/
 		$('th').click(ordena_table_general);
+		*/
 		
 	}).fail(function(){
-		show_error_enid(".place_usabilidad", "Error al actualizar incidencia");
-	});	
+		
+	});		
 	e.preventDefault();
-	
+
 }
 /*Data proyectos*/
 function carga_info_proyectos(e){
@@ -990,8 +985,7 @@ function carga_solicitudes_cliente(e){
 	e.preventDefault();
 } 
 /**/
-function carga_repo_afiliacion(e){
-	
+function carga_repo_afiliacion(e){	
 	url =  "../q/index.php/api/afiliacion/metricas/format/json/";	
 	data_send =  $(".form_busqueda_afiliacion").serialize();
 
@@ -1004,10 +998,7 @@ function carga_repo_afiliacion(e){
 		}
 	}).done(function(data){			
 		/**/
-		llenaelementoHTML(".place_repo_afiliacion" , data);
-		
-
-
+		llenaelementoHTML(".place_repo_afiliacion" , data);	
 	}).fail(function(){
 		show_error_enid(".place_repo_afiliacion" , "Error al cargar ..."); 
 	});	
@@ -1142,3 +1133,27 @@ function resumen_compras(){
 			show_error_enid(".place_reporte", "Error al actualizar incidencia");
 	});			
 }
+/**/
+function resumen_valoracion(){
+	
+	fecha_inicio =  $(this).attr("fecha_inicio"); 
+	fecha_termino = $(this).attr("fecha_termino"); 	
+
+	data_send =  {"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino };
+	url =  "../portafolio/index.php/api/valoracion/resumen_valoraciones_periodo/format/json/";	
+
+	$.ajax({
+			url : url , 
+			type : "GET", 
+			data :  data_send , 
+			beforeSend: function(){
+				show_load_enid(".place_reporte" , "Cargando..." );
+			}  
+	}).done(function(data){			
+			llenaelementoHTML(".place_reporte", data ); 					
+	}).fail(function(){
+			show_error_enid(".place_reporte", "Error al actualizar incidencia");
+	});				
+
+}
+

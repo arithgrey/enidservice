@@ -381,55 +381,18 @@
     function get_adeudo_cliente($param){
 
         $id_usuario =  $param["id_usuario"];        
-        $saldo_pendiente =  $this->get_saldo_pendiente_por_persona($id_usuario);    
-        return $saldo_pendiente;
-        
-    }    
-    /**/
-    function get_saldo_pendiente_por_persona($id_usuario){
-
-            $query_get="SELECT                         
-                            ppf.monto_a_pagar,
-                            ppf.saldo_cubierto, 
-                            ppf.flag_envio_gratis 
-                                    
+         $query_get="SELECT                              
+                            SUM(ppf.monto_a_pagar + ppf.costo_envio_cliente) - 
+                            SUM(ppf.saldo_cubierto)saldo_pendiente
                         FROM  
-                            proyecto_persona_forma_pago ppf 
-                        INNER JOIN 
-                            proyecto_persona pp 
-                        ON 
-                            ppf.id_proyecto_persona =  pp.id_proyecto_persona   
+                        proyecto_persona_forma_pago ppf                         
                         WHERE 
-                        pp.id_usuario = $id_usuario";
+                        ppf.id_usuario = $id_usuario
+                        AND 
+                        ppf.monto_a_pagar > ppf.saldo_cubierto";
 
         $result =  $this->db->query($query_get);        
-        $saldo_pendiente =  $result->result_array();        
-        return $this->crea_saldo_pendiente($saldo_pendiente);
-    }   
-    /**/
-    function crea_saldo_pendiente($saldo_pendiente){
-        
-        $total =  0;
-        /**/
-        foreach($saldo_pendiente as $row){
-                
-                $monto_a_pagar =  $row["monto_a_pagar"];
-                $saldo_cubierto =  $row["saldo_cubierto"];
-                $flag_envio_gratis =  $row["flag_envio_gratis"];
-
-
-                if ($flag_envio_gratis ==  1) {
-                    $nuevo_saldo = $monto_a_pagar - $saldo_cubierto;    
-                    $total =  $total + $nuevo_saldo;
-                }else{
-                    $nuevo_saldo = $monto_a_pagar - $saldo_cubierto;    
-                    $total =  $total + $nuevo_saldo + 100;
-                }
-                
-                
-        }
-        return $total;
-    }
-
-    /**/
+        return  $result->result_array()[0]["saldo_pendiente"];         
+    }    
+    /**/   
 }

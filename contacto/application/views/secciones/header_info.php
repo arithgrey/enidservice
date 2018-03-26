@@ -54,11 +54,11 @@
                     </div>  
 
                     <div>
-                        <a target="_blank" href="tel:5583954993" 
+                        <a target="_blank" href="tel:5552967027" 
                             style='font-size:1em; color: white!important;'>
                             <i class="icon-mobile contact">
                             </i>
-                            (55)8395-4993
+                            (55)5296-7027
                         </a>                        
                     </div>  
                     <div>

@@ -93,32 +93,28 @@ class Emp extends REST_Controller{
         $param["info_correo"] =  $mensaje_bienvenida;
         $nombre = $param["nombre"];     
         $param["asunto"] =  "Notificación Enid Service, buen día ".$nombre;
-
-        /**/
         $email = trim($param["email"]);  
-        $this->mensajeria_lead->notificacion_email($param , $email );     
-        $this->mensajeria_lead->notificacion_email($param , "enidservice@gmail.com" );
-        $registro_usuario =  $this->registra_usuario_enid_service($param);        
-                             
-                                  
+        $this->mensajeria_lead->notificacion_email($param , $email );             
+        $registro_usuario =  $this->registra_usuario_enid_service($param);
         $this->response($mensaje_bienvenida);
         /**/
-    }  
+    }      
     /**/
-    function registra_usuario_enid_service($param){
+    private function registra_usuario_enid_service($param){
 
-        $api = new RestClient();                
-
+        /**/        
         $extra = array('email' =>  $param["email"] ,  'password'=> $param["password"] ,  'nombre' => 
             $param["nombre"] ,  'telefono'=> $param["telefono"] );
 
-        $url = "persona/index.php/api/";    
+        $url = "persona/index.php/api/";         
         $url_request=  $this->get_url_request($url);
-        $api->set_option('base_url', $url_request);
-        $api->set_option('format', "json");
-        $result = $api->post("equipo/prospecto_subscrito" , $extra);
-        $response =  $result->response;
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = 
+        $this->restclient->post("equipo/prospecto_subscrito/format/json/" , $extra);
+        $response =  $result->response;        
         return $response;
+        
     }    
     /**/
     function carga_mensaje_bienvenida($param){
@@ -129,16 +125,10 @@ class Emp extends REST_Controller{
         $url_request=  $this->get_url_request($url);
         $api->set_option('base_url', $url_request);
         $api->set_option('format', "json");
-        $result = $api->post("emp/bienvenida_enid_service_usuario_subscrito" , $extra);
+        $result = $api->post("presentacion/bienvenida_enid_service_usuario_subscrito" , $extra);
         $response =  $result->response;
         return $response;
-    }
-    /**/
-    function bienvenida_enid_service_usuario_subscrito_POST(){
-
-        $param["info"] =  $this->post();
-        $this->load->view("registro/subscrito" , $param);
-    } 
+    }    
     /**/
     function contacto_POST(){
         
@@ -189,7 +179,8 @@ class Emp extends REST_Controller{
         
         $nuevo_mensaje =
         "Hola soy 
-        <br>Nombre:".
+        <br>
+        Nombre:".
         $nombre ."<br> 
         Correo electrónico: ". 
         $email ."<br>  

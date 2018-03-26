@@ -161,7 +161,7 @@ if(!function_exists('invierte_date_time')){
 
                 $ventas_pendientes  = ($meta_ventas - $ventas_realizadas);            
                 $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-                $lista_pendientes .= "<a href='../ventas/' >
+                $lista_pendientes .= "<a href='../reporte_enid/' >
                                         <i class='fa fa-money ventas_pendientes' 
                                           id='".$ventas_pendientes."' >
                                         </i> ";
@@ -203,7 +203,7 @@ if(!function_exists('invierte_date_time')){
                 $llamadas_restantes = ($meta_llamadas - $llamadas_enid_service);
 
                 $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-                $lista_pendientes .= "<a href='../ventas/'>
+                $lista_pendientes .= "<a href='../reporte_enid/'>
                                       <i class='fa fa-mobile'></i> ";
                 $lista_pendientes .= "<span $style_pedientes>".$llamadas_restantes."</span>"; 
                 $lista_pendientes .= "Llamadas
@@ -227,7 +227,7 @@ if(!function_exists('invierte_date_time')){
                 $llamadas_restantes = ($meta_contactos_promociones - $contactos_promociones);
 
                 $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-                $lista_pendientes .= "<a href='../tareas/'>
+                $lista_pendientes .= "<a href='../tareas/?q=2'>
                                       <i class='fa fa-star-o'></i> ";
                 $lista_pendientes .= "<span $style_pedientes>".$llamadas_restantes."</span>"; 
                 $lista_pendientes .= "Afiliados
@@ -246,7 +246,7 @@ if(!function_exists('invierte_date_time')){
           if ($meta_email  > $email_enviados_enid_service){           
               $email_restantes = ($meta_email -  $email_enviados_enid_service);
                 $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-                $lista_pendientes .= "<a href='../tareas/'>
+                $lista_pendientes .= "<a href='../tareas/?q=2'>
                                       <i class='fa fa-envelope-o'></i> ";
                 $lista_pendientes .= "<span $style_pedientes>
                                       ".$email_restantes."
@@ -323,7 +323,7 @@ if(!function_exists('invierte_date_time')){
             $ventas_restantes = ($meta_ventas - $ventas_enid_service);
             
               $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-              $lista_pendientes .= "<a href='../ventas/'>
+              $lista_pendientes .= "<a href='../reporte_enid/'>
                                     <i class='fa fa-credit-card ventas_pendientes' 
                                       id='".$ventas_restantes."' ></i> ";
               $lista_pendientes .= "<span $style_pedientes>".$ventas_restantes."</span>"; 
@@ -346,7 +346,7 @@ if(!function_exists('invierte_date_time')){
             $envios_a_validar_restantes =($meta_envios_a_validar - $envios_a_validar);
 
               $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-              $lista_pendientes .= "<a href='../validacion/'>
+              $lista_pendientes .= "<a href='../reporte_enid/'>
                                     <i class='fa fa-paper-plane'></i> ";
               $lista_pendientes .= "<span $style_pedientes>".
                                       $envios_a_validar_restantes
@@ -369,7 +369,7 @@ if(!function_exists('invierte_date_time')){
         if ($meta_email  > $email_enviados_enid_service){           
             $email_restantes = ($meta_email -  $email_enviados_enid_service);
               $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-              $lista_pendientes .= "<a href='../tareas/'>
+              $lista_pendientes .= "<a href='../tareas/?q=2'>
                                     <i class='fa fa-envelope-o'></i> ";
               $lista_pendientes .= "<span $style_pedientes>
                                     ".$email_restantes."
@@ -386,9 +386,6 @@ if(!function_exists('invierte_date_time')){
       case "Accesos":
         $meta_accesos = $row["cantidad"];     
 
-
-
-
         if ($meta_accesos  > $accesos_enid_service){            
 
           $accesos_restantes  = ($meta_accesos - $accesos_enid_service);
@@ -396,7 +393,7 @@ if(!function_exists('invierte_date_time')){
 
 
               $lista_pendientes .= "<li class='black ' style='font-size:.8em;'> ";
-              $lista_pendientes .= "<a href='../tareas/'>
+              $lista_pendientes .= "<a href='../tareas/?q=1'>
                                     <i class='fa fa-globe'></i> ";
                $lista_pendientes .= "<span $style_pedientes>".$accesos_restantes.
                                     "</span>"; 

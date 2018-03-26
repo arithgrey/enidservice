@@ -397,7 +397,7 @@ class Portafolio extends REST_Controller{
         /**/
         $data_ventas_compras["id_usuario"] =  $id_usuario;
         $data_ventas_compras["modalidad"]  = $param["modalidad"];
-            
+        /**/    
         $ordenes =0;    
         $compras_anteriores =0;
         $data_ventas_compras["ordenes"] =$ordenes;

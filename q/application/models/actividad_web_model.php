@@ -215,6 +215,13 @@
                    '".$fecha_inicio."' AND  '".$fecha_termino."' ";
           break;
         
+        case 3:
+          /**/
+          return " (fecha_actualizacion)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+          break;
+
         default:
           
           break;
@@ -261,6 +268,24 @@
         return $query_get;
     }
     /**/
+    private function crea_correos_enviados($param){
+
+      $where =  $this->get_where_tiempo($param , 3);
+        $query_get ="SELECT 
+                      DATE(fecha_actualizacion) fecha ,
+                      COUNT(0)total 
+                      FROM 
+                      prospecto
+                      WHERE
+                       n_tocado = 1
+                       AND 
+                      ".$where."                      
+                      GROUP BY 
+                      DATE(fecha_actualizacion)";
+        return $query_get;
+    }
+
+    /**/
     function crea_registros_usuarios($param){
 
         $where =  $this->get_where_tiempo($param , 1);
@@ -283,9 +308,8 @@
     function crea_visitas_por_periodo($param){
 
         $where =  $this->get_where_tiempo($param , 1);
-        $query_get ="SELECT 
-                    /*DATE(fecha_registro)fecha, */
-                    COUNT(0)accesos, 
+        $query_get ="SELECT                   
+                    COUNT(0)accesos,                     
                     SUM(CASE WHEN tipo = 2892 THEN 1 ELSE 0 END )accesos_a_intento_compra,
                     SUM(CASE WHEN tipo = 43 THEN 1 ELSE 0 END )accesos_contacto,
                     SUM(CASE WHEN tipo = 48 THEN 1 ELSE 0 END )accesos_area_cliente
@@ -356,6 +380,7 @@
         $tabla_contacto = "contacto_$_num";
         $tb_tareas =  "tareas_resueltas_$_num";
         $tb_valoraciones  = "valoraciones_$_num";
+        $tb_correos = "correos_$_num";
         /*usuarios*/
 
 
@@ -376,6 +401,12 @@
                 /**/
                 $sql_valoraciones =  $this->crea_valoraciones($param);
                   $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 0);
+                  /**/
+
+                  
+                  $sql_correos_enviados =  $this->crea_correos_enviados($param);
+                    $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 0);
+            
 
                 $a = 0;
                 
@@ -404,9 +435,13 @@
                     $data_complete[$a]["valoraciones"] 
                     = $this->get_registros_valoraciones($fecha, $tb_valoraciones); 
 
+                    /**/
+                    $data_complete[$a]["correos"] 
+                    = $this->get_correos_enviados($tb_correos); 
+
                    $a ++;
                 }      
-
+                  $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 1);
                 $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 1);
               $this->crea_tabla_temploral($tb_tareas , $sql_tareas , 1);
             $this->crea_tabla_temploral($tabla_contacto , $sql_contacto , 1);
@@ -424,6 +459,14 @@
                     FROM $tabla";
       $result =  $this->db->query($query_get);      
       return $result->result_array(); 
+    }
+    /**/
+    function get_correos_enviados($tabla){
+      $query_get = "SELECT 
+                    SUM(total) correos_enviados
+                    FROM $tabla";
+      $result =  $this->db->query($query_get);      
+      return $result->result_array();  
     }
     /**/
     function get_registros_venta_fecha($fecha , $tabla){      

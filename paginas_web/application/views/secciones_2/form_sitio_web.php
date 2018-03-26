@@ -27,11 +27,7 @@
                                     </a>
                                   </li>
                                   
-                                  <li>
-                                    <a href="../precios_sitios_web">
-                                      Ver precios 
-                                    </a>
-                                </li>
+                                  
                               </ul>
                 </div>
 

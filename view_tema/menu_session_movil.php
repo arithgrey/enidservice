@@ -19,32 +19,40 @@
                 Buscar
             </button>
         </a>
-    </form>    
-    <a  class="links" 
-        href="../login/?action=nuevo"
-        style="font-size: .9em;color:black!important;margin-top: 20px;">
-        <i class="fa fa-shopping-cart">
-        </i>
-        Vender 
-    </a>
-    <a  class="links" 
-        href="../afiliados/"
-        style="font-size: .9em;color:black!important;">
-        <i class="fa fa-usd">
-        </i>
-        Afiliados
-    </a>
-    <a  class="links" 
-    	href="../contacto/#envio_msj"
-        style="font-size: .9em;color:black!important;">
-        <i class="fa fa-paper-plane">
-        </i>
-        Envía mensaje
-    </a>
-    <a  class="links white blue_enid_background2" 
-        href="../login"
-        style="font-size: .9em;color: white!important;">
-        Iniciar sesión
-        <i class="fa fa-user"></i>
-    </a>    
+    </form>   
+
+
+    <?php if ($in_session === 0):?>              
+        <a  class="links" 
+            href="../login/?action=nuevo"
+            style="font-size: .9em;color:black!important;margin-top: 20px;">
+            <i class="fa fa-shopping-cart">
+            </i>
+            Vender 
+        </a>
+
+        <a  class="links" 
+            href="../afiliados/"
+            style="font-size: .9em;color:black!important;">
+            <i class="fa fa-usd">
+            </i>
+            Afiliados
+        </a>
+        <a  class="links" 
+        	href="../contacto/#envio_msj"
+            style="font-size: .9em;color:black!important;">
+            <i class="fa fa-paper-plane">
+            </i>
+            Envía mensaje
+        </a>
+        <a  class="links white blue_enid_background2" 
+            href="../login"
+            style="font-size: .9em;color: white!important;">
+            Iniciar sesión
+            <i class="fa fa-user"></i>
+        </a> 
+    <?php else: ?>
+      
+    <?php endif; ?>                  
+
 </div>

@@ -4,7 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }
-    /**/
+    /*
     function envio_info_inicial_paginas_web($param){
 
 
@@ -25,7 +25,8 @@
 
         return  $this->db->query($query_update);
     }
-    /**/
+    */
+    /*
     function get_servicio_tipo_negocio_por_persona($id_persona){
 
       $query_get = "SELECT id_servicio FROM persona WHERE  
@@ -47,7 +48,8 @@
       return $data_complete;
 
     }
-    /**/
+    */
+    /*
     function create_tmp_proyecto($param){
 
       $dominio_deseado = $param["dominio_deseado"];      
@@ -76,9 +78,10 @@
                             )";
       return $this->db->query($query_insert);      
     }
-    /**/
+    */
+    /*
     function create_tmp_personas_q($_num , $flag  ,$param){
-      /**/
+      
       $query_drop ="DROP TABLE IF EXISTS tmp_personas_$_num";
       $status =  $this->db->query($query_drop);      
       $tipo = $param["tipo"];
@@ -116,7 +119,8 @@
       }
       return $status;
     }
-    /**/
+    */
+    /*
     function get_clientesq($param){
         
         $_num =  get_random();        
@@ -146,6 +150,7 @@
           $this->create_tmp_personas_q($_num , 1  ,$param);        
         return $data;
     }
+    */
     /**/
     function crea_orden_de_compra($param){
       

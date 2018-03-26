@@ -1,86 +1,24 @@
 <main>    
-<style type="text/css">
-th {
-    cursor: pointer;
-}
-</style>
 <br>
 <div class='row'>    
     <div class='col-lg-2' >        
         <?=$this->load->view("secciones_2/menu");?>        
     </div>    
-    <div class='col-lg-6' style="background: #0024bf; padding: 10px;">    
+    <div class='col-lg-6 ' style="background: #0024bf; padding: 10px;">    
         <div class="tab-content">
             <input type='hidden' class='id_usuario' value='<?=$id_usuario;?>'>        
-            <div class='tab-pane active' id='tab_redes_sociales'>            
+            <div class='tab-pane <?=valida_seccion_activa(1 , $activa )?>' id='tab_redes_sociales'>
                 <?=$this->load->view("secciones_2/principal_redes");?>
             </div>
-            <div class='tab-pane ' id='tab_en_correo_electronico'>
+            <div class='tab-pane  <?=valida_seccion_activa(2 , $activa )?>' id='tab_en_correo_electronico'>
                 <?=$this->load->view("secciones_2/principal_correo_electronico");?>
-            </div>
-            <div class="tab-pane " id="tab_productividad_en_social">
-                <?=$this->load->view("secciones_2/principal_productividad");?>          
-            </div>  
+            </div>            
             <div class="tab-pane " id="tab_registro_msj">
                 <?=$this->load->view("secciones_2/tab_registrar_mensaje");?>          
             </div>
             
         </div>
-    </div>
-    <div class="col-lg-4" >
-    
-        <div style="background: white; padding: 10px;">
-            <h3 class="blue_enid_background2 white" style="padding: 5px;">
-                Ranking/Semanal
-            </h3>
-            
-                
-                    <ul class="nav nav-tabs ">
-                        <li class="active" >
-                            <a  
-                                
-                                href="#tab_ranking_mensajes" 
-                                data-toggle="tab"
-                                style="font-size: .8em!important;">
-                                Ventas
-                            </a>
-                        </li>
-                        <!--
-                        <li class="tab_articulos">
-                            <a  
-                            href="#tab_default_2" data-toggle="tab" style="font-size: .8em!important;">
-                                Top blog
-                            </a>
-                        </li>
-                        <li class="tab_ranking_personal">
-                            <a href="#tab_ranking_propio" data-toggle="tab" style="font-size: .8em!important;">
-                                Mis publicaciones
-                            </a>
-                        </li>
-                            -->
-                       
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_ranking_mensajes">
-                            <div class="place_ranking_mensajes">                                
-                            </div>                            
-                        </div>
-                        <div class="tab-pane" id="tab_default_2">
-                            <div class="place_ranking_blog">                                
-                            </div>                            
-                        </div>                        
-                        <div class="tab-pane" id="tab_ranking_propio">
-                            <div class="place_ranking_personal">                                
-                            </div>                                                   
-                        </div>                        
-                    </div>
-                
-            
-
-        </div>
-    
-
-    </div>
+    </div>    
 </div>        
 <main>
 

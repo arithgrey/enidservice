@@ -219,6 +219,5 @@ function carga_categocias_extras(){
 			show_error_enid(".place_categorias_extras", "Error al registrar" ); 
 		});
 
-	e.preventDefault();
 }
 /**/

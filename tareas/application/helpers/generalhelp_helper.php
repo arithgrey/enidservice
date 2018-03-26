@@ -1,6 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+function valida_seccion_activa($seccion , $activa ){
 
+    if($seccion ==  $activa){
+        return " active ";
+    }
+}    
+/**/
+function valida_valor_variable($option , $key){
+    /**/
+    $valor ="";
+    if(isset($option[$key])) {
+      $valor =  $option[$key];  
+    }
+    return $valor;
+}  
 function get_dominio($url){
     $protocolos = array('http://', 'https://', 'ftp://', 'www.');
     $url = explode('/', str_replace($protocolos, '', $url));

@@ -1,3 +1,4 @@
+    <?php if ($in_session ==  0): ?>
       <div class="row ">
 
             <ul class="largenav pull-right">                                                    
@@ -26,7 +27,7 @@
                 </a>
             </li>
 
-            <?php if ($in_session ==  0): ?>
+        
                 <li class="upper-links">
                     <a   
                             class="links white" 
@@ -38,7 +39,7 @@
 
                     </a>
                 </li>            
-            <?php endif; ?>               
+        
             </ul>
         </div>
-        
+    <?php endif; ?>               

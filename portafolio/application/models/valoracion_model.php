@@ -14,6 +14,46 @@ class valoracion_model extends CI_Model{
         $offset = ($page - 1) * $per_page;    
         return " LIMIT $offset , $per_page ";
     }
+
+    /**/
+    private function get_where_valoracion($param , $tipo){
+
+      $query_get ="";
+      switch ($tipo) {
+        case 1:
+          $query_get =" AND DATE(fecha_registro) 
+                          BETWEEN  
+                          '".$param["fecha_inicio"]."' 
+                          AND  
+                          '".$param["fecha_termino"]."' 
+                          ";
+          break;
+        
+        default:
+          
+          break;
+      }
+      return $query_get;
+    }
+    /**/    
+    function get_desglose_valoraciones_periodo($param){
+           
+        $where  =  $this->get_where_valoracion($param , 1);
+        $query_get =  "SELECT 
+                          * 
+                        FROM                          
+                      valoracion 
+                      WHERE 1= 1
+                      ".$where."
+                      ORDER BY 
+                      valoracion 
+                      DESC";   
+        $result =  $this->db->query($query_get);
+        $data_complete["data"] =  $result->result_array();
+        $data_complete["sql"] =  $result->result_array();      
+      return $data_complete;
+        
+    }
     /**/
     function get_desglose_valoraciones_vendedor($param){
 

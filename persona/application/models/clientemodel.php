@@ -4,9 +4,9 @@
         parent::__construct();        
         $this->load->database();
     }    
-    /**/
+    /*
     function create_tmp_clientes($_num , $flag  ,$param){
-      /**/
+      
       $query_drop ="DROP TABLE IF EXISTS tmp_personas_$_num";
       $status =  $this->db->query($query_drop);  
       $nombre_persona  =  $param["nombre"];
@@ -44,6 +44,7 @@
       }
       return $status;
     }
+    */
     /**/
     function get_clientes_enid_service($param){
 
@@ -92,7 +93,7 @@
       $result =  $this->db->query($query_get);
       return $result->result_array();
     }
-    /**/
+    /*
     function convertir($param){
 
       $tipo =  $param["tipo"];
@@ -113,6 +114,7 @@
       return $this->db->query($query_update);
 
     }
+    */
     /**/
     function get_comentarios_persona($param){
 
@@ -131,7 +133,7 @@
       $result = $this->db->query($query_get);
       return $result->result_array();
     }
-    /**/
+    /*
     function get_info_persona($param){
 
       $id_persona = $param["id_persona"];
@@ -162,6 +164,7 @@
       $result=  $this->db->query($query_get); 
       return $result->result_array();
     }
+    */
     /**/
     function get_clientes($param){
         
@@ -201,9 +204,9 @@
       $result = $this->db->query($query_insert);
       return $result->result_array()[0]["idusuario"];
     } 
-    /**/    
+    /*
     function create_tmp_personas($_num , $flag  ,$param){
-      /**/
+      
       $query_drop ="DROP TABLE IF EXISTS tmp_personas_$_num";
       $status =  $this->db->query($query_drop);
       $id_usuario =  $param["id_usuario"];      
@@ -278,6 +281,7 @@
       }
       return $status;
     }
+    */    
     /**/
 
     /**********************************************************+*/
@@ -300,9 +304,9 @@
 
 
 
-
+    /*
     function create_tmp_personas_q($_num , $flag  ,$param){
-      /**/
+
       $query_drop ="DROP TABLE IF EXISTS tmp_personas_$_num";
       $status =  $this->db->query($query_drop);      
       $tipo = $param["tipo"];
@@ -337,9 +341,9 @@
       }
       return $status;
     }
-    /**/
+    */
 
-
+    /*
     function get_clientesq($param){
         
         $_num =  get_random();
@@ -373,7 +377,8 @@
         return $data;
 
     }
-    /**/
+    */
+    /*
     function get_clientes_por_tipificacion($param){
         
         $_num =  get_random();
@@ -400,13 +405,14 @@
         return $data;
 
     }
+    */
     /**/
 
-
+    /*
 
 
     function create_tmp_personas_por_tipificacion($_num , $flag  ,$param){
-      /**/
+      
       $query_drop ="DROP TABLE IF EXISTS tmp_personas_$_num";
       $status =  $this->db->query($query_drop);
       $id_usuario =  $param["id_usuario"];      
@@ -421,12 +427,7 @@
       $extra_tiempo =  "AND date(p.fecha_registro) = '".$param["fecha_registro"]."'";
       $sql_extra =" AND  
                     p.id_usuario = '".$id_usuario."' ";
-
-     
-    
-
-      
-
+  
       if ($flag == 0){
 
             $query_create ="CREATE TABLE tmp_personas_$_num 
@@ -457,10 +458,11 @@
       }
       return $status;
     }
+    */
     
 
 
-    /*USUARIO CAMPO*/
+    /*
     function get_clientes_usuario_campo($param){
         
         $_num =  get_random();        
@@ -489,9 +491,10 @@
         return $data;
 
     }
-    /**/
+    USUARIO CAMPO*/
+    /*
     function create_tmp_personas_clientes_clientes_campo($_num , $flag  ,$param){
-      /**/
+      
       $query_drop ="DROP TABLE IF EXISTS tmp_personas_$_num";
       $status =  $this->db->query($query_drop);
     
@@ -502,7 +505,7 @@
       $sql_extra_telefono = "";            
       $sql_extra =" AND  p.id_usuario = '".$id_usuario."' ";
       
-      /**/
+      
       if( strlen(trim($telefono)) > 0 ){
         $sql_extra_telefono = "AND p.tel like '%".$telefono."%' ";
       }
@@ -546,6 +549,7 @@
       }
       return $status;
     }
+    */
     
 
 
