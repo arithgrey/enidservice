@@ -11,8 +11,7 @@ class Home extends CI_Controller{
         $data = $this->val_session("");                
         $data["meta_keywords"] = "";    
         $data["desc_web"] = "";        
-        $data["url_img_post"] = "";
-        $this->principal->crea_historico(48);            
+        $data["url_img_post"] = "";        
         $data["servicios"] = $this->principal->get_servicios();         
         $data["action"] =valida_valor_variable($this->input->get() , "action");    
             

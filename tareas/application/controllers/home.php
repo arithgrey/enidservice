@@ -13,7 +13,7 @@ class Home extends CI_Controller{
         $data["meta_keywords"] = "";
         $data["desc_web"] = "";        
         $data["url_img_post"] = create_url_preview("4.png");
-        $this->principal->crea_historico(48);            
+    
         $data["estado"]= $this->principal->get_estados();
         $data["tipos_negocios"]= $this->principal->get_tipos_negocios();
         $data["tipos_negocios_enid"]= $this->principal->get_tipos_negocios_enid();        

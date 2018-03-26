@@ -16,8 +16,7 @@ class Recursocontroller extends CI_Controller {
         $data["usuario"] =  $this->principal->get_info_usuario($id_usuario);                   
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;        
-        $this->principal->show_data_page($data , 'home' );
-        $this->principal->crea_historico(3 , 0 , $id_usuario );
+        $this->principal->show_data_page($data , 'home' );        
 	}	
     /*Inicia perfil avanzado*/	
 	 function val_session($titulo_dinamico_page ){        

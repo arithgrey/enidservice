@@ -1,5 +1,6 @@
 <div>
     <div class="col-lg-7">        
+        
         <div class="direcciones">
         </div>
     </div>       

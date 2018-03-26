@@ -2,7 +2,7 @@
 	<div class="container blue_enid_background" style="padding-top: 10px;">
         <span class="sidenav-heading" style="font-size: .9em;">
         	<img src="../img_tema/enid_service_logo.jpg" style="width: 50px;padding: 1px;">
-        	<span style="font-size: 1.5em;"> 
+        	<span style="font-size:1.5em;"> 
                 Enid Service
             </span>
         </span>

@@ -28,7 +28,7 @@ class Inicio extends CI_Controller {
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
        
         $this->principal->show_data_page( $data , 'empresas_enid');			
-    	$this->principal->crea_historico(29 , 0 , $this->sessionclass->getidusuario());
+    	
                 	
     }    	
    /**/

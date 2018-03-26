@@ -11,8 +11,7 @@ class Home extends CI_Controller{
         $data = $this->val_session("");                
         $data["meta_keywords"] = "Personas que hacen paginas web ";    
         $data["desc_web"] = "Empieza hacer dinero a través Internet, llega a más personas, multiplica tu mensaje y aumenta tus ventas.";        
-        $data["url_img_post"] = create_url_preview("4.png");
-        $this->principal->crea_historico(48);            
+        $data["url_img_post"] = create_url_preview("4.png");        
         $data["estado"]= $this->principal->get_estados();
         $data["tipos_negocios"]= $this->principal->get_tipos_negocios();
         $data["servicios"] = $this->principal->get_servicios();

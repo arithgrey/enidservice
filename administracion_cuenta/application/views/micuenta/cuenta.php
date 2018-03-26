@@ -41,7 +41,7 @@
         </div>
         <?=n_row_12()?>
             <div style="margin-top: 20px;">
-                <a class="a_enid_black" href="#tab_direccion" data-toggle="tab" >
+                <a class="a_enid_black btn_direccion" href="#tab_direccion" data-toggle="tab" >
                     MI DIRECCIÓN 
                     <i class="fa  fa-fighter-jet"></i>
                 </a>

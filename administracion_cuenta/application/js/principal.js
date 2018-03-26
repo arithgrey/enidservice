@@ -1,18 +1,18 @@
 $(document).ready(function(){	
 	/**/
 	$(".btn_direccion").click(function(){
-		carga_direccion_usuario();
 		set_option("v",1);
-
+		carga_direccion_usuario();	
 	});
+	/**/
+	/**/
 	$("#form_update_password").submit(update_password);
 	/**/
 	$(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
-
 });
 /**/
 function carga_direccion_usuario(){
-	/**/
+	/**/	
 	url =  "../portafolio/index.php/api/portafolio/direccion_usuario/format/json/";		
 	data_send =  $(".form_notificacion").serialize()+"&"+$.param({"v":get_option("v")});
 

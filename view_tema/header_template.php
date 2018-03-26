@@ -28,7 +28,7 @@
                                                     Enid Service                                
                                                 </a>
                                         </span>           
-                                        <a  
+                                        <a  href="../"
                                             class="largenav">
                                             <img 
                                             src="../img_tema/enid_service_logo.jpg" 
@@ -37,9 +37,7 @@
                                     </div>
                                     
                                     
-                                    <div 
-                                    class="col-lg-9 col-sm-12 
-                                    contenedor_busqueda_global_enid_service">
+                                    <div class="col-lg-9 contenedor_busqueda_global_enid_service">
                                         <form action="../search">
                                             <div class="row">
                                                 

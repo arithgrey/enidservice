@@ -40,7 +40,8 @@ class Home extends CI_Controller{
         }else{
             $data["servicio"] =  [];            
         }        
-        $this->principal->crea_historico(9978 , $num_usuario , $num_servicio );         
+
+        //$this->principal->crea_historico(9978 , $num_usuario , $num_servicio );         
         $this->principal->show_data_page($data, 'home');                          
     }
     /**/

@@ -30,9 +30,7 @@ class Inicio extends CI_Controller {
             $activa = 1;
         }
         $data["activa"] = $activa;
-        $this->principal->show_data_page( $data , 'empresas_enid');         
-        $this->principal->crea_historico(29 , 0 , $this->sessionclass->getidusuario());
-        
+        $this->principal->show_data_page( $data , 'empresas_enid');                 
         
     }    	
    /**/

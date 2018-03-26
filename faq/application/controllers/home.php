@@ -91,10 +91,8 @@ class Home extends CI_Controller{
             $data["faqs_categoria"] =  $resumen_respuestas;        
                         
         }    
-         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
-        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-        
-        $this->principal->crea_historico("2201" , 0,0 );         
+        $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
+        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;            
         $this->principal->show_data_page($data, 'home');                          
     }    
 
