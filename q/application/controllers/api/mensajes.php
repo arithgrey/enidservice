@@ -47,5 +47,7 @@ class Mensajes extends REST_Controller{
         $this->load->view("servicio/principal" , $info_servicio);
     }
     /**/
+    
+    /**/
 
 }?>

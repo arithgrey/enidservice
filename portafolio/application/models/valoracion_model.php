@@ -178,6 +178,29 @@ class valoracion_model extends CI_Model{
       return  $data_complete;
       
     }
+    /**/
+    function get_preguntas_sin_leer_vendedor($param){
+      
+      $_num =  get_random();
+      $this->create_tmp_servicios_venta_usuario(0 , $_num , $param);      
+        /**/        
+          $query_get ="SELECT 
+                  COUNT(0)num
+                    FROM 
+                      tmp_servicio_usuario_$_num s 
+                      INNER JOIN pregunta_servicio ps 
+                      ON s.id_servicio = ps.id_servicio
+                      INNER JOIN pregunta p 
+                      ON 
+                      p.id_pregunta  = ps.id_pregunta
+                      WHERE p.leido_vendedor =0";
+          $result =  $this->db->query($query_get);          
+          $data_complete = $result->result_array();
+        
+      $this->create_tmp_servicios_venta_usuario(1 , $_num , $param);
+      return  $data_complete;
+      
+    }
   	/**/
   	function get_preguntas_realizadas($param){
   		  

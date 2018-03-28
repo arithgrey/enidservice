@@ -7,7 +7,7 @@ function carga_buzon(){
 			type: "GET",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_buzon" , "Cargando ... ", 1 );
+				//show_load_enid(".place_buzon" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){									
 		/**/

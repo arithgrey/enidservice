@@ -1,5 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+  
+  /**/  
+  function entrega_data_campo($param , $key , $label='' , $validador_numerico =0){
+    $value =$param[0][$key];
+    if($validador_numerico == 1){
+        if(strlen($value) <5){
+          $value ="AGREGA TU NÚMERO TELEFÓNICO";
+        }
+    }
+    return $value;
+  }
   /**/
   function get_costo_envio($param){
     /**/

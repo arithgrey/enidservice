@@ -65,7 +65,12 @@
             break;
 
             case 20:                                                
+
+                /**/
                 $data_complete["adeudos_cliente"] = $this->get_adeudo_cliente($param);
+                $data_complete["flag_direccion"] = 
+                $this->verifica_direccion_registrada_usuario($param);                
+                $data_complete["productos_anunciados"] = $this->valida_producto_anunciado($param);
 
             break;
 
@@ -79,7 +84,8 @@
     /**/
     function get_objetivos_perfil($param){
         
-        $query_get ="SELECT * FROM  objetivo WHERE id_perfil = '".$param["id_perfil"]."' ";
+        $query_get ="SELECT * FROM  objetivo 
+                    WHERE id_perfil = '".$param["id_perfil"]."' ";
         $result = $this->db->query($query_get);
         return $result->result_array();
     }
@@ -394,5 +400,36 @@
         $result =  $this->db->query($query_get);        
         return  $result->result_array()[0]["saldo_pendiente"];         
     }    
-    /**/   
+    /**/
+    private function verifica_direccion_registrada_usuario($param){
+
+        $id_usuario =  $param["id_usuario"];
+        $query_get =
+        "SELECT COUNT(0)num 
+        FROM 
+        usuario_direccion 
+        WHERE id_usuario =$id_usuario LIMIT 1";
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["num"];
+    }   
+    /**/
+    /**/
+    private function valida_producto_anunciado($param){
+
+        $id_usuario =  $param["id_usuario"];
+        $query_get ="SELECT COUNT(0)num 
+        FROM 
+        servicio 
+        WHERE 
+        id_usuario =$id_usuario 
+        AND 
+        status = 1
+        AND 
+        existencia >0
+        LIMIT 1";
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["num"];
+    }
+
+
 }

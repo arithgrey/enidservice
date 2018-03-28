@@ -4,6 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }
+    /**/
     function create_table_visitas_usuario( $_num , $param , $sql_tiempo){
 
         $id_usuario =  $param["id_usuario"];
@@ -16,8 +17,7 @@
                         pagina_web       
                         WHERE
                         id_usuario ='".$id_usuario."'
-                        AND 
-                        ".$sql_tiempo;
+                        AND ".$sql_tiempo;
 
         $this->db->query($query_create); 
 

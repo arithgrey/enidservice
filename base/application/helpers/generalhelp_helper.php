@@ -1,8 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-/**/
-function porcentaje($cantidad,$porciento,$decimales){
-    return number_format($cantidad*$porciento/100 ,$decimales);
+  
+function porcentaje($cantidad,$porciento){
+  //return number_format($cantidad*$porciento/100 ,$decimales);
+  return $cantidad*$porciento/100;
 }
 /**/
 function entrega_data_campo($param , $key , $label="", $add_label=0 ){        

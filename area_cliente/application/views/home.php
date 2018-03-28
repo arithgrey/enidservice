@@ -44,13 +44,15 @@
 									<td>
 										<a 	class="a_enid_blue preguntas btn_preguntas_compras" 
 											id='0' style="color: white!important">
-											HECHAS A VENDEDORES
+											HECHAS
 										</a>
 										<a 
 											class="a_enid_black preguntas btn_preguntas_ventas" 
 											id="1" 
 											style="color: white!important">
-											LO QUE CLIENTES TE PREGUNTAN
+											RECIBIDAS
+											<span class="notificacion_preguntas_sin_leer">
+											</span>
 										</a>
 									</td>
 								</tr>
@@ -94,3 +96,9 @@
 <link rel="stylesheet" type="text/css" href="../css_tema/template/css_tienda_cliente.css">
 <link rel="stylesheet" type="text/css" href="../css_tema/template/valoracion.css">
 <link rel="stylesheet" type="text/css" href="../css_tema/template/area_cliente.css">
+<style type="text/css">
+	.notificacion_preguntas_no_leida{
+		background: red;
+		padding: 5px;
+	}
+</style>

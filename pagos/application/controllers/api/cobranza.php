@@ -425,21 +425,48 @@ class Cobranza extends REST_Controller{
     /**/
     function resumen_desglose_pago_GET(){
 
-        $param =  $this->get();                                        
-                
+        $param =  $this->get();                                                
         $recibo =  $this->cobranzamodel->get_info_recibo_por_id($param);        
-        $id_usuario =  $recibo[0]["id_usuario"];
-        $id_servicio =  $recibo[0]["id_servicio"];
-        $usuario  =  $this->get_usuario($id_usuario);
 
-        $data_complete["recibo"] =$recibo; 
-        $data_complete["usuario"] =$usuario; 
-        $data_complete["url_request"] =  $this->get_url_request_service();                
-        $data_complete["servicio"] = $this->cobranzamodel->get_servicio($id_servicio);        
-        /*Validamos que el costo de envio siga siendo el mismo*/
+        if(count($recibo) >0 ){            
 
-        $data_complete["costo_envio_sistema"] =  $this->get_costo_envio($recibo[0]);        
-        $this->load->view("cobranza/resumen_no_aplica" , $data_complete);             
+            $monto_a_pagar =  $recibo[0]["monto_a_pagar"];
+            $saldo_cubierto = $recibo[0]["saldo_cubierto"];
+            /**/
+          
+            
+            $data_complete["url_request"] =  $this->get_url_request_service();                
+            $data_complete["recibo"] =$recibo;             
+            $id_servicio =  $recibo[0]["id_servicio"];  
+            /*Validamos que exista un monto por pagar*/
+            if($monto_a_pagar > $saldo_cubierto ){                        
+                /**/
+                $id_usuario =  $recibo[0]["id_usuario"];
+                $usuario  =  $this->get_usuario($id_usuario);
+                $data_complete["usuario"] =$usuario; 
+                    
+                $data_complete["servicio"] = $this->cobranzamodel->get_servicio($id_servicio);        
+                $data_complete["costo_envio_sistema"] =  $this->get_costo_envio($recibo[0]);        
+                $this->load->view("cobranza/resumen_no_aplica" , $data_complete);                 
+
+            }else{
+
+                /**/
+                $data_complete["recibo"] =$recibo;         
+                $data_complete["id_recibo"]=  $param["id_recibo"];
+                $data_complete["servicio"] = $this->cobranzamodel->get_servicio($id_servicio); 
+                $id_usuario_venta =  $recibo[0]["id_usuario_venta"];
+                $usuario  =  $this->get_usuario($id_usuario_venta);
+                $data_complete["usuario_venta"] =$usuario; 
+                
+                $this->load->view("cobranza/notificacion_pago_realizado" , $data_complete);  
+                
+
+            }
+            /**/
+        }
+
+
     }   
     /**/
     

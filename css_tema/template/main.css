@@ -2,10 +2,10 @@
                 cursor: pointer;
             }
             .notificacion_tareas_pendientes_enid_service{
-                background: #0a399b;
-                padding: 5px;
-                color: white;
-                font-size: .8em!important;
+                background: white;
+                padding: 5px;                
+                margin-right: 5px;                
+                height: 35px;
             }
             .alerta_notificacion_ok{
                 background: #0a399b;
@@ -234,4 +234,13 @@
 }
 .link_menu_footer{
     text-decoration: underline!important;
+}
+.contenedor_notificacion:hover{
+    cursor: pointer;
+    background: #f6f8fe;    
+}
+.menu_usuario li:hover {
+    cursor: pointer;
+    background: #0052E1!important;
+    color: white!important;
 }

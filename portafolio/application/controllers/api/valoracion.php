@@ -201,6 +201,18 @@ class Valoracion extends REST_Controller{
         $this->load->view("valoraciones/preguntas" ,  $data_complete);                 
     }
     /**/
+    function preguntas_sin_leer_GET(){        
+        $param =  $this->get();
+        if ($param["modalidad"] ==  1) {          
+            /**/
+            if(!isset($param["id_usuario"])){
+                $param["id_usuario"] = $this->sessionclass->getidusuario();
+            }  
+            $num =  $this->valoracion_model->get_preguntas_sin_leer_vendedor($param);            
+            $this->response($num[0]["num"]);          
+        }
+    }
+    /**/
     function respuesta_pregunta_GET(){
         
         $param =  $this->get();

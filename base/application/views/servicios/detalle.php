@@ -55,14 +55,13 @@
     }
 
     $precio_venta =  $precio_publico["precio"];            
-    $costo_envio_vendedor =  ($flag_servicio == 0 )?floatval($costo_envio["costo_envio_vendedor"]):0;
-    //$comision =  
-    $comision = porcentaje(floatval($precio_venta),9,2);
+    $costo_envio_vendedor =  ($flag_servicio == 0 )?floatval($costo_envio["costo_envio_vendedor"]):0;    
+    $comision = porcentaje(floatval($precio_venta),9);
 
     $utilidad =  floatval($precio_venta) - $costo_envio_vendedor;
     $utilidad =  $utilidad - $comision;
+    
     $param["precio"] =  $precio_venta;
-
     $ganancias_afiliados =  0; 
     $ganancias_vendedores = 0; 
 

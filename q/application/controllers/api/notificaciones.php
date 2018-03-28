@@ -62,6 +62,11 @@ class Notificaciones extends REST_Controller{
         $data["meta_cubierta"] =  $num_correos_resta_text;
         
         $this->response($data);
-    }    
+    }
+    /**/    
+    function preguntas_recibidas_GET(){
+        
+        $this->response("ok");
+    }
     /**/
 }?>

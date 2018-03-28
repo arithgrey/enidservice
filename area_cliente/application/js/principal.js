@@ -51,7 +51,11 @@ $(document).ready(function(){
 		set_option("modalidad_ventas" , 0);
 		carga_compras_usuario();		
 	});
-	$(".btn_buzon").click(carga_buzon);
+	$(".btn_buzon").click(function(){
+		/**/
+		carga_num_preguntas();
+		carga_buzon();	
+	});
 	$(".preguntas").click(function(e){
 
 		if(e.target.id ==  0){
@@ -74,3 +78,27 @@ $(document).ready(function(){
 	/**/
 
 });
+/**/
+function carga_num_preguntas(){
+	
+	set_option("modalidad_ventas" , 1);	
+	url =  "../portafolio/index.php/api/valoracion/preguntas_sin_leer/format/json/";		
+	data_send =  {"modalidad" : get_option("modalidad_ventas")};				
+	$.ajax({
+			url : url , 
+			type: "GET",
+			data: data_send, 
+			beforeSend: function(){
+				//show_load_enid(".place_buzon" , "Cargando ... ", 1 );
+			}
+	}).done(function(data){									
+		/**/
+		$(".notificacion_preguntas_sin_leer").empty();
+		if (data>0){
+			llenaelementoHTML(".notificacion_preguntas_sin_leer"  , "<span class='notificacion_preguntas_no_leida'>"+data+"</span>");											
+		}
+		
+	}).fail(function(){			
+		show_error_enid(".place_buzon"  , "Error ... ");
+	});	
+}
