@@ -26,8 +26,8 @@ class Home extends CI_Controller{
         $num_servicio = get_info_usuario( $this->input->get("q3"));        
 
         $this->principal->crea_historico(5669877 , $num_usuario , $num_servicio );         
-        $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
-        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
+        
+        $data["clasificaciones_departamentos"] = "";
         
         $this->principal->show_data_page($data, 'home');                          
         
@@ -42,8 +42,7 @@ class Home extends CI_Controller{
         $this->restclient->set_option('base_url', $url_request);
         $this->restclient->set_option('format', "html");
         $result = $this->restclient->get("cobranza/resumen_desglose_pago" , $extra);
-        $response =  $result->response;
-        
+        $response =  $result->response;        
         return $response;
         
 

@@ -25,7 +25,19 @@ class Home extends CI_Controller{
             $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
             $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;    
             
-            $data["formulario_valoracion"]=  $this->carga_formulario_valoracion($servicio);
+
+
+            $prm["in_session"] = 0;    
+            if($data["in_session"] ==  1){
+                
+                $prm["in_session"] = 1;                
+                $prm["email"]=$this->sessionclass->getemailuser();
+                $prm["nombre"]=  $this->sessionclass->getnombre();
+                
+            }
+
+            $prm["id_servicio"] =  $servicio;
+            $data["formulario_valoracion"]=$this->carga_formulario_valoracion($prm);
             
             /*Cargamos reseñas de otros días*/    
             $this->principal->show_data_page($data, 'home');                              
@@ -37,9 +49,8 @@ class Home extends CI_Controller{
         
         
     }
-    function carga_formulario_valoracion($id_servicio){
-
-        $q["id_servicio"] =  $id_servicio;
+    function carga_formulario_valoracion($q){
+        
         $url = "portafolio/index.php/api/";         
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);

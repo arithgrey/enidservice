@@ -32,8 +32,20 @@ class Home extends CI_Controller{
             $data_recomendacion =  $this->busqueda_recomendacion($prm);
             $data["usuario"] =  $this->busqueda_datos_basicos_vendedor($prm);            
             
-            if( count($data["usuario"]) > 0){
-                $data["resumen_recomendacion"] =  $data_recomendacion["info_valoraciones"];    
+            if(count($data["usuario"]) > 0){
+                /**/
+
+                if($data["in_session"] == 1 ){
+                    $id_usuario_actual =  $this->sessionclass->getidusuario();
+                    /**/
+                   
+                    $this->notifica_lectura($id_usuario , $id_usuario_actual);    
+                }
+                
+                /**/
+                $data["resumen_recomendacion"] =  
+                $data_recomendacion["info_valoraciones"];    
+
                 /*Se crea la data*/             
                 $prm["page"] = get_info_valor_variable($this->input->get() , "page");
                 $prm["resultados_por_pagina"] =  5;
@@ -168,5 +180,17 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return json_decode($response , true);        
     }
+    /**/
+    private function notifica_lectura($id_usuario , $id_usuario_valoracion){
+            
+
+        if($id_usuario ==  $id_usuario_valoracion) {
+            $this->principal->actualiza_lectura_valoracion($id_usuario);    
+        }
+        
+
+        /**/
+    }
+
     /***/
 }

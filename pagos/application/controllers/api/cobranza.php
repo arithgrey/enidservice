@@ -36,20 +36,7 @@ class Cobranza extends REST_Controller{
      
         $costo = get_costo_envio($param);
         return $costo;
-    }
-    /**/
-    function calcula_precio_producto_GET(){
-        $param =  $this->get();
-        $nuevo_precio =  porcentajes_ventas($param["costo"]);
-        $this->response($nuevo_precio);
-    }
-    /**/
-    function calcula_precio_producto_mayoreo_GET(){
-
-        $param =  $this->get();
-        $nuevo_precio =  porcentajes_ventas_mayoreo($param["costo"]);
-        $this->response($nuevo_precio );
-    }
+    }        
     /**/
     function notifica_recordatorio_cobranza_PUT(){
 
@@ -226,17 +213,20 @@ class Cobranza extends REST_Controller{
     function solicitud_proceso_pago_POST(){
 
         $param =  $this->post();                
-        $precio =   $this->cobranzamodel->get_precio_id_servicio($param["plan"]);
+
+        $id_servicio=  $param["plan"]; 
+        $precio =   $this->cobranzamodel->get_precio_id_servicio($id_servicio);
+
         $data_complete = [];
         $data_orden = [];
         $data_reporte_compra = [];
         $data_reporte_compra["articulo_valido"] = 0;
         /*Si el plan existe y es disponible continuamos*/
-        if( count($precio) > 0){  
+        if(count($precio) > 0){  
 
             $data_reporte_compra["articulo_valido"] = 1;      
             /*ahora consultamos que el servicio se encuentre disponible para compra*/
-            $prm["id_servicio"] =  $param["plan"];      
+            $prm["id_servicio"] =  $id_servicio;      
             $prm["articulos_solicitados"] =  $param["num_ciclos"];
             $info_existencia =  $this->consulta_disponibilidad_servicio($prm);
             $data_orden["existencia"] =  $info_existencia;
@@ -246,23 +236,24 @@ class Cobranza extends REST_Controller{
             $data_reporte_compra["existencia"] = $info_existencia;
             /*Si se encuentra en existencia, continuamos*/                
             if($info_existencia["en_existencia"] == 1){     
-                $data_reporte_compra["articulo_disponible"] = 1;           
-                /**/
-
-                $precio_publico =  $precio[0]["precio"];
+                
+                $data_reporte_compra["articulo_disponible"] = 1;
                 $data_orden["id_ciclo_facturacion"] =  $precio[0]["id_ciclo_facturacion"];
-                $precio_venta =  $this->get_precio_venta($precio_publico);  
-                $data_orden["precio"] = $precio_venta["precio"];                 
-                $data_orden["comision_venta"] = $precio_venta["comision_venta"];                
+                
+                $data_orden["precio"] = $precio[0]["precio"];                                 
                 $data_orden["existencia"] = $info_existencia;
                 /**/
-                $servicio =  $info_existencia["info_servicio"][0];  
-                $data_orden["servicio"] = $servicio;
+                
+                $data_orden["servicio"] = $info_existencia["info_servicio"][0];
                 
                     
-                /*Consultamos el precio de envio del producto*/            
-                $prm_envio["flag_envio_gratis"] =  $servicio["flag_envio_gratis"]; 
-                $data_orden["costo_envio"] = $this->get_costo_envio($prm_envio);
+                /*Consultamos el precio de envio del producto*/                
+                
+                if($data_orden["servicio"]["flag_servicio"]== 0){
+                    /**/
+                    $prm_envio["flag_envio_gratis"] = $data_orden["servicio"]["flag_envio_gratis"];
+                    $data_orden["costo_envio"] = $this->get_costo_envio($prm_envio);        
+                }
                 
                 $data_orden["es_usuario_nuevo"] = 1;
                 $es_usuario_nuevo =  
@@ -273,34 +264,31 @@ class Cobranza extends REST_Controller{
                     $data_orden["es_usuario_nuevo"] =  0;
                 }
                 $data_orden["data_por_usuario"] =  $param;
-                /*Aquí creamos la orden de compra*/
+                
                 
                 
                 $data_acciones_posteriores["id_recibo"]
                 =  $this->genera_orden_compra($data_orden);    
                 
-
                 
 
-                $data_acciones_posteriores["id_usuario_venta"] = $servicio["id_usuario_venta"];
-
+                $data_acciones_posteriores["id_usuario_venta"] = $data_orden["servicio"]["id_usuario_venta"];
                 $data_acciones_posteriores["id_servicio"] = $param["plan"];
                 
-
-
-                  if($es_usuario_nuevo == 0){
+                if($es_usuario_nuevo == 0){
                       $data_acciones_posteriores["id_usuario"] = $data_orden["id_usuario"];
                   }else{
                       $data_acciones_posteriores["id_usuario"]=  $param["id_usuario"];  
                       $data_acciones_posteriores["telefono"]=  $param["telefono"];  
                       $data_acciones_posteriores["nombre"]=  $param["nombre"];  
                       $data_acciones_posteriores["email"] = $param["email"];
-                  }
+                }
                 $data_acciones_posteriores["es_usuario_nuevo"] =  $es_usuario_nuevo;
                 
                 $this->acciones_posterior_orden_pago($data_acciones_posteriores);
                 $data_orden["ficha"] = $this->carga_ficha_direccion_envio($data_acciones_posteriores);        
                 
+
                 
             }
 
@@ -432,9 +420,7 @@ class Cobranza extends REST_Controller{
 
             $monto_a_pagar =  $recibo[0]["monto_a_pagar"];
             $saldo_cubierto = $recibo[0]["saldo_cubierto"];
-            /**/
-          
-            
+            /**/          
             $data_complete["url_request"] =  $this->get_url_request_service();                
             $data_complete["recibo"] =$recibo;             
             $id_servicio =  $recibo[0]["id_servicio"];  
@@ -587,10 +573,10 @@ class Cobranza extends REST_Controller{
         $param["id_servicio"]=  $param["servicio"];        
         return  $param;
     }
-    /**/
+    /*
     function get_precio_venta($precio){
 
-        $q["costo"] =  $precio;
+        $q["precio"] =  $precio;
         $url = "pagos/index.php/api/";         
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
@@ -598,22 +584,27 @@ class Cobranza extends REST_Controller{
         $result = $this->restclient->get("cobranza/calcula_precio_producto/format/json/" , $q);        
         $response =  $result->response;        
         return json_decode($response , true );        
-    }   
+    } 
+    */  
     /**/
-    function get_url_request($extra){
+    private function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 
         return  $url_request;
     }
     /**/
-    function set_option($key, $value){
+    private function set_option($key, $value){
         $this->option[$key] = $value;
     }
     /**/
-    function get_option($key){
+    private function get_option($key){
         return $this->option[$key];
     }
-    
+    /**/
+    function comision_GET(){
+        $param =  $this->get();     
+        $this->response(7);
+    }
    
 }?>

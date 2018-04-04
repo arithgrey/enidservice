@@ -16,12 +16,18 @@
         
         $color =  isset($servicio["color"]) ? $servicio["color"] : "";
         $flag_servicio =  $servicio["flag_servicio"];
-        if ($flag_servicio == 0) {
-            $precio_publico =  $servicio["precio_publico"]["precio"];        
-            $precio =  $servicio["precio"];            
-            $costo_envio =  $servicio["costo_envio"]["text_envio"]["cliente_solo_text"];
-            
-        }
+        
+    
+        $precio =  $servicio["precio"];           
+        $costo_envio ="";
+        if($flag_servicio == 0){
+            $costo_envio =  $servicio["costo_envio"]["text_envio"]["cliente_solo_text"];                 
+        } 
+        
+        
+
+
+        $id_ciclo_facturacion =  $servicio["id_ciclo_facturacion"];
         
         $extra_url =  "";
         if($servicio["in_session"] == 1){
@@ -48,10 +54,13 @@
         $flag ++;
 
         $existencia =0;
+        $vista =0;
         $in_session =  $servicio["in_session"];
         if($in_session ==  1){
             $existencia =  $servicio["existencia"];     
+            $vista =  $servicio["vista"];
         }
+        
         
 ?>
 
@@ -72,17 +81,23 @@
                                 <div class="card-block">            
                                     <div class="row" style="position:relative;">         
                                         <?php if($in_session ==  1):?>
-                                            <?=valida_botton_editar_servicio($servicio , 
+                                            <?=valida_botton_editar_servicio(
+                                                $servicio , 
                                                 $id_usuario_registro_servicio);?>
                                         <?php endif; ?>                                    
                                         
                                         <table style="width: 100%;border-bottom: 1px dotted grey;font-size: .8em;height:20px;">
                                             <tr>
                                                 <td>
-                                                    <?=get_numero_colores($color,$flag_servicio,$url_info_producto)?>        
+                                                    <?=get_numero_colores($color,
+                                                        $flag_servicio,
+                                                        $url_info_producto)?>        
                                                 </td>
                                                 <td class="text-right">
-                                                    <?=get_en_existencia($existencia,$flag_servicio,$in_session)?>        
+                                                    <?=get_en_existencia(
+                                                        $existencia,
+                                                        $flag_servicio,
+                                                        $in_session)?>        
                                                 </td>
                                             
                                             </tr>
@@ -90,30 +105,28 @@
 
                                         <?=get_text_nombre_servicio($nombre_servicio)?>
 
-
-
-                                        <?php if($flag_servicio ==  0):?>
-                                            <div style="position:absolute;bottom:110px;">
-                                                <?=n_row_12()?>
-                                                    <div>
-                                                        <a  
-                                                            title="Precio del artículo, ver más detalles"
-                                                            href="<?=$url_info_producto?>" 
-                                                            style="background: #0027ff !important;
-                                                            color: white!important;
-                                                            font-size: .8em;
-                                                            padding: 3px;">
-                                                            <?=$precio_publico?>MXN    
-                                                        </a> 
-                                                    </div>                                       
-                                                <?=end_row()?>
-                                                <?=n_row_12()?>
-                                                    <div style="font-size: .8em;" class="strong">
-                                                        <?=$costo_envio?>
-                                                    </div>
-                                                <?=end_row()?>
+                                        <?=n_row_12()?>
+                                            <div style="position:absolute;bottom:120px;">
+                                                            <?=get_precio_producto(
+                                                            $url_info_producto ,  
+                                                            $precio,
+                                                            $costo_envio,
+                                                            $flag_servicio,
+                                                            $id_ciclo_facturacion)?>
+                                                                                                      
                                             </div>
-                                        <?php endif; ?>                                        
+                                        <?=end_row()?>
+                                        <?php if($flag_servicio ==  0):?>
+                                            <?=n_row_12()?>
+                                                <div style="font-size: .8em;" class="strong">
+                                                    <?=$costo_envio?>
+                                                </div>    
+                                            <?=end_row()?>
+                                        <?php endif; ?>                                    
+                                        <?=n_row_12()?>
+                                            
+                                            <?=muestra_vistas_servicio($in_session,$vista)?>
+                                        <?=end_row()?>
                                     </div>
                                 </div>
                             </div>

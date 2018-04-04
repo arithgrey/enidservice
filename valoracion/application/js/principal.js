@@ -71,7 +71,7 @@ function registra_valoracion(e){
 				console.log(data);
 				
 				url_producto = "../producto/?producto="+data.id_servicio+"&valoracion=1";
-				mira_tu_valoracion = "mira tu valoración <a class='blue_enid_background white'  href='"+url_producto+"' style='padding:5px;' > aquí </a>";
+				mira_tu_valoracion = "mira tu valoración <a class='blue_enid_background white'  href='"+url_producto+"' style='padding:5px;color:white!important;' > aquí </a>";
 				extra_invitacion_a_enid ="";
 				if (data.existencia_usuario == 0){ 
 
@@ -86,8 +86,9 @@ function registra_valoracion(e){
 					$(".registro_cuenta").css("color", "#0c4075");
 					$(".registro_cuenta").css("font-weight", "bold");
 					$(".registro_cuenta").css("text-decoration-line", "underline");
-					recorrepage(".place_registro_valoracion");
+					
 				}
+				recorrepage(".place_registro_valoracion");
 				/**/
 			}).fail(function(){							
 				show_error_enid(".place_registro_valoracion" , "Error al iniciar sessión");				

@@ -344,16 +344,16 @@
     function get_precio_id_servicio($id_servicio){
 
       $query_get = "SELECT  
-                    p.precio ,                     
-                    c.id_ciclo_facturacion ,                    
-                    c.ciclo
-                    FROM  
-                    precio p 
-                    INNER JOIN 
-                    ciclo_facturacion c 
-                    ON
-                    p.id_ciclo_facturacion =  c.id_ciclo_facturacion
-                    WHERE p.id_servicio =$id_servicio LIMIT 1";
+                      s.precio ,                     
+                      s.id_ciclo_facturacion ,                    
+                      c.ciclo
+                      FROM  
+                      servicio s
+                      INNER JOIN 
+                      ciclo_facturacion c 
+                      ON
+                      s.id_ciclo_facturacion =  c.id_ciclo_facturacion
+                      WHERE s.id_servicio =$id_servicio  LIMIT 1";
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }
@@ -385,9 +385,10 @@
       $id_forma_pago =  6;
       $saldo_cubierto = 0;
       $status = 6;/*En proceso de compra*/      
-      $fecha_vencimiento =" DATE_ADD(CURRENT_DATE(), INTERVAL 3 DAY) ";
-      $precio =  $param["precio"];
+      $fecha_vencimiento =" DATE_ADD(CURRENT_DATE(), INTERVAL 2 DAY) ";
       
+      
+
       $data_usuario =  $param["data_por_usuario"];      
       
       if($param["es_usuario_nuevo"] == 1){
@@ -408,17 +409,25 @@
 
       $flag_envio_gratis =  $servicio["flag_envio_gratis"];
       $id_usuario_venta =  $servicio["id_usuario_venta"];
+      $precio =  $servicio["precio"];
       /***/
+
       $resumen_compra =  
       $this->crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis);
-
-
-      $costo_envio  = $param["costo_envio"];
-
-      $costo_envio_cliente =   $costo_envio["costo_envio_cliente"];
+      
+      $costo_envio_cliente =0;
+      $costo_envio_vendedor =0;
+      $flag_servicio =  $servicio["flag_servicio"];
       $monto_a_pagar =  $precio; 
-      $costo_envio_vendedor =  $costo_envio["costo_envio_vendedor"];
 
+      if($flag_servicio ==  0){
+          
+        $costo_envio  = $param["costo_envio"];
+        $costo_envio_cliente =   $costo_envio["costo_envio_cliente"];        
+        $costo_envio_vendedor =  $costo_envio["costo_envio_vendedor"];
+  
+      }
+      
       $id_ciclo_facturacion =  $param["id_ciclo_facturacion"]; 
       
       /**/

@@ -25,9 +25,21 @@
 		        	$valor =  1;
 		        }
 		        return $valor;
-			}	
-			/**/
-			function crea_historico( $tipo , $id_evento = 0 , $id_usuario = 0  , $id_empresa = 0){
+		}	
+		/**/
+		function crea_historico_vista_servicio($id_servicio , $in_session){
+
+			if($in_session ==  0){
+				$query_update ="UPDATE servicio 
+							SET vista =  vista + 1 
+							WHERE 
+								id_servicio =  $id_servicio 
+							LIMIT 1";
+							$this->db->query($query_update);	
+			}
+		}
+		/**/
+		function crea_historico( $tipo , $id_evento = 0 , $id_usuario = 0  , $id_empresa = 0){
 
 			$pagina_url =  base_url(uri_string());         
 	        $ip = $this->input->ip_address();               

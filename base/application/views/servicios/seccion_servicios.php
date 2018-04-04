@@ -1,35 +1,30 @@
-<?php 
-    $ciclos_factura_servicio =  $ciclos_disponibles["ciclos_factura_servicio"];
-    $ciclos =  $ciclos_disponibles["disponibles"]; 
-    /**/
-    $nombre_ciclo =  $ciclos_disponibles["nombre_ciclo"]; 
-
-    
-?>
+<div class="well">
         <?=n_row_12()?>
              <div class="strong black row" style="font-size: 1em;">
                 <div class="col-md-3">                    
                     
                     <div> 
-                        <i class="fa fa-pencil text_ciclo_facturacion">                
-                        </i>                    
-                        Ciclo de facturación
+                        <i class="fa fa-pencil text_ciclo_facturacion ">                
+                        </i>                
+                        <span class="titulo_seccion_producto">
+                            Ciclo de facturación
+                        </span>    
                     </div>
-                    <div style="font-size: .8em;">
-                        <span>
-                            <?=$nombre_ciclo?>
-                        </span>
+                    <div>
+                        <?=get_nombre_ciclo_facturacion(
+                            $ciclos_disponibles,
+                            $id_ciclo_facturacion )?>
+                        
                     </div>
-                    
                 </div>
                 <div class="col-md-3 input_ciclo_facturacion" style="display: none;" >
                     <div>
                         <span style="font-size: .8em;">
                             <?=create_select_selected(
-                                $ciclos , 
+                                $ciclos_disponibles , 
                                 "id_ciclo_facturacion" , 
                                 "ciclo" , 
-                                $ciclos_factura_servicio , 
+                                $id_ciclo_facturacion , 
                                 "ciclo_facturacion" ,  
                                 "ciclo_facturacion"  
                             )?>                                                     
@@ -41,3 +36,4 @@
                 </div>
             </div>
         <?=end_row()?>
+</div>

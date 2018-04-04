@@ -12,15 +12,18 @@
                     <div class="text_costo">
                         <a style="color: white!important;font-size: 1.2em;">
                             <i  class="fa fa-pencil" style="margin-left: 10px;"></i>
-                            PRECIO:  $ <?=$costo;?> MXN
+                            <center>
+                                PRECIO POR UNIDAD:
+                                <br>  $ <?=$precio;?> MXN
+                            </center>
                         </a>
                         
                     </div>                   
                     <div style="display: none;" class="input_costo">
                         <form class="form_costo">
                             <div>
-                                <input type="number" name="costo" step="any" class="form-control input-sm"
-                                    value="<?=$costo;?>" />
+                                <input type="number" name="precio" step="any" class="form-control input-sm"
+                                    value="<?=$precio;?>" />
                                 <span class="strong">
                                     PRECIO
                                 </span>

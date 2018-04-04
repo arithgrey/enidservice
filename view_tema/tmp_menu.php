@@ -2,7 +2,7 @@
 
       
 
-
+        
         <li class="dropdown pull-right   " 
             style="padding:3px;z-index: 3000;background: white;margin-top: 2px;" >
                         <img 
@@ -20,7 +20,27 @@
                     </span>
                 </div>
                 <hr>
-                <?=$menu;?>                    
+                <?=$menu;?>        
+                <li>
+                    <a href="../recomendacion/?q=<?=$id_usuario?>">
+                        Mis reseñas y valoraciones
+                        <div class="contenedor_promedios"> 
+                            <label class="estrella" style="font-size: 1em;color: #0070dd;">★
+                            </label>
+                            <label class="estrella" style="font-size: 1em;color: #0070dd;">★
+                            </label>
+                            <label class="estrella" style="font-size: 1em;color: #0070dd;">★
+                            </label>
+                            <label class="estrella" style="font-size: 1em;color: #0070dd;">★
+                            </label>
+                            <label class="estrella" style="font-size: 1em;
+                            -webkit-text-fill-color: white;
+                            -webkit-text-stroke: 0.5px rgb(0, 74, 252);">★
+                            </label>
+                            
+                          </div>
+                    </a>
+                </li>            
                 <li>
                     <a href="../administracion_cuenta/">        
                         Configuración y privacidad
@@ -34,7 +54,7 @@
                 </li>        
             </ul>
         </li>  
-          <li class="dropdown  pull-right blue_enid_background menu_notificaciones_progreso_dia " 
+        <li class="dropdown  pull-right blue_enid_background menu_notificaciones_progreso_dia " 
             style="padding:3px;z-index: 3000;margin-top: 2px;height: 30px;margin-left:5px;" >            
             
                         <a class="blue_enid dropdown-toggle" 
@@ -49,5 +69,17 @@
                 </span>                            
             </ul>
         </li>
+
+
+        <li class="dropdown  pull-right blue_enid_background  boton_vender_global" 
+            style="padding:3px;z-index: 3000;margin-top: 2px;height: 30px;margin-left:5px;" >            
+            <a  class="white blue_enid" 
+                style="color: white!important"
+                href="../planes_servicios/?nuevo=1"> 
+                <i class="fa fa-cart-plus"></i>
+                VENDER
+            </a>
+        </li>
+  
   
 <?php endif; ?>

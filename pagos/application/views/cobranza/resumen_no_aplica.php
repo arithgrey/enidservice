@@ -1,10 +1,5 @@
-<link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
-<style type="text/css">
-	body{font-family: 'Muli', sans-serif;}
-</style>
 <?php 	
 	$costo_envio_cliente_sistema=  $costo_envio_sistema["costo_envio_cliente"];
-	$text_envio_cliente_sistema =  $costo_envio_sistema["text_envio"]["cliente"];
 
 
 	$recibo =  $recibo[0];  
@@ -47,40 +42,51 @@
 		$costo_envio_cliente =  $costo_envio_cliente_sistema;	
 	}
 	/*Data extra para oxxo*/
-	$saldo_pendiente =  $monto_a_pagar - $saldo_cubierto;
-	$saldo_pendiente =  $saldo_pendiente + $costo_envio_cliente;	
+	$saldo_pendiente =  ($monto_a_pagar * $num_ciclos_contratados )- $saldo_cubierto;	
+	
+
+	$servicio = $servicio[0];
+	$flag_servicio =  $servicio["flag_servicio"];
+	$text_envio_cliente_sistema = "";
+	if($flag_servicio == 0 ){
+		$saldo_pendiente =  $saldo_pendiente + $costo_envio_cliente;		
+		$text_envio_cliente_sistema =  $costo_envio_sistema["text_envio"]["cliente"];
+
+	}
+	
+
 	$url_pago_oxxo =$url_request ."orden_pago_oxxo/?q=".$saldo_pendiente."&q2=".$id_recibo;
 	$data_oxxo["url_pago_oxxo"] =  $url_pago_oxxo;
 	/*Data para notificar el pago*/
 	$data_notificacion["id_recibo"] =  $id_recibo;
 
-?>
-<?php			
+			
 
 	/**/
-	$servicio = $servicio[0];
+	
+	$flag_servicio =  $servicio["flag_servicio"];
 	$nombre_servicio =  $servicio["nombre_servicio"];	
 	/**/	
+
+
+
 	$proyecto =  $servicio;		
 	$detalles =  $resumen_pedido;	
 	/**/
 	$ciclo_de_facturacion =  $id_ciclo_facturacion;  
-	$num_ciclos_contratados =  $num_ciclos_contratados;  	
+		
 	/**/	
 	$saldo_cubierto =  $saldo_cubierto;
 	$monto_a_pagar =    $monto_a_pagar;
 
 	$primer_registro =  $fecha_registro;	
 
-	$saldo_pendiente =  $monto_a_pagar - $saldo_cubierto;
-	if ($saldo_pendiente < 0 ) {
-		$saldo_pendiente =0;
-	}
+
 	$estado_text ="";
 	if ($saldo_cubierto < $monto_a_pagar ){
+
 		$estado_text ="Pendiente";
 	}	
-	$saldo_pendiente = $costo_envio_cliente + $saldo_pendiente;
 	
 	$data["saldo_pendiente"] =  $saldo_pendiente;
 	$url_pago_paypal ="https://www.paypal.me/eniservice/".$saldo_pendiente;
@@ -91,33 +97,39 @@
 
 
 ?>
-	<div style="margin: 0 auto;width: 66%;">
+	<div style="margin: 0 auto;width: 76%;">
 		<?=$this->load->view("cobranza/saludo_inicial" , $data_extra)?>		
 		<center>
-			<div style="width: 230px;">
+			<div style="width: 200px;">
 				<img src="<?=$url_request?>img_tema/enid_service_logo.jpg" width="100%">
 			</div>
 		</center>
 		<h1>
 			<span style="color: black;font-weight: bold;"> 
-				#Recibo: 
+				#Recibo: <?=$id_recibo;?>
 			</span> 
-			<?=$id_recibo;?>
+			
 		</h1>
-		<div style="background: #f6fafc;padding: 5px;">
+		<div style="background: #fcfcfc;padding: 5px;">
 			<div>
-				<span style="font-size: 1.5em">
+				<span style="font-size: 1.5em;font-weight:bold;background: black;color: white;">
 					Concepto
 				</span>
 			</div>
 			<p>
 				<?=$resumen_pedido;?>
 			</p>
+
 			<p>
 				<strong>
-					# Piezas
-				</strong> <?=$num_ciclos_contratados?>
+					<?=valida_texto_periodos_contratados(
+						$num_ciclos_contratados, 
+						$flag_servicio , 
+						$id_ciclo_facturacion
+						)?>
+				</strong>
 			</p>
+
 			<p>
 				<strong>
 				Precio $
@@ -137,34 +149,45 @@
 		         <?=$fecha_vencimiento;?>
 		        </strong>
 		    </p>		                            
-			<p>
-				<h2>
-	          		Monto total pendiente <?=$saldo_pendiente?> Pesos Mexicanos	
-	          	</h2>
-	        </p>
+			<div style="border-style: solid;font-size: 1.5em;text-align: right;">
+				<strong>
+	          		Monto total pendiente 
+	          	</strong>
+	          	<span style="background: green; color:white;padding: 3px;">
+	          		<?=$saldo_pendiente?> Pesos Mexicanos	
+	          	</span>
+	        </div>
 		</div>	      
 		<hr>
 		<div style="margin-top: 10px; ">
-			<h2>				
-				Formas de pago Enid Service
-			</h2>
+			<h3>
+				<span style="color: black;font-weight: bold;"> 	
+					Formas de pago Enid Service
+				</span>
+			</h3>
 		</div>		
 		<hr>
-		<div>
+		<div style="background: black; color: white;padding: 5px;">
 			<strong>					
 				** NINGÚN CARGO A TARJETA ES AUTOMÁTICO. 
 				SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO **					
 			</strong>
 		</div>
+		
+		
+		
+		<div style="margin-top: 30px;">
+			<?=$this->load->view("cobranza/pago_oxxo" , $data_oxxo)?> 			
+		</div>
+		<hr>
 		<div style="margin-top: 20px;">
 			<?=$this->load->view("cobranza/pago-paypal" , $data)?> 	
 		</div>
-		<?=$this->load->view("cobranza/pago_oxxo" , $data_oxxo)?> 			
 
 		<div style="margin-top: 30px;">
 				<div style="background: #001a30!important;padding: 5px;">
 					<div style="background: white;padding: 10px;font-size: 2em;">
-						¿ya realizaste tu pago?
+						¿Ya realizaste tu pago?
 					</div>
 					<span style="color: white;padding: 4px;font-size: 1.2em;">
 						Notifica tu pago para que podamos procesarlo 

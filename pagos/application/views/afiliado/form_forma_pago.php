@@ -1,30 +1,11 @@
 <?php
-
-    $id_cuenta_pago =  "";
-    $numero_tarjeta = "";
-    $propietario_tarjeta = "";
-    $id_banco_registrado = 0;
-    $nombre = "";
-
-    foreach ($forma_pago as $row) {
-            
-        $id_cuenta_pago =  $row["id_cuenta_pago"];
-        $numero_tarjeta =  $row["numero_tarjeta"];
-        $propietario_tarjeta =  $row["propietario_tarjeta"];
-        $id_banco_registrado =  $row["id_banco"];
-        $nombre = $row["nombre"];
-    }    
-?>
-
-
-<?php
         
     $opcions = "";    
     foreach($bancos as $row){
             
         $id_banco = $row["id_banco"]; 
         $nombre = $row["nombre"];    
-        $imagen = $row["imagen"];
+        
 
         if ($flag_registro_previo == 1 ){        
 

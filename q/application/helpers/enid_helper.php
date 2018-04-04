@@ -1,16 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
-    function add_mensajes_sin_leer($num){
-      
+
+    function add_mensajes_sin_leer($num){      
       /**/
       $lista_pendientes ="";
       $flag_notificaciones = 0;           
       if($num > 0 ){         
           
           $lista_pendientes .= 
-          inicio_base_notificacion("../area_cliente/?action=preguntas" ,"fa fa-cart-plus");
-          $lista_pendientes .='Tienes '.$num.' mensajes sin leer';
+          inicio_base_notificacion("../area_cliente/?action=preguntas" ,"fa fa-cart-plus");          
+          $text ="Un posible cliente te ha enviado un mensaje mira lo que te ha enviado aquí!";
+          if($num>1){
+            $text = $num." personas te han hecho preguntas sobre tus productos, mira las preguntas aquí!";
+          }
+          $lista_pendientes .=$text;
           $lista_pendientes .= fin_base_notificacion();   
           $flag_notificaciones ++;                           
       }
@@ -19,6 +23,55 @@ if(!function_exists('invierte_date_time')){
       return $data_complete;
       
     }    
+    /**/
+    function add_mensajes_respuestas_vendedor($num){      
+      /**/
+      $lista_pendientes ="";
+      $flag_notificaciones = 0;           
+      if($num > 0 ){                   
+
+          $lista_pendientes .= 
+          inicio_base_notificacion("../area_cliente/?action=preguntas" ,"fa fa-comments");
+          $text ="El vendedor te ha contestado";
+          if($num>1){
+            $text =$num ." vendedores te han contestado, mira su respuesta aquí!";
+          }
+          $lista_pendientes .=$text;
+          $lista_pendientes .= fin_base_notificacion();   
+          $flag_notificaciones ++;                           
+      }
+      $data_complete["html"] =  $lista_pendientes;
+      $data_complete["flag"] =  $flag_notificaciones;
+      return $data_complete;
+      
+    }    
+    /**/
+    function add_valoraciones_sin_leer($num , $id_usuario){
+      $lista_pendientes ="";
+      $flag_notificaciones = 0;           
+      if($num > 0 ){                   
+
+          $lista_pendientes .= 
+          inicio_base_notificacion("../recomendacion/?q={$id_usuario}","fa fa-star");
+          
+          $text ="Una persona han agregado sus comentarios sobre uno de tus 
+                  artículos   en venta
+                  ".base_valoracion();
+          if($num>1){
+            $text =$num ." personas han agregado sus comentarios 
+                          sobre tus artículos
+                          ".base_valoracion();
+                          
+                        
+          }
+          $lista_pendientes .=$text;
+          $lista_pendientes .= fin_base_notificacion();   
+          $flag_notificaciones ++;                           
+      }
+      $data_complete["html"] =  $lista_pendientes;
+      $data_complete["flag"] =  $flag_notificaciones;
+      return $data_complete;
+    }
     /**/    
     function add_productos_publicados($num){
 
@@ -91,7 +144,7 @@ if(!function_exists('invierte_date_time')){
       $flag_notificaciones = 0;           
       if($meta  > $hecho){   
           $restantes = ($meta -  $hecho);                
-          $lista_pendientes .= inicio_base_notificacion("../reporte_enid/?q=2" , "fa fa-credit-card " );
+          $lista_pendientes .= inicio_base_notificacion("../desarrollo/?q=1" , "fa fa-credit-card " );
           $lista_pendientes .= "Hace falta por resolver ".$restantes." tareas!";
           $lista_pendientes .= fin_base_notificacion();                                          
           $flag_notificaciones ++;                           
@@ -176,7 +229,7 @@ if(!function_exists('invierte_date_time')){
       $flag_notificaciones = 0;           
       if($adeudos_cliente > 0 ){       
 
-          $lista_pendientes .= inicio_base_notificacion("../area_cliente/" , "fa fa-credit-card " );
+          $lista_pendientes .= inicio_base_notificacion("../area_cliente/?action=compras", "fa fa-credit-card " );
           $lista_pendientes .= 'Saldo pendiente 
                     <span 
                       style="padding:2px;"
@@ -214,8 +267,8 @@ if(!function_exists('invierte_date_time')){
 
       $new_flag_notificaciones = "";
       if ($flag_notificaciones > 0 ) {
-        $new_flag_notificaciones =  
-        "<span 
+
+        $new_flag_notificaciones = "<span 
           class='notificacion_tareas_pendientes_enid_service' 
           id='".$flag_notificaciones."'>
             ".$flag_notificaciones."
@@ -251,6 +304,11 @@ if(!function_exists('invierte_date_time')){
       $lista_pendientes .= $mensajes_sin_leer["html"];        
 
 
+      /**/
+      $mensajes_sin_leer = add_mensajes_respuestas_vendedor($info_notificaciones["respuestas"]);
+      $flag_notificaciones = $flag_notificaciones + $mensajes_sin_leer["flag"];
+      $lista_pendientes .= $mensajes_sin_leer["html"];        
+
 
       $data_complete["num_tareas_pendientes_text"] = $flag_notificaciones;  
       $data_complete["num_tareas_pendientes"] = crea_tareas_pendientes_info($flag_notificaciones);
@@ -262,56 +320,6 @@ if(!function_exists('invierte_date_time')){
     
     /*end*/
     }
-
-
-    /***/
-
-    function get_tareas_pendienetes_usuario_soporte($info){
-
-
-      $info_notificaciones = $info["info_notificaciones"];
-
-      $lista_pendientes ="";  
-      /*Metas u objetivos*/ 
-      $meta_email = 0;
-      $meta_email_registrados = 0; 
-     
-      //$correos_registrados_enid_service = $info_notificaciones["correos_registrados_enid_service"];  
-      
-
-      $style_pedientes ="style='padding:4px;background:red!important;color:white!important;'";
-      /*Sacamos valores del objetivo*/
-      $flag_notificaciones = 0; 
-
-    foreach ($info_notificaciones["objetivos_perfil"] as $row) {      
-      /*Meta ventas*/
-      switch ($row["nombre_objetivo"]) {
-          
-        default:
-          
-          break;
-      }
-
-    }
-
-
-    $new_flag_notificaciones = "";
-    if ($flag_notificaciones > 0 ) {
-      $new_flag_notificaciones =  "<span class='notificacion_tareas_pendientes_enid_service' 
-                                    id='".$flag_notificaciones."'>
-                                    ".$flag_notificaciones."
-                                    </span>"; 
-    }
-
-
-    
-    $data_complete["num_tareas_pendientes_text"] = $flag_notificaciones;  
-    $data_complete["num_tareas_pendientes"] = $new_flag_notificaciones;
-    $data_complete["lista_pendientes"] = $lista_pendientes;
-    return $data_complete;
-  
-  /*end*/
-  }
   /***/
   function get_tareas_pendientes_vendedor($info){
 
@@ -506,6 +514,29 @@ if(!function_exists('invierte_date_time')){
     $style_pedientes ="style='padding:4px;background:red!important;color:white!important;'";
     /*Sacamos valores del objetivo*/
     $flag_notificaciones = 0; 
+    $mensajes_sin_leer = add_mensajes_sin_leer($info_notificaciones["mensajes_sin_leer"]);
+    $flag_notificaciones = $flag_notificaciones + $mensajes_sin_leer["flag"];
+    $lista_pendientes .= $mensajes_sin_leer["html"];        
+
+
+    /**/
+    $mensajes_sin_leer = add_mensajes_respuestas_vendedor($info_notificaciones["respuestas"]);
+    $flag_notificaciones = $flag_notificaciones + $mensajes_sin_leer["flag"];
+    $lista_pendientes .= $mensajes_sin_leer["html"];        
+    /**/
+
+    $deuda = add_saldo_pendiente($info_notificaciones["adeudos_cliente"]);
+    $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
+    $lista_pendientes .= $deuda["html"]; 
+
+    /**/
+  
+    $deuda = add_valoraciones_sin_leer($info_notificaciones["valoraciones_sin_leer"], 
+      $info["id_usuario"]);
+    $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
+    $lista_pendientes .= $deuda["html"]; 
+  
+
 
   foreach ($info_notificaciones["objetivos_perfil"] as $row) {
     
@@ -560,6 +591,7 @@ if(!function_exists('invierte_date_time')){
     }
 
   }
+
 
 
   $new_flag_notificaciones = "";
@@ -971,6 +1003,26 @@ if(!function_exists('invierte_date_time')){
       $fechas .="</tr>";
       return $fechas;
       /**/
+  }
+  /**/
+  function base_valoracion(){
+    return "<div class='contenedor_promedios'> 
+                            <label class='estrella' style='font-size: 1em;color: #0070dd;'>★
+                            </label>
+                            <label class='estrella' style='font-size: 1em;color: #0070dd;'>★
+                            </label>
+                            <label class='estrella' style='font-size: 1em;color: #0070dd;'>★
+                            </label>
+                            <label class='estrella' style='font-size: 1em;color: #0070dd;'>★
+                            </label>
+                            <label class='estrella' style='font-size: 1em;
+                                  -webkit-text-fill-color: white;
+                                  -webkit-text-stroke: 0.5px rgb(0, 74, 252);'>★
+                            </label>
+          </div>
+          <span class='blue_enid_background white'>
+                            Mira los comentarios aquí!
+          </span>";
   }
 
 }/*Termina el helper*/

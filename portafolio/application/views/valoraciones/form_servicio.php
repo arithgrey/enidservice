@@ -1,4 +1,11 @@
 <?php 	
+	
+	$nombre ="";
+	$email ="";
+	if($extra["in_session"] ==  1) {
+		$nombre =  $extra["nombre"];
+		$email = $extra["email"];
+	}
 	$calificacion = array("","Insuficiente" , "Aceptable" , "Promedio" , "Bueno" , "Excelente");
 ?>
 <div class="col-lg-6 col-lg-offset-3">
@@ -133,6 +140,8 @@
 								type="text" 
 								name="nombre"
 								placeholder="Por ejemplo: Jonathan"
+								value="<?=$nombre?>" 
+								<?=valida_readonly($nombre)?>
 								required>
 								<input type="hidden" name="id_servicio" value="<?=$id_servicio?>">
 						</td>
@@ -150,8 +159,13 @@
 							</strong>
 						</td>
 						<td>
-							<input type="email" name="email"
-								placeholder="Por ejemplo: jmedrano@enidservice.com" required>
+							<input 
+							type="email" 
+							name="email"
+							placeholder="Por ejemplo: jmedrano@enidservice.com" 
+							required
+							<?=valida_readonly($email)?>
+							value="<?=$email?>">
 						</td>
 					</tr>	
 

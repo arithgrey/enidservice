@@ -9,7 +9,7 @@
                         >                        
                     </a>
                 </li> 
-                <li class="li_menu menu_vender">
+                <li class="li_menu menu_vender <?=valida_active_tab('ventas' , $action)?>">
                     <a href="../planes_servicios/?q=1"  class="white">
                         <i class="fa fa-cart-plus">                            
                         </i>
@@ -28,7 +28,7 @@
                         </span>
                     </a>
                 </li> 
-                <li  class='li_menu active'>
+                <li  class='li_menu <?=valida_active_tab('compras' , $action)?>'>
                     <a  
                         id="mis_compras"
                         href="#tab_mis_pagos" 
@@ -41,7 +41,7 @@
                         </span>
                     </a>
                 </li> 
-                <li class='li_menu'>
+                <li class='li_menu <?=valida_active_tab('preguntas' , $action)?>'>
                     <a  id="mi_buzon"
                         href="#tab_buzon" 
                         data-toggle="tab" 

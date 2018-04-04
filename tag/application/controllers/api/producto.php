@@ -43,8 +43,7 @@ class producto extends REST_Controller{
     function producto_por_clasificacion_GET(){
 
         $param =  $this->get();
-        $db_response =  $this->qmodel->get_producto_por_clasificacion($param);        
-        $servicios = $this->qmodel->add_precio($db_response);            
+        $db_response =  $this->qmodel->get_producto_por_clasificacion($param);                    
         $servicios =  $this->add_precio_publico($servicios);        
         $servicios =  $this->add_costo_envio($servicios);        
         $this->response($servicios);
@@ -84,48 +83,49 @@ class producto extends REST_Controller{
             $param["id_usuario"] =  $id_usuario;
             $this->registra_keyword($param);                                           
             /**/            
-            $info =  $this->qmodel->busqueda_producto($param);            
+            $servicios_complete =  $this->qmodel->busqueda_producto($param);            
             
-            if(count($info) > 0){
+            if( count($servicios_complete["servicio"])>0 ){
 
-                $this->set_option("servicios" , $info);  
-                $this->agrega_precio_publico();  
-                $this->agrega_costo_envio();         
+                $servicios =  $this->agrega_costo_envio($servicios_complete["servicio"]);         
+                $data["servicios"] = $servicios;            
 
-                $data["servicios"] = $this->get_option("servicios");            
                 $data["url_request"] =  $this->get_url_request(""); 
-                $data["num_servicios"] =  $info["num_servicios"];
-                
+                $data["num_servicios"] =  $servicios_complete["num_servicios"];                
                 if($param["agrega_clasificaciones"] == 1){
-                    $data["clasificaciones_niveles"] =  $info["clasificaciones_niveles"];    
+                    $data["clasificaciones_niveles"] =  
+                    $servicios_complete["clasificaciones_niveles"];    
                 }          
+                
                 $this->response($data);                         
-
+                
+                
             }else{
                 $data["num_servicios"] =0;
                 $this->response($data);         
             } 
             
+            
                         
     }
     /**/
-    function agrega_costo_envio(){
-               
-        $servicios =  $this->get_option("servicios");
+    function agrega_costo_envio($servicios){
+        
         $nueva_data =[];
         $a =0;
         foreach($servicios as $row){
             
             $nueva_data[$a] = $row;                        
             $flag_servicio =  $row["flag_servicio"];
+            
             if($flag_servicio == 0){
-                $param["flag_envio_gratis"] =  $row["flag_envio_gratis"];
-                $nueva_data[$a]["costo_envio"] = $this->calcula_costo_envio($param);    
-            }            
+                $prm["flag_envio_gratis"] =  $row["flag_envio_gratis"];
+                $nueva_data[$a]["costo_envio"] = $this->calcula_costo_envio($prm);    
+            } 
+            
             $a ++;
-        }
-        /**/
-        $this->set_option("servicios" , $nueva_data);    
+        }        
+        return $nueva_data;
     }
     /**/   
     function calcula_costo_envio($param){
@@ -163,7 +163,8 @@ class producto extends REST_Controller{
                         $config_paginacion["per_page"] = 12;
                         $config_paginacion["q"] = $param["q"];                                
                         $config_paginacion["q2"] = 0;   
-                        $config_paginacion["page"] = get_info_variable($this->input->get() , "page" );
+                        $config_paginacion["page"] = 
+                        get_info_variable($this->input->get() , "page" );
 
                         $data["busqueda"] =  $param["q"];                                             
                         $data["num_servicios"] =  $servicios["num_servicios"];
@@ -250,9 +251,9 @@ class producto extends REST_Controller{
         $a =0;
         foreach($servicios["servicio"] as $row){
             
-            $costo =  $row["costo"];
+            $precio =  $row["precio"];
             $nueva_data[$a] = $row;
-            $precio_publico =  $this->get_precio_venta($costo);  
+            $precio_publico =  $this->get_precio_venta($precio);  
             $nueva_data[$a]["precio_publico"] = $precio_publico;            
             /***/           
 
@@ -268,9 +269,9 @@ class producto extends REST_Controller{
         $a =0;
         foreach($servicios as $row){
             
-            $costo =  $row["costo"];
+            $precio =  $row["precio"];
             $nueva_data[$a] = $row;
-            $precio_publico =  $this->get_precio_venta($costo);  
+            $precio_publico =  $this->get_precio_venta($precio);  
             $nueva_data[$a]["precio_publico"] = $precio_publico;            
             /***/           
             $a ++;
@@ -278,20 +279,27 @@ class producto extends REST_Controller{
         return $nueva_data;
 
     }
-    /**/
-    function agrega_precio_publico(){
-        /**/
-        $servicios =  $this->get_option("servicios");
+    /*
+    function agrega_precio_publico($servicios){
+      
         $nueva_data =[];
         $a =0;
-        foreach($servicios["servicio"] as $row){
+        foreach($servicios as $row){
             
             $flag_servicio =  $row["flag_servicio"];
             $precio_publico = 0;
 
+      
             if($flag_servicio ==  0){
-                $costo =  $row["costo"];
-                $precio_publico =  $this->get_precio_venta($costo);      
+                $precio =  $row["precio"];
+                $precio_publico =  $this->get_precio_venta($precio);      
+            }else{
+
+                $id_ciclo_facturacion =  $row["id_ciclo_facturacion"];                
+                if($id_ciclo_facturacion  != 9){
+                    $precio =  $row["precio"];
+                    $precio_publico =  $this->get_precio_venta($precio);        
+                }
             }            
             $nueva_data[$a] = $row;
             $nueva_data[$a]["precio_publico"] = $precio_publico;            
@@ -299,6 +307,7 @@ class producto extends REST_Controller{
         }
         $this->set_option("servicios" , $nueva_data);
     }
+    */
     function registra_keyword($param){
         $id_usuario =  $param["id_usuario"];
         if($id_usuario == 0){
@@ -314,7 +323,7 @@ class producto extends REST_Controller{
         $nombre_servicio = $this->qmodel->get_nombre_servicio($param);
         $this->response($nombre_servicio);
     }
-    /**/
+    
     function get_precio_calculado_productos($info){
 
         $data =  $info;
@@ -323,8 +332,8 @@ class producto extends REST_Controller{
         $x =0;
         foreach($info as $row){
             
-            $precio_publico =  $this->get_precio_venta($row["costo"]);
-            /**/            
+            $precio_publico =  $this->get_precio_venta($row["precio"]);
+      
             $nueva_data[$x] = array(
                     "id_servicio" =>  $row["id_servicio"],
                     "nombre_servicio" =>  $row["nombre_servicio"],
@@ -332,8 +341,7 @@ class producto extends REST_Controller{
                     "flag_envio_gratis" =>  $row["flag_envio_gratis"],
                     "flag_precio_definido"  =>  $row["flag_precio_definido"],
                     "fecha_registro" =>  $row["fecha_registro"],
-                    "precio" =>  $row["precio"],
-                    "costo" => $row["costo"] ,
+                    "precio" =>  $row["precio"],                    
                     "precio_publico" => $precio_publico 
                 );
 
@@ -349,11 +357,11 @@ class producto extends REST_Controller{
         $url_request =  "http://".$host."/inicio/".$extra; 
         return  $url_request;
     }
-    /**/
-    function get_precio_venta($costo){
+    /*
+    function get_precio_venta($precio){
 
 
-        $q["costo"] =  $costo;
+        $q["precio"] =  $precio;
         $url = "pagos/index.php/api/";         
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
@@ -362,6 +370,7 @@ class producto extends REST_Controller{
         $response =  $result->response;        
         return json_decode($response , true);
     }
+    */
     /**/
     function crea_vista_producto_GET(){        
         
@@ -387,8 +396,6 @@ class producto extends REST_Controller{
             $q3 = $param["q3"];    
             $base_url .= "&q3=$q3";
         }
-
-        
 
         $config['full_tag_open'] = '<div class="pagination">';
         $config['full_tag_close'] = '</div>';

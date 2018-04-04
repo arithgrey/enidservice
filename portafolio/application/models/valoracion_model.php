@@ -123,9 +123,7 @@ class valoracion_model extends CI_Model{
                             SELECT id_servicio ,nombre_servicio
                             FROM servicio 
                             WHERE 
-                              id_usuario = $id_usuario
-                            AND
-                              existencia >0
+                              id_usuario = $id_usuario                            
                             AND 
                               status = 1";
           $this->db->query($query_create);
@@ -233,10 +231,9 @@ class valoracion_model extends CI_Model{
     function get_num_respuestas_sin_leer($id_pregunta){
 
       $query_get = "SELECT 
-                      COUNT(0)respuestas,  
-                      SUM(CASE WHEN leido_cliente = 0 THEN 1 ELSE 0 END )sin_leer,
-                      SUM(CASE WHEN leido_cliente = 0 THEN 1 ELSE 0 END )sin_leer_vendedor 
-                    FROM response 
+                      COUNT(0)respuestas                      
+                    FROM 
+                      response 
                     WHERE id_pregunta =  $id_pregunta";
       $result =  $this->db->query($query_get);
       return $result->result_array();
@@ -434,18 +431,40 @@ class valoracion_model extends CI_Model{
 
     /**/
     $query_insert = "INSERT INTO response(                      
-                        respuesta   ,                        
-                        id_pregunta ,
-                        id_usuario 
-
-                      )
+                        respuesta ,                        
+                        id_pregunta,
+                        id_usuario )
                       VALUES(
+
                         '".$respuesta."', 
                           $id_pregunta,
                           $id_usuario
                       )";
-    return  $this->db->query($query_insert);    
+    $this->db->query($query_insert);    
+    return $this->actualiza_estado_pregunta($param);
   }
+  /**/
+  function actualiza_estado_pregunta($param){
+
+    $id_pregunta =  $param["pregunta"];
+    $query_update = "UPDATE pregunta SET leido_vendedor =0 WHERE id_pregunta =  $id_pregunta LIMIT 1";
+    if($param["modalidad"]){
+      $query_update = "UPDATE pregunta SET leido_cliente =0 WHERE id_pregunta =  $id_pregunta LIMIT 1";     
+    }
+    return  $this->db->query($query_update);      
+  }
+
+  /**/
+  function get_respuestas_sin_leer($param){
+    /**/
+    $id_usuario =  $param["id_usuario"];
+    $query_get ="SELECT COUNT(0)num FROM pregunta WHERE 
+    id_usuario =  $id_usuario AND leido_cliente =0";
+    $result =  $this->db->query($query_get); 
+    return $result->result_array()[0]["num"];
+  }
+  /**/
+
 }
 
 

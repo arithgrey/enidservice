@@ -91,7 +91,9 @@ class Valoracion extends REST_Controller{
         $param =  $this->get();              
         $data["id_servicio"] =  $param["id_servicio"];
         $data["nombre_servicio"]=  $this->get_nombre_servicio($param);
+        $data["extra"] =  $param;
         $this->load->view("valoraciones/form_servicio" , $data);
+        
 
     }
     function get_url_request($extra){
@@ -208,8 +210,14 @@ class Valoracion extends REST_Controller{
             if(!isset($param["id_usuario"])){
                 $param["id_usuario"] = $this->sessionclass->getidusuario();
             }  
-            $num =  $this->valoracion_model->get_preguntas_sin_leer_vendedor($param);            
-            $this->response($num[0]["num"]);          
+            /*Modo vendedor*/
+            $data_complete["modo_vendedor"]=
+            $this->valoracion_model->get_preguntas_sin_leer_vendedor($param)[0]["num"];            
+            /*Modo cliente*/
+
+            $data_complete["modo_cliente"] = $this->valoracion_model->get_respuestas_sin_leer($param);
+
+            $this->response($data_complete);          
         }
     }
     /**/

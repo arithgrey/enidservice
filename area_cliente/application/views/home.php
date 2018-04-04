@@ -28,7 +28,7 @@
 	                    </div>
 	                <?=end_row()?>
 	            </div>
-	            <div class="tab-pane" id="tab_buzon">
+	            <div class="tab-pane <?=valida_active_tab('preguntas' , $action)?>" id="tab_buzon">
 	            	
 					<div class="contenedor_opciones_buzon">
 						<h3 style="font-weight: bold;font-size: 3em;">			
@@ -42,16 +42,17 @@
 							<table>
 								<tr>
 									<td>
-										<a 	class="a_enid_blue preguntas btn_preguntas_compras" 
+										<a 	class="a_enid_black preguntas btn_preguntas_compras" 
 											id='0' style="color: white!important">
-											HECHAS
+											HECHAS											
+											<span class="notificacion_preguntas_sin_leer_cliente">
+											</span>
 										</a>
-										<a 
-											class="a_enid_black preguntas btn_preguntas_ventas" 
+										<a class="a_enid_blue preguntas btn_preguntas_ventas" 
 											id="1" 
 											style="color: white!important">
 											RECIBIDAS
-											<span class="notificacion_preguntas_sin_leer">
+											<span class="notificacion_preguntas_sin_leer_ventas">
 											</span>
 										</a>
 									</td>

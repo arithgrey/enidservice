@@ -63,6 +63,10 @@ if(!function_exists('invierte_date_time')){
                         </span>
                     </div>";                            
         }else{
+          if($num<1){
+            
+            $num =  "";    
+          }
               $text ="<div class='pull-right'> 
                         <span 
                           style='font-size: .7em!important;padding:4px;background:black;' 
@@ -654,29 +658,51 @@ if(!function_exists('invierte_date_time')){
   
   }
   /**/
-  function carga_estado_compra($monto_por_liquidar, 
-                              $id_recibo , $status, $status_enid_service,  
+  function carga_estado_compra($monto_por_liquidar, $id_recibo , $status, $status_enid_service,  
                                $vendedor=0){
         
         $extra_tab_pagos =' href="#tab_renovar_servicio" data-toggle="tab" ';
-        
+        $estilos = "style='width: 100%;
+                    padding: 5px;
+                    border-style: solid;
+                    background: #19193c;
+                    color: white;
+                    '";
+
         $text = "";        
 
         if($vendedor ==  1) {
             $text =  "<span  
                             class='resumen_pagos_pendientes' 
                             id='".$id_recibo."' 
-                            $extra_tab_pagos >
-                            VER DETALLES DE LA COMPRA!
+                            $extra_tab_pagos 
+                            >
+                            DETALLES DE LA COMPRA
                       </span>";
         }else{          
             if($monto_por_liquidar <= 0){                              
-              $text =  "COMPRA REALIZADA!";
+              $text =  "
+              <span  
+                class='resumen_pagos_pendientes' 
+                id='".$id_recibo."' 
+                $extra_tab_pagos >
+                COMPRA REALIZADA
+                <i class='fa fa-check-circle'></i>
+              </span>";
             }else{  
+
+              $estilos = "style='width: 100%;
+              padding: 5px;
+              border-style: solid;
+              background: #1d0ff3;
+              color: white;
+              border-color: #1d0ff3;'";
+
               $text = "<span  
                             class='resumen_pagos_pendientes' 
                             id='".$id_recibo."' 
-                            $extra_tab_pagos >
+                            $extra_tab_pagos 
+                            >
                               LIQUIDAR AHORA!
                               <i class='fa fa-credit-card-alt' id='".$id_recibo."'>
                               </i>                         
@@ -686,7 +712,7 @@ if(!function_exists('invierte_date_time')){
         
 
      
-      return "<div class='btn_comprar'>".$text."</div>";
+      return "<div class='btn_comprar'><span $estilos>".$text."</span></div>";
   }
   /**/
   function create_seccion_saldo_pendiente($saldo_pendiente){

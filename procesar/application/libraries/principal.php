@@ -5,25 +5,16 @@
 		function resumen_servicio($param){
 			
 			$id_plan =  $param["plan"];
-			$query_get ="
-			 SELECT 
-			 	s.* , 
-			 	p.precio ,
-			 	p.costo ,
-			 	p.id_ciclo_facturacion, 
-			 	cf.*
-			 FROM  
-			 	servicio s  
-			 INNER JOIN 
-			 	precio p  
-			 ON 
-			 	s.id_servicio = p.id_servicio 
-			 INNER JOIN 
-			 	ciclo_facturacion cf 
-			 ON  
-			 	p.id_ciclo_facturacion = cf.id_ciclo_facturacion
-			 WHERE 
-			 	s.id_servicio ='".$id_plan."' LIMIT 1";			 
+			$query_get ="SELECT 
+						 	*
+						FROM  
+						 	servicio s  
+						INNER JOIN 			 	
+						 	ciclo_facturacion cf 			 	
+						ON  
+						 	s.id_ciclo_facturacion = cf.id_ciclo_facturacion
+						WHERE 
+						 	s.id_servicio ='".$id_plan."' LIMIT 1";			 
 			$result =  $this->db->query($query_get);
 			return $result ->result_array();
 			

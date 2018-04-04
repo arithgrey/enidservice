@@ -54,7 +54,7 @@ if(!function_exists('invierte_date_time')){
       $extra_estilos ='style="font-weight:40;font-size: .8em;text-transform: uppercase;color:black!important"';
 
       $text_nombre_servicio ='<h2 '.$extra_estilos.'>'.
-                substr( $nombre_servicio ,  0  , 200 ).
+                substr( $nombre_servicio ,  0  , 70 ).
                 '</h2>';
       return $text_nombre_servicio;
     }

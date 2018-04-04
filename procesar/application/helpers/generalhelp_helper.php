@@ -5,33 +5,28 @@ function get_dominio($url){
     $url = explode('/', str_replace($protocolos, '', $url));
     return $url[0];
 }
-function create_resumen_servicio($param , $precio_publico){
+/**/
+function create_resumen_servicio($servicio ,  $info_solicitud_extra){
   
   $resumen =""; 
-  $resumen_servicio ="";
-  $info_solicitud_extra =  $param["info_solicitud_extra"];
-  
+  $resumen_servicio ="";  
   $duracion =  $info_solicitud_extra["num_ciclos"];
-
   $precio =  0;
 
   $info_servicio = "";
   $id_ciclo_facturacion ="";
-  foreach ($param["resumen_servicio"] as $row) {
+  $precio =0;
+  foreach ($servicio as $row) {
     
     $id_servicio =  $row["id_servicio"];
     $nombre_servicio  =  $row["nombre_servicio"];
-    $info_servicio = $nombre_servicio;
-    
+    $info_servicio = $nombre_servicio;    
     $descripcion =  $row["descripcion"];    
-    $resumen_servicio  = $nombre_servicio;
-    
-    /**/
+    $resumen_servicio  = $nombre_servicio;    
     $id_ciclo_facturacion =  $row["id_ciclo_facturacion"];
+    $precio =  $row["precio"];
   }
 
-  //$iva =  $precio * .16;  
-  //$precio_con_iva = $precio + $iva;    
   $is_servicio =0;
   $text_label = "Piezas";
     
@@ -42,12 +37,6 @@ function create_resumen_servicio($param , $precio_publico){
 
   
   $text_ciclos_contratados =   get_text_duracion($id_ciclo_facturacion , $duracion ,  $is_servicio);  
-  
-  /**/
-
-  /**/
-  
-  /**/
 
   $resumen_completo ="<div class='row'>
                       <div class='col-lg-4 tex-center'style='font-size:.8em;'>
@@ -67,13 +56,13 @@ function create_resumen_servicio($param , $precio_publico){
                             Precio
                           </div>                          
                           ".
-                            $precio_publico["precio"]
+                            $precio
                           ."
                           </div>
                        </div>";
 
   $data_complete["resumen_producto"] = $resumen_completo;
-  $data_complete["monto_total"] = $precio_publico["precio"];
+  $data_complete["monto_total"] = $precio;
   $data_complete["resumen_servicio_info"] =  $info_servicio;
 
   return $data_complete;

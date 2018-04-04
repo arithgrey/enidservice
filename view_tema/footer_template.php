@@ -256,6 +256,7 @@
 </html>
 
 <link href="../css_tema/template/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!--
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98483031-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -264,6 +265,7 @@
 
   gtag('config', 'UA-98483031-1');
 </script>
+-->
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
 <style type="text/css">
     body{

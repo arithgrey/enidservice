@@ -1,13 +1,20 @@
-<?php
-  /**/  
-  $producto =  create_resumen_servicio($info_solicitud , $precio_publico);
-  $info_solicitud_extra =  $info_solicitud["info_solicitud_extra"];  
+<?php  
+  $producto =  create_resumen_servicio($servicio , $info_solicitud_extra);  
   $ciclos_solicitados =  $info_solicitud_extra["num_ciclos"];
   $resumen_producto = $producto["resumen_producto"];
   $resumen_servicio_info = $producto["resumen_servicio_info"];
-  $monto_total = floatval($precio_publico["precio"]) * floatval($ciclos_solicitados);
-  $text_envio =  $costo_envio["text_envio"]["cliente"];
-  $costo_envio_cliente= $costo_envio["costo_envio_cliente"];
+  $monto_total = floatval($servicio[0]["precio"]) * floatval($ciclos_solicitados);
+  
+
+
+  $costo_envio_cliente= 0;  
+  $text_envio ="";
+  if($servicio[0]["flag_servicio"] ==  0){
+    $costo_envio_cliente= $costo_envio["costo_envio_cliente"];  
+    $text_envio =  $costo_envio["text_envio"]["cliente"];
+  }
+  
+  
 
   $monto_total_con_envio =  $monto_total + $costo_envio_cliente;
 ?>

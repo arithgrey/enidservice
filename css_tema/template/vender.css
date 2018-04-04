@@ -27,3 +27,8 @@
 	font-weight: bold;
 	
 }
+.num_clasificacion:hover{
+	cursor: pointer;
+	background: blue;
+	color: white;
+}

@@ -11,8 +11,7 @@
 }
 .contenedor_articulo{
 	height: 230px;
-	margin-top: 10px;
-	background: #fafdff;
+	margin-top: 10px;	
 	border: 1px solid #d0d0d0;
 }
 .contenedor_articulo:hover{
@@ -42,11 +41,13 @@
 	margin-top: 30px;
 	margin-bottom: 10px;
 }
+/*
 .resumen_pagos_pendientes{
 	background: blue;
 	padding: 10px;
 	color: white;
 }
+*/
 .resumen_pagos_pendientes:hover{
 	cursor: pointer;
 }

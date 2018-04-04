@@ -108,8 +108,7 @@ function procesar_pedido_usuario_activo(){
 			}
 	
 		}).done(function(data){				
-					
-					console.log(data);
+										
 					set_option("data_registro" , data);
 					set_option("registro" , 0);
 					set_option("usuario_nuevo" , 0);

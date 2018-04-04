@@ -42,13 +42,13 @@
                         flag_envio_gratis, 
                         flag_servicio , 
                         flag_nuevo , 
-                        id_usuario id_usuario_venta 
+                        id_usuario id_usuario_venta,
+                        precio , 
+                        id_ciclo_facturacion
                     FROM 
                         servicio 
                     WHERE 
-                        id_servicio = $id_servicio 
-                    AND 
-                        existencia >= $articulos_solicitados
+                        id_servicio = $id_servicio                     
                     LIMIT 1";
             
             $result =  $this->db->query($query_get);
@@ -196,12 +196,12 @@
             $this->create_productos_disponibles(0 , $_num , $param);                
 
                     $data_complete["sql"] =  $this->get_option("sql");
-                    $query_get ="SELECT * FROM tmp_producto_$_num";
+                    $query_get ="SELECT * FROM tmp_producto_$_num ORDER BY vista DESC";
                     $result =  $this->db->query($query_get);
                     $servicios =  $result->result_array();
                 
-                    $data_complete["servicio"] =  
-                    $this->add_precio($servicios);    
+                    $data_complete["servicio"] =  $servicios;
+                    
 
                     if($param["agrega_clasificaciones"] ==  1){                        
                         $data_complete["clasificaciones_niveles"] =  
@@ -267,24 +267,14 @@
 
     }
     /**/
-    function add_precio($data_complete){
-
-        $nueva_data_complete = [];
-        $a =0;
-        foreach($data_complete  as $row){            
-            $id_servicio=  $row["id_servicio"];    
-            $nueva_data_complete[$a] =  $row;     
-            $info_precios  =  $this->get_precio_servicio($id_servicio);               
-            $nueva_data_complete[$a]["precio"] =  $info_precios[0]["precio"];
-            $nueva_data_complete[$a]["costo"] =  $info_precios[0]["costo"];            
-            $a ++ ;
-        }
-        return $nueva_data_complete;
-    }
+    
     /**/
     function get_precio_servicio($id_servicio){
         
-        $query_get = "SELECT precio , costo FROM precio WHERE id_servicio = $id_servicio LIMIT 1";
+        $query_get = "SELECT 
+                        precio ,                                                 
+                        id_ciclo_facturacion 
+                        FROM precio WHERE id_servicio = $id_servicio LIMIT 1";
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }
@@ -394,7 +384,10 @@
                                 flag_envio_gratis,
                                 metakeyword,                                 
                                 color,
-                                existencia                                
+                                existencia,
+                                precio , 
+                                id_ciclo_facturacion, 
+                                vista
                             FROM 
                             servicio".$query_where; 
 
@@ -413,7 +406,10 @@
                                 tercer_nivel ,
                                 cuarto_nivel , 
                                 quinto_nivel,
-                                color                                
+                                color,   
+                                precio , 
+                                id_ciclo_facturacion,
+                                vista                             
                             FROM 
                             servicio".$query_where;   
                             
@@ -423,25 +419,6 @@
             
 
 
-        }
-    }
-    /**/
-    function create_tmp_precios($flag , $_num , $param){
-
-     $query_drop = "DROP TABLE IF exists tmp_precios_$_num";
-        
-        $this->db->query($query_drop);
-        if($flag ==  0 ){
-            $query_create ="CREATE TABLE tmp_precios_$_num AS 
-                            SELECT  
-                                precio   ,
-                                costo , 
-                                id_servicio                                
-                            FROM 
-                            precio
-                                WHERE 
-                                status =1";
-            $this->db->query($query_create);
         }
     }
     /**/

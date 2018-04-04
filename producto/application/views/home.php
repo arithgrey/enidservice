@@ -18,6 +18,7 @@
   $flag_nuevo= "";
   $existencia =0;
   $color ="";  
+  $precio = 0;
   /**/
 
   foreach($info_servicio["servicio"] as $row){
@@ -35,26 +36,30 @@
     $existencia =$row["existencia"];
     $color = $row["color"];
     $flag_precio_definido =  $row["flag_precio_definido"];
+    $precio =  $row["precio"];
+    $id_ciclo_facturacion =  $row["id_ciclo_facturacion"];
 
   }
 
   $imagenes =  construye_seccion_imagen_lateral($imgs  ,$nombre_servicio , $url_vide_youtube);
   $info_compra["id_servicio"]= $id_servicio;
   $info_compra["flag_servicio"]= $flag_servicio;
+  $info_compra["precio"]= $precio;
+  $info_compra["id_ciclo_facturacion"]= $id_ciclo_facturacion;
 
 
 ?>
 <main> 
 
-  <?php if($flag_servicio ==  0): ?>  
-    <?=n_row_12()?>
-      <div style="margin-top: 10px;"></div>
-      <div style="width: 80%;margin:0 auto;">
-        <a href="../pregunta?tag=<?=$id_servicio?>" class="a_enid_blue" style="color: white!important;">
-          ENVIAR PREGUNTA AL VENDEDOR
-        </a>
-      </div>
-    <?=end_row()?>  
+  <?php if($flag_servicio ==  0): ?>    
+    <?php if($precio > 0):?>   
+      <?=$this->load->view("btn_pregunta");?>      
+    <?php endif; ?>
+
+  <?php else: ?>
+    <?php if($precio > 0 && $id_ciclo_facturacion !=9):?>   
+      <?=$this->load->view("btn_pregunta");?>      
+    <?php endif; ?>      
   <?php endif; ?>
 
 <?=n_row_12()?>  
@@ -86,14 +91,13 @@
                       <div class="valoracion_persona"></div>                        
                     </a>
                   </div>
-                  <?=valida_text_servicio($flag_servicio , $precio_unidad  , $flag_precio_definido)?>
+                  <?=valida_text_servicio($flag_servicio , $precio , $id_ciclo_facturacion )?>
                   <?=get_text_costo_envio($flag_servicio , $costo_envio)?>
-                  
                   <div style="margin-top: 10px;">
                     <?=get_tipo_articulo($flag_nuevo , $flag_servicio)?>
                   </div>
                   <?=creta_tabla_colores($color , $flag_servicio)?>
-                  <?=$this->load->view("form_compra" , $info_compra)?>            
+                    <?=$this->load->view("form_compra" , $info_compra)?>            
                   <?=n_row_12()?>                  
                     <?=get_descripcion_servicio($descripcion , $flag_servicio)?>                
                     <?=valida_url_youtube($url_vide_youtube)?>                                    

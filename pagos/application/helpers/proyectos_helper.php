@@ -67,6 +67,7 @@ if(!function_exists('invierte_date_time')){
     
   }
   /**/
+  /*
   function valida_nombre_propietario($flag_registro_previo ,  $nombre_persona , $propietario_tarjeta ){
 
     if ($flag_registro_previo ==  1) {
@@ -75,6 +76,7 @@ if(!function_exists('invierte_date_time')){
       return $nombre_persona; 
     }
   }
+  */
   /**/
   function valida_numero_tarjeta($tarjeta ,  $registro_previo){
 
@@ -82,7 +84,7 @@ if(!function_exists('invierte_date_time')){
           return $tarjeta;
       }
   }
-  /**/
+  /*
   function valida_imagen_banco_pago($id_banco , $registro_previo){
 
       if ($registro_previo ==  1){
@@ -92,6 +94,7 @@ if(!function_exists('invierte_date_time')){
       }
       
   }
+  */
   /**/
   function create_table_comentarios($comentarios){
 

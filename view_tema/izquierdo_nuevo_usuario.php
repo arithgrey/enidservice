@@ -14,30 +14,6 @@
                     <li>
                         
                         <p>
-                            <div>
-                                <div>
-                                <a  class=" strong blue_enid_background white" 
-                                    style="text-decoration:none !important;font-size: .9em; padding: 5px;color:white!important;"
-                                    target="_blank" 
-                                    href="../contacto/#envio_msj">
-                                    <i class="black icon-mobile contact white" style="color:white!important;">
-                                    </i>Envia tu mensaje
-                                </a>
-                                </div>
-                                <div  class="btn_whatsApp">
-                                    <a class=" strong blue_enid_background white" 
-                                        style="text-decoration:none !important;font-size: .9em; padding: 5px;color:white!important;"
-                                         href="https://api.whatsapp.com/send?phone=+525552967027&amp;text=Hola quiero más información sobre ...">
-
-                                        <i class="black fa fa-whatsapp  white" 
-                                            style="color:white!important;">
-                                        </i>
-                                        Click para enviar                                         
-                                        WhatsApp
-                                    </a>
-                                </div>
-                                
-                            </div>
                             
                             <div>
                                 <span style="font-size: .85em;">

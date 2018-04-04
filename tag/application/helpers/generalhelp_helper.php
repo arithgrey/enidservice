@@ -1,25 +1,91 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+  function muestra_vistas_servicio($in_session , $vistas){
+
+    if($in_session ==  1){
+       return "<div style='background:black;' class='white'>".$vistas." personas alcanzadas</div>";
+    } 
+  }
   /**/
-  function get_en_existencia($existencia , $flag_servicio , $in_session){
+  function get_precio_producto($url_info_producto , $precio, $costo_envio , 
+    $flag_servicio , $id_ciclo_facturacion){
     
-    if($existencia > 0 && $flag_servicio ==  0 && $in_session ==  1){
     
-        return "<span 
+    if($flag_servicio ==  0){    
+      $seccion = n_row_12().'
+                
+                      <a  
+                        title="Precio del artículo, ver más detalles"
+                        href="'.$url_info_producto.'" 
+                        style="background: #0027ff !important;
+                        color: white!important;
+                        font-size: .9em;
+                        padding: 3px;">
+                        '.$precio.'MXN    
+                      </a>                 
+                ';
+
+      $seccion .= end_row();
+    }else{
+      if($id_ciclo_facturacion != 9 && $precio>0 ){
+          $seccion = n_row_12().'
+                
+                      <a  
+                        title="Precio del artículo, ver más detalles"
+                        href="'.$url_info_producto.'" 
+                        style="background: #0027ff !important;
+                        color: white!important;
+                        font-size: .9em;
+                        padding: 3px;">
+                        '.$precio.'MXN    
+                      </a>                 
+                ';
+
+          $seccion .= end_row();  
+      }else{
+        $seccion = n_row_12().'
+                
+                      <a  
+                        title="Precio del artículo, ver más detalles"
+                        href="'.$url_info_producto.'" 
+                        style="background: #0027ff !important;
+                        color: white!important;
+                        font-size: .9em;
+                        padding: 3px;">
+                        A CONVENIR
+                      </a>                 
+                ';
+
+        $seccion .= end_row();
+      }
+      
+    }
+    
+    return $seccion;
+  }
+  /**/
+  function get_en_existencia($existencia , $flag_servicio , $in_session){      
+    if($flag_servicio ==  0) {
+      return informacion_existencia_producto($existencia , $in_session);
+    }
+  }
+  /**/
+  function informacion_existencia_producto($existencia , $in_session){
+
+    if($in_session ==  1){
+        if($existencia >0 ){
+           return "<span 
                     style='margin-right:10px;'
                     title='Articulos en existencia y listos para ser vendidos'>
                     ". $existencia." En existencia "."
                 </span>";
-    }else{
-
-        if($in_session == 1){
+        }else{
             return "<span class='white'
                           style='margin-right:10px;padding:2px;background:red;'>
                         INVENTARIO LIMITADO
-                    </span>";
+                    </span>"; 
         }
-          
     }
   }
   /**/
@@ -286,6 +352,7 @@ if(!function_exists('invierte_date_time')){
       return $msj[$f];
   }
   /*EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  */
+  /*
   function valida_empresa_prueba_name($nombre){
     $nombre_empresa =  $nombre;
     if (substr($nombre_empresa , 0 ,  10)  ==  "Empresa de") {
@@ -293,6 +360,7 @@ if(!function_exists('invierte_date_time')){
     }
     return $nombre_empresa;   
   }
+  */
   /*EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  EMPRESA  */
 
 
@@ -548,7 +616,7 @@ function btn_modal_config($public , $modal , $id ){
     return $locacion; 
 
   }  
-  
+  /*
   function template_evento_admin($nombre_evento , $id_evento){
     $url =  url_evento_view_config($id_evento);
     $template =  "
@@ -564,9 +632,10 @@ function btn_modal_config($public , $modal , $id ){
               ";
 
       return $template;        
-  }
+  }*/
 
-  /**/
+
+  /*
   function template_evento($nombre_evento ,  $id_evento , $id_empresa ,  $reservaciones = 1  , $flag_artistas = 0 ){
                           
 
@@ -615,7 +684,7 @@ function btn_modal_config($public , $modal , $id ){
 
       return $template;        
   }
-  /**/
+  
   function btn_aristas_escenarios($id_evento ,  $flag_artistas){
 
 
@@ -628,12 +697,10 @@ function btn_modal_config($public , $modal , $id ){
             </a>";       
     }else{
       return "";
-    }
-
-    
-    
+    }  
   }
-  /**/
+  
+  
   function btn_servicios($id_evento){
     $url = url_dia_evento($id_evento);
     
@@ -644,7 +711,7 @@ function btn_modal_config($public , $modal , $id ){
             </a>";     
     
   }
-  /**/
+  
   function btn_acceso($id_evento){
     $url =url_accesos_al_evento($id_evento);
     
@@ -655,7 +722,7 @@ function btn_modal_config($public , $modal , $id ){
             </a>";     
 
   }
-  /**/
+  
   function btn_solicita_tu_artista($id_empresa){
     
     $url = url_solicita_artista($id_empresa);
@@ -665,7 +732,7 @@ function btn_modal_config($public , $modal , $id ){
               </button> 
             </a>";     
   }
-  /***/
+  
   function btn_reservaciones(){
 
     
@@ -674,8 +741,7 @@ function btn_modal_config($public , $modal , $id ){
               </button> ";     
 
   }
-  /**/
-  /*
+  
   function btn_comunidad($id_empresa){    
       $url =  base_url('index.php/emp/lahistoria')."/".$id_empresa;
       $btn =  "
@@ -690,7 +756,6 @@ function btn_modal_config($public , $modal , $id ){
       return $btn;
   }
   */
-  /**/
   function get_random(){
     return  mt_rand();       
   }

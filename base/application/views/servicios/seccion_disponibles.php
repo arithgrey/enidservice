@@ -1,9 +1,7 @@
 
-    <div style="margin-top: 20px;">        
-    </div>
-    <div class="strong black row" style="font-size: 1em;">
-        <div class="col-md-6">                    
-            <span class='text_articulos_disponibles'>
+    <div class="well">
+        <div>                    
+            <span class='titulo_seccion_producto'>
                 Artículos disponibles
             </span>
             <i class="fa fa-pencil text_cantidad">                
@@ -12,7 +10,7 @@
                 <?=valida_text_numero_articulos($existencia)?>                                       
             </div>
         </div>
-        <div class="col-md-6 input_cantidad" style="display: none;">
+        <div class="input_cantidad" style="display: none;">
             <input 
                 type="number" 
                 name="existencia" 

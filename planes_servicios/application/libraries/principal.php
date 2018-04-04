@@ -5,8 +5,7 @@
 		/**/
 		function create_ciclo_facturacion(){
 
-			$query_get ="select * from ciclo_facturacion;";
-			
+			$query_get ="select * from ciclo_facturacion WHERE id_ciclo_facturacion!=5";
 			$result = $this->db->query($query_get);
 			return $result->result_array();
 		}		

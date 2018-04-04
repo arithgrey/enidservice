@@ -1,8 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){	
-	
-	function create_colores_disponibles($text_colores){
+	/**/
+	function get_nombre_ciclo_facturacion($ciclos , $id_ciclo){
+		foreach($ciclos as $row){
 
+			$id_ciclo_facturacion = $row["id_ciclo_facturacion"];
+			if($id_ciclo_facturacion == $id_ciclo) {
+				return $row["ciclo"];	
+			}
+		}
+	}
+	/**/
+	function create_colores_disponibles($text_colores){
 		/**/
 		$arreglo_colores =  explode("," , $text_colores);		
 		

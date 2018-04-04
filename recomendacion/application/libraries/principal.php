@@ -2,7 +2,20 @@
 	require "interfaces/iRegistro.php";
 	class principal extends CI_Model implements  iRegistro{	 			
 		
-				function get_valor_numerico_bool($bool){
+			/**/
+			function actualiza_lectura_valoracion($id_usuario){
+			
+				$query_update ="UPDATE valoracion , servicio  
+								SET 
+								valoracion.leido_vendedor = 1
+								WHERE 
+								servicio.id_usuario =  $id_usuario
+								AND
+								servicio.id_servicio =  valoracion.id_servicio";
+				$this->db->query($query_update);
+			}
+			/**/
+			function get_valor_numerico_bool($bool){
 
 				$valor =0;
 				if ($bool ==  true ){

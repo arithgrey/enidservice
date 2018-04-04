@@ -1,6 +1,86 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+  /**/
+  function crea_saldo_disponible($param , $porcentaje_comision){
+
+    $total_disponible = 0;    
+    /*Crea data saldos*/
+    foreach ($param as $row) {
   
+    
+      $saldo_cubierto = $row["saldo_cubierto"];
+
+      $monto_a_pagar = $row["monto_a_pagar"];
+
+      $saldo_cubierto_envio = $row["saldo_cubierto_envio"];
+      $flag_envio_gratis  = $row["flag_envio_gratis"];
+      $costo_envio_cliente = $row["costo_envio_cliente"];
+      $num_ciclos_contratados = $row["num_ciclos_contratados"];
+      $costo_envio_vendedor   = $row["costo_envio_vendedor"];
+
+      $monto_total_a_pagar = ($monto_a_pagar)*($num_ciclos_contratados);
+      if($saldo_cubierto>= $monto_total_a_pagar){        
+        if($flag_envio_gratis ==  0){
+          /*Cuando el envio lo paga el cliente*/
+          if($saldo_cubierto_envio >= $costo_envio_cliente ) {
+            /*Aplicamos la comision*/
+            $monto_aplicando_comision=  
+            aplica_comision($num_ciclos_contratados,$porcentaje_comision,$monto_a_pagar);
+            $total_disponible = $total_disponible + $monto_aplicando_comision;      
+
+          }          
+        }else{
+          /*Aplicamos las regla a cuando el vendedor asume el envío*/
+            $monto_aplicando_comision=  
+            aplica_comision($num_ciclos_contratados,$porcentaje_comision,$monto_a_pagar);
+            /*ahora se resta el envío*/
+            $monto_aplicando_comision_menos_envio
+            = $monto_aplicando_comision - $costo_envio_vendedor;
+            $total_disponible = 
+            $total_disponible + $monto_aplicando_comision_menos_envio;      
+        }          
+      }        
+    }
+    return $total_disponible;
+  }  
+  /**/
+  function aplica_comision($periodos, $p_comision, $monto_a_pagar){
+
+    $nuevo_total = 0;
+    for($a=0; $a < $periodos; $a++){       
+      
+      $total_comision = porcentaje($monto_a_pagar,$p_comision );
+      $total_comision=  $monto_a_pagar - $total_comision;
+      $nuevo_total =  $nuevo_total + $total_comision;
+    }
+    /**/
+    return $nuevo_total;
+  }
+  /**/
+  function valida_texto_periodos_contratados($periodos, $flag_servicio , $id_ciclo_facturacion){
+
+    $text ="";
+    if($flag_servicio ==  1){
+
+        $ciclos =["","Anualidad","Mensualidad","Semana","Quincena","","Anualidad a 3 meses",
+        "Anualidad a 6 meses", "A convenir"];
+        
+        $ciclos_largos =["","Anualidades","Mensualidades","Semanas","Quincenas","","Anualidades a 3 meses", "Anualidades a 6 meses", "A convenir"];
+        $text_ciclos = "";
+
+        if($periodos>1){
+          $text_ciclos =$ciclos_largos[$id_ciclo_facturacion];
+        }else{
+          $text_ciclos =$ciclos[$id_ciclo_facturacion];
+        }
+        
+
+        $text ="Ciclos contratados: ".$periodos." ".$text_ciclos;        
+    }else{
+        $text =($periodos >1) ? "Piezas ":"Pieza:";
+    }
+    return $text;
+  }
   /**/  
   function entrega_data_campo($param , $key , $label='' , $validador_numerico =0){
     $value =$param[0][$key];
@@ -92,18 +172,17 @@ if(!function_exists('invierte_date_time')){
     return $data;
   }
   /**/
-  function porcentaje($cantidad,$porciento,$decimales){
-    return number_format($cantidad*$porciento/100 ,$decimales);
+  function porcentaje($cantidad,$porciento,$decimales =0){
+    return $cantidad*$porciento/100;
   }
   /**/
   function get_info_usuario_valor_variable($q2 , $campo ){
-
+    /**/
     $id_usuario_envio =0;
     if(isset($q2[$campo]) && $q2[$campo] != null ){             
         $id_usuario_envio =$q2[$campo];
     }
     return $id_usuario_envio;
-
   }
   /**/
   function get_info_usuario($q2){    

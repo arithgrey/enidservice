@@ -24,7 +24,6 @@ class Home extends CI_Controller{
     /**/
     function index(){
 
-
         $id_servicio =  get_info_producto($this->input->get("producto"));                    
         $this->set_option("id_servicio" , $id_servicio);
         $data = $this->val_session("");  
@@ -35,10 +34,9 @@ class Home extends CI_Controller{
             /**/
             $data["meta_keywords"]="";
             $data["desc_web"] ="";
-            $data["url_img_post"]="";
-            
-
+            $data["url_img_post"]="";            
             $this->principal->show_data_page($data, $this->get_vista_no_encontrado());
+            
         }else{            
             $param =  $this->input->get();                            
             $data["desde_valoracion"] =  get_valor_variable($this->input->get() , "valoracion");
@@ -76,15 +74,8 @@ class Home extends CI_Controller{
             /**/
             $data["info_servicio"]["servicio"] = $servicio;    
             $this->set_option("flag_precio_definido" , 0);
-            $data["precio_unidad"] = 0;
+           
             /**/
-            if($servicio[0]["flag_precio_definido"] == 1){
-                $precio =  $this->get_precio_servicio($id_servicio);
-                $precio_unidad =  $precio[0]["precio"];            
-                $data["precio_unidad"] = $precio_unidad; 
-                $this->set_option("precio_unidad" , $precio_unidad);
-                $this->set_option("flag_precio_definido" , 1);
-            }
             
             $data["imgs"]=  $this->get_imagenes_productos($id_servicio);            
             $this->costruye_meta_keyword();
@@ -93,6 +84,10 @@ class Home extends CI_Controller{
             $this->costruye_descripcion_producto();             
 
             $this->principal->crea_historico($num_hist , $num_usuario , $num_usuario , $id_mensaje);
+            
+
+
+            $this->principal->crea_historico_vista_servicio($id_servicio , $data["in_session"]);
 
             $data["url_actual"]=   $this->get_the_current_url();
             $data["meta_keywords"] = $this->get_option("meta_keywords");                    
@@ -149,10 +144,11 @@ class Home extends CI_Controller{
         $descripcion_mensaje  =  $mensaje[0]["descripcion"];  
         $this->set_mensaje_descripcion(strip_tags($descripcion_mensaje));
     }
-    /**/
+    /*
     function get_precio_servicio($id_servicio){
         return $this->producto_model->get_precio_servicio($id_servicio);        
     }
+    */
     /**/
     /**/
     function get_informacion_basica_servicio($id_servicio){
@@ -214,7 +210,7 @@ class Home extends CI_Controller{
     function get_nombre_servicio(){
         return $this->nombre_servicio;
     }
-    /**/
+    /*
     function get_precio_venta($costo){
 
         $q["costo"] =  $costo;
@@ -226,6 +222,7 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return json_decode($response , true);
     }
+    */
     /**/
     function get_precio_venta_mayoreo($costo){
 
@@ -252,7 +249,7 @@ class Home extends CI_Controller{
             $precio_unidad =  $this->get_option("precio_unidad");    
             $precio_unidad = $precio_unidad ." MXN ";
         }        
-        $text=  $nombre_servicio." ".$precio_unidad." ".$descripcion;
+        $text=  strip_tags($nombre_servicio)." ".strip_tags($precio_unidad)." ".strip_tags($descripcion);
         $this->set_option( "desc_web" , $text);        
     } 
     function costruye_meta_keyword(){
@@ -278,7 +275,7 @@ class Home extends CI_Controller{
         $meta_keyword =  implode(",", $array);
         $meta_keywords =  $metakeyword;
         /**/        
-        $this->set_option("meta_keywords", $meta_keyword );
+        $this->set_option("meta_keywords", strip_tags($meta_keyword) );
 
     }    
     /**/

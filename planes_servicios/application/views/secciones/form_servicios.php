@@ -48,7 +48,7 @@
 			            placeholder="" 
 			            class="input  nuevo_producto_nombre input-sm" 
 			            type="text" 
-			            style="text-transform: uppercase;" 
+			             onkeyup="transforma_mayusculas(this)"
 			            required> 
 				</div>
 				<div class="col-lg-3 contenedor_ciclo_facturacion" style="display: none;">
@@ -88,7 +88,7 @@
 
   <div class="contenedor_categorias" style="display: none;">
   	
-    <div class="panel">      
+    <div>      
       <div style="overflow-x: auto;">
         <table width="100%;">
           <tr>
@@ -122,13 +122,3 @@
     </div>
   </div>
 
-
-<style type="text/css">
-	.tipo_promocion{
-		background: white;
-		color: black;
-		border: solid 1px;
-		padding: 10px;
-		margin-top: 10px;
-	}
-</style>

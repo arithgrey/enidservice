@@ -31,13 +31,9 @@ $(document).ready(function(){
 	set_option("action" , $(".action").val());		
 	set_option("estado_compra" , 6);	
 	set_option("interno" ,1);
+	valida_accion_inicial();
+
 	
-	if(get_option("action") ==  "ventas"){		
-		set_option("modalidad_ventas" , 1);		
-	}else{
-		set_option("modalidad_ventas" , 0);				
-	}
-	$("footer").ready(carga_compras_usuario);		
 	$(".btn_mis_ventas").click(function(){			
 		set_option("estado_compra" , 1);			
 		set_option("modalidad_ventas" , 1);		
@@ -45,7 +41,6 @@ $(document).ready(function(){
 	});
 	/*On click,  cargamos deudas pendientes de esta persona*/
 	$(".btn_cobranza").click(function(){				
-
 		/**/
 		set_option("estado_compra" , 6);			
 		set_option("modalidad_ventas" , 0);
@@ -93,12 +88,47 @@ function carga_num_preguntas(){
 			}
 	}).done(function(data){									
 		/**/
-		$(".notificacion_preguntas_sin_leer").empty();
-		if (data>0){
-			llenaelementoHTML(".notificacion_preguntas_sin_leer"  , "<span class='notificacion_preguntas_no_leida'>"+data+"</span>");											
+		$(".notificacion_preguntas_sin_leer_ventas").empty();
+		$(".notificacion_preguntas_sin_leer_cliente").empty();
+		if(data.modo_vendedor>0){
+			llenaelementoHTML(".notificacion_preguntas_sin_leer_ventas"  , "<span class='notificacion_preguntas_no_leida'>"+data.modo_vendedor+"</span>");											
+		}if(data.modo_cliente>0){
+			llenaelementoHTML(".notificacion_preguntas_sin_leer_cliente"  ,"<span class='notificacion_preguntas_no_leida'>"+data.modo_cliente+"</span>");											
 		}
+		
 		
 	}).fail(function(){			
 		show_error_enid(".place_buzon"  , "Error ... ");
 	});	
+}
+/**/
+function valida_accion_inicial(){
+
+		
+
+	action =   get_option("action"); 	
+	/**/
+	switch(action){
+	    case "ventas":
+			set_option("modalidad_ventas" , 1);		
+			carga_compras_usuario();		
+	        break;
+	    case "compras":
+			set_option("modalidad_ventas" , 0);				
+			carga_compras_usuario();		
+	        break;
+	    case "preguntas":
+	    	set_option("modalidad_ventas" , 0);				
+	    	carga_num_preguntas();
+			carga_buzon();
+
+	        break;
+	    default:
+	    	set_option("modalidad_ventas" , 0);				
+			carga_compras_usuario();		
+	        break;
+
+		
+	} 
+
 }

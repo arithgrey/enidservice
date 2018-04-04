@@ -58,22 +58,22 @@ class Afiliados extends REST_Controller{
     function metodos_disponibles_pago_GET(){
 
         $param=  $this->get();         
-        $id_usuario = $this->sessionclass->getidusuario();       
-        $param["id_usuario"] = $id_usuario;
-        $forma_pago=  $this->afiliadosmodel->get_metodos_de_pago_registrados($param);
+        /*
+        $forma_pago =  
+        $this->afiliadosmodel->get_metodos_de_pago_registrados($param);
             
-                    
             $data["forma_pago"] = $forma_pago;          
-            $data["flag_registro_previo"]     =0;
+            
             if (count($forma_pago) > 0 ){
-                $data["flag_registro_previo"]     =1;
+                $data["flag_registro_previo"]=1;
             }
-
-            $data["bancos"] = $this->afiliadosmodel->get_bancos();
-            $data["usuario"] = $this->afiliadosmodel->get_nombre_usuario($param);
-            $this->load->view("afiliado/form_forma_pago" , $data);  
+        */        
+        $data["flag_registro_previo"]= 0;
+        $data["bancos"] = $this->afiliadosmodel->get_bancos();
+        $data["usuario"] = $this->afiliadosmodel->get_nombre_usuario($param);
+        $this->load->view("afiliado/form_forma_pago" , $data);  
              
-        /**/
+        
     }
     /**/
     function cuenta_afiliado_PUT(){

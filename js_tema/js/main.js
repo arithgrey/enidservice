@@ -9,8 +9,6 @@ var option = [];
 $("footer").ready(function(){
 	now = $(".now").val();
 	in_session =  $(".in_session").val();		
-	//$(".text-filtro-enid").click(show_fields_mov);
-	//$(".more-info-f").click(carga_contenido);		
 	$("#form_contacto").submit(envia_comentario);		
 	$(".btn_enviar_email_prospecto").click(function(){
 		$(".form_enid_contacto").submit();
@@ -22,11 +20,6 @@ $("footer").ready(function(){
 	$(".menu_notificaciones_progreso_dia").click(metricas_perfil);
 	metricas_perfil();
 	set_titulo_web($(".titulo_web").val());					
-
-	/**/
-	//$(".btn_ejemplos_disponibles").click(carga_ejemplos_disponibles);
-	//$(".tipo_negocio_ej").change(carga_ejemplos_disponibles);	
-	
 	
 
 	/**/
@@ -39,32 +32,7 @@ $("footer").ready(function(){
 function get_alerta_enid(place ,  msj ){
 	llenaelementoHTML( place ,  "<span class='alerta_enid'>" + msj + "</span>");
 }
-/*
-function carga_data_empresa(){	
-	
-	
-	url  =  "../enid/index.php/api/emp/nombre_empresa/format/json/";		
-	id_empresa =  $(".id_empresa").val();
-	$.ajax({
 
-		url : url, 
-		data : {"id_empresa" :  id_empresa },		
-		beforeSend : function(){
-			show_load_enid(".place_nombre_empresa", " ... " , 1); 
-
-		}
-	}).done(function(data){
-
-		console.log(data);
-		$(".place_nombre_empresa").empty();
-		nombre_empresa= data[0].nombreempresa;
-		llenaelementoHTML(".nombre_empresa" , nombre_empresa );
-
-	}).fail(function(){
-		show_error_enid(".place_nombre_empresa" , "Error al cargar, reporte al administrado.");   			
-	});
-}
-*/
 /**/
 function existeFecha2(fecha){
         var fechaf = fecha.split("-");
@@ -78,88 +46,6 @@ function existeFecha2(fecha){
 
         return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
 }
-/*
-function valida_format_date(fecha_inicio , fecha_termino , place ,  mensaje ){
-
-	fecha_inicio =  $(fecha_inicio).val();
-	fecha_termino =  $(fecha_termino).val();
-	var fecha_actual =  new Date();
-
-
-
-	año_inicio =  fecha_inicio.substring(0 ,4);
-	año_inicio = parseInt(año_inicio);
-
-	año_termino =  fecha_termino.substring(0 ,4);
-	año_termino = parseInt(año_termino);
-
-	mes_inicio  =  fecha_inicio.substring(5 ,7);
-	mes_inicio = parseInt(mes_inicio);
-
-	mes_termino  =  fecha_termino.substring(5 ,7);
-	mes_termino = parseInt(mes_termino);
-
-
-	dia_inicio =  fecha_inicio.substring(8, 10);
-	dia_inicio = parseInt(dia_inicio);
-
-	dia_termino =  fecha_termino.substring(8, 10);
-	dia_termino = parseInt(dia_termino);
-
-
-	dia  =  fecha_actual.getDate();	
-	dia =  parseInt(dia);
-	mes =  fecha_actual.getMonth() +1;
-	mes =  parseInt(mes);
-	año =  fecha_actual.getFullYear();
-	año =  parseInt(año);
-
-
-	mensaje_cliente =  ""; 
-	flag_fecha = 0; 
-	flag2 = 0;
-
-
-	if (año_inicio >=  año &&  año_termino >= año){
-
-		if (mes_inicio >=  mes && mes_termino >= mes  ||   año_inicio < año_termino  ){
-
-		}else{			
-			flag_fecha  ++;  				
-		}
-	}else{
-		flag_fecha  ++;  
-		
-	}
-
-	if (flag_fecha > 0 ){		
-		llenaelementoHTML(place , "<span class='alerta_enid'>"+mensaje+"</span>");							
-	}
-
-
-	if(existeFecha2(fecha_inicio) ==  true){		
-	}else{
-		flag_fecha ++;
-		llenaelementoHTML(place , "<span class='alerta_enid'>Indique sólo fechas reales</span>");							
-	}
-
-	if(existeFecha2(fecha_termino) ==  true){		
-	}else{
-		flag_fecha ++;
-		llenaelementoHTML(place , "<span class='alerta_enid'>Indique sólo fechas reales</span>");							
-	}
-	fecha_ini =  new Date(año_inicio , mes_inicio , dia_inicio);
-	fecha_ter =  new Date(año_termino , mes_termino , dia_termino);
-	if (fecha_ini> fecha_ter) {
-		flag_fecha ++;
-		llenaelementoHTML(place , "<span class='alerta_enid'>La fecha inicio no puede ser mayor a la de termino </span>");								
-	}
-	if (flag_fecha == 0 ) {
-		$(place).empty();
-	}
-	return flag_fecha;	
-}
-*/
 /**/
 function validate_format_num_pass( input , place , num  ){
 
@@ -329,8 +215,6 @@ function valida_tel_form(input ,  place_msj ){
 	return flag; 
 }	
 /**/
-
-/**/
 function limpia_inputs(){
 	$(".form-control").val("");
 }
@@ -365,50 +249,7 @@ function showonehideone( elementomostrar , elementoocultar  ){
 	$(elementomostrar).show();
 	$(elementoocultar).hide();
 }
-/*
-function getidstringanddinamicelement(completa, elementomostrar , elementoocultar){
 
-	bandera =0; 
-	id="";
-
-	for(var x in completa){
-
-			if (bandera>0) {
-				id += completa[x];
-			}
-
-			if (completa[x] == "_") {
-				bandera++;
-			}
-
-
-	}
-	
-	dinamicinput =  elementomostrar + id;
-	dinamicpnombre =  elementoocultar+ id;
-	showonehideone( dinamicinput , dinamicpnombre  );
-	return id;
-}
-**/
-/*
-function getidstringcadena(completa){
-
-	bandera =0; 
-	id="";
-
-	for(var x in completa){
-
-			if (bandera>0) {
-				id += completa[x];
-			}
-
-			if (completa[x] == "_") {
-				bandera++;
-			}
-	}
-	return id;
-}
-*/
 /**/
 function valEmail(valor){
     re=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/
@@ -434,10 +275,11 @@ function valida_l_precio(input ,  l , place , mensaje_user ){
 	}
 }
 /**/
+/*
 function  suscribenewsletters(e) {
 	
 	EMAIL =  $("#mce-EMAIL").val();
-	/*Validamos que sea mail desde la vista */
+
 		if (valEmail(EMAIL) ==  true ) {
 
 				url = "../enid/index.php/api/newslettercontrolador/registrarCorreo/Format/json/";
@@ -447,19 +289,18 @@ function  suscribenewsletters(e) {
 					llenaelementoHTML("#mce-error-response", "");
 				
 				}).fail(function(){				
-					//alert("#mce-error-response", genericresponse[0]);					
+					
 				});
 
 		}else{
 
 				llenaelementoHTML("#mce-error-response" , "Lo sentimos, ingresa un email correcto para completar la solicitud");
 		}
-
-
 	$(".progress").show();
 	$(".progress-xs").show();
 	return false;
 }
+*/
 function show_section_dinamic_button(seccion){
 
 	if ($(seccion).is(":visible")) {
@@ -469,109 +310,6 @@ function show_section_dinamic_button(seccion){
 		$(seccion).show();
 	}	
 }
-/*
-function show_section_dinamic_arrow(dinamic_section , id_section , new_class_up , new_class_down){
-	if ($(dinamic_section).is(":visible")) {		
-		$(id_section).removeClass(new_class_down);		
-		$(id_section).addClass(new_class_up);				
-	}else{			
-		$(id_section).removeClass(new_class_up);		
-		$(id_section).addClass(new_class_down);		
-	}
-}
-*/
-/*
-function show_section_dinamic_on_click(dinamic_section){
-
-	if ($(dinamic_section).is(":visible")) {
-		$(dinamic_section).hide();
-	}else{
-
-		$(dinamic_section).show();
-	}
-
-}
-*/
-/*
-function updates_send(url , data_send ){
-
-	$.post(url , data_send ).done(function(data){
-
-	}).fail(function(){
-		alert("Falla al actualizar");
-	});
-
-}
-
-function updates_send_test(url , data_send ){
-
-	$.post(url , data_send ).done(function(data){
-
-		
-	}).fail(function(){
-		
-	});
-}
-function actualiza_data_test(url , data_send ){
-	$.ajax({
-	   url: url,
-	   type: 'PUT',
-	   data : data_send  }).done(function(data){
-	   		
-	}).fail(function(){
-	   		alert("falla al intentar actualizar");
-	});
-}
-function actualiza_data(url , data_send ){
-	$.ajax({
-	   url: url,
-	   type: 'PUT',
-	   data : data_send  }).done(function(data){
-	   		
-	}).fail(function(){
-	   	
-	});
-}
-
-function registra_data(url , data_send ){
-
-	$.post(url , data_send ).done(function(data){
-		
-	}).fail(function(){
-		
-	});
-}
-
-
-function registra_data_test(url , data_send ){
-
-	$.post(url , data_send ).done(function(data){
-		alert(data);
-	}).fail(function(){
-		
-	});
-}
-function eliminar_data(url , data_send ){
-	$.ajax({
-	   url: url,
-	   type: 'DELETE',
-	   data : data_send }).done(function(data){
-	   	
-	}).fail(function(){
-	   		
-	});
-}
-function eliminar_data_test(url , data_send ){
-	$.ajax({
-	   url: url,
-	   type: 'DELETE',
-	   data : data_send }).done(function(data){
-	   	
-	}).fail(function(){
-	   		
-	});
-}
-*/
 function exporta_excel(){
 	
     $("#datos_a_enviar").val( $("<div>").append( $("#print-section").eq(0).clone()).html());
@@ -666,37 +404,6 @@ function dinamic_t(){
     }  
 }
 
-/*
-function show_fields_mov(){	
-	seccion =  ".hidden-field-mov";
-	if ($(seccion).is(":visible")) {		
-		$(seccion).hide();		
-		$(".text-filtro-enid").text(" + Filtros");
-	}else{
-		$(seccion).show();
-		$(".text-filtro-enid").text(" - Filtros");
-	}	
-}
-*/
-/*
-function carga_contenido(){
-	
-	seccion =  ".show_descripcion";
-
-	if ($(seccion).is(":visible")) {		
-		$(".hiddden_descripcion").show();
-		$(".more-info-f-up").show();
-		$(".more-info-f-down").hide();
-		$(".show_descripcion").hide();
-	}else{
-		
-		$(".hiddden_descripcion").hide();
-		$(".more-info-f-up").hide();
-		$(".more-info-f-down").show();
-		$(".show_descripcion").show();
-	}
-}
-*/
 /**/
 function envia_comentario(e){	
 
@@ -930,7 +637,6 @@ function set_tarea(n_tarea){
 }
 /**/
 function quitar_espacios_numericos(nuevo_valor){
-
 	/**/
 	valor_numerico  ="";
 		for(var a = 0; a < nuevo_valor.length; a++){		
@@ -945,33 +651,10 @@ function quitar_espacios_numericos(nuevo_valor){
 		}
 	return valor_numerico;	
 }
-/************************comentarios a persona*************/
-/************************comentarios a persona*************/
-/************************comentarios a persona*************/
-
-/*
-function carga_ejemplos_disponibles(e){	
-	url =  "../portafolio/index.php/api/portafolio/proyecto/labor_venta/format/json/";	
-	data_send =  $(".form_busqueda_proyectos").serialize();	
-	$.ajax({
-			url : url , 
-			type: "GET",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_muestras_proyectos" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){											
-			llenaelementoHTML(".place_muestras_proyectos" , data);			
-	}).fail(function(){		
-		show_error_enid(".place_muestras_proyectos" , "Error ... ");
-	});
-	e.preventDefault();	
-}
-*/
+/**/
 function quita_espacios_input(){		
 
 	valor = $(".telefono_info_contacto").val();
-	/**/
 	nuevo =  quitar_espacios_numericos(valor);
 	$(".telefono_info_contacto").val(nuevo);	
 	/**/	
@@ -1032,109 +715,6 @@ function ordena_table_general(){
 function  muestra_campos_adicionales_lead(){
 	$(".parte_oculta_lead").show();	
 }
-/*
-function set_flag_carga_preferencias(n_flag){
-
-	flag_carga_preferencias =  n_flag;
-}
-*/
-/*
-function get_flag_carga_preferencias(){
-	return flag_carga_preferencias;
-}
-*/
-/*
-function verifica_tipo_negocio(e){
-
-	url =  "../q/index.php/api/ventas/negocio_q/format/json/";		
-	data_send = {"q" :  $(".tipo_negocio_b").val()};		
-	
-	$.ajax({
-			url : url , 
-			type: "GET",
-			data: data_send, 
-			beforeSend: function(){
-				//show_load_enid(".place_metricas_labor_venta" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){						
-
-
-		tipo_negocio =  data[0].idtipo_negocio;		
-		set_tipo_negocio(tipo_negocio);					
-		registrar_posiblie_cliente();
-
-		
-	}).fail(function(){		
-		
-
-	});	
-	
-	e.preventDefault();
-}
-function carga_tipo_negocio(){
-
-	url =  "../q/index.php/api/ventas/tipo_negocio_q/format/json/";		
-	data_send = {"q" :  $(".tipo_negocio_b").val()};		
-
-	$.ajax({
-			url : url , 
-			type: "GET",
-			data: data_send, 
-			beforeSend: function(){
-				//show_load_enid(".place_metricas_labor_venta" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){						
-
-		z =0;		
-		options ="";
-		for(var x in data) {
-			tipo_negocios_arr[z]=  data[x].nombre;
-			options += '<option value="'+data[x].nombre+'" />';
-			z++;
-		}
-
-		document.getElementById('info-tipos-negocios').innerHTML = options;		
-		
-	}).fail(function(){		
-		show_error_enid(".place_metricas_labor_venta" , "Error ... ");
-	});	
-}
-*/
-/*
-function registrar_posiblie_cliente(){
-
-		url =  "../base/index.php/api/ventas/prospecto/format/json/";		
-		comentario =  $(".note-editable").html();
-		$("#comentario").val(comentario);
-		data_send =  $(".form_referido").serialize();			
-
-		$.ajax({
-			url : url , 
-			type: "POST",
-			data: data_send, 
-				beforeSend: function(){
-					show_load_enid(".place_registro_prospecto" , "Cargando ... ", 1 );
-			}
-		}).done(function(data){						
-																			
-
-			if (data.num_usuario == 0){	
-					
-				$("#btn_agendar_llamada_base_marcacion").tab("show");
-				$("#base_tab_clientes").tab("show");						
-				reset_contenido_form_lanza_lista_de_marcacion();					
-
-					
-			}else{
-
-				llenaelementoHTML(".place_registro_prospecto" , "<span class='alerta_enid'> El usuario ya se encuentra registrado, prueba con otro!</span>");
-			}
-
-		}).fail(function(){		
-			show_error_enid(".place_registro_prospecto" , "Error ... ");
-		});		
-}
-*/
 /**/
 function muestra_cargando_proceso_enid(){
 	if($(".procesando_solicutud_enid_service").is(":visible")) {
@@ -1172,15 +752,18 @@ function desbloqueda_form(form){
 }
 /**/
 function transforma_mayusculas(x){
+	
 	var text =  x.value; 
 	text.trim();
 	text_mayusculas =  text.toUpperCase();  	
 	x.value =  text_mayusculas;
 }
-/**/
+/****/
 function valida_menu_superior(){
 	width_dispositivo =  $(window).width();
 	if (width_dispositivo< 800){
 		$(".contenedor_busqueda_global_enid_service").hide();
+		$(".boton_vender_global").hide();
 	}
 }
+/**/

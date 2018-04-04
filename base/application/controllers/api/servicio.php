@@ -98,19 +98,8 @@ class Servicio extends REST_Controller{
       "id_clasificacion");
 
     $this->response($select);
-  }
-  function get_precio_venta($costo){
-
-        $q["costo"] =  $costo;
-        $url = "pagos/index.php/api/";         
-        $url_request=  $this->get_url_request($url);
-        $this->restclient->set_option('base_url', $url_request);
-        $this->restclient->set_option('format', "json");        
-        $result = $this->restclient->get("cobranza/calcula_precio_producto/format/json/" , $q);        
-        $precio_publico =  $result->response;      
-        return json_decode($precio_publico , true);
-    }
-    /**/
+  }  
+  /**/
     function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];
@@ -121,18 +110,20 @@ class Servicio extends REST_Controller{
     function nuevo_POST(){      
       /**/
       if($this->input->is_ajax_request()){ 
-        $param =  $this->post();    
-        $costo =  $param["costo"];
-        $precio =  $this->get_precio_venta($costo);
-        $param["precio"] =  $precio["precio"];
+        $param =  $this->post();              
+
+        
+        
         
         $tags =  $this->create_tags($param);             
+
         $text_tags =  implode($tags, ",");
 
         $param["metakeyword"] =  $text_tags;
         $param["id_usuario"] = $this->sessionclass->getidusuario();
         $db_response = $this->serviciosmodel->create_servicio($param);    
         $this->response($db_response);    
+        
       }else{
         $this->response("error");
       }
@@ -246,15 +237,6 @@ class Servicio extends REST_Controller{
     $this->response($db_response);
   }
   /**/
-  /*
-  function servicios_GET(){      
-    
-    $param =  $this->get();
-    $db_response =  $this->serviciosmodel->get_servicios($param);
-    $data["servicios"] = $db_response;
-    $this->load->view("servicios/lista" , $data);
-  }
-  */
   function servicios_grupo_GET(){
       
     $param =  $this->get();
@@ -276,7 +258,18 @@ class Servicio extends REST_Controller{
         $result = $this->restclient->get("cobranza/calcula_costo_envio/format/json/", $param);
         $response =  $result->response;        
         return json_decode($response , true);
-    }
+  }
+  /**/
+  function get_porcentaje_comision($param){
+      
+      $url = "pagos/index.php/api/";         
+      $url_request=  $this->get_url_request($url);
+      $this->restclient->set_option('base_url', $url_request);
+      $this->restclient->set_option('format', "json");        
+      $result = $this->restclient->get("cobranza/comision/format/json/", $param);
+      $response =  $result->response;        
+      return json_decode($response , true); 
+  }
   /**/
   function especificacion_GET(){
 
@@ -292,24 +285,19 @@ class Servicio extends REST_Controller{
         $this->crea_data_costo_envio();            
         $data["costo_envio"] = $this->calcula_costo_envio($this->crea_data_costo_envio());  
       }
-      
-      $precios_servicio =  $this->serviciosmodel->get_precios_servicio($param);      
-
-      $costo =  $precios_servicio[0]["costo"];  
-      $precios_servicio[0]["precio_publico"]= $this->get_precio_venta($costo);
-      $data["precios_servicio"] =  $precios_servicio;
 
       $clasificaciones=  $this->carga_clasificaciones($data["servicio"]);
       $data["clasificaciones"] =  $clasificaciones;
-      $data["ciclos_facturarion"] =  $this->serviciosmodel->get_ciclos_facturacion($param);      
+      $data["ciclos"] =  $this->serviciosmodel->get_ciclos_facturacion($param);      
       $data["id_usuario"] = $this->sessionclass->getidusuario();      
       $data["imgs"] =  $this->carga_imagenes_servicio($id_servicio);
       $data["url_request"] = $this->get_url_request("");
-      $prm["id_servicio"] =  $id_servicio;      
-      $data["ciclo_facturarion_servicio"] =  
-      $this->get_ciclos_facturacion_servicio($prm);
+      $prm["id_servicio"] =  $id_servicio;           
       $data["num"] = $param["num"];
+
       /**/
+      $prm["id_servicio"]=$id_servicio;
+      $data["porcentaje_comision"] = $this->get_porcentaje_comision($prm);      
       $this->load->view("servicios/detalle" , $data);        
   }    
   /**/
@@ -399,21 +387,7 @@ class Servicio extends REST_Controller{
         $response  =  $result->response;      
         return json_decode($response , true);
         
-  }
-
-  /**/
-  /*
-  function terminos_servicios_GET(){
-
-    $param =  $this->get();
-    $data["info_servicio"] =  $this->serviciosmodel->get_info_servicio($param);
-    $data["precios_servicio"] =  $this->serviciosmodel->get_precios_servicio($param);
-    $data["terminos_servicio"] =  $this->serviciosmodel->get_terminos_servicio($param);
-    $data["terminos_enid"] = $this->serviciosmodel->get_terminos_disponibles_join_servicio($param);
-
-    $this->load->view("servicios/terminos_servicio" , $data);      
-  }
-  */
+  }  
   /**/
   function terminos_servicios_POST(){
 

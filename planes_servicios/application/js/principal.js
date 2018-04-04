@@ -106,8 +106,6 @@ function carga_info_servicio(e){
 /**/
 function carga_informacion_servicio(num){
 
-
-
 		$(".contenedor_busqueda").hide();
 		url = "../base/index.php/api/servicio/especificacion/format/json/";
 		data_send = {servicio : get_option("servicio"), "num" : num}
@@ -197,8 +195,6 @@ function carga_informacion_servicio(num){
 }
 /**/
 function lista_terminos_disponibles(){
-	
-
 
 		url = "../base/index.php/api/servicio/terminos_servicios/format/json/";
 		data_send = {servicio : get_option("servicio")}
@@ -575,7 +571,7 @@ function registrar_ciclo_facturacion(e){
 				}
 		}).done(function(data){
 				
-				carga_informacion_servicio(1);
+				carga_informacion_servicio(4);
 			
 		}).fail(function(){
 			show_error_enid(".place_servicios" , "Error ... ");
@@ -940,8 +936,6 @@ function  carga_listado_categorias_segundo_nivel(e){
 	$(".cuarto_nivel_seccion").empty();
 	$(".quinto_nivel_seccion").empty();
 	$(".sexto_nivel_seccion").empty();
-
-
 	data_send = {"modalidad": get_modalidad() , "padre":get_padre() , "nivel" : get_nivel()};
 
 	$.ajax({
@@ -1141,8 +1135,9 @@ function registra_nuevo_servicio(){
 	set_valores_categorias();
 	/**/
 	
-	data_send = {"nombre_servicio" : get_nombre_servicio() , "flag_servicio" : get_modalidad() , "costo" :get_costo() , "ciclo_facturacion": get_option("id_ciclo_facturacion") , "primer_nivel":get_categoria_primer_nivel() , "segundo_nivel":get_categoria_segundo_nivel() , "tercer_nivel":get_categoria_tercer_nivel() , "cuarto_nivel":get_categoria_cuarto_nivel() , "quinto_nivel":get_categoria_quinto_nivel()};
+	data_send = {"nombre_servicio" : get_nombre_servicio() , "flag_servicio" : get_modalidad() , "precio" :get_costo() , "ciclo_facturacion": get_option("id_ciclo_facturacion") , "primer_nivel":get_categoria_primer_nivel() , "segundo_nivel":get_categoria_segundo_nivel() , "tercer_nivel":get_categoria_tercer_nivel() , "cuarto_nivel":get_categoria_cuarto_nivel() , "quinto_nivel":get_categoria_quinto_nivel()};
 	url =  "../base/index.php/api/servicio/nuevo/format/json/";
+	
 	
 	$.ajax({		
 			url : url,
@@ -1152,7 +1147,8 @@ function registra_nuevo_servicio(){
 
 			}
 		}).done(function(data){
-				
+			
+			
 			console.log(data);
 			
 			set_option("servicio", data);
@@ -1374,8 +1370,7 @@ function agrega_metakeyword(e){
 	e.preventDefault();
 }
 /**/
-function eliminar_tag(text , id_servicio ){
-
+function eliminar_tag(text, id_servicio){
 	/**/
 	url ="../base/index.php/api/servicio/metakeyword_usuario/format/json/";	
 	data_send = {"tag" : text , "id_servicio" : id_servicio };	
@@ -1383,13 +1378,10 @@ function eliminar_tag(text , id_servicio ){
 			url : url,
 			type : "DELETE", 		
 			data : data_send,  			
-			beforeSend:function(){
-				//show_load_enid(".place_servicios" , "Cargando ... ", 1 );	
-		}
+			beforeSend:function(){}
 	}).done(function(data){
-
 		/**/
-		carga_informacion_servicio(2);
+		carga_informacion_servicio(3);
 		/**/
 	}).fail(function(){
 		show_error_enid(".place_servicios" , "Error ... ");
@@ -1448,7 +1440,7 @@ function actualiza_servicio_usado(){
 				}
 	}).done(function(data){
 			
-		carga_informacion_servicio(2);
+		carga_informacion_servicio(4);
 	}).fail(function(){
 		show_error_enid(".place_servicios" , "Error ... ");
 	});		
@@ -1487,13 +1479,9 @@ function actualiza_ciclo_facturacion(){
 				url : url,
 				type : "PUT", 		
 				data : data_send,  			
-				beforeSend:function(){
-					//show_load_enid(".place_servicios" , "Cargando ... ", 1 );	
-				}
-		}).done(function(data){
-				
-				carga_informacion_servicio(2);
-			
+				beforeSend:function(){}
+		}).done(function(data){				
+			carga_informacion_servicio(4);
 		}).fail(function(){
 			show_error_enid(".place_servicios" , "Error ... ");
 		});	
@@ -1516,7 +1504,7 @@ function actualiza_cantidad(){
 				}
 		}).done(function(data){
 				
-				carga_informacion_servicio(2);
+				carga_informacion_servicio(4);
 				set_option("seccion_a_recorrer" , ".text_cantidad");
 				set_option("flag_recorrido" , 1);
 

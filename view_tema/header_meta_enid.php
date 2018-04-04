@@ -5,7 +5,7 @@
 ?>    
     <title>
         <?=$titulo?> 
-        Compra y vende tus productos aquí!
+        Anuncia tus productos o servicios en Enid Service
     </title>    
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">        

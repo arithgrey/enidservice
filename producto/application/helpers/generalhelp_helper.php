@@ -1,5 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**/
+function valida_maximo_compra($flag_servicio, $existencia){
+
+  if($flag_servicio ==  1){
+    return 100;
+  }else{
+    return $existencia;
+  }
+}
+/**/
 function crea_nombre_publicador($nombre , $id_usuario){
   $nombre =  $nombre[0]["nombre"]; 
   return "<div>
@@ -141,15 +150,24 @@ function get_text_nombre_servicio($nombre_servicio){
 }
 
 /**/
-function valida_text_servicio($flag_servicio , $precio_unidad , $flag_precio_definido ){
+function valida_text_servicio($flag_servicio , $precio_unidad , $id_ciclo_facturacion){
     
     $text = "1 Pza ". $precio_unidad."MXN";  
     if ($flag_servicio == 1 ){      
-      if ($flag_precio_definido ==  1) {
-          $text = $text =  $precio_unidad."MXN";     
+        
+        if($id_ciclo_facturacion != 9){
+          $text = $precio_unidad."MXN";       
+        }else{
+          $text ="Precio a convenir";       
+        }
+        
+      
+    }else{
+      if($precio_unidad >0) {
+        $text = $precio_unidad."MXN";       
       }else{
-            $text = $text =  "Precio a convenir";     
-      }    
+        $text ="Precio a convenir";       
+      }
     }
     $text_final ='
     <div class="price-shipping">

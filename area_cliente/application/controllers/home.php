@@ -14,7 +14,8 @@ class Home extends CI_Controller{
         $data["url_img_post"] = "";        
         $data["servicios"] = $this->principal->get_servicios();         
         $data["action"] =valida_valor_variable($this->input->get() , "action");    
-            
+        
+        /**/            
         $valoraciones=  $this->resumen_valoraciones($this->sessionclass->getidusuario());
         $data["valoraciones"] =$valoraciones["info_valoraciones"]; 
         /**/

@@ -1,12 +1,10 @@
 <?php
 
-  $info_ext =  $info_solicitud["info_solicitud_extra"];
+  $info_ext =  $info_solicitud_extra;
   $plan = $info_ext["plan"];
   $num_ciclos = $info_ext["num_ciclos"];
   $ciclo_facturacion = $info_ext["ciclo_facturacion"];
-  $dominio = $info_ext["dominio"];
-  $extension_dominio = $info_ext["extension_dominio"];
-  $dominio_completo =  "www.".$dominio.$extension_dominio;
+  
   
 
 ?>
@@ -32,9 +30,7 @@
     <input type="hidden" name="num_ciclos" class="num_ciclos"  value="<?=$num_ciclos;?>">
     <input type="hidden" name="ciclo_facturacion" class="ciclo_facturacion"  
     value="<?=$ciclo_facturacion;?>">
-    
-    <input type="hidden" name="dominio" class="dominio"  value="<?=$dominio_completo;?>">
-    
+  
     <?php if($in_session == 0){?>
     <div class="row">
       <div class=" col-lg-6">        

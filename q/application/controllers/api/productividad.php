@@ -74,6 +74,20 @@ class productividad extends REST_Controller{
         $this->productividad_usuario_model->get_notificaciones_usuario_perfil($param);        
         /**/
         $id_perfil =  $db_response["info_notificaciones"]["perfil"]; 
+
+        $prm["modalidad"]=1;
+        $prm["id_usuario"] =  $id_usuario;                
+        
+        /**/            
+        $mensajes=  $this->carga_mensajes_sin_leer($prm);                    
+        $db_response["info_notificaciones"]["mensajes_sin_leer"]=
+        $mensajes["modo_vendedor"];
+        $db_response["info_notificaciones"]["respuestas"]=$mensajes["modo_cliente"];
+        /**/
+
+        /**/
+
+        $db_response["id_usuario"] = $id_usuario;
         /**/    
         switch ($id_perfil) {
             
@@ -90,17 +104,9 @@ class productividad extends REST_Controller{
                 $this->response(get_tareas_pendientes_vendedor($db_response));                
                 break;                        
             case 20:                   
-
-                $prm["modalidad"]=1;
-                $prm["id_usuario"] =  $id_usuario;                
-                
-                /**/                
-                $db_response["info_notificaciones"]["mensajes_sin_leer"]
-                = 
-                $this->carga_mensajes_sin_leer($prm);
-
+                /**/
                 $this->response(get_tareas_pendienetes_usuario_cliente($db_response));
-                //$this->response($db_response["info_notificaciones"]["mensajes_sin_leer"]);
+               
                 
                 break;    
             default:

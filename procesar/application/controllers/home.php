@@ -16,8 +16,8 @@ class Home extends CI_Controller{
     function set_option($key , $val){
         $this->option[$key] =  $val;
     }
-     function crea_data_costo_envio(){        
-        $param["flag_envio_gratis"]=   $this->get_option("servicio")[0]["flag_envio_gratis"];   
+     function crea_data_costo_envio($servicio){        
+        $param["flag_envio_gratis"]=  $servicio[0]["flag_envio_gratis"];   
         return $param;
     }
     /**/    
@@ -26,48 +26,31 @@ class Home extends CI_Controller{
         $data = 
         $this->val_session("Registra tu cuenta en nuestro sistema y recibe asistencia al momento."); 
         $data["meta_keywords"] = '';
-        $data["desc_web"] = 
-        "Registra tu cuenta en nuestro sistema y recibe  asistencia 
-        al momento.";
+        $data["desc_web"] = "Registra tu cuenta  y recibe  asistencia al momento.";
         $data["url_img_post"] = create_url_preview("recomendacion.jpg");
         $num_hist= get_info_usuario( $this->input->get("q"));   
         $num_usuario_referencia= get_info_usuario( $this->input->get("q2"));                    
         $data["q2"]= $num_usuario_referencia;
         $param =  $this->input->get();
-        /**/
-        $data_servicio =  $this->principal->resumen_servicio($param); 
-        $this->set_option("servicio" , $data_servicio );
-        /**/
-        $data["costo_envio"] = $this->calcula_costo_envio($this->crea_data_costo_envio());
+
+        $data["servicio"]  =  $this->principal->resumen_servicio($param);         
+
+        $data["costo_envio"] ="";
+        if($data["servicio"][0]["flag_servicio"] ==  0) {
+            $data["costo_envio"] = 
+            $this->calcula_costo_envio($this->crea_data_costo_envio($data["servicio"]));            
+        }
         
         
-        $costo =  $data_servicio[0]["costo"];
-        $info_solicitud["resumen_servicio"]= $data_servicio;
-        $data["precio_publico"] = $this->get_precio_venta($costo);
-        
-        $info_solicitud["info_solicitud_extra"] =  $param; 
-        $data["info_solicitud"] = $info_solicitud;
-        $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
-        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
+        $data["info_solicitud_extra"] =  $param;         
+        $data["clasificaciones_departamentos"] = "";
 
         $this->principal->crea_historico( 2892 , 0, 0 );                 
         $this->principal->show_data_page($data, 'home');                          
         
 
     }
-    /**/
-    function get_precio_venta($costo){
 
-        $q["costo"] =  $costo;
-        $url = "pagos/index.php/api/";         
-        $url_request=  $this->get_url_request($url);
-        $this->restclient->set_option('base_url', $url_request);
-        $this->restclient->set_option('format', "json");        
-        $result = $this->restclient->get("cobranza/calcula_precio_producto/format/json/" , $q);
-        $precio_publico =  $result->response;
-        return json_decode($precio_publico , true);
-            
-    }
     /**/
     function get_url_request($extra){
 

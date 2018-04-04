@@ -17,9 +17,9 @@ class Home extends CI_Controller{
     /**/   
     function index(){
         
-        $data = $this->val_session("");                    
-        $data["meta_keywords"] = "";
-        $data["desc_web"] = "";                                    
+        $data = $this->val_session("¿Necesitas que más clientes encuentren tu negocio?");                    
+        $data["meta_keywords"] = "Comprar, vender, ciudad de México, página web, tienda en linea";
+        $data["desc_web"] = "";
         $data["url_img_post"] = create_url_preview("promo.png");        
         $data["clasificaciones_departamentos"] = 
         $this->carga_data_clasificaciones_busqueda();
@@ -48,10 +48,11 @@ class Home extends CI_Controller{
         
         $data["servicios"] =  $servicios;
 
+        
                 
         if ($servicios["num_servicios"] > 0) {
             
-            /**/
+          
             $data["url_request"]=  $this->get_url_request("");
             $data["busqueda"] =  $q;     
             
@@ -78,7 +79,9 @@ class Home extends CI_Controller{
         }else{
             $this->principal->crea_historico($num_hist);
             $this->principal->show_data_page($data , 'sin_resultados');                              
-        }        
+        } 
+        
+
     }
     /**/
     function agrega_vista_servicios($data_servicio){

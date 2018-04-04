@@ -51,7 +51,9 @@ function registra_img_servicio(e){
             cache: false,
             contentType: false,
             processData: false , 
-            beforeSend : function(){}
+            beforeSend : function(){
+                $(".guardar_img_enid").hide();
+            }
 
     }).done(function(data){
         

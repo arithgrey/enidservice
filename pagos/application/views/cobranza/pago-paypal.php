@@ -2,7 +2,7 @@
 		<div>							
 					<div>
 						<span class="white" style="background: black;padding: 4px;color: white;" >
-							1.- 
+							2.- 
 						</span>
 							Podrás 
 							<strong style="background: blue;color: white;">
@@ -25,22 +25,11 @@
 					 	<div style="margin-top: 10px;">
 						 	<center>
 							 	<a href="<?=$url_pago_paypal?>" 
-							 		style="background: blue;padding: 15px;color: white">
+							 		style="background: blue;padding: 15px;color: white!important">
 							 		Comprar ahora!
 							 	</a>
 						 	</center>
 					 	</div>
-					 </div>
-
-					 <br>
-					 <br>
-					 <div>
-						 <a class="strong white blue_enid_background"
-						 	style="padding: 15px;margin-top: 10px;
-						 	color: white!important;" 
-						 	href="<?=$url_pago_paypal?>">						 	
-						 	Pagar ahora!
-						 </a>
 					 </div>
 		</div>
 	</div>

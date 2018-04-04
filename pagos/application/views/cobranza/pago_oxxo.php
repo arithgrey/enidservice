@@ -2,7 +2,7 @@
 					<div>
 						<span 							
 							style="background: black;padding: 5px;color: white;" >
-							2.- 
+							1.- 
 						</span>
 						Aceptamos pagos en tiendas de autoservicio 
 						<strong>
@@ -21,8 +21,8 @@
 					 	</a>
 					 	<center>
 						 	<a 	href="<?=$url_pago_oxxo?>" 							
-								style="background-color: #00BD81 !important; 
-								color: white;padding: 15px;">						 	
+								style="background-color: #005780 !important; 
+								color: white!important;padding: 15px;">						 	
 									
 									 <i class="fa fa-print">
 									 </i>Imprimir órden de pago

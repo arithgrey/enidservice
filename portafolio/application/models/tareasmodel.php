@@ -167,7 +167,7 @@ class tareasmodel extends CI_Model{
                   GROUP BY t.id_tarea
                   ORDER BY 
                   t.fecha_registro 
-                  DESC";
+                  ASC";
 
     $result = $this->db->query($query_get);
     return $result->result_array();

@@ -7,6 +7,7 @@
 	$cantidad =  entrega_data_campo($recibo , "num_ciclos_contratados");
 	$precio =  entrega_data_campo($recibo , "precio");
 	$monto_a_pagar = entrega_data_campo($recibo , "monto_a_pagar");
+	
 
 ?>
 <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">

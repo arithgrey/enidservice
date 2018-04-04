@@ -223,17 +223,15 @@
         
         $modalidad =  $param["modalidad"];            
         $padre = $param["padre"];
-        $extra =  " AND padre =0";
-        if ($padre > 0){            
-            $extra =  " AND padre = ".$padre;
-        }
+        $extra =  "  padre = ".$padre;
+        
 
         $query_get = "SELECT 
             * 
             FROM 
             clasificacion
             WHERE 
-            flag_servicio  = '".$modalidad."' ".$extra;    
+             ".$extra;    
         $result =  $this->db->query($query_get);
         return $result->result_array();
 
@@ -256,7 +254,7 @@
     }
     /**/    
     function create_servicio($param){
-
+        
         $nombre_servicio =  $param["nombre_servicio"];        
         $flag_servicio =  $param["flag_servicio"];
         $primer_nivel  =   $param["primer_nivel"];
@@ -267,7 +265,14 @@
         $descripcion = "";  
         $metakeyword =  $param["metakeyword"];      
         $id_usuario = $param["id_usuario"];
-
+       
+        
+        $precio = $param["precio"];
+        $id_ciclo_facturacion = 5;
+        if ($flag_servicio ==  1){        
+            $id_ciclo_facturacion = $param["ciclo_facturacion"];
+        }
+        
         $query_insert ="INSERT INTO servicio(
                                             nombre_servicio,                             
                                             flag_servicio , 
@@ -278,7 +283,9 @@
                                             quinto_nivel, 
                                             descripcion ,  
                                             metakeyword,
-                                            id_usuario 
+                                            id_usuario ,
+                                            precio ,
+                                            id_ciclo_facturacion
                                 )
 
                         VALUES(
@@ -292,43 +299,16 @@
                             '".$quinto_nivel ."',                            
                             '".$descripcion."', 
                             '".$metakeyword."',
-                            '".$id_usuario."'
+                            '".$id_usuario."',
+                            '".$precio."',
+                            '".$id_ciclo_facturacion."'
                         )";
         
-        $this->db->query($query_insert);
-        $id_servicio =  $this->db->insert_id();  
-        $param["id_servicio"]=  $id_servicio;
-        $db_response_precio=  $this->insert_precio($param);
-        return $id_servicio;
+        $this->db->query($query_insert);        
+        return $this->db->insert_id();  
         
         
-    }
-    /**/
-    function insert_precio($param){
-        
-        $costo = $param["costo"];
-        $precio = $param["precio"];
-        $id_servicio = $param["id_servicio"];
-        $id_ciclo_facturacion = $param["ciclo_facturacion"];
-        $flag_servicio =  $param["flag_servicio"];
-       
-
-        $query_insert = "INSERT INTO precio(
-                            precio , 
-                            costo , 
-                            id_servicio , 
-                            id_ciclo_facturacion 
-                        ) 
-                    VALUES(
-                        '".$precio."' ,  
-                        '".$costo."' ,  
-                        '".$id_servicio."' , 
-                        '".$id_ciclo_facturacion."' 
-                    )";
-
-        return $this->db->query($query_insert);    
-        
-    }
+    }    
     /**/
     function get_precio_servicio($param){
         
@@ -482,9 +462,8 @@
         
         $servicio = $param["servicio"];
         $id_ciclo_facturacion =  $param["ciclo_facturacion"];
-        
         $query_update ="UPDATE 
-                            precio 
+                           servicio
                         SET        
                             id_ciclo_facturacion = '".$id_ciclo_facturacion."'
                             WHERE                             
@@ -497,8 +476,13 @@
     /**/
     function get_ciclos_facturacion($param){
 
-        $query_update ="SELECT * FROM 
-                            ciclo_facturacion";
+        $query_update ="SELECT 
+                        * 
+                        FROM 
+                        ciclo_facturacion
+                        WHERE 
+                        id_ciclo_facturacion != 5
+                        AND status =1";
         $result= $this->db->query($query_update); 
         return $result->result_array();
     }
@@ -506,15 +490,14 @@
     function update_precio_servicio($param){
 
         $servicio = $param["servicio"];
-        $costo = $param["costo"];
+        $precio = $param["precio"];
+        
         $query_update ="UPDATE 
-                            precio 
-                        SET 
-                            costo  = '".$costo."'
-                            WHERE 
-                            id_servicio = '".$servicio."'
-                        LIMIT 1";
-
+        servicio 
+        SET 
+            precio = $precio
+        WHERE 
+        id_servicio = $servicio LIMIT 1";
         return  $this->db->query($query_update);
         
 

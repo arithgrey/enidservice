@@ -22,7 +22,9 @@
             metakeyword_usuario, 
             existencia, 
             color,
-            id_usuario
+            id_usuario,
+            precio, 
+            id_ciclo_facturacion
           FROM
             servicio 
           WHERE id_servicio = '".$id_servicio."' LIMIT 1";

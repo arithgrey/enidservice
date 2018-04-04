@@ -15,6 +15,20 @@
         /**/
         $data_complete["objetivos_perfil"] =  $this->get_objetivos_perfil($param);
 
+        $data_complete["id_usuario"]=  $param["id_usuario"]; 
+        $data_complete["adeudos_cliente"] = $this->get_adeudo_cliente($param);
+        $data_complete["flag_direccion"] = 
+        $this->verifica_direccion_registrada_usuario($param);                
+        $data_complete["productos_anunciados"] = 
+        $this->valida_producto_anunciado($param);
+        /**/
+
+
+        $data_complete["valoraciones_sin_leer"] = 
+        $this->valida_valoraciones_sin_leer($param);
+        /**/
+
+        
         switch ($id_perfil){
             case 3:            
                 /**/                                  
@@ -67,10 +81,7 @@
             case 20:                                                
 
                 /**/
-                $data_complete["adeudos_cliente"] = $this->get_adeudo_cliente($param);
-                $data_complete["flag_direccion"] = 
-                $this->verifica_direccion_registrada_usuario($param);                
-                $data_complete["productos_anunciados"] = $this->valida_producto_anunciado($param);
+                
 
             break;
 
@@ -430,6 +441,27 @@
         $result =  $this->db->query($query_get);
         return $result->result_array()[0]["num"];
     }
+    /**/
+    private function valida_valoraciones_sin_leer($param){
+        $id_usuario =  $param["id_usuario"];
+        $query_get ="
+            SELECT 
+                COUNT(0)num
+            FROM 
+                servicio s 
+            INNER JOIN  
+                valoracion v
+            ON 
+                s.id_servicio =  v.id_servicio
+            WHERE 
+                s.id_usuario = $id_usuario
+            AND
+                leido_vendedor =0";
+
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["num"];
+    }   
+
 
 
 }

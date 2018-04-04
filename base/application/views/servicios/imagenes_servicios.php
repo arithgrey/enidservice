@@ -1,10 +1,8 @@
 <div style="margin-top: 10px;"></div>
 <?=n_row_12()?>
-<div class="col-lg-12">
-    <div class="strong black">                                                    
+    <div class="titulo_seccion_producto">                                                    
         <?=valida_text_imagenes(valida_valor_variable($servicio , "flag_servicio") , $imgs);?>
-    </div>                        
-</div>
+    </div>  
 <?=end_row()?>
 <?=n_row_12()?>
 <div class="gallery cf" style="overflow-x: scroll;  overflow-x: hidden;">    
@@ -19,7 +17,7 @@
                 $num_imgs ++;
             ?>
             <div>            
-                <div style="border-style: solid;position:absolute;z-index: 2000;color: white;" >
+                <div style="border-style: solid;position:absolute;z-index: 2000;color: white;background: black;" >
                     <i  
                     class="fa fa-times fa-2x foto_producto" 
                     id="<?=$id_imagen?>">                

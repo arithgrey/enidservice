@@ -84,11 +84,11 @@
                         </div>
                         <span class="btn_estado_cuenta">
                            <?=carga_estado_compra(
-                            $monto_a_liquidar,
-                            $id_recibo,
-                            $estado , 
-                            $status_enid_service,
-                            $modalidad
+                                $monto_a_liquidar,
+                                $id_recibo,
+                                $estado , 
+                                $status_enid_service,
+                                $modalidad
                             )?>
                         </span>
                       </div>
