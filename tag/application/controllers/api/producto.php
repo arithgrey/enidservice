@@ -430,7 +430,14 @@ class producto extends REST_Controller{
         $paginacion =   $this->pagination->create_links();  
         $this->response($paginacion);
     }
-    
+    /**/
+    function periodo_GET(){
+        /**/
+        $param = $this->get();
+        $servicios =  $this->qmodel->get_servicios_periodo_simple($param);
+        $data["servicios"]= $servicios;
+        $this->load->view("producto/simple" , $data);        
+    }    
     /**/
 
 

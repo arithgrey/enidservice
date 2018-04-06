@@ -18,7 +18,7 @@ class Inicio extends CI_Controller {
 
         /**/
 		$data = $this->val_session("Enid Service");        	            
-
+        $data["clasificaciones_departamentos"] = "";
         if($data["in_session"] == 1) {
             
             /**/
@@ -29,19 +29,15 @@ class Inicio extends CI_Controller {
                     /*General*/
                     
                     $saldos=  $this->get_saldo_usuario($id_usuario);
-                    $data["saldo_disponible"] = $saldos;
-                    $data["clasificaciones_departamentos"] = "";
+                    $data["saldo_disponible"] = $saldos;                    
                     $this->principal->show_data_page( $data , 'empresas_enid');
                     break;
                 /**/
                 case 1:                
                     /*Despliega las cuentas disponibles del usuario*/                    
-                    $prm["id_usuario"] = $id_usuario;
-                    $data["clasificaciones_departamentos"] = "";
+                    $prm["id_usuario"] = $id_usuario;                    
                     $data["bancos"] = $this->get_bancos_disponibles($prm);
                     $data["usuario"] = $this->get_usuario($prm);
-                    
-
                     $data["banca"] = valida_valor_variable($this->input->get("tarjeta"));   
 
                     $data["error"] =0;                    
@@ -50,14 +46,14 @@ class Inicio extends CI_Controller {
                     if(isset($prm["error"]) && $prm["error"] != null && $prm["error"] == 1){
                         $data["error"] =1;
                     }
+                    /**/
+                    $data["seleccion"] =  valida_valor_variable($this->input->get("seleccion"));
                     $this->principal->show_data_page( $data , 'metodos_disponibles');
-                    
-                    
                     break;
                 /**/
                 case 2:          
                     /*Despliega las cuentas disponibles del usuario*/
-                    $data["clasificaciones_departamentos"] = "";                    
+                                        
                     $saldos=  $this->get_saldo_usuario($id_usuario);
                     $data["saldo_disponible"] = $saldos;
                     $cuentas_bancarias =  $this->get_cuentas_usuario($id_usuario , 0);
@@ -73,7 +69,7 @@ class Inicio extends CI_Controller {
 
                 case 3:
                     /*Despliega cuentas asociadas al momento*/
-                    $data["clasificaciones_departamentos"] = "";                    
+                                        
                     $data["cuentas_bancarias"] =  $this->get_cuentas_usuario($id_usuario , 0);
                     $data["tarjetas"] =  $this->get_cuentas_usuario($id_usuario , 1);
 
@@ -89,32 +85,35 @@ class Inicio extends CI_Controller {
                         $prm["id_usuario"] = $id_usuario;
                         $registro = $this->agregar_cuenta_bancaria($prm);
                         
+                        $base_transfer ="../../movimientos/?q=transfer";
                         if($registro["registro_cuenta"] ==  1){
-                            redirect("../../movimientos/?q=transfer&action=3");    
+                            redirect($base_transfer."&action=3");    
                         }else{                            
                             if($prm["tipo"] == 0) {
-                                redirect("../../movimientos/?q=transfer&action=1&error=1");
+                                redirect($base_transfer."&action=1&error=1");
                             }else{
-                                redirect("../../movimientos/?q=transfer&action=1&tarjeta=1&error=1");
+                                redirect($base_transfer."&action=1&tarjeta=1&error=1");
                             }
-                        }
-                        
-                        
+                        }                        
                     }else{
                         redirect("../../movimientos");
                     }
                     /**/
                     break;
-
-                case 5:
-                    
+                case 5:                    
                     /*Se muestran los datos de la cuenta*/
-
-
                     break;    
-                default:
+                case 6:                     
+                    $this->principal->show_data_page( $data , 'agregar_saldo');
+                    break;
+                case 7:                     
+                    /*Agregar saldo a cuenta en Oxxo */
+                    
+                    $this->principal->show_data_page( $data , 'agregar_saldo_desde_oxxo');
+                    break;
 
                 
+                default:
 
                 break;
             }

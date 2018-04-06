@@ -46,10 +46,9 @@
     }
     /**/
     function get_usuario_cliente($param){
+    
         /**/
-
         $id_usuario =  $param["id_usuario"];
-        
         $query_get =    "SELECT 
                         idusuario id_usuario, 
                         nombre , 

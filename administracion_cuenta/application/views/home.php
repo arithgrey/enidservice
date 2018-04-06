@@ -10,6 +10,9 @@
 			    <div class="tab-pane " id="tab_privacidad">
 			       <?=$this->load->view("micuenta/privacidad");?>
 			    </div>
+			    <div class="tab-pane " id="tab_privacidad_seguridad">
+			       <?=$this->load->view("micuenta/privacidad_seguridad");?>
+			    </div>
 			    <div class="tab-pane " id="tab_direccion">
 			    	<?=$this->load->view("micuenta/direccion")?>
 			    </div>
@@ -20,6 +23,8 @@
 
 
 <script type="text/javascript" src="<?=base_url('application/js/principal.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('application/js/privacidad_seguridad.js')?>">
+</script>
 <script type="text/javascript" src="<?=base_url('application/js/img.js')?>"></script>
 <script type="text/javascript" src="<?=base_url('application/js/perfil_user.js')?>"></script>
 <script type="text/javascript" src="../js_tema/js/direccion.js"></script>

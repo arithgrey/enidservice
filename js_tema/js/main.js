@@ -14,14 +14,10 @@ $("footer").ready(function(){
 		$(".form_enid_contacto").submit();
 	});
 	$(".form_enid_contacto").submit(registra_lead);	
-
-	
 	/**/
 	$(".menu_notificaciones_progreso_dia").click(metricas_perfil);
 	metricas_perfil();
 	set_titulo_web($(".titulo_web").val());					
-	
-
 	/**/
 	$(".telefono_info_contacto").keyup(quita_espacios_input);
 	$(".precio").keyup(quita_espacios_input_precio);
@@ -639,12 +635,15 @@ function set_tarea(n_tarea){
 function quitar_espacios_numericos(nuevo_valor){
 	/**/
 	valor_numerico  ="";
+
 		for(var a = 0; a < nuevo_valor.length; a++){		
 			if(nuevo_valor[a] != " "){
 				
 				is_num=  validar_si_numero(nuevo_valor[a]);
 				if (is_num ==  true) {
-					valor_numerico += nuevo_valor[a]; 		
+					if (a< 14) {
+						valor_numerico += nuevo_valor[a]; 		
+					}
 				}
 				
 			}

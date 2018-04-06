@@ -71,7 +71,7 @@ $(document).ready(function(){
 		carga_buzon();
 	});
 	/**/
-
+	$(".num_alcance").click(alcance_producto);
 });
 /**/
 function carga_num_preguntas(){
@@ -103,11 +103,8 @@ function carga_num_preguntas(){
 }
 /**/
 function valida_accion_inicial(){
-
-		
-
-	action =   get_option("action"); 	
-	/**/
+	
+	action =   get_option("action"); 		
 	switch(action){
 	    case "ventas":
 			set_option("modalidad_ventas" , 1);		
@@ -126,9 +123,23 @@ function valida_accion_inicial(){
 	    default:
 	    	set_option("modalidad_ventas" , 0);				
 			carga_compras_usuario();		
-	        break;
-
-		
+	        break;		
 	} 
-
+}
+/**/
+function alcance_producto(e){
+	tipo =  e.target.id;	
+	url =  "../q/index.php/api/productos/alcance_producto/format/json/";		
+	data_send =  {tipo:tipo};		
+	alert(tipo);		
+	$.ajax({
+			url : url , 
+			type: "GET",
+			data: data_send, 
+			beforeSend: function(){}
+	}).done(function(data){											
+		redirect("../producto/?producto="+data);
+	}).fail(function(){			
+		show_error_enid(".place_buzon"  , "Error ... ");
+	});	
 }

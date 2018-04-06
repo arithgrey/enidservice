@@ -603,10 +603,12 @@ if(!function_exists('invierte_date_time')){
    
   }
   /**/
-  function monto_pendiente_cliente($monto , $saldo_cubierto , $costo_envio_cliente , $num_ciclos){
+  function monto_pendiente_cliente($monto_a_pagar,$saldo_cubierto,$costo_envio_cliente,
+    $num_ciclos_contratados){
 
-      $monto_pedido =  $num_ciclos * $monto; 
-      return ($monto_pedido + $costo_envio_cliente) - $saldo_cubierto;
+      $total_deuda =  $monto_a_pagar * $num_ciclos_contratados;  
+      $total_deuda_mas_envio  =  $total_deuda + $costo_envio_cliente;  
+      return $total_deuda_mas_envio;
   }
   /**/
   function valida_url_facebook($url_facebook){

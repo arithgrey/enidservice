@@ -18,6 +18,11 @@ class Inicio extends CI_Controller {
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
         
         $data["q_action"]= valida_q($this->input->get("q"));   
+        $action =  valida_q($this->input->get("action"));                   
+        if($action === 0){
+            $action = "lista";  
+        }        
+        $data["action"] =  $action;
         /*************************************************************/        
         $this->principal->show_data_page( $data , 'empresas_enid');			
     	$this->principal->crea_historico(29 , 0 , $this->sessionclass->getidusuario());

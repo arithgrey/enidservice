@@ -2,7 +2,7 @@
 require APPPATH.'/libraries/REST_Controller.php';
 class Base extends REST_Controller{
   function __construct(){
-        parent::__construct();                                     
+        parent::__construct();            
         $this->load->library('sessionclass');      
   }  
   /**/
@@ -88,6 +88,22 @@ class Base extends REST_Controller{
     $param = $this->get();
     $data["info_mail"]=  $this->enidmodel->get_enviados($param);
     $this->load->view("secciones/lista" , $data);
+  }
+  /**/
+  function nombre_usuario_PUT(){
+        /**/
+        $param =  $this->put();        
+        $param["id_usuario"] =  $this->sessionclass->getidusuario();
+        $db_reponse = $this->enidmodel->nombre_usuario($param);
+        $this->response($db_reponse);      
+  }
+  /**/
+  function telefono_usuario_PUT(){
+        /**/
+        $param =  $this->put();        
+        $param["id_usuario"] =  $this->sessionclass->getidusuario();
+        $db_reponse = $this->enidmodel->telefono_usuario($param);
+        $this->response($db_reponse);      
   }
   /**/
   function val_session(){

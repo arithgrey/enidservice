@@ -1,5 +1,5 @@
 <?php 
-
+set_time_limit(300);
 ob_start();
 require "autoload.php";
 use Spipu\Html2Pdf\Html2Pdf;
@@ -10,12 +10,8 @@ try{
       $html2pdf->pdf->SetDisplayMode('fullpage');	   
       	$html2pdf->writeHTML($contenido_pdf);		
 		$html2pdf->Output('PDF-CF.pdf');
-
-}catch(HTML2PDF_exception $e) {
-    
+}catch(HTML2PDF_exception $e) {    
     echo $e;
     exit;
 }
-
-
 ?>

@@ -3,12 +3,19 @@ $(document).ready(function(){
 	$(".btn_direccion").click(function(){
 		set_option("v",1);
 		carga_direccion_usuario();	
-	});
+	});	
+
 	/**/
+	$(".f_nombre_usuario").submit(actualiza_nombre_usuario);
+	$(".f_telefono_usuario").submit(actualiza_telefono_usuario);
+	$(".tab_privacidad_seguridad").click(get_conceptos);
+
+	$(".nombre_usuario").keyup(quita_espacios_nombre_usuario);
 	/**/
-	$("#form_update_password").submit(update_password);
-	/**/
+	$("#form_update_password").submit(update_password);	
 	$(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
+
+
 });
 /**/
 function carga_direccion_usuario(){
@@ -84,4 +91,54 @@ function registra_direccion_usuario(e){
 		muestra_error_codigo(1);
 	}
 	e.preventDefault();
+}
+/**/
+function actualiza_nombre_usuario(e){
+	data_send=  $(".f_nombre_usuario").serialize();  
+	url =  "../base/index.php/api/base/nombre_usuario/format/json/";		
+	$.ajax({
+			url : url , 
+			type: "PUT",
+			data: data_send, 
+			beforeSend: function(){}
+		}).done(function(data){																				
+			show_response_ok_enid(".registro_nombre_usuario" , "Tu nombre de usuario fue actualizado!");
+		}).fail(function(){			
+			show_error_enid(".place_proyectos" , "Error ... ");
+		});			
+
+	e.preventDefault();
+}
+/**/
+function actualiza_telefono_usuario(e){
+
+	data_send=  $(".f_telefono_usuario").serialize();  
+	alert(data_send);
+	url =  "../base/index.php/api/base/telefono_usuario/format/json/";			
+	$.ajax({
+			url : url , 
+			type: "PUT",
+			data: data_send, 
+			beforeSend: function(){}
+		}).done(function(data){																							
+			show_response_ok_enid(".registro_telefono_usuario" , "Tu teléfono fue actualizado!");
+		}).fail(function(){			
+			show_error_enid(".place_proyectos" , "Error ... ");
+		});			
+	e.preventDefault();
+}
+/**/
+function quita_espacios_nombre_usuario(){	
+	nombre_usuario =  $(this).val(); 	
+	$(this).val(quita_espacios_text(nombre_usuario));
+}
+/**/
+function quita_espacios_text(nuevo_valor){
+	valor  ="";
+	for(var a = 0; a < nuevo_valor.length; a++){		
+		if(nuevo_valor[a] != " "){				
+			valor += nuevo_valor[a]; 						
+		}
+	}
+	return valor;	
 }

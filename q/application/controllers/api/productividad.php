@@ -12,7 +12,6 @@ class productividad extends REST_Controller{
     /**/
     function accesos_afiliados_GET(){        
 
-
         $param =  $this->get();
         $id_usuario =  $this->sessionclass->getidusuario();
         $enlace_afiliado = 'http://'.$_SERVER['HTTP_HOST']."/inicio/nosotros/?q=".$id_usuario;
@@ -83,10 +82,8 @@ class productividad extends REST_Controller{
         $db_response["info_notificaciones"]["mensajes_sin_leer"]=
         $mensajes["modo_vendedor"];
         $db_response["info_notificaciones"]["respuestas"]=$mensajes["modo_cliente"];
+        
         /**/
-
-        /**/
-
         $db_response["id_usuario"] = $id_usuario;
         /**/    
         switch ($id_perfil) {

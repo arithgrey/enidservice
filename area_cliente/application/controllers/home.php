@@ -13,40 +13,38 @@ class Home extends CI_Controller{
         $data["desc_web"] = "";        
         $data["url_img_post"] = "";        
         $data["servicios"] = $this->principal->get_servicios();         
-        $data["action"] =valida_valor_variable($this->input->get() , "action");    
-        
-        /**/            
+        $data["action"] =valida_valor_variable($this->input->get() , "action");
         $valoraciones=  $this->resumen_valoraciones($this->sessionclass->getidusuario());
-        $data["valoraciones"] =$valoraciones["info_valoraciones"]; 
-        /**/
+        $data["valoraciones"] =$valoraciones["info_valoraciones"];     
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;        
+        $alcance =  $this->get_alcance($data["id_usuario"]);
+        $data["alcance"] = "";
+        if(count($alcance)>0){
+            $data["alcance"]=   crea_alcance($alcance);
+        }
+        /**/
         $this->principal->show_data_page($data, 'home');                        
         
-    }
-    function logout(){                      
-        $this->sessionclass->logout();      
-    }   
+    }    
     /**/
     function val_session($titulo_dinamico_page ){        
 
         if($this->sessionclass->is_logged_in() == 1) {                                                            
                 $menu = $this->sessionclass->generadinamymenu();
-                $nombre = $this->sessionclass->getnombre();                                         
+                $nombre = $this->sessionclass->getnombre();
                 $data['titulo']= $titulo_dinamico_page;              
                 $data["menu"] = $menu;              
                 $data["nombre"]= $nombre;                                               
                 $data["email"]= $this->sessionclass->getemailuser();                                               
-                $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+                $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();
                 $data["in_session"] = 1;
                 $data["no_publics"] =1;
                 $data["meta_keywords"] =  "";
                 $data["url_img_post"]= "";
-                $data["id_usuario"] = $this->sessionclass->getidusuario();     
-                /**/
-
+                $data["id_usuario"] = $this->sessionclass->getidusuario();                     
                 $data["id_empresa"] =  $this->sessionclass->getidempresa();                     
-                $data["info_empresa"] =  $this->sessionclass->get_info_empresa();                     
+                $data["info_empresa"] =  $this->sessionclass->get_info_empresa();
                 $data["desc_web"] =  "";
                 
 
@@ -56,7 +54,7 @@ class Home extends CI_Controller{
             redirect(url_log_out());
         }   
     }      
-     function get_departamentos($nombre_pagina){
+    private function get_departamentos($nombre_pagina){
 
         $q["q"] =  $nombre_pagina;
         $url = "tag/index.php/api/";         
@@ -67,14 +65,14 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return $response;
     }
-    function get_url_request($extra){
+    private function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 
         return  $url_request;
     }
     /**/
-    function resumen_valoraciones($id_usuario){
+    private function resumen_valoraciones($id_usuario){
 
         $q["id_usuario"] =  $id_usuario;
         $url = "portafolio/index.php/api/";         
@@ -85,5 +83,15 @@ class Home extends CI_Controller{
         return json_decode($result->response , true);
     }
     /**/    
+    private function get_alcance($id_usuario){
+
+        $q["id_usuario"] =  $id_usuario;
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("productos/alcance_usuario/format/json/" , $q);
+        return json_decode($result->response , true);
+    }
 
 }

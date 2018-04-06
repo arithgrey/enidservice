@@ -8,7 +8,6 @@
     /**/
     function get_notificaciones_usuario_perfil($param){
 
-        /**/    
         $id_perfil =   $this->get_perfil_usuario($param);        
         $data_complete["perfil"] = $id_perfil;
         $param["id_perfil"] = $id_perfil;
@@ -18,12 +17,11 @@
         $data_complete["id_usuario"]=  $param["id_usuario"]; 
         $data_complete["adeudos_cliente"] = $this->get_adeudo_cliente($param);
         $data_complete["flag_direccion"] = 
+        
         $this->verifica_direccion_registrada_usuario($param);                
         $data_complete["productos_anunciados"] = 
         $this->valida_producto_anunciado($param);
         /**/
-
-
         $data_complete["valoraciones_sin_leer"] = 
         $this->valida_valoraciones_sin_leer($param);
         /**/
@@ -398,18 +396,31 @@
     function get_adeudo_cliente($param){
 
         $id_usuario =  $param["id_usuario"];        
-         $query_get="SELECT                              
-                            SUM(ppf.monto_a_pagar + ppf.costo_envio_cliente) - 
-                            SUM(ppf.saldo_cubierto)saldo_pendiente
-                        FROM  
-                        proyecto_persona_forma_pago ppf                         
-                        WHERE 
-                        ppf.id_usuario = $id_usuario
-                        AND 
-                        ppf.monto_a_pagar > ppf.saldo_cubierto";
+         $query_get="SELECT 
+                    (ppf.monto_a_pagar * ppf.num_ciclos_contratados )+ costo_envio_cliente as  saldo_pendiente,
+                    saldo_cubierto
+                    FROM 
+                    proyecto_persona_forma_pago 
+                    ppf                         
+                    WHERE 
+                    ppf.id_usuario = $id_usuario
+                    AND 
+                    ppf.monto_a_pagar  > ppf.saldo_cubierto";
+
 
         $result =  $this->db->query($query_get);        
-        return  $result->result_array()[0]["saldo_pendiente"];         
+        $data_complete=  $result->result_array();         
+
+        $total_deuda =0; 
+        foreach ($data_complete as $row){
+            
+            $saldo_pendiente = $row["saldo_pendiente"];
+            $saldo_cubierto = $row["saldo_cubierto"];
+            $deuda =  $saldo_pendiente - $saldo_cubierto; 
+            $total_deuda =  $total_deuda + $deuda;
+        }
+        return $total_deuda;
+
     }    
     /**/
     private function verifica_direccion_registrada_usuario($param){

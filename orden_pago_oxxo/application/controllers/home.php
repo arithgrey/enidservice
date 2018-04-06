@@ -14,17 +14,18 @@ class Home extends CI_Controller{
         $data["meta_keywords"] = '';
         $data["desc_web"] = "";                
         $data["url_img_post"] = create_url_preview("recomendacion.jpg");
+        
         $param =  $this->input->get();
         $data["info_pago"]= $param;
-        
-        $num_hist= get_info_servicio( $this->input->get("q"));    
+        $data["clasificaciones_departamentos"] = "";
 
-        $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
-        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-          
-        $this->principal->show_data_page($data, 'home');                          
-    }
-    /**/
+        $concepto =  valida_valor_variable($param , "concepto");    
+        $id_usuario=  $this->input->get("q2"); 
+        $data["usuario"]=  $this->get_usuario($id_usuario);
+        $this->principal->show_data_page($data, 'ingresar_saldo_a_cuenta');
+
+        
+    }    
     /**/
     function logout(){                      
         $this->sessionclass->logout();      
@@ -71,6 +72,19 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return $response;
     }
+    /**/
+    function get_usuario($id_usuario){
+        /**/
+        $q["id_usuario"] =  $id_usuario;
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("usuario/q/format/json/" , $q);
+        $response =  $result->response;        
+        return json_decode($response , true);
+    }
+    /**/
     function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];

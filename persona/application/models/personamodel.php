@@ -4,6 +4,8 @@
         parent::__construct();        
         $this->load->database();
     }
+    /***/
+    
     /**/
     function get_usuario_ventas(){
       

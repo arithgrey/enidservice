@@ -15,18 +15,36 @@
 	            	class="tab-pane <?=valida_active_tab('ventas' , $action)?>" 
 	            	id='tab_mis_ventas'>                
 	                <?=n_row_12()?> 
-	                	<div class="col-lg-10">	                		
+	                	<div class="col-lg-9">	                		
 	                    	<div class="place_ventas_usuario"></div>
 	                    </div>
-	                    <div class="col-lg-2">	                		
-					       	<h3 style="font-size: 1.5em;" class="black">									
-								VALORACIONES Y RESEÑAS
+	                    <div class="col-lg-3">	                		
+					       	<h3 style="font-size: 1.5em;" class="black strong">					
+								MIS VALORACIONES Y RESEÑAS RECIBIDAS
 							</h3>
+							<br>
+							
 							<center>
 					    		<?=$valoraciones?>
 					    	</center>
+					    	<br>
+					    	<div>	
+								<center>
+									<a href="../recomendacion/?q=<?=$id_usuario?>" 
+									   class="a_enid_blue text-center" 
+									   style="color: white!important">
+										VER COMENTARIOS
+									</a>
+								</center>						
+							</div>
+
+							<?=n_row_12()?>
+			                	<?=$alcance?>
+			                <?=end_row()?>
 	                    </div>
+
 	                <?=end_row()?>
+
 	            </div>
 	            <div class="tab-pane <?=valida_active_tab('preguntas' , $action)?>" id="tab_buzon">
 	            	
@@ -101,5 +119,9 @@
 	.notificacion_preguntas_no_leida{
 		background: red;
 		padding: 5px;
+	}
+	.num_alcance:hover{
+		cursor: pointer;
+		color: blue;
 	}
 </style>

@@ -7,7 +7,7 @@ if(!function_exists('invierte_date_time')){
     return $url[0];
   }
   /**/
-  function entrega_data_campo($param , $key , $label , $validador_numerico =0){
+  function entrega_data_campo($param , $key , $label='' , $validador_numerico =0){
 
     $value =$param[0][$key];
     if($validador_numerico == 1){

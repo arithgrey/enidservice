@@ -32,20 +32,14 @@ class Persona extends REST_Controller{
     /**/    
     function agendar_email_POST(){
 
-        $param =  $this->post();   
-        
+        $param =  $this->post();
         $db_reponse = $this->agendamodel->agenda_correo($param);
         $this->response($db_reponse);   
         
 
     }
     /**/     
-    function q_PUT(){
-        
-        $param =  $this->put();
-        $db_reponse = $this->personamodel->update_persona_q($param);
-        $this->response($db_reponse);
-    }
+   
     /**/
     
 }?>

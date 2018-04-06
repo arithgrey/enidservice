@@ -7,10 +7,12 @@
         <div class='col-lg-10'>
             <br>
             <div class="tab-content">                    
-                <div class="tab-pane active" id='tab_servicios'>
+                <div 
+                    class="tab-pane <?=valida_active_tab('lista' , $action)?> " 
+                    id='tab_servicios'>
                     <?=$this->load->view("secciones/servicios");?>
                 </div>                
-                <div class="tab-pane" id='tab_form_servicio'>
+                <div class="tab-pane <?=valida_active_tab('nuevo' , $action)?>" id='tab_form_servicio'>
                     <?=$this->load->view("secciones/form_servicios")?>
                 </div>
             </div>

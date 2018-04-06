@@ -244,3 +244,13 @@
     background: #0052E1!important;
     color: white!important;
 }
+.input_enid{
+    background: white!important;
+    background: white !important;
+    height: 30px !important;
+}
+.input_enid:hover{
+    border-style:solid;
+    border-color: black;
+    cursor: pointer;
+}

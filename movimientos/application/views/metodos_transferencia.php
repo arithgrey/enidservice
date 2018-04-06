@@ -35,7 +35,7 @@
                 </div>
 
                 <div style="width: 80%;margin: 0 auto;margin-top: 20px;">
-                    <a href="?q=transfer&action=1" class="white" 
+                    <a href="?q=transfer&action=1&seleccion=1" class="white" 
                         style="color: white!important;background:#004faa;padding: 3px;">
                         <?=agrega_cuentas_existencia($cuentas_gravadas)?>
                     </a>

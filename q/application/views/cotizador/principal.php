@@ -7,6 +7,9 @@
 	$extra_accesos ="style='background: #00b7ff;color: white !important;text-align: center;' ";
 	$extra_contacto ="style='text-align: center;' ";
 	$extra_labor ="style='text-align: center;background: #1c404e;color: white !important;' ";
+
+	$extra_servicios="style='text-align: center;background: #1c404e;color: white !important;' ";
+
 	/**/
 	$accesos ="";		
 	$accesos_a_intento_compra = "";
@@ -25,6 +28,7 @@
 	$no_recomendarian =  "";
 	$fecha_inicio =  $envio_usuario["fecha_inicio"];  
 	$fecha_termino =  $envio_usuario["fecha_termino"];  
+	$servicios =  "";
 
 		$extra_td_usuarios =  "class='usuarios' 
 			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
@@ -87,6 +91,12 @@
 			title='Valoraciones que se han hecho en Enid Service'  ";
 
 
+		$extra_td_servicios = "class='servicios' 
+			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'			
+			href='#reporte' 
+			data-toggle='tab' 
+			title='Servicios postulados'";
+
 	foreach($actividad_enid_service as $row){
 	
 		
@@ -98,10 +108,13 @@
 		$table ="<table width='100%' border=1  style='text-align: center;'>";
 			$table .="<tr>";	
 				$table .=get_td("Usuarios"  , "class='strong' ");						
-				$table .=get_td("Usabilidad" , $extra_td_usablidad);											
+
+				$table .=get_td("Servicios postulados" , "class='strong' ");							
+				$table .=get_td("Ingresos a Enid" , $extra_td_usablidad);					
 				$table .="</tr>";	
 				$table .="<tr>";	
 				$table .=get_td($row["usuarios"] , $extra_td_usuarios);						
+				$table .=get_td($row["servicios_creados"] , $extra_td_servicios);						
 				$table .=get_td($row["accesos_area_cliente"] , "title='Personas que acceden a Enid Service desde su área de cliente'");										
 			$table .="</tr>";	
 		$table .="</table>";
@@ -290,3 +303,11 @@
 		<?=get_td("Labores resueltas" ,$extra_labor)?><?=$labores_resueltas?>
 	</tr>	
 </table>
+
+<style type="text/css">
+	.servicios{
+		cursor: pointer;
+		color: blue;
+		font-weight: bold;
+	}
+</style>

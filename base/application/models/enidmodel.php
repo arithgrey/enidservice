@@ -4,6 +4,37 @@
         parent::__construct();        
         $this->load->database();
     }
+    function telefono_usuario($param){
+
+        $id_usuario=  $param["id_usuario"];
+        $telefono =  $param["telefono"];
+        $lada =  $param["lada"];
+        $query_update ="UPDATE usuario  
+                        SET 
+                            tel_contacto = '".$telefono."'  ,
+                            tel_lada = '".$lada."'
+
+                        WHERE 
+                        idusuario = $id_usuario 
+                        LIMIT 1";
+
+        return $this->db->query($query_update);
+
+    }
+    /**/
+    function nombre_usuario($param){
+      
+        $id_usuario=  $param["id_usuario"];
+        $nombre_usuario =  $param["nombre_usuario"];
+        $query_update ="UPDATE usuario  
+                        SET nombre_usuario = '".$nombre_usuario."' 
+                        WHERE 
+                        idusuario = $id_usuario
+                        LIMIT 1";
+
+        return $this->db->query($query_update);
+
+    }
     /**/
     function registra_lectura_email($param){
         $servicio =  $param["servicio"];

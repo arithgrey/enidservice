@@ -25,28 +25,6 @@
                 </div>
             </div>                                                    
         </div>  
-        <div class="card" style="width: 100%">
-          <ul class="list-group list-group-flush">
-            
-            <a href="?q=transfer&action=2">
-                <li class="list-group-item">
-                    <i class="fa fa-fighter-jet">
-                    </i>
-                    Trasnferir fondos                
-                </li>
-            </a>
-            <a href="?q=transfer&action=1">
-                <li class="list-group-item metodo_pago_disponible">
-                    <i class="fa fa-credit-card-alt"></i>
-                    Asociadar cuenta bancaria
-                </li>
-            </a>
-            <a href="?q=transfer&action=1&tarjeta=1">
-                <li class="list-group-item metodo_pago_disponible">
-                    <i class="fa fa-credit-card-alt"></i>
-                    Asociadar tarjeta de crédito o débito
-                </li>
-            </a>
-          </ul>
-        </div>          
+        
+        <?=$this->load->view("sub_menu")?>
     <?=end_row()?>

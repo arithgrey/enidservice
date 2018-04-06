@@ -331,7 +331,7 @@
                     
                     ".$sql_match."
                     ORDER BY 
-                    id_servicio 
+                    vista 
                     DESC ".$limit;
                 
             }if($num_q ==  0){
@@ -345,7 +345,7 @@
                         ".$extra_clasificacion." 
                         ".$extra_empresa."
                     ORDER BY 
-                    id_servicio DESC ".$limit;
+                    vista DESC ".$limit;
 
             }
             if($param["vendedor"] > 0){            
@@ -359,7 +359,7 @@
                         ".$extra_empresa."
                         status = 1                                             
                     ORDER BY 
-                    id_servicio DESC ".$limit;
+                    vista DESC ".$limit;
             }
             
 
@@ -436,5 +436,17 @@
                     WHERE id_servicio = $id_servicio LIMIT 1";
         $result =  $this->db->query($query_get);
         return $result->result_array()[0]["nombre_servicio"];
+    }
+    /**/
+    function get_servicios_periodo_simple($param){
+        
+        $query_get ="SELECT * FROM servicio 
+                    WHERE   
+                    
+                    DATE(fecha_registro) 
+        BETWEEN '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."' ";
+
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
     }
 }

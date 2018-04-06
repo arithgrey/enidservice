@@ -34,11 +34,9 @@ class Inicio extends CI_Controller {
             header("location:../area_cliente");   
         }
         /**/            
-        $data["usuarios_disponibles"]=  $this->principal->get_usuario_enid();
-        $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
-        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-        $this->principal->show_data_page( $data , 'empresas_enid');			
-    	//$this->principal->crea_historico(29 , 0 , $this->sessionclass->getidusuario())
+        $data["usuarios_disponibles"]=  $this->principal->get_usuario_enid();        
+        $data["clasificaciones_departamentos"] = "";
+        $this->principal->show_data_page( $data , 'empresas_enid');			    	
                 		
     }    	
    /**/

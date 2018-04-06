@@ -72,10 +72,10 @@
 
 
         <li class="dropdown  pull-right blue_enid_background  boton_vender_global" 
-            style="padding:3px;z-index: 3000;margin-top: 2px;height: 30px;margin-left:5px;" >            
+            style="padding:3px;z-index:3000;margin-top: 2px;height: 30px;margin-left:5px;">
             <a  class="white blue_enid" 
                 style="color: white!important"
-                href="../planes_servicios/?nuevo=1"> 
+                href="../planes_servicios/?action=nuevo"> 
                 <i class="fa fa-cart-plus"></i>
                 VENDER
             </a>

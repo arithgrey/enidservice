@@ -1,33 +1,33 @@
-  <div class="image-container set-full-height" >            
-      <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-sm-offset-2">
-              <div class="text-right">
-                <button class="btn input-sm btn-orden">
-                  <i class="fa fa-print"></i>
-                  Imprimir
-                </button>
-              </div>
-
-            </div>
-            <div class="col-sm-8 col-sm-offset-2">
+<main>                                                  
+	<?=n_row_12()?>    
+		<div style="width: 50%;margin: 0 auto;margin-top: 20px;">
+			<div class="text-right">
+			    <a class="a_enid_blue imprimir" style="color: white!important;" >
+			    	IMPRIMIR
+			    </a>
+		    </div>
+	    </div>
+    <?=end_row()?>
+    <br>
+    <div class="contenedor_orden_pago">    	
+            <div style="width: 50%;margin: 0 auto;border-style: solid;border-width: 1px;">
                 <div>                    
-                    <div class="info_orden_compra" style="box-shadow: 0 16px 24px 2px;">
-                      <div>
-                        <label style="font-size:1.4em;color:black;font-weight: bold;">
-                            Orden de pago                        
-                        </label>            
+                    <div class="info_orden_compra">
+                      <div style="font-size:1.4em;color:black;font-weight: bold;">
+                        
+                        <img src="http://enidservice.com/inicio/img_tema/portafolio/oxxo-logo.png" style="width: 100px;">
+                        ORDEN DE PAGO EN SUCURSALES OXXO
                       </div>
-                      <div>
-                        <img src="../img_tema/portafolio/oxxo-logo.png" 
-                        style="width: 100px;">
-                      </div>                      
-                      <div style="background: #0000f5;padding: 5px;color: white;">
-                          <label style="color: white;font-weight: bold;">Servicios Enid Service
-                            <br>Folio #<?=$info_pago["q2"]?>
-                          </label>
+                      <div style="background: #0000f5;padding: 5px;color: white;color: white;">
+                          	Saldo a cuenta Enid Service 
+                          	<br>
+                          	Beneficiario
+                          	<?=entrega_data_campo($usuario , "nombre")?> 
+                          	<?=entrega_data_campo($usuario , "apellido_paterno")?>
+                          	<?=entrega_data_campo($usuario , "apellido_materno")?>
+                            <br>
+                            Folio #<?=$info_pago["q2"]?>
                       </div>
-
                     <div style="margin-top:20px; ">                        
                       <div style="width: 80%;margin: 0 auto;">
                         <h1 style="color: : black;font-weight: bold;">
@@ -44,23 +44,17 @@
                     
                     <div style="margin-top:20px;"></div>
                     <?=n_row_12()?>
-                      <div style="width: 80%;margin: 0 auto;">
-                        <?=n_row_12()?>                                                              
-                          <img 
-                          src="../img_tema/portafolio/logo-bbv.png" 
-                          style="width: 200px">
-                        <?=end_row()?>
-                        <?=n_row_12()?>                                      
-                          <span style="font-weight: bold;">                   
-                            4152 3131 0230 5609
-                          </span>                                      
-                        <?=end_row()?>
+                      <div style="width: 80%;margin: 0 auto;">                        
+                        	<div>
+                        		<img src="http://enidservice.com/inicio/img_tema/portafolio/logo-bbv.png" style="width: 200px;">	
+                        	</div>
+                        	<div>
+	                          	<span style="font-weight: bold;">                   
+	                            	4152 3131 0230 5609
+	                          	</span>                                      
+                          	</div>
                       </div>
                     <?=end_row()?>
-
-
-
-
 
                     <div style="margin-top:20px;"></div>
                     <?=n_row_12()?>
@@ -98,7 +92,8 @@
                                             <strong>
                                             pago exacto
                                             </strong> 
-                                            correspondiente, que se indica en el monto a pagar 
+                                            correspondiente, 
+                                            que se indica en el monto a pagar 
                                           </span>
                                       </div>
                                       <div>
@@ -117,15 +112,17 @@
                                           </div>
                                       </div>
                                       <div>
-                                        <span style="font-size: .8em;margin-top: 7px;">                                            
+                                        <span style="font-size: .8em;margin-top: 7px;">
                                             <div>
                                               <strong>
-                                                6.- Notifica tu pago desde tu área de cliente
+                                                6.- Notifica tu cuenta Enid Service
                                               </strong>
                                             </div>
                                             <div>
                                               <span>
-                                                <a href="http://enidservice.com/inicio/login/" style="font-weight: bold;color: blue;" target="_black">
+                                                <a 
+                                                	href="http://enidservice.com/inicio/login/" style="font-weight: bold;color: blue;" 
+                                                	target="_black">
                                                   http://enidservice.com/inicio/login/
                                                 </a>
                                               </span>
@@ -136,61 +133,51 @@
                                               </strong>                                     
                                             </div>
                                             <div>                                              
-                                              Notifica tu pago  al área de ventas 
+                                            	Al correo
                                                 <strong>
                                                   ventas@enidservice.com
                                                 </strong>
                                             </div>                                            
                                           </span>
                                       </div>
-                                    <?=end_row()?>                                        
+                                    
+                                    <div>
+                                    	<img src="http://enidservice.com/inicio/img_tema/enid_service_logo.jpg" width="300px">	
+                                    </div>
+                                    
 
+                                      
 
-                                    <?=n_row_12()?>     
+                                    <?=end_row()?>     
+                                    <?=n_row_12()?>
+                                    	¿TIENES ALGUNA DUDA?
+                                    	<br>
+                                    	<strong>
+                                    		Solicita una llamada 
+                                    	</strong>
+                                    	<span style="text-decoration: underline;">
+                                    		www.enidservice.com/inicio/contacto/
+                                    	</span>
 
-                                      <img 
-                                        src="../img_tema/enid_service_logo.jpg" 
-                                        style="width: 300px;">
+                                    	<br>
+                                    	<strong>
+	                                    	Recibe asesoría
+                                    	</strong>
+                                    	(55)5296-7027
 
                                     <?=end_row()?>     
                         <?=end_row()?>
                       </div>
-                    <?=end_row()?>
-
-                              
-                                
-                              
-                          
+                    <?=end_row()?>                         
                           </div>
                     </div>
-                </div> <!-- wizard container -->
-            </div>
-        </div> <!-- row -->
-    </div> <!--  big container -->
-
-      
-  </div>
+                </div> 
+            </div>        
+    </div>  
 
 
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<form class="form_imprimir" action="../pdf/pdf.php" method="post">
+	<input type="hidden" name="contenido" class="contenido_imp" >
+</form>
+<script type="text/javascript" src="<?=base_url('application/js/imprimir.js')?>"></script>
+</main>

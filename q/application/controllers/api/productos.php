@@ -15,4 +15,21 @@ class productos extends REST_Controller{
         $this->load->view("producto/principal" , $data);
     }    
     /**/
+    function alcance_usuario_GET(){
+                
+        $param =  $this->get();
+        $alcance =  $this->productos_model->get_alcance_productos_usuario($param);
+        $this->response($alcance);
+    }
+    /**/
+    function alcance_producto_GET(){
+
+        $param =  $this->get();
+        
+        $param["id_usuario"] = $this->sessionclass->getidusuario();
+        $producto =  $this->productos_model->get_producto_alcance($param);
+        $this->response($producto);
+        
+    }
+
 }?>

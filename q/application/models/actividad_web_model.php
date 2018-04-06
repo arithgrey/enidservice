@@ -305,6 +305,23 @@
         return $query_get;
     }
     /**/
+    function crea_servicios_creados($param){
+      $where =  $this->get_where_tiempo($param , 1);
+        $query_get ="SELECT 
+                      DATE(fecha_registro) fecha ,
+                      COUNT(0)total 
+                      FROM 
+                      servicio 
+                      WHERE
+                       1=1 
+                      AND 
+                      ".$where."                      
+                      GROUP BY 
+                      DATE(fecha_registro)";
+        return $query_get;
+
+    }
+    /**/
     function crea_visitas_por_periodo($param){
 
         $where =  $this->get_where_tiempo($param , 1);
@@ -381,13 +398,12 @@
         $tb_tareas =  "tareas_resueltas_$_num";
         $tb_valoraciones  = "valoraciones_$_num";
         $tb_correos = "correos_$_num";
+        $tb_servicios = "servicios_$_num";
         /*usuarios*/
 
 
         $sql_usuarios =  $this->crea_registros_usuarios($param);        
-          $this->crea_tabla_temploral($tabla_usuarios , $sql_usuarios , 0);
-        
-
+          $this->crea_tabla_temploral($tabla_usuarios , $sql_usuarios , 0);      
           /**/
           $sql_ventas =  $this->crea_actividad_en_ventas($param);
             $this->crea_tabla_temploral($tabla_ventas , $sql_ventas , 0 );
@@ -403,9 +419,11 @@
                   $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 0);
                   /**/
 
-                  
                   $sql_correos_enviados =  $this->crea_correos_enviados($param);
                     $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 0);
+            
+                    $sql_servicios =  $this->crea_servicios_creados($param);
+                      $this->crea_tabla_temploral($tb_servicios , $sql_servicios , 0);
             
 
                 $a = 0;
@@ -414,13 +432,14 @@
                    $data_complete[$a] =  $row;               
                    $fecha = "";
                     /*Agregamos usuarios*/
-                   $data_complete[$a]["usuarios"] 
-                    = $this->get_num_registros_templal_table_fecha($fecha ,$tabla_usuarios); 
+                    $data_complete[$a]["usuarios"] 
+                    = $this->get_num_registros_usuario($fecha ,$tabla_usuarios); 
 
                     /*Agregamos ventas*/
                     $data_complete[$a]["ventas"] 
                     = 
                     $this->get_registros_venta_fecha($fecha ,$tabla_ventas); 
+
 
                     /*Agregamos data de contacto*/
                     $data_complete[$a]["contacto"] 
@@ -439,8 +458,11 @@
                     $data_complete[$a]["correos"] 
                     = $this->get_correos_enviados($tb_correos); 
 
+                    $data_complete[$a]["servicios_creados"] 
+                    = $this->get_servicios_creados($tb_servicios); 
                    $a ++;
                 }      
+                    $this->crea_tabla_temploral($tb_servicios , $sql_servicios , 1);
                   $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 1);
                 $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 1);
               $this->crea_tabla_temploral($tb_tareas , $sql_tareas , 1);
@@ -470,6 +492,7 @@
     }
     /**/
     function get_registros_venta_fecha($fecha , $tabla){      
+
       $query_get = "SELECT 
                     SUM(total)total
                     ,SUM(compras_efectivas)compras_efectivas
@@ -482,12 +505,28 @@
     }
     /**/
     function get_num_registros_templal_table_fecha($fecha , $tabla){      
-
       /**/
       $query_get = "SELECT COUNT(0)num FROM $tabla ";
       $result =  $this->db->query($query_get);
       return $result->result_array()[0]["num"];      
     }
+    /**/
+    function get_num_registros_usuario($fecha , $tabla){      
+      /**/        
+      $query_get = "SELECT SUM(total)num FROM $tabla ";
+      $result =  $this->db->query($query_get);
+      return $result->result_array()[0]["num"];      
+    }
+    /**/
+    function get_servicios_creados($tabla){
+
+      $query_get = "SELECT SUM(total)num FROM $tabla ";
+      $result =  $this->db->query($query_get);
+      return $result->result_array()[0]["num"];      
+    }
+
+    /**/
+
 
 
     /*

@@ -1,6 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
   
+  function valida_active_tab($nombre_seccion , $estatus){
+    
+      if($nombre_seccion ==  $estatus){
+        return " active ";   
+      }  
+    
+  }  
   function valida_q($q2){
       
       $id_producto =0;

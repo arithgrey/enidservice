@@ -4,10 +4,10 @@ if(!function_exists('invierte_date_time')){
   /**/
   function agrega_cuentas_existencia($flag_cuentas){
 
-  	if($flag_cuentas ==  0){
-  		return "Asocial nueva cuenta";
+  	if($flag_cuentas == 0){
+  		return "Asociar nueva cuenta";
   	}else{
-  		return "Asocial otra cuenta";
+  		return "Asociar otra cuenta";
   	}	
   } 		
   /**/

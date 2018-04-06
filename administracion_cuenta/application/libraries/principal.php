@@ -68,7 +68,9 @@
 							apellido_paterno    ,
 							apellido_materno    ,
 							email_alterno       ,
-							tel_contacto        
+							tel_contacto , 
+							nombre_usuario       ,
+							tel_lada
  						FROM usuario WHERE idusuario = '".$id_usuario."' 
  						LIMIT 1 ";
 

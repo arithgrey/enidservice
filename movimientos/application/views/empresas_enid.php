@@ -9,44 +9,11 @@
         </div>
     </div>
 <main>
-    <!--
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-colorpicker/css/colorpicker.css" />
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css" />
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-datepicker/css/datepicker.css" />
 
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-daterangepicker/daterangepicker.css" />
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-datetimepicker/css/datetimepicker-custom.css" />
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-datetimepicker/css/datetimepicker.css"/>
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-timepicker/css/timepicker.css" />
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-wysihtml5/bootstrap-wysihtml5.css">
-
-<script type="text/javascript" src="../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-daterangepicker/moment.min.js"></script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
-
-<script src="../js_tema/js/pickers-init.js"></script>
--->
 <script type="text/javascript" src="<?=base_url('application/js/principal.js')?>">
 </script>    
-<!--
-<script type="text/javascript" src="<?=base_url('application/js/posibles_clientes.js')?>">
-</script>    
-<script type="text/javascript" src="<?=base_url('application/js/clientes.js')?>">
-</script>    
-<script type="text/javascript" src="<?=base_url('application/js/proyectos_persona.js')?>">
-</script>    
--->
 <script type="text/javascript" src="<?=base_url('application/js/notificaciones.js')?>">
 </script>    
-<!---
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="<?=base_url('application')?>/js/summernote.js">    
-</script>
--->
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

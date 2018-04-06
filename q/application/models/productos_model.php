@@ -50,7 +50,39 @@
 
 
     }
-    
- 
- 
+    /**/
+    function get_alcance_productos_usuario($param){
+      /**/
+      $id_usuario = $param["id_usuario"];
+      $query_get ="SELECT MAX(vista)maximo, AVG(vista)promedio , MIN(vista)minimo 
+                    FROM servicio 
+                  WHERE id_usuario = $id_usuario
+                    AND status =1 AND
+                  existencia>0";
+      $result = $this->db->query($query_get);
+      return $result->result_array();
+    }
+    /**/
+    function get_producto_alcance($param){
+
+      $id_usuario = $param["id_usuario"];
+      $vista =  $param["tipo"];
+
+      $query_get ="SELECT id_servicio 
+                    FROM  
+                    servicio 
+                    WHERE 
+                    id_usuario = $id_usuario
+                    AND 
+                    vista = '".$vista."'
+                    AND 
+                    status =1 
+                    AND
+                    existencia>0
+                    LIMIT 1";
+      $result = $this->db->query($query_get);
+      return $result->result_array()[0]["id_servicio"];      
+    }
+    /**/
+
 }

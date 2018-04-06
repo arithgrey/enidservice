@@ -1,4 +1,43 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+function crea_alcance($alcance){
+
+    $maximo  = $alcance[0]["maximo"];
+    $minimo  = $alcance[0]["minimo"];
+    $promedio =  $alcance[0]["promedio"];
+
+    $a ="title='Tope de personas que han visto uno de tus productos o servicios disponibles'";
+    $b ="title='Promedio de personas que han visto tus productos' ";
+    $c ="title='El producto que ha tenido menos alcance de visitas ante clientes potenciales' ";
+
+    $text =  "<div style='border-top-style:solid;margin-top:55px;'></div>
+              <center>
+              <h3 style='font-size: 1.4em;margin-top:30px;' class='black strong'>         
+                ALCANCE DE TUS PRODUCTOS
+              </h3>
+              </center>";    
+
+    $text .=  "<table width='100%' class='text-center'>";
+    
+    $text .=  "<tr>";
+      $text .=  get_td($maximo , "class='strong num_alcance' 
+                id='".$maximo."' 
+                style='font-size:1.5em;' $a " );
+      $text .=  get_td($promedio, "class='strong' 
+                style='font-size:1.6em;' $b ");
+      $text .=  get_td($minimo, "class='strong num_alcance' 
+                        id='".$minimo."' 
+                style='font-size:1.5em;' $c ");
+    $text .=  "</tr>";
+
+    $text .=  "<tr>";
+      $text .=  get_td("Tope" , "class='strong blue_enid' $a  ");
+      $text .=  get_td("Promedio", "class='strong blue_enid' $b ");
+      $text .=  get_td("Mínimo", "class='strong blue_enid' $c"); 
+    $text .=  "</tr>";
+    $text .=  "</table>";
+
+    return $text;
+}
 /**/
 function valida_active_tab($nombre_seccion , $estatus){
 
