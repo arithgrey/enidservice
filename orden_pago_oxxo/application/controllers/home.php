@@ -18,9 +18,9 @@ class Home extends CI_Controller{
         $param =  $this->input->get();
         $data["info_pago"]= $param;
         $data["clasificaciones_departamentos"] = "";
-
+        
         $concepto =  valida_valor_variable($param , "concepto");    
-        $id_usuario=  $this->input->get("q2"); 
+        $id_usuario=  $this->input->get("q3"); 
         $data["usuario"]=  $this->get_usuario($id_usuario);
         $this->principal->show_data_page($data, 'ingresar_saldo_a_cuenta');
 

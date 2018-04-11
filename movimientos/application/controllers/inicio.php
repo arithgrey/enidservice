@@ -107,9 +107,30 @@ class Inicio extends CI_Controller {
                     $this->principal->show_data_page( $data , 'agregar_saldo');
                     break;
                 case 7:                     
-                    /*Agregar saldo a cuenta en Oxxo */
-                    
+                    /*Agregar saldo a cuenta en Oxxo */                
                     $this->principal->show_data_page( $data , 'agregar_saldo_desde_oxxo');
+                    break;
+
+                case 8:                     
+                    /*Agregar saldo a cuenta en Oxxo */                
+                    $saldos=  $this->get_saldo_usuario($id_usuario);
+                    $data["saldo_disponible"] = $saldos;
+                    /*Aquí se tiene que validar que tanto la operación  
+                    como el usuario a quien se quiere realizar la 
+                    compra sea el correcto*/
+                    $q["id_usuario"]= $id_usuario;                    
+                    $q["id_usuario_venta"]= $this->input->get("operacion");                    
+                    $q["id_recibo"]=  $this->input->get("recibo");    
+                    $data["recibo"] = $this->get_recibo_por_pagar($q);  
+
+                    if ($data["recibo"]["cuenta_correcta"] == 1 ) {
+
+                        $this->principal->show_data_page( $data , 'pagar_con_saldo_enid');
+                        
+                    }else{
+                        redirect("../");
+                    }                  
+                    
                     break;
 
                 
@@ -208,7 +229,18 @@ class Inicio extends CI_Controller {
         $response =  $result->response;        
         return json_decode($response , true);
     }
-    /**/
+    private function get_recibo_por_pagar($q){
+        
+        
+        $url = "pagos/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("cobranza/recibo_por_pagar/format/json/" , $q);
+        $response =  $result->response;        
+        return json_decode($response , true);
+    }
+    /*****/
     private function agregar_cuenta_bancaria($param){
 
         $url = "pagos/index.php/api/";         
@@ -219,5 +251,5 @@ class Inicio extends CI_Controller {
         $response =  $result->response;        
         return json_decode($response , true);
     }    
-    /**/  
+    /*********/  
 }

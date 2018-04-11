@@ -17,12 +17,15 @@ class Home extends CI_Controller{
     /**/   
     function index(){
         
-        $data = $this->val_session("¿Necesitas que más clientes encuentren tu negocio?");                    
-        $data["meta_keywords"] = "Comprar, vender, ciudad de México, página web, tienda en linea";
+        $data = $this->val_session("¿Necesitas que más clientes encuentren tu negocio?");   
+
+        $data["meta_keywords"] = 
+        "Comprar y vender tus artículos y servicios";
         $data["desc_web"] = "";
         $data["url_img_post"] = create_url_preview("promo.png");        
-        $data["clasificaciones_departamentos"] = 
-        $this->carga_data_clasificaciones_busqueda();
+        
+
+
         /**/
         $num_hist= get_info_servicio( $this->input->get("q"));                
         $q=  $this->input->get("q");
@@ -42,7 +45,17 @@ class Home extends CI_Controller{
         $data_send["resultados_por_pagina"] =$per_page;
         
         $data_send["agrega_clasificaciones"] = 1;
-        $data_send["in_session"] = 0;        
+        $data_send["in_session"] = 0;      
+    
+        if($this->agent->is_mobile()){
+            $data_send["agrega_clasificaciones"] =0;
+            $data["clasificaciones_departamentos"] =  "";
+        }else{
+            $data["clasificaciones_departamentos"] = 
+            $this->carga_data_clasificaciones_busqueda();
+
+        }
+
         $servicios=  $this->busqueda_producto_por_palabra_clave($data_send);
 
         
@@ -58,8 +71,14 @@ class Home extends CI_Controller{
             
             $totales_elementos=  $data["servicios"]["num_servicios"];    
             $data["num_servicios"] =  $totales_elementos;
-            $this->crea_menu_lateral($data["servicios"]["clasificaciones_niveles"]);
-            $data["bloque_busqueda"] =  $this->get_option("bloque_busqueda");
+            $data["bloque_busqueda"] ="";
+            $data["es_movil"] =  1;
+            if($this->agent->is_mobile() == FALSE) {
+                $this->crea_menu_lateral($data["servicios"]["clasificaciones_niveles"]);
+                $data["bloque_busqueda"] =  $this->get_option("bloque_busqueda");    
+                $data["es_movil"] =  0;
+            }
+            
             $this->principal->crea_historico($num_hist);
             
             $config_paginacion["totales_elementos"] =  $totales_elementos;

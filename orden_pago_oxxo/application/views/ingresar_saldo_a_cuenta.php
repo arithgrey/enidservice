@@ -14,7 +14,6 @@
                 <div>                    
                     <div class="info_orden_compra">
                       <div style="font-size:1.4em;color:black;font-weight: bold;">
-                        
                         <img src="http://enidservice.com/inicio/img_tema/portafolio/oxxo-logo.png" style="width: 100px;">
                         ORDEN DE PAGO EN SUCURSALES OXXO
                       </div>

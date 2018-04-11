@@ -26,17 +26,13 @@
                                </strong>
                             </span>
                             
-                                                                
-                            <?php
-
-                                if (isset($id_usuario)) {
-
-                                    echo "<input type='hidden'  
-                                               class='id_usuario'
-                                               value='".$id_usuario."' 
-                                                >";
-                                }
-                            ?>
+                            <?php if(isset($id_usuario)):?>
+                                <input 
+                                    type='hidden' 
+                                    class='id_usuario' 
+                                    value='<?=$id_usuario;?>'>
+                            <?php endif;?>    
+                            
                             
                         </div>
                     </div>
@@ -85,6 +81,8 @@
                     </div>        
                 </div>
             </div>
+            <br>
+            <br><br><br>
             <br>
             <hr>
         <?php endif; ?>
@@ -254,18 +252,7 @@
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css">
 </body>
 </html>
-
 <link href="../css_tema/template/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<!--
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-98483031-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-98483031-1');
-</script>
--->
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
 <style type="text/css">
     body{

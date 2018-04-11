@@ -113,7 +113,7 @@ function actualiza_nombre_usuario(e){
 function actualiza_telefono_usuario(e){
 
 	data_send=  $(".f_telefono_usuario").serialize();  
-	alert(data_send);
+	
 	url =  "../base/index.php/api/base/telefono_usuario/format/json/";			
 	$.ajax({
 			url : url , 

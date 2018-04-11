@@ -208,6 +208,20 @@
           $result =  $this->db->query($query_get);
           return  $result->result_array();
     }
-    
+    /*Se cancela la órden de compra*/
+    function cancela_orden_compra($param){
+        
+        $id_recibo =  $param["id_recibo"];
+        $query_update = "UPDATE 
+                            proyecto_persona_forma_pago 
+                          SET status = 10,
+                          fecha_cancelacion = current_date()
+                          WHERE 
+                            id_proyecto_persona_forma_pago = $id_recibo 
+                          LIMIT 1";
+        
+        return   $this->db->query($query_update);
+        
+    }
 
 }

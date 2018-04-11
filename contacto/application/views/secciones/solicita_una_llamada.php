@@ -27,7 +27,7 @@
                     <?=create_select(
                             $departamentos , 
                             "departamento" , 
-                            "departamento form-control" , 
+                            "departamento form-control input_enid" , 
                             "departamento", 
                             "nombre" , 
                             "id_departamento" )?>
@@ -35,7 +35,7 @@
             </div>
 
             
-            <div class="row" id='envio_msj'>
+            <div class="row" id='envio_msj' style="margin-top: 10px;">
                 <div class="col-sm-2">
                     <span class='white strong' style='font-size:.9em;'>
                         Nombre
@@ -46,7 +46,7 @@
                     type="text" 
                     id="nombre" 
                     name="nombre" 
-                    class="input-sm input" 
+                    class="input-sm input input_enid" 
                     placeholder="Nombre"
                     value="<?=$nombre?>">
                 </div>
@@ -65,7 +65,7 @@
                     id="emp_email"  
                     name="email" 
                     value="<?=$email?>" 
-                    class="input-sm" 
+                    class="input-sm input_enid" 
                     placeholder="Email">
                 </div>
                 <div class='place_mail_contacto' id='place_mail_contacto'>
@@ -83,7 +83,7 @@
             id="tel" 
             name="tel"  
             type="tel" 
-            class="input-sm telefono_info_contacto" 
+            class="input-sm telefono_info_contacto input_enid" 
             placeholder="Teléfono  de contacto"
             value="<?=$telefono?>" 
             >

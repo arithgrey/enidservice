@@ -27,8 +27,12 @@ class Home extends CI_Controller{
         $id_servicio =  get_info_producto($this->input->get("producto"));                    
         $this->set_option("id_servicio" , $id_servicio);
         $data = $this->val_session("");  
-        $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
-        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;        
+
+        $data["clasificaciones_departamentos"] = "";        
+        if($this->agent->is_mobile() == FALSE){
+            $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
+            $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;        
+        }
         /**/
         if ($id_servicio == 0 ){      
             /**/

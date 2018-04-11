@@ -268,11 +268,13 @@ function construye_seccion_imagen_lateral($param , $nombre_servicio , $url_youtu
                   </a>';
 
       /**/
-      $imgs_grandes .='<div id="'.$producto_tab.'" class="tab-pane fade '.$extra_class_contenido.' ">
+      $imgs_grandes .='<div 
+                        id="'.$producto_tab.'" 
+                        class="tab-pane fade '.$extra_class_contenido.' " >
                         <span 
-                        class="img"  
-                        style="background-image: url('."'".$url ."'".')"
-                        onerror="this.src='."'".$url."'".' ">
+                          class="img"  
+                          style="background-image: url('."'".$url ."'".')"
+                          onerror="this.src='."'".$url."'".' ">
                         </span>  
                       </div>';
       /**/

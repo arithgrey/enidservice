@@ -66,11 +66,7 @@
   <div style="width: 80%;margin:0 auto;">
     <section class="product-detail">                    
               <div class="left-col contenedor_izquierdo">                                      
-                <div class="thumbs">
-                    <div class="tab-pane fade '.$extra_class_contenido.' ">
-                        <span class="img"  style="background-image: url('.$url_img.')">
-                        </span>  
-                    </div>
+                <div class="thumbs">                    
                     <?=$imagenes["preview"]?>                            
                 </div>
                 <div class="big"> 

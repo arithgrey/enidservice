@@ -545,8 +545,9 @@
 
         /***/
         $query_get = "SELECT 
-                      * 
-                      FROM servicio 
+                        * 
+                      FROM 
+                      servicio 
                       WHERE 
                       id_servicio ='".$id_servicio."' ";
         $result =  $this->db->query($query_get);
@@ -1231,5 +1232,46 @@
         $result = $this->db->query($query_get);
         return $result->result_array();
     }
+    /**/
+    function valida_recibo_por_pagar($param){
+
+      $id_usuario =  $param["id_usuario"];
+      $id_usuario_venta = $param["id_usuario_venta"];
+      $id_recibo =  $param["id_recibo"];
+      $query_get ="SELECT * FROM proyecto_persona_forma_pago 
+                WHERE 
+                  id_proyecto_persona_forma_pago =$id_recibo
+                AND 
+                  id_usuario =  $id_usuario
+                AND
+                  id_usuario_venta =  $id_usuario_venta
+                AND 
+                  monto_a_pagar >saldo_cubierto 
+                LIMIT 1";
+
+                $result =  $this->db->query($query_get);
+                return $result->result_array();
+    }
+    /**/
+    function valida_recibo_por_pagar_usuario($param){
+      
+      $id_usuario =  $param["id_usuario"];      
+      $id_recibo =  $param["id_recibo"];
+      $query_get ="SELECT * FROM proyecto_persona_forma_pago 
+                  WHERE 
+                    id_proyecto_persona_forma_pago =$id_recibo
+                  AND 
+                    id_usuario =  $id_usuario
+                  AND 
+                    monto_a_pagar >saldo_cubierto 
+                  LIMIT 1";
+
+                  
+                $result =  $this->db->query($query_get);
+                return $result->result_array();
+                
+    }
+
+    /**/
 
 }

@@ -9,8 +9,11 @@
         $flag_envio_gratis =  $servicio["flag_envio_gratis"];
         $text_extra =  is_servicio($servicio);        
         
-        $url_img  = $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;
-        $url_img_error  = $url_request."img_tema/portafolio/producto.png";
+        $url_img  = $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;        
+        $url_img_error  = $url_img;
+        if ($servicio["in_session"] ==  1) {
+            $url_img_error  = $url_request."img_tema/portafolio/producto.png";    
+        }
         $metakeyword =  $servicio["metakeyword"];
         
         

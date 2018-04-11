@@ -46,9 +46,9 @@
                                                     <?=$clasificaciones_departamentos?>
                                                 </div>
                                                 <input 
-                                                    class="col-lg-7 input_busqueda_producto" 
+                                                    class="col-lg-7 input_busqueda_producto input_enid" 
                                                     type="text" 
-                                                    style="height: 30px!important;margin-top: 5px;" 
+                                                    style="margin-top: 5px;" 
                                                     placeholder="Buscar" 
                                                     name="q">
                                                     <button 

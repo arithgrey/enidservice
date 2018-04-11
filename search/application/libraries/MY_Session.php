@@ -165,7 +165,7 @@ class MY_Session
 			session_name(config_item('sess_name'));
 		}
 
-		if (session_id()=='')
+		if(session_id()=='')
 		{
 			session_start();
 		}

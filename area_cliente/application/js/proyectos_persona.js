@@ -3,6 +3,9 @@ function get_lugar_por_stus_compra(){
 	if(get_option("modalidad_ventas") == 0){		
 		/**/
 		switch(parseFloat(get_option("estado_compra"))){
+			case 10:
+		        nuevo_place = ".place_resumen_servicio";	        
+		        break;
 		    case 6:
 		        nuevo_place = ".place_servicios_contratados";	        
 		        break;
@@ -22,7 +25,7 @@ function carga_compras_usuario(){
 	place_info = get_lugar_por_stus_compra();  		
 	url =  "../portafolio/index.php/api/portafolio/proyecto_persona_info/format/json/";		
 	data_send =  { "status": get_option("estado_compra") , "modalidad" : get_option("modalidad_ventas")  };				
-
+	
 	$.ajax({
 			url : url , 
 			type: "GET",

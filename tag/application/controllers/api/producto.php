@@ -95,8 +95,7 @@ class producto extends REST_Controller{
                 if($param["agrega_clasificaciones"] == 1){
                     $data["clasificaciones_niveles"] =  
                     $servicios_complete["clasificaciones_niveles"];    
-                }          
-                
+                }                          
                 $this->response($data);                         
                 
                 

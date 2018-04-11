@@ -1,11 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**/
 function entrega_data_campo($param , $key , $label="", $add_label=0 ){        
-    if($add_label == 1){      
-      return $label ."  ". $param[0][$key];    
-    }else{
-      return $param[0][$key];    
-    }    
+  if(isset($param[0][$key]) && $param[0][$key] !=  null ){  
+      if($add_label == 1){      
+        return $label ."  ". $param[0][$key];    
+      }else{
+        return $param[0][$key];    
+      }    
+  }
 }
 /**/
 function valida_valor_variable($param , $key){

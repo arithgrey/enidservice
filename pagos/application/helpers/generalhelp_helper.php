@@ -178,11 +178,11 @@ if(!function_exists('invierte_date_time')){
   /**/
   function get_info_usuario_valor_variable($q2 , $campo ){
     /**/
-    $id_usuario_envio =0;
+    $val =0;
     if(isset($q2[$campo]) && $q2[$campo] != null ){             
-        $id_usuario_envio =$q2[$campo];
+        $val =$q2[$campo];
     }
-    return $id_usuario_envio;
+    return $val;
   }
   /**/
   function get_info_usuario($q2){    

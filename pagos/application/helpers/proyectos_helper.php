@@ -1,6 +1,30 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){  
   /**/
+  function crea_data_deuda_pendiente($param){
+
+      $data_complete["cuenta_correcta"] =0;
+      if(count($param)>0){
+
+        $recibo=  $param[0];
+          $precio =  $recibo["precio"]; 
+          
+          $num_ciclos_contratados =  $recibo["num_ciclos_contratados"]; 
+          $costo_envio_cliente =  $recibo["costo_envio_cliente"];
+
+          $saldo_pendiente = ($precio * $num_ciclos_contratados) + $costo_envio_cliente;
+          $data_complete["saldo_pendiente"] = $saldo_pendiente;
+          $data_complete["cuenta_correcta"] =1;
+          $data_complete["resumen"] =  $recibo["resumen_pedido"];
+          $data_complete["costo_envio_cliente"] =  $recibo["costo_envio_cliente"];
+          $data_complete["flag_envio_gratis"] =  $recibo["flag_envio_gratis"];
+          $data_complete["id_recibo"] =  $recibo["id_proyecto_persona_forma_pago"];
+
+      }
+      return $data_complete;
+      /**/
+  }
+  /**/
   function get_deuda_total_pendiente($costo_envio , $flag_envio_gratis , $saldo_pendiente){
 
     if($flag_envio_gratis == 0){
