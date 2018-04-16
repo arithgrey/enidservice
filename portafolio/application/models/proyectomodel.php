@@ -88,9 +88,8 @@ class proyectomodel extends CI_Model{
     $numero_exterior = $param["numero_exterior"];
     $numero_interior = $param["numero_interior"];
     $id_codigo_postal =  $param["id_codigo_postal"];
-
-
-
+    $nombre_receptor=  $param["nombre_receptor"];
+    $telefono_receptor=  $param["telefono_receptor"];
 
 
     $query_insert = "INSERT INTO direccion(                        
@@ -98,13 +97,17 @@ class proyectomodel extends CI_Model{
                           entre_calles,    
                           numero_exterior ,
                           numero_interior ,                           
-                          id_codigo_postal )
+                          id_codigo_postal,
+                          nombre_receptor, 
+                          telefono_receptor )
                         VALUES(
                           '".$calle."',
                           '".$referencia."', 
                           '".$numero_exterior."', 
                           '".$numero_interior."',
-                          '".$id_codigo_postal."'
+                          '".$id_codigo_postal."',
+                          '".$nombre_receptor."',
+                          '".$telefono_receptor."'
                           )";
       
       
@@ -207,7 +210,9 @@ class proyectomodel extends CI_Model{
   function verifica_direccion_envio_proyecto_persona_forma_pago($param){
       
       $id_recibo = $param["id_recibo"];
-      $query_get = "SELECT * FROM 
+      $query_get = "SELECT 
+                    * 
+                    FROM 
                     proyecto_persona_forma_pago_direccion 
                     WHERE id_proyecto_persona_forma_pago =".$id_recibo;      
 

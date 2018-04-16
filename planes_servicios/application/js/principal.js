@@ -19,11 +19,9 @@ var cantidad = 0;
 var seccion_recorrido = 0;
 $(document).ready(function() {
 
-	set_option("page", 1);
-	/**/
+	set_option("page", 1);	
 	$("footer").ready(valida_action_inicial);
-	$(".btn_servicios").click(carga_servicios);
-	// $(".btn_grupos").click(carga_grupos);
+	$(".btn_servicios").click(carga_servicios);	
 	$(".tipo_promocion").click(configuracion_inicial);
 	$(".form_nombre_producto").submit(simula_envio);
 	$(".btn_agregar_servicios").click(function() {
@@ -117,8 +115,7 @@ function carga_informacion_servicio(num) {
 		"num" : num
 	}
 
-	$
-			.ajax({
+	$.ajax({
 				url : url,
 				type : "GET",
 				data : data_send,
@@ -980,10 +977,8 @@ function carga_listado_categorias() {
 
 				llenaelementoHTML(".primer_nivel_seccion", data);
 				/* Carga categorias segundo nivel */
-				$(".primer_nivel .num_clasificacion").click(
-						carga_listado_categorias_segundo_nivel);
-				$(".nueva_categoria_producto")
-						.click(agregar_categoria_servicio);
+				$(".primer_nivel .num_clasificacion").click(carga_listado_categorias_segundo_nivel);
+				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 
 			}).fail(
 			function() {
@@ -1020,10 +1015,8 @@ function carga_listado_categorias_segundo_nivel(e) {
 			function(data) {
 
 				llenaelementoHTML(".segundo_nivel_seccion", data);
-				$(".segundo_nivel .num_clasificacion").click(
-						carga_listado_categorias_tercer_nivel);
-				$(".nueva_categoria_producto")
-						.click(agregar_categoria_servicio);
+				$(".segundo_nivel .num_clasificacion").click(carga_listado_categorias_tercer_nivel);
+				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 
 			}).fail(
 			function() {
@@ -1061,10 +1054,8 @@ function carga_listado_categorias_tercer_nivel(e) {
 			function(data) {
 
 				llenaelementoHTML(".tercer_nivel_seccion", data);
-				$(".tercer_nivel .num_clasificacion").click(
-						carga_listado_categorias_cuarto_nivel);
-				$(".nueva_categoria_producto")
-						.click(agregar_categoria_servicio);
+				$(".tercer_nivel .num_clasificacion").click(carga_listado_categorias_cuarto_nivel);
+				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 
 			}).fail(
 			function() {
@@ -1100,10 +1091,8 @@ function carga_listado_categorias_cuarto_nivel(e) {
 			function(data) {
 
 				llenaelementoHTML(".cuarto_nivel_seccion", data);
-				$(".cuarto_nivel .num_clasificacion").click(
-						carga_listado_categorias_quinto_nivel);
-				$(".nueva_categoria_producto")
-						.click(agregar_categoria_servicio);
+				$(".cuarto_nivel .num_clasificacion").click(carga_listado_categorias_quinto_nivel);
+				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 
 			}).fail(
 			function() {
@@ -1138,8 +1127,7 @@ function carga_listado_categorias_quinto_nivel(e) {
 			function(data) {
 
 				llenaelementoHTML(".quinto_nivel_seccion", data);
-				$(".quinto_nivel .num_clasificacion").click(
-carga_listado_categorias_sexto_nivel);
+				$(".quinto_nivel .num_clasificacion").click(carga_listado_categorias_sexto_nivel);
 				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 
 			}).fail(
@@ -1181,6 +1169,7 @@ function carga_listado_categorias_sexto_nivel(e) {
 /**/
 function agregar_categoria_servicio(e) {
 
+
 	id_categoria = e.target.id;
 	set_option("id_clasificacion", id_clasificacion);
 
@@ -1188,12 +1177,11 @@ function agregar_categoria_servicio(e) {
 		set_option("id_ciclo_facturacion", 5);
 	} else {
 		set_option("id_ciclo_facturacion", $("#ciclo").val());
-	}
-
-	if (get_option("nuevo") == 1) {
+	}	
+	if(get_option("nuevo") == 1) {
 		registra_nuevo_servicio();
 	} else {
-		// actualiza_categorias_servicio();
+		actualiza_categorias_servicio();
 	}
 
 }
@@ -1393,15 +1381,13 @@ function get_categoria_quinto_nivel() {
 function valida_action_inicial() {
 
 	set_option("accion", $(".q_action").val());
-
 	switch (parseInt(get_option("accion"))) {
-	case 1:
+	case 1:		
+		carga_servicios();
+	case 0:		
 		$(".btn_agregar_servicios").tab("show");
 		set_option("nuevo", 1);
 		break;
-	case 0:
-		/* Cargamos directo los servicios */
-		carga_servicios();
 		break;
 	default:
 
@@ -1726,5 +1712,4 @@ function evalua_precio(){
 	default:
 		$(".contenedor_precio").show();
 	}
-
 }

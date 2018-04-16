@@ -32,6 +32,13 @@ class usuario extends REST_Controller{
         $this->response($usuario);
     }
     /**/
+    function contacto_GET(){
+
+        $param = $this->get();                        
+        $usuario= $this->usuario_model->get_contacto_usuario($param);
+        $this->response($usuario);
+    }
+    /**/
     function usuario_cobranza_GET(){
 
         $param = $this->get();                        

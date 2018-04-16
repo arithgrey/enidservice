@@ -4,7 +4,23 @@
         parent::__construct();        
         $this->load->database();
     }
-
+    /**/
+    function get_contacto_usuario($param){
+        $id_usuario =  $param["id_usuario"];
+        $query_get =    "SELECT 
+                        idusuario id_usuario, 
+                        nombre , 
+                        apellido_paterno , 
+                        apellido_materno ,
+                        email,
+                        tel_contacto,  
+                        tel_contacto_alterno
+                        FROM 
+                        usuario 
+                        WHERE idusuario = $id_usuario LIMIT 1"; 
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+    }
     /**/
     function get_usuario_por_id_pregunta($param){
         /**/  

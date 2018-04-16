@@ -208,7 +208,6 @@ class Portafolio extends REST_Controller{
     function direccion_pedido_GET(){
         $param =  $this->get();
         $this->response($this->get_direccion_envio($param));
-
     }
     /**/   
     private function get_direccion_envio($param){
@@ -224,14 +223,24 @@ class Portafolio extends REST_Controller{
         $id_usuario =  $this->get_id_usuario($param);        
         $data["id_usuario"] = $id_usuario;        
         $param["id_usuario"] =  $id_usuario;
+
         $domicilio = $this->get_domicilio_cliente($param);        
+        $data["registro_direccion"] =0;
         if(count($domicilio) == 0 ){                
             $domicilio =  $this->proyectomodel->get_domicilio_cliente($id_usuario);            
+            if(count($domicilio) >0 ){ 
+                $data["registro_direccion"] =1;              
+            }
         }
         $data["data_saldo_pendiente"] = 
         $this->get_recibo_saldo_pendiente($param["id_recibo"]);
         $data["info_envio_direccion"] =  $domicilio;
         $data["param"] =$param;
+        /**/
+
+        if($data["registro_direccion"] ==  0){
+            $data["info_usuario"] =  $this->get_contacto_usuario($id_usuario);    
+        }
         $this->load->view("proyecto/domicilio_envio" , $data);                
     }
     /**/
@@ -556,6 +565,18 @@ class Portafolio extends REST_Controller{
         $data["videos"]  =  $this->proyectomodel->get_videos($param);
         $this->load->view("videos/videos" , $data);
         
+    }
+    /**/
+    private function get_contacto_usuario($id_usuario){
+
+        $param["id_usuario"] =  $id_usuario;
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("usuario/contacto/format/json/" , $param);        
+        $data =  $result->response;
+        return json_decode($data , true);  
     }
     /**/
 }?>

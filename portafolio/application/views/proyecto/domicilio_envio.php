@@ -1,5 +1,4 @@
 <?php	
-    
     /**/
     $id_recibo =  $param["id_recibo"];    
     $id_codigo_postal = 0;
@@ -16,9 +15,10 @@
     $flag_existe_direccion_previa = 0;
     $pais ="";
     $direccion_visible ="style='display:none;'";
-    
+    $nombre_receptor =  "";
+    $telefono_receptor = "";
     foreach ($info_envio_direccion as $row){
-        
+
         $direccion =  $row["direccion"];
         $calle =  $row["calle"];
         $entre_calles =  $row["entre_calles"];
@@ -32,8 +32,20 @@
         $direccion_visible ="";
         $id_codigo_postal = $row["id_codigo_postal"];
         $pais ="";        
+        $nombre_receptor =  $row["nombre_receptor"];
+        $telefono_receptor =  $row["telefono_receptor"];
     }
     /**/
+
+
+    if($registro_direccion ==  0) {
+
+        $nombre =  entrega_data_campo($info_usuario , "nombre");
+        $apellido_paterno =  entrega_data_campo($info_usuario , "apellido_paterno");
+        $apellido_materno =  entrega_data_campo($info_usuario , "apellido_materno");
+        $nombre_receptor =  $nombre ." " .$apellido_paterno ." ".$apellido_materno;
+        $telefono_receptor =  entrega_data_campo($info_usuario , "tel_contacto");
+    }
 ?>
 
 <div class="contenedor_deuda_para_envio" style="display: none;">
@@ -84,10 +96,41 @@
 
                                
                                   
-
+                                    <?=n_row_12()?>  
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="titulo_enid_sm_sm">
+                                                    Persona que recibe
+                                                </div>
+                                                <input 
+                                                        maxlength="80"
+                                                        name="nombre_receptor"
+                                                        value="<?=$nombre_receptor?>" 
+                                                        placeholder="* Tu o quien más pueda recibir tu pedido"
+                                                        required="required" 
+                                                        class="nombre_receptor" 
+                                                        id="nombre_receptor"
+                                                        type="text">                                
+                                            </div>              
+                                            <div class="col-lg-6">
+                                                <div class="titulo_enid_sm_sm">
+                                                    Teléfono
+                                                </div>
+                                                <input 
+                                                    maxlength="12"
+                                                    name="telefono_receptor"
+                                                    value="<?=$telefono_receptor?>" 
+                                                    placeholder="* Algún número telefónico "
+                                                    required="required" 
+                                                    class="telefono_receptor" 
+                                                    id="telefono_receptor"
+                                                    type="text">                                
+                                            </div>                                    
+                                        </div>    
+                                    <?=end_row()?>
                                     <?=n_row_12()?>                                
                                         <div class="titulo_enid_sm_sm">
-                                                                Código postal
+                                            Código postal
                                         </div>
                                         <input 
                                             maxlength="5"
@@ -134,34 +177,40 @@
                                         type="text">                
                                     <?=end_row()?>
                                     <?=n_row_12()?>
-                                        <div class="titulo_enid_sm_sm">
-                                            Número Exterior
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="titulo_enid_sm_sm">
+                                                    Número Exterior
+                                                </div>
+                                                <input 
+                                                class="required numero_exterior"
+                                                name="numero_exterior" 
+                                                value="<?=$numero_exterior?>" 
+                                                maxlength="8" 
+                                                placeholder="* Número Exterior" 
+                                                required
+                                                type="text">  
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="titulo_enid_sm_sm">
+                                                    Número Interior
+                                                </div>
+                                                                    
+                                                <input 
+                                                class="numero_interior" 
+                                                name="numero_interior" 
+                                                value="<?=$numero_interior;?>" 
+                                                maxlength="10"  
+                                                autocorrect="off" 
+                                                type="text"
+                                                required>
+                                            </div>
                                         </div>
-                                        <input 
-                                        class="required numero_exterior"
-                                        name="numero_exterior" 
-                                        value="<?=$numero_exterior?>" 
-                                        maxlength="8" 
-                                        placeholder="* Número Exterior" 
-                                        required
-                                        type="text">  
                                     <?=end_row()?>    
-                                    <?=n_row_12()?>
-                                        <div class="titulo_enid_sm_sm">
-                                            Número Interior
-                                        </div>
-                                                            
-                                        <input 
-                                        class="numero_interior" 
-                                        name="numero_interior" 
-                                        value="<?=$numero_interior;?>" 
-                                        maxlength="10"  
-                                        autocorrect="off" 
-                                        type="text"
-                                        required>
-                                    <?=end_row()?>                                      
+                                    
                                     <div <?=$direccion_visible?> 
                                         class="parte_colonia_delegacion">
+
 
                                         <?=n_row_12()?>
                                             <div class="titulo_enid_sm_sm">
@@ -234,6 +283,7 @@
                                                 value="<?=$id_recibo?>">
                                         <?=end_row()?> 
                                         
+
                                         <?=n_row_12()?>                          
                                             <div class="col-lg-12 button_c">
                                                 <button class="btn text_btn_direccion_envio a_enid_blue">

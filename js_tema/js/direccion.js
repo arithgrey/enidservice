@@ -94,6 +94,7 @@ function registra_nueva_direccion(e){
 												
 						$(".contenedor_informacion_envio").hide();
 						$(".contenedor_deuda_para_envio").show();
+						recorrepage(".contenedo_compra_info");
 						
 					}).fail(function(){			
 						show_error_enid(".place_proyectos" , "Error ... ");
@@ -146,11 +147,9 @@ function oculta_delegacion_estado_pais(flag){
 	}
 }
 function carga_informacion_envio_complete(){
-
-	url =  "../portafolio/index.php/api/portafolio/direccion_envio_pedido/format/json/";	
-	alert(get_option("recibo"));
+	/**/
+	url =  "../portafolio/index.php/api/portafolio/direccion_envio_pedido/format/json/";		
 	data_send =  {id_recibo : get_option("recibo")};				
-
 	place_info =".place_info";		
 	if(get_option("interno") ==  1){
 		place_info =".place_servicios_contratados";
@@ -226,7 +225,7 @@ function informacion_envio_complete(){
 		$(".form_direccion_envio").submit(registra_nueva_direccion);
 		*/
 		
-		recorrepage("#tab_lugar_envio");
+		recorrepage(".contenedo_compra_info");
 	}).fail(function(){			
 		show_error_enid(".place_direccion_envio" , "Error ... ");
 	});		

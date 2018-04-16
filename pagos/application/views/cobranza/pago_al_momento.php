@@ -107,7 +107,10 @@
 			            
 			        </div>
 			    </div>
+
+
 			    <div class='texto_direccion_envio_pedido'>
+
 			        <?=entrega_data_campo($informacion_envio , "direccion" )?>
 			        <?=entrega_data_campo($informacion_envio , "calle" )?>
 			        <?=entrega_data_campo($informacion_envio , "numero_exterior")?>
@@ -120,6 +123,17 @@
 			        <?=entrega_data_campo($informacion_envio , "estado" )?>		
 			        <br>
 			    </div>    
+			    <div>
+			    	<div>
+			    		¿Quíen más puede recibir tu pedido?
+			    	</div>
+			    	<div>
+			    		<?=entrega_data_campo($informacion_envio , "nombre_receptor" )?>
+			    	</div>
+			    	<div>
+			    		<?=entrega_data_campo($informacion_envio , "telefono_receptor" )?>
+			    	</div>
+			    </div>
 			</div>
 			<?php else: ?>
 				<?=n_row_12()?>
