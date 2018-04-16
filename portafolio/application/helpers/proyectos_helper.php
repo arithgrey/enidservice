@@ -716,10 +716,11 @@ if(!function_exists('invierte_date_time')){
      
       return "<div class='btn_comprar'><span $estilos>".$text."</span></div>";
   }
-  /**/
+  /*
   function create_seccion_saldo_pendiente($saldo_pendiente){
     return $saldo_pendiente;
   }
+  */
   /**/  
   function create_notificacion_ticket($info_usuario ,  $param ,  $info_ticket){
       

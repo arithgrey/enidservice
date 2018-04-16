@@ -59,9 +59,7 @@ function carga_respuesta_complete(){
 }
 /**/
 function enviar_respuesta(e){
-
-
-
+	
 	data_send =  $(".form_valoracion_pregunta").serialize()+"&"+$.param({"pregunta" : get_option("pregunta") , "modalidad" : get_option("modalidad_ventas")});				
 	url =  "../portafolio/index.php/api/valoracion/respuesta_pregunta/format/json/";			
 	$.ajax({

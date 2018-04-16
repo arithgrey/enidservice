@@ -9,7 +9,7 @@
 		    <form class="form_nombre_producto" id='form_nombre_producto'>                  
 
 		    	
-		    	<div class="col-lg-3">
+		    	<div class="col-lg-3 seccion_menu_tipo_servicio" >
 		    		<?=n_row_12()?>
 		    			<span style="font-size: 1.3em;font-weight: bold;" class="a_enid_blue">
 		    				¿Qué deseas anunciar?	
@@ -37,7 +37,7 @@
 					<?=end_row()?>					
 				</div>
 
-				<div class="col-lg-3">					
+				<div class="col-lg-3 seccion_menu_tipo_servicio" >					
 			        <h4 class="media-heading black text_modalidad" title="¿Qué vendes?">
 			        	<i class="fa fa-shopping-bag"></i>
 					    Artículo
@@ -51,7 +51,7 @@
 			             onkeyup="transforma_mayusculas(this)"
 			            required> 
 				</div>
-				<div class="col-lg-3 contenedor_ciclo_facturacion" style="display: none;">
+				<div class="col-lg-3 contenedor_ciclo_facturacion seccion_menu_tipo_servicio" style="display: none;">
 					
 			         <h4 class="media-heading black">
 					  Ciclo facturación
@@ -65,10 +65,11 @@
 				</div>
 
 
-				<div class="col-lg-3 contenedor_precio">					  
+				<div class="col-lg-3 contenedor_precio seccion_menu_tipo_servicio">					  
 			        <h4 class="media-heading black" 
 			        	title="¿Cual es el precio de tu artículo/Servicio?">
-					  <i class="fa fa-money"></i>
+					  <i class="fa fa-money">
+					  </i>
 					  Precio
 					</h4>            				
 		            <input 
@@ -76,49 +77,85 @@
 		            class="form-control input-sm costo precio" 
 		            name="costo" required="" step="any" type="number"> 
 				</div>		    
-		      
-		        <button class="btn input-sm btn_siguiente_registrar_servicio">
+		      	<div class='seccion_menu_tipo_servicio'>
+		        <button class="btn input-sm btn_siguiente_registrar_servicio ">
 		          Siguiente
 		        </button>
+		        </div>
 		      
 		    </form>
 	    </div>
   	</div>
 
 
-  <div class="contenedor_categorias" style="display: none;">
-  	
-    <div>      
-      <div style="overflow-x: auto;">
-        <table width="100%;">
-          <tr>
-            <td>
-              <div class="primer_nivel_seccion">          
-              </div>    
-            </td>
-            <td>
-              <div class="segundo_nivel_seccion">          
-              </div>    
-            </td>
-            <td>
-              <div class="tercer_nivel_seccion">          
-              </div>
-            </td>
-            <td>
-              <div class="cuarto_nivel_seccion">          
-              </div>
-            </td>
-            <td>
-              <div class="quinto_nivel_seccion">          
-              </div>
-            </td>
-            <td>
-              <div class="sexto_nivel_seccion">          
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
+		  <div class="contenedor_categorias" >
+  	        <div class='contenedor_nivel_tabla'>
+  	        	<?=n_row_12()?>
+  	        		<div class='place_text_nivel'>
+  	        			Grupo
+  	        		</div>
+  	        	<?=end_row();?>
+  	        	<?=n_row_12()?>	
+              		<div class="primer_nivel_seccion">          
+              		</div>
+              	<?=end_row();?>
+              	    
+            </div>
+            <div class='contenedor_nivel_tabla'>
+            	<?=n_row_12()?>
+  	        		<div class='place_text_nivel'>
+  	        			Categoría
+  	        		</div>
+  	        	<?=end_row();?>
+  	        	<?=n_row_12()?>
+                  <div class="segundo_nivel_seccion">          
+                  </div>
+                <?=end_row();?>    
+            </div>
+            <div class='contenedor_nivel_tabla'>
+            	<?=n_row_12()?>
+  	        		<div class='place_text_nivel'>
+  	        			Categoría
+  	        		</div>
+  	        	<?=end_row();?>
+  	        	<?=n_row_12()?>
+                  <div class="tercer_nivel_seccion">          
+                  </div>
+                <?=end_row();?>
+            </div>
+            <div class='contenedor_nivel_tabla'>
+            	<?=n_row_12()?>
+  	        		<div class='place_text_nivel'>
+  	        			Categoría
+  	        		</div>
+  	        	<?=end_row();?>
+  	        	<?=n_row_12()?>
+                  <div class="cuarto_nivel_seccion">          
+                  </div>
+                <?=end_row();?>
+            </div>
+            <div class='contenedor_nivel_tabla'>
+            	<?=n_row_12()?>
+  	        		<div class='place_text_nivel'>
+  	        			Categoría
+  	        		</div>
+  	        	<?=end_row();?>
+  	        	<?=n_row_12()?>
+                  <div class="quinto_nivel_seccion">          
+                  </div>
+                <?=end_row();?>
+            </div>
+            <div class='contenedor_nivel_tabla'>
+            	<?=n_row_12()?>
+  	        		<div class='place_text_nivel'>
+  	        			Categoría
+  	        		</div>
+  	        	<?=end_row();?>
+            	<?=n_row_12()?>
+                  <div class="sexto_nivel_seccion">          
+                  </div>
+                <?=end_row();?>
+            </div>          
+		  </div>
+
 

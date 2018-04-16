@@ -51,6 +51,7 @@ $(document).ready(function(){
 		carga_num_preguntas();
 		carga_buzon();	
 	});
+	
 	$(".preguntas").click(function(e){
 
 		if(e.target.id ==  0){
@@ -72,13 +73,17 @@ $(document).ready(function(){
 	});
 	/**/
 	$(".num_alcance").click(alcance_producto);
+	$("footer").ready(carga_num_preguntas);
+	
+	
 });
 /**/
 function carga_num_preguntas(){
 	
 	set_option("modalidad_ventas" , 1);	
 	url =  "../portafolio/index.php/api/valoracion/preguntas_sin_leer/format/json/";		
-	data_send =  {"modalidad" : get_option("modalidad_ventas")};				
+	data_send =  {"modalidad" : get_option("modalidad_ventas")};	
+	
 	$.ajax({
 			url : url , 
 			type: "GET",
@@ -90,12 +95,17 @@ function carga_num_preguntas(){
 		/**/
 		$(".notificacion_preguntas_sin_leer_ventas").empty();
 		$(".notificacion_preguntas_sin_leer_cliente").empty();
+		total_sin_leer =0;
 		if(data.modo_vendedor>0){
-			llenaelementoHTML(".notificacion_preguntas_sin_leer_ventas"  , "<span class='notificacion_preguntas_no_leida'>"+data.modo_vendedor+"</span>");											
+			llenaelementoHTML(".notificacion_preguntas_sin_leer_ventas"  , "<span class='notificacion_preguntas_no_leida'>"+data.modo_vendedor+"</span>");			
+			total_sin_leer = total_sin_leer + parseInt(data.modo_vendedor); 
 		}if(data.modo_cliente>0){
-			llenaelementoHTML(".notificacion_preguntas_sin_leer_cliente"  ,"<span class='notificacion_preguntas_no_leida'>"+data.modo_cliente+"</span>");											
+			llenaelementoHTML(".notificacion_preguntas_sin_leer_cliente"  ,"<span class='notificacion_preguntas_no_leida'>"+data.modo_cliente+"</span>");
+			total_sin_leer = total_sin_leer + parseInt(data.modo_cliente);
+		}		
+		if(total_sin_leer > 0 ){
+			llenaelementoHTML(".notificacion_preguntas_sin_leer_cliente_buzon"  ,"<span class='notificacion_preguntas_no_leida white'>"+total_sin_leer+"</span>");
 		}
-		
 		
 	}).fail(function(){			
 		show_error_enid(".place_buzon"  , "Error ... ");
@@ -130,8 +140,7 @@ function valida_accion_inicial(){
 function alcance_producto(e){
 	tipo =  e.target.id;	
 	url =  "../q/index.php/api/productos/alcance_producto/format/json/";		
-	data_send =  {tipo:tipo};		
-	alert(tipo);		
+	data_send =  {tipo:tipo};			
 	$.ajax({
 			url : url , 
 			type: "GET",

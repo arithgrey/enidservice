@@ -3,9 +3,7 @@
     function __construct(){      
         parent::__construct();        
         $this->load->database();
-    }
-    /**/
-    
+    }    
     /**/
     function update_inicidencia($param){
 
@@ -15,7 +13,6 @@
       return  $this->db->query($query_update);
 
     }
-
     /**/
     function get_perfiles_disponibles($id_perfil){
         
@@ -244,7 +241,7 @@
 
 
     }
-    /**/
+    /*
     function get_dispositivos_dia(){
 
        $query_get = "SELECT 
@@ -259,20 +256,22 @@
       $result =  $this->db->query($query_get);            
       return $result->result_array();
     }
-    /**/
+    */
+    /*
     function get_sitios_dia(){
 
-      $query_get = "SELECT 
-url , COUNT(0)accesos    
-FROM pagina_web 
-WHERE DATE(fecha_registro) =  DATE(CURRENT_DATE() ) 
-
-GROUP  BY url ORDER BY accesos DESC";
+      $query_get = "SELECT url , COUNT(0)accesos    
+            FROM pagina_web 
+            WHERE DATE(fecha_registro) =  DATE(CURRENT_DATE() ) 
+            
+            GROUP  BY url ORDER BY accesos DESC";
 
 
       $result =  $this->db->query($query_get);            
       return $result->result_array();
-    }    
+    } 
+    */
+    
     /**/
     function get_visitas_unicas_dia_enid($_num){
 

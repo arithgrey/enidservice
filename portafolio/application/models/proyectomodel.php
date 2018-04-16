@@ -202,33 +202,23 @@ class proyectomodel extends CI_Model{
     
     return $colonia;
 
-  }
-  /**/
+  }  
   /**/
   function verifica_direccion_envio_proyecto_persona_forma_pago($param){
-
       
       $id_recibo = $param["id_recibo"];
-
       $query_get = "SELECT * FROM 
                     proyecto_persona_forma_pago_direccion 
                     WHERE id_proyecto_persona_forma_pago =".$id_recibo;      
 
       $result = $this->db->query($query_get);
       $info =  $result->result_array();    
-
-      if(count($info) > 0){
-        
+      if(count($info) > 0){        
         $param["id_direccion"] =  $info[0]["id_direccion"];
-
         return $this->get_data_direccion($param);
-
       }else{
-
         return $info;
-      } 
-
-      
+      }       
   }
   /**/
   function get_data_direccion($param){

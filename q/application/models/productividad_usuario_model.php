@@ -36,9 +36,7 @@
                 $data_complete["email_enviados_enid_service"] = $this->email_enviados_enid_service();                
                 $data_complete["accesos_enid_service"] = $this->accesos_enid_service();                
                 $data_complete["tareas_enid_service"] = 
-                $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];    
-                /**/                    
-                
+                $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];
                 $data_complete["num_pendientes_direccion"] = 
                 $this->tareas_enid_service()[0]["num_pendientes_direccion"];        
                                 
@@ -396,31 +394,42 @@
     function get_adeudo_cliente($param){
 
         $id_usuario =  $param["id_usuario"];        
-         $query_get="SELECT 
+        $query_get="SELECT 
                     (ppf.monto_a_pagar * ppf.num_ciclos_contratados )+ costo_envio_cliente as  saldo_pendiente,
-                    saldo_cubierto
+                    ppf.saldo_cubierto, 
+                    ppfd.id_direccion
                     FROM 
                     proyecto_persona_forma_pago 
                     ppf                         
+                    LEFT OUTER JOIN 
+                    proyecto_persona_forma_pago_direccion  ppfd 
+                    ON 
+                    ppf.id_proyecto_persona_forma_pago =  ppfd.id_proyecto_persona_forma_pago
                     WHERE 
                     ppf.id_usuario = $id_usuario
                     AND 
-                    ppf.monto_a_pagar  > ppf.saldo_cubierto";
+                    ppf.monto_a_pagar  > ppf.saldo_cubierto
+                    AND se_cancela != 1";
 
 
         $result =  $this->db->query($query_get);        
         $data_complete=  $result->result_array();         
 
         $total_deuda =0; 
+        $direciones_pendientes =0;
         foreach ($data_complete as $row){
             
             $saldo_pendiente = $row["saldo_pendiente"];
             $saldo_cubierto = $row["saldo_cubierto"];
+            if ($row["id_direccion"] ==  null ){
+                $direciones_pendientes ++;
+            }
             $deuda =  $saldo_pendiente - $saldo_cubierto; 
             $total_deuda =  $total_deuda + $deuda;
         }
-        return $total_deuda;
-
+        $data_complete_response["total_deuda"] =  $total_deuda;
+        $data_complete_response["sin_direcciones"] =  $direciones_pendientes;
+        return $data_complete_response;
     }    
     /**/
     private function verifica_direccion_registrada_usuario($param){

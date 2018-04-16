@@ -11,7 +11,6 @@ if(!function_exists('invierte_date_time')){
           
           $num_ciclos_contratados =  $recibo["num_ciclos_contratados"]; 
           $costo_envio_cliente =  $recibo["costo_envio_cliente"];
-
           $saldo_pendiente = ($precio * $num_ciclos_contratados) + $costo_envio_cliente;
           $data_complete["saldo_pendiente"] = $saldo_pendiente;
           $data_complete["cuenta_correcta"] =1;
@@ -19,6 +18,8 @@ if(!function_exists('invierte_date_time')){
           $data_complete["costo_envio_cliente"] =  $recibo["costo_envio_cliente"];
           $data_complete["flag_envio_gratis"] =  $recibo["flag_envio_gratis"];
           $data_complete["id_recibo"] =  $recibo["id_proyecto_persona_forma_pago"];
+          $data_complete["id_usuario"] =  $recibo["id_usuario"];
+          $data_complete["id_usuario_venta"] =  $recibo["id_usuario_venta"];
 
       }
       return $data_complete;

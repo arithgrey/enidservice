@@ -6,8 +6,7 @@ $(document).ready(function(){
 	});	
 
 	/**/
-	$(".f_nombre_usuario").submit(actualiza_nombre_usuario);
-	$(".f_telefono_usuario").submit(actualiza_telefono_usuario);
+	$(".f_nombre_usuario").submit(actualiza_nombre_usuario);	
 	$(".tab_privacidad_seguridad").click(get_conceptos);
 
 	$(".nombre_usuario").keyup(quita_espacios_nombre_usuario);

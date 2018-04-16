@@ -62,34 +62,7 @@
 
         return $this->db->query($query_update);                      
     }
-    /*
-    function get_email_por_persona($id_persona){
-
-      $query_get ="SELECT 
-                      correo 
-                  FROM 
-                    persona
-                  WHERE  
-                  id_persona = $id_persona 
-                  LIMIT 1";
-        $result  = $this->db->query($query_get);
-        return $result->result_array()[0]["correo"];
-
-    }
-    */
-    /*
-    function get_id_persona_por_proyecto_persona($id_proyecto_persona){
-
-      $query_get ="SELECT id_persona 
-                  FROM 
-                    proyecto_persona 
-                  WHERE  
-                  id_proyecto_persona = $id_proyecto_persona 
-                  LIMIT 1";
-        $result  = $this->db->query($query_get);
-        return $result->result_array()[0]["id_persona"];
-    }
-    */
+    
     /**/
     function get_historial_pagos($param){
 
@@ -595,7 +568,7 @@
                     AND  
                       status = 1
                     AND 
-                      monto_a_pagar <=saldo_cubierto";  
+                      saldo_cubierto>=monto_a_pagar";  
             break;
           case 6:            
             /*Solicitud compra*/
@@ -1257,7 +1230,9 @@
       
       $id_usuario =  $param["id_usuario"];      
       $id_recibo =  $param["id_recibo"];
-      $query_get ="SELECT * FROM proyecto_persona_forma_pago 
+      $query_get ="SELECT 
+                    *
+                  FROM proyecto_persona_forma_pago 
                   WHERE 
                     id_proyecto_persona_forma_pago =$id_recibo
                   AND 
@@ -1265,13 +1240,29 @@
                   AND 
                     monto_a_pagar >saldo_cubierto 
                   LIMIT 1";
-
                   
                 $result =  $this->db->query($query_get);
                 return $result->result_array();
                 
     }
+    function valida_recibo_por_enviar_usuario($param){
 
+      $id_usuario =  $param["id_usuario"];      
+      $id_recibo =  $param["id_recibo"];
+      $query_get ="SELECT * FROM 
+                    proyecto_persona_forma_pago 
+                  WHERE 
+                    id_proyecto_persona_forma_pago =$id_recibo
+                  AND 
+                    id_usuario_venta =  $id_usuario
+                  AND 
+                    monto_a_pagar <= saldo_cubierto 
+                  LIMIT 1";
+
+                $result =  $this->db->query($query_get);
+                return $result->result_array();
+
+    }
     /**/
 
 }

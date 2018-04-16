@@ -4,8 +4,7 @@
 	    <?=$this->load->view("secciones/menu");?>
 	    <div class='col-lg-10'>
 	        <div class="tab-content">            
-	            <div 
-	            	class="tab-pane <?=valida_active_tab('compras' , $action)?>"  
+	            <div class="tab-pane <?=valida_active_tab('compras' , $action)?>"  
 	            	id='tab_mis_pagos'>
 	                <?=n_row_12()?>                
 	                    <div class="place_servicios_contratados"></div>
@@ -25,7 +24,7 @@
 							<br>
 							
 							<center>
-					    		<?=$valoraciones?>
+					    		<?=$valoraciones;?>
 					    	</center>
 					    	<br>
 					    	<div>	
@@ -104,8 +103,6 @@
 </script>    
 <script type="text/javascript" src="<?=base_url('application/js/cobranza.js')?>">
 </script>    
-<script type="text/javascript" src="<?=base_url('application/js/ventas.js')?>">
-</script>    
 <script type="text/javascript" src="<?=base_url('application/js/notificaciones.js')?>">
 </script>    
 <script type="text/javascript" src="../js_tema/js/direccion.js">
@@ -117,7 +114,7 @@
 <link rel="stylesheet" type="text/css" href="../css_tema/template/area_cliente.css">
 <style type="text/css">
 	.notificacion_preguntas_no_leida{
-		background: red;
+		background: #023263;
 		padding: 5px;
 	}
 	.num_alcance:hover{

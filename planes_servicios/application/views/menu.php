@@ -1,8 +1,8 @@
             
-            <ul class="nav tabs ">      
+            <ul class="nav tabs contenedor_menu_enid_service_lateral">      
                 <li class="<?=valida_active_tab('nuevo' , $action)?>">
                     <a  
-                        class="agregar_servicio white blue_enid_background     btn_agregar_servicios  " 
+                        class="agregar_servicio white blue_enid_background btn_agregar_servicios" 
                         href="#tab_form_servicio"
                         style="color: white!important;font-size: .8em;" 
                         data-toggle="tab" >

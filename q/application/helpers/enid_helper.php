@@ -1,7 +1,32 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+    /**/
+    function add_pedidos_sin_direccion($param){
 
+      $sin_direcciones =  $param["sin_direcciones"];
+      $lista_pendientes ="";
+      $flag_notificaciones = 0;           
+      if($sin_direcciones > 0 ){       
+
+          $lista_pendientes .= 
+          inicio_base_notificacion("../area_cliente/?action=compras", "fa fa-bus " );
+          
+          if($sin_direcciones>1){
+            $lista_pendientes .= $sin_direcciones." de tus compras solicitadas, aún no cuentan con tu dirección de envio";  
+          }else{
+            $lista_pendientes .= "Tu compra aún,  no cuentan con tu dirección de envio";  
+          }
+          
+          $lista_pendientes .= fin_base_notificacion();   
+          
+          $flag_notificaciones ++;                           
+      }
+      $data_complete["html"] =  $lista_pendientes;
+      $data_complete["flag"] =  $flag_notificaciones;
+      return $data_complete;
+    }
+    /**/
     function add_mensajes_sin_leer($num){      
       /**/
       $lista_pendientes ="";
@@ -224,16 +249,21 @@ if(!function_exists('invierte_date_time')){
       return $data_complete;
     }
     /**/
-    function add_saldo_pendiente($adeudos_cliente){
+    function add_saldo_pendiente($param){
+      
+      $adeudos_cliente =  $param["total_deuda"];
       $lista_pendientes ="";
       $flag_notificaciones = 0;           
       if($adeudos_cliente > 0 ){       
 
           $lista_pendientes .= inicio_base_notificacion("../area_cliente/?action=compras", "fa fa-credit-card " );
+          $total_pendiente = round($adeudos_cliente, 2);
           $lista_pendientes .= 'Saldo pendiente 
                     <span 
                       style="padding:2px;"
-                      class="blue_enid_background white">'. round($adeudos_cliente, 2).' MXN
+                      class="blue_enid_background white saldo_pendiente_notificacion " 
+                      deuda_cliente="'.$total_pendiente.'">
+                            '.$total_pendiente .' MXN
 
                     </span>';
           $lista_pendientes .= fin_base_notificacion();   
@@ -285,11 +315,17 @@ if(!function_exists('invierte_date_time')){
             
       $lista_pendientes ="";                            
       /*Agregamos notificación deuda pendiente**/
-      $deuda = add_saldo_pendiente($info_notificaciones["adeudos_cliente"]);
-      
+      $deuda = add_saldo_pendiente($info_notificaciones["adeudos_cliente"]);      
       $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
       $lista_pendientes .= $deuda["html"];        
       /*Agregamos notificación de dirección, cuando esta no está registrada hay que mostrar msj*/
+
+      $deuda = add_pedidos_sin_direccion($info_notificaciones["adeudos_cliente"]);
+      $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
+      $lista_pendientes .= $deuda["html"]; 
+
+
+
       $direccion = add_direccion_envio($info_notificaciones["flag_direccion"]);
       $flag_notificaciones = $flag_notificaciones + $direccion["flag"];
       $lista_pendientes .= $direccion["html"];        
@@ -526,6 +562,11 @@ if(!function_exists('invierte_date_time')){
     /**/
 
     $deuda = add_saldo_pendiente($info_notificaciones["adeudos_cliente"]);
+    $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
+    $lista_pendientes .= $deuda["html"]; 
+
+
+    $deuda = add_pedidos_sin_direccion($info_notificaciones["adeudos_cliente"]);
     $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
     $lista_pendientes .= $deuda["html"]; 
 

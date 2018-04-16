@@ -23,7 +23,6 @@
 	$costo_envio_vendedor  =  $recibo["costo_envio_vendedor"];
 	$id_servicio  =  $recibo["id_servicio"];
 	$resumen_pedido  =  $recibo["resumen_pedido"];
-
 	$saldo_pendiente =  ($monto_a_pagar * $num_ciclos_contratados )- $saldo_cubierto;	
 
 
@@ -58,7 +57,7 @@
 		<div style="margin-top: 10px; ">
 			<h3>
 				<span style="color: black;font-weight: bold;"> 	
-					Formas de pago
+					<i class="fa fa-credit-card "></i> Formas de pago
 				</span>
 			</h3>
 		</div>		
@@ -85,11 +84,66 @@
 				</div>
 			</a>
 		<?=end_row()?>
-
+	
+	
+	
+		<div style="margin-top: 10px; ">
+			<h3>
+				<span style="color: black;font-weight: bold;"> 	
+					Dirección de envío
+				</span>
+			</h3>
+		</div>		
+		<div>
+			<?php if(count($informacion_envio)>0):?>
+				<div style="background:#1F2839;color: white;padding: 10px;">
+			    <div style="margin-top: 10px;" class="text-right">
+			        <div 	
+			        	class="a_enid_blue btn_direccion_envio fa fa-pencil"  
+			        	id='<?=$id_recibo?>'						
+						href="#tab_mis_pagos"			        	
+						data-toggle="tab"
+			        	style="color: white!important">
+			            
+			        </div>
+			    </div>
+			    <div class='texto_direccion_envio_pedido'>
+			        <?=entrega_data_campo($informacion_envio , "direccion" )?>
+			        <?=entrega_data_campo($informacion_envio , "calle" )?>
+			        <?=entrega_data_campo($informacion_envio , "numero_exterior")?>
+			        <?=entrega_data_campo($informacion_envio , "numero_interior")?>
+			        <?=entrega_data_campo($informacion_envio , "entre_calles")?>
+			        <?=entrega_data_campo($informacion_envio , "cp")?>
+			        <?=entrega_data_campo($informacion_envio , "asentamiento")?>
+			        <?=entrega_data_campo($informacion_envio , "municipio")?>
+			        <?=entrega_data_campo($informacion_envio , "ciudad" )?>
+			        <?=entrega_data_campo($informacion_envio , "estado" )?>		
+			        <br>
+			    </div>    
+			</div>
+			<?php else: ?>
+				<?=n_row_12()?>
+					<div class="btn_direccion_envio contenedor_agregar_direccion_envio_pedido" 
+						id='<?=$id_recibo?>'
+						href="#tab_mis_pagos"			        	
+						data-toggle="tab">						
+						<i class="fa fa-bus ">
+						</i> 
+						Agrega la dirección de envío de tu pedido!
+						
+					</div>
+				<?=end_row()?>
+			<?php endif;?>
+		</div>
+		<hr>
+		
+		
+		
 		<?=n_row_12()?>
 			<div style="margin-top: 30px;">
 				<a 	class="cancelar_compra"
 					id="<?=$id_recibo?>" 
+					modalidad='0'
 					style="background: #f00 !important;padding: 10px!important;color:white !important;font-weight: bold !important;">
 					CANCELAR COMPRA
 				</a>
@@ -166,5 +220,29 @@
 	.contenedor_tipo_pago:hover{
 		cursor: pointer;
 		background: #005dff;
+	}
+	.contenedor_agregar_direccion_envio_pedido{
+	
+		background: #005dff;
+		padding: 10px;
+		border-style: solid;
+		border-width: 1px;
+		margin-top: 10px;
+		font-size: 1.2em;		
+		color: white;
+	}
+	.contenedor_agregar_direccion_envio_pedido:hover{
+		cursor: pointer;
+		background: #0057cc;
+		padding: 10px;
+		border-style: solid;
+		border-width: 1px;
+		margin-top: 10px;
+		font-size: 1.2em;		
+		color: white;
+	}
+	.texto_direccion_envio_pedido{
+		font-size: .9em;
+		text-transform: uppercase;
 	}
 </style>

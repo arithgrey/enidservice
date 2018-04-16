@@ -8,7 +8,7 @@ $("footer").ready(function(){
 	, "Felicidades ahora estás suscrito !!", "Error al cargar los datos de las gráficas, reportar al administrador"
 	, "Ocurio un error al intentar registrar cambio, reporte al administrador del sistema" ];
 
-	key_enid =  "AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4";
+	//key_enid =  "AIzaSyAVF0GA9R64Jnbd3ZX53TnLI-61vOqcq-4";
 	$(".text-filtro-enid").click(show_fields_mov);
 	$(".more-info-f").click(carga_contenido);
 	$(".form-busqueda-general").submit(new_busqueda_general);

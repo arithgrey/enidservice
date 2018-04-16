@@ -62,8 +62,8 @@ if(!function_exists('invierte_date_time')){
   function valida_boton_pago($param , $id_proyecto_persona_forma_pago){
   
     $btn ="<a  
-              style='background:#0A2C8F !important' 
-              class='btn resumen_pagos_pendientes'
+              style='background:#0A2C8F !important; color:white!important;' 
+              class='btn resumen_pagos_pendientes white'
               id='".$id_proyecto_persona_forma_pago."'
               href='#tab_renovar_servicio' data-toggle='tab' >  
               <i class='fa fa-credit-card-alt'></i>
@@ -77,15 +77,17 @@ if(!function_exists('invierte_date_time')){
       $btn ="<table width='100%'>
               <tr> 
                 <td>
-                  <a  class='a_enid_blue'              
+                  <a  class='a_enid_blue'
+                    style='color:white!important;'              
                       href='".$url."'>  
                       <i class='fa fa-credit-card-alt'></i>
                       Liquidar ahora!
                   </a>
                 </td>
 
-                <td>
+                <td class='text-right'>
                   <a  class='a_enid_black'              
+                      style='color:white!important;'              
                       href='../area_cliente/?action=compras'>                
                       Ver tus compras
                   </a>

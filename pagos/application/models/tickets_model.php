@@ -212,16 +212,24 @@
     function cancela_orden_compra($param){
         
         $id_recibo =  $param["id_recibo"];
+        $cancela_cliente = $param["cancela_cliente"];
+        
+        $extra_cancelacion = " cancela_cliente =0 ";
+        if ($cancela_cliente ==  1){
+          $extra_cancelacion = " cancela_cliente =1 ";  
+        }
         $query_update = "UPDATE 
                             proyecto_persona_forma_pago 
-                          SET status = 10,
-                          fecha_cancelacion = current_date()
+                          SET 
+                            status = 10,
+                            fecha_cancelacion = current_date(), 
+                            $extra_cancelacion,
+                            se_cancela =1
                           WHERE 
                             id_proyecto_persona_forma_pago = $id_recibo 
                           LIMIT 1";
         
-        return   $this->db->query($query_update);
-        
+        return   $this->db->query($query_update);        
     }
 
 }

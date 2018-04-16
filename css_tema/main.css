@@ -92,3 +92,9 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
     transform: rotate(360deg);
 }
 }
+.notificacion_enid{
+	background: #023263;
+	padding: 5px;
+	color: white!important;
+	font-size: .9em;
+}

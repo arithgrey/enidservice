@@ -35,281 +35,217 @@
     }
     /**/
 ?>
-<div>
-    <div>
-        <div class="row">
-        	<div 
-                class="col-lg-6 col-lg-offset-3" 
+
+<div class="contenedor_deuda_para_envio" style="display: none;">
+    <div class="col-lg-6 col-lg-offset-3">
+        <?=n_row_12()?>                            
+            <div class="col-lg-6 col-lg-offset-3">
+                <img src="../img_tema/bancos/ejemplo_proceso_envio.png" width="100%">
+            </div>
+        <?=end_row()?>
+        <?=n_row_12()?>                            
+            <p  style="font-size: 1.8em;padding: 5px;" class="blue_enid_background white">
+                SALDO PENDIENTE
+                <?=$data_saldo_pendiente;?>MXN               
+            </p>
+            <div>   
+                <?=valida_boton_pago($param , $id_recibo)?>
+            </div>
+        <?=end_row()?>
+    </div>
+
+</div>                                  
+                        
+
+
+
+
+
+
+
+<div class='contenedor_informacion_envio'>    
+    <div class="row">
+        	<div class="col-lg-6 col-lg-offset-3" 
                 style="border-style:solid;border-width: 1px;padding: 5px;">
-                <div>                    
-                    <div>   
-                        <div>
+                
+                    
+                        <?=n_row_12()?>
                             <center>
-                                <span style="font-size: 48px;line-height: 80%;">
-                                    <i class="fa fa-bus"></i>
-                                    Dirección de envio 
-                                </span>
+                                <h2 class="titulo_enid">
+                                    DIRECCIÓN DE ENVÍO
+                                </h2>                                
                             </center>
-                        </div>                   
+                        <?=end_row()?>
                         <br>                
                         <div 
                             id='modificar_direccion_seccion' class="contenedor_form_envio">
                             <hr>
                             <form class="form-horizontal form_direccion_envio">
 
-                                <div>                                    
-                                  <?=n_row_12()?>
-                                    <div>
-                                        
-                            
+                               
+                                  
 
-                                        <div>
-                                                    
-                                                    <div class="value">                
-                                                            <label class="label-off"">
+                                    <?=n_row_12()?>                                
+                                        <div class="titulo_enid_sm_sm">
                                                                 Código postal
-                                                            </label> 
-                                                            <input 
-                                                                maxlength="5"
-                                                                name="cp"
-                                                                value="<?=$cp?>" 
-                                                                placeholder="* Código postal"
-                                                                required="required" 
-                                                                class="codigo_postal" 
-                                                                id="codigo_postal"
-                                                                type="text">                
-                                                                <span class="place_codigo_postal">
-                                                                </span>
-                                                                <input type="hidden" 
-                                                                name="id_usuario"
-                                                                value="<?=$id_usuario?>">
-                                                            
-                                                    </div>
-                                                    
-                                                    
                                         </div>
+                                        <input 
+                                            maxlength="5"
+                                            name="cp"
+                                            value="<?=$cp?>" 
+                                            placeholder="* Código postal"
+                                            required="required" 
+                                            class="codigo_postal" 
+                                            id="codigo_postal"
+                                            type="text">                
+                                        <span class="place_codigo_postal">
+                                        </span>
+                                        <input type="hidden" 
+                                            name="id_usuario"
+                                            value="<?=$id_usuario?>">
+                                        
+                                    <?=end_row()?>
 
-                                        <div>      
-                                                    <div class="value">                    
-                                                            <label class="label-off" for="dwfrm_profile_address_address1">
-                                                                Calle
-                                                            </label> 
-                                                            <input 
-                                                            class="textinput address1  
-                                                            required" 
-                                                            name="calle" 
+                                    <?=n_row_12()?>
+                                            <div class="titulo_enid_sm_sm">
+                                                Calle
+                                            </div>                                            
+                                            <input 
+                                                class="textinput address1  
+                                                required" 
+                                                name="calle" 
 
-                                                            value="<?=$calle;?>" 
-                                                            maxlength="30" 
-                                                            placeholder="* Calle" 
-                                                            required="required" 
-                                                            autocorrect="off" type="text">
-                                                                      
-                                                    </div>
-                                                
-                                        </div>
-                                        <div>      
-                                                    <div class="value">                  
-                                                          <label class="label-off" for="dwfrm_profile_address_address3">
+                                                value="<?=$calle;?>" 
+                                                maxlength="30" 
+                                                placeholder="* Calle" 
+                                                required="required" 
+                                                autocorrect="off" type="text">
+                                    <?=end_row()?>
+
+                                    <?=n_row_12()?>
+                                        <div class="titulo_enid_sm_sm">        
                                                             Entre la calle y la calle, o información adicional
-                                                          </label> 
-                                                          <input
-                                                          required 
-                                                          class="textinput address3 " 
-                                                          name="referencia" 
-                                                          value="<?=$entre_calles;?>"                                                           
-                                                          placeholder="Entre la calle y la calle, o información adicional" 
-                                                          type="text">                
-                                                    </div>      
-                                                    
                                         </div>
-
-                                        <div>
-                                                
-                                                    <div class="value">
-                                                          
-                                                            <label class="label-off" for="dwfrm_profile_address_houseNumber">
-                                                            Número Exterior
-                                                            </label> 
-                                                            <input 
-                                                                class="required numero_exterior"
-                                                                name="numero_exterior" 
-                                                                value="<?=$numero_exterior?>" 
-                                                                maxlength="8" 
-                                                                placeholder="* Número Exterior" 
-                                                                required
-                                                                type="text">
-                                                        
-                                                    </div>              
+                                        <input
+                                        required 
+                                        class="textinput address3 " 
+                                        name="referencia" 
+                                        value="<?=$entre_calles;?>"                             placeholder="Entre la calle y la calle, o información adicional" 
+                                        type="text">                
+                                    <?=end_row()?>
+                                    <?=n_row_12()?>
+                                        <div class="titulo_enid_sm_sm">
+                                            Número Exterior
                                         </div>
-
-                                        <div>              
-                                                    <div class="value">                                
-                                                            <label class="label-off" for="dwfrm_profile_address_address2">
-                                                                Número Interior
-                                                            </label> 
-                                                            <input 
-                                                            class="numero_interior" 
-                                                            name="numero_interior" 
-                                                            value="<?=$numero_interior;?>" 
-                                                            maxlength="10"  
-                                                            autocorrect="off" 
-                                                            type="text"
-                                                            required>               
-                                                        
-                                                    </div>      
+                                        <input 
+                                        class="required numero_exterior"
+                                        name="numero_exterior" 
+                                        value="<?=$numero_exterior?>" 
+                                        maxlength="8" 
+                                        placeholder="* Número Exterior" 
+                                        required
+                                        type="text">  
+                                    <?=end_row()?>    
+                                    <?=n_row_12()?>
+                                        <div class="titulo_enid_sm_sm">
+                                            Número Interior
                                         </div>
+                                                            
+                                        <input 
+                                        class="numero_interior" 
+                                        name="numero_interior" 
+                                        value="<?=$numero_interior;?>" 
+                                        maxlength="10"  
+                                        autocorrect="off" 
+                                        type="text"
+                                        required>
+                                    <?=end_row()?>                                      
+                                    <div <?=$direccion_visible?> 
+                                        class="parte_colonia_delegacion">
 
-                                        <div <?=$direccion_visible?> class="parte_colonia_delegacion">
-
-                                        <div>            
-                                                    <div class="value">                
-                                                            <label 
-                                                            class="label-off" 
-                                                            for="dwfrm_profile_address_colony">
-                                                                Colonia
-                                                            </label> 
-                                                            <div class="place_colonias_info">
-                                                                <input type="text" name="colonia" 
+                                        <?=n_row_12()?>
+                                            <div class="titulo_enid_sm_sm">
+                                                Colonia
+                                            </div>
+                                            <div class="place_colonias_info">
+                                                <input type="text" name="colonia" 
                                                                 value="<?=$asentamiento?>" readonly>
-                                                            </div>
-                                                    </div>      
-                                                    <span class="place_asentamiento">
-                                                        
-                                                    </span>
+                                            </div>
                                                     
-                                        </div>
-                                        <div>
-                                            <div class=" district delegacion_c" 
-                                           >
-                                                        <div class="value">
-                                                                              
-                                                                <label class="label-off" for="dwfrm_profile_address_district">
+                                            <span class="place_asentamiento">
+                                            </span>
+                                        <?=end_row()?>                                                  
+                                        <?=n_row_12()?>
+                                            <div class=" district delegacion_c">
+                                                <div class="titulo_enid_sm_sm">
                                                                     Delegación o Municipio
-                                                                </label> 
-                                                                <div class="place_delegaciones_info">
-                                                                    <input 
-                                                                    type="text" 
-                                                                    name="delegacion"
-                                                                    value="<?=$municipio?>" readonly>
-                                                                </div>              
-                                                        </div>      
+                                                </div>
+                                                <div class="place_delegaciones_info">
+                                                    <input 
+                                                        type="text" 
+                                                        name="delegacion"
+                                                        value="<?=$municipio?>" readonly>
+                                                </div>              
                                             </div>
-                                        
+                                        <?=end_row()?>          
+                                        <?=n_row_12()?>
                                             <div class=" district  estado_c">
-                                                        <div class="value">
-                                                                <label 
-                                                                class="label-off" for="dwfrm_profile_address_district">
-                                                                    Estado    
-                                                                </label> 
-                                                                <div class="place_estado_info">
-                                                                    <input 
-                                                                    type="text" 
-                                                                    name="estado"
-                                                                    value="<?=$estado?>" readonly>
-                                                                </div>              
-                                                        </div>      
+                                                <div class="titulo_enid_sm_sm">
+                                                    Estado    
+                                                </div>            
+                                                <div class="place_estado_info">
+                                                    <input 
+                                                        type="text" 
+                                                        name="estado"
+                                                        value="<?=$estado?>" readonly>
+                                                </div>              
                                             </div>
-
-
+                                        <?=end_row()?>                           
+                                        <?=n_row_12()?>
                                             <div class=" district pais_c">
-                                                        <div class="value">
-                                                                <label 
-                                                                class="label-off" for="dwfrm_profile_address_district">
-                                                                    País    
-                                                                </label> 
-                                                                <div class="place_pais_info">
-                                                                    
-                                                                </div>              
-                                                        </div>      
+                                                <div class="value">
+                                                    <div class="titulo_enid_sm_sm">  
+                                                        País    
+                                                    </div>
+                                                    <div class="place_pais_info">
+                                                    </div>              
+                                                </div>      
                                             </div>
 
-                                                    
-                                                    <div class="direccion_principal_c">
-                                                        <label class="strong">
-                                                            Esta es mi dirección principal 
-                                                        </label>
-                                                        <select name='direccion_principal'>
-                                                            <option value="1">
-                                                                SI 
-                                                            </option>    
-                                                            <option value="0">
-                                                                NO 
-                                                            </option>
-                                                        </select>
-                                                    </div>
+                                        <?=end_row()?>  
 
-                                                    <div class="col-lg-12 button_c">
-                                                        <button class="btn text_btn_direccion_envio">
-                                                            Registrar dirección 
-                                                        </button>
-                                                    </div>
-                                            </div>        
-                                        </div>
-
-
-                                        </div>
-                                                  
-
-                                        </div>
-                                        </div>
+                                        <?=n_row_12()?>
+                                            <div class="direccion_principal_c">
+                                                <div class="titulo_enid_sm_sm">
+                                                    Esta es mi dirección principal 
+                                                </div>
+                                                <select name='direccion_principal'>
+                                                    <option value="1">
+                                                        SI
+                                                    </option>    
+                                                    <option value="0">
+                                                        NO 
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <input 
+                                                type="hidden"  
+                                                name="id_recibo" 
+                                                value="<?=$id_recibo?>">
+                                        <?=end_row()?> 
                                         
-                                        <input type="hidden"  name="id_recibo" 
-                                            value="<?=$id_recibo?>">
-                                    </div>
-                                  <?=end_row()?>
+                                        <?=n_row_12()?>                          
+                                            <div class="col-lg-12 button_c">
+                                                <button class="btn text_btn_direccion_envio a_enid_blue">
+                                                                Registrar dirección 
+                                                </button>
+                                            </div>
+                                        <?=end_row()?>                           
                                 </div>
                             </form>
-                        </div>                            
-                        <?=n_row_12()?>                            
-                                <div 
-                                    class="seccion_saldo_pendiente"  
-                                    id="seccion_saldo_pendiente" 
-                                    style="display: none;">
-                                    <div class="price-table">
-                                        <div class="row">
-                                            <div class="col-lg-8 col-lg-offset-2">
-                                                <div class="pricing text-center two">
-                                                    <div>
-                                                        <div>
-                                                            <center>
-                                                                <div style="width: 200px;">
-
-                                                                    <img 
-                                                                    src="../img_tema/bancos/ejemplo_proceso_envio.png"
-                                                                    width="100%">
-                                                                </div>
-                                                            </center>
-                                                        </div>
-                                                        <p  style="font-size: 1.8em;padding: 5px;" 
-                                                            class="blue_enid_background white">
-                                                            <em>
-                                                                
-                                                                <?=create_seccion_saldo_pendiente($data_saldo_pendiente)?>MXN   
-                                                            </em>                                    
-                                                        </p>
-                                                        <p 
-                                                            style="font-weight: bold;font-size: 1.2em;">
-                                                            Saldo pendiente 
-                                                        </p>
-                                                        <div>   
-                                                            <?=valida_boton_pago(
-                                                                $param , 
-                                                                $id_recibo)?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                          
-                        <?=end_row()?>
-                        
-                    </div>
-                </div>
+                        </div>                                                 
             </div>
-        </div>
-    </div>
+    </div>    
 </div>
 
 
@@ -323,9 +259,5 @@
 
 
 
-
-
-
-
-<br>
-<br><br><br><br>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>

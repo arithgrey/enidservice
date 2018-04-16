@@ -1,0 +1,230 @@
+/* PC: */
+@charset "UTF-8";
+.text-danger strong {
+	color: #001ec3;
+}
+            .receipt-main {
+                
+                padding: 40px 30px !important;
+                position: relative;
+                box-shadow: 0 1px 21px #acacac;                
+            }            
+            .receipt-footer h1{            
+                font-weight: 400 !important;
+                margin: 0 !important;
+            }
+            
+            
+            .receipt-right h5 {
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0 0 7px 0;
+            }
+            .receipt-right p {
+                font-size: 12px;
+                margin: 0px;
+            }
+            .receipt-right p i {
+                text-align: center;
+                width: 18px;
+            }
+            .receipt-main td {
+                padding: 9px 20px !important;
+            }
+            .receipt-main th {
+                padding: 13px 20px !important;
+            }
+            .receipt-main td {
+                font-size: 13px;
+                font-weight: initial !important;
+            }
+
+                 
+            #container {
+                background-color: #dcdcdc;
+            }
+            .terminos_btn:hover{
+                cursor: pointer;
+            }
+            .text_ciclo_facturacion:hover{
+                cursor: pointer;
+            }    
+    .tag_servicio:hover{    
+        padding: 10px;
+        background: blue;
+        cursor: pointer;   
+    }  
+    .tag_servicio{
+        background:black;margin-left: 1px;font-size:.8em;padding: 5px;color: white;
+    }
+    .gallery {  
+      margin: 0 auto;
+      padding: 5px;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,.3);
+    }
+    .gallery > div {
+      position: relative;
+      float: left;
+      padding: 5px;
+    }
+    .gallery > div > img {
+      display: block;
+      width: 200px;
+      transition: .1s transform;
+      transform: translateZ(0); /* hack */
+    }
+    .gallery > div:hover {
+      z-index: 1;
+    }
+    .gallery > div:hover > img {
+      transform: scale(1.7,1.7);
+      transition: .3s transform;
+    }
+
+    .nav-tabs>li.active {
+      border: 1px solid #ddd;
+      border-top: 5px solid blue;
+      
+    }
+    .nav-tabs>li {      
+      border: 1px solid #fff;
+      border-top: 3px solid transparent;        
+      min-width: 80px;                              
+    }    
+    .text_agregar_color:hover{
+        cursor: pointer;
+    }
+    .text_info_envio:hover{
+        cursor: pointer;
+    }
+    .contenedor_imagenes_info{
+        border:solid 1px;
+    }
+    .titulo_seccion_producto{
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+    .well{
+        background: #fefefe!important;
+    }.seccion_menu_tipo_servicio{
+        margin-top: 20px;   
+    } 
+    .campo_avanzado{
+    display: none;
+}
+.btn_mostrar_mas_campos{
+    background: #0485D7; 
+    padding: 4px;
+    color: white;
+}
+.btn_ocultar_mas_campos:hover , .btn_mostrar_mas_campos:hover{
+    cursor: pointer;
+}
+.agendar_llamada_btn{
+    background: #0485D7; 
+    padding: 4px;
+    color: white;
+}
+.campo_avanzado_agenda{
+    display: none;
+}
+.alerta_llamadas_agendadas{
+    background: #0a399b;
+    padding: 5px;
+    color: white;
+    font-size: .8em!important;
+}
+.contenedor_form_agenda{
+    display: none;
+}
+.agendar_llamada_btn:hover{
+    cursor: pointer;
+}
+.li_menu{
+    font-size: .8em!important;
+}
+.regresar_btn:hover{
+    cursor: pointer;
+}
+.agregar_info_validacion:hover{
+    cursor: pointer;
+}
+.agregar_info_validacion{
+    font-size: .8em;
+    background: white;
+    padding: 4px;
+}
+.alerta_red_notificacion{
+
+    background:red;
+    padding: 5px;
+    color: white;
+    font-size: .8em!important;
+}.regresar_btn_posible_cliente:hover{
+    cursor: pointer;
+}.btn_convertir_persona{
+    display: none;
+}.btn_agendar_correo{
+    display: none;
+}.btn_agendar_llamada{
+    display: none;
+}.btn_agregar_comentario{
+    display: none;
+}.regresar_btn_posible_cliente{
+    display: none;   
+}.btn_llamar{
+ display: none;      
+}
+.scroll_terms{
+    height: 300px;
+    overflow: auto;
+}
+.termino:hover{
+    cursor: pointer;
+}
+.muestra_input_precio:hover{
+ cursor: pointer;   
+}
+.contenedor_descripcion:hover{
+    cursor: pointer;
+}
+.tipo_promocion{
+        background: white;
+        color: black;
+        border: solid 1px;
+        padding: 10px;
+        margin-top: 10px;
+    }
+.contenedor_principal_planes_servicios{
+	margin-top: 20px;
+}
+.contenedor_nivel_tabla{
+	display: inline-table;	
+}
+.contenedor_categorias{
+	display: none;
+}
+.place_text_nivel{
+	display: none;	
+}
+.seccion_lista_categorias{
+		width: 100%;
+		margin-top: 20px;
+		margin: 0 auto;			
+}
+/* For mobile phones: */
+@media only screen and (max-width: 768px) {
+	 
+	.seccion_lista_categorias{
+		width: 100%;
+		margin-top: 20px;
+		margin: 0 auto;			
+	}
+	.contenedor_nivel_tabla{
+		display: block;	
+	}	    
+	.place_text_nivel{
+		display: block;
+	}
+}

@@ -4,7 +4,8 @@
                 <ul>    
                     <!-- SLIDE  -->
                     <li data-index="rs-3045" data-transition="parallaxtoleft" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000" data-rotate="0"  data-fstransition="fade" data-fsmasterspeed="1500" data-fsslotamount="7" data-saveperformance="off"  data-title="Intro" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
-                        <img src="../img_tema/afiliados/recomendacion.jpg"  alt=""  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
+                        <img src="../img_tema/afiliados/recomendacion.jpg"   
+                        data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10" class="rev-slidebg" data-no-retina>
                         <div class="tp-caption  tp-resizeme white" 
                              id="slide-1706-layer-2" 
                              data-y="['middle','middle','middle','middle']"                              
@@ -18,13 +19,7 @@
                                     <span style="background: black;">
                                        ¿Necesitas ayuda?
                                     </span>
-                                </div>
-                                
-                                <div>
-                                    
-                                    Llámanos                                    
-                                </div>
-                                
+                                </div>                                
                                 <div>                                    
                                     (55)5296-7027
                                 </div>

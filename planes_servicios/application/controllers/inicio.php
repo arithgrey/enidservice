@@ -24,7 +24,7 @@ class Inicio extends CI_Controller {
         }        
         $data["action"] =  $action;
         /*************************************************************/        
-        $this->principal->show_data_page( $data , 'empresas_enid');			
+        $this->principal->show_data_page( $data , 'home_enid');			
     	$this->principal->crea_historico(29 , 0 , $this->sessionclass->getidusuario());
         /**************************************************************/        	
     }    	

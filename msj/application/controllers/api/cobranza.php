@@ -44,7 +44,7 @@ class Cobranza extends REST_Controller{
         $this->response($data_notificacion);
     }
     /**/
-    function get_mensaje_ganancias_afiliado($param){
+    private function get_mensaje_ganancias_afiliado($param){
         
         /**/
         $info_usuario =  $param;
@@ -60,7 +60,7 @@ class Cobranza extends REST_Controller{
         
     }
     /**/
-    function get_reporte_ganancias($param){
+    private function get_reporte_ganancias($param){
         
         /**/
         $url = "pagos/index.php/api/";         
@@ -122,7 +122,7 @@ class Cobranza extends REST_Controller{
     }
     /**/
 
-    function actualiza_pago_notificado($id_recibo){
+    private function actualiza_pago_notificado($id_recibo){
 
         $url = "pagos/index.php/api/"; 
         $param["id_recibo"] = $id_recibo;
@@ -134,7 +134,7 @@ class Cobranza extends REST_Controller{
         return $response;
     }
     /**/
-    function get_cuentas_por_cobrar(){
+    private function get_cuentas_por_cobrar(){
 
         $url = "pagos/index.php/api/"; 
         $extra ="";
@@ -148,7 +148,7 @@ class Cobranza extends REST_Controller{
         
     }
     /**/
-    function get_url_request($extra){
+    private function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 

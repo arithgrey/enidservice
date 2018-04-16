@@ -91,12 +91,9 @@ function registra_nueva_direccion(e){
 								//show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
 							}
 					}).done(function(data){																	
-						
-			
-						$(".seccion_saldo_pendiente").show();
-						$(".form_direccion_envio").hide();			
-						recorrepage(".seccion_saldo_pendiente");
-						
+												
+						$(".contenedor_informacion_envio").hide();
+						$(".contenedor_deuda_para_envio").show();
 						
 					}).fail(function(){			
 						show_error_enid(".place_proyectos" , "Error ... ");
@@ -151,9 +148,10 @@ function oculta_delegacion_estado_pais(flag){
 function carga_informacion_envio_complete(){
 
 	url =  "../portafolio/index.php/api/portafolio/direccion_envio_pedido/format/json/";	
+	alert(get_option("recibo"));
 	data_send =  {id_recibo : get_option("recibo")};				
-	
-	place_info =".place_info";	
+
+	place_info =".place_info";		
 	if(get_option("interno") ==  1){
 		place_info =".place_servicios_contratados";
 	}
@@ -166,14 +164,13 @@ function carga_informacion_envio_complete(){
 				show_load_enid(place_info , "Cargando ... ", 1 );
 			}
 	}).done(function(data){							
-		/**/
-		llenaelementoHTML(place_info , data);				
-		$(".resumen_pagos_pendientes").click(cargar_info_resumen_pago_pendiente);
 		
+		/**/		
+		llenaelementoHTML(place_info , data);				
+		$(".resumen_pagos_pendientes").click(cargar_info_resumen_pago_pendiente);		
 		$(".editar_envio_btn").click(function(){
 			showonehideone(".contenedor_form_envio" ,  ".contenedor_form_envio_text" );
 		});
-
 		/**/
 		$(".codigo_postal").keyup(auto_completa_direccion);
 		
@@ -185,6 +182,7 @@ function carga_informacion_envio_complete(){
 		});
 		/**/
 		$(".form_direccion_envio").submit(registra_nueva_direccion);
+
 		/**/
 		
 		

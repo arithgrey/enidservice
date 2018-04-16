@@ -155,7 +155,6 @@ function config_direccion(){
 		ficha =  data_registro.ficha; 	
 	}
 	
-	
 	llenaelementoHTML(".contenedo_compra_info" , ficha);
 	recorrepage(".contenedor_compra");	
 	$(".codigo_postal").keyup(auto_completa_direccion);		

@@ -37,7 +37,7 @@
                         <i class="fa fa-credit-card-alt">                            
                         </i>                        
                         Mis compras
-                        <span class="place_num_pagos_notificados">                        
+                        <span class="place_num_pagos_por_realizar">                        
                         </span>
                     </a>
                 </li> 
@@ -48,6 +48,8 @@
                         class='black strong btn_buzon'>
                         <i class="fa fa-comments"></i>                        
                         Buzón
+                        <span class='notificacion_preguntas_sin_leer_cliente_buzon'>
+                        </span>
                     </a>
                 </li> 
 

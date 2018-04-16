@@ -1,65 +1,63 @@
 <main>    
-    
-<div class='row'>
-<div style='background:white;'>
-    <div class="col-lg-2">              
-        
-        <nav class="nav-sidebar">
+    <div class="contenedor_principal_enid_service">
+        <div class='row'>
+            <div style='background:white;'>
+                <div class="col-lg-2">                      
+                    <nav class="nav-sidebar">
 
-            <ul class="nav tabs">       
-                <br>        
-                
-                
-                <li class='black li_menu <?=valida_seccion_activa(2 , $activa )?>' 
-                    style='background:white;'>
-                    <a  
-                        href="#tab_charts" 
-                        data-toggle="tab"                         
-                        class='black strong'>
-                        <i class="fa fa-area-chart"></i>
-                        Métricas                        
-                    </a>
-                </li>                 
-                 
-                <li class='black li_menu <?=valida_seccion_activa(1 , $activa )?>' 
-                    style='background:white;'>
-                    <a                          
-                        href="#tab_abrir_ticket" 
-                        data-toggle="tab" 
-                        id='base_tab_clientes' 
-                        class='black strong base_tab_clientes'>
-                        <i class="fa fa-check-circle">
-                        </i>
-                        Pendientes
-                        <span class="place_tareas_pendientes">                            
-                        </span>
-                    </a>
-                </li>       
+                        <ul class="nav tabs">       
+                            <br>        
                             
+                            
+                            <li class='black li_menu <?=valida_seccion_activa(2 , $activa )?>' 
+                                style='background:white;'>
+                                <a  
+                                    href="#tab_charts" 
+                                    data-toggle="tab"                         
+                                    class='black strong'>
+                                    <i class="fa fa-area-chart"></i>
+                                    Métricas                        
+                                </a>
+                            </li>                 
+                             
+                            <li class='black li_menu <?=valida_seccion_activa(1 , $activa )?>' 
+                                style='background:white;'>
+                                <a                          
+                                    href="#tab_abrir_ticket" 
+                                    data-toggle="tab" 
+                                    id='base_tab_clientes' 
+                                    class='black strong base_tab_clientes'>
+                                    <i class="fa fa-check-circle">
+                                    </i>
+                                    Pendientes
+                                    <span class="place_tareas_pendientes">                            
+                                    </span>
+                                </a>
+                            </li>       
+                                        
 
-            </ul>
-        </nav>        
-    </div>
-</div>
-<div class='col-lg-10'>
-    <div class="tab-content">        
-        <input type='hidden' class='id_usuario' value='<?=$id_usuario;?>'>                
-        <div 
-            class="tab-pane <?=valida_seccion_activa(1 , $activa)?>" 
-            id='tab_abrir_ticket'>
-            <?=$this->load->view("tickets/principal")?>                              
-        </div>
-        <div 
-            class="tab-pane  <?=valida_seccion_activa(2 , $activa)?>" 
-            id='tab_charts'>
-            <?=$this->load->view("tickets/charts")?>                              
-        </div>
-    </div>
-</div>
-</div>        
-<?=$this->load->view("modal/principal")?>
-<main>
-    
+                        </ul>
+                    </nav>        
+                </div>
+            </div>
+            <div class='col-lg-10'>
+                <div class="tab-content">        
+                    <input type='hidden' class='id_usuario' value='<?=$id_usuario;?>'>                
+                    <div 
+                        class="tab-pane <?=valida_seccion_activa(1 , $activa)?>" 
+                        id='tab_abrir_ticket'>
+                        <?=$this->load->view("tickets/principal")?>                              
+                    </div>
+                    <div 
+                        class="tab-pane  <?=valida_seccion_activa(2 , $activa)?>" 
+                        id='tab_charts'>
+                        <?=$this->load->view("tickets/charts")?>                              
+                    </div>
+                </div>
+            </div>
+        </div>            
+    </div>    
+<main>    
     <br>
     <br>
     <br>

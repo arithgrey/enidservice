@@ -68,19 +68,36 @@ class Tickets extends REST_Controller{
         
         $param =  $this->get();
         $param["id_usuario"] =  $this->sessionclass->getidusuario();
-        $data["recibo"] = $this->get_recibo_por_pagar($param);
-        $this->load->view("cobranza/form_cancelar_compra" , $data);        
+        $data["modalidad"] =  $param["modalidad"];
+        if($param["modalidad"] ==1 ){
+            $data["recibo"] = $this->get_recibo_por_enviar($param);        
+        }else{
+            $data["recibo"] = $this->get_recibo_por_pagar($param);        
+        }
+        $this->load->view("cobranza/form_cancelar_compra" , $data);            
+        
     }
     /**/
     function cancelar_PUT(){
+        
         $param = $this->put();
         $param["id_usuario"] = $this->sessionclass->getidusuario();
-        $data["recibo"] = $this->get_recibo_por_pagar($param);
         
         $data_complete["registro"] =0;
-        if ($data["recibo"]["cuenta_correcta"] ==  1 ){
-            /*Si la cuenta pertenece hay que realizar la cancelación del la órden de pago*/
-            $data_complete["registro"] = $this->cancelar_orden_compra($param);
+        if ($param["modalidad"]== 0){
+            $data["recibo"] = $this->get_recibo_por_pagar($param);                   
+            if ($data["recibo"]["cuenta_correcta"] ==  1 ){            
+                $param["cancela_cliente"] = ($data["recibo"]["id_usuario"] ==  $param["id_usuario"] )? 1:0;                
+                /*Si la cuenta pertenece hay que realizar la cancelación del la órden de pago*/
+                $data_complete["registro"] = $this->cancelar_orden_compra($param);
+            }
+        }else{
+            $data["recibo"] = $this->get_recibo_por_enviar($param);
+            if ($data["recibo"]["cuenta_correcta"] ==  1 ){
+                $param["cancela_cliente"] = ($data["recibo"]["id_usuario_venta"] ==  $param["id_usuario"] )? 0:1;
+                /*Si la cuenta pertenece hay que realizar la cancelación del la órden de pago*/
+                $data_complete["registro"] = $this->cancelar_orden_compra($param);
+            }
         }
         $this->response($data_complete);
     }
@@ -99,11 +116,27 @@ class Tickets extends REST_Controller{
       $response =  $result->response;        
       return json_decode($response , true); 
     }
+    /**/
+    
+    private function get_recibo_por_enviar($param){
+      
+      $url = "pagos/index.php/api/";         
+      $url_request=  $this->get_url_request($url);
+      $this->restclient->set_option('base_url', $url_request);
+      $this->restclient->set_option('format', "json");        
+      $result =
+      $this->restclient->get("cobranza/recibo_por_enviar_usuario/format/json/", $param);
+      $response =  $result->response;        
+      return json_decode($response , true); 
+    }
+    /**/
     private function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 
         return  $url_request;
     }
-   
+    /**/
+
+    
 }?>

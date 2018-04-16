@@ -286,7 +286,8 @@ class Cobranza extends REST_Controller{
                 $data_acciones_posteriores["es_usuario_nuevo"] =  $es_usuario_nuevo;
                 
                 $this->acciones_posterior_orden_pago($data_acciones_posteriores);
-                $data_orden["ficha"] = $this->carga_ficha_direccion_envio($data_acciones_posteriores);        
+                $data_orden["ficha"] = 
+                $this->carga_ficha_direccion_envio($data_acciones_posteriores);        
                 
 
                 
@@ -431,21 +432,20 @@ class Cobranza extends REST_Controller{
             if($monto_a_pagar > $saldo_cubierto ){                        
                 /**/
 
-                $id_usuario =  $recibo[0]["id_usuario"];
-                
-
-                if (get_info_usuario_valor_variable($param , "cobranza") ==  1){
-                    
+                $id_usuario =  $recibo[0]["id_usuario"];               
+                if (get_info_usuario_valor_variable($param , "cobranza") ==  1){                    
                     /*Aquí se da la opción de que la persona ya pague*/
                     $data_complete["costo_envio_sistema"] =  $this->get_costo_envio($recibo[0]);
                     /*Cargamos el saldo que tiene la persona*/
                     $data_complete["id_recibo"] = $param["id_recibo"];
                     $id_usuario_venta =  $recibo[0]["id_usuario_venta"];
                     $data_complete["id_usuario_venta"] =$id_usuario_venta; 
+                    $data_complete["informacion_envio"] = 
+                    $this->get_direccion_pedido($param["id_recibo"]);
                     $this->load->view("cobranza/pago_al_momento" , $data_complete);    
 
-
                 }else{
+
                     $usuario  =  $this->get_usuario($id_usuario);
                     $data_complete["usuario"] =$usuario; 
                     $data_complete["costo_envio_sistema"] =  $this->get_costo_envio($recibo[0]);
@@ -453,8 +453,6 @@ class Cobranza extends REST_Controller{
                     $this->load->view("cobranza/resumen_no_aplica" , $data_complete);    
                 }
                 
-
-                                 
 
             }else{
 
@@ -465,7 +463,7 @@ class Cobranza extends REST_Controller{
                 $id_usuario_venta =  $recibo[0]["id_usuario_venta"];
                 $usuario  =  $this->get_usuario($id_usuario_venta);
                 $data_complete["usuario_venta"] =$usuario; 
-                
+                $data_complete["modalidad"] =1;
                 $this->load->view("cobranza/notificacion_pago_realizado" , $data_complete);  
                 
 
@@ -643,9 +641,26 @@ class Cobranza extends REST_Controller{
 
         $param = $this->get();
         $data_respose =  $this->cobranzamodel->valida_recibo_por_pagar_usuario($param);
-        $this->response(crea_data_deuda_pendiente($data_respose) );
+        $this->response(crea_data_deuda_pendiente($data_respose));
     }
     /**/
+    function recibo_por_enviar_usuario_GET()
+    {
+        $param = $this->get();
+        $data_respose =  $this->cobranzamodel->valida_recibo_por_enviar_usuario($param);
+        $this->response(crea_data_deuda_pendiente($data_respose) );   
+    }
+    /**/
+    private function get_direccion_pedido($id_recibo){
+        $param["id_recibo"] = $id_recibo;
+        $url = "portafolio/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("portafolio/direccion_pedido/format/json/" , $param);
+        $response =  $result->response;        
+        return json_decode($response , true);     
+    }
 
 
 }?>

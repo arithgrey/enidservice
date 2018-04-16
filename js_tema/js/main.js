@@ -542,8 +542,12 @@ function metricas_perfil(){
 			num_tareas_pendientes =  parseInt(num_tareas_pendientes );
 			if (num_tareas_pendientes > 1) {
 				llenaelementoHTML(".tareas_pendientes_productividad" , "<span class='alerta_notificacion_fail' >"+ num_tareas_pendientes +"</span>");	
+			}			
+			deuda_cliente = $(".saldo_pendiente_notificacion").attr("deuda_cliente");
+			$(".place_num_pagos_por_realizar").empty();
+			if (parseInt(deuda_cliente)>0){
+				llenaelementoHTML(".place_num_pagos_por_realizar" , "<span class='notificacion_enid'>"+deuda_cliente+"MXN</span>");
 			}
-			
 		}).fail(function(){				
 			show_error_enid(".place_notificaciones_usuario"  , "Error al cargar la sección de artistas"); 		
 		});	

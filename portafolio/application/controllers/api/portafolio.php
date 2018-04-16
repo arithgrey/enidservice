@@ -10,10 +10,6 @@ class Portafolio extends REST_Controller{
         $this->load->library("restclient");
         $this->load->library('sessionclass');                                           
     }
-    function direccion_principal_usuario_GET(){
-
-        $this->response("ok");
-    }
     /**/
     function cp_GET(){        
 
@@ -174,11 +170,15 @@ class Portafolio extends REST_Controller{
 
     }
     /**/
+    private  function get_domicilio_cliente($param){
+        return $this->proyectomodel->get_domicilio_cliente($param["id_usuario"]);
+    }
+    /**/
     function direccion_usuario_GET(){
 
         $param = $this->get();             
         $param["id_usuario"] = $this->sessionclass->getidusuario();                        
-        $domicilio =  $this->proyectomodel->get_domicilio_cliente($param["id_usuario"]);            
+        $domicilio =  $this->get_domicilio_cliente($param);            
         $data["info_envio_direccion"] =  $domicilio;
         $data["param"] =$param;
         switch($param["v"]){
@@ -204,27 +204,35 @@ class Portafolio extends REST_Controller{
         }        
     }
     /**/
+
+    function direccion_pedido_GET(){
+        $param =  $this->get();
+        $this->response($this->get_direccion_envio($param));
+
+    }
+    /**/   
+    private function get_direccion_envio($param){
+        
+        return  
+        $this->proyectomodel->verifica_direccion_envio_proyecto_persona_forma_pago($param);
+    }
+    /**/
     function direccion_envio_pedido_GET(){
 
         /**/
         $param = $this->get();             
-        $id_usuario =  $this->get_id_usuario($param);
+        $id_usuario =  $this->get_id_usuario($param);        
         $data["id_usuario"] = $id_usuario;        
-
-        /**/
-        $domicilio = 
-        $this->proyectomodel->verifica_direccion_envio_proyecto_persona_forma_pago($param);
-        
+        $param["id_usuario"] =  $id_usuario;
+        $domicilio = $this->get_domicilio_cliente($param);        
         if(count($domicilio) == 0 ){                
             $domicilio =  $this->proyectomodel->get_domicilio_cliente($id_usuario);            
         }
         $data["data_saldo_pendiente"] = 
         $this->get_recibo_saldo_pendiente($param["id_recibo"]);
-
         $data["info_envio_direccion"] =  $domicilio;
         $data["param"] =$param;
-        $this->load->view("proyecto/domicilio_envio" , $data);        
-        
+        $this->load->view("proyecto/domicilio_envio" , $data);                
     }
     /**/
     function get_recibo_saldo_pendiente($id_recibo){               
@@ -252,7 +260,7 @@ class Portafolio extends REST_Controller{
                 
                 $id_usuario =  $this->get_id_usuario($param);
                 $data_complete["registro_direccion_usuario"] =  
-                $this->proyectomodel->actualiza_direcciones_usuario($id_usuario ,  $id_direccion);
+                $this->proyectomodel->actualiza_direcciones_usuario($id_usuario ,$id_direccion);
             }            
         }        
         $data_complete["externo"] =  get_valor_variable($param , "externo");
@@ -526,13 +534,10 @@ class Portafolio extends REST_Controller{
         $this->load->view("proyecto/list" , $data);                    
     }
     /**/
-    function info_proyectos_fecha_GET(){
-
-        /*************/
+    function info_proyectos_fecha_GET(){        
         $param =  $this->get();         
         $data["proyectos"]  =  $this->empresamodel->get_proyectos_fecha($param);
-        $this->load->view("proyecto/list" , $data);                    
-        
+        $this->load->view("proyecto/list" , $data);                        
     }
     /**/
     function get_url_request($extra){

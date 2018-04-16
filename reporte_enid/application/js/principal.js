@@ -4,72 +4,49 @@ $(document).ready(function(){
 	$("#nuevos_miembros").click(carga_nuevos_miembros);
 	$(".mail_marketing").click(carga_metricas_mail_marketing);
 	$(".form_busqueda_mail_enid").submit(carga_metricas_mail_marketing);
-	$(".usabilidad_btn").click(carga_uso_sistema);
-	
-	$("footer").ready(function(){
-		$(".form_busqueda_global_enid").submit();
+	$(".usabilidad_btn").click(function(){
+		$(".f_usabilidad").submit();
 	});	
+	$(".f_usabilidad").submit(carga_uso_sistema);	
 
-	
-	$(".form_busqueda_global_enid").submit(carga_metricas_cotizaciones);
+	$(".form_busqueda_global_enid").submit(indicadores);
 	$('.datetimepicker4').datepicker();
-	$('.datetimepicker5').datepicker();	
-	$(".form_busqueda_actividad_enid").submit(busqueda_actividad_enid);
-	$(".presentaciones").click(carga_presentaciones);
-	$(".form_presentaciones").submit(carga_presentaciones);	
+	$('.datetimepicker5').datepicker();		
+	//$(".presentaciones").click(carga_presentaciones);	
 	$("#form_metas").submit(registra_metas);
-	$(".cargar_perfiles_disponibles").click(cargar_perfiles_disponibles);
-	$("#form_busqueda_tipo_negocio").submit(cargar_perfiles_disponibles);	
+	//$(".cargar_perfiles_disponibles").click(cargar_perfiles_disponibles);
+	//$("#form_busqueda_tipo_negocio").submit(cargar_perfiles_disponibles);	
 	$(".form_busqueda_desarrollo").submit(carga_metricas_desarrollo);
 	$(".form_busqueda_desarrollo_solicitudes").submit(carga_solicitudes_cliente);
 	$(".comparativa").click(carga_comparativas);
 	$(".form_busqueda_afiliacion").submit(carga_repo_afiliacion);
-	$(".form_busqueda_afiliacion_productividad").submit(carga_repo_afiliacion_productividad);	
-	/**/
-	$(".btn_repo_afiliacion").click(carga_productos_mas_solicitados);
-	/**/
+	$(".form_busqueda_afiliacion_productividad").submit(carga_repo_afiliacion_productividad);		
+	$(".btn_repo_afiliacion").click(carga_productos_mas_solicitados);	
 	$(".form_busqueda_productos_solicitados").submit(carga_productos_mas_solicitados);
 
 });
-/*
-function set_inicidencia(new_inicidencia){	
-	incidencia =  new_inicidencia;
+/*Aquí se carga la data de las métricas del visitas(día)*/
+function carga_uso_sistema(e){
 
-}
-function get_inicidencia(){
-	return incidencia;
-}
-*/
-function carga_uso_sistema(){
 
 	url =  "../q/index.php/api/enid/usabilidad_landing_pages/format/json/";
 	$.ajax({
 		url : url , 
 		type : "GET" ,
-		data: $(".form_busqueda_actividad_enid").serialize(), 
+		data: $(".f_usabilidad").serialize(), 
 		beforeSend: function(){
-			show_load_enid( ".place_usabilidad" , "Cargando ..." , 1 );
+			show_load_enid( ".place_usabilidad_general" , "Cargando ..." , 1 );
 		}
 	}).done(function(data){
-
-
-		//console.log(data);		
-		llenaelementoHTML(".place_usabilidad" , data);
-		$(".sitios_dia").click(carga_info_sitios_dia);
-		$(".dispositivos_dis").click(carga_info_dispositivos_dia);
-		
-		$('th').click(ordena_table_general);
-		
+		llenaelementoHTML(".place_usabilidad_general" , data);		
+		$('th').click(ordena_table_general);	
 	}).fail(function(){
-
-		show_error_enid(".place_usabilidad" , "Error en la usabilidad"); 
-
+		show_error_enid(".place_usabilidad_general" , "Error en la usabilidad"); 
 	});
+	e.preventDefault();
 }
 /**/
-
 function comparativa_dia(){
-
 
 	url = "../q/index.php/api/enid/prospectos_comparativa_d/format/json/";
 	$.ajax({
@@ -147,44 +124,7 @@ function data_eventos_g(e){
 
 
 }
-/**/
-function carga_info_sitios_dia(){
-	$(".place_visitas").empty();
-	url = "../q/index.php/api/enid/sitios_dia/format/json/";  ;
-	$.ajax({
-		url : url , 
-		type: "GET", 
-		beforeSend: function(){
-			show_load_enid(".place_visitas" , "Cargando"  , 1 );
-		}
-	}).done(function(data){
-		llenaelementoHTML(".place_visitas" , data );
-		/**/
-		$("th").click(ordena_table_general);
 
-	}).fail(function(){
-		show_error_enid(".place_visitas", "Error al cargar las visitas ...");
-	});	
-
-}
-function carga_info_dispositivos_dia(){
-
-	$(".place_visitas").empty();
-	url = "../q/index.php/api/enid/dispositivos_dia/format/json/";  ;
-	$.ajax({
-		url : url , 
-		type: "GET", 
-		beforeSend: function(){
-			show_load_enid(".place_visitas" , "Cargando"  , 1 );
-		}
-	}).done(function(data){
-		llenaelementoHTML(".place_visitas" , data );
-		$("th").click(ordena_table_general);
-	}).fail(function(){
-		show_error_enid(".place_visitas", "Error al cargar las visitas ...");
-	});	
-
-}
 /**/
 function carga_nuevos_miembros(){
 	
@@ -206,59 +146,12 @@ function carga_nuevos_miembros(){
 
 
 }
-/*
-function carga_bugs_enid(){
-	
-	url =  "../q/index.php/api/enid/bugs/format/json/";	
-	$.ajax({
-		url :  url , 
-		type: "GET",
-		data: {estado_incidencia : $("#estado_incidencia").val()},
-		beforeSend: function(){
-			show_load_enid(".bugs_enid_service" , "Cargando"  , 1 );
-		}
-	}).done(function(data){
-
-		llenaelementoHTML(".bugs_enid_service" , data);		
-		$(".evaluar_incidencia").click(evaluar);
-	}).fail(function(){
-
-		show_error_enid(".bugs_enid_service", "Error al cargar los nuevos miembros");
-	});
-
-}
-*/
 /**/
 function evaluar(e){
 
 	incidencia = e.target.id;
 	set_inicidencia(incidencia);
 }
-/*
-//function modifica_inicidencia(e){
-	
-	data_send = $("#form-calificacion-incidencia").serialize()+ "&"+$.param({"id_incidencia" : get_inicidencia()}); 	
-	url =  $("#form-calificacion-incidencia").attr("action");	
-	$.ajax({
-		url : url , 
-		type : "PUT", 
-		data :  data_send , 
-		beforeSend: function(){
-
-			show_load_enid(".place_info_calificacion_incidencia" , ""  , 1 );
-		}  
-	}).done(function(data){
-			
-			show_response_ok_enid( ".place_info_calificacion_incidencia", "Status  actualizado!"); 
-			$("#evalua_bug").modal("hide");
-			carga_bugs_enid();
-	}).fail(function(){
-		show_error_enid(".place_info_calificacion_incidencia", "Error al actualizar incidencia");
-	});	
-	
-	e.preventDefault();
-}
-*/
 /**/
 function carga_metricas_mail_marketing(e){
 	
@@ -269,18 +162,18 @@ function carga_metricas_mail_marketing(e){
 		type : "GET", 
 		data :  data_send , 
 		beforeSend: function(){
-			show_load_enid(".place_usabilidad" , "Cargando..." );
+			show_load_enid(".place_mail_marketing" , "Cargando..." );
 		}  
 	}).done(function(data){		
-		llenaelementoHTML(".place_usabilidad", data ); 			
+		llenaelementoHTML(".place_mail_marketing", data ); 			
 	}).fail(function(){
-		show_error_enid(".place_usabilidad", "Error al actualizar incidencia");
+		show_error_enid(".place_mail_marketing", "Error al actualizar incidencia");
 	});	
 	e.preventDefault();
 	
 }
 /**/
-function carga_metricas_cotizaciones(e){
+function indicadores(e){
 
 	data_send = $(".form_busqueda_global_enid").serialize()+"&"+$.param({"vista" :"1"}); 	
 	url =  "../q/index.php/api/enid/metricas_cotizaciones/format/json/";	
@@ -294,30 +187,12 @@ function carga_metricas_cotizaciones(e){
 	}).done(function(data){			
 
 		llenaelementoHTML(".place_usabilidad", data ); 		
-
 		$(".usuarios").click(resumen_usuarios);		
 		$(".contactos").click(resumen_mensajes);	
 		$(".solicitudes").click(resumen_compras);	
 		$(".valoraciones").click(resumen_valoracion);
 		$(".servicios").click(resumen_servicios);
-
-
-
-		/*
-		$(".proyectos_registrados").click(carga_info_proyectos);		
-		$(".cotizaciones_registradas").click(carga_info_cotizaciones);	
-
-			$(".clientes_info").click(cargar_info_clientes);
-			$(".posibles_clientes_contacto").click(cargar_info_clientes_prospecto);
-			$(".num_prospectos_sistema").click(cargar_info_sistema);
-			$(".num_afiliados").click(cargar_info_afiliados);		
-			$(".num_contactos_promociones").click(cargar_contactos_promociones);
-			
-		$(".base_registrada").click(carga_info_registros);
-		$(".base_enviados").click(carga_info_enviados);
-		$('th').click(ordena_table_general);
-		*/
-		
+				
 	}).fail(function(){
 		
 	});		
@@ -557,68 +432,16 @@ function carga_info_blogs(e){
 			show_error_enid(".place_mas_info", "Error al actualizar incidencia");
 		});	
 	
-}
+	}
 
 }
+
 /*
-function lanzar_mensajeria(){
-
-	url =  "../msj/index.php/api/marketing/blaster/format/json/";	
-		$.ajax({
-			url : url , 
-			type : "GET", 
-			data :  data_send , 
-			beforeSend: function(){
-				show_load_enid(".place_envios" , "Cargando..." );
-			}  
-		}).done(function(data){			
-
-			llenaelementoHTML(".place_envios", "Correos enviados: "+data.data_email_enviados ); 					
-
-		}).fail(function(){
-			show_error_enid(".place_envios", "Error al actualizar incidencia");
-		});	
-}
-*/
-/**/
-function busqueda_actividad_enid(e){
-
-	
-	url =  "../q/index.php/api/enid/usabilidad_landing_pages/format/json/";
-	$.ajax({
-		url : url , 
-		type : "GET" ,
-		data: $(".form_busqueda_actividad_enid").serialize() , 
-		beforeSend: function(){
-			show_load_enid( ".place_usabilidad" , "Cargando ..." , 1 );
-		}
-	}).done(function(data){
-		
-
-		llenaelementoHTML(".place_usabilidad" , data);
-		$(".sitios_dia").click(carga_info_sitios_dia);
-		$(".dispositivos_dis").click(carga_info_dispositivos_dia);
-		$('th').click(ordena_table_general);
-
-	}).fail(function(){
-
-		show_error_enid(".place_usabilidad" , "Error en la usabilidad"); 
-
-	});
-	
-
-	
-
-	e.preventDefault();
-}
-
-
 function carga_presentaciones(e){
 
 	url =  "../q/index.php/api/objetivos/presentaciones/format/json/";
 	data_send =  $(".form_presentaciones").serialize();
 	
-
 	$.ajax({
 		url : url , 
 		type : "GET" ,
@@ -639,29 +462,7 @@ function carga_presentaciones(e){
 	
 	e.preventDefault();
 }
-/**/
-/*
-function carga_objetivos_dia(){
-	
-	data_send =  {}; 
-	url =  "../q/index.php/api/objetivos/usuario/format/json/";
-	$.ajax({
-			url : url , 
-			type: "GET",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_objetivos" , "Cargando ... ");
-		}
-	}).done(function(data){										
-		
-		llenaelementoHTML(".place_objetivos" , data);											
-					
-	}).fail(function(){
-			show_error_enid(".place_objetivos" , "Error ... al cargar portafolio.");
-	});	
-	
-}
-*/	
+*/
 /**/
 function registra_metas(e){
 	
@@ -689,71 +490,6 @@ function registra_metas(e){
 }
 /***/
 
-/**/
-function cargar_perfiles_disponibles(e){
-	
-	url =  "../base/index.php/api/perfiles/disponibles/format/json/";
-	data_send =  $("#form_busqueda_tipo_negocio").serialize() +"&"+ $.param({"solo_lectura":0});
-
-	$.ajax({
-			url : url , 
-			type: "GET",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_perfiles_disponibles" , "Cargando ... ");
-		}
-	}).done(function(data){										
-		
-		llenaelementoHTML(".place_perfiles_disponibles" , data);											
-		$(".tipo_servicio").click(actualiza_perfil_disponibles);
-		$(".limpiar_perfiles_dia").click(limpia_perfiles_disponibles);
-					
-	}).fail(function(){
-			show_error_enid(".place_perfiles_disponibles" , "Error ... al cargar portafolio.");
-	});	
-
-	e.preventDefault();
-}
-/**/
-function actualiza_perfil_disponibles(e){
-	
-	url =  "../base/index.php/api/perfiles/disponibles/format/json/";
-	id_tipo_negocio =  e.target.id; 	
-	flag =  e.target.value; 
-
-	data_send = {"id_tipo_negocio" : id_tipo_negocio ,  "flag" : flag  }
-	$.ajax({url : url , 
-			type: "PUT",			
-			data: data_send , 			
-			beforeSend: function(){
-	
-			}
-	}).done(function(data){												
-	
-		cargar_perfiles_disponibles();
-
-	}).fail(function(){
-			show_error_enid(".place_perfiles_disponibles" , "Error ... al cargar portafolio.");
-	});	
-}
-/**/
-function limpia_perfiles_disponibles(){
-
-	url =  "../base/index.php/api/perfiles/disponible/format/json/";
-	data_send =  {};
-	$.ajax({
-			url : url , 
-			type: "DELETE",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_perfiles_disponibles" , "Cargando ... ");
-		}
-	}).done(function(data){												
-		cargar_perfiles_disponibles();					
-	}).fail(function(){
-			show_error_enid(".place_perfiles_disponibles" , "Error ... al cargar portafolio.");
-	});	
-}
 /**/
 function cargar_info_clientes(e){
 
@@ -815,10 +551,8 @@ function cargar_info_clientes_prospecto(e){
 }
 /**/
 function cargar_contactos_promociones(e){
-
-
+	
 	valor =  $(this).attr("num_contactos"); 		
-
 	if(valor>0){
 
 		fecha =  e.target.id;

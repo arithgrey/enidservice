@@ -23,17 +23,20 @@ class Enid extends REST_Controller{
         
     }    
     /**/
+    /*
     function dispositivos_dia_GET(){
         
         $data["dispositivos"] =   $this->enidmodel->get_dispositivos_dia();
         $this->load->view("enid/market/dispositivos_visitados" ,  $data);
     }
-    /**/
+    */
+    /*     
     function sitios_dia_GET(){
         
         $data["sitios_visitados"] =   $this->enidmodel->get_sitios_dia();
         $this->load->view("enid/market/sitios_visitados" ,  $data);
     }
+    */
     /**/
     function usabilidad_landing_pages_GET(){    
 

@@ -14,7 +14,16 @@
 <style type="text/css">
 	body{font-family: 'Muli', sans-serif;}
 </style>
-
+	<?php if ($modalidad ==  1):?>
+		<?=n_row_12()?>	
+			<a 	class="cancelar_compra" 
+				id="<?=$id_recibo;?>" 
+				modalidad ="<?=$modalidad?>"
+				style="background: #f00 !important;padding: 10px!important;color:white !important;font-weight: bold !important;">
+				CANCELAR VENTA
+			</a>
+		<?=end_row()?>
+	<?php endif;?>
 	<div style="margin: 0 auto;width: 66%;">		
 		<center>
 			<div style="width: 200px;">

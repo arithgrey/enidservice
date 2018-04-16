@@ -14,9 +14,7 @@
         if ($servicio["in_session"] ==  1) {
             $url_img_error  = $url_request."img_tema/portafolio/producto.png";    
         }
-        $metakeyword =  $servicio["metakeyword"];
-        
-        
+        $metakeyword =  $servicio["metakeyword"];        
         $color =  isset($servicio["color"]) ? $servicio["color"] : "";
         $flag_servicio =  $servicio["flag_servicio"];
         

@@ -51,69 +51,12 @@ function carga_compras_usuario(){
 	});		
 }
 /**/
-function carga_form_solicitar_desarrollo(e){
-
-	url =  "../portafolio/index.php/api/tickets/form/format/json/";	
-	data_send =  {"id_persona" : get_persona() , id_proyecto : get_proyecto()};				
-
-		$.ajax({
-				url : url , 
-				type: "GET",
-				data: data_send, 
-				beforeSend: function(){
-					show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
-				}
-		}).done(function(data){													
-			
-			llenaelementoHTML(".place_proyectos" , data);							
-
-
-			$(".form_ticket").submit(registra_ticket);
-			$(".regresar_tickets_usuario").click(function(){
-				carga_tikets_usuario_servicio();
-			});
-
-
-		}).fail(function(){			
-			show_error_enid(".place_proyectos" , "Error ... ");
-	});				
-}
-/**/
-function registra_ticket(e){
-
-	url =  "../portafolio/index.php/api/tickets/ticket/format/json/";	
-	data_send = $(".form_ticket").serialize()+"&"+ $.param({"id_proyecto" : get_proyecto() , "id_usuario" : get_id_usuario()});				
-
-		$.ajax({
-				url : url , 
-				type: "POST",
-				data: data_send, 
-				beforeSend: function(){
-					show_load_enid(".place_registro_ticket" , "Cargando ... ", 1 );
-				}
-		}).done(function(data){																
-
-			llenaelementoHTML(".place_registro_ticket" , "A la brevedad se realizará su solicitud!");							
-			set_id_ticket(data); 
-			carga_info_detalle_ticket();
-			/**/
-
-						
-
-		}).fail(function(){			
-			show_error_enid(".place_registro_ticket" , "Error ... ");
-		});	
-					
-	e.preventDefault();
-}
-/**/
 function carga_informacion_envio(e){
 	
-	id_recibo =  e.target.id;
+	id_recibo =  e.target.id;	
 	set_option("recibo" , id_recibo);
 	carga_informacion_envio_complete();
 }
-
 function carga_compras_o_ventas_concluidas(){	
 	
 	place_info = get_lugar_por_stus_compra();  		
