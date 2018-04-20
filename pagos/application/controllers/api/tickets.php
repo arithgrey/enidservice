@@ -137,6 +137,20 @@ class Tickets extends REST_Controller{
         return  $url_request;
     }
     /**/
+    function solicitud_amigo_POST(){
 
+        $param =  $this->post();
+        $param["id_usuario"] =   $this->sessionclass->getidusuario();
+        $db_response =  $this->tickets_model->registra_solicitud_pago_amigo($param);
+        $this->response($db_response);        
+    }
+    /**/
+    function movimientos_usuario_GET(){
+        
+        $param =  $this->get();
+        $param["id_usuario"] =   $this->sessionclass->getidusuario();
+        $response["solicitud_saldo"] =  $this->tickets_model->get_solicitudes_saldo($param);
+        $this->load->view("tickets/solicitudes_saldo" , $response);               
+    }
     
 }?>

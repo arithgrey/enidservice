@@ -31,6 +31,7 @@ var id_proyecto_persona_forma_pago =0;
 var tipo_video =1; 
 $(document).ready(function(){	
 	
+	$("footer").ready(cargar_ultimos_movimientos);
 });
 /**/
 function metodos_de_envio_disponibles(){

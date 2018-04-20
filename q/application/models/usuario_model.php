@@ -93,6 +93,18 @@
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }
+    /**/
+    function get_tipo_entregas($param){
+
+        $id_usuario =  $param["id_usuario"];
+        $query_get = "SELECT 
+                        entregas_en_casa tipo_entregas 
+                        FROM usuario 
+                        WHERE 
+                        idusuario =  $id_usuario LIMIT 1";
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["tipo_entregas"];
+    }
       
 
 }

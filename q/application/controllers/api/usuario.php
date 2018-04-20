@@ -66,4 +66,10 @@ class usuario extends REST_Controller{
         $this->response($db_response);
     }    
     /**/
+    function entregas_en_casa_GET(){
+        $param = $this->get();
+        $db_response=  $this->usuario_model->get_tipo_entregas($param);
+        $this->response($db_response);        
+    }
+    /**/
 }?>

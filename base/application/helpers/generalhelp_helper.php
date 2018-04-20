@@ -1,6 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
   
+/**/
+function valida_activo_entregas_en_casa($valor , $valor_usuario){
+
+  if($valor ==  $valor_usuario){
+      return "button_enid_eleccion_active";
+  }
+} 
+/**/
 function porcentaje($cantidad,$porciento){
   //return number_format($cantidad*$porciento/100 ,$decimales);
   return $cantidad*$porciento/100;
@@ -40,21 +48,24 @@ function valida_active_pane($num , $num_tab){
   }  
 }
 /**/
-function valida_text_imagenes($flag_servicio, $imgs){
-
-    if(count($imgs) == 0){              
-      if($flag_servicio == 1){
-        return "Agrega imagenes para que tu servicio pueda ser publicado!";
-      }else{
-        return "<span class='mensaje_imagenes_visible'>
-                  Agrega imagenes al producto que ofreces así tu producto sera visible
-                </span>";
-      }
+function valida_text_imagenes($tipo_promocion, $imgs){
+    if(count($imgs) == 0){                       
+      $tipo_promocion=  strtolower($tipo_promocion); 
+      $text =  n_row_12();
+          $text .="<span class='mensaje_imagenes_visible'>
+                        Muestra imagenes sobre tu ". $tipo_promocion."
+                        a posibles clientes
+                    </span>";
+      $text .= end_row();
+      $text .= n_row_12();
+          $text .="<small class='small_agregar_imagenes' style='font-size: .7em!important;'>
+                     Tu ".$tipo_promocion." NO será visible hasta que incluyas algunas imágenes
+                  </small>";
+      $text .= end_row();
+      return  $text;
     }else{
       return "Agregar imágenes!";
-    }  
-  
-    
+    }      
 }
 /**/
 function valida_existencia_imagenes($imgs){
@@ -64,14 +75,6 @@ function valida_existencia_imagenes($imgs){
       $estilos ="";
     }
     return $estilos;
-}
-/**/
-function get_text_tipo_servicio($flag_servicio){
-  if ($flag_servicio ==  1) {
-    return "Servicio";
-  }else{
-    return "Producto";
-  }
 }
 /**/
 function get_info_variable($param , $nomber_variable ){
@@ -297,8 +300,6 @@ function filtra_lineas_con_gmail($correos){
   $arreglo_solo_gmail = [];
   $b = 0; 
   for($a=0; $a < count($correos); $a++){ 
-
-
       if(preg_match("/@gmail.com/", $correos[$a])  ==  1 ){          
           $arreglo_solo_gmail[$b] = $correos[$a];                      
           $b++;            
@@ -1536,9 +1537,6 @@ function get_statusevent($status){
           </span>"; 
   }
   /**/
-  function valida_reservaciones_public($in_session , $tel , $mail , $href){
   
-          return "";
-  }
 
 }/*Termina el helper*/

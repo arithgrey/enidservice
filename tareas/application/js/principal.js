@@ -430,12 +430,10 @@ $(document).ready(function(){
 		carga_mensaje_red_social();
 
 	});
-
-	/**************************/	
-
-	$(".btn_comandos_ayuda").click(cargar_comandos_ayuda);	
-	$(".form_comando").submit(registrar_comando);
-	$(".form_up_correo").submit(registrar_actualizacion_correo);
+	
+	//$(".btn_comandos_ayuda").click(cargar_comandos_ayuda);	
+	//$(".form_comando").submit(registrar_comando);
+	//$(".form_up_correo").submit(registrar_actualizacion_correo);
 	
 
 	$(".form_mover_mensaje").submit(mover_mensaje);
@@ -770,7 +768,7 @@ function get_tipo_negocio(){
 function set_tipo_negocio(n_tipo_negocio){
 	tipo_negocio = n_tipo_negocio;
 }
-/**/
+/*
 function cargar_comandos_ayuda(){
 
 	url =  "../base/index.php/api/mensaje/comandos/format/json/";	
@@ -789,7 +787,8 @@ function cargar_comandos_ayuda(){
 		show_error_enid(".place_comandos" , "Error ... al cargar portafolio.");
 	});	
 }
-/**/
+*/
+/*
 function registrar_comando(e){
 
 	url =  "../base/index.php/api/mensaje/comandos/format/json/";	
@@ -803,11 +802,11 @@ function registrar_comando(e){
 		}
 	}).done(function(data){							
 
-		/**/
+		
 			llenaelementoHTML(".place_registro_comandos", data);		
 			document.getElementById("form_comando").reset(); 
 			
-		/**/
+		
 
 	}).fail(function(){
 		show_error_enid(".place_registro_comandos" , "Error ... al cargar portafolio.");
@@ -815,9 +814,11 @@ function registrar_comando(e){
 	cargar_comandos_ayuda();
 	e.preventDefault();
 }
-/**/
+*/
+/*
 function registrar_actualizacion_correo(e){
 	
+
 	url =  "../base/index.php/api/base/prospecto/format/json/";	
 	data_send =  $("#form_up_correo").serialize();
 
@@ -830,6 +831,7 @@ function registrar_actualizacion_correo(e){
 			}
 	}).done(function(data){										
 			
+			console.log(data);
 			show_response_ok_enid(".place_registro" , "Correo actualizado");
 			$(".correo_individual").val("");
 			
@@ -839,6 +841,7 @@ function registrar_actualizacion_correo(e){
 	e.preventDefault();
 
 }
+*/
 /**/
 function mover_mensaje(e){
 	

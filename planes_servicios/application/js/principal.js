@@ -1,6 +1,5 @@
 var servicio = 0;
 var grupo = 0;
-var modalidad = 0;
 var contenido_mensaje = "";
 var nombre_servicio = "";
 var padre = 0;
@@ -33,12 +32,12 @@ $(document).ready(function() {
 	$(".li_menu_servicio").click(function() {
 		$(".btn_agregar_servicios").show();
 	});
-
+	/*
 	$(".li_menu_grupos").click(function() {
 		$(".btn_agregar_servicios").hide();
 	});
-
-	/**/
+	*/
+	
 	$(".contenedor_busqueda_global_enid_service").hide();
 	$(".ci_facturacion").change(evalua_precio);
 
@@ -131,9 +130,12 @@ function carga_informacion_servicio(num) {
 						llenaelementoHTML(".place_servicios", data);
 
 						$(".agregar_img_servicio").click(carga_form_img);
+						/*
 						$(".btn_agregar_termino").click(
 								lista_terminos_disponibles);
+								
 						$(".termino").click(asocia_termino_servicio);
+						*/
 						/**/
 						$(".text_costo").click(muestra_input_costo);
 						$(".text_ciclo_facturacion").click(
@@ -215,12 +217,30 @@ function carga_informacion_servicio(num) {
 							recorrepage(get_option("seccion_a_recorrer"));
 						}
 						$('#summernote').summernote();
-
+						$(".entregas_en_casa").click(u_entregas_en_casa);
 					}).fail(function() {
 				show_error_enid(".place_servicios", "Error ... ");
 			});
 }
 /**/
+function u_entregas_en_casa(e){
+
+	url =  "../base/index.php/api/servicio/entregas_en_casa/format/json/";	
+	data_send  = {entregas_en_casa : e.target.id , servicio : get_option("servicio")};
+	$.ajax({
+		url : url , 
+		type: "PUT",
+		data: data_send , 
+		beforeSend: function(){
+			show_load_enid(".place_sobre_el_negocio" , "Cargando ... ");
+		}
+	}).done(function(data){													
+		carga_informacion_servicio(2);
+	}).fail(function(){
+		//show_error_enid(".place_direccion_envio" , "Error ... al cargar portafolio.");
+	});
+}
+/*
 function lista_terminos_disponibles() {
 
 	url = "../base/index.php/api/servicio/terminos_servicios/format/json/";
@@ -245,56 +265,7 @@ function lista_terminos_disponibles() {
 		show_error_enid(".place_servicios", "Error ... ");
 	});
 }
-/**/
-function agregar_termino_servicio(e) {
-
-	data_send = $(".form_termino_servicio").serialize() + "&" + $.param({
-		servicio : get_option("servicio")
-	});
-	url = "../base/index.php/api/servicio/terminos_servicios/format/json/";
-
-	$.ajax({
-		url : url,
-		type : "POST",
-		data : data_send,
-		beforeSend : function() {
-		}
-	}).done(function(data) {
-
-		lista_terminos_disponibles();
-
-	}).fail(function() {
-		show_error_enid(".place_servicios", "Error ... ");
-	});
-	e.preventDefault();
-}
-/**/
-function asocia_termino_servicio(e) {
-
-	id_caracteristica = e.target.id;
-	data_send = $.param({
-		"servicio" : get_option("servicio"),
-		"caracteristica" : id_caracteristica
-	});
-	url = "../base/index.php/api/servicio/servicio_categoria/format/json/";
-
-	$.ajax({
-		url : url,
-		type : "PUT",
-		data : data_send,
-		beforeSend : function() {
-
-		}
-
-	}).done(function(data) {
-		/**/
-		lista_terminos_disponibles();
-
-	}).fail(function() {
-		show_error_enid(".place_servicios", "Error ... ");
-	});
-
-}
+*/
 /**/
 function muestra_input_costo() {
 
@@ -841,37 +812,11 @@ function muestra_seccion_porcentaje_ganancia_afiliados() {
 	}
 }
 /**/
-function busqueda_terminos(e) {
-
-	data_send = $(".form_busqueda_termino").serialize() + "&" + $.param({
-		"servicio" : get_option("servicio")
-	});
-	url = "../base/index.php/api/servicio/terminos_q/format/json/";
-
-	$.ajax({
-		url : url,
-		type : "GET",
-		data : data_send,
-		beforeSend : function() {
-		}
-	}).done(function(data) {
-		/**/
-		llenaelementoHTML(".lista_terminos_actuales", data);
-		$(".termino").click(asocia_termino_servicio);
-
-	}).fail(function() {
-		show_error_enid(".place_servicios_en_grupos", "Error ... ");
-	});
-	e.preventDefault();
-}
-/**/
 
 /**/
 function configuracion_inicial(e) {
 
-	modalidad = e.target.id;
-
-	set_option("modalidad", modalidad);
+	set_option("modalidad", e.target.id);
 	if (get_option("modalidad") == 1) {
 
 		set_option("id_ciclo_facturacion", 9);
@@ -883,7 +828,7 @@ function configuracion_inicial(e) {
 		$(".contenedor_precio").hide();
 		$(".precio").val(0);
 
-	} else {
+	}else{
 
 		set_option("id_ciclo_facturacion", 5);
 		$(".text_modalidad").text("Artículo/Producto");
@@ -893,23 +838,6 @@ function configuracion_inicial(e) {
 		$(".contenedor_precio").show();
 	}
 
-}
-/**/
-function set_modalidad(n_modalidad) {
-
-	modalidad = n_modalidad;
-	/* Si la modalidad es servicio */
-	if (n_modalidad == 1) {
-
-		set_option("id_ciclo_facturacion", 1);
-	} else {
-		set_option("id_ciclo_facturacion", 5);
-
-	}
-}
-/**/
-function get_modalidad() {
-	return modalidad;
 }
 /**/
 function simula_envio(e) {
@@ -960,7 +888,7 @@ function carga_listado_categorias() {
 	$(".categorias_edicion .sexto_nivel_seccion").empty();
 
 	data_send = {
-		"modalidad" : get_modalidad(),
+		"modalidad" : get_option("modalidad"),
 		"padre" : get_option("padre"),
 		"nivel" : get_option("nivel")
 	};
@@ -999,7 +927,7 @@ function carga_listado_categorias_segundo_nivel(e) {
 	$(".quinto_nivel_seccion").empty();
 	$(".sexto_nivel_seccion").empty();
 	data_send = {
-		"modalidad" : get_modalidad(),
+		"modalidad" : get_option("modalidad"),
 		"padre" : get_option("padre"),
 		"nivel" : get_option("nivel")
 	};
@@ -1034,7 +962,7 @@ function carga_listado_categorias_tercer_nivel(e) {
 	set_option("nivel" , "tercer_nivel");
 	
 	data_send = {
-		"modalidad" : get_modalidad(),
+		"modalidad" : get_option("modalidad"),
 		"padre" : get_option("padre"),
 		"nivel" : get_option("nivel")
 	};
@@ -1075,7 +1003,7 @@ function carga_listado_categorias_cuarto_nivel(e) {
 	$(".sexto_nivel_seccion").empty();
 
 	data_send = {
-		"modalidad" : get_modalidad(),
+		"modalidad" : get_option("modalidad"),
 		"padre" : get_option("padre"),
 		"nivel" : get_option("nivel")
 	};
@@ -1111,7 +1039,7 @@ function carga_listado_categorias_quinto_nivel(e) {
 	$(".sexto_nivel_seccion").empty();
 
 	data_send = {
-		"modalidad" : get_modalidad(),
+		"modalidad" : get_option("modalidad"),
 		"padre" : get_option("padre"),
 		"nivel" : get_option("nivel")
 	};
@@ -1145,7 +1073,7 @@ function carga_listado_categorias_sexto_nivel(e) {
 	set_option("nivel","sexto_nivel");
 	$(".sexto_nivel").empty();
 	data_send = {
-		"modalidad" : get_modalidad(),
+		"modalidad" : get_option("modalidad"),
 		"padre" : get_option("padre"),
 		"nivel" : get_option("nivel")
 	};
@@ -1167,17 +1095,16 @@ function carga_listado_categorias_sexto_nivel(e) {
 
 }
 /**/
-function agregar_categoria_servicio(e) {
-
+function agregar_categoria_servicio(e){
 
 	id_categoria = e.target.id;
 	set_option("id_clasificacion", id_clasificacion);
-
-	if (get_modalidad() == 0) {
+	if (get_option("modalidad") == 0) {
 		set_option("id_ciclo_facturacion", 5);
 	} else {
 		set_option("id_ciclo_facturacion", $("#ciclo").val());
 	}	
+	
 	if(get_option("nuevo") == 1) {
 		registra_nuevo_servicio();
 	} else {
@@ -1197,15 +1124,13 @@ function actualiza_categorias_servicio() {
 		"quinto_nivel" : get_categoria_quinto_nivel(),
 		"id_servicio" : get_option("servicio")
 	};
+	
 	url = "../base/index.php/api/servicio/categorias/format/json/";
-
 	$.ajax({
 		url : url,
 		type : "PUT",
 		data : data_send,
-		beforeSend : function() {
-
-		}
+		beforeSend : function(){}
 	}).done(function(data) {
 		carga_informacion_servicio(3);
 	}).fail(function() {
@@ -1221,7 +1146,7 @@ function registra_nuevo_servicio() {
 
 	data_send = {
 		"nombre_servicio" : get_nombre_servicio(),
-		"flag_servicio" : get_modalidad(),
+		"flag_servicio" : get_option("modalidad"),
 		"precio" : get_costo(),
 		"ciclo_facturacion" : get_option("id_ciclo_facturacion"),
 		"primer_nivel" : get_categoria_primer_nivel(),
@@ -1231,7 +1156,7 @@ function registra_nuevo_servicio() {
 		"quinto_nivel" : get_categoria_quinto_nivel()
 	};
 	url = "../base/index.php/api/servicio/nuevo/format/json/";
-
+	console.log(data_send);
 	$.ajax({
 		url : url,
 		type : "POST",
@@ -1378,21 +1303,7 @@ function get_categoria_quinto_nivel() {
 /**/
 
 /**/
-function valida_action_inicial() {
 
-	set_option("accion", $(".q_action").val());
-	switch (parseInt(get_option("accion"))) {
-	case 1:		
-		carga_servicios();
-	case 0:		
-		$(".btn_agregar_servicios").tab("show");
-		set_option("nuevo", 1);
-		break;
-		break;
-	default:
-
-	}
-}
 /**/
 function get_q_action() {
 	return q_action;
@@ -1711,5 +1622,24 @@ function evalua_precio(){
 		break;
 	default:
 		$(".contenedor_precio").show();
+	}
+}
+/**/
+function valida_action_inicial() {
+	
+	set_option("accion", $(".q_action").val());	
+	switch (parseInt(get_option("accion"))){	
+	case 1:		
+		$(".btn_agregar_servicios").tab("show");
+		set_option("modalidad" , 0);
+		set_option("nuevo", 1);
+		break;
+	case 0:				
+		carga_servicios();
+		set_option("modalidad" , 1);
+		set_option("nuevo", 0);
+		break;
+	default:
+		break;
 	}
 }

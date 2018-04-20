@@ -4,6 +4,20 @@
         parent::__construct();        
         $this->load->database();
     }
+    function update_entregas_en_casa($param){
+
+        
+        $entregas_en_casa = $param["entregas_en_casa"];
+        $id_servicio =  $param["servicio"];
+        $query_update = "UPDATE servicio 
+                            SET 
+                                entregas_en_casa =  $entregas_en_casa 
+                            WHERE 
+                                id_servicio =  '".$id_servicio."'
+                            LIMIT 1";
+                            return  $this->db->query($query_update);
+                            
+    }
     /**/
     function elimina_color_servicio($param){
         
@@ -223,17 +237,17 @@
         
         $modalidad =  $param["modalidad"];            
         $padre = $param["padre"];
-        $extra =  "  padre = ".$padre;
-        
-
+        $extra =  "  padre = ".$padre ." AND flag_servicio =".$modalidad;        
         $query_get = "SELECT 
-            * 
-            FROM 
-            clasificacion
-            WHERE 
-             ".$extra;    
+                        * 
+                        FROM 
+                        clasificacion
+                        WHERE 
+                        ".$extra;    
+        
         $result =  $this->db->query($query_get);
         return $result->result_array();
+        
 
     }
     /**/

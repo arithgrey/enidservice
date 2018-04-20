@@ -1,9 +1,9 @@
-
                 <?=n_row_12()?>               
                     <div class="well" >
                         <div>
                             <span class="titulo_seccion_producto">
-                                SOBRE EL PRODUCTO TU <?=entrega_data_campo($servicio ,"nombre_servicio")?>
+                                INFORMACIÓN SOBRE TU - 
+                                <?=entrega_data_campo($servicio ,"nombre_servicio")?>
                             </span>
                         </div>                    
                         <div class="text_desc_servicio">

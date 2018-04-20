@@ -159,6 +159,12 @@
 .detail-socials a:last-child {
   margin-right: 0;
 }
+.button_seleccion_enid{
+	background: white;
+	color: black;
+	border: solid 1px;
+	padding: 10px;
+}
 @media only screen and (max-width: 500px) {
     
     .product-detail .left-col {

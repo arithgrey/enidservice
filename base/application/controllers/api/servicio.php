@@ -10,6 +10,15 @@ class Servicio extends REST_Controller{
         $this->load->library('sessionclass');      
   } 
   /**/
+  function entregas_en_casa_PUT(){
+        /**/
+      $param =  $this->put();
+      $param["id_usuario"] = $this->sessionclass->getidusuario();
+      $db_response =  $this->serviciosmodel->update_entregas_en_casa($param);
+      $this->response($db_response);
+        
+  }
+  /**/
   function color_POST(){
 
     $param =  $this->post();    
@@ -75,8 +84,6 @@ class Servicio extends REST_Controller{
     $param =  $this->get();
     $data["info_categorias"] =  $this->serviciosmodel->get_categorias_servicios($param);
     $data["nivel"]=  $param["nivel"];
-
-    /***************/    
     if(count($data["info_categorias"]) > 0){
         
         $this->load->view("categoria/principal" , $data);  
@@ -279,13 +286,12 @@ class Servicio extends REST_Controller{
       $servicio  =  $this->serviciosmodel->get_info_servicio($param);      
             
       $data["servicio"] = $servicio;
-      $this->set_option("servicio" , $servicio );
+      $this->set_option("servicio" , $servicio);
       
       if($servicio[0]["flag_servicio"] ==  0){
         $this->crea_data_costo_envio();            
         $data["costo_envio"] = $this->calcula_costo_envio($this->crea_data_costo_envio());  
       }
-
       $clasificaciones=  $this->carga_clasificaciones($data["servicio"]);
       $data["clasificaciones"] =  $clasificaciones;
       $data["ciclos"] =  $this->serviciosmodel->get_ciclos_facturacion($param);      
@@ -293,13 +299,12 @@ class Servicio extends REST_Controller{
       $data["imgs"] =  $this->carga_imagenes_servicio($id_servicio);
       $data["url_request"] = $this->get_url_request("");
       $prm["id_servicio"] =  $id_servicio;           
-      $data["num"] = $param["num"];
-
-      /**/
+      $data["num"] = $param["num"];      
       $prm["id_servicio"]=$id_servicio;
       $data["porcentaje_comision"] = $this->get_porcentaje_comision($prm);      
       $this->load->view("servicios/detalle" , $data);        
   }    
+  /**/  
   /**/
   function get_ciclos_facturacion_servicio($param){
         

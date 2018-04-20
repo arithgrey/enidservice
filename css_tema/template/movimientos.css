@@ -1,96 +1,26 @@
-<h3 style="font-weight: bold;font-size: 3em;">    
-  USUARIOS
-</h3>
-<?=$paginacion?>
-<?php	
-	$l ="";
-	foreach($miembros as $row) {
-	
-		$id_usuario=  $row["id_usuario"]; 
-		$nombre=  $row["nombre"]; 
-		$email=  $row["email"]; 
-		$apellido_paterno=  $row["apellido_paterno"]; 
-		$apellido_materno=  $row["apellido_materno"]; 
-		$tel_contacto=  ""; 
-		$afiliado = $nombre . " " . $apellido_paterno ." " . $apellido_materno;		
-        $url_imagen =  "../imgs/index.php/enid/imagen_usuario/".$id_usuario;
-
-    $editar_datos_usuario = 
-      "class='usuario_enid_service' 
-      data-toggle='tab' href='#tab_mas_info_usuario' 
-            id='".$id_usuario."' ";
-            
-    $fecha_registro =  $row["fecha_registro"];
-    ?>
-    <div  
-        class="popup-box chat-popup" id="qnimate" 
-          style="margin-top: 4px;">
-            <div class="popup-head">
-              <div class="popup-head-left pull-left">
-                <img 
-                  src="<?=$url_imagen?>" style='width: 44px;'
-                   onerror="this.src='../img_tema/user/user.png'"> 
-                  <span class="black">
-                    <?=$afiliado;?>                    
-                  </span>          
-                  <div style="font-size: .6em!important;">
-                    <?=$fecha_registro?>        
-                  </div>
-              </div>
-              
-                
-
-                <?php if ($modo_edicion == 1):?>
-                  <div class="popup-head-right pull-right">                
-                    <span style="font-size: .7em!important" title="Email de recordatorio enviados">
-                      <i class="fa fa-envelope"></i>                  
-                    </span>
-                    <div class="btn-group">
-                            <button 
-                              class="chat-header-button" 
-                              data-toggle="dropdown" 
-                              type="button" 
-                              aria-expanded="false">
-                             <i class="fa fa-plus">                        
-                             </i> 
-                            </button>
-                            <ul role="menu" class="dropdown-menu pull-right">
-                              <li>                          
-                                <a style="font-size: 1.3em;" <?=$editar_datos_usuario?> >
-                                  
-                                  <i class='fa fa-pencil'></i>
-                                  Editar información
-                                </a>
-                              </li>                      
-                            </ul>
-                    </div>  
-                  </div>
-                <?php endif; ?>
-
-              
-          </div>
-        </div> 
-        <?php 
-
-	}	
-?>
-
-<?=$l;?>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-
-
-<style type="text/css">
-  
+.option_ingresar_saldo{
+	border-style: solid;
+	border-width: .5px;
+	margin-top: 10px;		
+	font-weight: bold;
+	padding: 10px;
+	background: #0054ff;
+	color: white!important;
+}	
+.mensaje_envio_amigo{
+	background: black;
+	color: white;
+	padding: 10px;
+	margin-top: 10px;
+}
+.desc_solicitud{
+	text-decoration: underline;
+}
+.btn_solicitud_saldo{
+	width: 100%!important;
+}
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,300);
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
   .popup-box{    
       border: 1px solid #b0b0b0;
       bottom: 0;      
@@ -298,4 +228,3 @@
   .info_persona:hover{
     cursor: pointer;
   }
-</style>

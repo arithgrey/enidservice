@@ -144,7 +144,6 @@
                 font-size: .9em;
                 border-radius: 1px;
             }
-
             .white{
                 color: white !important;
             }
@@ -159,6 +158,15 @@
             
             li{
               list-style: none !important;
+            }
+            .button_enid_eleccion{
+	            background: white;
+				color: black;
+				border: solid 1px;
+				padding: 10px;
+			}
+            .button_enid_eleccion_active{                
+                color: blue !important;                
             }
 
             /*Todo lo que pertenece a medios*/
@@ -243,6 +251,12 @@
     cursor: pointer;
     background: #0052E1!important;
     color: white!important;
+}
+input{
+    background: white!important;
+    background: white !important;
+    height: 30px !important;
+    width: 100%;
 }
 .input_enid{
     background: white!important;

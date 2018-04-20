@@ -10,23 +10,20 @@ class Inicio extends CI_Controller {
     function index(){
         
 		$data = $this->val_session("Grupo ventas - Enid Service - ");        	            
-        $num_perfil =  $this->sessionclass->getperfiles()[0]["idperfil"];
-        
-        
-        $data["ciclo_facturacion"]= $this->principal->create_ciclo_facturacion();  
-        $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
-        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-        
-        $data["q_action"]= valida_q($this->input->get("q"));   
-        $action =  valida_q($this->input->get("action"));                   
-        if($action === 0){
-            $action = "lista";  
-        }        
-        $data["action"] =  $action;
+        $num_perfil =  $this->sessionclass->getperfiles()[0]["idperfil"];        
+        $data["ciclo_facturacion"]= $this->principal->create_ciclo_facturacion();          
+        $data["clasificaciones_departamentos"] = "";
+          
+        $action =  valida_q($this->input->get("action"));           
+        if($action === "nuevo" || $action ===  "vender"){
+            $action = 1;  
+        }else{
+            $action = 0;
+        }         
+        $data["action"] =  $action;        
         /*************************************************************/        
         $this->principal->show_data_page( $data , 'home_enid');			
-    	$this->principal->crea_historico(29 , 0 , $this->sessionclass->getidusuario());
-        /**************************************************************/        	
+    	        	
     }    	
    /**/
     function val_session($titulo_dinamico_page ){        
@@ -50,18 +47,7 @@ class Inicio extends CI_Controller {
         }else{            
             redirect(url_log_out());
         }   
-    }      
-     function get_departamentos($nombre_pagina){
-
-        $q["q"] =  $nombre_pagina;
-        $url = "tag/index.php/api/";         
-        $url_request=  $this->get_url_request($url);
-        $this->restclient->set_option('base_url', $url_request);
-        $this->restclient->set_option('format', "html");        
-        $result = $this->restclient->get("clasificacion/primer_nivel/format/json/" , $q);        
-        $response =  $result->response;        
-        return $response;
-    }
+    }           
     function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];

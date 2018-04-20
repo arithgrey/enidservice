@@ -26,18 +26,15 @@ class Base extends REST_Controller{
     /**/        
   }
   /**/
-  function prospectos_PUT(){
+  function prospectos_PUT(){  
     
-    /***/
-    $this->val_session();    
-    $param =  $this->put();
-    $param["id_usuario"] = $this->sessionclass->getidusuario();
-    $email =  filtar_correos($param);
-    $data["palabras"]=  $email;
-    $param["lista_correos"] = $data["palabras"];         
-    /**/ 
-    $db_response = $this->enidmodel->actualiza_contactos($param);
-    $this->response($db_response);
+    $this->val_session();   
+    $param =  $this->put(); 
+    $param["id_usuario"] = $this->sessionclass->getidusuario();    
+    $param["correos"] = filtar_correos($param);    
+    $db_response = $this->enidmodel->actualiza_contactos($param);    
+    $this->response($db_response );
+    
   }
   /**/  
   function prospecto_PUT(){      

@@ -53,6 +53,7 @@ function registra_img_servicio(e){
             processData: false , 
             beforeSend : function(){
                 $(".guardar_img_enid").hide();
+                show_load_enid(".place_load_img");
             }
 
     }).done(function(data){

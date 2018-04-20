@@ -1,7 +1,7 @@
 <div style="margin-top: 10px;"></div>
 <?=n_row_12()?>
     <div class="titulo_seccion_producto">                                                    
-        <?=valida_text_imagenes(valida_valor_variable($servicio , "flag_servicio") , $imgs);?>
+        <?=valida_text_imagenes($tipo_promocion , $imgs);?>
     </div>  
 <?=end_row()?>
 <?=n_row_12()?>

@@ -5,6 +5,28 @@
         $this->load->database();
     }   
     /**/
+    function registra_solicitud_pago_amigo($param){
+
+        $monto =  $param["monto"];
+        $email_amigo =  $param["email_amigo"];        
+        $query_insert  = "INSERT INTO 
+                          solicitud_pago(email_solicitado ,  monto_solicitado) 
+                          VALUES('".$email_amigo."' ,  '".$monto."')";        
+        $this->db->query($query_insert);
+        $param["id_solicitud"] = $this->db->insert_id();                
+        return $this->agrega_solicitud_usuario_amigo($param);
+    } 
+    /**/
+    function agrega_solicitud_usuario_amigo($param){
+
+        $id_usuario =  $param["id_usuario"]; 
+        $id_solicitud =  $param["id_solicitud"]; 
+        
+        $query_insert ="INSERT INTO solicitud_pago_usuario(id_solicitud , id_usuario ) 
+              VALUES('".$id_solicitud ."' ,  '".$id_usuario."')";
+        return $this->db->query($query_insert);
+    }
+    /**/
     function get_status_enid_service($param){
         $query_get ="select id_estatus_enid_service , nombre  from status_enid_service";
         $result=  $this->db->query($query_get);
@@ -230,6 +252,33 @@
                           LIMIT 1";
         
         return   $this->db->query($query_update);        
+    }    
+    function get_solicitudes_saldo($param){
+               
+        $_num =  get_random();
+        $this->create_tmp_solicitud_pago_usuario(0, $_num, $param);
+            
+            $query_get ="SELECT * FROM tmp_solicitud_pago_usuario_$_num s 
+                        INNER JOIN solicitud_pago sp
+                        ON s.id_solicitud = sp.id_solicitud";            
+            $data_complete =  $this->db->query($query_get)->result_array();
+        $this->create_tmp_solicitud_pago_usuario(1, $_num, $param);
+        return $data_complete;        
+    }    
+    private function create_tmp_solicitud_pago_usuario($flag , $_num , $param){
+        
+        $query_drop = "DROP TABLE IF exists tmp_solicitud_pago_usuario_$_num";
+        $this->db->query($query_drop);
+        if ($flag ==  0){
+            $id_usuario =  $param["id_usuario"];
+            $query_create ="CREATE TABLE tmp_solicitud_pago_usuario_$_num
+                            AS
+                            SELECT id_solicitud FROM solicitud_pago_usuario 
+                            WHERE id_usuario =$id_usuario
+                            AND status =0 ";            
+            $this->db->query($query_create);
+        }        
     }
+    
 
 }

@@ -213,6 +213,9 @@
 		margin-top: 20px;
 		margin: 0 auto;			
 }
+.small_agregar_imagenes{
+	font-size: .9em!important;
+}
 /* For mobile phones: */
 @media only screen and (max-width: 768px) {
 	 

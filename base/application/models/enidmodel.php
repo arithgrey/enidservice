@@ -71,8 +71,7 @@
     /**/
     function actualiza_contactos($param){
 
-        $lista_correos = $param["lista_correos"];                        
-        $query_update = "";     
+        $lista_correos = $param["correos"];                                
         $flag = 0;                    
         $id_usuario =  $param["id_usuario"];
         for ($i=0; $i < count($lista_correos); $i++){                  
@@ -81,16 +80,17 @@
                 $query_update = "UPDATE 
                                     prospecto 
                                 SET 
-                                    n_tocado = n_tocado +1  , 
-                                    id_usuario_ultimo_toque = '".$id_usuario."' , 
+                                    n_tocado = 1  , 
                                     fecha_actualizacion =  CURRENT_TIMESTAMP() 
                                 WHERE 
-                                    email = '".$email. "' LIMIT 1";
+                                    email = '".$email. "'
+                                LIMIT 1";
                 $this->db->query($query_update);
                 $flag ++;
                 /**/                
         }            
         return "Email registrados como enviados ".$flag;
+        
 
     }
     /**/

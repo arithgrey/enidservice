@@ -133,7 +133,11 @@ class Inicio extends CI_Controller {
                     
                     break;
 
-                
+                /*Solicitar saldo a un amigo*/
+                case 9:
+                        $this->principal->show_data_page( $data , 'solicitar_a_un_amigo');
+                    break;
+
                 default:
 
                 break;

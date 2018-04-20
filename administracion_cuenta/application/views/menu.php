@@ -19,7 +19,18 @@
                         </i>
                         Dirección de envío
                     </a>
-                </li>                     
+                </li>
+                <li class='black li_menu'>
+                    <a  href="#tab_sobre_tu_negocio" 
+                        data-toggle="tab" 
+                        id='btn_sobre_tu_negocio' 
+                        class='black strong btn_sobre_tu_negocio'>                        
+                        <i class="fa fa-map-signs">                            
+                        </i>
+                        Sobre tu negocio
+                    </a>
+                </li>
+                                     
                 <li class='black li_menu'>
                     <a  href="#tab_privacidad" 
                         data-toggle="tab" 

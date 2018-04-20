@@ -2,6 +2,7 @@
 	$extra_periodo =" style='background:#02316f;color:white!important;' ";
 	$extra_nuevos_usuarios ="style='background: #2372e9;color: white !important;text-align: center;' ";
 	$extra_trans ="style='background: #d0e2fe;color: white !important;text-align: center;' ";
+	$extra_conversaciones = "style='background: #006475;color: white !important;text-align: center;' ";
 	$extra_usablidad ="style='background: #375789;color: white !important;text-align: center;' ";
 	$extra_valoraciones ="style='background: #000;color: white !important;text-align: center;' ";
 	$extra_accesos ="style='background: #00b7ff;color: white !important;text-align: center;' ";
@@ -28,6 +29,7 @@
 	$no_recomendarian =  "";
 	$fecha_inicio =  $envio_usuario["fecha_inicio"];  
 	$fecha_termino =  $envio_usuario["fecha_termino"];  
+	$conversaciones = "";
 	$servicios =  "";
 
 		$extra_td_usuarios =  "class='usuarios' 
@@ -116,7 +118,8 @@
 			$table .="</tr>";	
 		$table .="</table>";
 		$nuevos_usuarios = get_td($table);
-				
+		
+		$accesos =  $row["accesos"];			
 		$accesos_a_intento_compra = $row["accesos_a_intento_compra"];		
 		$accesos_contacto = $row["accesos_contacto"];		
 		$contacto = $row["contacto"];		
@@ -138,7 +141,57 @@
 			$accesos .=  get_td($table);
 
 
-
+        
+	   	
+			if(count($row["conversaciones"]) > 0){
+			    
+			    
+			    $ventas =$row["conversaciones"][0];
+			    $num_transacciones = $ventas["num"];
+			    $leidas_por_vendedor =  $ventas["leidas_por_vendedor"];
+			    $leidas_por_cliente =  $ventas["leidas_por_cliente"];
+			    
+			    
+			    $table ="<table width='100%' border=1  style='text-align: center;'>";
+			    $table .="<tr>";
+    			    $table .=get_td("Preguntas enviadas a vendedores");
+    			    $table .=get_td("Leidas por vendedores");
+    			    $table .=get_td("Contestadas a clientes");
+    			    
+			    $table .="</tr>";
+			    $table .="<tr>";
+    			    $table .=get_td($num_transacciones);
+    			    $table .=get_td($leidas_por_vendedor);
+    			    $table .=get_td($leidas_por_cliente);			    			    
+			    $table .="</tr>";
+			    $table .="</table>";
+			    $conversaciones .=  get_td($table);
+			    
+			    
+			    
+			}else{
+			    $table ="<table width='100%' border=1  style='text-align: center;'>";
+			    $table .="<tr>";
+    			    $table .=get_td("Preguntas enviadas a vendedores");
+    			    $table .=get_td("Leidas por vendedores");
+    			    $table .=get_td("Contestadas a clientes");
+    			    
+			    $table .="</tr>";
+			    $table .="<tr>";
+    			    $table .=get_td(0);
+    			    $table .=get_td(0);
+    			    $table .=get_td(0);
+			    $table .="</tr>";
+			    $table .="</table>";
+			    
+			    $conversaciones .=  get_td($table);
+			    
+			}
+			
+			
+			
+			
+			
 		if(count($row["ventas"]) > 0){
 
 
@@ -282,6 +335,9 @@
     	</tr>
     	<tr>
     		<?=get_td("USUARIOS NUEVOS" , $extra_nuevos_usuarios)?><?=$nuevos_usuarios?>
+    	</tr>
+    	<tr>
+    		<?=get_td("CONVERSACIONES" , $extra_conversaciones )?> <?=$conversaciones?>
     	</tr>
     	<tr>
     		<?=get_td("TRANSACCIONES" , $extra_trans )?> <?=$transacciones?>

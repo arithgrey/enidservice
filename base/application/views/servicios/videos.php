@@ -2,7 +2,7 @@
 <?=n_row_12()?>    
     <div class="well" style="background: #fefefe!important">    
         <div class='titulo_seccion_producto'>
-            ¿Tu producto tiene algún video?
+            TIENES ALGÚN VIDEO SOBRE TU - <?=$tipo_promocion?> 
         </div>
         <div style="margin-top: 20px;">                            
         </div>

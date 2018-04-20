@@ -13,7 +13,7 @@ $(document).ready(function(){
 	/**/
 	$("#form_update_password").submit(update_password);	
 	$(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
-
+	$(".btn_sobre_tu_negocio").click(carga_info_sobre_el_negocio);
 
 });
 /**/

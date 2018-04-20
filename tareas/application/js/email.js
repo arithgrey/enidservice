@@ -22,7 +22,6 @@ function descargar_contactos(e){
 }
 /**/
 function actualiza_contactos(e){
-
 	url =  "../base/index.php/api/base/prospectos/format/json/";	
 	data_send =  $(".form_update_correo").serialize();
 
@@ -34,16 +33,10 @@ function actualiza_contactos(e){
 				show_load_enid(".place_registro" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){										
-			
-
-			/*******************************************/
+			console.log(data);
 			llenaelementoHTML(".place_registro" , data );						
-			$(".text_info").val("");			
-			
-				/**/	
-				$(".btn_descargar_email").show();
-				$(".btn_registro_actualizacion").hide();
-
+			$(".text_info").val("");						
+			showonehideone(".btn_descargar_email" , ".btn_registro_actualizacion");
 			carga_info_registros();				
 			carga_notificacion_email_enviados();
 

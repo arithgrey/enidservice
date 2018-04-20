@@ -1,21 +1,21 @@
-<main>    
-
-    <br>
-    <div class="col-lg-3">       
-        <?=$this->load->view("menu")?>
-    </div>
-    <div class='col-lg-9'>            
-        <div class="place_info_cuentas_pago">                    
+<main>
+	<div class='contenedor_principal_enid_service'>        
+        <div class="col-lg-3">       
+            <?=$this->load->view("menu")?>
+        </div>
+        <div class='col-lg-9'>            
+            <div class="place_movimientos">                    
+            </div>
         </div>
     </div>
-<main>
+</main>
 
 <script type="text/javascript" src="<?=base_url('application/js/principal.js')?>">
 </script>    
 <script type="text/javascript" src="<?=base_url('application/js/notificaciones.js')?>">
+</script>
+<script type="text/javascript" src="<?=base_url('application/js/movimientos.js')?>">
 </script>    
-
-
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 <style type="text/css">

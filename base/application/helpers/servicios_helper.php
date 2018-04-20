@@ -1,6 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){	
-	/**/
+    
+    function valida_tipo_promocion($param){
+        
+        $tipo = ($param[0]["flag_servicio"] ==  1) ? "SERVICIO": "PRODUCTO";
+        return $tipo;
+    }
+    /**/
 	function get_nombre_ciclo_facturacion($ciclos , $id_ciclo){
 		foreach($ciclos as $row){
 

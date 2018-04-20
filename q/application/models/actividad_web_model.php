@@ -277,7 +277,7 @@
                       FROM 
                       prospecto
                       WHERE
-                       n_tocado = 1
+                       n_tocado > 0
                        AND 
                       ".$where."                      
                       GROUP BY 
@@ -301,6 +301,24 @@
                       AND  
                         idperfil = 20                        
                       GROUP BY 
+                      DATE(fecha_registro)";
+        return $query_get;
+    }
+    /**/
+    function crea_conversaciones($param){
+        $where =  $this->get_where_tiempo($param , 1);
+        $query_get ="SELECT
+                      DATE(fecha_registro) fecha ,
+                      COUNT(0)total,
+                        SUM(CASE WHEN leido_vendedor =1 THEN 1 ELSE 0 END)leidas_por_vendedor,
+                        SUM(CASE WHEN leido_cliente =1 THEN 1 ELSE 0 END)leidas_por_cliente
+                      FROM
+                      pregunta
+                      WHERE
+                       1=1
+                      AND
+                      ".$where."
+                      GROUP BY
                       DATE(fecha_registro)";
         return $query_get;
     }
@@ -377,7 +395,6 @@
         $sql_visitas  =  $this->crea_visitas_por_periodo($param);
         $data_complete["sql_visitas"] = $sql_visitas;
         $this->crea_tabla_temploral("visitas_periodo_$_num" , $sql_visitas , 0);
-
               $query_get = "SELECT * FROM visitas_periodo_$_num";
               $result =  $this->db->query($query_get);
               $accesos =  $result->result_array();
@@ -399,6 +416,8 @@
         $tb_valoraciones  = "valoraciones_$_num";
         $tb_correos = "correos_$_num";
         $tb_servicios = "servicios_$_num";
+        /**/
+        $tb_preguntas =  "pregunta_$_num";
         /*usuarios*/
 
 
@@ -413,17 +432,18 @@
 
               $sql_tareas = $this->crea_tareas_resueltas($param);
                 $this->crea_tabla_temploral($tb_tareas , $sql_tareas , 0);
-
                 /**/
                 $sql_valoraciones =  $this->crea_valoraciones($param);
                   $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 0);
                   /**/
-
                   $sql_correos_enviados =  $this->crea_correos_enviados($param);
                     $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 0);
             
                     $sql_servicios =  $this->crea_servicios_creados($param);
                       $this->crea_tabla_temploral($tb_servicios , $sql_servicios , 0);
+                      
+                      $sql_preguntas =  $this->crea_conversaciones($param);
+                        $this->crea_tabla_temploral($tb_preguntas , $sql_preguntas , 0);
             
 
                 $a = 0;
@@ -459,7 +479,13 @@
                     = $this->get_correos_enviados($tb_correos); 
 
                     $data_complete[$a]["servicios_creados"] 
-                    = $this->get_servicios_creados($tb_servicios); 
+                    = $this->get_total_tabla($tb_servicios);
+                    
+                    $data_complete[$a]["conversaciones"] 
+                    = $this->get_total_conversaciones($tb_preguntas);  
+                    
+                    
+                    
                    $a ++;
                 }      
                     $this->crea_tabla_temploral($tb_servicios , $sql_servicios , 1);
@@ -469,6 +495,7 @@
             $this->crea_tabla_temploral($tabla_contacto , $sql_contacto , 1);
           $this->crea_tabla_temploral($tabla_ventas , $sql_ventas , 1);        
       $this->crea_tabla_temploral($tabla_usuarios , $sql_usuarios , 1);
+     $this->crea_tabla_temploral($tb_preguntas , $sql_preguntas , 1);
       }      
       return $data_complete;      
     }
@@ -524,7 +551,24 @@
       $result =  $this->db->query($query_get);
       return $result->result_array()[0]["num"];      
     }
-
+    /**/
+    private function get_total_tabla($tabla){
+        
+        $query_get = "SELECT SUM(total)num FROM $tabla ";
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["num"];
+    }
+    /**/
+    private function  get_total_conversaciones($tabla){
+        $query_get = "SELECT 
+                        SUM(total)num,
+                        SUM(leidas_por_vendedor)leidas_por_vendedor,
+                        SUM(leidas_por_cliente)leidas_por_cliente
+ 
+                       FROM $tabla ";
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+    }
     /**/
 
 
