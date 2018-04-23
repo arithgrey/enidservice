@@ -93,11 +93,26 @@ class Tickets extends REST_Controller{
                 $data_complete["registro"] = $this->cancelar_orden_compra($param);
             }
         }else{
+
             $data["recibo"] = $this->get_recibo_por_enviar($param);
             if ($data["recibo"]["cuenta_correcta"] ==  1 ){
-                $param["cancela_cliente"] = ($data["recibo"]["id_usuario_venta"] ==  $param["id_usuario"] )? 0:1;
+                $param["cancela_cliente"] = 
+                ($data["recibo"]["id_usuario_venta"] ==  $param["id_usuario"] )? 0:1;
+
                 /*Si la cuenta pertenece hay que realizar la cancelación del la órden de pago*/
+
                 $data_complete["registro"] = $this->cancelar_orden_compra($param);
+                
+                $usuario_notificado=  $data["recibo"]["id_usuario"];
+                $prm["id_recibo"] =  $param["id_recibo"];
+                $prm["usuario_notificado"] = 
+                $data_complete["info_cliente"]
+                =  $this->get_info_usuario($usuario_notificado);
+                
+                $data_complete["info_email"]=  
+                $this->notifica_venta_cancelada_a_cliente($prm);
+                
+
             }
         }
         $this->response($data_complete);
@@ -153,5 +168,28 @@ class Tickets extends REST_Controller{
         $response["solicitud_saldo"] =  $this->tickets_model->get_solicitudes_saldo($param);
         $this->load->view("tickets/solicitudes_saldo" , $response);               
     }
-    
+    /**/
+    function notifica_venta_cancelada_a_cliente($param){
+
+        $url = "msj/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("cobranza/cancelacion_venta/format/json/", 
+            $param);
+        $response =  $result->response;        
+        return json_decode($response , true); 
+
+    }
+    private function get_info_usuario($id_usuario){
+
+        $param["id_usuario"] =  $id_usuario;
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("usuario/q/format/json/" , $param);        
+        $data =  $result->response;
+        return json_decode($data , true);  
+    }
 }?>

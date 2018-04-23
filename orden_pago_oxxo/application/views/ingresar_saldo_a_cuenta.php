@@ -120,23 +120,14 @@
                                             <div>
                                               <span>
                                                 <a 
-                                                	href="http://enidservice.com/inicio/login/" style="font-weight: bold;color: blue;" 
+                                                  href="http://enidservice.com/inicio/notificar/?recibo=<?=$info_pago["q2"]?>" 
+                                                  style="font-weight: bold;color: blue;" 
                                                 	target="_black">
-                                                  http://enidservice.com/inicio/login/
+                                                  NOTIFICA TU PAGO AQUÍ!
                                                 </a>
                                               </span>
                                             </div>
-                                            <div>
-                                              <strong>
-                                                ó 
-                                              </strong>                                     
-                                            </div>
-                                            <div>                                              
-                                            	Al correo
-                                                <strong>
-                                                  ventas@enidservice.com
-                                                </strong>
-                                            </div>                                            
+                                                     
                                           </span>
                                       </div>
                                     

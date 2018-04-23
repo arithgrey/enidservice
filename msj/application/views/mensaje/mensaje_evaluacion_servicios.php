@@ -29,7 +29,7 @@
 
 <div style="margin-top: 20px;">
 	<span>
-      <a href="http://enidservice.com/" style="background: blue;color: white;padding: 5px;"> 
+      <a href="http://enidservice.com/inicio/login" style="background: blue;color: white;padding: 5px;"> 
         Le recordamos que puede acceder a su cuenta Enid Service a través de este enlace
 		</a>
 	</span>

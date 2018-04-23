@@ -69,7 +69,9 @@ function cancela_compra(e){
 				//show_load_enid(".place_resumen_servicio" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){	
-			
+		
+
+		console.log(data);
 		
 		if(get_option("modalidad_ventas") ==  1){			
 			$("#mi_buzon").tab("show");		

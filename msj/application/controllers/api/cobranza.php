@@ -10,6 +10,28 @@ class Cobranza extends REST_Controller{
         $this->load->library("mensajeria_lead");                                    
     }
     /**/
+    function cancelacion_venta_GET(){
+
+        $param = $this->get();        
+
+        $cuerpo_correo = $this->get_mensaje_cancelacion_venta($param); 
+        $this->response($cuerpo_correo);
+    }
+    /**/
+    private function get_mensaje_cancelacion_venta($param){
+        
+        $info_usuario =  $param;
+        $url = "msj/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "html");        
+        $result = 
+        $this->restclient->get("cron/cancelacion_venta/format/html/" , 
+            $info_usuario);
+        $response =  $result->response;        
+        return $response;
+    }
+    /**/
     function ganancias_afiliados_GET(){
 
         $param =  $this->get();

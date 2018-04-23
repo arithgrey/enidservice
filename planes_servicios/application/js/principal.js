@@ -24,6 +24,7 @@ $(document).ready(function() {
 	$(".tipo_promocion").click(configuracion_inicial);
 	$(".form_nombre_producto").submit(simula_envio);
 	$(".btn_agregar_servicios").click(function() {
+		
 		showonehideone(".contenedor_nombre", ".contenedor_categorias");
 		set_option("nuevo", 1);
 		/**/

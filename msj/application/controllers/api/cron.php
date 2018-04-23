@@ -9,7 +9,7 @@ class Cron extends REST_Controller{
         $this->load->library("principal");
         $this->load->model("pagosmodel");                                              
     }
-    /**/
+    /*
     function pagos_GET(){
 
         $param = $this->get();
@@ -19,7 +19,7 @@ class Cron extends REST_Controller{
         $lista_email_enviados = $this->pagosmodel->registra_email_enviados($lista_email , $contenido_correo);
         $this->response($lista_email_enviados);
     }
-    /**/
+    */
     /**/
     function encuesta_evaluacion_servicios_GET(){
 
@@ -58,15 +58,21 @@ class Cron extends REST_Controller{
     function base_promocion_GET(){
         $this->load->view("mensaje/mensaje_promocion");
     }
+    /**/
     function evaluacion_servicios_GET(){
         $this->load->view("mensaje/mensaje_evaluacion_servicios");
     }
     /**/
     function notificacion_ganancias_afiliado_GET(){
-    
         $param =  $this->get();
         $data["info_usuario"] =  $param;
         $this->load->view("mensaje/ganancias_afiliado" , $data);
+    }
+    /**/
+    function cancelacion_venta_GET(){
+
+        $param["info"] =  $this->get();
+        $this->load->view("mensaje/cancelacion_venta_vendedor" , $param);
     }
     /**/
     function get_url_request($extra){
