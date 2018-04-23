@@ -19,6 +19,19 @@
                             
     }
     /**/
+    function update_telefono_visible($param){
+
+        $telefono_visible = $param["telefono_visible"];
+        $id_servicio =  $param["servicio"];
+        $query_update = "UPDATE servicio 
+                            SET 
+                                telefono_visible =  $telefono_visible 
+                            WHERE 
+                                id_servicio =  '".$id_servicio."'
+                            LIMIT 1";
+        return  $this->db->query($query_update);                        
+    }
+    /**/
     function elimina_color_servicio($param){
         
         $colores =  $this->get_colores_por_servicio($param);

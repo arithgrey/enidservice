@@ -46,11 +46,16 @@ class Home extends CI_Controller{
         $data["clasificaciones_departamentos"] = "";
 
         $this->principal->crea_historico( 2892 , 0, 0 );                 
-        $this->principal->show_data_page($data, 'home');                          
+
+        $data["vendedor"] ="";
         
+        if($data["servicio"][0]["telefono_visible"]==1){
+            $data["vendedor"] =
+            $this->get_contacto_usuario($data["servicio"][0]["id_usuario"]);            
+        }
+        $this->principal->show_data_page($data, 'home');                          
 
     }
-
     /**/
     function get_url_request($extra){
 
@@ -91,23 +96,10 @@ class Home extends CI_Controller{
             $data["email"]= "";                       
             return $data;
         }   
-    }
-    /**/    
-    function get_departamentos($nombre_pagina){
-
-        $q["q"] =  $nombre_pagina;
-        $url = "tag/index.php/api/";         
-        $url_request=  $this->get_url_request($url);
-        $this->restclient->set_option('base_url', $url_request);
-        $this->restclient->set_option('format', "html");        
-        $result = $this->restclient->get("clasificacion/primer_nivel/format/json/" , $q);        
-        $response =  $result->response;        
-        return $response;
-    }
+    }    
     /**/
     function calcula_costo_envio($param){
-        
-        
+
         $url = "pagos/index.php/api/";         
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
@@ -116,8 +108,18 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return json_decode($response , true);
     }
-    
-   
+    /**/
+    private function get_contacto_usuario($id_usuario){
+
+        $param["id_usuario"] =  $id_usuario;
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("usuario/contacto/format/json/" , $param);        
+        $data =  $result->response;
+        return json_decode($data , true);  
+    }  
 
     
 }

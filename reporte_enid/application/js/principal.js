@@ -11,11 +11,8 @@ $(document).ready(function(){
 
 	$(".form_busqueda_global_enid").submit(indicadores);
 	$('.datetimepicker4').datepicker();
-	$('.datetimepicker5').datepicker();		
-	//$(".presentaciones").click(carga_presentaciones);	
+	$('.datetimepicker5').datepicker();			
 	$("#form_metas").submit(registra_metas);
-	//$(".cargar_perfiles_disponibles").click(cargar_perfiles_disponibles);
-	//$("#form_busqueda_tipo_negocio").submit(cargar_perfiles_disponibles);	
 	$(".form_busqueda_desarrollo").submit(carga_metricas_desarrollo);
 	$(".form_busqueda_desarrollo_solicitudes").submit(carga_solicitudes_cliente);
 	$(".comparativa").click(carga_comparativas);
@@ -27,7 +24,6 @@ $(document).ready(function(){
 });
 /*Aquí se carga la data de las métricas del visitas(día)*/
 function carga_uso_sistema(e){
-
 
 	url =  "../q/index.php/api/enid/usabilidad_landing_pages/format/json/";
 	$.ajax({
@@ -193,9 +189,7 @@ function indicadores(e){
 		$(".valoraciones").click(resumen_valoracion);
 		$(".servicios").click(resumen_servicios);
 				
-	}).fail(function(){
-		
-	});		
+	}).fail(function(){});		
 	e.preventDefault();
 
 }

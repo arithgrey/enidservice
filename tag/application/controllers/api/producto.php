@@ -316,11 +316,11 @@ class producto extends REST_Controller{
         }
     }
     /**/
-    function nombre_servicio_GET(){
+    function basic_servicio_GET(){
     /**/        
         $param = $this->get();
-        $nombre_servicio = $this->qmodel->get_nombre_servicio($param);
-        $this->response($nombre_servicio);
+        $response = $this->qmodel->get_basic_servicio($param);
+        $this->response($response);
     }
     
     function get_precio_calculado_productos($info){

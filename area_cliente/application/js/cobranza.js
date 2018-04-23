@@ -70,14 +70,24 @@ function cancela_compra(e){
 			}
 	}).done(function(data){	
 			
-		$("#mi_buzon").tab("show");		
+		
 		if(get_option("modalidad_ventas") ==  1){			
+			$("#mi_buzon").tab("show");		
 			$("#mis_ventas").tab("show");
+			carga_compras_usuario();			
 		}else{
-			$("#mis_compras").tab("show");
-		}
-		carga_compras_usuario();
-		/*Cargamos notificaciones*/
+
+			id_servicio=  data.registro.id_servicio; 
+			href ="../valoracion/?servicio="+id_servicio;
+			btn_cuenta_historia =  "<a href='"+href+"' class='a_enid_blue'>CUENTANOS TU EXPERIENCIA</a>";
+			btn_ir_a_compras =  "<a class='a_enid_black mis_compras_btn' id='mis_compras' href='#tab_mis_pagos' data-toggle='tab'>VER MIS COMPRAS</a>";
+			div= "<div class='cuenta_tu_experiencia'>"+btn_cuenta_historia+btn_ir_a_compras+"</div>";
+			div2="<div class='titulo_enid'>¿NOS AYUDARÍAS A EVALUAR EL PRODUCTO QUE CANCELASTE?</div>";
+			div2 +="<div class='desc_ayuda'>Con esto otros clientes podrán mantenerse informados sobre el vendedor y su atención al cliente</div>";
+			llenaelementoHTML(".place_resumen_servicio" ,  div2 +""+div);
+			$(".mis_compras_btn").click(carga_compras_usuario);
+			
+		}		
 		metricas_perfil();		
 		
 	}).fail(function(){			

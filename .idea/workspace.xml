@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a4841393-12e7-4800-b1dc-425733663c32" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/css_tema/template/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movimientos/application/controllers/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/controllers/inicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movimientos/application/views/agregar_saldo.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/agregar_saldo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movimientos/application/views/agregar_saldo_desde_oxxo.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/agregar_saldo_desde_oxxo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movimientos/application/views/cuentas_asociadas.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/cuentas_asociadas.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movimientos/application/views/metodos_disponibles.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/metodos_disponibles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movimientos/application/views/metodos_transferencia.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/metodos_transferencia.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movimientos/application/views/pagar_con_saldo_enid.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/pagar_con_saldo_enid.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movimientos/application/views/solicitar_a_un_amigo.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/solicitar_a_un_amigo.php" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="enid.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/enid.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="61" column="38" lean-forward="true" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>metricas</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="10" />
+    <option name="y" value="47" />
+    <option name="width" value="1346" />
+    <option name="height" value="701" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="q" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="q" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a4841393-12e7-4800-b1dc-425733663c32" name="Default" comment="" />
+      <created>1524416328227</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1524416328227</updated>
+      <workItem from="1524416373189" duration="1043000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1043000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="27" width="1366" height="741" extended-state="6" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24597365" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/enid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="61" column="38" lean-forward="true" selection-start-line="61" selection-start-column="38" selection-end-line="61" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

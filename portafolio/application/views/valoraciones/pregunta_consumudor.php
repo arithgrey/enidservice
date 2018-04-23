@@ -1,12 +1,21 @@
+<?php 
+	$nombre_vendedor = ($in_session==1)? 
+	$vendedor[0]["nombre"]." ".$vendedor[0]["apellido_paterno"]:"AL VENDEDOR";
+
+	$telefono_visible =  $servicio[0]["telefono_visible"]; 
+
+?>
 <div class="col-lg-6 col-lg-offset-3">
 	<div>
 		<center>
 			<h3 style="font-weight: bold;font-size: 3em;">		
-				ESCRIBE UNA PREGUNTA AL VENDEDOR
+				ESCRIBE UNA PREGUNTA <?=strtoupper($nombre_vendedor);?>
 			</h3>
 			<div style="font-size: 1.4em">
 				<span >Sobre su </span>
-				<strong><?=$nombre_servicio?></strong>				
+				<strong>
+					<?=$servicio[0]["nombre_servicio"]?>					
+				</strong>				
 			</div>
 		</center>
 		<form class="form_valoracion" >
@@ -24,20 +33,34 @@
 					
 				</div>
 			</div>		
-
 			<div class="nuevo"></div>
 			<?=n_row_12()?>
 				<button 
 					type="submit" 
 					style="background: #015ec8;
 					padding: 10px;color: white;font-weight: bold;">
-					ENVIAR PREGUNTA <i class="fa fa-chevron-right ir"></i>
-					
+					ENVIAR PREGUNTA 
+					<i class="fa fa-chevron-right ir"></i>
 				</button>
 			<?=end_row()?>			
 			<?=n_row_12()?>
 				<div class="place_registro_valoracion"></div>
 			<?=end_row()?>
+
+			<?php if ($telefono_visible == 1 && $in_session == 1):?>
+				<?=n_row_12()?>
+					<div style="margin-top: 10px;background: black;color: white;padding: 10px;">
+						TAMBIÉN PUEDES SOLICITAR INFORMACIÓN 
+						SOBRE TU COMPRA AL 						
+					</div>
+					<div 
+						style="background: #f9fcff;padding: 6px;
+						text-decoration: underline;font-size: 1.2em;">
+						<i class="fa fa-phone"></i>
+						<?=$vendedor[0]["tel_contacto"]?>
+					</div>
+				<?=end_row()?>
+			<?php endif;?>
 
 		</form>	
 	</div>

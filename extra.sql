@@ -78,3 +78,5 @@ CREATE TABLE IF NOT EXISTS `enidserv_web`.`solicitud_pago_usuario` (
 ENGINE = InnoDB;
 
 alter table solicitud_pago_usuario add status int(1) not  null default 0;
+alter table servicio add valoracion int not null default 0;
+select telefono_visible from servicio where id_servicio=89;

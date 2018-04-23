@@ -1,12 +1,8 @@
-<main>                                                   
-        
+<main>                                                           
         <?=$this->load->view("secciones_2/slider");?>     
         <?=$this->load->view("secciones_2/contenedor_2")?>              
         <script type="text/javascript" src="<?=base_url('application')?>/revolution/js/jquery.themepunch.tools.min.js"></script>
         <script type="text/javascript" src="<?=base_url('application')?>/revolution/js/jquery.themepunch.revolution.min.js"></script>
-
-        <script type="text/javascript" src="<?=base_url('application')?>/revolution/js/extensions/revolution.extension.actions.min.js"></script>
-        
         <script type="text/javascript" src="<?=base_url('application')?>/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
         
         <script type="text/javascript" src="<?=base_url('application')?>/revolution/js/extensions/revolution.extension.navigation.min.js"></script>

@@ -23,7 +23,8 @@
 <?php    
     /**/   
     if($ordenes!=0){
-        
+    
+
 	foreach($ordenes as $row){
 		
         $id_recibo     = $row["id_proyecto_persona_forma_pago"];
@@ -37,6 +38,7 @@
         $num_ciclos_contratados =  $row["num_ciclos_contratados"];
         $estado_envio =  $row["estado_envio"];
         
+        $url_servicio =  "../producto/?producto=".$id_servicio;
         /*echo $direccion_registrada;*/
         $monto_a_liquidar = monto_pendiente_cliente($monto_a_pagar , 
                                                     $saldo_cubierto , 
@@ -46,7 +48,8 @@
 
         $url_imagen_servicio ="../imgs/index.php/enid/imagen_servicio/".$id_servicio;
         $url_imagen_error =  '../img_tema/portafolio/producto.png';                
-		$lista_info_attr= " info_proyecto= '$resumen_pedido'  info_status =  '$estado' ";
+		$lista_info_attr= 
+        " info_proyecto= '$resumen_pedido'  info_status =  '$estado' ";
 
 
 
@@ -55,10 +58,11 @@
         <?=n_row_12()?>
         <div class="contenedor_articulo">
                     <div class="col-lg-3">
-                        
-                        <img src="<?=$url_imagen_servicio?>"
+                        <a href="<?=$url_servicio?>">
+                            <img src="<?=$url_imagen_servicio?>"
                             onerror="this.src='<?=$url_imagen_error?>' "
-                            class='imagen_articulo'>                    
+                            class='imagen_articulo'>
+                        </a>                    
                     </div>    
                     <div class="col-lg-9">                      
                         

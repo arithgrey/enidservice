@@ -11,8 +11,7 @@ class Tickets extends REST_Controller{
     /**/
     function compras_GET(){
 
-        $param =  $this->get();
-        /**/
+        $param =  $this->get();        
         $db_response =  $this->tickets_model->get_compras_tipo_periodo($param);
         $data["compras"]=  $db_response;
         $data["tipo"] =  $param["tipo"];
@@ -25,7 +24,7 @@ class Tickets extends REST_Controller{
         
         $param =  $this->get();
         $id_servicio =  $this->tickets_model->get_id_servicio_por_id_recibo($param);        
-        $flag_envio_gratis =  $this->tickets_model->get_flag_envio_gratis_por_id_recibo($param);
+        $flag_envio_gratis = $this->tickets_model->get_flag_envio_gratis_por_id_recibo($param);
         $this->response($flag_envio_gratis);
     }
     /**/
@@ -69,7 +68,8 @@ class Tickets extends REST_Controller{
         $param =  $this->get();
         $param["id_usuario"] =  $this->sessionclass->getidusuario();
         $data["modalidad"] =  $param["modalidad"];
-        if($param["modalidad"] ==1 ){
+        if($param["modalidad"] ==1){
+
             $data["recibo"] = $this->get_recibo_por_enviar($param);        
         }else{
             $data["recibo"] = $this->get_recibo_por_pagar($param);        
@@ -88,7 +88,8 @@ class Tickets extends REST_Controller{
             $data["recibo"] = $this->get_recibo_por_pagar($param);                   
             if ($data["recibo"]["cuenta_correcta"] ==  1 ){            
                 $param["cancela_cliente"] = ($data["recibo"]["id_usuario"] ==  $param["id_usuario"] )? 1:0;                
-                /*Si la cuenta pertenece hay que realizar la cancelación del la órden de pago*/
+                /*Si la cuenta pertenece 
+                hay que realizar la cancelación del la órden de pago*/
                 $data_complete["registro"] = $this->cancelar_orden_compra($param);
             }
         }else{

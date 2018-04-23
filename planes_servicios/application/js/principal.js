@@ -218,6 +218,7 @@ function carga_informacion_servicio(num) {
 						}
 						$('#summernote').summernote();
 						$(".entregas_en_casa").click(u_entregas_en_casa);
+						$(".telefono_visible").click(u_telefono_visible)
 					}).fail(function() {
 				show_error_enid(".place_servicios", "Error ... ");
 			});
@@ -235,10 +236,29 @@ function u_entregas_en_casa(e){
 			show_load_enid(".place_sobre_el_negocio" , "Cargando ... ");
 		}
 	}).done(function(data){													
-		carga_informacion_servicio(2);
+		carga_informacion_servicio(4);
 	}).fail(function(){
 		//show_error_enid(".place_direccion_envio" , "Error ... al cargar portafolio.");
 	});
+}
+/**/
+function u_telefono_visible(e){
+
+	url =  "../base/index.php/api/servicio/telefono_visible/format/json/";	
+	data_send  = {telefono_visible : e.target.id , servicio : get_option("servicio")};	
+	$.ajax({
+		url : url , 
+		type: "PUT",
+		data: data_send , 
+		beforeSend: function(){
+			show_load_enid(".place_sobre_el_negocio" , "Cargando ... ");
+		}
+	}).done(function(data){			
+
+		carga_informacion_servicio(4);
+	}).fail(function(){
+		//show_error_enid(".place_direccion_envio" , "Error ... al cargar portafolio.");
+	});	
 }
 /*
 function lista_terminos_disponibles() {

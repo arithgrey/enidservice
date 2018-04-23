@@ -48,7 +48,6 @@
                 </li>        
                 <li>
                     <a href="../login/index.php/startsession/logout">
-                        
                         Cerrar sessión
                     </a>
                 </li>        

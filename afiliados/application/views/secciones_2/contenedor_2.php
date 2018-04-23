@@ -27,8 +27,7 @@
                                       <i class="fa fa-google-plus-square  fa">
                                       </i>
                                       <i class="fa fa-tumblr-square   fa">
-                                      </i>
-              
+                                      </i>          
            
                                    </span>
                                   recibe tu recompensa!

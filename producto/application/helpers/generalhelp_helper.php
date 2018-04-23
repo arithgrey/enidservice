@@ -113,6 +113,18 @@ function get_tipo_articulo($flag_nuevo , $flag_servicio){
   }
 }
 /**/
+function get_entrega_en_casa($entregas_en_casa , $flag_servicio){
+  
+  $text ="";
+  if($entregas_en_casa ==  1) {
+    
+    $text = ($flag_servicio ==  1)? "EL VENDEDOR TAMBIÉN BRINDA
+           ATENCIÓN EN SU NEGOCIO":
+          "TAMBIÉN PUEDES ADQUIRIR TUS COMPRAS EN EL NEGOCIO DEL VENDEDOR";
+  }
+  return $text;
+}
+/**/
 function get_descripcion_servicio($descripcion , $flag_servicio){
   
   $extra_info ="style='font-size:.9em;'";

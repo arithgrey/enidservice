@@ -18,6 +18,7 @@
     $precio = 0;
     $id_ciclo_facturacion = 0;
     $entregas_en_casa = 0;
+    $telefono_visible = 0;
     foreach ($servicio  as $row){
         
         $id_servicio =   $row["id_servicio"];
@@ -37,6 +38,7 @@
         $precio =  $row["precio"];
         $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
         $entregas_en_casa =  $row["entregas_en_casa"];
+        $telefono_visible = $row["telefono_visible"];
     }    
     $url_web_servicio = $url_request."producto/?producto=".$id_servicio;    
     $url_productos_publico ="../producto/?producto=".$id_servicio."&q2=".$id_usuario;            
@@ -82,6 +84,25 @@
     $data["precio"] = $precio;
     $data["utilidad"] =  $utilidad;
     $data["comision"] = $comision;
+
+    $msj_compra_en_casa = ($flag_servicio==1)?"OFRECES SERVICIO EN TU NEGOCIO?":
+                        "¿CLIENTES 
+                            <span class='indicacion_tambien'>TAMBIÉN</span>
+                        PUEDEN RECOGER 
+                        SUS COMPRAS EN TU NEGOCIO? ";
+
+    $no_atencion_en_casa =  ($flag_servicio==1)?"NO":"NO, SOLO HAGO ENVÍOS";
+
+
+    $msj_ver_telefono =  ($flag_servicio==1)?
+    "¿PERSONAS PUEDEN VER TU NÚMERO TELEFÓNICO PARA SOLICITARTE MÁS 
+    INFORMES?":
+    "¿PERSONAS PUEDEN SOLICITARTE MÁS 
+    INFORMES POR TELÉFONO?";
+    
+
+
+    
 ?>
 
 <?=$this->load->view("servicios/agregar_imagenes" , $data);?>
@@ -94,7 +115,8 @@
     <?=$this->load->view("servicios/menu_tabs" , $data);?>            
        <!-- Tab panes -->
         <div class="tab-content">
-            <div class="tab-pane <?=valida_active_pane($num , 1)?>" id="tab_imagenes">
+            <div class="tab-pane <?=valida_active_pane($num , 1)?>" 
+                id="tab_imagenes">
                     <?=n_row_12()?>                    
                         <?=$this->load->view("servicios/imagenes_servicios" , $data)?>
                     <?=end_row()?>                    
@@ -103,32 +125,10 @@
                     <?=end_row()?> 
             </div>
             <div 
-            class="tab-pane <?=valida_active_pane($num , 2);?>" id="tab_info_producto" >                
+            class="tab-pane <?=valida_active_pane($num , 2);?>" 
+            id="tab_info_producto" >                
                             
-                <?=$this->load->view("servicios/descripcion" , $data)?>                
-                    <?=n_row_12();?>
-                        <div class='col-lg-7'>
-                            ¿CLIENTES TAMBIÉN PUEDEN RECOGER 
-                            SUS COMPRAS EN TU NEGOCIO? 
-                        </div>
-                        <div class='col-lg-5'>
-                            <a 
-                                id='1'
-                                class='button_enid_eleccion entregas_en_casa 
-                                <?=valida_activo_entregas_en_casa(1 , $entregas_en_casa)?>'>
-                                SI
-                            </a>
-                            <a 
-                                style="margin-left: 10px;"
-                                id='0'
-                                class='button_enid_eleccion entregas_en_casa
-                                <?=valida_activo_entregas_en_casa(0 , $entregas_en_casa)?>'>
-                                NO
-                            </a>
-                        </div>
-                    <?=end_row();?>
-                
-
+                <?=$this->load->view("servicios/descripcion" , $data)?>        
                 <?php if($flag_servicio ==  0): ?>
                     <div style="margin-top: 20px;"></div>                      
                     <?=n_row_12()?>
@@ -230,22 +230,89 @@
                     </div>
                 <?=end_row()?>
             </div>
-            <div  class="tab-pane <?=valida_active_pane($num , 4);?>" id="tab_info_precios">
-                <?php if ($flag_servicio == 0): ?>
-                    <?=n_row_12()?>
-                        <?php $this->load->view("servicios/seccion_nuevo" , $en_productos);?>
-                    <?=end_row()?>
-                    <?=n_row_12()?>                    
-                        <?php $this->load->view("servicios/seccion_disponibles", $en_productos);?>
-                    <?=end_row()?>                
+            <div 
+                class="tab-pane <?=valida_active_pane($num , 4);?>" 
+                id="tab_info_precios">
+                <div class="well">        
+                    <?=n_row_12();?> 
+                    <div class='col-lg-6'>
+                                <div class='col-lg-5'>
+                                    <div class="row">
+                                        <strong>
+                                            <?=$msj_compra_en_casa;?>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class='col-lg-7'>
+                                    <a 
+                                        id='1'
+                                        class='button_enid_eleccion entregas_en_casa 
+                                        <?=valida_activo_entregas_en_casa(1 , $entregas_en_casa)?>'>
+                                        SI
+                                    </a>
+                                    <a  style="margin-left: 10px;"
+                                        id='0'
+                                        class='button_enid_eleccion entregas_en_casa
+                                        <?=valida_activo_entregas_en_casa(0 , $entregas_en_casa)?>'>
+                                        <?=$no_atencion_en_casa;?>
+                                    </a>
+                                </div>
+                        
+                    </div>
+                    <div class='col-lg-6'>
+                                <div class='col-lg-5'>
+                                    <div class="row">
+                                        <strong>
+                                            <?=$msj_ver_telefono;?>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div class='col-lg-7'>
+                                    <a 
+                                        id='1'
+                                        class='button_enid_eleccion telefono_visible 
+                                        <?=valida_activo_vista_telefono(1 , 
+                                            $telefono_visible)?>'>
+                                        SI
+                                    </a>
+                                    <a  style="margin-left: 10px;"
+                                        id='0'
+                                        class='button_enid_eleccion telefono_visible
+                                        <?=valida_activo_vista_telefono(0 , 
+                                            $telefono_visible)?>'>
+                                        NO, OCULTAR MI TELÉFONO
+                                    </a>
+                                </div>
+                    </div>
+                    <?=end_row();?>
+                    
+                </div>
+                <?php if ($flag_servicio == 0): ?>                    
+                    
+                    <div class="well">
+                        <?=n_row_12()?>
+                            
+                                <div class="col-lg-6">
+                                    <?php $this->load->view("servicios/seccion_nuevo" , $en_productos);?>
+                                </div>
+                                <div class="col-lg-6">
+                                    <?php $this->load->view("servicios/seccion_disponibles", $en_productos);?>
+                                </div>
+                            
+                        <?=end_row()?>
+                    </div>
+
+
                 <?php else: ?>
                     <?=n_row_12()?>
                         <?php $this->load->view("servicios/seccion_servicios" , $en_servicios); ?>
                     <?=end_row()?>
                 <?php endif; ?>
-                <?php if ($id_ciclo_facturacion != 9): ?>
+                <?php if ($id_ciclo_facturacion != 9): ?>                    
                     <?=$this->load->view("servicios/precios" , $data);?>
                 <?php endif; ?>
+
+
             </div>
         
     </div>

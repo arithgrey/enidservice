@@ -9,6 +9,13 @@ function valida_activo_entregas_en_casa($valor , $valor_usuario){
   }
 } 
 /**/
+function valida_activo_vista_telefono($valor , $valor_usuario){
+
+  if($valor ==  $valor_usuario){
+      return "button_enid_eleccion_active";
+  }
+} 
+/**/
 function porcentaje($cantidad,$porciento){
   //return number_format($cantidad*$porciento/100 ,$decimales);
   return $cantidad*$porciento/100;

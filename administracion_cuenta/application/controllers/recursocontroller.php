@@ -13,7 +13,7 @@ class Recursocontroller extends CI_Controller {
 		$data = $this->val_session("");									
         $id_usuario =  $this->sessionclass->getidusuario(); 
 
-        $data["usuario"] =  $this->principal->get_info_usuario($id_usuario);                   
+        $data["usuario"] =  $this->principal->get_info_usuario($id_usuario);
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;        
         $this->principal->show_data_page($data , 'home' );        

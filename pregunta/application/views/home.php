@@ -17,13 +17,13 @@
 	<?=end_row()?>
 	<?=n_row_12()?>
 		<div class="contenedor_registro" style="display: none;">
-			<div class="col-lg-6 col-lg-offset-3">
-				<div style="margin-top: 40px;">
-					<strong>
+			<div class="col-lg-4 col-lg-offset-4">
+				<div style="margin-top: 40px;background: black;color: white;padding: 5px;">
+					<span style="font-size: 1.2em;">
 
-						Accede a tu cuenta o registra tu usuario en Enid Service para hacer preguntas 
-						al vendedor
-					</strong>
+						Accede a tu cuenta o registra tu usuario en Enid Service para hacer preguntas o ver el número telefónico del 
+						vendedor
+					</span>
 				</div>
 				<div style="margin-top: 15px;">
 					<table>
@@ -31,7 +31,7 @@
 							<td>
 							<a href="../login"  class="a_enid_blue" 
 								style="color: white!important">
-								ACCEDER A MI CUENTA
+								ACCEDER A TU CUENTA
 							</a>			
 							</td>
 							<td>

@@ -24,7 +24,8 @@
             color,
             id_usuario,
             precio, 
-            id_ciclo_facturacion
+            id_ciclo_facturacion,
+            entregas_en_casa
           FROM
             servicio 
           WHERE id_servicio = '".$id_servicio."' LIMIT 1";

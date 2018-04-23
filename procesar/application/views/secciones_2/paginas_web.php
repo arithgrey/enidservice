@@ -30,7 +30,7 @@
                         <div class="col-lg-12">
                           <span class="strong "  
                               style="font-size: 1.5em;line-height: .8;">  
-                              Su carrito de compras
+                              SU CARRITO DE COMPRAS
                           </span>
                         </div>                        
                         <hr style="color:black;height: 1px;
@@ -52,7 +52,7 @@
                               style="font-size: 1em;
                                     padding: 2px;">
                                     <strong class="text-left">
-                                      Monto del pedido:
+                                      MONTO DEL PEDIDO:
                                     </strong>
                                     $<?=$monto_total?> MXN                                
                             </span> 
@@ -63,7 +63,7 @@
                               style="font-size: 1em;                                    
                                     padding: 2px;">
                                     <strong class="text-left">
-                                      Cargos del envío
+                                      CARGOS DE ENVÍO
                                     </strong>
                                     $<?=$costo_envio_cliente?>
                                     MXN                                
@@ -75,7 +75,7 @@
                                     padding: 2px;
                                     background: green;color: white;">
                                     <strong class="text-left">
-                                      Total
+                                      TOTAL
                                     </strong>
                                     $<?=$monto_total_con_envio?>
                                     MXN                                

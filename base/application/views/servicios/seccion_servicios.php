@@ -6,9 +6,9 @@
                     <div> 
                         <i class="fa fa-pencil text_ciclo_facturacion ">                
                         </i>                
-                        <span class="titulo_seccion_producto">
-                            Ciclo de facturación
-                        </span>    
+                        <strong>
+                            CICLO DE FACTURACIÓN
+                        </strong>    
                     </div>
                     <div>
                         <?=get_nombre_ciclo_facturacion(

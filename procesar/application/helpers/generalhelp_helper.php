@@ -1,5 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+function crea_telefonos_ayuda($servicio , $vendedor){
 
+  $base ="<div>(55)5296-7027</div><div>(55)3269-3811 </div>";
+  $telefonos_ayuda =  
+  ($servicio[0]["telefono_visible"] ==  1)?$vendedor[0]["tel_contacto"]:$base;
+
+  if(strlen(trim($telefonos_ayuda)) <5 ){
+    $telefonos_ayuda =  $base;
+  }
+  return $telefonos_ayuda;
+
+}
 function get_dominio($url){
     $protocolos = array('http://', 'https://', 'ftp://', 'www.');
     $url = explode('/', str_replace($protocolos, '', $url));

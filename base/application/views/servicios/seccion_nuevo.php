@@ -1,8 +1,8 @@
-    <div class='well'>        
+
         <div>                    
-            <span class="titulo_seccion_producto">
-                ¿Es nuevo?
-            </span>
+            <strong>
+                ¿ES NUEVO?
+            </strong>
             <i class="fa fa-pencil text_nuevo">                
             </i>
             <div>
@@ -17,4 +17,4 @@
                 Guardar 
             </button>
         </div>
-    </div>
+    

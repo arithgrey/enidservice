@@ -244,9 +244,7 @@ class Cobranza extends REST_Controller{
                 $data_orden["existencia"] = $info_existencia;
                 /**/
                 
-                $data_orden["servicio"] = $info_existencia["info_servicio"][0];
-                
-                    
+                $data_orden["servicio"] = $info_existencia["info_servicio"][0];                
                 /*Consultamos el precio de envio del producto*/                
                 
                 if($data_orden["servicio"]["flag_servicio"]== 0){
@@ -278,7 +276,7 @@ class Cobranza extends REST_Controller{
                 if($es_usuario_nuevo == 0){
                       $data_acciones_posteriores["id_usuario"] = $data_orden["id_usuario"];
                   }else{
-                      $data_acciones_posteriores["id_usuario"]=  $param["id_usuario"];  
+                      $data_acciones_posteriores["id_usuario"]= $param["id_usuario"];  
                       $data_acciones_posteriores["telefono"]=  $param["telefono"];  
                       $data_acciones_posteriores["nombre"]=  $param["nombre"];  
                       $data_acciones_posteriores["email"] = $param["email"];

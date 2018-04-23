@@ -1,9 +1,9 @@
 
-    <div class="well">
+
         <div>                    
-            <span class='titulo_seccion_producto'>
-                Artículos disponibles
-            </span>
+            <strong >
+                ¿ARTÍCULOS DISPONIBLES?
+            </strong>
             <i class="fa fa-pencil text_cantidad">                
             </i>
             <div class="text_numero_existencia">                
@@ -21,6 +21,4 @@
                 Guardar 
             </button>
         </div>
-    </div>
-
     

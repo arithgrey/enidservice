@@ -47,7 +47,7 @@ class Inicio extends CI_Controller {
                         $data["error"] =1;
                     }
                     /**/
-                    $data["seleccion"] =  valida_valor_variable($this->input->get("seleccion"));
+                    $data["seleccion"] = valida_valor_variable($this->input->get("seleccion"));
                     $this->principal->show_data_page( $data , 'metodos_disponibles');
                     break;
                 /**/

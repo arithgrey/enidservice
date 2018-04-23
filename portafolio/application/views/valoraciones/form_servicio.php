@@ -12,11 +12,11 @@
 	<div>
 		<center>
 			<h3 style="font-weight: bold;font-size: 3em;">		
-				ESCRIBA UNA RESEÑA
+				ESCRIBE UNA RESEÑA
 			</h3>
 			<div style="font-size: 1.4em">
 				<span >Sobre tu </span>
-				<strong><?=$nombre_servicio?></strong>
+				<strong><?=$servicio[0]["nombre_servicio"]?></strong>
 			</div>
 		</center>
 		<form class="form_valoracion" >

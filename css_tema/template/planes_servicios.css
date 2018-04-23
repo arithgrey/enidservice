@@ -1,5 +1,9 @@
-/* PC: */
 @charset "UTF-8";
+.indicacion_tambien{
+    background: black!important;
+    color: white!important;
+    padding: 3px;
+}
 .text-danger strong {
 	color: #001ec3;
 }

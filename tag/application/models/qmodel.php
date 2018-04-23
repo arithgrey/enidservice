@@ -196,13 +196,13 @@
             $this->create_productos_disponibles(0 , $_num , $param);                
 
                     $data_complete["sql"] =  $this->get_option("sql");
-                    $query_get ="SELECT * FROM tmp_producto_$_num ORDER BY vista DESC";
+                    $query_get ="SELECT * FROM tmp_producto_$_num ORDER BY 
+                    valoracion,vista DESC";
                     $result =  $this->db->query($query_get);
                     $servicios =  $result->result_array();
                 
                     $data_complete["servicio"] =  $servicios;
                     
-
                     if($param["agrega_clasificaciones"] ==  1){                        
                         $data_complete["clasificaciones_niveles"] =  
                         $this->get_clasificaciones_disponibles($_num);                      
@@ -387,7 +387,9 @@
                                 existencia,
                                 precio , 
                                 id_ciclo_facturacion, 
-                                vista
+                                vista,
+                                valoracion  
+
                             FROM 
                             servicio".$query_where; 
 
@@ -409,7 +411,8 @@
                                 color,   
                                 precio , 
                                 id_ciclo_facturacion,
-                                vista                             
+                                vista,
+                                valoracion                             
                             FROM 
                             servicio".$query_where;   
                             
@@ -429,13 +432,17 @@
             return $this->db->query($query_insert);    
         }
     }
-    /*carga nombre servicio por id_servicio*/
-    function get_nombre_servicio($param){
+    /*carga conceptos básicos por servicio por id_servicio*/
+    function get_basic_servicio($param){
         $id_servicio =  $param["id_servicio"];
-        $query_get ="SELECT nombre_servicio FROM servicio 
+        $query_get ="SELECT 
+                    nombre_servicio , 
+                    telefono_visible ,
+                    id_usuario 
+                    FROM servicio 
                     WHERE id_servicio = $id_servicio LIMIT 1";
         $result =  $this->db->query($query_get);
-        return $result->result_array()[0]["nombre_servicio"];
+        return $result->result_array();
     }
     /**/
     function get_servicios_periodo_simple($param){

@@ -36,10 +36,8 @@
     /**/
     function get_compras_tipo_periodo($param){
 
-      $fecha_inicio =  $param["fecha_inicio"];
-      $fecha_termino =  $param["fecha_termino"];
+      $where =  $this->get_where_tiempo($param);
       $tipo =  $param["tipo"];
-
       $query_get = "SELECT 
                       * 
                     FROM 
@@ -47,17 +45,52 @@
                     WHERE 
                       status =  $tipo 
                     AND 
-                      DATE(fecha_registro) 
-                    BETWEEN 
-                      '".$fecha_inicio."' 
-                    AND  
-                      '".$fecha_termino."'
-                      ORDER BY fecha_registro DESC ";
+                       ".$where;
                     
                     $result =  $this->db->query($query_get);
                     return $result->result_array();
-
     }
+    /**/
+    function get_where_tiempo($param){
+
+      $fecha_inicio =  $param["fecha_inicio"];
+      $fecha_termino =  $param["fecha_termino"];
+      $tipo =  $param["tipo"];
+      switch ($tipo){
+        case 6:          
+          /**/
+          return " DATE(fecha_registro)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+          break;
+        case 2:
+          /**/
+          return " (fecha_termino)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+          break;
+        
+        case 3:
+          /**/
+          return " (fecha_actualizacion)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+          break;
+
+        case 10:
+          /**/
+          return " (fecha_cancelacion)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+          break;
+
+        default:
+          
+          break;
+      }
+      
+    }       
+
     /**/
     function carga_actividad_pendiente($param){
 
@@ -237,22 +270,46 @@
         $cancela_cliente = $param["cancela_cliente"];
         
         $extra_cancelacion = " cancela_cliente =0 ";
-        if ($cancela_cliente ==  1){
+        if($cancela_cliente ==  1){
           $extra_cancelacion = " cancela_cliente =1 ";  
         }
+        /**/
         $query_update = "UPDATE 
                             proyecto_persona_forma_pago 
                           SET 
                             status = 10,
-                            fecha_cancelacion = current_date(), 
+                            fecha_cancelacion = CURRENT_DATE(), 
                             $extra_cancelacion,
                             se_cancela =1
                           WHERE 
                             id_proyecto_persona_forma_pago = $id_recibo 
                           LIMIT 1";
         
-        return   $this->db->query($query_update);        
-    }    
+        $data_complete["sql"]=$query_update;
+        $this->db->query($query_update);        
+        $data_complete["id_servicio"]
+        =  $this->actualiza_valoracion_negativa_orden_compra($id_recibo);
+        return $data_complete;
+    }   
+    /**/
+    private function actualiza_valoracion_negativa_orden_compra($id_recibo){
+        
+        $query_get =  "SELECT id_servicio 
+                      FROM 
+                        proyecto_persona_forma_pago 
+                      WHERE 
+                        id_proyecto_persona_forma_pago = $id_recibo 
+                        LIMIT 1";
+        
+        $id_servicio =$this->db->query($query_get)->result_array()[0]["id_servicio"];
+
+        $query_update ="UPDATE servicio SET valoracion =  valoracion -1 
+                WHERE id_servicio = $id_servicio LIMIT 1";
+
+        $this->db->query($query_update);
+        return $id_servicio;
+    } 
+    /**/
     function get_solicitudes_saldo($param){
                
         $_num =  get_random();

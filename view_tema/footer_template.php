@@ -59,8 +59,6 @@
                         </div>
                     </div>                
                 </div>
-
-
                 <!---->
                 <div class='col-lg-4'>
                     <div class='col-lg-2'>
@@ -75,7 +73,7 @@
                         </div>
                         <div>
                             <span class='black'>
-                                Evoluciona y escala con base en tu éxito
+                                Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!
                             </span>
                         </div>
                     </div>        
@@ -171,13 +169,6 @@
                         &nbsp;
                     </li>
                     
-
-                    <li>
-                        <a class='black link_menu_footer strong' href="../afiliados/" 
-                            >
-                            -Afiliados
-                        </a>
-                    </li>   
                     <li>
                         <a class='black link_menu_footer' 
                             href="../unete_a_nuestro_equipo" >

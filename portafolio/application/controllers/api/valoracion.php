@@ -90,11 +90,9 @@ class Valoracion extends REST_Controller{
 
         $param =  $this->get();              
         $data["id_servicio"] =  $param["id_servicio"];
-        $data["nombre_servicio"]=  $this->get_nombre_servicio($param);
+        $data["servicio"]=  $this->get_basic_servicio($param);
         $data["extra"] =  $param;
-        $this->load->view("valoraciones/form_servicio" , $data);
-        
-
+        $this->load->view("valoraciones/form_servicio" , $data);        
     }
     function get_url_request($extra){
 
@@ -103,13 +101,13 @@ class Valoracion extends REST_Controller{
         return  $url_request;
     }
     /**/
-    function get_nombre_servicio($param){
+    function get_basic_servicio($param){
         
         $url = "tag/index.php/api/";         
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
         $this->restclient->set_option('format', "json");        
-        $result = $this->restclient->get("producto/nombre_servicio/format/json/" , $param);        
+        $result = $this->restclient->get("producto/basic_servicio/format/json/" , $param);        
         $response =  $result->response;        
         return json_decode($response , true);
     }
@@ -151,10 +149,30 @@ class Valoracion extends REST_Controller{
         /**/     
         $param =  $this->get();              
         $data["id_servicio"] =  $param["id_servicio"];
-        $data["nombre_servicio"]=  $this->get_nombre_servicio($param);                
+        $servicio =  $this->get_basic_servicio($param);                
+        $data["servicio"]= $servicio;
+
         $data["in_session"]=  $param["in_session"];
         $data["id_usuario"] = $param["id_usuario"];
+        $data["vendedor"] ="";
+        if( $data["in_session"] == 1 ){
+            $data["vendedor"] =  
+            $this->get_contacto_usuario($servicio[0]["id_usuario"]);
+            
+        }
         $this->load->view("valoraciones/pregunta_consumudor" , $data);
+    }
+    /**/
+    private function get_contacto_usuario($id_usuario){
+
+        $param["id_usuario"] =  $id_usuario;
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("usuario/contacto/format/json/" , $param);        
+        $data =  $result->response;
+        return json_decode($data , true);  
     }
     /**/
     function pregunta_POST(){

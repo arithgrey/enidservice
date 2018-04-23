@@ -4,20 +4,16 @@
   $plan = $info_ext["plan"];
   $num_ciclos = $info_ext["num_ciclos"];
   $ciclo_facturacion = $info_ext["ciclo_facturacion"];
-  
-  
 
 ?>
-
-
 <?=n_row_12()?>
 
 <?php if($in_session == 0){?>
 <div class="row">
   <h2 class="black">
      <a class="blue_enid" href="../login">
-      Ingrese
-     </a> o cree una cuenta para recibir asistencia y comprar al momento
+      INGRESA 
+     </a> O CREA UNA CUENTA PARA RECIBIR ASISTENCIA Y COMPRAR AL MOMENTO
   </h2>
 </div> 
 <?php }?>
@@ -34,7 +30,7 @@
     <?php if($in_session == 0){?>
     <div class="row">
       <div class=" col-lg-6">        
-          <span style="font-size: .8em;">
+          <span style="text-transform: uppercase;">
               Nombre 
               <span style="color: red;">
                 *
@@ -54,7 +50,7 @@
         </div>
 
         <div class=" col-lg-6">        
-            <span style="font-size: .8em;">
+            <span style="text-transform: uppercase;">
                 Correo Electrónico
                 <span style="color: red;">
                   *
@@ -76,9 +72,8 @@
             </div>
         </div>
       </div>
-
       <div class="">
-        <span style="font-size: .8em;">
+        <span style="text-transform: uppercase;">
             <i class="fa fa-unlock-alt" aria-hidden="true"></i>
             Escribe una contraseña
         </span> 
@@ -94,7 +89,7 @@
       
 
       <div class="">
-        <span style="font-size: .8em;">
+        <span style="text-transform: uppercase;">
             <i class="fa fa-phone" aria-hidden="true"></i>
             Teléfono 
             <span style="color: red;">

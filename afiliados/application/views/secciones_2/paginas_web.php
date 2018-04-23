@@ -20,7 +20,7 @@
           </div>
       </div>
       <div class="col-lg-3">        
-          <label class="black">
+          <label class="black" style="font-size: 1.4em!important;">
             Nombre  
           </label>  
           <div>

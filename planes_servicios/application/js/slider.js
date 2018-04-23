@@ -1,4 +1,5 @@
-$('.search').click(function(){
+	/*
+	$('.search').click(function(){
 		$(this).addClass('active');
 		$(this).find('input').focus();
 		$(document).mouseup(function (e)
@@ -30,4 +31,4 @@ $('.search').click(function(){
 		} else {
 			$('.slide.active').hide().removeClass('active').prev('.slide').fadeIn().addClass('active');
 		}
-	});
+	});*/

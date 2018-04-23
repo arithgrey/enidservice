@@ -262,6 +262,7 @@ input{
     background: white!important;
     background: white !important;
     height: 30px !important;
+    width: 100%;
 }
 .input_enid:hover{
     border-style:solid;

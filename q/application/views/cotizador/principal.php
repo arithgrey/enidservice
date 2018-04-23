@@ -1,7 +1,7 @@
 <?php 	
 	$extra_periodo =" style='background:#02316f;color:white!important;' ";
 	$extra_nuevos_usuarios ="style='background: #2372e9;color: white !important;text-align: center;' ";
-	$extra_trans ="style='background: #d0e2fe;color: white !important;text-align: center;' ";
+	$extra_trans ="style='background: #002763;color: white !important;text-align: center;' ";
 	$extra_conversaciones = "style='background: #006475;color: white !important;text-align: center;' ";
 	$extra_usablidad ="style='background: #375789;color: white !important;text-align: center;' ";
 	$extra_valoraciones ="style='background: #000;color: white !important;text-align: center;' ";
@@ -104,22 +104,28 @@
 		
 		
 
-		$extra_td_usablidad = "title ='Personas que acceden al sistema para emplearlo' "; 
+		$extra_td_usablidad = 
+		"title ='Personas que acceden al sistema para emplearlo' "; 
 		$table ="<table width='100%' border=1  style='text-align: center;'>";
 			$table .="<tr>";	
-    				$table .=get_td("Usuarios"  , "class='strong' ");						
-    				$table .=get_td("Servicios postulados" , "class='strong' ");							
+    				$table .=get_td("Usuarios"  , "class='strong' ");				
+    				$table .=get_td("Servicios postulados" , "class='strong' ");	
     				$table .=get_td("Ingresos a Enid" , $extra_td_usablidad);					
 				$table .="</tr>";	
 				$table .="<tr>";	
-    				$table .=get_td($row["usuarios"] , $extra_td_usuarios);						
-    				$table .=get_td($row["servicios_creados"] , $extra_td_servicios);						
+    				$table .=get_td($row["usuarios"] , $extra_td_usuarios);
+    				$table .=get_td($row["servicios_creados"] , $extra_td_servicios);
     				$table .=get_td($row["accesos_area_cliente"] , "title='Personas que acceden a Enid Service desde su área de cliente'");										
 			$table .="</tr>";	
 		$table .="</table>";
 		$nuevos_usuarios = get_td($table);
 		
-		$accesos =  $row["accesos"];			
+		
+
+
+
+
+		$accesos_enid =  $row["accesos"];			
 		$accesos_a_intento_compra = $row["accesos_a_intento_compra"];		
 		$accesos_contacto = $row["accesos_contacto"];		
 		$contacto = $row["contacto"];		
@@ -127,13 +133,13 @@
 			$table ="<table width='100%' border=1  style='text-align: center;'>";
 				$table .="<tr>";	
     					$table .=get_td("Total");						
-    					$table .=get_td("Acesso a procesar compra");						
+    					$table .=get_td("Acesso a procesar compra");	
     					$table .=get_td("Accesos a contacto");					
     					$table .=get_td("Mensajes recibidos");					
 				$table .="</tr>";	
 				$table .="<tr>";	
-    					$table .=get_td($accesos);						
-    					$table .=get_td($accesos_a_intento_compra);						
+    					$table .=get_td($accesos_enid);						
+    					$table .=get_td($accesos_a_intento_compra);					
     					$table .=get_td($accesos_contacto );						
     					$table .=get_td($contacto , $extra_td_contacto);						
 				$table .="</tr>";	
@@ -187,11 +193,7 @@
 			    $conversaciones .=  get_td($table);
 			    
 			}
-			
-			
-			
-			
-			
+						
 		if(count($row["ventas"]) > 0){
 
 
@@ -334,26 +336,33 @@
     		<?=get_td($fecha_inicio  . " al " . $fecha_termino , $extra_periodo)?> 
     	</tr>
     	<tr>
-    		<?=get_td("USUARIOS NUEVOS" , $extra_nuevos_usuarios)?><?=$nuevos_usuarios?>
+    		<?=get_td("USUARIOS NUEVOS" , $extra_nuevos_usuarios)?>
+    		<?=$nuevos_usuarios?>
     	</tr>
     	<tr>
-    		<?=get_td("CONVERSACIONES" , $extra_conversaciones )?> <?=$conversaciones?>
+    		<?=get_td("CONVERSACIONES" , $extra_conversaciones )?> 
+    		<?=$conversaciones?>
     	</tr>
     	<tr>
-    		<?=get_td("TRANSACCIONES" , $extra_trans )?> <?=$transacciones?>
+    		<?=get_td("TRANSACCIONES" , $extra_trans )?> 
+    		<?=$transacciones?>
     	</tr>	
     	<tr>
-    		<?=get_td("VALORACIONES" , $extra_valoraciones)?><?=$total_valoraciones?>
+    		<?=get_td("VALORACIONES" , $extra_valoraciones)?>
+    		<?=$total_valoraciones?>
     	</tr>		
     	<tr>
-    		<?=get_td("ACCESOS" , $extra_accesos)?> <?=$accesos?>
+    		<?=get_td("ACCESOS" , $extra_accesos)?> 
+    		<?=$accesos?>
     	</tr>
     	
     	<tr>
-    		<?=get_td("CONTACTO",$extra_contacto)?><?=$contacto?>
+    		<?=get_td("CONTACTO",$extra_contacto)?>
+    		<?=$contacto?>
     	</tr>
     	<tr>
-    		<?=get_td("LABORES RESUELTAS" ,$extra_labor)?><?=$labores_resueltas?>
+    		<?=get_td("LABORES RESUELTAS" ,$extra_labor)?>
+    		<?=$labores_resueltas?>
     	</tr>	
     </table>
 <?=end_row();?>

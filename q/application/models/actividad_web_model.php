@@ -222,6 +222,13 @@
                    '".$fecha_inicio."' AND  '".$fecha_termino."' ";
           break;
 
+        case 4:
+          /**/
+          return " (fecha_cancelacion)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+          break;
+
         default:
           
           break;
@@ -229,23 +236,25 @@
       
     }      
     /**/
-    function crea_actividad_en_ventas($param){
+    function crea_actividad_solicitudes($param){
 
         $where =  $this->get_where_tiempo($param , 1);
+        $where_cancelacion =  $this->get_where_tiempo($param , 4);
         $query_get ="SELECT 
                       DATE(fecha_registro) fecha ,
                       COUNT(0)total ,                      
                       SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END)compras_efectivas, 
-                      SUM(CASE WHEN status = 6 THEN 1 ELSE 0 END)solicitudes,
+                      SUM(CASE WHEN status = 6 AND  ".$where." THEN 1 ELSE 0 END)solicitudes,
                       SUM(CASE WHEN status = 7 THEN 1 ELSE 0 END)envios, 
-                      SUM(CASE WHEN status = 9 THEN 1 ELSE 0 END)cancelaciones
-
+                      SUM(CASE WHEN status = 10 AND ".$where_cancelacion." THEN 1 ELSE 0 END)cancelaciones
                       FROM 
                       proyecto_persona_forma_pago 
                       WHERE
-                       1=1 
-                       AND 
-                      ".$where."                      
+                      1=1 
+                      AND 
+                      ".$where."
+                      OR 
+                      ".$where_cancelacion."
                       GROUP BY 
                       DATE(fecha_registro)";
         return $query_get;
@@ -416,7 +425,7 @@
         $tb_valoraciones  = "valoraciones_$_num";
         $tb_correos = "correos_$_num";
         $tb_servicios = "servicios_$_num";
-        /**/
+        
         $tb_preguntas =  "pregunta_$_num";
         /*usuarios*/
 
@@ -424,7 +433,7 @@
         $sql_usuarios =  $this->crea_registros_usuarios($param);        
           $this->crea_tabla_temploral($tabla_usuarios , $sql_usuarios , 0);      
           /**/
-          $sql_ventas =  $this->crea_actividad_en_ventas($param);
+          $sql_ventas =  $this->crea_actividad_solicitudes($param);
             $this->crea_tabla_temploral($tabla_ventas , $sql_ventas , 0 );
             
             $sql_contacto =  $this->crea_actividad_en_contacto($param);

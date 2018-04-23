@@ -32,8 +32,7 @@ class Home extends CI_Controller{
             }
 
             $data["formulario_valoracion"]= 
-            $this->carga_formulario_valoracion($servicio_send);
-            
+            $this->carga_formulario_valoracion($servicio_send);            
             /*Cargamos reseñas de otros días*/    
             $data["in_session"] =  $this->sessionclass->is_logged_in();
             $this->principal->show_data_page($data, 'home');                              

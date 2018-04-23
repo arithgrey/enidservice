@@ -20,6 +20,7 @@
   $color ="";  
   $precio = 0;
   /**/
+  $entregas_en_casa =  0;
 
   foreach($info_servicio["servicio"] as $row){
     
@@ -38,10 +39,11 @@
     $flag_precio_definido =  $row["flag_precio_definido"];
     $precio =  $row["precio"];
     $id_ciclo_facturacion =  $row["id_ciclo_facturacion"];
-
+    $entregas_en_casa =  $row["entregas_en_casa"];
   }
 
-  $imagenes =  construye_seccion_imagen_lateral($imgs  ,$nombre_servicio , $url_vide_youtube);
+  $imagenes =  
+  construye_seccion_imagen_lateral($imgs  ,$nombre_servicio , $url_vide_youtube);
   $info_compra["id_servicio"]= $id_servicio;
   $info_compra["flag_servicio"]= $flag_servicio;
   $info_compra["precio"]= $precio;
@@ -92,10 +94,16 @@
                   <div style="margin-top: 10px;">
                     <?=get_tipo_articulo($flag_nuevo , $flag_servicio)?>
                   </div>
+                  <div>
+                    <strong>
+                      <?=get_entrega_en_casa($entregas_en_casa , $flag_servicio)?>
+                    </strong>
+                  </div>
                   <?=creta_tabla_colores($color , $flag_servicio)?>
                     <?=$this->load->view("form_compra" , $info_compra)?>            
                   <?=n_row_12()?>                  
-                    <?=get_descripcion_servicio($descripcion , $flag_servicio)?>                
+
+                    <?=get_descripcion_servicio($descripcion , $flag_servicio)?>
                     <?=valida_url_youtube($url_vide_youtube)?>                                    
                   <?=end_row()?>
               </div>            

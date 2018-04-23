@@ -29,15 +29,7 @@
             <i class="fa fa-shopping-cart">
             </i>
             Vender 
-        </a>
-
-        <a  class="links" 
-            href="../afiliados/"
-            style="font-size: .9em;color:black!important;">
-            <i class="fa fa-usd">
-            </i>
-            Afiliados
-        </a>
+        </a>        
         <a  class="links" 
         	href="../contacto/#envio_msj"
             style="font-size: .9em;color:black!important;">

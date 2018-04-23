@@ -369,8 +369,9 @@
       }else{
           $id_usuario =  $param["id_usuario"];  
       }
-      
-      if(get_info_usuario_valor_variable($data_usuario , "usuario_referencia" ) == 0 ){
+
+      if(get_info_usuario_valor_variable($data_usuario , "usuario_referencia" )
+        ==0 ){
           $id_usuario_referencia =  $id_usuario;
       }else{
           $id_usuario_referencia =  $data_usuario["usuario_referencia"];
@@ -441,9 +442,19 @@
                                   )";                          
 
       $this->db->query($query_insert);
-      return  $this->db->insert_id();      
+
+      $id =  $this->db->insert_id();      
+      $this->mejora_calificacion_servicio($id_servicio);
+      return $id;
     
     }      
+    /**/
+    private function mejora_calificacion_servicio($id_servicio){
+
+      $query_update ="UPDATE servicio SET valoracion = valoracion+1 
+                      WHERE id_servicio=$id_servicio LIMIT 1";
+      return $this->db->query($query_update);
+    } 
     /**/
     function get_fechas_por_ciclo_facturacion($id_ciclo_facturacion , $num_ciclos){
 
@@ -604,7 +615,8 @@
               $sql= " WHERE 
                       id_usuario = $id_usuario  
                       AND  
-                      status = 6";  
+                      status = 6
+                      AND se_cancela =0";  
               break;
               
             default:
@@ -1126,11 +1138,12 @@
                       id_usuario ,
                       id_proyecto_persona_forma_pago
                     FROM 
-                    proyecto_persona_forma_pago
+                      proyecto_persona_forma_pago
                     WHERE 
-                    saldo_cubierto < monto_a_pagar 
+                      saldo_cubierto < monto_a_pagar 
                     AND 
-                    num_email_recordatorio < 3";
+                      num_email_recordatorio < 3
+                    AND  status = 6";
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }

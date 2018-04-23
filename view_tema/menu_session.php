@@ -12,14 +12,6 @@
             </li>
             <li class="upper-links">
                 <a  class="links white" 
-                    href="../afiliados/">
-                    <i class="fa fa-usd">
-                    </i>
-                    Afiliados
-                </a>
-            </li>
-            <li class="upper-links">
-                <a  class="links white" 
                     href="../contacto/#envio_msj">
                     <i class="fa fa-paper-plane">
                     </i>

@@ -19,15 +19,8 @@
                                     <span style="background: black;">
                                        ¿Necesitas ayuda?
                                     </span>
-                                </div>                                
-                                <div>                                    
-                                    (55)5296-7027
-                                </div>
-                                
-                                <div>
-                                    
-                                    (55)3269-3811 
-                                </div>
+                                </div>   
+                                <?=crea_telefonos_ayuda($servicio , $vendedor);?>
                             </div>
                     
                             
