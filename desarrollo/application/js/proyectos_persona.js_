@@ -1,0 +1,83 @@
+
+/**/
+function registra_ticket(e){
+
+	url =  "../portafolio/index.php/api/tickets/ticket/format/json/";	
+	data_send = $(".form_ticket").serialize()+"&"+ $.param({ "id_usuario" : get_id_usuario()});				
+	
+	
+
+		$.ajax({
+				url : url , 
+				type: "POST",
+				data: data_send, 
+				beforeSend: function(){
+					show_load_enid(".place_registro_ticket" , "Cargando ... ", 1 );
+				}
+		}).done(function(data){																
+
+			llenaelementoHTML(".place_registro_ticket" , "A la brevedad se realizará su solicitud!");							
+			set_id_ticket(data); 
+			carga_info_detalle_ticket();
+			/**/
+
+						
+
+		}).fail(function(){			
+			show_error_enid(".place_registro_ticket" , "Error ... ");
+		});	
+					
+	e.preventDefault();
+}
+/**/
+
+
+/**/
+
+/**/
+function actualizar_estatus_ticket(e){
+	
+	nuevo_estado= e.target.id;
+	url =  "../portafolio/index.php/api/tickets/status/format/json/";	
+	data_send =  {"id_ticket" : get_id_ticket() , "status" : nuevo_estado };				
+
+	$.ajax({
+			url : url , 
+			type: "PUT",
+			data: data_send, 
+			beforeSend: function(){
+				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+			}
+	}).done(function(data){									
+		carga_tikets_usuario();		
+	}).fail(function(){			
+		show_error_enid(".place_proyectos" , "Error ... ");
+	});		
+}
+/**/
+/**/
+/**/
+/**/
+
+/**/
+
+/**/
+
+/**/
+function set_id_proyecto_persona(n_id_proyecto_persona){
+	id_proyecto_persona =  n_id_proyecto_persona;
+}
+/**/
+function get_id_proyecto_persona(){
+	return id_proyecto_persona;
+}
+/**/
+function set_id_servicio(n_id_servicio){
+	id_servicio =  n_id_servicio;
+}
+/**/
+function get_id_servicio(){
+	return id_servicio;
+}
+/**/
+

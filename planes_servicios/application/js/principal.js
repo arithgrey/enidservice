@@ -130,13 +130,7 @@ function carga_informacion_servicio(num) {
 						/**/
 						llenaelementoHTML(".place_servicios", data);
 
-						$(".agregar_img_servicio").click(carga_form_img);
-						/*
-						$(".btn_agregar_termino").click(
-								lista_terminos_disponibles);
-								
-						$(".termino").click(asocia_termino_servicio);
-						*/
+						$(".agregar_img_servicio").click(carga_form_img);						
 						/**/
 						$(".text_costo").click(muestra_input_costo);
 						$(".text_ciclo_facturacion").click(
@@ -1646,12 +1640,14 @@ function evalua_precio(){
 	}
 }
 /**/
-function valida_action_inicial() {
+function valida_action_inicial(){
 	
+
 	set_option("accion", $(".q_action").val());	
+
 	switch (parseInt(get_option("accion"))){	
 	case 1:		
-		$(".btn_agregar_servicios").tab("show");
+		//$(".btn_agregar_servicios").tab("show");
 		set_option("modalidad" , 0);
 		set_option("nuevo", 1);
 		break;
@@ -1663,4 +1659,5 @@ function valida_action_inicial() {
 	default:
 		break;
 	}
+	
 }

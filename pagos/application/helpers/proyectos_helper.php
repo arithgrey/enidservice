@@ -654,18 +654,21 @@ if(!function_exists('invierte_date_time')){
 
     }
   }
-  /**/
+  /*
   function valida_mostrar_tareas($data){
 
   	if (count($data) > 0 ){
-  		return  "<label class='black mostrar_tareas_pendientes'> 
-  					Mostrar sólo tareas pendientes
-  				</label>
-  				<label class='black mostrar_todas_las_tareas'> 
-  					Mostrar todas las tareas
-  				</label>";
+  		return  "<label class='black mostrar_tareas_pendientes'>       			   		
+                  MOSTRAR SÓLO TAREAS PENDIENTES 
+      				</label>
+      				<label class='black mostrar_todas_las_tareas'> 
+      					 MOSTRAR TODAS LAS TAREAS
+      				</label>";
+
+
+
   	}
   }
-
+  */
   
 }/*Termina el helper*/

@@ -193,13 +193,7 @@ function get_id_ticket(){
 	return id_ticket;
 }
 /**/
-function get_id_tarea(){
-	return  id_tarea;
-}
-/**/
-function set_id_tarea(n_id_tarea){
-	id_tarea =  n_id_tarea;	
-}
+
 /**/
 function set_menu_actual(n_menu_actual){
 	menu_actual =  n_menu_actual;

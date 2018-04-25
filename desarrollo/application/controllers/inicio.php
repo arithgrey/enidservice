@@ -47,11 +47,9 @@ class Inicio extends CI_Controller {
                 $data["no_publics"] =1;
                 $data["meta_keywords"] =  "";
                 $data["url_img_post"]= "";
-                $data["id_usuario"] = $this->sessionclass->getidusuario();                     
-                $data["id_empresa"] =  $this->sessionclass->getidempresa();                     
+                $data["id_usuario"] = $this->sessionclass->getidusuario();
+                $data["id_empresa"] =  $this->sessionclass->getidempresa();
                 $data["info_empresa"] =  $this->sessionclass->get_info_empresa();  
-
-                                   
                 $data["desc_web"] =  "";
                 return $data;
         }else{            

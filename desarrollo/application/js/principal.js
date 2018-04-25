@@ -26,22 +26,21 @@ var id_servicio = 0;
 var depto = 0; 
 var flag_en_servicio = 0;
 
+$(document).ready(function(){		
 
-$(document).ready(function(){	
-	
-		
+
 	num_departamento = $(".num_departamento").val(); 
-	set_modulo(2);
+	set_option("modulo", 2);
 	/***/
 	$("footer").ready(function(){
 		id_depto = $(".num_departamento").val();		
-		set_depto(id_depto);
+		set_option("id_depto", id_depto);
 	});
 	/**/
 	$(".depto").change(function(){
 
 		id_depto = $(".contenedor_deptos .depto").val();				
-		set_depto(id_depto);
+		set_option("id_depto", id_depto);
 		carga_tikets_usuario();
 	});
 	/**/
@@ -50,91 +49,36 @@ $(document).ready(function(){
 	});
 
 
-
-	$(".form_busqueda_contacto").submit(descarga_contacto);
-	$(".form_busqueda_labor_venta").submit(carga_metricas_prospectacion);
+	$("footer").ready(carga_num_pendientes);	
+	
 	$('.datetimepicker_persona').datepicker();
 	$('.datetimepicker4').datepicker();
 	$('.datetimepicker5').datepicker();			
-	$(".form_referido").submit(registrar_posiblie_cliente);	
-	$(".btn_productividad").click(carga_metricas_prospectacion);
-	$(".form_busqueda_actividad_enid").submit(cargar_productividad);
-	$(".btn_ejemplos_disponibles").click(carga_ejemplos_disponibles);
-	$(".tipo_negocio_ej").change(carga_ejemplos_disponibles);	
-	$(".btn_contactos").click(descarga_contacto);
-	$(".btn_referidos").click(muestra_form_referidos);
+		
+	$(".form_busqueda_actividad_enid").submit(cargar_productividad);	
+	
+	
+	
 	/**/
 	$(".btn_mostrar_mas_campos").click(muestra_oculta_campos_persona);
 	/*hora*/
 	$('.datetimepicker1').timepicker();
 	$('.datetimepicker2').datepicker();
-	$(".seccion_busqueda_agendados").click(cargar_info_agendados);
-	$(".form_busqueda_agendados").submit(cargar_info_agendados);
-	/*Para posibles clientes*/
-	$(".btn_posibles_clientes").click(carga_posibles_clientes);
-	$(".form_busqueda_posibles_clientes").submit(carga_posibles_clientes);				
-	/**/
-
-
-	//$(".btn_clientes").click(carga_clientes);
-	$(".form_busqueda_clientes").submit(carga_clientes);					
-
-	/*Carga comentarios*/
-	$(".form_comentarios").submit(registra_comentarios_usuario);
-	/*AGENDAR LLAMADA*/
-	$(".form_agendar_llamada").submit(agenda_llamada);
-	$(".form_agendar_llamada_recicle").submit(agenda_llamada_recicle);	
-	/**/
-	$(".tipificacion").change(evalua_menu_tipificacion);
-	/**/	
-	$(".form_convertir_cliente").submit(convertir_cliente);	
-	/**/
-	$(".form_llamada_confirmada").submit(registrar_llamada_hecha);
-	set_id_usuario($(".id_usuario").val());
-
-	/**/
-	$(".form_correo_enviado").submit(registrar_correo_hecho);
-	$(".tab_base_marcacion").click(cargar_base_de_marcacion);	
-	$("footer").ready(carga_num_pendientes);
-	$(".btn_envios_validacion").click(carga_info_validacion);
-	/**/
-	$(".agendar_llamada_btn").click(muestra_form_agendar_llamada);
-	/**/
-	$(".agregar_posible_cliente_btn").click(reset_form_agenda);
-	/**/
-	$(".btn_correos_por_enviar").click(cargar_info_agendados_email);	
-	/**/
+	set_option("id_usuario" , $(".id_usuario").val());
+	
 	$(".li_menu").click(recorre_web_version_movil);	
-	/**/
-	$(".form_agendar_correo_electronico").submit(agenda_correo);
-	/**/
-	$(".info_envio_valida").submit(registrar_info_envio_validacion);
-	$(".form_busqueda_clientes").submit();
-	$(".form_q_servicios").submit(carga_formulario_servicios);
-
-	$(".select_tipo_negocio_servicio").change(function(){
-		$(".form_q_servicios").submit();
-	});
+	
 	/**/
 
-	$("footer").ready(carga_tikets_usuario);
-	/**/
+	$("footer").ready(carga_tikets_usuario);	
 	$(".base_tab_clientes").click(carga_tikets_usuario);
-	
-	$(".btn_clientes").click(carga_clientes);
-	$(".form_busqueda_clientes").submit(carga_clientes);					
-
-	/**/
-	$(".form_mover_ticket_depto").submit(mover_ticket_depto);
-	
 	$(".form_busqueda_desarrollo").submit(carga_metricas_desarrollo);
 	$(".form_busqueda_desarrollo_solicitudes").submit(carga_solicitudes_cliente);
-
 
 	if(num_departamento == 4 ){
 			
 		$(".contenedor_deptos").show();
-		set_depto(num_departamento);		
+		set_option("id_depto", num_departamento);		
 		selecciona_select(".depto" , 4);
 	}
 
@@ -193,7 +137,7 @@ function registra_avance(e){
 	set_fuente($("#id_fuente_marcacion").val());
 	set_referencia_email(0);	
 	/*Reset en los formularios*/	
-	reset_form_agenda();
+	
 	recorre_web_version_movil();	
 	/*Cuando se tiene que registrar la información de la persona */
 	if (val_tipificacion ==  "1" || val_tipificacion ==  "9" ){				
@@ -221,7 +165,7 @@ function carga_metricas_prospectacion(e){
 
 
 	url =  "../q/index.php/api/ventas/laborventa/format/json/";	
-	data_send =  $(".form_busqueda_labor_venta").serialize()+"&"+$.param({"id_usuario" : get_id_usuario() });			
+	data_send =  $(".form_busqueda_labor_venta").serialize()+"&"+$.param({"id_usuario" : get_option("id_usuario") });			
 	$.ajax({
 			url : url , 
 			type: "GET",
@@ -300,8 +244,7 @@ function registra_tipificacion(){
 function registrar_posiblie_cliente(e){
 
 	url =  "../base/index.php/api/ventas/prospecto/format/json/";	
-	data_send =  $(".form_referido").serialize() +"&"+ $.param({"id_usuario" : get_id_usuario() });			
-
+	data_send =  $(".form_referido").serialize() +"&"+ $.param({"id_usuario" : get_option("id_usuario") });			
 
 	$.ajax({
 			url : url , 
@@ -350,131 +293,16 @@ function muestra_oculta_campos_persona(){
 	}
 }
 /**/
-function cargar_info_agendados(e){
-
-
-	
-	set_menu_actual("agendados");
-
-	url =  "../base/index.php/api/ventas_tel/agendados/format/json/";	
-	data_send =  $(".form_busqueda_agendados").serialize();				
-	
-	$.ajax({
-			url : url , 
-			type: "GET",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_info_agendados" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){																				
-		llenaelementoHTML(".place_info_agendados" , data);
-		
-		/**/
-		$(".info_persona_agendados").click(function(e){
-			id_persona =  e.target.id;
-			set_persona(id_persona);
-			carga_info_persona();	
-		});			
-		/**/
-		$(".btn_agendar_llamada").click(asigna_valor_persona_agendado);	
-		$(".marcar_llamada_btn").click(marcar_llamada_hecha);
-		/*Cargamos num agendados en notificación*/
-		cargar_num_agendados();
-
-		/**/
-	}).fail(function(){			
-		show_error_enid(".place_info_agendados" , "Error ... ");
-	});		
-
-	e.preventDefault();
-}
-/**/
-function  marcar_llamada_hecha(e){	
-
-	set_llamada(e.target.id);
-	llenaelementoHTML(".place_llamada_hecha" , "");
-	
-}
-/**/
-function  registrar_llamada_hecha(e){
-	
-	url =  "../base/index.php/api/ventas_tel/agendados_llamada_hecha/format/json/";		
-	data_send =  {id_llamada :  get_llamada()};				
-	$.ajax({
-			url : url , 
-			type: "PUT",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_llamada_hecha" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){																				
-		
-		show_response_ok_enid(".place_llamada_hecha" , "Llamada hecha!");
-		$("#modal_llamada_efectuada").modal("hide");
-		$(".form_busqueda_agendados").submit();
-		recorre_web_version_movil();
-
-	}).fail(function(){			
-		show_error_enid(".place_llamada_hecha" , "Error ... ");
-	});		
-	e.preventDefault();	
-}
-/**/
 function cargar_base_de_marcacion(){
 	$("#registro_prospecto").tab("hide");
 	$(".place_contactos_disponibles").empty();
 	$("#contenedor_formulario_contactos").show();
 	show_response_ok_enid(".place_resultado_final" , "<div class='row'><span class='white'> Listo! siguiente contacto </span></div>");				
 }
-/***/
-function reset_contenido_form_lanza_lista_de_marcacion(){
-		
-	show_response_ok_enid(".place_registro_prospecto" , "Posible cliente registrado!");					
-	document.getElementById("form_referido").reset(); 
-	
-	/**/
-	recorre_web_version_movil();
-	if(get_flag_base_telefonica() == 1 ){
-			registra_tipificacion();								
-	}
-	$(".form_busqueda_posibles_clientes").submit();	
-	$(".base_tab_agendados").tab("show");
-	$("#tab_base_marcacion").tab("show");
-	/**/
-	if (get_referencia_email() ==  1 ) {
-		cargar_num_agendados_email();
-	}
-	
-
-}
-/**/
-/**/
-function muestra_form_agendar_llamada(){
-	showonehideone(".contenedor_form_agenda" , ".btn_ocultar_form");
-}
-/**/
-function reset_form_agenda(){
-	
-	set_referencia_email(0);
-	$(".input_f_agenda").val("");
-	$(".contenedor_form_agenda").hide();
-
-}
-/**/
-function get_referencia_email(){	
-	return  referencia_email;
-}
-/**/
-function set_referencia_email(n_referencia){
-	referencia_email =  n_referencia;
-	$(".referencia_email").val(referencia_email);
-}
 /**/
 function recorre_web_version_movil(){
 	recorrepage(".tab-content");
 }
-/**/
-
 /**/
 function carga_metricas_desarrollo(e){
 
@@ -545,4 +373,99 @@ function carga_solicitudes_cliente(e){
 	});
 	
 	e.preventDefault();
+}
+/**/
+function mover_ticket_depto(e){
+
+
+	url =  "../portafolio/index.php/api/tickets/ticket/format/json/";	
+	data_send = $(".form_mover_ticket_depto").serialize()+"&"+$.param({"id_ticket" : get_id_ticket() });				
+
+	$.ajax({
+			url : url , 
+			type: "PUT",
+			data: data_send, 
+			beforeSend: function(){
+				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+			}
+	}).done(function(data){							
+		
+		$('#btn_renovar_servicio').tab('show'); 
+		$('.base_tab_clientes').tab('show'); 
+
+		carga_tikets_usuario();
+		
+
+	}).fail(function(){			
+		show_error_enid(".place_proyectos" , "Error ... ");
+	});	
+
+	e.preventDefault();
+}
+function get_proyectos_persona(){
+	/**/	
+	url =  "../portafolio/index.php/api/portafolio/proyecto_persona/format/json/";	
+	data_send =  {"id_persona" : get_persona() , "usuario_validacion" : 0};				
+
+	$.ajax({
+			url : url , 
+			type: "GET",
+			data: data_send, 
+			beforeSend: function(){
+				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+			}
+	}).done(function(data){							
+		/**/
+		llenaelementoHTML(".place_proyectos" , data);				
+
+		$(".solicitar_desarrollo").click(function(e){
+			id_proyecto =  e.target.id;	
+			set_proyecto(id_proyecto);
+			carga_tikets_usuario();
+		});
+		/**/
+		$(".btn_clientes").click(carga_clientes);
+		$(".form_q_servicios").submit();
+		$(".persona_proyecto").click(renovar_servicio);
+		/**/
+
+	}).fail(function(){			
+		show_error_enid(".place_proyectos" , "Error ... ");
+	});		
+}
+function set_flag_mostrar_solo_pendientes(n_val){
+	flag_mostrar_solo_pendientes = n_val;
+}
+/**/
+function get_flag_mostrar_solo_pendientes(){
+	return  flag_mostrar_solo_pendientes;	
+}
+function get_id_tarea(){
+	return  id_tarea;
+}
+/**/
+function set_id_tarea(n_id_tarea){
+	id_tarea =  n_id_tarea;	
+}
+function carga_num_pendientes(){
+	
+	alert();
+	url =  "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";		
+	data_send =  {"id_usuario" : get_option("id_usuario") , "id_departamento" :  get_option("id_depto") };				
+
+	$.ajax({
+			url : url , 
+			type: "GET",
+			data: data_send, 
+			beforeSend: function(){
+				//show_load_enid(".place_tareas_pendientes" , "Cargando ... ", 1 );
+			}
+	}).done(function(data){		
+		
+		
+		llenaelementoHTML(".place_tareas_pendientes" , data);
+
+	}).fail(function(){			
+		show_error_enid(".place_tareas_pendientes" , "Error ... ");
+	});		
 }

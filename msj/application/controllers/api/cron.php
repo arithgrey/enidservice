@@ -37,22 +37,61 @@ class Cron extends REST_Controller{
             $lista_email = $this->pagosmodel->get_lista_clientes_activos();                
             $b = 0;
             foreach($lista_email as $row){          
-                    try{
-
-                        $param["info_correo"] = $response;
-                        $nombre_cliente =$row["nombre"] ." " .$row["apellido_paterno"] ." ".$row["apellido_materno"];
-
-                        $param["asunto"] =  "Buen día ".trim($nombre_cliente);
-                        $param["mensaje"] = $response;                                    
-                        $correo_dirigido_a = $row["email"]; 
-                        $this->mensajeria_lead->notificacion_email($param , $correo_dirigido_a);   
-                        
-                    }catch(Exception $e){              
                     
-                    }                     
+                $param["info_correo"] = $response;
+                $nombre_cliente =$row["nombre"] ." " .$row["apellido_paterno"] ." ".$row["apellido_materno"];
+
+                $param["asunto"] =  "Buen día ".trim($nombre_cliente);
+                $param["mensaje"] = $response;                                    
+                $correo_dirigido_a = $row["email"]; 
+                $this->mensajeria_lead->notificacion_email($param , $correo_dirigido_a);   
+                        
+                                     
             }
 
         $this->response($response);        
+    }
+    /**/
+    function recordatorio_publicaciones_GET(){
+
+        $param = $this->get();
+        $response =  $this->pagosmodel->get_usuarios_sin_publicar_articulos($param);
+        $a =0;
+        foreach ($response as $row){
+            
+            $nombre = $row["nombre"];
+            $email   = $row["email"];
+            
+            
+            $prm["nombre"] =    $nombre;
+            $prm["email"] =     $email;
+
+            $cuerpo_correo =  $this->get_mensaje_recordatorio_publicacion($prm);
+            
+            $param["info_correo"] = $cuerpo_correo;        
+            $param["asunto"] =  "Hemos tenido pocas noticias sobre ti".$nombre;
+            $this->mensajeria_lead->notificacion_email($param , $email);   
+            
+            $a ++; 
+        }
+        $this->response($a);
+    }
+    /**/
+    private function get_mensaje_recordatorio_publicacion($param){
+        
+        $api = new RestClient();                            
+        $url = "msj/index.php/api/";    
+        $url_request=  $this->get_url_request($url);
+        $api->set_option('base_url', $url_request);
+        $api->set_option('format', "json");
+        $result = $api->get("cron/recordatorio_publicar_articulos" , $param);
+        $response =  $result->response;        
+        return $response;
+    }
+    /**/
+    function recordatorio_publicar_articulos_GET(){
+        $param =  $this->get();
+        $this->load->view("mensaje/recordar_publicaciones" ,$param);
     }
     /**/
     function base_promocion_GET(){
@@ -71,7 +110,7 @@ class Cron extends REST_Controller{
     /**/
     function cancelacion_venta_GET(){
 
-        $param["info"] =  $this->get();
+        $param["info"] =  $this->get();        
         $this->load->view("mensaje/cancelacion_venta_vendedor" , $param);
     }
     /**/

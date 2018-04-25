@@ -2,7 +2,7 @@ var depto =0;
 function cargar_num_envios_a_validacion(){
 
 	url =  "../base/index.php/api/ventas_tel/num_agendados_validacion/format/json/";		
-	data_send =  {"id_usuario" : get_id_usuario()};				
+	data_send =  {"id_usuario" : get_option("id_usuario")};				
 	$.ajax({
 			url : url , 
 			type: "GET",
@@ -22,7 +22,7 @@ function  cargar_num_agendados(){
 	
 	
 	url =  "../base/index.php/api/ventas_tel/num_agendados/format/json/";		
-	data_send =  {"id_usuario" : get_id_usuario() };				
+	data_send =  {"id_usuario" : get_option("id_usuario") };				
 	$.ajax({
 			url : url , 
 			type: "GET",
@@ -50,7 +50,7 @@ function  cargar_num_agendados(){
 function  cargar_num_clientes_restantes(){
 
 	url =  "../base/index.php/api/ventas_tel/num_clientes_restantes/format/json/";		
-	data_send =  {"id_usuario" : get_id_usuario()};				
+	data_send =  {"id_usuario" : get_option("id_usuario")};				
 	$.ajax({
 			url : url , 
 			type: "GET",
@@ -69,7 +69,7 @@ function carga_num_pendientes(){
 
 	url =  "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";		
 
-	data_send =  {"id_usuario" : get_id_usuario() , "id_departamento" :  get_depto() };				
+	data_send =  {"id_usuario" : get_option("id_usuario") , "id_departamento" :  get_depto() };				
 
 	$.ajax({
 			url : url , 

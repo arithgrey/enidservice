@@ -3,7 +3,7 @@ var modulo = 0;
 var keyword ="";
 function cargar_tareas_venta(e){
 	id_proyecto =  e.target.id;	
-	set_modulo(1);
+	set_option( "modulo", 1 );
 	carga_tickets_por_proyecto_producto();
 }
 function set_id_ticket(n_id_ticket){
@@ -16,20 +16,18 @@ function get_id_ticket(){
 /**/
 function carga_form_solicitar_desarrollo(e){
 
-	if(get_modulo() !=  2){
+	if(get_option("modulo") !=  2){
 		carga_form_solicitar_desarrollo_interno_usuario_enid();
 	}else{
 
 		carga_form_solicitud_desarrollo_interno();
-	}
-						
-	
+	}				
 }
 /**/
 function carga_form_solicitar_desarrollo_interno_usuario_enid(){
 	
 		url =  "../portafolio/index.php/api/tickets/form/format/json/";	
-		data_send =  { id_proyecto : get_proyecto()};				
+		data_send =  { id_proyecto : get_option("id_proyecto")};				
 
 			$.ajax({
 					url : url , 
@@ -55,9 +53,10 @@ function carga_form_solicitar_desarrollo_interno_usuario_enid(){
 /**/
 function carga_form_solicitud_desarrollo_interno(){
 	
-	temporal_depto = $(".selector_departamento .depto").val(); 
+
+	set_option("depto",$(".selector_departamento .depto").val()); 
 	url =  "../portafolio/index.php/api/tickets/form_proyectos/format/json/";	
-	data_send =  {"id_persona" : get_persona() , id_proyecto : get_proyecto() , "id_departamento" : get_depto()};				
+	data_send =  {"id_persona" : get_persona() , id_proyecto : get_option("id_proyecto") , "id_departamento" : get_option("id_depto")};				
 
 
 		$.ajax({
@@ -82,13 +81,9 @@ function carga_form_solicitud_desarrollo_interno(){
 
 			$(".btn_siguiente_ticket").click(function(){						
 				showonehideone( ".contenedor_formulario_ticket" , ".btn_siguiente_ticket"  );					
-				selecciona_select(".contenedor_form_depto .depto" , get_depto());			
+				selecciona_select(".contenedor_form_depto .depto" , get_option("id_depto"));			
 			});
-			
-			/**/
-
-			
-			
+					
 
 		}).fail(function(){			
 			show_error_enid(".place_proyectos" , "Error ... ");
@@ -101,8 +96,8 @@ function registra_ticket(e){
 
 	url =  "../portafolio/index.php/api/tickets/ticket/format/json/";
 
-	data_send = $(".form_ticket").serialize()+"&"+ $.param({"id_proyecto" : get_proyecto() , "id_usuario" : get_id_usuario()});				
-	if (get_modulo() == 2) {
+	data_send = $(".form_ticket").serialize()+"&"+ $.param({"id_proyecto" : get_option("id_proyecto") , "id_usuario" : get_id_usuario()});				
+	if (get_option("modulo") == 2) {
 		data_send = $(".form_ticket").serialize();					
 		
 	}			
@@ -285,10 +280,6 @@ function carga_info_detalle_ticket(){
 	});		
 }
 /**/
-function  funciones_por_modulo(){
-	
-}
-/**/
 function carga_formulario_respuesta_ticket(e){
 	
 	tarea = e.target.id;
@@ -387,28 +378,20 @@ function muestra_todas_las_tareas(){
 	$(".mostrar_tareas_pendientes").show();
 	set_flag_mostrar_solo_pendientes(0);	
 }
-/***/
-function set_modulo(n_modulo){
-	modulo =  n_modulo;
-}
 /**/
-function  get_modulo(){
-	return modulo;
-}
 function carga_tikets_usuario(){
+	
 
-	/**/
 	recorre_web_version_movil();
 	status_ticket = 0; 	
 	if (document.querySelector(".estatus_tickets")) {		
 		status_ticket =  $(".estatus_tickets").val();
 	}
-
 	keyword = $(".q").val(); 	
 	set_keyword(keyword);	
 		
 	url =  "../portafolio/index.php/api/tickets/ticket_desarrollo/format/json/";			
-	data_send = { id_proyecto : get_proyecto() , "status" : status_ticket , "id_departamento" :  get_depto() , "keyword" : get_keyword(), "modulo": get_modulo() };				
+	data_send = { id_proyecto : get_option("id_proyecto") , "status" : status_ticket , "id_departamento" :  get_option("id_depto") , "keyword" : get_keyword(), "modulo": get_option("modulo") };				
 	
 
 		$.ajax({
@@ -420,7 +403,6 @@ function carga_tikets_usuario(){
 				}
 		}).done(function(data){													
 
-			/**/
 			llenaelementoHTML(".place_proyectos" , data);										
 			$(".solicitar_desarrollo_form").click(carga_form_solicitar_desarrollo);
 			/*Ver detalle ticket completo*/
@@ -456,7 +438,7 @@ function carga_tickets_por_proyecto_producto(){
 		status_ticket =  $(".estatus_tickets").val();
 	}	
 	url =  "../portafolio/index.php/api/tickets/ticket_desarrollo/format/json/";		
-	data_send =  {id_proyecto : get_proyecto() , "status" : status_ticket , "modulo" : get_modulo()};				
+	data_send =  {id_proyecto : get_option("id_proyecto") , "status" : status_ticket , "modulo" : get_option("modulo")};				
 
 
 		$.ajax({

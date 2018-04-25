@@ -101,13 +101,15 @@ class Tickets extends REST_Controller{
 
                 /*Si la cuenta pertenece hay que realizar la cancelación del la órden de pago*/
 
-                $data_complete["registro"] = $this->cancelar_orden_compra($param);
+                $data_complete["registro"] = 
+                $this->cancelar_orden_compra($param);
                 
                 $usuario_notificado=  $data["recibo"]["id_usuario"];
                 $prm["id_recibo"] =  $param["id_recibo"];
                 $prm["usuario_notificado"] = 
                 $data_complete["info_cliente"]
-                =  $this->get_info_usuario($usuario_notificado);
+                =  
+                $this->get_info_usuario($usuario_notificado);
                 
                 $data_complete["info_email"]=  
                 $this->notifica_venta_cancelada_a_cliente($prm);

@@ -1,113 +1,94 @@
-<?=n_row_12()?>
-<div class="col-lg-12">
-  <span   
-    class='text-center strong'
-    style='font-size:.8em!important;'>
-    # Resultados
-    <?=count($info_tickets);?>    
-  </span>   
-</div>
-<?=end_row()?>
-<?php  
-	$l ="";
-	$estilos_estra ="style='font-size:.8em!important;background: #0030ff;color: white;'"; 	
-	foreach ($info_tickets as $row) {	
-
-    $id_ticket =   $row["id_ticket"];
-    $asunto =   $row["asunto"];        
-    $id_usuario =   $row["id_usuario"];
-    $fecha_registro            =   $row["fecha_registro"];           
-    $nombre_departamento  = $row["nombre_departamento"];
-    $num_tareas_pendientes = $row["num_tareas_pendientes"];
-
-    $tareas_pendientes =
-    "class='strong white ver_detalle_ticket blue_enid_background' id='".$id_ticket."' ";
-    $id_usuario = $row["id_usuario"];		
-		$img_cliente = "../imgs/index.php/imagen_usuario/".$id_usuario;				
-    $url_imagen ="../imgs/index.php/enid/imagen_usuario/".$id_usuario;	
-    
-			
-			$btn_agregar_servicios =  "";
-			
-      ?>
-        <div class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
-            <div class="popup-head">
-              <div class="popup-head-left pull-left">
-                <img 
-                  src="<?=$url_imagen?>" style='width: 44px;'  
-                  onerror="this.src='../img_tema/user/user.png'" > 
-                  <span class="black">
-                    <?=$asunto?> 
-                  </span>
-                  <div>
-                    <span style="font-size: .7em!important; color: black;">
-                      
-                      <strong  style="padding: 1px;" 
-                        <?=$tareas_pendientes?>>
-                        #Tareas pendientes:  <?=$num_tareas_pendientes?> 
-                      </strong>
-                    
-                    </span>
-                  </div>
-              </div>
-              <div class="popup-head-right pull-right ">
-                <div class="btn-group">
-                        <button 
-                          class="chat-header-button" 
-                          data-toggle="dropdown" 
-                          type="button" 
-                          aria-expanded="false">
-                           <i class="fa fa-plus">                        
-                           </i> 
-                        </button>
-                        <ul role="menu" class="dropdown-menu pull-right ">
-                        <li>
-                            <a <?=$tareas_pendientes?> style='color: white!important;'>
-                              Agregar tareas
-                            </a>
-                        </li>                        
-                        </ul>
-                </div>        
-              </div>
-          </div>
-        </div>                
-      <?php 
-
-
-	}
- 	
-?>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-
-<style type="text/css">
-  .popup-box{    
+.mostrar_todas_las_tareas{
+  display: none;
+}
+.mostrar_tareas_pendientes:hover, .mostrar_todas_las_tareas:hover{
+  cursor: pointer;
+}
+.ver_tickets:hover{
+  cursor: pointer;
+}
+.agregar_respuesta:hover{
+  cursor: pointer;
+}
+.comentarios_tarea:hover{
+    cursor: pointer;
+}
+.herramientas_session{
+    display: none!important;
+}
+.campo_avanzado{
+    display: none;
+}
+.btn_mostrar_mas_campos{
+    background: #0485D7; 
+    padding: 4px;
+    color: white;
+}
+.btn_ocultar_mas_campos:hover , .btn_mostrar_mas_campos:hover{
+    cursor: pointer;
+}
+.agendar_llamada_btn{
+    background: #0485D7; 
+    padding: 4px;
+    color: white;
+}
+.campo_avanzado_agenda{
+    display: none;
+}
+.alerta_validaciones{
+    background: #0a399b;
+    padding: 5px;
+    color: white;
+    font-size: .8em!important;
+}
+.alerta_llamadas_agendadas{
+    background: #0a399b;
+    padding: 5px;
+    color: white;
+    font-size: .8em!important;
+}
+.alerta_pendientes{
+    background: red;
+    padding: 5px;
+    color: white;
+    font-size: .8em!important;
+}
+.alerta_pendientes_blue{
+    background: blue;
+    padding: 5px;
+    color: white;
+    font-size: .8em!important;
+}
+.contenedor_form_agenda{
+    display: none;
+}
+.agendar_llamada_btn:hover{
+    cursor: pointer;
+}
+.li_menu{
+    font-size: .85em!important;
+}
+.regresar_btn:hover{
+    cursor: pointer;
+}
+.agregar_info_validacion:hover{
+    cursor: pointer;
+}
+.agregar_info_validacion{
+    font-size: .8em;
+    background: white;
+    padding: 4px;
+}
+.btn_liquidar_servicio:hover{
+    cursor: pointer;
+}
+.regresar_btn_posible_cliente:hover{
+    cursor: pointer;
+}
+.contenedor-info-ventas{
+    display: none;
+}
+.popup-box{    
       border: 1px solid #b0b0b0;
       bottom: 0;      
       right: 70px;
@@ -315,5 +296,6 @@
   .info_persona:hover{
     cursor: pointer;
   }
-</style>
-
+  .titulo_bloque_tarea{
+      text-decoration: underline;
+  }

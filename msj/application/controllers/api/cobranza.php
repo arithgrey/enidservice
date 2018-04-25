@@ -11,11 +11,17 @@ class Cobranza extends REST_Controller{
     }
     /**/
     function cancelacion_venta_GET(){
-
-        $param = $this->get();        
-
+        
+        /**/        
+        $param = $this->get();            
+        $cliente = $param["usuario_notificado"][0];
+        $nombre = $cliente["nombre"];    
+        $email = $cliente["email"];    
+        $info_correo["info_correo"] =  $cuerpo_correo;        
         $cuerpo_correo = $this->get_mensaje_cancelacion_venta($param); 
-        $this->response($cuerpo_correo);
+        $info_correo["asunto"] = "HOLA ".$nombre." TENEMOS NOTICIAS SOBRE TU COMPRA";
+        $this->mensajeria_lead->notificacion_email($info_correo , $email);
+        $this->response($cuerpo_correo);        
     }
     /**/
     private function get_mensaje_cancelacion_venta($param){
@@ -51,8 +57,7 @@ class Cobranza extends REST_Controller{
                 $email =  $row["email"];
                 $nombre =  $row["nombre"];            
                 $info_correo_afiliado["info_correo"] =  $mensaje;
-                $info_correo_afiliado["asunto"] =  
-                "Reporte de ganancias - afiliados - Enid Service";
+                $info_correo_afiliado["asunto"] = "Reporte de ganancias - afiliados - Enid Service";
                 $correo_dirigido_a = $email;
                 
 

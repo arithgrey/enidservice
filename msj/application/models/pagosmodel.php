@@ -5,6 +5,21 @@
         $this->load->database();
     }   
     /**/
+    function get_usuarios_sin_publicar_articulos($param){
+
+      $query_get = "SELECT
+                    nombre , 
+                    email 
+                    FROM usuario 
+                    WHERE status = 1 
+                    AND 
+                    ultima_publicacion 
+                    < DATE_ADD(CURRENT_DATE() , INTERVAL - 30 DAY )
+                    AND id_departamento =9 ";
+      $result      =  $this->db->query($query_get);
+      return $result->result_array();
+    }
+    /**/
     function get_lista_clientes_activos(){      
       /**/
       $_num =  get_random();

@@ -332,10 +332,23 @@
                         )";
         
         $this->db->query($query_insert);        
-        return $this->db->insert_id();  
+        $id_servicio=  $this->db->insert_id();  
+        $this->notifica_ultima_publicacion($id_usuario);
+        return $id_servicio;
         
+    }   
+    /**/
+    private function notifica_ultima_publicacion($id_usuario){
         
-    }    
+        $query_update = "UPDATE usuario 
+                        SET 
+                            ultima_publicacion =  CURRENT_TIMESTAMP()
+                        WHERE 
+                            idusuario = '".$id_usuario."' 
+                        LIMIT 1";
+        $this->db->query($query_update);
+        
+    } 
     /**/
     function get_precio_servicio($param){
         

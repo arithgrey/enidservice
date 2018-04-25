@@ -126,14 +126,8 @@ class Servicio extends REST_Controller{
       /**/
       if($this->input->is_ajax_request()){ 
         $param =  $this->post();              
-
-        
-        
-        
         $tags =  $this->create_tags($param);             
-
         $text_tags =  implode($tags, ",");
-
         $param["metakeyword"] =  $text_tags;
         $param["id_usuario"] = $this->sessionclass->getidusuario();
         $db_response = $this->serviciosmodel->create_servicio($param);    

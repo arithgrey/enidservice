@@ -72,4 +72,5 @@ class usuario extends REST_Controller{
         $this->response($db_response);        
     }
     /**/
+    
 }?>

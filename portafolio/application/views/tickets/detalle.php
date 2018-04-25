@@ -1,37 +1,17 @@
-<br>
 <?php
 	$id_perfil =  $perfil[0]["idperfil"];
 	$extra_estilos ="class='blue_enid_background white' style='font-size:1.1em;' ";
 ?>
-<?=n_row_12()?>
-	<div class="col-lg-10 col-lg-offset-1">
-		<div class='contenedor_movil contenedor_listado_info'>
-	            <?=crea_tabla_resumen_ticket(
-	            	$info_ticket  , $info_num_tareas);?>			
-		</div>
+<?=n_row_12()?>	
+	<div style="border: solid 1px;padding: 10px;">
+		<?=crea_tabla_resumen_ticket($info_ticket  , $info_num_tareas);?>	
 	</div>
 <?=end_row()?>
 <?=n_row_12()?>
-	<div class="col-lg-10 col-lg-offset-1">
-		<span>
-			
-		</span>
-	</div>
-<?=end_row()?>
-
-
-<?php 
-	if ($id_perfil != 20 ) {
-		$this->load->view("tickets/configuracion_ticket");
-	}
-?>
-
-
-<?=n_row_12()?>
-	<div class="col-lg-10 col-lg-offset-1 seccion_nueva_tarea" style="display: none;" >
+	<div class="seccion_nueva_tarea" style="display: none;" >
 		<div style="margin-top: 25px;" >
 			<span class="strong" style="font-size: 1.5em;">
-				Solicitar tarea
+				SOLICITAR TAREA
 			</span>
 			<form class='form_agregar_tarea'>
 				<div id="summernote" class="summernote">        
@@ -46,221 +26,126 @@
 	</div>	
 <?=end_row()?>
 
+<?php
+	$z = 1; 			
+	$l = "";	
+	foreach ($info_tareas as $row){
 
+		$id_tarea =  $row["id_tarea"];
+		$status =  $row["status"];
+		$valor_actualizar = 0; 
+		$estado_tarea = ""; 
+		$fecha_registro =  $row["fecha_registro"];			
+		$nombre =  $row["nombre"];
+		$apellido_paterno = $row["apellido_paterno"];
+		$apellido_materno =  $row["apellido_materno"];
 
+		$num_comentarios =  $row["num_comentarios"];
 
+		$nombre_usuario_registro = 
+		$nombre ." " .$apellido_paterno ." " . $apellido_materno;
 
-<?=n_row_12()?>	
-		<?php
-			$z = 1; 			
-			$ltareas = "";	
-			foreach ($info_tareas as $row){
+		if($status == 0){
+			$valor_actualizar = 1; 					
+		}else{
+			$valor_actualizar = 0; 
+			$estado_tarea = "tarea_pendiente"; 					
+		}
 
-				$id_tarea =  $row["id_tarea"];
-				$status =  $row["status"];
-				$valor_actualizar = 0; 
-				$estado_tarea = ""; 
-				$fecha_registro =  $row["fecha_registro"];			
-				$nombre =  $row["nombre"];
-				$apellido_paterno = $row["apellido_paterno"];
-				$apellido_materno =  $row["apellido_materno"];
-
-				/**/
-				$num_comentarios =  $row["num_comentarios"];
-
-				$nombre_usuario_registro = 
-					$nombre ." " .$apellido_paterno ." " . $apellido_materno;
-
-
-
-				if ($status == 0){
-					$valor_actualizar = 1; 					
-				}else{
-					$valor_actualizar = 0; 
-					$estado_tarea = "tarea_pendiente"; 					
-				}
-
-				$tipo_usuario =  valida_tipo_usuario_tarea($id_perfil);
-				$extra_checkbox =" ";	
+		$tipo_usuario =  valida_tipo_usuario_tarea($id_perfil);
+		$extra_checkbox =" ";	
 				
-				$input =valida_check_tarea(
-					$id_tarea ,  
-					$valor_actualizar ,
-					$status , 
-					$id_perfil);
+		$input=valida_check_tarea($id_tarea,$valor_actualizar,$status,$id_perfil);
+		$l .= "<div class='".$estado_tarea."'>";
+				
+				$l .= "<div style='background: #02022d;color: white;padding: 5px;margin-top:50px;'>";							
+					$l .= n_row_12();							
+							   $l .="<div class='col-lg-10 col-lg-offset-1'>
+										<div class='col-lg-7'>
+											".$nombre_usuario_registro."
+											|| 
+											".$tipo_usuario."
+										</div>
+										<div class='col-lg-5 '>
+											".$fecha_registro."
+											".$input."
+										</div>
+									</div>
+									";
+					$l .= end_row();						
+				$l .= "</div>";																	
+				
+				$l .= "<div style='padding: 10px;'>";													
+				$l .= n_row_12();										
+					$l .= $row["descripcion"];					
+				$l .= end_row();	
+				$l .= "</div>";																							
+				
 
-						$ltareas .= "<div class='".$estado_tarea."' style='background:#f5f8ff;'>";							
-							$ltareas .= n_row_12();							
-								$ltareas .= n_row_12();							
-									$ltareas .="<div class='white'
-													 style='background:#041965 !important;'>
-														<div class='row'>
-															<div class='col-lg-10 col-lg-offset-1'>
-																<div class='col-lg-7'>
-
-																	<span style='font-size:1.1em;'>
-
-																		".$nombre_usuario_registro."
-																		|| 
-																		".$tipo_usuario."
-																	</span>
-																</div>
-																<div class='col-lg-5 '>
-																	
-																		
-																	<div 
-																		style='font-size:1.1em;'
-																		class='white'>
-																		".$fecha_registro."
-																		".$input."
-																	</div>
-																	
-																	
-																			
-																	
-																</div>			
-															</div>			
-														</div>				
-												</div>
-
-												
-
-												";
-
-
-								$ltareas .= end_row();																
-								$ltareas .= n_row_12();										
-									
-									$ltareas .= "<div  style='padding:30px;'>"; 
-
-										
-										
-										$ltareas .= "
-													<div>
-														<span style='font-size:1.1em!important;'> 
-															".$row["descripcion"] ."
-														</span>
-													</div>";
-									$ltareas .= "</div>
-										";
-								$ltareas .= end_row();															
-							$ltareas .= end_row();
-							
+				$seccion_respuesta_num ="seccion_respuesta_".$id_tarea;
 						
-
-
-
-						$seccion_respuesta_num ="seccion_respuesta_".$id_tarea;
-						
-
-
-
-						$ltareas .= "
-							<div>
-								<table style='width:100%'>
-									<tr>
-										<td>
+				
+				$l .= "<table style='width:100%'>
+								<tr>
+									<td>
 										<span 
-											style ='font-size:1.1em;' 
 											class='strong comentarios_tarea' 
-											id='".$id_tarea."'> 									
+											id='".$id_tarea."'> 					
 											Ver comentarios(".$num_comentarios.")
 										</span>					
-										</td>
-										<td class='text-right'>
+									</td>
+									<td class='text-right'>
 										<span 
-											style ='font-size:1.1em;' 
-											class='strong agregar_respuesta' 
+
+											class='strong agregar_respuesta a_enid_blue_sm' 
 											id='".$id_tarea."'> 
-											+ agregar 
-											comentario
+											+ agregar comentario
 										</span>					
-										</td>
-									</tr>	
-								</table>	
-							</div>
-						";
+									</td>
+								</tr>	
+							</table>";
 
-						$ltareas .= "<div style='background:white !important;' class='row'>";
-						$ltareas .= n_row_12();
-							
-							$ltareas .= "<div class='".$seccion_respuesta_num."' 
-											id='".$id_tarea."'></div>";
-							
-						$ltareas .= end_row();
-						$ltareas .= "</div>";					
-
-					$ltareas .= "</div>
-								<br>";	
 						
+						$l .= n_row_12();
+							$l .= "<div class='".$seccion_respuesta_num." row'
+											id='".$id_tarea."'>
+										</div>";
+						$l .= end_row();
+						
+					$l .= "</div>";							
 				$z ++;
 			}					
 		?>
 
 
-	<div class="col-lg-10 col-lg-offset-1">		
+	
 
-		<?=n_row_12()?>
-			<hr>
-			<div>
-				<table style="width: 100%;">
-					<tr>
-						<td>
-							<span class="strong" style="font-size: 2em;">
-								Solicitudes
-							</span>
-							<div>
-								<span class="strong btn input-sm btn_agregar_tarea" style="background: 
-								#0635FF !important">
-									+ Agregar 
-								</span>
-							</div>
-						</td>
-						<td class="text-right">
-							<?=valida_mostrar_tareas($info_tareas)?>			
-						</td>
-					</tr>
-				</table>
-			</div>						
-		<?=end_row()?>
-		<?=$ltareas;?>
-	</div>
+		
+
+
+
+<div style="margin-top: 50px;"></div>
+<?=n_row_12()?>						
+	<table style="width: 100%;">
+		<tr>
+			<td>
+				<span class="strong" style="font-size: 1.4em;">
+					SOLICITUDES
+				</span>
+				<div>
+					<span class="strong btn input-sm btn_agregar_tarea" 
+							style="background: #0635FF !important">
+						+ AGREGAR
+					</span>
+				</div>
+			</td>
+			<td class="text-right">
+				<?=valida_mostrar_tareas($info_tareas)?>			
+			</td>
+		</tr>
+	</table>			
 <?=end_row()?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style type="text/css">
-.mostrar_todas_las_tareas{
-	display: none;
-}
-.mostrar_tareas_pendientes:hover, .mostrar_todas_las_tareas:hover{
-	cursor: pointer;
-}
-.ver_tickets:hover{
-	cursor: pointer;
-}
-.agregar_respuesta:hover{
-	cursor: pointer;
-}
-.comentarios_tarea:hover{
-		cursor: pointer;
-}
-</style>
+<div style="margin-top: 20px;"></div>
+<?=n_row_12()?>						
+	<?=$l;?>
+<?=end_row()?>

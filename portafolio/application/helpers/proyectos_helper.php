@@ -824,7 +824,7 @@ if(!function_exists('invierte_date_time')){
           $extra_checkbox =" checked  ";  
         }
         $input =" <input type='checkbox' 
-                        class='tarea '                         
+                        class='tarea form-control'                         
                         id='".$id_tarea ."' 
                         value='".$valor_actualizar."'
                         $extra_checkbox>";   
@@ -844,12 +844,8 @@ if(!function_exists('invierte_date_time')){
   /**/
   function crea_tabla_resumen_ticket($info_ticket  , $info_num_tareas){
      
-
     $tareas =  $info_num_tareas[0]["tareas"];  
     $pendientes =  $info_num_tareas[0]["pendientes"];      
-
-    
-    /**/    
     $id_ticket =  ""; 
     $asunto =  ""; 
     $mensaje =  ""; 
@@ -859,7 +855,6 @@ if(!function_exists('invierte_date_time')){
     $id_proyecto = "";
     $id_usuario = "";
     $nombre_departamento = "";
-
     foreach($info_ticket as $row){
             
           $id_ticket =  $row["id_ticket"];
@@ -871,78 +866,39 @@ if(!function_exists('invierte_date_time')){
           $lista_status = ["Abierto", "Cerrado" , "Visto"];
           $asunto =  $row["asunto"];
       }
+      ?>      
+      <?php echo n_row_12()?>
+        <div class="titulo_enid_sm titulo_bloque_tarea">
+          <?php echo $asunto; ?>
+        </div>
+      <?php echo end_row()?>
 
-       $l ="
-            <div class='panel' style='background:#0632c9;color:white;'>
-              <div class='row'>
-                <div class='col-lg-8'>
-                  <span style='font-size:.9em;' class='strong'>
-                    ". $asunto."                 
-                  </span>                  
-                </div>  
-                <div class='col-lg-4'>
-                  <div>
-                    <span style='font-size:.9em;'>
-                      #Tareas ".$tareas." |
-                    </span>
-                    <span style='font-size:.9em;'>
-                      #Pendientes ".$pendientes."
-                    </span>
-                  </div>  
-                  
-                </div>
-              </div>  
-            </div>
+      <?php echo n_row_12()?>
+          <div style="font-size: 1.5em;font-weight: bold;color: #0120a7;">
+            <?php echo "#TAREAS ".$tareas; ?> | 
+            <?php echo "#PENDIENTES ".$pendientes; ?> 
+          </div>
+      <?php echo end_row()?>
 
-            <div class='panel'>
-              <table style='width:100;'>
-                <tr>
-                  <td>
-                  <div>
-                    <span style='font-size:.8em;'>
-                    ".$info_ticket[0]["asunto"]."
-                    </span>
-                  </div>  
-                  </td>
-                  <td>
-                    <div>
-                      <span style='font-size:.8em;'>
-                      ".$info_ticket[0]["mensaje"]."
-                      </span>
-                    </div>  
-                  </td>  
-                </tr>
-              </table>
-            </div>
+      <?php echo n_row_12()?>
+          <div style="font-size: 1em;">
+            <?php echo $info_ticket[0]["asunto"]; ?>             
+          </div>
+          <div style="font-size: 1em;">
+            <?php echo $info_ticket[0]["mensaje"]; ?> 
+          </div>
+      <?php echo end_row()?>
 
+      <?php echo n_row_12()?>
+        <?php echo "TICKET # ".$id_ticket ?> |
+        <?php echo "DEPARTAMENTO ".strtoupper($nombre_departamento) ?> |
+        <?php echo "ESTADO ".strtoupper($lista_status[$status]) ?> |
+        <?php echo "PRIORIDAD ".strtoupper($lista_prioridad[$prioridad])  ?> |
+        <?php echo "ALTA ".strtoupper($fecha_registro) ?> 
+      <?php echo end_row()?>
+    
 
-
-
-            
-            <div 
-              class='panel' style='background:#000a44;padding:5px;'>                                     
-                  
-                  <div>
-                    <span style='font-size:.8em;background:white;padding:5px;' >
-                      <span>
-                        Ticket #".$id_ticket." | 
-                        ". $nombre_departamento ." 
-                        | 
-                        ". $lista_status[$status] ."
-                        | ". 
-                        $lista_prioridad[$prioridad]  ."
-                        |
-                        ".$fecha_registro."
-
-                    </span>                  
-                  </div> 
-              </div>
-            
-            
-
-              ";
-        return $l;        
-
+  <?php
   }
   /**/
   function get_bnt_retorno($id_perfil){
@@ -1030,11 +986,11 @@ if(!function_exists('invierte_date_time')){
   function valida_mostrar_tareas($data){
 
   	if (count($data) > 0 ){
-  		return  "<label class='mostrar_tareas_pendientes blue_enid'> 
-  					       Mostrar sólo tareas pendientes
+  		return  "<label class='mostrar_tareas_pendientes a_enid_black'> 
+                   MOSTRAR SÓLO TAREAS PENDIENTES
   				    </label>
-    				<label class='mostrar_todas_las_tareas blue_enid' > 
-    					Mostrar todas las tareas
+    				<label class='mostrar_todas_las_tareas a_enid_black' >     					
+              MOSTRAR TODAS LAS TAREAS
     				</label>";
   	}
   }
