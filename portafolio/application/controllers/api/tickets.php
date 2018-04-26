@@ -94,18 +94,16 @@ class Tickets extends REST_Controller{
     /**/
     function ticket_POST(){        
 
-        $param = $this->post();            
+        $param = $this->post();                    
         $param["id_usuario"] = $this->sessionclass->getidusuario();
-        $ticket_abierto =  $this->ticketsmodel->insert_ticket($param);                
+        $ticket_abierto =  $this->ticketsmodel->insert_ticket($param);        
         $es_cliente =  $this->ticketsmodel->es_cliente($param["id_usuario"]);
         $param["ticket"] = $ticket_abierto;
         $estatus_notificacion =  "";
         if ($es_cliente ==  1){                    
-            $estatus_notificacion =  $this->notificacion_nuevo_ticket_soporte($param);
+            $estatus_notificacion=$this->notificacion_nuevo_ticket_soporte($param);
         }                
-
         $this->response($param["ticket"]);        
-        
     }   
     function notificacion_nuevo_ticket_soporte($param){
                         

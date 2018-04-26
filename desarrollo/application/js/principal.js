@@ -25,12 +25,12 @@ var menu_actual = "clientes";
 var id_servicio = 0; 
 var depto = 0; 
 var flag_en_servicio = 0;
-
 $(document).ready(function(){		
 
 
 	num_departamento = $(".num_departamento").val(); 
 	set_option("modulo", 2);
+	
 	/***/
 	$("footer").ready(function(){
 		id_depto = $(".num_departamento").val();		
@@ -53,23 +53,15 @@ $(document).ready(function(){
 	
 	$('.datetimepicker_persona').datepicker();
 	$('.datetimepicker4').datepicker();
-	$('.datetimepicker5').datepicker();			
-		
-	$(".form_busqueda_actividad_enid").submit(cargar_productividad);	
-	
-	
-	
-	/**/
-	$(".btn_mostrar_mas_campos").click(muestra_oculta_campos_persona);
+	$('.datetimepicker5').datepicker();					
+	$(".form_busqueda_actividad_enid").submit(cargar_productividad);		
+	//$(".btn_mostrar_mas_campos").click(muestra_oculta_campos_persona);
 	/*hora*/
 	$('.datetimepicker1').timepicker();
 	$('.datetimepicker2').datepicker();
 	set_option("id_usuario" , $(".id_usuario").val());
 	
-	$(".li_menu").click(recorre_web_version_movil);	
-	
-	/**/
-
+	$(".li_menu").click(recorre_web_version_movil);		
 	$("footer").ready(carga_tikets_usuario);	
 	$(".base_tab_clientes").click(carga_tikets_usuario);
 	$(".form_busqueda_desarrollo").submit(carga_metricas_desarrollo);
@@ -84,125 +76,10 @@ $(document).ready(function(){
 
 	/**/
 	$(".comparativa").click(carga_comparativas);
+	$(".abrir_ticket").click(form_nuevo_ticket);
 
 });
-/**/
-function descarga_contacto(e){
 
-	set_nombre_tipo_negocio($("#tipo_negocio>option:selected").text());  
-	set_flag_base_telefonica(1);
-	set_tipo_negocio($(".tipo_negocio").val());
-
-
-	url =  "../base/index.php/api/ventas_tel/prospecto/format/json/";	
-	data_send = $(".form_busqueda_contacto").serialize();	
-	$.ajax({
-		url : url , 
-		type : "GET" ,
-		data: data_send , 
-		beforeSend: function(){
-			show_load_enid( ".place_contactos_disponibles" , "Cargando ..." , 1 );
-		}
-	}).done(function(data){	
-
-
-		if (data ==  0) {
-			redirect("");
-		}else{
-
-			/*Si no hay contactos, carga de nuevo*/
-			llenaelementoHTML(".place_contactos_disponibles" , data);		
-			$("#contenedor_formulario_contactos").hide();
-			$(".form_tipificacion").submit(registra_avance);
-			set_nombre_tipo_negocio(get_nombre_tipo_negocio());  
-
-
-			/*Cuando se lanza formulario de agendamiento*/		
-		}
-		
-	}).fail(function(){
-		show_error_enid(".place_contactos_disponibles" , "Error al cargar ..."); 
-	});
-	set_num_persona(0);
-	e.preventDefault();
-}
-/**/
-function registra_avance(e){	
-	
-
-	val_tipificacion =  $("#tipificacion").val();	
-	tmp_tel = $(".telefono_venta").val();
-	$("#telefono_info_contacto").val(tmp_tel);			
-	set_telefono(tmp_tel);
-	set_fuente($("#id_fuente_marcacion").val());
-	set_referencia_email(0);	
-	/*Reset en los formularios*/	
-	
-	recorre_web_version_movil();	
-	/*Cuando se tiene que registrar la información de la persona */
-	if (val_tipificacion ==  "1" || val_tipificacion ==  "9" ){				
-
-		$('.agregar_posible_cliente_btn').tab('show'); 			
-
-	}else if(val_tipificacion ==  "8"){
-		/*Mostramos el form y seteamos a 1 sólo enviar referencia*/
-		set_referencia_email(1);
-		$('.agregar_posible_cliente_btn').tab('show'); 							
-		
-	}else if(val_tipificacion == "2" ){
-		/*Cuando pide llamar después, lanzar formulario*/
-		$('.btn_agendar_llamada_base_marcacion').tab('show'); 				
-		/**/		
-	}else{		
-		/*Registra tipificación*/
-		registra_tipificacion();
-	}
-	e.preventDefault();
-}
-/**/
-/**/
-function carga_metricas_prospectacion(e){
-
-
-	url =  "../q/index.php/api/ventas/laborventa/format/json/";	
-	data_send =  $(".form_busqueda_labor_venta").serialize()+"&"+$.param({"id_usuario" : get_option("id_usuario") });			
-	$.ajax({
-			url : url , 
-			type: "GET",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_metricas_labor_venta" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){						
-
-		llenaelementoHTML(".place_metricas_labor_venta" , data);	
-	}).fail(function(){		
-		//show_error_enid(".place_metricas_labor_venta" , "Error ... ");
-	});
-	e.preventDefault();	
-}
-/**/
-
-/**/
-function carga_ejemplos_disponibles(e){
-	
-	url =  "../portafolio/index.php/api/portafolio/proyecto/labor_venta/format/json/";	
-	data_send =  $(".form_busqueda_proyectos").serialize();
-	
-	$.ajax({
-			url : url , 
-			type: "GET",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_muestras_proyectos" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){											
-			llenaelementoHTML(".place_muestras_proyectos" , data);			
-	}).fail(function(){		
-		show_error_enid(".place_muestras_proyectos" , "Error ... ");
-	});
-	e.preventDefault();	
-}
 function cargar_productividad(e){
 		
 	url =  "../q/index.php/api/productividad/usuario/format/json/";
@@ -220,86 +97,6 @@ function cargar_productividad(e){
 	});	
 	e.preventDefault();
 }
-/**/
-function registra_tipificacion(){
-
-	url =  "../base/index.php/api/ventas_tel/prospecto/format/json/";	
-	data_send = $(".form_tipificacion").serialize();
-		$.ajax({
-			url : url , 
-			type : "PUT" ,
-			data: data_send , 
-			beforeSend: function(){
-				show_load_enid(".place_update_prospecto" , "Cargando ..." , 1 );
-			}
-		}).done(function(data){		
-			cargar_base_de_marcacion();
-		}).fail(function(){
-			show_error_enid(".place_update_prospecto" , "Error al cargar ..."); 
-	});
-	
-}
-/**/
-
-function registrar_posiblie_cliente(e){
-
-	url =  "../base/index.php/api/ventas/prospecto/format/json/";	
-	data_send =  $(".form_referido").serialize() +"&"+ $.param({"id_usuario" : get_option("id_usuario") });			
-
-	$.ajax({
-			url : url , 
-			type: "POST",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_registro_prospecto" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){																
-
-
-		reset_contenido_form_lanza_lista_de_marcacion();
-		
-	}).fail(function(){		
-		show_error_enid(".place_registro_prospecto" , "Error ... ");
-
-	});		
-	e.preventDefault();
-}
-/**/
-function muestra_form_referidos(){	
-	set_num_persona(1);
-}
-/**/
-function set_num_persona(z){
-	
-	if (z == 1){
-		$('.telefono_info_contacto').attr('readonly', false);		
-		$(".telefono_info_contacto").val("");	
-	}else{
-		$('.telefono_info_contacto').attr('readonly', true);					
-	}
-}
-/**/
-function muestra_oculta_campos_persona(){
-
-	if (campos_disponibles == 0 ){
-
-		showonehideone( ".menos_campos" , ".mas_campos");
-		$(".campo_avanzado").show();
-		campos_disponibles = 1;
-	}else{
-		showonehideone(".mas_campos" , ".menos_campos" );		
-		$(".campo_avanzado").hide();
-		campos_disponibles = 0;
-	}
-}
-/**/
-function cargar_base_de_marcacion(){
-	$("#registro_prospecto").tab("hide");
-	$(".place_contactos_disponibles").empty();
-	$("#contenedor_formulario_contactos").show();
-	show_response_ok_enid(".place_resultado_final" , "<div class='row'><span class='white'> Listo! siguiente contacto </span></div>");				
-}
-/**/
 function recorre_web_version_movil(){
 	recorrepage(".tab-content");
 }
@@ -349,7 +146,6 @@ function carga_comparativas(){
 		show_error_enid(".place_metricas_comparativa" , "Error al cargar ..."); 
 	});
 	
-	e.preventDefault();	
 }
 /**/
 function carga_solicitudes_cliente(e){
@@ -375,64 +171,6 @@ function carga_solicitudes_cliente(e){
 	e.preventDefault();
 }
 /**/
-function mover_ticket_depto(e){
-
-
-	url =  "../portafolio/index.php/api/tickets/ticket/format/json/";	
-	data_send = $(".form_mover_ticket_depto").serialize()+"&"+$.param({"id_ticket" : get_id_ticket() });				
-
-	$.ajax({
-			url : url , 
-			type: "PUT",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){							
-		
-		$('#btn_renovar_servicio').tab('show'); 
-		$('.base_tab_clientes').tab('show'); 
-
-		carga_tikets_usuario();
-		
-
-	}).fail(function(){			
-		show_error_enid(".place_proyectos" , "Error ... ");
-	});	
-
-	e.preventDefault();
-}
-function get_proyectos_persona(){
-	/**/	
-	url =  "../portafolio/index.php/api/portafolio/proyecto_persona/format/json/";	
-	data_send =  {"id_persona" : get_persona() , "usuario_validacion" : 0};				
-
-	$.ajax({
-			url : url , 
-			type: "GET",
-			data: data_send, 
-			beforeSend: function(){
-				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
-			}
-	}).done(function(data){							
-		/**/
-		llenaelementoHTML(".place_proyectos" , data);				
-
-		$(".solicitar_desarrollo").click(function(e){
-			id_proyecto =  e.target.id;	
-			set_proyecto(id_proyecto);
-			carga_tikets_usuario();
-		});
-		/**/
-		$(".btn_clientes").click(carga_clientes);
-		$(".form_q_servicios").submit();
-		$(".persona_proyecto").click(renovar_servicio);
-		/**/
-
-	}).fail(function(){			
-		show_error_enid(".place_proyectos" , "Error ... ");
-	});		
-}
 function set_flag_mostrar_solo_pendientes(n_val){
 	flag_mostrar_solo_pendientes = n_val;
 }
@@ -447,9 +185,9 @@ function get_id_tarea(){
 function set_id_tarea(n_id_tarea){
 	id_tarea =  n_id_tarea;	
 }
+/**/
 function carga_num_pendientes(){
-	
-	alert();
+
 	url =  "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";		
 	data_send =  {"id_usuario" : get_option("id_usuario") , "id_departamento" :  get_option("id_depto") };				
 
@@ -468,4 +206,303 @@ function carga_num_pendientes(){
 	}).fail(function(){			
 		show_error_enid(".place_tareas_pendientes" , "Error ... ");
 	});		
+}
+/**/
+function form_nuevo_ticket(){
+		
+	url =  "../portafolio/index.php/api/tickets/form/format/json/";	
+	data_send =  {};				
+		
+		$.ajax({
+			url : url , 
+			type: "GET",
+			data: data_send, 
+			beforeSend: function(){
+				show_load_enid(".place_form_tickets" , "Cargando ... ", 1 );
+			}
+		}).done(function(data){				
+				llenaelementoHTML(".place_form_tickets" , data);							
+				$(".form_ticket").submit(registra_ticket);				
+		}).fail(function(){			
+			show_error_enid(".place_form_tickets" , "Error ... ");
+		});
+}
+/**/
+function registra_ticket(e){
+
+	url =  "../portafolio/index.php/api/tickets/ticket/format/json/";
+	data_send = $(".form_ticket").serialize();				
+
+		$.ajax({
+				url : url , 
+				type: "POST",
+				data: data_send, 
+				beforeSend: function(){
+					show_load_enid(".place_registro_ticket" , "Cargando ... ", 1 );
+				}
+		}).done(function(data){																
+
+			llenaelementoHTML(".place_registro_ticket" , "A la brevedad se realizará su solicitud!");							
+			set_option("id_ticket", data); 
+			$("#ver_avances").tab("show");
+			$("#base_tab_clientes").tab("show");
+			carga_info_detalle_ticket();
+
+		}).fail(function(){			
+			show_error_enid(".place_registro_ticket" , "Error ... ");
+		});		
+	e.preventDefault();
+	
+}
+
+/**/
+function actualizar_estatus_ticket(e){
+	
+	nuevo_estado= e.target.id;
+	url =  "../portafolio/index.php/api/tickets/status/format/json/";	
+	data_send =  {"id_ticket" : get_option("id_ticket") , "status" : nuevo_estado };				
+
+	$.ajax({
+			url : url , 
+			type: "PUT",
+			data: data_send, 
+			beforeSend: function(){
+				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+			}
+	}).done(function(data){									
+		//carga_tickets_por_proyecto_producto();		
+	}).fail(function(){			
+		show_error_enid(".place_proyectos" , "Error ... ");
+	});		
+}
+/**/
+/****************************************************************************************************/
+/*Necesario Necesario Necesario Necesario Necesario Necesario Necesario Necesario Necesario Necesario */
+function carga_info_detalle_ticket(){
+	
+
+	url =  "../portafolio/index.php/api/tickets/detalle/format/json/";	
+	data_send =  {"id_ticket" : get_option("id_ticket")};				
+
+	$.ajax({
+			url : url , 
+			type: "GET",
+			data: data_send, 
+			beforeSend: function(){
+				//show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+			}
+	}).done(function(data){							
+
+		
+		//carga_num_pendientes();
+		llenaelementoHTML(".place_proyectos" , data);		
+		$(".btn_mod_ticket").click(actualizar_estatus_ticket);
+		$(".btn_agregar_tarea").click(function(){		
+			show_section_dinamic_button(".seccion_nueva_tarea");
+			show_section_dinamic_button(".btn_agregar_tarea");
+			recorrepage(".seccion_nueva_tarea");
+			/**/
+		});
+		
+		$(".agregar_respuesta").click(carga_formulario_respuesta_ticket);
+		$(".comentarios_tarea").click(carga_comentarios_tareas);
+		/*Agregar tarea*/
+
+		$(".form_agregar_tarea").submit(registra_tarea);
+		$(".tarea").click(actualiza_tareas);
+		//recorrepage("#asunto_ticket");
+		/**/
+			$(".mostrar_tareas_pendientes").click(muestra_tareas_por_estatus);
+			$(".mostrar_todas_las_tareas").click(muestra_todas_las_tareas);
+		/**/
+		$(".ver_tickets").click(function(){
+			carga_tikets_usuario();
+		});
+
+		if (get_flag_mostrar_solo_pendientes() ==  1) {
+			muestra_tareas_por_estatus();
+		}
+		/**/
+		//$(".mover_ticket").click(mover_ticket_depto_pre);
+		$('.summernote').summernote();
+
+
+		/**/
+	}).fail(function(){			
+		show_error_enid(".place_proyectos" , "Error ... ");
+	});		
+}
+/**/
+function carga_formulario_respuesta_ticket(e){
+	
+	tarea = e.target.id;
+	set_tarea(tarea);	
+	url =  "../portafolio/index.php/api/tickets/formulario_respuesta/format/json/";	
+	data_send =  {"tarea" : tarea};				
+	seccion =".seccion_respuesta_"+get_tarea();
+
+	$.ajax({
+			url : url , 
+			type: "GET",
+			data: data_send, 
+			beforeSend: function(){
+				show_load_enid(seccion , "Cargando ... ", 1 );
+			}
+	}).done(function(data){							
+		
+		llenaelementoHTML(seccion , data);
+		$(".form_respuesta_ticket").submit(registra_respuesta_pregunta);
+		/**/
+	}).fail(function(){			
+		//show_error_enid(".place_proyectos" , "Error ... ");
+	});		
+
+}
+/**/
+function carga_comentarios_tareas(e){
+
+	tarea = e.target.id;
+	set_tarea(tarea);	
+	url =  "../portafolio/index.php/api/tickets/respuesta/format/json/";	
+	data_send =  {"tarea" : tarea};				
+	seccion =".seccion_respuesta_"+get_tarea();
+
+	$.ajax({
+			url : url , 
+			type: "GET",
+			data: data_send, 
+			beforeSend: function(){
+				show_load_enid(seccion , "Cargando ... ", 1 );
+			}
+	}).done(function(data){							
+		
+		llenaelementoHTML(seccion , data);
+		
+		$(".ocultar_comentarios").click(function(e){
+
+			set_tarea(e.target.id);
+			seccion =".seccion_respuesta_"+get_tarea();
+			$(seccion).empty();			
+		});
+		/**/
+	}).fail(function(){			
+		//show_error_enid(".place_proyectos" , "Error ... ");
+	});		
+
+
+}
+/**/
+function registra_tarea(e){
+	
+	requerimiento =  $(".form_agregar_tarea .note-editable").html();		
+	url =  "../portafolio/index.php/api/tarea/nueva/format/json/";	
+	data_send =  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_option("id_ticket") , "tarea": requerimiento });				
+
+	$.ajax({
+			url : url , 
+			type: "POST",
+			data: data_send, 
+			beforeSend: function(){
+				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+			}
+	}).done(function(data){		
+								
+		carga_info_detalle_ticket();				
+	}).fail(function(){			
+		show_error_enid(".place_proyectos" , "Error ... ");
+	});			
+	
+	e.preventDefault();
+}
+/**/
+function muestra_tareas_por_estatus(){
+
+	showonehideone( ".mostrar_todas_las_tareas" , ".tarea_pendiente"  );
+	$(".mostrar_tareas_pendientes").hide();
+	set_flag_mostrar_solo_pendientes(1);
+}
+/**/
+function muestra_todas_las_tareas(){
+
+	showonehideone( ".tarea_pendiente"  , ".mostrar_todas_las_tareas");	
+	$(".mostrar_tareas_pendientes").show();
+	set_flag_mostrar_solo_pendientes(0);	
+}
+/**/
+function carga_tikets_usuario(){
+	
+	recorre_web_version_movil();
+	status_ticket = 0; 	
+	if (document.querySelector(".estatus_tickets")) {		
+		status_ticket =  $(".estatus_tickets").val();
+	}
+	keyword = $(".q").val(); 	
+	set_option("keyword" , keyword);	
+		
+	url =  "../portafolio/index.php/api/tickets/ticket_desarrollo/format/json/";			
+	data_send = { "status" : status_ticket , "id_departamento" :  get_option("id_depto") , "keyword" : get_option("keyword"), "modulo": get_option("modulo") };				
+	
+
+		$.ajax({
+				url : url , 
+				type: "GET",
+				data: data_send, 
+				beforeSend: function(){
+					show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+				}
+		}).done(function(data){													
+
+			llenaelementoHTML(".place_proyectos" , data);										
+			//$(".solicitar_desarrollo_form").click(carga_form_solicitar_desarrollo);
+			/*Ver detalle ticket completo*/
+			$(".ver_detalle_ticket").click(function(e){
+				set_option("id_ticket", e.target.id); 
+				carga_info_detalle_ticket();
+			});
+			/**/
+			$(".btn_refresh").click(function(){
+				carga_tikets_usuario();
+			});
+			/**/
+			$(".estatus_tickets").change(function(){
+				carga_tikets_usuario();
+			});	
+			
+			
+			carga_num_pendientes();
+			/**/
+		}).fail(function(){			
+			show_error_enid(".place_proyectos" , "Error ... ");
+
+	});	
+	/**/
+	
+}
+function actualiza_tareas(e){
+
+	set_id_tarea(e.target.id);
+	nuevo_valor = this.value;
+
+	url =  "../portafolio/index.php/api/tarea/estado/format/json/";	
+	data_send = {"id_tarea" : get_id_tarea() ,  "nuevo_valor" : nuevo_valor , "id_ticket" : get_option("id_ticket") };				
+
+	$.ajax({
+			url : url , 
+			type: "PUT",
+			data: data_send, 
+			beforeSend: function(){
+				//show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+			}
+	}).done(function(data){							
+		
+		
+		if (data ==  "cerrado") {
+			carga_tikets_usuario();
+		}else{
+			carga_info_detalle_ticket();					
+		}
+		
+	}).fail(function(){			
+		show_error_enid(".place_proyectos" , "Error ... ");
+	});			
 }

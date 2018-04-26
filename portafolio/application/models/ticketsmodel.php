@@ -666,22 +666,21 @@ class ticketsmodel extends CI_Model{
   function insert_ticket($param){
 
       /***/      
-      $prioridad =  $param["prioridad"];
-      $id_proyecto = $param["id_proyecto"];      
+      $prioridad =  $param["prioridad"];        
       $departamento =  $param["departamento"];     
       $asunto = $param["asunto"];      
       $id_usuario = $param["id_usuario"];      
 
+
       $query_insert = "INSERT INTO ticket(
                                     asunto,
                                     prioridad ,        
-                                    id_proyecto  ,
+                                    
                                     id_usuario , 
                                     id_departamento 
                       )VALUES(
                         '". $asunto ."' ,
-                        '". $prioridad ."', 
-                        '". $id_proyecto  ."', 
+                        '". $prioridad ."',                         
                         '". $id_usuario  ."' ,
                         '". $departamento ."'
                       )";    

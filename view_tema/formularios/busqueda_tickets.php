@@ -28,6 +28,8 @@
 		        </div>
 	        </div>			
 		<?=end_row()?>    
+
+		<br>
 		<?=n_row_12()?>    
 			<div class='place_proyectos'>
 			</div>

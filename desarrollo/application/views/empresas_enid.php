@@ -8,7 +8,17 @@
             </div>
             <div class='col-lg-10'>
                 <div class="tab-content">        
-                    <input type='hidden' class='id_usuario' value='<?=$id_usuario;?>'>
+                    <input 
+                    type='hidden' 
+                    class='id_usuario' 
+                    value='<?=$id_usuario;?>'>
+
+                    <div 
+                        class="tab-pane <?=valida_seccion_activa(3 , $activa)?>" 
+                        id="tab_nuevo_ticket">
+                        <div class="place_form_tickets">
+                        </div>
+                    </div>
                     <div class="tab-pane <?=valida_seccion_activa(1 , $activa)?>" 
                         id='tab_abrir_ticket'>
                         <?=n_row_12()?>
@@ -16,13 +26,14 @@
                                 DESARROLLO ENID SERVICE
                             </h3>
                         <?=end_row()?>
-                        <?=
-                        $this->load->view("../../../view_tema/formularios/busqueda_tickets")?>
+                        <?=$this->load->view("../../../view_tema/formularios/busqueda_tickets")?>
                     </div>
-                    <div class="tab-pane  <?=valida_seccion_activa(2 , $activa)?>" 
+
+                    <div class="tab-pane <?=valida_seccion_activa(2 , $activa)?>" 
                         id='tab_charts'>
-                        <?=$this->load->view("tickets/charts")?>                              
+                        <?=$this->load->view("tickets/charts")?>
                     </div>
+
                 </div>
             </div>
         </div>            
