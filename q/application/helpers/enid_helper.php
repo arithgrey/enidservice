@@ -105,7 +105,7 @@ if(!function_exists('invierte_date_time')){
       if($num < 1 ){         
           
           $lista_pendientes .= 
-          inicio_base_notificacion("../planes_servicios/?q=1" ,"fa fa-cart-plus");
+          inicio_base_notificacion("../planes_servicios/?action=nuevo" ,"fa fa-cart-plus");
           $lista_pendientes .='Aún no tienes artículos en oferta, anuncia un producto o servicio!
           ';
           $lista_pendientes .= fin_base_notificacion();   

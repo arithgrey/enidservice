@@ -9,11 +9,8 @@ function entrega_data_campo($param , $key , $label="", $add_label=0 ){
 /**/
 function get_info_valor_variable($param , $key ){
     
-    $valor =0;
-    if(isset($param[$key]) && $param[$key] != null){             
-        $valor =  $param[$key];
-    }
-    return $valor;
+    $valor =  (array_key_exists($key, $param))? $param[$key]: 0;
+    return $valor; 
 }
 /**/
 function get_dominio($url){

@@ -11,8 +11,8 @@ class Negocio extends REST_Controller{
     function index_GET(){
         
         $this->get();
-        $id_usuario =  $this->sessionclass->getidusuario();    
-        $data["entregas_en_casa"]=  $this->get_tipo_entregas($id_usuario);        
+        $id_usuario =  $this->sessionclass->getidusuario();           
+        $data["entregas_en_casa"]=  $this->get_tipo_entregas($id_usuario);           
         $this->load->view("negocio/principal" ,  $data);
         
     }
@@ -27,7 +27,7 @@ class Negocio extends REST_Controller{
         $result = $this->restclient->get("usuario/entregas_en_casa/format/json/" , $q);
         $info =  $result->response;        
         return json_decode($info, true);
-    }
+    }    
     /**/
     function entregas_en_casa_PUT(){
         /**/

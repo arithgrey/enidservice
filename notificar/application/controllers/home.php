@@ -24,7 +24,8 @@ class Home extends CI_Controller{
         $data["desc_web"] = "";                
         $data["url_img_post"] = create_url_preview("");        
         $data["f_pago"]=1;           
-        $data["num_recibo"] = $this->input->get("recibo");    
+        
+        $data["num_recibo"] = $this->input->get("recibo");            
         
         $num_usuario = get_info_usuario( $this->input->get("q2"));        
         $num_servicio = get_info_usuario( $this->input->get("q3"));        
@@ -32,9 +33,8 @@ class Home extends CI_Controller{
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
         
-        $data["forma_pago"]=  $this->principal->get_forma_pago(); 
-        
-        if($data["num_recibo"] >0 ){
+        $data["forma_pago"]=  $this->principal->get_forma_pago();         
+        if($data["num_recibo"] > 0 && ctype_digit($this->input->get("recibo"))){
             $prm["id_recibo"] =  $data["num_recibo"];
             $data["servicio"] =  $this->carga_servicio_por_recibo($prm);            
         }else{

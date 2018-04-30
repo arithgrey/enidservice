@@ -1,5 +1,28 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**/
+function valida_editar_servicio($usuario_servicio , $id_usuario , $in_session , $id_servicio){
+  
+  $editar ="";
+  if ($in_session == 1 ) {      
+      $href="../planes_servicios/?action=editar&servicio=".$id_servicio;
+      $editar_button ="<div class='text-right'>                        
+                        <a href='".$href."'>
+                          <span class='a_enid_blue_sm'>
+                            <span class='fa fa-pencil'></span>
+                            EDITAR
+                          </span>                      
+                        </a>
+                      </div>";
+      $editar =($id_usuario ==  $usuario_servicio)?$editar_button:"";
+  }
+  return $editar;
+}
+/**/
+function valida_valor_variable($param , $q){
+  $val = (array_key_exists($q, $param)== true) ? $param[$q]:0; 
+  return $val;
+}
+/**/
 function valida_maximo_compra($flag_servicio, $existencia){
 
   if($flag_servicio ==  1){
@@ -9,13 +32,14 @@ function valida_maximo_compra($flag_servicio, $existencia){
   }
 }
 /**/
-function crea_nombre_publicador($nombre , $id_usuario){
-  $nombre =  $nombre[0]["nombre"]; 
+function crea_nombre_publicador($usuario , $id_usuario){
+  
+  $nombre =  $usuario[0]["nombre"]; 
   return "<div>
-            Por
+            POR
             <a href='../search/?q3=$id_usuario&vendedor=$nombre'
               class='publicado_por' style='color: blue;'>  
-              ".$nombre ."
+              ".strtoupper($nombre) ."
             </a> 
           </div>";
 }
@@ -124,6 +148,27 @@ function get_entrega_en_casa($entregas_en_casa , $flag_servicio){
   }
   return $text;
 }
+/******/
+function get_contacto_cliente($telefono_visible , $in_session , $usuario){
+
+  if ($in_session ==  1){
+    
+    $telefono =  $usuario[0]["tel_contacto"];
+    $text_tel =  "<div>                  
+                    <a target='_blank' href='tel:".$telefono."' style='text-decoration:underline;color:black;'>
+                      <i class='fa fa-phone'>
+                      </i>
+                      ".$telefono."
+                    </a>
+                    </div>
+                    <br>";
+    $text_telefono_visible =  
+    ($telefono_visible ==  1 && strlen(trim($telefono))>4)? $text_tel :"";
+    return $text_telefono_visible;
+  }
+
+}
+
 /**/
 function get_descripcion_servicio($descripcion , $flag_servicio){
   
@@ -328,9 +373,11 @@ function get_info_usuario($q2){
 }
 /**/
 function get_info_servicio($q){
+        
         $num_hist= 9990890;                      
-       
-        if(isset($q)){                
+        
+        if(isset($q)){ 
+
             if($q== 1){
                 /*Cuando se comparte en facebook*/
                 $num_hist= 109;      

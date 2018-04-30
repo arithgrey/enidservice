@@ -9,20 +9,22 @@ $(document).ready(function(){
 });
 /**/
 function carga_productos_sugeridos(){
-	
+
+
 	url =  "../tag/index.php/api/sugerencia/servicio/format/json/";		
+
 	data_send = {"servicio" : get_option("servicio")}	
-	/************************************************************************************/
+	
 	$.ajax({
 		url : url , 
 		type : "GET" , 
 		data: data_send, 
 			beforeSend : function(){} 					
 		}).done(function(data){			
+			console.log(data);
 			if (data["sugerencias"] == undefined ){				
 				llenaelementoHTML(".place_tambien_podria_interezar" , data);		
 				/**/
-
 			}
 		}).fail(function(){							
 			show_error_enid(".place_registro_afiliado" , "Error al iniciar sessión");				

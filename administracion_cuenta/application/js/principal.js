@@ -13,8 +13,9 @@ $(document).ready(function(){
 	/**/
 	$("#form_update_password").submit(update_password);	
 	$(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
-	$(".btn_sobre_tu_negocio").click(carga_info_sobre_el_negocio);
 	$(".f_telefono_usuario").submit(actualiza_telefono_usuario);
+	$(".f_telefono_usuario_negocio").submit(actualiza_telefono_usuario_negocio);
+	
 
 });
 /**/
@@ -122,6 +123,25 @@ function actualiza_telefono_usuario(e){
 			beforeSend: function(){}
 		}).done(function(data){																							
 			show_response_ok_enid(".registro_telefono_usuario" , "Tu teléfono fue actualizado!");
+		}).fail(function(){			
+			show_error_enid(".place_proyectos" , "Error ... ");
+		});			
+	e.preventDefault();
+}
+/**/
+function actualiza_telefono_usuario_negocio(e){
+
+
+	data_send=  $(".f_telefono_usuario_negocio").serialize();  	
+	console.log(data_send);
+	url =  "../base/index.php/api/base/telefono_usuario_negocio/format/json/";			
+	$.ajax({
+			url : url , 
+			type: "PUT",
+			data: data_send, 
+			beforeSend: function(){}
+		}).done(function(data){																							
+			show_response_ok_enid(".registro_telefono_usuario_negocio" , "Tu teléfono fue actualizado!");
 		}).fail(function(){			
 			show_error_enid(".place_proyectos" , "Error ... ");
 		});			

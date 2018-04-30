@@ -28,7 +28,7 @@ class Cobranza extends REST_Controller{
     /**/
     function calcula_costo_envio_GET(){
         /**/        
-        $param =  $this->get();        
+        $param =  $this->get();                
         $this->response($this->get_costo_envio($param));
     }
     /**/

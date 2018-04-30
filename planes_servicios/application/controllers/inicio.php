@@ -10,23 +10,33 @@ class Inicio extends CI_Controller {
     function index(){
         
 		$data = $this->val_session("Grupo ventas - Enid Service - ");        	            
+        $param =  $this->input->get();
+        $data["action"] =  valida_action($param , "action");     
+        $data["considera_segundo"] =0;
+        $data["extra_servicio"] =0;
+
+        if ($data["action"] ==  2 ){            
+            $data["considera_segundo"] =1;
+            if (ctype_digit($param["servicio"])){
+                $prm =  $param;            
+                $prm["id_usuario"] =  $data["id_usuario"];            
+
+                if ($this->valida_servicio_usuario($prm)!= 1){
+                    redirect(url_log_out());
+                }    
+                $data["extra_servicio"] = $param["servicio"];
+            }else{
+                redirect(url_log_out());
+            }            
+        }
+
         $num_perfil =  $this->sessionclass->getperfiles()[0]["idperfil"];        
         $data["ciclo_facturacion"]= $this->principal->create_ciclo_facturacion();          
-        $data["clasificaciones_departamentos"] = "";
-          
-        $action =  valida_q($this->input->get("action"));           
-        if($action === "nuevo" || $action ===  "vender"){
-            $action = 1;  
-        }else{
-            $action = 0;
-        }         
-        $data["action"] =  $action;        
-        /*************************************************************/        
-        $this->principal->show_data_page( $data , 'home_enid');			
-    	        	
+        $data["clasificaciones_departamentos"] = "";    
+        $this->principal->show_data_page( $data , 'home_enid');			    	        	
     }    	
-   /**/
-    function val_session($titulo_dinamico_page ){        
+    /**/
+    private function val_session($titulo_dinamico_page ){        
         if ( $this->sessionclass->is_logged_in() == 1) {                                                            
                 $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         
@@ -47,13 +57,24 @@ class Inicio extends CI_Controller {
         }else{            
             redirect(url_log_out());
         }   
-    }           
-    function get_url_request($extra){
+    }       
+    /**/    
+    private function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 
         return  $url_request;
+    }  
+    /**/
+    private function valida_servicio_usuario($param){
+        
+        $url = "tag/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("producto/es_servicio_usuario/format/json/", $param);
+        $response =  $result->response;        
+        return json_decode($response , true);
     }
-
 
 }

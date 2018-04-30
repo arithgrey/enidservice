@@ -70,7 +70,9 @@
 							email_alterno       ,
 							tel_contacto , 
 							nombre_usuario       ,
-							tel_lada
+							tel_lada,
+							tel_contacto_alterno , 
+							lada_negocio
  						FROM usuario WHERE idusuario = '".$id_usuario."' 
  						LIMIT 1 ";
 

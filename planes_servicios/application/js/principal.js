@@ -199,7 +199,6 @@ function carga_informacion_servicio(num) {
 						$(".text_incluye_envio").click(
 								muestra_input_incluye_envio);
 						$(".btn_guardar_envio").click(actualiza_envio_incluido);
-
 						/* Recorremos a la sección de categorias */
 						if (get_flag_nueva_categoria() == 1) {
 							recorrepage("#seccion_metakeywords_servicio");
@@ -213,7 +212,8 @@ function carga_informacion_servicio(num) {
 						}
 						$('#summernote').summernote();
 						$(".entregas_en_casa").click(u_entregas_en_casa);
-						$(".telefono_visible").click(u_telefono_visible)
+						$(".telefono_visible").click(u_telefono_visible);
+
 					}).fail(function() {
 				show_error_enid(".place_servicios", "Error ... ");
 			});
@@ -1642,10 +1642,16 @@ function evalua_precio(){
 /**/
 function valida_action_inicial(){
 	
-
 	set_option("accion", $(".q_action").val());	
-
 	switch (parseInt(get_option("accion"))){	
+	case 2:		
+
+		set_option("servicio", $(".extra_servicio").val());		
+		carga_informacion_servicio(1);
+		set_option("modalidad" , 1);
+		set_option("nuevo", 0);
+		break;
+
 	case 1:		
 		//$(".btn_agregar_servicios").tab("show");
 		set_option("modalidad" , 0);

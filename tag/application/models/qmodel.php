@@ -7,6 +7,20 @@
         $this->load->database();
     }
     /**/
+    function valida_servicio_usuario($param){
+
+        $id_usuario =  $param["id_usuario"];
+        $id_servicio =  $param["servicio"];
+        $query_get = "SELECT COUNT(0)num FROM servicio 
+                        WHERE
+                        id_usuario =  $id_usuario
+                        AND 
+                        id_servicio =  $id_servicio
+                        LIMIT 1";
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["num"];
+    }
+    /**/
     function carga_productos_en_venta_usuario($param){
 
         $id_usuario =  $param["id_usuario"];
@@ -84,17 +98,24 @@
     /**/
     function get_producto_por_clasificacion($param){
 
+
         $servicio =  $param[0];             
         $this->set_option("sql_distintos" , "");      
+
         $this->agrega_elemento_distinto($servicio["id_servicio"]);                    
-        $n_servicio =  $this->get_producto_clasificacion_nivel(1 , $servicio["primer_nivel"]);    
+        $n_servicio =  $this->get_producto_clasificacion_nivel(1 , $servicio["primer_nivel"]);
+
         /**2*/
         if(count($n_servicio) > 0){
 
+
             $this->agrega_servicios_list($n_servicio);    
             $this->agrega_elemento_distinto($n_servicio[0]["id_servicio"]);            
-            $n_servicio =  $this->get_producto_clasificacion_nivel(2 , $servicio["segundo_nivel"]);
-            $this->agrega_servicios_list($n_servicio);
+            
+            $n_servicio =  
+            $this->get_producto_clasificacion_nivel(2 , $servicio["segundo_nivel"]);
+
+            $this->agrega_servicios_list($n_servicio);            
 
             /**3*/
             if (count($n_servicio) > 0) {
@@ -133,7 +154,10 @@
     }
     /**/
     function agrega_servicios_list($servicio){        
-        array_push($this->lista_servicios, $servicio[0]);
+        if (count($servicio)>0){
+            array_push($this->lista_servicios, $servicio[0]);    
+        }
+        
     }
     /**/
     function agrega_elemento_distinto($distinto){        
@@ -165,7 +189,9 @@
                                 tercer_nivel ,
                                 cuarto_nivel , 
                                 quinto_nivel, 
-                                color
+                                color,
+                                precio,
+                                id_ciclo_facturacion
                         FROM 
                         servicio
                         WHERE 

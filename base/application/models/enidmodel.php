@@ -4,6 +4,23 @@
         parent::__construct();        
         $this->load->database();
     }
+    /**/
+    function telefono_usuario_negocio($param){
+
+        $id_usuario=  $param["id_usuario"];
+        $telefono =  $param["telefono_negocio"];
+        $lada =  $param["lada_negocio"];
+        $query_update ="UPDATE usuario  
+                        SET 
+                            tel_contacto_alterno = '".$telefono."'  ,
+                            lada_negocio = '".$lada."'
+                        WHERE 
+                        idusuario = $id_usuario 
+                        LIMIT 1";
+
+        return $this->db->query($query_update);
+    }
+    /**/
     function telefono_usuario($param){
 
         $id_usuario=  $param["id_usuario"];

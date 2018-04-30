@@ -10,11 +10,12 @@ function get_conceptos(){
 				beforeSend: function(){}
 
 		}).done(function(data){										
+
 			llenaelementoHTML(".contenedor_conceptos_privacidad" , data);			
 			$(".concepto_privacidad").click(update_conceptos_privacidad);
-		}).fail(function(){
-				
-	});
+
+		}).fail(function(){				
+	});	
 }
 /**/
 function  update_conceptos_privacidad(e){

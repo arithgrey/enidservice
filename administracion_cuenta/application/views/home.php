@@ -11,11 +11,8 @@
 			       <?=$this->load->view("micuenta/privacidad");?>
 			    </div>
 			    <div class="tab-pane " id="tab_privacidad_seguridad">
-			       <?=$this->load->view("micuenta/privacidad_seguridad");?>
-			    </div>
-			    <div class='tab-pane' id="tab_sobre_tu_negocio">
-			    	<?=$this->load->view("micuenta/informacion_negocio");?>
-			    </div>
+			       <?=$this->load->view("micuenta/privacidad_seguridad");?>			       
+			    </div>			    
 			    <div class="tab-pane " id="tab_direccion">
 			    	<?=$this->load->view("micuenta/direccion")?>
 			    </div>

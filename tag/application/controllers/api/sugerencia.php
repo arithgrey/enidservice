@@ -22,21 +22,21 @@ class sugerencia extends REST_Controller{
 
         $param =  $this->get();
         $clasificaciones =  
-        $this->clasificacion_model->get_clasificaciones_por_id_servicio($param["servicio"]);        
+        $this->clasificacion_model->get_clasificaciones_por_id_servicio($param["servicio"]);
         $servicios =  $this->get_servicios_por_clasificaciones($clasificaciones);    
-            
+       
         if (count($servicios) >0){
 
             $this->set_option("in_session" , 0);
             $servicios_html=  $this->agrega_vistas_servicios($servicios);
             $data["lista_productos"] = $servicios_html;
             $this->load->view("producto/sugerencias" , $data);    
-            /**/
+          
         }else{
             $data_response["sugerencias"] =0;
             $this->response($data_response);
         } 
-        
+       
     }
     /**/
     function agrega_vistas_servicios($servicios){

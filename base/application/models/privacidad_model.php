@@ -55,7 +55,8 @@
                         pu.id_usuario
                         FROM 
                             privacidad  p 
-                        LEFT OUTER JOIN privacidad_usuario pu
+                        LEFT OUTER JOIN 
+                        privacidad_usuario pu
                             ON
                             p.id_privacidad =  pu.id_privacidad
                             AND 

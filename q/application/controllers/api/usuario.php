@@ -72,5 +72,23 @@ class usuario extends REST_Controller{
         $this->response($db_response);        
     }
     /**/
-    
+    function informes_por_telefono_GET(){
+        
+        $param = $this->get();
+        $db_response=  $this->usuario_model->get_informes_por_telefono($param);
+        $this->response($db_response);           
+    }
+    /**/
+    function terminos_privacidad_GET(){
+
+        $param = $this->get();
+        $db_response=  $this->usuario_model->get_terminos_privacidad($param);
+        $this->response($db_response);              
+    }
+    /**/
+    function get_terminos_privacidad_productos_GET(){
+        $param = $this->get();
+        $db_response=  $this->usuario_model->get_terminos_privacidad_usuario($param);
+        $this->response($db_response);                 
+    }
 }?>

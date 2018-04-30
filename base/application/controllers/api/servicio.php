@@ -125,14 +125,20 @@ class Servicio extends REST_Controller{
     function nuevo_POST(){      
       /**/
       if($this->input->is_ajax_request()){ 
+        
         $param =  $this->post();              
         $tags =  $this->create_tags($param);             
         $text_tags =  implode($tags, ",");
         $param["metakeyword"] =  $text_tags;
-        $param["id_usuario"] = $this->sessionclass->getidusuario();
-        $db_response = $this->serviciosmodel->create_servicio($param);    
-        $this->response($db_response);    
-        
+        $id_usuario =  $this->sessionclass->getidusuario();
+        $param["id_usuario"] = $id_usuario;        
+        $terminos_usuario =  $this->get_terminos_privacidad_productos($id_usuario);
+
+        $terminos = $terminos_usuario[0];
+        $param["entregas_en_casa"] = ($terminos["entregas_en_casa"] > 0)?1:0;
+        $param["telefonos_visibles"] = ($terminos["telefonos_visibles"] > 0 )?1:0;    
+        $this->response($this->serviciosmodel->create_servicio($param));    
+
       }else{
         $this->response("error");
       }
@@ -182,7 +188,6 @@ class Servicio extends REST_Controller{
       return $lista_nombres;
 
   }
-
   /**/
   function  get_tag_categorias($id_clasificacion){
         
@@ -298,7 +303,8 @@ class Servicio extends REST_Controller{
       $data["clasificaciones"] =  $clasificaciones;
       $data["ciclos"] =  $this->serviciosmodel->get_ciclos_facturacion($param);      
       $data["id_usuario"] = $this->sessionclass->getidusuario();      
-      $data["imgs"] =  $this->carga_imagenes_servicio($id_servicio);
+      
+      $data["imgs"] =  $this->carga_imagenes_servicio($id_servicio);      
       $data["url_request"] = $this->get_url_request("");
       $prm["id_servicio"] =  $id_servicio;           
       $data["num"] = $param["num"];      
@@ -485,6 +491,31 @@ class Servicio extends REST_Controller{
         return $table_header;
     } 
   /**/
-/**/
+  private function get_entregas_en_casa_usuario($id_usuario){
+        
+        $q["id_usuario"] =  $id_usuario;
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("usuario/entregas_en_casa/format/json/" , $q);        
+        $response =  $result->response;        
+        return json_decode($response , true);
+        
+  }
+  /**/
+  private function get_terminos_privacidad_productos($id_usuario){
+        /**/
+        $q["id_usuario"] =  $id_usuario;
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = 
+        $this->restclient->get("usuario/get_terminos_privacidad_productos/format/json/" , $q);        
+        $response =  $result->response;        
+        return json_decode($response , true);      
+  }  
+  /**/
 }
 ?>

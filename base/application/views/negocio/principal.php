@@ -1,9 +1,5 @@
-<?=n_row_12();?>
-    <div class='col-lg-7'>
-    	¿CLIENTES TAMBIÉN PUEDEN RECOGER 
-    	SUS COMPRAS EN TU NEGOCIO? 
-    </div>
-    <div class='col-lg-5'>
+<?=n_row_12();?>    
+    <div class='col-lg-3'>
     	<a 
             id='1'
             class='button_enid_eleccion entregas_en_casa 
@@ -18,5 +14,10 @@
     		NO
     	</a>
     </div>
+    <div class='col-lg-9'>
+        ¿CLIENTES TAMBIÉN PUEDEN RECOGER 
+        SUS COMPRAS EN TU NEGOCIO? 
+    </div>
 <?=end_row();?>
 <div style="margin-top: 30px;"></div>
+

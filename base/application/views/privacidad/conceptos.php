@@ -1,5 +1,5 @@
-<?php 
-	
+
+<?php 	
 	$tb ="";
 	foreach ($conceptos as $row){
 		
@@ -37,7 +37,7 @@
 											>";
 								$tb.= "</td>";
 								$tb.= "<td>";
-									$tb.= $privacidad;
+									$tb.= strtoupper($privacidad);
 								$tb.= "</td>";
 							$tb.= "</tr>";
 						

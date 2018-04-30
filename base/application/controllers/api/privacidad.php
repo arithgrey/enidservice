@@ -18,8 +18,7 @@ class Privacidad extends REST_Controller{
   function conceptos_GET(){
     /**/
     $param =  $this->get();
-    $param["id_usuario"] =  $this->sessionclass->getidusuario();
-    
+    $param["id_usuario"] =  $this->sessionclass->getidusuario();  
     $data["conceptos"] = $this->privacidad_model->get_conceptos_usuario($param);
     $this->load->view("privacidad/conceptos" , $data);
   }

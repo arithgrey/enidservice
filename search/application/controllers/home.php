@@ -7,103 +7,90 @@ class Home extends CI_Controller{
         $this->load->library("restclient");        
         $this->load->library('sessionclass');     
     }       
-    function set_option($key, $value){
+    private function set_option($key, $value){
         $this->options[$key] = $value;
     }
     /**/
-    function get_option($key){
+    private function get_option($key){
         return  $this->options[$key];
     }
     /**/   
-    function index(){
+    function index(){           
+        $param    =  $this->input->get();
+        $param["id_clasificacion"]  =  get_info_variable($param , "q2" );               
+        $param["vendedor"] =  get_info_variable($param , "q3" );
+        $param["num_hist"]= get_info_servicio($param["q"]);                
+        $this->load_data($param);    
         
-        $data = $this->val_session("¿Necesitas que más clientes encuentren tu negocio?");   
-
-        $data["meta_keywords"] = 
+    }
+    private function load_data($param){
+        
+        $data = $this->val_session("¿Necesitas que más clientes encuentren tu negocio?");
+        $data["meta_keywords"] =
         "Comprar y vender tus artículos y servicios";
         $data["desc_web"] = "";
-        $data["url_img_post"] = create_url_preview("promo.png");        
+        $data["url_img_post"] = create_url_preview("promo.png");
+    
         
-
-
-        /**/
-        $num_hist= get_info_servicio( $this->input->get("q"));                
-        $q=  $this->input->get("q");
-        /**/        
-        $prm =  $this->input->get();
-        $id_clasificacion =  get_info_variable($prm , "q2" );   
-        /*usuario que promociona*/
-        $vendedor =  get_info_variable($prm , "q3" );           
-        /**/
-
-        $data_send["q"]= $q;
-        $data_send["vendedor"] = $vendedor;
-        $data_send["id_clasificacion"] =  $id_clasificacion;        
-        $data_send["extra"]= $this->input->get();    
-        $per_page = 12;        
+        $data_send["q"]= $param["q"];
+        $data_send["vendedor"] = $param["vendedor"];
+        $data_send["id_clasificacion"] =  $param["id_clasificacion"];
+        $data_send["extra"]= $param;
+        $per_page = 12;
         
         $data_send["resultados_por_pagina"] =$per_page;
         
         $data_send["agrega_clasificaciones"] = 1;
-        $data_send["in_session"] = 0;      
-    
+        $data_send["in_session"] = 0;
+        
         if($this->agent->is_mobile()){
             $data_send["agrega_clasificaciones"] =0;
             $data["clasificaciones_departamentos"] =  "";
         }else{
-            $data["clasificaciones_departamentos"] = 
+            $data["clasificaciones_departamentos"] =
             $this->carga_data_clasificaciones_busqueda();
-
+            
         }
-
-        $servicios=  $this->busqueda_producto_por_palabra_clave($data_send);
-
         
+        $servicios=  $this->busqueda_producto_por_palabra_clave($data_send);          
         $data["servicios"] =  $servicios;
-
-        
-                
         if ($servicios["num_servicios"] > 0) {
             
-          
             $data["url_request"]=  $this->get_url_request("");
-            $data["busqueda"] =  $q;     
-            
-            $totales_elementos=  $data["servicios"]["num_servicios"];    
+            $data["busqueda"] =  $param["q"];
+            $totales_elementos=  $data["servicios"]["num_servicios"];
             $data["num_servicios"] =  $totales_elementos;
             $data["bloque_busqueda"] ="";
             $data["es_movil"] =  1;
             if($this->agent->is_mobile() == FALSE) {
                 $this->crea_menu_lateral($data["servicios"]["clasificaciones_niveles"]);
-                $data["bloque_busqueda"] =  $this->get_option("bloque_busqueda");    
+                $data["bloque_busqueda"] =  $this->get_option("bloque_busqueda");
                 $data["es_movil"] =  0;
             }
             
-            $this->principal->crea_historico($num_hist);
+            $this->principal->crea_historico($param["num_hist"]);
             
             $config_paginacion["totales_elementos"] =  $totales_elementos;
             $config_paginacion["per_page"] = $per_page;
-            $config_paginacion["q"] = $q;            
-            $config_paginacion["q2"] = $id_clasificacion;   
-            $config_paginacion["q3"] = $vendedor;
-            $config_paginacion["page"] = get_info_variable($this->input->get() , "page" );
+            $config_paginacion["q"] =  $param["q"];
+            $config_paginacion["q2"] = $param["id_clasificacion"];
+            $config_paginacion["q3"] = $param["vendedor"];
 
-            $data["paginacion"]= $this->create_pagination($config_paginacion);
-
+            $config_paginacion["page"] = get_info_variable($param , "page" );            
+            $data["paginacion"]= $this->create_pagination($config_paginacion);            
             $this->set_option("in_session" ,  0);
             $data["lista_productos"]= $this->agrega_vista_servicios($servicios["servicios"]);
-            $data["q"] =$q;  
-            $this->principal->show_data_page($data , 'home');                              
-
+            $data["q"] = $param["q"];
+            $this->principal->show_data_page($data , 'home');
+            
         }else{
-            $this->principal->crea_historico($num_hist);
-            $this->principal->show_data_page($data , 'sin_resultados');                              
-        } 
+            $this->principal->crea_historico($param["num_hist"]);
+            $this->principal->show_data_page($data , 'sin_resultados');
+        }
         
-
     }
     /**/
-    function agrega_vista_servicios($data_servicio){
+    private function agrega_vista_servicios($data_servicio){
 
         $data_complete = [];
         $a = 0;
@@ -115,7 +102,7 @@ class Home extends CI_Controller{
         return $data_complete;
     }
     /**/
-    function get_vista_servicio($servicio){
+    private function get_vista_servicio($servicio){
 
         $servicio =  $servicio;
         $servicio["in_session"] =  $this->get_option("in_session");        
@@ -127,7 +114,7 @@ class Home extends CI_Controller{
         return   $result->response;        
     }
     /**/   
-    function create_pagination($q){
+    private function create_pagination($q){
         /**/
         $url = "tag/index.php/api/";         
         $url_request=  $this->get_url_request($url);
@@ -138,7 +125,7 @@ class Home extends CI_Controller{
         return json_decode($response, true);            
     }
     /**/
-    function crea_menu_lateral($clasificaciones_niveles){
+    private function crea_menu_lateral($clasificaciones_niveles){
         
         $primer_nivel = $clasificaciones_niveles["primer_nivel"];
         $segundo_nivel = $clasificaciones_niveles["segundo_nivel"];
@@ -156,7 +143,7 @@ class Home extends CI_Controller{
         
         
     }
-    function get_info_bloque($info){
+    private function get_info_bloque($info){
         $info_bloque =[];
         
         for($a=0; $a <count($info); $a++){             
@@ -172,7 +159,7 @@ class Home extends CI_Controller{
         return $info_bloque;
     }
     /**/
-    function busqueda_producto_por_palabra_clave($q){
+    private function busqueda_producto_por_palabra_clave($q){
 
         /****************************/
         $url = "tag/index.php/api/";         
@@ -184,16 +171,16 @@ class Home extends CI_Controller{
         return json_decode($response , true);
     }
     /**/
-    function carga_data_clasificaciones_busqueda(){
+    private function carga_data_clasificaciones_busqueda(){
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
         return $clasificaciones_departamentos;        
     }
     /**/
-    function logout(){                      
+    private function logout(){                      
         $this->sessionclass->logout();      
     }   
     /**/
-    function val_session($titulo_dinamico_page ){
+    private function val_session($titulo_dinamico_page ){
 
         if( $this->sessionclass->is_logged_in() == 1){                                                                                            
 
@@ -223,7 +210,7 @@ class Home extends CI_Controller{
             return $data;
         }   
     }    
-    function get_departamentos($nombre_pagina){
+    private function get_departamentos($nombre_pagina){
 
         $q["q"] =  $nombre_pagina;
         $url = "tag/index.php/api/";         
@@ -234,7 +221,7 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return $response;
     }
-    function get_info_clasificacion($id_clasificacion){
+    private function get_info_clasificacion($id_clasificacion){
 
         $q["id_clasificacion"] =  $id_clasificacion;
         $url = "tag/index.php/api/";         
@@ -245,7 +232,7 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return json_decode($response , true );
     }
-    function get_url_request($extra){
+    private function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 

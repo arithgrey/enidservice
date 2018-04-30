@@ -43,26 +43,11 @@ class producto extends REST_Controller{
     function producto_por_clasificacion_GET(){
 
         $param =  $this->get();
-        $db_response =  $this->qmodel->get_producto_por_clasificacion($param);                    
-        $servicios =  $this->add_precio_publico($servicios);        
-        $servicios =  $this->add_costo_envio($servicios);        
-        $this->response($servicios);
-    }
-    /**/
-    function add_costo_envio($servicios){
+        $servicios =  $this->qmodel->get_producto_por_clasificacion($param);
+        $response =  $this->agrega_costo_envio($servicios);        
+        $this->response($response);
         
-        $nueva_data =[];
-        $a =0;
-        foreach($servicios as $row){
-            
-            $nueva_data[$a] = $row;                        
-            $param["flag_envio_gratis"] =  $row["flag_envio_gratis"];
-            $nueva_data[$a]["costo_envio"] = $this->calcula_costo_envio($param);
-
-            $a ++;
-        }
-        return $nueva_data;
-    }
+    }    
     /**/
     function agregar_precios_en_servicio($servicios){
 
@@ -79,9 +64,9 @@ class producto extends REST_Controller{
     function q_GET(){
         
         $param =  $this->get();         
-            $id_usuario =  get_info_variable($param , "id_usuario" );          
-            $param["id_usuario"] =  $id_usuario;
-            $this->registra_keyword($param);                                           
+        $id_usuario =  get_info_variable($param , "id_usuario" );          
+        $param["id_usuario"] =  $id_usuario;
+        $this->registra_keyword($param);                                           
             /**/            
             $servicios_complete =  $this->qmodel->busqueda_producto($param);            
             
@@ -110,6 +95,7 @@ class producto extends REST_Controller{
     /**/
     function agrega_costo_envio($servicios){
         
+        
         $nueva_data =[];
         $a =0;
         foreach($servicios as $row){
@@ -125,6 +111,7 @@ class producto extends REST_Controller{
             $a ++;
         }        
         return $nueva_data;
+        
     }
     /**/   
     function calcula_costo_envio($param){
@@ -136,6 +123,7 @@ class producto extends REST_Controller{
         $result = $this->restclient->get("cobranza/calcula_costo_envio/format/json/", $param);
         $response =  $result->response;        
         return json_decode($response , true);
+
     } 
     /**/
     function servicios_empresa_GET(){
@@ -262,6 +250,7 @@ class producto extends REST_Controller{
 
     }
 
+    /*
     function add_precio_publico($servicios){
     
         $nueva_data =[];
@@ -272,12 +261,13 @@ class producto extends REST_Controller{
             $nueva_data[$a] = $row;
             $precio_publico =  $this->get_precio_venta($precio);  
             $nueva_data[$a]["precio_publico"] = $precio_publico;            
-            /***/           
+      
             $a ++;
         }
         return $nueva_data;
 
     }
+    */
     /*
     function agrega_precio_publico($servicios){
       
@@ -384,8 +374,6 @@ class producto extends REST_Controller{
         $totales_elementos =  $param["totales_elementos"];
         $per_page =  $param["per_page"]; 
         
-
-        
         $q = $param["q"];        
         $base_url = "?q=$q";
         if(isset($param["q2"]) && $param["q2"] >0){
@@ -438,6 +426,10 @@ class producto extends REST_Controller{
         $this->load->view("producto/simple" , $data);        
     }    
     /**/
+    function es_servicio_usuario_GET(){
+        $param =  $this->get();
+        $this->response($this->qmodel->valida_servicio_usuario($param));
+    }
 
 
 

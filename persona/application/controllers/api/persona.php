@@ -35,8 +35,7 @@ class Persona extends REST_Controller{
         $param =  $this->post();
         $db_reponse = $this->agendamodel->agenda_correo($param);
         $this->response($db_reponse);   
-        
-
+    
     }
     /**/     
    

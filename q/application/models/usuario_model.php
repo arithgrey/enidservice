@@ -98,13 +98,53 @@
 
         $id_usuario =  $param["id_usuario"];
         $query_get = "SELECT 
-                        entregas_en_casa tipo_entregas 
+                        entregas_en_casa 
+                        tipo_entregas 
                         FROM usuario 
                         WHERE 
                         idusuario =  $id_usuario LIMIT 1";
         $result =  $this->db->query($query_get);
         return $result->result_array()[0]["tipo_entregas"];
     }
-      
+    /**/
+    function get_informes_por_telefono($param){
+
+        $id_usuario =  $param["id_usuario"];
+        $query_get = "SELECT 
+                        informes_telefono                        
+                        FROM usuario 
+                        WHERE 
+                        idusuario =  $id_usuario LIMIT 1";
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["informes_telefono"];
+    
+    }
+    /**/
+    function get_terminos_privacidad($param){
+
+        $id_usuario =  $param["id_usuario"];
+        $query_get = "SELECT 
+                        *
+                        FROM privacidad_usuario
+                        WHERE 
+                        id_usuario =  $id_usuario";
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+    }
+    /**/
+    function get_terminos_privacidad_usuario($param){
+
+        $id_usuario =  $param["id_usuario"];
+        $query_get = "SELECT 
+                        SUM( CASE WHEN id_privacidad =  5 THEN 1 ELSE 0 END )entregas_en_casa,
+                        SUM( CASE WHEN id_privacidad =  2 THEN 1 ELSE 0 END )telefonos_visibles
+                        FROM 
+                        privacidad_usuario
+                        WHERE 
+                        id_usuario = $id_usuario LIMIT 10";
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+    }
+    /**/
 
 }

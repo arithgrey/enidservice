@@ -103,6 +103,14 @@ class Base extends REST_Controller{
         $this->response($db_reponse);      
   }
   /**/
+  function telefono_usuario_negocio_PUT(){
+        /**/
+        $param =  $this->put();        
+        $param["id_usuario"] =  $this->sessionclass->getidusuario();
+        $db_reponse = $this->enidmodel->telefono_usuario_negocio($param);
+        $this->response($db_reponse);      
+  }
+  /**/
   function val_session(){
 
       if( $this->sessionclass->is_logged_in() == 1){

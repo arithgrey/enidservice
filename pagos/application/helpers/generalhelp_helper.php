@@ -94,6 +94,7 @@ if(!function_exists('invierte_date_time')){
   /**/
   function get_costo_envio($param){
     /**/
+    
     $flag_envio_gratis =  $param["flag_envio_gratis"];
     $data_complete = [];
     /**/

@@ -19,8 +19,10 @@
   $existencia =0;
   $color ="";  
   $precio = 0;
+  $id_usuario_servicio = 0; 
   /**/
   $entregas_en_casa =  0;
+  $telefono_visible =  0;
 
   foreach($info_servicio["servicio"] as $row){
     
@@ -40,6 +42,8 @@
     $precio =  $row["precio"];
     $id_ciclo_facturacion =  $row["id_ciclo_facturacion"];
     $entregas_en_casa =  $row["entregas_en_casa"];
+    $id_usuario_servicio =  $row["id_usuario"];
+    $telefono_visible =  $row["telefono_visible"];
   }
 
   $imagenes =  
@@ -48,6 +52,8 @@
   $info_compra["flag_servicio"]= $flag_servicio;
   $info_compra["precio"]= $precio;
   $info_compra["id_ciclo_facturacion"]= $id_ciclo_facturacion;
+
+
 
 
 ?>
@@ -80,8 +86,12 @@
               </div>
               <div class="right-col" style="background: #fafbfc;padding: 10px;">                
                   
+                  <?=valida_editar_servicio($id_usuario_servicio , 
+                    $id_usuario , 
+                    $in_session,  
+                    $id_servicio)?>
                   <?=get_text_nombre_servicio($nombre_servicio)?>                      
-                  <?=crea_nombre_publicador($nombre_usuario , $id_publicador);?>                  
+                  <?=crea_nombre_publicador($usuario , $id_publicador);?>                  
                   <div style="margin-top: 10px;">
                     <a href="../search/?q3=<?=$id_publicador?>" 
                       style='margin-top: 10px;'
@@ -99,6 +109,15 @@
                       <?=get_entrega_en_casa($entregas_en_casa , $flag_servicio)?>
                     </strong>
                   </div>
+                  <div>
+                    <strong>
+                      <?=get_contacto_cliente(
+                        $telefono_visible ,                         
+                        $in_session,
+                        $usuario)?>
+                    </strong>
+                  </div>
+
                   <?=creta_tabla_colores($color , $flag_servicio)?>
                     <?=$this->load->view("form_compra" , $info_compra)?>            
                   <?=n_row_12()?>                  

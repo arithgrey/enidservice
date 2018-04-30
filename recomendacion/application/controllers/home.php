@@ -10,7 +10,10 @@ class Home extends CI_Controller{
     /**/
     function index(){
 
-        if(get_info_valor_variable($this->input->get() , "q" )){
+        $param =  $this->input->get();
+        $val  =  get_info_valor_variable( $param , "q" ); 
+        
+        if(ctype_digit($val)){
             $id_usuario =  $this->input->get("q");
             $data = $this->val_session("");
             $data["meta_keywords"] = '';

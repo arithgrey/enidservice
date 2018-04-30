@@ -86,7 +86,7 @@
                 </form>
               <?=end_row()?>
 
-              <div style="margin-top: 30px;"></div>
+            <div style="margin-top: 30px;"></div>
               <?=n_row_12()?>
                 <form class="f_telefono_usuario">
                     <div>
@@ -114,7 +114,7 @@
 
                             <input id="telefono" 
                                 name="telefono" 
-                                placeholder="El Teléfono no se mostrará públicamente" 
+                                placeholder="Teléfono" 
                                 class="form-control input-sm input_enid telefono telefono_info_contacto" 
                                 required
                                 type="text"
@@ -125,22 +125,66 @@
                                 </span>
                             
                         </div>
-                    </div>            
-                    <button class=" input_enid"> 
-                        Actualizar
-                    </button>
+                        <div class="col-lg-2">
+                            <button class="input_enid"> 
+                                Actualizar
+                            </button>
+                        </div>
+                    </div>                                
                 </form>
-                <?=n_row_12()?>
-                    <center>
-                        <span>
-                            Mantén la calma esta información será solo será visible si tú lo permites 
-                        </span>
-                    </center>
                 <?=end_row()?>
+              <div style="margin-top: 30px;"></div>
+              <?=n_row_12()?>
+                    <form class="f_telefono_usuario_negocio">
+                    <div>
+                        <label 
+                            class="col-md-3 control-label" 
+                            for="textinput">
+                            Teléfono de negocio
+                        </label>                          
+                        <div class="col-md-2">
+                                <input id="lada" 
+                                name="lada_negocio" 
+                                placeholder="Lada" 
+                                class="form-control input-sm input_enid lada_negocio "
+                                type="text"
+                                maxlength="3"
+                                minlength="2"
+                                value="<?=entrega_data_campo($usuario , 'lada_negocio')?>">
+                                <span class="registro_telefono_usuario_lada_negocio"> 
+                                </span>
+                        </div>
+                        <div class="col-md-5">
+                            <input id="telefono" 
+                                name="telefono_negocio" 
+                                placeholder="El Teléfono de tu negocio" 
+                                class="form-control input-sm input_enid telefono telefono_info_contacto_negocio"                                 
+                                type="text"
+                                maxlength="13"
+                                minlength="8"
+                                value="<?=entrega_data_campo($usuario , 'tel_contacto_alterno')?>">
+                                <span class="registro_telefono_usuario_negocio"> 
+                                </span>
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="input_enid"> 
+                                Actualizar
+                            </button>
+                        </div>
+                    </div>            
+                    </form>                
               <?=end_row()?>
-
             </div>
+
         <?=end_row()?>
+        <?=n_row_12()?>
+            <center>
+                <span class="strong">
+                    Mantén la calma esta información será solo será visible si tú lo permites 
+                </span>
+            </center>
+        <?=end_row()?>
+                    
     </div>   
     
     <div class="col-lg-5">

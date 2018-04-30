@@ -1,6 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-  
+
+/**/
+function valida_activo_informes_por_telefono($valor , $valor_usuario){
+  if($valor ==  $valor_usuario){
+      return "button_enid_eleccion_active";
+  }  
+}  
 /**/
 function valida_activo_entregas_en_casa($valor , $valor_usuario){
 

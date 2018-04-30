@@ -16,7 +16,7 @@ class Home extends CI_Controller{
 
         /**/
         $servicio =  $this->input->get("servicio");
-        if($servicio > 0){
+        if($servicio > 0 && ctype_digit($servicio) ){
             
             $num_hist= get_info_servicio( $this->input->get("q"));            
             $num_usuario = get_info_usuario( $this->input->get("q2"));        

@@ -292,7 +292,8 @@
         $descripcion = "";  
         $metakeyword =  $param["metakeyword"];      
         $id_usuario = $param["id_usuario"];
-       
+        $entregas_en_casa = $param["entregas_en_casa"];
+        $telefonos_visibles =  $param["telefonos_visibles"];
         
         $precio = $param["precio"];
         $id_ciclo_facturacion = 5;
@@ -312,7 +313,9 @@
                                             metakeyword,
                                             id_usuario ,
                                             precio ,
-                                            id_ciclo_facturacion
+                                            id_ciclo_facturacion,
+                                            entregas_en_casa,
+                                            telefono_visible
                                 )
 
                         VALUES(
@@ -328,14 +331,15 @@
                             '".$metakeyword."',
                             '".$id_usuario."',
                             '".$precio."',
-                            '".$id_ciclo_facturacion."'
+                            '".$id_ciclo_facturacion."', 
+                            '".$entregas_en_casa."',
+                            '".$telefonos_visibles."'
                         )";
         
         $this->db->query($query_insert);        
         $id_servicio=  $this->db->insert_id();  
         $this->notifica_ultima_publicacion($id_usuario);
-        return $id_servicio;
-        
+        return $id_servicio;        
     }   
     /**/
     private function notifica_ultima_publicacion($id_usuario){

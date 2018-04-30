@@ -10,12 +10,13 @@ class Home extends CI_Controller{
     /**/
     function index(){
 
+
         $data = $this->val_session("");
         $data["meta_keywords"] = '';
         $data["desc_web"] = "";                
         $data["url_img_post"] = create_url_preview("formas_pago_enid.png");
         $servicio =  $this->input->get("tag");
-        if($servicio > 0){
+        if($servicio > 0 && ctype_digit($servicio)){
             
             $num_hist= get_info_servicio( $this->input->get("q"));            
             $num_usuario = get_info_usuario( $this->input->get("q2"));        
@@ -41,7 +42,8 @@ class Home extends CI_Controller{
             header("location:../?q2=0&q=");
         }    
     }
-    function carga_formulario_valoracion($param){
+    /**/
+    private function carga_formulario_valoracion($param){
 
         
         $url = "portafolio/index.php/api/";         
@@ -59,7 +61,7 @@ class Home extends CI_Controller{
         $this->sessionclass->logout();      
     }   
     /**/
-    function val_session($titulo_dinamico_page ){
+    private  function val_session($titulo_dinamico_page ){
 
         if( $this->sessionclass->is_logged_in() == 1){                                                                                            
                 $menu = $this->sessionclass->generadinamymenu();
@@ -89,7 +91,7 @@ class Home extends CI_Controller{
         }   
     }
     /**/    
-    function get_departamentos($nombre_pagina){
+    private function get_departamentos($nombre_pagina){
 
         $q["q"] =  $nombre_pagina;
         $url = "tag/index.php/api/";         
@@ -100,7 +102,7 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return $response;
     }
-    function get_url_request($extra){
+    private function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 

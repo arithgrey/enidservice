@@ -1,13 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
   
-  function valida_active_tab($nombre_seccion , $estatus){
-    
-      if($nombre_seccion ==  $estatus){
-        return " active ";   
-      }  
-    
+  function valida_active_tab($seccion , $valor_actual , $considera_segundo =0 ){
+      
+      if ($considera_segundo == 0 ) {
+        if($seccion ==  $valor_actual){
+          return " active ";   
+        }    
+      }else{        
+          return " active ";           
+      }      
   }  
+  /*
   function valida_q($q2){
       
       $id_producto =0;
@@ -15,8 +19,39 @@ if(!function_exists('invierte_date_time')){
           $id_producto =$q2;
       }
       return $id_producto;    
-      /**/
-  }  
+    
+  } 
+  */
+  function valida_action($param , $key ){
+
+    $action =0;
+    if (isset($param[$key]) && array_key_exists($key, $param)) {
+        $action = $param[$key];       
+        switch ($action) {
+            case 'nuevo':
+              $action =1;
+              break;
+            
+            case 'vender':
+              $action =1;
+              break;
+
+            case 'lista':
+              $action =0;
+              break;
+
+            case 'editar':
+              $action =2;
+              break;
+
+           default:
+             
+             break;
+         } 
+    }
+    return $action;
+  } 
+  /**/
   function get_dominio($url){
     $protocolos = array('http://', 'https://', 'ftp://', 'www.');
     $url = explode('/', str_replace($protocolos, '', $url));

@@ -27,13 +27,9 @@
       $text_nombre_servicio ='<h2 '.$extra_estilos.'>'.$nombre_servicio.'</h2>';
       return $text_nombre_servicio;
     }
-    function get_info_variable($param , $nomber_variable ){
-      
-      $valor =0;
-      if(isset($param[$nomber_variable]) && $param[$nomber_variable] != null ){             
-          $valor = $param[$nomber_variable];
-      }
-      return $valor;
+    function get_info_variable( $param , $nomber_variable ){      
+      $val =  array_key_exists($nomber_variable , $param)? $param[$nomber_variable]:0;
+      return $val;
     }
     /**/
     function crea_seccion_de_busqueda_extra($info , $busqueda){

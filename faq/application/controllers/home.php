@@ -18,8 +18,10 @@ class Home extends CI_Controller{
         $faqs =  $this->input->get("faqs");
         $categoria = $this->input->get("categoria");
         /**/
-        $data["categorias_publicas_venta"] = $this->principal->get_categorias_faq($session , 1 );
-        $data["categorias_temas_de_ayuda"] = $this->principal->get_categorias_faq($session , 5 );
+        $data["categorias_publicas_venta"] = 
+        $this->principal->get_categorias_faq($session , 1 );
+        $data["categorias_temas_de_ayuda"] = 
+        $this->principal->get_categorias_faq($session , 5 );
         $data["categorias_programa_de_afiliados"] = $this->principal->get_categorias_faq($session , 6 );
     
 
