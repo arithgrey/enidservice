@@ -89,12 +89,13 @@
 
 
 		  <div class="contenedor_categorias" >
-  	        <div class='contenedor_nivel_tabla'>
-  	        	<?=n_row_12()?>
-  	        		<div class='place_text_nivel'>
-  	        			Grupo
+		  	<?=n_row_12()?>
+  	        		<div style="font-weight: bold;font-size: 1.5em;">
+  	        			GRUPO AL CUAL PERTENECE TU PRODUCTO 
   	        		</div>
-  	        	<?=end_row();?>
+  	       	<?=end_row();?>
+  	       	<hr>
+  	        <div class='contenedor_nivel_tabla'>  	        	
   	        	<?=n_row_12()?>	
               		<div class="primer_nivel_seccion">          
               		</div>
@@ -104,7 +105,7 @@
             <div class='contenedor_nivel_tabla'>
             	<?=n_row_12()?>
   	        		<div class='place_text_nivel'>
-  	        			Categoría
+  	        			
   	        		</div>
   	        	<?=end_row();?>
   	        	<?=n_row_12()?>
@@ -115,7 +116,7 @@
             <div class='contenedor_nivel_tabla'>
             	<?=n_row_12()?>
   	        		<div class='place_text_nivel'>
-  	        			Categoría
+  	        			
   	        		</div>
   	        	<?=end_row();?>
   	        	<?=n_row_12()?>
@@ -126,7 +127,7 @@
             <div class='contenedor_nivel_tabla'>
             	<?=n_row_12()?>
   	        		<div class='place_text_nivel'>
-  	        			Categoría
+  	        			
   	        		</div>
   	        	<?=end_row();?>
   	        	<?=n_row_12()?>
@@ -137,7 +138,7 @@
             <div class='contenedor_nivel_tabla'>
             	<?=n_row_12()?>
   	        		<div class='place_text_nivel'>
-  	        			Categoría
+  	        			
   	        		</div>
   	        	<?=end_row();?>
   	        	<?=n_row_12()?>
@@ -148,7 +149,7 @@
             <div class='contenedor_nivel_tabla'>
             	<?=n_row_12()?>
   	        		<div class='place_text_nivel'>
-  	        			Categoría
+  	        			
   	        		</div>
   	        	<?=end_row();?>
             	<?=n_row_12()?>

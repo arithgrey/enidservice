@@ -1,11 +1,12 @@
-<div class="blue_enid_background2 white text-center" style="padding: 10px;">
-	<div>
-		<i class="fa fa-check-circle fa-3x">		
-		</i>
+<center>
+	<div  style="width: 270px;">
+		<?=n_row_12()?>
+			<div style="top: 10px;">
+				<div class="a_enid_black nueva_categoria_producto"  id='<?=$padre;?>'>
+				 	AGREGAR NUEVO
+					<i class="fa fa-angle-double-right"></i>
+				</div>
+			</div>
+		<?=end_row()?>
 	</div>
-	<div>
-		<a class="input-sm input btn nueva_categoria_producto"  id='<?=$padre;?>'>
-			Agregar
-		</a>
-	</div>
-</div>
+</center>

@@ -235,3 +235,6 @@
 		display: block;
 	}
 }
+.nueva_categoria_producto:hover{
+    cursor: pointer;
+}
