@@ -35,21 +35,33 @@
 							</a>			
 							</td>
 							<td>
-								<a href="../login"  class="a_enid_black"
+								<a href="../login?action=nuevo"  class="a_enid_black"
 									style="color: white!important">
 									REGISTRAR UNA CUENTA
 								</a>
 							</td>
 						</tr>
 					</table>
-					
-					
 				</div>
 			</div>
 		</div>
 	<?=end_row()?>
+
+	<?=n_row_12()?>
+		<hr>
+		<div class="col-lg-8 col-lg-offset-2">
+			<div class="place_tambien_podria_interezar"></div>
+		</div>
+	<?=end_row()?>
+	<?=n_row_12()?>
+		<hr>
+		<div class="col-lg-8 col-lg-offset-2">
+			<div class="place_valoraciones"></div>
+		</div>
+	<?=end_row()?>	
 </main>
 <br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
 <input type="hidden" class="envio_pregunta" type="hidden" value="<?=$in_session?>">
+<input type="hidden" class="servicio" type="hidden" value="<?=$id_servicio?>">
 <script type="text/javascript" src="<?=base_url()?>/application/js/principal.js"></script>

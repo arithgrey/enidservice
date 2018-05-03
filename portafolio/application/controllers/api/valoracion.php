@@ -34,6 +34,25 @@ class Valoracion extends REST_Controller{
         $this->response($data_comentarios);        
     }
     /**/
+    function resumen_valoraciones_periodo_servicios_GET(){
+
+        $param =  $this->get();
+        $response =  $this->valoracion_model->get_productos_distinctos_valorados($param);
+        
+        $data_complete = array();
+        $a =0;
+        foreach ($response as $row) {
+
+            $prm["id_servicio"] = $row["id_servicio"];
+            $data_complete[$a] = $this->get_producto_por_id($prm)[0];
+            $a ++;
+        }        
+        
+        $data["servicios"] =  $data_complete;
+        $this->load->view("servicio/lista" ,$data);
+        
+    }
+    /**/
     function usuario_GET(){
 
         $param =  $this->get();
@@ -62,6 +81,17 @@ class Valoracion extends REST_Controller{
         return json_decode($response , true);
     }
     /**/
+    private function get_producto_por_id($param){
+        
+        $url = "tag/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("producto/producto_por_id/format/json/",$param);
+        $response =  $result->response;        
+        return json_decode($response , true);
+    }
+    /**/
     function articulo_GET(){
             
         $param =  $this->get();
@@ -76,8 +106,6 @@ class Valoracion extends REST_Controller{
             $data["comentarios"]=  $this->valoracion_model->get_valoraciones($param);    
             $data["numero_valoraciones"] = $valoraciones;
             $data["respuesta_valorada"]=  $param["respuesta_valorada"];
-            
-            
             
             $this->load->view("valoraciones/articulo", $data);        
         }else{

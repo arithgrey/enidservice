@@ -1043,5 +1043,6 @@ if(!function_exists('invierte_date_time')){
       return $fechas;
       /**/
   }
+  
 
 }/*Termina el helper*/

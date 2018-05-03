@@ -430,6 +430,12 @@ class producto extends REST_Controller{
         $param =  $this->get();
         $this->response($this->qmodel->valida_servicio_usuario($param));
     }
+    /**/
+    function producto_por_id_GET(){
+
+        $param =  $this->get();
+        $this->response($this->qmodel->get_producto_por_id($param));       
+    }
 
 
 

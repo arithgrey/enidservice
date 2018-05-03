@@ -58,7 +58,7 @@
 				<a  class="escribir_valoracion" 
 					href="../valoracion?servicio=<?=$servicio?> "
 					 style="color:white!important">
-					ESCRIBE UNA RESEÑA 
+						ESCRIBE UNA RESEÑA 
 					<i class="fa fa-chevron-right ir">				
 					</i>
 				</a>	
@@ -72,7 +72,6 @@
 	<div class="col-lg-8">
 		<?=crea_resumen_valoracion_comentarios($comentarios , $respuesta_valorada);?>
 		<?php if(count($comentarios) >5){?>
-
 			<center>
 				<div class="btn_escribir_valoracion">
 					<?php if($numero_valoraciones[0]["num_valoraciones"] > 6){?>

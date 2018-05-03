@@ -1,224 +1,235 @@
-<div class='row contenedor-info-ventas' style="background: white!important;">
-    <div class='container contenedo-texto-footer'>
-        <input type="hidden" class="in_session" value="<?=$in_session?>">
-        <input type="hidden" name="titulo_web" class="titulo_web" value="<?=$titulo?>">
-        <?php if ($in_session === 0):?>
-            <hr>
+<?=n_row_12()?>
+    <div class='contenedor-info-ventas'>
+        <div class='container contenedo-texto-footer'>
+            <input type="hidden" class="in_session" value="<?=$in_session?>">
+            <input type="hidden" name="titulo_web" class="titulo_web" value="<?=$titulo?>">
+            
 
-            <div class='col-lg-12'>
-                <!---->
-                <div class='col-lg-4'>
-                    <div class='col-lg-2'>
-                        <i class="fa fa-3x fa-fighter-jet">                    
-                        </i>
+            <?php if ($in_session === 0):?>                
+                <?=n_row_12()?>
+                    <div style="margin-top: 40px;"></div>
+                    <hr>
+                    <div style="margin-top: 20px;"></div>
+                <?=end_row()?>
+                <div>                    
+                    <div class='col-lg-4'>
+                        <div class="row">
+                            <div class='col-lg-2'>
+                                <i class="fa fa-3x fa-fighter-jet">                    
+                                </i>
+                            </div>
+                            <div class='col-lg-10'>
+                                <div>
+                                    <label class="strong">
+                                        FACILIDAD DE COMPRA
+                                    </label>
+                                </div>
+                                <div>
+                                    <span class='black'>                           
+                                       Compras seguras 
+                                       <strong>
+                                       al momento
+                                       </strong>
+                                    </span>
+                                    
+                                    <?php if(isset($id_usuario)):?>
+                                        <input 
+                                            type='hidden' 
+                                            class='id_usuario' 
+                                            value='<?=$id_usuario;?>'>
+                                    <?php endif;?>    
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class='col-lg-10'>
-                        <div>
-                            <label class="strong">
-                                Facilidad de compra
-                            </label>
+                    <div class='col-lg-4'>
+                        <div class="row">
+                            <div class='col-lg-2'>
+                                <i class="fa fa-clock-o fa-3x">                    
+                                </i>
+                            </div>
+                            <div class='col-lg-10'>
+                                <div>
+                                    <label class="strong">
+                                        + ENTREGAS PUNTUALES
+                                    </label>
+                                </div>
+                                <div>
+                                    <span class='black'>                            
+                                        Recibe lo que deseas 
+                                        en tiempo y forma
+                                    </span>
+                                </div>
+                            </div> 
                         </div>
-                        <div>
-                            <span class='black'>                           
-                               Compras seguras 
-                               <strong>
-                               al momento
-                               </strong>
-                            </span>
-                            
-                            <?php if(isset($id_usuario)):?>
-                                <input 
-                                    type='hidden' 
-                                    class='id_usuario' 
-                                    value='<?=$id_usuario;?>'>
-                            <?php endif;?>    
-                            
-                            
+                    </div>                    
+                    <div class='col-lg-4'>
+                        <div class="row">
+                            <div class='col-lg-2'>
+                                <i class="fa fa-lock fa-3x" >                    
+                                </i>
+                            </div>
+                            <div class='col-lg-10'>
+                                <div>
+                                    <label class="strong">
+                                        COMPRAS SEGURAS
+                                    </label>
+                                </div>
+                                <div>
+                                    <span class='black'>
+                                        Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!
+                                    </span>
+                                </div>
+                            </div>        
                         </div>
                     </div>
-
-                </div>
-
-                <!---->
-                <div class='col-lg-4'>
-                    <div class='col-lg-2'>
-                        <i class="fa fa-clock-o fa-3x">                    
-                        </i>
-                    </div>
-                    <div class='col-lg-10'>
-                        <div>
-                            <label class="strong">
-                                + Entregas puntuales
-                            </label>
-                        </div>
-                        <div>
-                            <span class='black'>                            
-                                Recibe lo que deseas 
-                                en tiempo y forma
-                            </span>
-                        </div>
-                    </div>                
-                </div>
-                <!---->
-                <div class='col-lg-4'>
-                    <div class='col-lg-2'>
-                        <i class="fa fa-lock fa-3x" >                    
-                        </i>
-                    </div>
-                    <div class='col-lg-10'>
-                        <div>
-                            <label class="strong">
-                                Compras seguras
-                            </label>
-                        </div>
-                        <div>
-                            <span class='black'>
-                                Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!
-                            </span>
-                        </div>
-                    </div>        
-                </div>
-            </div>
-            <br>
-            <br><br><br>
-            <br>
-            <hr>
-        <?php endif; ?>
+                </div>                
+                <?=n_row_12()?>
+                    <div style="margin-top: 40px;"></div>                    
+                <?=end_row()?>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
 
 
 
-    
+        
 
 
 
-<?php if ($in_session === 0):?>
-<?=$this->load->view("../../../view_tema/form_recibir_promociones");?>
-<footer class="dark-bg footer-extra" style='background:#fff;'>
-    <div>    
-        <div class="row">
-            <div class='col-lg-10 col-lg-offset-1'>
-                <div class="col-md-3 col-sm-6 inner">
-                    
-<ul>
-    <li style="background: black;">
-        <h5 style="font-size:1.2em!important; color: white!important;padding: 2px;"> 
-            ASISTENCIA
-        </h5>
-    </li>
-    <li>&nbsp;
-    </li>
-    <li>
-        <a class='black link_menu_footer' href="../contacto/#envio_msj">
-           - Servicio al cliente
-        </a>
-    </li>
-    
-    
-    <li>
-        <a class='black link_menu_footer' href="../notificar">
-            - Notificar pagos
-        </a>
-    </li>
-    
-</ul>
+    <?php if ($in_session === 0):?>
 
-
-                </div>
-                <div class="col-md-3 col-sm-6 inner">
+    <?=n_row_12()?>
+        <?=$this->load->view("../../../view_tema/seccion_iniciar_session");?>    
+    <?=end_row()?>
+    <?=$this->load->view("../../../view_tema/form_recibir_promociones");?>
+    <?=n_row_12()?>
+    <footer class="dark-bg footer-extra" style='background:#fff;'>
+        <div>    
+            <div class="row">
+                <div class='col-lg-10 col-lg-offset-1'>
+                    <div class="col-md-3 col-sm-6 inner">
                         
-
-    <ul>
+    <ul class="row">
         <li style="background: black;">
             <h5 style="font-size:1.2em!important; color: white!important;padding: 2px;"> 
-                TEMAS RELACIONADOS
+                ASISTENCIA
             </h5>
         </li>
+        <li>&nbsp;
+        </li>
         <li>
-            &nbsp;
+            <a class='black link_menu_footer' href="../contacto/#envio_msj">
+               - Servicio al cliente
+            </a>
         </li>
         
         
         <li>
-            <a  class='black link_menu_footer strong' 
-                href="../faq/" 
-                >
-                - Temas de ayuda 
+            <a class='black link_menu_footer' href="../notificar">
+                - Notificar pagos
             </a>
-        </li>    
+        </li>
         
     </ul>
 
 
+                    </div>
+                    <div class="col-md-3 col-sm-6 inner">
+                            
+
+        <ul class="row">
+            <li style="background: black;">
+                <h5 style="font-size:1.2em!important; color: white!important;padding: 2px;"> 
+                    TEMAS RELACIONADOS
+                </h5>
+            </li>
+            <li>
+                &nbsp;
+            </li>
+            
+            
+            <li>
+                <a  class='black link_menu_footer strong' 
+                    href="../faq/" 
+                    >
+                    - Temas de ayuda 
+                </a>
+            </li>    
+            
+        </ul>
 
 
 
 
 
 
-                </div>
-                <div class="col-md-3 col-sm-6 inner">
-                    <ul>
-                    <li style="background: black;">
-                    <h5 style="font-size:1.2em!important; color: white!important;padding: 2px;"> 
-                        ESPECIALES
-                    </h5>
-                    </li>
-                    <li>
-                        &nbsp;
-                    </li>
-                    
-                    <li>
-                        <a class='black link_menu_footer' 
-                            href="../unete_a_nuestro_equipo" >
-                            Trabaja en nuestro equipo
-                        </a>
-                    </li>                                           
-
-                </ul>
 
 
-
-
-                </div>                
-                <div class="col-md-3 col-sm-6 inner">                
-                    <ul>
-                    <li style="background: black;"> 
-                        <a href="../sobre_enidservice">
-                            <h5 style="font-size:1.2em!important; color: white!important;padding: 2px;">
-                                ACERCA DE NOSOTROS
+                    </div>
+                    <div class="col-md-3 col-sm-6 inner">
+                        <ul class="row">
+                            <li style="background: black;">
+                            <h5 style="font-size:1.2em!important; color: white!important;padding: 2px;"> 
+                                ESPECIALES
                             </h5>
-                        </a>
-                    </li>
-                    <li>
-                        &nbsp;
-                    </li>
-                    
-                    <li>
-                        <a class='link_menu_footer' href="../sobre_enidservice">
-                            <img 
-                            src="../img_tema/enid_service_logo.jpg" 
-                            width="100%" >
-                        </a>
-                    </li>    
-                </ul>
+                            </li>
+                            <li>
+                                &nbsp;
+                            </li>
+                            
+                            <li>
+                                <a class='black link_menu_footer' 
+                                    href="../unete_a_nuestro_equipo" >
+                                    Trabaja en nuestro equipo
+                                </a>
+                            </li>                                           
+                        </ul>
 
+
+
+
+                    </div>                
+                    <div class="col-md-3 col-sm-6 inner">                
+                        <ul class="row">
+                            <li style="background: black;"> 
+                                <a href="../sobre_enidservice">
+                                    <h5 style="font-size:1.2em!important; color: white!important;padding: 2px;">
+                                        ACERCA DE NOSOTROS
+                                    </h5>
+                                </a>
+                            </li>
+                            <li>
+                                &nbsp;
+                            </li>
+                            
+                            <li>
+                                <a class='link_menu_footer' href="../sobre_enidservice">
+                                    <img 
+                                    src="../img_tema/enid_service_logo.jpg" 
+                                    width="100%" >
+                                </a>
+                            </li>    
+                        </ul>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-<div class="footer-bottom" style='background:#001d9b !important'>
-    <div class="container inner">
-        <p class=" white">
-            © 2017 ENID SERVICE.                 
-        </p>
+    <div class="footer-bottom" style='background:#001d9b !important'>
+        <div class="container inner">
+            <p class=" white">
+                © 2017 ENID SERVICE.                 
+            </p>
+        </div>
     </div>
-</div>
-</footer>
-<?php endif; ?>
-
+    </footer>
+    <?=end_row()?>
+    <?php endif; ?>
+<?=end_row()?>
 <script src="../js_tema/js/main.js">
 </script>
 <script src="../js_tema/js/librerias/clipboard.min.js">

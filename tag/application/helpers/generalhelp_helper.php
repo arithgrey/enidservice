@@ -1,6 +1,35 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+  /**/
+  function width_productos_sugeridos($num_productos){
+    
+    $style_tabla ="";
+    $style_producto =" style='width:250px!important;' ";
+    switch (count($num_productos)){
+      case 1:
+        $style_tabla =" style='margin:0auto;' ";
+        break;      
+      case 2:
+        $style_tabla =" style='margin:0auto;' ";
+        break;
+      case 3:
+        $style_tabla =" style='margin:0auto;' ";
+        break;
+      case 4:
+        $style_tabla =" style='margin:0auto;' ";
+        break;
+      case 5:
+        $style_tabla =" style='margin:0auto;' ";
+        break;
+      default:      
+        break;
+    }
 
+    $data_complete["tabla"] = $style_tabla;
+    $data_complete["producto"] = $style_producto;
+    return $data_complete;
+  }
+  /**/
   function muestra_vistas_servicio($in_session , $vistas){
 
     if($in_session ==  1){
@@ -1241,6 +1270,7 @@ function get_statusevent($status){
 
 
   }
+
   
   /**/
   

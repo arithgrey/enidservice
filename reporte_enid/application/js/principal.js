@@ -188,6 +188,7 @@ function indicadores(e){
 		$(".solicitudes").click(resumen_compras);	
 		$(".valoraciones").click(resumen_valoracion);
 		$(".servicios").click(resumen_servicios);
+		$(".productos_valorados_distintos").click(resumen_servicios_valorados);
 				
 	}).fail(function(){});		
 	e.preventDefault();
@@ -907,4 +908,26 @@ function resumen_servicios(){
 			show_error_enid(".place_reporte", "Error al actualizar incidencia");
 	});				
 }
+/**/
+function resumen_servicios_valorados(){
+	
+	fecha_inicio =  $(this).attr("fecha_inicio"); 
+	fecha_termino = $(this).attr("fecha_termino"); 	
+	
+	data_send =  {"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino };
+	url =  "../portafolio/index.php/api/valoracion/resumen_valoraciones_periodo_servicios/format/json/";	
 
+	$.ajax({
+			url : url , 
+			type : "GET", 
+			data :  data_send , 
+			beforeSend: function(){
+				show_load_enid(".place_reporte" , "Cargando..." );
+			}  
+	}).done(function(data){			
+			llenaelementoHTML(".place_reporte", data ); 					
+	}).fail(function(){
+			show_error_enid(".place_reporte", "Error al actualizar incidencia");
+	});					
+	
+}

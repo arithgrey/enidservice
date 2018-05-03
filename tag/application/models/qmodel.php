@@ -482,4 +482,13 @@
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }
+    /**/
+    function get_producto_por_id($param){
+
+        $id_servicio = $param["id_servicio"];
+        $query_get = "SELECT  id_servicio , nombre_servicio , precio, valoracion , vista 
+                      FROM servicio WHERE id_servicio = $id_servicio LIMIT 1";
+        $result =  $this->db->query($query_get);      
+        return $result->result_array();
+    }
 }

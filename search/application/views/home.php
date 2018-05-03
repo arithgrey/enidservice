@@ -1,29 +1,37 @@
 <?php if ( strlen(trim($q)) ==  0):?>
-    <section id="hero" 
-     style="background-image: url(../img_tema/portafolio/llamada_gratis_2.png);">
-        <div class="container ">
-        <div class="row">
-            <div class="col-md-4">            
-                <div style="background: #1b03ff!important;opacity: .8">                
-                <ul class="contacts ">                
-                        
-                <li class='text_enid_contact' style="margin-top:205px!important;"> 
-                    <label style='padding:10px;'>
-                        <span style='font-size:1em;' class="white">
-                            <a href="../login?action=nuevo" style="color: white !important">
-                             ANUNCIA TUS ARTÍCULOS Y SERVICIOS AQUÍ!
-                            </a>
-                        </span>                    
-                    </label>        
-                </li>                        
+    <?=n_row_12()?>
+        <div class="contenedor_img_principal" >                
+        </div>        
+    <?=end_row()?>    
+<?php endif;?>
+<?=n_row_12()?>    
+    <div style="border-bottom:solid 1px;padding: 4px;">
+        <?=n_row_12()?>
+            <div style="width: 50%;margin:0 auto;">
+                <div class="col-lg-4">                                    
+                    <a  
+                        href="../login?action=nuevo" 
+                        style="font-size: 1em; color: black;"
+                        >
+                        ANUNCIA TUS ARTÍCULOS  AQUÍ!
+                        <i class="fa fa-chevron-circle-right"></i>
+                    </a> 
                 </div>
-                </ul><br><br><br><br><br><br><br>
-            </div>    
-    </div>
-    </div>
-    </section>
-<?php endif; ?>
-
+                <div class="col-lg-4">                                    
+                    <a  
+                        href="../forma_pago/?info=" 
+                        style="font-size: 1em; color: black;">
+                        FORMAS DE PAGO
+                        <i class="fa fa-chevron-circle-right">                        
+                        </i>
+                    </a> 
+                </div>  
+                <div class="col-lg-4">                                          
+                </div>  
+            </div>        
+        <?=end_row()?>         
+    </div>        
+<?=end_row()?>                       
 <?php    
 
     $num_servicios_encontrados =  $servicios["num_servicios"];
@@ -45,20 +53,15 @@
 ?>
 <link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css'>
 <main>
-    <div class="col-lg-12" style="padding: 50px;">
-        <br>    
-        <?=n_row_12()?>
-                <i class="fa fa-search">                    
-                </i>
-                Tu búsqueda de
-                <strong>
-                <?=$busqueda?>
-                </strong> (<?=$num_servicios?> Productos)
-        <?=end_row()?>
-        <br>
-        <div class="row">
+    <div style="width: 95%;margin-top: 20px;">                            
             <div class="col-lg-2">      
-
+                <?=n_row_12()?>
+                    <div style="font-size: 1.5em;text-align: center;margin-bottom: 5px;">
+                        <i class="fa fa-search strong">                    
+                        </i><?=$busqueda?>(<?=$num_servicios?> PRODUCTOS)
+                    </div>
+                <?=end_row()?>
+                       
                 <?php if($es_movil ==  0):?>                    
                 <div 
                     style="border: solid black .7px;padding: 3px;background: #000205;color: white;">
@@ -102,34 +105,38 @@
                 </div>
             </div>
             <div class="col-lg-10">
-                <center>
+                <?=n_row_12()?>
                     <?=$paginacion?>
-                </center>
+                <?=end_row()?>
                 
                 <?php
                    $list ="";  
                    $flag =0;    
-                    foreach($lista_productos as $row){
-                        
-                        echo "<div class='col-lg-3' style='margin-top:30px;' >";  
+                   $extra = "";
+                   $b=0;
+                    foreach($lista_productos as $row){                        
+                        if ($b > 0) {
+                            $extra = "style='margin-top:30px;'";          
+                        } 
+                        echo "<div class='col-lg-3' ".$extra." >";  
                         echo $row;
                         echo "</div>";  
                         $flag ++;
                         if ($flag == 4) {
                             $flag =0;
                             echo "<hr>";
+                            $b ++;
                         }
                     }
-                    if(count($lista_productos) > 8){
-                        echo "<center>" . $paginacion ."</center>";
-                    }
+                    
                 ?>
+                <?php if( count($lista_productos) > 8):?>
+                    <?=n_row_12();?>
+                        <?=$paginacion;?>
+                    <?=end_row();?>
+                <?php endif;?>
                 
-            </div>
         </div>
-    </div>
-    <br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>    
 </main>
 

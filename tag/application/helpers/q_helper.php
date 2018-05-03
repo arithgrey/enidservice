@@ -25,21 +25,19 @@ if(!function_exists('invierte_date_time')){
       }
   }
   /**/
-  function get_numero_colores($color , $flag_servicio , $url_info_producto ){
+  function get_numero_colores($color , $flag_servicio , $url_info_producto , $extra ){
 
         if($flag_servicio !=  1) {                
           $arreglo_colores =  explode(",", $color);
           $num_colores =  count($arreglo_colores);
           if( $num_colores > 0){            
               if($num_colores > 1){
-                return "
-                          <a href='".$url_info_producto."'>" 
+                return "  <a href='".$url_info_producto."' ".$extra." >" 
                           .$num_colores ." colores
                           </a>
                         ";  
               }else{
-                return "
-                          <a href='".$url_info_producto."'>" 
+                return "  <a href='".$url_info_producto."' ".$extra." >" 
                           .$num_colores ." color
                           </a>
                         ";  

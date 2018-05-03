@@ -32,7 +32,6 @@ function carga_productos_sugeridos(){
 }
 /**/
 function carga_valoraciones(){
-	//place_valoraciones
 	url =  "../portafolio/index.php/api/valoracion/articulo/format/json/";		
 	data_send = {"servicio" : get_option("servicio") , "respuesta_valorada" : get_option("respuesta_valorada")}	
 	/************************************************************************************/
@@ -50,8 +49,7 @@ function carga_valoraciones(){
 				set_option("desde_valoracion" , 0);
 
 			}
-			$(".ordenar_valoraciones_button").click(ordenar_valoraciones);
-			
+			$(".ordenar_valoraciones_button").click(ordenar_valoraciones);			
 			valoracion_persona=  $(".contenedor_promedios").html();
 			llenaelementoHTML(".valoracion_persona" , valoracion_persona);
 			$(".valoracion_persona_principal .valoracion_persona .estrella").css("font-size" , "1.2em");

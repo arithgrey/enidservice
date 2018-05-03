@@ -58,7 +58,7 @@ class sugerencia extends REST_Controller{
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
         $this->restclient->set_option('format', "html");        
-        $result = $this->restclient->get("producto/crea_vista_producto/format/html/" , $servicio);
+        $result=$this->restclient->get("producto/crea_vista_producto/format/html/" , $servicio);
         $response =  $result->response;                
         return $response;
     }

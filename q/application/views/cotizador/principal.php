@@ -5,6 +5,8 @@
 	$extra_conversaciones = "style='background: #006475;color: white !important;text-align: center;' ";
 	$extra_usablidad ="style='background: #375789;color: white !important;text-align: center;' ";
 	$extra_valoraciones ="style='background: #000;color: white !important;text-align: center;' ";
+	$extra_td_productos_valorados ="";
+
 	$extra_accesos ="style='background: #00b7ff;color: white !important;text-align: center;' ";
 	$extra_contacto ="style='text-align: center;' ";
 	$extra_labor ="style='text-align: center;background: #1c404e;color: white !important;' ";
@@ -99,9 +101,13 @@
 			data-toggle='tab' 
 			title='Servicios postulados'";
 
+
+		$extra_td_productos_valorados =  "class='productos_valorados_distintos' 
+			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
+			href='#reporte' data-toggle='tab' 
+			title='Productos distintos valorados' ";
+
 	foreach($actividad_enid_service as $row){
-	
-		
 		
 
 		$extra_td_usablidad = 
@@ -273,9 +279,13 @@
 			$table .="</table>";
 		$labores_resueltas .=  get_td($table);
 
+		$productos_valorados =  
+		($row["valoraciones_productos"]>0)?$row["valoraciones_productos"][0]["productos_valorados"]:0;
 
 		if(count($row["valoraciones"]) > 0){
 			
+
+			/**/
 			$valoraciones = $row["valoraciones"][0];
 			$total_val =  $valoraciones["num_valoraciones"];
 			$si_recomendarian  = $valoraciones["si_recomendarian"];
@@ -291,12 +301,15 @@
 
 			$table ="<table width='100%' border=1  style='text-align: center;'>";
 				$table .="<tr>";	
-					$table .=get_td("Total");						
+					$table .=get_td("Valoraciones");						
+					$table .=get_td("Productos distintos valorados");	
 					$table .=get_td("Recomendarian");			
 					$table .=get_td("NO recomendarían");	
+					
 				$table .="</tr>";	
 				$table .="<tr>";	
 					$table .=get_td($total_val , $extra_td_total);						
+					$table .=get_td($productos_valorados, $extra_td_productos_valorados);		
 					$table .=get_td($porcentaje_si."%" , $extra_si_recomendaria);			
 					$table .=get_td($porcentaje_no."%"  , $extra_no_recomendaria);	
 				$table .="</tr>";	
@@ -310,10 +323,13 @@
 			$table ="<table width='100%' border=1>";
 				$table .="<tr>";	
 					$table .=get_td("Total");						
+					$table .=get_td("Productos distintos valorados");	
 					$table .=get_td("Recomendarian");			
 					$table .=get_td("NO recomendarían");	
+
 				$table .="</tr>";
 				$table .="<tr>";	
+					$table .=get_td("0");	
 					$table .=get_td("0");	
 					$table .=get_td("0%");	
 					$table .=get_td("0%");	

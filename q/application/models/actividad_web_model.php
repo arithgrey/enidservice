@@ -393,7 +393,18 @@
                           valoracion
                         WHERE 
                           ".$where;
-
+      return $query_create;
+    }
+    /**/
+    function crea_valoraciones_distintas($param){
+      /**/
+      $where =  $this->get_where_tiempo($param , 1);
+      $query_create = "SELECT                          
+                          DISTINCT(id_servicio)servicios_valorados
+                        FROM 
+                        valoracion
+                        WHERE 
+                          ".$where;
       return $query_create;
     }
     /**/
@@ -423,6 +434,7 @@
         $tabla_contacto = "contacto_$_num";
         $tb_tareas =  "tareas_resueltas_$_num";
         $tb_valoraciones  = "valoraciones_$_num";
+        $tb_valoraciones_p ="valoraciones_p_$_num";
         $tb_correos = "correos_$_num";
         $tb_servicios = "servicios_$_num";
         
@@ -444,6 +456,16 @@
                 /**/
                 $sql_valoraciones =  $this->crea_valoraciones($param);
                   $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 0);
+
+                  /**/         
+                  $sql_valoraciones_productos =  
+                  $this->crea_valoraciones_distintas($param);
+                  
+                  $this->crea_tabla_temploral(
+                    $tb_valoraciones_p,
+                    $sql_valoraciones_productos,0);
+                  
+
                   /**/
                   $sql_correos_enviados =  $this->crea_correos_enviados($param);
                     $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 0);
@@ -483,6 +505,10 @@
                     $data_complete[$a]["valoraciones"] 
                     = $this->get_registros_valoraciones($fecha, $tb_valoraciones); 
 
+                    
+                    $data_complete[$a]["valoraciones_productos"] 
+                    = $this->get_registros_valoraciones_productos($tb_valoraciones_p);                     
+
                     /**/
                     $data_complete[$a]["correos"] 
                     = $this->get_correos_enviados($tb_correos); 
@@ -499,6 +525,7 @@
                 }      
                     $this->crea_tabla_temploral($tb_servicios , $sql_servicios , 1);
                   $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 1);
+                  $this->crea_tabla_temploral($tb_valoraciones_p,$sql_valoraciones_productos,1);
                 $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 1);
               $this->crea_tabla_temploral($tb_tareas , $sql_tareas , 1);
             $this->crea_tabla_temploral($tabla_contacto , $sql_contacto , 1);
@@ -515,6 +542,13 @@
                     ,si_recomendarian
                     ,no_recomendarian
                     FROM $tabla";
+      $result =  $this->db->query($query_get);      
+      return $result->result_array(); 
+    }
+    /**/
+    function get_registros_valoraciones_productos($tabla){
+
+      $query_get = "SELECT COUNT(0)productos_valorados FROM $tabla";
       $result =  $this->db->query($query_get);      
       return $result->result_array(); 
     }

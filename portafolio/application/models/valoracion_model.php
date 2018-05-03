@@ -464,6 +464,27 @@ class valoracion_model extends CI_Model{
     return $result->result_array()[0]["num"];
   }
   /**/
+  function get_productos_distinctos_valorados($param){
+
+    $fecha_inicio =  $param["fecha_inicio"];
+    $fecha_termino =  $param["fecha_termino"];
+
+    $query_get ="SELECT 
+                  DISTINCT(id_servicio) 
+                FROM  valoracion 
+                WHERE 
+                  DATE(fecha_registro) 
+                BETWEEN  
+                  '".$fecha_inicio."' 
+                AND  
+                  '".$fecha_termino."' ";
+
+    $result =  $this->db->query($query_get);      
+    return $result->result_array();
+  }
+  /**/
+  
+
 
 }
 

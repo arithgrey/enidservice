@@ -36,6 +36,7 @@ class Home extends CI_Controller{
             $this->carga_formulario_valoracion($servicio_send);            
             /*Cargamos reseñas de otros días*/    
             $data["in_session"] =  $this->sessionclass->is_logged_in();
+            $data["id_servicio"] = $servicio; 
             $this->principal->show_data_page($data, 'home');                              
         
         }else{

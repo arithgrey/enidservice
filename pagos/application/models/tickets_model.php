@@ -77,6 +77,16 @@
                    '".$fecha_inicio."' AND  '".$fecha_termino."' ";
           break;
 
+
+        
+          case 9:
+          /**/
+          return " (fecha_pago)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+          break;
+
+
         case 10:
           /**/
           return " (fecha_cancelacion)

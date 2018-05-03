@@ -1,15 +1,11 @@
-<div>
+<div style="margin-top: 100px;">
 	<center>
-		<h3 style="font-size: 2em;" class="black">										
+		<h3 style="font-size: 2em;" class="black strong">										
 			SÉ EL PRIMERO EN REVISAR ESTE PRODUCTO
 		</h3>
-	</center>
-	<div>
-	
+	</center>	
 </div>
-</div>
-
-<div class="btn_escribir_valoracion">
+<div class="btn_escribir_valoracion" style="margin-top: 30px;">
 	<center>
 		<a class="escribir_valoracion" href="../valoracion?servicio=<?=$servicio?>" 
 			style="color: white!important">
