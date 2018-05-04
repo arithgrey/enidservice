@@ -105,8 +105,13 @@ if(!function_exists('invierte_date_time')){
       if($num < 1 ){         
           
           $lista_pendientes .= 
-          inicio_base_notificacion("../planes_servicios/?action=nuevo" ,"fa fa-cart-plus");
-          $lista_pendientes .='Aún no tienes artículos en oferta, anuncia un producto o servicio!
+          inicio_base_notificacion("../planes_servicios/?action=nuevo" ,"");
+          $lista_pendientes .='<div style="background:black;color:white;padding:5px;">
+                                ¿TE GUSTARÍA ANUNCIAR TUS PRODUCTOS O SERVICIOS?
+                              </div>                              
+                              <div class="a_enid_blue_sm" style="color:white!important;margin-top:10px;">                                
+                                  INICIA AQUÍ                                
+                              </div>
           ';
           $lista_pendientes .= fin_base_notificacion();   
           $flag_notificaciones ++;                           
@@ -307,7 +312,6 @@ if(!function_exists('invierte_date_time')){
       return $new_flag_notificaciones;
     }
     /**/    
-    /**/
     function get_tareas_pendienetes_usuario_cliente($info){
       
       $flag_notificaciones =0; 

@@ -9,3 +9,8 @@ delete from funcionalidad where id_funcionalidad =4;
 
 alter table usuario drop entregas_en_casa;
 alter table  usuario add lada_negocio int(3);
+
+
+
+alter table pagina_web_bot add id_servicio int not null default 0;
+alter table pagina_web add id_servicio int not null default 0;

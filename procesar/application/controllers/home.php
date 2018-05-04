@@ -8,53 +8,63 @@ class Home extends CI_Controller{
         $this->load->library('sessionclass');     
     }   
     /**/
-    function get_option($key)
+    private function get_option($key)
     {
         return $this->option[$key];
     }
     /**/
-    function set_option($key , $val){
+    private function set_option($key , $val){
         $this->option[$key] =  $val;
     }
-     function crea_data_costo_envio($servicio){        
+    private function crea_data_costo_envio($servicio){        
         $param["flag_envio_gratis"]=  $servicio[0]["flag_envio_gratis"];   
         return $param;
     }
     /**/    
     function index(){
 
+        $param =  $this->input->get();
+        if( array_key_exists("num_ciclos", $param)&&ctype_digit($param["num_ciclos"])
+            &&$param["num_ciclos"] >0&&array_key_exists("ciclo_facturacion", $param)
+            &&$param["num_ciclos"] >0 && $param["num_ciclos"] < 10
+            &&ctype_digit($param["plan"])&& $param["plan"] >0){
+                $this->crea_orden_compra($param);            
+        }else{
+            redirect("../../");
+        }
+    }
+    /**/
+    private function crea_orden_compra($param){
+        /**/
         $data = 
-        $this->val_session("Registra tu cuenta en nuestro sistema y recibe asistencia al momento."); 
+        $this->val_session("Registra tu cuenta en nuestro sistema y recibe asistencia 
+            al momento.");         
+
         $data["meta_keywords"] = '';
         $data["desc_web"] = "Registra tu cuenta  y recibe  asistencia al momento.";
         $data["url_img_post"] = create_url_preview("recomendacion.jpg");
         $num_hist= get_info_usuario( $this->input->get("q"));   
         $num_usuario_referencia= get_info_usuario( $this->input->get("q2"));                    
         $data["q2"]= $num_usuario_referencia;
-        $param =  $this->input->get();
-
-        $data["servicio"]  =  $this->principal->resumen_servicio($param);         
+        
+        $data["servicio"]  =  
+        $this->principal->resumen_servicio($param);                 
 
         $data["costo_envio"] ="";
         if($data["servicio"][0]["flag_servicio"] ==  0) {
             $data["costo_envio"] = 
-            $this->calcula_costo_envio($this->crea_data_costo_envio($data["servicio"]));            
-        }
-        
-        
+            $this->calcula_costo_envio($this->crea_data_costo_envio($data["servicio"]));
+        }   
+        /**/
         $data["info_solicitud_extra"] =  $param;         
         $data["clasificaciones_departamentos"] = "";
-
         $this->principal->crea_historico( 2892 , 0, 0 );                 
-
-        $data["vendedor"] ="";
-        
+        $data["vendedor"] ="";        
         if($data["servicio"][0]["telefono_visible"]==1){
             $data["vendedor"] =
             $this->get_contacto_usuario($data["servicio"][0]["id_usuario"]);            
         }
         $this->principal->show_data_page($data, 'home');                          
-
     }
     /**/
     function get_url_request($extra){
@@ -70,24 +80,23 @@ class Home extends CI_Controller{
     /**/
     function val_session($titulo_dinamico_page ){
 
-        if( $this->sessionclass->is_logged_in() == 1){                                                                                           
-                
-                $menu = $this->sessionclass->generadinamymenu();
-                $nombre = $this->sessionclass->getnombre();                                         
-                $data['titulo']= $titulo_dinamico_page;              
-                $data["menu"] = $menu;              
-                $data["nombre"]= $nombre;                                               
-                $data["email"]= $this->sessionclass->getemailuser();                                               
-                $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
-                $data["in_session"] = 1;
-                $data["no_publics"] =1;
-                $data["meta_keywords"] =  "";
-                $data["url_img_post"]= "";
-                $data["id_usuario"] = $this->sessionclass->getidusuario();                     
-                $data["id_empresa"] =  $this->sessionclass->getidempresa();
-                $data["desc_web"] =  "";
-                return $data;                
-                
+        if( $this->sessionclass->is_logged_in() == 1){
+
+            $menu = $this->sessionclass->generadinamymenu();
+            $nombre = $this->sessionclass->getnombre();                                         
+            $data['titulo']= $titulo_dinamico_page;              
+            $data["menu"] = $menu;              
+            $data["nombre"]= $nombre;                                               
+            $data["email"]= $this->sessionclass->getemailuser();                                               
+            $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+            $data["in_session"] = 1;
+            $data["no_publics"] =1;
+            $data["meta_keywords"] =  "";
+            $data["url_img_post"]= "";
+            $data["id_usuario"] = $this->sessionclass->getidusuario();                     
+            $data["id_empresa"] =  $this->sessionclass->getidempresa();
+            $data["desc_web"] =  "";
+            return $data;                
 
         }else{            
             $data['titulo']=$titulo_dinamico_page;              
@@ -98,7 +107,7 @@ class Home extends CI_Controller{
         }   
     }    
     /**/
-    function calcula_costo_envio($param){
+    private function calcula_costo_envio($param){
 
         $url = "pagos/index.php/api/";         
         $url_request=  $this->get_url_request($url);
@@ -120,6 +129,4 @@ class Home extends CI_Controller{
         $data =  $result->response;
         return json_decode($data , true);  
     }  
-
-    
 }

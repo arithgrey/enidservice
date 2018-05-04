@@ -6,38 +6,40 @@ class Home extends CI_Controller{
         $this->load->library("principal");        
         $this->load->library("restclient");   
         $this->load->library('sessionclass');     
-    }   
-         
+    }            
     /**/
     function index(){
-
+        
         if (is_array($this->input->get()) && array_key_exists("info", $this->input->get())) {
             $this->crea_info();    
-        }else{
-            $this->crea_orden();
+        }else{            
+            (ctype_digit($this->input->get("recibo") ))?$this->crea_orden():redirect("../../");
         }
     }
     /**/
     private function crea_info(){
         
         $data = $this->val_session("");
-        $data["meta_keywords"] = '';
+        $data["meta_keywords"] = "";
         $data["desc_web"] = "Formas de pago Enid Service";                
         $data["url_img_post"] = create_url_preview("formas_pago_enid.png");        
         $data["clasificaciones_departamentos"] = "";        
-        $this->principal->show_data_page($data, 'info_formas_pago');                    
-        
+        $this->principal->show_data_page($data, 'info_formas_pago');                            
     }
     /**/
     private function crea_orden(){
+
         $data = $this->val_session("");
         $data["meta_keywords"] = '';
         $data["desc_web"] = "";                
         $data["url_img_post"] = create_url_preview("formas_pago_enid.png");        
+        
+        /**/
         $id_recibo =  $this->input->get("recibo");                
         $data["recibo"] = $id_recibo;        
         $data["info_recibo"] = $this->get_recibo_forma_pago($id_recibo);
 
+        /**/
         $num_hist= get_info_servicio( $this->input->get("q"));            
         $num_usuario = get_info_usuario( $this->input->get("q2"));        
         $num_servicio = get_info_usuario( $this->input->get("q3"));        
@@ -46,9 +48,8 @@ class Home extends CI_Controller{
         $this->principal->show_data_page($data, 'home');                          
     }
     /**/
-    function get_recibo_forma_pago($id_recibo){
-                
-                
+    private function get_recibo_forma_pago($id_recibo){
+                            
         $extra = array('id_recibo' =>  $id_recibo );
         $url = "pagos/index.php/api/";    
         $url_request=  $this->get_url_request($url);
@@ -63,7 +64,7 @@ class Home extends CI_Controller{
         $this->sessionclass->logout();      
     }   
     /**/
-    function val_session($titulo_dinamico_page ){
+    private function val_session($titulo_dinamico_page ){
 
         if( $this->sessionclass->is_logged_in() == 1){                                                                                            
                 $menu = $this->sessionclass->generadinamymenu();
@@ -82,9 +83,6 @@ class Home extends CI_Controller{
                 $data["info_empresa"] =  $this->sessionclass->get_info_empresa();                     
                 $data["desc_web"] =  "";
                 return $data;
-                
-                
-
         }else{            
             $data['titulo']=$titulo_dinamico_page;              
             $data["in_session"] = 0;     
@@ -93,7 +91,7 @@ class Home extends CI_Controller{
         }   
     }
     /**/    
-    function get_departamentos($nombre_pagina){
+    private function get_departamentos($nombre_pagina){
 
         $q["q"] =  $nombre_pagina;
         $url = "tag/index.php/api/";         
@@ -104,7 +102,7 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return $response;
     }
-    function get_url_request($extra){
+    private function get_url_request($extra){
 
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 

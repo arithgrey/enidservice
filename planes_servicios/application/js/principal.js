@@ -33,12 +33,7 @@ $(document).ready(function() {
 	$(".li_menu_servicio").click(function() {
 		$(".btn_agregar_servicios").show();
 	});
-	/*
-	$(".li_menu_grupos").click(function() {
-		$(".btn_agregar_servicios").hide();
-	});
-	*/
-	
+	/**/	
 	$(".contenedor_busqueda_global_enid_service").hide();
 	$(".ci_facturacion").change(evalua_precio);
 
@@ -1194,10 +1189,8 @@ function registra_nuevo_servicio() {
 	}).fail(function() {
 		show_error_enid(".place_registro_servicio", "Error ... ");
 	});
-
 }
 /**/
-
 function set_costo(n_costo) {
 	costo = n_costo;
 }

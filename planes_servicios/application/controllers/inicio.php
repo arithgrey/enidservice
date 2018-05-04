@@ -30,6 +30,8 @@ class Inicio extends CI_Controller {
             }            
         }
 
+
+        $data["top_servicios"] =  $this->get_top_servicios_usuario($data["id_usuario"]);        
         $num_perfil =  $this->sessionclass->getperfiles()[0]["idperfil"];        
         $data["ciclo_facturacion"]= $this->principal->create_ciclo_facturacion();          
         $data["clasificaciones_departamentos"] = "";    
@@ -76,5 +78,18 @@ class Inicio extends CI_Controller {
         $response =  $result->response;        
         return json_decode($response , true);
     }
+    /**/
+    private function get_top_servicios_usuario($id_usuario){
+        /**/        
+        $param["id_usuario"] =  $id_usuario;
+        $url = "q/index.php/api/";         
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result = $this->restclient->get("productos/top_semanal_vendedor/format/json/", $param);
+        $response =  $result->response;        
+        return json_decode($response , true);
+    }
+
 
 }

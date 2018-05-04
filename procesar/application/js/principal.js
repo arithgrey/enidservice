@@ -32,9 +32,7 @@ function registra_afiliado(e){
 
 	text_password =  $.trim($(".password").val());	
 	if (text_password.length>7 ) {
-
 		flag =  valida_num_form(".telefono" , ".place_telefono" ); 
-
 		if (flag == 1 ){
 				flag2 =  valida_text_form(".telefono" , ".place_telefono" , 6 , "Número telefónico" );
 				if (flag2 ==  1 ) {
@@ -48,8 +46,7 @@ function registra_afiliado(e){
 					set_option("telefono",$(".telefono").val());		
 					set_option("usuario_referencia", $(".q2").val());																
 					data_send =  {"password": pwpost , "email" : get_option("email") , "nombre" : get_option("nombre"), "telefono": get_option("telefono") , "plan" : get_option("plan") , "num_ciclos" : get_option("num_ciclos"),"descripcion_servicio" : get_option("descripcion_servicio"),"ciclo_facturacion":get_option("ciclo_facturacion"),"usuario_referencia":get_option("usuario_referencia")};				
-					
-					console.log(data_send);
+										
 					$.ajax({
 							url : url , 						
 							type : "POST" , 
@@ -59,12 +56,10 @@ function registra_afiliado(e){
 							bloquea_form(".form-miembro-enid-service");											
 							show_load_enid(".place_registro_afiliado" ,  "Validando datos " , 1 );
 						}
-					}).done(function(data){	
-
-								
+					}).done(function(data){									
+							if (data != -1) {								
 								desbloqueda_form(".form-miembro-enid-service");
 								if(data.usuario_existe > 0){
-
 									usuario_registrado = "<span class='alerta_enid'>Este usuario ya se encuentra registrado, acceda a su cuenta para solicitar compra</span><br><a href='../login/' class='blue_enid_background white' style='padding:5px;' >Acceder aquí</a>";
 									llenaelementoHTML(".place_registro_afiliado" , usuario_registrado);				 				
 								}else{									
@@ -73,12 +68,13 @@ function registra_afiliado(e){
 									set_option("usuario_nuevo" , 1);
 									config_direccion();
 								}
-								
-								console.log(data);
-							
+							}else{								
+								redirect("../");
+							}
+
 						}).fail(function(){							
 							show_error_enid(".place_registro_afiliado" , "Error al iniciar sessión");				
-						});
+					});
 						
 				}			
 			}		

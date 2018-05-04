@@ -143,24 +143,34 @@ class Equipo extends REST_Controller{
     }
     /****************************************************/        
     function prospecto_POST(){
-    
-        $param =  $this->post();        
-        $db_response =  $this->equipomodel->registrar_prospecto($param);            
         
-        if ($db_response["usuario_registrado"] ==  1){                
-            
-            $param["id_usuario"] = $db_response["id_usuario"];                           
-            $param["usuario_nuevo"] =1;                                        
-            $orden_de_compra["siguiente"] = $this->crea_orden_de_compra($param);    
-            $orden_de_compra["usuario_existe"] =0;
-            $this->response($orden_de_compra);           
-            
-                        
+        $param =  $this->post();                                
+        if( array_key_exists("num_ciclos", $param)&&ctype_digit($param["num_ciclos"])
+            &&$param["num_ciclos"] >0&&array_key_exists("ciclo_facturacion", $param)
+            &&$param["num_ciclos"] >0 && $param["num_ciclos"] < 10
+            &&ctype_digit($param["plan"])&& $param["plan"] >0){
+
+            $this->response($this->crear_proceso_compra($param));
+
         }else{
-            $this->response($db_response);    
+            $this->response(-1);
+        }
+    }   
+    /**/
+    private function crear_proceso_compra($param){
+        
+        $response =  $this->equipomodel->registrar_prospecto($param);            
+        if ($response["usuario_registrado"] ==  1){                
+                $param["id_usuario"] = $response["id_usuario"];                           
+                $param["usuario_nuevo"] =1;                                        
+                $orden_de_compra["siguiente"] = $this->crea_orden_de_compra($param);    
+                $orden_de_compra["usuario_existe"] =0;
+            return $orden_de_compra;           
+                            
+        }else{
+            return $response;    
         }         
-    }    
-    
+    }     
     /**/
     function crea_orden_de_compra($param){
            

@@ -27,7 +27,7 @@
 		        return $valor;
 		}	
 		/**/
-		function crea_historico_vista_servicio($id_servicio , $in_session){
+		function crea_historico_vista_servicio($id_servicio , $in_session , $vendedor){
 
 			if($in_session ==  0){
 				$query_update ="UPDATE servicio 
@@ -36,11 +36,14 @@
 								id_servicio =  $id_servicio 
 							LIMIT 1";
 							$this->db->query($query_update);	
+
+				$this->crea_historico($id_servicio ,$id_servicio , 0, $vendedor);
 			}
+
 		}
 		/**/
-		function crea_historico( $tipo , $id_evento = 0 , $id_usuario = 0  , $id_empresa = 0){
-
+		function crea_historico($tipo,$id_servicio,$id_evento=0,$id_usuario = 0,$id_empresa=0){
+			
 			$pagina_url =  base_url(uri_string());         
 	        $ip = $this->input->ip_address();               
 	        $dispositivo  = $this->agent->agent_string();        
@@ -53,8 +56,7 @@
 			$is_browser=  $this->agent->is_browser();
 			$is_robot = $this->agent->is_robot();
 	        $is_mobile = $this->agent->is_mobile();
-			
-	        
+				        
 	        $table ="";
 	        $is_robot=  $this->get_valor_numerico_bool($is_robot);
 	        $is_mobile =  $this->get_valor_numerico_bool($is_mobile);
@@ -64,9 +66,8 @@
 	        	$table = "pagina_web";
 	        }
 
-
-	        $url_referencia = "";
 	        
+	        $url_referencia = "";	        
 	        if(isset( $_SERVER['HTTP_REFERER'] ) ){	            
 	            $url_referencia  = strtolower( $_SERVER['HTTP_REFERER'] ); 	           
 	        }
@@ -95,7 +96,8 @@
 								  platform,
 								  is_browser,
 								  is_robot,
-								  is_mobile
+								  is_mobile,
+								  id_servicio
 			                )
 			                VALUES( 
 	                        	'".$pagina_url."'  ,
@@ -114,21 +116,18 @@
 	                        	'".$platform."' ,
 	                        	'".$is_browser."' ,
 								'".$is_robot."' ,
-								'".$is_mobile."' 
+								'".$is_mobile."' ,
+								'".$id_servicio."'
                         	)"; 
       		return  $this->db->query($query_insert);
       	}
 
-      	/**/
-      	/**/
-      	
 		/**/
 		function show_data_page($data, $center_page , $tema = 0 ){           
 
 	            $this->load->view("../../../view_tema/header_template", $data);
 	            $this->load->view($center_page , $data);            
 	            $this->load->view("../../../view_tema/footer_template", $data);
-	                            
 	    }
 	}
 ?>

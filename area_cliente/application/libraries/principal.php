@@ -47,7 +47,7 @@
 		        return $valor;
 			}	
 			/**/
-			function crea_historico( $tipo , $id_evento = 0 , $id_usuario = 0  , $id_empresa = 0){
+		function crea_historico($tipo,$id_evento = 0,$id_usuario = 0,$id_empresa = 0){
 
 			$pagina_url =  base_url(uri_string());         
 	        $ip = $this->input->ip_address();               

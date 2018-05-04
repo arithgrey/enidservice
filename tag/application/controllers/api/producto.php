@@ -32,11 +32,11 @@ class producto extends REST_Controller{
         $this->response($db_response);
     }     
     /**/
-    function get_option($key){
+    private function get_option($key){
         return $this->options[$key];
     }    
     /**/
-    function set_option($key , $value){
+    private function set_option($key , $value){
         $this->options[$key] = $value;
     }
     /**/

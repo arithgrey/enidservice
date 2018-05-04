@@ -82,11 +82,7 @@ class productividad extends REST_Controller{
         $db_response["info_notificaciones"]["mensajes_sin_leer"]=
         $mensajes["modo_vendedor"];
         $db_response["info_notificaciones"]["respuestas"]=$mensajes["modo_cliente"];
-        /**/
-        
-        
-        
-        
+        /**/        
         $db_response["id_usuario"] = $id_usuario;
         
         switch ($id_perfil){

@@ -27,9 +27,8 @@ class Home extends CI_Controller{
         if (ctype_digit(trim($this->input->get("producto")))) {
             $this->load_servicio($this->input->get());
         }else{
-            header("location:../search");  
-        }
-        
+            redirect("../../?q=");
+        }    
     }
     /**/
     private function load_servicio($param){
@@ -59,47 +58,56 @@ class Home extends CI_Controller{
     }                
     /**/
     private function crea_vista_producto($param , $data){
-                
+            
+            
             $id_servicio =  $this->get_option("id_servicio");                              
             $data["q2"] =   valida_valor_variable($param , "q2");            
             $servicio =     $this->get_informacion_basica_servicio($id_servicio);
-            $usuario         =  $this->get_contacto_usuario($servicio[0]["id_usuario"]);
-            $data["usuario"] = $usuario; 
-            $data["id_publicador"]  = $servicio[0]["id_usuario"];
-            /**/            
-            if(count($servicio) == 0){
-                header("location:../search");  
-            }                        
-            $this->set_option("servicio" , $servicio);                                            
-            $data["costo_envio"] ="";
-            /**/
-            if($servicio[0]["flag_servicio"] ==  0){                
-                $data["costo_envio"] = 
-                $this->calcula_costo_envio($this->crea_data_costo_envio());    
-            }                        
-            /**/
-            $data["info_servicio"]["servicio"] = $servicio;    
-            $this->set_option("flag_precio_definido" , 0);
-           
-            /**/            
-            $data["imgs"]=  $this->get_imagenes_productos($id_servicio);            
-            $this->costruye_meta_keyword();
-            $data["meta_keywords"] = $this->get_option("meta_keywords");                
-            
-            $this->costruye_descripcion_producto();             
 
+            $usuario =0;
+            if (count($servicio)>0 ){
+                $usuario         =  $this->get_contacto_usuario($servicio[0]["id_usuario"]);
+            }
+            if ($usuario == 0) {
+                redirect("../../?q=");
+            }
 
-            $this->principal->crea_historico_vista_servicio($id_servicio , $data["in_session"]);
+                    $data["usuario"] = $usuario; 
+                    $data["id_publicador"]  = $servicio[0]["id_usuario"];
+                           
+                    if(count($servicio) == 0){                        
+                        redirect("../../?q=");
+                    }                        
+                    $this->set_option("servicio" , $servicio);                                            
+                    $data["costo_envio"] ="";
+                    
+                    if($servicio[0]["flag_servicio"] ==  0){                
+                        $data["costo_envio"] = 
+                        $this->calcula_costo_envio($this->crea_data_costo_envio());    
+                    }                        
+                    
+                    $data["info_servicio"]["servicio"] = $servicio;    
+                    $this->set_option("flag_precio_definido" , 0);
+                   
+                    
+                    $data["imgs"]=  $this->get_imagenes_productos($id_servicio);            
+                    $this->costruye_meta_keyword();
+                    $data["meta_keywords"] = $this->get_option("meta_keywords");                
+                    
 
-            $data["url_actual"]=   $this->get_the_current_url();
-            $data["meta_keywords"] = $this->get_option("meta_keywords");                    
-            $data["url_img_post"] = $this->get_url_imagen_post();    
-            $data["desc_web"] = $this->get_option("desc_web");
-            $data["id_servicio"] =  $id_servicio;            
-            $prm["id_servicio"] = $id_servicio;
-            $data["existencia"]=  $this->verifica_disponibilidad_servicio($prm);
-            $this->principal->show_data_page($data, 'home');                                              
-            
+                    $this->costruye_descripcion_producto();             
+
+                    $this->principal->crea_historico_vista_servicio($id_servicio , $data["in_session"] ,$data["id_publicador"]);
+
+                    $data["url_actual"]=   $this->get_the_current_url();
+                    $data["meta_keywords"] = $this->get_option("meta_keywords");                    
+                    $data["url_img_post"] = $this->get_url_imagen_post();    
+                    $data["desc_web"] = $this->get_option("desc_web");
+                    
+                    $data["id_servicio"] =  $id_servicio;            
+                    $prm["id_servicio"] = $id_servicio;
+                    $data["existencia"]=  $this->verifica_disponibilidad_servicio($prm);                
+                    $this->principal->show_data_page($data, 'home');
     }
     /**/
     private function get_contacto_usuario($id_usuario){

@@ -240,6 +240,13 @@
     color: white!important;
     font-weight: bold!important;   
 }
+.a_enid_black_sm_sm{
+
+    background: black!important;
+    padding: 2px!important;
+    color: white!important;
+    font-weight: bold!important;   
+}
 .link_menu_footer{
     text-decoration: underline!important;
 }
