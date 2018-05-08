@@ -345,12 +345,13 @@
     }
     /**/
     function crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis){
-        $nombre_servicio =  $servicio["nombre_servicio"];
-        $resumen = $num_ciclos." ".$nombre_servicio;        
+        $resumen ="";
+        $resumen = $num_ciclos." ".$servicio["nombre_servicio"];                
+
         if($flag_envio_gratis ==  1){
-          $resumen .= " - Envío gratis";
+          $resumen.=   " - Envío gratis";          
         }
-        return $resumen;        
+        return $resumen;      
     }
     /**/
     function crea_orden_de_compra($param){    
@@ -360,8 +361,6 @@
       $status = 6;/*En proceso de compra*/      
       $fecha_vencimiento =" DATE_ADD(CURRENT_DATE(), INTERVAL 2 DAY) ";
       
-      
-
       $data_usuario =  $param["data_por_usuario"];      
       
       if($param["es_usuario_nuevo"] == 1){
@@ -377,6 +376,7 @@
           $id_usuario_referencia =  $data_usuario["usuario_referencia"];
       }
 
+
       $num_ciclos =  $data_usuario["num_ciclos"];    
       $servicio =  $param["servicio"];
       $id_servicio =  $servicio["id_servicio"];
@@ -385,6 +385,7 @@
       $id_usuario_venta =  $servicio["id_usuario_venta"];
       $precio =  $servicio["precio"];
       /***/
+
 
       $resumen_compra =  
       $this->crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis);
@@ -441,8 +442,8 @@
                                     '".$resumen_compra."'
                                   )";                          
 
-      $this->db->query($query_insert);
 
+      $this->db->query($query_insert);
       $id =  $this->db->insert_id();      
       $this->mejora_calificacion_servicio($id_servicio);
       return $id;

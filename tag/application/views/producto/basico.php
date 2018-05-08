@@ -9,7 +9,7 @@
         height: 400px!important;
         width:100%;' ";
 
-    $style_img_card ="style='height: 250px;' ";
+    $style_img_card ="style='height: 260px;' ";
     $style_card_block = '
     -webkit-box-flex:1;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;
     padding:1.2rem; border-top-style: solid;border-top-width: .9px;margin-top: 0px;

@@ -21,26 +21,26 @@ class Enid extends CI_Controller {
     /**/   
     function imagen_usuario($id_usuario){
 
-        $db_response =  $this->img_model->get_img_usuario($id_usuario);                        
-        foreach ($db_response as $row ){ 
-            echo $row["img"];
-        }  
+        $response =  $this->img_model->get_img_usuario($id_usuario);                        
+        $img ="";
+        foreach ($response as $row ){ 
+            
+            echo "<img src='data:image/png;base64,".base64_encode($row["img"])."' style='width:100%'>";
+        } 
 
     }        
     /**/
     function imagen_servicio($id_servicio){
 
-        $data_imagen =  $this->img_model->get_img_servicio($id_servicio);                        
-        /*Validamos que exista alguna imagen*/
-        $num_img =  count($data_imagen);
-        if($num_img > 0){
-            
-            $db_response =  $this->img_model->get_img($data_imagen[0]["id_imagen"]);
-            foreach ($db_response as $row ){ 
+        $response = $this->img_model->get_img_servicio($id_servicio);
+        if ( count($response)> 0 ) {
+
+            $response =  $this->img_model->get_img($response[0]["id_imagen"]);    
+            foreach ($response as $row ){ 
                 echo $row["img"];
             }     
         }
-        /**/
+     
         
     }
     /**/

@@ -1,11 +1,10 @@
 <?php
-  
+
   $info_social["url_facebook"] =  get_url_facebook($url_actual);   
   $info_social["url_twitter"] =  get_url_twitter($url_actual , $desc_web);
   $info_social["url_pinterest"] = get_url_pinterest($url_actual, $desc_web);
   $info_social["url_tumblr"] = get_url_tumblr($url_actual, $desc_web);
-
-  /**/
+  
   $url_vide_youtube ="";  
   $id_servicio= "";
   $nombre_servicio= "";
@@ -52,7 +51,6 @@
   $info_compra["flag_servicio"]= $flag_servicio;
   $info_compra["precio"]= $precio;
   $info_compra["id_ciclo_facturacion"]= $id_ciclo_facturacion;
-
 
 
 
@@ -143,8 +141,16 @@
 </main>
 <script type="text/javascript" src="<?=base_url('application')?>/js/principal.js">        
 </script>
-<input type="hidden" name="servicio" class="servicio" value="<?=$id_servicio?>">
-<input type="hidden" name="desde_valoracion" value="<?=$desde_valoracion?>" class='desde_valoracion'>
+<input 
+type="hidden" 
+name="servicio" 
+class="servicio" 
+value="<?=$id_servicio?>">
+<input 
+type="hidden" 
+name="desde_valoracion" 
+value="<?=$desde_valoracion?>" 
+class='desde_valoracion'>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application')?>/css/main.css">
 <link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css'>
 <style type="text/css">

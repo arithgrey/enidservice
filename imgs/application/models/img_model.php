@@ -189,17 +189,13 @@ function elimina_img($id_imagen){
 /*Solo gets*/
 function get_img_usuario($id_usuario){
 
-  $query_get =  "select  id_imagen from imagen_usuario WHERE idusuario =$id_usuario LIMIT 1";    
+  $query_get =  "SELECT id_imagen from imagen_usuario WHERE idusuario =$id_usuario LIMIT 1";    
   $result = $this->db->query($query_get);
   $imagen_faq =  $result->result_array();
   
     if (count($imagen_faq) > 0 ) {
         $id_imagen = $imagen_faq[0]["id_imagen"];      
         $query_get =  "SELECT  * FROM imagen WHERE idimagen =  $id_imagen LIMIT 1;";
-        $result  =  $this->db->query($query_get);
-        return $result->result_array();
-    }else{
-        $query_get =  "SELECT  * FROM imagen WHERE idimagen = 1 LIMIT 1;";
         $result  =  $this->db->query($query_get);
         return $result->result_array();
     } 

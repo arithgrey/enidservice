@@ -217,6 +217,7 @@ class Cobranza extends REST_Controller{
         $id_servicio=  $param["plan"]; 
         $precio =   $this->cobranzamodel->get_precio_id_servicio($id_servicio);
 
+
         $data_complete = [];
         $data_orden = [];
         $data_reporte_compra = [];
@@ -229,12 +230,14 @@ class Cobranza extends REST_Controller{
             $prm["id_servicio"] =  $id_servicio;      
             $prm["articulos_solicitados"] =  $param["num_ciclos"];
             $info_existencia =  $this->consulta_disponibilidad_servicio($prm);
+
             $data_orden["existencia"] =  $info_existencia;
             
 
             $data_reporte_compra["articulo_disponible"] = 0;
             $data_reporte_compra["existencia"] = $info_existencia;
             /*Si se encuentra en existencia, continuamos*/                
+
             if($info_existencia["en_existencia"] == 1){     
                 
                 $data_reporte_compra["articulo_disponible"] = 1;
@@ -257,6 +260,7 @@ class Cobranza extends REST_Controller{
                 $es_usuario_nuevo =  
                 get_info_usuario_valor_variable($param , "usuario_nuevo" ); 
 
+
                 if($es_usuario_nuevo == 0){            
                     $data_orden["id_usuario"] = $this->sessionclass->getidusuario();
                     $data_orden["es_usuario_nuevo"] =  0;
@@ -267,6 +271,7 @@ class Cobranza extends REST_Controller{
                 
                 $data_acciones_posteriores["id_recibo"]
                 =  $this->genera_orden_compra($data_orden);    
+                
                 
                 
 

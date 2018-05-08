@@ -29,8 +29,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                           <span class="strong "  
-                              style="font-size: 1.5em;line-height: .8;">  
-                              SU CARRITO DE COMPRAS
+                              style="font-size: 2em;line-height: .8;">  
+                              TU CARRITO DE COMPRAS
                           </span>
                         </div>                        
                         <hr style="color:black;height: 1px;

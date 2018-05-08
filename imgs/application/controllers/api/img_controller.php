@@ -42,8 +42,7 @@ class Img_controller extends REST_Controller{
   /**/
   function imagen_servicio_DELETE(){
 
-    $param =  $this->delete();
-    
+    $param =  $this->delete();    
     $db_response =  $this->img_model->delete_imagen_servicio($param);
     $this->response($db_response);
     

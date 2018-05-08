@@ -281,7 +281,9 @@ class Portafolio extends REST_Controller{
 
         $param =  $this->post();
         /*Primero la registramos*/    
-        $id_direccion = $this->proyectomodel->registra_direccion_usuario($param);                 
+
+        $id_direccion = $this->proyectomodel->registra_direccion_usuario($param);
+        $this->response($id_direccion);
         
         $param["id_direccion"] = $id_direccion;        
         $data_complete["id_direccion"] = $id_direccion;

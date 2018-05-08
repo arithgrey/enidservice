@@ -67,13 +67,11 @@ class Areacliente extends REST_Controller{
             /**/
             $param["info_correo"] =  $response;
             $param["asunto"] =  "Resumen del día Enid Service";
-            $lista_correos= ["arithgrey@gmail.com" , "kopkjojt@gmail.com"];
+            $lista_correos= ["arithgrey@gmail.com"];
 
             for($a=0; $a < count($lista_correos); $a++){                 
-                            
-                $this->mensajeria_lead->notificacion_email($param , $lista_correos[$a]);             
-            }
-            
+                $this->mensajeria_lead->notificacion_email($param , $lista_correos[$a]);
+            }            
         $this->response($response);
             
     }

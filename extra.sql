@@ -14,3 +14,16 @@ alter table  usuario add lada_negocio int(3);
 
 alter table pagina_web_bot add id_servicio int not null default 0;
 alter table pagina_web add id_servicio int not null default 0;
+delete from faq;
+alter table  proyecto_persona_forma_pago add fecha_cancelacion  timestamp not null default  current_timestamp;
+
+alter table proyecto_persona_forma_pago add se_cancela int not null  default 0;
+
+
+alter table servicio add entregas_en_casa int not null default 0;
+alter table servicio add telefono_visible  int not null default 0;
+alter table servicio add valoracion int not null default 0;
+alter table proyecto_persona_forma_pago add cancela_cliente int not null default 0;
+alter table direccion add  nombre_receptor varchar(75);
+alter table direccion add  telefono_receptor bigint(10);
+alter table proyecto_persona_forma_pago change resumen_pedido resumen_pedido text;

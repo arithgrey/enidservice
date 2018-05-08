@@ -88,8 +88,11 @@ class proyectomodel extends CI_Model{
     $numero_exterior = $param["numero_exterior"];
     $numero_interior = $param["numero_interior"];
     $id_codigo_postal =  $param["id_codigo_postal"];
-    $nombre_receptor=  $param["nombre_receptor"];
-    $telefono_receptor=  $param["telefono_receptor"];
+
+    $receptor=
+      (array_key_exists("nombre_receptor", $param))?$param["nombre_receptor"]:"";
+    $tel_receptor=
+      (array_key_exists("telefono_receptor", $param))?$param["telefono_receptor"]:0;
 
 
     $query_insert = "INSERT INTO direccion(                        
@@ -106,16 +109,12 @@ class proyectomodel extends CI_Model{
                           '".$numero_exterior."', 
                           '".$numero_interior."',
                           '".$id_codigo_postal."',
-                          '".$nombre_receptor."',
-                          '".$telefono_receptor."'
+                          '".$receptor."',
+                          '".$tel_receptor."'
                           )";
-      
-      
-      $this->db->query($query_insert);
-      $id_direccion =  $this->db->insert_id();
-      return $id_direccion;
-      
-    
+            
+      $this->db->query($query_insert);      
+      return $this->db->insert_id();
   }
   /**/
   function get_id_codigo_postal_por_patron($param){
@@ -176,10 +175,8 @@ class proyectomodel extends CI_Model{
   function registra_direccion_usuario($param){
     
     $id_codigo_postal =  $this->get_id_codigo_postal_por_patron($param);
-    $param["id_codigo_postal"] =  $id_codigo_postal;
-    $id_direccion =  $this->crea_direccion($param);
-    $param["id_direccion"] =  $id_direccion;          
-    return $id_direccion;   
+    $param["id_codigo_postal"] =  $id_codigo_postal;  
+    return  $this->crea_direccion($param);
   }
   /**/
   function get_delegaciones($param){

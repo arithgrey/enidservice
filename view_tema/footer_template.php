@@ -132,6 +132,12 @@
                 - Notificar pagos
             </a>
         </li>
+        <li>
+            <a class='black link_menu_footer' href="../terminos-y-condiciones">
+                -Términos y condiciones
+            </a>
+        </li>
+        
         
     </ul>
 

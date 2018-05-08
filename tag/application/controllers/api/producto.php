@@ -129,7 +129,7 @@ class producto extends REST_Controller{
     function servicios_empresa_GET(){
         
 
-        if($this->input->is_ajax_request()){ 
+        if($this->input->is_ajax_request() OR $_SERVER['HTTP_HOST'] ==  "localhost"){ 
             
             $param =  $this->get();                                     
             $param["q"]= $this->get("q");

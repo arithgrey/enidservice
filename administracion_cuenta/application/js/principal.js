@@ -4,7 +4,6 @@ $(document).ready(function(){
 		set_option("v",1);
 		carga_direccion_usuario();	
 	});	
-
 	/**/
 	$(".f_nombre_usuario").submit(actualiza_nombre_usuario);	
 	$(".tab_privacidad_seguridad").click(get_conceptos);
@@ -59,8 +58,7 @@ function carga_direccion_usuario(){
 /*Solo para usuario*/
 function registra_direccion_usuario(e){
 
-	if(get_existe_codigo_postal() ==  1){
-				
+	if(get_existe_codigo_postal() ==  1){			
 				url =  "../portafolio/index.php/api/portafolio/direccion_usuario/format/json/";	
 				data_send =  $(".form_direccion_envio").serialize()+"&"+$.param({"direccion_principal" : 1});						
 				asentamiento = $(".asentamiento").val();
@@ -69,23 +67,17 @@ function registra_direccion_usuario(e){
 							url : url , 
 							type: "POST",
 							data: data_send, 
-							beforeSend: function(){
-								//show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
-							}
-					}).done(function(data){																	
-						
-
+							beforeSend: function(){}
+					}).done(function(data){																							
 						set_option("v" , 1);
 						carga_direccion_usuario();
-						
 					}).fail(function(){			
 						show_error_enid(".place_proyectos" , "Error ... ");
 					});		
 					$(".place_asentamiento").empty();		
 				}else{
 					recorrepage("#asentamiento");										
-					llenaelementoHTML( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");
-					
+					llenaelementoHTML( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");					
 				}		
 
 	}else{

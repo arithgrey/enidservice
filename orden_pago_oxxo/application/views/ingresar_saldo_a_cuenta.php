@@ -1,10 +1,28 @@
+<?php 
+  $beneficiario = entrega_data_campo($usuario , "nombre") ." ". 
+                  entrega_data_campo($usuario , "apellido_paterno") ." ".
+                  entrega_data_campo($usuario , "apellido_materno");
+
+  $folio  = $info_pago["q2"];
+  $monto  = $info_pago["q"];
+  $numero_cuenta =  "4152 3131 0230 5609";
+  $concepto =  "Saldo a cuenta Enid Service";
+?>
 <main>                                                  
 	<?=n_row_12()?>    
 		<div style="width: 50%;margin: 0 auto;margin-top: 20px;">
 			<div class="text-right">
-			    <a class="a_enid_blue imprimir" style="color: white!important;" >
-			    	IMPRIMIR
-			    </a>
+          <form action="../pdf/orden_pago.php" method="POST">
+            <input type="hidden" name="beneficiario" value="<?=$beneficiario?>">
+            <input type="hidden" name="folio" value="<?=$folio?>">
+            <input type="hidden" name="monto" value="<?=$monto?>">
+            <input type="hidden" name="numero_cuenta" value="<?=$numero_cuenta?>">
+            <input type="hidden" name="concepto" value="<?=$concepto?>">
+            
+  			    <button class="a_enid_blue imprimir" style="color: white!important;" >
+  			    	IMPRIMIR
+  			    </button>
+          </form>
 		    </div>
 	    </div>
     <?=end_row()?>
@@ -18,14 +36,12 @@
                         ORDEN DE PAGO EN SUCURSALES OXXO
                       </div>
                       <div style="background: #0000f5;padding: 5px;color: white;color: white;">
-                          	Saldo a cuenta Enid Service 
+                          	<?=$concepto?>
                           	<br>
                           	Beneficiario
-                          	<?=entrega_data_campo($usuario , "nombre")?> 
-                          	<?=entrega_data_campo($usuario , "apellido_paterno")?>
-                          	<?=entrega_data_campo($usuario , "apellido_materno")?>
+                          	<?=$beneficiario?>
                             <br>
-                            Folio #<?=$info_pago["q2"]?>
+                            Folio #<?=$folio?>
                       </div>
                     <div style="margin-top:20px; ">                        
                       <div style="width: 80%;margin: 0 auto;">
@@ -33,7 +49,7 @@
                           MONTO A PAGAR
                         </h1>
                         <h2 style="color: black;">
-                          $<?=$info_pago["q"]?> MXN
+                          $<?=$monto?> MXN
                         </h2>
                         <span style="font-size: .8em;">
                           OXXO Cobrará una comisión adicional al momento de realizar el pago
@@ -49,7 +65,7 @@
                         	</div>
                         	<div>
 	                          	<span style="font-weight: bold;">                   
-	                            	4152 3131 0230 5609
+	                            	<?=$numero_cuenta?>
 	                          	</span>                                      
                           	</div>
                       </div>
@@ -166,8 +182,4 @@
     </div>  
 
 
-<form class="form_imprimir" action="../pdf/pdf.php" method="post">
-	<input type="hidden" name="contenido" class="contenido_imp" >
-</form>
-<script type="text/javascript" src="<?=base_url('application/js/imprimir.js')?>"></script>
 </main>

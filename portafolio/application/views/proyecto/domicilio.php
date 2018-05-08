@@ -34,12 +34,10 @@
     }
     /**/
 ?>
-<div>
-    <div>
+
+    
         <div class="row">
-        	<div 
-                class="col-lg-6 col-lg-offset-3" 
-                style="border-style:solid;border-width: 1px;padding: 5px;">
+        	<div style="border-style:solid;border-width: 1px;padding: 5px;">
                 <div>                    
                     <div>   
                         <div>
@@ -305,8 +303,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    
+
 
 
 
