@@ -77,7 +77,7 @@
 		            id="costo" 
 		            class="form-control input-sm costo precio" 
 		            name="costo" required="" step="any" type="number"> 
-		            <span>
+		            <span class="extra_precio">
 	 					<?=$error_registro?>
 	 				</span>
 				</div>		    

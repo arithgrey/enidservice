@@ -23,15 +23,15 @@ $(document).ready(function() {
 	$(".btn_servicios").click(carga_servicios);	
 	$(".tipo_promocion").click(configuracion_inicial);
 	$(".form_nombre_producto").submit(simula_envio);
-	$(".btn_agregar_servicios").click(function() {
-		
+	$(".btn_agregar_servicios").click(function(){
+
 		showonehideone(".contenedor_nombre", ".contenedor_categorias");
-		set_option("nuevo", 1);
-		/**/
+		set_option("nuevo", 1);		
 		$(".texto_ventas_titulo").show();
 	});
 	$(".li_menu_servicio").click(function() {
 		$(".btn_agregar_servicios").show();
+		$(".contenedor_top").show();
 	});
 	/**/	
 	$(".contenedor_busqueda_global_enid_service").hide();
@@ -852,14 +852,20 @@ function configuracion_inicial(e) {
 /**/
 function simula_envio(e) {
 
-	carga_listado_categorias();
-	/**/
-	nombre_servicio = $(".nuevo_producto_nombre").val();
 	costo = $(".costo").val();
-	showonehideone(".contenedor_categorias", ".contenedor_nombre");
-	set_nombre_servicio(nombre_servicio);
-	set_costo(costo);
-
+	next =  (get_option("modalidad") == 0 && costo == 0)?0:1; 
+	if (next) {
+		carga_listado_categorias();
+		nombre_servicio = $(".nuevo_producto_nombre").val();		
+		showonehideone(".contenedor_categorias", ".contenedor_nombre");
+		$(".contenedor_top").hide();
+		set_nombre_servicio(nombre_servicio);
+		set_costo(costo);
+		$(".extra_precio").text("");
+	}else{
+		$("#costo").css("border" , "1px solid rgb(13, 62, 86)");
+		$(".extra_precio").text("INGRESA EL PRECIO DEL PRODUCTO");
+	}
 	e.preventDefault();
 }
 /**/
@@ -1115,7 +1121,7 @@ function agregar_categoria_servicio(e){
 		set_option("id_ciclo_facturacion", $("#ciclo").val());
 	}	
 	
-	if(get_option("nuevo") == 1) {
+	if(get_option("nuevo") == 1) {		
 		registra_nuevo_servicio();
 	} else {
 		actualiza_categorias_servicio();
@@ -1151,8 +1157,8 @@ function actualiza_categorias_servicio() {
 /**/
 function registra_nuevo_servicio() {
 
-	set_valores_categorias();
-	/**/
+	url = "../base/index.php/api/servicio/nuevo/format/json/";
+	set_valores_categorias();	
 
 	data_send = {
 		"nombre_servicio" : get_nombre_servicio(),
@@ -1165,15 +1171,12 @@ function registra_nuevo_servicio() {
 		"cuarto_nivel" : get_categoria_cuarto_nivel(),
 		"quinto_nivel" : get_categoria_quinto_nivel()
 	};
-	url = "../base/index.php/api/servicio/nuevo/format/json/";
-	
+		
 	$.ajax({
 		url : url,
 		type : "POST",
 		data : data_send,
-		beforeSend : function() {
-
-		}
+		beforeSend : function(){}
 	}).done(function(data) {
 
 		if (data.registro!=0){			
@@ -1660,6 +1663,5 @@ function valida_action_inicial(){
 		break;
 	default:
 		break;
-	}
-	
+	}	
 }

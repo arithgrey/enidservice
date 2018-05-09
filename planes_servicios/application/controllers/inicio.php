@@ -56,8 +56,9 @@ class Inicio extends CI_Controller {
                 $data["url_img_post"]= "";
                 $data["id_usuario"] = $this->sessionclass->getidusuario();                     
                 $data["id_empresa"] =  $this->sessionclass->getidempresa();                     
-                $data["info_empresa"] =  $this->sessionclass->get_info_empresa();                     
+                $data["info_empresa"] =  $this->sessionclass->get_info_empresa();
                 $data["desc_web"] =  "";
+                $data["is_mobile"]=  ($this->agent->is_mobile() == FALSE)?0:1;
                 return $data;
         }else{            
             redirect(url_log_out());

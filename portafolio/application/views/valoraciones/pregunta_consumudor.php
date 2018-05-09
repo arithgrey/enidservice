@@ -1,15 +1,18 @@
 <?php 
 	$nombre_vendedor = ($in_session==1)? 
 	$vendedor[0]["nombre"]." ".$vendedor[0]["apellido_paterno"]:"AL VENDEDOR";
-
 	$telefono_visible =  $servicio[0]["telefono_visible"]; 
+	$telefono_contacto = 
+	(strlen($vendedor[0]["tel_contacto"]) >4)?$vendedor[0]["tel_contacto"]:
+	$vendedor[0]["tel_contacto_alterno"];
 
+	
 ?>
 <div class="col-lg-6 col-lg-offset-3">
 	<div>
 		<center>
 			<h3 style="font-weight: bold;font-size: 3em;">		
-				ESCRIBE UNA PREGUNTA <?=strtoupper($nombre_vendedor);?>
+				ESCRIBE UNA PREGUNTA A <?=strtoupper($nombre_vendedor);?>
 			</h3>
 			<div style="font-size: 1.4em">
 				<span >Sobre su </span>
@@ -47,7 +50,9 @@
 				<div class="place_registro_valoracion"></div>
 			<?=end_row()?>
 
-			<?php if ($telefono_visible == 1 && $in_session == 1):?>
+
+
+			<?php if ($telefono_visible == 1 && strlen($telefono_contacto)>4 ):?>
 				<?=n_row_12()?>
 					<div style="margin-top: 10px;background: black;color: white;padding: 10px;">
 						TAMBIÉN PUEDES SOLICITAR INFORMACIÓN 

@@ -185,7 +185,7 @@ class Valoracion extends REST_Controller{
         $data["vendedor"] ="";
         if( $data["in_session"] == 1 ){
             $data["vendedor"] =  
-            $this->get_contacto_usuario($servicio[0]["id_usuario"]);
+            $this->get_contacto_usuario($servicio[0]["id_usuario"]);        
             
         }
         $this->load->view("valoraciones/pregunta_consumudor" , $data);
