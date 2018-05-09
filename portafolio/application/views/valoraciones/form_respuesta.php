@@ -1,3 +1,14 @@
+<?php 	
+	$next =0;	
+	if ($info_usuario!=0) {
+		$cliente =  $info_usuario[0];
+		$nombre = $cliente["nombre"]." " .$cliente["apellido_paterno"];
+		$telefono =  
+		(strlen($cliente["tel_contacto"])>4)?$cliente["tel_contacto"]:
+		$cliente["tel_contacto_alterno"];				
+		$next ++;	
+	}
+?>
 <div style="margin-top: 10px;"></div>
 <?=n_row_12()?>
 <div>
@@ -7,17 +18,34 @@
 	<div>
 		<strong>
 			SOBRE 
-			<a href="<?=get_url_servicio($data_send["servicio"])?>" class='a_enid_blue_sm'>
+			<a href="<?=get_url_servicio($data_send["servicio"])?>" 
+				class='a_enid_blue_sm'
+				style="color: white!important">
 				<?=strtoupper($data_send["nombre_servicio"])?>			
 			</a>
 		</strong>
-	</div>
-  	<div style="margin-top: 10px;">
-	  <span>
-	  	<?=$data_send["registro"]?>
-	  </span>
-	</div>
+	</div>  	
 </div>
+<?php if($next>0):?>
+	<div style="margin-top: 15px;">
+		<span class="strong">
+			CLIENTE:
+		</span> 
+		<span style="text-decoration: underline;">
+			<?=strtoupper($nombre)?>
+		</span>
+	</div>
+	<?php if(strlen($telefono)>4):?>
+		<div style="margin-top: 10px;">
+			<span class="strong">
+				TELÉFONO DE CONTACTO:
+			</span> 
+			<span style="text-decoration: underline;">
+				<?=$telefono?>
+			</span>
+		</div>
+	<?php endif;?>		
+<?php endif;?>
 <?=end_row()?>
 <?=n_row_12()?>
 <div class="contenedor_preguntas">

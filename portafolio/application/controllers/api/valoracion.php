@@ -184,10 +184,11 @@ class Valoracion extends REST_Controller{
         $data["id_usuario"] = $param["id_usuario"];
         $data["vendedor"] ="";
         if( $data["in_session"] == 1 ){
-            $data["vendedor"] =  
-            $this->get_contacto_usuario($servicio[0]["id_usuario"]);        
             
+            $data["vendedor"] = $this->get_contacto_usuario($servicio[0]["id_usuario"]);        
+
         }
+        $data["propietario"] =  ($servicio[0]["id_usuario"]!=$data["id_usuario"])?0:1;
         $this->load->view("valoraciones/pregunta_consumudor" , $data);
     }
     /**/
@@ -272,8 +273,15 @@ class Valoracion extends REST_Controller{
         $param =  $this->get();
         $data_complete["data_send"] = $param;  
         /*Pasamos a visto la pregunta*/
+
         $this->valoracion_model->set_visto_pregunta($param);
         $data_complete["respuestas"] = $this->valoracion_model->get_respuestas_pregunta($param);
+        $data_complete["info_usuario"] =0;
+        if ($param["modalidad"] ==  1) {
+            $data_complete["info_usuario"] 
+            = 
+            $this->get_contacto_usuario($param["usuario_pregunta"]);
+        }
         $this->load->view("valoraciones/form_respuesta" , $data_complete);        
     }
     /**/

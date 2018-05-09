@@ -5,11 +5,15 @@ $(document).ready(function(){
 	set_option("servicio" , $(".servicio").val());
 	set_option("respuesta_valorada" , 0);		
 	$(".form_valoracion").submit(registra_valoracion);
+	
 	envio_pregunta =  $(".envio_pregunta").val();
 	if (envio_pregunta !=1){
 		bloquea_form(".form_valoracion");
 		$(".contenedor_registro").show();
-	}	
+	}
+	if ($(".propietario").val()== 1){
+		bloquea_form(".form_valoracion");
+	}
 	$("footer").ready(carga_productos_sugeridos);
 	$("footer").ready(carga_valoraciones);
 });

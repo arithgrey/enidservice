@@ -21,7 +21,7 @@
 				</strong>				
 			</div>
 		</center>
-		<form class="form_valoracion" >
+		<form class="form_valoracion">
 			<textarea 
 				class="form-control" 
 				id="pregunta" 
@@ -31,6 +31,7 @@
 			</textarea>
 			<input type="hidden" name="servicio" value="<?=$id_servicio?>">
 			<input type="hidden" name="usuario" value="<?=$id_usuario?>">
+			<input type="hidden" name="propietario" class="propietario" value="<?=$propietario?>">
 			<div>
 				<div class="place_area_pregunta">
 					
