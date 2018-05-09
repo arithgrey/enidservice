@@ -10,7 +10,7 @@
 ?>
 <main>                                                  
 	<?=n_row_12()?>    
-		<div style="width: 50%;margin: 0 auto;margin-top: 20px;">
+		<div class="boton_imprimir_orden">
 			<div class="text-right">
           <form action="../pdf/orden_pago.php" method="POST">
             <input type="hidden" name="beneficiario" value="<?=$beneficiario?>">
@@ -28,7 +28,7 @@
     <?=end_row()?>
     <br>
     <div class="contenedor_orden_pago">    	
-            <div style="width: 50%;margin: 0 auto;border-style: solid;border-width: 1px;">
+            <div class='contenido_orden_pago'>
                 <div>                    
                     <div class="info_orden_compra">
                       <div style="font-size:1.4em;color:black;font-weight: bold;">
@@ -180,6 +180,21 @@
                 </div> 
             </div>        
     </div>  
-
-
+    <style type="text/css">
+      .contenido_orden_pago{
+        width: 50%;margin: 0 auto;border-style: solid;border-width: 1px;
+      }
+      .boton_imprimir_orden{
+        width: 50%;margin: 0 auto;margin-top: 20px;
+      }
+      @media only screen and (max-width: 601px) {
+        .contenido_orden_pago{
+          width: 90%;margin: 0 auto;border-style: solid;border-width: 1px;
+        } 
+        .boton_imprimir_orden{
+          width: 90%;margin: 0 auto;margin-top: 20px;
+          margin-bottom: 5px;
+        }
+      }
+    </style>
 </main>

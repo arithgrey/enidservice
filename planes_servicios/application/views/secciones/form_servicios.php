@@ -4,6 +4,7 @@
  				<h2 class="texto_ventas_titulo">
  					DA A CONOCER TU PRODUCTO Ó SERVICIO
  				</h2>
+ 				
  			<?=end_row()?>
  			<hr>
 		    <form class="form_nombre_producto" id='form_nombre_producto'>                  
@@ -76,6 +77,9 @@
 		            id="costo" 
 		            class="form-control input-sm costo precio" 
 		            name="costo" required="" step="any" type="number"> 
+		            <span>
+	 					<?=$error_registro?>
+	 				</span>
 				</div>		    
 		      	<div class='seccion_menu_tipo_servicio'>
 		        <button class="btn input-sm btn_siguiente_registrar_servicio ">

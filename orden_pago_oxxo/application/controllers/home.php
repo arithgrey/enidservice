@@ -13,17 +13,14 @@ class Home extends CI_Controller{
         
         $data["meta_keywords"] = '';
         $data["desc_web"] = "";                
-        $data["url_img_post"] = create_url_preview("recomendacion.jpg");
-        
+        $data["url_img_post"] = create_url_preview("");        
         $param =  $this->input->get();
         $data["info_pago"]= $param;
         $data["clasificaciones_departamentos"] = "";        
         $concepto =  valida_valor_variable($param , "concepto");    
         $id_usuario=  $this->input->get("q3"); 
         $data["usuario"]=  $this->get_usuario($id_usuario);
-        $this->principal->show_data_page($data, 'ingresar_saldo_a_cuenta');
-
-        
+        $this->principal->show_data_page($data, 'ingresar_saldo_a_cuenta');        
     }    
     /**/
     function logout(){                      

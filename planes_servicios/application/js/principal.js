@@ -1166,7 +1166,7 @@ function registra_nuevo_servicio() {
 		"quinto_nivel" : get_categoria_quinto_nivel()
 	};
 	url = "../base/index.php/api/servicio/nuevo/format/json/";
-	console.log(data_send);
+	
 	$.ajax({
 		url : url,
 		type : "POST",
@@ -1176,16 +1176,19 @@ function registra_nuevo_servicio() {
 		}
 	}).done(function(data) {
 
-		console.log(data);
-
-		set_option("servicio", data);
-		carga_informacion_servicio(1);
-		document.getElementById("form_nombre_producto").reset();
-
-		$("#tab_productividad").tab("show");
-		$(".btn_serv").tab("show");
-		$(".btn_agregar_servicios").show();
-
+		if (data.registro!=0){			
+			if (data.registro.servicio>0) {
+				set_option("servicio", data.registro.servicio);
+				carga_informacion_servicio(1);
+				document.getElementById("form_nombre_producto").reset();
+				$("#tab_productividad").tab("show");
+				$(".btn_serv").tab("show");
+				$(".btn_agregar_servicios").show();
+			}else{				
+				/**/
+				redirect("../planes_servicios/?action=nuevo&mensaje="+data.registro.mensaje);
+			}
+		}		
 	}).fail(function() {
 		show_error_enid(".place_registro_servicio", "Error ... ");
 	});

@@ -31,6 +31,9 @@ class Inicio extends CI_Controller {
         }
 
 
+        $data["error_registro"]=
+        (strlen($this->input->get("mensaje")) >5 )?$this->input->get("mensaje"):"";
+
         $data["top_servicios"] =  $this->get_top_servicios_usuario($data["id_usuario"]);        
         $num_perfil =  $this->sessionclass->getperfiles()[0]["idperfil"];        
         $data["ciclo_facturacion"]= $this->principal->create_ciclo_facturacion();          

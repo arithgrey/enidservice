@@ -124,24 +124,36 @@ class Servicio extends REST_Controller{
     /**/
     function nuevo_POST(){      
       /**/
-      if($this->input->is_ajax_request()){ 
+      if($this->input->is_ajax_request()){         
+        $param =  $this->post();        
         
-        $param =  $this->post();              
-        $tags =  $this->create_tags($param);             
-        $text_tags =  implode($tags, ",");
-        $param["metakeyword"] =  $text_tags;
-        $id_usuario =  $this->sessionclass->getidusuario();
-        $param["id_usuario"] = $id_usuario;        
-        $terminos_usuario =  $this->get_terminos_privacidad_productos($id_usuario);
-
-        $terminos = $terminos_usuario[0];
-        $param["entregas_en_casa"] = ($terminos["entregas_en_casa"] > 0)?1:0;
-        $param["telefonos_visibles"] = ($terminos["telefonos_visibles"] > 0 )?1:0;    
-        $this->response($this->serviciosmodel->create_servicio($param));    
-
+        $response["registro"] = (ctype_digit($param["precio"])&& $param["precio"] >= 0)?
+        $this->registra_data_servicio($param):0;                        
+        $this->response($response);  
+        
       }else{
         $this->response("error");
       }
+  }
+  /**/
+  private function registra_data_servicio($param){
+
+        $next =  ($param["flag_servicio"] == 0 && $param["precio"] == 0)?0:1;         
+        $data_complete["mensaje"] =  ($next ==1)?"":"TU PRODUCTO DEBE TENER ALGÚN PRECIO";
+        if ($next) {
+
+            $tags =  $this->create_tags($param);             
+            $text_tags =  implode($tags, ",");
+            $param["metakeyword"] =  $text_tags;
+            $id_usuario =  $this->sessionclass->getidusuario();
+            $param["id_usuario"] = $id_usuario;        
+            $terminos_usuario =  $this->get_terminos_privacidad_productos($id_usuario);
+            $terminos = $terminos_usuario[0];
+            $param["entregas_en_casa"] = ($terminos["entregas_en_casa"] > 0)?1:0;
+            $param["telefonos_visibles"] = ($terminos["telefonos_visibles"] > 0 )?1:0;    
+            $data_complete["servicio"]=  $this->serviciosmodel->create_servicio($param);
+        }
+        return $data_complete;
   }
   /**/
   function create_tags($param){
