@@ -110,9 +110,5 @@ class Home extends CI_Controller{
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 
         return  $url_request;
-    } 
-
- 
-
-    
+    }    
 }

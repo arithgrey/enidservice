@@ -12,9 +12,6 @@
     
     <!--Google-->
     <?=meta('keywords', $meta_keywords . " ");?>    
-
-
-
     <?=meta('author', 'Enid Service');?>        
     <meta name="description" content="<?=$desc_web;?>"/>
     <meta name="robots" content="all">
@@ -49,8 +46,7 @@
     <meta property="fb:admins" content="645179855527609" />
 
     
-    <!--Twitter Card data-->
-    
+    <!--Twitter Card data-->    
     <meta name="twitter:card" content="summary">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@enidservice">
@@ -68,46 +64,10 @@
     <meta itemprop="address" content="Eje Central Lázaro Cárdenas 38, Centro Histórico, Centro, 06000 Ciudad de México, CDMX, Local 406">
     <meta itemprop="url" content="<?=base_url()?>">
     <meta itemprop="photo" content="<?=$url_img_post?>">
- 
-    
-    <link href="../css_tema/main.css" rel="stylesheet">   
-   
-    <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">
+    <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">    
     <script src="../js_tema/jquery.min.js">
-    </script>
-    <script src="../js_tema/jquery.easing.1.3.min.js">
-    </script>
-    <!--
-    <script src="../js_tema/jquery.form.js">
-    </script>
--->
-
-    
-    <script src="../js_tema/jquery.validate.min.js">
-    </script>   
+    </script>    
     <script src="../js_tema/bootstrap.min.js">
     </script>
-    <script src="../js_tema/aos.js">
-    </script>
-    <script src="../js_tema/owl.carousel.min.js">
-    </script>
-    
-    
-    
-    <script src="../js_tema/jquery.isotope.min.js">
-    </script>
-
-    <script src="../js_tema/imagesloaded.pkgd.min.js">
-    </script>
-    <script src="../js_tema/jquery.easytabs.min.js">
-    </script>
-    
-    <script src="../js_tema/viewport-units-buggyfill.js">   
-    </script>    
-    <script src="../js_tema/scripts.js">
-    </script>
-
 
     
-    
-

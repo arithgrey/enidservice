@@ -102,9 +102,11 @@
 <script type="text/javascript" src="<?=base_url('application/js/proyectos_persona.js')?>">
 </script>    
 <script type="text/javascript" src="<?=base_url('application/js/cobranza.js')?>">
-</script>    
+</script> 
+<!--   
 <script type="text/javascript" src="<?=base_url('application/js/notificaciones.js')?>">
 </script>    
+-->
 <script type="text/javascript" src="../js_tema/js/direccion.js">
 </script>    
 <script type="text/javascript" src="<?=base_url('application/js/buzon.js')?>">

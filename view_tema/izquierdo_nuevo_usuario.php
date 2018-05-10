@@ -56,17 +56,7 @@
                             <i class="fa fa-tumblr-square black" aria-hidden="true">
                             </i>
                         </a>
-                        
-                        <?=n_row_12()?>
-                            <a href="../documentacion/presentacion/folleto.pdf" target="_blank">
-                                <strong style="font-size: .9em;padding: 3px;" 
-                                    class="blue_enid_background white" >
-                                    <i class="fa fa-cloud-download" aria-hidden="true"></i>
-
-                                    Descarga un folleto
-                                </strong>
-                            </a>
-                        <?=end_row()?>
+                                                
                     </li>
                     </ul>
                 </nav>

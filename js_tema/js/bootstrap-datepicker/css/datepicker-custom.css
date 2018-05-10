@@ -1,9 +1,3 @@
-/*
-	Datepicker for Bootstrap
-	Copyright 2012 Stefan Petre
-	Licensed under the Apache License v2.0
-	http://www.apache.org/licenses/LICENSE-2.0
-*/
 .datepicker {
     z-index: 1051;
     top: 0;
@@ -13,7 +7,6 @@
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    /*.dow { border-top: 1px solid #ddd !important; }*/;
     background: #65CEA7 !important;
     border-color: #65CEA7 !important;
     color: #fff;
@@ -109,36 +102,17 @@
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-
 .datepicker td span:hover {
     background: #42866d;
     color: #fff;
 }
-
-/*.datepicker td span.active {*/
-    /*background-color: #42866d;*/
-    /*background-image: -moz-linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-image: -ms-linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#65CEA7), to(#65CEA7));*/
-    /*background-image: -webkit-linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-image: -o-linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-image: linear-gradient(top, #65CEA7, #65CEA7);*/
-    /*background-repeat: repeat-x;*/
-    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#65CEA7', endColorstr='#65CEA7', GradientType=0);*/
-    /*border-color: #65CEA7 #65CEA7 #65CEA7;*/
-    /*border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);*/
-    /*filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);*/
-    /*color: #fff;*/
-    /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);*/
-/*}*/
-
 .datepicker td span.active:hover, .datepicker td span.active:active, .datepicker td span.active.active, .datepicker td span.active.disabled, .datepicker td span.active[disabled] {
     background-color: #42866d;
     color: #fff;
 }
 
 .datepicker td span.active:active, .datepicker td span.active.active {
-    background-color: #42866d \9;
+    background-color: #42866d;
     color: #fff;
 }
 
@@ -161,7 +135,6 @@
 .datepicker thead tr:first-child th:hover {
     background: #42866d;
 }
-
 .input-append.date .add-on i, .input-prepend.date .add-on i {
     display: block;
     cursor: pointer;

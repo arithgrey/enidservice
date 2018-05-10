@@ -256,14 +256,8 @@
     });
 </script>
 <link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css">
-
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css">
 </body>
 </html>
 <link href="../css_tema/template/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
-<style type="text/css">
-    body{
-        font-family: 'Roboto Condensed', sans-serif!important;
-    }
-</style>
