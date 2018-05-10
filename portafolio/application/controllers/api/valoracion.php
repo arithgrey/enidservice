@@ -116,6 +116,7 @@ class Valoracion extends REST_Controller{
     /**/
     function valoracion_form_GET(){
 
+        /**/
         $param =  $this->get();              
         $data["id_servicio"] =  $param["id_servicio"];
         $data["servicio"]=  $this->get_basic_servicio($param);
@@ -141,12 +142,10 @@ class Valoracion extends REST_Controller{
     }
     /**/
     function nueva_POST(){
-        
-        /**/
+                
         $param = $this->post();        
         $db_response =  $this->valoracion_model->registrar($param);             
-        $data_complete["id_servicio"] =  $param["id_servicio"];        
-        /**/
+        $data_complete["id_servicio"] =  $param["id_servicio"];                
         $prm["key"] =  "email";
         $prm["value"] =  $param["email"];        
         /*Al registrar pregunta envía notificación al vendedor*/

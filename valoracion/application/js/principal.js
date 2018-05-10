@@ -6,6 +6,7 @@ $(document).ready(function(){
 	$(".estrella").click(configura_calificacion);	
 	/*Se registra valoración*/
 	$(".form_valoracion").submit(registra_valoracion);
+	$("footer").ready(evalua_propietario);
 	
 });
 /**/
@@ -97,4 +98,11 @@ function registra_valoracion(e){
 	}
 		
 	e.preventDefault();
+}
+/**/
+function evalua_propietario(){
+	es_propietario =  $(".propietario").val();  	
+	if (es_propietario == 1){		
+		bloquea_form(".form_valoracion");
+	}
 }

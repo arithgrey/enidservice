@@ -1,5 +1,7 @@
 <?php 	
 	
+	$propietario = ($extra["id_usuario"] == $servicio[0]["id_usuario"])?1:0;
+
 	$nombre ="";
 	$email ="";
 	if($extra["in_session"] ==  1) {
@@ -39,6 +41,7 @@
 											value="<?=$x?>" 
 											class='input-start' 
 											type="radio">    			
+
 
 										<label 
 											class='estrella <?=$num_estrella?>' 
@@ -100,6 +103,11 @@
 								placeholder="Por ejemplo: Me encantó!"
 								required="Agrega una breve descripción" 
 								>
+							<input 
+							type="hidden" 
+							name="propietario" 
+							class="propietario"
+							value="<?=$propietario?>">
 						</td>
 					</tr>	
 

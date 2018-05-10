@@ -25,15 +25,15 @@ class Home extends CI_Controller{
             $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
             $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;    
             
-
-
+            
             $prm["in_session"] = 0;    
+            $prm["id_usuario"] =0;
             if($data["in_session"] ==  1){
                 
                 $prm["in_session"] = 1;                
-                $prm["email"]=$this->sessionclass->getemailuser();
-                $prm["nombre"]=  $this->sessionclass->getnombre();
-                
+                $prm["email"] = $data["email"];
+                $prm["nombre"]= $data["nombre"];
+                $prm["id_usuario"] =$data["id_usuario"];                 
             }
 
             $prm["id_servicio"] =  $servicio;
