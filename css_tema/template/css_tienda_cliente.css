@@ -77,3 +77,6 @@
 	font-weight: bold;
 	color: black;
 }
+.valoracion_persona_principal:hover{
+    cursor: pointer;
+}

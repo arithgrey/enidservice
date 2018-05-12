@@ -4,7 +4,7 @@
   $info_social["url_twitter"] =  get_url_twitter($url_actual , $desc_web);
   $info_social["url_pinterest"] = get_url_pinterest($url_actual, $desc_web);
   $info_social["url_tumblr"] = get_url_tumblr($url_actual, $desc_web);
-  
+
   $url_vide_youtube ="";  
   $id_servicio= "";
   $nombre_servicio= "";
@@ -57,87 +57,137 @@
 ?>
 <main> 
 
-  <?php if($flag_servicio ==  0): ?>    
-    <?php if($precio > 0):?>   
-      <?=$this->load->view("btn_pregunta");?>      
-    <?php endif; ?>
 
-  <?php else: ?>
-    <?php if($precio > 0 && $id_ciclo_facturacion !=9):?>   
-      <?=$this->load->view("btn_pregunta");?>      
-    <?php endif; ?>      
-  <?php endif; ?>
-
-<?=n_row_12()?>  
-  <div style="width: 80%;margin:0 auto;">
-    <section class="product-detail">                    
-              <div class="left-col contenedor_izquierdo">                                      
-                <div class="thumbs">                    
-                    <?=$imagenes["preview"]?>                            
-                </div>
-                <div class="big"> 
-                      <div class="tab-content">
-                        <?=$imagenes["imagenes_contenido"]?>                    
-                      </div>                                                  
-                      <?=$this->load->view("social", $info_social)?>
-                </div>
-              </div>
-              <div class="right-col" style="background: #fafbfc;padding: 10px;">                
-                  
-                  <?=valida_editar_servicio($id_usuario_servicio , 
-                    $id_usuario , 
-                    $in_session,  
-                    $id_servicio)?>
-                  <?=get_text_nombre_servicio($nombre_servicio)?>                      
-                  <?=crea_nombre_publicador($usuario , $id_publicador);?>                  
-                  <div style="margin-top: 10px;">
-                    <a href="../search/?q3=<?=$id_publicador?>" 
-                      style='margin-top: 10px;'
-                      class='valoracion_persona_principal'>
-                      <div class="valoracion_persona"></div>                        
-                    </a>
-                  </div>
-                  <?=valida_text_servicio($flag_servicio , $precio , $id_ciclo_facturacion )?>
-                  <?=get_text_costo_envio($flag_servicio , $costo_envio)?>
-                  <div style="margin-top: 10px;">
-                    <?=get_tipo_articulo($flag_nuevo , $flag_servicio)?>
-                  </div>
-                  <div>
-                    <strong>
-                      <?=get_entrega_en_casa($entregas_en_casa , $flag_servicio)?>
-                    </strong>
-                  </div>
-                  <div>
-                    <strong>
-                      <?=get_contacto_cliente(
-                        $telefono_visible ,                         
-                        $in_session,
-                        $usuario)?>
-                    </strong>
-                  </div>
-
-                  <?=creta_tabla_colores($color , $flag_servicio)?>
-                    <?=$this->load->view("form_compra" , $info_compra)?>            
+<?=n_row_12()?>    
+    <div class="product-detail contenedor_info_producto">                    
+              <div class="col-lg-8">
+                <div class="col-lg-8">                   
                   <?=n_row_12()?>                  
-
-                    <?=get_descripcion_servicio($descripcion , $flag_servicio)?>
-                    <?=valida_url_youtube($url_vide_youtube)?>                                    
+                    <div class="left-col contenedor_izquierdo">
+                      <div class="thumbs">                    
+                          <?=$imagenes["preview"]?>                            
+                      </div>
+                      <div class="big"> 
+                            <div class="tab-content">
+                              <?=$imagenes["imagenes_contenido"]?>                    
+                            </div>                                                  
+                      </div>                
+                    </div> 
                   <?=end_row()?>
-              </div>            
-    </section>
-  </div>
+                </div> 
+                <div class="col-lg-4">                  
+                    
+                    <?=n_row_12()?>                  
+                      <p class="informacion_text">                        
+                        INFORMACIÓN
+                      </p>
+                    <?=end_row()?>
+                    <br>
+                    <?=n_row_12()?>                  
+                          <?=$this->load->view("btn_pregunta");?>      
+                    <?=end_row()?>
+                    <?=n_row_12()?>                  
+                      <?=creta_tabla_colores($color , $flag_servicio)?>
+                    <?=end_row()?>
+                    <?=n_row_12()?>
+                      <?=get_tipo_articulo($flag_nuevo , $flag_servicio)?>
+                    <?=end_row()?>
+                    <div class="separador"></div>
+                    <?=n_row_12()?>
+                      <p class="">
+                        VENDEDOR
+                      </p>
+                      <?=crea_nombre_publicador_info($usuario , $id_publicador);?>
+                      <div>
+                        <a href="../search/?q3=<?=$id_publicador?>" 
+                          style='margin-top: 10px;'
+                          class='valoracion_persona_principal'>
+                          <div class="valoracion_persona"></div>                        
+                        </a>
+                      </div>
+                    <?=end_row()?>
+                    <div class="separador"></div>
+                    <?=n_row_12()?>
+                      <div>
+                        <strong>
+                          <?=get_entrega_en_casa($entregas_en_casa , $flag_servicio)?>
+                        </strong>
+                      </div>
+                      <div>
+                          <?=get_contacto_cliente(
+                          $telefono_visible ,                         
+                          $in_session,
+                          $usuario)?>                    
+                      </div>
+                    <?=end_row()?>
+                    <div class="separador">                      
+                    </div>
+                    <?=n_row_12()?>
+                      <?=$this->load->view("social", $info_social)?>
+                    <?=end_row()?>
+                    <div style="border: solid 1px">
+                    </div>
+                </div> 
+              </div>                          
+              <div class="col-lg-4">   
+                <?=n_row_12()?>    
+                <?=valida_editar_servicio(
+                  $id_usuario_servicio , 
+                  $id_usuario , 
+                  $in_session,  
+                  $id_servicio)?>
+                    
+                <h1 class="nombre_producto_servicio">
+                    <?=substr(strtoupper($nombre_servicio), 0 , 70);?>
+                </h1>
+                <div class="contenedor_derecho" >                
+                  <div class="contenedor_informacion_producto">                    
+                    <div>
+                      <h2 class="white texto_precio">
+                        <?=valida_text_servicio(
+                          $flag_servicio, 
+                          $precio , 
+                          $id_ciclo_facturacion )?>
+                      </h2>
+                    </div>                                        
+                    <?=get_text_costo_envio($flag_servicio , $costo_envio)?>
+                    <?=$this->load->view("form_compra" , $info_compra)?>            
+
+                    
+  
+                  </div>  
+                </div>
+                <?php if($flag_servicio == 0): ?>
+                        <?php if($existencia > 0): ?>
+                            <div class="text_en_existencia">                              
+                              <?=get_text_diponibilidad_articulo($existencia , $flag_servicio)?>
+                            </div>                                                              
+                        <?php endif; ?>
+                <?php endif; ?>            
+                <?=end_row()?>    
+              </div>
+    </div>
+    <div class="contenedor_info_producto">
+      <?=n_row_12()?>          
+        <div 
+            class="col-lg-12" 
+            class="contenedor_sobre_el_producto">
+            <?=get_descripcion_servicio($descripcion , $flag_servicio)?>
+            <?=valida_url_youtube($url_vide_youtube)?>
+        </div>        
+      <?=end_row()?>    
+    </div>
+<?=end_row()?>
+<?=n_row_12()?>  
+    <div class="place_valoraciones"></div>  
 <?=end_row()?>
 <?=n_row_12()?>
-  <div style="width: 80%;margin:0 auto;">
-    <div class="place_tambien_podria_interezar"></div>
+  <div class="col-lg-12">
+    <div class="place_tambien_podria_interezar"></div>  
   </div>
 <?=end_row()?>
 
-<?=n_row_12()?>
-  <div style="width: 80%;margin:0 auto;">
-    <div class="place_valoraciones"></div>
-  </div>
-<?=end_row()?>
+
 </main>
 <script type="text/javascript" src="<?=base_url('application')?>/js/principal.js">        
 </script>
@@ -153,8 +203,121 @@ value="<?=$desde_valoracion?>"
 class='desde_valoracion'>
 <link rel="stylesheet" type="text/css" href="<?=base_url('application')?>/css/main.css">
 <link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css'>
+
 <style type="text/css">
-  .valoracion_persona_principal:hover{
-    cursor: pointer;
+  .contenedor_info_producto{
+    width: 95%!important;
+    margin: 0 auto;
+  }
+  .contenedor_izquierdo{
+    width: 100%!important;
+  }
+  .contenedor_derecho{
+    width: 100%!important; 
+    background: black;
+    padding: 20px;
+    height: 430px;    
+  }
+  .contenedor_derecho_nombre{
+    width: 95%!important;     
+  }
+
+  .informacion_text{
+    font-size: 1.7em;    
+    color: #0a1339;
+  }
+  .nombre_producto_servicio{
+    font-size: 2.5em;
+    margin-top: 0!important;    
+    margin-bottom:  0!important;    
+    padding: 0!important;
+    background: black;
+    color: white;
+    
+  }  
+  .por_vendedor{
+    color: white!important;    
+    background: black;
+    font-weight: bold;
+    padding: 2px;
+  }
+  .publicado_por{        
+    color: white!important;    
+  }
+  .publicado_por:hover{     
+    color: white!important;
+  }   
+  .texto_precio{
+    font-weight: bold; 
+  }  
+  .pregunta_vendedor_servicio{
+
+  }
+  .a_pregunta_vendedor{
+    background: #f5f5f5;
+    color: #010a17 !important;
+    padding: 8px;
+    text-decoration: none !important;
+    border: solid 1.5px;
+    font-weight: bold;
+  }
+  .a_pregunta_vendedor:hover{
+    color: white!important;
+  }
+  .titulo_sobre_el_producto{
+    margin-top: 65px!important;
+    font-weight: bold;
+  }
+  #AddToCart{
+    background: #fff !important;
+    color: #00060c !important;
+  }
+  .text_colores_disponibles{
+    color: white;    
+  }
+  .informacion_colores_disponibles{    
+    font-size: 1.2em;
+  }
+  .contenedor_informacion_colores{
+    margin-top: 20px;  
+  }
+  .contenedor_descripcion_servicio{
+    background: white;
+  }
+  .contenedor_sobre_el_producto{
+    
+  }
+  .editar_button{    
+    text-align: right;
+    z-index: 2878787;
+
+  }
+  .separador{
+    margin-top: 20px;
+  }
+  .informacion_vendedor_descripcion a{
+    color: black;
+    font-weight: bold;
+  }
+  .text_en_existencia{
+    color: #001330;
+    font-size: 1.1em;
+    position: absolute;
+    bottom: 0;
+    width: 93% !important;
+    background: #eceefe;
+    padding: 5px;
+    font-weight: bold;
+  }
+  .numero_piezas{
+    font-weight: bold;
+    font-size: 1.2em;
+    color: white!important;
+  }
+  @media only screen and (max-width: 768px) {
+    .contenedor_info_producto{
+      width: 100%!important;
+      margin: 0 auto;
+    }
   }
 </style>

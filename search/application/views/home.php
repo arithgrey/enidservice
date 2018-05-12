@@ -4,34 +4,21 @@
         </div>        
     <?=end_row()?>    
 <?php endif;?>
-<?=n_row_12()?>    
-    <div style="border-bottom:solid 1px;padding: 4px;">
-        <?=n_row_12()?>
-            <div style="width: 50%;margin:0 auto;">
-                <div class="col-lg-4">                                    
-                    <a  
-                        href="../login?action=nuevo" 
-                        style="font-size: 1em; color: black;"
-                        >
-                        ANUNCIA TUS ARTÍCULOS  AQUÍ!
+   
+<?=n_row_12();?>        
+    
+            <div class='contenedor_anuncios_home'>
+                <div class='contenedor_anunciate'>
+                    <a  href="../login?action=nuevo" 
+                        class='anuncia_articulos'>
+                        ANUNCIA TUS ARTÍCULOS AQUÍ!
                         <i class="fa fa-chevron-circle-right"></i>
                     </a> 
                 </div>
-                <div class="col-lg-4">                                    
-                    <a  
-                        href="../forma_pago/?info=" 
-                        style="font-size: 1em; color: black;">
-                        FORMAS DE PAGO
-                        <i class="fa fa-chevron-circle-right">                        
-                        </i>
-                    </a> 
-                </div>  
-                <div class="col-lg-4">                                          
-                </div>  
-            </div>        
-        <?=end_row()?>         
-    </div>        
-<?=end_row()?>                       
+                
+            </div>                  
+    
+<?=end_row();?>                       
 <?php    
 
     $num_servicios_encontrados =  $servicios["num_servicios"];
@@ -53,12 +40,13 @@
 ?>
 <link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css'>
 <main>
-    <div style="width: 95%;margin-top: 20px;">                            
+    <div style="margin-top: 30px;">                            
             <div class="col-lg-2">      
                 <?=n_row_12()?>
-                    <div style="font-size: 1.5em;text-align: center;margin-bottom: 5px;">
+                    <div class='informacion_busqueda_productos_encontrados'>
                         <i class="fa fa-search strong">                    
-                        </i><?=$busqueda?>(<?=$num_servicios?> PRODUCTOS)
+                        </i>
+                        <?=$busqueda?>(<?=$num_servicios?> PRODUCTOS)
                     </div>
                 <?=end_row()?>
                        
@@ -70,7 +58,7 @@
                     </span>
                 </div>  
                 <?php endif;?>
-                <div style="border: solid black .7px;padding: 3px;">
+                <div class='contenedor_menu_productos_sugeridos'>
                     <?php
                         if ($es_movil == 0){                            
 
@@ -119,7 +107,11 @@
                             $extra = "style='margin-top:30px;'";          
                         } 
                         echo "<div class='col-lg-3' ".$extra." >";  
-                        echo $row;
+                        echo "<div class='row'>";
+                            echo "<center>";
+                                echo $row;
+                            echo "</center>";  
+                        echo "</div>";  
                         echo "</div>";  
                         $flag ++;
                         if ($flag == 4) {
@@ -140,3 +132,46 @@
     </div>    
 </main>
 
+<style>
+
+.contenedor_anuncios_home{
+    width: 50%;margin:0 auto;    
+} 
+.anuncia_articulos,.btn_formas_pago{
+    font-size: 1em; color: black;
+}
+.informacion_busqueda_productos_encontrados{
+    font-size: 1em;    
+}
+.contenedor_menu_productos_sugeridos{
+    border: solid black .7px;padding: 3px;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .contenedor_anuncios_home{
+        width: 100%;margin:0 auto;
+    }
+    .contenedor_anunciate{
+        background: #0231fc;
+        color:white;
+        padding:5px;        
+    }
+    .contenedor_anunciate a{
+        color:white!important;
+    }
+    .contenedor_formas_pago{
+        display:none;
+    }
+    .contenedor_menu_productos_sugeridos{
+        display: none;
+    }
+    .informacion_busqueda_productos_encontrados{        
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    
+}
+
+}
+</style>

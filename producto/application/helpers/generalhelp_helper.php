@@ -5,13 +5,13 @@ function valida_editar_servicio($usuario_servicio , $id_usuario , $in_session , 
   $editar ="";
   if ($in_session == 1 ) {      
       $href="../planes_servicios/?action=editar&servicio=".$id_servicio;
-      $editar_button ="<div class='text-right'>                        
-                        <a href='".$href."'>
-                          <span class='a_enid_blue_sm'>
-                            <span class='fa fa-pencil'></span>
-                            EDITAR
-                          </span>                      
-                        </a>
+      $editar_button ="<div class='a_enid_black_sm editar_button'>                        
+                        
+                        <a href='".$href."' 
+                          style='color:white!important;' >                          
+                          <span class='fa fa-pencil'></span>
+                          EDITAR                        
+                        </a>                        
                       </div>";
       $editar =($id_usuario ==  $usuario_servicio)?$editar_button:"";
   }
@@ -35,14 +35,27 @@ function valida_maximo_compra($flag_servicio, $existencia){
 function crea_nombre_publicador($usuario , $id_usuario){
   
   $nombre =  $usuario[0]["nombre"]; 
-  return "<div>
-            POR
+  return "<div class='informacion_vendedor'>
+            <span class='por_vendedor'>
+              POR
+            <span>
             <a href='../search/?q3=$id_usuario&vendedor=$nombre'
-              class='publicado_por' style='color: blue;'>  
+              class='publicado_por' >  
               ".strtoupper($nombre) ."
             </a> 
           </div>";
 }
+function crea_nombre_publicador_info($usuario , $id_usuario){
+  
+  $nombre =  $usuario[0]["nombre"]; 
+  return "<div class='informacion_vendedor_descripcion'>
+              <a href='../search/?q3=$id_usuario&vendedor=$nombre'>  
+              POR                    
+              ".strtoupper($nombre) ."
+            </a> 
+          </div>";
+}
+
 /**/
 function get_text_periodo_compra($flag_servicio){
   if($flag_servicio == 0){
@@ -71,7 +84,8 @@ function get_valor_variable($variable , $valor){
 function get_text_diponibilidad_articulo($existencia , $flag_servicio){
   if($flag_servicio == 0 ){
     if($existencia > 0){    
-        return "¡Apresúrate! solo hay " .$existencia." en existencia ";      
+        $text =  "¡Apresúrate! solo hay " .$existencia." en existencia ";      
+        return strtoupper($text);
     }
   }
   /**/
@@ -79,51 +93,33 @@ function get_text_diponibilidad_articulo($existencia , $flag_servicio){
 /**/
 function creta_tabla_colores($text_color , $flag_servicio ){
 
+  $final ="";
   if ($flag_servicio == 0) {    
     $arreglo_colores = explode(",", $text_color);
     $num_colores=  count($arreglo_colores);  
     $info_title ="";  
 
     if($num_colores > 0){
-      if ($num_colores>1) {
-        $info_title ="<div class='strong' >- Colores disponibles</div>";    
-      }else{
-        $info_title ="<div class='strong'>- Color disponible</div>";    
-      }   
+      $info_title = ($num_colores>1)?"COLORES DISPONIBLES":"COLOR DISPONIBLE";      
     }
     $info ="";
     $v =0;
-    for($z=0; $z <$num_colores; $z++){       
+    for($z=0; $z <count($arreglo_colores); $z++){       
         $color =  $arreglo_colores[$z]; 
-        $estyle = "style='background:$color;width:100px;height:40px;' ";
-        $info .= "<div $estyle class='col-lg-3'></div>";
+        $estyle = "style='background:$color;height:40px;' ";
+        $info .= "<div $estyle class='col-lg-4'></div>";
         $v ++;
-    }  
+    }
     if($v>0){    
-      $final = $info_title;
-      $final .="<div style='height:110px;overflow:auto;'>";
-        $final .= $info;
+      $final  ="<div class='contenedor_informacion_colores'> ";
+        $final .= "<div class='informacion_colores_disponibles'>".$info_title."</div>";        
+          $final .= $info;        
       $final .="</div>";
     }
-
     return $final;
   }
 
 }
-/*
-function get_text_existencia($existencia){
-  
-  $text = " ";  
-  if($existencia >1){    
-      $text = n_row_12();
-      
-      $text .= "<li><span style='font-size:1em;'>- Sólo quedan " .$existencia." ordena ahora!</span></li>";
-      $text .= end_row();
-  }
-  return $text;
-
-}
-*/
 /**/
 function get_tipo_articulo($flag_nuevo , $flag_servicio){
 
@@ -174,38 +170,23 @@ function get_descripcion_servicio($descripcion , $flag_servicio){
   
   $extra_info ="style='font-size:.9em;'";
   $extra ="style='padding:5px;margin-top:10px;'";
-
-  $servicio =" Sobre el producto ";
-  if($flag_servicio ==  1){
-    $servicio =" Sobre el servicio ";
-  }
+  $servicio = ($flag_servicio ==  1)?"SOBRE EL SERVICIO": "SOBRE EL PRODUCTO";
   
 
-  return "<div 
-          style='background: #0067cc;
-          color: white; padding:2px;text-transform:uppercase;margin-top:40px;'>    
-            ".$servicio."
-          </div>
-          <div ".$extra.">
-            <p ".$extra_info.">
-              " . $descripcion ."
-            </p>
-          </div>";
-}
-/**/
-function get_text_nombre_servicio($nombre_servicio){
-
-  $extra = " style='text-transform: uppercase;font-size:1.2em;color:white;padding:3px;background:#022344;'  ";
-  if(strlen($nombre_servicio) > 60){     
-     $extra = " style='text-transform: uppercase;font-size:1.1em;color:white;padding:3px;background:#022344;'  ";
-  }if(strlen($nombre_servicio) > 100){     
-     $extra = " style='text-transform: uppercase;font-size:1em;color:white;padding:3px;background:#022344;'  ";
+  if (strlen(trim(strip_tags($descripcion))) >10 ){
+    return "<div class='contenedor_descripcion_servicio'>    
+            <h3 class='titulo_sobre_el_producto'>
+              ".$servicio."
+            </h3>          
+            <div ".$extra.">
+              <p ".$extra_info.">
+                " . strip_tags($descripcion) ."
+              </p>
+            </div>
+          </div>";  
   }
-
-  return "<h1 ".$extra.">" .$nombre_servicio."</h1>";
   
 }
-
 /**/
 function valida_text_servicio($flag_servicio , $precio_unidad , $id_ciclo_facturacion){
     
@@ -226,13 +207,8 @@ function valida_text_servicio($flag_servicio , $precio_unidad , $id_ciclo_factur
         $text ="Precio a convenir";       
       }
     }
-    $text_final ='
-    <div class="price-shipping">
-      <div class="price" id="price-preview" style="font-size: 1.2em;">
-            '.$text.'          
-      </div>                    
-    </div>';                  
-    return $text_final;
+                     
+    return $text;
     
 }
 /**/

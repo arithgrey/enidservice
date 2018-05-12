@@ -1,27 +1,30 @@
 <div style="margin-top: 100px;">
-	<center>
-		<h3 style="font-size: 2em;" class="black strong">										
-			SÉ EL PRIMERO EN REVISAR ESTE PRODUCTO
-		</h3>
-	</center>	
-</div>
-<div class="btn_escribir_valoracion" style="margin-top: 30px;">
-	<center>
-		<a class="escribir_valoracion" href="../valoracion?servicio=<?=$servicio?>" 
-			style="color: white!important">
-			ESCRIBE UNA RESEÑA 
-			<i class="fa fa-chevron-right ir"></i>
-		</a>
-	</center>	
-</div>
-<div class="btn_escribir_valoracion" style="margin-top: 20px;">
-	<center>
+	<div class="col-lg-12">	
+		<div class="col-lg-12">	
+			<div class="col-lg-12">	
+				<h3 style="font-size: 2em;" class="black strong">										
+					SÉ EL PRIMERO EN REVISAR ESTE PRODUCTO
+				</h3>
+				<div class="btn_escribir_valoracion" style="margin-top: 30px;">	
+						<a class="escribir_valoracion" href="../valoracion?servicio=<?=$servicio?>" 
+							style="color: white!important">
+							ESCRIBE UNA RESEÑA 
+							<i class="fa fa-chevron-right ir"></i>
+						</a>
+					
+				</div>
+				<div class="btn_escribir_valoracion" style="margin-top: 20px;">
+						<a class="a_enid_black" href="../recomendacion/?q=<?=$id_usuario?>" 
+							style="color: white!important">
+							MÁS VALORACIONES DEl VENDEDOR
+							<i class="fa fa-chevron-right ir"></i>
+						</a>
+					
+				</div>
 
-		<a class="a_enid_black" href="../recomendacion/?q=<?=$id_usuario?>" 
-			style="color: white!important">
-			VE MÁS VALORACIONES DEl VENDEDOR
-			<i class="fa fa-chevron-right ir"></i>
-		</a>
-	</center>	
+			</div>
+		</div>
+	</div>
 </div>
+
 <link rel="stylesheet" type="text/css" href="../css_tema/template/valoracion.css">

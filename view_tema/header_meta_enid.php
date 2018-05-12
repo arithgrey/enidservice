@@ -8,9 +8,8 @@
         Anuncia tus productos o servicios en Enid Service
     </title>    
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">        
-    
-    <!--Google-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
     <?=meta('keywords', $meta_keywords . " ");?>    
     <?=meta('author', 'Enid Service');?>        
     <meta name="description" content="<?=$desc_web;?>"/>
@@ -64,7 +63,7 @@
     <meta itemprop="address" content="Eje Central Lázaro Cárdenas 38, Centro Histórico, Centro, 06000 Ciudad de México, CDMX, Local 406">
     <meta itemprop="url" content="<?=base_url()?>">
     <meta itemprop="photo" content="<?=$url_img_post?>">
-    <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">    
+    <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">        
     <script src="../js_tema/jquery.min.js">
     </script>    
     <script src="../js_tema/bootstrap.min.js">

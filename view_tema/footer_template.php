@@ -124,9 +124,7 @@
             <a class='black link_menu_footer' href="../contacto/#envio_msj">
                - Servicio al cliente
             </a>
-        </li>
-        
-        
+        </li>        
         <li>
             <a class='black link_menu_footer' href="../notificar">
                 - Notificar pagos
@@ -156,7 +154,11 @@
                 &nbsp;
             </li>
             
-            
+            <li>
+                <a class='black link_menu_footer' href="../forma_pago/?info=">
+                    - Formas de pago
+                </a>
+            </li>
             <li>
                 <a  class='black link_menu_footer strong' 
                     href="../faq/" 
@@ -256,7 +258,9 @@
     });
 </script>
 <link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css">
+
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css">
+
 </body>
 </html>
 <link href="../css_tema/template/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">

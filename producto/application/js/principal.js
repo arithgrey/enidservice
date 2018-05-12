@@ -12,7 +12,6 @@ function carga_productos_sugeridos(){
 
 
 	url =  "../tag/index.php/api/sugerencia/servicio/format/json/";		
-
 	data_send = {"servicio" : get_option("servicio")}	
 	
 	$.ajax({

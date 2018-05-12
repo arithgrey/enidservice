@@ -1,27 +1,10 @@
 <?php
-    $style_card="style='position:relative;display:-webkit-box;
-        display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:
-        vertical;-webkit-box-direction:normal;
-        -webkit-flex-direction:column;-ms-flex-direction:column;
-        flex-direction:column;background-color:#fff;
-        border:1px solid rgba(0,0,0,.125);
-        border-radius:.25rem;
-        height: 400px!important;
-        width:100%;' ";
-
-    $style_img_card ="style='height: 260px;' ";
-    $style_card_block = '
-    -webkit-box-flex:1;-webkit-flex:1 1 auto;-ms-flex:1 1 auto;flex:1 1 auto;
-    padding:1.2rem; border-top-style: solid;border-top-width: .9px;margin-top: 0px;
-    margin-left: 10px;';
 
     $extra_color ="style='margin-left:5px;color: black;font-weight:bold;'";
     $list ="";  
-    $flag =0;    
-        
+    $flag =0;            
         $nombre_servicio =  $servicio["nombre_servicio"];             
         $id_servicio  =  $servicio["id_servicio"];        
-        
         
         $flag_envio_gratis =  $servicio["flag_envio_gratis"];
         $text_extra =  is_servicio($servicio);        
@@ -42,9 +25,6 @@
             $costo_envio =  $servicio["costo_envio"]["text_envio"]["cliente_solo_text"];                 
         } 
         
-        
-
-
         $id_ciclo_facturacion =  $servicio["id_ciclo_facturacion"];
         
         $extra_url =  "";
@@ -83,7 +63,7 @@
 ?>
 
 
-<div <?=$style_card?> class='info_producto'>
+<div class='info_producto'>
     <?=n_row_12()?>
         <div style="position:absolute;top:180px;margin-left: 5px;z-index: 100">
             <?=get_precio_producto($url_info_producto,$precio,$costo_envio,$flag_servicio,
@@ -92,16 +72,18 @@
     <?=end_row()?>
     <?=n_row_12()?>
         <center>
-            <div <?=$style_img_card?>>
+            <div class='contenedor_principal_imagen_producto'>
                 <a href="<?=$url_info_producto?>" >    
-                    <img src="<?=$url_img?>" alt="<?=$metakeyword?>" title="Ver artículo"
-                        onerror="this.src='<?=$url_img_error?>'" 
-                        style="width: 95%;height: 88%;margin-top:10px;"> 
+                    <img 
+                    src="<?=$url_img?>" alt="<?=$metakeyword?>" 
+                    title="Ver artículo"
+                    onerror="this.src='<?=$url_img_error?>'" 
+                    class='imagen_producto'> 
                 </a>
             </div>
         </center>
     <?=end_row()?>
-    <div <?=$style_img_card;?> class='card-block' >            
+    <div class='contenedor_principal_informacion_producto card-block' >            
         <div style="position:relative;">                             
             <?php if($in_session ==  1):?>
                 <?=n_row_12()?>
@@ -138,13 +120,69 @@
     </div>
     <?php if($flag_servicio ==  0):?>
             <?=n_row_12()?>
-                <div style="background: black;color: white;font-size: .8em;
-                        text-align:left!important;
-                        padding: 3px;">
+                <div class='informacion_costo_envio'>
                     <?=strtoupper($costo_envio)?>
                 </div>    
             <?=end_row()?>
     <?php endif; ?>                                    
 </div>
                                              
-            
+<style type="text/css">
+    .imagen_producto{
+        width: 95%;height: 90%;margin-top:10px;
+    }
+    .contenedor_principal_imagen_producto{
+        height: 265px;
+    }
+    .contenedor_principal_informacion_producto{
+        height: 265px;   
+    }
+    .info_producto{
+        position:relative;display:-webkit-box;
+        display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:
+        vertical;-webkit-box-direction:normal;
+        -webkit-flex-direction:column;-ms-flex-direction:column;
+        flex-direction:column;background-color:#fff;
+        border:1px solid rgba(0,0,0,.125);
+        border-radius:.25rem;
+        height: 410px!important;
+        width:95%;
+    }
+    .informacion_costo_envio{
+        background: black;color: white;font-size: .8em;
+        text-align:left!important;
+        padding: 3px;
+    }
+    @media only screen and (max-width: 768px) {
+
+        .imagen_producto{
+            width: 99%!important;
+            height: 100%;
+            margin-top:10px;
+        }
+        .contenedor_principal_imagen_producto{
+            height: 370px;
+        }
+        .contenedor_principal_informacion_producto{
+            height: 270px;   
+        }
+        .info_producto{
+            position:relative;display:-webkit-box;
+            display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:
+            vertical;-webkit-box-direction:normal;
+            -webkit-flex-direction:column;-ms-flex-direction:column;
+            flex-direction:column;background-color:#fff;
+            border:1px solid rgba(0,0,0,.125);
+            border-radius:.25rem;
+            height: 510px!important;
+            width:100%;
+            margin-top: 12px;
+        }
+        .informacion_costo_envio{
+            background: black;
+            color: white;
+            font-size: .95em!important;            
+            padding: 5px;
+        }
+    }
+</style>

@@ -1,18 +1,23 @@
 <?php	
 	$criterios = array("RELEVANTE" , "RECIENTE" );
 ?>
-<div>
-	<center>
-		<h3 style="font-size: 2em;" class="black">										
-			VALORACIONES Y RESEÑAS
-		</h3>
-		<a class="a_enid_black" href="../recomendacion/?q=<?=$id_usuario?>" 
-			style="color: white!important">
-			VE MÁS VALORACIONES DEl VENDEDOR
-			<i class="fa fa-chevron-right ir"></i>
-		</a>
-	</center>
-</div>
+<br>
+<?=n_row_12()?>
+	<div class="col-lg-12">
+		<div class="col-lg-12">
+			<div class="col-lg-12">
+				<h3 style="font-size: 2em;" class="black">										
+					VALORACIONES Y RESEÑAS
+				</h3>
+				<a class="a_enid_black" href="../recomendacion/?q=<?=$id_usuario?>" 
+					style="color: white!important">
+					VE MÁS VALORACIONES DEl VENDEDOR
+					<i class="fa fa-chevron-right ir"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+<?=end_row()?>
 <hr>
 <table style="width: 100%">
 	<tr>
