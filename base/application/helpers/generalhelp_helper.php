@@ -1,6 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+function valida_activo_ventas_mayoreo($estado_actual , $ventas_mayoreo){
+
+
+    if ($estado_actual == $ventas_mayoreo ) {
+      return "button_enid_eleccion_active";
+    }
+
+}
 /**/
 function valida_activo_informes_por_telefono($valor , $valor_usuario){
   if($valor ==  $valor_usuario){

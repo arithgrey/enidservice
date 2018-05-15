@@ -32,6 +32,19 @@
         return  $this->db->query($query_update);                        
     }
     /**/
+    function update_ventas_mayoreo($param){
+
+        $venta_mayoreo = $param["venta_mayoreo"];
+        $id_servicio =  $param["servicio"];
+        $query_update = "UPDATE servicio 
+                            SET 
+                                venta_mayoreo =  $venta_mayoreo 
+                            WHERE 
+                                id_servicio =  '".$id_servicio."'
+                            LIMIT 1";
+        return  $this->db->query($query_update);                           
+    }
+    /**/
     function elimina_color_servicio($param){
         
         $colores =  $this->get_colores_por_servicio($param);

@@ -3,6 +3,8 @@ $(document).on("ready", function(){
 	$("footer").ready(valida_seccion_inicial);
 	/**/
 	$(".btn_soy_nuevo").click(mostrar_seccion_nuevo_usuario);
+	$(".btn_soy_nuevo_simple").click(mostrar_seccion_nuevo_usuario);
+
 	$(".form_sesion_enid").submit(valida_form_session);
 	$(".form-pass").submit(recupera_password);
 	$("#olvide-pass").click(carga_mail);

@@ -43,15 +43,14 @@
                                                 strlen($row["nombre_servicio"]);
                                             ?>
                                             
-                                            
-                                                <?=$articulo?>
-                                                <div 
+                                            <?=$articulo?>
+                                            <div 
                                                     class="pull-right" 
                                                     title="Personas que han visualizado este  producto">
                                                     <span class="a_enid_black_sm_sm" >
                                                         <?=$row["vistas"]?>
                                                     </span>
-                                                </div>                                            
+                                            </div>                                            
                                         </li>
                                     </a>
                                 <?php endforeach; ?>                      

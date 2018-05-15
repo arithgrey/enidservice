@@ -19,6 +19,7 @@
     $id_ciclo_facturacion = 0;
     $entregas_en_casa = 0;
     $telefono_visible = 0;
+    $venta_mayoreo = 0;
     foreach ($servicio  as $row){
         
         $id_servicio =   $row["id_servicio"];
@@ -39,6 +40,7 @@
         $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
         $entregas_en_casa =  $row["entregas_en_casa"];
         $telefono_visible = $row["telefono_visible"];
+        $venta_mayoreo =  $row["venta_mayoreo"];
     }    
     $url_web_servicio = $url_request."producto/?producto=".$id_servicio;    
     $url_productos_publico ="../producto/?producto=".$id_servicio."&q2=".$id_usuario;            
@@ -303,6 +305,8 @@
                     </div>
 
 
+
+
                 <?php else: ?>
                     <?=n_row_12()?>
                         <?php $this->load->view("servicios/seccion_servicios" , $en_servicios); ?>
@@ -313,6 +317,46 @@
                 <?php endif; ?>
 
 
+
+
+                <?php if($flag_servicio == 0 ):?>
+
+                    <div class="well">
+                        <?=n_row_12()?>                        
+                            <div class="col-lg-8">                                
+                                <div>   
+                                        <div class="col-lg-4">
+                                            <strong>
+                                                ¿TAMBIÉN VENDES ESTE PRODUCTO A 
+                                                PRECIOS DE MAYOREO?
+                                            </strong>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <a 
+                                                id='1'
+                                                class='button_enid_eleccion venta_mayoreo 
+                                                <?=valida_activo_ventas_mayoreo(1 , 
+                                                    $venta_mayoreo)?>'>
+                                                SI
+                                            </a>
+                                            <a  style="margin-left: 10px;"
+                                                id='0'
+                                                class='button_enid_eleccion venta_mayoreo
+                                                <?=valida_activo_ventas_mayoreo(0 , 
+                                                    $venta_mayoreo)?>'>
+                                                NO
+                                            </a>
+                                        </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4">
+                            
+                            </div>
+                        <?=end_row()?>
+                    </div>
+
+                <?php  endif;?>
             </div>
         
     </div>

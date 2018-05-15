@@ -19,12 +19,20 @@ class Servicio extends REST_Controller{
         
   }
   function telefono_visible_PUT(){
-        /**/
+      /**/
       $param =  $this->put();
       $param["id_usuario"] = $this->sessionclass->getidusuario();
       $db_response =  $this->serviciosmodel->update_telefono_visible($param);
       $this->response($db_response);
         
+  }
+  /**/
+  function ventas_mayoreo_PUT(){
+    /**/
+    $param =  $this->put();
+    $param["id_usuario"] = $this->sessionclass->getidusuario();
+    $db_response =  $this->serviciosmodel->update_ventas_mayoreo($param);
+    $this->response($db_response);
   }
   /**/
   function color_POST(){

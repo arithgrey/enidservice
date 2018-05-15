@@ -1,10 +1,19 @@
 <?php 
-	$nombre_vendedor = ($in_session==1)? 
-	$vendedor[0]["nombre"]." ".$vendedor[0]["apellido_paterno"]:"AL VENDEDOR";
+	
+	
+	$nombre_vendedor = "";
 	$telefono_visible =  $servicio[0]["telefono_visible"]; 
-	$telefono_contacto = 
-	(strlen($vendedor[0]["tel_contacto"]) >4)?$vendedor[0]["tel_contacto"]:
-	$vendedor[0]["tel_contacto_alterno"];
+	$telefono_contacto ="";
+	if ($in_session ==  1) {
+		$nombre_vendedor = $vendedor[0]["nombre"]." ".$vendedor[0]["apellido_paterno"];
+
+		
+		$telefono_contacto = 
+		(strlen($vendedor[0]["tel_contacto"]) >4)?$vendedor[0]["tel_contacto"]:
+		$vendedor[0]["tel_contacto_alterno"];	
+
+	}
+	
 
 	
 ?>

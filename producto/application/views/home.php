@@ -22,7 +22,7 @@
   /**/
   $entregas_en_casa =  0;
   $telefono_visible =  0;
-
+  $venta_mayoreo =  0;
   foreach($info_servicio["servicio"] as $row){
     
     $id_servicio =  $row["id_servicio"]; 
@@ -43,6 +43,7 @@
     $entregas_en_casa =  $row["entregas_en_casa"];
     $id_usuario_servicio =  $row["id_usuario"];
     $telefono_visible =  $row["telefono_visible"];
+    $venta_mayoreo =  $row["venta_mayoreo"];
   }
 
   $imagenes =  
@@ -62,130 +63,144 @@
     <div class="product-detail contenedor_info_producto">                    
               <div class="col-lg-8">
                 <div class="col-lg-8">                   
-                  <?=n_row_12()?>                  
-                    <div class="left-col contenedor_izquierdo">
-                      <div class="thumbs">                    
-                          <?=$imagenes["preview"]?>                            
-                      </div>
-                      <div class="big"> 
-                            <div class="tab-content">
-                              <?=$imagenes["imagenes_contenido"]?>                    
-                            </div>                                                  
-                      </div>                
-                    </div> 
-                  <?=end_row()?>
+                  <div class="row">
+                    <?=n_row_12()?>                  
+                      <div class="left-col contenedor_izquierdo">
+                        <div class="thumbs">                    
+                            <?=$imagenes["preview"]?>                            
+                        </div>
+                        <div class="big"> 
+                              <div class="tab-content">
+                                <?=$imagenes["imagenes_contenido"]?>                    
+                              </div>                                                  
+                        </div>                
+                      </div> 
+                    <?=end_row()?>
+                  </div>
                 </div> 
                 <div class="col-lg-4">                  
-                    
-                    <?=n_row_12()?>                  
-                      <p class="informacion_text">                        
-                        INFORMACIÓN
-                      </p>
-                    <?=end_row()?>
-                    <br>
-                    <?=n_row_12()?>                  
-                          <?=$this->load->view("btn_pregunta");?>      
-                    <?=end_row()?>
-                    <?=n_row_12()?>                  
-                      <?=creta_tabla_colores($color , $flag_servicio)?>
-                    <?=end_row()?>
-                    <?=n_row_12()?>
-                      <?=get_tipo_articulo($flag_nuevo , $flag_servicio)?>
-                    <?=end_row()?>
-                    <div class="separador"></div>
-                    <?=n_row_12()?>
-                      <p class="">
-                        VENDEDOR
-                      </p>
-                      <?=crea_nombre_publicador_info($usuario , $id_publicador);?>
-                      <div>
-                        <a href="../search/?q3=<?=$id_publicador?>" 
-                          style='margin-top: 10px;'
-                          class='valoracion_persona_principal'>
-                          <div class="valoracion_persona"></div>                        
-                        </a>
+                  <div class="row">  
+                    <div class="contenedor_central_info">
+                      <?=n_row_12()?>                  
+                        <p class="informacion_text">                        
+                          INFORMACIÓN
+                        </p>
+                      <?=end_row()?>
+                      <br>
+                      <?=n_row_12()?>                  
+                            <?=$this->load->view("btn_pregunta");?>      
+                      <?=end_row()?>
+                      <?=n_row_12()?>                  
+                        <?=creta_tabla_colores($color , $flag_servicio)?>
+                      <?=end_row()?>
+                      
+                      <div class='separador'></div>
+                      <?=n_row_12()?>                  
+                        <?=valida_informacion_precio_mayoreo($flag_servicio ,  $venta_mayoreo)?>
+                      <?=end_row()?>
+                      <?=n_row_12()?>
+                        <?=get_tipo_articulo($flag_nuevo , $flag_servicio)?>
+                      <?=end_row()?>
+                      <div class="separador"></div>
+                      <?=n_row_12()?>
+                        <p class="">
+                          VENDEDOR
+                        </p>
+                        <?=crea_nombre_publicador_info($usuario , $id_publicador);?>
+                        <div>
+                          <a href="../search/?q3=<?=$id_publicador?>" 
+                            style='margin-top: 10px;'
+                            class='valoracion_persona_principal'>
+                            <div class="valoracion_persona"></div>                        
+                          </a>
+                        </div>
+                      <?=end_row()?>
+                      <div class="separador"></div>
+                      <?=n_row_12()?>
+                        <div>
+                          <strong>
+                            <?=get_entrega_en_casa($entregas_en_casa , $flag_servicio)?>
+                          </strong>
+                        </div>
+                        <div>
+                            <?=get_contacto_cliente(
+                            $telefono_visible ,                         
+                            $in_session,
+                            $usuario)?>                    
+                        </div>
+                      <?=end_row()?>
+                      <div class="separador">                      
                       </div>
-                    <?=end_row()?>
-                    <div class="separador"></div>
-                    <?=n_row_12()?>
-                      <div>
-                        <strong>
-                          <?=get_entrega_en_casa($entregas_en_casa , $flag_servicio)?>
-                        </strong>
+                      <?=n_row_12()?>
+                        <?=$this->load->view("social", $info_social)?>
+                      <?=end_row()?>
+                      <div style="border: solid 1px">
                       </div>
-                      <div>
-                          <?=get_contacto_cliente(
-                          $telefono_visible ,                         
-                          $in_session,
-                          $usuario)?>                    
-                      </div>
-                    <?=end_row()?>
-                    <div class="separador">                      
                     </div>
-                    <?=n_row_12()?>
-                      <?=$this->load->view("social", $info_social)?>
-                    <?=end_row()?>
-                    <div style="border: solid 1px">
-                    </div>
+                  </div>  
                 </div> 
               </div>                          
               <div class="col-lg-4">   
-                <?=n_row_12()?>    
-                <?=valida_editar_servicio(
-                  $id_usuario_servicio , 
-                  $id_usuario , 
-                  $in_session,  
-                  $id_servicio)?>
-                    
-                <h1 class="nombre_producto_servicio">
-                    <?=substr(strtoupper($nombre_servicio), 0 , 70);?>
-                </h1>
-                <div class="contenedor_derecho" >                
-                  <div class="contenedor_informacion_producto">                    
-                    <div>
-                      <h2 class="white texto_precio">
-                        <?=valida_text_servicio(
-                          $flag_servicio, 
-                          $precio , 
-                          $id_ciclo_facturacion )?>
-                      </h2>
-                    </div>                                        
-                    <?=get_text_costo_envio($flag_servicio , $costo_envio)?>
-                    <?=$this->load->view("form_compra" , $info_compra)?>            
+                <div class="contenedor_venta">
+                  <?=n_row_12()?>    
+                  <?=valida_editar_servicio(
+                    $id_usuario_servicio , 
+                    $id_usuario , 
+                    $in_session,  
+                    $id_servicio)?>
+                      
+                  <h1 class="nombre_producto_servicio">
+                      <?=substr(strtoupper($nombre_servicio), 0 , 70);?>
+                  </h1>
+                  <div class="contenedor_derecho" >                
+                    <div class="contenedor_informacion_producto">                    
+                      <div>
+                        <h2 class="white texto_precio">
+                          <?=valida_text_servicio(
+                            $flag_servicio, 
+                            $precio , 
+                            $id_ciclo_facturacion )?>
+                        </h2>
+                      </div>                                        
+                      <?=get_text_costo_envio($flag_servicio , $costo_envio)?>
+                      <?=$this->load->view("form_compra" , $info_compra)?>            
 
-                    
-  
-                  </div>  
-                </div>
-                <?php if($flag_servicio == 0): ?>
-                        <?php if($existencia > 0): ?>
-                            <div class="text_en_existencia">                              
-                              <?=get_text_diponibilidad_articulo($existencia , $flag_servicio)?>
-                            </div>                                                              
-                        <?php endif; ?>
-                <?php endif; ?>            
-                <?=end_row()?>    
+                      
+    
+                    </div>  
+                  </div>
+                  <?php if($flag_servicio == 0): ?>
+                          <?php if($existencia > 0): ?>
+                              <div class="text_en_existencia">                              
+                                <?=get_text_diponibilidad_articulo($existencia , $flag_servicio)?>
+                              </div>                                                              
+                          <?php endif; ?>
+                  <?php endif; ?>            
+                  <?=end_row()?>    
               </div>
+          </div>
+          <div class="separador"></div>
+          <div class="col-lg-12">
+            <div class="contenedor_sobre_el_producto">
+                <?=get_descripcion_servicio($descripcion , $flag_servicio)?>
+                <?=valida_url_youtube($url_vide_youtube)?>
+            </div>        
+          </div>         
+
+          <div class="separador"></div>
+          <div class="col-lg-12">
+            <div class="place_valoraciones"></div>  
+          </div>
+          <div class="separador"></div>
+          <div class="col-lg-12">
+            <div class="place_tambien_podria_interezar"></div>  
+          </div>
+          
+          
     </div>
-    <div class="contenedor_info_producto">
-      <?=n_row_12()?>          
-        <div 
-            class="col-lg-12" 
-            class="contenedor_sobre_el_producto">
-            <?=get_descripcion_servicio($descripcion , $flag_servicio)?>
-            <?=valida_url_youtube($url_vide_youtube)?>
-        </div>        
-      <?=end_row()?>    
-    </div>
+    
 <?=end_row()?>
-<?=n_row_12()?>  
-    <div class="place_valoraciones"></div>  
-<?=end_row()?>
-<?=n_row_12()?>
-  <div class="col-lg-12">
-    <div class="place_tambien_podria_interezar"></div>  
-  </div>
-<?=end_row()?>
+
 
 
 </main>
@@ -265,8 +280,8 @@ class='desde_valoracion'>
     color: white!important;
   }
   .titulo_sobre_el_producto{
-    margin-top: 65px!important;
-    font-weight: bold;
+    margin-top: 65px!important;    
+    font-size: 2em;
   }
   #AddToCart{
     background: #fff !important;
@@ -284,9 +299,7 @@ class='desde_valoracion'>
   .contenedor_descripcion_servicio{
     background: white;
   }
-  .contenedor_sobre_el_producto{
-    
-  }
+  
   .editar_button{    
     text-align: right;
     z-index: 2878787;
@@ -314,10 +327,43 @@ class='desde_valoracion'>
     font-size: 1.2em;
     color: white!important;
   }
+  .contenedor_central_info{    
+    margin: 0 auto;
+    width: 90%!important;
+  }
+  .table_orden_1{
+    width: 50%;
+  }
+  .table_orden_2{
+    width: 40%;
+  }
+  .table_orden_3{
+    width: 10%;
+  }
   @media only screen and (max-width: 768px) {
     .contenedor_info_producto{
       width: 100%!important;
       margin: 0 auto;
+    }
+    .contenedor_central_info{    
+      margin: 0 auto;
+      width: 100%!important;
+    }
+    .contenedor_venta{
+      margin-top: 25px;
+    }
+    .table_orden_1{
+      width: 50%;      
+    }
+    .table_orden_2{
+      width: 0%;
+    }
+    .table_orden_3{
+      width: 50%;
+      text-align: right;
+    }
+    .contenedor_comentarios{
+      margin-top: 50px;
     }
   }
 </style>

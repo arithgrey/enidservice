@@ -1,4 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+function valida_informacion_precio_mayoreo($flag_servicio ,  $venta_mayoreo){
+        
+    $text=($flag_servicio == 0 && $venta_mayoreo ==1)
+    ?"TAMBIÉN REALIZA VENTAS A PRECIO DE MAYOREO <i class='fa fa-check-circle'></i>":"";
+   
+    return  $text;
+}
 /**/
 function valida_editar_servicio($usuario_servicio , $id_usuario , $in_session , $id_servicio){
   
@@ -174,7 +181,7 @@ function get_descripcion_servicio($descripcion , $flag_servicio){
   
 
   if (strlen(trim(strip_tags($descripcion))) >10 ){
-    return "<div class='contenedor_descripcion_servicio'>    
+    return "<div>    
             <h3 class='titulo_sobre_el_producto'>
               ".$servicio."
             </h3>          

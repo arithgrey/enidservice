@@ -82,4 +82,7 @@
 	.pagination > li > a, .pagination > li > span{
 		color: white!important;
 	}
+	.info_comentarios{
+		text-align: center;
+	}
 </style>

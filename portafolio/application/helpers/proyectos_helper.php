@@ -464,8 +464,11 @@ if(!function_exists('invierte_date_time')){
           $mensaje_final ="de los consumidores recomiendan";          
       }
       $valoraciones =  $numero_valoraciones[0];
+
       $num_valoraciones =  $valoraciones["num_valoraciones"];
-      $comentarios = $num_valoraciones." COMENTARIOS";
+      $text_comentarios =  ($num_valoraciones>1)?"COMENTARIOS":"COMENTARIO";
+      $comentarios = $num_valoraciones.$text_comentarios;
+
       $promedio =  $valoraciones["promedio"];
       $personas_recomendarian =  $valoraciones["personas_recomendarian"];
 
@@ -476,7 +479,7 @@ if(!function_exists('invierte_date_time')){
                             ".crea_estrellas($promedio_general)."
                             <span class='promedio_num'>".$promedio_general."</span>"."
                           </div>";
-      $parte_promedio .= "<table width='100%' class='text-center'>
+      $parte_promedio .= "<table width='100%'>
                             <tr>
                               ".get_td("<div class='info_comentarios'>".$comentarios."</div>")."
                             </tr>

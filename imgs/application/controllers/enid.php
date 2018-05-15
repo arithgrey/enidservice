@@ -25,7 +25,9 @@ class Enid extends CI_Controller {
         $img ="";
         foreach ($response as $row ){ 
             
-            echo "<img src='data:image/png;base64,".base64_encode($row["img"])."' style='width:100%'>";
+            
+                echo $row["img"];
+            
         } 
 
     }        

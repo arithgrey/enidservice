@@ -19,7 +19,8 @@ function carga_productos_sugeridos(){
 		type : "GET" , 
 		data: data_send, 
 			beforeSend : function(){} 					
-		}).done(function(data){			
+		}).done(function(data){	
+				
 			console.log(data);
 			if (data["sugerencias"] == undefined ){				
 				llenaelementoHTML(".place_tambien_podria_interezar" , data);		
