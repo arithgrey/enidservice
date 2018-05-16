@@ -20,6 +20,15 @@
                         PRODUCTOS SOLICITADOS
                     </a>
                 </li>  
+                <li class='li_menu'>
+                    <a  id='btn_repo_afiliacion'
+                        href="#tab_productos_publicos" 
+                        data-toggle="tab"                         
+                        class='black strong  btn_repo_afiliacion '>                        
+                        <i class="fa fa-check-circle"></i>
+                        CATEGORÍAS DESTACADAS
+                    </a>
+                </li>  
                 
                 <li  class='li_menu'>
                     <a  

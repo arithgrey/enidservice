@@ -173,6 +173,29 @@
         $result =  $this->db->query($query_get);
         return $result->result_array();             
     }
+    /**/
+    function  get_clasificaciones_destacadas($param){
+        
+        $query_get ="SELECT primer_nivel, count(0)total
+                    FROM servicio 
+                    WHERE 
+                    status =1 
+                    AND existencia >0 
+                    GROUP BY 
+                    primer_nivel
+                    ORDER BY count(0) DESC";
+        $result =  $this->db->query($query_get);
+        return $result->result_array(); 
+    }
+    /**/
+    function get_clasificaciones_primer_nivel_nombres($param){
+        
+        $query_get ="SELECT nombre_clasificacion ,id_clasificacion , flag_servicio  FROM clasificacion WHERE primer_nivel=1";
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+    }
+    
+    
 
 
 }

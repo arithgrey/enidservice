@@ -38,7 +38,15 @@ class clasificacion extends REST_Controller{
         $this->clasificacion_model->get_clasificaciones_por_id_clasificacion($param);
         $this->response($info_clasificacion);
     }
-    /**/
-    
+    /**/    
+    function categorias_destacadas_GET(){
+        
+        $param = $this->get();
+        $data_complete["clasificaciones"]=$this->clasificacion_model->get_clasificaciones_destacadas($param);
+        $data_complete["nombres_primer_nivel"] =
+        $this->clasificacion_model->get_clasificaciones_primer_nivel_nombres($param);
+        
+        $this->response($data_complete);
+    }    
     /**/
 }?>

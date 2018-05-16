@@ -46,13 +46,15 @@ class Home extends CI_Controller{
         if($this->agent->is_mobile()){
             $data_send["agrega_clasificaciones"] =0;
             $data["clasificaciones_departamentos"] =  "";
+            
         }else{
             $data["clasificaciones_departamentos"] =
             $this->carga_data_clasificaciones_busqueda();
             
         }
         
-        $servicios=  $this->busqueda_producto_por_palabra_clave($data_send);          
+        $servicios=  $this->busqueda_producto_por_palabra_clave($data_send);  
+        $categorias_destacadas =  $this->carga_categorias_destacadas("");        
         $data["servicios"] =  $servicios;
         if ($servicios["num_servicios"] > 0) {
             
@@ -81,6 +83,7 @@ class Home extends CI_Controller{
             $this->set_option("in_session" ,  0);
             $data["lista_productos"]= $this->agrega_vista_servicios($servicios["servicios"]);
             $data["q"] = $param["q"];
+            $data["categorias_destacadas"] = $categorias_destacadas;
             $this->principal->show_data_page($data , 'home');
             
         }else{
@@ -237,6 +240,18 @@ class Home extends CI_Controller{
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 
         return  $url_request;
+    }
+    /**/
+    private function carga_categorias_destacadas($param){
+                
+        $url = "tag/index.php/api/";
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");
+        $result = $this->restclient->get("clasificacion/categorias_destacadas/format/json/" 
+            , $param);
+        $response =  $result->response;
+        return json_decode($response , true );
     }
     /**/
 }

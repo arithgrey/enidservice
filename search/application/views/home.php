@@ -1,26 +1,4 @@
-<?php if ( strlen(trim($q)) ==  0):?>
-    <?=n_row_12()?>
-        <div class="contenedor_img_principal" >                
-        </div>        
-    <?=end_row()?>    
-<?php endif;?>
-   
-<?=n_row_12();?>        
-    
-            <div class='contenedor_anuncios_home'>
-                <div class='contenedor_anunciate'>
-                    <a  href="../login?action=nuevo" 
-                        class='anuncia_articulos'>
-                        ANUNCIA TUS ARTÍCULOS AQUÍ!
-                        <i class="fa fa-chevron-circle-right"></i>
-                    </a> 
-                </div>
-                
-            </div>                  
-    
-<?=end_row();?>                       
-<?php    
-
+<?php 
     $num_servicios_encontrados =  $servicios["num_servicios"];
     $servicios = $servicios["servicios"];        
     if($es_movil == 0){        
@@ -37,7 +15,49 @@
         $bloque_cuarto_nivel =  crea_seccion_de_busqueda_extra($cuarto_nivel, $busqueda); 
         $bloque_quinto_nivel =  crea_seccion_de_busqueda_extra($quinto_nivel, $busqueda); 
     }
+    /**/
+    $categorias_destacadas_orden =  sub_categorias_destacadas($categorias_destacadas);  
 ?>
+<?php if ( strlen(trim($q)) ==  0):?>
+    <?=n_row_12()?>
+        <div class="contenedor_img_principal" >                
+        </div>        
+    <?=end_row()?>    
+<?php endif;?>
+   
+<?=n_row_12();?>            
+            <div class='contenedor_anuncios_home'>
+                <div class='contenedor_anunciate'>
+                    <div>
+                        <a  href="../login?action=nuevo" 
+                            class='anuncia_articulos'
+                            style="color: white!important">
+                            ANUNCIA TUS ARTÍCULOS AQUÍ!
+                            <i class="fa fa-chevron-circle-right"></i>
+                        </a>
+
+                        <?php if($es_movil ==  0):?>
+                            <?php 
+                            foreach(crea_menu_principal_web($categorias_destacadas) as $row): ?>
+
+                                <a  href="?q=&q2=<?=$row['primer_nivel']?>" 
+                                    class='categorias_mas_vistas'
+                                    style='color: white!important'
+                                    >
+                                    <?=mayus($row["nombre_clasificacion"])?>                                        
+                                </a>
+                            <?php endforeach; ?>      
+                        <?php endif;?>               
+                    </div>
+                </div>              
+            </div>
+            
+            
+<?=end_row();?>
+                           
+
+
+
 <link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css'>
 <main>
     <div style="margin-top: 30px;">                            
@@ -85,9 +105,7 @@
                                 echo "<hr>";
                                 echo $bloque_quinto_nivel["html"];
                             }
-
                         }
-
                     ?>
 
                 </div>
@@ -129,16 +147,37 @@
                 <?php endif;?>
                 
         </div>
-    </div>    
+    </div>
+
+    <br>
+    <?=n_row_12()?>         
+        <div class="col-lg-2">            
+        </div>  
+        <div class="col-lg-10">
+            <p class='titulo_categorias'>
+                CATEGORIAS DESTACAGAS
+            </p>
+            <div class="row">
+                <?=crea_sub_menu_categorias_destacadas($categorias_destacadas_orden)?>
+            </div>
+        </div>
+    <?=end_row()?>
 </main>
 
 <style>
-
+.contenedor_categorias_y_anuncio{
+    width: 95%;
+}
 .contenedor_anuncios_home{
-    width: 50%;margin:0 auto;    
+    width: 100%;
+    margin:0 auto;    
+    background: #00223f;
 } 
 .anuncia_articulos,.btn_formas_pago{
-    font-size: 1em; color: black;
+    font-size: 1em; color: white;
+    background: #05757a;
+    padding: 2px;
+    margin-top: 5px;
 }
 .informacion_busqueda_productos_encontrados{
     font-size: 1em;    
@@ -146,16 +185,34 @@
 .contenedor_menu_productos_sugeridos{
     border: solid black .7px;padding: 3px;
 }
-
+.categorias_mas_vistas{
+     color: white!important;
+     margin-left: 20px;
+     margin-top: 3px;
+     padding: 3px;
+}
+.clasificaciones_sub_menu_ul{
+    display: inline-table;
+}
+.titulo_categorias{
+    font-size: 1.7em;
+    color: #0a1339;
+    font-weight: bold;
+}
+.text_categoria_sub_menu{
+    color: black;
+}
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
+  
     .contenedor_anuncios_home{
         width: 100%;margin:0 auto;
+        background: #00223f;        
     }
     .contenedor_anunciate{
         background: #0231fc;
-        color:white;
-        padding:5px;        
+        color:white!important;
+        padding:5px;
     }
     .contenedor_anunciate a{
         color:white!important;
@@ -170,7 +227,14 @@
         font-weight: bold;
         font-size: 1.2em;
     }
-    
+    .categorias_mas_vistas{
+        display: none;
+
+    }
+    .anuncia_articulos{
+        background: #0231fc!important; 
+
+    }    
 }
 
 }

@@ -63,8 +63,17 @@ class producto extends REST_Controller{
     /********************************************************/
     function q_GET(){
         
-        $param =  $this->get();         
-        $id_usuario =  get_info_variable($param , "id_usuario" );          
+        $param =  $this->get();        
+        
+        error_log($this->sessionclass->getidusuario()."-----------");
+        $id_usuario=($this->sessionclass->is_logged_in())?
+        $this->sessionclass->getidusuario():
+        get_info_variable($param , "id_usuario" );
+        
+
+
+
+
         $param["id_usuario"] =  $id_usuario;
         $this->registra_keyword($param);                                           
             /**/            
@@ -297,13 +306,11 @@ class producto extends REST_Controller{
         $this->set_option("servicios" , $nueva_data);
     }
     */
-    function registra_keyword($param){
-        $id_usuario =  $param["id_usuario"];
-        if($id_usuario == 0){
-            if(count($param["q"]) >0 ){
-                $this->qmodel->registra_keyword($param);   
-            }            
-        }
+    function registra_keyword($param){        
+        if(array_key_exists("q", $param) >0 && strlen(trim($param["q"]))>1 ){
+            $this->qmodel->registra_keyword($param);   
+        }            
+        
     }
     /**/
     function basic_servicio_GET(){

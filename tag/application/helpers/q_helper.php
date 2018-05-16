@@ -57,10 +57,12 @@ if(!function_exists('invierte_date_time')){
       return $text_nombre_servicio;
     }
     function get_info_variable($param , $nomber_variable ){
-      
-      $valor =0;
-      if(isset($param[$nomber_variable]) && $param[$nomber_variable] != null ){             
-          $valor = $param[$nomber_variable];
+     
+
+      $valor =0;      
+      if (array_key_exists($nomber_variable, $param) == 1  
+          && $param[$nomber_variable] != null ){
+        $valor = $param[$nomber_variable]; 
       }
       return $valor;
     }

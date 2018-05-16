@@ -42,3 +42,6 @@
       color: blue;
       font-weight: bold;
     }
+    .clasificaciones_sub_menu_ul{
+      display: inline-table;
+    }

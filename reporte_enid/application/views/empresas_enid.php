@@ -95,6 +95,28 @@
                 <?=end_row()?> 
                 <?=$this->load->view("secciones/keywords" );?>
             </div>
+
+            <div class="tab-pane" id="tab_productos_publicos">
+                <?=n_row_12()?>
+                    <span class="titulo_enid_sm">
+                        CATEGORÍAS DESTACADAS
+                    </span>
+                <?=end_row()?> 
+                <br>
+                <br>
+                <?=n_row_12()?>
+                    <?php 
+                        $categorias_destacadas_orden =  
+                        sub_categorias_destacadas($categorias_destacadas);  
+                    ?>
+                    <div class="row">
+                        <?=crea_repo_categorias_destacadas($categorias_destacadas_orden)?>
+                    </div>
+                <?=end_row()?>
+                
+            </div>
+
+            
             
         </div>
     </div>   
@@ -133,3 +155,13 @@
 <script type="text/javascript" src="<?=base_url('application/js/principal.js')?>">
 </script>
 <style type="text/css" src="../css_tema/template/metricas.css"></style>
+<style type="text/css">
+    .clasificaciones_sub_menu_ul{
+        display: inline-table;
+    }
+    .total_categoria{
+        background: black;
+        padding: 5px;
+        color: white;
+    }
+</style>

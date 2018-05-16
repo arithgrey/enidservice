@@ -1,4 +1,105 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+    
+    function crea_sub_menu_categorias_destacadas($param){      
+      $z =0;
+      $data_complete = [];
+
+      foreach ($param as $row) {      
+        
+        $primer_nivel = $row["primer_nivel"];
+        $total =  $row["total"];
+        $nombre_clasificacion =  $row["nombre_clasificacion"];
+        
+        if ($z == 0) {          
+          echo "<ul class='clasificaciones_sub_menu_ul'>";    
+        } 
+        $href ="?q=&q2=".$row["primer_nivel"];
+        echo "<li>
+              <a href='".$href."' class='text_categoria_sub_menu'>".$nombre_clasificacion."
+              </a>
+              </li>"; 
+        $z ++;
+        if ($z == 5) {          
+          $z =0;
+          echo "</ul>";    
+        }                 
+        /**/
+      }
+    }
+    /**/
+    function sub_categorias_destacadas($param){
+
+      $nombres_primer_nivel =  $param["nombres_primer_nivel"];
+        $z =0;
+        $data_complete =[];
+                
+        foreach ($param["clasificaciones"] as $row){
+            
+            $primer_nivel =  $row["primer_nivel"];
+            $total =  $row["total"];
+            $nombre_clasificacion =  "";
+            foreach ($param["nombres_primer_nivel"] as $row2){                
+                
+                $id_clasificacion = $row2["id_clasificacion"];
+                if($primer_nivel == $id_clasificacion ){
+                    $nombre_clasificacion =  $row2["nombre_clasificacion"];
+                    break;
+                }
+                
+                
+            }
+            $data_complete[$z]["primer_nivel"] =  $primer_nivel;
+            $data_complete[$z]["total"] =  $total;
+            $data_complete[$z]["nombre_clasificacion"] =  $nombre_clasificacion;
+            
+            if($z == 29){
+                break;
+            }
+            $z ++;
+            
+        }        
+        return $data_complete; 
+
+    }
+    /**/  
+    function mayus($variable){
+      $variable = strtr(strtoupper($variable),"àèìòùáéíóúçñäëïöü","ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ");
+      return $variable;
+    }    
+    /**/
+    function crea_menu_principal_web($param){
+        
+        $nombres_primer_nivel =  $param["nombres_primer_nivel"];
+        $z =0;
+        $data_complete =[];
+                
+        foreach ($param["clasificaciones"] as $row){
+            
+            $primer_nivel =  $row["primer_nivel"];
+            $total =  $row["total"];
+            $nombre_clasificacion =  "";
+            foreach ($param["nombres_primer_nivel"] as $row2){                
+                
+                $id_clasificacion = $row2["id_clasificacion"];
+                if($primer_nivel == $id_clasificacion ){
+                    $nombre_clasificacion =  $row2["nombre_clasificacion"];
+                    break;
+                }
+                
+                
+            }
+            $data_complete[$z]["primer_nivel"] =  $primer_nivel;
+            $data_complete[$z]["total"] =  $total;
+            $data_complete[$z]["nombre_clasificacion"] =  $nombre_clasificacion;
+            
+            if($z == 4){
+                break;
+            }
+            $z ++;
+            
+        }        
+        return $data_complete;          
+    }
     /**/  
     function get_numero_colores($arreglo){
 

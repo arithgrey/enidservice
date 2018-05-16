@@ -36,6 +36,7 @@ class Inicio extends CI_Controller {
         /**/            
         $data["usuarios_disponibles"]=  $this->principal->get_usuario_enid();        
         $data["clasificaciones_departamentos"] = "";
+        $data["categorias_destacadas"] =  $this->carga_categorias_destacadas("");
         $this->principal->show_data_page( $data , 'empresas_enid');			    	
                 		
     }    	
@@ -80,9 +81,18 @@ class Inicio extends CI_Controller {
         $host =  $_SERVER['HTTP_HOST'];
         $url_request =  "http://".$host."/inicio/".$extra; 
         return  $url_request;
+    }      
+    /**/
+    private function carga_categorias_destacadas($param){
+                
+        $url = "tag/index.php/api/";
+        $url_request=  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");
+        $result = $this->restclient->get("clasificacion/categorias_destacadas/format/json/" 
+            , $param);
+        $response =  $result->response;
+        return json_decode($response , true );
     }
-      
-
-
-
+ 
 }

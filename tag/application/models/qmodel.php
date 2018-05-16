@@ -452,11 +452,13 @@
     }
     /**/
     function registra_keyword($param){
-        $q =  $param["q"];
-        if (strlen(trim($q)) > 2){        
-            $query_insert ="INSERT INTO keyword(keyword) VALUES('".$param["q"]."')";
-            return $this->db->query($query_insert);    
-        }
+        
+        $q =  $param["q"];            
+        $id_usuario =  $param["id_usuario"];        
+        $query_insert ="INSERT INTO keyword(keyword , id_usuario) 
+                        VALUES('".$param["q"]."' ,  '".$id_usuario."')";    
+        return $this->db->query($query_insert);    
+        
     }
     /*carga conceptos básicos por servicio por id_servicio*/
     function get_basic_servicio($param){
