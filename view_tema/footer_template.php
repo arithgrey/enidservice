@@ -226,7 +226,6 @@
                 </div>
             </div>
         </div>
-
     <div class="footer-bottom" style='background:#001d9b !important'>
         <div class="container inner">
             <p class=" white">
@@ -238,9 +237,9 @@
     <?=end_row()?>
     <?php endif; ?>
 <?=end_row()?>
-<script src="../js_tema/js/main.js">
+<script src="../js_tema/js/main.js?<?=version_enid?>">
 </script>
-<script src="../js_tema/js/librerias/clipboard.min.js">
+<script src="../js_tema/js/librerias/clipboard.min.js?<?=version_enid?>">
 </script>
 <script>
     var clipboard = new Clipboard('.btn_copiar_enlace_pagina_contacto');
@@ -251,17 +250,20 @@
 
         e.clearSelection();
     });
-
     clipboard.on('error', function(e) {
         console.error('Accion:', e.action);
         console.error('Trigger:', e.trigger);
     });
 </script>
-<link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css">
-
-<link rel="stylesheet" type="text/css" href="../css_tema/template/main.css">
-
+    <link 
+        rel="stylesheet" 
+        href="../css_tema/font-asome2/css/font-awesome.min.css?<?=version_enid?>">
+    <link 
+        rel="stylesheet" 
+        type="text/css" 
+        href="../css_tema/template/main.css?<?=version_enid?>">
 </body>
 </html>
-<link href="../css_tema/template/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="../css_tema/template/bootstrap.min.css?<?=version_enid?>" 
+rel="stylesheet" id="bootstrap-css">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 

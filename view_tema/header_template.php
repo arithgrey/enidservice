@@ -26,7 +26,7 @@
                                                 onclick="openNav()">☰ 
                                                 <a  class="white" 
                                                 style="color: white!important;">
-                                                    Enid Service                                
+                                                    ENID SERVICE
                                                 </a>
                                         </span>           
                                         <a  href="../"

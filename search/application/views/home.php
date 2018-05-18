@@ -53,12 +53,11 @@
             </div>
             
             
-<?=end_row();?>
-                           
+<?=end_row();?>                        
+<link 
+    rel='stylesheet prefetch' 
+    href='../css_tema/template/css_tienda.css?<?=version_enid?>'>
 
-
-
-<link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css'>
 <main>
     <div style="margin-top: 30px;">                            
             <div class="col-lg-2">      

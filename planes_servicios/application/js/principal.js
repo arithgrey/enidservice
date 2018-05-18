@@ -1658,11 +1658,12 @@ function evalua_precio(){
 }
 /**/
 function valida_action_inicial(){
-	
+
+	es_movil= $(".es_movil").val();  	
 	set_option("accion", $(".q_action").val());	
 	switch (parseInt(get_option("accion"))){	
 	case 2:		
-
+		
 		set_option("servicio", $(".extra_servicio").val());		
 		carga_informacion_servicio(1);
 		set_option("modalidad" , 1);
@@ -1670,6 +1671,8 @@ function valida_action_inicial(){
 		break;
 
 	case 1:		
+		/*Si es version movil recorre pantalla*/
+		if (es_movil == 1) {recorrepage(".text_deseas_anunciar")}
 		//$(".btn_agregar_servicios").tab("show");
 		set_option("modalidad" , 0);
 		set_option("nuevo", 1);

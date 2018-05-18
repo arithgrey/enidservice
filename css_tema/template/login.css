@@ -44,3 +44,15 @@ footer, .footer-extra{display: none;  }
 form button:hover {
   background-color: #0d20ed;
 }
+#flipkart-navbar{
+        display: none;
+}
+#olvide-pass{
+  color:#000306!important;
+}
+@media only screen and (max-width: 768px) {
+
+        .btn_soy_nuevo_simple{
+            display: none;
+        }
+}

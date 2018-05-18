@@ -63,24 +63,14 @@
 <div class="wrapper wrapper_login" >    
     <?=$this->load->view("acceder")?>
 </div>
-
     
 </main>
-<link rel="stylesheet" type="text/css" href="../css_tema/template/login.css">
+<link 
+rel="stylesheet" type="text/css" 
+href="../css_tema/template/login.css?<?=version_enid?>">
 <input type="hidden" class="action" value="<?=$action?>">
-<script src="<?=base_url('application/js/sha1.js');?>">
+<script src="<?=base_url('application/js/sha1.js');?>?<?=version_enid?>">
 </script>
-<script type="text/javascript" src="<?=base_url('application/js/ini.js')?>">
+<script type="text/javascript" src="<?=base_url('application/js/ini.js')?>?<?=version_enid?>">
 </script>
 
-<style type="text/css">
-    #flipkart-navbar{
-        display: none;
-    }
-    @media only screen and (max-width: 768px) {
-
-        .btn_soy_nuevo_simple{
-            display: none;
-        }
-    }
-</style>

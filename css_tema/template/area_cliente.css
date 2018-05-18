@@ -131,3 +131,11 @@
 }.desc_ayuda{
     text-decoration:underline;
 }
+.notificacion_preguntas_no_leida{
+        background: #023263;
+        padding: 5px;
+}
+.num_alcance:hover{
+        cursor: pointer;
+        color: blue;
+}

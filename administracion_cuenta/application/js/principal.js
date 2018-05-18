@@ -154,3 +154,4 @@ function quita_espacios_text(nuevo_valor){
 	}
 	return valor;	
 }
+/**/

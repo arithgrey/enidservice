@@ -97,30 +97,28 @@
 	<input type="hidden" class="action" value="<?=$action?>" >
 </main>       
 
-<script type="text/javascript" src="<?=base_url('application/js/principal.js')?>">
+<script type="text/javascript" 
+src="<?=base_url('application/js/principal.js')?><?=version_enid?>">
 </script>    
-<script type="text/javascript" src="<?=base_url('application/js/proyectos_persona.js')?>">
+<script 
+	type="text/javascript" 
+	src="<?=base_url('application/js/proyectos_persona.js')?><?=version_enid?>">
 </script>    
-<script type="text/javascript" src="<?=base_url('application/js/cobranza.js')?>">
+<script 
+	type="text/javascript" 
+	src="<?=base_url('application/js/cobranza.js')?><?=version_enid?>">
 </script> 
-<!--   
-<script type="text/javascript" src="<?=base_url('application/js/notificaciones.js')?>">
+<script 
+	type="text/javascript" 
+	src="../js_tema/js/direccion.js<?=version_enid?>">
 </script>    
--->
-<script type="text/javascript" src="../js_tema/js/direccion.js">
+<script type="text/javascript" 
+	src="<?=base_url('application/js/buzon.js')?><?=version_enid?>">
 </script>    
-<script type="text/javascript" src="<?=base_url('application/js/buzon.js')?>">
-</script>    
-<link rel="stylesheet" type="text/css" href="../css_tema/template/css_tienda_cliente.css">
-<link rel="stylesheet" type="text/css" href="../css_tema/template/valoracion.css">
-<link rel="stylesheet" type="text/css" href="../css_tema/template/area_cliente.css">
-<style type="text/css">
-	.notificacion_preguntas_no_leida{
-		background: #023263;
-		padding: 5px;
-	}
-	.num_alcance:hover{
-		cursor: pointer;
-		color: blue;
-	}
-</style>
+<link rel="stylesheet" 
+	type="text/css" href="../css_tema/template/css_tienda_cliente.css<?=version_enid?>">
+<link 
+	rel="stylesheet" 
+	type="text/css" href="../css_tema/template/valoracion.css<?=version_enid?>">
+<link rel="stylesheet" 
+	type="text/css" href="../css_tema/template/area_cliente.css<?=version_enid?>">

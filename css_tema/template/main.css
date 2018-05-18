@@ -693,7 +693,7 @@ input{
     .contenedor_img_principal{
         width: 100%;
         height: 150px!important;
-        background-image: url('http://enidservice.com/inicio/img_tema/portafolio/llamada_gratis_2.png');
+        background-image: url('../../img_tema/portafolio/llamada_gratis_2.png');
         background-size: 100% 100%;
     }
     .contenedor_footer_iniciar_sesion{
@@ -704,7 +704,7 @@ input{
 .contenedor_img_principal{
     width: 100%;
     height: 300px;
-    background-image: url('http://enidservice.com/inicio/img_tema/portafolio/llamada_gratis_2.png');
+    background-image: url('../../img_tema/portafolio/llamada_gratis_2.png');
 }
 .pagination > li > a, .pagination > li > span{
     font-size: 10px!important;
@@ -900,36 +900,60 @@ input{
     padding-top: 0px;
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-    color: #fff;        
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav a {font-size: 18px;}
-}
-
-.sidenav-heading{
-    font-size: 36px;
-    color: #fff;
-}
 
 .input_busqueda_producto ,.button_busqueda_producto{
     display: inline-table!important;
 }
 body{
 	font-family: 'Roboto Condensed', sans-serif!important;
+}
+.logo_lateral_login{
+	width: 50%;	
+	margin: 0 auto;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+
+	.contenedor-lateral-menu{
+		background-color: black;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 40px;
+		z-index: 178211;
+	}
+  	.sidenav a {font-size: 18px;}
+  	.closebtn_lateral{
+		position: absolute;
+	    top: 5px;
+	    right: 25px;       
+	    color: #fff; 
+		background: blue;
+		
+	}	
+	.input_search{
+		width: 100%;
+	}
+
+
+}
+.boton-busqueda{
+	margin-top: 10px;
+	width: 100%;
+	background: black !important;
+	color: white!important;
+}
+.form-control{
+	border-radius: 0px!important;	
+}
+.iniciar_sesion_lateral{
+	font-size: 1em!important;
+	color: white!important;
+}
+.call_to_action_anuncio{
+	font-size: 1em!important;	
+	margin-top: 0px!important;
+	color: white!important;
 }

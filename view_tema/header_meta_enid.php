@@ -15,8 +15,8 @@
     <meta name="description" content="<?=$desc_web;?>"/>
     <meta name="robots" content="all">
     <meta name="google-site-verification" content="http://enidservice.com/google8dba39b938429ded.html"/> 
-    <link rel="canonical" href="http://enidservice.com/inicio/paginas_web/" />   
-    <link rel="canonical" href="http://www.enidservice.com/inicio/correo_para_negocios/"/>   
+    <link rel="canonical" href="http://enidservice.com/"/>   
+    <link rel="canonical" href="http://www.enidservice.com/"/>   
     <link rel="alternate" hreflang="es" href="http://enidservice.com/" />
     <meta name="googlebot" content="index,follow">
     <meta name="geo.region" content="MX-DIF" />
@@ -64,9 +64,9 @@
     <meta itemprop="url" content="<?=base_url()?>">
     <meta itemprop="photo" content="<?=$url_img_post?>">
     <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">        
-    <script src="../js_tema/jquery.min.js">
+    <script src="../js_tema/jquery.min.js?<?=version_enid?>">
     </script>    
-    <script src="../js_tema/bootstrap.min.js">
+    <script src="../js_tema/bootstrap.min.js?<?=version_enid?>">
     </script>
 
     

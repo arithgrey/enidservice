@@ -10,7 +10,8 @@
                     </a>
                 </li> 
                 <li class="li_menu menu_vender <?=valida_active_tab('ventas' , $action)?>">
-                    <a href="../planes_servicios/?q=1"  class="white" style="color: white!important">
+                    <a href="../planes_servicios/?action=nuevo"  
+                    class="white" style="color: white!important">
                         <i class="fa fa-cart-plus">                            
                         </i>
                         Vender
