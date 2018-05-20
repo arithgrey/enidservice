@@ -114,8 +114,7 @@ function carga_informacion_servicio(num) {
 				url : url,
 				type : "GET",
 				data : data_send,
-				beforeSend : function() {
-					// show_load_enid(".place_servicios" , "Cargando ... ", 1 );
+				beforeSend : function() {					
 					$(".texto_ventas_titulo").hide();
 				}
 			})
@@ -844,6 +843,7 @@ function muestra_seccion_porcentaje_ganancia_afiliados() {
 /**/
 function configuracion_inicial(e) {
 
+
 	set_option("modalidad", e.target.id);
 	if (get_option("modalidad") == 1) {
 
@@ -852,9 +852,9 @@ function configuracion_inicial(e) {
 		$(".tipo_producto").css("color", "black");
 		$(".tipo_servicio").css("color", "blue");
 		$(".contenedor_ciclo_facturacion").show();
-		selecciona_select(".ci_facturacion", 9);
-		$(".contenedor_precio").hide();
+		selecciona_select(".ci_facturacion", 9);	
 		$(".precio").val(0);
+		$(".contenedor_precio").show();
 
 	}else{
 
@@ -865,21 +865,21 @@ function configuracion_inicial(e) {
 		$(".contenedor_ciclo_facturacion").hide();
 		$(".contenedor_precio").show();
 	}
-
 }
 /**/
 function simula_envio(e) {
 
 	costo = $(".costo").val();
 	next =  (get_option("modalidad") == 0 && costo == 0)?0:1; 
+
 	if (next) {
-		carga_listado_categorias();
-		nombre_servicio = $(".nuevo_producto_nombre").val();		
+
 		showonehideone(".contenedor_categorias", ".contenedor_nombre");
 		$(".contenedor_top").hide();
-		set_nombre_servicio(nombre_servicio);
+		set_nombre_servicio($(".nuevo_producto_nombre").val());
 		set_costo(costo);
-		$(".extra_precio").text("");
+		$(".extra_precio").text("");		
+		carga_listado_categorias();		
 	}else{
 		$("#costo").css("border" , "1px solid rgb(13, 62, 86)");
 		$(".extra_precio").text("INGRESA EL PRECIO DEL PRODUCTO");
@@ -895,19 +895,7 @@ function set_nombre_servicio(n_nombre_servicio) {
 	nombre_servicio = n_nombre_servicio;
 	$(".nombre_producto").val(n_nombre_servicio);
 }
-/**/
-function carga_listado_categorias() {
-
-	$(".btn_agregar_servicios").hide();
-	if (get_option("nuevo") == 1) {
-		showonehideone(".contenedor_nombre", ".contenedor_categorias");
-	} else {
-		$(".contenedor_categorias").show();
-	}
-
-	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";
-	set_option("nivel" , "primer_nivel");
-	set_option("padre", 0);
+function clean_data_categorias(){
 
 	$(".segundo_nivel_seccion").empty();
 	$(".tercer_nivel_seccion").empty();
@@ -920,13 +908,18 @@ function carga_listado_categorias() {
 	$(".categorias_edicion .cuarto_nivel_seccion").empty();
 	$(".categorias_edicion .quinto_nivel_seccion").empty();
 	$(".categorias_edicion .sexto_nivel_seccion").empty();
-
-	data_send = {
-		"modalidad" : get_option("modalidad"),
-		"padre" : get_option("padre"),
-		"nivel" : get_option("nivel")
-	};
-
+	set_option("nivel" , "primer_nivel");
+	set_option("padre", 0);
+	showonehideone(".contenedor_categorias_servicios", ".contenedor_agregar_servicio_form");
+	
+}
+/**/
+function carga_listado_categorias() {
+	
+	/**/	
+	clean_data_categorias();	
+	data_send = {"modalidad" : get_option("modalidad"),"padre" : get_option("padre"),"nivel" : get_option("nivel")};
+	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";
 	$.ajax({
 		url : url,
 		type : "GET",
@@ -934,23 +927,20 @@ function carga_listado_categorias() {
 		beforeSend : function() {
 			show_load_enid(".primer_nivel_seccion", "Cargando ... ", 1);
 		}
-	}).done(
-			function(data) {
+	}).done(function(data) {
 
-				llenaelementoHTML(".primer_nivel_seccion", data);
-				/* Carga categorias segundo nivel */
-				$(".primer_nivel .num_clasificacion").click(carga_listado_categorias_segundo_nivel);
-				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+		llenaelementoHTML(".primer_nivel_seccion", data);		
+		$(".primer_nivel .num_clasificacion").click(carga_listado_categorias_segundo_nivel);
+		$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 
-			}).fail(
-			function() {
-				show_error_enid(".primer_nivel_seccion",
-						"Error ... al cargar portafolio.");
-			});
-
+	}).fail(function() {
+		show_error_enid(".primer_nivel_seccion","Error ... al cargar portafolio.");
+	});
+	
 }
 /**/
 function carga_listado_categorias_segundo_nivel(e) {
+
 	padre = e.target.value;
 	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";
 	set_option("padre" , padre);	
@@ -976,9 +966,11 @@ function carga_listado_categorias_segundo_nivel(e) {
 	}).done(
 			function(data) {
 
+
 				llenaelementoHTML(".segundo_nivel_seccion", data);
 				$(".segundo_nivel .num_clasificacion").click(carga_listado_categorias_tercer_nivel);
 				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+				recorrepage(".segundo_nivel_seccion");
 
 			}).fail(
 			function() {
@@ -1018,6 +1010,7 @@ function carga_listado_categorias_tercer_nivel(e) {
 				llenaelementoHTML(".tercer_nivel_seccion", data);
 				$(".tercer_nivel .num_clasificacion").click(carga_listado_categorias_cuarto_nivel);
 				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+				recorrepage(".tercer_nivel_seccion");
 
 			}).fail(
 			function() {
@@ -1055,6 +1048,7 @@ function carga_listado_categorias_cuarto_nivel(e) {
 				llenaelementoHTML(".cuarto_nivel_seccion", data);
 				$(".cuarto_nivel .num_clasificacion").click(carga_listado_categorias_quinto_nivel);
 				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+				recorrepage(".cuarto_nivel_seccion");
 
 			}).fail(
 			function() {
@@ -1091,6 +1085,7 @@ function carga_listado_categorias_quinto_nivel(e) {
 				llenaelementoHTML(".quinto_nivel_seccion", data);
 				$(".quinto_nivel .num_clasificacion").click(carga_listado_categorias_sexto_nivel);
 				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+				recorrepage(".quinto_nivel_seccion");
 
 			}).fail(
 			function() {
@@ -1121,6 +1116,7 @@ function carga_listado_categorias_sexto_nivel(e) {
 		}
 	}).done(function(data) {
 		llenaelementoHTML(".sexto_nivel_seccion", data);
+		recorrepage(".sexto_nivel_seccion");
 	}).fail(
 			function() {
 				show_error_enid(".sexto_nivel_seccion",
@@ -1177,7 +1173,6 @@ function registra_nuevo_servicio() {
 
 	url = "../base/index.php/api/servicio/nuevo/format/json/";
 	set_valores_categorias();	
-
 	data_send = {
 		"nombre_servicio" : get_nombre_servicio(),
 		"flag_servicio" : get_option("modalidad"),
@@ -1210,9 +1205,7 @@ function registra_nuevo_servicio() {
 				redirect("../planes_servicios/?action=nuevo&mensaje="+data.registro.mensaje);
 			}
 		}		
-	}).fail(function() {
-		show_error_enid(".place_registro_servicio", "Error ... ");
-	});
+	}).fail(function() {show_error_enid(".place_registro_servicio", "Error ... ");});
 }
 /**/
 function set_costo(n_costo) {

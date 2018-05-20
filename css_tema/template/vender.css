@@ -33,17 +33,16 @@
 	color: white;
 }
 .text_deseas_anunciar{
-	font-size: 1.3em;
-	font-weight: bold;	
-	background: #07206b!important;
+	font-weight: bold;		
 }
-.text_deseas_anunciar{
-	font-size: 1em;
-	padding: 5px;
-	color: white;
-	font-weight: bold;	
-	background: #07206b!important;
-}	
+.btn_siguiente_registrar_servicio{
+		width: 100%!important;		
+		background: black!important;
+		padding: 5px;
+		color: white;
+		margin-bottom: 50px;
+
+}
 @media only screen and (max-width: 768px) {
 	
 	.text_deseas_anunciar{

@@ -22,7 +22,6 @@
 		</div>
 	</div>
 <?=end_row()?>
-
 <?=n_row_12()?>
 	<div class="place_servicios">
 	</div>

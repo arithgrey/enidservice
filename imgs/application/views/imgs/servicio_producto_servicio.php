@@ -30,9 +30,14 @@
     <?=n_row_12()?>
         <button 
             type="submit" 
-            class='btn btn btn-sm guardar_img_enid pull-right' 
+            class='btn guardar_img_enid ' 
             id='guardar_img' 
-            style='color:white;display: none;'>
+            style='color:white;display: none;width: 100%;background: #00030B !important;
+            width: 100% !important;
+            background: black !important;
+            padding: 5px;
+            color: white;
+            margin-bottom: 50px;'>
             AGREGAR IMAGEN
             <i class='fa fa-check'>
             </i>

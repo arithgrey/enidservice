@@ -237,9 +237,9 @@
     <?=end_row()?>
     <?php endif; ?>
 <?=end_row()?>
-<script src="../js_tema/js/main.js?<?=version_enid?>">
+<script src="../js_tema/js/main.js<?=version_enid?>">
 </script>
-<script src="../js_tema/js/librerias/clipboard.min.js?<?=version_enid?>">
+<script src="../js_tema/js/librerias/clipboard.min.js<?=version_enid?>">
 </script>
 <script>
     var clipboard = new Clipboard('.btn_copiar_enlace_pagina_contacto');
@@ -257,13 +257,13 @@
 </script>
     <link 
         rel="stylesheet" 
-        href="../css_tema/font-asome2/css/font-awesome.min.css?<?=version_enid?>">
+        href="../css_tema/font-asome2/css/font-awesome.min.css<?=version_enid?>">
     <link 
         rel="stylesheet" 
         type="text/css" 
-        href="../css_tema/template/main.css?<?=version_enid?>">
+        href="../css_tema/template/main.css<?=version_enid?>">
 </body>
 </html>
-<link href="../css_tema/template/bootstrap.min.css?<?=version_enid?>" 
+<link href="../css_tema/template/bootstrap.min.css<?=version_enid?>" 
 rel="stylesheet" id="bootstrap-css">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 

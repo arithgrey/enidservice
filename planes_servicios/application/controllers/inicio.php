@@ -39,6 +39,7 @@ class Inicio extends CI_Controller {
         $data["ciclo_facturacion"]= $this->principal->create_ciclo_facturacion();          
         $data["clasificaciones_departamentos"] = "";    
         $data["es_movil"] = $this->is_movil();
+        
         $this->principal->show_data_page( $data , 'home_enid');			    	        	
     }    	
     /**/
@@ -91,7 +92,8 @@ class Inicio extends CI_Controller {
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
         $this->restclient->set_option('format', "json");        
-        $result = $this->restclient->get("productos/top_semanal_vendedor/format/json/", $param);
+        $result = $this->restclient->get("productos/top_semanal_vendedor/format/json/", 
+            $param);
         $response =  $result->response;        
         return json_decode($response , true);
     }

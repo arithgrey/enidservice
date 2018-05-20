@@ -203,9 +203,6 @@
 .contenedor_principal_planes_servicios{
 	margin-top: 20px;
 }
-.contenedor_nivel_tabla{
-	display: inline-table;	
-}
 .contenedor_categorias{
 	display: none;
 }
@@ -220,6 +217,18 @@
 .small_agregar_imagenes{
 	font-size: .9em!important;
 }
+.nueva_categoria_producto:hover{
+    cursor: pointer;
+}
+.contenedor_categorias_servicios{
+    display: none;
+}
+.info_categoria{
+    display: inline-table;    
+}
+.text_add_imgs{
+    font-weight: bold;font-size: 2em;
+}
 /* For mobile phones: */
 @media only screen and (max-width: 768px) {
 	 
@@ -227,14 +236,19 @@
 		width: 100%;
 		margin-top: 20px;
 		margin: 0 auto;			
-	}
-	.contenedor_nivel_tabla{
-		display: block;	
-	}	    
+	}	
 	.place_text_nivel{
 		display: block;
 	}
-}
-.nueva_categoria_producto:hover{
-    cursor: pointer;
+    .contenedor_categorias_servicios{
+        margin-top: 30px;
+    }
+    .info_categoria_movil{
+        margin-top: 25px!important;   
+    }
+    .text_add_imgs{
+        font-weight: bold;font-size: 1.6em;
+    }
+    
+
 }
