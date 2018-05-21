@@ -1,4 +1,4 @@
-<div class="contenedor_categorias_servicios">
+	<div class="contenedor_categorias_servicios">
 				<?=n_row_12()?>                
 					<div class="col-lg-12">
 						<div style="font-weight: bold;font-size: 1.5em;">
@@ -8,38 +8,50 @@
 				<?=end_row();?>
 	  	       	<hr>
   	        	<?=n_row_12()?>
-  	        		<div class="row info_categoria_movil">
-              			<div class="primer_nivel_seccion">          
+  	        		<?=n_row_12()?>
+  	        			<div class="col-lg-12">
+	              			<div class="primer_nivel_seccion">          
+	              			</div>
               			</div>
-              		</div>	              	
+              		<?=end_row()?>         	
             		
-  	        		<div class="row info_categoria_movil">
-	                  <div class="segundo_nivel_seccion">          
-	                  </div>
-	              	</div>              
+  	        		<?=n_row_12()?>
+  	        			<div class="col-lg-12"> 
+		                  <div class="segundo_nivel_seccion">          
+		                  </div>
+	                  	</div>	
+	              	<?=end_row()?>       
 	  	        	
   	        	
-  	        		<div class="row info_categoria_movil">
-	                  <div class="tercer_nivel_seccion">          
-	                  </div>
-                  	</div>
+  	        		<?=n_row_12()?>
+  	        			<div class="col-lg-12">
+		                  <div class="tercer_nivel_seccion">          
+		                  </div>
+	                  	</div>	
+                  	<?=end_row()?>
               
   	        		
-  	        		<div class="row info_categoria_movil">
-	                  <div class="cuarto_nivel_seccion">          
-	                  </div>
-	              	</div>
+  	        		<?=n_row_12()?>
+  	        			<div class="col-lg-12">
+		                  <div class="cuarto_nivel_seccion">          
+		                  </div>
+	                  	</div>	
+	              	<?=end_row()?>
               
   	        		
-  	        		<div class="row info_categoria_movil">
-	                  <div class="quinto_nivel_seccion">          
-	                  </div>
-	              	</div>
+  	        		<?=n_row_12()?>
+  	        			<div class="col-lg-12">
+		                  <div class="quinto_nivel_seccion">          
+		                  </div>
+	                  	</div>	
+	              	<?=end_row()?>
               
   	        		
-            		<div class="row info_categoria_movil">
-	                  <div class="sexto_nivel_seccion">          
-	                  </div>
-	                </div>
+            		<?=n_row_12()?>
+            			<div class="col-lg-12">
+		                  <div class="sexto_nivel_seccion">          
+		                  </div>
+	                  	</div>	
+	                <?=end_row()?>
               <?=end_row();?>                   
-</div>
+	</div>

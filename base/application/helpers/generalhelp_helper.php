@@ -69,23 +69,23 @@ function valida_active_pane($num , $num_tab){
   }  
 }
 /**/
-function valida_text_imagenes($tipo_promocion, $imgs){
+function  valida_text_imagenes($tipo_promocion, $imgs){
     if(count($imgs) == 0){                       
       $tipo_promocion=  strtolower($tipo_promocion); 
       $text =  n_row_12();
-          $text .="<span class='mensaje_imagenes_visible'>
+          $text .="<div class='mensaje_imagenes_visible'>
                         Muestra imagenes sobre tu ". $tipo_promocion."
                         a posibles clientes
-                    </span>";
+                    </div>";
       $text .= end_row();
       $text .= n_row_12();
-          $text .="<small class='small_agregar_imagenes' style='font-size: .7em!important;'>
-                     Tu ".$tipo_promocion." NO será visible hasta que incluyas algunas imágenes
-                  </small>";
+          $text .="<div>
+                    <small class='small_agregar_imagenes' style='font-size: .7em!important;'>
+                       Tu ".$tipo_promocion." NO será visible hasta que incluyas algunas imágenes
+                    </small>
+                  </div>";
       $text .= end_row();
       return  $text;
-    }else{
-      return "Agregar imágenes!";
     }      
 }
 /**/

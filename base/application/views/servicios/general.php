@@ -26,7 +26,7 @@
                 </div>    
                 <div>
                     <button class="btn input-sm">
-                        Guardar 
+                        GUARDAR 
                     </button>
                 </div>
             </form>

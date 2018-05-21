@@ -18,10 +18,10 @@
 	font-size: 1.3em;
 }
 @media only screen and (max-width: 400px) {
-		.productos_sugeridos{
+	.productos_sugeridos{
 			width: 100%;			
-		}
-		.info_producto{
-			width: 285px!important;
-		}
+	}
+	.info_producto{
+		width: 285px!important;
+	}
 }

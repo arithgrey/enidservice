@@ -1,4 +1,4 @@
-<div class="well">
+<div class="contenedor_inf_servicios contenedor_inf_servicios_ciclo_facturacion">
         <?=n_row_12()?>
              <div class="strong black row" style="font-size: 1em;">
                 <div class="col-md-3">                    
@@ -26,11 +26,11 @@
                                 "ciclo" , 
                                 $id_ciclo_facturacion , 
                                 "ciclo_facturacion" ,  
-                                "ciclo_facturacion"  
+                                "ciclo_facturacion form-control"  
                             )?>                                                     
                         </span>
                     </div>  
-                    <button class="btn input-sm btn_guardar_ciclo_facturacion">
+                    <button class="btn_guardar_ciclo_facturacion">
                         Guardar 
                     </button>
                 </div>

@@ -1,6 +1,5 @@
       <div class="contenedor_categorias_servicios">
-			  	    <?=n_row_12()?>
-                
+			  	<?=n_row_12()?>                
 	  	        		<div style="font-weight: bold;font-size: 1.5em;">
 	  	        			GRUPO AL CUAL PERTENECE TU PRODUCTO 
 	  	        		</div>

@@ -109,26 +109,25 @@
 
 <?=$this->load->view("servicios/agregar_imagenes" , $data);?>
 
-<div class="contenedor_global_servicio">    
-    <div class="page-header">      
-      <?=$this->load->view("servicios/general" , $data);?>    
-    </div>        
+<div class="contenedor_global_servicio">        
+    <?=$this->load->view("servicios/general" , $data);?>        
     <div>
-    <?=$this->load->view("servicios/menu_tabs" , $data);?>            
-       <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane <?=valida_active_pane($num , 1)?>" 
+        <?=$this->load->view("servicios/menu_tabs" , $data);?>                   
+
+        <div class="tab-content" style="margin-top: 10px;">
+            <div 
+                class="tab-pane <?=valida_active_pane($num , 1)?>" 
                 id="tab_imagenes">
-                    <?=n_row_12()?>                    
-                        <?=$this->load->view("servicios/imagenes_servicios" , $data)?>
-                    <?=end_row()?>                    
-                    <?=n_row_12()?>                                            
-                            <?=$this->load->view("servicios/videos" , $data)?>
-                    <?=end_row()?> 
+                <?=n_row_12()?>                    
+                    <?=$this->load->view("servicios/imagenes_servicios" , $data)?>
+                <?=end_row()?>                    
+                <?=n_row_12()?>                                            
+                    <?=$this->load->view("servicios/videos" , $data)?>
+                <?=end_row()?> 
             </div>
             <div 
-            class="tab-pane <?=valida_active_pane($num , 2);?>" 
-            id="tab_info_producto" >                
+                class="tab-pane <?=valida_active_pane($num , 2);?>" 
+                id="tab_info_producto" >                
                             
                 <?=$this->load->view("servicios/descripcion" , $data)?>        
                 <?php if($flag_servicio ==  0): ?>
@@ -181,63 +180,18 @@
 
                 <?=end_row()?>
             
-                <?=n_row_12()?>
-                    <div class="well">
-                        <div class="titulo_seccion_producto">
-                            ¿A qué grupo pertenece?
-                        </div>                    
-                        <div style="font-size: .9em;">
-                            <i  class="fa fa-pencil editar_categorias_servicio" 
-                                id='<?=$id_servicio?>'>
-                            </i>
-                            <?=$text_clasificacion?>
-                        </div>
-                        <?=n_row_12()?>
-                            <div class="contenedor_categorias " style="display: none;">    
-                                <div class="panel">      
-                                    <div style="overflow-x: auto;">
-                                    <table width="100%;" class="categorias_edicion">
-                                        <tr>
-                                        <td>
-                                            <div class="primer_nivel_seccion">          
-                                            </div>    
-                                        </td>
-                                        <td>
-                                            <div class="segundo_nivel_seccion">          
-                                            </div>    
-                                        </td>
-                                        <td>
-                                            <div class="tercer_nivel_seccion">          
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cuarto_nivel_seccion">          
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="quinto_nivel_seccion">          
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="sexto_nivel_seccion">          
-                                            </div>
-                                        </td>
-                                        </tr>
-                                    </table>
-                                    </div>
-                                </div>
-                            </div>  
-                            <div class="contenedor_cat"></div>  
-                        <?=end_row()?>   
-                    </div>
-                <?=end_row()?>
+               
             </div>
             <div 
                 class="tab-pane <?=valida_active_pane($num , 4);?>" 
                 id="tab_info_precios">
-                <div class="well">        
+                <br>
+                <div class='contenedor_inf_servicios'>        
+                    
                     <?=n_row_12();?> 
-                    <div class='col-lg-6'>
+
+                        <div class='col-lg-6'>
+                            <div class="row">                                
                                 <div class='col-lg-5'>
                                     <div class="row">
                                         <strong>
@@ -245,23 +199,37 @@
                                         </strong>
                                     </div>
                                 </div>
-                                <div class='col-lg-7'>
-                                    <a 
-                                        id='1'
-                                        class='button_enid_eleccion entregas_en_casa 
-                                        <?=valida_activo_entregas_en_casa(1 , $entregas_en_casa)?>'>
-                                        SI
-                                    </a>
-                                    <a  style="margin-left: 10px;"
-                                        id='0'
-                                        class='button_enid_eleccion entregas_en_casa
-                                        <?=valida_activo_entregas_en_casa(0 , $entregas_en_casa)?>'>
-                                        <?=$no_atencion_en_casa;?>
-                                    </a>
-                                </div>
-                        
-                    </div>
-                    <div class='col-lg-6'>
+                                <div class='col-lg-7 info_recoge_en_casa'>
+                                    <div class="row">                                        
+                                        <br>
+                                        <?=n_row_12();?>    
+                                            
+                                                <a  id='1'
+                                                    class='button_enid_eleccion 
+                                                    entregas_en_casa_si
+                                                    entregas_en_casa 
+                                                    <?=valida_activo_entregas_en_casa(1 , $entregas_en_casa)?>'>
+                                                    SI
+                                                </a>
+                                                <a  style="margin-left: 10px;"
+                                                    id='0'
+                                                    class='button_enid_eleccion 
+                                                    entregas_en_casa_no
+                                                    entregas_en_casa
+                                                    <?=valida_activo_entregas_en_casa(
+                                                        0 , $entregas_en_casa)?>'>
+                                                    <?=$no_atencion_en_casa;?>
+                                                </a>
+                                            
+                                        <?=end_row()?>
+                                        
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+
+                    <div class='col-lg-6 contenedor_infor_telefonos'>
+                        <div class="row">
                                 <div class='col-lg-5'>
                                     <div class="row">
                                         <strong>
@@ -269,47 +237,56 @@
                                         </strong>
                                     </div>
                                 </div>
-                                <div class='col-lg-7'>
-                                    <a 
-                                        id='1'
-                                        class='button_enid_eleccion telefono_visible 
-                                        <?=valida_activo_vista_telefono(1 , 
-                                            $telefono_visible)?>'>
-                                        SI
-                                    </a>
-                                    <a  style="margin-left: 10px;"
-                                        id='0'
-                                        class='button_enid_eleccion telefono_visible
-                                        <?=valida_activo_vista_telefono(0 , 
-                                            $telefono_visible)?>'>
-                                        NO, OCULTAR MI TELÉFONO
-                                    </a>
+                                <div class='col-lg-7 info_telefonos_visibles'>
+                                    <div class="row">
+                                        <br>
+                                        <?=n_row_12();?>    
+                                            
+                                                <a 
+                                                    id='1'
+                                                    class='button_enid_eleccion telefono_visible 
+                                                    <?=valida_activo_vista_telefono(1 , 
+                                                        $telefono_visible)?>'>
+                                                    SI
+                                                </a>
+                                                <a  style="margin-left: 10px;"
+                                                    id='0'
+                                                    class='button_enid_eleccion telefono_visible
+                                                    <?=valida_activo_vista_telefono(0 , 
+                                                        $telefono_visible)?>'>
+                                                    NO, OCULTAR MI TELÉFONO
+                                                </a>
+                                            
+                                        <?=end_row()?>
+                                    </div>
                                 </div>
+                        </div>
                     </div>
-                    <?=end_row();?>
-                    
+                    <?=end_row();?>                    
                 </div>
+
                 <?php if ($flag_servicio == 0): ?>                    
                     
-                    <div class="well">
+                    <div class="contenedor_inf_servicios contenedor_inf_servicios_novedad">
                         <?=n_row_12()?>
-                            
+                            <div class="row">
                                 <div class="col-lg-6">
                                     <?php $this->load->view("servicios/seccion_nuevo" , $en_productos);?>
                                 </div>
                                 <div class="col-lg-6">
                                     <?php $this->load->view("servicios/seccion_disponibles", $en_productos);?>
                                 </div>
-                            
+                            </div>
                         <?=end_row()?>
                     </div>
-
+                    <br>
 
 
 
                 <?php else: ?>
                     <?=n_row_12()?>
-                        <?php $this->load->view("servicios/seccion_servicios" , $en_servicios); ?>
+                        <?php 
+                        $this->load->view("servicios/seccion_servicios" , $en_servicios); ?>
                     <?=end_row()?>
                 <?php endif; ?>
                 <?php if ($id_ciclo_facturacion != 9): ?>                    
@@ -320,42 +297,44 @@
 
 
                 <?php if($flag_servicio == 0 ):?>
-
-                    <div class="well">
-                        <?=n_row_12()?>                        
-                            <div class="col-lg-8">                                
-                                <div>   
-                                        <div class="col-lg-4">
-                                            <strong>
-                                                ¿TAMBIÉN VENDES ESTE PRODUCTO A 
-                                                PRECIOS DE MAYOREO?
-                                            </strong>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <a 
-                                                id='1'
-                                                class='button_enid_eleccion venta_mayoreo 
-                                                <?=valida_activo_ventas_mayoreo(1 , 
-                                                    $venta_mayoreo)?>'>
-                                                SI
-                                            </a>
-                                            <a  style="margin-left: 10px;"
-                                                id='0'
-                                                class='button_enid_eleccion venta_mayoreo
-                                                <?=valida_activo_ventas_mayoreo(0 , 
-                                                    $venta_mayoreo)?>'>
-                                                NO
-                                            </a>
-                                        </div>
+                    <br>
+                    <div class="contenedor_inf_servicios" >                        
+                            <div class="row">
+                                <div class="col-lg-8">                                
+                                    <div class="row">   
+                                            <div class="col-lg-4">
+                                                <strong>
+                                                    ¿TAMBIÉN VENDES ESTE PRODUCTO A 
+                                                    PRECIOS DE MAYOREO?
+                                                </strong>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <br>
+                                                <?=n_row_12()?>
+                                                    <a 
+                                                        id='1'
+                                                        class='button_enid_eleccion venta_mayoreo 
+                                                        <?=valida_activo_ventas_mayoreo(1 , 
+                                                            $venta_mayoreo)?>'>
+                                                        SI
+                                                    </a>
+                                                    <a  style="margin-left: 10px;"
+                                                        id='0'
+                                                        class='button_enid_eleccion venta_mayoreo
+                                                        <?=valida_activo_ventas_mayoreo(0 , 
+                                                            $venta_mayoreo)?>'>
+                                                        NO
+                                                    </a>
+                                                <?=end_row()?>
+                                            </div>
+                                    </div>
+                                    
                                 </div>
+                                <div class="col-lg-4">
                                 
-                            </div>
-                            <div class="col-lg-4">
-                            
-                            </div>
-                        <?=end_row()?>
+                                </div>
+                            </div>       
                     </div>
-
                 <?php  endif;?>
             </div>
         

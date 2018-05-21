@@ -23,7 +23,7 @@
             </ul>
 
 
-            <?php if(count($top_servicios)>0 && $is_mobile ==0):?>
+            <?php if(count($top_servicios)>0 && $is_mobile == 0 ):?>
                 <?php $extra_estilos = ($action == 1)?"display:none":"";?>
                 <div class="card contenedor_top" 
                 style="background: #00142f;padding: 2px 2px 30px;margin-top:100px;color: white;<?=$extra_estilos?>">

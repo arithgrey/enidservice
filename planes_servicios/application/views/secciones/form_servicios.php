@@ -42,7 +42,7 @@
 							<div class="row">
 						        <h4 class="media-heading black text_modalidad" title="¿Qué vendes?">
 						        	<i class="fa fa-shopping-bag"></i>
-								    Artículo
+								    ARTÍCULO
 								</h4>  
 						        <input 
 						        	id="nombre_producto" 
@@ -58,7 +58,7 @@
 							<div class="row">
 							
 					         <h4 class="media-heading black">
-							  Ciclo facturación
+							  CICLO DE FACTURACIÓN
 							</h4>       
 				        	  <?=create_select($ciclo_facturacion ,
 				        	   "ciclo" , 
@@ -76,7 +76,7 @@
 						        	title="¿Cual es el precio de tu artículo/Servicio?">
 								  <i class="fa fa-money">
 								  </i>
-								  Precio
+								  PRECIO
 								</h4>            				
 					            <input 
 					            id="costo" 
@@ -98,8 +98,8 @@
 		  	
 		<?=end_row();?>
 		<br><br><br><br><br>
-		<?=n_row_12()?>
-			<?php if($es_movil ==  0):?>
+		<?=n_row_12()?>			
+			<?php if($is_mobile ==  0):?>
 				<?php $this->load->view("secciones/categorias_web");?>
 			<?php else:?>
 				<?php $this->load->view("secciones/categorias_movil");?>

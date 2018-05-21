@@ -38,7 +38,7 @@ class Inicio extends CI_Controller {
         $num_perfil =  $this->sessionclass->getperfiles()[0]["idperfil"];        
         $data["ciclo_facturacion"]= $this->principal->create_ciclo_facturacion();          
         $data["clasificaciones_departamentos"] = "";    
-        $data["es_movil"] = $this->is_movil();
+        $data["is_mobile"] = ($this->agent->is_mobile() === FALSE)?0:1;
         
         $this->principal->show_data_page( $data , 'home_enid');			    	        	
     }    	
@@ -97,9 +97,5 @@ class Inicio extends CI_Controller {
         $response =  $result->response;        
         return json_decode($response , true);
     }
-    private function is_movil(){        
-        $es_movil =  ($this->agent->is_mobile() == FALSE)?0:1;        
-        return $es_movil;
-    }
-
+    
 }

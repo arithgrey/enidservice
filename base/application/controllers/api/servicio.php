@@ -101,11 +101,20 @@ class Servicio extends REST_Controller{
     $data["info_categorias"] =  $this->serviciosmodel->get_categorias_servicios($param);
     $data["nivel"]=  $param["nivel"];
     if(count($data["info_categorias"]) > 0){
+        if ($param["is_mobile"] ==  1) {
+          $this->load->view("categoria/principal_phone",  $data);    
+        }else{          
+          $this->load->view("categoria/principal_web",  $data);    
+        }
         
-        $this->load->view("categoria/principal" , $data);  
     }else{
         $data["padre"] = $param["padre"];        
-        $this->load->view("categoria/seleccionar_categoria" , $data);  
+        if ($param["is_mobile"] ==  1) {
+          $this->load->view("categoria/seleccionar_categoria_phone" , $data);
+          
+        }else{
+          $this->load->view("categoria/seleccionar_categoria" , $data);  
+        }
     }  
   }
   /**/
@@ -313,8 +322,7 @@ class Servicio extends REST_Controller{
       $servicio  =  $this->serviciosmodel->get_info_servicio($param);      
             
       $data["servicio"] = $servicio;
-      $this->set_option("servicio" , $servicio);
-      
+      $this->set_option("servicio" , $servicio);      
       if($servicio[0]["flag_servicio"] ==  0){
         $this->crea_data_costo_envio();            
         $data["costo_envio"] = $this->calcula_costo_envio($this->crea_data_costo_envio());  
@@ -330,6 +338,8 @@ class Servicio extends REST_Controller{
       $data["num"] = $param["num"];      
       $prm["id_servicio"]=$id_servicio;
       $data["porcentaje_comision"] = $this->get_porcentaje_comision($prm);      
+
+      $data["is_mobile"] = ($this->agent->is_mobile() === FALSE)?0:1;      
       $this->load->view("servicios/detalle" , $data);        
   }    
   /**/  

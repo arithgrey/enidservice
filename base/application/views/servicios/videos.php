@@ -24,25 +24,28 @@
                                         style="margin-left: 10px;">
                 </i>
             </div>
-                                <div style="display: none;" class="input_url_youtube">
-                                    <form class="form_servicio_youtube">
-                                        <div>                           
-                                            <input type="hidden" name="q" value="url_vide_youtube">
-                                            <input type="url" name="q2" class='url_youtube' 
-                                            value ="<?=entrega_data_campo($servicio , 'url_vide_youtube')?>"
-                                            required>
-                                            <span class="place_url_youtube">            
-                                            </span>
-                                        </div>    
-                                        <div>
-                                            <button class="btn input-sm">
-                                                Guardar 
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                            <?=end_row()?>  
+            <div style="display: none;" class="input_url_youtube">
+                <form class="form_servicio_youtube">
+                    <div>                           
+                        <input type="hidden" name="q" value="url_vide_youtube">
+                        <input 
+                            type="url" 
+                            name="q2" 
+                            class='url_youtube' 
+                            value ="<?=entrega_data_campo($servicio , 'url_vide_youtube')?>"
+                            required>
+                        <span class="place_url_youtube">            
+                        </span>
+                    </div>    
+                    
+                    <?=n_row_12()?>
+                        <button class="guardar_video_btn">
+                            GUARDAR
+                        </button>
+                    <?=end_row()?>
+                </form>
+            </div>                            
+        <?=end_row()?>  
        </div>  
                          
                               

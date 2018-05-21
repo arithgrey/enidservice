@@ -1,6 +1,4 @@
-
-
-        <div>                    
+        <div class="contenedor_articulos_disponibles">                    
             <strong >
                 ¿ARTÍCULOS DISPONIBLES?
             </strong>
@@ -17,7 +15,7 @@
                 class="existencia" 
                 required="" 
                 value="<?=$existencia?>">
-            <button class="btn input-sm btn_guardar_cantidad_productos">
+            <button class="es_disponible btn_guardar_cantidad_productos">
                 Guardar 
             </button>
         </div>

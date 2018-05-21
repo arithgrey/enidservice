@@ -1,6 +1,6 @@
 <main>    
     <div class='contenedor_principal_planes_servicios'>        
-        <div class="col-lg-2" >       
+        <div class="col-lg-2" >                   
             <?=$this->load->view("menu")?>
         </div>
         <div class='col-lg-10'>            
@@ -17,9 +17,8 @@
             </div>
         </div>
         <div class="col-lg-2">
-            <?php if(count($top_servicios)>0 && $is_mobile ==1):?>
-                <div class="card" 
-                style="background: #00142f;padding: 2px 2px 30px;margin-top:100px;color: white;">
+            <?php if(count($top_servicios)>0 && $is_mobile ==1):?>                
+                <div class="card row contenedor_articulos_mobil" style="background: #00142f;padding: 2px 2px 30px;margin-top:100px;color: white;">
                     <?=n_row_12()?>
                         <div class="card" style="margin-top: 30px;">
                           <div class="card-header">                    
@@ -65,7 +64,7 @@
 </main>
 
 
-<input type="hidden" name="version_movil" value="<?=$es_movil?>" class='es_movil'>
+<input type="hidden" name="version_movil" value="<?=$is_mobile?>" class='es_movil'>
 <script type="text/javascript" 
 src="<?=base_url('application/js/principal.js')?><?=version_enid?>">
 </script>     
@@ -85,3 +84,8 @@ src="../js_tema/js/summernote.js<?=version_enid?>">
 <link rel="stylesheet" 
 type="text/css" href="../css_tema/template/planes_servicios.css<?=version_enid?>">
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<style type="text/css">
+    .selector_categoria{
+        width: 100%;    
+    }
+</style>
