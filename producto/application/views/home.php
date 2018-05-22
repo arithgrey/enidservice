@@ -131,6 +131,11 @@
                       <?=end_row()?>
                       <div class="separador">                      
                       </div>
+
+                      <?=n_row_12()?>
+                        <?=$this->load->view("lista_deseos")?>
+                      <?=end_row()?>
+
                       <?=n_row_12()?>
                         <?=$this->load->view("social", $info_social)?>
                       <?=end_row()?>
@@ -204,7 +209,7 @@
 
 
 </main>
-<script type="text/javascript" src="<?=base_url('application')?>/js/principal.js">        
+<script type="text/javascript" src="<?=base_url('application')?>/js/principal.js<?=version_enid?>">        
 </script>
 <input 
 type="hidden" 
@@ -216,8 +221,8 @@ type="hidden"
 name="desde_valoracion" 
 value="<?=$desde_valoracion?>" 
 class='desde_valoracion'>
-<link rel="stylesheet" type="text/css" href="<?=base_url('application')?>/css/main.css">
-<link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css'>
+<link rel="stylesheet" type="text/css" href="<?=base_url('application')?>/css/main.css<?=version_enid?>">
+<link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css<?=version_enid?>'>
 
 <style type="text/css">
   .contenedor_info_producto{
@@ -339,6 +344,18 @@ class='desde_valoracion'>
   }
   .table_orden_3{
     width: 10%;
+  }
+  .agregar_a_lista_deseos{    
+    margin-bottom: 30px;
+  }
+  .agregar_a_lista_deseos:hover{
+    cursor: pointer;
+  }
+  .btn_add_list{
+    background: #16308a !important;
+    padding: 10px !important;
+    color: white !important;
+    font-weight: bold !important;
   }
   @media only screen and (max-width: 768px) {
     .contenedor_info_producto{

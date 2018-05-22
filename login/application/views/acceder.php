@@ -8,7 +8,9 @@
     <?=n_row_12()?>
       <div class="col-lg-4 col-lg-offset-4">
         <div class="col-lg-6 col-lg-offset-3">
-          <img src="../img_tema/enid_service_logo.jpg" style="width: 100%">
+            <a href="../">
+                <img src="../img_tema/enid_service_logo.jpg" style="width: 100%">
+            </a>
         </div>
       </div>
     <?=end_row()?>

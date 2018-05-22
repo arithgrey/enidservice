@@ -6,6 +6,7 @@ $(document).ready(function(){
 	$("footer").ready(carga_valoraciones);
 	set_option("desde_valoracion", $(".desde_valoracion").val());
 	set_option("orden" ,"desc");	
+	$(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);
 });
 /**/
 function carga_productos_sugeridos(){
@@ -122,5 +123,18 @@ function ordenar_valoraciones(e){
 		default:
 	}
 }
-
-
+/**/
+function agregar_a_lista_deseos(){	
+	url =  "../tag/index.php/api/producto/lista_deseos/format/json/";		
+	data_send = {"servicio" : get_option("servicio")}		
+	$.ajax({
+		url : url , 
+		type : "PUT" , 
+		data: data_send				
+	}).done(respuesta_add_valoracion).fail(function(){});	
+}
+/**/
+function respuesta_add_valoracion(data){	
+	$("#agregar_a_lista_deseos_add").empty();	
+	llenaelementoHTML("#agregar_a_lista_deseos_add" , "<div class='btn_add_list'>AÑADISTE A TU LISTA DE DESEOS ESTE PRODUCTO! <i class='fa fa-gift'></i></div><br>");
+}

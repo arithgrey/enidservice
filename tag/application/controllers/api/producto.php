@@ -443,6 +443,14 @@ class producto extends REST_Controller{
         $param =  $this->get();
         $this->response($this->qmodel->get_producto_por_id($param));       
     }
+    /**/
+    function lista_deseos_PUT(){
+        
+        $param               =            $this->put();
+        $param["id_usuario"] =  $this->sessionclass->getidusuario();          
+        $response            =  $this->qmodel->add_lista_deseos($param);
+        $this->response($response);
+    }
 
 
 

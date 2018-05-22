@@ -493,4 +493,49 @@
         $result =  $this->db->query($query_get);      
         return $result->result_array();
     }
+    /**/
+    function add_lista_deseos($param){
+
+        $status =0;
+        if ($this->get_producto_deseo($param) == 0 ) {
+
+            $id_usuario =  $param["id_usuario"];
+            $id_servicio =  $param["servicio"];
+            $query_insert = "INSERT INTO usuario_deseo(id_usuario , id_servicio) 
+                            VALUES('".$id_usuario."' , '".$id_servicio."')";
+            $status =  $this->db->query($query_insert);    
+        }else{
+            $status = $this->aumenta_deseo($param);
+        }        
+        return $status;
+    }
+    /**/
+    private function aumenta_deseo($param){
+
+
+        $id_usuario =  $param["id_usuario"];
+        $id_servicio =  $param["servicio"];
+        $query_update =  "UPDATE usuario_deseo SET 
+                            num_deseo = num_deseo +1 
+                            WHERE 
+                                id_usuario ='".$id_usuario ."'
+                            AND 
+                            id_servicio ='".$id_servicio."' 
+                            LIMIT 1";
+
+        return $this->db->query($query_update);                    
+    }
+    /**/
+    private function get_producto_deseo($param){
+
+        $id_usuario =  $param["id_usuario"];
+        $id_servicio =  $param["servicio"];
+        $query_get ="SELECT COUNT(0)num FROM usuario_deseo
+                    WHERE 
+                    id_usuario ='".$id_usuario ."'
+                    AND 
+                    id_servicio ='".$id_servicio."' LIMIT 1";
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["num"];
+    }
 }
