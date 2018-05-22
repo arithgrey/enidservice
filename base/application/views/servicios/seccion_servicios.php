@@ -6,9 +6,9 @@
                     <div> 
                         <i class="fa fa-pencil text_ciclo_facturacion ">                
                         </i>                
-                        <strong>
+                        <div class="titulo_producto_servicio">
                             CICLO DE FACTURACIÓN
-                        </strong>    
+                        </div>    
                     </div>
                     <div>
                         <?=get_nombre_ciclo_facturacion(
@@ -31,9 +31,10 @@
                         </span>
                     </div>  
                     <button class="btn_guardar_ciclo_facturacion">
-                        Guardar 
+                        GUARDAR 
                     </button>
                 </div>
             </div>
         <?=end_row()?>
 </div>
+<hr class="hr_producto">

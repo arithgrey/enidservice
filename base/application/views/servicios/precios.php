@@ -1,7 +1,7 @@
 <?php 
     $flag_servicio =  entrega_data_campo($servicio , "flag_servicio");     
 ?>
-
+<hr class="hr_producto">
 <?=n_row_12()?>                        
     <div class='contenedor_inf_servicios'>                            
                     <?=n_row_12();?> 
@@ -10,9 +10,9 @@
                                 <div class='col-lg-12'>
                                     <div class="row">
                                             <?=n_row_12()?>               
-                                                <div class="text_costo">
+                                                <div class="text_costo informacion_precio_unidad">
                                                     <a class="a_precio_unidad">         
-                                                        <div>
+                                                        <div class="titulo_producto_servicio">
                                                             PRECIO POR UNIDAD:                
                                                         </div>
                                                         <div>
@@ -48,14 +48,16 @@
                                 
                             </div>
                         </div>
-
+                        <hr class="hr_producto">
                         <div class='col-lg-6'>
                             <div class="row">                                
                                 <div class='col-lg-12'>
                                     <div class="row">
                                         <?php if($flag_servicio == 0  ): ?>
                                             <?=n_row_12()?>                        
-                                                <div class="informacion_costo informacion_costo_envio">
+                                                <div class="informacion_costo informacion_costo_envio
+                                                titulo_producto_servicio 
+                                                ">
                                                         COSTO DE ENVÍO 
                                                         $<?=$costo_envio["costo_envio_vendedor"]?>MXN                                
                                                 </div>                        
@@ -78,21 +80,27 @@
                                             <?=n_row_12()?>
                                                 <div class="input_envio" 
                                                     style="display: none;margin-top: 20px;">
-                                                    <div>                                        
-                                                        <div style="font-size: 1.5em;">
-                                                            ¿EL PRECIO INCLUYE ENVÍO?                                        
+                                                    <div>
+                                                        <div>
+                                                            <strong>
+                                                                ¿EL PRECIO INCLUYE ENVÍO?         
+                                                            </strong>
                                                         </div>
 
-                                                        <select class="form-control input_envio_incluido" >
+                                                        <select 
+                                                        class="form-control 
+                                                        input-sm
+                                                        input_envio_incluido" >
                                                             <option value="0">
-                                                                No, QUE SE CARGUE AL CLIENTE
+                                                                NO, QUE SE CARGUE AL CLIENTE
                                                             </option>
                                                             <option value="1">
-                                                                Si - YO PAGO EL ENVIO
+                                                                SI - YO PAGO EL ENVIO
                                                             </option>
                                                         </select>
                                                             <div>
-                                                                <button class="btn input-sm btn_guardar_envio">
+                                                                <button 
+                                                                class="btn_guardar_envio">
                                                                     GUARDAR
                                                                 </button>
                                                             </div>
@@ -110,7 +118,7 @@
                     <?=end_row();?>                    
     </div>
 <?=end_row()?>
-
+<hr class="hr_producto">    
 <?=n_row_12()?>                        
     <div class="contenedor_inf_servicios contenedor_inf_servicios_precios_finales">
                 <?=n_row_12()?>

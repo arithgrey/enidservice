@@ -1,6 +1,7 @@
-<div class="well">
+<hr class="hr_producto">
+<div class="contenedor_inf_servicios">
 	<div class="titulo_seccion_producto">
-		Colores
+		COLORES
 	</div>
 	<?=n_row_12()?>
 		<?=n_row_12()?>

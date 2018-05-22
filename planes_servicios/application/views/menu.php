@@ -17,7 +17,7 @@
                         class='black strong btn_serv'>
                         <i class="fa fa-shopping-bag">                            
                         </i>
-                        Tus articulos en venta
+                        TUS ARTÍCULOS EN VENTA
                     </a>
                 </li>                 
             </ul>

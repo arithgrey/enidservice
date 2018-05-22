@@ -25,7 +25,7 @@
                     required>
                 </div>    
                 <div>
-                    <button class="btn input-sm">
+                    <button class="btn input-sm info_guardar_nombre_servicio">
                         GUARDAR 
                     </button>
                 </div>

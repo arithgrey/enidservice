@@ -39,7 +39,7 @@
                 </a> 
             </div>
             <div class="col-lg-12">
-                <a  href="../planes_servicios?action=nuevo" 
+                <a  href="../login/?action=nuevo" 
                     style="color: white!important;" 
                     class='call_to_action_anuncio'>
                     ANUNCIA TU NEGOCIO AQUÍ

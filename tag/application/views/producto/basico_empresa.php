@@ -1,14 +1,19 @@
                 <?=n_row_12()?>
+                    
                         <i class="fa fa-search">                    
                         </i>
                         Tu búsqueda de
                         <strong>
                         <?=$busqueda?>
                         </strong> (<?=$num_servicios?> Productos)
+                    
                 <?=end_row()?>
                 <?=n_row_12()?>
-                    <?=$paginacion?>
+                    
+                        <?=$paginacion?>
+                    
                 <?=end_row()?>
+                <?=n_row_12()?>
                 <?php
                    $list ="";  
                    $flag =0;    
@@ -24,3 +29,4 @@
                         }
                     }
                 ?>
+                <?=end_row()?>

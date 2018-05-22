@@ -1,3 +1,6 @@
+.hr_producto{
+	display: none;
+}
 .texto_ventas_titulo{
 	font-weight: bold;
 	color: black;
@@ -72,14 +75,14 @@
 .ciclo_facturacion{
 	width: 100%;
 }
-.btn_siguiente_registrar_servicio,.btn_guardar_ciclo_facturacion,.btn_precio_servicio{
+.btn_siguiente_registrar_servicio,.btn_guardar_ciclo_facturacion,.btn_precio_servicio,
+.btn_guardar_envio,.btn_guardar_desc,.info_guardar_nombre_servicio{
 	width: 100%!important;		
 	background: black!important;
 	padding: 5px;
 	color: white;
 	margin-bottom: 50px;
 	margin-top: 20px;
-
 }
 .contenedor_inf_servicios_precios_finales{
 	margin-top: 30px;
@@ -113,6 +116,9 @@
 	font-weight: bold;
 	color: black!important;		
 }
+.info_meta_tags{
+	height: 50px;overflow: auto;
+}
 @media only screen and (max-width: 768px) {
 	
 	.text_deseas_anunciar{
@@ -139,10 +145,7 @@
 	}
 	.contenedor_infor_telefonos{
 		margin-top: 30px;
-	}
-	.contenedor_es_nuevo{
-		margin-top: 30px;	
-	}
+	}	
 	.contenedor_articulos_disponibles{
 		margin-top: 35px;		
 	}
@@ -151,6 +154,27 @@
 	}
 	.info_comision_venta{
 		padding: 5px;
+	}	
+	.informacion_costo_envio{
+		margin-top: 40px;	
+	}	
+	.contenedor_inf_servicios{
+		margin-top: 30px;			
+		margin-bottom: 30px;	
+	}
+	.info_meta_tags{
+		height: 100px;
+		overflow: auto;
+		margin-top: 25px;
+		margin-bottom: 30px;
+	}
+	.titulo_producto_servicio{
+		font-size: 1.6em!important;
+		font-weight: bold!important;
+		background: #ededed!important;
+	}
+	.hr_producto{
+		display: block;
 	}
 
 }

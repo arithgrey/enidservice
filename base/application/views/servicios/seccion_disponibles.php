@@ -1,5 +1,5 @@
         <div class="contenedor_articulos_disponibles">                    
-            <strong >
+            <strong class="titulo_producto_servicio titulo_producto_servicio " >
                 ¿ARTÍCULOS DISPONIBLES?
             </strong>
             <i class="fa fa-pencil text_cantidad">                
@@ -16,7 +16,6 @@
                 required="" 
                 value="<?=$existencia?>">
             <button class="es_disponible btn_guardar_cantidad_productos">
-                Guardar 
+                GUARDAR 
             </button>
         </div>
-    

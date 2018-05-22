@@ -121,7 +121,8 @@
                 <?=n_row_12()?>                    
                     <?=$this->load->view("servicios/imagenes_servicios" , $data)?>
                 <?=end_row()?>                    
-                <?=n_row_12()?>                                            
+                <?=n_row_12()?>                     
+                    <hr class="hr_producto">                       
                     <?=$this->load->view("servicios/videos" , $data)?>
                 <?=end_row()?> 
             </div>
@@ -140,23 +141,23 @@
             </div>
             <div class="tab-pane <?=valida_active_pane($num , 3);?>" id="tab_terminos_de_busqueda">
                 <?=n_row_12()?>    
-                    <div class="well">
+                    <div class="contenedor_inf_servicios">
                     <table style="width: 100%" id="seccion_metakeywords_servicio"> 
-                        <div class="titulo_seccion_producto">
-                            ¿Clientes por qué palabras encuentran lo que vendes?
+                        <div class="titulo_seccion_producto titulo_producto_servicio">
+                            ¿CLIENTES POR QUÉ PALABRAS ENCUENTRAN LO QUE VENDES?
                         </div>
-                        <div style="height: 50px;overflow: auto;">
+                        <div class="info_meta_tags">
                             <?=create_meta_tags($metakeyword_usuario , $id_servicio);?>
                         </div>                    
                         <table>
                             <tr>
                                 <td>
-                                    <span class="strong" style="font-size: .9em">
-                                                Agregar
+                                    <span class="strong" >
+                                        AGREGAR
                                     </span>
                                 </td>
                                 <td>
-                                    <div style="width: 300px;margin-left: 5px;">                    
+                                    <div style="width: 100%;margin-left: 5px;">                    
                                         <form class="form_tag" id="form_tag">
                                             <input 
                                                     type="hidden" 
@@ -194,9 +195,9 @@
                             <div class="row">                                
                                 <div class='col-lg-5'>
                                     <div class="row">
-                                        <strong>
+                                        <div class="titulo_producto_servicio">
                                             <?=$msj_compra_en_casa;?>
-                                        </strong>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class='col-lg-7 info_recoge_en_casa'>
@@ -227,41 +228,43 @@
                                 </div>  
                             </div>
                         </div>
+                        <hr class="hr_producto">
 
-                    <div class='col-lg-6 contenedor_infor_telefonos'>
-                        <div class="row">
-                                <div class='col-lg-5'>
-                                    <div class="row">
-                                        <strong>
-                                            <?=$msj_ver_telefono;?>
-                                        </strong>
+                        <div class='col-lg-6 contenedor_infor_telefonos'>
+                            <div class="row">
+                                    <div class='col-lg-5'>
+                                        <div class="row">
+                                            <div class="titulo_producto_servicio">
+                                                <?=$msj_ver_telefono;?>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class='col-lg-7 info_telefonos_visibles'>
-                                    <div class="row">
-                                        <br>
-                                        <?=n_row_12();?>    
-                                            
-                                                <a 
-                                                    id='1'
-                                                    class='button_enid_eleccion telefono_visible 
-                                                    <?=valida_activo_vista_telefono(1 , 
-                                                        $telefono_visible)?>'>
-                                                    SI
-                                                </a>
-                                                <a  style="margin-left: 10px;"
-                                                    id='0'
-                                                    class='button_enid_eleccion telefono_visible
-                                                    <?=valida_activo_vista_telefono(0 , 
-                                                        $telefono_visible)?>'>
-                                                    NO, OCULTAR MI TELÉFONO
-                                                </a>
-                                            
-                                        <?=end_row()?>
+                                    <div class='col-lg-7 info_telefonos_visibles'>
+                                        <div class="row">
+                                            <br>
+                                            <?=n_row_12();?>    
+                                                
+                                                    <a 
+                                                        id='1'
+                                                        class='button_enid_eleccion telefono_visible 
+                                                        <?=valida_activo_vista_telefono(1 , 
+                                                            $telefono_visible)?>'>
+                                                        SI
+                                                    </a>
+                                                    <a  style="margin-left: 10px;"
+                                                        id='0'
+                                                        class='button_enid_eleccion telefono_visible
+                                                        <?=valida_activo_vista_telefono(0 , 
+                                                            $telefono_visible)?>'>
+                                                        NO, OCULTAR MI TELÉFONO
+                                                    </a>
+                                                
+                                            <?=end_row()?>
+                                        </div>
                                     </div>
-                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <hr class="hr_producto">
                     <?=end_row();?>                    
                 </div>
 
@@ -271,10 +274,13 @@
                         <?=n_row_12()?>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <?php $this->load->view("servicios/seccion_nuevo" , $en_productos);?>
+                                    <?php $this->load->view("servicios/seccion_nuevo" , 
+                                        $en_productos);?>
                                 </div>
                                 <div class="col-lg-6">
-                                    <?php $this->load->view("servicios/seccion_disponibles", $en_productos);?>
+                                    <?php 
+                                    $this->load->view("servicios/seccion_disponibles", 
+                                        $en_productos);?>
                                 </div>
                             </div>
                         <?=end_row()?>
@@ -297,16 +303,16 @@
 
 
                 <?php if($flag_servicio == 0 ):?>
-                    <br>
+                    <hr class="hr_producto">
                     <div class="contenedor_inf_servicios" >                        
                             <div class="row">
                                 <div class="col-lg-8">                                
                                     <div class="row">   
                                             <div class="col-lg-4">
-                                                <strong>
+                                                <div class="titulo_producto_servicio">
                                                     ¿TAMBIÉN VENDES ESTE PRODUCTO A 
                                                     PRECIOS DE MAYOREO?
-                                                </strong>
+                                                </div>
                                             </div>
                                             <div class="col-lg-8">
                                                 <br>

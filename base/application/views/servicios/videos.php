@@ -1,6 +1,6 @@
 <div style="margin-top: 30px;"></div>
 <?=n_row_12()?>    
-    <div class="well" style="background: #fefefe!important">    
+    <div class="contenedor_inf_servicios">    
         <div class='titulo_seccion_producto'>
             TIENES ALGÚN VIDEO SOBRE TU - <?=$tipo_promocion?> 
         </div>
@@ -21,7 +21,7 @@
                     <?=entrega_data_campo($servicio , "url_vide_youtube")?>
                 </span>
                 <i  class="fa fa-pencil text_url_youtube" 
-                                        style="margin-left: 10px;">
+                    style="margin-left: 10px;">
                 </i>
             </div>
             <div style="display: none;" class="input_url_youtube">
@@ -50,3 +50,4 @@
                          
                               
 <?=end_row()?>
+<div style="margin-top: 30px;"></div>

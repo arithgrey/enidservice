@@ -69,7 +69,7 @@
                         <a type="button" 
                            id='olvide-pass' 
                            class="recupara-pass" 
-                           style="font-size: 1.7em;font-weight: bold;">                            
+                            style="font-size: 1.7em;font-weight: bold;">                            
                             ¿OLVIDASTE TU CONTRASEÑA?
                         </a>
                     </center>
@@ -95,3 +95,4 @@
         </div>    
         <?=end_row()?>
     </div>
+    <div style="margin-top: 110px;"></div>

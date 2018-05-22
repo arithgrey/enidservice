@@ -1,8 +1,7 @@
-
         <div class="contenedor_es_nuevo">                    
-            <strong>
+            <div class="titulo_producto_servicio">
                 ¿ES NUEVO?
-            </strong>
+            </div>
             <i class="fa fa-pencil text_nuevo">                
             </i>
             <div>
@@ -17,4 +16,4 @@
                 Guardar 
             </button>
         </div>
-    
+        <hr class="hr_producto">
