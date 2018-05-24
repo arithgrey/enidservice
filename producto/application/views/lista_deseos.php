@@ -1,6 +1,6 @@
 <?php if($in_session ==  0):?>
 	<a href="../login/">
-		<div class="a_enid_black">		
+		<div class="a_enid_black agregar_a_lista">		
 			AGREGAR A TU LISTA DE DESEOS
 			<i class="fa fa-gift"></i>
 		</div>

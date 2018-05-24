@@ -64,8 +64,7 @@ class producto extends REST_Controller{
     function q_GET(){
         
         $param =  $this->get();        
-        
-        error_log($this->sessionclass->getidusuario()."-----------");
+                
         $id_usuario=($this->sessionclass->is_logged_in())?
         $this->sessionclass->getidusuario():
         get_info_variable($param , "id_usuario" );
@@ -451,7 +450,15 @@ class producto extends REST_Controller{
         $response            =  $this->qmodel->add_lista_deseos($param);
         $this->response($response);
     }
-
+    /**
+     * 
+     */
+    function lista_deseos_GET(){    
+        $param = $this->get();
+        $response =  $this->qmodel->get_productos_deseados_usuario($param);
+        $this->response($response);
+    }
+    
 
 
 }?>

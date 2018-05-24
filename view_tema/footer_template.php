@@ -241,6 +241,21 @@
 </script>
 <script src="../js_tema/js/librerias/clipboard.min.js<?=version_enid?>">
 </script>
+
+<?php if (isset($js)):?>
+	<?php  foreach($js as $script):?>
+		<script type='text/javascript' src = '<?php echo $script;?><?=version_enid?>'></script>
+    <?php endforeach;?>
+<?php  endif; ?>
+
+<?php if (isset($css)):?>
+	<?php  foreach($css as $c):?>
+		<link 
+            rel="stylesheet" 
+            type="text/css" 
+            href="<?php echo $c;?><?=version_enid?>">
+    <?php endforeach;?>
+<?php  endif; ?>
 <script>
     var clipboard = new Clipboard('.btn_copiar_enlace_pagina_contacto');
     clipboard.on('success', function(e) {

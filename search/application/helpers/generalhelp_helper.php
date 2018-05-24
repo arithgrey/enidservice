@@ -363,46 +363,7 @@ function get_info_usuario($q2){
 }
 /**/
 function get_info_servicio($q){
-        $num_hist= 9990890;                      
-       
-        if(isset($q)){                
-            if($q== 1){
-                /*Cuando se comparte en facebook*/
-                $num_hist= 109;      
-            }if ($q == 2 ){
-                /*Cuando se comparte en mercado libre*/
-                $num_hist= 110;             
-            }    
-            if ($q == 3 ){
-                /*Cuando se comparte en linkeding*/
-                $num_hist= 510;             
-            }    
-            if ($q == 4 ){
-                /*Cuando se comparte en twitter*/
-                $num_hist= 511;             
-            }if ($q == 5 ){
-                /*Cuando se comparte en Email*/
-                $num_hist= 50123;             
-            }    
-            if ($q == 6 ){
-                /*Cuando se comparte en Blog*/
-                $num_hist= 50121;             
-            }    
-            if ($q == 7 ){
-                /*Cuando se comparte Adwords*/
-                $num_hist= 50179;             
-            }
-            /**/
-            if ($q == 8 ){
-                /*Cuando es en Instagram*/
-                $num_hist= 50180;             
-            }
-            if ($q == 9 ){
-                /*Cuando es en pinterest*/
-                $num_hist= 50181;             
-            }
-
-        }  
+        $num_hist= 9990890;                                    
         return $num_hist;      
 
 }

@@ -213,7 +213,7 @@
     function set_option($key , $value){
         $this->options[$key] =  $value;
     }
-    /**/
+    /*----*/
     function busqueda_producto($param){
         
         $data_complete["num_servicios"] =  
@@ -272,7 +272,6 @@
 
             $extra_clasificacion ="";
 
-            if ($param["agrega_clasificaciones"] ==  1) {
                 
                 if($id_clasificacion > 0){                
                     $extra_clasificacion = "AND(
@@ -287,7 +286,6 @@
                                                 quinto_nivel   =  $id_clasificacion 
                                             )";
                 }       
-            }
             
             return $extra_clasificacion;
 
@@ -322,10 +320,10 @@
             if ($flag_conteo ==  0){
                 $limit =  $this->get_limit($param);    
             }
-            /**/
-            $id_clasificacion =  $param["id_clasificacion"];
-            $extra_clasificacion =  
-            $this->get_extra_clasificacion($id_clasificacion , $param);            
+            /**/            
+            $extra_clasificacion = $this->get_extra_clasificacion(
+                $param["id_clasificacion"] , $param);            
+            
             $num_q = strlen(trim($param["q"])); 
             $q=  $param["q"]; 
             $sql_extra  ="";
@@ -537,5 +535,14 @@
                     id_servicio ='".$id_servicio."' LIMIT 1";
         $result =  $this->db->query($query_get);
         return $result->result_array()[0]["num"];
+    }
+    /**/
+    function get_productos_deseados_usuario($param){
+            
+        $id_usuario =  $param["id_usuario"];        
+        $query_get ="SELECT id_servicio FROM usuario_deseo 
+                     WHERE id_usuario = '".$id_usuario."' ORDER BY num_deseo DESC LIMIT 30";
+        $result=  $this->db->query($query_get);
+        return  $result->result_array();
     }
 }

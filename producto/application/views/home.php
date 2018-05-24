@@ -348,6 +348,9 @@ class='desde_valoracion'>
   .agregar_a_lista_deseos{    
     margin-bottom: 30px;
   }
+  .agregar_a_lista{
+    margin-bottom: 35px; 
+  }
   .agregar_a_lista_deseos:hover{
     cursor: pointer;
   }

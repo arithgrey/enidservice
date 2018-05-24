@@ -1,0 +1,334 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+function crea_alcance($alcance){
+
+    $maximo  = $alcance[0]["maximo"];
+    $minimo  = $alcance[0]["minimo"];
+    $promedio =  $alcance[0]["promedio"];
+
+    $a ="title='Tope de personas que han visto uno de tus productos o servicios disponibles'";
+    $b ="title='Promedio de personas que han visto tus productos' ";
+    $c ="title='El producto que ha tenido menos alcance de visitas ante clientes potenciales' ";
+
+    $text =  "<div style='border-top-style:solid;margin-top:55px;'></div>
+              <center>
+              <h3 style='font-size: 1.4em;margin-top:30px;' class='black strong'>         
+                ALCANCE DE TUS PRODUCTOS
+              </h3>
+              </center>";    
+
+    $text .=  "<table width='100%' class='text-center'>";
+    
+    $text .=  "<tr>";
+      $text .=  get_td($maximo , "class='strong num_alcance' 
+                id='".$maximo."' 
+                style='font-size:1.5em;' $a " );
+      $text .=  get_td($promedio, "class='strong' 
+                style='font-size:1.6em;' $b ");
+      $text .=  get_td($minimo, "class='strong num_alcance' 
+                        id='".$minimo."' 
+                style='font-size:1.5em;' $c ");
+    $text .=  "</tr>";
+
+    $text .=  "<tr>";
+      $text .=  get_td("Tope" , "class='strong blue_enid' $a  ");
+      $text .=  get_td("Promedio", "class='strong blue_enid' $b ");
+      $text .=  get_td("Mínimo", "class='strong blue_enid' $c"); 
+    $text .=  "</tr>";
+    $text .=  "</table>";
+
+    return $text;
+}
+/**/
+function valida_active_tab($nombre_seccion , $estatus){
+
+  if(strlen($estatus) > 0 ){    
+    if($nombre_seccion ==  $estatus){
+      return " active ";   
+    }  
+  }else{
+    if($nombre_seccion == "compras"){
+      return " active ";   
+    }
+  } 
+  
+}
+/**/
+function valida_valor_variable($option , $key){
+
+  $valor ="";
+  if(isset($option[$key])) {
+    $valor =  $option[$key];  
+  }
+  return $valor;
+}
+/**/
+function get_dominio($url){
+    $protocolos = array('http://', 'https://', 'ftp://', 'www.');
+    $url = explode('/', str_replace($protocolos, '', $url));
+    return $url[0];
+}
+/*
+function get_select_tipo_actualizaciones(){
+
+  $lista_actualizaciones =  ["Páginas web", "Google Adwords" ,"Tienda en linea","CRM" ,"Actualizar a lista negra"];
+  $lista_valores = [1,2,3,4,0];
+
+  $select =  "<select name='tipo' class='form-control'> ";
+  for ($b=0; $b <count($lista_actualizaciones); $b++){ 
+    $select .=  "<option value='". $lista_valores[$b]."'>".$lista_actualizaciones[$b]."</option>";    
+  }
+  $select .=  "</select>";
+  return $select;
+}
+*/
+/*
+function get_select_descargas_email(){
+
+  $num_email =["250","500" ,"1000","2000","5000"];
+
+  $select ='<select id="selectbasic" name="limit" class="form-control">';
+  for ($b=0; $b < count($num_email); $b++) { 
+        
+    $select.= "<option value='".$num_email[$b]."'>".$num_email[$b]."</option>";
+  }
+  $select .='</select>';
+
+  return $select;
+
+}
+*/
+
+/*
+function get_tipos_servicios_def(){
+
+  $servicios =["Gestor de contenidos","Landing pages","CRM","Adwords","Tienda en linea "];
+
+  $select ='<select id="selectbasic" name="tipo_servicio" class="form-control">';
+  for ($b=0; $b < count($servicios); $b++) { 
+        
+    $select.= "<option value='".$b ."'>".$servicios[$b]."</option>";
+  }
+  $select .='</select>';
+
+  return $select;
+
+}**/
+/*
+function get_tels($id_usuario){    
+    
+    $l ='
+                          <ul>   
+                            <li>
+                                <a target="_blank" href="tel:+015545444823" class=" " style="font-size:1.2em;color:black;">
+                                    <i class="icon-mobile contact">
+                                    </i>(55) 4544-4823
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="tel:+015532693811" class=" " style="font-size:1.2em;color:black;">
+                                    <i class="icon-mobile contact">
+                                    </i>
+                                    (55) 3269-3811
+                                </a>
+                            </li>
+                          </ul>
+      ';
+    if ($id_usuario ==  158 ){
+
+          
+    $l ='
+                          <ul>                               
+                            <li>
+                                <a target="_blank" href="tel:+015532693811" class=" " style="font-size:1.2em;color:black;">
+                                    <i class="icon-mobile contact">
+                                    </i>
+                                    (55) 3269-3811
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="tel:+015545444823" class=" " style="font-size:1.2em;color:black;">
+                                    <i class="icon-mobile contact">
+                                    </i>(55) 4544-4823
+                                </a>
+                            </li>
+                          </ul>
+      ';
+    }
+    return $l;
+}
+*/
+/**/
+function get_btn_nuevo_mensaje($id_usuario){
+
+  $btn ="";
+  if ($id_usuario ==  1 ){
+    
+    $btn ="<i class='btn fa fa-plus'   data-toggle='modal' data-target='#registrar_info_red_social'></i>";
+    
+
+  }
+  return $btn;
+}
+/**/
+function get_btn_comando($id_usuario){
+
+  $btn ="";
+  if ($id_usuario ==  1 ){    
+    
+    $btn ="<i class='btn fa fa-plus' data-toggle='modal' data-target='#registra_info_comando'>
+          </i>";
+  }
+  return $btn;
+}
+/**/
+function get_parte_facebook($id_usuario){    
+      return "?q=1&q2=$id_usuario";
+}
+function get_parte_mercado_libre($id_usuario){    
+      return "?q=2&q2=$id_usuario";
+}
+function get_parte_linkeding($id_usuario){    
+      return "?q=3&q2=$id_usuario";
+}
+function get_parte_twitter($id_usuario){    
+      return "?q=4&q2=$id_usuario";
+}
+function get_parte_gmail($id_usuario){    
+      return "?q=5&q2=$id_usuario";
+}
+
+function get_parte_blog($id_usuario){    
+      return "?q=6&q2=$id_usuario";
+}
+
+/**/
+function template_documentacion($titulo,  $descripcion , $url_img  ){    
+      $block =  "
+                  <span>
+                  <b>"; 
+      $block .= $titulo;
+      
+      $block .= "</b>
+                </span>
+                <br>
+                <span>
+                ". $descripcion;
+
+      $block .= "</span>
+                  <img src='".$url_img."' class='desc-img'>
+                ";                          
+      $block .= "<br>
+                <br>";
+      return $block;
+
+
+  }
+/**/
+if(!function_exists('invierte_date_time')){
+  
+  function construye_menu_enid_service($titulos , $extras ){
+      $menu =  ""; 
+      for ($a=0; $a < count($titulos ); $a++){ 
+        $menu .=  "<a ".$extras[$a]." >" . $titulos[$a]." | </a>" ; 
+      }
+      return $menu;
+  }
+  /**/
+  /**/
+  
+
+  /*NAVEGACIÓN NAVEGACIÓN NAVEGACIÓN NAVEGACIÓN NAVEGACIÓN NAVEGACIÓN */
+  function navegador(){
+    return $_SERVER['HTTP_USER_AGENT'];
+  }
+  /**/
+  function ip_user(){
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))
+    return $_SERVER['HTTP_CLIENT_IP'];
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+    return $_SERVER['HTTP_X_FORWARDED_FOR'];
+    return $_SERVER['REMOTE_ADDR'];
+  }  
+  /**/
+  function RandomString($length=10,$uc=TRUE,$n=TRUE,$sc=FALSE){    
+        $source = 'abcdefghijklmnopqrstuvwxyz';
+        if($uc==1) $source .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if($n==1) $source .= '1234567890';
+        if($sc==1) $source .= '|@#~$%()=^*+[]{}-_';
+        if($length>0){
+            $rstr = "";
+            $source = str_split($source,1);
+            for($i=1; $i<=$length; $i++){
+                mt_srand((double)microtime() * 1000000);
+                $num = mt_rand(1,count($source));
+                $rstr .= $source[$num-1];
+            }
+        }
+        return $rstr;
+  }
+  function create_url_preview($img){
+    return base_url()."../img_tema/portafolio/".$img;
+  }
+
+  /**/
+  function valida_template_perfil_home($perfil){
+
+    switch ($perfil) {
+      case 7:
+          return "principal/center_page_general"; 
+        break;
+      case 4:
+          return "principal/center_page_general_prospecto";   
+        break;    
+      case 3:
+          return "principal/center_page_general_prospecto"; 
+      break;  
+      
+      default:
+        return ""; 
+      break;
+    }
+  }                                                
+
+  /*NAVEGACIÓN NAVEGACIÓN NAVEGACIÓN NAVEGACIÓN NAVEGACIÓN NAVEGACIÓN */
+  
+  function get_random(){
+    return  mt_rand();       
+  }
+  /**/
+  function get_td($valor , $extra = '' )
+  {
+    return "<td ". $extra ." NOWRAP >". $valor ."</td>";
+  }
+  /**/
+  
+  function n_row_12($extra =""){
+
+    $row= "<div class='row'>
+            <div class='col-lg-12 col-md-12 col-sm-12 ". $extra ." '>";
+    return $row;
+  }
+  function end_row(){
+    $row= "</div>
+          </div>";
+    return $row;
+  }
+  /**/
+  function titulo_enid($titulo){
+
+    $n_titulo =  n_row_12() 
+                 ."<h1 class='titulo_enid_service'>
+                    ". $titulo ."
+                    </h1>".
+                 end_row();
+
+    return $n_titulo;             
+  }
+  /**/
+  function now_enid(){
+    return  date('Y-m-d');
+  }
+  
+  
+
+}/*Termina el helper*/

@@ -137,4 +137,5 @@ function agregar_a_lista_deseos(){
 function respuesta_add_valoracion(data){	
 	$("#agregar_a_lista_deseos_add").empty();	
 	llenaelementoHTML("#agregar_a_lista_deseos_add" , "<div class='btn_add_list'>AÑADISTE A TU LISTA DE DESEOS ESTE PRODUCTO! <i class='fa fa-gift'></i></div><br>");
+	redirect("../lista_deseos");
 }

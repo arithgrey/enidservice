@@ -19,7 +19,9 @@ class Home extends CI_Controller{
         $param    =  $this->input->get();
         $param["id_clasificacion"]  =  get_info_variable($param , "q2" );               
         $param["vendedor"] =  get_info_variable($param , "q3" );
-        $param["num_hist"]= get_info_servicio($param["q"]);                
+        
+        $q=  (array_key_exists("q", $param)) ?$param["q"] :"";  
+        $param["num_hist"]= get_info_servicio($q);                
         $this->load_data($param);    
         
     }
@@ -31,8 +33,8 @@ class Home extends CI_Controller{
         $data["desc_web"] = "";
         $data["url_img_post"] = create_url_preview("promo.png");
     
-        
-        $data_send["q"]= $param["q"];
+        $q=  (array_key_exists("q", $param)) ?$param["q"] :""; 
+        $data_send["q"] = $q; 
         $data_send["vendedor"] = $param["vendedor"];
         $data_send["id_clasificacion"] =  $param["id_clasificacion"];
         $data_send["extra"]= $param;
@@ -59,7 +61,7 @@ class Home extends CI_Controller{
         if ($servicios["num_servicios"] > 0) {
             
             $data["url_request"]=  $this->get_url_request("");
-            $data["busqueda"] =  $param["q"];
+            $data["busqueda"] =  $q;
             $totales_elementos=  $data["servicios"]["num_servicios"];
             $data["num_servicios"] =  $totales_elementos;
             $data["bloque_busqueda"] ="";
@@ -74,7 +76,7 @@ class Home extends CI_Controller{
             
             $config_paginacion["totales_elementos"] =  $totales_elementos;
             $config_paginacion["per_page"] = $per_page;
-            $config_paginacion["q"] =  $param["q"];
+            $config_paginacion["q"] =  $q;
             $config_paginacion["q2"] = $param["id_clasificacion"];
             $config_paginacion["q3"] = $param["vendedor"];
 
@@ -82,7 +84,7 @@ class Home extends CI_Controller{
             $data["paginacion"]= $this->create_pagination($config_paginacion);            
             $this->set_option("in_session" ,  0);
             $data["lista_productos"]= $this->agrega_vista_servicios($servicios["servicios"]);
-            $data["q"] = $param["q"];
+            $data["q"] = $q;
             $data["categorias_destacadas"] = $categorias_destacadas;
             $this->principal->show_data_page($data , 'home');
             

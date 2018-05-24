@@ -70,13 +70,14 @@
         </li>
 
 
-        <li class="dropdown  pull-right blue_enid_background  boton_vender_global" 
-            style="padding:3px;z-index:3000;margin-top: 2px;height: 30px;margin-left:5px;">
-            <a  class="white blue_enid" 
-                style="color: white!important"
+        <li 
+            class="dropdown  pull-right  boton_vender_global" 
+            style="padding:3px;z-index:3000;margin-top: 2px;height: 30px;margin-left:5px;border: solid 1px;background: white;font-weight: bold;">
+            <a 
+                style="color: #01020f!important"
                 href="../planes_servicios/?action=nuevo"> 
                 <i class="fa fa-cart-plus"></i>
-                VENDER
+                ANUNCIA TUS PRODUCTOS
             </a>
         </li>
   

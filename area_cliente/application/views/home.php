@@ -1,6 +1,6 @@
 <main>  
 	<div class="contenedor_header"></div>
-    <div class='contenedor_principal_area_cliente' >
+    <div>
 	    <?=$this->load->view("secciones/menu");?>
 	    <div class='col-lg-10'>
 	        <div class="tab-content">            
@@ -18,11 +18,10 @@
 	                    	<div class="place_ventas_usuario"></div>
 	                    </div>
 	                    <div class="col-lg-3">	                		
-					       	<h3 style="font-size: 1.5em;" class="black strong">					
+					       	<h3 style="font-size: 1.5em;" class="black strong">				
 								MIS VALORACIONES Y RESEÑAS RECIBIDAS
 							</h3>
 							<br>
-							
 							<center>
 					    		<?=$valoraciones;?>
 					    	</center>
