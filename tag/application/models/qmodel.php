@@ -497,28 +497,85 @@
         $status =0;
         if ($this->get_producto_deseo($param) == 0 ) {
 
-            $id_usuario =  $param["id_usuario"];
-            $id_servicio =  $param["servicio"];
-            $query_insert = "INSERT INTO usuario_deseo(id_usuario , id_servicio) 
-                            VALUES('".$id_usuario."' , '".$id_servicio."')";
-            $status =  $this->db->query($query_insert);    
+            $this->add_usuario_deseo($param);
+            $this->mejora_deseo_producto($param);
+            $this->agrega_interes_usuario($param);
         }else{
             $status = $this->aumenta_deseo($param);
         }        
         return $status;
     }
     /**/
-    private function aumenta_deseo($param){
-
+    private function add_usuario_deseo($param){
 
         $id_usuario =  $param["id_usuario"];
         $id_servicio =  $param["servicio"];
-        $query_update =  "UPDATE usuario_deseo SET 
-                            num_deseo = num_deseo +1 
+        $query_insert = "INSERT INTO usuario_deseo(
+                                id_usuario , 
+                                id_servicio
+                            ) 
+                            VALUES(
+                                '".$id_usuario."' , 
+                                '".$id_servicio."')";
+        return $this->db->query($query_insert);    
+    }
+    /**/
+    private function get_clasificacion_producto_primer_nivel($id_servicio){
+        
+        $query_get ="SELECT primer_nivel 
+                    FROM 
+                        servicio 
+                    WHERE  
+                        id_servicio ='".$id_servicio."' 
+                    LIMIT 1";
+
+                    $result =  $this->db->query($query_get);
+                    return $result->result_array()[0]["primer_nivel"];
+    }
+    /**/
+    private function agrega_interes_usuario($param){
+
+        
+        $id_usuario     =  $param["id_usuario"];
+        $id_clasificacion =  
+        $this->get_clasificacion_producto_primer_nivel($param["servicio"]);
+
+        $query_insert ="INSERT INTO usuario_clasificacion(
+                            id_usuario ,
+                            id_clasificacion  
+                            )
+                        VALUES(
+                            '".$id_usuario."' ,
+                            '".$id_clasificacion."' 
+                            
+                        )";
+
+        return $this->db->query($query_insert);
+
+    }
+    /**/
+    private  function mejora_deseo_producto($param){
+
+        $id_servicio =  $param["servicio"];
+        $query_update = "UPDATE servicio SET 
+                            deseado = deseado + 1 
+                        WHERE 
+                            id_servicio = '".$id_servicio."' 
+                        LIMIT 1";
+        return $this->db->query($query_update);
+    }
+    /**/
+    private function aumenta_deseo($param){
+
+
+        $id_usuario     =  $param["id_usuario"];
+        $id_servicio    =  $param["servicio"];
+        $query_update   =  "UPDATE usuario_deseo SET 
+                                num_deseo = num_deseo +1 
                             WHERE 
                                 id_usuario ='".$id_usuario ."'
                             AND 
-                            id_servicio ='".$id_servicio."' 
+                                id_servicio ='".$id_servicio."' 
                             LIMIT 1";
 
         return $this->db->query($query_update);                    
