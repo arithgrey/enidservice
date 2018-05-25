@@ -1,5 +1,5 @@
 	<?=n_row_12()?>
-		<select class='form-control num_clasificacion num_clasificacion_phone <?=$nivel;?>' 
+		<select class='num_clasificacion num_clasificacion_phone selector_categoria <?=$nivel;?>' 
 			style="width: 100%!important;" >
 	        <?php foreach ($info_categorias as $row): ?>
 	        	<option 

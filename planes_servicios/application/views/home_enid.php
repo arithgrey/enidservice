@@ -65,24 +65,18 @@
 
 
 <input type="hidden" name="version_movil" value="<?=$is_mobile?>" class='es_movil'>
-<script type="text/javascript" 
-src="<?=base_url('application/js/principal.js')?><?=version_enid?>">
-</script>     
-<script type="text/javascript" 
-src="<?=base_url('application/js/img.js')?><?=version_enid?>">
-</script>    
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" 
-rel="stylesheet">
-<script 
-src="../js_tema/js/summernote.js<?=version_enid?>">    
-</script>
+
+
+
+
+
+
+
 <input type="hidden" value="<?=$action?>" class="q_action">
 <input type="hidden" value="<?=$extra_servicio?>" class="extra_servicio">
 
-<link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css<?=version_enid?>'>
-<link rel="stylesheet" type="text/css" href="../css_tema/template/vender.css<?=version_enid?>">
-<link rel="stylesheet" 
-type="text/css" href="../css_tema/template/planes_servicios.css<?=version_enid?>">
+
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <style type="text/css">
     .selector_categoria{
