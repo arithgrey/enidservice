@@ -602,4 +602,26 @@
         $result=  $this->db->query($query_get);
         return  $result->result_array();
     }
+    /**/
+    function get_productos_deseados_periodo($param){
+            
+        $fecha_inicio = $param["fecha_inicio"];
+        $fecha_termino = $param["fecha_termino"];
+
+        $query_get ="SELECT 
+                        id_servicio ,
+                        num_deseo
+                     FROM 
+                        usuario_deseo 
+                     WHERE 
+                        DATE(fecha_registro) 
+                    BETWEEN 
+                        '".$fecha_inicio."'
+                        AND 
+                        '".$fecha_termino."'
+                    ORDER BY num_deseo DESC";
+        
+        $result=  $this->db->query($query_get);
+        return  $result->result_array();        
+    }
 }

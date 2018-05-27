@@ -189,7 +189,7 @@ function indicadores(e){
 		$(".valoraciones").click(resumen_valoracion);
 		$(".servicios").click(resumen_servicios);
 		$(".productos_valorados_distintos").click(resumen_servicios_valorados);
-				
+		$(".lista_deseos").click(resume_lista_deseos);		
 	}).fail(function(){});		
 	e.preventDefault();
 
@@ -928,6 +928,28 @@ function resumen_servicios_valorados(){
 			llenaelementoHTML(".place_reporte", data ); 					
 	}).fail(function(){
 			show_error_enid(".place_reporte", "Error al actualizar incidencia");
-	});					
+	});						
+}
+/***/
+function resume_lista_deseos(){
+
+	fecha_inicio =  $(this).attr("fecha_inicio"); 
+	fecha_termino = $(this).attr("fecha_termino"); 	
+	data_send =  {"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino };
+	
+	url =  "../tag/index.php/api/producto/lista_deseos_periodo/format/json/";	
+
+	$.ajax({
+			url : url , 
+			type : "GET", 
+			data :  data_send , 
+			beforeSend: function(){
+				show_load_enid(".place_reporte" , "Cargando..." );
+			}  
+	}).done(function(data){			
+			llenaelementoHTML(".place_reporte", data ); 					
+	}).fail(function(){
+			show_error_enid(".place_reporte", "Error al actualizar incidencia");
+	});
 	
 }

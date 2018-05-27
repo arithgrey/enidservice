@@ -436,46 +436,46 @@
         $tb_valoraciones  = "valoraciones_$_num";
         $tb_valoraciones_p ="valoraciones_p_$_num";
         $tb_correos = "correos_$_num";
-        $tb_servicios = "servicios_$_num";
-        
+        $tb_servicios = "servicios_$_num";        
         $tb_preguntas =  "pregunta_$_num";
         /*usuarios*/
-
+        $tb_deseo_usuario =  "deseo_$_num";
 
         $sql_usuarios =  $this->crea_registros_usuarios($param);        
-          $this->crea_tabla_temploral($tabla_usuarios , $sql_usuarios , 0);      
+        $this->crea_tabla_temploral($tabla_usuarios , $sql_usuarios , 0);      
           /**/
-          $sql_ventas =  $this->crea_actividad_solicitudes($param);
-            $this->crea_tabla_temploral($tabla_ventas , $sql_ventas , 0 );
+        $sql_ventas =  $this->crea_actividad_solicitudes($param);
+        $this->crea_tabla_temploral($tabla_ventas , $sql_ventas , 0 );
             
-            $sql_contacto =  $this->crea_actividad_en_contacto($param);
-              $this->crea_tabla_temploral($tabla_contacto , $sql_contacto , 0);
+        $sql_contacto =  $this->crea_actividad_en_contacto($param);
+        $this->crea_tabla_temploral($tabla_contacto , $sql_contacto , 0);
 
-              $sql_tareas = $this->crea_tareas_resueltas($param);
-                $this->crea_tabla_temploral($tb_tareas , $sql_tareas , 0);
-                /**/
-                $sql_valoraciones =  $this->crea_valoraciones($param);
-                  $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 0);
+        $sql_tareas = $this->crea_tareas_resueltas($param);
+        $this->crea_tabla_temploral($tb_tareas , $sql_tareas , 0);
+        /**/
+        $sql_valoraciones =  $this->crea_valoraciones($param);
+        $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 0);
 
-                  /**/         
-                  $sql_valoraciones_productos =  
-                  $this->crea_valoraciones_distintas($param);
+        /**/         
+        $sql_valoraciones_productos =  
+        $this->crea_valoraciones_distintas($param);
                   
-                  $this->crea_tabla_temploral(
-                    $tb_valoraciones_p,
-                    $sql_valoraciones_productos,0);
+        $this->crea_tabla_temploral(
+        $tb_valoraciones_p,
+        $sql_valoraciones_productos,0);
                   
-
                   /**/
-                  $sql_correos_enviados =  $this->crea_correos_enviados($param);
-                    $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 0);
+        $sql_correos_enviados =  $this->crea_correos_enviados($param);
+        $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 0);
             
-                    $sql_servicios =  $this->crea_servicios_creados($param);
-                      $this->crea_tabla_temploral($tb_servicios , $sql_servicios , 0);
+        $sql_servicios =  $this->crea_servicios_creados($param);
+        $this->crea_tabla_temploral($tb_servicios , $sql_servicios , 0);
                       
-                      $sql_preguntas =  $this->crea_conversaciones($param);
-                        $this->crea_tabla_temploral($tb_preguntas , $sql_preguntas , 0);
-            
+        $sql_preguntas =  $this->crea_conversaciones($param);
+        $this->crea_tabla_temploral($tb_preguntas , $sql_preguntas , 0);
+              
+        $sql_deseo = $this->crea_tb_deseo($param);    
+        $this->crea_tabla_temploral($tb_deseo_usuario, $sql_deseo , 0);
 
                 $a = 0;
                 
@@ -504,36 +504,62 @@
 
                     $data_complete[$a]["valoraciones"] 
                     = $this->get_registros_valoraciones($fecha, $tb_valoraciones); 
-
                     
                     $data_complete[$a]["valoraciones_productos"] 
                     = $this->get_registros_valoraciones_productos($tb_valoraciones_p);                     
-
                     /**/
                     $data_complete[$a]["correos"] 
                     = $this->get_correos_enviados($tb_correos); 
 
+                    /**/
                     $data_complete[$a]["servicios_creados"] 
                     = $this->get_total_tabla($tb_servicios);
-                    
+                    /**/                    
                     $data_complete[$a]["conversaciones"] 
                     = $this->get_total_conversaciones($tb_preguntas);  
                     
+                    $data_complete[$a]["lista_deseo"] 
+                    = $this->get_total_lista_deseo($tb_deseo_usuario);  
                     
                     
                    $a ++;
                 }      
-                    $this->crea_tabla_temploral($tb_servicios , $sql_servicios , 1);
-                  $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 1);
-                  $this->crea_tabla_temploral($tb_valoraciones_p,$sql_valoraciones_productos,1);
-                $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 1);
-              $this->crea_tabla_temploral($tb_tareas , $sql_tareas , 1);
-            $this->crea_tabla_temploral($tabla_contacto , $sql_contacto , 1);
-          $this->crea_tabla_temploral($tabla_ventas , $sql_ventas , 1);        
-      $this->crea_tabla_temploral($tabla_usuarios , $sql_usuarios , 1);
-     $this->crea_tabla_temploral($tb_preguntas , $sql_preguntas , 1);
+          
+        $this->crea_tabla_temploral($tb_deseo_usuario , $sql_deseo , 1);      
+        $this->crea_tabla_temploral($tb_servicios , $sql_servicios , 1);
+        $this->crea_tabla_temploral($tb_correos , $sql_correos_enviados , 1);
+        $this->crea_tabla_temploral($tb_valoraciones_p,$sql_valoraciones_productos,1);
+        $this->crea_tabla_temploral($tb_valoraciones , $sql_valoraciones , 1);
+        $this->crea_tabla_temploral($tb_tareas , $sql_tareas , 1);
+        $this->crea_tabla_temploral($tabla_contacto , $sql_contacto , 1);
+        $this->crea_tabla_temploral($tabla_ventas , $sql_ventas , 1);        
+        $this->crea_tabla_temploral($tabla_usuarios , $sql_usuarios , 1);
+        $this->crea_tabla_temploral($tb_preguntas , $sql_preguntas , 1);
       }      
       return $data_complete;      
+    }
+    /**/
+    private function get_total_lista_deseo($tb_deseo_usuario){
+      $query_get = "SELECT 
+                      num
+                    FROM 
+                    $tb_deseo_usuario ";
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+    }
+    /**/
+    private function crea_tb_deseo($param){
+
+      $where =  $this->get_where_tiempo($param , 1);
+      $query_get ="SELECT 
+                      COUNT(0)num 
+                    FROM 
+                      usuario_deseo 
+                    WHERE 
+                      1=1 
+                    AND 
+                    ".$where;
+                    return $query_get;
     }
     /**/
     function get_registros_valoraciones($fecha , $tabla){

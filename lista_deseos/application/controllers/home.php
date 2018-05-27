@@ -13,9 +13,8 @@ class Home extends CI_Controller{
         $data["desc_web"] = "";        
         $data["url_img_post"] = ""; 
         $data["clasificaciones_departamentos"] = $this->get_departamentos("");
-        $data["productos_deseados"]=  $this->get_lista_deseos($data["id_usuario"]);  
-        $css_lista_deseos = base_url("application/css/principal.css");
-        $data["css"] =  array($css_lista_deseos);
+        $data["productos_deseados"]=  $this->get_lista_deseos($data["id_usuario"]);          
+        $data["css"] =  array("../css_tema/template/lista_deseos.css");
         $this->principal->show_data_page($data, 'home');        
     }    
     /**/

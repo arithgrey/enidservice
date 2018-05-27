@@ -458,7 +458,12 @@ class producto extends REST_Controller{
         $response =  $this->qmodel->get_productos_deseados_usuario($param);
         $this->response($response);
     }
-    
-
+    /**/
+    function lista_deseos_periodo_GET(){            
+        $param = $this->get();     
+        $data["productos_deseados"]=$this->qmodel->get_productos_deseados_periodo($param);   
+        $data["extra"] =  $param;
+        $this->load->view("producto/lista_deseos" , $data);
+    }
 
 }?>

@@ -37,6 +37,24 @@ class Inicio extends CI_Controller {
         $data["usuarios_disponibles"]=  $this->principal->get_usuario_enid();        
         $data["clasificaciones_departamentos"] = "";
         $data["categorias_destacadas"] =  $this->carga_categorias_destacadas("");
+
+        $data["js"] = array(
+            "../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+            "../js_tema/js/bootstrap-daterangepicker/moment.min.js",
+            "../js_tema/js/bootstrap-daterangepicker/daterangepicker.js",
+            "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+            "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+            "../js_tema/js/pickers-init.js",
+            base_url('application/js/principal.js')
+        );
+
+
+        $data["css"] = array(
+            "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css",
+            "../js_tema/js/bootstrap-timepicker/css/timepicker.css",
+            "../css_tema/template/metricas.css",
+            "../css_tema/template/lista_deseos.css");
         $this->principal->show_data_page( $data , 'empresas_enid');			    	
                 		
     }    	
@@ -54,9 +72,9 @@ class Inicio extends CI_Controller {
                 $data["no_publics"] =1;
                 $data["meta_keywords"] =  "";
                 $data["url_img_post"]= "";
-                $data["id_usuario"] = $this->sessionclass->getidusuario();                     
-                $data["id_empresa"] =  $this->sessionclass->getidempresa();                     
-                $data["info_empresa"] =  $this->sessionclass->get_info_empresa();                     
+                $data["id_usuario"] = $this->sessionclass->getidusuario();
+                $data["id_empresa"] =  $this->sessionclass->getidempresa();
+                $data["info_empresa"] =  $this->sessionclass->get_info_empresa();
                 $data["desc_web"] =  "";
                 return $data;
         }else{            

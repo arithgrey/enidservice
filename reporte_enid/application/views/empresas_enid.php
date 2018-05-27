@@ -130,38 +130,13 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css" />
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-timepicker/css/timepicker.css" />
-<script type="text/javascript" src="../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js">
-  
-</script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js">
-  
-</script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-daterangepicker/moment.min.js">
-  
-</script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-daterangepicker/daterangepicker.js">
-  
-</script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js">
-  
-</script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js">
-  
-</script>
-<script src="../js_tema/js/pickers-init.js">  
-</script>
-<script type="text/javascript" src="<?=base_url('application/js/principal.js')?>">
-</script>
-<style type="text/css" src="../css_tema/template/metricas.css"></style>
-<style type="text/css">
-    .clasificaciones_sub_menu_ul{
-        display: inline-table;
-    }
-    .total_categoria{
-        background: black;
-        padding: 5px;
-        color: white;
-    }
-</style>
+
+
+
+
+
+
+
+
+
+

@@ -7,11 +7,11 @@
 	$extra_valoraciones ="style='background: #000;color: white !important;text-align: center;' ";
 	$extra_td_productos_valorados ="";
 
-	$extra_accesos ="style='background: #00b7ff;color: white !important;text-align: center;' ";
+	$extra_accesos ="style='background: #00b7ff;color: white !important;text-align:center;'";
 	$extra_contacto ="style='text-align: center;' ";
 	$extra_labor ="style='text-align: center;background: #1c404e;color: white !important;' ";
-
-	$extra_servicios="style='text-align: center;background: #1c404e;color: white !important;' ";
+	$extra_servicios="style='text-align:center;background:#1c404e;color: white !important;'";
+	$extra_deseos = "style='text-align: center;background: #ff0048;color: white !important;'";
 
 	/**/
 	$accesos ="";		
@@ -33,6 +33,7 @@
 	$fecha_termino =  $envio_usuario["fecha_termino"];  
 	$conversaciones = "";
 	$servicios =  "";
+	$lista_deseos =  "";
 
 		$extra_td_usuarios =  "class='usuarios' 
 			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
@@ -339,11 +340,42 @@
 			$total_valoraciones .=  get_td($table);
 			
 		}
+
+		/**/
+		if (count($row["lista_deseo"]) >0 ) {
+
+			$extra_lista_deseos = " 
+				fecha_inicio = '".$fecha_inicio."' 
+				fecha_termino ='".$fecha_termino."' 
+				class='lista_deseos lista_deseos_num'
+				href='#reporte' data-toggle='tab' ";		
+
+			$num_lista_deseos = $row["lista_deseo"][0]["num"];			
+			$table ="<table width='100%' border=1  style='text-align: center;'>";
+				$table .="<tr>";	
+					$table .=get_td("Agregados a la lista");						
+				$table .="</tr>";	
+				$table .="<tr>";	
+					$table .=get_td($num_lista_deseos , $extra_lista_deseos);				
+				$table .="</tr>";	
+			$table .="</table>";			
+			$lista_deseos .=  get_td($table);
+
+		}else{
+
+			$table ="<table width='100%' border=1  style='text-align: center;'>";
+				$table .="<tr>";	
+					$table .=get_td("Agregados a la lista");						
+				$table .="</tr>";	
+				$table .="<tr>";	
+					$table .=get_td(0);							
+				$table .="</tr>";	
+			$table .="</table>";			
+			$lista_deseos .=  get_td($table);
+		}
 		
 	}	
 ?>
-
-
 
 <?=n_row_12()?>
     <table width="100%" border="1">
@@ -379,6 +411,10 @@
     	<tr>
     		<?=get_td("LABORES RESUELTAS" ,$extra_labor)?>
     		<?=$labores_resueltas?>
+    	</tr>	
+    	<tr>
+    		<?=get_td("LISTA DE DESEOS" ,$extra_deseos)?>
+    		<?=$lista_deseos?>
     	</tr>	
     </table>
 <?=end_row();?>
