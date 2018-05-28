@@ -64,6 +64,7 @@ class Home extends CI_Controller{
                     $data["paginacion"] =  $this->get_paginacion($prm);                
                 }
                 
+                $data["css"] = array(base_url("application/css/principal.css"));
                 $this->principal->show_data_page($data, 'home');                          
             
             }else{

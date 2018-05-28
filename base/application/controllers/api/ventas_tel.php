@@ -28,13 +28,14 @@ class Ventas_tel extends REST_Controller{
       $data["llamar_despues"] =  $this->agendadosmodel->get_llamar_despues($param);
       $this->load->view("agendados/llamar_despues" , $data);
   }
-  /**/
+  /*
   function marca_llamada_hecha_posterior_comentario_PUT(){
 
     $param =  $this->PUT();
     $db_response =  $this->agendadosmodel->limpia_registro_llamada_posterior_a_comentario($param);
     $this->response($db_response);
   }
+  */
   /**/
   function num_clientes_restantes_GET(){
     

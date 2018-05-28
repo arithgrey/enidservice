@@ -96,28 +96,7 @@
 	<input type="hidden" class="action" value="<?=$action?>" >
 </main>       
 
-<script type="text/javascript" 
-src="<?=base_url('application/js/principal.js')?><?=version_enid?>">
-</script>    
-<script 
-	type="text/javascript" 
-	src="<?=base_url('application/js/proyectos_persona.js')?><?=version_enid?>">
-</script>    
-<script 
-	type="text/javascript" 
-	src="<?=base_url('application/js/cobranza.js')?><?=version_enid?>">
-</script> 
-<script 
-	type="text/javascript" 
-	src="../js_tema/js/direccion.js<?=version_enid?>">
-</script>    
-<script type="text/javascript" 
-	src="<?=base_url('application/js/buzon.js')?><?=version_enid?>">
-</script>    
-<link rel="stylesheet" 
-	type="text/css" href="../css_tema/template/css_tienda_cliente.css<?=version_enid?>">
-<link 
-	rel="stylesheet" 
-	type="text/css" href="../css_tema/template/valoracion.css<?=version_enid?>">
-<link rel="stylesheet" 
-	type="text/css" href="../css_tema/template/area_cliente.css<?=version_enid?>">
+
+
+
+

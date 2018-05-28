@@ -11,11 +11,26 @@ class Home extends CI_Controller{
         $data = $this->val_session("");                
         $data["meta_keywords"] = "";    
         $data["desc_web"] = "";        
-        $data["url_img_post"] = ""; 
+        $data["url_img_post"] = "";
         $data["clasificaciones_departamentos"] = $this->get_departamentos("");
-        $data["productos_deseados"]=  $this->get_lista_deseos($data["id_usuario"]);          
-        $data["css"] =  array("../css_tema/template/lista_deseos.css");
-        $this->principal->show_data_page($data, 'home');        
+        
+
+        if (is_array($this->input->get()) 
+            && array_key_exists("q", $this->input->get())
+            && $this->input->get("q") === "preferencias" ){
+            
+            $data["preferencias"]=  $this->get_preferencias($data["id_usuario"]);            
+            $data["css"] = array( base_url("application/css/preferencias.css") );
+            $data["js"] = array( base_url("application/js/preferencias.js") );
+            $this->principal->show_data_page($data, 'home_preferencias');        
+
+        }else{            
+            /*Validamos que se envíe a lista de deseos o a preferencias*/            
+            $data["productos_deseados"]=  $this->get_lista_deseos($data["id_usuario"]);
+            $data["css"] =  array("../css_tema/template/lista_deseos.css");
+            $this->principal->show_data_page($data, 'home');        
+        } 
+        
     }    
     /**/
     function val_session( $titulo_dinamico_page ){        
@@ -66,10 +81,21 @@ class Home extends CI_Controller{
         $url_request        =  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
         $this->restclient->set_option('format', "json");        
-        $result             = $this->restclient->get("producto/lista_deseos/format/json/" , $q);
+        $result             =$this->restclient->get("producto/lista_deseos/format/json/" , $q);
         return json_decode($result->response , true);
         
     }
     /**/    
+    private function get_preferencias($id_usuario){
+
+        $q["id_usuario"]    =  $id_usuario;
+        $url                = "tag/index.php/api/";         
+        $url_request        =  $this->get_url_request($url);
+        $this->restclient->set_option('base_url', $url_request);
+        $this->restclient->set_option('format', "json");        
+        $result  = $this->restclient->get("clasificacion/interes_usuario/format/json/" , $q);
+        return json_decode($result->response , true);
+        
+    }
     
 }

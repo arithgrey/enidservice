@@ -65,49 +65,33 @@ class productividad extends REST_Controller{
     /**/
     function notificaciones_GET(){
 
-        $param = $this->get();  
-        $id_usuario =  $this->sessionclass->getidusuario();              
-        $param["id_usuario"] =  $id_usuario;
+        $param                          = $this->get();  
+        $id_usuario                     =  $this->sessionclass->getidusuario();              
+        $param["id_usuario"]            =  $id_usuario;
 
-        $db_response["info_notificaciones"] = 
-        $this->productividad_usuario_model->get_notificaciones_usuario_perfil($param);        
-        /**/
-        $id_perfil =  $db_response["info_notificaciones"]["perfil"]; 
-
-        $prm["modalidad"]=1;
-        $prm["id_usuario"] =  $id_usuario;                
+        $response["info_notificaciones"] = 
+        $this->productividad_usuario_model->get_notificaciones_usuario_perfil($param);
+        $id_perfil                      =  $response["info_notificaciones"]["perfil"]; 
+        $prm["modalidad"]               =1;
+        $prm["id_usuario"]              =  $id_usuario;                            
+            
+        $response["info_notificaciones"]["mensajes"] = $this->carga_mensajes_sin_leer($prm);
+        $response["id_usuario"] = $id_usuario;
         
-        /**/            
-        $mensajes=  $this->carga_mensajes_sin_leer($prm);                    
-        $db_response["info_notificaciones"]["mensajes_sin_leer"]=
-        $mensajes["modo_vendedor"];
-        $db_response["info_notificaciones"]["respuestas"]=$mensajes["modo_cliente"];
-        /**/        
-        $db_response["id_usuario"] = $id_usuario;
+        
         
         switch ($id_perfil){
             
             case 3:                
-                $this->response(get_tareas_pendienetes_usuario($db_response));        
-                break;            
-            case 4:                
-                $this->response(get_tareas_pendienetes_usuario($db_response));
-                break;
-            case 5:                
-                $this->response(get_tareas_pendienetes_usuario_soporte($db_response));
-                break;                
-            case 6:                                        
-                $this->response(get_tareas_pendientes_vendedor($db_response));                
+                $this->response(get_tareas_pendienetes_usuario($response));        
                 break;                        
-            case 20:                   
-                
-                $this->response(get_tareas_pendienetes_usuario_cliente($db_response));
+            case 20:                               
+                $this->response(get_tareas_pendienetes_usuario_cliente($response));
                 break;    
-            default:
-                $this->response("");    
+            default:                
                 break;
-        }          
-        /**/        
+        }       
+        
     }
     /**/
     function num_clientes_GET(){
@@ -155,7 +139,8 @@ class productividad extends REST_Controller{
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
         $this->restclient->set_option('format', "json");        
-        $result = $this->restclient->get("valoracion/preguntas_sin_leer/format/json/" , $param);
+        $result = 
+        $this->restclient->get("valoracion/preguntas_sin_leer/format/json/" , $param);
         $info =  $result->response;        
         return json_decode($info, true);
         

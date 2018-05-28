@@ -208,13 +208,9 @@ class Valoracion extends REST_Controller{
         $param =  $this->post();
         $db_response =  $this->valoracion_model->registra_pregunta($param);        
         /**/
-        if($db_response == true ){
-            
-            /**/                        
+        if($db_response == true ){                                
             $respuesta_notificacion = $this->envia_pregunta_a_vendedor($param);
-
-        }
-        
+        }        
         $this->response($respuesta_notificacion);
         /**/
 
@@ -238,9 +234,10 @@ class Valoracion extends REST_Controller{
         $data_complete["modalidad"] = $param["modalidad"];
         /*Consulta preguntas hechas con proposito de compras*/
         if($param["modalidad"] ==  1){             
-            /**/
-            $preguntas =  $this->valoracion_model->get_preguntas_realizadas_a_vendedor($param); 
+            /**/            
+            $preguntas = $this->valoracion_model->get_preguntas_realizadas_a_vendedor($param);
             $data_complete["preguntas"] = $preguntas;            
+
         }else{
             /***************************************/
             $preguntas =  $this->valoracion_model->get_preguntas_realizadas($param);
@@ -260,8 +257,8 @@ class Valoracion extends REST_Controller{
             $data_complete["modo_vendedor"]=
             $this->valoracion_model->get_preguntas_sin_leer_vendedor($param)[0]["num"];            
             /*Modo cliente*/
-
-            $data_complete["modo_cliente"] = $this->valoracion_model->get_respuestas_sin_leer($param);
+            $data_complete["modo_cliente"] = 
+            $this->valoracion_model->get_respuestas_sin_leer($param);
 
             $this->response($data_complete);          
         }
@@ -270,18 +267,20 @@ class Valoracion extends REST_Controller{
     function respuesta_pregunta_GET(){
         
         $param =  $this->get();
-        $data_complete["data_send"] = $param;  
-        /*Pasamos a visto la pregunta*/
-
-        $this->valoracion_model->set_visto_pregunta($param);
-        $data_complete["respuestas"] = $this->valoracion_model->get_respuestas_pregunta($param);
-        $data_complete["info_usuario"] =0;
+        $response["data_send"] = $param;  
+        
+        /*Pasamos a visto la pregunta*/            
+        $visto =  $this->valoracion_model->set_visto_pregunta($param);
+        $response["respuestas"] =  
+        $this->valoracion_model->get_respuestas_pregunta($param);
+        $response["info_usuario"] =0;
         if ($param["modalidad"] ==  1) {
-            $data_complete["info_usuario"] 
-            = 
-            $this->get_contacto_usuario($param["usuario_pregunta"]);
+            
+            $response["info_usuario"] 
+            = $this->get_contacto_usuario($param["usuario_pregunta"]);
         }
-        $this->load->view("valoraciones/form_respuesta" , $data_complete);        
+        $this->load->view("valoraciones/form_respuesta" , $response);        
+        
     }
     /**/
     function respuesta_pregunta_POST(){        

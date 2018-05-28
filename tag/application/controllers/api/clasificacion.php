@@ -5,6 +5,7 @@ class clasificacion extends REST_Controller{
         parent::__construct();                                      
         $this->load->model("clasificacion_model");
         $this->load->helper("enid");        
+        $this->load->library("sessionclass");
     }   
     /**/
     function clasificaciones_por_servicio_GET(){
@@ -21,6 +22,13 @@ class clasificacion extends REST_Controller{
         $data["clasificaciones"] 
         = $this->clasificacion_model->get_clasificaciones_segundo($primer_nivel);        
         $this->load->view("clasificaciones/menu" , $data);
+    }
+    /**/
+    function interes_usuario_GET($param){
+        
+        $param      =  $this->get();
+        $response   =  $this->clasificacion_model->get_intereses_usuario($param);
+        $this->response($response);
     }
     /**/
     function nombre_GET(){
@@ -49,4 +57,11 @@ class clasificacion extends REST_Controller{
         $this->response($data_complete);
     }    
     /**/
+    function interes_PUT(){
+
+        $param=  $this->put();         
+        $param["id_usuario"] =  $this->sessionclass->getidusuario();
+        $response =  $this->clasificacion_model->interes_usuario($param);        
+        $this->response($response);        
+    }
 }?>

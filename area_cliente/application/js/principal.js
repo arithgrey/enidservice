@@ -47,7 +47,7 @@ $(document).ready(function(){
 		carga_compras_usuario();		
 	});
 	$(".btn_buzon").click(function(){
-		/**/
+		/**/		
 		carga_num_preguntas();
 		carga_buzon();	
 	});
@@ -62,10 +62,8 @@ $(document).ready(function(){
 
 			$(".btn_preguntas_ventas").addClass("a_enid_blue");
 			$(".btn_preguntas_ventas").removeClass("a_enid_black");
-			$(".btn_preguntas_compras").addClass("a_enid_black");
-			
-		}
-		
+			$(".btn_preguntas_compras").addClass("a_enid_black");		
+		}		
 		/**/
 		set_option( "modalidad_ventas", e.target.id);  		
 		$(".contenedor_opciones_buzon").show();
@@ -96,13 +94,17 @@ function carga_num_preguntas(){
 		$(".notificacion_preguntas_sin_leer_ventas").empty();
 		$(".notificacion_preguntas_sin_leer_cliente").empty();
 		total_sin_leer =0;
+		
 		if(data.modo_vendedor>0){
 			llenaelementoHTML(".notificacion_preguntas_sin_leer_ventas"  , "<span class='notificacion_preguntas_no_leida'>"+data.modo_vendedor+"</span>");			
 			total_sin_leer = total_sin_leer + parseInt(data.modo_vendedor); 
-		}if(data.modo_cliente>0){
+		}
+		/*
+		if(data.modo_cliente>0){
 			llenaelementoHTML(".notificacion_preguntas_sin_leer_cliente"  ,"<span class='notificacion_preguntas_no_leida'>"+data.modo_cliente+"</span>");
 			total_sin_leer = total_sin_leer + parseInt(data.modo_cliente);
-		}		
+		}
+		*/		
 		if(total_sin_leer > 0 ){
 			llenaelementoHTML(".notificacion_preguntas_sin_leer_cliente_buzon"  ,"<span class='notificacion_preguntas_no_leida white'>"+total_sin_leer+"</span>");
 		}

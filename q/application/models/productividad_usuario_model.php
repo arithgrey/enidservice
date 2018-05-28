@@ -12,31 +12,34 @@
         $data_complete["perfil"] = $id_perfil;
         $param["id_perfil"] = $id_perfil;
         /**/
-        $data_complete["objetivos_perfil"] =  $this->get_objetivos_perfil($param);
-
-        $data_complete["id_usuario"]=  $param["id_usuario"]; 
-        $data_complete["adeudos_cliente"] = $this->get_adeudo_cliente($param);
-        $data_complete["flag_direccion"] = 
-        
+        $data_complete["objetivos_perfil"]      =  $this->get_objetivos_perfil($param);
+        $data_complete["id_usuario"]            =  $param["id_usuario"]; 
+        $data_complete["adeudos_cliente"]       = $this->get_adeudo_cliente($param);
+        $data_complete["flag_direccion"]        =  
         $this->verifica_direccion_registrada_usuario($param);                
-        $data_complete["productos_anunciados"] = 
-        $this->valida_producto_anunciado($param);
-        /**/
-        $data_complete["valoraciones_sin_leer"] = 
-        $this->valida_valoraciones_sin_leer($param);
+
+        $data_complete["productos_anunciados"]  = $this->valida_producto_anunciado($param);
+        $data_complete["valoraciones_sin_leer"] = $this->valoraciones_sin_leer($param);
         /**/
 
         
         switch ($id_perfil){
             case 3:            
                 /**/                                  
-                $data_complete["ventas_enid_service"]= $this->ventas_enid_service();                
+                $data_complete["ventas_enid_service"]= $this->ventas_enid_service();
+                
                 $data_complete["envios_a_validar_enid_service"] = 
                 $this->envios_a_validar_enid_service();                
-                $data_complete["email_enviados_enid_service"] = $this->email_enviados_enid_service();                
-                $data_complete["accesos_enid_service"] = $this->accesos_enid_service();                
+                
+                $data_complete["email_enviados_enid_service"] = 
+                $this->email_enviados_enid_service();                
+
+                $data_complete["accesos_enid_service"] = 
+                $this->accesos_enid_service();                
+
                 $data_complete["tareas_enid_service"] = 
                 $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];
+
                 $data_complete["num_pendientes_direccion"] = 
                 $this->tareas_enid_service()[0]["num_pendientes_direccion"];        
                                 
@@ -45,38 +48,16 @@
          case 4:            
                 
                 $data_complete["ventas_enid_service"]= $this->ventas_enid_service();                
-                $data_complete["envios_a_validar_enid_service"] = $this->envios_a_validar_enid_service();
-                $data_complete["email_enviados_enid_service"] = $this->email_enviados_enid_service();
-                $data_complete["accesos_enid_service"] = $this->accesos_enid_service();                
+                $data_complete["envios_a_validar_enid_service"] = 
+                $this->envios_a_validar_enid_service();
+
+                $data_complete["email_enviados_enid_service"] = 
+                $this->email_enviados_enid_service();
+
+                $data_complete["accesos_enid_service"] = 
+                $this->accesos_enid_service();                
                 $data_complete["tareas_enid_service"] = 
                 $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];                
-                
-
-            break;
-
-
-            case 5:            
-                /**/    
-                $data_complete["correos_registrados_enid_service"] = 
-                $this->correos_electronicos();  
-            break;
-
-
-            case 6:            
-                /**/
-                
-                $data_complete["ventas_usuario"] = $this->ventas_enid_service_vendedor($param);  
-                $data_complete["contactos_promociones_enid_service"] = 
-                $this->contactos_enid_promociones($param);
-
-                $data_complete["email_enviados_enid_service"] =  $this->email_enviados_usuario_enid_service($param);
-                
-
-            break;
-
-            case 20:                                                
-
-                /**/
                 
 
             break;
@@ -462,7 +443,7 @@
         return $result->result_array()[0]["num"];
     }
     /**/
-    private function valida_valoraciones_sin_leer($param){
+    private function valoraciones_sin_leer($param){
         $id_usuario =  $param["id_usuario"];
         $query_get ="
             SELECT 

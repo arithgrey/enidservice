@@ -65,17 +65,8 @@
 
 
 <input type="hidden" name="version_movil" value="<?=$is_mobile?>" class='es_movil'>
-
-
-
-
-
-
-
 <input type="hidden" value="<?=$action?>" class="q_action">
 <input type="hidden" value="<?=$extra_servicio?>" class="extra_servicio">
-
-
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <style type="text/css">

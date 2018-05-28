@@ -1,7 +1,9 @@
 function carga_buzon(){
+	
 	$(".contenedor_opciones_buzon").show();
 	url =  "../portafolio/index.php/api/valoracion/preguntas/format/json/";		
-	data_send =  {"modalidad" : get_option("modalidad_ventas")};				
+	data_send =  {"modalidad" : get_option("modalidad_ventas")};	
+				
 	$.ajax({
 			url : url , 
 			type: "GET",
@@ -20,6 +22,7 @@ function carga_buzon(){
 }
 /**/
 function carga_respuestas(e){	
+
 	id_pregunta =  parseInt(e.target.id);
 	var elemento =  $(this);
 	pregunta =  $(elemento).attr("pregunta");
@@ -32,13 +35,14 @@ function carga_respuestas(e){
 		/**/
 		set_option("pregunta" , id_pregunta);		
 		data_send = {"id_pregunta":id_pregunta , "pregunta" : pregunta, "registro" : registro , "usuario_pregunta" : usuario_pregunta , "modalidad" : get_option("modalidad_ventas") , "nombre_servicio":nombre_servicio , "servicio" :servicio}		
-		set_option("data_pregunta" , data_send);
+		set_option("data_pregunta" , data_send);		
 		carga_respuesta_complete();		
 	}
 	/**/
 }
 /**/
 function carga_respuesta_complete(){		
+
 		data_send =  get_option("data_pregunta");
 		url =  "../portafolio/index.php/api/valoracion/respuesta_pregunta/format/json/";		
 
@@ -52,7 +56,7 @@ function carga_respuesta_complete(){
 					$(".contenedor_opciones_buzon").hide();
 					llenaelementoHTML(".place_buzon" , data);
 					$(".form_valoracion_pregunta").submit(enviar_respuesta);
-
+					carga_num_preguntas();
 			}).fail(function(){			
 				show_error_enid(".place_buzon"  , "Error ... ");
 		});			

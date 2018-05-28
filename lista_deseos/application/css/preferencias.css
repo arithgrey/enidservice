@@ -1,0 +1,13 @@
+.titulo_preferencias{
+	font-weight: bold;font-size: 2em;
+}
+.item_preferencias:hover{
+	background: #0a004b;
+	color: white;
+	cursor: pointer;
+}
+.selected_clasificacion{
+	background: #0a004b!important;
+	color: white;
+	cursor: pointer;	
+}

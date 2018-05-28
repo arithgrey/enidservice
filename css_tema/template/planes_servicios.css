@@ -229,6 +229,12 @@
 .text_add_imgs{
     font-weight: bold;font-size: 2em;
 }
+.cancelar_registro{
+    background: red;
+    padding: 5px !important;
+    color: white !important;
+    font-weight: bold !important;
+}
 
 /* For mobile phones: */
 @media only screen and (max-width: 768px) {
@@ -250,5 +256,19 @@
     .text_add_imgs{
         font-weight: bold;font-size: 1.6em;
     }
-    
+    .separador_cancelar{
+        margin-top: 10px;
+        margin-bottom:10px;
+    }
+    .cancelar_registro:hover{
+        cursor: pointer;
+    }
+    .cancelar_registro{
+        background: red;
+        padding: 10px !important;
+        color: white !important;
+        font-weight: bold !important;
+        margin-bottom: 100px;
+    }
+
 }

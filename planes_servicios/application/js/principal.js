@@ -36,8 +36,12 @@ $(document).ready(function() {
 	/**/	
 	$(".contenedor_busqueda_global_enid_service").hide();
 	$(".ci_facturacion").change(evalua_precio);
-
+	$(".cancelar_registro").click(cancelar_registro);
 });
+function cancelar_registro(){	
+	showonehideone(".contenedor_agregar_servicio_form" ,".contenedor_categorias_servicios");
+}
+/**/
 function carga_servicios() {
 
 	$(".texto_ventas_titulo").show();
@@ -868,6 +872,7 @@ function set_nombre_servicio(n_nombre_servicio) {
 }
 function clean_data_categorias(){
 
+	/**/
 	$(".segundo_nivel_seccion").empty();
 	$(".tercer_nivel_seccion").empty();
 	$(".cuarto_nivel_seccion").empty();
@@ -877,7 +882,7 @@ function clean_data_categorias(){
 	set_option("nivel" , "primer_nivel");
 	set_option("padre", 0);
 	showonehideone(".contenedor_categorias_servicios", ".contenedor_agregar_servicio_form");
-	
+	//
 }
 /**/
 function carga_listado_categorias() {
@@ -897,6 +902,7 @@ function carga_listado_categorias() {
 		llenaelementoHTML(".primer_nivel_seccion", data);		
 		$(".primer_nivel_seccion .primer_nivel").change(carga_listado_categorias_segundo_nivel);		
 		$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+		add_cancelar_movil();
 
 	}).fail(function() {
 		show_error_enid(".primer_nivel_seccion","Error ... al cargar portafolio.");
@@ -934,6 +940,8 @@ function carga_listado_categorias_segundo_nivel(e) {
 			$(".segundo_nivel_seccion .segundo_nivel").change(carga_listado_categorias_tercer_nivel);
 			$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 			recorrepage(".segundo_nivel_seccion");
+			add_cancelar_movil();
+
 
 	}).fail(function() {
 			show_error_enid(".segundo_nivel_seccion","Error ... al cargar portafolio.");
@@ -972,7 +980,7 @@ function carga_listado_categorias_tercer_nivel(e) {
 		$(".tercer_nivel_seccion .tercer_nivel").change(carga_listado_categorias_cuarto_nivel);
 		$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 		recorrepage(".tercer_nivel_seccion");
-
+		add_cancelar_movil();
 	}).fail(function() {
 		show_error_enid(".tercer_nivel_seccion","Error ... al cargar portafolio.");
 	});
@@ -1009,6 +1017,7 @@ function carga_listado_categorias_cuarto_nivel(e) {
 				$(".cuarto_nivel_seccion .cuarto_nivel").change(carga_listado_categorias_quinto_nivel);
 				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 				recorrepage(".cuarto_nivel_seccion");
+				add_cancelar_movil();
 
 			}).fail(
 			function() {
@@ -1046,6 +1055,7 @@ function carga_listado_categorias_quinto_nivel(e) {
 		$(".quinto_nivel_seccion .quinto_nivel").change(carga_listado_categorias_sexto_nivel);
 		$(".nueva_categoria_producto").click(agregar_categoria_servicio);
 		recorrepage(".quinto_nivel_seccion");
+		add_cancelar_movil();
 
 	}).fail(function() {
 		show_error_enid(".quinto_nivel_seccion","Error ... al cargar portafolio.");
@@ -1077,6 +1087,7 @@ function carga_listado_categorias_sexto_nivel(e) {
 		llenaelementoHTML(".sexto_nivel_seccion", data);
 		recorrepage(".sexto_nivel_seccion");
 		$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+		add_cancelar_movil();
 	}).fail(function() {
 		show_error_enid(".sexto_nivel_seccion","Error ... al cargar portafolio.");
 	});
@@ -1539,4 +1550,15 @@ function valida_action_inicial(){
 	default:
 		break;
 	}	
+}
+/**/
+function add_cancelar_movil(){
+
+	$(".add_cancelar").empty();
+	console.log($(".nueva_categoria_producto").val());
+	if (es_movil ==  1 && $(".nueva_categoria_producto").val() !== undefined) {
+		btn_cancelar =  "<div class='cancelar_registro'>REGRESAR</div>";
+		llenaelementoHTML(".add_cancelar" , btn_cancelar);
+		$(".cancelar_registro").click(cancelar_registro);
+	}
 }

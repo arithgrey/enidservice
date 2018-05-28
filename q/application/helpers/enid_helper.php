@@ -27,15 +27,17 @@ if(!function_exists('invierte_date_time')){
       return $data_complete;
     }
     /**/
-    function add_mensajes_sin_leer($num){      
-      /**/
+    function add_mensajes_sin_leer($param){      
+
+      
       $lista_pendientes ="";
       $flag_notificaciones = 0;           
       if($num > 0 ){         
           
           $lista_pendientes .= 
           inicio_base_notificacion("../area_cliente/?action=preguntas" ,"fa fa-cart-plus");          
-          $text ="Un posible cliente te ha enviado un mensaje mira lo que te ha enviado aquí!";
+          $text ="Un posible cliente te ha enviado un mensaje
+                  mira lo que te ha enviado aquí!";
           if($num>1){
             $text = $num." personas te han hecho preguntas sobre tus productos, mira las preguntas aquí!";
           }
@@ -47,28 +49,30 @@ if(!function_exists('invierte_date_time')){
       $data_complete["flag"] =  $flag_notificaciones;
       return $data_complete;
       
+
     }    
     /**/
-    function add_mensajes_respuestas_vendedor($num){      
-      /**/
+    function add_mensajes_respuestas_vendedor($param, $tipo){      
+
       $lista_pendientes ="";
       $flag_notificaciones = 0;           
+      
+      $num = ($tipo == 1)?$param["modo_vendedor"]:$param["modo_cliente"];      
+
       if($num > 0 ){                   
 
           $lista_pendientes .= 
           inicio_base_notificacion("../area_cliente/?action=preguntas" ,"fa fa-comments");
-          $text ="El vendedor te ha contestado";
-          if($num>1){
-            $text =$num ." vendedores te han contestado, mira su respuesta aquí!";
-          }
-          $lista_pendientes .=$text;
+          $text = ($tipo ==  1)?"Alguien quiere saber más sobre tu producto":
+          "Tienes una nueva respuesta en tu buzón";
+          $lista_pendientes .= $text;
           $lista_pendientes .= fin_base_notificacion();   
           $flag_notificaciones ++;                           
+
       }
       $data_complete["html"] =  $lista_pendientes;
       $data_complete["flag"] =  $flag_notificaciones;
       return $data_complete;
-      
     }    
     /**/
     function add_valoraciones_sin_leer($num , $id_usuario){
@@ -79,15 +83,13 @@ if(!function_exists('invierte_date_time')){
           $lista_pendientes .= 
           inicio_base_notificacion("../recomendacion/?q={$id_usuario}","fa fa-star");
           
-          $text ="Una persona han agregado sus comentarios sobre uno de tus 
-                  artículos   en venta
-                  ".base_valoracion();
+          $text ="Una persona han agregado sus comentarios 
+                  sobre uno de tus artículos   en venta ".base_valoracion();
           if($num>1){
             $text =$num ." personas han agregado sus comentarios 
                           sobre tus artículos
                           ".base_valoracion();
-                          
-                        
+                                                
           }
           $lista_pendientes .=$text;
           $lista_pendientes .= fin_base_notificacion();   
@@ -314,276 +316,112 @@ if(!function_exists('invierte_date_time')){
     /**/    
     function get_tareas_pendienetes_usuario_cliente($info){
       
-      $flag_notificaciones =0; 
-      $info_notificaciones = $info["info_notificaciones"];
+      $flag =0; 
+      $inf_notificacion = $info["info_notificaciones"];
             
-      $lista_pendientes ="";                            
-      /*Agregamos notificación deuda pendiente**/
-      $deuda = add_saldo_pendiente($info_notificaciones["adeudos_cliente"]);      
-      $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
-      $lista_pendientes .= $deuda["html"];        
-      /*Agregamos notificación de dirección, cuando esta no está registrada hay que mostrar msj*/
+      $lista_pendientes ="";        
 
-      $deuda = add_pedidos_sin_direccion($info_notificaciones["adeudos_cliente"]);
-      $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
+      /*Agregamos notificación deuda pendiente**/
+      $deuda = add_saldo_pendiente($inf_notificacion["adeudos_cliente"]);      
+      $flag = $flag + $deuda["flag"];
+      $lista_pendientes .= $deuda["html"];        
+      /*Agregamos notificación de dirección, cuando esta no está registrada 
+      hay que mostrar msj*/
+
+      $deuda = add_pedidos_sin_direccion($inf_notificacion["adeudos_cliente"]);
+      $flag = $flag + $deuda["flag"];
       $lista_pendientes .= $deuda["html"]; 
 
 
-
-      $direccion = add_direccion_envio($info_notificaciones["flag_direccion"]);
-      $flag_notificaciones = $flag_notificaciones + $direccion["flag"];
+      $direccion = add_direccion_envio($inf_notificacion["flag_direccion"]);
+      $flag = $flag + $direccion["flag"];
       $lista_pendientes .= $direccion["html"];        
       /**/
 
-      $direccion = add_productos_publicados($info_notificaciones["productos_anunciados"]);
-      $flag_notificaciones = $flag_notificaciones + $direccion["flag"];
-      $lista_pendientes .= $direccion["html"];        
+      $direccion = add_productos_publicados($inf_notificacion["productos_anunciados"]);
+      $flag = $flag + $direccion["flag"];
+      $lista_pendientes .= $direccion["html"];              
+      
       /**/
-      $mensajes_sin_leer = add_mensajes_sin_leer($info_notificaciones["mensajes_sin_leer"]);
-      $flag_notificaciones = $flag_notificaciones + $mensajes_sin_leer["flag"];
-      $lista_pendientes .= $mensajes_sin_leer["html"];        
-
-
+      $mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf_notificacion["mensajes"] ,1);
+      $flag = $flag + $mensajes_sin_leer["flag"];
+      $lista_pendientes .= $mensajes_sin_leer["html"];            
       /**/
-      $mensajes_sin_leer = add_mensajes_respuestas_vendedor($info_notificaciones["respuestas"]);
-      $flag_notificaciones = $flag_notificaciones + $mensajes_sin_leer["flag"];
-      $lista_pendientes .= $mensajes_sin_leer["html"];        
 
-
-      $data_complete["num_tareas_pendientes_text"] = $flag_notificaciones;  
-      $data_complete["num_tareas_pendientes"] = crea_tareas_pendientes_info($flag_notificaciones);
+      $data_complete["num_tareas_pendientes_text"] = $flag;  
+      $data_complete["num_tareas_pendientes"] = crea_tareas_pendientes_info($flag);
       $data_complete["lista_pendientes"] = 
-      get_mensaje_inicial_notificaciones(1 , $flag_notificaciones).
+      get_mensaje_inicial_notificaciones(1 , $flag).
       $lista_pendientes;
       return $data_complete;
       
     
     /*end*/
-    }
-  /***/
-  function get_tareas_pendientes_vendedor($info){
-
-
-      $info_notificaciones = $info["info_notificaciones"];
-      $lista_pendientes ="";  
-      /*Metas u objetivos*/       
-      $meta_ventas = 0;       
-      $meta_envios_a_validar = 0;
-      $meta_email = 0;
-      $meta_llamadas =0; 
-      $meta_contactos = 0;
-      $meta_accesos = 0; 
-      $meta_tareas = 0; 
-      $meta_email_registrados = 0; 
-      $meta_direccion = 0;
-      $meta_temas_de_ayuda = 0;
-      $meta_contactos_promociones =0; 
-
-    
-      $ventas_realizadas = $info_notificaciones["ventas_usuario"];      
-      //$contactos_enid_service =  $info_notificaciones["contactos_enid_service"];
-      //$llamadas_enid_service =  $info_notificaciones["llamadas_enid_service"];
-      $contactos_promociones = $info_notificaciones["contactos_promociones_enid_service"];
-      $email_enviados_enid_service = $info_notificaciones["email_enviados_enid_service"];
-      $style_pedientes ="style='padding:4px;background:red!important;color:white!important;'";
-      /*Sacamos valores del objetivo*/
-      $flag_notificaciones = 0; 
-
-    foreach ($info_notificaciones["objetivos_perfil"] as $row) {
-      
-      /*Meta ventas*/
-      switch ($row["nombre_objetivo"]) {
-        
-          case "Ventas":
-          
-          $meta_ventas = $row["cantidad"];       
-
-          if ($meta_ventas  > $ventas_realizadas){            
-
-                $ventas_pendientes  = ($meta_ventas - $ventas_realizadas);            
-                $lista_pendientes .= "<li class='black ' > ";
-                $lista_pendientes .= "<a href='../reporte_enid/' >
-                                        <i class='fa fa-money ventas_pendientes' 
-                                          id='".$ventas_pendientes."' >
-                                        </i> ";
-                $lista_pendientes .= "<span $style_pedientes>". $ventas_pendientes."</span>"; 
-                $lista_pendientes .= "Ventas</a>";                
-                $lista_pendientes .= "</li>";  
-                $flag_notificaciones ++;                         
-          }
-          break;
-          /*          
-          case "Contactos":
-          $meta_contactos = $row["cantidad"];       
-
-          if($meta_contactos  > $contactos_enid_service){           
-              
-              $contactos_restantes  = ($meta_contactos - $contactos_enid_service);
-
-              $lista_pendientes .= "<li class='black ' > ";
-              $lista_pendientes .= "<a href='../tareas/'>
-                                    <i class='fa fa-user'></i> ";
-              $lista_pendientes .=  "<span $style_pedientes>".
-                                      $contactos_restantes
-                                     ."</span>"; 
-                  $lista_pendientes .= "Prospectos
-                                    </a>";
-              
-              $lista_pendientes .= "</li>";    
-              $flag_notificaciones ++;                       
-          }
-          break;
-          */
-          /*
-          case "Llamadas":
-          $meta_llamadas = $row["cantidad"];  
-
-          
-            if($meta_llamadas  > $llamadas_enid_service){           
-
-                $llamadas_restantes = ($meta_llamadas - $llamadas_enid_service);
-
-                $lista_pendientes .= "<li class='black ' > ";
-                $lista_pendientes .= "<a href='../reporte_enid/'>
-                                      <i class='fa fa-mobile'></i> ";
-                $lista_pendientes .= "<span $style_pedientes>".$llamadas_restantes."</span>"; 
-                $lista_pendientes .= "Llamadas
-                                      </a>";
-               
-                $lista_pendientes .= "</li>";    
-                $flag_notificaciones ++;                      
-            }
-
-
-
-          break;    
-          */
-
-          case "Contactos_promociones":
-          $meta_contactos_promociones = $row["cantidad"];  
-
-          
-            if($meta_contactos_promociones  > $contactos_promociones){           
-
-                $llamadas_restantes = ($meta_contactos_promociones - $contactos_promociones);
-
-                $lista_pendientes .= "<li class='black ' > ";
-                $lista_pendientes .= "<a href='../tareas/?q=2'>
-                                      <i class='fa fa-star-o'></i> ";
-                $lista_pendientes .= "<span $style_pedientes>".$llamadas_restantes."</span>"; 
-                $lista_pendientes .= "Afiliados
-                                      </a>";
-               
-                $lista_pendientes .= "</li>";    
-                $flag_notificaciones ++;                      
-            }
-
-        break;        
-
-        case "Email":
-      
-          $meta_email = $row["cantidad"];       
-          /**/
-
-          /*
-          if ($meta_email  > $email_enviados_enid_service){           
-                $email_restantes = ($meta_email -  $email_enviados_enid_service);
-                $lista_pendientes .= "<li class='black ' > ";
-                $lista_pendientes .= "<a href='../tareas/?q=2'>
-                                      <i class='fa fa-envelope-o'></i> ";
-                $lista_pendientes .= "<span $style_pedientes>
-                                      ".$email_restantes."
-                                      </span>"; 
-                $lista_pendientes .= "Email
-                                      </a>";              
-                $lista_pendientes .= "</li>";   
-                $flag_notificaciones ++;                       
-            }
-            */
-
-          break;  
-          
-            
-
-        default:
-          
-          break;
-      }
-
-    }
-
-
-    $new_flag_notificaciones = "";
-    if ($flag_notificaciones > 0 ) {
-      $new_flag_notificaciones =    "<span class='notificacion_tareas_pendientes_enid_service' 
-                                      id='".$flag_notificaciones."'
-                                      >".$flag_notificaciones."
-                                    </span>"; 
-    }
-    $data_complete["num_tareas_pendientes_text"] = $flag_notificaciones;  
-    $data_complete["num_tareas_pendientes"] = $new_flag_notificaciones;
-    $data_complete["lista_pendientes"] = $lista_pendientes;
-    return $data_complete;  
-  }  
+  }
   /**/
   function get_tareas_pendienetes_usuario($info){
 
-    $info_notificaciones = $info["info_notificaciones"];
+    $inf = $info["info_notificaciones"];
     $lista_pendientes ="";  
     /*Metas u objetivos*/ 
-    $meta_ventas = 0;
-    $meta_envios_a_validar = 0;
-    $meta_email = 0;
-    $meta_llamadas =0; 
-    $meta_contactos = 0;
-    $meta_accesos = 0; 
-    $meta_tareas = 0; 
-    $meta_email_registrados = 0; 
-    $meta_direccion = 0;
-    $meta_temas_de_ayuda = 0;
+    $meta_ventas              = 0;
+    $meta_envios_a_validar    = 0;
+    $meta_email               = 0;
+    $meta_llamadas            = 0; 
+    $meta_contactos           = 0;
+    $meta_accesos             = 0; 
+    $meta_tareas              = 0; 
+    $meta_email_registrados   = 0; 
+    $meta_direccion           = 0;
+    $meta_temas_de_ayuda      = 0;
+    $flag_notificaciones      = 0; 
 
-
-    $ventas_enid_service = $info_notificaciones["ventas_enid_service"];
-    $envios_a_validar = $info_notificaciones["envios_a_validar_enid_service"];
-    $email_enviados_enid_service = $info_notificaciones["email_enviados_enid_service"];
-    $accesos_enid_service =  $info_notificaciones["accesos_enid_service"];
-    $tareas_enid_service =  $info_notificaciones["tareas_enid_service"];
+    $ventas_enid_service          =   $inf["ventas_enid_service"];
+    $envios_a_validar             =   $inf["envios_a_validar_enid_service"];
+    $email_enviados_enid_service  =   $inf["email_enviados_enid_service"];
+    $accesos_enid_service         =   $inf["accesos_enid_service"];
+    $tareas_enid_service          =   $inf["tareas_enid_service"];
     
     
 
     $style_pedientes ="style='padding:4px;background:red!important;color:white!important;'";
     /*Sacamos valores del objetivo*/
-    $flag_notificaciones = 0; 
-    $mensajes_sin_leer = add_mensajes_sin_leer($info_notificaciones["mensajes_sin_leer"]);
-    $flag_notificaciones = $flag_notificaciones + $mensajes_sin_leer["flag"];
+    $mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf["mensajes"] ,1);
+    $flag_notificaciones = $flag_notificaciones + $mensajes_sin_leer["flag"];    
     $lista_pendientes .= $mensajes_sin_leer["html"];        
-
-
-    /**/
-    $mensajes_sin_leer = add_mensajes_respuestas_vendedor($info_notificaciones["respuestas"]);
-    $flag_notificaciones = $flag_notificaciones + $mensajes_sin_leer["flag"];
+    
+    $mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf["mensajes"] ,2);
+    $flag_notificaciones = $flag_notificaciones + $mensajes_sin_leer["flag"];    
     $lista_pendientes .= $mensajes_sin_leer["html"];        
-    /**/
+    
 
-    $deuda = add_saldo_pendiente($info_notificaciones["adeudos_cliente"]);
+
+    $mensajes_sin_leer    = add_mensajes_sin_leer($inf["mensajes"]);
+    $flag_notificaciones  = $flag_notificaciones + $mensajes_sin_leer["flag"];
+    $lista_pendientes .=  $mensajes_sin_leer["html"];        
+
+    
+    $deuda = add_saldo_pendiente($inf["adeudos_cliente"]);
     $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
     $lista_pendientes .= $deuda["html"]; 
 
 
-    $deuda = add_pedidos_sin_direccion($info_notificaciones["adeudos_cliente"]);
+    $deuda = add_pedidos_sin_direccion($inf["adeudos_cliente"]);
     $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
     $lista_pendientes .= $deuda["html"]; 
 
     /**/
   
-    $deuda = add_valoraciones_sin_leer($info_notificaciones["valoraciones_sin_leer"], 
+    $deuda = add_valoraciones_sin_leer($inf["valoraciones_sin_leer"], 
       $info["id_usuario"]);
     $flag_notificaciones = $flag_notificaciones + $deuda["flag"];
     $lista_pendientes .= $deuda["html"]; 
-  
+    
+    /**/
+    
+      
 
-
-  foreach ($info_notificaciones["objetivos_perfil"] as $row) {
+  foreach ($inf["objetivos_perfil"] as $row) {
     
     /*Meta ventas*/
     switch ($row["nombre_objetivo"]) {
@@ -643,9 +481,6 @@ if(!function_exists('invierte_date_time')){
   if ($flag_notificaciones > 0 ) {
     $new_flag_notificaciones =  "<span id='".$flag_notificaciones."' class='notificacion_tareas_pendientes_enid_service'>".$flag_notificaciones."</span>"; 
   }
-
-
-  
   $data_complete["num_tareas_pendientes_text"] = $flag_notificaciones;  
   $data_complete["num_tareas_pendientes"] = $new_flag_notificaciones;
   
@@ -655,8 +490,6 @@ if(!function_exists('invierte_date_time')){
   
   /*end*/
   }
-
-
 
   /**/
   function get_fechas_cotizador($param){
@@ -790,7 +623,7 @@ if(!function_exists('invierte_date_time')){
 
     foreach ($param as $row) {
 
-      //$num_ventas_efectivas = valida_num($row["num_ventas_efectivas"]);
+      
       $num_proyectos =  valida_num($row["numero_proyectos"] );      
       $numero_contactos = valida_num($row["numero_contactos"]);  
       $num_contactos_promociones = valida_num($row["num_contactos_promociones"]);
@@ -868,9 +701,7 @@ if(!function_exists('invierte_date_time')){
       $fechas .=  get_th(      $fecha .  "<br>" . $row["fecha"] , 
         "style='color:white!important;' 
         class='text-tb '  ");
-
       
-      //$info_ventas_efectivas .= get_td($num_ventas_efectivas);
 
       $info_visitas .= get_td(
         valida_num($row["visitas"]) , 
@@ -884,22 +715,16 @@ if(!function_exists('invierte_date_time')){
         num_afiliados = $afiliados  " );
 
       
-      
-      
       $info_contactos .= get_td($numero_contactos , $extra_contactos);
 
 
-
-
-        $info_contactos_promociones .= 
-        get_td(
-          $num_contactos_promociones ,
-         $extra_contactos_promociones);
+      $info_contactos_promociones .= 
+      get_td($num_contactos_promociones , $extra_contactos_promociones);
 
 
 
-        $info_clientes_sistema .= get_td( $num_prospectos_sistema, $extra_clientes_sistema);
-
+      $info_clientes_sistema .= 
+      get_td( $num_prospectos_sistema, $extra_clientes_sistema);
 
       
       $info_email_enviados .= 

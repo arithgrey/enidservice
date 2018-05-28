@@ -74,9 +74,10 @@ class valoracion_model extends CI_Model{
     /**/
     function set_visto_pregunta($param){
 
+      
       $campo ="leido_cliente";
-      if($param["modalidad"] == 1) {
-        $campo ="leido_vendedor";  
+      if($param["modalidad"] == 1) {        
+          $campo ="leido_vendedor";    
       }
       /***/
       $id_pregunta =  $param["id_pregunta"];      
@@ -87,6 +88,7 @@ class valoracion_model extends CI_Model{
                         id_pregunta =  $id_pregunta 
                         LIMIT 1";      
       return $this->db->query($query_update);
+                
     }
     /**/
     function get_respuestas_pregunta($param){
@@ -99,7 +101,8 @@ class valoracion_model extends CI_Model{
                     ,r. id_pregunta
                     ,u.nombre 
                     ,u.apellido_paterno
-                    FROM response r 
+                    FROM 
+                      response r 
                       INNER JOIN  
                       usuario u 
                       ON r.id_usuario = u.idusuario
@@ -120,7 +123,9 @@ class valoracion_model extends CI_Model{
         if($flag == 0){          
           $id_usuario =  $param["id_usuario"]; 
           $query_create = "CREATE TABLE tmp_servicio_usuario_$_num AS 
-                            SELECT id_servicio ,nombre_servicio
+                            SELECT 
+                              id_servicio ,
+                              nombre_servicio
                             FROM servicio 
                             WHERE 
                               id_usuario = $id_usuario                            
@@ -160,7 +165,6 @@ class valoracion_model extends CI_Model{
       
       $_num =  get_random();
       $this->create_tmp_servicios_venta_usuario(0 , $_num , $param);      
-        /**/
         $this->create_tmp_servicios_venta_usuario_pregunta(0 , $_num, $param);
           $query_get ="SELECT * FROM 
                       tmp_servicio_usuario_pregunta_$_num 
@@ -183,15 +187,18 @@ class valoracion_model extends CI_Model{
       $this->create_tmp_servicios_venta_usuario(0 , $_num , $param);      
         /**/        
           $query_get ="SELECT 
-                  COUNT(0)num
-                    FROM 
-                      tmp_servicio_usuario_$_num s 
-                      INNER JOIN pregunta_servicio ps 
-                      ON s.id_servicio = ps.id_servicio
+                        COUNT(0)num
+                      FROM 
+                        tmp_servicio_usuario_$_num s 
+                      INNER JOIN 
+                        pregunta_servicio ps 
+                      ON 
+                        s.id_servicio = ps.id_servicio
                       INNER JOIN pregunta p 
                       ON 
-                      p.id_pregunta  = ps.id_pregunta
-                      WHERE p.leido_vendedor =0";
+                        p.id_pregunta  = ps.id_pregunta
+                      WHERE 
+                        p.leido_vendedor =0";
           $result =  $this->db->query($query_get);          
           $data_complete = $result->result_array();
         
@@ -456,12 +463,43 @@ class valoracion_model extends CI_Model{
 
   /**/
   function get_respuestas_sin_leer($param){
-    /**/
+    
+
+    
     $id_usuario =  $param["id_usuario"];
-    $query_get ="SELECT COUNT(0)num FROM pregunta WHERE 
-    id_usuario =  $id_usuario AND leido_cliente =0";
+    $query_get ="SELECT 
+                    COUNT(0)num 
+                  FROM 
+                    pregunta 
+                  WHERE 
+                    id_usuario =  $id_usuario 
+                  AND 
+                    leido_cliente =0";
     $result =  $this->db->query($query_get); 
     return $result->result_array()[0]["num"];
+    /*
+    $_num =  get_random();
+      $this->create_tmp_servicios_venta_usuario(0 , $_num , $param);      
+            
+          $query_get ="SELECT 
+                        COUNT(0)num
+                      FROM 
+                        tmp_servicio_usuario_$_num s 
+                      INNER JOIN 
+                        pregunta_servicio ps 
+                      ON 
+                        s.id_servicio = ps.id_servicio
+                      INNER JOIN pregunta p 
+                      ON 
+                        p.id_pregunta  = ps.id_pregunta
+                      WHERE 
+                        p.leido_vendedor =0";
+          $result =  $this->db->query($query_get);          
+          $data_complete = $result->result_array();
+        
+      $this->create_tmp_servicios_venta_usuario(1 , $_num , $param);
+      return  $data_complete;
+    */   
   }
   /**/
   function get_productos_distinctos_valorados($param){

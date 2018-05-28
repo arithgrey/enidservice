@@ -23,6 +23,19 @@ class Home extends CI_Controller{
         if(count($alcance)>0){
             $data["alcance"]=   crea_alcance($alcance);
         }
+
+        $data["js"] =  array(
+            base_url('application/js/principal.js'),
+            base_url('application/js/proyectos_persona.js'),
+            base_url('application/js/cobranza.js'),
+            "../js_tema/js/direccion.js",
+            base_url('application/js/buzon.js')
+        );
+
+        $data["css"] = array(
+            "../css_tema/template/css_tienda_cliente.css",
+            "../css_tema/template/valoracion.css",
+            "../css_tema/template/area_cliente.css");
         /**/
         $this->principal->show_data_page($data, 'home');                        
         

@@ -53,5 +53,14 @@
 		                  </div>
 	                  	</div>	
 	                <?=end_row()?>
-              <?=end_row();?>                   
+	                <div class="separador_cancelar">	                	
+	                </div>
+	                <?=n_row_12()?>    
+	                	<div class="col-lg-12">
+	                		<div class="add_cancelar">
+	                		</div>
+			  	    	</div>
+					<?=end_row();?>            
+              <?=end_row();?>       
+              	
 	</div>

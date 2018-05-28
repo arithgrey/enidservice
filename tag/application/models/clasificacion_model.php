@@ -194,8 +194,100 @@
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }
-    
-    
+    /**/
+    function get_intereses_usuario($param){
+
+        $id_usuario =  $param["id_usuario"];
+
+        $query_get ="
+            SELECT 
+                c.id_clasificacion,
+                c.nombre_clasificacion,
+                uc.id_usuario 
+            FROM 
+                clasificacion c
+            LEFT OUTER JOIN 
+                usuario_clasificacion uc 
+            ON 
+                c.id_clasificacion = uc.id_clasificacion
+            AND  
+                uc.tipo =2
+            AND  
+                uc.id_usuario =$id_usuario
+            WHERE 
+                c.primer_nivel =1 
+            AND 
+                c.flag_servicio =0";
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+    }   
+    /**/
+    function interes_usuario($param)
+    {
+        /*Verifica que esté */
+        $num = $this->get_interes_usuario($param);
+        if ($num >0 ) {
+            /*Baja*/
+            return $this->delete_interes_usuario($param);
+        }else{
+            /*Alta*/
+            return $this->insert_interes_usuario($param);
+        }
+    }
+    /**/
+    function get_interes_usuario($param)
+    {   
+        $id_usuario =  $param["id_usuario"];
+        $id_clasificacion =  $param["id_clasificacion"];
+
+         $query_get ="
+            SELECT 
+                COUNT(0)num
+            FROM                 
+            usuario_clasificacion  uc             
+            WHERE 
+                uc.tipo =2
+            AND  
+                uc.id_usuario =$id_usuario
+            AND 
+                uc.id_clasificacion = $id_clasificacion
+            ";
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["num"];
+    }
+    /**/
+    private function delete_interes_usuario($param)
+    {   
+        $id_usuario         =  $param["id_usuario"];
+        $id_clasificacion   =  $param["id_clasificacion"];
+
+         $query_delete ="DELETE  FROM                 
+            usuario_clasificacion  
+            WHERE 
+                tipo =2
+            AND  
+                id_usuario =$id_usuario
+            AND 
+                id_clasificacion = $id_clasificacion";
+        return $this->db->query($query_delete);
+        
+    }
+    /**/
+    private function insert_interes_usuario($param)
+    {
+        $id_usuario         =  $param["id_usuario"];
+        $id_clasificacion   =  $param["id_clasificacion"];
+
+        $query_insert =  "INSERT INTO usuario_clasificacion(
+                                id_usuario       
+                                ,id_clasificacion 
+                                ,tipo) 
+                            VALUES(
+                                '".$id_usuario."' , 
+                                '".$id_clasificacion."',
+                                2)";                          
+                                return $this->db->query($query_insert);
+    }
 
 
 }
