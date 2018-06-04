@@ -69,8 +69,3 @@
 <input type="hidden" value="<?=$extra_servicio?>" class="extra_servicio">
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<style type="text/css">
-    .selector_categoria{
-        width: 100%;    
-    }
-</style>

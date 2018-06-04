@@ -225,14 +225,17 @@
     function interes_usuario($param)
     {
         /*Verifica que esté */
-        $num = $this->get_interes_usuario($param);
+        $num = $this->get_interes_usuario($param);        
+        $response["tipo"] =0;
         if ($num >0 ) {
             /*Baja*/
-            return $this->delete_interes_usuario($param);
+            $this->delete_interes_usuario($param);            
         }else{
             /*Alta*/
-            return $this->insert_interes_usuario($param);
+            $this->insert_interes_usuario($param);
+            $response["tipo"] =1;
         }
+        return $response;
     }
     /**/
     function get_interes_usuario($param)

@@ -41,15 +41,15 @@ class Inicio extends CI_Controller {
         $data["is_mobile"] = ($this->agent->is_mobile() === FALSE)?0:1;
         
 
-
-        
         $data["js"] =['application/js/principal.js', 
                       'application/js/img.js',
-                      "../js_tema/js/summernote.js"];
-        $data["css"]=["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css",
+                      '../js_tema/js/summernote.js'];
+
+        $data["css"]=[
                         "../css_tema/template/css_tienda.css", 
                         "../css_tema/template/vender.css" ,
-                        "../css_tema/template/planes_servicios.css"
+                        "../css_tema/template/planes_servicios.css",
+                        "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
                         ];
         
         $this->principal->show_data_page( $data , 'home_enid');			    	        	

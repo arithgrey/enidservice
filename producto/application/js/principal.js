@@ -6,7 +6,18 @@ $(document).ready(function(){
 	$("footer").ready(carga_valoraciones);
 	set_option("desde_valoracion", $(".desde_valoracion").val());
 	set_option("orden" ,"desc");	
-	$(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);
+	$(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);	
+	$('#imagen_tab_0').zoom();
+	$('#imagen_tab_1').zoom();
+	$('#imagen_tab_2').zoom();
+	$('#imagen_tab_3').zoom();
+	$('#imagen_tab_4').zoom();
+	$('#imagen_tab_5').zoom();
+	$('#imagen_tab_6').zoom();
+	$('#imagen_tab_7').zoom();
+	$('#imagen_tab_8').zoom();
+	$('#imagen_tab_9').zoom();
+	$('#imagen_tab_10').zoom();
 });
 /**/
 function carga_productos_sugeridos(){

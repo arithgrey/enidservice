@@ -9,6 +9,14 @@ $(document).ready(function(){
 	$(".tab_privacidad_seguridad").click(get_conceptos);
 
 	$(".nombre_usuario").keyup(quita_espacios_nombre_usuario);
+	
+	$(".tel2").keyup(function(){
+		quita_espacios(".tel2");		
+	});
+	
+	$(".lada2").keyup(function(){
+		quita_espacios(".lada2");		
+	});
 	/**/
 	$("#form_update_password").submit(update_password);	
 	$(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
@@ -20,6 +28,7 @@ $(document).ready(function(){
 /**/
 function carga_direccion_usuario(){
 	/**/	
+
 	url =  "../portafolio/index.php/api/portafolio/direccion_usuario/format/json/";		
 	data_send =  $(".form_notificacion").serialize()+"&"+$.param({"v":get_option("v")});
 
@@ -27,9 +36,7 @@ function carga_direccion_usuario(){
 					url : url , 
 					type: "GET",
 					data: data_send , 
-					beforeSend: function(){
-						//show_load_enid(".place_direccion_envio" , "Cargando ... ", 1 );
-					}
+					beforeSend: function(){}
 			}).done(function(data){										
 
 				llenaelementoHTML(".direcciones" , data);

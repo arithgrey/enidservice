@@ -22,12 +22,10 @@
 </main>
 
 
-<script type="text/javascript" src="<?=base_url('application/js/principal.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/privacidad_seguridad.js')?>">
-</script>
-<script type="text/javascript" src="<?=base_url('application/js/sobre_el_negocio.js')?>">
-</script>
-<script type="text/javascript" src="<?=base_url('application/js/img.js')?>"></script>
-<script type="text/javascript" src="<?=base_url('application/js/perfil_user.js')?>"></script>
-<script type="text/javascript" src="../js_tema/js/direccion.js"></script>
-<script type="text/javascript" src="<?= base_url('application/js/sha1.js')?>"></script>
+
+
+
+
+
+
+

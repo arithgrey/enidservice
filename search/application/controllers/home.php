@@ -86,9 +86,13 @@ class Home extends CI_Controller{
             $data["lista_productos"]= $this->agrega_vista_servicios($servicios["servicios"]);
             $data["q"] = $q;
             $data["categorias_destacadas"] = $categorias_destacadas;
+            $data["css"] = [base_url("application/css/main.css") , 
+                            "../css_tema/template/css_tienda.css"];
             $this->principal->show_data_page($data , 'home');
             
         }else{
+            
+            $data["css"] = [base_url('application/css/sin_encontrar.css')];
             $this->principal->crea_historico($param["num_hist"]);
             $this->principal->show_data_page($data , 'sin_resultados');
         }

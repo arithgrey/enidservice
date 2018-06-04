@@ -152,23 +152,39 @@ function get_entrega_en_casa($entregas_en_casa , $flag_servicio){
   return $text;
 }
 /******/
-function get_contacto_cliente($telefono_visible , $in_session , $usuario){
+function get_contacto_cliente($tel_visible , $in_session , $usuario){
 
-  if ($in_session ==  1){
-    
-    $telefono =  $usuario[0]["tel_contacto"];
-    $text_tel =  "<div>                  
-                    <a target='_blank' href='tel:".$telefono."' style='text-decoration:underline;color:black;'>
+    if ($tel_visible) {
+        
+        $usr = $usuario[0];    
+        $ftel =1;
+        $ftel2 =1;
+
+        $tel     = (strlen($usr["tel_contacto"]) >4)?$usr["tel_contacto"]:$ftel=0;
+        $tel2=(strlen($usr["tel_contacto_alterno"]) >4)?$usr["tel_contacto_alterno"]:$ftel2=0;
+        $inf  =  "<div>";        
+
+
+        if ($ftel == 1){
+            
+            $lada = (strlen($usr["tel_lada"])>0)?"(".$usr["tel_lada"].")":"";
+            $inf .= "<div>
                       <i class='fa fa-phone'>
-                      </i>
-                      ".$telefono."
-                    </a>
-                    </div>
-                    <br>";
-    $text_telefono_visible =  
-    ($telefono_visible ==  1 && strlen(trim($telefono))>4)? $text_tel :"";
-    return $text_telefono_visible;
-  }
+                      </i>".$lada.$tel."</div>";
+        }
+        if ($ftel2 ==  1) {
+            $lada = (strlen($usr["lada_negocio"])>0)?"(".$usr["lada_negocio"].")":"";
+            $inf .= "<div>
+                      <i class='fa fa-phone'>
+                      </i>".$lada.$tel2."</div>"; 
+        }
+        $inf .=  "</div>";
+
+        return $inf;
+    }
+  
+
+  
 
 }
 
@@ -179,7 +195,6 @@ function get_descripcion_servicio($descripcion , $flag_servicio){
   $extra ="style='padding:5px;margin-top:10px;'";
   $servicio = ($flag_servicio ==  1)?"SOBRE EL SERVICIO": "SOBRE EL PRODUCTO";
   
-
   if (strlen(trim(strip_tags($descripcion))) >10 ){
     return "<div>    
             <h3 class='titulo_sobre_el_producto'>
@@ -292,42 +307,48 @@ function construye_seccion_imagen_lateral($param , $nombre_servicio , $url_youtu
       $url =  "../imgs/index.php/enid/imagen/".$id_imagen;    
       $extra_class = '';
       $extra_class_contenido = '';      
+      
       if($z == 0){
-
         $extra_class =' active ';  
         $extra_class_contenido = ' in active ';
-        $img_principal = $url;
-      
+        $img_principal = $url;      
       }
-      /**/
-      $producto_tab = "imagen_tab_".$z;
-      $parte_tab ="data-toggle='tab'  href='#".$producto_tab."'";
-      $preview .='<a class="'.$extra_class.' "  '. $parte_tab.' >                    
-                      <img src="'.$url.'" alt="'.$nombre_servicio.'"
-                      onerror="this.src='."'".$url."'".' ">                    
-                  </a>';
 
-      /**/
-      $imgs_grandes .='<div 
-                        id="'.$producto_tab.'" 
-                        class="tab-pane fade '.$extra_class_contenido.' " >
-                        <span 
-                          class="img"  
-                          style="background-image: url('."'".$url ."'".')"
-                          onerror="this.src='."'".$url."'".' ">
-                        </span>  
+      $producto_tab = "#imagen_tab_".$z;      
+      $producto_tab_s = "imagen_tab_".$z;      
+      
+      $img_pro = array(
+        'src'     => $url,                        
+        'alt'     => $nombre_servicio, 
+        'id'      => $z, 
+        'class'   => 'imagen-producto'
+        );
+
+      $preview  .=  anchor_enid($producto_tab, img($img_pro) , array(
+        'id'          =>  $z, 
+        'data-toggle' =>  'tab',
+        'class'       =>  ' preview_enid '.$extra_class        
+        ));
+
+      $image_properties = array(  'src'     => $url , 
+                                  "class" => "imagen_producto_completa");
+
+      $imgs_grandes .='<div id="'.$producto_tab_s.'" 
+                        class="tab-pane fade zoom'.$extra_class_contenido.' " >                  
+                        
+                        '.
+                          img($image_properties).'
+                        
                       </div>';
       /**/
       $z ++;
 
   }
-
   
   $data_complete["preview"] =  $preview;
   $data_complete["num_imagenes"] =  count($param);
   $data_complete["imagenes_contenido"] = $imgs_grandes;
   return $data_complete;
-
 }
 /**/
 function get_info_producto($q2){
@@ -336,10 +357,8 @@ function get_info_producto($q2){
     if(isset($q2) && $q2 != null ){             
         $id_producto =$q2;
     }
-    return $id_producto;    
-    /**/
+    return $id_producto;        
 }
-/**/
 /**/
 function get_dominio($url){
     $protocolos = array('http://', 'https://', 'ftp://', 'www.');

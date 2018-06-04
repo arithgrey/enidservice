@@ -2,12 +2,12 @@
 	font-weight: bold;font-size: 2em;
 }
 .item_preferencias:hover{
-	background: #0a004b;
+	background: #1d00da;
 	color: white;
 	cursor: pointer;
 }
 .selected_clasificacion{
-	background: #0a004b!important;
+	background: #1d00da!important;
 	color: white;
 	cursor: pointer;	
 }

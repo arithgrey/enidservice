@@ -30,6 +30,30 @@ class Inicio extends CI_Controller {
             $activa = 1;
         }
         $data["activa"] = $activa;
+
+        $data["css"] = [
+            "http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css",
+            "../css_tema/template/desarrollo.css",
+            "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css",
+            base_url("application/css/principal.css"),
+            "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css"
+            ];
+        
+        $data["js"] = [
+                "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
+                "../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",                
+                "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                "../js_tema/js/pickers-init.js",
+                base_url('application/js/principal.js'),                                
+                base_url('application/js/summernote.js',
+                "http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js",
+                "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"
+            )
+
+        ];
+
+
         $this->principal->show_data_page( $data , 'empresas_enid');                 
         
     }    	

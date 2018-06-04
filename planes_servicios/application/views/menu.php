@@ -1,25 +1,74 @@
             
             <ul class="nav tabs contenedor_menu_enid_service_lateral">      
-                <li class="<?=valida_active_tab('nuevo' , $action)?>">
-                    <a  
-                        class="agregar_servicio white blue_enid_background btn_agregar_servicios" 
-                        href="../planes_servicios/?action=nuevo"
-                        style="color: white!important;font-size: .8em;">
-                        <i class="fa fa-cart-plus">                            
-                        </i>
-                        + ANUNCIAR MÁS PRODUCTOS
-                    </a>
+                
+
+                <li class="<?=valida_active_tab('nuevo' , $action)?>">                       
+                    <?=anchor_enid(
+                        "../planes_servicios/?action=nuevo" ,
+                        "<i class='fa fa-cart-plus'></i>
+                        ANUNCIAR MÁS PRODUCTOS  "  , 
+                        'class="agregar_servicio 
+                        white 
+                        blue_enid_background 
+                        btn_agregar_servicios"
+                        style="color: white!important;font-size: .9em;" '
+                    )?>                    
                 </li>          
                 <li class='li_menu li_menu_servicio btn_servicios 
                     <?=valida_active_tab('lista' , $action)?>'>
-                    <a  href="#tab_servicios" 
-                        data-toggle="tab"                         
-                        class='black strong btn_serv'>
-                        <i class="fa fa-shopping-bag">                            
-                        </i>
-                        TUS ARTÍCULOS EN VENTA
-                    </a>
+                    <?=anchor_enid("#tab_servicios" , 
+                        "
+                        <i class='fa fa-shopping-cart'></i>
+                        TUS ARTÍCULOS EN VENTA" ,
+                        'data-toggle="tab"                         
+                        class="black strong btn_serv" ')?>                    
                 </li>                 
+                
+                <li class="li_menu menu_redes">
+                    <div class="contenedor_compartir_redes_sociales">                        
+                        <?=anchor_enid(                            
+                            "" ,
+                            "<i class='                                
+                                fa fa-clone  black
+                                fa-2x'>
+                            </i>",                                
+                            "class='btn_copiar_enlace_pagina_contacto'
+                            data-clipboard-text='".
+                            get_url_productos_cuenta_usuario_web($id_usuario)."' ",
+                            1                              
+                        )?>
+                        <?=anchor_enid(
+                            get_url_facebook(get_url_productos_cuenta_usuario_web($id_usuario)),
+                            '<i class="fa fa-facebook-square fa-2x black"></i>',
+                            'target="_black" '
+                            )?>
+
+                        <?=anchor_enid(
+                            get_url_twitter(
+                                get_url_productos_cuenta_usuario_web($id_usuario),
+                                "VISITA MI TIENDA EN LÍNEA!" ) ,
+                                "<i class='fa fa-twitter black fa-2x'></i>",
+                                " target='_black' "                                
+                            )?>
+
+                        <?=anchor_enid(
+                            get_url_pinterest(
+                                get_url_productos_cuenta_usuario_web($id_usuario)) ,
+                                "<i class='fa fa-pinterest-p black fa-2x'></i>",
+                                " target='_black' "                                
+                            )?>
+
+
+                        <?=anchor_enid(
+                            get_url_tumblr(
+                                get_url_productos_cuenta_usuario_web($id_usuario)) ,
+                                "<i class='fa fa-tumblr fa-2x black'></i>",
+                                " target='_black' "                                
+                            )?>
+                        
+
+                    </div>
+                </li>
             </ul>
 
 

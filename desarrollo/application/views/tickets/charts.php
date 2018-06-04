@@ -1,37 +1,30 @@
-<br>
-<br>
 <?=n_row_12()?>
-<p class="white strong" 
-   style="font-size: 3em;line-height: .8;background: black;padding: 5px;">                        
-    Indicadores
-</p>
+  <p class="white strong" 
+    style="font-size: 3em;line-height: .8;background: black;padding: 5px;">                        
+      Indicadores
+  </p>
 <?=end_row()?>		      	
-
-
-            <div>
-                <br>
-                <div class="panel-heading">
-                        <ul class="nav nav-tabs">
-                            <li class="active">
-                              <a href="#tab_1_actividad" data-toggle="tab">
+                         
+                
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                          <a href="#tab_1_actividad" data-toggle="tab">
                                 Atención al cliente
-                              </a>
-                            </li>
-                            <li class="comparativa">
-                              <a href="#tab_2_comparativa" data-toggle="tab">
+                          </a>
+                        </li>
+                        <li class="comparativa">
+                          <a href="#tab_2_comparativa" data-toggle="tab">
                                 Comparativa
-                              </a>
-                            </li>
-                            <li class="calidad_servicio">
-                              <a href="#tab_3_comparativa" data-toggle="tab">
+                          </a>
+                        </li>
+                        <li class="calidad_servicio">
+                          <a href="#tab_3_comparativa" data-toggle="tab">
                                 Calidad y servicio
-                              </a>
-                            </li>
-                        </ul>
-                </div>
-                <br>
-                <div>
-                    <div class="tab-content">
+                          </a>
+                        </li>
+                    </ul>
+                
+                    <div class="tab-content">                        
                         <div class="tab-pane fade in active" id="tab_1_actividad">
                             <div class="row">
                               <form class='form_busqueda_desarrollo'>                    
@@ -52,8 +45,5 @@
                               </form>             
                             <div class="place_metricas_servicio">    
                             </div>
-                        </div>
-                       
+                        </div>                       
                     </div>
-                </div>
-            </div>

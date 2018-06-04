@@ -237,12 +237,18 @@
     <?=end_row()?>
     <?php endif; ?>
 <?=end_row()?>
-<script src="../js_tema/js/main.js<?=version_enid?>">
-</script>
-<script src="../js_tema/js/librerias/clipboard.min.js<?=version_enid?>">
-</script>
 
 
+<link 
+rel="stylesheet" 
+href="../css_tema/font-asome2/css/font-awesome.min.css<?=version_enid?>">
+<link 
+rel="stylesheet" 
+type="text/css" 
+href="../css_tema/template/main.css<?=version_enid?>">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
+<link href="../css_tema/template/bootstrap.min.css<?=version_enid?>" 
+rel="stylesheet" id="bootstrap-css">
 <?php if (isset($css)):?>
     <?php  foreach($css as $c):?>
         <link 
@@ -252,12 +258,15 @@
     <?php endforeach;?>
 <?php  endif; ?>
 
+
+
+<script src="../js_tema/js/main.js"></script>
 <?php if (isset($js)):?>
 	<?php  foreach($js as $script):?>
 		<script type='text/javascript' src = '<?php echo $script;?><?=version_enid?>'></script>
     <?php endforeach;?>
 <?php  endif; ?>
-
+<script src="../js_tema/js/librerias/clipboard.min.js"></script>
 <script>
     var clipboard = new Clipboard('.btn_copiar_enlace_pagina_contacto');
     clipboard.on('success', function(e) {
@@ -272,15 +281,8 @@
         console.error('Trigger:', e.trigger);
     });
 </script>
-    <link 
-        rel="stylesheet" 
-        href="../css_tema/font-asome2/css/font-awesome.min.css<?=version_enid?>">
-    <link 
-        rel="stylesheet" 
-        type="text/css" 
-        href="../css_tema/template/main.css<?=version_enid?>">
+
 </body>
 </html>
-<link href="../css_tema/template/bootstrap.min.css<?=version_enid?>" 
-rel="stylesheet" id="bootstrap-css">
-<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
+
+

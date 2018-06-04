@@ -3,7 +3,7 @@ $config['base_url']	= '';
 $config['index_page'] = 'index.php';
 $config['uri_protocol']	= 'AUTO';
 $config['url_suffix'] = '';
-$config['language']	= 'english';
+$config['language']	= '';
 $config['charset'] = 'UTF-8';
 $config['enable_hooks'] = FALSE;
 $config['subclass_prefix'] = 'MY_';
@@ -27,62 +27,19 @@ $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']	= TRUE;
 $config['sess_time_to_update']	= 300;
-/*
-|--------------------------------------------------------------------------
-| Cookie Related Variables
-|--------------------------------------------------------------------------
-|
-| 'cookie_prefix' = Set a prefix if you need to avoid collisions
-| 'cookie_domain' = Set to .your-domain.com for site-wide cookies
-| 'cookie_path'   =  Typically will be a forward slash
-|
-*/
+
+
 $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
-/*
-|--------------------------------------------------------------------------
-| Global XSS Filtering
-|--------------------------------------------------------------------------
-|
-| Determines whether the XSS filter is always active when GET, POST or
-| COOKIE data is encountered
-|
-*/
+
 $config['global_xss_filtering'] = FALSE;
-/*
-|--------------------------------------------------------------------------
-| Cross Site Request Forgery
-|--------------------------------------------------------------------------
-| Enables a CSRF cookie token to be set. When set to TRUE, token will be
-| checked on a submitted form. If you are accepting user data, it is strongly
-| recommended CSRF protection be enabled.
-|
-| 'csrf_token_name' = The token name
-| 'csrf_cookie_name' = The cookie name
-| 'csrf_expire' = The number in seconds the token should expire.
-*/
+
 $config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
-/*
-|--------------------------------------------------------------------------
-| Output Compression
-|--------------------------------------------------------------------------
-|
-| Enables Gzip output compression for faster page loads.  When enabled,
-| the output class will test whether your server supports Gzip.
-| Even if it does, however, not all browsers support compression
-| so enable only if you are reasonably sure your visitors can handle it.
-|
-| VERY IMPORTANT:  If you are getting a blank page when compression is enabled it
-| means you are prematurely outputting something to your browser. It could
-| even be a line of whitespace at the end of one of your scripts.  For
-| compression to work, nothing can be sent before the output buffer is called
-| by the output class.  Do not 'echo' any values with compression enabled.
-|
-*/
+
 $config['compress_output'] = FALSE;
 /*
 |--------------------------------------------------------------------------
@@ -95,29 +52,8 @@ $config['compress_output'] = FALSE;
 | regarding date handling.
 |
 */
-$config['time_reference'] = 'local';
-/*
-|--------------------------------------------------------------------------
-| Rewrite PHP Short Tags
-|--------------------------------------------------------------------------
-|
-| If your PHP installation does not have short tag support enabled CI
-| can rewrite the tags on-the-fly, enabling you to utilize that syntax
-| in your view files.  Options are TRUE or FALSE (boolean)
-|
-*/
+$config['time_reference'] = 'America/Mexico_City';
 $config['rewrite_short_tags'] = FALSE;
-/*
-|--------------------------------------------------------------------------
-| Reverse Proxy IPs
-|--------------------------------------------------------------------------
-|
-| If your server is behind a reverse proxy, you must whitelist the proxy IP
-| addresses from which CodeIgniter should trust the HTTP_X_FORWARDED_FOR
-| header in order to properly identify the visitor's IP address.
-| Comma-delimited, e.g. '10.0.1.200,10.0.1.201'
-|
-*/
 $config['proxy_ips'] = '';
-/* End of file config.php */
-/* Location: ./application/config/config.php */
+
+date_default_timezone_set("America/Mexico_City");

@@ -85,9 +85,9 @@
 					            <span class="extra_precio">
 				 					<?=$error_registro?>
 				 				</span>
-
-							</div>		    
-				      	<div class='seccion_menu_tipo_servicio row'>
+							</div>		
+						</div>    
+				      	<div class='seccion_menu_tipo_servicio col-lg-3 siguiente_btn'>
 					        <button class=" btn_siguiente_registrar_servicio ">
 					          SIGUIENTE
 					        </button>

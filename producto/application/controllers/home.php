@@ -1,7 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once ('../librerias/google-translate/vendor/autoload.php');
+use \Statickidz\GoogleTranslate;
 class Home extends CI_Controller{
     public $options;  
-
     function __construct($options=[]){        
         parent::__construct();                                    
         $this->load->library("principal");   
@@ -18,12 +19,11 @@ class Home extends CI_Controller{
     }
     /**/
     function crea_data_costo_envio(){        
-        $param["flag_envio_gratis"]=   $this->get_option("servicio")[0]["flag_envio_gratis"];   
+        $param["flag_envio_gratis"]=   $this->get_option("servicio")[0]["flag_envio_gratis"];
         return $param;
     }
     /**/    
-    function index(){
-        
+    function index(){                
         if (ctype_digit(trim($this->input->get("producto")))) {
             $this->load_servicio($this->input->get());
         }else{
@@ -40,8 +40,8 @@ class Home extends CI_Controller{
 
         if($this->agent->is_mobile() == FALSE){
             /**/
-            $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
-            $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;        
+            
+            $data["clasificaciones_departamentos"] = $this->get_departamentos("nosotros");        
         }
         if ($id_servicio == 0 ){      
             /**/
@@ -59,7 +59,7 @@ class Home extends CI_Controller{
     /**/
     private function crea_vista_producto($param , $data){
             
-            
+
             $id_servicio =  $this->get_option("id_servicio");                              
             $data["q2"] =   valida_valor_variable($param , "q2");            
             $servicio =     $this->get_informacion_basica_servicio($id_servicio);
@@ -80,12 +80,19 @@ class Home extends CI_Controller{
                     }                        
                     $this->set_option("servicio" , $servicio);                                            
                     $data["costo_envio"] ="";
-                    
+                    $data["tiempo_entrega"] ="";
                     if($servicio[0]["flag_servicio"] ==  0){                
                         $data["costo_envio"] = 
                         $this->calcula_costo_envio($this->crea_data_costo_envio());    
+
+                        $tiempo_promedio_entrega =  $servicio[0]["tiempo_promedio_entrega"];
+                        $data["tiempo_entrega"] = 
+                        $this->valida_tiempo_entrega($tiempo_promedio_entrega);
                     }                        
                     
+
+
+
                     $data["info_servicio"]["servicio"] = $servicio;    
                     $this->set_option("flag_precio_definido" , 0);
                    
@@ -97,7 +104,8 @@ class Home extends CI_Controller{
 
                     $this->costruye_descripcion_producto();             
 
-                    $this->principal->crea_historico_vista_servicio($id_servicio , $data["in_session"] ,$data["id_publicador"]);
+                    $this->principal->crea_historico_vista_servicio($id_servicio , 
+                        $data["in_session"] ,$data["id_publicador"]);
 
                     $data["url_actual"]=   $this->get_the_current_url();
                     $data["meta_keywords"] = $this->get_option("meta_keywords");                    
@@ -106,7 +114,17 @@ class Home extends CI_Controller{
                     
                     $data["id_servicio"] =  $id_servicio;            
                     $prm["id_servicio"] = $id_servicio;
-                    $data["existencia"]=  $this->verifica_disponibilidad_servicio($prm);                
+                    $data["existencia"]=  $this->verifica_disponibilidad_servicio($prm);
+
+                    $data["css"] = [base_url('application/css/main.css'),
+                                    "../css_tema/template/css_tienda.css",
+                                    base_url('application/css/zoom_imagen.css')
+                                    ];
+
+                    $data["js"] = [
+                                base_url('application/js/principal.js'),
+                                "../librerias/jquery-zoom/jquery.zoom.js"
+                            ];
                     $this->principal->show_data_page($data, 'home');
     }
     /**/
@@ -128,7 +146,8 @@ class Home extends CI_Controller{
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
         $this->restclient->set_option('format', "json");        
-        $result = $this->restclient->get("producto/articulos_disponibles/format/json/", $param);
+        $result = 
+        $this->restclient->get("producto/articulos_disponibles/format/json/", $param);
         $response =  $result->response;        
         return json_decode($response , true);
     }
@@ -308,5 +327,27 @@ class Home extends CI_Controller{
         $response =  $result->response;        
         return $response;
     }
-    
+    /***/
+    private  function valida_tiempo_entrega($tiempo)
+    {
+
+        
+        $source = 'en';
+        $target = 'es';
+
+        $fecha =  date("Y-m-d e");    
+        $fecha = new DateTime($fecha);
+        $fecha->add(new DateInterval('P'.$tiempo.'D'));        
+        $fecha_entrega_promedio =  $fecha->format('l, d M Y');
+        $trans = new GoogleTranslate();
+        $fecha_entrega_promedio = $trans->translate($source, $target, strtoupper($fecha_entrega_promedio));
+
+        $tiempo_entrega =  "REALIZA HOY TU PEDIDO PARA 
+        TENERLO EN TU HOGAR
+        EL <span class='tiempo_promedio'>".$fecha_entrega_promedio."</span>";
+
+        return $tiempo_entrega;
+      
+    }
+
 }

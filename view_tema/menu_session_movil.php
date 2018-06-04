@@ -7,7 +7,9 @@
         onclick="closeNav()">×
         </a>
         <div class="logo_lateral_login">
-            <img src="../img_tema/enid_service_logo.jpg" >        	        
+            <a href="../search/?q2=0&q=">
+                <img src="../img_tema/enid_service_logo.jpg" >        	        
+            </a>
         </div>
 
     </div> 

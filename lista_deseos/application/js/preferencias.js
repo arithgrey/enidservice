@@ -3,8 +3,6 @@ $(document).ready(function(){
 });
 /**/
 function agrega_interes(e){
-	
-	$(this).addClass("selected_clasificacion");	
 
 	id_clasificacion =  e.target.id;
 	url = "../tag/index.php/api/clasificacion/interes/format/json/";
@@ -18,6 +16,12 @@ function agrega_interes(e){
 		}
 	}).done(function(data){				
 
-		
+		preferencia =".preferencia_"+id_clasificacion;
+		if (data.tipo ==  1) {			
+			$(preferencia).addClass("selected_clasificacion");	
+		}else{
+			$(preferencia).removeClass("selected_clasificacion");	
+		}
+
 	}).fail(function(){});	
 }

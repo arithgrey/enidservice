@@ -1,3 +1,9 @@
+.tiempo_promedio{    
+  background: #ededed;
+  padding: 5px;
+  color: #000509;
+  font-weight: bold;
+}
 .product-detail {
   padding-top: 15px;
 }.product-detail .cols {
@@ -38,37 +44,14 @@
   margin-right: 0;
 }
 
-.product-detail .left-col .big .img {
-  -moz-transition: all 600ms ease-out 0s;
-  -o-transition: all 600ms ease-out 0s;
-  -webkit-transition: all 600ms ease-out;
-  -webkit-transition-delay: 0s;
-  transition: all 600ms ease-out 0s;
-  -moz-transform: translateY(0px);
-  -ms-transform: translateY(0px);
-  -webkit-transform: translateY(0px);
-  transform: translateY(0px);
-  -moz-border-radius: 1px;
-  -webkit-border-radius: 1px;
-  border-radius: 1px;
-  background: transparent no-repeat center center;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  -webkit-background-size: cover;
-  background-size: cover;
-  border: 1px solid #e2e2e3;
-  display: block;
-  height: 0;
-  opacity: 1;
-  padding-bottom: 133%;
+.imagen_producto_completa{
+  width: 95%;  
 }
 .product-detail .right-col {
   width: 48.27586%;
   float: right;
   margin-right: 0;
 }
-
-
 .product-detail a {
   font-size: 100%;
   line-height: 123.07692%;
@@ -184,3 +167,164 @@
     }
     */
 }
+.contenedor_info_producto{
+    width: 95%!important;
+    margin: 0 auto;
+  }
+  .contenedor_izquierdo{
+    width: 100%!important;
+  }
+  .contenedor_derecho{
+    width: 100%!important; 
+    background: black;
+    padding: 20px;
+    height: 430px;    
+  }
+  .contenedor_derecho_nombre{
+    width: 95%!important;     
+  }
+
+  .informacion_text{
+    font-size: 1.7em;    
+    color: #0a1339;
+  }
+  .nombre_producto_servicio{
+    font-size: 2.5em;
+    margin-top: 0!important;    
+    margin-bottom:  0!important;    
+    padding: 0!important;
+    background: black;
+    color: white;
+    
+  }  
+  .por_vendedor{
+    color: white!important;    
+    background: black;
+    font-weight: bold;
+    padding: 2px;
+  }
+  .publicado_por{        
+    color: white!important;    
+  }
+  .publicado_por:hover{     
+    color: white!important;
+  }   
+  .texto_precio{
+    font-weight: bold; 
+  }  
+  .pregunta_vendedor_servicio{
+
+  }
+  .a_pregunta_vendedor{
+    background: #f5f5f5;
+    color: #010a17 !important;
+    padding: 8px;
+    text-decoration: none !important;
+    border: solid 1.5px;
+    font-weight: bold;
+  }
+  .a_pregunta_vendedor:hover{
+    color: white!important;
+  }
+  .titulo_sobre_el_producto{
+    margin-top: 65px!important;    
+    font-size: 2em;
+  }
+  #AddToCart{
+    background: #fff !important;
+    color: #00060c !important;
+  }
+  .text_colores_disponibles{
+    color: white;    
+  }
+  .informacion_colores_disponibles{    
+    font-size: 1.2em;
+  }
+  .contenedor_informacion_colores{
+    margin-top: 20px;  
+  }
+  .contenedor_descripcion_servicio{
+    background: white;
+  }
+  
+  .editar_button{    
+    text-align: right;
+    z-index: 2878787;
+
+  }
+  .separador{
+    margin-top: 20px;
+  }
+  .informacion_vendedor_descripcion a{
+    color: black;
+    font-weight: bold;
+  }
+  .text_en_existencia{
+    color: #001330;
+    font-size: 1.1em;
+    position: absolute;
+    bottom: 0;
+    width: 93% !important;
+    background: #eceefe;
+    padding: 5px;
+    font-weight: bold;
+  }
+  .numero_piezas{
+    font-weight: bold;
+    font-size: 1.2em;
+    color: white!important;
+  }
+  .contenedor_central_info{    
+    margin: 0 auto;
+    width: 90%!important;
+  }
+  .table_orden_1{
+    width: 50%;
+  }
+  .table_orden_2{
+    width: 40%;
+  }
+  .table_orden_3{
+    width: 10%;
+  }
+  .agregar_a_lista_deseos{    
+    margin-bottom: 30px;
+  }
+  .agregar_a_lista{
+    margin-bottom: 35px; 
+  }
+  .agregar_a_lista_deseos:hover{
+    cursor: pointer;
+  }
+  .btn_add_list{
+    background: #16308a !important;
+    padding: 10px !important;
+    color: white !important;
+    font-weight: bold !important;
+  }
+  @media only screen and (max-width: 768px) {
+    .contenedor_info_producto{
+      width: 100%!important;
+      margin: 0 auto;
+    }
+    .contenedor_central_info{    
+      margin: 0 auto;
+      width: 100%!important;
+    }
+    .contenedor_venta{
+      margin-top: 25px;
+    }
+    .table_orden_1{
+      width: 50%;      
+    }
+    .table_orden_2{
+      width: 0%;
+    }
+    .table_orden_3{
+      width: 50%;
+      text-align: right;
+    }
+    .contenedor_comentarios{
+      margin-top: 50px;
+    }
+  }

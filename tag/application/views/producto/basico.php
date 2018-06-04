@@ -1,4 +1,5 @@
 <?php
+    
 
     $extra_color ="style='margin-left:5px;color: black;font-weight:bold;'";
     $list ="";  
@@ -59,6 +60,14 @@
             $vista =  $servicio["vista"];
         }
         
+        $atributos_imagen = 
+            array(
+                'src'   => $url_img, 
+                'title' => 'Ver artículo', 
+                'class' => 'imagen_producto',
+                'alt'   => $metakeyword);
+        $img =  img($atributos_imagen);    
+                        
         
 ?>
 
@@ -74,11 +83,8 @@
         <center>
             <div class='contenedor_principal_imagen_producto'>
                 <a href="<?=$url_info_producto?>" >    
-                    <img 
-                    src="<?=$url_img?>" alt="<?=$metakeyword?>" 
-                    title="Ver artículo"
-                    onerror="this.src='<?=$url_img_error?>'" 
-                    class='imagen_producto'> 
+                    
+                    <?=$img?>
                 </a>
             </div>
         </center>

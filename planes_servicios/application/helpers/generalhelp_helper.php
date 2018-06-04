@@ -1,6 +1,69 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
   
+  if ( ! function_exists('anchor_enid'))
+  {
+    function anchor_enid($uri = '', $title = '', $attributes = '', $simple=0)
+    {
+      $title = (string) $title;
+      if ( ! is_array($uri))
+      {
+        $site_url = ( ! preg_match('!^\w+://! i', $uri)) ? $uri : $uri;
+      }
+      else
+      {
+        $site_url = $uri;
+      }
+
+      if ($title == '')
+      {
+        $title = $site_url;
+      }
+
+      if ($attributes != '')
+      {
+        $attributes = _parse_attributes($attributes);
+      }
+
+      if ($simple ==0) {
+        return '<a href="'.$site_url.'"'.$attributes.'>'.$title.'</a>';  
+      }else{
+        return '<a '.$attributes.'>'.$title.'</a>';  
+      }
+      
+    }
+  }
+  function get_url_tumblr($url){
+    return "http://tumblr.com/widgets/share/tool?canonicalUrl=".$url;    
+  }
+  /**/
+  function get_url_pinterest($url ){
+    
+    $url_pinterest = "https://www.pinterest.com/pin/create/button/?url=". $url;
+
+    return $url_pinterest;
+  }
+  /**/
+  function get_url_twitter($url , $mensaje){
+
+    $url_twitter ="https://twitter.com/intent/tweet?text=".$mensaje.$url;
+    return $url_twitter;
+  }
+  /**/
+  function get_url_facebook($url){
+    $url_facebook ="https://www.facebook.com/sharer/sharer.php?u=".$url.";src=sdkpreparse";
+    return $url_facebook;
+  }
+  function get_url_productos_cuenta_usuario_web($id_usuario)
+  {
+    $host =  $_SERVER['HTTP_HOST'];
+    $url_request =  "http://".$host."/inicio/search/?q3=".$id_usuario; 
+    return  $url_request;    
+  }    
+  function get_url_productos_cuenta_usuario($id_usuario)
+  {
+    return "../../search/?q3=".$id_usuario; 
+  }  
   function valida_active_tab($seccion , $valor_actual , $considera_segundo =0 ){
       
       if ($considera_segundo == 0 ) {

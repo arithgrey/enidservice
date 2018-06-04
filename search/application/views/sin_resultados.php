@@ -1,68 +1,47 @@
 <main>
-<br>
-<br>
-<br>
-<br>
-<div class="panel" >        
-<div class="resultados">
-<div class="container">
-	<div class="row">
-		<ul class="thumbnails">
-            <li class="span4">
-              <div class="thumbnail">
-                
-                <div class="caption">
-                  <h3 class="black">
-					           No hay productos que coincidan con tu búsqueda. 
-                  </h3>
-                  <ul>
-                  	<li style="font-size: .8em;">
-                  		- Revisa la <strong> ortografía de la palabra.</strong>
-                  	</li>
-                  	<li style="font-size: .8em;">
-						- Utiliza palabras 
-							<strong>
-							más simples o 
-							menos palabras.                  		
-							</strong>
-                  	</li>
-                  	<li style="font-size: .8em;">
-                  		- Navega por categorías
-                  	</li>
-                  </ul>
-
-                </div>
-              </div>
+  <div class="contenedor_principal_enid_service">
+    <?=n_row_12()?>    
+      <div class="separador_inicial"></div>
+    <?=end_row()?>
+    <?=n_row_12()?>    
+      <div class="inf_sugerencias">
+        <h3 class="info_sin_encontrar">        
+          NO HAY PRODUCTOS QUE COINCIDAN CON TU BÚSQUEDA
+        </h3>
+        <div class="contenedor_sugerencias sugerencias">          
+            SUGERENCIAS          
+        </div>
+        <div class="info_sugerencias">
+          <ul>
+            <li>
+              - REVISA LA
+              <strong> ORTOGRAFÍA DE LA PALABRA
+              </strong>
             </li>
-              
-        </ul>
-	</div>
-</div>
-</div>
-            
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+            <li>            
+              - UTILIZA PALABRAS
+            <strong>
+              MÁS SIMPLES             
+            </strong>
+            </li>
+            <li>
+              - NAVEGA POR CATEGORÍAS
+            </li>
+            <li class="anunciar_btn">
+                <a href="../login" class="a_enid_black2" style="color: white!important">
+                  ANUNCIA ESTE PRODUCTO!
+                <i class="fa fa-chevron-right ir">              
+                </i>
+              </a>
+            </li>
+          </ul>
+        </div>        
+        
+        
+      </div>
+    <?=end_row()?>
+    <?=n_row_12()?>    
+      <div class="separador_final"></div>
+    <?=end_row()?>
+  </div>
 </main>

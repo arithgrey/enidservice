@@ -3,6 +3,7 @@ class Recursocontroller extends CI_Controller {
 	function __construct(){		
 		/**/
         parent::__construct();				
+        $this->load->helper("form");
 		$this->load->library('principal');  			
         $this->load->library("restclient");   
 		$this->load->library('sessionclass');  			
@@ -16,6 +17,17 @@ class Recursocontroller extends CI_Controller {
         $data["usuario"] =  $this->principal->get_info_usuario($id_usuario);
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;        
+        $data["js"] =  [
+            base_url('application/js/principal.js'),
+            base_url('application/js/privacidad_seguridad.js'),
+            base_url('application/js/sobre_el_negocio.js'),
+            base_url('application/js/img.js'),
+            base_url('application/js/perfil_user.js'),
+            "../js_tema/js/direccion.js",
+            base_url('application/js/sha1.js')
+        ];
+
+        $data["css"] = [base_url("application/css/principal.css") ];
         $this->principal->show_data_page($data , 'home' );        
 	}	
     /*Inicia perfil avanzado*/	
@@ -35,11 +47,11 @@ class Recursocontroller extends CI_Controller {
                 $data["url_img_post"]= "";
                 $data["id_usuario"] = $this->sessionclass->getidusuario();     
                 /**/
-
                 $data["id_empresa"] =  $this->sessionclass->getidempresa();                     
                 $data["info_empresa"] =  $this->sessionclass->get_info_empresa();                     
                 $data["desc_web"] =  "";
-                $data["info_perfil_usuario"] = $this->sessionclass->getperfiles()[0]["idperfil"];
+                $data["info_perfil_usuario"] = 
+                $this->sessionclass->getperfiles()[0]["idperfil"];
                 /**/
                 return $data;
         }else{            

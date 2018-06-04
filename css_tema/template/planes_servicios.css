@@ -1,4 +1,10 @@
 @charset "UTF-8";
+.menu_redes{
+
+}
+.contenedor_compartir_redes_sociales{
+    margin-top: 25px;
+}
 .indicacion_tambien{
     background: black!important;
     color: white!important;
@@ -234,6 +240,12 @@
     padding: 5px !important;
     color: white !important;
     font-weight: bold !important;
+}
+.selector_categoria{
+        width: 100%;            
+}
+.li_menu_compartir_cuenta{
+    background: #e9f0fb;    
 }
 
 /* For mobile phones: */

@@ -14,8 +14,7 @@ if(!function_exists('invierte_date_time')){
     foreach ($solicitudes as $row){        
         /**/          
         $fecha_registro =  $row["fecha_registro"];  
-        if($fecha_registro ==  $fecha_actual) {
-          
+        if($fecha_registro ==  $fecha_actual) {          
           $tareas_solicitadas = $row["tareas_solicitadas"];
           $valor  =  $tareas_solicitadas;
           break;  

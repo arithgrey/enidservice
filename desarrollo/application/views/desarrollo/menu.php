@@ -1,6 +1,5 @@
 <nav class="nav-sidebar">
-    <ul class="nav tabs">                                   
-        
+    <ul class="nav tabs">                                           
         <li class='black li_menu <?=valida_seccion_activa(3 , $activa )?>' 
             style='background:white;'>
             <a  

@@ -7,6 +7,10 @@
 	margin-top: 8px;
 	margin-left: 1px;
 }
+.img_servicio:hover{		
+	cursor: pointer;
+	padding: 5px;	
+}
 .titulo_lista_deseos{
 	font-weight: bold;font-size: 3em;
 }

@@ -14,7 +14,9 @@
                         apellido_materno ,
                         email,
                         tel_contacto,  
-                        tel_contacto_alterno
+                        tel_contacto_alterno,
+                        tel_lada,
+                        lada_negocio
                         FROM 
                         usuario 
                         WHERE idusuario = $id_usuario LIMIT 1"; 

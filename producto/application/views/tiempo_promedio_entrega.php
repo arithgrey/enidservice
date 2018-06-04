@@ -1,0 +1,1 @@
+<?=$tiempo_promedio_entrega?>

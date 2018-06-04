@@ -1,15 +1,17 @@
 		<?=n_row_12()?>    						
-			<div class="col-lg-8 col-lg-2-offset">
-					 <label class="col-md-2 control-label" >
-					  <i class="fa fa-search">
-					  </i>
-						  	Ticket
-				</label>  
+			
+				<div class="col-lg-4">
+					<span>
+						<i class="fa fa-search">
+						</i>
+						Ticket
+					</span>  
+				</div>
 				<div class="col-lg-4">
 					<input name="q" class="input-sm q" type="text">
 				</div>
 				<div class="col-lg-4">
-					<div class="contenedor_deptos">
+					<div>
 				        <?=create_select(
 				            $departamentos , 
 				            "depto" , 
@@ -25,15 +27,15 @@
 					        class='num_departamento'
 					        style='display: none;'>
 				   	</div>
-		        </div>
-	        </div>			
+		        </div>	        		
 		<?=end_row()?>    
 
-		<br>
-		<?=n_row_12()?>    
+	
+		<?=n_row_12()?>    			
 			<div class='place_proyectos'>
-			</div>
+			</div>			
+		<?=end_row()?>    
+		<?=n_row_12()?>    			
 			<div class='place_tickets'>
 			</div>
 		<?=end_row()?>    
-	

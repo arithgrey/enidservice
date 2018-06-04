@@ -12,7 +12,9 @@ class Home extends CI_Controller{
         $data["meta_keywords"] = "";    
         $data["desc_web"] = "";        
         $data["url_img_post"] = "";
-        $data["clasificaciones_departamentos"] = $this->get_departamentos("");
+        $data["clasificaciones_departamentos"] 
+        = 
+        $this->get_departamentos("");
         
 
         if (is_array($this->input->get()) 

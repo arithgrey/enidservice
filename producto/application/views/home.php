@@ -23,6 +23,7 @@
   $entregas_en_casa =  0;
   $telefono_visible =  0;
   $venta_mayoreo =  0;
+
   foreach($info_servicio["servicio"] as $row){
     
     $id_servicio =  $row["id_servicio"]; 
@@ -44,6 +45,7 @@
     $id_usuario_servicio =  $row["id_usuario"];
     $telefono_visible =  $row["telefono_visible"];
     $venta_mayoreo =  $row["venta_mayoreo"];
+    
   }
 
   $imagenes =  
@@ -57,6 +59,7 @@
 
 ?>
 <main> 
+
 
 
 <?=n_row_12()?>    
@@ -135,7 +138,11 @@
                       <?=n_row_12()?>
                         <?=$this->load->view("lista_deseos")?>
                       <?=end_row()?>
-
+                      
+                      <?=n_row_12()?>                        
+                          <?=$tiempo_entrega?>                        
+                      <?=end_row()?>
+                      <br>
                       <?=n_row_12()?>
                         <?=$this->load->view("social", $info_social)?>
                       <?=end_row()?>
@@ -207,10 +214,8 @@
 <?=end_row()?>
 
 
-
 </main>
-<script type="text/javascript" src="<?=base_url('application')?>/js/principal.js<?=version_enid?>">        
-</script>
+
 <input 
 type="hidden" 
 name="servicio" 
@@ -221,169 +226,4 @@ type="hidden"
 name="desde_valoracion" 
 value="<?=$desde_valoracion?>" 
 class='desde_valoracion'>
-<link rel="stylesheet" type="text/css" href="<?=base_url('application')?>/css/main.css<?=version_enid?>">
-<link rel='stylesheet prefetch' href='../css_tema/template/css_tienda.css<?=version_enid?>'>
 
-<style type="text/css">
-  .contenedor_info_producto{
-    width: 95%!important;
-    margin: 0 auto;
-  }
-  .contenedor_izquierdo{
-    width: 100%!important;
-  }
-  .contenedor_derecho{
-    width: 100%!important; 
-    background: black;
-    padding: 20px;
-    height: 430px;    
-  }
-  .contenedor_derecho_nombre{
-    width: 95%!important;     
-  }
-
-  .informacion_text{
-    font-size: 1.7em;    
-    color: #0a1339;
-  }
-  .nombre_producto_servicio{
-    font-size: 2.5em;
-    margin-top: 0!important;    
-    margin-bottom:  0!important;    
-    padding: 0!important;
-    background: black;
-    color: white;
-    
-  }  
-  .por_vendedor{
-    color: white!important;    
-    background: black;
-    font-weight: bold;
-    padding: 2px;
-  }
-  .publicado_por{        
-    color: white!important;    
-  }
-  .publicado_por:hover{     
-    color: white!important;
-  }   
-  .texto_precio{
-    font-weight: bold; 
-  }  
-  .pregunta_vendedor_servicio{
-
-  }
-  .a_pregunta_vendedor{
-    background: #f5f5f5;
-    color: #010a17 !important;
-    padding: 8px;
-    text-decoration: none !important;
-    border: solid 1.5px;
-    font-weight: bold;
-  }
-  .a_pregunta_vendedor:hover{
-    color: white!important;
-  }
-  .titulo_sobre_el_producto{
-    margin-top: 65px!important;    
-    font-size: 2em;
-  }
-  #AddToCart{
-    background: #fff !important;
-    color: #00060c !important;
-  }
-  .text_colores_disponibles{
-    color: white;    
-  }
-  .informacion_colores_disponibles{    
-    font-size: 1.2em;
-  }
-  .contenedor_informacion_colores{
-    margin-top: 20px;  
-  }
-  .contenedor_descripcion_servicio{
-    background: white;
-  }
-  
-  .editar_button{    
-    text-align: right;
-    z-index: 2878787;
-
-  }
-  .separador{
-    margin-top: 20px;
-  }
-  .informacion_vendedor_descripcion a{
-    color: black;
-    font-weight: bold;
-  }
-  .text_en_existencia{
-    color: #001330;
-    font-size: 1.1em;
-    position: absolute;
-    bottom: 0;
-    width: 93% !important;
-    background: #eceefe;
-    padding: 5px;
-    font-weight: bold;
-  }
-  .numero_piezas{
-    font-weight: bold;
-    font-size: 1.2em;
-    color: white!important;
-  }
-  .contenedor_central_info{    
-    margin: 0 auto;
-    width: 90%!important;
-  }
-  .table_orden_1{
-    width: 50%;
-  }
-  .table_orden_2{
-    width: 40%;
-  }
-  .table_orden_3{
-    width: 10%;
-  }
-  .agregar_a_lista_deseos{    
-    margin-bottom: 30px;
-  }
-  .agregar_a_lista{
-    margin-bottom: 35px; 
-  }
-  .agregar_a_lista_deseos:hover{
-    cursor: pointer;
-  }
-  .btn_add_list{
-    background: #16308a !important;
-    padding: 10px !important;
-    color: white !important;
-    font-weight: bold !important;
-  }
-  @media only screen and (max-width: 768px) {
-    .contenedor_info_producto{
-      width: 100%!important;
-      margin: 0 auto;
-    }
-    .contenedor_central_info{    
-      margin: 0 auto;
-      width: 100%!important;
-    }
-    .contenedor_venta{
-      margin-top: 25px;
-    }
-    .table_orden_1{
-      width: 50%;      
-    }
-    .table_orden_2{
-      width: 0%;
-    }
-    .table_orden_3{
-      width: 50%;
-      text-align: right;
-    }
-    .contenedor_comentarios{
-      margin-top: 50px;
-    }
-  }
-</style>

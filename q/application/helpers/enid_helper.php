@@ -27,30 +27,7 @@ if(!function_exists('invierte_date_time')){
       return $data_complete;
     }
     /**/
-    function add_mensajes_sin_leer($param){      
-
-      
-      $lista_pendientes ="";
-      $flag_notificaciones = 0;           
-      if($num > 0 ){         
-          
-          $lista_pendientes .= 
-          inicio_base_notificacion("../area_cliente/?action=preguntas" ,"fa fa-cart-plus");          
-          $text ="Un posible cliente te ha enviado un mensaje
-                  mira lo que te ha enviado aquí!";
-          if($num>1){
-            $text = $num." personas te han hecho preguntas sobre tus productos, mira las preguntas aquí!";
-          }
-          $lista_pendientes .=$text;
-          $lista_pendientes .= fin_base_notificacion();   
-          $flag_notificaciones ++;                           
-      }
-      $data_complete["html"] =  $lista_pendientes;
-      $data_complete["flag"] =  $flag_notificaciones;
-      return $data_complete;
-      
-
-    }    
+    
     /**/
     function add_mensajes_respuestas_vendedor($param, $tipo){      
 
@@ -395,11 +372,7 @@ if(!function_exists('invierte_date_time')){
     $lista_pendientes .= $mensajes_sin_leer["html"];        
     
 
-
-    $mensajes_sin_leer    = add_mensajes_sin_leer($inf["mensajes"]);
-    $flag_notificaciones  = $flag_notificaciones + $mensajes_sin_leer["flag"];
-    $lista_pendientes .=  $mensajes_sin_leer["html"];        
-
+    
     
     $deuda = add_saldo_pendiente($inf["adeudos_cliente"]);
     $flag_notificaciones = $flag_notificaciones + $deuda["flag"];

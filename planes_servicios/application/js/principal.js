@@ -174,14 +174,7 @@ function carga_informacion_servicio(num) {
 						$(".foto_producto").click(elimina_foto_producto);
 						/**/
 						$(".form_tag").submit(agrega_metakeyword);
-						/*
-						$(".editar_categorias_servicio").click(function() {
-							set_option("nuevo", 0);
-							carga_listado_categorias();
-							recorrepage(".contenedor_cat");
-						});
-						*/
-
+						
 						/**/
 						$(".text_nuevo").click(muestra_input_producto_nuevo);
 						$(".text_ciclo_facturacion").click(
@@ -829,7 +822,8 @@ function configuracion_inicial(e) {
 		$(".contenedor_ciclo_facturacion").show();
 		selecciona_select(".ci_facturacion", 9);	
 		$(".precio").val(0);
-		$(".contenedor_precio").show();
+		$(".contenedor_precio").hide();
+		$(".siguiente_btn").show();
 
 	}else{
 

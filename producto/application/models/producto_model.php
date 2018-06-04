@@ -27,7 +27,8 @@
             id_ciclo_facturacion,
             entregas_en_casa, 
             telefono_visible,
-            venta_mayoreo
+            venta_mayoreo,
+            tiempo_promedio_entrega
           FROM
             servicio 
           WHERE id_servicio = '".$id_servicio."' LIMIT 1";

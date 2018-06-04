@@ -601,6 +601,15 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
     color: white!important;
     font-weight: bold!important;   
 }
+.a_enid_black2{
+	background: #0a1e35 !important;
+	padding: 10px !important;
+	color: white !important;
+	font-weight: bold !important;
+}
+.a_enid_black2:hover{
+	background: #015ec8!important;
+}
 .a_enid_blue_sm{
     background: #015ec8!important;
     padding: 5px!important;

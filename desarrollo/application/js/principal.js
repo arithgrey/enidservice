@@ -288,29 +288,33 @@ function carga_info_detalle_ticket(){
 			url : url , 
 			type: "GET",
 			data: data_send, 
-			beforeSend: function(){
-				//show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
-			}
+			beforeSend: function(){}
 	}).done(function(data){							
 
 		
-		//carga_num_pendientes();
 		llenaelementoHTML(".place_proyectos" , data);		
 		$(".btn_mod_ticket").click(actualizar_estatus_ticket);
 		$(".btn_agregar_tarea").click(function(){		
 			show_section_dinamic_button(".seccion_nueva_tarea");
 			show_section_dinamic_button(".btn_agregar_tarea");
 			recorrepage(".seccion_nueva_tarea");
-			/**/
+			
+			$('.summernote').summernote({
+		        placeholder: 'Tarea pendiente',
+		        tabsize: 2,
+		        height: 100
+		      });
+
+
+
 		});
 		
 		$(".agregar_respuesta").click(carga_formulario_respuesta_ticket);
 		$(".comentarios_tarea").click(carga_comentarios_tareas);
-		/*Agregar tarea*/
-
+		
 		$(".form_agregar_tarea").submit(registra_tarea);
 		$(".tarea").click(actualiza_tareas);
-		//recorrepage("#asunto_ticket");
+		
 		/**/
 			$(".mostrar_tareas_pendientes").click(muestra_tareas_por_estatus);
 			$(".mostrar_todas_las_tareas").click(muestra_todas_las_tareas);
@@ -323,8 +327,8 @@ function carga_info_detalle_ticket(){
 			muestra_tareas_por_estatus();
 		}
 		/**/
-		//$(".mover_ticket").click(mover_ticket_depto_pre);
-		$('.summernote').summernote();
+
+		
 
 
 		/**/

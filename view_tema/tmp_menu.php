@@ -1,7 +1,4 @@
 <?php if ($in_session ==  1):?>    
-
-      
-
         
         <li class="dropdown pull-right   " 
             style="padding:3px;z-index: 3000;background: white;margin-top: 2px;" >
