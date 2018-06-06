@@ -229,8 +229,7 @@ function u_entregas_en_casa(e){
 	});
 }
 /**/
-function u_telefono_visible(e){
-
+function u_telefono_visible(e){	
 	url =  "../base/index.php/api/servicio/telefono_visible/format/json/";	
 	data_send  = {telefono_visible : e.target.id , servicio : get_option("servicio")};	
 	$.ajax({
@@ -243,6 +242,7 @@ function u_telefono_visible(e){
 	}).done(function(data){			
 
 		carga_informacion_servicio(4);
+
 	}).fail(function(){});	
 }
 /**/

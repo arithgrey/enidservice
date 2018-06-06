@@ -1,13 +1,26 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+/**/
+function text_agregar_telefono($has_phone , $telefono_visible){
+  
+  if ($has_phone ==0 && $telefono_visible == 1) {
+    
+    $config["class"] =  "invitacion_registro_telefono";
+    $config["style"] =  "color:white!important";
+    $link =  anchor('../../administracion_cuenta/',  
+                    'INDICA A TUS CLIENTES ALGÚN NÚMERO 
+                      TELEFÓNICO DONDE PUEDAN SOLICITAR 
+                      MÁS INFORMES SOBRE TUS PRODUCTOS'
+                    , $config );  
 
+    return "<div class='add_phone'>".$link."</div>";
+  }
+}
 function valida_activo_ventas_mayoreo($estado_actual , $ventas_mayoreo){
-
 
     if ($estado_actual == $ventas_mayoreo ) {
       return "button_enid_eleccion_active";
     }
-
 }
 /**/
 function valida_activo_informes_por_telefono($valor , $valor_usuario){

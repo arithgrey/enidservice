@@ -1,6 +1,34 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
+  function add_parse_attributes($attributes)
+  {
+    if (is_string($attributes))
+    {
+      return ($attributes != '') ? ' '.$attributes : '';
+    }
+    $att = '';
+    foreach ($attributes as $key => $val)
+    {      
+        $att .= ' ' . $key . '="' . $val . '"';
+      
+    }  
+    return $att;
+  }
+
+/**/
+function select_vertical($data, $val , $text_option , $attributes=''){ 
+        
+    $extra = add_parse_attributes($attributes);  
+    $select ="<select ".$extra." > ";
+      foreach ($data as $row) {      
+        $select .=  "<option value='". $row[$val] ."'>". $row[$text_option]." </option>";
+      }
+    $select .="</select>";
+    return $select;
+
+}
+/**/
 function get_cotizaciones_btn($tipo_prospecto){
 
   $extra_class='';

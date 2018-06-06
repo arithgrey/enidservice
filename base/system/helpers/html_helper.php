@@ -1,55 +1,4 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-function get_cotizaciones_btn($tipo_prospecto){
-
-  $extra_class='';
-  if ($tipo_prospecto ==  15) {
-    $extra_class='style="background:#0656F9 !important;" ';
-  }
-  $l = n_row_12().
-        '<form id="form_enid_contacto" class="form_enid_contacto" 
-            class="forms" 
-            action="../msj/index.php/api/emp/lead/format/json" 
-            method="post"
-            class="form-horizontal">                    
-            <div class="form-group">     
-              <div class="col-lg-12 parte_oculta_lead" style="display:none;" >
-                
-                <input type="text" class="nombre_lead" name="nombre" placeholder="Nombre" required >
-                <span class="place_nombre_lead"></span>
-                <input 
-                      type="number" 
-                      name="telefono" 
-                      placeholder="telefono"
-                      class="telefono_info_contacto telefono_lead" 
-                      required >                             
-                <span class="place_telefono_lead"></span>
-
-
-              </div>
-              <div class="col-md-12">
-                <div class="input-group">
-                  <input 
-                    id="btn_cotizacion" 
-                    name="email" 
-                    class="form-control correo_electrionico_lead" 
-                    placeholder="Correo Electrónico" type="email">
-                    <div class="input-group-addon btn btn_enviar_email_prospecto  " '.$extra_class.'>
-                            DESCUENTOS
-                    </div>
-                </div>                        
-              </div>
-              <div class="col-md-12">
-                <div class="place_registro_contacto">
-                </div>
-              </div>
-            </div>                    
-        </form>
-        '.
-        end_row()."<br><br>";
-        return $l;
-}
-
-
 
 if ( ! function_exists('end_row'))
 {
@@ -75,60 +24,6 @@ function n_row_12($extra =""){
 }
 
 
-function construye_header_modal($id_modal  , $titulo_modal , $ml =0 ){
-
-    $class = '';
-    if ($ml == 1 ) {
-      $class = ' modal-lg ';  
-    }  
-  $modal ='
-    <div class="portfolio-modal modal fade" id="'.$id_modal.'" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="close-modal" data-dismiss="modal">
-                    <div class="lr">
-                        <div class="rl">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                    <h2 class="titulo_modal_enid">
-                    '.$titulo_modal.'
-                    </h2>
-                    <div class="contenedor_central_modal">
-                    ';
-                    return $modal;
-
-
-            
-  }
-
-  function construye_footer_modal(){
-  
-    $m ='     
-      <br>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">
-                <i class="fa fa-times">
-                </i> 
-                Cerrar
-              </button>
-
-             </div>
-             </div>
-              </div>              
-          </div>
-      </div>
-  </div> ';
-  return $m;    
-  }
-  
-
-
-
-
 
 if ( ! function_exists('btn_cancelar'))
 {
@@ -141,8 +36,6 @@ if ( ! function_exists('btn_cancelar'))
     
   }
 }
-
-
 /**/
 if ( ! function_exists('btn_confirma_delete_img'))
 {

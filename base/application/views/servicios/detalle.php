@@ -142,43 +142,39 @@
             <div class="tab-pane <?=valida_active_pane($num , 3);?>" id="tab_terminos_de_busqueda">
                 <?=n_row_12()?>    
                     <div class="contenedor_inf_servicios">
-                    <table style="width: 100%" id="seccion_metakeywords_servicio"> 
+                    
+
+
+                    
+                        
                         <div class="titulo_seccion_producto titulo_producto_servicio">
-                            ¿CLIENTES POR QUÉ PALABRAS ENCUENTRAN LO QUE VENDES?
+                            ¿CLIENTES CÓMO BUSCAN LO QUE VENDES?
                         </div>
                         <div class="info_meta_tags">
                             <?=create_meta_tags($metakeyword_usuario , $id_servicio);?>
-                        </div>                    
-                        <table>
+                        </div> 
+                        <table style="width: 100%;">
                             <tr>
-                                <td>
-                                    <span class="strong" >
-                                        AGREGAR
-                                    </span>
-                                </td>
-                                <td>
-                                    <div style="width: 100%;margin-left: 5px;">                    
-                                        <form class="form_tag" id="form_tag">
-                                            <input 
-                                                    type="hidden" 
-                                                    name="id_servicio" 
-                                            value="<?=$id_servicio?>">
-                                            <input 
-                                                    type="text" 
-                                                    name="metakeyword_usuario" 
-                                                    required 
-                                                    placeholder="Palabra como buscan tu producto" 
-                                                    class="input-sm" style="height: 30px;">
-                                        </form>
-                                    </div>
-                                </td>
+                                <?=get_td(add_element("AGREGAR" , "span"))?>
+                            <td>                        
+                                <form class="form_tag" id="form_tag">
+                                    <?=add_input(array( "type"   =>  "hidden" ,
+                                                "name"  => "id_servicio" ,
+                                                "value" => $id_servicio))?>             
+                                    <?=add_input(array(  
+                                                "type"          =>"text" ,
+                                                "name"          =>"metakeyword_usuario" ,
+                                                "required"      =>"",
+                                                "placeholder"   =>
+                                                "Palabra como buscan tu producto",
+                                                "class"         =>"input-md"))?>
+                                            
+                                </form>                                
+                            </td>   
                                         
                             </tr>
-                        </table>                        
-                        
-                    </table>
+                        </table>                                                
                     </div>
-
                 <?=end_row()?>
             
                
@@ -243,22 +239,35 @@
                                         <div class="row">
                                             <br>
                                             <?=n_row_12();?>    
+                                                <?=anchor_enid(
+                                                    "SI",
+                                                    array('id'    => 1 ,
+                                                        'class' => '
+                                                        button_enid_eleccion telefono_visible
+                                                        '.valida_activo_vista_telefono(1 , 
+                                                            $telefono_visible).' '
+                                                ))?>
                                                 
-                                                    <a 
-                                                        id='1'
-                                                        class='button_enid_eleccion telefono_visible 
-                                                        <?=valida_activo_vista_telefono(1 , 
-                                                            $telefono_visible)?>'>
-                                                        SI
-                                                    </a>
-                                                    <a  style="margin-left: 10px;"
-                                                        id='0'
-                                                        class='button_enid_eleccion telefono_visible
-                                                        <?=valida_activo_vista_telefono(0 , 
-                                                            $telefono_visible)?>'>
-                                                        NO, OCULTAR MI TELÉFONO
-                                                    </a>
+
+                                                <?=anchor_enid("NO, OCULTAR MI TELÉFONO",
+                                                array(
+                                                    'id'    => 0 ,
+                                                    'class' => '
+                                                        button_enid_eleccion 
+                                                        no_tel telefono_visible
+                                                        '.valida_activo_vista_telefono(0 , 
+                                                            $telefono_visible).' '
+
+                                                        ))?>    
+
+                                                    
                                                 
+                                            <?=end_row()?>
+                                            <?=br()?>
+                                            <?=n_row_12()?>
+                                                
+                                                <?=text_agregar_telefono($has_phone, 
+                                                    $telefono_visible)?>
                                             <?=end_row()?>
                                         </div>
                                     </div>
@@ -333,11 +342,9 @@
                                                     </a>
                                                 <?=end_row()?>
                                             </div>
-                                    </div>
-                                    
+                                    </div>                                    
                                 </div>
-                                <div class="col-lg-4">
-                                
+                                <div class="col-lg-4">                                
                                 </div>
                             </div>       
                     </div>

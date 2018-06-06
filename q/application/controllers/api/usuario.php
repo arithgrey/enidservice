@@ -91,4 +91,10 @@ class usuario extends REST_Controller{
         $db_response=  $this->usuario_model->get_terminos_privacidad_usuario($param);
         $this->response($db_response);                 
     }
+    /**/
+    function has_phone_GET(){
+        $param      = $this->get();
+        $response   =  $this->usuario_model->has_phone($param);
+        $this->response($response);                 
+    }
 }?>

@@ -30,6 +30,8 @@
                           class="fa fa-tumblr black" style="font-size: .9em" 
                           title="Tumblr">                    
                         </a>
-
+                        <?=mailto(
+                          "ventas@enidservice.com",  
+                          "<i class='fa fa-envelope-open black'></i>")?>
                       </div>
                     </div>

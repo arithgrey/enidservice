@@ -779,3 +779,7 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
+/**/
+function reset_form(id){
+	document.getElementById(id).reset();	
+}

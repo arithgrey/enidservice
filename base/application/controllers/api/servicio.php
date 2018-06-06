@@ -22,9 +22,8 @@ class Servicio extends REST_Controller{
       /**/
       $param =  $this->put();
       $param["id_usuario"] = $this->sessionclass->getidusuario();
-      $db_response =  $this->serviciosmodel->update_telefono_visible($param);
-      $this->response($db_response);
-        
+      $response =  $this->serviciosmodel->update_telefono_visible($param);
+      $this->response($response);    
   }
   /**/
   function ventas_mayoreo_PUT(){
@@ -327,19 +326,19 @@ class Servicio extends REST_Controller{
         $this->crea_data_costo_envio();            
         $data["costo_envio"] = $this->calcula_costo_envio($this->crea_data_costo_envio());  
       }
-      $clasificaciones=  $this->carga_clasificaciones($data["servicio"]);
-      $data["clasificaciones"] =  $clasificaciones;
-      $data["ciclos"] =  $this->serviciosmodel->get_ciclos_facturacion($param);      
-      $data["id_usuario"] = $this->sessionclass->getidusuario();      
+      $clasificaciones            =  $this->carga_clasificaciones($data["servicio"]);
+      $data["clasificaciones"]    =  $clasificaciones;
+      $data["ciclos"]             =  $this->serviciosmodel->get_ciclos_facturacion($param);      
+      $data["id_usuario"]         = $this->sessionclass->getidusuario();          
+      $data["imgs"]               = $this->carga_imagenes_servicio($id_servicio);      
+      $data["url_request"]        = $this->get_url_request("");
+      $prm["id_servicio"]         = $id_servicio;           
+      $data["num"]                = $param["num"];      
+      $prm["id_servicio"]         = $id_servicio;
+      $data["porcentaje_comision"]= $this->get_porcentaje_comision($prm);      
+      $data["is_mobile"]          = ($this->agent->is_mobile() === FALSE)?0:1;      
       
-      $data["imgs"] =  $this->carga_imagenes_servicio($id_servicio);      
-      $data["url_request"] = $this->get_url_request("");
-      $prm["id_servicio"] =  $id_servicio;           
-      $data["num"] = $param["num"];      
-      $prm["id_servicio"]=$id_servicio;
-      $data["porcentaje_comision"] = $this->get_porcentaje_comision($prm);      
-
-      $data["is_mobile"] = ($this->agent->is_mobile() === FALSE)?0:1;      
+      $data["has_phone"] = $this->valida_usuario_tiene_numero($data["id_usuario"]);
       $this->load->view("servicios/detalle" , $data);        
   }    
   /**/  
@@ -352,8 +351,7 @@ class Servicio extends REST_Controller{
         $this->restclient->set_option('format', "json");        
         $result = $this->restclient->get("ciclo_facturacion/servicio/format/json/", $param);        
         $response =  $result->response;      
-        return json_decode($response , true);  
-        
+        return json_decode($response , true);        
   } 
   /**/
   function get_info_ciclo_facturacion_servicio(){
@@ -546,6 +544,19 @@ class Servicio extends REST_Controller{
         $response =  $result->response;        
         return json_decode($response , true);      
   }  
+  /**/
+  private function valida_usuario_tiene_numero($id_usuario){
+    /**/
+      $q["id_usuario"] =  $id_usuario;
+      $url = "q/index.php/api/";         
+      $url_request=  $this->get_url_request($url);
+      $this->restclient->set_option('base_url', $url_request);
+      $this->restclient->set_option('format', "json");        
+      $result = 
+      $this->restclient->get("usuario/has_phone/format/json/" , $q);        
+      $response =  $result->response;        
+      return json_decode($response , true);     
+  }
   /**/
 }
 ?>

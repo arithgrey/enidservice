@@ -9,27 +9,48 @@ class Inicio extends CI_Controller {
     /**/
     function index(){
 
-		$data = $this->val_session("Grupo ventas - Enid Service - ");        
-	    	        
-
-
+		$data = $this->val_session("Grupo ventas - Enid Service - ");        	    	  
         $num_perfil =  $this->sessionclass->getperfiles()[0]["idperfil"];   
         /*Si tienes perfil, soporte a ventas enciamos al usuario a su sitio  home*/       
-
         $num_perfil =  $this->sessionclass->getperfiles()[0]["idperfil"];
         if ($num_perfil == 20 ) {
             header("location:../area_cliente");   
         }        
-
-        
         $data["departamentos"] =  $this->principal->get_departamentos();       
         $data["perfiles_enid_service"] =  $this->principal->get_perfiles_enid_service(); 
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");    
-        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-       
-        $this->principal->show_data_page( $data , 'empresas_enid');			
-    	
-                	
+        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;   
+
+        $data["js"]      = [
+            "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
+            "../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+            "../js_tema/js/bootstrap-daterangepicker/moment.min.js",
+            "../js_tema/js/bootstrap-daterangepicker/daterangepicker.js",
+            "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+            "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+            "../js_tema/js/pickers-init.js",
+            base_url('application/js/principal.js'),
+            base_url('application/js/notificaciones.js'),
+            base_url('application/js/categorias.js')
+
+        ];
+
+        /**/
+        $data["css"] = [
+            "../js_tema/js/bootstrap-colorpicker/css/colorpicker.css" ,
+            "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css" ,
+            "../js_tema/js/bootstrap-datepicker/css/datepicker.css" ,
+            "../js_tema/js/bootstrap-daterangepicker/daterangepicker.css" ,
+            "../js_tema/js/bootstrap-datetimepicker/css/datetimepicker-custom.css" ,
+            "../js_tema/js/bootstrap-datetimepicker/css/datetimepicker.css",
+            "../js_tema/js/bootstrap-timepicker/css/timepicker.css" ,
+            "../js_tema/js/bootstrap-wysihtml5/bootstrap-wysihtml5.css", 
+            base_url("application/css/principal.css")
+
+        ];
+    
+        $this->principal->show_data_page( $data , 'empresas_enid');			    	                	
     }    	
    /**/
     function val_session($titulo_dinamico_page ){        

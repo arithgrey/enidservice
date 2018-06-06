@@ -42,7 +42,7 @@ $(document).ready(function(){
 		set_option("estado_usuario" , e.target.id);
 		carga_usuarios();
 	});
-
+	$(".form_categoria").submit(simula_envio_categoria);
 });
 /**/
 function get_place_usuarios(){

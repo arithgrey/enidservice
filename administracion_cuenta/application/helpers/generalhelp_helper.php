@@ -561,14 +561,13 @@ function btn_modal_config($public , $modal , $id ){
                         </span>                        
                       </a>     
                   ". end_row() ."
-                  <div>
-                    
+                  <div>                    
                     ".btn_asistencia() ."                                    
                     ".$btn_reservaciones."                                        
                     ".btn_solicita_tu_artista($id_empresa)."                    
                     ".btn_servicios($id_evento)."                    
-                    ".btn_acceso($id_evento)."                                                         
-                    ".btn_aristas_escenarios($id_evento ,  $flag_artistas) ."                    
+                    ".btn_acceso($id_evento)."
+                    ".btn_aristas_escenarios($id_evento ,  $flag_artistas) ."
                     </ul>                    
                   </div>
                 </div>
@@ -581,7 +580,6 @@ function btn_modal_config($public , $modal , $id ){
   /**/
   function btn_aristas_escenarios($id_evento ,  $flag_artistas){
 
-
     $url = url_dia_evento($id_evento);
     if ( $flag_artistas ==  1 ){
       return "<a href='".$url."'> 
@@ -591,9 +589,7 @@ function btn_modal_config($public , $modal , $id ){
             </a>";       
     }else{
       return "";
-    }
-
-    
+    }    
     
   }
   /**/

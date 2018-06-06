@@ -5,6 +5,20 @@
         $this->load->database();
     }
     /**/
+    function has_phone($param){
+        $id_usuario =  $param["id_usuario"];
+        $query_get ="SELECT 
+                        COUNT(0)num 
+                    FROM usuario 
+                    WHERE 
+                        idusuario =$id_usuario
+                    AND 
+                        tel_contacto 
+                    IS NOT NULl LIMIT 1";
+                    $result =  $this->db->query($query_get);
+                    return $result->result_array()[0]["num"];
+    }
+    /**/
     function get_contacto_usuario($param){
         $id_usuario =  $param["id_usuario"];
         $query_get =    "SELECT 
