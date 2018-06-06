@@ -2,7 +2,7 @@
 
 $autoload['packages'] = array(APPPATH.'third_party');
 $autoload['libraries'] = array('encrypt', 'email' ,  'session' , 'parser' , 'user_agent');
-$autoload['helper'] = array('html', 'url',  'generalhelp' , 'date' , 'security');
+$autoload['helper'] = array('html', 'url',  'generalhelp' , 'date' , 'security', "enid");
 $autoload['config'] = array();
 $autoload['language'] = array();
 $autoload['model'] = array("enidmodel");
