@@ -11,10 +11,7 @@
         $text_extra =  is_servicio($servicio);        
         
         $url_img  = $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;        
-        $url_img_error  = "http://enidservice.com/inicio/img_tema/portafolio/producto.png";
-        if ($servicio["in_session"] ==  1) {
-            $url_img_error  = $url_request."img_tema/portafolio/producto.png";    
-        }
+        
         $metakeyword =  $servicio["metakeyword"];        
         $color =  isset($servicio["color"]) ? $servicio["color"] : "";
         $flag_servicio =  $servicio["flag_servicio"];
@@ -65,7 +62,9 @@
                 'src'   => $url_img, 
                 'title' => 'Ver artículo', 
                 'class' => 'imagen_producto',
-                'alt'   => $metakeyword);
+                'alt'   => $metakeyword,
+                'onerror' => "this.onerror=null;this.src='".$url_img."';"
+            );
         $img =  img($atributos_imagen);    
                         
         
@@ -132,5 +131,3 @@
             <?=end_row()?>
     <?php endif; ?>                                    
 </div>                                        
-<link rel="stylesheet" 
-type="text/css" href="../css_tema/template/producto.css?<?=version_enid?>">

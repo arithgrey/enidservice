@@ -1,3 +1,15 @@
+.tag_catalogo{
+		background: #295d98;
+		padding: 3px;
+		color: white;
+		margin-top: 10px;
+		border-radius: 4px;
+		font-size: .95em;
+}
+.tag_catalogo:hover{
+	cursor: pointer;
+	background: #002d60;
+}
 .invitacion_registro_telefono{
 	color: white!important;
 }

@@ -1,151 +1,81 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Enid extends CI_Controller {
 
     function __construct(){
         parent::__construct();
-
         $this->load->model("img_model");
         $this->load->model("enidmodel");
         $this->load->library('principal');    
-        $this->load->library('sessionclass');    
+        
     }
+
     function img_faq($id_faq){
 
-        $db_response =  $this->img_model->get_img_faq($id_faq);                
-            foreach ($db_response as $row ){                 
-                $imagen =  $row["img"];
-                echo $imagen;
-            }                    
-    }
-
-    /**/   
-    function imagen_usuario($id_usuario){
-
-        $response =  $this->img_model->get_img_usuario($id_usuario);                        
-        $img ="";
-        foreach ($response as $row ){ 
-            
-            
-                echo $row["img"];
-            
-        } 
-
-    }        
-    /**/
-    function imagen_servicio($id_servicio){
-
-        $response = $this->img_model->get_img_servicio($id_servicio);
-        if ( count($response)> 0 ) {
-
-            $response =  $this->img_model->get_img($response[0]["id_imagen"]);    
-            foreach ($response as $row ){ 
-                echo $row["img"];
-            }     
-        }
-     
-        
+        $this->construye_img_format(
+            $this->img_model->get_img_faq($id_faq));                
     }
     /**/
     function imagen($id_imagen){
 
-        $db_response =  $this->img_model->get_img($id_imagen);                                
-        foreach ($db_response as $row ){ 
-            echo $row["img"];
-        } 
-        /**/
-    }   
-    /**/     
-    function galeria_GET(){
-        $param =  $this->get();        
-        $imgs =  $this->enidmodel->get_galeria_empresa($param);
-        $this->response(construye_galeria($imgs , $param ));
-    }
-    /**/
-    function img_id($id_imagen){
-        
-        $db_response =  $this->img_model->get_data_img_id($id_imagen);                        
-        foreach ($db_response as $row ){ 
-            echo $row["img"];
-        }  
-    }
-    /**/
-    function imagen_empresa($id_empresa){
-
-        $db_response =  $this->img_model->get_img_empresa($id_empresa);                        
-        foreach ($db_response as $row ){ 
-            echo $row["img"];
-        }  
-
-    }
-    /**/
-    function imagen_acceso($id_acceso){
-
-        $db_response =  $this->img_model->get_img_acceso($id_acceso);                        
-        foreach ($db_response as $row ){ 
-            echo $row["img"];
-        }  
-
-    }
-    /**/
-    function imagen_artista($id_artista){
-
-        $db_response =  $this->img_model->get_img_artista($id_artista);                        
-        foreach ($db_response as $row ){ 
-            echo $row["img"];
-        }         
-
-    }
-    /**/
-    function imagen_escenario($id_escenario){
-
-        $db_response =  $this->img_model->get_img_escenario($id_escenario);                
-        
-        foreach ($db_response as $row ){ 
-            echo $row["img"];
-        }         
-    }
-    /**/
-    function img_evento($id_evento){
-
-        $db_response =  $this->img_model->get_img_evento($id_evento);                
-            foreach ($db_response as $row ){ 
-                echo $row["img"];
-            }                    
-    }
-    /**/
-    /**/    
+        $img_src="";
+        foreach ($this->img_model->get_img($id_imagen) as $row ){ 
+            $img_src =  $row["img"];
+            echo  $img_src;
+        }        
+    }       
     function img($id_imagen){
 
-        $imagen = $this->enidmodel->get_imagen($id_imagen);
-        foreach ($imagen as $row ){ 
-            echo $row["img"];
-        }        
+        $img_src="";
+        foreach ($this->img_model->get_img($id_imagen) as $row ){ 
+            $img_src =  $row["img"];
+            echo  $img_src;
+        }         
     }
     /**/
-    function mail(){
-        $data = $this->val_session("Mail marketing");                     
-        $data["tipos_publicidad"]= $this->enidmodel->get_tipo_publicidad();
-        $this->principal->show_data_page($data ,  "enid/mail_marketing" );                   
+     /**/   
+    function imagen_usuario($id_usuario){
+        
+        $this->construye_img_format(
+            $this->img_model->get_img_usuario($id_usuario));        
+    }        
+    /**/
+    function imagen_servicio($id_servicio){
 
+        $this->construye_img_format(
+            $this->img_model->get_img_servicio($id_servicio));        
     }
-    /*Termina la función*/ 
-    function val_session($titulo_dinamico_page){
+    private function construye_img_format($response){
+        
+        if ( count($response) > 0 ) {            
+            $id_imagen =  $response[0]["id_imagen"];            
+            $img= $this->costruye_imagen($id_imagen);
+            
+            header('Content-Type: image/png');
+            echo $img;
+            /*
+            $im = imagecreatefromstring($img);
+            if ($im !== false) {
+                header('Content-Type: image/png');
+                imagepng($im);
+                imagedestroy($im);
+            }
+            else {
+                echo 'Ocurrió un error.';
+            }
+            */
 
-        if ( $this->sessionclass->is_logged_in() == 1 ){                                                            
-                $menu = $this->sessionclass->generadinamymenu();
-                $nombre = $this->sessionclass->getnombre();                                         
-                $data['titulo']= $titulo_dinamico_page;              
-                $data["menu"] = $menu;              
-                $data["nombre"]= $nombre;                                               
-                $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
-                $data["in_session"] = 1;
-                $data["meta_keywords"] =  "";
-                $data["url_img_post"]= "";
-                $data["no_publics"] =1;
-                return $data;
-        }else{          
-            redirect("home/logout");
-        }   
+            
+        }         
     }
+    /**/
+    private function costruye_imagen($id_imagen){
+        $img_src="";
+        foreach ($this->img_model->get_img($id_imagen) as $row ){ 
+            $img_src =  $row["img"];
+        }     
+        return  $img_src;
+    }
+
     /*Determina que vistas mostrar para los eventos*/    
 }/*Termina el controlador */

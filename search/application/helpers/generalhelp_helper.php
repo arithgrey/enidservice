@@ -128,8 +128,9 @@
       $text_nombre_servicio ='<h2 '.$extra_estilos.'>'.$nombre_servicio.'</h2>';
       return $text_nombre_servicio;
     }
-    function get_info_variable( $param , $nomber_variable ){      
-      $val =  array_key_exists($nomber_variable , $param)? $param[$nomber_variable]:0;
+    function get_info_variable( $param , $nomber_variable ){    
+
+      $val = ( is_array($param) && array_key_exists($nomber_variable , $param) )?$param[$nomber_variable]:0;
       return $val;
     }
     /**/

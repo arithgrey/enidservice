@@ -125,9 +125,10 @@ function carga_informacion_servicio(num) {
 			.done(
 					function(data) {
 
-						/**/
+						
 						llenaelementoHTML(".place_servicios", data);
 
+						$(".menu_meta_key_words").click(carga_sugerencias_meta_key_words);
 						$(".agregar_img_servicio").click(carga_form_img);						
 						/**/
 						$(".text_costo").click(muestra_input_costo);
@@ -1249,8 +1250,10 @@ function agrega_metakeyword(e) {
 		data : data_send,
 		beforeSend : function() {}
 	}).done(function(data) {
+		console.log(data);
 		set_flag_nueva_categoria(1);
 		carga_informacion_servicio(3);
+		carga_sugerencias_meta_key_words();
 	}).fail(function() {
 		show_error_enid(".place_servicios", "Error ... ");
 	});
@@ -1273,6 +1276,7 @@ function eliminar_tag(text, id_servicio) {
 	}).done(function(data) {
 		/**/
 		carga_informacion_servicio(3);
+		carga_sugerencias_meta_key_words();
 		/**/
 	}).fail(function() {
 		show_error_enid(".place_servicios", "Error ... ");
@@ -1555,4 +1559,49 @@ function add_cancelar_movil(){
 		llenaelementoHTML(".add_cancelar" , btn_cancelar);
 		$(".cancelar_registro").click(cancelar_registro);
 	}
+}
+/**/
+function carga_sugerencias_meta_key_words(){
+
+	url = "../base/index.php/api/servicio/metakeyword_catalogo/format/json/";
+	data_send =  {"v" : 1};
+	$.ajax({
+		url : url,
+		type : "GET",
+		data : data_send
+	}).done(muestra_sugerencias_meta_key_words).fail(function() {
+		show_error_enid(".place_servicios", "Error ... ");
+	});
+}
+/**/
+function muestra_sugerencias_meta_key_words(data){
+	
+	llenaelementoHTML(".contenedor_sugerencias_tags" , data);	
+	var tag_servicio_registrados = $('.tag_servicio');			
+	var arr_registros = [];	 
+	
+	$.each( tag_servicio_registrados, function(i, val){
+	    arr_registros.push( $(val).attr('id') );
+	});
+	/**/
+	if (arr_registros.length > 0){		
+		var tag_sugerencias = $('.tag_catalogo');				
+		var arr_sugerencias = [];	 
+		var  x =0;
+
+		$.each( tag_sugerencias, function(i, val){		    
+		    for (var i = 0; i < arr_registros.length; i++) {
+				if ($(val).attr('id') == arr_registros[i] ) {
+					$(val).hide();					
+				}		    	
+		    }
+		});
+	}	
+	$(".tag_catalogo").click(auto_complete_metakeyword);
+}
+/**/
+function auto_complete_metakeyword(e){
+	var tag =  e.target.id; 
+	$(".metakeyword_usuario").val(tag);	
+	$(".form_tag").submit();
 }

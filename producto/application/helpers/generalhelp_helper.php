@@ -321,7 +321,8 @@ function construye_seccion_imagen_lateral($param , $nombre_servicio , $url_youtu
         'src'     => $url,                        
         'alt'     => $nombre_servicio, 
         'id'      => $z, 
-        'class'   => 'imagen-producto'
+        'class'   => 'imagen-producto',
+        'onerror' => "this.onerror=null;this.src='".$url."';"
         );
 
       $preview  .=  anchor_enid($producto_tab, img($img_pro) , array(
@@ -331,7 +332,9 @@ function construye_seccion_imagen_lateral($param , $nombre_servicio , $url_youtu
         ));
 
       $image_properties = array(  'src'     => $url , 
-                                  "class" => "imagen_producto_completa");
+                                  "class" => "imagen_producto_completa",
+                                  'onerror' => "this.onerror=null;this.src='".$url."';"
+                                );
 
       $imgs_grandes .='<div id="'.$producto_tab_s.'" 
                         class="tab-pane fade zoom'.$extra_class_contenido.' " >                  

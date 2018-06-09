@@ -20,7 +20,7 @@ class Home extends CI_Controller{
         $param["id_clasificacion"]  =  get_info_variable($param , "q2" );               
         $param["vendedor"] =  get_info_variable($param , "q3" );
         
-        $q=  (array_key_exists("q", $param)) ?$param["q"] :"";  
+        $q=  ( is_array($param)  && array_key_exists("q", $param)) ?$param["q"] :"";  
         $param["num_hist"]= get_info_servicio($q);                
         $this->load_data($param);    
         
@@ -87,7 +87,12 @@ class Home extends CI_Controller{
             $data["q"] = $q;
             $data["categorias_destacadas"] = $categorias_destacadas;
             $data["css"] = [base_url("application/css/main.css") , 
-                            "../css_tema/template/css_tienda.css"];
+                            "../css_tema/template/css_tienda.css",
+                            "../css_tema/template/producto.css"
+                            ];
+
+
+
             $this->principal->show_data_page($data , 'home');
             
         }else{

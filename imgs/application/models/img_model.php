@@ -40,20 +40,9 @@ function elimina_imagen($id_imagen){
 /**/
 function get_img_faq($id_faq){
 
-  $query_get =  "select  id_imagen from imagen_faq WHERE id_faq =$id_faq LIMIT 1";    
+  $query_get =  "select  id_imagen from imagen_faq WHERE id_faq =$id_faq LIMIT 1";
   $result = $this->db->query($query_get);
-  $imagen_faq =  $result->result_array();
-  
-    if (count($imagen_faq) > 0 ) {
-        $id_imagen = $imagen_faq[0]["id_imagen"];      
-        $query_get =  "SELECT  * FROM imagen WHERE idimagen =  $id_imagen LIMIT 1;";
-        $result  =  $this->db->query($query_get);
-        return $result->result_array();
-    }else{
-        $query_get =  "SELECT  * FROM imagen WHERE idimagen = 1 LIMIT 1;";
-        $result  =  $this->db->query($query_get);
-        return $result->result_array();
-    } 
+  return $result->result_array();
 }
 /**/
 function elimina_pre_img_faq($param){
@@ -186,19 +175,20 @@ function elimina_img($id_imagen){
     $query_delete ="DELETE FROM imagen WHERE  idimagen  = '". $id_imagen ."' LIMIT 1";              
     $this->db->query($query_delete);
 }
-/*Solo gets*/
+
 function get_img_usuario($id_usuario){
 
-  $query_get =  "SELECT id_imagen from imagen_usuario WHERE idusuario =$id_usuario LIMIT 1";    
-  $result = $this->db->query($query_get);
-  $imagen_faq =  $result->result_array();
+  $query_get   =  "SELECT 
+                    id_imagen 
+                  FROM 
+                    imagen_usuario 
+                  WHERE 
+                    idusuario =$id_usuario 
+                    LIMIT 1";    
+  $result   = $this->db->query($query_get);
+  return   $result->result_array();
   
-    if (count($imagen_faq) > 0 ) {
-        $id_imagen = $imagen_faq[0]["id_imagen"];      
-        $query_get =  "SELECT  * FROM imagen WHERE idimagen =  $id_imagen LIMIT 1;";
-        $result  =  $this->db->query($query_get);
-        return $result->result_array();
-    } 
+  
 }
 /**/
 function get_img($id_imagen){
@@ -211,7 +201,10 @@ function get_img($id_imagen){
 function get_img_servicio($id_servicio){
 
   /**/
-  $query_get ="SELECT id_imagen FROM imagen_servicio 
+  $query_get ="SELECT 
+                id_imagen 
+                FROM 
+                imagen_servicio 
               WHERE 
               id_servicio = '".$id_servicio."' LIMIT 1";
   $result  =  $this->db->query($query_get);

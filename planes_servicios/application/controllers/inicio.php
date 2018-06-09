@@ -49,7 +49,8 @@ class Inicio extends CI_Controller {
                         "../css_tema/template/css_tienda.css", 
                         "../css_tema/template/vender.css" ,
                         "../css_tema/template/planes_servicios.css",
-                        "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
+                        "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css",
+                        "../css_tema/template/producto.css"
                         ];
         
         $this->principal->show_data_page( $data , 'home_enid');			    	        	

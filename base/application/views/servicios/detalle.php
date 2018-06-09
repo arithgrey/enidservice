@@ -113,7 +113,6 @@
     <?=$this->load->view("servicios/general" , $data);?>        
     <div>
         <?=$this->load->view("servicios/menu_tabs" , $data);?>                   
-
         <div class="tab-content" style="margin-top: 10px;">
             <div 
                 class="tab-pane <?=valida_active_pane($num , 1)?>" 
@@ -148,10 +147,11 @@
                     
                         
                         <div class="titulo_seccion_producto titulo_producto_servicio">
-                            ¿CLIENTES CÓMO BUSCAN LO QUE VENDES?
+                            ¿PALABRAS CLAVE DE BÚSQUEDA?
                         </div>
                         <div class="info_meta_tags">
-                            <?=create_meta_tags($metakeyword_usuario , $id_servicio);?>
+                            <?=create_meta_tags(
+                                $metakeyword_usuario , $id_servicio);?>
                         </div> 
                         <table style="width: 100%;">
                             <tr>
@@ -167,13 +167,14 @@
                                                 "required"      =>"",
                                                 "placeholder"   =>
                                                 "Palabra como buscan tu producto",
-                                                "class"         =>"input-md"))?>
+                                                "class"         =>"input-md metakeyword_usuario"))?>
                                             
                                 </form>                                
                             </td>   
                                         
                             </tr>
-                        </table>                                                
+                        </table>  
+                        <div class="contenedor_sugerencias_tags"></div>                                              
                     </div>
                 <?=end_row()?>
             

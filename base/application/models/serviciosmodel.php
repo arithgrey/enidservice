@@ -223,21 +223,90 @@
         $palabras_clave =  $result->result_array()[0]["metakeyword"];
         return $palabras_clave;
         
-    }
+    }    
+    
 
+    private function verifica_existencia_catalogo_metakeyword_usuario($param){
+        return $this->get_metakeyword_catalogo_usuario($param);
+    }
+    /**/
+    function agrega_metakeyword_catalogo($param){   
+
+        $metakeyword = 
+        $this->verifica_existencia_catalogo_metakeyword_usuario($param);
+        
+        if (count($metakeyword)> 0) {
+            $json_meta  =  $metakeyword[0]["metakeyword"];  
+            $arr_meta   =  json_decode($json_meta , true);
+            /*Buscamos si es que existe el meta  keyword*/
+            $existe =$this->existe_meta($arr_meta, $param["metakeyword_usuario"]);
+            if ($existe == 0) {                
+                return $this->add_metakeyword($param , $arr_meta);    
+            }
+        }else{
+            return $this->crea_registro_metakeyword($param);
+        }
+    }
+    /**/
+    function existe_meta($param, $val){
+
+        $existe =0;
+        for ($a=0; $a <count($param) ; $a++) { 
+                
+                if ($param[$a] ==  $val) {
+                    $existe =1;
+                    break;
+                }
+        }
+        return $existe;
+    }
+    /**/
+    private function add_metakeyword($param , $arr_meta){
+        
+        array_push($arr_meta, strtoupper($param["metakeyword_usuario"]));        
+        $meta           =  json_encode($arr_meta);
+        $id_usuario     =  $param["id_usuario"];
+        $meta =  json_encode($arr_meta);
+        
+        $query_update   =  "UPDATE 
+                                metakeyword 
+                            SET 
+                                metakeyword = '".$meta."' 
+                            WHERE 
+                                id_usuario =  $id_usuario 
+                            LIMIT 1 ";
+                            return $this->db->query($query_update);
+
+    }
+    /**/
+    private function crea_registro_metakeyword($param){
+        /*Se prepara el json inicial*/
+        $arr = array();        
+        array_push($arr, strtoupper($param["metakeyword_usuario"]));        
+        $id_usuario =  $param["id_usuario"];
+        $meta =  json_encode($arr);
+        $query_insert       =   "INSERT INTO 
+                                    metakeyword(
+                                    metakeyword , 
+                                    id_usuario) 
+                                VALUES(
+                                    '".$meta."' , 
+                                    $id_usuario )";        
+        return $this->db->query($query_insert);        
+    }
     /**/
     function agrega_metakeyword($param){
         
         $metakeyword_usuario = $param["metakeyword_usuario"];    
         $id_servicio = $param["id_servicio"];
-
         $meta  =  $this->get_palabras_clave_por_servicio($id_servicio);
         $metakeyword_usuario =  $meta .",".$metakeyword_usuario;
-        
+
         $query_update = "UPDATE 
                             servicio 
                         SET 
-                        metakeyword_usuario = '".$metakeyword_usuario."'                        
+                        metakeyword_usuario 
+                        = '".$metakeyword_usuario."'                        
                         WHERE id_servicio ='".$id_servicio."' LIMIT 1";    
 
         return $this->db->query($query_update);
@@ -777,6 +846,19 @@
             return $this->db->query($query_insert);
         }
 
+    }
+    /**/
+    function get_metakeyword_catalogo_usuario($param){
+        $id_usuario =  $param["id_usuario"];
+        $query_get  =  "SELECT 
+                            metakeyword  
+                        FROM 
+                            metakeyword 
+                        WHERE 
+                            id_usuario = $id_usuario 
+                        LIMIT 1";
+                        $result =  $this->db->query($query_get);
+                        return $result->result_array();
     }
 
 }

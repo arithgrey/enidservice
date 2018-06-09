@@ -58,7 +58,8 @@ class Servicio extends REST_Controller{
 
     $param = $this->put();
     /**/    
-    $param["nombre_servicio"] =  $this->serviciosmodel->get_nombre_servicio($param);
+    $param["nombre_servicio"] =  
+    $this->serviciosmodel->get_nombre_servicio($param);
     $tags = $this->create_tags($param);    
     $text_tags =  implode($tags, ",");
     $param["metakeyword"] =  $text_tags;
@@ -80,9 +81,18 @@ class Servicio extends REST_Controller{
   function metakeyword_usuario_POST(){
     /**/
     if($this->input->is_ajax_request()){ 
+      
       $param =  $this->post();
-      $db_response =  $this->serviciosmodel->agrega_metakeyword($param);
-      $this->response($db_response);
+      $param["id_usuario"] = $this->sessionclass->getidusuario();
+      
+      $response["add"] 
+      =  $this->serviciosmodel->agrega_metakeyword($param);    
+
+      $response["add_catalogo"] 
+      =  $this->serviciosmodel->agrega_metakeyword_catalogo($param);
+
+      $this->response($response);
+
     }
   }
   /**/
@@ -557,6 +567,36 @@ class Servicio extends REST_Controller{
       $response =  $result->response;        
       return json_decode($response , true);     
   }
+  /**/
+  public function metakeyword_catalogo_GET(){
+
+      $param =  $this->get();
+      $param["id_usuario"] =  $this->sessionclass->getidusuario();
+      $response =  
+      $this->serviciosmodel->get_metakeyword_catalogo_usuario($param); 
+
+      if ($param["v"] == 1) {
+        
+        $data["catalogo"] =  $this->create_arr_tags($response);
+        $this->load->view("servicios/catalogo_metakeyword" , $data);  
+      }else{
+        $this->response($response);
+      }
+
+  }
+  /**/
+  public function create_arr_tags($data){
+
+    $tags = array();
+    foreach ($data as $row) { 
+
+      $metakeyword =  $row["metakeyword"];    
+      if (strlen($metakeyword)>0) {   
+        $tags =  json_decode($metakeyword , true);
+      }
+    }
+    return $tags;
+  } 
   /**/
 }
 ?>

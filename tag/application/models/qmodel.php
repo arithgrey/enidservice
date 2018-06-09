@@ -453,7 +453,8 @@
         
         $q =  $param["q"];            
         $id_usuario =  $param["id_usuario"];        
-        $query_insert ="INSERT INTO keyword(keyword , id_usuario) 
+        $query_insert ="INSERT INTO 
+                        keyword(keyword , id_usuario) 
                         VALUES('".$param["q"]."' ,  '".$id_usuario."')";    
         return $this->db->query($query_insert);    
         
