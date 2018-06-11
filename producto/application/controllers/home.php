@@ -86,6 +86,7 @@ class Home extends CI_Controller{
                         $this->calcula_costo_envio($this->crea_data_costo_envio());    
 
                         $tiempo_promedio_entrega =  $servicio[0]["tiempo_promedio_entrega"];
+                        
                         $data["tiempo_entrega"] = 
                         $this->valida_tiempo_entrega($tiempo_promedio_entrega);
                     }                        
@@ -339,10 +340,24 @@ class Home extends CI_Controller{
         $source = 'en';
         $target = 'es';
 
-        $fecha =  date("Y-m-d e");    
+        $fecha =  date("Y-m-d e");            
         $fecha = new DateTime($fecha);
-        $fecha->add(new DateInterval('P'.$tiempo.'D'));        
-        $fecha_entrega_promedio =  $fecha->format('l, d M Y');
+
+        $fecha->add(new DateInterval('P'.$tiempo.'D'));   
+         
+
+        $nuevo_tiempos_sat =  ($fecha->format("D") == "Sat")?5:0;
+        $nuevo_tiempo_sun =  ($fecha->format("D") == "Sun")?4:0;
+        if ($nuevo_tiempo_sun >0 || $nuevo_tiempos_sat >0 ) {        
+            if ($nuevo_tiempos_sat>0) {
+                $fecha->add(new DateInterval('P'.$nuevo_tiempos_sat.'D'));
+            }else{
+                $fecha->add(new DateInterval('P'.$nuevo_tiempo_sun .'D'));
+            }            
+        }else{
+            $fecha_entrega_promedio =  $fecha->format('l, d M Y');
+        }        
+        
         $trans = new GoogleTranslate();
         $fecha_entrega_promedio = $trans->translate($source, $target, strtoupper($fecha_entrega_promedio));
 
@@ -350,8 +365,7 @@ class Home extends CI_Controller{
         TENERLO EN TU HOGAR
         EL <span class='tiempo_promedio'>".$fecha_entrega_promedio."</span>";
 
-        return $tiempo_entrega;
-      
+        return $tiempo_entrega;     
     }
 
 }
