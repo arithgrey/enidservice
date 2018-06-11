@@ -10,7 +10,8 @@ class Home extends CI_Controller{
     /**/
     function index(){
         
-        if (is_array($this->input->get()) && array_key_exists("info", $this->input->get())) {
+        if (is_array($this->input->get()) 
+            && array_key_exists("info", $this->input->get())) {
             $this->crea_info();    
         }else{            
             (ctype_digit($this->input->get("recibo") ))?$this->crea_orden():redirect("../../");
@@ -23,7 +24,8 @@ class Home extends CI_Controller{
         $data["meta_keywords"] = "";
         $data["desc_web"] = "Formas de pago Enid Service";                
         $data["url_img_post"] = create_url_preview("formas_pago_enid.png");        
-        $data["clasificaciones_departamentos"] = "";        
+        $data["clasificaciones_departamentos"] = ""; 
+        $data["css"] = ["../css_tema/template/formas_pago.css"];       
         $this->principal->show_data_page($data, 'info_formas_pago');                            
     }
     /**/
@@ -65,7 +67,7 @@ class Home extends CI_Controller{
     }   
     /**/
     private function val_session($titulo_dinamico_page ){
-
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
         if( $this->sessionclass->is_logged_in() == 1){                                                                                            
                 $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         

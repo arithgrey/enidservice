@@ -1,5 +1,5 @@
-<main>                                           
-    <div class="contenedor_principal_enid_service">        
+<?=n_row_12()?>
+    <div class="contenedor_principal_enid">        
         <div class="col-lg-3">
             <?=$this->load->view("secciones/menu");?>
         </div>
@@ -10,8 +10,4 @@
             <?=$this->load->view($vista);?>
         </div>
     </div>
-    
-</main>
-<br><br><br><br><br><br>
-<br><br><br><br><br><br>
-<br><br><br><br><br><br>
+<?=end_row()?>

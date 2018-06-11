@@ -1,5 +1,5 @@
-<main>
-<div class='row'>
+<?=n_row_12()?>
+<div class="contenedor_principal_enid">
     <div class="contenedor_principal_enid_service">
     <?=$this->load->view("secciones/menu");?>    
     <div class='col-lg-10'>
@@ -112,31 +112,10 @@
                     <div class="row">
                         <?=crea_repo_categorias_destacadas($categorias_destacadas_orden)?>
                     </div>
-                <?=end_row()?>
-                
-            </div>
-
-            
-            
+                <?=end_row()?>                
+            </div>            
         </div>
     </div>   
     </div>
 </div>        
-<br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?=end_row()?>

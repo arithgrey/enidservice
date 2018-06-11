@@ -20,6 +20,7 @@ class Home extends CI_Controller{
         $concepto =  valida_valor_variable($param , "concepto");    
         $id_usuario=  $this->input->get("q3"); 
         $data["usuario"]=  $this->get_usuario($id_usuario);
+        $data["css"] = ["../css_tema/template/pago_oxxo.css"];
         $this->principal->show_data_page($data, 'ingresar_saldo_a_cuenta');        
     }    
     /**/
@@ -29,9 +30,8 @@ class Home extends CI_Controller{
     /**/
     function val_session($titulo_dinamico_page ){
 
-        if( $this->sessionclass->is_logged_in() == 1){                                                                                            
-
-                
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
+        if( $this->sessionclass->is_logged_in() == 1){                                                                                                    
                 $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         
                 $data['titulo']= $titulo_dinamico_page;              

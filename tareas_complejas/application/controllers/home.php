@@ -21,10 +21,10 @@ class Home extends CI_Controller{
         $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
         $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
 
-        $this->principal->crea_historico(566 , $num_usuario , $num_servicio );         
+        $this->principal->crea_historico(566 , $num_usuario , $num_servicio );
+        $data["js"] =  [base_url('application/js/principal.js')];
         $this->principal->show_data_page($data, 'home');                          
-    }
-    /**/
+    }    
     /**/
     function logout(){                      
         $this->sessionclass->logout();      
@@ -32,6 +32,7 @@ class Home extends CI_Controller{
     /**/
     function val_session($titulo_dinamico_page ){
 
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
         if( $this->sessionclass->is_logged_in() == 1){                                                                                            
                 $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         

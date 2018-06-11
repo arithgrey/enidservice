@@ -29,7 +29,8 @@ class Home extends CI_Controller{
             $servicio_send["id_servicio"] =  $servicio;
             $servicio_send["id_usuario"] =0;
             if ($servicio_send["in_session"] == 1) {
-                $servicio_send["id_usuario"]=  $this->sessionclass->getidusuario();
+                $servicio_send["id_usuario"]=  
+                $this->sessionclass->getidusuario();
             }
 
             $data["formulario_valoracion"]= 
@@ -37,7 +38,10 @@ class Home extends CI_Controller{
             /*Cargamos reseñas de otros días*/    
             $data["in_session"] =  $this->sessionclass->is_logged_in();
             $data["id_servicio"] = $servicio; 
-            $this->principal->show_data_page($data, 'home');                              
+            $data["js"]     =  [base_url("application/js/principal.js")];
+            $data["css"]    =  ["../css_tema/template/producto.css"];
+
+            $this->principal->show_data_page($data, 'home');
         
         }else{
             header("location:../?q2=0&q=");
@@ -63,7 +67,7 @@ class Home extends CI_Controller{
     }   
     /**/
     private  function val_session($titulo_dinamico_page ){
-
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
         if( $this->sessionclass->is_logged_in() == 1){                                                                                            
                 $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         

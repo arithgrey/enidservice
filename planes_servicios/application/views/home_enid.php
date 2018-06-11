@@ -1,5 +1,5 @@
-<main>    
-    <div class='contenedor_principal_planes_servicios'>        
+<?=n_row_12()?>
+    <div class='contenedor_principal_enid'>        
         <div class="col-lg-2" >                   
             <?=$this->load->view("menu")?>
         </div>
@@ -61,9 +61,8 @@
             <?php endif;?>
         </div>
     </div>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</main>
+<?=end_row()?>
+<div class="separador-footer"></div>
 
 
 <input type="hidden" name="version_movil" value="<?=$is_mobile?>" class='es_movil'>

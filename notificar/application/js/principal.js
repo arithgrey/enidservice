@@ -116,7 +116,9 @@ function valida_auto_complete_recibo(){
 			beforeSend : function(){}
 		}).done(function(data){	
 
+
 			console.log(data);
+			
 			
 			pago_notificado_previamente=  data.resultado_notificado;  			
 			resultados =  data.resultados;
@@ -130,19 +132,21 @@ function valida_auto_complete_recibo(){
 
 			}
 			
+			
+			
+			
 			id_servicio =  data.id_servicio;
-			info_pago_pendiente =  data.info_pago_pendiente;
+			info_pago_pendiente =  data.info_pago_pendiente;			
 			monto_a_pagar =  info_pago_pendiente[0].monto_a_pagar;  			
+
 			set_monto_a_pagar(monto_a_pagar);			
 			set_id_servicio(id_servicio);
 			set_select_servicio(data.data_servicio);
 			
 			
+	
 
-
-		}).fail(function(){		
-
-			//show_error_enid(".placa_notificador_pago" , "Error al iniciar sessión");				
+		}).fail(function(){					
 		});	
 		
 }

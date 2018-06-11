@@ -1,5 +1,5 @@
-<main>
-	<div class='contenedor_principal_enid_service'>
+<?=n_row_12()?>
+	<div class='contenedor_principal_enid'>
 		<div class="col-lg-4 col-lg-offset-4">
 			<h3 style="font-weight: bold;font-size: 2em;">      
 	           AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR 
@@ -39,22 +39,4 @@
 			</a>
 		</div>
 	</div>
-</main>
-<style type="text/css">
-	.option_ingresar_saldo{
-		border-style: solid;
-		border-width: .5px;
-		margin-top: 10px;		
-		font-weight: bold;
-		padding: 10px;
-
-	}
-	.option_ingresar_saldo:hover, 
-	.option_ingresar_saldo:hover .tipo_pago,
-	.option_ingresar_saldo:hover .tipo_pago_descripcion{
-		cursor: pointer;
-		background: #0054ff;
-		color: white!important;
-	}
-	
-</style>
+<?=end_row()?>

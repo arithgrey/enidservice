@@ -13,6 +13,12 @@
 .text-danger strong {
 	color: #001ec3;
 }
+.cancelar_img{
+    margin-bottom: 20px;
+}
+.cancelar_carga_imagen{
+    margin-top: 20px;
+}
             .receipt-main {
                 
                 padding: 40px 30px !important;

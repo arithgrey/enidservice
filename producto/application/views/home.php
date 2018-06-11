@@ -58,7 +58,7 @@
 
 
 ?>
-<main> 
+
 
 
 
@@ -214,7 +214,7 @@
 <?=end_row()?>
 
 
-</main>
+
 
 <input 
 type="hidden" 

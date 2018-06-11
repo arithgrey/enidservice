@@ -96,8 +96,7 @@
 				    </form>		    
 		  	</div>
 		  	
-		<?=end_row();?>
-		<br><br><br><br><br>
+		<?=end_row();?>	
 		<?=n_row_12()?>			
 			<?php if($is_mobile ==  0):?>
 				<?php $this->load->view("secciones/categorias_web");?>

@@ -406,6 +406,10 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
                 overflow-x:auto; 
                 overflow-y:auto; 
             }
+            .logo_pago{
+            	height: 30px;
+            	width: 65px;
+            }
             .contenedor_central_modal{
                 height: 400px;
                 overflow: auto;
@@ -770,7 +774,20 @@ input{
     border: none;
     outline: none;
 }
-
+.btn_enid{
+        background: white;
+        color: black;
+        border: solid 1px;
+        padding: 10px;
+        margin-top: 10px;
+}
+.btn_enid_blue{
+	background: #051d41;
+	color: white;
+	border: solid 1px;
+	padding: 10px;
+	margin-top: 10px;
+}
 .cart-button:hover{
     text-decoration: none;
     color: #fff;
@@ -916,6 +933,10 @@ input{
 body{
 	font-family: 'Roboto Condensed', sans-serif!important;
 }
+.separador-footer{
+	margin-top: 400px;
+	
+}
 .logo_lateral_login{
 	width: 50%;	
 	margin: 0 auto;
@@ -967,4 +988,8 @@ body{
 	font-size: 1em!important;	
 	margin-top: 0px!important;
 	color: white!important;
+}
+.contenedor_principal_enid{
+	margin-top: 20px;
+	margin-bottom: 300px;
 }

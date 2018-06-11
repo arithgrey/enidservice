@@ -1,4 +1,7 @@
 <?=n_row_12()?>
+<div class="separador-footer"></div>
+<?=end_row()?>
+<?=n_row_12()?>
     <div class='contenedor-info-ventas'>
         <div class='container contenedo-texto-footer'>
             <input type="hidden" class="in_session" value="<?=$in_session?>">
@@ -226,8 +229,20 @@
                 </div>
             </div>
         </div>
+
+
+    
+    <?=n_row_12()?>    
+        <?php if ($is_mobile == 0): ?>    
+            <?=$this->load->view("../../../view_tema/metodos_pago");?>
+        <?php else: ?>
+            <?=$this->load->view("../../../view_tema/metodos_pago_mobile");?>
+        <?php endif ?>    
+    <?=end_row()?>    
+    
     <div class="footer-bottom" style='background:#001d9b !important'>
         <div class="container inner">
+
             <p class=" white">
                 © 2017 ENID SERVICE.                 
             </p>

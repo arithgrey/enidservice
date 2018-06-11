@@ -1,5 +1,5 @@
-<main>
-	<div class='contenedor_principal_enid_service'>
+<?=n_row_12()?>
+	<div class='contenedor_principal_enid'>
 		<div class="col-lg-4 col-lg-offset-4">
 			<h3 style="font-weight: bold;font-size: 2em;margin-top: 70px;">      
 	           AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR DEPÓSITO DESDE CUALQUIER SUCURSAL OXXO
@@ -45,18 +45,5 @@
 			
 		</div>
 	</div>
-</main>
-<style type="text/css">
-	.option_ingresar_saldo{
-		border-style: solid;
-		border-width: .5px;
-		margin-top: 10px;		
-		font-weight: bold;
-		padding: 10px;
-		background: #0054ff;
-		color: white!important;
+<?=end_row()?>
 
-
-	}	
-</style>
-<script type="text/javascript" src="<?=base_url('application/js/solicitud_oxxo.js')?>"></script>

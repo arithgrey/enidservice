@@ -9,9 +9,7 @@
                     
                 <?=end_row()?>
                 <?=n_row_12()?>
-                    
                         <?=$paginacion?>
-                    
                 <?=end_row()?>
                 <?=n_row_12()?>
                 <?php
@@ -29,4 +27,7 @@
                         }
                     }
                 ?>
+                <?=end_row()?>
+                <?=n_row_12()?>
+                        <?=$paginacion?>
                 <?=end_row()?>

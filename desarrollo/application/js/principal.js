@@ -39,7 +39,7 @@ $(document).ready(function(){
 	/**/
 	$(".depto").change(function(){
 
-		id_depto = $(".contenedor_deptos .depto").val();				
+		id_depto = $(".depto").val();						
 		set_option("id_depto", id_depto);
 		carga_tikets_usuario();
 	});

@@ -64,6 +64,9 @@ class Home extends CI_Controller{
             $data["vendedor"] =
             $this->get_contacto_usuario($data["servicio"][0]["id_usuario"]);            
         }
+        $data["js"]     =  ["../js_tema/js/direccion.js" ,  
+                            base_url('application/js/principal.js'),
+                            base_url('application/js/sha1.js')];
         $this->principal->show_data_page($data, 'home');                          
     }
     /**/
@@ -80,6 +83,7 @@ class Home extends CI_Controller{
     /**/
     function val_session($titulo_dinamico_page ){
 
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
         if( $this->sessionclass->is_logged_in() == 1){
 
             $menu = $this->sessionclass->generadinamymenu();

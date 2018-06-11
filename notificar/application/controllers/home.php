@@ -41,7 +41,13 @@ class Home extends CI_Controller{
             $data["servicio"] =  [];            
         }        
 
-        //$this->principal->crea_historico(9978 , $num_usuario , $num_servicio );         
+        $data["css"] =  ["../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css"];
+
+
+        $data["js"] = [
+            "../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            base_url('application/js/principal.js')];
+        
         $this->principal->show_data_page($data, 'home');                          
     }
     /**/
@@ -79,7 +85,7 @@ class Home extends CI_Controller{
     }    
     /**/
     function val_session($titulo_dinamico_page ){
-
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
         if( $this->sessionclass->is_logged_in() == 1){                                                                                            
 
                 /*

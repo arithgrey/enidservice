@@ -22,7 +22,8 @@ class Home extends CI_Controller{
         $data["meta_keywords"] = '';
         $data["desc_web"] = "";                
         $data["url_img_post"] = create_url_preview("");        
-        $data["clasificaciones_departamentos"] = $this->get_departamentos("nosotros");        
+        $data["clasificaciones_departamentos"] = 
+        $this->get_departamentos("nosotros");        
         
         $param =  $this->input->get();
         $vista =  "secciones/terminos_condiciones";
@@ -30,9 +31,9 @@ class Home extends CI_Controller{
         if ( is_array($param) && array_key_exists("action", $param)) {
             
         }
-
+        
         $data["vista"] =  $vista;
-        $data["titulo"] = $titulo;
+        $data["titulo"] = $titulo;        
         $this->principal->show_data_page($data, 'home');                          
     }
     /**/
@@ -70,30 +71,23 @@ class Home extends CI_Controller{
     }    
     /**/
     function val_session($titulo_dinamico_page ){
-
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
         if( $this->sessionclass->is_logged_in() == 1){                                                                                            
 
-                /*
-                $email_user  = $this->sessionclass->getemailuser();            
-                $data['titulo']= $titulo_dinamico_page;                              
-                $data["in_session"] = 1; 
-                $data["menu"] ="";                                        
-                return $data;
-                */
-                 $menu = $this->sessionclass->generadinamymenu();
-                $nombre = $this->sessionclass->getnombre();                                         
+                $menu = $this->sessionclass->generadinamymenu();
+                $nombre = $this->sessionclass->getnombre();
                 $data['titulo']= $titulo_dinamico_page;              
                 $data["menu"] = $menu;              
-                $data["nombre"]= $nombre;                                               
-                $data["email"]= $this->sessionclass->getemailuser();                                               
-                $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+                $data["nombre"]= $nombre;
+                $data["email"]= $this->sessionclass->getemailuser();
+                $data["perfilactual"] =  
+                $this->sessionclass->getnameperfilactual();                
                 $data["in_session"] = 1;
                 $data["no_publics"] =1;
                 $data["meta_keywords"] =  "";
                 $data["url_img_post"]= "";
-                $data["id_usuario"] = $this->sessionclass->getidusuario();                     
-                $data["id_empresa"] =  $this->sessionclass->getidempresa();                     
-                //$data["info_empresa"] =  $this->sessionclass->get_info_empresa();                     
+                $data["id_usuario"] = $this->sessionclass->getidusuario();
+                $data["id_empresa"] =  $this->sessionclass->getidempresa();
                 $data["desc_web"] =  "";
                 return $data;                
                 

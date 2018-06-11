@@ -19,6 +19,7 @@ class Inicio extends CI_Controller {
         /**/
 		$data = $this->val_session("Enid Service");        	            
         $data["clasificaciones_departamentos"] = "";
+        $data["css"] =  ["../css_tema/template/movimientos_info.css"];
         if($data["in_session"] == 1) {
             
             /**/
@@ -30,6 +31,12 @@ class Inicio extends CI_Controller {
                     
                     $saldos=  $this->get_saldo_usuario($id_usuario);
                     $data["saldo_disponible"] = $saldos;                    
+                    $data["js"] =  [
+                        base_url('application/js/principal.js'),
+                        base_url('application/js/notificaciones.js'),
+                        base_url('application/js/movimientos.js')
+                    ];
+
                     $this->principal->show_data_page( $data , 'empresas_enid');
                     break;
                 /**/
@@ -47,8 +54,10 @@ class Inicio extends CI_Controller {
                         $data["error"] =1;
                     }
                     /**/
-                    $data["seleccion"] = valida_valor_variable($this->input->get("seleccion"));
-                    $this->principal->show_data_page( $data , 'metodos_disponibles');
+                    $data["seleccion"] = 
+                    valida_valor_variable($this->input->get("seleccion"));
+                    $this->principal->show_data_page( 
+                        $data , 'metodos_disponibles');
                     break;
                 /**/
                 case 2:          
@@ -107,7 +116,8 @@ class Inicio extends CI_Controller {
                     $this->principal->show_data_page( $data , 'agregar_saldo');
                     break;
                 case 7:                     
-                    /*Agregar saldo a cuenta en Oxxo */                
+                    /*Agregar saldo a cuenta en Oxxo */     
+                    $data["js"] =  [base_url('application/js/solicitud_oxxo.js')];
                     $this->principal->show_data_page( $data , 'agregar_saldo_desde_oxxo');
                     break;
 
@@ -125,7 +135,9 @@ class Inicio extends CI_Controller {
 
                     if ($data["recibo"]["cuenta_correcta"] == 1 ) {
 
-                        $this->principal->show_data_page( $data , 'pagar_con_saldo_enid');
+
+                        $this->principal->show_data_page( $data , 
+                            'pagar_con_saldo_enid');
                         
                     }else{
                         redirect("../");
@@ -135,7 +147,11 @@ class Inicio extends CI_Controller {
 
                 /*Solicitar saldo a un amigo*/
                 case 9:
-                        $this->principal->show_data_page( $data , 'solicitar_a_un_amigo');
+
+                    $data["css"]    = ["../css_tema/template/movimientos.css"];
+                    $data["js"]     = [base_url('application/js/solicitud_saldo_amigo.js')];
+                    $this->principal->show_data_page( 
+                        $data , 'solicitar_a_un_amigo');
                     break;
 
                 default:
@@ -152,6 +168,7 @@ class Inicio extends CI_Controller {
     }    	
    /**/
     private function val_session($titulo_dinamico_page ){        
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
         if ( $this->sessionclass->is_logged_in() == 1) {                                                            
                 $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         
@@ -159,7 +176,8 @@ class Inicio extends CI_Controller {
                 $data["menu"] = $menu;              
                 $data["nombre"]= $nombre;                                               
                 $data["email"]= $this->sessionclass->getemailuser();                                               
-                $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+                $data["perfilactual"] =  
+                $this->sessionclass->getnameperfilactual();                
                 $data["in_session"] = 1;
                 $data["no_publics"] =1;
                 $data["meta_keywords"] =  "";

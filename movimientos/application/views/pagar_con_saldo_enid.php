@@ -1,5 +1,5 @@
-<main class="contenedor_principal_transfer">        
-    <div class='contenedor_principal_enid_service'>
+<?=n_row_12()?>
+    <div class='contenedor_principal_enid'>
         <div class="col-lg-4 col-lg-offset-4">            
         <?=n_row_12()?>
             <div class="jumbotron" 
@@ -75,14 +75,4 @@
         <?=end_row()?>
         </div>
     </div>
-<main>
-<style type="text/css">    
-    .btn_transfer:hover{
-        cursor: pointer;
-        background: #0656F9!important;    
-        color: white!important;
-        border-style: solid;
-        border-width: .9px;
-        font-weight: bold;
-    }
-</style>
+<?=end_row()?>

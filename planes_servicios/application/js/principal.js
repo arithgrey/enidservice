@@ -38,6 +38,11 @@ $(document).ready(function() {
 	$(".ci_facturacion").change(evalua_precio);
 	$(".cancelar_registro").click(cancelar_registro);
 });
+/**/
+function cancelar_carga_imagen(){
+	showonehideone( ".contenedor_global_servicio" , ".contenedor_agregar_imagenes");	
+}
+/**/
 function cancelar_registro(){	
 	showonehideone(".contenedor_agregar_servicio_form" ,".contenedor_categorias_servicios");
 }
@@ -128,6 +133,7 @@ function carga_informacion_servicio(num) {
 						
 						llenaelementoHTML(".place_servicios", data);
 
+						$(".cancelar_carga_imagen").click(cancelar_carga_imagen);
 						$(".menu_meta_key_words").click(carga_sugerencias_meta_key_words);
 						$(".agregar_img_servicio").click(carga_form_img);						
 						/**/

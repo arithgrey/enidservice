@@ -34,23 +34,16 @@ class Home extends CI_Controller{
     }   
     /**/
     function val_session($titulo_dinamico_page ){
-
-        if( $this->sessionclass->is_logged_in() == 1){                                                                                            
-
-                /*
-                $email_user  = $this->sessionclass->getemailuser();            
-                $data['titulo']= $titulo_dinamico_page;                              
-                $data["in_session"] = 1; 
-                $data["menu"] ="";                                        
-                return $data;
-                */
-                 $menu = $this->sessionclass->generadinamymenu();
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
+        if( $this->sessionclass->is_logged_in() == 1){                                                                                           
+                $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         
                 $data['titulo']= $titulo_dinamico_page;              
                 $data["menu"] = $menu;              
                 $data["nombre"]= $nombre;                                               
-                $data["email"]= $this->sessionclass->getemailuser();                                               
-                $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+                $data["email"]= $this->sessionclass->getemailuser();
+                $data["perfilactual"] =  
+                $this->sessionclass->getnameperfilactual();                
                 $data["in_session"] = 1;
                 $data["no_publics"] =1;
                 $data["meta_keywords"] =  "";

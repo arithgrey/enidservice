@@ -118,7 +118,8 @@ class Home extends CI_Controller{
 
                     $data["css"] = [base_url('application/css/main.css'),
                                     "../css_tema/template/css_tienda.css",
-                                    base_url('application/css/zoom_imagen.css')
+                                    base_url('application/css/zoom_imagen.css'),
+                                    "../css_tema/template/producto.css?v115843636"
                                     ];
 
                     $data["js"] = [
@@ -184,6 +185,7 @@ class Home extends CI_Controller{
     /**/
     private function val_session($titulo_dinamico_page ){
 
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
         if( $this->sessionclass->is_logged_in() == 1){                                          
                 
                 $menu = $this->sessionclass->generadinamymenu();
@@ -192,7 +194,8 @@ class Home extends CI_Controller{
                 $data["menu"] = $menu;              
                 $data["nombre"]= $nombre;                                               
                 $data["email"]= $this->sessionclass->getemailuser();                                               
-                $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+                $data["perfilactual"] =  
+                $this->sessionclass->getnameperfilactual();                
                 $data["in_session"] = 1;
                 $data["no_publics"] =1;
                 $data["meta_keywords"] =  "";
@@ -236,7 +239,8 @@ class Home extends CI_Controller{
         $url_request=  $this->get_url_request($url);
         $this->restclient->set_option('base_url', $url_request);
         $this->restclient->set_option('format', "html");        
-        $result = $this->restclient->get("cobranza/calcula_precio_producto_mayoreo" , $q);        
+        $result = 
+        $this->restclient->get("cobranza/calcula_precio_producto_mayoreo" , $q);        
         $response =  $result->response;        
         return $response;
     }

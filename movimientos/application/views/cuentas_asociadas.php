@@ -1,5 +1,5 @@
-<main>
-  <div class='contenedor_principal_enid_service'>
+<?=n_row_12()?>
+  <div class='contenedor_principal_enid'>
     <div class="col-lg-4 col-lg-offset-4" style="background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;">
 
         <h3 style="font-weight: bold;font-size: 2em;">
@@ -107,4 +107,4 @@
 
     </div>
   </div>
-</main>
+<?=end_row()?>

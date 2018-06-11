@@ -18,6 +18,7 @@
     /**/
     $categorias_destacadas_orden =  sub_categorias_destacadas($categorias_destacadas);  
 ?>
+
 <?php if ( strlen(trim($q)) ==  0):?>
     <?=n_row_12()?>
         <div class="contenedor_img_principal" >                
@@ -55,7 +56,7 @@
             
 <?=end_row();?>                        
 
-<main>
+<?=n_row_12()?>
     <div style="margin-top: 30px;">                            
             <div class="col-lg-2">      
                 <?=n_row_12()?>
@@ -144,7 +145,6 @@
                 
         </div>
     </div>
-
     <br>
     <?=n_row_12()?>         
         <div class="col-lg-2">            
@@ -158,5 +158,5 @@
             </div>
         </div>
     <?=end_row()?>
-</main>
+<?=end_row()?>
 

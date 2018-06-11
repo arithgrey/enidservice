@@ -1,6 +1,5 @@
-<main>
-	<div class="contenedor_header"></div>	
-	<div class="contenedor_principal_planes_servicios">
+<?=n_row_12()?>	
+	<div class="contenedor_principal_enid">
 		<div class="col-lg-2">
 			<?=$this->load->view("secciones/menu");?>
 		</div>	
@@ -46,4 +45,4 @@
 			<?=end_row()?>
 		</div>
 	</div>
-</main>
+<?=end_row()?>	

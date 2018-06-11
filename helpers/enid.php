@@ -66,3 +66,12 @@ if ( ! function_exists('anchor_enid'))
     return '<a '.$attributes.'>'.$title.'</a>';
   }
 }
+
+if ( ! function_exists('get_td'))
+{
+  function get_td($val , $attributes = '' ){
+
+      $attr =  add_attributes($attributes);   
+      return "<td ". $attr ." NOWRAP >". $val ."</td>";
+  }
+}

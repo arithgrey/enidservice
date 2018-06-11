@@ -1,4 +1,4 @@
-<main>
+<?=n_row_12()?>
 	<div class="col-lg-6 col-lg-offset-3">	
 		<?=n_row_12()?>
 			<center>
@@ -29,27 +29,43 @@
 		<?=end_row()?>
 		<hr>
 		<?=n_row_12()?>		
-			<div class="col-lg-8 col-lg-offset-2">
+			
 				<table style="width: 100%;">
 					<tr>
-						<td class="col-lg-4">				
-							<img src="../img_tema/bancos/paypal.png" 
-								style="width: 100%;">
-						</td>
-						<td class="col-lg-4">
-							<img src="../img_tema/bancos/1.png" 
-							style="width: 100%;">
-						</td>
-						<td class="col-lg-4">
-							<img src="../img_tema/bancos/targetas-de-credito.jpg" 
-							style="width: 100%;">
-						</td>
+						<?=get_td(
+							img(array(
+								'class' => "img_pago",
+								'src' => 
+								"../img_tema/bancos/targetas-de-credito.jpg" )))?>
+						<?=get_td(
+							img(array('class' => "img_pago",
+							 'src' => "../img_tema/bancos/paypal.png")))?>	
+						<?=get_td(
+							img(array('class' => "img_pago",
+							'src' => "../img_tema/bancos/1.png")))?>		
+											
+						<?=get_td(
+							img(array(
+								'class' => "img_pago",
+								'src' => 
+								"../img_tema/bancos/3.png" )))?>
+
+						<?=get_td(
+							img(array(
+								'class' => "img_pago",
+								'src' => 
+								"../img_tema/bancos/8.png" )))?>		
+			
+
+						<?=get_td(
+							img(array(
+								'class' => "img_pago",
+								'src' => 
+								"../img_tema/bancos/oxxo-logo.png" )))?>		
 					</tr>
 				</table>
-			</div>
+			
 		<?=end_row()?>
 
 	</div>
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</main>
-
+<?=end_row()?>

@@ -7,7 +7,7 @@
   /**/
   $icon_config['class'] =  "fa fa-credit-card";   
   $icon_precios         = add_element( "" , "i" , $icon_config );
-  $precios_config       =  array('href' => "#tab_imagenes" ,
+  $precios_config       =  array('href' => "#tab_info_precios" ,
                                   'data-toggle'   => "tab" );
   
 
@@ -28,17 +28,21 @@
               <li <?=valida_active($num , 1);?> >
                   <?=anchor_enid( $icon , $foto_config)?>  
               </li> 
+
               <li <?=valida_active($num , 4 );?> 
                   <?=valida_existencia_imagenes($imgs)?> >
                   <?=anchor_enid( $icon_precios , $precios_config )?>
               </li>
+
               <li <?=valida_existencia_imagenes($imgs)?>>      
                   <?=anchor_enid( $icon_inf , $precios_inf )?>
               </li>
+
               <li  <?=valida_active($num , 3);?>  
                     <?=valida_existencia_imagenes($imgs)?>>         
                     <?=anchor_enid( $icon_meta , $meta_inf )?>                
               </li>
+              
               <li <?=valida_existencia_imagenes($imgs)?> >                    
                       <a href="<?=$url_productos_publico?>" target="_blank"
                         style='background: black;color: white!important;'>

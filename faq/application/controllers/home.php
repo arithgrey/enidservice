@@ -114,6 +114,7 @@ class Home extends CI_Controller{
     /**/
     function val_session($titulo_dinamico_page ){
 
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
         if( $this->sessionclass->is_logged_in() == 1){                                                                                          
                 $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         
@@ -121,7 +122,8 @@ class Home extends CI_Controller{
                 $data["menu"] = $menu;              
                 $data["nombre"]= $nombre;                                               
                 $data["email"]= $this->sessionclass->getemailuser();                                               
-                $data["perfilactual"] =  $this->sessionclass->getnameperfilactual();                
+                $data["perfilactual"] =  
+                $this->sessionclass->getnameperfilactual();                
                 $data["in_session"] = 1;
                 $data["no_publics"] =1;
                 $data["meta_keywords"] =  "";

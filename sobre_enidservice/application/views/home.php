@@ -1,4 +1,4 @@
-<main>       
+<?=n_row_12()?>      
 	<?=$this->load->view("secciones_2/contenedor_2")?>
-</main>
-<script type="text/javascript" src="<?=base_url('application')?>/js/principal.js"></script>
+<?=end_row()?>      
+

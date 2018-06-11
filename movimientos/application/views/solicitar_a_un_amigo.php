@@ -1,5 +1,5 @@
-<main>
-	<div class='contenedor_principal_enid_service'>
+<?=n_row_12()?>
+	<div class='contenedor_principal_enid'>
 		<div class="col-lg-4 col-lg-offset-4">
 			<h3 style="font-weight: bold;font-size: 2em;margin-top: 70px;">      
 	           SOLICITA SALDO A UN AMIGO
@@ -67,7 +67,6 @@
 				<?=end_row()?>
 		</div>
 	</div>
-</main>
-<link rel="stylesheet" type="text/css" href="../css_tema/template/movimientos.css">
-<script type="text/javascript" src="<?=base_url('application/js/solicitud_saldo_amigo.js')?>">
-</script>
+<?=end_row()?>
+
+

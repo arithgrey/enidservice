@@ -195,9 +195,8 @@ class Home extends CI_Controller{
     }   
     /**/
     private function val_session($titulo_dinamico_page ){
-
-        if( $this->sessionclass->is_logged_in() == 1){                                                                                            
-
+        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
+        if( $this->sessionclass->is_logged_in() == 1){                 
                 
                 $menu = $this->sessionclass->generadinamymenu();
                 $nombre = $this->sessionclass->getnombre();                                         

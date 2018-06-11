@@ -1,9 +1,8 @@
-<main>  	
+<?=n_row_12()?>
 	<?=n_row_12()?>
 		<div class="col-lg-8 col-lg-offset-2">
 			<?=$formulario_valoracion?>		
-		</div>
-		
+		</div>		
 	<?=end_row()?>	
 	<?=n_row_12()?>
 
@@ -59,9 +58,7 @@
 			<div class="place_valoraciones"></div>
 		</div>
 	<?=end_row()?>	
-</main>
-<br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<?=end_row()?>	
+
 <input type="hidden" class="envio_pregunta" type="hidden" value="<?=$in_session?>">
 <input type="hidden" class="servicio" type="hidden" value="<?=$id_servicio?>">
-<script type="text/javascript" src="<?=base_url()?>/application/js/principal.js"></script>
