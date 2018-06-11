@@ -148,8 +148,10 @@ function actualiza_telefono_usuario_negocio(e){
 }
 /**/
 function quita_espacios_nombre_usuario(){	
+	
 	nombre_usuario =  $(this).val(); 	
-	$(this).val(quita_espacios_text(nombre_usuario));
+	var nuevo_text = nombre_usuario.toLowerCase();	
+	$(this).val(quita_espacios_text(nuevo_text));
 }
 /**/
 function quita_espacios_text(nuevo_valor){

@@ -171,13 +171,14 @@ class Portafolio extends REST_Controller{
     }
     /**/
     private  function get_domicilio_cliente($param){
-        return $this->proyectomodel->get_domicilio_cliente($param["id_usuario"]);
+        $id_usuario = $param["id_usuario"];
+        return $this->proyectomodel->get_domicilio_cliente($id_usuario);
     }
     /**/
     function direccion_usuario_GET(){
 
         $param = $this->get();             
-        $param["id_usuario"] = $this->sessionclass->getidusuario();                        
+        $param["id_usuario"] = $this->sessionclass->getidusuario();        
         $domicilio =  $this->get_domicilio_cliente($param);            
         $data["info_envio_direccion"] =  $domicilio;
         $data["param"] =$param;
@@ -188,6 +189,7 @@ class Portafolio extends REST_Controller{
                 break;
             /*Texto*/                        
             case 1:
+
                 if(count($domicilio)>0){
                     $this->load->view("proyecto/domicilio_resumen" , $data);                            
                 }else{
@@ -281,9 +283,7 @@ class Portafolio extends REST_Controller{
 
         $param =  $this->post();
         /*Primero la registramos*/    
-
         $id_direccion = $this->proyectomodel->registra_direccion_usuario($param);
-        $this->response($id_direccion);
         
         $param["id_direccion"] = $id_direccion;        
         $data_complete["id_direccion"] = $id_direccion;
