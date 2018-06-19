@@ -6,6 +6,17 @@
 
     }
     /**/
+    function verifica_registro_telefono($param){
+
+        /**/
+        $query_get ="SELECT COUNT(0)num FROM 
+                    usuario WHERE 
+                    idusuario ='".$param["id_usuario"]."' 
+                    and tel_contacto is null";                    
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["num"];
+    }
+    /**/
     function get_notificaciones_usuario_perfil($param){
 
         $id_perfil =   $this->get_perfil_usuario($param);        

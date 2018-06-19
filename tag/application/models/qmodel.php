@@ -179,29 +179,34 @@
         $nivel_text =  $lista_niveles[$nivel];
         $distinto =  $this->get_option("sql_distintos");
         $query_get = "SELECT 
-                                id_servicio ,  
-                                nombre_servicio, 
-                                flag_servicio, 
-                                flag_envio_gratis,
-                                metakeyword, 
-                                primer_nivel , 
-                                segundo_nivel ,
-                                tercer_nivel ,
-                                cuarto_nivel , 
-                                quinto_nivel, 
-                                color,
-                                precio,
-                                id_ciclo_facturacion
+                        id_servicio ,  
+                        nombre_servicio, 
+                        flag_servicio, 
+                        flag_envio_gratis,
+                        metakeyword, 
+                        primer_nivel , 
+                        segundo_nivel ,
+                        tercer_nivel ,
+                        cuarto_nivel , 
+                        quinto_nivel, 
+                        color,
+                        precio,
+                        id_ciclo_facturacion
                         FROM 
                         servicio
                         WHERE 
                             1=1
-                            $distinto
+                        $distinto
                             AND 
-                            $nivel_text = $id_clasificacion  
+                        $nivel_text = $id_clasificacion  
                             AND 
-                            existencia > 0
-                        LIMIT 1";
+                        existencia > 0
+                            AND 
+                        status = 1
+                            AND 
+                        flag_imagen = 1
+
+                            LIMIT 1";
                     $result =  $this->db->query($query_get);
                     return $result->result_array();
     }  
@@ -222,8 +227,7 @@
             $this->create_productos_disponibles(0 , $_num , $param);                
 
                     $data_complete["sql"] =  $this->get_option("sql");
-                    $query_get ="SELECT * FROM tmp_producto_$_num ORDER BY 
-                    valoracion,vista DESC";
+                    $query_get ="SELECT * FROM tmp_producto_$_num ";
                     $result =  $this->db->query($query_get);
                     $servicios =  $result->result_array();
                 
@@ -258,7 +262,7 @@
     /**/
     function get_resultados_posibles($param){
         
-        $query_where = $this->get_sql_producto($param , 1);            
+        $query_where = $this->get_sql_servicio($param , 1);            
         $query_get ="SELECT  
                         COUNT(0)num_servicios 
                     FROM 
@@ -268,29 +272,22 @@
             
     }
     /**/
-    function get_extra_clasificacion($id_clasificacion , $param){
+    function get_extra_clasificacion($param){
 
-            $extra_clasificacion ="";
-
-                
-                if($id_clasificacion > 0){                
-                    $extra_clasificacion = "AND(
-                                                primer_nivel  =  $id_clasificacion 
-                                                OR 
-                                                segundo_nivel  =  $id_clasificacion 
-                                                OR 
-                                                tercer_nivel  =  $id_clasificacion 
-                                                OR                    
-                                                cuarto_nivel   =  $id_clasificacion 
-                                                OR                    
-                                                quinto_nivel   =  $id_clasificacion 
-                                            )";
-                }       
-            
-            return $extra_clasificacion;
-
+        $id_clasificacion =  $param["id_clasificacion"];  
+        $extra = " AND( primer_nivel  =  $id_clasificacion 
+                        OR 
+                        segundo_nivel  =  $id_clasificacion 
+                        OR 
+                        tercer_nivel  =  $id_clasificacion 
+                        OR                    
+                        cuarto_nivel   =  $id_clasificacion 
+                        OR                    
+                        quinto_nivel   =  $id_clasificacion )";
+                        
+        $extra = ($id_clasificacion > 0) ? $extra:"";
+        return $extra;
     }
-    /**/
     
     /**/
     function get_precio_servicio($id_servicio){
@@ -314,138 +311,144 @@
         return " LIMIT $offset , $per_page ";
     }
     /**/
-    function get_sql_producto($param , $flag_conteo){
+    function get_sql_servicio($param , $flag_conteo){
             
-            $limit = " ";    
-            if ($flag_conteo ==  0){
-                $limit =  $this->get_limit($param);    
-            }
-            /**/            
-            $extra_clasificacion = $this->get_extra_clasificacion(
-                $param["id_clasificacion"] , $param);            
-            
-            $num_q = strlen(trim($param["q"])); 
-            $q=  $param["q"]; 
-            $sql_extra  ="";
-            $extra_empresa = "";   
-                          
-            /**/
-            $extra_existencia =" AND existencia > 0  ";
-            $sql_considera_imagenes = " AND flag_imagen =1 ";
-            
-            /**/
-            if($param["id_usuario"] > 0){
-                    $extra_existencia = " ";
-                    $sql_considera_imagenes = " ";
-                    $extra_empresa = " AND id_usuario = " . $param["id_usuario"];      
-            }
+            $q          =  $param["q"]; 
+            $limit      = ($flag_conteo == 0)?$this->get_limit($param):" ";
+            $extra_clasificacion = $this->get_extra_clasificacion($param);
+            $num_q      = strlen(trim($q));             
+            $id_usuario =  $param["id_usuario"];
+
            
-            /**/
-            if($num_q >0 ){
-                
-                $sql_match =" AND MATCH(metakeyword , metakeyword_usuario) 
-                            AGAINST ('".$q."*' IN BOOLEAN MODE) ";
-                $sql_extra =" WHERE 1 = 1 
+            $sql_extra  ="";
+            
+            $extra_existencia      = 
+                ($id_usuario > 0)?" ":" AND existencia >0 ";
+            
+            $sql_considera_imagenes = 
+                ($id_usuario > 0)?" ":" AND flag_imagen = 1 ";
+
+            $extra_empresa = 
+                ($id_usuario > 0)?" AND id_usuario = " . $id_usuario :"";
+
+            
+
+            $vendedor =  $param["vendedor"];    
+            $extra_vendedor =
+            ( $vendedor > 0)?" AND id_usuario =  '".$vendedor."'" : "";
+
+            
+            $orden = $this->get_orden($param);    
+            $sql_match = ($num_q >0 )?
+            "   AND MATCH(metakeyword , 
+                metakeyword_usuario) 
+                AGAINST ('".$q."*' IN BOOLEAN MODE) ":"";
+
+                $sql_extra =" 
+                    WHERE 
+                    1 = 1 
+                    ".$extra_empresa."
+                    ".$extra_vendedor."
                     ".$extra_existencia."
                     ".$sql_considera_imagenes."
                     AND 
                     status =1   
-                    ".$extra_clasificacion." 
-                    ".$extra_empresa."
-                    
+                    ".$extra_clasificacion."
                     ".$sql_match."
-                    ORDER BY 
-                    vista 
-                    DESC ".$limit;
+                    ".$orden."
+                    ".$limit;
                 
-            }if($num_q ==  0){
-        
-                $sql_extra =" WHERE 
-                        1 = 1               
-                        ".$extra_existencia."
-                        ".$sql_considera_imagenes."                       
-                    AND 
-                        status = 1                     
-                        ".$extra_clasificacion." 
-                        ".$extra_empresa."
-                    ORDER BY 
-                    vista DESC ".$limit;
-
-            }
-            if($param["vendedor"] > 0){            
-                $sql_extra =" WHERE 
-                        1 = 1               
-                            ".$extra_existencia."
-                            ".$sql_considera_imagenes."                        
-                        AND 
-                            id_usuario =  '".$param["vendedor"]."'
-                        AND 
-                        ".$extra_empresa."
-                        status = 1                                             
-                    ORDER BY 
-                    vista DESC ".$limit;
-            }
-            
-
+                                
             return $sql_extra;
           
+    }
+    /**/
+    function get_orden($param){
+
+        
+        switch ($param["order"]) {
+            case 1:
+                return " ORDER BY  fecha_registro  DESC";
+                break;
+            
+            case 2:
+                return " ORDER BY  deseado  DESC";
+                break;
+
+            case 3:
+                return " ORDER BY valoracion DESC";
+                break;            
+
+            case 4:
+                return " ORDER BY vista DESC";
+                break;
+
+            case 5:
+                return " ORDER BY precio DESC";
+                break;    
+
+            case 6:
+                return " ORDER BY precio ASC";
+                break;    
+            
+            case 7:
+                return " ORDER BY nombre_servicio DESC";
+                break;    
+
+            case 8:
+                return " ORDER BY nombre_servicio ASC";
+                break;    
+                        
+            case 9:
+                return " AND flag_servicio = 1 ORDER BY  deseado , vista  DESC";
+            break;    
+
+            case 10:
+                return " AND flag_servicio = 0 ORDER BY  deseado , vista  DESC";
+            break; 
+
+            case 11:
+                return " ORDER BY  deseado , vista  DESC ";
+            break;    
+
+            default:
+                
+                break;
+        }        
     }
     /**/
     function create_productos_disponibles($flag , $_num , $param){
 
         $query_drop = "DROP TABLE IF exists tmp_producto_$_num";
-        $this->db->query($query_drop);        
-        /**/
+        $this->db->query($query_drop);                
         if($flag == 0){
 
-            $query_where = $this->get_sql_producto($param , 0);
+            $query_where = $this->get_sql_servicio($param , 0);
+            $param_extra =  ( $param["agrega_clasificaciones"] ==  1)?
+            ",primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 
+            , quinto_nivel":""; 
+              
 
-             $query_create ="CREATE TABLE tmp_producto_$_num AS 
-                            SELECT  
-                                id_servicio ,  
-                                nombre_servicio, 
-                                flag_servicio, 
-                                flag_envio_gratis,
-                                metakeyword,                                 
-                                color,
-                                existencia,
-                                precio , 
-                                id_ciclo_facturacion, 
-                                vista,
-                                valoracion  
-
-                            FROM 
-                            servicio".$query_where; 
-
-                        $this->set_option("sql" , $query_create);       
-
-            if( $param["agrega_clasificaciones"] ==  1){            
+            
                 $query_create ="CREATE TABLE tmp_producto_$_num AS 
                             SELECT  
                                 id_servicio ,  
                                 nombre_servicio, 
                                 flag_servicio, 
                                 flag_envio_gratis,
-                                metakeyword, 
-                                primer_nivel , 
-                                segundo_nivel ,
-                                tercer_nivel ,
-                                cuarto_nivel , 
-                                quinto_nivel,
+                                metakeyword,                                 
                                 color,   
                                 precio , 
+                                existencia,
                                 id_ciclo_facturacion,
                                 vista,
-                                valoracion                             
+                                valoracion,
+                                deseado      
+                                ".$param_extra."                       
                             FROM 
-                            servicio".$query_where;   
-                            
-                            $this->set_option("sql" , $query_create );       
-            }
-            $this->db->query($query_create);
-            
-
-
+                            servicio".$query_where;
+                            $this->set_option("sql" , $query_create );               
+            $this->db->query($query_create);    
         }
     }
     /**/
@@ -600,6 +603,36 @@
         $id_usuario =  $param["id_usuario"];        
         $query_get ="SELECT id_servicio FROM usuario_deseo 
                      WHERE id_usuario = '".$id_usuario."' ORDER BY num_deseo DESC LIMIT 30";
+        $result=  $this->db->query($query_get);
+        return  $result->result_array();
+    }
+    /**/
+    function get_productos_deseados_sugerencias($param){
+        
+        $id_usuario =  $param["id_usuario"];        
+        $limit =  $param["limit"];                              
+        $query_get ="SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                    us.id_usuario = '".$id_usuario."' 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT $limit ";
+                    
         $result=  $this->db->query($query_get);
         return  $result->result_array();
     }

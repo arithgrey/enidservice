@@ -31,7 +31,7 @@ class clasificacion_model extends CI_Model{
                     WHERE 
                       flag_servicio = '".$es_servicio."' 
                     AND 
-                      ".$nivel ." = 1
+                      nivel =  '".$nivel."'
                     AND 
                       padre = '".$padre."'";
 
@@ -50,12 +50,12 @@ class clasificacion_model extends CI_Model{
                             nombre_clasificacion,
                             flag_servicio ,
                             padre ,
-                            ".$nivel ."
+                            nivel
                         ) VALUES(
                             '".$clasificacion."',
                             '".$tipo ."',
                             '".$padre ."',
-                            1
+                            '".$nivel."'
                         )";      
       return $this->db->query($query_insert);
   }

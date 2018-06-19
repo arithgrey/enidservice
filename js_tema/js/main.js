@@ -227,7 +227,7 @@ function redirect(url){
 	window.location.replace(url);
 }
 function recorrepage(idrecorrer){		
-	/*$('html, body').animate({scrollTop: $(idrecorrer).offset().top -100 }, 'slow');*/
+	$('html, body').animate({scrollTop: $(idrecorrer).offset().top -100 }, 'slow');
 }
 function get_td(val , extra ){ 
 	return "<td>" + val + "</td>";

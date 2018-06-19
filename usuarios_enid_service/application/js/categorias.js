@@ -34,7 +34,7 @@ function load_niveles(){
 	$(".form_categoria").hide();
 	es_servicio 	=  $(".servicio option:selected").val();		
 	set_option("es_servicio" , es_servicio);
-	nivel 			=	 "primer_nivel";
+	nivel 			=	1;
     padre        	=  0;	
 
     data_send =  {es_servicio : es_servicio , nivel : nivel, padre : padre };	
@@ -53,11 +53,12 @@ function muestra_sugerencias_primer_nivel(data){
 }
 /**/
 function muestra_mas_opciones(e){
+
 	clean_categorias(0);
 	
 	padre =  e.target.value;
 	if (padre >0 ){		
-		nivel 			=	 "segundo_nivel";
+		nivel 			=	2;
 		es_servicio  	= 	get_option("es_servicio");
 		data_send =  {es_servicio : es_servicio , nivel : nivel, padre : padre };	
 		url =  "../portafolio/index.php/api/clasificacion/nivel/format/json/";	
@@ -74,8 +75,9 @@ function muestra_sugerencias_segundo_nivel(data){
 
 	
 	llenaelementoHTML( ".segundo_nivel" ,  data);
-	$(".seleccion_segundo_nivel").click(function(){
-		add_categoria("segundo_nivel" , $(".primer_nivel option:selected").val() , $(".servicio option:selected").val());
+	$(".seleccion_2").click(function(){
+
+		add_categoria(2 , $(".primer_nivel option:selected").val() , $(".servicio option:selected").val());
 	});
 	$(".segundo_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_segundo);
 }
@@ -86,7 +88,7 @@ function muestra_mas_opciones_segundo(e){
 
 	padre =  e.target.value;
 	if (padre >0 ){		
-		nivel 			=	 "tercer_nivel";
+		nivel 			=	 3;
 		es_servicio  	= 	get_option("es_servicio");
 		data_send =  {es_servicio : es_servicio , nivel : nivel, padre : padre };	
 		url =  "../portafolio/index.php/api/clasificacion/nivel/format/json/";	
@@ -102,11 +104,11 @@ function muestra_mas_opciones_segundo(e){
 function muestra_sugerencias_tercer_nivel(data){
 
 	llenaelementoHTML( ".tercer_nivel" ,  data);
-	$(".seleccion_tercer_nivel").click(function(){
-		add_categoria("tercer_nivel" , $(".segundo_nivel option:selected").val() , $(".servicio option:selected").val());
+	$(".seleccion_3").click(function(){
+		add_categoria(3 , $(".segundo_nivel option:selected").val() , $(".servicio option:selected").val());
 	});
 
-	$(".seleccion_segundo_nivel").hide();
+	$(".seleccion_2").hide();
 	$(".tercer_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_tercer);
 }
 /**/
@@ -114,7 +116,7 @@ function muestra_mas_opciones_tercer(e){
 	clean_categorias(2);
 	padre =  e.target.value;
 	if (padre >0 ){		
-		nivel 			=	 "cuarto_nivel";
+		nivel 			=	 4;
 		es_servicio  	= 	get_option("es_servicio");
 		data_send =  {es_servicio : es_servicio , nivel : nivel, padre : padre };	
 		url =  "../portafolio/index.php/api/clasificacion/nivel/format/json/";	
@@ -129,11 +131,11 @@ function muestra_mas_opciones_tercer(e){
 /**/
 function muestra_sugerencias_cuarto(data){
 	llenaelementoHTML( ".cuarto_nivel" ,  data);
-	$(".seleccion_cuarto_nivel").click(function(){
-		add_categoria("cuarto_nivel" , $(".tercer_nivel option:selected").val() , $(".servicio option:selected").val());
+	$(".seleccion_4").click(function(){
+		add_categoria(4 , $(".tercer_nivel option:selected").val() , $(".servicio option:selected").val());
 	});
 
-	$(".seleccion_tercer_nivel").hide();
+	$(".seleccion_3").hide();
 	$(".cuarto_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_quinto);
 }
 /**/
@@ -141,7 +143,7 @@ function muestra_mas_opciones_quinto(e){
 	clean_categorias(3);
 	padre =  e.target.value;
 	if (padre >0 ){		
-		nivel 			=	 "quinto_nivel";
+		nivel 			=	 5;
 		es_servicio  	= 	get_option("es_servicio");
 		data_send =  {es_servicio : es_servicio , nivel : nivel, padre : padre };	
 		url =  "../portafolio/index.php/api/clasificacion/nivel/format/json/";	
@@ -156,10 +158,10 @@ function muestra_mas_opciones_quinto(e){
 /**/
 function muestra_sugerencias_quinto(data){
 	clean_categorias(4);
-	$(".seleccion_cuarto_nivel").hide();
+	$(".seleccion_4").hide();
 	llenaelementoHTML( ".quinto_nivel" ,  data);	
-	$(".seleccion_quinto_nivel").click(function(){		
-		add_categoria("quinto_nivel" , $(".cuarto_nivel option:selected").val() , $(".servicio option:selected").val());
+	$(".seleccion_5").click(function(){		
+		add_categoria(5 , $(".cuarto_nivel option:selected").val() , $(".servicio option:selected").val());
 	});
 }
 /**/
@@ -179,7 +181,8 @@ function clean_categorias(inicio){
 }
 /***/
 function add_categoria(nivel , padre , tipo){
-		
+	
+	
 	clasificacion = $(".clasificacion").val();
 	data_send =   {clasificacion:clasificacion , tipo : tipo , padre : padre , nivel:nivel};	
 	url =  "../portafolio/index.php/api/clasificacion/nivel/format/json/";	

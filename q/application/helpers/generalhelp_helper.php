@@ -1231,6 +1231,27 @@ function get_statusevent($status){
       $data_complete["flag"] =  $flag_notificaciones;
       return $data_complete;
     }
+    /**/
+    function add_numero_telefonico($num){
+      $lista_pendientes ="";
+      $flag_notificaciones = 0;           
+      if($num > 0 ){                   
+
+          $lista_pendientes .= 
+          inicio_base_notificacion("../administracion_cuenta/",
+            "fa fa-mobile-alt");
+          
+          $text ="Agrega un número para compras o ventas";
+          
+          $lista_pendientes .=$text;
+          $lista_pendientes .= fin_base_notificacion();   
+          $flag_notificaciones ++;                           
+      }
+      $data_complete["html"] =  $lista_pendientes;
+      $data_complete["flag"] =  $flag_notificaciones;
+      return $data_complete;
+    }
+    
     /**/    
     function add_productos_publicados($num){
 
@@ -1448,6 +1469,7 @@ function get_statusevent($status){
     /**/    
     function get_tareas_pendienetes_usuario_cliente($info){
       
+      $num_telefonico =  $info["info_notificaciones"]["numero_telefonico"];
       $flag =0; 
       $inf_notificacion = $info["info_notificaciones"];
             
@@ -1473,7 +1495,12 @@ function get_statusevent($status){
       $direccion = add_productos_publicados($inf_notificacion["productos_anunciados"]);
       $flag = $flag + $direccion["flag"];
       $lista_pendientes .= $direccion["html"];              
-      
+    
+
+      $numtelefonico = add_numero_telefonico($num_telefonico);
+      $flag = $flag + $numtelefonico["flag"];
+      $lista_pendientes .= $numtelefonico["html"]; 
+    
       /**/
       $mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf_notificacion["mensajes"] ,1);
       $flag = $flag + $mensajes_sin_leer["flag"];
@@ -1490,6 +1517,7 @@ function get_statusevent($status){
     
     /*end*/
   }
+
   /**/
   function get_tareas_pendienetes_usuario($info){
 
@@ -1513,7 +1541,7 @@ function get_statusevent($status){
     $email_enviados_enid_service  =   $inf["email_enviados_enid_service"];
     $accesos_enid_service         =   $inf["accesos_enid_service"];
     $tareas_enid_service          =   $inf["tareas_enid_service"];
-    
+    $num_telefonico               =   $inf["numero_telefonico"];
     
 
     $style_pedientes ="style='padding:4px;background:red!important;color:white!important;'";
@@ -1547,6 +1575,11 @@ function get_statusevent($status){
     
     /**/
     
+    $num_telefonico = add_numero_telefonico($num_telefonico);
+    $flag_notificaciones = $flag_notificaciones + $num_telefonico["flag"];
+    $lista_pendientes .= $num_telefonico["html"]; 
+    
+
       
 
   foreach ($inf["objetivos_perfil"] as $row) {

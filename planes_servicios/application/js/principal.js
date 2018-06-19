@@ -16,6 +16,7 @@ var producto_nuevo = 0;
 var envio_incluido = 0;
 var cantidad = 0;
 var seccion_recorrido = 0;
+
 $(document).ready(function() {
 	
 	set_option("is_mobile" ,$(".es_movil").val());
@@ -37,6 +38,19 @@ $(document).ready(function() {
 	$(".contenedor_busqueda_global_enid_service").hide();
 	$(".ci_facturacion").change(evalua_precio);
 	$(".cancelar_registro").click(cancelar_registro);
+	set_option("selected_2" , 0);
+	set_option("selected_3" , 0);
+	set_option("selected_4" , 0);
+	set_option("selected_5" , 0);
+	set_option("selected_6" , 0);
+	set_option("selected_7" , 0);
+
+	set_option("primer_nivel", 0);
+	set_option("segundo_nivel", 0);
+	set_option("tercer_nivel", 0);
+	set_option("cuarto_nivel", 0);
+	set_option("quinto_nivel", 0);
+	
 });
 /**/
 function cancelar_carga_imagen(){
@@ -51,13 +65,15 @@ function carga_servicios() {
 
 	$(".texto_ventas_titulo").show();
 	$(".contenedor_busqueda").show();
+
 	url = "../tag/index.php/api/producto/servicios_empresa/format/json/";
+	orden =  $("#orden").val();	
 	data_send = {
 		"q" : get_q(),
 		"id_clasificacion" : get_option("id_clasificacion"),
-		"page" : get_option("page")
+		"page" : get_option("page"),
+		"order": orden
 	}
-
 	$.ajax({
 		url : url,
 		type : "GET",
@@ -847,50 +863,124 @@ function simula_envio(e) {
 
 	costo = $(".costo").val();
 	next =  (get_option("modalidad") == 0 && costo == 0)?0:1; 
-
+	
 	if (next) {
-
 		showonehideone(".contenedor_categorias", ".contenedor_nombre");
 		$(".contenedor_top").hide();
 		set_nombre_servicio($(".nuevo_producto_nombre").val());
 		set_costo(costo);
 		$(".extra_precio").text("");		
-		carga_listado_categorias();		
+		verifica_existencia_categoria();
 	}else{
 		$("#costo").css("border" , "1px solid rgb(13, 62, 86)");
 		$(".extra_precio").text("INGRESA EL PRECIO DEL PRODUCTO");
 	}
 	e.preventDefault();
 }
+function verifica_existencia_categoria(){
+	
+	
+	var url ="../base/index.php/api/servicio/verifica_existencia_clasificacion/format/json/";	
+	nombre =  $(".nuevo_producto_nombre").val();
+	data_send =  {clasificacion : nombre , servicio : get_option("modalidad")};
+	$.ajax({
+		url : url,
+		type : "GET",
+		data : data_send,
+		beforeSend : function() {
+			
+		}
+	}).done(listar_categorias);
+
+	
+}
+function listar_categorias(data){
+	
+	
+
+	if (data.total >0) {
+		cat =  data.categorias;
+		if (cat[1].nivel != undefined && cat[1].nivel ==  1) {
+			data =  cat;
+			for(var a in data ){
+				nivel =  parseInt(data[a].nivel);
+				id_clasificacion =  parseInt(data[a].id_clasificacion); 
+			
+				switch(nivel) {
+				    case 1:		 				 					 		
+				    	set_option("selected_1" , 1);
+				    	set_option("selected_num_1" , id_clasificacion);					    	
+				 		carga_listado_categorias();    
+						set_option("padre" , id_clasificacion);			 	
+						
+				        break;
+
+				    case 2:
+				  		set_option("selected_2" , 1);
+				    	set_option("selected_num_2" , id_clasificacion);				
+				  		carga_listado_categorias_segundo_nivel();      
+				  		set_option("padre" , id_clasificacion);			 		
+				  		set_option("segundo_nivel" , id_clasificacion);		
+				        break;
+
+				    case 3:
+				    	set_option("selected_3" , 1);
+				    	set_option("selected_num_3" , id_clasificacion);				
+				  		carga_listado_categorias_tercer_nivel();
+				  		set_option("padre" , id_clasificacion);			 				    	
+				  		set_option("tercer_nivel" , id_clasificacion);		
+				        break;
+
+				    case 4:
+				    	set_option("selected_4" , 1);
+				    	set_option("selected_num_4" , id_clasificacion);				
+				  		carga_listado_categorias_cuarto_nivel();
+				  		set_option("padre" , id_clasificacion);			 				    	
+				  		set_option("cuarto_nivel" , id_clasificacion);		
+				        break;
+
+				    default:
+				        
+				}		
+
+			}
+		}else{
+			carga_listado_categorias();		
+		}
+	}else{
+		carga_listado_categorias();		
+	}
+	
+	
+}
 /**/
 function get_nombre_servicio() {
 	return nombre_servicio;
 }
-/***/
+/**/
 function set_nombre_servicio(n_nombre_servicio) {
 	nombre_servicio = n_nombre_servicio;
 	$(".nombre_producto").val(n_nombre_servicio);
 }
 function clean_data_categorias(){
 
-	/**/
 	$(".segundo_nivel_seccion").empty();
 	$(".tercer_nivel_seccion").empty();
 	$(".cuarto_nivel_seccion").empty();
 	$(".quinto_nivel_seccion").empty();
-	$(".sexto_nivel_seccion").empty();
-	
-	set_option("nivel" , "primer_nivel");
+	$(".sexto_nivel_seccion").empty();	
+	set_option("nivel" , 1);	
 	set_option("padre", 0);
 	showonehideone(".contenedor_categorias_servicios", ".contenedor_agregar_servicio_form");
-	//
 }
 /**/
 function carga_listado_categorias() {
 
+	nombre =  $(".nuevo_producto_nombre").val();
 	clean_data_categorias();	
-	data_send = {"modalidad" : get_option("modalidad"),"padre" : get_option("padre"),"nivel" : get_option("nivel"),"is_mobile": get_option("is_mobile")};
+	data_send = {"modalidad" : get_option("modalidad"), "padre" : 0, "nivel" : get_option("nivel"), "is_mobile": get_option("is_mobile"), nombre:nombre};
 	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";
+	
 	$.ajax({
 		url : url,
 		type : "GET",
@@ -898,36 +988,49 @@ function carga_listado_categorias() {
 		beforeSend : function() {
 			show_load_enid(".primer_nivel_seccion", "Cargando ... ", 1);
 		}
-	}).done(function(data) {
-		
-		llenaelementoHTML(".primer_nivel_seccion", data);		
-		$(".primer_nivel_seccion .primer_nivel").change(carga_listado_categorias_segundo_nivel);		
-		$(".nueva_categoria_producto").click(agregar_categoria_servicio);
-		add_cancelar_movil();
-
-	}).fail(function() {
-		show_error_enid(".primer_nivel_seccion","Error ... al cargar portafolio.");
-	});
+	}).done(muestra_p_nivel);
 	
 }
-/**/
-function carga_listado_categorias_segundo_nivel(e) {
+function muestra_p_nivel(data){
+
+	llenaelementoHTML(".primer_nivel_seccion", data);		
+	if (get_option("selected_1") == 1) {
+		$(".nivel_1 option[value='"+get_option("selected_num_1") +"']").attr("selected", true);		
+	}
+
+	set_option("primer_nivel" ,  $(".nivel_1 option").val());
 	
+
+	$(".primer_nivel_seccion .nivel_1").change(carga_listado_categorias_segundo_nivel);		
+	$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+	add_cancelar_movil();
+}
+/**/
+function carga_listado_categorias_segundo_nivel() {
+
+
+	set_option("nivel" , 2);	
 	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";
-	set_option("padre" , padre);	
-	set_option("nivel" , "segundo_nivel");
+	
+	if (get_option("selected_2") == 0) {		
+		n_padre = $(".nivel_1 option:selected").val();		
+		set_option("padre" , n_padre);		
+	}
+	set_option("primer_nivel" , $(".nivel_1 option:selected").val());
+
+
 	$(".segundo_nivel_seccion").empty();
 	$(".tercer_nivel_seccion").empty();
 	$(".cuarto_nivel_seccion").empty();
 	$(".quinto_nivel_seccion").empty();
 	$(".sexto_nivel_seccion").empty();
+
 	data_send = {
 		"modalidad" : get_option("modalidad"),
 		"padre" : get_option("padre"),
 		"nivel" : get_option("nivel"),
 		"is_mobile": get_option("is_mobile")
 	};
-
 	$.ajax({
 		url : url,
 		type : "GET",
@@ -935,38 +1038,43 @@ function carga_listado_categorias_segundo_nivel(e) {
 		beforeSend : function() {
 			show_load_enid(".segundo_nivel_seccion", "Cargando ... ", 1);
 		}
-	}).done(function(data) {
-			
-			llenaelementoHTML(".segundo_nivel_seccion", data);
-			$(".segundo_nivel_seccion .segundo_nivel").change(carga_listado_categorias_tercer_nivel);
-			$(".nueva_categoria_producto").click(agregar_categoria_servicio);
-			recorrepage(".segundo_nivel_seccion");
-			add_cancelar_movil();
-
-
-	}).fail(function() {
-			show_error_enid(".segundo_nivel_seccion","Error ... al cargar portafolio.");
-	});
+	}).done(muestra_s_nivel);
 
 }
+function muestra_s_nivel(data){
+
+	llenaelementoHTML(".segundo_nivel_seccion", data);
+	if (get_option("selected_2") == 1) {		
+		$(".nivel_2 option[value='"+get_option("selected_num_2") +"']").attr("selected", true);
+	}
+	set_option("segundo_nivel" , $(".nivel_2 option:selected").val());
+
+	$(".segundo_nivel_seccion .nivel_2").change(carga_listado_categorias_tercer_nivel);
+	$(".nueva_categoria_producto").click(agregar_categoria_servicio);	
+	add_cancelar_movil();
+}
 /**/
-function carga_listado_categorias_tercer_nivel(e) {
-
-	padre = e.target.value;
-	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";
-	set_option("padre" , padre);	
-	set_option("nivel" , "tercer_nivel");
-	
-	data_send = {
-		"modalidad" : get_option("modalidad"),
-		"padre" : get_option("padre"),
-		"nivel" : get_option("nivel"),
-		"is_mobile": get_option("is_mobile")
-	};
-
+function carga_listado_categorias_tercer_nivel() {
 	$(".cuarto_nivel_seccion").empty();
 	$(".quinto_nivel_seccion").empty();
 	$(".sexto_nivel_seccion").empty();
+	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";	
+	set_option("nivel" , 3);
+
+	if (get_option("selected_3") == 0) {		
+		n_padre= $(".nivel_2 option:selected").val();		
+		set_option("padre" , n_padre);
+	}
+	
+	set_option("segundo_nivel" , $(".nivel_2 option:selected").val());
+
+	data_send = {
+		"modalidad" : get_option("modalidad"),
+		"padre" 	: get_option("padre"),
+		"nivel" 	: get_option("nivel"),
+		"is_mobile"	: get_option("is_mobile")
+	};
+
 
 	$.ajax({
 		url : url,
@@ -975,27 +1083,34 @@ function carga_listado_categorias_tercer_nivel(e) {
 		beforeSend : function() {
 			show_load_enid(".tercer_nivel_seccion", "Cargando ... ", 1);
 		}
-	}).done(function(data) {
-
-		llenaelementoHTML(".tercer_nivel_seccion", data);
-		$(".tercer_nivel_seccion .tercer_nivel").change(carga_listado_categorias_cuarto_nivel);
-		$(".nueva_categoria_producto").click(agregar_categoria_servicio);
-		recorrepage(".tercer_nivel_seccion");
-		add_cancelar_movil();
-	}).fail(function() {
-		show_error_enid(".tercer_nivel_seccion","Error ... al cargar portafolio.");
-	});
+	}).done(muestra_t_nivel);
 
 }
-/**/
-function carga_listado_categorias_cuarto_nivel(e) {
+function muestra_t_nivel(data){
 
-	padre = e.target.value;
-	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";
-	set_option("padre" , padre);
-	set_option("nivel" ,"cuarto_nivel");
+	llenaelementoHTML(".tercer_nivel_seccion", data);
+
+	if (get_option("selected_3") == 1 ) {		
+		$(".nivel_3 option[value='"+get_option("selected_num_3") +"']").attr("selected", true);
+	}
+	$(".tercer_nivel_seccion .nivel_3").change(carga_listado_categorias_cuarto_nivel);	
+	$(".nueva_categoria_producto").click(agregar_categoria_servicio);	
+	add_cancelar_movil();
+}
+/**/
+function carga_listado_categorias_cuarto_nivel() {
+
+	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";	
+	set_option("nivel" ,4);
 	$(".quinto_nivel_seccion").empty();
 	$(".sexto_nivel_seccion").empty();
+
+	if (get_option("selected_4") == 0) {		
+		n_padre= $(".nivel_3 option:selected").val();		
+		set_option("padre" , n_padre);
+	}
+	set_option("tercer_nivel" , $(".nivel_3 option:selected").val());
+
 
 	data_send = {
 		"modalidad" : get_option("modalidad"),
@@ -1011,31 +1126,33 @@ function carga_listado_categorias_cuarto_nivel(e) {
 		beforeSend : function() {
 			show_load_enid(".cuarto_nivel_seccion", "Cargando ... ", 1);
 		}
-	}).done(
-			function(data) {
-
-				llenaelementoHTML(".cuarto_nivel_seccion", data);
-				$(".cuarto_nivel_seccion .cuarto_nivel").change(carga_listado_categorias_quinto_nivel);
-				$(".nueva_categoria_producto").click(agregar_categoria_servicio);
-				recorrepage(".cuarto_nivel_seccion");
-				add_cancelar_movil();
-
-			}).fail(
-			function() {
-				show_error_enid(".cuarto_nivel_seccion",
-						"Error ... al cargar portafolio.");
-			});
+	}).done(muestras_c_nivel);
 
 }
-/**/
-function carga_listado_categorias_quinto_nivel(e) {
+function muestras_c_nivel(data){
 
-	padre = e.target.value;
+	llenaelementoHTML(".cuarto_nivel_seccion", data);
+	if (get_option("selected_4") == 1) {		
+		$(".nivel_4 option[value='"+get_option("selected_num_4") +"']").attr("selected", true);
+	}
+	$(".cuarto_nivel_seccion .nivel_4").change(carga_listado_categorias_quinto_nivel);
+	$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+	recorrepage(".cuarto_nivel_seccion");
+	add_cancelar_movil();
+}
+/**/
+function carga_listado_categorias_quinto_nivel() {
+
+	
 	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";
 	set_option("padre" , padre);
-	set_option("nivel" , "quinto_nivel");
-	$(".sexto_nivel_seccion").empty();
-
+	set_option("nivel" , 5);
+	$(".sexto_nivel_seccion").empty();	
+	if (get_option("selected_5") == 0) {		
+		n_padre= $(".nivel_4 option:selected").val();		
+		set_option("padre" , n_padre);
+	}
+	set_option("cuarto_nivel" , $(".nivel_4 option:selected").val());
 	data_send = {
 		"modalidad" : get_option("modalidad"),
 		"padre" : get_option("padre"),
@@ -1050,25 +1167,24 @@ function carga_listado_categorias_quinto_nivel(e) {
 		beforeSend : function() {
 			show_load_enid(".quinto_nivel_seccion", "Cargando ... ", 1);
 		}
-	}).done(function(data) {
-
-		llenaelementoHTML(".quinto_nivel_seccion", data);
-		$(".quinto_nivel_seccion .quinto_nivel").change(carga_listado_categorias_sexto_nivel);
-		$(".nueva_categoria_producto").click(agregar_categoria_servicio);
-		recorrepage(".quinto_nivel_seccion");
-		add_cancelar_movil();
-
-	}).fail(function() {
-		show_error_enid(".quinto_nivel_seccion","Error ... al cargar portafolio.");
-	});
+	}).done(muestra_q_nivel);
 
 }
-function carga_listado_categorias_sexto_nivel(e) {
+/**/
+function muestra_q_nivel(data){
 
-	padre = e.target.value;
+	llenaelementoHTML(".quinto_nivel_seccion", data);
+	$(".quinto_nivel_seccion .nivel_5").change(carga_listado_categorias_sexto_nivel);
+	$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+	recorrepage(".quinto_nivel_seccion");
+	add_cancelar_movil();
+}
+/**/
+function carga_listado_categorias_sexto_nivel() {
+	
 	url = "../base/index.php/api/servicio/lista_categorias_servicios/format/json/";
 	set_option("padre" , padre);
-	set_option("nivel","sexto_nivel");
+	set_option("nivel",6);
 	$(".sexto_nivel").empty();
 	data_send = {
 		"modalidad" : get_option("modalidad"),
@@ -1076,7 +1192,7 @@ function carga_listado_categorias_sexto_nivel(e) {
 		"nivel" : get_option("nivel"),
 		"is_mobile": get_option("is_mobile")
 	};
-
+	set_option("quinto_nivel" , $(".nivel_5 option:selected").val());
 	$.ajax({
 		url : url,
 		type : "GET",
@@ -1084,15 +1200,15 @@ function carga_listado_categorias_sexto_nivel(e) {
 		beforeSend : function() {
 			show_load_enid(".sexto_nivel_seccion", "Cargando ... ", 1);
 		}
-	}).done(function(data) {
-		llenaelementoHTML(".sexto_nivel_seccion", data);
-		recorrepage(".sexto_nivel_seccion");
-		$(".nueva_categoria_producto").click(agregar_categoria_servicio);
-		add_cancelar_movil();
-	}).fail(function() {
-		show_error_enid(".sexto_nivel_seccion","Error ... al cargar portafolio.");
-	});
+	}).done(muestra_sexo_nivel);
 
+}
+/**/
+function muestra_sexo_nivel(data){
+	
+	llenaelementoHTML(".sexto_nivel_seccion", data);	
+	$(".nueva_categoria_producto").click(agregar_categoria_servicio);
+	add_cancelar_movil();	
 }
 /**/
 function agregar_categoria_servicio(e){
@@ -1110,40 +1226,43 @@ function agregar_categoria_servicio(e){
 function registra_nuevo_servicio() {
 
 	url = "../base/index.php/api/servicio/nuevo/format/json/";
-	set_valores_categorias();	
-	data_send = {
-		"nombre_servicio" : get_nombre_servicio(),
-		"flag_servicio" : get_option("modalidad"),
-		"precio" : get_costo(),
+
+	
+	var  data_send = {
+		"nombre_servicio" 	: get_nombre_servicio(),
+		"flag_servicio" 	: get_option("modalidad"),
+		"precio" 			: get_costo(),
 		"ciclo_facturacion" : get_option("id_ciclo_facturacion"),
-		"primer_nivel" : get_categoria_primer_nivel(),
-		"segundo_nivel" : get_categoria_segundo_nivel(),
-		"tercer_nivel" : get_categoria_tercer_nivel(),
-		"cuarto_nivel" : get_categoria_cuarto_nivel(),
-		"quinto_nivel" : get_categoria_quinto_nivel()
-	};
-		
+		"primer_nivel" 		: get_option("primer_nivel"),
+		"segundo_nivel" 	: get_option("segundo_nivel"),
+		"tercer_nivel" 		: get_option("tercer_nivel"),
+		"cuarto_nivel" 		: get_option("cuarto_nivel"),
+		"quinto_nivel" 		: get_option("quinto_nivel")
+	}
+
+	console.log(data_send);
 	$.ajax({
 		url : url,
 		type : "POST",
 		data : data_send,
 		beforeSend : function(){}
-	}).done(function(data) {
+	}).done(status_registro);	
+}
+/**/
+function status_registro(data){
 
-		if (data.registro!=0){			
-			if (data.registro.servicio>0) {
-				set_option("servicio", data.registro.servicio);
-				carga_informacion_servicio(1);
-				document.getElementById("form_nombre_producto").reset();
-				$("#tab_productividad").tab("show");
-				$(".btn_serv").tab("show");
-				$(".btn_agregar_servicios").show();
-			}else{				
-				/**/
-				redirect("../planes_servicios/?action=nuevo&mensaje="+data.registro.mensaje);
-			}
-		}		
-	}).fail(function() {show_error_enid(".place_registro_servicio", "Error ... ");});
+	if (data.registro!=0){			
+		if (data.registro.servicio>0) {
+			set_option("servicio", data.registro.servicio);
+			carga_informacion_servicio(1);
+			document.getElementById("form_nombre_producto").reset();
+			$("#tab_productividad").tab("show");
+			$(".btn_serv").tab("show");
+			$(".btn_agregar_servicios").show();
+		}else{								
+			redirect("../planes_servicios/?action=nuevo&mensaje="+data.registro.mensaje);				
+		}
+	}			
 }
 /**/
 function set_costo(n_costo) {
@@ -1153,55 +1272,7 @@ function set_costo(n_costo) {
 function get_costo() {
 	return costo;
 }
-/**/
-function set_valores_categorias() {
 
-	set_categoria_primer_nivel(0);
-	set_categoria_segundo_nivel(0);
-	set_categoria_tercer_nivel(0);
-	set_categoria_cuarto_nivel(0);
-	set_categoria_quinto_nivel(0);	
-}
-/**/
-function set_categoria_primer_nivel(nivel) {
-	categoria_primer_nivel = nivel;
-}
-/**/
-function get_categoria_primer_nivel() {
-	return categoria_primer_nivel;
-}
-/**/
-function set_categoria_segundo_nivel(nivel) {
-	categoria_segundo_nivel = nivel;
-}
-/**/
-function get_categoria_segundo_nivel() {
-	return categoria_segundo_nivel;
-}
-/**/
-function set_categoria_tercer_nivel(nivel) {
-	categoria_tercer_nivel = nivel;
-}
-/**/
-function get_categoria_tercer_nivel() {
-	return categoria_tercer_nivel;
-}
-/**/
-function set_categoria_cuarto_nivel(nivel) {
-	categoria_cuarto_nivel = nivel;
-}
-/**/
-function get_categoria_cuarto_nivel() {
-	return categoria_cuarto_nivel;
-}
-/***/
-function set_categoria_quinto_nivel(nivel) {
-	categoria_quinto_nivel = nivel;
-}
-/**/
-function get_categoria_quinto_nivel() {
-	return categoria_quinto_nivel;
-}
 /**/
 function get_q_action() {
 	return q_action;
@@ -1437,9 +1508,9 @@ function agrega_color_servicio(e) {
 	color = e.target.id;
 	set_option("color", color);
 
-	data_send = $.param({
-		"servicio" : get_option("servicio"),
-		"color" : get_option("color")
+	data_send 		= $.param({
+		"servicio" 	: get_option("servicio"),
+		"color" 	: get_option("color")
 	});
 	url = "../base/index.php/api/servicio/color/format/json/";
 
@@ -1485,8 +1556,8 @@ function elimina_color_servicio(e) {
 	color = e.target.id;
 	set_option("color", color);
 	data_send = $.param({
-		"servicio" : get_option("servicio"),
-		"color" : get_option("color")
+		"servicio" 	: get_option("servicio"),
+		"color" 	: get_option("color")
 	});
 	url = "../base/index.php/api/servicio/color/format/json/";
 
@@ -1559,7 +1630,7 @@ function valida_action_inicial(){
 function add_cancelar_movil(){
 
 	$(".add_cancelar").empty();
-	console.log($(".nueva_categoria_producto").val());
+	
 	if (es_movil ==  1 && $(".nueva_categoria_producto").val() !== undefined) {
 		btn_cancelar =  "<div class='cancelar_registro'>REGRESAR</div>";
 		llenaelementoHTML(".add_cancelar" , btn_cancelar);
@@ -1589,7 +1660,7 @@ function muestra_sugerencias_meta_key_words(data){
 	$.each( tag_servicio_registrados, function(i, val){
 	    arr_registros.push( $(val).attr('id') );
 	});
-	/**/
+
 	if (arr_registros.length > 0){		
 		var tag_sugerencias = $('.tag_catalogo');				
 		var arr_sugerencias = [];	 

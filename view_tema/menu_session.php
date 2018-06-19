@@ -12,7 +12,7 @@
             </li>
             <li class="upper-links">
                 <a  class="links white" 
-                    href="../contacto/#envio_msj">
+                    href="../contact/#envio_msj">
                     <i class="fa fa-paper-plane">
                     </i>
                     Envía mensaje

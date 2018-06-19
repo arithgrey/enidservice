@@ -106,15 +106,33 @@ class Servicio extends REST_Controller{
   /**/
   function lista_categorias_servicios_GET(){
     
-    $param =  $this->get();
+    $param =  $this->get();    
     $data["info_categorias"] =  $this->serviciosmodel->get_categorias_servicios($param);
     $data["nivel"]=  $param["nivel"];
+
     if(count($data["info_categorias"]) > 0){
+
+        $nivel=  "nivel_".$data["nivel"];                        
+        $config  = array(
+          'class' => 'num_clasificacion '.$nivel.' selector_categoria ' ,
+          'size'  =>'20' );
+
         if ($param["is_mobile"] ==  1) {
-          $this->load->view("categoria/principal_phone",  $data);    
-        }else{          
-          $this->load->view("categoria/principal_web",  $data);    
+            
+            $config  = array(            
+            'class'   => 'num_clasificacion '.$nivel.' 
+                          num_clasificacion_phone selector_categoria ' 
+            );  
         }
+
+        $info_categorias =  $data["info_categorias"];                
+        $select  =  select_enid($info_categorias , 
+                            "nombre_clasificacion" , 
+                            "id_clasificacion" ,  
+                            $config);  
+                  
+        $this->response($select);  
+
         
     }else{
         $data["padre"] = $param["padre"];        
@@ -124,7 +142,55 @@ class Servicio extends REST_Controller{
         }else{
           $this->load->view("categoria/seleccionar_categoria" , $data);  
         }
-    }  
+    }
+
+  }
+  /**/
+  function verifica_existencia_clasificacion_GET(){
+
+    $param          =  $this->get();
+    $coincidencias  =  $this->get_coincidencias_busqueda($param);  
+    $this->response($coincidencias);
+   
+  }
+  /**/
+
+  /**/
+  private function get_coincidencias_busqueda($param){
+    $coincidencia =  $this->serviciosmodel->get_coincidencia($param);
+    $res =  [];
+    $z =0;
+    if (count($coincidencia)>0) {
+        $coincidencia =  $coincidencia[0];
+        $a = $coincidencia["nivel"];
+        $res[$a] = $coincidencia;
+        
+        $z =0;
+        $nueva_coincidencia  = $coincidencia;
+        while ( $a > 0) {
+          
+          
+          if ($z == 0) {                      
+            $res[$a] = $coincidencia;            
+
+          }else{          
+
+              $n = 
+              $this->serviciosmodel->get_clasificacion_padre_nivel($nueva_coincidencia , 
+                $a);
+              if (count($n)>0) {
+                $res[$a] = $n[0];     
+                $nueva_coincidencia =  $n[0];
+              }            
+          }
+          $z ++;
+          $a --;  
+        }       
+    }        
+
+    $response["total"]=  count($res);  
+    $response["categorias"]=  $res;
+    return $response;
   }
   /**/
   function clasifiacion_GET(){
@@ -153,7 +219,8 @@ class Servicio extends REST_Controller{
       if($this->input->is_ajax_request()){         
         $param =  $this->post();        
         
-        $response["registro"] = (ctype_digit($param["precio"])&& $param["precio"] >= 0)?
+        $response["registro"] = 
+        (ctype_digit($param["precio"])&& $param["precio"] >= 0)?
         $this->registra_data_servicio($param):0;                        
         $this->response($response);  
         
@@ -184,21 +251,27 @@ class Servicio extends REST_Controller{
   /**/
   function create_tags($param){
 
-    /**/
-      $primer_nivel =  $param["primer_nivel"];
-      $segundo_nivel = $param["segundo_nivel"];
-      $tercer_nivel = $param["tercer_nivel"];
-      $cuarto_nivel =  $param["cuarto_nivel"];
-      $quinto_nivel =  $param["quinto_nivel"];
-      /**/
-      $nombre_servicio =  $param["nombre_servicio"];
+        /**/
+        $primer_nivel  = 
+        (array_key_exists("primer_nivel", $param))?$param["primer_nivel"]:0;
 
-      
+        $segundo_nivel =   
+        (array_key_exists("segundo_nivel", $param))?$param["segundo_nivel"]:0;
+        
+        $tercer_nivel  =   
+        (array_key_exists("tercer_nivel", $param))?$param["tercer_nivel"]:0;
+        
+        $cuarto_nivel  =   
+        (array_key_exists("cuarto_nivel", $param))?$param["cuarto_nivel"]:0;
+        
+        $quinto_nivel  =   
+        (array_key_exists("quinto_nivel", $param))?$param["quinto_nivel"]:0;
+        
+      /**/
+      $nombre_servicio =  $param["nombre_servicio"];      
       $valor_precio =  get_info_variable($param , "precio" );
 
-
       
-      /**/
       $lista_clasificaciones = [$primer_nivel , 
         $segundo_nivel , 
         $tercer_nivel , 

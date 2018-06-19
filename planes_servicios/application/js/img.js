@@ -13,9 +13,10 @@ function carga_form_img(){
 				show_load_enid(".place_img_producto" , "Cargando ... ", 1 );	
 			}
 		}).done(function(data){
-			/**/
+			
 			llenaelementoHTML(".place_img_producto" , data);											
-			 $(".imagen_img").change(upload_imgs_enid_pre);
+			$(".imagen_img").change(upload_imgs_enid_pre);
+            recorrepage(".cancelar_carga_imagen");
 
 		}).fail(function(){
 			show_error_enid(".place_img_producto" , "Error ... ");
@@ -60,7 +61,8 @@ function registra_img_servicio(e){
         
         show_response_ok_enid(".place_load_img" , "Imagen cargada con éxito" );                         
         carga_informacion_servicio(1);        
-        /**/
+        /**/                
+        set_option("seccion_a_recorrer", ".contenedor_global_servicio");
     }).fail(function(){
         show_error_enid(".place_load_img" , "Falla al actualizar al cargar la imagen" );   
         carga_informacion_servicio(1);

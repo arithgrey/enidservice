@@ -18,9 +18,8 @@ class Home extends CI_Controller{
     function index(){           
         $param    =  $this->input->get();
         $param["id_clasificacion"]  =  get_info_variable($param , "q2" );               
-        $param["vendedor"] =  get_info_variable($param , "q3" );
-        
-        $q=  ( is_array($param)  && array_key_exists("q", $param)) ?$param["q"] :"";  
+        $param["vendedor"] =  get_info_variable($param , "q3" );        
+        $q=  ( is_array($param)  && array_key_exists("q", $param))?$param["q"] :"";  
         $param["num_hist"]= get_info_servicio($q);                
         $this->load_data($param);    
         
@@ -38,6 +37,8 @@ class Home extends CI_Controller{
         $data_send["vendedor"] = $param["vendedor"];
         $data_send["id_clasificacion"] =  $param["id_clasificacion"];
         $data_send["extra"]= $param;
+        $data_send["order"] = 
+        (array_key_exists("order", $param))?$param["order"]:11;
         $per_page = 12;
         
         $data_send["resultados_por_pagina"] =$per_page;
@@ -76,9 +77,10 @@ class Home extends CI_Controller{
             
             $config_paginacion["totales_elementos"] =  $totales_elementos;
             $config_paginacion["per_page"] = $per_page;
-            $config_paginacion["q"] =  $q;
+            $config_paginacion["q"]  =  $q;
             $config_paginacion["q2"] = $param["id_clasificacion"];
             $config_paginacion["q3"] = $param["vendedor"];
+            $config_paginacion["order"] = $data_send["order"];
 
             $config_paginacion["page"] = get_info_variable($param , "page" );            
             $data["paginacion"]= $this->create_pagination($config_paginacion);            
@@ -91,8 +93,10 @@ class Home extends CI_Controller{
                             "../css_tema/template/producto.css"
                             ];
 
+            $data["js"]  = [base_url("application/js/principal.js")];
 
-
+            $data["filtros"] =  $this->get_orden();
+            $data["order"]   = $config_paginacion["order"];
             $this->principal->show_data_page($data , 'home');
             
         }else{
@@ -165,7 +169,7 @@ class Home extends CI_Controller{
             $id_clasificacion =  $info[$a]["id_clasificacion"];            
             if($id_clasificacion > 0){
 
-                $info_clasificacion =  $this->get_info_clasificacion($id_clasificacion);    
+                $info_clasificacion =  $this->get_info_clasificacion($id_clasificacion);
                 array_push($info_bloque, $info_clasificacion);
             }
         }
@@ -186,7 +190,7 @@ class Home extends CI_Controller{
     }
     /**/
     private function carga_data_clasificaciones_busqueda(){
-        $clasificaciones_departamentos =   $this->get_departamentos("nosotros");        
+        $clasificaciones_departamentos =   $this->get_departamentos("");        
         return $clasificaciones_departamentos;        
     }
     /**/
@@ -264,4 +268,18 @@ class Home extends CI_Controller{
         return json_decode($response , true );
     }
     /**/
+    private function get_orden(){
+        $response =["ORDENAR POR",
+                    "Las novedades primero",
+                    "Lo     más vendido",
+                    "Los más votados",
+                    "Los más populares ",
+                    "Precio [de mayor a menor]",
+                    "Precio [de menor a mayor]",
+                    "Nombre del producto [A-Z]",
+                    "Nombre del producto [Z-A]",
+                    "Sólo servicios",
+                    "Sólo productos"];
+        return $response;
+    }
 }

@@ -348,6 +348,7 @@ class Home extends CI_Controller{
 
         $nuevo_tiempos_sat =  ($fecha->format("D") == "Sat")?5:0;
         $nuevo_tiempo_sun =  ($fecha->format("D") == "Sun")?4:0;
+        $fecha_entrega_promedio ="";
         if ($nuevo_tiempo_sun >0 || $nuevo_tiempos_sat >0 ) {        
             if ($nuevo_tiempos_sat>0) {
                 $fecha->add(new DateInterval('P'.$nuevo_tiempos_sat.'D'));

@@ -55,5 +55,6 @@ $config['compress_output'] = FALSE;
 $config['time_reference'] = 'America/Mexico_City';
 $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
+$config["api_google"] = "AIzaSyBLLYZa_q1UEM89apcpSY6QpHmqUovQ_1E";
 
 date_default_timezone_set("America/Mexico_City");

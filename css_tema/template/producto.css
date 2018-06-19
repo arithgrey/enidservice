@@ -1,8 +1,8 @@
-.imagen_producto{
+    .imagen_producto{
         width: 95%;height: 98%;margin-top:10px;
     }
     .contenedor_principal_imagen_producto{
-        height: 280px;
+        height: 330px;
     }
     .contenedor_principal_informacion_producto{
         height: 280px;   

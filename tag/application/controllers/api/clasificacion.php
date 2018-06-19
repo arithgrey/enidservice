@@ -18,7 +18,9 @@ class clasificacion extends REST_Controller{
     function primer_nivel_GET(){
 
         $param =  $this->get();
-        $primer_nivel =  $this->clasificacion_model->get_clasificaciones_primer_nivel($param);        
+        $param["nivel"] =1;
+        $primer_nivel =  
+        $this->clasificacion_model->get_clasificaciones_por_nivel($param);        
         $data["clasificaciones"] 
         = $this->clasificacion_model->get_clasificaciones_segundo($primer_nivel);        
         $this->load->view("clasificaciones/menu" , $data);
@@ -50,10 +52,10 @@ class clasificacion extends REST_Controller{
     function categorias_destacadas_GET(){
         
         $param = $this->get();
-        $data_complete["clasificaciones"]=$this->clasificacion_model->get_clasificaciones_destacadas($param);
+        $data_complete["clasificaciones"]=
+        $this->clasificacion_model->get_clasificaciones_destacadas($param);
         $data_complete["nombres_primer_nivel"] =
         $this->clasificacion_model->get_clasificaciones_primer_nivel_nombres($param);
-        
         $this->response($data_complete);
     }    
     /**/

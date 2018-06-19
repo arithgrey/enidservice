@@ -124,7 +124,7 @@
         <li>&nbsp;
         </li>
         <li>
-            <a class='black link_menu_footer' href="../contacto/#envio_msj">
+            <a class='black link_menu_footer' href="../contact/#envio_msj">
                - Servicio al cliente
             </a>
         </li>        

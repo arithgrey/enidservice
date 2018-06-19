@@ -18,7 +18,11 @@
                         tercer_nivel,  
                         cuarto_nivel,  
                         quinto_nivel  
-                     FROM servicio WHERE id_servicio = $id_servicio LIMIT 1";
+                     FROM servicio 
+                     WHERE 
+                     id_servicio = $id_servicio
+                     ORDER BY  deseado , vista  DESC
+                    LIMIT 1";
         $result = $this->db->query($query_get);
         return $result->result_array();
     }
@@ -30,15 +34,16 @@
     	return $this->options[$key];
     }
     /**/
-    function get_clasificaciones_primer_nivel($param){
+    function get_clasificaciones_por_nivel($param){
 
+        $nivel =  $param["nivel"];
         $query_get = "SELECT 
                         id_clasificacion
                         ,nombre_clasificacion                                                
                       FROM 
                         clasificacion 
                       WHERE 
-                      primer_nivel =1";
+                      nivel = '".$nivel."' ";
                       $result =  $this->db->query($query_get);
                       return $result->result_array();
     }
@@ -190,7 +195,7 @@
     /**/
     function get_clasificaciones_primer_nivel_nombres($param){
         
-        $query_get ="SELECT nombre_clasificacion ,id_clasificacion , flag_servicio  FROM clasificacion WHERE primer_nivel=1";
+        $query_get ="SELECT nombre_clasificacion ,id_clasificacion , flag_servicio  FROM clasificacion WHERE nivel=1";
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }

@@ -215,7 +215,10 @@
 
 
 
-
+<input 
+type="hidden" 
+class="qservicio"
+value="<?=$nombre_servicio?>">
 <input 
 type="hidden" 
 name="servicio" 

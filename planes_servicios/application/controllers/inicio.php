@@ -53,6 +53,7 @@ class Inicio extends CI_Controller {
                         "../css_tema/template/producto.css"
                         ];
         
+        $data["list_orden"]  = $this->get_orden();
         $this->principal->show_data_page( $data , 'home_enid');			    	        	
     }    	
     /**/
@@ -109,6 +110,20 @@ class Inicio extends CI_Controller {
             $param);
         $response =  $result->response;        
         return json_decode($response , true);
+    }
+    private function get_orden(){
+        $response =["Las novedades primero",
+                    "Lo     más vendido",
+                    "Los más votados",
+                    "Los más populares ",
+                    "Precio [de mayor a menor]",
+                    "Precio [de menor a mayor]",
+                    "Nombre del producto [A-Z]",
+                    "Nombre del producto [Z-A]",
+                    "Sólo servicios",
+                    "Sólo productos"
+                     ];
+        return $response;
     }
     
 }

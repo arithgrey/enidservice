@@ -6,7 +6,8 @@
         <div class='col-lg-10'>            
             <div class="tab-content">                   
                 <div class="tab-pane <?=valida_active_tab(0, $action , $considera_segundo )?> " 
-                    id='tab_servicios'>                    
+                    id='tab_servicios'>          
+
                     <?=$this->load->view("secciones/servicios");?>
                 </div>                
                 <div 

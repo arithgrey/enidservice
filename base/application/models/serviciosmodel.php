@@ -331,14 +331,16 @@
     function get_categorias_servicios($param){
         
         $modalidad =  $param["modalidad"];            
+        $nivel =  $param["nivel"];            
         $padre = $param["padre"];
-        $extra =  "  padre = ".$padre ." AND flag_servicio =".$modalidad;        
-        $query_get = "SELECT 
-                        * 
-                        FROM 
-                        clasificacion
-                        WHERE 
-                        ".$extra;    
+        $extra =  "  padre = ".$padre ." 
+                        AND 
+                    flag_servicio = ".$modalidad."
+                    AND  
+                    nivel = ".$nivel." ";      
+
+        $query_get = "SELECT * FROM clasificacion
+                    WHERE ".$extra;    
         
         $result =  $this->db->query($query_get);
         return $result->result_array();
@@ -365,12 +367,24 @@
     function create_servicio($param){
         
         $nombre_servicio =  $param["nombre_servicio"];        
-        $flag_servicio =  $param["flag_servicio"];
-        $primer_nivel  =   $param["primer_nivel"];
-        $segundo_nivel =   $param["segundo_nivel"];
-        $tercer_nivel  =   $param["tercer_nivel"];
-        $cuarto_nivel  =   $param["cuarto_nivel"];
-        $quinto_nivel  =   $param["quinto_nivel"];
+        $flag_servicio =    $param["flag_servicio"];
+        
+        $primer_nivel  = 
+        (array_key_exists("primer_nivel", $param))?$param["primer_nivel"]:0;
+
+        $segundo_nivel =   
+        (array_key_exists("segundo_nivel", $param))?$param["segundo_nivel"]:0;
+        
+        $tercer_nivel  =   
+        (array_key_exists("tercer_nivel", $param))?$param["tercer_nivel"]:0;
+        
+        $cuarto_nivel  =   
+        (array_key_exists("cuarto_nivel", $param))?$param["cuarto_nivel"]:0;
+        
+        $quinto_nivel  =   
+        (array_key_exists("quinto_nivel", $param))?$param["quinto_nivel"]:0;
+        
+
         $descripcion = "";  
         $metakeyword =  $param["metakeyword"];      
         $id_usuario = $param["id_usuario"];
@@ -859,6 +873,48 @@
                         LIMIT 1";
                         $result =  $this->db->query($query_get);
                         return $result->result_array();
+    }   
+    /**/
+    function get_coincidencia($param){
+
+        $clasificacion  =  $param["clasificacion"];
+        $servicio       =  $param["servicio"];
+        $query_get ="SELECT 
+                        id_clasificacion , 
+                        padre  ,
+                        nivel                        
+                        FROM  
+                    clasificacion 
+                        WHERE  
+                    nombre_clasificacion 
+                        LIKE  
+                        '%".$clasificacion."%' 
+                        AND 
+                        flag_servicio =  '".$servicio."'
+                    LIMIT 1";
+
+        $result =  $this->db->query($query_get);
+        return $result->result_array();            
     }
+    /**/
+    function get_clasificacion_padre_nivel($param , $nivel_actual ){
+            
+            
+        $id = $param["padre"];
+        
+        $query_get ="SELECT 
+                        id_clasificacion , padre , nivel 
+                    FROM  
+                        clasificacion 
+                    WHERE  
+                        id_clasificacion = '".$id."' 
+                        
+                    LIMIT 1";
+
+        $result =  $this->db->query($query_get);
+        return $result->result_array();               
+        
+ 
+    }    
 
 }

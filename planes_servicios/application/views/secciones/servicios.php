@@ -12,7 +12,16 @@
 			  	BUSCAR ENTRE TUS ARTÍCULOS
 			  	</div>	
 			</label>  
-			
+			<div class="col-md-4">
+					<select class="form-control" name="orden"
+					id="orden">
+                        <?php $a=1; foreach($list_orden as $row):?>
+                            <option value="<?=$a?>">
+                                <?=$row?>
+                            </option>
+                        <?php $a ++ ;endforeach;?>
+                    </select>
+			</div>
 		  <div class="col-md-4">
 		  	<div class="row">
 			  	<input 
@@ -28,8 +37,6 @@
 	</div>
 <?=end_row()?>
 <?=n_row_12()?>
-	
 		<div class="place_servicios">
-		</div>
-	
+		</div>	
 <?=end_row()?>

@@ -75,9 +75,13 @@ class productividad extends REST_Controller{
         $prm["modalidad"]               =1;
         $prm["id_usuario"]              =  $id_usuario;                            
             
-        $response["info_notificaciones"]["mensajes"] = $this->carga_mensajes_sin_leer($prm);
+        $response["info_notificaciones"]["mensajes"] = 
+        $this->carga_mensajes_sin_leer($prm);
+
         $response["id_usuario"] = $id_usuario;
         
+        $response["info_notificaciones"]["numero_telefonico"] = 
+        $this->productividad_usuario_model->verifica_registro_telefono($prm);
         
         
         switch ($id_perfil){

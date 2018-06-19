@@ -108,8 +108,33 @@
                 </div>
             </div>
             <div class="col-lg-10">
+
                 <?=n_row_12()?>
-                    <?=$paginacion?>
+                        <div class="col-md-3">
+                                
+                                <select 
+                                class="form-control order" 
+                                name="order"
+                                id="order">
+                                    <?php $a=0; foreach($filtros as $row):?>                                        
+                                        <?php if ($a ==  $order):?>
+                                            <option value="<?=$a?>" selected>
+                                                <?=$row?>
+                                            </option>
+                                        <?php else: ?>
+                                            <option value="<?=$a?>">
+                                                <?=$row?>
+                                            </option>
+                                        <?php endif;?>
+                                        
+                                    <?php $a ++ ;endforeach;?>
+                                </select>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="pull-right">
+                                <?=$paginacion?>
+                            </div>
+                        </div>                    
                 <?=end_row()?>
                 
                 <?php

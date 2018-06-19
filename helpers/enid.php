@@ -75,3 +75,19 @@ if ( ! function_exists('get_td'))
       return "<td ". $attr ." NOWRAP >". $val ."</td>";
   }
 }
+
+if ( ! function_exists('select_enid'))
+{
+  function select_enid($data , $text_option , $val ,  $attributes ='' ){
+
+      $attr =  add_attributes($attributes);   
+      $select ="<select ".$attr."> ";
+
+        foreach ($data as $row) {      
+          $select .=  "<option value='". $row[$val] ."'>". $row[$text_option]." </option>";
+        }
+
+      $select .="</select>";
+      return $select;
+  }
+}

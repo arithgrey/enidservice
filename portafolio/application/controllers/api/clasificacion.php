@@ -17,8 +17,8 @@ class Clasificacion extends REST_Controller{
     }
     /**/
     function existencia_GET(){
-        $param =  $this->get();
-        $response =  $this->clasificacion_model->count_clasificacion($param);
+        $param      =  $this->get();
+        $response   =  $this->clasificacion_model->count_clasificacion($param);
         $this->response($response);
     }
     /**/
@@ -48,7 +48,7 @@ class Clasificacion extends REST_Controller{
                     ) 
                 );
 
-            if ($param["nivel"] !== "primer_nivel") {
+            if ($param["nivel"] !== "1") {
                 $mas_nivel =  "mas_".$param["nivel"];
                 $seleccion =  "seleccion_".$param["nivel"];            
                 $response .=    "<div class='".$mas_nivel."'>

@@ -452,12 +452,13 @@
     /**/
     private function mejora_calificacion_servicio($id_servicio){
 
-      $query_update ="UPDATE servicio SET valoracion = valoracion+1 
+      $query_update ="UPDATE servicio SET deseado = deseado+2 
                       WHERE id_servicio=$id_servicio LIMIT 1";
       return $this->db->query($query_update);
     } 
     /**/
-    function get_fechas_por_ciclo_facturacion($id_ciclo_facturacion , $num_ciclos){
+    function get_fechas_por_ciclo_facturacion($id_ciclo_facturacion , 
+      $num_ciclos){
 
       
       $data_complete =[];
