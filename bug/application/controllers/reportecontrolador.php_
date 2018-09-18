@@ -1,0 +1,17 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+class Reportecontrolador extends CI_Controller {
+    function __construct(){
+        parent::__construct();
+        $this->load->helper("repo");                
+        $this->load->library('principal');    
+                              
+    }
+    function index(){  
+          
+        $data = $this->principal->val_session("Ayudanos a mejorar tu experiencia");
+        $clasificaciones_departamentos =   $this->principal->get_departamentos("nosotros");    
+        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
+        $this->principal->show_data_page( $data , 'reporte/reportes');        
+        
+    } 
+}

@@ -1,0 +1,117 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class Base extends REST_Controller{
+  private $id_usuario;
+  function __construct(){
+      parent::__construct();           
+      $this->load->model("enidmodel"); 
+      $this->load->library(lib_def());         
+      $this->id_usuario   =  $this->principal->get_session("idusuario");
+  }  
+  function departamentos_GET(){
+
+    $response = $this->enidmodel->get_departamentos();
+    $this->response($response);
+  }
+  /**/
+  function lectura_email_GET(){
+
+    $param        = $this->get();
+    $response  =  $this->enidmodel->registra_lectura_email($param);
+    $this->response($response);
+  }
+  /**/
+  function prospecto_POST(){
+    
+    $this->principal->validate_user_sesssion();
+    $param =  $this->post();
+    
+    $email                  =  filtar_correos($param);
+    $data["palabras"]       =  $email;
+    $param["lista_correos"] = $data["palabras"];      
+    $response = $this->enidmodel->registra_prospecto($param);
+    $this->response($response);    
+    /**/        
+  }
+  /**/
+  function prospectos_PUT(){  
+    
+    $this->principal->validate_user_sesssion();   
+    $param                      =  $this->put(); 
+    $param["id_usuario"]        = $this->id_usuario;    
+    $param["correos"]           = filtar_correos($param);    
+    $response                = $this->enidmodel->actualiza_contactos($param);    
+    $this->response($response );
+    
+  }
+  /**/  
+  function prospecto_PUT(){      
+      $this->principal->validate_user_sesssion();
+
+      $param =  $this->put();    
+      $param["id_usuario"] = $this->id_usuario;
+      $response = $this->enidmodel->actualiza_contacto($param);
+      $this->response($response);
+  }
+  /**/
+  function prospecto_GET()
+  {
+    $this->principal->validate_user_sesssion();
+    $param = $this->get();
+    $param["id_usuario"] =  $this->id_usuario;
+    $data["info_mail"]=  $this->enidmodel->get_registros_email($param);
+    $this->load->view("secciones/reporte_mail_registrados" , $data);
+  }
+  /*
+  function prospectos_GET(){
+      
+    $this->principal->validate_user_sesssion();
+    $param                = $this->get();
+    $param["id_usuario"]  =  $this->id_usuario;
+    
+    $num_correos_dia=  $this->enidmodel->get_num_correos_por_usuario_dia($param);
+    
+    if($num_correos_dia < 2500 ){
+
+      $data["info_registros"] =  $this->enidmodel->get_registros_disponibles($param);
+      $this->load->view("prospectos/contactos_disponibles" , $data);  
+    }else{
+      $this->response("<strong> Listo cumpliste tu meta del día!</strong>");
+    }
+    
+  }
+  */
+  /**/
+  function registros_GET()
+  {
+    $param = $this->get();
+    $data["info_mail"]=  $this->enidmodel->get_registros($param);
+    $this->load->view("secciones/lista" , $data);
+  }
+  /**/
+  function enviados_GET()
+  {
+    $param = $this->get();
+    $data["info_mail"]=  $this->enidmodel->get_enviados($param);
+    $this->load->view("secciones/lista" , $data);
+  }
+  /*
+  function nombre_usuario_PUT(){
+
+    $param                =   $this->put();        
+    $param["id_usuario"]  =   $this->id_usuario;
+    $reponse              =   $this->enidmodel->nombre_usuario($param);
+    $this->response($reponse);      
+  }
+  */
+  /**/
+  function telefono_usuario_PUT(){
+        /**/
+        $param =  $this->put();        
+        $param["id_usuario"] =  $this->id_usuario;
+        $db_reponse = $this->enidmodel->telefono_usuario($param);
+        $this->response($db_reponse);      
+  }
+  
+}
+?>

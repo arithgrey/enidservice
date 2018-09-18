@@ -1,0 +1,36 @@
+	<div >							
+					<div>
+						<span 							
+							style="background: black;padding: 5px;color: white;" >
+							1.- 
+						</span>
+						Aceptamos pagos en tiendas de autoservicio 
+						<strong>
+							(OXXO) 
+							</strong>
+							y transferencia bancaria en línea para bancos 
+							<strong>
+								BBVA Bancomer. 
+							</strong>
+						
+					 </div>
+					 <div >
+					 	<a href="<?=$url_pago_oxxo;?>">
+					 		<img src="<?=$url_request?>img_tema/pago-oxxo.jpeg" 
+					 		style="width: 100%">
+					 	</a>
+					 	<center>
+						 	<a 	href="<?=$url_pago_oxxo?>" 							
+								style="background-color: #005780 !important; 
+								color: white!important;padding: 15px;">						 	
+									 <i class="fa fa-print">
+									 </i>
+									 Imprimir órden de pago
+									 	
+								</a>
+							</center>
+					
+					 	
+					</div>
+					 
+		</div>

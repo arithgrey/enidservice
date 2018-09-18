@@ -1,0 +1,73 @@
+.acceder_btn{
+    padding: 10px;
+    background: #1040A1;
+    color: white !important;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.acceso_a_cuenta{
+  background: blue;
+  padding: 10px!important;
+}
+.acceso_a_cuenta:hover{
+  cursor: pointer;
+}
+.seccion_registro_nuevo_usuario_enid_service{
+  display: none;
+}
+.btn_soy_nuevo{
+  padding:15px;background:#1040A1;
+  color: white!important;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+.contenedor-info-ventas{display: none;}
+
+.error_login{
+  padding: 5px;
+  font-weight: bold;
+  font-size: 1em;
+  background: #e99587;
+  color: white;
+  width: 100%!important;
+}
+.recupara-pass{
+  margin-top: 30px;
+}
+.recupara-pass:hover{
+  cursor: pointer;
+  padding: 10px;
+}
+footer, .footer-extra{display: none;  }
+.menu_completo_enid_service{
+  display: none;
+}
+
+form button:hover {
+  background-color: #0d20ed;
+}
+#flipkart-navbar{
+        display: none;
+}
+#olvide-pass{
+  color:#000306!important;
+}
+.mensaje_bienvenida{
+  margin-top: 15px;background: #010c26;color: white;padding: 10px;
+}
+.registrar-cuenta{
+  font-weight: bold;
+  color: #00090f;
+}
+.registrar-cuenta:hover{
+  color: black!important;
+}
+.llamada-a-la-accion{
+  color: #0003f9!important;
+}
+@media only screen and (max-width: 768px) {
+
+        .btn_soy_nuevo_simple{
+            display: none;
+        }
+}

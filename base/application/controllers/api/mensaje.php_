@@ -1,0 +1,146 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class Mensaje extends REST_Controller{
+  private $id_usuario;
+  function __construct(){
+        parent::__construct();                                     
+        $this->load->model("mensajemodel");
+        $this->load->library(lib_def());      
+        $this->id_usuario = $this->principal->get_session("idusuario");
+  }  
+  /**/
+  function comentario_persona_usuario_POST(){
+        
+        $api = new RestClient();         
+
+        $param =  $this->post();
+        $param["id_usuario"] = $this->id_usuario;
+
+
+        $tipificacion=  $param["tipificacion"];          
+        $url = "persona/index.php/api/";    
+        $url_request=  get_url_request($url);
+        $api->set_option('base_url', $url_request);
+        $api->set_option('format', "json");
+            
+        switch($tipificacion){
+          case 2:
+            
+            $param["tipo_llamada"] =1;
+            $result = $api->post("persona/agendar" , $param);
+            $response =  $result->response;
+            $this->response($response);
+            break;
+
+          case 5:
+            
+            $param["tipo_llamada"] =1;
+            $result = $api->post("persona/agendar" , $param);
+            $response =  $result->response;
+            $this->response($response);
+            break;  
+          
+          case 9:
+            
+            $result = $api->post("persona/agendar_email" , $param);
+            $response =  $result->response;
+            $this->response($response);
+            
+            break;
+
+          default:
+            $response  =  $this->mensajemodel->insert_comentario($param);
+            $this->response($response);
+            break;
+        }
+        
+
+  }
+  /**/
+  function q_GET(){
+
+    $param =  $this->get();
+    $response =  $this->mensajemodel->get_mensaje($param);
+    $this->response($response);
+    
+  }
+  /**/
+  function red_social_PUT(){
+    $param =  $this->put();    
+    $response =   $this->mensajemodel->update_mensaje_red_social($param);
+    $this->response($response);
+  }
+  /**/
+  function red_social_DELETE(){
+    
+    $param =  $this->delete();    
+    $response =   $this->mensajemodel->delete_mensaje_red_social($param);
+    $this->response($response);
+  }
+  /**/
+  function red_social_POST(){
+    
+    /**/
+    $param =  $this->post();
+    $param["id_usuario"] =  $this->id_usuario;
+    if($param["id_mensaje"] > 0){
+            
+      $response =   $this->mensajemodel->update_mensaje($param);
+      $this->response($response);   
+      
+    }else{
+      $response =  $this->mensajemodel->insert_mensaje_red_social($param);
+      $this->response($response);          
+    }
+    
+  }
+  
+  function red_social_GET(){
+      
+      $param =  $this->get();    
+      $data["servicio"] = $param["servicio"];
+      $data["red_social"] = $param["red_social"];
+      $param["id_usuario"] =  $this->id_usuario;    
+      
+      $info_mensaje =  $this->mensajemodel->get_mensaje_red_social($param);
+      
+      $data["id_usuario"] = $this->id_usuario;      
+      $data["info_mensaje"] = $info_mensaje;
+      
+
+      
+      //
+      if (count($info_mensaje["mensaje"]) > 0){
+        $this->load->view("mensaje/principal",  $data);
+      }else{
+        $this->response("<span > Sín mensajes </span>");
+      }
+      
+
+      
+  }
+  /**/
+  function comandos_GET(){
+
+    $param =  $this->get();
+    $data["comandos_ayuda"] =  $this->mensajemodel->get_comandos_ayuda($param);
+    $this->load->view("comando/principal" , $data);
+  }
+  /**/
+  function comandos_POST(){
+
+    $param =  $this->post();    
+    return $this->mensajemodel->insert_comando($param);
+    
+  }  
+  function val_session(){
+
+      if( $this->principal->is_logged_in() == 1){
+
+      }else{
+        redirect(base_url());
+      }   
+  }    
+   
+}
+?>

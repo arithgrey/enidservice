@@ -1,0 +1,170 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+  class enidmodel extends CI_Model {
+    function __construct(){      
+        parent::__construct();        
+        $this->load->database();
+    }
+    private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
+    
+      foreach ($params_where as $key => $value) {
+              $this->db->where($key , $value);
+      }
+      $this->db->limit($limit);
+      return $this->db->update($table, $data);
+    
+    }
+    private function insert($tabla ='imagen', $params , $return_id=0){        
+      $insert   = $this->db->insert($tabla, $params);     
+      return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }
+    private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get($table)->result_array();
+    }
+
+    
+    
+    /*
+    
+    */
+    /*
+    */   
+        
+  /*    
+    
+    
+    function update_inicidencia($param){
+
+      $id_incidencia = $param["id_incidencia"];
+      $status = $param["status_incidencia"];
+      $query_update =  "UPDATE incidencia SET status = '".$status."' WHERE id_incidencia = '".$id_incidencia."' LIMIT 1 "; 
+      return  $this->db->query($query_update);
+
+    }
+
+    
+    function get_perfiles_disponibles($id_perfil){
+        
+        $where =""; 
+        switch ($id_perfil){
+          
+          case 4:
+            $where =" WHERE usuario_prueba =  1"; 
+            break;
+          
+          default:
+                      
+            break;
+        }
+        $query_get ="SELECT * FROM perfil " .$where .  " ORDER BY nombreperfil ASC";
+        $result = $this->db->query($query_get);
+        return $result->result_array();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    function registra_acceso_pagina_web($url , $ip , $dispositivo ,  $tipo  ){
+
+      $query_insert =  "INSERT INTO pagina_web(
+                        url,             
+                        ip ,              
+                        dispositivo , 
+                        tipo )
+                        VALUES( '".$url."'  , '".$ip."'  , '".$dispositivo."'  , '". $tipo ."' )"; 
+      $this->db->query($query_insert);
+    }
+   
+    
+    
+    function reporta_error($param){
+
+      $descripcion = $param["descripcion"];
+      $query_insert =  "INSERT INTO 
+                        incidencia(descripcion_incidencia , 
+                          idtipo_incidencia , 
+                          idcalificacion ,  
+                          id_user ) 
+                        VALUES('".$descripcion ."' , 4 ,  1 , 1)";
+      return  $this->db->query($query_insert);                  
+    }
+    
+
+    
+    
+    function miemtros_cuenta($param){
+
+      $query_get =  "
+                    SELECT 
+                      idusuario           , 
+                      nombre              , 
+                      email                     , 
+                      fecha_registro                  , 
+                      puesto              , 
+                      status              , 
+                      apellido_paterno    , 
+                      apellido_materno    , 
+                      email_alterno       , 
+                      tel_contacto        , 
+                      tel_contacto_alterno, 
+                      edad                      , 
+                      cargo               , 
+                      url_fb              , 
+                      url_tw              , 
+                      url_www             , 
+                      sexo                     
+                    FROM usuario WHERE idempresa =  '".$param["id_empresa"]."'  LIMIT  5";  
+                  $result =   $this->db->query($query_get);
+                  return $result->result_array();
+    }
+
+    
+   
+    
+    function set_pass($param){
+
+        $mail =  trim($param["mail"]); 
+        $new_pass =  RandomString(); 
+        $query_update =  "UPDATE usuario SET password = '".sha1($new_pass)."' WHERE email = '".$mail."' LIMIT 1 ";
+        
+        $status_send= $this->db->query($query_update); 
+        $data["new_pass"]= $new_pass;
+        $data["status_send"] = $status_send; 
+        $data["mail"] =  $param["mail"];
+        return $data;
+    }
+
+    
+    function verifica_estatus_prospecto($param){
+
+      $query_get =  "SELECT password_prospecto 
+                            FROM usuario 
+                            WHERE email =  '".$param["mail_user"]."' LIMIT 1";
+      $result =  $this->db->query($query_get);
+      $num_mail =  $result->result_array()[0]["password_prospecto"];
+      $data["mail_prospecto"] =1; 
+      if ($num_mail == 0 ){
+          $data["mail_prospecto"] =0;
+          $new_pass =  RandomString();
+          $data["new_pass"] =  $new_pass;
+
+          $query_update =  "UPDATE usuario SET password_prospecto = 1 ,  password = '".sha1($new_pass)."'  WHERE email =  '".$param["mail_user"]."' LIMIT 1   ";
+          $data["estatus_pass"]=  $this->db->query($query_update);
+
+      }
+      return $data;
+    }
+    
+    
+        */
+}

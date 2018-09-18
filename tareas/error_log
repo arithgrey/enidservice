@@ -1,0 +1,4 @@
+[15-May-2017 00:42:58 UTC] PHP Fatal error:  Class 'CI_DB_active_record' not found in /home/enidserv/public_html/inicio/tareas/system/database/DB.php(129) : eval()'d code on line 1
+[16-May-2017 14:34:04 UTC] PHP Fatal error:  Call to undefined method principal::get_estados() in /home/enidserv/public_html/inicio/tareas/application/controllers/home.php on line 16
+[16-May-2017 14:34:06 UTC] PHP Fatal error:  Call to undefined method principal::get_estados() in /home/enidserv/public_html/inicio/tareas/application/controllers/home.php on line 16
+[29-May-2017 05:02:04 UTC] PHP Fatal error:  Class 'CI_DB_result' not found in /home/enidserv/public_html/inicio/tareas/system/database/drivers/mysql/mysql_result.php on line 27

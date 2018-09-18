@@ -1,0 +1,53 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class Mensajes extends REST_Controller{      
+    function __construct(){
+        parent::__construct();                  
+        $this->load->helper("q");                                     
+        $this->load->model("mensajesmodel");
+        $this->load->library(lib_def());                         
+    }
+    /**/
+    function ranking_usuarios_mensajes_GET(){        
+        
+        $param = $this->get();
+        $response  =  $this->mensajesmodel->get_mensajes_destacados($param);
+        $data["info_mensajes"] =  $response;
+        /**/
+        $this->load->view("ranking/mensajes" , $data);
+    }
+    /**/
+    function ranking_usuarios_blog_GET(){
+
+        $param = $this->get();
+
+        $url="http://".$_SERVER['HTTP_HOST'];
+        $param["dominio"] =  $url;
+        $response  =  $this->mensajesmodel->get_blogs_destacados($param);
+        $data["info_mensajes"] =  $response;        
+        $this->load->view("ranking/blog" , $data);
+    }
+    /**/
+    function ranking_posts_GET(){
+
+        $param = $this->get();
+
+        $param["id_usuario"] = $this->principal->get_session("idusuario");
+        $response =  $this->mensajesmodel->get_posts_usuario($param);
+        $data["info_mensajes"] =  $response;
+        /**/
+        $this->load->view("ranking/mensajes" , $data);
+    }
+    /**/ 
+    function info_servicio_GET(){        
+        /**/
+        $param =  $this->get();
+        $info_servicio["info_servicio"] = $this->mensajesmodel->info_servicio($param);
+        $info_servicio["modalidad"] =  $param["modalidad"];
+        $this->load->view("servicio/principal" , $info_servicio);
+    }
+    /**/
+    
+    /**/
+
+}?>

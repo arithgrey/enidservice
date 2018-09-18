@@ -1,0 +1,114 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+  class qmodel extends CI_Model{
+    public $options;
+    public $lista_servicios =[];
+    function __construct($options=[]){      
+        parent::__construct();        
+        $this->load->database();
+    }
+   
+    
+    
+    /* 
+    private  function mejora_deseo_producto($param){
+
+        $id_servicio =  $param["servicio"];
+        $query_update = "UPDATE servicio SET 
+                            deseado = deseado + 1 
+                        WHERE 
+                            id_servicio = '".$id_servicio."' 
+                        LIMIT 1";
+        return $this->db->query($query_update);
+    }
+    */
+    /*
+    
+    */
+    /**/
+    
+    
+    
+    
+    
+ 
+    
+    
+
+    
+    
+    /*
+    */
+        
+    
+    
+    
+        
+    
+    /*
+
+    
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    function get_precio_servicio($id_servicio){
+        
+        $query_get = "SELECT 
+                        precio ,                                                 
+                        id_ciclo_facturacion 
+                        FROM precio WHERE id_servicio = $id_servicio LIMIT 1";
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+    }
+    
+    
+   
+    
+    
+    
+    
+    
+    function get_producto_por_id($param){
+
+        $id_servicio = $param["id_servicio"];
+        $query_get = "SELECT  id_servicio , nombre_servicio , precio, valoracion , vista 
+                      FROM servicio WHERE id_servicio = $id_servicio LIMIT 1";
+        $result =  $this->db->query($query_get);      
+        return $result->result_array();
+    }
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    */
+    
+    
+    
+    
+    /**/
+    
+    
+    
+   
+}

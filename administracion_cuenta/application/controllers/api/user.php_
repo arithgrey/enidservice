@@ -1,0 +1,119 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class User extends REST_Controller{
+
+    private $id_usuario;
+    function __construct(){
+        parent::__construct();  
+        $this->load->helper("recursos");
+        $this->load->model("cuentageneralmodel");
+        $this->load->model("usuariogeneralmodel");                
+        $this->load->library(lib_def());        
+        $this->id_usuario =  $this->principal->get_session("idusuario");
+    }
+    /**/
+    function form_user_GET(){
+        $this->principal->validate_user_sesssion();
+        $id_usuario  = $this->id_usuario;         
+        $data["data_user"] =  $this->cuentageneralmodel->get_data_user_by_id($id_usuario)[0];        
+        $data["id_usuario"] =  $id_usuario;
+        $this->load->view('user/form_user', $data);
+    }
+    /**/
+    function usuarioconectado_GET(){
+
+        $this->principal->validate_user_sesssion();
+        $id_usuario =  $this->id_usuario;
+        $response = $this->usuariogeneralmodel->get_is_conected_fb($id_usuario);
+        
+        if ($response == 0 ) {
+            $this->load->view("enid/notificacion_fb");
+        }else{
+            $this->response("");
+        }        
+    }
+    /**/
+    function nombre_usuario_GET(){
+        $param =  $this->get();
+        $response =  $this->usuariogeneralmodel->get_nombre_user($param);
+        $this->response($response);
+    }   
+    /**/
+    function estado_PUT(){
+
+        $this->principal->validate_user_sesssion();   
+        $id_empresa = $this->principal->get_session("idempresa"); 
+        $id_user = $this->id_usuario;                        
+        $param =  $this->put();        
+        $param["id_empresa"] =  $id_empresa; 
+        $param["id_usuario_modificador"] =  $id_user;         
+        $response =  $this->usuariogeneralmodel->set_status($param);
+
+        $response = "";
+        if ($response ==  true ) {
+            $response = "El estado del usuario ha sido modificado exitósamente .!" ; 
+        }else{
+            $response = "Error al actualizar el estado del usuario, notifique al admistrador" ; 
+        }
+
+        $this->response($response);
+    }
+    /**/    
+    function template_estado_GET(){ 
+
+        $this->principal->validate_user_sesssion();   
+        $id_usuario = $this->get("usuario"); 
+        $id_empresa =  $this->principal->get_session("idempresa");
+        $data["usuario"] =  $this->usuariogeneralmodel->get_usuario($id_usuario , $id_empresa ); 
+        echo  $this->load->view("usuarioscuenta/config_estatus", $data);
+    }
+    /**/
+    function miembro_PUT(){
+        
+        $this->principal->validate_user_sesssion();    
+        $data  =  $this->put();    
+        $data["mail"] =  $data["email"];   
+        $data["id_empresa"] = $this->principal->get_session("idempresa");            
+        $response =  $this->usuariogeneralmodel->update_datos_miembro($data);
+        $response["mail"] =  $data["email"];          
+        if ($response["status_user"] != "FALSE"){
+
+            $new_password =  $response["tmp_password"];
+            $mail =  $data["email"];            
+            
+            $response["mensajeria"] =  $this->mensajeria->notificacion_new_user( $mail ,  $new_password );            
+        }
+        $this->response($response);            
+    }
+    /**/
+    function miembro_GET(){
+
+        $data = $this->get();    
+        $response = $this->usuariogeneralmodel->get_data_miembro($data);
+        $this->response($response);
+    }
+    /**/
+    
+    function miembro_descripcion_put(){
+        
+        $data  =  $this->put();    
+        $response =  $this->usuariogeneralmodel->update_datos_miembro_descripcion($data);
+        $this->response($response);
+    }
+    /**/
+    function q_PUT(){
+
+        $param =  $this->put();
+        $this->principal->validate_user_sesssion();   
+        $id_user = $this->id_usuario;  
+        $response =  $this->usuariogeneralmodel->update_q($param ,  $id_user );         
+        $this->response($response);       
+    }
+    /**/
+    function locacion_PUT(){
+        $param =  $this->put();
+        $response = $this->usuariogeneralmodel->update_locacion_maps($param);
+        $this->response($response);        
+    }
+}
+?>

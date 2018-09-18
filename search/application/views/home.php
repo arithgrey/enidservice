@@ -1,0 +1,166 @@
+<?php 
+
+    $num_servicios_encontrados =  $servicios["num_servicios"];
+    $servicios = $servicios["servicios"];        
+    if($es_movil == 0){        
+
+    $primer_nivel   =  $bloque_busqueda["primer_nivel"];
+    $segundo_nivel  =  $bloque_busqueda["segundo_nivel"];
+    $tercer_nivel   =  $bloque_busqueda["tercer_nivel"];
+    $cuarto_nivel   =  $bloque_busqueda["cuarto_nivel"];
+    $quinto_nivel   =  $bloque_busqueda["quinto_nivel"];
+
+    $bloque_primer_nivel    =  
+    crea_seccion_de_busqueda_extra($primer_nivel, $busqueda); 
+    $bloque_segundo_nivel   =  
+    crea_seccion_de_busqueda_extra($segundo_nivel, $busqueda); 
+    $bloque_tercer_nivel    =  
+    crea_seccion_de_busqueda_extra($tercer_nivel, $busqueda); 
+    $bloque_cuarto_nivel    =  
+    crea_seccion_de_busqueda_extra($cuarto_nivel, $busqueda); 
+    $bloque_quinto_nivel    =  
+    crea_seccion_de_busqueda_extra($quinto_nivel, $busqueda); 
+    }
+    /**/
+    $categorias_destacadas_orden =  sub_categorias_destacadas($categorias_destacadas);  
+
+
+    $url_anunciar  = 
+    ($in_session ==1 )? "../../planes_servicios":"../../login?action=nuevo";    
+
+    $anunciar =  anchor_enid('ANUNCIA TUS ARTÍCULOS AQUÍ' ,  
+        [
+            "src"       => $url_anunciar,
+            'class'     => 'anuncia_articulos'
+        ]);
+    
+
+    
+?>
+
+<?php if ( strlen(trim($q)) ==  0):?>
+    <?=div("", ["class"=>"contenedor_img_principal"])?>
+<?php endif;?>
+
+<?=n_row_12();?>            
+    <div class='contenedor_anuncios_home'>
+        <div class='contenedor_anunciate'>                    
+        <?=$anunciar?>                        
+        <?php if($es_movil ==  0):?>
+            <?php 
+            foreach(crea_menu_principal_web($categorias_destacadas) as $row): ?>
+
+                <?=anchor_enid(mayus($row["nombre_clasificacion"]), 
+                [
+                    "href"  =>  "?q=&q2=".$row['primer_nivel'] ,
+                    "class" =>  'categorias_mas_vistas'
+                ]);?>                
+            <?php endforeach; ?>      
+        <?php endif;?>                                   
+        </div>              
+    </div>        
+<?=end_row();?>                        
+
+<?=n_row_12()?>
+    <div >                            
+        <div class="col-lg-2">              
+        <?=div(
+            icon("fa fa-search").$busqueda."(".$num_servicios."PRODUCTOS)",
+            ["class"    =>  'informacion_busqueda_productos_encontrados'], 
+            1)?>            
+        <?php if($es_movil ==  0):?>                    
+            <?=div("FILTRA TU BÚSQUEDA" ,[] ,1)?>            
+        <?php endif;?>
+        <div class='contenedor_menu_productos_sugeridos'>
+        <?php
+        if ($es_movil == 0){                            
+            if ($bloque_primer_nivel["num_categorias"] > 0) {
+                echo $bloque_primer_nivel["html"];
+
+            }
+            /**/
+            if($bloque_segundo_nivel["num_categorias"] > 0){
+                echo "<hr>";
+                echo $bloque_segundo_nivel["html"];
+            }
+            /**/
+            if($bloque_tercer_nivel["num_categorias"] > 0){
+                echo "<hr>";
+                echo $bloque_tercer_nivel["html"];
+            }
+            /**/
+            if($bloque_cuarto_nivel["num_categorias"] > 0){
+                echo "<hr>";
+                echo $bloque_cuarto_nivel["html"];
+            }
+            /**/
+            if($bloque_quinto_nivel["num_categorias"] > 0){
+                echo "<hr>";
+                echo $bloque_quinto_nivel["html"];
+            }
+        }
+        ?>
+
+        </div>
+    </div>
+    <div class="col-lg-10">
+        <?=n_row_12()?>
+            <div class="col-md-3">
+                <select class="form-control order" name="order" id="order">
+                    <?php $a=0; foreach($filtros as $row):?>
+                        <?php if ($a ==  $order):?>
+                            <option value="<?=$a?>" selected>
+                                <?=$row?>
+                                    
+                            </option>
+                            <?php else: ?>
+                                <option value="<?=$a?>">
+                                    <?=$row?>
+                                        
+                                </option>
+                            <?php endif;?>
+                        <?php $a ++ ;endforeach;?>
+                </select>
+            </div>
+            <div class="col-md-9">
+                <?=div($paginacion , ['class'=>"pull-right"])?>            
+            </div>                    
+        <?=end_row()?>
+        <?php
+        $list ="";  
+        $flag =0;    
+        $extra = ""; 
+        $b=0;
+        foreach($lista_productos as $row){                        
+            if ($b > 0) {
+                $extra = "style='margin-top:30px;'";          
+            } 
+            echo "<div class='col-lg-3' ".$extra." >";  
+            echo "<div class='row'>";
+                echo "<center>";
+                    echo $row;
+                echo "</center>";  
+            echo "</div>";  
+            echo "</div>";  
+            $flag ++;
+            if ($flag == 4) {
+                $flag =0;
+                echo "<hr>";
+                $b ++;
+            }
+        }?>
+        <?php if( count($lista_productos) > 8):?>
+            <?=div($paginacion ,  [] ,1)?>            
+        <?php endif;?>            
+    </div>
+    </div>    
+    <?=n_row_12()?>         
+        <?=div("" , ["class"   =>   "col-lg-2"])?>
+        <div class="col-lg-10">
+            <?=p("CATEGORIAS DESTACAGAS", ["class"=>'titulo_categorias'])?>  
+            <?=div(crea_sub_menu_categorias_destacadas(
+                $categorias_destacadas_orden) , ["class" => "row"])?>
+        </div>
+    <?=end_row()?>
+<?=end_row()?>
+

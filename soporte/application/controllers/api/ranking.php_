@@ -1,0 +1,42 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class Ranking extends REST_Controller{
+  private $id_usuario;
+  private $id_empresa;
+  function __construct(){
+        parent::__construct();                              
+        $this->load->model("rankingmodel");
+        $this->load->library(lib_def());
+        $this->id_usuario =   $this->principal->get_session("idusuario");
+        $this->id_empresa =   $this->principal->get_session("idempresa");
+  }  
+  /**/
+  function comentarios_calificacion_GET(){
+
+    $param = $this->get();
+    $param["id_empresa"] =  $this->id_empresa;
+    $param["id_usuario"] =  $this->id_usuario;
+    
+    $data["info_comentarios"] =  $this->rankingmodel->get_comentarios_calificacion($param);
+    $this->load->view("ranking/comentarios" ,  $data);
+  }
+  /**/
+  function general_GET(){
+
+    $this->principal->validate_user_sesssion();
+    
+    $param =  $this->get();    
+    $param["id_empresa"] =  $this->id_empresa;
+    $param["id_usuario"] =  $this->id_usuario;
+    
+    $data["info_estrellas"]=   $this->rankingmodel->get_info_general($param);
+
+
+
+    $this->load->view("ranking/info_general_calificaciones" , $data);
+    
+  }
+  
+  
+}
+?>

@@ -1,0 +1,1 @@
+<?=$this->load->view("secciones_2/form_afiliados")?>

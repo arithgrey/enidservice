@@ -1,0 +1,46 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+  class Privacidad_usuario_model extends CI_Model {
+    function __construct(){      
+        parent::__construct();        
+        $this->load->database();
+    }  
+    private function get($params=[], $params_where =[] , $limit =1){
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("privacidad_usuario")->result_array();
+    }
+    private function insert($params , $return_id=0){        
+        $insert   = $this->db->insert("privacidad_usuario", $params);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }
+    private function delete( $params_where =[] , $limit =1){              
+        $this->db->limit($limit);        
+        foreach ($params_where as $key => $value) {
+          $this->db->where($key , $value);
+        }        
+        return  $this->db->delete("privacidad_usuario", $params_where);
+    }    
+    function asociar_concepto_privacidad_usuario($param){
+
+        $id_privacidad  =  $param["concepto"];
+        $id_usuario     =  $param["id_usuario"];
+
+        if($param["termino_asociado"] == 0){
+
+            $params = [ "id_privacidad" =>  $id_privacidad ,
+                        "id_usuario"    =>  $id_usuario
+                    ];
+            return $this->insert($params );            
+        }else{            
+            $params_where =  ["id_privacidad" => $id_privacidad ,  "id_usuario" => $id_usuario ];
+            return  $this->delete($params_where);            
+        }
+    }
+    
+    
+    
+}

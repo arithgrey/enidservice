@@ -1,0 +1,61 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class Ventas extends REST_Controller{
+  private $id_usuario;
+  function __construct(){
+      parent::__construct();                                     
+      $this->load->model("ventasmodel");
+      $this->load->library(lib_def());    
+      $this->id_usuario =  $this->principal->get_session("idusuario");
+  }  
+  /**/
+  function prospecto_POST(){
+    
+    /********/
+    $param =  $this->post();        
+    $param["id_usuario"] =  $this->id_usuario;
+    $num_usuario = $this->ventasmodel->verifica_existencia_usuario($param);    
+    
+    $data_complete["num_usuario"] =  $num_usuario;
+    if($num_usuario == 0 ){
+      $data_complete["id_persona"] = $this->ventasmodel->insert_prospecto($param);  
+    }
+    $this->response($data_complete);    
+    
+  }
+
+  /**/
+  function prospecto_get(){
+
+    $param =  $this->get();    
+    $param["id_usuario"] =  $this->id_usuario;
+
+    $response["id_usuario"] =  $this->id_usuario;
+    $response["data_prospectos"] =  $this->ventasmodel->get_prospecto($param);    
+    $response["data_tipo_propuesta"] =  $this->ventasmodel->get_tipo_propuesta();    
+    $response["data_servicios"] =  $this->ventasmodel->get_servicios();    
+
+    $this->load->view("ventas/prospectos_disponibles" , $response );
+
+  }
+  /**/
+  function propuesta_POST(){
+
+    $param = $this->post();        
+    $param["id_usuario"] = $this->id_usuario;    
+    $response=  $this->ventasmodel->insert_propuesta($param);
+    $this->response($response);
+  
+  }
+  /**/
+  function labor_venta_get(){
+
+    $param =  $this->get();    
+    $param["id_usuario"] =  $this->id_usuario;
+    $response["labor_venta"] =  $this->ventasmodel->get_labor_venta($param);    
+    $this->load->view("ventas/principal" , $response);    
+
+  }
+  /**/
+}
+?>

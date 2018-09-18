@@ -1,0 +1,180 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class Tickets extends REST_Controller{          
+    private $id_usuario;
+    function __construct(){
+        parent::__construct();                          
+        $this->load->helper("proyectos");
+        //$this->load->model("ticketsmodel");                                          
+        $this->load->library(lib_def()); 
+        $this->id_usuario =  $this->principal->get_session("idusuario");
+    }    
+    
+    /**/
+    function formulario_respuesta_GET(){
+
+        $param = $this->get();
+        $data["request"] = $param;
+        $this->load->view("tickets/form_respuesta" , $data);            
+    }
+    /**/
+    function asunto_PUT(){        
+        $param =  $this->put();
+        $response =  $this->ticketsmodel->update_asunto($param);
+        $this->response($response);
+    }
+    /**/
+    function form_GET(){
+        $param                  =  $this->get();                 
+        $data["departamentos"]  = $this->ticketsmodel->get_departamentos($param);
+        $this->load->view("secciones/form_tickets" , $data );        
+    }
+    /**/
+    function form_proyectos_GET(){
+        
+        $param =  $this->get();                         
+        $clientes_disponibles =  $this->ticketsmodel->get_clientes_actuales();
+        /**/
+        $data["clientes_disponibles"] = $clientes_disponibles;
+        /**/
+        $id_persona =  $clientes_disponibles[0]["id_persona"];    
+        /**/
+        $data["servicios_cliente"] = 
+        $this->ticketsmodel->get_servicios_cliente($id_persona);
+        /**/        
+        /**/
+        $data["departamentos"] = $this->ticketsmodel->get_departamentos($param);
+        $this->load->view("secciones/form_tickets_proyectos" , $data );        
+    }
+    /**/
+    function form_proyectos_persona_GET(){
+        
+
+        $param =  $this->get();   
+        $param["id_usuario"] =  $this->id_usuario;
+        $clientes_disponibles =  $this->ticketsmodel->get_info_cliente($param);        
+        $data["clientes_disponibles"] = $clientes_disponibles;
+        $id_usuario =  $clientes_disponibles[0]["id_usuario"];    
+
+        $data["servicios_cliente"] = 
+        $this->ticketsmodel->get_servicios_cliente($id_usuario);
+        $data["departamentos"] = $this->ticketsmodel->get_departamentos($param);
+        $this->load->view("secciones/form_tickets_proyectos_persona" , $data );            
+    }
+    /**/
+    function servicios_cliente_GET(){
+        
+        $param =  $this->get();
+        $id_usuario = $this->id_usuario;
+        $servicios = 
+        $this->ticketsmodel->get_servicios_cliente($id_usuario);
+
+        $lista_servicios    =  create_select($servicios , 
+            "id_proyecto" , 
+            "form-control" , 
+            "servicios_cliente" , 
+            "proyecto" , 
+            "id_proyecto" );
+
+        $this->response($lista_servicios);
+        
+    }    
+    /**/
+    function ticket_POST(){        
+
+        $param                  = $this->post();                    
+        $id_usuario             = 
+        (array_key_exists("id_usuario", $param)) ? $param["id_usuario"] : $this->id_usuario;
+        $param["id_usuario"]    = $id_usuario;
+        $ticket_abierto         = $this->ticketsmodel->insert_ticket($param);        
+        $es_cliente             = $this->ticketsmodel->es_cliente($id_usuario);
+        //debug($es_cliente);
+        
+        $param["ticket"]        = $ticket_abierto;
+        
+        $estatus_notificacion   =  "";
+        if ($es_cliente ==  1){                            
+            $estatus_notificacion=$this->notificacion_nuevo_ticket_soporte($param);
+        }                
+        $this->response($param["ticket"]);        
+        
+
+    }   
+    
+    /**/
+    function ticket_PUT(){
+
+        $param =  $this->put();
+        $response =  $this->ticketsmodel->update_departamento($param);
+        $this->response($response);
+
+    }
+    
+    function tickets_por_servicio($param){                
+        $data["info_tickets"] =  $this->ticketsmodel->get_tickets($param);
+        $data["status_solicitado"] =  $param["status"];        
+        return $data;       
+    }
+   
+    /**/
+    
+    function ticket_persona_GET(){
+
+        $param = $this->get();
+        $param["id_usuario"] =  $this->id_usuario;
+        $data["info_tickets"] =  $this->ticketsmodel->get_tickets_persona($param);
+        $data["status_solicitado"] =  $param["status"];
+        $data["info_get"] =  $param;
+        $this->load->view("tickets/principal_desarollo_persona" , $data );
+
+    }
+    function  get_tareas_ticket($q){
+        $api    =  "tarea/tareas_ticket/format/json";
+        return  $this->principal->api("q", $api , $q);
+    }
+    function get_tareas_ticket_num($q){
+
+        $api    =  "tarea/tareas_ticket_num/format/json";
+        return  $this->principal->api("q", $api , $q);   
+    }
+    /**/
+    function detalle_GET(){
+
+        $param  =   $this->get();         
+        $perfil =   $this->principal->getperfiles();
+        $data["info_ticket"]        =   $this->ticketsmodel->get_info_ticket($param);     
+        $data["info_tareas"]        =   $this->get_tareas_ticket($param);
+        $data["info_num_tareas"]    =   $this->get_tareas_ticket_num($param);        
+        $data["perfil"] =  $perfil;
+        $this->load->view("tickets/detalle" , $data );             
+    }
+    /*
+    function respuesta_POST(){
+
+        $param =  $this->post();
+        $param["id_usuario"] = $this->id_usuario;
+        $response =  $this->tareasmodel->registra_respuesta($param);
+        $this->response($response);
+    }
+    */
+    function get_respuestas($q){
+
+        $api =  "respuesta/respuestas/format/json";
+        return $this->principal->api("q" , $api , $q);
+    }
+    function respuesta_GET(){
+
+        $param          =  $this->get();        
+        $response       =  $this->get_respuestas($param);
+        $response["info_respuestas"] = $response;
+        $this->load->view("tickets/respuestas" , $response);        
+    }
+    /**/
+    function status_PUT(){
+
+        $param = $this->put();    
+        $response =  $this->ticketsmodel->update_status($param);
+        $this->response($response);
+    }
+    
+}?>

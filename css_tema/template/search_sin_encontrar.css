@@ -1,0 +1,34 @@
+.separador_inicial{
+	margin-top: 30px;
+}
+.separador_final{
+	margin-bottom: 50px;
+}
+.info_sin_encontrar{
+	font-weight: bold;
+	font-size: 2em;
+	color: #02152c;
+}
+.sugerencias{	
+	font-size: 1.5em;	
+	padding: 3px;	
+	font-weight: bold;
+	color: #02152c;
+}
+.contenedor_sugerencias{
+	margin-top: 30px;	
+}
+.info_sugerencias{
+	margin-top: 20px;
+}
+.inf_sugerencias{
+	border: solid 1px;
+	padding: 10px;
+	margin-bottom: 90px;
+}
+.anunciar_btn{
+	margin-top: 30px;
+}
+.boton_primer_producto{
+	margin-top: 30px!important;
+}

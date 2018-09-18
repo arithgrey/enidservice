@@ -1,0 +1,19 @@
+.contenedor_informacion_envio{
+	width: 50%;
+	margin: 0 auto;
+}
+.contenedor_deuda_para_envio{
+	width: 60%;
+	margin: 0 auto;	
+}
+@media only screen and (max-width: 768px) {
+	.contenedor_informacion_envio{
+		margin-top: 25px!important;
+		width: 100%;
+		margin: 0 auto;
+	}	
+	.contenedor_deuda_para_envio{
+		width: 100%;
+		margin: 0 auto;	
+	}
+}

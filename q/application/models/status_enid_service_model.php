@@ -1,0 +1,26 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+  class Status_enid_service_model extends CI_Model {
+    function __construct(){      
+        parent::__construct();        
+        $this->load->database();
+    }
+    function get_status_enid_service($param){
+		return $this->get("status_enid_service", ["id_estatus_enid_service", "nombre"], [], 100);
+	}        
+	function get_estatus_servicio_enid_service($param){
+
+      $params =  ["id_estatus_enid_service","nombre","text_cliente","text_vendedor" ];
+      return $this->get("status_enid_service", $params, ["pago"=> 1], 10);
+  } 
+  function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+        
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);        
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get($table)->result_array();
+  }
+    
+}

@@ -1,0 +1,18 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class Tipo_negocio extends REST_Controller{
+  function __construct(){
+        parent::__construct();           
+        $this->load->model("tipo_negocio_model"); 
+        $this->load->library(lib_def());       
+  }  
+  /**/
+  function all_GET(){
+    
+    $param    =  $this->get();
+    $response =  $this->tipo_negocio_model->get_all($param);  
+    $this->response($response);
+    
+  }    
+}
+?>

@@ -1,0 +1,21 @@
+.strong{
+	font-weight: bold!important;
+}
+.a_enid_black{
+	background: black !important;
+	padding: 10px !important;
+	color: white !important;
+	font-weight: bold !important;
+	width: 100%;
+}
+.a_enid_black:hover{
+	background: #001250 !important;
+	padding: 10px !important;
+	color: white !important;
+	font-weight: bold !important;
+	width: 100%;
+}
+.anunciar_productos{
+	margin-top: 36px!important;color: black!important;text-decoration: underline!important;
+	font-size: 1.32em;
+}

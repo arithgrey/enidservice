@@ -1,0 +1,23 @@
+<?php
+	
+	$l ="";
+	$num_elementos = count($info_registros); 
+	$z = 0;
+	foreach ($info_registros as $row) {
+
+		if ($z != $num_elementos-1) {
+			$l .= $row["email"].",";	
+		}else{
+			$l .= $row["email"];
+		}
+		$z ++;		
+	}
+?>
+
+<form class="form_update_correo"  id='form_update_correo'>
+	<textarea class='form-control text_info' name='text_info'>
+		<?=$l?>
+	</textarea>
+	<?=guardar("Registrar como enviado" , ['btn_registro_actualizacion'])?>
+</form>
+<?=place("place_registro")?>

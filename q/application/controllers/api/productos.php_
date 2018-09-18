@@ -1,0 +1,20 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class productos extends REST_Controller{      
+    function __construct(){
+        parent::__construct();                                      
+        $this->load->helper("q");                                     
+        $this->load->model("productos_model");
+        $this->load->library(lib_def());     
+    }   
+    /**/
+    
+    function get_nombre_servicio($id_servicio){
+
+        $q["id"] = $id_servicio;
+        $api ="servicio/nombre_servicio/format/json";
+        return $this->principal->api("base" , $api , $q);
+    }
+
+
+}?>
