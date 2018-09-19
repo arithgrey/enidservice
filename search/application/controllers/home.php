@@ -8,12 +8,10 @@ class Home extends CI_Controller{
     }       
     private function set_option($key, $value){
         $this->options[$key] = $value;
-    }
-    /**/
+    }    
     private function get_option($key){
         return  $this->options[$key];
-    }
-    /**/   
+    }    
     function index(){           
                 
         $param                      =  $this->input->get();
@@ -27,13 +25,13 @@ class Home extends CI_Controller{
     private function load_data($param){
         
 
-        $data = 
+        $data                           = 
         $this->principal->val_session("¿Necesitas que más clientes encuentren tu negocio?");
-        $data["meta_keywords"]  =   "Comprar y vender tus artículos y servicios";
-        $data["desc_web"]       =   "";
-        $data["url_img_post"]   =   create_url_preview("promo.png");
+        $data["meta_keywords"]          =   "Comprar y vender tus artículos y servicios";
+        $data["desc_web"]               =   "";
+        $data["url_img_post"]           =   create_url_preview("promo.png");
     
-        $q                      =  (array_key_exists("q", $param)) ?$param["q"] :""; 
+        $q                              =  (array_key_exists("q", $param)) ?$param["q"] :""; 
 
         $data_send["q"]                 = $q; 
         $data_send["vendedor"]          = $param["vendedor"];
@@ -171,16 +169,14 @@ class Home extends CI_Controller{
         return $info_bloque;
     }
     /**/
-    private function busqueda_producto_por_palabra_clave($q){
-        
+    private function busqueda_producto_por_palabra_clave($q){        
         $api =  "servicio/q/format/json/";        
         return $this->principal->api("q", $api, $q);
     }
     /**/
     private function logout(){                      
         $this->principal->logout();      
-    }   
-      
+    }         
     private function get_info_clasificacion($id_clasificacion){
 
         $q["id_clasificacion"] =  $id_clasificacion;

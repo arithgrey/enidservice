@@ -17,7 +17,7 @@ class Imagen_servicio_model extends CI_Model {
 	    }
 	    return $this->db->get("imagen_servicio")->result_array();
   	}
- 	function get_img_servicio($id_servicio){¡
+ 	function get_img_servicio($id_servicio){
     	return $this->get(["id_imagen"] , ["id_servicio" => $id_servicio ] );
   	}
   	function get_imagenes_por_servicio($param){

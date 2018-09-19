@@ -7,12 +7,12 @@ class Talla extends REST_Controller{
         $this->load->library(lib_def());       
   }  
   /**/
-  function id_GET(){
-    
+  function id_GET(){    
     $param        =   $this->get();
-    $params       =   $params["fields"];
-    $id_servicio  =  $param["id_servicio"];
-    $response     =   $this->talla_model->q_get($params , $id_servicio);  
+    //debug($param , 1);
+    $params       =   $param["fields"];
+    $id_talla     =   $param["id"];
+    $response     =   $this->talla_model->q_get($params , $id_talla);  
     $this->response($response);
     
   }    

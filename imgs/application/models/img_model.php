@@ -4,16 +4,16 @@ class img_model extends CI_Model {
         parent::__construct();        
         $this->load->database();
   	}
-   	private function get( $params=[], $params_where =[] , $limit =1){
+   	private function get($params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("imagen")->result_array();
   	}
-	function get_img($id_imagen){	   
-	   return $this->get("imagen" , ["img"] , ["idimagen" => $id_imagen]);
-	}  
+  	function get_img($id_imagen){	   
+  	   return $this->get(["img"] , ["idimagen" => $id_imagen]);
+  	}  
 }

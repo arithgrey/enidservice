@@ -340,16 +340,11 @@
             $this->get_resultados_posibles($param);                    
             $_num =  get_random();
             $this->create_productos_disponibles(0 , $_num , $param);                
-
-                $data_complete["sql"] =     $this->get_option("sql");
-                $data_complete["servicio"] =  $this->get("tmp_producto_$_num" ,  [] , [] , 1000);
-                    
+                $data_complete["sql"]       =       $this->get_option("sql");                            
+                $data_complete["servicio"]  =       $this->db->get("tmp_producto_$_num")->result_array();
                 if($param["agrega_clasificaciones"] ==  1){                        
-                    $data_complete["clasificaciones_niveles"] 
-                    =  
-                    $this->get_clasificaciones_disponibles($_num);                      
-
-                }                    
+                    $data_complete["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
+                }                 
             $this->create_productos_disponibles(1 , $_num , $param);
         return  $data_complete;        
     }
@@ -360,8 +355,10 @@
         for ($a=0; $a <count($niveles); $a++){ 
                 
             $nivel =  $niveles[$a];    
-            $data_niveles_clasificaciones[$nivel] = 
-            $this->get("tmp_producto_$_num" , ["distinct($nivel)id_clasificacion"] ,[], 1000);  
+                    
+            $query_get =  "SELECT DISTINCT($nivel)id_clasificacion FROM tmp_producto_$_num";
+            $data_niveles_clasificaciones[$nivel] =  $this->db->query($query_get)->result_array();
+
         }
         return $data_niveles_clasificaciones;
     }    

@@ -38,7 +38,7 @@ class Enid extends CI_Controller {
     private function construye_img_format($response){
             
         if ( count($response) > 0 ) {            
-            $id_imagen =  $response[0]["id_imagen"];            
+            $id_imagen =  $response[0]["id_imagen"];              
             $img       = $this->costruye_imagen($id_imagen);
             
             header('Content-Type: image/png');
@@ -72,7 +72,7 @@ class Enid extends CI_Controller {
     private function get_img_servicio($id_servicio){
 
         $q["id_servicio"]  =  $id_servicio;        
-        $api               =  "img/servicio/format/json/";
+        $api               =  "imagen_servicio/servicio/format/json/";
         return $this->principal->api("q" , $api , $q);            
     }
 }/*Termina el controlador */

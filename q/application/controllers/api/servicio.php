@@ -740,15 +740,16 @@ class Servicio extends REST_Controller{
     $q["id_usuario"] =  $id_usuario;
     $api             = "usuario/has_phone/format/json/";
     return   $this->principal->api("q", $api , $q );            
-  }  
-  
+  }    
   /**/
   function talla_GET(){
 
     $param              =  $this->get();    
     $id_servicio        =  $param["id_servicio"];
-    $servicio           =  $this->serviciosmodel->q_get(["talla"] , $id_servicio);
+    $servicio           =  $this->serviciosmodel->q_get(["talla"] , $id_servicio);    
     $servicio_tallas    =  $this->add_tallas($servicio);    
+    
+
     
     if ($param["v"] ==  1) {  
 
@@ -796,11 +797,10 @@ class Servicio extends REST_Controller{
     $fields               = ["id_talla" , "talla" , "id_country"];
     $tallas_en_servicio   = get_array_json($talla_servicio[0]["talla"]);
 
-    
     for ($a=0; $a < count($tallas_en_servicio); $a++) { 
 
         $id_talla =   $tallas_en_servicio[$a];        
-        $talla    =   $this->get_talla_id($id_talla , $fields);
+        $talla    =   $this->get_talla_id($id_talla , $fields);        
         $talla    =   (count($talla)>0) ? $talla[0]: array();        
         $data_complete[$a]    = $talla;
     }
@@ -1020,8 +1020,7 @@ class Servicio extends REST_Controller{
                 $prm["flag_envio_gratis"]       =  $row["flag_envio_gratis"];
                 $nueva_data[$a]["costo_envio"]  = 
                 $this->principal->calcula_costo_envio($prm);    
-            } 
-            
+            }             
             $a ++;
         }        
         return $nueva_data;

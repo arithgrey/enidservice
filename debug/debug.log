@@ -24434,3 +24434,825 @@ DEBUG - TYPE string 2018-09-18 02:27:21 --> 1
 DEBUG - TYPE string 2018-09-18 02:27:26 --> UPDATE `servicio` SET `flag_nuevo` = '0'
 WHERE `id_servicio` = '311' LIMIT 1
 DEBUG - TYPE string 2018-09-18 02:27:26 --> 1
+DEBUG - TYPE string 2018-09-18 21:52:41 --> UPDATE `servicio` SET `vista` = ' vista + 1'
+WHERE `id_servicio` = '77' LIMIT 1
+DEBUG - TYPE array 2018-09-18 22:42:36 --> Array
+(
+    [q] => 
+    [vendedor] => 0
+    [id_clasificacion] => 0
+    [extra] => Array
+        (
+            [q2] => 0
+            [q] => 
+            [id_clasificacion] => 0
+            [vendedor] => 0
+            [num_hist] => 9990890
+        )
+
+    [order] => 11
+    [resultados_por_pagina] => 12
+    [agrega_clasificaciones] => 1
+    [in_session] => 0
+)
+
+DEBUG - TYPE array 2018-09-18 22:43:01 --> Array
+(
+    [q] => 
+    [vendedor] => 0
+    [id_clasificacion] => 0
+    [extra] => Array
+        (
+            [q2] => 0
+            [q] => 
+            [id_clasificacion] => 0
+            [vendedor] => 0
+            [num_hist] => 9990890
+        )
+
+    [order] => 11
+    [resultados_por_pagina] => 12
+    [agrega_clasificaciones] => 1
+    [in_session] => 0
+)
+
+DEBUG - TYPE array 2018-09-18 23:16:27 --> Array
+(
+    [0] => Array
+        (
+            [id_imagen] => 262
+        )
+
+)
+
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 262
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 342
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 507
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 443
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 299
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 452
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 576
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 499
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 269
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 368
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 511
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 550
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 507
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 342
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 262
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 299
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 452
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 443
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 576
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 499
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 269
+DEBUG - TYPE string 2018-09-18 23:18:09 --> 368
+DEBUG - TYPE string 2018-09-18 23:18:10 --> 511
+DEBUG - TYPE string 2018-09-18 23:18:10 --> 550
+DEBUG - TYPE NULL 2018-09-19 09:35:37 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:37 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE NULL 2018-09-19 09:35:38 --> 
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 123
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 122
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 120
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 110
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 121
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 111
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 112
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 113
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 114
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 117
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 119
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:10 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 118
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:10 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 116
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 123
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 122
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 120
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 110
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 121
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 111
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 112
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 113
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 114
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 117
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 119
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 118
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:36:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 116
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 123
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 122
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 120
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 110
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 121
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 111
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 112
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 113
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 114
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 117
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:35 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 119
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:35 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 118
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:37:35 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 116
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 123
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 122
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 120
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 110
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 121
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 111
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 112
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 113
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 114
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 117
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 119
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 118
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-19 09:38:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id] => 116
+    [fields] => Array
+        (
+            [0] => id_talla
+            [1] => talla
+            [2] => id_country
+        )
+
+)
+
+DEBUG - TYPE string 2018-09-19 09:40:46 --> UPDATE `servicio` SET `vista` = ' vista + 1'
+WHERE `id_servicio` = '100' LIMIT 1
+DEBUG - TYPE string 2018-09-19 09:41:05 --> UPDATE `servicio` SET `vista` = ' vista + 1'
+WHERE `id_servicio` = '100' LIMIT 1
+DEBUG - TYPE string 2018-09-19 09:41:24 --> UPDATE `servicio` SET `vista` = ' vista + 1'
+WHERE `id_servicio` = '100' LIMIT 1

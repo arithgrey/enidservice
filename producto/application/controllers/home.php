@@ -23,9 +23,8 @@ class Home extends CI_Controller{
     }
     /**/    
     function index(){                
-
         if (ctype_digit(trim($this->input->get("producto")))) {
-            
+
             $this->load_servicio($this->input->get());
         }else{
             redirect("../../?q=");
@@ -35,6 +34,9 @@ class Home extends CI_Controller{
     private function load_servicio($param){
 
         $id_servicio =  get_info_producto($param["producto"]);                    
+
+        
+        
         $this->set_option("id_servicio" , $id_servicio);                
         $data        = $this->principal->val_session("");  
 
@@ -60,9 +62,6 @@ class Home extends CI_Controller{
             $this->vista($param , $data);            
         } 
         
-
-        
-        
     }     
     /**/
     private function get_tallas($id_servicio){
@@ -77,16 +76,22 @@ class Home extends CI_Controller{
         $data["q2"]     =   get_info_variable($param , "q2");            
         $servicio       =   $this->principal->get_base_servicio($id_servicio);        
 
-        $data["tallas"] =   $this->get_tallas($id_servicio);        
+        
+        $data["tallas"] =   $this->get_tallas($id_servicio);                
         $id_usuario     =   0;
         $usuario =0;
         
         if (count($servicio)>0 ){
+
             $id_usuario      =  $servicio[0]["id_usuario"];
+            echo $id_usuario;
             $usuario         =  $this->principal->get_info_usuario($id_usuario);
-        }else{redirect("../../?q=");}
+            print_r($usuario);
+
+        }else{/*redirect("../../?q="); */}
+
         if ($usuario == 0) {
-            redirect("../../?q=");
+            /*redirect("../../?q=");*/
         }
     
         $data["usuario"]        = $usuario; 
@@ -129,6 +134,7 @@ class Home extends CI_Controller{
         $data["js"] = [base_url('application/js/principal.js')];
         $this->principal->show_data_page($data, 'home');         
         
+
     }    
     /**/
     private function get_existencia($id_servicio){                
