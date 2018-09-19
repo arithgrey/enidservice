@@ -6,27 +6,26 @@ class clasificacion_model extends CI_Model{
       $this->load->database();
   }   
   private function q_get($params=[], $id){
-        return $this->get("clasificacion", $params, ["id_clasificacion" => $id ] );
+        return $this->get($params, ["id_clasificacion" => $id ] );
     }
-    function q_up($q , $q2 , $id_usuario){
-        return $this->update("clasificacion" , [$q => $q2 ] , ["idusuario" => $id_usuario ]);
-    }
-
-  function insert($tabla ='imagen', $params , $return_id=0){        
+  function q_up($q , $q2 , $id_usuario){
+        return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);
+  }
+  function insert( $params , $return_id=0){        
       $insert   = $this->db->insert($tabla, $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }
-  private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
+  private function update($data =[] , $params_where =[] , $limit =1 ){
     
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
       }
       $this->db->limit($limit);
-      return $this->db->update($table, $data);
+      return $this->db->update("clasificacion", $data);
     
   }
   function get_clasificacion_padre_nivel($param){                        
-        return  $this->get("clasificacion", ["id_clasificacion" , "padre" , "nivel" ], [ "id_clasificacion" => $param["padre"] ] );
+        return  $this->get(["id_clasificacion" , "padre" , "nivel" ], [ "id_clasificacion" => $param["padre"] ] );
   }    
   function get_intereses_usuario($param){
 
@@ -53,15 +52,15 @@ class clasificacion_model extends CI_Model{
                 c.flag_servicio =0";
         $result =  $this->db->query($query_get);
         return $result->result_array();
-    }   
-  private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
-        $params = implode(",", $params);
-        $this->db->limit($limit);
-        $this->db->select($params);
-        foreach ($params_where as $key => $value) {
+  }   
+  private function get($params=[], $params_where =[] , $limit =1){
+    $params = implode(",", $params);
+    $this->db->limit($limit);
+    $this->db->select($params);
+    foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
-        }
-        return $this->db->get($table)->result_array();
+    } 
+    return $this->db->get("clasificacion")->result_array();
   }
   function get_clasificacion_por_palabra_clave($param){
     
@@ -88,7 +87,7 @@ class clasificacion_model extends CI_Model{
       $es_servicio  =  $param["es_servicio"];
       $nivel        =  $param["nivel"];
       $padre        =  $param["padre"];
-      return $this->get('clasificacion' , [] , ["flag_servicio" => $es_servicio, "nivel" => $nivel , "padre" => $padre] , 100 );
+      return $this->get([] , ["flag_servicio" => $es_servicio, "nivel" => $nivel , "padre" => $padre] , 100 );
   }
   function count_clasificacion($param){
 
@@ -123,7 +122,7 @@ class clasificacion_model extends CI_Model{
   }
     
     function get_clasificaciones_por_padre($padre){
-        return $this->get("clasificacion" , ["id_clasificacion","nombre_clasificacion" ],  ["padre"  => $padre] , 100);        
+        return $this->get(["id_clasificacion","nombre_clasificacion" ],  ["padre"  => $padre] , 100);        
     }    
     function get_nombre_clasificacion_por_id_clasificacion($param){        
         $response =  $this->q_get(["nombre_clasificacion"], $param["id_clasificacion"]);
@@ -135,7 +134,7 @@ class clasificacion_model extends CI_Model{
         $nivel      =  $param["nivel"];        
         $params       = ["id_clasificacion","nombre_clasificacion"];
         $params_where = ["nivel" => $nivel];
-        return $this->get("clasificacion" , $params ,$params_where , 100 );
+        return $this->get($params ,$params_where , 100 );
     }
 
     function get_clasificaciones_segundo($array_padre){
@@ -156,7 +155,7 @@ class clasificacion_model extends CI_Model{
         
         $params         = ["nombre_clasificacion" ,"id_clasificacion" , "flag_servicio"  ];
         $params_where   = ["nivel"=> 1];
-        return $this->get("clasificacion" , $params , $params_where , 50);
+        return $this->get($params , $params_where , 50);
     }
     function get_clasificaciones_por_id_clasificacion($param){
 
@@ -194,7 +193,7 @@ class clasificacion_model extends CI_Model{
                             "nivel"         => $nivel 
                         ];
         
-        return $this->get("clasificacion" , [] , $params_where , 100);
+        return $this->get([] , $params_where , 100);
     }
     
  

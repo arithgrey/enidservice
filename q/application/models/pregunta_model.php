@@ -5,8 +5,8 @@
         parent::__construct();        
         $this->load->database();
     }
-    function insert($tabla ='imagen', $params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
+    function insert( $params , $return_id=0){        
+      $insert   = $this->db->insert("pregunta", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
     function set_visto_pregunta($param){
@@ -16,7 +16,7 @@
           $campo ="leido_vendedor";    
       }
       $id_pregunta  =  $param["id_pregunta"];      
-      return $this->update("pregunta" , [$campo =>  1 ] , ["id_pregunta" =>  $id_pregunta ] );
+      return $this->update([$campo =>  1 ] , ["id_pregunta" =>  $id_pregunta ] );
                 
     }
     function get_servicios_pregunta_sin_contestar($param){
@@ -56,13 +56,11 @@
       $id_servicio  =  $param["servicio"]; 
       $id_usuario   =  $param["usuario"];
       $params       = ["pregunta" => $pregunta , "id_usuario"  => $id_usuario];
-
-      $id_pregunta =  $this->insert("pregunta" , $params , 1);    
+      $id_pregunta =  $this->insert($params, 1);    
       return $this->agrega_pregunta_servicio($id_pregunta , $id_servicio);
     }
     function preguntas($param){
-
-        
+      
         $fecha_inicio   = $param["fecha_inicio"];  
         $fecha_termino  = $param["fecha_termino"];
         $query_get      = 
@@ -226,5 +224,15 @@
       $result = $this->db->query($query_get);
       return $result->result_array();
     }
+    function actualiza_estado_pregunta($param){
 
+      $id_pregunta =  $param["pregunta"];    
+      $type =  ($param["modalidad"]== 1) ? 1:0;
+      return $this->update(["leido_vendedor" => $type ]  , ["id_pregunta" =>  $id_pregunta]);
+    }
+    function update_gamificacion_pregunta($param){      
+      $data = ['gamificacion' => 1];
+      $this->db->where('id_pregunta', $param["id_pregunta"]);
+      return $this->db->update('pregunta', $data);     
+    }
 }

@@ -135,14 +135,14 @@
           $campo_usuario ="id_usuario_venta";  
       }      
       $params_where = [$campo_usuario => $id_usuario ,  "status" =>  9];
-      return $this->get("proyecto_persona_forma_pago" , ["count(0)num"] , $params_where  )[0]["num"];
+      return $this->get(["count(0)num"] , $params_where  )[0]["num"];
       
     }
     
   function get_monto_pendiente_proyecto_persona_forma_pago($param){
 
     $id_recibo = $param["recibo"];
-    return $this->get("proyecto_persona_forma_pago", [] , ["id_proyecto_persona_forma_pago" => $id_recibo] );
+    return $this->get([] , ["id_proyecto_persona_forma_pago" => $id_recibo] );
      
   }
   function valida_recibo_por_enviar_usuario($param){
@@ -228,33 +228,30 @@
       $insert   = $this->db->insert($tabla, $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }
-  function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
+  function update($data =[] , $params_where =[] , $limit =1 ){
     
     foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
     }
     $this->db->limit($limit);
-    return $this->db->update($table, $data);
+    return $this->db->update("id_proyecto_persona_forma_pago", $data);
     
   }
   function q_get($params=[], $id){
-      return 
-      $this->get("proyecto_persona_forma_pago", $params, ["id_proyecto_persona_forma_pago" => $id ] );
-
+    return $this->get($params, ["id_proyecto_persona_forma_pago" => $id ] );
   }
   function q_up($q , $q2 , $id_servicio){
-        return $this->update("servicio" , [$q => $q2 ] , ["idusuario" => $id_servicio ]);
+    return $this->update([$q => $q2 ] , ["idusuario" => $id_servicio ]);
   }
-  private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
-
-
-        $params = implode(",", $params);
-        $this->db->limit($limit);
-        $this->db->select($params);
-        foreach ($params_where as $key => $value) {
-            $this->db->where($key , $value);
-        }        
-        return $this->db->get($table)->result_array();
+  private function get( $params=[], $params_where =[] , $limit =1){
+    
+    $params = implode(",", $params);
+    $this->db->limit($limit);
+    $this->db->select($params);
+    foreach ($params_where as $key => $value) {
+      $this->db->where($key , $value);
+    }        
+    return $this->db->get("proyecto_persona_forma_pago")->result_array();
   }
   
   function get_solicitudes_venta_dia($param){
@@ -368,17 +365,13 @@
   function get_saldo_pendiente_recibo($param){
 
       $id_recibo =  $param["id_recibo"];
-      return $this->get("proyecto_persona_forma_pago",[ "monto_a_pagar" , "flag_envio_gratis"], [ "id_proyecto_persona_forma_pago" => $id_recibo] );
+      return $this->get([ "monto_a_pagar" , "flag_envio_gratis"], [ "id_proyecto_persona_forma_pago" => $id_recibo] );
   }
 
-  function get_servicio($id_servicio){
-
-        return $this->get("servicio", [], ["id_servicio" => $id_servicio ], 100);
-  }
   function get_info_recibo_por_id($param){
             
       $where =  ["id_proyecto_persona_forma_pago" =>  $param["id_recibo"] ];            
-      return    $this->get('proyecto_persona_forma_pago' , [], $where );
+      return    $this->get([], $where );
   }
   function crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis){
         $resumen ="";

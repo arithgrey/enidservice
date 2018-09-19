@@ -14,24 +14,21 @@
     function cancelar_envio_recordatorio($param){
       $data   = array('recordatorio_publicacion' => 0);
       $this->db->where('idusuario', $param["id"]);
-      return  $this->db->update('usuario', $data);
+      return  $this->db->update($data);
     }
     /**/
     function calificacion_cancelacion_compra($param){
-
       $id           = $param["id"];
-      return $this->update("usuario" , ["num_cancelaciones" => "num_cancelaciones + 1" ], ["idusuario" =>  $id]);
+      return $this->update(["num_cancelaciones" => "num_cancelaciones + 1" ], ["idusuario" =>  $id]);
     }
     function evalua_usuario_existente($param){
 
       $email =  $param["email"];
-      $query_get ="SELECT COUNT(0)num 
-                    FROM usuario 
-                  WHERE email = '".$email."' ";
+      $query_get ="SELECT COUNT(0)num  FROM usuario WHERE email = '".$email."' ";
       $result = $this->db->query($query_get);
       return $result->result_array()[0]["num"];
     }
-    function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    function get($params=[], $params_where =[] , $limit =1){
         
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -39,27 +36,24 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("usuario")->result_array();
     }
-    private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
-      foreach ($params_where as $key => $value) {
-              $this->db->where($key , $value);
-      }
-      $this->db->limit($limit);
-      return $this->db->update($table, $data);    
+    private function update( $data =[] , $params_where =[] , $limit =1 ){
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        $this->db->limit($limit);
+        return $this->db->update("usuario", $data);    
     }
     function q_up($q , $q2 , $id_usuario){
-        return $this->update("usuario" , [$q => $q2 ] , ["idusuario" => $id_usuario ]);
+        return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);
     }
     function q_get($params=[], $id){
-        return $this->get("usuario", $params, ["idusuario" => $id ] );
-    }
-    
-    
+        return $this->get($params, ["idusuario" => $id ] );
+    }   
     function get_usuario_ventas(){
-      return $this->get("usuario", ["idusuario"], ["email" => 'ventas@enidservice.com']);
+      return $this->get( ["idusuario"], ["email" => 'ventas@enidservice.com']);
     } 
-    
     function get_terminos_privacidad_usuario($param){
 
         $id_usuario =  $param["id_usuario"];
@@ -160,7 +154,7 @@
             "lada_negocio"          =>  $param["lada_negocio"]
         ];      
         $params_where   = ["idusuario" => $param["id_usuario"]];
-        return $this->update('usuario' , $params , $params_where );        
+        return $this->update( $params , $params_where );        
     }
     function set_telefono($param){
         
@@ -170,7 +164,7 @@
             "tel_lada"      =>  $param["lada"]
         ];      
         $params_where   = ["idusuario" => $param["id_usuario"]];
-        return $this->update('usuario' , $params , $params_where );        
+        return $this->update( $params , $params_where );        
     }
     function set_pass($param){
     
@@ -179,7 +173,7 @@
         $params                 =   ["password" => sha1($new_pass)];    
         $params_where           =   ["email"   => $mail ];            
         $data["new_pass"]       =   $new_pass;
-        $data["status_send"]    =   $this->update("usuario" , $params, $params_where );
+        $data["status_send"]    =   $this->update($params, $params_where );
         $data["mail"] =  $param["mail"];
         return $data;    
     }
@@ -201,16 +195,9 @@
     }
     */
     /**/
-    function insert($tabla ='imagen', $params , $return_id=0){        
-        $insert   = $this->db->insert($tabla, $params);     
+    function insert( $params , $return_id=0){        
+        $insert   = $this->db->insert("usuario", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-    }
-    /**/
-    function delete($table ='imagen' , $params_where = [] , $limit = 1){
-
-        $this->db->limit($limit);
-        //where($key, $value = NULL, $escape = NULL);
-        return $this->db->delete($table,  $params_where);
     }
     function get_usuario_cliente($param){
 
@@ -306,11 +293,7 @@
 
         $fecha_inicio   = $param["fecha_inicio"];  
         $fecha_termino  = $param["fecha_termino"];
-        $query_get      = 
-                        "SELECT 
-                            COUNT(0)num 
-                        FROM 
-                            usuario
+        $query_get      = "SELECT COUNT(0)num FROM usuario
                         WHERE 
                             DATE(ultima_publicacion) 
                         BETWEEN 
@@ -347,8 +330,7 @@
         $fecha_inicio   = $param["fecha_inicio"];  
         $fecha_termino  = $param["fecha_termino"];
 
-        $query_get ="SELECT 
-                        COUNT(0)num 
+        $query_get ="SELECT  COUNT(0)num 
                     FROM 
                         usuario_direccion 
                     WHERE 
@@ -423,7 +405,7 @@
             "idusuario" => $id_usuario,
             "password"  => $antes
         ];
-        return $this->get("usuario", ["password"] , $params_where);
+        return $this->get(["password"] , $params_where);
     }
     /*
     function actualizarPassword($antes, $nuevo, $id_usuario){   
@@ -447,7 +429,7 @@
       $params_where        = 
       ["DATE(fecha_registro)" =>  "BETWEEN '".$fecha_inicio."' AND  '".$fecha_termino."'" ];
       
-      return $this->get("usuario" ,  ["COUNT(0)num"] ,  $params_where)[0]["num"];
+      return $this->get(  ["COUNT(0)num"] ,  $params_where)[0]["num"];
       
    }
     function get_usuarios_periodo($param){      
@@ -681,16 +663,9 @@
             $params["tel_contacto"] =  $tel_contacto;
         }
         
-        $this->update('usuario' , $params , ["idusuario" => $id_usuario] );
+        $this->update($params, ["idusuario" => $id_usuario] );
 
-        $query_update =  
-        "UPDATE 
-        usuario 
-        SET 
-        ultima_modificacion = CURRENT_TIMESTAMP() 
-        WHERE idusuario = $id_usuario 
-        LIMIT 1 ";
-        
+        $query_update =  "UPDATE usuario SET ultima_modificacion = CURRENT_TIMESTAMP() WHERE idusuario = $id_usuario LIMIT 1 ";
         return $this->db->query($query_update);
       
     } 
@@ -724,7 +699,7 @@
         "id_departamento"    => $id_departamento,
         "password"           => sha1("qwerty123.1")
       ];
-      $id_usuario = $this->insert("usuario" , $params , 1);
+      $id_usuario = $this->insert($params , 1);
       $param["id_usuario"] = $id_usuario;      
       return $param;
 

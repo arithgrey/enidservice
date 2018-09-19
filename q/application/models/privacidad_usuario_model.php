@@ -4,6 +4,10 @@
         parent::__construct();        
         $this->load->database();
     }  
+    function insert( $params , $return_id=0 , $debug=0){        
+        $insert   = $this->db->insert("privacidad_usuario", $params , $debug);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }        
     private function get($params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -12,10 +16,6 @@
             $this->db->where($key , $value);
         }
         return $this->db->get("privacidad_usuario")->result_array();
-    }
-    private function insert($params , $return_id=0){        
-        $insert   = $this->db->insert("privacidad_usuario", $params);     
-        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
     private function delete( $params_where =[] , $limit =1){              
         $this->db->limit($limit);        
@@ -34,7 +34,7 @@
             $params = [ "id_privacidad" =>  $id_privacidad ,
                         "id_usuario"    =>  $id_usuario
                     ];
-            return $this->insert($params );            
+            return $this->insert($params);            
         }else{            
             $params_where =  ["id_privacidad" => $id_privacidad ,  "id_usuario" => $id_usuario ];
             return  $this->delete($params_where);            

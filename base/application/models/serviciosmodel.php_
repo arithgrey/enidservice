@@ -20,7 +20,7 @@
         return $this->db->query($query_update);
     }    
       
-    function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    function get( $params=[], $params_where =[] , $limit =1){
         
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -31,7 +31,7 @@
         return $this->db->get($table)->result_array();
     }
     /**/
-    private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
+    private function update( , $data =[] , $params_where =[] , $limit =1 ){
     
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
@@ -211,7 +211,7 @@
     /**/
     
     /**/
-    function insert($tabla ='imagen', $params , $return_id=0 , $debug=0){        
+    function insert( $params , $return_id=0 , $debug=0){        
         $insert   = $this->db->insert($tabla, $params , $debug);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }        

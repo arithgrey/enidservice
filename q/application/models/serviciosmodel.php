@@ -7,20 +7,18 @@
         $this->load->database();
     }
     function q_up($q , $q2 , $id_servicio){
-        return $this->update("servicio" , [$q => $q2 ] , ["id_servicio" => $id_servicio ]);
+        return $this->update([$q => $q2 ] , ["id_servicio" => $id_servicio ]);
     }
     function q_get($params=[], $id){
-        return $this->get("servicio", $params, ["id_servicio" => $id ] );
+        return $this->get($params, ["id_servicio" => $id ] );
     }  
     function set_gamificacion_deseo($param , $positivo=1 , $valor =1){
 
         $val  =  ($positivo ==  1) ? "deseado + ".$valor :  "deseado - ".$valor;
-        $query_update = 
-        "UPDATE servicio SET deseado =  ".$val .  " WHERE id_servicio =" .$param["id_servicio"];
+        $query_update = "UPDATE servicio SET deseado =  ".$val .  " WHERE id_servicio =" .$param["id_servicio"];
         return $this->db->query($query_update);
-    }    
-      
-    function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    }         
+    function get($params=[], $params_where =[] , $limit =1){
         
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -28,16 +26,16 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("servicio")->result_array();
     }
     /**/
-    private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
+    private function update($data =[] , $params_where =[] , $limit =1 ){
     
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
       }
       $this->db->limit($limit);
-      return $this->db->update($table, $data);    
+      return $this->db->update("servicio", $data);    
     }
     private function set_option($key , $value){
         $this->options[$key] =  $value;
@@ -165,7 +163,7 @@
             "status"        => 1, 
             "existencia"    => ">0"
         ];
-        return $this->get("servicio" , $params , $params_where);      
+        return $this->get($params , $params_where);      
     }
     function get_top_semanal_vendedor($param){
         
@@ -206,7 +204,7 @@
                       $this->db->query($query_get);
       }
     }     
-    function insert($tabla ='imagen', $params , $return_id=0 , $debug=0){        
+    function insert( $params , $return_id=0 , $debug=0){        
         $insert   = $this->db->insert($tabla, $params , $debug);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }        
@@ -305,11 +303,11 @@
     }
     function get_colores_por_servicio($param){
         $id_servicio =  $param["id_servicio"];
-        return $this->get("servicio" , ["color"],  [ "id_servicio" => $id_servicio  ]);
+        return $this->get(["color"],  [ "id_servicio" => $id_servicio  ]);
     }
 
     function get_info_servicio($param){
-        return $this->get("servicio" , [] , ["id_servicio" =>  $param["id_servicio"] ]);
+        return $this->get([] , ["id_servicio" =>  $param["id_servicio"] ]);
     }    
     function gamificacion_usuario_servicios($param){
           
@@ -550,7 +548,7 @@
             "venta_mayoreo",
             "tiempo_promedio_entrega",
             "talla"];
-        return $this->get("servicio" , $params , ["id_servicio" => $id_servicio]  );
+        return $this->get( $params , ["id_servicio" => $id_servicio]  );
       }      
     function get_num_existencia($id_servicio){
 
@@ -672,7 +670,7 @@
         "id_usuario"    =>  $id_usuario,
         "id_servicio"   =>  $id_servicio
         ];
-        return $this->get("servicio" , ["COUNT(0)num"], $params_where  )[0]["num"];
+        return $this->get( ["COUNT(0)num"], $params_where  )[0]["num"];
 
     }
     function get_clasificaciones_por_id_servicio($id_servicio){
@@ -684,7 +682,7 @@
                         "cuarto_nivel",  
                         "quinto_nivel" 
                     ];
-        return $this->get("servicio" , $params , ["id_servicio" => $id_servicio]);
+        return $this->get( $params , ["id_servicio" => $id_servicio]);
 
     }
     function  get_clasificaciones_destacadas($param){

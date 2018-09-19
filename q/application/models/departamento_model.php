@@ -4,17 +4,17 @@
         parent::__construct();        
         $this->load->database();
     }
-    function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    function get($params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("departamento")->result_array();
     }
     function get_all($param){        
-        return $this->get("departamento" , [] , [] , 100);
+        return $this->get([] , [] , 100);
     }
     
 }

@@ -46,7 +46,7 @@
         return $info;
 
     } 
-    function insert($tabla ='imagen', $params , $return_id=0 , $debug=0){        
+    function insert( $params , $return_id=0 , $debug=0){        
           $insert   = $this->db->insert($tabla, $params , $debug);     
           return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }        

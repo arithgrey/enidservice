@@ -4,14 +4,14 @@
         parent::__construct();        
         $this->load->database();
   }
-  function delete($table='imagen' , $params_where =[] , $limit =1){              
+  function delete($params_where =[] , $limit =1){              
     $this->db->limit($limit);        
     foreach ($params_where as $key => $value) {
       $this->db->where($key , $value);
     }        
-    return  $this->db->delete($table, $params_where);
+    return  $this->db->delete("perfil_recurso", $params_where);
   }
-  function insert($tabla ='imagen', $params , $return_id=0 , $debug=0){        
+  function insert( $params , $return_id=0 , $debug=0){        
         $insert   = $this->db->insert($tabla, $params , $debug);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }        
@@ -33,10 +33,12 @@
     return  $this->db->query($query_get)->result_array()[0]["num_permiso"];                    
   }  
   function delete_perfil_recurso($param){
+    
     $params_where =  [
-        "idrecurso" => $param["id_recurso"] , 
-        "idperfil"  => $param["id_perfil"]
+      "idrecurso" => $param["id_recurso"] , 
+      "idperfil"  => $param["id_perfil"]
     ];
-    return  $this->delete("perfil_recurso", $params_where);
+
+    return  $this->delete($params_where);
   }
 }

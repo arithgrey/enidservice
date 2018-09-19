@@ -7,10 +7,11 @@ class empresa_recurso extends REST_Controller{
         $this->load->library(lib_def());    
   }  
   function recursos_GET(){      
-      $param        = 	$this->get();
-      $id_empresa   = 	$param["id_empresa"];
-      $params_where = 	["idempresa" => $id_empresa ]; 
-      $response 	= 	$this->empresa_recurso_model->get("empresa_recurso", ["idrecurso"] ,  $params_where , 25);
+      
+      $param         = 	$this->get();
+      $id_empresa    = 	$param["id_empresa"];
+      $params_where  = 	["idempresa" => $id_empresa ]; 
+      $response 	   = 	$this->empresa_recurso_model->get(["idrecurso"] ,  $params_where , 25);
       $this->response($response);
   }  
 }

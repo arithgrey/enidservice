@@ -3,11 +3,26 @@
     function __construct(){      
         parent::__construct();        
         $this->load->database();
-
     }
-	function get_all($param=''){
-    
-	    $query_get  =  "SELECT  id , tipo , clasificacion  FROM tipo_talla LIMIT 10";
+    function update($data =[] , $params_where =[] , $limit =1 ){
+      foreach ($params_where as $key => $value) {
+              $this->db->where($key , $value);
+      }
+      $this->db->limit($limit);
+      return $this->db->update("tipo_talla", $data);    
+    }
+    function get($params=[], $params_where =[] , $limit =1){
+        
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);        
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("tipo_talla")->result_array();
+    }
+    function get_all($param=''){
+	    $query_get  =  "SELECT  id , tipo , clasificacion FROM tipo_talla LIMIT 10";
 	    return   	$this->db->query($query_get)->result_array();
   	}    
   	function get_like_clasificacion($param){ 
@@ -20,5 +35,18 @@
         return            $result->result_array();
 
     }
-}
+    function get_tipo_talla($param){
+        $id             = $param["id"];
+        return $this->get([] , ["id" => $id] );
+    }
+    function update_talla_clasificacion($param){
 
+        $id                     =   $param["id"];
+        $clasificaciones        =   $param["clasificaciones"];
+        $params                 = [ "clasificacion" =>  $clasificaciones ];
+        return $this->update($params , ["id" => $id ] );    
+    }
+    function get_tallas_clasificacion($param=''){
+        return $this->get(["id" , "tipo" , "clasificacion"] , [] , 10 );
+    } 
+}

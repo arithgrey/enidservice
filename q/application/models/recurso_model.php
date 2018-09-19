@@ -15,10 +15,8 @@
           "status"          =>  1,
           "class"           =>  '' 
         ];
-        return $this->insert("recurso", $params );
-        
+        return $this->insert($params);
     }
-
     function get_recurso_perfil_recurso($id_perfil){
 
         $query_get ="SELECT
@@ -70,11 +68,10 @@
                     r.status = 1
                     GROUP BY r.idrecurso ";
                     
-
       return $this->db->query($query_get)->result_array();
     }
-    function insert($tabla ='imagen', $params , $return_id=0 , $debug=0){        
-        $insert   = $this->db->insert($tabla, $params , $debug);     
+    function insert( $params , $return_id=0 , $debug=0){        
+        $insert   = $this->db->insert("recurso", $params , $debug);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }        
 }

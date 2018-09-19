@@ -4,7 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }    
-    private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    private function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
@@ -22,7 +22,7 @@
       $recomendaria         = $param["recomendaria"];
       $valoracion           = $param["calificacion"];
       $id_servicio          = $param["id_servicio"];
-      
+
       $params = [
         "valoracion"      =>    $valoracion,
         "titulo"          =>    $titulo,
@@ -32,19 +32,21 @@
         "nombre"          =>    $nombre,
         "id_servicio"     =>    $id_servicio
       ];
-      return $this->insert("valoracion", $params, 1);
+      return $this->insert($params, 1);
 
     }
-    
     /**/
-    function insert($tabla ='imagen', $params , $return_id=0){                
+    function insert( $params , $return_id=0){                
         $insert   = $this->db->insert($tabla, $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }    
-    function update( $table = 'imagen', $params , $limit =1 ){
-    
-        $this->db->limit($limit);
-        return $this->db->update($table, $data);
+    private function update($data =[] , $params_where =[] , $limit =1 ){
+
+      foreach ($params_where as $key => $value) {
+              $this->db->where($key , $value);
+      }
+      $this->db->limit($limit);
+      return $this->db->update("valoracion", $data);    
     }
     /**/
     function set_gamificacion($param , $positivo=1 , $valor =1){
@@ -59,7 +61,6 @@
       $result =  $this->db->query($query_get);
       return $result->result_array();
       
-
     }    
     function get_valoraciones_usuario($param){
       $_num =  get_random();
@@ -121,38 +122,23 @@
   
   function get_productos_distinctos_valorados($param){
 
-    $fecha_inicio =  $param["fecha_inicio"];
-    $fecha_termino =  $param["fecha_termino"];
+      $fecha_inicio =  $param["fecha_inicio"];
+      $fecha_termino =  $param["fecha_termino"];
 
-    $query_get ="SELECT 
-                  DISTINCT(id_servicio) 
-                FROM  valoracion 
-                WHERE 
-                  DATE(fecha_registro) 
-                BETWEEN  
-                  '".$fecha_inicio."' 
-                AND  
-                  '".$fecha_termino."' ";
+      $query_get ="SELECT 
+                    DISTINCT(id_servicio) 
+                  FROM  valoracion 
+                  WHERE 
+                    DATE(fecha_registro) 
+                  BETWEEN  
+                    '".$fecha_inicio."' 
+                  AND  
+                    '".$fecha_termino."' ";
 
-    $result =  $this->db->query($query_get);      
-    return $result->result_array();
-  }
- 
-    
-    
-    
-    
-    
-    
-    /*
-    
-    
-    */
-   
-    
-    
-    
-    
+      $result =  $this->db->query($query_get);      
+      return $result->result_array();
+    }
+
     function get_numero_valoraciones_servicio($id_servicio){
     
     $query_get = "SELECT 
@@ -170,32 +156,7 @@
       $id_servicio=  $param["id_servicio"];
       return $this->get_numero_valoraciones_servicio($id_servicio);
     } 
-    function update_gamificacion_pregunta($param){      
-      $data = ['gamificacion' => 1];
-      $this->db->where('id_pregunta', $param["id_pregunta"]);
-      return $this->db->update('pregunta', $data);     
-    }
     
-    /*
-    
-    
-   
-    
-    
-    
-   
-    
-    
-    
-    
-    
-
-    
-  
-  
-  
-   
-*/  
    function get_desglose_valoraciones_periodo($param){
            
         $where  =  $this->get_where_valoracion($param , 1);
@@ -272,9 +233,5 @@
       return $data_complete;
         
     }
-    function agrega_pregunta_servicio($id_pregunta , $id_servicio){
-      /**/
-      $params = ["id_pregunta"  =>  $id_pregunta , "id_servicio"   => $id_servicio];
-      return $this->insert("pregunta_servicio", $params);    
-    }
+    
 }

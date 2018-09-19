@@ -5,16 +5,16 @@
         $this->load->database();
     }
     function get_all($param){
-        return $this->get('funcionalidad' , [], [] , 100);        
+        return $this->get([], [] , 100);        
     }
-    private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    private function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get('funcionalidad')->result_array();
     }
 
     

@@ -4,20 +4,19 @@
         parent::__construct();        
         $this->load->database();
     }  
-    private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    private function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("privacidad")->result_array();
     }
-    private function insert($tabla ='privacidad', $params , $return_id=0){        
-        $insert   = $this->db->insert($tabla, $params);     
+    private function insert($params , $return_id=0){        
+        $insert   = $this->db->insert("privacidad", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
-    
     function get_conceptos_por_funcionalidad_usuario($id_funcionalidad , $id_usuario){
 
         $keys = get_keys(["p.id_privacidad", "p.privacidad" , "pu.id_usuario"]);
@@ -36,6 +35,4 @@
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }  
-    
-    
 }

@@ -326,7 +326,7 @@ class usuario extends REST_Controller{
         $param          = $this->post();                
         $params         = [ "idusuario","nombre","email","fecha_registro","idempresa"];
         $params_where   = ["email" => $param["email"] , "password" => $param["secret"]];
-        $response       = $this->usuario_model->get("usuario" , $params , $params_where);
+        $response       = $this->usuario_model->get($params , $params_where);
         $this->response($response);
     }
     function num_registros_preriodo_GET(){

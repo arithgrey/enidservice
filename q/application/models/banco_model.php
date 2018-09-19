@@ -6,7 +6,6 @@
     }
    	/**/
     function get_bancos($param){          
-      
       return $this->get("banco" , [] , ["status" => 1] , 100);
     }
     

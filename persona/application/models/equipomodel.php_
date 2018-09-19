@@ -10,7 +10,7 @@
   function q_up($q , $q2 , $id_usuario){
         return $this->update("servicio" , [$q => $q2 ] , ["idusuario" => $id_usuario ]);
   }
-  private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+  private function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);

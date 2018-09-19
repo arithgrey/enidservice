@@ -44,9 +44,7 @@ class Notificaciones extends REST_Controller{
         $num_correos_resta_text =  "";
         
         if ($num_correos_resta > 0 ){            
-            $num_correos_resta_text =  "<span class='alerta_notificacion_fail'>
-                                        <i class='fa fa-minus-circle'></i>
-                                        ".$num_correos_resta."
+            $num_correos_resta_text =  "<span class='alerta_notificacion_fail'>".icon('fa fa-minus-circle').$num_correos_resta."
                                         </span>";
         }else if($num_correos_resta == 0 ){
             $num_correos_resta_text =  "<span class='alerta_notificacion_ok'>
@@ -54,8 +52,7 @@ class Notificaciones extends REST_Controller{
                                         </span>";
         }else{
             $num_correos_resta_text =  "<span class='alerta_notificacion_ok'>
-                                            <i class='fa fa-plus-circle' ></i>
-                                        ". abs($num_correos_resta) ."
+                                        ".icon('fa fa-plus-circle').abs($num_correos_resta) ."
                                         </span>";
         }
 
@@ -64,10 +61,5 @@ class Notificaciones extends REST_Controller{
         
         $this->response($data);
     }
-    /**/    
-    function preguntas_recibidas_GET(){
-        
-        $this->response("ok");
-    }
-    /**/
+    
 }?>

@@ -3,21 +3,19 @@
     function __construct(){      
         parent::__construct();        
         $this->load->database();
-    }   
-    function get_pais($param){
-
-      $id_pais = $param["id_pais"];
-      $query_get = "SELECT  
-                  *
-                  FROM 
-                    countries
-                  WHERE 
-                    idCountry = $id_pais";
-
-                  $result =  $this->db->query($query_get);
-                  return $result->result_array();
-
+    } 
+    function q_get($params=[], $id){
+        return $this->get($params, ["id_servicio" => $id ] );
+    } 
+    function get($params=[], $params_where =[] , $limit =1){
+        
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);        
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("countries")->result_array();
     }
-  
-          
+        
 }

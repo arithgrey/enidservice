@@ -10,7 +10,7 @@ class Perfiles extends REST_Controller{
   function get_GET(){
     
     $param    =   $this->get();
-    $response =  $this->perfil_model->get('perfil' , [], [] , 50);
+    $response =  $this->perfil_model->get( [], [] , 50);
     $this->response($response);
   }  
   /**/

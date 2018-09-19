@@ -4,7 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }
-    private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
+    private function update( , $data =[] , $params_where =[] , $limit =1 ){
     
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
@@ -13,7 +13,7 @@
       return $this->db->update($table, $data);
     
     }
-    private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    private function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);

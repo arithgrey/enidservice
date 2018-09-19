@@ -11,8 +11,7 @@ class usuario_perfil extends REST_Controller{
       $param          =   $this->get();
       $id_usuario     =   $param["id_usuario"];      
       $params         =   ["idusuario" => $id_usuario , "status"   =>  1 ];
-      $response       =   
-      $this->usuario_perfil_model->get("usuario_perfil" , ["idperfil"] , $params);
+      $response       =   $this->usuario_perfil_model->get(["idperfil"] , $params);
       $this->response($response);
   	}    
     function permisos_usuario_POST(){

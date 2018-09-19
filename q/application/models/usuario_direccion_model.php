@@ -12,7 +12,7 @@
         }        
         return  $this->db->delete("usuario_direccion", $params_where);
     }
-    function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    function get( $params=[], $params_where =[] , $limit =1){
         
         $params = implode(",", $params);
         $this->db->limit($limit);

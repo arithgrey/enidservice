@@ -4,7 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }    
-    function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
@@ -16,7 +16,7 @@
     
     /*Se cancela el envio de email recordatorio de publicación*/
     
-    private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
+    private function update( , $data =[] , $params_where =[] , $limit =1 ){
     
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);

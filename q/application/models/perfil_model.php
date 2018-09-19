@@ -4,17 +4,17 @@
         parent::__construct();        
         $this->load->database();
     }
-    function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("perfil")->result_array();
     }
     /**/
-    function insert($tabla ='imagen', $params , $return_id=0){        
+    function insert( $params , $return_id=0){        
         $insert   = $this->db->insert($tabla, $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
@@ -45,7 +45,7 @@
     }
     function get_puesto_cargo($param){
       $id_departamento =  $param["id_departamento"];
-      return $this->get("perfil", [] , ["id_departamento" =>  $id_departamento ] , 100);
+      return $this->get([] , ["id_departamento" =>  $id_departamento ] , 100);
     }      
 
 }

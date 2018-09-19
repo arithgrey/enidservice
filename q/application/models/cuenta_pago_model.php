@@ -26,7 +26,7 @@
               "tipo"        =>   0
             ];
                         
-            $data_complete["registro_cuenta"]= $this->insert("cuenta_pago");
+            $data_complete["registro_cuenta"]= $this->insert($params);
           }
       }
       return $data_complete;
@@ -57,7 +57,7 @@
               "tipo"                =>   1,
               "tipo_tarjeta"        =>  $tipo_tarjeta
             ];
-            $data_complete["registro_cuenta"] = $this->insert("cuenta_pago" , $params);
+            $data_complete["registro_cuenta"] = $this->insert($params);
             
           }
       }
@@ -87,5 +87,9 @@
       $result =  $this->db->query($query_get);
       return $result->result_array();
     }
+    function insert($params , $return_id=0 , $debug=0){        
+        $insert   = $this->db->insert("cuenta_pago", $params , $debug);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }        
     
 }

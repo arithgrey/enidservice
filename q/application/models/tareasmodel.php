@@ -4,14 +4,13 @@ class tareasmodel extends CI_Model{
       parent::__construct();        
       $this->load->database();
   } 
-  private function q_get($params=[], $id){
-        return $this->get("servicio", $params, ["id_servicio" => $id ] );
+  function q_get($params=[], $id){
+    return $this->get($params, ["id_servicio" => $id ] );
   }
   function q_up($q , $q2 , $id_usuario){
-    return $this->update("servicio" , [$q => $q2 ] , ["idusuario" => $id_usuario ]);
+    return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);
   }
-  private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
-    
+  function update($data =[] , $params_where =[] , $limit =1 ){
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
       }
@@ -19,35 +18,20 @@ class tareasmodel extends CI_Model{
       return $this->db->update($table, $data);
     
   }
-  function insert($tabla ='imagen', $params , $return_id=0){        
+  function insert( $params , $return_id=0){        
       $insert   = $this->db->insert($tabla, $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }
-  function registra_respuesta($param){
-
-    $id_tarea     =   $param["tarea"];
-    $id_usuario   =   $param["id_usuario"];
-    $respuesta    =   $param["mensaje"];
-    $params       =   [
-        "respuesta"     =>  $respuesta,
-        "id_tarea"      =>  $id_tarea,
-        "id_usuario"    =>  $id_usuario
-    ];
-    
-    return $this->insert("respuesta" , $params);
-
-  }
- 
   
-  function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+  function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
-    }
+        return $this->db->get("tarea")->result_array();
+  }
   function valida_tareas_pendientes($param){
 
     $id_ticket =  $param["id_ticket"];
@@ -80,7 +64,6 @@ class tareasmodel extends CI_Model{
 
     $descripcion  =  $param["tarea"];
     $id_ticket    =  $param["id_ticket"];
-    return 23;
     $id_usuario   =  $param["id_usuario"];
 
     $params = [
@@ -88,7 +71,7 @@ class tareasmodel extends CI_Model{
         "id_ticket"         =>  $id_ticket ,
         "usuario_registro"  =>  $id_usuario
     ];
-    $this->insert("tarea" ,$params);
+    $this->insert($params);
     return  $this->valida_tareas_pendientes($param);
     
   }  
@@ -99,10 +82,8 @@ class tareasmodel extends CI_Model{
       "fecha_termino" => CURRENT_TIMESTAMP()
     ];
     $params_where = ["id_tarea" =>  $param["id_tarea"] ];
-    $this->update("tarea", $params, $params_where);
+    $this->update($params, $params_where);
     return $this->valida_tareas_pendientes($param);
-    
-
   }    
   function get_tareas_ticket_num($param){
 

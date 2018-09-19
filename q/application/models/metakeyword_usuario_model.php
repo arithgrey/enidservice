@@ -20,9 +20,15 @@
 
         $metakeyword =  $param["metakeyword_usuario"];
         $id_usuario  =  $param["id_usuario"];
-        return $this->q_up( "metakeyword_usuario"  ,  $metakeyword ,  $id_servicio );    
+        return $this->q_up("metakeyword_usuario"  ,  $metakeyword ,  $id_servicio );    
     }     
     /*
+    function q_up($q , $q2 , $id_servicio){
+        return $this->update([$q => $q2 ] , ["id_servicio" => $id_servicio ]);
+    }
+    */
+    /*
+
     function agrega_metakeyword($param){
         
         $metakeyword_usuario    =   $param["metakeyword_usuario"];    

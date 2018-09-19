@@ -4,29 +4,18 @@ class img_model extends CI_Model {
         parent::__construct();        
         $this->load->database();
   }
-  private function insert($tabla ='imagen', $params , $return_id=0){        
-    $insert   = $this->db->insert($tabla, $params);     
+  private function insert($params , $return_id=0){        
+    $insert   = $this->db->insert("imagen", $params);     
     return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }
-  private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
-        $params = implode(",", $params);
-        $this->db->limit($limit);
-        $this->db->select($params);
-        foreach ($params_where as $key => $value) {
-            $this->db->where($key , $value);
-        }
-        return $this->db->get($table)->result_array();
-  }
- 
-  function delete($table ='imagen' , $params_where = [] , $limit = 1){
-
+  private function get( $params=[], $params_where =[] , $limit =1){
+    $params = implode(",", $params);
     $this->db->limit($limit);
-    //where($key, $value = NULL, $escape = NULL);
-    return $this->db->delete($table,  $params_where);
-  }
-  function get_img_servicio($id_servicio){
-    
-    return $this->get('imagen_servicio', ["id_imagen"] , ["id_servicio" => $id_servicio ] );
+    $this->db->select($params);
+    foreach ($params_where as $key => $value) {
+        $this->db->where($key , $value);
+    }
+    return $this->db->get("imagen")->result_array();
   }
   /**/
   function elimina_img($id_imagen){
@@ -47,7 +36,6 @@ class img_model extends CI_Model {
     }
     
   }
-  
   function insert_imgen_usuario($param){
 
     $this->elimina_pre_img_usuario($param);    
@@ -88,15 +76,8 @@ class img_model extends CI_Model {
     return     $this->db->insert_id();     
   }  
   
-  function get_img_usuario($id_usuario){
-
-    return 
-    $this->get('imagen_usuario', ["id_imagen"] , ["idusuario" => $id_usuario ] ); 
-  }
   function get_img($id_imagen){
-
-    return $this->get("imagen" , ["img"] , [ "idimagen" => $id_imagen]);
-
+    return $this->get(["img"] , [ "idimagen" => $id_imagen]);
   }
   function insert_imgen_servicio($param){
               
@@ -106,10 +87,7 @@ class img_model extends CI_Model {
     return  $this->insert("imagen_servicio" ,  $params , 1);
     
 }
-function get_imagenes_por_servicio($param){
-  $id_servicio   =  $param["id_servicio"];
-  return $this->get('imagen_servicio', ["id_imagen"] , ["id_servicio" => $id_servicio ] , 10);
-}
+
 function delete_imagen_servicio($param){
     
   $id_imagen =   $param["id_imagen"];  

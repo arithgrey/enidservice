@@ -11,7 +11,7 @@ class ticketsmodel extends CI_Model{
   function q_up($q , $q2 , $id_usuario){
         return $this->update("servicio" , [$q => $q2 ] , ["idusuario" => $id_usuario ]);
   }
-  private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
+  private function update( , $data =[] , $params_where =[] , $limit =1 ){
     
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
@@ -20,7 +20,7 @@ class ticketsmodel extends CI_Model{
       return $this->db->update($table, $data);
     
   }
-  function insert($tabla ='imagen', $params , $return_id=0){        
+  function insert( $params , $return_id=0){        
       $insert   = $this->db->insert($tabla, $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }

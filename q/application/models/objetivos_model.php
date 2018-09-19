@@ -4,8 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }
-
-    function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    function get($params=[], $params_where =[] , $limit =1){
         
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -13,6 +12,6 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("objetivo")->result_array();
     }    
 }

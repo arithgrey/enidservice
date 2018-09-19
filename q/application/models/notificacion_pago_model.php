@@ -3,11 +3,11 @@
     function __construct(){      
         parent::__construct();        
         $this->load->database();
-    }
-    function insert($tabla ='imagen', $params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
-      return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }    
+    function insert( $params , $return_id=0){        
+        $insert   = $this->db->insert("notificacion_pago", $params);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }
     function get_notificacion_pago($param){    
         $id_notificacion_pago =  $param["id_notificacion_pago"];    
         $query_get ="
@@ -103,8 +103,7 @@
         "comentario"          => $comentarios,
         "num_recibo"          => $num_recibo
       ];
-      return $this->insert("notificacion_pago" , $params , 1);
-    
+      return $this->insert($params, 1);
     }
     function actualiza_pago_notificado($param){
 

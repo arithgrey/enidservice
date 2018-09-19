@@ -4,29 +4,28 @@
         parent::__construct();        
         $this->load->database();
     }
-    private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
+    private function update($data =[] , $params_where =[] , $limit =1 ){
     
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
       }
       $this->db->limit($limit);
-      return $this->db->update($table, $data);
+      return $this->db->update("faq", $data);
     }
     function q_up($q , $q2 , $id_usuario){
-        return $this->update("servicio" , [$q => $q2 ] , ["idusuario" => $id_usuario ]);
+        return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);
     }
     private function q_get($params=[], $id){
-        return $this->get("servicio", $params, ["id_servicio" => $id ] );
+        return $this->get($params, ["id_servicio" => $id ] );
     }
-    
-    private function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    private function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("faq")->result_array();
     }
     function search($param){
 
@@ -42,7 +41,7 @@
         return $result->result_array();
     }
     /**/
-    function insert($tabla ='imagen', $params , $return_id=0){        
+    function insert( $params , $return_id=0){        
         $insert   = $this->db->insert($tabla, $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }

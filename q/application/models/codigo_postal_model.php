@@ -22,9 +22,9 @@
     function get_colonia_delegacion($param){    
     
       /*hay que realizar correccion a la base de datos*/
-      $cp =  $param["cp"];    
+      $cp        =  $param["cp"];    
       $query_get =  "SELECT * FROM codigo_postal WHERE cp like '".$cp."%' LIMIT 20";
-      $cps = $this->db->query($query_get)->result_array();
+      $cps       = $this->db->query($query_get)->result_array();
       if (count($cps) ==  0) {
         $cp =  substr($cp, 1 , strlen($cp));
         $query_get =  "SELECT * FROM codigo_postal WHERE cp like '".$cp."%' LIMIT 20";

@@ -52,7 +52,7 @@ class Valoracion extends REST_Controller{
         return $this->update("servicio" , [$q => $q2 ] , ["idusuario" => $id_usuario ]);
     }
 
-    function insert($tabla ='imagen', $params , $return_id=0){        
+    function insert( $params , $return_id=0){        
       $insert   = $this->db->insert($tabla, $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }

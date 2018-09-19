@@ -4,6 +4,12 @@
         parent::__construct();        
         $this->load->database();
     }
+    private function q_get($params=[], $id){
+      return $this->get($params, ["id_servicio" => $id ] );
+    }
+    function q_up($q , $q2 , $id_usuario){
+      return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);
+    }
     function create_tmp_tareas_tickets($flag , $_num , $param ){
 
       $result = $this->db->query(get_drop("tmp_tareas_ticket_$_num"));
@@ -63,20 +69,20 @@
     $this->create_tmp_tareas_tickets(1 , $_num , $param); 
     return $data;
   }
-    function insert($tabla ='imagen', $params , $return_id=0 , $debug=0){        
-        $insert   = $this->db->insert($tabla, $params , $debug);     
-        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-    }        
-   function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+  function insert( $params , $return_id=0 , $debug=0){        
+    $insert   = $this->db->insert("ticket", $params , $debug);     
+    return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+  }        
+  function get($params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
-    }    
-    function get_resumen_id($id_ticket){
+        return $this->db->get("ticket")->result_array();
+  }    
+  function get_resumen_id($id_ticket){
     
     $query_get ="SELECT
                  t.* ,
@@ -84,7 +90,6 @@
                  nombre_departamento
                 FROM 
                   ticket t
-
                 INNER JOIN departamento d 
                 ON 
                  t.id_departamento = d.id_departamento 
@@ -93,40 +98,27 @@
     $result =  $this->db->query($query_get);
     return $result->result_array();    
   }
-  
-    private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
-    
-      foreach ($params_where as $key => $value) {
-              $this->db->where($key , $value);
-      }
-      $this->db->limit($limit);
-      return $this->db->update($table, $data);
-    
+  private function update($data =[] , $params_where =[] , $limit =1 ){
+    foreach ($params_where as $key => $value) {
+      $this->db->where($key , $value);
     }
-    private function q_get($params=[], $id){
-        return $this->get("servicio", $params, ["id_servicio" => $id ] );
-    }
-    function q_up($q , $q2 , $id_usuario){
-        return $this->update("servicio" , [$q => $q2 ] , ["idusuario" => $id_usuario ]);
-    }
-
-    private function create_tmp_solicitud_pago_usuario($flag , $_num , $param){
-        
-        
-        $this->db->query(get_drop("tmp_solicitud_pago_usuario_$_num"));
-        if ($flag ==  0){
-            $id_usuario =  $param["id_usuario"];
-            $query_create ="CREATE TABLE tmp_solicitud_pago_usuario_$_num
-                            AS
-                            SELECT id_solicitud FROM solicitud_pago_usuario 
-                            WHERE id_usuario =$id_usuario
-                            AND status =0 ";            
-            $this->db->query($query_create);
-        }        
-    }
-      
-    
-    function get_solicitudes_saldo($param){
+    $this->db->limit($limit);
+    return $this->db->update("ticket", $data);
+  }
+ 
+  private function create_tmp_solicitud_pago_usuario($flag , $_num , $param){
+    $this->db->query(get_drop("tmp_solicitud_pago_usuario_$_num"));
+    if ($flag ==  0){
+      $id_usuario =  $param["id_usuario"];
+      $query_create ="CREATE TABLE tmp_solicitud_pago_usuario_$_num
+      AS
+      SELECT id_solicitud FROM solicitud_pago_usuario 
+      WHERE id_usuario =$id_usuario
+      AND status =0 ";            
+      $this->db->query($query_create);
+    }        
+  }
+  function get_solicitudes_saldo($param){
                
         $_num =  get_random();
         $this->create_tmp_solicitud_pago_usuario(0, $_num, $param);

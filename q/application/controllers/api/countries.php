@@ -7,12 +7,10 @@ class countries extends REST_Controller{
         $this->load->library(lib_def());            
     } 
     function pais_GET(){
+
         $param      =  $this->get();                
-        $response   =  $this->countries_model->get_pais($id_pais);
+        $response   =  $this->countries_model->get([] , ["idCountry" => $id_pais]);
         $this->response($response);
     }     
-    /**/
-
-
    
 }?>

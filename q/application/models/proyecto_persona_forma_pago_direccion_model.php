@@ -11,17 +11,10 @@
                       proyecto_persona_forma_pago_direccion 
                       WHERE 
                       id_proyecto_persona_forma_pago = $id_recibo";
-                      debug($query_delete);
         return  $this->db->query($query_delete);
     }
     function get_by_recibo($param){
-      
-      
-      $query_get = "SELECT * FROM proyecto_persona_forma_pago_direccion 
-                    WHERE 
-                    id_proyecto_persona_forma_pago = ".$param["id_recibo"];      
-      
-      return  $this->db->query($query_get)->result_array();                
+      return $this->q_get([], $param["id_recibo"]);
     }
     function agrega_direccion_a_compra($param){
             
@@ -29,10 +22,23 @@
         "id_proyecto_persona_forma_pago"  => $param["id_recibo"],
         "id_direccion"                    => $param["id_direccion"]
       ];
-      return $this->insert("proyecto_persona_forma_pago_direccion" , $params);
+      return $this->insert($params);
     }
-    function insert($tabla ='imagen', $params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
+    function insert( $params , $return_id=0){        
+      $insert   = $this->db->insert("proyecto_persona_forma_pago_direccion", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
+    function get($params=[], $params_where =[] , $limit =1){
+        
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);        
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("proyecto_persona_forma_pago_direccion")->result_array();
+    }
+    function q_get($params=[], $id){
+        return $this->get($params, ["id_proyecto_persona_forma_pago" => $id ] );
+    }  
 }

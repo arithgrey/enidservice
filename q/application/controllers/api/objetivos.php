@@ -40,13 +40,7 @@ class objetivos extends REST_Controller{
     }
     function perfil_GET(){
         $param      = $this->get();        
-        $response   = 
-        $this->objetivos_model->get(
-            "objetivo", 
-            [] , 
-            ["id_perfil" => $param["id_perfil"]
-            ] , 
-            100);
+        $response   = $this->objetivos_model->get([] , ["id_perfil" => $param["id_perfil"]] , 100);
         $this->response($response);
     }
 

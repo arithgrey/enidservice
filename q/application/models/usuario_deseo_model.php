@@ -4,15 +4,18 @@
         parent::__construct();        
         $this->load->database();
     }
-    private function update($table='imagen' , $data =[] , $params_where =[] , $limit =1 ){
-    
-      foreach ($params_where as $key => $value) {
-              $this->db->where($key , $value);
-      }
-      $this->db->limit($limit);
-      return $this->db->update($table, $data);    
+    function insert( $params , $return_id=0 , $debug=0){        
+        $insert   = $this->db->insert('usuario_deseo', $params , $debug);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }        
+    function update($data =[] , $params_where =[] , $limit =1 ){    
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        $this->db->limit($limit);
+        return $this->db->update($table, $data);    
     }
-    function get($table='imagen' , $params=[], $params_where =[] , $limit =1){
+    function get($params=[], $params_where =[] , $limit =1){
         
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -20,11 +23,11 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get('usuario_deseo')->result_array();
     }
     function get_num_deseo_servicio_usuario($param){
         $params_where = ["id_usuario" => $param["id_usuario"] , "id_servicio" =>  $param["id_servicio"]];
-        return   $this->get('usuario_deseo' , ["COUNT(0)num"], $params_where)[0]["num"]; 
+        return   $this->get(["COUNT(0)num"], $params_where)[0]["num"]; 
     }
     function aumenta_deseo($param){
         $id_usuario     =  $param["id_usuario"];
@@ -38,7 +41,7 @@
             "id_usuario"    => $param["id_usuario"],
             "id_servicio"   => $param["id_servicio"]
         ];
-        return $this->insert("usuario_deseo", $params);
+        return $this->insert($params);
     }
     function agregan_lista_deseos_periodo($param){
 
@@ -83,16 +86,11 @@
         
         $result=  $this->db->query($query_get);
         return  $result->result_array();        
-    }
-    function insert($tabla ='imagen', $params , $return_id=0 , $debug=0){        
-        $insert   = $this->db->insert($tabla, $params , $debug);     
-        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-    }        
+    }   
     function get_por_usuario($param){
             
         $id_usuario =  $param["id_usuario"];        
-        $query_get ="SELECT id_servicio FROM usuario_deseo WHERE 
-        id_usuario = '".$id_usuario."' ORDER BY num_deseo DESC LIMIT 30";        
+        $query_get ="SELECT id_servicio FROM usuario_deseo WHERE id_usuario = '".$id_usuario."' ORDER BY num_deseo DESC LIMIT 30";        
         $result=  $this->db->query($query_get);
         return  $result->result_array();
     }

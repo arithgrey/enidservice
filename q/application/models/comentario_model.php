@@ -24,7 +24,10 @@
       "idusuario"             =>  $id_usuario_ventas,
       "id_tipificacion"       =>  "1"
     ];
-    return $this->insert("comentario" , $params , 1);
+    return $this->insert($params , 1);
   }
-  
+  function insert($params , $return_id=0 , $debug=0){        
+        $insert   = $this->db->insert("comentario", $params , $debug);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+  } 
 }
