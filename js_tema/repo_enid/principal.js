@@ -127,7 +127,7 @@ function carga_info_proyectos(e){
 		$("#mas_info").modal("show");
 		var fecha 		=  e.target.id;
 		var data_send 	= { "fecha" : fecha}; 	
-		var url 		= "../portafolio/index.php/api/portafolio/info_proyectos_fecha/format/json/";	
+		var url 		= "../q/index.php/api/portafolio/info_proyectos_fecha/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info" , 0 , ".place_mas_info" );			
 	}	
 }

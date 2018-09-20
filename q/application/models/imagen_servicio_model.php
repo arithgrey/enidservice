@@ -8,6 +8,15 @@ class Imagen_servicio_model extends CI_Model {
 	    $insert   = $this->db->insert("imagen_servicio", $params);     
 	    return ($return_id ==  1) ? $this->db->insert_id() : $insert;
 	}
+	function create($param ){
+
+		$params = [ 
+				"id_imagen"   =>  $param["id_imagen"] ,
+				"id_servicio" =>  $param["id_servicio"]
+				];
+
+		return $this->insert($params);
+	}
   	private function get( $params=[], $params_where =[] , $limit =1){
 	    $params = implode(",", $params);
 	    $this->db->limit($limit);

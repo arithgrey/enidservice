@@ -216,11 +216,13 @@
                     "value"   => $id_recibo 
                 ])?>                            
             <?=end_row()?> 
-            <?=div(guardar("Registrar dirección " ,  
+            <?=div(
+                guardar("Registrar dirección " ,  
                 ['class' =>     "text_btn_direccion_envio"]) , 
-            ["class"=>"button_c"]
+                ["class"=>"button_c"]
             )?>                    
-                                            
+            <?=place("notificacion_direccion" , 1)?>
+                                        
                                         
         </div>
     </form>

@@ -62,10 +62,11 @@ class Valoracion extends REST_Controller{
   /*
   function registra_respuesta($param){
 
-    $id_usuario =  $param["id_usuario"];    
-    $id_pregunta =  $param["pregunta"];    
-    $respuesta =  $param["respuesta"];
-    $params = ["respuesta" => $respuesta,"id_pregunta" => $id_pregunta, "id_usuario" => $id_usuario];
+    $id_usuario     =  $param["id_usuario"];    
+    $id_pregunta    =  $param["pregunta"];    
+    $respuesta      =  $param["respuesta"];
+    $params         = 
+    ["respuesta" => $respuesta,"id_pregunta" => $id_pregunta, "id_usuario" => $id_usuario];
     $this->insert("response", $params);
     return $this->actualiza_estado_pregunta($param);
   }
@@ -229,16 +230,16 @@ class Valoracion extends REST_Controller{
     }
     /**/
     function registro_pregunta($q){ 
-        $api = "pregunta/registro";
-        return $this->principal->api("q" , $api , $q);
+        $api = "pregunta/index";
+        return $this->principal->api("q" , $api , $q , "json" , "POST");
     }
     /**/
     function pregunta_POST(){
 
         $param      =  $this->post();
-        $response   =  $this->registro_pregunta($param);        
+        $response   =  $this->registro_pregunta($param);                        
         $respuesta_notificacion = "";
-        if($response == true ){                                
+        if($response){                                            
             $respuesta_notificacion = $this->envia_pregunta_a_vendedor($param);
         }        
         $this->response($respuesta_notificacion);
@@ -248,12 +249,7 @@ class Valoracion extends REST_Controller{
         $api =  "pregunta/pregunta_vendedor/format/json/"; 
         return $this->principal->api("msj" , $api , $q );
     }
-    /**/
     
-    /**/
-    /**/
-    
-    /**/
     function set_visto_pregunta($q){
 
         $api = "pregunta/visto_pregunta";

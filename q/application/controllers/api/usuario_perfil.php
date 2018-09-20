@@ -16,20 +16,19 @@ class usuario_perfil extends REST_Controller{
   	}    
     function permisos_usuario_POST(){
       
-      $param          =   $this->post();
+      $param          =   $this->post();      
       $id_usuario     =   $param["id_usuario"];
-      $id_perfil      =   $param["puesto"];
-      
-      $this->usuario_perfil_model->delete(["idusuario" => $id_usuario], 15);
-      
-      $params         = 
-      ["idusuario" => $id_usuario , 
-       "idperfil" => $id_perfil 
-      ];
-      
-      $response       =  $this->usuario_perfil_model->insert($params);
-      $this->response($response);
+      $id_perfil      =   $param["puesto"];      
+      $status         =   $this->usuario_perfil_model->delete(["idusuario" => $id_usuario], 15);
 
+      $response       = [];
+      if($status == true){  
+
+        $params         =   ["idusuario" => $id_usuario , "idperfil" => $id_perfil ];        
+        $response       =   $this->usuario_perfil_model->insert($params);        
+        
+      }
+      $this->response($response);        
     }
     function es_cliente_GET($id_usuario){    
       $param          =   $this->get();

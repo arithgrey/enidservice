@@ -47,9 +47,6 @@ class img_model extends CI_Model {
   }
   function insert_img($param , $type=0 ){    
 
-    $id_usuario =  $param["id_usuario"];     
-    $id_empresa =  $param["id_empresa"]; 
-
     $values     =   [ "nombre_imagen" ,
                       "type"          ,
                       "id_usuario"    ,
@@ -57,36 +54,34 @@ class img_model extends CI_Model {
                       "img"           ,
                       "extension" 
                     ];
-
-    $keys =  implode(",", $values);
-
     
-    $query_insert =   "INSERT INTO imagen(
-                              ".$keys."
-                            ) VALUES (
-                                '". $param["nombre_archivo"] ."' , 
-                                ".  $type ." ,                       
-                                '". $id_usuario."' , 
-                                '". $id_empresa."' ,
-                                '". $param["imagenBinaria"]."' ,
-                                '". $param["extension"]."' 
-                            )";    
+    $val = implode(",", $values);
+    $query_insert = 
+            "INSERT INTO imagen(".$val.") VALUES (
+                '". $param["nombre_archivo"] ."' , 
+                ".  $type ." ,                       
+                '". $param["id_usuario"] ."' , 
+                '". $param["id_empresa"] ."' ,
+                '". $param["imagenBinaria"]."' ,
+                '". $param["extension"]."' 
+              )";    
     
     $this->db->query($query_insert);
-    return     $this->db->insert_id();     
+    return $this->db->insert_id();     
   }  
   
   function get_img($id_imagen){
     return $this->get(["img"] , [ "idimagen" => $id_imagen]);
   }
+  /*
   function insert_imgen_servicio($param){
               
     $id_servicio  = $param["servicio"];
     $id_imagen    = $this->insert_img($param , 1 );          
     $params       = [ "id_imagen"   =>  $id_imagen , "id_servicio" =>  $id_servicio];
-    return  $this->insert("imagen_servicio" ,  $params , 1);
-    
+    return  $this->insert("imagen_servicio" ,  $params , 1);    
 }
+*/
 
 function delete_imagen_servicio($param){
     

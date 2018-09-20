@@ -11,11 +11,9 @@ class direccion extends REST_Controller{
         $response   =  $this->direccion_model->get_data_direccion($param);
         $this->response($response);
     }
-    function index_POST(){
-        $param      = $this->post();
-        $response   =  $this->direccion_model->crea_direccion($param);        
+    function index_POST(){        
+        $param      =   $this->post();        
+        $response   =  $this->direccion_model->create($param);        
         $this->response($response);
-    }       
-    
-
+    }           
 }?>

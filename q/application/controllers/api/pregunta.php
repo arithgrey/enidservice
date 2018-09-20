@@ -15,11 +15,21 @@ class pregunta extends REST_Controller{
         $response   = $this->pregunta_model->set_visto_pregunta($param); 
         $this->response($response);
     }
-    function registro_POST(){
-        
-        $param      = $this->post();
-        $response   = $this->pregunta_model->registra_pregunta($param); 
+    function index_POST(){        
+        $param          = $this->post();        
+        $id_pregunta    = $this->pregunta_model->create($param); 
+        $response       = [];
+
+        if ($id_pregunta >0 ) {
+            $param["id_pregunta"] = $id_pregunta;
+            $response             =  $this->agrega_pregunta_servicio($param);    
+        }
         $this->response($response);        
+    }
+    function agrega_pregunta_servicio($q){
+
+        $api = "pregunta_servicio/index";
+        return $this->principal->api("q", $api , $q , "json", "POST");
     }
     function index_GET(){
 

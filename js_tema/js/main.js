@@ -418,7 +418,7 @@ function get_flag_activa_notificaciones(){
 }
 /**/
 function registra_respuesta_pregunta(e){
-	var url 		=  "../portafolio/index.php/api/tickets/respuesta/format/json/";	
+	var url 		=  "../q/index.php/api/tickets/respuesta/format/json/";	
 	var data_send 	=  $(".form_respuesta_ticket").serialize();				
 	var seccion 	=".seccion_respuesta_"+get_tarea();
 	request_enid( "POST",  data_send , url , function(){

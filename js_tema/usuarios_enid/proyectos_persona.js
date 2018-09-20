@@ -1,5 +1,5 @@
 function get_proyectos_persona(){
-	url =  "../portafolio/index.php/api/portafolio/proyecto_persona/format/json/";	
+	url =  "../q/index.php/api/portafolio/proyecto_persona/format/json/";	
 	data_send =  {"id_persona" : get_persona()};				
 
 	$.ajax({
@@ -30,7 +30,7 @@ function get_proyectos_persona(){
 /**/
 function carga_form_solicitar_desarrollo(e){
 
-	url =  "../portafolio/index.php/api/tickets/form/format/json/";	
+	url =  "../q/index.php/api/tickets/form/format/json/";	
 	data_send =  {"id_persona" : get_persona() , id_proyecto : get_proyecto()};				
 
 
@@ -59,7 +59,7 @@ function carga_form_solicitar_desarrollo(e){
 function registra_ticket(e){
 
 
-	url =  "../portafolio/index.php/api/tickets/ticket/format/json/";	
+	url =  "../q/index.php/api/tickets/ticket/format/json/";	
 	data_send = $(".form_ticket").serialize()+"&"+ $.param({"id_proyecto" : get_proyecto() , "id_usuario" : get_id_usuario()});				
 
 		$.ajax({
@@ -95,7 +95,7 @@ function carga_tikets_usuario(){
 	}
 	
 	
-	url =  "../portafolio/index.php/api/tickets/ticket/format/json/";		
+	url =  "../q/index.php/api/tickets/ticket/format/json/";		
 	data_send =  {id_proyecto : get_proyecto() , "status" : status_ticket };				
 
 
@@ -139,7 +139,7 @@ function carga_tikets_usuario(){
 /**/
 function carga_info_detalle_ticket(){
 
-	url =  "../portafolio/index.php/api/tickets/detalle/format/json/";	
+	url =  "../q/index.php/api/tickets/detalle/format/json/";	
 	data_send =  {"id_ticket" : get_id_ticket()};				
 
 	$.ajax({
@@ -184,7 +184,7 @@ function carga_info_detalle_ticket(){
 function actualizar_estatus_ticket(e){
 	
 	nuevo_estado= e.target.id;
-	url =  "../portafolio/index.php/api/tickets/status/format/json/";	
+	url =  "../q/index.php/api/tickets/status/format/json/";	
 	data_send =  {"id_ticket" : get_id_ticket() , "status" : nuevo_estado };				
 
 	$.ajax({
@@ -206,7 +206,7 @@ function registra_tarea(e){
 	requerimiento =  $(".note-editable").html();
 	$(".tarea_pendiente").val(requerimiento);
 	
-	url =  "../portafolio/index.php/api/tarea/nueva/format/json/";	
+	url =  "../q/index.php/api/tarea/index/format/json/";	
 	data_send =  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_id_ticket() });				
 
 	$.ajax({
@@ -231,7 +231,7 @@ function actualiza_tareas(e){
 	set_id_tarea(e.target.id);
 	nuevo_valor = this.value;
 
-	url =  "../portafolio/index.php/api/tarea/estado/format/json/";	
+	url =  "../q/index.php/api/tarea/estado/format/json/";	
 	data_send = {"id_tarea" : get_id_tarea() ,  "nuevo_valor" : nuevo_valor , "id_ticket" : get_id_ticket() };				
 	
 	$.ajax({
@@ -287,7 +287,7 @@ function modificar_asunto(e){
 function actualiza_asunto_ticket(e){
 	
 	data_send = $(".form-actualizar-asunto").serialize()+"&"+$.param({"id_ticket" : get_id_ticket()});	
-	url =  "../portafolio/index.php/api/tickets/asunto/format/json/";	
+	url =  "../q/index.php/api/tickets/asunto/format/json/";	
 	
 	$.ajax({
 			url : url , 

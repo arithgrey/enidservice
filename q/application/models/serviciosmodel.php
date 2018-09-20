@@ -6,6 +6,10 @@
         parent::__construct();        
         $this->load->database();
     }
+    function insert( $params , $return_id=0 , $debug=0){        
+        $insert   = $this->db->insert("servicio", $params , $debug);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }        
     function q_up($q , $q2 , $id_servicio){
         return $this->update([$q => $q2 ] , ["id_servicio" => $id_servicio ]);
     }
@@ -204,10 +208,7 @@
                       $this->db->query($query_get);
       }
     }     
-    function insert( $params , $return_id=0 , $debug=0){        
-        $insert   = $this->db->insert($tabla, $params , $debug);     
-        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-    }        
+    
     function busqueda_meta_key_word($arreglo_tags , $tag){        
         return  array_search($tag, $arreglo_tags); 
     }

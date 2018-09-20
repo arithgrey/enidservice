@@ -48,7 +48,7 @@ function response_direccion_usuario(data){
 function registra_direccion_usuario(e){
 
 	if(get_existe_codigo_postal() ==  1){			
-		var url =  "../portafolio/index.php/api/portafolio/direccion_usuario/format/json/";	
+		var url =  "../q/index.php/api/portafolio/direccion_usuario/format/json/";	
 		var data_send =  $(".form_direccion_envio").serialize()+"&"+$.param({"direccion_principal" : 1});						
 		var asentamiento = $(".asentamiento").val();
 				if (asentamiento != 0 ) {

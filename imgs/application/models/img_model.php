@@ -4,7 +4,7 @@ class img_model extends CI_Model {
         parent::__construct();        
         $this->load->database();
   	}
-   	private function get($params=[], $params_where =[] , $limit =1){
+   	function get($params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);

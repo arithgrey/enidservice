@@ -498,26 +498,21 @@ class usuario extends REST_Controller{
         return  $this->principal->api("msj" , $api , $q);
     }
     function prospecto_POST(){
-        
-        /*
-        
-        if( array_key_exists("num_ciclos", $param) && ctype_digit($param["num_ciclos"]) 
-            && $param["num_ciclos"] >0 && array_key_exists("ciclo_facturacion", $param)
-            && $param["num_ciclos"] >0 && $param["num_ciclos"] < 10
-            && ctype_digit($param["plan"]) && $param["plan"] >0 
-        ){
-            */
-        $param =  $this->post();                                
-        $response["usuario_existe"] = $this->usuario_model->evalua_usuario_existente($param);        
+    
+        $param                          =  $this->post();                                
+
+        $response["usuario_existe"]     = $this->usuario_model->evalua_usuario_existente($param);        
         $response["usuario_registrado"] = 0;
         if ($response["usuario_existe"] == 0 ){
+
 
             $email              =  $param["email"];
             $id_departamento    =  9;      
             $password           =  $param["password"];            
             $nombre             =  $param["nombre"];
             $telefono           =  $param["telefono"];
-            $id_usuario_referencia        = get_info_usuario_valor_variable($param , "usuario_referencia");        
+            $id_usuario_referencia        = get_info_usuario_valor_variable($param , "usuario_referencia");
+
             $params = [
                 "email"                   =>   $email,
                 "idempresa"               =>   '1',                  
@@ -527,13 +522,15 @@ class usuario extends REST_Controller{
                 "tel_contacto"            =>   $telefono,
                 "id_usuario_referencia"   =>   $id_usuario_referencia 
             ];
-       
-            $response["id_usuario"]       =    $this->usuario_model->insert("usuario", $params , 1);
+            
+            $response["id_usuario"]       =    $this->usuario_model->insert($params , 1);
+                 
             if ( $response["id_usuario"]>0){
-                
+                   
                 $q["id_usuario"]    =  $response["id_usuario"]; 
                 $q["puesto"]        =  20; 
                 $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);   
+                debug($response["usuario_permisos"]);
                 if ($response["usuario_permisos"] > 0) {
                     $response["email"]              =  $email;
                     $response["usuario_registrado"] = 1;

@@ -17,32 +17,29 @@ class Archivo extends REST_Controller{
     function imgs_POST(){
         
         $prm    =   $this->post(); 
-        $extensiones = 
-        ['jpg','jpeg','gif','png','bmp',"image/jpg","image/jpeg","image/gif","image/png"];
+        $extensiones = ['jpg','jpeg','gif','png','bmp',"image/jpg","image/jpeg","image/gif","image/png"];
+
         if($_FILES['imagen']['error'] === 4) {
             $this->response( 'Es necesario establecer una imagen' );        
+        
         }else if($_FILES['imagen']['error'] === 0 ){
 
 
-            $imagenBinaria  = addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
-            $nombre_archivo = $_FILES['imagen']['name'];    
-            $extension      =  $this->extension($nombre_archivo );
+            $imagenBinaria  =   addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
+            $nombre_archivo =   $_FILES['imagen']['name'];    
+            $extension      =   $this->extension($nombre_archivo );
 
             if(!in_array($extension, $extensiones)) {
                 $msj =  'Sólo se permiten archivos con las siguientes extensiones: ';
                 $this->response( $msj.implode(', ', $extensiones) );
             }
 
-            
             $prm["imagenBinaria"]   =   $imagenBinaria;
             $prm["nombre_archivo"]  =   $nombre_archivo;
             $prm["extension"]       =   $extension; 
             $response               =   $this->gestiona_imagenes($prm);         
-            $this->response($response);            
-            
-        }
-        
-        
+            $this->response($response);                        
+        }        
     }
     /**/
     function gestiona_imagenes($param){ 
@@ -73,13 +70,15 @@ class Archivo extends REST_Controller{
               case 'servicio':            
                 
                 
-                if ($this->img_model->insert_imgen_servicio($param) ==  true ) {
-                    /*Notifico que ya tenemos imagen en servicio*/
-                    $param["exist"] = 1;
+                $id_imagen = $this->img_model->insert_img($param , 1);
+                if ( $id_imagen > 0 ) {                    
+                    $prm["id_imagen"]   = $id_imagen;
+                    $prm["id_servicio"] = $param["servicio"];
+                    $this->insert_imagen_servicio($prm);
+                    $prm["exist"] = 1;
                     $this->notifica_producto_imagen($param);
                 }
-
-
+                
                 break;          
 
         
@@ -97,11 +96,15 @@ class Archivo extends REST_Controller{
         }
         return $msj; 
     }
-    /*Validar session para modificar datos*/
-    
+    /*Validar session para modificar datos*/    
     function notifica_producto_imagen($q){
         $api = "servicio/status_imagen/format/json/";
         return $this->principal->api("q" , $api , $q , "json", "PUT");
+    }
+    function insert_imagen_servicio($q){
+        
+        $api = "imagen_servicio/index";
+        return $this->principal->api("q" , $api , $q , "json", "POST");
     }
     
 }?>

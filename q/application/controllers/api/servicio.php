@@ -300,7 +300,7 @@ class Servicio extends REST_Controller{
                 "telefono_visible"            =>  $telefonos_visibles];
 
 
-        $id_servicio    =  $this->serviciosmodel->insert("servicio", $params, 1);        
+        $id_servicio    =  $this->serviciosmodel->insert($params, 1);        
         $this->set_ultima_publicacion($id_usuario);
         return $id_servicio;        
   }  
@@ -650,7 +650,7 @@ class Servicio extends REST_Controller{
   function carga_imagenes_servicio($id_servicio){
 
     $q["id_servicio"] =  $id_servicio;
-    $api = "img/imgs_servicio/format/json/";
+    $api = "imagen_servicio/servicio/format/json/";
     return $this->principal->api("q", $api , $q  );              
   }  
   /**/

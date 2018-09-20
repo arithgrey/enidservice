@@ -71,10 +71,19 @@ function registro_direccion(){
 	}
 }
 /**/
-function response_registro_direccion(data){
-	showonehideone(".contenedor_deuda_para_envio" , ".contenedor_informacion_envio");					
-	recorrepage(".contenedo_compra_info");	
-	$(".place_asentamiento").empty();		
+var  response_registro_direccion = function(data){
+
+	if (data != -1 ){
+		showonehideone(".contenedor_deuda_para_envio" , ".contenedor_informacion_envio");					
+		recorrepage(".contenedo_compra_info");			
+		var empty = [".place_asentamiento" , ".notificacion_direccion"];
+		empty_elements(empty);
+
+	}else{
+		format_error( ".notificacion_direccion", "VERIFICA LOS DATOS DE TU DIRECCIÓN");
+		recorrepage(".notificacion_direccion");
+	
+	}	
 }
 /**/
 function oculta_delegacion_estado_pais(flag){

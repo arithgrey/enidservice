@@ -27,24 +27,6 @@ class ticketsmodel extends CI_Model{
   
   
   /**/  
-  function get_info_ticket($param){
-
-    $id_ticket =  $param["id_ticket"];    
-    $query_get = "SELECT 
-                    t.* ,
-                    d.nombre nombre_departamento
-                  FROM 
-                    ticket t
-                  INNER JOIN 
-                    departamento d
-                  ON t.id_departamento =  d.id_departamento
-                    WHERE  
-                  t.id_ticket = '".$id_ticket."' 
-                  LIMIT 1";
-
-    $result =  $this->db->query($query_get);
-    return  $result->result_array();      
-  }
     
   
 

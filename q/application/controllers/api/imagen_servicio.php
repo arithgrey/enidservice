@@ -9,9 +9,14 @@ class Imagen_servicio extends REST_Controller{
   function servicio_GET(){
 
       $param      =  $this->get();
-      $response   =  
-      $this->imagen_servicio_model->get_img_servicio($param["id_servicio"]);
+      $response   =  $this->imagen_servicio_model->get_img_servicio($param["id_servicio"]);
       $this->response($response);   
+  }
+  function index_POST(){              
+    $param    =  $this->post();        
+    debug($param , 1);
+    $response =  $this->imagen_servicio_model->create($param);
+    $this->response($response);
   }
 
 }

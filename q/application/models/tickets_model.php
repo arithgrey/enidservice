@@ -1,11 +1,29 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-  class tickets_model extends CI_Model {
+  class Tickets_model extends CI_Model {
     function __construct(){      
         parent::__construct();        
         $this->load->database();
     }
     private function q_get($params=[], $id){
       return $this->get($params, ["id_servicio" => $id ] );
+    }
+    function get_info_ticket($param){
+
+      $id_ticket =  $param["id_ticket"];    
+      $query_get = "SELECT 
+                      t.* ,
+                      d.nombre nombre_departamento
+                    FROM 
+                      ticket t
+                    INNER JOIN 
+                      departamento d
+                    ON t.id_departamento =  d.id_departamento
+                      WHERE  
+                    t.id_ticket = '".$id_ticket."' 
+                    LIMIT 1";
+
+      $result =  $this->db->query($query_get);
+      return  $result->result_array();      
     }
     function q_up($q , $q2 , $id_usuario){
       return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);

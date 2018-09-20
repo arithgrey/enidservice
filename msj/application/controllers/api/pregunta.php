@@ -36,10 +36,8 @@ class Pregunta extends REST_Controller{
     function pregunta_vendedor_GET(){
 
         $param  =  $this->get();
-        $prm    =  $this->get_info_vendedor_por_servicio($param["servicio"]);
-        
-        if(count($prm)>0){        
-          
+        $prm    =  $this->get_info_vendedor_por_servicio($param["servicio"]);    
+        if(count($prm)>0){                
             $email_vendedor           =  $prm[0]["email"];                
             $prm_email["info_correo"] =  $this->crea_vista_notificacion_pregunta($prm);    
             $prm_email["asunto"]      =  
@@ -66,8 +64,8 @@ class Pregunta extends REST_Controller{
     /**/
     private function get_info_vendedor_por_servicio($id_servicio){
 
-        $q["servicio"] =  $id_servicio;        
-        $api           =  "usuario/usuario_servicio/format/json/"; 
+        $q["id_servicio"]   =  $id_servicio;        
+        $api                =  "usuario/usuario_servicio/format/json/"; 
         return  $this->principal->api("q",  $api , $q);                
     }
     /**/

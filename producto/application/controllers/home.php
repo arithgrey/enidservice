@@ -79,23 +79,24 @@ class Home extends CI_Controller{
         
         $data["tallas"] =   $this->get_tallas($id_servicio);                
         $id_usuario     =   0;
-        $usuario =0;
+        $usuario        =   0;
         
-        if (count($servicio)>0 ){
+        if ( count( $servicio ) > 0 ){
 
             $id_usuario      =  $servicio[0]["id_usuario"];
-            echo $id_usuario;
-            $usuario         =  $this->principal->get_info_usuario($id_usuario);
-            print_r($usuario);
+            $usuario         =  $this->principal->get_info_usuario($id_usuario);        
 
-        }else{/*redirect("../../?q="); */}
+        }else{
+            redirect("../../?q="); 
+        }   
 
-        if ($usuario == 0) {
-            /*redirect("../../?q=");*/
+        if( count($usuario) == 0) {            
+            redirect("../../?q=");
         }
-    
-        $data["usuario"]        = $usuario; 
-        $data["id_publicador"]  = $id_usuario;
+        
+        
+        $data["usuario"]                    = $usuario; 
+        $data["id_publicador"]              = $id_usuario;
 
         $this->set_option("servicio" , $servicio);    
         $data["info_servicio"]["servicio"]  =   $servicio;
@@ -111,10 +112,8 @@ class Home extends CI_Controller{
         }                        
 
         $this->set_option("flag_precio_definido" , 0);       
-
-
-
-        $data["imgs"]           =  $this->get_imagenes_productos($id_servicio);
+        $data["imgs"] =  $this->get_imagenes_productos($id_servicio);
+        
         $this->costruye_meta_keyword();
         $data["meta_keywords"] = $this->get_option("meta_keywords");                            
         $this->costruye_descripcion_producto();             
@@ -157,7 +156,7 @@ class Home extends CI_Controller{
     private function get_imagenes_productos($id_servicio){
         
         $q["id_servicio"] = $id_servicio;
-        $api =  "img/imgs_servicio/format/json/";
+        $api =  "imagen_servicio/servicio/format/json/";
         return $this->principal->api("q" , $api , $q);
     }
     /**/

@@ -3,11 +3,23 @@ require APPPATH.'../../librerias/REST_Controller.php';
 class Tickets extends REST_Controller{      
     private $id_usuario; 
     function __construct(){
-        parent::__construct();                       
+        parent::__construct();         
+        $this->load->helper("tickets");              
         $this->load->model("tickets_model");                       
         $this->load->library(lib_def());
         $this->id_usuario   = $this->principal->get_session("idusuario");
     } 
+    function detalle_GET(){
+
+        $param  =   $this->get();         
+        $perfil =   $this->principal->getperfiles();
+        $data["info_ticket"]        =   $this->tickets_model->get_info_ticket($param);     
+
+        $data["info_tareas"]        =   $this->get_tareas_ticket($param);        
+        $data["info_num_tareas"]    =   $this->get_tareas_ticket_num($param);        
+        $data["perfil"] =  $perfil;
+        $this->load->view("tickets/detalle" , $data );             
+    }
     function get_es_cliente($id_usuario){        
 
         $q["id_usuario"]    =  $id_usuario;
@@ -264,4 +276,35 @@ class Tickets extends REST_Controller{
         
         $this->load->view("tickets/principal_desarollo" , $data );
     }
+    function respuesta_POST(){
+
+        $param =  $this->post();
+        $param["id_usuario"] = $this->id_usuario;
+        $response =  $this->tareasmodel->registra_respuesta($param);
+        $this->response($response);
+    }
+    function formulario_respuesta_GET(){
+
+        $param = $this->get();
+        $data["request"] = $param;
+        $this->load->view("tickets/form_respuesta" , $data);            
+    }
+    /**/
+    function  get_tareas_ticket($q){
+        $api    =  "tarea/tareas_ticket/format/json";
+        return  $this->principal->api("q", $api , $q);
+    }
+    function get_tareas_ticket_num($q){
+
+        $api    =  "tarea/tareas_ticket_num/format/json";
+        return  $this->principal->api("q", $api , $q);   
+    }
+    function estado_PUT(){
+
+        $param    = $this->put();
+        $response = 
+        $this->tickets_model->q_up("status" ,  $param["status"] , $param["id_ticket"]);
+        $this->response($response);
+    }
+
 }?>

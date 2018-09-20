@@ -12,7 +12,7 @@
         return  $this->db->delete("usuario_perfil", $params_where);
     }
     function insert($params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
+      $insert   = $this->db->insert("usuario_perfil", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
     function get($params=[], $params_where =[] , $limit =1){

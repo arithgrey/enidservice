@@ -50,14 +50,10 @@
       return $result->result_array()[0]["num"];
   
     }  
-    function registra_pregunta($param){
+    function create($param){
 
-      $pregunta     =  $param["pregunta"]; 
-      $id_servicio  =  $param["servicio"]; 
-      $id_usuario   =  $param["usuario"];
-      $params       = ["pregunta" => $pregunta , "id_usuario"  => $id_usuario];
-      $id_pregunta =  $this->insert($params, 1);    
-      return $this->agrega_pregunta_servicio($id_pregunta , $id_servicio);
+      $params       =  ["pregunta" => $param["pregunta"] , "id_usuario"  => $param["usuario"]];
+      return        $this->insert($params, 1);    
     }
     function preguntas($param){
       
@@ -82,28 +78,25 @@
     }    
     function get_preguntas_sin_leer_vendedor($param){
       
-      $_num          =  get_random();
+      $_num  =  get_random();
       $this->create_tmp_servicios_venta_usuario(0 , $_num , $param);      
         
-          $query_get ="SELECT 
-                        COUNT(0)num
-                      FROM 
-                        tmp_servicio_usuario_$_num s 
-                      INNER JOIN 
-                        pregunta_servicio ps 
-                      ON 
-                        s.id_servicio = ps.id_servicio
-                      INNER JOIN pregunta p 
-                      ON 
-                        p.id_pregunta  = ps.id_pregunta
-                      WHERE 
-                        p.leido_vendedor =0";
-          $result =  $this->db->query($query_get);          
-          $data_complete = $result->result_array();
-        
+        $query_get ="SELECT 
+                          COUNT(0)num
+                        FROM 
+                          tmp_servicio_usuario_$_num s 
+                        INNER JOIN 
+                          pregunta_servicio ps 
+                        ON 
+                          s.id_servicio = ps.id_servicio
+                        INNER JOIN pregunta p 
+                        ON 
+                          p.id_pregunta  = ps.id_pregunta
+                        WHERE 
+                          p.leido_vendedor =0";
+        $data_complete =  $this->db->query($query_get)->result_array();          
       $this->create_tmp_servicios_venta_usuario(1 , $_num , $param);
-      return  $data_complete;
-      
+      return  $data_complete;      
     }        
     function create_tmp_servicios_venta_usuario($flag , $_num, $param){
 
@@ -111,7 +104,7 @@
         $this->db->query(get_drop("tmp_servicio_usuario_$_num"));
 
         if($flag == 0){          
-          $id_usuario =  $param["id_usuario"]; 
+          $id_usuario   =  $param["id_usuario"]; 
           $query_create = "CREATE TABLE tmp_servicio_usuario_$_num AS 
                             SELECT 
                               id_servicio ,

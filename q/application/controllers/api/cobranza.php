@@ -296,32 +296,25 @@ class Cobranza extends REST_Controller{
         if( array_key_exists("num_ciclos", $param) && ctype_digit($param["num_ciclos"]) 
             && $param["num_ciclos"] >0 && array_key_exists("ciclo_facturacion", $param)
             && $param["num_ciclos"] >0 && $param["num_ciclos"] < 10 && 
-            ctype_digit($param["plan"]) && $param["plan"] >0 ){
+            ctype_digit($param["plan"]) 
+            && $param["plan"] >0 
+        ){
 
+                   
             $usuario = $this->crea_usuario($param);
-
-            
-            
+                
             if ($usuario["usuario_registrado"] ==  1 && $usuario["id_usuario"]>0 ) {
                 
                 
                 $param["es_usuario_nuevo"]    = 1;
                 $param["usuario_nuevo"]       = 1;        
                 $param["usuario_referencia"]  = $usuario["id_usuario"];
-                $param["id_usuario"]          = $usuario["id_usuario"];                       
-                /*                                
-                $param["data_por_usuario"]    = $this->principal->get_info_usuario($usuario["id_usuario"]);
-                
-                $param["id_servicio"]         = $param["plan"];                
-                $response["siguiente"]        = $this->recibo_model->crea_orden_de_compra($param);
-                
-
-                $this->response($response);
-                */
-                $orden_compra                     = $this->crea_orden($param); 
+                $param["id_usuario"]          = $usuario["id_usuario"];                                       
+                $orden_compra                 = $this->crea_orden($param); 
                 $orden_compra["usuario_existe"]   = 0;
                 $this->response($orden_compra);
             }
+            debug("okokokoko");
             
             
         }else{

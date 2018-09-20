@@ -13,13 +13,15 @@ class codigo_postal extends REST_Controller{
 
         $param                          =   $this->post();                        
         $id_direccion                   =   $this->registra_direccion_envio($param);        
+        if ($id_direccion == 0) {
+            $this->response(-1);
+        }
+        
         $param["id_direccion"]          =   $id_direccion;        
         $data_complete["id_direccion"]  =   $id_direccion;
 
-        if($id_direccion > 0 ){    
-            //debug("Entro");        
+        if($id_direccion > 0 ){                
             if($param["direccion_principal"] ==  1 ){                
-
                 $id_usuario    =  $this->get_id_usuario($param);
                 $data_complete["registro_direccion_usuario"] =  
                 $this->set_direcciones_usuario($id_usuario ,$id_direccion);
@@ -31,13 +33,16 @@ class codigo_postal extends REST_Controller{
 
     function registra_direccion_envio($param){
 
-        $this->elimina_direccion_previa_envio($param);
+        
         $param["id_codigo_postal"] =  $this->codigo_postal_model->get_id_codigo_postal_por_patron($param);
         if ($param["id_codigo_postal"] > 0 ){
+
             $param["id_direccion"]          =  $this->crea_direccion($param);
+            $this->elimina_direccion_previa_envio($param);    
             $this->agrega_direccion_a_compra($param);
             return  $param["id_direccion"];    
-        }    
+        }   
+        return 0; 
     }
     /**/
     function id_por_patron_GET(){

@@ -1,7 +1,8 @@
 <?php
 /*
 ---- Pasar a set functions
----- Obligat set nombre tabla
+---- Pasar a create los insert
+----  quitar Q
 
 https://youtu.be/FwXskdcCRIk
 
@@ -565,10 +566,7 @@ if ( ! function_exists('label'))
 if ( ! function_exists('place'))
 {
   /**/
-  function place($class_place , $row=1){      
-      
-      
-
+  function place($class_place , $row=1){            
       if ($row == 1) {
         return div("", ['class'=> $class_place] , 1);  
       }else{

@@ -11,13 +11,7 @@ class Tickets extends REST_Controller{
     }    
     
     /**/
-    function formulario_respuesta_GET(){
 
-        $param = $this->get();
-        $data["request"] = $param;
-        $this->load->view("tickets/form_respuesta" , $data);            
-    }
-    /**/
     function asunto_PUT(){        
         $param =  $this->put();
         $response =  $this->ticketsmodel->update_asunto($param);
@@ -128,34 +122,11 @@ class Tickets extends REST_Controller{
         $this->load->view("tickets/principal_desarollo_persona" , $data );
 
     }
-    function  get_tareas_ticket($q){
-        $api    =  "tarea/tareas_ticket/format/json";
-        return  $this->principal->api("q", $api , $q);
-    }
-    function get_tareas_ticket_num($q){
-
-        $api    =  "tarea/tareas_ticket_num/format/json";
-        return  $this->principal->api("q", $api , $q);   
-    }
+    
     /**/
-    function detalle_GET(){
-
-        $param  =   $this->get();         
-        $perfil =   $this->principal->getperfiles();
-        $data["info_ticket"]        =   $this->ticketsmodel->get_info_ticket($param);     
-        $data["info_tareas"]        =   $this->get_tareas_ticket($param);
-        $data["info_num_tareas"]    =   $this->get_tareas_ticket_num($param);        
-        $data["perfil"] =  $perfil;
-        $this->load->view("tickets/detalle" , $data );             
-    }
+   
     /*
-    function respuesta_POST(){
-
-        $param =  $this->post();
-        $param["id_usuario"] = $this->id_usuario;
-        $response =  $this->tareasmodel->registra_respuesta($param);
-        $this->response($response);
-    }
+    
     */
     function get_respuestas($q){
 

@@ -4,27 +4,20 @@
         parent::__construct();        
         $this->load->database();
     }    
-    function crea_direccion($param){
-
-      $calle            =   $param["calle"];
-      $referencia       =   $param["referencia"];
-      $numero_exterior  =   $param["numero_exterior"];
-      $numero_interior  =   $param["numero_interior"];
-      $id_codigo_postal =   $param["id_codigo_postal"];
+    function create($param){        
       $receptor         =   get_param_def($param ,"nombre_receptor" , "");
-      $tel_receptor     =   get_param_def($param ,"telefono_receptor" , 0);
-      
+      $tel_receptor     =   get_param_def($param ,"telefono_receptor" , 0);    
 
       $params = [
-        "calle"               =>  $calle,
-        "entre_calles"        =>  $referencia,
-        "numero_exterior"     =>  $numero_exterior,
-        "numero_interior"     =>  $numero_interior,
-        "id_codigo_postal"    =>  $id_codigo_postal,
+        "calle"               =>  $param["calle"],
+        "entre_calles"        =>  $param["referencia"],
+        "numero_exterior"     =>  $param["numero_exterior"],
+        "numero_interior"     =>  $param["numero_interior"],
+        "id_codigo_postal"    =>  $param["id_codigo_postal"],
         "nombre_receptor"     =>  $receptor,
         "telefono_receptor"   =>  $tel_receptor
-      ];
-      return $this->insert("direccion", $params , 1);
+      ];      
+      return $this->insert($params , 1);
       
     }  
     function get_data_direccion($param){
@@ -47,7 +40,7 @@
 
     } 
     function insert( $params , $return_id=0 , $debug=0){        
-          $insert   = $this->db->insert($tabla, $params , $debug);     
-          return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+        $insert   = $this->db->insert("direccion", $params , $debug);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }        
 }

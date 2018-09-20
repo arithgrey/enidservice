@@ -15,11 +15,11 @@ class tareasmodel extends CI_Model{
               $this->db->where($key , $value);
       }
       $this->db->limit($limit);
-      return $this->db->update($table, $data);
+      return $this->db->update("tarea", $data);
     
   }
   function insert( $params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
+      $insert   = $this->db->insert("tarea", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }
   
@@ -31,36 +31,8 @@ class tareasmodel extends CI_Model{
             $this->db->where($key , $value);
         }
         return $this->db->get("tarea")->result_array();
-  }
-  function valida_tareas_pendientes($param){
-
-    $id_ticket =  $param["id_ticket"];
-    $query_get = "SELECT count(*)num_tareas_pendientes
-                  from 
-                  tarea 
-                  where 
-                  status =0 
-                  and id_ticket ='".$id_ticket."' ";
-
-    $result =  $this->db->query($query_get);              
-    $num_pendientes =  $result->result_array()[0]["num_tareas_pendientes"];
-    $nuevo_estado_ticket ="";
-
-    $status = 1;
-    $nuevo_estado_ticket ="cerrado";
-    
-    if ($num_pendientes != 0 ) {        
-        $status = 0;
-        $nuevo_estado_ticket ="abierto";
-    }
-
-    $this->update('ticket' , ["status" =>  $status ] , ["id_ticket" => $id_ticket] );
-    return $nuevo_estado_ticket;
-
-  }
-    
-
-  function insert_tarea($param){
+  }  
+  function create($param){
 
     $descripcion  =  $param["tarea"];
     $id_ticket    =  $param["id_ticket"];
@@ -71,8 +43,8 @@ class tareasmodel extends CI_Model{
         "id_ticket"         =>  $id_ticket ,
         "usuario_registro"  =>  $id_usuario
     ];
-    $this->insert($params);
-    return  $this->valida_tareas_pendientes($param);
+    return $this->insert($params);
+    
     
   }  
   function update_estado_tarea($param){
@@ -119,17 +91,26 @@ class tareasmodel extends CI_Model{
                     t.id_tarea =  r.id_tarea
 
                   WHERE 
-                    t.id_ticket 
-                    = '".$id_ticket ."'
-
+                    t.id_ticket = '".$id_ticket ."'
                   GROUP BY t.id_tarea
                   ORDER BY 
                   t.fecha_registro 
                   ASC";
 
+
     $result = $this->db->query($query_get);
     return $result->result_array();
   }  
-  
+  function get_pendientes_ticket($param){
+
+    $id_ticket =  $param["id_ticket"];
+    $query_get = "SELECT count(*)num_tareas_pendientes from tarea 
+                  where 
+                  status =0 
+                  and id_ticket ='".$id_ticket."' ";
+
+    $result =  $this->db->query($query_get);              
+    return  $result->result_array()[0]["num_tareas_pendientes"];
+  } 
 
 }

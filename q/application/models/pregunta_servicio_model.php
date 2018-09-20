@@ -5,11 +5,15 @@
         $this->load->database();
     }    
     function insert( $params , $return_id=0){                
-        	$insert  =	 $this->db->insert("pregunta_servicio", $params);     
+        $insert  =	 $this->db->insert("pregunta_servicio", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }    
-	function agrega_pregunta_servicio($id_pregunta , $id_servicio){
-	    $params = ["id_pregunta"  =>  $id_pregunta , "id_servicio"   => $id_servicio];
+	function create($param){
+	    
+        $params = [
+            "id_pregunta"   =>  $param["id_pregunta"] , 
+            "id_servicio"   =>  $param["id_servicio"]];
+
 	    return $this->insert($params);    
 	}    
 }
