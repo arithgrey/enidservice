@@ -11,7 +11,6 @@ class Emp extends REST_Controller{
     }
     /**/
     function salir_list_email($q){
-
         $api = "prospecto/salir_list_email";
         return $this->principal->api("q" , $api , $q , "json" , "PUT");
     }

@@ -4,6 +4,16 @@
         parent::__construct();        
         $this->load->database();
   }
+  function get($params=[], $params_where =[] , $limit =1){
+        
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);        
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("perfil_recurso")->result_array();
+  }
   function delete($params_where =[] , $limit =1){              
     $this->db->limit($limit);        
     foreach ($params_where as $key => $value) {
@@ -12,15 +22,14 @@
     return  $this->db->delete("perfil_recurso", $params_where);
   }
   function insert( $params , $return_id=0 , $debug=0){        
-        $insert   = $this->db->insert($tabla, $params , $debug);     
-        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    $insert   = $this->db->insert("perfil_recurso", $params , $debug);     
+    return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }        
   function q_up($q , $q2 , $id_servicio){
         return $this->update("perfil_recurso" , [$q => $q2 ] , ["id_servicio" => $id_servicio ]);
   }
-
   function q_get($params=[], $id){
-      return $this->get("perfil_recurso", $params, ["id_servicio" => $id ] );
+      return $this->get($params, ["id_servicio" => $id ] );
   }  
   function get_num($param){
      $query_get ="SELECT 

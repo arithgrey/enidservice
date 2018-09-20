@@ -11,7 +11,7 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get('ciclo_facturacion')->result_array();
     }
     /**/
     function not_ciclo_facturacion($param){

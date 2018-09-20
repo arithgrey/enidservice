@@ -20,13 +20,12 @@
         }
         return $this->db->get("prospecto")->result_array();
     }    
-    function update( , $data =[] , $params_where =[] , $limit =1 ){
-    
+    function update( $data =[] , $params_where =[] , $limit =1 ){
       foreach ($params_where as $key => $value) {
         $this->db->where($key , $value);
       }
       $this->db->limit($limit);
-      return $this->db->update($table, $data);    
+      return $this->db->update("prospecto", $data);    
     }    
     function salir_list_email($param){
         $query_update =  "UPDATE prospecto SET 

@@ -4,19 +4,6 @@
         parent::__construct();        
         $this->load->database();
     }
-    private function get( $params=[], $params_where =[] , $limit =1){
-        $params = implode(",", $params);
-        $this->db->limit($limit);
-        $this->db->select($params);
-        foreach ($params_where as $key => $value) {
-            $this->db->where($key , $value);
-        }
-        return $this->db->get($table)->result_array();
-    }
-    function insert( $params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
-      return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-    }
     function repo_afiliaciones($param){
 
       $_num =  get_random();

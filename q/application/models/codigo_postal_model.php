@@ -5,19 +5,21 @@
         $this->load->database();
 
     }
-    
+     function get($params=[], $params_where =[] , $limit =1){
+        
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);        
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("codigo_postal")->result_array();
+    }
+    function q_get($params=[], $id){
+        return $this->get($params, ["id_servicio" => $id ] );
+    }  
     function get_id_codigo_postal_por_patron($param){
-      
-      $cp        =  $param["cp"];
-      $query_get ="SELECT 
-                    id_codigo_postal 
-                  FROM 
-                    codigo_postal
-                  WHERE 
-                    cp = $cp                  
-                  LIMIT 1";      
-      return $this->db->query($query_get)->result_array()[0]["id_codigo_postal"];
-
+      return $this->get(["id_codigo_postal"] , ["cp" => $param["cp"] ])[0]["id_codigo_postal"];
     }
     function get_colonia_delegacion($param){    
     

@@ -304,13 +304,6 @@ function get_usuario($param){
   }
   
   
-  function salir_list_email($param){
-
-    $query_update =  "UPDATE prospecto SET 
-                      status = -1
-                      WHERE 
-                      email = '".$param["email"]."' LIMIT 1 ";
-    return $this->db->query($query_update);
-  } 
+  
 */
 }

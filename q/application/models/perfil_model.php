@@ -21,7 +21,7 @@
     /**/
     function get_id_departamento_by_id_perfil($param){
         $id_perfil =  $param["id_perfil"];
-        $result = $this->get("perfil" , ["id_departamento"] , ["idperfil" => $id_perfil ]);
+        $result = $this->get(["id_departamento"] , ["idperfil" => $id_perfil ]);
         return $result[0]["id_departamento"];
     }       
     function get_usuario($id_usuario){

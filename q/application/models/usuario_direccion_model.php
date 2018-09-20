@@ -20,7 +20,7 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("usuario_direccion")->result_array();
     }
 
     function get_num($param){
@@ -39,7 +39,7 @@
         return $result->result_array()[0]["num"];
     }
     function get_usuario_direccion($id_usuario){
-      return $this->get("usuario_direccion", [] , ["id_usuario" => $id_usuario , "status" => 1  ] );
+      return $this->get([] , ["id_usuario" => $id_usuario , "status" => 1  ] );
     }
     function insert($params , $return_id=0 , $debug=0){               
         $insert   = $this->db->insert("usuario_direccion", $params , $debug);     

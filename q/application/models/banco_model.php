@@ -4,9 +4,19 @@
         parent::__construct();        
         $this->load->database();
     }
+    function get($params=[], $params_where =[] , $limit =1){
+        
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);        
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("banco")->result_array();
+    }    
    	/**/
     function get_bancos($param){          
-      return $this->get("banco" , [] , ["status" => 1] , 100);
+      return $this->get([] , ["status" => 1] , 100);
     }
     
 }

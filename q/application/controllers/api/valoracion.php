@@ -196,14 +196,24 @@ class Valoracion extends REST_Controller{
         $this->load->view("valoraciones/form_servicio" , $data);        
     }
     /**/    
-    function nueva_POST(){
+    function index_POST(){
                 
-        $param                              = $this->post();        
-        $response                           =  $this->valoracion_model->registrar($param);             
-        $data_complete["id_servicio"]       =  $param["id_servicio"];                
-        $prm["key"]                         =  "email";
-        $prm["value"]                       =  $param["email"];                
-        $data_complete["existencia_usuario"] =  $this->valida_existencia_usuario($prm);        
+        $param                = $this->post();  
+        $id_servicio          = $param["id_servicio"];      
+        $params = [
+            "valoracion"      =>    $param["calificacion"],
+            "titulo"          =>    $param["titulo"],
+            "comentario"      =>    $param["comentario"],
+            "recomendaria"    =>    $param["recomendaria"],
+            "email"           =>    $param["email"],
+            "nombre"          =>    $param["nombre"],
+            "id_servicio"     =>    $id_servicio
+        ];
+        $id_valoracion                          =  $this->valoracion_model->insert($params, 1);             
+        $data_complete["id_servicio"]           =  $id_servicio;                
+        $prm["key"]                             =  "email";
+        $prm["value"]                           =  $param["email"];                
+        $data_complete["existencia_usuario"]    =  $this->valida_existencia_usuario($prm);        
         $this->response($data_complete);        
     }
     /**/
@@ -213,13 +223,10 @@ class Valoracion extends REST_Controller{
     }
     /**/
     function utilidad_PUT(){
-        
         $param = $this->put();
         $response = $this->valoracion_model->utilidad($param);
         $this->response($response);
     }
-    /**/
-    
     /**/
     function registro_pregunta($q){ 
         $api = "pregunta/registro";

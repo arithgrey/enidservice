@@ -11,10 +11,10 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("cuentas")->result_array();
     }   
     function insert( $params , $return_id=0){        
-        $insert   = $this->db->insert($tabla, $params);     
+        $insert   = $this->db->insert("cuentas", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }    
            

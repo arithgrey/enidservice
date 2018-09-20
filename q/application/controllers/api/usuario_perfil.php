@@ -17,7 +17,17 @@ class usuario_perfil extends REST_Controller{
     function permisos_usuario_POST(){
       
       $param          =   $this->post();
-      $response       =   $this->usuario_perfil_model->agrega_permisos_usuario($param);
+      $id_usuario     =   $param["id_usuario"];
+      $id_perfil      =   $param["puesto"];
+      
+      $this->usuario_perfil_model->delete(["idusuario" => $id_usuario], 15);
+      
+      $params         = 
+      ["idusuario" => $id_usuario , 
+       "idperfil" => $id_perfil 
+      ];
+      
+      $response       =  $this->usuario_perfil_model->insert($params);
       $this->response($response);
 
     }

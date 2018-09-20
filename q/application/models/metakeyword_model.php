@@ -10,7 +10,7 @@
         $this->db->where($key , $value);
       }
       $this->db->limit($limit);
-      return $this->db->update($table, $data);    
+      return $this->db->update("metakeyword", $data);    
     }
     function q_up($q , $q2 , $id_metakeyword){
         return $this->update([$q => $q2 ] , ["id_metakeyword" => $id_metakeyword ]);

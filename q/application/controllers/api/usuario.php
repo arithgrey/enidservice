@@ -388,6 +388,7 @@ class usuario extends REST_Controller{
 
         if($this->input->is_ajax_request()){             
             $param = $this->post();        
+            
             $response["usuario_existe"]          =  $this->usuario_model->evalua_usuario_existente($param);
             $response["usuario_registrado"] = 0;
             if ($response["usuario_existe"] == 0 ){

@@ -34,32 +34,25 @@
     }
     function regitra_tarjeta($param){
 
-
-      $id_usuario     =   $param["id_usuario"];
-      $numero_tarjeta =   $param["numero_tarjeta"];
-      $banco          =   $param["banco"];       
-      $tipo_tarjeta   =   $param["tipo_tarjeta"];
-
-      $data_complete["registro_cuenta"]     = 0;    
-      $data_complete["banco_es_numerico"]   = 0;    
-      $data_complete["clabe_es_corta"]      = 1;    
+      $numero_tarjeta                       =   $param["numero_tarjeta"];
+      $banco                                =   $param["banco"];  
+      $data_complete["registro_cuenta"]     =   0;    
+      $data_complete["banco_es_numerico"]   =   0;    
+      $data_complete["clabe_es_corta"]      =   1;    
 
       if(is_numeric($banco)){          
           $data_complete["banco_es_numerico"] = 1;              
           if(strlen(trim($numero_tarjeta)) ==  16){
             $data_complete["clabe_es_corta"] = 0;    
-
-
             $params = [
-              "id_usuario"          =>   $id_usuario ,
+              "id_usuario"          =>   $param["id_usuario"] ,
               "numero_tarjeta"      =>   $numero_tarjeta ,
               "id_banco"            =>   $banco,
-              "tipo"                =>   1,
-              "tipo_tarjeta"        =>  $tipo_tarjeta
+              "tipo"                =>   1 ,
+              "tipo_tarjeta"        =>  $param["tipo_tarjeta"]
             ];
             $data_complete["registro_cuenta"] = $this->insert($params);
-            
-          }
+        }
       }
       return $data_complete;
     }

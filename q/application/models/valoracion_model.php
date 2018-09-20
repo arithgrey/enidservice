@@ -11,33 +11,11 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
-    }
-    function registrar($param){
-
-      $titulo               = $param["titulo"];
-      $comentario           = $param["comentario"];
-      $nombre               = $param["nombre"];
-      $email                = $param["email"];   
-      $recomendaria         = $param["recomendaria"];
-      $valoracion           = $param["calificacion"];
-      $id_servicio          = $param["id_servicio"];
-
-      $params = [
-        "valoracion"      =>    $valoracion,
-        "titulo"          =>    $titulo,
-        "comentario"      =>    $comentario,
-        "recomendaria"    =>    $recomendaria,
-        "email"           =>    $email,
-        "nombre"          =>    $nombre,
-        "id_servicio"     =>    $id_servicio
-      ];
-      return $this->insert($params, 1);
-
+        return $this->db->get("")->result_array();
     }
     /**/
     function insert( $params , $return_id=0){                
-        $insert   = $this->db->insert($tabla, $params);     
+        $insert   = $this->db->insert("valoracion", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }    
     private function update($data =[] , $params_where =[] , $limit =1 ){
@@ -82,8 +60,8 @@
               v.id_servicio= s.id_servicio
             WHERE 
               s.id_usuario =  $id_usuario";
-      $result =  $this->db->query($query_get);
-      $data_complete =  $result->result_array();
+      
+      $data_complete =  $this->db->query($query_get)->result_array();
       $this->create_tmp_servicios_usuario($_num , 0 , $param);
       return $data_complete;
     }
@@ -140,8 +118,9 @@
     }
 
     function get_numero_valoraciones_servicio($id_servicio){
-    
-    $query_get = "SELECT 
+      
+      /*
+      $query_get = "SELECT 
             COUNT(0)num_valoraciones,
             AVG(valoracion) promedio ,
             SUM(CASE WHEN recomendaria = 1 THEN 1 ELSE 0 END )personas_recomendarian
@@ -151,6 +130,16 @@
             id_servicio = $id_servicio";      
           $result =  $this->db->query($query_get);
           return $result->result_array();
+      */
+
+      $params = [
+        "COUNT(0)num_valoraciones",
+        "AVG(valoracion) promedio" ,
+        "SUM(CASE WHEN recomendaria = 1 THEN 1 ELSE 0 END )personas_recomendarian"
+        ];
+
+      $params_where = ["id_servicio" => $id_servicio];
+      return $this->get($params , $params_where);
     }    
     function get_valoraciones_articulo($param){        
       $id_servicio=  $param["id_servicio"];
@@ -208,7 +197,7 @@
             id_valoracion = $id_valoracion LIMIT 1";
             return $this->db->query($query_update);
     }     
-     private function get_limit($param){
+    private function get_limit($param){
         
         $page = (isset($param['page'])&& !empty($param['page']))?
         $param['page']:1;

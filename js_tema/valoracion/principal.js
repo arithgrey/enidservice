@@ -55,7 +55,7 @@ function registra_valoracion(e){
 		/**/
 		$(".place_recomendaria").empty();
 			
-			var url ="../q/index.php/api/valoracion/nueva/format/json/";
+			var url ="../q/index.php/api/valoracion/index/format/json/";
 			var data_send =  $(".form_valoracion").serialize()+"&"+$.param({"calificacion" : get_option("calificacion"), "recomendaria" : get_option("recomendaria") });	
 			
 			request_enid( "POST",  data_send, url, response_registro_valoracion,  0, before_registro_valoracion);

@@ -15,7 +15,7 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("faq")->result_array();
     }
     function get_url_blog_fecha($param){
       $fecha =  $param["fecha"];       

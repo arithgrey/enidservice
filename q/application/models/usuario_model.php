@@ -23,10 +23,14 @@
     }
     function evalua_usuario_existente($param){
 
+        $email =  $param["email"];
+        return $this->get(["COUNT(0)num"], [ "email" =>  $email])[0]["num"];
+      /*
       $email =  $param["email"];
       $query_get ="SELECT COUNT(0)num  FROM usuario WHERE email = '".$email."' ";
       $result = $this->db->query($query_get);
       return $result->result_array()[0]["num"];
+      */
     }
     function get($params=[], $params_where =[] , $limit =1){
         
@@ -54,19 +58,6 @@
     function get_usuario_ventas(){
       return $this->get( ["idusuario"], ["email" => 'ventas@enidservice.com']);
     } 
-    function get_terminos_privacidad_usuario($param){
-
-        $id_usuario =  $param["id_usuario"];
-        $query_get = "SELECT 
-                        SUM( CASE WHEN id_privacidad =  5 THEN 1 ELSE 0 END )entregas_en_casa,
-                        SUM( CASE WHEN id_privacidad =  2 THEN 1 ELSE 0 END )telefonos_visibles
-                        FROM 
-                        privacidad_usuario
-                        WHERE 
-                        id_usuario = $id_usuario LIMIT 10";
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
-    }
     function get_miembro($param){
 
         $query_get = "SELECT 
@@ -98,25 +89,7 @@
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }
-    function img_perfil($param){
-        
-        $fecha_inicio   = $param["fecha_inicio"];  
-        $fecha_termino  = $param["fecha_termino"];
-        $query_get      = 
-                        "SELECT 
-                            COUNT(0)num 
-                        FROM 
-                            imagen_usuario
-                        WHERE 
-                            DATE(fecha_registro) 
-                        BETWEEN 
-                          '".$fecha_inicio."' 
-                        AND  
-                          '".$fecha_termino."'";
-
-        $result = $this->db->query($query_get);                
-        return $result->result_array()[0]["num"];
-    }
+    
     function registros($param){
 
         $fecha_inicio   = $param["fecha_inicio"];  
@@ -214,9 +187,8 @@
                     "tel_lada"
                     ];
 
-        return $this->get('usuario' , $params, ["idusuario" => $id_usuario]);
+        return $this->get( $params, ["idusuario" => $id_usuario]);
     } 
-    
     function has_phone($param){
 
         $id_usuario =  $param["id_usuario"];        
@@ -353,9 +325,7 @@
         $nombre_usuario     =   $param["nombre_usuario"];
         return $this->q_up("nombre_usuario", $nombre_usuario , $id_usuario);
     }
-   
-    
-    /**/
+
     function get_usuarios_perfil($param){      
         
         $id_perfil          =   $param["id_perfil"];

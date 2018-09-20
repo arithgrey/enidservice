@@ -15,7 +15,7 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get($table)->result_array();
+        return $this->db->get("tarea")->result_array();
     }
     function create_tmp_table_comparativas($flag ,$_num , $param){
 
@@ -90,9 +90,10 @@
         $this->create_tmp_tareas_solicitadas(0 ,$_num , $param);
             $this->create_tmp_tareas_realizadas(0 ,$_num , $param);
                $this->create_tmp_fechas(0 , $_num , $param);
-               $data_complete["solicitudes"]    = $this->get("tmp_tareas_solicitadas_$_num" , [] , [] , 1000);
-               $data_complete["terminos"]       = $this->get("tmp_tareas_realizadas_$_num" , [] , [] , 1000);
-               $data_complete["lista_fechas"] =$this->get("tmp_accesos_$_num" , [] , [] , 1000);
+               $data_complete["solicitudes"]    = $this->db->query("SELECT * FROM tmp_tareas_solicitadas_$_num")->result_array();
+               $data_complete["terminos"]       = $this->db->query("SELECT * FROM tmp_tareas_realizadas_$_num")->result_array();
+               $data_complete["lista_fechas"]   = $this->db->query("SELECT * FROM tmp_accesos_$_num")->result_array();
+
                $this->create_tmp_fechas(1 , $_num , $param);
             $this->create_tmp_tareas_realizadas(1 ,$_num , $param);           
         $this->create_tmp_tareas_solicitadas(1 ,$_num , $param);        
@@ -225,9 +226,10 @@
         $param["tiempo"]= 3;
         $this->create_tmp_table_comparativas(0 ,$_num , $param);
         
-            $data_complete["hoy"]   = $this->get("tmp_tareas_comparativas_hoy_$_num" , [] ,[] , 1000);
-            $data_complete["ayer"]  =  $this->get("tmp_tareas_comparativas_ayer_$_num" , [] ,[] , 1000);
-            $data_complete["menos_7"]= $this->get("tmp_tareas_comparativas_menos7_$_num" , [] ,[] , 1000);
+            $data_complete["hoy"]   = $this->db->query("SELECT * FROM   tmp_tareas_comparativas_hoy_$_num")->result_array();
+            $data_complete["ayer"]  =  $this->db->query("SELECT * FROM  tmp_tareas_comparativas_ayer_$_num")->result_array();
+            $data_complete["menos_7"]= $this->db->query("SELECT * FROM  tmp_tareas_comparativas_menos7_$_num")->result_array();
+
             
 
         $param["tiempo"]= 1;

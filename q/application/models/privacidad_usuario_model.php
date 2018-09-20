@@ -40,7 +40,19 @@
             return  $this->delete($params_where);            
         }
     }
-    
+    function get_terminos_privacidad_usuario($param){
+
+        $id_usuario =  $param["id_usuario"];
+        $query_get = "SELECT 
+                        SUM( CASE WHEN id_privacidad =  5 THEN 1 ELSE 0 END )entregas_en_casa,
+                        SUM( CASE WHEN id_privacidad =  2 THEN 1 ELSE 0 END )telefonos_visibles
+                        FROM 
+                        privacidad_usuario
+                        WHERE 
+                        id_usuario = $id_usuario LIMIT 10";
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+    }    
     
     
 }

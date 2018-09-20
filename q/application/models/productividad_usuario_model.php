@@ -5,20 +5,6 @@
         $this->load->database();
 
     }
-    function insert( $params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
-      return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-    }
-    private function get( $params=[], $params_where =[] , $limit =1){
-        $params = implode(",", $params);
-        $this->db->limit($limit);
-        $this->db->select($params);
-        foreach ($params_where as $key => $value) {
-            $this->db->where($key , $value);
-        }
-        return $this->db->get($table)->result_array();
-    }
-
     function valoraciones_sin_leer($param){
         $id_usuario =  $param["id_usuario"];
         $query_get ="
