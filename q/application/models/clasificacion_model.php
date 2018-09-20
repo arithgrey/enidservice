@@ -74,53 +74,18 @@ class clasificacion_model extends CI_Model{
 
     $result         =   $this->db->query($query_get);
     return $result->result_array(); 
-  }
-  
-  function get_clasificacion_por_id($param){
-    $id         = $param["id"];
-    return $this->q_get($param["fields"] , $id );
-  } 
-  
-  
-  function get_clasificacion_nivel($param){
-
-      $es_servicio  =  $param["es_servicio"];
-      $nivel        =  $param["nivel"];
-      $padre        =  $param["padre"];
-      return $this->get([] , ["flag_servicio" => $es_servicio, "nivel" => $nivel , "padre" => $padre] , 100 );
-  }
-  function count_clasificacion($param){
-
-    $nombre   =    $param["clasificacion"];
-    $servicio =  $param["servicio"];
-    $query_get = "SELECT COUNT(0)num FROM clasificacion 
-                  WHERE 
-                  flag_servicio =  '".$servicio."'
-                  AND 
-                  nombre_clasificacion =  '".$nombre."' LIMIT 1 ";
-    $result =  $this->db->query($query_get);
-    $response["existencia"] =  $result->result_array()[0]["num"];
-    return $response;
-  }
-  
-  
-  function add_clasificacion($param){
-
-      $nivel          =  $param["nivel"];
-      $clasificacion  =  $param["clasificacion"];
-      $tipo           =  $param["tipo"];
-      $padre          =  $param["padre"];
-      
-      $params = [
-
-        "nombre_clasificacion"  =>  $clasificacion,
-        "flag_servicio"         =>  $tipo,
-        "padre"                 =>  $padre,
-        "nivel"                 =>  $nivel
-      ];
-      return $this->insert("clasificacion", $params);
-  }
-    
+    }
+    function get_clasificacion_por_id($param){
+      $id         = $param["id"];
+      return $this->q_get($param["fields"] , $id );
+    } 
+    function get_servicio_nivel($param){
+        return $this->get([] , ["flag_servicio" => $param["es_servicio"], "nivel" => $param["nivel"] , "padre" => $param["padre"]] , 100 );
+    }
+    function num_servicio_nombre($param){
+      $params_where =  ["flag_servicio" =>  $servicio, "nombre_clasificacion" =>  $nombre];
+      return  $this->get(["COUNT(0)num"] , $params_where, 10000 )[0]["num"];
+    }
     function get_clasificaciones_por_padre($padre){
         return $this->get(["id_clasificacion","nombre_clasificacion" ],  ["padre"  => $padre] , 100);        
     }    
@@ -129,16 +94,12 @@ class clasificacion_model extends CI_Model{
         return $response[0]["nombre_clasificacion"];
 
     }    
-    function get_clasificaciones_por_nivel($param){
-
-        $nivel      =  $param["nivel"];        
-        $params       = ["id_clasificacion","nombre_clasificacion"];
-        $params_where = ["nivel" => $nivel];
+    function get_clasificaciones_por_nivel($param){ 
+        $params       = ["id_clasificacion","nombre_clasificacion", "flag_servicio"  ];
+        $params_where = ["nivel" => $param["nivel"]];
         return $this->get($params ,$params_where , 100 );
     }
-
     function get_clasificaciones_segundo($array_padre){
-
         
         $nueva_data =[];
         $a =0;
@@ -151,12 +112,7 @@ class clasificacion_model extends CI_Model{
         }
         return $nueva_data;
     }
-    function get_clasificaciones_primer_nivel_nombres($param){
-        
-        $params         = ["nombre_clasificacion" ,"id_clasificacion" , "flag_servicio"  ];
-        $params_where   = ["nivel"=> 1];
-        return $this->get($params , $params_where , 50);
-    }
+    
     function get_clasificaciones_por_id_clasificacion($param){
 
         $fields = ["id_clasificacion", "nombre_clasificacion"];
@@ -183,18 +139,13 @@ class clasificacion_model extends CI_Model{
         $result =  $this->db->query($query_get);
         return $result->result_array();            
     }
-    function get_categorias_servicios($param){
-        
-        $modalidad  =  $param["modalidad"];            
-        $nivel      =  $param["nivel"];            
-        $padre      = $param["padre"];
+    function get_padre_tipo($param){
+      
         $params_where = [   "padre"         => $padre,
-                            "flag_servicio" => $modalidad,
-                            "nivel"         => $nivel 
+                            "flag_servicio" => $param["nivel"],
+                            "nivel"         => $param["padre"] 
                         ];
         
         return $this->get([] , $params_where , 100);
     }
-    
- 
 }

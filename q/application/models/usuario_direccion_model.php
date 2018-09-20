@@ -22,21 +22,8 @@
         }
         return $this->db->get("usuario_direccion")->result_array();
     }
-
     function get_num($param){
-
-        $id_usuario =  $param["id_usuario"];
-        $query_get  =
-        "SELECT 
-            COUNT(0)num 
-        FROM 
-            usuario_direccion 
-        WHERE 
-            id_usuario =$id_usuario 
-        LIMIT 1";
-
-        $result =  $this->db->query($query_get);
-        return $result->result_array()[0]["num"];
+        return $this->get(["COUNT(0)num"] , ["id_usuario" => $param["id_usuario"] ] )[0]["num"];
     }
     function get_usuario_direccion($id_usuario){
       return $this->get([] , ["id_usuario" => $id_usuario , "status" => 1  ] );

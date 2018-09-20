@@ -112,7 +112,7 @@ class usuario extends REST_Controller{
                 
                 if($nuevo == $confirm){        
                     $id_usuario   = $this->principal->get_session("idusuario");            
-                    $existe = count($this->usuario_model->validar_pass($anterior , $id_usuario));
+                    $existe = $this->usuario_model->valida_pass($anterior , $id_usuario);
                     if($existe != 1){            
                         $this->response("La contraseña ingresada no corresponde a su contraseña actual");
                     }else{
@@ -453,7 +453,7 @@ class usuario extends REST_Controller{
         $response["usuario_existente"] = 0;
 
         if($editar ==  1){              
-            $response["modificacion_usuario"] = $this->usuario_model->modifica_usuario($param);        
+            $response["modificacion_usuario"] = $this->usuario_model->set_miembro($param);        
             $this->agrega_permisos_usuario($param);
         }else{
 
@@ -541,6 +541,12 @@ class usuario extends REST_Controller{
         $this->response($response);    
                  
     }         
+    function cancelar_envio_recordatorio_PUT(){
+        
+        $param      =  $this->put(); 
+        $response   =  $this->usuario_model->q_up('recordatorio_publicacion', 0, $param["id"]);
+        $this->response($response);
+    }    
     private function crear_proceso_compra($param){
         
         

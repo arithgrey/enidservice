@@ -65,19 +65,8 @@
         return $result->result_array()[0]["num"];
     }
     
-    function delete_interes_usuario($param)
-    {   
-        
-        $id_usuario         =  $param["id_usuario"];
-        $id_clasificacion   =  $param["id_clasificacion"];
-        $params_where       =[ 
-            "tipo"                => 2,
-            "id_usuario"          => $id_usuario,
-            "id_clasificacion"    => $id_clasificacion
-        ];
-        return $this->delete($params_where);
-    }      
-    function insert_interes_usuario($param)
+    
+    function create($param)
     {
         $params = [
             "id_usuario"       => $param["id_usuario"],

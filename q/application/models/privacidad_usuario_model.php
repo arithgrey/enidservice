@@ -26,13 +26,11 @@
     }    
     function asociar_concepto_privacidad_usuario($param){
 
-        $id_privacidad  =  $param["concepto"];
-        $id_usuario     =  $param["id_usuario"];
-
         if($param["termino_asociado"] == 0){
 
-            $params = [ "id_privacidad" =>  $id_privacidad ,
-                        "id_usuario"    =>  $id_usuario
+            $params = 
+                    [ "id_privacidad" =>  $param["concepto"] ,
+                        "id_usuario"    =>  $param["id_usuario"]
                     ];
             return $this->insert($params);            
         }else{            

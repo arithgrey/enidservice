@@ -32,22 +32,12 @@
       return $this->get($params, ["id_servicio" => $id ] );
   }  
   function get_num($param){
-     $query_get ="SELECT 
-                    COUNT(0)num_permiso FROM perfil_recurso 
-                    WHERE 
-                  idrecurso = '".$param["id_recurso"]."' 
-                    AND 
-                  idperfil = '".$param["id_perfil"]."'";
-
-    return  $this->db->query($query_get)->result_array()[0]["num_permiso"];                    
-  }  
-  function delete_perfil_recurso($param){
     
-    $params_where =  [
-      "idrecurso" => $param["id_recurso"] , 
+    $params_where = [
+      "idrecurso" => $param["id_recurso"],
       "idperfil"  => $param["id_perfil"]
     ];
-
-    return  $this->delete($params_where);
-  }
+    $this->get(["COUNT(0)num"] , $params_where )[0]["num"];
+  }  
+  
 }

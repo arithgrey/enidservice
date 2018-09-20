@@ -19,7 +19,7 @@ class recibo extends REST_Controller{
     function saldo_pendiente_recibo_GET(){
 
         $param          =   $this->get();
-        $response       =   $this->recibo_model->get_saldo_pendiente_recibo($param);        
+        $response       =   $this->recibo_model->q_get([ "monto_a_pagar" , "flag_envio_gratis"], $param["id_recibo"]);        
         $monto_a_pagar  =   $response[0]["monto_a_pagar"]; 
         $costo_envio    =   get_costo_envio($response[0]);
         $total          =   $monto_a_pagar + $costo_envio["costo_envio_cliente"];

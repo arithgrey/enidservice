@@ -502,9 +502,7 @@
     
     function get_informacion_basica_servicio_disponible($param){
 
-        $id_servicio            =  $param["id_servicio"];
-        $articulos_solicitados  =  $param["articulos_solicitados"];
-
+        //$articulos_solicitados  =  $param["articulos_solicitados"];
         $params  =  [   "id_servicio",
                         "nombre_servicio" , 
                         "status" , 
@@ -517,7 +515,7 @@
                         "id_ciclo_facturacion"
                     ];
 
-        return  $this->q_get($params, $id_servicio );
+        return  $this->q_get($params, $param["id_servicio"] );
        
     }  
     function get_base($param){
@@ -804,10 +802,10 @@
         
         $metakeyword = $param["metakeyword"];    
         $id_servicio = $param["id_servicio"];
-
-        $meta  =  $this->get_palabras_clave_por_servicio_sistema($id_servicio);
+        $meta        =  $this->get_palabras_clave_por_servicio_sistema($id_servicio);
         $metakeyword =  $meta .",".$metakeyword;
         
+        /*
         $query_update = "UPDATE 
                             servicio 
                         SET 
@@ -815,6 +813,8 @@
                         WHERE id_servicio ='".$id_servicio."' LIMIT 1";    
 
         return $this->db->query($query_update);
+        */
+        return $this->q_up("metakeyword",$metakeyword, $id_servicio);
     }
     function get_palabras_clave($id_servicio){
 

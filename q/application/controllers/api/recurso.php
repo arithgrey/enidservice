@@ -9,7 +9,7 @@ class recurso extends REST_Controller{
     function index_POST(){
 
         $param      =  $this->post();
-        $response   =  $this->recurso_model->registra_recurso($param);
+        $response   =  $this->recurso_model->create($param);
         $this->response($response);
     }
     function navegacion_GET(){                

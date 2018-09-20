@@ -9,11 +9,12 @@
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }        
     function update($data =[] , $params_where =[] , $limit =1 ){    
+        
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
         $this->db->limit($limit);
-        return $this->db->update($table, $data);    
+        return $this->db->update("usuario_deseo", $data);    
     }
     function get($params=[], $params_where =[] , $limit =1){
         
@@ -30,10 +31,10 @@
         return   $this->get(["COUNT(0)num"], $params_where)[0]["num"]; 
     }
     function aumenta_deseo($param){
+        
         $id_usuario     =  $param["id_usuario"];
         $id_servicio    =  $param["id_servicio"];        
-        $query_update =  "UPDATE usuario_deseo SET num_deseo = num_deseo + 1 WHERE 
-                            id_usuario = $id_usuario AND  id_servicio = $id_servicio LIMIT 1";
+        $query_update =  "UPDATE usuario_deseo SET num_deseo = num_deseo + 1 WHERE id_usuario = $id_usuario AND  id_servicio = $id_servicio LIMIT 1";
         return $this->db->query($query_update);
     }   
     function add_usuario_deseo($param){

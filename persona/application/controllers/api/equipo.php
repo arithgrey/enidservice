@@ -8,12 +8,6 @@ class Equipo extends REST_Controller{
         $this->load->library(lib_def());        
     }   
     /**/
-    function cancelar_envio_recordatorio_PUT(){
-
-        $param      =  $this->put(); 
-        $response   =  $this->personamodel->cancelar_envio_recordatorio($param);
-        $this->response($response);
-    }    
     /**/
     function calificacion_cancelacion_compra_PUT(){
 

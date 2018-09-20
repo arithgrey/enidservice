@@ -18,10 +18,16 @@ class usuario_clasificacion extends REST_Controller{
         $this->usuario_clasificacion_model->get_interes_usuario($param);        
         
         $response["tipo"] =0;
-        if ($num >0 ) {        
-            $this->usuario_clasificacion_model->delete_interes_usuario($param);            
+        if ($num >0 ) {  
+            
+            $params       =[ 
+                "tipo"                => 2,
+                "id_usuario"          =>    $param["id_usuario"],
+                "id_clasificacion"    =>    $param["id_clasificacion"]
+            ];      
+            $this->usuario_clasificacion_model->delete($params);            
         }else{            
-            $this->usuario_clasificacion_model->insert_interes_usuario($param);
+            $this->usuario_clasificacion_model->create($param);
             $response["tipo"] =1;
         }
 

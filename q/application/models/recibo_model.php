@@ -33,12 +33,12 @@
     function carga_actividad_pendiente($param){
 
           $campo_usuario = "id_usuario";        
-          $id_usuario =  $param["id_usuario"];
-
           if($param["modalidad"] ==  1){
               $campo_usuario ="id_usuario_venta";            
           }
           
+
+          /*
           $query_get = "SELECT 
                           COUNT(0)num
                         FROM 
@@ -50,6 +50,12 @@
                           
           $result = $this->db->query($query_get);   
           $num = $result->result_array()[0]["num"];
+          */
+          $params_where = [
+            "status"        => 7 , 
+            $campo_usuario  =>  $param["id_usuario"]
+          ];
+          $num = $this->get(["COUNT(0)num"] , $params_where , 10000 )['0']["num"];
           $data_complete["num_pedidos"] = $num;        
           return $data_complete;
       }    
@@ -108,6 +114,11 @@
     } 
     function num_compras_efectivas_usuario($param){
 
+      $campo_usuario  = "id_usuario";
+      if($param["modalidad"] == 1){
+          $campo_usuario ="id_usuario_venta";  
+      }
+      /*
       $id_usuario     =  $param["id_usuario"];
       $campo_usuario  = "id_usuario";
 
@@ -125,6 +136,14 @@
                       
       $result =  $this->db->query($query_get);  
       return $result->result_array()[0]["num"];      
+      */
+
+      
+      $params_where = [
+            "status"        => 9 , 
+            $campo_usuario  =>  $param["id_usuario"]
+      ];
+      return $this->get(["COUNT(0)num"] , $params_where , 10000 )['0']["num"];
     }
     
   function total_compras_ventas_efectivas_usuario($param){
@@ -240,8 +259,8 @@
   function q_get($params=[], $id){
     return $this->get($params, ["id_proyecto_persona_forma_pago" => $id ] );
   }
-  function q_up($q , $q2 , $id_servicio){
-    return $this->update([$q => $q2 ] , ["idusuario" => $id_servicio ]);
+  function q_up($q , $q2 , $id_recibo){
+    return $this->update([$q => $q2 ] , ["id_proyecto_persona_forma_pago" => $id_recibo ]);
   }
   private function get( $params=[], $params_where =[] , $limit =1){
     
@@ -362,12 +381,7 @@
       return $data_complete;      
   }     
   /**/
-  function get_saldo_pendiente_recibo($param){
-
-      $id_recibo =  $param["id_recibo"];
-      return $this->get([ "monto_a_pagar" , "flag_envio_gratis"], [ "id_proyecto_persona_forma_pago" => $id_recibo] );
-  }
-
+  
   function get_info_recibo_por_id($param){
             
       $where =  ["id_proyecto_persona_forma_pago" =>  $param["id_recibo"] ];            

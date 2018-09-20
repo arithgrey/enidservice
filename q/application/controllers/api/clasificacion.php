@@ -10,9 +10,8 @@ class Clasificacion extends REST_Controller{
     function categorias_servicios_GET(){
 
         $param      =  $this->get();
-        $response   = $this->clasificacion_model->get_categorias_servicios($param);
+        $response   = $this->clasificacion_model->get_padre_tipo($param);
         $this->response($response);
-
     }
     function clasificaciones_por_servicio_GET(){
         
@@ -27,7 +26,6 @@ class Clasificacion extends REST_Controller{
         $param["nivel"]         =  1;        
         $primer_nivel           =  $this->clasificacion_model->get_clasificaciones_por_nivel($param);
         $response["clasificaciones"] = $this->clasificacion_model->get_clasificaciones_segundo($primer_nivel);
-        
         $this->load->view("clasificaciones/menu" , $response);
     }
     /**/
@@ -45,7 +43,6 @@ class Clasificacion extends REST_Controller{
         $this->clasificacion_model->get_nombre_clasificacion_por_id_clasificacion($param);
         $this->response($nombre_clasificacion);
     }
-    /**/
     function id_GET(){
 
         $param = $this->get();        
@@ -58,14 +55,11 @@ class Clasificacion extends REST_Controller{
     function categorias_destacadas_GET(){
         
         $param                                  = $this->get();
+        $param["nivel"]                         = 1; 
         $data_complete["clasificaciones"]       = $this->get_clasificaciones_destacadas($param);
-        $data_complete["nombres_primer_nivel"]  =
-        $this->clasificacion_model->get_clasificaciones_primer_nivel_nombres($param);
+        $data_complete["nombres_primer_nivel"]  = $this->clasificacion_model->get_clasificaciones_por_nivel($param);
         $this->response($data_complete);
     }    
-    /**/
-    
-    /*----viejo--*/
     function clasificaciones_nivel_GET(){
 
         $param      =  $this->get();
@@ -179,25 +173,29 @@ class Clasificacion extends REST_Controller{
         return $data_complete;
     }
     /**/
-    
-    /**/
     function existencia_GET(){
-        $param      =  $this->get();
-        $response   =  $this->clasificacion_model->count_clasificacion($param);
+        $param                    =  $this->get();
+        $response["existencia"]   =  $this->clasificacion_model->num_servicio_nombre($param);
         $this->response($response);
     }
     /**/
     function nivel_POST(){
 
         $param      =  $this->post();
-        $response   =  $this->clasificacion_model->add_clasificacion($param);
+        $params = [
+            "nombre_clasificacion"  =>  $param["clasificacion"],
+            "flag_servicio"         =>  $param["tipo"],
+            "padre"                 =>  $param["padre"],
+            "nivel"                 =>  $param["nivel"]
+        ];
+        $response   =  $this->clasificacion_model->insert($param);
         $this->response($response);
     }
     /**/
     function nivel_GET(){
 
         $param      =  $this->get();
-        $response   =  $this->clasificacion_model->get_clasificacion_nivel($param);
+        $response   =  $this->clasificacion_model->get_servicio_nivel($param);
         
         if (array_key_exists('v', $param) && $param["v"] ==  1 ) {
             $this->response($response);
@@ -216,9 +214,7 @@ class Clasificacion extends REST_Controller{
             if ($param["nivel"] !== "1") {
                 $mas_nivel =  "mas_".$param["nivel"];
                 $seleccion =  "seleccion_".$param["nivel"];            
-
                 $response .=    "<div class='".$mas_nivel."'>
-
                                     <button class='button-op ".$seleccion."'>
                                         AGREGAR A LA LISTA
                                     </button>                                
@@ -329,19 +325,19 @@ class Clasificacion extends REST_Controller{
     }
     /**/
     function  get_tallas_countries($q){            
-        $api  =  "talla/tallas_countries/format/json/";
+        $api    =  "talla/tallas_countries/format/json/";
         return  $this->principal->api("q", $api, $q);     
     }  
     /**/
     function  get_tallas_servicio($q){            
-        $api  =  "servicio/tallas/format/json/";
+        $api    =  "servicio/tallas/format/json/";
         return  $this->principal->api("q", $api, $q);     
     }  
     function get_tipo_talla(){
 
         $q["info"]  = 1;
         $api        =  "tipo_talla/index/format/json/";
-        return  $this->principal->api("q", $api, $q);      
+        return      $this->principal->api("q", $api, $q);      
     }
     function coincidencia_servicio_GET(){        
         $param      =   $this->get();

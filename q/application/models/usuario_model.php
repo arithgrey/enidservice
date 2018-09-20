@@ -11,11 +11,6 @@
         "UPDATE usuario SET ultima_publicacion = CURRENT_TIMESTAMP() WHERE idusuario =  $id_usuario";
         return  $this->db->query($query_update);
     } 
-    function cancelar_envio_recordatorio($param){
-      $data   = array('recordatorio_publicacion' => 0);
-      $this->db->where('idusuario', $param["id"]);
-      return  $this->db->update($data);
-    }
     /**/
     function calificacion_cancelacion_compra($param){
       $id           = $param["id"];
@@ -141,14 +136,14 @@
     }
     function set_pass($param){
     
-        $mail                   =   trim($param["mail"]); 
-        $new_pass               =   RandomString();             
-        $params                 =   ["password" => sha1($new_pass)];    
-        $params_where           =   ["email"   => $mail ];            
-        $data["new_pass"]       =   $new_pass;
-        $data["status_send"]    =   $this->update($params, $params_where );
-        $data["mail"] =  $param["mail"];
-        return $data;    
+        
+        $new_pass                   =   RandomString();             
+        $params                     =   ["password" => sha1($new_pass)];    
+        $params_where               =   ["email"   => trim($param["mail"]) ];            
+        $resopnse["new_pass"]       =   $new_pass;
+        $resopnse["status_send"]    =   $this->update($params, $params_where );
+        $resopnse["mail"] =  $param["mail"];
+        return $resopnse;    
     }
     /*
       function get_usuario_cobranza($param){
@@ -174,7 +169,6 @@
     }
     function get_usuario_cliente($param){
 
-        $id_usuario =  $param["id_usuario"];        
         $params =  ["idusuario id_usuario", 
                     "nombre" , 
                     "apellido_paterno" , 
@@ -187,7 +181,7 @@
                     "tel_lada"
                     ];
 
-        return $this->get( $params, ["idusuario" => $id_usuario]);
+        return $this->q_get($params, $param["id_usuario"]);
     } 
     function has_phone($param){
 
@@ -320,12 +314,8 @@
 
     }      
     function set_nombre_usuario($param){
-    
-        $id_usuario         =   $param["id_usuario"];
-        $nombre_usuario     =   $param["nombre_usuario"];
-        return $this->q_up("nombre_usuario", $nombre_usuario , $id_usuario);
+        return $this->q_up("nombre_usuario", $param["nombre_usuario"] , $param["id_usuario"]);
     }
-
     function get_usuarios_perfil($param){      
         
         $id_perfil          =   $param["id_perfil"];
@@ -369,13 +359,13 @@
     function set_cancelacion_compra($id){
         return $this->q_up("num_cancelaciones" , "num_cancelaciones + 1 " , $id);        
     }    
-    function validar_pass($antes , $id_usuario)
+    function valida_pass($antes , $id_usuario)
     {           
         $params_where = [
             "idusuario" => $id_usuario,
             "password"  => $antes
         ];
-        return $this->get(["password"] , $params_where);
+        return $this->get(["COUNT(0)num"] , $params_where)[0]["num"];
     }
     /*
     function actualizarPassword($antes, $nuevo, $id_usuario){   
@@ -598,35 +588,19 @@
           break;
       }
    }
-   function modifica_usuario($param){
-        
-        $nombre               =  $param["nombre"];
-        $apellido_paterno     =  $param["apellido_paterno"];
-        $apellido_materno     =  $param["apellido_materno"];
-        $email                =  $param["email"];
-        $id_departamento      =  $param["departamento"];
-        $puesto               =  $param["puesto"];
-        $inicio_labor         =  $param["inicio_labor"];
-        $fin_labor            =  $param["fin_labor"];
-        $turno                =  $param["turno"];
-        $sexo                 =  $param["sexo"];
-        $tel_contacto         =  $param["tel_contacto"];
-        $id_usuario           =  $param["id_usuario"];
-        $editar               =  $param["editar"];
-        $status               =  $param["status"];
-
-      
+   function set_miembro($param){
+       
         $params =  [
-          "nombre"                => $nombre,              
-          "email"                 => $email,                                                   
-          "apellido_paterno"      => $apellido_paterno , 
-          "apellido_materno"      => $apellido_materno,       
-          "inicio_labor"          => $inicio_labor, 
-          "fin_labor"             => $fin_labor ,                  
-          "turno"                 => $turno, 
-          "sexo"                  => $sexo, 
-          "id_departamento"       => $id_departamento, 
-          "status"                => $status          
+          "nombre"                =>  $param["nombre"],              
+          "email"                 =>  $param["email"],                                                   
+          "apellido_paterno"      =>  $param["apellido_paterno"] , 
+          "apellido_materno"      =>  $param["apellido_materno"],       
+          "inicio_labor"          =>  $param["inicio_labor"], 
+          "fin_labor"             =>  $param["fin_labor"] ,                  
+          "turno"                 =>  $param["turno"], 
+          "sexo"                  =>  $param["sexo"], 
+          "id_departamento"       =>  $param["departamento"], 
+          "status"                =>  $param["status"]
         ];
         
         if(strlen($tel_contacto)>3) {      
@@ -641,63 +615,46 @@
     } 
     function crea_usuario_enid_service($param){
 
-      $nombre               =  $param["nombre"];
-      $apellido_paterno     =  $param["apellido_paterno"];
-      $apellido_materno     =  $param["apellido_materno"];
-      $email                =  $param["email"];
-      $id_departamento      =  $param["departamento"];
-      $puesto               =  $param["puesto"];
-      $inicio_labor         =  $param["inicio_labor"];
-      $fin_labor            =  $param["fin_labor"];
-      $turno                =  $param["turno"];
-      $sexo                 =  $param["sexo"];
-      $tel_contacto         =  $param["tel_contacto"];
-      $id_usuario           =  $param["id_usuario"];
-      $editar               =  $param["editar"];
+      //$puesto               =  $param["puesto"];
+      //$id_usuario           =  $param["id_usuario"];
+      //$editar               =  $param["editar"];
 
       $params = [
-        "nombre"             => $nombre,
-        "email"              => $email,
+        "nombre"             => $param["nombre"],
+        "email"              => $param["email"],
         "idempresa"          => '1',
-        "apellido_paterno"   => $apellido_paterno,
-        "apellido_materno"   => $apellido_materno,
-        "tel_contacto"       => $tel_contacto ,
-        "inicio_labor"       => $inicio_labor,
-        "fin_labor"          => $fin_labor ,
-        "turno"              => $turno,
-        "sexo"               => $sexo,
-        "id_departamento"    => $id_departamento,
+        "apellido_paterno"   => $param["apellido_paterno"],
+        "apellido_materno"   => $param["apellido_materno"],
+        "tel_contacto"       => $param["tel_contacto"],
+        "inicio_labor"       => $param["inicio_labor"],
+        "fin_labor"          => $param["fin_labor"],
+        "turno"              => $param["turno"],
+        "sexo"               => $param["sexo"],
+        "id_departamento"    => $param["departamento"],
         "password"           => sha1("qwerty123.1")
       ];
       $id_usuario = $this->insert($params , 1);
       $param["id_usuario"] = $id_usuario;      
       return $param;
 
-  }
-  
+    }
     function registrar_afiliado($param){
 
       $data_complete["usuario_existe"] =  $this->evalua_usuario_existente($param);
       $data_complete["usuario_registrado"] = 0;
       
       if($data_complete["usuario_existe"] == 0 ){
-        
-          $email =  $param["email"];
-          $id_departamento =  8;      
-          $password =  $param["password"];            
-          $nombre =  $param["nombre"];
-          $telefono =  $param["telefono"];
-
+      
           $params = [
-            "email"                   =>  $email,
-            "idempresa"               =>  '1',
-            "id_departamento"         =>  $id_departamento,
-            "password"                =>  $password,
-            "nombre"                  =>  $nombre,
-            "tel_contacto"            =>  $telefono 
+            "email"                   =>    $param["email"],
+            "idempresa"               =>    '1',
+            "id_departamento"         =>    8,
+            "password"                =>    $param["password"],
+            "nombre"                  =>    $param["nombre"],
+            "tel_contacto"            =>    $param["telefono"]
         ];
 
-        $id_usuario                             = $this->insert("usuario" , $params , 1);
+        $id_usuario                             = $this->insert($params , 1);
         $param["id_usuario"]                    =  $id_usuario;           
         $param["puesto"]                        =  19; 
         $data_complete["usuario_permisos"]      =  $this->agrega_permisos_usuario($param);   

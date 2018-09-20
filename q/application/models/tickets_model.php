@@ -199,7 +199,16 @@
     }       
 
     
-    
+     /*  
+    function get_pendientes_ticket($param){
+
+      $params_where = [
+        "status" => 0 , 
+        "id_ticket" => $id_ticket 
+      ];
+      return $this->get(["count(*)num"] , $params_where)[0]["num"];
+    } 
+    */
     /*
     function registra_solicitud_pago_amigo($param){
 

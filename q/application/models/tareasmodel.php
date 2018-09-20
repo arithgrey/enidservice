@@ -33,18 +33,12 @@ class tareasmodel extends CI_Model{
         return $this->db->get("tarea")->result_array();
   }  
   function create($param){
-
-    $descripcion  =  $param["tarea"];
-    $id_ticket    =  $param["id_ticket"];
-    $id_usuario   =  $param["id_usuario"];
-
     $params = [
-        "descripcion"       =>  $descripcion ,
-        "id_ticket"         =>  $id_ticket ,
-        "usuario_registro"  =>  $id_usuario
+        "descripcion"       =>  $param["tarea"] ,
+        "id_ticket"         =>  $param["id_ticket"] ,
+        "usuario_registro"  =>  $param["id_usuario"]
     ];
     return $this->insert($params);
-    
     
   }  
   function update_estado_tarea($param){
@@ -100,17 +94,7 @@ class tareasmodel extends CI_Model{
 
     $result = $this->db->query($query_get);
     return $result->result_array();
-  }  
-  function get_pendientes_ticket($param){
-
-    $id_ticket =  $param["id_ticket"];
-    $query_get = "SELECT count(*)num_tareas_pendientes from tarea 
-                  where 
-                  status =0 
-                  and id_ticket ='".$id_ticket."' ";
-
-    $result =  $this->db->query($query_get);              
-    return  $result->result_array()[0]["num_tareas_pendientes"];
-  } 
+  }
+ 
 
 }

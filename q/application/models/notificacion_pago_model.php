@@ -3,7 +3,10 @@
     function __construct(){      
         parent::__construct();        
         $this->load->database();
-    }    
+    }  
+    function q_up($q , $q2 , $id_notificacion_pago){
+        return $this->update([$q => $q2 ] , ["id_notificacion_pago" => $id_notificacion_pago ]);
+    }  
     function insert( $params , $return_id=0){        
         $insert   = $this->db->insert("notificacion_pago", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
@@ -76,46 +79,6 @@
 
         $result =  $this->db->query($query_get);
         return $result->result_array();
-
-    }
-    function registra_pago_usuario($param){
-        
-        $num_recibo           =  $param["num_recibo"];
-        $nombre               =  $param["nombre"];
-        $correo               =  $param["correo"];
-        $dominio              =  $param["dominio"];
-        $servicio             =  $param["servicio"];    
-        $fecha_pago           =  $param["fecha"];
-        $cantidad             =  $param["cantidad"];
-        $forma_pago           =  $param["forma_pago"];
-        $referencia           =  $param["referencia"];
-        $comentarios          =  $param["comentarios"];
-        
-        $params =  [
-        "nombre_persona"      => $nombre,
-        "correo"              => $correo,
-        "dominio"             => $dominio,
-        "id_servicio"         => $servicio,
-        "fecha_pago"          => $fecha_pago,
-        "cantidad"            => $cantidad,
-        "id_forma_pago"       => $forma_pago,
-        "referencia"          => $referencia,
-        "comentario"          => $comentarios,
-        "num_recibo"          => $num_recibo
-      ];
-      return $this->insert($params, 1);
-    }
-    function actualiza_pago_notificado($param){
-
-        $id_notificacion_pago =  $param["id_notificacion_pago"];
-        $estado =  $param["estado"];
-        $query_update ="UPDATE notificacion_pago 
-                        SET 
-                        status =  '".$estado."'
-                        WHERE
-                        id_notificacion_pago = '".$id_notificacion_pago."'
-                        LIMIT 1";
-        return $this->db->query($query_update);
 
     }
     

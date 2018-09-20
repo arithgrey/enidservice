@@ -4,13 +4,11 @@
         parent::__construct();        
         $this->load->database();
     }
-    function registra_recurso($param){
-
-        $nombre =  $param["nombre"];
-        $urlpaginaweb =  $param["urlpaginaweb"];  
+    function create($param){
+        
         $params = [ 
-          "nombre"          =>  $nombre,
-          "urlpaginaweb"    =>  $urlpaginaweb,
+          "nombre"          =>  $param["nombre"],
+          "urlpaginaweb"    =>  $param["urlpaginaweb"],
           "order_negocio"   =>  1,
           "status"          =>  1,
           "class"           =>  '' 
