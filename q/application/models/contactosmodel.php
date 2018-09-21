@@ -12,32 +12,15 @@
     }        
     function get_contactos($param){
 
-      $fecha_inicio =  $param["fecha_inicio"];
-      $fecha_termino =  $param["fecha_termino"];
-
-      $query_get =  "SELECT 
-                      * 
-                    FROM  
+      $query_get =  "SELECT * FROM  
                     contact 
                     WHERE 
                     DATE(fecha_registro)
-                    BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."' "; 
+                    BETWEEN '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."' "; 
       $result = $this->db->query($query_get);      
       return $result->result_array();
     }
     
-    function insert_contacto($param){
-
-      $params = [
-        "nombre"              =>  $param["nombre"],
-        "email"               =>  $param["email"],
-        "mensaje"             =>  $param["mensaje"],
-        "id_empresa"          =>  $param["empresa"],
-        "id_tipo_contacto"    =>  $param["tipo"],
-        "telefono"            =>  $param["tel"]
-      ];
-      return $this->insert($params);    
-    } 
     
     /*
     function get_resumen_cotizacione($param)

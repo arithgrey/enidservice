@@ -4,6 +4,16 @@ class img_model extends CI_Model {
         parent::__construct();        
         $this->load->database();
   }
+  function q_get($params=[], $id){
+    return $this->get($params, ["idimagen" => $id ] );
+  } 
+  function delete($params_where =[] , $limit =1){              
+    $this->db->limit($limit);        
+    foreach ($params_where as $key => $value) {
+      $this->db->where($key , $value);
+    }        
+    return  $this->db->delete("imagen", $params_where);
+  }
   private function insert($params , $return_id=0){        
     $insert   = $this->db->insert("imagen", $params);     
     return ($return_id ==  1) ? $this->db->insert_id() : $insert;
@@ -19,32 +29,10 @@ class img_model extends CI_Model {
   }
   /**/
   function elimina_img($id_imagen){
-    $query_delete ="DELETE FROM imagen WHERE  
-    idimagen  = '". $id_imagen ."' LIMIT 1";              
+    $query_delete ="DELETE FROM imagen WHERE  idimagen  = '". $id_imagen ."' LIMIT 1";              
     $this->db->query($query_delete);
   }
   /**/
-  function elimina_pre_img_usuario($param){
-
-    $id_usuario =  $param["id_usuario"];  
-    $imagen = $this->get_img_usuario($id_usuario);  
-    foreach ($imagen as $row){
-      $id_imagen=  $row["id_imagen"];      
-      $query_delete ="DELETE FROM imagen_usuario WHERE  idusuario  = '". $id_usuario ."' LIMIT 1";
-      $this->db->query($query_delete); 
-      $this->elimina_img($id_imagen);
-    }
-    
-  }
-  function insert_imgen_usuario($param){
-
-    $this->elimina_pre_img_usuario($param);    
-    $id_usuario =  $param["id_usuario"];
-    $id_empresa = $param["id_empresa"];
-    $id_imagen = $this->insert_img($param , 1);  
-    $params   = ["id_imagen" => $id_imagen,"idusuario" => $id_usuario];    
-    return $this->insert("imagen_usuario" , $params);
-  }
   function insert_img($param , $type=0 ){    
 
     $values     =   [ "nombre_imagen" ,
@@ -70,10 +58,11 @@ class img_model extends CI_Model {
     return $this->db->insert_id();     
   }  
   
+  
+  /*
   function get_img($id_imagen){
     return $this->get(["img"] , [ "idimagen" => $id_imagen]);
   }
-  /*
   function insert_imgen_servicio($param){
               
     $id_servicio  = $param["servicio"];
@@ -83,14 +72,6 @@ class img_model extends CI_Model {
 }
 */
 
-function delete_imagen_servicio($param){
-    
-  $id_imagen =   $param["id_imagen"];  
-  $query_delete = "DELETE FROM  imagen_servicio WHERE id_imagen = '".$id_imagen."' LIMIT 5";
-  $result =  $this->db->query($query_delete); 
-  return  $this->elimina_imagen($id_imagen);
-  
-}
 
 /*
 

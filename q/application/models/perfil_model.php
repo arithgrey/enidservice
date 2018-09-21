@@ -15,17 +15,10 @@
     }
     /**/
     function insert( $params , $return_id=0){        
-        $insert   = $this->db->insert($tabla, $params);     
+        $insert   = $this->db->insert("perfil", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
-    /**/
-    function get_id_departamento_by_id_perfil($param){
-        $id_perfil =  $param["id_perfil"];
-        $result = $this->get(["id_departamento"] , ["idperfil" => $id_perfil ]);
-        return $result[0]["id_departamento"];
-    }       
     function get_usuario($id_usuario){
-
 
         $query_get ="SELECT 
                     p.idperfil , 
@@ -43,9 +36,5 @@
         return $this->db->query($query_get)->result_array();       
         
     }
-    function get_puesto_cargo($param){
-      $id_departamento =  $param["id_departamento"];
-      return $this->get([] , ["id_departamento" =>  $id_departamento ] , 100);
-    }      
-
+    
 }

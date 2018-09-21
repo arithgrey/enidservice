@@ -15,10 +15,10 @@ class Perfiles extends REST_Controller{
   }  
   /**/
   function  id_departamento_by_id_perfil_GET(){
-    
-    $param = $this->get();
-    $response =  $this->perfil_model->get_id_departamento_by_id_perfil($param); 
-    $this->response($response);
+
+    $param           = $this->get();
+    $id_departamento = $this->get(["id_departamento"] , ["idperfil" => $param["id_perfil"] ])[0]["id_departamento"];
+    $this->response($id_departamento);
   }
   function data_usuario_GET(){
 
@@ -30,7 +30,7 @@ class Perfiles extends REST_Controller{
   function puesto_cargo_GET(){
 
     $param      =   $this->get();    
-    $puestos    =   $this->perfil_model->get_puesto_cargo($param); 
+    $puestos    = $this->perfil_model->get( [] ,["id_departamento" =>  $param["id_departamento"] ] , 100);
     $select     =   create_select(
       $puestos , 
       "puesto" , 

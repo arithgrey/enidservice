@@ -8,12 +8,5 @@
         $insert  =	 $this->db->insert("pregunta_servicio", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }    
-	function create($param){
-	    
-        $params = [
-            "id_pregunta"   =>  $param["id_pregunta"] , 
-            "id_servicio"   =>  $param["id_servicio"]];
-
-	    return $this->insert($params);    
-	}    
+	   
 }

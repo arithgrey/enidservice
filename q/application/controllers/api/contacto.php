@@ -8,7 +8,16 @@ class contacto extends REST_Controller{
     }
     function index_POST(){        
         $param      =  $this->post();
-        $response   = $this->contactosmodel->insert_contacto($param);
+        
+        $params = [
+            "nombre"              =>  $param["nombre"],
+            "email"               =>  $param["email"],
+            "mensaje"             =>  $param["mensaje"],
+            "id_empresa"          =>  $param["empresa"],
+            "id_tipo_contacto"    =>  $param["tipo"],
+            "telefono"            =>  $param["tel"]
+        ];
+        $response   =  $this->contactosmodel->insert($params);  
         /*ahora creo ticket*/
         $this->abre_ticket($param);
         $this->response($response);

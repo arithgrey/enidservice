@@ -26,40 +26,9 @@
         return $this->db->get("metakeyword")->result_array();
     }
     function insert( $params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
+      $insert   = $this->db->insert("metakeyword", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
-    function gamificacion_search($param){
-
-        $q            =  $param["q"];            
-        $id_usuario   =  $param["id_usuario"];        
-        $params       = [
-          "keyword"     => $param["q"],
-          "id_usuario"  => $id_usuario
-        ];
-        return $this->insert("keyword" , $params );        
-    }
-    function registra_keyword($param){
-        
-        $q =  $param["q"];            
-        $id_usuario =  $param["id_usuario"];        
-        $query_insert ="INSERT INTO 
-                        keyword(keyword , id_usuario) 
-                        VALUES('".$param["q"]."' ,  '".$id_usuario."')";    
-        return $this->db->query($query_insert);    
-    }
-    function crea_registro_metakeyword($param){        
-        $arr                = array();        
-        array_push($arr, strtoupper($param["metakeyword_usuario"]));        
-        $id_usuario         =  $param["id_usuario"];
-        $meta               =  json_encode($arr);
-
-        $params = [ "metakeyword"   =>  $meta,"id_usuario"    =>  $id_usuario];
-        return $this->insert($params);
-    }    
-    function set_metakeyword($param){        
-        return $this->update(["metakeyword" => $param["metakeyword"] ] , ["id_usuario" => $param["id_usuario"]]);        
-    }     
     function get_metakeyword_catalogo_usuario($param){
         return $this->get(["metakeyword"], ["id_usuario" =>  $param["id_usuario"] ]);        
     } 

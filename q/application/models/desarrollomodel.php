@@ -4,10 +4,12 @@
         parent::__construct();        
         $this->load->database();
     }
+    /*
     function insert( $params , $return_id=0){        
       $insert   = $this->db->insert($tabla, $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
+    */
     private function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);

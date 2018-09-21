@@ -667,10 +667,7 @@
         return $result->result_array();
     }   
     private function get_total_lista_deseo($tb_deseo_usuario){
-      $query_get = "SELECT 
-                      num
-                    FROM 
-                    $tb_deseo_usuario ";
+        $query_get = "SELECT num FROM  $tb_deseo_usuario ";
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }

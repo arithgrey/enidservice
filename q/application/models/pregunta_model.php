@@ -1,10 +1,23 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
   class Pregunta_model extends CI_Model {
     function __construct(){      
         parent::__construct();        
         $this->load->database();
     }
+    function q_up($q , $q2 , $id_pregunta){
+        return $this->update([$q => $q2 ] , ["id_pregunta" => $id_pregunta ]);
+    }
+    function update($data =[] , $params_where =[] , $limit =1 ){
+
+      foreach ($params_where as $key => $value) {
+              $this->db->where($key , $value);
+      }
+      $this->db->limit($limit);
+      return $this->db->update("pregunta", $data);    
+    }
+    function q_get($params=[], $id){
+        return $this->get($params, ["id_pregunta" => $id ] );
+    }  
     function insert( $params , $return_id=0){        
       $insert   = $this->db->insert("pregunta", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
@@ -17,7 +30,7 @@
       }
       $id_pregunta  =  $param["id_pregunta"];      
       return $this->update([$campo =>  1 ] , ["id_pregunta" =>  $id_pregunta ] );
-                
+
     }
     function get_servicios_pregunta_sin_contestar($param){
 
@@ -36,19 +49,12 @@
       return $result->result_array();
     }
     function get_respuestas_sin_leer($param){
-    
-      $id_usuario =  $param["id_usuario"];
-      $query_get ="SELECT 
-                      COUNT(0)num 
-                    FROM 
-                      pregunta 
-                    WHERE 
-                      id_usuario =  $id_usuario 
-                    AND 
-                      leido_cliente =0";
-      $result =  $this->db->query($query_get); 
-      return $result->result_array()[0]["num"];
-  
+      
+      $params_where = [
+        "id_usuario"    =>  $id_usuario ,
+        "leido_cliente" =   0
+      ];
+      return  $this->get(["COUNT(0)num"] , $params_where )[0]["num"];
     }  
     function create($param){
 
@@ -73,8 +79,7 @@
                         group by 
                         id_usuario";
 
-        $result = $this->db->query($query_get);                
-        return $result->result_array();
+      return  $this->db->query($query_get)->result_array();                
     }    
     function get_preguntas_sin_leer_vendedor($param){
       
@@ -176,7 +181,7 @@
       return $data_complete;
       
     }
-    function create_tmp_preguntas_realizadas($flag , $_num , $param){
+    function p_tmp_preguntas_realizadas($flag , $_num , $param){
         
         $this->db->query(get_drop("tmp_preguntas_usuario_$_num"));        
         if($flag == 0){
@@ -211,21 +216,14 @@
         }     
     }
     function get_usuario_por_id_pregunta($param){
-        
-      $id_pregunta =  $param["id_pregunta"];
-      $query_get ="SELECT id_usuario FROM pregunta WHERE id_pregunta = $id_pregunta LIMIT 1";
-      $result = $this->db->query($query_get);
-      return $result->result_array();
+      return $this->q_get(["id_usuario"] , $param["id_pregunta"]);
     }
     function actualiza_estado_pregunta($param){
+      $type         =  ($param["modalidad"]== 1) ? 1:0;
+      return $this->q_up("leido_vendedor", $type , $param["pregunta"]);
 
-      $id_pregunta =  $param["pregunta"];    
-      $type =  ($param["modalidad"]== 1) ? 1:0;
-      return $this->update(["leido_vendedor" => $type ]  , ["id_pregunta" =>  $id_pregunta]);
     }
-    function update_gamificacion_pregunta($param){      
-      $data = ['gamificacion' => 1];
-      $this->db->where('id_pregunta', $param["id_pregunta"]);
-      return $this->db->update('pregunta', $data);     
+    function update_gamificacion_pregunta($param){    
+      return $this->q_up('gamificacion' , 1 , $param["id_pregunta"] );
     }
 }

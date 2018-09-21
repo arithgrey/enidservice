@@ -4,7 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }
-    function get( $params=[], $params_where =[] , $limit =1){
+    function get($params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
@@ -13,8 +13,5 @@
         }
         return $this->db->get("forma_pago")->result_array();
     }       
-    function forma_pago(){
-      return $this->get([], [], 100);
-    }
     
 }

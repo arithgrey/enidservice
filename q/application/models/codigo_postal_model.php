@@ -19,21 +19,20 @@
       
 
       $cp_base        =  substr($param["cp"], 1 , strlen($param["cp"]));    
-      $query_get      =  
-                      "SELECT id_codigo_postal 
-                      FROM 
-                        codigo_postal 
-                      WHERE 
-                        asentamiento         = '".$param["asentamiento"]."'
-                      AND 
-                        municipio            = '".$param["municipio"]."' 
-                      AND 
-                        id_estado_republica  = '".$param["estado"]."'
-                      AND
-                        id_pais          = '".$param["pais"]."' 
-                      AND 
-                      cp like '".$cp_base."%' ";
-                      
+      $query_get      =  "SELECT id_codigo_postal 
+                          FROM 
+                            codigo_postal 
+                          WHERE 
+                            asentamiento         = '".$param["asentamiento"]."'
+                          AND 
+                            municipio            = '".$param["municipio"]."' 
+                          AND 
+                            id_estado_republica  = '".$param["estado"]."'
+                          AND
+                            id_pais          = '".$param["pais"]."' 
+                          AND 
+                          cp like '".$cp_base."%' ";
+                        
 
       
       $cp   =  $this->db->query($query_get)->result_array();

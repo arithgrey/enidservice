@@ -13,7 +13,19 @@ class direccion extends REST_Controller{
     }
     function index_POST(){        
         $param      =   $this->post();        
-        $response   =  $this->direccion_model->create($param);        
+        $receptor         =   get_param_def($param ,"nombre_receptor" , "");
+        $tel_receptor     =   get_param_def($param ,"telefono_receptor" , 0);    
+
+        $params = [
+            "calle"               =>  $param["calle"],
+            "entre_calles"        =>  $param["referencia"],
+            "numero_exterior"     =>  $param["numero_exterior"],
+            "numero_interior"     =>  $param["numero_interior"],
+            "id_codigo_postal"    =>  $param["id_codigo_postal"],
+            "nombre_receptor"     =>  $receptor,
+            "telefono_receptor"   =>  $tel_receptor
+        ];      
+        $response                 =  $this->direccion_model->insert($params , 1);
         $this->response($response);
     }           
 }?>

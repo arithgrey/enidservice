@@ -19,6 +19,6 @@
     }
     function get_url_blog_fecha($param){
       $fecha =  $param["fecha"];       
-      return $this->get('faq' , ["id_faq", "titulo" ,"id_categoria"  , "fecha_registro"], [ "DATE(fecha_registro) " => $fecha] , 1000);
+      return $this->get(["id_faq", "titulo" ,"id_categoria"  , "fecha_registro"], [ "DATE(fecha_registro) " => $fecha] , 1000);
     }
 }

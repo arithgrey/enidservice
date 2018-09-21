@@ -9,7 +9,7 @@ class forma_pago extends REST_Controller{
     function forma_pago_GET(){
         
         $param    = $this->get();
-        $response =  $this->forma_pago_model->forma_pago();
+        $response =  $this->forma_pago_model->$this->get([], [], 100);
         $this->response($response);
     }
     

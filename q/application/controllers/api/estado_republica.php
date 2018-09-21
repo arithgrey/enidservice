@@ -9,7 +9,7 @@ class estado_republica extends REST_Controller{
 	function id_GET($param){
 
         $param      =  $this->get();
-        $response   =  $this->estado_republica_model->get_estado($param);
+        $response   =  $this->estado_republica_model->q_get([], $param["id_estado"]);
         $this->response($response);
 
     }

@@ -4,22 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }    
-    function create($param){        
-      $receptor         =   get_param_def($param ,"nombre_receptor" , "");
-      $tel_receptor     =   get_param_def($param ,"telefono_receptor" , 0);    
-
-      $params = [
-        "calle"               =>  $param["calle"],
-        "entre_calles"        =>  $param["referencia"],
-        "numero_exterior"     =>  $param["numero_exterior"],
-        "numero_interior"     =>  $param["numero_interior"],
-        "id_codigo_postal"    =>  $param["id_codigo_postal"],
-        "nombre_receptor"     =>  $receptor,
-        "telefono_receptor"   =>  $tel_receptor
-      ];      
-      return $this->insert($params , 1);
       
-    }  
     function get_data_direccion($param){
         
         $id_direccion =  $param["id_direccion"];

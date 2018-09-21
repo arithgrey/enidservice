@@ -28,9 +28,11 @@
   function q_up($q , $q2 , $id_servicio){
         return $this->update("perfil_recurso" , [$q => $q2 ] , ["id_servicio" => $id_servicio ]);
   }
+  /*
   function q_get($params=[], $id){
       return $this->get($params, ["id_servicio" => $id ] );
-  }  
+  } 
+  */ 
   function get_num($param){
     
     $params_where = [

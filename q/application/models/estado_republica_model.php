@@ -4,10 +4,9 @@ class Estado_republica_model extends CI_Model{
 	      parent::__construct();        
 	      $this->load->database();
 	} 
-	function get_estado($param){    
-	    return $this->get([] , ["id_estado_republica" =>  $param["id_estado"] ]);
-	}
-
+    function q_get($params=[], $id){
+        return $this->get($params, ["id_estado_republica" => $id ] );
+    }  
   	function get($params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);

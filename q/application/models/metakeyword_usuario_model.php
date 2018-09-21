@@ -4,7 +4,14 @@
         parent::__construct();        
         $this->load->database();
     }
+    private function update($data =[] , $params_where =[] , $limit =1 ){
     
+      foreach ($params_where as $key => $value) {
+        $this->db->where($key , $value);
+      }
+      $this->db->limit($limit);
+      return $this->db->update("metakeyword_usuario", $data);    
+    }
     function delete_tag_servicio($param){
         
         $tag            =   $param["tag"];
@@ -17,10 +24,7 @@
         return $param;
     }    
     function set_metakeyword_usuario($param){
-
-        $metakeyword =  $param["metakeyword_usuario"];
-        $id_usuario  =  $param["id_usuario"];
-        return $this->q_up("metakeyword_usuario"  ,  $metakeyword ,  $id_servicio );    
+        return $this->update($param["metakeyword_usuario"] ,  ["id_usuario" =>  $param["id_usuario"] ]);    
     }     
     /*
     function q_up($q , $q2 , $id_servicio){

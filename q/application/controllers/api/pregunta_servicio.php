@@ -9,8 +9,11 @@ class Pregunta_servicio extends REST_Controller{
     function index_POST(){
 
         $param     = $this->post();
-        $param["id_servicio"] = $param["servicio"];
-        $response  = $this->pregunta_servicio_model->create($param);
+        $params = [
+            "id_pregunta"   =>  $param["id_pregunta"] , 
+            "id_servicio"   =>  $param["servicio"]
+        ];
+        $response  = $this->pregunta_servicio_model->insert($params);
         $this->response($response);
     }
    

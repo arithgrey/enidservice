@@ -4,6 +4,19 @@
         parent::__construct();        
         $this->load->database();
     }
+    function q_get($params=[], $id){
+        return $this->get($params, ["id_person" => $id ] );
+    }
+    function get($params=[], $params_where =[] , $limit =1){
+        
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);        
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("persona")->result_array();
+    }
    	function ventas_enid_service(){   
         
         $query_get ="SELECT

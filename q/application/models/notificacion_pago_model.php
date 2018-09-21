@@ -42,25 +42,12 @@
         return $result->result_array();    
   }
   function verifica_pago_notificado($param){
-
-      $num_recibo = $param["recibo"];
-
-      $query_get ="SELECT 
-                    count(0)num_recibo
-                   FROM  
-                    notificacion_pago 
-                   WHERE   
-                    num_recibo = '".$num_recibo."' 
-                    AND status = 0 
-                    LIMIT 1";
-      $result =  $this->db->query($query_get);
-      return $result->result_array()[0]["num_recibo"];                  
-    }
-    function get_notificacion_pago_resumen($param){
-
-        $id_notificacion_pago =  $param["id_notificacion_pago"];
-        
-        $query_get = "SELECT  
+    $params_where = ["num_recibo"  =>  $param["recibo"] , "status" => 0 ];
+    return $this->get(["count(0)num"] , $params_where)[0]["num"];    
+  }
+  function get_notificacion_pago_resumen($param){
+    
+    $query_get = "SELECT  
                         np.* ,
                         nombre_servicio, 
                         fp.*
@@ -75,12 +62,10 @@
                         ON 
                         fp.id_forma_pago =  np.id_forma_pago
                       WHERE 
-                        id_notificacion_pago = '".$id_notificacion_pago."'  LIMIT 1";
+                        id_notificacion_pago = '".$param["id_notificacion_pago"]."'  LIMIT 1";
 
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
+      return $this->db->query($query_get)->result_array();
 
     }
-    
     
 }
