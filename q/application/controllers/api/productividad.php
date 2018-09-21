@@ -83,6 +83,8 @@ class productividad extends REST_Controller{
         $response["flag_direccion"]             =  $this->verifica_direccion_registrada_usuario($param);
 
 
+
+        $param["id_perfil"]                 =   $this->principal->getperfiles();        
         $response["info_notificaciones"]    = 
         $this->productividad_usuario_model->get_notificaciones_usuario_perfil($param);
         $response["ventas_enid_service"]    =   $this->get_ventas_enid_service();

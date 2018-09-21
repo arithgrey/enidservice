@@ -234,7 +234,7 @@ function carga_comentarios_tareas(e){
 
 	var tarea = e.target.id;
 	set_option("tarea", tarea);	
-	var url =  "../q/index.php/api/tickets/respuesta/format/json/";	
+	var url =  "../q/index.php/api/respuesta/index/format/json/";	
 	var data_send =  {"tarea" : tarea};				
 	var seccion =".seccion_respuesta_"+get_option("tarea");
 	request_enid( "GET",  data_send, url, response_carga_comentario_tareas, seccion);
@@ -243,7 +243,7 @@ function carga_comentarios_tareas(e){
 }
 /**/
 function response_carga_comentario_tareas(data){
-
+	
 	llenaelementoHTML(seccion , data);
 	$(".ocultar_comentarios").click(function(e){
 		set_option("tarea", e.target.id);

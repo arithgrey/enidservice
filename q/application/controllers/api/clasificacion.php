@@ -10,7 +10,13 @@ class Clasificacion extends REST_Controller{
     function categorias_servicios_GET(){
 
         $param      =  $this->get();
-        $response   = $this->clasificacion_model->get_padre_tipo($param);
+        $in     = [   
+            "padre"         => $param["padre"],
+            "flag_servicio" => $param["modalidad"],
+            "nivel"         => $param["nivel"]
+        ];
+        debug($in , 1);
+        $response   =  $this->clasificacion_model->get([] , $in , 100);
         $this->response($response);
     }
     function clasificaciones_por_servicio_GET(){

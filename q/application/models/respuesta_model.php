@@ -13,7 +13,7 @@
       return $this->db->update("respuesta", $data);    
     }
     function insert( $params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
+      $insert   = $this->db->insert('respuesta', $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
     function get( $params=[], $params_where =[] , $limit =1){

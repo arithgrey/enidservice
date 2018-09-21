@@ -1,10 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'../../librerias/REST_Controller.php';
 class Tarea extends REST_Controller{      
+    private $id_usuario;
     function __construct(){
         parent::__construct();                          
         $this->load->model("tareasmodel");
         $this->load->library(lib_def());     
+        $this->id_usuario = $this->principal->get_session("idusuario");
     }
     /**/    
     function estado_PUT(){
@@ -29,7 +31,7 @@ class Tarea extends REST_Controller{
         $api =  "ticket/estado";
         return $this->principal->api("q", $api , $q , "json", "PUT");
     }
-    /**/
+    /**/    
     function valida_tareas_pendientes($param){
 
         $num_pendientes =  $this->tareasmodel->get_pendientes_ticket($param);
@@ -53,9 +55,10 @@ class Tarea extends REST_Controller{
         $response = $this->tareasmodel->insert_tarea($param);
         $this->response($response);        
     }
-    function tareas_ticket_GET(){
+    function ticket_GET(){
 
         $param      =   $this->get();       
+        //debug($param , 1);
         $response   =   $this->tareasmodel->get_tareas_ticket($param);                
         $this->response($response);           
     }

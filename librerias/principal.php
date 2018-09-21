@@ -120,8 +120,8 @@
 	        $this->load->view("../../../view_tema/footer_template", $data);
 	    }
 	    /**/
-	    function getperfiles($v = 2 , $key =''){
-	    	return $this->sessionclass->getperfiles($v, $key);
+	    function getperfiles(){
+	    	return $this->sessionclass->getperfiles();
 	    }
 	    /**/
 	    function val_session($titulo){

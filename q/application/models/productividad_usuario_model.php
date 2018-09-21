@@ -131,7 +131,7 @@
     
     function get_notificaciones_usuario_perfil($param){
 
-        $id_perfil                              =   $this->get_perfil_usuario($param);        
+        $id_perfil                              =   $param["id_perfil"];
         $data_complete["perfil"]                =   $id_perfil;
         $param["id_perfil"]                     =   $id_perfil;
         

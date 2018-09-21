@@ -261,13 +261,7 @@ class usuario extends REST_Controller{
         $param = $this->get();
         $response=  $this->usuario_model->get_terminos_privacidad($param);
         $this->response($response);              
-    }
-    /**/
-    function get_terminos_privacidad_productos_GET(){
-        $param = $this->get();
-        $response=  $this->usuario_model->get_terminos_privacidad_usuario($param);
-        $this->response($response);                 
-    }
+    }    
     /**/
     function has_phone_GET(){
 

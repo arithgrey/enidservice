@@ -39,7 +39,7 @@ class Sessionclass extends CI_Controller{
 	function getfecharegistro(){
 		return $this->session->userdata('fecha_registro');
 	}
-	function getperfiles($v = 1 , $key='' ){		
+	function getperfiles(){		
 		return $this->session->userdata('perfiles')[0]["idperfil"];  
 	}
 	function getidempresa(){

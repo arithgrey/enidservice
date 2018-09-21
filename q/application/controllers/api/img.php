@@ -58,11 +58,6 @@ class Img extends REST_Controller{
       $param      =  $this->get();
       $response   =  $this->img_model->get_img($param["id_imagen"]);      
       $this->response($response);   
-  }
-  function usuario_GET(){
-      $param      =  $this->get();
-      $response   =  $this->img_model->get_img_usuario($param["id_usuario"]);
-      $this->response($response);   
-  }
+  }  
   /**/  
 }

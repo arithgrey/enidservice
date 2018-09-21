@@ -731,7 +731,7 @@ class Servicio extends REST_Controller{
   private function get_terminos_privacidad_productos($id_usuario){
     
     $q["id_usuario"] =  $id_usuario;
-    $api = "usuario/get_terminos_privacidad_productos/format/json/";
+    $api = "privacidad_usuario/servicio/format/json/";
     return $this->principal->api("q", $api , $q  );         
   }  
   /**/

@@ -66,7 +66,7 @@ class Enid extends CI_Controller {
     private function get_img_usuario($id_usuario){
 
         $q["id_usuario"]   =  $id_usuario;        
-        $api               =  "img/usuario/format/json/";
+        $api               =  "imagen_usuario/usuario/format/json/";
         return $this->principal->api("q" , $api , $q);   
     }
     private function get_img_servicio($id_servicio){

@@ -5,9 +5,9 @@ class clasificacion_model extends CI_Model{
       parent::__construct();        
       $this->load->database();
   }   
-  private function q_get($params=[], $id){
+  function q_get($params=[], $id){
         return $this->get($params, ["id_clasificacion" => $id ] );
-    }
+  }
   function q_up($q , $q2 , $id_usuario){
         return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);
   }
@@ -53,7 +53,7 @@ class clasificacion_model extends CI_Model{
         $result =  $this->db->query($query_get);
         return $result->result_array();
   }   
-  private function get($params=[], $params_where =[] , $limit =1){
+  function get($params=[], $params_where =[] , $limit =1){
     $params = implode(",", $params);
     $this->db->limit($limit);
     $this->db->select($params);
@@ -139,13 +139,5 @@ class clasificacion_model extends CI_Model{
         $result =  $this->db->query($query_get);
         return $result->result_array();            
     }
-    function get_padre_tipo($param){
-      
-        $params_where = [   "padre"         => $padre,
-                            "flag_servicio" => $param["nivel"],
-                            "nivel"         => $param["padre"] 
-                        ];
-        
-        return $this->get([] , $params_where , 100);
-    }
+    
 }

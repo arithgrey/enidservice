@@ -11,9 +11,14 @@ class Privacidad_usuario extends REST_Controller{
     function index_PUT(){    
         $param                =  $this->put();    
         $param["id_usuario"]  =  $this->id_usuario;
-        $registro             =   $this->privacidad_usuario_model->asociar_concepto_privacidad_usuario($param);
+        $registro             =   
+        $this->privacidad_usuario_model->asociar_concepto_privacidad_usuario($param);
         $this->response($registro);
-
+    }
+    function servicio_GET(){
+        $param = $this->get();
+        $response=  $this->privacidad_usuario_model->get_terminos_privacidad_usuario($param);
+        $this->response($response);                 
     }
     
 }?>

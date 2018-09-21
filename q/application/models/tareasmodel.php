@@ -91,7 +91,7 @@ class tareasmodel extends CI_Model{
                   t.fecha_registro 
                   ASC";
 
-
+    
     $result = $this->db->query($query_get);
     return $result->result_array();
   }

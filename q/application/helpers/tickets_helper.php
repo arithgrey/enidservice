@@ -28,6 +28,7 @@ if(!function_exists('invierte_date_time')){
     return $input;              
   }
   function valida_mostrar_tareas($data){
+    
     if (count($data) > 0 ){
       $contenido =  div("MOSTRAR SÓLO TAREAS PENDIENTES",   
         ["class"=>'mostrar_tareas_pendientes a_enid_black']);

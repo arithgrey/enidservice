@@ -276,13 +276,7 @@ class Tickets extends REST_Controller{
         
         $this->load->view("tickets/principal_desarollo" , $data );
     }
-    function respuesta_POST(){
-
-        $param =  $this->post();
-        $param["id_usuario"] = $this->id_usuario;
-        $response =  $this->tareasmodel->registra_respuesta($param);
-        $this->response($response);
-    }
+    
     function formulario_respuesta_GET(){
 
         $param = $this->get();
@@ -291,7 +285,7 @@ class Tickets extends REST_Controller{
     }
     /**/
     function  get_tareas_ticket($q){
-        $api    =  "tarea/tareas_ticket/format/json";
+        $api    =  "tarea/ticket/format/json";
         return  $this->principal->api("q", $api , $q);
     }
     function get_tareas_ticket_num($q){

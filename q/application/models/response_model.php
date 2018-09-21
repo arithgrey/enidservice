@@ -24,6 +24,8 @@
         }
       return $this->db->get("response")->result_array();
     }
+    
+    /*
     function registra_respuesta($param){
 
       $id_usuario   =   $param["id_usuario"];    
@@ -32,6 +34,7 @@
       $params       =   ["respuesta" => $respuesta,"id_pregunta" => $id_pregunta, "id_usuario" => $id_usuario];
       return $this->insert($params);
     }
+    */
     function get_respuestas_pregunta($param){
 
         $id_pregunta =  $param["id_pregunta"];      
@@ -55,4 +58,5 @@
         $result =  $this->db->query($query_get);
         return $result->result_array();
     }
+
 }

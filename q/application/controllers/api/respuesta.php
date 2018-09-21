@@ -62,5 +62,16 @@ class Respuesta extends REST_Controller{
         $api = "pregunta/visto_pregunta";
         return $this->principal->api("q" , $api , $q  , "json" , "PUT");
     }
+    function index_POST(){
+
+        $param               =  $this->post();        
+        $params       =   [
+            "respuesta"     =>  $param["mensaje"],
+            "id_tarea"      =>  $param["tarea"],
+            "id_usuario"    =>  $this->id_usuario
+        ];
+        $response =  $this->respuesta_model->insert($params , 1);
+        $this->response($response);
+    }
 
 }?>
