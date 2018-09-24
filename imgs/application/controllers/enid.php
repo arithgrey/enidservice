@@ -57,7 +57,7 @@ class Enid extends CI_Controller {
 
         $q["id_faq"]    =  $id_faq;        
         $api            =  "img/img_faq/format/json/";
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }
     private function get_img($id_imagen){
 
@@ -67,12 +67,12 @@ class Enid extends CI_Controller {
 
         $q["id_usuario"]   =  $id_usuario;        
         $api               =  "imagen_usuario/usuario/format/json/";
-        return $this->principal->api("q" , $api , $q);   
+        return $this->principal->api( $api , $q);   
     }
     private function get_img_servicio($id_servicio){
 
         $q["id_servicio"]  =  $id_servicio;        
         $api               =  "imagen_servicio/servicio/format/json/";
-        return $this->principal->api("q" , $api , $q);            
+        return $this->principal->api( $api , $q);            
     }
 }/*Termina el controlador */

@@ -23,14 +23,14 @@ $(document).ready(function(){
 	//$(".form_direccion_envio").submit(registra_nueva_direccion);
 });
 /**/
-function carga_direccion_usuario(){
-	/**/	
-	var url =  "../q/index.php/api/usuario_direccion/index/format/json/";		
-	var data_send =  $(".form_notificacion").serialize()+"&"+$.param({"v":get_option("v")});
+function carga_direccion_usuario(){	
+	var url 		=  "../q/index.php/api/usuario_direccion/index/format/json/";		
+	var data_send 	=  $(".form_notificacion").serialize()+"&"+$.param({"v":get_option("v")});
 	request_enid( "GET",  data_send, url, response_direccion_usuario);
 }
 /**/
 function response_direccion_usuario(data){
+
 
 	llenaelementoHTML(".direcciones" , data);
 	$(".codigo_postal").keyup(auto_completa_direccion);						
@@ -47,20 +47,18 @@ function response_direccion_usuario(data){
 /*Solo para usuario*/
 function registra_direccion_usuario(e){
 
-	if(get_existe_codigo_postal() ==  1){			
-		var url =  "../q/index.php/api/portafolio/direccion_usuario/format/json/";	
+	if(get_option("existe_codigo_postal") ==  1){			
+		
+		var url =  "../q/index.php/api/codigo_postal/direccion_usuario/format/json/";	
 		var data_send =  $(".form_direccion_envio").serialize()+"&"+$.param({"direccion_principal" : 1});						
 		var asentamiento = $(".asentamiento").val();
-				if (asentamiento != 0 ) {
-					request_enid( "POST",  data_send, url, response_registra_direccion_usuario, ".place_proyectos" );
-					$(".place_asentamiento").empty();		
-				}else{
-					recorrepage("#asentamiento");										
-					llenaelementoHTML( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");					
-				}		
-
-	}else{
-		muestra_error_codigo(1);
+		if (asentamiento != 0 ) {
+			request_enid( "POST",  data_send, url, response_registra_direccion_usuario, ".place_proyectos" );
+			$(".place_asentamiento").empty();		
+		}else{
+			recorrepage("#asentamiento");										
+			llenaelementoHTML( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");					
+		}		
 	}
 	e.preventDefault();
 }
@@ -178,4 +176,19 @@ function response_actualizacion_pass(data){
 	}			
 	
 }
-/**/
+/*
+function auto_completa_direccion(){
+	
+
+	
+	quita_espacios(".codigo_postal"); 	
+	var cp = get_parameter(".codigo_postal");
+	var numero_caracteres = cp.length; 
+	if(numero_caracteres > 4 ) {
+		var url 		=  "../portafolio/index.php/api/portafolio/cp/format/json/";	
+		var data_send 	=  {"cp" : cp , "delegacion" : get_delegacion() };
+		request_enid( "GET",  data_send , url , response_auto_complete_direccion );
+	}
+
+}
+*/

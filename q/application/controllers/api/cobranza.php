@@ -58,7 +58,7 @@ class Cobranza extends REST_Controller{
     /**/
     function get_pago($q){
         $api = "recibo/resumen_desglose_pago"; 
-        return $this->principal->api("q", $api , $q , "html" );
+        return $this->principal->api( $api , $q , "html" );
     }        
     /*Carga cuentas por */
     function cuentas_por_cobrar_GET(){
@@ -121,7 +121,7 @@ class Cobranza extends REST_Controller{
     function get_notificacion_pago($q){
 
         $api =  "notificacion_pago/pago_resumen/format/json";
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }
     /**/
     function notificacion_pago_GET(){
@@ -150,7 +150,7 @@ class Cobranza extends REST_Controller{
     function verifica_pago_notificado($q){
         
         $api =  "notificacion_pago/es_notificado/format/json";
-        return  $this->principal->api("q", $api ,$q);
+        return  $this->principal->api( $api ,$q);
     }
     /**/
     function info_saldo_pendiente_GET(){
@@ -181,14 +181,14 @@ class Cobranza extends REST_Controller{
     /**/
     function carga_servicio_por_recibo($q){
         $api = "tickets/servicio_recibo/format/json/"; 
-        return $this->principal->api("q", $api , $q);
+        return $this->principal->api( $api , $q);
     }
     /**/
     function get_precio_id_servicio($id_servicio){
 
         $q["id_servicio"] = $id_servicio;
         $api              = "recibo/precio_servicio/format/json/"; 
-        return $this->principal->api("q", $api , $q);   
+        return $this->principal->api( $api , $q);   
     }
     /**/
     function solicitud_proceso_pago_POST(){
@@ -324,28 +324,28 @@ class Cobranza extends REST_Controller{
     function crea_orden($q){
 
         $api =  "cobranza/solicitud_proceso_pago";
-        return $this->principal->api("q" , $api , $q, "json", "POST");        
+        return $this->principal->api( $api , $q, "json", "POST");        
     }
     /**/
     function crea_usuario($q){
 
         $api =  "usuario/prospecto";
-        return $this->principal->api("q" , $api , $q, "json", "POST");
+        return $this->principal->api( $api , $q, "json", "POST");
     }
     private function gamificacion_deseo($q){
 
         $api = "servicio/gamificacion_deseo"; 
-        return $this->principal->api("q", $api , $q , "json" , "PUT");
+        return $this->principal->api( $api , $q , "json" , "PUT");
     }
     /*aquí creamos en base de datos*/
     private function genera_orden_compra($q){            
         $api    =  "recibo/orden_de_compra";    
-        return  $this->principal->api("q" , $api, $q , "json" , "POST");
+        return  $this->principal->api( $api, $q , "json" , "POST");
     }
     /**/
     function consulta_disponibilidad_servicio($q){     
         $api = "servicio/info_disponibilidad_servicio/format/json/"; 
-        return $this->principal->api("q", $api , $q);
+        return $this->principal->api( $api , $q);
     }
     /**/
     function acciones_posterior_orden_pago($param){        
@@ -361,7 +361,7 @@ class Cobranza extends REST_Controller{
     /**/
     function notifica_registro_usuario($param){       
         $api = "emp/solicitud_usuario"; 
-        return $this->principal->api("msj", $api , $q);  
+        return $this->principal->api($api , $q);  
     }    
     /**/
     function carga_ficha_direccion_envio($q){
@@ -369,7 +369,7 @@ class Cobranza extends REST_Controller{
         $q["text_direccion"]    =  "Dirección de Envio";
         $q["externo"]           =  1;        
         $api                    = "usuario_direccion/direccion_envio_pedido"; 
-        return $this->principal->api("q", $api , $q , "html");  
+        return $this->principal->api( $api , $q , "html");  
 
     }
     /**/
@@ -397,14 +397,14 @@ class Cobranza extends REST_Controller{
             
 
         $api = "comentario/comentario_pedido"; 
-        return $this->principal->api("msj", $api ,$data_send);  
+        return $this->principal->api( $api ,$data_send);  
         
     }
     /**/
     function notifica_deuda_cliente($q){
 
         $api = "areacliente/pago_pendiente_web/format/json"; 
-        return $this->principal->api("msj", $api ,$q);  
+        return $this->principal->api( $api ,$q);  
     }   
     /**/
     
@@ -460,7 +460,7 @@ class Cobranza extends REST_Controller{
     /**/
     function get_estatus_enid_service($q){        
         $api = "servicio/nombre_estado_enid/format/json/";
-        return $this->principal->api("q" , $api ,  $q);
+        return $this->principal->api( $api ,  $q);
     } 
     /**/
     function resumen_num_pendientes_GET(){
@@ -577,7 +577,7 @@ class Cobranza extends REST_Controller{
             
         $q["id_recibo"]     = $id_recibo;
         $api                = "portafolio/direccion_pedido/format/json/";
-        return $this->principal->api("q" , $api ,  $q);    
+        return $this->principal->api( $api ,  $q);    
     }
     
 

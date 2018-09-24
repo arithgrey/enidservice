@@ -43,13 +43,10 @@ function registra_img_usr(e){
                //show_load_enid(".place_img_registrada", "Cargando ... " , 2);                 
                //$(".guardar_img_enid").hide();
             }
-    }).done(function(data){
-
-        /**/
-
+    }).done(function(data){    
+        
         show_response_ok_enid(".place_load_img" , "Imagen cargada con éxito" );                 
         redirect("");
-
 
     }).fail(function(){
         show_error_enid(".place_load_img" , "Falla al actualizar al cargar la imagen" );   

@@ -42,7 +42,7 @@ class funcionalidad extends REST_Controller{
         $q["id_usuario"]        = $id_usuario;
         $q["id_funcionalidad"]  = $id_funcionalidad;
         $api                    = "privacidad/conceptos_por_funcionalidad_usuario/format/json/";        
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }    
 
 }?>

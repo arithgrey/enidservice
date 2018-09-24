@@ -60,11 +60,14 @@ class Archivo extends REST_Controller{
                 
               case 'perfil_usuario':
                 
-                
-                $response = 
-                $this->img_model->insert_imgen_usuario($param);                
-                return $this->response_status_img($response);                    
-                
+                    
+                $id_imagen = $this->img_model->insert_img($param , 1);
+
+                if ( $id_imagen > 0 && $param["id_usuario"]>0) {                    
+                    $prm["id_imagen"]    = $id_imagen;                    
+                    $prm["id_usuario"]   = $param["id_usuario"];                    
+                    return $this->create_imagen_usuario($prm);                
+                }               
                 break;        
 
               case 'servicio':            
@@ -99,12 +102,18 @@ class Archivo extends REST_Controller{
     /*Validar session para modificar datos*/    
     function notifica_producto_imagen($q){
         $api = "servicio/status_imagen/format/json/";
-        return $this->principal->api("q" , $api , $q , "json", "PUT");
+        return $this->principal->api( $api , $q , "json", "PUT");
     }
     function insert_imagen_servicio($q){
         
         $api = "imagen_servicio/index";
-        return $this->principal->api("q" , $api , $q , "json", "POST");
+        return $this->principal->api( $api , $q , "json", "POST");
     }
-    
+    function create_imagen_usuario($q){
+        
+        $api = "imagen_usuario/index";
+        return $this->principal->api( $api , $q , "json", "POST");
+    }
+        
+
 }?>

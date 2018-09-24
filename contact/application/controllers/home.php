@@ -24,7 +24,7 @@ class Home extends CI_Controller{
     function get_departamentos_enid(){ 
      
         $api       =  "departamento/index/format/json/";        
-        return  $this->principal->api("q" , $api );
+        return  $this->principal->api( $api );
 
     }       
      

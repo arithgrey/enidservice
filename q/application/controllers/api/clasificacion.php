@@ -98,11 +98,11 @@ class Clasificacion extends REST_Controller{
     /**/
     function get_clasificaciones_destacadas($q){
         $api    = "servicio/clasificaciones_destacadas/format/json";
-        return  $this->principal->api("q", $api , $q);
+        return  $this->principal->api( $api , $q);
     }      
     function set_clasificacion_talla($q){
         $api    = "talla/clasificacion";
-        return  $this->principal->api("q", $api , $q , "json" , "PUT");
+        return  $this->principal->api( $api , $q , "json" , "PUT");
     }
     /**/
     function tipo_talla_clasificacion_POST(){
@@ -332,18 +332,18 @@ class Clasificacion extends REST_Controller{
     /**/
     function  get_tallas_countries($q){            
         $api    =  "talla/tallas_countries/format/json/";
-        return  $this->principal->api("q", $api, $q);     
+        return  $this->principal->api( $api, $q);     
     }  
     /**/
     function  get_tallas_servicio($q){            
         $api    =  "servicio/tallas/format/json/";
-        return  $this->principal->api("q", $api, $q);     
+        return  $this->principal->api( $api, $q);     
     }  
     function get_tipo_talla(){
 
         $q["info"]  = 1;
         $api        =  "tipo_talla/index/format/json/";
-        return      $this->principal->api("q", $api, $q);      
+        return      $this->principal->api( $api, $q);      
     }
     function coincidencia_servicio_GET(){        
         $param      =   $this->get();

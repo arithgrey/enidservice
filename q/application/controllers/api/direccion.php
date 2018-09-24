@@ -28,4 +28,5 @@ class direccion extends REST_Controller{
         $response                 =  $this->direccion_model->insert($params , 1);
         $this->response($response);
     }           
+    
 }?>

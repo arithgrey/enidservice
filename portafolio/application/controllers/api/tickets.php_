@@ -131,7 +131,7 @@ class Tickets extends REST_Controller{
     function get_respuestas($q){
 
         $api =  "respuesta/respuestas/format/json";
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }
     function respuesta_GET(){
 

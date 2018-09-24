@@ -23,7 +23,7 @@ function registra_valoracion(e){
 
 	var flag =  valida_text_form("#pregunta" , ".place_area_pregunta" , 5 , "Pregunta" );
 	if (flag == 1) {
-		var url 		=	"../q/index.php/api/valoracion/pregunta/format/json/";
+		var url 		=	"../q/index.php/api/pregunta/index/format/json/";
 		var data_send 	=  	$(".form_valoracion").serialize();				
 		request_enid( "POST",  data_send, url, response_registro_valoracion, ".place_registro_valoracion");		
 	}

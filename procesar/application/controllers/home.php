@@ -73,12 +73,12 @@ class Home extends CI_Controller{
     /**/
     private function calcula_costo_envio($q){
         $api    = "cobranza/calcula_costo_envio/format/json/";
-        return $this->principal->api("q" ,  $api , $q);
+        return $this->principal->api(  $api , $q);
     }
     private function resumen_servicio($id_servicio){
 
         $q["id_servicio"] = $id_servicio;
         $api                 = "servicio/resumen/format/json/";
-        return $this->principal->api("q" ,  $api , $q );           
+        return $this->principal->api(  $api , $q );           
     }
 }

@@ -44,14 +44,14 @@ class Home extends CI_Controller{
 
         $q["id_usuario"] =  $id_usuario;
         $api             =  "valoracion/usuario/format/json/";
-        return $this->principal->api("q", $api, $q);
+        return $this->principal->api( $api, $q);
     }
     /**/    
     private function get_alcance($id_usuario){
 
         $q["id_usuario"]    =  $id_usuario;
         $api                =  "servicio/alcance_usuario/format/json/";
-        return              $this->principal->api("q", $api, $q );    
+        return              $this->principal->api( $api, $q );    
 
     }
 }

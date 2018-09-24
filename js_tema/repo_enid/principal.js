@@ -513,7 +513,7 @@ function resume_lista_deseos(){
 function carga_repo_usabilidad(e){
 
 	var  	data_send 		=  $(".f_actividad_productos_usuarios").serialize()+"&"+$.param({"v":1});	
-	var 	url 			=  "../q/index.php/api/servicio/q/format/json/";	
+	var 	url 			=  "../q/index.php/api/usuario/actividad/format/json/";	
 	request_enid( "GET",  data_send, url, info_usabilidad, ".place_reporte"); 
 	e.preventDefault();	
 }

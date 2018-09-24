@@ -24,7 +24,7 @@ class Cobranza extends REST_Controller{
     /**/
     private function get_mensaje_cancelacion_venta($q){        
         $api  = "cron/cancelacion_venta/format/html/"; 
-        return  $this->principal->api("msj", $api , $q, "html");
+        return  $this->principal->api( $api , $q, "html");
     }
     /*
     function ganancias_afiliados_GET(){
@@ -63,13 +63,13 @@ class Cobranza extends REST_Controller{
     /**/
     private function get_mensaje_ganancias_afiliado($q){
         $api  = "cron/notificacion_ganancias_afiliado/format/html/"; 
-        return  $this->principal->api("msj", $api , $q, "html");        
+        return  $this->principal->api($api , $q, "html");        
     }
     /**/
     private function get_reporte_ganancias($param){
         
         $api  = "afiliados/usuarios_ganancias/format/json/"; 
-        return  $this->principal->api("pagos", $api , $q);        
+        return  $this->principal->api( $api , $q);        
     }
     /**/
     private function set_option($key, $value){
@@ -120,13 +120,13 @@ class Cobranza extends REST_Controller{
 
         $param["id_recibo"] = $id_recibo;
         $api    = "cobranza/notifica_recordatorio_cobranza"; 
-        return  $this->principal->api("pagos", $api , $q);        
+        return  $this->principal->api( $api , $q);        
     }
     /**/
     private function get_cuentas_por_cobrar(){
 
         $api    = "cobranza/cuentas_por_cobrar/format/json"; 
-        return  $this->principal->api("pagos", $api , []);                
+        return  $this->principal->api( $api , []);                
     }
     
 }?>

@@ -155,13 +155,13 @@ class Valoracion extends REST_Controller{
     private function get_usuario_por_servicio($q){  
                 
         $api  =  "servicio/usuario_por_servicio/format/json/";
-        return $this->principal->api("q" ,  $api , $q );
+        return $this->principal->api(  $api , $q );
     }
     /**/
     private function get_producto_por_id($q){
         
         $api  =  "producto/producto_por_id/format/json/";
-        return $this->principal->api("tag" ,  $api , $q );        
+        return $this->principal->api( $api , $q );        
     }
     /**/
     function articulo_GET(){
@@ -220,7 +220,7 @@ class Valoracion extends REST_Controller{
     /**/
     function valida_existencia_usuario($q){                
         $api =  "usuario/usuario_existencia/format/json/"; 
-        return $this->principal->api("q" , $api , $q );      
+        return $this->principal->api( $api , $q );      
     }
     /**/
     function utilidad_PUT(){
@@ -229,11 +229,12 @@ class Valoracion extends REST_Controller{
         $this->response($response);
     }
     /**/
+    
+    /*
     function registro_pregunta($q){ 
         $api = "pregunta/index";
-        return $this->principal->api("q" , $api , $q , "json" , "POST");
+        return $this->principal->api( $api , $q , "json" , "POST");
     }
-    /**/
     function pregunta_POST(){
 
         $param      =  $this->post();
@@ -245,15 +246,13 @@ class Valoracion extends REST_Controller{
         $this->response($respuesta_notificacion);
 
     }
-    private function envia_pregunta_a_vendedor($q){
-        $api =  "pregunta/pregunta_vendedor/format/json/"; 
-        return $this->principal->api("msj" , $api , $q );
-    }
+    */
+    
     
     function set_visto_pregunta($q){
 
         $api = "pregunta/visto_pregunta";
-        return $this->principal->api("q" , $api , $q  , "json" , "PUT");
+        return $this->principal->api( $api , $q  , "json" , "PUT");
 
     }
 

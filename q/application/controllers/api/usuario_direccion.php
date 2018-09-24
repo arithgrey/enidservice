@@ -9,6 +9,37 @@ class usuario_direccion extends REST_Controller{
         $this->load->library(lib_def());   
         $this->id_usuario = $this->principal->get_session("idusuario");                 
     }    
+    function principal_PUT(){
+
+        $param      = $this->put();
+        
+        $response   = false;
+        if ($param["id_usuario"]  > 0 && $param["id_direccion"] > 0) {
+            
+                        
+            $params_where   =  ["id_usuario" => $param["id_usuario"]];
+            $response       =  
+            $this->usuario_direccion_model->delete($params_where, 10 );
+            debug($response ,1);
+            /*
+            if ($response == 1) {
+                
+                $params         =  ["status" => 1];
+                $params_where   =  [
+                    "id_usuario"    => $param["id_usuario"] ,
+                    "id_direccion"  => $param["id_direccion"]
+
+                ];
+                $response       =  
+                $this->usuario_direccion_model->update($params , $params_where , 1);
+    
+            }
+            */
+                        
+        }
+        $this->response($response);
+        
+    }
     function id_GET(){
 
         $param      =  $this->get();
@@ -69,12 +100,12 @@ class usuario_direccion extends REST_Controller{
 
         $q["id_direccion"]  =   $id_direccion;
         $api =  "direccion/data_direccion/format/json/";
-        return $this->principal->api("q", $api, $q);
+        return $this->principal->api( $api, $q);
     }
     private function get_direccion_pedido($q){
 
         $api   =  "proyecto_persona_forma_pago_direccion/recibo/format/json/";
-        return   $this->principal->api("q", $api, $q);     
+        return   $this->principal->api( $api, $q);     
         
     }
     function direccion_envio_pedido_GET(){
@@ -109,7 +140,7 @@ class usuario_direccion extends REST_Controller{
     function get_recibo_saldo_pendiente($q){                 
         
         $api     =  "recibo/saldo_pendiente_recibo/format/json/";
-        return   $this->principal->api("q", $api, $q);     
+        return   $this->principal->api( $api, $q);     
     }
     function get_id_usuario($param){        
         $in_session = $this->principal->is_logged_in();                
@@ -126,6 +157,13 @@ class usuario_direccion extends REST_Controller{
             $this->response($response);    
         }
         $this->response(-1);    
+    }
+    function index_POST(){
 
+        $param      =   $this->post();
+        $params     =   ["id_usuario" => $param["id_usuario"] , 'id_direccion' => $param["id_direccion"] ];
+        $response   =  $this->usuario_direccion_model->insert($params);
+        $this->response($response);    
+        
     }
 }?>

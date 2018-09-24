@@ -4,7 +4,18 @@ class Imagen_usuario_model extends CI_Model{
     parent::__construct();        
     $this->load->database();
   } 
-  private function get($params=[], $params_where =[] , $limit =1){
+  function insert( $params , $return_id=0){        
+      $insert   = $this->db->insert("imagen_usuario", $params);     
+      return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+  }
+  function delete($params_where =[] , $limit =1){              
+    $this->db->limit($limit);        
+    foreach ($params_where as $key => $value) {
+      $this->db->where($key , $value);
+    }        
+    return  $this->db->delete("imagen_usuario", $params_where);
+  }
+  function get($params=[], $params_where =[] , $limit =1){
     $params = implode(",", $params);
     $this->db->limit($limit);
     $this->db->select($params);
@@ -35,7 +46,8 @@ class Imagen_usuario_model extends CI_Model{
         $result = $this->db->query($query_get);                
         return $result->result_array()[0]["num"];
   }
-  function elimina_pre_img_usuario($param){
+  /*
+  function delete($param){
 
     $id_usuario =  $param["id_usuario"];  
     $imagen = $this->get_img_usuario($id_usuario);  
@@ -43,10 +55,11 @@ class Imagen_usuario_model extends CI_Model{
       $id_imagen=  $row["id_imagen"];      
       $query_delete ="DELETE FROM imagen_usuario WHERE  idusuario  = '". $id_usuario ."' LIMIT 1";
       $this->db->query($query_delete); 
-      $this->elimina_img($id_imagen);
+      //$this->elimina_img($id_imagen);
     }
     
   }
+  */
   function insert_imgen_usuario($param){
 
     $this->elimina_pre_img_usuario($param);    

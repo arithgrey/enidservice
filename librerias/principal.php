@@ -4,10 +4,11 @@
 			parent::__construct();     
 			$this->load->library('../../librerias/sessionclass');     
 	    }
-	    function api($modul, $api, $q=[], $format='json', $type='GET', $debug = 0  ){
-	        $url 				=  $modul."/index.php/api/";         
+	    function api($api, $q=[], $format='json', $type='GET', $debug = 0  ){
+	        $url 				=  "q/index.php/api/";         
 	        $url_request		=  get_url_request($url);
 
+	        //echo $url_request;
 	        $this->restclient->set_option('base_url', $url_request);
 	        $this->restclient->set_option('format', $format);        
 	        $result 			= "";
@@ -56,31 +57,32 @@
 			
 			if ($format_html == 1) {
 				$api =  "clasificacion/primer_nivel/format/json/"; 			
-				return $this->api("q", $api , [] , "html");			
+				return $this->api( $api , [] , "html");			
 			}else{
 				$api =  "clasificacion/primer_nivel/format/json/"; 			
-				return $this->api("q", $api , [] , "json");	
+				return $this->api( $api , [] , "json");	
 			}
 			
 	    }	   	    
 	    function calcula_costo_envio($q){      
 		    $api  = "cobranza/calcula_costo_envio/format/json/";
-		    return $this->api("q", $api, $q );  
+		    return $this->api( $api, $q );  
 		}
 		function get_info_usuario($id_usuario){
 			
 			$q["id_usuario"] =  $id_usuario;
 	        $api =  "usuario/q/format/json/"; 
-	        return $this->api("q" , $api , $q );
+	        return $this->api( $api , $q );
     	}
     	function get_base_servicio($id_servicio){    
     		$q["id_servicio"] =  $id_servicio;
 	        $api  =  "servicio/base/format/json/";
-	        return $this->api("q" ,  $api , $q );
+	        return $this->api($api , $q );
     	}
     	function create_pagination($q){
     		$api  =  "producto/paginacion/format/json/";
-	        return $this->api("tag" ,  $api , $q );        	              
+	        //return $this->api("tag" ,  $api , $q );        	              
+	        return $this->api($api , $q );        	              
 	    }
 		/**/		
 		function get_valor_numerico_bool($bool){
@@ -156,7 +158,6 @@
 	            return $data;
 	        }   
 	       
-	    } 
-	    /***/ 
+	    } 	    
 	}
 ?>

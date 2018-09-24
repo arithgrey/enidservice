@@ -3,7 +3,14 @@
     function __construct(){      
         parent::__construct();        
         $this->load->database();
-
+    }
+    
+    function update($data =[] , $params_where =[] , $limit =1 ){    
+      foreach ($params_where as $key => $value) {
+              $this->db->where($key , $value);
+      }
+      $this->db->limit($limit);
+      return $this->db->update("usuario_direccion", $data);    
     }
     function delete($params_where =[] , $limit =1){              
         $this->db->limit($limit);        

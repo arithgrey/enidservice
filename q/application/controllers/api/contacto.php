@@ -32,7 +32,7 @@ class contacto extends REST_Controller{
         $q["id_usuario"]        =   180;                  
         $api                    =   "tickets/index";     
         
-        return $this->principal->api("q",  $api , $q ,"json" ,"POST");
+        return $this->principal->api(  $api , $q ,"json" ,"POST");
     }
 
 

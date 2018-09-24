@@ -42,13 +42,13 @@ class Inicio extends CI_Controller {
     function get_id_departamento_by_id_perfil($id_perfil){        
         $q["id_perfil"]  = $id_perfil;
         $api             = "perfiles/id_departamento_by_id_perfil/format/json/";
-        return  $this->principal->api("q" , $api , $q);
+        return  $this->principal->api( $api , $q);
     }
     /**/
     function get_departamentos_enid(){
         $q["info"]  = 1;
         $api        = "departamento/index/format/json/";        
-        return  $this->principal->api("q" , $api , $q );   
+        return  $this->principal->api( $api , $q );   
     }
     
 }

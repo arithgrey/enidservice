@@ -1846,7 +1846,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		$sql = $this->_update($this->qb_from[0], $this->qb_set);
 		$this->_reset_write();
-		debug($sql);
+		
 		return $this->query($sql);
 	}
 
@@ -2064,6 +2064,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 
 		$sql = $this->_delete($table);
 		$this->_reset_write();
+		debug($sql);
 		return $this->query($sql);
 	}
 
@@ -2200,7 +2201,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		{
 			$this->_reset_write();
 		}
-
+		//debug($sql);
 		return ($this->return_delete_sql === TRUE) ? $sql : $this->query($sql);
 	}
 

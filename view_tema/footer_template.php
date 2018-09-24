@@ -47,7 +47,8 @@ div(ul($list4) , ["class"=>"col-md-3 col-sm-6 inner"])];
             <?=input_hidden(["class"    => "in_session" , "value"   => $in_session ])?>
             <?=input_hidden(["name"     => "titulo_web" , "class"   => "titulo_web" ,  
             "value" => $titulo ])?>            
-            <?php if ($in_session === 0):?>                                
+            <?php if ($in_session === 0 ):?>                                
+                <div class="base_compras">
                     <div class='col-lg-4'>
                         <div class="row">
                             <?=div(icon('fa  fa-fighter-jet') , ['class' => 'col-lg-2'])?>
@@ -78,6 +79,7 @@ div(ul($list4) , ["class"=>"col-md-3 col-sm-6 inner"])];
                             </div>        
                         </div>
                     </div>                
+                </div>
             <?php endif; ?>
         
     
@@ -88,7 +90,7 @@ div(ul($list4) , ["class"=>"col-md-3 col-sm-6 inner"])];
     <?=n_row_12()?>
         <?=$this->load->view("../../../view_tema/seccion_iniciar_session");?>
     <?=end_row()?>    
-    <?=div(print_footer($list_footer) , ["class" =>""] , 1)?>    
+    <?=div(print_footer($list_footer) , ["class" =>"base_paginas_extra"] , 1)?>    
         <?=n_row_12()?>    
             <?php if ($is_mobile == 0): ?>    
                 <?=$this->load->view("../../../view_tema/metodos_pago");?>

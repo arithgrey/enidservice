@@ -31,42 +31,42 @@ class Sess extends REST_Controller{
     }
     function get_es_usuario($q){    
         $api = "usuario/es";
-        return $this->principal->api("q" , $api , $q , "json",  "POST");
+        return $this->principal->api( $api , $q , "json",  "POST");
     }    
     /**/
     function get_perfil_user($id_usuario){
 
         $q["id_usuario"]    =  $id_usuario;
         $api                =  "usuario_perfil/usuario/format/json/";
-        return $this->principal->api("q", $api , $q);
+        return $this->principal->api( $api , $q);
     }    
     function get_empresa($id_empresa){                        
         $q["id_empresa"]    =  $id_empresa;
         $api                =  "empresa/id/format/json/";
-        return $this->principal->api("q", $api , $q);
+        return $this->principal->api( $api , $q);
     }    
     function get_perfil_data($id_usuario){
         
         $q["id_usuario"]   =  $id_usuario;
         $api                =  "perfiles/data_usuario/format/json/";
-        return $this->principal->api("q", $api , $q);
+        return $this->principal->api( $api , $q);
     }
     function get_empresa_permiso($id_empresa){
 
         $q["id_empresa"]      =  $id_empresa;
         $api                  =  "empresa_permiso/empresa/format/json/";
-        return $this->principal->api("q", $api , $q);   
+        return $this->principal->api( $api , $q);   
     }
     function get_empresa_recursos($id_empresa){
         $q["id_empresa"]    =  $id_empresa;
         $api                =  "empresa_recurso/recursos/format/json/";
-        return $this->principal->api("q", $api , $q);   
+        return $this->principal->api( $api , $q);   
     }
     function get_recursos_perfiles($q){        
         
         $q["id_perfil"]        =  $q[0]["idperfil"];
         $api                =  "recurso/navegacion/format/json/";
-        return $this->principal->api("q", $api , $q);      
+        return $this->principal->api( $api , $q);      
     }
     /**/
      function crea_session($id_usuario, $nombre , $email ,$id_empresa){                            

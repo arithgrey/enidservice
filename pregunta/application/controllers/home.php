@@ -50,7 +50,7 @@ class Home extends CI_Controller{
     private function carga_formulario_valoracion($q){
         
         $api =  "valoracion/pregunta_consumudor_form/format/json/";
-        return $this->principal->api("q" , $api , $q , "html" , "GET");
+        return $this->principal->api( $api , $q , "html" , "GET");
     }
     
 }

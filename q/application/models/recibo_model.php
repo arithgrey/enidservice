@@ -35,22 +35,7 @@
           $campo_usuario = "id_usuario";        
           if($param["modalidad"] ==  1){
               $campo_usuario ="id_usuario_venta";            
-          }
-          
-
-          /*
-          $query_get = "SELECT 
-                          COUNT(0)num
-                        FROM 
-                        proyecto_persona_forma_pago 
-                        WHERE  
-                          status = 7
-                        AND 
-                          $campo_usuario =  $id_usuario";
-                          
-          $result = $this->db->query($query_get);   
-          $num = $result->result_array()[0]["num"];
-          */
+          }          
           $params_where = [
             "status"        => 7 , 
             $campo_usuario  =>  $param["id_usuario"]

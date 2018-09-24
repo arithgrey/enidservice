@@ -19,24 +19,24 @@ class Equipo extends REST_Controller{
     function create_pagination($q){
         
         $api = "producto/paginacion/format/json/"; 
-        return  $this->principal->api("tag" , $api , $q);
+        return  $this->principal->api($api , $q);
 
     }
     /*
     function get_num_total_usuarios($q){
 
         $api = "usuario/num_total/format/json/"; 
-        return  $this->principal->api("q" , $api , $q);
+        return  $this->principal->api( $api , $q);
     }
     */
     /**/
     function get_num_registros_periodo($q){
         $api =  "usuario/num_registros_preriodo/format/json";
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }
     function get_registros_periodo($q){
         $api =  "usuario/registros_preriodo/format/json";
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }
     /**/
     
@@ -85,7 +85,7 @@ class Equipo extends REST_Controller{
     private function crea_orden_de_compra($q){
         
         $api =  "cobranza/solicitud_proceso_pago"; 
-        return  $this->principal->api("pagos" , $api , $q , "json" , "POST");
+        return  $this->principal->api($api , $q , "json" , "POST");
     }
     /**/
     

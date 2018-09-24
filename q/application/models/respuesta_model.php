@@ -26,16 +26,10 @@
       return $this->db->get("respuesta")->result_array();
     }
     function get_num_respuestas($param){
-
-      /*
-      $id_tarea  = $param["tarea"];
-      $query_get ="SELECT  COUNT(0)num_respuestas FROM  respuesta WHERE id_tarea = '".$id_tarea."' ";
-
-      $result =  $this->db->query($query_get);             
-      return $result->result_array()[0]["num_respuestas"];
-      */
-      return $this->get(["COUNT(0)num"] , ["id_tarea" => $param["tarea"]])[0]["num"];
-    
+      return $this->get(["COUNT(0)num"] , ["id_tarea" => $param["tarea"]])[0]["num"];  
+    }
+    function get_num_respuestas_sin_leer($id_pregunta){ 
+      return $this->get(["COUNT(0)respuestas"] , ["id_pregunta" =>  $id_pregunta] );
     }
     /*
   	function actualiza_estado_pregunta($param){

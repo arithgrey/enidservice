@@ -128,12 +128,12 @@ class Home extends CI_Controller{
         $q               =  $servicio;
         $q["in_session"] =  $this->get_option("in_session");                
         $api             =  "servicio/crea_vista_producto/format/html/";
-        return $this->principal->api("q", $api, $q , 'html'); 
+        return $this->principal->api( $api, $q , 'html'); 
     }
     /**/   
     private function create_pagination($q){        
         $api =  "producto/paginacion/format/json/";
-        return $this->principal->api("q", $api, $q); 
+        return $this->principal->api( $api, $q); 
     }
     /**/
     private function crea_menu_lateral($clasificaciones_niveles){
@@ -171,7 +171,7 @@ class Home extends CI_Controller{
     /**/
     private function busqueda_producto_por_palabra_clave($q){        
         $api =  "servicio/q/format/json/";        
-        return $this->principal->api("q", $api, $q);
+        return $this->principal->api( $api, $q);
     }
     /**/
     private function logout(){                      
@@ -181,13 +181,13 @@ class Home extends CI_Controller{
 
         $q["id_clasificacion"] =  $id_clasificacion;
         $api                   = "clasificacion/id/format/json/";
-        return $this->principal->api("q", $api, $q);
+        return $this->principal->api( $api, $q);
     }
     /**/
     private function carga_categorias_destacadas($q){
         
         $api =  "clasificacion/categorias_destacadas/format/json/";
-        return $this->principal->api("q", $api, $q);
+        return $this->principal->api( $api, $q);
     }
     /**/
     private function get_orden(){

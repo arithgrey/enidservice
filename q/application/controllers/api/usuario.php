@@ -6,6 +6,7 @@ class usuario extends REST_Controller{
         parent::__construct(); 
         $this->load->helper("q");                                      
         $this->load->model('usuario_model');    
+        $this->load->library('table');  
         $this->load->library(lib_def());   
         $this->id_usuario   =  $this->principal->get_session("idusuario");  
     } 
@@ -76,7 +77,7 @@ class usuario extends REST_Controller{
     function get_usuario_por_servicio($q){
 
         $api =  "servicio/usuario_por_servicio/format/json";
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }
     /**/
     function usuario_servicio_GET(){
@@ -170,7 +171,7 @@ class usuario extends REST_Controller{
     function agrega_permisos_usuario($q){
 
         $api = "usuario_perfil/permisos_usuario";
-        return $this->principal->api("q" , $api , $q, "json" , "POST");
+        return $this->principal->api( $api , $q, "json" , "POST");
     }
 
     /*
@@ -220,9 +221,12 @@ class usuario extends REST_Controller{
     }
     function nombre_usuario_PUT(){
 
-        $param                =   $this->put();        
-        //$param["id_usuario"]  =   $this->id_usuario;
-        $reponse              =   $this->usuario_model->set_nombre_usuario($param);
+        $param                =     $this->put();                
+        $response             =     false;  
+        if ($this->id_usuario > 0 && strlen($param["nombre_usuario"]) >0 ){            
+            $reponse          =   
+            $this->usuario_model->q_up("nombre_usuario", $param["nombre_usuario"] , $this->id_usuario);
+        }                
         $this->response($reponse);      
     }
 
@@ -284,13 +288,7 @@ class usuario extends REST_Controller{
         $response   =   $this->usuario_model->activos_con_direcciones($param);
         $this->response($response);        
     }
-    /**/
-    function agregan_clasificaciones_periodo_GET(){
-
-        $param      =   $this->get();
-        $response   =   $this->usuario_model->agregan_clasificaciones_periodo($param);
-        $this->response($response);        
-    }
+    /**/    
     function publican_periodo_GET(){
 
         $param      =   $this->get();
@@ -303,14 +301,7 @@ class usuario extends REST_Controller{
         $param      =   $this->get();
         $response   =   $this->usuario_model->registros($param);
         $this->response($response);        
-    }
-    /**/    
-    function img_perfil_GET(){
-
-        $param      =   $this->get();
-        $response   =   $this->usuario_model->img_perfil($param);
-        $this->response($response);        
-    }
+    }    
     /**/
     function social_icons_GET(){
         $this->load->view("servicio/social_icons");
@@ -401,7 +392,7 @@ class usuario extends REST_Controller{
                   "nombre"                  =>  $nombre,
                   "id_usuario_referencia"   =>  $id_usuario_referencia 
                 ];
-                $response["id_usuario"] = $this->usuario_model->insert("usuario" , $params , 1);
+                $response["id_usuario"] = $this->usuario_model->insert($params , 1);
                 
                 if ( $response["id_usuario"]>0){
                     $q["id_usuario"]    =  $response["id_usuario"]; 
@@ -489,7 +480,7 @@ class usuario extends REST_Controller{
     /*Notifica registro con éxito*/
     function notifica_registro_exitoso($q){         
         $api = "emp/solicitud_afiliado/format/json/"; 
-        return  $this->principal->api("msj" , $api , $q);
+        return  $this->principal->api( $api , $q);
     }
     function prospecto_POST(){
     
@@ -541,10 +532,166 @@ class usuario extends REST_Controller{
         $response   =  $this->usuario_model->q_up('recordatorio_publicacion', 0, $param["id"]);
         $this->response($response);
     }    
+    function actividad_GET(){
+        
+        $param                          = $this->get();
+        $param["usuarios_nuevos"]       = $this->get_num_registros_periodo($param);
+        $param["usuarios_direcciones"]  = $this->get_nun_activos_con_direcciones($param); 
+        $usuarios_clasifican            = 
+        $this->get_agregan_clasificaciones_periodo($param);         
+        $param["usuarios_clasifican"]   = count($usuarios_clasifican);
+
+        $usuarios_lista_deseos 
+        = 
+        $this->agregan_lista_deseos_periodo($param);
+        $param["usuarios_lista_deseos"]         = count($usuarios_lista_deseos);        
+
+        $param["usuarios_activos_publican"]     = $this->get_publican_periodo($param); 
+        $registros                              = $this->usuario_model->registros($param);
+        $param["registros"]                     = $registros["num"];
+        $param["registros_numeros_telefonicos"] = $registros["registros_numeros_telefonicos"];
+
+        $param["img_perfil"]                    = $this->agregan_img_perfil($param);
+        $usuarios_preguntas                     = $this->get_preguntas($param);
+        $param["preguntas"]                     = count($usuarios_preguntas);
+        $param["fechas"]                        = date_range($param["fecha_inicio"], $param["fecha_termino"]);
+        $response                               = $this->get_num_servicios_periodo($param);
+        $param["publicaciones"] =  $response;
+        
+        
+        if ($param["v"] ==1) {
+            $response    = $this->create_table_usabilidad($param);
+            $response   .= "<br>";
+            $response   .= $this->create_table_promotion($param);
+            $this->response($response);
+        }            
+        $this->response($param);
+
+        
+    }
+    function create_table_usabilidad($param){
+        $heading = [
+                    "USUARIOS NUEVOS"       ,
+                    "REGISTRAN SU DIRECCIÓN",
+                    "INDICAN SU NÚMERO NÚMERO TELEFÓNICO" ,
+                    "INDICAN PREFERENCIAS"  , 
+                    "AGREGAN LISTA DESEOS"  ,
+                    "PUBLICAN PRODUCTOS"    ,
+                    "AGREGAN IMAGENES A SU PERFIL",
+                    "PREGUNTAN SOBRE PRODUCTOS"
+                ];
+        $inf = [    $param["registros"],
+                    $param["registros_numeros_telefonicos"],
+                    $param["usuarios_direcciones"] , 
+                    $param["usuarios_clasifican"], 
+                    $param["usuarios_lista_deseos"] , 
+                    $param["usuarios_activos_publican"],
+                    $param["img_perfil"],
+                    $param["preguntas"]
+                ];      
+        $this->table->set_heading($heading);
+        $this->table->add_row($inf);
+        $tb =  $this->table->generate();
+        return  $tb;
+    }
+    private function get_num_registros_periodo($q){
+        return$this->usuario_model->num_registros_periodo($q);
+    }
+    private function get_nun_activos_con_direcciones($q){
+        return $this->usuario_model->activos_con_direcciones($q);
+    }
+    private function get_agregan_clasificaciones_periodo($q){
+                
+        $api = "usuario_clasificacion/agregan_clasificaciones_periodo/format/json/"; 
+        return $this->principal->api($api , $q );                                       
+    } 
+    private function agregan_lista_deseos_periodo($q){
+        
+        $api = "usuario_deseo/agregan_lista_deseos_periodo/format/json/"; 
+        return $this->principal->api($api , $q );                               
+    } 
+    private  function get_publican_periodo($q){
+        return $this->usuario_model->publican_periodo($q);        
+    }
+    private function agregan_img_perfil($q){        
+
+        $api =  "imagen_usuario/img_perfil/format/json/"; 
+        return $this->principal->api($api , $q );                               
+
+    }
+    private function get_preguntas($q){       
+        $api =  "pregunta/periodo/format/json/"; 
+        return $this->principal->api($api , $q );                        
+    }
+    private function get_num_servicios_periodo($q){
+        $api =  "servicio/num_periodo/format/json/"; 
+        return $this->principal->api($api , $q );                        
+    }
+     public function create_table_promotion($param){
+        array_unshift($param["fechas"] , "Fechas");
+        $this->table->set_heading($param["fechas"]);
+        
+        $publicaciones   = array(); 
+        $registros       = array();        
+        $dias            = array();  
+        $total           = count($param["fechas"]);
+        $a               = 1;
+        
+        foreach($param["fechas"] as $fecha) {
+            
+            $num = 
+            $this->search_element_array($param["publicaciones"] , 
+                "fecha_registro" , $fecha , "num");
+            
+            $config     =  array(   'class' =>  'servicios' , 
+                                    'fecha_inicio'    =>  $fecha, 
+                                    'fecha_termino'   =>  $fecha, 
+                                    'href'            =>  "#reporte",
+                                    'data-toggle'     =>  "tab",
+                                    'title'           =>  "Servicios postulados"
+                                        );
+            $num    = ($num > 0)? anchor_enid($num, $config):0;
+            $config     =  array(   'class' =>  'usuarios' , 
+                                    'fecha_inicio'    =>  $fecha, 
+                                    'fecha_termino'   =>  $fecha, 
+                                    'href'            =>  "#reporte",
+                                    'data-toggle'     =>  "tab",
+                                    'title'           =>  "Servicios postulados"
+                                        );
+            /*Registros*/
+            $num_registros = 
+            $this->search_element_array($param["usuarios_nuevos"] , 
+                "fecha" , $fecha , "num");
+            $num_registros    
+            = ($num_registros > 0)? anchor_enid($num_registros, $config):0;
+            if ($a < $total) {
+                array_push($publicaciones, $num);                
+                array_push($registros, $num_registros);                
+            }
+            $a ++;  
+            
+        }    
+        /**/
+        array_unshift($publicaciones , "PRODUCTOS PUBLICADOS");
+        array_unshift($registros     , "USUARIOS NUEVOS");
+        $this->table->add_row($publicaciones);
+        $this->table->add_row($registros);
+        $tb =  $this->table->generate();
+        return  $tb;
+    }
+    function search_element_array($array , $key , $comparador , $key_val ){
+        $num =0;
+        foreach ($array as $row) {
+            
+            if ($row[$key] == $comparador) {
+                $num = $row[$key_val];
+                break;
+            }
+        }
+        return $num;
+    }
     private function crear_proceso_compra($param){
         
-        
-
         /*
         if ($response["usuario_registrado"] ==  1 && $response["id_usuario"]>0 ){                
                 $param["id_usuario"]                = $response["id_usuario"];       

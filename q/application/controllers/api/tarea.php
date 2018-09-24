@@ -29,7 +29,7 @@ class Tarea extends REST_Controller{
     /**/
     function set_stado_ticket($q){
         $api =  "ticket/estado";
-        return $this->principal->api("q", $api , $q , "json", "PUT");
+        return $this->principal->api( $api , $q , "json", "PUT");
     }
     /**/    
     function valida_tareas_pendientes($param){

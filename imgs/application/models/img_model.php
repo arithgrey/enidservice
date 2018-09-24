@@ -16,4 +16,12 @@ class img_model extends CI_Model {
   	function get_img($id_imagen){	   
   	   return $this->get(["img"] , ["idimagen" => $id_imagen]);
   	}  
+    private function delete($params_where =[] , $limit =1){              
+      $this->db->limit($limit);        
+      foreach ($params_where as $key => $value) {
+        $this->db->where($key , $value);
+      }        
+      return  $this->db->delete("img", $params_where);
+    }
+    
 }

@@ -165,12 +165,12 @@ class Inicio extends CI_Controller {
     private function get_saldo_usuario($id_usuario){
         $q["id_usuario"] =  $id_usuario;        
         $api  =  "saldos/usuario/format/json/";         
-        return $this->principal->api("q", $api , $q , "json", "POST" );         
+        return $this->principal->api( $api , $q , "json", "POST" );         
     }
     /**/
     private function carga_metodos_pago_usuario($q){        
         $api  =  "cuentas/metodos_disponibles_pago/";         
-        return $this->principal->api("q", $api , $q , "html" );         
+        return $this->principal->api( $api , $q , "html" );         
     }
     /**/
     private function get_cuentas_usuario($id_usuario ,$tipo){        
@@ -179,26 +179,26 @@ class Inicio extends CI_Controller {
         $q["tipo"]                  =   $tipo;
         $q["metodos_disponibles"]   =   1;        
         $api  =  "cuentas/usuario/format/json/";         
-        return $this->principal->api("q", $api , $q  , "json", "POST");        
+        return $this->principal->api( $api , $q  , "json", "POST");        
 
     }
     /**/
     private function get_bancos_disponibles($q){
 
         $api  =  "cuentas/bancos_disponibles/format/json/";         
-        return $this->principal->api("q", $api , $q );        
+        return $this->principal->api( $api , $q );        
     }
     
     /**/
     private function get_recibo_por_pagar($q){        
         $api  =  "cobranza/recibo_por_pagar/format/json/";         
-        return $this->principal->api("q", $api , $q );        
+        return $this->principal->api( $api , $q );        
     }
     /*****/
     private function agregar_cuenta_bancaria($q){
 
         $api  = "cuentas/bancaria/format/json/";
-        return $this->principal->api("q", $api , $q , "json" , "POST");
+        return $this->principal->api( $api , $q , "json" , "POST");
     }    
     /*********/  
 }

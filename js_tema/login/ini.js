@@ -14,6 +14,7 @@ $(document).on("ready", function(){
 		transforma_mayusculas(this);
 	});
 	display_elements([".extra_menu_simple"] , 1  );	
+	display_elements([".base_compras" ,".base_paginas_extra" , ".info_metodos_pago"] , 0  );
 	
 });
 /*****************************/

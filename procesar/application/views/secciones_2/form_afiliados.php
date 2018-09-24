@@ -4,8 +4,7 @@
   $num_ciclos         = $info_ext["num_ciclos"];
   $ciclo_facturacion  = $info_ext["ciclo_facturacion"];
   $ingresar =  anchor_enid( 'INGRESA', array(                            
-                            'href'  => '../login',
-                            'style' => 'color:#BEF8FF!important;font-weight: bold'
+                            'href'  => '../login'
                           )); 
 $talla                = 
 (array_key_exists("talla", $info_solicitud_extra))?$info_solicitud_extra["talla"]:0;  

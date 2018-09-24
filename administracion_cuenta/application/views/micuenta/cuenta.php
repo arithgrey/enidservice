@@ -1,5 +1,5 @@
 <div>
-    <div class="col-lg-7" >
+    <div class="col-lg-8" >
         <?=n_row_12()?>
             <div class="col-lg-5">
                 <?=n_row_12()?>        
@@ -21,12 +21,13 @@
         
 
         <?=n_row_12()?>
+
             <div class="page-header" >
-            <?=heading_enid("Cuenta" , 1 , [] , 1)?>
-              
-              <?=n_row_12()?>
+            <?=heading_enid("Cuenta" , 1 , ['class'=>'strong'] , 1)?>   
+            <br>  
+            <?=n_row_12()?>
                 <form class="f_nombre_usuario">
-                    <?=label('Nombre de usuario', '', ['class'=> 'col-md-3 control-label'])?>
+                    <?=div('Nombre de usuario',  ['class'=> 'strong'] , 1)?>
                     <?=input([
                         "id"            =>  "nombre_usuario" ,
                         "name"          =>  "nombre_usuario" ,
@@ -44,10 +45,9 @@
 
 
               <?=n_row_12()?>
-                <form>
-                    <?=label('Correo electrónico', '', ["class"=>"col-md-3 control-label" ] )?>
-                        <div class="col-md-7">
-                           <?=input([
+                <form >
+                    <?=div('Correo electrónico' , ['class' => 'strong'] , 1)?>                    
+                    <?=input([
                             "id"            => "correo_electronico",
                             "name"          => "correo_electronico",
                             "placeholder"   => "El correo electrónico no se mostrará públicamente",
@@ -56,19 +56,17 @@
                             "type"          => "text",
                             "value"         => entrega_data_campo($usuario , 'email' ),
                             "readonly"      =>  true 
-                            ])?>
-                           <?=div('El correo electrónico NO se mostrará públicamente'  , [] , 1)?>
-                        </div>
+                    ])?>
+                    <?=div('El correo electrónico NO se mostrará públicamente', ['class'=> 'blue_enid '], 1)?>
                 </form>
               <?=end_row()?>
+              <br>
 
             
               <?=n_row_12()?>
                 <form class="f_telefono_usuario">
-                    <div>
-                        
-                        <?=div("Teléfon Movil" , ["class" => "col-md-3 control-label" ])?>
-                        
+                    <div class="row">                        
+                        <?=div("Teléfon Movil" , ["class" => "col-md-3 strong" ])?>                        
                         <div class ="col-md-2" >
                             <?=input([
                                     "id"   => "lada",
@@ -84,7 +82,6 @@
                             <?=place("registro_telefono_usuario_lada")?>
                         </div>
                         <div class ="col-md-5" >
-
                             <?=input([
                                 "id"          => "telefono",
                                 "name"        => "telefono",
@@ -106,10 +103,9 @@
               
               <?=n_row_12()?>
                     <form class="f_telefono_usuario_negocio">
-                    <div>
-                       <?=div("Teléfono de negocio" ,["class"=>"col-md-3 control-label"] )?>                          
-                        <div class="col-md-2">
-                                
+                    <div class="row">
+                       <?=div("Teléfono de negocio", ["class"=>"col-md-3 strong"] )?>
+                        <div class="col-md-2">                                
                             <?=form_input(array(
                                         'name'          => 'lada_negocio',
                                         'id'            => 'lada',
@@ -145,10 +141,11 @@
             </div>
 
         <?=end_row()?>
-        <?=div("Mantén la calma esta información será solo será visible si tú lo permites "  , ['class'=>'registro_telefono_usuario_lada_negocio'] , 1)?>
+        <?=div("Mantén la calma esta información será solo será visible si tú lo permites "  , 
+        ['class'=>'registro_telefono_usuario_lada_negocio blue_enid_background2 white padding_1'] , 1)?>
     </div>   
     
-    <div class="col-lg-5">
+    <div class="col-lg-4">
         <?=heading_enid("TU CUENTA ENID SERVICE" , 3)?>
         <div>
             <p style="text-decoration: underline">

@@ -9,6 +9,20 @@ class recibo extends REST_Controller{
         $this->load->library(lib_def());                    
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
+    /*
+    function en_proceso_GET(){
+        $param =  $this->get();
+        $response =  $this->recibo_model->carga_actividad_pendiente($param);        
+        $this->response($response);
+    } 
+    function verifica_anteriores_GET(){        
+        $param =  $this->get();        
+        $response = $this->tickets_model->num_compras_efectivas_usuario($param);        
+        $this->response($response);        
+    }    
+    */
+    
+    
     function servicio_ppfp_GET(){
         
         $param          =   $this->get();                
@@ -52,7 +66,7 @@ class recibo extends REST_Controller{
     } 
     function get_estatus_servicio_enid_service($q){
         $api =  "status_enid_service/servicio/format/json/";
-        return  $this->principal->api("q" , $api , $q);
+        return  $this->principal->api( $api , $q);
         
     }    
     function proyecto_persona_info_GET(){        
@@ -80,7 +94,8 @@ class recibo extends REST_Controller{
             $data["numero_articulos_en_venta"] = $this->carga_productos_en_venta($param);                    
         }   
         $data["status"]      =   $param["status"];
-        $data["anteriores"]  =   $this->verifica_anteriores($prm);                 
+        $data["anteriores"]  =   
+        $this->recibo_model->num_compras_efectivas_usuario($param);
 
         $this->load->view("proyecto/lista_version_cliente" , $data);
     }     
@@ -102,19 +117,20 @@ class recibo extends REST_Controller{
         }
         return $ordenes;
     }
-    function en_proceso($q){    
-        $api        =  "tickets/en_proceso/format/json/";
-        return       $this->principal->api("pagos", $api, $q);     
+    private function en_proceso($q){            
+        return $this->recibo_model->carga_actividad_pendiente($q);            
     }    
     function carga_productos_en_venta($q){
         $api        =  "servicio/num_venta_usuario/format/json/";
-        return       $this->principal->api("q", $api, $q);     
+        return       $this->principal->api( $api, $q);     
     }
+    /*
     function verifica_anteriores($q){
       
         $api        =  "tickets/verifica_anteriores/format/json/";
-        return       $this->principal->api("pagos", $api, $q);     
+        return       $this->principal->api($api, $q);     
     }
+    */
     function resumen_desglose_pago_GET(){
         
         $param  =  $this->get();                                                
@@ -210,13 +226,13 @@ class recibo extends REST_Controller{
             
         $q["id_recibo"]     = $id_recibo;
         $api                = "proyecto_persona_forma_pago_direccion/recibo/format/json/";
-        return $this->principal->api("q" , $api ,  $q);    
+        return $this->principal->api( $api ,  $q);    
     }
     private function get_direccion_por_id($id_direccion){
             
         $q["id_direccion"] = $id_direccion;
         $api               = "direccion/data_direccion/format/json/";
-        return $this->principal->api("q" , $api ,  $q);    
+        return $this->principal->api( $api ,  $q);    
     }
 
 

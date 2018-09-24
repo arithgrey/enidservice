@@ -22,7 +22,7 @@ class Respuesta extends REST_Controller{
     private function notifica_respuesta_email($q){
         
         $api =  "pregunta/respuesta_vendedor/format/json/"; 
-        return $this->principal->api("msj" , $api , $q );        
+        return $this->principal->api( $api , $q );        
     }
     function respuestas_GET(){
 
@@ -60,7 +60,7 @@ class Respuesta extends REST_Controller{
     }    
     function set_visto_pregunta($q){
         $api = "pregunta/visto_pregunta";
-        return $this->principal->api("q" , $api , $q  , "json" , "PUT");
+        return $this->principal->api( $api , $q  , "json" , "PUT");
     }
     function index_POST(){
 

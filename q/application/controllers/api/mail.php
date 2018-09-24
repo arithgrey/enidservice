@@ -38,13 +38,13 @@ class Mail extends REST_Controller{
         
         $q["fecha"] =  $fecha;
         $api =  "ganancias/solicitudes_fecha/format/json/"; 
-        return $this->principal->api("q" , $api , $q );        
+        return $this->principal->api( $api , $q );        
     }
     /**/
     function get_ventas_dia($fecha){
         $q["fecha"] =  $fecha;
         $api =  "ganancias/ganancias_fecha/format/json/"; 
-        return $this->principal->api("q" , $api , $q );                
+        return $this->principal->api( $api , $q );                
     }    
     /**/ 
 }?>

@@ -54,25 +54,25 @@ class Pregunta extends REST_Controller{
     /**/
     private function crea_vista_notificacion_pregunta($q){
         $api    = "presentacion/notificacion_duda_vendedor/format/html/"; 
-        return  $this->principal->api("msj",  $api , $q, "html" );        
+        return  $this->principal->api($api , $q, "html" );        
     }
     private function crea_vista_notificacion_respuesta($q){
 
         $api    = "presentacion/notificacion_respuesta_a_cliente/format/html/"; 
-        return  $this->principal->api("msj",  $api , $q, "html" );                
+        return  $this->principal->api($api , $q, "html" );                
     }
     /**/
     private function get_info_vendedor_por_servicio($id_servicio){
 
         $q["id_servicio"]   =  $id_servicio;        
         $api                =  "usuario/usuario_servicio/format/json/"; 
-        return  $this->principal->api("q",  $api , $q);                
+        return  $this->principal->api(  $api , $q);                
     }
     /**/
     private function get_id_usuario_por_pregunta($id_pregunta){
 
         $q["id_pregunta"] =  $id_pregunta;        
         $api    = "pregunta/usuario_por_pregunta/format/json/"; 
-        return  $this->principal->api("q",  $api , $q);                
+        return  $this->principal->api(  $api , $q);                
     }
 }?>

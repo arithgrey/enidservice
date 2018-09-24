@@ -23,7 +23,12 @@
   <div class="contenedo_compra_info">
     <div class="col-lg-10 col-lg-offset-1">
       <?=n_row_12()?>                 
-        <?=heading_enid('TU CARRITO DE COMPRAS'.icon("fa fa-shopping-bag"))?>
+        <?=heading_enid(
+          'TU CARRITO DE COMPRAS'.icon("fa fa-shopping-bag")
+          , 
+          2,
+          ['class' => 'strong']
+           )?>
         <?=div($resumen_producto , [], 1)?>      
         <?=div($text_envio)?>
         <?=input_hidden([

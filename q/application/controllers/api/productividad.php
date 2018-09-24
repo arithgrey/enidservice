@@ -67,7 +67,7 @@ class productividad extends REST_Controller{
     function verifica_registro_telefono($q){
 
         $api = "usuario/verifica_registro_telefono/format/json";
-        return  $this->principal->api("q" , $api , $q);
+        return  $this->principal->api( $api , $q);
     }
     /**/
     function notificaciones_GET(){
@@ -123,7 +123,7 @@ class productividad extends REST_Controller{
 
     function valida_producto_anunciado($q){
         $api =  "servicio/num_anuncios/format/json/"; 
-        return $this->principal->api("q" , $api , $q );                        
+        return $this->principal->api( $api , $q );                        
     }
     //$data_complete["productos_anunciados"]  = $this->valida_producto_anunciado($param);
 
@@ -184,16 +184,16 @@ class productividad extends REST_Controller{
 
     private function carga_mensajes_sin_leer($q){
         $api =  "pregunta/preguntas_sin_leer/format/json/"; 
-        return $this->principal->api("q" , $api , $q );                
+        return $this->principal->api( $api , $q );                
     }
     private function get_objetivos_perfil($q){
 
         $api =  "objetivos/perfil/format/json/"; 
-        return   $this->principal->api("q" , $api , $q );                        
+        return   $this->principal->api( $api , $q );                        
     }
     private function verifica_direccion_registrada_usuario($q){
         $api =  "usuario_direccion/num/format/json/"; 
-        return   $this->principal->api("q" , $api , $q );                        
+        return   $this->principal->api( $api , $q );                        
     }   
     private function get_ventas_enid_service(){
         

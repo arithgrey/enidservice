@@ -22,7 +22,7 @@ class Areacliente extends REST_Controller{
 
         $q["id_recibo"] =  $id_recibo;        
         $api  = "recibo/resumen_desglose_pago/format/html/"; 
-        return $this->principal->api("q", $api , $q ,"html"  );
+        return $this->principal->api( $api , $q ,"html"  );
     }
     
     function pago_pendiente_web_GET(){
@@ -52,7 +52,7 @@ class Areacliente extends REST_Controller{
         $q["id_recibo"] =  $id_recibo;        
         $api  = "enid/metricas_cotizaciones/"; 
     
-        $param["info_correo"] =  $this->principal->api("q", $api , $q ,"json" );
+        $param["info_correo"] =  $this->principal->api( $api , $q ,"json" );
         $param["asunto"] =  "Resumen del día Enid Service";
         $lista_correos= ["arithgrey@gmail.com"];
 

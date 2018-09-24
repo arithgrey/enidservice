@@ -5,7 +5,18 @@ class Img extends REST_Controller{
       parent::__construct();        
       $this->load->model("img_model");              
       $this->load->library(lib_def());              
-  }     
+  }    
+  function index_DELETE(){
+
+    $param    =  $this->delete();
+    $response = false;
+    if ($param["id_imagen"] > 0) {
+      $params   =  [ 'idimagen' => $param["id_imagen"]];    
+      $response =  $this->img_model->delete($params); 
+      
+    }    
+    $this->response($response);  
+  }   
   function imgs_servicio_GET(){
 
     $param  =  $this->get();       

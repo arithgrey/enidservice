@@ -85,28 +85,7 @@ class Portafolio extends REST_Controller{
     
     
     /**/
-    function direccion_usuario_POST(){
-
-        $param =  $this->post();
-        /*Primero la registramos*/    
-        $param["id_codigo_postal"] = $this->get_id_codigo_postal_por_patron($param);
-        $this->proyecto_->crea_direccion($param);
-
-        $id_direccion = $this->proyectomodel->registra_direccion_usuario($param);
-        
-        $param["id_direccion"] = $id_direccion;        
-        $data_complete["id_direccion"] = $id_direccion;
-        if($id_direccion > 0 ){            
-            if ($param["direccion_principal"] ==  1 ){
-
-                $id_usuario =  $this->get_id_usuario($param);
-                $data_complete["registro_direccion_usuario"] =  
-                $this->proyectomodel->actualiza_direcciones_usuario($id_usuario ,  $id_direccion);
-            }            
-        }        
-        $data_complete["externo"] =  get_info_variable($param , "externo");
-        $this->response($data_complete);        
-    }    
+      
     /**/
     
     /*
@@ -127,18 +106,18 @@ class Portafolio extends REST_Controller{
     function carga_compras_usuario($q){
 
         $api        =  "recibo/resumen_compras_usuario/format/json/";
-        return       $this->principal->api("q", $api, $q);     
+        return       $this->principal->api( $api, $q);     
     } 
     */      
     /**/
     function get_compras_efectivas($q){        
         $api        =  "tickets/compras_efectivas/format/json/";
-        return       $this->principal->api("pagos", $api, $q);     
+        return       $this->principal->api( $api, $q);     
     }
     /**/
     function create_pagination($q){               
         $api        =  "producto/paginacion/format/json/";
-        return       $this->principal->api("tag", $api, $q);     
+        return       $this->principal->api( $api, $q);     
     }
     /**/
     function compras_efectivas_GET(){
@@ -211,13 +190,13 @@ class Portafolio extends REST_Controller{
     /*
     function en_proceso($q){    
         $api        =  "tickets/en_proceso/format/json/";
-        return       $this->principal->api("pagos", $api, $q);     
+        return       $this->principal->api( $api, $q);     
     } 
     */   
     /*
     function carga_productos_en_venta($q){
         $api        =  "servicio/num_venta_usuario/format/json/";
-        return       $this->principal->api("base", $api, $q);     
+        return       $this->principal->api( $api, $q);     
     }
     */
     /*

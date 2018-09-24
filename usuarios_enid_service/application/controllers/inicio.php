@@ -55,13 +55,13 @@ class Inicio extends CI_Controller {
     private function get_perfiles_enid_service(){
         
         $api = "perfiles/get/format/json/";                
-        return $this->principal->api("q" , $api , []);
+        return $this->principal->api( $api , []);
     }
     /**/
     private function get_departamentos_enid(){
 
         $q["estado"]    =  1;
         $api            = "departamento/index/format/json/";                
-        return $this->principal->api("q", $api , $q);
+        return $this->principal->api( $api , $q);
     }
 }

@@ -123,7 +123,7 @@ class producto extends REST_Controller{
     function get_servicios_empresa($q){
 
         $api  =  "producto/q/format/json/";
-        return  $this->principal->api("tag" ,  $api , $q);  
+        return  $this->principal->api($api , $q);  
     }
     /***/
     function agrega_precio_servicio_publico(){
@@ -150,7 +150,7 @@ class producto extends REST_Controller{
     function registra_keyword($param){        
         if(array_key_exists("q", $param) >0 && strlen(trim($param["q"]))>1 ){
             $api = "metakeyword/registro";
-            $this->principal->api("q", $api , $param, "json", "POST");
+            $this->principal->api( $api , $param, "json", "POST");
         }            
         
     }    
@@ -240,7 +240,7 @@ class producto extends REST_Controller{
     function get_servicios_periodo_simple($q){
         
         $api    =  "servicio/periodo/format/json/";
-        return $this->principal->api("q", $api , $q );
+        return $this->principal->api( $api , $q );
     }
     /**/
     function periodo_GET(){
@@ -270,7 +270,7 @@ class producto extends REST_Controller{
     
     function get_num_deseo_servicio_usuario($q){
         $api =  "usuario/num_deseo_servicio_usuario/format/json/";
-        return $this->principal->api("q", $api , $q);
+        return $this->principal->api( $api , $q);
     }    
     
     function lista_deseos_periodo_GET(){            

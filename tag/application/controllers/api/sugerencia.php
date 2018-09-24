@@ -18,7 +18,7 @@ class sugerencia extends REST_Controller{
     }
     function get_servicios_lista_deseos($q){
         $api  =  "usuario/lista_deseos_sugerencias/format/json/";
-        return $this->principal->api("q" ,  $api , $q );         
+        return $this->principal->api(  $api , $q );         
     }
 
     function completa_servicios_sugeridos($servicios, $param){
@@ -60,12 +60,12 @@ class sugerencia extends REST_Controller{
     private function busqueda_producto_por_palabra_clave($q){
 
         $api  =  "servicio/qmetakeyword/format/json/";
-        return $this->principal->api("q" ,  $api , $q );             
+        return $this->principal->api(  $api , $q );             
     }
     function get_clasificaciones_por_id_servicio($q){
 
         $api  =  "servicio/clasificaciones_por_id_servicio/format/json/";
-        return $this->principal->api("q" ,  $api , $q );                
+        return $this->principal->api(  $api , $q );                
     }
     /**/
     function servicio_GET(){
@@ -105,14 +105,14 @@ class sugerencia extends REST_Controller{
         
         $q["in_session"] =  $this->get_option("in_session");
         $api  =  "servicio/crea_vista_producto/format/html/";
-        return $this->principal->api("q" ,  $api , $q  , "html");         
+        return $this->principal->api(  $api , $q  , "html");         
     }
     /**/
     function get_servicios_por_clasificaciones($q){          
         
         $param = $q[0];        
         $api  =  "servicio/por_clasificacion/format/json/";
-        return $this->principal->api("q" ,  $api , $param );                 
+        return $this->principal->api(  $api , $param );                 
     }    
    
 }?>

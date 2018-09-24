@@ -33,7 +33,7 @@ class usuario_deseo extends REST_Controller{
     function agregan_lista_deseos_periodo_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->usuario_model->agregan_lista_deseos_periodo($param);
+        $response   =   $this->usuario_deseo_model->agregan_lista_deseos_periodo($param);
         $this->response($response);        
     }
     function lista_deseos_PUT(){
@@ -54,17 +54,17 @@ class usuario_deseo extends REST_Controller{
     /*
     function add_lista_deseos($q){        
         $api    =  "usuario_deseo/add_lista_deseos/format/json/";
-        return $this->principal->api("q", $api , $q , "json" , "PUT");
+        return $this->principal->api( $api , $q , "json" , "PUT");
     }
     */
     function agrega_interes_usuario($q){
 
         $api    =  "usuario_clasificacion/interes";
-        return $this->principal->api("q", $api , $q , "json" , "POST");
+        return $this->principal->api( $api , $q , "json" , "POST");
     }
     function gamificacion_deseo($q){
         $api  =  "servicio/gamificacion_deseo";
-        return  $this->principal->api("q" ,  $api , $q, "json" , "PUT");  
+        return  $this->principal->api(  $api , $q, "json" , "PUT");  
     }
 
 }?>

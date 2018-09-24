@@ -93,7 +93,7 @@ class Inicio extends CI_Controller {
     private function carga_categorias_destacadas($q){
         
         $api = "clasificacion/categorias_destacadas/format/json/"; 
-        return $this->principal->api("q" , $api , $q );        
+        return $this->principal->api( $api , $q );        
     }
  
 }

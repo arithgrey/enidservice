@@ -98,19 +98,19 @@ class Home extends CI_Controller{
 
         $q["tipo"]  = $tipo;
         $api    = "empresa/categorias_por_tipo/format/json/";
-        return  $this->principal->api("q" , $api  , $q);
+        return  $this->principal->api( $api  , $q);
     }   
     /**/
     function get_categorias_by_status($status = 1 ){
 
         $q["tipo"]  = 1;
         $api        = "empresa/q/format/json/";
-        return  $this->principal->api("q" , $api  , $q );
+        return  $this->principal->api( $api  , $q );
     }
     /**/
     function search_faqs($q){        
         $param["q"]     = $q;
         $api        = "faqs/search/format/json/";
-        return  $this->principal->api("q" , $api  , $param );
+        return  $this->principal->api( $api  , $param );
     }
 }

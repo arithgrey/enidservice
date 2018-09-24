@@ -15,7 +15,7 @@ class Cron extends REST_Controller{
         /*
         $q = array('q' =>  1 );        
         $api      = "cron/evaluacion_servicios";
-        $response = $this->principal->api("msj", $api , $q  );
+        $response = $this->principal->api( $api , $q  );
 
         $lista_email = $this->pagosmodel->get_lista_clientes_activos();                
         $b = 0;
@@ -38,12 +38,12 @@ class Cron extends REST_Controller{
 
         $param["id_perfil"]     =  20;
         $api                    =  "usuario/usuarios_perfil/format/json";
-        return  $this->principal->api("q", $api , $param);
+        return  $this->principal->api( $api , $param);
     }
     private function get_usuarios_sin_publicar_articulos($q){
         $param["id_perfil"]     =  20;
         $api                    =  "usuario/sin_publicar_articulos/format/json";
-        return  $this->principal->api("q", $api , $param);
+        return  $this->principal->api( $api , $param);
     }
     /**/
     function recordatorio_publicaciones_GET(){
@@ -73,7 +73,7 @@ class Cron extends REST_Controller{
     /**/
     private function get_mensaje_recordatorio_publicacion($param){
         $api =  "cron/recordatorio_publicar_articulos"; 
-        $this->principal->api("msj", $api , $param );
+        $this->principal->api( $api , $param );
     }
     /**/
     function recordatorio_publicar_articulos_GET(){        

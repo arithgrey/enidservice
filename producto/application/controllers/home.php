@@ -67,7 +67,7 @@ class Home extends CI_Controller{
     private function get_tallas($id_servicio){
         $api            =   "servicio/talla/format/json/";        
         $q              =   ["id"=> $id_servicio ,  "v"=>"1" ]; 
-        return    $this->principal->api("q" , $api , $q ); 
+        return    $this->principal->api( $api , $q ); 
     }
     /**/
     private function vista($param , $data){
@@ -139,12 +139,12 @@ class Home extends CI_Controller{
     private function get_existencia($id_servicio){                
         $q["id_servicio"] =  $id_servicio;
         $api  = "servicio/existencia/format/json/";
-        return $this->principal->api("q", $api, $q);    
+        return $this->principal->api( $api, $q);    
     }
     /**/
     private function calcula_costo_envio($q){                
         $api  = "cobranza/calcula_costo_envio/format/json/";
-        return $this->principal->api("pagos", $api, $q);    
+        return $this->principal->api( $api, $q);    
     }
     /**/
     private function get_descripcion_mensaje($id_mensaje){        
@@ -157,7 +157,7 @@ class Home extends CI_Controller{
         
         $q["id_servicio"] = $id_servicio;
         $api =  "imagen_servicio/servicio/format/json/";
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }
     /**/
     function logout(){                      
@@ -183,7 +183,7 @@ class Home extends CI_Controller{
     private function get_precio_venta_mayoreo($costo){
         $q["costo"] =  $costo;
         $api =  "cobranza/calcula_precio_producto_mayoreo";
-        return $this->principal->api("q" , $api , $q , "html" );
+        return $this->principal->api( $api , $q , "html" );
     }
     /**/
     private function costruye_descripcion_producto(){
@@ -227,7 +227,7 @@ class Home extends CI_Controller{
     private function get_categorias_por_producto($id_clasificacion){        
         $q["id_clasificacion"] =  $id_clasificacion;
         $api                   = "clasificacion/clasificaciones_por_servicio/format/json/";
-        return $this->principal->api("q", $api , $q );
+        return $this->principal->api( $api , $q );
     }    
     /**/    
     private function get_vista_no_encontrado(){
@@ -264,6 +264,6 @@ class Home extends CI_Controller{
         
         $q["id_servicio"]   =  $id_servicio;
         $api                = "servicio/visitas/format/json/";
-        $this->principal->api("q", $api, $q, 'json', 'PUT');    
+        $this->principal->api( $api, $q, 'json', 'PUT');    
     }
 }

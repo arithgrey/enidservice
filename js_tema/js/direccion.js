@@ -12,6 +12,7 @@ function auto_completa_direccion(){
 /**/
 function response_auto_complete_direccion(data){
 
+	
 	if(data.resultados >0){
 		llenaelementoHTML(".place_colonias_info" , data.colonias);				
 		$(".parte_colonia_delegacion").show();			

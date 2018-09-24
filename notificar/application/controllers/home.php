@@ -38,11 +38,13 @@ class Home extends CI_Controller{
     }
     /**/
     function carga_servicio_por_recibo($q){
-        return $this->principal->api("q" , "tickets/servicio_recibo/format/json/", $q);
+        $api =  "tickets/servicio_recibo/format/json/";
+        return $this->principal->api( $api, $q);
     }
     /**/
     function get_forma_pago(){
+        $api = "cuentas/forma_pago/format/json/";
         return 
-        $this->principal->api("q" , "cuentas/forma_pago/format/json/");
+        $this->principal->api( $api);
     }   
 }

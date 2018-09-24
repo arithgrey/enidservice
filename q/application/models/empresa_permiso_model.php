@@ -11,7 +11,7 @@ class Empresa_permiso_model extends CI_Model{
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get'empresa_permiso')->result_array();
+        return $this->db->get('empresa_permiso')->result_array();
   }
   
 }

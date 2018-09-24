@@ -13,7 +13,9 @@ var direccion ="";
 var option =[];
 $(document).ready(function(){
 
+	$(".base_compras").hide();
 	$(".nav-sidebar").hide();
+	$(".base_paginas_extra").hide();
 	recorrepage(".contenedor_compra");	
 	$(".form-miembro-enid-service").submit(registra_afiliado);
 
@@ -25,6 +27,7 @@ $(document).ready(function(){
 
 	$(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
 	$(".telefono").keyup(quita_espacios_en_telefono);
+
 
 });
 /**/

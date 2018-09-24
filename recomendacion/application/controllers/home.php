@@ -77,17 +77,17 @@ class Home extends CI_Controller{
     private function busqueda_recomendacion($q){        
 
         $api =  "valoracion/usuario/format/json/";        
-        return $this->principal->api("q", $api, $q); 
+        return $this->principal->api( $api, $q); 
     }    
     /**/
     private function resumen_valoraciones_vendedor($q){     
 
         $api    =  "valoracion/resumen_valoraciones_vendedor/format/json/"; 
-        return  $this->principal->api("q" , $api , $q);                  
+        return  $this->principal->api( $api , $q);                  
     }    
     private function get_paginacion($q){
         $api    =  "producto/paginacion/format/json/"; 
-        return $this->principal->api("q" , $api , $q);  
+        return $this->principal->api( $api , $q);  
     }
     /**/
     private function notifica_lectura($id_usuario , $id_usuario_valoracion){
@@ -95,7 +95,7 @@ class Home extends CI_Controller{
         if($id_usuario ==  $id_usuario_valoracion) {
             $q["id_usuario"] = $id_usuario;
             $api ="valoracion/lectura/format/json/";
-            $this->principal->api("q", $api, $q, 'json', 'PUT');
+            $this->principal->api( $api, $q, 'json', 'PUT');
         }                
     }
     /***/

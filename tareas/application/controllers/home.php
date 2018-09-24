@@ -42,13 +42,13 @@ class Home extends CI_Controller{
     function get_estados($q=[]){
 
         $api = "locaciones/get/format/json/";
-        return $this->principal->api("q", $api ,$q);
+        return $this->principal->api( $api ,$q);
     }
     /**/    
     function get_tipos_negocios($q=[]){
 
         $api = "tipos_negocios/all/format/json/";
-        return $this->principal->api("q", $api ,$q);
+        return $this->principal->api( $api ,$q);
     }
 
        

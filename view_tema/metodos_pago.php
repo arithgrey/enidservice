@@ -1,4 +1,4 @@
-        <div class="row">
+        <div class="row info_metodos_pago">
             <div class="col-lg-10">
                 <div class="col-lg-6 ">
                 <table>

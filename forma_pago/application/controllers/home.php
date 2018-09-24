@@ -47,7 +47,7 @@ class Home extends CI_Controller{
         
         $q      = ['id_recibo' =>  $id_recibo ];
         $api    = "recibo/resumen_desglose_pago";
-        return $this->principal->api("q" , $api , $q , "html");
+        return $this->principal->api( $api , $q , "html");
     }
 
 }

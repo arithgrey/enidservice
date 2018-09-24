@@ -104,7 +104,7 @@ class Archivo extends REST_Controller{
     
     function notifica_producto_imagen($q){
         $api = "servicio/status_imagen/format/json/";
-        return $this->principal->api("q" , $api , $q , "json", "PUT");
+        return $this->principal->api( $api , $q , "json", "PUT");
     }
     
 }?>

@@ -4,8 +4,24 @@
 		"selected_items":
 		[
 			[
+				"res",
+				"respuesta_model"
+			],
+			[
+				"repson",
+				"response_model"
+			],
+			[
+				"para",
+				"param"
+			],
+			[
+				"num",
+				"num_pendientes"
+			],
+			[
 				"id_",
-				"id_imagen"
+				"id_ticket"
 			],
 			[
 				"pa",
@@ -18,14 +34,6 @@
 			[
 				"id",
 				"id_direccion"
-			],
-			[
-				"para",
-				"params"
-			],
-			[
-				"res",
-				"result_array"
 			],
 			[
 				"que",
@@ -471,67 +479,6 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "function insert_imagen_servicio($param){\n              \n    $id_servicio  = $param[\"servicio\"];\n    $id_imagen    = $this->insert_img($param , 1 );          \n    $params       = [ \"id_imagen\"   =>  $id_imagen , \"id_servicio\" =>  $id_servicio];\n    return  $this->insert(\"imagen_servicio\" ,  $params , 1);\n    \n}",
-			"settings":
-			{
-				"buffer_size": 311,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "q/application/controllers/api/tickets.php",
-			"settings":
-			{
-				"buffer_size": 10979,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "q/application/models/tickets_model.php",
-			"settings":
-			{
-				"buffer_size": 10395,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "q/application/views/tickets/detalle.php",
-			"settings":
-			{
-				"buffer_size": 2651,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "q/application/helpers/valoracion_helper.php",
-			"settings":
-			{
-				"buffer_size": 12237,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "portafolio/application/models/ticketsmodel.php_",
-			"settings":
-			{
-				"buffer_size": 18976,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "portafolio/application/controllers/api/tickets.php_",
-			"settings":
-			{
-				"buffer_size": 5489,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -590,154 +537,152 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/q",
-		"/var/www/html/inicio/q/application",
-		"/var/www/html/inicio/q/application/controllers",
-		"/var/www/html/inicio/q/application/helpers",
 		"/var/www/html/inicio/search",
 		"/var/www/html/inicio/search/application",
 		"/var/www/html/inicio/search/application/controllers"
 	],
 	"file_history":
 	[
-		"/var/www/html/inicio/q/application/helpers/tickets_helper.php",
-		"/var/www/html/inicio/q/application/models/tickets_model.php",
-		"/var/www/html/inicio/q/application/models/imagen_servicio_model.php",
+		"/var/www/html/inicio/helpers/enid_helper.php",
+		"/var/www/html/inicio/msj/application/controllers/api/cron.php",
+		"/var/www/html/inicio/msj/application/controllers/api/emp.php",
+		"/var/www/html/inicio/librerias/principal.php",
+		"/var/www/html/inicio/tag/application/controllers/api/producto.php",
+		"/var/www/html/inicio/q/application/models/cobranza.php_",
+		"/var/www/html/inicio/q/application/controllers/api/valoracion.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
+		"/var/www/html/inicio/q/application/controllers/api/tickets.php",
+		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
+		"/var/www/html/inicio/q/application/controllers/api/respuesta.php",
+		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
+		"/var/www/html/inicio/q/application/controllers/api/productos.php_",
+		"/var/www/html/inicio/q/application/controllers/api/negocio.php",
+		"/var/www/html/inicio/q/application/controllers/api/codigo_postal.php",
+		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
+		"/var/www/html/inicio/producto/application/controllers/home.php",
+		"/var/www/html/inicio/portafolio/application/controllers/api/tickets.php_",
+		"/var/www/html/inicio/portafolio/application/controllers/api/portafolio.php_",
+		"/var/www/html/inicio/planes_servicios/application/controllers/inicio.php",
+		"/var/www/html/inicio/persona/application/controllers/api/equipo.php",
+		"/var/www/html/inicio/pagos/application/controllers/api/cobranza.php_",
+		"/var/www/html/inicio/notificar/application/controllers/home.php",
+		"/var/www/html/inicio/msj/application/controllers/api/pregunta.php",
+		"/var/www/html/inicio/msj/application/controllers/api/cobranza.php",
+		"/var/www/html/inicio/base/application/controllers/api/servicio.php_",
+		"/var/www/html/inicio/recomendacion/application/controllers/home.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario_direccion.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario_deseo.php",
+		"/var/www/html/inicio/q/application/controllers/api/tarea.php",
+		"/var/www/html/inicio/q/application/controllers/api/saldos.php",
+		"/var/www/html/inicio/q/application/controllers/api/pregunta.php",
+		"/var/www/html/inicio/q/application/controllers/api/contacto.php",
+		"/var/www/html/inicio/q/application/controllers/api/clasificacion.php",
+		"/var/www/html/inicio/msj/application/controllers/api/areacliente.php",
+		"/var/www/html/inicio/movimientos/application/controllers/inicio.php",
+		"/var/www/html/inicio/login/application/controllers/api/sess.php",
+		"/var/www/html/inicio/lista_deseos/application/controllers/home.php",
+		"/var/www/html/inicio/area_cliente/application/controllers/home.php",
+		"/var/www/html/inicio/administracion_cuenta/application/controllers/api/cambiopasswordcontrolador.php_",
+		"/var/www/html/inicio/search/application/controllers/home.php",
+		"/var/www/html/inicio/tareas/application/controllers/home.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/controllers/inicio.php",
+		"/var/www/html/inicio/contact/application/controllers/home.php",
+		"/var/www/html/inicio/desarrollo/application/controllers/inicio.php",
+		"/var/www/html/inicio/faq/application/controllers/home.php",
+		"/var/www/html/inicio/forma_pago/application/controllers/home.php",
+		"/var/www/html/inicio/imgs/application/controllers/enid.php",
+		"/var/www/html/inicio/imgs/application/controllers/api_/archivo.php_",
+		"/var/www/html/inicio/msj/application/controllers/api/mailrest.php",
+		"/var/www/html/inicio/pregunta/application/controllers/home.php",
+		"/var/www/html/inicio/procesar/application/controllers/home.php",
 		"/var/www/html/inicio/q/application/controllers/api/archivo.php",
-		"/var/www/html/inicio/q/application/controllers/api/imagen_servicio.php",
+		"/var/www/html/inicio/q/application/controllers/api/funcionalidad.php",
+		"/var/www/html/inicio/q/application/controllers/api/mail.php",
+		"/var/www/html/inicio/q/application/controllers/api/productividad.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario_clasificacion.php",
+		"/var/www/html/inicio/reporte_enid/application/controllers/inicio.php",
+		"/var/www/html/inicio/tag/application/controllers/api/sugerencia.php",
+		"/var/www/html/inicio/valoracion/application/controllers/home.php",
+		"/var/www/html/inicio/q/application/views/tickets/detalle.php",
+		"/var/www/html/inicio/q/application/models/clasificacion_model.php",
+		"/var/www/html/inicio/q/application/helpers/tickets_helper.php",
+		"/var/www/html/inicio/q/application/controllers/api/privacidad_usuario.php",
+		"/var/www/html/inicio/q/application/models/tareasmodel.php",
+		"/var/www/html/inicio/q/application/models/privacidad_usuario_model.php",
+		"/var/www/html/inicio/persona/application/views/equipo/miembros.php",
+		"/var/www/html/inicio/q/application/helpers/valoracion_helper.php",
+		"/var/www/html/inicio/q/application/models/productividad_usuario_model.php",
+		"/var/www/html/inicio/librerias/sessionclass.php",
+		"/var/www/html/inicio/q/application/models/imagen_usuario_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/imagen_usuario.php",
+		"/var/www/html/inicio/administracion_cuenta/application/views/micuenta/info_usuario.php",
 		"/var/www/html/inicio/q/application/controllers/api/img.php",
-		"/var/www/html/inicio/imgs_/application/controllers/enid.php",
-		"/var/www/html/inicio/js_tema/administracion_cuenta/principal.js",
+		"/var/www/html/inicio/q/application/models/respuesta_model.php",
 		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
 		"/var/www/html/inicio/js_tema/js/main.js",
-		"/var/www/html/inicio/js_tema/repo_enid/principal.js",
+		"/var/www/html/inicio/q/application/controllers/api/respon.php",
+		"/var/www/html/inicio/q/application/models/response_model.php",
+		"/var/www/html/inicio/base/application/models/serviciosmodel.php_",
+		"/var/www/html/inicio/portafolio/application/models/ticketsmodel.php_",
+		"/var/www/html/inicio/q/application/models/tickets_model.php",
 		"/var/www/html/inicio/js_tema/usuarios_enid/proyectos_persona.js",
+		"/var/www/html/inicio/q/application/models/imagen_servicio_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/imagen_servicio.php",
+		"/var/www/html/inicio/imgs_/application/controllers/enid.php",
+		"/var/www/html/inicio/js_tema/administracion_cuenta/principal.js",
+		"/var/www/html/inicio/js_tema/repo_enid/principal.js",
 		"/var/www/html/inicio/q/application/models/img_model.php",
 		"/var/www/html/inicio/system/database/DB_query_builder.php",
 		"/var/www/html/inicio/system/libraries/Upload.php",
-		"/var/www/html/inicio/helpers/enid_helper.php",
-		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
 		"/var/www/html/inicio/imgs/application/models/img_model.php",
 		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
 		"/var/www/html/inicio/q/application/models/pregunta_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/valoracion.php",
-		"/var/www/html/inicio/msj/application/controllers/api/pregunta.php",
-		"/var/www/html/inicio/q/application/controllers/api/pregunta.php",
 		"/var/www/html/inicio/q/application/models/pregunta_servicio_model.php",
 		"/var/www/html/inicio/q/application/controllers/api/pregunta_servicio.php",
 		"/var/www/html/inicio/js_tema/pregunta/principal.js",
 		"/var/www/html/inicio/q/application/models/direccion_model.php",
 		"/var/www/html/inicio/q/application/controllers/api/direccion.php",
-		"/var/www/html/inicio/q/application/controllers/api/codigo_postal.php",
 		"/var/www/html/inicio/q/application/views/proyecto/domicilio_envio.php",
 		"/var/www/html/inicio/q/application/views/proyecto/domicilio.php",
 		"/var/www/html/inicio/js_tema/js/direccion.js",
 		"/var/www/html/inicio/q/application/models/codigo_postal_model.php",
-		"/var/www/html/inicio/producto/application/controllers/home.php",
 		"/var/www/html/inicio/q/application/models/usuario_perfil_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
 		"/var/www/html/inicio/q/application/controllers/api/usuario_perfil.php",
 		"/var/www/html/inicio/q/application/models/talla_model.php",
 		"/var/www/html/inicio/q/application/controllers/api/talla.php",
 		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
-		"/var/www/html/inicio/imgs/application/controllers/enid.php",
-		"/var/www/html/inicio/base/application/models/serviciosmodel.php_",
-		"/var/www/html/inicio/search/application/controllers/home.php",
 		"/var/www/html/inicio/producto/application/libraries/servicio.php_",
 		"/var/www/html/inicio/administracion_cuenta/index.php",
-		"/var/www/html/inicio/q/application/models/clasificacion_model.php",
 		"/var/www/html/inicio/desarrollo/application/views/desarrollo/menu.php",
 		"/var/www/html/inicio/view_tema/formularios/busqueda_tickets.php",
 		"/var/www/html/inicio/q/application/controllers/api/departamento.php",
-		"/var/www/html/inicio/desarrollo/application/controllers/inicio.php",
 		"/var/www/html/inicio/q/application/controllers/api/perfiles.php",
-		"/var/www/html/inicio/lista_deseos/application/controllers/home.php",
-		"/var/www/html/inicio/librerias/principal.php",
 		"/var/www/html/inicio/base/application/controllers/api/base.php_",
 		"/var/www/html/inicio/desarrollo/application/views/empresas_enid.php",
 		"/var/www/html/inicio/debug/debug.log",
 		"/var/www/html/inicio/q/application/models/desarrollomodel.php",
 		"/var/www/html/inicio/q/application/controllers/api/desarrollo.php",
-		"/var/www/html/inicio/portafolio/application/models/ticketsmodel.php_",
-		"/var/www/html/inicio/q/application/controllers/api/tickets.php",
-		"/var/www/html/inicio/portafolio/application/controllers/api/tickets.php_",
-		"/var/www/html/inicio/q/application/controllers/api/productividad.php",
 		"/var/www/html/inicio/q/application/views/servicio/detalle.php",
 		"/var/www/html/inicio/q/application/models/persona_model.php",
-		"/var/www/html/inicio/q/application/models/productividad_usuario_model.php",
 		"/var/www/html/inicio/producto/application/views/home.php",
 		"/var/www/html/inicio/q/application/models/usuario_deseo_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario_deseo.php",
 		"/var/www/html/inicio/producto/application/js/principal.js",
 		"/var/www/html/inicio/js_tema/administracion_cuenta/img.js",
 		"/var/www/html/inicio/q/application/models/usuario_model.php",
-		"/var/www/html/inicio/q/application/models/privacidad_usuario_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/privacidad_usuario.php",
 		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
-		"/var/www/html/inicio/q/application/models/perfil_recurso_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/privacidad.php",
-		"/var/www/html/inicio/q/application/models/privacidad_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/funcionalidad.php",
-		"/home/arithgrey/Documentos/inicio/producto/application/libraries/servicio.php",
-		"/home/arithgrey/Documentos/inicio/q/application/models/servicio_model.php",
-		"/var/www/html/inicio/base/application/views/privacidad/conceptos.php",
-		"/var/www/html/inicio/q/application/models/funcionalidad_model.php",
-		"/home/arithgrey/Documentos/inicio/base/application/models/privacidad_model.php",
-		"/var/www/html/inicio/q/application/models/metakeyword_model.php",
-		"/var/www/html/inicio/base/application/controllers/api/servicio.php_",
-		"/var/www/html/inicio/q/application/controllers/api/clasificacion.php",
-		"/var/www/html/inicio/q/application/controllers/api/metakeyword.php",
-		"/var/www/html/inicio/q/application/helpers/metakeyword_helper.php",
-		"/var/www/html/inicio/q/application/helpers/recibo_helper.php",
-		"/var/www/html/inicio/js_tema/planes_servicios/principal.js",
-		"/var/www/html/inicio/js_tema/area_cliente/cobranza.js",
-		"/var/www/html/inicio/system/libraries/Session/drivers/Session_database_driver.php",
-		"/var/www/html/inicio/q/application/models/recibo_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
-		"/var/www/html/inicio/pagos/application/helpers/proyectos_helper.php",
-		"/var/www/html/inicio/q/application/controllers/api/status_enid_service.php",
-		"/var/www/html/inicio/contact/application/controllers/home.php",
-		"/var/www/html/inicio/q/application/controllers/api/contacto.php",
-		"/var/www/html/inicio/q/application/controllers/api/respuesta.php",
-		"/var/www/html/inicio/js_tema/area_cliente/proyectos_persona.js",
-		"/var/www/html/inicio/q/application/helpers/valoracion_helper.php",
-		"/var/www/html/inicio/q/application/models/respuesta_model.php",
-		"/var/www/html/inicio/q/application/helpers/pregunta_helper.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario_direccion.php",
-		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
-		"/var/www/html/inicio/q/application/models/proyecto_persona_forma_pago_direccion_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php",
-		"/var/www/html/inicio/pagos/application/controllers/api/cobranza.php_",
-		"/var/www/html/inicio/q/application/views/proyecto/lista_version_cliente.php",
-		"/var/www/html/inicio/q/application/models/status_enid_service_model.php",
-		"/var/www/html/inicio/msj/application/controllers/api/areacliente.php",
-		"/var/www/html/inicio/q/application/models/usuario_direccion_model.php",
-		"/var/www/html/inicio/portafolio/application/models/proyectomodel.php_",
-		"/var/www/html/inicio/portafolio/application/controllers/api/portafolio.php_",
-		"/var/www/html/inicio/js_tema/procesar/principal.js",
-		"/var/www/html/inicio/procesar/application/views/secciones_2/form_afiliados.php",
-		"/var/www/html/inicio/persona/application/controllers/api/equipo.php",
-		"/var/www/html/inicio/js_tema/planes_servicios/img.js",
-		"/var/www/html/inicio/faq/application/faq/principal.js",
-		"/var/www/html/inicio/js_tema/faq/principal.js",
-		"/var/www/html/inicio/pagos/application/helpers/pagos_helper.php",
-		"/var/www/html/inicio/tag/application/helpers/q_helper.php",
-		"/var/www/html/inicio/q/application/helpers/servicios_helper.php",
-		"/var/www/html/inicio/forma_pago/application/controllers/home.php",
-		"/var/www/html/inicio/msj/application/controllers/api/cobranza.php",
-		"/var/www/html/inicio/tag/application/controllers/api/producto.php",
-		"/var/www/html/inicio/tag/application/controllers/api/sugerencia.php"
+		"/var/www/html/inicio/q/application/models/perfil_recurso_model.php"
 	],
 	"find":
 	{
-		"height": 43.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
 		"height": 116.0,
 		"where_history":
 		[
+			"",
+			"*.php",
 			"",
 			"*.js",
 			"*.php",
@@ -813,6 +758,76 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"$this->principal->api(",
+			"$this->principal->api(\"tag\" ,",
+			"API",
+			"$this->principal->api(",
+			"$this->principal->api('q'",
+			"$this->principal->api(,",
+			"$this->principal->api( ,",
+			"$this->principal->api(\"q\"",
+			"metricas_productos_solicitados_GET",
+			"metricas_productos_solicitados",
+			"valida_mostrar_tareas",
+			"ticket_GET",
+			"tarea/tareas_ticket",
+			"tareas_ticket",
+			"get_tareas_ticket",
+			"$data[\"info_tarea",
+			"$data[\"info_tarea\"]",
+			"valida_mostrar_tareas",
+			"get_terminos_privacidad_productos",
+			"get_terminos_privacidad_usuario",
+			"servicio_GET",
+			"get_padre_tipo",
+			"categorias_servicios",
+			"categorias_servicios_GET",
+			"get_categorias_servicios",
+			"getperfiles",
+			"get_notificaciones_usuario_perfil",
+			"get_perfil_usuario",
+			"get_perfil_usuario}",
+			"get_perfil_usuario",
+			"imagen_usu",
+			"get_img_usuario",
+			"imagen_usuario",
+			"get_img_usuario",
+			"/index.php/api/respuesta/index/format/json/",
+			"respuesta_model",
+			"tarea/respuesta",
+			"index",
+			"respuesta_POST",
+			"index_POST",
+			"registr",
+			"$param[\"mensaje\"];",
+			"tickets/respuesta/format/json/",
+			"registra_respuesta",
+			"insert_tarea",
+			":insert_tarea",
+			"get_pendientes_ticket",
+			"num_tareas_pendientes",
+			"SELECT count(*)num_tareas_pendientes",
+			"get_tareas_ticket",
+			"valida_tareas_pendientes",
+			"tarea/nueva",
+			"insert_tarea",
+			"tarea/nueva",
+			"index",
+			"insert_tarea",
+			"valida_tareas_pendientes",
+			"valida_tareas_pendientes+",
+			"registra_respuesta",
+			"respuesta_POST",
+			"formulario_respuesta",
+			"valida_check_tarea",
+			"valida_tipo_usuario_tarea",
+			"get_tareas_ticket",
+			"tareas_ticket/",
+			"get_tareas_ticket",
+			"tareas_ticket",
+			"get_tareas_ticket",
+			"tickets/detalle",
+			"ticket/detalle",
 			"valida_mostrar_tareas",
 			"crea_tabla_resumen_ticket",
 			"valida_mostrar_tareas",
@@ -870,77 +885,7 @@
 			"crea_usuario",
 			"primer_orden",
 			"get_imagenes_productos",
-			"construye_seccion_imagen_lateral",
-			"=",
-			"print_r",
-			"add_tallas",
-			"get_talla_id",
-			"add_tallas",
-			"talla",
-			"get_tallas",
-			"vista",
-			"get_img",
-			"costruye_imagen",
-			"get_img_servicio",
-			"construye_img_format",
-			"get_img_servicio",
-			"img_model",
-			"get_img_servicio",
-			"servicio_GET",
-			"servicio",
-			"imagen_servicio",
-			"$_num",
-			"temp",
-			"get_clasificaciones_disponibles",
-			"function get",
-			"get",
-			"create_productos_disponibles",
-			"q_GET",
-			"busqueda_producto_por_palabra_clave",
-			"=",
-			"get_departamentos_enid",
-			"departamentos",
-			"get_departamentos",
-			"departamentos",
-			"get_departamentos_enid",
-			"tickets/ticket_desarrollo/format/json",
-			"create_tmp_tareas_tickets",
-			"get_tickets_desarrollo",
-			"ticket_desarrollo",
-			"envios_a_validar_enid_service",
-			"get_perfil_usuario",
-			"get_notificaciones_usuario_perfil",
-			"envios_a_validar_enid_service",
-			"index.php/api/img_controller/form_img_user/format/json/",
-			"editar_direccion_persona",
-			"procesa_deseo",
-			"add_lista_deseos",
-			"lista_deseos_PU",
-			"lista_deseos",
-			"agregar_a_lista_deseos",
-			"a_enid_blue agregar_a_lista_deseos",
-			"get_productos_deseados_usuario",
-			"usuario",
-			"lista_deseos",
-			"get_productos_deseados_usuario",
-			"usuario_deseo",
-			"get_productos_deseados_usuario",
-			"get_lista_deseos",
-			"lista_deseos",
-			"q/index.php/api/usuario_deseo/lista_deseos/format/json/",
-			"delete",
-			"asociar_concepto_privacidad_usuario",
-			"privacidad_usuario",
-			"function delete",
-			"q/index.php/api/privacidad/concepto/format/json/",
-			"asociar_concepto_privacidad_usuario",
-			"/api/privacidad/conceptos/format/json/",
-			"conceptos_por_funcionalidad_usuario",
-			"add_conceptos",
-			"get_conceptos_usuario",
-			"conceptos_usuario",
-			"get_conceptos_usuario",
-			"evalua_acciones_modalidad_anteriores"
+			"construye_seccion_imagen_lateral"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -948,6 +893,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"$this->principal->api(",
 			"../q",
 			"q/index.php/api/codigo_postal/direccion_envio_pedido/",
 			"function q_up",
@@ -964,221 +910,14 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 311,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								311,
-								311
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "q/application/controllers/api/tickets.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10979,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								751,
-								751
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "q/application/models/tickets_model.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10395,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2557,
-								2557
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 994.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "q/application/views/tickets/detalle.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2651,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								133,
-								133
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "q/application/helpers/valoracion_helper.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 12237,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1687,
-								1687
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1192.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "portafolio/application/models/ticketsmodel.php_",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 18976,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								975,
-								975
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 332.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "portafolio/application/controllers/api/tickets.php_",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5489,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4638,
-								4638
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2598.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -1219,7 +958,7 @@
 	"project": "enid.sublime-project",
 	"replace":
 	{
-		"height": 60.0
+		"height": 52.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1229,12 +968,84 @@
 		"selected_items":
 		[
 			[
-				"ticke",
-				"q/application/controllers/api/tickets.php"
+				"princi",
+				"librerias/principal.php"
+			],
+			[
+				"tickets/detalle.php",
+				"q/application/views/tickets/detalle.php"
+			],
+			[
+				"helpers/tickets_helper.php",
+				"q/application/helpers/tickets_helper.php"
+			],
+			[
+				"tarea",
+				"q/application/controllers/api/tarea.php"
+			],
+			[
+				"tickets_helper.php",
+				"q/application/helpers/tickets_helper.php"
+			],
+			[
+				"privacidad_usuario",
+				"q/application/controllers/api/privacidad_usuario.php"
+			],
+			[
+				"api/servicio.php",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"principal",
+				"librerias/principal.php"
+			],
+			[
+				"productividad_mo",
+				"q/application/models/productividad_usuario_model.php"
 			],
 			[
 				"enid.php",
-				"imgs_/application/controllers/enid.php"
+				"imgs/application/controllers/enid.php"
+			],
+			[
+				"api/im",
+				"q/application/controllers/api/img.php"
+			],
+			[
+				"respuesta_mode",
+				"q/application/models/respuesta_model.php"
+			],
+			[
+				"respuesta",
+				"q/application/controllers/api/respuesta.php"
+			],
+			[
+				"response_",
+				"q/application/models/response_model.php"
+			],
+			[
+				"ser",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"tickets.php",
+				"q/application/controllers/api/tickets.php"
+			],
+			[
+				"tareamo",
+				"q/application/models/tareasmodel.php"
+			],
+			[
+				"ticket",
+				"q/application/controllers/api/tickets.php"
+			],
+			[
+				"tick",
+				"q/application/controllers/api/tickets.php"
+			],
+			[
+				"ticke",
+				"q/application/controllers/api/tickets.php"
 			],
 			[
 				"img.php",
@@ -1397,20 +1208,12 @@
 				"q/application/models/tickets_model.php"
 			],
 			[
-				"tick",
-				"portafolio/application/controllers/api/tickets.php_"
-			],
-			[
 				"ticketsmodel",
 				"portafolio/application/models/ticketsmodel.php_"
 			],
 			[
 				"servicio/detalle.php",
 				"q/application/views/servicio/detalle.php"
-			],
-			[
-				"productividad_mo",
-				"q/application/models/productividad_usuario_model.php"
 			],
 			[
 				"productividad",
@@ -1521,10 +1324,6 @@
 				"q/application/models/pregunta_model.php"
 			],
 			[
-				"respuesta",
-				"q/application/controllers/api/respuesta.php"
-			],
-			[
 				"Respuesta_model",
 				"q/application/models/respuesta_model.php"
 			],
@@ -1605,10 +1404,6 @@
 				"q/application/controllers/api/cobranza.php"
 			],
 			[
-				"princi",
-				"librerias/principal.php"
-			],
-			[
 				"equipo",
 				"persona/application/controllers/api/equipo.php"
 			],
@@ -1683,62 +1478,6 @@
 			[
 				"objetivo",
 				"q/application/controllers/api/objetivos.php"
-			],
-			[
-				"api/servicio.php",
-				"q/application/controllers/api/servicio.php"
-			],
-			[
-				"clasificacion",
-				"q/application/controllers/api/clasificacion.php"
-			],
-			[
-				"api/sugerencia.php",
-				"tag/application/controllers/api/sugerencia.php"
-			],
-			[
-				"basico.php",
-				"tag/application/views/producto/basico.php"
-			],
-			[
-				"basico",
-				"q/application/views/producto/basico.php"
-			],
-			[
-				"valoraciones/form_respuesta",
-				"q/application/views/valoraciones/form_respuesta.php"
-			],
-			[
-				"servi",
-				"q/application/controllers/api/servicio.php"
-			],
-			[
-				"api/respuesta.php",
-				"q/application/controllers/api/respuesta.php"
-			],
-			[
-				"valoraciones/form_respuesta.php",
-				"q/application/views/valoraciones/form_respuesta.php"
-			],
-			[
-				"pregunta_mode",
-				"q/application/models/pregunta_model.php"
-			],
-			[
-				"pregunta_mo",
-				"q/application/models/pregunta_model.php"
-			],
-			[
-				"respuesta_mo",
-				"q/application/models/respuesta_model.php"
-			],
-			[
-				"respuesta.",
-				"q/application/controllers/api/respuesta.php"
-			],
-			[
-				"repuesta",
-				"q/application/controllers/api/respuesta.php"
 			]
 		],
 		"width": 0.0
@@ -1857,7 +1596,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 246.0,
+	"side_bar_width": 210.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

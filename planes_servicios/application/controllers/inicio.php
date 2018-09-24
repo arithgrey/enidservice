@@ -62,14 +62,14 @@ class Inicio extends CI_Controller {
     private function valida_servicio_usuario($q){        
 
         $api = "producto/es_servicio_usuario/format/json/";
-        return  $this->principal->api("tag" , $api , $q );
+        return  $this->principal->api($api , $q );
     }
     /*Regresa el top de servicios*/
     private function get_top_servicios_usuario($id_usuario){    
 
         $q["id_usuario"] = $id_usuario;        
         $api             = "servicio/top_semanal_vendedor/format/json/";
-        return   $this->principal->api("q", $api , $q );                        
+        return   $this->principal->api( $api , $q );                        
     }
     private function get_orden(){
         $response =["Las novedades primero",
@@ -90,6 +90,6 @@ class Inicio extends CI_Controller {
 
         $q          = array();
         $api        =  "ciclo_facturacion/not_ciclo_facturacion/format/json/";
-        return  $this->principal->api("q", $api , $q);         
+        return  $this->principal->api( $api , $q);         
     }
 }

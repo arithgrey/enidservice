@@ -12,7 +12,7 @@ class Emp extends REST_Controller{
     /**/
     function salir_list_email($q){
         $api = "prospecto/salir_list_email";
-        return $this->principal->api("q" , $api , $q , "json" , "PUT");
+        return $this->principal->api( $api , $q , "json" , "PUT");
     }
     function salir_GET(){
 
@@ -32,7 +32,7 @@ class Emp extends REST_Controller{
                 $uri_request          = "cobranza/cancelar_envio_recordatorio/format/json/";
                 $param["v"]           = rand();
                 $response             = 
-                $this->principal->api("pagos", $uri_request, $param, "json", "PUT");
+                $this->principal->api( $uri_request, $param, "json", "PUT");
 
                 /*Agregamos gamifición*/
                 $gamificion     =  $this->aplica_gamification_servicio($param);
@@ -51,7 +51,7 @@ class Emp extends REST_Controller{
                 $gamificion           =  $this->aplica_gamification_servicio($param);
                 /*Se cancela*/    
                 $response             = 
-                $this->principal->api("persona" , $uri_request , $param, "json", "PUT");                
+                $this->principal->api( $uri_request , $param, "json", "PUT");                
                 $this->load->view(  "mensaje/evaluacion" , $param );
                 
                 break;
@@ -70,7 +70,7 @@ class Emp extends REST_Controller{
     private function get_notificacion_pago($q){
 
         $api    =  "notificacion_pago/resumen/format/json/"; 
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }
     /**/
     function notifica_pago_POST(){
@@ -112,7 +112,7 @@ class Emp extends REST_Controller{
     /***/
     private function carga_mensaje_bienvenida_afiliado($param){
         $api =  "emp/mensaje_inicial_afiliado/format/html/"; 
-        return $this->principal->api("msj",$api ,$param, "html");
+        return $this->principal->api($api ,$param, "html");
     }
     /**/
     function mensaje_inicial_afiliado_GET(){
@@ -213,7 +213,7 @@ class Emp extends REST_Controller{
         $data_send["id_proyecto"]       =   38;
         $data_send["id_usuario"]        =   180;                  
         $api = "tickets/ticket/format/json/";          
-        return $this->principal->api("q",  $api , $data_send ,"json" ,"POST");
+        return $this->principal->api(  $api , $data_send ,"json" ,"POST");
         
     }*/
     /**/
@@ -237,7 +237,7 @@ class Emp extends REST_Controller{
         $data_send["id_usuario"]    = 180;
         
         return $param["id_ticket"];
-        $this->principal->api("portafolio", "tarea/buzon", $data_send , "json" ,"POST");
+        $this->principal->api("tarea/buzon", $data_send , "json" ,"POST");
 
 
     }   
@@ -246,7 +246,7 @@ class Emp extends REST_Controller{
         /*solicito los servicio que no han dado respuesta al cliente*/                
         $param      =  $this->get();
         $api        =  "valoracion/servicios_pregunta_sin_contestar/format/json/";
-        $servicios  =  $this->principal->api("q" , $api , $param);
+        $servicios  =  $this->principal->api( $api , $param);
 
         if (count($servicios)>0) {
             /**/
@@ -258,7 +258,7 @@ class Emp extends REST_Controller{
                 $id_pregunta                =  $row["id_pregunta"];                
                 $prm["servicio"]            =  $id_servicio;
                 $api                        =  "usuario/id_usuario_por_id_servicio/format/json/";
-                $usuario                    =  $this->principal->api("q" , $api  , $prm  );
+                $usuario                    =  $this->principal->api( $api  , $prm  );
 
                 $id_usuario                 =   $usuario[0]["id_usuario"];
                 $data_complete[$a]["id"]    =   $id_usuario;
@@ -273,7 +273,7 @@ class Emp extends REST_Controller{
                 $prm["id_pregunta"]         =  $id_pregunta;
                 $api                        =  "valoracion/gamificacion_pregunta/format/json/";
                 $data_complete[$a]["nueva_gamificacion"]    =  
-                $this->principal->api("q" , $api , $prm , "json" , "PUT");
+                $this->principal->api( $api , $prm , "json" , "PUT");
 
                 $a ++;
             }

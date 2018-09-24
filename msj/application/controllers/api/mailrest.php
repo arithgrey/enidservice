@@ -26,7 +26,7 @@ class Mailrest extends REST_Controller{
 	function set_pass($q){
 
 		$api 	=  "usuario/pass/format/json";
-		return  $this->principal->api("q" , $api , $q , 'json', 'PUT');
+		return  $this->principal->api( $api , $q , 'json', 'PUT');
 	}
 	/**/
 }/*Termina rest*/

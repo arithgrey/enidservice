@@ -26,15 +26,34 @@ class pregunta extends REST_Controller{
         }
         $this->response($response);        
     }
+    /*
+    private function envia_pregunta_a_vendedor($q){
+        $api =  "pregunta/pregunta_vendedor/format/json/"; 
+        return $this->principal->api( $api , $q );
+    }
+    */
+    /*
+    function pregunta_POST(){
+
+        $param      =  $this->post();
+        $response   =  $this->registro_pregunta($param);                        
+        $respuesta_notificacion = "";
+        if($response){                                            
+            $respuesta_notificacion = $this->envia_pregunta_a_vendedor($param);
+        }        
+        $this->response($respuesta_notificacion);
+
+    }
+    */
     function agrega_pregunta_servicio($q){
 
         $api = "pregunta_servicio/index";
-        return $this->principal->api("q", $api , $q , "json", "POST");
+        return $this->principal->api( $api , $q , "json", "POST");
     }
-    function index_GET(){
+    function periodo_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->pregunta_model->preguntas($param);
+        $response   =   $this->pregunta_model->num_periodo($param);
         $this->response($response);        
     }
     function buzon_GET(){
@@ -46,8 +65,7 @@ class pregunta extends REST_Controller{
         /*Consulta preguntas hechas con proposito de compras*/
         if($param["modalidad"] ==  1){                                                    
             $preguntas                  = 
-            $this->pregunta_model->get_preguntas_realizadas_a_vendedor($param);
-            
+            $this->pregunta_model->get_preguntas_realizadas_a_vendedor($param);            
             $data_complete["preguntas"] =  $this->add_num_respuestas_preguntas($preguntas);
 
         }else{              
@@ -96,7 +114,7 @@ class pregunta extends REST_Controller{
         
         $q["id_pregunta"] =  $id_pregunta;
         $api              =  "respuesta/num_respuestas_sin_leer/format/json/";
-        return $this->principal->api("q", $api , $q);
+        return $this->principal->api( $api , $q);
     }
     function usuario_por_pregunta_GET(){
 

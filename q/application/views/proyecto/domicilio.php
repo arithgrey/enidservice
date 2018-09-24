@@ -228,9 +228,9 @@
                                                     </div>
 
                                                     <div class="col-lg-12 button_c">
-                                                        <button class="btn text_btn_direccion_envio">
-                                                            Registrar dirección
-                                                        </button>
+                                                        <?=guardar("Registrar dirección" , 
+                                                        ["class"=>"btn text_btn_direccion_envio"])?>
+                                                        
                                                     </div>
                                                  
                                         </div>

@@ -163,9 +163,10 @@
     }
     */
     /**/
-    function insert( $params , $return_id=0){        
-        $insert   = $this->db->insert("usuario", $params);     
-        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    function insert($params , $return_id=0){        
+      
+      $insert   = $this->db->insert("usuario", $params);     
+      return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
     function get_usuario_cliente($param){
 
@@ -313,9 +314,7 @@
         return $result->result_array()[0]["num"];
 
     }      
-    function set_nombre_usuario($param){
-        return $this->q_up("nombre_usuario", $param["nombre_usuario"] , $param["id_usuario"]);
-    }
+    
     function get_usuarios_perfil($param){      
         
         $id_perfil          =   $param["id_perfil"];

@@ -4,6 +4,15 @@
         parent::__construct();        
         $this->load->database();
     }
+    function get($params=[], $params_where =[] , $limit =1){
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("pregunta")->result_array();
+    }
     function q_up($q , $q2 , $id_pregunta){
         return $this->update([$q => $q2 ] , ["id_pregunta" => $id_pregunta ]);
     }
@@ -52,7 +61,7 @@
       
       $params_where = [
         "id_usuario"    =>  $id_usuario ,
-        "leido_cliente" =   0
+        "leido_cliente" =>   0
       ];
       return  $this->get(["COUNT(0)num"] , $params_where )[0]["num"];
     }  
@@ -61,8 +70,8 @@
       $params       =  ["pregunta" => $param["pregunta"] , "id_usuario"  => $param["usuario"]];
       return        $this->insert($params, 1);    
     }
-    function preguntas($param){
-      
+    function num_periodo($param){
+        
         $fecha_inicio   = $param["fecha_inicio"];  
         $fecha_termino  = $param["fecha_termino"];
         $query_get      = 
@@ -181,6 +190,22 @@
       return $data_complete;
       
     }
+    function create_tmp_preguntas_realizadas($flag , $_num , $param){
+        $this->db->query(get_drop("tmp_preguntas_usuario_$_num"));
+
+        if($flag == 0){
+          $id_usuario =  $param["id_usuario"];
+          $query_create = "CREATE TABLE tmp_preguntas_usuario_$_num AS 
+                  SELECT p.* , ps.id_servicio FROM  
+                    pregunta p 
+                    INNER JOIN 
+                    pregunta_servicio ps 
+                    ON p.id_pregunta =  ps.id_pregunta
+                    WHERE p.id_usuario = $id_usuario";
+          $this->db->query($query_create);
+        }     
+    }
+
     function p_tmp_preguntas_realizadas($flag , $_num , $param){
         
         $this->db->query(get_drop("tmp_preguntas_usuario_$_num"));        

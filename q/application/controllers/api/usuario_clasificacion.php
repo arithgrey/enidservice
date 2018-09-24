@@ -1,13 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'../../librerias/REST_Controller.php';
 class usuario_clasificacion extends REST_Controller{      
-      private $id_usuario;
+    private $id_usuario;
     function __construct(){
         parent::__construct();          
         $this->load->model("usuario_clasificacion_model");        
         $this->load->library(lib_def());                    
         $this->id_usuario = $this->principal->get_session("idusuario");
 
+    }
+    function agregan_clasificaciones_periodo_GET(){
+
+        $param      =   $this->get();
+        $response   =   $this->usuario_clasificacion_model->agregan_clasificaciones_periodo($param);
+        $this->response($response);        
     }
     function interes_PUT(){
 
@@ -56,7 +62,7 @@ class usuario_clasificacion extends REST_Controller{
     function get_clasificaciones_servicio($q){     
         
         $api =  "servicio/tallas/format/json/";
-        return $this->principal->api("q" , $api , $q);
+        return $this->principal->api( $api , $q);
     }   
     /**/ 
 

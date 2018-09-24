@@ -69,7 +69,7 @@ class Servicio extends REST_Controller{
   */
   function set_metakeyword_usuario($q){
     $api =  "metakeyword/usuario";
-    return $this->principal->api("q" , $api , $q , "json" , "PUT");
+    return $this->principal->api( $api , $q , "json" , "PUT");
   }
   function metakeyword_usuario_DELETE(){
 
@@ -90,7 +90,7 @@ class Servicio extends REST_Controller{
   function get_categorias_servicios($q){
 
     $api = "clasificacion/categorias_servicios/format/json";
-    return $this->principal->api("q", $api , $q);
+    return $this->principal->api( $api , $q);
   }
   /**/
   function lista_categorias_servicios_GET(){
@@ -146,12 +146,12 @@ class Servicio extends REST_Controller{
   function get_clasificacion_padre_nivel($q){
 
       $api = "clasificacion/clasificacion_padre_nivel/format/json/";
-      return $this->principal->api("q" , $api , $q);
+      return $this->principal->api( $api , $q);
   }
   function get_coincidencia_servicio($q){
 
     $api  = "clasificacion/coincidencia_servicio/format/json";
-    return  $this->principal->api("q" , $api , $q);
+    return  $this->principal->api( $api , $q);
   }   
   /**/
   function get_coincidencias_busqueda($param){
@@ -308,7 +308,7 @@ class Servicio extends REST_Controller{
     
     $q["id_usuario"]  =  $id_usuario;
     $api              = "usuario/ultima_publicacion";
-    return $this->principal->api("q" , $api , $q , "json" , "PUT");
+    return $this->principal->api( $api , $q , "json" , "PUT");
   }
   /**/
   function create_tags($param){
@@ -383,7 +383,7 @@ class Servicio extends REST_Controller{
 
     $q["id_clasificacion"] =  $id_clasificacion;
     $api =  "clasificacion/nombre/format/json/";
-    return $this->principal->api("q" , $api , $q);      
+    return $this->principal->api( $api , $q);      
   }
   /*
   function terminos_q_GET(){
@@ -443,7 +443,7 @@ class Servicio extends REST_Controller{
   function get_porcentaje_comision($q){    
 
       $api =  "cobranza/comision/format/json/";
-      return $this->principal->api("q" , $api, $q );
+      return $this->principal->api( $api, $q );
   }
   /**/
   function especificacion_GET(){
@@ -595,28 +595,28 @@ class Servicio extends REST_Controller{
         $q["in_session"] =  $this->get_option("in_session");
         $q["id_usuario"] =  $this->get_option("id_usuario");        
         $api  =  "servicio/crea_vista_producto/format/html/";
-        return $this->principal->api("q" ,  $api , $q , "html" );  
+        return $this->principal->api(  $api , $q , "html" );  
   }
   function get_servicios_empresa($q){
     $q["es_empresa"] = 1;
     $api  =  "servicio/q/format/json/";
-    return  $this->principal->api("q" ,  $api , $q);  
+    return  $this->principal->api(  $api , $q);  
   }
   /**/
   function get_not_ciclo_facturacion($q){
 
     $api =  "ciclo_facturacion/not_ciclo_facturacion/format/json/";
-    return $this->principal->api("q", $api , $q  );      
+    return $this->principal->api( $api , $q  );      
   } 
   /**/
   function get_info_ciclo_facturacion_servicio($q){
     $api =  "cobranza/calcula_costo_envio/format/json/";
-    return $this->principal->api("q", $api , $q  );          
+    return $this->principal->api( $api , $q  );          
   }
   /**/  
   function get_costo_envio($q){
     $api = "cobranza/calcula_costo_envio/format/json/";
-    return $this->principal->api("q", $api , $q  );                    
+    return $this->principal->api( $api , $q  );                    
   }
   /**/
   function carga_clasificaciones($servicio){
@@ -644,14 +644,14 @@ class Servicio extends REST_Controller{
     
     $q["id_clasificacion"] =  $id_clasificacion;
     $api = "clasificacion/id/format/json/";
-    return $this->principal->api("q", $api , $q  );      
+    return $this->principal->api( $api , $q  );      
   }
   /**/
   function carga_imagenes_servicio($id_servicio){
 
     $q["id_servicio"] =  $id_servicio;
     $api = "imagen_servicio/servicio/format/json/";
-    return $this->principal->api("q", $api , $q  );              
+    return $this->principal->api( $api , $q  );              
   }  
   /**/
   function terminos_servicios_POST(){
@@ -725,21 +725,21 @@ class Servicio extends REST_Controller{
     
     $q["id_usuario"] =  $id_usuario;
     $api = "usuario/entregas_en_casa/format/json/";
-    return $this->principal->api("q", $api , $q  );         
+    return $this->principal->api( $api , $q  );         
   }
   /**/
   private function get_terminos_privacidad_productos($id_usuario){
     
     $q["id_usuario"] =  $id_usuario;
     $api = "privacidad_usuario/servicio/format/json/";
-    return $this->principal->api("q", $api , $q  );         
+    return $this->principal->api( $api , $q  );         
   }  
   /**/
   private function usuario_tiene_numero($id_usuario){
     
     $q["id_usuario"] =  $id_usuario;
     $api             = "usuario/has_phone/format/json/";
-    return   $this->principal->api("q", $api , $q );            
+    return   $this->principal->api( $api , $q );            
   }    
   /**/
   function talla_GET(){
@@ -811,7 +811,7 @@ class Servicio extends REST_Controller{
   private function get_talla_id($id_talla , $parametros){
     $param["id"]          =   $id_talla;
     $param["fields"]      =   $parametros;
-    return $this->principal->api("q", "talla/id/format/json/" , $param  );
+    return $this->principal->api( "talla/id/format/json/" , $param  );
   }
   /**/
   
@@ -820,7 +820,7 @@ class Servicio extends REST_Controller{
     $api                  =  
     "servicio/gamificacion_usuario_servicios/format/json/";
     $param["valoracion"]  = $valoracion;
-    return   $this->principal->api( "base", $api , $param, "json" , "PUT");
+    return   $this->principal->api(  $api , $param, "json" , "PUT");
   }
   
   /**/
@@ -934,7 +934,7 @@ class Servicio extends REST_Controller{
         /*Se notifica que el usuario cancela su compra*/
         
         $api                            = "usuario/cancelacion_compra/format/json/";
-        $cancelacion_compra             = $this->principal->api("q", $api, $param, "json" , "PUT" );
+        $cancelacion_compra             = $this->principal->api( $api, $param, "json" , "PUT" );
         $response["gamificacion_cancelacion_compra"] = $cancelacion_compra;
         
         /*ahora se baja califición interes compra - Servicio*/
@@ -1063,7 +1063,7 @@ class Servicio extends REST_Controller{
     function add_gamificacion_search($q){
         if(array_key_exists("q", $q) >0 && strlen(trim($q["q"]))>1 ){
             $api =  "metakeyword/gamificacion_search/format/json";
-            $this->principal->api("q" , $api , $q , "json" , "POST");
+            $this->principal->api( $api , $q , "json" , "POST");
         }                    
     }    
 
@@ -1143,6 +1143,12 @@ class Servicio extends REST_Controller{
          
         }       
     } 
+    function num_periodo_GET($param){
+      
+      $param    =  $this->get();
+      $response =  $this->serviciosmodel->num_periodo($param);
+      $this->response($response);
+    }
     function num_anuncios_GET(){
 
       $param    =  $this->get();
@@ -1151,7 +1157,7 @@ class Servicio extends REST_Controller{
     }
     function agrega_metakeyword_catalogo($q){
       $api =  "metakeyword/add";
-      return $this->principal->api( "q", $api , $q , "json"  , "POST");
+      return $this->principal->api( $api , $q , "json"  , "POST");
     }
     function alcance_usuario_GET(){
                 
@@ -1166,6 +1172,11 @@ class Servicio extends REST_Controller{
         $this->load->view("producto/basico" , $data);
     }
 
+    function metricas_productos_solicitados_GET(){
 
+        $param =  $this->get();
+        $data["info_productos"] =  $this->serviciosmodel->get_productos_solicitados($param);
+        $this->load->view("producto/principal" , $data);
+    }    
 }
 ?>

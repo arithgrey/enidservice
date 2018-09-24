@@ -13,7 +13,7 @@ class productos extends REST_Controller{
 
         $q["id"] = $id_servicio;
         $api ="servicio/nombre_servicio/format/json";
-        return $this->principal->api("base" , $api , $q);
+        return $this->principal->api( $api , $q);
     }
 
 
