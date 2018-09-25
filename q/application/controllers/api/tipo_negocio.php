@@ -7,12 +7,11 @@ class Tipo_negocio extends REST_Controller{
         $this->load->library(lib_def());       
   }  
   /**/
-  function all_GET(){
-    
+  function all_GET(){    
     $param    =  $this->get();
-    $response =  $this->tipo_negocio_model->get_all($param);  
-    $this->response($response);
-    
+    $response =  $this->tipo_negocio_model->get([] , [] , 1000]);  
+    $this->response($response);  
   }    
+
 }
 ?>

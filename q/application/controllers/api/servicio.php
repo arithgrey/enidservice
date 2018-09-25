@@ -451,7 +451,8 @@ class Servicio extends REST_Controller{
       $param                    =   $this->get();      
       $this->set_option("id_servicio" ,  $param["id_servicio"]);
       $id_servicio              =   $this->get_option("id_servicio");  
-      $servicio                 =   $this->serviciosmodel->get_info_servicio($param);                  
+      $servicio                 =   
+      $this->serviciosmodel->get([] , ["id_servicio" =>  $param["id_servicio"] ]);
       $data["servicio"]         =   $servicio;
       $this->set_option("servicio" , $servicio);      
       if($servicio[0]["flag_servicio"] ==  0){

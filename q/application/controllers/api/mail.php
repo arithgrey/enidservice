@@ -9,12 +9,18 @@ class Mail extends REST_Controller{
     }
     function reporte_mail_marketing_GET(){        
         
-        $param = $this->get();
-        $email = $this->email_model->get_correos_enviados_accesos($param);        
-        $nuevo_email =  $this->agrega_ventas($email);
-        
-        $data["email"] = $nuevo_email;
-        $this->load->view("enid/actividad_mail_marketing/principal" , $data);                
+
+        $param     = $this->get();
+        $response  = false;
+        if (if_ext($param , 'fecha_inicio,fecha_termino') ) {
+
+            $email          = $this->email_model->get_correos_enviados_accesos($param);                
+            $nuevo_email    =  $this->agrega_ventas($email);        
+            $data["email"]  = $nuevo_email;
+            $this->load->view("enid/actividad_mail_marketing/principal" , $data);                    
+        }else{
+            $this->response($response);    
+        }        
         
     }
     /**/

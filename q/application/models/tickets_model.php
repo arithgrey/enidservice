@@ -4,8 +4,8 @@
         parent::__construct();        
         $this->load->database();
     }
-    private function q_get($params=[], $id){
-      return $this->get($params, ["id_servicio" => $id ] );
+    function q_get($params=[], $id){
+      return $this->get($params, ["id_ticket" => $id ] );
     }
     function get_info_ticket($param){
 
@@ -25,8 +25,8 @@
       $result =  $this->db->query($query_get);
       return  $result->result_array();      
     }
-    function q_up($q , $q2 , $id_usuario){
-      return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);
+    function q_up($q , $q2 , $id){
+      return $this->update([$q => $q2 ] , ["id_ticket" => $id ]);
     }
     function create_tmp_tareas_tickets($flag , $_num , $param ){
 
@@ -50,13 +50,11 @@
     
     }
     function get_tickets_desarrollo($param){
-  
-    $status =  $param["status"];
-    $keyword =$param["keyword"];
-    $_num =  get_random();
-    $this->create_tmp_tareas_tickets(0 , $_num , $param); 
 
-    $query_get =  "SELECT                       
+      $_num =  get_random();
+      $this->create_tmp_tareas_tickets(0 , $_num , $param); 
+
+      $query_get =  "SELECT                       
                       t.id_ticket,
                       t.asunto,
                       t.mensaje,
@@ -74,7 +72,7 @@
                       ON 
                         t.id_ticket =  tp.id_ticket
                     WHERE                    
-                      t.status =  '". $status ."'
+                      t.status =  '". $param["keyword"] ."'
                       AND 
                       d.id_departamento = '".$param["id_departamento"]."'
                       AND 

@@ -163,7 +163,18 @@ class usuario_direccion extends REST_Controller{
         $param      =   $this->post();
         $params     =   ["id_usuario" => $param["id_usuario"] , 'id_direccion' => $param["id_direccion"] ];
         $response   =  $this->usuario_direccion_model->insert($params);
-        $this->response($response);    
+        $this->response($response);        
+    }
+    function activos_con_direcciones_GET(){
+
+        $param      =   $this->get();
+        $response   =   false;
+        
+        if( if_ext($param , 'fecha_inicio,fecha_termino') ){
+            $response   =   $this->usuario_direccion_model->activos_con_direcciones($param);
+            
+        }
+        $this->response($response);            
         
     }
 }?>

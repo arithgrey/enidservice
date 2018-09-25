@@ -23,7 +23,8 @@
           $this->db->where($key , $value);
         }        
         return  $this->db->delete("privacidad_usuario", $params_where);
-    }    
+    }   
+    /* 
     function asociar_concepto_privacidad_usuario($param){
 
         if($param["termino_asociado"] == 0){
@@ -38,6 +39,7 @@
             return  $this->delete($params_where);            
         }
     }
+    */
     function get_terminos_privacidad_usuario($param){
 
         /*

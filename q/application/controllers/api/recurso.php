@@ -9,7 +9,17 @@ class recurso extends REST_Controller{
     function index_POST(){
 
         $param      =  $this->post();
-        $response   =  $this->recurso_model->create($param);
+        $response   =   false;        
+        if(if_ext($param , "nombre ,  urlpaginaweb")){
+            $params = [ 
+              "nombre"          =>  $param["nombre"],
+              "urlpaginaweb"    =>  $param["urlpaginaweb"],
+              "order_negocio"   =>  1,
+              "status"          =>  1,
+              "class"           =>  '' 
+            ];
+            $response   =  $this->recurso_model->insert($param);
+        }        
         $this->response($response);
     }
     function navegacion_GET(){                

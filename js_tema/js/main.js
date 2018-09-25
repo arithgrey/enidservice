@@ -696,3 +696,6 @@ function set_black(array){
 		set_parameter(array[x] , "");
 	}
 }
+var focus_input = function(input){
+	$(input).css("border" , "1px solid rgb(13, 62, 86)");
+}

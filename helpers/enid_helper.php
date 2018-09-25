@@ -891,7 +891,7 @@ function debug($msg, $array = 0)
     //@chmod($filepath, FILE_WRITE_MODE);
     return TRUE;
   }
-    function get_costo_envio($param){
+  function get_costo_envio($param){
     
     
     $flag_envio_gratis =  $param["flag_envio_gratis"];
@@ -915,6 +915,20 @@ function debug($msg, $array = 0)
         $data_complete["costo_envio_vendedor"]);
     }
     return $data_complete;
+  }
+  /**/
+  function if_ext($param , $k=''){
+
+    $keys = explode(",", $k);
+    //print_r($keys);
+    $z    = 1;
+    for ($a=0; $a < count($keys); $a++){     
+      //echo strlen(trim($param[$keys[$a]]));
+      if (!array_key_exists(trim($keys[$a]), $param)  ||  strlen(trim($param[$keys[$a]])) < 3 ){
+          $z  = 0;          
+      }
+    }
+    return $z;
   }
   
 }

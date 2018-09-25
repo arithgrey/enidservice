@@ -134,7 +134,7 @@ class recibo extends REST_Controller{
     function resumen_desglose_pago_GET(){
         
         $param  =  $this->get();                                                
-        $recibo =  $this->recibo_model->get_info_recibo_por_id($param);        
+        $recibo =  $this->recibo_model->q_get([],  $param["id_recibo"] );        
 
         if(count($recibo) >0 ){            
 

@@ -34,6 +34,12 @@
                       email = '".$param["email"]."' LIMIT 1 ";
         return $this->db->query($query_update);
     } 
-
+    function email_enviados_enid_service(){
+        
+      $query_get = 
+      "SELECT  count(0)num_envios FROM prospecto WHERE DATE(fecha_actualizacion) = DATE(CURRENT_DATE())";      
+      return $this->db->query($query_get)->result_array()[0]["num_envios"];    
+    }    
+    
  
 }

@@ -4,21 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }    
-    private function get( $params=[], $params_where =[] , $limit =1){
-        $params = implode(",", $params);
-        $this->db->limit($limit);
-        $this->db->select($params);
-        foreach ($params_where as $key => $value) {
-            $this->db->where($key , $value);
-        }
-        return $this->db->get("")->result_array();
-    }
-    /**/
-    function insert( $params , $return_id=0){                
-        $insert   = $this->db->insert("valoracion", $params);     
-        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-    }    
-    private function update($data =[] , $params_where =[] , $limit =1 ){
+    function update($data =[] , $params_where =[] , $limit =1 ){
 
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
@@ -26,19 +12,33 @@
       $this->db->limit($limit);
       return $this->db->update("valoracion", $data);    
     }
+    function get( $params=[], $params_where =[] , $limit =1 , $order = '', $type_order='DESC'){
+
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+
+        if ($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+        }      
+        return $this->db->get("")->result_array();
+    }
+    /**/
+    function insert( $params , $return_id=0){                
+        $insert   = $this->db->insert("valoracion", $params);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }    
+    
     /**/
     function set_gamificacion($param , $positivo=1 , $valor =1){
-
         $val  =  ($positivo ==  1) ? "valoracion + ".$valor :  "valoracion - ".$valor;
         return $this->q_up("valoracion" , $val , $param["id_servicio"] );        
     }    
     function get_valoraciones($param){
-
-      $id_servicio = $param["id_servicio"];
-      $query_get="SELECT * FROM  valoracion WHERE id_servicio =$id_servicio ORDER BY id_valoracion DESC LIMIT 6";
-      $result =  $this->db->query($query_get);
-      return $result->result_array();
-      
+      return $this->get([], ["id_servicio" => $param["id_servicio"]] , 6 , 'id_valoracion' );          
     }    
     function get_valoraciones_usuario($param){
       $_num =  get_random();
@@ -163,10 +163,7 @@
         $data_complete["sql"] =  $result->result_array();      
       return $data_complete;
         
-    }   
-    
-    
-        
+    }       
     private function create_tmp_servicios_usuario($_num , $flag , $param){
 
       

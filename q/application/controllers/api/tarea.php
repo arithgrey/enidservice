@@ -19,10 +19,20 @@ class Tarea extends REST_Controller{
         
         $param               =  $this->post();
         $param["id_usuario"] =  $this->principal->get_session("idusuario");
-        $response            =  $this->tareasmodel->insert_tarea($param);
-        if ($response == true) {
-            $q = $this->valida_tareas_pendientes($param);
-            $this->set_stado_ticket($q);
+        $response            =  false ;
+
+        if ($param["id_usuario"] > 0 ) {
+
+            $params = [
+                "descripcion"       =>  $param["tarea"] ,
+                "id_ticket"         =>  $param["id_ticket"] ,
+                "usuario_registro"  =>  $param["id_usuario"]
+            ];
+            $response            =  $this->tareasmodel->insert_tarea($param);
+            if ($response == true) {
+                $q = $this->valida_tareas_pendientes($param);
+                $this->set_stado_ticket($q);
+            }    
         }
         $this->response($response);        
     }
@@ -50,9 +60,14 @@ class Tarea extends REST_Controller{
         return $q;
     }  
     function buzon_POST(){
-        
+
         $param =  $this->post();       
-        $response = $this->tareasmodel->insert_tarea($param);
+        $params = [
+            "descripcion"       =>  $param["tarea"] ,
+            "id_ticket"         =>  $param["id_ticket"] ,
+            "usuario_registro"  =>  $param["id_usuario"]
+        ];
+        $response = $this->tareasmodel->insert($params);
         $this->response($response);        
     }
     function ticket_GET(){

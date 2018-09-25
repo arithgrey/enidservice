@@ -15,15 +15,20 @@ class pregunta extends REST_Controller{
         $response   = $this->pregunta_model->set_visto_pregunta($param); 
         $this->response($response);
     }
-    function index_POST(){        
+    function index_POST(){      
+      
         $param          = $this->post();        
-        $id_pregunta    = $this->pregunta_model->create($param); 
-        $response       = [];
+        $response       = false;
+        if( if_ext($param , 'pregunta,usuario') ){
 
-        if ($id_pregunta >0 ) {
-            $param["id_pregunta"] = $id_pregunta;
-            $response             =  $this->agrega_pregunta_servicio($param);    
-        }
+            $q            =  ["pregunta" => $param["pregunta"] , "id_usuario"  => $param["usuario"]];
+            $id_pregunta  = $this->pregunta_model->insert($q, 1);        
+            if ($id_pregunta >0 ) {
+                $param["id_pregunta"] =  $id_pregunta;
+                $response             =  $this->agrega_pregunta_servicio($param);    
+            }
+    
+        }        
         $this->response($response);        
     }
     /*

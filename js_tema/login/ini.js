@@ -19,9 +19,16 @@ $(document).on("ready", function(){
 });
 /*****************************/
 function inicio_session(){
+
+
 	var url 		= get_option("url");
-	var data_send	= { secret:get_option("tmp_password") , "email" : get_option("email") }
-	request_enid( "POST",  data_send , url , response_inicio_session , 1 , before_inicio_session); 
+	var data_send	= { secret:get_option("tmp_password") , "email" : get_option("email") }	
+	if (get_parameter("#mail").length > 5 &&  get_parameter("#pw").length > 5){
+		request_enid( "POST",  data_send , url , response_inicio_session , 1 , before_inicio_session); 
+	}else{
+		focus_input("#email");
+		focus_input("#pw");
+	}
 }
 /**/
 function before_inicio_session(){

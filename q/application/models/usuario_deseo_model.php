@@ -16,7 +16,7 @@
         $this->db->limit($limit);
         return $this->db->update("usuario_deseo", $data);    
     }
-    function get($params=[], $params_where =[] , $limit =1){
+    function get($params=[], $params_where =[] , $limit =1 ,  $order = '', $type_order='DESC'){
         
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -24,19 +24,24 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
+        if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+        }      
         return $this->db->get('usuario_deseo')->result_array();
     }
     function get_num_deseo_servicio_usuario($param){
-        $params_where = ["id_usuario" => $param["id_usuario"] , "id_servicio" =>  $param["id_servicio"]];
-        return   $this->get(["COUNT(0)num"], $params_where)[0]["num"]; 
+        $q      = ["id_usuario" => $param["id_usuario"] , "id_servicio" =>  $param["id_servicio"]];
+        return  $this->get(["COUNT(0)num"], $q)[0]["num"]; 
     }
     function aumenta_deseo($param){
         
         $id_usuario     =  $param["id_usuario"];
         $id_servicio    =  $param["id_servicio"];        
-        $query_update =  "UPDATE usuario_deseo SET num_deseo = num_deseo + 1 WHERE id_usuario = $id_usuario AND  id_servicio = $id_servicio LIMIT 1";
+        $query_update   =  
+        "UPDATE usuario_deseo SET num_deseo = num_deseo + 1 WHERE id_usuario = $id_usuario AND  id_servicio = $id_servicio LIMIT 1";
         return $this->db->query($query_update);
     }   
+    /*
     function add_usuario_deseo($param){
         $params = [
             "id_usuario"    => $param["id_usuario"],
@@ -44,10 +49,8 @@
         ];
         return $this->insert($params);
     }
+    */
     function agregan_lista_deseos_periodo($param){
-
-        $fecha_inicio   = $param["fecha_inicio"];  
-        $fecha_termino  = $param["fecha_termino"];
 
         $query_get ="SELECT 
                         id_usuario 
@@ -56,9 +59,9 @@
                     WHERE
                         DATE(fecha_registro) 
                     BETWEEN 
-                        '".$fecha_inicio."' 
+                        '".$param["fecha_inicio"]."' 
                     AND  
-                        '".$fecha_termino."'                    
+                        '".$param["fecha_termino"]."'                    
                     GROUP 
                     BY 
                     id_usuario";
@@ -68,10 +71,7 @@
 
     }
     function get_productos_deseados_periodo($param){
-            
-        $fecha_inicio   = $param["fecha_inicio"];
-        $fecha_termino  = $param["fecha_termino"];
-
+        
         $query_get ="SELECT 
                         id_servicio ,
                         num_deseo
@@ -80,19 +80,14 @@
                      WHERE 
                         DATE(fecha_registro) 
                     BETWEEN 
-                        '".$fecha_inicio."'
+                        '".$param["fecha_inicio"]."'
                         AND 
-                        '".$fecha_termino."'
+                        '".$param["fecha_termino"]."'
                     ORDER BY num_deseo DESC";
         
-        $result=  $this->db->query($query_get);
-        return  $result->result_array();        
+        return  $this->db->query($query_get)->result_array();        
     }   
-    function get_por_usuario($param){
-            
-        $id_usuario =  $param["id_usuario"];        
-        $query_get ="SELECT id_servicio FROM usuario_deseo WHERE id_usuario = '".$id_usuario."' ORDER BY num_deseo DESC LIMIT 30";        
-        $result=  $this->db->query($query_get);
-        return  $result->result_array();
+    function get_por_usuario($param){        
+        return $this->get(["id_usuario"] , ["id_usuario" => $param["id_usuario"] ] , 30 , 'num_deseo' );
     }
 }

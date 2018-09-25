@@ -24,7 +24,14 @@ class usuario_deseo extends REST_Controller{
         
         $response   =   0;
         if ($this->usuario_deseo_model->get_num_deseo_servicio_usuario($param) == 0 ) {            
-            $response = $this->usuario_deseo_model->add_usuario_deseo($param);
+
+            $params = [
+                "id_usuario"    => $param["id_usuario"],
+                "id_servicio"   => $param["id_servicio"]
+            ];
+            $response =  $this->usuario_deseo_model->insert($params);
+
+            
         }else{
             $response = $this->usuario_deseo_model->aumenta_deseo($param);
         }        

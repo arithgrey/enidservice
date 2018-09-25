@@ -12,18 +12,7 @@
                       WHERE 
                       id_proyecto_persona_forma_pago = $id_recibo";
         return  $this->db->query($query_delete);
-    }
-    function get_by_recibo($param){
-      return $this->q_get([], $param["id_recibo"]);
-    }
-    function agrega_direccion_a_compra($param){
-            
-      $params = [
-        "id_proyecto_persona_forma_pago"  => $param["id_recibo"],
-        "id_direccion"                    => $param["id_direccion"]
-      ];
-      return $this->insert($params);
-    }
+    }    
     function insert( $params , $return_id=0){        
       $insert   = $this->db->insert("proyecto_persona_forma_pago_direccion", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;

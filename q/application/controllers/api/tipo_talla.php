@@ -10,7 +10,7 @@ class tipo_talla extends REST_Controller{
     function index_GET(){
 
         $param      =  $this->get();
-        $response   =  $this->tipo_talla_model->get_all($param);
+        $response   =  $this->tipo_talla_model->get([] , [] , 1000);
         $this->response($response);
     }
     /**/ 

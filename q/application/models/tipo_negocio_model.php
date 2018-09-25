@@ -13,9 +13,5 @@
         }
         return $this->db->get('tipo_negocio')->result_array();
     }
-    function get_all($param){
-        return $this->get( [] , [] , 200);
-    }
-
 }
 

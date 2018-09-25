@@ -4,6 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }
+    /*
     function create($param){
         
         $params = [ 
@@ -15,6 +16,7 @@
         ];
         return $this->insert($params);
     }
+    */
     function get_recurso_perfil_recurso($id_perfil){
 
         $query_get ="SELECT

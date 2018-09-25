@@ -73,9 +73,8 @@
                       ON a.fecha_registro =  e.fecha_actualizacion 
                       ORDER BY a.fecha_registro 
                       DESC";        
-
-        $result =  $this->db->query($query_get);        
-        $data_complete = $result->result_array();
+        
+        $data_complete =  $this->db->query($query_get)->result_array();        
         
       $this->create_tmp_envios(1 , $_num  , $param);
       $this->create_tmp_accesos(1 , $_num  , $param);

@@ -17,15 +17,7 @@
       return $this->update(["num_cancelaciones" => "num_cancelaciones + 1" ], ["idusuario" =>  $id]);
     }
     function evalua_usuario_existente($param){
-
-        $email =  $param["email"];
-        return $this->get(["COUNT(0)num"], [ "email" =>  $email])[0]["num"];
-      /*
-      $email =  $param["email"];
-      $query_get ="SELECT COUNT(0)num  FROM usuario WHERE email = '".$email."' ";
-      $result = $this->db->query($query_get);
-      return $result->result_array()[0]["num"];
-      */
+      return $this->get(["COUNT(0)num"], [ "email" =>  $param["email"]])[0]["num"];      
     }
     function get($params=[], $params_where =[] , $limit =1){
         
@@ -37,7 +29,7 @@
         }
         return $this->db->get("usuario")->result_array();
     }
-    private function update( $data =[] , $params_where =[] , $limit =1 ){
+    function update( $data =[] , $params_where =[] , $limit =1 ){
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
@@ -114,6 +106,7 @@
         
 
     }
+    /*
     function set_telefono_negocio($param){
         
         $params         =  
@@ -124,6 +117,7 @@
         $params_where   = ["idusuario" => $param["id_usuario"]];
         return $this->update( $params , $params_where );        
     }
+    */
     function set_telefono($param){
         
         $params         =  
@@ -292,33 +286,11 @@
         $result = $this->db->query($query_get);                
         return $result->result_array();
     }
-    function activos_con_direcciones($param){
-
-        $fecha_inicio   = $param["fecha_inicio"];  
-        $fecha_termino  = $param["fecha_termino"];
-
-        $query_get ="SELECT  COUNT(0)num 
-                    FROM 
-                        usuario_direccion 
-                    WHERE 
-                        status =1
-                    AND
-                        DATE(fecha_registro) 
-                    BETWEEN 
-                        '".$fecha_inicio."' 
-                    AND  
-                        '".$fecha_termino."'  ";
-                        
-
-        $result = $this->db->query($query_get);                
-        return $result->result_array()[0]["num"];
-
-    }      
     
     function get_usuarios_perfil($param){      
         
         $id_perfil          =   $param["id_perfil"];
-        $_num               =  get_random();
+        $_num               =   get_random();
         $this->create_tmp_usuarios_perfil(0 , $_num , $id_perfil );
             $query_get =
                     "SELECT
@@ -360,11 +332,11 @@
     }    
     function valida_pass($antes , $id_usuario)
     {           
-        $params_where = [
+        $q = [
             "idusuario" => $id_usuario,
             "password"  => $antes
         ];
-        return $this->get(["COUNT(0)num"] , $params_where)[0]["num"];
+        return $this->get(["COUNT(0)num"] , $q)[0]["num"];
     }
     /*
     function actualizarPassword($antes, $nuevo, $id_usuario){   
@@ -382,13 +354,9 @@
     */
     function num_registros_preriodo($param){
 
-      $fecha_inicio     =  $param["fecha_inicio"];  
-      $fecha_termino    =  $param["fecha_termino"];
-
-      $params_where        = 
-      ["DATE(fecha_registro)" =>  "BETWEEN '".$fecha_inicio."' AND  '".$fecha_termino."'" ];
-      
-      return $this->get(  ["COUNT(0)num"] ,  $params_where)[0]["num"];
+      $q = 
+      ["DATE(fecha_registro)" =>  "BETWEEN '".$param["fecha_inicio"]."' AND  '".$param["fecha_termino"]."'" ];
+      return $this->get(  ["COUNT(0)num"] ,  $q)[0]["num"];
       
    }
     function get_usuarios_periodo($param){      
@@ -493,18 +461,7 @@
         return  $result->result_array();
     }
     function num_q($param){
-
-        $key    = $param["key"];
-        $value  =  $param["value"];
-
-        $query_get = "SELECT 
-                        COUNT(0)num 
-                        FROM usuario 
-                            WHERE 
-                            $key = '".$value."' LIMIT 1";
-
-        $result =  $this->db->query($query_get);
-        return $result->result_array()[0]["num"];            
+        return $this->get([" COUNT(0)num "], [$param["key"] => $param["value"]]  , 1000)[0]["num"];
     }
     function get_usuarios_sin_publicar_articulos($param){
       $query_get = "SELECT

@@ -18,25 +18,26 @@ class usuario_clasificacion extends REST_Controller{
     function interes_PUT(){
 
         $param                  =  $this->put();         
-        $param["id_usuario"]    =  $this->id_usuario;
+        $id_usuario             =  $this->id_usuario;        
+        $num                    =  $this->usuario_clasificacion_model->get_interes_usuario($param);        
         
-        $num                    = 
-        $this->usuario_clasificacion_model->get_interes_usuario($param);        
         
-        $response["tipo"] =0;
-        if ($num >0 ) {  
-            
-            $params       =[ 
-                "tipo"                => 2,
-                "id_usuario"          =>    $param["id_usuario"],
-                "id_clasificacion"    =>    $param["id_clasificacion"]
-            ];      
-            $this->usuario_clasificacion_model->delete($params);            
-        }else{            
-            $this->usuario_clasificacion_model->create($param);
-            $response["tipo"] =1;
-        }
+        $response         = false;
+        if ($id_usuario > 0 ) {
 
+            $response["tipo"] =0;
+            $params = [ 
+                    "tipo"                =>    2,
+                    "id_usuario"          =>    $id_usuario,
+                    "id_clasificacion"    =>    $param["id_clasificacion"] ];      
+
+            if ($num >0 ) {                  
+                $this->usuario_clasificacion_model->delete($params);            
+            }else{                    
+                $this->usuario_clasificacion_model->insert($params);
+                $response["tipo"] =1;
+            }
+        }
         $this->response($response);        
     }
     

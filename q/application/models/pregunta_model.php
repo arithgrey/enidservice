@@ -36,10 +36,8 @@
       $campo ="leido_cliente";
       if($param["modalidad"] == 1) {        
           $campo ="leido_vendedor";    
-      }
-      $id_pregunta  =  $param["id_pregunta"];      
-      return $this->update([$campo =>  1 ] , ["id_pregunta" =>  $id_pregunta ] );
-
+      }      
+      return $this->q_up([$campo =>  1 ] , $param["id_pregunta"] );
     }
     function get_servicios_pregunta_sin_contestar($param){
 
@@ -59,21 +57,12 @@
     }
     function get_respuestas_sin_leer($param){
       
-      $params_where = [
-        "id_usuario"    =>  $id_usuario ,
-        "leido_cliente" =>   0
-      ];
-      return  $this->get(["COUNT(0)num"] , $params_where )[0]["num"];
-    }  
-    function create($param){
+      $q = ["id_usuario"    =>  $id_usuario ,"leido_cliente" => 0 ];
+      return  $this->get(["COUNT(0)num"] , $q )[0]["num"];
+    } 
 
-      $params       =  ["pregunta" => $param["pregunta"] , "id_usuario"  => $param["usuario"]];
-      return        $this->insert($params, 1);    
-    }
     function num_periodo($param){
-        
-        $fecha_inicio   = $param["fecha_inicio"];  
-        $fecha_termino  = $param["fecha_termino"];
+            
         $query_get      = 
                         "SELECT  
                             id_usuario  
@@ -82,9 +71,9 @@
                         WHERE 
                             DATE(fecha_registro) 
                         BETWEEN 
-                          '".$fecha_inicio."' 
+                          '".$param["fecha_inicio"]."' 
                         AND  
-                          '".$fecha_termino."'
+                          '".$param["fecha_termino"]."'
                         group by 
                         id_usuario";
 

@@ -5,42 +5,31 @@ class tareasmodel extends CI_Model{
       $this->load->database();
   } 
   function q_get($params=[], $id){
-    return $this->get($params, ["id_servicio" => $id ] );
+    return $this->get($params, ["id_tarea" => $id ] );
   }
-  function q_up($q , $q2 , $id_usuario){
-    return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);
+  function q_up($q , $q2 , $id){
+    return $this->update([$q => $q2 ] , ["id_tarea" => $id ]);
   }
   function update($data =[] , $params_where =[] , $limit =1 ){
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
       }
       $this->db->limit($limit);
-      return $this->db->update("tarea", $data);
-    
+      return $this->db->update("tarea", $data);  
   }
   function insert( $params , $return_id=0){        
       $insert   = $this->db->insert("tarea", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-  }
-  
+  }  
   function get( $params=[], $params_where =[] , $limit =1){
-        $params = implode(",", $params);
-        $this->db->limit($limit);
-        $this->db->select($params);
-        foreach ($params_where as $key => $value) {
-            $this->db->where($key , $value);
-        }
-        return $this->db->get("tarea")->result_array();
-  }  
-  function create($param){
-    $params = [
-        "descripcion"       =>  $param["tarea"] ,
-        "id_ticket"         =>  $param["id_ticket"] ,
-        "usuario_registro"  =>  $param["id_usuario"]
-    ];
-    return $this->insert($params);
-    
-  }  
+    $params = implode(",", $params);
+    $this->db->limit($limit);
+    $this->db->select($params);
+    foreach ($params_where as $key => $value) {
+      $this->db->where($key , $value);
+    }
+    return $this->db->get("tarea")->result_array();
+  }   
   function update_estado_tarea($param){
       
     $params =[
@@ -53,6 +42,7 @@ class tareasmodel extends CI_Model{
   }    
   function get_tareas_ticket_num($param){
 
+    /*
     $id_ticket =  $param["id_ticket"];    
     $query_get = "SELECT 
                   count(0) tareas ,  
@@ -62,11 +52,17 @@ class tareasmodel extends CI_Model{
                   id_ticket = '".$id_ticket."' ";
     $result = $this->db->query($query_get);
     return $result->result_array();
+    */
+    $f = [
+      "COUNT(0) tareas" ,  
+      "SUM(case when status = 0 then 1 else 0 end )pendientes"
+    ];
+    return  $this->get($f , [ "id_ticket" => $param["id_ticket"]]);
   }
   /**/  
   function get_tareas_ticket($param){
 
-    $id_ticket =  $param["id_ticket"];    
+    
     $query_get = "SELECT 
                   t.*,
                     u.idusuario  , 
@@ -85,16 +81,50 @@ class tareasmodel extends CI_Model{
                     t.id_tarea =  r.id_tarea
 
                   WHERE 
-                    t.id_ticket = '".$id_ticket ."'
+                    t.id_ticket = '".$param["id_ticket"]."'
                   GROUP BY t.id_tarea
                   ORDER BY 
                   t.fecha_registro 
                   ASC";
-
-    
     $result = $this->db->query($query_get);
     return $result->result_array();
   }
+   function tareas_enid_service(){
+            
+       
+                $query_get ="SELECT  
+                        SUM(CASE 
+                        WHEN 
+                        tt.id_departamento = 1 
+                        THEN 1 ELSE 0 END )num_pendientes_desarrollo,                        
+
+                        SUM(CASE 
+                                WHEN 
+                                tt.id_departamento = 2 
+                                THEN 1 ELSE 0 END )num_pendientes_ventas ,                       
+                        
+                        SUM(CASE 
+                        WHEN 
+                        tt.id_departamento = 4 
+                        THEN 1 ELSE 0 END )num_pendientes_direccion                        
+
+                    FROM 
+                        tarea t
+                    INNER JOIN
+                        ticket tt 
+                    ON 
+                    t.id_ticket = tt.id_ticket    
+                    WHERE  
+                        t.status = 1                         
+                    AND 
+                    date(t.fecha_termino) =  date(current_timestamp())";
+        $result =  $this->db->query($query_get);
+        return $result->result_array();
+
+           
+
+    }
+    
  
 
 }

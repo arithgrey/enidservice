@@ -37,7 +37,7 @@
     */
     function get_respuestas_pregunta($param){
 
-        $id_pregunta =  $param["id_pregunta"];      
+        
         $query_get = "SELECT 
                       r.respuesta     
                       ,r.fecha_registro
@@ -51,7 +51,7 @@
                         usuario u 
                         ON r.id_usuario = u.idusuario
                       WHERE 
-                        r.id_pregunta =  $id_pregunta 
+                        r.id_pregunta =  '".$param["id_pregunta"]."'
                       ORDER BY 
                       fecha_registro
                       DESC LIMIT 10";

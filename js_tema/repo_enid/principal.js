@@ -26,7 +26,12 @@ $(document).ready(function(){
 function carga_uso_sistema(e){
 	var data_send 	=  $(".f_usabilidad").serialize();
 	var url 		=  "../q/index.php/api/enid/usabilidad_landing_pages/format/json/";
-	request_enid( "GET",  data_send , url , response_carga_uso_sistema , ".place_usabilidad_general");
+	if (get_parameter(".f_usabilidad #datetimepicker4").length > 5 && get_parameter(".f_usabilidad #datetimepicker5").length > 5) {
+		request_enid( "GET",  data_send , url , response_carga_uso_sistema , ".place_usabilidad_general");
+	}else{
+		focus_input(".f_usabilidad #datetimepicker4");
+		focus_input(".f_usabilidad #datetimepicker5");
+	}	
 	e.preventDefault();
 }
 /**/
@@ -94,16 +99,33 @@ function evaluar(e){
 /**/
 function carga_metricas_mail_marketing(e){
 	
-	var  	data_send 	= $(".form_busqueda_mail_enid").serialize(); 	
+	var  	data_send 	= $(".form_busqueda_mail_enid").serialize(); 		
 	var 	url 		=  "../q/index.php/api/mail/reporte_mail_marketing/format/json/";	
-	request_enid( "GET",  data_send, url, 1, ".place_mail_marketing", 0 , ".place_mail_marketing" );
+
+	if (get_parameter(".form_busqueda_mail_enid #datetimepicker4").length > 5 && get_parameter(".form_busqueda_mail_enid #datetimepicker5").length >5) {
+
+		request_enid( "GET",  data_send, url, 1, ".place_mail_marketing", 0 , ".place_mail_marketing" );
+	}else{
+		focus_input(".form_busqueda_mail_enid #datetimepicker4");
+		focus_input(".form_busqueda_mail_enid #datetimepicker5");
+	}
 	e.preventDefault();
 }
 /**/
 function indicadores(e){
+
 	var 	data_send 	= $(".form_busqueda_global_enid").serialize()+"&"+$.param({"vista" :"1"}); 	
 	var  	url 		=  "../q/index.php/api/enid/metricas_cotizaciones/format/json/";	
-	request_enid( "GET",  data_send, url, response_indicadores, ".place_usabilidad", 0 , ".place_usabilidad" );
+
+	var f_inicio 	=  get_parameter(".form_busqueda_global_enid #datetimepicker4");
+	var f_termino 	=  get_parameter(".form_busqueda_global_enid #datetimepicker5");	
+
+	if (f_inicio.length > 5 &&  f_termino.length > 5 ) {
+		request_enid( "GET",  data_send, url, response_indicadores, ".place_usabilidad", 0 , ".place_usabilidad" );
+	}else{
+		focus_input(".form_busqueda_global_enid #datetimepicker4");
+		focus_input(".form_busqueda_global_enid #datetimepicker5");
+	}
 	e.preventDefault();
 }
 /**/
@@ -366,7 +388,16 @@ function carga_metricas_desarrollo(e){
 
 	var url 		=  "../q/index.php/api/desarrollo/global/format/json/";	
 	var data_send 	=  $(".form_busqueda_desarrollo").serialize();
-	request_enid( "GET",  data_send, url, response_carga_metricas_desarrollo , ".place_metricas_desarrollo" );
+
+
+	if (get_parameter(".form_busqueda_desarrollo #datetimepicker4").length > 5 && get_parameter(".form_busqueda_desarrollo #datetimepicker5").length >5 ) {
+		request_enid( "GET",  data_send, url, response_carga_metricas_desarrollo , ".place_metricas_desarrollo" );	
+	}else{
+		focus_input(".form_busqueda_desarrollo #datetimepicker5");
+		focus_input(".form_busqueda_desarrollo #datetimepicker5");
+	}
+	
+
 	e.preventDefault();
 }
 /**/
@@ -405,7 +436,13 @@ function carga_repo_afiliacion(e){
 	
 	var url 		=  "../q/index.php/api/afiliacion/metricas/format/json/";	
 	var data_send 	=  $(".form_busqueda_afiliacion").serialize();
-	request_enid( "GET",  data_send, url, 1,".place_repo_afiliacion", 0 , ".place_repo_afiliacion"); 
+
+	if (get_parameter(".form_busqueda_afiliacion #datetimepicker4").length > 5 && get_parameter(".form_busqueda_afiliacion #datetimepicker5").length > 5) {
+		request_enid( "GET",  data_send, url, 1,".place_repo_afiliacion", 0 , ".place_repo_afiliacion"); 	
+	}else{
+		focus_input(".form_busqueda_afiliacion #datetimepicker4");
+		focus_input(".form_busqueda_afiliacion #datetimepicker5");
+	}	
 	e.preventDefault();
 }
 /**/
@@ -420,10 +457,16 @@ function carga_repo_afiliacion_productividad(e){
 function carga_productos_mas_solicitados(e){
 
 
-	var url 		=  "../q/index.php/api/servicio/metricas_productos_solicitados/format/json/";	
-	var data_send 	=  	$(".form_busqueda_productos_solicitados").serialize();	
-	console.log(data_send);
-	request_enid( "GET",  data_send, url, 1 , ".place_keywords" , 0 , ".place_keywords" );
+	var url 		=  	"../q/index.php/api/servicio/metricas_productos_solicitados/format/json/";	
+	var data_send 	=  	$(".form_busqueda_productos_solicitados").serialize();			
+	
+	
+	if (get_parameter(".form_busqueda_productos_solicitados #datetimepicker4").length > 5 &&  get_parameter(".form_busqueda_productos_solicitados #datetimepicker5").length > 5 ) {
+		request_enid( "GET",  data_send, url, 1 , ".place_keywords" , 0 , ".place_keywords" );	
+	}else{
+		focus_input(".form_busqueda_productos_solicitados #datetimepicker4");
+		focus_input(".form_busqueda_productos_solicitados #datetimepicker5");
+	}
 	e.preventDefault();	
 }
 /**/
@@ -514,7 +557,13 @@ function carga_repo_usabilidad(e){
 
 	var  	data_send 		=  $(".f_actividad_productos_usuarios").serialize()+"&"+$.param({"v":1});	
 	var 	url 			=  "../q/index.php/api/usuario/actividad/format/json/";	
-	request_enid( "GET",  data_send, url, info_usabilidad, ".place_reporte"); 
+	
+	if (get_parameter(".f_actividad_productos_usuarios #datetimepicker4").length > 5 && get_parameter(".f_actividad_productos_usuarios #datetimepicker5").length > 5) {
+		request_enid( "GET",  data_send, url, info_usabilidad, ".place_reporte"); 	
+	}else{		
+		focus_input(".f_actividad_productos_usuarios #datetimepicker4");
+		focus_input(".f_actividad_productos_usuarios #datetimepicker5");
+	}	
 	e.preventDefault();	
 }
 /**/

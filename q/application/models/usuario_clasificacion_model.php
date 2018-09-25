@@ -46,26 +46,17 @@
     }
     function get_interes_usuario($param)
     {   
-        $id_usuario =  $param["id_usuario"];
-        $id_clasificacion =  $param["id_clasificacion"];
-
-         $query_get ="
-            SELECT 
-                COUNT(0)num
-            FROM                 
-            usuario_clasificacion  uc             
-            WHERE 
-                uc.tipo =2
-            AND  
-                uc.id_usuario =$id_usuario
-            AND 
-                uc.id_clasificacion = $id_clasificacion
-            ";
-        $result =  $this->db->query($query_get);
-        return $result->result_array()[0]["num"];
+        
+        $q =[
+            "tipo"              =>  2 ,
+            "id_usuario"        =>  $param["id_usuario"],
+            "id_clasificacion"  =>  $param["id_clasificacion"]
+        ];
+        return $this->get(["COUNT(0)num"] , $q )[0]["num"];
     }
     
     
+    /*   
     function create($param)
     {
         $params = [
@@ -75,6 +66,7 @@
         ];
         return $this->insert($params);
     }
+    */
     function insert( $params , $return_id=0 , $debug=0){        
         $insert   = $this->db->insert("usuario_clasificacion", $params , $debug);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;

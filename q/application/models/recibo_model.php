@@ -4,6 +4,47 @@
         parent::__construct();        
         $this->load->database();
     }
+    function get_adeudo_cliente($param){
+
+        $id_usuario =  $param["id_usuario"];        
+        $query_get="SELECT 
+                    (ppf.monto_a_pagar * ppf.num_ciclos_contratados )+ costo_envio_cliente as  saldo_pendiente,
+                    ppf.saldo_cubierto, 
+                    ppfd.id_direccion
+                    FROM 
+                    proyecto_persona_forma_pago 
+                    ppf                         
+                    LEFT OUTER JOIN 
+                    proyecto_persona_forma_pago_direccion  ppfd 
+                    ON 
+                    ppf.id_proyecto_persona_forma_pago =  ppfd.id_proyecto_persona_forma_pago
+                    WHERE 
+                    ppf.id_usuario = $id_usuario
+                    AND 
+                    ppf.monto_a_pagar  > ppf.saldo_cubierto
+                    AND se_cancela != 1";
+
+
+        $result =  $this->db->query($query_get);        
+        $data_complete=  $result->result_array();         
+
+        $total_deuda =0; 
+        $direciones_pendientes =0;
+        foreach ($data_complete as $row){
+            
+            $saldo_pendiente = $row["saldo_pendiente"];
+            $saldo_cubierto = $row["saldo_cubierto"];
+            if ($row["id_direccion"] ==  null ){
+                $direciones_pendientes ++;
+            }
+            $deuda =  $saldo_pendiente - $saldo_cubierto; 
+            $total_deuda =  $total_deuda + $deuda;
+        }
+        $data_complete_response["total_deuda"] =  $total_deuda;
+        $data_complete_response["sin_direcciones"] =  $direciones_pendientes;
+        return $data_complete_response;
+    }    
+ 
     function get_saldo_usuario($param){
         
         
@@ -16,8 +57,8 @@
                     "costo_envio_vendedor",
                     "saldo_cubierto_envio"];
 
-        $keys = get_keys($params); 
-        $query_get ="SELECT 
+        $keys       = get_keys($params); 
+        $query_get  = "SELECT 
                         ".$keys."
                     FROM 
                         proyecto_persona_forma_pago
@@ -32,22 +73,20 @@
     } 
     function carga_actividad_pendiente($param){
 
-          $campo_usuario = "id_usuario";        
-          if($param["modalidad"] ==  1){
-              $campo_usuario ="id_usuario_venta";            
-          }          
-          $params_where = [
-            "status"        => 7 , 
-            $campo_usuario  =>  $param["id_usuario"]
-          ];
-          $num = $this->get(["COUNT(0)num"] , $params_where , 10000 )['0']["num"];
-          $data_complete["num_pedidos"] = $num;        
-          return $data_complete;
-      }    
+      $campo_usuario = "id_usuario";        
+      if($param["modalidad"] ==  1){
+        $campo_usuario ="id_usuario_venta";            
+      }          
+      $params_where = [
+        "status"        => 7 , 
+        $campo_usuario  =>  $param["id_usuario"]
+      ];        
+      $data_complete["num_pedidos"] = $this->get(["COUNT(0)num"] , $params_where , 10000 )['0']["num"];
+      return $data_complete;
+    }    
     function get_servicio_por_recibo($param){
         
-        $id_recibo = $param["id_recibo"];       
-        $query_get ="SELECT 
+      $query_get ="SELECT 
                       s.id_servicio, 
                       s.nombre_servicio
                       FROM 
@@ -56,12 +95,10 @@
                       ON 
                       p.id_servicio =  s.id_servicio
                       WHERE 
-                      p.id_proyecto_persona_forma_pago=$id_recibo LIMIT 1";
+                      p.id_proyecto_persona_forma_pago='".$param["id_recibo"]."' LIMIT 1";
         
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
-    }
-    
+      return $this->db->query($query_get)->result_array();      
+    }    
     function get_compras_tipo_periodo($param){
 
       $where  =  $this->get_where_tiempo($param);
@@ -81,10 +118,7 @@
     /**/
     function cancela_orden_compra($param){
       
-
-        $id_recibo        =   $param["id_recibo"];        
         $cancelar         =   ($param["cancela_cliente"] ==  1) ? 1 : 0;
-
         $query_update     =  
           "UPDATE proyecto_persona_forma_pago 
           SET 
@@ -92,7 +126,7 @@
           fecha_cancelacion = CURRENT_DATE(), 
           cancela_cliente   = $cancelar,
           se_cancela        = 1
-          WHERE  id_proyecto_persona_forma_pago =  $id_recibo LIMIT 1";        
+          WHERE  id_proyecto_persona_forma_pago =  '".$param["id_recibo"]."' LIMIT 1";        
                 
         return $this->db->query($query_update);
 
@@ -144,70 +178,55 @@
     }
     
   function get_monto_pendiente_proyecto_persona_forma_pago($param){
-
-    $id_recibo = $param["recibo"];
-    return $this->get([] , ["id_proyecto_persona_forma_pago" => $id_recibo] );
-     
+    return $this->q_get([] , $param["recibo"] );     
   }
   function valida_recibo_por_enviar_usuario($param){
 
-      $id_usuario =  $param["id_usuario"];      
-      $id_recibo =  $param["id_recibo"];
-      $query_get ="SELECT * FROM 
-                    proyecto_persona_forma_pago 
-                  WHERE 
-                    id_proyecto_persona_forma_pago =$id_recibo
-                  AND 
-                    id_usuario_venta =  $id_usuario
-                  AND 
-                    monto_a_pagar <= saldo_cubierto 
-                  LIMIT 1";
+    $query_get  =   "SELECT * FROM 
+                        proyecto_persona_forma_pago 
+                      WHERE 
+                        id_proyecto_persona_forma_pago = '".$param["id_recibo"]."'
+                      AND 
+                        id_usuario_venta =  '".$param["id_usuario"]."'
+                      AND 
+                        monto_a_pagar <= saldo_cubierto 
+                      LIMIT 1";
 
-                $result =  $this->db->query($query_get);
-                return $result->result_array();
-
-    }
-  
+      return $this->db->query($query_get)->result_array();
+  }  
   /**/
   function valida_recibo_por_pagar_usuario($param){
       
-      $id_usuario =  $param["id_usuario"];      
-      $id_recibo  =  $param["id_recibo"];
       $query_get ="SELECT 
                     *
                   FROM proyecto_persona_forma_pago 
                   WHERE 
-                    id_proyecto_persona_forma_pago = $id_recibo
+                    id_proyecto_persona_forma_pago = '".$param["id_recibo"]."'
                   AND 
-                    id_usuario =  $id_usuario
+                    id_usuario =  '".$param["id_usuario"]."'
                   AND 
                     monto_a_pagar > saldo_cubierto 
                   LIMIT 1";
                   
-                $result =  $this->db->query($query_get);
-                return $result->result_array();
-                
+      return  $this->db->query($query_get)->result_array();
   }
   function valida_recibo_por_pagar($param){
 
-      $id_usuario =  $param["id_usuario"];
-      $id_usuario_venta = $param["id_usuario_venta"];
-      $id_recibo =  $param["id_recibo"];
       $query_get ="SELECT * FROM proyecto_persona_forma_pago 
                 WHERE 
-                  id_proyecto_persona_forma_pago =$id_recibo
+                  id_proyecto_persona_forma_pago = '".$param["id_recibo"]."'
                 AND 
-                  id_usuario =  $id_usuario
+                  id_usuario =  '".$param["id_usuario"]."'
                 AND
-                  id_usuario_venta =  $id_usuario_venta
+                  id_usuario_venta =  '".$param["id_usuario_venta"]."'
                 AND 
                   monto_a_pagar >saldo_cubierto 
                 LIMIT 1";
 
-                $result =  $this->db->query($query_get);
-                return $result->result_array();
+      return $this->db->query($query_get)->result_array();
+                
     }
-     function get_ventas_usuario($param){      
+    function get_ventas_usuario($param){      
 
       $where =  $this->get_where_estado_venta($param , 1);
       $query_get = "SELECT 
@@ -259,18 +278,7 @@
   }
   
   function get_solicitudes_venta_dia($param){
-
-      $dia =  $param["fecha"];
-      $query_get ="SELECT 
-                    COUNT(0)num_solicitudes 
-                  FROM 
-                    proyecto_persona_forma_pago  
-                  WHERE 
-                    DATE(fecha_registro) ='".$dia."'";
-
-      $result =  $this->db->query($query_get);
-      return $result->result_array()[0]["num_solicitudes"];
-
+    return $this->get([" COUNT(0)num "] , ["DATE(fecha_registro)" =>  $param["fecha"] ] )[0]["num"];
   }
   
   /*
@@ -364,14 +372,7 @@
             
       $data_complete["data"]=  $this->db->query($query_get)->result_array(); 
       return $data_complete;      
-  }     
-  /**/
-  
-  function get_info_recibo_por_id($param){
-            
-      $where =  ["id_proyecto_persona_forma_pago" =>  $param["id_recibo"] ];            
-      return    $this->get([], $where );
-  }
+  }       
   function crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis){
         $resumen ="";
         $resumen = $num_ciclos." ".$servicio["nombre_servicio"];
@@ -491,13 +492,12 @@
     }      
     function get_ventas_dia($param){
 
-      $dia =  $param["fecha"];
       $query_get ="SELECT 
                     COUNT(0)num_ventas 
                   FROM 
                     proyecto_persona_forma_pago  
                   WHERE 
-                    DATE(fecha_registro) ='".$dia."'
+                    DATE(fecha_registro) ='".$param["fecha"]."'
                     AND
                     monto_a_pagar <= saldo_cubierto";
                     

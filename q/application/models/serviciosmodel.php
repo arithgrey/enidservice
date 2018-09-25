@@ -33,7 +33,7 @@
         return $this->db->get("servicio")->result_array();
     }
     /**/
-    private function update($data =[] , $params_where =[] , $limit =1 ){
+    function update($data =[] , $params_where =[] , $limit =1 ){
     
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
@@ -51,25 +51,19 @@
       
       $_num =  get_random();
       $this->create_tmp_servicio(1 , $_num ,  $param);
-
-      $query_get =  "SELECT
-                      DATE(fecha_registro)fecha_registro, 
-                      COUNT(0)num 
-                      FROM tmp_servicio_$_num
-                      GROUP BY DATE(fecha_registro)";
-        $result=  $this->db->query($query_get);
-        $data_complete =  $result->result_array();
+        $query_get =    "SELECT
+                        DATE(fecha_registro)fecha_registro, 
+                        COUNT(0)num 
+                        FROM tmp_servicio_$_num
+                        GROUP BY DATE(fecha_registro)";        
+        $data_complete =  $this->db->query($query_get)->result_array();
       $this->create_tmp_servicio(0 , $_num ,  $param);
       return $data_complete;
     }
     private function create_tmp_servicio($flag , $_num , $param){
 
         $this->drop_tmp($_num);
-        if ($flag ==  1) {
-        
-            $fecha_inicio   = $param["fecha_inicio"];  
-            $fecha_termino  = $param["fecha_termino"];                 
-
+        if ($flag ==  1) {            
             $query_create= "CREATE TABLE  tmp_servicio_$_num AS  
                             SELECT 
                               fecha_registro
@@ -78,10 +72,9 @@
                             WHERE 
                               DATE(fecha_registro) 
                             BETWEEN 
-                            '".$fecha_inicio."' 
+                            '".$param["fecha_inicio"]."' 
                             AND  
-                            '".$fecha_termino."' ";
-            
+                            '".$param["fecha_termino"]."' ";
             $this->db->query($query_create);
         }
 
@@ -109,10 +102,8 @@
 
       if($flag ==  0){
 
-        $fecha_inicio =  $param["fecha_inicio"];
-        $fecha_termino =  $param["fecha_termino"];
-
-        $query_get=  "CREATE TABLE tmp_productos_$_num AS 
+        $query_get  =  
+                    "CREATE TABLE tmp_productos_$_num AS 
                       SELECT 
                         keyword, 
                         COUNT(0)num_keywords 
@@ -121,36 +112,32 @@
                       WHERE 
                         DATE(fecha_registro) 
                       BETWEEN 
-                        '".$fecha_inicio."'  
+                        '".$param["fecha_inicio"]."'  
                       AND 
-                        '".$fecha_termino."'
+                        '".$param["fecha_termino"]."'
                       GROUP BY keyword";
 
-                      $this->db->query($query_get);
-                      
+        $this->db->query($query_get);
 
       }
     } 
     
     function get_producto_alcance($param){
 
-      $id_usuario = $param["id_usuario"];
-      $vista =  $param["tipo"];
-
-      $query_get ="SELECT id_servicio 
+        $query_get ="SELECT id_servicio 
                     FROM  
                     servicio 
                     WHERE 
-                    id_usuario = $id_usuario
+                    id_usuario = '".$param["id_usuario"]."'
                     AND 
-                    vista = '".$vista."'
+                    vista = '".$param["tipo"]."'
                     AND 
                     status =1 
                     AND
                     existencia>0
                     LIMIT 1";
-      $result = $this->db->query($query_get);
-      return $result->result_array()[0]["id_servicio"];      
+        return $this->db->query($query_get)->result_array()[0]["id_servicio"];
+      
     }
     function get_alcance_productos_usuario($param){
       
@@ -212,11 +199,7 @@
     function busqueda_meta_key_word($arreglo_tags , $tag){        
         return  array_search($tag, $arreglo_tags); 
     }
-    /**/
-    
-    
-    
-    /**/    
+      
         
     /*
     function agrega_metakeyword_catalogo($param){   
@@ -255,21 +238,19 @@
     function elimina_color_servicio($param){
         
         $colores =  $this->get_colores_por_servicio($param);
-
         if (isset($colores[0]["color"])) {
             
-            $colores_en_servicio =$colores[0]["color"];
-            $color =  $param["color"]; 
-            $id_servicio =  $param["id_servicio"];
-            $arreglo_colores = explode(  "," , $colores_en_servicio);             
+            $colores_en_servicio =  $colores[0]["color"];
+            $color               =  $param["color"]; 
+            $id_servicio         =  $param["id_servicio"];
+            $arreglo_colores     =  explode(  "," , $colores_en_servicio);             
     
             $nueva_lista ="";
             for($z=0; $z < count($arreglo_colores); $z++){                 
                 if($arreglo_colores[$z] != $color){
                     $nueva_lista .= $arreglo_colores[$z].",";        
                 }                
-            }        
-            
+            }                    
             return $this->q_up("color" ,$nueva_lista , $id_servicio);
         }else{
             return 1;
@@ -283,33 +264,27 @@
             return $this->agrega_color($param , 1 , $colores[0]["color"] );
         }else{
             return $this->agrega_color($param, 0 , "");
-        }
-    
-    }    
-    
+        }    
+    }        
     /**/
     function agrega_color($param , $flag , $color_anterior ){
 
-        $id_servicio    =  $param["id_servicio"];
-        $color          =  $param["color"];         
-        if ($flag == 0){
-        }else{
+        $color     =  $param["color"];         
+        if ($flag != 0){
+
             $info_a             =  explode(",", $color_anterior);
             array_push($info_a, $color);            
             $nuevo              =  array_unique($info_a);
-            $color        =  implode(",", $nuevo);            
+            $color              =  implode(",", $nuevo);            
+
         }        
-        return $this->q_up("color" , $color , $id_servicio);
+        return $this->q_up("color" , $color , $param["id_servicio"]);
         
     }
-    function get_colores_por_servicio($param){
-        $id_servicio =  $param["id_servicio"];
-        return $this->get(["color"],  [ "id_servicio" => $id_servicio  ]);
+    function get_colores_por_servicio($param){        
+        return $this->q_get(["color"],  $param["id_servicio"] );
     }
-
-    function get_info_servicio($param){
-        return $this->get([] , ["id_servicio" =>  $param["id_servicio"] ]);
-    }    
+    
     function gamificacion_usuario_servicios($param){
           
         $id             =   $param["id"];
@@ -318,23 +293,20 @@
         return $this->q_up("valoracion" , $nueva_valoracion , $id);
     }
     function get_num_en_venta_usuario($param){
-
-        $id_usuario =  $param["id_usuario"];        
+    
         $query_get = "SELECT 
                         COUNT(0)num_servicios
                       FROM 
                       servicio 
                       WHERE 
-                      id_usuario = $id_usuario 
+                      id_usuario = '".$param["id_usuario"]."'
                       AND 
                         existencia>0
                       AND 
                         status =1
                       AND flag_imagen>0";
 
-        $result =  $this->db->query($query_get);
-        return $result->result_array()[0]["num_servicios"];
-
+        return  $this->db->query($query_get)->result_array()[0]["num_servicios"];
     }
     function busqueda($param){        
         $data_complete["num_servicios"] =  
@@ -653,18 +625,23 @@
     /**/
     function periodo($param){
 
+        /*
         $query_get ="SELECT * FROM servicio WHERE DATE(fecha_registro) BETWEEN '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."' ";
         $result =  $this->db->query($query_get);
         return $result->result_array();
+        */
+        $q = [
+            "DATE(fecha_registro)" => 
+            "BETWEEN '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."' "
+        ];
+        return $this->get([] , $q );
     }
     
     function es_servicio_usuario($param){
-
-        $id_usuario     =  $param["id_usuario"];
-        $id_servicio    =  $param["id_servicio"];
+        
         $params_where = [
-        "id_usuario"    =>  $id_usuario,
-        "id_servicio"   =>  $id_servicio
+        "id_usuario"    =>  $param["id_usuario"],
+        "id_servicio"   =>  $param["id_servicio"]
         ];
         return $this->get( ["COUNT(0)num"], $params_where  )[0]["num"];
 
@@ -691,8 +668,8 @@
                     GROUP BY 
                     primer_nivel
                     ORDER BY count(0) DESC";
-        $result =  $this->db->query($query_get);
-        return $result->result_array(); 
+        $result =  $this->db->query($query_get)->result_array();
+        
     }
     function get_usuario_por_servicio($param){
       
@@ -724,16 +701,8 @@
 
     }
     
-    function get_nombre_estado_enid_service($param){
-
-        $id_estatus= $param["id_estatus"];
-        $query_get = "SELECT nombre 
-                        FROM status_enid_service 
-                      WHERE id_estatus_enid_service = $id_estatus LIMIT 1";
-                      $result =  $this->db->query($query_get);
-                      return $result->result_array()[0]["nombre"];
-    }
-     function busqueda_producto($param){
+    
+    function busqueda_producto($param){
         
         $data_complete["num_servicios"] =  
             $this->get_resultados_posibles($param);                    
@@ -803,25 +772,12 @@
         $metakeyword = $param["metakeyword"];    
         $id_servicio = $param["id_servicio"];
         $meta        =  $this->get_palabras_clave_por_servicio_sistema($id_servicio);
-        $metakeyword =  $meta .",".$metakeyword;
-        
-        /*
-        $query_update = "UPDATE 
-                            servicio 
-                        SET 
-                        metakeyword = '".$metakeyword."'                        
-                        WHERE id_servicio ='".$id_servicio."' LIMIT 1";    
-
-        return $this->db->query($query_update);
-        */
+        $metakeyword =  $meta .",".$metakeyword;    
         return $this->q_up("metakeyword",$metakeyword, $id_servicio);
     }
     function get_palabras_clave($id_servicio){
 
-        $result         = $this->q_get(["metakeyword_usuario"], $id_servicio );
-        $palabras_clave =  $result[0]["metakeyword_usuario"];
-        return $palabras_clave;
-        
+        return $this->q_get(["metakeyword_usuario"], $id_servicio )[0]["metakeyword_usuario"];        
     }
     function get_num_anuncios($param){
 
@@ -839,12 +795,28 @@
         $result =  $this->db->query($query_get);
         return $result->result_array()[0]["num"];
     }
+    function valoraciones_sin_leer($param){
+        $id_usuario =  $param["id_usuario"];
+        $query_get ="
+            SELECT 
+                COUNT(0)num
+            FROM 
+                servicio s 
+            INNER JOIN  
+                valoracion v
+            ON 
+                s.id_servicio =  v.id_servicio
+            WHERE 
+                s.id_usuario = $id_usuario
+            AND
+                leido_vendedor =0";
+
+        $result =  $this->db->query($query_get);
+        return $result->result_array()[0]["num"];
+    }   
+
+
     /*
-    
-    
-    
-  
-    
     
     
     function get_nombre_servicio($param){

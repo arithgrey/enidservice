@@ -4,6 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }
+    
     private function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -13,6 +14,7 @@
         }
         return $this->db->get("tarea")->result_array();
     }
+    
     function visitas_enid_semana($_num){
 
 

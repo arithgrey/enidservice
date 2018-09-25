@@ -55,10 +55,24 @@ class usuario extends REST_Controller{
     }
     function telefono_negocio_PUT(){
 
-        $param                     =   $this->put();                
-        $param["id_usuario"]       =  $this->id_usuario;
-        $response    =   $this->usuario_model->set_telefono_negocio($param);
-        $this->response($response);      
+        $param                     =    $this->put();                
+        $id_usuario                =    $this->id_usuario;
+        $response                  =    false;
+
+        if ($id_usuario > 0 
+            &&  array_key_exists("telefono_negocio", $param) 
+            && array_key_exists('lada_negocio', $param) ){
+
+            $params         =  [
+                "tel_contacto_alterno"  =>  $param["telefono_negocio"] , 
+                "lada_negocio"          =>  $param["lada_negocio"]
+            ];  
+            $params_where   = ["idusuario" => $this->id_usuario];
+            $response       = $this->usuario_model->update( $params , $params_where );            
+        }
+        
+        $this->response($response);
+        
     }
     function telefono_PUT(){
         $param                     =    $this->put();                
@@ -280,14 +294,7 @@ class usuario extends REST_Controller{
         $param      =   $this->get();
         $response   =   $this->usuario_model->num_registros_periodo($param);
         $this->response($response);        
-    }
-    /**/
-    function activos_con_direcciones_GET(){
-
-        $param      =   $this->get();
-        $response   =   $this->usuario_model->activos_con_direcciones($param);
-        $this->response($response);        
-    }
+    }    
     /**/    
     function publican_periodo_GET(){
 
@@ -598,7 +605,8 @@ class usuario extends REST_Controller{
         return$this->usuario_model->num_registros_periodo($q);
     }
     private function get_nun_activos_con_direcciones($q){
-        return $this->usuario_model->activos_con_direcciones($q);
+        $api = "usuarios_direccion/activos_con_direcciones/format/json/"; 
+        return $this->principal->api($api , $q );                                       
     }
     private function get_agregan_clasificaciones_periodo($q){
                 

@@ -13,5 +13,14 @@ class Status_enid_service extends REST_Controller{
         $response =  $this->status_enid_service_model->get_estatus_servicio_enid_service($param);
         $this->response($response);
     }
-    /**/ 
+    /*get_nombre_estado_enid_service*/ 
+    function nombre_GET($param){
+        
+        $param      =   $this->get();
+        $response   =   false;
+        if ($param["id_estatus"] > 0) {
+            $respnse    =   $this->status_enid_service->q_get(["nombre"] ,  $param["id_estatus"])[0]["nombre"];
+        }
+        $this->response($response);
+    }
 }?>

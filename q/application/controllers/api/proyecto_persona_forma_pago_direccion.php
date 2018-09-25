@@ -16,15 +16,26 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller{
     function recibo_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->proyecto_persona_forma_pago_direccion_model->get_by_recibo($param);        
+        $response   = false;
+        if (if_ext($param , 'id_recibo')) {
+            $response   =  
+            $this->proyecto_persona_forma_pago_direccion_model->get([], 
+            [ "id_proyecto_persona_forma_pago" => $param["id_recibo"]]);            
+        }        
         $this->response($response);
-
     }
     function index_POST(){
 
-        $param      =   $this->post();        
-        $response   =   
-        $this->proyecto_persona_forma_pago_direccion_model->agrega_direccion_a_compra($param);
+        $param      =   $this->post();                
+        $response   =   false;        
+        
+        if (if_ext($param , 'id_recibo, id_direccion') ) {
+            $params = [
+                "id_proyecto_persona_forma_pago"  => $param["id_recibo"],
+                "id_direccion"                    => $param["id_direccion"]
+            ];
+            $response =  $this->proyecto_persona_forma_pago_direccion->insert($params);    
+        }
         $this->response($response);
     }
 

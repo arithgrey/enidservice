@@ -41,7 +41,7 @@
     */
     function get_respuestas($param){
     
-      $id_tarea  = $param["tarea"];
+      
       $query_get ="SELECT 
                      r.*, 
                      u.nombre , 
@@ -57,8 +57,7 @@
                    INNER JOIN usuario_perfil up 
                     ON u.idusuario = up.idusuario                    
                    WHERE 
-                    r.id_tarea = '".$id_tarea."' 
-
+                    r.id_tarea = '".$param["tarea"]."' 
                    ORDER BY 
                    r.fecha_registro DESC 
                    ";
