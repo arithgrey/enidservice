@@ -1,10 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH.'../../librerias/REST_Controller.php';
 class Archivo extends REST_Controller{      
+    private $id_usuario;
     function __construct(){
         parent::__construct();                       
         $this->load->model("img_model");
         $this->load->library(lib_def());                   
+        $this->id_usuario   =  $this->principal->get_session("idusuario");  
         
     }
     function extension($str){
@@ -44,17 +46,12 @@ class Archivo extends REST_Controller{
     /**/
     function gestiona_imagenes($param){ 
 
-        $param["id_usuario"]    =  $this->principal->get_session("idusuario");  
         $param["id_empresa"]    =  $this->principal->get_session("idempresa");            
         switch ($param["q"]) {
-            
-            
               case 'faq':
                 
                 $response = $this->img_model->insert_img_faq( $param);
                 return $this->response_status_img($response);                    
-                
-            
                 break;        
 
                 
@@ -63,9 +60,9 @@ class Archivo extends REST_Controller{
                     
                 $id_imagen = $this->img_model->insert_img($param , 1);
 
-                if ( $id_imagen > 0 && $param["id_usuario"]>0) {                    
+                if ( $id_imagen > 0 && $this->id_usuario>0) {                    
                     $prm["id_imagen"]    = $id_imagen;                    
-                    $prm["id_usuario"]   = $param["id_usuario"];                    
+                    $prm["id_usuario"]   = $this->id_usuario;                    
                     return $this->create_imagen_usuario($prm);                
                 }               
                 break;        
@@ -90,9 +87,7 @@ class Archivo extends REST_Controller{
                 break;
         }        
     }
-    /**/
     function response_status_img($status){
-
         $msj ="Error al cargar la image, reportar al admistrador ";
         if ($status ==  1  ) {
             $msj =  "Imagen guardada .!";
@@ -114,6 +109,4 @@ class Archivo extends REST_Controller{
         $api = "imagen_usuario/index";
         return $this->principal->api( $api , $q , "json", "POST");
     }
-        
-
 }?>

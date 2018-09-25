@@ -37,17 +37,12 @@
       $this->db->query(get_drop("tmp_accesos_$_num"));
 
       if ($flag ==  0){
-
-        $fecha_inicio =  $param["fecha_inicio"];
-        $fecha_termino =  $param["fecha_termino"];
-      
         $where_fecha = " WHERE 
                           DATE(fecha_registro) 
-                          BETWEEN  '".$fecha_inicio."' 
-                          AND '".$fecha_termino."'  ";
-
-
-        $query_create =  "CREATE TABLE tmp_accesos_$_num AS                           
+                          BETWEEN  '".$param["fecha_inicio"]."' 
+                          AND '".$param["fecha_termino"]."'  ";
+        $query_create   =  
+                        "CREATE TABLE tmp_accesos_$_num AS                           
                           SELECT 
                             DATE(fecha_registro)fecha_registro , 
                             COUNT(0)accesos                          

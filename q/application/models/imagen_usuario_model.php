@@ -28,23 +28,17 @@ class Imagen_usuario_model extends CI_Model{
     return  $this->get(["id_imagen"] , ["idusuario" => $id_usuario ] ); 
   }  
   function img_perfil($param){
-        
-        $fecha_inicio   = $param["fecha_inicio"];  
-        $fecha_termino  = $param["fecha_termino"];
-        $query_get      = 
-                        "SELECT 
-                            COUNT(0)num 
-                        FROM 
-                            imagen_usuario
+      
+      $query_get  = "SELECT COUNT(0)num FROM imagen_usuario
                         WHERE 
                             DATE(fecha_registro) 
                         BETWEEN 
-                          '".$fecha_inicio."' 
+                          '".$param["fecha_inicio"]."' 
                         AND  
-                          '".$fecha_termino."'";
+                          '".$param["fecha_termino"]."'";
 
-        $result = $this->db->query($query_get);                
-        return $result->result_array()[0]["num"];
+      return $this->db->query($query_get)->result_array()[0]["num"];                
+        
   }
   /*
   function delete($param){

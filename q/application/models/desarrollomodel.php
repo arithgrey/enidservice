@@ -22,7 +22,7 @@
     function create_tmp_table_comparativas($flag ,$_num , $param){
 
         $nombre_table ="";                               
-            switch ( $param["tiempo"] ) {
+        switch ( $param["tiempo"] ) {
                 case 1:            
                     $tiempo         =   "DATE(fecha_termino) = DATE(CURRENT_DATE())";           
                     $nombre_table   =   "tmp_tareas_comparativas_hoy_$_num";
@@ -40,7 +40,7 @@
                     break;                
                 default:            
                     break;
-            }                
+        }                
 
         if ($flag ==  0){        
             $query_create = "CREATE TABLE $nombre_table AS 
@@ -64,23 +64,19 @@
         $this->db->query(get_drop("tmp_tareas_realizadas_$_num"));
 
           if ($flag ==  0){
-
-            $fecha_inicio   =  $param["fecha_inicio"];
-            $fecha_termino  =  $param["fecha_termino"];                          
-            $query_create   =  "CREATE TABLE tmp_tareas_realizadas_$_num AS 
-                                SELECT 
-                                    COUNT(0)tareas_realizadas ,       
-                                    DATE(fecha_termino)fecha_termino                                
-                                FROM 
-                                    tarea  
-                                WHERE                           
-                                    DATE(fecha_termino) 
-                                BETWEEN                              
-                                    '".$fecha_inicio."' 
-                                        AND 
-                                    '".$fecha_termino."' 
-                                GROUP BY 
-                                DATE(fecha_termino)";
+            $query_create   =  
+            "CREATE TABLE tmp_tareas_realizadas_$_num AS 
+            SELECT 
+                COUNT(0)tareas_realizadas ,       
+                DATE(fecha_termino)fecha_termino                                
+            FROM 
+                tarea  
+            WHERE                           
+                DATE(fecha_termino) 
+            BETWEEN                              
+            '".$param["fecha_inicio"]."' AND  '".$param["fecha_termino"]."' 
+            GROUP BY 
+            DATE(fecha_termino)";
             $this->db->query($query_create);
             
       }
@@ -128,26 +124,22 @@
 
         
         $this->db->query(get_drop("tmp_tareas_$_num"));
-
-          if ($flag ==  0){
-
-            $fecha_inicio =  $param["fecha_inicio"];
-            $fecha_termino =  $param["fecha_termino"];
-                          
-            $query_create =  "CREATE TABLE tmp_tareas_$_num AS 
-                              SELECT 
-                                id_tarea ,       
-                                fecha_termino                                
-                              FROM tarea  
-                              WHERE                           
-                                DATE(fecha_termino) 
-                                BETWEEN                              
-                                '".$fecha_inicio."' 
-                                    AND 
-                                '".$fecha_termino."' ";
+        if ($flag ==  0){
+            $query_create =  
+                "CREATE TABLE tmp_tareas_$_num AS 
+                SELECT 
+                id_tarea ,       
+                fecha_termino                                
+                FROM tarea  
+                WHERE                           
+                DATE(fecha_termino) 
+                BETWEEN                              
+                '".$param["fecha_inicio"]."' 
+                AND 
+                '".$param["fecha_termino"]."' ";
             $this->db->query($query_create);
             
-          }
+        }
     } 
     function create_tmp_tareas_solicitadas($flag , $_num , $param){
 
@@ -195,11 +187,7 @@
         
         $this->db->query(get_drop("tmp_accesos_$_num"));
 
-          if ($flag ==  0){
-
-            $fecha_inicio =  $param["fecha_inicio"];
-            $fecha_termino =  $param["fecha_termino"];
-                          
+        if ($flag ==  0){
             $query_create =  "CREATE TABLE tmp_accesos_$_num AS 
                               SELECT 
                                     DATE(fecha_registro)fecha 
@@ -208,9 +196,9 @@
                                 WHERE                                    
                                 DATE(fecha_registro)                             
                                 BETWEEN    
-                                '".$fecha_inicio."' 
+                                '".$param["fecha_inicio"]."' 
                                     AND 
-                                '".$fecha_termino."'";
+                                '".$param["fecha_termino"]."'";
             $this->db->query($query_create);
             
       }

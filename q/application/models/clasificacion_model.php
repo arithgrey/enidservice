@@ -8,8 +8,8 @@ class clasificacion_model extends CI_Model{
   function q_get($params=[], $id){
         return $this->get($params, ["id_clasificacion" => $id ] );
   }
-  function q_up($q , $q2 , $id_usuario){
-        return $this->update([$q => $q2 ] , ["idusuario" => $id_usuario ]);
+  function q_up($q , $q2 , $id){
+        return $this->update([$q => $q2 ] , ["id_clasificacion" => $id ]);
   }
   function insert( $params , $return_id=0){        
       $insert   = $this->db->insert($tabla, $params);     
@@ -24,34 +24,29 @@ class clasificacion_model extends CI_Model{
       return $this->db->update("clasificacion", $data);
     
   }
-  function get_clasificacion_padre_nivel($param){                        
-        return  $this->get(["id_clasificacion" , "padre" , "nivel" ], [ "id_clasificacion" => $param["padre"] ] );
-  }    
   function get_intereses_usuario($param){
-
-        $id_usuario =  $param["id_usuario"];
-
-        $query_get ="
-            SELECT 
-                c.id_clasificacion,
-                c.nombre_clasificacion,
-                uc.id_usuario 
-            FROM 
-                clasificacion c
-            LEFT OUTER JOIN 
-                usuario_clasificacion uc 
-            ON 
-                c.id_clasificacion = uc.id_clasificacion
-            AND  
-                uc.tipo =2
-            AND  
-                uc.id_usuario =$id_usuario
-            WHERE 
-                c.nivel =1 
-            AND 
-                c.flag_servicio =0";
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
+    
+    $query_get ="
+      SELECT 
+      c.id_clasificacion,
+      c.nombre_clasificacion,
+      uc.id_usuario 
+      FROM 
+      clasificacion c
+      LEFT OUTER JOIN 
+      usuario_clasificacion uc 
+      ON 
+      c.id_clasificacion = uc.id_clasificacion
+      AND  
+      uc.tipo =2
+      AND  
+      uc.id_usuario = '".$param["id_usuario"]."'
+      WHERE 
+      c.nivel =1 
+      AND 
+      c.flag_servicio =0";
+      return  $this->db->query($query_get)->result_array();
+        
   }   
   function get($params=[], $params_where =[] , $limit =1){
     $params = implode(",", $params);
@@ -63,18 +58,11 @@ class clasificacion_model extends CI_Model{
     return $this->db->get("clasificacion")->result_array();
   }
   function get_clasificacion_por_palabra_clave($param){
+  
+      $query_get  =  "SELECT * FROM clasificacion WHERE nombre_clasificacion LIKE '%".$param["clasificacion"]."%' LIMIT 20";
+      return $this->db->query($query_get)->result_array();
     
-    $clasificacion  =  $param["clasificacion"];
-    $query_get      =  "SELECT * FROM clasificacion 
-                        WHERE 
-                          nombre_clasificacion 
-                        LIKE '%".$clasificacion."%' 
-                        LIMIT 20";
-
-
-    $result         =   $this->db->query($query_get);
-    return $result->result_array(); 
-    }
+  }
     function get_clasificacion_por_id($param){
       $id         = $param["id"];
       return $this->q_get($param["fields"] , $id );
@@ -120,24 +108,22 @@ class clasificacion_model extends CI_Model{
     }
     function get_coincidencia($param){
 
-        $clasificacion  =  $param["clasificacion"];
-        $servicio       =  $param["id_servicio"];
         $query_get ="SELECT 
                         id_clasificacion , 
                         padre  ,
                         nivel                        
                         FROM  
-                    clasificacion 
+                          clasificacion 
                         WHERE  
-                    nombre_clasificacion 
+                          nombre_clasificacion 
                         LIKE  
-                        '%".$clasificacion."%' 
+                          '%".$param["clasificacion"]."%' 
                         AND 
-                        flag_servicio =  '".$servicio."'
-                    LIMIT 1";
+                          flag_servicio =  '".$param["id_servicio"]."'
+                        LIMIT 1";
 
-        $result =  $this->db->query($query_get);
-        return $result->result_array();            
+        return  $this->db->query($query_get)->result_array();
+        
     }
     
 }

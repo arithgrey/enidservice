@@ -28,13 +28,11 @@
         return $this->db->get("faq")->result_array();
     }
     function search($param){
-
-        $q          =  $param["q"];
         $extra      = "AND status = 1";
         $query_get  = "SELECT * FROM faq 
                         WHERE 
                         titulo 
-                        like '%".$q."%' 
+                        like '%".$param["q"]."%' 
                         ".$extra ."
                         LIMIT 25";            
         $result =  $this->db->query($query_get);                            

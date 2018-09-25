@@ -8,7 +8,7 @@ class Departamento extends REST_Controller{
   }  
   function index_GET(){
     $param    = $this->get();
-    $response = $this->departamento_model->get_all($param);
+    $response = $this->departamento_model->get([] , [] , 100);
     $this->response($response);
   }
 }

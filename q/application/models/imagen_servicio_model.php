@@ -35,11 +35,19 @@ class Imagen_servicio_model extends CI_Model {
 	}
 	function delete_imagen_servicio($param){
     
-	  $id_imagen =   $param["id_imagen"];  
-	  $query_delete = "DELETE FROM  imagen_servicio WHERE id_imagen = '".$id_imagen."' LIMIT 5";
+	  /*
+	  $query_delete = "DELETE FROM  imagen_servicio WHERE id_imagen = '".$param["id_imagen"]."' LIMIT 5";
 	  $result =  $this->db->query($query_delete); 
 	  return  $this->elimina_imagen($id_imagen);
+	  */
+	  return $this->delete(["id_imagen" => $param["id_imagen"] ], 5);
 	  
 	}
-
+	function delete($params_where =[] , $limit =1){              
+      $this->db->limit($limit);        
+      foreach ($params_where as $key => $value) {
+        $this->db->where($key , $value);
+      }        
+      return  $this->db->delete("imagen_servicio", $params_where);
+    }
 }

@@ -31,11 +31,7 @@
       
       $response = $this->db->query(get_drop("tmp_table_afiliados_$_num"));
         
-
-      if($flag == 0 ) {
-  
-        $fecha_inicio =  $param["fecha_inicio"];        
-        $fecha_termino =  $param["fecha_termino"];        
+      if($flag == 0 ){
 
         $query_create = "CREATE TABLE tmp_table_afiliados_$_num 
         AS      
@@ -48,9 +44,9 @@
           idperfil = 19 
         AND
         DATE(fecha_registro)BETWEEN 
-        '".$fecha_inicio."' 
+        '".$param["fecha_inicio"]."' 
         AND 
-        '".$fecha_termino."' 
+        '".$param["fecha_termino"]."' 
         GROUP BY
         DATE(fecha_registro)";
 
@@ -64,20 +60,16 @@
       
       $this->db->query(get_drop("tmp_accesos_$_num") );
       if($flag ==  0){
-        
-        $fecha_inicio   =  $param["fecha_inicio"];
-        $fecha_termino  =  $param["fecha_termino"];
-        $query_create =  "CREATE TABLE tmp_accesos_$_num AS 
-                              SELECT 
-                                DATE(fecha_registro)fecha 
-                              FROM 
-                              pagina_web 
-                              WHERE                                    
-                              DATE(fecha_registro)                             
-                              BETWEEN    
-                                '".$fecha_inicio."' 
-                                    AND 
-                                '".$fecha_termino."'";
+        $query_create   =  
+        "CREATE TABLE tmp_accesos_$_num AS 
+            SELECT 
+            DATE(fecha_registro)fecha 
+        FROM 
+            pagina_web 
+            WHERE                                    
+            DATE(fecha_registro)                             
+            BETWEEN    
+            '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."'";
         $this->db->query($query_create);
         
         $query_create =  "CREATE TABLE tmp_accesos_fechas_$_num AS 

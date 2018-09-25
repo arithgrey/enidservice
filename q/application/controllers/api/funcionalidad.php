@@ -11,7 +11,7 @@ class funcionalidad extends REST_Controller{
     function add_usuario_PUT(){
 
         $param         =  $this->put();
-        $funcionalidades =  $this->funcionalidad_model->get_all($param);        
+        $funcionalidades =  $this->funcionalidad_model->get([], [] , 100);        
         $response = 
         $this->funcionalidad_model->add_conceptos($funcionalidades , $param["id_usuario"]);
         $this->response($response);

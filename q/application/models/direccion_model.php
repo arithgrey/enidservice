@@ -19,10 +19,8 @@
                     cp 
                     ON d.id_codigo_postal =  cp.id_codigo_postal  
                     WHERE d.id_direccion =".$id_direccion;
-        $result   =  $this->db->query($query_get);
-        $info     =  $result->result_array();    
-        return $info;
-
+        return  $this->db->query($query_get)->result_array();
+        
     } 
     function insert( $params , $return_id=0 , $debug=0){        
         $insert   = $this->db->insert("direccion", $params , $debug);     

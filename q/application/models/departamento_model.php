@@ -13,8 +13,5 @@
         }
         return $this->db->get("departamento")->result_array();
     }
-    function get_all($param){        
-        return $this->get([] , [] , 100);
-    }
     
 }

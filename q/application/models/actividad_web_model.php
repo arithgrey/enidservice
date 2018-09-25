@@ -4,7 +4,6 @@
         parent::__construct();        
         $this->load->database();
     }
-    
     private function get( $params=[], $params_where =[] , $limit =1){
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -16,43 +15,34 @@
     }
     
     function visitas_enid_semana($_num){
+      $query_get = "SELECT 
+        HOUR(fecha_registro)horario,
+        SUM(CASE WHEN tipo IS NOT NULL THEN 1 ELSE 0 END )total_registrado,
+        SUM(CASE WHEN tipo = 111 then 1 else 0 end )cotizaciones ,          
+        SUM(CASE WHEN tipo = 43 then 1 else 0 end )contacto , 
+        SUM(CASE WHEN tipo = 2201 then 1 else 0 end )faq , 
+        SUM(CASE WHEN tipo = 9990890 then 1 else 0 end )correos_empresas ,
+        SUM(CASE WHEN tipo = 2892 then 1 else 0 end )procesar_compra ,  
+        SUM(CASE WHEN tipo = 566 then 1 else 0 end )sobre_enid,
+        SUM(CASE WHEN tipo = 22 then 1 else 0 end )afiliados,
+        SUM(CASE WHEN tipo = 40 then 1 else 0 end )nosotros,                        
+        SUM(CASE WHEN tipo = 3009 then 1 else 0 end )formas_pago
+        FROM  tmp_landing_$_num
+        GROUP BY 
+        HOUR(fecha_registro)
+        ORDER BY HOUR(fecha_registro) DESC ";                       
 
-
-          $query_get = "SELECT 
-                        HOUR(fecha_registro)horario,
-                        SUM(CASE WHEN tipo IS NOT NULL THEN 1 ELSE 0 END )total_registrado,
-                        SUM(CASE WHEN tipo = 111 then 1 else 0 end )cotizaciones ,          
-                        SUM(CASE WHEN tipo = 43 then 1 else 0 end )contacto , 
-                        SUM(CASE WHEN tipo = 2201 then 1 else 0 end )faq , 
-                        SUM(CASE WHEN tipo = 9990890 then 1 else 0 end )correos_empresas ,
-                        SUM(CASE WHEN tipo = 2892 then 1 else 0 end )procesar_compra ,  
-                        SUM(CASE WHEN tipo = 566 then 1 else 0 end )sobre_enid,
-                        SUM(CASE WHEN tipo = 22 then 1 else 0 end )afiliados,
-                        SUM(CASE WHEN tipo = 40 then 1 else 0 end )nosotros,                        
-                        SUM(CASE WHEN tipo = 3009 then 1 else 0 end )formas_pago
-                        FROM  tmp_landing_$_num
-                        GROUP BY 
-                        HOUR(fecha_registro)
-                        ORDER BY HOUR(fecha_registro) DESC ";                       
-
-          $result = $this->db->query($query_get);
-          return  $result->result_array();
-
+      return $this->db->query($query_get)->result_array();
+          
     }
       
     function get_correos_enviados($tabla){
-      $query_get = "SELECT 
-                    SUM(total) correos_enviados
-                    FROM $tabla";
-      $result =  $this->db->query($query_get);      
-      return $result->result_array();  
+      $query_get = "SELECT SUM(total) correos_enviados FROM $tabla";
+      return  $this->db->query($query_get)->result_array();     
     }
-    
     function get_registros_valoraciones_productos($tabla){
-
       $query_get = "SELECT COUNT(0)productos_valorados FROM $tabla";
-      $result =  $this->db->query($query_get);      
-      return $result->result_array(); 
+      return  $this->db->query($query_get)->result_array();      
     }
     
     function get_registros_valoraciones($fecha , $tabla){
@@ -75,17 +65,14 @@
                     ,SUM(envios)envios
                     ,SUM(cancelaciones)cancelaciones
                     FROM $tabla ";
-      $result =  $this->db->query($query_get);      
-      return $result->result_array();            
+      return $this->db->query($query_get)->result_array();      
+
     }
-    
     function get_num_registros_usuario($fecha , $tabla){      
       
       $query_get = "SELECT SUM(total)num FROM $tabla ";
-      $result =  $this->db->query($query_get);
-      return $result->result_array()[0]["num"];      
+      return  $this->db->query($query_get)->result_array()[0]["num"];
     }
-      
     function crea_tb_deseo($param){
 
       $where =  $this->get_where_tiempo($param , 1);
@@ -289,9 +276,7 @@
 
         $_num =  get_random();
         $this->create_tmp_langings($_num ,  0  , $param );
-
           $data_complete["semanal"] =  $this->visitas_enid_semana($_num);          
-          
         $this->create_tmp_langings($_num ,  1 , $param );          
         return $data_complete;      
     }
@@ -479,15 +464,13 @@
     function crea_reporte_enid_service($param){
         
         
-        $_num = get_random();     
+        $_num         = get_random();     
         $sql_visitas  =  $this->crea_visitas_por_periodo($param);
         $data_complete["sql_visitas"] = $sql_visitas;
         $this->crea_tabla_temploral("visitas_periodo_$_num" , $sql_visitas , 0);
-              $query_get = "SELECT * FROM visitas_periodo_$_num";
-              $result =  $this->db->query($query_get);
-              $accesos =  $result->result_array();
+              $query_get  =   "SELECT * FROM visitas_periodo_$_num";
+              $accesos    =   $this->db->query($query_get)->result_array();
               $data_complete["resumen"] =  $this->agrega_data($param ,  $accesos , $_num);
-            
         $this->crea_tabla_temploral("visitas_periodo_$_num" , $sql_visitas , 1);
         return $data_complete;
     }      
@@ -653,25 +636,23 @@
     }
   */
     private function get_total_tabla($tabla){
+      
+      $query_get = "SELECT SUM(total)num FROM $tabla ";
+      return  $this->db->query($query_get)->result_array()[0]["num"];
         
-        $query_get = "SELECT SUM(total)num FROM $tabla ";
-        $result =  $this->db->query($query_get);
-        return $result->result_array()[0]["num"];
     }
   private function  get_total_conversaciones($tabla){
         $query_get = "SELECT 
                         SUM(total)num,
                         SUM(leidas_por_vendedor)leidas_por_vendedor,
                         SUM(leidas_por_cliente)leidas_por_cliente
- 
                        FROM $tabla ";
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
+        return  $this->db->query($query_get)->result_array();
+        
     }   
     private function get_total_lista_deseo($tb_deseo_usuario){
         $query_get = "SELECT num FROM  $tb_deseo_usuario ";
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
+        return $this->db->query($query_get)->result_array();
     }
     
 }

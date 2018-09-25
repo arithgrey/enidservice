@@ -10,10 +10,6 @@
     }  
     function regitra_cuenta_bancaria($param){
 
-      $id_usuario =  $param["id_usuario"];
-      $clabe =  $param["clabe"];
-      $banco = $param["banco"];       
-      
       $data_complete["registro_cuenta"] = 0;    
       $data_complete["banco_es_numerico"] = 0;    
       $data_complete["clabe_es_corta"] = 1;    
@@ -24,9 +20,9 @@
             $data_complete["clabe_es_corta"] = 0;    
 
             $params = [
-              "id_usuario"  =>   $id_usuario ,
-              "clabe"       =>   $clabe ,
-              "id_banco"    =>   $banco,
+              "id_usuario"  =>   $param["id_usuario"] ,
+              "clabe"       =>   $param["clabe"] ,
+              "id_banco"    =>   $param["banco"],
               "tipo"        =>   0
             ];
                         
@@ -37,9 +33,7 @@
       
     }
     function get_cuentas_usuario($param){
-      
-      $id_usuario =  $param["id_usuario"];
-      $tipo = $param["tipo"];
+    
       $query_get =   "SELECT 
                         c.id_cuenta_pago     
                         ,c.numero_tarjeta            
@@ -50,15 +44,14 @@
                       INNER JOIN banco b 
                         ON c.id_banco =  b.id_banco
                       WHERE 
-                        c.id_usuario = $id_usuario
+                        c.id_usuario = '".$param["id_usuario"]."'
                       AND 
-                        tipo =  $tipo                        
+                        tipo =  '".$param["tipo"]."'                     
                       AND 
                         c.status =1
-                        AND 
+                      AND 
                         b.status =1";    
-      $result =  $this->db->query($query_get);
-      return $result->result_array();
+      return  $this->db->query($query_get)->result_array();
     }
     function insert($params , $return_id=0 , $debug=0){        
         $insert   = $this->db->insert("cuenta_pago", $params , $debug);     
