@@ -5,57 +5,7 @@
         $this->load->database();
     }
     
-    function get_notificaciones_usuario_perfil($param){
-
-        $id_perfil                              =   $param["id_perfil"];
-        $data_complete["perfil"]                =   $id_perfil;
-        $param["id_perfil"]                     =   $id_perfil;
-        
-        $data_complete["id_usuario"]            =  $param["id_usuario"]; 
-        $data_complete["adeudos_cliente"]       = $this->get_adeudo_cliente($param);
-        $data_complete["valoraciones_sin_leer"] = $this->valoraciones_sin_leer($param);    
-        $data_complete["id_perfil"]             = $id_perfil;
-        switch ($id_perfil){
-            case 3:            
-                                
-                
-                
-                
-                $data_complete["email_enviados_enid_service"] = 
-                $this->email_enviados_enid_service();                
-
-                $data_complete["accesos_enid_service"] = 
-                $this->accesos_enid_service();                
-
-                $data_complete["tareas_enid_service"] = 
-                $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];
-
-                $data_complete["num_pendientes_direccion"] = 
-                $this->tareas_enid_service()[0]["num_pendientes_direccion"];        
-                                
-            break;
-            
-         case 4:            
-                
-                
-
-                $data_complete["email_enviados_enid_service"] = 
-                $this->email_enviados_enid_service();
-
-                $data_complete["accesos_enid_service"] = 
-                $this->accesos_enid_service();                
-                $data_complete["tareas_enid_service"] = 
-                $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];                
-                
-
-            break;
-
-            default:
-                
-                break;
-        }
-        return $data_complete;
-    }
+    
     
     /*
     

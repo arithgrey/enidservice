@@ -157,7 +157,6 @@ class Servicio extends REST_Controller{
   function get_coincidencias_busqueda($param){
 
     $coincidencia =  $this->get_coincidencia_servicio($param);
-
     $res =  [];
     $z =0;
     if (count($coincidencia)>0) {
@@ -168,15 +167,15 @@ class Servicio extends REST_Controller{
         $z =0;
         $nueva_coincidencia  = $coincidencia;
         while ( $a > 0) {
-          
-          
+                  
           if ($z == 0) {                      
             $res[$a] = $coincidencia;            
 
           }else{          
 
+              debug($nueva_coincidencia , 1);
               $n = $this->get_clasificacion_padre_nivel($nueva_coincidencia);
-              if (count($n)>0) {
+              if ( is_array($n) &&  count($n)>0) {
                 $res[$a] = $n[0];     
                 $nueva_coincidencia =  $n[0];
               }            
@@ -852,9 +851,11 @@ class Servicio extends REST_Controller{
   }
   function status_imagen_PUT(){ 
 
-      $param        =   $this->put();      
-      $id_servicio  =   $param["id_servicio"];
-      $response     =   $this->serviciosmodel->q_up("flag_imagen", $param["exist"], $id_servicio);
+      $param        =   $this->put();                
+
+      
+      $response     =   
+      $this->serviciosmodel->q_up("flag_imagen", $param["existencia"] , $param["id_servicio"]);
       $this->response($response);
   }
   function visitas_PUT(){
@@ -1179,5 +1180,10 @@ class Servicio extends REST_Controller{
         $data["info_productos"] =  $this->serviciosmodel->get_productos_solicitados($param);
         $this->load->view("producto/principal" , $data);
     }    
+    function num_lectura_valoraciones_GET(){
+        $param    =  $this->get();
+        $response =  $this->serviciosmodel->get_num_lectura_valoraciones($param);
+        $this->response($response);
+    }
 }
 ?>

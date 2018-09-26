@@ -917,15 +917,13 @@ function debug($msg, $array = 0)
     return $data_complete;
   }
   /**/
-  function if_ext($param , $k=''){
+  function if_ext($param , $k='', $num=0){
 
-    $keys = explode(",", $k);
-    //print_r($keys);
+    $keys = explode(",", $k);  
     $z    = 1;
-    for ($a=0; $a < count($keys); $a++){     
-      //echo strlen(trim($param[$keys[$a]]));
-      if (!array_key_exists(trim($keys[$a]), $param)  ||  strlen(trim($param[$keys[$a]])) < 3 ){
-          $z  = 0;          
+    for ($a=0; $a < count($keys); $a++){           
+      if (!array_key_exists(trim($keys[$a]), $param)  ||  strlen(trim($param[$keys[$a]])) < $num ){
+        $z  = 0;          
       }
     }
     return $z;

@@ -53,11 +53,26 @@ function registra_img_servicio(e){
     $.removeData(formData);
 }        
 /**/     
-function response_load_image(data){
+var response_load_image = function(data){
 
-    show_response_ok_enid(".place_load_img" , "Imagen cargada con éxito" );                         
-    carga_informacion_servicio(1);        
-    set_option("seccion_a_recorrer", ".contenedor_global_servicio");
-    recorrepage(".carga_informacion_servicio");
-}
+    if(array_key_exists("session_exp", data)){        
+        /*Session exp*/
+        redirect("");
+    }
+    if (data.status_imagen_servicio != true) {
+
+
+        llenaelementoHTML(".info_form" , "Intenta cargar otra imagen!" );                         
+        recorrepage(".info_form");
+        carga_form_img();
+
+    }else{
+        
+        show_response_ok_enid(".place_load_img" , "Imagen cargada con éxito" );                         
+        carga_informacion_servicio(1);        
+        set_option("seccion_a_recorrer", ".contenedor_global_servicio");
+        recorrepage(".carga_informacion_servicio");    
+    }
+
     
+}

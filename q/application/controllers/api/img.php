@@ -9,11 +9,10 @@ class Img extends REST_Controller{
   function index_DELETE(){
 
     $param    =  $this->delete();
-    $response = false;
-    if ($param["id_imagen"] > 0) {
-      $params   =  [ 'idimagen' => $param["id_imagen"]];    
-      $response =  $this->img_model->delete($params); 
-      
+    $response = [];    
+    if($param["id_imagen"] > 0) {
+        $params   =  [ 'idimagen' => $param["id_imagen"]];    
+        $response =  $this->img_model->delete($params);       
     }    
     $this->response($response);  
   }   

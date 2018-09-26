@@ -795,7 +795,7 @@
         $result =  $this->db->query($query_get);
         return $result->result_array()[0]["num"];
     }
-    function valoraciones_sin_leer($param){
+    function get_num_lectura_valoraciones($param){
         $id_usuario =  $param["id_usuario"];
         $query_get ="
             SELECT 

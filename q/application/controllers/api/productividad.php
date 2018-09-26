@@ -73,23 +73,18 @@ class productividad extends REST_Controller{
     function notificaciones_GET(){
 
         
-        $param                              =  $this->get();  
-        $id_usuario                         =  $this->principal->get_session('idusuario');
-        $param["id_perfil"]                 =  $this->principal->getperfiles();        
-        $param["id_usuario"]                =  $id_usuario;        
-        
-        $response["objetivos_perfil"]           =  $this->get_objetivos_perfil($param);
-        $response["productos_anunciados"]       =  $this->valida_producto_anunciado($param);
-        $response["flag_direccion"]             =  $this->verifica_direccion_registrada_usuario($param);
+        $param                                  =   $this->get();  
+        $id_usuario                             =   $this->principal->get_session('idusuario');
+        $param["id_perfil"]                     =   $this->principal->getperfiles();        
 
-
-
-        $param["id_perfil"]                 =   $this->principal->getperfiles();        
-        $response["info_notificaciones"]    = 
-        $this->productividad_usuario_model->get_notificaciones_usuario_perfil($param);
-        $response["ventas_enid_service"]    =   $this->get_ventas_enid_service();
-
-        if ($response["id_perfil"] ==  3 || $response["info_notificaciones"] == 4 ) {
+        $param["id_usuario"]                    =   $id_usuario;                
+        $response["objetivos_perfil"]           =   $this->get_objetivos_perfil($param);
+        $response["productos_anunciados"]       =   $this->valida_producto_anunciado($param);
+        $response["flag_direccion"]             =   $this->verifica_direccion_registrada_usuario($param);
+        $response["info_notificaciones"]        =   $this->get_notificaciones_usuario_perfil($param);
+        $response["ventas_enid_service"]        =   $this->get_ventas_enid_service();
+        $response["id_perfil"]                  =   $param["id_perfil"];
+        if ($param["id_perfil"] ==  3 || $response["info_notificaciones"] == 4 ) {
             $data_complete["envios_a_validar_enid_service"] = $this->envios_a_validar_enid_service();
         }
                         
@@ -200,6 +195,65 @@ class productividad extends REST_Controller{
     } 
     private function envios_a_validar_enid_service(){
         
+    }
+    private function get_adeudo_cliente($q){        
+        $api =  "recibo/deuda_cliente/format/json/"; 
+        return   $this->principal->api( $api , $q );                                
+    }
+    private function get_num_lectura_valoraciones($q){
+        $api =  "servicio/num_lectura_valoraciones/format/json/"; 
+        return   $this->principal->api( $api , $q );                                
+    }
+    function get_notificaciones_usuario_perfil($param){
+
+        $id_perfil                              =   $param["id_perfil"];
+        $data_complete["perfil"]                =   $id_perfil;
+        $param["id_perfil"]                     =   $id_perfil;
+        
+        $data_complete["id_usuario"]            =  $param["id_usuario"]; 
+        $data_complete["adeudos_cliente"]       = $this->get_adeudo_cliente($param);
+        $data_complete["valoraciones_sin_leer"] = $this->get_num_lectura_valoraciones($param);    
+        $data_complete["id_perfil"]             = $id_perfil;
+        switch ($id_perfil){
+            case 3:            
+                                
+                
+                
+                
+                $data_complete["email_enviados_enid_service"] = 
+                $this->email_enviados_enid_service();                
+
+                $data_complete["accesos_enid_service"] = 
+                $this->accesos_enid_service();                
+
+                $data_complete["tareas_enid_service"] = 
+                $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];
+
+                $data_complete["num_pendientes_direccion"] = 
+                $this->tareas_enid_service()[0]["num_pendientes_direccion"];        
+                                
+            break;
+            
+         case 4:            
+                
+                
+
+                $data_complete["email_enviados_enid_service"] = 
+                $this->email_enviados_enid_service();
+
+                $data_complete["accesos_enid_service"] = 
+                $this->accesos_enid_service();                
+                $data_complete["tareas_enid_service"] = 
+                $this->tareas_enid_service()[0]["num_pendientes_desarrollo"];                
+                
+
+            break;
+
+            default:
+                
+                break;
+        }
+        return $data_complete;
     }
     /**/
 }?>

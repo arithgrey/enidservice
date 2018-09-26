@@ -44,3 +44,4 @@
         </button>           
     <?=end_row()?>
 </form>
+<?=place("info_form")?>

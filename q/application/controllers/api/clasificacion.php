@@ -9,10 +9,12 @@ class Clasificacion extends REST_Controller{
     }
     function categorias_servicios_GET(){
 
-        $param      =  $this->get();
-        $response   = false;
+        $param      =   $this->get();
+        $response   =   [];
+
         if (if_ext($param , 'padre,modalidad,nivel') ) {
 
+            
             $in     = 
                 [   
                     "padre"         => $param["padre"],
@@ -80,11 +82,13 @@ class Clasificacion extends REST_Controller{
     /**/
     function clasificacion_padre_nivel_GET(){
 
-        $param    = $this->get();
-        $response = false;
-        if (if_ext($param , 'padre')) {
-            $f        =     ["id_clasificacion" , "padre" , "nivel" ];
-            $response =     $this->clasificacion_model->get($f, $param["padre"] );    
+        $param          = $this->get();        
+        $response       = [];    
+
+        if (if_ext($param , 'padre' , 0)) {            
+            $f          =     ["id_clasificacion" , "padre" , "nivel" ];
+            $response   =     $this->clasificacion_model->get($f, $param["padre"] );    
+
         }
         $this->response($response);
     }

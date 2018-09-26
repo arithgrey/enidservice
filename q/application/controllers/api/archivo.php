@@ -6,8 +6,7 @@ class Archivo extends REST_Controller{
         parent::__construct();                       
         $this->load->model("img_model");
         $this->load->library(lib_def());                   
-        $this->id_usuario   =  $this->principal->get_session("idusuario");  
-        
+        $this->id_usuario   =  $this->principal->get_session("idusuario");          
     }
     function extension($str){
         $str=implode("",explode("\\",$str));
@@ -46,7 +45,11 @@ class Archivo extends REST_Controller{
     /**/
     function gestiona_imagenes($param){ 
 
-        $param["id_empresa"]    =  $this->principal->get_session("idempresa");            
+        $param["id_empresa"]    =   $this->principal->get_session("idempresa");                    
+        $prm["id_usuario"]      =   $this->id_usuario;                    
+        $param["id_usuario"]    =   $this->id_usuario;                    
+
+
         switch ($param["q"]) {
               case 'faq':
                 
@@ -55,30 +58,12 @@ class Archivo extends REST_Controller{
                 break;        
 
                 
-              case 'perfil_usuario':
-                
-                    
-                $id_imagen = $this->img_model->insert_img($param , 1);
-
-                if ( $id_imagen > 0 && $this->id_usuario>0) {                    
-                    $prm["id_imagen"]    = $id_imagen;                    
-                    $prm["id_usuario"]   = $this->id_usuario;                    
-                    return $this->create_imagen_usuario($prm);                
-                }               
+              case 'perfil_usuario':                
+                $this->create_perfil_usuario($param);
                 break;        
 
               case 'servicio':            
-                
-                
-                $id_imagen = $this->img_model->insert_img($param , 1);
-                if ( $id_imagen > 0 ) {                    
-                    $prm["id_imagen"]   = $id_imagen;
-                    $prm["id_servicio"] = $param["servicio"];
-                    $this->insert_imagen_servicio($prm);
-                    $prm["exist"] = 1;
-                    $this->notifica_producto_imagen($param);
-                }
-                
+                return $this->create_imagen_servicio($param);
                 break;          
 
         
@@ -108,5 +93,44 @@ class Archivo extends REST_Controller{
         
         $api = "imagen_usuario/index";
         return $this->principal->api( $api , $q , "json", "POST");
+    }
+    private function create_perfil_usuario($param){
+        $id_imagen = $this->img_model->insert_img($param , 1);
+        if ( $id_imagen > 0 && $this->id_usuario > 0) {                    
+            $prm["id_imagen"]    = $id_imagen;                    
+            return $this->create_imagen_usuario($prm);                
+        }               
+    }
+    private function create_imagen_servicio($param){
+
+
+        
+        $response   =   [];
+        if ($param["id_usuario"] > 0){            
+
+            $existen    =   "nombre_archivo,id_usuario,id_empresa,imagenBinaria,extension,servicio";
+            if (if_ext($param , $existen)) {
+                $id_imagen  = $this->img_model->insert_img($param , 1);            
+
+                if ( $id_imagen > 0 ) {                    
+
+                    $prm["id_imagen"]                   =   $id_imagen;
+                    $prm["id_servicio"]                 =   $param["servicio"];
+
+                    $response["status_imagen_servicio"] =   $this->insert_imagen_servicio($prm);
+                    if ($response["status_imagen_servicio"] == true ) {
+                        $prm["existencia"]                  = 1;
+                        $response["status_notificacion"] =  $this->notifica_producto_imagen($prm);
+
+                    }   
+                    $response["status_notificacion"] = 2;                 
+                }    
+                return $response;
+            }        
+            $response["params_error"] = 1;
+            return $response;        
+        }
+        $response["session_exp"] = 1;
+        return $response;        
     }
 }?>

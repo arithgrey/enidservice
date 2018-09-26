@@ -234,6 +234,12 @@ class recibo extends REST_Controller{
         $api               = "direccion/data_direccion/format/json/";
         return $this->principal->api( $api ,  $q);    
     }
+    function deuda_cliente_GET(){
 
+        $param      = $this->get();
+        $response   = $this->recibo_model->get_adeudo_cliente($param);
+        $this->response($response);
+
+    }
 
 }?>

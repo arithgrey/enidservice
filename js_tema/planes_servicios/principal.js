@@ -873,11 +873,13 @@ function response_registro(data){
 /**/
 function elimina_foto_producto(e) {
 
-	var url 		= "../imgs/index.php/api/img_controller/imagen_servicio/format/json/";
-	var data_send 	= {"id_imagen" : get_parameter_enid( $(this),  "id")}
-	request_enid("DELETE", data_send , url , function(){
-		carga_informacion_servicio(1);
-	} , ".place_servicios");
+	var url 		= "../q/index.php/api/imagen_servicio/index/format/json/";
+	if (get_parameter_enid( $(this),  "id") > 0) {
+		var data_send 	= {"id_imagen" : get_parameter_enid( $(this),  "id") , "id_servicio" : get_option("servicio")}
+		request_enid("DELETE", data_send , url , function(){
+			carga_informacion_servicio(1);
+		} , ".place_servicios");
+	}
 }
 /**/
 function agrega_metakeyword(e) {
