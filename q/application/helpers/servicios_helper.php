@@ -2,7 +2,6 @@
 if(!function_exists('invierte_date_time')){	
     
     function valida_tipo_promocion($param){
-        
         $tipo = ($param[0]["flag_servicio"] ==  1) ? "SERVICIO": "PRODUCTO";
         return $tipo;
     }
@@ -17,31 +16,26 @@ if(!function_exists('invierte_date_time')){
 	}
 	/**/
 	function create_colores_disponibles($text_colores){
-		/**/
+		
 		$arreglo_colores =  explode("," , $text_colores);		
 		$a =0;
 		$lista_completa =  "";
 		for ($a=0; $a <count($arreglo_colores); $a++) { 
 			
-			$codigo_color 	=$arreglo_colores[$a];
-			$estilos 		="background:".$codigo_color.";color:white;padding:3px;";
-			$contenido 		= 
-			icon('fa fa-times elimina_color' , [ "id"=>$codigo_color])." ".$codigo_color;
-
-			$lista_completa .= div($contenido ,[ "style" => $estilos ]);
+			$codigo_color 		=	$arreglo_colores[$a];
+			$contenido 			= 	icon('fa fa-times elimina_color' , [ "id"=>$codigo_color])." ".$codigo_color;
+			$lista_completa 	.= 	div($contenido ,[ "style" => "background:".$codigo_color.";color:white;padding:3px;" ]);
 		}		
 		return div($lista_completa, ["id"	=>	'contenedor_colores_disponibles'] );
 	}
 	/**/
 	function valida_text_numero_articulos($num){	
 
-		$text =  span("Alerta" , ["class"=>'mjs_articulo_no_disponible'])."este artúculo no se encuentra disponible, agregar nuevo";
+		$text 	=  span("Alerta" , ["class"=>'mjs_articulo_no_disponible'])."este artúculo no se encuentra disponible, agregar nuevo";
 		if($num > 0){
-			$text =  $num ." Artículo disponible";			
-			if ($num>1) {
-				$text =  $num ." Artículos disponibles";				
-			}
-			
+			$s1 	=  	$num ." Artículo disponible";			
+			$s2 	=  	$num ." Artículos disponibles";				
+			$text 	= 	( $num > 1 ) ? $s1 : $s2;
 		}
 		return $text;
 	}
@@ -63,9 +57,9 @@ if(!function_exists('invierte_date_time')){
 	/**/
 	function get_valor_envio($costo_envio ,  $flag_envio_gratis){
 		if($flag_envio_gratis ==  1 ){			
-			return   -100;			
+			return  - 100;			
 		}else{			
-			return 100;
+			return 	100;
 		}
 	}
 	/**/
@@ -112,25 +106,17 @@ if(!function_exists('invierte_date_time')){
 		$extra ="";
 		foreach ($servicios as $row) {
 			
-			$id_servicio =  $row["id_servicio"];
-			$nombre_servicio =  $row["nombre_servicio"];
-			$status =  $row["status"];
-			$text_estatus ="Activo";
-			$especificacion =icon('servicio fa fa-file-text-o' , ["id"=> $id_servicio]);
-
-			if($status == 0){
-				$text_estatus ="Inactivo";
-			}
+			$id_servicio 		=  	$row["id_servicio"];
+			$nombre_servicio 	=  	$row["nombre_servicio"];
+			$status 			=  	$row["status"];
+			$especificacion 	= 	icon('servicio fa fa-file-text-o' , ["id"=> $id_servicio]);
+			$text_estatus 		= 	($status == 0) ? "Inactivo" : "Activo";
+				
+			
 			$list .=  "<tr>";
-				
-				
-				$list .=  
-				get_td($especificacion , 
-					"class=' especificacion_servicio' ");
-
+				$list .=  get_td($especificacion , ["class" => 'especificacion_servicio']);
 				$list .=  get_td($nombre_servicio,$extra);
 				$list .=  get_td($text_estatus , ["class"=>'text-center strong']);
-
 			$list .=  "</tr>";
 			$z ++;
 		}
@@ -214,13 +200,9 @@ function get_text_ciclo_facturacion($id_ciclo_facturacion){
           }          
           break;
         case 0:
-          
-          if($flag_envio_gratis == 1){              
-            
-            $extra ="Envio a todo México";               
-          }else{
-            $extra ="Envios a todo México";               
-          }
+
+          $extra = ($flag_envio_gratis == 1) ? "Envios gratis a todo México" : "Envios a todo México";
+
           break;
         default:          
           break;
@@ -228,24 +210,20 @@ function get_text_ciclo_facturacion($id_ciclo_facturacion){
       return $extra;
     }
     
-    function get_precio_producto($url_info_producto , $precio, $costo_envio , 
-    $flag_servicio , $id_ciclo_facturacion){
+    function get_precio_producto($url_info_producto , $precio, $costo_envio , $flag_servicio , $id_ciclo_facturacion){
     
-    
-	if($flag_servicio ==  0){    
-	      $seccion = anchor_enid($precio.'MXN', ["href"  =>  $url_info_producto ]);
-	    }else{
-	      if($id_ciclo_facturacion != 9 && $precio>0 ){
-	          $seccion =  anchor_enid($precio.'MXN' , ["href"=> $url_info_producto ] , 1 );
-	      }else{
-	          $seccion =  anchor_enid(' A CONVENIR' , ["href"=> $url_info_producto ] , 1 );
-	      }
-	      
-    }
-    
-    return $seccion;
+		if($flag_servicio ==  0){    
+		      $seccion = anchor_enid($precio.'MXN', ["href"  =>  $url_info_producto ]);
+		}else{
+
+			$s1 	 =  anchor_enid($precio.'MXN' , ["href"=> $url_info_producto ] , 1 );
+			$s2 	 =  anchor_enid(' A CONVENIR' , ["href"=> $url_info_producto ] , 1 );
+			$seccion = ($id_ciclo_facturacion != 9 && $precio>0 ) ? $s1 : $s2;
+		      
+	    }
+	    return $seccion;
   	}
-  	  function get_numero_colores($color , $flag_servicio , $url_info_producto , $extra ){
+  	function get_numero_colores($color , $flag_servicio , $url_info_producto , $extra ){
 
         if($flag_servicio !=  1) {                
           $arreglo_colores =  explode(",", $color);
@@ -267,6 +245,7 @@ function get_text_ciclo_facturacion($id_ciclo_facturacion){
           }
         }
     }
+
     function get_text_nombre_servicio($nombre_servicio){
       $text_nombre_servicio = heading_enid(substr( $nombre_servicio ,  0  , 70 ) , 2 );
       return $text_nombre_servicio;
@@ -279,38 +258,25 @@ function get_text_ciclo_facturacion($id_ciclo_facturacion){
 	function informacion_existencia_producto($existencia , $in_session){
 
 	    if($in_session ==  1){
-	        if($existencia >0 ){
-	           return "<span 
-	                    style='margin-right:10px;'
-	                    title='Articulos en existencia y listos para ser vendidos'>
-	                    ". $existencia." En existencia "."
-	                </span>";
-	        }else{
-	            return "<span class='white'
-	                          style='margin-right:10px;padding:2px;background:red;'>
-	                        INVENTARIO LIMITADO
-	                    </span>"; 
-	        }
+	        $msj = ($existencia >0 ) ? span($existencia." En existencia ") : span("INVENTARIO LIMITADO"){
+	        return $msj;
 	    }
   	}
   	function muestra_vistas_servicio($in_session , $vistas){
-
 	    if($in_session ==  1){
-	       return "<div style='background:black;' class='white'>".$vistas." personas alcanzadas</div>";
+	       return div($vistas." personas alcanzadas");
 	    } 
   	}
   	function valida_botton_editar_servicio($param, $id_usuario_registro_servicio ){
 
       $in_session = $param["in_session"];
-      if($in_session ==  1){
+      	if($in_session ==  1){
           $id_servicio        =  $param["id_servicio"];
           $id_usuario_actual  =   $param["id_usuario"];
           if( $id_usuario_actual ==  $id_usuario_registro_servicio){
-
             return div("" , ["class"=>'servicio fa fa-pencil' ,  "id"=> $id_servicio]);
           }
-          
-      }
+      	}
   	}
 
 }/*Termina el helper*/

@@ -52,30 +52,24 @@ if(!function_exists('invierte_date_time')){
 
   }
   
-  function monto_pendiente_cliente($monto_a_pagar,$saldo_cubierto,$costo_envio_cliente,
-    $num_ciclos_contratados){
+  function monto_pendiente_cliente($monto_a_pagar,$saldo_cubierto,$costo_envio_cliente,$num_ciclos_contratados){
 
-      $total_deuda =  $monto_a_pagar * $num_ciclos_contratados;  
-      $total_deuda_mas_envio  =  $total_deuda + $costo_envio_cliente;  
-      return $total_deuda_mas_envio;
+      $total_deuda  =  $monto_a_pagar * $num_ciclos_contratados;  
+      return        =  $total_deuda + $costo_envio_cliente;  
   }
-  
   function evalua_acciones_modalidad_anteriores($num_acciones , $modalidad_ventas){
     
     $text = "";
     if($num_acciones > 0){      
       if($modalidad_ventas ==  1){        
-        $text = "MIRA TUS ULTIMAS VENTAS";  
-        if($num_acciones >1){
-          $text = "MIRA TUS ÚLTIMAS $num_acciones  VENTAS";  
-        }        
+        $text =  ($num_acciones >1) ? "MIRA TUS ÚLTIMAS $num_acciones  VENTAS" :  "MIRA TUS ULTIMAS VENTAS";  
       }else{
         $text = "MIRA TUS ÚLTIMAS COMPRAS";          
       } 
       $config = ["class"=> "a_enid_black ver_mas_compras_o_ventas"];
       return anchor_enid($text , $config);    
     }
-    
+    return $text;
   }
   function evalua_acciones_modalidad($en_proceso , $modalidad_ventas){
 
@@ -83,22 +77,15 @@ if(!function_exists('invierte_date_time')){
     $flag =0;
     $simbolo =icon("fa  fa-fighter-jet");
     if($modalidad_ventas == 0 && $en_proceso["num_pedidos"]>0){
-        $flag ++;
-        $num  = $en_proceso["num_pedidos"];
-        $text = $simbolo." TU PEDIDO ESTÁ EN CAMINO ";
-        if($num>1) {
-            $text = $simbolo." TUS $num PEDIDOS ESTÁN EN CAMINO ";
-        }  
-        
+        $flag       ++;
+        $num        = $en_proceso["num_pedidos"];
+        $text   = ($num>1) ? $simbolo." TUS $num PEDIDOS ESTÁN EN CAMINO " : $simbolo." TU PEDIDO ESTÁ EN CAMINO ";
     }
-    
     if($modalidad_ventas == 1 && $en_proceso["num_pedidos"]>0){
         $flag ++;
-        $num = $en_proceso["num_pedidos"];
-        $text = $simbolo." TU ENVÍO ESTÁ EN CAMINO ";
-        if($num>1) {
-            $text = $simbolo." ENVIASTÉ $num PAQUETES QUE  ESTÁN POR LLEGAR A TU CLIENTE";
-        }          
+        $num  = $en_proceso["num_pedidos"];
+        $text = ($num>1) ? $simbolo." ENVIASTÉ $num PAQUETES QUE  ESTÁN POR LLEGAR A TU CLIENTE" : $simbolo." TU ENVÍO ESTÁ EN CAMINO " ;
+        
     }
 
     $panel_ini ="";

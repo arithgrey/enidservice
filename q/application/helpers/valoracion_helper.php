@@ -17,36 +17,13 @@
   }
   function ver_totalidad_por_modalidad($modalidad , $total){
 
-    $icon = "<i class='fa fa-shopping-bag'></i>"; 
-    $texto_compras = $icon."TUS COMPRAS HASTA EL MOMENTO ".$total;
-    if($modalidad == 1){
-      $texto_compras = $icon."TUS VENTAS HASTA EL MOMENTO ".$total;
-    }
+    $icon          = icon("fa fa-shopping-bag"); 
+    $texto_compras = ($modalidad == 1) ? $icon."TUS VENTAS HASTA EL MOMENTO ".$total : $icon."TUS COMPRAS HASTA EL MOMENTO ".$total;
     return $texto_compras;
   }
-  
-  
-
   function create_seccion_saldo_pendiente($saldo_pendiente){
     return $saldo_pendiente;
-  }
-      
-  
-
-  
-  
-
-  /**/
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  }  
   function crea_estrellas($calificacion , $sm=0){
 
       $estrellas_valoraciones ="";

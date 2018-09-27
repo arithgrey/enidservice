@@ -10,16 +10,15 @@ function lista_categorias($categorias){
   $l = "";  
   foreach($categorias as $row){
     
-    $id_categoria     = $row["id_categoria"];
-    $nombre_categoria = $row["nombre_categoria"];
-    $faqs             = $row["faqs"];   
-    $href             = "?categoria=".$id_categoria; 
+    $id_categoria     =   $row["id_categoria"];
+    $nombre_categoria =   $row["nombre_categoria"];
+    $faqs             =   $row["faqs"];   
+    $href             =   "?categoria=".$id_categoria; 
     
-    $text_lista=  
-    icon("fa fa-file-text-o"). span($nombre_categoria ."(".$faqs.")");  
+    $text_lista=  icon("fa fa-file-text-o"). span($nombre_categoria ."(".$faqs.")");  
 
     $link             =     anchor_enid($text_lista, ['href'=>$href]);
-    $l.=  div($link,["class" =>"col-lg-4"] );    
+    $l               .=  div($link,["class" =>"col-lg-4"] );    
   }
   return $l;
 }

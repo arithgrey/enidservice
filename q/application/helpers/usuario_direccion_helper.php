@@ -6,9 +6,9 @@ if(!function_exists('invierte_date_time')){
     $btn =    anchor_enid("Liquida ahora!" , 
       [
         'class' => 'resumen_pagos_pendientes ' ,
-                  'id'    =>  $id_proyecto_persona_forma_pago,
-                  'href'  =>  '#tab_renovar_servicio',
-                  'data-toggle' => 'tab'
+        'id'    =>  $id_proyecto_persona_forma_pago,
+        'href'  =>  '#tab_renovar_servicio',
+        'data-toggle' => 'tab'
       ]);
     
 

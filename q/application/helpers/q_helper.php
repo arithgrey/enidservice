@@ -3,21 +3,19 @@ if(!function_exists('invierte_date_time')){
   
   function base_valoracion(){
 
-    return "<div class='contenedor_promedios'> 
-                            <label class='estrella' style='font-size: 1em;color: #0070dd;'>★
-                            </label>
-                            <label class='estrella' style='font-size: 1em;color: #0070dd;'>★
-                            </label>
-                            <label class='estrella' style='font-size: 1em;color: #0070dd;'>★
-                            </label>
-                            <label class='estrella' style='font-size: 1em;color: #0070dd;'>★
-                            </label>
-                            <label class='estrella' style='font-size: 1em;
-                                  -webkit-text-fill-color: white;
-                                  -webkit-text-stroke: 0.5px rgb(0, 74, 252);'>★
-                            </label>
-          </div>
-          ".span("Mira los comentarios aquí!" , ["class"=>'blue_enid_background white']);
+    $base   = ["class"  =>  'estrella', "style" => 'color: #0070dd;'];
+    $start   = div("★" , $base);
+
+    $start  .= div("★" , $base);
+    $start  .= div("★" , $base);
+    $start  .= div("★" , $base);
+    $start  .= div("★" , $base);
+
+    $base   = ["class"  =>  'estrella', "style" => '-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);'];
+    $start  .= div("★" , $base2);
+
+    $starts = div($start).span("Mira los comentarios aquí!" , ["class"=>'blue_enid_background white']); 
+    return $start;
   }
     
   function tareas_realizadas($realizado, $fecha_actual){
@@ -38,16 +36,10 @@ if(!function_exists('invierte_date_time')){
   }
   function valida_total_menos1($anterior , $nuevo , $extra ='' )
   {
-    
-    $extra_class='style=""';
-    if ($anterior > $nuevo ){
-      $extra_class='style="background:#ff1b00!important; color:white!important;" ';
-    }
-    return get_td(
-      $nuevo ,  $extra_class .  " " . $extra);
+  
+    $extra_class = ($anterior > $nuevo ) ? 'style="background:#ff1b00!important; color:white!important;" ' : "";
+    return get_td($nuevo ,  $extra_class .  " " . $extra);
   }
-    
-
   function valida_tareas_fecha($lista_fechas , $fecha_actual , $franja_horaria ){
 
     $num_visitas_web =0;
@@ -352,23 +344,12 @@ if(!function_exists('invierte_date_time')){
     }
     
   function fin_base_notificacion(){
-    
-        $fin ="        
-            </div>
-          </a>
-          <hr>";
-          return $fin;
-    }
+      $fin ="</div></a><hr>";
+      return $fin;
+  }
   function inicio_base_notificacion($url='' , $class_icono='' ){      
-  
-      $base = n_row_12().
-              '<a href="'.$url.'" >
-                <div class="contenedor_notificacion black">
-                    '.icon($class_icono).'
-                      ';
-      return $base;
-    }
-    
+      return n_row_12().'<a href="'.$url.'" ><div class="contenedor_notificacion black">'.icon($class_icono).'';
+  }
   function add_mensajes_respuestas_vendedor($param, $tipo){      
 
       $lista_pendientes ="";
@@ -569,15 +550,14 @@ if(!function_exists('invierte_date_time')){
     $valor =0;
     foreach ($solicitudes as $row){        
         
-        $fecha_registro =  $row["fecha_registro"];  
-        if($fecha_registro ==  $fecha_actual) {          
+        $fecha_registro     =   $row["fecha_registro"];  
+        if($fecha_registro ==   $fecha_actual) {          
           $tareas_solicitadas = $row["tareas_solicitadas"];
-          $valor  =  $tareas_solicitadas;
+          $valor            =   $tareas_solicitadas;
           break;  
         }        
     }
     return $valor;
-
   }
   /*
   
