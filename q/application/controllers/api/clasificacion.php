@@ -3,6 +3,7 @@ require APPPATH.'../../librerias/REST_Controller.php';
 class Clasificacion extends REST_Controller{      
     function __construct(){
         parent::__construct();             
+        $this->load->helper("clasificaciones");
         $this->load->model("clasificacion_model");
         //$this->load->library('table');       
         $this->load->library(lib_def());  
@@ -34,11 +35,22 @@ class Clasificacion extends REST_Controller{
     /**/
     function primer_nivel_GET(){
 
-        $param                  =  $this->get();
-        $param["nivel"]         =  1;        
-        $primer_nivel           =  $this->clasificacion_model->get_clasificaciones_por_nivel($param);
-        $response["clasificaciones"] = $this->clasificacion_model->get_clasificaciones_segundo($primer_nivel);
-        $this->load->view("clasificaciones/menu" , $response);
+        $param                          =   $this->get();
+        $param["nivel"]                 =   1;        
+        $primer_nivel                   =   $this->clasificacion_model->get_clasificaciones_por_nivel($param);
+        $clasificaciones                =   $this->clasificacion_model->get_clasificaciones_segundo($primer_nivel);
+        $select                         =   create_select(
+            $clasificaciones , 
+            "q2" , 
+            "custom-select" , 
+            "id_clasificacion" , 
+            "nombre_clasificacion" , 
+            "id_clasificacion" , 
+            0 , 1, 0, 
+            "Todos los departamentos" );
+        $this->response($select);
+        //$this->load->view("clasificaciones/menu" , $response);
+
     }
     /**/
     function interes_usuario_GET($param){

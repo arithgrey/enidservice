@@ -298,7 +298,7 @@ if ( ! function_exists('anchor_enid'))
 
 if ( ! function_exists('get_td'))
 {
-  function get_td($val , $attributes = '' ){
+  function get_td($val='' , $attributes = '' ){
 
       $attr =  add_attributes($attributes);   
       return "<td ". $attr ." NOWRAP >"."\n". $val ."</td>". "\n";
@@ -528,12 +528,15 @@ if ( ! function_exists('create_button_easy_select'))
 if ( ! function_exists('create_select'))
 {
   /**/
-  function create_select($data , $name , $class , $id , $text_option , $val , $row=0 ){
+  function create_select($data , $name , $class , $id , $text_option , $val , $row=0  , $def=0 , $valor=0 , $text_def= ""){
 
-      $select ="<select name='". $name ."'  class='".$class ."'  id='". $id ."'> ". "\n";
+      $select = "<select name='". $name ."'  class='".$class ."'  id='". $id ."'> ". "\n";
+        
+        if ($def == 1) {
+          $select .=  "<option value='". $valor ."'>". $text_def." </option>". "\n";
+        }
         foreach ($data as $row) {      
-          $select .=  
-          "<option value='". $row[$val] ."'>". $row[$text_option]." </option>". "\n";
+          $select .=  "<option value='". $row[$val] ."'>". $row[$text_option]." </option>". "\n";
         }
       $select .="</select>". "\n";
       

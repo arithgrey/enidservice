@@ -12,44 +12,25 @@
 ?>
 
 	<?php if ($modalidad ==  1):?>
-		<?=n_row_12()?>	
-			<a 	class="cancelar_compra" 
-				id="<?=$id_recibo;?>" 
-				modalidad ="<?=$modalidad?>"
-				style="background: #f00 !important;padding: 10px!important;color:white !important;font-weight: bold !important;">
-				CANCELAR VENTA
-			</a>
-		<?=end_row()?>
+		<?=anchor_enid("CANCELAR VENTA", 
+			[
+				"class"			=>	"cancelar_compra" ,
+				"id"			=>	$id_recibo,
+				"modalidad" 	=> 	$modalidad,
+				"style"			=> 	"background: #f00 !important;padding: 10px!important;color:white !important;font-weight: bold !important;"
+			],
+			1
+		)?>
 	<?php endif;?>
 	<div style="margin: 0 auto;width: 66%;">		
-		<center>
-			<div style="width: 200px;">
-				<img src="<?=$url_request?>img_tema/enid_service_logo.jpg" width="100%">
-			</div>
-		</center>
-		<h2>
-			<span style="color: black;"> 
-				Detalles de la transacción
-			</span> 		
-		</h2>
-		<h3>
-			#Recibo: <?=$id_recibo;?>
-		</h3>
+		<?=div(img_enid(), ["style"=>"width: 200px;"])?>
+		<?=heading_enid("Detalles de la transacción" , 2)?>
+		<?=heading_enid("#Recibo: ".$id_recibo , 3)?>
 		<hr>
-		<table  style="width: 100%;padding: 10px;">
-
+		<table>
 			<tr class='tb_pagos'>
-				<td>
-					<h4>
-						Pago enviado a 
-					</h4>
-				</td>
-				<td>
-									
-					<h4>
-						Importe 
-					</h4>
-				</td>
+				<?=get_td(heading_enid("Pago enviado a " , 4))?>
+				<?=get_td(heading_enid("Importe " , 4))?>
 			</tr>
 			<tr>
 				<td>
@@ -57,82 +38,35 @@
 					<?=strtoupper(entrega_data_campo($usuario_venta , "apellido_materno" ))?>
 					<?=strtoupper(entrega_data_campo($usuario_venta , "apellido_paterno" ))?>			
 				</td>
-				<td>
-					<?=$total_cubierto?>MXN
-				</td>
+				<?=get_td($total_cubierto." MXN")?>
 			</tr>
 		</table>
-
-
-		<table style="width: 100%;margin-top: 20px;">
-			<tr >
-				<td style="">
-					Estado: 
-					<span style="border-style: solid;border-color: #000506;padding: 2px;">  
-						COMPLETADO
-					</span>
-				</td>
-				<td></td>
+		<table>
+			<tr>
+				<?=get_td("Estado: " . span("COMPLETADO") , ["style" => "border-style: solid;border-color: #000506;padding: 2px;"])?>
+				<?=get_td()?>
 			</tr>
 		</table>
 		<hr>
 		<table style="width: 100%;padding: 10px;margin-top: 20px;">
 			<tr class='tb_pagos'>
-				<td style="">
-					Detalles del pedido
-				</td>
-				<td style="">
-					Cantidad
-				</td>
-				<td style="">
-					Precio
-				</td>
-				<td style="">
-					Subtotal
-				</td>
+				<?=get_td("Detalles del pedido")?>
+				<?=get_td("Cantidad")?>
+				<?=get_td("Precio")?>				
+				<?=get_td("Subtotal")?>				
 			</tr>
 			<tr>
-				<td>
-					<?=$resumen_pedido?>			
-				</td>
-				<td class="tex-center">
-					<?=$cantidad?>
-				</td>
-				<td>
-					$<?=$precio?>MXN
-				</td>
-				<td>
-					$<?=$monto_a_pagar?>MXN
-				</td>
+				<?=get_td($resumen_pedido)?>
+				<?=get_td($cantidad)?>
+				<?=get_td("$".$precio."MXN")?>
+				<?=get_td("$".$monto_a_pagar."MXN")?>
 			</tr>
 			<tr>
-				<td>
-				
-				</td>
-				<td>
-				
-				</td>
-				<td>
-					<strong>
-						Total de la compra
-					</strong>
-				</td>
-				<td>
-					$<?=$monto_a_pagar?>MXN
-				</td>
+				<?=get_td()?>
+				<?=get_td()?>
+				<?=get_td("Total de la compra")?>
+				<?=get_td("$".$monto_a_pagar."MXN")?>
 			</tr>
-			
 		</table>
 	</div>
 </div>	
-<style type="text/css">
-	.tb_pagos{
-		background: #023460;
-		color: white;
-		text-align: center;
-	}
-	table{
-		text-align: center;
-	}
-
-</style>

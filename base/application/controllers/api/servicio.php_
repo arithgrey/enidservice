@@ -126,10 +126,29 @@ class Servicio extends REST_Controller{
     }else{
         $data["padre"] = $param["padre"];        
         if ($param["is_mobile"] ==  1) {
-          $this->load->view("categoria/seleccionar_categoria_phone" , $data);
+          
+
+
+          $add 
+          = 
+          div("AGREGAR NUEVO" .icon('fa fa-angle-double-right') ,  
+          [
+            "class" =>  "a_enid_black nueva_categoria_producto nueva_categoria_producto_button ",
+            "id"    =>  $padre
+           ],
+          1);
+          
+          $this->response($add);
           
         }else{
-          $this->load->view("categoria/seleccionar_categoria" , $data);  
+
+          $add = div( "AGREGAR NUEVO" .icon('fa fa-angle-double-right')  , 
+                      [
+                        "class"  =>  "a_enid_black nueva_categoria_producto",
+                        "id"     =>  $padre ],
+                    1);
+          $this->response($add);
+          
         }
     }
 
