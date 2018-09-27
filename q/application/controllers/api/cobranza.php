@@ -28,8 +28,7 @@ class Cobranza extends REST_Controller{
         }else{
             $data_complete =  $this->cobranzamodel->get_compras_usuario($param);                  
         }        
-        $data_complete["status_enid_service"] = 
-        $this->cobranzamodel->get_estatus_servicio_enid_service();        
+        $data_complete["status_enid_service"] = $this->cobranzamodel->get_estatus_servicio_enid_service();        
         $this->response($data_complete);
     }
     /**/
@@ -302,7 +301,7 @@ class Cobranza extends REST_Controller{
 
                    
             $usuario = $this->crea_usuario($param);
-                
+            
             if ($usuario["usuario_registrado"] ==  1 && $usuario["id_usuario"]>0 ) {
                 
                 
@@ -313,9 +312,8 @@ class Cobranza extends REST_Controller{
                 $orden_compra                 = $this->crea_orden($param); 
                 $orden_compra["usuario_existe"]   = 0;
                 $this->response($orden_compra);
-            }
-            debug("okokokoko");
-            
+            }            
+            $this->response($usuario);
             
         }else{
             $this->response(-1);

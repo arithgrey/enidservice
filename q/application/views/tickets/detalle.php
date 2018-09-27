@@ -1,13 +1,14 @@
 <?=n_row_12()?>						
 	<table>
 		<tr>
-			<?=get_td("SOLICITUDES")?>
-			<?=get_td("+ AGREGAR" , ["class"	=>	"btn_agregar_tarea"]  )?>
+			<?=get_td(heading_enid("SOLICITUDES" , 3 , ["class" => "strong"]))?>
+			<?=get_td(div("+ AGREGAR" , [ "class"	=>	"blue_enid_background btn_agregar_tarea padding_1 white cursor_pointer"]))?>
 			<?=get_td(valida_mostrar_tareas($info_tareas))?>			
 		</tr>
 	</table>			
 <?=end_row()?>
 
+<hr>
 <?=n_row_12()?>	
 	<?=crea_tabla_resumen_ticket($info_ticket  , $info_num_tareas);?>	
 <?=end_row()?>
@@ -80,14 +81,14 @@
 						<tr>
 							<td>
 								<span 
-									class='strong comentarios_tarea' 
+									class='strong comentarios_tarea cursor_pointer' 
 									id='<?=$id_tarea?>'> 					
 										Ver comentarios(<?=$num_comentarios?>)
 								</span>					
 							</td>
 							<td class='text-right'>
 								<span 
-									class='strong agregar_respuesta a_enid_blue_sm' 
+									class='strong agregar_respuesta a_enid_blue_sm cursor_pointer' 
 									id='<?=$id_tarea?>'> 
 									+ agregar comentario
 								</span>					

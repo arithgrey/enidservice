@@ -62,7 +62,6 @@ class tareasmodel extends CI_Model{
   /**/  
   function get_tareas_ticket($param){
 
-    
     $query_get = "SELECT 
                   t.*,
                     u.idusuario  , 
@@ -86,10 +85,11 @@ class tareasmodel extends CI_Model{
                   ORDER BY 
                   t.fecha_registro 
                   ASC";
-    $result = $this->db->query($query_get);
-    return $result->result_array();
+                  
+    return  $this->db->query($query_get)->result_array();
+    
   }
-   function tareas_enid_service(){
+  function tareas_enid_service(){
             
        
                 $query_get ="SELECT  

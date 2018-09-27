@@ -668,7 +668,7 @@
                     GROUP BY 
                     primer_nivel
                     ORDER BY count(0) DESC";
-        $result =  $this->db->query($query_get)->result_array();
+        return  $this->db->query($query_get)->result_array();
         
     }
     function get_usuario_por_servicio($param){

@@ -67,6 +67,7 @@
                             $estado_envio)?>                        
 
                         <?=get_texto_saldo_pendiente($monto_a_liquidar,$monto_a_pagar,$modalidad)?>
+                        
                         <?=get_estados_ventas($status_enid_service , $estado , $modalidad)?>
                                                 
                         <?=div(

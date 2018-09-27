@@ -134,6 +134,11 @@ rel="stylesheet" id="bootstrap-css">
 		<script type='text/javascript' src = '<?php echo $script;?><?=version_enid?>'></script>
     <?php endforeach;?>
 <?php  endif; ?>
+<?php if (isset($js_extra)):?>
+    <?php  foreach($js_extra as $script):?>
+        <script type='text/javascript' src = '<?php echo $script;?>'></script>
+    <?php endforeach;?>    
+<?php  endif; ?>
 <link 
 rel="stylesheet" 
 href="../css_tema/font-asome2/css/font-awesome.min.css?<?=version_enid?>">

@@ -57,7 +57,8 @@ class Home extends CI_Controller{
         }
         
         $servicios              =  $this->busqueda_producto_por_palabra_clave($data_send);        
-        $categorias_destacadas  =  $this->carga_categorias_destacadas("");            
+        $categorias_destacadas  =  $this->carga_categorias_destacadas();            
+        //debug($categorias_destacadas , 1);
         $data["servicios"]      =  $servicios;
 
 
@@ -184,9 +185,10 @@ class Home extends CI_Controller{
         return $this->principal->api( $api, $q);
     }
     /**/
-    private function carga_categorias_destacadas($q){
+    private function carga_categorias_destacadas($q=''){
         
-        $api =  "clasificacion/categorias_destacadas/format/json/";
+        $q      =   [];
+        $api    =   "clasificacion/categorias_destacadas/format/json/";
         return $this->principal->api( $api, $q);
     }
     /**/

@@ -76,7 +76,7 @@
                       AND 
                       d.id_departamento = '".$param["id_departamento"]."'
                       AND 
-                      t.asunto like '%".$keyword."%'                        
+                      t.asunto like '%".$param["keyword"]."%'                        
                       
                       ORDER BY                                                         
                       t.fecha_registro";
@@ -111,8 +111,8 @@
                  t.id_departamento = d.id_departamento 
                 WHERE  t.id_ticket = $id_ticket
                 limit 1";
-    $result =  $this->db->query($query_get);
-    return $result->result_array();    
+    return $this->db->query($query_get)->result_array();
+    
   }
   private function update($data =[] , $params_where =[] , $limit =1 ){
     foreach ($params_where as $key => $value) {

@@ -1,56 +1,24 @@
-var id_tarea = 0;
-var nombre_persona = 0;
-var flageditable  =0; 
-var llamada =  0;
-var campos_disponibles = 0; 
-var persona = 0;
-var tipo_negocio = 0;
-var fuente = 0;
-var telefono = 0;
-var flag_base_telefonica =0;
-var id_proyecto = 0; 
-var id_usuario = 0;
-var id_ticket = 0;
-var nombre_tipo_negocio = "";
-var num_agendados ="";
-var flag_mostrar_solo_pendientes = 0;
-var referencia_email = 0;
-var facturar_servicio = 0;
-var servicio_requerido = "";
-var nombre_ciclo_facturacion ="";
-var proxima_fecha_vencimiento = "";
-var id_proyecto_persona_forma_pago =  ""; 
-var id_proyecto_persona =  "";
-var menu_actual = "clientes";
-var id_servicio = 0; 
-var depto = 0; 
-var flag_en_servicio = 0;
 $(document).ready(function(){		
-
 
 	var num_departamento = $(".num_departamento").val(); 
 	set_option("modulo", 2);
+		
 	
-	/***/
 	$("footer").ready(function(){
-		id_depto = $(".num_departamento").val();		
+		var  id_depto = $(".num_departamento").val();		
 		set_option("id_depto", id_depto);
 	});
-	/**/
+
 	$(".depto").change(function(){
 
-		id_depto = $(".depto").val();						
+		var id_depto = $(".depto").val();						
 		set_option("id_depto", id_depto);
 		carga_tikets_usuario();
 	});
-	/**/
-	$(".q").keyup(function(){
-		carga_tikets_usuario();
-	});
 
+	$(".q").keyup(carga_tikets_usuario);
 
-	$("footer").ready(carga_num_pendientes);	
-	
+	$("footer").ready(carga_num_pendientes);		
 	$('.datetimepicker_persona').datepicker();
 	$('.datetimepicker4').datepicker();
 	$('.datetimepicker5').datepicker();					
@@ -74,7 +42,6 @@ $(document).ready(function(){
 		selecciona_select(".depto" , 4);
 	}
 
-	/**/
 	$(".comparativa").click(carga_comparativas);
 	$(".abrir_ticket").click(form_nuevo_ticket);
 
@@ -92,9 +59,19 @@ function recorre_web_version_movil(){
 /**/
 function carga_metricas_desarrollo(e){
 
-	var url =  "../q/index.php/api/desarrollo/global/format/json/";	
-	var data_send =  $(".form_busqueda_desarrollo").serialize();
-	request_enid( "GET",  data_send, url, response_carga_metricas, ".place_metricas_desarrollo");
+
+	if (get_parameter(".form_busqueda_desarrollo #datetimepicker4").length > 5 &&  get_parameter(".form_busqueda_desarrollo #datetimepicker5").length > 5){
+
+		var url 		=  "../q/index.php/api/desarrollo/global/format/json/";	
+		var data_send 	=  $(".form_busqueda_desarrollo").serialize();
+		bloquea_form(".form_busqueda_desarrollo");
+		request_enid( "GET",  data_send, url, response_carga_metricas, ".place_metricas_desarrollo");
+
+	}else{
+		
+		var inputs = [".form_busqueda_desarrollo #datetimepicker4" , ".form_busqueda_desarrollo #datetimepicker5"];
+		focus_input(inputs);		
+	}
 	e.preventDefault();
 }
 /**/
@@ -117,9 +94,19 @@ function carga_comparativas(){
 }
 /**/
 function carga_solicitudes_cliente(e){
-	var url =  "../q/index.php/api/desarrollo/global_calidad/format/json/";	
-	var data_send =  $(".form_busqueda_desarrollo_solicitudes").serialize();
-	request_enid( "GET",  data_send, url, response_carga_solicitudes,".place_metricas_servicio");
+
+	
+	if (get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker4").length > 5 &&  get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker5").length > 5){
+		
+		var url =  "../q/index.php/api/desarrollo/global_calidad/format/json/";	
+		var data_send =  $(".form_busqueda_desarrollo_solicitudes").serialize();
+		request_enid( "GET",  data_send, url, response_carga_solicitudes,".place_metricas_servicio");
+	}else{
+		
+		var  inputs = [".form_busqueda_desarrollo_solicitudes #datetimepicker4", ".form_busqueda_desarrollo_solicitudes #datetimepicker5"];
+		focus_input(inputs);
+		
+	}
 	e.preventDefault();
 }
 /**/
@@ -149,7 +136,7 @@ function response_form_nuevo_ticket(data){
 /**/
 function registra_ticket(e){
 
-	var url =  "../q/index.php/api/tickets/ticket/format/json/";
+	var url =  "../q/index.php/api/tickets/index/format/json/";
 	var data_send = $(".form_ticket").serialize();				
 	request_enid( "POST",  data_send, url, response_registro_ticket, ".place_registro_ticket" );
 	e.preventDefault();
@@ -164,11 +151,11 @@ function response_registro_ticket(data){
 	carga_info_detalle_ticket();
 }
 /**/
-function actualizar_estatus_ticket(e){
+function set_estatus_ticket(e){
 	
-	var nuevo_estado= e.target.id;
-	var url =  "../q/index.php/api/tickets/status/format/json/";	
-	var data_send =  {"id_ticket" : get_option("id_ticket") , "status" : nuevo_estado };				
+	var nuevo_estado 	= 	e.target.id;
+	var url 			=  	"../q/index.php/api/tickets/status/format/json/";	
+	var data_send 		=  	{"id_ticket" : get_option("id_ticket") , "status" : nuevo_estado };				
 	request_enid( "PUT",  data_send, url, function(){}, ".place_proyectos");
 }
 /**/
@@ -184,20 +171,9 @@ function carga_info_detalle_ticket(){
 function response_carga_ticket(data){
 
 	llenaelementoHTML(".place_proyectos" , data);		
-	$(".btn_mod_ticket").click(actualizar_estatus_ticket);
-	$(".btn_agregar_tarea").click(function(){		
-
-		show_section_dinamic_button(".seccion_nueva_tarea");
-		show_section_dinamic_button(".btn_agregar_tarea");
-		recorrepage(".seccion_nueva_tarea");
-			
-		$('.summernote').summernote({
-			placeholder: 'Tarea pendiente',
-			tabsize: 2,
-			height: 100
-		});
-		
-	});
+	$(".mostrar_tareas_pendientes").hide();
+	$(".btn_mod_ticket").click(set_estatus_ticket);
+	$(".btn_agregar_tarea").click(agregar_tarea);
 
 		
 	$(".agregar_respuesta").click(carga_formulario_respuesta_ticket);
@@ -217,11 +193,11 @@ function response_carga_ticket(data){
 /**/
 function carga_formulario_respuesta_ticket(e){
 	
-	var tarea = e.target.id;
+	var tarea 		= e.target.id;
 	set_option("tarea", tarea);	
-	var url =  "../q/index.php/api/tickets/formulario_respuesta/format/json/";	
-	var data_send =  {"tarea" : tarea};				
-	var seccion =".seccion_respuesta_"+get_option("tarea");
+	var url 		=  	"../q/index.php/api/tickets/formulario_respuesta/format/json/";	
+	var data_send 	=  	{"tarea" : tarea};				
+	var seccion 	=	".seccion_respuesta_"+get_option("tarea");
 
 	request_enid( "GET",  data_send, url, function(data){
 		llenaelementoHTML(seccion , data);
@@ -232,24 +208,37 @@ function carga_formulario_respuesta_ticket(e){
 /**/
 function carga_comentarios_tareas(e){
 
-	var tarea = e.target.id;
+	var tarea 		= 	e.target.id;
 	set_option("tarea", tarea);	
-	var url =  "../q/index.php/api/respuesta/index/format/json/";	
-	var data_send =  {"tarea" : tarea};				
-	var seccion =".seccion_respuesta_"+get_option("tarea");
-	request_enid( "GET",  data_send, url, response_carga_comentario_tareas, seccion);
+	var url 		=  	"../q/index.php/api/respuesta/respuestas/format/json/";	
+	var data_send 	=  	{"tarea" : tarea};				
+	var seccion 	=	".seccion_respuesta_"+get_option("tarea");
+	set_option("seccion" , seccion);
+	request_enid( "GET",  data_send, url, response_carga_comentario_tareas);
+	
 
+}
+/**/
+function carga_comentarios_terea_simple(){
 
+	var tarea 		=   get_option("tarea");	
+	var url 		=  	"../q/index.php/api/respuesta/respuestas/format/json/";	
+	var data_send 	=  	{"tarea" : tarea};				
+	var seccion 	=	".seccion_respuesta_"+tarea;
+	set_option("seccion" , seccion);
+	request_enid( "GET",  data_send, url, response_carga_comentario_tareas);
+	
 }
 /**/
 function response_carga_comentario_tareas(data){
 	
+	var seccion = get_option("seccion");
 	llenaelementoHTML(seccion , data);
 	$(".ocultar_comentarios").click(function(e){
-		set_option("tarea", e.target.id);
-		seccion =".seccion_respuesta_"+get_option("tarea");
+		set_option("tarea", e.target.id);		
 		$(seccion).empty();			
 	});
+	
 }
 /**/
 function registra_tarea(e){	
@@ -277,21 +266,23 @@ function muestra_todas_las_tareas(){
 /**/
 function carga_tikets_usuario(){
 	
+	
 	recorre_web_version_movil();
-	status_ticket = 0; 	
+	var status_ticket = 0; 	
 	if (document.querySelector(".estatus_tickets")) {		
 		status_ticket =  $(".estatus_tickets").val();
 	}
-	var keyword = $(".q").val(); 	
+	var keyword 	= 	$(".q").val(); 	
 	set_option("keyword" , keyword);	
-	var url 		=  "../q/index.php/api/tickets/ticket_desarrollo/format/json/";			
-	var data_send 	= { "status" : status_ticket , "id_departamento" :  get_option("id_depto") , "keyword" : get_option("keyword"), "modulo": get_option("modulo") };				
+	var url 		=  	"../q/index.php/api/tickets/ticket_desarrollo/format/json/";			
+	var data_send 	= 	{ "status" : status_ticket , "id_departamento" :  get_option("id_depto") , "keyword" : get_option("keyword"), "modulo": get_option("modulo") };				
+	
 	request_enid( "GET",  data_send, url, response_carga_tickets, ".place_proyectos" );
 	
 }
 /**/
 function response_carga_tickets(data){
-
+	
 	llenaelementoHTML(".place_proyectos" , data);										
 	/*Ver detalle ticket completo*/
 	$(".ver_detalle_ticket").click(function(e){
@@ -324,4 +315,18 @@ function response_actualiza_tareas(data){
 	}else{
 		carga_info_detalle_ticket();					
 	}	
+}
+var agregar_tarea = function(){
+	
+	debugger;
+	show_section_dinamic_button(".seccion_nueva_tarea");
+	show_section_dinamic_button(".btn_agregar_tarea");
+	recorrepage(".seccion_nueva_tarea");
+			
+	$('.summernote').summernote({
+		placeholder: 'Tarea pendiente',
+		tabsize: 2,
+		height: 100
+	});
+		
 }

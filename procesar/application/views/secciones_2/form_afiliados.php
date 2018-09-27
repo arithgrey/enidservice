@@ -13,8 +13,12 @@ $talla                =
 <?=n_row_12()?>
 
 <?php if($in_session == 0){?>
-<?=heading_enid(
-  $ingresar.' O CREA UNA CUENTA PARA RECIBIR ASISTENCIA Y COMPRAR AL MOMENTO', 2)?>
+  <div class="row">
+    <?=heading_enid($ingresar.' O CREA UNA CUENTA PARA RECIBIR ASISTENCIA Y COMPRAR AL MOMENTO', 
+      3 , 
+      ["class" => "strong"])?>
+  </div>
+
 <?php }?>
 <div class="row">
 <form 
@@ -74,11 +78,26 @@ $talla                =
     ])?>
     <?=place("place_telefono")?>        
     <?=guardar("CREA UNA CUENTA", [] , 1)?>            
-    <?=div(anchor_enid('¿Ya tienes una cuenta? Entra aquí ya »', 
-    ["href"  =>    "../login"]) )?>
+
+    <?=div(anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO" ,
+      [
+        'class' =>    "white",
+        "href"  =>    "../login"
+      ]) , 
+      [        
+        'class' =>    "usuario_existente black_enid_background padding_1 white top_20 enid_hide"
+      ] , 
+      1)?>
+
+
+      <?=div(anchor_enid(
+        '¿Ya tienes una cuenta? Entra aquí ya »', 
+        ["href"  =>    "../login"]) 
+      )?>
       
       </div>
     </div>
+
     <?=place("place_config_usuario")?>
     <?php }?>      
 </form>

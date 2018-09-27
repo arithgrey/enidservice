@@ -61,6 +61,7 @@ class recibo extends REST_Controller{
         }else{
             $response =  $this->recibo_model->get_compras_usuario($param);                  
         }        
+        
         $response["status_enid_service"] = $this->get_estatus_servicio_enid_service($param);        
         return $response;
     } 

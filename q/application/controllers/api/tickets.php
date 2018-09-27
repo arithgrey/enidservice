@@ -28,31 +28,34 @@ class Tickets extends REST_Controller{
     }    
     function index_POST(){        
 
-        $param                  = $this->post();                            
+        $param                  = $this->post();                                    
         $id_usuario             = 
         (array_key_exists("id_usuario", $param)) ? $param["id_usuario"] : $this->id_usuario;
         $param["id_usuario"]    = $id_usuario;
-    
+
+
         $prioridad        =   $param["prioridad"];        
         $departamento     =   $param["departamento"];     
         $asunto           =   $param["asunto"];      
         $id_usuario       =   $param["id_usuario"];      
-        $params =[
+        $params           =   [
             "asunto"          =>  $asunto,
             "prioridad"       =>  $prioridad,
             "id_usuario"      =>  $id_usuario,
             "id_departamento" =>  $departamento
           ];
 
-        $param["ticket"]        =   $this->tickets_model->insert("ticket" , $params , 1);        
+        $param["ticket"]        =   $this->tickets_model->insert( $params , 1);        
         $es_cliente             =   $this->get_es_cliente($id_usuario);        
+
         if ($es_cliente ==  1){                            
-            $estatus_notificacion = $this->notificacion_nuevo_ticket_soporte($param);
+            $estatus_notificacion = $this->notificacion_ticket_soporte($param);
         }                
         $this->response($param["ticket"]);                        
     }   
-    function notificacion_nuevo_ticket_soporte($param){
-                                
+    private function notificacion_ticket_soporte($param){
+        
+        
         $id_usuario     =   $param["id_usuario"];  
         $usuario        =   $this->principal->get_info_usuario($id_usuario);
         $id_ticket      =   $param["ticket"];  
@@ -60,37 +63,37 @@ class Tickets extends REST_Controller{
         $q["usuario"]   =   $usuario;
         $q["extra"]     =   $param;
         $q["ticket"]    =   $ticket;
-
-
-        $lista_correo_dirigido_a = 
-        ($param["departamento"] == 4) ? 
-        ["soporte@eniservice.com"] : ["soporte@eniservice.com" , "aritgrey@gmail.com"];
-        $q["lista_correo_dirigido_a"]  =  $lista_correo_dirigido_a;        
-        $q["mensaje"]                  =  $this->get_mensaje_notificacion($q);
-        $q["asunto"]    =   $param["asunto"];
-        $this->enviar($q);
+        $q["mensaje"]   =   $param["mensaje"];
+        $soporte        =   ["soporte@eniservice.com"];
+        $direccion      =   ["soporte@eniservice.com" , "aritgrey@gmail.com"];
+        
+        $q["lista_correo_dirigido_a"]  =  ($param["departamento"] == 4) ? $soporte : $direccion;
+        $q["mensaje"]                  =  $this->get_mensaje_notificacion($q);        
+        $q["asunto"]                   =   $param["asunto"];
+        return $this->enviar($q);
         
     }     
-    function enviar($q){
+    private function enviar($q){
 
         $api = "areacliente/enviar/";
         return $this->principal->api($api ,  $q , "json" , "POST");
     }
     /**/
     function get_mensaje_notificacion($q){
-        $api = "cron/ticket_soporte/";
-        return $this->principal->api( $api ,  $q , "html" , "GET");
+        $api          = "cron/ticket_soporte/";
+        return   $this->principal->api( $api ,  $q , "html" , "GET");                
     }
     /**/
     function compras_GET(){
 
-        $param              =  $this->get();        
-        $response           =  $this->tickets_model->get_compras_tipo_periodo($param);
-        $data["compras"]    =  $response;
-        $data["tipo"]       =  $param["tipo"];
-        $data["status_enid_service"] =  $this->tickets_model->get_status_enid_service($param);
+        $param                          =  $this->get();        
+        $response                       =  $this->tickets_model->get_compras_tipo_periodo($param);
+        $data["compras"]                =  $response;
+        $data["tipo"]                   =  $param["tipo"];
+        $data["status_enid_service"]    =  $this->tickets_model->get_status_enid_service($param);
 
-        $v      =  $param["v"]; 
+        
+        $v     =  $param["v"]; 
         if ($v == 1 ) {
             $this->load->view("ventas/compras" , $data);        
         }else{
@@ -114,8 +117,16 @@ class Tickets extends REST_Controller{
         $this->response($response );
     }
         
-    /**/
-    
+    private function get_departamentos($q){
+
+        $api  = "departamento/index/format/json/";
+        return $this->principal->api($api , $q );
+    }
+    function form_GET(){
+        $param                  =   $this->get();                 
+        $data["departamentos"]  =   $this->get_departamentos($param);
+        $this->load->view("secciones/form_tickets" , $data );        
+    }
     /**/
     function cancelar_form_GET(){
         
@@ -275,7 +286,8 @@ class Tickets extends REST_Controller{
     }
     /**/
     function  get_tareas_ticket($q){
-        $api    =  "tarea/ticket/format/json";
+        
+        $api    =  "tarea/ticket/format/json/";
         return  $this->principal->api( $api , $q);
     }
     function get_tareas_ticket_num($q){

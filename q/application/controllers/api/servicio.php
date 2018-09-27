@@ -16,6 +16,7 @@ class Servicio extends REST_Controller{
   function clasificaciones_destacadas_GET(){
 
     $param    =  $this->get();
+    debug("ok");
     $response =  $this->serviciosmodel->get_clasificaciones_destacadas($param);
     $this->response($response);
   }
