@@ -57,10 +57,8 @@ class Clasificacion extends REST_Controller{
     }
     function id_GET(){
 
-        $param = $this->get();        
-        $response 
-        =  
-        $this->clasificacion_model->get_clasificaciones_por_id_clasificacion($param);
+        $param      =   $this->get();        
+        $response   =   $this->clasificacion_model->get_clasificaciones_por_id_clasificacion($param);
         $this->response($response);
     }
     /**/    
