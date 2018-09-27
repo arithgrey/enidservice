@@ -41,9 +41,15 @@ function registra_afiliado(e){
 				if (flag2 ==  1 ) {
 
 
-					var url 	= "../q/index.php/api/cobranza/primer_orden/format/json/";				
-					var pw 		= $.trim($(".password").val());	
-					var pwpost 	= ""+CryptoJS.SHA1(pw);
+					//debugger;
+					$(".resumen_productos_solicitados").hide();					
+					recorrepage(".contenedor_formulario_compra");
+					
+					bloquea_form(".form-miembro-enid-service");
+					var url 	= 	"../q/index.php/api/cobranza/primer_orden/format/json/";				
+					var pw 		= 	$.trim($(".password").val());	
+					var pwpost 	= 	""+CryptoJS.SHA1(pw);
+
 
 					set_option("email", $(".email").val());					
 					set_option("nombre" ,$(".nombre").val());					
@@ -51,7 +57,7 @@ function registra_afiliado(e){
 					set_option("usuario_referencia", $(".q2").val());																
 					set_option("talla"	, $(".talla").val());																				
 					var data_send =  {"password": pwpost , "email" : get_option("email") , "nombre" : get_option("nombre"), "telefono": get_option("telefono") , "plan" : get_option("plan") , "num_ciclos" : get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"), "ciclo_facturacion":get_option("ciclo_facturacion"), "usuario_referencia":get_option("usuario_referencia") , "talla" : get_option("talla")};				
-					request_enid( "POST",  data_send, url, respuesta_registro_usuario_venta, 0 , before_registro_afiliado);	
+					request_enid( "POST",  data_send, url, respuesta_registro, 0 , before_registro_afiliado);	
 				}			
 			}		
 		}else{
@@ -67,15 +73,19 @@ function before_registro_afiliado(){
 	show_load_enid(".place_registro_afiliado" ,  "Validando datos " , 1 );
 }
 /***/
-function respuesta_registro_usuario_venta(data){
-	
+var respuesta_registro = function(data){
+
 	if (data != -1) {								
-	
+
 		desbloqueda_form(".form-miembro-enid-service");
 		if(data.usuario_existe > 0){
-			var usuario_registrado = "Este usuario ya se encuentra registrado, acceda a su cuenta para solicitar compra <a href='../login/'>Acceder aquí</a>";
-			llenaelementoHTML(".place_registro_afiliado" , usuario_registrado);				 				
+
+			flex(".usuario_existente");						
+			$(".place_registro_afiliado").empty();
+			recorrepage(".usuario_existente");
+
 		}else{									
+
 			set_option("data_registro" , data);
 			set_option("registro" , 1);
 			set_option("usuario_nuevo" , 1);
@@ -87,6 +97,7 @@ function respuesta_registro_usuario_venta(data){
 	}
 	
 }
+
 /**/
 function procesar_pedido_usuario_activo(){
 

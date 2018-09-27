@@ -73,9 +73,12 @@ class Tarea extends REST_Controller{
     function ticket_GET(){
 
         $param      =   $this->get();       
-        //debug($param , 1);
-        $response   =   $this->tareasmodel->get_tareas_ticket($param);                
-        $this->response($response);           
+        $response   =   [];        
+        if (if_ext($param , "id_ticket")) {            
+
+            $this->response($this->tareasmodel->get_tareas_ticket($param));               
+        }
+        $this->response($response);
     }
     function tareas_ticket_num_GET(){
 

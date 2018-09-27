@@ -121,6 +121,7 @@ function indicadores(e){
 	var f_termino 	=  get_parameter(".form_busqueda_global_enid #datetimepicker5");	
 
 	if (f_inicio.length > 5 &&  f_termino.length > 5 ) {
+		bloquea_form(".form_busqueda_global_enid");		
 		request_enid( "GET",  data_send, url, response_indicadores, ".place_usabilidad", 0 , ".place_usabilidad" );
 	}else{
 		focus_input(".form_busqueda_global_enid #datetimepicker4");
@@ -131,6 +132,7 @@ function indicadores(e){
 /**/
 function response_indicadores(data){
 
+	desbloqueda_form(".form_busqueda_global_enid");
 	llenaelementoHTML(".place_usabilidad", data ); 		
 	$(".usuarios").click(resumen_usuarios);		
 	$(".contactos").click(resumen_mensajes);	

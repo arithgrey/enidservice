@@ -258,7 +258,7 @@ function get_text_ciclo_facturacion($id_ciclo_facturacion){
 	function informacion_existencia_producto($existencia , $in_session){
 
 	    if($in_session ==  1){
-	        $msj = ($existencia >0 ) ? span($existencia." En existencia ") : span("INVENTARIO LIMITADO"){
+	        $msj = ($existencia >0 ) ? span($existencia." En existencia ") : span("INVENTARIO LIMITADO");
 	        return $msj;
 	    }
   	}

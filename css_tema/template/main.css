@@ -1052,3 +1052,21 @@ table{
 .padding_1{
 	padding: 10px;
 }
+.enid_hide{
+	display: none;
+}
+.black_enid_background{
+	background: black;
+}
+.top_10{
+	margin-top: 10px;
+}
+.top_15{
+	margin-top: 15px;
+}
+.top_20{
+	margin-top: 20px;
+}
+.cursor_pointer:hover{
+	cursor: pointer;
+}

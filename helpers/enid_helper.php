@@ -1,11 +1,13 @@
 <?php
 /*
----- Pasar a set functions
----- Pasar a create los insert
-----  quitar Q
+----  Pasar a set functions
+----  Pasar a create los insert
+---   js
+----  views
+---   controllers
+
 
 https://youtu.be/FwXskdcCRIk
-
 
 grep -r "libraries/REST_Controller.php"  /Users/jonathan.medrano/Documents/example
 perl -p -i -e 's/pero/pero_____/g' ex.php 

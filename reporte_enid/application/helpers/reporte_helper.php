@@ -28,6 +28,7 @@ if(!function_exists('invierte_date_time')){
         
       }
     }
+    
   function sub_categorias_destacadas($param){
 
       $nombres_primer_nivel =  $param["nombres_primer_nivel"];
@@ -60,5 +61,7 @@ if(!function_exists('invierte_date_time')){
         return $data_complete; 
 
     }
+
+ 
   
 }

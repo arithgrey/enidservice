@@ -109,7 +109,7 @@ class Clasificacion extends REST_Controller{
     }  
     /**/
     function get_clasificaciones_destacadas($q){
-        $api    = "servicio/clasificaciones_destacadas/format/json";
+        $api    = "servicio/clasificaciones_destacadas/format/json/";
         return  $this->principal->api( $api , $q);
     }      
     function set_clasificacion_talla($q){

@@ -26,9 +26,11 @@ class Respuesta extends REST_Controller{
     }
     function respuestas_GET(){
 
-        $param      = $this->get();
-        $response   = $this->respuesta_model->get_respuestas($param);
-        $this->response($response);
+        $param                          = $this->get();
+        $response                       = $this->respuesta_model->get_respuestas($param);
+        $response["info_respuestas"]    = $response;
+        $this->load->view("tickets/respuestas" , $response);        
+        
         
     }
     function num_respuestas_GET(){

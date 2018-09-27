@@ -421,10 +421,9 @@ function registra_respuesta_pregunta(e){
 	
 	var url 		=  "../q/index.php/api/respuesta/index/format/json/";	
 	var data_send 	=  $(".form_respuesta_ticket").serialize();				
-	var seccion 	=".seccion_respuesta_"+get_tarea();
-	request_enid( "POST",  data_send , url , function(){
-		llenaelementoHTML(seccion , "Comentario enviado!");		
-	} , seccion); 
+	var seccion 	=	".seccion_respuesta_"+get_tarea();
+	set_option("seccion" , seccion);
+	request_enid( "POST",  data_send , url , carga_comentarios_terea_simple ); 
 	e.preventDefault();
 }
 /**/
@@ -524,14 +523,9 @@ function set_option(key , value ){
 function get_option(key){
 	return option[key];
 }
-/*Bloque todos los elementos del formulario*/
-function bloquea_form(form){
-	$("*", form).prop('disabled',true);
-}
+
 /**/
-function desbloqueda_form(form){
-	$("*", form).prop('disabled',false);
-}
+
 /**/
 function transforma_mayusculas(x){
 	
@@ -697,5 +691,24 @@ function set_black(array){
 	}
 }
 var focus_input = function(input){
-	$(input).css("border" , "1px solid rgb(13, 62, 86)");
+	if (isArray(input)) {
+
+		for (var i = 0 in input ){			
+			$(input[i]).css("border" , "1px solid rgb(13, 62, 86)");
+		}
+	}else{
+		$(input).css("border" , "1px solid rgb(13, 62, 86)");
+	}
+	
+}
+/*Bloque todos los elementos del formulario*/
+var bloquea_form = function(form){	
+	$("*", form).prop('disabled',true);
+}
+var desbloqueda_form = function(form){
+	$("*", form).prop('disabled',false);
+}
+var flex = function(elemento){
+
+	$(elemento).css("display" ,  "flex");	
 }

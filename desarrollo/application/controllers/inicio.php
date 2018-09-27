@@ -31,11 +31,10 @@ class Inicio extends CI_Controller {
                 "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
                 "../js_tema/js/pickers-init.js",
                 '../js_tema/desarrollo/principal.js',
-                '../js_tema/desarrollo/summernote.js',
-                "http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"
-            
+                '../js_tema/desarrollo/summernote.js'            
 
         ];
+        $data["js_extra"] = ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"];
         $this->principal->show_data_page( $data , 'empresas_enid');                                 
     }    	
     /**/

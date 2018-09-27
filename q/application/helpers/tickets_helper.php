@@ -31,8 +31,10 @@ if(!function_exists('invierte_date_time')){
     
     if (count($data) > 0 ){
 
-      $contenido  =  div("MOSTRAR SÓLO TAREAS PENDIENTES",   ["class"=>'mostrar_tareas_pendientes a_enid_black']);
-      $contenido .= div("MOSTRAR TODAS LAS TAREAS",         ["class"=>'mostrar_todas_las_tareas a_enid_black']);
+      $config     =   [ "class" =>  'mostrar_tareas_pendientes a_enid_black cursor_pointer' ];
+      $config2    =   [ "class" =>  'mostrar_todas_las_tareas a_enid_black cursor_pointer'];
+      $contenido  =   div("MOSTRAR SÓLO TAREAS PENDIENTES",   $config);
+      $contenido .=   div("MOSTRAR TODAS LAS TAREAS",         $config2);
       return $contenido;
     }
   }

@@ -52,10 +52,10 @@ if(!function_exists('invierte_date_time')){
 
   }
   
-  function monto_pendiente_cliente($monto_a_pagar,$saldo_cubierto,$costo_envio_cliente,$num_ciclos_contratados){
-
-      $total_deuda  =  $monto_a_pagar * $num_ciclos_contratados;  
-      return        =  $total_deuda + $costo_envio_cliente;  
+  function monto_pendiente_cliente($monto,$saldo_cubierto,$costo,$num_ciclos){
+    
+      $total_deuda  =  $monto * $num_ciclos;  
+      return $total_deuda + $costo;  
   }
   function evalua_acciones_modalidad_anteriores($num_acciones , $modalidad_ventas){
     
@@ -176,8 +176,8 @@ if(!function_exists('invierte_date_time')){
       return $texto;
     }
   
-    function get_estados_ventas($data , $indice ,$modalidad_ventas){
-    
+  function get_estados_ventas($data , $indice ,$modalidad_ventas){
+
     $nueva_data = []; 
     $estado_venta ="";   
     foreach ($data as $row){      
