@@ -199,7 +199,7 @@ function valEmail(valor){
 /**/
 function valida_l_precio(input ,  l , place , mensaje_user ){
 
-	var val 		=  	$(input).val();	
+	var val 		=  	get_parameter(input);	
 	var val_length  =  	val.length;
 	var flag 		= 	0;
 	
@@ -293,8 +293,8 @@ function response_mensaje_contacto(data){
 function registra_lead(e){
 
 	var  url 			=   $(".form_enid_contacto").attr("action");		
-	var  f 				= valida_email_form("#btn_cotizacion" , ".place_mail_contacto" ); 
-	var  tipo_prospecto = $("#tipo_prospecto").val();
+	var  f 				= 	valida_email_form("#btn_cotizacion" , ".place_mail_contacto" ); 
+	var  tipo_prospecto = 	get_parameter("#tipo_prospecto");
 
 		if (f ==  1 ) {
 			set_places();
@@ -338,7 +338,7 @@ function metricas_perfil(){
 	
 	if (get_option("in_session") ==  1) {
 		var 	url 		=  "../q/index.php/api/productividad/notificaciones/format/json/";
-		var  	data_send 	= {id_usuario : $(".id_usuario").val() };
+		var  	data_send 	= {id_usuario : get_parameter(".id_usuario") };
 		request_enid( "GET",  data_send , url , response_metricas_perfil);		
 	}
 }
@@ -467,9 +467,9 @@ function quita_espacios(input){
 }
 /**/
 function quita_espacios_input_precio(){		
-	valor = $(".precio").val();
-	/**/
-	nuevo =  quitar_espacios_numericos(valor);
+	
+	var valor = get_parameter(".precio");
+	var nuevo =  quitar_espacios_numericos(valor);
 	$(".precio").val(nuevo);	
 	/**/	
 }

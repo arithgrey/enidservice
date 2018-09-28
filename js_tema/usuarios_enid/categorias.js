@@ -31,7 +31,7 @@ function load_niveles(){
 	
 	$(".msj_existencia").empty();		
 	$(".form_categoria").hide();
-	es_servicio 	=  $(".servicio option:selected").val();		
+	var es_servicio 	=  get_parameter(".servicio option:selected");		
 	set_option("es_servicio" , es_servicio);
 	nivel 			=	1;
     padre        	=  0;	
@@ -75,8 +75,7 @@ function muestra_sugerencias_segundo_nivel(data){
 	
 	llenaelementoHTML( ".segundo_nivel" ,  data);
 	$(".seleccion_2").click(function(){
-
-		add_categoria(2 , $(".primer_nivel option:selected").val() , $(".servicio option:selected").val());
+		add_categoria(2 , get_parameter(".primer_nivel option:selected") ,  get_parameter(".servicio option:selected"));
 	});
 	$(".segundo_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_segundo);
 }
@@ -104,9 +103,8 @@ function muestra_sugerencias_tercer_nivel(data){
 
 	llenaelementoHTML( ".tercer_nivel" ,  data);
 	$(".seleccion_3").click(function(){
-		add_categoria(3 , $(".segundo_nivel option:selected").val() , $(".servicio option:selected").val());
+		add_categoria(3 , get_parameter(".segundo_nivel option:selected") , get_parameter(".servicio option:selected") );
 	});
-
 	$(".seleccion_2").hide();
 	$(".tercer_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_tercer);
 }
@@ -131,7 +129,7 @@ function muestra_mas_opciones_tercer(e){
 function muestra_sugerencias_cuarto(data){
 	llenaelementoHTML( ".cuarto_nivel" ,  data);
 	$(".seleccion_4").click(function(){
-		add_categoria(4 , $(".tercer_nivel option:selected").val() , $(".servicio option:selected").val());
+		add_categoria(4 , get_parameter(".tercer_nivel option:selected")  ,  get_parameter(".servicio option:selected"));
 	});
 
 	$(".seleccion_3").hide();
@@ -160,7 +158,7 @@ function muestra_sugerencias_quinto(data){
 	$(".seleccion_4").hide();
 	llenaelementoHTML( ".quinto_nivel" ,  data);	
 	$(".seleccion_5").click(function(){		
-		add_categoria(5 , $(".cuarto_nivel option:selected").val() , $(".servicio option:selected").val());
+		add_categoria(5 , get_parameter(".cuarto_nivel option:selected")  , get_parameter(".servicio option:selected") );
 	});
 }
 /**/
@@ -182,9 +180,9 @@ function clean_categorias(inicio){
 function add_categoria(nivel , padre , tipo){
 	
 	
-	clasificacion = $(".clasificacion").val();
-	data_send =   {clasificacion:clasificacion , tipo : tipo , padre : padre , nivel:nivel};	
-	url =  "../q/index.php/api/clasificacion/nivel/format/json/";	
+	var clasificacion 	=	get_parameter(".clasificacion");
+	var data_send 		=   {clasificacion:clasificacion , tipo : tipo , padre : padre , nivel:nivel};	
+	var url 			=  	"../q/index.php/api/clasificacion/nivel/format/json/";	
 
 	$.ajax({
 			url: url,

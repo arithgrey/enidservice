@@ -1,7 +1,7 @@
 function  carga_informe_comunidad(){	
-	url =  now + "index.php/api/emp/laexperiencia/format/json/";
-	id_empresa = $(".id_empresa").val();
-	in_session =  $(".in_session").val();	
+	var url 		=  	now + "index.php/api/emp/laexperiencia/format/json/";
+	var id_empresa 	= 	get_parameter(".id_empresa");
+	var in_session 	=  	get_parameter(".in_session");	
 	
 	$.ajax({
 		url :  url , 

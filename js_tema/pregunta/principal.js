@@ -6,12 +6,12 @@ $(document).ready(function(){
 	set_option("respuesta_valorada" , 0);		
 	$(".form_valoracion").submit(registra_valoracion);
 	
-	var envio_pregunta =  $(".envio_pregunta").val();
+	var envio_pregunta =  get_parameter(".envio_pregunta");
 	if (envio_pregunta !=1){
 		bloquea_form(".form_valoracion");
 		$(".contenedor_registro").show();
 	}
-	if ($(".propietario").val()== 1){
+	if (get_parameter(".propietario") == 1){
 		bloquea_form(".form_valoracion");
 	}
 	$("footer").ready(carga_productos_sugeridos);
@@ -76,7 +76,7 @@ function response_carga_valoraciones(data){
 
 	}
 	$(".ordenar_valoraciones_button").click(ordenar_valoraciones);			
-	valoracion_persona=  $(".contenedor_promedios").html();
+	var valoracion_persona=  $(".contenedor_promedios").html();
 	llenaelementoHTML(".valoracion_persona" , valoracion_persona);
 	$(".valoracion_persona_principal .valoracion_persona .estrella").css("font-size" , "1.2em");
 	$(".valoracion_persona_principal .valoracion_persona .promedio_num").css("font-size" , "1.2em");

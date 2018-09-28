@@ -90,14 +90,13 @@ function response_metodos_envio(data){
 function muestra_imagen_banco(){
 
 	
-	var banco =  $(".banco_cuenta").val();
-
+	var banco 		=  get_parameter(".banco_cuenta");
 	set_option("banco", parseInt(banco));
 	var bancos_imgs = [ "", "1.png", "2.png" , "3.png", "4.png", "5.png", "6.png", "7.png" , "8.png", "9.png"];
 
 	if (get_option("banco")>0) {
-		url_img_banco =  "../img_tema/bancos/"+bancos_imgs[banco];	    	
-	    imagen ="<img src='"+url_img_banco+"' style='width:100%'>";
+		url_img_banco 	=  "../img_tema/bancos/"+bancos_imgs[banco];	    	
+	    imagen 			= "<img src='"+url_img_banco+"' style='width:100%'>";
 	    llenaelementoHTML(".place_imagen_banco" , imagen);
 	}else{
 		llenaelementoHTML(".place_imagen_banco" , "");	
@@ -106,25 +105,22 @@ function muestra_imagen_banco(){
 /**/
 function registra_actualizacion_banco_persona(){
 
-	flag_1 =  valida_banco_seleccionado();	
-	flag_2 =  valida_tarjeta_registrada();
-	flag_3 =  valida_propietario_tarjeta();
+	var flag_1 =  valida_banco_seleccionado();	
+	var flag_2 =  valida_tarjeta_registrada();
+	var flag_3 =  valida_propietario_tarjeta();
 
-	if (flag_1 == 1){
-		if (flag_2 == 1) {
-			if (flag_3 == 1){
-
-					var url =  "../pagos/index.php/api/afiliados/cuenta_afiliado/format/json/";						
-					var data_send = {"numero_tarjeta" : get_numero_tarjeta(), "banco" : get_option("banco"), "propietario" : get_propietario()};	
-					request_enid( "PUT",  data_send, url, metodos_de_envio_disponibles, ".place_info_cuentas_pago");
-			}
-		}
+	if (flag_1 ==  1 && flag_2 == 1 && flag_3 == 1) {
+		
+		var url =  "../pagos/index.php/api/afiliados/cuenta_afiliado/format/json/";						
+		var data_send = {"numero_tarjeta" : get_numero_tarjeta(), "banco" : get_option("banco"), "propietario" : get_propietario()};	
+		request_enid( "PUT",  data_send, url, metodos_de_envio_disponibles, ".place_info_cuentas_pago");
 	}
+	
 }
 /**/
 function valida_banco_seleccionado(){
 	
-	banco =  $(".banco_cuenta").val();
+	banco =  get_parameter(".banco_cuenta");
 	set_option("banco", banco);
 	if(get_option("banco") ==  0){
 		
@@ -144,14 +140,13 @@ function valida_banco_seleccionado(){
 /**/
 function valida_tarjeta_registrada(){	
 
-	numero_tarjeta =  $(".numero_tarjeta").val();
-	set_option("numero_tarjeta",numero_tarjeta);		
+	set_option("numero_tarjeta" , get_parameter(".numero_tarjeta"));		
 	return  valida_text_form(".numero_tarjeta" , ".place_numero_tarjeta" , 16 , "Número de tarjeta" );		
 	
 }
 /**/
 function valida_propietario_tarjeta(){
-	propietario =  $(".propietario").val();
-	set_optino("propietario" , propietario);
+	
+	set_optino("propietario" , get_parameter(".propietario"));
 	return valida_text_form(".propietario" , ".place_propietario_tarjeta" , 5 , "Propietario de la tarjeta" );				
 }

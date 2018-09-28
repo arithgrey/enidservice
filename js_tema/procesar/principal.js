@@ -128,8 +128,9 @@ function respuesta_proceso_venta_usuario_activo(data){
 }
 /**/
 function quita_espacios_en_telefono(){
-	valor = $(".telefono").val();
-	nuevo =  quitar_espacios_numericos(valor);
+	
+	var valor 	= 	get_parameter(".telefono");
+	var nuevo 	=  	quitar_espacios_numericos(valor);
 	$(".telefono").val(nuevo);	
 }
 /**/
@@ -160,7 +161,6 @@ function config_direccion(){
 
 	$(".contenedo_compra_info").show();
 	llenaelementoHTML(".contenedo_compra_info" , ficha);
-
 	recorrepage(".contenedor_compra");	
 	$(".codigo_postal").keyup(auto_completa_direccion);		
 	$(".numero_exterior").keyup(function (){

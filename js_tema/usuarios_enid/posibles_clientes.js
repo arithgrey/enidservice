@@ -233,7 +233,7 @@ function asigna_valor_persona_agendado(e){
 }
 /**/
 function evalua_menu_tipificacion(){
-	tipificacion =  $(".tipificacion").val();
+	var tipificacion =  get_parameter(".tipificacion");
 	if (tipificacion ==  2 ) {
 		$('.btn_agendar_llamada').tab('show'); 										
 	}

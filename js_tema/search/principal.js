@@ -3,8 +3,8 @@ $(document).ready(function(){
 });
 /**/
 function filtro(){
-	var url_actual = window.location;
-	var order =  $("#order option:selected").val();
-	var new_url =  url_actual+"&order="+order;
+	var url_actual 	= 	window.location;
+	var order 		=  	get_parameter("#order option:selected");
+	var new_url 	=  	url_actual+"&order="+order;
 	redirect(new_url);
 }

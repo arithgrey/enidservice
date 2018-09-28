@@ -94,8 +94,8 @@ function response_registro_valoracion(data){
 }
 /**/
 function evalua_propietario(){
-	es_propietario =  $(".propietario").val();  	
-	if (es_propietario == 1){		
+	
+	if (get_parameter(".propietario") == 1){		
 		bloquea_form(".form_valoracion");
 	}
 }

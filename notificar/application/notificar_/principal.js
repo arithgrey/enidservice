@@ -69,9 +69,8 @@ function response_notificacion_registro_pago(data){
 /**/
 function valida_auto_complete_recibo(){
 	
-	var num_recibo 	=  $(".num_recibo").val();		
 	var url 		=  "../pagos/index.php/api/cobranza/info_saldo_pendiente/format/json/";	
-	var data_send 	=  {"recibo" : num_recibo};
+	var data_send 	=  {"recibo" : get_parameter(".num_recibo")};
 	request_enid( "GET",  data_send, url , response_autocomplete);		
 }
 

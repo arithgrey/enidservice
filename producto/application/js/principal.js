@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	/**/
-	set_option("servicio" , $(".servicio").val());
+	set_option("servicio" , get_parameter(".servicio"));
 	set_option("respuesta_valorada" , 0);		
 	$("footer").ready(carga_productos_sugeridos);
 	$("footer").ready(carga_valoraciones);
-	set_option("desde_valoracion", $(".desde_valoracion").val());
+	set_option("desde_valoracion", get_parameter(".desde_valoracion"));
 	set_option("orden" ,"desc");	
 	$(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);	
 	$(".talla").click(agregar_talla);
@@ -25,9 +25,9 @@ $(document).ready(function(){
 /**/
 function carga_productos_sugeridos(){
 
-	var url =  "../tag/index.php/api/sugerencia/servicio/format/json/";		
-	var q=  $(".qservicio").val();  	
-	var data_send = {"id_servicio" : get_option("servicio") , "q" :  q}	
+	var url 		=  "../tag/index.php/api/sugerencia/servicio/format/json/";		
+	var q 			=  get_parameter(".qservicio");  	
+	var data_send 	= {"id_servicio" : get_option("servicio") , "q" :  q}	
 	request_enid( "GET",  data_send, url, response_carga_productos);
 }
 /**/

@@ -15,12 +15,12 @@ $(document).ready(function(){
 		quita_espacios(".lada2");		
 	});
 	/**/
-	$("#form_update_password").submit(update_password);	
+	$("#form_update_password").submit(set_password);	
 	$(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
 	$(".f_telefono_usuario").submit(actualiza_telefono_usuario);
 	$(".f_telefono_usuario_negocio").submit(actualiza_telefono_usuario_negocio);
 
-	//$(".form_direccion_envio").submit(registra_nueva_direccion);
+	
 });
 /**/
 function carga_direccion_usuario(){	
@@ -49,9 +49,9 @@ function registra_direccion_usuario(e){
 
 	if(get_option("existe_codigo_postal") ==  1){			
 		
-		var url =  "../q/index.php/api/codigo_postal/direccion_usuario/format/json/";	
-		var data_send =  $(".form_direccion_envio").serialize()+"&"+$.param({"direccion_principal" : 1});						
-		var asentamiento = $(".asentamiento").val();
+		var url 			=  	"../q/index.php/api/codigo_postal/direccion_usuario/format/json/";	
+		var data_send 		=  	$(".form_direccion_envio").serialize()+"&"+$.param({"direccion_principal" : 1});						
+		var asentamiento 	= 	get_parameter(".asentamiento");
 		if (asentamiento != 0 ) {
 			request_enid( "POST",  data_send, url, response_registra_direccion_usuario, ".place_proyectos" );
 			$(".place_asentamiento").empty();		
@@ -115,30 +115,31 @@ function quita_espacios_text(nuevo_valor){
 	return valor;	
 }
 /**/
-function update_password(e){
+function set_password(e){
 	
-	flag = 0; 
-	flag2 = 0;
-	flag3 = 0;
-	flag =  valida_text_form("#password" , ".place_pw_1" , 7 , "Texto " );			
-	flag2 =  valida_text_form("#pw_nueva" , ".place_pw_2" , 7 , "Texto " );			
-	flag3 =  valida_text_form("#pw_nueva_confirm" , ".place_pw_3" , 7 , "Texto " );			
-	nueva_password = 0;
+	var flag 			= 0; 
+	var flag2 			= 0;
+	var flag3 			= 0;
+	var flag 			=  valida_text_form("#password" , ".place_pw_1" , 7 , "Texto " );			
+	var flag2 			=  valida_text_form("#pw_nueva" , ".place_pw_2" , 7 , "Texto " );			
+	var flag3 			=  valida_text_form("#pw_nueva_confirm" , ".place_pw_3" , 7 , "Texto " );			
+	var nueva_password 	= 0;
 	
-	msj_user = "";
-	if (flag == flag2 && flag ==  flag3) {
-	
-			/*Ahora validamos que no sean las mismas que la antigua*/			
-			if ($("#password").val() !=  $("#pw_nueva").val() ){nueva_password =  1;}else{nueva_password =  2;}
-			if ($("#password").val() !=  $("#pw_nueva_confirm").val() ){nueva_password =  1;}else{nueva_passwor	 =  2;}		
+	if (flag == flag2 && flag ==  flag3) {	
+		/*Ahora validamos que no sean las mismas que la antigua*/		
+		nueva_password = (get_parameter("#password") !=  get_parameter("#pw_nueva") ) ? 1: 2;
+		if (get_parameter("#password") !=  get_parameter("#pw_nueva_confirm") ){nueva_password =  1;}else{nueva_passwor	 =  2;}		
+
 	}
 
 
 	switch(nueva_password){
 		case 1: 
-			a = $("#password").val();
-			b = $("#pw_nueva").val();
-			c = $("#pw_nueva_confirm").val();
+			
+			a = get_parameter("#password");
+			b = get_parameter("#pw_nueva");
+			c = get_parameter("#pw_nueva_confirm");
+
 			anterior = "" +CryptoJS.SHA1(a);
 			nuevo = "" +CryptoJS.SHA1(b);
 			confirma = "" +CryptoJS.SHA1(c);
@@ -154,28 +155,26 @@ function update_password(e){
 	e.preventDefault();
 }
 /**/
-function termina_session(){
-	url =   '../login/index.php/startsession/logout/';
-	redirect(url);	
+var termina_session = function(){
+	redirect('../login/index.php/startsession/logout/');	
 }
-/**/
 function  actualiza_password(anterior , nuevo , confirma){
 	
-	var url ="../q/index.php/api/usuario/pass/format/json/";	
-	var data_send = {"nuevo": nuevo, "anterior": anterior, "confirma": confirma , "type": 2};
-	request_enid( "PUT",  data_send, url, response_actualizacion_pass, ".msj_password" );
+	var 		url 		=	"../q/index.php/api/usuario/pass/format/json/";	
+	var 		data_send 	= 	{"nuevo": nuevo, "anterior": anterior, "confirma": confirma , "type": 2};
+	request_enid( "PUT",  data_send, url, resp_actualizacion_pass, ".msj_password" );
 }
 /**/
-function response_actualizacion_pass(data){
+var resp_actualizacion_pass = function(data){
 
 	if(data == true){				
-		show_response_ok_enid(".msj_password" , "Contraseña actualizada correctamente, inicia sessión para verificar el cambio.");	
+		show_response_ok_enid(".msj_password" , "Contraseña actualizada, inicia sessión para verificar el cambio.");	
 		setInterval('termina_session()',3000);
 	}else{
 		llenaelementoHTML(".msj_password" , data );			
-	}			
-	
+	}
 }
+
 /*
 function auto_completa_direccion(){
 	

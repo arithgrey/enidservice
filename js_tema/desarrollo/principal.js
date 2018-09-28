@@ -1,17 +1,17 @@
 $(document).ready(function(){		
 
-	var num_departamento = $(".num_departamento").val(); 
+	var num_departamento = get_parameter(".num_departamento"); 
 	set_option("modulo", 2);
 		
 	
 	$("footer").ready(function(){
-		var  id_depto = $(".num_departamento").val();		
+		var  id_depto = get_parameter(".num_departamento");		
 		set_option("id_depto", id_depto);
 	});
 
 	$(".depto").change(function(){
 
-		var id_depto = $(".depto").val();						
+		var id_depto 	= get_parameter(".depto");						
 		set_option("id_depto", id_depto);
 		carga_tikets_usuario();
 	});
@@ -270,9 +270,9 @@ function carga_tikets_usuario(){
 	recorre_web_version_movil();
 	var status_ticket = 0; 	
 	if (document.querySelector(".estatus_tickets")) {		
-		status_ticket =  $(".estatus_tickets").val();
+		status_ticket =  get_parameter(".estatus_tickets");
 	}
-	var keyword 	= 	$(".q").val(); 	
+	var keyword 	= 	get_parameter(".q"); 	
 	set_option("keyword" , keyword);	
 	var url 		=  	"../q/index.php/api/tickets/ticket_desarrollo/format/json/";			
 	var data_send 	= 	{ "status" : status_ticket , "id_departamento" :  get_option("id_depto") , "keyword" : get_option("keyword"), "modulo": get_option("modulo") };				

@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$("footer").ready(function() {
 		recorrepage("#info_articulo");		
 	});
-	if($(".in_session").val() == 1 ) {
+	if(get_parameter(".in_session") == 1 ) {
 		$('#summernote').summernote();  			
 		$(".form_respuesta").submit(registra_respuesta);	
 	}	
