@@ -1,81 +1,70 @@
 <?php 
 	
-	$costo_envio_cliente_sistema 	=  $costo_envio_sistema["costo_envio_cliente"];
-	$recibo 						=  $recibo[0]; 
-	$id_forma_pago  				=  $recibo["id_forma_pago"];
-	$saldo_cubierto  				=  $recibo["saldo_cubierto"];
-	$fecha_registro  				=  $recibo["fecha_registro"];
-	$status  						=  $recibo["status"];
-	$fecha_vencimiento  			=  $recibo["fecha_vencimiento"];
-	$monto_a_pagar  				=  $recibo["monto_a_pagar"];
-	$id_proyecto_persona_forma_pago =  $recibo["id_proyecto_persona_forma_pago"];
-	$id_recibo 						=  $id_proyecto_persona_forma_pago; 
-	$num_email_recordatorio  		=  $recibo["num_email_recordatorio"];
-	$id_usuario_referencia  		=  $recibo["id_usuario_referencia"];
-	$flag_pago_comision  			=  $recibo["flag_pago_comision"];
-	$flag_envio_gratis  			=  $recibo["flag_envio_gratis"];
-	$costo_envio_cliente 			=  $recibo["costo_envio_cliente"];
-	$id_usuario_venta  				=  $recibo["id_usuario_venta"];
-	$id_ciclo_facturacion			=  $recibo["id_ciclo_facturacion"];
-	$num_ciclos_contratados 		=  $recibo["num_ciclos_contratados"];
-	$id_usuario  					=  $recibo["id_usuario"];
-	$precio  						=  $recibo["precio"];
-	$costo_envio_vendedor  			=  $recibo["costo_envio_vendedor"];
-	$id_servicio  					=  $recibo["id_servicio"];
-	$resumen_pedido  				=  $recibo["resumen_pedido"];
-	$saldo_pendiente 				=  
-	($monto_a_pagar * $num_ciclos_contratados )- $saldo_cubierto;	
+	//$costo_envio_cliente_sistema 	=  $costo_envio_sistema["costo_envio_cliente"];
+	$recibo 				=  	$recibo[0]; 
+	$id_forma_pago  		=  	$recibo["id_forma_pago"];
+	$saldo_cubierto  		=  	$recibo["saldo_cubierto"];
+	$fecha_registro  		=  	$recibo["fecha_registro"];
+	$status  				=  	$recibo["status"];
+	$fecha_vencimiento  	=  	$recibo["fecha_vencimiento"];
+	$monto_a_pagar  		=  	$recibo["monto_a_pagar"];
+	$id_recibo 				=  	$recibo["id_proyecto_persona_forma_pago"];	
+	$num_email_recordatorio =  	$recibo["num_email_recordatorio"];
+	$id_usuario_referencia  =  	$recibo["id_usuario_referencia"];
+	$flag_pago_comision  	=  	$recibo["flag_pago_comision"];
+	$flag_envio_gratis  	=  	$recibo["flag_envio_gratis"];
+	$costo_envio_cliente 	=  	$recibo["costo_envio_cliente"];
+	$id_usuario_venta  		=  	$recibo["id_usuario_venta"];
+	$id_ciclo_facturacion	=  	$recibo["id_ciclo_facturacion"];
+	$num_ciclos_contratados =  	$recibo["num_ciclos_contratados"];
+	$id_usuario  			=  	$recibo["id_usuario"];
+	$precio  				=  	$recibo["precio"];
+	$costo_envio_vendedor  	=  	$recibo["costo_envio_vendedor"];
+	$id_servicio  			=  	$recibo["id_servicio"];
+	$resumen_pedido  		=  	$recibo["resumen_pedido"];
+	$servicio 				= 	$servicio[0];
+	$flag_servicio 			=  	$servicio["flag_servicio"];
 
+	$deuda 					=  
+	get_saldo_pendiente($monto_a_pagar,$num_ciclos_contratados,$saldo_cubierto,$flag_servicio,$costo_envio_cliente,$costo_envio_sistema);
 
-	$servicio = $servicio[0];
-	$flag_servicio =  $servicio["flag_servicio"];
-	$text_envio_cliente_sistema = "";
-	if($flag_servicio == 0 ){
-		$saldo_pendiente 			=  $saldo_pendiente + $costo_envio_cliente;		
-		$text_envio_cliente_sistema =  $costo_envio_sistema["text_envio"]["cliente"];
-	}
-	$url_pago_oxxo 					= 	$url_request ."orden_pago_oxxo/?q=".$saldo_pendiente."&q2=".$id_recibo."&q3=".$id_usuario_venta;
 	
-	/**/
-	$url_pago_saldo_enid 			= 	"../movimientos/?q=transfer&action=8&operacion=".$id_usuario_venta."&recibo=".$id_recibo;
-	$data_oxxo["url_pago_oxxo"] 	=  	$url_pago_oxxo;
-	/*Data para notificar el pago*/
-	$data_notificacion["id_recibo"] =  	$id_recibo;
-	$url_img_servicio 				=  	"../imgs/index.php/enid/imagen_servicio/$id_servicio";
-
-	$url_pago_paypal 				=	"https://www.paypal.me/eniservice/".$saldo_pendiente;
-	$data["url_pago_paypal"] 		= 	$url_pago_paypal;
-	$data["recibo"] 				=	$recibo;
+	$saldo_pendiente 		= 	$deuda["saldo_pendiente_envio"];   
+	$url_pago_oxxo 			= 	get_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
+	$url_pago_saldo_enid 	= 	get_link_saldo_enid($id_usuario_venta , $id_recibo);	
+	$url_img_servicio 		=  	link_imagen_servicio($id_servicio);
+	$url_pago_paypal 		=	get_link_paypal($saldo_pendiente);	
+	$data["url_pago_paypal"]= 	$url_pago_paypal;
+	$data["recibo"] 		=	$recibo;
 ?>
-
 <div class="col-lg-8">
-		<hr>
-		<div style="margin-top: 10px; ">
-			<?=heading_enid(icon("fa fa-credit-card") . "Formas de pago" , 3)?>
-		</div>		
-		<hr>
-	<?=n_row_12()?>		
-		
-		
-		<?=anchor_enid(
+	<hr>		
+	<?=heading_enid(icon("fa fa-credit-card") . "Formas de pago" , 3 , ["class" => 'strong' ])?>	
+	<hr>
+
+
+	<?=anchor_enid(
 			"Realiza compras con saldo Enid Service" , 
 			[
 				"href" 	=> 	$url_pago_saldo_enid ,
 				"class"	=> 	"contenedor_tipo_pago"
-
 			], 
 			1, 
 			1
-		)?>
-		<?=anchor_enid(
+	)?>
+	<?=anchor_enid(
 			"Pagos en tiendas de autoservicio (OXXO)",
 			[
 				"href"	=>  $url_pago_oxxo,
 				"class"	=> 	"contenedor_tipo_pago",
 				1,
 				1
-			]
-		)?>
+		]
+	)?>
+
+	<?=n_row_12()?>				
+		
+		
 		<?=anchor_enid(
 			"Compra através de PayPal",
 			[
@@ -90,37 +79,41 @@
 		
 		<div>
 			<?php if(count($informacion_envio)>0):?>
+
 				<div style="background:#1F2839;color: white;padding: 10px;">
+			    
 			    <div style="margin-top: 10px;" class="text-right">
-			        <div 	
-			        	class="a_enid_blue btn_direccion_envio fa fa-pencil"  
-			        	id='<?=$id_recibo?>'						
-						href="#tab_mis_pagos"			        	
-						data-toggle="tab"
-			        	style="color: white!important">
-			            
-			        </div>
+			    	<?=icon("fa fa-pencil" ,  
+			    		[			    		
+			    		"class"			=> 	"a_enid_blue btn_direccion_envio ",
+			        	"id" 			=> 	$id_recibo,
+						"href"			=> 	"#tab_mis_pagos",
+						"data-toggle"	=> 	"tab"
+			    		],
+			    		1
+			    	)?>
+			        
+			        
 			    </div>
 
 
 			    <div class='texto_direccion_envio_pedido'>
-
-			        <?=entrega_data_campo($informacion_envio , "direccion" )?>
-			        <?=entrega_data_campo($informacion_envio , "calle" )?>
-			        <?=entrega_data_campo($informacion_envio , "numero_exterior")?>
-			        <?=entrega_data_campo($informacion_envio , "numero_interior")?>
-			        <?=entrega_data_campo($informacion_envio , "entre_calles")?>
-			        <?=entrega_data_campo($informacion_envio , "cp")?>
-			        <?=entrega_data_campo($informacion_envio , "asentamiento")?>
-			        <?=entrega_data_campo($informacion_envio , "municipio")?>
-			        <?=entrega_data_campo($informacion_envio , "ciudad" )?>
-			        <?=entrega_data_campo($informacion_envio , "estado" )?>		
+			        <?=get_campo($informacion_envio , "direccion" )?>
+			        <?=get_campo($informacion_envio , "calle" )?>
+			        <?=get_campo($informacion_envio , "numero_exterior")?>
+			        <?=get_campo($informacion_envio , "numero_interior")?>
+			        <?=get_campo($informacion_envio , "entre_calles")?>
+			        <?=get_campo($informacion_envio , "cp")?>
+			        <?=get_campo($informacion_envio , "asentamiento")?>
+			        <?=get_campo($informacion_envio , "municipio")?>
+			        <?=get_campo($informacion_envio , "ciudad" )?>
+			        <?=get_campo($informacion_envio , "estado" )?>		
 			        
 			    </div>    
 			    <div>
 			    	<?=div("¿Quíen más puede recibir tu pedido?")?>
-			    	<?=div(entrega_data_campo($informacion_envio , "nombre_receptor" ))?>
-			    	<?=div(entrega_data_campo($informacion_envio , "telefono_receptor" ))?>
+			    	<?=div(get_campo($informacion_envio , "nombre_receptor" ))?>
+			    	<?=div(get_campo($informacion_envio , "telefono_receptor" ))?>
 			    </div>
 			</div>
 			<?php else: ?>
@@ -156,55 +149,17 @@
 <div class="col-lg-4">
 	<div style="border-style: solid;padding: 10px;border-width: 1px;">
 		<?=heading_enid("#Recibo: ".$id_recibo)?>
-		<?=div("Concepto" )?>
+		<?=div("Concepto")?>		
 		<?=div($resumen_pedido)?>
-		<?=div(valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio , $id_ciclo_facturacion))?>
+		<?=valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio , $id_ciclo_facturacion)?>
 		<?=div("Precio $".$monto_a_pagar)?>
-		<?=div($text_envio_cliente_sistema)?>
+		<?=div($deuda["text_envio"])?>
 	</div>
 	<div style="border-style: solid;text-align: center;">
-		<?=div("Monto total pendiente", ['class'=> 'strong'] , 1)?>
-	         <?=div($saldo_pendiente . "Pesos Mexicanos" , 1 )?>
+		<?=heading_enid("Monto total pendiente-", 3, ['class'	=> 'strong'] )?>
+	    <?=heading_enid($saldo_pendiente ."MXN", 4 ,   ["class" 		=> 'blue_enid strong'] )?>
+	    <?=heading_enid("Pesos Mexicanos" , 4 , ["class" 		=> 'strong'])?>
 	</div>
-	    <?=div(img($url_img_servicio), [] , 1)?>	        
+	<?=div(img($url_img_servicio), [] , 1)?>	        
 </div>
 
-<style type="text/css">
-	.contenedor_tipo_pago{
-		padding: 10px;
-		border-style: solid;
-		border-width: 1px;
-		margin-top: 10px;
-		
-		background: #02235c;
-		color: white;
-	}
-	.contenedor_tipo_pago:hover{
-		cursor: pointer;
-		background: #005dff;
-	}
-	.contenedor_agregar_direccion_envio_pedido{
-	
-		background: #005dff;
-		padding: 10px;
-		border-style: solid;
-		border-width: 1px;
-		margin-top: 10px;
-				
-		color: white;
-	}
-	.contenedor_agregar_direccion_envio_pedido:hover{
-		cursor: pointer;
-		background: #0057cc;
-		padding: 10px;
-		border-style: solid;
-		border-width: 1px;
-		margin-top: 10px;
-				
-		color: white;
-	}
-	.texto_direccion_envio_pedido{
-		font-size: .9em;
-		text-transform: uppercase;
-	}
-</style>

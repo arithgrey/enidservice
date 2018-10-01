@@ -163,30 +163,26 @@ class recibo extends REST_Controller{
                 $data_complete["modalidad"] =1;
                 $this->load->view("cobranza/notificacion_pago_realizado" , $data_complete);  
                 
-            }
-            /**/
+            }        
         }
-    }   
+    }      
     function ticket_pendiente_pago($param , $recibo , $data_complete){
 
         $id_usuario =  $recibo[0]["id_usuario"];               
         
         if (get_info_usuario_valor_variable($param , "cobranza") ==  1){
 
-            $data_complete["costo_envio_sistema"]   =  get_costo_envio($recibo[0]);
+            $data_complete["costo_envio_sistema"]       =  get_costo_envio($recibo[0]);
             /*Cargamos el saldo que tiene la persona*/
-            $data_complete["id_recibo"]             =   $param["id_recibo"];
-            $id_usuario_venta                       =   $recibo[0]["id_usuario_venta"];
-            $data_complete["id_usuario_venta"]      =   $id_usuario_venta; 
-            $direccion                              =   $this->get_direccion_pedido($param["id_recibo"]);
-
-            $data_complete["informacion_envio"]     =   [];
+            $data_complete["id_recibo"]                 =   $param["id_recibo"];
+            $id_usuario_venta                           =   $recibo[0]["id_usuario_venta"];
+            $data_complete["id_usuario_venta"]          =   $id_usuario_venta; 
+            $direccion                                  =   $this->get_direccion_pedido($param["id_recibo"]);
+            $data_complete["informacion_envio"]         =   [];
             if (count($direccion) > 0 ) {
                 $id_direccion = $direccion[0]["id_direccion"];
                 $data_complete["informacion_envio"]     =   $this->get_direccion_por_id($id_direccion);    
-            }
-            
-            
+            }            
             $this->load->view("cobranza/pago_al_momento" , $data_complete);    
 
 

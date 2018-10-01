@@ -254,7 +254,7 @@
 		}
 		/**/
 		$contacto .= get_td($row["contacto"]);		
-		/**/
+		
 		$table ="<table width='100%' border=1  style='text-align: center;'>";
 				$table .="<tr>";	
 					$table .=get_td("Labores");						
@@ -269,8 +269,8 @@
 									</a>");						
 
 					
-					if(count($row["correos"][0]["correos_enviados"])>0){
-						$table .=get_td($row["correos"][0]["correos_enviados"]);			
+					if($row["correos"] > 0){
+						$table .=get_td($row["correos"]);			
 					}else{
 						$table .=get_td(0);				
 					}

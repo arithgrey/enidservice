@@ -34,9 +34,6 @@ class Home extends CI_Controller{
     private function load_servicio($param){
 
         $id_servicio =  get_info_producto($param["producto"]);                    
-
-        
-        
         $this->set_option("id_servicio" , $id_servicio);                
         $data        = $this->principal->val_session("");  
 

@@ -44,6 +44,7 @@
         $entregas_en_casa   =  $row["entregas_en_casa"];
         $telefono_visible   = $row["telefono_visible"];
         $venta_mayoreo      =  $row["venta_mayoreo"];
+        $tiempo_promedio_entrega     =  $row["tiempo_promedio_entrega"];
     }    
     $url_web_servicio = $url_request."producto/?producto=".$id_servicio;    
     $url_productos_publico  = "../producto/?producto=".$id_servicio."&q2=".$id_usuario;            
@@ -102,7 +103,7 @@
     "¿PERSONAS PUEDEN VER TU NÚMERO TELEFÓNICO PARA SOLICITARTE MÁS 
     INFORMES?":"¿PERSONAS PUEDEN SOLICITARTE MÁS INFORMES POR TELÉFONO?";
     
-    $data["flag_servicio"]      =  entrega_data_campo($servicio , "flag_servicio");     
+    $data["flag_servicio"]      =  get_campo($servicio , "flag_servicio");     
 
     
     $text_notificacion_imagenes =  valida_text_imagenes($tipo_promocion, $num_imagenes);
@@ -128,14 +129,14 @@
     $llamada_accion_youtube      =  
     "¿TIENES ALGÚN VIDEO SOBRE TU ".$tipo_promocion."?";
     $text_llamada_accion_youtube =  icon('fa fa-youtube-play') ." VIDEO DE YOUTUBE ";
-    $valor_youtube               =  entrega_data_campo($servicio , "url_vide_youtube");
+    $valor_youtube               =  get_campo($servicio , "url_vide_youtube");
     $val_youtube                 =  icon('fa fa-pencil text_url_youtube').$valor_youtube;
-    $nuevo_nombre_servicio       =  entrega_data_campo($servicio ,"nombre_servicio");
+    $nuevo_nombre_servicio       =  get_campo($servicio ,"nombre_servicio");
 
     $text_titulo_seccion_producto=  
     "INFORMACIÓN SOBRE TU ".$nuevo_nombre_servicio.
     icon('fa fa-pencil text_desc_servicio icon-pencil');
-    $nueva_descripcion          = entrega_data_campo($servicio , 'descripcion');
+    $nueva_descripcion          = get_campo($servicio , 'descripcion');
     $nombre_servicio_heading    = icon('fa fa-pencil text_nombre_servicio')." ". 
     $tipo_promocion ." ".$nuevo_nombre_servicio;
 
@@ -160,7 +161,7 @@
         "name"    =>  "q2" ,
         "class"   =>  "nuevo_producto_nombre",
         "onkeyup" =>  "transforma_mayusculas(this)",
-        "value"   =>  entrega_data_campo($servicio,'nombre_servicio') ,
+        "value"   =>  get_campo($servicio,'nombre_servicio') ,
         "required"=> true ],
         1);
     
@@ -280,9 +281,12 @@
     <div class="tab-content">                
         <!--IMAGENES +  YOUTUBE-->
         <div class="tab-pane <?=$extra_1?>" id="tab_imagenes">
+
             <?=$notificacion_imagenes;?>
-            <?=div($images,["class"   => "contenedor_imagen_muestra"],1)?>
+            <?=div($images, ["class"   => "contenedor_imagen_muestra"],1 )?>
+            
             <?=heading_enid($llamada_accion_youtube , 4 ,[] ,1)?>
+
             <?=div($text_llamada_accion_youtube , [] , 1)?>
             <?=div($val_youtube , ["class"    =>  "text_video_servicio"] , 1 )?>
             <?=form_open("",  
@@ -325,6 +329,16 @@
 
     
         <div class="tab-pane <?=$extra_4?>" id="tab_info_precios">            
+
+            <?=get_rango_entrega(
+            $id_perfil, 
+            $tiempo_promedio_entrega, 
+            [   "name"=>"tiempo_entrega" , 
+                "class"=> "tiempo_entrega form-control"
+            ])?>
+            
+
+
             <?=heading_enid($titulo_compra_en_casa,4,[] , 1);?>
             <table  class='seccion_compras_casa'>
                 <tr>

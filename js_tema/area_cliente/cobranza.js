@@ -1,11 +1,14 @@
 /**/
 function cargar_info_resumen_pago_pendiente(e){	
+		
+	var id_recibo  	= get_parameter_enid($(this) , "id");
 	
-	var id_recibo 	=  e.target.id;		
-	set_option("id_recibo" ,  id_recibo);	
-	var url 		=  "../q/index.php/api/recibo/resumen_desglose_pago/format/json/";	
-	var data_send 	=  {"id_recibo" : get_option("id_recibo") , "cobranza" : 1};				
-	request_enid( "GET",  data_send, url, response_carga_info_resumen_pago_pendiente , ".place_resumen_servicio");
+	if (id_recibo > 0) {
+		set_option("id_recibo" ,  id_recibo);	
+		var url 		=  "../q/index.php/api/recibo/resumen_desglose_pago/format/json/";	
+		var data_send 	=  {"id_recibo" : get_option("id_recibo") , "cobranza" : 1};				
+		request_enid( "GET",  data_send, url, response_carga_info_resumen_pago_pendiente , ".place_resumen_servicio");
+	}
 }
 /**/
 function response_carga_info_resumen_pago_pendiente(data){

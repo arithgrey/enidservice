@@ -6,7 +6,8 @@ class productividad extends REST_Controller{
         $this->load->helper("q");                                          
         $this->load->model("productividad_usuario_model");          
         $this->load->library(lib_def());     
-    }   
+    } 
+    
     /*
     function accesos_afiliados_GET(){        
 

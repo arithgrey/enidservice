@@ -4,14 +4,16 @@
         parent::__construct();        
         $this->load->database();
     }
-    private function get( $params=[], $params_where =[] , $limit =1){
+    function get( $table , $params=[], $params_where =[] , $limit =1){
+        
+        
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
-        return $this->db->get("tarea")->result_array();
+        return $this->db->get($table)->result_array();
     }
     
     function visitas_enid_semana($_num){
@@ -37,8 +39,9 @@
     }
       
     function get_correos_enviados($tabla){
-      $query_get = "SELECT SUM(total) correos_enviados FROM $tabla";
-      return  $this->db->query($query_get)->result_array();     
+    
+      $query_get = "SELECT SUM(CASE WHEN total  > 0  THEN total ELSE 0 END) correos_enviados FROM $tabla";
+      return $this->db->query($query_get)->result_array()[0]["correos_enviados"];     
     }
     function get_registros_valoraciones_productos($tabla){
       $query_get = "SELECT COUNT(0)productos_valorados FROM $tabla";
@@ -365,8 +368,7 @@
                     $data_complete[$a]["valoraciones_productos"] 
                     = $this->get_registros_valoraciones_productos($tb_valoraciones_p);                     
                     
-                    $data_complete[$a]["correos"] 
-                    = $this->get_correos_enviados($tb_correos); 
+                    $data_complete[$a]["correos"] = $this->get_correos_enviados($tb_correos); 
 
                     
                     $data_complete[$a]["servicios_creados"] 
@@ -465,8 +467,7 @@
         
         
         $_num         = get_random();     
-        $sql_visitas  =  $this->crea_visitas_por_periodo($param);
-        $data_complete["sql_visitas"] = $sql_visitas;
+        $sql_visitas  =  $this->crea_visitas_por_periodo($param);        
         $this->crea_tabla_temploral("visitas_periodo_$_num" , $sql_visitas , 0);
               $query_get  =   "SELECT * FROM visitas_periodo_$_num";
               $accesos    =   $this->db->query($query_get)->result_array();

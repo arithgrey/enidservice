@@ -80,7 +80,7 @@ function carga_info_servicio(e) {
 	}
 }
 /**/
-function carga_informacion_servicio(num) {
+function carga_informacion_servicio(num = 1) {
 	
 	display_elements([".contenedor_busqueda"] ,  0);
 	var 	url 		= "../q/index.php/api/servicio/especificacion/format/json/";
@@ -116,6 +116,7 @@ function respuesta_informacion_servicio(data) {
 		$(".form_servicio_youtube").submit(actualiza_dato_servicio_youtube);
 		$(".form_servicio_facebook").submit(actualiza_dato_servicio_facebook);
 		$(".foto_producto").click(elimina_foto_producto);
+		$(".imagen_principal").click(set_imagen_principal);
 		$(".form_tag").submit(agrega_metakeyword);
 		$(".text_nuevo").click(muestra_input_producto_nuevo);
 		$(".text_ciclo_facturacion").click(muestra_input_ciclo_facturacion);
@@ -131,7 +132,7 @@ function respuesta_informacion_servicio(data) {
 		$(".telefono_visible").click(actualiza_telefono_visible);
 		$(".venta_mayoreo").click(actualiza_ventas_mayoreo);
 		$(".detalle").click(carga_tallas);
-				
+		$(".tiempo_entrega").change(set_tiempo_entrega);
 		if( get_option("flag_nueva_categoria")  == 1 ) {
 			recorrepage("#seccion_metakeywords_servicio");
 		}
@@ -1135,6 +1136,29 @@ function actualiza_talla_servicio(){
 	if ( id>0 ) {
 		var 	url 		=  "../q/index.php/api/servicio/talla/format/json/";		
 		var  	data_send  	=  {"id_servicio" : get_option("servicio") ,  "id_talla" : id ,  "existencia": existencia };
-		request_enid("PUT",  data_send , url , carga_tallas ,  place_load =  "" , mensaje_place_load = "");
+		request_enid("PUT",  data_send , url , carga_tallas );
+	}
+}
+function set_tiempo_entrega(){
+		
+	var 	tiempo_entrega 		=  get_valor_selected(".tiempo_entrega");
+	var 	url 		=  "../q/index.php/api/servicio/tiempo_entrega/format/json/";		
+	var  	data_send  	=  {"id_servicio" : get_option("servicio") , "tiempo_entrega" : tiempo_entrega };
+	request_enid("PUT",  data_send , url , respuesta_tiempo_entrega  , ".response_tiempo_entrega" );
+	
+
+}
+var respuesta_tiempo_entrega = function(data){
+
+	$(".response_tiempo_entrega").empty();
+	debugger;
+}
+var set_imagen_principal = function(){
+	var id 			=  get_parameter_enid($(this) ,  	"id");
+	if (id > 0 ) {
+		
+		var 	url 		=  "../q/index.php/api/imagen_servicio/principal/format/json/";		
+		var  	data_send  	=  {"id_servicio" : get_option("servicio") , "id_imagen" : id };
+		request_enid("PUT",  data_send , url , carga_informacion_servicio(1), ".place_servicios");
 	}
 }

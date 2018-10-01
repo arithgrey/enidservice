@@ -21,6 +21,8 @@ $(document).ready(function(){
 	$(".btn_repo_afiliacion").click(carga_productos_mas_solicitados);	
 	$(".form_busqueda_productos_solicitados").submit(carga_productos_mas_solicitados);
 	$(".f_actividad_productos_usuarios").submit(carga_repo_usabilidad);
+	$(".f_dipositivos").submit(carga_repo_dispositivos);
+
 });
 /*Aquí se carga la data de las métricas del visitas(día)*/
 function carga_uso_sistema(e){
@@ -568,6 +570,20 @@ function carga_repo_usabilidad(e){
 	}	
 	e.preventDefault();	
 }
+function carga_repo_dispositivos(e){
+
+	var  	data_send 		=  $(".f_dipositivos").serialize()+"&"+$.param({"v":1});	
+	var 	url 			=  "../q/index.php/api/pagina_web/productividad/format/json/";	
+	
+	if (get_parameter(".f_dipositivos #datetimepicker4").length > 5 && get_parameter(".f_dipositivos #datetimepicker5").length > 5) {
+		request_enid( "GET",  data_send, url, 1, ".repo_dispositivos", 0, ".repo_dispositivos"); 	
+	}else{		
+		focus_input(".f_dipositivos #datetimepicker4");
+		focus_input(".f_dipositivos #datetimepicker5");
+	}	
+	e.preventDefault();	
+}
+/**/
 /**/
 function info_usabilidad(data){
 	llenaelementoHTML(".repo_usabilidad" , data);

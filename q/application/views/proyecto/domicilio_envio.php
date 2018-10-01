@@ -40,11 +40,11 @@
 
     if($registro_direccion ==  0) {
 
-        $nombre =  entrega_data_campo($info_usuario , "nombre");
-        $apellido_paterno =  entrega_data_campo($info_usuario , "apellido_paterno");
-        $apellido_materno =  entrega_data_campo($info_usuario , "apellido_materno");
+        $nombre =  get_campo($info_usuario , "nombre");
+        $apellido_paterno =  get_campo($info_usuario , "apellido_paterno");
+        $apellido_materno =  get_campo($info_usuario , "apellido_materno");
         $nombre_receptor =  $nombre ." " .$apellido_paterno ." ".$apellido_materno;
-        $telefono_receptor =  entrega_data_campo($info_usuario , "tel_contacto");
+        $telefono_receptor =  get_campo($info_usuario , "tel_contacto");
     }
 ?>
 <div class="contenedor_deuda_para_envio" style="display: none;">         

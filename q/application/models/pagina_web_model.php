@@ -15,5 +15,16 @@
 
         return $this->db->query($query_get)->result_array()[0]["num_accesos"];
     }
+    function get_num_field($f_inicio , $f_termino , $field){
+
+        $query_get = 
+        "SELECT  count($field)num , $field FROM pagina_web 
+        WHERE DATE(fecha_registro) 
+        BETWEEN '".$f_inicio."' AND '".$f_termino."'
+        GROUP BY $field ORDER BY 
+        count($field)  DESC";
+
+        return $this->db->query($query_get)->result_array();
+    }
 
 }

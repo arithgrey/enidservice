@@ -22,6 +22,7 @@
     crea_seccion_de_busqueda_extra($quinto_nivel, $busqueda); 
     }
     /**/
+    //debug($categorias_destacadas);
     $categorias_destacadas_orden =  sub_categorias_destacadas($categorias_destacadas);  
 
 

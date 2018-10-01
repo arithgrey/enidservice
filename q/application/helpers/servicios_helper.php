@@ -1,6 +1,60 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){	
-    
+	
+	function create_dropdown_button($id_imagen , $principal = 0 ){
+		
+	$button =  
+		add_element(
+			icon("fa fa-chevron-circle-down") , 
+			"div" , 
+		[
+				"class"				=> 
+				"btn btn-secondary dropdown-toggle contenedor_imagen_muestra_producto",
+				"type"				=> "button" ,
+				"id"				=> "dropdownMenuButton" ,
+				"data-toggle"		=> "dropdown" ,
+				"aria-haspopup"		=> "true" ,
+				"aria-expanded"		=> "false"
+		]);
+
+
+	$text 			 = ($principal ==  0) ? "Definir como principal":  "Imagen principal";
+	$extra_principal = ($principal ==  0) ? "" : "blue_enid";
+	$item =  div(
+		icon('fa fa-star' , 
+		[		
+			"id"   =>  $id_imagen,
+			"class" =>  "dropdown-item imagen_principal ".$extra_principal
+		] , 
+		0 , 
+		$text
+	));
+		
+
+	$item  .=   
+		div(
+			icon('fa fa-times' , 
+			[		
+			"id"   =>  $id_imagen,
+			"class" =>  "dropdown-item foto_producto"
+			] , 
+			0 , 
+			"Quitar")
+		);
+
+
+		$menu =  div( 
+			$item
+			,  
+		[ 	
+			"class"				=>"dropdown-menu" ,
+			"aria-labelledby"	=>"dropdownMenuButton",
+			"style" => "width:220px;border-style:solid;height:50px;z-index:3000;position:absolute;border-style: solid;border-color: #92a8d1;padding:3px;"
+		]);
+		
+		return div($button . $menu ,  ["class" => "dropdown cursor"]);
+
+	}    
     function valida_tipo_promocion($param){
         $tipo = ($param[0]["flag_servicio"] ==  1) ? "SERVICIO": "PRODUCTO";
         return $tipo;
@@ -277,6 +331,31 @@ function get_text_ciclo_facturacion($id_ciclo_facturacion){
             return div("" , ["class"=>'servicio fa fa-pencil' ,  "id"=> $id_servicio]);
           }
       	}
+  	}
+  	function get_rango_entrega($id_perfil, $actual, $attributes=''){
+
+  		
+  		$select 		=  "";
+  		if ($id_perfil ==  3) {
+
+  			$att 		= 	add_attributes($attributes);
+
+  			$select    .=  	heading_enid("DÍAS PROMEDIO DE ENTREGA" , 4);  			
+	  		$select  	.= 	"<select ".$att.">";
+
+	  		for ($a=1; $a < 10 ; $a++) { 
+	  			if ($a ==  $actual) {
+	  				$select  	.= "<option value='".$a."' selected>".$a."</option>";
+	  			}else{
+	  				$select  	.= "<option value='".$a."'>".$a."</option>";	
+	  			}
+	  			
+	  		}
+	  		$select .= "</select>";  		
+	  		$select .=  place("response_tiempo_entrega");
+
+  		}  		
+  		return $select;
   	}
 
 }/*Termina el helper*/

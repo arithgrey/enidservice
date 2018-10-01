@@ -20,7 +20,7 @@ class usuario_direccion extends REST_Controller{
             $params_where   =  ["id_usuario" => $param["id_usuario"]];
             $response       =  
             $this->usuario_direccion_model->delete($params_where, 10 );
-            debug($response ,1);
+            //debug($response ,1);
             /*
             if ($response == 1) {
                 

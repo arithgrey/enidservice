@@ -29,38 +29,6 @@ if(!function_exists('invierte_date_time')){
       }
     }
     
-  function sub_categorias_destacadas($param){
-
-      $nombres_primer_nivel =  $param["nombres_primer_nivel"];
-        $z =0;
-        $data_complete =[];
-                
-        foreach ($param["clasificaciones"] as $row){
-            
-            $primer_nivel =  $row["primer_nivel"];
-            $total =  $row["total"];
-            $nombre_clasificacion =  "";
-            foreach ($param["nombres_primer_nivel"] as $row2){                
-                
-                $id_clasificacion = $row2["id_clasificacion"];
-                if($primer_nivel == $id_clasificacion ){
-                    $nombre_clasificacion =  $row2["nombre_clasificacion"];
-                    break;
-                }
-            }
-            $data_complete[$z]["primer_nivel"] =  $primer_nivel;
-            $data_complete[$z]["total"] =  $total;
-            $data_complete[$z]["nombre_clasificacion"] =  $nombre_clasificacion;
-            
-            if($z == 29){
-                break;
-            }
-            $z ++;
-            
-        }        
-        return $data_complete; 
-
-    }
 
  
   

@@ -1,7 +1,7 @@
 <?php 
-  $beneficiario = entrega_data_campo($usuario , "nombre") ." ". 
-                  entrega_data_campo($usuario , "apellido_paterno") ." ".
-                  entrega_data_campo($usuario , "apellido_materno");
+  $beneficiario = get_campo($usuario , "nombre") ." ". 
+                  get_campo($usuario , "apellido_paterno") ." ".
+                  get_campo($usuario , "apellido_materno");
 
   $folio  = $info_pago["q2"];
   $monto  = $info_pago["q"];

@@ -2,6 +2,7 @@
 	class principal extends CI_Controller {	 	
 		function __construct(){        
 			parent::__construct();     
+			debug("ok");
 			$this->load->library('../../librerias/sessionclass');     
 	    }
 	    function api($api, $q=[], $format='json', $type='GET', $debug = 0  ){
@@ -55,9 +56,10 @@
 	    }	    
 		function get_departamentos($param = '' , $format_html =1){				
 			
+			//debug($format_html);
 			if ($format_html == 1) {
 				$api =  "clasificacion/primer_nivel/format/json/"; 			
-				return $this->api( $api , [] , "html");			
+				return $this->api( $api , [] , "json");			
 			}else{
 				$api =  "clasificacion/primer_nivel/format/json/"; 			
 				return $this->api( $api , [] , "json");	

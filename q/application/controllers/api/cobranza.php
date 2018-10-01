@@ -527,7 +527,7 @@ class Cobranza extends REST_Controller{
         $data_respose =  $this->cobranzamodel->valida_recibo_por_enviar_usuario($param);
         $this->response(crea_data_deuda_pendiente($data_respose) );   
     }
-    /**/
+    /*
     function ticket_pendiente_pago($param , $recibo , $data_complete){
 
         $id_usuario =  $recibo[0]["id_usuario"];               
@@ -535,7 +535,8 @@ class Cobranza extends REST_Controller{
         if (get_info_usuario_valor_variable($param , "cobranza") ==  1){
 
             $data_complete["costo_envio_sistema"]   =  $this->get_costo_envio($recibo[0]);
-            /*Cargamos el saldo que tiene la persona*/
+
+
 
 
             $data_complete["id_recibo"]             =   $param["id_recibo"];
@@ -556,6 +557,7 @@ class Cobranza extends REST_Controller{
         }
                
     }
+    */
     /**/
     function ganancias_fecha_GET(){
         

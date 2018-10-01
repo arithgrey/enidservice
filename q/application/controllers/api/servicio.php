@@ -15,8 +15,7 @@ class Servicio extends REST_Controller{
   /**/
   function clasificaciones_destacadas_GET(){
 
-    $param    =  $this->get();
-    debug("ok");
+    $param    =  $this->get();    
     $response =  $this->serviciosmodel->get_clasificaciones_destacadas($param);
     $this->response($response);
   }
@@ -98,7 +97,7 @@ class Servicio extends REST_Controller{
     
     $param =  $this->get();    
     $data["info_categorias"] =  $this->get_categorias_servicios($param);
-    $data["nivel"]=  $param["nivel"];
+    $data["nivel"]           =  $param["nivel"];
 
     if(count($data["info_categorias"]) > 0){
 
@@ -130,7 +129,18 @@ class Servicio extends REST_Controller{
           $this->load->view("categoria/seleccionar_categoria_phone" , $data);
           
         }else{
-          $this->load->view("categoria/seleccionar_categoria" , $data);  
+
+
+        $select =  div(
+                        "AGREGAR NUEVO" .icon('fa fa-angle-double-right')  ,  
+                        ["class"  =>  "a_enid_black nueva_categoria_producto",
+                        "id"   =>  $data["padre"]],
+                    1); 
+        $this->response($select);
+
+
+
+          
         }
     }
 
@@ -174,7 +184,7 @@ class Servicio extends REST_Controller{
 
           }else{          
 
-              debug($nueva_coincidencia , 1);
+              //debug($nueva_coincidencia , 1);
               $n = $this->get_clasificacion_padre_nivel($nueva_coincidencia);
               if ( is_array($n) &&  count($n)>0) {
                 $res[$a] = $n[0];     
@@ -476,6 +486,7 @@ class Servicio extends REST_Controller{
       $data["has_phone"]          =   $this->usuario_tiene_numero($data["id_usuario"]);
       $data["num_imagenes"]       =   count($imagenes);
       $data["images"]             =   $this->create_table_images($imagenes);
+      $data["id_perfil"]          =   $this->principal->getperfiles();
       $this->load->view("servicio/detalle" , $data);        
       
   }    
@@ -494,12 +505,15 @@ class Servicio extends REST_Controller{
           'src'      => $url_imagen,
           'style'    => 'position:relative;width:180px!important;'
       ]);
+
+
+      $config_imagen      = create_dropdown_button($id_imagen , $row["principal"]);     
+      $extra_principal    = ["class"  =>  "selector_principal"];    
+      $informacion_imagen = $config_imagen.$img;
+      $contenedor_imagen  = 
+      ($row["principal"] ==  0) ? $informacion_imagen : div($informacion_imagen, $extra_principal);
+      $images_complete[$num_imgs] =  $contenedor_imagen;    
       
-      $config_imagen =  div(icon('fa fa-times  foto_producto' , 
-        ["id"   =>  $id_imagen ]),  
-        ["class" =>  "contenedor_imagen_muestra_producto"]);
-      
-      $images_complete[$num_imgs] =  $config_imagen.$img;  
       $num_imgs ++;      
     }
 
@@ -1185,6 +1199,18 @@ class Servicio extends REST_Controller{
         $param    =  $this->get();
         $response =  $this->serviciosmodel->get_num_lectura_valoraciones($param);
         $this->response($response);
+    }
+    function tiempo_entrega_PUT(){
+
+        $param    =   $this->put();
+        $response =   []; 
+        if(if_ext($param , "tiempo_entrega,id_servicio")){
+          $response   = 
+          $this->serviciosmodel->q_up("tiempo_promedio_entrega" , $param["tiempo_entrega"] , $param["id_servicio"]);  
+        }  
+        $this->response($response);
+        
+
     }
 }
 ?>

@@ -9,18 +9,19 @@ class Imagen_servicio_model extends CI_Model {
 	    return ($return_id ==  1) ? $this->db->insert_id() : $insert;
 	}
 	
-  	private function get( $params=[], $params_where =[] , $limit =1){
+  function get( $params=[], $params_where =[] , $limit =1 , $order = '', $type_order='DESC'){
 	    $params = implode(",", $params);
 	    $this->db->limit($limit);
 	    $this->db->select($params);
 	    foreach ($params_where as $key => $value) {
 	        $this->db->where($key , $value);
 	    }
+      if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+      }      
 	    return $this->db->get("imagen_servicio")->result_array();
   	}
- 	function get_img_servicio($id_servicio){
-    	return $this->get(["id_imagen"] , ["id_servicio" => $id_servicio ] , 8 );
-  	}
+ 	
   	function get_imagenes_por_servicio($param){
 	  $id_servicio   =  $param["id_servicio"];
 	  return $this->get(["id_imagen"] , ["id_servicio" => $id_servicio ] , 10);
@@ -34,5 +35,13 @@ class Imagen_servicio_model extends CI_Model {
   }
   function get_num_servicio($id_servicio){
     return $this->get(["COUNT(0)num"] , ["id_servicio" => $id_servicio])[0]["num"];
+  }
+  function update($data =[] , $params_where =[] , $limit =1 ){
+    
+      foreach ($params_where as $key => $value) {
+              $this->db->where($key , $value);
+      }
+      $this->db->limit($limit);
+      return $this->db->update("imagen_servicio", $data);    
   }
 }

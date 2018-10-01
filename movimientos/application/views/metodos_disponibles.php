@@ -1,7 +1,7 @@
 <?php    
-    $nombre=  entrega_data_campo($usuario , "nombre");
-    $apellido_paterno=  entrega_data_campo($usuario , "apellido_paterno");
-    $apellido_materno=  entrega_data_campo($usuario , "apellido_materno");
+    $nombre=  get_campo($usuario , "nombre");
+    $apellido_paterno=  get_campo($usuario , "apellido_paterno");
+    $apellido_materno=  get_campo($usuario , "apellido_materno");
     $nombre_persona =  $nombre ." " . $apellido_paterno ." " .$apellido_materno;    
     $text_tipo_ingreso = ($banca ==  0)?"ASOCIAR CUENTA BANCARIA":"ASOCIAR TARJETA DE DÉDITO O CRÉDITO" ;
 ?>

@@ -96,7 +96,7 @@
     "¿PERSONAS PUEDEN VER TU NÚMERO TELEFÓNICO PARA SOLICITARTE MÁS 
     INFORMES?":"¿PERSONAS PUEDEN SOLICITARTE MÁS INFORMES POR TELÉFONO?";
     
-    $data["flag_servicio"]      =  entrega_data_campo($servicio , "flag_servicio");     
+    $data["flag_servicio"]      =  get_campo($servicio , "flag_servicio");     
 
     
     $text_notificacion_imagenes =  valida_text_imagenes($tipo_promocion, $num_imagenes);
@@ -122,14 +122,14 @@
     $llamada_accion_youtube      =  
     "¿TIENES ALGÚN VIDEO SOBRE TU ".$tipo_promocion."?";
     $text_llamada_accion_youtube =  icon('fa fa-youtube-play') ." VIDEO DE YOUTUBE ";
-    $valor_youtube               =  entrega_data_campo($servicio , "url_vide_youtube");
+    $valor_youtube               =  get_campo($servicio , "url_vide_youtube");
     $val_youtube                 =  icon('fa fa-pencil text_url_youtube').$valor_youtube;
-    $nuevo_nombre_servicio       =  entrega_data_campo($servicio ,"nombre_servicio");
+    $nuevo_nombre_servicio       =  get_campo($servicio ,"nombre_servicio");
 
     $text_titulo_seccion_producto=  
     "INFORMACIÓN SOBRE TU ".$nuevo_nombre_servicio.
     icon('fa fa-pencil text_desc_servicio icon-pencil');
-    $nueva_descripcion          = entrega_data_campo($servicio , 'descripcion');
+    $nueva_descripcion          = get_campo($servicio , 'descripcion');
     $nombre_servicio_heading    = icon('fa fa-pencil text_nombre_servicio')." ". 
     $tipo_promocion ." ".$nuevo_nombre_servicio;
 
@@ -154,7 +154,7 @@
         "name"    =>  "q2" ,
         "class"   =>  "nuevo_producto_nombre",
         "onkeyup" =>  "transforma_mayusculas(this)",
-        "value"   =>  entrega_data_campo($servicio,'nombre_servicio') ,
+        "value"   =>  get_campo($servicio,'nombre_servicio') ,
         "required"=> true ],
         1);
     

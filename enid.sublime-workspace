@@ -4,6 +4,146 @@
 		"selected_items":
 		[
 			[
+				"tae",
+				"tarea"
+			],
+			[
+				"get_",
+				"get_option"
+			],
+			[
+				"agreg",
+				"agregar_tarea"
+			],
+			[
+				"direc",
+				"direccion"
+			],
+			[
+				"depa",
+				"departamento"
+			],
+			[
+				"in",
+				"inputs"
+			],
+			[
+				"input",
+				"focus_input"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"con",
+				"config2"
+			],
+			[
+				"ca",
+				"categorias_destacadas"
+			],
+			[
+				"RES",
+				"response"
+			],
+			[
+				"vali",
+				"valida_existencia_servicio"
+			],
+			[
+				"stat",
+				"status"
+			],
+			[
+				"cre",
+				"create_imagen_servicio"
+			],
+			[
+				"isa",
+				"is_ajax_request"
+			],
+			[
+				"nu",
+				"nueva_coincidencia"
+			],
+			[
+				"get_p",
+				"get_parameter"
+			],
+			[
+				"ta",
+				"table"
+			],
+			[
+				"paa",
+				"param"
+			],
+			[
+				"usu",
+				"usuario_direccion_model"
+			],
+			[
+				"q_",
+				"q_up"
+			],
+			[
+				"id_",
+				"id_pregunta"
+			],
+			[
+				"priva",
+				"privacidad_usuario_model-"
+			],
+			[
+				"key",
+				"keys"
+			],
+			[
+				"usua",
+				"usuario_model"
+			],
+			[
+				"usuario_cla",
+				"usuario_clasificacion_model"
+			],
+			[
+				"ser",
+				"serviciosmodel"
+			],
+			[
+				"pa",
+				"param"
+			],
+			[
+				"para",
+				"params_where"
+			],
+			[
+				"id",
+				"idusuario"
+			],
+			[
+				"delete",
+				"delete_imagen"
+			],
+			[
+				"im",
+				"imgs"
+			],
+			[
+				"imagen_is",
+				"imagen_usuario_model-"
+			],
+			[
+				"imagen_",
+				"imagen_usuario_model"
+			],
+			[
+				"drop",
+				"dbplus_ropen"
+			],
+			[
 				"res",
 				"respuesta_model"
 			],
@@ -12,28 +152,12 @@
 				"response_model"
 			],
 			[
-				"para",
-				"param"
-			],
-			[
 				"num",
 				"num_pendientes"
 			],
 			[
-				"id_",
-				"id_ticket"
-			],
-			[
-				"pa",
-				"param"
-			],
-			[
 				"re",
 				"return_id"
-			],
-			[
-				"id",
-				"id_direccion"
 			],
 			[
 				"que",
@@ -42,10 +166,6 @@
 			[
 				"cp",
 				"cp"
-			],
-			[
-				"ser",
-				"servicio"
 			],
 			[
 				"servicio_",
@@ -98,10 +218,6 @@
 			[
 				"esta",
 				"carga_estado_compra"
-			],
-			[
-				"usua",
-				"usuario_direccion_model"
 			],
 			[
 				"codigo_p",
@@ -170,10 +286,6 @@
 			[
 				"is_a",
 				"is_array"
-			],
-			[
-				"usu",
-				"usuario_direccion_model"
 			],
 			[
 				"id_us",
@@ -320,10 +432,6 @@
 				"usuario"
 			],
 			[
-				"q_",
-				"q_get"
-			],
-			[
 				"quert",
 				"query_update"
 			],
@@ -350,10 +458,6 @@
 			[
 				"usuario",
 				"usuario_model"
-			],
-			[
-				"for",
-				"format"
 			],
 			[
 				"servo",
@@ -410,75 +514,20 @@
 			[
 				"cn",
 				"conf"
-			],
-			[
-				"ex",
-				"extra"
-			],
-			[
-				"con",
-				"config"
-			],
-			[
-				"show",
-				"showonehideone"
-			],
-			[
-				"set_",
-				"set_black"
-			],
-			[
-				"cl",
-				"clasificaciones"
-			],
-			[
-				"place",
-				"place_info"
-			],
-			[
-				"data_",
-				"data_ventas_compras"
-			],
-			[
-				"is_",
-				"is_array"
-			],
-			[
-				"ca",
-				"cantidad"
-			],
-			[
-				"comiio",
-				"text_comision_venta"
-			],
-			[
-				"por",
-				"porcentaje_comision"
-			],
-			[
-				"id_pro",
-				"id_proyecto_persona_forma_pago"
-			],
-			[
-				"inf",
-				"info_direccion"
-			],
-			[
-				"di",
-				"div\tTag"
-			],
-			[
-				"strn",
-				"string"
-			],
-			[
-				"print",
-				"print_r"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"contents": "select * from servicio where id_servicio in(\n96,\n229,\n37,\n53,\n54,\n51,\n65,\n68,\n56,\n85,\n91,\n102,\n113,\n145,\n146,\n229,\n101\n)\nlimit 9000;\n\n",
+			"settings":
+			{
+				"buffer_size": 134,
+				"line_ending": "Unix",
+				"name": "select * from servicio where id_servicio in("
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -543,134 +592,134 @@
 	],
 	"file_history":
 	[
-		"/var/www/html/inicio/helpers/enid_helper.php",
-		"/var/www/html/inicio/msj/application/controllers/api/cron.php",
-		"/var/www/html/inicio/msj/application/controllers/api/emp.php",
 		"/var/www/html/inicio/librerias/principal.php",
-		"/var/www/html/inicio/tag/application/controllers/api/producto.php",
-		"/var/www/html/inicio/q/application/models/cobranza.php_",
-		"/var/www/html/inicio/q/application/controllers/api/valoracion.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
-		"/var/www/html/inicio/q/application/controllers/api/tickets.php",
+		"/var/www/html/inicio/search/application/helpers/search_helper.php",
+		"/var/www/html/index.php",
+		"/var/www/html/inicio/search/application/views/home.php",
+		"/var/www/html/inicio/reporte_enid/application/helpers/reporte_helper.php",
+		"/var/www/html/inicio/helpers/enid_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
-		"/var/www/html/inicio/q/application/controllers/api/respuesta.php",
-		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
-		"/var/www/html/inicio/q/application/controllers/api/productos.php_",
-		"/var/www/html/inicio/q/application/controllers/api/negocio.php",
-		"/var/www/html/inicio/q/application/controllers/api/codigo_postal.php",
-		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
-		"/var/www/html/inicio/producto/application/controllers/home.php",
-		"/var/www/html/inicio/portafolio/application/controllers/api/tickets.php_",
-		"/var/www/html/inicio/portafolio/application/controllers/api/portafolio.php_",
-		"/var/www/html/inicio/planes_servicios/application/controllers/inicio.php",
-		"/var/www/html/inicio/persona/application/controllers/api/equipo.php",
-		"/var/www/html/inicio/pagos/application/controllers/api/cobranza.php_",
-		"/var/www/html/inicio/notificar/application/controllers/home.php",
-		"/var/www/html/inicio/msj/application/controllers/api/pregunta.php",
-		"/var/www/html/inicio/msj/application/controllers/api/cobranza.php",
-		"/var/www/html/inicio/base/application/controllers/api/servicio.php_",
-		"/var/www/html/inicio/recomendacion/application/controllers/home.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario_direccion.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario_deseo.php",
-		"/var/www/html/inicio/q/application/controllers/api/tarea.php",
-		"/var/www/html/inicio/q/application/controllers/api/saldos.php",
-		"/var/www/html/inicio/q/application/controllers/api/pregunta.php",
-		"/var/www/html/inicio/q/application/controllers/api/contacto.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
+		"/var/www/html/inicio/q/application/controllers/api/departamento.php",
 		"/var/www/html/inicio/q/application/controllers/api/clasificacion.php",
-		"/var/www/html/inicio/msj/application/controllers/api/areacliente.php",
-		"/var/www/html/inicio/movimientos/application/controllers/inicio.php",
-		"/var/www/html/inicio/login/application/controllers/api/sess.php",
-		"/var/www/html/inicio/lista_deseos/application/controllers/home.php",
-		"/var/www/html/inicio/area_cliente/application/controllers/home.php",
-		"/var/www/html/inicio/administracion_cuenta/application/controllers/api/cambiopasswordcontrolador.php_",
 		"/var/www/html/inicio/search/application/controllers/home.php",
-		"/var/www/html/inicio/tareas/application/controllers/home.php",
-		"/var/www/html/inicio/usuarios_enid_service/application/controllers/inicio.php",
-		"/var/www/html/inicio/contact/application/controllers/home.php",
-		"/var/www/html/inicio/desarrollo/application/controllers/inicio.php",
-		"/var/www/html/inicio/faq/application/controllers/home.php",
-		"/var/www/html/inicio/forma_pago/application/controllers/home.php",
-		"/var/www/html/inicio/imgs/application/controllers/enid.php",
-		"/var/www/html/inicio/imgs/application/controllers/api_/archivo.php_",
-		"/var/www/html/inicio/msj/application/controllers/api/mailrest.php",
-		"/var/www/html/inicio/pregunta/application/controllers/home.php",
-		"/var/www/html/inicio/procesar/application/controllers/home.php",
-		"/var/www/html/inicio/q/application/controllers/api/archivo.php",
-		"/var/www/html/inicio/q/application/controllers/api/funcionalidad.php",
-		"/var/www/html/inicio/q/application/controllers/api/mail.php",
-		"/var/www/html/inicio/q/application/controllers/api/productividad.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario_clasificacion.php",
-		"/var/www/html/inicio/reporte_enid/application/controllers/inicio.php",
-		"/var/www/html/inicio/tag/application/controllers/api/sugerencia.php",
-		"/var/www/html/inicio/valoracion/application/controllers/home.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario_direccion.php",
+		"/var/www/html/inicio/portafolio/application/views/clasificaciones/menu.php",
+		"/var/www/html/inicio/debug/debug.log",
 		"/var/www/html/inicio/q/application/views/tickets/detalle.php",
-		"/var/www/html/inicio/q/application/models/clasificacion_model.php",
-		"/var/www/html/inicio/q/application/helpers/tickets_helper.php",
-		"/var/www/html/inicio/q/application/controllers/api/privacidad_usuario.php",
-		"/var/www/html/inicio/q/application/models/tareasmodel.php",
-		"/var/www/html/inicio/q/application/models/privacidad_usuario_model.php",
-		"/var/www/html/inicio/persona/application/views/equipo/miembros.php",
-		"/var/www/html/inicio/q/application/helpers/valoracion_helper.php",
-		"/var/www/html/inicio/q/application/models/productividad_usuario_model.php",
-		"/var/www/html/inicio/librerias/sessionclass.php",
-		"/var/www/html/inicio/q/application/models/imagen_usuario_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/imagen_usuario.php",
-		"/var/www/html/inicio/administracion_cuenta/application/views/micuenta/info_usuario.php",
-		"/var/www/html/inicio/q/application/controllers/api/img.php",
-		"/var/www/html/inicio/q/application/models/respuesta_model.php",
-		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
+		"/var/www/html/inicio/q/application/views/tickets/form_respuesta.php",
+		"/var/www/html/inicio/css_tema/template/main.css",
 		"/var/www/html/inicio/js_tema/js/main.js",
-		"/var/www/html/inicio/q/application/controllers/api/respon.php",
-		"/var/www/html/inicio/q/application/models/response_model.php",
-		"/var/www/html/inicio/base/application/models/serviciosmodel.php_",
-		"/var/www/html/inicio/portafolio/application/models/ticketsmodel.php_",
+		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
+		"/var/www/html/inicio/q/application/controllers/api/respuesta.php",
+		"/var/www/html/inicio/view_tema/footer_template.php",
+		"/var/www/html/inicio/portafolio/application/controllers/api/tickets.php_",
+		"/var/www/html/inicio/q/application/views/tickets/respuestas.php",
+		"/var/www/html/inicio/area_cliente/application/views/home.php",
+		"/var/www/html/inicio/desarrollo/application/controllers/inicio.php",
+		"/var/www/html/inicio/q/application/helpers/tickets_helper.php",
+		"/var/www/html/inicio/css_tema/template/search_main.css",
 		"/var/www/html/inicio/q/application/models/tickets_model.php",
-		"/var/www/html/inicio/js_tema/usuarios_enid/proyectos_persona.js",
+		"/var/www/html/inicio/q/application/controllers/api/cron.php",
+		"/var/www/html/inicio/q/application/controllers/api/areacliente.php",
+		"/var/www/html/inicio/q/application/controllers/api/tickets.php",
+		"/var/www/html/inicio/msj/application/controllers/api/cron.php",
+		"/var/www/html/inicio/portafolio/application/models/ticketsmodel.php_",
+		"/home/arithgrey/Documentos/inicio/portafolio/application/models/ticketsmodel.php",
+		"/var/www/html/inicio/js_tema/login/ini.js",
+		"/var/www/html/inicio/q/application/models/tareasmodel.php",
+		"/var/www/html/inicio/q/application/controllers/api/tarea.php",
+		"/var/www/html/inicio/librerias/REST_Controller.php",
+		"/var/www/html/inicio/js_tema/repo_enid/principal.js",
+		"/var/www/html/inicio/desarrollo/application/views/empresas_enid.php",
+		"/var/www/html/inicio/view_tema/formularios/busqueda_tickets.php",
+		"/var/www/html/inicio/js_tema/procesar/principal.js",
+		"/var/www/html/inicio/q/application/models/img_model.php",
+		"/var/www/html/inicio/q/application/models/status_enid_service_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/status_enid_service.php",
+		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
+		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
+		"/var/www/html/inicio/q/application/helpers/recibo_helper.php",
+		"/var/www/html/inicio/procesar/application/views/secciones_2/form_afiliados.php",
+		"/var/www/html/inicio/procesar/application/views/secciones_2/paginas_web.php",
+		"/var/www/html/inicio/q/application/views/proyecto/lista_version_cliente.php",
+		"/var/www/html/inicio/reporte_enid/application/views/empresas_enid.php",
+		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
+		"/var/www/html/inicio/q/application/helpers/servicios_helper.php",
+		"/var/www/html/inicio/q/application/controllers/api/archivo.php",
+		"/var/www/html/inicio/q/application/models/imagen_usuario_model.php",
+		"/var/www/html/inicio/administracion_cuenta/application/controllers/api/user.php_",
 		"/var/www/html/inicio/q/application/models/imagen_servicio_model.php",
 		"/var/www/html/inicio/q/application/controllers/api/imagen_servicio.php",
-		"/var/www/html/inicio/imgs_/application/controllers/enid.php",
-		"/var/www/html/inicio/js_tema/administracion_cuenta/principal.js",
-		"/var/www/html/inicio/js_tema/repo_enid/principal.js",
-		"/var/www/html/inicio/q/application/models/img_model.php",
-		"/var/www/html/inicio/system/database/DB_query_builder.php",
-		"/var/www/html/inicio/system/libraries/Upload.php",
+		"/var/www/html/inicio/js_tema/planes_servicios/img.js",
+		"/var/www/html/inicio/q/application/controllers/api/img.php",
+		"/var/www/html/inicio/js_tema/planes_servicios/principal.js",
+		"/var/www/html/inicio/q/application/controllers/api/productividad.php",
+		"/var/www/html/inicio/imgs/application/controllers/api_/img_controller.php_",
+		"/var/www/html/inicio/q/application/views/imgs/servicio_producto_servicio.php",
 		"/var/www/html/inicio/imgs/application/models/img_model.php",
-		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
-		"/var/www/html/inicio/q/application/models/pregunta_model.php",
-		"/var/www/html/inicio/q/application/models/pregunta_servicio_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/pregunta_servicio.php",
-		"/var/www/html/inicio/js_tema/pregunta/principal.js",
-		"/var/www/html/inicio/q/application/models/direccion_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/direccion.php",
-		"/var/www/html/inicio/q/application/views/proyecto/domicilio_envio.php",
-		"/var/www/html/inicio/q/application/views/proyecto/domicilio.php",
-		"/var/www/html/inicio/js_tema/js/direccion.js",
-		"/var/www/html/inicio/q/application/models/codigo_postal_model.php",
-		"/var/www/html/inicio/q/application/models/usuario_perfil_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario_perfil.php",
-		"/var/www/html/inicio/q/application/models/talla_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/talla.php",
-		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
-		"/var/www/html/inicio/producto/application/libraries/servicio.php_",
-		"/var/www/html/inicio/administracion_cuenta/index.php",
-		"/var/www/html/inicio/desarrollo/application/views/desarrollo/menu.php",
-		"/var/www/html/inicio/view_tema/formularios/busqueda_tickets.php",
-		"/var/www/html/inicio/q/application/controllers/api/departamento.php",
-		"/var/www/html/inicio/q/application/controllers/api/perfiles.php",
-		"/var/www/html/inicio/base/application/controllers/api/base.php_",
-		"/var/www/html/inicio/desarrollo/application/views/empresas_enid.php",
-		"/var/www/html/inicio/debug/debug.log",
-		"/var/www/html/inicio/q/application/models/desarrollomodel.php",
-		"/var/www/html/inicio/q/application/controllers/api/desarrollo.php",
-		"/var/www/html/inicio/q/application/views/servicio/detalle.php",
-		"/var/www/html/inicio/q/application/models/persona_model.php",
-		"/var/www/html/inicio/producto/application/views/home.php",
-		"/var/www/html/inicio/q/application/models/usuario_deseo_model.php",
-		"/var/www/html/inicio/producto/application/js/principal.js",
-		"/var/www/html/inicio/js_tema/administracion_cuenta/img.js",
+		"/var/www/html/inicio/q/application/models/productividad_usuario_model.php",
+		"/var/www/html/inicio/q/application/models/recibo_model.php",
+		"/var/www/html/inicio/q/application/models/actividad_web_model.php",
 		"/var/www/html/inicio/q/application/models/usuario_model.php",
-		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
-		"/var/www/html/inicio/q/application/models/perfil_recurso_model.php"
+		"/var/www/html/inicio/q/application/models/email_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/mail.php",
+		"/var/www/html/inicio/base/application/models/serviciosmodel.php_",
+		"/var/www/html/inicio/q/application/models/usuario_direccion_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/pregunta.php",
+		"/var/www/html/inicio/q/application/models/pregunta_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/privacidad_usuario.php",
+		"/var/www/html/inicio/q/application/models/privacidad_usuario_model.php",
+		"/var/www/html/inicio/q/application/models/prospecto_model.php",
+		"/var/www/html/inicio/q/application/models/pagina_web_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/pagina_web.php",
+		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php",
+		"/var/www/html/inicio/q/application/models/proyecto_persona_forma_pago_direccion_model.php",
+		"/var/www/html/inicio/q/application/models/recurso_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/recurso.php",
+		"/var/www/html/inicio/q/application/models/respuesta_model.php",
+		"/var/www/html/inicio/q/application/models/response_model.php",
+		"/var/www/html/inicio/q/application/models/tipo_negocio_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/tipo_negocio.php",
+		"/var/www/html/inicio/q/application/controllers/api/tipo_talla.php",
+		"/var/www/html/inicio/q/application/models/tipo_talla_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/talla.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario_clasificacion.php",
+		"/var/www/html/inicio/q/application/models/usuario_clasificacion_model.php",
+		"/var/www/html/inicio/q/application/models/usuario_deseo_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario_deseo.php",
+		"/var/www/html/inicio/q/application/models/valoracion_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/imagen_usuario.php",
+		"/var/www/html/inicio/persona/application/controllers/api/equipo.php",
+		"/home/arithgrey/Documentos/inicio/q/application/controllers/api/productos.php",
+		"/var/www/html/inicio/q/application/models/empresa_permiso_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/direccion.php",
+		"/var/www/html/inicio/q/application/controllers/api/codigo_postal.php",
+		"/home/arithgrey/Documentos/inicio/q/application/models/servicio_model.php",
+		"/var/www/html/inicio/js_tema/js/direccion.js",
+		"/var/www/html/inicio/q/application/views/proyecto/domicilio.php",
+		"/var/www/html/inicio/portafolio/application/models/proyectomodel.php_",
+		"/home/arithgrey/Documentos/inicio/portafolio/application/models/proyectomodel.php",
+		"/var/www/html/inicio/js_tema/administracion_cuenta/principal.js",
+		"/var/www/html/inicio/portafolio/application/controllers/api/portafolio.php_",
+		"/home/arithgrey/Documentos/inicio/js_tema/js/direccion.js",
+		"/var/www/html/inicio/administracion_cuenta/application/views/micuenta/cuenta.php",
+		"/var/www/html/inicio/view_tema/metodos_pago.php",
+		"/var/www/html/inicio/js_tema/administracion_cuenta/img.js",
+		"/var/www/html/inicio/system/libraries/Cache/drivers/Cache_redis.php",
+		"/var/www/html/inicio/system/database/DB_query_builder.php",
+		"/var/www/html/inicio/system/core/Model.php",
+		"/var/www/html/inicio/imgs/application/controllers/api_/archivo.php_",
+		"/var/www/html/inicio/procesar/application/views/home.php",
+		"/var/www/html/inicio/view_tema/izquierdo.php",
+		"/var/www/html/inicio/procesar/application/controllers/home.php",
+		"/var/www/html/inicio/q/application/controllers/api/valoracion.php",
+		"/var/www/html/inicio/js_tema/pregunta/principal.js",
+		"/home/arithgrey/Documentos/inicio/portafolio/application/models/valoracion_model.php",
+		"/var/www/html/inicio/q/application/models/servicio_model.php_",
+		"/var/www/html/inicio/msj/application/controllers/api/emp.php",
+		"/var/www/html/inicio/tag/application/controllers/api/producto.php",
+		"/var/www/html/inicio/q/application/models/cobranza.php_"
 	],
 	"find":
 	{
@@ -681,6 +730,18 @@
 		"height": 116.0,
 		"where_history":
 		[
+			"*.php",
+			"",
+			"*.php",
+			"",
+			"*.php",
+			"",
+			"*.php",
+			"*.js",
+			"*.php",
+			"",
+			"*.php",
+			"*.js",
 			"",
 			"*.php",
 			"",
@@ -758,134 +819,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"$this->principal->api(",
-			"$this->principal->api(\"tag\" ,",
-			"API",
-			"$this->principal->api(",
-			"$this->principal->api('q'",
-			"$this->principal->api(,",
-			"$this->principal->api( ,",
-			"$this->principal->api(\"q\"",
-			"metricas_productos_solicitados_GET",
-			"metricas_productos_solicitados",
-			"valida_mostrar_tareas",
-			"ticket_GET",
-			"tarea/tareas_ticket",
-			"tareas_ticket",
-			"get_tareas_ticket",
-			"$data[\"info_tarea",
-			"$data[\"info_tarea\"]",
-			"valida_mostrar_tareas",
-			"get_terminos_privacidad_productos",
-			"get_terminos_privacidad_usuario",
-			"servicio_GET",
-			"get_padre_tipo",
-			"categorias_servicios",
-			"categorias_servicios_GET",
-			"get_categorias_servicios",
-			"getperfiles",
-			"get_notificaciones_usuario_perfil",
-			"get_perfil_usuario",
-			"get_perfil_usuario}",
-			"get_perfil_usuario",
-			"imagen_usu",
-			"get_img_usuario",
-			"imagen_usuario",
-			"get_img_usuario",
-			"/index.php/api/respuesta/index/format/json/",
-			"respuesta_model",
-			"tarea/respuesta",
-			"index",
-			"respuesta_POST",
-			"index_POST",
-			"registr",
-			"$param[\"mensaje\"];",
-			"tickets/respuesta/format/json/",
-			"registra_respuesta",
-			"insert_tarea",
-			":insert_tarea",
-			"get_pendientes_ticket",
-			"num_tareas_pendientes",
-			"SELECT count(*)num_tareas_pendientes",
-			"get_tareas_ticket",
-			"valida_tareas_pendientes",
-			"tarea/nueva",
-			"insert_tarea",
-			"tarea/nueva",
-			"index",
-			"insert_tarea",
-			"valida_tareas_pendientes",
-			"valida_tareas_pendientes+",
-			"registra_respuesta",
-			"respuesta_POST",
-			"formulario_respuesta",
-			"valida_check_tarea",
-			"valida_tipo_usuario_tarea",
-			"get_tareas_ticket",
-			"tareas_ticket/",
-			"get_tareas_ticket",
-			"tareas_ticket",
-			"get_tareas_ticket",
-			"tickets/detalle",
-			"ticket/detalle",
-			"valida_mostrar_tareas",
-			"crea_tabla_resumen_ticket",
-			"valida_mostrar_tareas",
-			"tickets",
-			"valida_mostrar_tareas",
-			"get_tareas_ticket",
-			"get_info_ticket",
-			"detalle_GET",
-			"detalle",
-			"../portafolio",
-			"tickets/detalle",
-			"imagen_servicio",
-			"notifica_producto_imagen",
-			"insert_imagen_servicio",
-			"debug",
-			"insert_imagen_servicio",
+			"<option",
+			"create_select",
+			"\\n",
+			"create_selec",
+			"\\n",
+			"\"\\n\"",
+			"\"\\n\".\"",
+			". \"\\n\"",
+			".\"\\n\"",
+			"sub_categorias_destacadas",
+			"=",
 			"debug(",
-			"                                ",
 			"debug",
-			"insert_img",
-			"insert_imagen_servicio",
-			"insert_imgen_servicio",
-			"gestiona_imagenes",
-			"insert_imgen_servicio",
-			"gestiona_imagenes",
-			"imagen_servicio",
-			"carga_imagenes_servicio",
-			"insert",
-			"get_info_vendedor_por_servicio",
-			"valoracion/pregunta",
-			"pregunta/index",
-			"registro_pregunta",
-			"registro",
-			"registro_pregunta",
-			"pregunta",
-			"response_registro_direccion",
-			"empty(",
-			"format_error",
-			"sho",
-			"registrar dirección",
-			"direccion_envio_pedido/",
-			"registra_direccion_envio",
-			"get_id_codigo_postal_por_patron",
-			"insert",
-			"crea_direccion",
-			"                      ",
-			"                        ",
-			"                       ",
-			"                      ",
-			"q_get",
-			"insert",
-			"permisos_usuario",
-			"agrega_permisos_usuario",
-			"prospecto",
-			"crea_usuario",
-			"primer_orden",
-			"get_imagenes_productos",
-			"construye_seccion_imagen_lateral"
+			"ok",
+			"clasificacion/primer_nivel",
+			"clasificaciones/menu",
+			"categorias_destacadas",
+			"carga_categorias_destacadas",
+			"todos los departamentos",
+			"sub_categorias_destacadas",
+			"ocultar",
+			"form_respuesta_ticket",
+			"Mensaje",
+			"enviar",
+			"agregar comentario",
+			"agregar comentarios",
+			"registra_respuesta_pregunta",
+			"get_tarea",
+			"carga_comentarios_terea_simple",
+			"carga_comentarios_tareas",
+			"registra_respuesta_pregunta",
+			"formulario_res",
+			"form/",
+			"form",
+			"carga_comentarios_tareas",
+			"response_carga_comentario_tareas",
+			"carga_comentarios_tareas",
+			"respuesta/respuestas/format",
+			"/respuesta/respuestas/format",
+			"/respuesta/respuestas/format/",
+			"api/respuesta/index/format/json/",
+			"Ver comentarios",
+			"ver comentarios",
+			"=",
+			"/respuestas",
+			"Ocultar",
+			"respuestas_GE",
+			"respuestas",
+			"index",
+			"respuesta/index/format/json",
+			"extra",
+			"js_extra",
+			"agregar_tarea",
+			"\t\t\t",
+			"\t\t",
+			"agregar_tarea",
+			"btn_agregar_tarea",
+			"btn_agregar_tarea ",
+			"btn_agregar_tarea",
+			"actualizar_estatus_ticket",
+			"seccion_nueva_tarea",
+			"SOLICITAR TAREA",
+			"SOLICITAR TAREA ",
+			"enviar",
+			"notificacion_ticket_soporte",
+			"notificacion_nuevo_ticket_soporte",
+			"get_mensaje_notificacion",
+			"$notificacion",
+			"notificacion_nuevo_ticket_soporte",
+			"mensajeria_lead",
+			"ticket_soporte",
+			"get_mensaje_notificacion",
+			"notificacion_nuevo_ticket_soporte",
+			"index.php/api/tickets/ticket/format/json/",
+			"ticke_POST",
+			"ticke",
+			"get_departamentos",
+			"form_get",
+			"form_",
+			"form_busqueda_desarrollo_solicitudes",
+			"l.beforeSend.call",
+			"carga_metricas_desarrollo",
+			"form_busqueda_desarrollo",
+			"muestra_oculta_campos_persona",
+			"mostrar_tareas_pendientes",
+			"keyup",
+			"/***/",
+			"beforeSend",
+			"response_carga_comentario_tareas",
+			"index.php/api/respuesta/index/format/json/",
+			"get_tareas_ticket",
+			"ticket_GET",
+			"get_tareas_ticket",
+			"info_tareas",
+			"valida_mostrar_tareas",
+			"mostrar_tareas_pendientes",
+			"response_carga_comentario_tareas",
+			"/q/index.php/api/respuesta/index/format/json/",
+			"form_busqueda_global_enid",
+			"response_carga_tickets",
+			"DESARROLLO ENID SERVICE",
+			"\nDESARROLLO ENID SERVIC",
+			"\nDESARROLLO ENID SERVICE",
+			"bloquea_form",
+			"/tickets/ticket_desarrollo/format/",
+			"response_indicadores",
+			"bloque",
+			"metricas_cotizaciones/format/",
+			"metricas_cotizaciones/format/json/?fecha_inicio=2018-09-03&fecha_termino=2018-09-27&vista=1",
+			"sub_categorias_destacadas",
+			"status_enid_service",
+			"=",
+			"status_enid_service",
+			"$data[\"status_enid_service",
+			"status_enid_service",
+			"get_estados_ventas",
+			"crea una cuenta",
+			"place_registro_afiliado",
+			"respuesta_registro",
+			"respuesta_registro_usuario_venta",
+			"TU CARRITO DE COMPRAS",
+			"usuario_existente",
+			"top_20",
+			"black_eni",
+			"black",
+			"black_enid",
+			"displa",
+			"padding_10"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -893,6 +954,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"$response = [];",
 			"$this->principal->api(",
 			"../q",
 			"q/index.php/api/codigo_postal/direccion_envio_pedido/",
@@ -910,8 +972,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 134,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								134,
+								134
+							]
+						],
+						"settings":
+						{
+							"auto_name": "select * from servicio where id_servicio in(",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -972,16 +1063,428 @@
 				"librerias/principal.php"
 			],
 			[
+				"enid",
+				"helpers/enid_helper.php"
+			],
+			[
+				"depa",
+				"q/application/controllers/api/departamento.php"
+			],
+			[
+				"helpers/search_helper.php",
+				"search/application/helpers/search_helper.php"
+			],
+			[
+				"search_helper.php",
+				"search/application/helpers/search_helper.php"
+			],
+			[
+				"main",
+				"css_tema/template/main.css"
+			],
+			[
+				"respuesta",
+				"q/application/controllers/api/respuesta.php"
+			],
+			[
+				"ticket.",
+				"portafolio/application/controllers/api/tickets.php_"
+			],
+			[
+				"foo",
+				"view_tema/footer_template.php"
+			],
+			[
+				"main.css",
+				"css_tema/template/main.css"
+			],
+			[
+				"main.",
+				"css_tema/template/search_main.css"
+			],
+			[
+				"areacli",
+				"q/application/controllers/api/areacliente.php"
+			],
+			[
+				"cron",
+				"q/application/controllers/api/cron.php"
+			],
+			[
+				"depart",
+				"q/application/controllers/api/departamento.php"
+			],
+			[
+				"tickets",
+				"q/application/controllers/api/tickets.php"
+			],
+			[
+				"tic",
+				"inicio/portafolio/application/models/ticketsmodel.php"
+			],
+			[
+				"tick",
+				"inicio/portafolio/application/models/ticketsmodel.php_"
+			],
+			[
+				"ini",
+				"js_tema/login/ini.js"
+			],
+			[
+				"login",
+				"js_tema/login/ini.js"
+			],
+			[
 				"tickets/detalle.php",
 				"q/application/views/tickets/detalle.php"
+			],
+			[
+				"desarrollo.js",
+				"js_tema/desarrollo/principal.js"
+			],
+			[
+				"tarea.php",
+				"q/application/controllers/api/tarea.php"
 			],
 			[
 				"helpers/tickets_helper.php",
 				"q/application/helpers/tickets_helper.php"
 			],
 			[
+				" models/tickets_model.php",
+				"q/application/models/tickets_model.php"
+			],
+			[
+				"formularios/busqueda_tickets",
+				"view_tema/formularios/busqueda_tickets.php"
+			],
+			[
+				"reporte_",
+				"reporte_enid/application/helpers/reporte_helper.php"
+			],
+			[
+				"empresas_enid.php",
+				"reporte_enid/application/views/empresas_enid.php"
+			],
+			[
+				"empresas_enid",
+				"desarrollo/application/views/empresas_enid.php"
+			],
+			[
+				"mode",
+				"q/application/models/img_model.php"
+			],
+			[
+				"status_enid_service_model",
+				"q/application/models/status_enid_service_model.php"
+			],
+			[
+				"status_enid_service",
+				"q/application/controllers/api/status_enid_service.php"
+			],
+			[
+				"recibo",
+				"q/application/controllers/api/recibo.php"
+			],
+			[
+				"helpers/recibo_helper.php",
+				"q/application/helpers/recibo_helper.php"
+			],
+			[
+				"main.js",
+				"js_tema/js/main.js"
+			],
+			[
+				"recibo_helper.php",
+				"q/application/helpers/recibo_helper.php"
+			],
+			[
+				"/search_helper.php",
+				"search/application/helpers/search_helper.php"
+			],
+			[
+				"servicios_helper.php",
+				"q/application/helpers/servicios_helper.php"
+			],
+			[
+				"servicio",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"imagen_ser",
+				"q/application/models/imagen_servicio_model.php"
+			],
+			[
+				"archivo",
+				"q/application/controllers/api/archivo.php"
+			],
+			[
+				"img",
+				"q/application/controllers/api/img.php"
+			],
+			[
+				"imgs/servicio_producto_servicio",
+				"q/application/views/imgs/servicio_producto_servicio.php"
+			],
+			[
+				"imagen_servicio",
+				"q/application/controllers/api/imagen_servicio.php"
+			],
+			[
+				"models/img_model.php",
+				"q/application/models/img_model.php"
+			],
+			[
+				"servicio.php",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"productividad",
+				"q/application/controllers/api/productividad.php"
+			],
+			[
+				"clasi",
+				"q/application/controllers/api/clasificacion.php"
+			],
+			[
+				"servicio.",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"actividad_web",
+				"q/application/models/actividad_web_model.php"
+			],
+			[
+				"models/actividad_web_model.php",
+				"q/application/models/actividad_web_model.php"
+			],
+			[
+				" models/actividad_web_model.php",
+				"q/application/models/actividad_web_model.php"
+			],
+			[
+				"s_tema/login/ini.js",
+				"js_tema/login/ini.js"
+			],
+			[
+				"models/serviciosmodel.php",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"eni",
+				"helpers/enid_helper.php"
+			],
+			[
+				"usuario_d",
+				"q/application/controllers/api/usuario_direccion.php"
+			],
+			[
+				"usuario",
+				"q/application/controllers/api/usuario.php"
+			],
+			[
+				"usuariomode",
+				"q/application/models/usuario_model.php"
+			],
+			[
+				"pregunta.php",
+				"q/application/controllers/api/pregunta.php"
+			],
+			[
+				"prospecto",
+				"q/application/models/prospecto_model.php"
+			],
+			[
 				"tarea",
-				"q/application/controllers/api/tarea.php"
+				"q/application/models/tareasmodel.php"
+			],
+			[
+				"recibo_m",
+				"q/application/models/recibo_model.php"
+			],
+			[
+				"enid_",
+				"helpers/enid_helper.php"
+			],
+			[
+				"proyecto_per",
+				"q/application/controllers/api/proyecto_persona_forma_pago_direccion.php"
+			],
+			[
+				"recurso.php",
+				"q/application/controllers/api/recurso.php"
+			],
+			[
+				"stat",
+				"q/application/controllers/api/status_enid_service.php"
+			],
+			[
+				"tipo_ne",
+				"q/application/controllers/api/tipo_negocio.php"
+			],
+			[
+				"serviciomo",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"usuario_cl",
+				"q/application/controllers/api/usuario_clasificacion.php"
+			],
+			[
+				"usuario_direccion_mode",
+				"q/application/models/usuario_direccion_model.php"
+			],
+			[
+				"usuario_di",
+				"q/application/controllers/api/usuario_direccion.php"
+			],
+			[
+				"servicio.ph",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"imagen_usua",
+				"q/application/controllers/api/imagen_usuario.php"
+			],
+			[
+				"usuario_de",
+				"q/application/controllers/api/usuario_deseo.php"
+			],
+			[
+				"usuario_c",
+				"q/application/controllers/api/usuario_clasificacion.php"
+			],
+			[
+				"usuario_cla",
+				"q/application/controllers/api/usuario_clasificacion.php"
+			],
+			[
+				"usuar",
+				"q/application/controllers/api/usuario.php"
+			],
+			[
+				"models/empresa_permiso_model.php",
+				"q/application/models/empresa_permiso_model.php"
+			],
+			[
+				"serviciomode",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"USUARIO_D",
+				"inicio/q/application/controllers/api/usuario_direccion.php"
+			],
+			[
+				"proyecto/domicilio",
+				"inicio/q/application/views/proyecto/domicilio.php"
+			],
+			[
+				"usuario_direccion",
+				"inicio/q/application/controllers/api/usuario_direccion.php"
+			],
+			[
+				"proyec",
+				"portafolio/application/models/proyectomodel.php_"
+			],
+			[
+				"direcc",
+				"q/application/controllers/api/usuario_direccion.php"
+			],
+			[
+				"proyectomode",
+				"portafolio/application/models/proyectomodel.php_"
+			],
+			[
+				"administracion_cuenta/principal.js",
+				"js_tema/administracion_cuenta/principal.js"
+			],
+			[
+				"usuario.php",
+				"q/application/controllers/api/usuario.php"
+			],
+			[
+				"usuario_model.php",
+				"q/application/models/usuario_model.php"
+			],
+			[
+				"login/ini.js",
+				"js_tema/login/ini.js"
+			],
+			[
+				"js_tema/administracion_cuenta/img.js",
+				"js_tema/administracion_cuenta/img.js"
+			],
+			[
+				"img_mod",
+				"imgs/application/models/img_model.php"
+			],
+			[
+				"servicio_mo",
+				"q/application/models/imagen_servicio_model.php"
+			],
+			[
+				"imagen_usu",
+				"q/application/models/imagen_usuario_model.php"
+			],
+			[
+				"img_model",
+				"q/application/models/img_model.php"
+			],
+			[
+				"imamode",
+				"imgs/application/models/img_model.php"
+			],
+			[
+				"img_mode",
+				"imgs/application/models/img_model.php"
+			],
+			[
+				"imagen_usuario_model",
+				"q/application/models/imagen_usuario_model.php"
+			],
+			[
+				"js_tema/administracion_cuenta/principal.js",
+				"js_tema/administracion_cuenta/principal.js"
+			],
+			[
+				"procesar/p",
+				"js_tema/procesar/principal.js"
+			],
+			[
+				"respuesta_",
+				"q/application/models/respuesta_model.php"
+			],
+			[
+				"valora",
+				"q/application/controllers/api/valoracion.php"
+			],
+			[
+				"pregunta",
+				"q/application/controllers/api/pregunta.php"
+			],
+			[
+				"valoracion.php",
+				"q/application/controllers/api/valoracion.php"
+			],
+			[
+				"preguntamdoe",
+				"q/application/models/pregunta_model.php"
+			],
+			[
+				"reci",
+				"q/application/controllers/api/recibo.php"
+			],
+			[
+				"/models/pregunta_model.php ",
+				"q/application/models/pregunta_model.php"
+			],
+			[
+				"ticket_mo",
+				"q/application/models/tickets_model.php"
+			],
+			[
+				"models/usuario_model.php",
+				"q/application/models/usuario_model.php"
 			],
 			[
 				"tickets_helper.php",
@@ -1016,10 +1519,6 @@
 				"q/application/models/respuesta_model.php"
 			],
 			[
-				"respuesta",
-				"q/application/controllers/api/respuesta.php"
-			],
-			[
 				"response_",
 				"q/application/models/response_model.php"
 			],
@@ -1040,10 +1539,6 @@
 				"q/application/controllers/api/tickets.php"
 			],
 			[
-				"tick",
-				"q/application/controllers/api/tickets.php"
-			],
-			[
 				"ticke",
 				"q/application/controllers/api/tickets.php"
 			],
@@ -1060,18 +1555,6 @@
 				"q/application/controllers/api/imagen_servicio.php"
 			],
 			[
-				"imagen_ser",
-				"q/application/models/imagen_servicio_model.php"
-			],
-			[
-				"eni",
-				"helpers/enid_helper.php"
-			],
-			[
-				"archivo",
-				"q/application/controllers/api/archivo.php"
-			],
-			[
 				" models/img_model.php",
 				"q/application/models/img_model.php"
 			],
@@ -1086,398 +1569,6 @@
 			[
 				"image_ser",
 				"q/application/controllers/api/imagen_servicio.php"
-			],
-			[
-				" api/servicio.php",
-				"q/application/controllers/api/servicio.php"
-			],
-			[
-				"servicio.php",
-				"q/application/controllers/api/servicio.php"
-			],
-			[
-				" models/serviciosmodel.php",
-				"q/application/models/serviciosmodel.php"
-			],
-			[
-				"models/pregunta_model.php",
-				"q/application/models/pregunta_model.php"
-			],
-			[
-				"pregunta.php",
-				"msj/application/controllers/api/pregunta.php"
-			],
-			[
-				"PREGUNTA_SER",
-				"q/application/models/pregunta_servicio_model.php"
-			],
-			[
-				"enid",
-				"helpers/enid_helper.php"
-			],
-			[
-				"valoracion.php",
-				"q/application/controllers/api/valoracion.php"
-			],
-			[
-				"main",
-				"js_tema/js/main.js"
-			],
-			[
-				"direccion",
-				"q/application/controllers/api/direccion.php"
-			],
-			[
-				"codigo_",
-				"q/application/controllers/api/codigo_postal.php"
-			],
-			[
-				"codigo_postal_model.php",
-				"q/application/models/codigo_postal_model.php"
-			],
-			[
-				"usuario_per",
-				"q/application/models/usuario_perfil_model.php"
-			],
-			[
-				"usuario_perfil",
-				"q/application/controllers/api/usuario_perfil.php"
-			],
-			[
-				"usua",
-				"q/application/controllers/api/usuario.php"
-			],
-			[
-				"cobranza",
-				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"/producto_helper.php",
-				"producto/application/helpers/producto_helper.php"
-			],
-			[
-				"talla_mo",
-				"q/application/models/talla_model.php"
-			],
-			[
-				"talla",
-				"q/application/controllers/api/talla.php"
-			],
-			[
-				"img_mode",
-				"imgs/application/models/img_model.php"
-			],
-			[
-				"departa",
-				"q/application/controllers/api/departamento.php"
-			],
-			[
-				"view_tema/formularios/busqueda_tickets",
-				"view_tema/formularios/busqueda_tickets.php"
-			],
-			[
-				"empresas_enid",
-				"desarrollo/application/views/empresas_enid.php"
-			],
-			[
-				"",
-				"q/application/controllers/api/perfiles.php"
-			],
-			[
-				"perfiles",
-				"q/application/controllers/api/perfiles.php"
-			],
-			[
-				"desarrollo/menu",
-				"desarrollo/application/views/desarrollo/menu.php"
-			],
-			[
-				"de",
-				"debug/debug.log"
-			],
-			[
-				"desarrollomodel",
-				"q/application/models/desarrollomodel.php"
-			],
-			[
-				"desarrollo.php",
-				"q/application/controllers/api/desarrollo.php"
-			],
-			[
-				"ticket_ode",
-				"q/application/models/tickets_model.php"
-			],
-			[
-				"ticketsmodel",
-				"portafolio/application/models/ticketsmodel.php_"
-			],
-			[
-				"servicio/detalle.php",
-				"q/application/views/servicio/detalle.php"
-			],
-			[
-				"productividad",
-				"q/application/controllers/api/productividad.php"
-			],
-			[
-				"usuario_de",
-				"q/application/controllers/api/usuario_deseo.php"
-			],
-			[
-				"usuario",
-				"q/application/controllers/api/usuario.php"
-			],
-			[
-				"privacidad_usuario_model",
-				"q/application/models/privacidad_usuario_model.php"
-			],
-			[
-				"privacidad_usua",
-				"q/application/controllers/api/privacidad_usuario.php"
-			],
-			[
-				"privacidad.pph",
-				"q/application/controllers/api/privacidad.php"
-			],
-			[
-				"privacidad_usu",
-				"q/application/models/privacidad_usuario_model.php"
-			],
-			[
-				"servicio",
-				"inicio/q/application/controllers/api/servicio.php"
-			],
-			[
-				"funcio",
-				"inicio/q/application/controllers/api/funcionalidad.php"
-			],
-			[
-				"funcion",
-				"inicio/q/application/models/funcionalidad_model.php"
-			],
-			[
-				"serviciomode",
-				"inicio/q/application/models/servicio_model.php"
-			],
-			[
-				"privacidad/conceptos",
-				"inicio/base/application/views/privacidad/conceptos.php"
-			],
-			[
-				"funcionalidad_",
-				"inicio/q/application/models/funcionalidad_model.php"
-			],
-			[
-				"privacidad.php",
-				"inicio/q/application/controllers/api/privacidad.php"
-			],
-			[
-				"privacidad_model",
-				"q/application/models/privacidad_model.php"
-			],
-			[
-				"privacidad",
-				"js_tema/administracion_cuenta/privacidad_seguridad.js"
-			],
-			[
-				"meta",
-				"q/application/helpers/metakeyword_helper.php"
-			],
-			[
-				"servici",
-				"q/application/controllers/api/servicio.php"
-			],
-			[
-				"recibo",
-				"q/application/controllers/api/recibo.php"
-			],
-			[
-				"cobran",
-				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"recibo_he",
-				"q/application/helpers/recibo_helper.php"
-			],
-			[
-				"cobranza.php",
-				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"contac",
-				"q/application/controllers/api/contacto.php"
-			],
-			[
-				"productividad_usuario_model",
-				"q/application/models/productividad_usuario_model.php"
-			],
-			[
-				"prin",
-				"librerias/principal.php"
-			],
-			[
-				"pregunta",
-				"q/application/controllers/api/pregunta.php"
-			],
-			[
-				"pregunta_",
-				"q/application/models/pregunta_model.php"
-			],
-			[
-				"Respuesta_model",
-				"q/application/models/respuesta_model.php"
-			],
-			[
-				"usuario_direc",
-				"q/application/controllers/api/usuario_direccion.php"
-			],
-			[
-				"direccion_mo",
-				"q/application/models/direccion_model.php"
-			],
-			[
-				"proyecto_persona_forma_pago_direccion",
-				"q/application/controllers/api/proyecto_persona_forma_pago_direccion.php"
-			],
-			[
-				"enid_",
-				"helpers/enid_helper.php"
-			],
-			[
-				"cobranza/pago_al_momento",
-				"q/application/views/cobranza/pago_al_momento.php"
-			],
-			[
-				"recibo.php",
-				"q/application/controllers/api/recibo.php"
-			],
-			[
-				"proyecto_per",
-				"q/application/controllers/api/proyecto_persona_forma_pago_direccion.php"
-			],
-			[
-				"api/usuario_direccion.php",
-				"q/application/controllers/api/usuario_direccion.php"
-			],
-			[
-				"cobranza.p",
-				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"serviciomo",
-				"q/application/models/serviciosmodel.php"
-			],
-			[
-				"status_enid_service_model",
-				"q/application/models/status_enid_service_model.php"
-			],
-			[
-				"status_enid_service",
-				"q/application/controllers/api/status_servicio_enid_service.php"
-			],
-			[
-				"recibo_",
-				"q/application/helpers/recibo_helper.php"
-			],
-			[
-				"api/codigo_postal.php",
-				"q/application/controllers/api/codigo_postal.php"
-			],
-			[
-				"usuario_direccion_model",
-				"q/application/models/usuario_direccion_model.php"
-			],
-			[
-				"usuario_direccion_mo",
-				"q/application/models/usuario_direccion_model.php"
-			],
-			[
-				"proyectomodel",
-				"portafolio/application/models/proyectomodel.php_"
-			],
-			[
-				"codigo_po",
-				"q/application/controllers/api/codigo_postal.php"
-			],
-			[
-				"api/cobranza.php",
-				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"equipo",
-				"persona/application/controllers/api/equipo.php"
-			],
-			[
-				"servicio_he",
-				"q/application/helpers/servicios_helper.php"
-			],
-			[
-				"recibe_",
-				"q/application/helpers/recibo_helper.php"
-			],
-			[
-				"usuario.php",
-				"q/application/controllers/api/usuario.php"
-			],
-			[
-				" helpers/area_helper.php",
-				"area_cliente/application/helpers/area_helper.php"
-			],
-			[
-				"servicio_",
-				"q/application/models/servicio_model.php_"
-			],
-			[
-				"recibo.",
-				"q/application/controllers/api/recibo.php"
-			],
-			[
-				"direccion.php",
-				"q/application/controllers/api/direccion.php"
-			],
-			[
-				"cp",
-				"inicio/js_tema/js/cube-portfolio.js"
-			],
-			[
-				"porta",
-				"inicio/portafolio/application/controllers/api/portafolio.php_"
-			],
-			[
-				"controllers/enid.php",
-				"imgs/application/controllers/enid.php"
-			],
-			[
-				"home",
-				"inicio/administracion_cuenta/application/views/home.php"
-			],
-			[
-				"helpers/producto_helper.php",
-				"inicio/producto/application/helpers/producto_helper.php"
-			],
-			[
-				"img_mo",
-				"imgs/application/models/img_model.php"
-			],
-			[
-				"usuario_direccion",
-				"q/application/controllers/api/usuario_direccion.php"
-			],
-			[
-				"usuario_di",
-				"q/application/models/usuario_direccion_model.php"
-			],
-			[
-				"objetivos_model",
-				"q/application/models/objetivos_model.php"
-			],
-			[
-				"objetivos",
-				"q/application/controllers/api/objetivos.php"
-			],
-			[
-				"objetivo",
-				"q/application/controllers/api/objetivos.php"
 			]
 		],
 		"width": 0.0
@@ -1508,50 +1599,40 @@
 			"hide_conflict": false,
 			"restore_index":
 			{
-				"858":
+				"36":
 				{
 					"group": 0,
 					"index": 0
 				},
-				"876":
-				{
-					"group": 0,
-					"index": 1
-				},
-				"877":
-				{
-					"group": 0,
-					"index": 2
-				},
-				"882":
-				{
-					"group": 0,
-					"index": 3
-				},
-				"883":
-				{
-					"group": 0,
-					"index": 4
-				},
-				"884":
-				{
-					"group": 0,
-					"index": 5
-				},
-				"891":
+				"37":
 				{
 					"group": 0,
 					"index": 6
 				},
-				"910":
-				{
-					"group": 2,
-					"index": 0
-				},
-				"922":
+				"41":
 				{
 					"group": 0,
-					"index": 7
+					"index": 5
+				},
+				"42":
+				{
+					"group": 0,
+					"index": 3
+				},
+				"46":
+				{
+					"group": 0,
+					"index": 2
+				},
+				"47":
+				{
+					"group": 0,
+					"index": 4
+				},
+				"48":
+				{
+					"group": 0,
+					"index": 1
 				}
 			},
 			"restore_layout":
@@ -1561,32 +1642,18 @@
 					[
 						0,
 						0,
-						2,
+						1,
 						1
-					],
-					[
-						0,
-						1,
-						1,
-						2
-					],
-					[
-						1,
-						1,
-						2,
-						2
 					]
 				],
 				"cols":
 				[
 					0.0,
-					0.104698672114,
 					1.0
 				],
 				"rows":
 				[
 					0.0,
-					0.367664670659,
 					1.0
 				]
 			}
@@ -1595,8 +1662,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
-	"side_bar_width": 210.0,
+	"side_bar_visible": false,
+	"side_bar_width": 249.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

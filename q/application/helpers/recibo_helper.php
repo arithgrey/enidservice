@@ -1,6 +1,52 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+  function get_link_paypal($saldo_pendiente){
+      
+    if ($saldo_pendiente > 0) {
+      /*Aplico la comisión del paypal 3**/
+      $comision_paypal   =  porcentaje($saldo_pendiente,3.7); 
+      $saldo             = $saldo_pendiente + $comision_paypal;
+      return "https://www.paypal.me/eniservice/".$saldo;        
+    }
+    return 0;  
+    
+  }  
+  /**/
+  function get_link_saldo_enid($id_usuario , $id_recibo){
+    return  "../movimientos/?q=transfer&action=8&operacion=".$id_usuario."&recibo=".$id_recibo;    
+  }
+  /**/
+  function get_link_oxxo($url_request, $saldo , $id_recibo , $id_usuario){      
+    
+    $url   =  $url_request ."orden_pago_oxxo/?q=".$saldo."&q2=".$id_recibo."&q3=".$id_usuario;
+    $url   = ($saldo > 0 && $id_recibo > 0  && $id_usuario >0 ) ? $url : "";
+    return $url;
+
+  }
+  /**/
+  function get_saldo_pendiente($monto, $ciclos, $cubierto , $es_servicio , $envio_cliente,  $envio_sistema){
+
+
+    $cubierto =  ($cubierto < 0 ) ? 0 : $cubierto;    
+    $total = ( $es_servicio == 0 && $monto > 0  && $ciclos > 0 ) ? ($monto * $ciclos ) - $cubierto : 0;     
+
+    $envio                  =   ($es_servicio == 0 ) ? $envio_cliente : 0;     
+    $saldo_pendiente_envio  =   ($total > 0) ? $total + $envio : 0;
+    $text_envio             =   ($es_servicio == 0) ? $envio_sistema["text_envio"]["cliente"]: ""; 
+
+    $response =  [
+        'saldo_pendiente'       =>  $total ,
+        'envio'                 =>  $envio,
+        'saldo_pendiente_envio' =>  $saldo_pendiente_envio, 
+        'text_envio'            =>  $text_envio
+    ];
+
+    //debug($response , 1);
+    return $response;
+      
+  }
+  /**/
   function crea_data_deuda_pendiente($param){
 
       $data_complete["cuenta_correcta"] =0;
@@ -221,6 +267,7 @@ if(!function_exists('invierte_date_time')){
 
             }else{  
 
+
               $estilos = "";
               $text = span(icon('fa fa-credit-card-alt'). "LIQUIDAR AHORA!" , 
               [
@@ -256,7 +303,7 @@ if(!function_exists('invierte_date_time')){
     return $data_complete;
   }
     function valida_texto_periodos_contratados($periodos, $flag_servicio , $id_ciclo_facturacion){
-
+    
     $text ="";
     if($flag_servicio ==  1){
 
@@ -292,8 +339,9 @@ if(!function_exists('invierte_date_time')){
 
         $text ="Ciclos contratados: ".$periodos." ".$text_ciclos;        
     }else{
-        $text =($periodos >1) ? "Piezas ":"Pieza:";
-    }
+        $text = ($periodos > 1) ? "Piezas ":"Pieza ";
+        $text = heading_enid($periodos." ".$text , 3); 
+    }    
     return $text;
   }
 

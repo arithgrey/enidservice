@@ -1,8 +1,8 @@
 <?php 
 	/**/
-	$nombre =  strtoupper(trim( entrega_data_campo($vendedor , "nombre"  ))); 
-	$apellido_paterno =  strtoupper(trim(entrega_data_campo($vendedor , "apellido_paterno"))); 
-	$apellido_materno =  strtoupper(trim(entrega_data_campo($vendedor , "apellido_materno"  ))); 
+	$nombre =  strtoupper(trim( get_campo($vendedor , "nombre"  ))); 
+	$apellido_paterno =  strtoupper(trim(get_campo($vendedor , "apellido_paterno"))); 
+	$apellido_materno =  strtoupper(trim(get_campo($vendedor , "apellido_materno"  ))); 
 	$nombre_vendedor = $nombre . " ".$apellido_paterno ." " .$apellido_materno;
 
 ?>

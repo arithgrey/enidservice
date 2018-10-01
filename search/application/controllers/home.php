@@ -1,10 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Home extends CI_Controller{
     public $options;    
+    private $id_usuario;
     function __construct(){        
         parent::__construct();       
         $this->load->helper("search");      
         $this->load->library(lib_def());                              
+        $this->id_usuario = $this->principal->get_session("idusuario");
     }       
     private function set_option($key, $value){
         $this->options[$key] = $value;
@@ -19,24 +21,31 @@ class Home extends CI_Controller{
         $param["vendedor"]          =  get_info_variable($param , "q3" );        
         $q                          =  get_param_def($param     , "q", "");    
         $param["num_hist"]          =  get_info_servicio($q);                        
-        $this->load_data($param);    
+
+
+        if (if_ext($param , "q" )){
+
+            /**/
+            $this->create_keyword($param);
+            $this->load_data($param);        
+        }
+        
         
     }
     private function load_data($param){
         
 
-        $data                           = 
-        $this->principal->val_session("¿Necesitas que más clientes encuentren tu negocio?");
+        $data                           =   $this->principal->val_session("¿En busca de un buen regalo?");
         $data["meta_keywords"]          =   "Comprar y vender tus artículos y servicios";
         $data["desc_web"]               =   "";
         $data["url_img_post"]           =   create_url_preview("promo.png");
-    
-        $q                              =  (array_key_exists("q", $param)) ?$param["q"] :""; 
+        
+        $q                              =   (array_key_exists("q", $param)) ?$param["q"] :""; 
 
-        $data_send["q"]                 = $q; 
-        $data_send["vendedor"]          = $param["vendedor"];
-        $data_send["id_clasificacion"]  =  $param["id_clasificacion"];
-        $data_send["extra"]             = $param;
+        $data_send["q"]                 =   $q; 
+        $data_send["vendedor"]          =   $param["vendedor"];
+        $data_send["id_clasificacion"]  =   $param["id_clasificacion"];
+        $data_send["extra"]             =   $param;
         $data_send["order"]             = 
         (array_key_exists("order", $param))?$param["order"]:11;
 
@@ -57,8 +66,7 @@ class Home extends CI_Controller{
         }
         
         $servicios              =  $this->busqueda_producto_por_palabra_clave($data_send);        
-        $categorias_destacadas  =  $this->carga_categorias_destacadas();            
-        //debug($categorias_destacadas , 1);
+        $categorias_destacadas  =  $this->carga_categorias_destacadas();                    
         $data["servicios"]      =  $servicios;
 
 
@@ -215,4 +223,12 @@ class Home extends CI_Controller{
     }
     return $data_complete;
   }  
+  private function create_keyword($q){    
+    if ($this->id_usuario > 0) {
+        $q["id_usuario"] =  $this->id_usuario;
+    }
+    $api =  "keyword/index";
+    return $this->principal->api($api , $q, "json" , "POST");
+  }
+
 }

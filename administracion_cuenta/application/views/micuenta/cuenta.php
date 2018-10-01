@@ -35,7 +35,7 @@
                         "class"         =>  "form-control input-sm input_enid nombre_usuario" ,
                         "required"      =>  true  ,
                         "type"          =>  "text",
-                        "value"         =>  entrega_data_campo($usuario , 'nombre_usuario' ) ,
+                        "value"         =>  get_campo($usuario , 'nombre_usuario' ) ,
                         "maxlength"     =>  "15"
                     ])?>
                     <?=div(div("" , ['class'=>'registro_nombre_usuario']) , ['class'=> '"col-md-7"'])?>
@@ -54,7 +54,7 @@
                             "class"         => "form-control input-sm input_enid correo_electronico",
                             "required"      => "",
                             "type"          => "text",
-                            "value"         => entrega_data_campo($usuario , 'email' ),
+                            "value"         => get_campo($usuario , 'email' ),
                             "readonly"      =>  true 
                     ])?>
                     <?=div('El correo electrónico NO se mostrará públicamente', ['class'=> 'blue_enid '], 1)?>
@@ -77,7 +77,7 @@
                                     "type" => "text",
                                     "maxlength" => "3",
                                     "minlength" => "2",
-                                    "value" => entrega_data_campo($usuario , 'tel_lada')
+                                    "value" => get_campo($usuario , 'tel_lada')
                             ])?>
                             <?=place("registro_telefono_usuario_lada")?>
                         </div>
@@ -91,7 +91,7 @@
                                 "type"        => "text",
                                 "maxlength"   => "13",
                                 "minlength"   => "8",
-                                "value"       => entrega_data_campo($usuario , 'tel_contacto')
+                                "value"       => get_campo($usuario , 'tel_contacto')
                             ])?>
                             <?=div("" , ["class" => "registro_telefono_usuario" ])?>
 
@@ -109,7 +109,7 @@
                             <?=form_input(array(
                                         'name'          => 'lada_negocio',
                                         'id'            => 'lada',
-                                        'value'         => entrega_data_campo($usuario , 'lada_negocio'),
+                                        'value'         => get_campo($usuario , 'lada_negocio'),
                                         'maxlength'     => '3',
                                         'minlength'     => '2',
                                         'class'         => 'form-control input-sm input_enid lada_negocio lada2',
@@ -124,7 +124,7 @@
                                 <?=form_input(array(
                                         'name'          => 'telefono_negocio',
                                         'id'            => 'telefono',
-                                        'value'         => entrega_data_campo($usuario , 'tel_contacto_alterno'),
+                                        'value'         => get_campo($usuario , 'tel_contacto_alterno'),
                                         'maxlength'     => '13',
                                         'minlength'     => '8',
                                         'class'         => 'form-control input-sm input_enid telefono telefono_info_contacto_negocio tel2',
@@ -149,15 +149,15 @@
         <?=heading_enid("TU CUENTA ENID SERVICE" , 3)?>
         <div>
             <p style="text-decoration: underline">
-                <?=entrega_data_campo($usuario , "nombre" , "Tu Nombre")?>
-                <?=entrega_data_campo($usuario , "apellido_paterno" , "Tu prime apellido")?>
-                <?=entrega_data_campo($usuario , "apellido_materno" , "Tu prime apellido")?>
+                <?=get_campo($usuario , "nombre" , "Tu Nombre")?>
+                <?=get_campo($usuario , "apellido_paterno" , "Tu prime apellido")?>
+                <?=get_campo($usuario , "apellido_materno" , "Tu prime apellido")?>
             </p>
             <?=n_row_12()?>
-                <?=entrega_data_campo($usuario , "email" , "Tu prime apellido")?>
+                <?=get_campo($usuario , "email" , "Tu prime apellido")?>
             <?=end_row()?>
             <?=n_row_12()?>
-                <?=entrega_data_campo($usuario , "tel_contacto" , "Tu prime apellido" , 1)?>
+                <?=get_campo($usuario , "tel_contacto" , "Tu prime apellido" , 1)?>
             <?=end_row()?>
         </div>
         <?=anchor_enid("MI DIRECCIÓN" . icon('fa  fa-fighter-jet') , ["class"=>"a_enid_black btn_direccion", "href"=>"#tab_direccion" ,  "data-toggle"=>"tab" ] , 1 )?>

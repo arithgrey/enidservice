@@ -285,7 +285,7 @@ class usuario extends REST_Controller{
 
         $param      =   $this->get();
         $response   =   $this->usuario_model->has_phone($param);
-        debug($response);        
+        //debug($response);        
         $this->response($response);                 
     }
     /**/
@@ -522,7 +522,7 @@ class usuario extends REST_Controller{
                 $q["id_usuario"]    =  $response["id_usuario"]; 
                 $q["puesto"]        =  20; 
                 $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);   
-                debug($response["usuario_permisos"]);
+                //debug($response["usuario_permisos"]);
                 if ($response["usuario_permisos"] > 0) {
                     $response["email"]              =  $email;
                     $response["usuario_registrado"] = 1;

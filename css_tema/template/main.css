@@ -442,9 +442,8 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
             }.blue_enid3{
                 background:#05378D;
             }
-            .blue_enid_background{
-                
-                background: #0656F9!important;
+            .blue_enid_background{                
+                background: #0656F9!important;                
             }
             .blue_enid_background2{
                 background: #02587a!important;
@@ -1067,6 +1066,9 @@ table{
 .top_20{
 	margin-top: 20px;
 }
-.cursor_pointer:hover{
+.cursor_pointer:hover, .cursor:hover{
 	cursor: pointer;
+}
+.completo{
+	width: 100%!important;
 }

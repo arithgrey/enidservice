@@ -18,7 +18,11 @@
 	overflow-x: scroll;  overflow-x: hidden;	
 }
 .contenedor_imagen_muestra_producto{
-	border-style: solid;position:absolute;z-index: 2000;color: white;background: black;
+	border-style: solid;
+	position:absolute;
+	z-index: 2000;
+	color: white;
+	background: black;
 }
 .notificacion_publicar_imagenes{
 	margin-top: 10px;

@@ -38,6 +38,17 @@
                 <?=end_row()?> 
                 <?=place("repo_usabilidad")?>                
             </div>
+
+            <div class="tab-pane" id='tab_dispositivos'>
+                <?=div("DISPOSITIVOS " , ["class"=>"titulo_enid_sm" ,1])?>
+                <?=n_row_12()?>
+                    <form class='f_dipositivos row'>                    
+                        <?=$this->load->view("../../../view_tema/inputs_fecha_busqueda")?>
+                    </form>
+                <?=end_row()?> 
+                <?=place("repo_dispositivos")?>                
+            </div>
+
             
             <div class="tab-pane" id='tab_default_3'>                
                 <?=div("EMAIL ENVIADOS " , ["class"=>"titulo_enid_sm" ,1])?>             

@@ -76,6 +76,15 @@
                     "class"       =>    "black strong  usabilidad_btn"
                 ]);?>                    
             </li>                      
+            <li>
+                <?=anchor_enid(icon("fa fa-mobile")."DISPOSITIVOS" ,  
+                [
+                    "id"          =>    "btn_servicios",
+                    "href"        =>    "#tab_dispositivos", 
+                    "data-toggle" =>    "tab"  ,
+                    "class"       =>    "black strong  dispositivos"
+                ]);?>                    
+            </li>                      
             </ul>
         </nav>        
     </div>    

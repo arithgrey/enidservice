@@ -39,6 +39,8 @@ class Clasificacion extends REST_Controller{
         $param["nivel"]                 =   1;        
         $primer_nivel                   =   $this->clasificacion_model->get_clasificaciones_por_nivel($param);
         $clasificaciones                =   $this->clasificacion_model->get_clasificaciones_segundo($primer_nivel);
+        
+
         $select                         =   create_select(
             $clasificaciones , 
             "q2" , 
@@ -46,10 +48,16 @@ class Clasificacion extends REST_Controller{
             "id_clasificacion" , 
             "nombre_clasificacion" , 
             "id_clasificacion" , 
-            0 , 1, 0, 
-            "Todos los departamentos" );
+            0 , 
+            1, 
+            0, 
+            "Todos los departamentos"
+        );
+        
         $this->response($select);
+
         //$this->load->view("clasificaciones/menu" , $response);
+
 
     }
     /**/

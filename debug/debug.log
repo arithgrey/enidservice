@@ -1,0 +1,3307 @@
+DEBUG - TYPE string 2018-09-27 22:37:36 --> ok
+DEBUG - TYPE array 2018-09-27 22:37:38 --> Array
+DEBUG - TYPE string 2018-09-27 22:47:50 --> paso
+DEBUG - TYPE string 2018-09-27 22:47:52 --> ok
+DEBUG - TYPE array 2018-09-27 22:47:54 --> Array
+DEBUG - TYPE string 2018-09-27 22:48:45 --> ok
+DEBUG - TYPE array 2018-09-27 22:48:47 --> Array
+DEBUG - TYPE string 2018-09-27 22:49:20 --> Entro-------
+DEBUG - TYPE string 2018-09-27 22:49:21 --> ok
+DEBUG - TYPE array 2018-09-27 22:49:24 --> Array
+DEBUG - TYPE string 2018-09-27 22:49:41 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:49:43 --> ok
+DEBUG - TYPE array 2018-09-27 22:49:45 --> Array
+DEBUG - TYPE string 2018-09-27 22:50:28 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:50:28 --> <div class='row'>
+
+
+            <div class='col-lg-12 col-md-12 col-sm-12  '>
+<select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option><option value='1'>Accesorios para Vehículos </option><option value='2'>Alimentos y Bebidas </option><option value='3'>Animales y Mascotas </option><option value='4'>Arte y Antigüedades </option><option value='5'>Bebés </option><option value='6'>Belleza y Cuidado Personal </option><option value='7'>Cámaras y Accesorios </option><option value='8'>Celulares y Telefonía </option><option value='9'>Coleccionables </option><option value='10'>Computación </option><option value='11'>Consolas y Videojuegos </option><option value='12'>Deportes y Fitness </option><option value='13'>Electrodomésticos </option><option value='14'>Electrónica, Audio y Video </option><option value='15'>Herramientas y Construcción </option><option value='16'>Hogar, Muebles y Jardín </option><option value='17'>Industrias y Oficinas </option><option value='18'>Instrumentos Musicales </option><option value='19'>Joyas y Relojes </option><option value='20'>Juegos y Juguetes </option><option value='21'>Libros, Revistas y Comics </option><option value='22'>Música, Películas y Series </option><option value='23'>Recuerdos, Cotillón y Fiestas </option><option value='24'>Ropa, Bolsas y Calzado </option><option value='25'>Salud y Equipamiento Médico </option><option value='26'>Otras Categorías </option><option value='27'>Servicios </option><option value='28'>Belleza y Cuidado Personal </option><option value='29'>Clases,Cursos y Capacitaciones </option><option value='37'>Servicios para Mascotas </option><option value='38'>Transporte </option><option value='39'>Otros Servicios </option><option value='1670'>Fiestas y eventos </option><option value='1679'>Hogar </option><option value='1682'>Imprenta </option><option value='1690'>Vehiculos </option><option value='1701'>Profesionales </option><option value='1712'>Recreación y Turismo </option><option value='1717'>Servicios de reparación </option></select></div>
+</div>
+
+DEBUG - TYPE string 2018-09-27 22:50:29 --> ok
+DEBUG - TYPE array 2018-09-27 22:50:32 --> Array
+DEBUG - TYPE integer 2018-09-27 22:51:49 --> 1
+DEBUG - TYPE string 2018-09-27 22:51:50 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:51:50 --> <div class='row'>
+
+
+            <div class='col-lg-12 col-md-12 col-sm-12  '>
+<select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option><option value='1'>Accesorios para Vehículos </option><option value='2'>Alimentos y Bebidas </option><option value='3'>Animales y Mascotas </option><option value='4'>Arte y Antigüedades </option><option value='5'>Bebés </option><option value='6'>Belleza y Cuidado Personal </option><option value='7'>Cámaras y Accesorios </option><option value='8'>Celulares y Telefonía </option><option value='9'>Coleccionables </option><option value='10'>Computación </option><option value='11'>Consolas y Videojuegos </option><option value='12'>Deportes y Fitness </option><option value='13'>Electrodomésticos </option><option value='14'>Electrónica, Audio y Video </option><option value='15'>Herramientas y Construcción </option><option value='16'>Hogar, Muebles y Jardín </option><option value='17'>Industrias y Oficinas </option><option value='18'>Instrumentos Musicales </option><option value='19'>Joyas y Relojes </option><option value='20'>Juegos y Juguetes </option><option value='21'>Libros, Revistas y Comics </option><option value='22'>Música, Películas y Series </option><option value='23'>Recuerdos, Cotillón y Fiestas </option><option value='24'>Ropa, Bolsas y Calzado </option><option value='25'>Salud y Equipamiento Médico </option><option value='26'>Otras Categorías </option><option value='27'>Servicios </option><option value='28'>Belleza y Cuidado Personal </option><option value='29'>Clases,Cursos y Capacitaciones </option><option value='37'>Servicios para Mascotas </option><option value='38'>Transporte </option><option value='39'>Otros Servicios </option><option value='1670'>Fiestas y eventos </option><option value='1679'>Hogar </option><option value='1682'>Imprenta </option><option value='1690'>Vehiculos </option><option value='1701'>Profesionales </option><option value='1712'>Recreación y Turismo </option><option value='1717'>Servicios de reparación </option></select></div>
+</div>
+
+DEBUG - TYPE string 2018-09-27 22:51:51 --> ok
+DEBUG - TYPE array 2018-09-27 22:51:53 --> Array
+DEBUG - TYPE integer 2018-09-27 22:52:05 --> 1
+DEBUG - TYPE string 2018-09-27 22:52:05 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:52:07 --> ok
+DEBUG - TYPE array 2018-09-27 22:52:09 --> Array
+DEBUG - TYPE integer 2018-09-27 22:53:02 --> 1
+DEBUG - TYPE string 2018-09-27 22:53:02 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:53:03 --> ok
+DEBUG - TYPE array 2018-09-27 22:53:06 --> Array
+DEBUG - TYPE integer 2018-09-27 22:53:55 --> 1
+DEBUG - TYPE string 2018-09-27 22:53:56 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:53:56 --> ok
+DEBUG - TYPE array 2018-09-27 22:53:57 --> Array
+DEBUG - TYPE integer 2018-09-27 22:53:59 --> 1
+DEBUG - TYPE string 2018-09-27 22:53:59 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:54:37 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:54:38 --> ok
+DEBUG - TYPE array 2018-09-27 22:54:39 --> Array
+DEBUG - TYPE string 2018-09-27 22:55:01 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:55:03 --> ok
+DEBUG - TYPE array 2018-09-27 22:55:03 --> Array
+DEBUG - TYPE string 2018-09-27 22:55:22 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE string 2018-09-27 22:55:23 --> ok
+DEBUG - TYPE array 2018-09-27 22:55:23 --> Array
+(
+    [clasificaciones] => Array
+        (
+            [0] => Array
+                (
+                    [primer_nivel] => 9
+                    [total] => 37
+                )
+
+            [1] => Array
+                (
+                    [primer_nivel] => 8
+                    [total] => 35
+                )
+
+            [2] => Array
+                (
+                    [primer_nivel] => 0
+                    [total] => 35
+                )
+
+            [3] => Array
+                (
+                    [primer_nivel] => 1
+                    [total] => 23
+                )
+
+            [4] => Array
+                (
+                    [primer_nivel] => 14
+                    [total] => 22
+                )
+
+            [5] => Array
+                (
+                    [primer_nivel] => 19
+                    [total] => 21
+                )
+
+            [6] => Array
+                (
+                    [primer_nivel] => 24
+                    [total] => 16
+                )
+
+            [7] => Array
+                (
+                    [primer_nivel] => 10
+                    [total] => 15
+                )
+
+            [8] => Array
+                (
+                    [primer_nivel] => 26
+                    [total] => 11
+                )
+
+            [9] => Array
+                (
+                    [primer_nivel] => 7
+                    [total] => 10
+                )
+
+            [10] => Array
+                (
+                    [primer_nivel] => 4
+                    [total] => 9
+                )
+
+            [11] => Array
+                (
+                    [primer_nivel] => 3
+                    [total] => 8
+                )
+
+            [12] => Array
+                (
+                    [primer_nivel] => 5
+                    [total] => 5
+                )
+
+            [13] => Array
+                (
+                    [primer_nivel] => 6
+                    [total] => 5
+                )
+
+            [14] => Array
+                (
+                    [primer_nivel] => 23
+                    [total] => 5
+                )
+
+            [15] => Array
+                (
+                    [primer_nivel] => 36
+                    [total] => 4
+                )
+
+            [16] => Array
+                (
+                    [primer_nivel] => 2
+                    [total] => 4
+                )
+
+            [17] => Array
+                (
+                    [primer_nivel] => 21
+                    [total] => 3
+                )
+
+            [18] => Array
+                (
+                    [primer_nivel] => 34
+                    [total] => 2
+                )
+
+            [19] => Array
+                (
+                    [primer_nivel] => 31
+                    [total] => 2
+                )
+
+            [20] => Array
+                (
+                    [primer_nivel] => 17
+                    [total] => 2
+                )
+
+            [21] => Array
+                (
+                    [primer_nivel] => 39
+                    [total] => 2
+                )
+
+            [22] => Array
+                (
+                    [primer_nivel] => 1701
+                    [total] => 2
+                )
+
+            [23] => Array
+                (
+                    [primer_nivel] => 18
+                    [total] => 1
+                )
+
+            [24] => Array
+                (
+                    [primer_nivel] => 29
+                    [total] => 1
+                )
+
+            [25] => Array
+                (
+                    [primer_nivel] => 12
+                    [total] => 1
+                )
+
+            [26] => Array
+                (
+                    [primer_nivel] => 30
+                    [total] => 1
+                )
+
+            [27] => Array
+                (
+                    [primer_nivel] => 13
+                    [total] => 1
+                )
+
+            [28] => Array
+                (
+                    [primer_nivel] => 16
+                    [total] => 1
+                )
+
+            [29] => Array
+                (
+                    [primer_nivel] => 37
+                    [total] => 1
+                )
+
+            [30] => Array
+                (
+                    [primer_nivel] => 20
+                    [total] => 1
+                )
+
+            [31] => Array
+                (
+                    [primer_nivel] => 27
+                    [total] => 1
+                )
+
+            [32] => Array
+                (
+                    [primer_nivel] => 1682
+                    [total] => 1
+                )
+
+            [33] => Array
+                (
+                    [primer_nivel] => 11
+                    [total] => 1
+                )
+
+            [34] => Array
+                (
+                    [primer_nivel] => 38
+                    [total] => 1
+                )
+
+        )
+
+    [nombres_primer_nivel] => Array
+        (
+            [0] => Array
+                (
+                    [id_clasificacion] => 1
+                    [nombre_clasificacion] => Accesorios para Vehículos
+                    [flag_servicio] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_clasificacion] => 2
+                    [nombre_clasificacion] => Alimentos y Bebidas
+                    [flag_servicio] => 0
+                )
+
+            [2] => Array
+                (
+                    [id_clasificacion] => 3
+                    [nombre_clasificacion] => Animales y Mascotas
+                    [flag_servicio] => 0
+                )
+
+            [3] => Array
+                (
+                    [id_clasificacion] => 4
+                    [nombre_clasificacion] => Arte y Antigüedades
+                    [flag_servicio] => 0
+                )
+
+            [4] => Array
+                (
+                    [id_clasificacion] => 5
+                    [nombre_clasificacion] => Bebés
+                    [flag_servicio] => 0
+                )
+
+            [5] => Array
+                (
+                    [id_clasificacion] => 6
+                    [nombre_clasificacion] => Belleza y Cuidado Personal
+                    [flag_servicio] => 0
+                )
+
+            [6] => Array
+                (
+                    [id_clasificacion] => 7
+                    [nombre_clasificacion] => Cámaras y Accesorios
+                    [flag_servicio] => 0
+                )
+
+            [7] => Array
+                (
+                    [id_clasificacion] => 8
+                    [nombre_clasificacion] => Celulares y Telefonía
+                    [flag_servicio] => 0
+                )
+
+            [8] => Array
+                (
+                    [id_clasificacion] => 9
+                    [nombre_clasificacion] => Coleccionables
+                    [flag_servicio] => 0
+                )
+
+            [9] => Array
+                (
+                    [id_clasificacion] => 10
+                    [nombre_clasificacion] => Computación
+                    [flag_servicio] => 0
+                )
+
+            [10] => Array
+                (
+                    [id_clasificacion] => 11
+                    [nombre_clasificacion] => Consolas y Videojuegos
+                    [flag_servicio] => 0
+                )
+
+            [11] => Array
+                (
+                    [id_clasificacion] => 12
+                    [nombre_clasificacion] => Deportes y Fitness
+                    [flag_servicio] => 0
+                )
+
+            [12] => Array
+                (
+                    [id_clasificacion] => 13
+                    [nombre_clasificacion] => Electrodomésticos
+                    [flag_servicio] => 0
+                )
+
+            [13] => Array
+                (
+                    [id_clasificacion] => 14
+                    [nombre_clasificacion] => Electrónica, Audio y Video
+                    [flag_servicio] => 0
+                )
+
+            [14] => Array
+                (
+                    [id_clasificacion] => 15
+                    [nombre_clasificacion] => Herramientas y Construcción
+                    [flag_servicio] => 0
+                )
+
+            [15] => Array
+                (
+                    [id_clasificacion] => 16
+                    [nombre_clasificacion] => Hogar, Muebles y Jardín
+                    [flag_servicio] => 0
+                )
+
+            [16] => Array
+                (
+                    [id_clasificacion] => 17
+                    [nombre_clasificacion] => Industrias y Oficinas
+                    [flag_servicio] => 0
+                )
+
+            [17] => Array
+                (
+                    [id_clasificacion] => 18
+                    [nombre_clasificacion] => Instrumentos Musicales
+                    [flag_servicio] => 0
+                )
+
+            [18] => Array
+                (
+                    [id_clasificacion] => 19
+                    [nombre_clasificacion] => Joyas y Relojes
+                    [flag_servicio] => 0
+                )
+
+            [19] => Array
+                (
+                    [id_clasificacion] => 20
+                    [nombre_clasificacion] => Juegos y Juguetes
+                    [flag_servicio] => 0
+                )
+
+            [20] => Array
+                (
+                    [id_clasificacion] => 21
+                    [nombre_clasificacion] => Libros, Revistas y Comics
+                    [flag_servicio] => 0
+                )
+
+            [21] => Array
+                (
+                    [id_clasificacion] => 22
+                    [nombre_clasificacion] => Música, Películas y Series
+                    [flag_servicio] => 0
+                )
+
+            [22] => Array
+                (
+                    [id_clasificacion] => 23
+                    [nombre_clasificacion] => Recuerdos, Cotillón y Fiestas
+                    [flag_servicio] => 0
+                )
+
+            [23] => Array
+                (
+                    [id_clasificacion] => 24
+                    [nombre_clasificacion] => Ropa, Bolsas y Calzado
+                    [flag_servicio] => 0
+                )
+
+            [24] => Array
+                (
+                    [id_clasificacion] => 25
+                    [nombre_clasificacion] => Salud y Equipamiento Médico
+                    [flag_servicio] => 0
+                )
+
+            [25] => Array
+                (
+                    [id_clasificacion] => 26
+                    [nombre_clasificacion] => Otras Categorías
+                    [flag_servicio] => 0
+                )
+
+            [26] => Array
+                (
+                    [id_clasificacion] => 27
+                    [nombre_clasificacion] => Servicios
+                    [flag_servicio] => 1
+                )
+
+            [27] => Array
+                (
+                    [id_clasificacion] => 28
+                    [nombre_clasificacion] => Belleza y Cuidado Personal
+                    [flag_servicio] => 1
+                )
+
+            [28] => Array
+                (
+                    [id_clasificacion] => 29
+                    [nombre_clasificacion] => Clases,Cursos y Capacitaciones
+                    [flag_servicio] => 1
+                )
+
+            [29] => Array
+                (
+                    [id_clasificacion] => 37
+                    [nombre_clasificacion] => Servicios para Mascotas
+                    [flag_servicio] => 1
+                )
+
+            [30] => Array
+                (
+                    [id_clasificacion] => 38
+                    [nombre_clasificacion] => Transporte
+                    [flag_servicio] => 1
+                )
+
+            [31] => Array
+                (
+                    [id_clasificacion] => 39
+                    [nombre_clasificacion] => Otros Servicios
+                    [flag_servicio] => 1
+                )
+
+            [32] => Array
+                (
+                    [id_clasificacion] => 1670
+                    [nombre_clasificacion] => Fiestas y eventos
+                    [flag_servicio] => 1
+                )
+
+            [33] => Array
+                (
+                    [id_clasificacion] => 1679
+                    [nombre_clasificacion] => Hogar
+                    [flag_servicio] => 1
+                )
+
+            [34] => Array
+                (
+                    [id_clasificacion] => 1682
+                    [nombre_clasificacion] => Imprenta
+                    [flag_servicio] => 1
+                )
+
+            [35] => Array
+                (
+                    [id_clasificacion] => 1690
+                    [nombre_clasificacion] => Vehiculos
+                    [flag_servicio] => 1
+                )
+
+            [36] => Array
+                (
+                    [id_clasificacion] => 1701
+                    [nombre_clasificacion] => Profesionales
+                    [flag_servicio] => 1
+                )
+
+            [37] => Array
+                (
+                    [id_clasificacion] => 1712
+                    [nombre_clasificacion] => Recreación y Turismo
+                    [flag_servicio] => 1
+                )
+
+            [38] => Array
+                (
+                    [id_clasificacion] => 1717
+                    [nombre_clasificacion] => Servicios de reparación
+                    [flag_servicio] => 1
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-27 22:55:23 --> Array
+DEBUG - TYPE string 2018-09-27 22:55:52 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE array 2018-09-27 22:55:53 --> Array
+DEBUG - TYPE string 2018-09-27 22:56:06 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE array 2018-09-27 22:56:08 --> Array
+DEBUG - TYPE string 2018-09-27 22:56:21 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE array 2018-09-27 22:56:22 --> Array
+DEBUG - TYPE string 2018-09-27 22:57:09 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE array 2018-09-27 22:57:10 --> Array
+DEBUG - TYPE string 2018-09-27 22:57:33 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE array 2018-09-27 22:57:35 --> Array
+DEBUG - TYPE string 2018-09-27 22:57:40 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option>
+DEBUG - TYPE array 2018-09-27 22:57:42 --> Array
+DEBUG - TYPE array 2018-09-27 22:58:59 --> Array
+DEBUG - TYPE string 2018-09-27 22:59:36 --> PAso
+DEBUG - TYPE string 2018-09-27 22:59:42 --> PAso
+DEBUG - TYPE array 2018-09-27 22:59:51 --> Array
+(
+    [clasificaciones] => Array
+        (
+            [0] => Array
+                (
+                    [primer_nivel] => 9
+                    [total] => 37
+                )
+
+            [1] => Array
+                (
+                    [primer_nivel] => 8
+                    [total] => 35
+                )
+
+            [2] => Array
+                (
+                    [primer_nivel] => 0
+                    [total] => 35
+                )
+
+            [3] => Array
+                (
+                    [primer_nivel] => 1
+                    [total] => 23
+                )
+
+            [4] => Array
+                (
+                    [primer_nivel] => 14
+                    [total] => 22
+                )
+
+            [5] => Array
+                (
+                    [primer_nivel] => 19
+                    [total] => 21
+                )
+
+            [6] => Array
+                (
+                    [primer_nivel] => 24
+                    [total] => 16
+                )
+
+            [7] => Array
+                (
+                    [primer_nivel] => 10
+                    [total] => 15
+                )
+
+            [8] => Array
+                (
+                    [primer_nivel] => 26
+                    [total] => 11
+                )
+
+            [9] => Array
+                (
+                    [primer_nivel] => 7
+                    [total] => 10
+                )
+
+            [10] => Array
+                (
+                    [primer_nivel] => 4
+                    [total] => 9
+                )
+
+            [11] => Array
+                (
+                    [primer_nivel] => 3
+                    [total] => 8
+                )
+
+            [12] => Array
+                (
+                    [primer_nivel] => 6
+                    [total] => 5
+                )
+
+            [13] => Array
+                (
+                    [primer_nivel] => 23
+                    [total] => 5
+                )
+
+            [14] => Array
+                (
+                    [primer_nivel] => 5
+                    [total] => 5
+                )
+
+            [15] => Array
+                (
+                    [primer_nivel] => 2
+                    [total] => 4
+                )
+
+            [16] => Array
+                (
+                    [primer_nivel] => 36
+                    [total] => 4
+                )
+
+            [17] => Array
+                (
+                    [primer_nivel] => 21
+                    [total] => 3
+                )
+
+            [18] => Array
+                (
+                    [primer_nivel] => 17
+                    [total] => 2
+                )
+
+            [19] => Array
+                (
+                    [primer_nivel] => 39
+                    [total] => 2
+                )
+
+            [20] => Array
+                (
+                    [primer_nivel] => 1701
+                    [total] => 2
+                )
+
+            [21] => Array
+                (
+                    [primer_nivel] => 34
+                    [total] => 2
+                )
+
+            [22] => Array
+                (
+                    [primer_nivel] => 31
+                    [total] => 2
+                )
+
+            [23] => Array
+                (
+                    [primer_nivel] => 29
+                    [total] => 1
+                )
+
+            [24] => Array
+                (
+                    [primer_nivel] => 12
+                    [total] => 1
+                )
+
+            [25] => Array
+                (
+                    [primer_nivel] => 30
+                    [total] => 1
+                )
+
+            [26] => Array
+                (
+                    [primer_nivel] => 13
+                    [total] => 1
+                )
+
+            [27] => Array
+                (
+                    [primer_nivel] => 16
+                    [total] => 1
+                )
+
+            [28] => Array
+                (
+                    [primer_nivel] => 37
+                    [total] => 1
+                )
+
+            [29] => Array
+                (
+                    [primer_nivel] => 20
+                    [total] => 1
+                )
+
+            [30] => Array
+                (
+                    [primer_nivel] => 27
+                    [total] => 1
+                )
+
+            [31] => Array
+                (
+                    [primer_nivel] => 1682
+                    [total] => 1
+                )
+
+            [32] => Array
+                (
+                    [primer_nivel] => 11
+                    [total] => 1
+                )
+
+            [33] => Array
+                (
+                    [primer_nivel] => 38
+                    [total] => 1
+                )
+
+            [34] => Array
+                (
+                    [primer_nivel] => 18
+                    [total] => 1
+                )
+
+        )
+
+    [nombres_primer_nivel] => Array
+        (
+            [0] => Array
+                (
+                    [id_clasificacion] => 1
+                    [nombre_clasificacion] => Accesorios para Vehículos
+                    [flag_servicio] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_clasificacion] => 2
+                    [nombre_clasificacion] => Alimentos y Bebidas
+                    [flag_servicio] => 0
+                )
+
+            [2] => Array
+                (
+                    [id_clasificacion] => 3
+                    [nombre_clasificacion] => Animales y Mascotas
+                    [flag_servicio] => 0
+                )
+
+            [3] => Array
+                (
+                    [id_clasificacion] => 4
+                    [nombre_clasificacion] => Arte y Antigüedades
+                    [flag_servicio] => 0
+                )
+
+            [4] => Array
+                (
+                    [id_clasificacion] => 5
+                    [nombre_clasificacion] => Bebés
+                    [flag_servicio] => 0
+                )
+
+            [5] => Array
+                (
+                    [id_clasificacion] => 6
+                    [nombre_clasificacion] => Belleza y Cuidado Personal
+                    [flag_servicio] => 0
+                )
+
+            [6] => Array
+                (
+                    [id_clasificacion] => 7
+                    [nombre_clasificacion] => Cámaras y Accesorios
+                    [flag_servicio] => 0
+                )
+
+            [7] => Array
+                (
+                    [id_clasificacion] => 8
+                    [nombre_clasificacion] => Celulares y Telefonía
+                    [flag_servicio] => 0
+                )
+
+            [8] => Array
+                (
+                    [id_clasificacion] => 9
+                    [nombre_clasificacion] => Coleccionables
+                    [flag_servicio] => 0
+                )
+
+            [9] => Array
+                (
+                    [id_clasificacion] => 10
+                    [nombre_clasificacion] => Computación
+                    [flag_servicio] => 0
+                )
+
+            [10] => Array
+                (
+                    [id_clasificacion] => 11
+                    [nombre_clasificacion] => Consolas y Videojuegos
+                    [flag_servicio] => 0
+                )
+
+            [11] => Array
+                (
+                    [id_clasificacion] => 12
+                    [nombre_clasificacion] => Deportes y Fitness
+                    [flag_servicio] => 0
+                )
+
+            [12] => Array
+                (
+                    [id_clasificacion] => 13
+                    [nombre_clasificacion] => Electrodomésticos
+                    [flag_servicio] => 0
+                )
+
+            [13] => Array
+                (
+                    [id_clasificacion] => 14
+                    [nombre_clasificacion] => Electrónica, Audio y Video
+                    [flag_servicio] => 0
+                )
+
+            [14] => Array
+                (
+                    [id_clasificacion] => 15
+                    [nombre_clasificacion] => Herramientas y Construcción
+                    [flag_servicio] => 0
+                )
+
+            [15] => Array
+                (
+                    [id_clasificacion] => 16
+                    [nombre_clasificacion] => Hogar, Muebles y Jardín
+                    [flag_servicio] => 0
+                )
+
+            [16] => Array
+                (
+                    [id_clasificacion] => 17
+                    [nombre_clasificacion] => Industrias y Oficinas
+                    [flag_servicio] => 0
+                )
+
+            [17] => Array
+                (
+                    [id_clasificacion] => 18
+                    [nombre_clasificacion] => Instrumentos Musicales
+                    [flag_servicio] => 0
+                )
+
+            [18] => Array
+                (
+                    [id_clasificacion] => 19
+                    [nombre_clasificacion] => Joyas y Relojes
+                    [flag_servicio] => 0
+                )
+
+            [19] => Array
+                (
+                    [id_clasificacion] => 20
+                    [nombre_clasificacion] => Juegos y Juguetes
+                    [flag_servicio] => 0
+                )
+
+            [20] => Array
+                (
+                    [id_clasificacion] => 21
+                    [nombre_clasificacion] => Libros, Revistas y Comics
+                    [flag_servicio] => 0
+                )
+
+            [21] => Array
+                (
+                    [id_clasificacion] => 22
+                    [nombre_clasificacion] => Música, Películas y Series
+                    [flag_servicio] => 0
+                )
+
+            [22] => Array
+                (
+                    [id_clasificacion] => 23
+                    [nombre_clasificacion] => Recuerdos, Cotillón y Fiestas
+                    [flag_servicio] => 0
+                )
+
+            [23] => Array
+                (
+                    [id_clasificacion] => 24
+                    [nombre_clasificacion] => Ropa, Bolsas y Calzado
+                    [flag_servicio] => 0
+                )
+
+            [24] => Array
+                (
+                    [id_clasificacion] => 25
+                    [nombre_clasificacion] => Salud y Equipamiento Médico
+                    [flag_servicio] => 0
+                )
+
+            [25] => Array
+                (
+                    [id_clasificacion] => 26
+                    [nombre_clasificacion] => Otras Categorías
+                    [flag_servicio] => 0
+                )
+
+            [26] => Array
+                (
+                    [id_clasificacion] => 27
+                    [nombre_clasificacion] => Servicios
+                    [flag_servicio] => 1
+                )
+
+            [27] => Array
+                (
+                    [id_clasificacion] => 28
+                    [nombre_clasificacion] => Belleza y Cuidado Personal
+                    [flag_servicio] => 1
+                )
+
+            [28] => Array
+                (
+                    [id_clasificacion] => 29
+                    [nombre_clasificacion] => Clases,Cursos y Capacitaciones
+                    [flag_servicio] => 1
+                )
+
+            [29] => Array
+                (
+                    [id_clasificacion] => 37
+                    [nombre_clasificacion] => Servicios para Mascotas
+                    [flag_servicio] => 1
+                )
+
+            [30] => Array
+                (
+                    [id_clasificacion] => 38
+                    [nombre_clasificacion] => Transporte
+                    [flag_servicio] => 1
+                )
+
+            [31] => Array
+                (
+                    [id_clasificacion] => 39
+                    [nombre_clasificacion] => Otros Servicios
+                    [flag_servicio] => 1
+                )
+
+            [32] => Array
+                (
+                    [id_clasificacion] => 1670
+                    [nombre_clasificacion] => Fiestas y eventos
+                    [flag_servicio] => 1
+                )
+
+            [33] => Array
+                (
+                    [id_clasificacion] => 1679
+                    [nombre_clasificacion] => Hogar
+                    [flag_servicio] => 1
+                )
+
+            [34] => Array
+                (
+                    [id_clasificacion] => 1682
+                    [nombre_clasificacion] => Imprenta
+                    [flag_servicio] => 1
+                )
+
+            [35] => Array
+                (
+                    [id_clasificacion] => 1690
+                    [nombre_clasificacion] => Vehiculos
+                    [flag_servicio] => 1
+                )
+
+            [36] => Array
+                (
+                    [id_clasificacion] => 1701
+                    [nombre_clasificacion] => Profesionales
+                    [flag_servicio] => 1
+                )
+
+            [37] => Array
+                (
+                    [id_clasificacion] => 1712
+                    [nombre_clasificacion] => Recreación y Turismo
+                    [flag_servicio] => 1
+                )
+
+            [38] => Array
+                (
+                    [id_clasificacion] => 1717
+                    [nombre_clasificacion] => Servicios de reparación
+                    [flag_servicio] => 1
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-27 23:01:33 --> Array
+(
+    [0] => Array
+        (
+            [primer_nivel] => 9
+            [total] => 37
+            [nombre_clasificacion] => Coleccionables
+        )
+
+    [1] => Array
+        (
+            [primer_nivel] => 8
+            [total] => 35
+            [nombre_clasificacion] => Celulares y Telefonía
+        )
+
+    [2] => Array
+        (
+            [primer_nivel] => 0
+            [total] => 35
+            [nombre_clasificacion] => 
+        )
+
+    [3] => Array
+        (
+            [primer_nivel] => 1
+            [total] => 23
+            [nombre_clasificacion] => Accesorios para Vehículos
+        )
+
+    [4] => Array
+        (
+            [primer_nivel] => 14
+            [total] => 22
+            [nombre_clasificacion] => Electrónica, Audio y Video
+        )
+
+    [5] => Array
+        (
+            [primer_nivel] => 19
+            [total] => 21
+            [nombre_clasificacion] => Joyas y Relojes
+        )
+
+    [6] => Array
+        (
+            [primer_nivel] => 24
+            [total] => 16
+            [nombre_clasificacion] => Ropa, Bolsas y Calzado
+        )
+
+    [7] => Array
+        (
+            [primer_nivel] => 10
+            [total] => 15
+            [nombre_clasificacion] => Computación
+        )
+
+    [8] => Array
+        (
+            [primer_nivel] => 26
+            [total] => 11
+            [nombre_clasificacion] => Otras Categorías
+        )
+
+    [9] => Array
+        (
+            [primer_nivel] => 7
+            [total] => 10
+            [nombre_clasificacion] => Cámaras y Accesorios
+        )
+
+    [10] => Array
+        (
+            [primer_nivel] => 4
+            [total] => 9
+            [nombre_clasificacion] => Arte y Antigüedades
+        )
+
+    [11] => Array
+        (
+            [primer_nivel] => 3
+            [total] => 8
+            [nombre_clasificacion] => Animales y Mascotas
+        )
+
+    [12] => Array
+        (
+            [primer_nivel] => 5
+            [total] => 5
+            [nombre_clasificacion] => Bebés
+        )
+
+    [13] => Array
+        (
+            [primer_nivel] => 6
+            [total] => 5
+            [nombre_clasificacion] => Belleza y Cuidado Personal
+        )
+
+    [14] => Array
+        (
+            [primer_nivel] => 23
+            [total] => 5
+            [nombre_clasificacion] => Recuerdos, Cotillón y Fiestas
+        )
+
+    [15] => Array
+        (
+            [primer_nivel] => 36
+            [total] => 4
+            [nombre_clasificacion] => 
+        )
+
+    [16] => Array
+        (
+            [primer_nivel] => 2
+            [total] => 4
+            [nombre_clasificacion] => Alimentos y Bebidas
+        )
+
+    [17] => Array
+        (
+            [primer_nivel] => 21
+            [total] => 3
+            [nombre_clasificacion] => Libros, Revistas y Comics
+        )
+
+    [18] => Array
+        (
+            [primer_nivel] => 1701
+            [total] => 2
+            [nombre_clasificacion] => Profesionales
+        )
+
+    [19] => Array
+        (
+            [primer_nivel] => 34
+            [total] => 2
+            [nombre_clasificacion] => 
+        )
+
+    [20] => Array
+        (
+            [primer_nivel] => 31
+            [total] => 2
+            [nombre_clasificacion] => 
+        )
+
+    [21] => Array
+        (
+            [primer_nivel] => 17
+            [total] => 2
+            [nombre_clasificacion] => Industrias y Oficinas
+        )
+
+    [22] => Array
+        (
+            [primer_nivel] => 39
+            [total] => 2
+            [nombre_clasificacion] => Otros Servicios
+        )
+
+    [23] => Array
+        (
+            [primer_nivel] => 18
+            [total] => 1
+            [nombre_clasificacion] => Instrumentos Musicales
+        )
+
+    [24] => Array
+        (
+            [primer_nivel] => 29
+            [total] => 1
+            [nombre_clasificacion] => Clases,Cursos y Capacitaciones
+        )
+
+    [25] => Array
+        (
+            [primer_nivel] => 12
+            [total] => 1
+            [nombre_clasificacion] => Deportes y Fitness
+        )
+
+    [26] => Array
+        (
+            [primer_nivel] => 30
+            [total] => 1
+            [nombre_clasificacion] => 
+        )
+
+    [27] => Array
+        (
+            [primer_nivel] => 13
+            [total] => 1
+            [nombre_clasificacion] => Electrodomésticos
+        )
+
+    [28] => Array
+        (
+            [primer_nivel] => 16
+            [total] => 1
+            [nombre_clasificacion] => Hogar, Muebles y Jardín
+        )
+
+    [29] => Array
+        (
+            [primer_nivel] => 37
+            [total] => 1
+            [nombre_clasificacion] => Servicios para Mascotas
+        )
+
+)
+
+DEBUG - TYPE array 2018-09-27 23:01:40 --> Array
+(
+    [0] => Array
+        (
+            [primer_nivel] => 9
+            [total] => 37
+            [nombre_clasificacion] => Coleccionables
+        )
+
+    [1] => Array
+        (
+            [primer_nivel] => 0
+            [total] => 35
+            [nombre_clasificacion] => 
+        )
+
+    [2] => Array
+        (
+            [primer_nivel] => 8
+            [total] => 35
+            [nombre_clasificacion] => Celulares y Telefonía
+        )
+
+    [3] => Array
+        (
+            [primer_nivel] => 1
+            [total] => 23
+            [nombre_clasificacion] => Accesorios para Vehículos
+        )
+
+    [4] => Array
+        (
+            [primer_nivel] => 14
+            [total] => 22
+            [nombre_clasificacion] => Electrónica, Audio y Video
+        )
+
+    [5] => Array
+        (
+            [primer_nivel] => 19
+            [total] => 21
+            [nombre_clasificacion] => Joyas y Relojes
+        )
+
+    [6] => Array
+        (
+            [primer_nivel] => 24
+            [total] => 16
+            [nombre_clasificacion] => Ropa, Bolsas y Calzado
+        )
+
+    [7] => Array
+        (
+            [primer_nivel] => 10
+            [total] => 15
+            [nombre_clasificacion] => Computación
+        )
+
+    [8] => Array
+        (
+            [primer_nivel] => 26
+            [total] => 11
+            [nombre_clasificacion] => Otras Categorías
+        )
+
+    [9] => Array
+        (
+            [primer_nivel] => 7
+            [total] => 10
+            [nombre_clasificacion] => Cámaras y Accesorios
+        )
+
+    [10] => Array
+        (
+            [primer_nivel] => 4
+            [total] => 9
+            [nombre_clasificacion] => Arte y Antigüedades
+        )
+
+    [11] => Array
+        (
+            [primer_nivel] => 3
+            [total] => 8
+            [nombre_clasificacion] => Animales y Mascotas
+        )
+
+    [12] => Array
+        (
+            [primer_nivel] => 6
+            [total] => 5
+            [nombre_clasificacion] => Belleza y Cuidado Personal
+        )
+
+    [13] => Array
+        (
+            [primer_nivel] => 23
+            [total] => 5
+            [nombre_clasificacion] => Recuerdos, Cotillón y Fiestas
+        )
+
+    [14] => Array
+        (
+            [primer_nivel] => 5
+            [total] => 5
+            [nombre_clasificacion] => Bebés
+        )
+
+    [15] => Array
+        (
+            [primer_nivel] => 36
+            [total] => 4
+            [nombre_clasificacion] => 
+        )
+
+    [16] => Array
+        (
+            [primer_nivel] => 2
+            [total] => 4
+            [nombre_clasificacion] => Alimentos y Bebidas
+        )
+
+    [17] => Array
+        (
+            [primer_nivel] => 21
+            [total] => 3
+            [nombre_clasificacion] => Libros, Revistas y Comics
+        )
+
+    [18] => Array
+        (
+            [primer_nivel] => 17
+            [total] => 2
+            [nombre_clasificacion] => Industrias y Oficinas
+        )
+
+    [19] => Array
+        (
+            [primer_nivel] => 39
+            [total] => 2
+            [nombre_clasificacion] => Otros Servicios
+        )
+
+    [20] => Array
+        (
+            [primer_nivel] => 1701
+            [total] => 2
+            [nombre_clasificacion] => Profesionales
+        )
+
+    [21] => Array
+        (
+            [primer_nivel] => 34
+            [total] => 2
+            [nombre_clasificacion] => 
+        )
+
+    [22] => Array
+        (
+            [primer_nivel] => 31
+            [total] => 2
+            [nombre_clasificacion] => 
+        )
+
+    [23] => Array
+        (
+            [primer_nivel] => 20
+            [total] => 1
+            [nombre_clasificacion] => Juegos y Juguetes
+        )
+
+    [24] => Array
+        (
+            [primer_nivel] => 27
+            [total] => 1
+            [nombre_clasificacion] => Servicios
+        )
+
+    [25] => Array
+        (
+            [primer_nivel] => 1682
+            [total] => 1
+            [nombre_clasificacion] => Imprenta
+        )
+
+    [26] => Array
+        (
+            [primer_nivel] => 11
+            [total] => 1
+            [nombre_clasificacion] => Consolas y Videojuegos
+        )
+
+    [27] => Array
+        (
+            [primer_nivel] => 38
+            [total] => 1
+            [nombre_clasificacion] => Transporte
+        )
+
+    [28] => Array
+        (
+            [primer_nivel] => 18
+            [total] => 1
+            [nombre_clasificacion] => Instrumentos Musicales
+        )
+
+    [29] => Array
+        (
+            [primer_nivel] => 29
+            [total] => 1
+            [nombre_clasificacion] => Clases,Cursos y Capacitaciones
+        )
+
+)
+
+DEBUG - TYPE string 2018-09-27 23:14:54 --> <select name='q2'  class='custom-select'  id='id_clasificacion'> <option value='0'>Todos los departamentos </option><option value='1'>Accesorios para Vehículos </option><option value='2'>Alimentos y Bebidas </option><option value='3'>Animales y Mascotas </option><option value='4'>Arte y Antigüedades </option><option value='5'>Bebés </option><option value='6'>Belleza y Cuidado Personal </option><option value='7'>Cámaras y Accesorios </option><option value='8'>Celulares y Telefonía </option><option value='9'>Coleccionables </option><option value='10'>Computación </option><option value='11'>Consolas y Videojuegos </option><option value='12'>Deportes y Fitness </option><option value='13'>Electrodomésticos </option><option value='14'>Electrónica, Audio y Video </option><option value='15'>Herramientas y Construcción </option><option value='16'>Hogar, Muebles y Jardín </option><option value='17'>Industrias y Oficinas </option><option value='18'>Instrumentos Musicales </option><option value='19'>Joyas y Relojes </option><option value='20'>Juegos y Juguetes </option><option value='21'>Libros, Revistas y Comics </option><option value='22'>Música, Películas y Series </option><option value='23'>Recuerdos, Cotillón y Fiestas </option><option value='24'>Ropa, Bolsas y Calzado </option><option value='25'>Salud y Equipamiento Médico </option><option value='26'>Otras Categorías </option><option value='27'>Servicios </option><option value='28'>Belleza y Cuidado Personal </option><option value='29'>Clases,Cursos y Capacitaciones </option><option value='37'>Servicios para Mascotas </option><option value='38'>Transporte </option><option value='39'>Otros Servicios </option><option value='1670'>Fiestas y eventos </option><option value='1679'>Hogar </option><option value='1682'>Imprenta </option><option value='1690'>Vehiculos </option><option value='1701'>Profesionales </option><option value='1712'>Recreación y Turismo </option><option value='1717'>Servicios de reparación </option></select>DEBUG - TYPE integer 2018-09-27 23:17:34 --> 1DEBUG - TYPE integer 2018-09-27 23:17:56 --> 1DEBUG - TYPE integer 2018-09-27 23:18:05 --> 1DEBUG - TYPE integer 2018-09-27 23:18:16 --> 1DEBUG - TYPE integer 2018-09-27 23:18:20 --> 1DEBUG - TYPE string 2018-09-29 07:40:57 --> PPPPDEBUG - TYPE array 2018-09-29 07:42:15 --> Array
+(
+    [url_request] => http://localhost/inicio/
+    [recibo] => Array
+        (
+            [0] => Array
+                (
+                    [id_forma_pago] => 6
+                    [saldo_cubierto] => 0
+                    [fecha_registro] => 2018-09-29 14:33:05
+                    [status] => 6
+                    [fecha_vencimiento] => 2018-10-01
+                    [monto_a_pagar] => 650
+                    [id_proyecto_persona_forma_pago] => 380
+                    [num_email_recordatorio] => 0
+                    [id_usuario_referencia] => 829
+                    [flag_pago_comision] => 0
+                    [flag_envio_gratis] => 0
+                    [costo_envio_cliente] => 100
+                    [id_usuario_venta] => 158
+                    [id_ciclo_facturacion] => 5
+                    [num_ciclos_contratados] => 1
+                    [id_usuario] => 829
+                    [precio] => 650
+                    [costo_envio_vendedor] => 0
+                    [id_servicio] => 37
+                    [resumen_pedido] => 1 AGUILATOR DRON
+                    [estado_envio] => 0
+                    [entregado] => 0
+                    [fecha_entrega] => 2018-09-29 14:33:05
+                    [fecha_pago] => 2018-09-29 14:33:05
+                    [saldo_cubierto_envio] => 0
+                    [fecha_cancelacion] => 2018-09-29 14:33:05
+                    [cancela_cliente] => 0
+                    [se_cancela] => 0
+                    [talla] => 0
+                    [cancela_email] => 0
+                )
+
+        )
+
+    [servicio] => Array
+        (
+            [0] => Array
+                (
+                    [id_servicio] => 37
+                    [nombre_servicio] => AGUILATOR DRON
+                    [descripcion] => 
+                    [status] => 1
+                    [id_clasificacion] => 27
+                    [flag_servicio] => 0
+                    [flag_envio_gratis] => 0
+                    [flag_precio_definido] => 1
+                    [flag_nuevo] => 1
+                    [url_vide_youtube] => https://www.youtube.com/embed/oLbMfZYXLF8
+                    [metakeyword] => Aguilator Dron
+                    [metakeyword_usuario] => ,Dron
+                    [existencia] => 10
+                    [color] => 
+                    [id_usuario] => 158
+                    [precio] => 650
+                    [id_ciclo_facturacion] => 5
+                    [entregas_en_casa] => 0
+                    [telefono_visible] => 0
+                    [venta_mayoreo] => 0
+                    [tiempo_promedio_entrega] => 3
+                    [talla] => 
+                )
+
+        )
+
+    [costo_envio_sistema] => Array
+        (
+            [costo_envio_cliente] => 100
+            [costo_envio_vendedor] => 0
+            [text_envio] => Array
+                (
+                    [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                    [cliente_solo_text] => Más 100 MXN de envío
+                    [cliente] => MÁS 100 MXN DE ENVÍO
+                )
+
+        )
+
+    [id_recibo] => 380
+    [id_usuario_venta] => 158
+    [informacion_envio] => Array
+        (
+        )
+
+)
+DEBUG - TYPE integer 2018-09-29 07:50:50 --> 650DEBUG - TYPE string 2018-09-29 08:03:05 --> 650DEBUG - TYPE string 2018-09-29 08:03:05 --> 1DEBUG - TYPE string 2018-09-29 08:03:05 --> 0DEBUG - TYPE string 2018-09-29 08:03:05 --> 0DEBUG - TYPE string 2018-09-29 08:04:19 --> 1190DEBUG - TYPE string 2018-09-29 08:04:19 --> 1DEBUG - TYPE string 2018-09-29 08:04:19 --> 0DEBUG - TYPE string 2018-09-29 08:04:19 --> 0DEBUG - TYPE string 2018-09-29 08:04:52 --> 1190DEBUG - TYPE string 2018-09-29 08:04:52 --> 1DEBUG - TYPE string 2018-09-29 08:04:52 --> 0DEBUG - TYPE string 2018-09-29 08:04:52 --> 0DEBUG - TYPE integer 2018-09-29 08:09:19 --> 1190DEBUG - TYPE integer 2018-09-29 08:09:27 --> 1190DEBUG - TYPE array 2018-09-29 08:17:21 --> ArrayDEBUG - TYPE array 2018-09-29 08:18:49 --> ArrayDEBUG - TYPE array 2018-09-29 08:19:05 --> ArrayDEBUG - TYPE string 2018-09-29 08:19:40 --> MÁS 100 MXN DE ENVÍODEBUG - TYPE array 2018-09-29 08:19:40 --> ArrayDEBUG - TYPE string 2018-09-29 08:19:47 --> MÁS 100 MXN DE ENVÍODEBUG - TYPE array 2018-09-29 08:19:47 --> ArrayDEBUG - TYPE string 2018-09-29 08:19:59 --> MÁS 100 MXN DE ENVÍODEBUG - TYPE string 2018-09-29 08:21:41 --> 100DEBUG - TYPE array 2018-09-29 08:22:59 --> Array
+(
+    [saldo_pendiente] => 1190
+    [envio] => 100
+    [saldo_pendiente_envio] => 1290
+)
+DEBUG - TYPE array 2018-09-29 08:24:25 --> Array
+(
+    [saldo_pendiente] => 1190
+    [envio] => 100
+    [saldo_pendiente_envio] => 1290
+    [text_envio] => MÁS 100 MXN DE ENVÍO
+)
+DEBUG - TYPE array 2018-09-29 08:25:26 --> Array
+(
+    [saldo_pendiente] => 0
+    [envio] => 0
+    [saldo_pendiente_envio] => 0
+    [text_envio] => 
+)
+DEBUG - TYPE array 2018-09-29 08:27:11 --> Array
+(
+    [saldo_pendiente] => 1190
+    [envio] => 100
+    [saldo_pendiente_envio] => 1290
+    [text_envio] => MÁS 100 MXN DE ENVÍO
+)
+DEBUG - TYPE string 2018-09-29 09:08:28 -->  href="../recomendacion/?q=832" class="a_enid_blue text-center"DEBUG - TYPE string 2018-09-29 09:08:32 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  blue_enid_background white "DEBUG - TYPE string 2018-09-29 09:09:07 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  blue_enid_background white "DEBUG - TYPE string 2018-09-29 09:09:15 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  blue_enid_background white "DEBUG - TYPE string 2018-09-29 09:09:48 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  blue_enid_background white completo"DEBUG - TYPE string 2018-09-29 09:09:58 -->  href="../recomendacion/?q=832" class="a_enid_blue text-center"DEBUG - TYPE string 2018-09-29 09:10:01 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  blue_enid_background white completo"DEBUG - TYPE string 2018-09-29 09:11:09 -->  href="../recomendacion/?q=832" class="a_enid_blue text-center"DEBUG - TYPE string 2018-09-29 09:11:11 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  blue_enid_background white completo"DEBUG - TYPE string 2018-09-29 09:11:30 -->  href="../recomendacion/?q=832" class="a_enid_blue text-center"DEBUG - TYPE string 2018-09-29 09:11:32 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  blue_enid_background white completo"DEBUG - TYPE string 2018-09-29 09:12:33 -->  href="../recomendacion/?q=832" class="a_enid_blue text-center"DEBUG - TYPE string 2018-09-29 09:12:35 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  a_enid_blue white completo "DEBUG - TYPE string 2018-09-29 09:13:01 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago"DEBUG - TYPE string 2018-09-29 09:14:47 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  a_enid_blue white completo "DEBUG - TYPE string 2018-09-29 09:15:00 -->  href="../movimientos/?q=transfer&action=8&operacion=1&recibo=383" class="contenedor_tipo_pago  a_enid_blue white completo "DEBUG - TYPE string 2018-09-29 11:23:02 -->  class="btn_acceder_cuenta_enid a_enid_blue" id="btn_acceder_cuenta_enid" style="color:white!important"DEBUG - TYPE string 2018-09-29 11:23:02 -->  style="color:#000306 !important"DEBUG - TYPE string 2018-09-29 11:23:02 -->  class="btn_acceder_cuenta_enid a_enid_blue" id="btn_acceder_cuenta_enid" style="color: white!important"DEBUG - TYPE string 2018-09-29 11:23:02 -->  class="btn_soy_nuevo" style="color: white!important;"DEBUG - TYPE string 2018-09-29 11:23:02 -->  href="../"DEBUG - TYPE string 2018-09-29 11:23:02 -->  id="olvide-pass" class="recupara-pass" style=""DEBUG - TYPE string 2018-09-29 11:23:02 -->  class="registrar-cuenta"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=76"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=76"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=77"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=77"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=78"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=78"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=126"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=126"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=97"DEBUG - TYPE string 2018-09-29 11:23:10 -->  href="../producto/?producto=97"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=76"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=76"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=77"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=77"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=78"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=78"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=126"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=126"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=97"DEBUG - TYPE string 2018-09-29 11:24:09 -->  href="../producto/?producto=97"DEBUG - TYPE string 2018-09-29 11:24:13 -->  href="../pregunta?tag=71" style="color: white!important;" class="a_enid_black"DEBUG - TYPE string 2018-09-29 11:24:13 -->  class="a_enid_black agregar_a_lista" href="../login/"DEBUG - TYPE string 2018-09-29 11:24:13 -->  style="color:blue;" href="../search/?q3=158"DEBUG - TYPE string 2018-09-29 11:24:54 -->  class="btn_acceder_cuenta_enid a_enid_blue" id="btn_acceder_cuenta_enid" style="color:white!important"DEBUG - TYPE string 2018-09-29 11:24:54 -->  style="color:#000306 !important"DEBUG - TYPE string 2018-09-29 11:24:54 -->  class="btn_acceder_cuenta_enid a_enid_blue" id="btn_acceder_cuenta_enid" style="color: white!important"DEBUG - TYPE string 2018-09-29 11:24:54 -->  class="btn_soy_nuevo" style="color: white!important;"DEBUG - TYPE string 2018-09-29 11:24:54 -->  href="../"DEBUG - TYPE string 2018-09-29 11:24:54 -->  id="olvide-pass" class="recupara-pass" style=""DEBUG - TYPE string 2018-09-29 11:24:54 -->  class="registrar-cuenta"DEBUG - TYPE string 2018-09-29 11:24:58 -->  href="../recomendacion/?q=833" class="a_enid_blue text-center"DEBUG - TYPE string 2018-09-29 11:25:01 -->  href="../movimientos/?q=transfer&action=8&operacion=158&recibo=384" class="contenedor_tipo_pago  a_enid_blue white completo "DEBUG - TYPE string 2018-09-29 11:25:14 -->  href="../movimientos/?q=transfer&action=8&operacion=158&recibo=384" class="contenedor_tipo_pago  a_enid_blue white completo "DEBUG - TYPE string 2018-09-29 11:25:42 -->  href="../movimientos/?q=transfer&action=8&operacion=158&recibo=384" class="contenedor_tipo_pago  a_enid_blue white completo "DEBUG - TYPE string 2018-09-29 11:26:52 -->  href="../movimientos/?q=transfer&action=8&operacion=158&recibo=384" class="contenedor_tipo_pago  a_enid_blue white completo "DEBUG - TYPE string 2018-09-29 11:26:52 --> 1 CAMARA DE VIGILANCIA WIFI MONITOREABLE EN CELULAR DESDE CUALQUIER PARTEDEBUG - TYPE string 2018-09-29 11:27:22 --> 1 CAMARA DE VIGILANCIA WIFI MONITOREABLE EN CELULAR DESDE CUALQUIER PARTEDEBUG - TYPE string 2018-09-29 11:28:19 --> 1 CAMARA DE VIGILANCIA WIFI MONITOREABLE EN CELULAR DESDE CUALQUIER PARTEDEBUG - TYPE double 2018-09-29 11:28:19 --> 878.7DEBUG - TYPE double 2018-09-29 11:28:48 --> 878.7DEBUG - TYPE string 2018-09-29 11:29:55 --> entraDEBUG - TYPE double 2018-09-29 11:29:55 --> 878.7DEBUG - TYPE string 2018-09-29 11:30:25 --> entraDEBUG - TYPE string 2018-09-29 11:30:49 --> 1DEBUG - TYPE string 2018-09-29 11:31:11 --> 5DEBUG - TYPE string 2018-09-29 11:31:29 --> Pieza:DEBUG - TYPE string 2018-09-29 11:31:43 --> Pieza:DEBUG - TYPE string 2018-09-29 11:33:08 --> 1 Pieza:DEBUG - TYPE string 2018-09-29 11:33:45 --> <h3>1 Pieza </h3>DEBUG - TYPE string 2018-09-30 16:00:57 --> 3DEBUG - TYPE string 2018-10-01 00:01:46 --> valoraciones_857025249DEBUG - TYPE array 2018-10-01 00:03:09 --> ArrayDEBUG - TYPE array 2018-10-01 00:04:42 --> ArrayDEBUG - TYPE array 2018-10-01 00:04:49 --> ArrayDEBUG - TYPE array 2018-10-01 00:04:55 --> ArrayDEBUG - TYPE array 2018-10-01 00:17:56 --> ArrayDEBUG - TYPE array 2018-10-01 00:20:19 --> ArrayDEBUG - TYPE array 2018-10-01 00:22:47 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [correos_enviados] => 
+                                )
+
+                        )
+
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:26:47 --> ArrayDEBUG - TYPE array 2018-10-01 00:26:50 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => Array
+                        (
+                            [correos_enviados] => 
+                        )
+
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:26:59 --> Array
+(
+    [correos_enviados] => 
+)
+DEBUG - TYPE array 2018-10-01 00:27:02 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => Array
+                        (
+                            [correos_enviados] => 
+                        )
+
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:28:39 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:28:58 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:31:16 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:31:58 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:32:28 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:32:28 --> Array
+(
+    [accesos] => 0
+    [accesos_a_intento_compra] => 
+    [accesos_contacto] => 
+    [accesos_area_cliente] => 
+    [usuarios] => 2
+    [ventas] => Array
+        (
+            [0] => Array
+                (
+                    [total] => 
+                    [compras_efectivas] => 
+                    [solicitudes] => 
+                    [envios] => 
+                    [cancelaciones] => 
+                )
+
+        )
+
+    [contacto] => 0
+    [labores_resueltas] => 0
+    [valoraciones] => Array
+        (
+            [0] => Array
+                (
+                    [num_valoraciones] => 0
+                    [si_recomendarian] => 
+                    [no_recomendarian] => 
+                )
+
+        )
+
+    [valoraciones_productos] => Array
+        (
+            [0] => Array
+                (
+                    [productos_valorados] => 0
+                )
+
+        )
+
+    [correos] => 
+    [servicios_creados] => 2
+    [conversaciones] => Array
+        (
+            [0] => Array
+                (
+                    [num] => 
+                    [leidas_por_vendedor] => 
+                    [leidas_por_cliente] => 
+                )
+
+        )
+
+    [lista_deseo] => Array
+        (
+            [0] => Array
+                (
+                    [num] => 0
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:33:21 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:33:40 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 37161
+                    [accesos_a_intento_compra] => 442
+                    [accesos_contacto] => 387
+                    [accesos_area_cliente] => 47
+                    [usuarios] => 369
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 310
+                                    [compras_efectivas] => 24
+                                    [solicitudes] => 226
+                                    [envios] => 0
+                                    [cancelaciones] => 14
+                                )
+
+                        )
+
+                    [contacto] => 3
+                    [labores_resueltas] => 57
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 22
+                                    [si_recomendarian] => 22
+                                    [no_recomendarian] => 0
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 12
+                                )
+
+                        )
+
+                    [correos] => 3214
+                    [servicios_creados] => 248
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 56
+                                    [leidas_por_vendedor] => 15
+                                    [leidas_por_cliente] => 4
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 33
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:36:53 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 2
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 2
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:37:24 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 28957
+                    [accesos_a_intento_compra] => 301
+                    [accesos_contacto] => 331
+                    [accesos_area_cliente] => 34
+                    [usuarios] => 347
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 238
+                                    [compras_efectivas] => 0
+                                    [solicitudes] => 225
+                                    [envios] => 0
+                                    [cancelaciones] => 13
+                                )
+
+                        )
+
+                    [contacto] => 3
+                    [labores_resueltas] => 33
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 20
+                                    [si_recomendarian] => 20
+                                    [no_recomendarian] => 0
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 10
+                                )
+
+                        )
+
+                    [correos] => 250
+                    [servicios_creados] => 216
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 56
+                                    [leidas_por_vendedor] => 15
+                                    [leidas_por_cliente] => 4
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 33
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:38:16 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 58474
+                    [accesos_a_intento_compra] => 867
+                    [accesos_contacto] => 587
+                    [accesos_area_cliente] => 341
+                    [usuarios] => 574
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 310
+                                    [compras_efectivas] => 24
+                                    [solicitudes] => 272
+                                    [envios] => 0
+                                    [cancelaciones] => 14
+                                )
+
+                        )
+
+                    [contacto] => 16
+                    [labores_resueltas] => 140
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 25
+                                    [si_recomendarian] => 25
+                                    [no_recomendarian] => 0
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 15
+                                )
+
+                        )
+
+                    [correos] => 9733
+                    [servicios_creados] => 323
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 61
+                                    [leidas_por_vendedor] => 20
+                                    [leidas_por_cliente] => 6
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 33
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:38:48 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 58474
+                    [accesos_a_intento_compra] => 867
+                    [accesos_contacto] => 587
+                    [accesos_area_cliente] => 341
+                    [usuarios] => 574
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 310
+                                    [compras_efectivas] => 24
+                                    [solicitudes] => 272
+                                    [envios] => 0
+                                    [cancelaciones] => 14
+                                )
+
+                        )
+
+                    [contacto] => 16
+                    [labores_resueltas] => 140
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 25
+                                    [si_recomendarian] => 25
+                                    [no_recomendarian] => 0
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 15
+                                )
+
+                        )
+
+                    [correos] => 9733
+                    [servicios_creados] => 323
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 61
+                                    [leidas_por_vendedor] => 20
+                                    [leidas_por_cliente] => 6
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 33
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:39:37 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 58474
+                    [accesos_a_intento_compra] => 867
+                    [accesos_contacto] => 587
+                    [accesos_area_cliente] => 341
+                    [usuarios] => 574
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 310
+                                    [compras_efectivas] => 24
+                                    [solicitudes] => 272
+                                    [envios] => 0
+                                    [cancelaciones] => 14
+                                )
+
+                        )
+
+                    [contacto] => 16
+                    [labores_resueltas] => 140
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 25
+                                    [si_recomendarian] => 25
+                                    [no_recomendarian] => 0
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 15
+                                )
+
+                        )
+
+                    [correos] => 9733
+                    [servicios_creados] => 323
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 61
+                                    [leidas_por_vendedor] => 20
+                                    [leidas_por_cliente] => 6
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 33
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE array 2018-10-01 00:40:01 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+DEBUG - TYPE string 2018-10-01 01:09:09 --> uNiOnDEBUG - TYPE string 2018-10-01 01:09:09 --> 0x3931333531343536DEBUG - TYPE string 2018-10-01 01:09:09 --> cOnCaTDEBUG - TYPE string 2018-10-01 01:09:09 --> /**/DEBUG - TYPE string 2018-10-01 01:09:09 --> 999999.9DEBUG - TYPE string 2018-10-01 01:09:09 --> (DEBUG - TYPE string 2018-10-01 01:09:09 --> &DEBUG - TYPE string 2018-10-01 01:09:09 --> ?DEBUG - TYPE string 2018-10-01 01:09:09 --> ?=DEBUG - TYPE string 2018-10-01 01:09:09 --> dropDEBUG - TYPE string 2018-10-01 01:09:09 --> deleteDEBUG - TYPE array 2018-10-01 01:12:01 --> Array
+(
+    [0] => q
+)
+DEBUG - TYPE array 2018-10-01 01:12:47 --> Array
+(
+    [0] => 
+)
+DEBUG - TYPE array 2018-10-01 01:13:13 --> Array
+(
+    [0] => q
+)
+DEBUG - TYPE array 2018-10-01 01:13:23 --> Array
+(
+    [0] => q
+)
+DEBUG - TYPE array 2018-10-01 01:13:25 --> Array
+(
+    [0] => id_servicio
+)
+DEBUG - TYPE array 2018-10-01 01:13:26 --> Array
+(
+    [0] => id_servicio
+)
+DEBUG - TYPE array 2018-10-01 01:13:26 --> Array
+(
+    [0] => id_servicio
+)
+DEBUG - TYPE array 2018-10-01 01:13:45 --> Array
+(
+    [0] => q
+)
+DEBUG - TYPE array 2018-10-01 01:13:48 --> Array
+(
+    [0] => id_servicio
+)
+DEBUG - TYPE array 2018-10-01 01:13:48 --> Array
+(
+    [0] => id_servicio
+)
+DEBUG - TYPE array 2018-10-01 01:13:48 --> Array
+(
+    [0] => id_servicio
+)
+DEBUG - TYPE array 2018-10-01 01:13:56 --> Array
+(
+    [0] => q
+)
+DEBUG - TYPE array 2018-10-01 01:13:58 --> Array
+(
+    [0] => id_servicio
+)
+DEBUG - TYPE array 2018-10-01 01:13:58 --> Array
+(
+    [0] => id_servicio
+)
+DEBUG - TYPE array 2018-10-01 01:13:58 --> Array
+(
+    [0] => id_servicio
+)
+DEBUG - TYPE string 2018-10-01 01:14:50 --> playeraDEBUG - TYPE NULL 2018-10-01 01:14:52 --> DEBUG - TYPE NULL 2018-10-01 01:14:52 --> DEBUG - TYPE NULL 2018-10-01 01:14:52 --> DEBUG - TYPE NULL 2018-10-01 01:14:52 --> DEBUG - TYPE NULL 2018-10-01 01:14:52 --> DEBUG - TYPE NULL 2018-10-01 01:14:53 --> DEBUG - TYPE string 2018-10-01 01:15:32 --> playeraDEBUG - TYPE string 2018-10-01 01:15:35 --> 241DEBUG - TYPE string 2018-10-01 01:15:35 --> 181DEBUG - TYPE string 2018-10-01 01:15:35 --> 102DEBUG - TYPE string 2018-10-01 01:21:25 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:25 --> 0x3931333531343536DEBUG - TYPE string 2018-10-01 01:21:25 --> cOnCaTDEBUG - TYPE string 2018-10-01 01:21:25 --> /**/DEBUG - TYPE string 2018-10-01 01:21:25 --> 999999.9DEBUG - TYPE string 2018-10-01 01:21:25 --> (DEBUG - TYPE string 2018-10-01 01:21:25 --> &DEBUG - TYPE string 2018-10-01 01:21:25 --> ?DEBUG - TYPE string 2018-10-01 01:21:25 --> ?=DEBUG - TYPE string 2018-10-01 01:21:25 --> dropDEBUG - TYPE string 2018-10-01 01:21:25 --> deleteDEBUG - TYPE string 2018-10-01 01:21:25 --> $DEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> 0x3931333531343536DEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> cOnCaTDEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> /**/DEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> 999999.9DEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> (DEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> &DEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> ?DEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> ?=DEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> dropDEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> deleteDEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:47 --> $DEBUG - TYPE string 2018-10-01 01:21:47 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:21:59 --> uNiOnDEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:23:03 --> uNiOn
+DEBUG - TYPE string 2018-10-01 01:45:59 --> Llega
+DEBUG - TYPE string 2018-10-01 01:46:46 --> Llega
+DEBUG - TYPE string 2018-10-01 01:46:58 --> Llega
+DEBUG - TYPE boolean 2018-10-01 01:49:19 --> 
+DEBUG - TYPE boolean 2018-10-01 01:49:42 --> 
+DEBUG - TYPE boolean 2018-10-01 01:49:48 --> 
+DEBUG - TYPE boolean 2018-10-01 01:49:53 --> 
+DEBUG - TYPE boolean 2018-10-01 01:50:58 --> 
+DEBUG - TYPE string 2018-10-01 01:53:51 --> 1
+DEBUG - TYPE string 2018-10-01 02:10:48 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:48 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:48 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:49 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:53 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:54 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:55 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:55 --> ok
+DEBUG - TYPE string 2018-10-01 02:10:55 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:04 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:04 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:04 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:05 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:05 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:08 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:11:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:22 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:22 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:22 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:22 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:22 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:22 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:22 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:23 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:23 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:23 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:23 --> ok
+DEBUG - TYPE string 2018-10-01 02:15:28 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:58 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:58 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:58 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:58 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:58 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:58 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:58 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:59 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:59 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:59 --> ok
+DEBUG - TYPE string 2018-10-01 02:17:59 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:06 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:18:07 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:19 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:19 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:19 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:19 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:19 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:19 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:20 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:20 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:20 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:20 --> ok
+DEBUG - TYPE string 2018-10-01 02:19:20 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:15 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:15 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:15 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:15 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:15 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:15 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:15 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:15 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:16 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:16 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:16 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:46 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:46 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:46 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:47 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:47 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:47 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:47 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:47 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:47 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:47 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:47 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:51 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:20:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:09 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:23 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:26 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:42 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:42 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:42 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:43 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:43 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:43 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:43 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:43 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:43 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:43 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:43 --> ok
+DEBUG - TYPE string 2018-10-01 02:25:49 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:33 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:33 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:33 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:34 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:34 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:34 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:34 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:34 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:34 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:34 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:34 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:26:52 --> ok
+DEBUG - TYPE string 2018-10-01 02:27:33 --> ok
+DEBUG - TYPE string 2018-10-01 02:27:37 --> ok
+DEBUG - TYPE string 2018-10-01 02:34:25 --> ok
+DEBUG - TYPE string 2018-10-01 02:34:31 --> ok
+DEBUG - TYPE string 2018-10-01 02:34:50 --> ok
+DEBUG - TYPE string 2018-10-01 02:35:27 --> ok
+DEBUG - TYPE string 2018-10-01 02:35:34 --> ok
+DEBUG - TYPE string 2018-10-01 02:37:55 --> ok
+DEBUG - TYPE string 2018-10-01 02:38:20 --> ok
+DEBUG - TYPE string 2018-10-01 02:39:16 --> ok
+DEBUG - TYPE string 2018-10-01 02:46:45 --> ok
+DEBUG - TYPE string 2018-10-01 02:51:32 --> ok
+DEBUG - TYPE string 2018-10-01 02:52:30 --> ok
+DEBUG - TYPE string 2018-10-01 02:53:10 --> ok
+DEBUG - TYPE string 2018-10-01 02:53:39 --> ok
+DEBUG - TYPE string 2018-10-01 02:54:32 --> ok
+DEBUG - TYPE string 2018-10-01 02:55:42 --> ok
+DEBUG - TYPE string 2018-10-01 02:59:59 --> ok
+DEBUG - TYPE string 2018-10-01 03:01:09 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:21 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:21 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:22 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:22 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:22 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:22 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:22 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:22 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:22 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:23 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:23 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:29 --> ok
+DEBUG - TYPE string 2018-10-01 03:03:37 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:49 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:49 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:49 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:50 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:50 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:50 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:50 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:50 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:50 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:50 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:50 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:53 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:56 --> ok
+DEBUG - TYPE string 2018-10-01 03:04:58 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:10 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:10 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:10 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:10 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:10 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:11 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:11 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:11 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:11 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:11 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:11 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:13 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:21 --> ok
+DEBUG - TYPE string 2018-10-01 03:06:26 --> ok
+DEBUG - TYPE string 2018-10-01 03:09:54 --> ok
+DEBUG - TYPE string 2018-10-01 03:14:10 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:15 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:15 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:16 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:16 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:16 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:16 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:16 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:16 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:16 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:17 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:17 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:19 --> ok
+DEBUG - TYPE string 2018-10-01 03:17:44 --> ok
+DEBUG - TYPE string 2018-10-01 03:18:42 --> ok
+DEBUG - TYPE string 2018-10-01 03:19:13 --> ok
+DEBUG - TYPE string 2018-10-01 03:19:57 --> ok
+DEBUG - TYPE string 2018-10-01 03:21:26 --> ok
+DEBUG - TYPE string 2018-10-01 03:21:37 --> ok
+DEBUG - TYPE string 2018-10-01 03:21:48 --> ok
+DEBUG - TYPE string 2018-10-01 03:22:04 --> ok
+DEBUG - TYPE string 2018-10-01 03:22:24 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:05 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:05 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:05 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:06 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:06 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:06 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:06 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:06 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:06 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:06 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:06 --> ok
+DEBUG - TYPE string 2018-10-01 03:23:12 --> ok
+DEBUG - TYPE string 2018-10-01 03:24:28 --> ok
+DEBUG - TYPE string 2018-10-01 03:25:14 --> ok
+DEBUG - TYPE string 2018-10-01 03:25:56 --> ok
+DEBUG - TYPE string 2018-10-01 03:27:09 --> ok

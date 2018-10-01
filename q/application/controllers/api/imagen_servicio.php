@@ -9,7 +9,13 @@ class Imagen_servicio extends REST_Controller{
   function servicio_GET(){
 
       $param      =  $this->get();
-      $response   =  $this->imagen_servicio_model->get_img_servicio($param["id_servicio"]);
+      $response = 2;
+      if (if_ext($param ,  "id_servicio")) {        
+        
+        $in         =   ["id_servicio" => $param["id_servicio"]];
+        $f          =   ["id_imagen" , "principal"];
+        $response   =  $this->imagen_servicio_model->get($f, $in , 8 , "principal" );  
+      }      
       $this->response($response);   
   }
   function index_POST(){              
@@ -24,7 +30,28 @@ class Imagen_servicio extends REST_Controller{
       $response         =  $this->imagen_servicio_model->insert($params);          
     }
     $this->response($response);
+  }
+  /**/
+  function principal_PUT(){
+    $param    =  $this->put();
+    $response = 2;
+    if (if_ext($param , "id_imagen,id_servicio" )) {
 
+      $id_servicio  = $param["id_servicio"];
+      $id_imagen    = $param["id_imagen"];
+
+      $set = ["principal"   => 0];
+      $in  = ["id_servicio" => $id_servicio];
+      $response = false;
+      if ($this->imagen_servicio_model->update($set, $in , 10 )) {
+        
+        $set = ["principal"   => 1];
+        $in  = ["id_servicio" => $id_servicio , "id_imagen" => $id_imagen];
+        $response =  $this->imagen_servicio_model->update($set, $in );
+      }
+      
+    }
+    $this->response($response);
   }
   function index_DELETE(){
     

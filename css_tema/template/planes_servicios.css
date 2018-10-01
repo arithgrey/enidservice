@@ -1,3 +1,14 @@
+.foto_producto, .imagen_principal{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    text-decoration: underline!important;
+}
+.selector_principal{
+    padding: .5px;
+    border: solid;
+    border-color: blue;
+}
+
 .contenedor_compartir_redes_sociales{
     margin-top: 25px;
 }

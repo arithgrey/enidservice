@@ -523,9 +523,6 @@ function set_option(key , value ){
 function get_option(key){
 	return option[key];
 }
-
-/**/
-
 /**/
 function transforma_mayusculas(x){
 	
@@ -711,4 +708,7 @@ var desbloqueda_form = function(form){
 var flex = function(elemento){
 
 	$(elemento).css("display" ,  "flex");	
+}
+var get_valor_selected = function(select){
+	return get_parameter(select +" option:selected");
 }

@@ -1,11 +1,11 @@
     <div class="contenedor_inf_servicios">
-        <?=div("INFORMACIÓN SOBRE TU".entrega_data_campo($servicio ,"nombre_servicio"). 
+        <?=div("INFORMACIÓN SOBRE TU".get_campo($servicio ,"nombre_servicio"). 
                 icon('fa fa-pencil text_desc_servicio icon-pencil')      , 
                 ["class"=>"titulo_seccion_producto titulo_producto_servicio"],
                 1
 
         )?>
-        <?=div(entrega_data_campo($servicio , 'descripcion') , 
+        <?=div(get_campo($servicio , 'descripcion') , 
             ["class"    =>  "text_desc_servicio contenedor_descripcion"],
             1
         )?>        
@@ -16,7 +16,7 @@
                     "name"  =>  "q" , 
                     "value" =>"descripcion"] , 1)?>
                 <?=div(
-                    "-".entrega_data_campo($servicio , 'descripcion'), 
+                    "-".get_campo($servicio , 'descripcion'), 
                     ["id"   =>  "summernote"],
                     1
                 )?>    

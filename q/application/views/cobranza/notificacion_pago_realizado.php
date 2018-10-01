@@ -1,12 +1,12 @@
 <?php 
 	
-	$saldo_cubierto =  entrega_data_campo($recibo , "saldo_cubierto");
-	$costo_envio_cliente =  entrega_data_campo($recibo , "costo_envio_cliente");
+	$saldo_cubierto =  get_campo($recibo , "saldo_cubierto");
+	$costo_envio_cliente =  get_campo($recibo , "costo_envio_cliente");
 	$total_cubierto =  $saldo_cubierto + $costo_envio_cliente;
-	$resumen_pedido =  entrega_data_campo($recibo , "resumen_pedido");
-	$cantidad =  entrega_data_campo($recibo , "num_ciclos_contratados");
-	$precio =  entrega_data_campo($recibo , "precio");
-	$monto_a_pagar = entrega_data_campo($recibo , "monto_a_pagar");
+	$resumen_pedido =  get_campo($recibo , "resumen_pedido");
+	$cantidad =  get_campo($recibo , "num_ciclos_contratados");
+	$precio =  get_campo($recibo , "precio");
+	$monto_a_pagar = get_campo($recibo , "monto_a_pagar");
 	
 
 ?>
@@ -34,9 +34,9 @@
 			</tr>
 			<tr>
 				<td>
-					<?=strtoupper(entrega_data_campo($usuario_venta , "nombre" ))?>
-					<?=strtoupper(entrega_data_campo($usuario_venta , "apellido_materno" ))?>
-					<?=strtoupper(entrega_data_campo($usuario_venta , "apellido_paterno" ))?>			
+					<?=strtoupper(get_campo($usuario_venta , "nombre" ))?>
+					<?=strtoupper(get_campo($usuario_venta , "apellido_materno" ))?>
+					<?=strtoupper(get_campo($usuario_venta , "apellido_paterno" ))?>			
 				</td>
 				<?=get_td($total_cubierto." MXN")?>
 			</tr>
