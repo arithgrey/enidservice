@@ -273,7 +273,10 @@
     $this->db->select($params);
     foreach ($params_where as $key => $value) {
       $this->db->where($key , $value);
-    }        
+    } 
+    if($order !=  ''){
+      $this->db->order_by($order, $type_order);  
+    }       
     return $this->db->get("proyecto_persona_forma_pago")->result_array();
   }
   

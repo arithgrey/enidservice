@@ -12,7 +12,7 @@ $(document).ready(function(){
 /**/
 function configura_recomendaria(e){	
 	/**/
-	recomendaria =  e.target.id;
+	recomendaria =  get_parameter_enid($(this) , "id");
 	set_option("recomendaria" , parseInt(recomendaria));
 	/*hacemos efecto selección*/
 	$(".recomendaria").css("color" , "black");
@@ -22,7 +22,7 @@ function configura_recomendaria(e){
 }
 /**/
 function configura_calificacion(e){
-	calificacion =  e.target.id;
+	calificacion =  get_parameter_enid($(this) , "id");
 	set_option("calificacion" , parseInt(calificacion));		
 	
 	/*DEJAMOS EN BLANCO TODAS PARA INICIAR*/

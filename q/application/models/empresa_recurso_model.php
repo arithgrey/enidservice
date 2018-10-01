@@ -11,6 +11,9 @@ class Empresa_recurso_model extends CI_Model{
     foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
     }
+    if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+    }       
     return $this->db->get("empresa_recurso")->result_array();
   }
   

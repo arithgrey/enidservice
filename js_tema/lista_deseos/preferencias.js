@@ -44,7 +44,7 @@ $(document).ready(function(){
 /**/
 function agrega_interes(e){
 	
-    var id_clasificacion = e.target.id;
+    var id_clasificacion = get_parameter_enid($(this) , "id");
     set_option("id_clasificacion" , id_clasificacion);
 	var url = "../q/index.php/api/usuario_clasificacion/interes/format/json/";
 	var data_send = {id_clasificacion : id_clasificacion};

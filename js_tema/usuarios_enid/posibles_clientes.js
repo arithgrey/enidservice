@@ -16,7 +16,7 @@ function carga_info_ventas_mensuales(){
 		/**/																		
 		llenaelementoHTML(".place_info_clientes_del_mes" , data);
 		$(".info_persona").click(function(e){
-			id_persona =  e.target.id;
+			id_persona =  get_parameter_enid($(this) , "id");
 			set_option("persona", id_persona);
 			carga_info_persona();	
 		});			
@@ -49,7 +49,7 @@ function carga_posibles_clientes(e){
 		/**/																		
 		llenaelementoHTML(".place_info_posibles_clientes" , data);
 		$(".info_persona").click(function(e){
-			id_persona =  e.target.id;
+			id_persona =  get_parameter_enid($(this) , "id");
 			set_option("persona", id_persona);
 			carga_info_persona();	
 		});			
@@ -228,7 +228,7 @@ function agenda_llamada_recicle(e){
 }
 /**/
 function asigna_valor_persona_agendado(e){
-	id_persona =  e.target.id;
+	id_persona =  get_parameter_enid($(this) , "id");
 	set_option("persona", id_persona);		
 }
 /**/

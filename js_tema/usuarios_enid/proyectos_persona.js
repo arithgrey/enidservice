@@ -14,7 +14,7 @@ function get_proyectos_persona(){
 		llenaelementoHTML(".place_proyectos" , data);				
 
 		$(".solicitar_desarrollo").click(function(e){
-			id_proyecto =  e.target.id;	
+			id_proyecto =  get_parameter_enid($(this) , "id");	
 			set_proyecto(id_proyecto);
 			carga_tikets_usuario();
 		});
@@ -113,7 +113,7 @@ function carga_tikets_usuario(){
 			$(".solicitar_desarrollo_form").click(carga_form_solicitar_desarrollo);
 			/*Ver detalle ticket completo*/
 			$(".ver_detalle_ticket").click(function(e){
-				set_id_ticket(e.target.id); 
+				set_id_ticket(get_parameter_enid($(this) , "id")); 
 				carga_info_detalle_ticket();
 			});
 			/**/
@@ -183,7 +183,7 @@ function carga_info_detalle_ticket(){
 /**/
 function actualizar_estatus_ticket(e){
 	
-	nuevo_estado= e.target.id;
+	nuevo_estado= get_parameter_enid($(this) , "id");
 	url =  "../q/index.php/api/tickets/status/format/json/";	
 	data_send =  {"id_ticket" : get_id_ticket() , "status" : nuevo_estado };				
 
@@ -228,7 +228,7 @@ function registra_tarea(e){
 function actualiza_tareas(e){
 		
 
-	set_id_tarea(e.target.id);
+	set_id_tarea(get_parameter_enid($(this) , "id"));
 	nuevo_valor = this.value;
 
 	url =  "../q/index.php/api/tarea/estado/format/json/";	
@@ -279,7 +279,7 @@ function regresar_list_posible_cliente(){
 function modificar_asunto(e){
 	
 	recorre_web_version_movil();
-	asunto_ticket = e.target.id;
+	asunto_ticket = get_parameter_enid($(this) , "id");
 	$(".mof_asunto").val(asunto_ticket);
 	/**/
 	$(".form-actualizar-asunto").submit(actualiza_asunto_ticket);

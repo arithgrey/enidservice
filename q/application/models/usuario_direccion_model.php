@@ -27,6 +27,9 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
+        if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+        }
         return $this->db->get("usuario_direccion")->result_array();
     }
     function get_num($param){

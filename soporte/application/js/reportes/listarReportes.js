@@ -17,7 +17,7 @@ function tryupdatestatus(){
 }
 /**/
 function update_repo(e){
-      element_update = e.target.id;
+      element_update = get_parameter_enid($(this) , "id");
 
       llenaelementoHTML(".num_repo" , element_update);
       $(".update_element_id").val(element_update);

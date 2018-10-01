@@ -25,6 +25,9 @@ class img_model extends CI_Model {
     foreach ($params_where as $key => $value) {
         $this->db->where($key , $value);
     }
+    if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+    }       
     return $this->db->get("imagen")->result_array();
   }
   /**/

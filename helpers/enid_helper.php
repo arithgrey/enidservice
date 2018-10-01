@@ -1,13 +1,7 @@
 <?php
 
 /*
-----  agregar order by en todas las tablas -> 
-      if($order !=  ''){
-          $this->db->order_by($order, $type_order);  
-      }       
-----  Pasar e.target.id por  get_parameter_enid($(this) , "id")
 ----  Pasar a set functions
-----  Pasar a create los insert
 ---   js
 ----  views
 ---   controllers

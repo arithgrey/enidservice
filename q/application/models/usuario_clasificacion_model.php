@@ -12,6 +12,9 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
+        if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+        }
         return $this->db->get("usuario_clasificacion")->result_array();
     }
     private function delete( $params_where =[] , $limit =1){              

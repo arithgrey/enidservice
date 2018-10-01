@@ -102,7 +102,7 @@ function response_verifica_tipo_negocio(){
 /**/
 function carga_data_contactos_efectivos(e){
 	/**/		
-	var fecha_registro 	=  e.target.id;			
+	var fecha_registro 	=  get_parameter_enid($(this) , "id");			
 	var url 			=  "../persona/index.php/api/posiblesclientes/tipificacion/format/json/";		
 	var data_send 		= {"fecha_registro" : fecha_registro ,  "tipificacion" :  get_tipificacion() , "id_usuario": get_id_usuario()}	
 	request_enid( "GET",  data_send , url , response_carga_data_contactos_efectivos , ".place_info_posibles_clientes");
@@ -113,7 +113,7 @@ function response_carga_data_contactos_efectivos(data){
 	/**/																		
 	llenaelementoHTML(".place_info_posibles_clientes" , data);
 	$(".info_persona").click(function(e){
-		id_persona =  e.target.id;
+		id_persona =  get_parameter_enid($(this) , "id");
 		set_option("id_persona",id_persona);
 		carga_info_persona();	
 	});			

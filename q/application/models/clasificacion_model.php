@@ -48,13 +48,16 @@ class clasificacion_model extends CI_Model{
       return  $this->db->query($query_get)->result_array();
         
   }   
-  function get($params=[], $params_where =[] , $limit =1){
+  function get($params=[], $params_where =[] , $limit =1, $order = '', $type_order='DESC'){
     $params = implode(",", $params);
     $this->db->limit($limit);
     $this->db->select($params);
     foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
     } 
+    if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+    }       
     return $this->db->get("clasificacion")->result_array();
   }
   function get_clasificacion_por_palabra_clave($param){

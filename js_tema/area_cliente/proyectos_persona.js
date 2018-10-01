@@ -38,7 +38,7 @@ function response_carga_compras_usuario(data){
 	llenaelementoHTML(place  , data);								
 	$(".solicitar_desarrollo").click(function(e){
 		
-		var id_proyecto 	=  e.target.id;	
+		var id_proyecto 	=  get_parameter_enid($(this) , "id");	
 		set_option("id_proyecto" , id_proyecto);
 		carga_tikets_usuario_servicio();
 	});				
@@ -53,7 +53,7 @@ function response_carga_compras_usuario(data){
 /**/
 function carga_informacion_envio(e){
 	
-	var id_recibo =  e.target.id;	
+	var id_recibo =  get_parameter_enid($(this) , "id");	
 	set_option("recibo" , id_recibo);
 	debugger;
 	carga_informacion_envio_complete();

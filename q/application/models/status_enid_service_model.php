@@ -19,6 +19,9 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
+        if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+        }
         return $this->db->get("status_enid_service")->result_array();
     }
     

@@ -153,7 +153,7 @@ function response_registro_ticket(data){
 /**/
 function set_estatus_ticket(e){
 	
-	var nuevo_estado 	= 	e.target.id;
+	var nuevo_estado 	= 	get_parameter_enid($(this) , "id");
 	var url 			=  	"../q/index.php/api/tickets/status/format/json/";	
 	var data_send 		=  	{"id_ticket" : get_option("id_ticket") , "status" : nuevo_estado };				
 	request_enid( "PUT",  data_send, url, function(){}, ".place_proyectos");
@@ -193,7 +193,7 @@ function response_carga_ticket(data){
 /**/
 function carga_formulario_respuesta_ticket(e){
 	
-	var tarea 		= e.target.id;
+	var tarea 		= get_parameter_enid($(this) , "id");
 	set_option("tarea", tarea);	
 	var url 		=  	"../q/index.php/api/tickets/formulario_respuesta/format/json/";	
 	var data_send 	=  	{"tarea" : tarea};				
@@ -208,7 +208,7 @@ function carga_formulario_respuesta_ticket(e){
 /**/
 function carga_comentarios_tareas(e){
 
-	var tarea 		= 	e.target.id;
+	var tarea 		= 	get_parameter_enid($(this) , "id");
 	set_option("tarea", tarea);	
 	var url 		=  	"../q/index.php/api/respuesta/respuestas/format/json/";	
 	var data_send 	=  	{"tarea" : tarea};				
@@ -235,7 +235,7 @@ function response_carga_comentario_tareas(data){
 	var seccion = get_option("seccion");
 	llenaelementoHTML(seccion , data);
 	$(".ocultar_comentarios").click(function(e){
-		set_option("tarea", e.target.id);		
+		set_option("tarea", get_parameter_enid($(this) , "id"));		
 		$(seccion).empty();			
 	});
 	
@@ -286,7 +286,7 @@ function response_carga_tickets(data){
 	llenaelementoHTML(".place_proyectos" , data);										
 	/*Ver detalle ticket completo*/
 	$(".ver_detalle_ticket").click(function(e){
-		set_option("id_ticket", e.target.id); 
+		set_option("id_ticket", get_parameter_enid($(this) , "id")); 
 		carga_info_detalle_ticket();
 	});
 	/**/
@@ -302,7 +302,7 @@ function response_carga_tickets(data){
 /**/
 function actualiza_tareas(e){
 
-	set_option("id_tarea" , e.target.id);
+	set_option("id_tarea" , get_parameter_enid($(this) , "id"));
 	var nuevo_valor 	= this.value;
 	var url 			=  "../q/index.php/api/tarea/estado/format/json/";	
 	var data_send 		= {"id_tarea" : get_option("id_tarea") ,  "nuevo_valor" : nuevo_valor , "id_ticket" : get_option("id_ticket") };				

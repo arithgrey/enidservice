@@ -54,7 +54,7 @@ $(document).ready(function(){
 	
 	$(".preguntas").click(function(e){
 
-		if(e.target.id ==  0){
+		if(get_parameter_enid($(this) , "id") ==  0){
 			$(".btn_preguntas_compras").addClass("a_enid_blue");
 			$(".btn_preguntas_compras").removeClass("a_enid_black");
 			$(".btn_preguntas_ventas").addClass("a_enid_black");
@@ -65,7 +65,7 @@ $(document).ready(function(){
 			$(".btn_preguntas_compras").addClass("a_enid_black");		
 		}		
 		/**/
-		set_option( "modalidad_ventas", e.target.id);  		
+		set_option( "modalidad_ventas", get_parameter_enid($(this) , "id"));  		
 		$(".contenedor_opciones_buzon").show();
 		carga_buzon();
 	});
@@ -131,7 +131,7 @@ function valida_accion_inicial(){
 }
 /**/
 function alcance_producto(e){
-	var tipo 		=  e.target.id;	
+	var tipo 		=  get_parameter_enid($(this) , "id");	
 	var url 		=  "../q/index.php/api/servicio/alcance_producto/format/json/";		
 	var data_send 	=  {tipo:tipo};			
 	request_enid( "GET",  data_send, url , function(data){

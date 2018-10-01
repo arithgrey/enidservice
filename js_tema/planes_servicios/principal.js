@@ -148,7 +148,7 @@ function respuesta_informacion_servicio(data) {
 function actualiza_entregas_en_casa(e){
 
 	var url 		=  "../q/index.php/api/servicio/entregas_en_casa/format/json/";	
-	var data_send  	= {entregas_en_casa : e.target.id , id_servicio : get_option("servicio")};
+	var data_send  	= {entregas_en_casa : get_parameter_enid($(this) , "id") , id_servicio : get_option("servicio")};
 	request_enid( "PUT",  data_send , url , function(){
 		carga_informacion_servicio(4);
 	} , ".place_sobre_el_negocio" );
@@ -165,7 +165,7 @@ function actualiza_telefono_visible(){
 function actualiza_ventas_mayoreo(e){
 	
 	var  url 		=  	"../q/index.php/api/servicio/ventas_mayoreo/format/json/";	
-	var  data_send  = 	{venta_mayoreo : e.target.id , id_servicio : get_option("servicio")};	
+	var  data_send  = 	{venta_mayoreo : get_parameter_enid($(this) , "id") , id_servicio : get_option("servicio")};	
 	request_enid("PUT", data_send , url , function(){
 		carga_informacion_servicio(4);
 	} , ".place_sobre_el_negocio");	
@@ -464,7 +464,7 @@ function respuestas_cargar_lista_servicios(data){
 }
 /**/
 function agrega_quita_servicio_grupo(e) {
-	var   id_servicio 	= e.target.id;
+	var   id_servicio 	= get_parameter_enid($(this) , "id");
 	set_option("servicio", id_servicio);	
 	var data_send 		= $.param({
 								"id_servicio" : get_option("servicio"),
@@ -512,7 +512,7 @@ function muestra_seccion_porcentaje_ganancia_afiliados() {
 function configuracion_inicial(e) {
 
 
-	set_option("modalidad", e.target.id);
+	set_option("modalidad", get_parameter_enid($(this) , "id"));
 	if (get_option("modalidad") == 1) {
 		set_option("id_ciclo_facturacion", 9);
 		$(".text_modalidad").text("Servicio");
@@ -1111,7 +1111,7 @@ function muestra_sugerencias_meta_key_words(data){
 }
 /**/
 function auto_complete_metakeyword(e){
-	var tag =  e.target.id; 
+	var tag =  get_parameter_enid($(this) , "id"); 
 	$(".metakeyword_usuario").val(tag);	
 	$(".form_tag").submit();
 }

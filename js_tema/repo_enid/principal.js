@@ -59,7 +59,7 @@ function response_comparativa_dia(data){
 function carga_miembros_empresa(e){
 
 	$(".place_miembros").empty();
-	var empresa = e.target.id;
+	var empresa = get_parameter_enid($(this) , "id");
 	var url =  "../q/index.php/api/enid/miembros_cuenta/format/json/";
 	var data_send = {"id_empresa" :  empresa};
 	
@@ -71,7 +71,7 @@ function carga_miembros_empresa(e){
 /**/
 function data_miembros_g(e){	
 
-	var periodo 	=  	e.target.id;	
+	var periodo 	=  	get_parameter_enid($(this) , "id");	
 	var url 		= 	"../q/index.php/api/enid/resumen_global_admin_p/format/json/";  
 	var data_send 	= 	{periodo :  periodo};	
 	request_enid( "GET",  data_send , url, 1, ".info-resumen-prospecto", "" , ".info-resumen-prospecto" );
@@ -79,7 +79,7 @@ function data_miembros_g(e){
 }
 /*
 function data_eventos_g(e){
-	var periodo 	=  e.target.id;	
+	var periodo 	=  get_parameter_enid($(this) , "id");	
 	var url 		=  "../q/index.php/api/enid/resumen_global_admin_e/format/json/"; 
 	var data_send 	= {periodo :  periodo}; 
 	request_enid( "GET",  data_send, url, 1, ".info-resumen-prospecto" , "" , ".info-resumen-prospecto" ); 
@@ -95,7 +95,7 @@ function carga_nuevos_miembros(){
 /**/
 function evaluar(e){
 
-	incidencia = e.target.id;
+	incidencia = get_parameter_enid($(this) , "id");
 	set_option("inicidencia",incidencia);
 }
 /**/
@@ -151,7 +151,7 @@ function carga_info_proyectos(e){
 	if(num_proyectos > 0 ) {
 		/**/
 		$("#mas_info").modal("show");
-		var fecha 		=  e.target.id;
+		var fecha 		=  get_parameter_enid($(this) , "id");
 		var data_send 	= { "fecha" : fecha}; 	
 		var url 		= "../q/index.php/api/portafolio/info_proyectos_fecha/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info" , 0 , ".place_mas_info" );			
@@ -162,7 +162,7 @@ function carga_info_cotizaciones(e){
 	var num_cotizaciones = get_parameter_enid($(this) , "num_cotizaciones"); 
 	if (num_cotizaciones > 0 ) {
 		$("#mas_info").modal("show");
-		var  fecha 		=  e.target.id;
+		var  fecha 		=  get_parameter_enid($(this) , "id");
 		var  data_send 	= {"fecha" : fecha}; 	
 		var  url 		=  "../q/index.php/api/cotizaciones/cotizaciones_sitios_web/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info", 0 , ".place_mas_info" );  
@@ -175,7 +175,7 @@ function carga_info_descarga_paginas_web(e){
 	if (num_contactos > 0 ) {
 
 		$("#mas_info").modal("show");
-		var fecha 		=  e.target.id;
+		var fecha 		=  get_parameter_enid($(this) , "id");
 		var data_send 	= {"fecha" : fecha}; 	
 		var url 		=  "../q/index.php/api/cotizaciones/sitios_web/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info" , 0 , ".place_mas_info");
@@ -189,7 +189,7 @@ function carga_info_descarga_adwords(e){
 	if (get_parameter_enid($(this) , "num_contactos") > 0 ) {
 
 		$("#mas_info").modal("show");
-		var  fecha 		=  e.target.id;
+		var  fecha 		=  get_parameter_enid($(this) , "id");
 		var  data_send 	= {"fecha" : fecha}; 	
 		var  url 		=  "../q/index.php/api/cotizaciones/adwords/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info" ,  0 , ".place_mas_info" );
@@ -201,7 +201,7 @@ function carga_info_descarga_tienda_linea(e){
 	if (get_parameter_enid($(this) , "num_contactos") > 0 ) {
 
 		$("#mas_info").modal("show");
-		var 	fecha 		= e.target.id;
+		var 	fecha 		= get_parameter_enid($(this) , "id");
 		var  	data_send 	= {"fecha" : fecha}; 	
 		var 	url 		= "../q/index.php/api/cotizaciones/tienda_en_linea/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info" ,  0 , ".place_mas_info" );	
@@ -216,7 +216,7 @@ function carga_info_descarga_crm(e){
 	if (get_parameter_enid($(this) , "num_contactos") > 0 ) {
 
 		$("#mas_info").modal("show");
-		var 	fecha 		= e.target.id;
+		var 	fecha 		= get_parameter_enid($(this) , "id");
 		var  	data_send 	= {"fecha" : fecha}; 	
 		var 	url 		=  "../q/index.php/api/cotizaciones/crm/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info" ,  0 , ".place_mas_info" );	
@@ -228,7 +228,7 @@ function carga_info_registros(e){
 	if (get_parameter_enid($(this) , "num_contactos") > 0 ) {
 
 		$("#mas_info").modal("show");
-		var 	fecha 		= e.target.id;
+		var 	fecha 		= get_parameter_enid($(this) , "id");
 		var  	data_send 	= {"fecha" : fecha}; 	
 		var 	url 		=  "../q/index.php/api/base/registros/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info" ,  0 , ".place_mas_info" );	
@@ -240,7 +240,7 @@ function carga_info_enviados(e){
 	if (get_parameter_enid($(this) , "num_contactos") > 0 ) {
 
 		$("#mas_info").modal("show");
-		var 	fecha 		= e.target.id;
+		var 	fecha 		= get_parameter_enid($(this) , "id");
 		var  	data_send 	= {"fecha" : fecha}; 	
 		var 	url 		=  "../q/index.php/api/base/enviados/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info" ,  0 , ".place_mas_info" );	
@@ -253,7 +253,7 @@ function carga_info_blogs(e){
 	if ( num_blogs > 0 ) {
 
 		$("#mas_info").modal("show");
-		var 	fecha 		= e.target.id;
+		var 	fecha 		= get_parameter_enid($(this) , "id");
 		var  	data_send 	= {"fecha" : fecha}; 	
 		var 	url =  "../q/index.php/api/blog/fecha/format/json/";	
 		request_enid( "GET",  data_send, url, 1, ".place_mas_info" ,  0 , ".place_mas_info" );	
@@ -282,7 +282,7 @@ function cargar_info_clientes(e){
 	valor =  get_attr(this, "num_proyectos"); 	
 	if (valor>0) {
 				
-		fecha =  e.target.id;
+		fecha =  get_parameter_enid($(this) , "id");
 		set_option("fecha", fecha);	
 		data_send = {fecha : get_fecha() , "tipo" : 2}; 	
 	
@@ -312,7 +312,7 @@ function cargar_info_clientes_prospecto(e){
 
 	if (valor>0) {
 
-		var fecha 		=  e.target.id;
+		var fecha 		=  get_parameter_enid($(this) , "id");
 		set_option("fecha", fecha);	
 		var data_send 	= {fecha : get_fecha() , "tipo": 1}; 		
 		var url 		=  "../q/index.php/api/productividad/num_clientes/format/json/";	
@@ -330,7 +330,7 @@ function cargar_contactos_promociones(e){
 	var  valor =  get_attr(this, "num_contactos"); 		
 	if(valor>0){
 
-		var fecha =  e.target.id;
+		var fecha =  get_parameter_enid($(this) , "id");
 		set_option("fecha", fecha);	
 		var  data_send = {fecha : get_fecha() , "tipo": 15}; 	
 		var url =  "../q/index.php/api/productividad/contactos_lead/format/json/";			
@@ -348,7 +348,7 @@ function cargar_info_sistema(e){
 	valor =  get_attr(this, "num_proyectos"); 		
 	if (valor>0) {
 		
-		fecha =  e.target.id;
+		fecha =  get_parameter_enid($(this) , "id");
 		set_option("fecha", fecha);	
 		data_send = {fecha : get_fecha() , "tipo": 1}; 	
 	
@@ -376,7 +376,7 @@ function cargar_info_afiliados(e){
 
 	var valor =  get_attr(this, "num_afiliados"); 			
 	if (valor>0) {		
-		var 	fecha 		=  e.target.id;
+		var 	fecha 		=  get_parameter_enid($(this) , "id");
 		set_option("fecha", fecha);	
 		var  	data_send 	= {fecha : get_fecha() , "tipo": 1}; 	
 		var 	url 		=  "../q/index.php/api/productividad/num_afiliados/format/json/";	

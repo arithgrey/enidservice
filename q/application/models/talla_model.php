@@ -11,6 +11,9 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
+        if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+        }
         return $this->db->get("talla")->result_array();
     }
     function insert( $params , $return_id=0){        

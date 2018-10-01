@@ -14,7 +14,7 @@ function response_conceptos(data){
 /**/
 function  update_conceptos_privacidad(e){
 	
-	var concepto 			=  	e.target.id;
+	var concepto 			=  	get_parameter_enid($(this) , "id");
 	var termino_asociado 	=  	get_attr(this, "termino_asociado");		
 	var data_send 			= 	{"concepto": concepto, "termino_asociado" : termino_asociado};
 	var url 				= 	"../q/index.php/api/privacidad_usuario/index/format/json/";			

@@ -14,7 +14,7 @@ function cargar_info_agendados_email(){
 		llenaelementoHTML(".place_info_correos_agendados" , data);
 		
 			$(".info_persona_agendados").click(function(e){
-				id_persona =  e.target.id;
+				id_persona =  get_parameter_enid($(this) , "id");
 				set_option("persona", id_persona);
 				carga_info_persona();	
 			});			
@@ -24,7 +24,7 @@ function cargar_info_agendados_email(){
 			
 			$(".marcar_correo_btn").click(function(e){
 
-				id_persona =  e.target.id;				
+				id_persona =  get_parameter_enid($(this) , "id");				
 				set_option("persona", id_persona);
 			});
 			recorre_web_version_movil();
@@ -70,7 +70,7 @@ function registrar_correo_hecho(e){
 
 function agenda_correo_usuario_registrado(e){
 
-	id_persona =  e.target.id;
+	id_persona =  get_parameter_enid($(this) , "id");
 	set_option("persona", id_persona);	
 	recorre_web_version_movil();
 }

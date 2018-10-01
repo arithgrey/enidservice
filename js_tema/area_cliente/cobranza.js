@@ -36,7 +36,7 @@ function resposponse_confirma_cancelacion(data){
 /**/
 function cancela_compra(e){
 	
-	var id_recibo 	=  e.target.id;
+	var id_recibo 	=  get_parameter_enid($(this) , "id");
 	set_option(id_recibo);
 	var url 		=  "../q/index.php/api/tickets/cancelar/format/json/";	
 	var data_send 	=  {"id_recibo" : get_option("id_recibo") , "modalidad" : get_option("modalidad_ventas") };					

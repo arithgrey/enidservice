@@ -87,7 +87,7 @@ function carga_data_usuario(e){
 	document.getElementById("form-miembro-enid-service").reset();	
 	$(".place_correo_incorrecto").empty();
 	recorrepage(".tab-content");
-	set_option("id_usuario", e.target.id);
+	set_option("id_usuario", get_parameter_enid($(this) , "id"));
 	set_option("flag_editar",1);
 
 	var url 		=  	"../q/index.php/api/usuario/miembro/format/json/";	
@@ -184,7 +184,7 @@ function response_carga_mapa(data){
 }
 function modifica_accesos_usuario(e){
 	
-	set_option("id_recurso", e.target.id);	
+	set_option("id_recurso", get_parameter_enid($(this) , "id"));	
 	var url 		=  	"../q/index.php/api/perfil_recurso/permiso/format/json/";	
 	var data_send 	= 	{"id_perfil" : get_option("id_perfil"),  "id_recurso" : get_option("id_recurso")};					
 	request_enid( "PUT",  data_send, url , carga_mapa_menu );	

@@ -85,7 +85,7 @@ function response_carga_valoraciones(data){
 /**/
 function ordenar_valoraciones(e){
 
-	tipo_ordenamiento=  e.target.id;  
+	tipo_ordenamiento=  get_parameter_enid($(this) , "id");  
 	switch(parseInt(tipo_ordenamiento)){
 		case 0:
 			/*Ordenamos por los que tienen más votos*/			

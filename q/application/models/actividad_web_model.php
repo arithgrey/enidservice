@@ -5,14 +5,15 @@
         $this->load->database();
     }
     function get( $table , $params=[], $params_where =[] , $limit =1){
-        
-        
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
+        if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+        }       
         return $this->db->get($table)->result_array();
     }
     

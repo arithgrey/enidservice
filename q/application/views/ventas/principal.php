@@ -10,16 +10,18 @@
 		$url_img         = $row["url_img"];
 		$status          = $row["status"];
 		
-		$lista_proyectos .= "<div class='col-lg-3'>";
-		$lista_proyectos .= "<a href='".$url."' target='black'>											
-								<img  src='".$url_img."'  style='width: 100%; height:150px;'/>
-							</a>";
-		$lista_proyectos .= "</div>";
 
-
+		$item 			  = anchor_enid(
+			img(
+			[	"src" 		=> $url_img ,  
+				"style" 	=> 'width: 100%; height:150px;'
+			]) ,  
+			[
+				"href"=> $url ,  "target" => 'black' 
+			]);
+		$lista_proyectos .= div($item , ["class" => 'col-lg-3']);
+		
 	}
 ?>
-
-
 
 <?=$lista_proyectos;?>

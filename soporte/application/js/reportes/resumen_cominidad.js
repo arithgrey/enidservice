@@ -19,7 +19,7 @@ function  carga_informe_comunidad(){
 /**/
 function status_empresa(e){
 	
-	id_experiencia =  e.target.id; 
+	id_experiencia =  get_parameter_enid($(this) , "id"); 
 	url =  now + "index.php/api/emp/experienciaq/format/json/";		
 	status_ =  ".status_"+ id_experiencia;
 	nestatus =  $(status_).val(); 

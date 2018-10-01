@@ -7,7 +7,7 @@
     function q_get($params=[], $id){
         return $this->get($params, ["id_person" => $id ] );
     }
-    function get($params=[], $params_where =[] , $limit =1){
+    function get($params=[], $params_where =[] , $limit =1, $order = '', $type_order='DESC'){
         
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -15,6 +15,9 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
+        if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+        }       
         return $this->db->get("persona")->result_array();
     }
    	function ventas_enid_service(){   

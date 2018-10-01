@@ -18,6 +18,9 @@
         foreach ($params_where as $key => $value) {
             $this->db->where($key , $value);
         }
+        if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+        }       
         return $this->db->get("prospecto")->result_array();
     }    
     function update( $data =[] , $params_where =[] , $limit =1 ){

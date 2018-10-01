@@ -36,7 +36,7 @@ function response_registro_respuesta(data){
 function pre_editar_respuesta(e){
 	/**/
 	document.getElementById("form_respuesta").reset(); 	
-	set_option("faq", e.target.id);
+	set_option("faq", get_parameter_enid($(this) , "id"));
 	set_option("editar_respuesta", 1);
 	carga_info_faq();
 	carga_form_imagenes_faq();

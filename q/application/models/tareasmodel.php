@@ -28,6 +28,9 @@ class tareasmodel extends CI_Model{
     foreach ($params_where as $key => $value) {
       $this->db->where($key , $value);
     }
+    if($order !=  ''){
+          $this->db->order_by($order, $type_order);  
+    }
     return $this->db->get("tarea")->result_array();
   }   
   function update_estado_tarea($param){
