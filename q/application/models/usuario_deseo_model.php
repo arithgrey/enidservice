@@ -88,6 +88,6 @@
         return  $this->db->query($query_get)->result_array();        
     }   
     function get_por_usuario($param){        
-        return $this->get(["id_usuario"] , ["id_usuario" => $param["id_usuario"] ] , 30 , 'num_deseo' );
+        return $this->get([] , ["id_usuario" => $param["id_usuario"] ] , 30 , 'num_deseo' );
     }
 }

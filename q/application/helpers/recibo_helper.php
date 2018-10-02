@@ -87,10 +87,8 @@ if(!function_exists('invierte_date_time')){
 
         if($monto_a_liquidar >0){         
             
-            $text = span("SALDO PENDIENTE" , 
-                      [  "class"   =>  'text-saldo-pendiente']) .
-                    span($monto_a_liquidar."MXN" , 
-                        ["class"  =>  "text-saldo-pendiente-monto"]);  
+            $text  = span("SALDO PENDIENTE" , ["class"   =>  'text-saldo-pendiente']);
+            $text .= span($monto_a_liquidar."MXN" , ["class"  =>  "text-saldo-pendiente-monto"]);  
         }
 
     }
@@ -210,7 +208,8 @@ if(!function_exists('invierte_date_time')){
             }
             
         }else{
-            $texto =icon('fa fa-bus btn_direccion_envio' , ["id"=>$id_recibo ]). "¿DÓNDE ENVIAMOS TU COMPRA?";
+            $texto =icon('fa fa-bus btn_direccion_envio' , ["id"=>$id_recibo ]). 
+            "¿DÓNDE ENVIAMOS TU PEDIDO?";
         }
       }else{
         

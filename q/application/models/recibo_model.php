@@ -266,7 +266,7 @@
   function q_up($q , $q2 , $id_recibo){
     return $this->update([$q => $q2 ] , ["id_proyecto_persona_forma_pago" => $id_recibo ]);
   }
-  private function get( $params=[], $params_where =[] , $limit =1){
+  private function get( $params=[], $params_where =[] , $limit =1 ,  $order = '', $type_order='DESC'){
     
     $params = implode(",", $params);
     $this->db->limit($limit);

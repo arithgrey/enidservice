@@ -108,13 +108,11 @@
                     <div class="contenedor_central_info">
                       <?=p("INFORMACIÓN" , ["class"=>"informacion_text"] , 1)?>         
                       
-                      <?=anchor_enid("ENVIAR PREGUNTA AL VENDEDOR"  , 
-                        [
-                          "href"  =>  "../pregunta?tag=".$id_servicio , 
-                          "style" =>  "color: white!important;",
-                          "class" =>  "a_enid_black"
-                        ] , 
-                        1)?>               
+                      <?=anchor_enid(
+                        div("SOLICITAR INFORMACIÓN" ,['class' => 'black_enid_background white padding_1'] ,1) , 
+                        ["href"  =>  "../pregunta?tag=".$id_servicio]  
+                        
+                        )?>               
                       <?=creta_tabla_colores($color , $flag_servicio)?>
                       <div class='separador'></div>
                       <?=div(valida_informacion_precio_mayoreo($flag_servicio ,  

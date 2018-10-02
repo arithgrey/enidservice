@@ -5,18 +5,16 @@
 		<div class="col-lg-3">
 			<?=div(anchor_enid("ESCRIBE UNA RESEÑA" . icon("fa fa-chevron-right ir") , 
 			[
-				"href"	=>"../valoracion?servicio=".$servicio, 
-				"style"	=>"color:white!important;"
+				"href"	=>"../valoracion?servicio=".$servicio
 			]),  
 			['class'  => 'a_enid_blue'])?>
 		</div>
 	</div>		
 	<div class="row">
 		<div class="col-lg-3">
-			<?=div(anchor_enid("MÁS VALORACIONES DEl VENDEDOR" . icon("fa fa-chevron-right ir") , 
+			<?=div(anchor_enid("MÁS SOBRE EL VENDEDOR" . icon("fa fa-chevron-right ir") , 
 			[
-				"href"	=>"../recomendacion/?q=".$id_usuario, 
-				"style"	=>"color:white!important;"
+				"href"	=>"../recomendacion/?q=".$id_usuario				
 			]),  
 			['class'  => 'a_enid_black'])?>
 

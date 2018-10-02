@@ -45,7 +45,7 @@
                     <?=anchor_enid("TUS PRODUCTOS EN VENTA" ,                
                         [
                             "class" =>  "btn_cuenta_personal" ,
-                            "href"  => "../search/?q3=<?=$id_usuario?>&tienda=1"
+                            "href"  => "../search/?q3=".$id_usuario."&tienda=1"
                         ]
                     )?>
                 </li>

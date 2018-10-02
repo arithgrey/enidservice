@@ -26,7 +26,7 @@ class Home extends CI_Controller{
         }else{            
 
             /*Validamos que se envíe a lista de deseos o a preferencias*/            
-            $data["productos_deseados"]=  $this->get_lista_deseos($data["id_usuario"]);
+            $data["productos_deseados"]=  $this->get_lista_deseos($data["id_usuario"]);            
             $data["css"] =  array("lista_deseos.css");
             $this->principal->show_data_page($data, 'home');        
 

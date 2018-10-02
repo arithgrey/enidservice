@@ -24,7 +24,7 @@
         if ($order !=  ''){
           $this->db->order_by($order, $type_order);  
         }      
-        return $this->db->get("")->result_array();
+        return $this->db->get("valoracion")->result_array();
     }
     /**/
     function insert( $params , $return_id=0){                

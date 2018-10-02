@@ -18,20 +18,19 @@
     $estrellas = "";
     for ($a=0; $a < 4; $a++) { 
         $estrellas  .=  
-        label('★', '', ["class"=>"estrella", "style"=>"color: #0070dd;"]);     
+        span('★', '', ["class"=>"estrella", "style"=>"color: #0070dd;"]);     
     }
-    $estrellas      .=  label('★', '', 
+    $estrellas      .=  span('★', '', 
     [
     "class" =>  "estrella", 
     "style" =>  
     "-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);"]);
         
-    $link_valoraciones  = anchor_enid(
+    $link_valoraciones  = 
+        anchor_enid(
         "Mis reseñas y valoraciones" .
-        div(
-            $estrellas , 
-            ["class"=>"contenedor_promedios"]),
-            ["href" =>  "../recomendacion/?q=".$id_usuario ]
+        div($estrellas , ["class"=>"contenedor_promedios"]),
+        ["href" =>  "../recomendacion/?q=".$id_usuario ]
     );     
      
 ?>

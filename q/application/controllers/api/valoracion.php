@@ -169,11 +169,16 @@ class Valoracion extends REST_Controller{
         $param              =   $this->get();
         $valoraciones       =   $this->valoracion_model->get_valoraciones_articulo($param);    
         $data["servicio"]   =   $param["id_servicio"];        
-        $usuario            =   $this->get_usuario_por_servicio($param);                
-
-        
+        $usuario            =   $this->get_usuario_por_servicio($param);                        
         $id_usuario         =   $usuario[0]["id_usuario"];            
         $data["id_usuario"] =   $id_usuario;
+        
+        $data["comentarios"]          =  $this->valoracion_model->get_valoraciones($param);    
+        $data["numero_valoraciones"]  =  $valoraciones;
+        $data["respuesta_valorada"]   =  $param["respuesta_valorada"];            
+        $this->load->view("valoraciones/articulo", $data);        
+          
+        /*
         if($valoraciones[0]["num_valoraciones"] > 0){
             
             $data["comentarios"]          =  $this->valoracion_model->get_valoraciones($param);    
@@ -184,6 +189,7 @@ class Valoracion extends REST_Controller{
         }else{
             $this->load->view("valoraciones/se_el_primero", $data);        
         } 
+        */
         
 
     }

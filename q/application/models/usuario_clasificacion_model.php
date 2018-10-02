@@ -4,7 +4,7 @@
         parent::__construct();        
         $this->load->database();
     }
-    function get( $params=[], $params_where =[] , $limit =1){
+    function get( $params=[], $params_where =[] , $limit =1, $order = '', $type_order='DESC'){
         
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -17,7 +17,7 @@
         }
         return $this->db->get("usuario_clasificacion")->result_array();
     }
-    private function delete( $params_where =[] , $limit =1){              
+    function delete( $params_where =[] , $limit =1){              
         $this->db->limit($limit);        
         foreach ($params_where as $key => $value) {
           $this->db->where($key , $value);
@@ -49,7 +49,7 @@
     }
     function get_interes_usuario($param)
     {   
-        
+            
         $q =[
             "tipo"              =>  2 ,
             "id_usuario"        =>  $param["id_usuario"],

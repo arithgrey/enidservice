@@ -7,7 +7,6 @@ class usuario_clasificacion extends REST_Controller{
         $this->load->model("usuario_clasificacion_model");        
         $this->load->library(lib_def());                    
         $this->id_usuario = $this->principal->get_session("idusuario");
-
     }
     function agregan_clasificaciones_periodo_GET(){
 
@@ -17,10 +16,10 @@ class usuario_clasificacion extends REST_Controller{
     }
     function interes_PUT(){
 
-        $param                  =  $this->put();         
-        $id_usuario             =  $this->id_usuario;        
-        $num                    =  $this->usuario_clasificacion_model->get_interes_usuario($param);        
-        
+        $param                  =   $this->put();         
+        $id_usuario             =   $this->id_usuario;        
+        $param["id_usuario"]    =   $id_usuario;
+        $num                    =   $this->usuario_clasificacion_model->get_interes_usuario($param);        
         
         $response         = false;
         if ($id_usuario > 0 ) {
@@ -46,10 +45,10 @@ class usuario_clasificacion extends REST_Controller{
         $param              =   $this->post();                
         $id_clasificacion   =   $this->get_clasificaciones_servicio($param)[0]["primer_nivel"];        
         $params             = [
-            "id_usuario"        => $param["id_usuario"],
+            "id_usuario"        => $this->id_usuario,
             "id_clasificacion"  => $param["id_servicio"]
         ];    
-        $num =  $this->usuario_clasificacion_model->get_num_usuario_clasificacion($param["id_usuario"]  , 
+        $num =  $this->usuario_clasificacion_model->get_num_usuario_clasificacion($this->id_usuario  , 
             $param["id_servicio"]);
         
         if ($num == 1 ){

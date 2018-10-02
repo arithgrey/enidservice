@@ -19,7 +19,7 @@ class funcionalidad extends REST_Controller{
     function usuario_GET(){
         
         $param                =  $this->get();    
-        $funcionalidad        =  $this->funcionalidad_model->get_all($param);        
+        $funcionalidad        =  $this->funcionalidad_model->get([], [] , 100);        
         $data["conceptos"]= $this->add_conceptos($funcionalidad , $this->id_usuario);
         $this->load->view("privacidad/conceptos" , $data);
     }  

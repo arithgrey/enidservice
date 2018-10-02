@@ -15,7 +15,7 @@
     function q_up($q , $q2 , $id_metakeyword){
         return $this->update([$q => $q2 ] , ["id_metakeyword" => $id_metakeyword ]);
     }
-    function get( $params=[], $params_where =[] , $limit =1){
+    function get( $params=[], $params_where =[] , $limit =1 , $order = '', $type_order='DESC'){
         
         $params = implode(",", $params);
         $this->db->limit($limit);

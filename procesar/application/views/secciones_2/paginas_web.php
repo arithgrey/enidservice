@@ -48,7 +48,7 @@
         <?=end_row()?>
         <?=n_row_12()?>
           <?php if($in_session == 1): ?>
-            <?=guardar("Ordenar compra" .icon("fa fa-shopping-cart") , 
+            <?=guardar("Ordenar compra" ,
             ['class' => 'btn_procesar_pedido_cliente']  )?>
             <?=place('place_proceso_compra')?>        
           <?php endif; ?>

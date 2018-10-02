@@ -3,7 +3,7 @@
 ?>
 <?=n_row_12()?>	
 	<?=heading_enid("VALORACIONES Y RESEÑAS" , 2 )?>
-	<?=anchor_enid("MÁS VALORACIONES DEl VENDEDOR".icon("fa fa-chevron-right ir") ,
+	<?=anchor_enid("MÁS SOBRE EL VENDEDOR".icon("fa fa-chevron-right ir") ,
 		[
 		"class" 	=>	"a_enid_black" ,
 		"href" 		=>	"../recomendacion/?q=".$id_usuario,
@@ -14,7 +14,7 @@
 <hr>
 <table style="width: 100%">
 	<tr>
-		<?=get_td(["class" => "table_orden_1"])?>
+		<?=get_td("", ["class" => "table_orden_1"])?>
 		<td class="table_orden_2">			
 			<strong>
 				ORDENAR POR
@@ -48,11 +48,12 @@
 <?=n_row_12()?>
 	<div class="col-lg-4">	
 		<div class="row">
+
 			<?=div(anchor_enid("ESCRIBE UNA RESEÑA".icon("fa fa-chevron-right ir") , 
 				[
 					"class"		=> "escribir_valoracion" ,
 					"href"		=> "../valoracion?servicio=".$servicio,
-					"style"		=> "color:white!important"
+					
 				]) , 
 				["class" => "btn_escribir_valoracion"])?>
 			<?=crea_resumen_valoracion($numero_valoraciones);?>		

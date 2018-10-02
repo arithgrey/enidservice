@@ -5,6 +5,9 @@
 ---   js
 ----  views
 ---   controllers
+- Habilitar entregas personales 
+- definir periodos de entrega solo para el perfil enidservice 
+- Poner siempre como disponibles 5 
 
 
 https://youtu.be/FwXskdcCRIk
