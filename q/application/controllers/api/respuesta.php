@@ -51,7 +51,7 @@ class Respuesta extends REST_Controller{
         $param                  =   $this->get();
         $response["data_send"]  =   $param;    
         $visto                  =   $this->set_visto_pregunta($param);
-        $response["respuestas"] =   $this->respuesta_model->get_respuestas_pregunta($param);
+        $response["respuestas"] =   $this->get_respuestas_pregunta($param);
         $response["info_usuario"] = 0;
         if ($param["modalidad"] ==  1) {            
             $response["info_usuario"] 
@@ -60,6 +60,11 @@ class Respuesta extends REST_Controller{
         $this->load->view("valoraciones/form_respuesta" , $response);        
         
     }    
+    private function get_respuestas_pregunta($q){
+
+        $api =  "respon/respuestas_pregunta/format/json/";
+        return $this->principal->api($api , $q);
+    }
     function set_visto_pregunta($q){
         $api = "pregunta/visto_pregunta";
         return $this->principal->api( $api , $q  , "json" , "PUT");

@@ -18,7 +18,7 @@
     private function q_get($params=[], $id){
         return $this->get($params, ["id_servicio" => $id ] );
     }
-    private function get( $params=[], $params_where =[] , $limit =1){
+    private function get( $params=[], $params_where =[] , $limit =1, $order = '', $type_order='DESC'){
         $params = implode(",", $params);
         $this->db->limit($limit);
         $this->db->select($params);

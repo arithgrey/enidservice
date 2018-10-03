@@ -18,7 +18,7 @@ class img_model extends CI_Model {
     $insert   = $this->db->insert("imagen", $params);     
     return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }
-  private function get( $params=[], $params_where =[] , $limit =1){
+  private function get( $params=[], $params_where =[] , $limit =1 , $order = '', $type_order='DESC'){
     $params = implode(",", $params);
     $this->db->limit($limit);
     $this->db->select($params);

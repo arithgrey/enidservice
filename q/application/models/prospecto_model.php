@@ -10,7 +10,7 @@
     function q_get($params=[], $id){
       return $this->get( $params, ["id_servicio" => $id ] );
     }    
-    function get( $params=[], $params_where =[] , $limit =1){
+    function get( $params=[], $params_where =[] , $limit =1, $order = '', $type_order='DESC'){
 
         $params = implode(",", $params);
         $this->db->limit($limit);

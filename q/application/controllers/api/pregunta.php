@@ -79,6 +79,7 @@ class pregunta extends REST_Controller{
             $data_complete["preguntas"] =  $this->add_num_respuestas_preguntas($preguntas);
                                     
         }   
+        
         $this->load->view("valoraciones/preguntas" ,  $data_complete);                 
     }
     function preguntas_sin_leer_GET(){        

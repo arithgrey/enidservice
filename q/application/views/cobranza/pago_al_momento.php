@@ -25,8 +25,14 @@
 	$servicio 				= 	$servicio[0];
 	$flag_servicio 			=  	$servicio["flag_servicio"];
 
-	$deuda 					=  
-	get_saldo_pendiente($monto_a_pagar,$num_ciclos_contratados,$saldo_cubierto,$flag_servicio,$costo_envio_cliente,$costo_envio_sistema);
+	debug($monto_a_pagar);
+	debug("pappapapapp");
+	$deuda 					=  get_saldo_pendiente($monto_a_pagar,
+		$num_ciclos_contratados,
+		$saldo_cubierto,
+		$flag_servicio,
+		$costo_envio_cliente,
+		$costo_envio_sistema);
 
 	
 	$saldo_pendiente 		= 	$deuda["saldo_pendiente_envio"];   

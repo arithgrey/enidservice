@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-    function get_titulo_preguntas_modalidad($modalidad){
+    function get_titulo_modalidad($modalidad){
     
-    $texto = "LO QUE PREGUNTASTÉ A VENDEDORES";  
-    if($modalidad ==  1) {
-      $texto = " LO QUE TE HAN PREGUNTADO";    
-    }    
-    return $texto;
-  }   
+      $texto = "LO QUE PREGUNTASTÉ A VENDEDORES";  
+      if($modalidad ==  1) {
+        $texto = " LO QUE TE HAN PREGUNTADO";    
+      }    
+      return heading_enid($texto , 3);
+    }   
     function get_url_imagen_pregunta($modalidad , $param){
     if($modalidad == 0){
       

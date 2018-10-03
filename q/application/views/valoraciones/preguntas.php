@@ -1,4 +1,4 @@
-<?=div(get_titulo_preguntas_modalidad($modalidad) , 1)?>
+<?=get_titulo_modalidad($modalidad)?>
 <?=n_row_12()?>
 <?php	
 	$l ="";

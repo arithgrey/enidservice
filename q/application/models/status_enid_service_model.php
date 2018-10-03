@@ -11,7 +11,7 @@
       $params =  ["id_estatus_enid_service","nombre","text_cliente","text_vendedor" ];
       return $this->get($params, ["pago"=> 1], 10);
     } 
-    function get( $params=[], $params_where =[] , $limit =1){
+    function get( $params=[], $params_where =[] , $limit =1 , $order = '', $type_order='DESC'){
         
         $params = implode(",", $params);
         $this->db->limit($limit);

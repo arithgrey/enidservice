@@ -75,7 +75,8 @@ class recibo extends REST_Controller{
         $param                              =   $this->get();              
         $id_usuario                         =   $this->id_usuario;                
         $param["id_usuario"]                =   $id_usuario;
-        $data                               =   $this->resumen_compras_usuario($param);    
+        $data                               =   $this->resumen_compras_usuario($param);            
+
         $data["id_usuario"]                 =   $id_usuario;
         $data["modalidad"]                  =   $param["modalidad"];
         $ordenes                            =   0;            
@@ -95,8 +96,7 @@ class recibo extends REST_Controller{
             $data["numero_articulos_en_venta"] = $this->carga_productos_en_venta($param);                    
         }   
         $data["status"]      =   $param["status"];
-        $data["anteriores"]  =   
-        $this->recibo_model->num_compras_efectivas_usuario($param);
+        $data["anteriores"]  =   $this->recibo_model->num_compras_efectivas_usuario($param);
 
         $this->load->view("proyecto/lista_version_cliente" , $data);
     }     

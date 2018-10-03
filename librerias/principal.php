@@ -1,8 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No permitir el acceso directo al script');	
 	class principal extends CI_Controller {	 	
 		function __construct(){        
-			parent::__construct();     
-			debug("ok");
+			parent::__construct();     			
 			$this->load->library('../../librerias/sessionclass');     
 	    }
 	    function api($api, $q=[], $format='json', $type='GET', $debug = 0  ){

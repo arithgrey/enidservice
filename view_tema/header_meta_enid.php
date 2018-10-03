@@ -20,6 +20,7 @@
     <meta name="geo.placename" content="Ciudad de Mexico"/>
     <meta name="ICBM" content="23.634501, -102.552784" />
     <meta name="revisit-after" content="1 days" />
+    <meta name="p:domain_verify" content="ed4f86be0c9d41f8889e945d5b65a701"/>
     
     <link rel="publisher" href="https://plus.google.com/u/0/117684782897236574265"/>
 
