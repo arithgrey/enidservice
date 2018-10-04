@@ -336,7 +336,7 @@ if(!function_exists('invierte_date_time')){
         }
         
 
-        $text ="Ciclos contratados: ".$periodos." ".$text_ciclos;        
+        $text = "Ciclos contratados: ".$periodos." ".$text_ciclos;        
     }else{
         $text = ($periodos > 1) ? "Piezas ":"Pieza ";
         $text = heading_enid($periodos." ".$text , 3); 

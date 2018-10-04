@@ -1,8 +1,7 @@
 <?php
 	
-	$extra_table="class='blue_enid_background white text-center' 
-						style='font-size: .8em;' ";
-	$l ="";
+	$extra_table = "class='blue_enid_background white text-center' ";
+	$l 		     = "";
 	foreach ($saldos_pendientes as $row) {
 		
 		$proyecto                 		 = $row["proyecto"]; 

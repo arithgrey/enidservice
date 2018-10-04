@@ -5,7 +5,7 @@
                                             <a  href="#tab1default_en_agenda" 
                                                 data-toggle="tab" 
                                                 >
-                                                <i class="fa fa-cloud-download  black ">
+                                                icon('fa fa-cloud-download  black ">
                                                 </i>
                                                 Descargar 
                                                 correos
@@ -15,7 +15,7 @@
                                             <a href="#tab2default_en_agenda" 
                                                data-toggle="tab"
                                                >    
-                                               <i class="fa fa-refresh  black">
+                                               icon('fa fa-refresh  black">
                                                </i>
                                                 Registra envios                                                 
                                             </a>

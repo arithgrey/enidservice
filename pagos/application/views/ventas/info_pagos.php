@@ -39,7 +39,7 @@
 
 
 		$extra_part ="style='font-size:.8em!important;' ";
-		$historico ="<i class='fa fa-credit-card-alt id_proyecto_persona_forma_pago' 
+		$historico ="icon('fa fa-credit-card-alt id_proyecto_persona_forma_pago' 
 						id='".$id_proyecto_persona_forma_pago."' >
 					</i>";
 

@@ -251,7 +251,7 @@
                                     $lista_info_attr >
                                   </i>";            
 
-    $btn_articulo_enviado = "<i class='black fa fa-bus'></i>
+    $btn_articulo_enviado = "icon('black fa fa-bus'')
                                 <span >
                                   Enviado!
                                 <span>";            
@@ -280,7 +280,7 @@
         <a  href='#tab_clientes'
             data-toggle='tab' 
             class='btn_clientes strong  black'>
-            <i class='fa fa-chevron-circle-left'>            
+            icon('fa fa-chevron-circle-left'>            
             </i>
             Regresar a clientes 
         </a>";

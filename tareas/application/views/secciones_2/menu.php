@@ -8,7 +8,7 @@
                         href="#tab_redes_sociales" 
                         data-toggle="tab"                         
                         class='black tab_redes_s '>
-                        <i class="fa fa-fighter-jet">                          
+                        icon('fa fa-fighter-jet">                          
                         </i>                        
                         Social  
                         <span class="place_notificacion_accesos_dia">                        
@@ -23,7 +23,7 @@
                         href="#tab_en_correo_electronico" 
                         data-toggle="tab"                         
                         class='black tab_marketing'>                        
-                        <i class="fa fa-envelope strong black">                          
+                        icon('fa fa-envelope strong black">                          
                         </i>
                         Email 
                         <span class="place_notificacion_email_enviados">                            

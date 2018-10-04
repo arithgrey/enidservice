@@ -5,7 +5,7 @@
 					<div class='col-lg-4'>
 						<button class='btn input-sm btn_descargar_email' 
 								style="background: black!important;">
-								<i class="fa fa-cloud-download">
+								icon('fa fa-cloud-download">
 								</i>
 							Descargar
 						</button>

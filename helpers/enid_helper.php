@@ -386,11 +386,8 @@ if ( ! function_exists('get_url_request'))
 }
 if ( ! function_exists('icon'))
 {
- function icon($class , $attributes ='' , $row_12 = 0 , $extra_text ='' ){
-
+  function icon($class , $attributes ='' , $row_12 = 0 , $extra_text ='' ){
     $attr =  add_attributes($attributes);   
-
-
     if ($row_12 == 0) {
       return 
       "<i class='fa ".$class."' ". $attr." ></i>".
@@ -605,7 +602,7 @@ if ( ! function_exists('label'))
 {  
   function label($label_text = '', $id = '', $attributes = array() , $n_row_12 = 0 ){
       if ($row =0 ) {
-          return form_label($label_text = '', $id = '', $attributes = array());
+          return form_label($label_text , $id , $attributes );
       }else{
           return n_row_12() . form_label($label_text = '', $id = '', $attributes = array()) . end_row();
       }      
@@ -924,6 +921,25 @@ if ( ! function_exists('select_vertical'))
 
   }
 }
+if ( ! function_exists('small'))
+{
+  function small($text, $attributes = '')
+  {
+    $extra      = add_attributes($attributes);  
+    return "<small ".$extra." > ". $text . "</small>";
+  }
+}
+
+if ( ! function_exists('strong'))
+{
+  function strong($text, $attributes = '')
+  {
+    $extra      = add_attributes($attributes);  
+    return "<strong ".$extra." > ". $text . "</strong>";
+  }
+}
+
+
 if ( ! function_exists('debug'))
 {
 function debug($msg, $array = 0)

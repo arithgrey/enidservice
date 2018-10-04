@@ -6,7 +6,7 @@
         <div>
             <span class="strong modo_servicios " style="font-size: .8em!important;">
                 Promover servicios
-                <i class="fa fa-chevron-right">          
+                icon('fa fa-chevron-right">          
                 </i>
             </span>        
         </div>
@@ -25,7 +25,7 @@
           <div>          
             <span class="strong modo_productos " style="font-size: .8em!important;" >
               Promover productos
-              <i class="fa fa-chevron-right">          
+              icon('fa fa-chevron-right">          
               </i>
             </span>      
           </div>      
@@ -70,7 +70,7 @@
                   href="#mensajeria_facebook" 
                   data-toggle="tab" 
                   class=" btn_tareas_fb active m_facebook blue_active">
-                  <i class="fa fa-facebook-official">                       
+                  icon('fa fa-facebook-official">                       
                   </i>                      
                 </label>
 
@@ -78,7 +78,7 @@
                   title="Actividad en Mercado libre" 
                   href="#profile" data-toggle="tab" 
                   class=" btn_tareas_mercado_libre m_mercado_libre">
-                  <i class="fa fa-shopping-bag">                        
+                  icon('fa fa-shopping-bag">                        
                   </i>                      
                 </label>
                               
@@ -88,7 +88,7 @@
                   data-toggle="tab" 
                   class=" btn_tareas_linkedin m_linkedin" 
                   >
-                  <i class="fa fa-linkedin-square">                        
+                  icon('fa fa-linkedin-square">                        
                   </i>                      
                 </label>
 
@@ -98,7 +98,7 @@
                   data-toggle="tab" 
                   class=" btn_tareas_twitter m_twitter" 
                   >
-                  <i class="fa fa-twitter">                        
+                  icon('fa fa-twitter">                        
                   </i>                      
                 </label>
 
@@ -107,7 +107,7 @@
                   href="#tab_gplus" 
                   data-toggle="tab" 
                   class=" btn_tareas_gplus m_gplus">
-                  <i class="fa fa-google-plus">                        
+                  icon('fa fa-google-plus">                        
                   </i>                      
                 </label>
 
@@ -117,7 +117,7 @@
                   data-toggle="tab" 
                   class=" btn_tareas_pinterest m_pinteres" 
                   >
-                  <i class="fa  fa-pinterest">                        
+                  icon('fa  fa-pinterest">                        
                   </i>                      
                 </label>
 
@@ -126,7 +126,7 @@
                   href="#tab_instagram" 
                   data-toggle="tab" 
                   class=" btn_tareas_instagram m_instagram">
-                  <i class="fa fa-instagram">                        
+                  icon('fa fa-instagram">                        
                   </i>                      
                 </label>
                 <label 
@@ -134,7 +134,7 @@
                   href="#tab_email" 
                   data-toggle="tab" 
                   class="btn_tareas_email m_email">
-                  <i class="fa fa-envelope">              
+                  icon('fa fa-envelope">              
                   </i>
                 </label>
 
@@ -143,7 +143,7 @@
                   href="#tab_whatsapp" 
                   data-toggle="tab" 
                   class="btn_tareas_whatsapp m_whatsapp">
-                  <i class="fa fa-whatsapp">              
+                  icon('fa fa-whatsapp">              
                   </i>
                 </label>
 
@@ -152,7 +152,7 @@
                   href="#tab_tumlr" 
                   data-toggle="tab" 
                   class="btn_tareas_tumblr m_tumblr">
-                  <i class="fa fa-tumblr" ></i>
+                  icon('fa fa-tumblr" ')
                 </label>
               
               </div>

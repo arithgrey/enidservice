@@ -3,7 +3,7 @@
 	$div 		=  	div(strtoupper($recibo["resumen"]) , ["class"=>"blue_enid"]);
 	$tmp 		= 	$heading_1. $div;
 ?>
-<?=div($tmp , ['class' => 'jumbotron',  "style"=>"padding: 10px;" ])?>
+<?=div($tmp , ['class' => 'jumbotron',  "class"=>"padding_1" ])?>
 <?=guardar("CANCELAR ÓRDEN DE COMPRA" , 
 	[
 		"class"			=>		"cancelar_orden_compra" 

@@ -25,13 +25,13 @@ function create_select_turnos($name ,  $class , $id ){
 /**/
 function validate_social($url , $class , $class_icon ,  $flag  = 0  ){
 
-    $red_social =  ""; 
-    $class_extra =  "";
+    $red_social     =  ""; 
+    $class_extra    =  [];
 
     if ( trim(strlen($url) ) > 7){
-        $class_extra =  " color_social ";        
+        $class_extra = ["class"=> "color_social "];        
     }
-    $url_text = icon( $class_icon. $class_extra);
+    $url_text = icon( $class_icon ,  $class_extra);
     if ($flag == 1 ){
         $url_text =  "www";
     }
@@ -150,7 +150,7 @@ function lista_usuarios_cuenta($integrantes ){
         $id_user = $row["idusuario"];
             
             $list .="<tr>";                              
-            $list .=    get_td(icon('editar_permisos_miembro fa fa-cog' , ["id"= $row["idusuario"]]));                           
+            $list .=    get_td(icon('editar_permisos_miembro fa fa-cog' , ["id"= $row["idusuario"]]) );                           
             $list .=    get_td(anchor_enid($row["status"] , ["class"='config_estatus_user',  "id"=> $row["idusuario"]]));               
             $img  =     create_icon_img($row , "img_user", $row["idusuario"], "a"  );                                 
             $miembro = $row["nombre"] .  $row["apellido_paterno"]  . $row["apellido_materno"];

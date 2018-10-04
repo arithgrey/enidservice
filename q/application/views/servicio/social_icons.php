@@ -1,6 +1,6 @@
                         <?=anchor_enid(                            
                             "" ,
-                            "<i class='                                
+                            "icon('                                
                                 fa fa-clone  black
                                 '>
                             </i>",                                
@@ -11,7 +11,7 @@
                         )?>
                         <?=anchor_enid(
                             get_url_facebook(get_url_productos_cuenta_usuario_web($id_usuario)),
-                            '<i class="fa fa-facebook-square  black"></i>',
+                            'icon('fa fa-facebook-square  black"')',
                             'target="_black" '
                             )?>
 
@@ -19,14 +19,14 @@
                             get_url_twitter(
                                 get_url_productos_cuenta_usuario_web($id_usuario),
                                 "VISITA MI TIENDA EN LÍNEA!" ) ,
-                                "<i class='fa fa-twitter black '></i>",
+                                "icon('fa fa-twitter black '')",
                                 " target='_black' "                                
                             )?>
 
                         <?=anchor_enid(
                             get_url_pinterest(
                                 get_url_productos_cuenta_usuario_web($id_usuario)) ,
-                                "<i class='fa fa-pinterest-p black '></i>",
+                                "icon('fa fa-pinterest-p black '')",
                                 " target='_black' "                                
                             )?>
 
@@ -34,6 +34,6 @@
                         <?=anchor_enid(
                             get_url_tumblr(
                                 get_url_productos_cuenta_usuario_web($id_usuario)) ,
-                                "<i class='fa fa-tumblr  black'></i>",
+                                "icon('fa fa-tumblr  black'')",
                                 " target='_black' "                                
                             )?>

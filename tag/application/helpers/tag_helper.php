@@ -421,7 +421,7 @@ if(!function_exists('invierte_date_time')){
       $social .=  '
             <li>
                     <a href="'.$url.'">
-                        <i class="'.$icon.'">
+                        icon(''.$icon.'">
                         </i>
                     </a>
                 </li>
@@ -430,7 +430,7 @@ if(!function_exists('invierte_date_time')){
       $social .=  '
             <li>
                     <a href="'.$url.'">
-                        <i class="'.$icon.'">
+                        icon(''.$icon.'">
                         </i>
                     </a>
                 </li>
@@ -507,11 +507,11 @@ if(!function_exists('invierte_date_time')){
 
     $locacion = ""; 
     if (strlen(trim($direccion))>4){    
-      $locacion =  "<i class='locacion fa fa-map-marker ' id='".$id_evento."' 
+      $locacion =  "icon('locacion fa fa-map-marker ' id='".$id_evento."' 
                         data-toggle='modal' data-target='#locacion-modal'  title='". $direccion."'>
                       </i>";  
     }else{
-      $locacion =  "<i class='locacion fa fa-map-marker direccion_registrada' 
+      $locacion =  "icon('locacion fa fa-map-marker direccion_registrada' 
                         id='".$id_evento."' 
                         data-toggle='modal' data-target='#locacion-modal'  title='". $direccion."'>
                       </i>";  
@@ -685,7 +685,7 @@ if(!function_exists('invierte_date_time')){
 
     $l =  "";
     for ($a=0; $a < $val; $a++) { 
-      $l .=  "<i class='fa fa-star text-default'></i>";
+      $l .=  "icon('fa fa-star text-default'')";
     }
     return $l; 
   }
@@ -693,7 +693,7 @@ if(!function_exists('invierte_date_time')){
   function get_start($val , $comparacion ){
     
       if ($val ==  $comparacion ) {
-        return  $val . " <i class='fa fa-star'></i>"; 
+        return  $val . " icon('fa fa-star'')"; 
       }else{
         return  $val;
       }
@@ -915,7 +915,7 @@ if(!function_exists('invierte_date_time')){
 
                 $lista_pendientes .= "<li class='black ' > ";
                 $lista_pendientes .= "<a href='../cargar_base/'>
-                                        <i class='fa fa-database'></i> ";
+                                        icon('fa fa-database'') ";
                 $lista_pendientes .= "<span $style_pedientes>
                               ". $correos_pendientes
                               ."
@@ -996,7 +996,7 @@ if(!function_exists('invierte_date_time')){
                 $ventas_pendientes  = ($meta_ventas - $ventas_realizadas);            
                 $lista_pendientes .= "<li class='black ' > ";
                 $lista_pendientes .= "<a href='../ventas/'>
-                                        <i class='fa fa-money' ></i> ";
+                                        icon('fa fa-money' ') ";
                 $lista_pendientes .= "<span $style_pedientes>". $ventas_pendientes."</span>"; 
                 $lista_pendientes .= "Ventas</a>";                
                 $lista_pendientes .= "</li>";  
@@ -1013,7 +1013,7 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../tareas/'>
-                                    <i class='fa fa-user'></i> ";
+                                    icon('fa fa-user'') ";
               $lista_pendientes .=  "<span $style_pedientes>".
                                       $contactos_restantes
                                      ."</span>"; 
@@ -1035,7 +1035,7 @@ if(!function_exists('invierte_date_time')){
 
                 $lista_pendientes .= "<li class='black ' > ";
                 $lista_pendientes .= "<a href='../ventas/'>
-                                      <i class='fa fa-mobile'></i> ";
+                                      icon('fa fa-mobile'') ";
                 $lista_pendientes .= "<span $style_pedientes>".$llamadas_restantes."</span>"; 
                 $lista_pendientes .= "Llamadas
                                       </a>";
@@ -1059,7 +1059,7 @@ if(!function_exists('invierte_date_time')){
 
                 $lista_pendientes .= "<li class='black ' > ";
                 $lista_pendientes .= "<a href='../tareas/'>
-                                      <i class='fa fa-star-o'></i> ";
+                                      icon('fa fa-star-o'') ";
                 $lista_pendientes .= "<span $style_pedientes>".$llamadas_restantes."</span>"; 
                 $lista_pendientes .= "Afiliados
                                       </a>";
@@ -1078,7 +1078,7 @@ if(!function_exists('invierte_date_time')){
               $email_restantes = ($meta_email -  $email_enviados_enid_service);
                 $lista_pendientes .= "<li class='black ' > ";
                 $lista_pendientes .= "<a href='../tareas/'>
-                                      <i class='fa fa-envelope-o'></i> ";
+                                      icon('fa fa-envelope-o'') ";
                 $lista_pendientes .= "<span $style_pedientes>
                                       ".$email_restantes."
                                       </span>"; 
@@ -1169,7 +1169,7 @@ if(!function_exists('invierte_date_time')){
             
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../ventas/'>
-                                    <i class='fa fa-credit-card'></i> ";
+                                    icon('fa fa-credit-card'') ";
               $lista_pendientes .= "<span $style_pedientes>".$ventas_restantes."</span>"; 
               $lista_pendientes .= "Ventas
                                     </a>";              
@@ -1191,7 +1191,7 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../validacion/'>
-                                    <i class='fa fa-paper-plane'></i> ";
+                                    icon('fa fa-paper-plane'') ";
               $lista_pendientes .= "<span $style_pedientes>".
                                       $envios_a_validar_restantes
                                     ."</span>"; 
@@ -1214,7 +1214,7 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../ventas/'>
-                                    <i class='fa fa-mobile'></i> ";
+                                    icon('fa fa-mobile'') ";
               $lista_pendientes .= "<span $style_pedientes>
                                     ".
                                     $llamadas_restantes
@@ -1239,7 +1239,7 @@ if(!function_exists('invierte_date_time')){
 
             $lista_pendientes .= "<li class='black ' > ";
             $lista_pendientes .= "<a href='../ventas/'>
-                                  <i class='fa fa-user'></i> ";
+                                  icon('fa fa-user'') ";
             $lista_pendientes .=  "<span $style_pedientes>".
                                     $contactos_restantes
                                    ."</span>"; 
@@ -1262,7 +1262,7 @@ if(!function_exists('invierte_date_time')){
             $email_restantes = ($meta_email -  $email_enviados_enid_service);
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../tareas/'>
-                                    <i class='fa fa-envelope-o'></i> ";
+                                    icon('fa fa-envelope-o'') ";
               $lista_pendientes .= "<span $style_pedientes>
                                     ".$email_restantes."
                                     </span>"; 
@@ -1289,7 +1289,7 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../tareas/'>
-                                    <i class='fa fa-globe'></i> ";
+                                    icon('fa fa-globe'') ";
                $lista_pendientes .= "<span $style_pedientes>".$accesos_restantes.
                                     "</span>"; 
               $lista_pendientes .= "Accesos
@@ -1312,7 +1312,7 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' >
                                     <a href='../desarrollo'> ";
-                $lista_pendientes .= "<i class='fa fa-code' ></i> ";
+                $lista_pendientes .= "icon('fa fa-code' ') ";
                 $lista_pendientes .= "<span $style_pedientes>".$tareas_restantes."</span>";                
                 $lista_pendientes .= "Desarrollo";
                 $lista_pendientes .= "</a>
@@ -1335,7 +1335,7 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../cargar_base/'>
-                                      <i class='fa fa-database'></i> ";
+                                      icon('fa fa-database'') ";
               $lista_pendientes .= "<span $style_pedientes>
                             ". $correos_pendientes
                             ."
@@ -1365,7 +1365,7 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../desarrollo/'>
-                                    <i class='fa fa-flag'></i> ";
+                                    icon('fa fa-flag'') ";
               $lista_pendientes .= "<span $style_pedientes>
                                       ". $tareas_restantes_marketing
                                       ."
@@ -1393,7 +1393,7 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../desarrollo/'>
-                                    <i class='fa fa-building'></i> ";
+                                    icon('fa fa-building'') ";
               $lista_pendientes .= "<span $style_pedientes>
                                       ". 
                                       $tareas_restantes_direccion
@@ -1420,7 +1420,7 @@ if(!function_exists('invierte_date_time')){
 
               $lista_pendientes .= "<li class='black ' > ";
               $lista_pendientes .= "<a href='../faq/'>
-                                    <i class='fa fa-television' ></i> ";
+                                    icon('fa fa-television' ') ";
               $lista_pendientes .= "<span $style_pedientes>
                                       ". 
                                       $tareas_enid_service_temas_ayuda1

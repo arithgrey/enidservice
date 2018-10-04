@@ -2,7 +2,6 @@
 
 	$costo_envio_cliente_sistema 	=  $costo_envio_sistema["costo_envio_cliente"];
 	$recibo 						=  $recibo[0];  
-	/*Información de recibo*/
 	$id_forma_pago  				=  $recibo["id_forma_pago"];
 	$saldo_cubierto  				=  $recibo["saldo_cubierto"];
 	$fecha_registro  				=  $recibo["fecha_registro"];
@@ -32,9 +31,8 @@
 	$apellido_paterno 				=  $usuario["apellido_paterno"]; 
 	$apellido_materno				=  $usuario["apellido_materno"]; 
 	$email 							=  $usuario["email"]; 
-	$url_request =  $url_request;
-
-	$cliente = $nombre." ". $apellido_paterno ." " .$apellido_materno;		
+	$url_request 					=  $url_request;
+	$cliente 						= $nombre." ". $apellido_paterno ." " .$apellido_materno;		
 	
 
 	if($costo_envio_cliente_sistema > $costo_envio_vendedor) {
@@ -44,11 +42,11 @@
 	$saldo_pendiente =  ($monto_a_pagar * $num_ciclos_contratados )- $saldo_cubierto;	
 	
 
-	$servicio 					= $servicio[0];
-	$flag_servicio 				=  $servicio["flag_servicio"];
-	$text_envio_cliente_sistema = "";
+	$servicio 					= 	$servicio[0];
+	$flag_servicio 				=  	$servicio["flag_servicio"];
+	$text_envio_cliente_sistema = 	"";
 	if($flag_servicio == 0 ){
-		$saldo_pendiente 		=  $saldo_pendiente + $costo_envio_cliente;		
+		$saldo_pendiente 			=  $saldo_pendiente + $costo_envio_cliente;		
 		$text_envio_cliente_sistema =  $costo_envio_sistema["text_envio"]["cliente"];
 	}
 	
@@ -67,14 +65,10 @@
 	$detalles 					=  $resumen_pedido;	
 	$ciclo_de_facturacion 		=  $id_ciclo_facturacion;  	
 	$saldo_cubierto 			=  $saldo_cubierto;
-	$monto_a_pagar 				=    $monto_a_pagar;
+	$monto_a_pagar 				=  $monto_a_pagar;
 	$primer_registro 			=  $fecha_registro;	
-
-	$estado_text ="";
-	if ($saldo_cubierto < $monto_a_pagar ){
-
-		$estado_text ="Pendiente";
-	}	
+	$estado_text 				=  ($saldo_cubierto < $monto_a_pagar ) ? "Pendiente": "";
+		
 	
 	$data["saldo_pendiente"] =  $saldo_pendiente;
 	$url_pago_paypal ="https://www.paypal.me/eniservice/".$saldo_pendiente;
@@ -84,9 +78,7 @@
 	$data_extra["cliente"] 	=  	$cliente;
 	$url_logo 				= 	$url_request."img_tema/enid_service_logo.jpg";
 	$config_log				=   ['src' => $url_logo  ,'width'	=> '100'];
-	
-	$url_cancelar_envio_email = 
-	$url_request."msj/index.php/api/emp/salir/format/json/?type=2&id=".$id_proyecto_persona_forma_pago;
+	$url_cancelacion 		= 	$url_request."msj/index.php/api/emp/salir/format/json/?type=2&id=".$id_proyecto_persona_forma_pago;
 
 
 ?>
@@ -97,57 +89,26 @@
 				<?=img($config_log)?>
 			</div>
 		</center>
-		<h1>
-			<span style="color: black;"> 
-				#Recibo: <?=$id_recibo;?>
-			</span> 
-			
-		</h1>
+		<?=heading_enid("#Recibo: " .$id_recibo;)?>
+
 		<div style="background: #fcfcfc;padding: 5px;">
-			<div>
-				<span style="font-weight:bold;background: black;color: white;">
-					Concepto
-				</span>
-			</div>
-			<p>
-				<?=$resumen_pedido;?>
-			</p>
-
-			<p>
-				<strong>
-					<?=valida_texto_periodos_contratados(
-						$num_ciclos_contratados, 
-						$flag_servicio , 
-						$id_ciclo_facturacion
-						)?>
-				</strong>
-			</p>
-
-			<p>
-				<strong>
-				Precio $
-				</strong><?=$monto_a_pagar;?>       	
-			</p>
-			<p>
-				<?=$text_envio_cliente_sistema?>
-			</p>
+			<?=div("Concepto")?>
+			<?=div($resumen_pedido)?>
+			<?=div(valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio , $id_ciclo_facturacion))?>
+			<?=div("Precio $" . $monto_a_pagar)?>
+			<?=div($text_envio_cliente_sistema)?>
 			<p>	
-				<i class="fa fa-check-circle-o"></i>  
+				<?=icon('fa fa-check-circle-o')?>  
 		        Ordén de compra
-		        <strong>
 		         <?=$primer_registro;?>                         		
-		        </strong>
-		                            	| Límite de pago 
-		        <strong>
+		       	| Límite de pago 
 		         <?=$fecha_vencimiento;?>
-		        </strong>
 		    </p>		                            
 			<div style="border-style: solid;text-align: right;">
-				<strong>
-	          		Monto total pendiente 
-	          	</strong>
+				<?=strong("Monto total pendiente ")?>
+	          	<?=span($saldo_pendiente . "Pesos Mexicanos"	)?>
 	          	<span style="background: green; color:white;padding: 3px;">
-	          		<?=$saldo_pendiente?> Pesos Mexicanos	
+	          		
 	          	</span>
 	        </div>
 		</div>	      
@@ -171,7 +132,7 @@
 			<?=$this->load->view("cobranza/pago_oxxo" , $data_oxxo)?> 			
 		</div>
 		<hr>
-		<div >
+		<div>
 			<?=$this->load->view("cobranza/pago-paypal" , $data)?> 	
 		</div>
 
@@ -195,7 +156,7 @@
 			<?=anchor_enid( 
 			"YA NO QUIERO RECIBIR ESTE CORREO" ,  
 			[
-				'href' 	=> $url_cancelar_envio_email ,  
+				'href' 	=> $url_cancelacion ,  
 				'style' => 'color:black;font-size:.9em;font-weight:bold'
 			])?>
 		</div>

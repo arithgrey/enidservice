@@ -23,13 +23,13 @@
 						title="'.$nombre_servicio.'">						   
 						<div class="d-flex w-100 justify-content-between " >
 							<h5 class="mb-1 '.$color.'" >
-							<i class="fa fa-check">
+							icon('fa fa-check">
 								</i>
 							    '.$nombre_servicio.'						      
 							</h5>
 							<!--
 							<div class="text-right">
-								<i class="fa fa-check">
+								icon('fa fa-check">
 								</i>
 								<small class="'.$color.'"  >				
 								    Agregar
@@ -56,7 +56,7 @@
 							</h5>							
 							<div class="text-right">
 								<a href="../planes_servicios/?q=1" style="color:white!important;">	
-									<i class="fa fa-check">
+									icon('fa fa-check">
 									</i>								
 									<small 
 										class="blue_enid_background2 white"

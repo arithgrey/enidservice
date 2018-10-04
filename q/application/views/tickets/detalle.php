@@ -29,16 +29,15 @@
 	$l = "";	
 	foreach ($info_tareas as $row){
 
-		$id_tarea =  $row["id_tarea"];
-		$status =  $row["status"];
-		$valor_actualizar = 0; 
-		$estado_tarea = ""; 
-		$fecha_registro =  $row["fecha_registro"];			
-		$nombre =  $row["nombre"];
-		$apellido_paterno = $row["apellido_paterno"];
-		$apellido_materno =  $row["apellido_materno"];
-
-		$num_comentarios =  $row["num_comentarios"];
+		$id_tarea 			=  $row["id_tarea"];
+		$status 			=  $row["status"];
+		$valor_actualizar 	= 0; 
+		$estado_tarea 		= ""; 
+		$fecha_registro 	=  $row["fecha_registro"];			
+		$nombre 			=  $row["nombre"];
+		$apellido_paterno 	= $row["apellido_paterno"];
+		$apellido_materno 	=  $row["apellido_materno"];
+		$num_comentarios 	=  $row["num_comentarios"];
 
 		$nombre_usuario_registro = 
 		$nombre ." " .$apellido_paterno ." " . $apellido_materno;
@@ -50,56 +49,40 @@
 			$estado_tarea = "tarea_pendiente"; 					
 		}
 
-		$tipo_usuario =  valida_tipo_usuario_tarea($perfil);
+		$tipo_usuario 	=  valida_tipo_usuario_tarea($perfil);
 		$extra_checkbox =" ";	
 				
-		$input=valida_check_tarea($id_tarea,$valor_actualizar,$status,$perfil);
-		$seccion_respuesta_num ="seccion_respuesta_".$id_tarea;
+		$input 					=	valida_check_tarea($id_tarea,$valor_actualizar,$status,$perfil);
+		$seccion_respuesta_num 	=	"seccion_respuesta_".$id_tarea;
 		
 ?>
-
-
-
-			<div class='<?=$estado_tarea?>'>
-				<?=n_row_12()?>	
-
-					<div>
-					<div class='col-lg-10 col-lg-offset-1'>
-						<?=div($nombre_usuario_registro . "||" .$tipo_usuario , 
-							[ "class"=>'col-lg-7'])?>
-						<?=div($fecha_registro . $input , ["class"=>'col-lg-5'])?>		
-					</div>							
-					</div>					
-				<?=end_row()?>
-				<?=n_row_12()?>
-					<div>						
-						<?=$row["descripcion"]?>
-					</div>	
-				<?=end_row()?>
-				<?=n_row_12()?>						
-					<table>
-						<tr>
-							<td>
-								<span 
-									class='strong comentarios_tarea cursor_pointer' 
-									id='<?=$id_tarea?>'> 					
-										Ver comentarios(<?=$num_comentarios?>)
-								</span>					
-							</td>
-							<td class='text-right'>
-								<span 
-									class='strong agregar_respuesta a_enid_blue_sm cursor_pointer' 
-									id='<?=$id_tarea?>'> 
-									+ agregar comentario
-								</span>					
-							</td>
-						</tr>	
-					</table>
-				<?=end_row()?>
-					
-				<?=n_row_12()?>
-					<div class='<?=$seccion_respuesta_num?>  row' id='<?=$id_tarea?>'>
-					</div>
-				<?=end_row()?>						
-			</div>				
+	<div class='<?=$estado_tarea?>'>
+		<?=n_row_12()?>	
+			<div class='col-lg-10 col-lg-offset-1'>
+				<?=div($nombre_usuario_registro . "||" .$tipo_usuario , [ "class"=>'col-lg-7'])?>
+				<?=div($fecha_registro . $input , ["class"=>'col-lg-5'])?>		
+			</div>							
+		<?=end_row()?>
+		<?=div($row["descripcion"] , 1)?>
+		<?=n_row_12()?>						
+			<table>
+				<tr>
+				<?=get_td(div("Ver comentarios(" . $num_comentarios .")" , 
+							[
+								"class"	=>	'strong comentarios_tarea cursor_pointer', 
+								"id"	=>	$id_tarea
+							])
+						)?>
+						
+				<?=get_td(div("+ agregar comentario" , 
+							[
+								"class"	=>	'text-right strong agregar_respuesta a_enid_blue_sm cursor_pointer', 
+								"id"	=>	$id_tarea
+							])
+						)?>
+				</tr>	
+			</table>
+		<?=end_row()?>
+		<?=place($seccion_respuesta_num , ["id" => $id_tarea])?>
+	</div>				
 <?php }?>

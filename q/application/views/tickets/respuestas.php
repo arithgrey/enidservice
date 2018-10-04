@@ -19,47 +19,32 @@
 			if ($idperfil != 20 ) {
 				$text_perfil ="Equipo Enid Service";	
 			}
-			$respuestas .= "
-				<div class='media msg'>
-                    <a class='pull-left' href='#'>
-                        <img class='media-object'>
-                    </a>
-                    <div class='media-body'>
-                        <small class='pull-right time'>
-                        	<i class='fa fa-clock-o'></i> 
-                        	".$fecha_registro."
-                        </small>
-                        <h5 class='media-heading'>
-                        	  ".$usuario_respuesta."  | ".$text_perfil ."
-                        </h5>
-                        <small class='col-lg-10'>
-                        	".$respuesta."
-                        </small>
-                    </div>
-                </div>
-                <hr>";
+
+            $respuestas .= "<div>";
+                $respuestas .=  anchor_enid(img(["class"=>'media-object']) , ["class"=>'pull-left',  "href"=>'#'] );
+                $respuestas .= "<div class='media-body'>";
+                    $respuestas .= small(icon('fa fa-clock-o') . $fecha_registro , ["class"=>'pull-right time'] );
+                    $respuestas .= heading_enid($usuario_respuesta."  | ".$text_perfil , ["class" => 'media-heading']);
+                    $respuestas .= small($respuesta , ["class"=>'col-lg-10'] );
+                $respuestas .= "</div>";
+            $respuestas .= "</div>";
+            $respuestas .= "<hr>";
                 	
 	}
 	
-	$oculta_comentarios ="";
-	if (count($info_respuestas) >0 ) {
-		$oculta_comentarios ="<span class='ocultar_comentarios strong blue_enid' 
-									id='".$id_tarea."'>
-									Ocultar 
-							  </span>";
-	}
+	$oculta_comentarios = (count($info_respuestas) >0 ) ? span("Ocultar " , ["class"=>'ocultar_comentarios strong blue_enid' , "id"=> $id_tarea ]) : "";
+	
+		
+
 ?>
 
 <div class="col-lg-12">
-	
-
 	<?=$oculta_comentarios?>
-	<div class="Message-wrap">
-		<div class="msg-wrap">
-			<?=$respuestas;?>
-		</div>
-	</div>
+    <?=div(div($respuestas , ["class" => "msg-wrap"]) , ["class"=>"Message-wrap"]) ?>
 </div>
+
+
+
 
 
 

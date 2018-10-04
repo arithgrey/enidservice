@@ -9,107 +9,88 @@
 		$next ++;	
 	}
 ?>
-<div style="margin-top: 10px;"></div>
+
 <?=n_row_12()?>
-<div>
-	<h3 style="font-size: 2em;">
-	  	<?=$data_send["pregunta"]?>
-	</h3>
-	<div>
-		<strong>
-			SOBRE 
-			<a href="<?=get_url_servicio($data_send["id_servicio"])?>" 
-				class='a_enid_blue_sm'
-				style="color: white!important">
-				<?=strtoupper($data_send["nombre_servicio"])?>			
-			</a>
-		</strong>
-	</div>  	
-</div>
+
+	<?=heading_enid($data_send["pregunta"] , 2)?>
+	<?=anchor_enid( strong("SOBRE") . strtoupper($data_send["nombre_servicio"]) , 
+		[ 
+			"href"		=> 	get_url_servicio($data_send["id_servicio"]) , 
+			"class" 	=>	'a_enid_blue_sm'
+		]
+		,
+		1
+	)?>
+		
+
 <?php if($next>0):?>
-	<div style="margin-top: 15px;">
-		<span class="strong">
-			CLIENTE:
-		</span> 
-		<span style="text-decoration: underline;">
-			<?=strtoupper($nombre)?>
-		</span>
+	<div class="top_15">
+		<?=strong("CLIENTE:")?>
+		<?=span(strtoupper($nombre) , ["class" => "underline"])?>	
 	</div>
 	<?php if(strlen($telefono)>4):?>
 		<div style="margin-top: 10px;">
-			<span class="strong">
-				TELÉFONO DE CONTACTO:
-			</span> 
-			<span style="text-decoration: underline;">
-				<?=$telefono?>
-			</span>
+			<?=strong("TELÉFONO DE CONTACTO:")?>
+			<?=span($telefono , ["class" => "underline"])?>
 		</div>
 	<?php endif;?>		
 <?php endif;?>
 <?=end_row()?>
 <?=n_row_12()?>
 <div class="contenedor_preguntas">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Seguimiento
-                </div>
-                <div class="panel-body">
-                	<div class="<?=verifica_scroll_respuesta(count($respuestas))?>">
-	                    <ul class="chat">
-	                    	<?php 
-		                    	foreach($respuestas as $row){	       
-
-									$respuesta      =  $row["respuesta"];
-									$fecha_registro =  $row["fecha_registro"];
-									$id_pregunta    =  $row["id_pregunta"];
-									$id_usuario     =  $row["id_usuario"];
-									$nombre  = $row["nombre"];
-									$apellido_paterno  = $row["apellido_paterno"];                    				
-							?>
-		                        <li class="left clearfix">
-		                        	<span class="chat-img pull-left">
-		                            	<img 
-		                            		src="<?=carga_imagen_usuario_respuesta($id_usuario)?>" 
-		                            		onerror="this.src='../img_tema/user/user.png'"
-		                            		style="width: 40px!important;height: 32px!important;"	
-		                            		class="img-circle"/>
-		                        	</span>
-		                            <div class="chat-body clearfix">
-		                                <div class="header">
-		                                    <strong class="primary-font">
-		                                	    <?=$nombre?> <?=$apellido_paterno?>
-		                                	</strong> 
-		                                    <small class="pull-right text-muted">
-		                                        <span class="fa fa-clock">
-		                                     	</span><?=$fecha_registro?>
-		                                     </small>
-		                                </div>
-		                                <p>
-		                                    <?=$respuesta?>
-		                                </p>
-		                            </div>
-		                        </li>
-	                        <?php }?>                 
-	                    </ul>
-                    </div>
-                </div>
-                <form class="form_valoracion_pregunta"  > 
-	                <div class="panel-footer">
-	                    <div class="input-group">
-	                        <input 
-		                        id="btn-input" 
-		                        type="text" 
-		                        class="form-control input-sm" 
-		                        placeholder="Agrega una respuesta"
-		                        name="respuesta" />
-	                        <span class="input-group-btn">
-	                            <button class="btn btn-warning btn-sm" id="btn-chat">
-	                                Enviar respuesta
-	                            </button>
-	                        </span>
-	                    </div>
-	                </div>
-                </form>
-            </div>        
+	<div class="panel panel-primary">
+		<?=div("Seguimiento" , ["class" => "panel-heading"])?>
+		<div class="panel-body">
+			<div class="<?=verifica_scroll_respuesta(count($respuestas))?>">
+				<ul class="chat">
+				<?php foreach($respuestas as $row){	       
+					$respuesta      =  $row["respuesta"];
+					$fecha_registro =  $row["fecha_registro"];
+					$id_pregunta    =  $row["id_pregunta"];
+					$id_usuario     =  $row["id_usuario"];
+					$nombre  		= $row["nombre"];
+					$apellido_paterno  = $row["apellido_paterno"];                    				
+				?>
+				<li class="left clearfix">
+					<?=span(
+						img([
+							"src" 			= carga_imagen_usuario_respuesta($id_usuario),
+		                    "onerror" 		= "this.src='../img_tema/user/user.png'",
+		                    "style" 		= "width: 40px!important;height: 32px!important;"	,
+		                    "class" 		= "img-circle"
+						]) , 
+						["class" 			=>	"chat-img pull-left"]
+					)?>
+					<div class="chat-body clearfix">
+						<div class="header">
+							<?=strong( $nombre . $apellido_paterno , ["class" => "primary-font"] )?>
+							<?=small(icon("fa fa-clock") . $fecha_registro , ["class" => "pull-right text-muted"] )?>
+						</div>
+						<?=p($respuesta)?>
+					</div>
+				</li>
+				<?php }?>                 
+				</ul>
+			</div>
+		</div>
+		<form class="form_valoracion_pregunta"  > 
+	        <div class="panel-footer">
+	            <div class="input-group">
+	            <?=input([
+	            	"id"				=> 	"btn-input" ,
+		            "type"				=> 	"text" ,
+		            "class"				=> 	"form-control input-sm" ,
+		            "placeholder"		=> 	"Agrega una respuesta",
+		            "name"				=> 	"respuesta"
+	            ])?>
+	            <?=guardar("Enviar respuesta" , 
+	            [
+	            	"class"=>"btn btn-warning btn-sm input-group-btn" ,
+	            	"id"=>"btn-chat"
+	            ])?>
+	            </div>
+	        </div>
+	    </form>
+	</div>        
 </div>
 <?=end_row()?>

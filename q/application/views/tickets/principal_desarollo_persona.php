@@ -107,7 +107,7 @@
                               class="input-sm btn" 
                               href="../faq">
                                 Preguntas frecuentes      
-                                <i class="fa fa-info-circle">                                  
+                                icon('fa fa-info-circle">                                  
                                 </i>
                             </a> 
                         </div>

@@ -63,7 +63,7 @@
 		$l.= "<tr>";	    
 
 
-			$l.= get_td($lista_status[$status] . " <i class='".$class_estatus_iconos[$status]."'>
+			$l.= get_td($lista_status[$status] . " icon('".$class_estatus_iconos[$status]."'>
 		    	<i>" , " class='".$class_estatus[$status]."'  ");
 		   
 		    $l.= get_td($btn_mas_info);

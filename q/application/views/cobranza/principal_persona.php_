@@ -24,7 +24,7 @@
 		
 		$servicio_meses ="No aplica";
 		if ($flag_meses ==  1) {
-			$servicio_meses ="<i class='fa fa-check' ></i>";
+			$servicio_meses ="icon('fa fa-check' ')";
 		}if($num_meses ==  0) {
 			$num_meses ="-";
 		}

@@ -677,7 +677,7 @@ if(!function_exists('invierte_date_time')){
 
     $l =  "";
     for ($a=0; $a < $val; $a++) { 
-      $l .=  "<i class='fa fa-star text-default'></i>";
+      $l .=  "icon('fa fa-star text-default'')";
     }
     return $l; 
   }
@@ -685,7 +685,7 @@ if(!function_exists('invierte_date_time')){
   function get_start($val , $comparacion ){
     
       if ($val ==  $comparacion ) {
-        return  $val . " <i class='fa fa-star'></i>"; 
+        return  $val . " icon('fa fa-star'')"; 
       }else{
         return  $val;
       }
@@ -833,7 +833,7 @@ if(!function_exists('invierte_date_time')){
           return '  
                     <li class="btn_configurar_enid">
                       <a href="'.$href.'" >
-                        <i class="fa fa fa-cog">
+                        icon('fa fa fa-cog">
                         </i> 
                      
                       </a>

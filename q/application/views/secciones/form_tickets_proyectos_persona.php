@@ -1,6 +1,6 @@
 <div class="col-lg-12 col-md-12 col-sm-12  "> 
   <a class="regresar_tickets_usuario strong  black">
-  <i class="fa fa-chevron-circle-left">            
+  icon('fa fa-chevron-circle-left">            
   </i>
     Regresar a mis tickets abiertos
   </a>

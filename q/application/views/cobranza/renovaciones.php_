@@ -75,7 +75,7 @@
 	                        <a href="#" class="btn btn-primary btn-lg btn-block" style="background: #0400BD!important"><?=$estado;?></a>
 	                        <ul class="list-unstyled">
 		                            <li >
-		                                <i class="fa fa-check-circle-o">
+		                                icon('fa fa-check-circle-o">
 		                            	</i>  
 		                            	Solicitud
 		                            	<strong>
@@ -83,14 +83,14 @@
 		                            	</strong>
 		                        	</li>
 		                            <li  >
-		                                <i class="fa fa-check-circle-o">
+		                                icon('fa fa-check-circle-o">
 		                            	</i> Vencimiento
 		                            	<strong>
 		                            		<?=$fecha_vencimiento;?>
 		                            	</strong>
 		                        	</li>
 		                            <li  >
-	                                <i class="fa fa-check-circle-o">
+	                                icon('fa fa-check-circle-o">
 	                            	</i>
 	                            		Próximo vencimiento(días)		
 	                            		<strong>

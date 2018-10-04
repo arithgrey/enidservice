@@ -18,7 +18,7 @@
             <div class="col-lg-2">
               <center>
               <div>
-                <i class="fa fa-usd ">                  
+                icon('fa fa-usd ">                  
                 </i>
               </div>
               </center>

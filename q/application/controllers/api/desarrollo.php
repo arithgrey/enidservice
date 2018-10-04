@@ -14,13 +14,13 @@ class desarrollo extends REST_Controller{
         $num_tareas_pendientes = $this->desarrollomodel->get_tareas_pendientes_usuario($param);
 
         $new_response = "<span class='alerta_pendientes_blue'>".$num_tareas_pendientes."
-                            <i class='fa fa-terminal'>
+                            icon('fa fa-terminal'>
                             </i>
                         </span>";
         if ($num_tareas_pendientes > 5 ) {
             
             $new_response = "<span class='alerta_pendientes'>".$num_tareas_pendientes."
-                                <i class='fa fa-terminal'>
+                                icon('fa fa-terminal'>
                                 </i>
                              </span>";
         }if($num_tareas_pendientes ==  0  ) {

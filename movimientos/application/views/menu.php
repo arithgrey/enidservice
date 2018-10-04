@@ -4,7 +4,7 @@
                 <div class="panel income db mbm">
                     <div class="panel-body">
                         <p class="icon">
-                            <i class="icon fa fa-money">                    
+                            icon('icon fa fa-money">                    
                             </i>
                         </p>
                         <p>

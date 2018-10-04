@@ -25,14 +25,14 @@
 	$servicio 				= 	$servicio[0];
 	$flag_servicio 			=  	$servicio["flag_servicio"];
 
-	debug($monto_a_pagar);
-	debug("pappapapapp");
+	
+	
 	$deuda 					=  get_saldo_pendiente($monto_a_pagar,
-		$num_ciclos_contratados,
-		$saldo_cubierto,
-		$flag_servicio,
-		$costo_envio_cliente,
-		$costo_envio_sistema);
+								$num_ciclos_contratados,
+								$saldo_cubierto,
+								$flag_servicio,
+								$costo_envio_cliente,
+								$costo_envio_sistema);
 
 	
 	$saldo_pendiente 		= 	$deuda["saldo_pendiente_envio"];   
@@ -63,11 +63,10 @@
 			[
 				"href"	=>  $url_pago_oxxo,
 				"class"	=> 	"contenedor_tipo_pago",
-				1,
-				1
+			1,
+			1
 		]
 	)?>
-
 	<?=n_row_12()?>				
 		
 		
@@ -87,8 +86,7 @@
 			<?php if(count($informacion_envio)>0):?>
 
 				<div style="background:#1F2839;color: white;padding: 10px;">
-			    
-			    <div style="margin-top: 10px;" class="text-right">
+			    <div class="text-right top_10">
 			    	<?=icon("fa fa-pencil" ,  
 			    		[			    		
 			    		"class"			=> 	"a_enid_blue btn_direccion_envio ",
@@ -98,8 +96,6 @@
 			    		],
 			    		1
 			    	)?>
-			        
-			        
 			    </div>
 
 
@@ -114,13 +110,10 @@
 			        <?=get_campo($informacion_envio , "municipio")?>
 			        <?=get_campo($informacion_envio , "ciudad" )?>
 			        <?=get_campo($informacion_envio , "estado" )?>		
-			        
 			    </div>    
-			    <div>
-			    	<?=div("¿Quíen más puede recibir tu pedido?")?>
-			    	<?=div(get_campo($informacion_envio , "nombre_receptor" ))?>
-			    	<?=div(get_campo($informacion_envio , "telefono_receptor" ))?>
-			    </div>
+			    <?=div("¿Quíen más puede recibir tu pedido?")?>
+			    <?=div(get_campo($informacion_envio , "nombre_receptor" ))?>
+			    <?=div(get_campo($informacion_envio , "telefono_receptor" ))?>
 			</div>
 			<?php else: ?>
 				<?=div(
@@ -141,15 +134,11 @@
 
 		<?=anchor_enid('CANCELAR COMPRA', 
 		[
-
 			"class"		=> 	"cancelar_compra",
 			"id"		=> 	 $id_recibo,
 			"modalidad"	=> 	'0',
 			"style"		=> 	"background: #f00 !important;padding: 10px!important;color:white !important;font-weight: bold !important;"
-		])?>
-
-
-		
+		])?>		
 	<?=end_row()?>	
 </div>
 <div class="col-lg-4">
@@ -162,9 +151,9 @@
 		<?=div($deuda["text_envio"])?>
 	</div>
 	<div style="border-style: solid;text-align: center;">
-		<?=heading_enid("Monto total pendiente-", 3, ['class'	=> 'strong'] )?>
-	    <?=heading_enid($saldo_pendiente ."MXN", 4 ,   ["class" 		=> 'blue_enid strong'] )?>
-	    <?=heading_enid("Pesos Mexicanos" , 4 , ["class" 		=> 'strong'])?>
+		<?=heading_enid("Monto total pendiente-", 3, 	['class' 	=> 'strong'] )?>
+	    <?=heading_enid($saldo_pendiente ."MXN", 4 ,   	["class" => 'blue_enid strong'] )?>
+	    <?=heading_enid("Pesos Mexicanos" , 4 , 		["class"=> 'strong'])?>
 	</div>
 	<?=div(img($url_img_servicio), [] , 1)?>	        
 </div>

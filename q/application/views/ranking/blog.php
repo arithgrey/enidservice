@@ -26,7 +26,7 @@
                 <div class="timeline-entry-inner">
                     <div class="timeline-icon bg-info">
                         '.$z.'
-                        <i class="entypo-feather"></i>
+                        icon('entypo-feather"')
                     </div>
                     <div class="timeline-label">
                         <h2>

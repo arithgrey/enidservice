@@ -1,35 +1,22 @@
-<div class="jumbotron">
-  <h1 class="titulo_enid">ULTIMOS MOVIMIENTOS
-  </h1> 
-</div>
+<?=div( heading_enid("ULTIMOS MOVIMIENTOS" , 1, ["class"=>"titulo_enid"])  , ["class"=>"jumbotron"])?>
 
-<?=n_row_12();?>
-
-<?=end_row();?>
 <?=n_row_12();?>	
 	<?php if(count($solicitud_saldo)>0): ?>
-		<div class='titulo_enid_sm_sm'>
-			SOLICITUDES DE SALDO A TUS AMIGOS
-		</div>
+		<?=div("SOLICITUDES DE SALDO A TUS AMIGOS" , ["class"=>'titulo_enid_sm_sm'])?>
 	<?php endif;?>
     <?php foreach ($solicitud_saldo as $row): ?>
-    			
     		<?=n_row_12();?>
                    <div class='list-group-item-movimiento '>
                    		<table style='width:100%'>
                    			<tr>
-                   				<td colspan="2">
-                               		<div class='folio'>
-                               			Folio #<?=$row["id_solicitud"];?>
-                               		</div>
-                           		<td>
-                           	</tr>
+                            <?=get_td(div("Folio # ".$row["id_solicitud"] ,  ["class" =>  'folio']) , ["colspan" => "2"])?>
+                   				  </tr>
                            	<tr>
                            		<td>
+                                <?=div()?>
                                		<div class='desc_solicitud'>
-                               			<span class='monto_solicitado'>                   		
-                                   			SOLICITUD DE SALDO A <?=$row["email_solicitado"] ?>
-                                   		</span>                                   		
+                                    <?=span("SOLICITUD DE SALDO A" . $row["email_solicitado"] , ["class"=>'monto_solicitado'] )?>
+                               			
                                		</div>
                            		</td>
                            		<td>

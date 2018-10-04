@@ -6,36 +6,28 @@
 
 	foreach ($saldos_pendientes["info_cobranza"] as $row) {
 			
-    $saldo_cubierto = $row["saldo_cubierto"]; 		
-		$monto_a_pagar = $row["monto_a_pagar"]; 						
-		$id_proyecto_persona_forma_pago =  $row["id_proyecto_persona_forma_pago"];			
-		$id_usuario = $row["id_usuario"];
-		$cliente  = get_nombre_cliente($row);	
-    $vendedor =  get_nombre_vendedor($row);
-    $id_proyecto_persona =  $row["id_proyecto_persona"];        
-    $id_usuario =  $row["id_usuario"];
-    $num_email_recordatorio =  $row["num_email_recordatorio"];    
+    $saldo_cubierto                   =   $row["saldo_cubierto"]; 		
+		$monto_a_pagar                    =   $row["monto_a_pagar"]; 						
+		$id_proyecto_persona_forma_pago   =   $row["id_proyecto_persona_forma_pago"];			
+		$id_usuario                       =   $row["id_usuario"];
+		$cliente                          =   get_nombre_cliente($row);	
+    $vendedor                         =   get_nombre_vendedor($row);
+    $id_proyecto_persona              =   $row["id_proyecto_persona"];        
+    $id_usuario                       =   $row["id_usuario"];
+    $num_email_recordatorio           =   $row["num_email_recordatorio"];    
+    $monto_deuda                      =   valida_monto_pendiente($monto_a_pagar , $saldo_cubierto );
+    $abrir_ticket                     =   "href='#tab_abrir_ticket' data-toggle='tab'";    
+    $pagos_pendientes                 =   "class='resumen_pagos_pendientes' id='".$id_proyecto_persona_forma_pago."'";  
+    $saldos_abonados                  =   "  class='persona_proyecto'  id='".$id_proyecto_persona."'  href='#tab_renovar_servicio' data-toggle='tab' ";
+
+
+    $lugar_de_envio                   = "  class='btn_direccion_envio' id='".$id_proyecto_persona_forma_pago."'  href='#tab_lugar_envio' data-toggle='tab' ";
+    $info_persona                     = "  class='info_persona' id='".$id_usuario."'  ";
+
     
-    $monto_deuda =  valida_monto_pendiente($monto_a_pagar , $saldo_cubierto );
-    $abrir_ticket =  "href='#tab_abrir_ticket' data-toggle='tab'";    
-    $pagos_pendientes = "class='resumen_pagos_pendientes' id='".$id_proyecto_persona_forma_pago."'";  
-    $saldos_abonados = "  class='persona_proyecto'  id='".$id_proyecto_persona."'  href='#tab_renovar_servicio' data-toggle='tab' ";
-
-
-    $lugar_de_envio = "  class='btn_direccion_envio' 
-                          id='".$id_proyecto_persona_forma_pago."'  
-                          href='#tab_lugar_envio' data-toggle='tab' ";
-
-    $info_persona  = "  class='info_persona' 
-                          id='".$id_usuario."'  ";
-
-    /**/
     $url_oxxo = "http://enidservice.com/inicio/orden_pago_oxxo/?q=$monto_a_pagar&q2=".$id_proyecto_persona_forma_pago;
-    /**/
     $url_compra_completo ="http://enidservice.com/inicio/forma_pago/?recibo=".$id_proyecto_persona_forma_pago;
-    /**/
     $url_imagen =  "../imgs/index.php/enid/imagen_usuario/".$id_usuario;
-
     /*Información de contacto*/
 
 
@@ -72,28 +64,28 @@
                         <ul role="menu" class="dropdown-menu pull-right">
                         <li>                          
                           <a <?=$pagos_pendientes?> style="" >
-                            <i class="fa fa-shopping-bag">                              
+                            icon('fa fa-shopping-bag">                              
                             </i>
                             Resumen del pedido
                           </a>
                         </li>
                         <li>
                           <a <?=$saldos_abonados?> style="" >
-                            <i class="fa fa-money">                            
+                            icon('fa fa-money">                            
                             </i>
                             Saldo abonado                            
                           </a>
                         </li>
                         <li>
                           <a <?=$info_persona?> style="">                            
-                            <i class="fa fa-user-circle" ></i>
+                            icon('fa fa-user-circle" ')
                             Información del cliente
                           </a>
                         </li>
 
                         <li>
                           <a <?=$lugar_de_envio?>  style="">
-                            <i class="fa fa-map-marker"></i>
+                            icon('fa fa-map-marker"')
                               Lugar de envio
                           </a>
                         </li>
@@ -106,7 +98,7 @@
                               id='<?=$id_proyecto_persona?>' 
                               persona="<?=$id_proyecto_persona?>"
                               <?=$abrir_ticket?> >
-                              <i class="fa fa-file-text-o">                                
+                              icon('fa fa-file-text-o">                                
                               </i>                              
                               Agregar tareas
                           </a>

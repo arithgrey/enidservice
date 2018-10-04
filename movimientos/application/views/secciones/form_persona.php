@@ -123,7 +123,7 @@
     <div class='col-lg-12'>            
         <div class='agendar_llamada_btn'>
             Agendar llamada 
-          <i class="fa fa-clock-o">
+          icon('fa fa-clock-o">
           </i>                    
         </div>
         <input type='hidden' name='idtipo_llamada' value="1">     

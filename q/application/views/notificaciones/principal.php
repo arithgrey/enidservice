@@ -34,7 +34,7 @@
 						$ventas_restantes = ($meta_ventas - $ventas_enid_service);
 						
 							$lista_pendientes .= "<li class='black '> ";
-							$lista_pendientes .= "<i class='fa fa-credit-card'></i> ";
+							$lista_pendientes .= "icon('fa fa-credit-card'') ";
 							$lista_pendientes .= "Ventas";							
 							$lista_pendientes .= "<span $style_pedientes>".
 													$ventas_restantes
@@ -55,7 +55,7 @@
 						$envios_a_validar_restantes =($meta_envios_a_validar - $envios_a_validar);
 
 							$lista_pendientes .= "<li class='black '> ";
-							$lista_pendientes .= "<i class='fa fa-paper-plane'></i> ";
+							$lista_pendientes .= "icon('fa fa-paper-plane'') ";
 							$lista_pendientes .= "Envios a validar";
 							$lista_pendientes .= "<span $style_pedientes>".
 													$envios_a_validar_restantes
@@ -74,7 +74,7 @@
 							$llamadas_restantes = ($meta_llamadas - $llamadas_enid_service);
 
 							$lista_pendientes .= "<li class='black '> ";
-							$lista_pendientes .= "<i class='fa fa-mobile'></i> ";
+							$lista_pendientes .= "icon('fa fa-mobile'') ";
 							$lista_pendientes .= "Llamadas";
 							$lista_pendientes .= "<span $style_pedientes>
 													".
@@ -95,7 +95,7 @@
 						$contactos_restantes  = ($meta_contactos - $contactos_enid_service);
 
 						$lista_pendientes .= "<li class='black '> ";
-						$lista_pendientes .= "<i class='fa fa-user'></i> ";
+						$lista_pendientes .= "icon('fa fa-user'') ";
 						$lista_pendientes .= "Contactos";
 						$lista_pendientes .=  "<span $style_pedientes>".
 												$contactos_restantes
@@ -114,7 +114,7 @@
 				if ($meta_email  > $email_enviados_enid_service){						
 						$email_restantes = ($meta_email -  $email_enviados_enid_service);
 							$lista_pendientes .= "<li class='black '> ";
-							$lista_pendientes .= "<i class='fa fa-envelope-o'></i> ";
+							$lista_pendientes .= "icon('fa fa-envelope-o'') ";
 							$lista_pendientes .= "Email ";
 							$lista_pendientes .= "<span $style_pedientes>".$email_restantes
 												."</span>"; 
@@ -137,7 +137,7 @@
 
 
 							$lista_pendientes .= "<li class='black '> ";
-							$lista_pendientes .= "<i class='fa fa-globe'></i> ";
+							$lista_pendientes .= "icon('fa fa-globe'') ";
 							$lista_pendientes .= "Accesos";
 							$lista_pendientes .= "<span $style_pedientes>".$accesos_restantes.
 												 "</span>"; 
@@ -158,7 +158,7 @@
 
 
 							$lista_pendientes .= "<li class='black '> ";
-							$lista_pendientes .= "<i class='fa fa-code'></i> ";
+							$lista_pendientes .= "icon('fa fa-code'') ";
 							$lista_pendientes .= "Desarrollo web";
 							$lista_pendientes .= "<span $style_pedientes>
 														". $tareas_restantes
@@ -183,7 +183,7 @@
 
 
 							$lista_pendientes .= "<li class='black '> ";
-							$lista_pendientes .= "<i class='fa fa-code'></i> ";
+							$lista_pendientes .= "icon('fa fa-code'') ";
 							$lista_pendientes .= "Correos por cargar al sistema";
 							$lista_pendientes .= "<span $style_pedientes>
 														". $correos_pendientes

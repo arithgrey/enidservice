@@ -16,9 +16,7 @@
 	<tr>
 		<?=get_td("", ["class" => "table_orden_1"])?>
 		<td class="table_orden_2">			
-			<strong>
-				ORDENAR POR
-			</strong>
+			<?=strong("ORDENAR POR")?>
 		</td>	
 		<td class="table_orden_3">			
 			<table border="1">
@@ -48,7 +46,6 @@
 <?=n_row_12()?>
 	<div class="col-lg-4">	
 		<div class="row">
-
 			<?=div(anchor_enid("ESCRIBE UNA RESEÑA".icon("fa fa-chevron-right ir") , 
 				[
 					"class"		=> "escribir_valoracion" ,

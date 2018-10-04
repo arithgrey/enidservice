@@ -111,7 +111,7 @@ class Sessionclass extends CI_Controller{
 			$menu .=  "
 			<li>
                 <a href='".$url."' class='black'>
-                    <i class='".$icono."'>
+                    icon('".$icono."'>
                     </i>  
 					".$nombre."
                 </a>

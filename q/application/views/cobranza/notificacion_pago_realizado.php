@@ -14,10 +14,10 @@
 	<?php if ($modalidad ==  1):?>
 		<?=anchor_enid("CANCELAR VENTA", 
 			[
-				"class"			=>	"cancelar_compra" ,
+				"class"			=>	"cancelar_compra padding_10" ,
 				"id"			=>	$id_recibo,
 				"modalidad" 	=> 	$modalidad,
-				"style"			=> 	"background: #f00 !important;padding: 10px!important;color:white !important;font-weight: bold !important;"
+				"style"			=> 	"background: #f00 !important;color:white !important;font-weight: bold !important;"
 			],
 			1
 		)?>
@@ -48,7 +48,7 @@
 			</tr>
 		</table>
 		<hr>
-		<table style="width: 100%;padding: 10px;margin-top: 20px;">
+		<table style="width: 100%;margin-top: 20px;" class="padding_10">
 			<tr class='tb_pagos'>
 				<?=get_td("Detalles del pedido")?>
 				<?=get_td("Cantidad")?>

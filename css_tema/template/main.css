@@ -1048,7 +1048,7 @@ table{
 	color: white!important;
 	padding: 10px;
 }
-.padding_1{
+.padding_1, .padding_10{
 	padding: 10px;
 }
 .enid_hide{
@@ -1071,4 +1071,10 @@ table{
 }
 .completo{
 	width: 100%!important;
+}
+.underline{
+	text-decoration: underline;
+}
+.3em{
+	font-size: 3em;
 }

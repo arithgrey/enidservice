@@ -121,7 +121,7 @@
 
               <td>
                         <a target="_blank" href="tel:5552967027" style="color: white;">
-                            <i class="icon-mobile contact">
+                            icon('icon-mobile contact">
                             </i>
                             (55)5296-7027
                         </a>
@@ -130,14 +130,14 @@
 
               <td>
                         <a target="_blank" href="tel:this->principal->get_info_usuario" style="color: white;">
-                        <i class="icon-mobile contact">
+                        icon('icon-mobile contact">
                         </i>
                         (55)3269-3811 
                     </a>
               </td>
               <td>
                         <a target="_blank" href="tel:5583954993" style="color: white;">
-                            <i class="icon-mobile contact">
+                            icon('icon-mobile contact">
                             </i>
                             (55)8395 -4993
                         </a>
