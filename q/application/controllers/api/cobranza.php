@@ -483,7 +483,7 @@ class Cobranza extends REST_Controller{
             $new_response = "<span class='alerta_llamadas_agendadas'>
                                 ".$num_pendientes."                                
                                 icon('fa fa-usd'>
-                                </i>
+                                get_titulo_modalidad
                             </span>";
         }
         /**/   

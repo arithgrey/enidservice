@@ -59,7 +59,7 @@
                           type="button" 
                           aria-expanded="false">
                          <?=icon("fa fa-plus")?>                        
-                         </i> 
+                         get_titulo_modalidad 
                         </button>
                         <ul role="menu" class="dropdown-menu pull-right">
                         

@@ -12,7 +12,7 @@
                                                     data-toggle="tab" 
                                                     >
                         icon('fa fa-cloud-download  black ">
-                        </i>
+                        get_titulo_modalidad
                         Descargar contactos
                     </a>
                 </li>                                       

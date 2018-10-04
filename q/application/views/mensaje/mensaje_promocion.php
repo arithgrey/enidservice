@@ -71,7 +71,7 @@
               <td>
                 		<a target="_blank" href="tel:5552967027" style="color: white;">
                             icon('icon-mobile contact">
-                            </i>
+                            get_titulo_modalidad
                             (55)5296-7027
                         </a>
               </td>
@@ -79,7 +79,7 @@
               <td>
               			<a target="_blank" href="tel:this->principal->get_info_usuario" style="color: white;">
                         icon('icon-mobile contact">
-                        </i>
+                        get_titulo_modalidad
                         (55)3269-3811 
                     </a>
               </td>

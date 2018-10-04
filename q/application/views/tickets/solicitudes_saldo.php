@@ -1,5 +1,4 @@
 <?=div( heading_enid("ULTIMOS MOVIMIENTOS" , 1, ["class"=>"titulo_enid"])  , ["class"=>"jumbotron"])?>
-
 <?=n_row_12();?>	
 	<?php if(count($solicitud_saldo)>0): ?>
 		<?=div("SOLICITUDES DE SALDO A TUS AMIGOS" , ["class"=>'titulo_enid_sm_sm'])?>
@@ -13,20 +12,14 @@
                    				  </tr>
                            	<tr>
                            		<td>
-                                <?=div()?>
-                               		<div class='desc_solicitud'>
-                                    <?=span("SOLICITUD DE SALDO A" . $row["email_solicitado"] , ["class"=>'monto_solicitado'] )?>
-                               			
-                               		</div>
+                                <?=
+                                get_td(
+                                div(span("SOLICITUD DE SALDO A" . $row["email_solicitado"] , ["class"=>'monto_solicitado'] ) ,  
+                                [
+                                  "class" =>"desc_solicitud"
+                                ]))?>                               		
                            		</td>
-                           		<td>
-                           			<span class='pull-right'>
-                           				<span class='monto_solicitud_text'>
-            								<?=$row["monto_solicitado"];?>MXN
-            							</span>
-            						</span>
-                           		</td>
-                           		
+                              <?=get_td($row["monto_solicitado"]."MXN" ,  ["class"=>'monto_solicitud_text'])?>
                        		</tr> 
                    		</table>                   		  
                    </div>
@@ -34,6 +27,7 @@
          
     <?php endforeach; ?>
 <?=end_row();?>
+<!--
 <style>
 .list-group-item-movimiento{    
     margin-top:3px;
@@ -70,3 +64,4 @@
     text-align: right;
 }
 </style>
+-->

@@ -108,7 +108,7 @@
                               href="../faq">
                                 Preguntas frecuentes      
                                 icon('fa fa-info-circle">                                  
-                                </i>
+                                get_titulo_modalidad
                             </a> 
                         </div>
 	</div>   

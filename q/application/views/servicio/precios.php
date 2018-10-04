@@ -44,7 +44,7 @@
 <div class='seccion_precio_por_unidad contenedor_inf_servicios'>    
     <?=heading_enid("PRECIO POR UNIDAD", 
         4 ,
-        ['class' => ''],
+        [],
         1)?>
 
     <?=anchor_enid( 

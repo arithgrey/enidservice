@@ -41,7 +41,7 @@
 		$extra_part ="style='font-size:.8em!important;' ";
 		$historico ="icon('fa fa-credit-card-alt id_proyecto_persona_forma_pago' 
 						id='".$id_proyecto_persona_forma_pago."' >
-					</i>";
+					get_titulo_modalidad";
 
 		$extra_liquidar_servicio = "
 			id='".$id_proyecto_persona_forma_pago."'

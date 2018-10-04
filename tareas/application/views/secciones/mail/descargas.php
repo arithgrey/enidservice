@@ -6,7 +6,7 @@
 						<button class='btn input-sm btn_descargar_email' 
 								style="background: black!important;">
 								icon('fa fa-cloud-download">
-								</i>
+								get_titulo_modalidad
 							Descargar
 						</button>
 					</div>

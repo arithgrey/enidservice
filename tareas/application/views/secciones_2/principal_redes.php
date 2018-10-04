@@ -7,7 +7,7 @@
             <span class="strong modo_servicios " style="font-size: .8em!important;">
                 Promover servicios
                 icon('fa fa-chevron-right">          
-                </i>
+                get_titulo_modalidad
             </span>        
         </div>
         <div>
@@ -26,7 +26,7 @@
             <span class="strong modo_productos " style="font-size: .8em!important;" >
               Promover productos
               icon('fa fa-chevron-right">          
-              </i>
+              get_titulo_modalidad
             </span>      
           </div>      
           <div>
@@ -71,7 +71,7 @@
                   data-toggle="tab" 
                   class=" btn_tareas_fb active m_facebook blue_active">
                   icon('fa fa-facebook-official">                       
-                  </i>                      
+                  get_titulo_modalidad                      
                 </label>
 
                 <label  
@@ -79,7 +79,7 @@
                   href="#profile" data-toggle="tab" 
                   class=" btn_tareas_mercado_libre m_mercado_libre">
                   icon('fa fa-shopping-bag">                        
-                  </i>                      
+                  get_titulo_modalidad                      
                 </label>
                               
                 <label 
@@ -89,7 +89,7 @@
                   class=" btn_tareas_linkedin m_linkedin" 
                   >
                   icon('fa fa-linkedin-square">                        
-                  </i>                      
+                  get_titulo_modalidad                      
                 </label>
 
                 <label 
@@ -99,7 +99,7 @@
                   class=" btn_tareas_twitter m_twitter" 
                   >
                   icon('fa fa-twitter">                        
-                  </i>                      
+                  get_titulo_modalidad                      
                 </label>
 
                 <label 
@@ -108,7 +108,7 @@
                   data-toggle="tab" 
                   class=" btn_tareas_gplus m_gplus">
                   icon('fa fa-google-plus">                        
-                  </i>                      
+                  get_titulo_modalidad                      
                 </label>
 
                 <label 
@@ -118,7 +118,7 @@
                   class=" btn_tareas_pinterest m_pinteres" 
                   >
                   icon('fa  fa-pinterest">                        
-                  </i>                      
+                  get_titulo_modalidad                      
                 </label>
 
                 <label 
@@ -127,7 +127,7 @@
                   data-toggle="tab" 
                   class=" btn_tareas_instagram m_instagram">
                   icon('fa fa-instagram">                        
-                  </i>                      
+                  get_titulo_modalidad                      
                 </label>
                 <label 
                   title="Actividad en email " 
@@ -135,7 +135,7 @@
                   data-toggle="tab" 
                   class="btn_tareas_email m_email">
                   icon('fa fa-envelope">              
-                  </i>
+                  get_titulo_modalidad
                 </label>
 
                 <label 
@@ -144,7 +144,7 @@
                   data-toggle="tab" 
                   class="btn_tareas_whatsapp m_whatsapp">
                   icon('fa fa-whatsapp">              
-                  </i>
+                  get_titulo_modalidad
                 </label>
 
                 <label 

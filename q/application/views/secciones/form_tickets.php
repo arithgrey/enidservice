@@ -2,9 +2,9 @@
   <?=div("ABRIR SOLICITUD" ,  ["class"=>"titulo_enid"])?>
 </div>
 <div class="col-lg-6 col-lg-offset-3" style="margin-top: 50px;">
-  <form class='form_ticket'>                
-      <input id="prioridad" name="prioridad" value="1"  type="hidden">
-      <input type="hidden" name="mensaje" id="mensaje" class="mensaje">      
+  <form class='form_ticket'>                      
+      <?=input_hidden(["name"=>"prioridad", "value"=>"1" ])?>
+      <?=input_hidden(["name"=>"mensaje", "id"=>"mensaje", "class"=>"mensaje"])?>      
       <?=div("DEPARTAMENTO AL CUAL SOLICITAS" , [] , 1)?>
 
       <?=n_row_12()?>
@@ -30,8 +30,7 @@
             ])?>
 
           </div>                        
-      <?=end_row()?>   
-       
+      <?=end_row()?>          
       <?=guardar("ABRIR TICKET")?>    
   </form>
 </div>

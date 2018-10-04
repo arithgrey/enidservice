@@ -3,36 +3,33 @@
 	$respuestas ="";	
 	foreach ($info_respuestas as $row){
 
-		$respuesta  =  $row["respuesta"]; 
-		$fecha_registro  =  $row["fecha_registro"]; 		
-		$id_usuario  =  $row["id_usuario"]; 
-		$id_tarea =  $row["id_tarea"];
+		$respuesta            =   $row["respuesta"]; 
+		$fecha_registro       =   $row["fecha_registro"]; 		
+		$id_usuario           =   $row["id_usuario"]; 
+		$id_tarea             =   $row["id_tarea"];
+		$nombre               =   $row["nombre"];
+		$apellido_paterno     =   $row["apellido_paterno"];
+		$apellido_materno     =   $row["apellido_materno"]; 
+		$usuario_respuesta    =   $nombre ." " . $apellido_paterno;
+		$idperfil             =   $row["idperfil"];
+		$text_perfil = ($idperfil != 20 ) ? "Equipo Enid Service" :  "Cliente";
+		
 
-			$nombre =  $row["nombre"];
-			$apellido_paterno=  $row["apellido_paterno"];
-			$apellido_materno =  $row["apellido_materno"]; 
-			$usuario_respuesta = $nombre ." " . $apellido_paterno;
-
-			$idperfil =  $row["idperfil"];
-
-			$text_perfil ="Cliente";
-			if ($idperfil != 20 ) {
-				$text_perfil ="Equipo Enid Service";	
-			}
-
-            $respuestas .= "<div>";
-                $respuestas .=  anchor_enid(img(["class"=>'media-object']) , ["class"=>'pull-left',  "href"=>'#'] );
-                $respuestas .= "<div class='media-body'>";
-                    $respuestas .= small(icon('fa fa-clock-o') . $fecha_registro , ["class"=>'pull-right time'] );
-                    $respuestas .= heading_enid($usuario_respuesta."  | ".$text_perfil , ["class" => 'media-heading']);
-                    $respuestas .= small($respuesta , ["class"=>'col-lg-10'] );
-                $respuestas .= "</div>";
+        $respuestas .= "<div>";
+            $respuestas .=  anchor_enid(img(["class"=>'media-object']) , ["class"=>'pull-left'] );
+            $respuestas .= "<div class='media-body'>";
+                $respuestas .= small(icon('fa fa-clock-o') . $fecha_registro , ["class"=>'pull-right time'] );
+                $respuestas .= heading_enid($usuario_respuesta."  | ".$text_perfil , ["class" => 'media-heading']);
+                $respuestas .= small($respuesta , ["class"=>'col-lg-10'] );
             $respuestas .= "</div>";
-            $respuestas .= "<hr>";
+        $respuestas .= "</div>";
+        $respuestas .= "<hr>";
                 	
 	}
 	
-	$oculta_comentarios = (count($info_respuestas) >0 ) ? span("Ocultar " , ["class"=>'ocultar_comentarios strong blue_enid' , "id"=> $id_tarea ]) : "";
+	$oculta_comentarios = 
+    (count($info_respuestas) >0 ) ? span("Ocultar " , 
+        ["class"=>'ocultar_comentarios strong blue_enid' , "id"=> $id_tarea ]) : "";
 	
 		
 
@@ -47,7 +44,7 @@
 
 
 
-
+<!--
 	<style type="text/css">
 	    .conversation-wrap
     {
@@ -196,3 +193,4 @@
     }
 
 </style>
+-->

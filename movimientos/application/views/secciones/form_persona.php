@@ -124,7 +124,7 @@
         <div class='agendar_llamada_btn'>
             Agendar llamada 
           icon('fa fa-clock-o">
-          </i>                    
+          get_titulo_modalidad                    
         </div>
         <input type='hidden' name='idtipo_llamada' value="1">     
     </div>

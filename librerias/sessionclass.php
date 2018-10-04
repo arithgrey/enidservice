@@ -112,7 +112,7 @@ class Sessionclass extends CI_Controller{
 			<li>
                 <a href='".$url."' class='black'>
                     icon('".$icono."'>
-                    </i>  
+                    get_titulo_modalidad  
 					".$nombre."
                 </a>
 			</li>";                       

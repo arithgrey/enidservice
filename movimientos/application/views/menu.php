@@ -5,7 +5,7 @@
                     <div class="panel-body">
                         <p class="icon">
                             icon('icon fa fa-money">                    
-                            </i>
+                            get_titulo_modalidad
                         </p>
                         <p>
                             Saldo disponible

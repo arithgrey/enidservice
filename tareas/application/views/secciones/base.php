@@ -6,7 +6,7 @@
                                                 data-toggle="tab" 
                                                 >
                                                 icon('fa fa-cloud-download  black ">
-                                                </i>
+                                                get_titulo_modalidad
                                                 Descargar 
                                                 correos
                                             </a>
@@ -16,7 +16,7 @@
                                                data-toggle="tab"
                                                >    
                                                icon('fa fa-refresh  black">
-                                               </i>
+                                               get_titulo_modalidad
                                                 Registra envios                                                 
                                             </a>
                                         </li>

@@ -55,7 +55,7 @@
                           data-toggle="dropdown" 
                           type="button">
                            <?=icon("fa fa-plus")?>                        
-                           </i> 
+                           get_titulo_modalidad 
                         </button>
                         <ul class="dropdown-menu pull-right ">
                           <li>

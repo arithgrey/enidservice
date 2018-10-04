@@ -15,13 +15,13 @@ class desarrollo extends REST_Controller{
 
         $new_response = "<span class='alerta_pendientes_blue'>".$num_tareas_pendientes."
                             icon('fa fa-terminal'>
-                            </i>
+                            get_titulo_modalidad
                         </span>";
         if ($num_tareas_pendientes > 5 ) {
             
             $new_response = "<span class='alerta_pendientes'>".$num_tareas_pendientes."
                                 icon('fa fa-terminal'>
-                                </i>
+                                get_titulo_modalidad
                              </span>";
         }if($num_tareas_pendientes ==  0  ) {
             $new_response = "";

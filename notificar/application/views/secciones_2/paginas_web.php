@@ -19,7 +19,7 @@
               <center>
               <div>
                 icon('fa fa-usd ">                  
-                </i>
+                get_titulo_modalidad
               </div>
               </center>
             </div>

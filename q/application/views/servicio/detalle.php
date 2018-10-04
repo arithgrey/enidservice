@@ -2,24 +2,24 @@
     $en_servicios = [];
     $en_productos = [];
     /*INFO SERVICIO */
-    $id_servicio = "";
-    $nombre_servicio = "";
-    $status = "";    
-    $url_vide_youtube = "";
-    $url_video_facebook =  "";
-    $url_productos_publico = "";
-    $metakeyword =  "";
-    $metakeyword_usuario =  "";
-    $flag_nuevo =  0;
-    $flag_envio_gratis =  0;
-    $flag_servicio =0;
-    $existencia =0;
-    $color ="";
-    $precio = 0;
-    $id_ciclo_facturacion = 0;
-    $entregas_en_casa = 0;
-    $telefono_visible = 0;
-    $venta_mayoreo = 0;
+    $id_servicio                =   "";
+    $nombre_servicio            =   "";
+    $status                     =   "";    
+    $url_vide_youtube           =   "";
+    $url_video_facebook         =   "";
+    $url_productos_publico      =   "";
+    $metakeyword                =   "";
+    $metakeyword_usuario        =   "";
+    $flag_nuevo                 =   0;
+    $flag_envio_gratis          =   0;
+    $flag_servicio              =   0;
+    $existencia                 =   0;
+    $color                      =   "";
+    $precio                     =   0;
+    $id_ciclo_facturacion       =   0;
+    $entregas_en_casa           =   0;
+    $telefono_visible           =   0;
+    $venta_mayoreo              =   0;
     foreach ($servicio  as $row){
         
         $id_servicio =   $row["id_servicio"];
@@ -103,9 +103,7 @@
     "¿PERSONAS PUEDEN VER TU NÚMERO TELEFÓNICO PARA SOLICITARTE MÁS 
     INFORMES?":"¿PERSONAS PUEDEN SOLICITARTE MÁS INFORMES POR TELÉFONO?";
     
-    $data["flag_servicio"]      =  get_campo($servicio , "flag_servicio");     
-
-    
+    $data["flag_servicio"]      =  get_campo($servicio , "flag_servicio");         
     $text_notificacion_imagenes =  valida_text_imagenes($tipo_promocion, $num_imagenes);
 
     $notificacion_imagenes  
@@ -121,12 +119,12 @@
     $data["baja_ventas_mayoreo"]    =  valida_activo_ventas_mayoreo(0 , $venta_mayoreo); 
     
     /**/
-    $extra_1=  valida_active_pane($num , 1);  
-    $extra_2=  valida_active_pane($num , 2);  
-    $extra_3=  valida_active_pane($num , 3);  
-    $extra_4=  valida_active_pane($num , 4);  
-    $num_articulos =  valida_text_numero_articulos($existencia);     
-    $llamada_accion_youtube      =  
+    $extra_1                    =  valida_active_pane($num , 1);  
+    $extra_2                    =  valida_active_pane($num , 2);  
+    $extra_3                    =  valida_active_pane($num , 3);  
+    $extra_4                    =  valida_active_pane($num , 4);  
+    $num_articulos              =  valida_text_numero_articulos($existencia);     
+    $llamada_accion_youtube     =  
     "¿TIENES ALGÚN VIDEO SOBRE TU ".$tipo_promocion."?";
     $text_llamada_accion_youtube =  icon('fa fa-youtube-play') ." VIDEO DE YOUTUBE ";
     $valor_youtube               =  get_campo($servicio , "url_vide_youtube");
@@ -150,8 +148,7 @@
     div($nueva_descripcion , ["class" => "text_desc_servicio contenedor_descripcion"],1);
     /**inputs**/
     /*NOMBRE*/
-    $i_nombre = input([
-        "type" => "hidden", 
+    $i_nombre = input_hidden([        
         "name"  =>  "q" , 
         "value" =>  "nombre_servicio"]
         ,1);
@@ -175,7 +172,7 @@
                     ],
                     1);
     /*DESCRIPCION*/
-    $i_descripcion       = 
+    $i_descripcion = 
     input(["type"  =>  "hidden" ,  "name"  =>  "q" , "value" =>"descripcion"] , 1); 
     $isummer_descripcion =  div("-".$nueva_descripcion, ["id"   =>  "summernote"], 1);
 
@@ -255,7 +252,6 @@
             ],
             1);
 
-
     $place_youtube =  div("" , ["class" => "place_url_youtube"] , 1);
 
 ?>
@@ -265,8 +261,7 @@
     <?=n_row_12()?>
         <?=heading_enid($nombre_servicio_heading, 4 ,[] , 1)?>    
         <?=form_open("",
-            [ 'class' => 
-            'form_servicio_nombre_info input_nombre_servicio_facturacion row']
+            [ 'class' => 'form_servicio_nombre_info input_nombre_servicio_facturacion ']
             );?>  
             <?=$i_nombre?>          
             <?=div($ie_nombre ,['class'=> 'col-lg-9'])?>
@@ -291,8 +286,7 @@
             <?=div($val_youtube , ["class"    =>  "text_video_servicio"] , 1 )?>
             <?=form_open("",  
                 [
-                "class"
-                =>
+                "class"=>
                 "form_servicio_youtube input_url_youtube contenedor_info_youtube row"])?>
                 <?=$ih_youtube?>
                 <?=div($i_youtube.$place_youtube , ['class' => 'col-lg-9'])?>                
@@ -331,13 +325,11 @@
         <div class="tab-pane <?=$extra_4?>" id="tab_info_precios">            
 
             <?=get_rango_entrega(
-            $id_perfil, 
-            $tiempo_promedio_entrega, 
-            [   "name"=>"tiempo_entrega" , 
-                "class"=> "tiempo_entrega form-control"
-            ])?>
-            
-
+                $id_perfil, 
+                $tiempo_promedio_entrega, 
+                [   "name"=>"tiempo_entrega" , 
+                    "class"=> "tiempo_entrega form-control"
+                ])?>
 
             <?=heading_enid($titulo_compra_en_casa,4,[] , 1);?>
             <table  class='seccion_compras_casa'>
@@ -398,7 +390,7 @@
             <?=div($metatags_format , ["class"    =>  "info_meta_tags"] , 1)?>
             <table>
                 <tr>
-                    <?=get_td(add_element("AGREGAR" , "span"))?>                    
+                    <?=get_td(div("AGREGAR"))?>
                     <td>     
                         <?=form_open("" , ["class"=>"form_tag", "id"=>"form_tag"])?>
                             <?=$i_tags?>             
@@ -406,8 +398,8 @@
                         <?=form_close()?>
                     </td>   
                 </tr>
-            </table>  
-            <?=div("" , ["class"    =>  "contenedor_sugerencias_tags"] , 1)?>            
+            </table>              
+            <?=place("contenedor_sugerencias_tags")?>
         </div>
 
     </div>

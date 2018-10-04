@@ -14,6 +14,17 @@
 			$x_active ="active";		
 			$color ="white";
 		}
+
+
+		<div class="d-flex w-100 justify-content-between " >
+							<h5 class="mb-1 '.$color.'" >
+							icon('fa fa-check').$nombre_servicio.'						      
+							</h5>							
+						</div>						  
+
+
+		$div 	= div();
+		$lista 	= anchor_enid();
 		$lista .=  '<a  						
 						class="list-group-item 
 						list-group-item-action 						
@@ -21,21 +32,9 @@
 						nombre_servicio="'.$nombre_servicio.'" 
 						id="'.$id_servicio.'" 
 						title="'.$nombre_servicio.'">						   
-						<div class="d-flex w-100 justify-content-between " >
-							<h5 class="mb-1 '.$color.'" >
-							icon('fa fa-check">
-								</i>
-							    '.$nombre_servicio.'						      
-							</h5>
-							<!--
-							<div class="text-right">
-								icon('fa fa-check">
-								</i>
-								<small class="'.$color.'"  >				
-								    Agregar
-								</small>
-							</div>-->
-						</div>						  
+						
+						
+
 						</a>';
 						$x ++;
 	}

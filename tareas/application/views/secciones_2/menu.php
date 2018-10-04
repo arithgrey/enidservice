@@ -9,7 +9,7 @@
                         data-toggle="tab"                         
                         class='black tab_redes_s '>
                         icon('fa fa-fighter-jet">                          
-                        </i>                        
+                        get_titulo_modalidad                        
                         Social  
                         <span class="place_notificacion_accesos_dia">                        
                         </span>      
@@ -24,7 +24,7 @@
                         data-toggle="tab"                         
                         class='black tab_marketing'>                        
                         icon('fa fa-envelope strong black">                          
-                        </i>
+                        get_titulo_modalidad
                         Email 
                         <span class="place_notificacion_email_enviados">                            
                         </span>

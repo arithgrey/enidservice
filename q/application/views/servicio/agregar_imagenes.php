@@ -9,8 +9,8 @@
     );?>        
     <div class="col-lg-4 col-lg-offset-4">            
         <?=heading_enid("AGREGAR IMAGENES", 3 ,  
-            ["class"     =>  "titulo_agregar_imagenes row "]  , 
-        1)?>                           
-        <?=div( "" , ["class"    => "place_img_producto row"],1);?>
+            ["class"     =>  "titulo_agregar_imagenes"]  , 
+        1)?>                                   
+        <?=place("place_img_producto")?>
     </div>    
 </div>

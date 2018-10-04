@@ -31,7 +31,7 @@
                 <a href="../login" class="a_enid_black2" style="color: white!important">
                   ANUNCIA ESTE PRODUCTO!
                 icon('fa fa-chevron-right ir">              
-                </i>
+                get_titulo_modalidad
               </a>
             </li>
           </ul>

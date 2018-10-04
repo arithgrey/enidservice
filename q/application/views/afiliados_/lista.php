@@ -36,7 +36,7 @@
                           type="button" 
                           aria-expanded="false">
                          <?=icon("fa fa-plus")?>                        
-                         </i> 
+                         get_titulo_modalidad 
                         </button>                       
                 </div>        
               </div>
