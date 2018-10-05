@@ -34,7 +34,7 @@
                 <div class="timeline-entry-inner">
                     <div class="timeline-icon bg-info">
                         '.$z.'
-                        icon('entypo-feather"')
+                        '.icon('entypo-feather').'
                     </div>
                     <div class="timeline-label">
                         <h2>

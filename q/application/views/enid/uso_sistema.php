@@ -1,13 +1,13 @@
 <?php
-        $complete  ="";		
-        $info_uso = "";			
-		$height ="style='overflow-x:auto;'"; 
+        $complete  	=	"";		
+        $info_uso 	= 	"";			
+		$height 	=	"style='overflow-x:auto;'"; 
 		if (count($info_sistema["semanal"])>3 ){		
 			$height ="style='overflow-x:auto;' " ; 
 		}
-		$b =1;						  
-		$x =0;
-		$limite = count($info_sistema["semanal"]) -1;
+		$b 		=	1;						  
+		$x 		=	0;
+		$limite = 	count($info_sistema["semanal"]) -1;
 		$total_d_m_1 = 0;
 		
 		
@@ -18,13 +18,10 @@
 		
 		$correos_empresas_1 =0;
 		$correos_empresas ="";
-
 		$sobre_enid_1 =0;
 		$sobre_enid ="";
-
 		$afiliados = 0; 
 		$afiliados_1 = 0; 
-
 		$nosotros_1 = 0; 
 		$procesar_compra_1 = 0; 
 		/*TOTAL*/
@@ -139,55 +136,12 @@
 				<?=get_td($total_afiliado)?>
 				<?=get_td($total_home)?>				
 				<?=get_td($total_procesar_compra)?>		
-											
 		</tr>		
 	</table>
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style type="text/css">
-
-
-
 .tipo_text{
 	background: #166781;
 	color: white;

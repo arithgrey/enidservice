@@ -30,9 +30,8 @@
             <li class="anunciar_btn">
                 <a href="../login" class="a_enid_black2" style="color: white!important">
                   ANUNCIA ESTE PRODUCTO!
-                icon('fa fa-chevron-right ir">              
-                get_titulo_modalidad
-              </a>
+                  <?=icon('fa fa-chevron-right ir')?>
+                </a>
             </li>
           </ul>
         </div>        

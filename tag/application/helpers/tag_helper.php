@@ -422,7 +422,7 @@ if(!function_exists('invierte_date_time')){
             <li>
                     <a href="'.$url.'">
                         icon(''.$icon.'">
-                        get_titulo_modalidad
+                        
                     </a>
                 </li>
                 ';
@@ -431,7 +431,7 @@ if(!function_exists('invierte_date_time')){
             <li>
                     <a href="'.$url.'">
                         icon(''.$icon.'">
-                        get_titulo_modalidad
+                        
                     </a>
                 </li>
                 ';          
@@ -509,12 +509,12 @@ if(!function_exists('invierte_date_time')){
     if (strlen(trim($direccion))>4){    
       $locacion =  "icon('locacion fa fa-map-marker ' id='".$id_evento."' 
                         data-toggle='modal' data-target='#locacion-modal'  title='". $direccion."'>
-                      get_titulo_modalidad";  
+                      ";  
     }else{
       $locacion =  "icon('locacion fa fa-map-marker direccion_registrada' 
                         id='".$id_evento."' 
                         data-toggle='modal' data-target='#locacion-modal'  title='". $direccion."'>
-                      get_titulo_modalidad";  
+                      ";  
     }   
     return $locacion; 
 

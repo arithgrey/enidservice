@@ -1,12 +1,6 @@
-
-<?php	
-	$resumen = get_fechas_cotizador($productividad_usuario);
-?>
-<h2 class='titulo_repo'>
-	Productividad/Enid Service
-</h2>
-	<?=n_row_12()?>
-	
+<?php	$resumen = get_fechas_cotizador($productividad_usuario);?>
+<?=heading_enid("Productividad/Enid Service", 2 , ["class" => "titulo_repo"] )?>
+	<?=n_row_12()?>	
 		<div  style='overflow-x:auto;'>
 			<table class='table_enid_service' border=1>		
 				<tr class='f-enid'>								
@@ -52,8 +46,6 @@
 		</div>
 	
 	<?=end_row()?>
-
-
 
 <style type="text/css">
 .table_enid_service{
@@ -137,4 +129,3 @@ table {
 						
 }
 </style>
-

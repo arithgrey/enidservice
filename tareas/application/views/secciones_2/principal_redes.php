@@ -6,8 +6,8 @@
         <div>
             <span class="strong modo_servicios " style="font-size: .8em!important;">
                 Promover servicios
-                icon('fa fa-chevron-right">          
-                get_titulo_modalidad
+                <?=icon('fa fa-chevron-right')?>
+                
             </span>        
         </div>
         <div>
@@ -25,8 +25,8 @@
           <div>          
             <span class="strong modo_productos " style="font-size: .8em!important;" >
               Promover productos
-              icon('fa fa-chevron-right">          
-              get_titulo_modalidad
+              <?=icon('fa fa-chevron-right')?>       
+              
             </span>      
           </div>      
           <div>
@@ -51,7 +51,7 @@
               <div>
                 <div class="input-group">
                   <span class="input-group-addon">
-                    <?=icon("fa fa-search")?>
+                    <?=icon('fa fa-search')?>
                   </span>
                   <input id="prependedtext" name="prependedtext" class="form-control keyword" placeholder="Mensaje, producto, servicio" type="text">
                 </div>
@@ -70,16 +70,16 @@
                   href="#mensajeria_facebook" 
                   data-toggle="tab" 
                   class=" btn_tareas_fb active m_facebook blue_active">
-                  icon('fa fa-facebook-official">                       
-                  get_titulo_modalidad                      
+                  <?=icon('fa fa-facebook-official')?>
+                                        
                 </label>
 
                 <label  
                   title="Actividad en Mercado libre" 
                   href="#profile" data-toggle="tab" 
                   class=" btn_tareas_mercado_libre m_mercado_libre">
-                  icon('fa fa-shopping-bag">                        
-                  get_titulo_modalidad                      
+                  <?=icon('fa fa-shopping-bag')?>                        
+                                        
                 </label>
                               
                 <label 
@@ -88,8 +88,8 @@
                   data-toggle="tab" 
                   class=" btn_tareas_linkedin m_linkedin" 
                   >
-                  icon('fa fa-linkedin-square">                        
-                  get_titulo_modalidad                      
+                  <?=icon('fa fa-linkedin-square')?>
+                                        
                 </label>
 
                 <label 
@@ -98,8 +98,8 @@
                   data-toggle="tab" 
                   class=" btn_tareas_twitter m_twitter" 
                   >
-                  icon('fa fa-twitter">                        
-                  get_titulo_modalidad                      
+                  <?=icon('fa fa-twitter')?>
+                                        
                 </label>
 
                 <label 
@@ -107,8 +107,8 @@
                   href="#tab_gplus" 
                   data-toggle="tab" 
                   class=" btn_tareas_gplus m_gplus">
-                  icon('fa fa-google-plus">                        
-                  get_titulo_modalidad                      
+                  <?=icon('fa fa-google-plus')?>                       
+                                        
                 </label>
 
                 <label 
@@ -117,8 +117,8 @@
                   data-toggle="tab" 
                   class=" btn_tareas_pinterest m_pinteres" 
                   >
-                  icon('fa  fa-pinterest">                        
-                  get_titulo_modalidad                      
+                  <?=icon('fa  fa-pinterest')?>
+                                        
                 </label>
 
                 <label 
@@ -126,16 +126,16 @@
                   href="#tab_instagram" 
                   data-toggle="tab" 
                   class=" btn_tareas_instagram m_instagram">
-                  icon('fa fa-instagram">                        
-                  get_titulo_modalidad                      
+                  <?=icon('fa fa-instagram')?>                       
+                                        
                 </label>
                 <label 
                   title="Actividad en email " 
                   href="#tab_email" 
                   data-toggle="tab" 
                   class="btn_tareas_email m_email">
-                  icon('fa fa-envelope">              
-                  get_titulo_modalidad
+                  <?=icon('fa fa-envelope')?>              
+                  
                 </label>
 
                 <label 
@@ -143,8 +143,8 @@
                   href="#tab_whatsapp" 
                   data-toggle="tab" 
                   class="btn_tareas_whatsapp m_whatsapp">
-                  icon('fa fa-whatsapp">              
-                  get_titulo_modalidad
+                  <?=icon('fa fa-whatsapp')?>            
+                  
                 </label>
 
                 <label 
@@ -152,7 +152,7 @@
                   href="#tab_tumlr" 
                   data-toggle="tab" 
                   class="btn_tareas_tumblr m_tumblr">
-                  icon('fa fa-tumblr" ')
+                  <?=icon('fa fa-tumblr')?>
                 </label>
               
               </div>

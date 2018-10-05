@@ -51,7 +51,7 @@ if(!function_exists('invierte_date_time')){
 
       $btn_copiar ='<i 
       class="btn_copiar_enlace_pagina_contacto fa fa-clone" data-clipboard-text="'.$url.'">
-      get_titulo_modalidad';
+      ';
       return $btn_copiar;
 
     }

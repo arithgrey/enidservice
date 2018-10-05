@@ -7,12 +7,12 @@
 				style="background:black!important;"
 				class="fa fa-chevron-left btn input-sm btn_indicador_izquierdo_fb"  
 				title="mover a la izquierda">
-				get_titulo_modalidad
+				
 				<i 
 				title="mover a la derecha"
 				style="background:black!important;"
 				class="fa fa-chevron-right btn input-sm btn_indicador_derecho_fb" >
-				get_titulo_modalidad
+				
 				<?=get_btn_nuevo_mensaje($id_usuario , "fb");?>				
 			<?=end_row()?>				
 	<?=end_row()?>

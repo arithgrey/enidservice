@@ -63,7 +63,7 @@
 	        class='strong btn agregar_posible_cliente_btn btn_referidos input-s'
 	        style="background: blue!important;">            
 			<?=icon("fa fa-plus")?>				
-			get_titulo_modalidad
+			
 			Agregar nuevo
 		</span>
 	<?=end_row()?>

@@ -17,32 +17,19 @@
           class="popup-box chat-popup" id="qnimate" 
             style="margin-top: 4px;">
               <div class="popup-head">
-                <div class="popup-head-left pull-left">
-                  
-                  
-
-                  <?=img(
-                    array(
+                <div class="popup-head-left pull-left">                  
+                  <?=img([    
                       "src"     =>  $url_imagen ,
                       "style"   =>  'width: 44px!important;height: 44px;',
                       "onerror" =>  "this.src='../img_tema/portafolio/producto.png'"
-                ))?>
-                  
-                    <span class="black">
-                      <?=$nombre_servicio;?> | <?=$precio?>MXN
-                    </span>          
-                    <div >
-                      <?=$fecha_registro?> | alcance <?=$vista?>
-                    </div>
-                </div>
-                
+                  ])?>
+                  <?=span($nombre_servicio . "|".  $precio ."MXN")?>
+                  <?=div($fecha_registro ."|".  "alcance" . $vista)?>                  
+                </div>                
             </div>
           </div> 
-        </a>
-        <?php 
-
-    }   
-?>
+      </a>
+  <?php } ?>
 
 <?=$l;?>
 

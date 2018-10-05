@@ -107,8 +107,8 @@
                               class="input-sm btn" 
                               href="../faq">
                                 Preguntas frecuentes      
-                                icon('fa fa-info-circle">                                  
-                                get_titulo_modalidad
+                                <?=icon('fa fa-info-circle')?>
+                                
                             </a> 
                         </div>
 	</div>   

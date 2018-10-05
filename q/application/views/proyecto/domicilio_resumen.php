@@ -1,4 +1,4 @@
-<div>
+
     <?=div(anchor_enid(icon("fa fa-pencil") ,  
     ["class"    =>  "a_enid_blue editar_direccion_persona"])
     ,
@@ -15,9 +15,6 @@
         <?=get_campo($info_envio_direccion , "asentamiento" , " Colonia " , 1)?>
         <?=get_campo($info_envio_direccion , "municipio" , " Delegación/Municipio " , 1)?>
         <?=get_campo($info_envio_direccion , "ciudad" , " Ciudad " , 1)?>
-        <?=get_campo($info_envio_direccion , "estado" , " Estado " , 1)?>
-        
-        
+        <?=get_campo($info_envio_direccion , "estado" , " Estado " , 1)?>    
     </div>    
 
-</div>

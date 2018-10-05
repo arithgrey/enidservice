@@ -481,9 +481,8 @@ class Cobranza extends REST_Controller{
         if ($num_pendientes >0){
 
             $new_response = "<span class='alerta_llamadas_agendadas'>
-                                ".$num_pendientes."                                
-                                icon('fa fa-usd'>
-                                get_titulo_modalidad
+                                ".$num_pendientes.icon('fa fa-usd')."                                
+                                
                             </span>";
         }
         /**/   

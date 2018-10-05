@@ -32,8 +32,7 @@
                 <?=div($clasificaciones_departamentos , ["class"=>"col-lg-3"])?>
                 <?=input(
                     [
-                        "class"         =>  
-                    "col-lg-7 input_busqueda_producto input_enid", 
+                    "class"         =>  "col-lg-7 input_busqueda_producto input_enid", 
                     "type"          =>  "text", 
                     "style"         =>  "margin-top: 5px;", 
                     "placeholder"   =>  "Buscar",  

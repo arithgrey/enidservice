@@ -18,8 +18,7 @@
             <div class="col-lg-2">
               <center>
               <div>
-                icon('fa fa-usd ">                  
-                get_titulo_modalidad
+                <?=icon('fa fa-usd ')?>                
               </div>
               </center>
             </div>

@@ -1,9 +1,5 @@
-<?php	
-	$resumen = get_fechas_cotizador($info);
-?>
-<h2 class='titulo_repo'>
-	Tu Productividad
-</h2>
+<?php	$resumen = get_fechas_cotizador($info);?>
+<?=heading_enid("Tu Productividad" , 2 ,["class"=>'titulo_repo'])?>
 	<?=n_row_12()?>
 	
 		<div  style='overflow-x:auto;'>
@@ -132,4 +128,3 @@ table {
 						
 }
 </style>
-

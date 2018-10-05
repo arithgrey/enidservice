@@ -1,112 +1,148 @@
 <?php 	
-	$extra_periodo =" style='background:#02316f;color:white!important;' ";
-	$extra_nuevos_usuarios ="style='background: #2372e9;color: white !important;text-align: center;' ";
-	$extra_trans ="style='background: #002763;color: white !important;text-align: center;' ";
-	$extra_conversaciones = "style='background: #006475;color: white !important;text-align: center;' ";
-	$extra_usablidad ="style='background: #375789;color: white !important;text-align: center;' ";
-	$extra_valoraciones ="style='background: #000;color: white !important;text-align: center;' ";
+	$extra_periodo 			=	
+	["style"=> 'background:#02316f;color:white!important;'];
+	$extra_nuevos_usuarios 	=	
+	["style"=> 'background: #2372e9;color: white !important;text-align: center;' ];
+	$extra_trans = 
+	["style"=> 'background: #002763;color: white !important;text-align: center;'];
+	$extra_conversaciones = 
+	["style"=> 	'background: #006475;color: white !important;text-align: center;' ];
+	$extra_usablidad =
+	["style"=> 	'background: #375789;color: white !important;text-align: center;' ];
+	$extra_valoraciones =
+	["style"=> 	'background: #000;color: white !important;text-align: center;'];
 	$extra_td_productos_valorados ="";
-
-	$extra_accesos ="style='background: #00b7ff;color: white !important;text-align:center;'";
-	$extra_contacto ="style='text-align: center;' ";
-	$extra_labor ="style='text-align: center;background: #1c404e;color: white !important;' ";
-	$extra_servicios="style='text-align:center;background:#1c404e;color: white !important;'";
-	$extra_deseos = "style='text-align: center;background: #ff0048;color: white !important;'";
+	$extra_accesos =
+	["style"=> 	'background: #00b7ff;color: white !important;text-align:center;'];
+	$extra_contacto =
+	["style"=> 	'text-align: center;' ];
+	$extra_labor =
+	["style"=> 	'text-align: center;background: #1c404e;color: white !important;' ];
+	$extra_servicios=
+	["style"=> 	'text-align:center;background:#1c404e;color: white !important;'];
+	$extra_deseos = 
+	["style"=> 	'text-align: center;background: #ff0048;color: white !important;'];
 
 	/**/
-	$accesos ="";		
-	$accesos_a_intento_compra = "";
-	$accesos_contacto =  "";
-	$accesos_area_cliente = "";
-	$usuarios = "";
-	$transacciones = "";
-	$compras_efectivas =  "";
-	$solicitudes =  "";
-	$envios ="";
-	$cancelaciones = "";
-	$contacto =  "";
-	$labores_resueltas ="";
-	$total_valoraciones = "";
-	$si_recomendarian =  "";
-	$no_recomendarian =  "";
-	$fecha_inicio =  $envio_usuario["fecha_inicio"];  
-	$fecha_termino =  $envio_usuario["fecha_termino"];  
-	$conversaciones = "";
-	$servicios =  "";
-	$lista_deseos =  "";
+	$accesos 					=	"";		
+	$accesos_a_intento_compra 	= 	"";
+	$accesos_contacto 			=  	"";
+	$accesos_area_cliente 		= 	"";
+	$usuarios 					= 	"";
+	$transacciones 				= 	"";
+	$compras_efectivas 			=  	"";
+	$solicitudes 				=  	"";
+	$envios 					=	"";
+	$cancelaciones 				= 	"";
+	$contacto 					=  	"";
+	$labores_resueltas 			=	"";
+	$total_valoraciones 		= 	"";
+	$si_recomendarian 			=  	"";
+	$no_recomendarian 			=  	"";
+	$fecha_inicio 				=  	$envio_usuario["fecha_inicio"];  
+	$fecha_termino 				=  	$envio_usuario["fecha_termino"];  
+	$conversaciones 			= 	"";
+	$servicios 					=  	"";
+	$lista_deseos 				=  	"";
 
-		$extra_td_usuarios =  "class='usuarios' 
-			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
-			href='#reporte' data-toggle='tab' 
-			title='Personas que se registran en el sistema' ";
+	$extra_td_usuarios 			=  
+	[
+		"class"			=>	'usuarios' ,
+		"fecha_inicio" 	=> 	$fecha_inicio,
+		"fecha_termino" => 	$fecha_termino,
+		"href"			=>	'#reporte' ,
+		"data-toggle"	=>	'tab' ,
+		"title"			=>	'Personas que se registran en el sistema' 
+	];
 
-
-		$extra_td_contacto =  " 
-			class='contactos' 
-			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
-			href='#reporte' 
-			data-toggle='tab' 
-			title='Mensajes enviados por personas a Enid Service'  ";
+	$extra_td_contacto =  
+	[
+		"class"				=>	'contactos',
+		"fecha_inicio" 		=>	 $fecha_inicio,
+		"fecha_termino" 	=>	 $fecha_termino,
+		"href"				=>	'#reporte',
+		"data-toggle"		=>	'tab',
+		"title"				=>	'Mensajes enviados por personas a Enid Service'  
+	];
+	
+	$extra_td_solicitudes =  
+	[
+		"class"				=>	'solicitudes' ,
+		"fecha_inicio" 		=>	 $fecha_inicio  ,
+		"fecha_termino" 	=>	 $fecha_termino,
+		"tipo_compra" 		=>	 '6',
+		"href"				=>	'#reporte' ,
+		"data-toggle"		=>	'tab' ,
+		"title"				=>	'Solicitudes de compra'  
+	];
 		
-		$extra_td_solicitudes =  " 
-			class='solicitudes' 
-			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
-			tipo_compra = '6'
-			href='#reporte' 
-			data-toggle='tab' 
 
-			title='Solicitudes de compra'  ";
+	$extra_td_cancelaciones = 
+	[
+		"class"				=>	'solicitudes' ,
+		"fecha_inicio" 		=> 	$fecha_inicio,
+		"fecha_termino" 	=> 	$fecha_termino,
+		"tipo_compra" 		=> 	'10',
+		"href"				=>	'#reporte' ,
+		"data-toggle"		=>	'tab' ,
+		"title"				=>	'Solicitudes de compra'  
+	];
+
+			
+	$extra_td_efectivas =  [
+
+		"class"				=>	'solicitudes' ,
+		"fecha_inicio" 		=>	 $fecha_inicio  ,
+		"fecha_termino" 	=>	 $fecha_termino,
+		"tipo_compra" 		=>	 '9',
+		"href"				=>	'#reporte' ,
+		"data-toggle"		=>	'tab' ,
+		"title"				=>	'COMPRAS SATISFACTORIAS'
+	];
+
+	$extra_td_envios =  [ 
+		"class"				=>	'solicitudes' ,
+		"fecha_inicio" 		=>	$fecha_inicio,
+		"fecha_termino" 	=>	$fecha_termino,
+		"tipo_compra" 		=>	'7',
+		"href"				=>	'#reporte' ,
+		"data-toggle"		=>	'tab' ,
+		"title"				=>	'Se han enviado'  
+	];
+
+
+	$extra_td_total = [
+		"class"				=>	'valoraciones' ,
+		"fecha_inicio" 		=> 	$fecha_inicio,
+		"fecha_termino" 	=> 	$fecha_termino,
+		"href"				=>	'#reporte' ,
+		"data-toggle"		=>	'tab' ,
+		"title"				=>	'Valoraciones que se han hecho en Enid Service' 
+	];  
 			
 
-		$extra_td_cancelaciones =  " 
-			class='solicitudes' 
-			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
-			tipo_compra = '10'
-			href='#reporte' 
-			data-toggle='tab' 
 
-			title='Solicitudes de compra'  ";
-		
-
-
-		$extra_td_efectivas =  " 
-			class='solicitudes' 
-			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
-			tipo_compra = '9'
-			href='#reporte' 
-			data-toggle='tab' 
-			title='COMPRAS SATISFACTORIAS'  ";
+	$extra_td_servicios = [
+		"class"				=>	'servicios' ,
+		"fecha_inicio" 		=>	 $fecha_inicio,
+		"fecha_termino" 	=>	 $fecha_termino,
+		"href"				=>	'#reporte' ,
+		"data-toggle"		=>	'tab' ,
+		"title"				=>	'Servicios postulados'
+	];
 
 
 
-		$extra_td_envios =  " 
-			class='solicitudes' 
-			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
-			tipo_compra = '7'
-			href='#reporte' 
-			data-toggle='tab' 
-			title='Se han enviado'  ";
-
-
-		$extra_td_total =  " 
-			class='valoraciones' 
-			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'			
-			href='#reporte' 
-			data-toggle='tab' 
-			title='Valoraciones que se han hecho en Enid Service'  ";
-
-
-		$extra_td_servicios = "class='servicios' 
-			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'			
-			href='#reporte' 
-			data-toggle='tab' 
-			title='Servicios postulados'";
-
-
-		$extra_td_productos_valorados =  "class='productos_valorados_distintos' 
-			fecha_inicio = '".$fecha_inicio."'  fecha_termino = '".$fecha_termino."'
-			href='#reporte' data-toggle='tab' 
-			title='Productos distintos valorados' ";
+	$extra_td_productos_valorados =  
+	[
+		"class"				=>	'productos_valorados_distintos' ,
+		"fecha_inicio" 		=>	 $fecha_inicio  ,
+		"fecha_termino" 	=>	 $fecha_termino,
+		"href"				=>	'#reporte' ,
+		"data-toggle"		=>	'tab' ,
+		"title"				=>	'Productos distintos valorados' 
+	];
+	
 
 	foreach($actividad_enid_service as $row){
 		
@@ -122,7 +158,8 @@
 				$table .="<tr>";	
     				$table .=get_td($row["usuarios"] , $extra_td_usuarios);
     				$table .=get_td($row["servicios_creados"] , $extra_td_servicios);
-    				$table .=get_td($row["accesos_area_cliente"] , "title='Personas que acceden a Enid Service desde su área de cliente'");										
+    				$table .=get_td($row["accesos_area_cliente"] ,
+    				["title"=>'Personas que acceden a Enid Service desde su área de cliente']);				
 			$table .="</tr>";	
 		$table .="</table>";
 		$nuevos_usuarios = get_td($table);
@@ -261,12 +298,14 @@
 					$table .=get_td("Prospección email");											
 				$table .="</tr>";	
 				$table .="<tr>";	
-					$table .=get_td("<a href='../desarrollo/' 
-										target='_blank' 
-										class='strong'
-										style='color:blue !important;'>
-										".$row["labores_resueltas"]."
-									</a>");						
+					$table .=get_td(
+						anchor_enid($row["labores_resueltas"] , 
+						[
+							"href"		=>	'../desarrollo/' ,
+							"target"	=>	'_blank' ,
+							"class"		=>	'strong',
+							"style"		=>	'color:blue !important;'
+						]));						
 
 					
 					if($row["correos"] > 0){
@@ -293,10 +332,11 @@
 			$no_recomendarian  = $valoraciones["no_recomendarian"];
 
 				
-			$extra_si_recomendaria =" title ='Personas que SI recomendarían la compra 
-										$si_recomendarian ' ";
-			$extra_no_recomendaria =  " title ='Personas que NO recondarían la compra 
-										$no_recomendarian' ";			
+			$extra_si_recomendaria =
+			["title" 	=> "Personas que SI recomendarían la compra  " .$si_recomendarian];
+			$extra_no_recomendaria =  
+			["title"	=>"Personas que NO recondarían la compra ".$no_recomendarian];			
+			
 			$porcentaje_si =  porcentaje($total_val, intval($si_recomendarian));
 			$porcentaje_no =  porcentaje($total_val, intval($no_recomendarian));
 

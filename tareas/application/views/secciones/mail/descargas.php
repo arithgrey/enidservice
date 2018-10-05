@@ -5,8 +5,8 @@
 					<div class='col-lg-4'>
 						<button class='btn input-sm btn_descargar_email' 
 								style="background: black!important;">
-								icon('fa fa-cloud-download">
-								get_titulo_modalidad
+								<?=icon('fa fa-cloud-download')?>
+								
 							Descargar
 						</button>
 					</div>

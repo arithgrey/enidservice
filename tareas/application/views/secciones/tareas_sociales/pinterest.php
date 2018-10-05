@@ -4,14 +4,8 @@
 			<?=$this->load->view("secciones/inputs_busqueda");?>
 		</div>		
 		<?=n_row_12()?>
-			<i style="background:black!important;"
-				class="fa fa-chevron-left btn input-sm btn_indicador_izquierdo_pinterest" title="mover a la izquierda">					
-			get_titulo_modalidad
-			<i 	
-			title="mover a la derecha"
-				style="background:black!important;"
-				class="fa fa-chevron-right btn input-sm btn_indicador_derecho_pinterest" >					
-			get_titulo_modalidad
+			<?=icon("fa fa-chevron-left btn input-sm btn_indicador_izquierdo_pinterest")?>
+			<?=icon("fa fa-chevron-right btn input-sm btn_indicador_derecho_pinterest")?>			
 			<?=get_btn_nuevo_mensaje($id_usuario , "pinterest");?>		
 		<?=end_row()?>		
 		

@@ -32,7 +32,7 @@
 ?>
 <div  style='overflow-x:auto;'>
 	<table class='table_enid_service' border=1>
-		<tr class="white" style="background: #0022B7!important;font-size: .8em;">
+		<tr>
 			<?=get_td("#", $extra)?>
 			<?=get_td("Nombre", $extra)?>
 			<?=get_td("Teléfono", $extra)?>

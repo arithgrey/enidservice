@@ -249,7 +249,7 @@
     $btn_config_direccion_envio = "<i  class='black btn_direccion_envio fa fa-bus'
                                         id='".$id_proyecto_persona_forma_pago."'  
                                     $lista_info_attr >
-                                  get_titulo_modalidad";            
+                                  ";            
 
     $btn_articulo_enviado = "icon('black fa fa-bus'')
                                 <span >
@@ -281,7 +281,7 @@
             data-toggle='tab' 
             class='btn_clientes strong  black'>
             icon('fa fa-chevron-circle-left'>            
-            get_titulo_modalidad
+            
             Regresar a clientes 
         </a>";
       }

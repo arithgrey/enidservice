@@ -108,14 +108,11 @@ class Sessionclass extends CI_Controller{
 				$style ="style='background:rgb(2, 17, 29);' ";	
 			}
 
-			$menu .=  "
-			<li>
-                <a href='".$url."' class='black'>
-                    icon('".$icono."'>
-                    get_titulo_modalidad  
-					".$nombre."
-                </a>
-			</li>";                       
+			$menu .= li(anchor_enid(icon($icono). $nombre , 
+						["href"=> $url ,  "class"=>'black']
+						));
+
+			
 			$b++;
 		}	
 		return $menu;

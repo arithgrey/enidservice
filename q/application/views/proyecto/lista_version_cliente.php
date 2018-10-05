@@ -91,4 +91,4 @@
 <?php }}?>
 <?=evalua_acciones_modalidad($en_proceso , $modalidad)?>
 <?=evalua_acciones_modalidad_anteriores($anteriores , $modalidad)?>
-<div class="contenedor_ventas_compras_anteriores"></div>
+<?=place("contenedor_ventas_compras_anteriores")?>

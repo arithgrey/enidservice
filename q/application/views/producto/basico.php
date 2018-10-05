@@ -1,22 +1,20 @@
 <?php
         
     
-    $extra_color ="style='margin-left:5px;color: black;font-weight:bold;'";
-    $list ="";  
-    $flag =0;            
-    $nombre_servicio =  $servicio["nombre_servicio"];             
-    $id_servicio  =  $servicio["id_servicio"];        
+    $extra_color        =   "style='margin-left:5px;color: black;font-weight:bold;'";
+    $list               =   "";  
+    $flag               =   0;            
+    $nombre_servicio    =   $servicio["nombre_servicio"];             
+    $id_servicio        =   $servicio["id_servicio"];        
         
-    $flag_envio_gratis =  $servicio["flag_envio_gratis"];
-    $text_extra =  is_servicio($servicio);        
-    $url_img  = $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;        
+    $flag_envio_gratis  =   $servicio["flag_envio_gratis"];
+    $text_extra         =   is_servicio($servicio);        
+    $url_img            =   $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;        
         
-    $metakeyword =  $servicio["metakeyword"];        
-    $color =  isset($servicio["color"]) ? $servicio["color"] : "";
-    $flag_servicio =  $servicio["flag_servicio"];
-        
-    
-    $precio =  $servicio["precio"];           
+    $metakeyword        =  $servicio["metakeyword"];        
+    $color              =  isset($servicio["color"]) ? $servicio["color"] : "";
+    $flag_servicio      =  $servicio["flag_servicio"];        
+    $precio             =  $servicio["precio"];           
     $costo_envio ="";
     if($flag_servicio == 0){
         $costo_envio =  $servicio["costo_envio"]["text_envio"]["cliente_solo_text"];                 

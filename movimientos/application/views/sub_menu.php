@@ -9,7 +9,7 @@
             <a href="?q=transfer&action=2" class="black">
                 <li class="list-group-item">
                     <?=icon("fa fa-fighter-jet")?>
-                    get_titulo_modalidad
+                    
                     Trasnferir fondos                
                 </li>
             </a>

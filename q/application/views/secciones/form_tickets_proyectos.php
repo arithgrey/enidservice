@@ -1,55 +1,44 @@
 <div class="col-lg-12 col-md-12 col-sm-12  "> 
 
-  <a class="regresar_tickets_usuario strong  black">
-  icon('fa fa-chevron-circle-left")
-  get_titulo_modalidad
-    Regresar a mis tickets abiertos
-  </a>
+  <?=anchor_enid(
+    icon('fa fa-chevron-circle-left'). "Regresar a mis tickets abiertos" ,
+    ["class"  =>  "regresar_tickets_usuario strong  black"]
+  )?>  
 </div>
         
 <div class='col-lg-8 col-lg-offset-2'>
-  <form class='form_ticket'>    
-
-    
-      <div class="col-lg-12">      
-        
-        <label>
-          Cliente
-        </label>
+  <form class='form_ticket'>      
+      <div class="col-lg-12">              
+        <?=label("Cliente")?>        
         <?=create_select($clientes_disponibles , 
         "cliente" , 
         "form-control lista_cliente_ticket" , 
         "cliente" , 
         "nombre" , 
         "id_persona" );?>
-        <label>
-          Servicio
-        </label>
-         <div class="place_lista_servicios">          
-            <?=create_select(
+        <?=label("Servicio")?>        
+
+        <?=div(create_select(
               $servicios_cliente , 
               "id_proyecto" , 
               "form-control" , 
               "servicios_cliente" , 
               "proyecto" , 
-              "id_proyecto" );?>
-         </div>         
-         <div>
-            <a class="input-sm btn btn_siguiente_ticket" style="background: black!important;">
-              Siguiente
-            </a>
-         </div>
+              "id_proyecto" ), 
+            ["class"  => "place_lista_servicios"]
+        );?>        
+        <?=anchor_enid("Siguiente" , ["class"=>"input-sm btn btn_siguiente_ticket"],1)?>
       </div>
-
-
-
                  
       
       <div style="display: none;" class="contenedor_formulario_ticket">
         <div class="col-lg-6">
-          <label class="col-md-3 control-label blue_enid_background white" for="prioridad">
-            Prioridad
-          </label>
+          <?=label("Prioridad" , 
+          [
+            "class" =>  "col-md-3 control-label blue_enid_background white" ,
+            "for"   =>  "prioridad"
+          ])?>
+          
           <div class="col-md-9">
             <select id="prioridad" name="prioridad" class="form-control">
               <option value="1">Alta
@@ -81,33 +70,28 @@
 
         <div class="col-lg-12">            
             <div class="input-group">
-              <span class="input-group-addon">Asunto
-              </span>
-              <input id="asunto" name="asunto" class="form-control" placeholder="Solicitud" required="" type="text">
+              <?=span("Asunto" , ["class"=>"input-group-addon"])?>
+              <?=input([
+                "id"            =>  "asunto", 
+                "name"          =>  "asunto", 
+                "class"         =>  "form-control",
+                "placeholder"   =>  "Solicitud",
+                "type"          =>  "text"
+              ])?>                            
             </div>                  
         </div>
         
         
         <!-- Textarea -->
-
         <div class="col-lg-12" style="display: none;">
-          <label class="control-label blue_enid_background white" for="mensaje">
-            Descripción
-          </label>
-          <div class="">                     
-            <textarea class="form-control" id="mensaje" name="mensaje"></textarea>
-          </div>
+          <?=label("Descripción" , 
+          [ "class" =>  "control-label blue_enid_background white" ,
+            "for"   =>  "mensaje"] 
+          )?>          
+          <textarea class="form-control" id="mensaje" name="mensaje"></textarea>          
         </div>
-      
-        <button class='btn'>
-          Abrir ticket
-        </button>
+        <?=guardar("Abrir ticket" , ["class"=>'btn'])?>
       </div>
   </form>
 </div>
-
-
-<?=n_row_12()?>
-  <div class='place_registro_ticket'>
-  </div>
-<?=n_row_12()?>
+<?=place("place_registro_ticket")?>

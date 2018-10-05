@@ -3,21 +3,14 @@
 display: none;
 }
 </style>
-
-
 <form accept-charset="utf-8" method="POST" id="img_user_empresa" enctype="multipart/form-data" >
-
-<input type="file" name="imagen"/>
-<input type='hidden' name='q' value='usuarios'>
-	
-	<button type="submit">ENVIAR</button>
+	<?=input(["type"=>"file", "name"=>"imagen"])?>
+	<?=input_hidden(["name"	=>	'q', "value"=>'usuarios'])?>
+	<?=guardar("ENVIAR")?>
 </form>
-
 <hr>
-<div id="mensaje"></div>
+<?=div(["class" => "mensaje" , "id" => "mensaje"])?>
 <hr>
-
-
 
 <script>
 $("#img_user_empresa").on("submit", function(e){
@@ -45,7 +38,3 @@ $("#img_user_empresa").on("submit", function(e){
 	});
 });
 </script>
-
-
-
-

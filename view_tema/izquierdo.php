@@ -8,7 +8,7 @@
     <?=heading_enid("¿TIENES ALGUNA DUDA?" ,3)?>
     <?=anchor_enid("ENVIA TU MENSAJE", 
         [	
-        	"href"=>"../contact/#envio_msj" ,
-            'style'=>'color:black!important;text-decoration:underline;'
+        	"href"	=>	"../contact/#envio_msj" ,
+            'style'	=>	'color:black!important;text-decoration:underline;'
         ])?>
 </div>

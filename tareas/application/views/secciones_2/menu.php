@@ -8,8 +8,8 @@
                         href="#tab_redes_sociales" 
                         data-toggle="tab"                         
                         class='black tab_redes_s '>
-                        icon('fa fa-fighter-jet">                          
-                        get_titulo_modalidad                        
+                        <?=icon('fa fa-fighter-jet')?>
+                                                
                         Social  
                         <span class="place_notificacion_accesos_dia">                        
                         </span>      
@@ -23,8 +23,8 @@
                         href="#tab_en_correo_electronico" 
                         data-toggle="tab"                         
                         class='black tab_marketing'>                        
-                        icon('fa fa-envelope strong black">                          
-                        get_titulo_modalidad
+                        <?=icon('fa fa-envelope strong black')?>
+                        
                         Email 
                         <span class="place_notificacion_email_enviados">                            
                         </span>

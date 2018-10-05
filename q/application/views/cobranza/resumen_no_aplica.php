@@ -59,35 +59,31 @@
 	$data_notificacion["id_recibo"] =  $id_recibo;
 
 			
-	$flag_servicio 				=  $servicio["flag_servicio"];
-	$nombre_servicio 			=  $servicio["nombre_servicio"];	
-	$proyecto 					=  $servicio;		
-	$detalles 					=  $resumen_pedido;	
-	$ciclo_de_facturacion 		=  $id_ciclo_facturacion;  	
-	$saldo_cubierto 			=  $saldo_cubierto;
-	$monto_a_pagar 				=  $monto_a_pagar;
-	$primer_registro 			=  $fecha_registro;	
-	$estado_text 				=  ($saldo_cubierto < $monto_a_pagar ) ? "Pendiente": "";
-		
-	
-	$data["saldo_pendiente"] =  $saldo_pendiente;
-	$url_pago_paypal ="https://www.paypal.me/eniservice/".$saldo_pendiente;
-	$data["url_pago_paypal"] = $url_pago_paypal;
+	$flag_servicio 				=  	$servicio["flag_servicio"];
+	$nombre_servicio 			=  	$servicio["nombre_servicio"];	
+	$proyecto 					=  	$servicio;		
+	$detalles 					=  	$resumen_pedido;	
+	$ciclo_de_facturacion 		=  	$id_ciclo_facturacion;  	
+	$saldo_cubierto 			=  	$saldo_cubierto;
+	$monto_a_pagar 				=  	$monto_a_pagar;
+	$primer_registro 			=  	$fecha_registro;	
+	$estado_text 				=  	($saldo_cubierto < $monto_a_pagar ) ? "Pendiente": "";		
+	$data["saldo_pendiente"] 	=  	$saldo_pendiente;
+	$url_pago_paypal 			=	"https://www.paypal.me/eniservice/".$saldo_pendiente;
+	$data["url_pago_paypal"] 	= 	$url_pago_paypal;
 	$data["recibo"] =$recibo;
 	
-	$data_extra["cliente"] 	=  	$cliente;
-	$url_logo 				= 	$url_request."img_tema/enid_service_logo.jpg";
-	$config_log				=   ['src' => $url_logo  ,'width'	=> '100'];
-	$url_cancelacion 		= 	$url_request."msj/index.php/api/emp/salir/format/json/?type=2&id=".$id_proyecto_persona_forma_pago;
+	$data_extra["cliente"] 		=  	$cliente;
+	$url_logo 					= 	$url_request."img_tema/enid_service_logo.jpg";
+	$config_log					=   ['src' => $url_logo  ,'width'	=> '100'];
+	$url_cancelacion 			= 	$url_request."msj/index.php/api/emp/salir/format/json/?type=2&id=".$id_proyecto_persona_forma_pago;
 
 
 ?>
 	<div style="margin: 0 auto;width: 76%;">
 		<?=$this->load->view("cobranza/saludo_inicial" , $data_extra)?>		
 		<center>
-			<div style="width: 200px;">				
-				<?=img($config_log)?>
-			</div>
+			<?=div(img($config_log) , [ "style"=> "width: 200px;"] )?>			
 		</center>
 		<?=heading_enid("#Recibo: " .$id_recibo;)?>
 
@@ -97,38 +93,26 @@
 			<?=div(valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio , $id_ciclo_facturacion))?>
 			<?=div("Precio $" . $monto_a_pagar)?>
 			<?=div($text_envio_cliente_sistema)?>
-			<p>	
-				<?=icon('fa fa-check-circle-o')?>  
-		        Ordén de compra
-		         <?=$primer_registro;?>                         		
-		       	| Límite de pago 
-		         <?=$fecha_vencimiento;?>
-		    </p>		                            
+			<?=div(
+				icon('fa fa-check-circle-o'). 
+				" Ordén de compra ".$primer_registro."| Límite de pago ".$fecha_vencimiento)?>
+			
 			<div style="border-style: solid;text-align: right;">
 				<?=strong("Monto total pendiente ")?>
-	          	<?=span($saldo_pendiente . "Pesos Mexicanos"	)?>
-	          	<span style="background: green; color:white;padding: 3px;">
-	          		
-	          	</span>
+	          	<?=span($saldo_pendiente . "Pesos Mexicanos", 
+	          	["style"=>"background: green; color:white;padding: 3px;"])?>
+	          	
 	        </div>
 		</div>	      
+		<hr>		
+		<?=heading_enid("Formas de pago Enid Service" , 2 , ["class" => "top_10"])?>					
 		<hr>
-		<div style="margin-top: 10px; ">
-			<h3>
-				<span style="color: black;"> 	
-					Formas de pago Enid Service
-				</span>
-			</h3>
-		</div>		
-		<hr>
-		<div style="background: black; color: white;padding: 5px;">
-			<strong>					
-				** NINGÚN CARGO A TARJETA ES AUTOMÁTICO. 
-				SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO **					
-			</strong>
-		</div>
-				
-		<div >
+		
+		<?=div(strong("** NINGÚN CARGO A TARJETA ES AUTOMÁTICO. 
+			SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO **	"), 
+			["style" => "background: black; color: white;padding: 5px;"])?>			
+			
+		<div>
 			<?=$this->load->view("cobranza/pago_oxxo" , $data_oxxo)?> 			
 		</div>
 		<hr>
@@ -136,30 +120,33 @@
 			<?=$this->load->view("cobranza/pago-paypal" , $data)?> 	
 		</div>
 
-		<div >
-				<div style="background: #001a30!important;padding: 5px;">
-					<div style="background: white;padding: 10px;font-size: 2em;">
-						¿Ya realizaste tu pago?
-					</div>
-					<span style="color: white;padding: 4px;">
-						Notifica tu pago para que podamos procesarlo 
-					</span>
-					<a 
-						href="<?=$url_request?>notificar/?recibo=<?=$id_recibo;?>" 
-						style="background:white;color: black!important;padding: 5px;">
-						dando click aquí. 
-					</a>
-				</div>
-		</div>
+		
+		<div style="background: #001a30!important;padding: 5px;">
+			<?=div("¿Ya realizaste tu pago?", 
+				[
+					"style" =>	"background: white;padding: 10px;font-size: 2em;"
+			])?>
+				
+			<?=span("Notifica tu pago para que podamos procesarlo " , 
+				[	
+					"style"	=>	"padding: 4px;"
+					"class"	=> 	"white"
+			])?>
+				
+			<?=anchor_enid("dando click aquí. ",
+				[
+					"href" 	=>	"<?=$url_request?>notificar/?recibo=". $id_recibo ,
+					"style"	=>	"background:white;color: black!important;padding: 5px;"
+			])?>				
+		</div>		
 		<hr>
-		<div>	
-			<?=anchor_enid( 
+		
+		<?=div(anchor_enid( 
 			"YA NO QUIERO RECIBIR ESTE CORREO" ,  
 			[
 				'href' 	=> $url_cancelacion ,  
 				'style' => 'color:black;font-size:.9em;font-weight:bold'
-			])?>
-		</div>
-
+			])
+		)?>		
 	</div>
 </div>	

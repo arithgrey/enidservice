@@ -723,8 +723,7 @@ class Servicio extends REST_Controller{
                     $text =icon("fa fa-check-circle");
                     if ($num_exist == 0 ) {
                         
-                        $text ='
-                        icon('fa fa-times red_enid_background white" style="padding: 5px;"') ';  
+                        $text =icon('fa fa-times red_enid_background white' , ["style"=>"padding: 5px;"]);  
                     }
                     $list .= get_td($text);                
                 }

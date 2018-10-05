@@ -5,8 +5,8 @@
                                             <a  href="#tab1default_en_agenda" 
                                                 data-toggle="tab" 
                                                 >
-                                                icon('fa fa-cloud-download  black ">
-                                                get_titulo_modalidad
+                                                <?=icon('fa fa-cloud-download  black ')?>
+                                                
                                                 Descargar 
                                                 correos
                                             </a>
@@ -15,8 +15,8 @@
                                             <a href="#tab2default_en_agenda" 
                                                data-toggle="tab"
                                                >    
-                                               icon('fa fa-refresh  black">
-                                               get_titulo_modalidad
+                                               <?=icon('fa fa-refresh  black')?>
+                                               
                                                 Registra envios                                                 
                                             </a>
                                         </li>

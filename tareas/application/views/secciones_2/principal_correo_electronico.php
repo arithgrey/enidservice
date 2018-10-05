@@ -11,8 +11,7 @@
                     <a  href="#tab1default_en_agenda" 
                                                     data-toggle="tab" 
                                                     >
-                        icon('fa fa-cloud-download  black ">
-                        get_titulo_modalidad
+                        <?=icon('fa fa-cloud-download  black ')?>                        
                         Descargar contactos
                     </a>
                 </li>                                       

@@ -834,7 +834,7 @@ if(!function_exists('invierte_date_time')){
                     <li class="btn_configurar_enid">
                       <a href="'.$href.'" >
                         icon('fa fa fa-cog">
-                        get_titulo_modalidad 
+                         
                      
                       </a>
                     </li>               
@@ -850,7 +850,7 @@ if(!function_exists('invierte_date_time')){
                     <li class="btn_agregar_enid" title="Agregar nuevo">
                       <a href="'.$href.'" >
                         <?=icon("fa fa-plus")?>
-                        get_titulo_modalidad 
+                         
                      
                       </a>
                     </li>               
