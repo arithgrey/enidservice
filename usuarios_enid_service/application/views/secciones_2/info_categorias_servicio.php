@@ -4,7 +4,7 @@
 		<div class="form-group">
 		  <?=div("¿ES SERVICIO?" ,  ["class"	=> "col-md-4"])?>
 		  
-		  <div class="col-md-8">
+		  <div class="col-md-8">		  
 		    <select id="servicio" name="servicio" class="form-control servicio">
 		      <option value="0">NO</option>
 		      <option value="1">SI</option>
@@ -28,20 +28,18 @@
 		</div>
 		<div class="form-group">
 			<?=guardar("SIGUIENTE" ,  ["class"=>"a_enid_blue add_categoria"])?>
-			<?=place(".msj_existencia")?>
+			<?=place("msj_existencia")?>
 		</div>		
 		</form>
 		<?=n_row_12()?>
 			<table>
-				<?=get_td("<div class='primer_nivel'></div>")?>
-				<?=get_td("<div class='segundo_nivel'></div>")?>
-				<?=get_td("<div class='tercer_nivel'></div>")?>
-				<?=get_td("<div class='cuarto_nivel'></div>")?>
-				<?=get_td("<div class='quinto_nivel'></div>")?>				
+				<?=get_td(div("" , ["class"=>'primer_nivel']))?>
+				<?=get_td(div("" , ["class"=>'segundo_nivel']))?>
+				<?=get_td(div("" , ["class"=>'tercer_nivel']))?>
+				<?=get_td(div("" , ["class"=>'cuarto_nivel']))?>
+				<?=get_td(div("" , ["class"=>'quinto_nivel']))?>					
 			</table>
 		<?=end_row()?>
-	</div>
-	<div class="col-lg-5">
-		<?=heading("CATEGORÍAS 	EN PRODUCTOS Y SERVICIOS" , 3)?>		
-	</div>
+	</div>	
+	<?=div(heading("CATEGORÍAS 	EN PRODUCTOS Y SERVICIOS" , 3) ,  ["class"=>"col-lg-5"])?>
 <?=end_row()?>

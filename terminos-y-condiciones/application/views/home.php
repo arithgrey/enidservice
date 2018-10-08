@@ -4,7 +4,7 @@
             <?=$this->load->view("secciones/menu");?>
         </div>
         <div class="col-lg-9">
-            <?=heading_enid($titulo , 1)?>            
+            <?=heading_enid($titulo)?>            
             <?=$this->load->view($vista);?>
         </div>
     </div>

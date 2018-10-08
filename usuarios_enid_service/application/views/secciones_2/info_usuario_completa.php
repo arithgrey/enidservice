@@ -5,13 +5,13 @@
 				<?=div("Estatus")?>					
 				<select class="form-control input-sm estado_usuario" name="status">
 					<option  value="1">
-							Activo
+						Activo
 					</option>
 					<option value="0">
-							Baja
+						Baja
 					</option>
 					<option value="2">
-							Suspendido
+						Suspendido
 					</option>
 				</select>
 			</div>
@@ -109,10 +109,16 @@
 
 			<div class="col-lg-4">
 				<?=div("Turno")?>			
-				<select class="form-control input-sm turno" name="turno">
-				 <option value="Matutino">Matutino</option>
-				 <option value="Vespertino">Vespertino</option>
-				 <option>Tiempo completo</option>
+				<select class="form-control input-sm turno" name="turno">				 
+					<option value="Matutino">
+						Matutino
+					</option>
+					<option value="Vespertino">
+						Vespertino
+					</option>					
+					<option>
+						Tiempo completo
+					</option>
 				</select>				
 			</div>
 		</div>
@@ -120,12 +126,12 @@
 			<div class="col-lg-4">
 				<?=div("Sexo")?>
 				<select class="form-control input-sm sexo" name="sexo">
-				  		<option value="1">
-				  			Masculino
-				  		</option>
-				  		<option value="0">
-				  			Femenino
-				  		</option>		  		
+				  	<option value="1">
+				  		Masculino
+				  	</option>
+				  	<option value="0">
+				  		Femenino
+				  	</option>		  		
 				</select>
 			</div>
 			<div class="col-lg-4">

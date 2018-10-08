@@ -40,10 +40,9 @@
                 </div>                    
               <?=end_row()?>
               
-              <?=anchor_enid("Iniciemos conversación" , 
-              ["href"=>"../contact"] )?>
-              <hr 
-              style="color:black;height: 1px;border: 0;background-color: black;">
+              <?=anchor_enid("Iniciemos conversación" , ["href"=>"../contact"] )?>
+              <hr style="color:black;height: 1px;border: 0;background-color: black;">
+
             </div>
           </div>                   
         </div>      
@@ -66,6 +65,5 @@
 
 
 });
-/**/
 
-  </script>
+</script>
