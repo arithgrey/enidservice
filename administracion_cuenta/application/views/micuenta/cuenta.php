@@ -4,13 +4,14 @@
             <div class="col-lg-5">
                 <?=n_row_12()?>        
                     <div class="coach-card">            
-                            <?=n_row_12()?>
+                            
                                 <?=img([
                                     "src"=>"../imgs/index.php/enid/imagen_usuario/".$id_usuario ,
                                     "onerror"=>"this.src='../img_tema/user/user.png'"
-                                ])?>
+                                ] , 
+                                1)?>
 
-                            <?=end_row()?>     
+                            
                             <?=anchor_enid("ACTUALIZAR FOTO" , ["class"=>"a_enid_blue editar_imagen_perfil white" , "style"=>"color: white!important"] , 1)?>
                     </div>
                 <?=end_row()?>
