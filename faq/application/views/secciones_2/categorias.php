@@ -1,36 +1,18 @@
-
-
-
-		
 <?=n_row_12()?>
-	<div class="blue_enid_background white strong">
-		Servicios
-	</div>
-	<div>
-		<?=lista_categorias($categorias_publicas_venta);?>
-	</div>
+	<?=div("Servicios" , ["class"=>"blue_enid_background white strong"])?>
+	<?=div(lista_categorias($categorias_publicas_venta));?>
 <?=end_row()?>
 <?=n_row_12()?>
 	<?=place("place_categorias_extras")?>
 <?=end_row()?>
-
 <?=n_row_12()?>
-	<div class="white strong" style="background: black;">
-		Temas de ayuda
-	</div>
-	<div>
-		<?=lista_categorias($categorias_temas_de_ayuda);?>
-	</div>
+	<?=div("Temas de ayuda" , ["class"=>"white strong", "style"=>"background: black;"])?>
+	<?=div(lista_categorias($categorias_temas_de_ayuda) );?>
 <?=end_row()?>
 
-
 <?=n_row_12()?>
-	<div class="white strong" style="background: black;">
-		Programa de afiliados
-	</div>
-	<div>
-		<?=lista_categorias($categorias_programa_de_afiliados);?>
-	</div>
+	<?=diiv("Programa de afiliados" , ["class"=>"white strong", "style"=>"background: black;"])?>
+	<?=div(lista_categorias($categorias_programa_de_afiliados))?>
 <?=end_row()?>
 
 

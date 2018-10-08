@@ -149,14 +149,12 @@
     <div class="col-lg-4">
         <?=heading_enid("TU CUENTA ENID SERVICE" , 3)?>
         <div>
-            <p style="text-decoration: underline">
+            <p  class="underline">
                 <?=get_campo($usuario , "nombre" , "Tu Nombre")?>
                 <?=get_campo($usuario , "apellido_paterno" , "Tu prime apellido")?>
                 <?=get_campo($usuario , "apellido_materno" , "Tu prime apellido")?>
             </p>
-            <?=n_row_12()?>
-                <?=get_campo($usuario , "email" , "Tu prime apellido")?>
-            <?=end_row()?>
+            <?=div(get_campo($usuario , "email" , "Tu prime apellido") , [] , 1)?>
             <?=n_row_12()?>
                 <?=get_campo($usuario , "tel_contacto" , "Tu prime apellido" , 1)?>
             <?=end_row()?>

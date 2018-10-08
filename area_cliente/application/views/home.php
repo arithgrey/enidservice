@@ -21,23 +21,20 @@ $llamadas_recibidas =  anchor_enid(
 		            <div class="tab-pane <?=valida_active_tab('compras' , $action)?>"  id='tab_mis_pagos'>
 		                <?=div("" , ["class"=>"place_servicios_contratados"] , 1)?>
 		            </div>
-		            <div 
-		            	class="tab-pane <?=valida_active_tab('ventas' , $action)?>" 
-		            	id='tab_mis_ventas'>                
+		            <div class="tab-pane <?=valida_active_tab('ventas' , $action)?>" id='tab_mis_ventas'>                
 		                <?=n_row_12()?> 
-		                	<div class="col-lg-9">	                		
-		                    	<?=div("", ["class"=>'place_ventas_usuario'])?>
-		                    </div>
+		                	<?=div(place("place_ventas_usuario") , ["class"=>"col-lg-9"])?>
+		                    
 		                    <div class="col-lg-3">	                		
-		                    	<?=heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS" , 3 ,[])?>
-								
+		                    	<?=heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS" , 3)?>
 								<center>
 						    		<?=$valoraciones;?>
 						    	</center>
-						    	
-						    	<?=anchor_enid("VER COMENTARIOS" , [
+						    	<?=anchor_enid("VER COMENTARIOS" , 
+						    		[
 						    		"href"	=>	"../recomendacion/?q=".$id_usuario ,
-									"class"	=>	"a_enid_blue text-center"] ,
+									"class"	=>	"a_enid_blue text-center"
+									] ,
 									1
 								)?>
 								<?=div($alcance , [] , 1)?>
@@ -54,22 +51,15 @@ $llamadas_recibidas =  anchor_enid(
 							<?=n_row_12()?>
 								<table>
 									<tr>
-										<td>
-											<?=$llamadas_hechas;?>
-											<?=$llamadas_recibidas?>
-										</td>
+										<?=get_td($llamadas_hechas . $llamadas_recibidas )?>
 									</tr>
 								</table>
 							<?=end_row()?>
 						</div>
 						<?=place("place_buzon")?>
 		            </div>
-		            <div  class="tab-pane" id="tab_pagos">
-		            	<?=place("place_pagar_ahora")?>
-		            </div>
-		            <div  class="tab-pane" id="tab_renovar_servicio">    
-		           		<?=place("place_resumen_servicio")?>       
-		            </div>
+					<?=div(place("place_pagar_ahora") ,  ["class"=>"tab-pane", "id"=>"tab_pagos"] )?>
+		           	<?=div(place("place_resumen_servicio") , ["class"=>"tab-pane" , "id"=>"tab_renovar_servicio"] )?>       
 		        </div>
 		    </div>   
 		</div> 

@@ -6,32 +6,17 @@
 
 		$titulo = $row["titulo"];
 		$id_faq = $row["id_faq"];
-
-		$href="?faq=".$id_faq;		
-
-
+		$href 	="?faq=".$id_faq;		
 		$href_img ="../imgs/index.php/enid/img_faq/".$id_faq;
 
-		
 		$lista_preguntas .= '<a href="'.$href.'" class="row">
 									<ul class="event-list" >
 										<li class="black blue_enid_background" >
 											<time style="background:#00304b!important;">
-												<span class="day" >
-													'.	$x .'
-												</span>
-											
+												'.span($x , ["class"=>"day"] ).'
 											</time>
-											<img  src="'.$href_img.'">
-
-											<h2 class="info blue_enid_background" 
-												style="font-size:1em!important;							color:white!important;padding:5px;">
-												
-												
-												' .$titulo .'
-												
-											</h2>
-											
+											'.img(["src"=> $href_img ]).'
+											'. heading($titulo).'
 										</li>
 									</ul>
 								</a>';			
@@ -39,25 +24,8 @@
 	}	
 ?>
 
-
-
-<?=n_row_12()?>
-	<h2 class="white" 
-		style="background: black;padding: 10px;">
-		Temas relacionados 
-	</h2>
-<?=end_row()?>
-
-
-<?=n_row_12()?>
-	<div style="height: 600px;overflow-y: auto;">
-		<?=$lista_preguntas;?>
-	</div>
-<?=end_row()?>
-
-
-
-
+<?=heading("Temas relacionados" , 2 , 1)?>
+<?=div($lista_preguntas , ["style"=>"height: 600px;overflow-y: auto;"] , 1)?>
 <style type="text/css">
 	
 	.event-list > li {
