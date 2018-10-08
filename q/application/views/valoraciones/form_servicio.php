@@ -34,11 +34,12 @@
 									"class"	=>'input-start' ,
 									"type"	=>"radio"
 								])?>		
-								<?=label("★" , [	"class"		=>'estrella '.$num_estrella, ,
+								<?=label( "★" , [	"class"		=>'estrella '.$num_estrella, 
 													"for"		=>"$id_input" ,
 													"id"		=>$x,
 													"title"		=> $x." - ".$calificacion[$x]
-												])?>
+												]
+											)?>
 										
 								<?php }?>
 							</td>
@@ -107,7 +108,7 @@
 			<?=n_row_12()?>
 				<table style='width:100%'>
 					<tr>
-						<?=get_td(strong("Nombre*" ,  "class"  => "text-valoracion"))?>
+						<?=get_td(strong("Nombre*" ,  ["class"  => "text-valoracion"]))?>
 						<td>
 
 							<input 
@@ -143,7 +144,7 @@
 				</table>
 			<?=end_row()?>
 			<?=place("nuevo")?>
-			<?=guardar("ENVIAR RESEÑA" .icon('fa fa-chevron-right ir') ,[] , 1 )?>
+			<?=guardar("ENVIAR RESEÑA" .icon('fa fa-chevron-right ir') )?>
 			<?=place("place_registro_valoracion" )?>
 		</form>	
 	</div>

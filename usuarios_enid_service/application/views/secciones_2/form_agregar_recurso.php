@@ -2,15 +2,13 @@
 <?=n_row_12()?>                  
   <form class="form_recurso" id='form_recurso'>                      
     <div class="col-lg-6">
-
       <?=div("Nombre")?>
       <?=input([
         "type"      =>  "text" ,
         "name"      =>  "nombre" ,
         "class"     =>  "form-control",
         "required"  =>   "true"
-      ])?>
-      
+      ])?>      
     </div>
     <div class="col-lg-6">
       <?=div("../Url recurso")?>

@@ -6458,3 +6458,77 @@ DEBUG - TYPE array 2018-10-05 01:52:46 --> Array
 
 )
 
+DEBUG - TYPE array 2018-10-08 09:14:49 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+

@@ -1,5 +1,4 @@
 <main>    
-
 <div class='row'>    
     <div class='col-lg-2' >        
         <?=$this->load->view("secciones_2/menu");?>        
@@ -22,10 +21,6 @@
 </div>        
 <main>
 
-
-<main>
-  
-</main>
 
 <script type="text/javascript" src="<?=base_url('application/js/principal.js')?>">    
 </script>
@@ -72,15 +67,6 @@
 .contenedor-info-ventas{
     display: none;
 }
-
 </style>
 
 
-
-<style type="text/css">
-.navbar, main{
-    background-color: #FFF!important;
-}
-    
-}
-</style>

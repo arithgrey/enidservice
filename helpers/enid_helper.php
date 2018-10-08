@@ -140,13 +140,24 @@ if ( ! function_exists('p'))
 }
 if ( ! function_exists('guardar'))
 {
-  function guardar( $info , $attributes=[], $row = 0 )
+  function guardar( $info , $attributes=[], $row = 1 , $type_button =1 )
   {   
       $attributes["type"] = "submit";      
-      if ($row == 0) {
-        return  form_submit("" , $info  , $attributes); 
+      if($type_button == 1) {
+        $existe =  array_key_exists("class", $attributes)?1:0;      
+        
+        if ($existe ==  1) {
+          $attributes["class"] = $attributes["class"]." " ." a_enid_blue white completo ";
+        }else{
+          $attributes["class"] =  "a_enid_blue white completo ";
+        }    
+      }
+      $attr =  add_attributes($attributes);
+      if ($row == 0) {        
+        return "<button ".$attr. ">" . $info . "<button />\n";
       }else{
-        return  n_row_12().form_submit("" , $info , $attributes).end_row(); 
+        $button =  "<button ".$attr. ">" . $info . "<button />\n";
+        return div($button , [] ,  1);
       }      
   }
 }
@@ -307,8 +318,7 @@ if ( ! function_exists('anchor_enid'))
   {
     
     if($type_button == 1) {
-      $existe =  array_key_exists("class", $attributes)?1:0;
-      
+      $existe =  array_key_exists("class", $attributes)?1:0;      
       
       if ($existe ==  1) {
         $attributes["class"] = $attributes["class"]." " ." a_enid_blue white completo ";

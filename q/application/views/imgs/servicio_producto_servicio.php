@@ -11,10 +11,14 @@ method="POST" id="form_img_enid" class="form_img_enid" enctype="multipart/form-d
     <?=input_hidden(["class"=>'dinamic_img', "id"=>'dinamic_img' ,"name"=>'dinamic_img' ])?>
     <?=place("separate-enid")?>
     <?=place("place_load_img" , ["id"   =>  'place_load_img'])?>
-    
-    <?=guardar("AGREGAR IMAGEN" . icon("fa fa-check") ,
+    <?=anchor_enid(
+        "AGREGAR IMAGEN" . icon("fa fa-check") ,
+        [
         "class" =>  'btn guardar_img_enid ' ,
-        "id"    =>  'guardar_img' 
-)?>    
+        "id"    =>  'guardar_img'
+        ],
+        1,
+        1
+    )?>    
 </form>
 <?=place("info_form")?>
