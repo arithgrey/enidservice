@@ -3,7 +3,8 @@
 	<div class="panel-heading">
 		 <ul class="nav nav-tabs">
 		   	<li class="li_menu active">  
-		      <?=anchor_enid("General" .icon("fa fa-question-circle") , ["href"=>"#tab_faq_general", "data-toggle"=>"tab", "aria-expanded"=>"false"])?>
+		      <?=anchor_enid("General" .icon("fa fa-question-circle") , 
+		      ["href"=>"#tab_faq_general", "data-toggle"=>"tab", "aria-expanded"=>"false"])?>
 		  	</li>
 		  	<li class="btn_img_avanzado li_menu " style="display: none;">
 		  		<?=anchor_enid("Avanzado" . icon("fa fa-plus-circle") , [

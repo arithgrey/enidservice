@@ -18,7 +18,7 @@
               <?=$row["nombre"];?>                
               <div style="position: absolute;top: 50px;">                
                 <?=icon("fa fa-credit-card ")?>
-                <?=span($resumen_clabe )?>
+                <?=div($resumen_clabe )?>
               </div>
             </div>
         <?php endforeach; ?>
@@ -26,11 +26,11 @@
           <a href="?q=transfer&action=1">
             <div class="col-lg-6 contenedor_info_trasnfer">
               <?=div( 
-                span( "Agregar cuenta" .icon("fa fa-plus-circle ")
+                div( "Agregar cuenta" .icon("fa fa-plus-circle ")
                  , 
-                 ['class' =>'agregar_cuenta_text'] ,1) 
-                 , 
-                 [ "class"=>"text-center contenedor_agregar_cuenta"])?>                
+                ['class' =>'agregar_cuenta_text'] ,1) 
+                ,
+                [ "class"=>"text-center contenedor_agregar_cuenta"])?>              
             </div>
           </a>
       </div>
@@ -38,7 +38,7 @@
       <?=$head_tarjetas_credito?>
       <?php foreach ($tarjetas as $row): ?>          
             <div class="col-lg-6 contenedor_agregar_cuenta_2">
-              <?=div($row["nombre"], [] , 1)?>                              
+              <?=div($row["nombre"],  1)?>                              
               <div style="position: absolute;top: 50px;">
                 <?=icon("fa fa-credit-card ")?>
                 <?=div(substr($row["numero_tarjeta"], 0 ,4) .  "********")?>
@@ -47,8 +47,8 @@
         <?php endforeach; ?>
         <a href="?q=transfer&action=1&tarjeta=1">
             <div class="col-lg-6 contenedir_agregar_tarjeta">              
-                  <?=div("Agregar tarjeta")?>
-                  <?=icon("fa fa-plus-circle ")?>                    
+              <?=div("Agregar tarjeta")?>
+              <?=icon("fa fa-plus-circle ")?>                    
             </div>
         </a>
     </div>

@@ -14,15 +14,32 @@
 		<div class="boton_imprimir_orden">
 			<div class="text-right">
           <form action="../pdf/orden_pago.php" method="POST">
-            <input type="hidden" name="beneficiario" value="<?=$beneficiario?>">
-            <input type="hidden" name="folio" value="<?=$folio?>">
-            <input type="hidden" name="monto" value="<?=$monto?>">
-            <input type="hidden" name="numero_cuenta" value="<?=$numero_cuenta?>">
-            <input type="hidden" name="concepto" value="<?=$concepto?>">
-            
-  			    <button class="a_enid_blue imprimir" style="color: white!important;" >
-  			    	IMPRIMIR
-  			    </button>
+            <?=input_hidden([
+              "name"  =>  "beneficiario" ,
+              "value" =>  $beneficiario
+
+            ])?> 
+            <?=input_hidden([
+              "name"  =>  "folio" ,
+              "value" =>  $folio
+
+            ])?> 
+            <?=input_hidden([
+              "name"  =>  "monto" ,
+              "value" =>  $monto
+
+            ])?> 
+            <?=input_hidden([
+              "name"  =>  "numero_cuenta" ,
+              "value" =>  $numero_cuenta
+
+            ])?> 
+            <?=input_hidden([
+              "name"  =>  "concepto" ,
+              "value" =>  $concepto
+
+            ])?> 
+            <?=guardar("IMPRIMIR" , ["class"=>"a_enid_blue imprimir"] ,1,1)?>  			    
           </form>
 		    </div>
 	    </div>
@@ -35,157 +52,73 @@
                       <div class="info_orden_compra">
                         <div style="font-size:1.4em;color:black;">
                           <?=img(
-                            array(
+                            [
                               'src'   => "http://enidservice.com/inicio/img_tema/portafolio/oxxo-logo.png",
                               'style' => "width:100px!important"
-                            ))?>
+                            ]
+                          )?>
                           ORDEN DE PAGO EN SUCURSALES OXXO
                         </div>
-                        <div style="background: #0000f5;padding: 5px;color: white;color: white;">
-                            	<?=$concepto?>
-                            	
-                            	Beneficiario
-                            	<?=$beneficiario?>
-                              
-                              Folio #<?=$folio?>
-                        </div>
+                        <?=div($concepto ."Beneficiario".$beneficiario ."Folio #".$folio,
+                        ["style"=>"background: #0000f5;padding: 5px;color: white;color: white;"])?>
+                        
                       <div style="margin-top:20px; ">                        
                         <div style="width: 80%;margin: 0 auto;">
-                          <h1 style="color: : black;">
-                            MONTO A PAGAR
-                          </h1>
-                          <h2 style="color: black;">
-                            $<?=$monto?> MXN
-                          </h2>
-                          <span >
-                            OXXO Cobrará una comisión adicional al momento de realizar el pago
-                          </span>
+                          <?=heading("MONTO A PAGAR")?>
+                          <?=heading("$".$monto ."MXN" , 2)?>
+                          <?=div("OXXO Cobrará una comisión adicional al momento de realizar el pago" ,[] ,1)?>
+                          
                         </div>
                       </div>
                       
-                      <div style="margin-top:20px;"></div>
+                      
                       <?=n_row_12()?>                        
                         <div class="contenedor-img-logo">
-                          <div class="col-lg-6">
-                                <?=img(
-                                    array(
-                                      "src" =>  "http://enidservice.com/inicio/img_tema/portafolio/logo-bbv.png"
-                                    ))?>                        
-                          </div>
+                          <?=div(img(
+                              ["src" =>  "http://enidservice.com/inicio/img_tema/portafolio/logo-bbv.png"]
+                            )
+                          , 
+                          ["class"=>"col-lg-6"])?>                                                  
                         </div>
                       <?=end_row()?>
                       <?=n_row_12()?>                        
                         <div class="contenedor-img-logo">
-                          <div class="col-lg-6">
-                            <span style="">    
-                              <?=$numero_cuenta?>
-                            </span>       
-                          </div>
+                          <?=div($numero_cuenta , ["class"=>"col-lg-6"])?>
                         </div>
                       <?=end_row()?>                               
-                              
-                        
 
-                      <div style="margin-top:20px;"></div>
                       <?=n_row_12()?>
-                        <div style="width: 80%;margin: 0 auto;">
-                          <?=n_row_12()?> 
-                            <div style="background: black;color: white;padding: 5px;">
-                             INSTRUCCIONES
-                            </div>
-                          <?=end_row()?>
-                          <?=n_row_12()?>                                      
-                             <?=n_row_12()?>
-                                        <div>
-                                          <span style="font-size: 1em;margin-top: 7px;">
-                                              1.-Acude a la tienda OXXO más cencana 
-                                          </span>
-                                        </div>
-                                        <div>
-                                          <span style="font-size: 1em;margin-top: 7px;">
-                                              2.- Indica en caja que quieres realizar un
-                                                  depósito en cuenta 
-                                                <strong>
-                                                BBVA Bancomer
-                                                
-                                                </strong>
-                                            </span>
-                                        </div>
-                                        <div>
-                                          <span style="font-size: 1em;margin-top: 7px;">
-                                              3.- Proporciona el número de cuenta señalado
-                                          </span> 
-                                        </div>
-                                        <div>
-                                            <span style="font-size: 1em;margin-top: 7px;">
-                                              4.-Realiza el 
-                                              <strong>
-                                              pago exacto
-                                              </strong> 
-                                              correspondiente, 
-                                              que se indica en el monto a pagar 
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <div>
-                                              <span style="font-size: 1em;margin-top: 7px;">
-                                                5.-Al confirmar tu pago, el cajero te entregará un comprobante impreso. 
-                                              </span>
-                                            </div>
-                                            <div>
-                                            <span >
-                                                <strong>
-                                                En el podrás verificar que se haya realizado correctamente, conserva este comprobante. 
-                                                </strong>
-                                                
-                                            </span>
-                                            </div>
-                                        </div>
-                                        <div>
-                                          <span style="font-size: 1em;margin-top: 7px;">
-                                              <div>
-                                                <strong>
-                                                  6.- Notifica tu cuenta Enid Service
-                                                </strong>
-                                              </div>
-                                              <div>
-                                                <span>
-                                                  <a 
-                                                    href="http://enidservice.com/inicio/notificar/?recibo=<?=$info_pago["q2"]?>" 
-                                                    style="color: blue;" 
-                                                  	target="_black">
-                                                    NOTIFICA TU PAGO AQUÍ!
-                                                  </a>
-                                                </span>
-                                              </div>
-                                                       
-                                            </span>
-                                        </div>
-                                      
-                                      <div>
-                                      	<img src="http://enidservice.com/inicio/img_tema/enid_service_logo.jpg" width="300px">	
-                                      </div>
-                                      
+                      <div style="width: 80%;margin: 0 auto;">
+                        <?=div(
+                          "INSTRUCCIONES" ,
+                          ["style"=>"background: black;color: white;padding: 5px;"] ,
+                          1)?>
+                        <?=div("1.-Acude a la tienda OXXO más cencana ")?>
+                        <?=div("2.- Indica en caja que quieres realizar un
+                                                depósito en cuenta BBVA Bancomer ")?>
+                        <?=div("3.- Proporciona el número de cuenta señalado")?>
+                        <?=div("4.-Realiza el 
+                        pago exacto correspondiente, que se indica en el monto a pagar")?>
+                        <?=div("5.-Al confirmar tu pago, el cajero te entregará un comprobante impreso.")?>
+                        <?=div("En el podrás verificar que se haya realizado correctamente, conserva este comprobante.")?>
 
-                                        
+                        <?=div("6.- Notifica tu pago desde tu área de cliente")?>
+                        <?=anchor_enid("http://enidservice.com/inicio/login/" , 
+                        [
+                          "href"  =>  "http://enidservice.com/inicio/login/"
+                        ])?>
+                        <?=div("ó")?>
+                        <?=div("Notifica tu pago  al área de ventas ventas@enidservice.com")?>
+                        <?=div(img([
+                            "src"     =>  "../img_tema/enid_service_logo.jpg" ,
+                            "style"   =>  "width: 300px;"
+                          ]) 
+                          ,
+                          1)?> 
+                          
+                      </div>
+                    <?=end_row()?>
 
-                                      <?=end_row()?>     
-                                      <?=n_row_12()?>
-                                      	¿TIENES ALGUNA DUDA?
-                                      	
-                                      	<strong>
-                                      		Solicita una llamada 
-                                      	</strong>
-                                      	<span style="text-decoration: underline;">
-                                      		www.enidservice.com/inicio/
-                                      	</span>
-
-
-                                      <?=end_row()?>     
-                          <?=end_row()?>
-                        </div>
-                      <?=end_row()?>                         
-                            </div>
                       </div>
                   </div> 
               </div>        

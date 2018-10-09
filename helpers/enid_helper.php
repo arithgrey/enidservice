@@ -211,10 +211,12 @@ if ( ! function_exists('div'))
 {
   function div( $info , $attributes='' , $row_12 =0 )
   {          
-      $attr =  add_attributes($attributes);
-      if ($row_12 == 0 ) {
+      
+      if ($row_12 == 0 && $attributes != 1 ) {
+          $attr =  add_attributes($attributes);
           return "<div ".$attr." >".$info."</div>";  
       }else{
+          $attr =  add_attributes($attributes);
           return n_row_12()."<div ".$attr." >".$info."</div>".end_row();  
       }
       

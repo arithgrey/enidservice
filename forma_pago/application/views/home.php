@@ -1,10 +1,9 @@
-<?=n_row_12()?>
-	<div class="contenedor_principal_enid">
-		<div class="col-lg-8 col-lg-offset-2">	
-			<?=$info_recibo?>		
-		</div>	
-	</div>
-<?=end_row()?>
+<?=div(div($info_recibo , 
+["class"	=> "col-lg-8 col-lg-offset-2"]),  
+["class" 	=>"contenedor_principal_enid"] 
+, 
+1)?>		
+		
 <style type="text/css">
 	.contenedor-info-ventas{
 		display: none!important;

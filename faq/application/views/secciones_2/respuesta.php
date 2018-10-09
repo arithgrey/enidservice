@@ -41,25 +41,13 @@
 		$info_respuestas_similares_text .= '<a href="'.$href.'" class="row">
 									<ul class="event-list" >
 										<li class="black blue_enid_background" >
-											<time style="background:#00304b!important;">
-												<span class="day" >
-													'.	$x .'
-												</span>
-											
+											<time>
+											'.span($x ,  ["class"=>"day"]).'
 											</time>
 											'.img(["src"=> $href_img]).'
-											
-
 											<div class="info">
-
-												<div class="black blue_enid_background" 
-												style="font-size:.8em;												
-												color:white!important;padding:5px;">
-												' .$titulo .'
-												</div>
-												
+												' .div($titulo) .'
 											</div>
-											
 										</li>
 									</ul>
 								</a>';		

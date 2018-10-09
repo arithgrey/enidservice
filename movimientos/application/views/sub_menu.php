@@ -1,6 +1,5 @@
         <div class="card" style="width: 100%">
-          <ul class="list-group list-group-flush">
-            
+          <ul class="list-group list-group-flush">            
             <a href="?q=transfer&action=6" class="black">
                 <li class="list-group-item">                    
                     Añadir ó solicitar saldo 
@@ -8,8 +7,7 @@
             </a>
             <a href="?q=transfer&action=2" class="black">
                 <li class="list-group-item">
-                    <?=icon("fa fa-fighter-jet")?>
-                    
+                    <?=icon("fa fa-fighter-jet")?>                    
                     Trasnferir fondos                
                 </li>
             </a>

@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"con",
+				"config"
+			],
+			[
 				"sty",
 				"style_pedientes"
 			],
@@ -214,10 +218,6 @@
 			[
 				"input",
 				"focus_input"
-			],
-			[
-				"con",
-				"config2"
 			],
 			[
 				"ca",
@@ -519,6 +519,23 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "portafolio/application/views/servicio/lista.php",
+			"settings":
+			{
+				"buffer_size": 6089,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "notificar/application/views/secciones_2/paginas_web.php",
+			"settings":
+			{
+				"buffer_size": 6197,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -576,10 +593,110 @@
 	},
 	"expanded_folders":
 	[
-		"/var/www/html/inicio"
+		"/var/www/html/inicio",
+		"/var/www/html/inicio/faq",
+		"/var/www/html/inicio/faq/application",
+		"/var/www/html/inicio/faq/application/views",
+		"/var/www/html/inicio/faq/application/views/secciones_2",
+		"/var/www/html/inicio/img_tema",
+		"/var/www/html/inicio/imgs",
+		"/var/www/html/inicio/imgs/application",
+		"/var/www/html/inicio/imgs/application/views",
+		"/var/www/html/inicio/lista_deseos",
+		"/var/www/html/inicio/lista_deseos/application",
+		"/var/www/html/inicio/lista_deseos/application/views",
+		"/var/www/html/inicio/login",
+		"/var/www/html/inicio/login/application",
+		"/var/www/html/inicio/login/application/views",
+		"/var/www/html/inicio/movimientos",
+		"/var/www/html/inicio/movimientos/application",
+		"/var/www/html/inicio/movimientos/application/views",
+		"/var/www/html/inicio/msj",
+		"/var/www/html/inicio/msj/application",
+		"/var/www/html/inicio/msj/application/views",
+		"/var/www/html/inicio/notificar",
+		"/var/www/html/inicio/notificar/application",
+		"/var/www/html/inicio/notificar/application/views",
+		"/var/www/html/inicio/notificar/application/views/secciones_2",
+		"/var/www/html/inicio/orden_pago_oxxo",
+		"/var/www/html/inicio/orden_pago_oxxo/application",
+		"/var/www/html/inicio/orden_pago_oxxo/application/controllers",
+		"/var/www/html/inicio/orden_pago_oxxo/application/views",
+		"/var/www/html/inicio/orden_pago_oxxo/application/views/secciones_2",
+		"/var/www/html/inicio/pagos",
+		"/var/www/html/inicio/pagos/application",
+		"/var/www/html/inicio/pagos/application/controllers",
+		"/var/www/html/inicio/pagos/application/controllers/api",
+		"/var/www/html/inicio/pagos/application/views",
+		"/var/www/html/inicio/pdf",
+		"/var/www/html/inicio/persona",
+		"/var/www/html/inicio/persona/application",
+		"/var/www/html/inicio/persona/application/views",
+		"/var/www/html/inicio/persona/application/views/equipo",
+		"/var/www/html/inicio/planes_servicios",
+		"/var/www/html/inicio/planes_servicios/application",
+		"/var/www/html/inicio/planes_servicios/application/controllers",
+		"/var/www/html/inicio/planes_servicios/application/views",
+		"/var/www/html/inicio/portafolio",
+		"/var/www/html/inicio/portafolio/application",
+		"/var/www/html/inicio/portafolio/application/views",
+		"/var/www/html/inicio/portafolio/application/views/servicio",
+		"/var/www/html/inicio/search",
+		"/var/www/html/inicio/tareas",
+		"/var/www/html/inicio/tareas/application",
+		"/var/www/html/inicio/tareas/application/views",
+		"/var/www/html/inicio/tareas/application/views/secciones",
+		"/var/www/html/inicio/usuarios_enid_service",
+		"/var/www/html/inicio/usuarios_enid_service/application",
+		"/var/www/html/inicio/usuarios_enid_service/application/views",
+		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2"
 	],
 	"file_history":
 	[
+		"/var/www/html/inicio/orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php",
+		"/var/www/html/inicio/helpers/enid_helper.php",
+		"/var/www/html/inicio/notificar/application/views/secciones_2/paginas_web.php",
+		"/var/www/html/inicio/notificar/application/views/secciones_2/contenedor_2.php",
+		"/var/www/html/inicio/movimientos/application/views/metodos_transferencia.php",
+		"/var/www/html/inicio/movimientos/application/views/pagar_con_saldo_enid.php",
+		"/var/www/html/inicio/movimientos/application/views/solicitar_a_un_amigo.php",
+		"/var/www/html/inicio/movimientos/application/views/sub_menu.php",
+		"/var/www/html/inicio/notificar/application/views/home.php",
+		"/var/www/html/inicio/orden_pago_oxxo/application/views/secciones_2/contenedor_2.php",
+		"/var/www/html/inicio/movimientos/application/views/cuentas_asociadas.php",
+		"/var/www/html/inicio/movimientos/application/views/menu.php",
+		"/var/www/html/inicio/movimientos/application/views/metodos_disponibles.php",
+		"/var/www/html/inicio/lista_deseos/application/views/home.php",
+		"/var/www/html/inicio/lista_deseos/application/views/home_preferencias.php",
+		"/var/www/html/inicio/login/application/views/signin.php",
+		"/var/www/html/inicio/movimientos/application/views/agregar_saldo.php",
+		"/var/www/html/inicio/movimientos/application/views/agregar_saldo_desde_oxxo.php",
+		"/var/www/html/inicio/forma_pago/application/views/home.php",
+		"/var/www/html/inicio/imgs/application/views/empresa/galeria_imgs.php",
+		"/var/www/html/inicio/forma_pago/application/views/info_formas_pago.php",
+		"/var/www/html/inicio/faq/application/views/secciones_2/respuesta.php",
+		"/var/www/html/inicio/faq/application/views/secciones_2/contenedor_2.php",
+		"/var/www/html/inicio/faq/application/views/secciones_2/faqs_categorias.php",
+		"/var/www/html/inicio/faq/application/views/secciones_2/form.php",
+		"/var/www/html/inicio/system/helpers/form_helper.php",
+		"/var/www/html/inicio/tareas/application/views/home.php",
+		"/var/www/html/inicio/q/application/views/servicio/detalle.php",
+		"/var/www/html/inicio/q/application/views/imgs/servicio_producto_servicio.php",
+		"/var/www/html/inicio/q/application/views/valoraciones/form_servicio.php",
+		"/var/www/html/inicio/tareas_complejas/application/views/home.php",
+		"/var/www/html/inicio/tareas_complejas/application/views/secciones_2/resumen.php",
+		"/var/www/html/inicio/terminos-y-condiciones/application/views/home.php",
+		"/var/www/html/inicio/terminos-y-condiciones/application/views/secciones/menu.php",
+		"/var/www/html/inicio/unete_a_nuestro_equipo/application/views/home.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/info_usuario_completa.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/perfiles_permisos_seccion.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/afiliados.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/form_agregar_recurso.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/info_tallas.php",
+		"/var/www/html/inicio/valoracion/application/controllers/home.php",
+		"/var/www/html/inicio/valoracion/application/views/home.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/info_categorias_servicio.php",
+		"/var/www/html/inicio/system/helpers/html_helper.php",
 		"/var/www/html/inicio/q/application/views/valoraciones/preguntas.php",
 		"/var/www/html/inicio/search/application/views/sin_resultados.php",
 		"/var/www/html/inicio/tag/application/helpers/q_helper.php",
@@ -608,11 +725,9 @@
 		"/var/www/html/inicio/q/application/views/afiliados_/productividad.php",
 		"/var/www/html/inicio/q/application/views/tickets/principal_desarollo.php",
 		"/var/www/html/inicio/q/application/views/tickets/principal_desarollo_persona.php",
-		"/var/www/html/inicio/movimientos/application/views/sub_menu.php",
 		"/var/www/html/inicio/movimientos/application/views/secciones/form_persona.php",
 		"/var/www/html/inicio/movimientos/application/views/secciones/posibles_clientes.php",
 		"/var/www/html/inicio/msj/application/views/registro/mensaje_inicial_afiliado.php",
-		"/var/www/html/inicio/notificar/application/views/secciones_2/paginas_web.php",
 		"/var/www/html/inicio/pagos/application/views/ventas/info_pagos.php",
 		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
 		"/var/www/html/inicio/q/application/controllers/api/desarrollo.php",
@@ -620,9 +735,7 @@
 		"/var/www/html/inicio/q/application/views/afiliados_/lista.php",
 		"/var/www/html/inicio/view_tema/header_template.php",
 		"/var/www/html/inicio/view_tema/izquierdo.php",
-		"/var/www/html/inicio/movimientos/application/views/menu.php",
 		"/var/www/html/inicio/librerias/sessionclass.php",
-		"/var/www/html/inicio/helpers/enid_helper.php",
 		"/var/www/html/inicio/q/application/views/cobranza/pago_oxxo.php",
 		"/var/www/html/inicio/q/application/views/cotizador/principal.php",
 		"/var/www/html/inicio/q/application/views/cotizador/social_media.php",
@@ -637,7 +750,6 @@
 		"/var/www/html/inicio/q/application/views/imgs/usuario.php",
 		"/var/www/html/inicio/q/application/views/imgs/user.php",
 		"/var/www/html/inicio/q/application/views/imgs/faq.php",
-		"/var/www/html/inicio/q/application/views/imgs/servicio_producto_servicio.php",
 		"/var/www/html/inicio/q/application/views/notificaciones/principal.php",
 		"/var/www/html/inicio/q/application/views/productividad/preguntas_frecuentes.php",
 		"/var/www/html/inicio/q/application/views/productividad/usuario.php",
@@ -656,7 +768,6 @@
 		"/var/www/html/inicio/q/application/views/secciones/form_tickets_proyectos.php",
 		"/var/www/html/inicio/q/application/views/secciones/form_tickets_proyectos_persona.php",
 		"/var/www/html/inicio/q/application/views/servicio/descripcion.php",
-		"/var/www/html/inicio/q/application/views/servicio/detalle.php",
 		"/var/www/html/inicio/q/application/views/servicio/form_grupo.php",
 		"/var/www/html/inicio/q/application/views/secciones/form_tickets.php",
 		"/var/www/html/inicio/q/application/views/servicio/agregar_imagenes.php",
@@ -669,45 +780,7 @@
 		"/var/www/html/inicio/q/application/views/tickets/form_respuesta.php",
 		"/var/www/html/inicio/q/application/views/tickets/principal.php",
 		"/var/www/html/inicio/q/application/controllers/api/respon.php",
-		"/var/www/html/inicio/q/application/models/response_model.php",
-		"/var/www/html/inicio/q/application/models/respuesta_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/respuesta.php",
-		"/var/www/html/inicio/q/application/models/actividad_web_model.php",
-		"/var/www/html/inicio/q/application/models/blog_model.php",
-		"/var/www/html/inicio/q/application/models/cuenta_pago_model.php",
-		"/var/www/html/inicio/q/application/models/cuentas_model.php",
-		"/var/www/html/inicio/q/application/models/desarrollomodel.php",
-		"/var/www/html/inicio/q/application/models/empresa_permiso_model.php",
-		"/var/www/html/inicio/q/application/models/empresa_recurso_model.php",
-		"/var/www/html/inicio/q/application/models/facturacion_model.php",
-		"/var/www/html/inicio/q/application/models/faqsmodel.php",
-		"/var/www/html/inicio/q/application/models/img_model.php",
-		"/var/www/html/inicio/q/application/models/perfil_model.php",
-		"/var/www/html/inicio/q/application/models/privacidad_model.php",
-		"/var/www/html/inicio/q/application/models/productos_model.php_",
-		"/var/www/html/inicio/q/application/models/prospecto_model.php",
-		"/var/www/html/inicio/q/application/models/saldos_model.php",
-		"/var/www/html/inicio/q/application/models/talla_model.php",
-		"/var/www/html/inicio/q/application/models/tareasmodel.php",
-		"/var/www/html/inicio/q/application/models/tipo_negocio_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/pregunta.php",
-		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
-		"/var/www/html/inicio/q/application/helpers/recibo_helper.php",
-		"/var/www/html/inicio/view_tema/header_meta_enid.php",
-		"/var/www/html/inicio/librerias/principal.php",
-		"/var/www/html/inicio/q/application/models/status_enid_service_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/valoracion.php",
-		"/var/www/html/inicio/q/application/views/valoraciones/articulo.php",
-		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
-		"/var/www/html/inicio/q/application/controllers/api/status_enid_service.php",
-		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
-		"/var/www/html/inicio/view_tema/tmp_menu.php",
-		"/var/www/html/inicio/q/application/models/valoracion_model.php",
-		"/var/www/html/inicio/producto/application/views/home.php",
-		"/var/www/html/inicio/q/application/views/valoraciones/se_el_primero.php",
-		"/var/www/html/inicio/q/application/models/usuario_deseo_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario_deseo.php",
-		"/var/www/html/inicio/lista_deseos/application/controllers/home.php"
+		"/var/www/html/inicio/q/application/models/response_model.php"
 	],
 	"find":
 	{
@@ -815,6 +888,86 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"value=",
+			"name=",
+			"=",
+			"value",
+			"name=",
+			">",
+			"type=\"hidden\"",
+			"=",
+			"<",
+			"<strong>",
+			"</strong>",
+			"<strong>",
+			"<div>",
+			"</span>",
+			" <span >",
+			"style=\"font-size: .8em;margin-top: 7px;\"",
+			"<",
+			"=",
+			"=>",
+			"=",
+			" =>",
+			"=",
+			"=>",
+			"=",
+			"=>",
+			"=",
+			"=>",
+			"=",
+			" =>",
+			"=",
+			"=>",
+			"=",
+			"=>",
+			"<",
+			"=>",
+			"=",
+			"\t\t\t\t\t\t\t\t\t\t",
+			"<",
+			"=>",
+			"=",
+			"<",
+			"center",
+			"=>",
+			" =>",
+			"=",
+			"=>",
+			"=",
+			"<?=",
+			"=>",
+			"=",
+			"<?=",
+			"p",
+			"<",
+			"guardar",
+			"input",
+			"form_submit",
+			"icon",
+			"<",
+			"function ul(",
+			"                    ",
+			"                   ",
+			"                  ",
+			"                 ",
+			"                ",
+			"</li>",
+			"<ul>",
+			"<li>",
+			"<",
+			"\t\t\t\t  \t\t\t",
+			"<",
+			"\t\t\t\t\t ",
+			"<",
+			"\t\t\t\t\t\t\t",
+			"opt",
+			"optio",
+			"se",
+			"sel",
+			"sele",
+			"select",
+			"select ",
 			":email_enviados_enid_service",
 			"get_titulo_modalidad",
 			"\n\t\t\t",
@@ -862,87 +1015,7 @@
 			"\t\t\t",
 			"'\".",
 			".\"'",
-			"=>",
-			"\t\t=>",
-			"=",
-			"\t\t\t",
-			"=>",
-			"=",
-			"\t\t\t",
-			"=",
-			"[\"style",
-			"conversaciones",
-			"\"style",
-			"=",
-			"style=",
-			"extra_periodo",
-			"=",
-			"style_terminos",
-			"=",
-			"=>",
-			"=",
-			"\t\t\t\t\t\t",
-			"=",
-			"=>",
-			"editar",
-			"editar_datos_usuario",
-			"=",
-			"publicidad",
-			"/publicidad",
-			"=",
-			"=>",
-			"=",
-			"        ",
-			"=>",
-			"            ",
-			"=",
-			"=>",
-			"=",
-			",",
-			"=>",
-			"=",
-			"\t\t\t\t\t\t\t",
-			"\t\t\t\t\t\t",
-			"\t\t\t\t\t\t\t",
-			"$pendientes",
-			"lista_pendientes",
-			"=",
-			"style_pedientes",
-			"=",
-			"\t\t\t\t\t\t\t\t\t\t\t",
-			"=",
-			"<",
-			"padding_10",
-			"=>",
-			"<",
-			"=>",
-			"<",
-			"$",
-			"                           ",
-			"=",
-			"=>",
-			"get_titulo_modalidad",
-			"</i>",
-			"                                ",
-			"</i>",
-			"<i>",
-			"servicio/principal",
-			"=",
-			"'",
-			"=",
-			"\t\t\t",
-			"=",
-			"[\"class\"",
-			"\"class",
-			"\"class=''   \"",
-			"<",
-			"button",
-			"get_respuestas_pregunta",
-			"get_titulo_preguntas_modalidad",
-			"valoraciones/preguntas",
-			"get_num_respuestas_sin_leer",
-			"add_num_respuestas_preguntas",
-			"add_"
+			"=>"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -970,8 +1043,69 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "portafolio/application/views/servicio/lista.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 6089,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 627.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "notificar/application/views/secciones_2/paginas_web.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6197,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4246,
+								4246
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1938.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1027,6 +1161,30 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"notificar/application/views/secciones_2/paginas_web.php",
+				"notificar/application/views/secciones_2/paginas_web.php"
+			],
+			[
+				"ingresar_saldo_a_cuenta",
+				"orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php"
+			],
+			[
+				"views/valoraciones/form_servicio.ph",
+				"q/application/views/valoraciones/form_servicio.php"
+			],
+			[
+				"application/views/imgs/servicio_producto_servicio.php",
+				"q/application/views/imgs/servicio_producto_servicio.php"
+			],
+			[
+				"servicio/detalle.php",
+				"q/application/views/servicio/detalle.php"
+			],
+			[
+				"html",
+				"system/helpers/html_helper.php"
+			],
 			[
 				"productividad",
 				"q/application/controllers/api/productividad.php"
@@ -1514,30 +1672,6 @@
 			[
 				"usuario_cla",
 				"q/application/controllers/api/usuario_clasificacion.php"
-			],
-			[
-				"usuar",
-				"q/application/controllers/api/usuario.php"
-			],
-			[
-				"models/empresa_permiso_model.php",
-				"q/application/models/empresa_permiso_model.php"
-			],
-			[
-				"serviciomode",
-				"q/application/models/serviciosmodel.php"
-			],
-			[
-				"USUARIO_D",
-				"inicio/q/application/controllers/api/usuario_direccion.php"
-			],
-			[
-				"proyecto/domicilio",
-				"inicio/q/application/views/proyecto/domicilio.php"
-			],
-			[
-				"usuario_direccion",
-				"inicio/q/application/controllers/api/usuario_direccion.php"
 			]
 		],
 		"width": 0.0
@@ -1631,8 +1765,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
-	"side_bar_width": 408.0,
+	"side_bar_visible": true,
+	"side_bar_width": 275.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

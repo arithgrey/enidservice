@@ -1,7 +1,8 @@
 <?php 
 	$heading_enid_1	= 
 	heading_enid(
-		"AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR DEPÓSITO DESDE CUALQUIER SUCURSAL OXXO", 
+		"AÑADE SALDO A TU CUENTA DE ENID SERVICE AL 
+		REALIZAR DEPÓSITO DESDE CUALQUIER SUCURSAL OXXO", 
 		3 );
 	
 	
@@ -25,17 +26,18 @@
 				<?=$input_0?>
 				<?=$input_1?>		
 				<?=$input_3?>		
-				<table >
+				<table>
 					<tr>
 						<?=get_td($input_2)?>
-						<td style="width: 10%;margin-bottom: 10px!important;">
-							<?=heading_enid("MXN" , 2 )?>
-						</td>
+						<?=get_td(heading_enid("MXN" , 2 ))?>						
 					</tr>
 					<tr>
-						<td colspan="2" style="color: black;text-decoration: underline;" >
-							¿MONTO QUÉ DESEAS INGRESAR A TU SALDO ENID SERVICE?
-						</td>
+						<?=get_td("¿MONTO QUÉ DESEAS INGRESAR A TU SALDO ENID SERVICE?" ,
+							[
+								"colspan"	=>	"2" ,
+								"class"		=> 	"underline"
+							]
+					)?>						
 					</tr>
 				</table>
 				<?=guardar("Generar órden" , [] , 1)?>

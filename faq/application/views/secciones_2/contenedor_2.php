@@ -32,14 +32,13 @@
                                             <div class="tab-content">
                                                 <?=place("" , ["id" => "info_articulo"])?>        
                                                 <div class="tab-pane fade in active" id="tab1default">
-                                                    <div class="row">
-                                                        <?=$this->load->view("secciones_2/principal_faqs")?>
-                                                    </div>
+                                                    <?=$this->load->view("secciones_2/principal_faqs")?>
                                                 </div>
                                                 <div class="tab-pane fade" id="tab2default">
-                                                    <div class="row">
-                                                        <?php if ($in_session ==  1) {$this->load->view("secciones_2/form"); }?>   
-                                                    </div>
+                                                    
+                                                    <?php if ($in_session ==  1) {
+                                                        $this->load->view("secciones_2/form"); 
+                                                    }?>   
                                                 </div>                                              
                                             </div>
                                         </div>      
@@ -52,10 +51,9 @@
                                     <hr>
                                     <div class="panel">
                                         <div class="panel-content">
-                                            <?=n_row_12()?>
-                                                <?=div("¿Tienes alguna duda o consulta?")?>
-                                                <?=span("Si no la encuentras, envíala a soporte@enidservice.com")?>
-                                            <?=end_row()?>
+                                            <?=div("¿Tienes alguna duda o consulta?" , [] , 1)?>
+                                            <?=div("Si no la encuentras, envíala a soporte@enidservice.com",
+                                            [],1)?>                                            
                                             <?=n_row_12()?>  
                                                 <form>  
                                                     <?=input([

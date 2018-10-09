@@ -29,10 +29,10 @@
         <?=heading_enid("TU LISTA DE DESEOS" , 3,
         ["class"=>'titulo_lista_deseos'] , 1 )?>
         
-        <?=anchor_enid("EXPLORAR MÁS ARTÍCULOS", 
-            
+        <?=anchor_enid("EXPLORAR MÁS ARTÍCULOS",     
             ["href" => "../search/?q2=0&q="] , 
-            1)?>
+            1
+        )?>
     </div>
 </div>
 <?=end_row()?>

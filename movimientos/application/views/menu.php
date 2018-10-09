@@ -7,8 +7,6 @@
                 <?=heading_enid("$". number_format ($saldo_disponible,2). "MXN" , 
                     ["class"    =>  "value white"])?>
                 <?=span("Monto expresado en Pesos Mexicanos")?>
-                    
-                        
             </div>
         </div>
     </div>          

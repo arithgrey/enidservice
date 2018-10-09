@@ -93,9 +93,6 @@
 			height: 130px;
 			padding: 0px;
 			margin: 0px;
-		}
-		
-		
-		
+		}		
 	}
 </style>

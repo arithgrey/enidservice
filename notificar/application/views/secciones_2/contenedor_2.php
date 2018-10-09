@@ -7,8 +7,10 @@
         </div>
         <div class='col-lg-10'>
             <div class="tab-content">
+                <!--
                 <div class="info_articulo" id='info_articulo'>                        
                 </div>
+                -->
                 <?=$this->load->view("secciones_2/paginas_web")?>
             </div>
         </div>
