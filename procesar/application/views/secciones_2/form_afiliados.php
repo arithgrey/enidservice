@@ -13,26 +13,22 @@ $talla                =
 <?=n_row_12()?>
 
 <?php if($in_session == 0){?>
-  <div class="row">
-    <?=heading_enid($ingresar.' O CREA UNA CUENTA PARA RECIBIR ASISTENCIA Y COMPRAR AL MOMENTO', 
-      3 , 
-      ["class" => "strong"])?>
-  </div>
-
+  <?=heading_enid($ingresar.' O CREA UNA CUENTA PARA RECIBIR ASISTENCIA Y COMPRAR AL MOMENTO', 
+    3 , 
+    ["class" => "strong"] , 
+    1
+  )?>
 <?php }?>
 <div class="row">
-<form 
-  class="form-miembro-enid-service" 
-  id="form-miembro-enid-service">
-    <input type="hidden" name="descripcion" value="">
-    <input type="hidden" name="usuario_referencia" value="<?=$q2?>" class='q2'>
-    <input type="hidden" name="plan" class="plan"  value="<?=$plan;?>">
-    <input type="hidden" name="num_ciclos" class="num_ciclos"  value="<?=$num_ciclos;?>">
-    <input type="hidden" name="ciclo_facturacion" class="ciclo_facturacion"  
-    value="<?=$ciclo_facturacion;?>">
-    <input type="hidden" name="talla" class="talla" value="<?=$talla;?>">
+<form class="form-miembro-enid-service"  id="form-miembro-enid-service">
+  
+     <?=input_hidden(["name"   =>  "descripcion",        "value" =>""])?>
+     <?=input_hidden(["name"   =>  "usuario_referencia", "value" => $q2 ,  "class" =>'q2'])?>
+     <?=input_hidden(["name"   =>  "plan" ,              "class" => "plan", "value" =>  $plan ])?>
+     <?=input_hidden(["name"   =>  "num_ciclos" ,        "class" => "num_ciclos" , "value"  => $num_ciclos ])?>
+     <?=input_hidden(["name"   =>  "ciclo_facturacion" , "class" =>"ciclo_facturacion" , "value"   => $ciclo_facturacion ])?>
+     <?=input_hidden(["name"   =>  "talla" ,             "class" =>"talla"   ,"value"    => $talla ])?>
 
-    
     <?php if($in_session == 0){?>
     <div class="row">
       <div class=" col-lg-6">        
@@ -88,7 +84,6 @@ $talla                =
         'class' =>    "usuario_existente black_enid_background padding_1 white top_20 enid_hide"
       ] , 
       1)?>
-
 
       <?=div(anchor_enid(
         '¿Ya tienes una cuenta? Entra aquí ya »', 

@@ -50,26 +50,22 @@
               <div class='contenido_orden_pago'>
                   <div>                    
                       <div class="info_orden_compra">
-                        <div style="font-size:1.4em;color:black;">
-                          <?=img(
+                        <?=div(img(
                             [
                               'src'   => "http://enidservice.com/inicio/img_tema/portafolio/oxxo-logo.png",
                               'style' => "width:100px!important"
                             ]
-                          )?>
-                          ORDEN DE PAGO EN SUCURSALES OXXO
-                        </div>
+                          ). "ORDEN DE PAGO EN SUCURSALES OXXO")?>
                         <?=div($concepto ."Beneficiario".$beneficiario ."Folio #".$folio,
                         ["style"=>"background: #0000f5;padding: 5px;color: white;color: white;"])?>
                         
-                      <div style="margin-top:20px; ">                        
-                        <div style="width: 80%;margin: 0 auto;">
-                          <?=heading("MONTO A PAGAR")?>
-                          <?=heading("$".$monto ."MXN" , 2)?>
-                          <?=div("OXXO Cobrará una comisión adicional al momento de realizar el pago" ,[] ,1)?>
-                          
+                        <div style="margin-top:20px; ">                        
+                          <div style="width: 80%;margin: 0 auto;">
+                            <?=heading("MONTO A PAGAR")?>
+                            <?=heading("$".$monto ."MXN" , 2)?>
+                            <?=div("OXXO Cobrará una comisión adicional al momento de realizar el pago" ,1)?>
+                          </div>
                         </div>
-                      </div>
                       
                       
                       <?=n_row_12()?>                        
@@ -80,14 +76,9 @@
                           , 
                           ["class"=>"col-lg-6"])?>                                                  
                         </div>
-                      <?=end_row()?>
-                      <?=n_row_12()?>                        
-                        <div class="contenedor-img-logo">
-                          <?=div($numero_cuenta , ["class"=>"col-lg-6"])?>
-                        </div>
-                      <?=end_row()?>                               
-
-                      <?=n_row_12()?>
+                      
+                      <?=div(div($numero_cuenta , ["class"=>"col-lg-6"]) , ["class"=>"contenedor-img-logo"] , 1)?>
+                      
                       <div style="width: 80%;margin: 0 auto;">
                         <?=div(
                           "INSTRUCCIONES" ,

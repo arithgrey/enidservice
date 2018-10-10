@@ -4,19 +4,23 @@
 	$l ="";
 	foreach($miembros as $row) {
 	
-		$id_usuario=  $row["id_usuario"]; 
-		$nombre=  $row["nombre"]; 
-		$email=  $row["email"]; 
-		$apellido_paterno=  $row["apellido_paterno"]; 
-		$apellido_materno=  $row["apellido_materno"]; 
-		$tel_contacto=  ""; 
-		$afiliado = $nombre . " " . $apellido_paterno ." " . $apellido_materno;		
-        $url_imagen =  "../imgs/index.php/enid/imagen_usuario/".$id_usuario;
+		$id_usuario           =   $row["id_usuario"]; 
+		$nombre               =   $row["nombre"]; 
+		$email                =   $row["email"]; 
+		$apellido_paterno     =   $row["apellido_paterno"]; 
+		$apellido_materno     =   $row["apellido_materno"]; 
+		$tel_contacto         =   ""; 
+		$afiliado             =   $nombre . " " . $apellido_paterno ." " . $apellido_materno;		
+    $url_imagen           =   "../imgs/index.php/enid/imagen_usuario/".$id_usuario;
 
     $editar_datos_usuario = 
-      "class='usuario_enid_service' 
-      data-toggle='tab' href='#tab_mas_info_usuario' 
-            id='".$id_usuario."' ";
+    [
+      "class"           =>  'usuario_enid_service' ,
+      "data-toggle"     =>  'tab', 
+      "href"            =>  '#tab_mas_info_usuario' ,
+      "id"              =>  $id_usuario
+    ];
+      
             
     $fecha_registro =  $row["fecha_registro"];
     ?>
@@ -41,15 +45,14 @@
             "class"       => "chat-header-button" ,
             "data-toggle" => "dropdown" 
           ])?>
+      
         <ul role="menu" class="dropdown-menu pull-right">
           <li>                          
-            <a <?=$editar_datos_usuario?> >
-              <?=icon('fa fa-pencil')?> Editar información
-            </a>
+            <?=anchor_enid(icon('fa fa-pencil'). "Editar información" , $editar_datos_usuario)?>
           </li>                      
         </ul>
-        </div>  
-      </div>
+      </div>  
+    </div>
   <?php endif; ?>
     </div>
   </div> 

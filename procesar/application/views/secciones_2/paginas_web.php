@@ -7,17 +7,14 @@
   $resumen_servicio_info  = $producto["resumen_servicio_info"];
   $monto_total            = floatval($servicio[0]["precio"]) * floatval($ciclos_solicitados);
   
-  
-
-
-  $costo_envio_cliente= 0;  
-  $text_envio ="";
+  $costo_envio_cliente    = 0;  
+  $text_envio             = "";
   if($servicio[0]["flag_servicio"] ==  0){
     $costo_envio_cliente= $costo_envio["costo_envio_cliente"];  
-    $text_envio =  $costo_envio["text_envio"]["cliente"];
+    $text_envio           =  $costo_envio["text_envio"]["cliente"];
   }
   
-  $monto_total_con_envio =  $monto_total + $costo_envio_cliente;
+  $monto_total_con_envio  =  $monto_total + $costo_envio_cliente;
 ?>
 <div class="contenedor_compra">      
   <div class="contenedo_compra_info">
@@ -48,8 +45,7 @@
         <?=end_row()?>
         <?=n_row_12()?>
           <?php if($in_session == 1): ?>
-            <?=guardar("Ordenar compra" ,
-            ['class' => 'btn_procesar_pedido_cliente']  )?>
+            <?=guardar("Ordenar compra" , ['class' => 'btn_procesar_pedido_cliente']  )?>
             <?=place('place_proceso_compra')?>        
           <?php endif; ?>
         <?=end_row()?>

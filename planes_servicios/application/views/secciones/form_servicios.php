@@ -68,7 +68,7 @@ $s_ciclo_facturcion = create_select($ciclo_facturacion ,
 				        	   1 );
 
 
-/**/
+
 
 ?>
 <div class="contenedor_agregar_servicio_form">		 		
@@ -77,33 +77,27 @@ $s_ciclo_facturcion = create_select($ciclo_facturacion ,
 	<?=form_open('' ,['class'=>"form_nombre_producto row" , "id"=>'form_nombre_producto'])?>
 		<div class="col-lg-3 seccion_menu_tipo_servicio ">				    
 			<?=div("¿QUÉ DESEAS ANUNCIAR?" , ['class' => 'text_deseas_anunciar'] , 1);?>
-			<?=div( "", ["style" 	=>	"margin-top: 20px;"] ,1)?>
-			<div class="row">
-				<table>
-					<tr>
-						<?=get_td($tipo_promocion_producto)?>							
-						<?=get_td($tipo_promocion_servicio)?>
-					</tr>
-				</table>			
-			</div>
+			<table>
+				<tr>
+					<?=get_td($tipo_promocion_producto)?>							
+					<?=get_td($tipo_promocion_servicio)?>
+				</tr>
+			</table>			
 		</div>
-		<div class="col-lg-3 seccion_menu_tipo_servicio" >					
-			<?=$t_tipo_promocion?>				
-			<?=$i_tipo_promocion?>		        				
-		</div>
-		<div class="col-lg-3 
-			contenedor_ciclo_facturacion seccion_menu_tipo_servicio" 
-			style="display: none;">
-			<?=$t_ciclo_facturacion;?>							
-			<?=$s_ciclo_facturcion?>			
-		</div>
-		<div class="col-lg-3 contenedor_precio seccion_menu_tipo_servicio">			
-				<?=$t_costo;?>
-				<?=$i_costo;?>			
-			<?=div($error_registro , ["class"	=>	"extra_precio"] , 1 )?>					
-		</div>    
-		<?=div(guardar("SIGUIENTE" , ["class"=>	"btn_siguiente_registrar_servicio "] ,1) ,
-				["class"=>'seccion_menu_tipo_servicio col-lg-3 siguiente_btn']);?>			
+		<?=div($t_tipo_promocion.$i_tipo_promocion, ["class" => "col-lg-3 seccion_menu_tipo_servicio"])?>
+		<?=div( $t_ciclo_facturacion . $s_ciclo_facturcion ,  
+			[
+				"class"	=>	"col-lg-3 contenedor_ciclo_facturacion seccion_menu_tipo_servicio", 
+				"style"	=>	"display: none;"
+			])?>
+		<?=div(
+			$t_costo.$i_costo. div($error_registro , ["class"	=>	"extra_precio"] , 1 )	, 
+			["class"	=>	"col-lg-3 contenedor_precio seccion_menu_tipo_servicio"]
+		)?>
+		<?=div(
+			guardar("SIGUIENTE" , ["class"=>	"btn_siguiente_registrar_servicio "] ,1) ,
+			["class"=>'seccion_menu_tipo_servicio col-lg-3 siguiente_btn']
+		);?>			
 	<?=form_close()?>
 </div>		 
 <?php if($is_mobile ==  1):?> 	

@@ -47,12 +47,7 @@
                   "href"  =>  "../tareas_complejas/",
                   "class" =>  "a_enid_blue"
                 ])?>
-                <hr 
-                style="color:black;height: 1px;border: 0;background-color: black;">
-
-
-
-
+                <hr style="color:black;height: 1px;border: 0;background-color: black;">
             </div>
             <div role="tabpanel" class="tab-pane" id="profile">        
               
@@ -66,8 +61,7 @@
               <?=anchor_enid("Nuestra Visión")?>          
               <?=img(["src"=>"../img_tema/portafolio/bte.png"])?>
               <?=p("Contar con el mejor sistema de negocios en la ciudad de México, para el año 2021 gracia a las tecnologías de la Información y la comunicación.")?>
-              <hr 
-              style="color:black;height: 1px;border: 0;background-color: black;">
+              <hr style="color:black;height: 1px;border: 0;background-color: black;">
             </div>
             
           </div>

@@ -2,20 +2,18 @@
   $list ="";      
   foreach ($servicios as $row) {
         
-    $nombre_servicio =  $row["nombre_servicio"];      
-    $id_servicio  =  $row["id_servicio"];        
-    $precio =  $row["precio"];        
-    $flag_envio_gratis =  $row["flag_envio_gratis"];
-    $text_extra =  is_servicio($row);        
-    $precio_publico =  $row["precio_publico"];        
-    $url_img  = 
-    $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;
-    $url_img_error  = $url_request."img_tema/portafolio/producto.png";      
-    $extra_url =  ($in_session == 1)?"&q2=".$id_usuario : "";      
-    $url_info_producto =  "../producto/?producto=".$id_servicio.$extra_url;
-    $url_venta =
-    "http://enidservice.com/inicio/producto/?producto=".$id_servicio.$extra_url;
-    $social = create_social_buttons($url_venta , $nombre_servicio);
+    $nombre_servicio          =   $row["nombre_servicio"];      
+    $id_servicio              =   $row["id_servicio"];        
+    $precio                   =   $row["precio"];        
+    $flag_envio_gratis        =   $row["flag_envio_gratis"];
+    $text_extra               =   is_servicio($row);        
+    $precio_publico           =   $row["precio_publico"];        
+    $url_img                  =   $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;
+    $url_img_error            =   $url_request."img_tema/portafolio/producto.png";      
+    $extra_url                =   ($in_session == 1)?"&q2=".$id_usuario : "";      
+    $url_info_producto        =   "../producto/?producto=".$id_servicio.$extra_url;
+    $url_venta                =   "http://enidservice.com/inicio/producto/?producto=".$id_servicio.$extra_url;
+    $social                   =   create_social_buttons($url_venta , $nombre_servicio);
 ?>
 
 <table  class="enid_mobile_max_width" width="728" 
@@ -43,16 +41,15 @@ style="background: white; padding: 10px;">
                         	text-align:center;
                         	text-transform:uppercase;
                         	color:#000001; padding-left:2px; padding-right:2px;">
-
-                          <a
-                            href="<?=$url_info_producto?>"
-                            style="color:#000001; text-decoration:none" 
-                            class="info_producto"  
-                            id="<?=$id_servicio?>">                            
-                            <?=$nombre_servicio?>
-                          </a>
-
-                    </td>
+                          
+                          <?=anchor_enid($nombre_servicio , 
+                            [
+                              "href"        =>  $url_info_producto,
+                              "style"       =>  "color:#000001; text-decoration:none" ,
+                              "class"       =>  "info_producto"  ,
+                              "id"          =>  $id_servicio
+                            ])?>
+                        </td>
                       </tr>
                       <tr>
                         <td height="8">

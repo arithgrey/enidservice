@@ -1,28 +1,22 @@
 <?php 
 
-    $num_servicios_encontrados =  $servicios["num_servicios"];
-    $servicios = $servicios["servicios"];        
+    $num_servicios_encontrados  =   $servicios["num_servicios"];
+    $servicios                  =   $servicios["servicios"];        
     if($es_movil == 0){        
 
-    $primer_nivel   =  $bloque_busqueda["primer_nivel"];
-    $segundo_nivel  =  $bloque_busqueda["segundo_nivel"];
-    $tercer_nivel   =  $bloque_busqueda["tercer_nivel"];
-    $cuarto_nivel   =  $bloque_busqueda["cuarto_nivel"];
-    $quinto_nivel   =  $bloque_busqueda["quinto_nivel"];
+        $primer_nivel   =  $bloque_busqueda["primer_nivel"];
+        $segundo_nivel  =  $bloque_busqueda["segundo_nivel"];
+        $tercer_nivel   =  $bloque_busqueda["tercer_nivel"];
+        $cuarto_nivel   =  $bloque_busqueda["cuarto_nivel"];
+        $quinto_nivel   =  $bloque_busqueda["quinto_nivel"];
 
-    $bloque_primer_nivel    =  
-    crea_seccion_de_busqueda_extra($primer_nivel, $busqueda); 
-    $bloque_segundo_nivel   =  
-    crea_seccion_de_busqueda_extra($segundo_nivel, $busqueda); 
-    $bloque_tercer_nivel    =  
-    crea_seccion_de_busqueda_extra($tercer_nivel, $busqueda); 
-    $bloque_cuarto_nivel    =  
-    crea_seccion_de_busqueda_extra($cuarto_nivel, $busqueda); 
-    $bloque_quinto_nivel    =  
-    crea_seccion_de_busqueda_extra($quinto_nivel, $busqueda); 
+        $bloque_primer_nivel    =  crea_seccion_de_busqueda_extra($primer_nivel, $busqueda); 
+        $bloque_segundo_nivel   =  crea_seccion_de_busqueda_extra($segundo_nivel, $busqueda); 
+        $bloque_tercer_nivel    =  crea_seccion_de_busqueda_extra($tercer_nivel, $busqueda); 
+        $bloque_cuarto_nivel    =  crea_seccion_de_busqueda_extra($cuarto_nivel, $busqueda); 
+        $bloque_quinto_nivel    =  crea_seccion_de_busqueda_extra($quinto_nivel, $busqueda); 
     }
-    /**/
-    //debug($categorias_destacadas);
+    
     $categorias_destacadas_orden =  sub_categorias_destacadas($categorias_destacadas);  
 
 
@@ -40,7 +34,7 @@
 ?>
 
 <?php if ( strlen(trim($q)) ==  0):?>
-    <?=div("", ["class"=>"contenedor_img_principal"])?>
+    <?=place("contenedor_img_principal")?>
 <?php endif;?>
 
 <?=n_row_12();?>            
@@ -110,14 +104,12 @@
                 <select class="form-control order" name="order" id="order">
                     <?php $a=0; foreach($filtros as $row):?>
                         <?php if ($a ==  $order):?>
-                            <option value="<?=$a?>" selected>
+                            <option value="<?=$a?>" selected >
                                 <?=$row?>
-                                    
                             </option>
                             <?php else: ?>
                                 <option value="<?=$a?>">
                                     <?=$row?>
-                                        
                                 </option>
                             <?php endif;?>
                         <?php $a ++ ;endforeach;?>
@@ -151,7 +143,7 @@
             }
         }?>
         <?php if( count($lista_productos) > 8):?>
-            <?=div($paginacion ,  [] ,1)?>            
+            <?=div($paginacion , 1)?>            
         <?php endif;?>            
     </div>
     </div>    
@@ -159,8 +151,7 @@
         <?=div("" , ["class"   =>   "col-lg-2"])?>
         <div class="col-lg-10">
             <?=p("CATEGORIAS DESTACAGAS", ["class"=>'titulo_categorias'])?>  
-            <?=div(crea_sub_menu_categorias_destacadas(
-                $categorias_destacadas_orden) , ["class" => "row"])?>
+            <?=div(crea_sub_menu_categorias_destacadas( $categorias_destacadas_orden) , 1)?>
         </div>
     <?=end_row()?>
 <?=end_row()?>

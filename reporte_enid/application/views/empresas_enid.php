@@ -47,9 +47,7 @@
                     </form>
                 <?=end_row()?> 
                 <?=place("repo_dispositivos")?>                
-            </div>
-
-            
+            </div>            
             <div class="tab-pane" id='tab_default_3'>                
                 <?=div("EMAIL ENVIADOS " , ["class"=>"titulo_enid_sm" ,1])?>             
                 <?=n_row_12()?>
@@ -82,9 +80,7 @@
                     ["class"=>"titulo_enid_sm" ] 
                     , 1)?>                
                 <?=n_row_12()?>
-                    <?php 
-                    $categorias_destacadas_orden =  sub_categorias_destacadas($categorias_destacadas);  
-                    ?>
+                    <?php $categorias_destacadas_orden =  sub_categorias_destacadas($categorias_destacadas);  ?>
                     <div class="row">
                     <?=crea_repo_categorias_destacadas($categorias_destacadas_orden)?>
                     </div>

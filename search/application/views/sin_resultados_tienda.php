@@ -18,15 +18,14 @@
             "class" =>  "a_enid_black2 boton_primer_producto",
             "style" =>  "color: white!important"
           ] ,
+          1,
           1)
-
         );?>
         
         </center>
       </div>
     <?=end_row()?>
-    <?=n_row_12()?>    
-      <div class="separador_final"></div>
-    <?=end_row()?>
+    <?=place("separador_final")?>
+    
   </div>
 </main>

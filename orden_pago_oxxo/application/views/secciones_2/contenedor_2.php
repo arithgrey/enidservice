@@ -1,4 +1,4 @@
-  <div class="image-container set-full-height" >            
+    <div class="image-container set-full-height" >            
       <div class="container">
           <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
@@ -12,10 +12,10 @@
                 <div class="info_orden_compra" style="box-shadow: 0 16px 24px 2px;">
                   <?=div("Orden de pago", 1)?>
                   <?=div(img(
-                    [ "src"     =>  "../img_tema/portafolio/oxxo-logo.png" ,
-                       "style"   =>  "width: 100px;"
-                    ]), 
-                  1)?>
+                          [ "src"     =>  "../img_tema/portafolio/oxxo-logo.png" ,
+                             "style"   =>  "width: 100px;"
+                          ]), 
+                        1)?>
                 <?=div("Servicios Enid Service Folio #".$info_pago["q2"], 
                 [ 
                   "style" => "background: #0000f5;padding: 5px;color: white;"
@@ -28,6 +28,7 @@
                     <?=div("OXXO Cobrará una comisión adicional al momento de realizar el pago" ,[] ,1)?>
                   </div>
                 </div>
+
                 <?=n_row_12()?>
                   <div style="width: 80%;margin: 0 auto;">
                     <?=div(img([
@@ -67,8 +68,7 @@
                             "style"   =>  "width: 300px;"
                           ]) 
                           ,
-                          1)?> 
-                          
+                          1)?>
                       </div>
                     <?=end_row()?>
                     </div>
@@ -77,26 +77,4 @@
             </div>
         </div> 
     </div> 
-  </div>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
