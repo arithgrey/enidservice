@@ -38,25 +38,12 @@
                     </div>
                     <div class="timeline-label">
                         <h2>
-                            <a class="blue_enid">
-                                '.$nombre_usuario.'
-                            </a> 
-                            <span>
-                            '.$email.'
-                            </span>
-                            
-                            <a href="#" class="blue_enid">
-                            '.$nombre_red.'
-                            </a>
+                            '.anchor_enid($nombre_usuario ).'
+                            '.span($email).'
+                            '.anchor_enid($nombre_red , ["class"=>"blue_enid"]).'
                         </h2>
-                        <p>
-                            '.$mensaje_completo.'
-                        </p>
-                        <span class="strong" stylele="font-size:1.5em;">
-                            #Accesos '.$num_accesos.'
-                            
-                            '.$nombre_tipo_negocio.'
-                        </span>
+                        '.div($mensaje_completo).'
+                        '.div('#Accesos '.$num_accesos.' '.$nombre_tipo_negocio ).'
                     </div>
                 </div>
 
@@ -71,15 +58,7 @@
 ?>
 
 <div style="background: #001d71;">
-    
-	<div>
-        <div class="timeline-centered">
-            <?=$article?>
-        
-    </div>
-
-    
-	</div>
+    <?=div($article)?>
 </div>
 <style type="text/css">
     

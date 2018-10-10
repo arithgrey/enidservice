@@ -17,8 +17,10 @@
     $nombre_departamento  = $row["nombre_departamento"];
     $num_tareas_pendientes = $row["num_tareas_pendientes"];
 
-    $tareas_pendientes ="class='strong white ver_detalle_ticket 
-    a_enid_black_sm' id='".$id_ticket."' ";
+    $tareas_pendientes = [
+      "class" =>  'strong white ver_detalle_ticket a_enid_black_sm' , 
+      "id"    =>  $id_ticket 
+    ];
 
     $id_usuario = $row["id_usuario"];		
 		$img_cliente = "../imgs/index.php/imagen_usuario/".$id_usuario;				
@@ -30,19 +32,15 @@
       ?>
         <div class="popup-box chat-popup" id="qnimate">
             <div class="popup-head">
-              
               <div class="popup-head-left pull-left">
                   <div>
                     <?=img( 
-                      array(
+                      [
                         'src'     => $url_imagen ,
                         'style'   => 'width: 44px!important;',
                         'onerror' =>  'this.src="'.$url_imagen.'" '
-                      )
-                    )?>
-                      <span class="black">
-                        <?=$asunto?> 
-                      </span>
+                      ])?>
+                      <?=div($asunto)?>
                   </div>
                   <div <?=$tareas_pendientes?>>                     
                         #Tareas pendientes:  <?=$num_tareas_pendientes?>
@@ -50,20 +48,17 @@
               </div>
               <div class="popup-head-right pull-right ">
                 <div class="btn-group">
-                        <button 
-                          class="chat-header-button" 
-                          data-toggle="dropdown" 
-                          type="button">
-                           <?=icon("fa fa-plus")?>                        
-                            
-                        </button>
-                        <ul class="dropdown-menu pull-right ">
-                          <li>
-                              <a <?=$tareas_pendientes?>>
-                                Agregar tareas
-                              </a>
-                          </li>                        
-                        </ul>
+                  <?=gurdar(icon("fa fa-plus") ,  [
+                      "class"         =>  "chat-header-button" ,
+                      "data-toggle"   =>  "dropdown" ,
+                      "type"          =>  "button"
+                    
+                  ])?>
+                <ul class="dropdown-menu pull-right ">
+                  <li>
+                      <?=anchor_enid("Agregar tareas" , $tareas_pendientes )?>
+                  </li>                        
+                </ul>
                 </div>        
               </div>
           </div>

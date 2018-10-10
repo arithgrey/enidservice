@@ -24,7 +24,7 @@
 					<?php 
 					for($z=0; $z <count($criterios); $z++){ 
 						$extra_criterios = [
-							"style" 	=> 	'padding:8px;',
+							
 							"class"		=>	'criterio_busqueda ordenar_valoraciones_button',
 							"id"		=> $z
 						];

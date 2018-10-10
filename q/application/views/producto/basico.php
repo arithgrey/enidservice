@@ -6,7 +6,6 @@
     $flag               =   0;            
     $nombre_servicio    =   $servicio["nombre_servicio"];             
     $id_servicio        =   $servicio["id_servicio"];        
-        
     $flag_envio_gratis  =   $servicio["flag_envio_gratis"];
     $text_extra         =   is_servicio($servicio);        
     $url_img            =   $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;        

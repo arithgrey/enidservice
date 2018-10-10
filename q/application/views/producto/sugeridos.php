@@ -7,29 +7,27 @@
     $extra_color ="style='margin-left:5px;color: black;font-weight:bold;'";
     $list ="";  
     $flag =0;            
-        $nombre_servicio =  $row["nombre_servicio"];             
-        $id_servicio  =  $row["id_servicio"];                
-        $flag_envio_gratis =  $row["flag_envio_gratis"];        
-        $url_img  = $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;        
+        $nombre_servicio    =   $row["nombre_servicio"];             
+        $id_servicio        =   $row["id_servicio"];                
+        $flag_envio_gratis  =   $row["flag_envio_gratis"];        
+        $url_img            =   $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;        
         
-        $metakeyword =  $row["metakeyword"];        
-        $color =  isset($row["color"]) ? $row["color"] : "";
-        $flag_servicio =  $row["flag_servicio"];
-        
-    
-        $precio =  $row["precio"];           
-        $costo_envio ="";
+        $metakeyword        =  $row["metakeyword"];        
+        $color              =  isset($row["color"]) ? $row["color"] : "";
+        $flag_servicio      =  $row["flag_servicio"];
+        $precio             =  $row["precio"];           
+        $costo_envio        = "";
         if($flag_servicio == 0){
             $costo_envio =  $row["costo_envio"]["text_envio"]["cliente_solo_text"];                 
         }         
-        $url_info_producto =  "../producto/?producto=".$id_servicio;
-        $url_venta         ="../../producto/?producto=".$id_servicio;
-        $extra ="";
-        $flag =0;        
+        $url_info_producto  =  "../producto/?producto=".$id_servicio;
+        $url_venta          =  "../../producto/?producto=".$id_servicio;
+        $extra              = "";
+        $flag               = 0;        
         $flag ++;
 
-        $existencia =0;
-        $vista =0;
+        $existencia         = 0;
+        $vista              = 0;
             
         $img =  img([
           'src'   => $url_img, 

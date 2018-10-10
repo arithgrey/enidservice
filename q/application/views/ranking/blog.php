@@ -26,36 +26,20 @@
                 <div class="timeline-entry-inner">
                     <div class="timeline-icon bg-info">
                         '.$z.'
-                        icon('entypo-feather"')
+                        '.icon('entypo-feather').'
                     </div>
                     <div class="timeline-label">
                         <h2>
-                            <a class="blue_enid">
-                                '.$nombre_usuario.'
-                            </a> 
-                            <span>
+                            '.anchor_enid($nombre_usuario).'
                             '.$email.'
-                            </span>
-                            
-                            <a href="#" class="blue_enid">
-                            '.$nombre_red.'
-                            </a>
+                            '.anchor_enid($nombre_red).'
                         </h2>
                         <div>
-                        	<div class="strong black">
-                        		Artículo 
-                        	</div>
-                        	<div>
-		                        <a href="'.$url_faq.'" style="font-size:.9em;">
-		                            '.$titulo.'
-		                        </a>
-	                        </div>
+                            '.div("Artículo " ).'
+                        	'.anchor_enid($titulo ,  ["href" => $url_faq] ).'
+                        	
                         </div>
-                        <span class="strong" stylele="font-size:1.5em;">
-                            #Accesos '.$num_accesos.'
-                            
-                            '.$nombre_categoria.'
-                        </span>
+                        '.div("#Accesos" , $num_accesos . $nombre_categoria).'
                     </div>
                 </div>
 

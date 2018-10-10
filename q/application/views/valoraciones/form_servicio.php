@@ -110,7 +110,7 @@
 					<tr>
 						<?=get_td(strong("Nombre*" ,  ["class"  => "text-valoracion"]))?>
 						<td>
-
+							
 							<input 
 								type="text" 
 								name="nombre"

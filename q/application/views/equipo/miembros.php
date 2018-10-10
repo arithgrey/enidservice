@@ -36,7 +36,7 @@
     <?php if ($modo_edicion == 1):?>
     <div class="popup-head-right pull-right">                
       <?=span(icon("fa fa-envelope") ,  
-      ["title"=>"Email de recordatorio enviados"])?>                    
+      ["title"  => "Email de recordatorio enviados"])?>                    
       <div class="btn-group">
         <?=guardar(icon('fa fa-plus') ,  
           [

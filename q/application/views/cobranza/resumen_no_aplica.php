@@ -99,8 +99,7 @@
 			
 			<div style="border-style: solid;text-align: right;">
 				<?=strong("Monto total pendiente ")?>
-	          	<?=span($saldo_pendiente . "Pesos Mexicanos", 
-	          	["style"=>"background: green; color:white;padding: 3px;"])?>
+	          	<?=span($saldo_pendiente . "Pesos Mexicanos", ["style"=>"background: green; color:white;padding: 3px;"])?>
 	          	
 	        </div>
 		</div>	      

@@ -10,15 +10,23 @@ class="form_img_perfil_user" enctype="multipart/form-data">
 			"class"	=>	'imagen_upload_perfiles_user',
 			"name"	=>	"imagen"])?>
 	
-	<?=input_hidden(["name"=>'q', "value"=>'perfil_user'])?>
-	<?=input_hidden(["class"=>'dinamic_user', "id"=>'dinamic_user',  "name"=>'dinamic_user', "value"=>'0'])?>
+	<?=input_hidden([
+		"name"=>'q',
+		"value"=>'perfil_user'
+	])?>
+	<?=input_hidden([
+		"class"		=>	'dinamic_user', 
+		"id"		=>	'dinamic_user',  
+		"name"		=>	'dinamic_user', 
+		"value"		=>	'0'
+	])?>
 	<?=place("lista_imagenes_user" , ["id"=>'lista_imagenes_user'] )?>	
 	<?=guardar("CARGAR" , 
 	[
-	"type"		=>"submit", 
-	"class"		=>'btn btn btn-sm guardar_img_enid' ,
-	"id"		=>'guardar_img_enid', 
-	"style"		=>'color:white;']
+	"type"		=>	"submit", 
+	"class"		=>	'btn btn btn-sm guardar_img_enid' ,
+	"id"		=>	'guardar_img_enid', 
+	"style"		=>	'color:white;']
 	)?>
 			
 </form>

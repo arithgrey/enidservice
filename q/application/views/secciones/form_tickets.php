@@ -3,9 +3,16 @@
 </div>
 <div class="col-lg-6 col-lg-offset-3" style="margin-top: 50px;">
   <form class='form_ticket'>                      
-      <?=input_hidden(["name"=>"prioridad", "value"=>"1" ])?>
-      <?=input_hidden(["name"=>"mensaje", "id"=>"mensaje", "class"=>"mensaje"])?>      
-      <?=div("DEPARTAMENTO AL CUAL SOLICITAS" , [] , 1)?>
+      <?=input_hidden([
+        "name" =>  "prioridad",
+        "value" => "1" 
+      ])?>
+      <?=input_hidden([
+        "name" =>  "mensaje",
+        "id"  => "mensaje",
+        "class"  => "mensaje"
+      ])?>      
+      <?=div("DEPARTAMENTO AL CUAL SOLICITAS" ,  1)?>
 
       <?=n_row_12()?>
         <?=create_select(
@@ -18,7 +25,7 @@
         );?>          
       <?=end_row()?>
       <?=n_row_12()?>
-          <div class="input-group" style="margin-top: 10px;">
+          <div class="input-group" >
             <?=div("MODULO, ASUNTO, TÓPICO" , ["class"=>"input-group-addon"])?>
             <?=input([
                 "id"              =>  "asunto" ,
@@ -28,7 +35,6 @@
                 "required"        =>  "true" ,
                 "type"            =>  "text"
             ])?>
-
           </div>                        
       <?=end_row()?>          
       <?=guardar("ABRIR TICKET")?>    

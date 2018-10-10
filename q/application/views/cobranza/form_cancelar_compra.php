@@ -6,9 +6,9 @@
 <?=div($tmp , ['class' => 'jumbotron',  "class"=>"padding_1" ])?>
 <?=guardar("CANCELAR ÓRDEN DE COMPRA" , 
 	[
-		"class"			=>		"cancelar_orden_compra" 
-		,"id"			=>		$recibo['id_recibo'] 
-		,"modalidad"		=>	$modalidad 
+		"class"				=>		"cancelar_orden_compra" 
+		,"id"				=>		$recibo['id_recibo'] 
+		,"modalidad"		=>		$modalidad 
 	] , 
 	1
 )?>

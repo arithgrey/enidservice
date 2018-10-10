@@ -9,8 +9,8 @@
 	foreach ($lista_fechas as $row){		
 
 		if ($b == 0) {
-			$fechas .=	get_td("Artículo" , " ");
-			$fechas .=	get_td("Total" , " ");
+			$fechas .=	get_td("Artículo" );
+			$fechas .=	get_td("Total" );
 			$b++;
 		}
 
@@ -28,25 +28,19 @@
 		$url 		=  	$row["url"];
 		$articulo 	=	anchor_enid($titulo ,  ["href"=> $url , "target"=>'_black' ]);
 		$list 	   .=	"<tr class='text-left'>";	
-		$list 		.=  get_td($articulo);
-
-
-
-				$lista_2 ="";
-				$total_accesos = 0;
-				
-				foreach($lista_fechas as $row){		
+		$list 	   .=  	get_td($articulo);
+		$lista_2 	=	"";
+		$total_accesos = 0;
+			foreach($lista_fechas as $row){		
 					
 					$fecha_actual = $row;				
-					$num_accesos
-					= valida_accesos_url_fecha($info_preguntas["info_accesos"] ,  $fecha_actual , $url);
+					$num_accesos  = valida_accesos_url_fecha($info_preguntas["info_accesos"] ,  $fecha_actual , $url);
 
 					$total_accesos =  $total_accesos + $num_accesos;
 					$lista_2  .= get_td($num_accesos);
-				}
-				$list .=  get_td($total_accesos );
-				$list .= $lista_2;
-
+			}
+			$list .=  get_td($total_accesos );
+			$list .= $lista_2;
 		$list .="<tr>";	
 
 	}

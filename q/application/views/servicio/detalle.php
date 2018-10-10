@@ -22,29 +22,25 @@
     $venta_mayoreo              =   0;
     foreach ($servicio  as $row){
         
-        $id_servicio =   $row["id_servicio"];
-        $nombre_servicio =   $row["nombre_servicio"];
-        $param["nombre_servicio"] =  $nombre_servicio;
-        
-        $status =   $row["status"];                
-        $url_vide_youtube= $row["url_vide_youtube"];
-        $url_video_facebook= $row["url_video_facebook"];
-        $metakeyword =  $row["metakeyword"];
-        $metakeyword_usuario =  $row["metakeyword_usuario"];
-        $flag_nuevo         =  $row["flag_nuevo"];
-        $flag_envio_gratis  = $row["flag_envio_gratis"];
-        $flag_servicio      = $row["flag_servicio"];
-        $existencia         =  $row["existencia"];
-        $color              = $row["color"];
-        $precio             =  $row["precio"];
-
-
-
-        $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
-        $entregas_en_casa   =  $row["entregas_en_casa"];
-        $telefono_visible   = $row["telefono_visible"];
-        $venta_mayoreo      =  $row["venta_mayoreo"];
-        $tiempo_promedio_entrega     =  $row["tiempo_promedio_entrega"];
+        $id_servicio                =   $row["id_servicio"];
+        $nombre_servicio            =   $row["nombre_servicio"];
+        $param["nombre_servicio"]   =  $nombre_servicio;
+        $status                     =   $row["status"];                
+        $url_vide_youtube           = $row["url_vide_youtube"];
+        $url_video_facebook         = $row["url_video_facebook"];
+        $metakeyword                =  $row["metakeyword"];
+        $metakeyword_usuario        =  $row["metakeyword_usuario"];
+        $flag_nuevo                 =  $row["flag_nuevo"];
+        $flag_envio_gratis          = $row["flag_envio_gratis"];
+        $flag_servicio              = $row["flag_servicio"];
+        $existencia                 =  $row["existencia"];
+        $color                      = $row["color"];
+        $precio                     =  $row["precio"];
+        $id_ciclo_facturacion       = $row["id_ciclo_facturacion"];
+        $entregas_en_casa           =  $row["entregas_en_casa"];
+        $telefono_visible           = $row["telefono_visible"];
+        $venta_mayoreo              =  $row["venta_mayoreo"];
+        $tiempo_promedio_entrega    =  $row["tiempo_promedio_entrega"];
     }    
     $url_web_servicio = $url_request."producto/?producto=".$id_servicio;    
     $url_productos_publico  = "../producto/?producto=".$id_servicio."&q2=".$id_usuario;            

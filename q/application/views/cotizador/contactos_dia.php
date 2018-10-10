@@ -12,9 +12,7 @@
       $telefono          = $row["telefono"];
       $id_tipo_contacto  = $row["id_tipo_contacto"];
   ?>
-    <div  
-        class="popup-box chat-popup" id="qnimate" 
-          style="margin-top: 4px;">
+    <div  class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
             <div class="popup-head">
               <div class="popup-head-left pull-left">
                 <?=img([
@@ -22,24 +20,9 @@
                   "style"   =>  'width: 44px!important;',
                   "onerror" =>  "this.src='../img_tema/user/user.png'"
                 ])?>
-                
-                  <span class="black">
-                    <?=$nombre;?> | <?=$email?>
-                  </span>          
-                  <div >
-                    <?=$mensaje?>
-                    
-                    <?=$telefono?>
-                  </div>
-                  <div >
-                    <?=$fecha_registro?>        
-                  </div>
+                <?=div($nombre ."|". $email)?>
+                <?=div($mensaje .$telefono.$fecha_registro)?>
               </div>
-              
-                
-
-                
-              
           </div>
         </div> 
       <?php 
@@ -47,16 +30,6 @@
 ?>
 
 <?=$l;?>
-
-
-
-
-
-
-
-
-
-
 
 
 

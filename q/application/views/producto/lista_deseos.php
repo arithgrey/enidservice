@@ -17,10 +17,10 @@
         $a =0;
             foreach ($productos_deseados as $row):
                 	   
-                $num_deseo =$row["num_deseo"];
-                $id_servicio =$row["id_servicio"];
-                $url = "../producto/?producto=".$id_servicio;
-                $src_img = "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
+                $num_deseo      =   $row["num_deseo"];
+                $id_servicio    =   $row["id_servicio"];
+                $url            =    "../producto/?producto=".$id_servicio;
+                $src_img        =   "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
         ?>
                 	
                 		

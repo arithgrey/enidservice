@@ -31,7 +31,7 @@
 				if ($meta_ventas > $ventas_enid_service){						
 						
 					$ventas_restantes = ($meta_ventas - $ventas_enid_service);					
-					$pendientes .= "<li class='black '> ";
+					$pendientes .= "<li> ";
 					$pendientes .= icon('fa fa-credit-card');
 					$pendientes .= "Ventas";							
 					$pendientes .= span($ventas_restantes , $style);							
@@ -65,11 +65,11 @@
 				if($meta_llamadas  > $llamadas_enid_service){						
 
 					$llamadas_restantes  = ($meta_llamadas - $llamadas_enid_service);
-					$pendientes 	.= "<li class='black '> ";
-					$pendientes 	.= icon('fa fa-mobile');
-					$pendientes 	.= "Llamadas";
-					$pendientes 	.= span($llamadas_restantes , $style_pedientes);
-					$pendientes 	.= "</li>";									         
+					$pendientes 	.= 	"<li> ";
+					$pendientes 	.= 	icon('fa fa-mobile');
+					$pendientes 	.= 	"Llamadas";
+					$pendientes 	.= 	span($llamadas_restantes , $style_pedientes);
+					$pendientes 	.= 	"</li>";									         
 				}
 
 
@@ -82,7 +82,7 @@
 				if($meta_contactos  > $contactos_enid_service){						
 						
 					$contactos_restantes  = ($meta_contactos - $contactos_enid_service);
-					$pendientes .= "<li class='black '> ";
+					$pendientes .= "<li> ";
 					$pendientes .= icon('fa fa-user');
 					$pendientes .= "Contactos";
 					$pendientes .= span($contactos_restantes , $style_pedientes);
@@ -96,7 +96,7 @@
 
 				if ($meta_email  > $email_enviados_enid_service){						
 					$email_restantes = ($meta_email -  $email_enviados_enid_service);
-					$pendientes .= "<li class='black '> ";
+					$pendientes .= "<li> ";
 					$pendientes .= icon('fa fa-envelope-o');
 					$pendientes .= "Email ";
 					$pendientes .= span($email_restantes , $style_pedientes);
@@ -109,7 +109,7 @@
 
 				if ($meta_accesos  > $accesos_enid_service){						
 					$accesos_restantes  = ($meta_accesos - $accesos_enid_service);
-					$pendientes .= "<li class='black '> ";
+					$pendientes .= "<li> ";
 					$pendientes .= icon('fa fa-globe');
 					$pendientes .= "Accesos";
 					$pendientes .= span($accesos_restantes , $style_pedientes);
@@ -124,7 +124,7 @@
 				if ($meta_tareas  > $tareas_enid_service){						
 
 					$tareas_restantes  = ($meta_tareas - $tareas_enid_service);					
-					$pendientes .= "<li class='black '> ";
+					$pendientes .= "<li> ";
 					$pendientes .= icon('fa fa-code');
 					$pendientes .= "Desarrollo web";
 					$pendientes .= span($tareas_restantes , $style_pedientes);
@@ -141,14 +141,12 @@
 				if ($meta_email_registrados  > $correos_registrados_enid_service){						
 
 					$correos_pendientes  = ($meta_email_registrados - $correos_registrados_enid_service);
-					$pendientes .= "<li class='black '> ";
-					$pendientes .= "icon('fa fa-code'') ";
+					$pendientes .= "<li> ";
+					$pendientes .= icon('fa fa-code');
 					$pendientes .= "Correos por cargar al sistema";
 					$pendientes .= span($correos_pendientes , $style_pedientes);
 					$pendientes .= "</li>";									         
 				}
-
-
 
 				break;
 
