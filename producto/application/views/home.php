@@ -105,13 +105,15 @@
                       <?=n_row_12()?>
                         <?php if($in_session ==  0):?>
                         
-                          <?=anchor_enid("AGREGAR A TU LISTA DE DESEOS" .icon('fa fa-gift') ,
+                          <?=anchor_enid(
+                          div("AGREGAR A TU LISTA DE DESEOS " .icon("fa fa-gift") , 
+                          ["class" => "a_enid_black"] , 1)  ,
                           [
-                            'class' => 'a_enid_black agregar_a_lista' , 
-                            'href' => "../login/"
-                          ] , 
-                          1,
-                          1)?>
+                            'class' => 'agregar_a_lista' , 
+                            'href'  => "../login/"
+                          ]
+                          )?>
+                          <br>
                         <?php else:?>
                           <?=div(
                             div(

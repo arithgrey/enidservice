@@ -3,7 +3,7 @@
 		<?=div(div("TIPO CLASIFICACIÓN"), ["class"=>"col-lg-3"])?>		
 		<div class="col-lg-9">
 			<form class="form-tipo-talla">				
-				<?=input(["type"=>"text", "name"=>"tipo_talla","required"=>""])?>
+				<?=input(["type"=>"text", "name"=>"tipo_talla","required"=>true])?>
 			</form>
 		</div>
 	</div>

@@ -1,8 +1,6 @@
 <main>
   <div class="contenedor_principal_enid_service">
-    <?=n_row_12()?>    
-      <div class="separador_inicial"></div>
-    <?=end_row()?>
+    <?=place("separador_inicial")?>    
     <?=n_row_12()?>          
       <div class="col-lg-6  col-lg-offset-3">
         <center>
@@ -25,7 +23,6 @@
         </center>
       </div>
     <?=end_row()?>
-    <?=place("separador_final")?>
-    
+    <?=place("separador_final")?>    
   </div>
 </main>

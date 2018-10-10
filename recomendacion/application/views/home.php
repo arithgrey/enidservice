@@ -4,9 +4,9 @@
 		<?=anchor_enid(
 		icon('fa fa-shopping-cart').get_campo($usuario, "nombre" ),
 			[	
-				"href" 	=>
-				"../search/?q3=".get_campo($usuario,"id_usuario" ),
-				"class"	=> 'go-usuario'
+				
+			"href" 	=> "../search/?q3=".get_campo($usuario,"id_usuario" ),
+			"class"	=> 'go-usuario'
 		])?>			
 		<?=div($resumen_recomendacion , 1)?>		
 		<?=div($paginacion , 1)?>

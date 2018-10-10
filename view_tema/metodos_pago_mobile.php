@@ -44,11 +44,23 @@
 <div class="container inner">
     <table>
         <tr>
-            <?=get_td("MÉTODOS DE ENVÍO" , ['colspan' => 2,"class" => "black"])?>
+            <?=get_td("MÉTODOS DE ENVÍO" , 
+            [
+                'colspan' => 2,
+                "class" => "black"
+            ])?>
         </tr>
         <tr>
-            <?=get_td(img(['class' => "logo_pago_mb", 'src' => "../img_tema/bancos/fedex.png" ]))?>    
-            <?=get_td(img(['class' => "logo_pago_mb", 'src' => "../img_tema/bancos/dhl2.png" ]))?>    
+            <?=get_td(img(
+                [
+                    'class' => "logo_pago_mb", 
+                    'src' => "../img_tema/bancos/fedex.png" 
+            ]))?>    
+            <?=get_td(img(
+                [
+                    'class' => "logo_pago_mb", 
+                    'src' => "../img_tema/bancos/dhl2.png" 
+            ]))?>    
         </tr>
     </table>      
 </div>

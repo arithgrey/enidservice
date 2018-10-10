@@ -3,7 +3,9 @@
     header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
     $enlace_actual = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 ?>    
-<title><?=$titulo?> Anuncia tus productos o servicios en Enid Service</title>    
+    <title>
+        <?=$titulo?>
+    </title>    
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <?=meta('keywords', $meta_keywords . " ");?>    
@@ -24,8 +26,6 @@
     
     <link rel="publisher" href="https://plus.google.com/u/0/117684782897236574265"/>
 
-
-    <!--Open Graph data-->        
     <meta property="og:locale" content="es_ES" />
     <meta property="og:type" content="article" />    
     <meta property="og:title" content="<?=$desc_web;?>"/>

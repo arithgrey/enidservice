@@ -13,8 +13,7 @@
             </li>
             <li>            
               - UTILIZA PALABRAS
-              <?=strong("MÁS SIMPLES")?>
-            
+              <?=strong("MÁS SIMPLES")?>            
             </li>
             <li>
               - NAVEGA POR CATEGORÍAS
@@ -31,8 +30,6 @@
         </div>        
       </div>
     <?=end_row()?>
-    <?=n_row_12()?>    
-      <div class="separador_final"></div>
-    <?=end_row()?>
+    <?=place("separador_final")?>    
   </div>
 </main>

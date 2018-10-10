@@ -64,7 +64,7 @@
             ["class"    =>  'informacion_busqueda_productos_encontrados'], 
             1)?>            
         <?php if($es_movil ==  0):?>                    
-            <?=div("FILTRA TU BÚSQUEDA" ,[] ,1)?>            
+            <?=div("FILTRA TU BÚSQUEDA" ,1)?>            
         <?php endif;?>
         <div class='contenedor_menu_productos_sugeridos'>
         <?php

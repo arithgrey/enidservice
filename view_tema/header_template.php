@@ -21,7 +21,8 @@
                 [
                     "class" =>  "smallnav menu white", 
                     "style" =>  "", 
-                    "onclick"=> "openNav()"])?>
+                    "onclick"=> "openNav()"
+                ])?>
             <?=anchor_enid($img_enid, 
                 ["href"  =>  "../"]
             )?>
@@ -36,8 +37,8 @@
                     "type"          =>  "text", 
                     "style"         =>  "margin-top: 5px;", 
                     "placeholder"   =>  "Buscar",  
-                    "name"          =>  "q"])?>
-                
+                    "name"          =>  "q"
+                ])?>                
                 <?=guardar("",
                     [                       
                     "class"         =>  

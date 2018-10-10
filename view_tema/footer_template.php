@@ -40,13 +40,16 @@ div(ul($list3) , ["class"=>"col-md-3 col-sm-6 inner"]),
 div(ul($list4) , ["class"=>"col-md-3 col-sm-6 inner"])];
 
 ?>
-<?=div("", [ "class"=>"separador-footer" ], 1 )?>
-
-    
-        
-            <?=input_hidden(["class"    => "in_session" , "value"   => $in_session ])?>
-            <?=input_hidden(["name"     => "titulo_web" , "class"   => "titulo_web" ,  
-            "value" => $titulo ])?>            
+<?=div("", [ "class"=>"separador-footer" ], 1 )?>    
+    <?=input_hidden([
+        "class"    => "in_session" , 
+        "value"   => $in_session 
+    ])?>
+    <?=input_hidden([
+        "name"      => "titulo_web" , 
+        "class"     => "titulo_web" ,  
+        "value"     => $titulo 
+    ])?>            
             <?php if ($in_session === 0 ):?>                                
                 <div class="base_compras">
                     <div class='col-lg-4'>
@@ -56,7 +59,10 @@ div(ul($list4) , ["class"=>"col-md-3 col-sm-6 inner"])];
                                 <?=div("FACILIDAD DE COMPRA" , ['class' => 'strong'])?>
                                 <?=div("Compras seguras al momento")?>
                                 <?php if(isset($id_usuario)):?>
-                                    <?=input_hidden(["class"=>'id_usuario', "value"=>$id_usuario])?>
+                                    <?=input_hidden([
+                                        "class"=>'id_usuario',
+                                        "value"=>$id_usuario
+                                    ])?>
                                 <?php endif;?>    
                             </div>
                         </div>
@@ -65,8 +71,8 @@ div(ul($list4) , ["class"=>"col-md-3 col-sm-6 inner"])];
                         <div class="row">
                             <?=div(icon('fa fa-clock-o ') , [ 'class' => 'col-lg-2'] )?>
                             <div class='col-lg-10'>
-                                <?=div("+ ENTREGAS PUNTUALES", ['class' => 'strong'])?>
-                                <?=span("Recibe lo que deseas en tiempo y forma" ,[] , 1)?>
+                                <?=div("+ ENTREGAS PUNTUALES", ['class' => 'strong'], 1)?>
+                                <?=div("Recibe lo que deseas en tiempo y forma" ,1)?>
                             </div> 
                         </div>
                     </div>                    
@@ -75,7 +81,7 @@ div(ul($list4) , ["class"=>"col-md-3 col-sm-6 inner"])];
                             <?=div(icon('fa fa-lock ') , ['class' => 'col-lg-2'])?>
                             <div class='col-lg-10'>
                                 <?=div(" COMPRAS SEGURAS" , ['class' => 'strong'])?>
-                                <?=span("Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!" , [] , 1)?>
+                                <?=div("Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!",  1)?>
                             </div>        
                         </div>
                     </div>                

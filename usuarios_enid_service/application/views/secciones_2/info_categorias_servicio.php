@@ -33,11 +33,11 @@
 		</form>
 		<?=n_row_12()?>
 			<table>
-				<?=get_td(div("" , ["class"=>'primer_nivel']))?>
-				<?=get_td(div("" , ["class"=>'segundo_nivel']))?>
-				<?=get_td(div("" , ["class"=>'tercer_nivel']))?>
-				<?=get_td(div("" , ["class"=>'cuarto_nivel']))?>
-				<?=get_td(div("" , ["class"=>'quinto_nivel']))?>					
+				<?=get_td(place('primer_nivel']))?>
+				<?=get_td(place('segundo_nivel']))?>
+				<?=get_td(place('tercer_nivel']))?>
+				<?=get_td(place('cuarto_nivel']))?>
+				<?=get_td(place('quinto_nivel']))?>					
 			</table>
 		<?=end_row()?>
 	</div>	

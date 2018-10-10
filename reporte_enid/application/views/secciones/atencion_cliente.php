@@ -31,7 +31,7 @@
     </div>
     <div class="tab-pane fade" id="tab_3_comparativa">
         <form class='form_busqueda_desarrollo_solicitudes'>                    
-              <?=$this->load->view("../../../view_tema/inputs_fecha_busqueda")?>
+          <?=$this->load->view("../../../view_tema/inputs_fecha_busqueda")?>
         </form>             
         <?=place("place_metricas_servicio")?>        
     </div>                       

@@ -24,6 +24,11 @@
         ]);?>      
         <?=form_label(get_text_periodo_compra($flag_servicio) , "" , ["class"=>"numero_piezas"] )?>
     </div>
-    <?=guardar( "ORDENAR COMPRA"  , ['id' => 'AddToCart' , 'type' => 'submit'] )?>  
+    <?=guardar("ORDENAR COMPRA"  , 
+              [
+                'id' => 'AddToCart'                 
+              ],
+              1,
+              1)?>  
   </div>
 <?=form_close()?>                    

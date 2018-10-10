@@ -15,7 +15,8 @@
                         
 <?=anchor_enid(
     icon("fa  fa-instagram white" )
-    ,["href"=>"https://www.instagram.com/enid_service/"       ])?>
+    ,["href"=>"https://www.instagram.com/enid_service/"       
+])?>
                             
                         
 <?=anchor_enid(

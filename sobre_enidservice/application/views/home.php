@@ -62,10 +62,8 @@
               <?=img(["src"=>"../img_tema/portafolio/bte.png"])?>
               <?=p("Contar con el mejor sistema de negocios en la ciudad de México, para el año 2021 gracia a las tecnologías de la Información y la comunicación.")?>
               <hr style="color:black;height: 1px;border: 0;background-color: black;">
-            </div>
-            
+            </div>            
           </div>
-
         </div>
       </div>
     <?=end_row()?>    
@@ -74,17 +72,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-
-  $(".btn_beneficios_basicos").click(function(){
-    recorrepage("#info_antes_de_ayuda");
-  });
-  /**/
-  $(".btn_beneficios_avanzados").click(function(){
-    recorrepage("#info_antes_de_ayuda");
-  });
-
-
+    $(".btn_beneficios_basicos").click(function(){
+      recorrepage("#info_antes_de_ayuda");
+    });  
+    $(".btn_beneficios_avanzados").click(function(){
+      recorrepage("#info_antes_de_ayuda");
+    });
 });
-/**/
-
 </script>

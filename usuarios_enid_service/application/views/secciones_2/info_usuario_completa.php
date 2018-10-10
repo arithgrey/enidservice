@@ -109,7 +109,7 @@
 
 			<div class="col-lg-4">
 				<?=div("Turno")?>			
-				<select class="form-control input-sm turno" name="turno">				 
+				<select class="form-control input-sm turno" name="turno">			 
 					<option value="Matutino">
 						Matutino
 					</option>

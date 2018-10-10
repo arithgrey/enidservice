@@ -16,7 +16,7 @@
             "name"              =>  'fecha_termino',
             "class"             =>  "form-control input-sm datetimepicker5" ,
             "id"                =>  'datetimepicker5' ,
-            "value"             => date("Y-m-d")
+            "value"             =>  date("Y-m-d")
         ])?>        
 </div>
 

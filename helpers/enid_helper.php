@@ -140,12 +140,13 @@ if ( ! function_exists('p'))
 }
 if ( ! function_exists('guardar'))
 {
-  function guardar( $info , $attributes=[], $row = 1 , $type_button =1 )
+  function guardar( $info , $attributes=[], $row = 1 , $type_button =1 ,$submit = 1  )
   {   
-      $attributes["type"] = "submit";      
+      if ($submit == 1) {
+          $attributes["type"] = "submit";        
+      }    
       if($type_button == 1) {
-        $existe =  array_key_exists("class", $attributes)?1:0;      
-        
+        $existe =  array_key_exists("class", $attributes)?1:0;              
         if ($existe ==  1) {
           $attributes["class"] = $attributes["class"]." " ." a_enid_blue white completo ";
         }else{
@@ -153,11 +154,13 @@ if ( ! function_exists('guardar'))
         }    
       }
       $attr =  add_attributes($attributes);
-      if ($row == 0) {        
-        return "<button ".$attr. ">" . $info . "<button />\n";
+      if ($row == 0) { 
+
+        return      "<button ". $attr. ">" . $info . "<button/>";
       }else{
-        $button =  "<button ".$attr. ">" . $info . "<button />\n";
-        return div($button , [] ,  1);
+
+        $b         = "<button ".  $attr. ">" . $info . "<button/>";        
+        return div($b , 1);
       }      
   }
 }
@@ -212,7 +215,10 @@ if ( ! function_exists('div'))
   function div( $info , $attributes='' , $row_12 =0 )
   {          
       
-      if ($row_12 == 0 && $attributes != 1 ) {
+      if ($attributes == 1) {
+          return n_row_12()."<div >".$info."</div>".end_row();  
+      }
+      if ($row_12 == 0 ) {
           $attr =  add_attributes($attributes);
           return "<div ".$attr." >".$info."</div>";  
       }else{
