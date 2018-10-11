@@ -76,7 +76,8 @@
 	$data_extra["cliente"] 		=  	$cliente;
 	$url_logo 					= 	$url_request."img_tema/enid_service_logo.jpg";
 	$config_log					=   ['src' => $url_logo  ,'width'	=> '100'];
-	$url_cancelacion 			= 	$url_request."msj/index.php/api/emp/salir/format/json/?type=2&id=".$id_proyecto_persona_forma_pago;
+	$url_cancelacion 			= 	
+	$url_request."msj/index.php/api/emp/salir/format/json/?type=2&id=".$id_proyecto_persona_forma_pago;
 
 
 ?>
@@ -85,7 +86,7 @@
 		<center>
 			<?=div(img($config_log) , [ "style"=> "width: 200px;"] )?>			
 		</center>
-		<?=heading_enid("#Recibo: " .$id_recibo;)?>
+		<?=heading_enid("#Recibo: " .$id_recibo)?>
 
 		<div style="background: #fcfcfc;padding: 5px;">
 			<?=div("Concepto")?>
@@ -109,7 +110,10 @@
 		
 		<?=div(strong("** NINGÚN CARGO A TARJETA ES AUTOMÁTICO. 
 			SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO **	"), 
-			["style" => "background: black; color: white;padding: 5px;"])?>			
+			[
+				"style" => "background: black; color: white;padding: 5px;",
+				"class" => "bottom_10"
+			])?>			
 			
 		<div>
 			<?=$this->load->view("cobranza/pago_oxxo" , $data_oxxo)?> 			
@@ -128,13 +132,13 @@
 				
 			<?=span("Notifica tu pago para que podamos procesarlo " , 
 				[	
-					"style"	=>	"padding: 4px;"
+					"style"	=>	"padding: 4px;",
 					"class"	=> 	"white"
 			])?>
 				
 			<?=anchor_enid("dando click aquí. ",
 				[
-					"href" 	=>	"<?=$url_request?>notificar/?recibo=". $id_recibo ,
+					"href" 	=>	$url_request."notificar/?recibo=". $id_recibo ,
 					"style"	=>	"background:white;color: black!important;padding: 5px;"
 			])?>				
 		</div>		

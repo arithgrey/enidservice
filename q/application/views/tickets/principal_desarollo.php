@@ -10,12 +10,14 @@
 	$estilos_estra =""; 	
 	foreach ($info_tickets as $row) {	
 
-    $id_ticket    =   $row["id_ticket"];
-    $asunto       =   $row["asunto"];        
-    $id_usuario   =   $row["id_usuario"];
-    $fecha_registro            =   $row["fecha_registro"];           
-    $nombre_departamento  = $row["nombre_departamento"];
-    $num_tareas_pendientes = $row["num_tareas_pendientes"];
+    $id_ticket                  =   $row["id_ticket"];
+    $asunto                     =   $row["asunto"];        
+    $id_usuario                 =   $row["id_usuario"];
+    $fecha_registro             =   $row["fecha_registro"];           
+    $nombre_departamento        =   $row["nombre_departamento"];
+    $num_tareas_pendientes      =   $row["num_tareas_pendientes"];
+
+
 
     $tareas_pendientes = [
       "class" =>  'strong white ver_detalle_ticket a_enid_black_sm' , 
@@ -42,13 +44,11 @@
                       ])?>
                       <?=div($asunto)?>
                   </div>
-                  <div <?=$tareas_pendientes?>>                     
-                        #Tareas pendientes:  <?=$num_tareas_pendientes?>
-                  </div>
+                  <?=div("#Tareas pendientes:" . $num_tareas_pendientes  ,$tareas_pendientes )?>
               </div>
               <div class="popup-head-right pull-right ">
                 <div class="btn-group">
-                  <?=gurdar(icon("fa fa-plus") ,  [
+                  <?=guardar(icon("fa fa-plus") ,  [
                       "class"         =>  "chat-header-button" ,
                       "data-toggle"   =>  "dropdown" ,
                       "type"          =>  "button"

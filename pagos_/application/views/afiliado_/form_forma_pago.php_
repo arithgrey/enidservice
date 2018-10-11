@@ -81,11 +81,11 @@
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse0" 
                                 style="background: #004fb6;color: white;">
                                 <div class="row">
-                                    <div class="col-md-1">
+                                    <div class="col-lg-1">
                                             <div class="step s0">1
                                             </div>
                                     </div>
-                                    <div class="col-md-11 step-text white">
+                                    <div class="col-lg-11 step-text white">
                                         Selecciona el banco donde realizaremos tu pago 
                                         <span class="place_banco"></span>
                                     </div>
@@ -111,9 +111,9 @@
                                         </div>                                    
                                     <?=end_row()?>    
 
-                                    <div class="col-md-1">
+                                    <div class="col-lg-1">
                                     </div>
-                                    <div class="col-md-11 step-text">
+                                    <div class="col-lg-11 step-text">
                                     <div class="form-group">
                                     <select class="form-control banco_cuenta" id="sel1"  >
                                         <option value="0">Seleccione un banco ...  </option>
@@ -121,14 +121,14 @@
                                     </select>
                                     </div>
                                     <div class="row pull-right">
-                                        <div class="col-md-1">
+                                        <div class="col-lg-1">
                                             <div class ="step-fll-prev step-prev prev" num-step="0">
                                                 <?=icon("fa fa-angle-left")?>
                                         </div>
                                         </div>
-                                        <div class="col-md-1">
+                                        <div class="col-lg-1">
                                         </div>
-                                        <div class="col-md-1 siguiente_banco">
+                                        <div class="col-lg-1 siguiente_banco">
                                             <div class ="step-fll-prev step-fll next" num-step="0">
                                                 <i class="fa fa-angle-right "  >
                                             </i>
@@ -148,10 +148,10 @@
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" 
                             style="background: #004fb6;color: white;">
                                 <div class="row">
-                                    <div class="col-md-1">
+                                    <div class="col-lg-1">
                                         <div class="step s1">2</div>
                                 </div>
-                                    <div class="col-md-11 step-text white">
+                                    <div class="col-lg-11 step-text white">
                                         Indicanos a que número de cuenta podemos depositarte                                         
                                         <span class="place_numero_tarjeta">             
                                         </span>    
@@ -175,9 +175,9 @@
 
                                     <?=end_row()?>    
 
-                                    <div class="col-md-1">
+                                    <div class="col-lg-1">
                                     </div>
-                                    <div class="col-md-11 step-text">
+                                    <div class="col-lg-11 step-text">
                                         <div class="form-group">
                                             <input 
                                                 class="form-control numero_tarjeta" 
@@ -188,14 +188,14 @@
                                             
                                         </div>
                                         <div class="row pull-right siguiente_numero_tarjeta">
-                                            <div class="col-md-1">
+                                            <div class="col-lg-1">
                                                 <div class ="step-fll-prev step-prev prev" num-step="1">
                                                     <?=icon("fa fa-angle-left")?>
                                             </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-lg-1">
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-lg-1">
                                                 <div class ="step-fll-prev step-fll next" num-step="1">
                                                     <i class="fa fa-angle-right"  >
                                                 </i>
@@ -214,10 +214,10 @@
                                 style="background: #004fb6;color: white;"
                                 data-toggle="collapse" data-parent="#accordion" href="#collapse2" >
                                 <div class="row">
-                                    <div class="col-md-1">
+                                    <div class="col-lg-1">
                                         <div class="step s3">3</div>
                                 </div>
-                                    <div class="col-md-11 step-text white">
+                                    <div class="col-lg-11 step-text white">
 
                                         Confirma el titular a quien depositaremos 
                                         <span class="place_propietario_tarjeta">
@@ -233,9 +233,9 @@
                             <div class="line-wizard l3">
                             </div>
                                 <div class="row">
-                                    <div class="col-md-1">
+                                    <div class="col-lg-1">
                                     </div>
-                                        <div class="col-md-11 step-text">
+                                        <div class="col-lg-11 step-text">
                                             <div class="form-group">
                                                 <input 
                                                     class="form-control propietario" 
@@ -248,7 +248,7 @@
                                                     placeholder="Propietario de la cuenta">
                                             </div>
                                             <div class="row pull-right">
-                                            <div class="col-md-5">
+                                            <div class="col-lg-5">
                                                 <button 
                                                     
                                                     type="button"
@@ -257,7 +257,7 @@
                                                     Actualizar 
                                                 </button>
                                             </div>
-                                            <div class="col-md-5">
+                                            <div class="col-lg-5">
                                                 <button type="button" class="btn btn-secondary">
                                                     Cancelar
                                                 </button>

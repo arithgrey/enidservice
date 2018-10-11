@@ -1,8 +1,10 @@
 <main>
 	<div class="col-lg-4 col-lg-offset-4">
-		<h3 style="font-size: 2em;margin-top: 70px;">                 
-           SOLICITA SALDO A UN AMIGO
-        </h3>
+		<?=heading("SOLICITA SALDO A UN AMIGO", 3, 
+		[
+			"style"=>"font-size: 2em;margin-top: 70px;"
+		])?>
+		
 			
 			<form method="GET" action="../orden_pago_oxxo">
 				<?=n_row_12()?>

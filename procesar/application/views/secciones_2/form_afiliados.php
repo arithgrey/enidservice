@@ -13,21 +13,51 @@ $talla                =
 <?=n_row_12()?>
 
 <?php if($in_session == 0){?>
-  <?=heading_enid($ingresar.' O CREA UNA CUENTA PARA RECIBIR ASISTENCIA Y COMPRAR AL MOMENTO', 
+
+  <?=
+  div(
+  heading_enid($ingresar.' O CREA UNA CUENTA PARA RECIBIR ASISTENCIA Y COMPRAR AL MOMENTO', 
     3 , 
     ["class" => "strong"] , 
     1
-  )?>
+  )
+  ,
+  ["class" => "row"]
+  )
+  ?>
 <?php }?>
 <div class="row">
 <form class="form-miembro-enid-service"  id="form-miembro-enid-service">
   
-     <?=input_hidden(["name"   =>  "descripcion",        "value" =>""])?>
-     <?=input_hidden(["name"   =>  "usuario_referencia", "value" => $q2 ,  "class" =>'q2'])?>
-     <?=input_hidden(["name"   =>  "plan" ,              "class" => "plan", "value" =>  $plan ])?>
-     <?=input_hidden(["name"   =>  "num_ciclos" ,        "class" => "num_ciclos" , "value"  => $num_ciclos ])?>
-     <?=input_hidden(["name"   =>  "ciclo_facturacion" , "class" =>"ciclo_facturacion" , "value"   => $ciclo_facturacion ])?>
-     <?=input_hidden(["name"   =>  "talla" ,             "class" =>"talla"   ,"value"    => $talla ])?>
+     <?=input_hidden([
+      "name"    =>  "descripcion",        
+      "value"   =>  ""
+    ])?>
+     <?=input_hidden([
+      "name"   =>  "usuario_referencia", 
+      "value" => $q2 ,  
+      "class" =>'q2'
+    ])?>
+    <?=input_hidden([
+      "name"   =>  "plan" ,              
+      "class" => "plan", 
+      "value" =>  $plan 
+    ])?>
+    <?=input_hidden([
+      "name"    =>  "num_ciclos" ,        
+      "class"   => "num_ciclos" , 
+      "value"   => $num_ciclos 
+    ])?>
+    <?=input_hidden([
+      "name"    =>  "ciclo_facturacion" , 
+      "class"   =>  "ciclo_facturacion" , 
+      "value"   => $ciclo_facturacion 
+    ])?>
+    <?=input_hidden([
+      "name"    =>  "talla" ,
+      "class"   =>  "talla"   ,
+      "value"    => $talla 
+    ])?>
 
     <?php if($in_session == 0){?>
     <div class="row">

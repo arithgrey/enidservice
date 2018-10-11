@@ -39,10 +39,12 @@
                     "placeholder"   =>  "Buscar",  
                     "name"          =>  "q"
                 ])?>                
-                <?=guardar("",
+                <?=guardar(icon("fa fa-search "),
                     [                       
                     "class"         =>  
-                    "flipkart-navbar-button col-lg-1 button_busqueda_producto fa fa-search col-sm-2"])?>
+                    " col-lg-1 button_busqueda_producto  flipkart-navbar-button"],
+                    0,
+                    0)?>
                 </form>
             </div>
         </div>        

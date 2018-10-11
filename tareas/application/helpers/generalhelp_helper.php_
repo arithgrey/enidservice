@@ -4,8 +4,8 @@ function get_btn_nuevo_mensaje( $id_usuario , $servicio ){
     
     return  icon('btn fa fa-plus btn_nuevo_mensaje input-sm', 
       [
-        "id"          =>  $servicio
-        "href"        =>  '#tab_registro_msj' 
+        "id"          =>  $servicio,
+        "href"        =>  '#tab_registro_msj' ,
         "data-toggle" =>  'tab'
       ]);
     
@@ -224,7 +224,7 @@ if(!function_exists('invierte_date_time')){
   function n_row_12($extra =""){
 
     $row= "<div class='row'>
-            <div class='col-lg-12 col-md-12 col-sm-12 ". $extra ." '>";
+            <div class='col-lg-12 col-lg-12 col-sm-12 ". $extra ." '>";
     return $row;
   }
   function end_row(){

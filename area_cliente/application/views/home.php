@@ -23,20 +23,25 @@ $llamadas_recibidas =  anchor_enid(
 		            </div>
 		            <div class="tab-pane <?=valida_active_tab('ventas' , $action)?>" id='tab_mis_ventas'>                
 		                <?=n_row_12()?> 
-		                	<?=div(place("place_ventas_usuario") , ["class"=>"col-lg-9"])?>
+		                	<?=div(place("place_ventas_usuario") , 
+		                	["class"=>"col-lg-9"])?>
 		                    
 		                    <div class="col-lg-3">	                		
 		                    	<?=heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS" , 3)?>
 								<center>
 						    		<?=$valoraciones;?>
 						    	</center>
+						    	<br>
+						    	<CENTER>
 						    	<?=anchor_enid("VER COMENTARIOS" , 
 						    		[
 						    		"href"	=>	"../recomendacion/?q=".$id_usuario ,
-									"class"	=>	"a_enid_blue text-center"
+									"class"	=>	"a_enid_blue text-center top_10"
 									] ,
+									1,
 									1
 								)?>
+								</CENTER>
 								<?=div($alcance , [] , 1)?>
 		                    </div>
 

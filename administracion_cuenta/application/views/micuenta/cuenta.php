@@ -39,7 +39,7 @@
                         "value"         =>  get_campo($usuario , 'nombre_usuario' ) ,
                         "maxlength"     =>  "15"
                     ])?>
-                    <?=div(div("" , ['class'=>'registro_nombre_usuario']) , ['class'=> '"col-md-7"'])?>
+                    <?=div(div("" , ['class'=>'registro_nombre_usuario']) , ['class'=> '"col-lg-7"'])?>
                 </form>
               <?=end_row()?>
 
@@ -67,8 +67,8 @@
               <?=n_row_12()?>
                 <form class="f_telefono_usuario">
                     <div class="row">                        
-                        <?=div("Teléfon Movil" , ["class" => "col-md-3 strong" ])?>                        
-                        <div class ="col-md-2" >
+                        <?=div("Teléfon Movil" , ["class" => "col-lg-3 strong" ])?>                        
+                        <div class ="col-lg-2" >
                             <?=input([
                                     "id"   => "lada",
                                     "name" => "lada",
@@ -82,7 +82,7 @@
                             ])?>
                             <?=place("registro_telefono_usuario_lada")?>
                         </div>
-                        <div class ="col-md-5" >
+                        <div class ="col-lg-5" >
                             <?=input([
                                 "id"          => "telefono",
                                 "name"        => "telefono",
@@ -105,8 +105,8 @@
               <?=n_row_12()?>
                     <form class="f_telefono_usuario_negocio">
                     <div class="row">
-                       <?=div("Teléfono de negocio", ["class"=>"col-md-3 strong"] )?>
-                        <div class="col-md-2">                                
+                       <?=div("Teléfono de negocio", ["class"=>"col-lg-3 strong"] )?>
+                        <div class="col-lg-2">                                
                             <?=form_input(array(
                                         'name'          => 'lada_negocio',
                                         'id'            => 'lada',
@@ -121,7 +121,7 @@
                             <?=place("registro_telefono_usuario_lada_negocio")?>
                                 
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-lg-5">
                                 <?=form_input(array(
                                         'name'          => 'telefono_negocio',
                                         'id'            => 'telefono',

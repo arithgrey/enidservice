@@ -51,10 +51,10 @@
         
         <div style="display: none;">
           <div class="col-lg-6">
-            <label class="col-md-3 control-label blue_enid_background white" for="prioridad" style="font-size: .8em!important;">
+            <label class="col-lg-3 control-label blue_enid_background white" for="prioridad" style="font-size: .8em!important;">
               Prioridad
             </label>
-            <div class="col-md-9">
+            <div class="col-lg-9">
               <select id="prioridad" name="prioridad" class="form-control">
                 <option value="1">Alta
                 </option>
@@ -67,10 +67,10 @@
           </div>
           
           <div class="col-lg-6">
-            <label class="col-md-4 control-label blue_enid_background white" for="departamento" style="font-size: .8em!important;">
+            <label class="col-lg-4 control-label blue_enid_background white" for="departamento" style="font-size: .8em!important;">
               Departamento
             </label>
-            <div class="col-md-8 contenedor_form_depto">
+            <div class="col-lg-8 contenedor_form_depto">
 
               <?=create_select_selected(  $departamentos, 
                                           "id_departamento", 

@@ -7,6 +7,11 @@
 </div>
 <div>
 	<?=anchor_enid(img(["src"=> $url_request."img_tema/pago-oxxo.jpeg"]) , ["href" => $url_pago_oxxo])?>
-	<?=anchor_enid(icon('fa fa-print') . "Imprimir órden de pago" , ["href"=>$url_pago_oxxo,  "style"=>"background-color: #005780 !important; color: white!important;padding: 15px;"])?>
+	<?=anchor_enid(icon('fa fa-print') . "Imprimir órden de pago" , 
+	[
+		"href"	=>$url_pago_oxxo,  
+		"style"	=>
+		"background-color: #005780 !important; color: white!important;padding: 15px;margin-top:30px;margin-bottom:30px;"
+	])?>
 </div>
 					 

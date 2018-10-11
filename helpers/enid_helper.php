@@ -81,8 +81,8 @@ if ( ! function_exists('heading'))
 {
   function heading($data = '', $h = '1', $attributes = '')
   {
-    $attributes = ($attributes != '') ? ' '.$attributes : $attributes;
-    return "<h".$h.$attributes.">".$data."</h".$h.">";
+    $attr =  add_attributes($attributes);
+    return "<h".$h.$attr.">".$data."</h".$h.">";
   }
 }
 
@@ -142,24 +142,27 @@ if ( ! function_exists('guardar'))
 {
   function guardar( $info , $attributes=[], $row = 1 , $type_button =1 ,$submit = 1  )
   {   
+    
       if ($submit == 1) {
           $attributes["type"] = "submit";        
       }    
+
       if($type_button == 1) {
         $existe =  array_key_exists("class", $attributes)?1:0;              
         if ($existe ==  1) {
-          $attributes["class"] = $attributes["class"]." " ." a_enid_blue white completo ";
+          $attributes["class"] = $attributes["class"]." " ." a_enid_blue white completo";
         }else{
-          $attributes["class"] =  "a_enid_blue white completo ";
+          $attributes["class"] =  "a_enid_blue white completo";
         }    
       }
       $attr =  add_attributes($attributes);
+      
       if ($row == 0) { 
 
-        return      "<button ". $attr. ">" . $info . "<button/>";
+        return  "<button ".$attr.">".$info."</button>";
       }else{
 
-        $b         = "<button ".  $attr. ">" . $info . "<button/>";        
+        $b    = "<button ".$attr.">".$info."</button>";        
         return div($b , 1);
       }      
   }
@@ -316,7 +319,7 @@ function n_row_12( $attributes = ''){
       $attributes = _parse_attributes($attributes);
     }
     $row= "<div class='row'>
-            <div class='col-lg-12 col-md-12 col-sm-12 ". $attributes  ." '>";
+            <div class='col-lg-12 col-lg-12 col-sm-12 ". $attributes  ." '>";
     return $row;
   }
 }
@@ -958,6 +961,20 @@ if ( ! function_exists('strong'))
 }
 
 
+if ( ! function_exists('hr'))
+{
+  function hr($row=1, $attributes = '')
+  {
+    $extra      = add_attributes($attributes);  
+    if ($row == 1) {
+      return n_row_12()."<hr ".$extra." >".end_row();  
+    }else{
+      return "<hr ".$extra." >";  
+    }
+    
+  }
+}
+
 if ( ! function_exists('debug'))
 {
 function debug($msg, $array = 0)
@@ -1024,4 +1041,20 @@ function debug($msg, $array = 0)
     return $z;
   }
 
+}
+if ( ! function_exists('iframe'))
+{
+  function iframe($attributes = '' ,  $row_12 = 0)
+  {
+      $attr =  add_attributes($attributes);
+      if ($row_12 == 0 ) {
+          
+          return "<iframe ".$attr." ></iframe>";  
+      }else{
+      
+          return n_row_12()."<iframe ".$attr." ></iframe>".end_row();  
+      }
+      
+
+  }
 }

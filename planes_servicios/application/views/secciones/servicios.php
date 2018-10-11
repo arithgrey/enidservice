@@ -1,7 +1,7 @@
 	<?=heading_enid("TUS ARTÍCULOS EN VENTA" , "2" , ["class" =>"titulo_articulos_venta"])?>	
 		<div class="contenedor_busqueda_articulos">
-			<?=div("BUSCAR ENTRE TUS ARTÍCULOS" , ["class"	=>	"col-md-4"]);?>			
-			<div class="col-md-4">
+			<?=div("BUSCAR ENTRE TUS ARTÍCULOS" , ["class"	=>	"col-lg-4"]);?>			
+			<div class="col-lg-4">
 				<select class="form-control" name="orden" id="orden">
 		            <?php $a=1; foreach($list_orden as $row):?>
 		                <option value="<?=$a?>">
@@ -10,7 +10,7 @@
 		            <?php $a ++ ;endforeach;?>
 		        </select>
 			</div>
-			<div class="col-md-4">		 
+			<div class="col-lg-4">		 
 				<?=input([
 				  			"id"			=>	"textinput" ,
 					  		"name"			=>	"textinput" ,

@@ -6,10 +6,10 @@ class forma_pago extends REST_Controller{
         $this->load->model("forma_pago_model");    	
         $this->load->library(lib_def());     
     }
-    function forma_pago_GET(){
+    function index_GET(){
         
         $param    = $this->get();
-        $response =  $this->forma_pago_model->$this->get([], [], 100);
+        $response =  $this->forma_pago_model->get([], [], 100);
         $this->response($response);
     }
     

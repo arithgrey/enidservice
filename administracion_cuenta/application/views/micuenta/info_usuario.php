@@ -10,7 +10,7 @@
                 ])?>
             </div>            
             <div class="row coach-info">                
-                <?=div(get_resumen_cuenta($info_usuario) , ["class" =>  "col-md-12"])?>
+                <?=div(get_resumen_cuenta($info_usuario) , ["class" =>  "col-lg-12"])?>
             </div>
         </div>
     </div>

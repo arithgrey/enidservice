@@ -1,4 +1,4 @@
-<div class="col-lg-12 col-md-12 col-sm-12  "> 
+<div class="col-lg-12 col-lg-12 col-sm-12  "> 
 
   <?=anchor_enid(
     icon('fa fa-chevron-circle-left'). "Regresar a mis tickets abiertos" ,
@@ -35,11 +35,11 @@
         <div class="col-lg-6">
           <?=label("Prioridad" , 
           [
-            "class" =>  "col-md-3 control-label blue_enid_background white" ,
+            "class" =>  "col-lg-3 control-label blue_enid_background white" ,
             "for"   =>  "prioridad"
           ])?>
           
-          <div class="col-md-9">
+          <div class="col-lg-9">
             <select id="prioridad" name="prioridad" class="form-control">
               <option value="1">Alta
               </option>
@@ -52,10 +52,10 @@
         </div>
         
         <div class="col-lg-6">
-          <label class="col-md-4 control-label blue_enid_background white" for="departamento">
+          <label class="col-lg-4 control-label blue_enid_background white" for="departamento">
             Departamento
           </label>
-          <div class="col-md-8 contenedor_form_depto">
+          <div class="col-lg-8 contenedor_form_depto">
 
             <?=create_select(
               $departamentos,

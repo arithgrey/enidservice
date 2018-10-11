@@ -34,10 +34,10 @@ $list4 = [
 
           
 $list_footer = [
-div(ul($list) , ["class"=>"col-md-3 col-sm-6 inner"]),
-div(ul($list2) , ["class"=>"col-md-3 col-sm-6 inner"]),
-div(ul($list3) , ["class"=>"col-md-3 col-sm-6 inner"]),
-div(ul($list4) , ["class"=>"col-md-3 col-sm-6 inner"])];
+div(ul($list) , ["class"=>"col-lg-3 col-sm-6 inner"]),
+div(ul($list2) , ["class"=>"col-lg-3 col-sm-6 inner"]),
+div(ul($list3) , ["class"=>"col-lg-3 col-sm-6 inner"]),
+div(ul($list4) , ["class"=>"col-lg-3 col-sm-6 inner"])];
 
 ?>
 <?=div("", [ "class"=>"separador-footer" ], 1 )?>    

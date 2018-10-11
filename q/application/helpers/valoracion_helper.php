@@ -68,7 +68,7 @@
       $parte_promedio   =  div(crea_estrellas($promedio_general).span($promedio_general , ["class"=>'promedio_num']) , ["class"=>'contenedor_promedios']);
       
       $config =  ["class"   =>  'info_comentarios'];
-      $parte_promedio   .= "<table width='100%'>
+      $parte_promedio   .= "<table>
                             <tr>
                               ".get_td( $comentarios , $config )."
                             </tr>

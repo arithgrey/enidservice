@@ -43,7 +43,7 @@ input[type="radio"]:checked ~ label {
 
 </style>
 <div class='seccion_form_errores'>
-	<div class='col-lg-6 col-md-6  col-sm-8 col-lg-offset-3  col-md-offset-3 col-sm-offset-2'>				
+	<div class='col-lg-6 col-lg-6  col-sm-8 col-lg-offset-3  col-lg-offset-3 col-sm-offset-2'>				
 		<form class='form-error' id='form-error' action='<?=base_url("index.php/api/reportes/reporteincidencia/format/json/")?>'>
 			<div class='enid-service-start' id='enid-service-start'>
 				<?=titulo_enid("Calíficanos")?>					

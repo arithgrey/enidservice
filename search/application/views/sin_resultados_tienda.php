@@ -9,11 +9,12 @@
           ['class' =>'strong']
           , 
           1)?> 
+          <br>
                  
         <?=div(
-          anchor_enid("ANUNCIA TU PRIMER PRODUCTO AQUÍ".icon('fa fa-chevron-right ir'),
+          anchor_enid("ANUNCIA TU PRIMER PRODUCTO ".icon('fa fa-chevron-right ir'),
           ["href"  =>  "../planes_servicios/?action=nuevo",
-            "class" =>  "a_enid_black2 boton_primer_producto",
+            "class" =>  "a_enid_black2 boton_primer_producto top_30",
             "style" =>  "color: white!important"
           ] ,
           1,

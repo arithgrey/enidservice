@@ -1,8 +1,8 @@
 <div style='background:#0012dd !important;'>
     <div  class="container inner" >
         <div class="row">        
-            <?=div("" , ["class"=>"col-md-6"])?>
-            <div class="col-md-6">
+            <?=div("" , ["class"=>"col-lg-6"])?>
+            <div class="col-lg-6">
                 <form  id="form_contacto"   action="../msj/index.php/api/emp/contacto/format/json"  method="post">
                     <div class="row" id='envio_msj'>
                         <?=div( span("Departamento " , ["class"=>'white strong']), ["class"=>"col-sm-3"])?>

@@ -10,22 +10,22 @@
 	<hr>
 	<?=n_row_12()?>
 		<div class="info_categoria">
-			<?=place("primer_nivel_seccion"] , 1)?>
+			<?=place("primer_nivel_seccion")?>
   	    </div>
   	    <div class="info_categoria">
-			<?=place("segundo_nivel_seccion"] , 1)?>
+			<?=place("segundo_nivel_seccion")?>
   	    </div>	
   	    <div class="info_categoria">
-			<?=place("tercer_nivel_seccion"] , 1)?>
+			<?=place("tercer_nivel_seccion")?>
   	    </div>	 
   	    <div class="info_categoria">
-			<?=place("cuarto_nivel_seccion"] , 1)?>
+			<?=place("cuarto_nivel_seccion")?>
   	    </div>	              	
 		<div class="info_categoria">
-			<?=place("quinto_nivel_seccion"] , 1)?>
+			<?=place("quinto_nivel_seccion")?>
   	    </div>	              	  	        
   	    <div class="info_categoria">
-			<?=place("sexto_nivel_seccion"] , 1)?>
+			<?=place("sexto_nivel_seccion")?>
   	    </div>	              	  	        
   	<?=end_row();?>                   
 </div>

@@ -241,7 +241,7 @@ if(!function_exists('invierte_date_time')){
   
   function contenedor_page_start(){
     return "<div class='row contenedor-enid' >
-              <div class='col-lg-12 col-md-12 col-sm-12'>";
+              <div class='col-lg-12 col-lg-12 col-sm-12'>";
   }
   function contenedor_page_end(){
     return "</div>

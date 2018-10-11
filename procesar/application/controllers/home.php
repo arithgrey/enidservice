@@ -21,7 +21,7 @@ class Home extends CI_Controller{
     }
     /**/    
     function index(){
-
+        
         $param =  $this->input->get();
         if( array_key_exists("num_ciclos", $param)
             && ctype_digit($param["num_ciclos"])

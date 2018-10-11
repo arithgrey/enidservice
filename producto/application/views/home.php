@@ -118,7 +118,7 @@
                           <?=div(
                             div(
                               "AGREGAR A TU LISTA DE DESEOS".icon('fa fa-gift') , 
-                              ["class" =>  "a_enid_blue agregar_a_lista_deseos"] 
+                              ["class" =>  "a_enid_black agregar_a_lista_deseos"] 
                             ,1
                             ) , 
                             ["id"=>'agregar_a_lista_deseos_add']
@@ -126,15 +126,16 @@
                         <?php endif;?>
                       <?=end_row()?>
                       <?=div($tiempo_entrega , 1)?>                        
-                      
+                      <br>
                       <?=n_row_12()?>
                         <?=$this->load->view("social", $info_social)?>
                       <?=end_row()?>
-                      
+                      <br>
                       <?=anchor_enid( 
                          "Ir a la tienda del vendedor",
                           [
-                            'href'  => "../search/?q3=".$id_publicador 
+                            'href'  => "../search/?q3=".$id_publicador ,
+                            'class' => "a_enid_black"
                           ]
                           ,
                           1,

@@ -43,8 +43,7 @@ class Home extends CI_Controller{
     }
     /**/
     function get_forma_pago(){
-        $api = "cuentas/forma_pago/format/json/";
-        return 
-        $this->principal->api( $api);
+        $api = "forma_pago/index/format/json/";
+        return $this->principal->api( $api);
     }   
 }

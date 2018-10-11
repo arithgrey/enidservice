@@ -57,50 +57,54 @@
 <?=end_row();?>                        
 
 <?=n_row_12()?>
-    <div >                            
-        <div class="col-lg-2">              
-        <?=div(
-            icon("fa fa-search").$busqueda."(".$num_servicios."PRODUCTOS)",
-            ["class"    =>  'informacion_busqueda_productos_encontrados'], 
-            1)?>            
+    
+    <div class="col-lg-2">              
+       
         <?php if($es_movil ==  0):?>                    
-            <?=div("FILTRA TU BÚSQUEDA" ,1)?>            
+            <?=heading("FILTRA TU BÚSQUEDA" ,5)?>            
         <?php endif;?>
+         <?=div(
+            icon("fa fa-search").$busqueda."(".$num_servicios."PRODUCTOS)",
+            ["class"    =>  'informacion_busqueda_productos_encontrados strong'], 
+            1
+        )?>            
         <div class='contenedor_menu_productos_sugeridos'>
-        <?php
-        if ($es_movil == 0){                            
-            if ($bloque_primer_nivel["num_categorias"] > 0) {
-                echo $bloque_primer_nivel["html"];
+            <?php
+            if ($es_movil == 0){                            
+                if ($bloque_primer_nivel["num_categorias"] > 0) {
+                    echo $bloque_primer_nivel["html"];
 
+                }
+                /**/
+                if($bloque_segundo_nivel["num_categorias"] > 0){
+                    echo hr();
+                    echo $bloque_segundo_nivel["html"];
+                }
+                /**/
+                if($bloque_tercer_nivel["num_categorias"] > 0){
+                    echo hr();
+                    echo $bloque_tercer_nivel["html"];
+                }
+                /**/
+                if($bloque_cuarto_nivel["num_categorias"] > 0){
+                    echo hr();
+                    echo $bloque_cuarto_nivel["html"];
+                }
+                /**/
+                if($bloque_quinto_nivel["num_categorias"] > 0){
+                    echo hr();
+                    echo $bloque_quinto_nivel["html"];
+                }
             }
-            /**/
-            if($bloque_segundo_nivel["num_categorias"] > 0){
-                echo "<hr>";
-                echo $bloque_segundo_nivel["html"];
-            }
-            /**/
-            if($bloque_tercer_nivel["num_categorias"] > 0){
-                echo "<hr>";
-                echo $bloque_tercer_nivel["html"];
-            }
-            /**/
-            if($bloque_cuarto_nivel["num_categorias"] > 0){
-                echo "<hr>";
-                echo $bloque_cuarto_nivel["html"];
-            }
-            /**/
-            if($bloque_quinto_nivel["num_categorias"] > 0){
-                echo "<hr>";
-                echo $bloque_quinto_nivel["html"];
-            }
-        }
-        ?>
-
+            ?>
         </div>
     </div>
+
+
     <div class="col-lg-10">
+        <br>
         <?=n_row_12()?>
-            <div class="col-md-3">
+            <div class="col-lg-3">
                 <select class="form-control order" name="order" id="order">
                     <?php $a=0; foreach($filtros as $row):?>
                         <?php if ($a ==  $order):?>
@@ -115,30 +119,25 @@
                         <?php $a ++ ;endforeach;?>
                 </select>
             </div>
-            <div class="col-md-9">
-                <?=div($paginacion , ['class'=>"pull-right"])?>            
-            </div>                    
+            
+            <?=div(div($paginacion , ['class'=>"pull-right"]) , ["class"=>"col-lg-9"])?>
         <?=end_row()?>
+        <br>
+
         <?php
-        $list ="";  
-        $flag =0;    
-        $extra = ""; 
-        $b=0;
+        $list   =   "";  
+        $flag   =   0;    
+        $extra  =   ""; 
+        $b      =   0;
         foreach($lista_productos as $row){                        
             if ($b > 0) {
-                $extra = "style='margin-top:30px;'";          
-            } 
-            echo "<div class='col-lg-3' ".$extra." >";  
-            echo "<div class='row'>";
-                echo "<center>";
-                    echo $row;
-                echo "</center>";  
-            echo "</div>";  
-            echo "</div>";  
+                $extra = "margin-top:30px;";          
+            }             
+            echo div(div(div($row , ["class"=>'row'])) ,  ["class"=>'col-lg-3' , "style" => $extra  ] );
             $flag ++;
             if ($flag == 4) {
                 $flag =0;
-                echo "<hr>";
+                echo hr();
                 $b ++;
             }
         }?>
@@ -146,13 +145,19 @@
             <?=div($paginacion , 1)?>            
         <?php endif;?>            
     </div>
-    </div>    
-    <?=n_row_12()?>         
-        <?=div("" , ["class"   =>   "col-lg-2"])?>
-        <div class="col-lg-10">
-            <?=p("CATEGORIAS DESTACAGAS", ["class"=>'titulo_categorias'])?>  
-            <?=div(crea_sub_menu_categorias_destacadas( $categorias_destacadas_orden) , 1)?>
-        </div>
-    <?=end_row()?>
+    
+    
 <?=end_row()?>
 
+
+<br>
+<?=n_row_12()?>         
+    <?=div("", ["class" => "col-lg-2"])?>
+    <div class="col-lg-10">
+        <?=heading(
+            "CATEGORIAS DESTACADAS", 
+            3
+            )?>  
+        <?=div(crea_sub_menu_categorias_destacadas( $categorias_destacadas_orden) , 1)?>
+    </div>
+<?=end_row()?>

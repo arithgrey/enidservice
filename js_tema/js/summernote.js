@@ -6940,7 +6940,7 @@
                  '<div class="form-group note-group-image-url" style="overflow:auto;">' +
                    '<label class="note-form-label">' + lang.image.url + '</label>' +
                    '<input class="note-image-url form-control note-form-control note-input ' +
-                   ' col-md-12" type="text" />' +
+                   ' col-lg-12" type="text" />' +
                  '</div>';
       var footer = '<button href="#" class="btn btn-primary note-btn note-btn-primary ' +
       'note-image-btn disabled" disabled>' + lang.image.insert + '</button>';

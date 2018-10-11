@@ -2,9 +2,9 @@
 	<div class="col-lg-7">			
 		<form class="form-horizontal form_categoria" id="form_categoria">
 		<div class="form-group">
-		  <?=div("¿ES SERVICIO?" ,  ["class"	=> "col-md-4"])?>
+		  <?=div("¿ES SERVICIO?" ,  ["class"	=> "col-lg-4"])?>
 		  
-		  <div class="col-md-8">		  
+		  <div class="col-lg-8">		  
 		    <select id="servicio" name="servicio" class="form-control servicio">
 		      <option value="0">NO</option>
 		      <option value="1">SI</option>
@@ -14,8 +14,8 @@
 
 		
 		<div class="form-group">
-			<?=div("CATEGORÍA" ,  ["class"	=> "col-md-4"])?>		  
-		  	<div class="col-md-8">
+			<?=div("CATEGORÍA" ,  ["class"	=> "col-lg-4"])?>		  
+		  	<div class="col-lg-8">
 		  		<?=input([
 		  			"id"			=>"textinput" ,
 					"name"			=>"clasificacion" ,
@@ -33,11 +33,11 @@
 		</form>
 		<?=n_row_12()?>
 			<table>
-				<?=get_td(place('primer_nivel']))?>
-				<?=get_td(place('segundo_nivel']))?>
-				<?=get_td(place('tercer_nivel']))?>
-				<?=get_td(place('cuarto_nivel']))?>
-				<?=get_td(place('quinto_nivel']))?>					
+				<?=get_td(place('primer_nivel'))?>
+				<?=get_td(place('segundo_nivel'))?>
+				<?=get_td(place('tercer_nivel'))?>
+				<?=get_td(place('cuarto_nivel'))?>
+				<?=get_td(place('quinto_nivel'))?>					
 			</table>
 		<?=end_row()?>
 	</div>	

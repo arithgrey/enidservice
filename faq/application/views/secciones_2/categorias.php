@@ -11,7 +11,7 @@
 <?=end_row()?>
 
 <?=n_row_12()?>
-	<?=diiv("Programa de afiliados" , ["class"=>"white strong", "style"=>"background: black;"])?>
+	<?=div("Programa de afiliados" , ["class"=>"white strong", "style"=>"background: black;"])?>
 	<?=div(lista_categorias($categorias_programa_de_afiliados))?>
 <?=end_row()?>
 

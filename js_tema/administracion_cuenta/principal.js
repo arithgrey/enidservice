@@ -18,7 +18,7 @@ $(document).ready(function(){
 	$("#form_update_password").submit(set_password);	
 	$(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
 	$(".f_telefono_usuario").submit(actualiza_telefono_usuario);
-	$(".f_telefono_usuario_negocio").submit(actualiza_telefono_usuario_negocio);
+	$(".f_telefono_usuario_negocio").submit(set_telefono_usuario_negocio);
 
 	
 });
@@ -87,14 +87,21 @@ function actualiza_telefono_usuario(e){
 	e.preventDefault();
 }
 /**/
-function actualiza_telefono_usuario_negocio(e){
+function set_telefono_usuario_negocio(e){
 
 
-	var data_send=  $(".f_telefono_usuario_negocio").serialize();  	
-	var url =  "../q/index.php/api/usuario/telefono_negocio/format/json/";			
-	request_enid( "PUT",  data_send, url, function(){
-		show_response_ok_enid(".registro_telefono_usuario_negocio" , "Tu teléfono fue actualizado!");
-	}  , ".registro_telefono_usuario_negocio" );
+	if (get_parameter(".tel2").length > 4 && get_parameter(".lada2").length > 1 ){
+
+		var data_send	=  $(".f_telefono_usuario_negocio").serialize();  	
+		var url 		=  "../q/index.php/api/usuario/telefono_negocio/format/json/";			
+		request_enid( "PUT",  data_send, url, function(){
+			show_response_ok_enid(".registro_telefono_usuario_negocio" , "Tu teléfono fue actualizado!");
+		}  , ".registro_telefono_usuario_negocio" );
+		
+	}else{		
+		var inputs = [".tel2", ".lada2"];
+		focus_input(inputs);				
+	}
 	e.preventDefault();
 }
 /**/

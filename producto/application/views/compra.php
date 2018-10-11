@@ -1,17 +1,16 @@
-<form action="../procesar"  id="AddToCartForm" >  
-  <?=input_hidden([
+<?php 
+  $hidden = array(
     "plan"              =>  $id_servicio,
     "extension_dominio" =>  "",
     "ciclo_facturacion" =>  "" ,
     "is_servicio"       =>  $flag_servicio,
     "q2"                =>  $q2 
-  ])?>
-  <?=input_hidden([
-    "name"    =>  "talla", 
-    "value"   =>  "0" , 
-    "class"   =>  "producto_talla" ,
-    "id"      =>  'productotalla'
-  ])?>
+  );
+?>
+<form action="../procesar"  id="AddToCartForm" >  
+  <?=form_hidden($hidden)?>
+ 
+ 
   <div class="btn-and-quantity">
     <div class="spinner">
         <?=form_input([

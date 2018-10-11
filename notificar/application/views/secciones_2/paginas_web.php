@@ -113,6 +113,7 @@
                 <div class="row">
                   <div class="col-lg-6 ">
                     <?=span("Forma de Pago *")?>                    
+                    
                     <?=create_select($forma_pago , 
                         "forma_pago" , 
                         "input-sm" , 

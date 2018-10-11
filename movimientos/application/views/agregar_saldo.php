@@ -24,8 +24,8 @@
 				<div class="option_ingresar_saldo">				
 					<?=div("SOLICITA SALDO A UN AMIGO" ,
 					[	
-						"style"	=>	"text-decoration:underline;",
-						"class"	=>"tipo_pago"
+						
+						"class"	=>"tipo_pago underline"
 					] , 
 					1)?>
 					<?=div(

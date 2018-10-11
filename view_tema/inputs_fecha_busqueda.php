@@ -19,5 +19,5 @@
             "value"             =>  date("Y-m-d")
         ])?>        
 </div>
-
-<?=guardar("Búsqueda", ["class"  => 'col-lg-4'])?>
+<br>
+<?=div(guardar("Búsqueda " .icon("fa fa-chevron-right").icon("fa fa-chevron-right")), ["class"  => 'col-lg-4'])?>

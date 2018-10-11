@@ -77,6 +77,7 @@ $s_ciclo_facturcion = create_select($ciclo_facturacion ,
 	<?=form_open('' ,['class'=>"form_nombre_producto row" , "id"=>'form_nombre_producto'])?>
 		<div class="col-lg-3 seccion_menu_tipo_servicio ">				    
 			<?=div("¿QUÉ DESEAS ANUNCIAR?" , ['class' => 'text_deseas_anunciar'] , 1);?>
+			<br>
 			<table>
 				<tr>
 					<?=get_td($tipo_promocion_producto)?>							

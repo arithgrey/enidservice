@@ -22,13 +22,11 @@ class Home extends CI_Controller{
         $q                          =  get_param_def($param     , "q", "");    
         $param["num_hist"]          =  get_info_servicio($q);                        
 
+        //if (if_ext($param , "q" )){
 
-        if (if_ext($param , "q" )){
-
-            /**/
             $this->create_keyword($param);
             $this->load_data($param);        
-        }
+        //}
         
         
     }
