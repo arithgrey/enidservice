@@ -17,7 +17,7 @@
                 <?=div("Monto total:" .$recibo["saldo_pendiente"] . "MXN" , 
                     ["style"=>"color: blue;font-size: 2.2em;text-decoration: underline;"] ,
                     1)?>
-                <?=div($recibo["resumen"] , [] ,1)?>                
+                <?=div($recibo["resumen"]  ,1)?>                
             </div>
             <?php if($saldo_disponible >= $recibo["saldo_pendiente"]):?>                            
                         

@@ -3,8 +3,6 @@ if(!function_exists('invierte_date_time')){
 function get_text_periodo_compra($flag_servicio){
   if($flag_servicio == 0){
     return "Piezas";
-  }else{
-
   }
 }
 function valida_maximo_compra($flag_servicio, $existencia){
@@ -24,12 +22,12 @@ function get_text_costo_envio($flag_servicio , $param){
 
 function get_descripcion_servicio($descripcion , $flag_servicio){
   
-  $extra_info ="";
-  $extra ="";
+  $extra_info = "";
+  $extra      = "";
   $servicio = ($flag_servicio ==  1)?"SOBRE EL SERVICIO": "SOBRE EL PRODUCTO";  
   if (strlen(trim(strip_tags($descripcion))) > 10 ){
-    $text = heading_enid($servicio, 2, ["class"=>'titulo_sobre_el_producto']);
-    $text .= div(p(strip_tags($descripcion)) );
+    $text   =   heading_enid($servicio, 2, ["class"=>'titulo_sobre_el_producto']);
+    $text   .=  div(p(strip_tags($descripcion)) );
     return $text;  
   }
   
@@ -111,8 +109,8 @@ function creta_tabla_colores($text_color , $flag_servicio ){
     $v =0;
     for($z=0; $z <count($arreglo_colores); $z++){       
         $color =  $arreglo_colores[$z]; 
-        $estyle = "style='background:$color;height:40px;' ";
-        $info .= div("" ,  ["style"=>'background:$color;height:40px;' , "class" => "col-lg-4"]);
+        $style = "background:$color;height:40px; ";
+        $info .= div("" ,  ["style"=>$style , "class" => "col-lg-4"]);
         $v ++;
     }
     if($v>0){    
@@ -120,10 +118,10 @@ function creta_tabla_colores($text_color , $flag_servicio ){
       $final  ="";
         $final .= div($info_title ,  ["class"=>'informacion_colores_disponibles']);
         $final .= $info;        
-      $final  = div($final , ['class'=>'contenedor_informacion_colores']);
+      $final  = div($final ,         ['class'=>'contenedor_informacion_colores']);
 
     }
-    return div($final , [] , 1);
+    return div($final , 1);
   }
 
 }
@@ -227,11 +225,16 @@ function valida_url_youtube($url_youtube){
 
   $url ="";
   if(strlen($url_youtube)>5){    
-    $url = "<iframe width='100%' 
-            src='".$url_youtube."' 
-            frameborder='0' 
-            allow='autoplay; encrypted-media' allowfullscreen>
-                      </iframe>";
+    
+
+    $url  = iframe([
+        "width"         =>  '100%' ,
+        "src"           =>   $url_youtube,
+        "frameborder"   =>  '0' ,
+        "allow"         =>  'autoplay'
+      
+    ]);
+
   }
   return $url;
 }

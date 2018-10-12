@@ -42,7 +42,7 @@ $llamadas_recibidas =  anchor_enid(
 									1
 								)?>
 								</CENTER>
-								<?=div($alcance , [] , 1)?>
+								<?=div($alcance , 1)?>
 		                    </div>
 
 		                <?=end_row()?>

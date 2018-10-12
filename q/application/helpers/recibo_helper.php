@@ -78,17 +78,17 @@ if(!function_exists('invierte_date_time')){
     if($modalidad_ventas == 1){
         
         if($monto_a_liquidar >0){      
-            $text = span("MONTO DE LA COMPRA" , 
+            $text = div("MONTO DE LA COMPRA" , 
                       [  "class"   =>  'text-saldo-pendiente']) .
-                    span($monto_a_pagar."MXN" , 
+                    div($monto_a_pagar."MXN" , 
                         ["class"  =>  "text-saldo-pendiente-monto"]);
         }             
     }else{
 
         if($monto_a_liquidar >0){         
             
-            $text  = span("SALDO PENDIENTE" , ["class"   =>  'text-saldo-pendiente']);
-            $text .= span($monto_a_liquidar."MXN" , ["class"  =>  "text-saldo-pendiente-monto"]);  
+            $text  = div("SALDO PENDIENTE" , ["class"   =>  'text-saldo-pendiente']);
+            $text .= div($monto_a_liquidar."MXN" , ["class"  =>  "text-saldo-pendiente-monto"]);  
         }
 
     }
@@ -153,7 +153,7 @@ if(!function_exists('invierte_date_time')){
                 "class"=>'vender_mas_productos']
               );
 
-      return div($link . $link2 , [] , 1);
+      return div($link . $link2 , 1);
   }
   function evalua_texto_envios_compras($modalidad_ventas , $num_orden , $tipo){ 
     

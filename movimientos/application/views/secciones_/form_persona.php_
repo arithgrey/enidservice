@@ -5,88 +5,102 @@
 <?=end_row()?>          
 <form class='form_referido' id='form_referido'>  
   <?=n_row_12()?>
-      <span class='btn_mostrar_mas_campos mas_campos'>
-          Mostrar más campos <?=icon("fa fa-angle-double-down")?>
-      </span>
-      <span class='btn_mostrar_mas_campos menos_campos' style='display:none;'>
-                    Ocultar campos
-          <?=icon("fa fa-angle-double-up")?>
-          
-      </span>
-  <?=end_row()?>
-
-
-    <input type='hidden'  name='referido' value="1">
-    <input type='hidden' name="referencia_email" class='referencia_email' value='0'>
-    <input type="hidden" name="fuente" value="1">    
-    <div class="col-lg-4">
-      <span >
-        Negocio
-      </span>
+    <?=div("Mostrar más campos" . icon("fa fa-angle-double-down") , 
+    [
+      "class" => 'btn_mostrar_mas_campos mas_campos'
+    ])?>
+    <?=div(
+      "Ocultar campos" .icon("fa fa-angle-double-up") , 
+      [
+        "class" =>  'btn_mostrar_mas_campos menos_campos',
+        "style" =>  'display:none;'
+    ])?>
       
+    <?=end_row()?>
+    <?=input_hidden([
+      "name"  =>  'referido' ,
+      "value" =>  "1"
+    ])?> 
+    <?=input_hidden([
+      "name"  =>  "referencia_email",
+      "class" => 'referencia_email' ,
+      "value" =>  '0'
+    ])?> 
+    <?=input_hidden([
+      "name"  =>  "fuente" ,
+      "value" =>  "1"   
+    ])?> 
+
+    <div class="col-lg-4">
+      <?=div("Negocio")?>
       <?=create_select($tipos_negocios_enid , 
         "tipo_negocio" , 
         "tipo_negocio   form-control" , 
         "tipo_negocio" ,
         "nombre", 
         "idtipo_negocio");?>
-      
     </div>
   
     <div class="col-lg-4">
-      <span >
-        Interés
-      </span>
-     
-        <?=create_select(
+      <?=div("Interés")?>
+      <?=create_select(
           $servicios , 
           "servicio" , 
           "form-control", 
           "selectbasic" , 
           "nombre_servicio" , 
           "id_servicio")?>   
-     
     </div>
     <div class="col-lg-4">
-      <span >
-        Sitio web
-      </span>  
-      <input id="sitio_web" name="sitio_web" placeholder="http://" class="form-control input-sm" type="text">
+      <?=div("Sitio web")?>
+      <?=input([
+        "id"            =>  "sitio_web" ,
+        "name"          =>  "sitio_web" ,
+        "placeholder"   =>  "http://" ,
+        "class"         =>  "form-control input-sm" ,
+        "type"          =>  "text"
+      ])?>
+      
     </div>
 
 
     <div class="col-lg-4">
-      <span >
-        Nombres
-      </span>      
-      <input 
-        id="nombre" 
-        name="nombre" 
-        placeholder="Nombre" 
-        class="form-control input-sm" 
-        required="" 
-        type="text">        
+      <?=div("Nombres")?>
+      <?=input([
+        "id"                => "nombre" ,
+        "name"              => "nombre" ,
+        "placeholder"       => "Nombre" ,
+        "class"             => "form-control input-sm" ,
+        "required"          => "" ,
+        "type"              => "text"
+      ])?>
+      
     </div>
 
     <div class="col-lg-4 campo_avanzado">
-      <span >
-        A.Paterno
-      </span>      
-      <input id="apellido_paterno" name="apellido_paterno" placeholder="Primer apellido" class="form-control input-sm" type="text">    
+      <?=div("A.Paterno")?>
+      <?=input([
+        "id"                 =>  "apellido_paterno" ,
+        "name"               =>  "apellido_paterno" ,
+        "placeholder"        =>  "Primer apellido",
+        "class"              =>  "form-control input-sm" ,
+        "type"               =>  "text"
+      ])?>      
     </div>
 
-
     <div class="col-lg-4 campo_avanzado">
-      <span >
-        A. Materno
-      </span>      
-      <input id="apellido_materno" name="apellido_materno" placeholder="Segundo apellido" class="form-control input-sm" type="text">        
+      <?=div("A. Materno")?>
+      <?=input([
+        "id"                  =>  "apellido_materno" ,
+        "name"                =>  "apellido_materno" ,
+        "placeholder"         =>  "Segundo apellido" ,
+        "class"               =>  "form-control input-sm" ,
+        "type"                =>  "text"
+      ])?>
     </div>
 
     <div class="col-lg-4">
-      <span >
-        Tel.
-      </span>  
+      <?=div("Tel.")?>
       
       <input id="telefono_info_contacto"  
         name="telefono_contacto" 

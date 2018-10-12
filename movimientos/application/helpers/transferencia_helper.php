@@ -11,18 +11,13 @@ if(!function_exists('invierte_date_time')){
   /**/
   function agrega_cuentas_existencia($flag_cuentas){
 
-  	if($flag_cuentas == 0){
-  		return "Asociar nueva cuenta";
-  	}else{
-  		return "Asociar otra cuenta";
-  	}	
+    $text = ($flag_cuentas == 0) ? "Asociar nueva cuenta" : "Asociar otra cuenta";
+    return $text;
   } 		
   /**/
   function valida_siguiente_paso_cuenta_existente($flag_cuentas_registradas){
-    /**/  
-    if($flag_cuentas_registradas ==  0){
-       return  "readonly";
-    }
+    $text = ($flag_cuentas_registradas ==  0) ? "readonly" : "";
+    return $text;
   }
   /**/
   function despliega_cuentas_registradas($cuentas){
@@ -30,21 +25,19 @@ if(!function_exists('invierte_date_time')){
   	$option = "";
   	foreach($cuentas as $row){
   		/**/		
-  		$id_cuenta_pago = $row["id_cuenta_pago"];
-  		$numero_tarjeta = $row["numero_tarjeta"];
-  		$nuevo_numero_tarjeta =  substr($numero_tarjeta, 0 , 4);
-  		$nombre = "Cuenta - " .$row["nombre"] ." " .$nuevo_numero_tarjeta."************";
+  		$id_cuenta_pago       =   $row["id_cuenta_pago"];
+  		$numero_tarjeta       =   $row["numero_tarjeta"];
+  		$nuevo_numero_tarjeta =   substr($numero_tarjeta, 0 , 4);
+  		$nombre               =   "Cuenta - " .$row["nombre"] ." " .$nuevo_numero_tarjeta."************";
   		$option .= add_option_select($nombre , $id_cuenta_pago );
   	}
   	return $option;
   }
   /**/
   function add_option_select($text , $value){
-
   	return "<option value='".$value."'>".$text."</option>";
   }
   function valida_nombre_propietario($nombre_persona , $propietario_tarjeta ){
       return $nombre_persona; 
   }
-
 }/*Termina el helper*/

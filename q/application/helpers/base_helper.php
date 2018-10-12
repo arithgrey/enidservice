@@ -14,11 +14,9 @@ function lista_categorias($categorias){
     $nombre_categoria =   $row["nombre_categoria"];
     $faqs             =   $row["faqs"];   
     $href             =   "?categoria=".$id_categoria; 
-    
-    $text_lista=  icon("fa fa-file-text-o"). span($nombre_categoria ."(".$faqs.")");  
-
-    $link             =     anchor_enid($text_lista, ['href'=>$href]);
-    $l               .=  div($link,["class" =>"col-lg-4"] );    
+    $text_lista       =   icon("fa fa-file-text-o"). span($nombre_categoria ."(".$faqs.")");  
+    $link             =   anchor_enid($text_lista, ['href'=>$href]);
+    $l               .=   div($link,["class" =>"col-lg-4"] );    
   }
   return $l;
 }
@@ -99,11 +97,10 @@ function  valida_text_imagenes($tipo_promocion, $num_images){
     $tipo_promocion =  strtoupper($tipo_promocion); 
     if($num_images == 0){                             
         
-        $msj    ="MUESTRA IMAGENES SOBRE TU ".$tipo_promocion." A POSIBLES CLIENTES"; 
+        $msj    =  "MUESTRA IMAGENES SOBRE TU ".$tipo_promocion." A POSIBLES CLIENTES"; 
         $text   =  heading_enid($msj ,  4 , ["class"  =>  'mensaje_imagenes_visible'] , 1);
-        $notificacion  =  
-        "TU ". $tipo_promocion ." NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES";
-        $text   .= div($notificacion, ["class" => "notificacion_publicar_imagenes"], 1);    
+        $notificacion  =  "TU ". $tipo_promocion ." NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES";
+        $text         .= div($notificacion, ["class" => "notificacion_publicar_imagenes"], 1);    
       return  $text;
     }      
 }

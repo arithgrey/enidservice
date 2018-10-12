@@ -75,13 +75,11 @@ class Home extends CI_Controller{
     }
     /**/
     private function busqueda_recomendacion($q){        
-
         $api =  "valoracion/usuario/format/json/";        
         return $this->principal->api( $api, $q); 
     }    
     /**/
     private function resumen_valoraciones_vendedor($q){     
-
         $api    =  "valoracion/resumen_valoraciones_vendedor/format/json/"; 
         return  $this->principal->api( $api , $q);                  
     }    

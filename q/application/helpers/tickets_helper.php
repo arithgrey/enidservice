@@ -49,11 +49,11 @@ if(!function_exists('invierte_date_time')){
       $ticket          .=   div("Cliente que solicita ".$nombre_usuario."");
     
       $lista_prioridades =["" , "Alta" , "Media" , "Baja"];
-      $lista            =  "";
-      $asunto           = "";
-      $mensaje          = "";
-      $prioridad        = "";
-      $nombre_departamento = "";
+      $lista                =   "";
+      $asunto               =   "";
+      $mensaje              =   "";
+      $prioridad            =   "";
+      $nombre_departamento  =   "";
 
         foreach ($info_ticket as $row) {
               

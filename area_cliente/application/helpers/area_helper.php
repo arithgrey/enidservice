@@ -26,17 +26,13 @@ if(!function_exists('invierte_date_time')){
   }
   function valida_active_tab($nombre_seccion , $estatus){
 
-  if(strlen($estatus) > 0 ){    
-    if($nombre_seccion ==  $estatus){
-      return " active ";   
+    $status = "";
+    if(strlen($estatus) > 0 ){    
+      $status =  ($nombre_seccion ==  $estatus)? " active " : "";
+    }else{
+      $status = ($nombre_seccion == "compras") ? " active " : "";
     }  
-  }else{
-    if($nombre_seccion == "compras"){
-      return " active ";   
-    }
-  } 
-  
-}
-
+    return $status;
+  }
 
 }

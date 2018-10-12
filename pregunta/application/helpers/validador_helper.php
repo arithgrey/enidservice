@@ -4,8 +4,7 @@ if(!function_exists('invierte_date_time')){
   function get_call_to_action_registro($in_session){
   	if ($in_session !=  1) {
   		return 
-  			anchor_enid(
-  			"ACCEDE A TU CUENTA PARA SOLICITAR INFORMACIÓN!", [], 1);
+  			anchor_enid("ACCEDE A TU CUENTA PARA SOLICITAR INFORMACIÓN!", [], 1);
   	}
   }
    

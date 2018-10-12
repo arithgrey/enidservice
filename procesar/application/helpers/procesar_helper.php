@@ -20,18 +20,16 @@ if(!function_exists('invierte_date_time')){
     switch($id_ciclo_facturacion){
       case 1:
         
-         $text = $num_ciclos ." Año";
-          if ($num_ciclos>1) {
-            $text = $num_ciclos ." Años";
-          }      
+        $periodo = ($num_ciclos>1) ?  "Años" : "Año";
+        $text    = $num_ciclos . $periodo;
         break;
       
       case 2:
         
-        $text = $num_ciclos ." Mes";
-        if($num_ciclos>1){
-            $text = $num_ciclos ." Meses";
-        }      
+
+        $periodo = ($num_ciclos>1) ?  "Meses" : "Mes";
+        $text    = $num_ciclos . $periodo;
+
         break;  
       
       case 5:        

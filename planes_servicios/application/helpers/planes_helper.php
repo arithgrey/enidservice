@@ -8,16 +8,16 @@ function valida_action($param , $key ){
         $action = $param[$key];       
         switch ($action) {
             case 'nuevo':
-              $action =1;
+              $action = 1;
               break;
             case 'vender':
-              $action =1;
+              $action = 1;
               break;
             case 'lista':
-              $action =0;
+              $action = 0;
               break;
             case 'editar':
-              $action =2;
+              $action = 2;
               break;
            default:
              break;
