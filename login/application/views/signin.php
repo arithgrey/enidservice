@@ -19,6 +19,13 @@
                     </div>
                 <?=end_row()?>
                 
+                <?=n_row_12()?>                
+                <div class="col-lg-4 col-lg-offset-4">
+                    <?=heading('ÚNETE A ENID SERVICE', '3')?>            
+                    
+                </div>                      
+            <?=end_row()?>       
+
                 <?=n_row_12()?>
                     <div class="col-lg-4 col-lg-offset-4">  
                       <form class="form-miembro-enid-service" id='form-miembro-enid-service'>        
@@ -51,14 +58,10 @@
                                 "required"      => true  ] , 
                             1)?>  
                             <?=place("place_password_afiliado")?>
-                            <?=anchor_enid('Registrar', [] , 1 , 1 )?>  
+                            <?=guardar('Registrar')?>  
                       </form>
                       <?=place("place_registro_miembro")?>
-                    <?=anchor_enid(
-                        "COMPRA Y VENDE DESDES ENID SERVICE", 
-                        [], 
-                        1 
-                    );?>
+                    
   
                     </div>
                 <?=end_row()?>
@@ -102,8 +105,8 @@
                                 ["class" => 'msj-recuperacion'] , 
                                 1
                             )?>                                
-                        <?=anchor_enid("Enviar" , 
-                            ["class"    =>  "btn_nnuevo recupera_password btn a_enid_blue"] ,1,1)?>    
+                        <?=guardar("Enviar" , 
+                            ["class"    =>  "btn_nnuevo recupera_password btn a_enid_blue"])?>    
                             
                     </form>  
                     <?=place("place_recuperacion_pw")?>
@@ -124,12 +127,23 @@
             <?=n_row_12()?>
               <div class="col-lg-4 col-lg-offset-4">
                 <div class="col-lg-6 col-lg-offset-3">
-                    <?=anchor_enid(img(
+
+                    <?=anchor_enid(
+                        img(
                         ["src"  =>  "../img_tema/enid_service_logo.jpg" ]) , 
-                        ["href" =>  "../"] , 1)?>
+                        ["href" =>  "../"] , 
+                    1)?>                    
                 </div>
+                
               </div>
+
             <?=end_row()?>
+
+
+
+
+
+
 
             <?=n_row_12()?>
                 <div class="col-lg-4 col-lg-offset-4">
@@ -178,24 +192,23 @@
             
             <?=n_row_12()?> 
                 <div class="col-lg-4 col-lg-offset-4">
-                    <?=div("place_acceso_sistema")?>
+                    <?=place("place_acceso_sistema top_20 bottom_20" )?>
                     <?=anchor_enid(
                         "¿OLVIDASTE TU CONTRASEÑA?", 
                         [
                             "id"      => "olvide-pass",
-                            "class"   => "recupara-pass"
+                            "class"   => "recupara-pass  olvide_pass "
                         ] , 
                         1 
                     );?>                                
                     <?=anchor_enid( 
-                        "¿NO TIENES UNA CUENTA?" . 
-                        div("REGISTRA UNA AHORA!" , ['class' => 'llamada-a-la-accion '])
+                         div(strong("¿ERES NUEVO?" , ["class" => "black"]) ."  REGISTRA UNA AHORA!" , ['class' => 'llamada-a-la-accion '])
                         , 
-                        ['class' => 'registrar-cuenta']  , 
-                        1
+                        ['class' => 'registrar-cuenta registrar_cuenta']  
                     )?>
+                    
                     <?php if( $action === "registro"){?>                
-                        <?=div("Felicidades ahora puedes comprar y vender desde Enid Service." , 
+                        <?=div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!" , 
                         ["class" => "mensaje_bienvenida"])?>                            
                     <?php } ?> 
                 </div>

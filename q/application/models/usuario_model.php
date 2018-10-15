@@ -131,10 +131,11 @@
         $params_where   = ["idusuario" => $param["id_usuario"]];
         return $this->update( $params , $params_where );        
     }
+    /*
     function set_pass($param){
     
         
-        $new_pass                   =   RandomString();             
+        $new_pass                   =   randomString();             
         $params                     =   ["password" => sha1($new_pass)];    
         $params_where               =   ["email"   => trim($param["mail"]) ];            
         $resopnse["new_pass"]       =   $new_pass;
@@ -142,6 +143,7 @@
         $resopnse["mail"] =  $param["mail"];
         return $resopnse;    
     }
+    */
     /*
       function get_usuario_cobranza($param){
         

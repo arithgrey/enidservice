@@ -27,7 +27,7 @@
   padding: 5px;
   font-weight: bold;
   font-size: 1em;
-  background: #e99587;
+  background: #f00000;
   color: white;
   width: 100%!important;
 }
@@ -49,11 +49,13 @@ form button:hover {
 #flipkart-navbar{
         display: none;
 }
-#olvide-pass{
+#olvide-pass, .place_acceso_sistema{
   color:#000306!important;
 }
 .mensaje_bienvenida{
-  margin-top: 15px;background: #010c26;color: white;padding: 10px;
+  background: #09052f;
+  color: white;
+  padding: 10px;
 }
 .registrar-cuenta{
   font-weight: bold;

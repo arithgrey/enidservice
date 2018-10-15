@@ -109,13 +109,24 @@ class usuario extends REST_Controller{
         $usuario= $this->usuario_model->get_usuario_cliente($param);
         $this->response($usuario);
     }
+    private function set_password_forget($param){
+
+        $new_pass                   =   randomString();                     
+        $params                     =   ["password" => sha1($new_pass)];    
+        $params_where               =   ["email"   => trim($param["mail"]) ];                    
+        $response["status_send"]    =   $this->usuario_model->update($params, $params_where );        
+        $response["new_pass"]       =   $new_pass;                        
+        return $response;
+
+    }
     function pass_PUT(){
 
         $param      =  $this->put();
+        
         switch ($param["type"]) {
             case 1:
-                $response   =  $this->usuario_model->set_pass($param);
-                $this->response($response);        
+                            
+                $this->response($this->set_password_forget($param));
                 break;
             
             case 2:

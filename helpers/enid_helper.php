@@ -150,9 +150,9 @@ if ( ! function_exists('guardar'))
       if($type_button == 1) {
         $existe =  array_key_exists("class", $attributes)?1:0;              
         if ($existe ==  1) {
-          $attributes["class"] = $attributes["class"]." " ." a_enid_blue white completo";
+          $attributes["class"] = $attributes["class"]." " ." a_enid_blue white completo btn_guardar";
         }else{
-          $attributes["class"] =  "a_enid_blue white completo";
+          $attributes["class"] =  "a_enid_blue white completo btn_guardar";
         }    
       }
       $attr =  add_attributes($attributes);
@@ -621,11 +621,13 @@ if ( ! function_exists('get_paramdef'))
 /**/
 if ( ! function_exists('label'))
 {  
-  function label($label_text = '', $id = '', $attributes = array() , $n_row_12 = 0 ){
+  function label($label_text = '',  $attributes = array() , $n_row_12 = 0 ){
+      
+      $attr =  add_attributes($attributes);
       if ($row =0 ) {
-          return form_label($label_text , $id , $attributes );
+        return "<label ".$attr.">".$label_text ."</label>";
       }else{
-          return n_row_12() . form_label($label_text = '', $id = '', $attributes = array()) . end_row();
+        return n_row_12(). "<label ".$attr.">".$label_text ."</label>" . end_row();
       }      
   }
 }
@@ -879,8 +881,9 @@ if ( ! function_exists('valida_seccion_activa')){
     }
   }
 } 
-if ( ! function_exists('RandomString')){
-function RandomString($length=10,$uc=TRUE,$n=TRUE,$sc=FALSE){    
+if ( ! function_exists('randomString')){
+function randomString($length=10,$uc=TRUE,$n=TRUE,$sc=FALSE){    
+  
         $source = 'abcdefghijklmnopqrstuvwxyz';
         if($uc==1) $source .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         if($n==1) $source .= '1234567890';

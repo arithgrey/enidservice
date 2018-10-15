@@ -29,22 +29,23 @@
       $estrellas_valoraciones ="";
       $restantes = ""; 
       $num_restantes =1;
-      $size="2.4em";
-      if($sm ==1 ){
-            $size="1em";
-      }
-      for($x=1; $x <= $calificacion; $x++){ 
-          
-          $extra ="";
-          $estrellas_valoraciones .="<label class='estrella' $extra >★</label>";
-          $num_restantes ++;
-      }
+      $size="2em";
       
+      for($x=1; $x <= $calificacion; $x++){         
+        $extra = "";          
+        $estrellas_valoraciones .=  label("★" ,["class"=>'estrella']);
+        $num_restantes ++;
+      }      
       for($num_restantes; $num_restantes <= 5; $num_restantes++ ){ 
-          $extra ="style='font-size: ".$size.";
+          $extra ="font-size: 2em;
                     -webkit-text-fill-color: white;
-                    -webkit-text-stroke: 0.5px rgb(0, 74, 252);' ";
-          $restantes  .="<label class='estrella' $extra >★</label>";
+                    -webkit-text-stroke: 0.5px rgb(0, 74, 252);";
+          
+          $restantes  .=  label("★" , 
+                          [
+                            "class" =>'estrella'  ,
+                            "style" => $extra
+           ]);
           
       }
       $estrellas =  $estrellas_valoraciones.$restantes;

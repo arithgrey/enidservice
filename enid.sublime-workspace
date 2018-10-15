@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"text",
+				"text-transform\tproperty"
+			],
+			[
+				"format",
+				"format_error"
+			],
+			[
+				"la",
+				"lada2"
+			],
+			[
+				"att",
+				"attr"
+			],
+			[
+				"ro",
+				"row_12"
+			],
+			[
+				"forma",
+				"forma_pago"
+			],
+			[
+				"end",
+				"end_row"
+			],
+			[
 				"e",
 				"echo\techo \"…\""
 			],
@@ -486,57 +514,11 @@
 			[
 				"noti",
 				"notifica_ticket_soporte"
-			],
-			[
-				"TICKE",
-				"ticket"
-			],
-			[
-				"ticke",
-				"tickets"
-			],
-			[
-				"servic",
-				"serviciosmodel"
-			],
-			[
-				"va",
-				"valoraciones"
-			],
-			[
-				"prin",
-				"print_r"
-			],
-			[
-				"val",
-				"valoracion_model"
-			],
-			[
-				"cla",
-				"clasificaciones"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "helpers/enid_helper.php",
-			"settings":
-			{
-				"buffer_size": 26687,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "producto/application/views/compra.php",
-			"settings":
-			{
-				"buffer_size": 1094,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -595,73 +577,97 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/producto",
-		"/var/www/html/inicio/producto/application",
-		"/var/www/html/inicio/producto/application/views",
-		"/var/www/html/inicio/recomendacion",
-		"/var/www/html/inicio/recomendacion/application",
-		"/var/www/html/inicio/recomendacion/application/views",
-		"/var/www/html/inicio/reporte_enid",
-		"/var/www/html/inicio/reporte_enid/application",
-		"/var/www/html/inicio/reporte_enid/application/views",
-		"/var/www/html/inicio/reporte_enid/application/views/secciones",
-		"/var/www/html/inicio/search",
-		"/var/www/html/inicio/search/application",
-		"/var/www/html/inicio/search/application/views",
-		"/var/www/html/inicio/sobre_enidservice",
-		"/var/www/html/inicio/sobre_enidservice/application",
-		"/var/www/html/inicio/sobre_enidservice/application/views",
-		"/var/www/html/inicio/tareas",
-		"/var/www/html/inicio/tareas/application",
-		"/var/www/html/inicio/tareas/application/views",
-		"/var/www/html/inicio/tareas/application/views/secciones",
-		"/var/www/html/inicio/tareas/application/views/secciones/tareas_sociales",
-		"/var/www/html/inicio/tareas/application/views/secciones_2",
-		"/var/www/html/inicio/tareas/application/views/secciones_3",
-		"/var/www/html/inicio/tareas_complejas",
-		"/var/www/html/inicio/tareas_complejas/application",
-		"/var/www/html/inicio/tareas_complejas/application/views",
-		"/var/www/html/inicio/tareas_complejas/application/views/secciones_2",
-		"/var/www/html/inicio/terminos-y-condiciones",
-		"/var/www/html/inicio/terminos-y-condiciones/application",
-		"/var/www/html/inicio/terminos-y-condiciones/application/views",
-		"/var/www/html/inicio/terminos-y-condiciones/application/views/secciones",
-		"/var/www/html/inicio/unete_a_nuestro_equipo",
-		"/var/www/html/inicio/unete_a_nuestro_equipo/application",
-		"/var/www/html/inicio/unete_a_nuestro_equipo/application/views",
-		"/var/www/html/inicio/unete_a_nuestro_equipo/application/views/secciones_2",
-		"/var/www/html/inicio/usuarios_enid_service",
-		"/var/www/html/inicio/usuarios_enid_service/application",
-		"/var/www/html/inicio/usuarios_enid_service/application/views",
-		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2",
-		"/var/www/html/inicio/valoracion",
-		"/var/www/html/inicio/valoracion/application",
-		"/var/www/html/inicio/valoracion/application/views",
 		"/var/www/html/inicio/view_tema",
 		"/var/www/html/inicio/view_tema/formularios"
 	],
 	"file_history":
 	[
-		"/var/www/html/inicio/producto/application/views/home.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
+		"/var/www/html/inicio/administracion_cuenta/application/controllers/api/cambiopasswordcontrolador.php_",
+		"/var/www/html/inicio/msj/application/controllers/api/mailrest.php",
+		"/var/www/html/inicio/q/application/models/usuario_model.php",
+		"/var/www/html/inicio/tag_/application/helpers/tag_helper.php",
+		"/var/www/html/inicio/tareas/application/helpers/generalhelp_helper.php_",
 		"/var/www/html/inicio/helpers/enid_helper.php",
+		"/var/www/html/inicio/css_tema/template/main.css",
+		"/var/www/html/inicio/css_tema/template/login.css",
+		"/var/www/html/inicio/login/application/controllers/startsession.php",
+		"/var/www/html/inicio/login/application/views/signin.php",
+		"/var/www/html/inicio/login/application/models/enidmodel.php_",
+		"/var/www/html/inicio/msj/application/models/enidmodel.php_",
+		"/var/www/html/inicio/js_tema/login/ini.js",
+		"/var/www/html/inicio/view_tema/menu_session_movil.php",
+		"/var/www/html/inicio/login/application/controllers/api/sess.php",
+		"/var/www/html/inicio/js_tema/js/main.js",
+		"/var/www/html/inicio/faq/application/views/secciones_2/categorias.php",
+		"/var/www/html/footer_template.php",
+		"/var/www/html/header_meta_enid.php",
+		"/var/www/html/inicio/tareas/application/views/secciones/tareas_sociales/email.php",
+		"/var/www/html/inicio/view_tema/inputs_fecha_busqueda.php",
+		"/var/www/html/inicio/view_tema/header_template.php",
+		"/var/www/html/inicio/search/application/views/sin_resultados_tienda.php",
+		"/var/www/html/inicio/planes_servicios/application/views/secciones/form_servicios.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/info_categorias_servicio.php",
+		"/var/www/html/inicio/q/application/views/tickets/principal_desarollo.php",
+		"/var/www/html/inicio/js_tema/administracion_cuenta/principal.js",
+		"/var/www/html/inicio/movimientos/application/views/agregar_saldo.php",
+		"/var/www/html/inicio/movimientos/application/views/secciones/solicitar_a_un_amigo.php",
+		"/var/www/html/inicio/contact/application/views/home.php",
+		"/var/www/html/inicio/movimientos/application/views/solicitar_a_un_amigo.php",
+		"/var/www/html/inicio/q/application/controllers/api/forma_pago.php",
+		"/var/www/html/inicio/view_tema/social_enid.php",
+		"/var/www/html/inicio/q/application/views/cobranza/pago_oxxo.php",
+		"/var/www/html/inicio/notificar/application/views/secciones_2/paginas_web.php",
+		"/var/www/html/inicio/q/application/controllers/api/cuentas.php",
+		"/var/www/html/inicio/procesar/application/views/secciones_2/form_afiliados.php",
+		"/var/www/html/inicio/q/application/views/cobranza/resumen_no_aplica.php",
+		"/var/www/html/inicio/notificar/application/controllers/home.php",
+		"/var/www/html/inicio/search/application/helpers/search_helper.php",
+		"/var/www/html/inicio/search/application/views/home.php",
+		"/var/www/html/inicio/q/application/controllers/api/notificacion_pago.php",
+		"/var/www/html/inicio/q/application/views/secciones/form_tickets_proyectos_persona.php_",
+		"/var/www/html/inicio/q/application/views/tickets/form_respuesta.php",
 		"/var/www/html/inicio/view_tema/footer_template.php",
+		"/var/www/html/inicio/producto/application/views/home.php",
+		"/var/www/html/inicio/producto/application/views/social.php",
+		"/var/www/html/inicio/search/application/controllers/home.php",
+		"/var/www/html/inicio/js_tema/summernote.js",
+		"/var/www/html/inicio/js_tema/desarrollo/summernote.js",
+		"/var/www/html/inicio/js_tema/faq/summernote.js_",
+		"/var/www/html/inicio/js_tema/js/summernote.js",
+		"/var/www/html/inicio/js_tema/movimientos/summernote.js",
+		"/var/www/html/inicio/js_tema/planes_servicios/summernote.js",
+		"/var/www/html/inicio/js_tema/usuarios_enid/summernote.js",
+		"/var/www/html/inicio/pagos_/application/views/afiliado_/form_forma_pago.php_",
+		"/var/www/html/inicio/planes_servicios/application/views/secciones/servicios.php",
+		"/var/www/html/inicio/q/application/views/secciones/form_tickets_proyectos.php",
+		"/var/www/html/inicio/administracion_cuenta/application/views/micuenta/cuenta.php",
+		"/var/www/html/inicio/administracion_cuenta/application/views/micuenta/info_usuario.php",
+		"/var/www/html/inicio/contact/application/views/secciones/solicita_una_llamada.php",
+		"/var/www/html/inicio/css_tema/template/bootstrap.min.css",
+		"/var/www/html/inicio/debug/debug.log",
+		"/var/www/html/inicio/faq/application/faq/summernote.js_",
+		"/var/www/html/inicio/soporte_/application/views/reporte/f_errores.php_",
+		"/var/www/html/inicio/movimientos/application/views/menu.php",
+		"/var/www/html/inicio/planes_servicios/application/views/secciones/categorias_web.php",
+		"/var/www/html/inicio/area_cliente/application/views/home.php",
+		"/var/www/html/inicio/q/application/helpers/valoracion_helper.php",
+		"/var/www/html/inicio/css_tema/template/valoracion.css",
+		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
+		"/var/www/html/inicio/procesar/application/controllers/home.php",
+		"/var/www/html/inicio/producto/application/views/compra.php",
 		"/var/www/html/inicio/css_tema/template/producto_principal.css",
 		"/var/www/html/inicio/procesar/application/views/secciones_2/paginas_web.php",
-		"/var/www/html/inicio/producto/application/views/compra.php",
 		"/var/www/html/inicio/view_tema/header_meta_enid.php",
-		"/var/www/html/inicio/view_tema/header_template.php",
-		"/var/www/html/inicio/view_tema/inputs_fecha_busqueda.php",
 		"/var/www/html/inicio/view_tema/izquierdo.php",
 		"/var/www/html/inicio/view_tema/metodos_envio.php",
 		"/var/www/html/inicio/view_tema/metodos_pago_mobile.php",
 		"/var/www/html/inicio/view_tema/producto_no_encontrado.php",
-		"/var/www/html/inicio/view_tema/social_enid.php",
 		"/var/www/html/inicio/tareas/application/views/secciones_2/tab_registrar_mensaje.php",
 		"/var/www/html/inicio/tareas_complejas/application/views/home.php",
 		"/var/www/html/inicio/tareas/application/views/secciones_2/principal_redes.php",
 		"/var/www/html/inicio/tareas_complejas/application/views/secciones_2/beneficios.php",
 		"/var/www/html/inicio/unete_a_nuestro_equipo/application/views/home.php",
-		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/info_categorias_servicio.php",
 		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/info_tallas.php",
 		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/info_usuario_completa.php",
 		"/var/www/html/inicio/view_tema/formularios/busqueda_tickets.php",
@@ -678,30 +684,23 @@
 		"/var/www/html/inicio/tareas/application/views/secciones_2/menu.php",
 		"/var/www/html/inicio/tareas/application/views/secciones_2/principal_correo_electronico.php",
 		"/var/www/html/inicio/tareas/application/views/secciones_2/principal_productividad.php",
-		"/var/www/html/inicio/search/application/views/sin_resultados_tienda.php",
 		"/var/www/html/inicio/search/application/views/sin_resultados.php",
-		"/var/www/html/inicio/notificar/application/views/secciones_2/paginas_web.php",
 		"/var/www/html/inicio/recomendacion/application/views/home.php",
 		"/var/www/html/inicio/reporte_enid/application/views/empresas_enid.php",
 		"/var/www/html/inicio/reporte_enid/application/views/secciones/atencion_cliente.php",
-		"/var/www/html/inicio/search/application/views/home.php",
 		"/var/www/html/inicio/sobre_enidservice/application/views/home.php",
 		"/var/www/html/inicio/tareas/application/views/secciones/inputs_busqueda.php",
 		"/var/www/html/inicio/orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php",
 		"/var/www/html/inicio/notificar/application/views/secciones_2/contenedor_2.php",
 		"/var/www/html/inicio/movimientos/application/views/metodos_transferencia.php",
 		"/var/www/html/inicio/movimientos/application/views/pagar_con_saldo_enid.php",
-		"/var/www/html/inicio/movimientos/application/views/solicitar_a_un_amigo.php",
 		"/var/www/html/inicio/movimientos/application/views/sub_menu.php",
 		"/var/www/html/inicio/notificar/application/views/home.php",
 		"/var/www/html/inicio/orden_pago_oxxo/application/views/secciones_2/contenedor_2.php",
 		"/var/www/html/inicio/movimientos/application/views/cuentas_asociadas.php",
-		"/var/www/html/inicio/movimientos/application/views/menu.php",
 		"/var/www/html/inicio/movimientos/application/views/metodos_disponibles.php",
 		"/var/www/html/inicio/lista_deseos/application/views/home.php",
 		"/var/www/html/inicio/lista_deseos/application/views/home_preferencias.php",
-		"/var/www/html/inicio/login/application/views/signin.php",
-		"/var/www/html/inicio/movimientos/application/views/agregar_saldo.php",
 		"/var/www/html/inicio/movimientos/application/views/agregar_saldo_desde_oxxo.php",
 		"/var/www/html/inicio/forma_pago/application/views/home.php",
 		"/var/www/html/inicio/imgs/application/views/empresa/galeria_imgs.php",
@@ -710,66 +709,7 @@
 		"/var/www/html/inicio/faq/application/views/secciones_2/contenedor_2.php",
 		"/var/www/html/inicio/faq/application/views/secciones_2/faqs_categorias.php",
 		"/var/www/html/inicio/faq/application/views/secciones_2/form.php",
-		"/var/www/html/inicio/system/helpers/form_helper.php",
-		"/var/www/html/inicio/tareas/application/views/home.php",
-		"/var/www/html/inicio/q/application/views/servicio/detalle.php",
-		"/var/www/html/inicio/q/application/views/imgs/servicio_producto_servicio.php",
-		"/var/www/html/inicio/q/application/views/valoraciones/form_servicio.php",
-		"/var/www/html/inicio/tareas_complejas/application/views/secciones_2/resumen.php",
-		"/var/www/html/inicio/terminos-y-condiciones/application/views/home.php",
-		"/var/www/html/inicio/terminos-y-condiciones/application/views/secciones/menu.php",
-		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/perfiles_permisos_seccion.php",
-		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/afiliados.php",
-		"/var/www/html/inicio/usuarios_enid_service/application/views/secciones_2/form_agregar_recurso.php",
-		"/var/www/html/inicio/valoracion/application/controllers/home.php",
-		"/var/www/html/inicio/valoracion/application/views/home.php",
-		"/var/www/html/inicio/system/helpers/html_helper.php",
-		"/var/www/html/inicio/q/application/views/valoraciones/preguntas.php",
-		"/var/www/html/inicio/tag/application/helpers/q_helper.php",
-		"/var/www/html/inicio/tag/application/helpers/tag_helper.php",
-		"/var/www/html/inicio/tareas/application/views/secciones/mail/descargas.php",
-		"/var/www/html/inicio/tareas/application/views/secciones/tareas_sociales/email.php",
-		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
-		"/var/www/html/inicio/q/application/controllers/api/productividad.php",
-		"/var/www/html/footer_template.php",
-		"/var/www/html/header_meta_enid.php",
-		"/var/www/html/inicio/q/application/helpers/pregunta_helper.php",
-		"/var/www/html/inicio/q/application/helpers/valoracion_helper.php",
-		"/var/www/html/inicio/q/application/views/mensaje/mensaje_promocion.php",
-		"/var/www/html/inicio/q/application/views/afiliados_/productividad.php",
-		"/var/www/html/inicio/q/application/views/tickets/principal_desarollo.php",
-		"/var/www/html/inicio/q/application/views/tickets/principal_desarollo_persona.php",
-		"/var/www/html/inicio/movimientos/application/views/secciones/form_persona.php",
-		"/var/www/html/inicio/movimientos/application/views/secciones/posibles_clientes.php",
-		"/var/www/html/inicio/msj/application/views/registro/mensaje_inicial_afiliado.php",
-		"/var/www/html/inicio/pagos/application/views/ventas/info_pagos.php",
-		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
-		"/var/www/html/inicio/q/application/controllers/api/desarrollo.php",
-		"/var/www/html/inicio/q/application/helpers/q_helper.php",
-		"/var/www/html/inicio/q/application/views/afiliados_/lista.php",
-		"/var/www/html/inicio/librerias/sessionclass.php",
-		"/var/www/html/inicio/q/application/views/cobranza/pago_oxxo.php",
-		"/var/www/html/inicio/q/application/views/cotizador/principal.php",
-		"/var/www/html/inicio/q/application/views/cotizador/social_media.php",
-		"/var/www/html/inicio/q/application/views/cobranza/resumen_no_aplica.php",
-		"/var/www/html/inicio/q/application/views/desarrollo/global_calidad.php",
-		"/var/www/html/inicio/q/application/views/desarrollo/global.php",
-		"/var/www/html/inicio/q/application/views/desarrollo/comparativa.php",
-		"/var/www/html/inicio/q/application/views/enid/uso_sistema.php",
-		"/var/www/html/inicio/q/application/views/equipo/tabla_recursos.php",
-		"/var/www/html/inicio/q/application/views/equipo/miembros.php",
-		"/var/www/html/inicio/q/application/views/imgs/user_perfiles.php",
-		"/var/www/html/inicio/q/application/views/imgs/usuario.php",
-		"/var/www/html/inicio/q/application/views/imgs/user.php",
-		"/var/www/html/inicio/q/application/views/imgs/faq.php",
-		"/var/www/html/inicio/q/application/views/notificaciones/principal.php",
-		"/var/www/html/inicio/q/application/views/productividad/preguntas_frecuentes.php",
-		"/var/www/html/inicio/q/application/views/productividad/usuario.php",
-		"/var/www/html/inicio/q/application/views/privacidad/conceptos.php",
-		"/var/www/html/inicio/css_tema/template/main.css",
-		"/var/www/html/inicio/q/application/views/producto/basico.php",
-		"/var/www/html/inicio/q/application/views/producto/lista_deseos.php",
-		"/var/www/html/inicio/q/application/views/producto/principal.php"
+		"/var/www/html/inicio/system/helpers/form_helper.php"
 	],
 	"find":
 	{
@@ -780,6 +720,10 @@
 		"height": 116.0,
 		"where_history":
 		[
+			"",
+			"*.php",
+			"*.css",
+			"*.php",
 			"",
 			"*.css",
 			"*.php",
@@ -879,134 +823,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"ORDENAR COMPRA",
-			"$button",
-			"button",
-			"ordenar compra",
-			"agregar_a_lista",
-			"a_enid_black",
-			"agregar_a_lista",
-			"AGREGAR A TU",
-			"ENTREGAS PUNTUALES",
-			"SOLICITAR INFORMACIÓN",
-			"=>",
-			"span",
-			"<?=input_hidden",
-			"))?>",
-			"div(\"\" , [\"class\"=>",
-			"=>",
+			"update",
+			"usuario/pass",
+			"pass/",
+			"set_password_forget",
+			"randomString",
+			"RandomString",
+			"set_pass",
+			"RECUPERA TUS DATOS DE ACCESO",
+			"RECUPERA",
+			"RECUPERA TUS DATOS DE ACCESO",
+			"CORREO",
+			"RECUPERA TUS DATOS DE ACCESO",
+			"CORREO ELEC",
+			"REGISTRA CORREO",
+			"\n¿OLVIDASTE",
+			"\n¿OLVIDASTE TU CONTRASEÑA?",
+			"INICIAR SESSION",
+			"INICIAR SESSION ",
+			"iniciar_sesion_lateral",
+			"            \n",
+			"olvidad",
+			"RECUPERA TUS DATOS DE ACCESO",
+			"¿OLVIDASTE TU CONTRASEÑA?",
+			"COMPRA Y VENDE",
+			"COMPRA Y VENDE EN ENID SERVICE",
+			"COMPRA Y",
+			"\nCOMPRA Y VENDE DESDES ENID SERVICE",
+			"btn_guardar",
+			"TU CORREO ELECTRONICO",
+			"mensaje_bienvenida",
+			"olvide_pass",
+			"olvide_pass\"",
+			"registrar-cuenta",
+			"olvide-pass",
+			"valida_seccion_inicial",
+			"registro",
+			"Registrar",
+			"muestra_seccion_acceso",
+			"response_inicio_session",
+			"inicio_session",
+			"valida_form_session",
+			"form_sesion_enid",
+			"start/",
+			"start",
+			"Error en tus datos de acceso",
+			"valida",
+			"correo no valido",
+			"recupara-pass",
+			"olvide-pass",
+			"carga_mail",
+			"olvide-pass",
+			"alerta_enid",
+			"alert_enid",
+			"bottom_10",
+			"format_error",
+			"erro",
+			"Contraseña muy corta!",
+			"\nContraseña",
+			"\nContraseña muy corta!",
+			"\nContraseña muy corta! ",
+			"error_login",
+			"error_",
+			"olvide-pass",
+			"place_acceso_sistema",
+			"get_btn_nuevo_mensaje",
+			"diiv",
+			"mon",
+			"SOLICITA SALDO A UN AMIGO",
+			"]",
+			"tareas_pendientes",
 			"=",
-			"\t\t\t\t\t\t\t  \t\t",
-			"<",
+			"num_tareas_pendientes",
+			"actualiza_telefono_usuario_negocio",
+			"actualiza_telefono_usuario_negocio(e",
+			"actualiza_telefono_usuario_negocio",
+			"/api/usuario/telefono_negocio/format/json",
+			"¿QUÉ DESEAS ANUNCIAR?",
+			"AÚN NO HAS ANUNCIADO",
+			"flipkart-navbar-button",
+			"a_enid_blue",
+			"departa",
 			"<?=",
-			"=",
-			"\t\t\t\t\t ",
+			"forma_pago",
+			"forma_pa",
+			"url_cancelacion",
+			"margin-top",
+			"top_",
+			"Aceptamos pagos en tiendas de autoservici",
+			"O CREA UNA CUENTA PARA RECIBIR ",
+			"])?>",
+			"anchor_enid",
+			"=>",
+			"div",
+			"ul",
+			"Eje Central Lázaro Cárdenas 38, Centro Histórico C.P. 06000 CDMX",
+			"get_forma_pago",
+			"forma_pago",
+			"forma_pago_GET",
+			"forma_pago",
+			"$forma_pago",
+			"id_forma_pago",
+			"echo \"<hr>\";",
 			"<",
-			"=>",
-			"=",
-			"=>",
-			"=",
-			"=>",
-			"=",
-			"=>",
-			"=",
-			"title=",
-			"=>",
-			"=",
-			"<",
-			"font-size: 2em;",
-			"style=\"font-size: .8em!important;\"",
-			"=>",
-			"=",
-			"=>",
-			"=",
-			"=>",
-			"=",
-			"<",
-			"=>",
-			"=",
-			"                        ",
-			"=>",
-			"=",
-			"=>",
-			"=",
-			"                         ",
-			"                        ",
-			"<",
-			"<?=",
-			"<",
-			"=>",
-			"<",
-			"\t\t\t",
-			"\t\t\t\t\t",
-			"<",
-			"value=",
-			"name=",
-			"=",
-			"value",
-			"name=",
-			">",
-			"type=\"hidden\"",
-			"=",
-			"<",
-			"<strong>",
-			"</strong>",
-			"<strong>",
-			"<div>",
-			"</span>",
-			" <span >",
-			"style=\"font-size: .8em;margin-top: 7px;\"",
-			"<",
-			"=",
-			"=>",
-			"=",
-			" =>",
-			"=",
-			"=>",
-			"=",
-			"=>",
-			"=",
-			"=>",
-			"=",
-			" =>",
-			"=",
-			"=>",
-			"=",
-			"=>",
-			"<",
-			"=>",
-			"=",
-			"\t\t\t\t\t\t\t\t\t\t",
-			"<",
-			"=>",
-			"=",
-			"<",
-			"center",
-			"=>",
-			" =>",
-			"=",
-			"=>",
-			"=",
-			"<?=",
-			"=>",
-			"=",
-			"<?=",
-			"p",
-			"<",
-			"guardar",
-			"input",
-			"form_submit",
-			"icon",
-			"<",
-			"function ul(",
-			"                    ",
-			"                   ",
-			"                  ",
-			"                 ",
-			"                ",
-			"</li>",
-			"<ul>",
-			"<li>"
+			"CATEGORIAS DESTACAGAS",
+			"DESTACADAS",
+			"CATEGORIAS",
+			"CATEGORIAS DESTACADAS",
+			"Categorias destacadas",
+			"Categorias ",
+			"col-md",
+			"CATEGORIAS DESTACAGAS",
+			"])?>",
+			"anchor_enid",
+			"ir a la tienda del vendedor",
+			"respuesta_ok",
+			"num_respuesta",
+			"btn_es_util",
+			"¿Te ha resultado útil?",
+			"SI",
+			"SI[",
+			"valoraciones",
+			"VER COMENTARIOS",
+			", 1",
+			"AGREGAR A TU LISTA",
+			"Saldo disponible",
+			"[\"name\"   =>",
+			"is_servicio",
+			"ORDENAR COMPRA"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1014,6 +958,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"randomString",
+			"col-lg",
 			"get_titulo_modalidad",
 			"get_campo",
 			"$response = [];",
@@ -1034,69 +980,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "helpers/enid_helper.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 26687,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3781,
-								3785
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2695.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "producto/application/views/compra.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1094,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1042,
-								1042
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 186.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1153,8 +1038,80 @@
 		"selected_items":
 		[
 			[
+				"usua",
+				"q/application/models/usuario_model.php"
+			],
+			[
+				"usuario_mo",
+				"q/application/models/usuario_model.php"
+			],
+			[
+				"/mailrest",
+				"msj/application/controllers/api/mailrest.php"
+			],
+			[
+				"ini.",
+				"js_tema/login/ini.js"
+			],
+			[
+				"main",
+				"css_tema/template/main.css"
+			],
+			[
 				"enid",
 				"helpers/enid_helper.php"
+			],
+			[
+				"main.js",
+				"js_tema/js/main.js"
+			],
+			[
+				"mian",
+				"css_tema/template/main.css"
+			],
+			[
+				"application/views/secciones_2/info_categorias_servicio.php",
+				"usuarios_enid_service/application/views/secciones_2/info_categorias_servicio.php"
+			],
+			[
+				"tickets/principal_desarollo.php",
+				"q/application/views/tickets/principal_desarollo.php"
+			],
+			[
+				"views/tickets/principal_desarollo.php ",
+				"q/application/views/tickets/principal_desarollo.php"
+			],
+			[
+				"ini",
+				"js_tema/login/ini.js"
+			],
+			[
+				"cobranza/pago_oxxo",
+				"q/application/views/cobranza/pago_oxxo.php"
+			],
+			[
+				"views/cobranza/resumen_no_aplica.php",
+				"q/application/views/cobranza/resumen_no_aplica.php"
+			],
+			[
+				"view_tema/social_enid",
+				"view_tema/social_enid.php"
+			],
+			[
+				"cuentas.php",
+				"q/application/controllers/api/cuentas.php"
+			],
+			[
+				"social.php",
+				"producto/application/views/social.php"
+			],
+			[
+				"/application/views/secciones/categorias_web.php",
+				"planes_servicios/application/views/secciones/categorias_web.php"
+			],
+			[
+				"secciones_2/form_afiliados.php",
+				"procesar/application/views/secciones_2/form_afiliados.php"
 			],
 			[
 				"notificar/application/views/secciones_2/paginas_web.php",
@@ -1191,10 +1148,6 @@
 			[
 				"eni",
 				"helpers/enid_helper.php"
-			],
-			[
-				"main",
-				"css_tema/template/main.css"
 			],
 			[
 				"respon",
@@ -1417,10 +1370,6 @@
 				"q/application/controllers/api/servicio.php"
 			],
 			[
-				"main.js",
-				"js_tema/js/main.js"
-			],
-			[
 				"recibo_",
 				"q/application/helpers/recibo_helper.php"
 			],
@@ -1487,10 +1436,6 @@
 			[
 				"tick",
 				"inicio/portafolio/application/models/ticketsmodel.php_"
-			],
-			[
-				"ini",
-				"js_tema/login/ini.js"
 			],
 			[
 				"login",
@@ -1603,66 +1548,6 @@
 			[
 				"usuariomode",
 				"q/application/models/usuario_model.php"
-			],
-			[
-				"pregunta.php",
-				"q/application/controllers/api/pregunta.php"
-			],
-			[
-				"prospecto",
-				"q/application/models/prospecto_model.php"
-			],
-			[
-				"tarea",
-				"q/application/models/tareasmodel.php"
-			],
-			[
-				"recibo_m",
-				"q/application/models/recibo_model.php"
-			],
-			[
-				"proyecto_per",
-				"q/application/controllers/api/proyecto_persona_forma_pago_direccion.php"
-			],
-			[
-				"recurso.php",
-				"q/application/controllers/api/recurso.php"
-			],
-			[
-				"stat",
-				"q/application/controllers/api/status_enid_service.php"
-			],
-			[
-				"tipo_ne",
-				"q/application/controllers/api/tipo_negocio.php"
-			],
-			[
-				"usuario_cl",
-				"q/application/controllers/api/usuario_clasificacion.php"
-			],
-			[
-				"usuario_direccion_mode",
-				"q/application/models/usuario_direccion_model.php"
-			],
-			[
-				"usuario_di",
-				"q/application/controllers/api/usuario_direccion.php"
-			],
-			[
-				"servicio.ph",
-				"q/application/controllers/api/servicio.php"
-			],
-			[
-				"imagen_usua",
-				"q/application/controllers/api/imagen_usuario.php"
-			],
-			[
-				"usuario_c",
-				"q/application/controllers/api/usuario_clasificacion.php"
-			],
-			[
-				"usuario_cla",
-				"q/application/controllers/api/usuario_clasificacion.php"
 			]
 		],
 		"width": 0.0

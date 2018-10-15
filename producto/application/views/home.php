@@ -196,48 +196,33 @@
                   <div class="card box-shadow">
                     <?=div(heading_enid(substr(strtoupper($nombre_servicio), 0 , 70) , 1 )  ,  
                       ["class"=>"card-header"]
-                    )?>
-                      
-                  <div class="card-body">
-                    <?=heading_enid(
+                    )?>                    
+                  <?=heading_enid(
                       valida_text_servicio(
                         $flag_servicio, 
                         $precio , 
                         $id_ciclo_facturacion ) ,
                         3 , 
                         ["class" => 'card-title pricing-card-title' ]
-                    )?>
-                        
-                        <ul class="list-unstyled mt-3 mb-4">                          
-                          <li>
-                            <?=anchor_enid("Pedir más información" , 
-                              ["href"=>"../pregunta/?tag=<?=$id_servicio?>&disponible=1" ],
-                              1,
-                              1
-                            )?>
-                          </li>
-                          <li>
-                            <?=$this->load->view("form_compra" , $info_compra)?>
-                          </li>                            
-                        </ul>
-
-                        
-                      </div>
-                    </div>
+                  )?>
+                  <?=anchor_enid(
+                      "Pedir más información" , 
+                      [ "href"=>"../pregunta/?tag=".$id_servicio."?>&disponible=1" 
+                      ]
+                  )?>
+                  <?=$this->load->view("form_compra" , $info_compra)?>
+                  
+                </div>
                 <?php endif; ?>  
               </div>          
-              <div class="col-lg-12">
-                <div class="contenedor_sobre_el_producto">
-                    <?=get_descripcion_servicio($descripcion , $flag_servicio)?>
-                    <?=valida_url_youtube($url_vide_youtube)?>
-                </div>        
+              <div class="col-lg-12">              
+                <?=get_descripcion_servicio($descripcion , $flag_servicio)?>
+                <?=valida_url_youtube($url_vide_youtube)?>                
               </div>         
           <?=place("separador")?>
           <?=place("place_valoraciones")?>
-          <?=place("place_tambien_podria_interezar")?>
-          
-    </div>
-    
+          <?=place("place_tambien_podria_interezar")?>        
+    </div>    
 <?=end_row()?>
 
 <?=input_hidden(["class"=>"qservicio", "value"=> $nombre_servicio])?>

@@ -124,7 +124,7 @@ function valida_num_form(input , place_msj ){
 }
 /**/
 function format_error( place_msj, msj){
-	llenaelementoHTML( place_msj ,  "<div class='row'><div class='col-lg-12 alerta_enid'>" + msj + "</div></div>");
+	llenaelementoHTML( place_msj ,  "<div class='col-lg-12 alerta_enid padding_5 top_10 bottom_10'>" + msj + "</div>");
 }
 /**/
 function valida_url_form( place , input  ,  msj ){
@@ -581,7 +581,7 @@ function display_elements(	array , tipo  ){
 	for(var  x in array ){
 		/*Cuando se muestra*/
 		if (tipo ==  1) {
-			$(array[x]).css("display" ,  "flex");
+			$(array[x]).css("display" ,  "block");
 		}else{
 		/*Cuando se ocualtan*/
 			$(array[x]).css("display" ,  "none");

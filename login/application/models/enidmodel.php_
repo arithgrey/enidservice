@@ -134,7 +134,7 @@
     function set_pass($param){
 
         $mail =  trim($param["mail"]); 
-        $new_pass =  RandomString(); 
+        $new_pass =  randomString(); 
         $query_update =  "UPDATE usuario SET password = '".sha1($new_pass)."' WHERE email = '".$mail."' LIMIT 1 ";
         
         $status_send= $this->db->query($query_update); 
@@ -155,7 +155,7 @@
       $data["mail_prospecto"] =1; 
       if ($num_mail == 0 ){
           $data["mail_prospecto"] =0;
-          $new_pass =  RandomString();
+          $new_pass =  randomString();
           $data["new_pass"] =  $new_pass;
 
           $query_update =  "UPDATE usuario SET password_prospecto = 1 ,  password = '".sha1($new_pass)."'  WHERE email =  '".$param["mail_user"]."' LIMIT 1   ";

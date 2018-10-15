@@ -518,12 +518,12 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
                 padding: 2px;
                 color: white !important;
             }.alerta_enid{
-                background: #ba6d78;
-                width: 25%;
-                padding: 2px;
-                color: white;   
-                font-size: .9em;
-                border-radius: 1px;
+                background: #fff;
+				color: #000106;
+				border-style: solid;
+				border-color: #06257e;
+				font-weight: bold;
+				border-width: 1px;
             }
             .white{
                 color: white !important;
@@ -596,11 +596,14 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
 }
 .custom-select{display:inline-block;max-width:100%;height:calc(2.25rem + 2px);padding:.375rem 1.75rem .375rem .75rem;line-height:1.25;color:#464a4c;vertical-align:middle;background:#fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .75rem center;-webkit-background-size:8px 10px;background-size:8px 10px;border:1px solid rgba(0,0,0,.15);border-radius:.25rem;-moz-appearance:none;-webkit-appearance:none}
 .a_enid_blue{
-    background: #015ec8!important;
+    //background: #015ec8!important;
+    //background: #000205;
+    background: #0e2f53!important;
     padding: 10px!important;
     color: white!important;
     font-weight: bold!important;
     width: 100%!important;
+    border: 0!important;
 }
 .a_enid_black{
 
@@ -609,6 +612,9 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
     color: white!important;
     font-weight: bold!important;   
     width: 100%!important;
+}
+.a_enid_black:hover{
+	color: white!important;
 }
 .a_enid_black2{
 	background: #0a1e35 !important;
@@ -1048,6 +1054,9 @@ table{
 	color: white!important;
 	padding: 10px;
 }
+.padding_5{
+	padding: 5px;
+}	
 .padding_1, .padding_10{
 	padding: 10px;
 }
@@ -1087,4 +1096,15 @@ table{
 }
 .3em{
 	font-size: 3em;
+}
+.btn_guardar{
+	border: 0 !important;
+}
+.btn_guardar:hover{
+	cursor: pointer;
+	padding: 10px;	
+	
+}
+::placeholder {    
+  text-transform: uppercase;
 }

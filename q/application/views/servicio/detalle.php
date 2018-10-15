@@ -52,15 +52,15 @@
     $utilidad = 0;
     if ($flag_servicio ==  0) {
         
-        $comision               =   porcentaje(floatval($precio),$porcentaje_comision);        
-        $utilidad               =   floatval($precio) - $costo_envio_vendedor;
-        $utilidad               =   $utilidad - $comision;    
+        $comision  =   porcentaje(floatval($precio),$porcentaje_comision);        
+        $utilidad  =   floatval($precio) - $costo_envio_vendedor;        
+        $utilidad  =   $utilidad - $comision;    
+
     }
     
-    
     $param["precio"]        =  $precio;
-    $ganancias_afiliados =  0; 
-    $ganancias_vendedores = 0; 
+    $ganancias_afiliados    =  0; 
+    $ganancias_vendedores   = 0; 
 
     /***/
     $text_meses ="No aplica";

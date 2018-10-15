@@ -12,5 +12,6 @@
             ["class"     =>  "titulo_agregar_imagenes"]  , 
         1)?>                                   
         <?=place("place_img_producto")?>
+        ----
     </div>    
 </div>

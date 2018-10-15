@@ -11,9 +11,10 @@ class Mailrest extends REST_Controller{
 	function recupera_password_POST(){
 
 		if($this->input->is_ajax_request()){ 
-			$param 					=  $this->post();		
-			$response 				=  $this->set_pass($param);
-			$response["info_set"] 	=  $response;
+
+			$param 					=  	$this->post();		
+			$param["type"]			= 	1;
+			$response 				=  	$this->set_pass($param);					
 			if ($response["status_send"] ==  1){					
 				$response["info_mail"] =  $this->mensajerialogin->mail_recuperacion_pw($response);			
 			}
@@ -23,9 +24,9 @@ class Mailrest extends REST_Controller{
 		}
 	}
 	/**/
-	function set_pass($q){
-
-		$api 	=  "usuario/pass/format/json";
+	private function set_pass($q){
+		
+		$api 	=  "usuario/pass/";
 		return  $this->principal->api( $api , $q , 'json', 'PUT');
 	}
 	/**/

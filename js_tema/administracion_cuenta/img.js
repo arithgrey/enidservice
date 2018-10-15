@@ -1,6 +1,6 @@
 function carga_form_imagenes_usuario(){    
-    var data_send = {};
-    var url =  "../q/index.php/api/img/form_img_user/format/json/";
+    var data_send   = {};
+    var url         =  "../q/index.php/api/img/form_img_user/format/json/";
     request_enid( "GET",  data_send, url, response_carga_form_imagenes, ".place_form_img"); 
 }
 /**/

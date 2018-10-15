@@ -1,0 +1,118 @@
+DEBUG - TYPE string 2018-10-13 12:27:36 --> pla
+DEBUG - TYPE string 2018-10-13 12:27:36 --> pla
+DEBUG - TYPE NULL 2018-10-13 12:28:36 --> 
+DEBUG - TYPE NULL 2018-10-13 12:29:39 --> 
+DEBUG - TYPE NULL 2018-10-13 12:32:28 --> 
+DEBUG - TYPE string 2018-10-13 12:32:59 --> netra
+DEBUG - TYPE NULL 2018-10-13 12:32:59 --> 
+DEBUG - TYPE NULL 2018-10-13 12:33:07 --> 
+DEBUG - TYPE NULL 2018-10-13 12:33:28 --> 
+DEBUG - TYPE NULL 2018-10-13 12:33:56 --> 
+DEBUG - TYPE NULL 2018-10-13 12:34:13 --> 
+DEBUG - TYPE NULL 2018-10-13 12:34:16 --> 
+DEBUG - TYPE NULL 2018-10-13 12:34:16 --> 
+DEBUG - TYPE NULL 2018-10-13 12:34:16 --> 
+DEBUG - TYPE NULL 2018-10-13 12:34:17 --> 
+DEBUG - TYPE NULL 2018-10-13 12:34:17 --> 
+DEBUG - TYPE NULL 2018-10-13 12:34:17 --> 
+DEBUG - TYPE NULL 2018-10-13 12:34:17 --> 
+DEBUG - TYPE NULL 2018-10-13 12:35:46 --> 
+DEBUG - TYPE NULL 2018-10-13 12:36:12 --> 
+DEBUG - TYPE NULL 2018-10-13 12:38:16 --> 
+DEBUG - TYPE NULL 2018-10-13 12:38:21 --> 
+DEBUG - TYPE NULL 2018-10-13 12:38:40 --> 
+DEBUG - TYPE NULL 2018-10-13 12:39:29 --> 
+DEBUG - TYPE NULL 2018-10-13 12:40:43 --> 
+DEBUG - TYPE NULL 2018-10-13 12:42:27 --> 
+DEBUG - TYPE NULL 2018-10-13 12:42:49 --> 
+DEBUG - TYPE NULL 2018-10-13 12:43:01 --> 
+DEBUG - TYPE NULL 2018-10-13 12:43:06 --> 
+DEBUG - TYPE NULL 2018-10-13 12:43:17 --> 
+DEBUG - TYPE string 2018-10-13 12:45:04 --> enta
+DEBUG - TYPE string 2018-10-13 12:45:28 --> GfnOYQaF7C
+DEBUG - TYPE array 2018-10-13 12:47:44 --> Array
+DEBUG - TYPE array 2018-10-13 12:47:50 --> Array
+(
+    [status_send] => 1
+)
+
+DEBUG - TYPE array 2018-10-13 12:50:00 --> Array
+(
+    [status_send] => 1
+    [new_pass] => 4YFomsb8uV
+)
+
+DEBUG - TYPE array 2018-10-15 09:05:40 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+

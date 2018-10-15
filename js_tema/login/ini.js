@@ -42,7 +42,7 @@ function response_inicio_session(data){
 		redirect("");
 	}else{
 		habilita_botones();
-		llenaelementoHTML(".place_acceso_sistema" , data);		
+		format_error(".place_acceso_sistema" , data);
 	}
 }
 /**/
@@ -86,12 +86,11 @@ function carga_mail(){
 }
 /**/
 function valida_formato_pass(text){
-	estado = 0;
+	var estado = 0;
 	if(text.length >= 8){
 		estado =1;
 	}else{
-		$("#pw").css("border" , "1px solid rgb(13, 62, 86)");
-		llenaelementoHTML(".place_acceso_sistema" , "<span class='error_login'> Contraseña muy corta! </span>");
+		format_error( ".place_acceso_sistema", "Contraseña muy corta!");
 	}
 	return estado;
 }
@@ -100,8 +99,8 @@ function valida_formato_email(email){
 	estado = 1;
 	expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	if (!expr.test(email)){		
-		estado = 0;
-		llenaelementoHTML(".place_acceso_sistema" , "<span class='error_login'> Correo no valido </span>");		
+		estado = 0;		
+		format_error(".place_acceso_sistema" , "Correo no valido");
 	}
 	return estado;
 }
@@ -182,6 +181,13 @@ function valida_seccion_inicial(){
 	    case "recuperar":
 	    	muestra_contenedor_recuperacion();
 	    	break;    
+	    case "registro":
+	    	facilita_acceso();
+	    	break;    
 	    default:	    	
 	} 
+}
+var facilita_acceso = function(){	
+	var secciones = [".olvide_pass"  , ".registrar_cuenta" ,".btn_soy_nuevo" , ".iniciar_sesion_lateral" , ".call_to_action_anuncio" , ".contenedor-lateral-menu"];
+	display_elements(secciones , 0);	
 }
