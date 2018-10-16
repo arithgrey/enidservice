@@ -1045,6 +1045,24 @@ function debug($msg, $array = 0)
   }
 
 }
+
+if ( ! function_exists('textarea'))
+{
+  function textarea($attributes = '' ,  $row_12 = 0 , $def='')
+  {
+      $attr =  add_attributes($attributes);
+      if ($row_12 == 0 ) {
+          
+          return "<textarea ".$attr." ></textarea>";  
+      }else{
+      
+          return n_row_12()."<textarea ".$attr." ></textarea>".end_row();  
+      }
+      
+
+  }
+}
+
 if ( ! function_exists('iframe'))
 {
   function iframe($attributes = '' ,  $row_12 = 0)

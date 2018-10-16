@@ -9,12 +9,12 @@
 									<span >
 										Correos	que enviaste
 									</span>
-									<textarea 
-										class="form-control" 
-										id="textarea" 
-										name="text_info">
-									</textarea>
-
+									<?=textarea([
+										"class"		=>	"form-control" ,
+										"id"		=>	"textarea" ,
+										"name"		=>	"text_info"
+									])?>
+									
 								<?=end_row()?>
 								<?=n_row_12()?>
 									<div class='place_registro'>

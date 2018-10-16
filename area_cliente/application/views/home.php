@@ -25,7 +25,6 @@ $llamadas_recibidas =  anchor_enid(
 		                <?=n_row_12()?> 
 		                	<?=div(place("place_ventas_usuario") , 
 		                	["class"=>"col-lg-9"])?>
-		                    
 		                    <div class="col-lg-3">	                		
 		                    	<?=heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS" , 3)?>
 								<center>

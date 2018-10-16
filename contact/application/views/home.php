@@ -89,8 +89,13 @@ style="background-image: url(../img_tema/portafolio/llamada_gratis_2.png);">
                 
                 <?=n_row_12()?>
                     <?=p("Mensaje" , ['class'=> 'white'] )?>
-                    <textarea  id="message" name="mensaje" placeholder="Mensaje"> 
-                    </textarea>
+
+                    <?=textarea([
+                        "id"            =>"message",
+                        "name"          =>"mensaje",
+                        "placeholder"   =>"Mensaje"
+                    ])?>
+                    
                 <?=end_row()?> 
                 <?=n_row_12()?>
                     <?=place("place_registro_contacto")?>            

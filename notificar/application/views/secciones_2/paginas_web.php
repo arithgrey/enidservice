@@ -124,18 +124,15 @@
                 </div>
 
                 <div class="row">
-                  <p class="col-lg-12 ">
                     <?=span("Información Adicional")?>
-
-                    <textarea 
-                      class="form-control" 
-                      id="comentarios" 
-                      name="comentarios" 
-                      rows="2" 
-                      style="resize:none" 
-                      placeholder="Información Adicional">                    
-                    </textarea>
-                  </p>
+                    <?=textarea([
+                      "class"           =>  "form-control" ,
+                      "id"              =>  "comentarios" ,
+                      "name"            =>  "comentarios" ,
+                      "rows"            =>  "2" ,
+                      "style"           =>  "resize:none" ,
+                      "placeholder"     =>  "Información Adicional"
+                    ])?>
                 </div>
                 
                 <?=guardar(

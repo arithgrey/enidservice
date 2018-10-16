@@ -11,10 +11,9 @@
 <form class="form_comentario_pago_notificacion">
 	<label>
 		Agregar comentario
-	</label>	
-	<textarea name='comentario'>
-		
-	</textarea>
+	</label>
+	<?=textarea(["name"	=>	'comentario'])?>	
+	
 	<button class="input-sm btn">
 		Agregar
 	</button>

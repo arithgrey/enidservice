@@ -38,4 +38,4 @@
 		</center>
 	<?=end_row()?>
 </div>
-<script type="text/javascript" src="<?=base_url('application/js/reportes/reporte.js')?>"></script>
+<!--<script type="text/javascript" src="<?=base_url('application/js/reportes/reporte.js')?>"></script>-->

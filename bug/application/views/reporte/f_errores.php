@@ -112,8 +112,13 @@
 					<?=span("¿Que mejorarías de nuestro sistema?" , ["class"=>'text-mejora black'])?>
 				</center>
 				<?=place("place_reporte_incidencia")?>
-				<textarea name='descripcion' id='descripcion_incidencia' class='descripcion form-control'  rows="2" >
-				</textarea>				
+				<?=textarea([
+					"name"	=>	'descripcion' ,
+					"id"	=>	'descripcion_incidencia' ,
+					"class" =>	'descripcion form-control'  ,
+					"rows"	=>	"2"
+				])?>
+				
 				<?=input_hidden(["name" 	=> 	'tipo_template', "value" =>  $param["tipo"]])?>
 			<?=end_row()?>
 			<?=div(btn_registrar_cambios_enid("btn_registar" , "btn_registar") , [] , 1)?>             	

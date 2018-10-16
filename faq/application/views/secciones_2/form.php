@@ -1,4 +1,4 @@
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<!--<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">-->
 <script src="<?=base_url('application')?>/js/summernote.js"></script>
 	<div class="panel-heading">
 		 <ul class="nav nav-tabs">

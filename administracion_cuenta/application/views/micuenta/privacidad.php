@@ -4,7 +4,7 @@
 		<?=n_row_12()?>
 					<form id="form_update_password" class="form-horizontal" method="POST">            			
 						<div class="form-group">            
-							<?=div("Contraseña actual", [] , 1)?>
+							<?=div("Contraseña actual", 1)?>
 				            <?=input([
 				              	"name"			=> 	"password" ,
 				              	"id"			=> 	"password" ,
@@ -21,7 +21,7 @@
 				            	class='form-control input-sm'
 				             	required>
 				            <?=place('place_pw_2')?>
-				            <?=div("Confirmar nueva", [] , 1)?>
+				            <?=div("Confirmar nueva", 1)?>
 				            <?=input([
 				            	"name"			=> "pw_nueva_confirm" ,
 				            	"id"			=> "pw_nueva_confirm"  ,

@@ -21,14 +21,13 @@
 </div>        
 <main>
 
-
+<!--
 <script type="text/javascript" src="<?=base_url('application/js/principal.js')?>">    
 </script>
 <script type="text/javascript" src="<?=base_url('application/js/ventas.js')?>">    
 </script>
 <script type="text/javascript" src="<?=base_url('application/js/notificaciones.js')?>">    
 </script>
-
 <script type="text/javascript" src="<?=base_url('application/js/email.js')?>">    
 </script>
 
@@ -57,9 +56,13 @@
 
 <script src="../js_tema/js/summernote.js">    
 </script>
+-->
+<?=textarea([
+    "id"    =>  'contenedor_msj_temporal' ,
+    "class" =>  'contenedor_msj_temporal' ,
+    "style" =>  'display:none;'
+])?>
 
-<textarea id='contenedor_msj_temporal' class='contenedor_msj_temporal' style='display:none;'>
-</textarea>
 <style type="text/css">
 .cargar_metas:hover{
   cursor: pointer;

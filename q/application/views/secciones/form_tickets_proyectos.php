@@ -87,8 +87,13 @@
           <?=label("Descripción" , 
           [ "class" =>  "control-label blue_enid_background white" ,
             "for"   =>  "mensaje"] 
-          )?>          
-          <textarea class="form-control" id="mensaje" name="mensaje"></textarea>          
+          )?>       
+          <?=textarea([
+            "class"     =>  "form-control", 
+            "id"        =>  "mensaje", 
+            "name"      =>  "mensaje"
+          ])?>   
+          
         </div>
         <?=guardar("Abrir ticket" , ["class"=>'btn'])?>
       </div>

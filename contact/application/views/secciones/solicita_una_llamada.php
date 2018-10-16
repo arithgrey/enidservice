@@ -52,14 +52,17 @@
                     </div>
                     <div class="row">
                         <?=div(span("Mensaje") , ["class"=>"col-sm-12"])?>
-                        <div class="col-sm-12">
-                            <textarea id="message" name="mensaje" placeholder="Mensaje"> 
-                            </textarea>
-                        </div>
+                        <?=textarea([
+                            "id"            =>  "message",
+                            "name"          =>  "mensaje" ,
+                            "placeholder"   =>  "Mensaje"
+                        ], 1)?>
+
                     </div>
                     <?=place("place_registro_contacto" )?>
                     <div class="row">
-                        <?=div(guardar("Enviar mensaje" , ["type"=>"submit" , "class"=>"btn input-sm", "id"=>'btn_envio_mensaje']) ,  
+                        <?=div(guardar("Enviar mensaje" , 
+                            ["type"=>"submit" , "class"=>"btn input-sm", "id"=>'btn_envio_mensaje']) ,  
                             ["class"=>"col-lg-6"])?>
                     </div>
                 </form>    

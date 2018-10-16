@@ -20,8 +20,14 @@
 			<?=div("Sobre su" .$servicio[0]["nombre_servicio"] )?>
 		</center>
 		<form class="form_valoracion">
-			<textarea class="form-control" id="pregunta" name="pregunta" style="resize:none" placeholder="Alguna pregunta">   
-			</textarea>
+			<?=textarea([
+				"class"			=>	"form-control" ,
+				"id"			=>	"pregunta" ,
+				"name"			=>	"pregunta" ,
+				"style"			=>	"resize:none" ,
+				"placeholder" 	=>	"Alguna pregunta"
+			])?>
+			
 			<?=input_hidden(["name"=>"servicio" ,  "value"=> $id_servicio ])?>
 			<?=input_hidden(["name"=>"usuario" ,  "value"=> $id_usuario ])?>
 			<?=input_hidden(["name"=>"propietario" , "class"=> "propietario" ,   "value"=> $propietario ])?>
