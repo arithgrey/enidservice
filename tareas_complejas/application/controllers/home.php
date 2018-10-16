@@ -16,11 +16,13 @@ class Home extends CI_Controller{
         $num_usuario            = get_info_usuario( $this->input->get("q2"));        
         $num_servicio           = get_info_usuario( $this->input->get("q3"));        
 
-        $clasificaciones_departamentos =   $this->principal->get_departamentos("nosotros");
-        $data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
+        $clasificaciones_departamentos          =   $this->principal->get_departamentos("nosotros");
+        $data["clasificaciones_departamentos"]  = $clasificaciones_departamentos;
 
         $this->principal->crea_historico(566 , $num_usuario , $num_servicio );
-        $data["js"] =  [base_url('application/js/principal.js')];
+        $data["js"]     =   [base_url('application/js/principal.js') , 
+                             "../js_tema/tareas_complejas/principal.css"];
+        $data["css"]    =   ["tareas_complejas.css"];
         $this->principal->show_data_page($data, 'home');                          
     }        
 }

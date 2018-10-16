@@ -75,7 +75,7 @@ class Inicio extends CI_Controller {
                                         
                     $data["cuentas_bancarias"]  =  $this->get_cuentas_usuario($id_usuario , 0);
                     $data["tarjetas"]           =  $this->get_cuentas_usuario($id_usuario , 1);
-
+                    $data["css"]                = ["cuentas_asociadas.css"];
                     $this->principal->show_data_page( $data , 'cuentas_asociadas');
                     break;
                 

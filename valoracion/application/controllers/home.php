@@ -27,10 +27,10 @@ class Home extends CI_Controller{
             $prm["id_usuario"]                      =   0;
             if($data["in_session"] ==  1){
                 
-                $prm["in_session"] = 1;                
-                $prm["email"] = $data["email"];
-                $prm["nombre"]= $data["nombre"];
-                $prm["id_usuario"] =$data["id_usuario"];                 
+                $prm["in_session"]  = 1;                
+                $prm["email"]       =   $data["email"];
+                $prm["nombre"]      =   $data["nombre"];
+                $prm["id_usuario"]  =   $data["id_usuario"];                 
             }
 
             $prm["id_servicio"] =  $servicio;

@@ -1,6 +1,5 @@
 <div class="detail-socials ">
   <table>
-
     <?=get_td(anchor_enid("" , 
       ["class"                => "btn_copiar_enlace_pagina_contacto fa fa-clone black" ,  
         "data-clipboard-text" => $url_actual

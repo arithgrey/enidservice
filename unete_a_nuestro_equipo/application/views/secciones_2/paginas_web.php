@@ -15,6 +15,7 @@
     </div>    
     <div class="row">
     <?=div("",  ['class' => "col-lg-2"])?>
+    
       <div class="col-lg-8">
         <?=p("Como parte de nuestro equipo, influirás en el futuro de negocios
         que se encuentran en crecimiento a lo largo de la ciudad de México, 

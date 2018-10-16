@@ -5,7 +5,7 @@
 <nav style="background: #f2f2f2;padding: 10px;">
     <?=heading_enid("¿Tienes alguna duda?" , ["class" => 'strong'])?>                        
     <?=div("Lunes a Viernes de 08:00 a 19:00 y  Sábados de 09:00 a 18:00" , [] , 1)?>
-    <?=div("Síguenos en" , [] , 1)?>
+    <?=div("Síguenos en" , 1)?>
                         
 
     <?=anchor_enid("" , 

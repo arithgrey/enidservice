@@ -6,8 +6,7 @@
         icon("fa  fa-instagram white" )
         ,["href"=>"https://www.instagram.com/enid_service/"       
     ]))?>
-                                
-                            
+    
     <?=get_td(anchor_enid(
         icon("icon-s-twitter white ")
         ,[" href"=>"https://twitter.com/enidservice"]))?>

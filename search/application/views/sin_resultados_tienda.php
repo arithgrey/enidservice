@@ -12,15 +12,14 @@
           <br>
                  
         <?=div(
-          anchor_enid("ANUNCIA TU PRIMER PRODUCTO ".icon('fa fa-chevron-right ir'),
-          ["href"  =>  "../planes_servicios/?action=nuevo",
-            "class" =>  "a_enid_black2 boton_primer_producto top_30",
-            "style" =>  "color: white!important"
-          ] ,
-          1,
-          1)
+            anchor_enid("ANUNCIA TU PRIMER PRODUCTO ".icon('fa fa-chevron-right ir'),
+            ["href"  =>  "../planes_servicios/?action=nuevo",
+              "class" =>  "a_enid_black2 boton_primer_producto top_30",
+              "style" =>  "color: white!important"
+            ] ,
+            1,
+            1)
         );?>
-        
         </center>
       </div>
     <?=end_row()?>

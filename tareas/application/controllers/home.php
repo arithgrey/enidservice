@@ -35,7 +35,8 @@ class Home extends CI_Controller{
             $activa = 1;
         }
         $data["activa"] = $activa;
-        $data["css_external"] = ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];
+        $data["css_external"]   = ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];
+        $data["css"]            = ["tareas.css"];
         $this->principal->show_data_page($data, 'home');                          
     }
     /**/

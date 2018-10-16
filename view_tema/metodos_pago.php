@@ -43,7 +43,6 @@
                         'style' => 'width:95px!important',
                         'src' => "../img_tema/bancos/banamex.png" ]))?>    
 
-                        
                 </tr>
             </table>    
             </div>

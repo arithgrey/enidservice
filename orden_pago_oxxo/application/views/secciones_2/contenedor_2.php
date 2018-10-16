@@ -17,9 +17,7 @@
                           ]), 
                         1)?>
                 <?=div("Servicios Enid Service Folio #".$info_pago["q2"], 
-                [ 
-                  "style" => "background: #0000f5;padding: 5px;color: white;"
-                ])?>                          
+                [ "style" => "background: #0000f5;padding: 5px;color: white;"])?>                          
                 
                 <div style="margin-top:20px; ">                        
                   <div style="width: 80%;margin: 0 auto;">

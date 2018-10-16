@@ -9,23 +9,11 @@
 		1);?>
 	<hr>
 	<?=n_row_12()?>
-		<div class="info_categoria">
-			<?=place("primer_nivel_seccion")?>
-  	    </div>
-  	    <div class="info_categoria">
-			<?=place("segundo_nivel_seccion")?>
-  	    </div>	
-  	    <div class="info_categoria">
-			<?=place("tercer_nivel_seccion")?>
-  	    </div>	 
-  	    <div class="info_categoria">
-			<?=place("cuarto_nivel_seccion")?>
-  	    </div>	              	
-		<div class="info_categoria">
-			<?=place("quinto_nivel_seccion")?>
-  	    </div>	              	  	        
-  	    <div class="info_categoria">
-			<?=place("sexto_nivel_seccion")?>
-  	    </div>	              	  	        
+		<?=div(place("primer_nivel_seccion"), ["class" => "info_categoria"])?>
+  	    <?=div(place("segundo_nivel_seccion"), ["class" => "info_categoria"])?>
+  	    <?=div(place("tercer_nivel_seccion"), ["class" => "info_categoria"])?>
+  	    <?=div(place("cuarto_nivel_seccion"), ["class" => "info_categoria"])?>
+		<?=div(place("quinto_nivel_seccion"), ["class" => "info_categoria"])?>
+  	    <?=div(place("sexto_nivel_seccion"), ["class" => "info_categoria"])?>
   	<?=end_row();?>                   
 </div>

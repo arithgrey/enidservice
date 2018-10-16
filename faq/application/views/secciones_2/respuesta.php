@@ -5,9 +5,9 @@
 
 	foreach ($respuesta as $row) {
 		
-		$titulo    =  $row["titulo"];
-		$respuesta =  $row["respuesta"];
-		$id_faq =  $row["id_faq"];
+		$titulo    	=  $row["titulo"];
+		$respuesta 	=  $row["respuesta"];
+		$id_faq 	=  $row["id_faq"];
 
 
 		$btn_conf = "";
@@ -23,8 +23,8 @@
 			}
 			
 		}
-		$info_respuesta = div(div($btn_conf.$titulo ) , ["class" => "row"]);
-		$info_respuesta .= $respuesta;
+		$info_respuesta 	= 	div(div($btn_conf.$titulo ) , ["class" => "row"]);
+		$info_respuesta 	.= 	$respuesta;
 	}
 		
 
@@ -78,80 +78,11 @@
 <hr>
 <?=anchor_enid(
 	img(
-		["src"=>"http://enidservice.com/inicio/img_tema/faq/necesitas-una-pagina-web-enidservice.png", "width"=>"100%"]) , 
-		["href"=>"../contacto/#envio_msj"])?>
+		[
+			"src"=>"http://enidservice.com/inicio/img_tema/faq/necesitas-una-pagina-web-enidservice.png", 
+			"width"=>"100%"
+		]) , 
+		[	"href"=>"../contacto/#envio_msj"
+	])?>
 
 
-<style type="text/css">
-	
-	.event-list > li {
-		background-color: rgb(255, 255, 255);
-		box-shadow: 0px 0px 5px rgb(51, 51, 51);
-		box-shadow: 0px 0px 5px rgba(51, 51, 51, 0.7);
-		padding: 0px;
-		
-	}
-	.event-list > li > time {
-		display: inline-block;
-		width: 100%;
-		color: rgb(255, 255, 255);
-		background-color: black;
-		padding: 5px;
-		text-align: center;
-		text-transform: uppercase;
-	}
-	
-	.event-list > li > time > span {
-		display: none;
-	}
-	.event-list > li > time > .day {
-		display: block;
-		font-size: 56pt;
-		font-weight: 100;
-		line-height: 1;
-	}
-	.event-list > li time > .month {
-		display: block;
-		font-size: 24pt;
-		font-weight: 900;
-		line-height: 1;
-	}
-	
-    
-	
-
-	@media (min-width: 768px) {
-		.event-list > li {
-			position: relative;
-			display: block;
-			width: 100%;
-			height: 130px;
-			padding: 0px;
-		}
-
-		.event-list > li > time,
-		.event-list > li > img  {
-			display: inline-block;
-		}
-
-		.event-list > li > time,
-		.event-list > li > img {
-			width: 130px;
-			float: left;
-		}
-		.event-list > li > .info {
-			background-color: white;
-			overflow: hidden;
-		}
-		.event-list > li > time,
-		.event-list > li > img {
-			width: 130px;
-			height: 130px;
-			padding: 0px;
-			margin: 0px;
-		}
-		
-		
-		
-	}
-</style>

@@ -82,9 +82,8 @@
                     1)?>                
                 <?=n_row_12()?>
                     <?php $categorias_destacadas_orden =  sub_categorias_destacadas($categorias_destacadas);  ?>
-                    <div class="row">
-                    <?=crea_repo_categorias_destacadas($categorias_destacadas_orden)?>
-                    </div>
+                    <?=div(crea_repo_categorias_destacadas($categorias_destacadas_orden) , ["class"=>"row"])?>
+                    
                 <?=end_row()?>                
             </div>            
         </div>

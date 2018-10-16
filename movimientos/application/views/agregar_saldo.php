@@ -24,16 +24,16 @@
 				<div class="option_ingresar_saldo">				
 					<?=div("SOLICITA SALDO A UN AMIGO" ,
 					[	
-						
 						"class"	=>"tipo_pago underline"
-					] , 
-					1)?>
+					] 
+					, 
+					1
+					)?>
 					<?=div(
 						"Pide a un amigo que te transfira saldo desde su cuenta" ,
 						[
-						"style"	=>	
-						"text-decoration: underline;",
-						"class"	=>"tipo_pago_descripcion" 
+						"style"	=>	"text-decoration: underline;",
+						"class"	=>	"tipo_pago_descripcion" 
 						] 
 					, 
 					1)?>					

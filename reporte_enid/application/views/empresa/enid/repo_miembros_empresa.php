@@ -8,23 +8,23 @@
 		$b =1;						  
 		foreach($miembros as $row){
 
-			$idusuario=     $row["idusuario"];
-			$nombre=     $row["nombre"];
-			$email=     $row["email"];
-			$fecha_registro=     $row["fecha_registro"];
-			$puesto=     $row["puesto"];
-			$status=     $row["status"];
-			$apellido_paterno=     $row["apellido_paterno"];
-			$apellido_materno=     $row["apellido_materno"];
-			$email_alterno=     $row["email_alterno"];
-			$tel_contacto=     $row["tel_contacto"];
-			$tel_contacto_alterno=     $row["tel_contacto_alterno"];
-			$edad=     $row["edad"];
-			$cargo=     $row["cargo"];
-			$url_fb=     $row["url_fb"];
-			$url_tw=     $row["url_tw"];
-			$url_www=     $row["url_www"];
-			$sexo=     $row["sexo"];
+			$idusuario				=     $row["idusuario"];
+			$nombre					=     $row["nombre"];
+			$email					=     $row["email"];
+			$fecha_registro			=     $row["fecha_registro"];
+			$puesto					=     $row["puesto"];
+			$status					=     $row["status"];
+			$apellido_paterno		=     $row["apellido_paterno"];
+			$apellido_materno		=     $row["apellido_materno"];
+			$email_alterno			=     $row["email_alterno"];
+			$tel_contacto			=     $row["tel_contacto"];
+			$tel_contacto_alterno	=     $row["tel_contacto_alterno"];
+			$edad					=     $row["edad"];
+			$cargo					=     $row["cargo"];
+			$url_fb					=     $row["url_fb"];
+			$url_tw					=     $row["url_tw"];
+			$url_www				=     $row["url_www"];
+			$sexo					=     $row["sexo"];
 
 
 			$lis_miembros .=  "<tr>";

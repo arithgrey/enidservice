@@ -1,4 +1,3 @@
-    <!--INICIAR SESSION-->    
     <div class="seccion_registro_nuevo_usuario_enid_service">                
         <?=n_row_12();?>            
                 <?=anchor_enid(

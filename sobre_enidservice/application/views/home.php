@@ -9,15 +9,24 @@
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
               <?=anchor_enid("Lo que hacemos" , 
-              ["href"=> "#home" , "data-toggle"=>"tab"])?>          
+              [
+                "href"=> "#home" , 
+                "data-toggle"=>"tab"
+              ])?>          
             </li>
             <li role="presentation">
               <?=anchor_enid("Misión" , 
-              ["href"=> "#profile" , "data-toggle"=>"tab"])?>            
+              [
+                "href"=> "#profile" , 
+                "data-toggle"=>"tab"
+              ])?>            
             </li>
               <li role="presentation">
                 <?=anchor_enid("Visión" , 
-                ["href"=> "#messages" , "data-toggle"=>"tab"])?>             
+                [
+                  "href"=> "#messages" , 
+                  "data-toggle"=>"tab"
+                ])?>             
             </li>        
             <li role="presentation">
               <?=anchor_enid("Tareas complejas", ["href"=> "../tareas_complejas"])?>
@@ -28,7 +37,7 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">          
               
-                <?=p("Lo que hacemos en Enid Service")?>
+                <?=div("Lo que hacemos en Enid Service")?>
                 <?=img(["src"=>"../img_tema/portafolio/ejemplo-personas.jpg"])?>
 
                 <?=p("Facilitamos los procesos de negocios a través de las TIC, Tecnologías de la información y comunicación, por lo tanto,el éxito de las personas a quienes ayudamos, define nuestro 

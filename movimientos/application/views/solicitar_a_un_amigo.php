@@ -7,10 +7,9 @@
 				["class"=>"desc_solicitud"]
 			)?>
 			
-	        
 			<form class='solicitar_saldo_amigo_form'>
 				<?=n_row_12()?>
-					<table style="width: 100%;margin-top: 15px;">
+					<table>
 						<tr>
 							<?=get_td(input([
 									"placeholder"	=>	"Ejemplo 200" ,
@@ -40,12 +39,11 @@
 							]))?>
 							<?=get_td("Email" , ["class"=>'strong'])?>
 						</tr>
-							
-						</table>
-						<?=guardar("SOLICITAR SALDO"  , ["class" => "btn_solicitud_saldo"] , 1,1)?>
-					<?=end_row()?>
-				</form>		
-				<?=place("place_solicitud_amigo")?>				
+					</table>
+					<?=guardar("SOLICITAR SALDO"  , ["class" => "btn_solicitud_saldo"] , 1,1)?>
+				<?=end_row()?>
+			</form>		
+			<?=place("place_solicitud_amigo")?>				
 		</div>
 	</div>
 <?=end_row()?>

@@ -103,7 +103,7 @@
                     
                     <?=heading("ASOCIAR CUENTA BANCARIA Ó TARJETA DE CRÉDITO O DÉBITO", 3)?>
 
-                    <a href="?q=transfer&action=1&tarjeta=1" style="color:black;"  >
+                    <a href="?q=transfer&action=1&tarjeta=1" style="color:black;">
                         <?=div("Asociar  tarjeta de crédito o débito" , 
                             [
                                 "class"     =>   "asociar_cuenta_bancaria" ,

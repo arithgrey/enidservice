@@ -89,8 +89,9 @@ class Home extends CI_Controller{
                         
         }    
         $clasificaciones_departamentos          =   $this->principal->get_departamentos("nosotros");        
-        $data["clasificaciones_departamentos"]  = $clasificaciones_departamentos;
-        $data["js"]                             = ["../js_tema/faq/principal.js"];       
+        $data["clasificaciones_departamentos"]  =   $clasificaciones_departamentos;
+        $data["js"]                             =   ["../js_tema/faq/principal.js"];       
+        $data["css"]                            =   ["faqs.css" , "faqs_second.css"];
         $data["css_external"]                   = 
         ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];       
         $this->principal->show_data_page($data, 'home');                          

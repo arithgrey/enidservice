@@ -27,9 +27,10 @@
 					$extra = ($row["id_usuario"] != null )?"selected_clasificacion":"";
 					$preferencia_="preferencia_".$row['id_clasificacion'];
 					$config 
-					=  [
+					=   [
 						'class' => 'list-preferencias item_preferencias '.$preferencia_.' '.$extra.' ' ,
-						'id' 	=> $row['id_clasificacion']
+						'id' 	=> $row['id_clasificacion'
+						]
 					];
 
 					$extraIcon 		= ($row["id_usuario"] != null )? icon("fa fa-check-circle-o "):"";		

@@ -106,9 +106,7 @@ div(ul($list4) , ["class"=>"col-lg-3 col-sm-6 inner"])];
         <?=end_row()?>    
         <?=div("© 2018 ENID SERVICE.", ['class'=>'white footer-enid'])?>
     <?php endif; ?>
-
-
-
+    
 <link 
 rel="stylesheet" 
 type="text/css" 

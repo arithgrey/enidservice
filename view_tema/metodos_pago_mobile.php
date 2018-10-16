@@ -34,9 +34,6 @@
                     <?=get_td(img(array(
                         'class' => "logo_pago_mb",                    
                         'src' => "../img_tema/bancos/banamex.png" )))?>    
-
-                    
-                        
                 </tr>
             </table>    
             <?=end_row()?>

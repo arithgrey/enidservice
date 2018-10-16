@@ -26,13 +26,8 @@
     <?php endforeach; ?>            
     </div>
     <div class="col-lg-3">            
-        <?=heading_enid("TU LISTA DE DESEOS" , 3,
-        ["class"=>'titulo_lista_deseos'] , 1 )?>
-        
-        <?=anchor_enid("EXPLORAR MÁS ARTÍCULOS",     
-            ["href" => "../search/?q2=0&q="] , 
-            1
-        )?>
+        <?=heading_enid("TU LISTA DE DESEOS" , 3, ["class"=>'titulo_lista_deseos'] , 1 )?>
+        <?=anchor_enid("EXPLORAR MÁS ARTÍCULOS", ["href" => "../search/?q2=0&q="] , 1 )?>
     </div>
 </div>
 <?=end_row()?>

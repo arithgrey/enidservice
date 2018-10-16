@@ -20,10 +20,10 @@
     $categorias_destacadas_orden =  sub_categorias_destacadas($categorias_destacadas);  
 
 
-    $url_anunciar  = 
+    $url_anunciar   = 
     ($in_session ==1 )? "../../planes_servicios":"../../login?action=nuevo";    
 
-    $anunciar =  anchor_enid('ANUNCIA TUS ARTÍCULOS AQUÍ' ,  
+    $anunciar       =  anchor_enid('ANUNCIA TUS ARTÍCULOS AQUÍ' ,  
         [
             "src"       => $url_anunciar,
             'class'     => 'anuncia_articulos'
@@ -123,7 +123,6 @@
             <?=div(div($paginacion , ['class'=>"pull-right"]) , ["class"=>"col-lg-9"])?>
         <?=end_row()?>
         <br>
-
         <?php
         $list   =   "";  
         $flag   =   0;    
@@ -145,11 +144,8 @@
             <?=div($paginacion , 1)?>            
         <?php endif;?>            
     </div>
-    
-    
+
 <?=end_row()?>
-
-
 <br>
 <?=n_row_12()?>         
     <?=div("", ["class" => "col-lg-2"])?>
