@@ -9,6 +9,13 @@ class Pagina_web extends REST_Controller{
         $this->load->library(lib_def());                    
         $this->id_usuario = $this->principal->get_session("idusuario");
     } 
+    function dia_GET(){
+
+      $param    =   $this->get();
+      $response =   $this->pagina_web_model->accesos_enid_service();
+      $this->response($response);
+
+    }
     function productividad_GET(){
 
         $param      = $this->get();        

@@ -605,6 +605,9 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
     width: 100%!important;
     border: 0!important;
 }
+.a_enid_blue:hover{
+	color: white!important;
+}
 .a_enid_black{
 
     background: black!important;

@@ -104,13 +104,11 @@ class Cobranza extends REST_Controller{
     }
     /**/
     function comentario_notificacion_pago_POST(){
-
-        /**/
+        
         $param =  $this->post();    
         $param["id_usuario"] =  $this->id_usuario;        
         $response =  $this->cobranzamodel->registra_comentario_pago_notificado($param);
-        $this->response($response);
-        
+        $this->response($response);        
     }
     /**/
     function form_comentario_notificacion_pago_GET(){
@@ -566,11 +564,10 @@ class Cobranza extends REST_Controller{
     }
     function solicitudes_fecha_GET(){
         
-        $param =  $this->get();
+        $param      =  $this->get();
         $num_ventas =  $this->cobranzamodel->get_solicitudes_venta_dia($param);
         $this->response($num_ventas);
-    }
-    /**/
+    }    
     /**/
     private function get_direccion_pedido($id_recibo){
             

@@ -243,8 +243,7 @@ class producto extends REST_Controller{
         return $this->principal->api( $api , $q );
     }
     /**/
-    function periodo_GET(){
-        
+    function periodo_GET(){        
         $param              = $this->get();        
         $data["servicios"]  = $this->get_servicios_periodo_simple($param);
         $this->load->view("producto/simple" , $data);        

@@ -93,41 +93,32 @@ class tareasmodel extends CI_Model{
     
   }
   function tareas_enid_service(){
-            
-       
-                $query_get ="SELECT  
+      
+      $query_get =    "SELECT  
                         SUM(CASE 
                         WHEN 
-                        tt.id_departamento = 1 
+                          tt.id_departamento = 1 
                         THEN 1 ELSE 0 END )num_pendientes_desarrollo,                        
-
                         SUM(CASE 
                                 WHEN 
                                 tt.id_departamento = 2 
-                                THEN 1 ELSE 0 END )num_pendientes_ventas ,                       
-                        
+                                THEN 1 ELSE 0 END )num_pendientes_ventas , 
                         SUM(CASE 
-                        WHEN 
-                        tt.id_departamento = 4 
-                        THEN 1 ELSE 0 END )num_pendientes_direccion                        
-
-                    FROM 
-                        tarea t
-                    INNER JOIN
-                        ticket tt 
-                    ON 
-                    t.id_ticket = tt.id_ticket    
-                    WHERE  
-                        t.status = 1                         
-                    AND 
-                    date(t.fecha_termino) =  date(current_timestamp())";
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
-
-           
-
+                          WHEN 
+                            tt.id_departamento = 4 
+                          THEN 1 ELSE 0 END )num_pendientes_direccion                        
+                      FROM 
+                          tarea t
+                      INNER JOIN
+                          ticket tt 
+                      ON 
+                      t.id_ticket = tt.id_ticket    
+                      WHERE  
+                          t.status = 1                         
+                      AND 
+                      DATE(t.fecha_termino) =  DATE(CURRENT_TIMESTAMP())";
+        
+        return  $this->db->query($query_get)->result_array();        
     }
     
- 
-
 }

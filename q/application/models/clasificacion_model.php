@@ -12,7 +12,7 @@ class clasificacion_model extends CI_Model{
         return $this->update([$q => $q2 ] , ["id_clasificacion" => $id ]);
   }
   function insert( $params , $return_id=0){        
-      $insert   = $this->db->insert($tabla, $params);     
+      $insert   = $this->db->insert("clasificacion", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }
   private function update($data =[] , $params_where =[] , $limit =1 ){
@@ -74,7 +74,7 @@ class clasificacion_model extends CI_Model{
         return $this->get([] , ["flag_servicio" => $param["es_servicio"], "nivel" => $param["nivel"] , "padre" => $param["padre"]] , 100 );
     }
     function num_servicio_nombre($param){
-      $params_where =  ["flag_servicio" =>  $servicio, "nombre_clasificacion" =>  $nombre];
+      $params_where =  ["flag_servicio" =>  $param["servicio"], "nombre_clasificacion" =>  $param["clasificacion"]];
       return  $this->get(["COUNT(0)num"] , $params_where, 10000 )[0]["num"];
     }
     function get_clasificaciones_por_padre($padre){

@@ -10,9 +10,11 @@ class Respuesta extends REST_Controller{
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
     function respuesta_pregunta_POST(){        
+        
         $param                  =   $this->post();
         $param["id_usuario"]    =   $this->id_usuario;
-        $status                 =   $this->respuesta_model->registra_respuesta($param);
+        $status                 =   $this->respuesta_model->insert($param);
+
         $response               =   $this->respuesta_model->actualiza_estado_pregunta($param);
         if($param["modalidad"] ==  1){          
             $response =  $this->notifica_respuesta_email($param);

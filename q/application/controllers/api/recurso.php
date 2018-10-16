@@ -10,7 +10,7 @@ class recurso extends REST_Controller{
 
         $param      =  $this->post();
         $response   =   false;        
-        if(if_ext($param , "nombre ,  urlpaginaweb")){
+        if(if_ext($param , "nombre,urlpaginaweb")){
             $params = [ 
               "nombre"          =>  $param["nombre"],
               "urlpaginaweb"    =>  $param["urlpaginaweb"],
@@ -18,7 +18,7 @@ class recurso extends REST_Controller{
               "status"          =>  1,
               "class"           =>  '' 
             ];
-            $response   =  $this->recurso_model->insert($param);
+            $response =  $this->recurso_model->insert($params);
         }        
         $this->response($response);
     }

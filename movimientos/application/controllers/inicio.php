@@ -178,14 +178,14 @@ class Inicio extends CI_Controller {
         $q["id_usuario"]            =   $id_usuario;
         $q["tipo"]                  =   $tipo;
         $q["metodos_disponibles"]   =   1;        
-        $api  =  "cuentas/usuario/format/json/";         
+        $api  =  "cuentas/usuario";         
         return $this->principal->api( $api , $q  , "json", "POST");        
 
     }
     /**/
     private function get_bancos_disponibles($q){
 
-        $api  =  "cuentas/bancos_disponibles/format/json/";         
+        $api  =  "banco/index/format/json/";         
         return $this->principal->api( $api , $q );        
     }
     

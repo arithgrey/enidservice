@@ -42,7 +42,7 @@
       "idrecurso" => $param["id_recurso"],
       "idperfil"  => $param["id_perfil"]
     ];
-    $this->get(["COUNT(0)num"] , $params_where )[0]["num"];
+    return $this->get(["COUNT(0)num"] , $params_where )[0]["num"];
   }  
   
 }

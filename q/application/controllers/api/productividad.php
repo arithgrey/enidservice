@@ -188,11 +188,16 @@ class productividad extends REST_Controller{
         return   $this->principal->api( $api , $q );                        
     }
     private function verifica_direccion_registrada_usuario($q){
+        
         $api =  "usuario_direccion/num/format/json/"; 
         return   $this->principal->api( $api , $q );                        
     }   
     private function get_ventas_enid_service(){
-        
+      
+      
+        $api =  "cobranza/solicitudes_fecha/format/json/"; 
+        return   $this->principal->api( $api , $q );                        
+
     } 
     private function envios_a_validar_enid_service(){
         
@@ -217,9 +222,7 @@ class productividad extends REST_Controller{
         $data_complete["id_perfil"]             = $id_perfil;
         switch ($id_perfil){
             case 3:            
-                                
-                
-                
+                                            
                 
                 $data_complete["email_enviados_enid_service"] = 
                 $this->email_enviados_enid_service();                
@@ -256,5 +259,25 @@ class productividad extends REST_Controller{
         }
         return $data_complete;
     }
+    private function email_enviados_enid_service(){
+            
+        $q["info"]     = 1;
+        $api =  "prospecto/dia/format/json/";        
+        return $this->principal->api($api , $q);
+
+    }
+    private function accesos_enid_service(){
+            
+        $q["info"] = 1;
+        $api =  "pagina_web/dia/format/json/";        
+        return $this->principal->api($api , $q);
+    }
+    private function tareas_enid_service(){
+            
+        $q["info"] = 1;
+        $api =  "tarea/tareas_enid_service/format/json/";        
+        return $this->principal->api($api , $q);
+    }
+    
     /**/
 }?>

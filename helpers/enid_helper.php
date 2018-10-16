@@ -958,8 +958,10 @@ if ( ! function_exists('strong'))
 {
   function strong($text, $attributes = '')
   {
+    
     $extra      = add_attributes($attributes);  
     return "<strong ".$extra." > ". $text . "</strong>";
+
   }
 }
 

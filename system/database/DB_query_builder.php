@@ -1375,8 +1375,10 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 			$this->limit($limit, $offset);
 		}
 
+		
 		if ($debug ==  1) {
 			debug($this->_compile_select());
+
 		}
 		$result = $this->query($this->_compile_select());
 		$this->_reset_select();

@@ -163,20 +163,18 @@
             $campo_usuario  =>  $param["id_usuario"]
       ];
       return $this->get(["COUNT(0)num"] , $params_where , 10000 )['0']["num"];
-    }
-    
+  }  
   function total_compras_ventas_efectivas_usuario($param){
 
-      $id_usuario =  $param["id_usuario"];
-      $campo_usuario = "id_usuario";
+      $id_usuario     =  $param["id_usuario"];
+      $campo_usuario  = "id_usuario";
       if($param["modalidad"] == 1){
           $campo_usuario ="id_usuario_venta";  
       }      
-      $params_where = [$campo_usuario => $id_usuario ,  "status" =>  9];
-      return $this->get(["count(0)num"] , $params_where  )[0]["num"];
+      $params_where =   [$campo_usuario => $id_usuario ,  "status" =>  9];
+      return $this->get( ["count(0)num"] , $params_where )[0]["num"];
       
-    }
-    
+  }  
   function get_monto_pendiente_proyecto_persona_forma_pago($param){
     return $this->q_get([] , $param["recibo"] );     
   }

@@ -1119,8 +1119,23 @@ class Servicio extends REST_Controller{
     /**/
     function periodo_GET(){
         $param      =  $this->get();
-        $response   = $this->serviciosmodel->get_periodo($param);
-        $this->response($response);
+        $response   = $this->serviciosmodel->periodo($param);
+
+        $v =  (array_key_exists("v", $param) && $param["v"] > 0 ) ?  $param["v"] : 0;
+
+        switch ($v) {
+          case 1:
+            
+            $data["servicios"]  =  $response;
+            $this->load->view("producto/simple" , $data);            
+            break;
+          
+          default:
+            $this->response($response);
+            break;
+        }
+        
+
     }
     function es_servicio_usuario_GET(){
         $param =  $this->get();
@@ -1191,7 +1206,8 @@ class Servicio extends REST_Controller{
     function metricas_productos_solicitados_GET(){
 
         $param =  $this->get();
-        $data["info_productos"] =  $this->serviciosmodel->get_productos_solicitados($param);
+        $data["info_productos"] =  
+        $this->serviciosmodel->get_productos_solicitados($param);
         $this->load->view("producto/principal" , $data);
     }    
     function num_lectura_valoraciones_GET(){

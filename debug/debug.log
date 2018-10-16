@@ -1,0 +1,467 @@
+DEBUG - TYPE array 2018-10-15 21:30:26 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 24
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-10-15 21:38:50 --> SELECT *
+FROM `ci_sessions`
+WHERE `session_id` = '82bf3a6974c1890c1752209b3591de89'
+AND `user_agent` = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:62.0) Gecko/20100101 Firefox/62.0'
+DEBUG - TYPE string 2018-10-15 21:38:50 --> SELECT *
+FROM `servicio`
+WHERE DATE(fecha_registro) = 'BETWEEN \'2018-10-01\' AND \'2018-10-15\' '
+ LIMIT 1
+DEBUG - TYPE string 2018-10-15 21:39:04 --> SELECT *
+FROM `ci_sessions`
+WHERE `session_id` = '82bf3a6974c1890c1752209b3591de89'
+AND `user_agent` = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:62.0) Gecko/20100101 Firefox/62.0'
+DEBUG - TYPE string 2018-10-15 21:39:04 --> SELECT *
+FROM `servicio`
+WHERE DATE(fecha_registro) = 'BETWEEN \'2018-10-01\' AND \'2018-10-15\' '
+ LIMIT 1
+DEBUG - TYPE array 2018-10-15 21:42:07 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 24
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-10-15 21:42:44 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 24
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-10-15 21:51:29 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 24
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-10-15 21:56:28 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 24
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-10-15 22:30:50 --> SELECT  
+                        SUM(CASE 
+                        WHEN 
+                          tt.id_departamento = 1 
+                        THEN 1 ELSE 0 END )num_pendientes_desarrollo,                        
+                        SUM(CASE 
+                                WHEN 
+                                tt.id_departamento = 2 
+                                THEN 1 ELSE 0 END )num_pendientes_ventas , 
+                        SUM(CASE 
+                          WHEN 
+                            tt.id_departamento = 4 
+                          THEN 1 ELSE 0 END )num_pendientes_direccion                        
+                      FROM 
+                          tarea t
+                      INNER JOIN
+                          ticket tt 
+                      ON 
+                      t.id_ticket = tt.id_ticket    
+                      WHERE  
+                          t.status = 1                         
+                      AND 
+                      DATE(t.fecha_termino) =  DATE(CURRENT_TIMESTAMP())
+DEBUG - TYPE string 2018-10-15 22:30:50 --> SELECT  
+                        SUM(CASE 
+                        WHEN 
+                          tt.id_departamento = 1 
+                        THEN 1 ELSE 0 END )num_pendientes_desarrollo,                        
+                        SUM(CASE 
+                                WHEN 
+                                tt.id_departamento = 2 
+                                THEN 1 ELSE 0 END )num_pendientes_ventas , 
+                        SUM(CASE 
+                          WHEN 
+                            tt.id_departamento = 4 
+                          THEN 1 ELSE 0 END )num_pendientes_direccion                        
+                      FROM 
+                          tarea t
+                      INNER JOIN
+                          ticket tt 
+                      ON 
+                      t.id_ticket = tt.id_ticket    
+                      WHERE  
+                          t.status = 1                         
+                      AND 
+                      DATE(t.fecha_termino) =  DATE(CURRENT_TIMESTAMP())
+DEBUG - TYPE string 2018-10-15 23:15:03 --> 0099
+DEBUG - TYPE NULL 2018-10-15 23:15:11 --> 
+DEBUG - TYPE string 2018-10-15 23:15:32 --> 18
+DEBUG - TYPE string 2018-10-15 23:15:34 --> 17
+DEBUG - TYPE string 2018-10-15 23:16:21 --> 16
+DEBUG - TYPE string 2018-10-15 23:16:38 --> 4
+DEBUG - TYPE string 2018-10-15 23:16:41 --> 3
+DEBUG - TYPE string 2018-10-15 23:16:43 --> 4
+DEBUG - TYPE string 2018-10-15 23:16:51 --> 15
+DEBUG - TYPE string 2018-10-15 23:16:55 --> 14
+DEBUG - TYPE string 2018-10-15 23:16:59 --> 13
+DEBUG - TYPE string 2018-10-15 23:16:59 --> 12
+DEBUG - TYPE string 2018-10-15 23:17:00 --> 11
+DEBUG - TYPE string 2018-10-15 23:17:00 --> 10
+DEBUG - TYPE string 2018-10-15 23:17:01 --> 9
+DEBUG - TYPE string 2018-10-15 23:17:01 --> 8
+DEBUG - TYPE string 2018-10-15 23:17:02 --> 7
+DEBUG - TYPE string 2018-10-15 23:17:02 --> 6
+DEBUG - TYPE string 2018-10-15 23:17:02 --> 5
+DEBUG - TYPE string 2018-10-15 23:17:02 --> 4
+DEBUG - TYPE string 2018-10-15 23:17:02 --> 3
+DEBUG - TYPE string 2018-10-15 23:17:07 --> 2
+DEBUG - TYPE string 2018-10-15 23:17:07 --> 1
+DEBUG - TYPE string 2018-10-15 23:20:32 --> ok---
+DEBUG - TYPE string 2018-10-15 23:22:59 --> ok---
+DEBUG - TYPE string 2018-10-15 23:24:27 --> ok---
+DEBUG - TYPE string 2018-10-15 23:25:39 --> ok---
+DEBUG - TYPE string 2018-10-15 23:27:39 --> ok---
+DEBUG - TYPE string 2018-10-15 23:28:04 --> ok---
+DEBUG - TYPE string 2018-10-15 23:29:20 --> ok---
+DEBUG - TYPE string 2018-10-15 23:30:20 --> ok---
+DEBUG - TYPE string 2018-10-15 23:30:22 --> ok---
+DEBUG - TYPE string 2018-10-15 23:30:35 --> ok---
+DEBUG - TYPE string 2018-10-16 09:05:56 --> pasa
+DEBUG - TYPE string 2018-10-16 09:06:08 --> pasa2

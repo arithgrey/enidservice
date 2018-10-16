@@ -35,11 +35,13 @@ class Inicio extends CI_Controller {
         );
 
 
-        $data["css_tema"] = [
+        $data["css"] = [
             "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css",
-            "../js_tema/js/bootstrap-timepicker/css/timepicker.css"];
+            "../js_tema/js/bootstrap-timepicker/css/timepicker.css"
+            
+        ];
 
-        $data["css"] = ["metricas.css", "lista_deseos.css"];
+        $data["css"] = ["metricas.css", "lista_deseos.css" , "productos_solicitados.css"];
         $this->principal->show_data_page( $data , 'empresas_enid');			    	
             
     }    	

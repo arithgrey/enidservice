@@ -13,9 +13,11 @@ class perfil_recurso extends REST_Controller{
               "idrecurso" => $param["id_recurso"] , 
               "idperfil"  => $param["id_perfil"]
         ];
-        $num        = $this->perfil_recurso_model->get_num($param);  
+        $num        = $this->perfil_recurso_model->get_num($param);          
         if ($num > 0){
-            $this->response($this->perfil_recurso_model->delete($params));
+
+            $this->response($this->perfil_recurso_model->delete($params , 10));
+
         }else{
             $this->response($this->perfil_recurso_model->insert($params ));
         }

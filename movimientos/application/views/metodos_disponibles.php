@@ -82,7 +82,8 @@
                                 
                             <?php endif; ?>
                             <?=input_hidden([ "name"=>"tipo", "value"=> $banca])?>
-                            <?=anchor_enid("ASOCIAR" . icon("fa fa-chevron-right") , [] ,1 ,1 )?>
+                            <br>
+                            <?=guardar("ASOCIAR" . icon("fa fa-chevron-right") , [] ,1 ,1 )?>
 
                             <?=div(p("Al asociar tu cuenta, podrás transferir tu saldo de 
                                     Enid Service a tu cuenta personal" , 

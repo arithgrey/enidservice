@@ -26,15 +26,14 @@
 
 							$tb.= "<tr>";
 								
-								$tb.= 
-									get_td(input([
+							$attr =  add_attributes([
 									"id"				=> 	$id_privacidad ,
 									"class"				=>	'concepto_privacidad' ,
 									"termino_asociado" 	=> 	$termino_asociado ,
-									"type"				=>	'checkbox' .$extra_seleccion
-								]));
-								
-								$tb .=  get_td(strtoupper($privacidad));
+									"type"				=>	'checkbox' 
+							]);		
+							$tb .= get_td("<input ".$attr." ".$extra_seleccion.">");
+							$tb .=  get_td(strtoupper($privacidad));
 								
 							$tb.= "</tr>";
 						

@@ -26,6 +26,7 @@ if(!function_exists('invierte_date_time')){
   }
   function valida_active_tab($nombre_seccion , $estatus){
 
+    
     $status = "";
     if(strlen($estatus) > 0 ){    
       $status =  ($nombre_seccion ==  $estatus)? " active " : "";

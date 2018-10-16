@@ -533,8 +533,9 @@ function resumen_servicios(){
 	/***/
 	var fecha_inicio 		=  get_parameter_enid( $(this) , "fecha_inicio"); 
 	var fecha_termino 		= get_parameter_enid( $(this) , "fecha_termino"); 	
-	var data_send 			=  {"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino };
-	var url 				=  "../tag/index.php/api/producto/periodo/format/json/";	
+	var data_send 			=  {"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino ,  "v":  1};
+
+	var url 				=  "../q/index.php/api/servicio/periodo/format/json/";	
 	request_enid( "GET",  data_send, url, 1, ".place_reporte", 0 , ".place_reporte" );				
 }
 /**/
@@ -553,7 +554,7 @@ function resume_lista_deseos(){
 	var 	fecha_inicio 	=  	get_parameter_enid($(this) , "fecha_inicio");
 	var  	fecha_termino 	= 	get_parameter_enid($(this) , "fecha_termino"); 	
 	var 	data_send 		=  	{"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino };
-	var  	url 			=  	"../tag/index.php/api/producto/lista_deseos_periodo/format/json/";	
+	var  	url 			=  	"../q/index.php/api/servicio/lista_deseos_periodo/format/json/";	
 	request_enid( "GET",  data_send , url, 1, ".place_reporte" , 0 , ".place_reporte" );	
 }
 /**/

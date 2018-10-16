@@ -224,7 +224,7 @@ class Clasificacion extends REST_Controller{
             "padre"                 =>  $param["padre"],
             "nivel"                 =>  $param["nivel"]
         ];
-        $response   =  $this->clasificacion_model->insert($param);
+        $response   =  $this->clasificacion_model->insert($params);
         $this->response($response);
     }
     /**/

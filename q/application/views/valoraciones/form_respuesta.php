@@ -54,16 +54,17 @@
 				<li class="left clearfix">
 					<?=span(
 						img([
-							"src" 			= carga_imagen_usuario_respuesta($id_usuario),
-		                    "onerror" 		= "this.src='../img_tema/user/user.png'",
-		                    "style" 		= "width: 40px!important;height: 32px!important;"	,
-		                    "class" 		= "img-circle"
-						]) , 
+							"src" 			=> carga_imagen_usuario_respuesta($id_usuario),
+		                    "onerror" 		=> "this.src='../img_tema/user/user.png'",
+		                    "style" 		=> "width: 40px!important;height: 32px!important;"	,
+		                    "class" 		=> "img-circle"
+						]), 
 						["class" 			=>	"chat-img pull-left"]
+
 					)?>
 					<div class="chat-body clearfix">
 						<div class="header">
-							<?=strong( $nombre . $apellido_paterno , ["class" => "primary-font"] )?>
+							<?=strong( $nombre . $apellido_paterno );?>
 							<?=small(icon("fa fa-clock") . $fecha_registro , ["class" => "pull-right text-muted"] )?>
 						</div>
 						<?=p($respuesta)?>

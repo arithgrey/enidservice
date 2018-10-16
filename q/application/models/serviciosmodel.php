@@ -628,16 +628,10 @@
     /**/
     function periodo($param){
 
-        /*
-        $query_get ="SELECT * FROM servicio WHERE DATE(fecha_registro) BETWEEN '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."' ";
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
-        */
-        $q = [
-            "DATE(fecha_registro)" => 
-            "BETWEEN '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."' "
-        ];
-        return $this->get([] , $q );
+        $query_get =  "SELECT * FROM servicio WHERE DATE(fecha_registro) 
+        BETWEEN '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."'";        
+
+        return $this->db->query($query_get)->result_array();
     }
     
     function es_servicio_usuario($param){
