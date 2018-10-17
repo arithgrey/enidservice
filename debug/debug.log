@@ -465,3 +465,149 @@ DEBUG - TYPE string 2018-10-15 23:30:22 --> ok---
 DEBUG - TYPE string 2018-10-15 23:30:35 --> ok---
 DEBUG - TYPE string 2018-10-16 09:05:56 --> pasa
 DEBUG - TYPE string 2018-10-16 09:06:08 --> pasa2
+DEBUG - TYPE string 2018-10-17 00:00:00 --> 8888
+DEBUG - TYPE string 2018-10-17 01:26:37 --> 2018/10/17
+DEBUG - TYPE string 2018-10-17 01:27:01 --> 2018-10-17
+DEBUG - TYPE string 2018-10-17 01:27:57 --> 2
+DEBUG - TYPE array 2018-10-17 01:29:51 --> Array
+(
+    [perfil] => 3
+    [id_usuario] => 1
+    [adeudos_cliente] => Array
+        (
+            [total_deuda] => 11752
+            [sin_direcciones] => 30
+        )
+
+    [valoraciones_sin_leer] => 1
+    [id_perfil] => 3
+    [email_enviados_enid_service] => 0
+    [accesos_enid_service] => 0
+    [tareas_enid_service] => 
+    [num_pendientes_direccion] => 
+    [mensajes] => 
+    [numero_telefonico] => 
+)
+
+DEBUG - TYPE array 2018-10-17 01:30:35 --> Array
+DEBUG - TYPE array 2018-10-17 01:30:48 --> Array
+(
+    [objetivos_perfil] => Array
+        (
+            [0] => Array
+                (
+                    [id_objetivo] => 1
+                    [nombre_objetivo] => Email
+                    [cantidad] => 500
+                    [id_perfil] => 3
+                )
+
+            [1] => Array
+                (
+                    [id_objetivo] => 2
+                    [nombre_objetivo] => Accesos
+                    [cantidad] => 400
+                    [id_perfil] => 3
+                )
+
+            [2] => Array
+                (
+                    [id_objetivo] => 3
+                    [nombre_objetivo] => Llamadas
+                    [cantidad] => 10
+                    [id_perfil] => 3
+                )
+
+            [3] => Array
+                (
+                    [id_objetivo] => 4
+                    [nombre_objetivo] => contactos
+                    [cantidad] => 10
+                    [id_perfil] => 3
+                )
+
+            [4] => Array
+                (
+                    [id_objetivo] => 5
+                    [nombre_objetivo] => Envios_a_validar
+                    [cantidad] => 6
+                    [id_perfil] => 3
+                )
+
+            [5] => Array
+                (
+                    [id_objetivo] => 6
+                    [nombre_objetivo] => Ventas
+                    [cantidad] => 1
+                    [id_perfil] => 3
+                )
+
+            [6] => Array
+                (
+                    [id_objetivo] => 7
+                    [nombre_objetivo] => Desarrollo_web
+                    [cantidad] => 15
+                    [id_perfil] => 3
+                )
+
+            [7] => Array
+                (
+                    [id_objetivo] => 8
+                    [nombre_objetivo] => email_registrados
+                    [cantidad] => 500
+                    [id_perfil] => 3
+                )
+
+            [8] => Array
+                (
+                    [id_objetivo] => 9
+                    [nombre_objetivo] => marketing
+                    [cantidad] => 10
+                    [id_perfil] => 3
+                )
+
+            [9] => Array
+                (
+                    [id_objetivo] => 10
+                    [nombre_objetivo] => direccion
+                    [cantidad] => 10
+                    [id_perfil] => 3
+                )
+
+            [10] => Array
+                (
+                    [id_objetivo] => 27
+                    [nombre_objetivo] => Temas de ayuda
+                    [cantidad] => 3
+                    [id_perfil] => 3
+                )
+
+        )
+
+    [productos_anunciados] => 127
+    [flag_direccion] => 12
+    [info_notificaciones] => Array
+        (
+            [perfil] => 3
+            [id_usuario] => 1
+            [adeudos_cliente] => Array
+                (
+                    [total_deuda] => 11752
+                    [sin_direcciones] => 30
+                )
+
+            [valoraciones_sin_leer] => 1
+            [id_perfil] => 3
+            [email_enviados_enid_service] => 0
+            [accesos_enid_service] => 0
+            [tareas_enid_service] => 
+            [num_pendientes_direccion] => 
+            [mensajes] => 
+            [numero_telefonico] => 
+        )
+
+    [id_perfil] => 3
+    [id_usuario] => 1
+    [ventas_enid_service] => 2
+)
+

@@ -2,16 +2,17 @@
 $llamadas_hechas = anchor_enid("HECHAS". 
 	span( "" ,['class' => 'notificacion_preguntas_sin_leer_cliente'] ) , 
 [	"class"	=>	"a_enid_black preguntas btn_preguntas_compras" ,
-	"id"	=>	'0' ,
-	"style"	=>	"color: white!important"
+	"id"	=>	'0' 	
 ]);
 
 $llamadas_recibidas =  anchor_enid(
-	"RECIBIDAS" .span("" , ['class' => 'notificacion_preguntas_sin_leer_ventas']   ) , 
-["class"	=>"a_enid_blue preguntas btn_preguntas_ventas" ,
-"id"	=>"1" ,
-"style" =>"color: white!important"
-]);
+	"RECIBIDAS" .
+	span("" , ['class' => 'notificacion_preguntas_sin_leer_ventas']   ) 
+	, 
+	[
+		"class"	=>	"a_enid_blue preguntas " ,
+		"id"	=>	"1" 		
+	]);
 ?>
 	<?=n_row_12()?>
 	    <div class="contenedor_principal_enid">

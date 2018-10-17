@@ -3,17 +3,11 @@
 		font-weight: bold;
 	}
 	.go-usuario{
-		color: blue; text-decoration: underline;
-	}
-	.go-usuario:hover{
-
-		background: black;
-		color: white!important; 
-		padding: 2px;
-
+		color: #007881;
+		font-weight: bold;		
 	}
 	.text_resumen{
-		font-weight: bold;font-size: 1.1em;
+		font-weight: bold;font-size: 1.4em;
 		background: black;
 		color: white;
 		padding: 1px;
@@ -24,3 +18,8 @@
 	.info_comentarios{
 		text-align: center;
 	}
+	.contenedor_promedios{		
+		text-decoration: underline;
+		background: #fefefe;	
+	}
+	

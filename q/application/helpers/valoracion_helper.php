@@ -32,20 +32,18 @@
       $size="2em";
       
       for($x=1; $x <= $calificacion; $x++){         
-        $extra = "";          
-        $estrellas_valoraciones .=  label("★" ,["class"=>'estrella']);
+        $extra = "font-size: 2em;";          
+        $estrellas_valoraciones .=  label("★" ,["class"=>'estrella' , "style" => $extra]);
         $num_restantes ++;
       }      
       for($num_restantes; $num_restantes <= 5; $num_restantes++ ){ 
-          $extra ="font-size: 2em;
-                    -webkit-text-fill-color: white;
-                    -webkit-text-stroke: 0.5px rgb(0, 74, 252);";
+          $extra ="font-size: 2em;-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);";
           
           $restantes  .=  label("★" , 
                           [
                             "class" =>'estrella'  ,
                             "style" => $extra
-           ]);
+                          ]);
           
       }
       $estrellas =  $estrellas_valoraciones.$restantes;
@@ -58,11 +56,11 @@
       if($persona == 1){
           $mensaje_final ="de los consumidores recomiendan";          
       }
-      $valoraciones     =  $numero_valoraciones[0];
-      $num_valoraciones =  $valoraciones["num_valoraciones"];
-      $text_comentarios =  ($num_valoraciones>1)?"COMENTARIOS":"COMENTARIO";
-      $comentarios      = $num_valoraciones.$text_comentarios;
-      $promedio         =  $valoraciones["promedio"];
+      $valoraciones     =   $numero_valoraciones[0];
+      $num_valoraciones =   $valoraciones["num_valoraciones"];
+      $text_comentarios =   ($num_valoraciones>1)?"COMENTARIOS":"COMENTARIO";
+      $comentarios      =   $num_valoraciones.$text_comentarios;
+      $promedio         =   $valoraciones["promedio"];
       $personas_recomendarian =  $valoraciones["personas_recomendarian"];
 
       $promedio_general =  number_format($promedio, 1, '.', '');            

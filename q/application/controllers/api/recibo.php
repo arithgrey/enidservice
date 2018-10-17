@@ -238,5 +238,19 @@ class recibo extends REST_Controller{
         $this->response($response);
 
     }
+    function dia_GET(){
+        
+        $param      = $this->get();
+        $response   = [];
+        if(if_ext($param , 'fecha')){
+            if ($param["fecha"] ==  1) {            
+                $param["fecha"] =  date("Y-m-d");                
+            }
+            $response   = $this->recibo_model->get_dia($param);        
+            
+        }
+        $this->response($response);            
+        
+    }
 
 }?>

@@ -15,9 +15,7 @@
 .informacion_busqueda_productos_encontrados{
     font-size: 1em;    
 }
-.contenedor_menu_productos_sugeridos{
-    border: solid black .7px;padding: 3px;
-}
+
 .categorias_mas_vistas{
      color: white!important;
      margin-left: 20px;

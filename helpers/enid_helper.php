@@ -1,9 +1,9 @@
 <?php
 
 /*
+--Refactor helpers
 ----  Pasar a set functions
 ---   js
-----  views
 ---   controllers
 - Habilitar entregas personales 
 - definir periodos de entrega solo para el perfil enidservice 
@@ -336,9 +336,8 @@ if ( ! function_exists('anchor_enid'))
       }else{
         $attributes["class"] =  "a_enid_blue white completo ";
       }    
-
     }
-
+    
     if ($attributes != '')
     {
       $attributes = _parse_attributes($attributes);
@@ -621,10 +620,10 @@ if ( ! function_exists('get_paramdef'))
 /**/
 if ( ! function_exists('label'))
 {  
-  function label($label_text = '',  $attributes = array() , $n_row_12 = 0 ){
+  function label($label_text = '',  $attributes = '' , $row = 0 ){
       
       $attr =  add_attributes($attributes);
-      if ($row =0 ) {
+      if ($row == 0 ) {
         return "<label ".$attr.">".$label_text ."</label>";
       }else{
         return n_row_12(). "<label ".$attr.">".$label_text ."</label>" . end_row();

@@ -48,37 +48,30 @@
 	<?=heading_enid(icon("fa fa-credit-card") . "Formas de pago" , 3 , ["class" => 'strong' ])?>	
 	<hr>
 
-
 	<?=anchor_enid(
 			"Realiza compras con saldo Enid Service" , 
 			[
-				"href" 	=> 	$url_pago_saldo_enid ,
-				"class"	=> 	"contenedor_tipo_pago"
+				"href" 	=> 	$url_pago_saldo_enid 				
 			], 
 			1, 
 			1
 	)?>
 	<?=anchor_enid(
 			"Pagos en tiendas de autoservicio (OXXO)",
-			[
-				"href"	=>  $url_pago_oxxo,
-				"class"	=> 	"contenedor_tipo_pago",
+			[ "href"	=>  $url_pago_oxxo	],
 			1,
 			1
-		]
+	)?>
+	<?=anchor_enid(
+			"Compra através de PayPal",
+			["href"	=>  $url_pago_paypal],
+			1,
+			1
 	)?>
 	<?=n_row_12()?>				
 		
 		
-		<?=anchor_enid(
-			"Compra através de PayPal",
-			[
-				"href"	=>  $url_pago_paypal,
-				"class"	=> 	"contenedor_tipo_pago",
-				1,
-				1
-			]
-		)?>
+		
 	
 		<?=heading_enid("Dirección de envío" , 3)?>
 		
@@ -97,8 +90,6 @@
 			    		1
 			    	)?>
 			    </div>
-
-
 			    <div class='texto_direccion_envio_pedido'>
 			        <?=get_campo($informacion_envio , "direccion" )?>
 			        <?=get_campo($informacion_envio , "calle" )?>
@@ -117,11 +108,14 @@
 			</div>
 			<?php else: ?>
 				<?=div(
-					icon("fa fa-bus")."Agrega la dirección de envío de tu pedido!", 
+					icon("fa fa-bus")." Agrega la dirección de envío de tu pedido!", 
 						[
-							"class"				=>	"btn_direccion_envio contenedor_agregar_direccion_envio_pedido" ,
+							"class"				=>	
+								"btn_direccion_envio 
+								contenedor_agregar_direccion_envio_pedido 
+								a_enid_black cursor_pointer",
 							"id"				=>	$id_recibo,
-							"href"				=>	"#tab_mis_pagos"			        	,
+							"href"				=>	"#tab_mis_pagos",
 							"data-toggle"		=>	"tab"	
 						],
 						1

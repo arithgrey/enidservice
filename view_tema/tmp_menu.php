@@ -18,13 +18,12 @@
     $estrellas = "";
     for ($a=0; $a < 4; $a++) { 
         $estrellas  .=  
-        span('★', '', ["class"=>"estrella", "style"=>"color: #0070dd;"]);     
+        span('★', ["class"=>"estrella", "style"=>"color: #0070dd;"]);     
     }
-    $estrellas      .=  span('★', '', 
+    $estrellas      .=  span('★', 
     [
     "class" =>  "estrella", 
-    "style" =>  
-    "-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);"]);
+    "style" =>  "-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);"]);
         
     $link_valoraciones  = 
         anchor_enid(

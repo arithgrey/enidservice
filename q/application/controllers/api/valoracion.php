@@ -99,7 +99,10 @@ class Valoracion extends REST_Controller{
         $data_comentarios  =  crea_resumen_valoracion_comentarios($comentarios["data"] , "");
         if(count($comentarios["data"])> 0 ){
             
-            $data_comentarios = "<hr><div class='text_resumen'> RESEÑAS HECHAS POR OTROS CLIENTES </div><hr>".$data_comentarios;          
+            $data_comentarios =  
+            hr().div("RESEÑAS HECHAS POR OTROS CLIENTES" , ["class"=>'text_resumen']).hr().$data_comentarios;
+
+            
         }
         $this->response($data_comentarios);        
     }

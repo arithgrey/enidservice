@@ -1,3 +1,12 @@
+.escribir_valoracion{
+  color: blue!important;
+  font-size: 1.5em!important;
+  font-weight: bold;
+}
+.promedio_num{  
+    font-size: 2em;
+    text-decoration: underline;
+}
 .facil_selec{
   margin-top: 10px!important;
   color: black!important;

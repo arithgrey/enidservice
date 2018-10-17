@@ -403,8 +403,6 @@ class Cobranza extends REST_Controller{
         return $this->principal->api( $api ,$q);  
     }   
     /**/
-    
-    /**/
     function agrega_data_cliente($data){
 
         $nueva_data = [];
@@ -470,12 +468,10 @@ class Cobranza extends REST_Controller{
     }
     /**/
      function resumen_num_pendientes_persona_GET(){
-        $param =  $this->get();                
-        /**/
-        $num_pendientes  = 
-        $this->cobranzamodel->get_num_saldos_pendientes_persona($param);
-        /**/
-        $new_response = "";        
+        $param              =  $this->get();                        
+        $num_pendientes     = 
+        $this->cobranzamodel->get_num_saldos_pendientes_persona($param);        
+        $new_response       = "";        
         if ($num_pendientes >0){
 
             $new_response = "<span class='alerta_llamadas_agendadas'>
@@ -483,7 +479,7 @@ class Cobranza extends REST_Controller{
                                 
                             </span>";
         }
-        /**/   
+        
         $this->response($new_response);
     }
     /**/
@@ -515,9 +511,6 @@ class Cobranza extends REST_Controller{
         $data_respose =  $this->cobranzamodel->valida_recibo_por_pagar($param);
         $this->response(crea_data_deuda_pendiente($data_respose) );
     }
-    /**/
-    
-    /**/
     function recibo_por_enviar_usuario_GET()
     {
         $param = $this->get();
@@ -562,12 +555,14 @@ class Cobranza extends REST_Controller{
         $num_ventas =  $this->cobranzamodel->get_ventas_dia($param);
         $this->response($num_ventas);
     }
+    /*
     function solicitudes_fecha_GET(){
         
         $param      =  $this->get();
         $num_ventas =  $this->cobranzamodel->get_solicitudes_venta_dia($param);
         $this->response($num_ventas);
-    }    
+    } 
+    */   
     /**/
     private function get_direccion_pedido($id_recibo){
             

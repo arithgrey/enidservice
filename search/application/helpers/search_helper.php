@@ -60,8 +60,10 @@ if(!function_exists('invierte_date_time')){
   
   function crea_seccion_de_busqueda_extra($info , $busqueda){
       
-      $seccion ="";
-      $flag =0;
+      $seccion  = "";
+      $flag     = 0;
+
+      $lista    = [];
       for ($z=0; $z < count($info); $z++) {           
           $data = $info[$z];
           foreach ($data as $row) {
@@ -70,12 +72,12 @@ if(!function_exists('invierte_date_time')){
             $nombre_clasificacion = $row["nombre_clasificacion"];  
 
             $url      = "../search/?q=".$busqueda."&q2=".$id_clasificacion;
-            $seccion .= anchor_enid($nombre_clasificacion , ["href"=> $url , "class"=>'black categoria_text']);
+            $lista[]  = anchor_enid($nombre_clasificacion , ["href"=> $url , "class"=>'categoria_text black'] );
             $flag ++; 
           }
       }
       
-      $info_seccion["html"]           =  $seccion;
+      $info_seccion["html"]           =  ul($lista);
       $info_seccion["num_categorias"] =  $flag; 
       return $info_seccion;
       

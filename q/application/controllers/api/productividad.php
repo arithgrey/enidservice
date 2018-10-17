@@ -77,21 +77,17 @@ class productividad extends REST_Controller{
         $param                                  =   $this->get();  
         $id_usuario                             =   $this->principal->get_session('idusuario');
         $param["id_perfil"]                     =   $this->principal->getperfiles();        
-
         $param["id_usuario"]                    =   $id_usuario;                
         $response["objetivos_perfil"]           =   $this->get_objetivos_perfil($param);
         $response["productos_anunciados"]       =   $this->valida_producto_anunciado($param);
         $response["flag_direccion"]             =   $this->verifica_direccion_registrada_usuario($param);
         $response["info_notificaciones"]        =   $this->get_notificaciones_usuario_perfil($param);
-        $response["ventas_enid_service"]        =   $this->get_ventas_enid_service();
+        
         $response["id_perfil"]                  =   $param["id_perfil"];
         if ($param["id_perfil"] ==  3 || $response["info_notificaciones"] == 4 ) {
             $data_complete["envios_a_validar_enid_service"] = $this->envios_a_validar_enid_service();
         }
                         
-
-
-
         $id_perfil                          =   $param["id_perfil"]; 
         $prm["modalidad"]                   =   1;
         $prm["id_usuario"]                  =   $id_usuario;                            
@@ -105,10 +101,13 @@ class productividad extends REST_Controller{
         
         switch ($id_perfil){
             
-            case 3:                
+            case 3:     
+                
+                $response["ventas_enid_service"]        =   $this->get_ventas_enid_service();           
                 $this->response(get_tareas_pendienetes_usuario($response));        
                 break;                        
             case 20:                               
+
                 $this->response(get_tareas_pendienetes_usuario_cliente($response));
                 break;    
             default:                
@@ -193,11 +192,10 @@ class productividad extends REST_Controller{
         return   $this->principal->api( $api , $q );                        
     }   
     private function get_ventas_enid_service(){
-      
-      
-        $api =  "cobranza/solicitudes_fecha/format/json/"; 
+        
+        $q["fecha"]         = 1;
+        $api =  "recibo/dia/format/json/";         
         return   $this->principal->api( $api , $q );                        
-
     } 
     private function envios_a_validar_enid_service(){
         

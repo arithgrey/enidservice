@@ -278,8 +278,9 @@
     return $this->db->get("proyecto_persona_forma_pago")->result_array();
   }
   
-  function get_solicitudes_venta_dia($param){
-    return $this->get([" COUNT(0)num "] , ["DATE(fecha_registro)" =>  $param["fecha"] ] )[0]["num"];
+  function get_dia($param){
+    return 
+    $this->get([" COUNT(0)num "] , ["DATE(fecha_registro)" =>  $param["fecha"] ] )[0]["num"];
   }
   
   /*

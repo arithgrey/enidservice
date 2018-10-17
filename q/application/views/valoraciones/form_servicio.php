@@ -72,7 +72,8 @@
 			<?=n_row_12()?>
 				<table style='width:100%'>
 					<tr>
-						<?=get_td("Tu opinión en una frase*" , ["class" => "text-valoracion"])?>
+						<?=get_td("Tu opinión en una frase*" , 
+						["class" => "text-valoracion strong"])?>
 						
 							<?=get_td(input([
 								"type"			=>"text" ,
