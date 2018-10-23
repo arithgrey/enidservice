@@ -22,9 +22,9 @@ function lista_categorias($categorias){
 }
 function create_meta_tags($string , $id_servicio){
 
-  $tags=   explode(",", $string);
-  $listado_tag ="";
-  $lista_tags = "";
+  $tags         =   explode(",", $string);
+  $listado_tag  =   "";
+  $lista_tags   =   "";
   foreach ($tags as $row) {
     
     $icon          =  icon('fa fa-times');    
@@ -47,11 +47,9 @@ function valida_active_pane($num , $num_tab){
   }  
 }
 
-
 function valida_existencia_imagenes($num_images){
     return ($num_images > 0) ? "" : " style='display:none;' ";      
 }
-
 
 function text_agregar_telefono($has_phone , $telefono_visible){
   
@@ -75,34 +73,30 @@ function valida_activo_informes_por_telefono($valor , $valor_usuario){
       return "button_enid_eleccion_active";
   }  
 }  
-function valida_activo_vista_telefono($valor , $valor_usuario){
+  function valida_activo_vista_telefono($valor , $valor_usuario){
 
-  if($valor ==  $valor_usuario){
-      return "button_enid_eleccion_active";
+    if($valor ==  $valor_usuario){
+        return "button_enid_eleccion_active";
+    }
+  } 
+  function valida_activo_entregas_en_casa($valor , $valor_usuario){
+
+    if($valor ==  $valor_usuario){
+        return "button_enid_eleccion_active";
+    }
+  } 
+
+  function  valida_text_imagenes($tipo_promocion, $num_images){
+      
+      $tipo_promocion =  strtoupper($tipo_promocion); 
+      if($num_images == 0){                             
+          
+          $msj    =  "MUESTRA IMAGENES SOBRE TU ".$tipo_promocion." A POSIBLES CLIENTES"; 
+          $text   =  heading_enid($msj ,  4 , ["class"  =>  'mensaje_imagenes_visible'] , 1);
+          $notificacion  =  "TU ". $tipo_promocion ." NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES";
+          $text         .= div($notificacion, ["class" => "notificacion_publicar_imagenes"], 1);    
+        return  $text;
+      }      
   }
-} 
-
-
-if(!function_exists('invierte_date_time')){
-
-function valida_activo_entregas_en_casa($valor , $valor_usuario){
-
-  if($valor ==  $valor_usuario){
-      return "button_enid_eleccion_active";
-  }
-} 
-
-function  valida_text_imagenes($tipo_promocion, $num_images){
-    
-    $tipo_promocion =  strtoupper($tipo_promocion); 
-    if($num_images == 0){                             
-        
-        $msj    =  "MUESTRA IMAGENES SOBRE TU ".$tipo_promocion." A POSIBLES CLIENTES"; 
-        $text   =  heading_enid($msj ,  4 , ["class"  =>  'mensaje_imagenes_visible'] , 1);
-        $notificacion  =  "TU ". $tipo_promocion ." NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES";
-        $text         .= div($notificacion, ["class" => "notificacion_publicar_imagenes"], 1);    
-      return  $text;
-    }      
-}
- }
+ 
 }

@@ -42,7 +42,7 @@
     ]);
 ?>
     <div class="col-lg-2" >               
-        <nav class="nav-sidebar">
+        <nav class="nav-sidebar">            
             <ul class="nav tabs">
                 <li class='li_menu' style="display: none;">
                     <?=$a_tab_pagos?>

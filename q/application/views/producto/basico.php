@@ -1,19 +1,18 @@
 <?php
         
     
-    $extra_color        =   "style='margin-left:5px;color: black;font-weight:bold;'";
+    $extra_color        =   "";
     $list               =   "";  
     $flag               =   0;            
     $nombre_servicio    =   $servicio["nombre_servicio"];             
     $id_servicio        =   $servicio["id_servicio"];        
     $flag_envio_gratis  =   $servicio["flag_envio_gratis"];
     $text_extra         =   is_servicio($servicio);        
-    $url_img            =   $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;        
-        
-    $metakeyword        =  $servicio["metakeyword"];        
-    $color              =  isset($servicio["color"]) ? $servicio["color"] : "";
-    $flag_servicio      =  $servicio["flag_servicio"];        
-    $precio             =  $servicio["precio"];           
+    $url_img            =   $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;                
+    $metakeyword        =   $servicio["metakeyword"];        
+    $color              =   array_key_exists("color", $servicio) ? $servicio["color"] : "";
+    $flag_servicio      =   $servicio["flag_servicio"];        
+    $precio             =   $servicio["precio"];           
     $costo_envio ="";
     if($flag_servicio == 0){
         $costo_envio =  $servicio["costo_envio"]["text_envio"]["cliente_solo_text"];                 
@@ -29,9 +28,9 @@
         $id_usuario_registro_servicio =  $id_usuario;            
     }
 
-    $url_info_producto =  "../producto/?producto=".$id_servicio.$extra_url;
-    $url_venta =
-    "http://enidservice.com/inicio/producto/?producto=".$id_servicio.$extra_url;
+    $url_info_producto  =  "../producto/?producto=".$id_servicio.$extra_url;
+    $url_venta          =  get_url_venta($id_servicio.$extra_url); 
+    
     
     $extra_flag_1 ="";
     $extra_flag_2 ="";
@@ -65,8 +64,7 @@
 ?>
 <div class='info_producto'>
     <?=div(
-    get_precio_producto($url_info_producto,$precio,$costo_envio,
-    $flag_servicio, $id_ciclo_facturacion) ,
+    get_precio_producto($url_info_producto,$precio,$costo_envio,$flag_servicio, $id_ciclo_facturacion) ,
     ["style"=>"position:absolute;top:180px;margin-left:5px;z-index: 100"],
     1)?>
     
@@ -84,7 +82,7 @@
                     1)?>
             <?php endif; ?>
             <?=n_row_12()?>
-            <table style="border-bottom:1px dotted black;font-size:.8em;height:20px;">
+            <table class='resumen_colores_producto'>
                 <tr>
                     <?=get_td(get_numero_colores($color, 
                                 $flag_servicio,

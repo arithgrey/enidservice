@@ -611,3 +611,201 @@ DEBUG - TYPE array 2018-10-17 01:30:48 --> Array
     [ventas_enid_service] => 2
 )
 
+DEBUG - TYPE string 2018-10-17 23:26:17 --> w
+DEBUG - TYPE string 2018-10-17 23:27:40 --> w
+DEBUG - TYPE array 2018-10-17 23:28:14 --> Array
+(
+    [tarea] => 
+    [id_ticket] => 177
+    [id_usuario] => 1
+)
+
+DEBUG - TYPE array 2018-10-17 23:29:07 --> Array
+(
+    [tarea] => 
+    [id_ticket] => 177
+    [id_usuario] => 1
+)
+
+DEBUG - TYPE array 2018-10-17 23:30:16 --> Array
+(
+    [descripcion] => 
+    [id_ticket] => 177
+    [usuario_registro] => 1
+)
+
+DEBUG - TYPE array 2018-10-17 23:44:43 --> Array
+(
+    [tarea] => 
+    [id_ticket] => 318
+    [id_usuario] => 1
+)
+
+DEBUG - TYPE array 2018-10-17 23:45:16 --> Array
+(
+    [tarea] => 
+    [id_ticket] => 177
+    [id_usuario] => 1
+)
+
+DEBUG - TYPE NULL 2018-10-17 23:45:59 --> 
+DEBUG - TYPE NULL 2018-10-17 23:47:31 --> 
+DEBUG - TYPE NULL 2018-10-17 23:47:50 --> 
+DEBUG - TYPE string 2018-10-17 23:48:29 --> oko
+DEBUG - TYPE array 2018-10-17 23:48:29 --> Array
+(
+    [format] => json
+    [.json] => 
+    [tarea] => 
+    [id_ticket] => 177
+    [id_usuario] => 1
+)
+
+DEBUG - TYPE string 2018-10-17 23:48:29 --> 1
+DEBUG - TYPE array 2018-10-17 23:48:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [tarea] => 
+    [id_ticket] => 177
+    [id_usuario] => 1
+)
+
+DEBUG - TYPE string 2018-10-17 23:48:58 --> ....1
+DEBUG - TYPE array 2018-10-17 23:49:52 --> Array
+(
+    [format] => json
+    [.json] => 
+    [tarea] => 
+    [id_ticket] => 177
+    [id_usuario] => 1
+)
+
+DEBUG - TYPE string 2018-10-17 23:49:52 --> ....1
+DEBUG - TYPE array 2018-10-17 23:50:03 --> Array
+(
+    [format] => json
+    [.json] => 
+    [tarea] => 
+    [id_ticket] => 177
+    [id_usuario] => 1
+)
+
+DEBUG - TYPE string 2018-10-17 23:50:03 --> ....1
+DEBUG - TYPE array 2018-10-17 23:54:06 --> Array
+(
+    [0] => Array
+        (
+            [tareas] => 11
+            [pendientes] => 11
+        )
+
+)
+
+DEBUG - TYPE array 2018-10-17 23:56:44 --> Array
+(
+    [status] => 0
+    [id_ticket] => 
+    [num_tareas] => Array
+        (
+            [0] => Array
+                (
+                    [tareas] => 12
+                    [pendientes] => 12
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-10-17 23:57:28 --> Array
+(
+    [status] => 0
+    [id_ticket] => 177
+    [num_tareas] => Array
+        (
+            [0] => Array
+                (
+                    [tareas] => 13
+                    [pendientes] => 13
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-10-18 00:04:08 --> Array
+(
+    [status] => 0
+    [id_ticket] => 177
+    [num_tareas] => 18
+)
+
+DEBUG - TYPE array 2018-10-18 00:04:26 --> Array
+(
+    [status] => 0
+    [id_ticket] => 177
+    [num_tareas] => 19
+)
+
+DEBUG - TYPE string 2018-10-18 00:04:26 --> enrto
+DEBUG - TYPE array 2018-10-18 00:05:42 --> Array
+(
+    [status] => 0
+    [id_ticket] => 177
+    [num_tareas] => 21
+)
+
+DEBUG - TYPE array 2018-10-18 00:07:37 --> Array
+(
+    [status] => 0
+    [id_ticket] => 177
+    [num_tareas] => 22
+)
+
+DEBUG - TYPE array 2018-10-18 00:07:42 --> Array
+(
+    [status] => 0
+    [id_ticket] => 177
+    [num_tareas] => 23
+)
+
+DEBUG - TYPE array 2018-10-18 00:08:08 --> Array
+(
+    [status] => 0
+    [id_ticket] => 177
+    [num_tareas] => 24
+)
+
+DEBUG - TYPE string 2018-10-18 00:08:08 --> enrto
+DEBUG - TYPE boolean 2018-10-18 00:08:50 --> 1
+DEBUG - TYPE string 2018-10-22 22:47:45 --> 9988
+DEBUG - TYPE string 2018-10-22 22:47:46 --> 9988
+DEBUG - TYPE string 2018-10-22 22:47:46 --> 9988
+DEBUG - TYPE string 2018-10-22 22:47:46 --> 9988
+DEBUG - TYPE string 2018-10-22 22:47:46 --> 9988
+DEBUG - TYPE string 2018-10-22 22:48:20 --> 99887
+DEBUG - TYPE string 2018-10-22 22:48:56 --> 998874
+DEBUG - TYPE string 2018-10-22 22:51:09 --> 998874
+DEBUG - TYPE string 2018-10-22 22:51:17 --> 998874999999
+DEBUG - TYPE string 2018-10-22 22:58:45 --> ....
+DEBUG - TYPE NULL 2018-10-22 22:58:45 --> 
+DEBUG - TYPE array 2018-10-22 23:00:04 --> Array
+(
+    [id_imagen] => 896
+    [idusuario] => 
+)
+
+DEBUG - TYPE string 2018-10-22 23:00:04 --> ....
+DEBUG - TYPE NULL 2018-10-22 23:00:04 --> 
+DEBUG - TYPE array 2018-10-22 23:00:59 --> Array
+(
+    [id_imagen] => 897
+    [idusuario] => 850
+)
+
+DEBUG - TYPE string 2018-10-22 23:00:59 --> ....
+DEBUG - TYPE boolean 2018-10-22 23:00:59 --> 1
+DEBUG - TYPE string 2018-10-22 23:02:41 --> llo
+DEBUG - TYPE string 2018-10-22 23:02:41 --> ....
+DEBUG - TYPE boolean 2018-10-22 23:02:41 --> 1

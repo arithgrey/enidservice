@@ -37,9 +37,8 @@ class Archivo extends REST_Controller{
 
             $prm["imagenBinaria"]   =   $imagenBinaria;
             $prm["nombre_archivo"]  =   $nombre_archivo;
-            $prm["extension"]       =   $extension; 
-            $response               =   $this->gestiona_imagenes($prm);         
-            $this->response($response);                        
+            $prm["extension"]       =   $extension;             
+            $this->response($this->gestiona_imagenes($prm));                        
         }        
     }
     /**/
@@ -59,7 +58,10 @@ class Archivo extends REST_Controller{
 
                 
               case 'perfil_usuario':                
-                $this->create_perfil_usuario($param);
+                $response =  $this->create_perfil_usuario($param);
+                debug("....");
+                debug($response);
+                return $response;
                 break;        
 
               case 'servicio':            
@@ -95,9 +97,11 @@ class Archivo extends REST_Controller{
         return $this->principal->api( $api , $q , "json", "POST");
     }
     private function create_perfil_usuario($param){
+
         $id_imagen = $this->img_model->insert_img($param , 1);
         if ( $id_imagen > 0 && $this->id_usuario > 0) {                    
-            $prm["id_imagen"]    = $id_imagen;                    
+            $prm["id_imagen"]    = $id_imagen;  
+            $prm["id_usuario"]   = $this->id_usuario;               
             return $this->create_imagen_usuario($prm);                
         }               
     }

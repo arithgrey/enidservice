@@ -325,12 +325,11 @@ function n_row_12( $attributes = ''){
 }
 if ( ! function_exists('anchor_enid'))
 {
-  function anchor_enid($title= '',$attributes= '',$row_12 = 0 , $type_button=0 )
+  function anchor_enid($title= '',$attributes= '',$row_12 = 0 , $type_button = 0 )
   {
     
     if($type_button == 1) {
-      $existe =  array_key_exists("class", $attributes)?1:0;      
-      
+      $existe =  array_key_exists("class", $attributes)?1:0;            
       if ($existe ==  1) {
         $attributes["class"] = $attributes["class"]." " ." a_enid_blue white completo ";
       }else{
@@ -343,6 +342,7 @@ if ( ! function_exists('anchor_enid'))
       $attributes = _parse_attributes($attributes);
     }
     if ($row_12 == 0 ) {
+      
       return '<a '.$attributes.'>'.$title.'</a>';  
     }else{
       
@@ -634,12 +634,15 @@ if ( ! function_exists('label'))
 if ( ! function_exists('place'))
 {
   /**/
-  function place($class_place , $row=1){            
-      if ($row == 1) {
-        return div("", ['class'=> $class_place] , 1);  
-      }else{
-        return div("", ['class'=> $class_place ]);  
-      }          
+  function place($class , $attributes = [] , $row =1){         
+
+    $attributes["class"]  = $class;  
+    //print_r($attributes);
+    if ($row == 1) {
+      return div("",  $attributes  , 1); 
+    }else{
+      return div("",  $attributes );  
+    }          
   }
 }
 /**/
@@ -1075,6 +1078,23 @@ if ( ! function_exists('iframe'))
       }else{
       
           return n_row_12()."<iframe ".$attr." ></iframe>".end_row();  
+      }
+      
+
+  }
+}
+
+if ( ! function_exists('center'))
+{
+  function center($attributes = '' ,  $row_12 = 0)
+  {
+      $attr =  add_attributes($attributes);
+      if ($row_12 == 0 ) {
+          
+          return "<center ".$attr." ></center>";  
+      }else{
+      
+          return n_row_12()."<center ".$attr." ></center>".end_row();  
       }
       
 

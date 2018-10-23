@@ -3,6 +3,8 @@ accept-charset="utf-8"
 method="POST" 
 id="form_img_perfil_user"  
 class="form_img_perfil_user" enctype="multipart/form-data">
+	
+	
 
 	<?=input(
 		[	"type"	=>	"file", 
@@ -20,13 +22,7 @@ class="form_img_perfil_user" enctype="multipart/form-data">
 		"name"		=>	'dinamic_user', 
 		"value"		=>	'0'
 	])?>
-	<?=place("lista_imagenes_user" , ["id"=>'lista_imagenes_user'] )?>	
-	<?=guardar("CARGAR" , 
-	[
-	"type"		=>	"submit", 
-	"class"		=>	'btn btn btn-sm guardar_img_enid' ,
-	"id"		=>	'guardar_img_enid', 
-	"style"		=>	'color:white;']
-	)?>
-			
+	
+	<?=guardar("CARGAR")?>
+	<?=place("lista_imagenes_user" , ["id"=>'lista_imagenes_user'] )?>			
 </form>

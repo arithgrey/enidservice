@@ -41,8 +41,6 @@ if(!function_exists('invierte_date_time')){
         'saldo_pendiente_envio' =>  $saldo_pendiente_envio, 
         'text_envio'            =>  $text_envio
     ];
-
-    //debug($response , 1);
     return $response;
       
   }
@@ -52,9 +50,8 @@ if(!function_exists('invierte_date_time')){
       $data_complete["cuenta_correcta"] =0;
       if(count($param)>0){
 
-        $recibo=  $param[0];
-          $precio =  $recibo["precio"]; 
-          
+          $recibo                                 =  $param[0];
+          $precio                                 =  $recibo["precio"];           
           $num_ciclos_contratados                 =   $recibo["num_ciclos_contratados"]; 
           $costo_envio_cliente                    =   $recibo["costo_envio_cliente"];
           $saldo_pendiente                        =   
@@ -131,10 +128,7 @@ if(!function_exists('invierte_date_time')){
         $text = ($num>1) ? $simbolo." ENVIASTÉ $num PAQUETES QUE  ESTÁN POR LLEGAR A TU CLIENTE" : $simbolo." TU ENVÍO ESTÁ EN CAMINO " ;
         
     }
-
-    $panel_ini ="";
-    $panel_end ="";
-
+    
     return div( $text, ["class"=>"alert alert-info text-center"]);
 
   }  
@@ -343,6 +337,4 @@ if(!function_exists('invierte_date_time')){
     }    
     return $text;
   }
-
-  
 }

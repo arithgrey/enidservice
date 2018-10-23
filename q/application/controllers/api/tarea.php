@@ -19,46 +19,48 @@ class Tarea extends REST_Controller{
         
         $param               =  $this->post();
         $param["id_usuario"] =  $this->principal->get_session("idusuario");
-        $response            =  false ;
-
+        $response            =  false;
         if ($param["id_usuario"] > 0 ) {
-
             $params = [
                 "descripcion"       =>  $param["tarea"] ,
                 "id_ticket"         =>  $param["id_ticket"] ,
                 "usuario_registro"  =>  $param["id_usuario"]
             ];
-            $response            =  $this->tareasmodel->insert_tarea($param);
-            if ($response == true) {
-                $q = $this->valida_tareas_pendientes($param);
-                $this->set_stado_ticket($q);
+            
+            $response  =  $this->tareasmodel->insert($params);
+            if ($response == true) {                                
+                $this->set_stado_ticket($this->valida_tareas_pendientes($param));
             }    
         }
         $this->response($response);        
     }
     /**/
-    function set_stado_ticket($q){
-        $api =  "ticket/estado";
+    function set_stado_ticket($q){        
+        $api =  "tickets/estado";
         return $this->principal->api( $api , $q , "json", "PUT");
     }
     /**/    
     function valida_tareas_pendientes($param){
 
-        $num_pendientes =  $this->tareasmodel->get_pendientes_ticket($param);
-        $nuevo_estado_ticket ="";
-        $status = 1;
-        $nuevo_estado_ticket ="cerrado";        
-        if ($num_pendientes != 0 ) {        
-            $status = 0;
-            $nuevo_estado_ticket ="abierto";
-        }
+        
+        $num_pendientes      =  $this->tareasmodel->get_tareas_ticket_num($param)[0]["pendientes"];    
+        $status = ($num_pendientes > 0 ) ? 0 : 1;
+
         $q    = [
                     "status"        =>  $status  , 
-                    "id_ticket"     =>  $id_ticket,
+                    "id_ticket"     =>  $param["id_ticket"],
                     "num_tareas"    =>  $num_pendientes
                 ]; 
         return $q;
-    }  
+    } 
+    /*
+    private function get_pendientes_ticket($q){
+
+        $api    = "tickets/num/format/json/";
+        return  $this->principal->api($api , $q);
+
+    }
+    */
     function buzon_POST(){
 
         $param =  $this->post();       

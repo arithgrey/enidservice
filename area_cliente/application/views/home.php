@@ -1,5 +1,6 @@
 <?php 
-$llamadas_hechas = anchor_enid("HECHAS". 
+
+$llamadas = anchor_enid("HECHAS". 
 	span( "" ,['class' => 'notificacion_preguntas_sin_leer_cliente'] ) , 
 [	"class"	=>	"a_enid_black preguntas btn_preguntas_compras" ,
 	"id"	=>	'0' 	
@@ -21,12 +22,11 @@ $llamadas_recibidas =  anchor_enid(
 		        <div class="tab-content">            
 		        	<div class="tab-pane <?=valida_active_tab('preguntas' , $action)?>" id="tab_buzon">
 						<!--<div class="contenedor_opciones_buzon">-->
-							<?=heading_enid("BUZÓN" , 3)?>
-							<?=div("TUS PREGUNTAS" , ['class' => 'text-preguntas'])?>
+							<?=heading_enid("BUZÓN" , 3)?>							
 							<hr>							
 							<table>
 								<tr>
-									<?=get_td($llamadas_hechas . $llamadas_recibidas )?>
+									<?=get_td($llamadas . $llamadas_recibidas )?>
 								</tr>
 							</table>
 						<!--</div>-->

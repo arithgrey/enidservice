@@ -49,10 +49,10 @@ if(!function_exists('invierte_date_time')){
         $fecha_registro   =   $param["fecha_registro"];
         $id_usuario       =   $param["id_usuario"];
         $leido_vendedor   =   $param["leido_vendedor"];        
-        $respuestas       =  $param["respuestas"][0];
-        $num              = $respuestas["respuestas"];
-        $nombre_servicio  =  $param["nombre_servicio"];
-        $id_servicio      =  $param["id_servicio"];
+        $respuestas       =   $param["respuestas"][0];
+        $num              =   $respuestas["respuestas"];
+        $nombre_servicio  =   $param["nombre_servicio"];
+        $id_servicio      =   $param["id_servicio"];
 
         
 
@@ -120,9 +120,6 @@ if(!function_exists('invierte_date_time')){
               $text                   =  div($num , $base_servicio);
             }
         }      
-        return $text;        
-        
+        return $text;              
   }
- 
- 
 }

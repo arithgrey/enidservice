@@ -3,11 +3,12 @@ if(!function_exists('invierte_date_time')){
 	
 	function create_arr_tags($data){
 	    $tags = array();
-	    foreach ($data as $row) { 
+	    
+	    foreach ($data as $row){ 
 
-	      $metakeyword =  $row["metakeyword"];    
+	      $metakeyword 		=  $row["metakeyword"];    
 	      if (strlen($metakeyword)>0) {   
-	        $tags =  json_decode($metakeyword , true);
+	        $tags 			=  json_decode($metakeyword , true);
 	      }
 	    }
 	    return $tags;

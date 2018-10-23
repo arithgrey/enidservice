@@ -14,30 +14,28 @@ if(!function_exists('invierte_date_time')){
 
     if(get_info_usuario_valor_variable($param , "externo") == 1){
       
-      $url ="../forma_pago/?recibo=".$id_proyecto_persona_forma_pago;
-      $extra="";
-
-      $f_btn =   anchor_enid("LIQUIDAR AHORA!" , 
-                  array(
-                  'class' => 'resumen_pagos_pendientes' ,
-                  'id'    =>  $id_proyecto_persona_forma_pago,
-                  'href'  =>  $url,
-                  'style' => 'color: white!important;background:black;padding: 5px;'
-                ));
-
+      $url    = "../forma_pago/?recibo=".$id_proyecto_persona_forma_pago;
+      $extra  = "";
+      $f_btn  = anchor_enid("LIQUIDAR AHORA!" , 
+                  [
+                    'class' => 'resumen_pagos_pendientes' ,
+                    'id'    =>  $id_proyecto_persona_forma_pago,
+                    'href'  =>  $url,
+                    'style' => 'color: white!important;background:black;padding: 5px;'
+              ]);
+      
       $s_btn =   anchor_enid("ACCEDE A TU CUENTA PARA VER EL ESTADO DE TU PEDIDO" , 
-                  array(
-                  'class' => 'resumen_pagos_pendientes' ,
-                  'id'    =>  $id_proyecto_persona_forma_pago,
-                  'href'  => '../area_cliente/?action=compras',
-                  'style' =>  'color:black;'
-
-                ));
+                  [
+                    'class' => 'resumen_pagos_pendientes' ,
+                    'id'    =>  $id_proyecto_persona_forma_pago,
+                    'href'  => '../area_cliente/?action=compras',
+                    'style' =>  'color:black;'
+                  ]);
 
       
       
-      $contenido  =  add_element($f_btn , "div");
-      $contenido .=  add_element($s_btn , "div");
+      $contenido  =  div($f_btn);      
+      $contenido .=  div($s_btn);      
       return $contenido;     
     }
     return $btn;

@@ -48,7 +48,7 @@ if(!function_exists('invierte_date_time')){
       $ticket           =   div("Nuevo ticket abierto [".$param["ticket"]."]");
       $ticket          .=   div("Cliente que solicita ".$nombre_usuario."");
     
-      $lista_prioridades =["" , "Alta" , "Media" , "Baja"];
+      $lista_prioridades    =   ["" , "Alta" , "Media" , "Baja"];
       $lista                =   "";
       $asunto               =   "";
       $mensaje              =   "";
@@ -57,10 +57,10 @@ if(!function_exists('invierte_date_time')){
 
         foreach ($info_ticket as $row) {
               
-          $asunto       =   $row["asunto"]; 
-          $mensaje      =   $row["mensaje"];     
-          $prioridad    =   $row["prioridad"];
-          $nombre_departamento =  $row["nombre_departamento"]; 
+          $asunto               =   $row["asunto"]; 
+          $mensaje              =   $row["mensaje"];     
+          $prioridad            =   $row["prioridad"];
+          $nombre_departamento  =   $row["nombre_departamento"]; 
            
         }
 
@@ -123,6 +123,4 @@ if(!function_exists('invierte_date_time')){
     
   <?php
   }
-  
-
 }

@@ -34,7 +34,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller{
                 "id_proyecto_persona_forma_pago"  => $param["id_recibo"],
                 "id_direccion"                    => $param["id_direccion"]
             ];
-            $response =  $this->proyecto_persona_forma_pago_direccion->insert($params);    
+            $response =  $this->proyecto_persona_forma_pago_direccion_model->insert($params);    
         }
         $this->response($response);
     }

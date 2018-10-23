@@ -71,51 +71,39 @@ class Sessionclass extends CI_Controller{
 		return $this->session->userdata("data_navegacion");
 	}
 	/*Generamos menú*/
-	function generadinamymenu(){
+	function create_contenido_menu(){
 		
-		$perfiles = $this->getperfiles();
-		$data = $this->get_user_data_navegacion();
-
-		$menu ='';
-		$id_empresa = $this->getidempresa();		
-
-		$flag = 0; 	
-		$b = 0;	
+		$perfiles 	= 	$this->getperfiles();
+		$data 		= 	$this->get_user_data_navegacion();
+		$menu 		=	'';
+		$id_empresa = 	$this->getidempresa();		
+		$flag 		= 	0; 	
+		$b 			= 	0;	
 		foreach ($data as $row) {
 
-
-
-
-			$nombre = $row["nombre"];
+			$nombre 	= $row["nombre"];
 			$id_recurso =  $row["idrecurso"];
-
-
-			$url = base_url($row["urlpaginaweb"]);	
+			$url 		= base_url($row["urlpaginaweb"]);	
 			if ($id_recurso ==  18 ){
 				$url = base_url($row["urlpaginaweb"])."/?q=".$id_empresa;	
 			}
 
+			$icono 			= 	$row["iconorecurso"];
+			$descripcion	= 	$row["descripcionrecurso"];			
+			$extra 			=	"";
+			$order_negocio 	=  	$row["order_negocio"];
 
-			
-			$icono = $row["iconorecurso"];
-			$descripcion = $row["descripcionrecurso"];			
-			$extra ="";
-			$order_negocio =  $row["order_negocio"];
 
-			
-			$style ="";
-			if ( $order_negocio >9){
-				$style ="style='background:rgb(2, 17, 29);' ";	
-			}
-
-			$menu .= li(anchor_enid(icon($icono). $nombre , 
-						["href"=> $url ,  "class"=>'black']
-						));
-
+			$style = 	( $order_negocio >9) ? "style='background:rgb(2, 17, 29);' " : "";
+			$menu .= 	li(
+							anchor_enid(icon($icono). $nombre , 
+							[
+								"href"=> $url ,  
+								"class"=>'black'
+							]));
 			
 			$b++;
 		}	
 		return $menu;
 	}
-/**/	
 }

@@ -9,6 +9,15 @@ class Tickets extends REST_Controller{
         $this->load->library(lib_def());
         $this->id_usuario   = $this->principal->get_session("idusuario");
     } 
+    function num_GET(){
+
+        $param      =   $this->get();
+        $response   =   [];        
+        if (if_ext($param,"id_ticket")) {
+            $response   =  $this->tickets_model->get_num($param);    
+        }        
+        $this->response($response);
+    }
     function detalle_GET(){
 
         $param  =   $this->get();         
@@ -297,10 +306,14 @@ class Tickets extends REST_Controller{
     }
     function estado_PUT(){
 
-        $param    = $this->put();
-        $response = 
-        $this->tickets_model->q_up("status" ,  $param["status"] , $param["id_ticket"]);
-        $this->response($response);
+        $param    = $this->put();        
+        $response = [];
+        if (if_ext($param, "status,id_ticket")) {
+            
+            $response = $this->tickets_model->q_up("status" ,  $param["status"] , $param["id_ticket"]);
+            
+        }    
+        $this->response($response);    
     }
 
 }?>

@@ -15,12 +15,13 @@ class Imagen_usuario extends REST_Controller{
     function index_POST(){
 
       $param      =   $this->post();           
-      $response   = false;
+      $response   =   false;      
       if ($this->delete_usuario($param) ==  1) {
+
           $params     = [
             "id_imagen" => $param["id_imagen"],
             "idusuario" => $param["id_usuario"]
-          ];
+          ];          
           $response   =   $this->imagen_usuario_model->insert($params);        
       }      
       $this->response($response);

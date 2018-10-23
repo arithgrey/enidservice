@@ -7,8 +7,7 @@ function carga_form_img(){
     request_enid("GET", data_send , url , response_cargar_form , ".place_img_producto" );					
 }
 /**/
-function response_cargar_form(data){
-
+function response_cargar_form(data){    
     llenaelementoHTML(".place_img_producto" , data);
     $(".imagen_img").change(upload_imgs_enid_pre);
     recorrepage("#guardar_img");
@@ -16,10 +15,10 @@ function response_cargar_form(data){
 /**/
 function upload_imgs_enid_pre(){    
 
-    
-    var i       = 0, len = this.files.length , img, reader, file;        
-    var file    = this.files[i];    
-    var reader  = new FileReader();
+    debugger;
+    var i = 0, len = this.files.length , img, reader, file;        
+    file = this.files[i];    
+    reader = new FileReader();
     reader.onloadend = function(e){
         showonehideone(".guardar_img_enid" , ".imagen_img");
         mostrar_img_upload(e.target.result , 'place_load_img');    

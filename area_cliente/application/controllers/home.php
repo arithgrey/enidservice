@@ -13,7 +13,7 @@ class Home extends CI_Controller{
         $data["meta_keywords"]                  =   "";    
         $data["desc_web"]                       =   "";        
         $data["url_img_post"]                   =   "";                
-        $data["action"]                         =   get_info_variable($this->input->get() , "action");
+        $data["action"]                         =   $this->input->get("action");
         $valoraciones                           =   $this->resumen_valoraciones($data["id_usuario"]);        
         $data["valoraciones"]                   =   $valoraciones["info_valoraciones"];     
         $class_departamentos                    =   $this->principal->get_departamentos("nosotros");    

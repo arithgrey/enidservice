@@ -4,12 +4,10 @@ if(!function_exists('invierte_date_time')){
     $status = (isset($q) && strlen($q)>0) ?  1 : 0;
     return $status;
   }
-  /**/
   function get_info_categoria($q){
     
     $status = (isset($q) && strlen($q)>0) ? 1 : 0;
-    return $status;
-      
+    return $status;    
   }
   /**/
   function get_btn_registro_faq($in_session , $perfil){

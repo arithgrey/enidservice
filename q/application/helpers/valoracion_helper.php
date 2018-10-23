@@ -105,12 +105,13 @@
                             <div ".$extra_config_comentarios.">".div(crea_estrellas($valoracion ,1));
         
         $lista_comentario .= div($titulo ,     ["class" =>  'titulo_valoracion']);
-        $lista_comentario .= div($comentario , ["class"=>'comentario_valoracion']);
+        $lista_comentario .= div($comentario , ["class" =>  'comentario_valoracion']);
 
         if($recomendaria ==  1){
-          $lista_comentario .= div(icon("fa fa-check-circle") . "Recomiendo este producto" , ["class"=>'recomendaria_valoracion'] );          
+          $lista_comentario .= div(icon("fa fa-check-circle") . "Recomiendo este producto" , 
+            ["class"=>'recomendaria_valoracion'] );          
         }
-        $lista_comentario .=div($nombre . "- " .$fecha_registro , ["class"=>'nombre_comentario_valoracion'] );
+        $lista_comentario .= div($nombre . "- " .$fecha_registro , ["class"=>'nombre_comentario_valoracion'] );
         $function_valoracion_funciona   = 'onclick="agrega_valoracion_respuesta('.$id_valoracion.' , 1)"';                    
         $function_valoracion_NO_funciona = 'onclick="agrega_valoracion_respuesta('.$id_valoracion.' , 0)"';                    
         $texto_valoracion ="";
@@ -136,7 +137,7 @@
 
         $lista_comentario .="<hr>
                             <div class='contenedor_utilidad'>
-                              <table >
+                              <table>
                                 <tr>
                                   ".get_td(span("¿Te ha resultado útil?" , ['class'=>'strong']))."
                                   ".get_td($btn_es_util . $btn_no_util)."

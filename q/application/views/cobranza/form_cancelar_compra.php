@@ -1,14 +1,14 @@
 <?php 
-	$heading_1	=  	heading_enid("¿REALMENTE DESEAS CANCELAR LA COMPRA? DE:" ,	3 , [] , 1);
-	$div 		=  	div(strtoupper($recibo["resumen"]) , ["class"=>"blue_enid"]);
-	$tmp 		= 	$heading_1. $div;
+	$heading_1	=  	heading_enid("¿REALMENTE DESEAS CANCELAR LA COMPRA? DE:" ,	3 );
+	$div 		=  	div(strtoupper($recibo["resumen"]) , ["class"=>"blue_enid_background"] );
+	$tmp 		= 	$heading_1 . $div;
 ?>
 <?=div($tmp , ['class' => 'jumbotron',  "class"=>"padding_1" ])?>
 <?=guardar("CANCELAR ÓRDEN DE COMPRA" , 
 	[
-		"class"				=>		"cancelar_orden_compra" 
-		,"id"				=>		$recibo['id_recibo'] 
-		,"modalidad"		=>		$modalidad 
-	] , 
-	1
-)?>
+		"class"				=>		"cancelar_orden_compra" ,
+		"id"				=>		$recibo['id_recibo'] ,
+		"modalidad"			=>		$modalidad 
+	], 
+	1,
+	1)?>

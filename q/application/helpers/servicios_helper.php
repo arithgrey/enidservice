@@ -1,56 +1,54 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){	
-	
+	function get_url_venta($extra){
+		return "http://enidservice.com/inicio/producto/?producto=" .$extra;
+	}	
 	function create_dropdown_button($id_imagen , $principal = 0 ){
-		
-	$button =  
-		add_element(
-			icon("fa fa-chevron-circle-down") , 
-			"div" , 
-		[
-				"class"				=> 
-				"btn btn-secondary dropdown-toggle contenedor_imagen_muestra_producto",
-				"type"				=> "button" ,
-				"id"				=> "dropdownMenuButton" ,
-				"data-toggle"		=> "dropdown" ,
-				"aria-haspopup"		=> "true" ,
-				"aria-expanded"		=> "false"
-		]);
+	
+		$button =  div(icon("fa fa-chevron-circle-down") , 
+			[
+					"class"				=> 
+					"btn btn-secondary dropdown-toggle contenedor_imagen_muestra_producto",
+					"type"				=> "button" ,
+					"id"				=> "dropdownMenuButton" ,
+					"data-toggle"		=> "dropdown" ,
+					"aria-haspopup"		=> "true" ,
+					"aria-expanded"		=> "false"
+		]);		
 
-
-	$text 			 = ($principal ==  0) ? "Definir como principal":  "Imagen principal";
-	$extra_principal = ($principal ==  0) ? "" : "blue_enid";
-	$item =  div(
-		icon('fa fa-star' , 
-		[		
-			"id"   =>  $id_imagen,
-			"class" =>  "dropdown-item imagen_principal ".$extra_principal
-		] , 
-		0 , 
-		$text
-	));
-		
-
-	$item  .=   
-		div(
-			icon('fa fa-times' , 
+		$text 			 = ($principal ==  0) ? "Definir como principal":  "Imagen principal";
+		$extra_principal = ($principal ==  0) ? "" : "blue_enid";
+		$item =  div(
+			icon('fa fa-star' , 
 			[		
-			"id"   =>  $id_imagen,
-			"class" =>  "dropdown-item foto_producto"
+				"id"   =>  $id_imagen,
+				"class" =>  "dropdown-item imagen_principal ".$extra_principal
 			] , 
 			0 , 
-			"Quitar")
-		);
+			$text
+		));
+			
+
+		$item  .=   
+			div(
+				icon('fa fa-times' , 
+				[		
+				"id"   =>  $id_imagen,
+				"class" =>  "dropdown-item foto_producto"
+				] , 
+				0 , 
+				"Quitar")
+			);
 
 
-		$menu =  div( 
-			$item
-			,  
-		[ 	
-			"class"				=>"dropdown-menu" ,
-			"aria-labelledby"	=>"dropdownMenuButton",
-			"style" => "width:220px;border-style:solid;height:50px;z-index:3000;position:absolute;border-style: solid;border-color: #92a8d1;padding:3px;"
-		]);
+			$menu =  div( 
+				$item
+				,  
+			[ 	
+				"class"				=>"dropdown-menu" ,
+				"aria-labelledby"	=>"dropdownMenuButton",
+				"style" => "width:220px;border-style:solid;height:50px;z-index:3000;position:absolute;border-style: solid;border-color: #92a8d1;padding:3px;"
+			]);
 		
 		return div($button . $menu ,  ["class" => "dropdown cursor"]);
 
@@ -98,8 +96,7 @@ if(!function_exists('invierte_date_time')){
 		
 		$data[$key] =  $valor;
 		return $data;
-	}
-	/**/
+	}	
 	function evalua_utilidad_mas_envio($flag_envio_gratis, $costo_envio, $utilidad){
 
 		if($flag_envio_gratis == 1 ){
@@ -108,13 +105,9 @@ if(!function_exists('invierte_date_time')){
 			return $utilidad;
 		}		
 	}	
-	/**/
 	function get_valor_envio($costo_envio ,  $flag_envio_gratis){
-		if($flag_envio_gratis ==  1 ){			
-			return  - 100;			
-		}else{			
-			return 	100;
-		}
+		$costo =  ($flag_envio_gratis ==  1 ) ? -100 : 100;
+		return $costo;
 	}
 	/**/
 	function select_producto_usado($valor_actual){
@@ -130,8 +123,7 @@ if(!function_exists('invierte_date_time')){
 			}
 		$list .= "</select>";
 		return $list;   
-	}	
-	/**/
+	}		
 	function get_producto_usado($tipo){
 		$usado = [ "No" , "Si"];
 		return $usado[$tipo];
@@ -176,20 +168,14 @@ if(!function_exists('invierte_date_time')){
 		}
 		return  $list;
 
-	}
-	
-	
-	/**/
+	}	
 	function scroll_terminos($num_terminos){
 		
-		if($num_terminos > 3){
-			return "scroll_terms";
-		}
-		return "";
-		
+		$extra = 	($num_terminos > 3) ? "scroll_terms" : "";
+		return $extra;		
 	}
-/**/
-function get_text_ciclo_facturacion($id_ciclo_facturacion){
+	/**/
+	function get_text_ciclo_facturacion($id_ciclo_facturacion){
 
 	  	$nuevo_text ="";
 		switch ($id_ciclo_facturacion) {
@@ -284,22 +270,17 @@ function get_text_ciclo_facturacion($id_ciclo_facturacion){
           $num_colores =  count($arreglo_colores);
           if( $num_colores > 0){            
               if($num_colores > 1){
+    			
+    			return anchor_enid($num_colores ." colores" , ["href" => $url_info_producto ]);            
                 
-                return "  <a href='".$url_info_producto."' ".$extra." >" 
-                          .$num_colores ." colores
-                          </a>
-                        ";  
               }else{
-                return "  <a href='".$url_info_producto."' ".$extra." >" 
-                          .$num_colores ." color
-                          </a>
-                        ";  
+
+              	return anchor_enid($num_colores ." color" , ["href" => $url_info_producto ]);
               }
               
           }
         }
     }
-
     function get_text_nombre_servicio($nombre_servicio){
       $text_nombre_servicio = heading_enid(substr( $nombre_servicio ,  0  , 70 ) , 2 );
       return $text_nombre_servicio;
@@ -357,5 +338,4 @@ function get_text_ciclo_facturacion($id_ciclo_facturacion){
   		}  		
   		return $select;
   	}
-
 }/*Termina el helper*/

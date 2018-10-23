@@ -37,13 +37,12 @@ class Img extends REST_Controller{
     
   }  
   /**/
-  function form_img_servicio_producto_GET(){
-    /**/
-    $param =  $this->get();
+  function form_img_servicio_producto_GET(){    
     
-    $param["q"] =  "servicio";
-    $param["q2"] = "servicio";
-    $param["q3"] = $param["id_servicio"];
+    $param        =   $this->get();    
+    $param["q"]   =   "servicio";
+    $param["q2"]  =   "servicio";
+    $param["q3"]  =   $param["id_servicio"];
 
     $this->load->view("imgs/servicio_producto_servicio" ,  $param);       
     

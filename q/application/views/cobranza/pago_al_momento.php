@@ -78,19 +78,21 @@
 		<div>
 			<?php if(count($informacion_envio)>0):?>
 
-				<div style="background:#1F2839;color: white;padding: 10px;">
-			    <div class="text-right top_10">
-			    	<?=icon("fa fa-pencil" ,  
+				<div class="informacion_resumen_envio">
+			    
+			    <?=div(
+			    	icon("fa fa-pencil" ,  
 			    		[			    		
-			    		"class"			=> 	"a_enid_blue btn_direccion_envio ",
+			    		"class"			=> 	"btn_direccion_envio ",
 			        	"id" 			=> 	$id_recibo,
 						"href"			=> 	"#tab_mis_pagos",
 						"data-toggle"	=> 	"tab"
 			    		],
 			    		1
-			    	)?>
-			    </div>
-			    <div class='texto_direccion_envio_pedido'>
+			    	), 
+			    	["class" =>	"top_20"],
+			    	1)?>
+			    <div class='texto_direccion_envio_pedido top_20'>
 			        <?=get_campo($informacion_envio , "direccion" )?>
 			        <?=get_campo($informacion_envio , "calle" )?>
 			        <?=get_campo($informacion_envio , "numero_exterior")?>
@@ -126,13 +128,17 @@
 		
 
 
-		<?=anchor_enid('CANCELAR COMPRA', 
+		<?=
+		div(
+		anchor_enid('CANCELAR COMPRA', 
 		[
 			"class"		=> 	"cancelar_compra",
 			"id"		=> 	 $id_recibo,
-			"modalidad"	=> 	'0',
-			"style"		=> 	"background: #f00 !important;padding: 10px!important;color:white !important;font-weight: bold !important;"
-		])?>		
+			"modalidad"	=> 	'0'		
+		]
+		) , 
+		["class" => "top_20"],
+		1)?>		
 	<?=end_row()?>	
 </div>
 <div class="col-lg-4">
@@ -149,6 +155,6 @@
 	    <?=heading_enid($saldo_pendiente ."MXN", 4 ,   	["class" => 'blue_enid strong'] )?>
 	    <?=heading_enid("Pesos Mexicanos" , 4 , 		["class"=> 'strong'])?>
 	</div>
-	<?=div(img($url_img_servicio), [] , 1)?>	        
+	<?=div(img($url_img_servicio),  1)?>	        
 </div>
 

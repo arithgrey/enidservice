@@ -54,8 +54,7 @@
 	    	$this->sessionclass->logout();		   						
 	    }	    
 		function get_departamentos($param = '' , $format_html =1){				
-			
-			//debug($format_html);
+						
 			if ($format_html == 1) {
 				$api =  "clasificacion/primer_nivel/format/json/"; 			
 				return $this->api( $api , [] , "json");			
@@ -81,8 +80,7 @@
 	        return $this->api($api , $q );
     	}
     	function create_pagination($q){
-    		$api  =  "producto/paginacion/format/json/";
-	        //return $this->api("tag" ,  $api , $q );        	              
+    		$api  =  "producto/paginacion/format/json/";	        
 	        return $this->api($api , $q );        	              
 	    }
 		/**/		
@@ -132,7 +130,7 @@
 	        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
 	        if( $this->sessionclass->is_logged_in() == 1){                 
 	                
-	            $menu 					= 	$this->sessionclass->generadinamymenu();
+	            $menu 					= 	$this->sessionclass->create_contenido_menu();
 	            $nombre 				= 	$this->get_session("nombre");
 	            $data['titulo']			= 	$titulo;              
 	            $data["menu"] 			= 	$menu;              

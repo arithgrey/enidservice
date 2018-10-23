@@ -44,18 +44,7 @@ class tareasmodel extends CI_Model{
     return $this->valida_tareas_pendientes($param);
   }    
   function get_tareas_ticket_num($param){
-
-    /*
-    $id_ticket =  $param["id_ticket"];    
-    $query_get = "SELECT 
-                  count(0) tareas ,  
-                  sum(case when status = 0 then 1 else 0 end )pendientes
-                  FROM tarea 
-                  WHERE 
-                  id_ticket = '".$id_ticket."' ";
-    $result = $this->db->query($query_get);
-    return $result->result_array();
-    */
+   
     $f = [
       "COUNT(0) tareas" ,  
       "SUM(case when status = 0 then 1 else 0 end )pendientes"

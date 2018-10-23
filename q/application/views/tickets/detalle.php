@@ -27,20 +27,19 @@
 <?php
 	$z = 1; 			
 	$l = "";	
-	foreach ($info_tareas as $row){
+	foreach($info_tareas as $row){
 
-		$id_tarea 			=  $row["id_tarea"];
-		$status 			=  $row["status"];
-		$valor_actualizar 	= 0; 
-		$estado_tarea 		= ""; 
-		$fecha_registro 	=  $row["fecha_registro"];			
-		$nombre 			=  $row["nombre"];
-		$apellido_paterno 	= $row["apellido_paterno"];
-		$apellido_materno 	=  $row["apellido_materno"];
-		$num_comentarios 	=  $row["num_comentarios"];
+		$id_tarea 			=  	$row["id_tarea"];
+		$status 			=  	$row["status"];
+		$valor_actualizar 	= 	0; 
+		$estado_tarea 		= 	""; 
+		$fecha_registro 	=  	$row["fecha_registro"];			
+		$nombre 			=  	$row["nombre"];
+		$apellido_paterno 	= 	$row["apellido_paterno"];
+		$apellido_materno 	=  	$row["apellido_materno"];
+		$num_comentarios 	=  	$row["num_comentarios"];
 
-		$nombre_usuario_registro = 
-		$nombre ." " .$apellido_paterno ." " . $apellido_materno;
+		$nombre_usuario_registro = $nombre ." " .$apellido_paterno ." " . $apellido_materno;
 
 		if($status == 0){
 			$valor_actualizar = 1; 					
