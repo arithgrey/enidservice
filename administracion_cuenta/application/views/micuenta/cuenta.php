@@ -2,24 +2,23 @@
     <div class="col-lg-8" >
         <?=n_row_12()?>
             <div class="col-lg-5">
-                <?=n_row_12()?>        
-                    <div class="coach-card">            
-                        <?=img([
-                            "src"=>"../imgs/index.php/enid/imagen_usuario/".$id_usuario ,
-                            "onerror"=>"this.src='../img_tema/user/user.png'"
-                        ] , 
-                        1)?>
-                        <?=anchor_enid("ACTUALIZAR FOTO" , ["class"=>"a_enid_blue editar_imagen_perfil white" , "style"=>"color: white!important"] , 1)?>
-                    </div>
-                <?=end_row()?>
-                <?=place("place_form_img")?>
+                <div  style="position: relative;">
+                    <?=div(img([
+                        "src"       =>  "../imgs/index.php/enid/imagen_usuario/".$id_usuario ,
+                        "onerror"   =>  "this.src='../img_tema/user/user.png'"                    
+                    ]),  ["class"   => "imagen_usuario_completa"])?>                
+                    <?=anchor_enid("MODIFICAR" , ["class"=>"editar_imagen_perfil "] )?>
+                </div>
+                <center>
+                    <?=place("place_form_img")?>
+                </center>
             </div>
         <?=end_row()?>
         
 
         <?=n_row_12()?>
 
-            <div class="page-header" >
+            <div class="page-header menu_info_usuario" >
             <?=heading_enid("Cuenta" , 1 , ['class'=>'strong'] , 1)?>   
             <br>  
             <?=n_row_12()?>
@@ -143,19 +142,31 @@
     </div>   
     
     <div class="col-lg-4">
-        <?=heading_enid("TU CUENTA ENID SERVICE" , 3)?>
-        <div>
-            <p  class="underline">
-                <?=get_campo($usuario , "nombre" , "Tu Nombre")?>
-                <?=get_campo($usuario , "apellido_paterno" , "Tu prime apellido")?>
-                <?=get_campo($usuario , "apellido_materno" , "Tu prime apellido")?>
-            </p>
-            <?=div(get_campo($usuario , "email" , "Tu prime apellido") , [] , 1)?>
-            <?=n_row_12()?>
-                <?=get_campo($usuario , "tel_contacto" , "Tu prime apellido" , 1)?>
-            <?=end_row()?>
+        <div class="contenedor_lateral">
+            <?=heading_enid("TU CUENTA ENID SERVICE" , 3)?>   
+                <?=n_row_12()?>
+                    <?=get_campo($usuario , "nombre" , "Tu Nombre")?>
+                    <?=get_campo($usuario , "apellido_paterno" , "Tu prime apellido")?>
+                    <?=get_campo($usuario , "apellido_materno" , "Tu prime apellido")?>            
+                <?=end_row()?>
+                <?=n_row_12()?>
+                    <?=div(get_campo($usuario , "email" , "") , ["class" => "top_20"] , 1)?>
+                <?=end_row()?>
+
+                <?=n_row_12()?>
+                    <?=get_campo($usuario , "tel_contacto" , "Tu prime apellido" , 1)?>
+                <?=end_row()?>
+                <br>
+                <?=n_row_12()?>
+                    <?=anchor_enid("MI DIRECCIÓN" . icon('fa  fa-fighter-jet') ,
+                        [  "class"=>"a_enid_black btn_direccion top_20", 
+                            "href"=>"#tab_direccion" ,  
+                            "data-toggle"=>"tab" 
+                        ] , 
+                        1 ,
+                        1)?>
+                <?=end_row()?>
+            <hr>
         </div>
-        <?=anchor_enid("MI DIRECCIÓN" . icon('fa  fa-fighter-jet') , ["class"=>"a_enid_black btn_direccion", "href"=>"#tab_direccion" ,  "data-toggle"=>"tab" ] , 1 )?>
-        <hr>
     </div>
 </div>

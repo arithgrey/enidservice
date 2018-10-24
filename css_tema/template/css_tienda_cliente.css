@@ -73,3 +73,27 @@
 .valoracion_persona_principal:hover{
     cursor: pointer;
 }
+.img_invitacion_compra{
+	width: 50%;
+	opacity: .1;
+}
+.img_center_compra{
+	width: 35%;
+	margin: 0 auto;
+	background: #000002;
+	padding: 2px;
+	border-radius: 50%;
+}
+.img_invitacion_compra{
+	border-radius: 50%;
+}
+.text_explorar_tienda{
+	text-align: center;
+	font-weight: bold;
+	background: black;
+	color: white;
+	width: 50%;
+	margin: 0 auto;	
+	margin-top: 10px;
+	padding: 1px;
+}

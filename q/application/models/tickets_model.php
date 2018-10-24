@@ -49,7 +49,7 @@
       }
     
     }
-    function get_tickets_desarrollo($param){
+    function get_tickets_desarrollo($param , $simple=0){
 
       $_num =  get_random();
       $this->create_tmp_tareas_tickets(0 , $_num , $param); 
@@ -73,13 +73,21 @@
                         t.id_ticket =  tp.id_ticket
                     WHERE                    
                       t.status =  '". $param["keyword"] ."'
-                      AND 
-                      d.id_departamento = '".$param["id_departamento"]."'
+                      ";
+
+
+                    $sql =  ($simple == 0) ? "AND d.id_departamento = '".$param["id_departamento"]."' " : "";
+                    
+                    $query_get .= $sql;
+                      $query_get .="
                       AND 
                       t.asunto like '%".$param["keyword"]."%'                        
                       
                       ORDER BY                                                         
                       t.fecha_registro";
+
+
+                      debug($query_get);
     $result = $this->db->query($query_get);
     $data =  $result->result_array();
     $this->create_tmp_tareas_tickets(1 , $_num , $param); 

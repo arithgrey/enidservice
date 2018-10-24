@@ -18,18 +18,16 @@ if(!function_exists('invierte_date_time')){
       $extra  = "";
       $f_btn  = anchor_enid("LIQUIDAR AHORA!" , 
                   [
-                    'class' => 'resumen_pagos_pendientes' ,
+                    'class' => 'resumen_pagos_pendientes top_20' ,
                     'id'    =>  $id_proyecto_persona_forma_pago,
-                    'href'  =>  $url,
-                    'style' => 'color: white!important;background:black;padding: 5px;'
-              ]);
+                    'href'  =>  $url                    
+              ],1,1);
       
       $s_btn =   anchor_enid("ACCEDE A TU CUENTA PARA VER EL ESTADO DE TU PEDIDO" , 
                   [
-                    'class' => 'resumen_pagos_pendientes' ,
+                    'class' => 'resumen_pagos_pendientes black top_20' ,
                     'id'    =>  $id_proyecto_persona_forma_pago,
-                    'href'  => '../area_cliente/?action=compras',
-                    'style' =>  'color:black;'
+                    'href'  => '../area_cliente/?action=compras'                    
                   ]);
 
       

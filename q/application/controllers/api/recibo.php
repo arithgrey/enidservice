@@ -92,6 +92,7 @@ class recibo extends REST_Controller{
         $prm["id_usuario"]                  =  $id_usuario;
         $data["en_proceso"]                 =  $this->en_proceso($prm);            
         /*Actividades que están en proceso por ejemplo envios y pagos pedientes*/            
+        $data["numero_articulos_en_venta"]  = 0;
         if($param["modalidad"] == 1){
             $data["numero_articulos_en_venta"] = $this->carga_productos_en_venta($param);                    
         }   

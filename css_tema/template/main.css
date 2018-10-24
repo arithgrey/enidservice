@@ -601,7 +601,8 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
 .a_enid_blue{
     //background: #015ec8!important;
     //background: #000205;
-    background: #0e2f53!important;
+    //background: #0e2f53!important;
+    background: #0a1521!important;
     padding: 10px!important;
     color: white!important;
     font-weight: bold!important;
@@ -633,7 +634,8 @@ dropdown-menu:not(.yamm-dropdown-menu){display:block}.dropdown-submenu>a:after{d
 	background: #015ec8!important;
 }
 .a_enid_blue_sm{
-    background: #015ec8!important;
+    //background: #015ec8!important;
+    background: #0a1521!important;
     padding: 5px!important;
     color: white!important;
     font-weight: bold!important;
@@ -1066,6 +1068,9 @@ table{
 .padding_1, .padding_10{
 	padding: 10px;
 }
+.padding_20{
+	padding: 20px;	
+}
 .enid_hide{
 	display: none;
 }
@@ -1113,4 +1118,7 @@ table{
 }
 ::placeholder {    
   text-transform: uppercase;
+}
+.display_none{
+	display: none;
 }

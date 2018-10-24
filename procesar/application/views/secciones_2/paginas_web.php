@@ -21,36 +21,39 @@
     <div class="col-lg-10 col-lg-offset-1">      
         <?=n_row_12()?>                 
           <div class="resumen_productos_solicitados">
-          <?=heading_enid(
-            'TU CARRITO DE COMPRAS'.icon("fa fa-shopping-bag")
-            , 
-            2,
-            ['class' => 'strong']
-             )?>
-          <?=div($resumen_producto , [], 1)?>      
-          <?=div($text_envio)?>
-          <?=input_hidden([
-            "name"    =>  "resumen_producto" ,
-            "class"   =>  "resumen_producto"  ,
-            "value"   =>  $resumen_servicio_info
-          ])?>
-        
-        <?=n_row_12()?>
-        <div class="text-right">
-          <?=heading_enid("MONTO DEL PEDIDO $".$monto_total."MXN", 4)?>      
-          <?=heading_enid("CARGOS DE ENVÍO $".$costo_envio_cliente."MXN", 4)?>
-          <?=heading_enid("TOTAL $".$monto_total_con_envio."MXN", 3 )?>
-          <?=p("Precios expresados en Pesos Mexicanos.")?>
-        </div>
-        <?=end_row()?>
-        <?=n_row_12()?>
-          <?php if($in_session == 1): ?>
-            <?=guardar("Ordenar compra" , ['class' => 'btn_procesar_pedido_cliente']  )?>
-            <?=place('place_proceso_compra')?>        
-          <?php endif; ?>
-        <?=end_row()?>
-        <hr>        
-        </div>
+            <?=heading_enid(
+              'TU CARRITO DE COMPRAS'.icon("fa fa-shopping-bag")
+              , 
+              2,
+              ['class' => 'strong']
+               )?>
+            <?=div($resumen_producto , 1)?>      
+            <?=div($text_envio ,1)?>
+            <?=input_hidden([
+              "name"    =>  "resumen_producto" ,
+              "class"   =>  "resumen_producto"  ,
+              "value"   =>  $resumen_servicio_info
+            ])?>        
+            <?=n_row_12()?>
+              <div class="text-right">
+                <?=heading_enid("MONTO DEL PEDIDO $".$monto_total."MXN", 4)?>      
+                <?=heading_enid("CARGOS DE ENVÍO $".$costo_envio_cliente."MXN", 4)?>
+                <?=heading_enid("TOTAL $".$monto_total_con_envio."MXN", 3 )?>
+                <?=div("Precios expresados en Pesos Mexicanos." ,["class" => "bottom_10"])?>
+              </div>
+            <?=end_row()?>
+            <?=n_row_12()?>
+              <?php if($in_session == 1): ?>
+                <?=guardar("ORDENAR COMPRA" , ['class' => 'btn_procesar_pedido_cliente'],1,1  )?>
+                <?=place('place_proceso_compra')?>        
+              <?php endif; ?>
+            <?=end_row()?>
+            <hr>        
+          </div>
+
+
+
+
         <div class="contenedor_formulario_compra">
           <?php
   $info_ext           =  $info_solicitud_extra;
@@ -64,7 +67,7 @@ $talla                =
 (array_key_exists("talla", $info_solicitud_extra))?$info_solicitud_extra["talla"]:0;  
 
 ?>  
-<?=n_row_12()?>
+
 
 <?php if($in_session == 0){?>
 
@@ -80,6 +83,9 @@ $talla                =
   )
   ?>
 <?php }?>
+
+
+
 <div class="row">
 <form class="form-miembro-enid-service"  id="form-miembro-enid-service">
   

@@ -16,7 +16,7 @@
     ]);   
     /**/
     $icon         = icon('fa fa-shopping-bag');
-    $place_mis_ventas = place("place_num_pagos_notificados" , 1);
+    $place_mis_ventas = place("place_num_pagos_notificados");
     $a_mis_ventas     = anchor_enid($icon . "MIS VENTAS".$place_mis_ventas , 
         ["id"               =>  "mis_ventas",
          "href"             =>  "#tab_mis_ventas",
@@ -25,8 +25,7 @@
 
     /**/
     $icon         = icon('fa fa-credit-card-alt');
-    $place = place("place_num_pagos_por_realizar" ,
-     1);
+    $place = place("place_num_pagos_por_realizar" );
     $a_mis_compras = anchor_enid($icon."MIS COMPRAS".$place,
         ["id"=>"mis_compras" ,"href"=>"#tab_mis_pagos" ,"data-toggle"=>"tab","class"=>'black strong btn_cobranza mis_compras']);
 

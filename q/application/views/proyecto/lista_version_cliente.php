@@ -1,20 +1,18 @@
-<?php if($modalidad ==  1){?>   
-    <?=heading_enid("TUS VENTAS" , 2 )?>
-    <?=get_numero_articulos_en_venta_usuario($numero_articulos_en_venta)?>    
-    <?php }else{?>      
-        <?=heading_enid("TUS COMPRAS" , 2 )?>        
-    <?php } ?>  
-    <?php if($ordenes !=0 ){?>
-        <?=div(evalua_texto_envios_compras($modalidad , count($ordenes) , $status) ,  
-            [
-                'class' => 'alert alert-info' ,
-                'style' => 'margin-top: 10px;background: #001541;color: white'
-            ])?>        
-    <?php }?>
+<?=get_text_modalidad_compra($modalidad, $ordenes)?>
+<?=get_numero_articulos_en_venta_usuario($modalidad,  $numero_articulos_en_venta)?>    
+<?=get_mensaje_compra($modalidad , $ordenes)?>
+<?php if($ordenes != 0 ):?>
+    <?=div(evalua_texto_envios_compras($modalidad , count($ordenes) , $status) ,  
+        [
+            'class' => 'alert alert-info' ,
+            'style' => 'margin-top: 10px;background: #001541;color: white'
+    ])?>        
+
+<?php endif;?>
 
 <?php    
     
-    if($ordenes!=0){
+if($ordenes!=0){
 	foreach($ordenes as $row){
 	        
         $id_recibo            =   $row["id_proyecto_persona_forma_pago"];
@@ -54,12 +52,12 @@
             </div>    
             <div class="col-lg-9">                      
                 <div class="contenedor_articulo_text">                        
-                    <div>                        
+                    <?=n_row_12()?>                    
                         <?=icon("fa fa-shopping-bag")?>
                         <?=span($resumen_pedido , 
                             ["class"=>'texto_compra'])?>                
-                    </div>
-                    <div>                        
+                    <?=end_row()?>
+                    <?=n_row_12()?>      
                         <?=get_text_direccion_envio(
                             $id_recibo , 
                             $modalidad , 
@@ -83,8 +81,8 @@
 
                         )?>
                         
-                      </div>
-                    </div>  
+                    <?=end_row()?>
+                </div>  
             </div>          
         </div>
     <?=end_row()?>

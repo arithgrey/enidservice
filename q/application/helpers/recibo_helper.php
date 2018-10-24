@@ -120,7 +120,7 @@ if(!function_exists('invierte_date_time')){
     if($modalidad_ventas == 0 && $en_proceso["num_pedidos"]>0){
         $flag       ++;
         $num        = $en_proceso["num_pedidos"];
-        $text   = ($num>1) ? $simbolo." TUS $num PEDIDOS ESTÁN EN CAMINO " : $simbolo." TU PEDIDO ESTÁ EN CAMINO ";
+        $text   = ($num>1) ? $simbolo." TUS ".$num." PEDIDOS ESTÁN EN CAMINO " : $simbolo." TU PEDIDO ESTÁ EN CAMINO ";
     }
     if($modalidad_ventas == 1 && $en_proceso["num_pedidos"]>0){
         $flag ++;
@@ -129,25 +129,29 @@ if(!function_exists('invierte_date_time')){
         
     }
     
-    return div( $text, ["class"=>"alert alert-info text-center"]);
+    $final =  (strlen($text) > 10 ) ? div( $text, ["class"=>"alert alert-info text-center"]) : $text; 
+    return $final;
 
   }  
-  function get_numero_articulos_en_venta_usuario($numero_articulos_en_venta){
+  function get_numero_articulos_en_venta_usuario($modalidad , $numero_articulos_en_venta){
 
-      $link = anchor_enid(
-              icon("fa fa-cart-plus"). " Artículos en promoción" , 
-              [ "href" =>  '../planes_servicios/', 
-                "class"=>'vender_mas_productos']
-              );
+      if ($modalidad == 1) {
+              
+        $link = anchor_enid(
+                icon("fa fa-cart-plus"). " Artículos en promoción" , 
+                [ "href" =>  '../planes_servicios/', 
+                  "class"=>'vender_mas_productos']
+                );
 
-      $link2 = anchor_enid(
-              " Agregar" , 
-              [ 
-                "href" =>  '../planes_servicios/?action=ventas', 
-                "class"=>'vender_mas_productos']
-              );
+        $link2 = anchor_enid(
+                " Agregar" , 
+                [ 
+                  "href" =>  '../planes_servicios/?action=nuevo', 
+                  "class"=>'vender_mas_productos']
+                );
 
-      return div($link . $link2 , 1);
+        return div($link . $link2 , 1);
+      }
   }
   function evalua_texto_envios_compras($modalidad_ventas , $num_orden , $tipo){ 
     
@@ -156,10 +160,7 @@ if(!function_exists('invierte_date_time')){
     switch($tipo) {
       case 1:      
         if($modalidad_ventas ==  1){                  
-            $text="
-                Date prisa, 
-                mantén una buena reputación enviando 
-                tu artículo en venta de forma puntual";
+            $text="DATE PRISA MANTÉN EXCELENTE REPUTACIÓN ENVIA TU ARTÍCULO EN VENTA DE FORMA PUNTUAL";
 
             $text_2="
                 Date prisa, 
@@ -239,7 +240,7 @@ if(!function_exists('invierte_date_time')){
         $text             = "";        
         if($vendedor ==  1) {
 
-            $text = span("DETALLES DE LA COMPRA" , 
+            $text = div("DETALLES DE LA COMPRA" , 
               [
                 "class"       => 'resumen_pagos_pendientes',
                 "id"          => $id_recibo,
@@ -250,7 +251,7 @@ if(!function_exists('invierte_date_time')){
         }else{          
             if($monto_por_liquidar <= 0){      
               
-              $text = span(icon('fa fa-check-circle'). "COMPRA REALIZADA" , 
+              $text = div(icon('fa fa-check-circle'). "COMPRA REALIZADA" , 
               [
                 "class"       => 'resumen_pagos_pendientes',
                 "id"          => $id_recibo,
@@ -262,7 +263,7 @@ if(!function_exists('invierte_date_time')){
 
 
               $estilos = "";
-              $text = span(icon('fa fa-credit-card-alt'). "LIQUIDAR AHORA!" , 
+              $text = div(icon('fa fa-credit-card-alt'). "LIQUIDAR AHORA!" , 
               [
                 "class"       => 'resumen_pagos_pendientes',
                 "id"          => $id_recibo,
@@ -337,4 +338,38 @@ if(!function_exists('invierte_date_time')){
     }    
     return $text;
   }
+  function get_text_modalidad_compra($modalidad , $ordenes ){
+
+    $text = ($modalidad == 1 ) ? "TUS VENTAS"  : "TUS COMPRAS";
+    if ($modalidad ==  0 && $ordenes  == 0) {
+      return "";
+    }
+    return heading_enid($text , 2);
+      
+  }
+
+  function get_mensaje_compra($modalidad , $ordenes){
+
+    /*Compras*/
+    if ($modalidad == 0 && $ordenes == 0) {
+        $final =  div(img([
+            "src" => "../img_tema/tienda_en_linea/carrito_compra.jpg" ,
+            "class" => "img_invitacion_compra" 
+        ])
+        ,
+        ["class" => "img_center_compra"]
+      );
+
+      $final  = anchor_enid($final , ["href" => "../"]);   
+      $final .= anchor_enid(heading_enid("EXPLORAR TIENDA", 3 , ["class" => "text-center text_explorar_tienda"]), 
+        [
+          "href" => "../"
+        ]);
+      return $final;
+
+
+
+    }
+  }
+
 }

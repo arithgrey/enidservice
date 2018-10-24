@@ -636,8 +636,7 @@ if ( ! function_exists('place'))
   /**/
   function place($class , $attributes = [] , $row =1){         
 
-    $attributes["class"]  = $class;  
-    //print_r($attributes);
+    $attributes["class"]  = $class;      
     if ($row == 1) {
       return div("",  $attributes  , 1); 
     }else{

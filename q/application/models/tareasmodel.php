@@ -34,14 +34,15 @@ class tareasmodel extends CI_Model{
     return $this->db->get("tarea")->result_array();
   }   
   function update_estado_tarea($param){
-      
-    $params =[
-      "status"        => $param["nuevo_valor"] , 
-      "fecha_termino" => CURRENT_TIMESTAMP()
-    ];
-    $params_where = ["id_tarea" =>  $param["id_tarea"] ];
-    $this->update($params, $params_where);
-    return $this->valida_tareas_pendientes($param);
+    
+    $query_update = "UPDATE tarea 
+    SET 
+    status = '".$param["nuevo_valor"]."' ,
+    fecha_termino = CURRENT_TIMESTAMP()
+    WHERE 
+    id_tarea = '".$param["id_tarea"]."'
+    LIMIT 1";
+    return $this->db->query($query_update);
   }    
   function get_tareas_ticket_num($param){
    

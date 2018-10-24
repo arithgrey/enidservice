@@ -1,14 +1,17 @@
 function carga_form_img(){	
     /**/    
-    showonehideone( ".contenedor_agregar_imagenes" , ".contenedor_global_servicio");
-    display_elements([".titulo_articulos_venta"], 0);
+    showonehideone( ".contenedor_agregar_imagenes" , ".contenedor_global_servicio");    
+    display_elements([".titulo_articulos_venta" , ".guardar_img_enid"], 0);
 	var url        = "../q/index.php/api/img/form_img_servicio_producto/format/json/";
 	var data_send  = $.param({"id_servicio" : get_option("servicio")});		    
     request_enid("GET", data_send , url , response_cargar_form , ".place_img_producto" );					
 }
 /**/
-function response_cargar_form(data){    
+function response_cargar_form(data){   
+
+    
     llenaelementoHTML(".place_img_producto" , data);
+    display_elements([".guardar_img_enid" , "#guardar_img"]);
     $(".imagen_img").change(upload_imgs_enid_pre);
     recorrepage("#guardar_img");
 }

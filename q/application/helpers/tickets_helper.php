@@ -75,7 +75,7 @@ if(!function_exists('invierte_date_time')){
       return $msj_email;
  
   }      
-    function crea_tabla_resumen_ticket($info_ticket  , $info_num_tareas){
+  function crea_tabla_resumen_ticket($info_ticket  , $info_num_tareas){
      
     $tareas                   =  $info_num_tareas[0]["tareas"];  
     $pendientes               =  $info_num_tareas[0]["pendientes"];      
@@ -100,26 +100,43 @@ if(!function_exists('invierte_date_time')){
           $asunto                     =  $row["asunto"];
       }
       ?>      
-      <?php echo n_row_12()?>
-          <?=div($asunto , ["class"=>"titulo_enid_sm titulo_bloque_tarea"]); ?>
-      <?php echo end_row()?>
+      
+      
+      <?=n_row_12()?>              
+        <?php echo "<table class='table_resumen_ticket'>";  ?>
+          <?php echo "<tr>";  ?>          
+            <?=get_td(heading_enid($asunto , 3, ["class"=>"white"]) ); ?>
+            <?=get_td("#TAREAS ".$tareas ); ?>    
+            <?=get_td("#PENDIENTES ".$pendientes )?>
+          <?php echo "</tr>";  ?>          
 
-      <?php echo n_row_12()?>
-            <?=div("#TAREAS ".$tareas ."" . "#PENDIENTES ".$pendientes ); ?> 
-      <?php echo end_row()?>
+          <?php echo "<tr>";  ?>          
+            <?=get_td($info_ticket[0]["asunto"] , ["colspan" => 3]); ?> 
+          <?php echo "</tr>";  ?>          
+          
+          <?php echo "<tr>";  ?>          
+            <?=get_td(div($info_ticket[0]["mensaje"])); ?> 
+          <?php echo "</tr>";  ?>          
 
-      <?php echo n_row_12()?>
-            <?=div($info_ticket[0]["asunto"]); ?> 
-            <?=div($info_ticket[0]["mensaje"]); ?>             
-      <?php echo end_row()?>
+          <?php echo "</tr>";  ?>
+        <?php echo "</table>";  ?>      
+      <?=end_row()?>
 
-      <?php echo n_row_12()?>
-        <?php echo "TICKET # ".$id_ticket ?> |
-        <?php echo "DEPARTAMENTO ".strtoupper($nombre_departamento) ?> |
-        <?php echo "ESTADO ".strtoupper($lista_status[$status]) ?> |
-        <?php echo "PRIORIDAD ".strtoupper($lista_prioridad[$prioridad])  ?> |
-        <?php echo "ALTA ".strtoupper($fecha_registro) ?>
-      <?php echo end_row()?>
+      <?=n_row_12()?>        
+        <?php echo "<table>";  ?>
+          <?php echo "<tr>";  ?>
+          <?php get_td("TICKET # ".$id_ticket)?>
+          
+          <?php get_td("DEPARTAMENTO ".strtoupper($nombre_departamento))?>
+          
+          <?php get_td("ESTADO ".strtoupper($lista_status[$status]))?>
+          
+          <?php get_td("PRIORIDAD ".strtoupper($lista_prioridad[$prioridad]))?>
+          
+          <?php get_td("ALTA ".strtoupper($fecha_registro))?>
+          <?php echo "</tr>";  ?>
+        <?php echo "</table>";  ?>      
+      <?=end_row()?>
     
   <?php
   }

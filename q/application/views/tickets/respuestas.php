@@ -28,7 +28,7 @@
 	}
 	
 	$oculta_comentarios = 
-    (count($info_respuestas) >0 ) ? span("Ocultar " , 
+    (count($info_respuestas) >0 ) ? div("Ocultar " , 
         ["class"=>'ocultar_comentarios strong blue_enid' , "id"=> $id_tarea ]) : "";
 	
 		

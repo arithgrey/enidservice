@@ -44,7 +44,8 @@
                       ])?>
                       <?=div($asunto)?>
                   </div>
-                  <?=div("#Tareas pendientes:" . $num_tareas_pendientes  ,$tareas_pendientes , 
+                  <?=div("#Tareas pendientes:". $num_tareas_pendientes,
+                    $tareas_pendientes , 
                   ["class" => "cursor_pointer"])?>
               </div>
               <div class="popup-head-right pull-right ">

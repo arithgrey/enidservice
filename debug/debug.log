@@ -809,3 +809,3927 @@ DEBUG - TYPE boolean 2018-10-22 23:00:59 --> 1
 DEBUG - TYPE string 2018-10-22 23:02:41 --> llo
 DEBUG - TYPE string 2018-10-22 23:02:41 --> ....
 DEBUG - TYPE boolean 2018-10-22 23:02:41 --> 1
+DEBUG - TYPE string 2018-10-23 22:59:15 --> ....
+DEBUG - TYPE boolean 2018-10-23 22:59:15 --> 1
+DEBUG - TYPE string 2018-10-24 00:20:32 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:20:32 --> 1
+DEBUG - TYPE string 2018-10-24 00:25:35 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:25:35 --> 1
+DEBUG - TYPE string 2018-10-24 00:26:19 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:26:19 --> 1
+DEBUG - TYPE string 2018-10-24 00:29:01 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:29:01 --> 1
+DEBUG - TYPE string 2018-10-24 00:29:12 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:29:12 --> 1
+DEBUG - TYPE string 2018-10-24 00:39:15 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:39:15 --> 1
+DEBUG - TYPE string 2018-10-24 00:42:49 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:42:49 --> 1
+DEBUG - TYPE string 2018-10-24 00:46:27 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:46:27 --> 1
+DEBUG - TYPE string 2018-10-24 00:48:00 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:48:00 --> 1
+DEBUG - TYPE string 2018-10-24 00:48:48 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:48:48 --> 1
+DEBUG - TYPE string 2018-10-24 00:49:51 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:49:51 --> 1
+DEBUG - TYPE string 2018-10-24 00:49:57 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:49:57 --> 1
+DEBUG - TYPE string 2018-10-24 00:51:40 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:51:40 --> 1
+DEBUG - TYPE string 2018-10-24 00:52:23 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:52:23 --> 1
+DEBUG - TYPE string 2018-10-24 00:52:23 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:52:23 --> 1
+DEBUG - TYPE string 2018-10-24 00:52:30 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:52:30 --> 1
+DEBUG - TYPE string 2018-10-24 00:53:24 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:53:24 --> 1
+DEBUG - TYPE string 2018-10-24 00:53:35 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:53:35 --> 1
+DEBUG - TYPE string 2018-10-24 00:53:53 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:53:53 --> 1
+DEBUG - TYPE string 2018-10-24 00:54:44 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:54:44 --> 1
+DEBUG - TYPE string 2018-10-24 00:54:55 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:54:55 --> 1
+DEBUG - TYPE string 2018-10-24 00:55:29 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:55:29 --> 1
+DEBUG - TYPE string 2018-10-24 00:56:50 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:56:50 --> 1
+DEBUG - TYPE string 2018-10-24 00:58:00 --> ....
+DEBUG - TYPE boolean 2018-10-24 00:58:00 --> 1
+DEBUG - TYPE array 2018-10-24 01:26:14 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 0
+                    [accesos_a_intento_compra] => 
+                    [accesos_contacto] => 
+                    [accesos_area_cliente] => 
+                    [usuarios] => 7
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 13
+                                    [compras_efectivas] => 0
+                                    [solicitudes] => 11
+                                    [envios] => 0
+                                    [cancelaciones] => 2
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 12
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-10-24 01:34:45 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1513748208 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:34:46 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2077778277 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:34:53 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1819945946 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:34:54 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1519767027 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:35:04 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1127209510 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:35:04 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_893989421 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:35:27 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1089148240 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:35:27 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2055669568 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:35:37 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1548476157 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:35:38 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_865332685 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:35:53 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_193879376 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:35:54 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_674634956 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:02 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1834884317 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:03 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1468554115 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:04 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_599994619 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:05 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_599994619 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:06 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1676625444 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ' DEL '
+                      
+                      AND 
+                      t.asunto like '% DEL %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:09 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_281871015 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      AND d.id_departamento = '2' 
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:24 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_64479503 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'Solicitud buzón de contacto'
+                      AND d.id_departamento = '2' 
+                      AND 
+                      t.asunto like '%Solicitud buzón de contacto%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:25 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_64479503 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'Solicitud buzón de contacto'
+                      AND d.id_departamento = '2' 
+                      AND 
+                      t.asunto like '%Solicitud buzón de contacto%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:26 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_928609247 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'Solicitud buzón de contacto'
+                      
+                      AND 
+                      t.asunto like '%Solicitud buzón de contacto%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:30 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1823780804 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'Solicitu'
+                      AND d.id_departamento = '2' 
+                      AND 
+                      t.asunto like '%Solicitu%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:34 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2094225613 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'Solicitu'
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '%Solicitu%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:35 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_39746458 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'Solicitu'
+                      
+                      AND 
+                      t.asunto like '%Solicitu%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:47 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_603615905 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'Solicitu'
+                      AND d.id_departamento = '6' 
+                      AND 
+                      t.asunto like '%Solicitu%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 01:36:48 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_78577397 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'Solicitu'
+                      
+                      AND 
+                      t.asunto like '%Solicitu%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:46:47 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1641721245 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:46:48 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_802441695 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:13 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1623287579 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:14 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1789460378 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:16 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_143846853 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:16 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_533276254 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:16 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1060224008 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi '
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:19 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_533276254 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'misi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%misi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:19 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1060224008 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi su'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi su%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:19 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1497350414 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:22 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_671928310 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi super'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi super%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:22 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1067575661 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi '
+                      
+                      AND 
+                      t.asunto like '%mi %'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:22 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2141992270 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'misi'
+                      
+                      AND 
+                      t.asunto like '%misi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:24 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_671928310 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi super'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi super%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:47:24 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1020620980 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi super'
+                      
+                      AND 
+                      t.asunto like '%mi super%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:48:56 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1067588234 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi super'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi super%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:48:57 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_565457395 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi super'
+                      
+                      AND 
+                      t.asunto like '%mi super%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:49:07 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1742573910 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi super'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi super%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:49:08 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_925723470 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi super'
+                      
+                      AND 
+                      t.asunto like '%mi super%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:49:20 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_602294609 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:49:20 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1891488644 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:49:21 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1891488644 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:49:21 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_737355154 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:49:23 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1049877314 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:50:45 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_479285657 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:50:46 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_876131382 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:51:53 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_985991998 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:51:54 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1074045755 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:39 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1576306068 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'm'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%m%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:41 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1576306068 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'ms'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%ms%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:41 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2126732031 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'm'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%m%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:43 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2058917922 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mis'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mis%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:43 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_996501047 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'ms'
+                      
+                      AND 
+                      t.asunto like '%ms%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:43 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2126732031 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:44 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2053577788 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mis'
+                      
+                      AND 
+                      t.asunto like '%mis%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:44 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_523925718 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:47 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1205881114 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:52:48 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1678116119 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:53:07 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1600159004 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:53:08 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1600159004 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:53:09 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1923659185 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:53:43 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1468941168 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:53:43 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1691347685 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:53:45 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1468941168 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:53:45 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_951240349 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:53:46 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1747746221 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:59:49 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1653535882 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:59:50 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1073777542 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:59:57 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_979835273 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MIS'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MIS%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:59:57 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2108007789 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:59:59 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2108007789 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MIS'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MIS%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 08:59:59 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_979835273 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MIS'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MIS%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:00 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1825833363 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MIS'
+                      
+                      AND 
+                      t.asunto like '%MIS%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:00 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1280559107 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MIS'
+                      
+                      AND 
+                      t.asunto like '%MIS%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:02 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1960179376 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:02 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_238584274 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:03 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1288809667 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:04 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_111398384 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:04 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_586414716 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:05 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_755819569 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:27 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1275685546 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:00:28 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1032956868 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:01:05 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1012061949 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:01:06 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1857233523 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:01:26 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_309526229 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:01:27 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_721547107 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'MI'
+                      
+                      AND 
+                      t.asunto like '%MI%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:03:24 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_397996494 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:03:24 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1046785901 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:05:25 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_517544486 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:05:26 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1268139301 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:06:40 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1560570152 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:06:41 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1332853546 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  ''
+                      
+                      AND 
+                      t.asunto like '%%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:09:57 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_291280050 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:09:58 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_291280050 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mis'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mis%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:10:00 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1313461945 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:10:00 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1039981507 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mis'
+                      
+                      AND 
+                      t.asunto like '%mis%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:10:00 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_130982911 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:10:02 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2063843268 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:10:02 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1515530115 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:10:50 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2037913476 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:10:51 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_589610021 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:10:55 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1629809822 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:10:56 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_115989495 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:15:35 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1133743875 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:15:36 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1133743875 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:15:37 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_724373633 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:18:18 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_237302505 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:18:19 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_507861488 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:18:41 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_354228254 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:18:41 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_5784030 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:18:42 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_354228254 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:18:42 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_77763179 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:18:43 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_143861624 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:20:20 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1288102424 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:20:20 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_153616884 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:21:37 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_500305240 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:21:38 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1050146672 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:30:52 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_559141686 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:30:53 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_559141686 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:30:54 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1885666820 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:05 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1937986785 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mis'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mis%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:06 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1130495923 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mis'
+                      
+                      AND 
+                      t.asunto like '%mis%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:08 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_922861953 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mis'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mis%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:09 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1635753630 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mis'
+                      
+                      AND 
+                      t.asunto like '%mis%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:10 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2068301440 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:11 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2068301440 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:12 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1921187262 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:43 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1918498392 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:44 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1918498392 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:31:45 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_712348091 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:10 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2079950335 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:10 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1077044857 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:11 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1278837517 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:11 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_2079950335 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:12 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_474422345 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:46 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1344702656 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  't'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%t%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:48 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1068033874 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:48 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1344702656 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'ta'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%ta%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:49 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1068033874 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:49 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_518318213 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'ta'
+                      
+                      AND 
+                      t.asunto like '%ta%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:33:51 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_670286285 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:34:01 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1157076085 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:34:02 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1411275674 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:37:39 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_223840247 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:37:40 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_223840247 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      AND d.id_departamento = '' 
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro
+DEBUG - TYPE string 2018-10-24 09:37:41 --> SELECT                       
+                      t.id_ticket,
+                      t.asunto,
+                      t.mensaje,
+                      t.status,
+                      t.id_usuario,
+                      t.fecha_registro,           
+                      d.nombre nombre_departamento ,                      
+                      tp.num_tareas_pendientes
+                      FROM 
+                        ticket t 
+                      INNER JOIN departamento d 
+                        ON t.id_departamento = d.id_departamento                      
+                      LEFT OUTER JOIN
+                        tmp_tareas_ticket_1197010003 tp
+                      ON 
+                        t.id_ticket =  tp.id_ticket
+                    WHERE                    
+                      t.status =  'mi'
+                      
+                      AND 
+                      t.asunto like '%mi%'                        
+                      
+                      ORDER BY                                                         
+                      t.fecha_registro

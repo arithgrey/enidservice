@@ -1,24 +1,31 @@
 <form 
-accept-charset="utf-8" method="POST" id="form_img_enid" class="form_img_enid" enctype="multipart/form-data">    <?=input([
+    accept-charset="utf-8" 
+    method="POST" 
+    id="form_img_enid" 
+    class="form_img_enid" 
+    enctype="multipart/form-data">    
+
+    <?=input([
     "type"        => "file" ,
     "id"          => 'imagen_img' ,
     "class"       => 'imagen_img' ,
     "name"        => "imagen"
     ])?>          
+    <br>
     <?=input_hidden(["name"=>'q', "value"=>'perfil_usuario'])?>    
     <?=input_hidden([
         "class" =>  'dinamic_img' ,
         "id"    =>  'dinamic_img' ,
         "name"  =>  'dinamic_img' 
     ])?>
-    <?=place("separate-enid")?>
-    <?=guardar(icon("fa fa-check") , 
+    
+    <?=place("place_load_img" , ["id"   =>  'place_load_img'])?>    
+    <?=guardar("ACTUALIZAR" , 
     [
         "type"      =>  "submit" ,
-        "class"     =>  'btn btn btn-sm guardar_img_enid pull-right' ,
-        "id"        =>  'guardar_img' ,
-        "style"     =>  'color:white;display: none;'
-    ])?>
-    <?=place("separate-enid")?>
+        "class"     =>  'guardar_img_enid display_none top_10' 
+        
+    ],1,1)?>
+    
 </form>
-<?=place("place_load_img" , ["id"   =>  'place_load_img'])?>
+

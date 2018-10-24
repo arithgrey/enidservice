@@ -221,7 +221,7 @@
                 ['class' =>     "text_btn_direccion_envio"]) , 
                 ["class"=>"button_c"]
             )?>                    
-            <?=place("notificacion_direccion" , 1)?>
+            <?=place("notificacion_direccion" )?>
                                         
                                         
         </div>

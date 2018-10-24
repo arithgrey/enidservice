@@ -204,4 +204,8 @@
   }
   .info_persona:hover{
     cursor: pointer;
-  }
+}
+.table_resumen_ticket{
+  background: #0d101d;  
+  color: white;
+}

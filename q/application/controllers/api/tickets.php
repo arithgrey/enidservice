@@ -261,9 +261,9 @@ class Tickets extends REST_Controller{
     }   
     function ticket_desarrollo_GET(){
 
-        $param = $this->get();
-        $data =[];
-        $modulo =  $param["modulo"]; 
+        $param  =   $this->get();
+        $data   =   [];
+        $modulo =   $param["modulo"]; 
         switch ($modulo) {
             case 1:
                 /*Cargamos data tickets desde la versión del vendedor y por producto*/
@@ -272,8 +272,13 @@ class Tickets extends REST_Controller{
         
             case 2:
                 /*Cargamos data tickets desde la versión direccion*/
-                $data["info_tickets"] =  
-                $this->tickets_model->get_tickets_desarrollo($param);
+                $tickets              =   $this->tickets_model->get_tickets_desarrollo($param);
+                if (count($tickets) == 0) {
+                    $tickets          =   $this->tickets_model->get_tickets_desarrollo($param ,1);
+                }
+                $data["info_tickets"] = $tickets;
+ 
+
                 $data["status_solicitado"] =  $param["status"];
                 $data["info_get"] =  $param;
                 break;

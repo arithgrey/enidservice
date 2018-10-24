@@ -4,7 +4,7 @@
 			<div class="col-lg-10">			
 				<div class="tab-content">								
 				    <div class="tab-pane active"  id="tab_mis_datos">
-				    	 <?=$this->load->view("micuenta/cuenta");?>
+				    	<?=$this->load->view("micuenta/cuenta");?>
 				    </div>
 				    <div class="tab-pane " id="tab_privacidad">
 				       <?=$this->load->view("micuenta/privacidad");?>

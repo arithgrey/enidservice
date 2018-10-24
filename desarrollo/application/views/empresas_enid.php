@@ -12,7 +12,7 @@
                     <?=end_row()?>
                 </div>
                 <div class="tab-pane <?=valida_seccion_activa(1 , $activa)?>" id='tab_abrir_ticket'>
-                    <?=heading_enid("DESARROLLO ENID SERVICE", 3)?>                        
+                                        
                     <?=n_row_12()?>
                         <?=$this->load->view("../../../view_tema/formularios/busqueda_tickets")?>
                     <?=end_row()?>

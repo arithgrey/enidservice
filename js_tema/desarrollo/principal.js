@@ -1,5 +1,6 @@
 $(document).ready(function(){		
 
+
 	var num_departamento = get_parameter(".num_departamento"); 
 	set_option("modulo", 2);
 		
@@ -170,7 +171,9 @@ function carga_info_detalle_ticket(){
 /**/
 function response_carga_ticket(data){
 
-	llenaelementoHTML(".place_proyectos" , data);		
+	
+	llenaelementoHTML(".place_proyectos" , data);	
+	display_elements([".seccion_nueva_tarea" ] , 0);	
 	$(".mostrar_tareas_pendientes").hide();
 	$(".btn_mod_ticket").click(set_estatus_ticket);
 	$(".btn_agregar_tarea").click(agregar_tarea);
@@ -242,10 +245,10 @@ function response_carga_comentario_tareas(data){
 }
 /**/
 function registra_tarea(e){	
+
 	var requerimiento 	=  $(".form_agregar_tarea .note-editable").html();		
 	var url 			=  "../q/index.php/api/tarea/index/format/json/";	
 	var data_send 		=  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_option("id_ticket") , "tarea": requerimiento });				
-
 	request_enid( "POST",  data_send, url, carga_info_detalle_ticket, ".place_proyectos");
 	e.preventDefault();
 }
@@ -286,6 +289,7 @@ function response_carga_tickets(data){
 	llenaelementoHTML(".place_proyectos" , data);										
 	/*Ver detalle ticket completo*/
 	$(".ver_detalle_ticket").click(function(e){
+
 		set_option("id_ticket", get_parameter_enid($(this) , "id")); 
 		carga_info_detalle_ticket();
 	});
@@ -317,12 +321,12 @@ function response_actualiza_tareas(data){
 	}	
 }
 var agregar_tarea = function(){
-	
-	debugger;
+
 	show_section_dinamic_button(".seccion_nueva_tarea");
 	show_section_dinamic_button(".btn_agregar_tarea");
 	recorrepage(".seccion_nueva_tarea");
-			
+	
+	display_elements([".listado_pendientes" , ".mostrar_todas_las_tareas" ,".table_resumen_ticket"] , 0);			
 	$('.summernote').summernote({
 		placeholder: 'Tarea pendiente',
 		tabsize: 2,

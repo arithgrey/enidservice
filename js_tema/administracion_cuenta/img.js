@@ -1,4 +1,6 @@
 function carga_form_imagenes_usuario(){    
+    
+    display_elements(  [".imagen_usuario_completa" , ".menu_info_usuario" , ".contenedor_lateral" , ".registro_telefono_usuario_lada_negocio" , ".editar_imagen_perfil"] , 0  );
     var data_send   = {};
     var url         =  "../q/index.php/api/img/form_img_user/format/json/";
     request_enid( "GET",  data_send, url, response_carga_form_imagenes, ".place_form_img"); 

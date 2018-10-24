@@ -21,16 +21,13 @@ $llamadas_recibidas =  anchor_enid(
 		    <div class='col-lg-10'>
 		        <div class="tab-content">            
 		        	<div class="tab-pane <?=valida_active_tab('preguntas' , $action)?>" id="tab_buzon">
-						<!--<div class="contenedor_opciones_buzon">-->
-							<?=heading_enid("BUZÓN" , 3)?>							
-							<hr>							
-							<table>
-								<tr>
-									<?=get_td($llamadas . $llamadas_recibidas )?>
-								</tr>
-							</table>
-						<!--</div>-->
-
+						<?=heading_enid("BUZÓN" , 3)?>							
+						<hr>							
+						<table>
+							<tr>
+								<?=get_td($llamadas . $llamadas_recibidas )?>
+							</tr>
+						</table>
 						<?=place("place_buzon")?>
 		            </div>
 		            <div class="tab-pane <?=valida_active_tab('compras' , $action)?>"  id='tab_mis_pagos'>
@@ -38,25 +35,25 @@ $llamadas_recibidas =  anchor_enid(
 		            </div>
 		            <div class="tab-pane <?=valida_active_tab('ventas' , $action)?>" id='tab_mis_ventas'>                
 		                
-		                	<?=div(place("place_ventas_usuario") , ["class"=>"col-lg-9"])?>
-		                    <div class="col-lg-3">	                		
-		                    	<?=heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS" , 3)?>
-								<center>
-						    		<?=$valoraciones;?>
-						    	</center>
-						    	<br>
-						    	<CENTER>
-						    	<?=anchor_enid("VER COMENTARIOS" , 
-						    		[
+		            <?=div(place("place_ventas_usuario") , ["class"=>"col-lg-9"])?>
+		               <div class="col-lg-3">	                		
+		                <?=heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS" , 3)?>
+						<center>
+							 <?=$valoraciones;?>
+						</center>
+						<br>
+						<CENTER>
+							<?=anchor_enid("VER COMENTARIOS" , 
+						    	[
 						    		"href"	=>	"../recomendacion/?q=".$id_usuario ,
 									"class"	=>	"a_enid_blue text-center top_10"
-									] ,
-									1,
-									1
-								)?>
-								</CENTER>
-								<?=div($alcance , 1)?>
-		                    </div>
+								] ,
+								1,
+								1
+							)?>
+						</CENTER>
+			<?=div($alcance , 1)?>
+		               </div>
 
 		                
 
