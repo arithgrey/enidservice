@@ -209,3 +209,16 @@
   background: #0d101d;  
   color: white;
 }
+.listado_pendientes{
+  background: #fafdff;
+  padding: 10px;
+  border: 1px;    
+  border-style: solid;  
+  margin-top: 20px;
+}
+.contenedor_respuestas_tickect_tarea{
+  padding: 10px;
+  margin-top: 20px;
+  border-style: solid;
+  border-width: 1px;
+}

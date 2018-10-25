@@ -63,34 +63,42 @@
 		
 ?>	
 <div class="listado_pendientes">
-	<div class='<?=$estado_tarea?> top_20'>
+	<div class='<?=$estado_tarea?> top_20 contenedor_tarea_ticket'>
 		<?=n_row_12()?>	
-			<div class='col-lg-8 col-lg-offset-2'>
-				<?=div($nombre_usuario_registro . "||" .$tipo_usuario , [ "class"=>'col-lg-7'])?>
-				<?=div($fecha_registro . $input , ["class"=>'col-lg-5'])?>		
-			</div>							
-		<?=end_row()?>
-		<?=div($row["descripcion"] , 1)?>
-		<?=n_row_12()?>						
 			<table>
+				<tr>				
+					<?=get_td($nombre_usuario_registro ,  ["class" =>"usuario_abre_tarea"])?>				
+					<?=get_td($fecha_registro ,["class" =>	"fecha_registro_tarea"])?>
+					<?=get_td($tipo_usuario , ["class" => "text-right tipo_usuario"])?>
+				</tr>
 				<tr>
-				<?=get_td(div("Ver comentarios(" . $num_comentarios .")" , 
+					<?=get_td("" , ["colspan" => 2])?>
+					<?=get_td($input)?>
+				</tr>
+				<tr>
+					<?=get_td(div($row["descripcion"] , 1) ,  ["colspan" => 3] )?>			
+				</tr>
+				<tr class="top_20">
+					<?=get_td(div("Ver comentarios(" . $num_comentarios .")" , 
 							[
 								"class"	=>	'strong comentarios_tarea cursor_pointer', 
 								"id"	=>	$id_tarea
 							])
-						)?>
+						, ["colspan" => 2] )?>
 						
-				<?=get_td(div("+ agregar comentario" , 
+					<?=get_td(div("+ agregar comentario" , 
 							[
-								"class"	=>	'text-right strong agregar_respuesta a_enid_blue_sm cursor_pointer', 
+								"class"	=>	'text-right strong agregar_respuesta  cursor_pointer', 
 								"id"	=>	$id_tarea
 							])
 						)?>
-				</tr>	
+				</tr>
 			</table>
-		<?=end_row()?>
+												
+		<?=end_row()?>				
 		<?=place($seccion_respuesta_num , ["id" => $id_tarea])?>
-	</div>				
+
+	</div>		
+	<hr>			
 </div>
 <?php }?>

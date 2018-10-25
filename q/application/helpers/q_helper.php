@@ -101,7 +101,7 @@ if(!function_exists('invierte_date_time')){
       if ($num_tareas>0){                
         switch ($tipo){
           case 1:          
-            $seccion = div("PENDIENTES");            
+            $seccion = div("NOTIFICACIONES " , 1);            
             break;          
           default:            
             break;
@@ -331,9 +331,7 @@ if(!function_exists('invierte_date_time')){
       return $fin;
   }
   function inicio_base_notificacion($url='' , $class_icono='' ){      
-      return n_row_12().
-        anchor_enid(div(icon($class_icono),["class" => "contenedor_notificacion black"]) ,
-        ["href"=> $url ]);
+      return n_row_12(). anchor_enid(icon($class_icono) ,["href"=> $url ]);
       
   }
   function add_mensajes_respuestas_vendedor($param, $tipo){      
@@ -397,9 +395,7 @@ if(!function_exists('invierte_date_time')){
 
       $data_complete["num_tareas_pendientes_text"] = $flag;  
       $data_complete["num_tareas_pendientes"] = crea_tareas_pendientes_info($flag);
-      $data_complete["lista_pendientes"] = 
-      get_mensaje_inicial_notificaciones(1 , $flag).
-      $lista_pendientes;
+      $data_complete["lista_pendientes"] = get_mensaje_inicial_notificaciones(1 , $flag).$lista_pendientes;
       return $data_complete;
     
   }

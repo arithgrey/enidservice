@@ -12,16 +12,14 @@
 		$apellido_materno     =   $row["apellido_materno"]; 
 		$usuario_respuesta    =   $nombre ." " . $apellido_paterno;
 		$idperfil             =   $row["idperfil"];
-		$text_perfil = ($idperfil != 20 ) ? "Equipo Enid Service" :  "Cliente";
+		$text_perfil          = ($idperfil != 20 ) ? "Equipo Enid Service" :  "Cliente";
 		
 
-        $respuestas .= "<div>";
-            $respuestas .=  anchor_enid(img(["class"=>'media-object']) , ["class"=>'pull-left'] );
-            $respuestas .= "<div class='media-body'>";
-                $respuestas .= small(icon('fa fa-clock-o') . $fecha_registro , ["class"=>'pull-right time'] );
-                $respuestas .= heading_enid($usuario_respuesta."  | ".$text_perfil , ["class" => 'media-heading']);
-                $respuestas .= small($respuesta , ["class"=>'col-lg-10'] );
-            $respuestas .= "</div>";
+        $respuestas .= "<div class='contenedor_respuestas_tickect_tarea'>";
+            $respuestas .=  anchor_enid(img(["class"=>'media-object']) , ["class"=>'pull-left'] );            
+            $respuestas .=  small(icon('fa fa-clock-o') . $fecha_registro , ["class"=>'pull-right time'] );
+            $respuestas .=  div($usuario_respuesta."  | ".$text_perfil , ["class" => 'media-heading']);
+            $respuestas .=  div($respuesta  );            
         $respuestas .= "</div>";
         $respuestas .= "<hr>";
                 	

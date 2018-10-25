@@ -211,6 +211,8 @@ function carga_formulario_respuesta_ticket(e){
 /**/
 function carga_comentarios_tareas(e){
 
+	
+	showonehideone( ".ocultar_comentarios" , ".comentarios_tarea");
 	var tarea 		= 	get_parameter_enid($(this) , "id");
 	set_option("tarea", tarea);	
 	var url 		=  	"../q/index.php/api/respuesta/respuestas/format/json/";	
