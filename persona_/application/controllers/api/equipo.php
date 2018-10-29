@@ -31,11 +31,11 @@ class Equipo extends REST_Controller{
     */
     /**/
     function get_num_registros_periodo($q){
-        $api =  "usuario/num_registros_preriodo/format/json";
+        $api =  "usuario/num_registros_preriodo/format/json/";
         return $this->principal->api( $api , $q);
     }
     function get_registros_periodo($q){
-        $api =  "usuario/registros_preriodo/format/json";
+        $api =  "usuario/registros_preriodo/format/json/";
         return $this->principal->api( $api , $q);
     }
     /**/

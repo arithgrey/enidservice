@@ -282,7 +282,7 @@ class producto extends REST_Controller{
     /**/
     function get_productos_interes($q){
 
-        $api    =  "usuario/productos_interes/format/json";
+        $api    =  "usuario/productos_interes/format/json/";
         return $this->principal->productos_deseados_periodo("q", $api ,  $q);
     }
 

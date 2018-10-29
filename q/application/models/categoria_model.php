@@ -23,6 +23,23 @@
             return $result->result_array();
 
     }
+    function get( $params=[], $params_where =[] , $limit =1){
+        $params = implode(",", $params);
+        $this->db->limit($limit);
+        $this->db->select($params);
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key , $value);
+        }
+        return $this->db->get("categoria")->result_array();
+    }
+    /**/
+    function insert( $params , $return_id=0){        
+        $insert   = $this->db->insert("categoria", $params);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }
     
+    function q_get($params=[], $id){
+        return $this->get($params, ["id_categoria" => $id ] );
+    }   
     
 }

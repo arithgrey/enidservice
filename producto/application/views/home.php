@@ -21,7 +21,7 @@
   $entregas_en_casa                 =   0;
   $telefono_visible                 =   0;
   $venta_mayoreo                    =   0;
-
+  $url_ml                           =   "";
   foreach($info_servicio["servicio"] as $row){
     
     $id_servicio                    =   $row["id_servicio"]; 
@@ -43,6 +43,7 @@
     $id_usuario_servicio            =   $row["id_usuario"];
     $telefono_visible               =   $row["telefono_visible"];
     $venta_mayoreo                  =   $row["venta_mayoreo"];
+    $url_ml                         =   $row["url_ml"];
     
   }
 
@@ -59,7 +60,7 @@
   $nombre_producto        =  heading_enid($nombre_servicio ,1 , ['class' =>  "strong" ]);
   $nuevo_nombre_servicio  =   valida_text_servicio($flag_servicio, $precio , $id_ciclo_facturacion ); 
   $boton_editar           =   valida_editar_servicio($id_usuario_servicio , $id_usuario , $in_session,  $id_servicio);
-  $texto_en_existencia    =   get_text_diponibilidad_articulo($existencia , $flag_servicio);
+  $texto_en_existencia    =   get_text_diponibilidad_articulo($existencia , $flag_servicio , $url_ml);
   $config                 =   ['class' =>  'valoracion_persona_principal valoracion_persona'];
   $estrellas              =   anchor_enid(div("", $config), ['class' => 'lee_valoraciones' , 'href'=> $url_tienda]);
 
@@ -169,7 +170,7 @@
                     <div class="card box-shadow">
                       <?=div($nombre_producto , ["class"=>"card-header"])?>
                       <div class="card-body">
-                        <?=heading( $precio ."MXN".get_text_diponibilidad_articulo($existencia , $flag_servicio) , 
+                        <?=heading( $precio ."MXN".get_text_diponibilidad_articulo($existencia , $flag_servicio , $url_ml) , 
                           1,
                           [ "class"=> "card-title pricing-card-title"]
                         )?>

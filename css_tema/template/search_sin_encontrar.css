@@ -32,3 +32,6 @@
 .boton_primer_producto{
 	margin-top: 30px!important;
 }
+.categoria_text{
+	text-transform: uppercase;
+}

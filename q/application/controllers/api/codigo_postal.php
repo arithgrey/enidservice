@@ -187,23 +187,23 @@ class codigo_postal extends REST_Controller{
         $this->response($data_complete);        
     }
     function get_colonia_delegacion($q){
-        $api    =  "codigo_postal/colonia_delegacion/format/json";
+        $api    =  "codigo_postal/colonia_delegacion/format/json/";
         return $this->principal->api( $api, $q);
     }
     /**/
     function get_pais_por_id($q)
     {
-        $api = "contries/pais/format/json";
+        $api = "contries/pais/format/json/";
         return $this->principal->api( $api , $q);
     }
     function get_data_direccion($q){
 
-        $api    =  "direccion/data_direccion/format/json";
+        $api    =  "direccion/data_direccion/format/json/";
         return  $this->principal->api(  $api, $q);
     }
     function get_id_codigo_postal_por_patron($q){
 
-        $api    = "codigo_postal/id_por_patron/format/json";
+        $api    = "codigo_postal/id_por_patron/format/json/";
         return  $this->principal->api( $api , $q );
     }
     function crea_direccion($q){

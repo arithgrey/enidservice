@@ -170,7 +170,7 @@ if ( ! function_exists('guardar'))
 /**/
 if ( ! function_exists('add_element'))
 {
-  function add_element( $info , $type , $attributes='' , $row_12 =0 )
+  function add_element( $info , $type , $attributes ='' , $row_12 =0 )
   {    
       
       $attr =  add_attributes($attributes);
@@ -262,7 +262,7 @@ if ( ! function_exists('input_hidden'))
 /**/
 if ( ! function_exists('add_attributes'))
 {
-  function add_attributes($attributes)
+  function add_attributes($attributes='')
   {
     if (is_string($attributes))
     {
@@ -985,7 +985,7 @@ if ( ! function_exists('debug'))
 {
 function debug($msg, $array = 0)
 { 
-
+    
     $_date_fmt  = 'Y-m-d H:i:s';
     $filepath = "/var/www/html/inicio/debug/debug.log"; 
     $message  = '';   

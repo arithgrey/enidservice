@@ -37,12 +37,12 @@ class Cron extends REST_Controller{
     private function get_usuarios_activos_perfil(){
 
         $param["id_perfil"]     =  20;
-        $api                    =  "usuario/usuarios_perfil/format/json";
+        $api                    =  "usuario/usuarios_perfil/format/json/";
         return  $this->principal->api( $api , $param);
     }
     private function get_usuarios_sin_publicar_articulos($q){
         $param["id_perfil"]     =  20;
-        $api                    =  "usuario/sin_publicar_articulos/format/json";
+        $api                    =  "usuario/sin_publicar_articulos/format/json/";
         return  $this->principal->api( $api , $param);
     }
     /**/

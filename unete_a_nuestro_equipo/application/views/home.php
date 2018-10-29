@@ -13,9 +13,11 @@
         <?=div("De Lunes a Viernes de 8:00 a 19:00 y Sábados de 09:00 a 18:00." , 1)?>
         <?=div("Podemos utilizar tu correo para mantenerte informado.." , 1)?>        
         <?=div("O si lo prefieres Comunícate directamente" , 1)?>                    
+        
         <?=anchor_enid(
-            "Preguntas frecuentes", 
-            ["href" =>   "http://enidservice.com/inicio/faq/?categoria=5"   ],
+            "FAQS", 
+            ["href" =>   "../faq/?categoria=5" , "class" => "top_20" ],
+            1,
             1,
             1
         )?>

@@ -753,7 +753,8 @@ input{
     display: none;
 }
 #flipkart-navbar {
-    background-color: #03163f;
+    //background-color: #03163f;
+    background-color: #0b348f;
     color: #FFFFFF;
 }
 
@@ -1121,4 +1122,32 @@ table{
 }
 .display_none{
 	display: none;
+}
+h2{
+	text-transform: uppercase;
+}
+.links:hover{
+	color: white!important;
+}
+.info_producto{
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(131,136,150,1);
+-moz-box-shadow: 2px 2px 5px 0px rgba(131,136,150,1);
+box-shadow: 2px 2px 5px 0px rgba(131,136,150,1);
+}
+.categorias_mas_vistas:hover{
+    color: white!important;
+}
+.categoria_text{
+    text-transform: uppercase;
+}
+.nombre_servicio{
+    font-size:  1.1em;
+}
+.text_precio{
+    font-size: 1.5em;
+    color: white;
+    background: #0b348f;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(227,217,255,1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(227,217,255,1);
+    box-shadow: 1px 5px 5px 0px rgba(227,217,255,1);
 }

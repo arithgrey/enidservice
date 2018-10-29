@@ -10,9 +10,21 @@ class categoria extends REST_Controller{
     function categorias_por_tipo_GET(){
 
       $param    =   $this->get();
-      $response =  $this->get_categorias_por_tipo($param["tipo"]); 
+      $response =  $this->categoria_model->get_categorias_por_tipo($param["tipo"]); 
       $this->response($response);
       
   	}
+    function id_GET(){
+
+      $param    = $this->get();
+      $response = [];
+      if (if_ext($param , "id") ) {
+        
+        $params = [];
+        $response =  $this->categoria_model->q_get($params, $param["id"]);
+      }
+      $this->response($response);
+
+    }
 
 }?>

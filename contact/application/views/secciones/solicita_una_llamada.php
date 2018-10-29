@@ -3,7 +3,7 @@
         <div class="row">        
             <?=div("" , ["class"=>"col-lg-6"])?>
             <div class="col-lg-6">
-                <form  id="form_contacto"   action="../msj/index.php/api/emp/contacto/format/json"  method="post">
+                <form  id="form_contacto"   action="../msj/index.php/api/emp/contacto/format/json/"  method="post">
                     <div class="row" id='envio_msj'>
                         <?=div( span("Departamento " , ["class"=>'white strong']), ["class"=>"col-sm-3"])?>
                         <?=div(create_select(

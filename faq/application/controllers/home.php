@@ -62,12 +62,9 @@ class Home extends CI_Controller{
         if ($flag_categoria == 1){            
             
             $id_categoria =  $categoria;
-            $resumen_respuestas = $this->principal->get_faqs_categoria($id_categoria , $data);            
-            $data["faqs_categoria"] = $resumen_respuestas;     
-
-            /**/
-            $info_categoria =  $this->principal->get_info_categoria($id_categoria);
-            
+            $resumen_respuestas = $this->get_faqs_categoria($id_categoria , $data);            
+            $data["faqs_categoria"] = $resumen_respuestas;                 
+            $info_categoria =  $this->get_info_categoria($id_categoria);            
             $data["meta_keywords"] =  " Preguntas frecuentes, ".$info_categoria["nombre_categoria"].", ";
             $data["desc_web"] =  " Preguntas frecuentes, ".$info_categoria["nombre_categoria"];
             $data["url_img_post"] = create_url_preview("faq.png");            
@@ -95,13 +92,34 @@ class Home extends CI_Controller{
         $data["css_external"]                   = 
         ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];       
         $this->principal->show_data_page($data, 'home');                          
-    }    
+    }   
+    function get_faqs_categoria($id_categoria , $data){
+        
+        $in_session=  $data["in_session"];
+        $extra =" AND status IN(1, 2, 3) ";     
+        if ($in_session ==  1){
+            $id_perfil =  $data["perfil"][0]["idperfil"];
+            $extra = ($id_perfil == 20 ) ? " AND status IN(1, 3) " : "";
+        }
+
+        $q["id_categoria"]  =  $id_categoria;
+        $q["extra"]         =  $extra;
+
+        $api        =  "faqs/qsearch/format/json/";
+        $response   =  $this->principal->api($api , $q);
+//        debug($response , 1);
+        return $response;
+
+    } 
     /**/
     function get_categorias_por_tipo($tipo){
 
         $q["tipo"]  = $tipo;
-        $api    = "empresa/categorias_por_tipo/format/json/";
-        return  $this->principal->api( $api  , $q);
+        $api        = "categoria/categorias_por_tipo/format/json/";
+        $response   =   $this->principal->api( $api  , $q);
+        debug($response ,1);
+
+        return $response;
     }   
     /**/
     function get_categorias_by_status($status = 1 ){
@@ -115,5 +133,13 @@ class Home extends CI_Controller{
         $param["q"]     = $q;
         $api        = "faqs/search/format/json/";
         return  $this->principal->api( $api  , $param );
+    }
+    function get_info_categoria($id){
+        
+        $param["id"]  = $id;
+        $api                    = "categoria/id/format/json/";
+        $response =   $this->principal->api( $api  , $param );   
+        //debug($response,1);
+        return $response[0];
     }
 }

@@ -133,6 +133,8 @@ function respuesta_informacion_servicio(data) {
 		$(".venta_mayoreo").click(actualiza_ventas_mayoreo);
 		$(".detalle").click(carga_tallas);
 		$(".tiempo_entrega").change(set_tiempo_entrega);
+
+		$(".btn_url_ml").click(set_url_ml);
 		if( get_option("flag_nueva_categoria")  == 1 ) {
 			recorrepage("#seccion_metakeywords_servicio");
 		}
@@ -1161,4 +1163,21 @@ var set_imagen_principal = function(){
 		var  	data_send  	=  {"id_servicio" : get_option("servicio") , "id_imagen" : id };
 		request_enid("PUT",  data_send , url , carga_informacion_servicio(1), ".place_servicios");
 	}
+}
+var set_url_ml = function(){
+	
+	var url_ml =  get_parameter(".url_mercado_libre");
+	if (url_ml.length > 5) {
+
+		var 	url 		=  "../q/index.php/api/servicio/url_ml/format/json/";		
+		var  	data_send  	=  {"id_servicio" : get_option("servicio") , "url" : url_ml };
+
+		request_enid("PUT",  data_send , url , carga_informacion_servicio(4), ".place_servicios" , 	function(){
+			recorrepage(".url_mercado_libre");	
+
+		});
+	}else{
+		focus_input(".url_mercado_libre");
+	}
+	
 }

@@ -46,6 +46,19 @@
         $insert   = $this->db->insert($tabla, $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
+    function qsearch($param){
+
+        $q      = $param["id_categoria"];
+        $extra  = $param["extra"];
+        $query_get ="SELECT 
+        titulo, 
+        id_faq  
+        FROM 
+        faq 
+        WHERE 
+        id_categoria = '".$q."'   ".$extra."  ";
+        return  $this->db->query($query_get)->result_array();                            
+    }
     
     /*
     function q($param){        

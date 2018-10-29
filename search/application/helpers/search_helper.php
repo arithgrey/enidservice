@@ -72,7 +72,9 @@ if(!function_exists('invierte_date_time')){
             $nombre_clasificacion = $row["nombre_clasificacion"];  
 
             $url      = "../search/?q=".$busqueda."&q2=".$id_clasificacion;
-            $lista[]  = anchor_enid($nombre_clasificacion , ["href"=> $url , "class"=>'categoria_text black'] );
+            $lista[]  = 
+            anchor_enid($nombre_clasificacion , ["href"=> $url , "class"=>'categoria_text black'] );
+            
             $flag ++; 
           }
       }

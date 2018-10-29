@@ -90,7 +90,7 @@ class usuario extends REST_Controller{
     
     function get_usuario_por_servicio($q){
 
-        $api =  "servicio/usuario_por_servicio/format/json";
+        $api =  "servicio/usuario_por_servicio/format/json/";
         return $this->principal->api( $api , $q);
     }
     /**/

@@ -518,7 +518,9 @@
             "telefono_visible",
             "venta_mayoreo",
             "tiempo_promedio_entrega",
-            "talla"];
+            "talla",
+            "url_ml"
+        ];
         return $this->get( $params , ["id_servicio" => $id_servicio]  );
       }      
     function get_num_existencia($id_servicio){

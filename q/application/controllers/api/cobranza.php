@@ -117,7 +117,7 @@ class Cobranza extends REST_Controller{
     /**/
     function get_notificacion_pago($q){
 
-        $api =  "notificacion_pago/pago_resumen/format/json";
+        $api =  "notificacion_pago/pago_resumen/format/json/";
         return $this->principal->api( $api , $q);
     }
     /**/
@@ -146,7 +146,7 @@ class Cobranza extends REST_Controller{
     }
     function verifica_pago_notificado($q){
         
-        $api =  "notificacion_pago/es_notificado/format/json";
+        $api =  "notificacion_pago/es_notificado/format/json/";
         return  $this->principal->api( $api ,$q);
     }
     /**/
@@ -399,7 +399,7 @@ class Cobranza extends REST_Controller{
     /**/
     function notifica_deuda_cliente($q){
 
-        $api = "areacliente/pago_pendiente_web/format/json"; 
+        $api = "areacliente/pago_pendiente_web/format/json/"; 
         return $this->principal->api( $api ,$q);  
     }   
     /**/

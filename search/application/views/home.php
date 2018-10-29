@@ -40,7 +40,7 @@
 <?=n_row_12();?>            
     <div class='contenedor_anuncios_home'>
         <div class='contenedor_anunciate'>                    
-        <?=$anunciar?>                        
+                        
         <?php if($es_movil ==  0):?>
             <?php 
             foreach(crea_menu_principal_web($categorias_destacadas) as $row): ?>

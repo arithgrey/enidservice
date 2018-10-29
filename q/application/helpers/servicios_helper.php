@@ -253,11 +253,12 @@ if(!function_exists('invierte_date_time')){
     function get_precio_producto($url_info_producto , $precio, $costo_envio , $flag_servicio , $id_ciclo_facturacion){
     
 		if($flag_servicio ==  0){    
-		      $seccion = anchor_enid($precio.'MXN', ["href"  =>  $url_info_producto ]);
+		      $seccion = anchor_enid($precio.'MXN', ["href"  =>  $url_info_producto , 
+		      	"class" => "text_precio" ]);
 		}else{
 
-			$s1 	 =  anchor_enid($precio.'MXN' , ["href"=> $url_info_producto ] , 1 );
-			$s2 	 =  anchor_enid(' A CONVENIR' , ["href"=> $url_info_producto ] , 1 );
+			$s1 	 =  anchor_enid($precio.'MXN' , ["href"=> $url_info_producto , "class" => "text_precio"] , 1 );
+			$s2 	 =  anchor_enid(' A CONVENIR' , ["href"=> $url_info_producto , "class" => "text_precio"] , 1 );
 			$seccion = ($id_ciclo_facturacion != 9 && $precio>0 ) ? $s1 : $s2;
 		      
 	    }
@@ -282,7 +283,8 @@ if(!function_exists('invierte_date_time')){
         }
     }
     function get_text_nombre_servicio($nombre_servicio){
-      $text_nombre_servicio = heading_enid(substr( $nombre_servicio ,  0  , 70 ) , 2 );
+      $text_nombre_servicio = heading_enid(substr( $nombre_servicio ,  0  , 70 ) , 3 , 
+      	["class"=>"nombre_servicio" ] );
       return $text_nombre_servicio;
     }
     function get_en_existencia($existencia , $flag_servicio , $in_session){      

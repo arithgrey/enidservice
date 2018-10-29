@@ -87,7 +87,7 @@
                       t.fecha_registro";
 
 
-                      debug($query_get);
+                      
     $result = $this->db->query($query_get);
     $data =  $result->result_array();
     $this->create_tmp_tareas_tickets(1 , $_num , $param); 

@@ -5,8 +5,9 @@
     $text_costo_envio_config    =   $icon_envio. $costo_envio["text_envio"]["ventas_configuracion"];      
     $costo_envio_cliente        =   $costo_envio["text_envio"]["cliente"];      
     $text_comision_venta        =   "COMISIÓN POR VENTA" . $comision ."MXN";    
-    $text_envios_mayoreo        =   "¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?";   
+    $text_envios_mayoreo        =   "¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?";       
     
+
     $btn_ventas_mayoreo 
         = anchor_enid( "SI", 
             [
@@ -117,4 +118,21 @@
                 </tr>
             </table>            
         </div>
+
+        <div class="contenedor_inf_servicios seccion_ventas_mayoreo">
+            <?=heading_enid("¿CUENTAS CON ALGÚN ENLACE DE PAGO EN MERCADO LIBRE?" ,4 , [],1)?>            
+
+            <?=input([   
+                "type"      =>    "url" , 
+                "name"      =>    "url_mercado_libre" ,                 
+                "class"     =>    "form-control url_mercado_libre" , 
+                "value"     =>    $url_ml
+            ] , 
+            1);            
+            ?>
+            <?=get_td(guardar("GUARDAR", 
+                        ["class" => "btn_url_ml "]))?>
+        </div>
+
+
     <?php  endif;?>

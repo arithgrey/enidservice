@@ -15,7 +15,7 @@
                 icon("fa fa-shopping-cart")." TUS ARTÍCULOS EN VENTA",
                 [
                     'data-toggle'     =>   "tab"    ,
-                    'class'           =>    "black strong btn_serv",
+                    'class'           =>    "black  btn_serv",
                     'href'            =>    "#tab_servicios" 
                 ]
             );?>                    
@@ -39,7 +39,7 @@
                 "",
                 [
                     'data-toggle'     =>   "tab"    ,
-                    'class'           =>    "black strong btn_serv",
+                    'class'           =>    "black  btn_serv",
                     'href'            =>    "#tab_servicios" 
                 ]
             );?>                    

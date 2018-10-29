@@ -78,9 +78,33 @@ class Tarea extends REST_Controller{
         $response   =   [];        
         if (if_ext($param , "id_ticket")) {            
 
-            $this->response($this->tareasmodel->get_tareas_ticket($param));               
-        }
+            $response =  $this->tareasmodel->get_tareas_ticket($param); 
+            $response = $this->cleanTagsInArray($response);
+            
+           
+        }        
         $this->response($response);
+    }
+    function cleanTagsInArray(array $input, $easy = false, $throwByFoundObject = true)
+    {
+        if ($easy) {
+            $output = array_map(function($v){
+                return trim(strip_tags($v));
+            }, $input);
+        } else {
+            $output = $input;
+            foreach ($output as $key => $value) {
+                if (is_string($value)) {
+                    $output[$key] = trim(strip_tags(html_entity_decode($value)));
+                } elseif (is_array($value)) {
+                    $output[$key] = self::cleanTagsInArray($value);
+                } elseif (is_object($value) && $throwByFoundObject) {
+                    
+                    throw new Exception('Object found in Array by key ' . $key);
+                }
+            }
+        }
+        return $output;
     }
     function tareas_ticket_num_GET(){
 

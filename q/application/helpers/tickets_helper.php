@@ -29,7 +29,7 @@ if(!function_exists('invierte_date_time')){
   }
   function valida_mostrar_tareas($data){
     
-    if (count($data) > 0 ){
+    if(count($data) > 0 ){
 
       $config     =   [ "class" =>  'mostrar_tareas_pendientes a_enid_black cursor_pointer' ];
       $config2    =   [ "class" =>  'mostrar_todas_las_tareas a_enid_black cursor_pointer'];

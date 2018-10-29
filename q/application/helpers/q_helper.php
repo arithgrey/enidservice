@@ -101,7 +101,7 @@ if(!function_exists('invierte_date_time')){
       if ($num_tareas>0){                
         switch ($tipo){
           case 1:          
-            $seccion = div("NOTIFICACIONES " , 1);            
+            $seccion = div("NOTIFICACIONES " , 1  );            
             break;          
           default:            
             break;
@@ -110,15 +110,15 @@ if(!function_exists('invierte_date_time')){
       return $seccion;
     }
     
-  function crea_tareas_pendientes_info($flag_notificaciones){
+  function crea_tareas_pendientes_info($flag){
 
-      $new_flag_notificaciones = "";
-      if ($flag_notificaciones > 0 ) {
+      $new_flag = "";
+      if ($flag > 0 ) {
 
-        $new_flag_notificaciones = span($flag_notificaciones ,          
+        $new_flag = span($flag ,          
           [
             "class"   =>  'notificacion_tareas_pendientes_enid_service',
-            "id"      =>    $flag_notificaciones
+            "id"      =>    $flag
         ] );        
       }
       return $new_flag_notificaciones;

@@ -1,8 +1,0 @@
-<?php 
-class Def
-{	
-	function __construct(){      
-     
-    }
-}
-?>

@@ -89,7 +89,7 @@ class Servicio extends REST_Controller{
   }
   function get_categorias_servicios($q){
 
-    $api = "clasificacion/categorias_servicios/format/json";
+    $api = "clasificacion/categorias_servicios/format/json/";
     return $this->principal->api( $api , $q);
   }
   /**/
@@ -161,7 +161,7 @@ class Servicio extends REST_Controller{
   }
   function get_coincidencia_servicio($q){
 
-    $api  = "clasificacion/coincidencia_servicio/format/json";
+    $api  = "clasificacion/coincidencia_servicio/format/json/";
     return  $this->principal->api( $api , $q);
   }   
   /**/
@@ -836,7 +836,17 @@ class Servicio extends REST_Controller{
     $param["valoracion"]  = $valoracion;
     return   $this->principal->api(  $api , $param, "json" , "PUT");
   }
-  
+  function url_ml_PUT(){
+
+    $param    =  $this->put();
+    $response =  [];
+    if (if_ext($param , "id_servicio,url")) {
+        
+        $response = $this->serviciosmodel->q_up("url_ml" , $param["url"] , $param["id_servicio"]);
+    }
+    $this->response($response);
+
+  }
   /**/
   function gamificacion_deseo_PUT(){    
 
@@ -1078,7 +1088,7 @@ class Servicio extends REST_Controller{
     /**/
     function add_gamificacion_search($q){
         if(array_key_exists("q", $q) >0 && strlen(trim($q["q"]))>1 ){
-            $api =  "metakeyword/gamificacion_search/format/json";
+            $api =  "metakeyword/gamificacion_search/format/json/";
             $this->principal->api( $api , $q , "json" , "POST");
         }                    
     }    

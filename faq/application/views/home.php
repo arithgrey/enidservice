@@ -17,10 +17,13 @@
 		                                        <div class="panel-heading">
 		                                            <ul class="nav nav-tabs">
 		                                                <li>
-		                                                    <?=anchor_enid("Categorías" , ["href"=>"../faq" , "class"=>"black strong" ])?>
+		                                                    <?=anchor_enid("CATEGORIAS" , 
+		                                                    ["href"=>"../faq" , "class"=>"text_categorias" ])?>
 		                                                </li>
 		                                                <li class="active li_menu">  
-		                                                    <?=anchor_enid(icon("fa fa-question-circle") , "Preguntas frecuentes" , 
+		                                                    <?=anchor_enid(
+		                                                    	icon("fa fa-question-circle") . 
+		                                                    	"Preguntas frecuentes" , 
 		                                                    [
 		                                                        "href"          =>  "#tab1default" ,
 		                                                        "class"         =>  "black strong" ,

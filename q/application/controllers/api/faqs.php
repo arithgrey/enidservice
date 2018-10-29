@@ -7,6 +7,18 @@ class Faqs extends REST_Controller{
         $this->load->model("faqsmodel");                                 
         $this->load->library(lib_def());    
   }  
+  function qsearch_GET(){
+
+
+    $param    = $this->get();
+    $response =  [];
+    if (if_ext($param , "id_categoria,extra")) {
+        
+        $response =  $this->faqsmodel->qsearch($param);
+    }
+    $this->response($response);
+
+  }
   /**/
   function q_GET(){
     $param      = $this->get();

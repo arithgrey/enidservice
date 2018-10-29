@@ -1,3 +1,7 @@
+
+.text_precio:hover{
+    color: white!important;
+}
 .contenedor_categorias_y_anuncio{
     width: 95%;
 }
@@ -38,7 +42,8 @@
   
     .contenedor_anuncios_home{
         width: 100%;margin:0 auto;
-        background: #00223f;        
+        //background: #00223f;        
+        background: #10171d;
     }
     .contenedor_anunciate{
         background: #0231fc;

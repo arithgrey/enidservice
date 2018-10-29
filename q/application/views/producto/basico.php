@@ -62,10 +62,10 @@
         $img =  img($atributos_imagen);                          
         
 ?>
-<div class='info_producto'>
+<div class='info_producto' >
     <?=div(
     get_precio_producto($url_info_producto,$precio,$costo_envio,$flag_servicio, $id_ciclo_facturacion) ,
-    ["style"=>"position:absolute;top:180px;margin-left:5px;z-index: 100"],
+    ["style"=>"position:absolute;top:250px;margin-left:5px;z-index: 100"],
     1)?>
     
     <?=div(anchor_enid($img ,  ["href"=> $url_info_producto ]),

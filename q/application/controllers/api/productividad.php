@@ -67,7 +67,7 @@ class productividad extends REST_Controller{
     */ 
     function verifica_registro_telefono($q){
 
-        $api = "usuario/verifica_registro_telefono/format/json";
+        $api = "usuario/verifica_registro_telefono/format/json/";
         return  $this->principal->api( $api , $q);
     }
     /**/

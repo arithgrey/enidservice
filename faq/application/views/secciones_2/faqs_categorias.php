@@ -24,5 +24,5 @@
 	}	
 ?>
 
-<?=heading("Temas relacionados" , 2 , 1)?>
+<?=heading("Temas relacionados" , 2 )?>
 <?=div($lista_preguntas , ["style"=>"height: 600px;overflow-y: auto;"] , 1)?>

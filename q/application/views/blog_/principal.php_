@@ -1,9 +1,0 @@
-<div>
-	<table class='table_enid_service' border=1>
-		<tr>		
-			<?=get_td("#");?>
-			<?=get_td("Titulo");?>			
-		</tr>
-		<?=$l;?>
-	</table>		
-</div>

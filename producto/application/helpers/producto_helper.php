@@ -126,11 +126,14 @@ function creta_tabla_colores($text_color , $flag_servicio ){
 
 }
 
-function get_text_diponibilidad_articulo($existencia , $flag_servicio){
+function get_text_diponibilidad_articulo($existencia , $flag_servicio , $url_ml=''){
   if($flag_servicio == 0 ){
     if($existencia > 0){    
-        $text =  "APRESÚRATE! SOLO HAY " .$existencia." EN EXISTENCIA ";      
-        $text =  add_element($text , "div" , array('class' => 'text-en-existencia'));
+        $text =  "APRESÚRATE! SOLO HAY " .$existencia." EN EXISTENCIA ";              
+        $text   = div($text , ['class' => 'text-en-existencia'] );
+        if (strlen($url_ml) > 10 ) {
+          $text  .= "<br>".anchor_enid("Adquiéralo en Mercado libre" ,["href" => $url_ml , "class" => "black"]);  
+        }
         return $text;
     }
   }
