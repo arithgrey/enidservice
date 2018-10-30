@@ -95,8 +95,9 @@ class Home extends CI_Controller{
             $config_paginacion["q3"]        =   $param["vendedor"];
             $config_paginacion["order"]     =   $data_send["order"];
             $config_paginacion["page"]      =   get_info_variable($param , "page" );            
-            $data["paginacion"]             =   
-            $this->create_pagination($config_paginacion);            
+            
+            //$this->create_pagination($config_paginacion);            
+            $data["paginacion"]             = $this->principal->create_pagination($config_paginacion);
 
             $this->set_option("in_session" , 0);
 

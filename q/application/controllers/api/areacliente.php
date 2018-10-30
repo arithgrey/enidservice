@@ -7,7 +7,24 @@ class Areacliente extends REST_Controller{
         $this->load->library("mensajeria_lead");
         $this->load->library(lib_def());     
     }
-    
+    function pago_pendiente_web_GET(){
+
+        //debug("Entra");
+        $param = $this->get();        
+        $cuerpo_correo = $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);        
+        $param["info_correo"] =  $cuerpo_correo;
+        $param["asunto"] =  "Notificacion de compra o renovación pendiente";
+        $correo_dirigido_a = $param["email"];            
+        $this->mensajeria_lead->notificacion_email($param , $correo_dirigido_a);
+        $this->response($cuerpo_correo);
+        
+    }    
+    function carga_pago_pendiente_por_recibo($id_recibo){
+
+        $q["id_recibo"] =  $id_recibo;        
+        $api  = "recibo/resumen_desglose_pago/format/html/"; 
+        return $this->principal->api( $api , $q ,"html"  );
+    }
     /*
     function notifica_accesos_nuevo_usuario_POST(){
 
@@ -18,24 +35,9 @@ class Areacliente extends REST_Controller{
         $envio_correo_maps = $this->mensajeria_lead->envia_correo_maps($param);
         $this->response($envio_correo_maps);        
     }
-    function carga_pago_pendiente_por_recibo($id_recibo){
-
-        $q["id_recibo"] =  $id_recibo;        
-        $api  = "recibo/resumen_desglose_pago/format/html/"; 
-        return $this->principal->api( $api , $q ,"html"  );
-    }
     
-    function pago_pendiente_web_GET(){
-
-        $param = $this->get();        
-        $cuerpo_correo = $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);        
-        $param["info_correo"] =  $cuerpo_correo;
-        $param["asunto"] =  "Notificacion de compra o renovación pendiente";
-        $correo_dirigido_a = $param["email"];            
-        $this->mensajeria_lead->notificacion_email($param , $correo_dirigido_a);         
-        $this->response($cuerpo_correo);
-        
-    }
+    
+    
     function reporte_direccion_GET(){
 
         $param = $this->get();        

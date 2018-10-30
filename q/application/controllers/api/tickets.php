@@ -302,7 +302,7 @@ class Tickets extends REST_Controller{
     function  get_tareas_ticket($q){
 
         $api    =  "tarea/ticket/format/json/";
-        $tareas =   $this->principal->api( $api , $q);        
+        $tareas =   $this->principal->api( $api , $q , "json" , "GET" , 1);        
         return $tareas;
     }
     function get_tareas_ticket_num($q){

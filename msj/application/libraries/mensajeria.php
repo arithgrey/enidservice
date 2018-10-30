@@ -28,55 +28,7 @@
       return $cuerpo;
 
       }
-      /*
-      function get_contenido_plantilla($plantilla ){
-
-        $contenido_plantilla = "";
-        if ($plantilla ==  0 ){
-          
-          $contenido_plantilla =  "<center>
-                    <span style='margin-top: 9%;margin-left: 5%;font-size: 3em;color: #223c48;'>
-                      Enid Service
-                    </spa>                    
-                  </center>
-                  
-                  <center>
-                  <a href='". base_url('index.php/startsession') ."'>
-                          <button class='btn btn-default login-btn ' style='border-radius: 0;
-                                  border-style: solid;
-                                  border-width: 0;
-                                  cursor: pointer;    
-                                  padding: 1rem 1.77778rem 0.94444rem 1.77778rem;
-                                  font-size: 0.98889rem;
-                                  background-color: #008CBA;
-                                  border-color: #007095;
-                                  color: #FFFFFF;'>                    
-                              Inicia ahora.!
-                          </button>
-                  </a>
-                  </center>";
-        }else{
-          $contenido_plantilla = "
-                  <center>                    
-                    <a href='". url_developer() ."'>
-                            <button class='btn btn-default login-btn ' style='border-radius: 0;
-                              border-style: solid;
-                              border-width: 0;
-                              cursor: pointer;    
-                              padding: 1rem 1.77778rem 0.94444rem 1.77778rem;
-                              font-size: 0.98889rem;
-                              background-color: #008CBA;
-                              border-color: #007095;
-                              color: #FFFFFF;'>                    
-                                Conoce mi trabajo
-                              
-                            </button>
-                    </a>
-                  </center>";
-        }
-        return $contenido_plantilla;                
-      }
-      */
+  
       
       function get_headers_mail($mail){
 

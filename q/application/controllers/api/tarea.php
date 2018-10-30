@@ -78,11 +78,15 @@ class Tarea extends REST_Controller{
         $response   =   [];        
         if (if_ext($param , "id_ticket")) {            
 
-            $response =  $this->tareasmodel->get_tareas_ticket($param); 
-            $response = $this->cleanTagsInArray($response);
+
+            $response =     $this->tareasmodel->get_tareas_ticket($param); 
+            $response =     $this->clean($response);
+            $response =     $this->cleanTagsInArray($response);
+
             
            
         }        
+        
         $this->response($response);
     }
     function cleanTagsInArray(array $input, $easy = false, $throwByFoundObject = true)
@@ -118,4 +122,35 @@ class Tarea extends REST_Controller{
         $response   =   $this->tareasmodel->tareas_enid_service($param);        
         $this->response($response);           
     } 
+    private function clean($array){
+
+
+        
+        
+
+        $list =  [];
+        $a      = 0;
+        foreach ($array as $row) {
+            
+                $descripcion = strip_tags(trim($row["descripcion"])); 
+                $descripcion = str_replace("-" , "", $descripcion);                
+                $list[] =  [
+                        "id_tarea"              => $row["id_tarea"] ,
+                        "descripcion"           => utf8_encode($descripcion),
+                        "fecha_registro"        => $row["fecha_registro"] ,
+                        "status"                => $row["status"] ,
+                        "id_ticket"             => $row["id_ticket"] ,
+                        "fecha_termino"         => $row["fecha_termino"] ,
+                        "usuario_registro"      => $row["usuario_registro"] ,
+                        "idusuario"             => $row["idusuario"] ,
+                        "nombre"                => strip_tags(trim($row["nombre"])) ,
+                        "apellido_paterno"      => $row["apellido_paterno"] ,
+                        "apellido_materno"      => $row["apellido_materno"] ,
+                        "num_comentarios"       => $row["num_comentarios"] 
+                    ];    
+            
+            $a++;
+        }
+        return $list;
+    }
 }?>

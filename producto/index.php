@@ -134,4 +134,4 @@ switch (ENVIRONMENT)
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
 	date_default_timezone_set('America/Mexico_City');
-	require_once BASEPATH.'core/CodeIgniter.php';
+	ini_set('memory_limit', '32M'); require_once BASEPATH.'core/CodeIgniter.php';

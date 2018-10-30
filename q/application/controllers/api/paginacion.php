@@ -1,0 +1,66 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+require APPPATH.'../../librerias/REST_Controller.php';
+class Paginacion extends REST_Controller{      
+    function __construct(){
+        parent::__construct();          
+        $this->load->library("pagination");  
+        $this->load->library(lib_def());                    
+    }
+    function create_GET(){
+    
+
+            $param              =  $this->get();        
+            $totales_elementos  =  $param["totales_elementos"];
+            $per_page           =  $param["per_page"]; 
+            
+            $q                  = $param["q"];        
+
+            $base_url           = "?q=$q";
+            if( array_key_exists($param["q2"] , $param) && $param["q2"] >0){
+                $q2 = $param["q2"];    
+                $base_url .= "&q2=$q2";
+            }if(array_key_exists($param["q3"], $param) && $param["q3"] >0){
+                $q3 = $param["q3"];    
+                $base_url .= "&q3=$q3";
+            }
+
+            if (array_key_exists("order", $param)) {
+                $base_url .= "&order=".$param["order"];
+            }
+
+
+            $config['full_tag_open'] = '<div class="pagination">';
+            $config['full_tag_close'] = '</div>';
+            $config['num_tag_open'] = '<li>';
+            $config['num_tag_close'] = '</li>';        
+            $config['cur_tag_open'] = '<li class="active"><span>';
+            $config['cur_tag_close'] = '<span></span></span></li>';
+            $config['prev_tag_open'] = '<li>';
+            $config['prev_tag_close'] = '</li>';
+            $config['next_tag_open'] = '<li>';
+            $config['next_tag_close'] = '</li>';        
+            $config['prev_link'] = '‹';
+            $config['last_link'] = '»';
+            $config['next_link'] = '<span class="white">›</span>';
+            $config['first_tag_open'] = '<li>';
+            $config['first_tag_close'] = '</li>';
+            $config['last_tag_open'] = '<li>';
+            $config['last_tag_close'] = '</li>'; 
+            $config['per_page'] = $per_page;
+            $config['base_url'] = $base_url;    
+            $config['num_links'] = 10;     
+            $config['first_link'] = '<span class="white">« Primera</span>';
+            $config['last_link'] = '<span class="white">Última»</span>';
+            $config['total_rows'] = $totales_elementos;                
+            $config['use_page_numbers'] = TRUE;
+            $config['page_query_string'] = TRUE;     
+            $config['enable_query_strings'] = TRUE;                
+            $config['query_string_segment'] = 'page';
+
+            $this->pagination->initialize($config);        
+            $paginacion =   $this->pagination->create_links();  
+            $this->response($paginacion);
+    }
+    
+}?>
+

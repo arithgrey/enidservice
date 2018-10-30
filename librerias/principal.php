@@ -5,6 +5,7 @@
 			$this->load->library('../../librerias/sessionclass');     
 	    }
 	    function api($api, $q=[], $format='json', $type='GET', $debug = 0  ){
+	        
 	        $url 				=  "q/index.php/api/";         
 	        $url_request		=  get_url_request($url);
 
@@ -31,14 +32,9 @@
 	        		break;
 	        }	        
 	        
-	             
+	       
 	        if ($debug == 1) {
-	        	if ($format ==  "json") {
-	        		print_r(json_decode($result->response , true));	
-	        	}else{
-	        		print_r($result);
-	        	}
-	        	
+	        	debug($result->response , 1);	        		        	
 	        }
 	        if ($format ==  "json"){	        	
 	        	$response 					= $result->response;   
@@ -80,8 +76,11 @@
 	        return $this->api($api , $q );
     	}
     	function create_pagination($q){
-    		$api  =  "producto/paginacion/format/json/";	        
-	        return $this->api($api , $q );        	              
+
+    		$api  =  "paginacion/create/format/json/";	        
+	        $paginacion =  $this->api($api , $q , "json" , "GET", 1 );        	              
+	        
+	        return $paginacion;
 	    }
 		/**/		
 		function get_valor_numerico_bool($bool){

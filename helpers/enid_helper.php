@@ -985,7 +985,8 @@ if ( ! function_exists('debug'))
 {
 function debug($msg, $array = 0)
 { 
-    
+  
+       
     $_date_fmt  = 'Y-m-d H:i:s';
     $filepath = "/var/www/html/inicio/debug/debug.log"; 
     $message  = '';   

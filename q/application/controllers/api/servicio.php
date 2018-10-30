@@ -124,24 +124,16 @@ class Servicio extends REST_Controller{
 
         
     }else{
-        $data["padre"] = $param["padre"];        
-        if ($param["is_mobile"] ==  1) {
-          $this->load->view("categoria/seleccionar_categoria_phone" , $data);
-          
-        }else{
-
-
-        $select =  div(
+        
+      $data["padre"] = $param["padre"];  
+      $select =  div(
                         "AGREGAR NUEVO" .icon('fa fa-angle-double-right')  ,  
-                        ["class"  =>  "a_enid_black nueva_categoria_producto",
-                        "id"   =>  $data["padre"]],
+                        ["class"  =>  "a_enid_black nueva_categoria_producto top_20",
+                        "id"      =>  $data["padre"]
+                      ],
                     1); 
-        $this->response($select);
-
-
-
-          
-        }
+        
+      $this->response($select);
     }
 
   }
@@ -254,9 +246,11 @@ class Servicio extends REST_Controller{
             $param["id_usuario"]        =   $id_usuario;        
             $terminos_usuario           =   $this->get_terminos_privacidad_productos($id_usuario);            
             $terminos                   =   $terminos_usuario[0];            
-            $param["entregas_en_casa"]  = ($terminos["entregas_en_casa"] > 0)?1:0;
-            $param["telefonos_visibles"]= ($terminos["telefonos_visibles"] > 0 )?1:0;    
-            $data_complete["servicio"]  =  $this->create_servicio($param);
+            $param["entregas_en_casa"]  =   ($terminos["entregas_en_casa"] > 0)?1:0;
+            $param["telefonos_visibles"]=   ($terminos["telefonos_visibles"] > 0 )?1:0;    
+
+            $data_complete["servicio"]  =   $this->create_servicio($param);
+
         }
         
         return $data_complete;
@@ -282,16 +276,18 @@ class Servicio extends REST_Controller{
         (array_key_exists("quinto_nivel", $param))?$param["quinto_nivel"]:0;
         
         $descripcion            = "";  
-        $metakeyword            =  $param["metakeyword"];      
-        $id_usuario             = $param["id_usuario"];
-        $entregas_en_casa       = $param["entregas_en_casa"];
-        $telefonos_visibles     =  $param["telefonos_visibles"];
+        $metakeyword            =   $param["metakeyword"];      
+        $id_usuario             =   $param["id_usuario"];
+        $entregas_en_casa       =   $param["entregas_en_casa"];
+        $telefonos_visibles     =   $param["telefonos_visibles"];
         
         $precio = $param["precio"];
         $id_ciclo_facturacion = 5;
         if ($flag_servicio ==  1){        
             $id_ciclo_facturacion = $param["ciclo_facturacion"];
         }
+
+
         
         $params = [
                 "nombre_servicio"             =>  $nombre_servicio,
@@ -309,6 +305,14 @@ class Servicio extends REST_Controller{
                 "entregas_en_casa"            =>  $entregas_en_casa,
                 "telefono_visible"            =>  $telefonos_visibles];
 
+
+        //
+        
+        if ($this->principal->getperfiles() ==  3) {
+            $params["tiempo_promedio_entrega"] =  1;
+        }
+        
+        
 
         $id_servicio    =  $this->serviciosmodel->insert($params, 1);        
         $this->set_ultima_publicacion($id_usuario);
@@ -373,14 +377,15 @@ class Servicio extends REST_Controller{
   }
   function top_semanal_vendedor_GET(){
 
-        $param =  $this->get();
-        $response =  $this->serviciosmodel->get_top_semanal_vendedor($param);
-        $data_complete = [];
+        $param          =  $this->get();
+        $response       =  $this->serviciosmodel->get_top_semanal_vendedor($param);        
+        $data_complete  = [];
         $a =0;
         foreach ($response as $row){
             
-            $id_servicio =  $row["id_servicio"];    
-            $nombre =  $this->serviciosmodel->get_nombre_servicio($id_servicio);
+            $id_servicio  =  $row["id_servicio"];    
+            $nombre       =  
+            $this->serviciosmodel->q_get(["nombre_servicio"],$id_servicio)[0]["nombre_servicio"];
             $data_complete[$a] =  $row;
             $data_complete[$a]["nombre_servicio"] =  $nombre;
             $a ++;
@@ -551,6 +556,7 @@ class Servicio extends REST_Controller{
   }
   function empresa_GET(){
     
+
     if($this->input->is_ajax_request() OR $_SERVER['HTTP_HOST'] ==  "localhost"){ 
       
       $param                              =   $this->get();
@@ -578,7 +584,9 @@ class Servicio extends REST_Controller{
           $this->set_option("in_session" , 1);
           $this->set_option("id_usuario" , $this->id_usuario);
           $data["lista_productos"]                = $this->agrega_vista_servicios($servicios["servicios"]);
+          
           $data["paginacion"]                     = $this->principal->create_pagination($config_paginacion);
+          
           $this->load->view("producto/basico_empresa" , $data);                    
           
           
@@ -1237,5 +1245,6 @@ class Servicio extends REST_Controller{
         
 
     }
+
 }
 ?>

@@ -418,7 +418,10 @@ class usuario extends REST_Controller{
                     $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);   
                     if ($response["usuario_permisos"] > 0) {
                         $response["email"]              =  $email;
-                        $response["usuario_registrado"] = 1;
+                        $response["usuario_registrado"] =  1;
+                        /*Ahora notifico al usuario */
+                        
+
 
                     }
                 }

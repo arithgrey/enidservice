@@ -192,10 +192,10 @@ class producto extends REST_Controller{
         
         $q                  = $param["q"];        
         $base_url           = "?q=$q";
-        if(isset($param["q2"]) && $param["q2"] >0){
+        if( array_key_exists($param["q2"]) && $param["q2"] >0){
             $q2 = $param["q2"];    
             $base_url .= "&q2=$q2";
-        }if(isset($param["q3"]) && $param["q3"] >0){
+        }if(array_key_exists($param["q3"]) && $param["q3"] >0){
             $q3 = $param["q3"];    
             $base_url .= "&q3=$q3";
         }
