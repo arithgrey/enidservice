@@ -23,11 +23,13 @@
         ]);?>      
         <?=form_label(get_text_periodo_compra($flag_servicio) , "" , ["class"=>"numero_piezas"] )?>
     </div>
-    <?=guardar("ORDENAR COMPRA"  , 
+    <?=guardar("ORDENAR "  , 
               [
                 'id' => 'AddToCart'                 
               ],
               1,
               1)?>  
+    <br>
+    <?=agregar_lista_deseos(0 , $in_session)?>
   </div>
 <?=form_close()?>                    

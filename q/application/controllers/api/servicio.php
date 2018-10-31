@@ -1241,8 +1241,34 @@ class Servicio extends REST_Controller{
           $response   = 
           $this->serviciosmodel->q_up("tiempo_promedio_entrega" , $param["tiempo_entrega"] , $param["id_servicio"]);  
         }  
-        $this->response($response);
-        
+        $this->response($response);        
+    }
+    function tipo_entrega_PUT(){
+
+        $param    =   $this->put();
+        $response =   []; 
+        if(if_ext($param , "tipo,id_servicio")){
+          
+
+          $tipo =  "";
+          switch ($param["tipo"]) {
+            case 1:
+              $tipo =  "tipo_entrega_envio";
+              break;
+            case 2:
+              $tipo =  "tipo_entrega_visita";
+              break;
+            case 3:
+              $tipo =  "tipo_entrega_punto_medio";
+              break;
+            
+            default:
+
+              break;
+          }
+          $response   = $this->serviciosmodel->set_preferencia_entrega($tipo , $param["id_servicio"]);
+        }  
+        $this->response($response);        
 
     }
 

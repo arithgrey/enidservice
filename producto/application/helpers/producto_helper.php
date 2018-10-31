@@ -26,17 +26,17 @@ function get_descripcion_servicio($descripcion , $flag_servicio){
   $extra      = "";
   $servicio = ($flag_servicio ==  1)?"SOBRE EL SERVICIO": "SOBRE EL PRODUCTO";  
   if (strlen(trim(strip_tags($descripcion))) > 10 ){
-    $text   =   heading_enid($servicio, 2, ["class"=>'titulo_sobre_el_producto']);
+    $text   =   heading_enid($servicio, 2, ["class"=>'titulo_sobre_el_producto strong']);
     $text   .=  div(p(strip_tags($descripcion)) );
     return $text;  
   }
   
 }
 
-function get_contacto_cliente($tel_visible , $in_session , $usuario){
+function get_contacto_cliente($proceso_compra , $tel_visible , $in_session , $usuario){
 
     $inf ="";
-    if ($tel_visible){
+    if ($tel_visible ==  1 && $proceso_compra == 0){
         $usr = $usuario[0];    
         $ftel =1;
         $ftel2 =1;
@@ -53,7 +53,7 @@ function get_contacto_cliente($tel_visible , $in_session , $usuario){
             $lada = (strlen($usr["lada_negocio"])>0)?"(".$usr["lada_negocio"].")":"";
             $inf .= div(icon('fa fa-phone').$lada.$tel2); 
         }
-        return $inf;
+        return div($inf, 1);
     }
 }
 
@@ -91,7 +91,7 @@ function get_tipo_articulo($flag_nuevo , $flag_servicio){
 }
 function valida_informacion_precio_mayoreo($flag_servicio ,  $venta_mayoreo){
         
-    return ($flag_servicio == 0 && $venta_mayoreo ==1)?"TAMBIÉN REALIZA VENTAS A PRECIO DE MAYOREO ".icon('fa fa-check-circle'):"";
+    return ($flag_servicio == 0 && $venta_mayoreo ==1)?"VENTAS MAYORISTAS ".icon('fa fa-check-circle'):"";
    
 }
 function creta_tabla_colores($text_color , $flag_servicio ){
@@ -224,14 +224,18 @@ function construye_seccion_imagen_lateral($param , $nombre_servicio , $url_youtu
   $data_complete["imagenes_contenido"] = $imgs_grandes;
   return $data_complete;
 }
-function valida_url_youtube($url_youtube){
+function valida_url_youtube($url_youtube , $is_mobile){
 
   $url ="";
   if(strlen($url_youtube)>5){    
     
-
+    $height = "400px";
+    if ($is_mobile ==  0) {
+        $height = "600px";
+    }
     $url  = iframe([
         "width"         =>  '100%' ,
+        "height"        =>   $height ,
         "src"           =>   $url_youtube,
         "frameborder"   =>  '0' ,
         "allow"         =>  'autoplay'
@@ -249,6 +253,72 @@ function get_info_producto($q2){
         $id_producto =$q2;
     }
     return $id_producto;        
+}
+function get_tienda_vendedor($proceso_compra , $id_vendedor){
+
+  if ($proceso_compra ==  0) {
+    return  anchor_enid( 
+      "Ir a la tienda del vendedor",
+        [
+          'href'  => "../search/?q3=".$id_vendedor ,
+          'class' => "a_enid_black"
+        ]
+        ,
+        1,
+        1
+      );  
+  }  
+}
+
+function get_solicitud_informacion($proceso_compra , $id_servicio){
+
+  if ($proceso_compra == 0) {
+      return  anchor_enid(
+      div("SOLICITAR INFORMACIÓN" ,['class' => 'black_enid_background white padding_1'] ,1) , 
+      [
+        "href"  =>  "../pregunta?tag=".$id_servicio
+      ]);
+  }
+    
+
+}
+function agregar_lista_deseos($proceso_compra ,$in_session){
+
+  if ($proceso_compra == 0) {
+    
+    $btn =  anchor_enid(div("AGREGAR A TU LISTA DE DESEOS " .icon("fa fa-gift fa-x2") , 
+      ["class" => "a_enid_black"] , 1)  ,
+      [
+        'class' => 'agregar_a_lista' ,  
+        'href'  => "../login/"
+      ]
+    );  
+
+    if ($in_session ==  1) {
+         $btn =  div(div(
+                "AGREGAR A TU LISTA DE DESEOS".icon('fa fa-gift') , 
+                ["class" =>  "a_enid_black agregar_a_lista_deseos"] 
+                ,1
+              ) , 
+              ["id"=>'agregar_a_lista_deseos_add']
+            );
+
+    }
+    return $btn;
+
+  }
+}
+function get_tiempo_entrega($proceso_compra , $tiempo_entrega){
+  if ($proceso_compra == 0) {
+    return  div($tiempo_entrega , 1);   
+  }
+ 
+}
+function get_nombre_vendedor($proceso_compra , $usuario , $id_vendedor){
+  if ($proceso_compra == 0) {
+      return  div(crea_nombre_publicador_info($usuario , $id_vendedor) ,  1).place("separador");   
+  }
+  
 }
 
 }

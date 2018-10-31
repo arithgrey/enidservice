@@ -51,6 +51,7 @@
 
   $imagenes                             =   construye_seccion_imagen_lateral($imgs  ,$nombre_servicio , $url_vide_youtube);
   $info_compra["id_servicio"]           =   $id_servicio;
+  $info_compra["proceso_compra"]        =   $proceso_compra;
   $info_compra["flag_servicio"]         =   $flag_servicio;
   $info_compra["precio"]                =   $precio;
   $info_compra["id_ciclo_facturacion"]  =   $id_ciclo_facturacion;
@@ -83,65 +84,33 @@
 
                 <div class="col-lg-4">                  
                   <div class="row">  
-                    <div class="contenedor_central_info">
-                      <?=p("INFORMACIÓN" , ["class"=>"informacion_text"] , 1)?>         
+                    <div class="contenedor_central_info">                      
+                      <?=get_solicitud_informacion($proceso_compra , $id_servicio)?>
+                      <?php if($proceso_compra == 1):?>
+                        <?=get_tiempo_entrega(0 , $tiempo_entrega)?>
+                      <?php endif;?>
                       
-                      <?=anchor_enid(
-                        div("SOLICITAR INFORMACIÓN" ,['class' => 'black_enid_background white padding_1'] ,1) , 
-                        [
-                          "href"  =>  "../pregunta?tag=".$id_servicio
-                        ])?>               
                       <?=creta_tabla_colores($color , $flag_servicio)?>
                       <?=place("separador")?>
                       <?=div(valida_informacion_precio_mayoreo($flag_servicio , $venta_mayoreo) ,  1)?>               
                       <?=div(get_tipo_articulo($flag_nuevo , $flag_servicio) , 1)?>
                       <?=place("separador")?>
-                      <?=div(crea_nombre_publicador_info($usuario , $id_publicador) ,  1)?>
-                      <?=place("separador")?>
+                      <?=get_nombre_vendedor($proceso_compra ,$usuario , $id_publicador )?>
+                      
                       <?=n_row_12()?>
                         <?=div(get_entrega_en_casa($entregas_en_casa , $flag_servicio) ,[ 'class' => 'strong'])?>
-                        <?=div(get_contacto_cliente($telefono_visible, $in_session, $usuario))?>
+                        <?=get_contacto_cliente($proceso_compra, $telefono_visible, $in_session, $usuario)?>
                       <?=end_row()?>
-                      <?=place("separador")?>
-                      <?=n_row_12()?>
-                        <?php if($in_session ==  0):?>
-                        
-                          <?=anchor_enid(
-                          div("AGREGAR A TU LISTA DE DESEOS " .icon("fa fa-gift") , 
-                          ["class" => "a_enid_black"] , 1)  ,
-                          [
-                            'class' => 'agregar_a_lista' , 
-                            'href'  => "../login/"
-                          ]
-                          )?>
-                          <br>
-                        <?php else:?>
-                          <?=div(
-                            div(
-                              "AGREGAR A TU LISTA DE DESEOS".icon('fa fa-gift') , 
-                              ["class" =>  "a_enid_black agregar_a_lista_deseos"] 
-                            ,1
-                            ) , 
-                            ["id"=>'agregar_a_lista_deseos_add']
-                        )?>
-                        <?php endif;?>
-                      <?=end_row()?>
-                      <?=div($tiempo_entrega , 1)?>                        
+                      <?=place("separador")?>                      
+                      <?=get_tiempo_entrega($proceso_compra , $tiempo_entrega)?>
+                      <?php if($proceso_compra == 0):?>                        
+                        <br>
+                        <?=n_row_12()?>                                                 
+                          <?=$this->load->view("social", $info_social)?>                          
+                        <?=end_row()?>
+                      <?php endif;?>
                       <br>
-                      <?=n_row_12()?>
-                        <?=$this->load->view("social", $info_social)?>
-                      <?=end_row()?>
-                      <br>
-                      <?=anchor_enid( 
-                         "Ir a la tienda del vendedor",
-                          [
-                            'href'  => "../search/?q3=".$id_publicador ,
-                            'class' => "a_enid_black"
-                          ]
-                          ,
-                          1,
-                          1
-                        )?>
+                      <?=get_tienda_vendedor($proceso_compra , $id_publicador)?>
                       <?=place("" , ["style"  =>  "border: solid 1px"] )?>
                     </div>
                   </div>  
@@ -218,7 +187,7 @@
               </div>          
               <div class="col-lg-12">              
                 <?=get_descripcion_servicio($descripcion , $flag_servicio)?>
-                <?=valida_url_youtube($url_vide_youtube)?>                
+                <?=valida_url_youtube($url_vide_youtube , $is_mobile)?>                
               </div>         
           <?=place("separador")?>
           <?=place("place_valoraciones")?>

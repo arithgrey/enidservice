@@ -42,7 +42,8 @@
 	        }       	
 
 	        return $result->response;   
-	    }    
+	    }   
+	    
 	    function get_session($key){
 	    	return $this->sessionclass->get_session($key);
 	    }

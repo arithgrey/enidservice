@@ -16,6 +16,8 @@ $(document).on("ready", function(){
 	display_elements([".extra_menu_simple"] , 1  );	
 	display_elements([".base_compras" ,".base_paginas_extra" , ".info_metodos_pago"] , 0  );
 	
+	
+	
 });
 /*****************************/
 function inicio_session(){
@@ -38,11 +40,11 @@ function before_inicio_session(){
 /**/
 function response_inicio_session(data){
 
-	if(data == 1){
-		redirect("");
+	if(data != 0){
+		redirect(data);
 	}else{
 		habilita_botones();
-		format_error(".place_acceso_sistema" , data);
+		format_error(".place_acceso_sistema" , "Error en los datos de acceso");
 	}
 }
 /**/

@@ -84,4 +84,32 @@ if(!function_exists('invierte_date_time')){
 
     return $data_complete;
   }
+  function get_text_acceder_cuenta($is_mobile ,$param){
+    
+    $plan               = $param["plan"];
+    $num_ciclos         = $param["num_ciclos"];
+    $ciclo_facturacion  = $param["ciclo_facturacion"];
+    $is_servicio        = $param["is_servicio"];  
+    $q2                 = $param["q2"];  
+
+    
+    $extra = 
+    [
+      "plan"              => $plan, 
+      "extension_dominio" => "",
+      "ciclo_facturacion" => $ciclo_facturacion ,
+      "is_servicio"       => $is_servicio,
+      "q2"                => $q2 ,
+      "num_ciclos"        => $num_ciclos,
+      "class"             => "link_acceso cursor_pointer"      
+    ];  
+    
+    
+    
+    $text   =   heading_enid('¿Ya tienes una cuenta? ', 3 );
+    $text  .=   div("ACCEDE AHORA!", $extra , 1);
+    return $text;
+
+  }
+
 }

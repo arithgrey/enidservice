@@ -22,7 +22,7 @@
         <?=n_row_12()?>                 
           <div class="resumen_productos_solicitados">
             <?=heading_enid(
-              'TU CARRITO DE COMPRAS'.icon("fa fa-shopping-bag")
+              'RESUMEN DE TU PEDIDO'.icon("fa fa-shopping-bag")
               , 
               2,
               ['class' => 'strong']
@@ -69,24 +69,14 @@ $talla                =
 ?>  
 
 
-<?php if($in_session == 0){?>
+<?php if($in_session == 0 && $is_mobile ==0){?>
+  <?=heading_enid("DINOS QUIEN ERES" ,2 ,["class" =>"strong"])?>
 
-  <?=
-  div(
-  heading_enid($ingresar.' O CREA UNA CUENTA PARA RECIBIR ASISTENCIA Y COMPRAR AL MOMENTO', 
-    3 , 
-    ["class" => "strong"] , 
-    1
-  )
-  ,
-  ["class" => "row"]
-  )
-  ?>
 <?php }?>
 
 
 
-<div class="row">
+<div >
 <form class="form-miembro-enid-service"  id="form-miembro-enid-service">
   
      <?=input_hidden([
@@ -175,10 +165,8 @@ $talla                =
       ] , 
       1)?>
 
-      <?=div(anchor_enid(
-        '¿Ya tienes una cuenta? Entra aquí ya »', 
-        ["href"  =>    "../login"]) 
-      )?>
+      <?=get_text_acceder_cuenta($is_mobile , $info_ext)?>
+      
       
       </div>
     </div>

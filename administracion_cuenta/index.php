@@ -133,4 +133,4 @@ switch (ENVIRONMENT)
 	}
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
-	ini_set('memory_limit', '32M'); require_once BASEPATH.'core/CodeIgniter.php';
+	ini_set('memory_limit', '32M'); require_once BASEPATH.'core/CodeIgniter.php'; require_once BASEPATH.'core/CodeIgniter.php';

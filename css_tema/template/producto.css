@@ -1,3 +1,17 @@
+.base_paginas_extra{
+    display: none;
+}
+.base_compras{
+    display: none;
+}
+.info_metodos_pago{
+    display: none;   
+}
+.telefono_info_contacto{
+    border : 2px solid rgb(13, 62, 86)!important;
+}
+
+
     .contenedor_agregar_imagenes{
         display: none;
     }

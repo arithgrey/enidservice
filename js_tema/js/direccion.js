@@ -63,6 +63,8 @@ function registra_nueva_direccion(e){
 function registro_direccion(){
 	
 	if (asentamiento != 0 ){
+		
+		set_option("id_recibo" , $(".id_recibo").val());
 		var data_send 		=  	$(".form_direccion_envio").serialize();		
 		var url =  	"../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
 		request_enid( "POST",  data_send , url , response_registro_direccion);
@@ -75,10 +77,13 @@ function registro_direccion(){
 var  response_registro_direccion = function(data){
 
 	if (data != -1 ){
+		/*
 		showonehideone(".contenedor_deuda_para_envio" , ".contenedor_informacion_envio");					
 		recorrepage(".contenedo_compra_info");			
 		var empty = [".place_asentamiento" , ".notificacion_direccion"];
 		empty_elements(empty);
+		*/
+		redirect("../area_cliente/?action=compras&ticket="+get_option("id_recibo"));
 
 	}else{
 		format_error( ".notificacion_direccion", "VERIFICA LOS DATOS DE TU DIRECCIÓN");

@@ -4,6 +4,7 @@ class Sessionclass extends CI_Controller{
 		parent::__construct();
 		$this->load->library("session");		
 	}
+	
 	/**/
 	function set_userdata($session_data){
 		$this->session->set_userdata($session_data);	

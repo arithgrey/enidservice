@@ -114,7 +114,13 @@ function valida_accion_inicial(){
 	    case "compras":
 
 	    	set_option("modalidad_ventas" , 0);					    	
-			carga_compras_usuario();		
+	    	if (get_parameter(".ticket") > 0 ) {
+	    		/*Cargo la información del ticket*/
+	    		cargar_info_resumen_pago_pendiente();
+	    	}else{
+	    		carga_compras_usuario();		
+	    	}
+			
 
 	        break;
 	    case "preguntas":

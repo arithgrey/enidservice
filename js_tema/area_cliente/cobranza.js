@@ -1,9 +1,15 @@
 /**/
 function cargar_info_resumen_pago_pendiente(e){	
-		
-	var id_recibo  	= get_parameter_enid($(this) , "id");
 	
+	
+	
+	var id_recibo  	= get_parameter_enid($(this) , "id");	
+	if (id_recibo == undefined) {
+		id_recibo 	= get_parameter(".ticket");  		
+	}
+
 	if (id_recibo > 0) {
+
 		set_option("id_recibo" ,  id_recibo);	
 		var url 		=  "../q/index.php/api/recibo/resumen_desglose_pago/format/json/";	
 		var data_send 	=  {"id_recibo" : get_option("id_recibo") , "cobranza" : 1};				
@@ -13,6 +19,8 @@ function cargar_info_resumen_pago_pendiente(e){
 /**/
 function response_carga_info_resumen_pago_pendiente(data){
 
+	
+	$(".resumen_pagos_pendientes").tab("show");
 	llenaelementoHTML(".place_resumen_servicio" , data);		
 	$(".cancelar_compra").click(confirmar_cancelacion_compra);		
 	$(".btn_direccion_envio").click(carga_informacion_envio);

@@ -813,7 +813,13 @@
         $result =  $this->db->query($query_get);
         return $result->result_array()[0]["num"];
     }   
+    function set_preferencia_entrega($tipo , $id_servicio){
+        $query_update =  
+        "UPDATE servicio SET ".$tipo." = ".$tipo." + 1 WHERE id_servicio = $id_servicio LIMIT 1";
 
+        debug($query_update);
+        return $this->db->query($query_update);
+    }
 
     /*
     

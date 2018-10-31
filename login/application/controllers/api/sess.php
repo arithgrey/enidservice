@@ -7,7 +7,9 @@ class Sess extends REST_Controller{
     }         
     function start_post(){
         
+        
         $param          =   $this->post();            
+        $url            =   $this->create_url();        
 
         if($this->input->is_ajax_request()){                     
             $usuario           = $this->get_es_usuario($param);                            
@@ -20,11 +22,12 @@ class Sess extends REST_Controller{
                 $fecha_registro = $usuario["fecha_registro"]; 
                 $id_empresa     = $usuario["idempresa"]; 
                 $response       = 
+
                 $this->crea_session($id_usuario, $nombre , $email , $id_empresa);            
-                $response       =  ($response != 1) ? "Error en tus datos de acceso" : 1; 
+                $response       =  ($response != 1) ? 0 : $url; 
                 $this->response($response);
             }
-            $this->response("Error en tus datos de acceso");               
+            $this->response(0);               
         }
         $this->response("Error");
         
@@ -102,4 +105,28 @@ class Sess extends REST_Controller{
             }        
         }                                     
     } 
+    function servicio_POST(){
+
+        $param =  $this->post();
+        $this->principal->set_userdata($param);
+        $this->response(1);
+    }
+    private function create_url(){
+
+        if ($this->principal->get_session("plan") >0 ) {
+            $plan               = $this->principal->get_session("plan"); 
+            $extension_dominio  = $this->principal->get_session("extension_dominio"); 
+            $ciclo_facturacion  = $this->principal->get_session("ciclo_facturacion"); 
+            $is_servicio        = $this->principal->get_session("is_servicio"); 
+            $q2                 = $this->principal->get_session("q2"); 
+            $num_ciclos         = $this->principal->get_session("num_ciclos"); 
+            
+            $url =  
+            "../procesar/?plan=".$plan."&extension_dominio=".$extension_dominio."&ciclo_facturacion=".$ciclo_facturacion."&is_servicio=".$is_servicio."&q2=".$q2."&num_ciclos=".$num_ciclos;    
+
+        }else{
+            $url =  "../login";
+        }
+        return $url;    
+    }
 }

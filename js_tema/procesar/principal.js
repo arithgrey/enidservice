@@ -27,7 +27,7 @@ $(document).ready(function(){
 
 	$(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
 	$(".telefono").keyup(quita_espacios_en_telefono);
-
+	$(".link_acceso").click(set_link);
 
 });
 /**/
@@ -171,4 +171,21 @@ function config_direccion(){
 	});
 	$(".form_direccion_envio").submit(registra_nueva_direccion);							
 	
+}
+var set_link = function(){
+			
+	var plan 			  = get_parameter_enid($(this) , "plan");	
+	var extension_dominio = get_parameter_enid($(this) , "extension_dominio");	
+	var ciclo_facturacion = get_parameter_enid($(this) , "ciclo_facturacion");	
+	var is_servicio 	  = get_parameter_enid($(this) , "is_servicio");	
+	var q2 	  		      = get_parameter_enid($(this) , "q2");	
+	var num_ciclos 	      = get_parameter_enid($(this) , "num_ciclos");	
+	
+	var data_send         = $.param({"plan" : plan , "extension_dominio" : extension_dominio , "ciclo_facturacion" : ciclo_facturacion , is_servicio : is_servicio , "q2": q2 , "num_ciclos": num_ciclos});
+	var url				  = "../login/index.php/api/sess/servicio/format/json/"; 
+	request_enid( "POST",  data_send, url, response_set_link);
+	
+}
+var response_set_link = function(data){
+	redirect("../login");
 }

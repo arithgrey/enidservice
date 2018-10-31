@@ -47,9 +47,7 @@
         $telefono_receptor =  get_campo($info_usuario , "tel_contacto");
     }
 ?>
-<div class="contenedor_deuda_para_envio" style="display: none;">         
-    <?=$this->load->view("ventas/call_to_action" ,  $param);?>        
-</div>                                                  
+                                    
 <div class='contenedor_informacion_envio'>        
     <?=heading_enid("DIRECCIÓN DE ENVÍO" , 2 , [] , 1)?>
     <div id='modificar_direccion_seccion' class="contenedor_form_envio">
@@ -213,7 +211,8 @@
                 </div>
                 <?=input_hidden([
                     "name"    => "id_recibo", 
-                    "value"   => $id_recibo 
+                    "value"   => $id_recibo, 
+                    "class"   => "id_recibo" 
                 ])?>                            
             <?=end_row()?> 
             <?=div(

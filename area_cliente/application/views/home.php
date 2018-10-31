@@ -65,9 +65,11 @@ $llamadas_recibidas =  anchor_enid(
 		    </div>   
 		</div> 
 		<?=input_hidden(["class"=>"action",  "value"=>$action ])?>
+		<?=input_hidden(["class"=>"ticket",  "value"=>$ticket ])?>
 		
 	<?=end_row()?>
 
 
 
 
+<div class="resumen_pagos_pendientes"  href="#tab_renovar_servicio" data-toggle="tab"></div>

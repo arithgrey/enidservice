@@ -985,28 +985,32 @@ if ( ! function_exists('debug'))
 {
 function debug($msg, $array = 0)
 { 
-  
-       
-    $_date_fmt  = 'Y-m-d H:i:s';
-    $filepath = "/var/www/html/inicio/debug/debug.log"; 
-    $message  = '';   
-    $fp = @fopen($filepath, FOPEN_WRITE_CREATE);    
+    
 
-    if ($array == 0) {
-      $message .= 
-      'DEBUG'.' -' .' TYPE '. gettype($msg).' '.date($_date_fmt). ' --> '.$msg."\n";
-    }else{
-      $message .= 
-      'DEBUG'.' -' .' TYPE '. gettype($msg).' '.date($_date_fmt). ' --> '.print_r($msg, true)."\n";
+    if($_SERVER['HTTP_HOST'] ==  "localhost") {
+
+      $_date_fmt  = 'Y-m-d H:i:s';
+      $filepath = "/var/www/html/inicio/debug/debug.log"; 
+      $message  = '';   
+      $fp = @fopen($filepath, FOPEN_WRITE_CREATE);    
+
+      if ($array == 0) {
+        $message .= 
+        'DEBUG'.' -' .' TYPE '. gettype($msg).' '.date($_date_fmt). ' --> '.$msg."\n";
+      }else{
+        $message .= 
+        'DEBUG'.' -' .' TYPE '. gettype($msg).' '.date($_date_fmt). ' --> '.print_r($msg, true)."\n";
+      }
+          
+      flock($fp, LOCK_EX);
+      fwrite($fp, $message);
+      flock($fp, LOCK_UN);
+      fclose($fp);
+
+      //@chmod($filepath, FILE_WRITE_MODE);
+      return TRUE;  
     }
-        
-    flock($fp, LOCK_EX);
-    fwrite($fp, $message);
-    flock($fp, LOCK_UN);
-    fclose($fp);
-
-    //@chmod($filepath, FILE_WRITE_MODE);
-    return TRUE;
+    
   }
   function get_costo_envio($param){
     

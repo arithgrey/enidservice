@@ -6,6 +6,14 @@
 	width: 60%;
 	margin: 0 auto;	
 }
+.link_acceso{
+	color: #005db3!important;
+	font-size: 1.2em;
+	text-decoration: underline;
+}
+.info_metodos_pago{
+	display: none;
+}
 @media only screen and (max-width: 768px) {
 	.contenedor_informacion_envio{
 		margin-top: 25px!important;

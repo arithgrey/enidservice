@@ -36,6 +36,7 @@ class Home extends CI_Controller{
         "preguntas.css"
         ];
         
+        $data["ticket"] =  get_info_variable( $this->input->get() , "ticket" );
         $this->principal->show_data_page($data, 'home');                        
         
         

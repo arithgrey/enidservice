@@ -2,7 +2,7 @@
 	$criterios = array("RELEVANTE" , "RECIENTE" );
 ?>
 <?=n_row_12()?>	
-	<?=heading_enid("VALORACIONES Y RESEÑAS" , 2 )?>
+	<?=heading_enid("VALORACIONES Y RESEÑAS" , 2  , ["class" => "strong"] )?>
 	<?=anchor_enid("MÁS SOBRE EL VENDEDOR".icon("fa fa-chevron-right ir") ,
 		[
 		"class" 	=>	"a_enid_black" ,

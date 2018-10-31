@@ -21,11 +21,34 @@ class Home extends CI_Controller{
         $this->get_option("servicio")[0]["flag_envio_gratis"];
         return $param;
     }
+    function load_pre(){
+
+        $data        = $this->principal->val_session("");  
+        $data["clasificaciones_departamentos"] = "";        
+        if($this->agent->is_mobile() == FALSE){                    
+            $data["clasificaciones_departamentos"] = 
+            $this->principal->get_departamentos("nosotros");
+        }
+        $data["meta_keywords"]  ="";
+        $data["desc_web"]       ="";
+        $data["url_img_post"]   ="";            
+        $data["css"]            = ["pre.css"];
+        $data["js"]             = ["../js_tema/servicio/pre.js"];
+        $data["id_servicio"] = $this->input->get("producto");
+
+        $this->principal->show_data_page($data, 'pre'); 
+    }
     /**/    
     function index(){                
+        $param  = $this->input->get();
         if (ctype_digit(trim($this->input->get("producto")))) {
 
-            $this->load_servicio($this->input->get());
+            if (array_key_exists("pre", $param)) {
+                $this->load_pre($param);        
+            }else{
+                $this->load_servicio($this->input->get());    
+            }
+            
         }else{
             redirect("../../?q=");
         }     
@@ -33,9 +56,15 @@ class Home extends CI_Controller{
     /**/
     private function load_servicio($param){
 
-        $id_servicio =  get_info_producto($param["producto"]);                    
+        $id_servicio    =  get_info_producto($param["producto"]);
+    
         $this->set_option("id_servicio" , $id_servicio);                
         $data        = $this->principal->val_session("");  
+        $data["proceso_compra"] = get_info_variable( $param , "proceso" );
+        if ($data["in_session"] ==  1) {
+            $data["proceso_compra"]  = 1;
+        }
+
 
         
         $data["clasificaciones_departamentos"] = "";        
@@ -252,7 +281,7 @@ class Home extends CI_Controller{
         $trans = new GoogleTranslate();
         $fecha_entrega_promedio = $trans->translate($source, $target, strtoupper($fecha_entrega_promedio));
 
-        $tiempo_entrega =  "REALIZA HOY TU PEDIDO PARA TENERLO EN TU HOGAR EL".
+        $tiempo_entrega =  "REALIZA HOY TU PEDIDO Y TENLO EN TU HOGAR EL".
         span($fecha_entrega_promedio, ["class"=>'tiempo_promedio']);
         return $tiempo_entrega;     
     }
