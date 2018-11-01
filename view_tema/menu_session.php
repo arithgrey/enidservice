@@ -1,4 +1,4 @@
-<?php if ($in_session ==  0): ?>
+<?php if ($in_session ==  0 ):  ?>
     <?php 
         $link_vender    = 
         anchor_enid("Vender". icon("fa fa-shopping-cart") , 
@@ -16,5 +16,8 @@
 
         $list = [$link_vender , $links_envio_msj , $links_session]; 
     ?>
-    <?=ul($list , ["class"  => "largenav pull-right"])?>    
+    <?php if(!isset($proceso_compra)  || (isset($proceso_compra) && $proceso_compra ==  0)){
+        echo ul($list , ["class"  => "largenav pull-right"]);
+    }?>
+    
 <?php endif; ?>               

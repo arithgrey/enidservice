@@ -26,5 +26,9 @@
 
         return $this->db->query($query_get)->result_array();
     }
+    function insert( $params , $return_id=0 , $debug=0 , $table='pagina_web'){        
+        $insert   = $this->db->insert($table, $params , $debug);     
+        return ($return_id ==  1) ? $this->db->insert_id() : $insert;
+    }        
 
 }

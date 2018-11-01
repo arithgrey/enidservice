@@ -34,8 +34,18 @@ class Home extends CI_Controller{
         $data["url_img_post"]   ="";            
         $data["css"]            = ["pre.css"];
         $data["js"]             = ["../js_tema/servicio/pre.js"];
-        $data["id_servicio"] = $this->input->get("producto");
-
+        $data["id_servicio"]    = $this->input->get("producto");
+        $data["proceso_compra"] = 1;
+        
+        /*Fix*/
+        
+        $data["plan"]              =  $this->input->post("plan");
+        $data["extension_dominio"] =  $this->input->post("extension_dominio");
+        $data["ciclo_facturacion"] =  $this->input->post("ciclo_facturacion") ;
+        $data["is_servicio"]       =  $this->input->post("is_servicio");
+        $data["q2"]                =  $this->input->post("q2");
+        $data["num_ciclos"]        =  $this->input->post("num_ciclos");
+        
         $this->principal->show_data_page($data, 'pre'); 
     }
     /**/    
@@ -288,8 +298,9 @@ class Home extends CI_Controller{
     /**/
     private function crea_historico_vista_servicio($id_servicio){
         
+        
         $q["id_servicio"]   =  $id_servicio;
-        $api                = "servicio/visitas/format/json/";
+        $api                = "servicio/visitas";
         $this->principal->api( $api, $q, 'json', 'PUT');    
     }
 }

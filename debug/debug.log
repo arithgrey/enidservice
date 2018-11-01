@@ -1,0 +1,100 @@
+DEBUG - TYPE string 2018-11-01 11:20:21 --> ok
+DEBUG - TYPE string 2018-11-01 11:20:26 --> ok
+DEBUG - TYPE string 2018-11-01 11:20:40 --> lllo
+DEBUG - TYPE array 2018-11-01 11:20:58 --> Array
+(
+    [id_servicio] => 158
+)
+
+DEBUG - TYPE string 2018-11-01 11:43:50 --> entro
+DEBUG - TYPE array 2018-11-01 11:44:33 --> Array
+(
+    [url] => http://localhost/inicio/procesar/
+    [ip] => 127.0.0.1
+    [dispositivo] => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0
+    [tipo] => 2892
+    [id_evento] => 0
+    [id_usuario] => 0
+    [id_empresa] => 0
+    [url_referencia] => http://localhost/inicio/producto/?producto=158
+    [dominio] => localhost
+    [flag_enid] => 0
+    [browser] => Firefox 63.0
+    [robot] => 
+    [mobile] => 
+    [platform] => Linux
+    [is_browser] => 1
+    [is_robot] => 0
+    [is_mobile] => 0
+    [id_servicio] => 0
+)
+
+DEBUG - TYPE array 2018-11-01 11:45:52 --> Array
+(
+    [url] => http://localhost/inicio/procesar/
+    [ip] => 127.0.0.1
+    [dispositivo] => Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0
+    [tipo] => 2892
+    [id_evento] => 0
+    [id_usuario] => 0
+    [id_empresa] => 0
+    [url_referencia] => http://localhost/inicio/producto/?producto=158
+    [dominio] => localhost
+    [flag_enid] => 0
+    [browser] => Firefox 63.0
+    [robot] => 
+    [mobile] => 
+    [platform] => Linux
+    [is_browser] => 1
+    [is_robot] => 0
+    [is_mobile] => 0
+    [id_servicio] => 0
+)
+
+DEBUG - TYPE integer 2018-11-01 11:45:52 --> 132344
+DEBUG - TYPE integer 2018-11-01 11:48:14 --> 0
+DEBUG - TYPE integer 2018-11-01 11:48:24 --> 0
+DEBUG - TYPE integer 2018-11-01 11:48:29 --> 0
+DEBUG - TYPE integer 2018-11-01 11:48:53 --> 0
+DEBUG - TYPE integer 2018-11-01 11:49:18 --> 132345
+DEBUG - TYPE string 2018-11-01 11:49:34 --> 0
+DEBUG - TYPE integer 2018-11-01 11:49:34 --> 132346
+DEBUG - TYPE integer 2018-11-01 11:49:45 --> 0
+DEBUG - TYPE integer 2018-11-01 11:49:51 --> 0
+DEBUG - TYPE integer 2018-11-01 12:04:53 --> 0
+DEBUG - TYPE integer 2018-11-01 12:06:25 --> 0
+DEBUG - TYPE integer 2018-11-01 12:06:44 --> 0
+DEBUG - TYPE integer 2018-11-01 12:06:50 --> 0
+DEBUG - TYPE integer 2018-11-01 12:07:07 --> 0
+DEBUG - TYPE integer 2018-11-01 12:08:11 --> 0
+DEBUG - TYPE integer 2018-11-01 12:08:32 --> 0
+DEBUG - TYPE integer 2018-11-01 12:09:15 --> 0
+DEBUG - TYPE integer 2018-11-01 12:09:33 --> 0
+DEBUG - TYPE integer 2018-11-01 12:10:11 --> 0
+DEBUG - TYPE string 2018-11-01 12:10:19 --> entra
+DEBUG - TYPE integer 2018-11-01 12:10:19 --> 0
+DEBUG - TYPE string 2018-11-01 12:10:40 --> INSERT INTO `pagina_web_bot` (`url`, `ip`, `dispositivo`, `tipo`, `id_evento`, `id_usuario`, `id_empresa`, `url_referencia`, `dominio`, `flag_enid`, `browser`, `robot`, `mobile`, `platform`, `is_browser`, `is_robot`, `is_mobile`, `id_servicio`) VALUES ('http://localhost/inicio/procesar/', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0', '2892', '0', '0', '0', '', 'localhost', '0', 'Firefox 63.0', '', '', 'Linux', '1', '0', '0', '0')
+DEBUG - TYPE integer 2018-11-01 12:10:40 --> 0
+DEBUG - TYPE string 2018-11-01 12:11:22 --> INSERT INTO `pagina_web_bot` (`url`, `ip`, `dispositivo`, `tipo`, `id_evento`, `id_usuario`, `id_empresa`, `url_referencia`, `dominio`, `flag_enid`, `browser`, `robot`, `mobile`, `platform`, `is_browser`, `is_robot`, `is_mobile`, `id_servicio`) VALUES ('http://localhost/inicio/procesar/', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0', '2892', '0', '0', '0', '', 'localhost', '0', 'Firefox 63.0', '', '', 'Linux', '1', '0', '0', '0')
+DEBUG - TYPE integer 2018-11-01 12:11:22 --> 0
+DEBUG - TYPE integer 2018-11-01 12:12:04 --> 0
+DEBUG - TYPE integer 2018-11-01 12:14:02 --> 86696
+DEBUG - TYPE integer 2018-11-01 12:14:19 --> 86697
+DEBUG - TYPE string 2018-11-01 12:15:46 --> 
+"<div class=\"pagination\"><li class=\"active\"><span>1<span><\/span><\/span><\/li><li><a href=\"?q=&order=11&amp;page=2\" data-ci-pagination-page=\"2\">2<\/a><\/li><li><a href=\"?q=&order=11&amp;page=3\" data-ci-pagination-page=\"3\">3<\/a><\/li><li><a href=\"?q=&order=11&amp;page=4\" data-ci-pagination-page=\"4\">4<\/a><\/li><li><a href=\"?q=&order=11&amp;page=5\" data-ci-pagination-page=\"5\">5<\/a><\/li><li><a href=\"?q=&order=11&amp;page=6\" data-ci-pagination-page=\"6\">6<\/a><\/li><li><a href=\"?q=&order=11&amp;page=7\" data-ci-pagination-page=\"7\">7<\/a><\/li><li><a href=\"?q=&order=11&amp;page=8\" data-ci-pagination-page=\"8\">8<\/a><\/li><li><a href=\"?q=&order=11&amp;page=9\" data-ci-pagination-page=\"9\">9<\/a><\/li><li><a href=\"?q=&order=11&amp;page=10\" data-ci-pagination-page=\"10\">10<\/a><\/li><li><a href=\"?q=&order=11&amp;page=2\" data-ci-pagination-page=\"2\" rel=\"next\"><span class=\"white\">\u203a<\/span><\/a><\/li><\/div>"
+DEBUG - TYPE string 2018-11-01 12:19:52 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 12:26:27 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 173 LIMIT 1
+DEBUG - TYPE string 2018-11-01 12:46:26 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 12:50:58 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 12:56:16 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 12:56:26 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:11:38 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:18:15 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:18:22 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:22:56 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:23:08 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:23:32 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:30:53 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:33:10 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 148 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:34:06 --> UPDATE servicio SET tipo_entrega_visita = tipo_entrega_visita + 1 WHERE id_servicio = 203 LIMIT 1
+DEBUG - TYPE string 2018-11-01 13:34:16 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 203 LIMIT 1

@@ -892,8 +892,11 @@ class Servicio extends REST_Controller{
   }
   function visitas_PUT(){
 
-    $param    =  $this->put();    
-    $response = $this->serviciosmodel->q_up("vista" , " vista + 1" , $param["id_servicio"]);        
+    $param    =   $this->put();    
+    $response =   [];
+    if(if_ext($param , "id_servicio")) {
+      $response = $this->serviciosmodel->set_vista($param);        
+    }    
     $this->response($response);
   }  
   function entregas_en_casa_PUT(){          

@@ -1,3 +1,9 @@
+.contenedor_busqueda_global_enid_service{
+	display: none!important;
+}
+.largenav{
+	display: none;
+}
 .contenedor_informacion_envio{
 	width: 50%;
 	margin: 0 auto;

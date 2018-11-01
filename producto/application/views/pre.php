@@ -59,5 +59,10 @@
 	</div>
 	<?=end_row()?>
 
-
-
+   <?=input_hidden(["class" => "plan" , "value"=>  $plan])?>
+   <?=input_hidden(["class" => "extension_dominio" , "value"=>  $extension_dominio])?>
+   <?=input_hidden(["class" => "ciclo_facturacion" , "value"=>  $ciclo_facturacion])?>
+   <?=input_hidden(["class" => "is_servicio" , "value"=>  $is_servicio])?>
+   <?=input_hidden(["class" => "q2" , "value"=>  $q2])?>
+   <?=input_hidden(["class" => "num_ciclos" , "value"=>  $num_ciclos])?>
+        

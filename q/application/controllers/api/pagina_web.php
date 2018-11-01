@@ -9,6 +9,24 @@ class Pagina_web extends REST_Controller{
         $this->load->library(lib_def());                    
         $this->id_usuario = $this->principal->get_session("idusuario");
     } 
+    function index_POST(){
+
+        $param    =  $this->post();
+        $response =  [];
+        if (if_ext($param , "q,q2")) {
+            
+            $params   =  $param["q"];
+            $q2       =  $param["q2"];                        
+            if ($q2 == 0) {
+                $response = $this->pagina_web_model->insert($params, 1);  
+            }else{
+                $response = $this->pagina_web_model->insert($params, 1 , 0, "pagina_web_bot");
+            }
+            
+        }        
+        $this->response($response);
+
+    }
     function dia_GET(){
 
       $param    =   $this->get();

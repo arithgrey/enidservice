@@ -7,10 +7,8 @@
     "q2"                =>  $q2 
   );
 ?>
-<form action="../procesar"  id="AddToCartForm" >  
-  <?=form_hidden($hidden)?>
- 
- 
+<form action="../producto/?producto=<?=$id_servicio?>&pre=1"  id="AddToCartForm" method="POST" >  
+  <?=form_hidden($hidden)?> 
   <div class="btn-and-quantity">
     <div class="spinner">
         <?=form_input([

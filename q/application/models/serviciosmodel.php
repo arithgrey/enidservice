@@ -99,6 +99,15 @@
         return $data_complete;
       
     }
+    function set_vista($param){
+
+        $id_servicio    =  $param["id_servicio"];
+        $query_update   = 
+        "UPDATE servicio  SET vista =  vista + 1 
+            WHERE id_servicio =  $id_servicio LIMIT 1";
+        return $this->db->query($query_update);
+
+    }
     function create_tmp_productos_solicitados($flag , $_num,  $param){
 
       $this->db->query(get_drop("tmp_productos_$_num"));
