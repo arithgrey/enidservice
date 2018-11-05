@@ -1,3 +1,0 @@
-[21-Jul-2017 23:39:47 UTC] PHP Fatal error:  Class 'CI_URI' not found in /home/enidserv/public_html/inicio/persona/system/core/Common.php on line 174
-[21-Jul-2017 23:39:52 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/enidserv/public_html/inicio/persona/system/core/Loader.php on line 1176
-[24-Jul-2017 14:35:41 UTC] PHP Fatal error:  Call to undefined function get_random() in /home/enidserv/public_html/inicio/persona/application/models/clientemodel.php on line 95

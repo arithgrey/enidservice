@@ -17,22 +17,11 @@ var response_opcion_entrega = function(data){
 	var id_servicio = 	get_option("id_servicio");
 	var url 		=	"";
 	switch(get_option("tipo")) {
-	    case 1:
-
-	    
-	    var plan 				= get_parameter(".plan");
-		var extension_dominio 	= get_parameter(".extension_dominio");
-		var ciclo_facturacion 	= get_parameter(".ciclo_facturacion");
-		var is_servicio 		= get_parameter(".is_servicio");
-		var q2 					= get_parameter(".q2");
-		var num_ciclos 			= get_parameter(".num_ciclos");
-	    
-	    var url = "../procesar/?plan="+id_servicio+"&extension_dominio="+extension_dominio+"&ciclo_facturacion="+ciclo_facturacion+"&is_servicio="+is_servicio+"&q2="+q2+"&num_ciclos="+num_ciclos;
-	    	   
+	    case 1:	    	
+	    	$(".form_pre_pedido").submit();	    	   
 	        break;
 	    case 2:
-	        var url = "../contact/?plan="+id_servicio+"&proceso=1";
-	    	
+	    	$(".form_pre_pedido_contact").submit();	        			
 	        break;
 	    case 3:
 	        
@@ -41,5 +30,4 @@ var response_opcion_entrega = function(data){
         
 	} 
 
-	redirect(url); 
 }

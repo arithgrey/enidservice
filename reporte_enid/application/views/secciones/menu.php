@@ -6,7 +6,7 @@
                 [
                     "href"          =>"#tab_default_1" ,
                     "data-toggle"   =>"tab" ,
-                    "class"         =>'btn_menu_tab cotizaciones black strong '
+                    "class"         =>'btn_menu_tab cotizaciones black  '
                 ] )?>                            
             </li>                
             <li>
@@ -14,7 +14,7 @@
                 [
                     "href"          =>"#tab_busqueda_productos" ,
                     "data-toggle"   =>"tab" ,
-                    "class"         =>'black strong  btn_repo_afiliacion',
+                    "class"         =>'black   btn_repo_afiliacion',
                     "id"            =>'btn_repo_afiliacion'
                 ] )?>                        
             </li>  
@@ -25,7 +25,7 @@
                     "id"          =>    "btn_usuarios",
                     "href"        =>    "#tab_usuarios", 
                     "data-toggle" =>    "tab"  ,
-                    "class"       =>    "black strong  btn_repo_afiliacion"
+                    "class"       =>    "black   btn_repo_afiliacion"
                 ]);?>
             </li>  
             <li>
@@ -34,7 +34,7 @@
                     "id"          =>    "btn_repo_afiliacion",
                     "href"        =>    "#tab_productos_publicos", 
                     "data-toggle" =>    "tab"  ,
-                    "class"       =>    "black strong  btn_repo_afiliacion"
+                    "class"       =>    "black   btn_repo_afiliacion"
                 ]);?>                    
             </li>  
 
@@ -45,7 +45,7 @@
                     "id"          =>    "btn_repo_afiliacion",
                     "href"        =>    "#tab_default_3", 
                     "data-toggle" =>    "tab"  ,
-                    "class"       =>    "black strong  btn_repo_afiliacion"
+                    "class"       =>    "black   btn_repo_afiliacion"
                 ]);?>                    
             </li>  
             <li>
@@ -54,7 +54,7 @@
                     "id"          =>    "btn_repo_afiliacion",
                     "href"        =>    "#tab_afiliaciones", 
                     "data-toggle" =>    "tab"  ,
-                    "class"       =>    "black strong  btn_repo_afiliacion"
+                    "class"       =>    "black   btn_repo_afiliacion"
                 ]);?>                    
             </li>   
 
@@ -64,7 +64,7 @@
                     "id"          =>    "btn_repo_atencion_cliente",
                     "href"        =>    "#tab_atencion_cliente", 
                     "data-toggle" =>    "tab"  ,
-                    "class"       =>    "black strong  btn_repo_atencion_cliente"
+                    "class"       =>    "black   btn_repo_atencion_cliente"
                 ]);?>                    
             </li>      
             <li>
@@ -73,7 +73,7 @@
                     "id"          =>    "btn_servicios",
                     "href"        =>    "#tab_default_2", 
                     "data-toggle" =>    "tab"  ,
-                    "class"       =>    "black strong  usabilidad_btn"
+                    "class"       =>    "black   usabilidad_btn"
                 ]);?>                    
             </li>                      
             <li>
@@ -82,7 +82,7 @@
                     "id"          =>    "btn_servicios",
                     "href"        =>    "#tab_dispositivos", 
                     "data-toggle" =>    "tab"  ,
-                    "class"       =>    "black strong  dispositivos"
+                    "class"       =>    "black   dispositivos"
                 ]);?>                    
             </li>                      
             </ul>

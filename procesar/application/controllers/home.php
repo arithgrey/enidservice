@@ -22,7 +22,8 @@ class Home extends CI_Controller{
     /**/    
     function index(){
         
-        $param =  $this->input->get();
+    
+        $param =  $this->input->post();
         if( array_key_exists("num_ciclos", $param)
             && ctype_digit($param["num_ciclos"])
             && $param["num_ciclos"] >0&&array_key_exists("ciclo_facturacion", $param)
@@ -32,6 +33,8 @@ class Home extends CI_Controller{
         }else{
             redirect("../../");
         }
+    
+    
     }
     /**/
     private function crea_orden_compra($param){

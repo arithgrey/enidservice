@@ -17,7 +17,7 @@ $(document).ready(function(){
 	$(".nav-sidebar").hide();
 	$(".base_paginas_extra").hide();
 	recorrepage(".contenedor_compra");	
-	$(".form-miembro-enid-service").submit(registra_afiliado);
+	$(".form-miembro-enid-service").submit(registro);
 
 	set_option( "plan", $(".plan").val());
 	set_option( "dominio" , $(".dominio").val());	
@@ -31,25 +31,23 @@ $(document).ready(function(){
 
 });
 /**/
-function registra_afiliado(e){
+function registro(e){
 
-	text_password =  $.trim($(".password").val());	
+
+	var text_password =  $.trim($(".password").val());	
 	if (text_password.length>7 ) {
 		flag =  valida_num_form(".telefono" , ".place_telefono" ); 
 		if (flag == 1 ){
 				flag2 =  valida_text_form(".telefono" , ".place_telefono" , 6 , "Número telefónico" );
 				if (flag2 ==  1 ) {
 
-
-					//debugger;
-					$(".resumen_productos_solicitados").hide();					
-					recorrepage(".contenedor_formulario_compra");
 					
+					$(".resumen_productos_solicitados").hide();					
+					recorrepage(".contenedor_formulario_compra");					
 					bloquea_form(".form-miembro-enid-service");
 					var url 	= 	"../q/index.php/api/cobranza/primer_orden/format/json/";				
 					var pw 		= 	$.trim($(".password").val());	
 					var pwpost 	= 	""+CryptoJS.SHA1(pw);
-
 
 					set_option("email", $(".email").val());					
 					set_option("nombre" ,$(".nombre").val());					

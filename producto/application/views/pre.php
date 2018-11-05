@@ -8,14 +8,6 @@
 		</div>
 	<?=end_row()?>
 
-	<?=n_row_12()?>
-		<div class="col-lg-6 col-lg-offset-3">
-			<center>
-				<?=img(["src" => $url])?>
-			</center>		
-		</div>
-	<?=end_row()?>
-	
 
 
 </div>
@@ -59,10 +51,24 @@
 	</div>
 	<?=end_row()?>
 
-   <?=input_hidden(["class" => "plan" , "value"=>  $plan])?>
-   <?=input_hidden(["class" => "extension_dominio" , "value"=>  $extension_dominio])?>
-   <?=input_hidden(["class" => "ciclo_facturacion" , "value"=>  $ciclo_facturacion])?>
-   <?=input_hidden(["class" => "is_servicio" , "value"=>  $is_servicio])?>
-   <?=input_hidden(["class" => "q2" , "value"=>  $q2])?>
-   <?=input_hidden(["class" => "num_ciclos" , "value"=>  $num_ciclos])?>
-        
+	<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">
+	   <?=input_hidden(["class" => "plan" , "name" => "plan", "value"=>  $plan])?>
+	   <?=input_hidden(["class" => "extension_dominio" ,"name" => "extension_dominio"  , "value"=>  $extension_dominio])?>
+	   <?=input_hidden(["class" => "ciclo_facturacion" , "name" => "ciclo_facturacion" ,  "value"=>  $ciclo_facturacion])?>
+	   <?=input_hidden(["class" => "is_servicio" ,"name" => "is_servicio" , "value"=>  $is_servicio])?>
+	   <?=input_hidden(["class" => "q2" , "name" => "q2" ,  "value"=>  $q2])?>
+	   <?=input_hidden(["class" => "num_ciclos" ,"name" => "num_ciclos" , "value"=>  $num_ciclos])?>
+    </form>	   
+   	<form class="form_pre_pedido_contact" action="../contact/?w=1" method="POST">
+	   <?=input_hidden(["class" => "servicio" , "name" => "servicio", "value"=>  $plan])?>	   
+	   <?=input_hidden(["class" => "num_ciclos" ,"name" => "num_ciclos" , "value"=>  $num_ciclos])?>
+    </form>	
+   
+	<?=n_row_12()?>
+		<div class="col-lg-6 col-lg-offset-3">
+			<center>
+				<?=img(["src" => $url])?>
+			</center>		
+		</div>
+	<?=end_row()?>
+	

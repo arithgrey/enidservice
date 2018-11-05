@@ -93,15 +93,10 @@ div(ul($list4) , ["class"=>"col-lg-3 col-sm-6 inner"])];
 
 
     <?php if ($in_session == 0):?>
-    <?=n_row_12()?>
-        <?=$this->load->view("../../../view_tema/seccion_iniciar_session");?>
-    <?=end_row()?>    
     <?=div(print_footer($list_footer) , ["class" =>"base_paginas_extra"] , 1)?>    
         <?=n_row_12()?>    
             <?php if ($is_mobile == 0): ?>    
-                <?=$this->load->view("../../../view_tema/metodos_pago");?>
-            <?php else: ?>
-                <?=$this->load->view("../../../view_tema/metodos_pago_mobile");?>
+                <?=$this->load->view("../../../view_tema/metodos_pago");?>            
             <?php endif ?>    
         <?=end_row()?>    
         <?=div("© 2018 ENID SERVICE.", ['class'=>'white footer-enid'])?>
@@ -115,7 +110,6 @@ href="../css_tema/template/main.css?<?=version_enid?>">
 <link href="../css_tema/template/bootstrap.min.css?<?=version_enid?>" 
 rel="stylesheet" id="bootstrap-css">
 <?php if ( isset($css) && is_array($css) && count($css)>0 ):?>
-
     <?php  foreach($css as $c): $link ="../css_tema/template/".$c; ?>
         <link rel="stylesheet"  type="text/css"  href="<?=$link;?><?=version_enid?>">
     <?php endforeach;?>

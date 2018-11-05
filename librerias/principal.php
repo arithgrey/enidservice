@@ -4,12 +4,16 @@
 			parent::__construct();     			
 			$this->load->library('../../librerias/sessionclass');     
 	    }
-	    function api($api, $q=[], $format='json', $type='GET', $debug = 0  ){
+	    function api($api, $q=[], $format='json', $type='GET', $debug = 0  , $externo = 0  , $b = "" ){
 	        
-	        $url 				=  "q/index.php/api/";         
-	        $url_request		=  get_url_request($url);
-
-	        //echo $url_request;
+	        if ($externo == 0) {
+	        	$url 				=  "q/index.php/api/";         	
+	        }else{
+	        	$url 				=  $b."/index.php/api/";         	
+	        	
+	        }
+	        
+	        $url_request		=  get_url_request($url);	       
 	        $this->restclient->set_option('base_url', $url_request);
 	        $this->restclient->set_option('format', $format);        
 	        $result 			= "";
@@ -42,8 +46,7 @@
 	        }       	
 
 	        return $result->response;   
-	    }   
-	    
+	    }   	    
 	    function get_session($key){
 	    	return $this->sessionclass->get_session($key);
 	    }

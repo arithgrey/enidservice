@@ -9,10 +9,13 @@ class Sess extends REST_Controller{
         
         
         $param          =   $this->post();            
-        $url            =   $this->create_url();        
+        $url            =   $this->create_url();            
+        if($this->input->is_ajax_request() || 
+            ( array_key_exists("t", $param) && $param["t"] == "x=0.,!><!$#" ) 
+        ){                     
 
-        if($this->input->is_ajax_request()){                     
-            $usuario           = $this->get_es_usuario($param);                            
+            $usuario            = $this->get_es_usuario($param);                            
+
             if (count($usuario) == 1){
 
                 $usuario        = $usuario[0];                                
@@ -20,12 +23,14 @@ class Sess extends REST_Controller{
                 $nombre         = $usuario["nombre"];
                 $email          = $usuario["email"];                
                 $fecha_registro = $usuario["fecha_registro"]; 
-                $id_empresa     = $usuario["idempresa"]; 
-                $response       = 
-
-                $this->crea_session($id_usuario, $nombre , $email , $id_empresa);            
-                $response       =  ($response != 1) ? 0 : $url; 
+                $id_empresa     = $usuario["idempresa"];                 
+                $response       = $this->crea_session($id_usuario,$nombre,$email,$id_empresa);
+                if( array_key_exists("t", $param) && $param["t"] == "x=0.,!><!$#" ){
+                    $this->response($response);
+                }
+                $response       = ($response != 0) ? $url:0;
                 $this->response($response);
+
             }
             $this->response(0);               
         }
@@ -75,11 +80,8 @@ class Sess extends REST_Controller{
      function crea_session($id_usuario, $nombre , $email ,$id_empresa){                            
         
         $empresa            =  $this->get_empresa($id_empresa);                    
-
         $perfiles           =  $this->get_perfil_user($id_usuario);
-
         $perfildata         =  $this->get_perfil_data($id_usuario); 
-
         $empresa_permiso    =  $this->get_empresa_permiso($id_empresa);
         $empresa_recurso    =  $this->get_empresa_recursos($id_empresa);       
 
@@ -87,6 +89,7 @@ class Sess extends REST_Controller{
         if (count($perfiles) > 0) {            
             $navegacion                     =  $this->get_recursos_perfiles($perfiles);                     
             if (count($navegacion)> 0) {                
+               
                 $session = [            
                         "idusuario"         => $id_usuario , 
                         "nombre"            => $nombre ,
@@ -101,9 +104,12 @@ class Sess extends REST_Controller{
                         'logged_in'         => TRUE
                 ];               
                 $this->principal->set_userdata($session);
-                return 1;                
-            }        
-        }                                     
+                return $session;
+
+            }
+            return 0;        
+        } 
+        return 0;                                    
     } 
     function servicio_POST(){
 

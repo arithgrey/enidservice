@@ -36,7 +36,7 @@
             ])?>        
             <?=n_row_12()?>
               <div class="text-right">
-                <?=heading_enid("MONTO DEL PEDIDO $".$monto_total."MXN", 4)?>      
+                <?=heading_enid("MONTO $".$monto_total."MXN", 4)?>      
                 <?=heading_enid("CARGOS DE ENVÍO $".$costo_envio_cliente."MXN", 4)?>
                 <?=heading_enid("TOTAL $".$monto_total_con_envio."MXN", 3 )?>
                 <?=div("Precios expresados en Pesos Mexicanos." ,["class" => "bottom_10"])?>
@@ -69,8 +69,9 @@ $talla                =
 ?>  
 
 
-<?php if($in_session == 0 && $is_mobile ==0){?>
-  <?=heading_enid("DINOS QUIEN ERES" ,2 ,["class" =>"strong"])?>
+<?php if($in_session == 0 && $is_mobile ==0){  ?>
+
+  <?=heading_enid("QUIEN ERES" ,2 ,["class" =>"strong"])?>
 
 <?php }?>
 

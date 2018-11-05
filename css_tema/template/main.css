@@ -1087,6 +1087,9 @@ table{
 .top_20{
 	margin-top: 20px;
 }
+.top_50{
+	margin-top: 50px;
+}
 
 .bottom_10{
 	margin-bottom: 10px;
@@ -1096,6 +1099,9 @@ table{
 }
 .bottom_20{
 	margin-bottom: 20px;
+}
+.bottom_50{
+	margin-bottom: 50px;	
 }
 .cursor_pointer:hover, .cursor:hover{
 	cursor: pointer;

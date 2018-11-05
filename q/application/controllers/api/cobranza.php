@@ -190,8 +190,7 @@ class Cobranza extends REST_Controller{
     /**/
     function solicitud_proceso_pago_POST(){
 
-        $param          =  $this->post();               
-        //debug($param , 1); 
+        $param          =  $this->post();                      
         $id_servicio    =  $param["plan"]; 
         $precio         =  $this->get_precio_id_servicio($id_servicio);
 
@@ -298,25 +297,35 @@ class Cobranza extends REST_Controller{
         ){
 
                    
-            $usuario = $this->crea_usuario($param);
-            
+            $usuario = $this->crea_usuario($param);            
             if ($usuario["usuario_registrado"] ==  1 && $usuario["id_usuario"]>0 ) {
-                
-                
+                                
                 $param["es_usuario_nuevo"]    = 1;
                 $param["usuario_nuevo"]       = 1;        
                 $param["usuario_referencia"]  = $usuario["id_usuario"];
-                $param["id_usuario"]          = $usuario["id_usuario"];                                       
-                $orden_compra                 = $this->crea_orden($param); 
-                $orden_compra["usuario_existe"]   = 0;
-                $this->response($orden_compra);
+                $param["id_usuario"]          = $usuario["id_usuario"];
+                $response                     = $this->crea_orden($param);                 
+                $response["usuario_existe"]   = 0;
+                $session                =  $this->create_session($param); 
+                $this->principal->set_userdata($session);
+                $this->response($response);
+                
             }            
             $this->response($usuario);
             
         }else{
             $this->response(-1);
         }
-    }    
+    }   
+    /**/
+    function create_session($q){
+
+        $api            =     "sess/start";
+        $q["t"]         =     "x=0.,!><!$#";
+        $q["secret"]    =     $q["password"]; 
+        return $this->principal->api($api,$q,"json","POST",0,1,"login");                
+    }
+    /**/ 
     function crea_orden($q){
 
         $api =  "cobranza/solicitud_proceso_pago";
