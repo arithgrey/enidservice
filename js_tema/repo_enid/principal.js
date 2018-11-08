@@ -22,7 +22,7 @@ $(document).ready(function(){
 	$(".form_busqueda_productos_solicitados").submit(carga_productos_mas_solicitados);
 	$(".f_actividad_productos_usuarios").submit(carga_repo_usabilidad);
 	$(".f_dipositivos").submit(carga_repo_dispositivos);
-
+	$(".form_tipos_entregas").submit(carga_repo_tipos_entregas);
 });
 /*Aquí se carga la data de las métricas del visitas(día)*/
 function carga_uso_sistema(e){
@@ -590,4 +590,18 @@ function info_usabilidad(data){
 	llenaelementoHTML(".repo_usabilidad" , data);
 	$(".servicios").click(resumen_servicios);	
 	$(".usuarios").click(resumen_usuarios);		
+}
+var carga_repo_tipos_entregas = function(e){
+	
+	var  	data_send 		=  $(".form_tipos_entregas").serialize()+"&"+$.param({"v":1});	
+	var 	url 			=  "../q/index.php/api/servicio/tipos_entregas/format/json/";	
+	
+	if (get_parameter(".form_tipos_entregas #datetimepicker4").length > 5 && get_parameter(".form_tipos_entregas #datetimepicker5").length > 5) {
+		request_enid( "GET",  data_send, url, 1, ".place_tipos_entregas", 0, ".place_tipos_entregas"); 	
+		$('th').click(ordena_table_general);
+	}else{		
+		focus_input(".form_tipos_entregas #datetimepicker4");
+		focus_input(".form_tipos_entregas #datetimepicker5");
+	}	
+	e.preventDefault();		
 }

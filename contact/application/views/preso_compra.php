@@ -2,6 +2,7 @@
 <div class="col-lg-10 col-lg-offset-1">
 	<center>
 		<?=heading_enid("Recibe nuestra ubicación" , 2 ,[ "class" => "strong" ])?>
+		<?=div("¿Donde quieres recibir la información?" ,["class" => "text_selector"])?>
 	</center>
 	
 </div>
@@ -26,7 +27,7 @@
 						  			"name" 			=>	"nombre" ,
 						  			"type"			=>	"text" ,
 						  			"placeholder"	=>	"Tu nombre ",
-						  			"class"			=>	"form-control input-md"
+						  			"class"			=>	"form-control input-md nombre"
 						  		])?>				  							  
 					  	</div>
 						<?=label(icon("fa fa-envelope-o") ." CORREO "   , ["class" =>	"col-lg-4 control-label"])?>  
@@ -36,7 +37,7 @@
 						  			"name" 			=>	"email" ,
 						  			"type"			=>	"email" ,
 						  			"placeholder"	=>	"@",
-						  			"class"			=>	"form-control input-md"
+						  			"class"			=>	"form-control input-md correo_electronico"
 						  		])?>				  		
 					  	<?=span("INGRESA TU EMAIL  PARA RECIBIR NUESTRA UBICACIÓN")?>
 					  </div>
@@ -60,7 +61,7 @@
 						  			"name" 			=>	"nombre" ,
 						  			"type"			=>	"text" ,
 						  			"placeholder"	=>	"Tu nombre ",
-						  			"class"			=>	"form-control input-md"
+						  			"class"			=>	"form-control input-md nombre_whatsapp"
 						  		])?>				  							  
 					  	</div>
 					<?=label(icon(".fa fa-whatsapp")." WHATSAPP" , ["class" =>	"col-lg-4 control-label"])?>  
@@ -69,7 +70,7 @@
 					  			"id"  			=>	"whatsapp" ,
 					  			"name" 			=>	"whatsapp" ,
 					  			"type"			=>	"tel" ,					  			
-					  			"class"			=>	"form-control input-md"
+					  			"class"			=>	"form-control input-md tel "
 					  		])?>				  		
 					  	<?=span("INGRESA TU WHATSAPP PARA RECIBIR NUESTRA UBICACIÓN")?>
 					  </div>

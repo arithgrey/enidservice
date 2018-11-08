@@ -1274,6 +1274,107 @@ class Servicio extends REST_Controller{
         $this->response($response);        
 
     }
+    /**/
+    function tipos_entregas_GET(){
+      
+      $param      =   $this->get();
+      $response   =   [];
+      $totales    =   [];
+      if (if_ext($param , "fecha_inicio,fecha_termino"  )) {
+        if ($param["v"] ==  1) {      
+            
+            $servicios = $this->serviciosmodel->get_tipos_entregas($param);  
+
+            $this->table->set_heading(
+              "Servicio",
+              'Vistas', 
+              'Entregas por envío', 
+              'Entregas en negocio' ,
+              'Entregas en punto medio', 
+              'deseado',
+              'valorado'
+              );
+
+            
+            $list = [];
+            $a    = 0; 
+            foreach ($servicios as $row) {
+
+              
+              $vista                        = $row["vista"];
+              $tipo_entrega_envio           = $row["tipo_entrega_envio"];
+              $tipo_entrega_visita          = $row["tipo_entrega_visita"];
+              $tipo_entrega_punto_medio     = $row["tipo_entrega_punto_medio"];
+              $deseado                      = $row["deseado"];
+              $valoracion                   = $row["valoracion"];
+              $id_servicio                  = $row["id_servicio"];
+
+
+              $img            = img(
+                [ "src" => 
+                  "../imgs/index.php/enid/imagen_servicio/".$id_servicio
+                  , 
+                  "style"  => "width:100px!important;"
+                ]);
+              
+
+              $array  = 
+              [ anchor_enid($img , 
+                [
+                  "href"    => "../producto/?producto=".$id_servicio,
+                  "target"  => "_black"
+                ]
+              ) ,
+                $vista, 
+                $tipo_entrega_envio,
+                $tipo_entrega_visita, 
+                $tipo_entrega_punto_medio ,
+                $deseado,
+                $valoracion   
+              ];
+
+              $this->table->add_row($array);                
+
+            }
+
+
+            $tb_general  = $this->table->generate();
+            $tb_headers  = $this->get_headers_tipo_entrega($servicios);
+            $total       = $tb_headers .br().hr().br(). $tb_general;
+            $response    = $total;
+                      
+
+        }
+
+      }
+      $this->response($response);
+    }
+    function get_headers_tipo_entrega($array){
+
+
+      $this->table->set_heading(
+              
+              'Vistas', 
+              'Entregas por envíos', 
+              'Entregas en negocio' ,
+              'Entregas en puntos medios', 
+              'deseados',
+              'valoraciones'
+              );
+
+      $this->table->add_row(
+        sumatoria_array($array ,"vista"),
+        sumatoria_array($array ,"tipo_entrega_envio"),
+        sumatoria_array($array ,"tipo_entrega_visita"),
+        sumatoria_array($array ,"tipo_entrega_punto_medio"),
+        sumatoria_array($array ,"deseado"),
+        sumatoria_array($array ,"valoracion")
+
+      );
+      
+      return  $this->table->generate();
+    }
+
 
 }
 ?>

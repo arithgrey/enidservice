@@ -14,8 +14,7 @@ function response_buzon(data){
 function carga_respuestas(){	
 
 	var id_pregunta 		=  	parseInt(get_attr(this, "id"));	
-	var pregunta 			=  	get_attr(this, "pregunta");	
-	alert(pregunta);
+	var pregunta 			=  	get_attr(this, "pregunta");		
 	var registro 			=  	get_attr(this, "registro");		
 	var nombre_servicio 	= 	get_attr(this, "nombre_servicio");
 	var usuario_pregunta	=  	get_attr(this, "usuario");		

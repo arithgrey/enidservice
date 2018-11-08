@@ -18,14 +18,19 @@ var response_opcion_entrega = function(data){
 	var url 		=	"";
 	switch(get_option("tipo")) {
 	    case 1:	    	
+	    	
 	    	$(".form_pre_pedido").submit();	    	   
 	        break;
+
 	    case 2:
+
 	    	$(".form_pre_pedido_contact").submit();	        			
 	        break;
+
 	    case 3:
-	        
+	        $(".form_pre_puntos_medios").submit();	        			
 	        break;
+	        
 	    default:
         
 	} 

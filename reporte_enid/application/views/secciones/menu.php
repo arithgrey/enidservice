@@ -20,6 +20,17 @@
             </li>  
 
             <li>
+                <?=anchor_enid(icon("fa fa-fighter-jet")."TIPOS ENTREGAS" , 
+                [
+                    "href"          =>"#tab_tipos_entregas" ,
+                    "data-toggle"   =>"tab" ,
+                    "class"         =>'black ',
+                    "id"            =>'btn_repo_afiliacion'
+                ] )?>                        
+            </li>  
+
+
+            <li>
                 <?=anchor_enid(icon("fa-shopping-bag")."ACTIVIDAD USUARIOS" ,  
                 [
                     "id"          =>    "btn_usuarios",

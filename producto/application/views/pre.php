@@ -63,7 +63,19 @@
 	   <?=input_hidden(["class" => "servicio" , "name" => "servicio", "value"=>  $plan])?>	   
 	   <?=input_hidden(["class" => "num_ciclos" ,"name" => "num_ciclos" , "value"=>  $num_ciclos])?>
     </form>	
-   
+    <form class="form_pre_puntos_medios" action="../puntos_medios/?producto=<?=$plan?>" method="POST">
+	   <?=input_hidden([
+	   	"class" => "servicio" , 
+	   	"name"  => "servicio", 
+	   	"value" => $plan
+	   ])?>	   
+	   <?=input_hidden([
+	   	"class" => "num_ciclos" ,
+	   	"name" 	=> "num_ciclos" , 
+	   	"value"=>  $num_ciclos
+	   ])?>
+    </form>	
+   	
 	<?=n_row_12()?>
 		<div class="col-lg-6 col-lg-offset-3">
 			<center>

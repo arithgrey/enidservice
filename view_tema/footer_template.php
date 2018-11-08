@@ -51,41 +51,43 @@ div(ul($list4) , ["class"=>"col-lg-3 col-sm-6 inner"])];
         "value"     => $titulo 
     ])?>            
             <?php if ($in_session === 0 ):?>                                
-                <div class="base_compras">
-                    <div class='col-lg-4'>
-                        <div class="row">
-                            <?=div(icon('fa  fa-fighter-jet') , ['class' => 'col-lg-2'])?>
-                            <div class='col-lg-10'>
-                                <?=div("FACILIDAD DE COMPRA" , ['class' => 'strong'])?>
-                                <?=div("Compras seguras al momento")?>
-                                <?php if(isset($id_usuario)):?>
-                                    <?=input_hidden([
-                                        "class"=>'id_usuario',
-                                        "value"=>$id_usuario
-                                    ])?>
-                                <?php endif;?>    
+                <?php if (!isset($proceso_compra) || $proceso_compra ==  0):?>                                
+                    <div class="base_compras">
+                        <div class='col-lg-4'>
+                            <div class="row">
+                                <?=div(icon('fa  fa-fighter-jet') , ['class' => 'col-lg-2'])?>
+                                <div class='col-lg-10'>
+                                    <?=div("FACILIDAD DE COMPRA" , ['class' => 'strong'])?>
+                                    <?=div("Compras seguras al momento")?>
+                                    <?php if(isset($id_usuario)):?>
+                                        <?=input_hidden([
+                                            "class"=>'id_usuario',
+                                            "value"=>$id_usuario
+                                        ])?>
+                                    <?php endif;?>    
+                                </div>
                             </div>
                         </div>
+                        <div class='col-lg-4'>
+                            <div class="row">
+                                <?=div(icon('fa fa-clock-o ') , [ 'class' => 'col-lg-2'] )?>
+                                <div class='col-lg-10'>
+                                    <?=div("+ ENTREGAS PUNTUALES", ['class' => 'strong'], 1)?>
+                                    <?=div("Recibe lo que deseas en tiempo y forma" ,1)?>
+                                </div> 
+                            </div>
+                        </div>                    
+                        <div class='col-lg-4'>
+                            <div class="row">
+                                <?=div(icon('fa fa-lock ') , ['class' => 'col-lg-2'])?>
+                                <div class='col-lg-10'>
+                                    <?=div(" COMPRAS SEGURAS" , ['class' => 'strong'])?>
+                                    <?=div("Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!",  1)?>
+                                </div>        
+                            </div>
+                        </div>                
                     </div>
-                    <div class='col-lg-4'>
-                        <div class="row">
-                            <?=div(icon('fa fa-clock-o ') , [ 'class' => 'col-lg-2'] )?>
-                            <div class='col-lg-10'>
-                                <?=div("+ ENTREGAS PUNTUALES", ['class' => 'strong'], 1)?>
-                                <?=div("Recibe lo que deseas en tiempo y forma" ,1)?>
-                            </div> 
-                        </div>
-                    </div>                    
-                    <div class='col-lg-4'>
-                        <div class="row">
-                            <?=div(icon('fa fa-lock ') , ['class' => 'col-lg-2'])?>
-                            <div class='col-lg-10'>
-                                <?=div(" COMPRAS SEGURAS" , ['class' => 'strong'])?>
-                                <?=div("Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!",  1)?>
-                            </div>        
-                        </div>
-                    </div>                
-                </div>
+                <?php endif; ?>
             <?php endif; ?>
         
     
@@ -93,10 +95,14 @@ div(ul($list4) , ["class"=>"col-lg-3 col-sm-6 inner"])];
 
 
     <?php if ($in_session == 0):?>
-    <?=div(print_footer($list_footer) , ["class" =>"base_paginas_extra"] , 1)?>    
+        <?php if (!isset($proceso_compra) || $proceso_compra ==  0):?>
+            <?=div(print_footer($list_footer) , ["class" =>"base_paginas_extra"] , 1)?>
+        <?php endif ?>    
         <?=n_row_12()?>    
-            <?php if ($is_mobile == 0): ?>    
+            <?php if ($is_mobile == 0): ?> 
+                <?php if (!isset($proceso_compra) || $proceso_compra ==  0):?>   
                 <?=$this->load->view("../../../view_tema/metodos_pago");?>            
+                <?php endif ?>    
             <?php endif ?>    
         <?=end_row()?>    
         <?=div("© 2018 ENID SERVICE.", ['class'=>'white footer-enid'])?>

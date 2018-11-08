@@ -431,6 +431,53 @@ class usuario extends REST_Controller{
         } 
         $this->response("Error");    
     }
+    /*
+    function punto_encuentro_POST(){        
+        
+
+        if($this->input->is_ajax_request()){             
+            $param = $this->post();        
+            
+            $response["usuario_existe"]          =  $this->usuario_model->evalua_usuario_existente($param);
+            $response["usuario_registrado"] = 0;
+            if ($response["usuario_existe"] == 0 ){
+
+
+                
+                $email              =  $param["email"];
+                $id_departamento    =  9;      
+                $password           =  $param["password"];            
+                $nombre             =  $param["nombre"];        
+                $id_usuario_referencia = 180; 
+
+                $params = [
+                  "email"                   =>  $email,
+                  "idempresa"               =>  '1',
+                  "id_departamento"         =>  $id_departamento,
+                  "password"                =>  $password,
+                  "nombre"                  =>  $nombre,
+                  "id_usuario_referencia"   =>  $id_usuario_referencia 
+                ];
+                $response["id_usuario"] = $this->usuario_model->insert($params , 1);
+                
+                if ( $response["id_usuario"]>0){
+                    $q["id_usuario"]    =  $response["id_usuario"]; 
+                    $q["puesto"]        =  20; 
+                    $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);   
+                    if ($response["usuario_permisos"] > 0) {
+                        $response["email"]              =  $email;
+                        $response["usuario_registrado"] =  1;
+                        
+                        
+                    }
+                }
+                
+            }
+            $this->response($response);
+        } 
+        $this->response("Error");    
+    }
+    */
     function whatsapp_POST(){        
         
 
@@ -479,6 +526,7 @@ class usuario extends REST_Controller{
         } 
         $this->response("Error");    
     }
+    
 
     function miembros_activos_GET(){
 

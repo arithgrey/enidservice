@@ -108,7 +108,7 @@ if(!function_exists('invierte_date_time')){
     
     $text   =   heading_enid('¿Ya tienes una cuenta? ', 3 );
     $text  .=   div("ACCEDE AHORA!", $extra , 1);
-    return $text;
+    return div($text , ["class" => "informacion_extra"]);
 
   }
 

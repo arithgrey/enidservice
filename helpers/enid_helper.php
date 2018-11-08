@@ -1,15 +1,6 @@
 <?php
 
 /*
---Refactor helpers
-----  Pasar a set functions
----   js
----   controllers
-- Habilitar entregas personales 
-- definir periodos de entrega solo para el perfil enidservice 
-- Poner siempre como disponibles 5 
-
-
 https://youtu.be/FwXskdcCRIk
 
 grep -r "libraries/REST_Controller.php"  /Users/jonathan.medrano/Documents/example
@@ -986,7 +977,7 @@ if ( ! function_exists('debug'))
 function debug($msg, $array = 0)
 { 
     
-    return "";
+    return "";   
     if($_SERVER['HTTP_HOST'] ==  "localhost") {
 
       $_date_fmt  = 'Y-m-d H:i:s';
@@ -1103,4 +1094,47 @@ if ( ! function_exists('center'))
       
 
   }
+}
+/*Ordena el arreglo de a cuerdo al tipo de indice que se indique*/
+function sksort(&$array, $subkey="id", $sort_ascending=false){
+        if (count($array))
+            $temp_array[key($array)] = array_shift($array);
+        foreach($array as $key => $val){
+            $offset = 0;
+            $found = false;
+            foreach($temp_array as $tmp_key => $tmp_val)
+            {
+                if(!$found and strtolower($val[$subkey]) > strtolower($tmp_val[$subkey]))
+                {
+                    $temp_array = array_merge(    (array)array_slice($temp_array,0,$offset),
+                                                array($key => $val),
+                                                array_slice($temp_array,$offset)
+                                              );
+                    $found = true;
+                }
+                $offset++;
+            }
+            if(!$found) $temp_array = array_merge($temp_array, array($key => $val));
+        }
+        if ($sort_ascending) $array = array_reverse($temp_array);
+        else $array = $temp_array;
+}
+function date_difference($date_1, $date_2, $differenceFormat = '%a')
+{
+    $datetime1  = date_create($date_1);
+    $datetime2  = date_create($date_2);
+    $interval   = date_diff($datetime1, $datetime2);
+    return $interval->format($differenceFormat);
+}
+function add_date($inicio , $dias){
+
+  $fecha = date_create($inicio);
+  date_add($fecha, date_interval_create_from_date_string($dias.' days'));
+  return date_format($fecha, 'Y-m-d');
+}
+function add_hour($num_hours){
+  $nowtime = date("Y-m-d H:i:s"); 
+  $num_hours = $num_hours *  60;
+  $date = date('H:i:s', strtotime($nowtime . ' + '.$num_hours.' minute'));
+  return $date;
 }

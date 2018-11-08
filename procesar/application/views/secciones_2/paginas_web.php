@@ -160,6 +160,7 @@ $talla                =
       [
         'class' =>    "white",
         "href"  =>    "../login"
+
       ]) , 
       [        
         'class' =>    "usuario_existente black_enid_background padding_1 white top_20 enid_hide"

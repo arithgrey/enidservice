@@ -34,6 +34,7 @@ $(document).ready(function(){
 function registro(e){
 
 
+
 	var text_password =  $.trim($(".password").val());	
 	if (text_password.length>7 ) {
 		flag =  valida_num_form(".telefono" , ".place_telefono" ); 
@@ -55,6 +56,7 @@ function registro(e){
 					set_option("usuario_referencia", $(".q2").val());																
 					set_option("talla"	, $(".talla").val());																				
 					var data_send =  {"password": pwpost , "email" : get_option("email") , "nombre" : get_option("nombre"), "telefono": get_option("telefono") , "plan" : get_option("plan") , "num_ciclos" : get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"), "ciclo_facturacion":get_option("ciclo_facturacion"), "usuario_referencia":get_option("usuario_referencia") , "talla" : get_option("talla")};				
+					$(".informacion_extra").hide();
 					request_enid( "POST",  data_send, url, respuesta_registro, 0 , before_registro_afiliado);	
 				}			
 			}		
@@ -81,7 +83,7 @@ var respuesta_registro = function(data){
 			flex(".usuario_existente");						
 			$(".place_registro_afiliado").empty();
 			recorrepage(".usuario_existente");
-
+			$(".informacion_extra").show();
 		}else{									
 
 			set_option("data_registro" , data);

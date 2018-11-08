@@ -29,6 +29,17 @@
                 <?=place("place_usabilidad_general" )?>
             </div>
 
+            <div class="tab-pane" id='tab_tipos_entregas'>                                  
+                <?=div("TIPOS DE ENTREGAS " , ["class"    =>  "titulo_enid_sm"] , 1 )?>                
+                <?=n_row_12()?>
+                    <form class='form_tipos_entregas row'>                    
+                        <?=$this->load->view("../../../view_tema/inputs_fecha_busqueda")?>
+                    </form>
+                <?=end_row()?>         
+                <?=place("place_tipos_entregas" )?>
+            </div>
+
+
             <div class="tab-pane" id='tab_usuarios'>                                  
                 <?=div("ACTIVIDAD " , ["class"=>"titulo_enid_sm" ,1])?>                
                 <?=n_row_12()?>

@@ -340,4 +340,10 @@ if(!function_exists('invierte_date_time')){
   		}  		
   		return $select;
   	}
+
+	function sumatoria_array($array ,$key) {
+		return array_sum(array_column($array, $key));
+	}
+	
+
 }/*Termina el helper*/

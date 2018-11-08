@@ -1,0 +1,51 @@
+.contenedor_estaciones{
+	display: flex;
+	flex-wrap: wrap;	
+	justify-content: space-around;
+}
+.nombre_estacion{
+	padding: 20px;
+	margin-top: 20px;
+	border-style: solid;
+}
+.nombre_estacion_punto_encuentro_extra{
+	padding: 20px;
+	margin-top: 20px;
+	border-style: solid;	
+	font-size: 1.1em;
+}
+.cargos_por_entrega_extra{
+	padding: 20px;
+	margin-top: 20px;
+	border-style: solid;	
+	font-size: 1.1em;	
+}
+.text_costo_envio{
+	font-size: 1.7em;
+	color: #0167c9;
+	font-weight: bold
+}
+.nombre_estacion:hover{
+	color: blue;
+}
+.nombre_linea_metro{
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.mensaje_cobro_envio{
+
+    font-weight: bold;
+    color: #0d1a53;
+    text-decoration: underline;
+    margin-top: 10px;
+    background: #e6ecff;
+    padding: 10px;
+}
+.btn_continuar_punto_encuentro{
+	display: none;
+	margin-top: 20px;
+}
+.contenedor_fecha_entrega{
+	background: red;
+}

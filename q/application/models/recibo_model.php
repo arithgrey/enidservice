@@ -375,14 +375,23 @@
       $data_complete["data"]=  $this->db->query($query_get)->result_array(); 
       return $data_complete;      
   }       
-  function crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis){
-        $resumen ="";
-        $resumen = $num_ciclos." ".$servicio["nombre_servicio"];
+  function crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis , $es_contra_entrega = 0 ){
         
-        if($flag_envio_gratis ==  1){
-          $resumen.=   " - Envío gratis";          
+        if ($es_contra_entrega == 0) {
+          
+            $resumen ="";
+            $resumen = $num_ciclos." ".$servicio["nombre_servicio"];
+            
+            if($flag_envio_gratis ==  1){
+              $resumen.=   " - Envío gratis";          
+            }
+            return $resumen;        
+
+        }else{
+            $resumen ="";
+            $resumen = $num_ciclos." ".$servicio["nombre_servicio"];            
         }
-        return $resumen;      
+        
   }
     /**/       
     function get_precio_servicio($param){
@@ -404,11 +413,20 @@
     
     function crea_orden_de_compra($param){    
       
-      $id_forma_pago      = 6;
-      $saldo_cubierto     = 0;
-      $status             = 6;
-      $fecha_vencimiento  =  "DATE_ADD(CURRENT_DATE(), INTERVAL 2 DAY)";      
+      
+      $saldo_cubierto     =   0;
+      $status             =   6;
+
+
       $data_usuario       =  $param["data_por_usuario"];            
+
+      $es_contra_entrega  = 0;
+      if(array_key_exists("es_contra_entrega", $data_usuario) && $data_usuario["es_contra_entrega"] ==  1){
+        $es_contra_entrega = 1;
+      } 
+      $id_forma_pago      =  ($es_contra_entrega ==  1) ? 7 : 6;
+
+      $fecha_vencimiento  =  "DATE_ADD(CURRENT_DATE(), INTERVAL 2 DAY)";            
       $id_usuario         =  $param["id_usuario"]; 
       
       
@@ -416,7 +434,7 @@
       (get_info_usuario_valor_variable($data_usuario , "usuario_referencia" ) == 0 ) 
       ? $id_usuario : $data_usuario["usuario_referencia"];
       
-      //debug($id_usuario_referencia);
+      
 
       $num_ciclos           =  $data_usuario["num_ciclos"];    
       $servicio             =  $param["servicio"];
@@ -426,23 +444,28 @@
       $precio               =  $servicio["precio"];
 
       $resumen_compra       =  
-      $this->crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis);
+      $this->crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis ,$es_contra_entrega );
       
       $costo_envio_cliente  =0;
       $costo_envio_vendedor =0;
-      $flag_servicio        =  $servicio["flag_servicio"];
+      $flag_servicio        =  ($es_contra_entrega ==  1 ) ? 0 : $servicio["flag_servicio"];
       $monto_a_pagar        =  $precio; 
-      if($flag_servicio ==  0){
+      if($flag_servicio ==  0 && $es_contra_entrega == 0){
           
-        $costo_envio          = $param["costo_envio"];
+        $costo_envio          =   $param["costo_envio"];
         $costo_envio_cliente  =   $costo_envio["costo_envio_cliente"];        
-        $costo_envio_vendedor =  $costo_envio["costo_envio_vendedor"];
+        $costo_envio_vendedor =   $costo_envio["costo_envio_vendedor"];
   
+      }else{
+                
+        $costo_envio_cliente  =   $param["costo_envio"];
+        $costo_envio_vendedor =   0;
+
       }      
       $id_ciclo_facturacion =  $param["id_ciclo_facturacion"];       
-
       $talla                =  $param["talla"];
-  
+      
+      
         $array_keys = [                                
         "id_forma_pago"             ,
         "saldo_cubierto"            ,
@@ -460,7 +483,10 @@
         "precio"                    ,
         "id_servicio"               ,
         "resumen_pedido"            ,
-        "talla"];
+        "talla"        
+      ];
+
+      
 
         $array_values  = 
         [                                
@@ -482,11 +508,17 @@
           "'".$resumen_compra."'",
           $talla 
         ];
-        
+      
+      if ($es_contra_entrega ==  1) {
+        array_push($array_keys , "fecha_contra_entrega");
+      }  
+      if ($es_contra_entrega ==  1) {
+        array_push($array_values ,  "'".$data_usuario["fecha_entrega"]."'"  );
+      }
+
       $keys         = get_keys($array_keys); 
       $values       = get_keys($array_values);      
-      $query_insert ="INSERT INTO proyecto_persona_forma_pago(". $keys .") VALUES(".  $values .")";    
-      
+      $query_insert ="INSERT INTO proyecto_persona_forma_pago(". $keys .") VALUES(".  $values .")";          
       $this->db->query($query_insert);
       return  $this->db->insert_id();  
       

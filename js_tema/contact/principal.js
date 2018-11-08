@@ -7,6 +7,7 @@ $(document).ready(function(){
 var muestra_opciones = function(){
 
 	var id 			= 	get_parameter_enid($(this) , "id");
+	$(".text_selector").hide();
 	switch(id){
 
 		case "1":			
@@ -26,11 +27,22 @@ var muestra_opciones = function(){
 }
 var envia_correo = function(e){
 	
-	var password 	 = ""+CryptoJS.SHA1(randomString(8));					
-	var data_send 	 = $(".form_correo").serialize()+"&"+$.param({"password":password});			
-	var url 		 = "../q/index.php/api/usuario/vendedor/format/json/";
-	bloquea_form(".form_correo");
-	request_enid("POST",  data_send , url , response_send_email);					
+
+	var nombre 	= 	get_parameter(".nombre_correo").length;
+	var correo 	= 	get_parameter(".correo_electronico").length;
+	
+	if ( nombre > 5 && correo > 5 ){
+		
+		var password 	 = 	""+CryptoJS.SHA1(randomString(8));					
+		var data_send 	 = 	$(".form_correo").serialize()+"&"+$.param({"password":password});			
+		var url 		 = 	"../q/index.php/api/usuario/vendedor/format/json/";
+		bloquea_form(".form_correo");
+		request_enid("POST",  data_send , url , response_send_email);					
+
+	}else{
+		
+		focus_input([".correo_electronico" ,".nombre_correo"]);
+	}
 	e.preventDefault();	
 	
 }
@@ -39,12 +51,23 @@ var response_send_email = function(data){
 }
 var envia_whatsapp = function(e){
 	
-	var password 	 = ""+CryptoJS.SHA1(randomString(8));					
-	var data_send 	 = $(".form_whatsapp").serialize()+"&"+$.param({"password":password});					
-	var url 		 = "../q/index.php/api/usuario/whatsapp/format/json/";
-	bloquea_form(".form_whatsapp");
-	request_enid("POST",  data_send , url , response_send_email);			
+	var nombre 	= 	get_parameter(".nombre_whatsapp").length;
+	var tel 	= 	get_parameter(".tel").length;
 
-	e.preventDefault();	
-	
+	if ( nombre > 5 && tel > 5 ){
+		
+
+		var password 	 = ""+CryptoJS.SHA1(randomString(8));					
+		var data_send 	 = $(".form_whatsapp").serialize()+"&"+$.param({"password":password});					
+		var url 		 = "../q/index.php/api/usuario/whatsapp/format/json/";
+		bloquea_form(".form_whatsapp");
+		request_enid("POST",  data_send , url , response_send_email);			
+
+	}else{			
+		var inputs = [".tel" ,".nombre_whatsapp"];
+		focus_input(inputs);
+
+	}
+
+	e.preventDefault();		
 }

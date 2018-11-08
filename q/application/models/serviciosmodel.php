@@ -103,8 +103,11 @@
 
         $id_servicio    =  $param["id_servicio"];
         $query_update   = 
-        "UPDATE servicio  SET vista =  vista + 1 
-            WHERE id_servicio =  $id_servicio LIMIT 1";
+        "UPDATE servicio 
+        SET 
+        vista               =  vista + 1 ,
+        ultima_vista        =  CURRENT_TIMESTAMP()
+        WHERE id_servicio   =  $id_servicio LIMIT 1";        
         return $this->db->query($query_update);
 
     }
@@ -211,7 +214,36 @@
     function busqueda_meta_key_word($arreglo_tags , $tag){        
         return  array_search($tag, $arreglo_tags); 
     }
-      
+    function get_tipos_entregas($param){
+
+        $query_get = "SELECT
+        id_servicio,
+        vista , 
+        tipo_entrega_envio,  
+        tipo_entrega_visita , 
+        tipo_entrega_punto_medio , 
+        deseado, 
+        valoracion  
+        FROM 
+        servicio
+        WHERE 
+        status =  1 
+        AND 
+        vista > 1 
+        AND  
+        DATE(ultima_vista) 
+        BETWEEN 
+        '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."' 
+        ORDER 
+        BY 
+        vista 
+        DESC
+        ";
+        
+        return $this->db->query($query_get)->result_array();
+
+
+    }
         
     /*
     function agrega_metakeyword_catalogo($param){   

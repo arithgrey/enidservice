@@ -4,40 +4,116 @@
 		"selected_items":
 		[
 			[
+				"for",
+				"format"
+			],
+			[
+				"nomre",
+				"nombre_estacion_punto_encuentro"
+			],
+			[
+				"nom",
+				"nombre_estacion"
+			],
+			[
+				"n",
+				"nombre"
+			],
+			[
+				"ali",
+				"align-self\tproperty"
+			],
+			[
+				"f",
+				"foreach\tforeach …"
+			],
+			[
+				"pam",
+				"params_where"
+			],
+			[
+				"ROSA",
+				"ROSARIO"
+			],
+			[
+				"ser",
+				"servicios"
+			],
+			[
+				"servic",
+				"servicios"
+			],
+			[
 				"que",
 				"query_update"
 			],
 			[
+				"par",
+				"param"
+			],
+			[
+				"pa",
+				"param"
+			],
+			[
+				"da",
+				"data_send"
+			],
+			[
+				"margin",
+				"margin\tproperty"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"PRINT",
+				"print_r"
+			],
+			[
+				"proces",
+				"proceso_compra"
+			],
+			[
+				"para",
+				"params"
+			],
+			[
+				"PARA",
+				"params"
+			],
+			[
 				"id",
-				"id_servicio"
+				"id_recibo"
+			],
+			[
+				"dat",
+				"data"
+			],
+			[
+				"data",
+				"data_send"
+			],
+			[
+				"extensin",
+				"extension_dominio"
+			],
+			[
+				"proc",
+				"proceso_compra"
+			],
+			[
+				"pro",
+				"proceso_compra"
 			],
 			[
 				"font-s",
 				"font-size\tproperty"
 			],
 			[
-				"for",
-				"foreach\tforeach …"
-			],
-			[
 				"q_",
 				"q_get"
-			],
-			[
-				"pa",
-				"params"
-			],
-			[
-				"res",
-				"result"
-			],
-			[
-				"ser",
-				"serviciosmodel-"
-			],
-			[
-				"para",
-				"param"
 			],
 			[
 				"url",
@@ -126,10 +202,6 @@
 			[
 				"mar",
 				"margin-top\tproperty"
-			],
-			[
-				"da",
-				"data_comentarios"
 			],
 			[
 				"cos",
@@ -242,10 +314,6 @@
 			[
 				"imagen_ser",
 				"imagen_servicio_model"
-			],
-			[
-				"margin",
-				"margin-top\tproperty"
 			],
 			[
 				"attr",
@@ -446,160 +514,11 @@
 			[
 				"me",
 				"metakeyword_model"
-			],
-			[
-				"id_re",
-				"id_recibo"
-			],
-			[
-				"do",
-				"domicilio"
-			],
-			[
-				"sta",
-				"status_enid_service"
-			],
-			[
-				"esta",
-				"carga_estado_compra"
-			],
-			[
-				"codigo_p",
-				"codigo_postal_model"
-			],
-			[
-				"codigo",
-				"codigo_postal_model"
-			],
-			[
-				"data",
-				"data_orden"
-			],
-			[
-				"resume",
-				"resumen_compra"
-			],
-			[
-				"cobra",
-				"cobranza"
-			],
-			[
-				"pos",
-				"post"
-			],
-			[
-				"recib",
-				"recibo_model"
-			],
-			[
-				"proye",
-				"proyecto_persona_forma_pago_direccion"
-			],
-			[
-				"pro",
-				"proyecto_persona_forma_pago_direccion"
-			],
-			[
-				"info",
-				"info_existencia"
-			],
-			[
-				"respues",
-				"respuesta_model"
-			],
-			[
-				"respu",
-				"respuesta_model"
-			],
-			[
-				"usuario_cl",
-				"usuario_clasificacion_model"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "producto/application/controllers/home.php",
-			"settings":
-			{
-				"buffer_size": 11161,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "producto/application/views/pre.php",
-			"settings":
-			{
-				"buffer_size": 1978,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "imgs/application/controllers/enid.php",
-			"settings":
-			{
-				"buffer_size": 2558,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "css_tema/template/pre.css",
-			"settings":
-			{
-				"buffer_size": 655,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js_tema/servicio/pre.js",
-			"settings":
-			{
-				"buffer_size": 891,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "q/application/controllers/api/servicio.php",
-			"settings":
-			{
-				"buffer_size": 44177,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "q/application/models/serviciosmodel.php",
-			"settings":
-			{
-				"buffer_size": 42963,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 1509 files for \"request_enid\"\n\n\n\nSearching 149 files for \"request_enid\"\n\n/var/www/html/inicio/faq/application/faq/principal.js:\n   22  \tvar data_send\t= $(\".form_respuesta\").serialize()+\"&\"+$.param({\"respuesta\" : respuesta , \"editar_respuesta\" :  get_option(\"editar_respuesta\") , \"id_faq\" : get_option(\"faq\") });\t\n   23  \tvar url \t\t=  \"../q/index.php/api/faqs/respuesta/format/json/\";\n   24: \trequest_enid( \"POST\",  data_send, url, response_registro_respuesta, \".place_refitro_respuesta\" );\n   25  \te.preventDefault();\n   26  }\n   ..\n   54  \tvar data_send= {\"id_faq\" : get_option(\"faq\")};\t\n   55  \tvar url =  \"../q/index.php/api/faqs/respuesta/format/json/\";\n   56: \trequest_enid( \"GET\",  data_send, url, response_carga_info_faq);\n   57  }\t\n   58  /**/\n   ..\n   76  \tllenaelementoHTML(\".place_img_actual_faq\", \"<img src='\"+url_img_faq+\"' style='width:100%;'>\");\n   77      var url =  \"../imgs/index.php/api/img_controller/form_faq/format/json/\";    \n   78:    \trequest_enid( \"GET\",  data_send, url, response_carga_form_imagenes, \".place_load_img_faq\");\n   79  }\n   80  /**/\n   ..\n  141  \tvar url =  \"../q/index.php/api/faqs/categorias_extras/format/json/\";\n  142  \tvar data_send = {}; \n  143: \trequest_enid( \"GET\",  data_send, url, 1 , \".place_categorias_extras\" , 0 , \".place_categorias_extras\");\n  144  }\n\n/var/www/html/inicio/js_tema/administracion_cuenta/img.js:\n    4      var data_send   = {};\n    5      var url         =  \"../q/index.php/api/img/form_img_user/format/json/\";\n    6:     request_enid( \"GET\",  data_send, url, response_carga_form_imagenes, \".place_form_img\"); \n    7  }\n    8  /**/\n\n/var/www/html/inicio/js_tema/administracion_cuenta/principal.js:\n   27  \tvar url \t\t=  \"../q/index.php/api/usuario_direccion/index/format/json/\";\t\t\n   28  \tvar data_send \t=  $(\".form_notificacion\").serialize()+\"&\"+$.param({\"v\":get_option(\"v\")});\n   29: \trequest_enid( \"GET\",  data_send, url, response_direccion_usuario);\n   30  }\n   31  /**/\n   ..\n   54  \t\tvar asentamiento \t= \tget_parameter(\".asentamiento\");\n   55  \t\tif (asentamiento != 0 ) {\n   56: \t\t\trequest_enid( \"POST\",  data_send, url, response_registra_direccion_usuario, \".place_proyectos\" );\n   57  \t\t\t$(\".place_asentamiento\").empty();\t\t\n   58  \t\t}else{\n   ..\n   72  \tvar data_send=  $(\".f_nombre_usuario\").serialize();  \n   73  \tvar url =  \"../q/index.php/api/usuario/nombre_usuario/format/json/\";\t\t\n   74: \trequest_enid(\"PUT\",  data_send, url, function(){\n   75  \t\tshow_response_ok_enid(\".registro_nombre_usuario\" , \"Tu nombre de usuario fue actualizado!\");\n   76  \t},\".registro_nombre_usuario\" );\n   ..\n   82  \tvar data_send=  $(\".f_telefono_usuario\").serialize();  \n   83  \tvar url =  \"../q/index.php/api/usuario/telefono/format/json/\";\t\t\t\n   84: \trequest_enid( \"PUT\",  data_send, url, function(){\n   85  \t\tshow_response_ok_enid(\".registro_telefono_usuario\" , \"Tu teléfono fue actualizado!\");\n   86  \t},\".registro_telefono_usuario\");\n   ..\n   95  \t\tvar data_send\t=  $(\".f_telefono_usuario_negocio\").serialize();  \t\n   96  \t\tvar url \t\t=  \"../q/index.php/api/usuario/telefono_negocio/format/json/\";\t\t\t\n   97: \t\trequest_enid( \"PUT\",  data_send, url, function(){\n   98  \t\t\tshow_response_ok_enid(\".registro_telefono_usuario_negocio\" , \"Tu teléfono fue actualizado!\");\n   99  \t\t}  , \".registro_telefono_usuario_negocio\" );\n  ...\n  170  \tvar \t\turl \t\t=\t\"../q/index.php/api/usuario/pass/format/json/\";\t\n  171  \tvar \t\tdata_send \t= \t{\"nuevo\": nuevo, \"anterior\": anterior, \"confirma\": confirma , \"type\": 2};\n  172: \trequest_enid( \"PUT\",  data_send, url, resp_actualizacion_pass, \".msj_password\" );\n  173  }\n  174  /**/\n  ...\n  194  \t\tvar url \t\t=  \"../portafolio/index.php/api/portafolio/cp/format/json/\";\t\n  195  \t\tvar data_send \t=  {\"cp\" : cp , \"delegacion\" : get_delegacion() };\n  196: \t\trequest_enid( \"GET\",  data_send , url , response_auto_complete_direccion );\n  197  \t}\n  198  \n\n/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js:\n    4  \tvar  url =  \"../q/index.php/api/funcionalidad/usuario/format/json/\";\t\t\n    5  \tvar data_send =  {};\n    6: \trequest_enid( \"GET\",  data_send, url, response_conceptos)\n    7  }\n    8  /**/\n    .\n   19  \tvar data_send \t\t\t= \t{\"concepto\": concepto, \"termino_asociado\" : termino_asociado};\n   20  \tvar url \t\t\t\t= \t\"../q/index.php/api/privacidad_usuario/index/format/json/\";\t\t\t\n   21: \trequest_enid( \"PUT\",  data_send, url, get_conceptos, \".place_registro_conceptos\",function(){\n   22  \t\tshow_response_ok_enid(\".place_registro_conceptos\" , \"Terminos de privacidad actualizados!\")\n   23  \t}); \n\n/var/www/html/inicio/js_tema/area_cliente/buzon.js:\n    4  \tvar url =  \"../q/index.php/api/pregunta/buzon/format/json/\";\t\t\n    5  \tvar data_send =  {\"modalidad\" : get_option(\"modalidad_ventas\")};\t\n    6: \trequest_enid( \"GET\",  data_send, url, response_buzon, \".place_buzon\" );\t\n    7  }\n    8  /**/\n    .\n   36  \tconsole.log(data_send);\n   37  \tvar url \t\t\t=  \"../q/index.php/api/respuesta/respuesta_pregunta/format/json/\";\t\t\n   38: \trequest_enid( \"GET\",  data_send, url, response_respuesta_complete,\".place_buzon\" );\n   39  }\n   40  /**/\n   ..\n   51  \tvar data_send \t=  $(\".form_valoracion_pregunta\").serialize()+\"&\"+$.param({\"pregunta\" : get_option(\"pregunta\") , \"modalidad\" : get_option(\"modalidad_ventas\")});\t\t\t\t\n   52  \tvar url \t\t=  \"../q/index.php/api/respuesta/respuesta_pregunta/format/json/\";\t\t\t\n   53: \trequest_enid( \"POST\",  data_send, url, carga_respuesta_complete); \n   54  \te.preventDefault();\n   55  }\n\n/var/www/html/inicio/js_tema/area_cliente/cobranza.js:\n    8  \t\tvar url \t\t=  \"../q/index.php/api/recibo/resumen_desglose_pago/format/json/\";\t\n    9  \t\tvar data_send \t=  {\"id_recibo\" : get_option(\"id_recibo\") , \"cobranza\" : 1};\t\t\t\t\n   10: \t\trequest_enid( \"GET\",  data_send, url, response_carga_info_resumen_pago_pendiente , \".place_resumen_servicio\");\n   11  \t}\n   12  }\n   ..\n   26  \t\tvar url \t\t=  \"../q/index.php/api/tickets/cancelar_form/format/json/\";\t\t\n   27  \t\tvar data_send \t=  {\"id_recibo\" : get_option(\"id_recibo\") , \"modalidad\" :  get_option(\"modalidad_ventas\")};\t\t\t\t\t\t\t\n   28: \t\trequest_enid( \"GET\",  data_send, url, resposponse_confirma_cancelacion);\n   29  \t}\n   30  }\n   ..\n   41  \tvar url \t\t=  \"../q/index.php/api/tickets/cancelar/format/json/\";\t\n   42  \tvar data_send \t=  {\"id_recibo\" : get_option(\"id_recibo\") , \"modalidad\" : get_option(\"modalidad_ventas\") };\t\t\t\t\t\n   43: \trequest_enid( \"PUT\",  data_send, url, response_cancelacion_compra);\n   44  }\n   45  /**/\n\n/var/www/html/inicio/js_tema/area_cliente/principal.js:\n   80  \tvar url =  \"../q/index.php/api/pregunta/preguntas_sin_leer/format/json/\";\t\t\n   81  \tvar data_send =  {\"modalidad\" : get_option(\"modalidad_ventas\")};\t\n   82: \trequest_enid( \"GET\",  data_send, url, response_carga_num_preguntas);\n   83  }\n   84  /**/\n   ..\n  135  \tvar url \t\t=  \"../q/index.php/api/servicio/alcance_producto/format/json/\";\t\t\n  136  \tvar data_send \t=  {tipo:tipo};\t\t\t\n  137: \trequest_enid( \"GET\",  data_send, url , function(data){\n  138  \t\tredirect(\"../producto/?producto=\"+data);\n  139  \t});\t\n\n/var/www/html/inicio/js_tema/area_cliente/proyectos_persona.js:\n   29  \tvar url \t\t=  \"../q/index.php/api/recibo/proyecto_persona_info/format/json/\";\t\t\n   30  \tvar data_send \t=  { \"status\": get_option(\"estado_compra\") , \"modalidad\" : modalidad };\t\t\t\t\n   31: \trequest_enid( \"GET\",  data_send, url, response_carga_compras_usuario);\n   32  }\n   33  /**/\n   ..\n   65  \tvar url \t\t=  \t\"../q/index.php/api/recibo/compras_efectivas/format/json/\";\t\t\n   66  \tvar data_send \t=  \t{\"modalidad\" : modalidad, \"page\" : page };\t\t\t\t\n   67: \trequest_enid( \"GET\",  data_send, url, reponse_carga_compras_o_ventas_concluidas);\n   68  }\n   69  /**/\n\n/var/www/html/inicio/js_tema/desarrollo/principal.js:\n   52  \t\t\n   53  \tvar url =  \"../q/index.php/api/productividad/usuario/format/json/\";\n   54: \trequest_enid( \"GET\",  data_send, url, 1, \".place_productividad\",  0 ,\".place_productividad\");\n   55  \te.preventDefault();\n   56  }\n   ..\n   67  \t\tvar data_send \t=  $(\".form_busqueda_desarrollo\").serialize();\n   68  \t\tbloquea_form(\".form_busqueda_desarrollo\");\n   69: \t\trequest_enid( \"GET\",  data_send, url, response_carga_metricas, \".place_metricas_desarrollo\");\n   70  \n   71  \t}else{\n   ..\n   88  \tvar data_send =  {};\n   89  \n   90: \trequest_enid( \"GET\" ,  data_send, url, function(){\n   91  \t\tllenaelementoHTML(\".place_metricas_comparativa\" , data);\n   92  \t\t$('th').click(ordena_table_general);\t\t\n   ..\n  102  \t\tvar url =  \"../q/index.php/api/desarrollo/global_calidad/format/json/\";\t\n  103  \t\tvar data_send =  $(\".form_busqueda_desarrollo_solicitudes\").serialize();\n  104: \t\trequest_enid( \"GET\",  data_send, url, response_carga_solicitudes,\".place_metricas_servicio\");\n  105  \t}else{\n  106  \t\t\n  ...\n  121  \tvar url =  \"../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/\";\t\t\n  122  \tvar data_send =  {\"id_usuario\" : get_option(\"id_usuario\") , \"id_departamento\" :  get_option(\"id_depto\") };\t\t\t\t\n  123: \trequest_enid( \"GET\",  data_send, url, 1, \".place_tareas_pendientes\" ,\".place_tareas_pendientes\" );\n  124  }\n  125  /**/\n  ...\n  128  \tvar url =  \"../q/index.php/api/tickets/form/format/json/\";\t\n  129  \tvar data_send =  {};\t\t\t\t\t\n  130: \trequest_enid( \"GET\",  data_send, url, response_form_nuevo_ticket,\".place_form_tickets\" );\n  131  }\n  132  /**/\n  ...\n  140  \tvar url =  \"../q/index.php/api/tickets/index/format/json/\";\n  141  \tvar data_send = $(\".form_ticket\").serialize();\t\t\t\t\n  142: \trequest_enid( \"POST\",  data_send, url, response_registro_ticket, \".place_registro_ticket\" );\n  143  \te.preventDefault();\n  144  \t\n  ...\n  158  \tvar url \t\t\t=  \t\"../q/index.php/api/tickets/status/format/json/\";\t\n  159  \tvar data_send \t\t=  \t{\"id_ticket\" : get_option(\"id_ticket\") , \"status\" : nuevo_estado };\t\t\t\t\n  160: \trequest_enid( \"PUT\",  data_send, url, function(){}, \".place_proyectos\");\n  161  }\n  162  /**/\n  ...\n  167  \tvar url =  \"../q/index.php/api/tickets/detalle/format/json/\";\t\n  168  \tvar data_send =  {\"id_ticket\" : get_option(\"id_ticket\")};\t\t\t\t\n  169: \trequest_enid( \"GET\",  data_send, url, response_carga_ticket);\n  170  }\n  171  /**/\n  ...\n  203  \tvar seccion \t=\t\".seccion_respuesta_\"+get_option(\"tarea\");\n  204  \n  205: \trequest_enid( \"GET\",  data_send, url, function(data){\n  206  \t\tllenaelementoHTML(seccion , data);\n  207  \t\t$(\".form_respuesta_ticket\").submit(registra_respuesta_pregunta);\n  ...\n  220  \tvar seccion \t=\t\".seccion_respuesta_\"+get_option(\"tarea\");\n  221  \tset_option(\"seccion\" , seccion);\n  222: \trequest_enid( \"GET\",  data_send, url, response_carga_comentario_tareas);\n  223  \t\n  224  \n  ...\n  232  \tvar seccion \t=\t\".seccion_respuesta_\"+tarea;\n  233  \tset_option(\"seccion\" , seccion);\n  234: \trequest_enid( \"GET\",  data_send, url, response_carga_comentario_tareas);\n  235  \t\n  236  }\n  ...\n  252  \tvar url \t\t\t=  \"../q/index.php/api/tarea/index/format/json/\";\t\n  253  \tvar data_send \t\t=  $(\".form_agregar_tarea\").serialize()+\"&\"+ $.param({\"id_ticket\" : get_option(\"id_ticket\") , \"tarea\": requerimiento });\t\t\t\t\n  254: \trequest_enid( \"POST\",  data_send, url, carga_info_detalle_ticket, \".place_proyectos\");\n  255  \te.preventDefault();\n  256  }\n  ...\n  283  \tvar data_send \t= \t{ \"status\" : status_ticket , \"id_departamento\" :  get_option(\"id_depto\") , \"keyword\" : get_option(\"keyword\"), \"modulo\": get_option(\"modulo\") };\t\t\t\t\n  284  \t\n  285: \trequest_enid( \"GET\",  data_send, url, response_carga_tickets, \".place_proyectos\" );\n  286  \t\n  287  }\n  ...\n  313  \tvar url \t\t\t=  \"../q/index.php/api/tarea/estado/format/json/\";\t\n  314  \tvar data_send \t\t= {\"id_tarea\" : get_option(\"id_tarea\") ,  \"nuevo_valor\" : nuevo_valor , \"id_ticket\" : get_option(\"id_ticket\") };\t\t\t\t\n  315: \trequest_enid( \"PUT\",  data_send, url, response_actualiza_tareas, \".place_proyectos\");\t\n  316  }\n  317  /**/\n\n/var/www/html/inicio/js_tema/faq/principal.js:\n   22  \tvar data_send\t= $(\".form_respuesta\").serialize()+\"&\"+$.param({\"respuesta\" : respuesta , \"editar_respuesta\" :  get_option(\"editar_respuesta\") , \"id_faq\" : get_option(\"faq\") });\t\n   23  \tvar url \t\t=  \"../q/index.php/api/faqs/respuesta/format/json/\";\n   24: \trequest_enid( \"POST\",  data_send, url, response_registro_respuesta, \".place_refitro_respuesta\" );\n   25  \te.preventDefault();\n   26  }\n   ..\n   54  \tvar data_send= {\"id_faq\" : get_option(\"faq\")};\t\n   55  \tvar url =  \"../q/index.php/api/faqs/respuesta/format/json/\";\n   56: \trequest_enid( \"GET\",  data_send, url, response_carga_info_faq);\n   57  }\t\n   58  /**/\n   ..\n   76  \tllenaelementoHTML(\".place_img_actual_faq\", \"<img src='\"+url_img_faq+\"' style='width:100%;'>\");\n   77      var url =  \"../imgs/index.php/api/img_controller/form_faq/format/json/\";    \n   78:    \trequest_enid( \"GET\",  data_send, url, response_carga_form_imagenes, \".place_load_img_faq\");\n   79  }\n   80  /**/\n   ..\n  141  \tvar url =  \"../q/index.php/api/faqs/categorias_extras/format/json/\";\n  142  \tvar data_send = {}; \n  143: \trequest_enid( \"GET\",  data_send, url, 1 , \".place_categorias_extras\" , 0 , \".place_categorias_extras\");\n  144  }\n\n/var/www/html/inicio/js_tema/js/clasificaciones.js:\n    3  \tvar  \tdata_send \t= $(\".form-tipo-talla\").serialize()+\"&\"+$.param({\"v\":1});\n    4  \tvar \turl\t\t\t= \"../q/index.php/api/tipo_talla/like_clasificacion/format/json/\";\n    5: \trequest_enid( \"GET\",  data_send , url , muestra_tipo_tallas);\n    6  \te.preventDefault();\n    7  }\n    .\n   24  \t\tvar  \tdata_send \t= $.param({\"id\":id , \"v\": 1});\n   25  \t\tvar \turl\t\t\t= \"../q/index.php/api/clasificacion/tipo_talla/format/json/\";\n   26: \t\trequest_enid( \"GET\",  data_send , url , muestra_tipo_talla );\n   27  \t}\t\n   28  }\n   ..\n   37  \tvar  \tdata_send \t= $(\".form-agregar-clasificacion-talla\").serialize()+\"&\"+$.param({\"id\":get_option(\"id\") , \"v\":1});\n   38  \tvar \turl\t\t\t= \"../q/index.php/api/clasificacion/tipo_talla_clasificacion/format/json/\";\n   39: \trequest_enid( \"GET\",  data_send , url , muestra_clasificaciones_disponibles );\n   40  \te.preventDefault();\n   41  }\n   ..\n   51  \tvar  \tdata_send \t=\t$.param({\"id_clasificacion\": id , \"id\": get_option(\"id\")});\n   52  \tvar \turl\t\t\t= \t\"../q/index.php/api/clasificacion/tipo_talla_clasificacion/format/json/\";\n   53: \trequest_enid( \"POST\",  data_send , url , muestra_estado_ingreso_tipo_talla );\n   54  \t\n   55  }\n\n/var/www/html/inicio/js_tema/js/direccion.js:\n    7  \t\tvar url \t\t=  \"../q/index.php/api/codigo_postal/cp/format/json/\";\t\n    8  \t\tvar data_send \t=  {\"cp\" : cp , \"delegacion\" : get_option(\"delegacion\") };\n    9: \t\trequest_enid( \"GET\",  data_send , url , response_auto_complete_direccion );\n   10  \t}\n   11  }\n   ..\n   66  \t\tvar data_send \t\t=  \t$(\".form_direccion_envio\").serialize();\t\t\n   67  \t\tvar url =  \t\"../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/\";\n   68: \t\trequest_enid( \"POST\",  data_send , url , response_registro_direccion);\n   69  \t}else{\n   70  \t\trecorrepage(\"#asentamiento\");\t\t\t\t\t\t\t\t\t\t\n   ..\n  109  \t\tplace_info =\".place_servicios_contratados\";\n  110  \t}\t\n  111: \trequest_enid( \"GET\",  data_send , url , function(data){\n  112  \t\tresponse_carga_informacion_envio_complete(data , place_info)\t\n  113  \t});\t\n  ...\n  137  \tvar url \t\t=  \"../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/\";\t\n  138  \tvar data_send \t=  {id_recibo : get_option(\"id_proyecto_persona_forma_pago\")};\t\t\t\t\n  139: \trequest_enid( \"GET\",  data_send , url , function(){\n  140  \t\tllenaelementoHTML(\".place_direccion_envio\" , data);\t\t\n  141  \t\trecorrepage(\".contenedo_compra_info\");\n\n/var/www/html/inicio/js_tema/js/main.js:\n   74  \tvar  data_send \t\t= {\"descripcion\" :  mensaje_error };\n   75  \tvar  mensaje_error \t= \"Se presentó error en \" +URLactual + \"  URLactual\";\n   76: \trequest_enid( \"POST\",  data_send , url , function(){\n   77  \t\t\n   78  \t}); \t\n   ..\n  278  \t\t\t\tvar  id_empresa = 1;\n  279  \t\t\t\tvar  data_send =   $(\"#form_contacto\").serialize()  + \"&\"+ $.param({\"empresa\" : id_empresa , \"tipo\" : 2 });\n  280: \t\t\t\trequest_enid( \"POST\",  data_send , url ,  response_mensaje_contacto , \".place_registro_contacto\");\t\t\t\t\t\n  281  \t\t\t}\n  282  \t}\n  ...\n  306  \t\t\t\t\t\t\t$(\".telefono_lead\").empty();\n  307  \t\t\t\t\t\t\tvar data_send =   $(\".form_enid_contacto\").serialize() + \"&\"+ $.param({\"empresa\" : 1 });\n  308: \t\t\t\t\t\t\trequest_enid( \"POST\",  data_send , url , response_registro_lead , \".place_registro_contacto\");\n  309  \t\t\t\t}\n  310  \t\t\t}\n  ...\n  340  \t\tvar \turl \t\t=  \"../q/index.php/api/productividad/notificaciones/format/json/\";\n  341  \t\tvar  \tdata_send \t= {id_usuario : get_parameter(\".id_usuario\") };\n  342: \t\trequest_enid( \"GET\",  data_send , url , response_metricas_perfil);\t\t\n  343  \t}\n  344  }\n  ...\n  424  \tvar seccion \t=\t\".seccion_respuesta_\"+get_tarea();\n  425  \tset_option(\"seccion\" , seccion);\n  426: \trequest_enid( \"POST\",  data_send , url , carga_comentarios_terea_simple ); \n  427  \te.preventDefault();\n  428  }\n  ...\n  660  }\n  661  /**/\n  662: function request_enid( method,  data_send, url, call_back, place_before_send = 0, before_send = 0 , place_render =\"\" ){\n  663  \tif (before_send ==  0) {\n  664  \t\tif (place_before_send.length >  0){\n\n/var/www/html/inicio/js_tema/js/metricas.js:\n    3  \tvar url \t\t=  \"../q/index.php/api/ventas/laborventa/format/json/\";\t\n    4  \tvar data_send \t=  $(\".form_busqueda_labor_venta\").serialize()+\"&\"+$.param({\"id_usuario\" : get_id_usuario() });\t\n    5: \trequest_enid( \"GET\",  data_send , url , call_back , \".place_metricas_labor_venta\");\t\t\n    6  \t\n    7  }\n\n/var/www/html/inicio/js_tema/js/notificaciones.js:\n    3  \tvar url \t\t=  \"../q/index.php/api/ventas_tel/num_agendados_validacion/format/json/\";\t\t\n    4  \tvar data_send \t=  {\"id_usuario\" : get_option(\"id_usuario\")};\t\t\t\t\n    5: \trequest_enid( \"GET\",  data_send , url , response_carga_numero_envios_a_validacion);\n    6  }\n    7  /**/\n    .\n   14  \tvar url \t\t=  \"../q/index.php/api/ventas_tel/num_agendados/format/json/\";\t\t\n   15  \tvar\tdata_send \t=  {\"id_usuario\" : get_option(\"id_usuario\") };\t\n   16: \trequest_enid( \"GET\",  data_send , url , response_num_agendados , \".place_llamada_hecha\");\t\t\t\n   17  }\n   18  /**/\n   ..\n   26  \tvar url \t\t=  \"../q/index.php/api/ventas_tel/num_clientes_restantes/format/json/\";\t\t\n   27  \tvar data_send \t=  {\"id_usuario\" : get_option(\"id_usuario\")};\t\t\t\t\n   28: \trequest_enid( \"GET\",  data_send , url , response_carga_num_clientes_restantes );\n   29  }\n   30  /**/\n   ..\n   37  \tvar url\t \t\t=  \"../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/\";\t\t\n   38  \tvar data_send \t=  {\"id_usuario\" : get_option(\"id_usuario\") , \"id_departamento\" :  get_depto() };\t\t\t\t\n   39: \trequest_enid( \"GET\",  data_send , url , response_carga_num_pendientes);\n   40  }\n   41  /**/\n\n/var/www/html/inicio/js_tema/js/persona.js:\n    3  \tvar url \t\t=  \"../msj/index.php/api/comentario/comentario_persona_usuario/format/json/\";\t\t\n    4  \tvar data_send \t=  $(\".form_comentarios\").serialize()+\"&\"+ $.param({\"id_persona\" : get_option(\"persona\")});\n    5: \trequest_enid( \"POST\",  data_send , url , response_agregar_comentario_a_usuario , \".place_nuevo_comentario\");\t\n    6  }\n    7  /**/\n    .\n   20  \tvar url \t\t=  \"../persona/index.php/api/clientes/persona/format/json/\";\t\n   21  \tvar data_send \t=  {\"id_persona\" : get_option(\"persona\")};\t\t\t\t\n   22: \trequest_enid( \"GET\",  data_send , url , response_carga_info_persona , \".place_info_posibles_clientes\");\n   23  \t\n   24  }\n   ..\n   65  \tvar data_send \t\t\t= $(\".form_convertir_cliente\").serialize()+\"&\"+$.param({\"id_persona\" : id_persona});\t\t\t\t\t\t\t\t\t\n   66  \tvar valor_tipo_actual \t=  $('input:radio[name=tipo]:checked').val();\n   67: \trequest_enid( \"PUT\",  data_send , url , response_convertir_cliente , \".place_convertir_cliente\");\n   68  \te.preventDefault();\t\n   69  }\n   ..\n   91  \tvar url \t\t=  \"../q/index.php/api/ventas/negocio_q/format/json/\";\t\t\n   92  \tvar data_send \t= {\"q\" :  $(\".tipo_negocio_b\").val()};\t\t\n   93: \trequest_enid( \"GET\",  data_send , url , response_verifica_tipo_negocio );\n   94  \te.preventDefault();\n   95  }\n   ..\n  106  \tvar url \t\t\t=  \"../persona/index.php/api/posiblesclientes/tipificacion/format/json/\";\t\t\n  107  \tvar data_send \t\t= {\"fecha_registro\" : fecha_registro ,  \"tipificacion\" :  get_tipificacion() , \"id_usuario\": get_id_usuario()}\t\n  108: \trequest_enid( \"GET\",  data_send , url , response_carga_data_contactos_efectivos , \".place_info_posibles_clientes\");\n  109  \te.preventDefault();\t\n  110  }\n\n/var/www/html/inicio/js_tema/lista_deseos/preferencias.js:\n   49  \tvar url = \"../q/index.php/api/usuario_clasificacion/interes/format/json/\";\n   50  \tvar data_send = {id_clasificacion : id_clasificacion};\n   51:     request_enid( \"PUT\",  data_send, url, response_agrega_interes, \".place_resumen_servicio\");\n   52  }\n   53  /**/\n\n/var/www/html/inicio/js_tema/login/ini.js:\n   25  \tvar data_send\t= { secret:get_option(\"tmp_password\") , \"email\" : get_option(\"email\") }\t\n   26  \tif (get_parameter(\"#mail\").length > 5 &&  get_parameter(\"#pw\").length > 5){\n   27: \t\trequest_enid( \"POST\",  data_send , url , response_inicio_session , 1 , before_inicio_session); \n   28  \t}else{\t\t\n   29  \t\tvar inputs = [\"#email\", \"#pw\"];\n   ..\n   70  \t\tvar url = $(\".form-pass\").attr(\"action\");\t\t\n   71  \t\tvar data_send =  $(\".form-pass\").serialize();\n   72: \t\trequest_enid( \"POST\",  data_send , url , response_recupera_password  , \".place_status_inicio\");\n   73  \t}\n   74  \te.preventDefault();\t\n   ..\n  139  \t\t\tset_option(\"nombre\" ,nombre);\t\n  140  \t\t\tvar  data_send = {\"nombre\" : nombre , \"email\" : email , \"password\": tmp_password}\t\t\t\t\t\t\t\t\t\t\t\t\n  141: \t\t\trequest_enid(\"POST\",  data_send , url , response_usuario_registro);\t\t\t\n  142  \t\t}\n  143  \t}\n\n/var/www/html/inicio/js_tema/movimientos/clientes.js:\n   20  \tvar data_send = {\"id_persona\" : id_persona , \"nuevo_valor\" :  nuevo_valor , \"name\" :  name };\n   21  \tvar url =  \"../persona/index.php/api/persona/q/format/json/\";\t\n   22: \trequest_enid( \"PUT\",  data_send, url, response_actualiza_info_campo , \".place_campo_editado\");\n   23  }\n   24  /**/\n   ..\n   37  \tvar data_send = {\"id_persona\" : id_persona , \"nuevo_valor\" :  nuevo_valor , \"name\" :  nuevo_name };\n   38  \tvar url =  \"../persona/index.php/api/persona/q/format/json/\";\t\n   39: \trequest_enid( \"PUT\",  data_send, url, response_actualiza_info_campo_change , \".place_campo_editado\" );\n   40  }\n   41  /**/\n\n/var/www/html/inicio/js_tema/movimientos/movimientos.js:\n    2  \tvar data_send = {}\n    3  \tvar url =  \"../q/index.php/api/tickets/movimientos_usuario/format/json/\";\n    4: \trequest_enid( \"GET\",  data_send, url, 1, \".place_movimientos\" , 0 , \".place_movimientos\");\n    5  }\n\n/var/www/html/inicio/js_tema/movimientos/notificaciones.js:\n    3  \tvar url =  \"../q/index.php/api/productividad/accesos_afiliados/format/json/\";\t\t\n    4  \tvar data_send =  {};\t\t\t\t\n    5: \trequest_enid( \"GET\",  data_send, url, response_num_accesos);\n    6  }\n    7  /**/\n\n/var/www/html/inicio/js_tema/movimientos/principal.js:\n   38  \tvar url =  \"../pagos/index.php/api/afiliados/metodos_disponibles_pago/format/json/\";\t\n   39  \tvar data_send = {};\t\n   40: \trequest_enid( method,  data_send, url, response_metodos_envio, \".place_info_cuentas_pago\" );\n   41  }\n   42  /**/\n   ..\n  114  \t\tvar url =  \"../pagos/index.php/api/afiliados/cuenta_afiliado/format/json/\";\t\t\t\t\t\t\n  115  \t\tvar data_send = {\"numero_tarjeta\" : get_numero_tarjeta(), \"banco\" : get_option(\"banco\"), \"propietario\" : get_propietario()};\t\n  116: \t\trequest_enid( \"PUT\",  data_send, url, metodos_de_envio_disponibles, \".place_info_cuentas_pago\");\n  117  \t}\n  118  \t\n\n/var/www/html/inicio/js_tema/movimientos/solicitud_saldo_amigo.js:\n   12  \tvar url =  \"../pagos/index.php/api/tickets/solicitud_amigo/format/json/\";\t\n   13  \tvar data_send =  $(\".solicitar_saldo_amigo_form\").serialize();\n   14: \trequest_enid( \"POST\",  data_send, url, response_solicita_saldo_amigo, \".place_solicitud_amigo\", before_solicitud_saldo );\n   15  \te.preventDefault();\t\n   16  }\n\n/var/www/html/inicio/js_tema/notificar/principal.js:\n   32  \t\t\tvar url \t\t=  \"../q/index.php/api/notificacion_pago/notifica_pago_usuario/format/json/\";\t\n   33  \t\t\tvar data_send \t=  $(\".form_notificacion\").serialize();\n   34: \t\t\trequest_enid( \"POST\",  data_send, url, response_notificacion_pago, \".placa_notificador_pago\" );\n   35  \t\t}else{\n   36  \n   ..\n   58  \tvar data_send =  {\"id_notificacion_pago\" : data};\t\n   59  \tvar url = \"../msj/index.php/api/emp/notifica_pago/format/json/\";\n   60: \trequest_enid( \"POST\",  data_send, url, response_notificacion_registro_pago , \".placa_notificador_pago\" );\t\n   61  }\n   62  /***/\n   ..\n   73  \tvar url \t\t=  \"../pagos/index.php/api/cobranza/info_saldo_pendiente/format/json/\";\t\n   74  \tvar data_send \t=  {\"recibo\" : num_recibo};\n   75: \trequest_enid( \"GET\",  data_send, url , response_autocomplete);\t\t\n   76  }\n   77  \n\n/var/www/html/inicio/js_tema/planes_servicios/img.js:\n    5  \tvar url        = \"../q/index.php/api/img/form_img_servicio_producto/format/json/\";\n    6  \tvar data_send  = $.param({\"id_servicio\" : get_option(\"servicio\")});\t\t    \n    7:     request_enid(\"GET\", data_send , url , response_cargar_form , \".place_img_producto\" );\t\t\t\t\t\n    8  }\n    9  /**/\n\n/var/www/html/inicio/js_tema/planes_servicios/principal.js:\n   42  \tvar \tdata_send \t= \t{ \"q\" : get_parameter(\".q_emp\") , \"id_clasificacion\" : get_option(\"id_clasificacion\") , \"page\" : get_option(\"page\"),\"order\": orden}\t\n   43  \n   44: \trequest_enid( \"GET\",  data_send , url , respuesta_carga_servicios , \".place_servicios\" , function(){\n   45  \n   46  \t\tshow_load_enid(\".place_servicios\" , \"\" , \"\");\n   ..\n   86  \tvar \turl \t\t= \"../q/index.php/api/servicio/especificacion/format/json/\";\n   87  \tvar  \tdata_send \t= {id_servicio : get_option(\"servicio\"),\"num\" : num}\n   88: \trequest_enid(\"GET\" , data_send , url , respuesta_informacion_servicio  , \".place_servicios\" , function(){\n   89  \t\trecorrepage(\".contenedor_principal_enid\");\t\n   90  \n   ..\n  152  \tvar url \t\t=  \"../q/index.php/api/servicio/entregas_en_casa/format/json/\";\t\n  153  \tvar data_send  \t= {entregas_en_casa : get_parameter_enid($(this) , \"id\") , id_servicio : get_option(\"servicio\")};\n  154: \trequest_enid( \"PUT\",  data_send , url , function(){\n  155  \t\tcarga_informacion_servicio(4);\n  156  \t} , \".place_sobre_el_negocio\" );\n  ...\n  160  \tvar  url \t\t=  \t\"../q/index.php/api/servicio/telefono_visible/format/json/\";\t\n  161  \tvar data_send  \t= \t{telefono_visible :get_parameter_enid( $(this),  \"id\") , id_servicio : get_option(\"servicio\")};\t\n  162: \trequest_enid(\"PUT\",  data_send , url , function(){\n  163  \t\tcarga_informacion_servicio(4);\n  164  \t} , \".place_sobre_el_negocio\" );\n  ...\n  169  \tvar  url \t\t=  \t\"../q/index.php/api/servicio/ventas_mayoreo/format/json/\";\t\n  170  \tvar  data_send  = \t{venta_mayoreo : get_parameter_enid($(this) , \"id\") , id_servicio : get_option(\"servicio\")};\t\n  171: \trequest_enid(\"PUT\", data_send , url , function(){\n  172  \t\tcarga_informacion_servicio(4);\n  173  \t} , \".place_sobre_el_negocio\");\t\n  ...\n  270  \t\t\"id_servicio\" : get_option(\"servicio\")\n  271  \t});\t\n  272: \trequest_enid(\"PUT\",  data_send , url , function(data){\n  273  \t\tcarga_informacion_servicio(4)\n  274  \t});\n  ...\n  284  \t});\n  285  \t/**/\n  286: \trequest_enid(\"PUT\",  data_send , url , function(data){\n  287  \t\tcarga_informacion_servicio(1);\n  288  \n  ...\n  296  \t\t\"id_servicio\" : get_option(\"servicio\")\n  297  \t});\n  298: \trequest_enid(\"PUT\",  data_send , url , function(data){\n  299  \t\tcarga_informacion_servicio(1);\n  300  \t});\n  ...\n  308  \t\t\"id_servicio\" : get_option(\"servicio\")\n  309  \t});\n  310: \trequest_enid(\"PUT\",  data_send , url , function(data){\n  311  \t\tcarga_informacion_servicio(1);\n  312  \t});\t\n  ...\n  343  \t\t\t\"id_servicio\" : get_option(\"servicio\")\n  344  \t\t});\n  345: \t\trequest_enid(\"PUT\",  data_send , url , function(data){\n  346  \t\t\tcarga_informacion_servicio(1);\n  347  \t\t});\t\t\n  ...\n  355  \t\t\"id_servicio\" : get_option(\"servicio\")\n  356  \t});\n  357: \trequest_enid(\"PUT\",  data_send , url , function(){\n  358  \t\tcarga_informacion_servicio(1);\n  359  \t});\t\t\n  ...\n  367  \t\t\"q2\" : $(\".note-editable\").html()\n  368  \t});\n  369: \trequest_enid(\"PUT\",  data_send , url , function(){\n  370  \t\tcarga_informacion_servicio(2);\n  371  \t});\t\n  ...\n  379  \t\t\"id_servicio\" : get_option(\"servicio\")\n  380  \t});\n  381: \trequest_enid(\"PUT\",  data_send , url , function(){\n  382  \t\tcarga_informacion_servicio(4);\n  383  \t} );\t\n  ...\n  388  \tvar  url \t\t= \"../q/index.php/api/servicio/grupos/format/json/\";\n  389  \tvar  data_send \t= {}\n  390: \trequest_enid(\"GET\" ,  data_send , url , respuesta_grupos );\t\n  391  }\n  392  /**/\n  ...\n  410  \tvar url \t\t= \"../q/index.php/api/servicio/grupo/format/json/\";\n  411  \tvar data_send \t= {grupo : get_option(\"grupo\")}\n  412: \trequest_enid(\"GET\",  data_send , url , respuesta_info_grupos );\n  413  \t\n  414  }\n  ...\n  425  \tvar  url \t\t= \"../q/index.php/api/servicio/grupo_form/format/json/\";\n  426  \tvar  data_send \t= {}\n  427: \trequest_enid( \"GET\", data_send , url , respuesta_nuevo_grupo , \".place_info_grupos\" );\t\n  428  }\n  429  /**/\n  ...\n  436  \tvar url \t\t= \t\"../q/index.php/api/servicio/grupo_form/format/json/\";\n  437  \tvar data_send \t= \t$(\".form_grupo_sistema\").serialize();\n  438: \trequest_enid(\"POST\", data_send , url , respuesta_grupo_sistema , \".place_info_grupos\", \"Cargando ... \");\n  439  \te.preventDefault();\n  440  }\n  ...\n  458  \tvar \turl \t\t= \"../q/index.php/api/servicio/servicios_grupo/format/json/\";\n  459  \tvar   \tdata_send \t= {grupo : get_option(\"grupo\")};\n  460: \trequest_enid( \"GET\",  data_send , url , respuestas_cargar_lista_servicios ,  \".place_servicios_en_grupos\" );\n  461  }\n  462  /**/\n  ...\n  475  \n  476  \tvar url \t\t\t= \"../q/index.php/api/servicio/servicio_grupo/format/json/\";\n  477: \trequest_enid(\"PUT\",  data_send , url , carga_grupos );\t\n  478  }\n  479  /**/\n  ...\n  564  \tvar  \tnombre \t\t=  \tget_parameter(\".nuevo_producto_nombre\");\n  565  \tvar \tdata_send \t=  \t{clasificacion : nombre , id_servicio : get_option(\"modalidad\")};\t\n  566: \trequest_enid(\"GET\" , data_send , url , listar_categorias );\t\n  567  }\n  568  /***/\n  ...\n  658  \tvar data_send \t= {\"modalidad\" : get_option(\"modalidad\"), \"padre\" : 0, \"nivel\" : get_option(\"nivel\"), \"is_mobile\": is_mobile(), nombre:nombre};\n  659  \tvar url \t\t= \"../q/index.php/api/servicio/lista_categorias_servicios/format/json/\";\n  660: \trequest_enid( \"GET\", data_send , url , respuestas_primer_nivel ,  \".primer_nivel_seccion\" );\t\n  661  }\n  662  /**/\n  ...\n  687  \tempty_elements([\".segundo_nivel_seccion\" , \".tercer_nivel_seccion\",\".cuarto_nivel_seccion\" ,\".quinto_nivel_seccion\" ,\".sexto_nivel_seccion\"]);\n  688  \tvar  data_send = {\"modalidad\" : get_option(\"modalidad\"), \"padre\" : get_option(\"padre\"), \"nivel\" : get_option(\"nivel\"), \"is_mobile\":is_mobile() };\t\n  689: \trequest_enid(\"GET\",  data_send , url , muestra_segundo_nivel ,  \".segundo_nivel_seccion\" );\t\n  690  }\n  691  function muestra_segundo_nivel(data){\n  ...\n  724  \t\t\"is_mobile\"\t: is_mobile()\n  725  \t};\n  726: \trequest_enid(\"GET\",   data_send , url , muestra_t_nivel , \".tercer_nivel_seccion\");\n  727  }\n  728  function muestra_t_nivel(data){\n  ...\n  758  \t\t\"is_mobile\"\t: is_mobile()\t\n  759  \t};\t\n  760: \trequest_enid(\"GET\",  data_send , url , muestras_c_nivel , \".cuarto_nivel_seccion\");\t\n  761  }\n  762  function muestras_c_nivel(data){\n  ...\n  793  \t\t\"is_mobile\"\t: is_mobile()\n  794  \t};\t\n  795: \trequest_enid(\"GET\" ,  data_send , url , muestra_q_nivel ,  \".quinto_nivel_seccion\");\t\n  796  }\n  797  /**/\n  ...\n  821  \t};\n  822  \tset_option(\"quinto_nivel\" , get_parameter(\".nivel_5 option:selected\"));\n  823: \trequest_enid(\"GET\", data_send , url , muestra_sexo_nivel ,  \".sexto_nivel_seccion\");\n  824  }\n  825  /**/\n  ...\n  855  \t\t\"quinto_nivel\" \t\t: get_option(\"quinto_nivel\")\n  856  \t}\t\n  857: \trequest_enid(\"POST\", data_send , url , response_registro);\t\n  858  }\n  859  /**/\n  ...\n  880  \tif (get_parameter_enid( $(this),  \"id\") > 0) {\n  881  \t\tvar data_send \t= {\"id_imagen\" : get_parameter_enid( $(this),  \"id\") , \"id_servicio\" : get_option(\"servicio\")}\n  882: \t\trequest_enid(\"DELETE\", data_send , url , function(){\n  883  \t\t\tcarga_informacion_servicio(1);\n  884  \t\t} , \".place_servicios\");\n  ...\n  889  \tvar  url \t\t= \"../q/index.php/api/servicio/metakeyword_usuario/format/json/\";\n  890  \tvar  data_send \t= $(\".form_tag\").serialize();\n  891: \trequest_enid(\"POST\", data_send , url , respuesta_agrega_metakeyword);\n  892  \t\n  893  \te.preventDefault();\n  ...\n  904  \tvar url \t\t= \"../q/index.php/api/servicio/metakeyword_usuario/format/json/\";\n  905  \tvar data_send \t= {\t\"tag\" : text, \"id_servicio\" : id_servicio };\n  906: \trequest_enid(\"DELETE\", data_send , url , respuesta_eliminar_tags );\t\n  907  }\n  908  /**/\n  ...\n  927  \t\t\"q\" \t\t\t: \"flag_nuevo\"\n  928  \t});\n  929: \trequest_enid(\"PUT\",  data_send , url , function(){\n  930  \t\tcarga_informacion_servicio(4);\n  931  \t});\n  ...\n  940  \t\t\t\t\t\t\t\"q\" \t\t: \"flag_envio_gratis\"\n  941  \t\t\t\t\t\t});\n  942: \trequest_enid(\"PUT\",  data_send , url , respuestas_actualiza_envio_incluido);\t\n  943  }\n  944  /**/\n  ...\n  954  \tvar url \t\t= \"../q/index.php/api/servicio/ciclo_facturacion/format/json/\";\n  955  \tvar data_send \t= $.param({\"id_servicio\" : get_option(\"servicio\"),\"ciclo_facturacion\" : get_option(\"id_ciclo_facturacion\")});\n  956: \trequest_enid(\"PUT\",  data_send , url , function(data){\n  957  \t\tcarga_informacion_servicio(4);\n  958  \t});\n  ...\n  968  \t\t\t\t\t\t\t\"q\" \t\t: \"existencia\"\n  969  \t\t\t\t\t\t});\n  970: \trequest_enid(\"PUT\",  data_send , url , respuesta_actualiza_cantidad );\n  971  }\n  972  /**/\n  ...\n  986  \t\t\t\t\t\t\t});\n  987  \tvar  url = \"../q/index.php/api/servicio/color/format/json/\";\n  988: \trequest_enid(\"POST\", data_send , url , respuesta_agregar_color);\t\n  989  }\n  990  /**/\n  ...\n  998  \tvar data_send \t= {};\n  999  \tvar url \t\t= \"../q/index.php/api/servicio/colores/format/json/\";\n 1000: \trequest_enid(\"GET\", data_send , url , respuesta_listado_colores , \".place_colores_disponibles\"  );\n 1001  }\n 1002  /**/\n ....\n 1015  \t});\n 1016  \tvar url = \"../q/index.php/api/servicio/color/format/json/\";\n 1017: \trequest_enid(\"DELETE\", data_send , url , respuesta_eliminar_color );\t\n 1018  }\n 1019  /**/\n ....\n 1084  \tvar \t\turl = \"../q/index.php/api/metakeyword/metakeyword_catalogo/format/json/\";\n 1085  \tvar  data_send \t=  {\"v\" : 1};\n 1086: \trequest_enid(\"GET\", data_send , url , muestra_sugerencias_meta_key_words);\t\n 1087  }\n 1088  /**/\n ....\n 1123  \tvar \turl \t\t=  \"../q/index.php/api/clasificacion/tallas_servicio/format/json/\";\t\t\n 1124  \tvar  \tdata_send  \t=  {\"id_servicio\" : get_option(\"servicio\") ,  \"nivel\" : 3 ,  \"v\":1};\n 1125: \trequest_enid(\"GET\",  data_send , url , muestra_clasificaciones_servicio);\n 1126  }\n 1127  /**/\n ....\n 1139  \t\tvar \turl \t\t=  \"../q/index.php/api/servicio/talla/format/json/\";\t\t\n 1140  \t\tvar  \tdata_send  \t=  {\"id_servicio\" : get_option(\"servicio\") ,  \"id_talla\" : id ,  \"existencia\": existencia };\n 1141: \t\trequest_enid(\"PUT\",  data_send , url , carga_tallas );\n 1142  \t}\n 1143  }\n ....\n 1147  \tvar \turl \t\t=  \"../q/index.php/api/servicio/tiempo_entrega/format/json/\";\t\t\n 1148  \tvar  \tdata_send  \t=  {\"id_servicio\" : get_option(\"servicio\") , \"tiempo_entrega\" : tiempo_entrega };\n 1149: \trequest_enid(\"PUT\",  data_send , url , respuesta_tiempo_entrega  , \".response_tiempo_entrega\" );\n 1150  \t\n 1151  \n ....\n 1162  \t\tvar \turl \t\t=  \"../q/index.php/api/imagen_servicio/principal/format/json/\";\t\t\n 1163  \t\tvar  \tdata_send  \t=  {\"id_servicio\" : get_option(\"servicio\") , \"id_imagen\" : id };\n 1164: \t\trequest_enid(\"PUT\",  data_send , url , carga_informacion_servicio(1), \".place_servicios\");\n 1165  \t}\n 1166  }\n ....\n 1173  \t\tvar  \tdata_send  \t=  {\"id_servicio\" : get_option(\"servicio\") , \"url\" : url_ml };\n 1174  \n 1175: \t\trequest_enid(\"PUT\",  data_send , url , carga_informacion_servicio(4), \".place_servicios\" , \tfunction(){\n 1176  \t\t\trecorrepage(\".url_mercado_libre\");\t\n 1177  \n\n/var/www/html/inicio/js_tema/pregunta/principal.js:\n   26  \t\tvar url \t\t=\t\"../q/index.php/api/pregunta/index/format/json/\";\n   27  \t\tvar data_send \t=  \t$(\".form_valoracion\").serialize();\t\t\t\t\n   28: \t\trequest_enid( \"POST\",  data_send, url, response_registro_valoracion, \".place_registro_valoracion\");\t\t\n   29  \t}\n   30  \te.preventDefault();\n   ..\n   50  \tvar url =  \"../tag/index.php/api/sugerencia/servicio/format/json/\";\t\t\n   51  \tvar data_send = {\"id_servicio\" : get_option(\"servicio\") }\t\n   52: \trequest_enid( \"GET\",  data_send, url, response_carga_productos_sugeridos, \".place_tambien_podria_interezar\");\n   53  }\n   54  /**/\n   ..\n   64  \turl =  \"../q/index.php/api/valoracion/articulo/format/json/\";\t\t\n   65  \tdata_send = {\"id_servicio\" : get_option(\"servicio\") , \"respuesta_valorada\" : get_option(\"respuesta_valorada\")}\t\n   66: \trequest_enid( \"GET\",  data_send, url, response_carga_valoraciones, \".place_registro_afiliado\");\t\n   67  }\n   68  /**/\n\n/var/www/html/inicio/js_tema/procesar/principal.js:\n   58  \t\t\t\t\tset_option(\"talla\"\t, $(\".talla\").val());\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n   59  \t\t\t\t\tvar data_send =  {\"password\": pwpost , \"email\" : get_option(\"email\") , \"nombre\" : get_option(\"nombre\"), \"telefono\": get_option(\"telefono\") , \"plan\" : get_option(\"plan\") , \"num_ciclos\" : get_option(\"num_ciclos\"), \"descripcion_servicio\" : get_option(\"descripcion_servicio\"), \"ciclo_facturacion\":get_option(\"ciclo_facturacion\"), \"usuario_referencia\":get_option(\"usuario_referencia\") , \"talla\" : get_option(\"talla\")};\t\t\t\t\n   60: \t\t\t\t\trequest_enid( \"POST\",  data_send, url, respuesta_registro, 0 , before_registro_afiliado);\t\n   61  \t\t\t\t}\t\t\t\n   62  \t\t\t}\t\t\n   ..\n  106  \tset_option(\"talla\"\t, $(\".talla\").val());\t\t\n  107  \tvar data_send =  {\"plan\" : get_option(\"plan\") , \"num_ciclos\": get_option(\"num_ciclos\"), \"descripcion_servicio\" : get_option(\"descripcion_servicio\"),\"ciclo_facturacion\":get_option(\"ciclo_facturacion\") ,  \"talla\" : get_option(\"talla\") };\t\t\t\t\t\n  108: \trequest_enid( \"POST\",  data_send, url, respuesta_proceso_venta_usuario_activo, \"\" , before_procesar_pedido_activo);\n  109  \t\n  110  }\n\n/var/www/html/inicio/js_tema/recomendaciones/principal.js:\n    7  \tvar data_send = {\"valoracion\" : valoracion,  \"utilidad\" :  num}\t\n    8  \tset_option(\"respuesta_valorada\" , valoracion);\t\t\n    9: \trequest_enid( \"PUT\",  data_send, url, carga_valoraciones);\n   10  }\n   11  function carga_valoraciones(){\n\n/var/www/html/inicio/js_tema/repo_enid/principal.js:\n   30  \tvar url \t\t=  \"../q/index.php/api/enid/usabilidad_landing_pages/format/json/\";\n   31  \tif (get_parameter(\".f_usabilidad #datetimepicker4\").length > 5 && get_parameter(\".f_usabilidad #datetimepicker5\").length > 5) {\n   32: \t\trequest_enid( \"GET\",  data_send , url , response_carga_uso_sistema , \".place_usabilidad_general\");\n   33  \t}else{\n   34  \t\tfocus_input(\".f_usabilidad #datetimepicker4\");\n   ..\n   46  \tvar url = \"../q/index.php/api/enid/prospectos_comparativa_d/format/json/\";\n   47  \tvar data_send = {};\n   48: \trequest_enid( \"GET\",  data_send , url , response_comparativa_dia , \".place_prospectos_comparativa\");\n   49  }\n   50  /**/\n   ..\n   64  \tvar data_send = {\"id_empresa\" :  empresa};\n   65  \t\n   66: \trequest_enid( \"GET\",  data_send , url , \n   67  \t\tfunction(){\n   68  \t\t\tllenaelementoHTML(\".place_miembros\" , data);\n   ..\n   75  \tvar url \t\t= \t\"../q/index.php/api/enid/resumen_global_admin_p/format/json/\";  \n   76  \tvar data_send \t= \t{periodo :  periodo};\t\n   77: \trequest_enid( \"GET\",  data_send , url, 1, \".info-resumen-prospecto\", \"\" , \".info-resumen-prospecto\" );\n   78  \n   79  }\n   ..\n   83  \tvar url \t\t=  \"../q/index.php/api/enid/resumen_global_admin_e/format/json/\"; \n   84  \tvar data_send \t= {periodo :  periodo}; \n   85: \trequest_enid( \"GET\",  data_send, url, 1, \".info-resumen-prospecto\" , \"\" , \".info-resumen-prospecto\" ); \n   86  }\n   87  */\n   ..\n   91  \tvar url \t\t\t\t\t= \"../q/index.php/api/enid/nuevos_miembros/format/json/\";\n   92  \tvar data_send \t\t\t\t= {};\n   93: \trequest_enid( \"GET\", data_send , url, 1, \".nuevos_miembros\", \"\" , \".nuevos_miembros\" );\n   94  }\n   95  /**/\n   ..\n  107  \tif (get_parameter(\".form_busqueda_mail_enid #datetimepicker4\").length > 5 && get_parameter(\".form_busqueda_mail_enid #datetimepicker5\").length >5) {\n  108  \n  109: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mail_marketing\", 0 , \".place_mail_marketing\" );\n  110  \t}else{\n  111  \t\tfocus_input(\".form_busqueda_mail_enid #datetimepicker4\");\n  ...\n  125  \tif (f_inicio.length > 5 &&  f_termino.length > 5 ) {\n  126  \t\tbloquea_form(\".form_busqueda_global_enid\");\t\t\n  127: \t\trequest_enid( \"GET\",  data_send, url, response_indicadores, \".place_usabilidad\", 0 , \".place_usabilidad\" );\n  128  \t}else{\n  129  \t\tfocus_input(\".form_busqueda_global_enid #datetimepicker4\");\n  ...\n  155  \t\tvar data_send \t= { \"fecha\" : fecha}; \t\n  156  \t\tvar url \t\t= \"../q/index.php/api/portafolio/info_proyectos_fecha/format/json/\";\t\n  157: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mas_info\" , 0 , \".place_mas_info\" );\t\t\t\n  158  \t}\t\n  159  }\n  ...\n  166  \t\tvar  data_send \t= {\"fecha\" : fecha}; \t\n  167  \t\tvar  url \t\t=  \"../q/index.php/api/cotizaciones/cotizaciones_sitios_web/format/json/\";\t\n  168: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mas_info\", 0 , \".place_mas_info\" );  \n  169  \t}\n  170  }\n  ...\n  179  \t\tvar data_send \t= {\"fecha\" : fecha}; \t\n  180  \t\tvar url \t\t=  \"../q/index.php/api/cotizaciones/sitios_web/format/json/\";\t\n  181: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mas_info\" , 0 , \".place_mas_info\");\n  182  \t\t\t\n  183  \t}\n  ...\n  193  \t\tvar  data_send \t= {\"fecha\" : fecha}; \t\n  194  \t\tvar  url \t\t=  \"../q/index.php/api/cotizaciones/adwords/format/json/\";\t\n  195: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mas_info\" ,  0 , \".place_mas_info\" );\n  196  \t}\n  197  }\n  ...\n  205  \t\tvar  \tdata_send \t= {\"fecha\" : fecha}; \t\n  206  \t\tvar \turl \t\t= \"../q/index.php/api/cotizaciones/tienda_en_linea/format/json/\";\t\n  207: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mas_info\" ,  0 , \".place_mas_info\" );\t\n  208  \t}\n  209  \t\n  ...\n  220  \t\tvar  \tdata_send \t= {\"fecha\" : fecha}; \t\n  221  \t\tvar \turl \t\t=  \"../q/index.php/api/cotizaciones/crm/format/json/\";\t\n  222: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mas_info\" ,  0 , \".place_mas_info\" );\t\n  223  \t}\n  224  }\n  ...\n  232  \t\tvar  \tdata_send \t= {\"fecha\" : fecha}; \t\n  233  \t\tvar \turl \t\t=  \"../q/index.php/api/base/registros/format/json/\";\t\n  234: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mas_info\" ,  0 , \".place_mas_info\" );\t\n  235  \t}\t\n  236  }\n  ...\n  244  \t\tvar  \tdata_send \t= {\"fecha\" : fecha}; \t\n  245  \t\tvar \turl \t\t=  \"../q/index.php/api/base/enviados/format/json/\";\t\n  246: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mas_info\" ,  0 , \".place_mas_info\" );\t\n  247  \t}\t\n  248  }\n  ...\n  257  \t\tvar  \tdata_send \t= {\"fecha\" : fecha}; \t\n  258  \t\tvar \turl =  \"../q/index.php/api/blog/fecha/format/json/\";\t\n  259: \t\trequest_enid( \"GET\",  data_send, url, 1, \".place_mas_info\" ,  0 , \".place_mas_info\" );\t\n  260  \t}\t\n  261  \t\n  ...\n  267  \tvar \tdata_send \t=  $(\"#form_metas\").serialize(); \t\n  268  \tvar  \turl \t\t=  \"../q/index.php/api/objetivos/meta/format/json/\";\n  269: \trequest_enid( \"POST\",  data_send, url, response_registro_metas , \".place_registro_metas\"); \t\n  270  \te.preventDefault();\n  271  }\n  ...\n  317  \t\tvar data_send \t= {fecha : get_fecha() , \"tipo\": 1}; \t\t\n  318  \t\tvar url \t\t=  \"../q/index.php/api/productividad/num_clientes/format/json/\";\t\n  319: \t\trequest_enid( \"GET\",  data_send, url, response_carga_info_cliente_prospecto, \".place_mas_info\");\n  320  \t}\n  321  }\n  ...\n  335  \t\tvar  data_send = {fecha : get_fecha() , \"tipo\": 15}; \t\n  336  \t\tvar url =  \"../q/index.php/api/productividad/contactos_lead/format/json/\";\t\t\t\n  337: \t\trequest_enid( \"GET\",  data_send, url, response_cargar_contactos_promociones, \".place_mas_info\" );  \t\n  338  \t}\n  339  }\n  ...\n  381  \t\tvar  \tdata_send \t= {fecha : get_fecha() , \"tipo\": 1}; \t\n  382  \t\tvar \turl \t\t=  \"../q/index.php/api/productividad/num_afiliados/format/json/\";\t\n  383: \t\trequest_enid( \"GET\",  data_send, url, response_info_afiliados, \".place_mas_info\", 0 , \".place_mas_info\" );\t\t\n  384  \t}\n  385  }\n  ...\n  396  \n  397  \tif (get_parameter(\".form_busqueda_desarrollo #datetimepicker4\").length > 5 && get_parameter(\".form_busqueda_desarrollo #datetimepicker5\").length >5 ) {\n  398: \t\trequest_enid( \"GET\",  data_send, url, response_carga_metricas_desarrollo , \".place_metricas_desarrollo\" );\t\n  399  \t}else{\n  400  \t\tfocus_input(\".form_busqueda_desarrollo #datetimepicker5\");\n  ...\n  415  \tvar url \t\t=  \"../q/index.php/api/desarrollo/comparativas/format/json/\";\t\n  416  \tvar data_send \t=  {};\n  417: \trequest_enid( \"GET\",  data_send, url, response_carga_comparativa, \".place_metricas_comparativa\" , 0 , \".place_metricas_comparativa\"  );\n  418  \te.preventDefault();\t\n  419  }\n  ...\n  428  \tvar url \t\t=  \"../q/index.php/api/desarrollo/global_calidad/format/json/\";\t\n  429  \tvar data_send \t=  $(\".form_busqueda_desarrollo_solicitudes\").serialize();\n  430: \trequest_enid( \"GET\",  data_send, url, response_carga_solicitudes_cliente, \".place_metricas_servicio\", 0 , \".place_metricas_servicio\" ); \t\n  431  \te.preventDefault();\n  432  } \n  ...\n  443  \n  444  \tif (get_parameter(\".form_busqueda_afiliacion #datetimepicker4\").length > 5 && get_parameter(\".form_busqueda_afiliacion #datetimepicker5\").length > 5) {\n  445: \t\trequest_enid( \"GET\",  data_send, url, 1,\".place_repo_afiliacion\", 0 , \".place_repo_afiliacion\"); \t\n  446  \t}else{\n  447  \t\tfocus_input(\".form_busqueda_afiliacion #datetimepicker4\");\n  ...\n  455  \tvar \turl \t\t=  \"../q/index.php/api/afiliacion/afiliados_productividad/format/json/\";\t\n  456  \tvar  \tdata_send \t=  $(\".form_busqueda_afiliacion_productividad\").serialize();\n  457: \trequest_enid( \"GET\",  data_send, url, 1, \".place_repo_afiliacion_productividad\", 0 , \".place_repo_afiliacion_productividad\" );\n  458  \te.preventDefault();\t\n  459  }\n  ...\n  467  \t\n  468  \tif (get_parameter(\".form_busqueda_productos_solicitados #datetimepicker4\").length > 5 &&  get_parameter(\".form_busqueda_productos_solicitados #datetimepicker5\").length > 5 ) {\n  469: \t\trequest_enid( \"GET\",  data_send, url, 1 , \".place_keywords\" , 0 , \".place_keywords\" );\t\n  470  \t}else{\n  471  \t\tfocus_input(\".form_busqueda_productos_solicitados #datetimepicker4\");\n  ...\n  481  \tvar \turl \t\t\t=  \"../persona/index.php/api/equipo/usuarios/format/json/\";\t\n  482  \tvar \tdata_send \t\t=  {\"fecha_inicio\":fecha_inicio , \"fecha_termino\":  fecha_termino ,  \"page\" : get_option(\"page\")};\n  483: \trequest_enid( \"GET\",  data_send , url, response_resumen_usuarios, \".place_reporte\"); \n  484  }\n  485  /**/\n  ...\n  508  \tvar  \tdata_send \t\t=  \t{\"fecha_inicio\":fecha_inicio , \"fecha_termino\":  fecha_termino};\n  509  \tvar \turl \t\t\t=  \t\"../q/index.php/api/cotizaciones/contactos/format/json/\";\t\n  510: \trequest_enid( \"GET\",  data_send, url, 1, \".place_reporte\", 0 , \".place_reporte\"); \t\n  511  }\n  512  /**/\n  ...\n  518  \tvar  \tdata_send \t\t=  \t{\"fecha_inicio\":fecha_inicio , \"fecha_termino\":  fecha_termino , \"tipo\" : tipo ,  \"v\" : 1};\n  519  \tvar \turl \t\t\t=  \t\"../pagos/index.php/api/tickets/compras/format/json/\";\t\n  520: \trequest_enid( \"GET\",  data_send, url, 1, \".place_reporte\", 0 , \".place_reporte\" );  \n  521  }\n  522  /**/\n  ...\n  527  \tvar data_send \t\t\t=  {\"fecha_inicio\":fecha_inicio , \"fecha_termino\":  fecha_termino };\n  528  \tvar url \t\t\t\t=  \"../q/index.php/api/valoracion/resumen_valoraciones_periodo/format/json/\";\t\n  529: \trequest_enid( \"GET\",  data_send, url, 1, \".place_reporte\",  0 , \".place_reporte\" );\t\t\t\t\n  530  }\n  531  /**/\n  ...\n  537  \n  538  \tvar url \t\t\t\t=  \"../q/index.php/api/servicio/periodo/format/json/\";\t\n  539: \trequest_enid( \"GET\",  data_send, url, 1, \".place_reporte\", 0 , \".place_reporte\" );\t\t\t\t\n  540  }\n  541  /**/\n  ...\n  546  \tvar  \tdata_send \t\t=  {\"fecha_inicio\":fecha_inicio , \"fecha_termino\":  fecha_termino };\n  547  \tvar  \turl \t\t\t=  \"../q/index.php/api/valoracion/resumen_valoraciones_periodo_servicios/format/json/\";\t\n  548: \trequest_enid( \"GET\",  data_send, url, 1, \".place_reporte\",  0 , \".place_reporte\" );\n  549  \t\n  550  }\n  ...\n  556  \tvar \tdata_send \t\t=  \t{\"fecha_inicio\":fecha_inicio , \"fecha_termino\":  fecha_termino };\n  557  \tvar  \turl \t\t\t=  \t\"../q/index.php/api/servicio/lista_deseos_periodo/format/json/\";\t\n  558: \trequest_enid( \"GET\",  data_send , url, 1, \".place_reporte\" , 0 , \".place_reporte\" );\t\n  559  }\n  560  /**/\n  ...\n  565  \t\n  566  \tif (get_parameter(\".f_actividad_productos_usuarios #datetimepicker4\").length > 5 && get_parameter(\".f_actividad_productos_usuarios #datetimepicker5\").length > 5) {\n  567: \t\trequest_enid( \"GET\",  data_send, url, info_usabilidad, \".place_reporte\"); \t\n  568  \t}else{\t\t\n  569  \t\tfocus_input(\".f_actividad_productos_usuarios #datetimepicker4\");\n  ...\n  578  \t\n  579  \tif (get_parameter(\".f_dipositivos #datetimepicker4\").length > 5 && get_parameter(\".f_dipositivos #datetimepicker5\").length > 5) {\n  580: \t\trequest_enid( \"GET\",  data_send, url, 1, \".repo_dispositivos\", 0, \".repo_dispositivos\"); \t\n  581  \t}else{\t\t\n  582  \t\tfocus_input(\".f_dipositivos #datetimepicker4\");\n\n/var/www/html/inicio/js_tema/servicio/pre.js:\n    6  \tvar data_send  = $.param({\"tipo\" : tipo , \"id_servicio\" : id_servicio});\n    7  \tvar url \t   = \"../servicio/\";\n    8: \trequest_enid( \"PUT\",  data_send, url, call_back, place_before_send = 0, before_send = 0 , place_render =\"\" );\n    9  }\n\n/var/www/html/inicio/js_tema/usuarios_enid/principal.js:\n   60  \tvar url \t\t=  \t\"../q/index.php/api/usuario/miembros_activos/format/json/\";\t\n   61  \tvar data_send \t= \t{\"status\": get_option(\"estado_usuario\") , \"id_departamento\" : get_option(\"depto\") , \"page\" : get_option(\"page\") };\t\t\t\t\t\n   62: \trequest_enid( \"GET\",  data_send, url, response_carga_usuario);\n   63  }\n   64  /**/\n   ..\n   93  \tvar url \t\t=  \t\"../q/index.php/api/usuario/miembro/format/json/\";\t\n   94  \tvar data_send \t= \t{\"id_usuario\" : get_option(\"id_usuario\")};\t\t\t\t\t\n   95: \trequest_enid( \"GET\",  data_send, url, response_carga_data_usuario);\n   96  }\n   97  /**/\n   ..\n  135  \tvar depto \t\t=  \t$(\".form-miembro-enid-service .depto\" ).val();\t\n  136  \tvar data_send \t= \t{id_departamento : depto};\t\t\t\t\t\n  137: \trequest_enid( \"GET\", data_send, url, response_puesto_por_cargo);\n  138  }\n  139  /**/\n  ...\n  148  \tvar data_send \t=  $(\".form-miembro-enid-service\").serialize()+\"&\"+$.param({\"id_usuario\" : get_option(\"id_usuario\"), \"editar\" : get_option(\"flag_editar\") });\t\n  149  \tvar url \t\t=  \"../q/index.php/api/usuario/miembro/format/json/\";\t\t\t\n  150: \trequest_enid(\"POST\", data_send, url, function(data){\n  151  \t\tresponse_actualizacion_usuario(data, data_send);\t\t\n  152  \t});\t\n  ...\n  174  \tset_option(\"id_perfil\" , $(\".perfil_enid_service\").val());  \n  175  \tvar data_send \t= \t{\"id_perfil\" : get_option(\"id_perfil\") };\t\t\t\t\t\t\n  176: \trequest_enid( \"GET\",  data_send, url, response_carga_mapa);\n  177  \t\n  178  }\n  ...\n  188  \tvar url \t\t=  \t\"../q/index.php/api/perfil_recurso/permiso/format/json/\";\t\n  189  \tvar data_send \t= \t{\"id_perfil\" : get_option(\"id_perfil\"),  \"id_recurso\" : get_option(\"id_recurso\")};\t\t\t\t\t\n  190: \trequest_enid( \"PUT\",  data_send, url , carga_mapa_menu );\t\n  191  }\n  192  /**/\n  ...\n  194  \tvar data_send \t=  $(\".form_recurso\").serialize();\t\n  195  \tvar url \t\t=  \"../q/index.php/api/recurso/index/format/json/\";\t\n  196: \trequest_enid( \"POST\",  data_send, url, response_registro_recurso);\n  197  \te.preventDefault();\n  198  }\n\n/var/www/html/inicio/js_tema/valoracion/principal.js:\n   59  \t\t\tvar data_send =  $(\".form_valoracion\").serialize()+\"&\"+$.param({\"calificacion\" : get_option(\"calificacion\"), \"recomendaria\" : get_option(\"recomendaria\") });\t\n   60  \t\t\t\n   61: \t\t\trequest_enid( \"POST\",  data_send, url, response_registro_valoracion,  0, before_registro_valoracion);\n   62  \t\t\t\n   63  \t\t\t\t\t\t\n\n/var/www/html/inicio/notificar/application/notificar_/principal.js:\n   32  \t\t\tvar url \t\t=  \"../pagos/index.php/api/cobranza/notifica_pago_usuario/format/json/\";\t\n   33  \t\t\tvar data_send \t=  $(\".form_notificacion\").serialize();\n   34: \t\t\trequest_enid( \"POST\",  data_send, url, response_notificacion_pago, \".placa_notificador_pago\" );\n   35  \t\t}else{\n   36  \n   ..\n   58  \tvar data_send =  {\"id_notificacion_pago\" : data};\t\n   59  \tvar url = \"../msj/index.php/api/emp/notifica_pago/format/json/\";\n   60: \trequest_enid( \"POST\",  data_send, url, response_notificacion_registro_pago , \".placa_notificador_pago\" );\t\n   61  }\n   62  /***/\n   ..\n   72  \tvar url \t\t=  \"../pagos/index.php/api/cobranza/info_saldo_pendiente/format/json/\";\t\n   73  \tvar data_send \t=  {\"recibo\" : get_parameter(\".num_recibo\")};\n   74: \trequest_enid( \"GET\",  data_send, url , response_autocomplete);\t\t\n   75  }\n   76  \n\n/var/www/html/inicio/producto/application/js/principal.js:\n   29  \tvar q \t\t\t=  get_parameter(\".qservicio\");  \t\n   30  \tvar data_send \t= {\"id_servicio\" : get_option(\"servicio\") , \"q\" :  q}\t\n   31: \trequest_enid( \"GET\",  data_send, url, response_carga_productos);\n   32  }\n   33  /**/\n   ..\n   41  \tvar url \t\t=  \"../q/index.php/api/valoracion/articulo/format/json/\";\t\t\n   42  \tvar data_send\t= {\"id_servicio\" : get_option(\"servicio\") , \"respuesta_valorada\" : get_option(\"respuesta_valorada\")}\t\n   43: \trequest_enid( \"GET\",  data_send, url, response_carga_valoraciones);\n   44  }\n   45  /**/\n   ..\n   64  \tvar data_send = {\"valoracion\" : valoracion,  \"utilidad\" :  num}\t\n   65  \tset_option(\"respuesta_valorada\" , valoracion);\t\t\n   66: \trequest_enid( \"PUT\",  data_send, url, carga_valoraciones);\n   67  }\n   68  /**/\n   ..\n  108  \tvar url =  \"../q/index.php/api/usuario_deseo/lista_deseos/format/json/\";\t\t\n  109  \tvar data_send = {\"id_servicio\" : get_option(\"servicio\")}\t\t\n  110: \trequest_enid( \"PUT\",  data_send, url, respuesta_add_valoracion);\n  111  }\n  112  /**/\n\n183 matches across 35 files\n",
-			"settings":
-			{
-				"buffer_size": 53174,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "js_tema/js/main.js",
-			"settings":
-			{
-				"buffer_size": 19958,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -658,18 +577,104 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/imgs",
-		"/var/www/html/inicio/imgs/application",
-		"/var/www/html/inicio/imgs/application/controllers",
-		"/var/www/html/inicio/js_tema",
-		"/var/www/html/inicio/js_tema/servicio",
-		"/var/www/html/inicio/js_tema/sobre_enid_service"
+		"/var/www/html/inicio/puntos_medios",
+		"/var/www/html/inicio/puntos_medios/application",
+		"/var/www/html/inicio/puntos_medios/application/controllers",
+		"/var/www/html/inicio/puntos_medios/application/views",
+		"/var/www/html/inicio/reporte_enid",
+		"/var/www/html/inicio/reporte_enid/application",
+		"/var/www/html/inicio/reporte_enid/application/controllers"
 	],
 	"file_history":
 	[
+		"/var/www/html/inicio/puntos_medios/application/views/home.php",
+		"/var/www/html/inicio/view_tema/inputs_fecha_busqueda.php",
+		"/var/www/html/inicio/puntos_medios/application/views/quien_recibe.php",
+		"/var/www/html/inicio/js_tema/puntos_medios/principal.js",
+		"/var/www/html/inicio/helpers/enid_helper.php",
+		"/var/www/html/inicio/puntos_medios/application/controllers/home.php",
+		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
+		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
+		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
+		"/var/www/html/inicio/js_tema/contact/principal.js",
+		"/var/www/html/inicio/contact/application/views/preso_compra.php",
+		"/var/www/html/inicio/q/application/helpers/lineametro_helper.php",
+		"/var/www/html/inicio/extra.sql",
+		"/var/www/html/inicio/css_tema/template/puntos_encuentro.css",
+		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
 		"/var/www/html/inicio/js_tema/js/main.js",
-		"/var/www/html/inicio/css_tema/template/pre.css",
 		"/var/www/html/inicio/producto/application/views/pre.php",
+		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
+		"/var/www/html/inicio/q/application/controllers/api/linea_metro.php",
+		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
+		"/var/www/html/inicio/q/application/controllers/api/clasificacion.php",
+		"/var/www/html/inicio/q/application/models/linea_metro_model.php",
+		"/var/www/html/inicio/css_tema/template/main.css",
+		"/var/www/html/inicio/q/application/models/punto_encuentro_model.php",
+		"/var/www/html/inicio/view_tema/footer_template.php",
+		"/var/www/html/inicio/contact/application/views/secciones/solicita_una_llamada.php",
+		"/var/www/html/inicio/q/application/controllers/api/tipo_punto_encuentro.php",
+		"/var/www/html/inicio/q/application/models/tipo_punto_encuentro_model.php",
+		"/var/www/html/inicio/js_tema/servicio/pre.js",
+		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
+		"/var/www/html/inicio/reporte_enid/application/views/secciones/menu.php",
+		"/var/www/html/inicio/reporte_enid/application/views/empresas_enid.php",
+		"/var/www/html/inicio/producto/application/controllers/home.php",
+		"/var/www/html/inicio/q/application/helpers/servicios_helper.php",
+		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
+		"/var/www/html/inicio/js_tema/repo_enid/principal.js",
+		"/var/www/html/inicio/js_tema/procesar/principal.js",
+		"/var/www/html/inicio/js_tema/login/ini.js",
+		"/var/www/html/inicio/js_tema/area_cliente/buzon.js",
+		"/var/www/html/inicio/procesar/application/helpers/procesar_helper.php",
+		"/var/www/html/inicio/procesar/application/views/secciones_2/paginas_web.php",
+		"/var/www/html/inicio/css_tema/template/contact.css",
+		"/var/www/html/inicio/contact/application/controllers/home.php",
+		"/var/www/html/inicio/contact/application/views/home.php",
+		"/var/www/html/inicio/q/application/models/usuario_model.php",
+		"/var/www/html/inicio/login/application/controllers/startsession.php",
+		"/var/www/html/inicio/login/application/views/signin.php",
+		"/var/www/html/inicio/procesar/application/controllers/home.php",
+		"/var/www/html/inicio/system/core/Input.php",
+		"/var/www/html/inicio/js_tema/contact/principal.css",
+		"/var/www/html/inicio/view_tema/seccion_iniciar_session.php",
+		"/var/www/html/inicio/librerias/principal.php",
+		"/var/www/html/inicio/login/application/controllers/api/sess.php",
+		"/var/www/html/inicio/librerias/sessionclass.php",
+		"/var/www/html/inicio/system/core/Controller.php",
+		"/var/www/html/inicio/css_tema/template/metricas.css",
+		"/var/www/html/inicio/orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php",
+		"/var/www/html/inicio/index.php",
+		"/var/www/html/inicio/producto/application/views/compra.php",
+		"/var/www/html/inicio/area_cliente/application/views/secciones/menu.php",
+		"/var/www/html/inicio/view_tema/header_template.php",
+		"/var/www/html/inicio/view_tema/menu_session.php",
+		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
+		"/var/www/html/inicio/css_tema/template/producto_principal.css",
+		"/var/www/html/inicio/q/application/controllers/api/paginacion.php",
+		"/var/www/html/inicio/q/application/models/pagina_web_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/pagina_web.php",
+		"/var/www/html/inicio/system/database/DB_query_builder.php",
+		"/var/www/html/inicio/administracion_cuenta/application/views/home.php",
+		"/var/www/html/inicio/css_tema/template/procesar_pago.css",
+		"/var/www/html/inicio/js_tema/area_cliente/principal.js",
+		"/var/www/html/inicio/area_cliente/application/views/home.php",
+		"/var/www/html/inicio/debug/debug.log",
+		"/var/www/html/inicio/js_tema/area_cliente/cobranza.js",
+		"/var/www/html/inicio/debug/debug.php",
+		"/var/www/html/inicio/area_cliente/application/controllers/home.php",
+		"/var/www/html/inicio/js_tema/area_cliente/proyectos_persona.js",
+		"/var/www/html/inicio/js_tema/js/direccion.js",
+		"/var/www/html/inicio/q/application/views/proyecto/domicilio_envio.php",
+		"/var/www/html/inicio/q/application/views/ventas/call_to_action.php",
+		"/var/www/html/inicio/js_tema/planes_servicios/principal.js",
+		"/var/www/html/inicio/q/application/controllers/api/codigo_postal.php",
+		"/var/www/html/inicio/system/libraries/Session.php",
+		"/var/www/html/inicio/producto/application/views/home.php",
+		"/var/www/html/inicio/q/application/views/valoraciones/articulo.php",
+		"/var/www/html/inicio/producto/application/views/form_compra.php",
+		"/var/www/html/inicio/css_tema/template/producto.css",
+		"/var/www/html/inicio/css_tema/template/pre.css",
 		"/var/www/html/inicio/js_tema/sobre_enid_service/principal.js",
 		"/var/www/html/inicio/q/application/views/valoraciones/form_servicio.php",
 		"/var/www/html/inicio/desarrollo/index.php",
@@ -678,7 +683,6 @@
 		"/var/www/html/inicio/base_/index.php",
 		"/var/www/html/inicio/area_cliente/index.php",
 		"/var/www/html/inicio/administracion_cuenta/index.php",
-		"/var/www/html/inicio/helpers/enid_helper.php",
 		"/var/www/html/inicio/faq/index.php",
 		"/var/www/html/inicio/forma_pago/index.php",
 		"/var/www/html/inicio/imgs/index.php",
@@ -710,91 +714,7 @@
 		"/var/www/html/inicio/valoracion/index.php",
 		"/var/www/html/inicio/q/application/helpers/tickets_helper.php",
 		"/var/www/html/inicio/q/application/views/tickets/detalle.php",
-		"/var/www/html/inicio/librerias/principal.php",
-		"/var/www/html/inicio/q/application/controllers/api/tickets.php",
-		"/var/www/html/inicio/q/application/controllers/api/tarea.php",
-		"/var/www/html/inicio/index.php",
-		"/var/www/html/inicio/system/core/CodeIgniter.php",
-		"/var/www/html/inicio/planes_servicios/application/views/home_enid.php",
-		"/var/www/html/inicio/planes_servicios/application/controllers/inicio.php",
-		"/var/www/html/inicio/producto/application/controllers/home.php",
-		"/var/www/html/inicio/q/application/helpers/q_helper.php",
-		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
-		"/var/www/html/inicio/librerias/sessionclass.php",
-		"/var/www/html/inicio/search/application/controllers/home.php",
-		"/var/www/html/inicio/librerias/REST_Controller.php",
-		"/var/www/html/inicio/q/application/controllers/api/paginacion.php",
-		"/var/www/html/inicio/tag_/application/controllers/api/producto.php",
-		"/var/www/html/inicio/msj/application/helpers/areaclienteshelp_helper.php",
-		"/var/www/html/inicio/q/application/libraries/mensajeria_lead.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
-		"/var/www/html/inicio/js_tema/login/ini.js",
-		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
-		"/var/www/html/inicio/q/application/controllers/api/areacliente.php",
-		"/var/www/html/inicio/msj/application/controllers/api/mensajeria_lead.php",
-		"/var/www/html/inicio/msj/application/libraries/mensajeria.php",
-		"/var/www/html/inicio/planes_servicios/application/views/secciones/categorias_movil.php",
-		"/var/www/html/inicio/q/application/views/servicio/precios.php",
-		"/var/www/html/inicio/q/application/views/servicio/detalle.php",
-		"/var/www/html/inicio/css_tema/template/producto_principal.css",
-		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
-		"/var/www/html/inicio/producto/application/views/home.php",
-		"/var/www/html/inicio/js_tema/planes_servicios/principal.js",
-		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
-		"/var/www/html/inicio/css_tema/template/main.css",
-		"/var/www/html/inicio/css_tema/template/search_main.css",
-		"/var/www/html/inicio/css_tema/template/search_sin_encontrar.css",
-		"/var/www/html/inicio/css_tema/template/planes_servicios.css",
-		"/var/www/html/inicio/unete_a_nuestro_equipo/application/views/home.php",
-		"/var/www/html/inicio/faq/application/controllers/home.php",
-		"/var/www/html/inicio/faq/application/helpers/faq_helper.php",
-		"/var/www/html/inicio/base_/application/helpers/base_helper.php_.php",
-		"/var/www/html/inicio/faq/application/views/secciones_2/categorias.php",
-		"/var/www/html/inicio/q/application/controllers/api/categoria.php",
-		"/var/www/html/inicio/q/application/models/categoria_model.php",
-		"/var/www/html/inicio/q/application/helpers/base_helper.php",
-		"/var/www/html/inicio/faq/application/views/home.php",
-		"/var/www/html/inicio/faq/application/views/secciones_2/faqs_categorias.php",
-		"/var/www/html/inicio/base_/application/models/categoria_model.php_",
-		"/var/www/html/inicio/q/application/controllers/api/faqs.php",
-		"/var/www/html/inicio/q/application/models/faqsmodel.php",
-		"/var/www/html/inicio/q/application/views/producto/basico.php",
-		"/var/www/html/inicio/search/application/views/home.php",
-		"/var/www/html/inicio/planes_servicios/application/views/menu.php",
-		"/var/www/html/inicio/terminos-y-condiciones/application/views/secciones/terminos_condiciones.php",
-		"/var/www/html/inicio/view_tema/footer_template.php",
-		"/var/www/html/inicio/terminos-y-condiciones/application/controllers/home.php",
-		"/var/www/html/inicio/q/application/helpers/servicios_helper.php",
-		"/var/www/html/inicio/base_/application/views_/producto_/basico.php",
-		"/var/www/html/inicio/search/application/helpers/search_helper.php",
-		"/var/www/html/inicio/tag_/application/helpers/q_helper.php",
-		"/var/www/html/database.php",
-		"/var/www/html/database.php___----",
-		"/var/www/html/inicio/system/database/drivers/mysql/mysql_driver.php",
-		"/var/www/html/inicio/db/database.php",
-		"/var/www/html/inicio/contact/application/views/secciones/solicita_una_llamada.php",
-		"/var/www/html/inicio/persona_/application/controllers/api/equipo.php",
-		"/var/www/html/inicio/q/application/controllers/api/codigo_postal.php",
-		"/var/www/html/inicio/q/application/controllers/api/cron.php",
-		"/var/www/html/inicio/q/application/controllers/api/productividad.php",
-		"/var/www/html/inicio/extra.sql",
-		"/var/www/html/inicio/q/application/models/tickets_model.php",
-		"/var/www/html/inicio/area_cliente/application/views/home.php",
-		"/var/www/html/inicio/css_tema/template/desarrollo_principal.css",
-		"/var/www/html/inicio/q/application/views/tickets/respuestas.php",
-		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
-		"/var/www/html/inicio/q/application/views/tickets/form_respuesta.php",
-		"/var/www/html/inicio/q/application/controllers/api/respuesta.php",
-		"/var/www/html/inicio/desarrollo/application/views/empresas_enid.php",
-		"/var/www/html/inicio/q/application/views/tickets/principal_desarollo.php",
-		"/var/www/html/inicio/q/application/models/tareasmodel.php",
-		"/var/www/html/inicio/desarrollo/application/controllers/inicio.php",
-		"/var/www/html/inicio/procesar/application/views/secciones_2/paginas_web.php",
-		"/var/www/html/inicio/procesar/application/views/home.php",
-		"/var/www/html/inicio/q/application/helpers/usuario_direccion_helper.php",
-		"/var/www/html/inicio/js_tema/planes_servicios/img.js",
-		"/var/www/html/inicio/js_tema/administracion_cuenta/img.js",
-		"/var/www/html/inicio/q/application/views/imgs/usuario.php"
+		"/var/www/html/inicio/q/application/controllers/api/tickets.php"
 	],
 	"find":
 	{
@@ -805,6 +725,28 @@
 		"height": 116.0,
 		"where_history":
 		[
+			"",
+			"*.php",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
+			"",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
+			"",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
 			"*.js",
 			"*.php",
 			"",
@@ -910,18 +852,6 @@
 			"*.php",
 			"",
 			"*.php",
-			"",
-			"*.js",
-			"",
-			"*.js",
-			"*.php",
-			"/var/www/html/inicio_",
-			"*.php",
-			"",
-			"*.php",
-			"",
-			"*.js",
-			"*.php",
 			""
 		]
 	},
@@ -930,134 +860,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"request_enid",
-			"fa",
-			"ESCRIBE UNA RESEÑA",
-			"val_session",
-			"producto",
-			"ini_set('memory_limit', '32M');",
-			"require_once BASEPATH.'core/CodeIgniter.php';",
-			"                                ",
-			"debug",
-			"clean",
-			"    =>",
-			"=>",
-			"[",
-			"=>",
-			"get_tareas_ticket",
-			"detalle_get",
-			"detalle/",
-			"detalle",
-			"span",
-			"Saldo por liquidar ",
-			"top_semanal_vendedor_GET",
-			"get_top_servicios_usuario",
-			"top_servicios",
-			"tiempo",
-			"registra_data_servicio",
-			"print_r",
-			"api",
-			"array_key_exists",
-			"pagination",
-			"create",
-			"paginacion",
-			"create_pagination",
-			"paginacion",
-			"create_pagination",
-			"pagina",
-			"create_pagination",
-			"isset",
-			"pagination",
-			"notificacion_email",
-			"response_usuario_registro",
-			"notifica",
-			"post",
-			"posr",
-			"areaclientemodel",
-			"carga_pago_pendiente_por_recibo",
-			"enviar",
-			"send",
-			"send(",
-			"send",
-			"notificacion",
-			"notificacion_email",
-			"envia_correo_maps",
-			"notificacion_email",
-			"pago_pendiente_web",
-			"notifica_deuda_cliente",
-			"acciones_posterior_orden_pago",
-			"genera_orden_compra",
+			"$('.datetimepicker5').datepicker();\t\t\t\t\t",
+			"datetimepicker5",
+			"=",
+			"quien_recibe",
+			"quien_recibe/",
+			"registra_usuario",
 			"solicitud_proceso_pago",
-			"categoria/seleccionar_categoria_phone",
-			"]",
-			"is_mobile",
-			"text-en-existencia",
-			"info_servicio",
-			"$url_ml",
-			"get_text_diponibilidad_articulo",
-			"$url_ml",
-			"APRESÚRATE! SOLO HAY ",
-			"APRESÚRATE! SOLO HAY 10 EN EXISTENCIA ",
-			"carga_informacion_servicio",
-			"venta_mayoreo",
-			"venta_mayoreo ",
-			"put",
-			"url_ml",
-			"get_para",
-			"input_envio_incluido",
-			"btn-ventas-mayoreo",
-			"$msj_ver_telefono",
-			"el ",
-			"input_precio_unidad",
-			"input",
-			"data",
-			"precios",
-			"$url_ml",
-			"servicio/detalle",
-			"servicio/precios",
-			"INPUT",
-			"$text_envios_mayoreo",
-			"¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?",
-			"debu",
-			"get_dominio",
-			"modificado:",
-			"debu",
-			"\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t",
-			"\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t",
-			"\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n",
-			"\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n",
-			"borrado:",
-			"portafolio/llamada_gratis_2.png",
-			"url('../../img_tema/portafolio/llamada_gratis_2.png');",
-			"links",
-			"Preguntas frecuentes",
-			"\nPreguntas frecuentes",
-			"get_categorias_por_tipo",
-			"categorias_publicas_venta",
-			"categorias_por_tipo",
-			"empresa",
-			"categorias_por_tipo",
-			"get_categorias_por_tipo",
-			"categorias_publicas_venta",
-			"lista_categorias",
-			"./",
-			"lista_categorias",
-			"info_categoria",
-			"Temas relacionados",
-			"add_attributes",
-			"add_element",
-			"tab1default",
-			"./",
-			"msj",
-			"\n./msj",
-			"./",
-			"faq",
-			"add_attributes",
-			"get_faqs_categoria",
-			"get_info_categoria",
-			"get_faqs_categoria",
-			"function get_info_categoria($id_categoria){\t\t\t\n\t\n\t$query_get = \"SELECT * FROM categoria WHERE id_categoria = '\".$id_categoria.\"' LIMIT 1\";\t\t\n\t$result =  $this->db->query($query_get);            \t\t\t\t\n\treturn $result->result_array()[0];\n}",
-			"SELECT * FROM categoria WHERE id_categoria "
+			"crea_orden",
+			"primer_orden",
+			"crea_orden",
+			"primer_orden",
+			"punto_",
+			"response_registro_usuario",
+			"registra_usuario",
+			"response_send_email",
+			"envia_correo",
+			"form_correo",
+			"Recibe nuestra ubicación",
+			"registra_usuario",
+			"form_punto_encuentro",
+			"IDENTIFICA TU PUNTO MÁS CERCANO",
+			"ACORDEMOS UN PUNTO MEDIO",
+			"Recibe nuestra ubicación",
+			"IDENTIFICA TU PUNTO MÁS CERCANO",
+			"nombre_linea_metro",
+			"muestra_estaciones",
+			"linea_metro",
+			"mensaje_cobro",
+			"=>",
+			"nombre_linea_metro",
+			"punto_encuentro",
+			"nombre_linea_metro",
+			"cursor_pointer linea_metro",
+			"alert",
+			"muestra_lineas_metro",
+			"color )",
+			"procesar_linea_metro",
+			"12);",
+			" ",
+			".",
+			"\n",
+			",",
+			"request_enid",
+			"select",
+			"$list_footer",
+			"$list",
+			"FACILIDAD DE COMPRA",
+			"create_select",
+			"Tipo_punto_encuentro_model",
+			"get_departamentos_enid",
+			"=",
+			"Solicita una llamada aquí",
+			"Recibe nuestra ubicación",
+			"form",
+			"ENCONTRÉMONOS",
+			" ENCONTRÉMONOS",
+			"  ENCONTRÉMONOS",
+			"  ",
+			"\n",
+			".",
+			",",
+			"1. ",
+			"  ",
+			",",
+			"  ",
+			",",
+			"  ",
+			",",
+			"1,",
+			",",
+			"6);",
+			",",
+			"5);",
+			",",
+			"  \"",
+			",",
+			"  \"",
+			"\n",
+			",",
+			"linea_metro",
+			"nombre )",
+			", numero_linea",
+			"1,\"",
+			", \"ROSA\"",
+			" , color_linea",
+			"nombre )",
+			"      ",
+			"        ",
+			"get_headers_tipo_entrega",
+			"arrayProducts",
+			"ordena_table_general",
+			"table",
+			"=",
+			"              ",
+			"  \t\n",
+			"table",
+			"between",
+			"crea_historico_vista_servicio",
+			"vista",
+			"repo_tipos_entregas",
+			"repo",
+			"repo_dispositivos",
+			"f_dipositivos",
+			"f_usabilidad",
+			"tab_tipos_entregas",
+			"DISPOSITIVOS",
+			"nombre",
+			"correo_electronico",
+			"get_patameter",
+			"correo_electronico",
+			"contenedor_eleccion_correo_electronico",
+			"whats",
+			"whas",
+			"whasa",
+			"whasapp",
+			"function registro",
+			"registro",
+			"TU USUARIO YA SE ENCUENTRA REGISTRADO",
+			"<a class=\"white\" href=\"../login\">TU USUARIO YA SE ENCUENTRA REGISTRADO</a>",
+			"respuesta_registro",
+			"registro",
+			"agrega_usuario",
+			"form-miembro-enid-service",
+			"QUIEN ERES",
+			"informacion_extra",
+			"agrega_usuario",
+			"form-miembro-enid-service",
+			"¿Ya tienes una cuenta?"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1090,1018 +1020,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "producto/application/controllers/home.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11161,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1387,
-								1387
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 380.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "producto/application/views/pre.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1978,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								349,
-								349
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "imgs/application/controllers/enid.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 2558,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1028,
-								1028
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 373.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "css_tema/template/pre.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 655,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								632,
-								632
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 221.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "js_tema/servicio/pre.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 891,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								546,
-								546
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 114.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "q/application/controllers/api/servicio.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 44177,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								44104,
-								44104
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 23705.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "q/application/models/serviciosmodel.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 42963,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								29456,
-								29456
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 15202.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 53174,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										402,
-										414
-									],
-									[
-										676,
-										688
-									],
-									[
-										970,
-										982
-									],
-									[
-										1203,
-										1215
-									],
-									[
-										1503,
-										1515
-									],
-									[
-										1867,
-										1879
-									],
-									[
-										2068,
-										2080
-									],
-									[
-										2383,
-										2395
-									],
-									[
-										2726,
-										2738
-									],
-									[
-										3087,
-										3099
-									],
-									[
-										3482,
-										3494
-									],
-									[
-										3756,
-										3768
-									],
-									[
-										4043,
-										4055
-									],
-									[
-										4313,
-										4325
-									],
-									[
-										4726,
-										4738
-									],
-									[
-										4954,
-										4966
-									],
-									[
-										5333,
-										5345
-									],
-									[
-										5678,
-										5690
-									],
-									[
-										6027,
-										6039
-									],
-									[
-										6327,
-										6339
-									],
-									[
-										6639,
-										6651
-									],
-									[
-										6869,
-										6881
-									],
-									[
-										7246,
-										7258
-									],
-									[
-										7510,
-										7522
-									],
-									[
-										7762,
-										7774
-									],
-									[
-										8031,
-										8043
-									],
-									[
-										8199,
-										8211
-									],
-									[
-										8543,
-										8555
-									],
-									[
-										8884,
-										8896
-									],
-									[
-										9120,
-										9132
-									],
-									[
-										9372,
-										9384
-									],
-									[
-										9690,
-										9702
-									],
-									[
-										9939,
-										9951
-									],
-									[
-										10110,
-										10122
-									],
-									[
-										10403,
-										10415
-									],
-									[
-										10600,
-										10612
-									],
-									[
-										10924,
-										10936
-									],
-									[
-										11245,
-										11257
-									],
-									[
-										11573,
-										11585
-									],
-									[
-										11993,
-										12005
-									],
-									[
-										12267,
-										12279
-									],
-									[
-										12561,
-										12573
-									],
-									[
-										12794,
-										12806
-									],
-									[
-										13137,
-										13149
-									],
-									[
-										13390,
-										13402
-									],
-									[
-										13705,
-										13717
-									],
-									[
-										14018,
-										14030
-									],
-									[
-										14328,
-										14340
-									],
-									[
-										14602,
-										14614
-									],
-									[
-										14815,
-										14827
-									],
-									[
-										15153,
-										15165
-									],
-									[
-										15510,
-										15522
-									],
-									[
-										15755,
-										15767
-									],
-									[
-										16047,
-										16059
-									],
-									[
-										16343,
-										16355
-									],
-									[
-										16544,
-										16556
-									],
-									[
-										16700,
-										16712
-									],
-									[
-										17138,
-										17150
-									],
-									[
-										17469,
-										17481
-									],
-									[
-										17742,
-										17754
-									],
-									[
-										18035,
-										18047
-									],
-									[
-										18352,
-										18364
-									],
-									[
-										18711,
-										18723
-									],
-									[
-										19006,
-										19018
-									],
-									[
-										19338,
-										19350
-									],
-									[
-										19627,
-										19639
-									],
-									[
-										19983,
-										19995
-									],
-									[
-										20354,
-										20366
-									],
-									[
-										20698,
-										20710
-									],
-									[
-										20975,
-										20987
-									],
-									[
-										21271,
-										21283
-									],
-									[
-										21599,
-										21611
-									],
-									[
-										21908,
-										21920
-									],
-									[
-										22207,
-										22219
-									],
-									[
-										22497,
-										22509
-									],
-									[
-										22766,
-										22778
-									],
-									[
-										23121,
-										23133
-									],
-									[
-										23467,
-										23479
-									],
-									[
-										23855,
-										23867
-									],
-									[
-										24121,
-										24133
-									],
-									[
-										24406,
-										24418
-									],
-									[
-										24727,
-										24739
-									],
-									[
-										25076,
-										25088
-									],
-									[
-										25412,
-										25424
-									],
-									[
-										25798,
-										25810
-									],
-									[
-										26154,
-										26166
-									],
-									[
-										26504,
-										26516
-									],
-									[
-										26710,
-										26722
-									],
-									[
-										26855,
-										26867
-									],
-									[
-										27032,
-										27044
-									],
-									[
-										27213,
-										27225
-									],
-									[
-										27398,
-										27410
-									],
-									[
-										27583,
-										27595
-									],
-									[
-										27757,
-										27769
-									],
-									[
-										27935,
-										27947
-									],
-									[
-										28155,
-										28167
-									],
-									[
-										28376,
-										28388
-									],
-									[
-										28577,
-										28589
-									],
-									[
-										28840,
-										28852
-									],
-									[
-										29136,
-										29148
-									],
-									[
-										29368,
-										29380
-									],
-									[
-										29622,
-										29634
-									],
-									[
-										29961,
-										29973
-									],
-									[
-										30396,
-										30408
-									],
-									[
-										30603,
-										30615
-									],
-									[
-										30797,
-										30809
-									],
-									[
-										30992,
-										31004
-									],
-									[
-										31204,
-										31216
-									],
-									[
-										31390,
-										31402
-									],
-									[
-										31660,
-										31672
-									],
-									[
-										31941,
-										31953
-									],
-									[
-										32218,
-										32230
-									],
-									[
-										32365,
-										32377
-									],
-									[
-										32541,
-										32553
-									],
-									[
-										32869,
-										32881
-									],
-									[
-										33042,
-										33054
-									],
-									[
-										33235,
-										33247
-									],
-									[
-										33437,
-										33449
-									],
-									[
-										33651,
-										33663
-									],
-									[
-										33882,
-										33894
-									],
-									[
-										34177,
-										34189
-									],
-									[
-										34482,
-										34494
-									],
-									[
-										34761,
-										34773
-									],
-									[
-										35068,
-										35080
-									],
-									[
-										35291,
-										35303
-									],
-									[
-										35649,
-										35661
-									],
-									[
-										35948,
-										35960
-									],
-									[
-										36285,
-										36297
-									],
-									[
-										36971,
-										36983
-									],
-									[
-										37406,
-										37418
-									],
-									[
-										37738,
-										37750
-									],
-									[
-										38129,
-										38141
-									],
-									[
-										38424,
-										38436
-									],
-									[
-										38620,
-										38632
-									],
-									[
-										38886,
-										38898
-									],
-									[
-										39153,
-										39165
-									],
-									[
-										39401,
-										39413
-									],
-									[
-										39690,
-										39702
-									],
-									[
-										40000,
-										40012
-									],
-									[
-										40344,
-										40356
-									],
-									[
-										40612,
-										40624
-									],
-									[
-										40862,
-										40874
-									],
-									[
-										41111,
-										41123
-									],
-									[
-										41368,
-										41380
-									],
-									[
-										41615,
-										41627
-									],
-									[
-										41860,
-										41872
-									],
-									[
-										42105,
-										42117
-									],
-									[
-										42345,
-										42357
-									],
-									[
-										42599,
-										42611
-									],
-									[
-										42893,
-										42905
-									],
-									[
-										43175,
-										43187
-									],
-									[
-										43462,
-										43474
-									],
-									[
-										43773,
-										43785
-									],
-									[
-										44089,
-										44101
-									],
-									[
-										44442,
-										44454
-									],
-									[
-										44801,
-										44813
-									],
-									[
-										45176,
-										45188
-									],
-									[
-										45549,
-										45561
-									],
-									[
-										45950,
-										45962
-									],
-									[
-										46249,
-										46261
-									],
-									[
-										46570,
-										46582
-									],
-									[
-										46883,
-										46895
-									],
-									[
-										47090,
-										47102
-									],
-									[
-										47417,
-										47429
-									],
-									[
-										47719,
-										47731
-									],
-									[
-										48022,
-										48034
-									],
-									[
-										48351,
-										48363
-									],
-									[
-										48690,
-										48702
-									],
-									[
-										49104,
-										49116
-									],
-									[
-										49350,
-										49362
-									],
-									[
-										49583,
-										49595
-									],
-									[
-										49924,
-										49936
-									],
-									[
-										50207,
-										50219
-									],
-									[
-										50494,
-										50506
-									],
-									[
-										50718,
-										50730
-									],
-									[
-										51066,
-										51078
-									],
-									[
-										51431,
-										51443
-									],
-									[
-										51697,
-										51709
-									],
-									[
-										52000,
-										52012
-									],
-									[
-										52280,
-										52292
-									],
-									[
-										52582,
-										52594
-									],
-									[
-										52815,
-										52827
-									],
-									[
-										53059,
-										53071
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								43,
-								43
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 2,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 57.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "js_tema/js/main.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 19958,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								19750,
-								19750
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 13019.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -2158,20 +1078,216 @@
 		"selected_items":
 		[
 			[
+				"enid",
+				"helpers/enid_helper.php"
+			],
+			[
+				"cobran",
+				"q/application/controllers/api/cobranza.php"
+			],
+			[
+				"usua",
+				"q/application/controllers/api/usuario.php"
+			],
+			[
+				"usuari",
+				"q/application/controllers/api/usuario.php"
+			],
+			[
+				"extra",
+				"extra.sql"
+			],
+			[
+				"punto",
+				"q/application/helpers/puntoencuentro_helper.php"
+			],
+			[
+				"punr",
+				"css_tema/template/puntos_encuentro.css"
+			],
+			[
+				"puntoencuentro",
+				"q/application/helpers/puntoencuentro_helper.php"
+			],
+			[
+				"punto_encuentro",
+				"q/application/controllers/api/punto_encuentro.php"
+			],
+			[
+				"line",
+				"q/application/controllers/api/linea_metro.php"
+			],
+			[
 				"main",
-				"js_tema/js/main.js"
-			],
-			[
-				"servicio",
-				"q/application/models/serviciosmodel.php"
-			],
-			[
-				"servicio.php",
-				"q/application/controllers/api/servicio.php"
+				"css_tema/template/main.css"
 			],
 			[
 				"main.js",
 				"js_tema/js/main.js"
+			],
+			[
+				"tipo_pun",
+				"q/application/controllers/api/tipo_punto_encuentro.php"
+			],
+			[
+				"pre",
+				"js_tema/servicio/pre.js"
+			],
+			[
+				"serviciomo",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"serviciohel",
+				"q/application/helpers/servicios_helper.php"
+			],
+			[
+				"SERVICIO",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"servicio",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"ini.js",
+				"js_tema/login/ini.js"
+			],
+			[
+				"usuario_model",
+				"q/application/models/usuario_model.php"
+			],
+			[
+				"mainj",
+				"js_tema/js/main.js"
+			],
+			[
+				"ini",
+				"js_tema/login/ini.js"
+			],
+			[
+				"con",
+				"css_tema/template/contact.css"
+			],
+			[
+				"contact",
+				"css_tema/template/contact.css"
+			],
+			[
+				"eni",
+				"helpers/enid_helper.php"
+			],
+			[
+				"main.css",
+				"css_tema/template/main.css"
+			],
+			[
+				"pre.js",
+				"js_tema/servicio/pre.js"
+			],
+			[
+				"princi",
+				"librerias/principal.php"
+			],
+			[
+				"sess.php",
+				"login/application/controllers/api/sess.php"
+			],
+			[
+				"pre.php",
+				"producto/application/views/pre.php"
+			],
+			[
+				"PRINCI",
+				"librerias/principal.php"
+			],
+			[
+				"usuario",
+				"q/application/controllers/api/usuario.php"
+			],
+			[
+				"ingresar_saldo_a_cuenta",
+				"orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php"
+			],
+			[
+				"session",
+				"librerias/sessionclass.php"
+			],
+			[
+				"compr",
+				"producto/application/views/compra.php"
+			],
+			[
+				"princ",
+				"librerias/principal.php"
+			],
+			[
+				"pgina",
+				"q/application/controllers/api/paginacion.php"
+			],
+			[
+				"pagina_web",
+				"q/application/controllers/api/pagina_web.php"
+			],
+			[
+				"procesar_pago.css",
+				"css_tema/template/procesar_pago.css"
+			],
+			[
+				"home",
+				"administracion_cuenta/application/views/home.php"
+			],
+			[
+				"pagina_web_model",
+				"q/application/models/pagina_web_model.php"
+			],
+			[
+				"deb",
+				"debug/debug.log"
+			],
+			[
+				"js_tema/area_cliente/principal.js",
+				"js_tema/area_cliente/principal.js"
+			],
+			[
+				"proce",
+				"css_tema/template/procesar_pago.css"
+			],
+			[
+				"prin",
+				"librerias/principal.php"
+			],
+			[
+				"principal",
+				"librerias/principal.php"
+			],
+			[
+				"js_tema/procesar/principal.js",
+				"js_tema/procesar/principal.js"
+			],
+			[
+				"sess",
+				"librerias/sessionclass.php"
+			],
+			[
+				"signin",
+				"login/application/views/signin.php"
+			],
+			[
+				"proces",
+				"css_tema/template/procesar_pago.css"
+			],
+			[
+				"compra",
+				"producto/application/views/compra.php"
+			],
+			[
+				"form_compra",
+				"producto/application/views/form_compra.php"
+			],
+			[
+				"servicio.php",
+				"q/application/controllers/api/servicio.php"
 			],
 			[
 				"pre.c",
@@ -2180,14 +1296,6 @@
 			[
 				"pre.",
 				"css_tema/template/pre.css"
-			],
-			[
-				"pre.php",
-				"producto/application/views/pre.php"
-			],
-			[
-				"enid",
-				"helpers/enid_helper.php"
 			],
 			[
 				"core/CodeIgniter.php",
@@ -2214,10 +1322,6 @@
 				"planes_servicios/application/views/home_enid.php"
 			],
 			[
-				"princi",
-				"librerias/principal.php"
-			],
-			[
 				"servic",
 				"q/application/controllers/api/servicio.php"
 			],
@@ -2236,10 +1340,6 @@
 			[
 				"usuario.php",
 				"q/application/controllers/api/usuario.php"
-			],
-			[
-				"ini.js",
-				"js_tema/login/ini.js"
 			],
 			[
 				"areaclie",
@@ -2276,10 +1376,6 @@
 			[
 				"planes",
 				"css_tema/template/planes_servicios.css"
-			],
-			[
-				"eni",
-				"helpers/enid_helper.php"
 			],
 			[
 				"categoria_model",
@@ -2366,10 +1462,6 @@
 				"extra.sql"
 			],
 			[
-				"extra",
-				"extra.sql"
-			],
-			[
 				"enid_helper.php",
 				"helpers/enid_helper.php"
 			],
@@ -2422,10 +1514,6 @@
 				"q/application/helpers/recibo_helper.php"
 			],
 			[
-				"main.css",
-				"css_tema/template/main.css"
-			],
-			[
 				"imagen_usuario_model",
 				"q/application/models/imagen_usuario_model.php"
 			],
@@ -2448,10 +1536,6 @@
 			[
 				"img.php",
 				"q/application/controllers/api/img.php"
-			],
-			[
-				"session",
-				"librerias/sessionclass.php"
 			],
 			[
 				"servicios_",
@@ -2504,170 +1588,6 @@
 			[
 				"productivi",
 				"q/application/controllers/api/productividad.php"
-			],
-			[
-				"recibo.ph",
-				"q/application/controllers/api/recibo.php"
-			],
-			[
-				"valoracion.php",
-				"q/application/controllers/api/valoracion.php"
-			],
-			[
-				"main.cs",
-				"css_tema/template/main.css"
-			],
-			[
-				"cobran",
-				"msj/application/controllers/api/cobranza.php"
-			],
-			[
-				"api/productividad.php",
-				"q/application/controllers/api/productividad.php"
-			],
-			[
-				"secciones_2/paginas_we",
-				"procesar/application/views/secciones_2/paginas_web.php"
-			],
-			[
-				"secciones_2/form_afiliados",
-				"procesar/application/views/secciones_2/form_afiliados.php"
-			],
-			[
-				"banco",
-				"q/application/models/banco_model.php"
-			],
-			[
-				"controllers/api/cuentas.php",
-				"q/application/controllers/api/cuentas.php"
-			],
-			[
-				"cuentas_model",
-				"q/application/models/cuentas_model.php"
-			],
-			[
-				"cuentas",
-				"q/application/controllers/api/cuentas.php"
-			],
-			[
-				"respuest",
-				"q/application/controllers/api/respuesta.php"
-			],
-			[
-				"valoraciones/form_respuesta.php",
-				"q/application/views/valoraciones/form_respuesta.php"
-			],
-			[
-				"ei",
-				"system/core/CodeIgniter.php"
-			],
-			[
-				"form_respuesta.php",
-				"q/application/views/valoraciones/form_respuesta.php"
-			],
-			[
-				"form_respuesta.php ",
-				"q/application/views/tickets/form_respuesta.php"
-			],
-			[
-				"perfil_recurso",
-				"q/application/controllers/api/perfil_recurso.php"
-			],
-			[
-				"recurso.php",
-				"q/application/controllers/api/recurso.php"
-			],
-			[
-				"recurso",
-				"q/application/controllers/api/recurso.php"
-			],
-			[
-				"clasificacion_model.php",
-				"q/application/models/clasificacion_model.php"
-			],
-			[
-				"clasificacion",
-				"q/application/controllers/api/clasificacion.php"
-			],
-			[
-				"models/clasificacion_model.php",
-				"q/application/models/clasificacion_model.php"
-			],
-			[
-				"proyecto_per",
-				"q/application/controllers/api/proyecto_persona_forma_pago_direccion.php"
-			],
-			[
-				"pagina_we",
-				"q/application/controllers/api/pagina_web.php"
-			],
-			[
-				"productividad.php",
-				"q/application/controllers/api/productividad.php"
-			],
-			[
-				"prospect",
-				"q/application/controllers/api/prospecto.php"
-			],
-			[
-				"productividad.php ",
-				"q/application/controllers/api/productividad.php"
-			],
-			[
-				"foot",
-				"view_tema/footer_template.php"
-			],
-			[
-				"producto/principal",
-				"q/application/views/producto/principal.php"
-			],
-			[
-				"que",
-				"system/database/DB_query_builder.php"
-			],
-			[
-				"servicio.",
-				"q/application/controllers/api/pregunta_servicio.php"
-			],
-			[
-				"producto.pph",
-				"tag_/application/controllers/api/producto.php"
-			],
-			[
-				" helpers/enid_helper.php",
-				"helpers/enid_helper.php"
-			],
-			[
-				"img",
-				"js_tema/administracion_cuenta/img.js"
-			],
-			[
-				" servicio/detalle.php",
-				"q/application/views/servicio/detalle.php"
-			],
-			[
-				"usua",
-				"q/application/models/usuario_model.php"
-			],
-			[
-				"usuario_mo",
-				"q/application/models/usuario_model.php"
-			],
-			[
-				"/mailrest",
-				"msj/application/controllers/api/mailrest.php"
-			],
-			[
-				"ini.",
-				"js_tema/login/ini.js"
-			],
-			[
-				"mian",
-				"css_tema/template/main.css"
-			],
-			[
-				"application/views/secciones_2/info_categorias_servicio.php",
-				"usuarios_enid_service/application/views/secciones_2/info_categorias_servicio.php"
 			]
 		],
 		"width": 0.0
@@ -2762,7 +1682,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 338.0,
+	"side_bar_width": 245.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

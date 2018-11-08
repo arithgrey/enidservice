@@ -230,8 +230,16 @@ class Cobranza extends REST_Controller{
                 /*Consultamos el precio de envio del producto*/                
                 
                 if($data_orden["servicio"]["flag_servicio"]== 0){
-                    $prm_envio["flag_envio_gratis"] = $data_orden["servicio"]["flag_envio_gratis"];
-                    $data_orden["costo_envio"] = $this->get_costo_envio($prm_envio);        
+                    if (!array_key_exists("es_contra_entrega", $param)) {
+                        
+                        $prm_envio["flag_envio_gratis"] = $data_orden["servicio"]["flag_envio_gratis"];
+                        $data_orden["costo_envio"] = $this->get_costo_envio($prm_envio);            
+                    }else{
+
+                        $prm_envio["flag_envio_gratis"] = 0;
+                        $data_orden["costo_envio"]      = $this->get_costo_envio_punto_encuentro($param);            
+                    }
+                    
                 }
                 
                 
@@ -249,10 +257,13 @@ class Cobranza extends REST_Controller{
                 
                 $data_orden["data_por_usuario"]     =  $param;
                 $data_orden["talla"]                =  
-                (array_key_exists("talla", $param)&& $param["talla"]>0) ? $param["talla"]: 0;
+                (array_key_exists("talla", $param) && $param["talla"]>0) ? $param["talla"]: 0;
                 
+
                 
                 $id_recibo        = $this->genera_orden_compra($data_orden);                
+
+
                 
                 $q["id_servicio"] = $id_servicio;
                 $q["valor"]       = 2;
@@ -264,8 +275,10 @@ class Cobranza extends REST_Controller{
                 $data_acciones_posteriores["id_servicio"] = $param["plan"];
                 
                 if($es_usuario_nuevo == 0){
-                      $data_acciones_posteriores["id_usuario"] = $data_orden["id_usuario"];
-                  }else{
+                    
+                    $data_acciones_posteriores["id_usuario"] = $data_orden["id_usuario"];
+
+                }else{
 
                       $data_acciones_posteriores["id_usuario"]  =   $param["id_usuario"];  
                       $data_acciones_posteriores["telefono"]    =   $param["telefono"];  
@@ -275,9 +288,21 @@ class Cobranza extends REST_Controller{
                 }
                 
                 $data_acciones_posteriores["es_usuario_nuevo"] =  $es_usuario_nuevo;
+
                 $this->acciones_posterior_orden_pago($data_acciones_posteriores);
-                $data_orden["ficha"]                           = 
-                $this->carga_ficha_direccion_envio($data_acciones_posteriores);        
+                
+                if(!array_key_exists("es_contra_entrega", $param)) {
+
+                    $data_orden["ficha"]                           = 
+                    $this->carga_ficha_direccion_envio($data_acciones_posteriores);        
+                }else{
+                    
+                    /* Registro en tabla de encuentros*/
+                    $param["id_recibo"]           = $id_recibo;  
+                    $data_orden["id_recibo"]      = $id_recibo;  
+                    $this->create_orden_punto_entrega($param);
+                }
+                
             }
 
         }        
@@ -294,9 +319,10 @@ class Cobranza extends REST_Controller{
             && $param["num_ciclos"] >0 && $param["num_ciclos"] < 10 && 
             ctype_digit($param["plan"]) 
             && $param["plan"] >0 
-        ){
 
-                   
+            || (array_key_exists("punto_encuentro", $param ) && $param["punto_encuentro"]> 0)
+        ){
+            
             $usuario = $this->crea_usuario($param);            
             if ($usuario["usuario_registrado"] ==  1 && $usuario["id_usuario"]>0 ) {
                                 
@@ -304,11 +330,20 @@ class Cobranza extends REST_Controller{
                 $param["usuario_nuevo"]       = 1;        
                 $param["usuario_referencia"]  = $usuario["id_usuario"];
                 $param["id_usuario"]          = $usuario["id_usuario"];
-                $response                     = $this->crea_orden($param);                 
+                
+                if (array_key_exists("punto_encuentro", $param) && $param["punto_encuentro"]> 0 ) {
+                    
+                    /*Para encuentros en puntos de entrega*/
+                    $response = $this->crea_orden_punto_entrega($param);
+                }else{
+                    /*Para ordenes por entrega DHL, FEDEX ETC*/
+                    $response =  $this->crea_orden($param);
+                    
+                }   
                 $response["usuario_existe"]   = 0;
-                $session                =  $this->create_session($param); 
+                $session                      =  $this->create_session($param); 
                 $this->principal->set_userdata($session);
-                $this->response($response);
+                $this->response($response);             
                 
             }            
             $this->response($usuario);
@@ -330,6 +365,34 @@ class Cobranza extends REST_Controller{
 
         $api =  "cobranza/solicitud_proceso_pago";
         return $this->principal->api( $api , $q, "json", "POST");        
+    }
+    private function crea_orden_punto_entrega($param)
+    {
+        
+        
+        if (!ctype_digit($param["servicio"]) 
+            || 
+            !ctype_digit($param["num_ciclos"])
+            ||  
+            !ctype_digit($param["punto_encuentro"])){return false;}
+
+
+
+        if( valida_fecha_entrega($param["fecha_entrega"]) 
+            && 
+            valida_horario_entrega($param["horario_entrega"]) 
+            ){
+
+            $param["fecha_entrega"]         =  $param["fecha_entrega"]." ".$param["horario_entrega"].":00";
+            $param["es_contra_entrega"]     =  1;
+            $param["plan"]                  =  $param["servicio"];
+            $param["id_ciclo_facturacion"]  =  5;
+            
+            return $this->crea_orden($param);
+            
+        }
+        return false;
+               
     }
     /**/
     function crea_usuario($q){
@@ -579,6 +642,20 @@ class Cobranza extends REST_Controller{
         $api                = "portafolio/direccion_pedido/format/json/";
         return $this->principal->api( $api ,  $q);    
     }
-    
+    private function get_costo_envio_punto_encuentro($q){
+
+        $api                = "punto_encuentro/costo_entrega/format/json/";
+        $response           =  $this->principal->api( $api ,  $q);    
+        if (is_array($response) && count($response) > 0) {
+            return $response[0]["costo_envio"];
+        }else{
+            return 50;
+        }
+    }
+    private function create_orden_punto_entrega($q){        
+        
+        $api                = "proyecto_persona_forma_pago_punto_encuentro/index";
+        return $this->principal->api( $api ,  $q , "json" , "POST");    
+    }
 
 }?>

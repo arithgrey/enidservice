@@ -671,6 +671,7 @@ function request_enid( method,  data_send, url, call_back, place_before_send = 0
 	if (call_back  == 1 ) {		
 		var call_back  =  function(data){
 			llenaelementoHTML(place_render , data );
+			$('th').click(ordena_table_general);
 		}
 	}	
 	/**/
@@ -695,8 +696,7 @@ var focus_input = function(input){
 		}
 	}else{
 		$(input).css("border" , "1px solid rgb(13, 62, 86)");
-	}
-	
+	}	
 }
 /*Bloque todos los elementos del formulario*/
 var bloquea_form = function(form){	
