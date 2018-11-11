@@ -131,7 +131,7 @@ if ( ! function_exists('p'))
 }
 if ( ! function_exists('guardar'))
 {
-  function guardar( $info , $attributes=[], $row = 1 , $type_button =1 ,$submit = 1  )
+  function guardar( $info , $attributes=[], $row = 1 , $type_button =1 ,$submit = 1 , $anchor = 0 )
   {   
     
       if ($submit == 1) {
@@ -146,14 +146,19 @@ if ( ! function_exists('guardar'))
           $attributes["class"] =  "a_enid_blue white completo btn_guardar";
         }    
       }
-      $attr =  add_attributes($attributes);
+      $attr   =  add_attributes($attributes);
       
       if ($row == 0) { 
 
         return  "<button ".$attr.">".$info."</button>";
       }else{
 
-        $b    = "<button ".$attr.">".$info."</button>";        
+        if ($anchor !== 0) {
+          $b    = "<a href='".$anchor."'> <button ".$attr.">".$info."</button></a>";        
+        }else{
+          $b    = "<button ".$attr.">".$info."</button>";        
+        }
+        
         return div($b , 1);
       }      
   }
@@ -976,8 +981,7 @@ if ( ! function_exists('debug'))
 {
 function debug($msg, $array = 0)
 { 
-    
-    return "";   
+        
     if($_SERVER['HTTP_HOST'] ==  "localhost") {
 
       $_date_fmt  = 'Y-m-d H:i:s';

@@ -14,7 +14,7 @@
 	<div>
 		<center>
 			<?=heading_enid("ESCRIBE UNA RESEÑA" , 3 , ["class" => "3em"])?>
-			<?=div("Sobre tu " . $servicio[0]["nombre_servicio"] ,  ["style" => "font-size: 1.4em"])?>
+			<?=div("Sobre  " . $servicio[0]["nombre_servicio"] ,  ["style" => "font-size: 1.4em"])?>
 		</center>
 		<form class="form_valoracion" >
 			<?=place("nuevo")?>

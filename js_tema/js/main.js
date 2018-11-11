@@ -614,12 +614,6 @@ function get_parameter(element){
 function set_parameter(element , valor ){	 		
 	$(element).val(valor);	
 }
-/*Recorre a sección*/
-function recorrepage(contenedor){		
-	if( $(contenedor).length > 0 ) { 
-		$('html, body').animate({scrollTop: $(contenedor).offset().top -100 }, 'slow');
-	}
-}
 /*El dispositivo en el que se accede es telefono?*/
 function is_mobile(){
 	return get_option("is_mobile");	
@@ -720,4 +714,13 @@ function randomString(len, charSet) {
         randomString += charSet.substring(randomPoz,randomPoz+1);
     }
     return randomString;
+}
+/*Recorre a sección*/
+var  recorrepage = function(contenedor = 0 ){		
+
+	if( $(contenedor).length > 2 ) { 
+		$('html, body').animate({scrollTop: $(contenedor).offset().top -100 }, 'slow');
+	}else{			
+		$('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top -100 }, 'slow');
+	}
 }

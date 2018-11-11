@@ -2,6 +2,8 @@ $(document).ready(function(){
 	$(".tipos_puntos_encuentro").change(iniciar_proceso_entrega);
 	$('.datetimepicker5').datepicker();						 
 	$(".form_punto_encuentro").submit(registra_usuario);
+	$(".form_punto_encuentro_horario").submit(notifica_punto_entrega);
+	
 	$(".link_acceso").click(set_link);
 	$(".telefono").keyup(quita_espacios_en_telefono);
 });
@@ -81,7 +83,7 @@ var muestra_horarios = function(){
 		llenaelementoHTML(".cargos_por_entrega" ,  "<span class='strong'>CARGO POR ENTREGA:</span> <span class='text_costo_envio'>"+costo_envio+"MXN</span>")
 		$(".cargos_por_entrega").addClass("cargos_por_entrega_extra");
 		$(".contenedor_estaciones").hide();
-		var text  = "Las entregas en puntos de encuentro tienen un costo adicional a tus artículos";
+		var text  = "Recuerda que previo a la entrega de tu producto, deberás realizar el pago de 50 pesos por concepto de gastos de envío";
 		llenaelementoHTML(".mensaje_cobro_envio" ,  text);
 		$(".btn_continuar_punto_encuentro").show();
 		$(".btn_continuar_punto_encuentro").click(muestra_quien_recibe);
@@ -105,8 +107,9 @@ var registra_usuario = function(e){
 		var data_send 	 = 	$(".form_punto_encuentro").serialize()+"&"+$.param({"password":password});					
 
 		var url 		 = 	"../q/index.php/api/cobranza/primer_orden/format/json/";
-		bloquea_form(".form_punto_encuentro");
-		request_enid("POST",  data_send , url , response_registro_usuario);					
+		bloquea_form(".form_punto_encuentro");	
+		$(".contenedor_ya_tienes_cuenta").hide();			
+		request_enid("POST",  data_send , url , response_registro_usuario , ".place_notificacion_punto_encuentro_registro");					
 
 	}else{
 		
@@ -117,13 +120,15 @@ var registra_usuario = function(e){
 }
 var response_registro_usuario = function(data){
 
+	display_elements([".place_notificacion_punto_encuentro_registro"] , 0);
 	if (data.usuario_existe == 1 ) {
 		
-		$(".text_usuario_registrado").show();
-		$(".text_usuario_registrado_pregunta").hide();
+		$(".text_usuario_registrado_pregunta").hide();		
+		display_elements([".text_usuario_registrado" , ".contenedor_ya_tienes_cuenta"] , 1);
 		recorrepage(".text_usuario_registrado");
 		
 	}else{
+		display_elements([".contenedor_eleccion_correo_electronico", ".formulario_quien_recibe"] , 0);
 		redirect("../area_cliente/?action=compras&ticket="+data.id_recibo);
 		//desbloqueda_form(".form_punto_encuentro");
 	}
@@ -146,4 +151,17 @@ var  quita_espacios_en_telefono = function(){
 	var valor 	= 	get_parameter(".telefono");
 	var nuevo 	=  	quitar_espacios_numericos(valor);
 	$(".telefono").val(nuevo);	
+}
+var notifica_punto_entrega = function(e){
+
+	var data_send 		=  $(".form_punto_encuentro_horario").serialize()+"&"+$.param({"es_contra_entrega":1});
+	var url 		 	= 	"../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
+	bloquea_form(".form_punto_encuentro_horario");
+	
+	request_enid("POST",  data_send , url , response_notificacion_punto_entrega , ".place_notificacion_punto_encuentro");						
+	e.preventDefault();
+}
+var response_notificacion_punto_entrega = function(data){	
+	display_elements([".place_notificacion_punto_encuentro" , ".form_punto_encuentro_horario"] , 0);	
+	redirect("../area_cliente/?action=compras&ticket="+data.id_recibo);		
 }

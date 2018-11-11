@@ -18,9 +18,32 @@
         return $this->db->get("punto_encuentro")->result_array();
     }   
     function q_get($params=[], $id){
-        return $this->get($params, ["id_tipo_punto_encuentro" => $id ] );
+        return $this->get($params, ["id" => $id ] );
     } 
-   
+    function get_tipo($param){
+        
+        $id =  $param["id"];    
+        $query_get = "SELECT 
+        p.* ,
+        p.nombre lugar_entrega ,
+        t.tipo ,
+        l.* 
+        FROM punto_encuentro p  
+        INNER JOIN   
+        tipo_punto_encuentro t on p.id_tipo_punto_encuentro =  t.id 
+        LEFT OUTER JOIN 
+        linea_metro l 
+        ON 
+        l.id = p.id_linea_metro 
+        WHERE   
+        p.id = '".$id."' LIMIT 1";
+        
+        return $this->db->query($query_get)->result_array();
+        
+
+        
+    }
+    
  
     
 }

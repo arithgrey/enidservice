@@ -33,13 +33,10 @@
 	font-size: 1.5em;
 }
 
-.mensaje_cobro_envio{
-
-    font-weight: bold;
-    color: #0d1a53;
-    text-decoration: underline;
+.mensaje_cobro_envio{	
+    color: #fdfeff;    
     margin-top: 10px;
-    background: #e6ecff;
+    background: #0b3cd8;
     padding: 10px;
 }
 .btn_continuar_punto_encuentro{
@@ -48,4 +45,9 @@
 }
 .contenedor_fecha_entrega{
 	background: red;
+}
+.titulo_horario_entra{
+	background: #005acf;
+	padding: 10px;
+	color: white;
 }

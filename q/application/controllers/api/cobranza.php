@@ -190,18 +190,18 @@ class Cobranza extends REST_Controller{
     /**/
     function solicitud_proceso_pago_POST(){
 
-        $param          =  $this->post();                      
-        $id_servicio    =  $param["plan"]; 
-        $precio         =  $this->get_precio_id_servicio($id_servicio);
+        $param                  =   $this->post();                      
 
-    
-        $data_complete  = [];
-        $data_orden     = [];
-        $data_reporte_compra = [];
+        $param["plan"]          =   (!array_key_exists("plan", $param)) ? $param["servicio"] : $param["plan"];
+        $id_servicio            =   $param["plan"]; 
+        $precio                 =   $this->get_precio_id_servicio($id_servicio);
+        $data_complete          =   [];
+        $data_orden             =   [];
+        $data_reporte_compra    =   [];
+
         $data_reporte_compra["articulo_valido"] = 0;
         /*Si el plan existe y es disponible continuamos*/
         if(count($precio) > 0){  
-
 
             $data_reporte_compra["articulo_valido"] = 1;      
             /*ahora consultamos que el servicio se encuentre disponible para compra*/

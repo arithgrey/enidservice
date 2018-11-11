@@ -416,15 +416,13 @@
       
       $saldo_cubierto     =   0;
       $status             =   6;
-
-
-      $data_usuario       =  $param["data_por_usuario"];            
+      $data_usuario       =   $param["data_por_usuario"];            
 
       $es_contra_entrega  = 0;
       if(array_key_exists("es_contra_entrega", $data_usuario) && $data_usuario["es_contra_entrega"] ==  1){
         $es_contra_entrega = 1;
       } 
-      $id_forma_pago      =  ($es_contra_entrega ==  1) ? 7 : 6;
+      $id_forma_pago      =  ($es_contra_entrega ==  1) ? 8 : 6;
 
       $fecha_vencimiento  =  "DATE_ADD(CURRENT_DATE(), INTERVAL 2 DAY)";            
       $id_usuario         =  $param["id_usuario"]; 
@@ -483,7 +481,8 @@
         "precio"                    ,
         "id_servicio"               ,
         "resumen_pedido"            ,
-        "talla"        
+        "talla"     ,
+        "es_contra_entrega"   
       ];
 
       
@@ -506,7 +505,8 @@
           $precio,
           $id_servicio,
           "'".$resumen_compra."'",
-          $talla 
+          $talla ,
+          $es_contra_entrega
         ];
       
       if ($es_contra_entrega ==  1) {

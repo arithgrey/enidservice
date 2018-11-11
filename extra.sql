@@ -300,6 +300,8 @@ INSERT INTO punto_encuentro(id_tipo_punto_encuentro , nombre , id_linea_metro) V
 INSERT INTO punto_encuentro(id_tipo_punto_encuentro , nombre , id_linea_metro) VALUES(1,"TLALTENCO" , 12);
 INSERT INTO punto_encuentro(id_tipo_punto_encuentro , nombre , id_linea_metro) VALUES(1,"TLAHUAC" , 12);
 
+use enidserv_web;
+desc punto_encuentro;
 alter table punto_encuentro add costo_envio float not null default 50;
 ALTER TABLE  proyecto_persona_forma_pago ADD  fecha_contra_entrega TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP();
 
@@ -324,3 +326,4 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 USE `enidserv_web` ;
+show tables;

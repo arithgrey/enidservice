@@ -25,7 +25,9 @@ if(!function_exists('invierte_date_time')){
 
   }
   /**/
-  function get_saldo_pendiente($monto, $ciclos, $cubierto , $es_servicio , $envio_cliente,  $envio_sistema){
+  function get_saldo_pendiente($monto, 
+    $ciclos, 
+    $cubierto , $es_servicio , $envio_cliente,  $envio_sistema,$es_contra_entrega){
 
 
     $cubierto =  ($cubierto < 0 ) ? 0 : $cubierto;    
@@ -33,8 +35,13 @@ if(!function_exists('invierte_date_time')){
 
     $envio                  =   ($es_servicio == 0 ) ? $envio_cliente : 0;     
     $saldo_pendiente_envio  =   ($total > 0) ? $total + $envio : 0;
-    $text_envio             =   ($es_servicio == 0) ? $envio_sistema["text_envio"]["cliente"]: ""; 
-
+    $text_envio             =   "";
+    if ($es_contra_entrega ==  0) {
+        $text_envio             =   ($es_servicio == 0) ? $envio_sistema["text_envio"]["cliente"]: "";   
+    }else{
+        $text_envio             =  "Cargos de entrega ".$envio_sistema."MXN";      
+    }
+    
     $response =  [
         'saldo_pendiente'       =>  $total ,
         'envio'                 =>  $envio,

@@ -2,7 +2,7 @@
 function cargar_info_resumen_pago_pendiente(e){	
 	
 	
-	
+	recorrepage();
 	var id_recibo  	= get_parameter_enid($(this) , "id");	
 	if (id_recibo == undefined) {
 		id_recibo 	= get_parameter(".ticket");  		
@@ -65,8 +65,7 @@ function response_cancelacion_compra(data){
 		var btn_cuenta_historia =  "<a href='"+href+"' class='a_enid_blue'>CUENTANOS TU EXPERIENCIA</a>";
 		var btn_ir_a_compras =  "<a class='a_enid_black mis_compras_btn' id='mis_compras' href='#tab_mis_pagos' data-toggle='tab'>VER MIS COMPRAS</a>";
 		var div= "<div class='cuenta_tu_experiencia'>"+btn_cuenta_historia+btn_ir_a_compras+"</div>";
-		var div2="<div class='titulo_enid'>¿NOS AYUDARÍAS A EVALUAR EL PRODUCTO QUE CANCELASTE?</div>";
-		div2 +="<div class='desc_ayuda'>Con esto otros clientes podrán mantenerse informados sobre el vendedor y su atención al cliente</div>";
+		var div2="<div class='titulo_enid'>¿NOS AYUDARÍAS A EVALUAR EL PRODUCTO QUE CANCELASTE?</div>";		
 		llenaelementoHTML(".place_resumen_servicio" ,  div2 +""+div);
 		$(".mis_compras_btn").click(carga_compras_usuario);
 			

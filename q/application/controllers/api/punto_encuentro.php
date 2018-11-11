@@ -40,7 +40,6 @@ class Punto_encuentro extends REST_Controller{
 
         $param      =  $this->get();
         $response   =  [];
-
         if (if_ext($param , "punto_encuentro")) {
 
             $id       =  $param["punto_encuentro"];
@@ -48,5 +47,16 @@ class Punto_encuentro extends REST_Controller{
         }
         $this->response($response);
     }
- 
+    function id_GET(){
+
+        $param      =  $this->get();
+        $response   =  [];
+
+        if (if_ext($param , "id")) {
+            
+            $response = $this->punto_encuentro_model->get_tipo($param);
+            
+        }
+        $this->response($response);
+    }
 }?>

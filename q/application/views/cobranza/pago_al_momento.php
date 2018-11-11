@@ -1,6 +1,5 @@
 <?php 
-	
-	//$costo_envio_cliente_sistema 	=  $costo_envio_sistema["costo_envio_cliente"];
+		
 	$recibo 				=  	$recibo[0]; 
 	$id_forma_pago  		=  	$recibo["id_forma_pago"];
 	$saldo_cubierto  		=  	$recibo["saldo_cubierto"];
@@ -24,7 +23,10 @@
 	$resumen_pedido  		=  	$recibo["resumen_pedido"];
 	$servicio 				= 	$servicio[0];
 	$flag_servicio 			=  	$servicio["flag_servicio"];
-
+	$es_contra_entrega      = 	$recibo["es_contra_entrega"];
+	
+	$costo_envio_sistema 	= 	
+	($es_contra_entrega == 1) ? $punto_encuentro[0]["costo_envio"] : $costo_envio_sistema;
 	
 	
 	$deuda 					=  get_saldo_pendiente($monto_a_pagar,
@@ -32,10 +34,12 @@
 								$saldo_cubierto,
 								$flag_servicio,
 								$costo_envio_cliente,
-								$costo_envio_sistema);
+								$costo_envio_sistema, 
+								$es_contra_entrega
+							);
 
 	
-	$saldo_pendiente 		= 	$deuda["saldo_pendiente_envio"];   
+	$saldo_pendiente 		= 	($es_contra_entrega == 1) ? $punto_encuentro[0]["costo_envio"]: $deuda["saldo_pendiente_envio"];   
 	$url_pago_oxxo 			= 	get_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
 	$url_pago_saldo_enid 	= 	get_link_saldo_enid($id_usuario_venta , $id_recibo);	
 	$url_img_servicio 		=  	link_imagen_servicio($id_servicio);
@@ -43,35 +47,73 @@
 	$data["url_pago_paypal"]= 	$url_pago_paypal;
 	$data["recibo"] 		=	$recibo;
 ?>
+
 <div class="col-lg-8">
+
+	<?php if($es_contra_entrega == 1 ):?>	
+		<?php 
+			$costo_envio =  $punto_encuentro[0]["costo_envio"];
+			$tipo 		 = 	$punto_encuentro[0]["tipo"]; 
+			$color 		 = 	$punto_encuentro[0]["color"]; 
+			$nombre_estacion 		 = 	$punto_encuentro[0]["nombre"]; 
+			$lugar_entrega 		= $punto_encuentro[0]["lugar_entrega"];
+			$numero 	 = 	"NÚMERO ".$punto_encuentro[0]["numero"]; 
+		?>		
+
+		<?=heading_enid("LUGAR DE ENCUENTRO" , 3, ["class" => "top_20"])?>
+		<?=div($tipo. " ". $nombre_estacion ." ". $numero." COLOR ". $color ,1)?>		
+		<?=div("ESTACIÓN ".$lugar_entrega , ["class" => "strong"],1)?>		
+
+		<br>
+
+		<?=div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"])?>
+		<br>
+		
+
+		<?=div(
+			"Recuerda que previo a la entrega de tu producto, deberás realizar el pago de ".$costo_envio." pesos por concepto de gastos de envío" , ["class" => "contenedor_text_entrega"])?>
+		
+		
+
+	<?php endif;?>
 	<hr>		
-	<?=heading_enid(icon("fa fa-credit-card") . "Formas de pago" , 3 , ["class" => 'strong' ])?>	
+	<?=heading_enid(icon("fa fa-credit-card") . "Formas de pago" , 4 , ["class" => 'strong' ])?>	
 	<hr>
 
-	<?=anchor_enid(
-			"Realiza compras con saldo Enid Service" , 
-			[
-				"href" 	=> 	$url_pago_saldo_enid 				
-			], 
-			1, 
-			1
+
+	<?=guardar(
+				"Pagos en tiendas de autoservicio (OXXO)" , 
+				["class" => "top_10"],
+				1,
+				1,
+				0,
+				$url_pago_oxxo
 	)?>
-	<?=anchor_enid(
-			"Pagos en tiendas de autoservicio (OXXO)",
-			[ "href"	=>  $url_pago_oxxo	],
-			1,
-			1
+
+
+	<?=guardar(
+				"Compra através de PayPal" , 
+				["class" => "top_10"],
+				1,
+				1,
+				0,
+				$url_pago_paypal
 	)?>
-	<?=anchor_enid(
-			"Compra através de PayPal",
-			["href"	=>  $url_pago_paypal],
-			1,
-			1
+	
+	<?=guardar(
+				"Realiza compras con saldo Enid Service" , 
+				["class" => "top_10"],
+				1,
+				1,
+				0,
+				$url_pago_saldo_enid 
 	)?>
+
+	
 	<?=n_row_12()?>				
 		
 		
-		
+	<?php if($es_contra_entrega == 0 ):?>		
 	
 		<?=heading_enid("Dirección de envío" , 3)?>
 		
@@ -124,6 +166,7 @@
 				)?>
 			<?php endif;?>
 		</div>
+	<?php endif;?>		
 		<hr>
 		
 

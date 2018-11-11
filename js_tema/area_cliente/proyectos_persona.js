@@ -25,6 +25,7 @@ function get_lugar_por_stus_compra(){
 /**/
 function carga_compras_usuario(){
 	
+	recorrepage();
 	var modalidad 	=  get_option("modalidad_ventas");  	
 	var url 		=  "../q/index.php/api/recibo/proyecto_persona_info/format/json/";		
 	var data_send 	=  { "status": get_option("estado_compra") , "modalidad" : modalidad };				
