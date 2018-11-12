@@ -300,8 +300,9 @@ INSERT INTO punto_encuentro(id_tipo_punto_encuentro , nombre , id_linea_metro) V
 INSERT INTO punto_encuentro(id_tipo_punto_encuentro , nombre , id_linea_metro) VALUES(1,"TLALTENCO" , 12);
 INSERT INTO punto_encuentro(id_tipo_punto_encuentro , nombre , id_linea_metro) VALUES(1,"TLAHUAC" , 12);
 
-use enidserv_web;
-desc punto_encuentro;
+
+
+
 alter table punto_encuentro add costo_envio float not null default 50;
 ALTER TABLE  proyecto_persona_forma_pago ADD  fecha_contra_entrega TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP();
 
@@ -327,3 +328,34 @@ DEFAULT CHARACTER SET = latin1;
 
 USE `enidserv_web` ;
 show tables;
+
+
+
+
+update tipo_punto_encuentro set status =1 limit 199;
+alter table  tipo_punto_encuentro change status status int not null default 1;
+update tipo_punto_encuentro set status =0 where id in (2,3);
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `enidserv_web`.`intento_compra` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `id_recibo` INT(11) NOT NULL,
+  `id_forma_pago` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_intento_compra_proyecto_persona_forma_pago1_idx` (`id_recibo` ASC),
+  INDEX `fk_intento_compra_forma_pago1_idx` (`id_forma_pago` ASC),
+  CONSTRAINT `fk_intento_compra_proyecto_persona_forma_pago1`
+    FOREIGN KEY (`id_recibo`)
+    REFERENCES `enidserv_web`.`proyecto_persona_forma_pago` (`id_proyecto_persona_forma_pago`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_intento_compra_forma_pago1`
+    FOREIGN KEY (`id_forma_pago`)
+    REFERENCES `enidserv_web`.`forma_pago` (`id_forma_pago`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;

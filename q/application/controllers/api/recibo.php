@@ -6,6 +6,7 @@ class recibo extends REST_Controller{
         parent::__construct();          
         $this->load->model("recibo_model");        
         $this->load->helper("recibo");
+        $this->load->library('table');       
         $this->load->library(lib_def());                    
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
@@ -277,6 +278,28 @@ class recibo extends REST_Controller{
         $this->response($response);
 
     }
+    /**/
+    function pedidos_GET(){
+        
+        $param      = $this->get();
+        $response   = [];  
+        if (if_ext($param , "fecha_inicio,fecha_termino,tipo_entrega")) {
+
+            if ($param["tipo_entrega"] == 2) {
+
+                $response   = $this->recibo_model->get_pedidos_mensajeria($param);        
+                $response   =  $this->table->generate($response);
+            }else{
+                $response   = $this->recibo_model->get_pedidos_contra_entrega($param);        
+                $response   =  $this->table->generate($response);
+            }
+            
+
+        }        
+        $this->response($response);
+
+    } 
+    /**/
     function dia_GET(){
         
         $param      = $this->get();
@@ -288,8 +311,7 @@ class recibo extends REST_Controller{
             $response   = $this->recibo_model->get_dia($param);        
             
         }
-        $this->response($response);            
-        
+        $this->response($response);                
     }
 
 }?>

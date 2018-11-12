@@ -605,7 +605,7 @@ if ( ! function_exists('create_select'))
   }
 }
 /**/
-if ( ! function_exists('get_paramdef'))
+if ( ! function_exists('get_param_def'))
 {
   /**/
   function get_param_def($data , $key , $val_def = 0){
@@ -613,7 +613,16 @@ if ( ! function_exists('get_paramdef'))
     return $val;
   }
 }
-/**/
+
+if ( ! function_exists('exists_array_def'))
+{
+  /**/
+  function exists_array_def($data , $key , $exists =1 , $fail = 0){
+    $val = ( is_array($data) && array_key_exists($key, $data) ) ? $exists : $fail;
+    return $val;
+  }
+}
+
 if ( ! function_exists('label'))
 {  
   function label($label_text = '',  $attributes = '' , $row = 0 ){

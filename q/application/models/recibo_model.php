@@ -4,6 +4,53 @@
         parent::__construct();        
         $this->load->database();
     }
+    function get_pedidos_mensajeria($param){
+
+      $query_get ="SELECT * FROM proyecto_persona_forma_pago WHERE 
+                    monto_a_pagar  <=  saldo_cubierto 
+                    AND 
+                    estado_envio = 0 
+                    AND 
+                    entregado =0 
+                    AND 
+                    se_cancela =0";
+      
+      return $this->db->query($query_get)->result_array();
+
+    }
+    function get_pedidos_contra_entrega($param){
+        
+      $fecha_inicio  =  $param["fecha_inicio"];
+      $fecha_termino =  $param["fecha_termino"];
+
+      $query_get  = "SELECT 
+                    r.saldo_cubierto , 
+                    r.monto_a_pagar , 
+                    r.costo_envio_cliente, 
+                    r.estado_envio ,
+                    r.cancela_cliente , 
+                    r.se_cancela, 
+                    r.num_ciclos_contratados, 
+                    r.fecha_contra_entrega ,  
+                    p.*
+                    FROM proyecto_persona_forma_pago r 
+                    INNER JOIN     
+                    proyecto_persona_forma_pago_punto_encuentro   rp 
+                    ON 
+                    r.id_proyecto_persona_forma_pago = rp.id_proyecto_persona_forma_pago 
+                    INNER JOIN 
+                    punto_encuentro  p 
+                    ON  
+                    p.id =  rp.id_punto_encuentro
+                    WHERE 
+                    es_contra_entrega = 1
+                    AND 
+                    DATE(fecha_contra_entrega) 
+                    BETWEEN 
+                    '".$fecha_inicio."' AND '".$fecha_termino."' ";
+                                        
+      return $this->db->query($query_get)->result_array();      
+    }
     function get_adeudo_cliente($param){
 
         $id_usuario =  $param["id_usuario"];        
