@@ -7,7 +7,7 @@ class Imagen_servicio_model extends CI_Model {
   	function insert( $params , $return_id=0){        
 	    $insert   = $this->db->insert("imagen_servicio", $params);     
 	    return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-	}
+	  }
 	
   function get( $params=[], $params_where =[] , $limit =1 , $order = '', $type_order='DESC'){
 	    $params = implode(",", $params);

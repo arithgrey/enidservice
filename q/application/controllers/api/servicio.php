@@ -1283,7 +1283,12 @@ class Servicio extends REST_Controller{
       if (if_ext($param , "fecha_inicio,fecha_termino"  )) {
         if ($param["v"] ==  1) {      
             
-            $servicios = $this->serviciosmodel->get_tipos_entregas($param);  
+            $servicios                = $this->serviciosmodel->get_tipos_entregas($param);  
+            $tipos_entregas_servicios = $this->get_tipos_intentos_entregas($param);
+            $servicios            = une_data($servicios ,  $tipos_entregas_servicios);
+
+
+
 
             $this->table->set_heading(
               "Servicio",
@@ -1292,7 +1297,8 @@ class Servicio extends REST_Controller{
               'Entregas en negocio' ,
               'Entregas en punto medio', 
               'deseado',
-              'valorado'
+              'valorado', 
+              'intentos'
               );
 
             
@@ -1302,14 +1308,16 @@ class Servicio extends REST_Controller{
 
               
               $vista                        = $row["vista"];
-              $tipo_entrega_envio           = $row["tipo_entrega_envio"];
-              $tipo_entrega_visita          = $row["tipo_entrega_visita"];
-              $tipo_entrega_punto_medio     = $row["tipo_entrega_punto_medio"];
+              $tipo_entrega_envio           = $row["mensajeria"];
+              $tipo_entrega_visita          = $row["visita_negocio"];
+              $tipo_entrega_punto_medio     = $row["punto_encuentro"];
               $deseado                      = $row["deseado"];
               $valoracion                   = $row["valoracion"];
               $id_servicio                  = $row["id_servicio"];
-
-
+              $intentos                     = $row["intentos"];
+  
+              //nombre_servicio 
+             
               $img            = img(
                 [ "src" => 
                   "../imgs/index.php/enid/imagen_servicio/".$id_servicio
@@ -1343,12 +1351,15 @@ class Servicio extends REST_Controller{
             $total       = $tb_headers .br().hr().br(). $tb_general;
             $response    = $total;
                       
+                      
+
 
         }
 
       }
       $this->response($response);
     }
+
     function get_headers_tipo_entrega($array){
 
 
@@ -1364,9 +1375,9 @@ class Servicio extends REST_Controller{
 
       $this->table->add_row(
         sumatoria_array($array ,"vista"),
-        sumatoria_array($array ,"tipo_entrega_envio"),
-        sumatoria_array($array ,"tipo_entrega_visita"),
-        sumatoria_array($array ,"tipo_entrega_punto_medio"),
+        sumatoria_array($array ,"mensajeria"),
+        sumatoria_array($array ,"visita_negocio"),
+        sumatoria_array($array ,"punto_encuentro"),
         sumatoria_array($array ,"deseado"),
         sumatoria_array($array ,"valoracion")
 
@@ -1374,7 +1385,10 @@ class Servicio extends REST_Controller{
       
       return  $this->table->generate();
     }
-
+    private function  get_tipos_intentos_entregas($q){
+      $api =  "intento_tipo_entrega/periodo/format/json/";
+      return $this->principal->api( $api , $q );      
+    }
 
 }
 ?>

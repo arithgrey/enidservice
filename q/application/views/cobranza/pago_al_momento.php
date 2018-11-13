@@ -46,6 +46,7 @@
 	$url_pago_paypal 		=	get_link_paypal($saldo_pendiente);	
 	$data["url_pago_paypal"]= 	$url_pago_paypal;
 	$data["recibo"] 		=	$recibo;
+	$text_forma_compra 	    =   ($es_contra_entrega) ?  "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
 ?>
 
 <div class="col-lg-8">
@@ -63,27 +64,27 @@
 		<?=heading_enid("LUGAR DE ENCUENTRO" , 3, ["class" => "top_20"])?>
 		<?=div($tipo. " ". $nombre_estacion ." ". $numero." COLOR ". $color ,1)?>		
 		<?=div("ESTACIÓN ".$lugar_entrega , ["class" => "strong"],1)?>		
-
 		<br>
-
 		<?=div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"])?>
-		<br>
-		
-
-		<?=div(
-			"Recuerda que previo a la entrega de tu producto, deberás realizar el pago de ".$costo_envio." pesos por concepto de gastos de envío" , ["class" => "contenedor_text_entrega"])?>
+		<br>	
+		<?=div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de ".$costo_envio." pesos por concepto de gastos de envío" , 
+		["class" => "contenedor_text_entrega"])?>
 		
 		
 
 	<?php endif;?>
 	<hr>		
-	<?=heading_enid(icon("fa fa-credit-card") . "Formas de pago" , 4 , ["class" => 'strong' ])?>	
+	<?=heading_enid(icon("fa fa-credit-card") . $text_forma_compra , 3 , ["class" => 'top_20' ])?>	
 	<hr>
 
 
 	<?=guardar(
-				"Pagos en tiendas de autoservicio (OXXO)" , 
-				["class" => "top_10"],
+				"PAGOS EN TIENDAS DE AUTOSERVICIO (OXXO)", 
+				[
+					"class" 	=> "top_10 text-left",
+					"onclick" 	=> "notifica_tipo_compra(4 ,  '".$id_recibo."');"
+
+				],
 				1,
 				1,
 				0,
@@ -92,8 +93,12 @@
 
 
 	<?=guardar(
-				"Compra através de PayPal" , 
-				["class" => "top_10"],
+				"A TRAVÉS DE PAYPAL" , 
+				[
+					"class" => "top_10 text-left" , 
+					"recibo" 	=> $id_recibo ,
+					"onclick" 	=> "notifica_tipo_compra(2 ,  '".$id_recibo."');"
+				],
 				1,
 				1,
 				0,
@@ -101,8 +106,11 @@
 	)?>
 	
 	<?=guardar(
-				"Realiza compras con saldo Enid Service" , 
-				["class" => "top_10"],
+				"SALDO  ENID SERVICE" , 
+				[
+					"class" => "top_10 text-left",
+					"onclick" 	=> "notifica_tipo_compra(1 ,  '".$id_recibo."');"
+				],
 				1,
 				1,
 				0,

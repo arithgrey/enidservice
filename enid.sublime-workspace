@@ -4,8 +4,124 @@
 		"selected_items":
 		[
 			[
+				"COLO",
+				"color"
+			],
+			[
+				"que",
+				"query_get"
+			],
+			[
+				"q",
+				"query_get"
+			],
+			[
+				"top_",
+				"top_20"
+			],
+			[
+				"cost",
+				"costo_envio_sistema"
+			],
+			[
+				"pa",
+				"params"
+			],
+			[
+				"id_",
+				"id_recibo"
+			],
+			[
+				"re",
+				"recibo"
+			],
+			[
+				"pla",
+				"place_notificacion_punto_encuentro"
+			],
+			[
+				"end",
+				"endif"
+			],
+			[
+				"pre",
+				"preventDefault"
+			],
+			[
+				"data",
+				"data_orden"
+			],
+			[
+				"putno",
+				"punto_encuentro"
+			],
+			[
+				"es_",
+				"es_contra_entrega"
+			],
+			[
+				"da",
+				"data_por_usuario"
+			],
+			[
+				"arra",
+				"array_keys"
+			],
+			[
+				"fecha",
+				"fecha_contra_entrega"
+			],
+			[
+				"es",
+				"es_contra_entrega"
+			],
+			[
+				"fal",
+				"false"
+			],
+			[
+				"ho",
+				"horario_entrega"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
 				"for",
-				"format"
+				"foreach\tforeach …"
+			],
+			[
+				"tex",
+				"text_usuario_registrado"
+			],
+			[
+				"punto",
+				"punto_encuentro"
+			],
+			[
+				"ser",
+				"servicio"
+			],
+			[
+				"num",
+				"num_hours"
+			],
+			[
+				"url",
+				"urlLecturaError"
+			],
+			[
+				"is",
+				"isShamir"
+			],
+			[
+				"op",
+				"ops"
+			],
+			[
+				"con",
+				"configData"
 			],
 			[
 				"nomre",
@@ -36,28 +152,12 @@
 				"ROSARIO"
 			],
 			[
-				"ser",
-				"servicios"
-			],
-			[
 				"servic",
 				"servicios"
 			],
 			[
-				"que",
-				"query_update"
-			],
-			[
 				"par",
 				"param"
-			],
-			[
-				"pa",
-				"param"
-			],
-			[
-				"da",
-				"data_send"
 			],
 			[
 				"margin",
@@ -92,10 +192,6 @@
 				"data"
 			],
 			[
-				"data",
-				"data_send"
-			],
-			[
 				"extensin",
 				"extension_dominio"
 			],
@@ -114,10 +210,6 @@
 			[
 				"q_",
 				"q_get"
-			],
-			[
-				"url",
-				"url_ml"
 			],
 			[
 				"p",
@@ -176,10 +268,6 @@
 				"attributes"
 			],
 			[
-				"con",
-				"contenido"
-			],
-			[
 				"link_",
 				"link_twitter"
 			],
@@ -190,14 +278,6 @@
 			[
 				"nu",
 				"nuevo_estado"
-			],
-			[
-				"id_",
-				"id_ticket"
-			],
-			[
-				"num",
-				"num_pendientes"
 			],
 			[
 				"mar",
@@ -226,10 +306,6 @@
 			[
 				"forma",
 				"forma_pago"
-			],
-			[
-				"end",
-				"end_row"
 			],
 			[
 				"e",
@@ -266,10 +342,6 @@
 			[
 				"fo",
 				"for\tfor …"
-			],
-			[
-				"fecha",
-				"fecha_inicio"
 			],
 			[
 				"f_",
@@ -364,10 +436,6 @@
 				"envio"
 			],
 			[
-				"fal",
-				"flag_servicio"
-			],
-			[
 				"fla",
 				"flag_servicio"
 			],
@@ -446,74 +514,6 @@
 			[
 				"usua",
 				"usuario_model"
-			],
-			[
-				"usuario_cla",
-				"usuario_clasificacion_model"
-			],
-			[
-				"delete",
-				"delete_imagen"
-			],
-			[
-				"im",
-				"imgs"
-			],
-			[
-				"imagen_is",
-				"imagen_usuario_model-"
-			],
-			[
-				"imagen_",
-				"imagen_usuario_model"
-			],
-			[
-				"drop",
-				"dbplus_ropen"
-			],
-			[
-				"re",
-				"return_id"
-			],
-			[
-				"cp",
-				"cp"
-			],
-			[
-				"servicio_",
-				"servicio_tallas"
-			],
-			[
-				"qe",
-				"query"
-			],
-			[
-				"sq",
-				"sql"
-			],
-			[
-				"tick",
-				"tickets_model"
-			],
-			[
-				"co",
-				"comision"
-			],
-			[
-				"usuario_de",
-				"usuario_deseo_model"
-			],
-			[
-				"fun",
-				"function"
-			],
-			[
-				"meta",
-				"metakeyword"
-			],
-			[
-				"me",
-				"metakeyword_model"
 			]
 		]
 	},
@@ -577,44 +577,84 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/puntos_medios",
-		"/var/www/html/inicio/puntos_medios/application",
-		"/var/www/html/inicio/puntos_medios/application/controllers",
-		"/var/www/html/inicio/puntos_medios/application/views",
-		"/var/www/html/inicio/reporte_enid",
-		"/var/www/html/inicio/reporte_enid/application",
-		"/var/www/html/inicio/reporte_enid/application/controllers"
+		"/var/www/html/inicio/q",
+		"/var/www/html/inicio/q/application",
+		"/var/www/html/inicio/q/application/models",
+		"/var/www/html/inicio/q/application/views",
+		"/var/www/html/inicio/q/application/views/cobranza"
 	],
 	"file_history":
 	[
-		"/var/www/html/inicio/puntos_medios/application/views/home.php",
-		"/var/www/html/inicio/view_tema/inputs_fecha_busqueda.php",
+		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
+		"/var/www/html/inicio/q/application/models/intento_compra_model.php",
+		"/var/www/html/inicio/js_tema/area_cliente/principal.js",
+		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
+		"/var/www/html/inicio/q/application/controllers/api/intento_compra.php",
+		"/var/www/html/inicio/js_tema/js/main.js",
+		"/var/www/html/inicio/extra.sql",
+		"/var/www/html/inicio/q/application/controllers/api/intento_compra",
+		"/var/www/html/inicio/q/application/models/tipo_punto_encuentro_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
+		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento_contra_entrega.php_",
+		"/var/www/html/inicio/q/application/controllers/api/tipo_punto_encuentro.php",
+		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
+		"/var/www/html/inicio/helpers/enid_helper.php",
+		"/var/www/html/inicio/contact/application/controllers/home.php",
+		"/var/www/html/inicio/q/application/models/punto_encuentro_model.php",
+		"/var/www/html/inicio/q/application/helpers/recibo_helper.php",
+		"/var/www/html/inicio/css_tema/template/area_cliente.css",
+		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento_contra_entrega.php",
+		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php",
+		"/var/www/html/inicio/q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php",
+		"/var/www/html/inicio/js_tema/area_cliente/cobranza.js",
+		"/var/www/html/inicio/js_tema/area_cliente/proyectos_persona.js",
+		"/var/www/html/inicio/area_cliente/application/views/secciones/menu.php",
+		"/var/www/html/inicio/q/application/views/valoraciones/form_servicio.php",
+		"/var/www/html/inicio/q/application/models/recibo_model.php",
+		"/var/www/html/inicio/area_cliente/application/views/home.php",
 		"/var/www/html/inicio/puntos_medios/application/views/quien_recibe.php",
 		"/var/www/html/inicio/js_tema/puntos_medios/principal.js",
-		"/var/www/html/inicio/helpers/enid_helper.php",
-		"/var/www/html/inicio/puntos_medios/application/controllers/home.php",
-		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
+		"/var/www/html/inicio/css_tema/template/puntos_encuentro.css",
+		"/var/www/html/inicio/js_tema/procesar/principal.js",
+		"/var/www/html/inicio/puntos_medios/application/helpers/puntoencuentro_helper.php",
+		"/var/www/html/inicio/q/application/helpers/cobranza_helper.php",
+		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
-		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
+		"/var/www/html/inicio/puntos_medios/application/views/home.php",
 		"/var/www/html/inicio/js_tema/contact/principal.js",
 		"/var/www/html/inicio/contact/application/views/preso_compra.php",
-		"/var/www/html/inicio/q/application/helpers/lineametro_helper.php",
-		"/var/www/html/inicio/extra.sql",
-		"/var/www/html/inicio/css_tema/template/puntos_encuentro.css",
-		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
-		"/var/www/html/inicio/js_tema/js/main.js",
+		"/var/www/html/inicio/puntos_medios/application/helper/puntoencuentro_helper.php",
+		"/var/www/html/inicio/puntos_medios/application/controllers/home.php",
+		"/var/www/html/inicio/css_tema/template/main.css",
+		"/var/www/html/inicio/procesar/application/helpers/procesar_helper.php",
+		"/var/www/html/inicio/login/application/controllers/api/sess.php",
 		"/var/www/html/inicio/producto/application/views/pre.php",
-		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/modulos/lensometro.php",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/js/lensometro.js",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/js/lensometro_fo.js",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/modulos/lensometro_fo.php",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/includes/easypost/EasyPost/EasyPost.php",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/includes/Funcion.php",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/includes/easypost/EasyPost/Object.php",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/clinicas/config.php",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/includes/Config.php",
+		"/home/arithgrey/Documentos/trabajo/backend.BenAndFrank.v1/includes/Config.php",
+		"/home/arithgrey/Documentos/trabajo/dockerFilesMagento2/Dockerfile",
+		"/home/arithgrey/Documentos/trabajo/backend.BenAndFrank.v1/docker-compose.yml",
+		"/var/www/html/trabajo/dockerFilesMagento2/Dockerfile",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/config/ local.php",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/config/local.php.dist",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/config/production.php",
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/docker-compose.yml",
+		"/var/www/html/inicio/view_tema/inputs_fecha_busqueda.php",
+		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
+		"/var/www/html/inicio/q/application/helpers/lineametro_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/linea_metro.php",
 		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
 		"/var/www/html/inicio/q/application/controllers/api/clasificacion.php",
 		"/var/www/html/inicio/q/application/models/linea_metro_model.php",
-		"/var/www/html/inicio/css_tema/template/main.css",
-		"/var/www/html/inicio/q/application/models/punto_encuentro_model.php",
 		"/var/www/html/inicio/view_tema/footer_template.php",
 		"/var/www/html/inicio/contact/application/views/secciones/solicita_una_llamada.php",
-		"/var/www/html/inicio/q/application/controllers/api/tipo_punto_encuentro.php",
-		"/var/www/html/inicio/q/application/models/tipo_punto_encuentro_model.php",
 		"/var/www/html/inicio/js_tema/servicio/pre.js",
 		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
 		"/var/www/html/inicio/reporte_enid/application/views/secciones/menu.php",
@@ -623,13 +663,10 @@
 		"/var/www/html/inicio/q/application/helpers/servicios_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
 		"/var/www/html/inicio/js_tema/repo_enid/principal.js",
-		"/var/www/html/inicio/js_tema/procesar/principal.js",
 		"/var/www/html/inicio/js_tema/login/ini.js",
 		"/var/www/html/inicio/js_tema/area_cliente/buzon.js",
-		"/var/www/html/inicio/procesar/application/helpers/procesar_helper.php",
 		"/var/www/html/inicio/procesar/application/views/secciones_2/paginas_web.php",
 		"/var/www/html/inicio/css_tema/template/contact.css",
-		"/var/www/html/inicio/contact/application/controllers/home.php",
 		"/var/www/html/inicio/contact/application/views/home.php",
 		"/var/www/html/inicio/q/application/models/usuario_model.php",
 		"/var/www/html/inicio/login/application/controllers/startsession.php",
@@ -639,14 +676,12 @@
 		"/var/www/html/inicio/js_tema/contact/principal.css",
 		"/var/www/html/inicio/view_tema/seccion_iniciar_session.php",
 		"/var/www/html/inicio/librerias/principal.php",
-		"/var/www/html/inicio/login/application/controllers/api/sess.php",
 		"/var/www/html/inicio/librerias/sessionclass.php",
 		"/var/www/html/inicio/system/core/Controller.php",
 		"/var/www/html/inicio/css_tema/template/metricas.css",
 		"/var/www/html/inicio/orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php",
 		"/var/www/html/inicio/index.php",
 		"/var/www/html/inicio/producto/application/views/compra.php",
-		"/var/www/html/inicio/area_cliente/application/views/secciones/menu.php",
 		"/var/www/html/inicio/view_tema/header_template.php",
 		"/var/www/html/inicio/view_tema/menu_session.php",
 		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
@@ -657,13 +692,9 @@
 		"/var/www/html/inicio/system/database/DB_query_builder.php",
 		"/var/www/html/inicio/administracion_cuenta/application/views/home.php",
 		"/var/www/html/inicio/css_tema/template/procesar_pago.css",
-		"/var/www/html/inicio/js_tema/area_cliente/principal.js",
-		"/var/www/html/inicio/area_cliente/application/views/home.php",
 		"/var/www/html/inicio/debug/debug.log",
-		"/var/www/html/inicio/js_tema/area_cliente/cobranza.js",
 		"/var/www/html/inicio/debug/debug.php",
 		"/var/www/html/inicio/area_cliente/application/controllers/home.php",
-		"/var/www/html/inicio/js_tema/area_cliente/proyectos_persona.js",
 		"/var/www/html/inicio/js_tema/js/direccion.js",
 		"/var/www/html/inicio/q/application/views/proyecto/domicilio_envio.php",
 		"/var/www/html/inicio/q/application/views/ventas/call_to_action.php",
@@ -676,45 +707,12 @@
 		"/var/www/html/inicio/css_tema/template/producto.css",
 		"/var/www/html/inicio/css_tema/template/pre.css",
 		"/var/www/html/inicio/js_tema/sobre_enid_service/principal.js",
-		"/var/www/html/inicio/q/application/views/valoraciones/form_servicio.php",
 		"/var/www/html/inicio/desarrollo/index.php",
 		"/var/www/html/inicio/contact/index.php",
 		"/var/www/html/inicio/bug_/index.php",
 		"/var/www/html/inicio/base_/index.php",
 		"/var/www/html/inicio/area_cliente/index.php",
-		"/var/www/html/inicio/administracion_cuenta/index.php",
-		"/var/www/html/inicio/faq/index.php",
-		"/var/www/html/inicio/forma_pago/index.php",
-		"/var/www/html/inicio/imgs/index.php",
-		"/var/www/html/inicio/lista_deseos/index.php",
-		"/var/www/html/inicio/login/index.php",
-		"/var/www/html/inicio/movimientos/index.php",
-		"/var/www/html/inicio/msj/index.php",
-		"/var/www/html/inicio/notificar/index.php",
-		"/var/www/html/inicio/orden_pago_oxxo/index.php",
-		"/var/www/html/inicio/pagos_/index.php",
-		"/var/www/html/inicio/persona_/index.php",
-		"/var/www/html/inicio/planes_servicios/index.php",
-		"/var/www/html/inicio/portafolio_/index.php",
-		"/var/www/html/inicio/pregunta/index.php",
-		"/var/www/html/inicio/procesar/index.php",
-		"/var/www/html/inicio/producto/index.php",
-		"/var/www/html/inicio/q/index.php",
-		"/var/www/html/inicio/recomendacion/index.php",
-		"/var/www/html/inicio/reporte_enid/index.php",
-		"/var/www/html/inicio/search/index.php",
-		"/var/www/html/inicio/sobre_enidservice/index.php",
-		"/var/www/html/inicio/soporte_/index.php",
-		"/var/www/html/inicio/tag_/index.php",
-		"/var/www/html/inicio/tareas/index.php",
-		"/var/www/html/inicio/tareas_complejas/index.php",
-		"/var/www/html/inicio/terminos-y-condiciones/index.php",
-		"/var/www/html/inicio/unete_a_nuestro_equipo/index.php",
-		"/var/www/html/inicio/usuarios_enid_service/index.php",
-		"/var/www/html/inicio/valoracion/index.php",
-		"/var/www/html/inicio/q/application/helpers/tickets_helper.php",
-		"/var/www/html/inicio/q/application/views/tickets/detalle.php",
-		"/var/www/html/inicio/q/application/controllers/api/tickets.php"
+		"/var/www/html/inicio/administracion_cuenta/index.php"
 	],
 	"find":
 	{
@@ -725,6 +723,13 @@
 		"height": 116.0,
 		"where_history":
 		[
+			"",
+			"*.php",
+			"*.js",
+			"*.JS",
+			"",
+			"*.php",
+			"*.js",
 			"",
 			"*.php",
 			"*.js",
@@ -845,14 +850,7 @@
 			"",
 			"*.php",
 			"/model*.php",
-			"*.php",
-			"*.js",
-			"*.php",
-			"",
-			"*.php",
-			"",
-			"*.php",
-			""
+			"*.php"
 		]
 	},
 	"find_state":
@@ -860,134 +858,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"$('.datetimepicker5').datepicker();\t\t\t\t\t",
-			"datetimepicker5",
-			"=",
-			"quien_recibe",
-			"quien_recibe/",
-			"registra_usuario",
+			"proyecto_persona_info_",
+			"proyecto_persona_info",
+			"id_recibo",
+			"payp",
+			"d_forma_pago",
+			"request_enid",
+			"text_forma_compra",
+			"formas",
+			"Formas de pago",
+			"Recuerda que previo a la entrega",
+			"Recuerda que previo a la entrega de tu producto, deberás realizar el pago de 50 pesos por concepto de gastos de envío",
+			"val_def",
+			"exists_array_def",
+			"get_param_def",
+			"get_paramdef",
+			"array_key",
+			"pago_al_momento",
+			"print",
+			"lugar_entrega",
+			"nombre_punto",
+			"get_punto_encuentro",
+			"get_punto_encuentro_recibo",
+			"get_costo_envio_punto_encuentro",
+			"cos",
+			"costo",
+			"punto",
+			"costo_envio_sistema",
+			"costo",
+			"get_punto_encuentro",
+			"get_punto_encuentro_recibo",
+			"params_where",
+			"debu",
+			"get_punto_encuentro_recibo",
+			"ticket_pendiente_pago_contra_entrega",
+			"get_punto_encuentro_recibo",
+			"ticket_pendiente_pago",
+			"ticket_pendiente_pago_contra_entrega",
+			"button",
+			"Realiza compras con saldo Enid Service",
+			"Sobre tu",
+			"Con esto otros clientes podrán mantenerse informados sobre el vendedor y su atención al cliente",
+			"a_buzon",
+			"mis ventas",
+			"alert",
+			"cargar_info_resumen_pago_pendiente",
+			"response_carga_compras_usuario",
+			"recorrepage",
+			"proyecto_persona_info",
+			"=>",
+			"resumen_pagos_pendientes",
+			"place_notificacion_punto_encuentro_registro",
+			"request_enid",
+			"text_usuario_registrado_pregunta",
+			"orden_de_compra",
+			"orden_de_compra\norden_de_compra",
+			"orden_de_compra",
+			"genera_orden_compra",
 			"solicitud_proceso_pago",
 			"crea_orden",
-			"primer_orden",
-			"crea_orden",
-			"primer_orden",
-			"punto_",
+			"¿En qué horario te gustaría recibir tu pedido?",
+			"form_punto_encuentro_horario",
+			"response_notificacion_punto_entrega",
 			"response_registro_usuario",
-			"registra_usuario",
-			"response_send_email",
-			"envia_correo",
-			"form_correo",
-			"Recibe nuestra ubicación",
-			"registra_usuario",
+			"solicitud_proceso_pago",
+			"crea_orden",
+			"=",
+			"solicitud_proceso_pago",
+			"primer_orden",
+			"serialize",
+			"notifica_punto_entrega",
 			"form_punto_encuentro",
-			"IDENTIFICA TU PUNTO MÁS CERCANO",
-			"ACORDEMOS UN PUNTO MEDIO",
-			"Recibe nuestra ubicación",
-			"IDENTIFICA TU PUNTO MÁS CERCANO",
-			"nombre_linea_metro",
-			"muestra_estaciones",
-			"linea_metro",
-			"mensaje_cobro",
-			"=>",
-			"nombre_linea_metro",
-			"punto_encuentro",
-			"nombre_linea_metro",
-			"cursor_pointer linea_metro",
-			"alert",
-			"muestra_lineas_metro",
-			"color )",
-			"procesar_linea_metro",
-			"12);",
-			" ",
-			".",
-			"\n",
-			",",
-			"request_enid",
-			"select",
-			"$list_footer",
-			"$list",
-			"FACILIDAD DE COMPRA",
-			"create_select",
-			"Tipo_punto_encuentro_model",
-			"get_departamentos_enid",
+			"form_punto_encuentro_horario",
+			"form_punto_encuentro",
+			"¿Quién recibe?",
+			"<?=input_hidden",
+			"\t\t\t\t\t\t\t            ",
+			"<",
+			"¿Quién recibe?",
+			".mensaje_cobro_envio",
+			"Las entregas",
+			"Las entregas en puntos de encuentro tienen un costo adicional a tus artículos",
+			"solicitud_proceso_pago",
+			"crea_orden",
+			"crea_orden_punto_entrega",
+			"create_orden_punto_entrega",
+			"proyecto_persona_forma_pago_PUN",
+			"proyecto_persona_forma_pago",
+			"PROYECTO",
+			"acciones_posterior_orden_pago",
+			"genera_orden_compra",
+			"/orden_de_compra",
+			"id_forma_pago",
+			"genera_orden_compra",
+			"crea_resumen_compra",
+			"orden_de_compra",
+			"genera_orden_compra",
+			"orden_de_compra",
+			"genera_orden_compra",
+			"solicitud_proceso_pago",
+			"crea_orden",
+			"crea_orden_punto_entrega",
+			"get_costo_envio_punto_encuentro",
+			"get_costo_envio",
+			"solicitud_proceso_pago",
+			"crea_orden",
+			"plan",
+			"planb",
+			"solicitud_proceso_pago",
+			"crea_orden",
 			"=",
-			"Solicita una llamada aquí",
-			"Recibe nuestra ubicación",
-			"form",
-			"ENCONTRÉMONOS",
-			" ENCONTRÉMONOS",
-			"  ENCONTRÉMONOS",
-			"  ",
-			"\n",
-			".",
-			",",
-			"1. ",
-			"  ",
-			",",
-			"  ",
-			",",
-			"  ",
-			",",
-			"1,",
-			",",
-			"6);",
-			",",
-			"5);",
-			",",
-			"  \"",
-			",",
-			"  \"",
-			"\n",
-			",",
-			"linea_metro",
-			"nombre )",
-			", numero_linea",
-			"1,\"",
-			", \"ROSA\"",
-			" , color_linea",
-			"nombre )",
-			"      ",
-			"        ",
-			"get_headers_tipo_entrega",
-			"arrayProducts",
-			"ordena_table_general",
-			"table",
-			"=",
-			"              ",
-			"  \t\n",
-			"table",
-			"between",
-			"crea_historico_vista_servicio",
-			"vista",
-			"repo_tipos_entregas",
-			"repo",
-			"repo_dispositivos",
-			"f_dipositivos",
-			"f_usabilidad",
-			"tab_tipos_entregas",
-			"DISPOSITIVOS",
-			"nombre",
-			"correo_electronico",
-			"get_patameter",
-			"correo_electronico",
-			"contenedor_eleccion_correo_electronico",
-			"whats",
-			"whas",
-			"whasa",
-			"whasapp",
-			"function registro",
-			"registro",
-			"TU USUARIO YA SE ENCUENTRA REGISTRADO",
-			"<a class=\"white\" href=\"../login\">TU USUARIO YA SE ENCUENTRA REGISTRADO</a>",
-			"respuesta_registro",
-			"registro",
-			"agrega_usuario",
-			"form-miembro-enid-service",
-			"QUIEN ERES",
-			"informacion_extra",
-			"agrega_usuario",
-			"form-miembro-enid-service",
-			"¿Ya tienes una cuenta?"
+			"plan",
+			"solicitud_proceso_pago",
+			"crea_orden",
+			"solicitud_proceso_pago",
+			"crea_orden",
+			"crea_orden_punto_entrega",
+			"genera_orden_compra",
+			"09:00",
+			"crea_orden_punto_entrega",
+			"date",
+			"valida_fecha_entrega",
+			"crea_orden_punto_entrega",
+			"crea_orden",
+			"crea_orden_punto_entrega",
+			"array_ke",
+			"crea_usuario",
+			"fecha_entrega",
+			"primer_orden_post"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1078,28 +1076,208 @@
 		"selected_items":
 		[
 			[
-				"enid",
-				"helpers/enid_helper.php"
+				"recibo",
+				"q/application/controllers/api/recibo.php"
 			],
 			[
-				"cobran",
-				"q/application/controllers/api/cobranza.php"
+				"intento_compra_model",
+				"q/application/models/intento_compra_model.php"
 			],
 			[
-				"usua",
-				"q/application/controllers/api/usuario.php"
+				"pago_a",
+				"q/application/views/cobranza/pago_al_momento.php"
 			],
 			[
-				"usuari",
-				"q/application/controllers/api/usuario.php"
+				"main",
+				"js_tema/js/main.js"
 			],
 			[
 				"extra",
 				"extra.sql"
 			],
 			[
+				"tipo_punto_encuentro_model",
+				"q/application/models/tipo_punto_encuentro_model.php"
+			],
+			[
+				"tipo_pun",
+				"q/application/controllers/api/tipo_punto_encuentro.php"
+			],
+			[
 				"punto",
+				"q/application/controllers/api/punto_encuentro.php"
+			],
+			[
+				"extr",
+				"extra.sql"
+			],
+			[
+				"enid",
+				"helpers/enid_helper.php"
+			],
+			[
+				"cobrna",
+				"q/application/controllers/api/cobranza.php"
+			],
+			[
+				"punto_encuentro",
+				"q/application/controllers/api/punto_encuentro.php"
+			],
+			[
+				"punto_en",
+				"q/application/controllers/api/punto_encuentro.php"
+			],
+			[
+				"punto_e",
+				"q/application/controllers/api/punto_encuentro.php"
+			],
+			[
+				"punto_",
+				"q/application/models/punto_encuentro_model.php"
+			],
+			[
+				"area_cli",
+				"css_tema/template/area_cliente.css"
+			],
+			[
+				"pago_al_momento",
+				"q/application/views/cobranza/pago_al_momento.php"
+			],
+			[
+				"cobranza/pago_al_momento",
+				"q/application/views/cobranza/pago_al_momento.php"
+			],
+			[
+				"pago_al_momento_contra_entrega",
+				"q/application/views/cobranza/pago_al_momento_contra_entrega.php"
+			],
+			[
+				"punto_encuentro_model",
+				"q/application/models/punto_encuentro_model.php"
+			],
+			[
+				"proyecto_persona_forma_pago_punto_encuentro_model",
+				"q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php"
+			],
+			[
+				"eni",
+				"helpers/enid_helper.php"
+			],
+			[
+				"proyecto_persona_forma_pago_punto_encuentro",
+				"q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php"
+			],
+			[
+				"recibomo",
+				"q/application/models/recibo_model.php"
+			],
+			[
+				"cobran",
+				"q/application/controllers/api/cobranza.php"
+			],
+			[
+				"cobranza",
+				"q/application/controllers/api/cobranza.php"
+			],
+			[
+				"js_tema/procesar/principal.js",
+				"js_tema/procesar/principal.js"
+			],
+			[
+				"EXTR",
+				"extra.sql"
+			],
+			[
+				"cobr",
+				"q/application/helpers/cobranza_helper.php"
+			],
+			[
+				"punt",
 				"q/application/helpers/puntoencuentro_helper.php"
+			],
+			[
+				"usua",
+				"q/application/controllers/api/usuario.php"
+			],
+			[
+				"_hel",
+				"helpers/enid_helper.php"
+			],
+			[
+				"sess.php",
+				"login/application/controllers/api/sess.php"
+			],
+			[
+				"usu",
+				"q/application/controllers/api/usuario.php"
+			],
+			[
+				"lensometro.php",
+				"backend.BenAndFrank.v1/modulos/lensometro.php"
+			],
+			[
+				"lensometro_fo",
+				"backend.BenAndFrank.v1/modulos/lensometro_fo.php"
+			],
+			[
+				"lensometro",
+				"backend.BenAndFrank.v1/js/lensometro.js"
+			],
+			[
+				"lensometr",
+				"backend.BenAndFrank.v1/modulos/lensometro_fo.php"
+			],
+			[
+				"lensometro_fo.",
+				"backend.BenAndFrank.v1/js/lensometro_fo.js"
+			],
+			[
+				"ensometro_fo.php",
+				"backend.BenAndFrank.v1/modulos/lensometro_fo.php"
+			],
+			[
+				"easypost/easypost.php",
+				"backend.BenAndFrank.v1/includes/easypost/EasyPost/EasyPost.php"
+			],
+			[
+				"EasyPost/Object.php",
+				"backend.BenAndFrank.v1/includes/easypost/EasyPost/Object.php"
+			],
+			[
+				"func",
+				"backend.BenAndFrank.v1/includes/Funcion.php"
+			],
+			[
+				"Object.php",
+				"backend.BenAndFrank.v1/includes/easypost/EasyPost/Object.php"
+			],
+			[
+				"includes/Config.php",
+				"backend.BenAndFrank.v1/includes/Config.php"
+			],
+			[
+				"confi",
+				"backend.BenAndFrank.v1/clinicas/config.php"
+			],
+			[
+				"con",
+				"includes/Config.php"
+			],
+			[
+				"dock",
+				"dockerFilesMagento2/Dockerfile"
+			],
+			[
+				"doc",
+				"backend.BenAndFrank.v1/docker-compose.yml"
+			],
+			[
+				"docker-com",
+				"backend.BenAndFrank.v1/docker-compose.yml"
+			],
+			[
+				"usuari",
+				"q/application/controllers/api/usuario.php"
 			],
 			[
 				"punr",
@@ -1110,24 +1288,12 @@
 				"q/application/helpers/puntoencuentro_helper.php"
 			],
 			[
-				"punto_encuentro",
-				"q/application/controllers/api/punto_encuentro.php"
-			],
-			[
 				"line",
 				"q/application/controllers/api/linea_metro.php"
 			],
 			[
-				"main",
-				"css_tema/template/main.css"
-			],
-			[
 				"main.js",
 				"js_tema/js/main.js"
-			],
-			[
-				"tipo_pun",
-				"q/application/controllers/api/tipo_punto_encuentro.php"
 			],
 			[
 				"pre",
@@ -1166,16 +1332,8 @@
 				"js_tema/login/ini.js"
 			],
 			[
-				"con",
-				"css_tema/template/contact.css"
-			],
-			[
 				"contact",
 				"css_tema/template/contact.css"
-			],
-			[
-				"eni",
-				"helpers/enid_helper.php"
 			],
 			[
 				"main.css",
@@ -1188,10 +1346,6 @@
 			[
 				"princi",
 				"librerias/principal.php"
-			],
-			[
-				"sess.php",
-				"login/application/controllers/api/sess.php"
 			],
 			[
 				"pre.php",
@@ -1260,10 +1414,6 @@
 			[
 				"principal",
 				"librerias/principal.php"
-			],
-			[
-				"js_tema/procesar/principal.js",
-				"js_tema/procesar/principal.js"
 			],
 			[
 				"sess",
@@ -1344,10 +1494,6 @@
 			[
 				"areaclie",
 				"q/application/controllers/api/areacliente.php"
-			],
-			[
-				"cobranza",
-				"q/application/controllers/api/cobranza.php"
 			],
 			[
 				" planes_servicios/application/views/secciones/categorias_movil.php",
@@ -1440,154 +1586,6 @@
 			[
 				"data",
 				"db/database.php"
-			],
-			[
-				"tickets/detalle.php",
-				"q/application/views/tickets/detalle.php"
-			],
-			[
-				"tickets",
-				"q/application/controllers/api/tickets.php"
-			],
-			[
-				"helpers/tickets_helper.ph",
-				"q/application/helpers/tickets_helper.php"
-			],
-			[
-				"ex",
-				"extra.sql"
-			],
-			[
-				"EXTRA",
-				"extra.sql"
-			],
-			[
-				"enid_helper.php",
-				"helpers/enid_helper.php"
-			],
-			[
-				"tickets/respuestas",
-				"q/application/views/tickets/respuestas.php"
-			],
-			[
-				"respuesta.php",
-				"q/application/controllers/api/respuesta.php"
-			],
-			[
-				"tickets/form_respuesta",
-				"q/application/views/tickets/form_respuesta.php"
-			],
-			[
-				"tickets.php",
-				"q/application/controllers/api/tickets.php"
-			],
-			[
-				"desarro",
-				"css_tema/template/desarrollo_principal.css"
-			],
-			[
-				"desarrollo_pri",
-				"css_tema/template/desarrollo_principal.css"
-			],
-			[
-				"MAIN",
-				"css_tema/template/main.css"
-			],
-			[
-				"tick",
-				"q/application/controllers/api/tickets.php"
-			],
-			[
-				"js_tema/administracion_cuenta/img.js",
-				"js_tema/administracion_cuenta/img.js"
-			],
-			[
-				"js_tema/administracion_cuenta/principal.js",
-				"js_tema/administracion_cuenta/principal.js"
-			],
-			[
-				"css_tienda_cliente.css",
-				"css_tema/template/css_tienda_cliente.css"
-			],
-			[
-				"recibo",
-				"q/application/helpers/recibo_helper.php"
-			],
-			[
-				"imagen_usuario_model",
-				"q/application/models/imagen_usuario_model.php"
-			],
-			[
-				"imagen_uu",
-				"q/application/controllers/api/imagen_usuario.php"
-			],
-			[
-				"imagen_usuario",
-				"q/application/controllers/api/imagen_usuario.php"
-			],
-			[
-				"archivo",
-				"q/application/controllers/api/archivo.php"
-			],
-			[
-				"imgs/servicio_producto_servicio",
-				"q/application/views/imgs/servicio_producto_servicio.php"
-			],
-			[
-				"img.php",
-				"q/application/controllers/api/img.php"
-			],
-			[
-				"servicios_",
-				"q/application/helpers/servicios_helper.php"
-			],
-			[
-				"tickets_model",
-				"q/application/models/tickets_model.php"
-			],
-			[
-				"tareasmo",
-				"q/application/models/tareasmodel.php"
-			],
-			[
-				"ticke",
-				"q/application/controllers/api/tickets.php"
-			],
-			[
-				"tarea",
-				"q/application/models/tareasmodel.php"
-			],
-			[
-				"proyecto_persona_forma_pago_direccion.php",
-				"q/application/controllers/api/proyecto_persona_forma_pago_direccion.php"
-			],
-			[
-				"producto_principal.css",
-				"css_tema/template/producto_principal.css"
-			],
-			[
-				"recomenda",
-				"css_tema/template/recomendacion_principal.css"
-			],
-			[
-				"valoracion_servicio",
-				"css_tema/template/valoracion_servicio.css"
-			],
-			[
-				"valoracion_ser",
-				"css_tema/template/valoracion_servicio.css"
-			],
-			[
-				"recibo.php",
-				"q/application/controllers/api/recibo.php"
-			],
-			[
-				"cobranza.php",
-				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"productivi",
-				"q/application/controllers/api/productividad.php"
 			]
 		],
 		"width": 0.0
@@ -1682,7 +1680,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 245.0,
+	"side_bar_width": 316.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

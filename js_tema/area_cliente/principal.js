@@ -144,3 +144,10 @@ function alcance_producto(e){
 		redirect("../producto/?producto="+data);
 	});	
 }
+var notifica_tipo_compra =  function(tipo, recibo){
+	
+	var url 		=  "../q/index.php/api/intento_compra/index/format/json/";		
+	var data_send 	=  {tipo : tipo , recibo : recibo};			
+	request_enid( "POST",  data_send, url);	
+	
+}

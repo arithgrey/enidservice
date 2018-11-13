@@ -4,6 +4,35 @@
         parent::__construct();        
         $this->load->database();
     }
+    function get_q($params ,$param){
+
+
+      $f              =  get_keys($params);  
+      $fecha_inicio   =  $param["fecha_inicio"];
+      $fecha_termino  =  $param["fecha_termino"];
+      $tipo_entrega   =  $param["tipo_entrega"];
+
+      $query_get ="SELECT ".$f." FROM proyecto_persona_forma_pago WHERE 1=1 ";
+
+
+      
+      $fecha_contra_entrega 
+      =  " AND DATE(fecha_contra_entrega) BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
+
+      $fecha_mensajeria
+      =  " AND DATE(fecha_contra_entrega) BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
+
+
+      $ext_fecha =  ($tipo_entrega ==  1 ) ? $fecha_contra_entrega : $fecha_mensajeria;
+      $ext_contra_entrega = " AND  es_contra_entrega = '".$tipo_entrega."'";
+
+      $query_get .=  $ext_contra_entrega . $ext_fecha;
+      
+
+      return $this->db->query($query_get)->result_array();
+
+    }
+    
     function get_adeudo_cliente($param){
 
         $id_usuario =  $param["id_usuario"];        

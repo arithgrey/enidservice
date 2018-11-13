@@ -6,6 +6,7 @@ class recibo extends REST_Controller{
         parent::__construct();          
         $this->load->model("recibo_model");        
         $this->load->helper("recibo");
+        $this->load->library('table');       
         $this->load->library(lib_def());                    
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
@@ -67,9 +68,14 @@ class recibo extends REST_Controller{
     } 
     function get_estatus_servicio_enid_service($q){
         $api =  "status_enid_service/servicio/format/json/";
-        return  $this->principal->api( $api , $q);
-        
+        return  $this->principal->api( $api , $q);        
     }    
+
+    function get_estatus_enid_service($q){
+
+        $api =  "status_enid_service/index/format/json/";
+        return  $this->principal->api( $api , $q);        
+    }        
     function proyecto_persona_info_GET(){        
                 
         $param                              =   $this->get();              
@@ -277,6 +283,53 @@ class recibo extends REST_Controller{
         $this->response($response);
 
     }
+    /**/
+    function pedidos_GET(){
+        
+        $param      = $this->get();
+        $response   = [];  
+        if (if_ext($param , "fecha_inicio,fecha_termino,tipo_entrega,recibo,v")) {
+
+            $params   =  [      "id_proyecto_persona_forma_pago recibo" , 
+                                "saldo_cubierto" , 
+                                "fecha_registro" ,
+                                "monto_a_pagar" ,
+                                "num_ciclos_contratados",
+                                "cancela_cliente",
+                                "se_cancela",
+                                "status",
+                                "fecha_contra_entrega",
+                                "es_contra_entrega",
+                                "fecha_entrega",
+                                "costo_envio_cliente"
+            ];
+            if ($param["recibo"] > 0) {
+                /*Busqueda por número recibo*/
+                
+
+                $response =  $this->recibo_model->q_get($params, $param["recibo"]);
+
+            }else{
+                $response =  $this->recibo_model->get_q($params , $param);    
+            }
+
+            
+            
+
+            if ($param["v"] ==  1) {
+                /*cargo vista*/
+                $response =  create_resumen_pedidos($response , 
+                    $this->get_estatus_enid_service($param));
+                
+            }
+            
+        }   
+
+
+        $this->response($response);
+
+    } 
+    /**/
     function dia_GET(){
         
         $param      = $this->get();
@@ -288,8 +341,7 @@ class recibo extends REST_Controller{
             $response   = $this->recibo_model->get_dia($param);        
             
         }
-        $this->response($response);            
-        
+        $this->response($response);                
     }
 
 }?>

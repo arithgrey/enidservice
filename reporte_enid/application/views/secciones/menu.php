@@ -1,6 +1,14 @@
 <div class="col-lg-2">       
     <nav class="nav-sidebar">
-        <ul class="nav tabs">                
+        <ul class="nav tabs">
+            <li>
+                <?=anchor_enid(icon("fa fa-money")."PEDIDOS" ,  
+                [
+                    "id"          =>    "btn_servicios",
+                    "href"        =>    "../pedidos",                     
+                    "class"       =>    "black   dispositivos"
+                ]);?>                    
+            </li>                
             <li class="active"> 
                 <?=anchor_enid(icon('fa fa-globe')."INDICADORES" , 
                 [
@@ -95,7 +103,8 @@
                     "data-toggle" =>    "tab"  ,
                     "class"       =>    "black   dispositivos"
                 ]);?>                    
-            </li>                      
+            </li>
+                                  
             </ul>
         </nav>        
     </div>    

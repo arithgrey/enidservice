@@ -23,4 +23,9 @@ class Status_enid_service extends REST_Controller{
         }
         $this->response($response);
     }
+    function index_GET(){
+        $param      =   $this->get();
+        $response   =   [];                
+        $this->response($this->status_enid_service_model->get([] ,[] ,100));
+    }
 }?>

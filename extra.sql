@@ -300,8 +300,9 @@ INSERT INTO punto_encuentro(id_tipo_punto_encuentro , nombre , id_linea_metro) V
 INSERT INTO punto_encuentro(id_tipo_punto_encuentro , nombre , id_linea_metro) VALUES(1,"TLALTENCO" , 12);
 INSERT INTO punto_encuentro(id_tipo_punto_encuentro , nombre , id_linea_metro) VALUES(1,"TLAHUAC" , 12);
 
-use enidserv_web;
-desc punto_encuentro;
+
+
+
 alter table punto_encuentro add costo_envio float not null default 50;
 ALTER TABLE  proyecto_persona_forma_pago ADD  fecha_contra_entrega TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP();
 
@@ -327,3 +328,75 @@ DEFAULT CHARACTER SET = latin1;
 
 USE `enidserv_web` ;
 show tables;
+
+
+
+
+update tipo_punto_encuentro set status =1 limit 199;
+alter table  tipo_punto_encuentro change status status int not null default 1;
+update tipo_punto_encuentro set status =0 where id in (2,3);
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `enidserv_web`.`intento_compra` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `id_recibo` INT(11) NOT NULL,
+  `id_forma_pago` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_intento_compra_proyecto_persona_forma_pago1_idx` (`id_recibo` ASC),
+  INDEX `fk_intento_compra_forma_pago1_idx` (`id_forma_pago` ASC),
+  CONSTRAINT `fk_intento_compra_proyecto_persona_forma_pago1`
+    FOREIGN KEY (`id_recibo`)
+    REFERENCES `enidserv_web`.`proyecto_persona_forma_pago` (`id_proyecto_persona_forma_pago`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_intento_compra_forma_pago1`
+    FOREIGN KEY (`id_forma_pago`)
+    REFERENCES `enidserv_web`.`forma_pago` (`id_forma_pago`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
+
+
+
+-------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `enidserv_web`.`tipo_entrega` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fecha_entrega` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `nombre` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+USE enidserv_web;
+INSERT INTO tipo_entrega(nombre) VALUES("PUNTO ENCUENTRO");
+INSERT INTO tipo_entrega(nombre) VALUES("MENSAJERIA");
+INSERT INTO tipo_entrega(nombre) VALUES("VISITA EN NEGOCIO");
+
+
+
+CREATE TABLE IF NOT EXISTS `enidserv_web`.`intento_tipo_entrega` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `id_servicio` INT(11) NOT NULL,
+  `id_tipo_entrega` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_intento_tipo_entrega_servicio1_idx` (`id_servicio` ASC),
+  INDEX `fk_intento_tipo_entrega_tipo_entrega1_idx` (`id_tipo_entrega` ASC),
+  CONSTRAINT `fk_intento_tipo_entrega_servicio1`
+    FOREIGN KEY (`id_servicio`)
+    REFERENCES `enidserv_web`.`servicio` (`id_servicio`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_intento_tipo_entrega_tipo_entrega1`
+    FOREIGN KEY (`id_tipo_entrega`)
+    REFERENCES `enidserv_web`.`tipo_entrega` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;

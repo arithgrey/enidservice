@@ -39,7 +39,8 @@ class Home extends CI_Controller{
         }else{
 
             $param             = $this->input->get();
-            $ubicacion         = (array_key_exists("ubicacion", $param)) ? 1 :0;
+            $ubicacion         = exists_array_def($param , "ubicacion" );
+             
             $data["ubicacion"] = $ubicacion;
             $this->principal->show_data_page($data, 'home');    
         }
