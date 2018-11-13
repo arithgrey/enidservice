@@ -217,11 +217,9 @@
     function get_tipos_entregas($param){
 
         $query_get = "SELECT
-        id_servicio,
+        id_servicio,   
+        nombre_servicio,     
         vista , 
-        tipo_entrega_envio,  
-        tipo_entrega_visita , 
-        tipo_entrega_punto_medio , 
         deseado, 
         valoracion  
         FROM 
@@ -238,8 +236,7 @@
         BY 
         vista 
         DESC
-        ";
-        
+        ";        
         return $this->db->query($query_get)->result_array();
 
 
@@ -861,7 +858,7 @@
         debug($query_update);
         return $this->db->query($query_update);
     }
-
+    
     /*
     
     

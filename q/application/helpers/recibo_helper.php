@@ -1,6 +1,68 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+  function create_resumen_pedidos($recibos , $lista_estados){
+
+    $default = ["class" => "header_table_recibos"];
+    $tb  = "<hr class='top_20'><table class='table_enid_service top_20' >";
+      $tb  .= "<tr class='header_table'>";
+        $tb  .= get_td("ORDEN",  $default);
+        $tb  .= get_td("STATUS", $default);
+        $tb  .= get_td("TIPO ENTREGA", $default);
+        $tb  .= get_td("SALDO CUBIERTO", $default);
+        $tb  .= get_td("MONTO PENDIENTE", $default);
+        $tb  .= get_td("ENTREGA", $default);
+      $tb  .= "</tr>";
+    foreach ($recibos as $row) {
+      
+      $recibo                   = $row["recibo"];
+      $saldo_cubierto           = $row["saldo_cubierto"];
+      $fecha_registro           = $row["fecha_registro"];
+      $monto_a_pagar            = $row["monto_a_pagar"];
+
+      $num_ciclos_contratados   = $row["num_ciclos_contratados"];
+      $costo_envio_cliente      = $row["costo_envio_cliente"];
+      $monto_a_pagar            = ($monto_a_pagar * $num_ciclos_contratados)+$costo_envio_cliente;
+      $cancela_cliente          = $row["cancela_cliente"];
+      $se_cancela               = $row["se_cancela"];
+      $status                   = $row["status"];
+      $fecha_contra_entrega     = $row["fecha_contra_entrega"];
+      $es_contra_entrega        = $row["es_contra_entrega"];
+      $fecha_entrega                  = $row["fecha_entrega"];
+      
+      $estado_compra            =  ($se_cancela == 1 || $cancela_cliente == 1 ) ? "CANCELACIÓN" : 0;
+      $estado_compra            =  
+      ($estado_compra == 0 ) ? get_text_status($lista_estados, $status)  : $estado_compra;
+      $tipo_entrega             = ($es_contra_entrega == 1) ? "PAGO CONTRA ENTREGA": "MENSAJERÍA";
+
+
+      $entrega = ($es_contra_entrega ==  1) ? $fecha_contra_entrega : $fecha_entrega;
+
+       
+      $tb  .= "<tr id='".$recibo."' class='desglose_orden cursor_pointer'>";
+        $tb  .= get_td($recibo);
+        $tb  .= get_td($estado_compra);
+        $tb  .= get_td($tipo_entrega);
+        $tb  .= get_td($saldo_cubierto."MXN");        
+        $tb  .= get_td($monto_a_pagar."MXN");  
+        $tb  .= get_td($entrega);  
+        
+      $tb  .= "</tr>";
+      
+    }
+    $tb  .= "</table>";
+    return $tb;
+  }
+  function get_text_status($lista, $estado_compra){
+
+    foreach ($lista  as $row) {
+      
+      $id_estatus_enid_service = $row["id_estatus_enid_service"];  
+      if ($estado_compra ==  $id_estatus_enid_service) {
+          return strtoupper($row["text_vendedor"]);
+      }
+    }
+  }
   function get_link_paypal($saldo_pendiente){
       
     if ($saldo_pendiente > 0) {

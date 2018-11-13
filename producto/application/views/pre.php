@@ -18,7 +18,7 @@
 			 			 
 				
 				<div class="contenedor_opcion col-lg-4 col-md-4 col-sm-4 col-xs-12 cursor_pointer" 
-				onclick="carga_opcion_entrega(1, <?=$id_servicio?>);">
+				onclick="carga_opcion_entrega(2, <?=$id_servicio?>);">
 					<div class="box-part text-center">                       
                         <?=icon('fa fa-truck fa-3x')?>                        
 						<?=div(heading_enid("POR MENSAJERÍA",3) ,  ["class"=>"title"])?>
@@ -26,26 +26,20 @@
 					 </div>
 				</div>	 
 				
-				<div class="contenedor_opcion col-lg-4 col-md-4 col-sm-4 col-xs-12 cursor_pointer" onclick="carga_opcion_entrega(2 , <?=$id_servicio?>);">               
+				<div class="contenedor_opcion col-lg-4 col-md-4 col-sm-4 col-xs-12 cursor_pointer" onclick="carga_opcion_entrega(3 , <?=$id_servicio?>);">               
 					<div class="box-part text-center">                       
                         <?=icon('fa fa-map-marker fa-3x')?>  
 						<?=div(heading_enid("VISÍTANOS",3) ,  ["class"=>"title"])?>
 						<?=div(span("VEN POR TUS ARTÍCULOS") , ["class" => "text"])?>
 					 </div>
 				</div>	 
-				<div class="contenedor_opcion col-lg-4 col-md-4 col-sm-4 col-xs-12 cursor_pointer" onclick="carga_opcion_entrega(3, <?=$id_servicio?>);">               
+				<div class="contenedor_opcion col-lg-4 col-md-4 col-sm-4 col-xs-12 cursor_pointer" onclick="carga_opcion_entrega(1, <?=$id_servicio?>);">
 					<div class="box-part text-center">                       
                         <?=icon('fa fa-space-shuttle fa-3x')?>  
 						<?=div(heading_enid("ENCONTRÉMONOS",3) ,  ["class"=>"title"])?>
 						<?=div(span("ACORDEMOS UN PUNTO MEDIO") , ["class" => "text"])?>
 					 </div>
-				</div>	 
-				
-
-
-				
-				
-		
+				</div>	 						
 		</div>		
     </div>
 	</div>

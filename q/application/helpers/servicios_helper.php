@@ -3,6 +3,57 @@ if(!function_exists('invierte_date_time')){
 	function get_url_venta($extra){
 		return "http://enidservice.com/inicio/producto/?producto=" .$extra;
 	}	
+	function une_data($data_servicios ,  $data_intentos_entregas){
+
+        $new_data 		=  [];
+        $data_complete 	=  [];
+        $a        =   0;        
+        foreach ($data_servicios as $row) {
+            
+            $new_data[$a]   = $row;
+            $id_servicio    = $row["id_servicio"]; 
+            $b 				= 0;
+            foreach ($data_intentos_entregas as $row2) {                
+                if ($row2["id_servicio"] ==  $id_servicio) {
+                    $new_data[$a]["intentos_compras"] = $row2;
+                    unset($data_intentos_entregas[$b]);
+                    break;
+                }
+                $b ++;
+            }            
+            $a ++;
+        }
+
+        
+        $z 			   =  0;
+        foreach ($new_data as $row) {        	
+
+        	$data_complete[$z] 	= [
+
+	        	"id_servicio"	 	=> $row["id_servicio"],	        	
+				"vista"	 			=> $row["vista"],
+				"nombre_servicio"	=> $row["nombre_servicio"],
+				"deseado"	 		=> $row["deseado"],
+				"valoracion"	 	=> $row["valoracion"],
+			];
+			if(array_key_exists("intentos_compras", $row) ){
+				
+				$data_complete[$z]["intentos"] 			= $row["intentos_compras"]["intentos"];
+				$data_complete[$z]["punto_encuentro"] 	= $row["intentos_compras"]["punto_encuentro"];
+				$data_complete[$z]["mensajeria"] 		= $row["intentos_compras"]["mensajeria"];
+				$data_complete[$z]["visita_negocio"] 	= $row["intentos_compras"]["visita_negocio"];
+				
+        	}else{
+        		$data_complete[$z]["intentos"] 			= 0;
+				$data_complete[$z]["punto_encuentro"] 	= 0;
+				$data_complete[$z]["mensajeria"] 		= 0;
+				$data_complete[$z]["visita_negocio"] 	= 0;
+        	}
+ 
+        	$z ++; 
+        }
+        return $data_complete;
+    }
 	function create_dropdown_button($id_imagen , $principal = 0 ){
 	
 		$button =  div(icon("fa fa-chevron-circle-down") , 
