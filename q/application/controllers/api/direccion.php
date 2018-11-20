@@ -8,7 +8,10 @@ class direccion extends REST_Controller{
     }
     function data_direccion_GET(){
         $param      = $this->get();
-        $response   =  $this->direccion_model->get_data_direccion($param);
+        $response   = [];
+        if (if_ext($param , "id_direccion")) {
+            $response   =  $this->direccion_model->get_data_direccion($param);    
+        }        
         $this->response($response);
     }
     function index_POST(){        

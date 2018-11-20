@@ -16,19 +16,16 @@
 
 
       
-      $fecha_contra_entrega 
-      =  " AND DATE(fecha_contra_entrega) BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
-
-      $fecha_mensajeria
-      =  " AND DATE(fecha_contra_entrega) BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
-
-
-      $ext_fecha =  ($tipo_entrega ==  1 ) ? $fecha_contra_entrega : $fecha_mensajeria;
-      $ext_contra_entrega = " AND  es_contra_entrega = '".$tipo_entrega."'";
-
-      $query_get .=  $ext_contra_entrega . $ext_fecha;
       
+      $ext_fecha
+      =  " AND DATE(fecha_registro) BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
+       
+      $ext_contra_entrega = " AND  tipo_entrega = '".$tipo_entrega."'";
 
+
+      $query_get .=  $ext_contra_entrega . $ext_fecha." ORDER BY fecha_registro DESC";
+
+      
       return $this->db->query($query_get)->result_array();
 
     }
@@ -284,7 +281,7 @@
             $this->db->where($key , $value);
     }
     $this->db->limit($limit);
-    return $this->db->update("id_proyecto_persona_forma_pago", $data);
+    return $this->db->update("proyecto_persona_forma_pago", $data);
     
   }
   function q_get($params=[], $id){
@@ -404,9 +401,9 @@
       $data_complete["data"]=  $this->db->query($query_get)->result_array(); 
       return $data_complete;      
   }       
-  function crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis , $es_contra_entrega = 0 ){
+  function crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis , $tipo_entrega = 0 ){
         
-        if ($es_contra_entrega == 0) {
+        if ($tipo_entrega == 0) {
           
             $resumen ="";
             $resumen = $num_ciclos." ".$servicio["nombre_servicio"];
@@ -442,17 +439,16 @@
     
     function crea_orden_de_compra($param){    
       
-      
       $saldo_cubierto     =   0;
       $status             =   6;
       $data_usuario       =   $param["data_por_usuario"];            
 
-      $es_contra_entrega  = 0;
-      if(array_key_exists("es_contra_entrega", $data_usuario) && $data_usuario["es_contra_entrega"] ==  1){
-        $es_contra_entrega = 1;
+      $tipo_entrega       = $data_usuario["tipo_entrega"];
+      if( $data_usuario["tipo_entrega"] !=  2 ){
+          $tipo_entrega = $data_usuario["tipo_entrega"];
       } 
-      $id_forma_pago      =  ($es_contra_entrega ==  1) ? 8 : 6;
-
+      
+      $id_forma_pago      =  ($tipo_entrega ==  1) ? 8 : 6;
       $fecha_vencimiento  =  "DATE_ADD(CURRENT_DATE(), INTERVAL 2 DAY)";            
       $id_usuario         =  $param["id_usuario"]; 
       
@@ -471,14 +467,14 @@
       $precio               =  $servicio["precio"];
 
       $resumen_compra       =  
-      $this->crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis ,$es_contra_entrega );
+      $this->crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis ,$tipo_entrega );
       
-      $costo_envio_cliente  =0;
-      $costo_envio_vendedor =0;
-      $flag_servicio        =  ($es_contra_entrega ==  1 ) ? 0 : $servicio["flag_servicio"];
-      $monto_a_pagar        =  $precio; 
-      if($flag_servicio ==  0 && $es_contra_entrega == 0){
-          
+      $costo_envio_cliente  =   0;
+      $costo_envio_vendedor =   0;
+      $flag_servicio        =   ($tipo_entrega <  5 ) ? 0 : $servicio["flag_servicio"];
+      $monto_a_pagar        =   $precio; 
+      if($flag_servicio ==  0 && $tipo_entrega > 1){
+
         $costo_envio          =   $param["costo_envio"];
         $costo_envio_cliente  =   $costo_envio["costo_envio_cliente"];        
         $costo_envio_vendedor =   $costo_envio["costo_envio_vendedor"];
@@ -511,7 +507,7 @@
         "id_servicio"               ,
         "resumen_pedido"            ,
         "talla"     ,
-        "es_contra_entrega"   
+        "tipo_entrega"   
       ];
 
       
@@ -535,19 +531,19 @@
           $id_servicio,
           "'".$resumen_compra."'",
           $talla ,
-          $es_contra_entrega
+          $tipo_entrega
         ];
       
-      if ($es_contra_entrega ==  1) {
-        array_push($array_keys , "fecha_contra_entrega");
-      }  
-      if ($es_contra_entrega ==  1) {
-        array_push($array_values ,  "'".$data_usuario["fecha_entrega"]."'"  );
+      
+      if ($tipo_entrega ==  1) {
+          array_push($array_keys , "fecha_contra_entrega");
+          array_push($array_values ,  "'".$data_usuario["fecha_entrega"]."'"  );
       }
 
       $keys         = get_keys($array_keys); 
       $values       = get_keys($array_values);      
-      $query_insert ="INSERT INTO proyecto_persona_forma_pago(". $keys .") VALUES(".  $values .")";          
+      $query_insert ="INSERT INTO proyecto_persona_forma_pago(". $keys .") VALUES(".  $values .")";
+      
       $this->db->query($query_insert);
       return  $this->db->insert_id();  
       

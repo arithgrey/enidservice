@@ -10,11 +10,16 @@ class Linea_metro extends REST_Controller{
     function index_GET(){
 
         $param      =  $this->get();
-        $response   =  $this->linea_metro_model->get([], [] , 100 );
-        if (if_ext($param , "v")) {
+
+        if (if_ext($param , "v,tipo")) {
             
-            if ($param["v"] ==  1) {
+            $params     =  ["tipo" => $param["tipo"]];
+            $response   =  $this->linea_metro_model->get([], $params , 100 );
+            
+            if ($param["v"] ==  1 && $param["tipo"] == 1) {
                 $response =  create_listado_linea_metro($response);        
+            }else if($param["v"] ==  1 && $param["tipo"] == 2){
+                $response =  create_listado_metrobus($response);        
             }                
         }        
         $this->response($response);

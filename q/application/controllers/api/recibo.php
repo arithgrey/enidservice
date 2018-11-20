@@ -34,12 +34,28 @@ class recibo extends REST_Controller{
     function saldo_pendiente_recibo_GET(){
 
         $param          =   $this->get();
-        $response       =   $this->recibo_model->q_get([ "monto_a_pagar" , "flag_envio_gratis"], $param["id_recibo"]);        
-        $monto_a_pagar  =   $response[0]["monto_a_pagar"]; 
-        $costo_envio    =   get_costo_envio($response[0]);
-        $total          =   $monto_a_pagar + $costo_envio["costo_envio_cliente"];
+        $total          =   $this->get_saldo_pendiente_recibo($param);
         $this->response($total);        
     }    
+    function get_saldo_pendiente_recibo($param){
+
+        $response       =   
+        $this->recibo_model->q_get(
+            [
+                "monto_a_pagar",
+                "num_ciclos_contratados", 
+                "flag_envio_gratis"
+            ], 
+            $param["id_recibo"]);        
+        $monto_a_pagar              =   $response[0]["monto_a_pagar"]; 
+        $num_ciclos_contratados     =   $response[0]["num_ciclos_contratados"]; 
+
+        $costo_envio    =   get_costo_envio($response[0]);
+        $total          =   
+        ($monto_a_pagar * $num_ciclos_contratados) + 
+        $costo_envio["costo_envio_cliente"];
+        return $total;
+    }
     
     function orden_de_compra_POST(){
 
@@ -178,7 +194,7 @@ class recibo extends REST_Controller{
     function ticket_pendiente_pago($param , $recibo , $data_complete){
 
         $id_usuario =  $recibo[0]["id_usuario"];               
-        if ($recibo[0]["es_contra_entrega"] ==  1) {
+        if ($recibo[0]["tipo_entrega"] ==  1) {
            $this->ticket_pendiente_pago_contra_entrega($param , $recibo , $data_complete);
         }else{
 
@@ -299,9 +315,10 @@ class recibo extends REST_Controller{
                                 "se_cancela",
                                 "status",
                                 "fecha_contra_entrega",
-                                "es_contra_entrega",
+                                "tipo_entrega",
                                 "fecha_entrega",
-                                "costo_envio_cliente"
+                                "costo_envio_cliente",
+                                "id_servicio"
             ];
             if ($param["recibo"] > 0) {
                 /*Busqueda por número recibo*/
@@ -342,6 +359,92 @@ class recibo extends REST_Controller{
             
         }
         $this->response($response);                
+    }
+    function id_GET(){
+
+        $param      =  $this->get();     
+        $response   =  [];
+        if (if_ext($param , "id")) {
+            
+            $id_recibo = $param["id"];    
+            $response  = $this->recibo_model->q_get([] , $id_recibo);
+        }
+        $this->response($response);
+    }
+    function saldo_cubierto_PUT(){
+
+        $param      = $this->put();
+        $response   = [];
+        if (if_ext($param , "saldo_cubierto,recibo")) {
+            
+            $param["id_recibo"] =  $param["recibo"];
+            
+            
+            $pago_pendiente 
+            =  
+            $this->get_saldo_pendiente_recibo($param);             
+
+            $response = 
+            "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR ".$pago_pendiente."MXN";
+
+            if ($param["saldo_cubierto"] > 0
+            && 
+            $param["saldo_cubierto"] >= $pago_pendiente
+            || 
+            ( $pago_pendiente - $param["saldo_cubierto"] ) < 101){
+                
+
+                $params =  [
+                
+                    "saldo_cubierto"    => $param["saldo_cubierto"],
+                    "status"            => 1
+
+                ];
+                
+                $in                     =  
+                ["id_proyecto_persona_forma_pago" => $param["recibo"]];
+                $response =  $this->recibo_model->update($params , $in );    
+            }
+            
+        }
+        $this->response($response);
+    }
+    function status_PUT(){
+
+        $param      = $this->put();
+        $response   = [];
+        if (if_ext($param , "saldo_cubierto,recibo,status")) {
+            
+            $param["id_recibo"] =  $param["recibo"];            
+            
+            $pago_pendiente 
+            =  
+            $this->get_saldo_pendiente_recibo($param);             
+
+            $response = 
+            "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR ".$pago_pendiente."MXN";
+
+            if ($param["saldo_cubierto"] > 0
+            && 
+            $param["saldo_cubierto"] >= $pago_pendiente
+            || 
+            ( $pago_pendiente - $param["saldo_cubierto"] ) < 101){
+                
+
+                $params =  [
+                
+                    "saldo_cubierto"    => $param["saldo_cubierto"],
+                    "status"            => $param["status"]
+
+                ];
+                
+                $in                     =  
+                ["id_proyecto_persona_forma_pago" => $param["recibo"]];
+                $response =  $this->recibo_model->update($params , $in );    
+            }
+            
+        }
+        $this->response($response);
     }
 
 }?>

@@ -23,7 +23,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller{
             [ "id_proyecto_persona_forma_pago" => $param["id_recibo"]]);            
         }        
         $this->response($response);
-    }
+    }    
     function index_POST(){
 
         $param      =   $this->post();                

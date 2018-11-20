@@ -74,7 +74,7 @@
 
 
 						  <?=input_hidden(["name" => "punto_encuentro" , "class"  =>"punto_encuentro_form" ])?>
-						  <?=input_hidden(["name" => "servicio", "class"  =>"servicio" , "value" => $servicio ])?>
+
 						  <?=input_hidden(["name" => "num_ciclos" 	   , "class"  =>"num_ciclos" , "value" => $num_ciclos])?>
 
 						

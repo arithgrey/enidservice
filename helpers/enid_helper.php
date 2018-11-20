@@ -7,7 +7,7 @@ grep -r "libraries/REST_Controller.php"  /Users/jonathan.medrano/Documents/examp
 perl -p -i -e 's/pero/pero_____/g' ex.php 
 sed -i 's/;();/;/g' 'pagos/application/controllers/api/afiliados.php'
 
-ELIMINAR TODOS LOS REST_Controller.php
+
 
 https://youtu.be/_dwdRNckUGk
 https://www.youtube.com/watch?v=DhpZ9EFshXI
@@ -355,6 +355,14 @@ if ( ! function_exists('get_td'))
       return "<td ". $attr ." NOWRAP >". $val ."</td>";
   }
 }
+if ( ! function_exists('get_th'))
+{
+  function get_th($val='' , $attributes = '' ){
+
+      $attr =  add_attributes($attributes);   
+      return "<th ". $attr ." NOWRAP >". $val ."</th>";
+  }
+}
 
 if ( ! function_exists('select_enid'))
 {
@@ -587,11 +595,12 @@ if ( ! function_exists('create_select'))
         
         if($def == 1){
 
-          $select .=  "<option value='". $valor ."'>".$text_def." </option>";          
+          $select .=  "<option value='". $valor ."'>".strtoupper($text_def)." </option>";          
 
         }
         foreach ($data as $row) {      
-          $select .=  "<option value='". $row[$val] ."'>". $row[$text_option]." </option>";
+          $select .=  
+          "<option value='". $row[$val] ."'>". strtoupper($row[$text_option])." </option>";
         }
         $select .="</select>";
       
@@ -991,7 +1000,7 @@ if ( ! function_exists('debug'))
 function debug($msg, $array = 0)
 { 
     
-    return "";       
+    
     if($_SERVER['HTTP_HOST'] ==  "localhost") {
 
       $_date_fmt  = 'Y-m-d H:i:s';

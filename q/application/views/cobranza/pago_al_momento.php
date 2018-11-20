@@ -23,11 +23,14 @@
 	$resumen_pedido  		=  	$recibo["resumen_pedido"];
 	$servicio 				= 	$servicio[0];
 	$flag_servicio 			=  	$servicio["flag_servicio"];
-	$es_contra_entrega      = 	$recibo["es_contra_entrega"];
+	$tipo_entrega      = 	$recibo["tipo_entrega"];
 	
 	$costo_envio_sistema 	= 	
-	($es_contra_entrega == 1) ? $punto_encuentro[0]["costo_envio"] : $costo_envio_sistema;
+	($tipo_entrega == 1) ? $punto_encuentro[0]["costo_envio"] : $costo_envio_sistema;
 	
+	
+	debug($costo_envio_cliente, 1);
+	debug($costo_envio_sistema, 1);
 	
 	$deuda 					=  get_saldo_pendiente($monto_a_pagar,
 								$num_ciclos_contratados,
@@ -35,23 +38,23 @@
 								$flag_servicio,
 								$costo_envio_cliente,
 								$costo_envio_sistema, 
-								$es_contra_entrega
+								$tipo_entrega
 							);
 
 	
-	$saldo_pendiente 		= 	($es_contra_entrega == 1) ? $punto_encuentro[0]["costo_envio"]: $deuda["saldo_pendiente_envio"];   
+	$saldo_pendiente 		= 	($tipo_entrega == 1) ? $punto_encuentro[0]["costo_envio"]: $deuda["saldo_pendiente_envio"];   
 	$url_pago_oxxo 			= 	get_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
 	$url_pago_saldo_enid 	= 	get_link_saldo_enid($id_usuario_venta , $id_recibo);	
 	$url_img_servicio 		=  	link_imagen_servicio($id_servicio);
 	$url_pago_paypal 		=	get_link_paypal($saldo_pendiente);	
 	$data["url_pago_paypal"]= 	$url_pago_paypal;
 	$data["recibo"] 		=	$recibo;
-	$text_forma_compra 	    =   ($es_contra_entrega) ?  "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
+	$text_forma_compra 	    =   ($tipo_entrega) ?  "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
 ?>
 
 <div class="col-lg-8">
 
-	<?php if($es_contra_entrega == 1 ):?>	
+	<?php if($tipo_entrega == 1 ):?>	
 		<?php 
 			$costo_envio =  $punto_encuentro[0]["costo_envio"];
 			$tipo 		 = 	$punto_encuentro[0]["tipo"]; 
@@ -121,7 +124,7 @@
 	<?=n_row_12()?>				
 		
 		
-	<?php if($es_contra_entrega == 0 ):?>		
+	<?php if($tipo_entrega == 0 ):?>		
 	
 		<?=heading_enid("Dirección de envío" , 3)?>
 		

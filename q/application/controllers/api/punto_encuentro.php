@@ -22,15 +22,17 @@ class Punto_encuentro extends REST_Controller{
     }
     function linea_metro_GET(){
 
-        $param      =  $this->get();
-        $response   = [];
+        $param      =   $this->get();
+        $response   =   [];
 
         if (if_ext($param , "id,v")) {
         
             $params_where = ["id_linea_metro" =>  $param["id"]];
             $response = $this->punto_encuentro_model->get([], $params_where , 100);
             if ($param["v"] ==  1) {
-                $response = create_estaciones($response);    
+
+                $flag_envio_gratis  =   $this->get_flag_envio_gratis($param["servicio"]);                
+                $response           =   create_estaciones($response , $flag_envio_gratis);    
             }            
         }
         $this->response($response);     
@@ -51,12 +53,16 @@ class Punto_encuentro extends REST_Controller{
 
         $param      =  $this->get();
         $response   =  [];
-
-        if (if_ext($param , "id")) {
-            
-            $response = $this->punto_encuentro_model->get_tipo($param);
-            
+        if (if_ext($param , "id")) {            
+            $response = $this->punto_encuentro_model->get_tipo($param);        
         }
         $this->response($response);
+    }
+    private function get_flag_envio_gratis($id_servicio){
+        
+        $q          = ["id" => $id_servicio];        
+        $api        = "servicio/envio_gratis/format/json/";    
+        $response   =  $this->principal->api( $api , $q );        
+        return $response[0]["flag_envio_gratis"];
     }
 }?>

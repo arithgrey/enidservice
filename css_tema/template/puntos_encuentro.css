@@ -25,6 +25,11 @@
 	color: #0167c9;
 	font-weight: bold
 }
+.text_costo_envio_gratis{
+	font-size: 1.2em;
+	color: #0167c9;
+	font-weight: bold	
+}
 .nombre_estacion:hover{
 	color: blue;
 }
@@ -50,4 +55,11 @@
 	background: #005acf;
 	padding: 10px;
 	color: white;
+}
+.nombre_linea_metrobus{
+	background: #ec1606;
+	height: 50px;
+	text-align: center;
+	color: white;
+	font-size: 2em;
 }

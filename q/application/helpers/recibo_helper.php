@@ -4,15 +4,18 @@ if(!function_exists('invierte_date_time')){
   function create_resumen_pedidos($recibos , $lista_estados){
 
     $default = ["class" => "header_table_recibos"];
-    $tb  = "<hr class='top_20'><table class='table_enid_service top_20' >";
+    $tb  = "<hr class='top_20'>
+    <table class='table_enid_service top_20' >
+          <thead>";
       $tb  .= "<tr class='header_table'>";
-        $tb  .= get_td("ORDEN",  $default);
-        $tb  .= get_td("STATUS", $default);
-        $tb  .= get_td("TIPO ENTREGA", $default);
-        $tb  .= get_td("SALDO CUBIERTO", $default);
-        $tb  .= get_td("MONTO PENDIENTE", $default);
-        $tb  .= get_td("ENTREGA", $default);
-      $tb  .= "</tr>";
+        $tb  .= get_th("ORDEN",  $default);
+        $tb  .= get_th("", $default);
+        $tb  .= get_th("STATUS", $default);
+        $tb  .= get_th("TIPO ENTREGA", $default);
+        $tb  .= get_th("SALDO CUBIERTO", $default);
+        $tb  .= get_th("MONTO COMPRA", $default);
+        $tb  .= get_th("ENTREGA", $default);
+      $tb  .= "</thead></tr><tbody>";
     foreach ($recibos as $row) {
       
       $recibo                   = $row["recibo"];
@@ -27,20 +30,29 @@ if(!function_exists('invierte_date_time')){
       $se_cancela               = $row["se_cancela"];
       $status                   = $row["status"];
       $fecha_contra_entrega     = $row["fecha_contra_entrega"];
-      $es_contra_entrega        = $row["es_contra_entrega"];
+      $tipo_entrega        = $row["tipo_entrega"];
       $fecha_entrega                  = $row["fecha_entrega"];
       
       $estado_compra            =  ($se_cancela == 1 || $cancela_cliente == 1 ) ? "CANCELACIÓN" : 0;
       $estado_compra            =  
       ($estado_compra == 0 ) ? get_text_status($lista_estados, $status)  : $estado_compra;
-      $tipo_entrega             = ($es_contra_entrega == 1) ? "PAGO CONTRA ENTREGA": "MENSAJERÍA";
+      $tipo_entrega             = ($tipo_entrega == 1) ? "PAGO CONTRA ENTREGA": "MENSAJERÍA";
 
 
-      $entrega = ($es_contra_entrega ==  1) ? $fecha_contra_entrega : $fecha_entrega;
+      $entrega = ($tipo_entrega ==  1) ? $fecha_contra_entrega : $fecha_entrega;
 
-       
-      $tb  .= "<tr id='".$recibo."' class='desglose_orden cursor_pointer'>";
+      
+      
+      $extra = ($status == 9) ? "entregado" : "";
+      
+
+      $tb   .= "<tr id='".$recibo."' class='desglose_orden cursor_pointer ".$extra."' >";
+
+      $id_servicio =  $row["id_servicio"];
+      $url_img     =  "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
+      $img    = img(["src"=> $url_img , "style"=>"width: 40px !important"]);
         $tb  .= get_td($recibo);
+        $tb  .= get_td($img);
         $tb  .= get_td($estado_compra);
         $tb  .= get_td($tipo_entrega);
         $tb  .= get_td($saldo_cubierto."MXN");        
@@ -50,6 +62,8 @@ if(!function_exists('invierte_date_time')){
       $tb  .= "</tr>";
       
     }
+    
+    $tb  .= "</tbody>";
     $tb  .= "</table>";
     return $tb;
   }
@@ -89,7 +103,11 @@ if(!function_exists('invierte_date_time')){
   /**/
   function get_saldo_pendiente($monto, 
     $ciclos, 
-    $cubierto , $es_servicio , $envio_cliente,  $envio_sistema,$es_contra_entrega){
+    $cubierto , 
+    $es_servicio , 
+    $envio_cliente,  
+    $envio_sistema,
+    $tipo_entrega){
 
 
     $cubierto =  ($cubierto < 0 ) ? 0 : $cubierto;    
@@ -98,7 +116,7 @@ if(!function_exists('invierte_date_time')){
     $envio                  =   ($es_servicio == 0 ) ? $envio_cliente : 0;     
     $saldo_pendiente_envio  =   ($total > 0) ? $total + $envio : 0;
     $text_envio             =   "";
-    if ($es_contra_entrega ==  0) {
+    if ($tipo_entrega ==  2) {
         $text_envio             =   ($es_servicio == 0) ? $envio_sistema["text_envio"]["cliente"]: "";   
     }else{
         $text_envio             =  "Cargos de entrega ".$envio_sistema."MXN";      

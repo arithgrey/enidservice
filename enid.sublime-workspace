@@ -4,6 +4,206 @@
 		"selected_items":
 		[
 			[
+				"reu",
+				"return"
+			],
+			[
+				"stat",
+				"status"
+			],
+			[
+				"fn",
+				"font-size\tproperty"
+			],
+			[
+				"col",
+				"col-lg-6"
+			],
+			[
+				"for",
+				"for\tfor …"
+			],
+			[
+				"text",
+				"text"
+			],
+			[
+				"tipo",
+				"tipos_entregas"
+			],
+			[
+				"id_",
+				"id_recibo"
+			],
+			[
+				"tel_c",
+				"tel_contacto_alterno"
+			],
+			[
+				"PUNT",
+				"punto_encuentro"
+			],
+			[
+				"NOM",
+				"nombre_linea"
+			],
+			[
+				"fo",
+				"foreach\tforeach …"
+			],
+			[
+				"do",
+				"domicilio"
+			],
+			[
+				"pa",
+				"param"
+			],
+			[
+				"tex",
+				"text-align\tproperty"
+			],
+			[
+				"pritn",
+				"print_r"
+			],
+			[
+				"rec",
+				"recibo"
+			],
+			[
+				"text_en",
+				"text_costo_envio"
+			],
+			[
+				"texto_caga",
+				"texto_cargos_entrega"
+			],
+			[
+				"fla",
+				"flag_envio_gratis"
+			],
+			[
+				"text_c",
+				"texto_cargos_entrega"
+			],
+			[
+				"envio",
+				"flag_envio_gratis"
+			],
+			[
+				"ser",
+				"serviciosmodel-"
+			],
+			[
+				"text_",
+				"text_vendedor"
+			],
+			[
+				"url",
+				"url_img"
+			],
+			[
+				"form",
+				"form-control"
+			],
+			[
+				"tipo_",
+				"Tipo_entrega"
+			],
+			[
+				"A",
+				"APPPATH"
+			],
+			[
+				"li",
+				"linea_metro"
+			],
+			[
+				"no",
+				"nombre"
+			],
+			[
+				"num",
+				"num_ciclos_contratados"
+			],
+			[
+				"ex",
+				"exists"
+			],
+			[
+				"para",
+				"param"
+			],
+			[
+				"recibo",
+				"recibo_model"
+			],
+			[
+				"SAL",
+				"saldo_cubierto"
+			],
+			[
+				"sta",
+				"status"
+			],
+			[
+				"def",
+				"default"
+			],
+			[
+				"status",
+				"status_enid_service"
+			],
+			[
+				"da",
+				"data_entregas"
+			],
+			[
+				"inte",
+				"intentos_compras"
+			],
+			[
+				"row",
+				"row2"
+			],
+			[
+				"unse",
+				"unset"
+			],
+			[
+				"data",
+				"data_servicios"
+			],
+			[
+				"id",
+				"id_servicio"
+			],
+			[
+				"costo",
+				"costo_envio_cliente"
+			],
+			[
+				"sa",
+				"saldo_cubierto"
+			],
+			[
+				"id_pro",
+				"id_proyecto_persona"
+			],
+			[
+				"fecha_en",
+				"fecha_contra_entrega"
+			],
+			[
+				"op",
+				"option\tTag"
+			],
+			[
+				"resu",
+				"result_array"
+			],
+			[
 				"COLO",
 				"color"
 			],
@@ -24,14 +224,6 @@
 				"costo_envio_sistema"
 			],
 			[
-				"pa",
-				"params"
-			],
-			[
-				"id_",
-				"id_recibo"
-			],
-			[
 				"re",
 				"recibo"
 			],
@@ -48,20 +240,12 @@
 				"preventDefault"
 			],
 			[
-				"data",
-				"data_orden"
-			],
-			[
 				"putno",
 				"punto_encuentro"
 			],
 			[
 				"es_",
 				"es_contra_entrega"
-			],
-			[
-				"da",
-				"data_por_usuario"
 			],
 			[
 				"arra",
@@ -88,36 +272,12 @@
 				"function"
 			],
 			[
-				"for",
-				"foreach\tforeach …"
-			],
-			[
-				"tex",
-				"text_usuario_registrado"
-			],
-			[
 				"punto",
 				"punto_encuentro"
 			],
 			[
-				"ser",
-				"servicio"
-			],
-			[
-				"num",
-				"num_hours"
-			],
-			[
-				"url",
-				"urlLecturaError"
-			],
-			[
 				"is",
 				"isShamir"
-			],
-			[
-				"op",
-				"ops"
 			],
 			[
 				"con",
@@ -176,16 +336,8 @@
 				"proceso_compra"
 			],
 			[
-				"para",
-				"params"
-			],
-			[
 				"PARA",
 				"params"
-			],
-			[
-				"id",
-				"id_recibo"
 			],
 			[
 				"dat",
@@ -248,10 +400,6 @@
 				"div\tTag"
 			],
 			[
-				"col",
-				"color\tproperty"
-			],
-			[
 				"TARE",
 				"tarea"
 			],
@@ -296,10 +444,6 @@
 				"estrellas_valoraciones"
 			],
 			[
-				"text",
-				"text-transform\tproperty"
-			],
-			[
 				"format",
 				"format_error"
 			],
@@ -340,10 +484,6 @@
 				"print_r"
 			],
 			[
-				"fo",
-				"for\tfor …"
-			],
-			[
 				"f_",
 				"f_inicio"
 			],
@@ -374,151 +514,102 @@
 			[
 				"isa",
 				"is_array"
-			],
-			[
-				"corre",
-				"correos_enviados"
-			],
-			[
-				"contene",
-				"contenedor_imagen"
-			],
-			[
-				"imagen_ser",
-				"imagen_servicio_model"
-			],
-			[
-				"attr",
-				"attributes"
-			],
-			[
-				"extra",
-				"extra_text"
-			],
-			[
-				"confi",
-				"config_imagen"
-			],
-			[
-				"tiempo",
-				"tiempo_promedio_entrega"
-			],
-			[
-				"sel",
-				"select"
-			],
-			[
-				"se",
-				"select"
-			],
-			[
-				"atr",
-				"attributes"
-			],
-			[
-				"wid",
-				"width\tproperty"
-			],
-			[
-				"sal",
-				"saldo"
-			],
-			[
-				"sa",
-				"saldo_pendiente"
-			],
-			[
-				"id_usu",
-				"id_usuario_venta"
-			],
-			[
-				"en",
-				"envio"
-			],
-			[
-				"fla",
-				"flag_servicio"
-			],
-			[
-				"num_c",
-				"num_ciclos_contratados"
-			],
-			[
-				"mon",
-				"monto_a_pagar"
-			],
-			[
-				"tae",
-				"tarea"
-			],
-			[
-				"get_",
-				"get_option"
-			],
-			[
-				"agreg",
-				"agregar_tarea"
-			],
-			[
-				"direc",
-				"direccion"
-			],
-			[
-				"depa",
-				"departamento"
-			],
-			[
-				"in",
-				"inputs"
-			],
-			[
-				"input",
-				"focus_input"
-			],
-			[
-				"ca",
-				"categorias_destacadas"
-			],
-			[
-				"RES",
-				"response"
-			],
-			[
-				"vali",
-				"valida_existencia_servicio"
-			],
-			[
-				"stat",
-				"status"
-			],
-			[
-				"cre",
-				"create_imagen_servicio"
-			],
-			[
-				"get_p",
-				"get_parameter"
-			],
-			[
-				"paa",
-				"param"
-			],
-			[
-				"usu",
-				"usuario_direccion_model"
-			],
-			[
-				"priva",
-				"privacidad_usuario_model-"
-			],
-			[
-				"usua",
-				"usuario_model"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"contents": "DEBUG - TYPE array 2018-11-18 23:13:39 --> Array\n(\n    [id_forma_pago] => 8\n    [saldo_cubierto] => 0\n    [fecha_registro] => 2018-11-18 23:50:09\n    [status] => 6\n    [fecha_vencimiento] => 2018-11-20\n    [monto_a_pagar] => 149\n    [id_proyecto_persona_forma_pago] => 169\n    [num_email_recordatorio] => 0\n    [id_usuario_referencia] => 598\n    [flag_pago_comision] => 0\n    [flag_envio_gratis] => 0\n    [costo_envio_cliente] => 100\n    [id_usuario_venta] => 1\n    [id_ciclo_facturacion] => 5\n    [num_ciclos_contratados] => 1\n    [id_usuario] => 598\n    [precio] => 149\n    [costo_envio_vendedor] => 0\n    [id_servicio] => 285\n    [resumen_pedido] => \n    [estado_envio] => 0\n    [entregado] => 0\n    [fecha_entrega] => 2018-11-18 23:50:09\n    [fecha_pago] => 2018-11-18 23:50:09\n    [saldo_cubierto_envio] => 0\n    [fecha_cancelacion] => 2018-11-18 23:50:09\n    [cancela_cliente] => 0\n    [se_cancela] => 0\n    [talla] => 0\n    [cancela_email] => 0\n    [nota] => \n    [fecha_contra_entrega] => 2018-11-18 09:00:00\n    [es_contra_entrega] => 1\n)\n\n",
+			"settings":
+			{
+				"buffer_size": 1049,
+				"line_ending": "Unix",
+				"name": "DEBUG - TYPE array 2018-11-18 23:13:39 --> Array"
+			}
+		},
+		{
+			"file": "css_tema/template/pedidos.css",
+			"settings":
+			{
+				"buffer_size": 845,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "q/application/controllers/api/punto_encuentro.php",
+			"settings":
+			{
+				"buffer_size": 2363,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 1691 files for \"tipo_entrega\"\n\n/var/www/html/inicio/extra.sql:\n  368  -------------------------------------------------------------\n  369  \n  370: CREATE TABLE IF NOT EXISTS `enidserv_web`.`tipo_entrega` (\n  371    `id` INT NOT NULL AUTO_INCREMENT,\n  372    `fecha_entrega` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),\n  ...\n  376  \n  377  USE enidserv_web;\n  378: INSERT INTO tipo_entrega(nombre) VALUES(\"PUNTO ENCUENTRO\");\n  379: INSERT INTO tipo_entrega(nombre) VALUES(\"MENSAJERIA\");\n  380: INSERT INTO tipo_entrega(nombre) VALUES(\"VISITA EN NEGOCIO\");\n  381  \n  382  \n  383  \n  384: CREATE TABLE IF NOT EXISTS `enidserv_web`.`intento_tipo_entrega` (\n  385    `id` INT NOT NULL AUTO_INCREMENT,\n  386    `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),\n  387    `id_servicio` INT(11) NOT NULL,\n  388:   `id_tipo_entrega` INT NOT NULL,\n  389    PRIMARY KEY (`id`),\n  390:   INDEX `fk_intento_tipo_entrega_servicio1_idx` (`id_servicio` ASC),\n  391:   INDEX `fk_intento_tipo_entrega_tipo_entrega1_idx` (`id_tipo_entrega` ASC),\n  392:   CONSTRAINT `fk_intento_tipo_entrega_servicio1`\n  393      FOREIGN KEY (`id_servicio`)\n  394      REFERENCES `enidserv_web`.`servicio` (`id_servicio`)\n  395      ON DELETE NO ACTION\n  396      ON UPDATE NO ACTION,\n  397:   CONSTRAINT `fk_intento_tipo_entrega_tipo_entrega1`\n  398:     FOREIGN KEY (`id_tipo_entrega`)\n  399:     REFERENCES `enidserv_web`.`tipo_entrega` (`id`)\n  400      ON DELETE NO ACTION\n  401      ON UPDATE NO ACTION)\n\n/var/www/html/inicio/debug/debug.log:\n    1: DEBUG - TYPE string 2018-11-12 22:07:53 --> UPDATE servicio SET tipo_entrega_visita = tipo_entrega_visita + 1 WHERE id_servicio = 272 LIMIT 1\n    2: DEBUG - TYPE string 2018-11-12 22:11:17 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 272 LIMIT 1\n    3: DEBUG - TYPE string 2018-11-12 22:26:00 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 272 LIMIT 1\n    4: DEBUG - TYPE string 2018-11-12 22:26:59 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 272 LIMIT 1\n    5: DEBUG - TYPE string 2018-11-12 22:27:29 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 272 LIMIT 1\n    6: DEBUG - TYPE string 2018-11-12 22:27:48 --> UPDATE servicio SET tipo_entrega_envio = tipo_entrega_envio + 1 WHERE id_servicio = 272 LIMIT 1\n    7: DEBUG - TYPE string 2018-11-12 22:31:42 --> UPDATE servicio SET tipo_entrega_visita = tipo_entrega_visita + 1 WHERE id_servicio = 272 LIMIT 1\n    8  DEBUG - TYPE array 2018-11-12 23:23:24 --> Array\n    9  (\n   ..\n  397              [talla] => \n  398              [url_ml] => \n  399:             [tipo_entrega_envio] => 0\n  400:             [tipo_entrega_visita] => 0\n  401:             [tipo_entrega_punto_medio] => 0\n  402              [ultima_vista] => 2018-11-18 18:41:50\n  403          )\n  ...\n  691  DEBUG - TYPE array 2018-11-18 15:44:25 --> Array\n  692  (\n  693:     [tipo_entrega] => 0\n  694      [domicilio] => Array\n  695          (\n  ...\n  722  DEBUG - TYPE array 2018-11-18 15:44:48 --> Array\n  723  (\n  724:     [tipo_entrega] => 0\n  725      [domicilio] => Array\n  726          (\n  ...\n  754  DEBUG - TYPE array 2018-11-18 15:46:27 --> Array\n  755  (\n  756:     [tipo_entrega] => 0\n  757      [domicilio] => Array\n  758          (\n  ...\n  786  DEBUG - TYPE array 2018-11-18 15:46:45 --> Array\n  787  (\n  788:     [tipo_entrega] => 0\n  789      [domicilio] => Array\n  790          (\n  ...\n  841  DEBUG - TYPE array 2018-11-18 16:28:42 --> Array\n  842  (\n  843:     [tipo_entrega] => 0\n  844      [domicilio] => Array\n  845          (\n  ...\n  872  DEBUG - TYPE array 2018-11-18 16:28:57 --> Array\n  873  (\n  874:     [tipo_entrega] => 0\n  875      [domicilio] => Array\n  876          (\n  ...\n  903  DEBUG - TYPE array 2018-11-18 16:29:02 --> Array\n  904  (\n  905:     [tipo_entrega] => 1\n  906      [domicilio] => Array\n  907          (\n  ...\n  928  DEBUG - TYPE array 2018-11-18 16:29:02 --> Array\n  929  (\n  930:     [tipo_entrega] => 1\n  931      [domicilio] => Array\n  932          (\n  ...\n  953  DEBUG - TYPE array 2018-11-18 16:29:10 --> Array\n  954  (\n  955:     [tipo_entrega] => 1\n  956      [domicilio] => Array\n  957          (\n  ...\n  978  DEBUG - TYPE array 2018-11-18 16:29:10 --> Array\n  979  (\n  980:     [tipo_entrega] => 1\n  981      [domicilio] => Array\n  982          (\n  ...\n 1003  DEBUG - TYPE array 2018-11-18 16:29:26 --> Array\n 1004  (\n 1005:     [tipo_entrega] => 1\n 1006      [domicilio] => Array\n 1007          (\n ....\n 1028  DEBUG - TYPE array 2018-11-18 16:29:30 --> Array\n 1029  (\n 1030:     [tipo_entrega] => 1\n 1031      [domicilio] => Array\n 1032          (\n\n/var/www/html/inicio/js_tema/servicio/pre.js:\n    9  \t\tset_option(\"tipo\" , id);\n   10  \t\tvar data_send  = $.param({\"tipo\" : id , \"id_servicio\" : id_servicio});\n   11: \t\tvar url \t   = \"../q/index.php/api/intento_tipo_entrega/index/format/json/\";\n   12  \t\trequest_enid( \"POST\",  data_send, url, response_opcion_entrega);\n   13  \t}\n\n/var/www/html/inicio/pedidos/application/controllers/home.php:\n   78  \n   79          $recibo                        =    $recibo[0];         \n   80:         $tipo_entrega                  =    $recibo[\"tipo_entrega\"]; \n   81:         $data_complete[\"tipo_entrega\"] =    $tipo_entrega; \n   82          $domicilio                     =    [];\n   83  \n   84:         if ($tipo_entrega == 1) {\n   85              /*Pido el punto de encuentro*/\n   86              $domicilio                 =  $this->get_punto_encuentro($id_recibo);            \n   ..\n  120      }\n  121      private function get_tipos_entregas($q){        \n  122:         $api    = \"tipo_entrega/index/format/json/\"; \n  123          return $this->principal->api( $api , $q );\n  124      }\n\n/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php:\n   38  \t\t$recibo \t\t\t\t=  $recibo[0];\t\t\n   39  \t\t$text \t\t\t\t\t=  div(\"HORARIO DE ENTREGA\" , 1).div($recibo[\"fecha_contra_entrega\"] ,1);\n   40: \t\t$fecha_contra_entrega   =  ($recibo[\"tipo_entrega\"] == 1) ? $text:\"\";\n   41  \t\treturn $fecha_contra_entrega;\n   42  \n   ..\n   77  \n   78  \t}\n   79: \tfunction create_seccion_tipo_entrega($recibo , $tipos_entregas){\n   80  \n   81  \t\t$tipo \t\t\t\t=  \"\";\n   82: \t\t$id_tipo_entrega \t=  $recibo[0][\"tipo_entrega\"];\n   83  \t\tforeach ($tipos_entregas as $row) {\n   84  \t\t\t\n   85: \t\t\tif ($row[\"id\"] == $id_tipo_entrega) {\t\t\t\t\n   86  \t\t\t\t$tipo = $row[\"nombre\"];\n   87  \t\t\t\tbreak;\n   ..\n   89  \t\t}\n   90  \t\n   91: \t\t$encabezado \t= \tdiv(strong(\"TIPO DE ENTREGA\"),\t[\"class\" =>\"encabezado_tipo_entrega\"] ,1);\n   92: \t  \t$tipo \t\t\t=  \tdiv(strtoupper($tipo) ,[\"class\" =>\"encabezado_tipo_entrega\"] , 1);\n   93: \t  \treturn \t\t\tdiv($encabezado.$tipo , [\"class\" => \"contenedor_tipo_entrega\"] ,1).hr();\n   94  \n   95  \t}\n   ..\n  152  \t    \n  153  \t    $data_domicilio = $domicilio[\"domicilio\"];\n  154: \t    if ($domicilio[\"tipo_entrega\"] != 1) {\n  155  \t    \t/*puntos de encuentro*/\t\n  156  \t    \treturn create_domicilio_entrega($data_domicilio);\n\n/var/www/html/inicio/pedidos/application/views/detalle.php:\n   17  \t\t\n   18  \t\t\n   19: \t\t<?=create_seccion_tipo_entrega($recibo , $tipos_entregas)?>\n   20  \t\t<br>\n   21  \t\t<?=create_seccion_usuario($usuario)?>\n\n/var/www/html/inicio/pedidos/application/views/form_busqueda.php:\n   20  \t\t\t<?=strong(\"TIPO ENTREGA\")?>\n   21  \t\t\t<?=create_select($tipos_entregas , \n   22: \t\t\t\"tipo_entrega\" , \n   23: \t\t\t\"tipo_entrega form-control\" , \n   24: \t\t\t\"tipo_entrega\" , \n   25  \t\t\t\"nombre\" , \n   26  \t\t\t\"id\" )?>\n\n/var/www/html/inicio/q/application/controllers/api/cobranza.php:\n  231                  \n  232                  if($data_orden[\"servicio\"][\"flag_servicio\"]== 0){\n  233:                     if (!array_key_exists(\"tipo_entrega\", $param)) {\n  234                          \n  235                          $prm_envio[\"flag_envio_gratis\"] = $data_orden[\"servicio\"][\"flag_envio_gratis\"];\n  ...\n  292                  $this->acciones_posterior_orden_pago($data_acciones_posteriores);\n  293                  \n  294:                 if(!array_key_exists(\"tipo_entrega\", $param)) {\n  295  \n  296                      $data_orden[\"ficha\"]                           = \n  ...\n  385  \n  386              $param[\"fecha_entrega\"]         =  $param[\"fecha_entrega\"].\" \".$param[\"horario_entrega\"].\":00\";\n  387:             $param[\"tipo_entrega\"]     =  1;\n  388              $param[\"plan\"]                  =  $param[\"servicio\"];\n  389              $param[\"id_ciclo_facturacion\"]  =  5;\n\n/var/www/html/inicio/q/application/controllers/api/intento_tipo_entrega.php:\n    1  <?php defined('BASEPATH') OR exit('No direct script access allowed');\n    2  require APPPATH.'../../librerias/REST_Controller.php';\n    3: class intento_tipo_entrega extends REST_Controller{      \n    4      function __construct(){\n    5          parent::__construct();         \n    6:         $this->load->model(\"intento_tipo_entrega_model\");\n    7          $this->load->library(lib_def());                      \n    8      }\n    .\n   15          $params =  [\n   16                        \"id_servicio\"     => $param[\"id_servicio\"] ,\n   17:                       \"id_tipo_entrega\" => $param[\"tipo\"] \n   18  \n   19                      ];\n   20:         $response =  $this->intento_tipo_entrega_model->insert($params , 1);\n   21        } \n   22        $this->response($response);\n   ..\n   29        debug(\"llefa\");\n   30        if (if_ext($param ,  \"fecha_inicio,fecha_termino\")) {\n   31:           $response =  $this->intento_tipo_entrega_model->get_pediodo($param);\n   32        } \n   33        $this->response($response);\n\n/var/www/html/inicio/q/application/controllers/api/negocio.php:\n   14          $this->get();\n   15          $id_usuario =  $this->id_usuario;           \n   16:         $data[\"entregas_en_casa\"]=  $this->get_tipo_entregas($id_usuario);           \n   17          $this->load->view(\"negocio/principal\" ,  $data);\n   18          \n   19      }\n   20      /**/    \n   21:     private function get_tipo_entregas($id_usuario){    \n   22          $q[\"id_usuario\"] =  $id_usuario;   \n   23          $api             = \"usuario/entregas_en_casa/format/json/\";     \n\n/var/www/html/inicio/q/application/controllers/api/recibo.php:\n  179  \n  180          $id_usuario =  $recibo[0][\"id_usuario\"];               \n  181:         if ($recibo[0][\"tipo_entrega\"] ==  1) {\n  182             $this->ticket_pendiente_pago_contra_entrega($param , $recibo , $data_complete);\n  183          }else{\n  ...\n  289          $param      = $this->get();\n  290          $response   = [];  \n  291:         if (if_ext($param , \"fecha_inicio,fecha_termino,tipo_entrega,recibo,v\")) {\n  292  \n  293              $params   =  [      \"id_proyecto_persona_forma_pago recibo\" , \n  ...\n  300                                  \"status\",\n  301                                  \"fecha_contra_entrega\",\n  302:                                 \"tipo_entrega\",\n  303                                  \"fecha_entrega\",\n  304                                  \"costo_envio_cliente\",\n\n/var/www/html/inicio/q/application/controllers/api/servicio.php:\n 1259          $this->response($response);        \n 1260      }\n 1261:     function tipo_entrega_PUT(){\n 1262  \n 1263          $param    =   $this->put();\n ....\n 1269            switch ($param[\"tipo\"]) {\n 1270              case 1:\n 1271:               $tipo =  \"tipo_entrega_envio\";\n 1272                break;\n 1273              case 2:\n 1274:               $tipo =  \"tipo_entrega_visita\";\n 1275                break;\n 1276              case 3:\n 1277:               $tipo =  \"tipo_entrega_punto_medio\";\n 1278                break;\n 1279              \n ....\n 1321                \n 1322                $vista                        = $row[\"vista\"];\n 1323:               $tipo_entrega_envio           = $row[\"mensajeria\"];\n 1324:               $tipo_entrega_visita          = $row[\"visita_negocio\"];\n 1325:               $tipo_entrega_punto_medio     = $row[\"punto_encuentro\"];\n 1326                $deseado                      = $row[\"deseado\"];\n 1327                $valoracion                   = $row[\"valoracion\"];\n ....\n 1347                ) ,\n 1348                  $vista, \n 1349:                 $tipo_entrega_envio,\n 1350:                 $tipo_entrega_visita, \n 1351:                 $tipo_entrega_punto_medio ,\n 1352                  $deseado,\n 1353                  $valoracion   \n ....\n 1360  \n 1361              $tb_general  = $this->table->generate();\n 1362:             $tb_headers  = $this->get_headers_tipo_entrega($servicios);\n 1363              $total       = $tb_headers .br().hr().br(). $tb_general;\n 1364              $response    = $total;\n ....\n 1373      }\n 1374  \n 1375:     function get_headers_tipo_entrega($array){\n 1376  \n 1377  \n ....\n 1399      }\n 1400      private function  get_tipos_intentos_entregas($q){\n 1401:       $api =  \"intento_tipo_entrega/periodo/format/json/\";\n 1402        return $this->principal->api( $api , $q );      \n 1403      }\n\n/var/www/html/inicio/q/application/controllers/api/tipo_entrega.php:\n    1  <?php defined('BASEPATH') OR exit('No direct script access allowed');\n    2  require APPPATH.'../../librerias/REST_Controller.php';\n    3: class Tipo_entrega extends REST_Controller{\n    4    function __construct(){\n    5          parent::__construct();           \n    6:         $this->load->model(\"tipo_entrega_model\"); \n    7          $this->load->library(lib_def());       \n    8    }  \n    .\n   10    function index_GET(){    \n   11      $param    =  $this->get();\n   12:     $response =  $this->tipo_entrega_model->get([] , [] , 1000);  \n   13      $this->response($response);  \n   14    }    \n\n/var/www/html/inicio/q/application/controllers/api/usuario.php:\n  266      function entregas_en_casa_GET(){\n  267          $param      = $this->get();\n  268:         $response   =  $this->usuario_model->get_tipo_entregas($param);\n  269          $this->response($response);        \n  270      }\n\n/var/www/html/inicio/q/application/helpers/recibo_helper.php:\n   29        $status                   = $row[\"status\"];\n   30        $fecha_contra_entrega     = $row[\"fecha_contra_entrega\"];\n   31:       $tipo_entrega        = $row[\"tipo_entrega\"];\n   32        $fecha_entrega                  = $row[\"fecha_entrega\"];\n   33        \n   ..\n   35        $estado_compra            =  \n   36        ($estado_compra == 0 ) ? get_text_status($lista_estados, $status)  : $estado_compra;\n   37:       $tipo_entrega             = ($tipo_entrega == 1) ? \"PAGO CONTRA ENTREGA\": \"MENSAJERÍA\";\n   38  \n   39  \n   40:       $entrega = ($tipo_entrega ==  1) ? $fecha_contra_entrega : $fecha_entrega;\n   41  \n   42        \n   ..\n   53          $tb  .= get_td($img);\n   54          $tb  .= get_td($estado_compra);\n   55:         $tb  .= get_td($tipo_entrega);\n   56          $tb  .= get_td($saldo_cubierto.\"MXN\");        \n   57          $tb  .= get_td($monto_a_pagar.\"MXN\");  \n   ..\n  100    function get_saldo_pendiente($monto, \n  101      $ciclos, \n  102:     $cubierto , $es_servicio , $envio_cliente,  $envio_sistema,$tipo_entrega){\n  103  \n  104  \n  ...\n  109      $saldo_pendiente_envio  =   ($total > 0) ? $total + $envio : 0;\n  110      $text_envio             =   \"\";\n  111:     if ($tipo_entrega ==  0) {\n  112          $text_envio             =   ($es_servicio == 0) ? $envio_sistema[\"text_envio\"][\"cliente\"]: \"\";   \n  113      }else{\n\n/var/www/html/inicio/q/application/models/intento_tipo_entrega_model.php:\n    1  <?php defined('BASEPATH') OR exit('No direct script access allowed');\n    2:   class Intento_tipo_entrega_model extends CI_Model {\n    3      function __construct(){      \n    4          parent::__construct();        \n    .\n    6      }\n    7      function insert($params , $return_id=0){        \n    8:         $insert   = $this->db->insert(\"intento_tipo_entrega\", $params);     \n    9          return ($return_id ==  1) ? $this->db->insert_id() : $insert;\n   10      }\n   ..\n   15          $query_get =  \"SELECT \n   16                          COUNT(0)intentos, \n   17:                         SUM(CASE WHEN id_tipo_entrega  = 1 THEN 1 ELSE 0 END )punto_encuentro,\n   18:                         SUM(CASE WHEN id_tipo_entrega  = 2 THEN 1 ELSE 0 END )mensajeria,\n   19:                         SUM(CASE WHEN id_tipo_entrega  = 3 THEN 1 ELSE 0 END )visita_negocio,\n   20                          id_servicio  \n   21:                         FROM intento_tipo_entrega  \n   22                          WHERE DATE(fecha_registro) BETWEEN '\".$fecha_inicio.\"' AND '\".$fecha_termino.\"' \n   23                          GROUP BY id_servicio\";\n\n/var/www/html/inicio/q/application/models/recibo_model.php:\n   11        $fecha_inicio   =  $param[\"fecha_inicio\"];\n   12        $fecha_termino  =  $param[\"fecha_termino\"];\n   13:       $tipo_entrega   =  $param[\"tipo_entrega\"];\n   14  \n   15        $query_get =\"SELECT \".$f.\" FROM proyecto_persona_forma_pago WHERE 1=1 \";\n   ..\n   21        =  \" AND DATE(fecha_registro) BETWEEN '\".$fecha_inicio.\"' AND '\".$fecha_termino.\"'\";\n   22         \n   23:       $ext_contra_entrega = \" AND  tipo_entrega = '\".$tipo_entrega.\"'\";\n   24  \n   25  \n   ..\n  402        return $data_complete;      \n  403    }       \n  404:   function crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis , $tipo_entrega = 0 ){\n  405          \n  406:         if ($tipo_entrega == 0) {\n  407            \n  408              $resumen =\"\";\n  ...\n  445        $data_usuario       =   $param[\"data_por_usuario\"];            \n  446  \n  447:       $tipo_entrega  = 0;\n  448:       if(array_key_exists(\"tipo_entrega\", $data_usuario) && $data_usuario[\"tipo_entrega\"] ==  1){\n  449:         $tipo_entrega = 1;\n  450        } \n  451:       $id_forma_pago      =  ($tipo_entrega ==  1) ? 8 : 6;\n  452  \n  453        $fecha_vencimiento  =  \"DATE_ADD(CURRENT_DATE(), INTERVAL 2 DAY)\";            \n  ...\n  469  \n  470        $resumen_compra       =  \n  471:       $this->crea_resumen_compra($servicio , $num_ciclos , $flag_envio_gratis ,$tipo_entrega );\n  472        \n  473        $costo_envio_cliente  =0;\n  474        $costo_envio_vendedor =0;\n  475:       $flag_servicio        =  ($tipo_entrega ==  1 ) ? 0 : $servicio[\"flag_servicio\"];\n  476        $monto_a_pagar        =  $precio; \n  477:       if($flag_servicio ==  0 && $tipo_entrega == 0){\n  478            \n  479          $costo_envio          =   $param[\"costo_envio\"];\n  ...\n  509          \"resumen_pedido\"            ,\n  510          \"talla\"     ,\n  511:         \"tipo_entrega\"   \n  512        ];\n  513  \n  ...\n  533            \"'\".$resumen_compra.\"'\",\n  534            $talla ,\n  535:           $tipo_entrega\n  536          ];\n  537        \n  538:       if ($tipo_entrega ==  1) {\n  539          array_push($array_keys , \"fecha_contra_entrega\");\n  540        }  \n  541:       if ($tipo_entrega ==  1) {\n  542          array_push($array_values ,  \"'\".$data_usuario[\"fecha_entrega\"].\"'\"  );\n  543        }\n\n/var/www/html/inicio/q/application/models/tipo_entrega_model.php:\n    1  <?php defined('BASEPATH') OR exit('No direct script access allowed');\n    2:   class Tipo_entrega_model extends CI_Model {\n    3      function __construct(){      \n    4          parent::__construct();        \n    .\n    6      }\n    7      function insert($params , $return_id=0){        \n    8:         $insert   = $this->db->insert(\"tipo_entrega\", $params);     \n    9          return ($return_id ==  1) ? $this->db->insert_id() : $insert;\n   10      }\n   ..\n   19            $this->db->order_by($order, $type_order);  \n   20          }       \n   21:         return $this->db->get(\"tipo_entrega\")->result_array();\n   22      }\n   23  }\n\n/var/www/html/inicio/q/application/models/usuario_model.php:\n  218      \n  219     \n  220:     function get_tipo_entregas($param){\n  221  \n  222          $id_usuario =  $param[\"id_usuario\"];\n  223          $query_get = \"SELECT \n  224                          entregas_en_casa \n  225:                         tipo_entregas \n  226                          FROM usuario \n  227                          WHERE \n  228                          idusuario =  $id_usuario LIMIT 1\";\n  229          $result =  $this->db->query($query_get);\n  230:         return $result->result_array()[0][\"tipo_entregas\"];\n  231      }\n  232      \n\n/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php:\n   24  \t$servicio \t\t\t\t= \t$servicio[0];\n   25  \t$flag_servicio \t\t\t=  \t$servicio[\"flag_servicio\"];\n   26: \t$tipo_entrega      = \t$recibo[\"tipo_entrega\"];\n   27  \t\n   28  \t$costo_envio_sistema \t= \t\n   29: \t($tipo_entrega == 1) ? $punto_encuentro[0][\"costo_envio\"] : $costo_envio_sistema;\n   30  \t\n   31  \t\n   ..\n   36  \t\t\t\t\t\t\t\t$costo_envio_cliente,\n   37  \t\t\t\t\t\t\t\t$costo_envio_sistema, \n   38: \t\t\t\t\t\t\t\t$tipo_entrega\n   39  \t\t\t\t\t\t\t);\n   40  \n   41  \t\n   42: \t$saldo_pendiente \t\t= \t($tipo_entrega == 1) ? $punto_encuentro[0][\"costo_envio\"]: $deuda[\"saldo_pendiente_envio\"];   \n   43  \t$url_pago_oxxo \t\t\t= \tget_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);\n   44  \t$url_pago_saldo_enid \t= \tget_link_saldo_enid($id_usuario_venta , $id_recibo);\t\n   ..\n   47  \t$data[\"url_pago_paypal\"]= \t$url_pago_paypal;\n   48  \t$data[\"recibo\"] \t\t=\t$recibo;\n   49: \t$text_forma_compra \t    =   ($tipo_entrega) ?  \"¿COMO  PAGAS TU ENTREGA?\" : \"Formas de pago\";\n   50  ?>\n   51  \n   52  <div class=\"col-lg-8\">\n   53  \n   54: \t<?php if($tipo_entrega == 1 ):?>\t\n   55  \t\t<?php \n   56  \t\t\t$costo_envio =  $punto_encuentro[0][\"costo_envio\"];\n   ..\n  122  \t\t\n  123  \t\t\n  124: \t<?php if($tipo_entrega == 0 ):?>\t\t\n  125  \t\n  126  \t\t<?=heading_enid(\"Dirección de envío\" , 3)?>\n\n140 matches across 20 files\n\n\nSearching 1692 files for \"es_contra_entrega\"\n\n/var/www/html/inicio/extra.sql:\n  411  insert into forma_pago(forma_pago) values(\"Mercado pago\");\n  412  select * from proyecto_persona_forma_pago where id_proyecto_persona_forma_pago = 159;\n  413: UPDATE `enidserv_web`.`proyecto_persona_forma_pago` SET `es_contra_entrega`='4' WHERE `id_proyecto_persona_forma_pago`='158';\n  414  \n  415  \n\n/var/www/html/inicio/debug/debug.log:\n  290  )\n  291  \n  292: DEBUG - TYPE string 2018-11-13 01:27:36 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago\n  293: DEBUG - TYPE string 2018-11-13 01:38:11 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  294: DEBUG - TYPE string 2018-11-13 01:41:51 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  295: DEBUG - TYPE string 2018-11-13 01:44:07 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 1AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  296: DEBUG - TYPE string 2018-11-13 01:45:34 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 1 AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  297: DEBUG - TYPE string 2018-11-13 01:45:42 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 1 AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  298: DEBUG - TYPE string 2018-11-13 01:46:59 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  299: DEBUG - TYPE string 2018-11-13 01:47:04 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  300: DEBUG - TYPE string 2018-11-13 01:47:16 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '2' AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  301: DEBUG - TYPE string 2018-11-17 03:27:36 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  302: DEBUG - TYPE string 2018-11-17 03:27:51 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '2' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  303: DEBUG - TYPE string 2018-11-17 03:37:29 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  304: DEBUG - TYPE string 2018-11-17 03:37:32 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '2' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  305: DEBUG - TYPE string 2018-11-17 03:37:34 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '3' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  306: DEBUG - TYPE string 2018-11-17 03:37:36 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '4' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  307: DEBUG - TYPE string 2018-11-17 03:37:58 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  308: DEBUG - TYPE string 2018-11-17 03:38:14 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-01' AND '2018-11-17' ORDER BY fecha_registro DESC\n  309: DEBUG - TYPE string 2018-11-17 03:38:17 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '4' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-01' AND '2018-11-17' ORDER BY fecha_registro DESC\n  310  DEBUG - TYPE string 2018-11-18 12:01:07 --> entra\n  311  DEBUG - TYPE NULL 2018-11-18 12:01:08 --> \n  ...\n 1204      [nota] => \n 1205      [fecha_contra_entrega] => 2018-11-18 09:00:00\n 1206:     [es_contra_entrega] => 1\n 1207  )\n 1208  \n\n/var/www/html/inicio/js_tema/puntos_medios/principal.js:\n  195  var notifica_punto_entrega = function(e){\n  196  \n  197: \tvar data_send \t\t=  $(\".form_punto_encuentro_horario\").serialize()+\"&\"+$.param({\"es_contra_entrega\":1});\n  198  \tvar url \t\t \t= \t\"../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/\";\n  199  \tbloquea_form(\".form_punto_encuentro_horario\");\n\n<untitled 136>:\n   33      [nota] => \n   34      [fecha_contra_entrega] => 2018-11-18 09:00:00\n   35:     [es_contra_entrega] => 1\n   36  )\n   37  \n\n34 matches across 4 files\n\n\nSearching 1692 files for \"es_contra_entrega\"\n\n/var/www/html/inicio/extra.sql:\n  411  insert into forma_pago(forma_pago) values(\"Mercado pago\");\n  412  select * from proyecto_persona_forma_pago where id_proyecto_persona_forma_pago = 159;\n  413: UPDATE `enidserv_web`.`proyecto_persona_forma_pago` SET `es_contra_entrega`='4' WHERE `id_proyecto_persona_forma_pago`='158';\n  414  \n  415  \n\n/var/www/html/inicio/debug/debug.log:\n  290  )\n  291  \n  292: DEBUG - TYPE string 2018-11-13 01:27:36 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago\n  293: DEBUG - TYPE string 2018-11-13 01:38:11 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  294: DEBUG - TYPE string 2018-11-13 01:41:51 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  295: DEBUG - TYPE string 2018-11-13 01:44:07 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 1AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  296: DEBUG - TYPE string 2018-11-13 01:45:34 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 1 AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  297: DEBUG - TYPE string 2018-11-13 01:45:42 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1 1 AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  298: DEBUG - TYPE string 2018-11-13 01:46:59 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  299: DEBUG - TYPE string 2018-11-13 01:47:04 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  300: DEBUG - TYPE string 2018-11-13 01:47:16 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '2' AND DATE(fecha_contra_entrega) BETWEEN '2018-11-13' AND '2018-11-13'\n  301: DEBUG - TYPE string 2018-11-17 03:27:36 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  302: DEBUG - TYPE string 2018-11-17 03:27:51 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '2' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  303: DEBUG - TYPE string 2018-11-17 03:37:29 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  304: DEBUG - TYPE string 2018-11-17 03:37:32 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '2' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  305: DEBUG - TYPE string 2018-11-17 03:37:34 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '3' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  306: DEBUG - TYPE string 2018-11-17 03:37:36 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '4' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  307: DEBUG - TYPE string 2018-11-17 03:37:58 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-30' AND '2018-11-17' ORDER BY fecha_registro DESC\n  308: DEBUG - TYPE string 2018-11-17 03:38:14 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '1' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-01' AND '2018-11-17' ORDER BY fecha_registro DESC\n  309: DEBUG - TYPE string 2018-11-17 03:38:17 --> SELECT id_proyecto_persona_forma_pago recibo,saldo_cubierto,fecha_registro,monto_a_pagar,num_ciclos_contratados,cancela_cliente,se_cancela,status,fecha_contra_entrega,es_contra_entrega,fecha_entrega,costo_envio_cliente FROM proyecto_persona_forma_pago WHERE 1=1  AND  es_contra_entrega = '4' AND DATE(fecha_contra_entrega) BETWEEN '2018-10-01' AND '2018-11-17' ORDER BY fecha_registro DESC\n  310  DEBUG - TYPE string 2018-11-18 12:01:07 --> entra\n  311  DEBUG - TYPE NULL 2018-11-18 12:01:08 --> \n  ...\n 1204      [nota] => \n 1205      [fecha_contra_entrega] => 2018-11-18 09:00:00\n 1206:     [es_contra_entrega] => 1\n 1207  )\n 1208  \n\n/var/www/html/inicio/js_tema/puntos_medios/principal.js:\n  195  var notifica_punto_entrega = function(e){\n  196  \n  197: \tvar data_send \t\t=  $(\".form_punto_encuentro_horario\").serialize()+\"&\"+$.param({\"es_contra_entrega\":1});\n  198  \tvar url \t\t \t= \t\"../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/\";\n  199  \tbloquea_form(\".form_punto_encuentro_horario\");\n\n<untitled 136>:\n   33      [nota] => \n   34      [fecha_contra_entrega] => 2018-11-18 09:00:00\n   35:     [es_contra_entrega] => 1\n   36  )\n   37  \n\n34 matches across 4 files\n\n\nSearching 148 files for \"es_contra_entrega\"\n\n/var/www/html/inicio/js_tema/puntos_medios/principal.js:\n  195  var notifica_punto_entrega = function(e){\n  196  \n  197: \tvar data_send \t\t=  $(\".form_punto_encuentro_horario\").serialize()+\"&\"+$.param({\"es_contra_entrega\":1});\n  198  \tvar url \t\t \t= \t\"../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/\";\n  199  \tbloquea_form(\".form_punto_encuentro_horario\");\n\n1 match in 1 file\n\n\nSearching 148 files for \"tipo_entrega\"\n\n/var/www/html/inicio/js_tema/puntos_medios/principal.js:\n  195  var notifica_punto_entrega = function(e){\n  196  \n  197: \tvar data_send \t\t=   $(\".form_punto_encuentro_horario\").serialize()+\"&\"+$.param({\"tipo_entrega\":1});\n  198  \tvar url \t\t \t= \t\"../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/\";\n  199  \tbloquea_form(\".form_punto_encuentro_horario\");\n\n/var/www/html/inicio/js_tema/servicio/pre.js:\n    9  \t\tset_option(\"tipo\" , id);\n   10  \t\tvar data_send  = $.param({\"tipo\" : id , \"id_servicio\" : id_servicio});\n   11: \t\tvar url \t   = \"../q/index.php/api/intento_tipo_entrega/index/format/json/\";\n   12  \t\trequest_enid( \"POST\",  data_send, url, response_opcion_entrega);\n   13  \t}\n\n2 matches across 2 files\n\n\nSearching 148 files for \"tipo_entrega\"\n\n/var/www/html/inicio/js_tema/puntos_medios/principal.js:\n  195  var notifica_punto_entrega = function(e){\n  196  \n  197: \tvar data_send \t\t=  $(\".form_punto_encuentro_horario\").serialize()+\"&\"+$.param({\"tipo_entrega\":1});\n  198  \tvar url \t\t \t= \t\"../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/\";\n  199  \tbloquea_form(\".form_punto_encuentro_horario\");\n\n/var/www/html/inicio/js_tema/servicio/pre.js:\n    9  \t\tset_option(\"tipo\" , id);\n   10  \t\tvar data_send  = $.param({\"tipo\" : id , \"id_servicio\" : id_servicio});\n   11: \t\tvar url \t   = \"../q/index.php/api/intento_tipo_entrega/index/format/json/\";\n   12  \t\trequest_enid( \"POST\",  data_send, url, response_opcion_entrega);\n   13  \t}\n\n2 matches across 2 files\n\n\nSearching 148 files for \"es_contra_entrega\"\n\n0 matches\n\nSearching 1223 files for \"primer_orden\"\n\n/var/www/html/inicio/q/application/controllers/api/cobranza.php:\n  311          $this->response($data_orden);    \n  312      }\n  313:     function primer_orden_POST(){\n  314          \n  315          $param  =  $this->post();\n\n1 match in 1 file\n",
+			"settings":
+			{
+				"buffer_size": 40933,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"contents": "<?php defined('BASEPATH') OR exit('No direct script access allowed');\nrequire APPPATH.'../../librerias/REST_Controller.php';\nclass Cobranza extends REST_Controller{      \n    public $option; \n    private $id_usuario;\n    function __construct(){\n        parent::__construct();                          \n        $this->load->helper(\"cobranza\");                        \n        $this->load->library(lib_def());            \n        $this->id_usuario = $this->principal->get_session(\"idusuario\");\n    } \n    \n    /*Se cancela recordatorio de pago pendiente por email*/\n    function cancelar_envio_recordatorio_PUT(){\n        \n        $param  =  $this->put();\n        $response =  $this->cobranzamodel->cancelar_cobranza_email($param);\n        $this->response($response);        \n    }\n    /**/\n    function resumen_compras_usuario_GET(){        \n        \n        $param          = $this->get(); \n        $data_complete  = [];\n\n        if($param[\"modalidad\"] ==  1){\n            $data_complete =  $this->cobranzamodel->get_ventas_usuario($param);\n        }else{\n            $data_complete =  $this->cobranzamodel->get_compras_usuario($param);                  \n        }        \n        $data_complete[\"status_enid_service\"] = $this->cobranzamodel->get_estatus_servicio_enid_service();        \n        $this->response($data_complete);\n    }\n    /**/\n    function calcula_costo_envio_GET(){        \n        $param =  $this->get();                \n        $this->response($this->get_costo_envio($param));\n    }\n    /**/\n    function get_costo_envio($param){\n     \n        $costo          = get_costo_envio($param);\n        $icon           = icon('fas fa-bus');\n        $texto          = $costo[\"text_envio\"][\"cliente\"];         \n        $texto_cliente  = \n        add_element($icon.\" \".$texto , \"div\" , array('class' => 'texto_envio' ));    \n        $costo[\"text_envio\"][\"cliente\"] = $texto_cliente;\n        return $costo;\n    }        \n    /**/\n    function notifica_recordatorio_cobranza_PUT(){\n\n        $param = $this->put();\n        $info =  $this->cobranzamodel->notifica_email_enviado_recordatorio($param);\n        $this->response($info);\n    }\n    /**/\n    function get_pago($q){\n        $api = \"recibo/resumen_desglose_pago\"; \n        return $this->principal->api( $api , $q , \"html\" );\n    }        \n    /*Carga cuentas por */\n    function cuentas_por_cobrar_GET(){\n\n        $recibos =  $this->cobranzamodel->get_usuarios_deuda_pendiente();        \n        $nueva_data = [];\n        $x = 0;\n        foreach($recibos as $row){            \n            \n            $id_usuario                             =   $row[\"id_usuario\"];\n            $usuario                                =   \n            $this->principal->get_info_usuario($id_usuario);\n            $nueva_data[$x][\"usuario\"]              =   $usuario;\n            $nueva_data[$x][\"cuenta_por_cobrar\"]    =   $row;\n            $prm[\"id_recibo\"]                       =   \n            $row[\"id_proyecto_persona_forma_pago\"];\n            $nueva_data[$x][\"recibo\"]               =   $this->get_pago($prm);\n            $x ++;\n            \n        }\n        $this->response($nueva_data);\n        /**/\n    }\n    /**/\n    function resumen_proyecto_persona_GET(){\n        /**/\n        $param =  $this->get();  \n        $id_proyecto_persona = $param[\"id_proyecto_persona\"]; \n        $data[\"info_proyecto\"] =  $this->cobranzamodel->get_resumen_proyecto_persona($param);    \n        $data[\"info_persona\"] =  \n        $this->cobranzamodel->get_info_persona($data[\"info_proyecto\"][0]);        \n        $data[\"historial_pagos\"] =  $this->cobranzamodel->get_historial_pagos($param);         \n        $data[\"info_request\"] =  $param;\n        $this->load->view(\"cobranza/renovaciones\" , $data);        \n\n    }\n    /**/\n    /**/\n    function valida_estado_pago_GET(){\n\n        $param =  $this->get();\n        $id_proyecto_persona_forma_pago= $param[\"id_proyecto_persona_forma_pago\"];  \n        $this->response(\"<span class='blue_enid white'>\" .$id_proyecto_persona_forma_pago .\"</span>\");\n    }\n    /**/\n    function comentario_notificacion_pago_POST(){\n        \n        $param =  $this->post();    \n        $param[\"id_usuario\"] =  $this->id_usuario;        \n        $response =  $this->cobranzamodel->registra_comentario_pago_notificado($param);\n        $this->response($response);        \n    }\n    /**/\n    function form_comentario_notificacion_pago_GET(){\n        $this->load->view(\"pagos_notificados/comentarios_pago\");\n    }\n    /**/\n    function get_notificacion_pago($q){\n\n        $api =  \"notificacion_pago/pago_resumen/format/json/\";\n        return $this->principal->api( $api , $q);\n    }\n    /**/\n    function notificacion_pago_GET(){\n\n        $param            =  $this->get();        \n        $info_notificados =  $this->get_notificacion_pago($param); \n\n        $comentarios =  \n        $this->cobranzamodel->get_comentarios_por_pago_notificado($param);\n\n        $data_complete[\"ficha\"] =  get_ficha_pago($info_notificados , $comentarios);        \n        \n        $data_complete[\"info_pago_notificado\"] = $info_notificados;        \n        /**/\n        $id_proyecto_persona_forma_pago =  $info_notificados[0][\"num_recibo\"];\n        /**/\n        $id_servicio = $this->cobranzamodel->get_id_servicio_por_ppfp($id_proyecto_persona_forma_pago);\n        $data_complete[\"id_servicio\"] = $id_servicio;\n        /*Carga info pago pendiente*/\n        $id_proyecto_persona=  \n        $this->cobranzamodel->get_id_proyecto_servicio_por_ppfp($id_proyecto_persona_forma_pago);\n        $data_complete[\"id_proyecto_persona\"] = $id_proyecto_persona;\n\n        $this->response($data_complete);        \n    }\n    function verifica_pago_notificado($q){\n        \n        $api =  \"notificacion_pago/es_notificado/format/json/\";\n        return  $this->principal->api( $api ,$q);\n    }\n    /**/\n    function info_saldo_pendiente_GET(){\n\n        $param =  $this->get();      \n        $info_saldo_pendiente = \n        $this->cobranzamodel->get_monto_pendiente_proyecto_persona_forma_pago($param);\n\n        $data_complete[\"info_pago_pendiente\"] =  $info_saldo_pendiente;\n        $data_complete[\"resultados\"] =  count($info_saldo_pendiente);\n\n        $data_complete[\"resultado_notificado\"] = $this->verifica_pago_notificado($param);\n\n        if (count($info_saldo_pendiente) > 0 ) {\n            \n            $id_proyecto_persona_forma_pago = $param[\"recibo\"];\n            /**/\n            $data_complete[\"id_servicio\"] \n            = \n            $this->cobranzamodel->get_id_servicio_por_ppfp($id_proyecto_persona_forma_pago);            \n            /**/\n            $param[\"id_recibo\"] = $id_proyecto_persona_forma_pago;\n            $data_complete[\"data_servicio\"] = $this->carga_servicio_por_recibo($param);\n        }        \n        $this->response($data_complete);\n        \n    }\n    /**/\n    function carga_servicio_por_recibo($q){\n        $api = \"tickets/servicio_recibo/format/json/\"; \n        return $this->principal->api( $api , $q);\n    }\n    /**/\n    function get_precio_id_servicio($id_servicio){\n\n        $q[\"id_servicio\"] = $id_servicio;\n        $api              = \"recibo/precio_servicio/format/json/\"; \n        return $this->principal->api( $api , $q);   \n    }\n    /**/\n    function solicitud_proceso_pago_POST(){\n\n        $param                  =   $this->post();                      \n\n        $param[\"plan\"]          =   (!array_key_exists(\"plan\", $param)) ? $param[\"servicio\"] : $param[\"plan\"];\n        $id_servicio            =   $param[\"plan\"]; \n        $precio                 =   $this->get_precio_id_servicio($id_servicio);\n        $data_complete          =   [];\n        $data_orden             =   [];\n        $data_reporte_compra    =   [];\n\n        $data_reporte_compra[\"articulo_valido\"] = 0;\n        /*Si el plan existe y es disponible continuamos*/\n        if(count($precio) > 0){  \n\n            $data_reporte_compra[\"articulo_valido\"] = 1;      \n            /*ahora consultamos que el servicio se encuentre disponible para compra*/\n            $prm[\"id_servicio\"]             =  $id_servicio;      \n            $prm[\"articulos_solicitados\"]   =  $param[\"num_ciclos\"];\n            $info_existencia                =  $this->consulta_disponibilidad_servicio($prm);\n\n\n            $data_orden[\"existencia\"]       =  $info_existencia;            \n            $data_reporte_compra[\"articulo_disponible\"] = 0;\n            $data_reporte_compra[\"existencia\"] = $info_existencia;\n            /*Si se encuentra en existencia, continuamos*/                \n\n            if($info_existencia[\"en_existencia\"] == 1){     \n                \n\n\n                $new_precio =  $precio[0];\n                $data_reporte_compra[\"articulo_disponible\"] = 1;\n                $data_orden[\"id_ciclo_facturacion\"]         = $new_precio[\"id_ciclo_facturacion\"];\n                $data_orden[\"precio\"]                       = $new_precio[\"precio\"];\n                $data_orden[\"existencia\"]                   = $info_existencia;\n                /**/\n                \n                $data_orden[\"servicio\"] = $info_existencia[\"info_servicio\"][0];                \n                /*Consultamos el precio de envio del producto*/                \n                \n                if($data_orden[\"servicio\"][\"flag_servicio\"]== 0){\n                    if (!array_key_exists(\"tipo_entrega\", $param)) {\n                        \n                        $prm_envio[\"flag_envio_gratis\"] = $data_orden[\"servicio\"][\"flag_envio_gratis\"];\n                        $data_orden[\"costo_envio\"] = $this->get_costo_envio($prm_envio);            \n                    }else{\n\n                        $prm_envio[\"flag_envio_gratis\"] = 0;\n                        $data_orden[\"costo_envio\"]      = $this->get_costo_envio_punto_encuentro($param);            \n                    }\n                    \n                }\n                \n                \n                $data_orden[\"es_usuario_nuevo\"] = 1;\n                $es_usuario_nuevo               =  get_info_usuario_valor_variable($param , \"usuario_nuevo\" ); \n\n            \n                if($es_usuario_nuevo == 0){            \n                    $data_orden[\"id_usuario\"]       = $this->id_usuario;\n                    $data_orden[\"es_usuario_nuevo\"] =  0;\n\n                }else{\n                    $data_orden[\"id_usuario\"]       = $param[\"id_usuario\"];                    \n                }\n                \n                $data_orden[\"data_por_usuario\"]     =  $param;\n                $data_orden[\"talla\"]                =  \n                (array_key_exists(\"talla\", $param) && $param[\"talla\"]>0) ? $param[\"talla\"]: 0;\n                \n\n                \n                $id_recibo        = $this->genera_orden_compra($data_orden);                \n\n\n                \n                $q[\"id_servicio\"] = $id_servicio;\n                $q[\"valor\"]       = 2;\n                $this->gamificacion_deseo($q);            \n                $data_acciones_posteriores[\"id_recibo\"] =  $id_recibo;\n\n\n                $data_acciones_posteriores[\"id_usuario_venta\"] = $data_orden[\"servicio\"][\"id_usuario_venta\"];\n                $data_acciones_posteriores[\"id_servicio\"] = $param[\"plan\"];\n                \n                if($es_usuario_nuevo == 0){\n                    \n                    $data_acciones_posteriores[\"id_usuario\"] = $data_orden[\"id_usuario\"];\n\n                }else{\n\n                      $data_acciones_posteriores[\"id_usuario\"]  =   $param[\"id_usuario\"];  \n                      $data_acciones_posteriores[\"telefono\"]    =   $param[\"telefono\"];  \n                      $data_acciones_posteriores[\"nombre\"]      =   $param[\"nombre\"];  \n                      $data_acciones_posteriores[\"email\"]       =   $param[\"email\"];\n\n                }\n                \n                $data_acciones_posteriores[\"es_usuario_nuevo\"] =  $es_usuario_nuevo;\n\n                $this->acciones_posterior_orden_pago($data_acciones_posteriores);\n                \n                if(!array_key_exists(\"tipo_entrega\", $param)) {\n\n                    $data_orden[\"ficha\"]                           = \n                    $this->carga_ficha_direccion_envio($data_acciones_posteriores);        \n                }else{\n                    \n                    /* Registro en tabla de encuentros*/\n                    $param[\"id_recibo\"]           = $id_recibo;  \n                    $data_orden[\"id_recibo\"]      = $id_recibo;  \n                    $this->create_orden_punto_entrega($param);\n                }\n                \n            }\n\n        }        \n        \n\n        $this->response($data_orden);    \n    }\n    function primer_orden_POST(){\n        \n        $param  =  $this->post();\n\n        if( array_key_exists(\"num_ciclos\", $param) && ctype_digit($param[\"num_ciclos\"]) \n            && $param[\"num_ciclos\"] >0 && array_key_exists(\"ciclo_facturacion\", $param)\n            && $param[\"num_ciclos\"] >0 && $param[\"num_ciclos\"] < 10 && \n            ctype_digit($param[\"plan\"]) \n            && $param[\"plan\"] >0 \n\n            || (array_key_exists(\"punto_encuentro\", $param ) && $param[\"punto_encuentro\"]> 0)\n        ){\n            \n            $usuario = $this->crea_usuario($param);            \n            if ($usuario[\"usuario_registrado\"] ==  1 && $usuario[\"id_usuario\"]>0 ) {\n                                \n                $param[\"es_usuario_nuevo\"]    = 1;\n                $param[\"usuario_nuevo\"]       = 1;        \n                $param[\"usuario_referencia\"]  = $usuario[\"id_usuario\"];\n                $param[\"id_usuario\"]          = $usuario[\"id_usuario\"];\n                \n                if (array_key_exists(\"punto_encuentro\", $param) && $param[\"punto_encuentro\"]> 0 ) {\n                    \n                    /*Para encuentros en puntos de entrega*/\n                    $response = $this->crea_orden_punto_entrega($param);\n                }else{\n                    /*Para ordenes por entrega DHL, FEDEX ETC*/\n                    $response =  $this->crea_orden($param);\n                    \n                }   \n                $response[\"usuario_existe\"]   = 0;\n                $session                      =  $this->create_session($param); \n                $this->principal->set_userdata($session);\n                $this->response($response);             \n                \n            }            \n            $this->response($usuario);\n            \n        }else{\n            $this->response(-1);\n        }\n    }   \n    /**/\n    function create_session($q){\n\n        $api            =     \"sess/start\";\n        $q[\"t\"]         =     \"x=0.,!><!$#\";\n        $q[\"secret\"]    =     $q[\"password\"]; \n        return $this->principal->api($api,$q,\"json\",\"POST\",0,1,\"login\");                \n    }\n    /**/ \n    function crea_orden($q){\n\n        $api =  \"cobranza/solicitud_proceso_pago\";\n        return $this->principal->api( $api , $q, \"json\", \"POST\");        \n    }\n    private function crea_orden_punto_entrega($param)\n    {\n        \n        \n        if (!ctype_digit($param[\"servicio\"]) \n            || \n            !ctype_digit($param[\"num_ciclos\"])\n            ||  \n            !ctype_digit($param[\"punto_encuentro\"])){return false;}\n\n\n\n        if( valida_fecha_entrega($param[\"fecha_entrega\"]) \n            && \n            valida_horario_entrega($param[\"horario_entrega\"]) \n            ){\n\n            $param[\"fecha_entrega\"]         =  $param[\"fecha_entrega\"].\" \".$param[\"horario_entrega\"].\":00\";\n            $param[\"tipo_entrega\"]     =  1;\n            $param[\"plan\"]                  =  $param[\"servicio\"];\n            $param[\"id_ciclo_facturacion\"]  =  5;\n            \n            return $this->crea_orden($param);\n            \n        }\n        return false;\n               \n    }\n    /**/\n    function crea_usuario($q){\n\n        $api =  \"usuario/prospecto\";\n        return $this->principal->api( $api , $q, \"json\", \"POST\");\n    }\n    private function gamificacion_deseo($q){\n\n        $api = \"servicio/gamificacion_deseo\"; \n        return $this->principal->api( $api , $q , \"json\" , \"PUT\");\n    }\n    /*aquí creamos en base de datos*/\n    private function genera_orden_compra($q){            \n        $api    =  \"recibo/orden_de_compra\";    \n        return  $this->principal->api( $api, $q , \"json\" , \"POST\");\n    }\n    /**/\n    function consulta_disponibilidad_servicio($q){     \n        $api = \"servicio/info_disponibilidad_servicio/format/json/\"; \n        return $this->principal->api( $api , $q);\n    }\n    /**/\n    function acciones_posterior_orden_pago($param){        \n        $this->notifica_deuda_cliente($param);                   \n        $this->crea_comentario_pedido($param);                    \n    }\n    /**/\n    function valida_envio_notificacion_nuevo_usuario($param){\n        if(get_info_usuario_valor_variable($param , \"usuario_nuevo\" )>0){\n            $this->notifica_registro_usuario($param);      \n        }\n    }\n    /**/\n    function notifica_registro_usuario($param){       \n        $api = \"emp/solicitud_usuario\"; \n        return $this->principal->api($api , $q);  \n    }    \n    /**/\n    function carga_ficha_direccion_envio($q){\n\n        $q[\"text_direccion\"]    =  \"Dirección de Envio\";\n        $q[\"externo\"]           =  1;        \n        $api                    = \"usuario_direccion/direccion_envio_pedido\"; \n        return $this->principal->api( $api , $q , \"html\");  \n\n    }\n    /**/\n    function crea_comentario_pedido($param){\n\n        $data_send[\"id_usuario\"] =  $param[\"id_usuario\"];            \n        $data_send[\"id_usuario_venta\"] =  $param[\"id_usuario_venta\"];\n        $data_send[\"id_servicio\"] =  $param[\"id_servicio\"];\n\n        if(get_info_usuario_valor_variable($param , \"es_usuario_nuevo\" )>0){                     \n                        \n            $comentario = $param[\"nombre\"].\" - \".$param[\"email\"].\" - \".$param[\"telefono\"].\" \n                                    está interesado en comprar, \n                                    cuando haya realizado su compra \n                                    serás notificado(a)\";\n                \n            $data_send[\"comentario\"]= $comentario;\n\n        }else{\n            $text =\"Está interesado(a) en comprar, \n                cuando haya realizado su compra seras notificado(a)\";\n            $data_send[\"comentario\"]= $text;\n\n        }\n            \n\n        $api = \"comentario/comentario_pedido\"; \n        return $this->principal->api( $api ,$data_send);  \n        \n    }\n    /**/\n    function notifica_deuda_cliente($q){\n\n        $api = \"areacliente/pago_pendiente_web/format/json/\"; \n        return $this->principal->api( $api ,$q);  \n    }   \n    /**/\n    function agrega_data_cliente($data){\n\n        $nueva_data = [];\n        $x =0;\n        foreach($data as $row){\n            \n            $nueva_data[$x] =  $row;\n            $nueva_data[$x][\"cliente\"] = \n            $this->principal->get_info_usuario($row[\"id_usuario\"]);  \n            $x ++;\n        }\n        return $nueva_data;\n    }    \n    /**/    \n    function resumen_pendientes_persona_GET(){\n        \n        $param =  $this->get(); \n        $param[\"id_usuario\"] = $this->id_usuario;\n        \n        $data[\"saldos_pendientes\"] = \n        $this->cobranzamodel->get_saldos_pendientes_usuario($param);        \n        $this->load->view(\"cobranza/principal_persona\", $data);\n        \n    }\n    /**/\n    function resumen_realizados_persona_GET(){        \n        \n        $param =  $this->get();                    \n        $param[\"id_usuario\"] = $this->id_usuario;\n        $saldos =  $this->cobranzamodel->get_saldos_realizados_usuario($param);        \n        $saldos =  $this->agrega_estatus_enid_service($saldos);        \n        $data[\"saldos_pendientes\"] = $saldos;\n        $this->load->view(\"cobranza/principal_persona_realizados\", $data);        \n    }   \n    function agrega_estatus_enid_service($saldos){\n        \n        $nueva_data = [];\n        $a =0;\n        foreach($saldos as $row){\n            $nueva_data[$a] =  $row;\n            $prm[\"id_estatus\"] = $row[\"status\"];\n            $nueva_data[$a][\"estatus_enid_service\"]= \n            $this->get_estatus_enid_service($prm);\n            $a++;\n\n        }\n        return $nueva_data;\n    }\n    /**/\n    function get_estatus_enid_service($q){        \n        $api = \"servicio/nombre_estado_enid/format/json/\";\n        return $this->principal->api( $api ,  $q);\n    } \n    /**/\n    function resumen_num_pendientes_GET(){\n\n        $param =  $this->get();  \n        /**/\n        $param[\"id_usuario\"] =  $this->id_usuario;\n        $num_pendientes  = \n        $this->cobranzamodel->get_num_saldos_pendientes($param);        \n        $this->response($num_pendientes);\n    }\n    /**/\n     function resumen_num_pendientes_persona_GET(){\n        $param              =  $this->get();                        \n        $num_pendientes     = \n        $this->cobranzamodel->get_num_saldos_pendientes_persona($param);        \n        $new_response       = \"\";        \n        if ($num_pendientes >0){\n\n            $new_response = \"<span class='alerta_llamadas_agendadas'>\n                                \".$num_pendientes.icon('fa fa-usd').\"                                \n                                \n                            </span>\";\n        }\n        \n        $this->response($new_response);\n    }\n    /**/\n    \n    /**/\n    function simulamos_datos_creacion_proyecto_maps($param){\n\n        $param[\"proyecto\"]  =\"Registro o renovación de Negocio en Google MAPS\";      \n        $param[\"url\"] = \"\";\n        $param[\"id_servicio\"]=  $param[\"servicio\"];        \n        return  $param;\n    }    \n    /**/\n    private function set_option($key, $value){\n        $this->option[$key] = $value;\n    }\n    /**/\n    private function get_option($key){\n        return $this->option[$key];\n    }    \n    function comision_GET(){\n        $param =  $this->get();     \n        $this->response(7);\n    }\n    /**/\n    function recibo_por_pagar_GET(){\n\n        $param = $this->get();\n        $data_respose =  $this->cobranzamodel->valida_recibo_por_pagar($param);\n        $this->response(crea_data_deuda_pendiente($data_respose) );\n    }\n    function recibo_por_enviar_usuario_GET()\n    {\n        $param = $this->get();\n        $data_respose =  $this->cobranzamodel->valida_recibo_por_enviar_usuario($param);\n        $this->response(crea_data_deuda_pendiente($data_respose) );   \n    }\n    /*\n    function ticket_pendiente_pago($param , $recibo , $data_complete){\n\n        $id_usuario =  $recibo[0][\"id_usuario\"];               \n        \n        if (get_info_usuario_valor_variable($param , \"cobranza\") ==  1){\n\n            $data_complete[\"costo_envio_sistema\"]   =  $this->get_costo_envio($recibo[0]);\n\n\n\n\n            $data_complete[\"id_recibo\"]             =   $param[\"id_recibo\"];\n            $id_usuario_venta                       =   $recibo[0][\"id_usuario_venta\"];\n            $data_complete[\"id_usuario_venta\"]      =   $id_usuario_venta; \n            $informacion_envio                      =   $this->get_direccion_pedido($param[\"id_recibo\"]);\n            $data_complete[\"informacion_envio\"]     =   $informacion_envio;\n            $this->load->view(\"cobranza/pago_al_momento\" , $data_complete);    \n\n\n        }else{            \n            \n            $data_complete[\"usuario\"]             =  \n            $this->principal->get_info_usuario($id_usuario);\n            $data_complete[\"costo_envio_sistema\"] =  $this->get_costo_envio($recibo[0]);  \n            \n            $this->load->view(\"cobranza/resumen_no_aplica\" , $data_complete);    \n        }\n               \n    }\n    */\n    /**/\n    function ganancias_fecha_GET(){\n        \n        $param =  $this->get();\n        $num_ventas =  $this->cobranzamodel->get_ventas_dia($param);\n        $this->response($num_ventas);\n    }\n    /*\n    function solicitudes_fecha_GET(){\n        \n        $param      =  $this->get();\n        $num_ventas =  $this->cobranzamodel->get_solicitudes_venta_dia($param);\n        $this->response($num_ventas);\n    } \n    */   \n    /**/\n    private function get_direccion_pedido($id_recibo){\n            \n        $q[\"id_recibo\"]     = $id_recibo;\n        $api                = \"portafolio/direccion_pedido/format/json/\";\n        return $this->principal->api( $api ,  $q);    \n    }\n    private function get_costo_envio_punto_encuentro($q){\n\n        $api                = \"punto_encuentro/costo_entrega/format/json/\";\n        $response           =  $this->principal->api( $api ,  $q);    \n        if (is_array($response) && count($response) > 0) {\n            return $response[0][\"costo_envio\"];\n        }else{\n            return 50;\n        }\n    }\n    private function create_orden_punto_entrega($q){        \n        \n        $api                = \"proyecto_persona_forma_pago_punto_encuentro/index\";\n        return $this->principal->api( $api ,  $q , \"json\" , \"POST\");    \n    }\n\n}?>",
+			"file": "q/application/controllers/api/cobranza.php",
+			"file_size": 24765,
+			"file_write_time": 131870849129002944,
+			"settings":
+			{
+				"buffer_size": 24759,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "q/application/controllers/api/recibo.php",
+			"settings":
+			{
+				"buffer_size": 14559,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js_tema/servicio/pre.js",
+			"settings":
+			{
+				"buffer_size": 949,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js_tema/puntos_medios/principal.js",
+			"settings":
+			{
+				"buffer_size": 6900,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "q/application/models/recibo_model.php",
+			"settings":
+			{
+				"buffer_size": 44039,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "(\n    [existencia] => Array\n        (\n            [en_existencia] => 1\n            [info_servicio] => Array\n                (\n                    [0] => Array\n                        (\n                            [id_servicio] => 289\n                            [nombre_servicio] => AUDIFONOS NPOOW\n                            [status] => 1\n                            [existencia] => 10\n                            [flag_envio_gratis] => 1\n                            [flag_servicio] => 0\n                            [flag_nuevo] => 1\n                            [id_usuario_venta] => 1\n                            [precio] => 550\n                            [id_ciclo_facturacion] => 5\n                        )\n\n                )\n\n        )\n\n    [id_ciclo_facturacion] => 5\n    [precio] => 550\n    [servicio] => Array\n        (\n            [id_servicio] => 289\n            [nombre_servicio] => AUDIFONOS NPOOW\n            [status] => 1\n            [existencia] => 10\n            [flag_envio_gratis] => 1\n            [flag_servicio] => 0\n            [flag_nuevo] => 1\n            [id_usuario_venta] => 1\n            [precio] => 550\n            [id_ciclo_facturacion] => 5\n        )\n\n    [costo_envio] => Array\n        (\n            [costo_envio_cliente] => 0\n            [costo_envio_vendedor] => 100\n            [text_envio] => Array\n                (\n                    [cliente] => <div  class=\"texto_envio\" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>\n                    [cliente_solo_text] => ENVÍO GRATIS!\n                    [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO\n                )\n\n        )\n\n    [es_usuario_nuevo] => 1\n    [id_usuario] => 602\n    [data_por_usuario] => Array\n        (\n            [password] => 3e79bdc50677c497bc02bdb64735898a0ed6ea01\n            [email] => asdasdasd@jads.lo\n            [nombre] => asdasdasd@jads.lo\n            [telefono] => 87778878\n            [plan] => 289\n            [num_ciclos] => 1\n            [descripcion_servicio] => AUDIFONOS NPOOW\n            [ciclo_facturacion] => \n            [usuario_referencia] => 602\n            [talla] => 0\n            [es_usuario_nuevo] => 1\n            [usuario_nuevo] => 1\n            [id_usuario] => 602\n        )\n\n    [talla] => 0\n)\n\n",
+			"settings":
+			{
+				"buffer_size": 2266,
+				"line_ending": "Unix",
+				"name": "("
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -577,50 +668,133 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/q",
-		"/var/www/html/inicio/q/application",
-		"/var/www/html/inicio/q/application/models",
-		"/var/www/html/inicio/q/application/views",
-		"/var/www/html/inicio/q/application/views/cobranza"
+		"/var/www/html/inicio/pedidos",
+		"/var/www/html/inicio/pedidos/application",
+		"/var/www/html/inicio/pedidos/application/controllers",
+		"/var/www/html/inicio/pedidos/application/helpers",
+		"/var/www/html/inicio/pedidos/application/views"
 	],
 	"file_history":
 	[
+		"/var/www/html/inicio/pedidos/application/controllers/home.php",
+		"/var/www/html/inicio/pedidos/application/views/detalle.php",
+		"/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php",
+		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
+		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
+		"/var/www/html/inicio/q/application/helpers/recibo_helper.php",
+		"/var/www/html/inicio/q/application/models/recibo_model.php",
 		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
+		"/var/www/html/inicio/helpers/enid_helper.php",
+		"/var/www/html/inicio/css_tema/template/pedidos.css",
+		"/var/www/html/inicio/q/application/controllers/api/tipo_entrega.php",
+		"/var/www/html/inicio/q/application/models/punto_encuentro_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/status_enid_service.php",
+		"/var/www/html/inicio/librerias/principal.php",
+		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
+		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php",
+		"/var/www/html/inicio/q/application/controllers/api/direccion.php",
+		"/var/www/html/inicio/q/application/helpers/pedidos_helper.php",
+		"/var/www/html/inicio/q/application/models/direccion_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php",
+		"/var/www/html/inicio/pedidos/application/views/error.php",
+		"/var/www/html/inicio/pedidos/application/views/form_busqueda.php",
+		"/var/www/html/inicio/pedidos/application/views/home.php",
+		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
+		"/var/www/html/inicio/puntos_medios/application/views/home.php",
+		"/var/www/html/inicio/css_tema/template/puntos_encuentro.css",
+		"/var/www/html/inicio/search/application/controllers/home.php",
+		"/var/www/html/inicio/js_tema/puntos_medios/principal.js",
+		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
+		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
+		"/var/www/html/inicio/extra.sql",
+		"/var/www/html/inicio/system/helpers/html_helper.php",
+		"/var/www/html/inicio/q/application/views/recibo/pedidos.php",
+		"/var/www/html/inicio/q/application/controllers/api/intento_tipo_entrega.php",
+		"/var/www/html/inicio/q/application/models/tipo_entrega_model.php",
+		"/var/www/html/inicio/q/application/models/intento_tipo_entrega_model.php",
+		"/var/www/html/inicio/js_tema/pedidos/principal.js",
+		"/var/www/html/inicio/system/libraries/Xmlrpc.php",
+		"/var/www/html/inicio/js_tema/js/main.js",
+		"/var/www/html/inicio/producto/application/controllers/home.php",
+		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
+		"/var/www/html/inicio/view_tema/header_meta_enid.php",
+		"/var/www/html/inicio/lista_deseos/error_log",
+		"/var/www/html/inicio/config/config.php",
+		"/var/www/html/inicio/system/core/Common.php",
+		"/var/www/html/inicio/system/core/Exceptions.php",
+		"/var/www/html/inicio/usuarios_enid_service/index.php",
+		"/var/www/html/inicio/system/libraries/Session.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/config/email.php",
+		"/var/www/html/inicio/unete_a_nuestro_equipo/application/config/email.php",
+		"/var/www/html/inicio/terminos-y-condiciones/application/config/email.php",
+		"/var/www/html/inicio/tareas_complejas/application/config/email.php",
+		"/var/www/html/inicio/tareas/application/config/email.php",
+		"/var/www/html/inicio/sobre_enidservice/application/config/email.php",
+		"/var/www/html/inicio/search/application/config/email.php",
+		"/var/www/html/inicio/reporte_enid/application/config/email.php",
+		"/var/www/html/inicio/recomendacion/application/config/email.php",
+		"/var/www/html/inicio/q/application/config/email.php",
+		"/var/www/html/inicio/puntos_medios/application/config/email.php",
+		"/var/www/html/inicio/producto/application/config/email.php",
+		"/var/www/html/inicio/procesar/application/config/email.php",
+		"/var/www/html/inicio/pregunta/application/config/email.php",
+		"/var/www/html/inicio/planes_servicios/application/config/email.php",
+		"/var/www/html/inicio/pedidos/application/config/email.php",
+		"/var/www/html/inicio/orden_pago_oxxo/application/config/email.php",
+		"/var/www/html/inicio/movimientos/application/config/email.php",
+		"/var/www/html/inicio/msj/application/config/email.php",
+		"/var/www/html/inicio/notificar/application/config/email.php",
+		"/var/www/html/inicio/login/application/config/email.php",
+		"/var/www/html/inicio/lista_deseos/application/config/email.php",
+		"/var/www/html/inicio/imgs/application/config/email.php",
+		"/var/www/html/inicio/forma_pago/application/config/email.php",
+		"/var/www/html/inicio/faq/application/config/email.php",
+		"/var/www/html/inicio/desarrollo/application/config/email.php",
+		"/var/www/html/inicio/contact/application/config/email.php",
+		"/var/www/html/inicio/area_cliente/application/config/email.php",
+		"/var/www/html/inicio/valoracion/application/config/email.php",
+		"/var/www/html/inicio/planes_servicios/application/views/home_enid.php",
+		"/var/www/html/inicio/view_tema/header_template.php",
+		"/var/www/html/inicio/config/autoload.php",
+		"/var/www/html/inicio/librerias/Format.php",
+		"/var/www/html/inicio/librerias/REST_Controller.php",
+		"/var/www/html/inicio/q/application/libraries/Format.php_",
+		"/var/www/html/inicio/system/core/Loader.php",
+		"/var/www/html/inicio/config/constants.php",
+		"/var/www/html/inicio/view_tema/footer_template.php",
+		"/var/www/html/inicio/q/application/models/linea_metro_model.php",
+		"/var/www/html/inicio/q/application/views/proyecto/domicilio_envio.php",
+		"/var/www/html/inicio/q/application/helpers/lineametro_helper.php",
+		"/var/www/html/inicio/q/application/controllers/api/linea_metro.php",
+		"/var/www/html/inicio/reporte_enid/application/views/secciones/menu.php",
+		"/var/www/html/inicio/reporte_enid/application/views/empresas_enid.php",
+		"/var/www/html/inicio/js_tema/servicio/pre.js",
+		"/var/www/html/inicio/q/application/models/status_enid_service_model.php",
+		"/var/www/html/inicio/q/application/helpers/servicios_helper.php",
+		"/var/www/html/inicio/producto/application/views/pre.php",
+		"/var/www/html/inicio/q/application/models/imagen_servicio_model.php",
+		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
 		"/var/www/html/inicio/q/application/models/intento_compra_model.php",
 		"/var/www/html/inicio/js_tema/area_cliente/principal.js",
-		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
 		"/var/www/html/inicio/q/application/controllers/api/intento_compra.php",
-		"/var/www/html/inicio/js_tema/js/main.js",
-		"/var/www/html/inicio/extra.sql",
 		"/var/www/html/inicio/q/application/controllers/api/intento_compra",
 		"/var/www/html/inicio/q/application/models/tipo_punto_encuentro_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
 		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento_contra_entrega.php_",
 		"/var/www/html/inicio/q/application/controllers/api/tipo_punto_encuentro.php",
-		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
-		"/var/www/html/inicio/helpers/enid_helper.php",
 		"/var/www/html/inicio/contact/application/controllers/home.php",
-		"/var/www/html/inicio/q/application/models/punto_encuentro_model.php",
-		"/var/www/html/inicio/q/application/helpers/recibo_helper.php",
 		"/var/www/html/inicio/css_tema/template/area_cliente.css",
 		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento_contra_entrega.php",
-		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php",
 		"/var/www/html/inicio/q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php",
 		"/var/www/html/inicio/js_tema/area_cliente/cobranza.js",
 		"/var/www/html/inicio/js_tema/area_cliente/proyectos_persona.js",
 		"/var/www/html/inicio/area_cliente/application/views/secciones/menu.php",
 		"/var/www/html/inicio/q/application/views/valoraciones/form_servicio.php",
-		"/var/www/html/inicio/q/application/models/recibo_model.php",
 		"/var/www/html/inicio/area_cliente/application/views/home.php",
 		"/var/www/html/inicio/puntos_medios/application/views/quien_recibe.php",
-		"/var/www/html/inicio/js_tema/puntos_medios/principal.js",
-		"/var/www/html/inicio/css_tema/template/puntos_encuentro.css",
 		"/var/www/html/inicio/js_tema/procesar/principal.js",
 		"/var/www/html/inicio/puntos_medios/application/helpers/puntoencuentro_helper.php",
 		"/var/www/html/inicio/q/application/helpers/cobranza_helper.php",
-		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
-		"/var/www/html/inicio/puntos_medios/application/views/home.php",
 		"/var/www/html/inicio/js_tema/contact/principal.js",
 		"/var/www/html/inicio/contact/application/views/preso_compra.php",
 		"/var/www/html/inicio/puntos_medios/application/helper/puntoencuentro_helper.php",
@@ -628,101 +802,22 @@
 		"/var/www/html/inicio/css_tema/template/main.css",
 		"/var/www/html/inicio/procesar/application/helpers/procesar_helper.php",
 		"/var/www/html/inicio/login/application/controllers/api/sess.php",
-		"/var/www/html/inicio/producto/application/views/pre.php",
 		"/var/www/html/trabajo/backend.BenAndFrank.v1/modulos/lensometro.php",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/js/lensometro.js",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/js/lensometro_fo.js",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/modulos/lensometro_fo.php",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/includes/easypost/EasyPost/EasyPost.php",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/includes/Funcion.php",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/includes/easypost/EasyPost/Object.php",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/clinicas/config.php",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/includes/Config.php",
-		"/home/arithgrey/Documentos/trabajo/backend.BenAndFrank.v1/includes/Config.php",
-		"/home/arithgrey/Documentos/trabajo/dockerFilesMagento2/Dockerfile",
-		"/home/arithgrey/Documentos/trabajo/backend.BenAndFrank.v1/docker-compose.yml",
-		"/var/www/html/trabajo/dockerFilesMagento2/Dockerfile",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/config/ local.php",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/config/local.php.dist",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/config/production.php",
-		"/var/www/html/trabajo/backend.BenAndFrank.v1/docker-compose.yml",
-		"/var/www/html/inicio/view_tema/inputs_fecha_busqueda.php",
-		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
-		"/var/www/html/inicio/q/application/helpers/lineametro_helper.php",
-		"/var/www/html/inicio/q/application/controllers/api/linea_metro.php",
-		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
-		"/var/www/html/inicio/q/application/controllers/api/clasificacion.php",
-		"/var/www/html/inicio/q/application/models/linea_metro_model.php",
-		"/var/www/html/inicio/view_tema/footer_template.php",
-		"/var/www/html/inicio/contact/application/views/secciones/solicita_una_llamada.php",
-		"/var/www/html/inicio/js_tema/servicio/pre.js",
-		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
-		"/var/www/html/inicio/reporte_enid/application/views/secciones/menu.php",
-		"/var/www/html/inicio/reporte_enid/application/views/empresas_enid.php",
-		"/var/www/html/inicio/producto/application/controllers/home.php",
-		"/var/www/html/inicio/q/application/helpers/servicios_helper.php",
-		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
-		"/var/www/html/inicio/js_tema/repo_enid/principal.js",
-		"/var/www/html/inicio/js_tema/login/ini.js",
-		"/var/www/html/inicio/js_tema/area_cliente/buzon.js",
-		"/var/www/html/inicio/procesar/application/views/secciones_2/paginas_web.php",
-		"/var/www/html/inicio/css_tema/template/contact.css",
-		"/var/www/html/inicio/contact/application/views/home.php",
-		"/var/www/html/inicio/q/application/models/usuario_model.php",
-		"/var/www/html/inicio/login/application/controllers/startsession.php",
-		"/var/www/html/inicio/login/application/views/signin.php",
-		"/var/www/html/inicio/procesar/application/controllers/home.php",
-		"/var/www/html/inicio/system/core/Input.php",
-		"/var/www/html/inicio/js_tema/contact/principal.css",
-		"/var/www/html/inicio/view_tema/seccion_iniciar_session.php",
-		"/var/www/html/inicio/librerias/principal.php",
-		"/var/www/html/inicio/librerias/sessionclass.php",
-		"/var/www/html/inicio/system/core/Controller.php",
-		"/var/www/html/inicio/css_tema/template/metricas.css",
-		"/var/www/html/inicio/orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php",
-		"/var/www/html/inicio/index.php",
-		"/var/www/html/inicio/producto/application/views/compra.php",
-		"/var/www/html/inicio/view_tema/header_template.php",
-		"/var/www/html/inicio/view_tema/menu_session.php",
-		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
-		"/var/www/html/inicio/css_tema/template/producto_principal.css",
-		"/var/www/html/inicio/q/application/controllers/api/paginacion.php",
-		"/var/www/html/inicio/q/application/models/pagina_web_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/pagina_web.php",
-		"/var/www/html/inicio/system/database/DB_query_builder.php",
-		"/var/www/html/inicio/administracion_cuenta/application/views/home.php",
-		"/var/www/html/inicio/css_tema/template/procesar_pago.css",
-		"/var/www/html/inicio/debug/debug.log",
-		"/var/www/html/inicio/debug/debug.php",
-		"/var/www/html/inicio/area_cliente/application/controllers/home.php",
-		"/var/www/html/inicio/js_tema/js/direccion.js",
-		"/var/www/html/inicio/q/application/views/proyecto/domicilio_envio.php",
-		"/var/www/html/inicio/q/application/views/ventas/call_to_action.php",
-		"/var/www/html/inicio/js_tema/planes_servicios/principal.js",
-		"/var/www/html/inicio/q/application/controllers/api/codigo_postal.php",
-		"/var/www/html/inicio/system/libraries/Session.php",
-		"/var/www/html/inicio/producto/application/views/home.php",
-		"/var/www/html/inicio/q/application/views/valoraciones/articulo.php",
-		"/var/www/html/inicio/producto/application/views/form_compra.php",
-		"/var/www/html/inicio/css_tema/template/producto.css",
-		"/var/www/html/inicio/css_tema/template/pre.css",
-		"/var/www/html/inicio/js_tema/sobre_enid_service/principal.js",
-		"/var/www/html/inicio/desarrollo/index.php",
-		"/var/www/html/inicio/contact/index.php",
-		"/var/www/html/inicio/bug_/index.php",
-		"/var/www/html/inicio/base_/index.php",
-		"/var/www/html/inicio/area_cliente/index.php",
-		"/var/www/html/inicio/administracion_cuenta/index.php"
+		"/var/www/html/trabajo/backend.BenAndFrank.v1/js/lensometro.js"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 28.0
 	},
 	"find_in_files":
 	{
 		"height": 116.0,
 		"where_history":
 		[
+			"*.php",
+			"*.js",
+			"",
+			"*.php",
 			"",
 			"*.php",
 			"*.js",
@@ -846,10 +941,6 @@
 			"",
 			"*.php",
 			"",
-			"*.php",
-			"",
-			"*.php",
-			"/model*.php",
 			"*.php"
 		]
 	},
@@ -858,134 +949,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"proyecto_persona_info_",
-			"proyecto_persona_info",
-			"id_recibo",
-			"payp",
-			"d_forma_pago",
-			"request_enid",
-			"text_forma_compra",
-			"formas",
-			"Formas de pago",
-			"Recuerda que previo a la entrega",
-			"Recuerda que previo a la entrega de tu producto, deberás realizar el pago de 50 pesos por concepto de gastos de envío",
-			"val_def",
-			"exists_array_def",
-			"get_param_def",
-			"get_paramdef",
-			"array_key",
-			"pago_al_momento",
-			"print",
-			"lugar_entrega",
-			"nombre_punto",
-			"get_punto_encuentro",
-			"get_punto_encuentro_recibo",
-			"get_costo_envio_punto_encuentro",
-			"cos",
-			"costo",
-			"punto",
-			"costo_envio_sistema",
-			"costo",
-			"get_punto_encuentro",
-			"get_punto_encuentro_recibo",
-			"params_where",
-			"debu",
-			"get_punto_encuentro_recibo",
-			"ticket_pendiente_pago_contra_entrega",
-			"get_punto_encuentro_recibo",
-			"ticket_pendiente_pago",
-			"ticket_pendiente_pago_contra_entrega",
-			"button",
-			"Realiza compras con saldo Enid Service",
-			"Sobre tu",
-			"Con esto otros clientes podrán mantenerse informados sobre el vendedor y su atención al cliente",
-			"a_buzon",
-			"mis ventas",
-			"alert",
-			"cargar_info_resumen_pago_pendiente",
-			"response_carga_compras_usuario",
-			"recorrepage",
-			"proyecto_persona_info",
-			"=>",
-			"resumen_pagos_pendientes",
-			"place_notificacion_punto_encuentro_registro",
-			"request_enid",
-			"text_usuario_registrado_pregunta",
 			"orden_de_compra",
-			"orden_de_compra\norden_de_compra",
-			"orden_de_compra",
-			"genera_orden_compra",
 			"solicitud_proceso_pago",
 			"crea_orden",
-			"¿En qué horario te gustaría recibir tu pedido?",
-			"form_punto_encuentro_horario",
-			"response_notificacion_punto_entrega",
-			"response_registro_usuario",
-			"solicitud_proceso_pago",
-			"crea_orden",
-			"=",
-			"solicitud_proceso_pago",
 			"primer_orden",
-			"serialize",
+			"es_contra_entrega",
+			"tipo_entrega",
 			"notifica_punto_entrega",
-			"form_punto_encuentro",
-			"form_punto_encuentro_horario",
-			"form_punto_encuentro",
-			"¿Quién recibe?",
-			"<?=input_hidden",
-			"\t\t\t\t\t\t\t            ",
-			"<",
-			"¿Quién recibe?",
-			".mensaje_cobro_envio",
-			"Las entregas",
-			"Las entregas en puntos de encuentro tienen un costo adicional a tus artículos",
-			"solicitud_proceso_pago",
-			"crea_orden",
-			"crea_orden_punto_entrega",
-			"create_orden_punto_entrega",
-			"proyecto_persona_forma_pago_PUN",
-			"proyecto_persona_forma_pago",
-			"PROYECTO",
-			"acciones_posterior_orden_pago",
-			"genera_orden_compra",
-			"/orden_de_compra",
-			"id_forma_pago",
-			"genera_orden_compra",
-			"crea_resumen_compra",
-			"orden_de_compra",
-			"genera_orden_compra",
-			"orden_de_compra",
-			"genera_orden_compra",
-			"solicitud_proceso_pago",
-			"crea_orden",
-			"crea_orden_punto_entrega",
-			"get_costo_envio_punto_encuentro",
-			"get_costo_envio",
-			"solicitud_proceso_pago",
-			"crea_orden",
-			"plan",
-			"planb",
-			"solicitud_proceso_pago",
-			"crea_orden",
+			"tipo_entrega",
+			"es_contra_entrega",
+			"tipo",
+			"tipo_",
+			"model",
+			"tipo_entrega",
+			"es_contra_entrega",
+			"monto_a_pagar",
+			"text_saldo_pendiente",
+			"col-lg-6",
+			"crea_fecha_entrega",
+			"servicio",
+			"resumen",
+			"servicio",
 			"=",
+			"get_tipos_entregas",
+			"tipo_entrega/index",
+			"status_compra",
+			"\t\t\t",
+			"crea_estado_venta",
+			"MONTO PENDIENTE",
+			"get_estatus_enid_service",
+			"status",
+			"get_estatus_enid_service",
+			"status",
+			"get_estatus_servicio_enid_service",
+			"esta",
+			"eststu",
+			"status",
+			"status+",
+			"=",
+			" = \"",
+			"[",
+			"=>",
+			"get_usuario",
+			"get_info_usuario",
+			"=",
+			"$row[",
+			"=",
+			"=>",
+			"            ",
+			"get_punto_encuentro",
+			"create_punto_encuentro",
+			"]",
+			"$row[",
+			"= $row",
+			"]",
+			"=>",
+			"\t    \t",
+			"    [",
+			"create_seccion_domicilio",
+			"get_domicilio_recibo",
+			"data_direccion",
+			"get_domicilio_entrega",
+			"get_domicilio_recibo",
+			"data_direccion",
+			"response",
+			"get_domicilio_recibo",
+			"proyecto_persona_forma_pago_punto_encuentro",
+			"id_linea_metro",
+			"get_punto_encuentrio",
+			"api",
+			"complete",
+			"get_punto_encuentro",
+			"get_domicilio_entrega",
+			"data_recibo",
+			"get_domicilio_entrega",
+			"get_punto_encuentro",
+			"get_id_proyecto_persona_forma_pago",
+			"get_punto_encuentro_recibo",
+			"busqueda_mensaje",
+			"funny_error_message",
+			"index_GET",
+			"id_GET",
+			"¿En busca de un buen regalo?",
+			"text_costo_envio_gratis+",
+			"CARGO POR ENTREGA",
+			"titulo_punto_encuentro",
+			"IDENTIFICA TU PUNTO MÁS CERCANO",
+			"flag_envio_gratis",
+			"btn_continuar_punto_encuentr",
+			"response_lineas_metro",
+			"create_estaciones",
+			"get_flag_envio_gratis",
+			"get_costo_envio",
+			"flag_envio_",
+			"flag_",
+			"get_costo_envio",
+			"debug",
+			"q_get",
+			"get_costo_envio",
+			"fields",
+			"q_get",
+			"id_GET",
+			"index_GET",
+			"q_get",
+			"get_costo_envio",
+			"calcula_costo_envio_GET",
+			"costo_envio",
+			"get_costo_envio",
+			"costo_en",
+			"api",
+			"get_costo_envio",
+			"set_link",
 			"plan",
-			"solicitud_proceso_pago",
-			"crea_orden",
-			"solicitud_proceso_pago",
-			"crea_orden",
-			"crea_orden_punto_entrega",
-			"genera_orden_compra",
-			"09:00",
-			"crea_orden_punto_entrega",
-			"date",
-			"valida_fecha_entrega",
-			"crea_orden_punto_entrega",
-			"crea_orden",
-			"crea_orden_punto_entrega",
-			"array_ke",
-			"crea_usuario",
-			"fecha_entrega",
-			"primer_orden_post"
+			"muestra_lineas_metro",
+			"linea_metro",
+			"form_punto_encuentro",
+			"response_estaciones",
+			"id_servicio",
+			"es_contra_entrega",
+			"tipo_entrega",
+			"get_text_status",
+			"TIPO ENTREGA",
+			"variable",
+			"get_info",
+			"form_search",
+			"get_parameter_enid",
+			"get_para",
+			"redirect",
+			"ini_set('error_log'"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -993,6 +1084,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"tipo_entrega",
+			"",
 			"ini_set('memory_limit', '32M'); require_once BASEPATH.'core/CodeIgniter.php';",
 			"format/json/\"",
 			"create_contenido_menu",
@@ -1018,8 +1111,1174 @@
 	"groups":
 	[
 		{
+			"selected": 8,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1049,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								992,
+								992
+							]
+						],
+						"settings":
+						{
+							"auto_name": "DEBUG - TYPE array 2018-11-18 23:13:39 --> Array",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 114.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "css_tema/template/pedidos.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 845,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								822,
+								822
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 563.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "q/application/controllers/api/punto_encuentro.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2363,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1160,
+								1160
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 380.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 40933,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										200,
+										212
+									],
+									[
+										390,
+										402
+									],
+									[
+										457,
+										469
+									],
+									[
+										519,
+										531
+									],
+									[
+										651,
+										663
+									],
+									[
+										838,
+										850
+									],
+									[
+										922,
+										934
+									],
+									[
+										998,
+										1010
+									],
+									[
+										1011,
+										1023
+									],
+									[
+										1035,
+										1047
+									],
+									[
+										1087,
+										1099
+									],
+									[
+										1309,
+										1321
+									],
+									[
+										1322,
+										1334
+									],
+									[
+										1365,
+										1377
+									],
+									[
+										1418,
+										1430
+									],
+									[
+										1612,
+										1624
+									],
+									[
+										1634,
+										1646
+									],
+									[
+										1761,
+										1773
+									],
+									[
+										1782,
+										1794
+									],
+									[
+										1908,
+										1920
+									],
+									[
+										1929,
+										1941
+									],
+									[
+										2055,
+										2067
+									],
+									[
+										2076,
+										2088
+									],
+									[
+										2202,
+										2214
+									],
+									[
+										2223,
+										2235
+									],
+									[
+										2349,
+										2361
+									],
+									[
+										2370,
+										2382
+									],
+									[
+										2496,
+										2508
+									],
+									[
+										2518,
+										2530
+									],
+									[
+										2728,
+										2740
+									],
+									[
+										2773,
+										2785
+									],
+									[
+										2819,
+										2831
+									],
+									[
+										3007,
+										3019
+									],
+									[
+										3158,
+										3170
+									],
+									[
+										3309,
+										3321
+									],
+									[
+										3460,
+										3472
+									],
+									[
+										3611,
+										3623
+									],
+									[
+										3762,
+										3774
+									],
+									[
+										3913,
+										3925
+									],
+									[
+										4064,
+										4076
+									],
+									[
+										4215,
+										4227
+									],
+									[
+										4366,
+										4378
+									],
+									[
+										4517,
+										4529
+									],
+									[
+										4668,
+										4680
+									],
+									[
+										4948,
+										4960
+									],
+									[
+										5226,
+										5238
+									],
+									[
+										5270,
+										5282
+									],
+									[
+										5318,
+										5330
+									],
+									[
+										5339,
+										5351
+									],
+									[
+										5437,
+										5449
+									],
+									[
+										5714,
+										5726
+									],
+									[
+										6068,
+										6080
+									],
+									[
+										6204,
+										6216
+									],
+									[
+										6292,
+										6304
+									],
+									[
+										6321,
+										6333
+									],
+									[
+										6425,
+										6437
+									],
+									[
+										6603,
+										6615
+									],
+									[
+										6693,
+										6705
+									],
+									[
+										6783,
+										6795
+									],
+									[
+										6928,
+										6940
+									],
+									[
+										7160,
+										7172
+									],
+									[
+										7425,
+										7437
+									],
+									[
+										7453,
+										7465
+									],
+									[
+										7494,
+										7506
+									],
+									[
+										7765,
+										7777
+									],
+									[
+										8098,
+										8110
+									],
+									[
+										8365,
+										8377
+									],
+									[
+										8759,
+										8771
+									],
+									[
+										8928,
+										8940
+									],
+									[
+										9174,
+										9186
+									],
+									[
+										9288,
+										9300
+									],
+									[
+										9533,
+										9545
+									],
+									[
+										9839,
+										9851
+									],
+									[
+										10023,
+										10035
+									],
+									[
+										10360,
+										10372
+									],
+									[
+										10651,
+										10663
+									],
+									[
+										10926,
+										10938
+									],
+									[
+										11209,
+										11221
+									],
+									[
+										11387,
+										11399
+									],
+									[
+										11494,
+										11506
+									],
+									[
+										11602,
+										11614
+									],
+									[
+										11795,
+										11807
+									],
+									[
+										11868,
+										11880
+									],
+									[
+										11945,
+										11957
+									],
+									[
+										12231,
+										12243
+									],
+									[
+										12275,
+										12287
+									],
+									[
+										12321,
+										12333
+									],
+									[
+										12546,
+										12558
+									],
+									[
+										12749,
+										12761
+									],
+									[
+										12898,
+										12910
+									],
+									[
+										13231,
+										13243
+									],
+									[
+										13386,
+										13398
+									],
+									[
+										13587,
+										13599
+									],
+									[
+										13894,
+										13906
+									],
+									[
+										14186,
+										14198
+									],
+									[
+										14214,
+										14226
+									],
+									[
+										14475,
+										14487
+									],
+									[
+										14504,
+										14516
+									],
+									[
+										14604,
+										14616
+									],
+									[
+										14809,
+										14821
+									],
+									[
+										15086,
+										15098
+									],
+									[
+										15257,
+										15269
+									],
+									[
+										15585,
+										15597
+									],
+									[
+										15843,
+										15855
+									],
+									[
+										16105,
+										16117
+									],
+									[
+										16207,
+										16219
+									],
+									[
+										16304,
+										16316
+									],
+									[
+										16446,
+										16458
+									],
+									[
+										16815,
+										16827
+									],
+									[
+										16841,
+										16853
+									],
+									[
+										17112,
+										17124
+									],
+									[
+										17131,
+										17143
+									],
+									[
+										17317,
+										17329
+									],
+									[
+										17373,
+										17385
+									],
+									[
+										17550,
+										17562
+									],
+									[
+										17603,
+										17615
+									],
+									[
+										17651,
+										17663
+									],
+									[
+										17690,
+										17702
+									],
+									[
+										17762,
+										17774
+									],
+									[
+										18031,
+										18043
+									],
+									[
+										18179,
+										18191
+									],
+									[
+										18323,
+										18335
+									],
+									[
+										18521,
+										18533
+									],
+									[
+										18654,
+										18666
+									],
+									[
+										18717,
+										18729
+									],
+									[
+										18839,
+										18851
+									],
+									[
+										19121,
+										19133
+									],
+									[
+										19371,
+										19383
+									],
+									[
+										19620,
+										19632
+									],
+									[
+										19783,
+										19795
+									],
+									[
+										19983,
+										19995
+									],
+									[
+										20253,
+										20265
+									],
+									[
+										20473,
+										20485
+									],
+									[
+										20503,
+										20515
+									],
+									[
+										20572,
+										20584
+									],
+									[
+										20767,
+										20779
+									],
+									[
+										20846,
+										20858
+									],
+									[
+										21264,
+										21276
+									],
+									[
+										21402,
+										21414
+									],
+									[
+										21548,
+										21560
+									],
+									[
+										21967,
+										21984
+									],
+									[
+										22326,
+										22343
+									],
+									[
+										22609,
+										22626
+									],
+									[
+										22971,
+										22988
+									],
+									[
+										23333,
+										23350
+									],
+									[
+										23696,
+										23713
+									],
+									[
+										24060,
+										24077
+									],
+									[
+										24424,
+										24441
+									],
+									[
+										24505,
+										24522
+									],
+									[
+										24816,
+										24833
+									],
+									[
+										24897,
+										24914
+									],
+									[
+										25208,
+										25225
+									],
+									[
+										25289,
+										25306
+									],
+									[
+										25600,
+										25617
+									],
+									[
+										25701,
+										25718
+									],
+									[
+										26041,
+										26058
+									],
+									[
+										26142,
+										26159
+									],
+									[
+										26482,
+										26499
+									],
+									[
+										26583,
+										26600
+									],
+									[
+										26923,
+										26940
+									],
+									[
+										27024,
+										27041
+									],
+									[
+										27364,
+										27381
+									],
+									[
+										27465,
+										27482
+									],
+									[
+										27805,
+										27822
+									],
+									[
+										27906,
+										27923
+									],
+									[
+										28246,
+										28263
+									],
+									[
+										28347,
+										28364
+									],
+									[
+										28687,
+										28704
+									],
+									[
+										28788,
+										28805
+									],
+									[
+										29128,
+										29145
+									],
+									[
+										29229,
+										29246
+									],
+									[
+										29555,
+										29572
+									],
+									[
+										29799,
+										29816
+									],
+									[
+										30076,
+										30093
+									],
+									[
+										30447,
+										30464
+									],
+									[
+										30806,
+										30823
+									],
+									[
+										31089,
+										31106
+									],
+									[
+										31451,
+										31468
+									],
+									[
+										31813,
+										31830
+									],
+									[
+										32176,
+										32193
+									],
+									[
+										32540,
+										32557
+									],
+									[
+										32904,
+										32921
+									],
+									[
+										32985,
+										33002
+									],
+									[
+										33296,
+										33313
+									],
+									[
+										33377,
+										33394
+									],
+									[
+										33688,
+										33705
+									],
+									[
+										33769,
+										33786
+									],
+									[
+										34080,
+										34097
+									],
+									[
+										34181,
+										34198
+									],
+									[
+										34521,
+										34538
+									],
+									[
+										34622,
+										34639
+									],
+									[
+										34962,
+										34979
+									],
+									[
+										35063,
+										35080
+									],
+									[
+										35403,
+										35420
+									],
+									[
+										35504,
+										35521
+									],
+									[
+										35844,
+										35861
+									],
+									[
+										35945,
+										35962
+									],
+									[
+										36285,
+										36302
+									],
+									[
+										36386,
+										36403
+									],
+									[
+										36726,
+										36743
+									],
+									[
+										36827,
+										36844
+									],
+									[
+										37167,
+										37184
+									],
+									[
+										37268,
+										37285
+									],
+									[
+										37608,
+										37625
+									],
+									[
+										37709,
+										37726
+									],
+									[
+										38035,
+										38052
+									],
+									[
+										38279,
+										38296
+									],
+									[
+										38556,
+										38573
+									],
+									[
+										38873,
+										38890
+									],
+									[
+										39306,
+										39318
+									],
+									[
+										39682,
+										39694
+									],
+									[
+										40070,
+										40082
+									],
+									[
+										40446,
+										40458
+									],
+									[
+										40836,
+										40848
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								40842,
+								40842
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 8,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 16074.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "q/application/controllers/api/cobranza.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 24759,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16122,
+								16122
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7501.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "q/application/controllers/api/recibo.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14559,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1782,
+								1782
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 567.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "js_tema/servicio/pre.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 949,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								362,
+								362
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "js_tema/puntos_medios/principal.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6900,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6369,
+								6369
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3406.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "q/application/models/recibo_model.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 44039,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14792,
+								14792
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 9268.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2266,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1652,
+								1652
+							]
+						],
+						"settings":
+						{
+							"auto_name": "(",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 738.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1080,20 +2339,216 @@
 				"q/application/controllers/api/recibo.php"
 			],
 			[
-				"intento_compra_model",
-				"q/application/models/intento_compra_model.php"
+				"unto_encuentro.php",
+				"q/application/controllers/api/punto_encuentro.php"
 			],
 			[
-				"pago_a",
-				"q/application/views/cobranza/pago_al_momento.php"
+				"eni",
+				"helpers/enid_helper.php"
+			],
+			[
+				"enid",
+				"helpers/enid_helper.php"
+			],
+			[
+				"pedi",
+				"css_tema/template/pedidos.css"
+			],
+			[
+				"ped",
+				"css_tema/template/pedidos.css"
+			],
+			[
+				"tipoe",
+				"q/application/controllers/api/tipo_entrega.php"
+			],
+			[
+				"status",
+				"q/application/controllers/api/status_enid_service.php"
+			],
+			[
+				"cobra",
+				"q/application/controllers/api/cobranza.php"
+			],
+			[
+				"princi",
+				"librerias/principal.php"
+			],
+			[
+				"prin",
+				"librerias/principal.php"
+			],
+			[
+				"punto_encuentro",
+				"q/application/controllers/api/punto_encuentro.php"
+			],
+			[
+				"proyecto_persona_forma_pago_punto_encuentro",
+				"q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php"
+			],
+			[
+				"direccion",
+				"q/application/controllers/api/direccion.php"
+			],
+			[
+				"direccion.php",
+				"q/application/controllers/api/direccion.php"
+			],
+			[
+				"punto",
+				"q/application/controllers/api/punto_encuentro.php"
+			],
+			[
+				"punt",
+				"css_tema/template/puntos_encuentro.css"
+			],
+			[
+				"servii",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"extr",
+				"extra.sql"
+			],
+			[
+				"tipo_entrega_model",
+				"q/application/models/intento_tipo_entrega_model.php"
+			],
+			[
+				"tipo_e",
+				"q/application/controllers/api/intento_tipo_entrega.php"
+			],
+			[
+				"pedidos",
+				"q/application/views/recibo/pedidos.php"
+			],
+			[
+				"pedidos.",
+				"q/application/views/recibo/pedidos.php"
+			],
+			[
+				"pedidos.cs",
+				"css_tema/template/pedidos.css"
+			],
+			[
+				"extra",
+				"extra.sql"
 			],
 			[
 				"main",
 				"js_tema/js/main.js"
 			],
 			[
-				"extra",
-				"extra.sql"
+				"pedidos.js",
+				"js_tema/pedidos/principal.js"
+			],
+			[
+				"libraries/Session.php",
+				"system/libraries/Session.php"
+			],
+			[
+				"confi",
+				"config/config.php"
+			],
+			[
+				"header",
+				"view_tema/header_template.php"
+			],
+			[
+				"he",
+				"planes_servicios/application/views/home_enid.php"
+			],
+			[
+				"autolo",
+				"config/autoload.php"
+			],
+			[
+				"rest",
+				"librerias/REST_Controller.php"
+			],
+			[
+				"models/serviciosmodel.php",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"linea_metro",
+				"q/application/controllers/api/linea_metro.php"
+			],
+			[
+				"linea_metro_model",
+				"q/application/models/linea_metro_model.php"
+			],
+			[
+				"js_tema/puntos_medios/principal.js",
+				"js_tema/puntos_medios/principal.js"
+			],
+			[
+				"pre",
+				"js_tema/servicio/pre.js"
+			],
+			[
+				"servicio",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"status_enid_service_model",
+				"q/application/models/status_enid_service_model.php"
+			],
+			[
+				"recibo_",
+				"q/application/helpers/recibo_helper.php"
+			],
+			[
+				"tipo_entre",
+				"q/application/models/intento_tipo_entrega_model.php"
+			],
+			[
+				"intento_",
+				"q/application/controllers/api/intento_tipo_entrega.php"
+			],
+			[
+				"servicio_he",
+				"q/application/helpers/servicios_helper.php"
+			],
+			[
+				"servicios",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"intento_e",
+				"q/application/controllers/api/intento_tipo_entrega.php"
+			],
+			[
+				"inten",
+				"q/application/models/intento_tipo_entrega_model.php"
+			],
+			[
+				"intene",
+				"q/application/models/intento_tipo_entrega_model.php"
+			],
+			[
+				"servi",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"js_tema/servicio/pre.js",
+				"js_tema/servicio/pre.js"
+			],
+			[
+				"servici",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"recibomo",
+				"q/application/models/recibo_model.php"
+			],
+			[
+				"intento_compra_model",
+				"q/application/models/intento_compra_model.php"
+			],
+			[
+				"pago_a",
+				"q/application/views/cobranza/pago_al_momento.php"
 			],
 			[
 				"tipo_punto_encuentro_model",
@@ -1104,24 +2559,8 @@
 				"q/application/controllers/api/tipo_punto_encuentro.php"
 			],
 			[
-				"punto",
-				"q/application/controllers/api/punto_encuentro.php"
-			],
-			[
-				"extr",
-				"extra.sql"
-			],
-			[
-				"enid",
-				"helpers/enid_helper.php"
-			],
-			[
 				"cobrna",
 				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"punto_encuentro",
-				"q/application/controllers/api/punto_encuentro.php"
 			],
 			[
 				"punto_en",
@@ -1160,18 +2599,6 @@
 				"q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php"
 			],
 			[
-				"eni",
-				"helpers/enid_helper.php"
-			],
-			[
-				"proyecto_persona_forma_pago_punto_encuentro",
-				"q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php"
-			],
-			[
-				"recibomo",
-				"q/application/models/recibo_model.php"
-			],
-			[
 				"cobran",
 				"q/application/controllers/api/cobranza.php"
 			],
@@ -1190,10 +2617,6 @@
 			[
 				"cobr",
 				"q/application/helpers/cobranza_helper.php"
-			],
-			[
-				"punt",
-				"q/application/helpers/puntoencuentro_helper.php"
 			],
 			[
 				"usua",
@@ -1256,10 +2679,6 @@
 				"backend.BenAndFrank.v1/includes/Config.php"
 			],
 			[
-				"confi",
-				"backend.BenAndFrank.v1/clinicas/config.php"
-			],
-			[
 				"con",
 				"includes/Config.php"
 			],
@@ -1296,10 +2715,6 @@
 				"js_tema/js/main.js"
 			],
 			[
-				"pre",
-				"js_tema/servicio/pre.js"
-			],
-			[
 				"serviciomo",
 				"q/application/models/serviciosmodel.php"
 			],
@@ -1309,10 +2724,6 @@
 			],
 			[
 				"SERVICIO",
-				"q/application/controllers/api/servicio.php"
-			],
-			[
-				"servicio",
 				"q/application/controllers/api/servicio.php"
 			],
 			[
@@ -1342,10 +2753,6 @@
 			[
 				"pre.js",
 				"js_tema/servicio/pre.js"
-			],
-			[
-				"princi",
-				"librerias/principal.php"
 			],
 			[
 				"pre.php",
@@ -1408,10 +2815,6 @@
 				"css_tema/template/procesar_pago.css"
 			],
 			[
-				"prin",
-				"librerias/principal.php"
-			],
-			[
 				"principal",
 				"librerias/principal.php"
 			],
@@ -1442,150 +2845,6 @@
 			[
 				"pre.c",
 				"css_tema/template/pre.css"
-			],
-			[
-				"pre.",
-				"css_tema/template/pre.css"
-			],
-			[
-				"core/CodeIgniter.php",
-				"system/core/CodeIgniter.php"
-			],
-			[
-				"inde",
-				"index.php"
-			],
-			[
-				"tarea.php",
-				"q/application/controllers/api/tarea.php"
-			],
-			[
-				"tickets/detalle",
-				"q/application/views/tickets/detalle.php"
-			],
-			[
-				"helpers/tickets_helper.php",
-				"q/application/helpers/tickets_helper.php"
-			],
-			[
-				"home_enid",
-				"planes_servicios/application/views/home_enid.php"
-			],
-			[
-				"servic",
-				"q/application/controllers/api/servicio.php"
-			],
-			[
-				"producto.php",
-				"tag_/application/controllers/api/producto.php"
-			],
-			[
-				"product",
-				"tag_/application/controllers/api/producto.php"
-			],
-			[
-				"producto",
-				"tag_/application/controllers/api/producto.php"
-			],
-			[
-				"usuario.php",
-				"q/application/controllers/api/usuario.php"
-			],
-			[
-				"areaclie",
-				"q/application/controllers/api/areacliente.php"
-			],
-			[
-				" planes_servicios/application/views/secciones/categorias_movil.php",
-				"planes_servicios/application/views/secciones/categorias_movil.php"
-			],
-			[
-				"main.",
-				"js_tema/js/main.js"
-			],
-			[
-				"servicio/detalle",
-				"q/application/views/servicio/detalle.php"
-			],
-			[
-				"serviciosmodel",
-				"q/application/models/serviciosmodel.php"
-			],
-			[
-				"search",
-				"css_tema/template/search_main.css"
-			],
-			[
-				"sear",
-				"css_tema/template/search_sin_encontrar.css"
-			],
-			[
-				"planes",
-				"css_tema/template/planes_servicios.css"
-			],
-			[
-				"categoria_model",
-				"q/application/models/categoria_model.php"
-			],
-			[
-				"categori",
-				"q/application/controllers/api/categoria.php"
-			],
-			[
-				"CATE",
-				"faq/application/views/secciones_2/categorias.php"
-			],
-			[
-				" helpers/faq_helper.p",
-				"faq/application/helpers/faq_helper.php"
-			],
-			[
-				"helpers/faq_helper.php",
-				"faq/application/helpers/faq_helper.php"
-			],
-			[
-				"helpers/enid_helper.php",
-				"helpers/enid_helper.php"
-			],
-			[
-				"categoriamode",
-				"q/application/models/categoria_model.php"
-			],
-			[
-				"categoria",
-				"q/application/controllers/api/categoria.php"
-			],
-			[
-				"faqs.php",
-				"q/application/controllers/api/faqs.php"
-			],
-			[
-				"faq.php",
-				"q/application/controllers/api/faqs.php"
-			],
-			[
-				"terminos_condiciones.php",
-				"terminos-y-condiciones/application/views/secciones/terminos_condiciones.php_"
-			],
-			[
-				"foo",
-				"view_tema/footer_template.php"
-			],
-			[
-				"template/search_main.css",
-				"css_tema/template/search_main.css"
-			],
-			[
-				"search_sin_encontrar.css",
-				"css_tema/template/search_sin_encontrar.css"
-			],
-			[
-				"mysql/mysql_driver.php",
-				"system/database/drivers/mysql/mysql_driver.php"
-			],
-			[
-				"data",
-				"db/database.php"
 			]
 		],
 		"width": 0.0
@@ -1679,8 +2938,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
-	"side_bar_width": 316.0,
+	"side_bar_visible": false,
+	"side_bar_width": 435.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

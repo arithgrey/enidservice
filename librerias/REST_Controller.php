@@ -208,7 +208,12 @@ abstract class REST_Controller extends CI_Controller
         $this->load->config('rest');
 
         // This library is bundled with REST_Controller 2.5+, but will eventually be part of CodeIgniter itself
-        $this->load->library('format');
+        
+        //$this->load->library('format');
+        //$this->load->add_package_path(APPPATH.'librerias/')->library('format');
+        
+
+        
 
         // init objects
         $this->response     = new stdClass();

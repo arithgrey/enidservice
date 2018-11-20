@@ -191,7 +191,6 @@ class Cobranza extends REST_Controller{
     function solicitud_proceso_pago_POST(){
 
         $param                  =   $this->post();                      
-
         $param["plan"]          =   (!array_key_exists("plan", $param)) ? $param["servicio"] : $param["plan"];
         $id_servicio            =   $param["plan"]; 
         $precio                 =   $this->get_precio_id_servicio($id_servicio);
@@ -230,14 +229,22 @@ class Cobranza extends REST_Controller{
                 /*Consultamos el precio de envio del producto*/                
                 
                 if($data_orden["servicio"]["flag_servicio"]== 0){
-                    if (!array_key_exists("es_contra_entrega", $param)) {
+                    //debug($param ,1);
+                    if (array_key_exists("tipo_entrega", $param) && $param["tipo_entrega"] ==  1 ) {
                         
-                        $prm_envio["flag_envio_gratis"] = $data_orden["servicio"]["flag_envio_gratis"];
-                        $data_orden["costo_envio"] = $this->get_costo_envio($prm_envio);            
-                    }else{
-
                         $prm_envio["flag_envio_gratis"] = 0;
-                        $data_orden["costo_envio"]      = $this->get_costo_envio_punto_encuentro($param);            
+                        $data_orden["costo_envio"]      = 
+                        $this->get_costo_envio_punto_encuentro($param);
+
+
+                    }else{
+                        
+                        $prm_envio["flag_envio_gratis"] = 
+                        $data_orden["servicio"]["flag_envio_gratis"];
+                        
+                        $data_orden["costo_envio"]      = 
+                        $this->get_costo_envio($prm_envio);            
+                                    
                     }
                     
                 }
@@ -262,7 +269,7 @@ class Cobranza extends REST_Controller{
 
                 
                 $id_recibo        = $this->genera_orden_compra($data_orden);                
-
+                //debug($id_recibo);
 
                 
                 $q["id_servicio"] = $id_servicio;
@@ -288,15 +295,12 @@ class Cobranza extends REST_Controller{
                 }
                 
                 $data_acciones_posteriores["es_usuario_nuevo"] =  $es_usuario_nuevo;
+                $this->acciones_posterior_orden_pago($data_acciones_posteriores);                
+                if($param["tipo_entrega"] ==  2) {
 
-                $this->acciones_posterior_orden_pago($data_acciones_posteriores);
-                
-                if(!array_key_exists("es_contra_entrega", $param)) {
-
-                    $data_orden["ficha"]                           = 
+                    $data_orden["ficha"]  = 
                     $this->carga_ficha_direccion_envio($data_acciones_posteriores);        
-                }else{
-                    
+                }else{                
                     /* Registro en tabla de encuentros*/
                     $param["id_recibo"]           = $id_recibo;  
                     $data_orden["id_recibo"]      = $id_recibo;  
@@ -305,9 +309,7 @@ class Cobranza extends REST_Controller{
                 
             }
 
-        }        
-        
-
+        }                
         $this->response($data_orden);    
     }
     function primer_orden_POST(){
@@ -335,7 +337,9 @@ class Cobranza extends REST_Controller{
                     
                     /*Para encuentros en puntos de entrega*/
                     $response = $this->crea_orden_punto_entrega($param);
+
                 }else{
+
                     /*Para ordenes por entrega DHL, FEDEX ETC*/
                     $response =  $this->crea_orden($param);
                     
@@ -384,7 +388,7 @@ class Cobranza extends REST_Controller{
             ){
 
             $param["fecha_entrega"]         =  $param["fecha_entrega"]." ".$param["horario_entrega"].":00";
-            $param["es_contra_entrega"]     =  1;
+            $param["tipo_entrega"]     =  1;
             $param["plan"]                  =  $param["servicio"];
             $param["id_ciclo_facturacion"]  =  5;
             

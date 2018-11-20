@@ -26,8 +26,12 @@
         $query_get = "SELECT 
         p.* ,
         p.nombre lugar_entrega ,
-        t.tipo ,
-        l.* 
+        t.tipo ,        
+        l.nombre nombre_linea,
+        l.color,
+        l.tipo tipo_linea,
+        l.id id_linea_metro,
+        l.numero
         FROM punto_encuentro p  
         INNER JOIN   
         tipo_punto_encuentro t on p.id_tipo_punto_encuentro =  t.id 

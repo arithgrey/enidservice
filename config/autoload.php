@@ -1,6 +1,10 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-$autoload['packages'] 		= array(APPPATH.'third_party');
-$autoload['libraries'] 		= ['user_agent' , '../../librerias/restclient'];
+$autoload['packages'] 		= array(APPPATH.'third_party' );
+$autoload['libraries'] 		= [
+	'user_agent' , 
+	'../../librerias/restclient', 
+	'../../librerias/format'
+];
 $autoload['helper'] 		= 
 ['html', 'url' , 'date', "../../helpers/enid" ,"form"];
 

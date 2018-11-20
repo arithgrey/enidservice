@@ -400,3 +400,22 @@ CREATE TABLE IF NOT EXISTS `enidserv_web`.`intento_tipo_entrega` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+use enidserv_web;
+update proyecto_persona_forma_pago set status = 9 where id_proyecto_persona_forma_pago = 156;
+update proyecto_persona_forma_pago set status = 9 where id_proyecto_persona_forma_pago = 159;
+update proyecto_persona_forma_pago set status = 9 where id_proyecto_persona_forma_pago = 160;
+update proyecto_persona_forma_pago set status = 9 where id_proyecto_persona_forma_pago = 158;
+
+UPDATE `enidserv_web`.`status_enid_service` SET `descripcion`='', `text_vendedor`='Entregado' WHERE `id_estatus_enid_service`='9' and`nombre`='Entregado';
+insert into forma_pago(forma_pago) values("Mercado pago");
+select * from proyecto_persona_forma_pago where id_proyecto_persona_forma_pago = 159;
+UPDATE `enidserv_web`.`proyecto_persona_forma_pago` SET `es_contra_entrega`='4' WHERE `id_proyecto_persona_forma_pago`='158';
+
+
+
+
+insert into status_enid_service(nombre , pago , text_vendedor ,text_cliente )values("PAGADO, POR ENVIAR" , 1, "PAGADO, POR ENVIAR" , "PAGADO, POR ENVIAR");
+  SELECT * FROM status_enid_service;
+
+SELECT * FROM proyecto_persona_forma_pago order by id_proyecto_persona_forma_pago desc

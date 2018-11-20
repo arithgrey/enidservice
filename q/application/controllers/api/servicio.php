@@ -12,6 +12,18 @@ class Servicio extends REST_Controller{
       $this->load->library(lib_def());         
       $this->id_usuario = $this->principal->get_session("idusuario");
   } 
+  function envio_gratis_GET(){
+    
+    $param    =   $this->get();        
+    $response =   [];
+    if (if_ext($param , "id")) {
+        
+        $id_servicio  =   $param["id"];         
+        $response     =   $this->serviciosmodel->q_get(["flag_envio_gratis"], $id_servicio);      
+    
+    }    
+    $this->response($response);      
+  }
   /**/
   function clasificaciones_destacadas_GET(){
 

@@ -6,7 +6,8 @@ class Home extends CI_Controller{
     function __construct($options=[]){        
         parent::__construct();              
         $this->load->helper("producto");                                    
-        $this->load->library(lib_def());                       
+        $this->load->library(lib_def());       
+                    
     }       
     private function set_option($key, $value){
         $this->options[$key] = $value;

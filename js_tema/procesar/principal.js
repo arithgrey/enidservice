@@ -55,9 +55,9 @@ function registro(e){
 					set_option("telefono",$(".telefono").val());		
 					set_option("usuario_referencia", $(".q2").val());																
 					set_option("talla"	, $(".talla").val());																				
-					var data_send =  {"password": pwpost , "email" : get_option("email") , "nombre" : get_option("nombre"), "telefono": get_option("telefono") , "plan" : get_option("plan") , "num_ciclos" : get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"), "ciclo_facturacion":get_option("ciclo_facturacion"), "usuario_referencia":get_option("usuario_referencia") , "talla" : get_option("talla")};				
+					var data_send =  {"password": pwpost , "email" : get_option("email") , "nombre" : get_option("nombre"), "telefono": get_option("telefono") , "plan" : get_option("plan") , "num_ciclos" : get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"), "ciclo_facturacion":get_option("ciclo_facturacion"), "usuario_referencia":get_option("usuario_referencia") , "talla" : get_option("talla") , "tipo_entrega": 2};				
 					$(".informacion_extra").hide();
-					request_enid( "POST",  data_send, url, respuesta_registro, 0 , before_registro_afiliado);	
+					request_enid("POST", data_send, url, respuesta_registro, 0 , before_registro_afiliado);	
 				}			
 			}		
 		}else{
@@ -97,16 +97,14 @@ var respuesta_registro = function(data){
 	}
 	
 }
-
 /**/
 function procesar_pedido_usuario_activo(){
 
-
-	var url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";		
+	var url 			= "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";		
 	set_option("talla"	, $(".talla").val());		
-	var data_send =  {"plan" : get_option("plan") , "num_ciclos": get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"),"ciclo_facturacion":get_option("ciclo_facturacion") ,  "talla" : get_option("talla") };					
+	var data_send 		=  {"plan" : get_option("plan") , "num_ciclos": get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"),"ciclo_facturacion":get_option("ciclo_facturacion") ,  "talla" : get_option("talla"), "tipo_entrega" : 2 };
 	request_enid( "POST",  data_send, url, respuesta_proceso_venta_usuario_activo, "" , before_procesar_pedido_activo);
-	
+
 }
 /**/
 function before_procesar_pedido_activo(){

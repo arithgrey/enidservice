@@ -420,6 +420,7 @@
 
             
             $orden = $this->get_orden($param);    
+            
             $sql_match = ($num_q >0 )?
             "   AND MATCH(metakeyword , 
                 metakeyword_usuario) 
@@ -439,7 +440,7 @@
                     ".$orden."
                     ".$limit;
                 
-                                
+            
             return $sql_extra;
           
     }
@@ -463,48 +464,50 @@
 
         
         switch ($param["order"]) {
+            /*Novedades primero*/
             case 1:
-                return " ORDER BY  fecha_registro  DESC";
+                return " ORDER BY   fecha_registro DESC, deseado DESC ,  vista DESC";
                 break;
             
             case 2:
-                return " ORDER BY  deseado  DESC";
+                return " ORDER BY  deseado DESC , vista  DESC";
                 break;
 
             case 3:
-                return " ORDER BY valoracion DESC";
+                return " ORDER BY valoracion DESC , deseado DESC , vista DESC";
                 break;            
 
             case 4:
-                return " ORDER BY vista DESC";
+                return " ORDER BY vista DESC, deseado DESC , valoracion DESC";
                 break;
 
             case 5:
-                return " ORDER BY precio DESC";
+                return " ORDER BY precio DESC, deseado DESC";
                 break;    
 
             case 6:
-                return " ORDER BY precio ASC";
+                return " ORDER BY precio ASC, deseado DESC";
                 break;    
             
             case 7:
-                return " ORDER BY nombre_servicio DESC";
+                return " ORDER BY nombre_servicio ASC , deseado DESC";
                 break;    
 
             case 8:
-                return " ORDER BY nombre_servicio ASC";
+                return " ORDER BY nombre_servicio  DESC , deseado ASC";
                 break;    
                         
             case 9:
-                return " AND flag_servicio = 1 ORDER BY  deseado , vista  DESC";
+                return 
+                " AND flag_servicio = 1 ORDER BY  deseado DESC , vista  DESC , valoracion DESC";
             break;    
 
             case 10:
-                return " AND flag_servicio = 0 ORDER BY  deseado , vista  DESC";
+                return " AND flag_servicio = 0 ORDER BY  deseado DESC , vista  DESC";
             break; 
 
             case 11:
-                return " ORDER BY  deseado , vista  DESC ";
+                return " ORDER BY  deseado DESC, vista  DESC ";
             break;    
 
             default:
@@ -777,6 +780,7 @@
         $this->db->query($query_drop);                
         if($flag == 0){
             $query_where = $this->get_sql_servicio($param , 0);
+
             $param_extra =  ( $param["agrega_clasificaciones"] ==  1)?
             ",primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 
             , quinto_nivel":""; 
@@ -799,6 +803,7 @@
                                 ".$param_extra."                       
                             FROM 
                             servicio".$query_where;
+                            debug($query_create);
                             $this->set_option("sql" , $query_create );               
             $this->db->query($query_create);    
         }

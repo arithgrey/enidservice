@@ -117,7 +117,7 @@ href="../css_tema/template/main.css?<?=version_enid?>">
 rel="stylesheet" id="bootstrap-css">
 <?php if ( isset($css) && is_array($css) && count($css)>0 ):?>
     <?php  foreach($css as $c): $link ="../css_tema/template/".$c; ?>
-        <link rel="stylesheet"  type="text/css"  href="<?=$link;?><?=version_enid?>">
+        <link rel="stylesheet"  type="text/css"  href="<?=$link;?>?<?=version_enid?>">
     <?php endforeach;?>
 <?php  endif; ?>
 
@@ -126,14 +126,14 @@ rel="stylesheet" id="bootstrap-css">
         <link 
             rel="stylesheet" 
             type="text/css" 
-            href="<?php echo $c;?><?=version_enid?>">
+            href="<?php echo $c;?>?<?=version_enid?>">
     <?php endforeach;?>
 <?php  endif; ?>
 
 <script src="../js_tema/js/main.js?<?=version_enid?>"></script>
 <?php if (isset($js)):?>
 	<?php  foreach($js as $script):?>
-		<script type='text/javascript' src = '<?php echo $script;?><?=version_enid?>'></script>
+		<script type='text/javascript' src = '<?php echo $script;?>?<?=version_enid?>'></script>
     <?php endforeach;?>
 <?php  endif; ?>
 <?php if (isset($js_extra)):?>

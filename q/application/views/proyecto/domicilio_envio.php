@@ -104,8 +104,7 @@
             <?=input([
                         "class"         =>   "textinput address1" ,
                         "name"          =>   "calle" ,
-                        "value"         =>   $calle,
-                        "maxlength"     =>   "30" ,
+                        "value"         =>   $calle,                        
                         "placeholder"   =>   "* Calle" ,
                         "required"      =>   "required" ,
                         "autocorrect"   =>   "off" ,

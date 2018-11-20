@@ -2,8 +2,9 @@
 if(!function_exists('invierte_date_time')){
 
 	
-	function create_estaciones($array)
-	{
+	function create_estaciones($array , $flag_envio_gratis)
+	{	
+		
 		$l  = "";
 		foreach ($array as $row) {
 			
@@ -13,10 +14,12 @@ if(!function_exists('invierte_date_time')){
 
 			$l .=  div($nombre , 
 				[
-					"class" 			=> "nombre_estacion cursor_pointer punto_encuentro",
+					"class" 			=> 
+					"nombre_estacion cursor_pointer punto_encuentro",
 					"id"				=> $id,
 					"nombre_estacion" 	=> $nombre,
-					"costo_envio" 		=> $costo_envio
+					"costo_envio" 		=> $costo_envio,
+					"flag_envio_gratis" => $flag_envio_gratis
 
 
 			]);
@@ -36,4 +39,3 @@ if(!function_exists('invierte_date_time')){
 	}
   
 }
-
