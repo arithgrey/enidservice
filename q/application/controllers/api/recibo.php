@@ -413,6 +413,10 @@ class recibo extends REST_Controller{
 
         $param      = $this->put();
         $response   = [];
+
+        if (array_key_exists("cancelacion", $param)) {
+            $this->response($this->set_cancelacion($param));
+        }
         if (if_ext($param , "saldo_cubierto,recibo,status")) {
             
             $param["id_recibo"] =  $param["recibo"];            
@@ -446,5 +450,28 @@ class recibo extends REST_Controller{
         }
         $this->response($response);
     }
+    function set_cancelacion($param){
+        
+        $response   =  [];
+        
+        if (if_ext($param , "status,tipificacion,recibo")) {
 
+            $params     =  [                            
+                "status"            => $param["status"]
+            ];
+                    
+            $in                     =  
+            ["id_proyecto_persona_forma_pago" => $param["recibo"]];
+            $response =  $this->recibo_model->update($params , $in );       
+            if ($response ==  true) {
+                $response   =  $this->add_tipificacion($param);
+            }
+        }
+        return $response;    
+    }
+    function add_tipificacion($q){
+
+        $api =  "tipificacion_recibo/index";        
+        return  $this->principal->api( $api , $q, "json" ,"POST");             
+    }
 }?>

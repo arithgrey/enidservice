@@ -9,10 +9,9 @@
 	        if ($externo == 0) {
 	        	$url 				=  "q/index.php/api/";         	
 	        }else{
-	        	$url 				=  $b."/index.php/api/";         	
-	        	
+	        	$url 				=  $b."/index.php/api/";         		        
 	        }
-	        
+	        	        
 	        $url_request		=  get_url_request($url);	       
 	        $this->restclient->set_option('base_url', $url_request);
 	        $this->restclient->set_option('format', $format);        

@@ -30,7 +30,7 @@
 				0 ,  
 				"-"
 			)?>
-
+			<?=place("place_tipificaciones")?>
 			<div class="form_cantidad_post_venta top_20">
 				<?=div(strong("SALDO CUBIERTO") ,1)?>
 				<div class="row">
@@ -97,6 +97,7 @@
 		
 		
 		<?=create_seccion_tipo_entrega($recibo , $tipos_entregas)?>
+
 		<br>
 		<?=create_seccion_usuario($usuario)?>
 		<?=create_seccion_domicilio($domicilio)?>
@@ -113,9 +114,22 @@
 
 	</div>
 </div>
+
+<?=input_hidden(
+	[
+		"class" => "status_venta_registro" , 
+		"name" 	=> "status_venta",
+		"value"	=> $recibo[0]["status"]
+])?>
 <?=input_hidden(
 	[
 		"class" => "saldo_actual_cubierto" , 
 		"name" 	=> "saldo_cubierto",
 		"value"	=> $recibo[0]["saldo_cubierto"]
+	])?>
+<?=input_hidden(
+	[
+		"class" => "tipo_entrega" , 
+		"name" 	=> "tipo_entrega",
+		"value"	=> $recibo[0]["tipo_entrega"]
 	])?>

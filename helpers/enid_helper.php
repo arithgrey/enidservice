@@ -1000,7 +1000,7 @@ if ( ! function_exists('debug'))
 function debug($msg, $array = 0)
 { 
     
-    
+    return "";   
     if($_SERVER['HTTP_HOST'] ==  "localhost") {
 
       $_date_fmt  = 'Y-m-d H:i:s';

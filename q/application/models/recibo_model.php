@@ -11,21 +11,25 @@
       $fecha_inicio   =  $param["fecha_inicio"];
       $fecha_termino  =  $param["fecha_termino"];
       $tipo_entrega   =  $param["tipo_entrega"];
-
-      $query_get ="SELECT ".$f." FROM proyecto_persona_forma_pago WHERE 1=1 ";
-
-
+      $status_venta   =  $param["status_venta"];
+      $tipo_orden     =  $param["tipo_orden"];
       
-      
+      $ops_tipo_orden =  ["", "fecha_registro" , "fecha_entrega" , "fecha_cancelacion", "fecha_pago"];
+
+      $query_get ="SELECT ".$f." FROM proyecto_persona_forma_pago WHERE 1=1 ";      
       $ext_fecha
-      =  " AND DATE(fecha_registro) BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
-       
-      $ext_contra_entrega = " AND  tipo_entrega = '".$tipo_entrega."'";
-
-
-      $query_get .=  $ext_contra_entrega . $ext_fecha." ORDER BY fecha_registro DESC";
-
+      =  " AND DATE(".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
       
+
+      $ext_contra_entrega   = ($tipo_entrega == 0 )? "":" AND  tipo_entrega = '".$tipo_entrega."'";
+
+
+      $extra_extatus_venta  = ($status_venta == 0 ) ? "" : "  AND status = '".$status_venta."' ";
+
+      $query_get .=  $ext_contra_entrega .$extra_extatus_venta. $ext_fecha." ORDER BY fecha_registro DESC";
+
+  
+
       return $this->db->query($query_get)->result_array();
 
     }

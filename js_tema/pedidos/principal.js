@@ -19,6 +19,7 @@ $(document).ready(function(){
 	});
 
 
+
 });
 var busqueda_pedidos =  function(e){
 	
@@ -52,29 +53,64 @@ var cambio_estado = function(){
 }
 var modidica_estado = function(){
 
-	var status_venta 	= parseInt(get_valor_selected(".status_venta"));	
-	$(".form_cantidad").hide();
-	switch(status_venta) {
-	    case 0:
-	        
-	        break;
-	    case 1:
-	        $(".form_cantidad").show();
-	        break;
-	    case 7:
-	        modifica_status(status_venta);
-	        break;
+	if(get_parameter(".status_venta_registro") != 9){
 
-	    default:
-	    break;
-	        
+		guarda_nuevo_estado();
+		
+	}else{
+		var text = "ESTE PEDIDO YA FUÉ NOTIFICADO COMO ENTREGADO, ¿AÚN ASÍ DESEAS MODIFICAR SU ESTADO?";
+		$.confirm({
+		    title: text,
+		    content: '',
+		    type: 'green',
+		    buttons: {   
+		        ok: {
+		            text: "CONTINUAR Y MODIFICAR",
+		            btnClass: 'btn-primary',
+		            keys: ['enter'],
+		            action: function(){
+		                guarda_nuevo_estado();
+		            }
+		        },
+		        cancel: function(){
+		            $(".selector_estados_ventas").hide();	
+		        }
+		    }
+		});
+	} 
+}
+var guarda_nuevo_estado = function(){
+	var status_venta 	= parseInt(get_valor_selected(".status_venta"));	
+		$(".form_cantidad").hide();
+		$(".place_tipificaciones").empty();
+		switch(status_venta) {
+		    case 0:
+		        
+		        break;
+		    case 1:
+		        $(".form_cantidad").show();
+		        break;
+		    case 7:
+		        modifica_status(status_venta);
+		        break;
+		    case 9:
+		        modifica_status(status_venta);
+		        break;
+		    case 10:
+		        pre_cancelacion();
+		        break;
+		    case 11:
+		        modifica_status(status_venta);
+		        break;
+		    default:
+		    break;	       
 	}
 }
 var modifica_status = function(status_venta){
 
 	var saldo_cubierto =  get_parameter(".saldo_actual_cubierto");
 	if (saldo_cubierto 	> 0 ||  get_parameter(".saldo_cubierto_pos_venta") > 0 ) {
-		
+		bloquea_form(".selector_estados_ventas");
 		var data_send	=  $.param({"recibo" : get_parameter(".recibo") , "status":status_venta , "saldo_cubierto":get_parameter(".saldo_cubierto_pos_venta")});		
 		var  url 		= "../q/index.php/api/recibo/status/format/json/";		
 		request_enid( "PUT",  data_send, url, response_status_venta)	
@@ -114,9 +150,9 @@ var response_saldo_cubierto = function(data){
 	}	
 }
 var response_status_venta = function(data){
-	
-	if (data ==  true) {
-		
+	desbloqueda_form(".selector_estados_ventas");
+	if (data ==  true) {		
+
 		var url = "../pedidos/?recibo="+get_parameter(".recibo");
 		redirect(url);
 
@@ -124,4 +160,47 @@ var response_status_venta = function(data){
 		
 		llenaelementoHTML(".mensaje_saldo_cubierto_post_venta", data);
 	}	
+}
+var pre_cancelacion = function(){
+		
+	var tipo 		=	0;
+	switch(parseInt( get_parameter(".tipo_entrega"))) {
+		
+		/*opciones en punto de encuentro*/
+	    case 1:
+	        tipo = 2;
+	        break;
+	    /*opciones en mensajeria por  enid*/	   
+	    case 2:
+	        tipo = 4;
+
+	        break;
+	    /*opciones en mensajeria por  mercado libre*/	   	    
+	    case 4:
+			tipo = 5;	        
+	        break;	    
+
+	    default:
+	    break;
+	        
+	}
+
+	var data_send 	= {"v":1 , tipo: tipo , "text":"MOTIVO DE CANCELACIÓN" };
+	var url 		= "../q/index.php/api/tipificacion/index/format/json/";	
+	request_enid( "GET",  data_send, url, response_pre_cancelacion)		
+
+}
+var response_pre_cancelacion = function(data){
+
+	llenaelementoHTML(".place_tipificaciones" , data);
+	$(".tipificacion").change(registra_motivo_cancelacion);
+}
+var registra_motivo_cancelacion  = function(){
+	
+	var status_venta 	= 	get_valor_selected(".status_venta");
+	var tipificacion 	=  	get_valor_selected(".tipificacion");  
+	var data_send		=  	$.param({"recibo" : get_parameter(".recibo") , "status":status_venta , "tipificacion": tipificacion , "cancelacion":1});		
+	var url 			= 	"../q/index.php/api/recibo/status/format/json/";		
+	bloquea_form(".selector_estados_ventas");
+	request_enid( "PUT",  data_send, url, response_status_venta);	
 }

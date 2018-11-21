@@ -20,10 +20,12 @@ class Home extends CI_Controller{
         $data["css"] = [
                 "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css",
                 "../js_tema/js/bootstrap-timepicker/css/timepicker.css",
-                "pedidos.css"
+                "pedidos.css",
+                "confirm-alert.css"
+
             
         ];
-
+        
 
         $data["js"]         =  ["../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",
                                     "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
@@ -32,14 +34,17 @@ class Home extends CI_Controller{
                                     "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
                                     "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
                                     "../js_tema/js/pickers-init.js",
-                                    "../js_tema/pedidos/principal.js"
+                                    "../js_tema/pedidos/principal.js",
+                                    "../js_tema/alerts/jquery-confirm.js"
                                     
         ];
         
 
 
-        $es_recibo =  get_info_variable( $this->input->get() , "recibo" ); 
-        $data["tipos_entregas"] =  $this->get_tipos_entregas(array());
+        $es_recibo                        =  
+        get_info_variable( $this->input->get() , "recibo" ); 
+        $data["tipos_entregas"]           =  $this->get_tipos_entregas(array());
+        $data["status_ventas"]  = $this->get_estatus_enid_service();
         if ($es_recibo == 0 ) {
             
             $this->principal->show_data_page($data, 'home');      
