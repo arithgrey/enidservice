@@ -524,13 +524,7 @@ function get_option(key){
 	return option[key];
 }
 /**/
-function transforma_mayusculas(x){
-	
-	var text =  x.value; 
-	text.trim();
-	text_mayusculas =  text.toUpperCase();  	
-	x.value =  text_mayusculas;
-}
+
 /****/
 function valida_menu_superior(){
 	width_dispositivo =  $(window).width();
@@ -723,4 +717,10 @@ var  recorrepage = function(contenedor = 0 ){
 	}else{			
 		$('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top -100 }, 'slow');
 	}
+}
+var transforma_mayusculas = function(x){
+	var text =  x.value; 
+	text.trim();
+	text_mayusculas =  text.toUpperCase();  	
+	x.value =  text_mayusculas;
 }

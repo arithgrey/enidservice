@@ -1,10 +1,17 @@
-<form accept-charset="utf-8" 
-method="POST" id="form_img_enid" class="form_img_enid" enctype="multipart/form-data" >      
+<?=form_open_multipart('' ,
+[
+    "accept-charset"    =>  "utf-8" ,
+    "method"            =>  "POST" ,
+    "id"                =>  "form_img_enid" ,
+    "class"             =>  "form_img_enid" ,
+    "enctype"           =>  "multipart/form-data" 
+] )?>
     <?=input([
-        "type"      =>"file" ,
-        "id"        =>'imagen_img' ,
-        "class"     =>'imagen_img' ,
-        "name"      =>"imagen"
+        "type"      =>  "file" ,
+        "id"        =>  'imagen_img' ,
+        "class"     =>  'imagen_img' ,
+        "name"      =>  "imagen",
+        "enctype"   =>  "multipart/form-data"
     ])?>
     <?=input_hidden(["name" => 'q', "value"   => $q])?>
     <?=input_hidden(["name" => $q2, "value"   => $q3])?>

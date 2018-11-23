@@ -25,7 +25,7 @@ $(document).ready(function(){
 /**/
 function carga_productos_sugeridos(){
 
-	var url 		=  "../tag/index.php/api/sugerencia/servicio/format/json/";		
+	var url 		=  "../q/index.php/api/servicio/sugerencia/format/json/";		
 	var q 			=  get_parameter(".qservicio");  	
 	var data_send 	= {"id_servicio" : get_option("servicio") , "q" :  q}	
 	request_enid( "GET",  data_send, url, response_carga_productos);

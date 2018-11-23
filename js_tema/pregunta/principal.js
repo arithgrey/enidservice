@@ -47,7 +47,7 @@ function before_registro_valoracion(){
 }
 /**/
 function carga_productos_sugeridos(){	
-	var url =  "../tag/index.php/api/sugerencia/servicio/format/json/";		
+	var url =  "../q/index.php/api/servicio/sugerencia/format/json/";		
 	var data_send = {"id_servicio" : get_option("servicio") }	
 	request_enid( "GET",  data_send, url, response_carga_productos_sugeridos, ".place_tambien_podria_interezar");
 }

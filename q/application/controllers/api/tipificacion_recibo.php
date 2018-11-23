@@ -35,4 +35,15 @@ class tipificacion_recibo extends REST_Controller{
             ["id_recibo"    => $id_recibo ] ,
             1000 );
     }    
+    function recibo_GET(){
+
+        $param      =   $this->get();
+        $response   =   [];
+        if(if_ext($param , "recibo")){
+            
+            $response =  
+            $this->tipificacion_recibo_model->get_recibo($param);            
+        }
+        $this->response($response);
+    }
 }?>

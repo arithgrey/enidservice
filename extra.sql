@@ -19,9 +19,24 @@ DEFAULT CHARACTER SET = latin1;
 
 USE `enidserv_web` ;
 
-/**/
+
 alter table tipificacion add tipo int not null default 1;
-INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `icono`, `tipo`) VALUES ('11', 'FALTA DE STOCK(NO TUVIMOS EL PRODUCTO)', '', '2');
-INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('12', 'EL CLIENTE CANCELÓ LA ENTREGA', '2', '');
-INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('13', 'EL CLIENTE NO SE PRESENTÓ A LA ENTREGA', '3', '');
 alter table tipificacion_recibo add status int(1) not null default 1;
+alter table tipificacion change nombre_tipificacion nombre_tipificacion text;
+
+
+
+use enidserv_web;
+select * from tipificacion;
+
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('14', 'CLIENTE NO CONTESTÓ PREVIO A LA ENTREGA', '2', '');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('15', 'CLIENTE PIDE CAMBIO EN FECHA DE ENTREGA', '2', '');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('16', 'LE PARECE CARO', '2', '');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('17', 'PENSÓ QUE EL PRODUCTO TENÍA MEJORES CARACTERÍSTICAS', '2', '');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('18', 'DEVOLUCIÓN POR GATANTÍA', '4', '');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('19', 'NO REALIZÓ EL PAGO Y SE REALIZARON LAS ACCIONES DE VENTA Y RECUPERACIÓN', '4', '');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('20', 'NO TENEMOS STOCK', '4', '');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('21', 'NO TENEMOS STOCK',  '4' ,'');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('22', 'NO TENEMOS STOCK', '5', '');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('23', 'DEVOLUCIÓN POR GARANTÍA', '5', '');
+INSERT INTO `enidserv_web`.`tipificacion` (`id_tipificacion`, `nombre_tipificacion`, `tipo`, `icono`) VALUES ('24', 'NO SE PRESENTA AL NEGOCIO', '6', '');

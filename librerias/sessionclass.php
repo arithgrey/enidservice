@@ -2,9 +2,9 @@
 class Sessionclass extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->library("session");		
-	}
-	
+		$this->load->library("session");	
+		//debug("pase");	
+	}	
 	/**/
 	function set_userdata($session_data){
 		$this->session->set_userdata($session_data);	
@@ -22,6 +22,7 @@ class Sessionclass extends CI_Controller{
 		return true;
 	}	
 	function logout(){				
+		$this->session->unset_userdata($this->session);
 		$this->session->sess_destroy();				
 		redirect("../../login");
 	}

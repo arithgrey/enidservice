@@ -131,12 +131,12 @@ rel="stylesheet" id="bootstrap-css">
 <?php  endif; ?>
 
 <script src="../js_tema/js/main.js?<?=version_enid?>"></script>
-<?php if (isset($js)):?>
+<?php if (isset($js) && is_array($js)):?>
 	<?php  foreach($js as $script):?>
 		<script type='text/javascript' src = '<?php echo $script;?>?<?=version_enid?>'></script>
     <?php endforeach;?>
 <?php  endif; ?>
-<?php if (isset($js_extra)):?>
+<?php if (isset($js_extra) && is_array($js_extra)):?>
     <?php  foreach($js_extra as $script):?>
         <script type='text/javascript' src = '<?php echo $script;?>'></script>
     <?php endforeach;?>    

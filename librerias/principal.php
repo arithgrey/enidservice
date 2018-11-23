@@ -2,6 +2,7 @@
 	class principal extends CI_Controller {	 	
 		function __construct(){        
 			parent::__construct();     			
+			
 			$this->load->library('../../librerias/sessionclass');     
 	    }
 	    function api($api, $q=[], $format='json', $type='GET', $debug = 0  , $externo = 0  , $b = "" ){
@@ -202,7 +203,8 @@
 	            $data["desc_web"] 		= 	"";	            
 	            return $data;
 	                
-	        }else{            
+	        }else{   
+	        	//debug("999888");         
 	            $data['titulo']		= 	$titulo;              
 	            $data["in_session"] = 	0; 
 	            $data["id_usuario"] =	"";                                   	            

@@ -576,6 +576,7 @@
     }
     function get_producto_por_clasificacion($param){
 
+        
 
         $this->set_option("sql_distintos" , "");      
         $this->agrega_elemento_distinto($param["id_servicio"]);                    
@@ -663,10 +664,12 @@
                         status = 1
                             AND 
                         flag_imagen = 1
+                        LIMIT 1";
+                        //debug($query_get);
 
-                            LIMIT 1";
-                    $result =  $this->db->query($query_get);
-                    return $result->result_array();
+        return   $this->db->query($query_get)->result_array();
+
+                    
     } 
     /**/
     function periodo($param){

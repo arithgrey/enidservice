@@ -352,12 +352,21 @@ class usuario extends REST_Controller{
     }    
     function lista_deseos_sugerencias_GET(){    
 
-        $param     = $this->get();    
-        $param["id_usuario"] = $this->id_usuario;
-        $servicios  =  $this->usuario_model->get_productos_deseados_sugerencias($param);
-        $response   = $this->agrega_costo_envio($servicios);
+        $param               = $this->get();    
+        
+        $response            = [];
+
+        if ($this->id_usuario > 0 || array_key_exists("id_usuario", $param)) {
+
+            $param["id_usuario"]    = 
+            ( array_key_exists("id_usuario", $param) ) ? $param["id_usuario"]: $this->id_usuario;
+            $response               =  $this->usuario_model->get_productos_deseados_sugerencias($param);
+            //$response            = $this->agrega_costo_envio($servicios);    
+        }
+        
         $this->response($response);
     }
+    /*
     function agrega_costo_envio($servicios){
      
         $nueva_data =[];
@@ -378,6 +387,7 @@ class usuario extends REST_Controller{
         return $nueva_data;
         
     } 
+    */
     /**/
     function verifica_registro_telefono_GET(){
         

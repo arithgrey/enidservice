@@ -8,13 +8,16 @@ class Home extends CI_Controller{
     }           
     /**/
     function index(){
-    
+        
+
         $param                                  =  $this->input->get();
         $data                                   =   $this->principal->val_session("");
+        $this->principal->acceso();
         $data["meta_keywords"]                  =   "";
         $data["desc_web"]                       =   "";
         $data["url_img_post"]                   =   create_url_preview("");                
-        $data["clasificaciones_departamentos"]  =   $this->principal->get_departamentos();
+        $data["clasificaciones_departamentos"]  =   
+        $this->principal->get_departamentos();
         
 
         $data["css"] = [
@@ -69,9 +72,11 @@ class Home extends CI_Controller{
 
             $data["orden"]      =   $id_recibo;
             $data["recibo"]     =   $recibo;
-            $data["domicilio"]  =   $this->get_domicilio_entrega($id_recibo , $recibo);
-            $data["usuario"]    =   $this->get_usuario($recibo[0]["id_usuario"]);
-            $data["status_ventas"] = $this->get_estatus_enid_service();
+            $data["domicilio"]  =   
+            $this->get_domicilio_entrega($id_recibo , $recibo);
+            $data["usuario"]        =   $this->get_usuario($recibo[0]["id_usuario"]);
+            $data["status_ventas"]  =   $this->get_estatus_enid_service();
+            $data["tipificaciones"] =   $this->get_tipificaciones($id_recibo);
             $this->principal->show_data_page($data, 'detalle');          
 
         }else{
@@ -134,6 +139,11 @@ class Home extends CI_Controller{
         $api = "status_enid_service/index/format/json/";
         return $this->principal->api( $api ,  $q);
     } 
+    private function get_tipificaciones($id_recibo){
 
+        $q["recibo"]    =   $id_recibo;
+        $api            =   "tipificacion_recibo/recibo/format/json/";
+        return $this->principal->api( $api ,  $q);  
+    }
     
 }

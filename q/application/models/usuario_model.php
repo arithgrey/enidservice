@@ -439,8 +439,8 @@
     function get_productos_deseados_sugerencias($param){
         
         $id_usuario =  $param["id_usuario"];        
-        $limit =  $param["limit"];                              
-        $query_get ="SELECT                         
+        $limit      =  $param["limit"];                              
+        $query_get  =  "SELECT                         
                         s.id_servicio ,  
                         s.nombre_servicio, 
                         s.flag_servicio, 
@@ -461,9 +461,11 @@
                     us.id_usuario = '".$id_usuario."' 
                     ORDER BY 
                     us.num_deseo DESC LIMIT $limit ";
-                    
-        $result=  $this->db->query($query_get);
-        return  $result->result_array();
+        
+        debug("8888");
+        debug($query_get);
+        return   $this->db->query($query_get)->result_array();
+        
     }
     function num_q($param){
         return $this->get([" COUNT(0)num "], [$param["key"] => $param["value"]]  , 1000)[0]["num"];

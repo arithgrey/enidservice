@@ -417,6 +417,10 @@ class recibo extends REST_Controller{
         if (array_key_exists("cancelacion", $param)) {
             $this->response($this->set_cancelacion($param));
         }
+        if (array_key_exists("es_proceso_compra", $param) && $param["es_proceso_compra"] ==  1) {
+            $this->response($this->set_default_orden($param));
+        }
+
         if (if_ext($param , "saldo_cubierto,recibo,status")) {
             
             $param["id_recibo"] =  $param["recibo"];            
@@ -469,9 +473,50 @@ class recibo extends REST_Controller{
         }
         return $response;    
     }
-    function add_tipificacion($q){
+    function set_default_orden($param){
+        $response   =  [];
+        
+        if (if_ext($param , "status,recibo")) {
 
+            $params     =  [                            
+                "status"            => $param["status"], 
+                "saldo_cubierto"    => 0
+            ];
+                    
+            $in =  ["id_proyecto_persona_forma_pago" => $param["recibo"]];
+
+            $response =  $this->recibo_model->update($params , $in );       
+            if ($response ==  true) {
+
+                $param["tipificacion"] =  32;
+                $response   =  $this->add_tipificacion($param);
+            }
+        }
+        return $response;       
+    }
+    function add_tipificacion($q){
         $api =  "tipificacion_recibo/index";        
         return  $this->principal->api( $api , $q, "json" ,"POST");             
     }
+    function tipo_entrega_PUT(){
+
+        $param      =   $this->put();
+        $response   =   [];
+        if(if_ext($param , "recibo,tipo_entrega")){
+
+            $tipo_entrega   =  $param["tipo_entrega"];
+            $id_recibo      =  $param["recibo"]; 
+            $response       = 
+            $this->recibo_model->q_up("tipo_entrega" , $tipo_entrega , 
+                $id_recibo);    
+
+            if ($response == true) {
+                $param["tipificacion"] =  31;
+                $this->add_tipificacion($param);
+            }
+        }
+        $this->response($response);
+        
+    }
+
 }?>

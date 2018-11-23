@@ -11,6 +11,7 @@ class Servicio extends REST_Controller{
       $this->load->library('table');       
       $this->load->library(lib_def());         
       $this->id_usuario = $this->principal->get_session("idusuario");
+      
   } 
   function envio_gratis_GET(){
     
@@ -1117,9 +1118,18 @@ class Servicio extends REST_Controller{
     }    
 
     function por_clasificacion_GET(){
-        $param      =  $this->get();                
-        $servicios  =  $this->serviciosmodel->get_producto_por_clasificacion($param);
-        $response   =  $this->agrega_costo_envio($servicios);                        
+          
+        $param      =  $this->get();                 
+        $response   =  [];
+        if (if_ext(
+          $param, 
+          "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel")) {
+
+            $servicios  =  
+            $this->serviciosmodel->get_producto_por_clasificacion($param);
+            $response   =  
+            $this->agrega_costo_envio($servicios);                        
+        }        
         $this->response($response);        
     }
     function qmetakeyword_GET(){
@@ -1397,10 +1407,90 @@ class Servicio extends REST_Controller{
       
       return  $this->table->generate();
     }
+    function sugerencia_GET(){
+        $param                =   $this->get();
+        $response             =   [];
+
+        if (if_ext($param ,  "servicio")) {
+        
+          $id_servicio          =  $param["servicio"];
+          $clasificaciones      =  
+          $this->serviciosmodel->get_clasificaciones_por_id_servicio($id_servicio);  
+
+          if (count($clasificaciones) > 0 ) {               
+              $response   = $this->get_servicios_por_clasificaciones($clasificaciones[0]);   
+          }          
+        }
+       
+        $servicios = $this->completa_servicios_sugeridos($response , $param); 
+       
+      
+        if (count($servicios) >0){           
+            $data["servicios"]  =  $servicios;
+            $data["url_request"]=  get_url_request("");
+            $data["is_mobile"]  = $this->get_option("is_mobile");
+            $this->load->view("producto/sugeridos" , $data);
+        }else{            
+            $data_response["sugerencias"] =0;
+            $this->response($data_response);
+        } 
+        
+
+    }
+    function completa_servicios_sugeridos($servicios, $param){
+        
+        $in_session     =  $this->principal->is_logged_in();
+        $n_servicios    = [];
+        $existentes     =  count($servicios);
+        if ($existentes>0) {
+            $n_servicios = $servicios;
+        }
+        $limit =  "";
+        
+        if ($existentes<7 ){
+
+
+            $limit =  7 - $existentes;
+            $param["limit"]         = $limit;
+            if ($in_session  !=  false   ) {                                                
+                $param["id_usuario"]    = $this->principal->get_session("idusuario");
+                $sugerencias            = $this->get_servicios_lista_deseos($param);            
+                $sugerencias            = $this->agrega_costo_envio($sugerencias);
+                foreach ($sugerencias as $row) {
+                    array_push($n_servicios, $row);
+                }   
+            }
+            else{
+
+                $sugerencias     =  $this->busqueda_producto_por_palabra_clave($param);
+                if ($sugerencias !=  NULL ) {
+                    foreach ($sugerencias as $row) {
+                        array_push($n_servicios, $row);
+                    }                  
+                }
+                
+            }                     
+        }
+        return $n_servicios;        
+    }
+    private function busqueda_producto_por_palabra_clave($q){
+        $api  =  "servicio/qmetakeyword/format/json/";
+        return $this->principal->api(  $api , $q );             
+    }
+    function get_servicios_lista_deseos($q){        
+        $api  =  "usuario/lista_deseos_sugerencias/format/json/";
+        return $this->principal->api(  $api , $q );         
+    }
     private function  get_tipos_intentos_entregas($q){
       $api =  "intento_tipo_entrega/periodo/format/json/";
       return $this->principal->api( $api , $q );      
     }
+    private function  get_servicios_por_clasificaciones($q){
+      
+      $api =  "servicio/por_clasificacion/format/json/";
+      return $this->principal->api( $api , $q );      
+    }
+    
 
 }
 ?>

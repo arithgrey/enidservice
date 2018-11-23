@@ -28,4 +28,23 @@
       $this->db->limit($limit);
       return $this->db->update("tipificacion_recibo", $data);    
     }   
+    function get_recibo($param){
+
+      $id_recibo =  $param["recibo"];
+      $query_get =  
+      "SELECT 
+      tr.fecha_registro , 
+      tr.status , 
+      t.*  
+      FROM tipificacion_recibo tr 
+      INNER JOIN tipificacion t 
+      ON 
+      tr.id_tipificacion = t.id_tipificacion 
+      WHERE tr.id_recibo = '".$id_recibo."' 
+      ORDER BY 
+      tr.fecha_registro DESC LIMIT 10";
+ 
+      return $this->db->query($query_get)->result_array();
+
+    }   
 }

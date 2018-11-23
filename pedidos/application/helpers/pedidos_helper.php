@@ -1,6 +1,40 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+	function create_seccion_tipificaciones($data){
+
+		$tipificaciones  =	"";
+		
+		foreach ($data as $row) {
+				
+			$status 				= $row["status"];			
+
+			$fecha_registro      	= 
+			div(icon("fa fa-clock-o").$row["fecha_registro"] , 
+				["class" => "col-lg-3"]);
+			
+			$nombre_tipificacion    =
+			div($row["nombre_tipificacion"] ,  
+				["class" => "col-lg-9"]);			
+		
+			$tipificacion =  
+				div($fecha_registro.$nombre_tipificacion ,
+				
+				1);
+
+			$tipificaciones .=  
+			div($tipificacion , 
+				["class" => "seccion_tipificacion top_20 padding_10"]);
+
+		}
+
+
+		if ( count($data) > 0) {
+			$title	=  heading_enid("MOVIMIENTOS" ,4 ,["class" => "white"]);  
+			return div($title.$tipificaciones , ["class" => "global_tipificaciones"]);	
+		}
+		
+	}
 	function crea_seccion_productos($recibo){
 
 		$recibo 				= 	$recibo[0];  
@@ -33,12 +67,16 @@ if(!function_exists('invierte_date_time')){
 
 	}
 	
-	function create_fecha_contra_entrega($recibo){
+	function create_fecha_contra_entrega($recibo , $domicilio){
 
-		$recibo 				=  $recibo[0];		
-		$text 					=  div("HORARIO DE ENTREGA" , 1).div($recibo["fecha_contra_entrega"] ,1);
-		$fecha_contra_entrega   =  ($recibo["tipo_entrega"] == 1) ? $text:"";
-		return $fecha_contra_entrega;
+
+			
+		if (array_key_exists("domicilio", $domicilio) && is_array($domicilio["domicilio"]) && $domicilio["domicilio"]>0) {
+			$recibo 				=  $recibo[0];		
+			$text 					=  div("HORARIO DE ENTREGA" , 1).div($recibo["fecha_contra_entrega"] ,1);
+			$fecha_contra_entrega   =  ($recibo["tipo_entrega"] == 1) ? $text:"";
+			return $fecha_contra_entrega;
+		}
 
 	}
 	function create_seccion_saldos($recibo){
@@ -84,6 +122,13 @@ if(!function_exists('invierte_date_time')){
 			
 			if ($row["id"] == $id_tipo_entrega) {				
 				$tipo = $row["nombre"];
+				echo 
+				input_hidden(
+					[ 						
+						"class" => 	"text_tipo_entrega",
+						"value"	=>  $tipo
+					]
+				);
 				break;
 			}
 		}
@@ -151,14 +196,30 @@ if(!function_exists('invierte_date_time')){
 	function create_seccion_domicilio($domicilio)
 	{
 	    
-	    $data_domicilio = $domicilio["domicilio"];
-	    if ($domicilio["tipo_entrega"] != 1) {
-	    	/*puntos de encuentro*/	
-	    	return create_domicilio_entrega($data_domicilio);
-	    }else{	
-	    	/*domicilio cliente*/	
-	    	return create_punto_entrega($data_domicilio);
-	    }    
+		if (
+			array_key_exists("domicilio", $domicilio) 
+			&& 
+			is_array($domicilio["domicilio"])
+			&& 
+			count($domicilio["domicilio"])	> 0
+			){
+
+			
+			$data_domicilio 		= $domicilio["domicilio"];
+			if ($domicilio["tipo_entrega"] != 1) {
+			    /*puntos de encuentro*/	
+			    return create_domicilio_entrega($data_domicilio);
+			}else{	
+			   	/*domicilio cliente*/	
+			    return create_punto_entrega($data_domicilio);
+			}    	
+		}else{
+			/*solicita dirección de envio*/
+			
+
+		}
+		
+	    
 	}
 
 	function create_seccion_recordatorios($recibo){

@@ -58,3 +58,13 @@
 	color: #000060;	
 	font-weight: bold;
 }
+.seccion_tipificacion{
+	background: white;
+}
+.global_tipificaciones{
+	background: #0b1f33;
+	padding: 5px;
+}
+.form_edicion_tipo_entrega{
+	display: none;
+}
