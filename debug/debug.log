@@ -10617,3 +10617,393 @@ DEBUG - TYPE string 2018-11-23 02:26:44 --> SELECT
                     us.num_deseo DESC LIMIT 7 
 DEBUG - TYPE string 2018-11-23 02:27:00 --> 50
 DEBUG - TYPE string 2018-11-23 02:27:00 --> 50
+DEBUG - TYPE string 2018-11-26 05:56:18 --> CREATE TABLE tmp_producto_1442572956 AS 
+                            SELECT  
+                                id_servicio ,  
+                                nombre_servicio, 
+                                flag_servicio, 
+                                flag_envio_gratis,
+                                metakeyword,                                 
+                                color,   
+                                precio , 
+                                existencia,
+                                id_ciclo_facturacion,
+                                vista,
+                                valoracion,
+                                deseado      
+                                ,primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 
+            , quinto_nivel                       
+                            FROM 
+                            servicio 
+                    WHERE 
+                    1 = 1 
+                    
+                    
+                     AND existencia >0 
+                     AND flag_imagen = 1 
+                    AND 
+                    status =1   
+                    
+                    
+                     ORDER BY  deseado DESC , vista  DESC
+                     LIMIT 0 , 12 
+DEBUG - TYPE string 2018-11-26 05:56:36 --> CREATE TABLE tmp_producto_131937497 AS 
+                            SELECT  
+                                id_servicio ,  
+                                nombre_servicio, 
+                                flag_servicio, 
+                                flag_envio_gratis,
+                                metakeyword,                                 
+                                color,   
+                                precio , 
+                                existencia,
+                                id_ciclo_facturacion,
+                                vista,
+                                valoracion,
+                                deseado      
+                                                       
+                            FROM 
+                            servicio 
+                    WHERE 
+                    1 = 1 
+                    
+                    
+                     AND existencia >0 
+                     AND flag_imagen = 1 
+                    AND 
+                    status =1   
+                     AND( primer_nivel  =  1 
+                        OR 
+                        segundo_nivel  =  1 
+                        OR 
+                        tercer_nivel  =  1 
+                        OR                    
+                        cuarto_nivel   =  1 
+                        OR                    
+                        quinto_nivel   =  1 )
+                       AND MATCH(metakeyword , 
+                metakeyword_usuario) 
+                AGAINST ('POWERBANK 20800 MAH *' IN BOOLEAN MODE) 
+                     ORDER BY   fecha_registro DESC, deseado DESC ,  vista DESC
+                     LIMIT 0 , 7 
+DEBUG - TYPE string 2018-11-26 05:57:23 --> 100
+DEBUG - TYPE array 2018-11-26 05:57:23 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 05:57:40 --> 100
+DEBUG - TYPE array 2018-11-26 05:57:40 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 05:57:51 --> 100
+DEBUG - TYPE array 2018-11-26 05:57:51 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 05:58:03 --> 100
+DEBUG - TYPE array 2018-11-26 05:58:03 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 06:01:02 --> 100
+DEBUG - TYPE array 2018-11-26 06:01:02 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 06:01:16 --> 100
+DEBUG - TYPE array 2018-11-26 06:01:16 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 06:01:35 --> 100
+DEBUG - TYPE array 2018-11-26 06:01:35 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 06:01:43 --> 100
+DEBUG - TYPE array 2018-11-26 06:01:43 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 06:01:46 --> 100
+DEBUG - TYPE array 2018-11-26 06:01:46 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 06:02:34 --> 100
+DEBUG - TYPE array 2018-11-26 06:02:34 --> Array
+(
+    [costo_envio_cliente] => 100
+    [costo_envio_vendedor] => 0
+    [text_envio] => Array
+        (
+            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+            [cliente_solo_text] => Más 100 MXN de envío
+            [cliente] => MÁS 100 MXN DE ENVÍO
+        )
+
+)
+
+DEBUG - TYPE string 2018-11-26 06:06:59 --> CREATE TABLE tmp_producto_896690444 AS 
+                            SELECT  
+                                id_servicio ,  
+                                nombre_servicio, 
+                                flag_servicio, 
+                                flag_envio_gratis,
+                                metakeyword,                                 
+                                color,   
+                                precio , 
+                                existencia,
+                                id_ciclo_facturacion,
+                                vista,
+                                valoracion,
+                                deseado      
+                                ,primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 
+            , quinto_nivel                       
+                            FROM 
+                            servicio 
+                    WHERE 
+                    1 = 1 
+                    
+                    
+                     AND existencia >0 
+                     AND flag_imagen = 1 
+                    AND 
+                    status =1   
+                    
+                    
+                     ORDER BY  deseado DESC , vista  DESC
+                     LIMIT 0 , 12 
+DEBUG - TYPE string 2018-11-26 08:01:10 --> CREATE TABLE tmp_producto_1382090849 AS 
+                            SELECT  
+                                id_servicio ,  
+                                nombre_servicio, 
+                                flag_servicio, 
+                                flag_envio_gratis,
+                                metakeyword,                                 
+                                color,   
+                                precio , 
+                                existencia,
+                                id_ciclo_facturacion,
+                                vista,
+                                valoracion,
+                                deseado      
+                                ,primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 
+            , quinto_nivel                       
+                            FROM 
+                            servicio 
+                    WHERE 
+                    1 = 1 
+                    
+                    
+                     AND existencia >0 
+                     AND flag_imagen = 1 
+                    AND 
+                    status =1   
+                    
+                    
+                     ORDER BY  deseado DESC, vista  DESC 
+                     LIMIT 0 , 12 
+DEBUG - TYPE string 2018-11-26 08:01:20 --> 8888
+DEBUG - TYPE string 2018-11-26 08:01:20 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                    us.id_usuario = '598' 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE string 2018-11-26 08:09:42 --> CREATE TABLE tmp_producto_247593085 AS 
+                            SELECT  
+                                id_servicio ,  
+                                nombre_servicio, 
+                                flag_servicio, 
+                                flag_envio_gratis,
+                                metakeyword,                                 
+                                color,   
+                                precio , 
+                                existencia,
+                                id_ciclo_facturacion,
+                                vista,
+                                valoracion,
+                                deseado      
+                                ,primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 
+            , quinto_nivel                       
+                            FROM 
+                            servicio 
+                    WHERE 
+                    1 = 1 
+                    
+                    
+                     AND existencia >0 
+                     AND flag_imagen = 1 
+                    AND 
+                    status =1   
+                    
+                    
+                     ORDER BY  deseado DESC , vista  DESC
+                     LIMIT 0 , 12 
+DEBUG - TYPE string 2018-11-26 08:10:01 --> CREATE TABLE tmp_producto_1255821316 AS 
+                            SELECT  
+                                id_servicio ,  
+                                nombre_servicio, 
+                                flag_servicio, 
+                                flag_envio_gratis,
+                                metakeyword,                                 
+                                color,   
+                                precio , 
+                                existencia,
+                                id_ciclo_facturacion,
+                                vista,
+                                valoracion,
+                                deseado      
+                                                       
+                            FROM 
+                            servicio 
+                    WHERE 
+                    1 = 1 
+                    
+                    
+                     AND existencia >0 
+                     AND flag_imagen = 1 
+                    AND 
+                    status =1   
+                     AND( primer_nivel  =  1 
+                        OR 
+                        segundo_nivel  =  1 
+                        OR 
+                        tercer_nivel  =  1 
+                        OR                    
+                        cuarto_nivel   =  1 
+                        OR                    
+                        quinto_nivel   =  1 )
+                       AND MATCH(metakeyword , 
+                metakeyword_usuario) 
+                AGAINST ('POWERBANK 20800 MAH *' IN BOOLEAN MODE) 
+                     ORDER BY   fecha_registro DESC, deseado DESC ,  vista DESC
+                     LIMIT 0 , 7 
+DEBUG - TYPE string 2018-11-26 08:10:17 --> CREATE TABLE tmp_producto_138794213 AS 
+                            SELECT  
+                                id_servicio ,  
+                                nombre_servicio, 
+                                flag_servicio, 
+                                flag_envio_gratis,
+                                metakeyword,                                 
+                                color,   
+                                precio , 
+                                existencia,
+                                id_ciclo_facturacion,
+                                vista,
+                                valoracion,
+                                deseado      
+                                ,primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 
+            , quinto_nivel                       
+                            FROM 
+                            servicio 
+                    WHERE 
+                    1 = 1 
+                    
+                    
+                     AND existencia >0 
+                     AND flag_imagen = 1 
+                    AND 
+                    status =1   
+                    
+                    
+                     ORDER BY  deseado DESC , vista  DESC
+                     LIMIT 0 , 12 

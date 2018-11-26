@@ -1,6 +1,137 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+
+	function create_linea_tiempo($recibo){	
+
+		$linea 		= 	"";
+		$flag 		=	0;
+		$id_estado  =  $recibo[0]["status"];
+		for ($i=5; $i >0 ; $i--) { 
+
+			$status 	=  	get_texto_status($i , $recibo);
+
+			$activo =  1;
+			if ($flag == 0) {
+							
+				$activo 	=  0;
+				if ($id_estado ==  $status["estado"]) {
+					$activo = 1;	
+					$flag ++;
+				}
+			}
+			
+
+
+			
+			$class 		=  ($activo ==  1) ? "timeline__item__date_active": "timeline__item__date";
+			$seccion 	=  
+					div(icon("fa fa-check-circle-o") , 
+						["class"=>$class]);        
+			$seccion_2 	= 	
+					div(p($status["text"] , 
+			        	[
+			        		"class"	=>	"timeline__item__content__description"
+			        	]), 
+			        ["class"	=>"timeline__item__content"]);
+
+			$linea .=  div($seccion.$seccion_2 , ["class"=>"timeline__item"]);
+		
+		}
+		return $linea;
+	}
+	function get_texto_status($status , $recibo){
+
+		$status_recibo 	= $recibo[0]["status"];
+		$text  			= "";
+		$data_complete  = [];
+		$estado 	    =  6;
+
+		switch ($status) {
+			case 2:
+				$text 	= 	"PAGO VERIFICADO";	
+				$estado =	1;
+				break;
+			
+			case 1:
+				$text = "ORDEN REALIZADA";	
+				$estado = 6;
+				break;
+
+
+			case 4:
+				$text = "PEDIDO EN CAMINO";	
+				$estado =	7;
+				break;
+
+			case 5:
+				$text = "ENTREGADO";	
+				$estado =	9;
+				break;
+
+			case 3:
+				$text 	= 	"EMPACADO";	
+				$estado =	12;
+				break;
+			
+			default:
+				
+				break;
+		}
+		$data_complete["text"] 		= $text;
+		$data_complete["estado"] 	= $estado;
+		return $data_complete;
+
+	}
+	function create_seccion_linea_tiempo($recibo , $status , $activo=0){
+
+
+		$status_recibo = $recibo[0]["status"];
+		$text  = "";
+		switch ($status) {
+			case 1:
+				$text = "PAGO VERIFICADO";	
+				break;
+			
+			case 6:
+				$text = "ORDEN REALIZADA";	
+				break;
+
+
+			case 7:
+				$text = "PEDIDO EN CAMINO";	
+				break;
+
+			case 9:
+				$text = "ENTREGADO";	
+				break;
+
+			case 12:
+				$text = "EMPACADO";	
+				break;
+			
+			default:
+				
+				break;
+		}
+
+
+		$class 		=  ($activo ==  1) ? "timeline__item__date_active": "timeline__item__date";
+
+		$seccion 	=  
+				div(icon("fa fa-check-circle-o") , 
+					["class"=>$class]);        
+		$seccion_2 	= 	
+				div(p($text , 
+		        	[
+		        		"class"	=>	"timeline__item__content__description"
+		        	]), 
+		        ["class"	=>"timeline__item__content"]);
+
+		return  div($seccion.$seccion_2 , ["class"=>"timeline__item"]);
+		
+
+	}
 	function create_seccion_tipificaciones($data){
 
 		$tipificaciones  =	"";
@@ -311,6 +442,6 @@ if(!function_exists('invierte_date_time')){
 	  	$direccion 	=  	div(strtoupper($direccion) ,["class" =>"contenido_domicilio"] , 1);
 	  	return div($encabezado.$direccion , ["class" => "contenedor_domicilio"] ,1).hr();
 	}
-
+	
 
 }

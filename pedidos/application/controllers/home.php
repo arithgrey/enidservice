@@ -10,7 +10,7 @@ class Home extends CI_Controller{
     function index(){
         
 
-        $param                                  =  $this->input->get();
+        $param                                  =   $this->input->get();
         $data                                   =   $this->principal->val_session("");
         $this->principal->acceso();
         $data["meta_keywords"]                  =   "";
@@ -19,51 +19,67 @@ class Home extends CI_Controller{
         $data["clasificaciones_departamentos"]  =   
         $this->principal->get_departamentos();
         
+        if (is_array($param) 
+            &&
+               array_key_exists("seguimiento", $param) 
+            && ctype_digit(trim($this->input->get("seguimiento"))) 
+            && $param["seguimiento"] > 0) {
 
-        $data["css"] = [
+            $this->carga_vista_seguimiento($param , $data);
+        }else{
+
+            $num_perfil     =  $this->principal->getperfiles();  
+
+            if ($num_perfil != 3) {
+                $module =  "location:../area_cliente";
+                header( $module );
+                
+            }
+
+            $data["css"] = [
                 "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css",
                 "../js_tema/js/bootstrap-timepicker/css/timepicker.css",
                 "pedidos.css",
                 "confirm-alert.css"
 
             
-        ];
-        
-
-        $data["js"]         =  ["../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-                                    "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-                                    "../js_tema/js/bootstrap-daterangepicker/moment.min.js",
-                                    "../js_tema/js/bootstrap-daterangepicker/daterangepicker.js",
-                                    "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-                                    "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-                                    "../js_tema/js/pickers-init.js",
-                                    "../js_tema/pedidos/principal.js",
-                                    "../js_tema/alerts/jquery-confirm.js"
-                                    
-        ];
-        
-
-
-        $es_recibo                        =  
-        get_info_variable( $this->input->get() , "recibo" ); 
-        $data["tipos_entregas"]           =  $this->get_tipos_entregas(array());
-        $data["status_ventas"]  = $this->get_estatus_enid_service();
-        if ($es_recibo == 0 ) {
+            ];
             
-            $this->principal->show_data_page($data, 'home');      
-        }else{
-
-
-            if (ctype_digit(trim($this->input->get("recibo")))) {
-             
-                $id_recibo =  $this->input->get("recibo");            
-                $this->carga_detalle_pedido($id_recibo , $data);
-
+            $data["js"]         =  ["../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                                        "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+                                        "../js_tema/js/bootstrap-daterangepicker/moment.min.js",
+                                        "../js_tema/js/bootstrap-daterangepicker/daterangepicker.js",
+                                        "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                                        "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                                        "../js_tema/js/pickers-init.js",
+                                        "../js_tema/pedidos/principal.js",
+                                        "../js_tema/alerts/jquery-confirm.js"
+                                        
+            ];
+        
+            $es_recibo                        =  
+            get_info_variable( $this->input->get() , "recibo" ); 
+            $data["tipos_entregas"]           =  $this->get_tipos_entregas(array());
+            $data["status_ventas"]  = $this->get_estatus_enid_service();
+            if ($es_recibo == 0 ) {
+                
+                $this->principal->show_data_page($data, 'home');      
             }else{
-                redirect("../../?q=");
+
+                if (ctype_digit(trim($this->input->get("recibo"))) ) {
+                 
+                    $id_recibo =  $this->input->get("recibo");            
+                    $this->carga_detalle_pedido($id_recibo , $data);
+
+                }else{
+                    redirect("../../?q=");
+                }
+                
             }
-            
-        }             
+        }
+
+
+                     
     }
     function carga_detalle_pedido($id_recibo , $data){
 
@@ -100,6 +116,24 @@ class Home extends CI_Controller{
         }
         $data_complete["domicilio"]    = $domicilio;
         return $data_complete;
+    }
+    function carga_vista_seguimiento($param , $data){
+
+        $data["css"]    = ["seguimiento_pedido.css"];
+        $id_recibo =  $this->input->get("seguimiento");                                
+        $recibo    =  $this->get_recibo($id_recibo);
+        if ( count($recibo)>0 ) {
+
+            $data["orden"]          =   $id_recibo;
+            $data["recibo"]         =   $recibo;                        
+            $data["status_ventas"]  =   $this->get_estatus_enid_service();
+            $data["tipificaciones"] =   $this->get_tipificaciones($id_recibo);
+            $this->principal->show_data_page($data, 'seguimiento');          
+
+        }else{
+            redirect("../../area_cliente");
+        }
+        
     }
     private function get_domicilio_recibo($id_recibo){
         $q["id_recibo"] =   $id_recibo;

@@ -1,5 +1,5 @@
 <?php 
-		
+			
 	$recibo 				=  	$recibo[0]; 
 	$id_forma_pago  		=  	$recibo["id_forma_pago"];
 	$saldo_cubierto  		=  	$recibo["saldo_cubierto"];
@@ -23,14 +23,12 @@
 	$resumen_pedido  		=  	$recibo["resumen_pedido"];
 	$servicio 				= 	$servicio[0];
 	$flag_servicio 			=  	$servicio["flag_servicio"];
-	$tipo_entrega      = 	$recibo["tipo_entrega"];
+	$tipo_entrega      		= 	$recibo["tipo_entrega"];
 	
 	$costo_envio_sistema 	= 	
 	($tipo_entrega == 1) ? $punto_encuentro[0]["costo_envio"] : $costo_envio_sistema;
 	
 	
-	debug($costo_envio_cliente, 1);
-	debug($costo_envio_sistema, 1);
 	
 	$deuda 					=  get_saldo_pendiente($monto_a_pagar,
 								$num_ciclos_contratados,
@@ -50,6 +48,9 @@
 	$data["url_pago_paypal"]= 	$url_pago_paypal;
 	$data["recibo"] 		=	$recibo;
 	$text_forma_compra 	    =   ($tipo_entrega) ?  "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
+
+
+	$link_seguimiento 		=	"../pedidos/?seguimiento=".$id_recibo;
 ?>
 
 <div class="col-lg-8">
@@ -181,8 +182,10 @@
 		<hr>
 		
 
-
-		<?=
+	<?=anchor_enid(div("RASTREA TU PEDIDO".icon("fa fa-map-signs")) , 
+	["href"=>$link_seguimiento] 
+	, 1)?>
+	<?=
 		div(
 		anchor_enid('CANCELAR COMPRA', 
 		[
@@ -194,6 +197,9 @@
 		["class" => "top_20"],
 		1)?>		
 	<?=end_row()?>	
+
+
+
 </div>
 <div class="col-lg-4">
 	<div style="border-style: solid;padding: 10px;border-width: 1px;">
@@ -210,5 +216,6 @@
 	    <?=heading_enid("Pesos Mexicanos" , 4 , 		["class"=> 'strong'])?>
 	</div>
 	<?=div(img($url_img_servicio),  1)?>	        
+
 </div>
 
