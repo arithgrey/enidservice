@@ -8,39 +8,46 @@ class Home extends CI_Controller{
     }       
     function index(){        
 
-        $data                                   =   $this->principal->val_session("");                        
-        $this->principal->acceso();
-        $data["meta_keywords"]                  =   "";    
-        $data["desc_web"]                       =   "";        
-        $data["url_img_post"]                   =   "";                
-        $data["action"]                         =   $this->input->get("action");
-        $valoraciones                           =   $this->resumen_valoraciones($data["id_usuario"]);        
-        $data["valoraciones"]                   =   $valoraciones["info_valoraciones"];     
-        $class_departamentos                    =   $this->principal->get_departamentos("nosotros");    
-        $data["clasificaciones_departamentos"]  =   $class_departamentos;        
-        $alcance                                =   $this->get_alcance($data["id_usuario"]);
-        $data["alcance"]                        =   crea_alcance($alcance);
-        
-        $data["js"] =  [
-            '../js_tema/area_cliente/principal.js',
-            '../js_tema/area_cliente/proyectos_persona.js',
-            '../js_tema/area_cliente/cobranza.js',
-            "../js_tema/js/direccion.js",
-            '../js_tema/area_cliente/buzon.js'
-        ];
+        $data                                   =   $this->principal->val_session("");     
 
-        $data["css"] = [
-        "css_tienda_cliente.css",
-        "valoracion.css",
-        "area_cliente.css",
-        "preguntas.css"
-        ];
+        if (get_param_def($this->input->get() , "transfer" ) > 0 ) {
+            
+        }else{
+            $this->principal->acceso();
+            $data["meta_keywords"]                  =   "";    
+            $data["desc_web"]                       =   "";        
+            $data["url_img_post"]                   =   "";                
+            $data["action"]                         =   $this->input->get("action");
+            $valoraciones                           =   $this->resumen_valoraciones($data["id_usuario"]);        
+            $data["valoraciones"]                   =   $valoraciones["info_valoraciones"];     
+            $class_departamentos                    =   $this->principal->get_departamentos("nosotros");    
+            $data["clasificaciones_departamentos"]  =   $class_departamentos;        
+            $alcance                                =   $this->get_alcance($data["id_usuario"]);
+            $data["alcance"]                        =   crea_alcance($alcance);
+            
+            $data["js"] =  [
+                '../js_tema/area_cliente/principal.js',
+                '../js_tema/area_cliente/proyectos_persona.js',
+                '../js_tema/area_cliente/cobranza.js',
+                "../js_tema/js/direccion.js",
+                '../js_tema/area_cliente/buzon.js'
+            ];
+
+            $data["css"] = [
+            "css_tienda_cliente.css",
+            "valoracion.css",
+            "area_cliente.css",
+            "preguntas.css"
+            ];
+            
+            $data["ticket"] =  get_info_variable( $this->input->get() , "ticket" );
+            $this->principal->show_data_page($data, 'home');   
+        }                   
+                             
         
-        $data["ticket"] =  get_info_variable( $this->input->get() , "ticket" );
-        $this->principal->show_data_page($data, 'home');                        
         
-        
-    }    
+    }        
+    
     private function resumen_valoraciones($id_usuario){
 
         $q["id_usuario"] =  $id_usuario;

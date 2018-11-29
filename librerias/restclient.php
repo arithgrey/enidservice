@@ -1,5 +1,4 @@
 <?php
-
 /**
  * PHP REST Client
  * https://github.com/tcdent/php-restclient
@@ -273,5 +272,3 @@ class RestClient implements Iterator, ArrayAccess {
         return $this->decoded_response;
     }
 }
-
-

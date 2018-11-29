@@ -1,4 +1,3 @@
-
 <div class="col-lg-8">
 	<div class="page-section ">
 	  <div class="wrapper">
@@ -16,3 +15,5 @@
 	<?=img(["src" => link_imagen_servicio($recibo[0]["id_servicio"])])?>
 	</div>
 </div>
+<?=input_hidden(["value" => $notificacion_pago  ,  "class" => "notificacion_pago"])?>
+<?=input_hidden(["value" => $orden  ,  "class" => "orden"])?>

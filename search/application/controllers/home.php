@@ -17,23 +17,18 @@ class Home extends CI_Controller{
     function index(){           
                 
         $param                      =  $this->input->get();
-        $param["id_clasificacion"]  =  get_info_variable($param , "q2" );               
-        $param["vendedor"]          =  get_info_variable($param , "q3" );        
-        $q                          =  get_param_def($param     , "q", "");    
+        $param["id_clasificacion"]  =  get_info_variable($param , "q2" , 1 );               
+        $param["vendedor"]          =  get_info_variable($param , "q3"  , 1);        
+        $q                          =  get_param_def($param     , "q", "" , 1);            
+        evita_basura($q);
         $param["num_hist"]          =  get_info_servicio($q);                        
-
-        //if (if_ext($param , "q" )){
-
-            $this->create_keyword($param);
-            $this->load_data($param);        
-        //}
-        
-        
+        $this->create_keyword($param);
+        $this->load_data($param);                
     }
     private function load_data($param){
         
 
-        $data                           =   $this->principal->val_session("¿En busca de un buen regalo?");
+        $data                           =   $this->principal->val_session("");
         $data["meta_keywords"]          =   "Comprar y vender tus artículos y servicios";
         $data["desc_web"]               =   "";
         $data["url_img_post"]           =   create_url_preview("promo.png");
@@ -44,8 +39,8 @@ class Home extends CI_Controller{
         $data_send["vendedor"]          =   $param["vendedor"];
         $data_send["id_clasificacion"]  =   $param["id_clasificacion"];
         $data_send["extra"]             =   $param;
-        $data_send["order"]             = 
-        (array_key_exists("order", $param))?$param["order"]:11;
+        $data_send["order"]             =   get_param_def($param , "order" ,  11 , 1);        
+
 
         $per_page = 12;        
         $data_send["resultados_por_pagina"]     =   $per_page;        
@@ -120,7 +115,7 @@ class Home extends CI_Controller{
         }else{
             
             $data["css"]        = ["search_sin_encontrar.css"];
-            $tienda             = get_param_def($param , "tienda");
+            $tienda             = get_param_def($param , "tienda" , 1);
             $this->principal->crea_historico($param["num_hist"]);
             if ($tienda == 0) {
                 $this->principal->show_data_page($data , 'sin_resultados');    

@@ -25,22 +25,25 @@
 	$flag_servicio 			=  	$servicio["flag_servicio"];
 	$tipo_entrega      		= 	$recibo["tipo_entrega"];
 	
-	$costo_envio_sistema 	= 	
-	($tipo_entrega == 1) ? $punto_encuentro[0]["costo_envio"] : $costo_envio_sistema;
 	
 	
-	
-	$deuda 					=  get_saldo_pendiente($monto_a_pagar,
+	$deuda 					=  get_saldo_pendiente(
+								$monto_a_pagar,
 								$num_ciclos_contratados,
-								$saldo_cubierto,
-								$flag_servicio,
+								$saldo_cubierto,								
 								$costo_envio_cliente,
 								$costo_envio_sistema, 
 								$tipo_entrega
 							);
 
 	
-	$saldo_pendiente 		= 	($tipo_entrega == 1) ? $punto_encuentro[0]["costo_envio"]: $deuda["saldo_pendiente_envio"];   
+	$saldo_pendiente 		= 	$deuda["total_mas_envio"];
+	
+
+
+	
+	
+
 	$url_pago_oxxo 			= 	get_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
 	$url_pago_saldo_enid 	= 	get_link_saldo_enid($id_usuario_venta , $id_recibo);	
 	$url_img_servicio 		=  	link_imagen_servicio($id_servicio);
@@ -127,8 +130,7 @@
 		
 	<?php if($tipo_entrega == 0 ):?>		
 	
-		<?=heading_enid("Dirección de envío" , 3)?>
-		
+		<?=heading_enid("Dirección de envío" , 3)?>		
 		<div>
 			<?php if(count($informacion_envio)>0):?>
 
@@ -182,9 +184,22 @@
 		<hr>
 		
 
-	<?=anchor_enid(div("RASTREA TU PEDIDO".icon("fa fa-map-signs")) , 
-	["href"=>$link_seguimiento] 
-	, 1)?>
+
+
+	<?=guardar(
+				"RASTREA TU PEDIDO".icon("fa fa-map-signs"), 
+				[
+					"class" 	=> "top_20 text-left",					
+					"style" 	=> "border-style: solid!important;border-width: 2px!important;border-color: black!important;color: black !important;background: #f1f2f5 !important;"
+ 				],
+				1,
+				1,
+				0,
+				$link_seguimiento
+	)?>
+
+
+
 	<?=
 		div(
 		anchor_enid('CANCELAR COMPRA', 

@@ -130,7 +130,9 @@
 					"style" =>	"background: white;padding: 10px;font-size: 2em;"
 			])?>
 				
-			<?=span("Notifica tu pago para que podamos procesarlo " , 
+			<?=span(
+				span("Notifica tu pago para que podamos procesarlo " , 
+					["style" => "color:white;"]) , 
 				[	
 					"style"	=>	"padding: 4px;",
 					"class"	=> 	"white"
@@ -138,7 +140,8 @@
 				
 			<?=anchor_enid("dando click aquí. ",
 				[
-					"href" 	=>	$url_request."notificar/?recibo=". $id_recibo ,
+					"href" 	=>	
+					$url_request."pedidos/?seguimiento=$id_recibo&notificar=1" ,
 					"style"	=>	"background:white;color: black!important;padding: 5px;"
 			])?>				
 		</div>		

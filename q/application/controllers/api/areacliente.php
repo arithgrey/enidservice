@@ -9,12 +9,14 @@ class Areacliente extends REST_Controller{
     }
     function pago_pendiente_web_GET(){
 
-        //debug("Entra");
-        $param = $this->get();        
-        $cuerpo_correo = $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);        
-        $param["info_correo"] =  $cuerpo_correo;
-        $param["asunto"] =  "Notificacion de compra o renovación pendiente";
-        $correo_dirigido_a = $param["email"];            
+        
+        $param                  = $this->get();        
+        $cuerpo_correo          = $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);        
+        //debug($cuerpo_correo ,1);
+
+        $param["info_correo"]   =   $cuerpo_correo;
+        $param["asunto"]        =   "Notificacion de compra o renovación pendiente";
+        $correo_dirigido_a      =   $param["email"];            
         $this->mensajeria_lead->notificacion_email($param , $correo_dirigido_a);
         $this->response($cuerpo_correo);
         
@@ -22,7 +24,7 @@ class Areacliente extends REST_Controller{
     function carga_pago_pendiente_por_recibo($id_recibo){
 
         $q["id_recibo"] =  $id_recibo;        
-        $api  = "recibo/resumen_desglose_pago/format/html/"; 
+        $api            = "recibo/resumen_desglose_pago/format/html/"; 
         return $this->principal->api( $api , $q ,"html"  );
     }
     /*

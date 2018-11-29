@@ -120,9 +120,9 @@ class Tickets extends REST_Controller{
     }
     /**/
     function servicio_recibo_GET(){
-        /**/
+        
         $param =  $this->get();
-        $response =  $this->tickets_model->get_servicio_por_recibo($param);        
+        $response =  $this->tickets_model->get_servicio_por_recibo($param);
         $this->response($response );
     }
         

@@ -203,8 +203,7 @@
 	            $data["desc_web"] 		= 	"";	            
 	            return $data;
 	                
-	        }else{   
-	        	//debug("999888");         
+	        }else{   	        
 	            $data['titulo']		= 	$titulo;              
 	            $data["in_session"] = 	0; 
 	            $data["id_usuario"] =	"";                                   	            
@@ -216,4 +215,3 @@
 	       
 	    } 	    
 	}
-?>

@@ -157,7 +157,7 @@ class recibo extends REST_Controller{
     */
     function resumen_desglose_pago_GET(){
         
-        $param      =  $this->get();                                                
+        $param      =  $this->get();                                                        
         $recibo     =  $this->recibo_model->q_get([],  $param["id_recibo"] );
         
         if(count($recibo) >0 ){            
@@ -172,6 +172,7 @@ class recibo extends REST_Controller{
             $data_complete["servicio"] = $this->principal->get_base_servicio($id_servicio);
 
             if($monto_a_pagar > $saldo_cubierto ){                        
+
 
                $this->ticket_pendiente_pago($param , $recibo , $data_complete); 
 
@@ -193,13 +194,17 @@ class recibo extends REST_Controller{
     function ticket_pendiente_pago($param , $recibo , $data_complete){
 
         $id_usuario =  $recibo[0]["id_usuario"];               
+        $data_complete["costo_envio_sistema"]  =  get_costo_envio($recibo[0]);                
         if ($recibo[0]["tipo_entrega"] ==  1) {
-           $this->ticket_pendiente_pago_contra_entrega($param , $recibo , $data_complete);
+
+
+           $this->ticket_pendiente_pago_contra_entrega($param , $recibo , $data_complete );
+
         }else{
 
             if (get_info_usuario_valor_variable($param , "cobranza") ==  1){
 
-                $data_complete["costo_envio_sistema"]       =  get_costo_envio($recibo[0]);
+                
                 /*Cargamos el saldo que tiene la persona*/
                 $data_complete["id_recibo"]                 =   $param["id_recibo"];
                 $id_usuario_venta                           =   $recibo[0]["id_usuario_venta"];
@@ -209,7 +214,10 @@ class recibo extends REST_Controller{
                 if (count($direccion) > 0 ) {
                     $id_direccion = $direccion[0]["id_direccion"];
                     $data_complete["informacion_envio"]     =   $this->get_direccion_por_id($id_direccion);    
-                }            
+                }          
+
+
+
                 $this->load->view("cobranza/pago_al_momento" , $data_complete);    
 
             }else{            
@@ -227,8 +235,10 @@ class recibo extends REST_Controller{
 
         $id_recibo =  $param["id_recibo"];
 
+
         /*Cuando se puede pagar al momento*/
         if (get_info_usuario_valor_variable($param , "cobranza") ==  1){
+            
             /*Cuando no se ha entregado y no está cancelado*/
             if ($recibo[0]["entregado"] == 0 && $recibo[0]["se_cancela"] == 0) {
                 /*Muestro la fecha de entrega acordada más el recordatorio y las forma de pago*/           
@@ -240,6 +250,13 @@ class recibo extends REST_Controller{
 
                 
             }
+        }else{
+            
+            $id_usuario                           = $recibo[0]["id_usuario"]; 
+            $data_complete["usuario"]             = $this->principal->get_info_usuario($id_usuario);
+            //$data_complete["costo_envio_sistema"] =  get_costo_envio($recibo[0]);              
+
+            $this->load->view("cobranza/resumen_no_aplica" , $data_complete);    
         }
     }
     function compras_efectivas_GET(){        
@@ -516,6 +533,16 @@ class recibo extends REST_Controller{
         }
         $this->response($response);
         
+    }
+    function notificacion_pago_PUT(){
+        
+        $param      =  $this->put();
+        $response   =  [];
+        if (if_ext($param , "recibo")) {
+            
+            $response =  $this->recibo_model->q_up("notificacion_pago" , 1 , $param["recibo"]);
+        }
+        $this->response($response);
     }
 
 }?>

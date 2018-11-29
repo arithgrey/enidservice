@@ -204,6 +204,7 @@ var notifica_punto_entrega = function(e){
 	e.preventDefault();
 }
 var response_notificacion_punto_entrega = function(data){	
+	
 	display_elements([".place_notificacion_punto_encuentro" , ".form_punto_encuentro_horario"] , 0);	
-	redirect("../area_cliente/?action=compras&ticket="+data.id_recibo);		
+	redirect("../area_cliente/?action=compras&ticket="+data.id_recibo);			
 }

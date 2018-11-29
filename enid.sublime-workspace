@@ -4,12 +4,32 @@
 		"selected_items":
 		[
 			[
+				"data",
+				"data_complete"
+			],
+			[
+				"for",
+				"for\tfor …"
+			],
+			[
 				"stat",
-				"status_venta_registro"
+				"status"
+			],
+			[
+				"stst",
+				"status"
 			],
 			[
 				"sta",
-				"status_venta_registro"
+				"status"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"carga",
+				"carga_vista_seguimiento"
 			],
 			[
 				"js",
@@ -96,10 +116,6 @@
 				"col-lg-8"
 			],
 			[
-				"for",
-				"foreach\tforeach …"
-			],
-			[
 				"id",
 				"id_recibo"
 			],
@@ -154,10 +170,6 @@
 			[
 				"t",
 				"tipo"
-			],
-			[
-				"data",
-				"data_send"
 			],
 			[
 				"get",
@@ -502,96 +514,11 @@
 			[
 				"u",
 				"uppercase\ttext-transform"
-			],
-			[
-				"json",
-				"json_encode"
-			],
-			[
-				"ta",
-				"tareas"
-			],
-			[
-				"shwo",
-				"showonehideone"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "pedidos/application/helpers/pedidos_helper.php",
-			"settings":
-			{
-				"buffer_size": 9724,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js_tema/pedidos/principal.js",
-			"settings":
-			{
-				"buffer_size": 10440,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "use enidserv_web;\nselect * from  proyecto_persona_forma_pago order by id_proyecto_persona_forma_pago;\nselect * from usuario where idusuario =  595;\n\n\nhttps://articulo.mercadolibre.com.mx/MLM-646166232-base-enfriadora-laptoptableta-mesa-bambu-cama-sofa-playa-_JM?fbclid=IwAR0cbHt0omAWmJ8IFVZOnrQ7PVvtB_coF5atYeW7v_zsgGvpaHboqiEwrNI&quantity=1\n\n",
-			"settings":
-			{
-				"buffer_size": 343,
-				"line_ending": "Unix",
-				"name": "use enidserv_web;"
-			}
-		},
-		{
-			"file": "pedidos/application/views/detalle.php",
-			"settings":
-			{
-				"buffer_size": 3542,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "q/application/controllers/api/recibo.php",
-			"settings":
-			{
-				"buffer_size": 19696,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "pedidos/application/controllers/home.php",
-			"settings":
-			{
-				"buffer_size": 6073,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "view_tema/footer_template.php",
-			"settings":
-			{
-				"buffer_size": 6619,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 1695 files for \"version_enid\"\n\n/var/www/html/inicio/config/constants.php:\n   36  define('FOPEN_WRITE_CREATE_STRICT',\t\t\t\t'xb');\n   37  define('FOPEN_READ_WRITE_CREATE_STRICT',\t\t'x+b');\n   38: define('version_enid',\t\t'v='.rand() );\n   39  \n   40  \n\n/var/www/html/inicio/view_tema/footer_template.php:\n  112  rel=\"stylesheet\" \n  113  type=\"text/css\" \n  114: href=\"../css_tema/template/main.css?<?=version_enid?>\">\n  115  \n  116: <link href=\"../css_tema/template/bootstrap.min.css?<?=version_enid?>\" \n  117  rel=\"stylesheet\" id=\"bootstrap-css\">\n  118  <?php if ( isset($css) && is_array($css) && count($css)>0 ):?>\n  119      <?php  foreach($css as $c): $link =\"../css_tema/template/\".$c; ?>\n  120:         <link rel=\"stylesheet\"  type=\"text/css\"  href=\"<?=$link;?>?<?=version_enid?>\">\n  121      <?php endforeach;?>\n  122  <?php  endif; ?>\n  ...\n  127              rel=\"stylesheet\" \n  128              type=\"text/css\" \n  129:             href=\"<?php echo $c;?>?<?=version_enid?>\">\n  130      <?php endforeach;?>\n  131  <?php  endif; ?>\n  132  \n  133: <script src=\"../js_tema/js/main.js?<?=version_enid?>\"></script>\n  134  <?php if (isset($js) && is_array($js)):?>\n  135  \t<?php  foreach($js as $script):?>\n  136: \t\t<script type='text/javascript' src = '<?php echo $script;?>?<?=version_enid?>'></script>\n  137      <?php endforeach;?>\n  138  <?php  endif; ?>\n  ...\n  144  <link \n  145  rel=\"stylesheet\" \n  146: href=\"../css_tema/font-asome2/css/font-awesome.min.css?<?=version_enid?>\">\n  147  \n  148  <script src=\"../js_tema/js/librerias/clipboard.min.js\"></script>\n\n/var/www/html/inicio/view_tema/header_meta_enid.php:\n   63      <meta itemprop=\"photo\" content=\"<?=$url_img_post?>\">\n   64      <link rel=\"shortcut icon\" href=\"../img_tema/enid_service_logo.jpg\">        \n   65:     <script src=\"../js_tema/jquery.min.js?<?=version_enid?>\">\n   66      </script>    \n   67:     <script src=\"../js_tema/bootstrap.min.js?<?=version_enid?>\">\n   68      </script>\n\n10 matches across 3 files\n",
-			"settings":
-			{
-				"buffer_size": 1992,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -650,22 +577,25 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/administracion_cuenta",
-		"/var/www/html/inicio/administracion_cuenta/application",
-		"/var/www/html/inicio/area_cliente",
-		"/var/www/html/inicio/area_cliente/application",
-		"/var/www/html/inicio/contact",
-		"/var/www/html/inicio/contact/application",
-		"/var/www/html/inicio/css_tema",
-		"/var/www/html/inicio/desarrollo",
-		"/var/www/html/inicio/desarrollo/application",
-		"/var/www/html/inicio/pedidos"
+		"/var/www/html/inicio/reporte_enid",
+		"/var/www/html/inicio/reporte_enid/application",
+		"/var/www/html/inicio/reporte_enid/application/controllers"
 	],
 	"file_history":
 	[
+		"/var/www/html/inicio/helpers/enid_helper.php",
+		"/var/www/html/inicio/pedidos/application/views/seguimiento.php",
+		"/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php",
+		"/var/www/html/inicio/css_tema/template/seguimiento_pedido.css",
+		"/var/www/html/inicio/pedidos/application/controllers/home.php",
+		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
+		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
+		"/var/www/html/inicio/q/application/views/cobranza/notificacion_pago_realizado.php",
+		"/var/www/html/inicio/view_tema/footer_template.php",
+		"/var/www/html/inicio/pedidos/application/views/detalle.php",
+		"/var/www/html/inicio/js_tema/pedidos/principal.js",
 		"/var/www/html/inicio/config/constants.php",
 		"/var/www/html/inicio/q/application/controllers/api/tipificacion_recibo.php",
-		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
 		"/var/www/html/inicio/test/application/views/home.php",
 		"/var/www/html/inicio/test/application/models/upload_model.php",
 		"/var/www/html/inicio/system/libraries/Form_validation.php",
@@ -687,11 +617,6 @@
 		"/var/www/html/inicio/q/application/controllers/api/clasificacion.php",
 		"/var/www/html/inicio/system/libraries/Session.php",
 		"/var/www/html/inicio/css_tema/template/pedidos.css",
-		"/var/www/html/inicio/pedidos/application/views/detalle.php",
-		"/var/www/html/inicio/js_tema/pedidos/principal.js",
-		"/var/www/html/inicio/helpers/enid_helper.php",
-		"/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php",
-		"/var/www/html/inicio/pedidos/application/controllers/home.php",
 		"/var/www/html/inicio/q/application/models/recibo_model.php",
 		"/var/www/html/inicio/q/application/models/usuario_model.php",
 		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
@@ -703,7 +628,6 @@
 		"/var/www/html/inicio/js_tema/alerts/jquery-confirm.js",
 		"/var/www/html/inicio/css_tema/template/confirm-alert.css",
 		"/var/www/html/inicio/js_tema/extra/jquery-confirm/css/jquery-confirm.css",
-		"/var/www/html/inicio/view_tema/footer_template.php",
 		"/var/www/html/inicio/q/application/models/imagen_usuario_model.php",
 		"/var/www/html/inicio/q/application/models/tipificacion_model.php",
 		"/var/www/html/inicio/q/application/controllers/api/tipificacion.php",
@@ -715,7 +639,6 @@
 		"/var/www/html/inicio/js_tema/procesar/principal.js",
 		"/var/www/html/inicio/index.php",
 		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
-		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
 		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
 		"/var/www/html/inicio/js_tema/servicio/pre.js",
 		"/var/www/html/inicio/q/application/controllers/api/tipo_entrega.php",
@@ -787,10 +710,7 @@
 		"/var/www/html/inicio/reporte_enid/application/views/empresas_enid.php",
 		"/var/www/html/inicio/q/application/models/status_enid_service_model.php",
 		"/var/www/html/inicio/q/application/helpers/servicios_helper.php",
-		"/var/www/html/inicio/producto/application/views/pre.php",
-		"/var/www/html/inicio/q/application/models/imagen_servicio_model.php",
-		"/var/www/html/inicio/js_tema/desarrollo/principal.js",
-		"/var/www/html/inicio/q/application/models/intento_compra_model.php"
+		"/var/www/html/inicio/producto/application/views/pre.php"
 	],
 	"find":
 	{
@@ -936,6 +856,27 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"sigue tu pedido",
+			"module_redirect",
+			"servicio",
+			"servi",
+			"get_texto_status",
+			"get_actividad",
+			"timeline__item__date",
+			"carga_detalle_pedido",
+			"id_recibo",
+			"carga_vista_seguimiento",
+			"get_recibo",
+			"carga_detalle_pedido",
+			"p",
+			"p{",
+			"p",
+			"h4",
+			"h2",
+			"body",
+			"carga_vista_seguimiento",
+			"link_seguimiento",
+			"resumen_desglose_pago",
 			"https://articulo.mercadolibre.com.mx/MLM-646166232-base-enfriadora-laptoptableta-mesa-bambu-cama-sofa-playa-_JM",
 			"!=",
 			"selector_estados_ventas",
@@ -1042,28 +983,7 @@
 			"get_servicios_por_clasificaciones",
 			"por_clasificacion",
 			"]",
-			"[",
-			"por_clasificacion",
-			"get_servicios_por_clasificaciones",
-			"clasificaciones",
-			"por_clasificacion",
-			"get_producto_por_clasificacion",
-			"por_clasificacion",
-			"get_servicios_por_clasificaciones",
-			"por_clasificacion",
-			"por_c",
-			"get_servicios_por_clasificaciones",
-			"sugerencia_GET",
-			"por_clasificacion",
-			"producto_por_clasificacion",
-			"get_servicios_por_clasificaciones",
-			"get_clasificaciones_por_id_servicio",
-			"completa_servicios_sugeridos",
-			"get_clasificaciones_por_id_servicio",
-			"sugerencia_",
-			"sugerencia/",
-			"seccion_tipificacion",
-			"\t\t\t"
+			"["
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1099,296 +1019,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "pedidos/application/helpers/pedidos_helper.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9724,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6591,
-								6591
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3758.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "js_tema/pedidos/principal.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10440,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2003,
-								2003
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 745.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 343,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								343,
-								343
-							]
-						],
-						"settings":
-						{
-							"auto_name": "use enidserv_web;",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "pedidos/application/views/detalle.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3542,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3267,
-								3267
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2444.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "q/application/controllers/api/recibo.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 19696,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								16128,
-								16128
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 9402.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "pedidos/application/controllers/home.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6073,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								543,
-								543
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "view_tema/footer_template.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6619,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4851,
-								4851
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1950.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1992,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										209,
-										221
-									],
-									[
-										404,
-										416
-									],
-									[
-										490,
-										502
-									],
-									[
-										775,
-										787
-									],
-									[
-										971,
-										983
-									],
-									[
-										1096,
-										1108
-									],
-									[
-										1285,
-										1297
-									],
-									[
-										1476,
-										1488
-									],
-									[
-										1830,
-										1842
-									],
-									[
-										1927,
-										1939
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								219,
-								219
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 456.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1445,12 +1077,28 @@
 		"selected_items":
 		[
 			[
-				"foo",
-				"view_tema/footer_template.php"
+				"eni",
+				"helpers/enid_helper.php"
+			],
+			[
+				"PEDIDOS",
+				"pedidos/application/helpers/pedidos_helper.php"
+			],
+			[
+				"cobranza/pago_al_momento",
+				"q/application/views/cobranza/pago_al_momento.php"
+			],
+			[
+				"cobranza/notificacion_pago_realizado",
+				"q/application/views/cobranza/notificacion_pago_realizado.php"
 			],
 			[
 				"recibo",
 				"q/application/controllers/api/recibo.php"
+			],
+			[
+				"foo",
+				"view_tema/footer_template.php"
 			],
 			[
 				"deta",
@@ -1575,10 +1223,6 @@
 			[
 				"EXTRA",
 				"extra.sql"
-			],
-			[
-				"eni",
-				"helpers/enid_helper.php"
 			],
 			[
 				"pedi",
@@ -1801,10 +1445,6 @@
 				"q/application/views/cobranza/pago_al_momento.php"
 			],
 			[
-				"cobranza/pago_al_momento",
-				"q/application/views/cobranza/pago_al_momento.php"
-			],
-			[
 				"pago_al_momento_contra_entrega",
 				"q/application/views/cobranza/pago_al_momento_contra_entrega.php"
 			],
@@ -1947,14 +1587,6 @@
 			[
 				"usuario_model",
 				"q/application/models/usuario_model.php"
-			],
-			[
-				"mainj",
-				"js_tema/js/main.js"
-			],
-			[
-				"ini",
-				"js_tema/login/ini.js"
 			]
 		],
 		"width": 0.0

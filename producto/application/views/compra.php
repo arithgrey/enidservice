@@ -10,15 +10,8 @@
 <form action="../producto/?producto=<?=$id_servicio?>&pre=1"  id="AddToCartForm" method="POST" >  
   <?=form_hidden($hidden)?> 
   <div class="btn-and-quantity">
-    <div class="spinner">
-        <?=form_input([
-          "type"    =>  "number", 
-          "name"    =>  "num_ciclos", 
-          "value"   =>  "1" , 
-          "min"     =>  "1", 
-          "max"     =>  valida_maximo_compra($flag_servicio, $existencia),  
-          "class"   =>  "telefono_info_contacto"
-        ]);?>      
+    <div class="spinner">        
+        PIEZAS <?=select_cantidad_compra($flag_servicio, $existencia)?>    
         <?=form_label(get_text_periodo_compra($flag_servicio) , "" , ["class"=>"numero_piezas"] )?>
     </div>
     <?=guardar("ORDENAR "  , 

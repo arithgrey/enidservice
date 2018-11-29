@@ -10,12 +10,18 @@
     $text_extra         =   is_servicio($servicio);        
     $url_img            =   $url_request."imgs/index.php/enid/imagen_servicio/".$id_servicio;                
     $metakeyword        =   $servicio["metakeyword"];        
-    $color              =   array_key_exists("color", $servicio) ? $servicio["color"] : "";
+    
+
+    $color              =  (get_param_def($servicio , "color" ) > 0 ) ? $servicio["color"] : "";
+
+
+
+
     $flag_servicio      =   $servicio["flag_servicio"];        
     $precio             =   $servicio["precio"];           
     $costo_envio ="";
     if($flag_servicio == 0){
-        $costo_envio =  $servicio["costo_envio"]["text_envio"]["cliente_solo_text"];                 
+        $costo_envio    =  $servicio["costo_envio"]["text_envio"]["cliente_solo_text"];                 
     } 
     $id_ciclo_facturacion =  $servicio["id_ciclo_facturacion"];
         

@@ -6,8 +6,7 @@ class Home extends CI_Controller{
     function __construct($options=[]){        
         parent::__construct();              
         $this->load->helper("producto");                                    
-        $this->load->library(lib_def());       
-                    
+        $this->load->library(lib_def());                           
     }       
     private function set_option($key, $value){
         $this->options[$key] = $value;
@@ -50,7 +49,8 @@ class Home extends CI_Controller{
     }
     /**/    
     function index(){                
-        $param  = $this->input->get();
+        $param    = $this->input->get();
+        evita_basura($this->input->get("producto"));
         if (ctype_digit(trim($this->input->get("producto")))) {
 
             if (array_key_exists("pre", $param)) {
@@ -69,7 +69,7 @@ class Home extends CI_Controller{
             }
             
         }else{
-            redirect("../../?q=");
+            redirect("https://www.google.com/" , "refresh" ,302);    
         }     
     }
     /**/
@@ -168,7 +168,8 @@ class Home extends CI_Controller{
         $data["url_img_post"]   =   $this->get_url_imagen_post();    
         $data["desc_web"]       =   $this->get_option("desc_web");                    
         $data["id_servicio"]    =   $id_servicio;                    
-        $data["existencia"]     =   $this->get_existencia($id_servicio);
+        $data["existencia"]     =   $this->get_existencia($id_servicio);        
+        
         $data["css"] = ["css_tienda.css",
                         "producto_principal.css",
                         "sugerencias.css",

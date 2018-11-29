@@ -29,6 +29,9 @@
     $a_mis_compras = anchor_enid($icon."TUS COMPRAS".$place,
         ["id"=>"mis_compras" ,"href"=>"#tab_mis_pagos" ,"data-toggle"=>"tab","class"=>'black strong btn_cobranza mis_compras']);
 
+    $a_lista_deseo = anchor_enid(icon("fa fa-gift")."LISTA DE DESEOS",
+        ["href"=>"../lista_deseos/?q=preferencias" ,"class"=>'black strong']);
+
     /*
     $icon = icon('fa fa-comments');
     $place = place('notificacion_preguntas_sin_leer_cliente_buzon');
@@ -56,6 +59,9 @@
                 <li  class='li_menu <?=valida_active_tab('compras' , $action)?>'>
                     <?=$a_mis_compras?>
                 </li> 
+                <li class='li_menu'>
+                    <?=$a_lista_deseo?>
+                </li>
                 <!--
                 <li class='li_menu <?=valida_active_tab('preguntas' , $action)?>'>
                     <?=$a_buzon?>

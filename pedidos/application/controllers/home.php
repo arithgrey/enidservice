@@ -119,13 +119,34 @@ class Home extends CI_Controller{
     }
     function carga_vista_seguimiento($param , $data){
 
-        $data["css"]    = ["seguimiento_pedido.css"];
-        $id_recibo =  $this->input->get("seguimiento");                                
-        $recibo    =  $this->get_recibo($id_recibo);
-        if ( count($recibo)>0 ) {
+    
+        $data["css"]    =   ["seguimiento_pedido.css" , "confirm-alert.css"];
+        $data["js"]     =   ["../js_tema/alerts/jquery-confirm.js" , 
+        "../js_tema/pedidos/seguimiento.js"];
+
+        $id_recibo      =  $this->input->get("seguimiento");            
+        $recibo         =  $this->get_recibo($id_recibo);
+
+        $id_usuario_compra = $recibo[0]["id_usuario"];
+
+
+        if ( count($recibo)>0  
+            && 
+                $data["in_session"] ==  1 
+            && 
+                $data["id_usuario"] > 0
+            && 
+                $id_usuario_compra ==  $data["id_usuario"]) {
+
+
+
+            $notificacion_pago = (get_param_def($param , "notificar" ) > 0 ) ? 1 : 0; 
+            $notificacion_pago = ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago;
+            $data["notificacion_pago"] = $notificacion_pago;
 
             $data["orden"]          =   $id_recibo;
-            $data["recibo"]         =   $recibo;                        
+            $data["recibo"]         =   $recibo;  
+
             $data["status_ventas"]  =   $this->get_estatus_enid_service();
             $data["tipificaciones"] =   $this->get_tipificaciones($id_recibo);
             $this->principal->show_data_page($data, 'seguimiento');          

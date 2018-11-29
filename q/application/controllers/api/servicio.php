@@ -205,6 +205,23 @@ class Servicio extends REST_Controller{
     $response["categorias"]=  $res;
     return $response;
   }
+
+  function status_PUT(){
+
+    $param    = $this->put();
+    $response = [];
+
+    if (if_ext($param , "status,id_servicio")) {
+      
+
+      $status       = ($param["status"] ==  1 ) ? 0 : 1;
+      $id_servicio  = $param["id_servicio"];
+      $response = $this->serviciosmodel->q_up("status" , $status , $id_servicio);
+    }
+
+    $this->response($response);
+
+  }
   /*
   function clasifiacion_GET(){
     
@@ -599,7 +616,7 @@ class Servicio extends REST_Controller{
           $data["lista_productos"]                = $this->agrega_vista_servicios($servicios["servicios"]);
           
           $data["paginacion"]                     = $this->principal->create_pagination($config_paginacion);
-          
+          debug($data["paginacion"]);
           $this->load->view("producto/basico_empresa" , $data);                    
           
           
@@ -1424,8 +1441,8 @@ class Servicio extends REST_Controller{
        
         $servicios = $this->completa_servicios_sugeridos($response , $param); 
        
-      
-        if (count($servicios) >0){           
+        debug($servicios , 1);
+        if (count($servicios) > 0 ){           
             $data["servicios"]  =  $servicios;
             $data["url_request"]=  get_url_request("");
             $data["is_mobile"]  = $this->get_option("is_mobile");
@@ -1439,10 +1456,10 @@ class Servicio extends REST_Controller{
     }
     function completa_servicios_sugeridos($servicios, $param){
         
-        $in_session     =  $this->principal->is_logged_in();
-        $n_servicios    = [];
-        $existentes     =  count($servicios);
-        if ($existentes>0) {
+        $in_session     =   $this->principal->is_logged_in();
+        $n_servicios    =   [];
+        $existentes     =   count($servicios);
+        if ( $existentes > 0) {
             $n_servicios = $servicios;
         }
         $limit =  "";

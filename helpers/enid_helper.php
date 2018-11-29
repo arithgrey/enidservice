@@ -617,9 +617,17 @@ if ( ! function_exists('create_select'))
 if ( ! function_exists('get_param_def'))
 {
   /**/
-  function get_param_def($data , $key , $val_def = 0){
+  function get_param_def($data , $key , $val_def = 0 , $valida_basura = 0 ){
     $val = ( is_array($data) && array_key_exists($key, $data) ) ? $data[$key] : $val_def;
+
+    if ($valida_basura ==  1) {
+        
+        if (( is_array($data) && array_key_exists($key, $data) ) ) {
+            evita_basura($data[$key]);    
+        }      
+    }
     return $val;
+
   }
 }
 
@@ -695,9 +703,16 @@ if ( ! function_exists('get_dominio')){
 }
 
 if ( ! function_exists('get_info_variable')){
-  function get_info_variable( $param , $variable ){    
-    return ( !is_null($param ) &&  is_array($param) 
-      && array_key_exists($variable , $param) ) ? $param[$variable]:0;  
+  function get_info_variable( $param , $variable, $valida_basura  = 0 ){    
+    $text =  ( !is_null($param) &&  is_array($param) && array_key_exists($variable , $param) ) ? $param[$variable]:0;  
+
+    if ($valida_basura == 1) {
+      if (( !is_null($param) &&  is_array($param) && array_key_exists($variable , $param) ) ) {        
+          evita_basura($param[$variable]);
+      }  
+    }
+    return $text;
+    
   }
 }
 if ( ! function_exists('get_info_servicio')){
@@ -1028,8 +1043,8 @@ function debug($msg, $array = 0)
   function get_costo_envio($param){
     
     
-    $flag_envio_gratis =  $param["flag_envio_gratis"];
-    $data_complete = [];
+    $flag_envio_gratis  =  $param["flag_envio_gratis"];
+    $data_complete      = [];
     
     if($flag_envio_gratis ==  1){      
       
@@ -1153,6 +1168,21 @@ function add_date($inicio , $dias){
   $fecha = date_create($inicio);
   date_add($fecha, date_interval_create_from_date_string($dias.' days'));
   return date_format($fecha, 'Y-m-d');
+}
+function evita_basura($text){
+
+  $basura =   ["'","?","=","|","*"];
+  $b      =   0;
+  for ($a=0; $a < count($basura); $a++) { 
+      
+      if(strpos($text, $basura[$a]) !== FALSE){          
+          $b ++;
+      }
+  }  
+  if ($b > 0 ) {    
+    redirect("https://www.google.com/" , "refresh" ,302);    
+  }
+  return $b;  
 }
 function add_hour($num_hours){
   $nowtime = date("Y-m-d H:i:s"); 

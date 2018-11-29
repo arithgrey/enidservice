@@ -458,7 +458,9 @@
                     INNER JOIN servicio s  
                     ON us.id_servicio =  s.id_servicio
                     WHERE 
-                    us.id_usuario = '".$id_usuario."' 
+                       us.id_usuario = '".$id_usuario."' 
+                       AND  
+                       s.status = 1 
                     ORDER BY 
                     us.num_deseo DESC LIMIT $limit ";
         

@@ -1,5 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+
+function select_cantidad_compra($flag_servicio, $existencia){
+
+    $config =  [      
+      "name"    =>  "num_ciclos",                 
+      "class"   =>  "telefono_info_contacto form-control"
+    ];
+
+    $select   =  "<select ".add_attributes($config) .">";  
+    for ($a=1; $a < valida_maximo_compra($flag_servicio, $existencia); $a++) { 
+
+        $select .=  "<option value=".$a.">".$a."</option>";  
+    }
+    $select .=  "</select>";
+    return $select;
+
+
+}
 function get_text_periodo_compra($flag_servicio){
   if($flag_servicio == 0){
     return "Piezas";

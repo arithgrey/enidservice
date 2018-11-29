@@ -1,6 +1,0 @@
-{
-    "require": {
-        "statickidz/php-google-translate-free": "^1.0",
-        "google/apiclient": "^2.0"
-    }
-}

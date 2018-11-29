@@ -1,8 +1,24 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){	
+	function get_estado_publicacion($status , $id_servicio){
+
+		$text = ($status ==  1) ?  "PAUSAR PUBLICACIÓN": "ACTIVAR PUBLICACIÓN";
+		$btn =  
+        anchor_enid(
+	        $text , 
+	        [
+	        	"id"   		=>     $id_servicio, 
+	        	"status"   	=>     $status, 
+	        	"class" 	=>    'button_enid_eleccion activar_publicacion'
+	        ], 
+	    1);
+        return $btn;
+
+
+	}
 	function get_url_venta($extra){
 		return "http://enidservice.com/inicio/producto/?producto=" .$extra;
-	}	
+	}		
 	function une_data($data_servicios ,  $data_intentos_entregas){
 
         $new_data 		=  [];
@@ -374,7 +390,7 @@ if(!function_exists('invierte_date_time')){
 
   			$att 		= 	add_attributes($attributes);
 
-  			$select    .=  	heading_enid("DÍAS PROMEDIO DE ENTREGA" , 4);  			
+  			$titulo    	=  	heading_enid("DÍAS PROMEDIO DE ENTREGA" , 4);  			
 	  		$select  	.= 	"<select ".$att.">";
 
 	  		for ($a=1; $a < 10 ; $a++) { 
@@ -388,8 +404,9 @@ if(!function_exists('invierte_date_time')){
 	  		$select .= "</select>";  		
 	  		$select .=  place("response_tiempo_entrega");
 
+	  		return div(div($titulo ,  ["class" =>"col-lg-6"]) . div($select ,  ["class" =>"col-lg-6"]) , 1);
   		}  		
-  		return $select;
+  		
   	}
 
 	function sumatoria_array($array ,$key) {

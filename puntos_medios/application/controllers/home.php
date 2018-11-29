@@ -23,9 +23,8 @@ class Home extends CI_Controller{
         
         
 
-        if ($this->input->server('REQUEST_METHOD') == 'POST' && 
-            is_array($param) && 
-            array_key_exists("servicio", $param) && 
+        if ($this->input->server('REQUEST_METHOD') == 'POST' 
+            &&  is_array($param) && array_key_exists("servicio", $param) && 
             $param["servicio"] ){            
             
             $data["tipos_puntos_encuentro"]=  $this->get_tipos_puntos_encuentro($param);
@@ -55,7 +54,7 @@ class Home extends CI_Controller{
             $this->principal->show_data_page($data, 'home');  
 
         }else{
-
+            
             $id_servicio = $this->input->get("producto");
             redirect("../../producto/?producto=".$id_servicio);
         }        

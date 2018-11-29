@@ -323,6 +323,11 @@
     
         <div class="tab-pane <?=$extra_4?>" id="tab_info_precios">            
 
+            <br>
+            <?=n_row_12()?>
+                <?=div(get_estado_publicacion($status , $id_servicio) , ["class" => "text-right"])?>
+            <?=end_row()?>
+
             <?=get_rango_entrega(
                 $id_perfil, 
                 $tiempo_promedio_entrega, 
@@ -330,7 +335,7 @@
                     "class"=> "tiempo_entrega form-control"
                 ])?>
 
-            <?=heading_enid($titulo_compra_en_casa,4,[] , 1);?>
+            <?=heading_enid($titulo_compra_en_casa,4);?>
             <table  class='seccion_compras_casa'>
                 <tr>
                     <?=get_td($btn_confirm_entrega_casa )?>

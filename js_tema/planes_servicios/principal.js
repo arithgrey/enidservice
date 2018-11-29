@@ -36,7 +36,7 @@ function cancelar_registro(){
 /**/
 function carga_servicios() {
 	
-	display_elements(	[".texto_ventas_titulo" ,  ".contenedor_busqueda" ] , 1  );
+	display_elements(	[".texto_ventas_titulo" ,  ".contenedor_busqueda" , ".contenedor_busqueda_articulos" ] , 1  );
 	var 	url 		= 	"../q/index.php/api/servicio/empresa/format/json/";
 	var  	orden 		=  	get_parameter("#orden");	
 	var 	data_send 	= 	{ "q" : get_parameter(".q_emp") , "id_clasificacion" : get_option("id_clasificacion") , "page" : get_option("page"),"order": orden}	
@@ -132,6 +132,7 @@ function respuesta_informacion_servicio(data) {
 		$(".telefono_visible").click(actualiza_telefono_visible);
 		$(".venta_mayoreo").click(actualiza_ventas_mayoreo);
 		$(".detalle").click(carga_tallas);
+		$(".activar_publicacion").click(activa_publicacion);
 		$(".tiempo_entrega").change(set_tiempo_entrega);
 
 		$(".btn_url_ml").click(set_url_ml);
@@ -1180,4 +1181,14 @@ var set_url_ml = function(){
 		focus_input(".url_mercado_libre");
 	}
 	
+}
+var activa_publicacion = function(){
+	var status 		=  	get_parameter_enid( $(this),  "status"); 
+	var id_servicio =  	get_parameter_enid( $(this),  "id"); 
+	var data_send 	= 	{"status": status , "id_servicio" : id_servicio };
+	var url 		= 	"../q/index.php/api/servicio/status/format/json/";	
+	request_enid( "PUT",  data_send, url, function(){
+		carga_informacion_servicio(4);
+	} );
+
 }

@@ -103,30 +103,42 @@ if(!function_exists('invierte_date_time')){
   /**/
   function get_saldo_pendiente($monto, 
     $ciclos, 
-    $cubierto , 
-    $es_servicio , 
+    $cubierto ,     
     $envio_cliente,  
     $envio_sistema,
     $tipo_entrega){
 
-
-    $cubierto =  ($cubierto < 0 ) ? 0 : $cubierto;    
-    $total = ( $es_servicio == 0 && $monto > 0  && $ciclos > 0 ) ? ($monto * $ciclos ) - $cubierto : 0;     
-
-    $envio                  =   ($es_servicio == 0 ) ? $envio_cliente : 0;     
-    $saldo_pendiente_envio  =   ($total > 0) ? $total + $envio : 0;
-    $text_envio             =   "";
-    if ($tipo_entrega ==  2) {
-        $text_envio             =   ($es_servicio == 0) ? $envio_sistema["text_envio"]["cliente"]: "";   
-    }else{
-        $text_envio             =  "Cargos de entrega ".$envio_sistema."MXN";      
-    }
     
+
+    $cubierto       =   ($cubierto < 0 ) ? 0 : $cubierto;    
+    $total          =   ($monto > 0  && $ciclos > 0 ) ? ($monto * $ciclos ) - $cubierto : 0;      
+    $text_envio     =   "";
+    $cargo_envio    =   0;
+
+
+    if ($tipo_entrega ==  2 || $tipo_entrega ==  4) {
+
+        $text_envio         =  $envio_sistema["text_envio"]["cliente"];   
+        $cargo_envio        =  $envio_sistema["costo_envio_cliente"];
+ 
+
+    }else{
+
+      /*Lo que pertenece a puntos de encuentro*/      
+      $text_envio =  
+      ($envio_cliente > 0) ? 
+      "Cargos de entrega ".$envio_cliente."MXN":$envio_sistema["text_envio"]["cliente"];  
+
+
+      $cargo_envio =  ($envio_cliente > 0) ? $envio_cliente : 0; 
+            
+    }    
+
+    $total_mas_envio            =   $total + $cargo_envio;
     $response =  [
-        'saldo_pendiente'       =>  $total ,
-        'envio'                 =>  $envio,
-        'saldo_pendiente_envio' =>  $saldo_pendiente_envio, 
-        'text_envio'            =>  $text_envio
+        'saldo_pendiente'       =>  $total ,          
+        'text_envio'            =>  $text_envio,
+        'total_mas_envio'       =>  $total_mas_envio
     ];
     return $response;
       

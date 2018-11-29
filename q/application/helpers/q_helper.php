@@ -121,7 +121,7 @@ if(!function_exists('invierte_date_time')){
             "id"      =>    $flag
         ] );        
       }
-      return $new_flag_notificaciones;
+      return $new_flag;
     }
   
   function add_productos_publicados($num){

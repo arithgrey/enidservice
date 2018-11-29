@@ -1,11 +1,19 @@
 <?php
-
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");     
 define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 switch (ENVIRONMENT)
 {
 	case 'development':
 		error_reporting(-1);
 		ini_set('display_errors', 1);
+		// Motrar todos los errores de PHP
+		error_reporting(-1);		 
+		// Motrar todos los errores de PHP
+		error_reporting(E_ALL);		 
+		// Motrar todos los errores de PHP
+		ini_set('error_reporting', E_ALL);
+
 	break;
 
 	case 'testing':
@@ -133,4 +141,5 @@ switch (ENVIRONMENT)
 	}
 
 	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
-	ini_set('memory_limit', '32M'); require_once BASEPATH.'core/CodeIgniter.php'; require_once BASEPATH.'core/CodeIgniter.php';
+	ini_set('memory_limit', '32M'); 
+	require_once BASEPATH.'core/CodeIgniter.php'; 

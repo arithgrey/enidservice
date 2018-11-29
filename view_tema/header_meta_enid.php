@@ -1,12 +1,11 @@
-    <title>  
-        <?=$titulo?>        
-    </title>    
-    <?php 
+<?php 
     header("Cache-Control: no-cache, must-revalidate");
     header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
     $enlace_actual = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];        
-
-    ?>  
+?>  
+    <title>  
+        <?=$titulo?>        
+    </title>    
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <?=meta('keywords', $meta_keywords . " ");?>    
@@ -42,7 +41,6 @@
     <meta property="place:location:longitude" content="-102.552784" /> 
     <meta property="fb:admins" content="645179855527609" />
 
-    
     <!--Twitter Card data-->    
     <meta name="twitter:card" content="summary">
     <meta name="twitter:card" content="summary_large_image">

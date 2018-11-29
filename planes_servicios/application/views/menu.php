@@ -2,7 +2,7 @@
 <ul class="nav tabs contenedor_menu_enid_service_lateral">      
     <li class="<?=valida_active_tab('nuevo' , $action)?>">                       
         <?=anchor_enid(
-            icon('fa fa-cart-plus')." ANUNCIAR MÁS PRODUCTOS " ,
+            icon('fa fa-cart-plus')." VENDER PRODUCTOS " ,
             [
                 "href"      =>  "../planes_servicios/?action=nuevo" ,
                 "class"     =>  "agregar_servicio btn_agregar_servicios"

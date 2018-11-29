@@ -724,3 +724,12 @@ var transforma_mayusculas = function(x){
 	text_mayusculas =  text.toUpperCase();  	
 	x.value =  text_mayusculas;
 }
+var evita_basura  = function(){
+
+	var 	text = 	get_parameter(".input_busqueda_producto");
+	var 	text = text.replace(/["']/g, "");
+	var 	text = text.replace(/["?]/g, "");
+	var 	text = text.replace(/["=]/g, "");
+	var 	text = text.replace(/["|]/g, "");
+	set_parameter(".input_busqueda_producto" , text);	
+}

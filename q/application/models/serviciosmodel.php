@@ -751,9 +751,9 @@
             $this->get_resultados_posibles($param);                    
             $_num =  get_random();
             $this->create_productos_disponibles(0 , $_num , $param);                
-                    $data_complete["sql"] =  $this->get_option("sql");
-                    $query_get ="SELECT * FROM tmp_producto_$_num ";
-                    $result =  $this->db->query($query_get);
+                    $data_complete["sql"]   =   $this->get_option("sql");
+                    $query_get              =   "SELECT * FROM tmp_producto_$_num ";
+                    $result                 =  $this->db->query($query_get);
                     $servicios =  $result->result_array();
                 
                     $data_complete["servicio"] =  $servicios;
@@ -805,8 +805,7 @@
                                 deseado      
                                 ".$param_extra."                       
                             FROM 
-                            servicio".$query_where;
-                            debug($query_create);
+                            servicio".$query_where;                            
                             $this->set_option("sql" , $query_create );               
             $this->db->query($query_create);    
         }

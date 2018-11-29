@@ -167,26 +167,6 @@
       if($param["modalidad"] == 1){
           $campo_usuario ="id_usuario_venta";  
       }
-      /*
-      $id_usuario     =  $param["id_usuario"];
-      $campo_usuario  = "id_usuario";
-
-      if($param["modalidad"] == 1){
-          $campo_usuario ="id_usuario_venta";  
-      }      
-      $query_get ="SELECT   
-                        COUNT(0)num 
-                      FROM 
-                        proyecto_persona_forma_pago 
-                      WHERE 
-                        $campo_usuario = $id_usuario
-                      AND status =  9";      
-                      
-                      
-      $result =  $this->db->query($query_get);  
-      return $result->result_array()[0]["num"];      
-      */
-
       
       $params_where = [
             "status"        => 9 , 
@@ -270,7 +250,7 @@
                         estado_envio
                         FROM 
                           proyecto_persona_forma_pago
-                        ".$where;                        
+                        ".$where ." ORDER BY fecha_registro DESC";                        
       $response["data"]  = $this->db->query($query_get)->result_array();
       return $response;
   }
@@ -400,7 +380,7 @@
                     estado_envio
                   FROM 
                   proyecto_persona_forma_pago 
-                  ".$where;
+                  ".$where." ORDER BY fecha_registro DESC";
             
       $data_complete["data"]=  $this->db->query($query_get)->result_array(); 
       return $data_complete;      
