@@ -107,9 +107,9 @@ function oculta_delegacion_estado_pais(flag){
 }
 function carga_informacion_envio_complete(){
 	
-	var url =  "../q/index.php/api/usuario_direccion/direccion_envio_pedido/format/json/";		
-	var data_send =  {id_recibo : get_option("recibo")};				
-	var place_info =".place_info";		
+	var url 		=  	"../q/index.php/api/usuario_direccion/direccion_envio_pedido/format/json/";		
+	var data_send 	=  	{id_recibo : get_option("recibo")};				
+	var place_info 	=	".place_info";		
 	if(get_option("interno") ==  1){
 		place_info =".place_servicios_contratados";
 	}	

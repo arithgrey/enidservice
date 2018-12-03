@@ -4,7 +4,7 @@
 	  	<?=heading_enid("RASTREAR PAQUETE " .icon("fa fa-map-signs") ,  3)?>    
 	  	
 	    <div class="timeline">
-	    	<?=create_linea_tiempo($recibo)?>		   
+	    	<?=create_linea_tiempo($recibo , $domicilio)?>		   
 	    </div>
 	  </div>
 	</div>	

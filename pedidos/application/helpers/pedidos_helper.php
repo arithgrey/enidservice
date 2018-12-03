@@ -1,20 +1,95 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+	function agregar_nueva_direccion(){
 
-	function create_linea_tiempo($recibo){	
+		return li(guardar( "Agregar direccion " , 
+			["class"  => "agregar_direccion_pedido"]  ) , 
+			["class"=>"list-group-item"]);
 
-		$linea 		= 	"";
-		$flag 		=	0;
-		$id_estado  =  $recibo[0]["status"];
+	}
+	function create_lista_direcciones($lista){
+
+		$text  = "";		
+		$a 	   = 1;
+		foreach($lista as $row) {
+
+			$calle  				= $row["calle"];
+		    $entre_calles  			= $row["entre_calles"];
+		    $numero_exterior  		= $row["numero_exterior"];
+		    $numero_interior  		= $row["numero_interior"];
+		    $id_codigo_postal  		= $row["id_codigo_postal"];
+		    $telefono_receptor 		= $row["telefono_receptor"];
+		    $nombre_receptor  		= $row["nombre_receptor"];
+		    $cp  					= $row["cp"];
+		    $asentamiento  			= $row["asentamiento"];
+		    $municipio  			= $row["municipio"];
+		    $ciudad  				= $row["ciudad"];
+		    $estado  				= $row["estado"];
+		    $idtipo_asentamiento  	= $row["idtipo_asentamiento"];
+		    $id_estado_republica  	= $row["id_estado_republica"];
+		    $pais  					= $row["pais"]; 
+		    $id_pais  				= $row["id_pais"]; 
+
+		    $text .=  "<li class='list-group-item'>";
+
+		    $direccion =  $calle ." "." NÚMERO ".$numero_exterior." NÚMERO INTERIOR ".$numero_interior ." COLONIA ".$asentamiento ." DELEGACIÓN/MUNICIPIO ".$municipio. " ESTADO ".$estado." CÓDIGO POSTAL ".$cp;
+
+		    $text .= div("#".$a ,  ["class"=>"h6 text-muted"]);
+		    $text .= div( strtoupper($direccion)  ,  ["class"=>"h5"]);
+		    $text .=  "</li>";
+		    $a ++;
+		}
+		
+		return $text;
+	}
+	function create_descripcion_direccion_entrega($data_direccion){
+
+		$text = "";
+		if ($data_direccion["tipo_entrega"] ==  2 && count($data_direccion["domicilio"]) > 0  ) {
+			
+			$domicilio 	=  $data_direccion["domicilio"][0];
+			$calle  				= $domicilio["calle"];
+		    $entre_calles  			= $domicilio["entre_calles"];
+		    $numero_exterior  		= $domicilio["numero_exterior"];
+		    $numero_interior  		= $domicilio["numero_interior"];
+		    $id_codigo_postal  		= $domicilio["id_codigo_postal"];
+		    $telefono_receptor 		= $domicilio["telefono_receptor"];
+		    $nombre_receptor  		= $domicilio["nombre_receptor"];
+		    $cp  					= $domicilio["cp"];
+		    $asentamiento  			= $domicilio["asentamiento"];
+		    $municipio  			= $domicilio["municipio"];
+		    $ciudad  				= $domicilio["ciudad"];
+		    $estado  				= $domicilio["estado"];
+		    $idtipo_asentamiento  	= $domicilio["idtipo_asentamiento"];
+		    $id_estado_republica  	= $domicilio["id_estado_republica"];
+		    $pais  					= $domicilio["pais"]; 
+		    $id_pais  				= $domicilio["id_pais"]; 
+
+
+		    $text 
+		    =  
+		    $calle ." "." NÚMERO ".$numero_exterior." NÚMERO INTERIOR ".$numero_interior ." COLONIA ".$asentamiento ." DELEGACIÓN/MUNICIPIO ".$municipio. " ESTADO ".$estado." CÓDIGO POSTAL ".$cp;
+
+			
+		}
+		return p( strtoupper( $text ) , ["class"=>"card-text"]);
+	}
+
+	function create_linea_tiempo($recibo , $domicilio){	
+		
+		$linea 			= 	"";
+		$flag 			=	0;
+		$id_estado  	=   $recibo[0]["status"];
+		$tipo_entrega 	= 	$recibo[0]["tipo_entrega"];
 		for ($i=5; $i >0 ; $i--) { 
 
 			$status 	=  	get_texto_status($i , $recibo);
+			$activo 	=  1;
 
-			$activo =  1;
-			if ($flag == 0) {
-							
+			if ($flag == 0) {						
 				$activo 	=  0;
+				
 				if ($id_estado ==  $status["estado"]) {
 					$activo = 1;	
 					$flag ++;
@@ -25,15 +100,40 @@ if(!function_exists('invierte_date_time')){
 
 			
 			$class 		=  ($activo ==  1) ? "timeline__item__date_active": "timeline__item__date";
-			$seccion 	=  
-					div(icon("fa fa-check-circle-o") , 
-						["class"=>$class]);        
+			$seccion 	=  div(icon("fa fa-check-circle-o") , ["class"=>$class]); 
+
 			$seccion_2 	= 	
 					div(p($status["text"] , 
 			        	[
 			        		"class"	=>	"timeline__item__content__description"
 			        	]), 
 			        ["class"	=>"timeline__item__content"]);
+
+
+			
+
+
+			
+			if ($i == 2 ) {
+				
+
+				$texto_entrega 	 =  "DOMICILIO DE ENTREGA CONFIRMADO ".icon("fa fa-check");
+				if (tiene_domilio($domicilio , 1) ==  0) {
+					$texto_entrega = ($tipo_entrega ==  1 ) ? 
+					"REGISTRA TU DIRECCIÓN DE ENTREGA":"INDICA TU PUNTO DE DE ENTREGA";	
+				}
+				
+
+				$url 		= 
+				"../pedidos/?seguimiento=".$recibo[0]["id_proyecto_persona_forma_pago"]."&domicilio=1";
+
+				$seccion_2 	= 	
+					div(p(anchor_enid($texto_entrega , ["href" =>  $url]), 
+			        	[
+			        		"class"	=>	"timeline__item__content__description"
+			        	]), 
+			        ["class"	=>"timeline__item__content"]);
+			}
 
 			$linea .=  div($seccion.$seccion_2 , ["class"=>"timeline__item"]);
 		
@@ -264,8 +364,8 @@ if(!function_exists('invierte_date_time')){
 			}
 		}
 	
-		$encabezado 	= 	div(strong("TIPO DE ENTREGA"),	["class" =>"encabezado_tipo_entrega"] ,1);
-	  	$tipo 			=  	div(strtoupper($tipo) ,["class" =>"encabezado_tipo_entrega"] , 1);
+		$encabezado = 	div(strong("TIPO DE ENTREGA"),	["class" =>"encabezado_tipo_entrega"] ,1);
+	  	$tipo 		=  	div(strtoupper($tipo) ,["class" =>"encabezado_tipo_entrega"] , 1);
 	  	return 			div($encabezado.$tipo , ["class" => "contenedor_tipo_entrega"] ,1).hr();
 
 	}
@@ -324,11 +424,29 @@ if(!function_exists('invierte_date_time')){
 	  	return div($encabezado.$text_usuario , ["class" => "contenedor_cliente"] ,1).hr();
         
 	}
+	function tiene_domilio($domicilio , $numero = 0 ){
+
+		$final_text 	= "";
+		$final_numeric 	= 0;
+		if ( array_key_exists("domicilio", $domicilio) 
+			&& 
+			is_array($domicilio["domicilio"]) 
+			&& 
+			count($domicilio["domicilio"])	> 0 ){
+
+			$final_numeric ++;
+
+		}else{				
+			$final_text = div("SIN DOMICIO REGISTRADO" , ["class" => "sin_domicilio padding_10 white"] , 1 );
+		}	
+		
+		$response = ( $numero ==  0) ? $final_text : $final_numeric; 
+		return $response;
+	}
 	function create_seccion_domicilio($domicilio)
 	{
 	    
-		if (
-			array_key_exists("domicilio", $domicilio) 
+		if (array_key_exists("domicilio", $domicilio) 
 			&& 
 			is_array($domicilio["domicilio"])
 			&& 
@@ -345,14 +463,9 @@ if(!function_exists('invierte_date_time')){
 			    return create_punto_entrega($data_domicilio);
 			}    	
 		}else{
-			/*solicita dirección de envio*/
-			
-
-		}
-		
-	    
+			/*solicita dirección de envio*/			
+		}		
 	}
-
 	function create_seccion_recordatorios($recibo){
 		
 		$text = ($recibo[0]["status"] == 6) ? 

@@ -22,12 +22,12 @@ function response_carga_info_resumen_pago_pendiente(data){
 	
 	$(".resumen_pagos_pendientes").tab("show");
 	llenaelementoHTML(".place_resumen_servicio" , data);		
-	$(".cancelar_compra").click(confirmar_cancelacion_compra);		
+	//$(".cancelar_compra").click(confirmar_cancelacion_compra);		
 	$(".btn_direccion_envio").click(carga_informacion_envio);
 }
-/**/
+/*
 function confirmar_cancelacion_compra(){
-		
+
 	set_option("modalidad_ventas" 	, get_attr(this, "modalidad"));
 	set_option("id_recibo" 			, get_attr(this, "id"));	
 	if( get_option("id_recibo")>0) {
@@ -36,6 +36,7 @@ function confirmar_cancelacion_compra(){
 		request_enid( "GET",  data_send, url, resposponse_confirma_cancelacion);
 	}
 }
+*/
 /**/
 function resposponse_confirma_cancelacion(data){
 	llenaelementoHTML(".place_resumen_servicio" , data);				

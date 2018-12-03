@@ -19335,3 +19335,3219 @@ DEBUG - TYPE array 2018-11-29 02:08:36 --> Array
     [page] => 0
 )
 
+DEBUG - TYPE array 2018-12-01 11:14:43 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 99
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-01 11:14:54 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 14:36:08 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 99
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-02 14:36:55 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 14:37:32 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 99
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 14:44:26 --> 8888
+DEBUG - TYPE string 2018-12-02 14:44:26 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '606' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 14:44:26 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 14:45:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 14:45:07 --> 8888
+DEBUG - TYPE string 2018-12-02 14:45:07 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '606' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 14:45:07 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 14:55:54 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-02 15:03:26 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 15:03:33 --> 8888
+DEBUG - TYPE string 2018-12-02 15:03:33 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '606' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 15:03:33 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 15:03:56 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 15:04:01 --> 8888
+DEBUG - TYPE string 2018-12-02 15:04:01 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '606' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 15:04:01 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-02 15:07:45 --> 8888
+DEBUG - TYPE string 2018-12-02 15:07:45 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '606' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 15:07:45 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 15:08:08 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 15:09:16 --> 8888
+DEBUG - TYPE string 2018-12-02 15:09:16 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '606' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 15:09:16 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 15:12:05 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-02 15:17:04 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 13
+                    [accesos_a_intento_compra] => 4
+                    [accesos_contacto] => 0
+                    [accesos_area_cliente] => 0
+                    [usuarios] => 1
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 4
+                                    [compras_efectivas] => 0
+                                    [solicitudes] => 3
+                                    [envios] => 0
+                                    [cancelaciones] => 1
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 1
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-02 15:17:15 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 13
+                    [accesos_a_intento_compra] => 4
+                    [accesos_contacto] => 0
+                    [accesos_area_cliente] => 0
+                    [usuarios] => 1
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 4
+                                    [compras_efectivas] => 0
+                                    [solicitudes] => 3
+                                    [envios] => 0
+                                    [cancelaciones] => 1
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 1
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-02 15:18:24 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 15:18:37 --> 8888
+DEBUG - TYPE string 2018-12-02 15:18:37 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 15:18:37 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-02 15:18:50 --> 8888
+DEBUG - TYPE string 2018-12-02 15:18:50 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 15:18:50 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-02 15:19:04 --> 8888
+DEBUG - TYPE string 2018-12-02 15:19:04 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 15:19:05 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-02 15:19:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-02 15:19:34 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 15:20:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 15:45:55 --> 8888
+DEBUG - TYPE string 2018-12-02 15:45:55 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 15:45:55 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-02 15:52:14 --> Ennnnnnn
+DEBUG - TYPE string 2018-12-02 15:52:55 --> Ennnnnnn
+DEBUG - TYPE array 2018-12-02 16:21:05 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-02 16:21:12 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 13
+            [valoracion] => 0
+            [deseado] => 16
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-02 16:21:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-02 16:45:11 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 11
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 16:45:18 --> 8888
+DEBUG - TYPE string 2018-12-02 16:45:18 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '608' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 16:45:18 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 16:47:27 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-02 16:47:35 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 18:34:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-02 18:35:08 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-02 19:04:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 11
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 19:04:16 --> 8888
+DEBUG - TYPE string 2018-12-02 19:04:16 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '610' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 19:04:16 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-02 19:09:09 --> 610
+DEBUG - TYPE array 2018-12-02 19:09:22 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 19:09:27 --> 8888
+DEBUG - TYPE string 2018-12-02 19:09:27 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '610' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 19:09:27 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-02 19:25:06 --> !99999
+DEBUG - TYPE NULL 2018-12-02 19:26:08 --> 
+DEBUG - TYPE boolean 2018-12-02 19:27:41 --> 
+DEBUG - TYPE array 2018-12-02 19:27:51 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-02 19:28:02 --> 8888
+DEBUG - TYPE string 2018-12-02 19:28:02 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '610' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-02 19:28:02 --> Array
+(
+)
+
+DEBUG - TYPE boolean 2018-12-02 19:28:45 --> 
+DEBUG - TYPE array 2018-12-02 19:29:26 --> Array
+(
+    [format] => json
+    [.json] => 
+)
+
+DEBUG - TYPE boolean 2018-12-02 19:30:22 --> 
+DEBUG - TYPE array 2018-12-02 19:30:22 --> Array
+(
+    [format] => json
+    [.json] => 
+)
+
+DEBUG - TYPE boolean 2018-12-02 19:30:23 --> 
+DEBUG - TYPE boolean 2018-12-02 19:30:32 --> 
+DEBUG - TYPE boolean 2018-12-02 19:30:32 --> 
+DEBUG - TYPE boolean 2018-12-02 19:31:46 --> 
+DEBUG - TYPE boolean 2018-12-02 19:31:47 --> 
+DEBUG - TYPE string 2018-12-02 19:31:52 --> 610
+DEBUG - TYPE string 2018-12-02 19:31:54 --> 610
+DEBUG - TYPE string 2018-12-02 19:31:54 --> 610
+DEBUG - TYPE string 2018-12-02 19:31:54 --> 610
+DEBUG - TYPE string 2018-12-02 19:32:15 --> 610
+DEBUG - TYPE string 2018-12-02 19:32:25 --> 610
+DEBUG - TYPE array 2018-12-03 06:30:44 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 06:30:56 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 13
+            [valoracion] => 0
+            [deseado] => 16
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-03 06:31:25 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 06:36:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 06:36:28 --> 8888
+DEBUG - TYPE string 2018-12-03 06:36:28 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 06:36:28 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 06:44:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 11
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 06:44:22 --> 8888
+DEBUG - TYPE string 2018-12-03 06:44:22 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 06:44:22 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-03 06:46:58 --> 8888
+DEBUG - TYPE string 2018-12-03 06:46:58 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 06:46:58 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 06:48:30 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 06:48:36 --> 8888
+DEBUG - TYPE string 2018-12-03 06:48:36 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 06:48:36 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-03 06:48:59 --> 8888
+DEBUG - TYPE string 2018-12-03 06:48:59 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 06:48:59 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-03 06:51:31 --> 8888
+DEBUG - TYPE string 2018-12-03 06:51:31 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 06:51:31 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 06:55:32 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 06:55:47 --> 8888
+DEBUG - TYPE string 2018-12-03 06:55:47 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 06:55:48 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-03 06:57:15 --> 8888
+DEBUG - TYPE string 2018-12-03 06:57:15 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 06:57:15 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 07:01:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 07:01:53 --> 8888
+DEBUG - TYPE string 2018-12-03 07:01:53 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 07:01:53 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 07:04:03 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 07:04:09 --> 8888
+DEBUG - TYPE string 2018-12-03 07:04:09 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 07:04:09 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 07:05:52 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 07:05:56 --> 8888
+DEBUG - TYPE string 2018-12-03 07:05:56 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 07:05:56 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-03 07:08:56 --> 8888
+DEBUG - TYPE string 2018-12-03 07:08:56 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 07:08:56 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 07:09:12 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 07:14:40 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 11
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 07:15:03 --> 8888
+DEBUG - TYPE string 2018-12-03 07:15:03 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 07:15:03 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 07:21:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 11
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 07:21:27 --> 8888
+DEBUG - TYPE string 2018-12-03 07:21:27 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 07:21:27 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 07:34:32 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 07:44:04 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 07:44:14 --> 8888
+DEBUG - TYPE string 2018-12-03 07:44:14 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 07:44:14 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 07:52:02 --> Array
+(
+    [recibo] => 240
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 07:52:29 --> Array
+(
+    [recibo] => 240
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE NULL 2018-12-03 07:52:29 --> 
+DEBUG - TYPE array 2018-12-03 07:54:56 --> Array
+(
+    [recibo] => 240
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-03 07:56:39 --> 611
+DEBUG - TYPE array 2018-12-03 07:56:39 --> Array
+(
+    [recibo] => 240
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-03 07:56:42 --> 611
+DEBUG - TYPE array 2018-12-03 07:56:42 --> Array
+(
+    [recibo] => 240
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 07:57:32 --> Array
+(
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-03 07:57:57 --> ---611
+DEBUG - TYPE array 2018-12-03 07:58:53 --> Array
+(
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-03 07:59:03 --> ..
+DEBUG - TYPE array 2018-12-03 07:59:03 --> Array
+(
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-03 08:00:32 --> ..
+DEBUG - TYPE array 2018-12-03 08:00:32 --> Array
+(
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-03 08:00:43 --> ..
+DEBUG - TYPE array 2018-12-03 08:00:43 --> Array
+(
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE boolean 2018-12-03 08:01:24 --> 
+DEBUG - TYPE boolean 2018-12-03 08:01:29 --> 
+DEBUG - TYPE array 2018-12-03 08:02:08 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE boolean 2018-12-03 08:02:08 --> 
+DEBUG - TYPE array 2018-12-03 08:02:56 --> Array
+(
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:02:56 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:03:00 --> Array
+(
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:03:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:03:38 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 240
+    [id_recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:04:32 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 240
+    [id_recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:06:05 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 240
+    [id_recibo] => 240
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:06:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 08:07:03 --> 8888
+DEBUG - TYPE string 2018-12-03 08:07:03 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 08:07:03 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 08:07:08 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+    [id_usuario_venta] => 1
+    [id_servicio] => 256
+    [id_usuario] => 611
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:08:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:08:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:08:24 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:08:30 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:11:12 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:11:36 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:11:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:12:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 08:12:47 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:12:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:12:52 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:12:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:13:23 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 08:35:38 --> 8888
+DEBUG - TYPE string 2018-12-03 08:35:38 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 08:35:38 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 08:36:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:36:10 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:36:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:36:16 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:36:42 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 08:37:47 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:39:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:41:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:42:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 08:42:23 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:42:26 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:42:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 241
+)
+
+DEBUG - TYPE array 2018-12-03 08:42:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 241
+    [id_recibo] => 241
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:47:40 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 08:47:45 --> 8888
+DEBUG - TYPE string 2018-12-03 08:47:45 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '611' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 08:47:45 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 08:47:51 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 242
+    [id_usuario_venta] => 1
+    [id_servicio] => 256
+    [id_usuario] => 611
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:50:36 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 242
+)
+
+DEBUG - TYPE array 2018-12-03 08:50:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 242
+)
+
+DEBUG - TYPE array 2018-12-03 08:50:41 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 242
+)
+
+DEBUG - TYPE array 2018-12-03 08:50:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 242
+    [id_recibo] => 242
+    [id_usuario] => 611
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:51:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 242
+)
+
+DEBUG - TYPE array 2018-12-03 08:51:04 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 242
+)
+
+DEBUG - TYPE array 2018-12-03 08:51:08 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 242
+)
+
+DEBUG - TYPE array 2018-12-03 08:51:28 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 08:51:35 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 13
+            [valoracion] => 0
+            [deseado] => 16
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-03 08:52:02 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+    [id_usuario_venta] => 1
+    [id_servicio] => 268
+    [id_usuario] => 612
+    [telefono] => 67767667
+    [nombre] => jhfajjadsfhhj
+    [email] => hjhjashajkjw@jd.lo
+    [es_usuario_nuevo] => 1
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:52:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 08:52:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:52:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:52:24 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:52:28 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 243
+    [id_recibo] => 243
+    [id_usuario] => 612
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:52:53 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:52:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:53:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:53:53 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:54:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 243
+    [id_recibo] => 243
+    [id_usuario] => 612
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:54:16 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:54:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:54:22 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 243
+)
+
+DEBUG - TYPE array 2018-12-03 08:54:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 11
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 08:54:40 --> 8888
+DEBUG - TYPE string 2018-12-03 08:54:40 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '612' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 08:54:40 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 08:54:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 244
+    [id_usuario_venta] => 1
+    [id_servicio] => 285
+    [id_usuario] => 612
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:54:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 244
+)
+
+DEBUG - TYPE array 2018-12-03 08:55:01 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 244
+)
+
+DEBUG - TYPE array 2018-12-03 08:55:04 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 244
+)
+
+DEBUG - TYPE array 2018-12-03 08:55:15 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 244
+    [id_recibo] => 244
+    [id_usuario] => 612
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:55:38 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 244
+)
+
+DEBUG - TYPE array 2018-12-03 08:55:42 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 244
+)
+
+DEBUG - TYPE array 2018-12-03 08:55:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 244
+)
+
+DEBUG - TYPE array 2018-12-03 08:56:07 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 08:56:22 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 13
+            [valoracion] => 0
+            [deseado] => 16
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-03 08:56:35 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 245
+    [id_usuario_venta] => 1
+    [id_servicio] => 249
+    [id_usuario] => 613
+    [telefono] => 6776766776
+    [nombre] => OIAOSIDOIASDOIIO
+    [email] => ioisoioasio@kjs.lo
+    [es_usuario_nuevo] => 1
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:56:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 245
+)
+
+DEBUG - TYPE array 2018-12-03 08:56:51 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 245
+)
+
+DEBUG - TYPE array 2018-12-03 08:57:02 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 11
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 08:57:08 --> 8888
+DEBUG - TYPE string 2018-12-03 08:57:08 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '613' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 08:57:08 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 08:57:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 246
+    [id_usuario_venta] => 1
+    [id_servicio] => 279
+    [id_usuario] => 613
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:57:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 246
+)
+
+DEBUG - TYPE array 2018-12-03 08:57:22 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 246
+)
+
+DEBUG - TYPE array 2018-12-03 08:57:25 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 246
+)
+
+DEBUG - TYPE array 2018-12-03 08:57:39 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 246
+    [id_recibo] => 246
+    [id_usuario] => 613
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:57:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 246
+)
+
+DEBUG - TYPE array 2018-12-03 08:57:52 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 246
+)
+
+DEBUG - TYPE array 2018-12-03 08:57:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 246
+)
+
+DEBUG - TYPE array 2018-12-03 08:58:56 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 246
+)
+
+DEBUG - TYPE array 2018-12-03 08:59:02 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 11
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 08:59:09 --> 8888
+DEBUG - TYPE string 2018-12-03 08:59:09 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '613' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 08:59:09 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 08:59:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+    [id_usuario_venta] => 1
+    [id_servicio] => 243
+    [id_usuario] => 613
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 08:59:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 08:59:29 --> 8888
+DEBUG - TYPE string 2018-12-03 08:59:29 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '613' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 08:59:29 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 08:59:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 08:59:36 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 08:59:39 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 08:59:43 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 247
+    [id_recibo] => 247
+    [id_usuario] => 613
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:02 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:04 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:10 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 247
+    [id_recibo] => 247
+    [id_usuario] => 613
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:22 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 247
+    [id_recibo] => 247
+    [id_usuario] => 613
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:49 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:54 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:00:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 247
+    [id_recibo] => 247
+    [id_usuario] => 613
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:01:10 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:01:16 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:01:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:01:24 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 247
+    [id_recibo] => 247
+    [id_usuario] => 613
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:01:27 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 247
+    [id_recibo] => 247
+    [id_usuario] => 613
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:01:44 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 247
+)
+
+DEBUG - TYPE array 2018-12-03 09:02:08 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 09:02:15 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 09:02:31 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 248
+    [id_usuario_venta] => 1
+    [id_servicio] => 256
+    [id_usuario] => 614
+    [telefono] => 6667767676
+    [nombre] => AJSHJSADHJH
+    [email] => sjdhjas@jks.lo
+    [es_usuario_nuevo] => 1
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:02:42 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 09:02:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 248
+)
+
+DEBUG - TYPE array 2018-12-03 09:02:51 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 248
+)
+
+DEBUG - TYPE array 2018-12-03 09:02:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 248
+)
+
+DEBUG - TYPE array 2018-12-03 09:02:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 248
+    [id_recibo] => 248
+    [id_usuario] => 614
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:03:11 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 248
+)
+
+DEBUG - TYPE array 2018-12-03 09:03:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 248
+)
+
+DEBUG - TYPE array 2018-12-03 09:03:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 248
+)
+
+DEBUG - TYPE array 2018-12-03 09:03:26 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 248
+)
+
+DEBUG - TYPE array 2018-12-03 09:03:29 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 248
+    [id_recibo] => 248
+    [id_usuario] => 614
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:04:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 248
+    [id_recibo] => 248
+    [id_usuario] => 614
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 09:04:29 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 248
+)
+

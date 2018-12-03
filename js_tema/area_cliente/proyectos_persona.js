@@ -34,7 +34,6 @@ function carga_compras_usuario(){
 /**/
 function response_carga_compras_usuario(data){
 	
-	
 	var place 	= get_lugar_por_stus_compra(); 	
 	llenaelementoHTML(place  , data);								
 	$(".solicitar_desarrollo").click(function(e){
@@ -48,15 +47,12 @@ function response_carga_compras_usuario(data){
 	$(".btn_direccion_envio").click(carga_informacion_envio);
 	$(".ver_mas_compras_o_ventas").click(carga_compras_o_ventas_concluidas);
 	carga_num_preguntas();
-	
-
 }
 /**/
 function carga_informacion_envio(e){
 	
 	var id_recibo =  get_parameter_enid($(this) , "id");	
-	set_option("recibo" , id_recibo);
-	debugger;
+	set_option("recibo" , id_recibo);	
 	carga_informacion_envio_complete();
 }
 function carga_compras_o_ventas_concluidas(){	

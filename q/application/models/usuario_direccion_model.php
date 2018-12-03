@@ -3,8 +3,7 @@
     function __construct(){      
         parent::__construct();        
         $this->load->database();
-    }
-    
+    }    
     function update($data =[] , $params_where =[] , $limit =1 ){    
       foreach ($params_where as $key => $value) {
               $this->db->where($key , $value);
@@ -43,29 +42,6 @@
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }            
     function activos_con_direcciones($param){
-
-
-      /*
-        $fecha_inicio   = ;  
-        $fecha_termino  = ;
-
-        $query_get ="SELECT  COUNT(0)num 
-                    FROM 
-                        usuario_direccion 
-                    WHERE 
-                        status =1
-                    AND
-                        DATE(fecha_registro) 
-                    BETWEEN 
-                        '".$fecha_inicio."' 
-                    AND  
-                        '".$fecha_termino."'  ";
-                        
-
-        $result = $this->db->query($query_get);                
-        return $result->result_array()[0]["num"];
-        */
-
         $q =[
           "status"                => 1 ,
           'DATE(fecha_registro) ' =>  

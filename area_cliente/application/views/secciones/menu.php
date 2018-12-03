@@ -30,7 +30,7 @@
         ["id"=>"mis_compras" ,"href"=>"#tab_mis_pagos" ,"data-toggle"=>"tab","class"=>'black strong btn_cobranza mis_compras']);
 
     $a_lista_deseo = anchor_enid(icon("fa fa-gift")."LISTA DE DESEOS",
-        ["href"=>"../lista_deseos/?q=preferencias" ,"class"=>'black strong']);
+        ["href"=>"../lista_deseos/" ,"class"=>'black strong']);
 
     /*
     $icon = icon('fa fa-comments');

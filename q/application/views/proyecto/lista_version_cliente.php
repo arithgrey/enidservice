@@ -52,23 +52,7 @@ if($ordenes!=0){
             </div>    
             <div class="col-lg-9">                      
                 <div class="contenedor_articulo_text">                        
-                    <?=n_row_12()?>                    
-                        <?=icon("fa fa-shopping-bag")?>
-                        <?=span($resumen_pedido , 
-                            ["class"=>'texto_compra'])?>                
-                    <?=end_row()?>
-                    <?=n_row_12()?>      
-                        <?=get_text_direccion_envio(
-                            $id_recibo , 
-                            $modalidad , 
-                            $direccion_registrada , 
-                            $estado_envio)?>                        
-
-                        <?=get_texto_saldo_pendiente($monto_a_liquidar,$monto_a_pagar,$modalidad)?>
-                            
-                        
-                        <?=get_estados_ventas($status_enid_service , $estado , $modalidad)?>
-                                                
+                    <?=n_row_12()?>                                                                          
                         <?=div(
                             carga_estado_compra(
                                 $monto_a_liquidar,

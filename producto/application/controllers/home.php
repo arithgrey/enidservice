@@ -23,7 +23,6 @@ class Home extends CI_Controller{
     }
     function load_pre(){
 
-        
         $data        = $this->principal->val_session("");  
         $data["clasificaciones_departamentos"] = "";        
         if($this->agent->is_mobile() == FALSE){                    
@@ -44,17 +43,19 @@ class Home extends CI_Controller{
         $data["is_servicio"]        =  $this->input->post("is_servicio");
         $data["q2"]                 =  $this->input->post("q2");
         $data["num_ciclos"]         =  $this->input->post("num_ciclos");
-        
+        $data["orden_pedido"]       =  1;
         $this->principal->show_data_page($data, 'pre'); 
+
     }
     /**/    
     function index(){                
-        $param    = $this->input->get();
+        $param              = $this->input->get();
         evita_basura($this->input->get("producto"));
+        $request_method     =  $_SERVER['REQUEST_METHOD'];
         if (ctype_digit(trim($this->input->get("producto")))) {
 
             if (array_key_exists("pre", $param)) {
-                if ($_SERVER['REQUEST_METHOD'] ==  "POST") {
+                if ($request_method ==  "POST") {
                     
                     $this->load_pre($param);            
 
@@ -69,8 +70,38 @@ class Home extends CI_Controller{
             }
             
         }else{
-            redirect("https://www.google.com/" , "refresh" ,302);    
+            if ($request_method ==  "POST" 
+                && 
+                ctype_digit(trim($this->input->get("recibo")))){
+                $this->view_recibo_registrado();
+
+            }else{
+                redirect("https://www.google.com/" , "refresh" ,302);        
+            }
+            
+
         }     
+    }
+    function view_recibo_registrado(){
+
+        $data        = $this->principal->val_session("");  
+        $data["clasificaciones_departamentos"] = "";        
+        if($this->agent->is_mobile() == FALSE){                    
+            $data["clasificaciones_departamentos"] = 
+            $this->principal->get_departamentos("nosotros");
+        }
+        $data["meta_keywords"]      =   "";
+        $data["desc_web"]           =   "";
+        $data["url_img_post"]       =   "";            
+        $data["css"]                =   ["pre.css"];
+        $data["js"]                 =   ["../js_tema/servicio/pre.js"];
+        $data["id_servicio"]        =   $this->input->get("servicio");
+        $data["recibo"]             =   $this->input->get("recibo");
+
+        $data["proceso_compra"]     =   1;       
+        $data["orden_pedido"]       =   0; 
+        $this->principal->show_data_page($data, 'pre'); 
+
     }
     /**/
     private function load_servicio($param){

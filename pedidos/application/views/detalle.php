@@ -114,7 +114,10 @@
 			"-"
 		),
 		["class" => "form_edicion_tipo_entrega"]
+
 	)?>
+		<?=tiene_domilio($domicilio)?>
+
 
 		<br>
 		<?=create_seccion_usuario($usuario)?>

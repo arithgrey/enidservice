@@ -297,22 +297,22 @@ if(!function_exists('invierte_date_time')){
                 break;
               
               default:
-                $texto =icon('fa fa-bus btn_direccion_envio' , ["id"=> $id_recibo ])."DIRECCIÓN DE ENVÍO";    
+                $texto =icon('fa fa-bus' , ["id"=> $id_recibo ])."DIRECCIÓN DE ENVÍO";    
                 break;
             }
             
         }else{
-            $texto =icon('fa fa-bus btn_direccion_envio' , ["id"=>$id_recibo ]). 
+            $texto =icon('fa fa-bus ' , ["id"=>$id_recibo ]). 
             "¿DÓNDE ENVIAMOS TU PEDIDO?";
         }
       }else{
         
         if($direccion_registrada ==  1){  
-            $texto =icon('fa fa-bus btn_direccion_envio', ["id" => $id_recibo]) ."VER DIRECCIÓN DE ENVÍO";
+            $texto =icon('fa fa-bus ', ["id" => $id_recibo]) ."VER DIRECCIÓN DE ENVÍO";
         }
       }
 
-      return $texto;
+      return div($texto ,  ["class" => "btn_direccion_envio" , "id" => $id_recibo]);
     }
   
   function get_estados_ventas($data , $indice ,$modalidad_ventas){
@@ -337,41 +337,17 @@ if(!function_exists('invierte_date_time')){
         $extra_tab_pagos  = 'href="#tab_renovar_servicio" data-toggle="tab" ';
         $estilos          = "";
         $text             = "";        
-        if($vendedor ==  1) {
+        
+        $text_icono  =  ($vendedor ==  1 ) ? 
+        "DETALLES DE LA COMPRA " : icon('fa fa-credit-card-alt'). "DETALLES DE TU COMPRA ";
 
-            $text = div("DETALLES DE LA COMPRA" , 
+        $text = div( $text_icono , 
               [
                 "class"       => 'resumen_pagos_pendientes',
                 "id"          => $id_recibo,
                 "href"        => "#tab_renovar_servicio",
                 "data-toggle" => "tab"
-              ]);
-
-        }else{          
-            if($monto_por_liquidar <= 0){      
-              
-              $text = div(icon('fa fa-check-circle'). "COMPRA REALIZADA" , 
-              [
-                "class"       => 'resumen_pagos_pendientes',
-                "id"          => $id_recibo,
-                "href"        => "#tab_renovar_servicio",
-                "data-toggle" => "tab"
-              ]);
-
-            }else{  
-
-
-              $estilos = "";
-              $text = div(icon('fa fa-credit-card-alt'). "LIQUIDAR AHORA!" , 
-              [
-                "class"       => 'resumen_pagos_pendientes',
-                "id"          => $id_recibo,
-                "href"        => "#tab_renovar_servicio",
-                "data-toggle" => "tab"
-              ]);
-                            
-            }  
-        }
+        ]);
         return div($text , ["class"=>'btn_comprar']);
   }
     

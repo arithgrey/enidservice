@@ -26,22 +26,42 @@ class Home extends CI_Controller{
         $param =  $this->input->post();
         if( array_key_exists("num_ciclos", $param)
             && ctype_digit($param["num_ciclos"])
-            && $param["num_ciclos"] >0&&array_key_exists("ciclo_facturacion", $param)
+            && $param["num_ciclos"] >0 && array_key_exists("ciclo_facturacion", $param)
             && $param["num_ciclos"] >0 && $param["num_ciclos"] < 10
             && ctype_digit($param["plan"])&& $param["plan"] >0  ){
                 $this->crea_orden_compra($param);            
         }else{
-            redirect("../../");
-        }
-    
-    
+            if (get_param_def($param , "recibo" , 0 , 1 ) > 0 ) {
+                    
+                $this->add_domicilio_entrega($param);    
+            }else{
+                redirect("../../");    
+            }
+            
+        }    
+    }
+    private function add_domicilio_entrega($param){
+
+        $data                   = $this->principal->val_session("");         
+        $data["meta_keywords"]  = '';
+        $data["desc_web"]       = "Registra tu cuenta  y recibe  asistencia al momento.";
+        $data["clasificaciones_departamentos"]  = "";        
+        $this->principal->crea_historico( 2892 , 0, 0 );                         
+        
+        $data["js"]     =  [
+            "../js_tema/domicilio/direccion_pedido_registrado.js" ,
+            "../js_tema/js/direccion.js"];
+        $data["css"]            =   ["procesar_pago.css"]; 
+        $param["id_recibo"]     =   $this->input->post("recibo");                
+        $param["id_usuario"]    =   $this->principal->get_session("idusuario"); 
+        $data["carga_ficha_direccion_envio"] = $this->carga_ficha_direccion_envio($param);
+
+        $this->principal->show_data_page($data, 'secciones_2/domicilio_entrega');                          
     }
     /**/
     private function crea_orden_compra($param){
         
-        $data = 
-        $this->principal->val_session("Registra tu cuenta en nuestro sistema y recibe asistencia al momento.");         
-
+        $data                   = $this->principal->val_session("");         
         $data["meta_keywords"]  = '';
         $data["desc_web"]       = "Registra tu cuenta  y recibe  asistencia al momento.";
         $data["url_img_post"]   = create_url_preview("recomendacion.jpg");
@@ -83,5 +103,12 @@ class Home extends CI_Controller{
         $q["id_servicio"] = $id_servicio;
         $api                 = "servicio/resumen/format/json/";
         return $this->principal->api(  $api , $q );           
+    }
+    private function carga_ficha_direccion_envio($q){
+
+        $q["text_direccion"]    =   "Dirección de Envio";
+        $q["externo"]           =   1;        
+        $api                    =   "usuario_direccion/direccion_envio_pedido"; 
+        return $this->principal->api( $api , $q , "html");  
     }
 }

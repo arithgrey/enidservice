@@ -9,7 +9,6 @@ class Home extends CI_Controller{
     /**/
     function index(){
         
-
         $param                                  =   $this->input->get();
         $data                                   =   $this->principal->val_session("");
         $this->principal->acceso();
@@ -119,43 +118,55 @@ class Home extends CI_Controller{
     }
     function carga_vista_seguimiento($param , $data){
 
-    
+        
         $data["css"]    =   ["seguimiento_pedido.css" , "confirm-alert.css"];
-        $data["js"]     =   ["../js_tema/alerts/jquery-confirm.js" , 
-        "../js_tema/pedidos/seguimiento.js"];
-
-        $id_recibo      =  $this->input->get("seguimiento");            
-        $recibo         =  $this->get_recibo($id_recibo);
-
-        $id_usuario_compra = $recibo[0]["id_usuario"];
+        $data["js"]     =   ["../js_tema/alerts/jquery-confirm.js" , "../js_tema/pedidos/seguimiento.js"];
 
 
-        if ( count($recibo)>0  
-            && 
-                $data["in_session"] ==  1 
-            && 
-                $data["id_usuario"] > 0
-            && 
-                $id_usuario_compra ==  $data["id_usuario"]) {
+        $id_recibo          =  $this->input->get("seguimiento");            
+        $recibo             =  $this->get_recibo($id_recibo);
+        $id_usuario_compra  =  $recibo[0]["id_usuario"];    
+        
 
 
+        if ( count($recibo)>0  && $data["in_session"] ==  1 &&  $data["id_usuario"] > 0 && 
+            $id_usuario_compra ==  $data["id_usuario"]) {
 
-            $notificacion_pago = (get_param_def($param , "notificar" ) > 0 ) ? 1 : 0; 
-            $notificacion_pago = ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago;
-            $data["notificacion_pago"] = $notificacion_pago;
 
-            $data["orden"]          =   $id_recibo;
-            $data["recibo"]         =   $recibo;  
+            $data["domicilio"]          =   $this->get_domicilio_entrega($id_recibo , $recibo);
+            $data["recibo"]             =   $recibo;              
 
-            $data["status_ventas"]  =   $this->get_estatus_enid_service();
-            $data["tipificaciones"] =   $this->get_tipificaciones($id_recibo);
-            $this->principal->show_data_page($data, 'seguimiento');          
+            if (get_param_def($param , "domicilio" ) > 0 ) {
+                    
+                $data["css"]               = ["bootstrap_1.min.css"];
+                $data["js"]                = ["../js_tema/domicilio/domicilio_entrega.js"];
+
+                $data["lista_direcciones"]  =  $this->get_direcciones_usuario($data["id_usuario"]);
+
+                $this->principal->show_data_page($data, 'domicilio');              
+            }else{
+
+                $notificacion_pago          =   (get_param_def($param , "notificar" ) > 0 ) ? 1 : 0; 
+                $notificacion_pago          =   
+                ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago;
+                $data["notificacion_pago"]  =   $notificacion_pago;
+                $data["orden"]              =   $id_recibo;
+                
+                $data["status_ventas"]      =   $this->get_estatus_enid_service();
+                $data["tipificaciones"]     =   $this->get_tipificaciones($id_recibo);
+                
+                $this->principal->show_data_page($data, 'seguimiento');              
+            }
+
+            
+
 
         }else{
             redirect("../../area_cliente");
         }
         
     }
+
     private function get_domicilio_recibo($id_recibo){
         $q["id_recibo"] =   $id_recibo;
         $api            =   "proyecto_persona_forma_pago_direccion/recibo/format/json/"; 
@@ -199,6 +210,12 @@ class Home extends CI_Controller{
         $q["recibo"]    =   $id_recibo;
         $api            =   "tipificacion_recibo/recibo/format/json/";
         return $this->principal->api( $api ,  $q);  
+    }
+    private function get_direcciones_usuario($id_usuario){
+
+        $q["id_usuario"]    =   $id_usuario;
+        $api                =   "usuario_direccion/all/format/json/";
+        return $this->principal->api( $api ,  $q);          
     }
     
 }

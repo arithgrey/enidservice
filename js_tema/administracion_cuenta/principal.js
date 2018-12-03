@@ -46,6 +46,7 @@ function response_direccion_usuario(data){
 }
 /*Solo para usuario*/
 function registra_direccion_usuario(e){
+	debugger;
 
 	if(get_option("existe_codigo_postal") ==  1){			
 		

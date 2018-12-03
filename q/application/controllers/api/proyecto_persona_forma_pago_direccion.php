@@ -17,10 +17,13 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller{
 
         $param      =   $this->get();
         $response   = false;
+        debug($param ,1);
         if (if_ext($param , 'id_recibo')) {
+
             $response   =  
-            $this->proyecto_persona_forma_pago_direccion_model->get([], 
-            [ "id_proyecto_persona_forma_pago" => $param["id_recibo"]]);            
+            $this->proyecto_persona_forma_pago_direccion_model->get(
+                [], 
+                [ "id_proyecto_persona_forma_pago" => $param["id_recibo"]]);            
         }        
         $this->response($response);
     }    
