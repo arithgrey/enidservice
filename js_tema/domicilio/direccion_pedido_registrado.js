@@ -4,6 +4,7 @@ $(document).ready(function(){
 	$(".numero_interior").keyup(function (){quita_espacios(".numero_interior"); });					
 	$(".form_direccion_envio").submit(registra_nueva_direccion);
 	
+	
 });
 function registra_nueva_direccion(e){
 

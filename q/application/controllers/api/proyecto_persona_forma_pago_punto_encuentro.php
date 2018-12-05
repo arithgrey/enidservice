@@ -14,8 +14,8 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller{
       if (if_ext($param , "id_recibo,punto_encuentro")) {
 
         $params = [
-          "id_proyecto_persona_forma_pago" =>  $param["id_recibo"],
-          "id_punto_encuentro"             => $param["punto_encuentro"]
+          "id_proyecto_persona_forma_pago" =>   $param["id_recibo"],
+          "id_punto_encuentro"             =>   $param["punto_encuentro"]
         ];
         
         $response = 

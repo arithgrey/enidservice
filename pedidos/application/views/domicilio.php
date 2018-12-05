@@ -3,22 +3,32 @@
     $id_recibo      =   $recibo[0]["id_proyecto_persona_forma_pago"];  
     $id_servicio    =   $recibo[0]["id_servicio"];
 
+
 ?>
 	<br>
 
 	
     <div class="container-fluid gedf-wrapper">
-    	
-    	<?=div(heading_enid(icon("fa fa-map-marker") ."DIRECCIÓN DE ENTREGA" ) , 1)?>
-
+    
+        <?=n_row_12()?>    	
+    	   <?=div(heading_enid(icon("fa fa-map-marker") ."DIRECCIÓN DE ENTREGA" ) , 1)?>
+        <?=end_row()?>
         <div class="row">
             <div class="col-md-3">
+                <br>
+                <?=div("TUS DIRECCIONES DE ENTREGA REGISTRADAS")?>                
+                <?=agregar_nueva_direccion(0);?>                
                 <div class="card">
                     <ul class="list-group list-group-flush">
-                    	<?=create_lista_direcciones($lista_direcciones)?>	
-                    	<?=agregar_nueva_direccion();?>                
-                    </ul>
+                    	<?=create_lista_direcciones($lista_direcciones , $id_recibo)?>	
+                    </ul>                
                 </div>
+                <br>
+                <br>
+                
+                
+                
+
             </div>
             <div class="col-md-6 gedf-main">            
                 <div class="card gedf-card">
@@ -61,7 +71,8 @@
                             </h5>
                         </a>
                         <p class="card-text">                        	
-                        	<?=create_descripcion_direccion_entrega($domicilio)?>                            
+                        	<?=create_descripcion_direccion_entrega($domicilio)?>   
+                            <?=valida_accion_pago($recibo)?>                         
                         </p>
                     </div>
                     
@@ -69,6 +80,16 @@
 
             </div>
             <div class="col-md-3">
+                <br>
+                <?=div("TUS PUNTOS DE ENCUENTRO REGISTRADOS")?>                
+                <?=agregar_nueva_direccion(1);?>                
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <?=get_lista_puntos_encuentro($puntos_encuentro , $id_recibo)?>
+                    </ul>                
+                </div>
+                <br>
+                <br>
                 
                 
             </div>

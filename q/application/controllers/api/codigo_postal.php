@@ -25,9 +25,10 @@ class codigo_postal extends REST_Controller{
         $this->response($response);
         
     }  
+
     function direccion_envio_pedido_POST(){
 
-        $param                          =   $this->post();                        
+        $param                          =   $this->post();                            
         $id_direccion                   =   $this->registra_direccion_envio($param);        
         if ($id_direccion == 0) {
             $this->response(-1);
@@ -37,11 +38,11 @@ class codigo_postal extends REST_Controller{
         $data_complete["id_direccion"]  =   $id_direccion;
 
         if($id_direccion > 0 ){                
-            if($param["direccion_principal"] ==  1 ){                
-                $id_usuario    =  $this->get_id_usuario($param);
-                $data_complete["registro_direccion_usuario"] =  
-                $this->set_direcciones_usuario($id_usuario ,$id_direccion);
-            }            
+            
+            $id_usuario    =  $this->get_id_usuario($param);                
+            $data_complete["registro_direccion_usuario"] =  
+            $this->set_direcciones_usuario($id_usuario ,$id_direccion , $param["direccion_principal"] );
+            
         }        
         $data_complete["externo"] =  get_info_variable($param , "externo");
         $this->response($data_complete);        
@@ -50,7 +51,8 @@ class codigo_postal extends REST_Controller{
     function registra_direccion_envio($param){
 
         
-        $param["id_codigo_postal"] =  $this->codigo_postal_model->get_id_codigo_postal_por_patron($param);
+        $param["id_codigo_postal"] =  
+        $this->codigo_postal_model->get_id_codigo_postal_por_patron($param);
         if ($param["id_codigo_postal"] > 0 ){
 
             $param["id_direccion"]          =  $this->crea_direccion($param);
@@ -60,6 +62,7 @@ class codigo_postal extends REST_Controller{
         }   
         return 0; 
     }
+    
     /**/
     function id_por_patron_GET(){
 
@@ -226,11 +229,12 @@ class codigo_postal extends REST_Controller{
         $id_usuario = ($this->principal->is_logged_in() == 1) ?  $this->id_usuario :  $param["id_usuario"];
         return  $id_usuario;
     }
-    function set_direcciones_usuario($id_usuario ,$id_direccion){
+    function set_direcciones_usuario($id_usuario ,$id_direccion , $direccion_principal ){
 
-        $q["id_usuario"]        = $id_usuario;
-        $q["id_direccion"]      = $id_direccion;        
-        $api                    =  "usuario_direccion/index";
+        $q["id_usuario"]                = $id_usuario;
+        $q["id_direccion"]              = $id_direccion;        
+        $q["principal"]                 = $direccion_principal;                
+        $api                            = "usuario_direccion/index";
         return $this->principal->api( $api, $q, "json" , "PUT");
     }
     /**/

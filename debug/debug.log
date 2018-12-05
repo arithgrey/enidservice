@@ -22551,3 +22551,1814 @@ DEBUG - TYPE array 2018-12-03 09:04:29 --> Array
     [id_recibo] => 248
 )
 
+DEBUG - TYPE array 2018-12-03 22:41:12 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 22:41:18 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-03 22:41:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+    [id_usuario_venta] => 1
+    [id_servicio] => 268
+    [id_usuario] => 615
+    [telefono] => 77667767667
+    [nombre] => hdgfhjdsfjhj
+    [email] => hjhjashja@jhd.lo
+    [es_usuario_nuevo] => 1
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 22:41:46 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-03 22:41:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:42:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:42:03 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:42:08 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 249
+    [id_recibo] => 249
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 22:42:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:42:41 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:42:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:45:05 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:45:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:45:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:46:32 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:46:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 249
+    [id_recibo] => 249
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 22:46:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 249
+    [id_recibo] => 249
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 22:47:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 249
+    [id_recibo] => 249
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 22:47:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:51:03 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:53:51 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:54:02 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:54:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:54:25 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:54:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:54:53 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:55:02 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:55:12 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:55:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 249
+    [id_recibo] => 249
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 22:56:07 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:56:53 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 22:57:35 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:00:36 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:01:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:05:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:05:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:05:43 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:06:31 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:06:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:09:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:11:25 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:26:41 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:29:24 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:29:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 249
+)
+
+DEBUG - TYPE array 2018-12-03 23:30:23 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-03 23:30:48 --> 8888
+DEBUG - TYPE string 2018-12-03 23:30:48 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '615' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-03 23:30:49 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-03 23:30:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 250
+    [id_usuario_venta] => 1
+    [id_servicio] => 256
+    [id_usuario] => 615
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 23:31:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 250
+)
+
+DEBUG - TYPE array 2018-12-03 23:31:52 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 251
+    [id_usuario_venta] => 1
+    [id_servicio] => 256
+    [id_usuario] => 615
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 23:33:58 --> Array
+(
+    [nombre_receptor] => hdgfhjdsfjhj  
+    [telefono_receptor] => 77667767667
+    [cp] => 08500
+    [id_usuario] => 615
+    [calle] => 7788778
+    [referencia] => 787887
+    [numero_exterior] => 787887
+    [numero_interior] => 7887
+    [asentamiento] => Agrícola Oriental
+    [municipio] => Iztacalco
+    [estado] => 9
+    [pais] => 1
+    [direccion_principal] => 1
+    [id_recibo] => 251
+)
+
+DEBUG - TYPE array 2018-12-03 23:34:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 251
+)
+
+DEBUG - TYPE array 2018-12-03 23:44:31 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+    [id_usuario_venta] => 1
+    [id_servicio] => 256
+    [id_usuario] => 615
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 23:44:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:44:39 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:44:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:45:22 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:46:56 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:48:01 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE string 2018-12-03 23:48:07 --> 99009099
+DEBUG - TYPE string 2018-12-03 23:50:30 --> 99009099
+DEBUG - TYPE array 2018-12-03 23:52:03 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE string 2018-12-03 23:52:10 --> 99009099
+DEBUG - TYPE array 2018-12-03 23:52:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE boolean 2018-12-03 23:53:04 --> 1
+DEBUG - TYPE array 2018-12-03 23:53:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:54:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:54:26 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:54:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 252
+    [id_recibo] => 252
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-03 23:55:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:55:03 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:55:56 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:56:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:56:53 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-03 23:56:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-04 00:01:06 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 252
+    [id_recibo] => 252
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:02:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 252
+)
+
+DEBUG - TYPE array 2018-12-04 00:02:29 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 252
+    [id_recibo] => 252
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:03:43 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-04 00:04:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-04 00:04:54 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 3
+)
+
+DEBUG - TYPE array 2018-12-04 00:05:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 3
+)
+
+DEBUG - TYPE string 2018-12-04 00:05:39 --> 8888
+DEBUG - TYPE string 2018-12-04 00:05:39 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '615' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-04 00:05:39 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-04 00:05:44 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+    [id_usuario_venta] => 1
+    [id_servicio] => 286
+    [id_usuario] => 615
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:05:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:06:51 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:06:52 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:06:56 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:06:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:07:12 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:07:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:07:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:08:16 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-04 00:08:33 --> paso
+DEBUG - TYPE array 2018-12-04 00:08:35 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:08:36 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:08:40 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:10:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-04 00:10:17 --> neiiiiiii
+DEBUG - TYPE string 2018-12-04 00:10:17 --> paso
+DEBUG - TYPE array 2018-12-04 00:10:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:11:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:11:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:11:36 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:11:40 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:11:46 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:11:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:14:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:14:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:14:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:15:05 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:15:08 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:15:12 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:15:24 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:15:39 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:15:41 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:15:44 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:24:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:24:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:26:10 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:26:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:26:28 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:26:52 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:26:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:26:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:27:15 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:27:23 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:27:54 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:27:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-04 00:28:11 --> entra----
+DEBUG - TYPE boolean 2018-12-04 00:28:11 --> 1
+DEBUG - TYPE array 2018-12-04 00:28:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:29:28 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:29:31 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:29:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:35:53 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:36:06 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:36:10 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:36:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:36:21 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:36:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:37:01 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:37:46 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:37:49 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:37:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:37:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 253
+)
+
+DEBUG - TYPE array 2018-12-04 00:38:43 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 253
+    [id_recibo] => 253
+    [id_usuario] => 615
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:40:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-04 00:40:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-04 00:40:57 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 251
+            [nombre_servicio] => AUDIFONOS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Accesorios para Vehículos,Accesorios de Computación,Audífonos y Diademas,Sin Micrófono,AUDIFONOS,70
+            [color] => 
+            [precio] => 70
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 8
+            [valoracion] => 0
+            [deseado] => 0
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-04 00:41:10 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+    [id_usuario_venta] => 1
+    [id_servicio] => 43
+    [id_usuario] => 616
+    [telefono] => 7667676767
+    [nombre] => avenida@kj.lo
+    [email] => avenida@kj.lo
+    [es_usuario_nuevo] => 1
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:41:27 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:41:29 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:41:32 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:41:39 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:47:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:49:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:49:28 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:49:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:51:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:51:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:52:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:52:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:53:47 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-04 00:54:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:55:04 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:55:05 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:55:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:55:12 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:55:35 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:55:38 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:56:05 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-04 00:57:30 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:57:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:57:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:57:44 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 254
+    [id_recibo] => 254
+    [id_usuario] => 616
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-04 00:58:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:58:04 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:58:12 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 00:58:28 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 01:00:56 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 01:01:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 01:01:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 01:02:35 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 01:02:50 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 01:07:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 254
+)
+
+DEBUG - TYPE array 2018-12-04 01:09:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 11
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-04 01:09:19 --> 8888
+DEBUG - TYPE string 2018-12-04 01:09:19 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '616' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-04 01:09:19 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-04 01:12:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-04 01:12:17 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-04 01:30:10 --> 999999999999999
+DEBUG - TYPE integer 2018-12-04 01:46:56 --> 33333333333
+DEBUG - TYPE array 2018-12-04 01:47:30 --> Array
+(
+    [fecha_entrega] => 2018-12-04
+    [horario_entrega] => 09:00
+    [punto_encuentro] => 247
+    [servicio] => 268
+    [num_ciclos] => 1
+    [tipo_entrega] => 1
+    [plan] => 268
+    [id_recibo] => 258
+)
+
+DEBUG - TYPE array 2018-12-04 01:50:47 --> Array
+(
+    [id_recibo] => 259
+    [id_usuario_venta] => 1
+    [id_servicio] => 268
+    [id_usuario] => 617
+    [es_usuario_nuevo] => 0
+)
+
+DEBUG - TYPE array 2018-12-04 01:51:49 --> Array
+(
+    [fecha_entrega] => 2018-12-04
+    [horario_entrega] => 09:00
+    [punto_encuentro] => 34
+    [servicio] => 268
+    [num_ciclos] => 1
+    [tipo_entrega] => 1
+    [plan] => 268
+    [id_recibo] => 260
+    [id_usuario] => 617
+)
+
+DEBUG - TYPE array 2018-12-05 09:02:25 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 09:03:03 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-05 09:03:46 --> 0
+DEBUG - TYPE array 2018-12-05 09:03:56 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-05 09:04:19 --> 8888
+DEBUG - TYPE string 2018-12-05 09:04:19 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '618' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-05 09:04:19 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-05 09:05:23 --> 0
+DEBUG - TYPE array 2018-12-05 09:05:34 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-05 09:05:38 --> 8888
+DEBUG - TYPE string 2018-12-05 09:05:38 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '618' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-05 09:05:38 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-05 09:05:49 --> 1
+DEBUG - TYPE array 2018-12-05 09:37:38 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 265
+    [id_recibo] => 265
+    [id_usuario] => 618
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+

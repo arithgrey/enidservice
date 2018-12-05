@@ -952,9 +952,6 @@ input{
 .input_busqueda_producto ,.button_busqueda_producto{
     display: inline-table!important;
 }
-body{
-	font-family: 'Roboto Condensed', sans-serif!important;
-}
 .separador-footer{
 	margin-top: 400px;
 	

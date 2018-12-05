@@ -1,19 +1,62 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
-	function agregar_nueva_direccion(){
+	function agregar_nueva_direccion($direccion = 1){
 
-		return li(guardar( "Agregar direccion " , 
-			["class"  => "agregar_direccion_pedido"]  ) , 
-			["class"=>"list-group-item"]);
+
+		if ($direccion >  0) {
+			return li(guardar( "Agregar punto de encuentro " , 
+				["class"  => "agregar_punto_encuentro_pedido"]  ) );	
+		}else{
+			
+			return li(guardar( "Agregar direccion " , 
+				["class"  => "agregar_direccion_pedido"]  ) );	
+		}	
+		
 
 	}
-	function create_lista_direcciones($lista){
+	function get_lista_puntos_encuentro($puntos_encuentro , $id_recibo){
+
+		 
+		$lista 	= 	"";
+		$a  	=	0;
+		foreach ($puntos_encuentro as $row) {
+			
+			$id 						= $row["id"];
+			$nombre 					= $row["nombre"];
+			$status 					= $row["status"];
+			$id_tipo_punto_encuentro 	= $row["id_tipo_punto_encuentro"];
+			$id_linea_metro 			= $row["id_linea_metro"];
+			$costo_envio 				= $row["costo_envio"];
+
+
+
+			$lista .=  "<li class='list-group-item'>";
+
+		    
+
+		    $lista .= div("#".$a ,  ["class"=>"h6 text-muted"]);
+		    $lista .= div( strtoupper($nombre)  ,  ["class"=>"h5"]);
+		    $lista .= 
+		    div("ESTABLECER COMO PUNTO DE ENTREGA" ,  
+		    [
+		    	"class"		=>	"h6 text-muted text-right establecer_punto_encuentro cursor_pointer",
+		    	"id"		=>	$id,
+		    	"id_recibo"	=>	$id_recibo
+
+			]);
+		    $lista .=  "</li>";
+		    $a ++;
+		}
+		return $lista;
+	}
+	function create_lista_direcciones($lista , $id_recibo){
 
 		$text  = "";		
 		$a 	   = 1;
 		foreach($lista as $row) {
 
+			$id_direccion  			= $row["id_direccion"];
 			$calle  				= $row["calle"];
 		    $entre_calles  			= $row["entre_calles"];
 		    $numero_exterior  		= $row["numero_exterior"];
@@ -33,10 +76,19 @@ if(!function_exists('invierte_date_time')){
 
 		    $text .=  "<li class='list-group-item'>";
 
-		    $direccion =  $calle ." "." NÚMERO ".$numero_exterior." NÚMERO INTERIOR ".$numero_interior ." COLONIA ".$asentamiento ." DELEGACIÓN/MUNICIPIO ".$municipio. " ESTADO ".$estado." CÓDIGO POSTAL ".$cp;
+		    $direccion =  
+		    	$calle ." "." NÚMERO ".$numero_exterior." NÚMERO INTERIOR ".$numero_interior ." COLONIA ".$asentamiento ." DELEGACIÓN/MUNICIPIO ".$municipio. " ESTADO ".$estado." CÓDIGO POSTAL ".$cp;
 
 		    $text .= div("#".$a ,  ["class"=>"h6 text-muted"]);
 		    $text .= div( strtoupper($direccion)  ,  ["class"=>"h5"]);
+		    $text .= 
+		    div("ESTABLECER COMO DIRECCIÓN DE ENTREGA" ,  
+		    [
+		    	"class"		=>	"h6 text-muted text-right establecer_direccion cursor_pointer",
+		    	"id"		=>	$id_direccion,
+		    	"id_recibo"	=>	$id_recibo
+
+			]);
 		    $text .=  "</li>";
 		    $a ++;
 		}
@@ -75,7 +127,16 @@ if(!function_exists('invierte_date_time')){
 		}
 		return p( strtoupper( $text ) , ["class"=>"card-text"]);
 	}
+	function valida_accion_pago($recibo ){
 
+		if ($recibo[0]["saldo_cubierto"] < 1 ) {
+
+			$id_recibo 	= $recibo[0]["id_proyecto_persona_forma_pago"];
+			$url 		= "../area_cliente/?action=compras&ticket=".$id_recibo;
+			return guardar( "PROCEDER AL PAGO" , [], 1 , 1 , 0 , $url);
+
+		}
+	}
 	function create_linea_tiempo($recibo , $domicilio){	
 		
 		$linea 			= 	"";

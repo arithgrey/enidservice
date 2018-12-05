@@ -8,8 +8,7 @@ class Cobranza extends REST_Controller{
         $this->load->helper("cobranza");                        
         $this->load->library(lib_def());            
         $this->id_usuario = $this->principal->get_session("idusuario");
-    } 
-    
+    }     
     /*Se cancela recordatorio de pago pendiente por email*/
     function cancelar_envio_recordatorio_PUT(){
         
@@ -305,6 +304,8 @@ class Cobranza extends REST_Controller{
                     $param["id_recibo"]           = $id_recibo;  
                     $data_orden["id_recibo"]      = $id_recibo;  
                     $this->create_orden_punto_entrega($param);
+                    $param["id_usuario"]          =  $data_acciones_posteriores["id_usuario"]; 
+                    $this->agrega_punto_encuentro_usuario($param);
                 }
                 
             }
@@ -658,8 +659,12 @@ class Cobranza extends REST_Controller{
     }
     private function create_orden_punto_entrega($q){        
         
-        $api                = "proyecto_persona_forma_pago_punto_encuentro/index";
+        $api  = "proyecto_persona_forma_pago_punto_encuentro/index";
         return $this->principal->api( $api ,  $q , "json" , "POST");    
     }
+    private function agrega_punto_encuentro_usuario($q){
 
+        $api  = "usuario_punto_encuentro/index";
+        return $this->principal->api( $api ,  $q , "json" , "POST");    
+    }
 }?>

@@ -325,31 +325,6 @@ var verifica_pago_previo = function(){
 		modifica_status(6 , 1);
 	}
 }
-var show_confirm = function(text ,  text_complemento , text_continuar=0 , on_next = 0 , on_cancel= 0){
-
-	if (on_next == 0 ) {
-		on_next = function(){}
-	}if (on_cancel == 0) {
-		on_cancel = function(){}	
-	}
-	if(text_continuar ==  0){
-		text_continuar =  "CONTINUAR Y MODIFICAR";
-	}
-	$.confirm({
-		    title: text,
-		    content: text_complemento,
-		    type: 'green',
-		    buttons: {   
-		        ok: {
-		            text: text_continuar,
-		            btnClass: 'btn-primary',
-		            keys: ['enter'],
-		            action: on_next
-		        },
-		        cancel: on_cancel
-		    }
-	});
-}
 var oculta_opciones_estados =  function(){
 	display_elements([".selector_estados_ventas" , 0]);
 }

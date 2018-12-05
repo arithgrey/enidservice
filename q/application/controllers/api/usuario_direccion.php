@@ -175,13 +175,24 @@ class usuario_direccion extends REST_Controller{
     function index_PUT(){
 
         $param        =  $this->put();        
-        $params_where = ["id_usuario" => $param["id_usuario"] ];
-        $status       = $this->usuario_direccion_model->delete($params_where , 10);        
-        if ($status ==  1) {            
-            $response     =  $this->usuario_direccion_model->insert($param , 1);
-            $this->response($response);    
+        $response     =  [];
+
+        if (if_ext($param , "id_usuario,id_direccion,principal")) {
+            
+            $id_usuario   =  $param["id_usuario"]; 
+            $params_where = ["id_usuario" => $id_usuario ];
+            
+            if ($param["principal"] ==  1) {
+
+                $set    = ["principal"  =>  0 ];
+                $in     = ["id_usuario" =>  $id_usuario ];
+                $this->usuario_direccion_model->update($set , $in , 10 );                    
+            }
+            $response     =  $this->usuario_direccion_model->insert($param , 1);    
         }
-        $this->response(-1);    
+        
+        $this->response($response);    
+                
     }
     function index_POST(){
 
