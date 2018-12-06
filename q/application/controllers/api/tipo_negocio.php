@@ -13,5 +13,4 @@ class Tipo_negocio extends REST_Controller{
     $this->response($response);  
   }    
 
-}
-?>
+}?>

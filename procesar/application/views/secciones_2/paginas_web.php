@@ -150,6 +150,9 @@ $talla                =
         "id"          =>  "telefono",
         "class"       =>  "telefono form-control",
         "type"        =>  "tel" ,
+        "pattern"     =>  "^[0-9-+s()]*$",
+        "maxlength"   =>  13,
+        "minlength"   =>  8,
         "name"        =>  "telefono" ,
         "required"    =>  "true"
     ])?>

@@ -264,10 +264,4 @@ class Valoracion extends REST_Controller{
         return $this->principal->api( $api , $q  , "json" , "PUT");
 
     }
-
-    /**/
-    
-    /**/  
-
-}
-?>
+}?>

@@ -31,8 +31,7 @@ class Home extends CI_Controller{
         $data                           =   $this->principal->val_session("");
         $data["meta_keywords"]          =   "Comprar y vender tus artículos y servicios";
         $data["desc_web"]               =   "";
-        $data["url_img_post"]           =   create_url_preview("promo.png");
-        
+        $data["url_img_post"]           =   create_url_preview("promo.png");        
         $q                              =   (array_key_exists("q", $param)) ?$param["q"] :""; 
 
         $data_send["q"]                 =   $q; 
@@ -42,9 +41,9 @@ class Home extends CI_Controller{
         $data_send["order"]             =   get_param_def($param , "order" ,  11 , 1);        
 
 
-        $per_page = 12;        
+        $per_page = 8;        
         $data_send["resultados_por_pagina"]     =   $per_page;        
-        $data_send["agrega_clasificaciones"]    = 1;
+        $data_send["agrega_clasificaciones"]    =   1;
         $data_send["in_session"] = 0;
 
         
@@ -59,7 +58,7 @@ class Home extends CI_Controller{
         }
         
         $servicios              =  $this->busqueda_producto_por_palabra_clave($data_send);        
-        $categorias_destacadas  =  $this->carga_categorias_destacadas();                    
+        
         $data["servicios"]      =  $servicios;
 
 
@@ -81,23 +80,21 @@ class Home extends CI_Controller{
                 $data["es_movil"] =  0;
             }
             
-            $this->principal->crea_historico($param["num_hist"]);
-
-            $config_paginacion["totales_elementos"] =  $totales_elementos;
-            $config_paginacion["per_page"]  =   $per_page;
-            $config_paginacion["q"]         =   $q;
-            $config_paginacion["q2"]        =   $param["id_clasificacion"];
-            $config_paginacion["q3"]        =   $param["vendedor"];
-            $config_paginacion["order"]     =   $data_send["order"];
-            $config_paginacion["page"]      =   get_info_variable($param , "page" );            
             
-            //$this->create_pagination($config_paginacion);            
-            $data["paginacion"]             = $this->principal->create_pagination($config_paginacion);
+
+            $data["paginacion"]  =  $this->create_pagination($totales_elementos,
+                $per_page,
+                $q , 
+                $param["id_clasificacion"], 
+                $param["vendedor"] ,  
+                $data_send["order"] , 
+                get_info_variable($param , "page" )
+            );
 
             $this->set_option("in_session" , 0);
 
             
-
+            $categorias_destacadas          =   $this->carga_categorias_destacadas();                    
             $data["lista_productos"]        =   $this->agrega_vista_servicios($servicios["servicios"]);
             $data["q"]                      =   $q;
             $data["categorias_destacadas"]  =   $categorias_destacadas;
@@ -109,7 +106,8 @@ class Home extends CI_Controller{
             $data["js"]     = ["../js_tema/search/principal.js"];
 
             $data["filtros"] =  $this->get_orden();
-            $data["order"]   = $config_paginacion["order"];
+            $data["order"]   =  $data_send["order"];
+            $this->principal->crea_historico($param["num_hist"]);
             $this->principal->show_data_page($data, 'home');
             
         }else{
@@ -133,11 +131,19 @@ class Home extends CI_Controller{
         $api             =  "servicio/crea_vista_producto/format/html/";
         return $this->principal->api( $api, $q , 'html'); 
     }
-    /**/   
-    private function create_pagination($q){        
-        $api =  "producto/paginacion/format/json/";
-        return $this->principal->api( $api, $q); 
-    }
+    
+    private function create_pagination($totales_elementos ,  $per_page , $q , 
+        $id_clasificacion, $vendedor ,  $order , $page){        
+    
+        $config["totales_elementos"] =   $totales_elementos;
+        $config["per_page"]          =   $per_page;
+        $config["q"]                 =   $q;
+        $config["q2"]                =   $id_clasificacion;
+        $config["q3"]                =   $vendedor;
+        $config["order"]             =   $order;
+        $config["page"]              =   $page;        
+        return $this->principal->create_pagination($config);
+    }    
     /**/
     private function crea_menu_lateral($clasificaciones_niveles){
         
@@ -225,4 +231,4 @@ class Home extends CI_Controller{
     return $this->principal->api($api , $q, "json" , "POST");
   }
 
-}
+}?>

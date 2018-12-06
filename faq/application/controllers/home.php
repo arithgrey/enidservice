@@ -142,4 +142,4 @@ class Home extends CI_Controller{
         //debug($response,1);
         return $response[0];
     }
-}
+}?>

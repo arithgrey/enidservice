@@ -1,9 +1,14 @@
 $(document).ready(function(){
 	$(".agregar_direccion_pedido").click(agregar_direccion_pedido);
+	$(".agregar_punto_encuentro_pedido").click(agregar_punto_encuentro_pedido);
 	$(".establecer_direccion").click(asignar_direccion_existente_pedido);
 });
-var agregar_direccion_pedido = function(){
+var agregar_direccion_pedido = function(){	
 	$(".form_registro_direccion").submit();
+}
+var agregar_punto_encuentro_pedido = function(){
+	
+	$(".form_puntos_medios").submit();
 }
 var asignar_direccion_existente_pedido = function(){
 	

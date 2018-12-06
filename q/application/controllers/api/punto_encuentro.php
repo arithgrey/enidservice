@@ -33,6 +33,12 @@ class Punto_encuentro extends REST_Controller{
 
                 $flag_envio_gratis  =   $this->get_flag_envio_gratis($param["servicio"]);                
                 $response           =   create_estaciones($response , $flag_envio_gratis);    
+            }else{
+                
+                $id_servicio        =   $this->get_servicio_por_recibo($param["recibo"]);                
+                $flag_envio_gratis  =   $this->get_flag_envio_gratis($id_servicio);                
+                $response           =   create_estaciones($response , $flag_envio_gratis);    
+                
             }            
         }
         $this->response($response);     
@@ -65,4 +71,12 @@ class Punto_encuentro extends REST_Controller{
         $response   =  $this->principal->api( $api , $q );        
         return $response[0]["flag_envio_gratis"];
     }
+    private function get_servicio_por_recibo($id_recibo){
+        
+        $q          =   ["id_recibo" => $id_recibo];        
+        $api        =   "recibo/servicio_ppfp/format/json/";    
+        return          $this->principal->api( $api , $q );        
+        
+    }
+
 }?>

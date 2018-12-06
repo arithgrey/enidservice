@@ -69,4 +69,4 @@ class Img extends REST_Controller{
       $this->response($response);   
   }  
   /**/  
-}
+}?>

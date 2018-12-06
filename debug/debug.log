@@ -24362,3 +24362,1627 @@ DEBUG - TYPE array 2018-12-05 09:37:38 --> Array
     [externo] => 1
 )
 
+DEBUG - TYPE array 2018-12-05 23:11:42 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:14:10 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 4
+)
+
+DEBUG - TYPE array 2018-12-05 23:14:53 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-05 23:15:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:16:49 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:17:49 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:18:26 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:19:46 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:22:32 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:23:06 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:23:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:23:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:24:53 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:25:11 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:25:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:30:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:31:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:31:36 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:31:54 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:32:26 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE array 2018-12-05 23:33:31 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 12
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 0
+)
+
+DEBUG - TYPE string 2018-12-06 00:09:25 --> llega
+DEBUG - TYPE string 2018-12-06 00:26:31 --> /var/www/html/inicio/q/application/
+DEBUG - TYPE string 2018-12-06 00:27:05 --> /var/www/html/inicio/system/
+DEBUG - TYPE string 2018-12-06 00:28:17 --> 999
+DEBUG - TYPE string 2018-12-06 00:34:05 --> $response
+DEBUG - TYPE string 2018-12-06 00:34:11 --> $response
+DEBUG - TYPE string 2018-12-06 00:34:52 --> <div class="pagination"><li><a href="?q=&order=2" data-ci-pagination-page="1" rel="start"><span class="white">« Primera</span></a></li><li><a href="?q=&order=2&amp;page=12" data-ci-pagination-page="12" rel="prev">‹</a></li><li><a href="?q=&order=2&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&order=2&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&order=2&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&order=2&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&order=2&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&order=2&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&order=2&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&order=2&amp;page=10" data-ci-pagination-page="10">10</a></li><li><a href="?q=&order=2&amp;page=11" data-ci-pagination-page="11">11</a></li><li><a href="?q=&order=2&amp;page=12" data-ci-pagination-page="12">12</a></li><li class="active"><span>13<span></span></span></li><li><a href="?q=&order=2&amp;page=14" data-ci-pagination-page="14">14</a></li><li><a href="?q=&order=2&amp;page=15" data-ci-pagination-page="15">15</a></li><li><a href="?q=&order=2&amp;page=16" data-ci-pagination-page="16">16</a></li><li><a href="?q=&order=2&amp;page=17" data-ci-pagination-page="17">17</a></li><li><a href="?q=&order=2&amp;page=18" data-ci-pagination-page="18">18</a></li><li><a href="?q=&order=2&amp;page=19" data-ci-pagination-page="19">19</a></li><li><a href="?q=&order=2&amp;page=20" data-ci-pagination-page="20">20</a></li><li><a href="?q=&order=2&amp;page=21" data-ci-pagination-page="21">21</a></li><li><a href="?q=&order=2&amp;page=22" data-ci-pagination-page="22">22</a></li><li><a href="?q=&order=2&amp;page=23" data-ci-pagination-page="23">23</a></li><li><a href="?q=&order=2&amp;page=14" data-ci-pagination-page="14" rel="next"><span class="white">›</span></a></li><li><a href="?q=&order=2&amp;page=25" data-ci-pagination-page="25"><span class="white">Última»</span></a></li></div>
+DEBUG - TYPE array 2018-12-06 00:39:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [totales_elementos] => 100
+    [per_page] => 4
+    [q] => 
+    [q2] => 0
+    [q3] => 0
+    [order] => 2
+    [page] => 13
+)
+
+DEBUG - TYPE array 2018-12-06 00:40:09 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-06 01:01:17 --> <div class="pagination"><li class="active"><span>1<span></span></span></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-06 01:01:23 --> <div class="pagination"><li><a href="?q=&amp;page=5" data-ci-pagination-page="5" rel="prev">«</a></li><li><a href="?q=" data-ci-pagination-page="1" rel="start">1</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li class="active"><span>6<span></span></span></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-06 01:01:27 --> <div class="pagination"><li><a href="?q=&amp;page=6" data-ci-pagination-page="6" rel="prev">«</a></li><li><a href="?q=" data-ci-pagination-page="1" rel="start">1</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li class="active"><span>7<span></span></span></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-06 01:01:31 --> 8888
+DEBUG - TYPE string 2018-12-06 01:01:31 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-06 01:01:32 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-06 01:01:55 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 71
+                    [accesos_a_intento_compra] => 0
+                    [accesos_contacto] => 0
+                    [accesos_area_cliente] => 0
+                    [usuarios] => 
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 
+                                    [compras_efectivas] => 
+                                    [solicitudes] => 
+                                    [envios] => 
+                                    [cancelaciones] => 
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-06 01:05:59 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-06 01:11:08 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-06 01:14:12 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-06 01:14:43 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 266
+    [id_usuario_venta] => 1
+    [id_servicio] => 256
+    [id_usuario] => 619
+    [telefono] => 1111111
+    [nombre] => jhasjdhjasdhas@jhs.lo
+    [email] => jhasjdhjasdhas@jhs.lo
+    [es_usuario_nuevo] => 1
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:15:04 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 266
+)
+
+DEBUG - TYPE array 2018-12-06 01:15:41 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-06 01:17:26 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-06 01:17:41 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+    [id_usuario_venta] => 1
+    [id_servicio] => 256
+    [id_usuario] => 621
+    [telefono] => 76676766776
+    [nombre] => asjdjhasdjjhas@kjs.lo1
+    [email] => asjdjhasdjjhas@kjs.lo1
+    [es_usuario_nuevo] => 1
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-06 01:17:54 --> 8888
+DEBUG - TYPE string 2018-12-06 01:17:54 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '621' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-06 01:17:54 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-06 01:17:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:18:00 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:18:04 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:18:08 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:18:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:18:32 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:18:38 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:18:42 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:20:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:25:40 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:26:07 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:26:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:26:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:26:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:27:04 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:27:28 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:27:48 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:29:06 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:29:25 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:29:49 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:30:17 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:30:21 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:31:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:31:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:34:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-06 01:35:36 --> 8888
+DEBUG - TYPE string 2018-12-06 01:35:36 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '621' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-06 01:35:36 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-06 01:35:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:35:47 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:35:51 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:38:15 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:38:16 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:39:25 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:40:01 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:40:31 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:40:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:40:40 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:40:47 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:40:51 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:41:21 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:41:22 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:41:26 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:42:22 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:42:30 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:42:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:42:51 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:43:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:43:21 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:43:25 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:43:30 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:43:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:43:42 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:44:01 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:44:15 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:44:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:44:23 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:44:27 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:44:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:44:40 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:46:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:46:22 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:48:23 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 268
+    [id_recibo] => 268
+    [id_usuario] => 621
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:48:33 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 268
+)
+
+DEBUG - TYPE array 2018-12-06 01:50:27 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-06 01:50:41 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 269
+    [id_usuario_venta] => 1
+    [id_servicio] => 249
+    [id_usuario] => 622
+    [telefono] => 878778787878
+    [nombre] => asjdhajsdasj@iidididiid.slk
+    [email] => asjdhajsdasj@iidididiid.slk
+    [es_usuario_nuevo] => 1
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:50:54 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 269
+)
+
+DEBUG - TYPE array 2018-12-06 01:50:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 269
+)
+
+DEBUG - TYPE array 2018-12-06 01:50:59 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 269
+)
+
+DEBUG - TYPE array 2018-12-06 01:51:01 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 269
+    [id_recibo] => 269
+    [id_usuario] => 622
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:51:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 269
+)
+
+DEBUG - TYPE array 2018-12-06 01:51:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 269
+)
+
+DEBUG - TYPE array 2018-12-06 01:51:24 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 269
+)
+
+DEBUG - TYPE array 2018-12-06 01:52:03 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 269
+    [id_recibo] => 269
+    [id_usuario] => 622
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:52:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 269
+)
+
+DEBUG - TYPE array 2018-12-06 01:52:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 269
+    [id_recibo] => 269
+    [id_usuario] => 622
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:52:45 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 269
+    [id_recibo] => 269
+    [id_usuario] => 622
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 01:53:32 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 269
+)
+
+DEBUG - TYPE array 2018-12-06 01:53:36 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 269
+    [id_recibo] => 269
+    [id_usuario] => 622
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-06 01:53:59 --> 8888
+DEBUG - TYPE string 2018-12-06 01:53:59 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '622' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-06 01:53:59 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-06 01:54:53 --> 8888
+DEBUG - TYPE string 2018-12-06 01:54:53 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '622' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-06 01:54:53 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-06 02:13:02 --> 8888
+DEBUG - TYPE string 2018-12-06 02:13:02 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '622' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-06 02:13:02 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-06 02:17:05 --> 8888
+DEBUG - TYPE string 2018-12-06 02:17:05 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '622' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-06 02:17:05 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-06 02:37:49 --> Array
+(
+    [format] => json
+    [id] => 14
+    [v] => 2
+)
+
+DEBUG - TYPE array 2018-12-06 02:38:05 --> Array
+(
+    [format] => json
+    [id] => 5
+    [v] => 2
+)
+
+DEBUG - TYPE string 2018-12-06 02:38:25 --> ooooo
+DEBUG - TYPE array 2018-12-06 02:38:25 --> Array
+(
+    [format] => json
+    [id] => 14
+    [v] => 2
+)
+
+DEBUG - TYPE string 2018-12-06 02:39:59 --> ooooo
+DEBUG - TYPE array 2018-12-06 02:39:59 --> Array
+(
+    [format] => json
+    [id] => 5
+    [v] => 2
+    [recibo] => 273
+)
+
+DEBUG - TYPE NULL 2018-12-06 02:44:25 --> 
+DEBUG - TYPE string 2018-12-06 02:45:09 --> 256
+DEBUG - TYPE array 2018-12-06 03:00:57 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-06 03:08:43 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-06 03:13:54 --> ENNNENENE
+DEBUG - TYPE array 2018-12-06 03:13:54 --> Array
+(
+    [fecha_entrega] => 2018-12-06
+    [horario_entrega] => 09:00
+    [recibo] => 274
+    [tipo_entrega] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 03:13:54 --> Array
+(
+    [fecha_entrega] => 2018-12-06
+    [horario_entrega] => 09:00
+    [recibo] => 274
+    [tipo_entrega] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 03:16:22 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-06 03:16:45 --> Array
+(
+    [nombre] => asduasdj
+    [email] => asduasdj@kjs.lo
+    [telefono] => 7878787878
+    [fecha_entrega] => 2018-12-06 09:00:00
+    [horario_entrega] => 09:00
+    [punto_encuentro] => 34
+    [num_ciclos] => 1
+    [password] => 3ff257946aa7ae1c17bb2b01069a70a716159b4e
+    [servicio] => 268
+    [es_usuario_nuevo] => 1
+    [usuario_nuevo] => 1
+    [usuario_referencia] => 624
+    [id_usuario] => 624
+    [tipo_entrega] => 1
+    [plan] => 268
+    [id_ciclo_facturacion] => 5
+    [id_recibo] => 275
+)
+
+DEBUG - TYPE string 2018-12-06 03:18:10 --> ENNNENENE
+DEBUG - TYPE array 2018-12-06 03:18:10 --> Array
+(
+    [fecha_entrega] => 2018-12-06
+    [horario_entrega] => 09:00
+    [recibo] => 275
+    [punto_encuentro] => 83
+    [tipo_entrega] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 03:18:10 --> Array
+(
+    [fecha_entrega] => 2018-12-06
+    [horario_entrega] => 09:00
+    [recibo] => 275
+    [punto_encuentro] => 83
+    [tipo_entrega] => 1
+)
+
+DEBUG - TYPE string 2018-12-06 03:19:19 --> ENNNENENE
+DEBUG - TYPE array 2018-12-06 03:19:19 --> Array
+(
+    [fecha_entrega] => 2018-12-06
+    [horario_entrega] => 09:00
+    [recibo] => 275
+    [punto_encuentro] => 83
+    [tipo_entrega] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 03:19:19 --> Array
+(
+    [fecha_entrega] => 2018-12-06
+    [horario_entrega] => 09:00
+    [recibo] => 275
+    [punto_encuentro] => 83
+    [tipo_entrega] => 1
+)
+
+DEBUG - TYPE boolean 2018-12-06 03:39:33 --> 1
+DEBUG - TYPE integer 2018-12-06 03:40:06 --> 122
+DEBUG - TYPE boolean 2018-12-06 03:40:06 --> 1
+DEBUG - TYPE string 2018-12-06 03:41:47 --> 275
+DEBUG - TYPE boolean 2018-12-06 03:41:47 --> 1
+DEBUG - TYPE string 2018-12-06 03:43:13 --> 275
+DEBUG - TYPE boolean 2018-12-06 03:43:13 --> 1
+DEBUG - TYPE string 2018-12-06 03:43:37 --> 275
+DEBUG - TYPE boolean 2018-12-06 03:43:37 --> 1
+DEBUG - TYPE string 2018-12-06 03:45:42 --> 275
+DEBUG - TYPE boolean 2018-12-06 03:45:42 --> 1
+DEBUG - TYPE string 2018-12-06 03:45:54 --> 275
+DEBUG - TYPE boolean 2018-12-06 03:45:54 --> 1
+DEBUG - TYPE string 2018-12-06 03:46:07 --> 275
+DEBUG - TYPE boolean 2018-12-06 03:46:07 --> 1

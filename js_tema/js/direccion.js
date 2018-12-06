@@ -66,7 +66,7 @@ function registro_direccion(){
 		
 		set_option("id_recibo" , $(".id_recibo").val());
 		var data_send 		=  	$(".form_direccion_envio").serialize();		
-		var url =  	"../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
+		var url 			=  	"../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
 		request_enid( "POST",  data_send , url , response_registro_direccion);
 	}else{
 		recorrepage("#asentamiento");										
@@ -76,19 +76,18 @@ function registro_direccion(){
 /**/
 var  response_registro_direccion = function(data){
 
+	
 	if (data != -1 ){
-		/*
-		showonehideone(".contenedor_deuda_para_envio" , ".contenedor_informacion_envio");					
-		recorrepage(".contenedo_compra_info");			
-		var empty = [".place_asentamiento" , ".notificacion_direccion"];
-		empty_elements(empty);
-		*/
-		redirect("../area_cliente/?action=compras&ticket="+get_option("id_recibo"));
+			
+		var url_area_cliente	=  "../area_cliente/?action=compras&ticket="+get_option("id_recibo"); 	
+		var url_seguimiento 	=  "../pedidos/?seguimiento="+get_option("id_recibo")+"&&domicilio=1"; 			
+		var url =  (get_parameter(".es_seguimiento") != undefined && get_parameter(".es_seguimiento") ==  1) ? url_seguimiento :url_area_cliente; 
+		redirect(url);
 
 	}else{
+
 		format_error( ".notificacion_direccion", "VERIFICA LOS DATOS DE TU DIRECCIÓN");
-		recorrepage(".notificacion_direccion");
-	
+		recorrepage(".notificacion_direccion");	
 	}	
 }
 /**/

@@ -30,4 +30,4 @@ class Mailrest extends REST_Controller{
 		return  $this->principal->api( $api , $q , 'json', 'PUT');
 	}
 	/**/
-}/*Termina rest*/
+}?>

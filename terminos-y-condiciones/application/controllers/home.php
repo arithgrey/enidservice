@@ -26,4 +26,4 @@ class Home extends CI_Controller{
         $data["titulo"] = $titulo;        
         $this->principal->show_data_page($data, 'home');                          
     }
-}
+}?>

@@ -21,12 +21,8 @@ var response_opcion_entrega = function(data){
 	set_option("flag_carga" , 1);
 	var id_servicio = 	get_option("id_servicio");
 	var url 		=	"";
-
-	
-	
-	if (get_option("orden_pedido") == 1 ) {
 		
-		switch(get_option("tipo")) {
+	switch(get_option("tipo")) {
 		    case 1:	    	
 		    	
 		    	$(".form_pre_puntos_medios").submit();	        				    	
@@ -43,23 +39,6 @@ var response_opcion_entrega = function(data){
 		        break;
 		        
 		    default:        
-		} 
-
-	}else{
-		/*Indicar el tipo de entrega al pedido*/
-		switch(get_option("tipo")) {
-		    case 1:	    	
-				
-		    	$(".form_pre_puntos_medios").submit();	        				    	
-		        break;
-
-		    case 2:
-		    	//alert($(".form_orden_direccion").serialize());
-		    	$(".form_orden_direccion").submit();	         			
-		        break;
-		       
-		    default:        
-		} 
-	}
+	} 	
 
 }

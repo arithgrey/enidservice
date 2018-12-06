@@ -10,8 +10,16 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller{
 
       
       $param    =  $this->post();
+
       $response = false;
       if (if_ext($param , "id_recibo,punto_encuentro")) {
+
+        /**/
+        $in     = ["id_proyecto_persona_forma_pago" =>   $param["id_recibo"] ];
+        $status = $this->proyecto_persona_forma_pago_punto_encuentro_model->delete($in , 10);
+
+        debug($param["id_recibo"] );
+        debug($status);
 
         $params = [
           "id_proyecto_persona_forma_pago" =>   $param["id_recibo"],

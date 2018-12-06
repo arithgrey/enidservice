@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Home extends CI_Controller{
-
     function __construct(){        
         parent::__construct();                            
         $this->load->helper("puntoencuentro");
@@ -22,13 +21,25 @@ class Home extends CI_Controller{
 
         
         
+        $method_request = $this->input->server('REQUEST_METHOD');        
+        if ( 
+            (   $method_request == 'POST' 
+                &&  
+                get_param_def($param, "servicio" , 0 , 1 ) > 0 
+            )
 
-        if ($this->input->server('REQUEST_METHOD') == 'POST' 
-            &&  is_array($param) && array_key_exists("servicio", $param) && 
-            $param["servicio"] ){            
-            
+            || 
+                        
+            (   $method_request == 'POST' 
+                &&  
+                get_param_def($param, "recibo" , 0 , 1 ) > 0 
+            )
+
+        ){            
+        
+
+
             $data["tipos_puntos_encuentro"]=  $this->get_tipos_puntos_encuentro($param);
-            
 
             $data["css"] = [
                 "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css",
@@ -49,12 +60,22 @@ class Home extends CI_Controller{
                                     "../js_tema/js/pickers-init.js",
                                     
             ];
-            $data["servicio"]   =  $param["servicio"]; 
-            $data["num_ciclos"] =  $param["num_ciclos"];
+
+            $primer_registro            =  (get_param_def($param, "recibo" ) == 0 ) ? 1 : 0;
+            $data["primer_registro"]    =  $primer_registro;
+            if ($primer_registro ==  1) {
+
+                $data["servicio"]   =  $param["servicio"]; 
+                $data["num_ciclos"] =  $param["num_ciclos"];    
+
+            }else{                
+                $data["recibo"]     = $param["recibo"];
+            }            
             $this->principal->show_data_page($data, 'home');  
 
         }else{
             
+
             $id_servicio = $this->input->get("producto");
             redirect("../../producto/?producto=".$id_servicio);
         }        
@@ -65,4 +86,4 @@ class Home extends CI_Controller{
         return $this->principal->api($api , $q);
     }
     
-}
+}?>

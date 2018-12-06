@@ -75,4 +75,4 @@ class Enid extends CI_Controller {
         $api               =  "imagen_servicio/servicio/format/json/";
         return $this->principal->api( $api , $q);            
     }
-}/*Termina el controlador */
+}?>

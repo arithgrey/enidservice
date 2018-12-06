@@ -87,5 +87,4 @@ class Perfiles extends REST_Controller{
   /**/
   
    
-}
-?>
+}?>

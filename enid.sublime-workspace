@@ -4,12 +4,132 @@
 		"selected_items":
 		[
 			[
-				"data",
-				"data_complete"
+				"get_pre",
+				"get_parameter"
+			],
+			[
+				"url_",
+				"url_area_cliente"
+			],
+			[
+				"con",
+				"config"
+			],
+			[
+				"pa",
+				"paginacion"
+			],
+			[
+				"id_",
+				"id_recibo"
+			],
+			[
+				"PUNT",
+				"PUNTO"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"usua",
+				"usuario_punto_encuentro_model"
+			],
+			[
+				"que",
+				"query_get"
+			],
+			[
+				"dire",
+				"direccion_principal"
+			],
+			[
+				"da",
+				"data"
+			],
+			[
+				"domi",
+				"domicilio_entrega"
+			],
+			[
+				"view",
+				"view_recibo_registrado"
 			],
 			[
 				"for",
-				"for\tfor …"
+				"form\tTag"
+			],
+			[
+				"strup",
+				"strtoupper"
+			],
+			[
+				"data",
+				"data_direccion"
+			],
+			[
+				"get_pa",
+				"get_param_def"
+			],
+			[
+				"fa-",
+				"fa-check-circle"
+			],
+			[
+				"fin",
+				"final_numeric"
+			],
+			[
+				"nu",
+				"numerio"
+			],
+			[
+				"cl",
+				"col-lg-offset-4"
+			],
+			[
+				"noti",
+				"notificacion_pago"
+			],
+			[
+				"q_",
+				"q_up"
+			],
+			[
+				"reci",
+				"recibos"
+			],
+			[
+				"pro",
+				"proceso"
+			],
+			[
+				"toa",
+				"total_mas_envio"
+			],
+			[
+				"total_",
+				"total_mas_envio"
+			],
+			[
+				"to",
+				"total"
+			],
+			[
+				"envio_",
+				"envio_cliente"
+			],
+			[
+				"sal",
+				"saldo_pendiente"
+			],
+			[
+				"stta",
+				"status"
+			],
+			[
+				"ser",
+				"serviciosmodel"
 			],
 			[
 				"stat",
@@ -96,10 +216,6 @@
 				"sugerencias"
 			],
 			[
-				"ser",
-				"servicio"
-			],
-			[
 				"cla",
 				"clasificaciones"
 			],
@@ -118,10 +234,6 @@
 			[
 				"id",
 				"id_recibo"
-			],
-			[
-				"que",
-				"query_get"
 			],
 			[
 				"fe",
@@ -152,14 +264,6 @@
 				"SELECT\tTag"
 			],
 			[
-				"stta",
-				"status_venta"
-			],
-			[
-				"pa",
-				"param"
-			],
-			[
 				"tipifica",
 				"tipificacion"
 			],
@@ -180,14 +284,6 @@
 				"pago_pendiente"
 			],
 			[
-				"id_",
-				"id_proyecto_persona_forma_pago"
-			],
-			[
-				"sal",
-				"saldo_cubierto"
-			],
-			[
 				"col-",
 				"col-lg-4"
 			],
@@ -206,10 +302,6 @@
 			[
 				"tel_c",
 				"tel_contacto_alterno"
-			],
-			[
-				"PUNT",
-				"punto_encuentro"
 			],
 			[
 				"NOM",
@@ -302,10 +394,6 @@
 			[
 				"status",
 				"status_enid_service"
-			],
-			[
-				"da",
-				"data_entregas"
 			],
 			[
 				"inte",
@@ -412,10 +500,6 @@
 				"isShamir"
 			],
 			[
-				"con",
-				"configData"
-			],
-			[
 				"nomre",
 				"nombre_estacion_punto_encuentro"
 			],
@@ -430,90 +514,6 @@
 			[
 				"ali",
 				"align-self\tproperty"
-			],
-			[
-				"f",
-				"foreach\tforeach …"
-			],
-			[
-				"pam",
-				"params_where"
-			],
-			[
-				"ROSA",
-				"ROSARIO"
-			],
-			[
-				"servic",
-				"servicios"
-			],
-			[
-				"par",
-				"param"
-			],
-			[
-				"margin",
-				"margin\tproperty"
-			],
-			[
-				"res",
-				"response"
-			],
-			[
-				"PRINT",
-				"print_r"
-			],
-			[
-				"proces",
-				"proceso_compra"
-			],
-			[
-				"PARA",
-				"params"
-			],
-			[
-				"dat",
-				"data"
-			],
-			[
-				"extensin",
-				"extension_dominio"
-			],
-			[
-				"proc",
-				"proceso_compra"
-			],
-			[
-				"pro",
-				"proceso_compra"
-			],
-			[
-				"font-s",
-				"font-size\tproperty"
-			],
-			[
-				"q_",
-				"q_get"
-			],
-			[
-				"p",
-				"params"
-			],
-			[
-				"cate",
-				"categoria_model"
-			],
-			[
-				"th",
-				"this"
-			],
-			[
-				"faq",
-				"faqs"
-			],
-			[
-				"u",
-				"uppercase\ttext-transform"
 			]
 		]
 	},
@@ -577,150 +577,165 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/reporte_enid",
-		"/var/www/html/inicio/reporte_enid/application",
-		"/var/www/html/inicio/reporte_enid/application/controllers"
+		"/var/www/html/inicio/puntos_medios",
+		"/var/www/html/inicio/puntos_medios/application",
+		"/var/www/html/inicio/puntos_medios/application/controllers",
+		"/var/www/html/inicio/puntos_medios/application/views"
 	],
 	"file_history":
 	[
-		"/var/www/html/inicio/helpers/enid_helper.php",
-		"/var/www/html/inicio/pedidos/application/views/seguimiento.php",
-		"/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php",
-		"/var/www/html/inicio/css_tema/template/seguimiento_pedido.css",
-		"/var/www/html/inicio/pedidos/application/controllers/home.php",
-		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
-		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
-		"/var/www/html/inicio/q/application/views/cobranza/notificacion_pago_realizado.php",
-		"/var/www/html/inicio/view_tema/footer_template.php",
-		"/var/www/html/inicio/pedidos/application/views/detalle.php",
-		"/var/www/html/inicio/js_tema/pedidos/principal.js",
-		"/var/www/html/inicio/config/constants.php",
-		"/var/www/html/inicio/q/application/controllers/api/tipificacion_recibo.php",
-		"/var/www/html/inicio/test/application/views/home.php",
-		"/var/www/html/inicio/test/application/models/upload_model.php",
-		"/var/www/html/inicio/system/libraries/Form_validation.php",
-		"/var/www/html/inicio/test/application/controllers/home.php",
-		"/var/www/html/inicio/config/config.php",
-		"/var/www/html/inicio/config/autoload.php",
-		"/var/www/html/database.php",
-		"/var/www/html/inicio/q/application/controllers/api/archivo.php",
-		"/var/www/html/inicio/q/application/controllers/api/img.php",
-		"/var/www/html/inicio/q/application/views/imgs/servicio_producto_servicio.php",
-		"/var/www/html/inicio/system/helpers/file_helper.php",
-		"/var/www/html/inicio/system/libraries/Upload.php",
-		"/var/www/html/inicio/librerias/sessionclass.php",
-		"/var/www/html/inicio/librerias/principal.php",
-		"/var/www/html/inicio/js_tema/js/main.js",
-		"/var/www/html/inicio/system/helpers/form_helper.php",
+		"/var/www/html/inicio/puntos_medios/application/views/home.php",
+		"/var/www/html/inicio/q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php",
+		"/var/www/html/inicio/js_tema/puntos_medios/principal.js",
+		"/var/www/html/inicio/puntos_medios/application/views/quien_recibe.php",
+		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
+		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php",
+		"/var/www/html/inicio/q/application/models/imagen_servicio_model.php",
 		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
 		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
-		"/var/www/html/inicio/q/application/controllers/api/clasificacion.php",
-		"/var/www/html/inicio/system/libraries/Session.php",
-		"/var/www/html/inicio/css_tema/template/pedidos.css",
-		"/var/www/html/inicio/q/application/models/recibo_model.php",
-		"/var/www/html/inicio/q/application/models/usuario_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
-		"/var/www/html/inicio/producto/application/js/principal.js",
-		"/var/www/html/inicio/js_tema/pregunta/principal.js",
-		"/var/www/html/inicio/q/application/models/tipificacion_recibo_model.php",
-		"/var/www/html/inicio/pedidos/application/views/form_busqueda.php",
-		"/var/www/html/inicio/extra.sql",
-		"/var/www/html/inicio/js_tema/alerts/jquery-confirm.js",
-		"/var/www/html/inicio/css_tema/template/confirm-alert.css",
-		"/var/www/html/inicio/js_tema/extra/jquery-confirm/css/jquery-confirm.css",
-		"/var/www/html/inicio/q/application/models/imagen_usuario_model.php",
-		"/var/www/html/inicio/q/application/models/tipificacion_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/tipificacion.php",
-		"/var/www/html/inicio/contact/application/views/secciones/solicita_una_llamada.php",
-		"/var/www/html/inicio/puntos_medios/application/views/quien_recibe.php",
-		"/var/www/html/inicio/puntos_medios/application/views/home.php",
-		"/var/www/html/inicio/js_tema/puntos_medios/principal.js",
-		"/var/www/html/inicio/q/application/helpers/recibo_helper.php",
-		"/var/www/html/inicio/js_tema/procesar/principal.js",
-		"/var/www/html/inicio/index.php",
-		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
-		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
-		"/var/www/html/inicio/js_tema/servicio/pre.js",
-		"/var/www/html/inicio/q/application/controllers/api/tipo_entrega.php",
-		"/var/www/html/inicio/q/application/models/punto_encuentro_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/status_enid_service.php",
-		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php",
-		"/var/www/html/inicio/q/application/controllers/api/direccion.php",
-		"/var/www/html/inicio/q/application/helpers/pedidos_helper.php",
-		"/var/www/html/inicio/q/application/models/direccion_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php",
-		"/var/www/html/inicio/pedidos/application/views/error.php",
-		"/var/www/html/inicio/pedidos/application/views/home.php",
-		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
-		"/var/www/html/inicio/css_tema/template/puntos_encuentro.css",
-		"/var/www/html/inicio/search/application/controllers/home.php",
-		"/var/www/html/inicio/system/helpers/html_helper.php",
-		"/var/www/html/inicio/q/application/views/recibo/pedidos.php",
-		"/var/www/html/inicio/q/application/controllers/api/intento_tipo_entrega.php",
-		"/var/www/html/inicio/q/application/models/tipo_entrega_model.php",
-		"/var/www/html/inicio/q/application/models/intento_tipo_entrega_model.php",
-		"/var/www/html/inicio/system/libraries/Xmlrpc.php",
-		"/var/www/html/inicio/producto/application/controllers/home.php",
-		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
-		"/var/www/html/inicio/view_tema/header_meta_enid.php",
-		"/var/www/html/inicio/lista_deseos/error_log",
-		"/var/www/html/inicio/system/core/Common.php",
-		"/var/www/html/inicio/system/core/Exceptions.php",
-		"/var/www/html/inicio/usuarios_enid_service/index.php",
-		"/var/www/html/inicio/usuarios_enid_service/application/config/email.php",
-		"/var/www/html/inicio/unete_a_nuestro_equipo/application/config/email.php",
-		"/var/www/html/inicio/terminos-y-condiciones/application/config/email.php",
-		"/var/www/html/inicio/tareas_complejas/application/config/email.php",
-		"/var/www/html/inicio/tareas/application/config/email.php",
-		"/var/www/html/inicio/sobre_enidservice/application/config/email.php",
-		"/var/www/html/inicio/search/application/config/email.php",
-		"/var/www/html/inicio/reporte_enid/application/config/email.php",
-		"/var/www/html/inicio/recomendacion/application/config/email.php",
-		"/var/www/html/inicio/q/application/config/email.php",
-		"/var/www/html/inicio/puntos_medios/application/config/email.php",
-		"/var/www/html/inicio/producto/application/config/email.php",
-		"/var/www/html/inicio/procesar/application/config/email.php",
-		"/var/www/html/inicio/pregunta/application/config/email.php",
-		"/var/www/html/inicio/planes_servicios/application/config/email.php",
-		"/var/www/html/inicio/pedidos/application/config/email.php",
-		"/var/www/html/inicio/orden_pago_oxxo/application/config/email.php",
-		"/var/www/html/inicio/movimientos/application/config/email.php",
-		"/var/www/html/inicio/msj/application/config/email.php",
-		"/var/www/html/inicio/notificar/application/config/email.php",
-		"/var/www/html/inicio/login/application/config/email.php",
-		"/var/www/html/inicio/lista_deseos/application/config/email.php",
-		"/var/www/html/inicio/imgs/application/config/email.php",
-		"/var/www/html/inicio/forma_pago/application/config/email.php",
-		"/var/www/html/inicio/faq/application/config/email.php",
-		"/var/www/html/inicio/desarrollo/application/config/email.php",
-		"/var/www/html/inicio/contact/application/config/email.php",
-		"/var/www/html/inicio/area_cliente/application/config/email.php",
-		"/var/www/html/inicio/valoracion/application/config/email.php",
-		"/var/www/html/inicio/planes_servicios/application/views/home_enid.php",
-		"/var/www/html/inicio/view_tema/header_template.php",
-		"/var/www/html/inicio/librerias/Format.php",
-		"/var/www/html/inicio/librerias/REST_Controller.php",
-		"/var/www/html/inicio/q/application/libraries/Format.php_",
-		"/var/www/html/inicio/system/core/Loader.php",
-		"/var/www/html/inicio/q/application/models/linea_metro_model.php",
-		"/var/www/html/inicio/q/application/views/proyecto/domicilio_envio.php",
+		"/var/www/html/inicio/puntos_medios/application/controllers/home.php",
 		"/var/www/html/inicio/q/application/helpers/lineametro_helper.php",
+		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
 		"/var/www/html/inicio/q/application/controllers/api/linea_metro.php",
-		"/var/www/html/inicio/reporte_enid/application/views/secciones/menu.php",
-		"/var/www/html/inicio/reporte_enid/application/views/empresas_enid.php",
-		"/var/www/html/inicio/q/application/models/status_enid_service_model.php",
-		"/var/www/html/inicio/q/application/helpers/servicios_helper.php",
-		"/var/www/html/inicio/producto/application/views/pre.php"
+		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
+		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
+		"/var/www/html/inicio/js_tema/domicilio/domicilio_entrega.js",
+		"/var/www/html/inicio/pedidos/application/views/domicilio.php",
+		"/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php",
+		"/var/www/html/inicio/helpers/enid_helper.php",
+		"/var/www/html/inicio/producto/application/views/pre.php",
+		"/var/www/html/inicio/pedidos/application/views/seguimiento.php",
+		"/var/www/html/inicio/js_tema/servicio/pre.js",
+		"/var/www/html/inicio/procesar/application/views/secciones_2/domicilio_entrega.php",
+		"/var/www/html/inicio/procesar/application/controllers/home.php",
+		"/var/www/html/inicio/js_tema/js/direccion.js",
+		"/var/www/html/inicio/producto/application/controllers/home.php",
+		"/var/www/html/inicio/js_tema/domicilio/direccion_pedido_registrado.js",
+		"/var/www/html/inicio/pedidos/application/controllers/home.php",
+		"/var/www/html/inicio/planes_servicios/application/controllers/inicio.php",
+		"/var/www/html/inicio/js_tema/js/main.js",
+		"/var/www/html/inicio/procesar/application/views/secciones_2/paginas_web.php",
+		"/var/www/html/inicio/js_tema/procesar/principal.js",
+		"/var/www/html/inicio/reporte_enid/application/controllers/inicio.php",
+		"/var/www/html/inicio/recomendacion/application/controllers/home.php",
+		"/var/www/html/inicio/pregunta/application/controllers/home.php",
+		"/var/www/html/inicio/orden_pago_oxxo/application/controllers/home.php",
+		"/var/www/html/inicio/msj/application/controllers/api/presentacion.php",
+		"/var/www/html/inicio/msj/application/controllers/api/pregunta.php",
+		"/var/www/html/inicio/msj/application/controllers/api/mailrest.php",
+		"/var/www/html/inicio/movimientos/application/controllers/inicio.php",
+		"/var/www/html/inicio/login/application/controllers/startsession.php",
+		"/var/www/html/inicio/lista_deseos/application/controllers/home.php",
+		"/var/www/html/inicio/imgs/application/controllers/enid.php",
+		"/var/www/html/inicio/forma_pago/application/controllers/home.php",
+		"/var/www/html/inicio/faq/application/controllers/home.php",
+		"/var/www/html/inicio/desarrollo/application/controllers/inicio.php",
+		"/var/www/html/inicio/contact/application/controllers/home.php",
+		"/var/www/html/inicio/area_cliente/application/controllers/home.php",
+		"/var/www/html/inicio/administracion_cuenta/application/controllers/recursocontroller.php",
+		"/var/www/html/inicio/search/application/controllers/home.php",
+		"/var/www/html/inicio/sobre_enidservice/application/controllers/home.php",
+		"/var/www/html/inicio/tareas/application/controllers/home.php",
+		"/var/www/html/inicio/tareas_complejas/application/controllers/home.php",
+		"/var/www/html/inicio/terminos-y-condiciones/application/controllers/home.php",
+		"/var/www/html/inicio/unete_a_nuestro_equipo/application/controllers/home.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/controllers/inicio.php",
+		"/var/www/html/inicio/valoracion/application/controllers/home.php",
+		"/var/www/html/inicio/librerias/Format.php",
+		"/var/www/html/inicio/librerias/principal.php",
+		"/var/www/html/inicio/librerias/REST_Controller.php",
+		"/var/www/html/inicio/librerias/restclient.php",
+		"/var/www/html/inicio/librerias/sessionclass.php",
+		"/var/www/html/inicio/system/libraries/Pagination.php",
+		"/var/www/html/inicio/programacion/resumen_dia.php",
+		"/var/www/html/inicio/q/application/controllers/api/objetivos.php",
+		"/var/www/html/inicio/q/application/controllers/api/notificacion_pago.php",
+		"/var/www/html/inicio/q/application/controllers/api/negocio.php",
+		"/var/www/html/inicio/q/application/controllers/api/metakeyword_usuario.php",
+		"/var/www/html/inicio/q/application/controllers/api/metakeyword.php",
+		"/var/www/html/inicio/q/application/controllers/api/intento_compra.php",
+		"/var/www/html/inicio/q/application/controllers/api/incidencia.php",
+		"/var/www/html/inicio/q/application/controllers/api/img.php",
+		"/var/www/html/inicio/q/application/controllers/api/imagen_usuario.php",
+		"/var/www/html/inicio/q/application/controllers/api/imagen_servicio.php",
+		"/var/www/html/inicio/q/application/controllers/api/funcionalidad.php",
+		"/var/www/html/inicio/q/application/controllers/api/forma_pago.php",
+		"/var/www/html/inicio/q/application/controllers/api/estado_republica.php",
+		"/var/www/html/inicio/q/application/controllers/api/empresa_recurso.php",
+		"/var/www/html/inicio/q/application/controllers/api/direccion.php",
+		"/var/www/html/inicio/q/application/controllers/api/desarrollo.php",
+		"/var/www/html/inicio/q/application/controllers/api/cuentas.php",
+		"/var/www/html/inicio/q/application/controllers/api/cuenta_pago.php",
+		"/var/www/html/inicio/q/application/controllers/api/cron.php",
+		"/var/www/html/inicio/programacion/recordatorio_publicaciones.php",
+		"/var/www/html/inicio/q/application/controllers/api/cotizaciones.php",
+		"/var/www/html/inicio/q/application/controllers/api/contacto.php",
+		"/var/www/html/inicio/q/application/controllers/api/codigo_postal.php",
+		"/var/www/html/inicio/q/application/controllers/api/categoria.php",
+		"/var/www/html/inicio/q/application/controllers/api/blog.php",
+		"/var/www/html/inicio/q/application/controllers/api/banco.php",
+		"/var/www/html/inicio/q/application/controllers/api/areacliente.php",
+		"/var/www/html/inicio/msj/application/controllers/api/emp.php",
+		"/var/www/html/inicio/programacion/recordatorio_cobranza.php",
+		"/var/www/html/inicio/programacion/gamificacion_respuestas_a_cliente.php",
+		"/var/www/html/inicio/q/application/controllers/api/paginacion.php",
+		"/var/www/html/inicio/q/application/controllers/api/perfiles.php",
+		"/var/www/html/inicio/q/application/controllers/api/pregunta.php",
+		"/var/www/html/inicio/q/application/controllers/api/pregunta_servicio.php",
+		"/var/www/html/inicio/q/application/controllers/api/privacidad.php",
+		"/var/www/html/inicio/q/application/controllers/api/privacidad_usuario.php",
+		"/var/www/html/inicio/q/application/controllers/api/productividad.php",
+		"/var/www/html/inicio/q/application/controllers/api/prospecto.php",
+		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php",
+		"/var/www/html/inicio/q/application/controllers/api/recurso.php",
+		"/var/www/html/inicio/q/application/controllers/api/respon.php",
+		"/var/www/html/inicio/q/application/controllers/api/saldos.php",
+		"/var/www/html/inicio/q/application/controllers/api/talla.php",
+		"/var/www/html/inicio/q/application/controllers/api/tipificacion.php",
+		"/var/www/html/inicio/q/application/controllers/api/tipificacion_recibo.php",
+		"/var/www/html/inicio/q/application/controllers/api/tipo_entrega.php",
+		"/var/www/html/inicio/q/application/controllers/api/tipo_negocio.php",
+		"/var/www/html/inicio/q/application/controllers/api/tipo_punto_encuentro.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario_clasificacion.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario_punto_encuentro.php",
+		"/var/www/html/inicio/q/application/controllers/api/valoracion.php",
+		"/var/www/html/inicio/programacion/evaluacion_servicios_mensual.php",
+		"/var/www/html/inicio/q/application/models/usuario_punto_encuentro_model.php",
+		"/var/www/html/inicio/q/application/models/usuario_direccion_model.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario_direccion.php",
+		"/var/www/html/inicio/js_tema/pedidos/principal.js",
+		"/var/www/html/inicio/css_tema/template/pedido_domicilio.css",
+		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
+		"/var/www/html/inicio/css_tema/template/main.css",
+		"/var/www/html/inicio/css_tema/template/pedidos.css",
+		"/var/www/html/inicio/js_tema/administracion_cuenta/principal.js",
+		"/var/www/html/inicio/faq/application/faq/principal.js",
+		"/var/www/html/inicio/enid.sublime-project"
 	],
 	"find":
 	{
-		"height": 28.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
 		"height": 116.0,
 		"where_history":
 		[
+			"",
+			"*.php",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
+			"*.js",
+			"*.php",
 			"",
 			"*.php",
 			"*.PHP",
@@ -834,20 +849,6 @@
 			"*.php",
 			"",
 			"*.js",
-			"*.php",
-			"",
-			"*.js",
-			"*.php",
-			"*.js",
-			"*.php",
-			"",
-			"*.js",
-			"*.php",
-			"*.js",
-			"*.jsd",
-			"*.php",
-			"*.js",
-			"*.ks",
 			"*.php"
 		]
 	},
@@ -856,134 +857,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"sigue tu pedido",
-			"module_redirect",
+			"delete",
+			"create_orden_punto_entrega",
+			"punto_encuentro_form",
+			"punto_encuentro",
+			"create_orden_punto_entrega",
+			"solicitud_cambio_punto_entrega",
+			"primer_registro",
+			"2",
+			"primer_registro",
+			"linea_metro",
+			"create_orden_punto_entrega",
+			"agrega_punto_encuentro_usuario",
+			"\t\t",
+			"solicitud_proceso_pago",
+			"form_punto_encuentro_horario",
+			"aler",
+			"formulario_quien_recibe",
+			"response_estaciones",
+			"linea",
+			"get_servicio_por_recibo",
+			"servicio_ppfp",
+			"get_servicio_por_recibo",
+			"recibo",
+			"linea_metro",
+			"form_puntos_medios",
+			"agregar_punto_encuentro_pedido",
 			"servicio",
-			"servi",
+			"linea_metro_GET",
+			"response_estaciones",
+			"place_lineas",
+			"muestra_lineas_metro",
+			"muestra_estaciones",
+			"linea_metro",
+			"formulario_quien_recibe",
+			"form_puntos_medios",
+			"puntos_medios",
+			"form_pre_puntos_medios",
+			"form_puntos",
+			"form_puntos_medios",
+			"agregar_punto_encuentro_pedido",
+			"form_pre_puntos_medios",
+			"num_ciclos",
+			"$num_ciclos_contratados",
+			"form_pre_puntos_medios",
+			"carga_opcion_entrega",
+			"carga_opcion_entrega(",
+			"agregar_punto_encuentro_pedido",
+			"Agregar punto",
+			"url_seguimiento",
+			"carga_ficha_direccion_envio",
+			"post",
+			"form_registro_direccion",
+			"agregar_direccion_pedido",
+			"TUS DIRECCIONES DE ENTREGA REGISTRADAS",
+			"Agregar dirección",
+			"form_orden_direccion",
+			"view_recibo_registrado",
+			"form_registro_direccion",
+			"agregar_direccion_pedido",
+			"agregar_punto_encuentro_pedido",
+			"Agregar punto de encuentro",
+			"realiza",
 			"get_texto_status",
-			"get_actividad",
-			"timeline__item__date",
-			"carga_detalle_pedido",
-			"id_recibo",
-			"carga_vista_seguimiento",
-			"get_recibo",
-			"carga_detalle_pedido",
-			"p",
-			"p{",
-			"p",
-			"h4",
-			"h2",
-			"body",
-			"carga_vista_seguimiento",
-			"link_seguimiento",
-			"resumen_desglose_pago",
-			"https://articulo.mercadolibre.com.mx/MLM-646166232-base-enfriadora-laptoptableta-mesa-bambu-cama-sofa-playa-_JM",
-			"!=",
-			"selector_estados_ventas",
-			"cambio_estado",
-			"modidica_estado",
-			"guarda_nuevo_estado",
-			"status_venta_registro",
-			"modifica_status",
-			"status",
-			"set_tipo_entrega",
-			"version_enid",
-			"val_session",
-			"registra_data_nuevo_estado",
-			"modifica_status",
-			"procesa_cambio_estado",
-			"6",
-			"registra_data_nuevo_estado",
-			"modifica_status",
-			"registra_data_nuevo_estado",
-			"es_pro",
-			"modifica_status",
-			"registra_data_nuevo_estado",
-			"\t\t\t",
-			"modifica_status",
-			"procesa_cambio_estado",
-			"response_saldo_cubierto",
-			"Saldo_cubierto",
-			"SALDO_CU",
-			"SAL",
-			"0",
-			"add_tipificacion",
-			"es_",
-			"response_status_venta",
-			"modifica_status",
-			"procesa_cambio_estado",
-			"es_proceso_compra",
-			"modifica_status",
-			"verifica_pago_previo",
-			"procesa_cambio_estado",
-			"verifica_pago_previo",
-			"procesa_cambio_estado",
-			"oculta_opciones_estados",
-			"selector_estados_ventas",
-			"oculta_opciones_estados",
-			"text_continual",
-			"show_confirm",
-			"saldo_cubierto",
-			"saldo_actual_cubierto",
-			"verifica_pago_previo",
-			"saldo_cubierto",
-			"valida",
-			"6",
-			"guarda_nuevo_estado",
-			"modidica_estado",
-			"is_array",
-			"array_key_exists",
-			"create_seccion_domicilio",
-			"create_domicilio_entrega",
-			"DOMICIO DEL ENVIO",
-			"add_tipificacion",
-			"set_tipo_entrega",
-			"tipificacion",
-			"HORARIO DE ENTREGA",
-			"autoinit",
-			"form_img_servicio_producto",
-			"get_mimes",
-			"=>",
-			"=",
-			"form_img_servicio_producto",
-			"transforma_mayusculas",
+			"id_proyecto_persona_forma_pago",
+			"load_view_seguimiento",
+			"seguimiento",
+			"        \n",
+			"quitar_espacios_numericos",
+			"quita_espacios_en_telefono",
+			"tele",
+			"telefono form-control",
+			"}?>\n",
+			"gamificacion_respuestas_a_cliente.php on line 2",
+			"resumen_dia.php",
+			"resumen_dia.php on line 3",
+			"recordatorio_cobranza.php on line 3",
+			"empresamode",
+			"gamifica_usuarios_sin_contestar_cliente",
+			"deuda_pendiente",
+			"recordatorio_publicaciones",
+			"reporte_direccion",
+			"deuda_pendiente",
+			"gamificacion_respuestas_a_cliente.php",
+			"programacion",
+			"debu",
+			"create_pagination",
+			"pagina",
+			"per_page",
 			"princi",
-			"this->id_usuario",
-			"val_session",
-			"debug",
-			"session",
-			"cambio_estado",
-			"fa fa fa fa-pencil",
-			"cambio_tipo_entrega",
-			"tipo_entrega_",
-			"tipo_entrega",
-			"reci",
-			"registra_tipo_entrega",
-			"set_tipo_entrega",
-			"encabezado_tipo_entrega",
-			"tipo_entrega",
-			"form_edicion_tipo_entrega",
-			"carga_productos_sugeridos",
-			"../tag/index.php/api/sugerencia/servicio/format/json/",
-			"sugerencia/servicio",
-			"completa_servicios_sugeridos",
-			"qmetakeyword",
-			"busqueda_producto_por_palabra_clave",
-			"agrega_costo_envio",
-			"por_clasificacion",
-			"get_servicios_lista_deseos",
-			"agrega_costo_envio",
-			"lista_deseos_sugerencias",
-			"completa_servicios_sugeridos",
-			"lista_deseos_sugerencias",
-			"qmetakeyword",
-			"busqueda_producto_por_palabra_clave",
-			"get_servicios_lista_deseos",
-			"completa_servicios_sugeridos",
-			"get_servicios_por_clasificaciones",
-			"por_clasificacion",
-			"]",
-			"["
+			"              ",
+			"             ",
+			"            ",
+			"              ",
+			"             ",
+			"            ",
+			"paginacion",
+			"config",
+			"create_pagination",
+			"            $this->create_pagination($totales_elementos,\n",
+			"create_pagination",
+			"vendedor",
+			"$param[\"id_clasificacion\"]",
+			"create_pagination",
+			"config_paginacion",
+			"create_pagination",
+			"config_paginacion",
+			"pagin",
+			"            ",
+			"pagin",
+			"paginacion",
+			"pagina_",
+			"create_pagination",
+			"pagina",
+			"create_pagination",
+			"categorias_destacadas",
+			"create_keyword",
+			"load_data",
+			"=",
+			"pagin",
+			"agregar_nueva_direccion",
+			"<?=agregar_nueva_direccion();?>                ",
+			"agregar_nueva_direccion",
+			"3",
+			"$text",
+			"text",
+			"$text .=  \"<li class='list-group-item'>\";",
+			"=",
+			"]"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -991,6 +992,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"<?php require_once \"../def.php\";?>",
 			"../q/index.php/api/servicio/sugerencia/format/json/",
 			"tipo_entrega",
 			"",
@@ -1077,24 +1079,324 @@
 		"selected_items":
 		[
 			[
+				"imagen_ser",
+				"q/application/models/imagen_servicio_model.php"
+			],
+			[
+				"serviciomo",
+				"q/application/models/serviciosmodel.php"
+			],
+			[
+				"servi",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"proyecto_persona_forma_pago_punto_encuentro_model",
+				"q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php"
+			],
+			[
+				"proyecto_persona_forma_pago_punto_encuentro",
+				"q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php"
+			],
+			[
+				"qui",
+				"puntos_medios/application/views/quien_recibe.php"
+			],
+			[
+				"punto_encuentro",
+				"q/application/controllers/api/punto_encuentro.php"
+			],
+			[
+				"linea_metro",
+				"q/application/controllers/api/linea_metro.php"
+			],
+			[
+				"cobran",
+				"q/application/controllers/api/cobranza.php"
+			],
+			[
+				"recibo",
+				"q/application/controllers/api/recibo.php"
+			],
+			[
+				"quien_recibe",
+				"puntos_medios/application/views/quien_recibe.php"
+			],
+			[
+				"domi",
+				"pedidos/application/views/domicilio.php"
+			],
+			[
+				"domici",
+				"pedidos/application/views/domicilio.php"
+			],
+			[
+				"seguimi",
+				"pedidos/application/views/seguimiento.php"
+			],
+			[
+				"secciones_2/domicilio_entrega",
+				"procesar/application/views/secciones_2/domicilio_entrega.php"
+			],
+			[
+				"js_tema/domicilio/direccion_pedido_registrado.js",
+				"js_tema/domicilio/direccion_pedido_registrado.js"
+			],
+			[
+				"js_tema/js/direccion.js",
+				"js_tema/js/direccion.js"
+			],
+			[
+				"js_tema/servicio/pre.js",
+				"js_tema/servicio/pre.js"
+			],
+			[
+				"seguimiento",
+				"pedidos/application/views/seguimiento.php"
+			],
+			[
+				"s_tema/procesar/principal.js",
+				"js_tema/procesar/principal.js"
+			],
+			[
+				"pagi",
+				"q/application/controllers/api/paginacion.php"
+			],
+			[
+				"enid",
+				"helpers/enid_helper.php"
+			],
+			[
+				"cron",
+				"q/application/controllers/api/cron.php"
+			],
+			[
+				"pagina",
+				"q/application/controllers/api/paginacion.php"
+			],
+			[
+				"domicilio",
+				"pedidos/application/views/domicilio.php"
+			],
+			[
+				"usuario_pun",
+				"q/application/models/usuario_punto_encuentro_model.php"
+			],
+			[
+				"usuario_punt",
+				"q/application/controllers/api/usuario_punto_encuentro.php"
+			],
+			[
 				"eni",
 				"helpers/enid_helper.php"
 			],
 			[
-				"PEDIDOS",
+				"usuario_d",
+				"q/application/models/usuario_direccion_model.php"
+			],
+			[
+				"usuario_direccion_model",
+				"q/application/models/usuario_direccion_model.php"
+			],
+			[
+				"usuario_direccion",
+				"q/application/controllers/api/usuario_direccion.php"
+			],
+			[
+				"codigo",
+				"q/application/controllers/api/codigo_postal.php"
+			],
+			[
+				"codigo_pos",
+				"q/application/controllers/api/codigo_postal.php"
+			],
+			[
+				"main",
+				"js_tema/js/main.js"
+			],
+			[
+				"proyecto_persona_forma_pago_direccion",
+				"q/application/controllers/api/proyecto_persona_forma_pago_direccion.php"
+			],
+			[
+				"codigo_po",
+				"q/application/controllers/api/codigo_postal.php"
+			],
+			[
+				"main.js",
+				"js_tema/js/main.js"
+			],
+			[
+				"pedido_domicilio.css",
+				"css_tema/template/pedido_domicilio.css"
+			],
+			[
+				"pedidos.css",
+				"css_tema/template/pedidos.css"
+			],
+			[
+				"pedi",
 				"pedidos/application/helpers/pedidos_helper.php"
+			],
+			[
+				"direccion_pedido_registrado",
+				"js_tema/domicilio/direccion_pedido_registrado.js"
+			],
+			[
+				"domicilio_entrega.js",
+				"js_tema/domicilio/domicilio_entrega.js"
+			],
+			[
+				"direccion.js",
+				"js_tema/js/direccion.js"
+			],
+			[
+				"direccion_pedido_registrado.js",
+				"js_tema/domicilio/direccion_pedido_registrado.js"
+			],
+			[
+				"proyec",
+				"q/application/controllers/api/proyecto_persona_forma_pago_direccion.php"
+			],
+			[
+				"cobranza",
+				"q/application/controllers/api/cobranza.php"
+			],
+			[
+				"pre.php",
+				"producto/application/views/pre.php"
+			],
+			[
+				"pre",
+				"js_tema/servicio/pre.js"
+			],
+			[
+				"docmi",
+				"pedidos/application/views/domicilio.php"
+			],
+			[
+				"ENID",
+				"helpers/enid_helper.php"
+			],
+			[
+				"usua_",
+				"q/application/controllers/api/usuario_direccion.php"
+			],
+			[
+				"home",
+				"producto/application/controllers/home.php"
+			],
+			[
+				"direccion",
+				"q/application/controllers/api/direccion.php"
+			],
+			[
+				"proyecto/lista_version_cliente",
+				"inicio/q/application/views/proyecto/lista_version_cliente.php"
+			],
+			[
+				"ped",
+				"css_tema/template/pedidos.css"
+			],
+			[
+				"seguimiento_pedido.css",
+				"css_tema/template/seguimiento_pedido.css"
+			],
+			[
+				"princi",
+				"librerias/principal.php"
+			],
+			[
+				"home_preferencias",
+				"lista_deseos/application/views/home_preferencias.php"
+			],
+			[
+				"reci",
+				"q/application/controllers/api/recibo.php"
+			],
+			[
+				"q_hel",
+				"q/application/helpers/q_helper.php"
+			],
+			[
+				"productividad",
+				"q/application/controllers/api/productividad.php"
+			],
+			[
+				"usua",
+				"q/application/controllers/api/usuario.php"
+			],
+			[
+				"compra",
+				"producto/application/views/compra.php"
+			],
+			[
+				"form_compra",
+				"producto/application/views/form_compra.php"
+			],
+			[
+				"def",
+				"def.php"
+			],
+			[
+				"session",
+				"system/libraries/Session.php"
+			],
+			[
+				"sess",
+				"librerias/sessionclass.php"
+			],
+			[
+				"segui",
+				"pedidos/application/views/seguimiento.php"
+			],
+			[
+				"tickets",
+				"q/application/controllers/api/tickets.php"
+			],
+			[
+				"cobranza/resumen_no_aplica",
+				"q/application/views/cobranza/resumen_no_aplica.php"
+			],
+			[
+				"areaclie",
+				"q/application/controllers/api/areacliente.php"
 			],
 			[
 				"cobranza/pago_al_momento",
 				"q/application/views/cobranza/pago_al_momento.php"
 			],
 			[
-				"cobranza/notificacion_pago_realizado",
-				"q/application/views/cobranza/notificacion_pago_realizado.php"
+				"pago_a",
+				"q/application/views/cobranza/pago_al_momento.php"
 			],
 			[
-				"recibo",
-				"q/application/controllers/api/recibo.php"
+				"helpers/recibo_helper.php",
+				"q/application/helpers/recibo_helper.php"
+			],
+			[
+				"basico",
+				"q/application/views/producto/basico.php"
+			],
+			[
+				"producto_ba",
+				"q/application/views/producto/basico_empresa.php"
+			],
+			[
+				"paginacion",
+				"q/application/controllers/api/paginacion.php"
+			],
+			[
+				"servicio",
+				"q/application/controllers/api/servicio.php"
+			],
+			[
+				"PEDIDOS",
+				"pedidos/application/helpers/pedidos_helper.php"
+			],
+			[
+				"cobranza/notificacion_pago_realizado",
+				"q/application/views/cobranza/notificacion_pago_realizado.php"
 			],
 			[
 				"foo",
@@ -1141,10 +1443,6 @@
 				"system/libraries/Upload.php"
 			],
 			[
-				"princi",
-				"librerias/principal.php"
-			],
-			[
 				"librerias/sessionclass",
 				"librerias/sessionclass.php"
 			],
@@ -1157,32 +1455,8 @@
 				"q/application/controllers/api/clasificacion.php"
 			],
 			[
-				"serviciomo",
-				"q/application/models/serviciosmodel.php"
-			],
-			[
-				"session",
-				"system/libraries/Session.php"
-			],
-			[
 				"sessionclass",
 				"librerias/sessionclass.php"
-			],
-			[
-				"main",
-				"js_tema/js/main.js"
-			],
-			[
-				"reci",
-				"q/application/models/recibo_model.php"
-			],
-			[
-				"enid",
-				"helpers/enid_helper.php"
-			],
-			[
-				"servicio",
-				"q/application/controllers/api/servicio.php"
 			],
 			[
 				"DETALLE",
@@ -1191,10 +1465,6 @@
 			[
 				"tipificacion_recibo_model",
 				"q/application/models/tipificacion_recibo_model.php"
-			],
-			[
-				"servi",
-				"q/application/controllers/api/servicio.php"
 			],
 			[
 				"tipificacion_",
@@ -1225,14 +1495,6 @@
 				"extra.sql"
 			],
 			[
-				"pedi",
-				"css_tema/template/pedidos.css"
-			],
-			[
-				"quien_recibe",
-				"puntos_medios/application/views/quien_recibe.php"
-			],
-			[
 				"pedido.js",
 				"js_tema/pedidos/principal.js"
 			],
@@ -1249,10 +1511,6 @@
 				"q/application/controllers/api/punto_encuentro.php"
 			],
 			[
-				"ped",
-				"css_tema/template/pedidos.css"
-			],
-			[
 				"tipoe",
 				"q/application/controllers/api/tipo_entrega.php"
 			],
@@ -1263,18 +1521,6 @@
 			[
 				"cobra",
 				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"punto_encuentro",
-				"q/application/controllers/api/punto_encuentro.php"
-			],
-			[
-				"proyecto_persona_forma_pago_punto_encuentro",
-				"q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php"
-			],
-			[
-				"direccion",
-				"q/application/controllers/api/direccion.php"
 			],
 			[
 				"direccion.php",
@@ -1341,252 +1587,8 @@
 				"q/application/models/serviciosmodel.php"
 			],
 			[
-				"linea_metro",
-				"q/application/controllers/api/linea_metro.php"
-			],
-			[
 				"linea_metro_model",
 				"q/application/models/linea_metro_model.php"
-			],
-			[
-				"js_tema/puntos_medios/principal.js",
-				"js_tema/puntos_medios/principal.js"
-			],
-			[
-				"pre",
-				"js_tema/servicio/pre.js"
-			],
-			[
-				"status_enid_service_model",
-				"q/application/models/status_enid_service_model.php"
-			],
-			[
-				"recibo_",
-				"q/application/helpers/recibo_helper.php"
-			],
-			[
-				"tipo_entre",
-				"q/application/models/intento_tipo_entrega_model.php"
-			],
-			[
-				"intento_",
-				"q/application/controllers/api/intento_tipo_entrega.php"
-			],
-			[
-				"servicio_he",
-				"q/application/helpers/servicios_helper.php"
-			],
-			[
-				"servicios",
-				"q/application/models/serviciosmodel.php"
-			],
-			[
-				"intento_e",
-				"q/application/controllers/api/intento_tipo_entrega.php"
-			],
-			[
-				"inten",
-				"q/application/models/intento_tipo_entrega_model.php"
-			],
-			[
-				"intene",
-				"q/application/models/intento_tipo_entrega_model.php"
-			],
-			[
-				"js_tema/servicio/pre.js",
-				"js_tema/servicio/pre.js"
-			],
-			[
-				"servici",
-				"q/application/models/serviciosmodel.php"
-			],
-			[
-				"recibomo",
-				"q/application/models/recibo_model.php"
-			],
-			[
-				"intento_compra_model",
-				"q/application/models/intento_compra_model.php"
-			],
-			[
-				"pago_a",
-				"q/application/views/cobranza/pago_al_momento.php"
-			],
-			[
-				"tipo_punto_encuentro_model",
-				"q/application/models/tipo_punto_encuentro_model.php"
-			],
-			[
-				"tipo_pun",
-				"q/application/controllers/api/tipo_punto_encuentro.php"
-			],
-			[
-				"cobrna",
-				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"punto_en",
-				"q/application/controllers/api/punto_encuentro.php"
-			],
-			[
-				"punto_e",
-				"q/application/controllers/api/punto_encuentro.php"
-			],
-			[
-				"punto_",
-				"q/application/models/punto_encuentro_model.php"
-			],
-			[
-				"area_cli",
-				"css_tema/template/area_cliente.css"
-			],
-			[
-				"pago_al_momento",
-				"q/application/views/cobranza/pago_al_momento.php"
-			],
-			[
-				"pago_al_momento_contra_entrega",
-				"q/application/views/cobranza/pago_al_momento_contra_entrega.php"
-			],
-			[
-				"punto_encuentro_model",
-				"q/application/models/punto_encuentro_model.php"
-			],
-			[
-				"proyecto_persona_forma_pago_punto_encuentro_model",
-				"q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php"
-			],
-			[
-				"cobran",
-				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"cobranza",
-				"q/application/controllers/api/cobranza.php"
-			],
-			[
-				"js_tema/procesar/principal.js",
-				"js_tema/procesar/principal.js"
-			],
-			[
-				"EXTR",
-				"extra.sql"
-			],
-			[
-				"cobr",
-				"q/application/helpers/cobranza_helper.php"
-			],
-			[
-				"usua",
-				"q/application/controllers/api/usuario.php"
-			],
-			[
-				"_hel",
-				"helpers/enid_helper.php"
-			],
-			[
-				"sess.php",
-				"login/application/controllers/api/sess.php"
-			],
-			[
-				"usu",
-				"q/application/controllers/api/usuario.php"
-			],
-			[
-				"lensometro.php",
-				"backend.BenAndFrank.v1/modulos/lensometro.php"
-			],
-			[
-				"lensometro_fo",
-				"backend.BenAndFrank.v1/modulos/lensometro_fo.php"
-			],
-			[
-				"lensometro",
-				"backend.BenAndFrank.v1/js/lensometro.js"
-			],
-			[
-				"lensometr",
-				"backend.BenAndFrank.v1/modulos/lensometro_fo.php"
-			],
-			[
-				"lensometro_fo.",
-				"backend.BenAndFrank.v1/js/lensometro_fo.js"
-			],
-			[
-				"ensometro_fo.php",
-				"backend.BenAndFrank.v1/modulos/lensometro_fo.php"
-			],
-			[
-				"easypost/easypost.php",
-				"backend.BenAndFrank.v1/includes/easypost/EasyPost/EasyPost.php"
-			],
-			[
-				"EasyPost/Object.php",
-				"backend.BenAndFrank.v1/includes/easypost/EasyPost/Object.php"
-			],
-			[
-				"func",
-				"backend.BenAndFrank.v1/includes/Funcion.php"
-			],
-			[
-				"Object.php",
-				"backend.BenAndFrank.v1/includes/easypost/EasyPost/Object.php"
-			],
-			[
-				"includes/Config.php",
-				"backend.BenAndFrank.v1/includes/Config.php"
-			],
-			[
-				"con",
-				"includes/Config.php"
-			],
-			[
-				"dock",
-				"dockerFilesMagento2/Dockerfile"
-			],
-			[
-				"doc",
-				"backend.BenAndFrank.v1/docker-compose.yml"
-			],
-			[
-				"docker-com",
-				"backend.BenAndFrank.v1/docker-compose.yml"
-			],
-			[
-				"usuari",
-				"q/application/controllers/api/usuario.php"
-			],
-			[
-				"punr",
-				"css_tema/template/puntos_encuentro.css"
-			],
-			[
-				"puntoencuentro",
-				"q/application/helpers/puntoencuentro_helper.php"
-			],
-			[
-				"line",
-				"q/application/controllers/api/linea_metro.php"
-			],
-			[
-				"main.js",
-				"js_tema/js/main.js"
-			],
-			[
-				"serviciohel",
-				"q/application/helpers/servicios_helper.php"
-			],
-			[
-				"SERVICIO",
-				"q/application/controllers/api/servicio.php"
-			],
-			[
-				"ini.js",
-				"js_tema/login/ini.js"
-			],
-			[
-				"usuario_model",
-				"q/application/models/usuario_model.php"
 			]
 		],
 		"width": 0.0
@@ -1680,8 +1682,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
-	"side_bar_width": 326.0,
+	"side_bar_visible": true,
+	"side_bar_width": 186.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

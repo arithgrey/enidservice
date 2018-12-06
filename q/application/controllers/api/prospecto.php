@@ -19,4 +19,4 @@ class Prospecto extends REST_Controller{
         $this->response($response);
     }
     
-}
+}?>

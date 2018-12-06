@@ -44,5 +44,4 @@ class Talla extends REST_Controller{
     $this->response($response);
   }
 
-}
-?>
+}?>

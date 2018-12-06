@@ -436,14 +436,14 @@ function set_tarea(n_tarea){
 }
 /**/
 function quitar_espacios_numericos(nuevo_valor){
-	/**/
+
 	var valor_numerico  ="";
 		for(var a = 0; a < nuevo_valor.length; a++){		
 			if(nuevo_valor[a] != " "){
 				
 				is_num=  validar_si_numero(nuevo_valor[a]);
 				if (is_num ==  true) {
-					if (a< 14) {
+					if (a< 13) {
 						valor_numerico += nuevo_valor[a]; 		
 					}
 				}		

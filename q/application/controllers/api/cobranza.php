@@ -313,6 +313,17 @@ class Cobranza extends REST_Controller{
         }                
         $this->response($data_orden);    
     }
+    function solicitud_cambio_punto_entrega_POST(){
+
+        $param      = $this->post();                
+        $response   = [];
+        if (if_ext($param , "fecha_entrega,horario_entrega,recibo")) {
+            /*modifico hora de entrega*/    
+            $param["id_recibo"]         = $param["recibo"];
+            $response =  $this->create_orden_punto_entrega($param);   
+        }
+        $this->response($response);
+    }
     function primer_orden_POST(){
         
         $param  =  $this->post();

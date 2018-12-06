@@ -83,7 +83,5 @@
 		</div>
 	<?=end_row()?>
 <?php else:?>	
-	<form class="form_orden_direccion" action="../procesar/?w=1" method="POST">
-	   <?=input_hidden(["class" => "recibo" , "name" => "recibo", "value"=>  $recibo])?>
-    </form>
+	
 <?php endif;?>

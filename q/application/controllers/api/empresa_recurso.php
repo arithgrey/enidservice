@@ -16,4 +16,3 @@ class empresa_recurso extends REST_Controller{
   }  
 }
 ?>
-

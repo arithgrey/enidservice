@@ -52,4 +52,4 @@ class Home extends CI_Controller{
         return $this->principal->api( $api ,  $q);        
     }
     
-}
+}?>

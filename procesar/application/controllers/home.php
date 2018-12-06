@@ -46,7 +46,7 @@ class Home extends CI_Controller{
         $data["meta_keywords"]  = '';
         $data["desc_web"]       = "Registra tu cuenta  y recibe  asistencia al momento.";
         $data["clasificaciones_departamentos"]  = "";        
-        $this->principal->crea_historico( 2892 , 0, 0 );                         
+        
         
         $data["js"]     =  [
             "../js_tema/domicilio/direccion_pedido_registrado.js" ,
@@ -55,7 +55,6 @@ class Home extends CI_Controller{
         $param["id_recibo"]     =   $this->input->post("recibo");                
         $param["id_usuario"]    =   $this->principal->get_session("idusuario"); 
         $data["carga_ficha_direccion_envio"] = $this->carga_ficha_direccion_envio($param);
-
         $this->principal->show_data_page($data, 'secciones_2/domicilio_entrega');                          
     }
     /**/
@@ -111,4 +110,4 @@ class Home extends CI_Controller{
         $api                    =   "usuario_direccion/direccion_envio_pedido"; 
         return $this->principal->api( $api , $q , "html");  
     }
-}
+}?>

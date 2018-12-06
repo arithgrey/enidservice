@@ -33,5 +33,4 @@ class Privacidad extends REST_Controller{
     }
   */
 
-}
-?>
+}?>

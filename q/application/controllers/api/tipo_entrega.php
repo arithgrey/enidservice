@@ -13,5 +13,4 @@ class Tipo_entrega extends REST_Controller{
     $this->response($response);  
   }    
 
-}
-?>
+}?>

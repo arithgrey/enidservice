@@ -107,4 +107,4 @@ class Sessionclass extends CI_Controller{
 		}	
 		return $menu;
 	}
-}
+}?>

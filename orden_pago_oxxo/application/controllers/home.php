@@ -22,4 +22,4 @@ class Home extends CI_Controller{
         $data["css"]                =   ["pago_oxxo.css"];
         $this->principal->show_data_page($data, 'ingresar_saldo_a_cuenta');        
     }        
-}
+}?>

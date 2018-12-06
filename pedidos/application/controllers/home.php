@@ -1,6 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Home extends CI_Controller{
-
     function __construct(){        
         parent::__construct();                            
         $this->load->helper("pedidos");
@@ -139,14 +138,10 @@ class Home extends CI_Controller{
 
             if (get_param_def($param , "domicilio" ) > 0 ) {
                 
-                
-                
                 $this->load_view_domicilios_pedidos($data);                        
                 
             }else{
-
                 
-
                 $this->load_view_seguimiento($data , $param , $recibo ,$id_recibo);
             }
 
@@ -244,4 +239,4 @@ class Home extends CI_Controller{
         return $this->principal->api( $api ,  $q);             
     }
     
-}
+}?>

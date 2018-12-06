@@ -27,4 +27,4 @@ class Recursocontroller extends CI_Controller {
         $this->principal->show_data_page($data , 'home' );        
 	}	
   
-}
+}?>

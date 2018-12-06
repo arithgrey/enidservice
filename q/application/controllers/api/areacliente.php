@@ -40,6 +40,8 @@ class Areacliente extends REST_Controller{
     
     
     
+
+    */
     function reporte_direccion_GET(){
 
         $param = $this->get();        
@@ -66,7 +68,6 @@ class Areacliente extends REST_Controller{
         $this->response($response);
             
     }
-    */
     /**/
     
     function enviar_POST(){

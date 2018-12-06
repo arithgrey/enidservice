@@ -9,6 +9,13 @@ class proyecto_persona_forma_pago_punto_encuentro_model extends CI_Model{
     $insert   = $this->db->insert("proyecto_persona_forma_pago_punto_encuentro", $params);     
     return ($return_id ==  1) ? $this->db->insert_id() : $insert;
   }
+  function delete($params_where =[] , $limit =1){              
+      $this->db->limit($limit);        
+      foreach ($params_where as $key => $value) {
+        $this->db->where($key , $value);
+      }        
+      return  $this->db->delete("proyecto_persona_forma_pago_punto_encuentro", $params_where);
+  }
   function get($params=[], $params_where =[] , $limit =1, $order = '', $type_order='DESC'){
   	
         $params = implode(",", $params);

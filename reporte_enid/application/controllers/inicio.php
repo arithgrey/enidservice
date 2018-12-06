@@ -98,4 +98,4 @@ class Inicio extends CI_Controller {
         return $this->principal->api( $api , $q );        
     }
  
-}
+}?>

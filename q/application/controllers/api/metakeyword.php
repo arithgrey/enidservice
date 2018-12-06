@@ -103,5 +103,4 @@ class Metakeyword extends REST_Controller{
     }
   
     
-}
-?>
+}?>

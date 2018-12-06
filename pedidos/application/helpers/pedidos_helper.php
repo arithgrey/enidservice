@@ -141,9 +141,13 @@ if(!function_exists('invierte_date_time')){
 		
 		$linea 			= 	"";
 		$flag 			=	0;
-		$id_estado  	=   $recibo[0]["status"];
-		$tipo_entrega 	= 	$recibo[0]["tipo_entrega"];
-		for ($i=5; $i >0 ; $i--) { 
+		$recibo 		= 	$recibo[0]; 
+		$id_estado  	=   $recibo["status"];
+		$tipo_entrega 	= 	$recibo["tipo_entrega"];
+		$id_recibo 		=  	$recibo["id_proyecto_persona_forma_pago"];
+
+
+		for ($i=5; $i >0 ; $i-- ) { 
 
 			$status 	=  	get_texto_status($i , $recibo);
 			$activo 	=  1;
@@ -175,8 +179,7 @@ if(!function_exists('invierte_date_time')){
 
 
 			
-			if ($i == 2 ) {
-				
+			if ($i == 2 ) {				
 
 				$texto_entrega 	 =  "DOMICILIO DE ENTREGA CONFIRMADO ".icon("fa fa-check");
 				if (tiene_domilio($domicilio , 1) ==  0) {
@@ -186,10 +189,25 @@ if(!function_exists('invierte_date_time')){
 				
 
 				$url 		= 
-				"../pedidos/?seguimiento=".$recibo[0]["id_proyecto_persona_forma_pago"]."&domicilio=1";
+				"../pedidos/?seguimiento=".$id_recibo."&domicilio=1";
 
+				$seccion_2 	= 	div(p(anchor_enid($texto_entrega , ["href" =>  $url]), 
+			        	[
+			        		"class"	=>	"timeline__item__content__description"
+			        	]), 
+			        ["class"	=>"timeline__item__content"]);
+			}
+
+			if ($i == 3 ) {				
+
+				$text_realizo_compra 	= 	
+					( $recibo["saldo_cubierto"] > 0  ) ?  
+					"REALIZASTE TU COMPRA".icon("fa fa-check") : "REALIZA TU COMPRA";
+
+
+				$url 		=  "../area_cliente/?action=compras&ticket=".$id_recibo;				
 				$seccion_2 	= 	
-					div(p(anchor_enid($texto_entrega , ["href" =>  $url]), 
+					div(p(anchor_enid($text_realizo_compra , ["href" =>  $url]), 
 			        	[
 			        		"class"	=>	"timeline__item__content__description"
 			        	]), 
@@ -203,7 +221,7 @@ if(!function_exists('invierte_date_time')){
 	}
 	function get_texto_status($status , $recibo){
 
-		$status_recibo 	= $recibo[0]["status"];
+		$status_recibo 	= $recibo["status"];
 		$text  			= "";
 		$data_complete  = [];
 		$estado 	    =  6;

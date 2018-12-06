@@ -34,5 +34,4 @@ class Negocio extends REST_Controller{
     */   
     /**/
        
-}
-?>
+}?>

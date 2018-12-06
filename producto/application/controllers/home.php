@@ -84,6 +84,7 @@ class Home extends CI_Controller{
     }
     function view_recibo_registrado(){
 
+
         $data        = $this->principal->val_session("");  
         $data["clasificaciones_departamentos"] = "";        
         if($this->agent->is_mobile() == FALSE){                    
@@ -114,9 +115,7 @@ class Home extends CI_Controller{
         if ($data["in_session"] ==  1) {
             $data["proceso_compra"]  = 1;
         }
-
-
-        
+                
         $data["clasificaciones_departamentos"] = "";        
         if($this->agent->is_mobile() == FALSE){                    
             $data["clasificaciones_departamentos"] = 
@@ -344,4 +343,4 @@ class Home extends CI_Controller{
         $api                = "servicio/visitas";
         $this->principal->api( $api, $q, 'json', 'PUT');    
     }
-}
+}?>

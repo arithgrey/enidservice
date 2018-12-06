@@ -48,5 +48,4 @@ class notificacion_pago extends REST_Controller{
         $response = $this->notificacion_pago_model->q_up("status", $param["estado"], $param["id_notificacion_pago"]);       
         $this->response($response);    
     }
-}
-?>
+}?>

@@ -6,6 +6,7 @@ $(document).ready(function(){
 	
 	
 });
+/*
 function registra_nueva_direccion(e){
 
 	if(get_option("existe_codigo_postal") ==  1){
@@ -15,9 +16,10 @@ function registra_nueva_direccion(e){
 		muestra_error_codigo(1);
 	}
 	e.preventDefault();
-}
+}*/
+/*
 function registro_direccion(){
-	
+	alert();
 	if (asentamiento != 0 ){
 		
 		set_option("id_recibo" , $(".id_recibo").val());
@@ -43,6 +45,7 @@ var  response_registro_direccion = function(data){
 	if (data != -1 ){
 		
 		var url =  "../pedidos/?seguimiento="+get_option("id_recibo")+"&domicilio=1";		
+		alert(url);
 		redirect(url);
 	}else{
 
@@ -50,3 +53,4 @@ var  response_registro_direccion = function(data){
 		recorrepage(".notificacion_direccion");
 	}	
 }
+*/

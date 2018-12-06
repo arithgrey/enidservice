@@ -1,5 +1,4 @@
 <?php
-
 /*
 https://youtu.be/FwXskdcCRIk
 
@@ -1014,11 +1013,12 @@ if ( ! function_exists('debug'))
 {
 function debug($msg, $array = 0)
 { 
-        
-    if($_SERVER['HTTP_HOST'] ==  "localhost") {
+    
+
+    /*if($_SERVER['HTTP_HOST'] ==  "localhost") {*/
 
       $_date_fmt  = 'Y-m-d H:i:s';
-      $filepath = "/var/www/html/inicio/debug/debug.log"; 
+      $filepath   = BASEPATH."../debug/debug.log"; 
       $message  = '';   
       $fp = @fopen($filepath, FOPEN_WRITE_CREATE);    
 
@@ -1037,7 +1037,7 @@ function debug($msg, $array = 0)
 
       //@chmod($filepath, FILE_WRITE_MODE);
       return TRUE;  
-    }
+    /*}*/
     
   }
   function get_costo_envio($param){

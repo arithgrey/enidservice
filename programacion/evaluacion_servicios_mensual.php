@@ -1,6 +1,6 @@
 <?php 
 	
-	require 'restclient.php';	
+	require '../librerias/restclient.php';	
 	$api = new RestClient();
 	$api->set_option('base_url', "json");
 	$api->set_option('format', "json");	

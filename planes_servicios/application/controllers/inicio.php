@@ -37,8 +37,8 @@ class Inicio extends CI_Controller {
         $num_perfil                             =   $this->principal->getperfiles(2, "idperfil"); 
         $data["ciclo_facturacion"]              =   $this->create_ciclo_facturacion();
         $data["clasificaciones_departamentos"]  =   "";    
-        //$data["is_mobile"] = (  $this->agent->is_mobile() === FALSE ) ? 0 : 1;
-        $data["is_mobile"] = 1;
+        $data["is_mobile"] = (  $this->agent->is_mobile() === FALSE ) ? 0 : 1;
+        
         
         
         $data["js"] =['../js_tema/planes_servicios/principal.js', 
@@ -93,4 +93,4 @@ class Inicio extends CI_Controller {
         $api        =  "ciclo_facturacion/not_ciclo_facturacion/format/json/";
         return  $this->principal->api( $api , $q);         
     }
-}
+}?>

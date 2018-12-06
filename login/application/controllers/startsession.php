@@ -27,4 +27,4 @@ class Startsession extends CI_Controller{
 	function logout(){						
 		$this->principal->logout();
 	}	
-}
+}?>

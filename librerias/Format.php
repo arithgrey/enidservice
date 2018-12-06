@@ -1,12 +1,4 @@
 <?php
-/**
- * Format class
- *
- * Help convert between various formats such as XML, JSON, CSV, etc.
- *
- * @author  	Phil Sturgeon
- * @license		http://philsturgeon.co.uk/code/dbad-license
- */
 class Format {
 
 	// Array to convert
@@ -311,4 +303,4 @@ class Format {
 		return unserialize(trim($string));
 	}
 
-}
+}?>

@@ -2,6 +2,9 @@
     
     $id_recibo      =   $recibo[0]["id_proyecto_persona_forma_pago"];  
     $id_servicio    =   $recibo[0]["id_servicio"];
+    $num_ciclos = $recibo[0]["num_ciclos_contratados"];
+
+
 
 
 ?>
@@ -95,8 +98,22 @@
             </div>
         </div>
     </div>
-    <form   class="form_registro_direccion" 
-            action="../producto/?recibo=<?=$id_recibo?>&servicio=<?=$id_servicio?>" 
-            method="post" >
-        
+    
+    <form class="form_registro_direccion" action="../procesar/?w=1" method="POST">
+       <?=input_hidden(["class" => "recibo" , "name" => "recibo", "value"=>  $id_recibo])?>
     </form>
+
+
+
+
+    <form   class="form_puntos_medios" 
+            action="../puntos_medios/?recibo=<?=$id_recibo?>"     
+            method="POST">
+           
+    
+           <?=input_hidden([            
+            "name"  => "recibo" , 
+            "value"=>  $id_recibo
+           ])?>
+           
+    </form> 

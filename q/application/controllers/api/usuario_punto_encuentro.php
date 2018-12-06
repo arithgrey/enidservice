@@ -45,7 +45,4 @@ class Usuario_punto_encuentro extends REST_Controller{
     $this->response($response);
   }
   
-
-   
-
-}
+}?>
