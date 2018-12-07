@@ -25986,3 +25986,795 @@ DEBUG - TYPE string 2018-12-06 03:45:54 --> 275
 DEBUG - TYPE boolean 2018-12-06 03:45:54 --> 1
 DEBUG - TYPE string 2018-12-06 03:46:07 --> 275
 DEBUG - TYPE boolean 2018-12-06 03:46:07 --> 1
+DEBUG - TYPE array 2018-12-06 21:22:55 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-06 21:23:15 --> 276
+DEBUG - TYPE boolean 2018-12-06 21:23:15 --> 1
+DEBUG - TYPE string 2018-12-06 21:24:03 --> 276
+DEBUG - TYPE boolean 2018-12-06 21:24:03 --> 1
+DEBUG - TYPE string 2018-12-06 21:27:08 --> entra
+DEBUG - TYPE string 2018-12-06 21:28:17 --> entra
+DEBUG - TYPE string 2018-12-06 21:28:52 --> entra
+DEBUG - TYPE NULL 2018-12-06 21:38:18 --> 
+DEBUG - TYPE array 2018-12-06 21:39:07 --> Array
+(
+    [fecha_entrega] => 2018-12-06
+    [horario_entrega] => 09:00
+    [recibo] => 276
+    [punto_encuentro] => 83
+    [tipo_entrega] => 1
+    [id_recibo] => 276
+)
+
+DEBUG - TYPE array 2018-12-06 21:39:07 --> Array
+DEBUG - TYPE array 2018-12-06 21:40:44 --> Array
+(
+    [fecha_entrega] => 2018-12-06
+    [horario_entrega] => 09:00
+    [recibo] => 276
+    [punto_encuentro] => 381
+    [tipo_entrega] => 1
+    [id_recibo] => 276
+    [id_usuario] => 625
+)
+
+DEBUG - TYPE boolean 2018-12-06 21:40:44 --> 1
+DEBUG - TYPE string 2018-12-06 21:54:01 --> 8888
+DEBUG - TYPE string 2018-12-06 21:54:01 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '625' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-06 21:54:02 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-06 23:49:12 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-06 23:49:45 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 14
+            [valoracion] => 0
+            [deseado] => 18
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-06 23:57:57 --> 8888
+DEBUG - TYPE string 2018-12-06 23:57:57 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '626' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-06 23:57:57 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-06 23:58:05 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+    [id_usuario_venta] => 1
+    [id_servicio] => 249
+    [id_usuario] => 626
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-06 23:58:11 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-06 23:58:13 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-06 23:58:16 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:01:18 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:01:22 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:01:28 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 279
+    [id_recibo] => 279
+    [id_usuario] => 626
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-07 00:01:38 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:01:43 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:01:53 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:01:58 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:02:09 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:07:30 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:07:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:10:21 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:14:11 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 279
+)
+
+DEBUG - TYPE array 2018-12-07 00:40:46 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-07 00:46:12 --> 8888
+DEBUG - TYPE string 2018-12-07 00:46:12 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '627' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-07 00:46:12 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-07 00:50:05 --> Array
+(
+    [format] => json
+    [.json] => 
+    [recibo] => 281
+    [id_recibo] => 281
+    [id_usuario] => 627
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-07 01:33:52 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-07 02:27:57 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 28
+                    [accesos_a_intento_compra] => 1
+                    [accesos_contacto] => 0
+                    [accesos_area_cliente] => 0
+                    [usuarios] => 4
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 7
+                                    [compras_efectivas] => 0
+                                    [solicitudes] => 7
+                                    [envios] => 0
+                                    [cancelaciones] => 0
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-07 02:28:28 --> llefa
+DEBUG - TYPE string 2018-12-07 02:29:41 --> 8888
+DEBUG - TYPE string 2018-12-07 02:29:41 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-07 02:29:41 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-07 02:29:52 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 283
+    [id_usuario_venta] => 1
+    [id_servicio] => 268
+    [id_usuario] => 1
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-07 02:32:21 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 284
+    [id_usuario_venta] => 1
+    [id_servicio] => 268
+    [id_usuario] => 1
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-07 02:34:24 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 286
+    [id_usuario_venta] => 1
+    [id_servicio] => 268
+    [id_usuario] => 1
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-07 03:00:07 --> 8888
+DEBUG - TYPE string 2018-12-07 03:00:07 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-07 03:00:08 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-07 03:00:35 --> 8888
+DEBUG - TYPE string 2018-12-07 03:00:35 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-07 03:00:37 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-07 03:01:35 --> 8888
+DEBUG - TYPE string 2018-12-07 03:01:35 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-07 03:01:35 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+

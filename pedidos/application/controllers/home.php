@@ -64,8 +64,8 @@ class Home extends CI_Controller{
                 $this->principal->show_data_page($data, 'home');      
             }else{
 
-                if (ctype_digit(trim($this->input->get("recibo"))) ) {
-                 
+                if (ctype_digit(trim($this->input->get("recibo"))) ) {                
+                    
                     $id_recibo =  $this->input->get("recibo");            
                     $this->carga_detalle_pedido($id_recibo , $data);
 
@@ -84,6 +84,7 @@ class Home extends CI_Controller{
         $recibo     =  $this->get_recibo($id_recibo);
         if ( count($recibo)>0 ) {
 
+
             $data["orden"]      =   $id_recibo;
             $data["recibo"]     =   $recibo;
             $data["domicilio"]  =   
@@ -101,7 +102,8 @@ class Home extends CI_Controller{
     }    
     function get_domicilio_entrega($id_recibo , $recibo){
 
-        $recibo                        =    $recibo[0];         
+
+        $recibo                        =    $recibo[0];
         $tipo_entrega                  =    $recibo["tipo_entrega"]; 
         $data_complete["tipo_entrega"] =    $tipo_entrega; 
         $domicilio                     =    [];
@@ -109,6 +111,7 @@ class Home extends CI_Controller{
         if ($tipo_entrega == 1) {
             /*Pido el punto de encuentro*/
             $domicilio                 =  $this->get_punto_encuentro($id_recibo);            
+
         }else{
             /*Pido el domicilio del cliente*/
             $domicilio                 = $this->get_domicilio_recibo($id_recibo);
@@ -155,6 +158,7 @@ class Home extends CI_Controller{
     }
     private function load_view_seguimiento($data , $param , $recibo , $id_recibo){
 
+
         $notificacion_pago          =   (get_param_def($param , "notificar" ) > 0 ) ? 1 : 0; 
         $notificacion_pago          =   
         ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago;
@@ -166,6 +170,7 @@ class Home extends CI_Controller{
     }
     private function load_view_domicilios_pedidos($data){
 
+        
         $data["css"]               = [
             "bootstrap_1.min.css" , 
             "pedido_domicilio.css", 
@@ -176,10 +181,9 @@ class Home extends CI_Controller{
             "../js_tema/domicilio/domicilio_entrega.js",
             "../js_tema/alerts/jquery-confirm.js"
         ];
-        $data["lista_direcciones"]  =   
-        $this->get_direcciones_usuario($data["id_usuario"]);
-
+        $data["lista_direcciones"]  = $this->get_direcciones_usuario($data["id_usuario"]);
         $data["puntos_encuentro"] = $this->get_puntos_encuentro($data["id_usuario"]);
+
         $this->principal->show_data_page($data, 'domicilio');              
     }
     private function get_domicilio_recibo($id_recibo){

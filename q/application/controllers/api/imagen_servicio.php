@@ -10,11 +10,16 @@ class Imagen_servicio extends REST_Controller{
 
       $param      =  $this->get();
       $response = 2;
-      if (if_ext($param ,  "id_servicio")) {        
-        
+      if (if_ext($param ,  "id_servicio")) {
+
+          $limit = 8;
+          if(get_param_def($param , "limit") > 0 ){
+                    $limit = $param["limit"];
+            }
         $in         =   ["id_servicio" => $param["id_servicio"]];
         $f          =   ["id_imagen" , "principal"];
-        $response   =  $this->imagen_servicio_model->get($f, $in , 8 , "principal" );  
+        $response   =  $this->imagen_servicio_model->get($f, $in , $limit , "principal" );
+
       }      
       $this->response($response);   
   }

@@ -318,9 +318,14 @@ class Cobranza extends REST_Controller{
         $param      = $this->post();                
         $response   = [];
         if (if_ext($param , "fecha_entrega,horario_entrega,recibo")) {
+
             /*modifico hora de entrega*/    
             $param["id_recibo"]         = $param["recibo"];
+            /*Lo modifico en la orden*/
             $response =  $this->create_orden_punto_entrega($param);   
+            /*Lo agrego en el diccionario para el usuario*/
+            $param["id_usuario"]        = $this->id_usuario;
+            $response = $this->agrega_punto_encuentro_usuario($param);            
         }
         $this->response($response);
     }

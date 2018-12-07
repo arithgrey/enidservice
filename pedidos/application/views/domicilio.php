@@ -3,23 +3,14 @@
     $id_recibo      =   $recibo[0]["id_proyecto_persona_forma_pago"];  
     $id_servicio    =   $recibo[0]["id_servicio"];
     $num_ciclos = $recibo[0]["num_ciclos_contratados"];
-
-
-
-
 ?>
 	<br>
-
-	
     <div class="container-fluid gedf-wrapper">
-    
-        <?=n_row_12()?>    	
-    	   <?=div(heading_enid(icon("fa fa-map-marker") ."DIRECCIÓN DE ENTREGA" ) , 1)?>
-        <?=end_row()?>
+
         <div class="row">
             <div class="col-md-3">
                 <br>
-                <?=div("TUS DIRECCIONES DE ENTREGA REGISTRADAS")?>                
+                <?=div("TUS DIRECCIONES DE ENTREGA REGISTRADAS", ["class" => "text_direcciones_registradas"])?>
                 <?=agregar_nueva_direccion(0);?>                
                 <div class="card">
                     <ul class="list-group list-group-flush">
@@ -70,7 +61,7 @@
                         
                         <a class="card-link" href="#">
                             <h5 class="card-title">                            	
-                        	DIRECCIÓN DE ENTREGA    	
+
                             </h5>
                         </a>
                         <p class="card-text">                        	
@@ -84,11 +75,11 @@
             </div>
             <div class="col-md-3">
                 <br>
-                <?=div("TUS PUNTOS DE ENCUENTRO REGISTRADOS")?>                
+                <?=div("TUS PUNTOS DE ENCUENTRO REGISTRADOS" , ["class" => "text_puntos_registrados"])?>
                 <?=agregar_nueva_direccion(1);?>                
                 <div class="card">
                     <ul class="list-group list-group-flush">
-                        <?=get_lista_puntos_encuentro($puntos_encuentro , $id_recibo)?>
+                        <?=get_lista_puntos_encuentro($puntos_encuentro , $id_recibo , $domicilio)?>
                     </ul>                
                 </div>
                 <br>
@@ -104,16 +95,30 @@
     </form>
 
 
-
-
     <form   class="form_puntos_medios" 
             action="../puntos_medios/?recibo=<?=$id_recibo?>"     
             method="POST">
-           
-    
+
            <?=input_hidden([            
             "name"  => "recibo" , 
             "value"=>  $id_recibo
            ])?>
-           
-    </form> 
+    </form>
+    <form   class="form_puntos_medios_avanzado"
+            action="../puntos_medios/?recibo=<?=$id_recibo?>"
+            method="POST">
+        <?=input_hidden([
+            "name"  => "recibo" ,
+            "value"=>  $id_recibo
+        ])?>
+        <?=input_hidden([
+            "name"  => "avanzado" ,
+            "value"=>  1
+        ])?>
+        <?=input_hidden([
+            "class" => "punto_encuentro_asignado" ,
+            "name"  => "punto_encuentro" ,
+            "value" =>  0
+        ])?>
+
+    </form>

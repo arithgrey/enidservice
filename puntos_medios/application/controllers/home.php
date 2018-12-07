@@ -39,8 +39,8 @@ class Home extends CI_Controller{
         
 
 
-            $data["tipos_puntos_encuentro"]=  $this->get_tipos_puntos_encuentro($param);
-
+            $data["tipos_puntos_encuentro"] =  $this->get_tipos_puntos_encuentro($param);
+            $data["punto_encuentro"]        =  0;
             $data["css"] = [
                 "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css",
                 "../js_tema/js/bootstrap-timepicker/css/timepicker.css",
@@ -69,9 +69,19 @@ class Home extends CI_Controller{
                 $data["num_ciclos"] =  $param["num_ciclos"];    
 
             }else{                
-                $data["recibo"]     = $param["recibo"];
-            }            
-            $this->principal->show_data_page($data, 'home');  
+                $data["recibo"]         = $param["recibo"];
+
+
+            }
+            if(get_param_def($param , "avanzado" , 0 , 1 ) >0  &&
+                get_param_def($param , "punto_encuentro" , 0 , 1 )){
+                /*solo tomamos la hora del pedido*/
+                $data["punto_encuentro"] =  $param["punto_encuentro"];
+                $this->principal->show_data_page($data, 'horario_entrega');
+            }else{
+                $this->principal->show_data_page($data, 'home');
+            }
+
 
         }else{
             

@@ -5,7 +5,7 @@ if(!function_exists('invierte_date_time')){
 
 
 		if ($direccion >  0) {
-			return li(guardar( "Agregar punto de encuentro " , 
+			return li(guardar( "Agregar punto de encuentro " ,
 				["class"  => "agregar_punto_encuentro_pedido"]  ) );	
 		}else{
 			
@@ -15,7 +15,10 @@ if(!function_exists('invierte_date_time')){
 		
 
 	}
-	function get_lista_puntos_encuentro($puntos_encuentro , $id_recibo){
+	function get_lista_puntos_encuentro($puntos_encuentro , $id_recibo , $domicilio =''){
+
+	    $asignado_actualmente   =  (is_array($domicilio) && $domicilio["tipo_entrega"] ==  1) ? $domicilio["domicilio"][0]["id"] : 0;
+
 
 		 
 		$lista 	= 	"";
@@ -31,11 +34,11 @@ if(!function_exists('invierte_date_time')){
 
 
 
-			$lista .=  "<li class='list-group-item'>";
 
-		    
+            $extra =  ($id ===  $asignado_actualmente  ) ? "asignado_actualmente" : "";
+            $lista .=  "<li class='list-group-item ".$extra." '>";
 
-		    $lista .= div("#".$a ,  ["class"=>"h6 text-muted"]);
+            $lista .= div("#".$a ,  ["class"=>"h6 text-muted"]);
 		    $lista .= div( strtoupper($nombre)  ,  ["class"=>"h5"]);
 		    $lista .= 
 		    div("ESTABLECER COMO PUNTO DE ENTREGA" ,  
@@ -99,8 +102,9 @@ if(!function_exists('invierte_date_time')){
 
 		$text = "";
 		if ($data_direccion["tipo_entrega"] ==  2 && count($data_direccion["domicilio"]) > 0  ) {
-			
-			$domicilio 	=  $data_direccion["domicilio"][0];
+				
+
+			$domicilio 				= $data_direccion["domicilio"][0];
 			$calle  				= $domicilio["calle"];
 		    $entre_calles  			= $domicilio["entre_calles"];
 		    $numero_exterior  		= $domicilio["numero_exterior"];
@@ -116,16 +120,32 @@ if(!function_exists('invierte_date_time')){
 		    $idtipo_asentamiento  	= $domicilio["idtipo_asentamiento"];
 		    $id_estado_republica  	= $domicilio["id_estado_republica"];
 		    $pais  					= $domicilio["pais"]; 
-		    $id_pais  				= $domicilio["id_pais"]; 
-
+		    //$id_pais  				= $domicilio["id_pais"];
 
 		    $text 
 		    =  
 		    $calle ." "." NÚMERO ".$numero_exterior." NÚMERO INTERIOR ".$numero_interior ." COLONIA ".$asentamiento ." DELEGACIÓN/MUNICIPIO ".$municipio. " ESTADO ".$estado." CÓDIGO POSTAL ".$cp;
-
+		    return p( strtoupper( $text ) , ["class"=>"card-text"]);
 			
+		}else{
+
+		   if(is_array($data_direccion) &&  count($data_direccion["domicilio"]) > 0 ){
+               $punto_encuentro 	 	=	$data_direccion["domicilio"][0];
+               $costo_envio 			= 	$punto_encuentro["costo_envio"];
+               $tipo 		 			= 	$punto_encuentro["tipo"];
+               $color 		 			= 	$punto_encuentro["color"];
+               $nombre_estacion 		= 	$punto_encuentro["nombre"];
+               $lugar_entrega 			= 	$punto_encuentro["lugar_entrega"];
+               $numero 	 			= 	"NÚMERO ".$punto_encuentro["numero"];
+               $text =  	heading_enid("LUGAR DE ENCUENTRO" , 3, ["class" => "top_20"]);
+               $text.=		div($tipo. " ". $nombre_estacion ." ". $numero." COLOR ". $color ,1);
+               $text.= div("ESTACIÓN ".$lugar_entrega , ["class" => "strong"],1);
+               return $text;
+
+           }
+
 		}
-		return p( strtoupper( $text ) , ["class"=>"card-text"]);
+		
 	}
 	function valida_accion_pago($recibo ){
 
@@ -133,7 +153,11 @@ if(!function_exists('invierte_date_time')){
 
 			$id_recibo 	= $recibo[0]["id_proyecto_persona_forma_pago"];
 			$url 		= "../area_cliente/?action=compras&ticket=".$id_recibo;
-			return guardar( "PROCEDER AL PAGO" , [], 1 , 1 , 0 , $url);
+			return guardar( "PROCEDER A LA COMPRA " .icon("fa fa-2x fa-shopping-cart") ,
+                [
+                    "style" =>  "background:blue!important",
+                    "class" =>  "top_20"
+                ], 1 , 1 , 0 , $url);
 
 		}
 	}
@@ -577,7 +601,7 @@ if(!function_exists('invierte_date_time')){
 				//1 | LÍNEA DEL METRO          
 	        	case 1:
 					$punto_encuentro .=  
-					strong("ESTACIÓN DEL METRO ").$lugar_entrega ." LINEA ".$numero." ".$nombre_linea." COLOR ".$color;        		
+					strtoupper(strong("ESTACIÓN DEL METRO ").$lugar_entrega ." LINEA ".$numero." ".$nombre_linea." COLOR ".$color);
 	        		break;
 	        	//2 | ESTACIÓN DEL  METRO BUS  
 	        	case 2:

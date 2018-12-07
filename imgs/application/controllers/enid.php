@@ -71,8 +71,9 @@ class Enid extends CI_Controller {
     }
     private function get_img_servicio($id_servicio){
 
-        $q["id_servicio"]  =  $id_servicio;        
-        $api               =  "imagen_servicio/servicio/format/json/";
+        $q["id_servicio"]   =  $id_servicio;
+        $q["limit"]         =  1;
+        $api                =  "imagen_servicio/servicio/format/json/";
         return $this->principal->api( $api , $q);            
     }
 }?>

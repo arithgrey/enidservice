@@ -14,20 +14,20 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller{
       $response = false;
       if (if_ext($param , "id_recibo,punto_encuentro")) {
 
-        /**/
-        $in     = ["id_proyecto_persona_forma_pago" =>   $param["id_recibo"] ];
-        $status = $this->proyecto_persona_forma_pago_punto_encuentro_model->delete($in , 10);
-
-        debug($param["id_recibo"] );
-        debug($status);
-
-        $params = [
-          "id_proyecto_persona_forma_pago" =>   $param["id_recibo"],
-          "id_punto_encuentro"             =>   $param["punto_encuentro"]
-        ];
         
-        $response = 
-        $this->proyecto_persona_forma_pago_punto_encuentro_model->insert($params);  
+        $in     = ["id_proyecto_persona_forma_pago" =>   $param["id_recibo"] ];            
+        if ($this->proyecto_persona_forma_pago_punto_encuentro_model->delete($in , 10)) {
+
+            $params = [
+              "id_proyecto_persona_forma_pago" =>   $param["id_recibo"],
+              "id_punto_encuentro"             =>   $param["punto_encuentro"]
+            ];
+          
+            $response = 
+            $this->proyecto_persona_forma_pago_punto_encuentro_model->insert($params);    
+        }
+
+        
       }
       $this->response($response);
     }
