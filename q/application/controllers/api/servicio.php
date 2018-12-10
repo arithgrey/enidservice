@@ -498,7 +498,7 @@ class Servicio extends REST_Controller{
       $id_servicio              =   $this->get_option("id_servicio");  
       $servicio                 =   
       $this->serviciosmodel->get([] , ["id_servicio" =>  $param["id_servicio"] ]);
-      $data["servicio"]         =   $servicio;
+      $data["servicio"]         =    $servicio;
       $this->set_option("servicio" , $servicio);      
       if($servicio[0]["flag_servicio"] ==  0){
         $this->crea_data_costo_envio();            
@@ -520,13 +520,14 @@ class Servicio extends REST_Controller{
       $data["is_mobile"]          =   ($this->agent->is_mobile() === FALSE)?0:1;            
       $data["has_phone"]          =   $this->usuario_tiene_numero($data["id_usuario"]);
       $data["num_imagenes"]       =   count($imagenes);
-      $data["images"]             =   $this->create_table_images($imagenes);
+      $data["images"]             =   $this->create_table_images($imagenes , $data["is_mobile"]);
       $data["id_perfil"]          =   $this->principal->getperfiles();
       $this->load->view("servicio/detalle" , $data);        
       
   }    
   /**/  
-  private function create_table_images($imagenes){
+  private function create_table_images($imagenes , $is_mobile){
+
     
     $num_imgs =0; 
     $this->table->set_heading('', '', '' , '','', '', ''  );
@@ -535,10 +536,13 @@ class Servicio extends REST_Controller{
       
       $id_imagen    =  $row["id_imagen"];
       $url_imagen   = get_url_request("imgs/index.php/enid/imagen/".$id_imagen);
+      $extra_imagen = ($is_mobile == 0 ) ?  'position:relative;width:150px!important;height:150px!important;': 'position:relative;width:170px!important;height:150px!important;';
+      $id_error     = "imagen_".$id_imagen;
       $img = img([
-          'class'    => 'img-responsive',
           'src'      => $url_imagen,
-          'style'    => 'position:relative;width:180px!important;'
+          'style'    => $extra_imagen,
+          'id'       => $id_error,
+          'onerror' => "reloload_img( '".$id_error."','".$url_imagen."');"
       ]);
 
 
@@ -556,13 +560,14 @@ class Servicio extends REST_Controller{
     if ($num_imgs < 7 ) {
       
       $url_imagen =
-      get_url_request("img_tema/tienda_en_linea/agregar_imagen.png"); 
-      
+      get_url_request("img_tema/tienda_en_linea/agregar_imagen.png");
+
+      $extra_imagen = ($is_mobile ==  0 ) ? "position: relative;width:160px!important;height:160px;" :  "position: relative;width:160px!important;";
       $img =  img([
                     "class" =>  "img-responsive agregar_img_servicio_img" ,
                     "src"   =>  $url_imagen,
-                    "style" =>  "position: relative;width:180px!important;"
-                  ]);
+                    "style" =>  $extra_imagen
+      ]);
 
       for ($num_imgs=$num_imgs; $num_imgs <7; $num_imgs++) {
 
@@ -1094,7 +1099,8 @@ class Servicio extends REST_Controller{
         
     } 
     function info_disponibilidad_servicio_GET(){
-        $param    =  $this->get(); 
+        $param       =  $this->get();
+        $id_servicio =  $param["id_servicio"];
         $servicio =  $this->serviciosmodel->get_informacion_basica_servicio_disponible($param);
         
         $num_servicios                  =   count($servicio); 
@@ -1265,10 +1271,26 @@ class Servicio extends REST_Controller{
 
     function metricas_productos_solicitados_GET(){
 
-        $param =  $this->get();
-        $data["info_productos"] =  
+        $param      =  $this->get();
+
+        $articulos  =  
         $this->serviciosmodel->get_productos_solicitados($param);
-        $this->load->view("producto/principal" , $data);
+
+        //$this->load->view("producto/principal" , $data);
+        $this->table->set_heading(
+              "ARTÍCULO",
+              'SOLICITES'
+              );
+
+        foreach ($articulos as $row) {
+
+          
+          $this->table->add_row($row["keyword"] ,  $row["num_keywords"]);  
+          
+        }
+        
+        $table = $this->table->generate();
+        $this->response($table);
     }    
     function num_lectura_valoraciones_GET(){
         $param    =  $this->get();
@@ -1324,7 +1346,7 @@ class Servicio extends REST_Controller{
             
             $servicios                = $this->serviciosmodel->get_tipos_entregas($param);  
             $tipos_entregas_servicios = $this->get_tipos_intentos_entregas($param);
-            $servicios            = une_data($servicios ,  $tipos_entregas_servicios);
+            $servicios                = une_data($servicios ,  $tipos_entregas_servicios);
 
 
 
@@ -1355,13 +1377,15 @@ class Servicio extends REST_Controller{
               $id_servicio                  = $row["id_servicio"];
               $intentos                     = $row["intentos"];
   
-              //nombre_servicio 
-             
+
+
+              $id_error         = "imagen_".$id_servicio;
+              $url_img          =   "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
               $img            = img(
-                [ "src" => 
-                  "../imgs/index.php/enid/imagen_servicio/".$id_servicio
-                  , 
-                  "style"  => "width:100px!important;"
+                [
+                    "src" => $url_img,
+                    "style"  => "width:50px!important;height:50px!important;",
+                    'onerror' => "reloload_img( '".$id_error."','".$url_img."');"
                 ]);
               
 

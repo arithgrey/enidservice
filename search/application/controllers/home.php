@@ -32,8 +32,7 @@ class Home extends CI_Controller{
         $data["meta_keywords"]          =   "Comprar y vender tus artículos y servicios";
         $data["desc_web"]               =   "";
         $data["url_img_post"]           =   create_url_preview("promo.png");        
-        $q                              =   (array_key_exists("q", $param)) ?$param["q"] :""; 
-
+        $q                              =   (array_key_exists("q", $param)) ?$param["q"] :"";
         $data_send["q"]                 =   $q; 
         $data_send["vendedor"]          =   $param["vendedor"];
         $data_send["id_clasificacion"]  =   $param["id_clasificacion"];
@@ -103,18 +102,17 @@ class Home extends CI_Controller{
                                                     "producto.css"
                                                 ];
 
-            $data["js"]     = ["../js_tema/search/principal.js"];
 
-            $data["filtros"] =  $this->get_orden();
-            $data["order"]   =  $data_send["order"];
-            $this->principal->crea_historico($param["num_hist"]);
+            $data["js"]         =   ["../js_tema/search/principal.js"];
+            $data["filtros"]    =   $this->get_orden();
+            $data["order"]      =   $data_send["order"];
+            //$data["is_mobile"]  =   1;
             $this->principal->show_data_page($data, 'home');
             
         }else{
             
             $data["css"]        = ["search_sin_encontrar.css"];
             $tienda             = get_param_def($param , "tienda" , 1);
-            $this->principal->crea_historico($param["num_hist"]);
             if ($tienda == 0) {
                 $this->principal->show_data_page($data , 'sin_resultados');    
             }else{

@@ -211,13 +211,16 @@ function construye_seccion_imagen_lateral($param , $nombre_servicio , $url_youtu
 
       $producto_tab = "#imagen_tab_".$z;      
       $producto_tab_s = "imagen_tab_".$z;      
-      
+
+
+
+      $id_error =  "imagen_".$z;
       $img_pro = array(
         'src'     => $url,                        
         'alt'     => $nombre_servicio, 
-        'id'      => $z, 
+        'id'      => $id_error,
         'class'   => 'imagen-producto',
-        'onerror' => "this.onerror=null;this.src='".$url."';"
+        'onerror' => "reloload_img( '".$id_error."','".$url."');"
         );
 
       $preview  .=  anchor_enid(img($img_pro) , array(
@@ -227,9 +230,11 @@ function construye_seccion_imagen_lateral($param , $nombre_servicio , $url_youtu
         'href'            =>  $producto_tab
         ));
 
-      $image_properties = [  'src'     => $url , 
-                              "class" => "imagen_producto_completa",
-                              'onerror' => "this.onerror=null;this.src='".$url."';"
+      $id_error =  "imagen_".$id_imagen;
+      $image_properties = [     'src'       =>  $url ,
+                                'id'        =>  $id_error,
+                                "class"     =>  "imagen_producto_completa",
+                                'onerror'   =>  "reloload_img( '".$id_error."','".$url."');"
                           ];
       $imgs_grandes .= div(img($image_properties) , ["id"=> $producto_tab_s ,  "class"=>"tab-pane fade zoom ".$extra_class_contenido." "]);
       

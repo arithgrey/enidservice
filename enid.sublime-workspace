@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"para",
+				"param"
+			],
+			[
+				"for",
+				"foreach\tforeach …"
+			],
+			[
 				"domi",
 				"domicilio"
 			],
@@ -54,10 +62,6 @@
 			[
 				"view",
 				"view_recibo_registrado"
-			],
-			[
-				"for",
-				"form\tTag"
 			],
 			[
 				"strup",
@@ -376,10 +380,6 @@
 				"exists"
 			],
 			[
-				"para",
-				"param"
-			],
-			[
 				"recibo",
 				"recibo_model"
 			],
@@ -520,47 +520,56 @@
 	"buffers":
 	[
 		{
-			"file": "pedidos/application/controllers/home.php",
+			"file": "q/application/controllers/api/servicio.php",
 			"settings":
 			{
-				"buffer_size": 9783,
+				"buffer_size": 52049,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "pedidos/application/views/domicilio.php",
+			"file": "q/application/models/serviciosmodel.php",
 			"settings":
 			{
-				"buffer_size": 4631,
+				"buffer_size": 44278,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "pedidos/application/helpers/pedidos_helper.php",
+			"contents": "Searching 1680 files for \"this->table->add_row\"\n\n/var/www/html/inicio/q/application/controllers/api/servicio.php:\n  582        }\n  583      }   \n  584:     $this->table->add_row($images_complete);   \n  585      return $this->table->generate();\n  586    }\n  ...\n 1278  \n 1279            \n 1280:           $this->table->add_row($row[\"keyword\"]);  \n 1281:           $this->table->add_row($row[\"num_keywords\"]);  \n 1282          }\n 1283          \n ....\n 1395                ];\n 1396  \n 1397:               $this->table->add_row($array);                \n 1398  \n 1399              }\n ....\n 1427                );\n 1428  \n 1429:       $this->table->add_row(\n 1430          sumatoria_array($array ,\"vista\"),\n 1431          sumatoria_array($array ,\"mensajeria\"),\n\n/var/www/html/inicio/q/application/controllers/api/tipo_talla.php:\n   55                                                  'id'    => $id\n   56                                          ));\n   57:                 $this->table->add_row($config, $tipo, $num_clasificaciones);\n   58              }\n   59  \n\n/var/www/html/inicio/q/application/controllers/api/usuario.php:\n  718                  ];      \n  719          $this->table->set_heading($heading);\n  720:         $this->table->add_row($inf);\n  721          $tb =  $this->table->generate();\n  722          return  $tb;\n  ...\n  803          array_unshift($publicaciones , \"PRODUCTOS PUBLICADOS\");\n  804          array_unshift($registros     , \"USUARIOS NUEVOS\");\n  805:         $this->table->add_row($publicaciones);\n  806:         $this->table->add_row($registros);\n  807          $tb =  $this->table->generate();\n  808          return  $tb;\n\n9 matches across 3 files\n\n\nSearching 1680 files for \"width: 40px !important\"\n\n/var/www/html/inicio/q/application/helpers/recibo_helper.php:\n   51        $id_servicio =  $row[\"id_servicio\"];\n   52        $url_img     =  \"../imgs/index.php/enid/imagen_servicio/\".$id_servicio;\n   53:       $img    = img([\"src\"=> $url_img , \"style\"=>\"width: 40px !important\"]);\n   54          $tb  .= get_td($recibo);\n   55          $tb  .= get_td($img);\n\n1 match in 1 file\n\n\nSearching 1679 files for \"width:50px!important;\"\n\n/var/www/html/inicio/pedidos/application/views/domicilio.php:\n   35                                      \t\t\"src\" \t=> link_imagen_servicio($id_servicio) ,\n   36                                      \t\t\"class\"\t=>\t\"rounded-circle\",\n   37:                                     \t\t\"style\"\t=>\t\"width:50px!important;height:50px!important;\"\n   38  \n   39                                      ]), \n\n/var/www/html/inicio/q/application/controllers/api/servicio.php:\n 1378                    \"../imgs/index.php/enid/imagen_servicio/\".$id_servicio\n 1379                    , \n 1380:                   \"style\"  => \"width:50px!important;\"\n 1381                  ]);\n 1382                \n\n2 matches across 2 files\n",
 			"settings":
 			{
-				"buffer_size": 19012,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 1676 files for \"LUGAR DE ENCUENTRO\"\n\n/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php:\n   69  \t\t?>\t\t\n   70  \n   71: \t\t<?=heading_enid(\"LUGAR DE ENCUENTRO\" , 3, [\"class\" => \"top_20\"])?>\n   72  \t\t<?=div($tipo. \" \". $nombre_estacion .\" \". $numero.\" COLOR \". $color ,1)?>\t\t\n   73  \t\t<?=div(\"ESTACIÓN \".$lugar_entrega , [\"class\" => \"strong\"],1)?>\t\t\n\n1 match in 1 file\n",
-			"settings":
-			{
-				"buffer_size": 394,
+				"buffer_size": 2853,
 				"line_ending": "Unix",
 				"name": "Find Results",
 				"scratch": true
 			}
 		},
 		{
-			"file": "q/application/views/cobranza/pago_al_momento.php",
+			"file": "q/application/helpers/recibo_helper.php",
 			"settings":
 			{
-				"buffer_size": 6871,
+				"buffer_size": 15041,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "q/application/views/producto/principal.php",
+			"settings":
+			{
+				"buffer_size": 1111,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "q/application/views/producto/basico.php",
+			"settings":
+			{
+				"buffer_size": 4229,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -623,12 +632,21 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/pedidos",
-		"/var/www/html/inicio/pedidos/application",
-		"/var/www/html/inicio/pedidos/application/controllers"
+		"/var/www/html/inicio/q",
+		"/var/www/html/inicio/q/application",
+		"/var/www/html/inicio/q/application/views",
+		"/var/www/html/inicio/q/application/views/producto"
 	],
 	"file_history":
 	[
+		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
+		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
+		"/var/www/html/inicio/pedidos/application/controllers/home.php",
+		"/var/www/html/inicio/pedidos/application/views/domicilio.php",
+		"/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php",
+		"/var/www/html/inicio/orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php",
+		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
+		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
 		"/var/www/html/inicio/js_tema/puntos_medios/principal.js",
 		"/var/www/html/inicio/q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php",
 		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php",
@@ -637,8 +655,6 @@
 		"/var/www/html/inicio/puntos_medios/application/views/home.php",
 		"/var/www/html/inicio/puntos_medios/application/views/quien_recibe.php",
 		"/var/www/html/inicio/q/application/models/imagen_servicio_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
-		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
 		"/var/www/html/inicio/puntos_medios/application/controllers/home.php",
 		"/var/www/html/inicio/q/application/helpers/lineametro_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
@@ -646,8 +662,6 @@
 		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
 		"/var/www/html/inicio/js_tema/domicilio/domicilio_entrega.js",
-		"/var/www/html/inicio/pedidos/application/views/domicilio.php",
-		"/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php",
 		"/var/www/html/inicio/helpers/enid_helper.php",
 		"/var/www/html/inicio/producto/application/views/pre.php",
 		"/var/www/html/inicio/pedidos/application/views/seguimiento.php",
@@ -657,7 +671,6 @@
 		"/var/www/html/inicio/js_tema/js/direccion.js",
 		"/var/www/html/inicio/producto/application/controllers/home.php",
 		"/var/www/html/inicio/js_tema/domicilio/direccion_pedido_registrado.js",
-		"/var/www/html/inicio/pedidos/application/controllers/home.php",
 		"/var/www/html/inicio/planes_servicios/application/controllers/inicio.php",
 		"/var/www/html/inicio/js_tema/js/main.js",
 		"/var/www/html/inicio/procesar/application/views/secciones_2/paginas_web.php",
@@ -742,7 +755,6 @@
 		"/var/www/html/inicio/q/application/controllers/api/tipo_entrega.php",
 		"/var/www/html/inicio/q/application/controllers/api/tipo_negocio.php",
 		"/var/www/html/inicio/q/application/controllers/api/tipo_punto_encuentro.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
 		"/var/www/html/inicio/q/application/controllers/api/usuario_clasificacion.php",
 		"/var/www/html/inicio/q/application/controllers/api/valoracion.php",
 		"/var/www/html/inicio/programacion/evaluacion_servicios_mensual.php",
@@ -754,9 +766,7 @@
 		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
 		"/var/www/html/inicio/css_tema/template/main.css",
 		"/var/www/html/inicio/css_tema/template/pedidos.css",
-		"/var/www/html/inicio/js_tema/administracion_cuenta/principal.js",
-		"/var/www/html/inicio/faq/application/faq/principal.js",
-		"/var/www/html/inicio/enid.sublime-project"
+		"/var/www/html/inicio/js_tema/administracion_cuenta/principal.js"
 	],
 	"find":
 	{
@@ -902,6 +912,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"width:50px!important;",
+			"width: 40px !important",
+			"this->table->add_row",
+			"this->table->generate",
+			"generate",
+			"set_heading",
+			"metricas_productos_solicitados",
+			"imprimir",
 			"[0]",
 			"=",
 			"LUGAR DE ENCUENTRO",
@@ -1021,15 +1039,7 @@
 			"            ",
 			"pagin",
 			"paginacion",
-			"pagina_",
-			"create_pagination",
-			"pagina",
-			"create_pagination",
-			"categorias_destacadas",
-			"create_keyword",
-			"load_data",
-			"=",
-			"pagin"
+			"pagina_"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1066,104 +1076,75 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "pedidos/application/controllers/home.php",
+					"file": "q/application/controllers/api/servicio.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9783,
+						"buffer_size": 52049,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7399,
-								7399
+								47272,
+								47272
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3093.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "pedidos/application/views/domicilio.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4631,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1175.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "pedidos/application/helpers/pedidos_helper.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 19012,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2314.0,
+						"translation.y": 27167.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 1,
+					"file": "q/application/models/serviciosmodel.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 394,
+						"buffer_size": 44278,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4970,
+								4970
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2124.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2853,
 						"regions":
 						{
 							"match":
@@ -1172,8 +1153,52 @@
 								"regions":
 								[
 									[
-										166,
-										184
+										157,
+										177
+									],
+									[
+										305,
+										325
+									],
+									[
+										364,
+										384
+									],
+									[
+										503,
+										523
+									],
+									[
+										630,
+										650
+									],
+									[
+										968,
+										988
+									],
+									[
+										1222,
+										1242
+									],
+									[
+										1485,
+										1505
+									],
+									[
+										1539,
+										1559
+									],
+									[
+										1982,
+										2004
+									],
+									[
+										2442,
+										2463
+									],
+									[
+										2755,
+										2776
 									]
 								],
 								"scope": ""
@@ -1182,15 +1207,15 @@
 						"selection":
 						[
 							[
-								182,
-								182
+								2762,
+								2762
 							]
 						],
 						"settings":
 						{
 							"detect_indentation": false,
 							"line_numbers": false,
-							"output_tag": 1,
+							"output_tag": 3,
 							"result_base_dir": "",
 							"result_file_regex": "^([^ \t].*):$",
 							"result_line_regex": "^ +([0-9]+):",
@@ -1198,27 +1223,57 @@
 							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1197.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "q/application/views/cobranza/pago_al_momento.php",
+					"buffer": 3,
+					"file": "q/application/helpers/recibo_helper.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6871,
+						"buffer_size": 15041,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2685,
-								2685
+								2328,
+								2328
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 699.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "q/application/views/producto/principal.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1111,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								304,
+								304
 							]
 						],
 						"settings":
@@ -1227,10 +1282,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1022.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "q/application/views/producto/basico.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 4229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -1288,6 +1373,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"producto/principal",
+				"q/application/views/producto/principal.php"
+			],
+			[
+				"servicio.php",
+				"q/application/controllers/api/servicio.php"
+			],
 			[
 				"domicilio",
 				"pedidos/application/views/domicilio.php"
@@ -1791,14 +1884,6 @@
 			[
 				"autolo",
 				"config/autoload.php"
-			],
-			[
-				"rest",
-				"librerias/REST_Controller.php"
-			],
-			[
-				"models/serviciosmodel.php",
-				"q/application/models/serviciosmodel.php"
 			]
 		],
 		"width": 0.0
@@ -1892,8 +1977,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
-	"side_bar_width": 186.0,
+	"side_bar_visible": true,
+	"side_bar_width": 290.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

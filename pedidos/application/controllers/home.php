@@ -61,7 +61,7 @@ class Home extends CI_Controller{
             $data["status_ventas"]  = $this->get_estatus_enid_service();
             if ($es_recibo == 0 ) {
                 
-                $this->principal->show_data_page($data, 'home');      
+                $this->principal->show_data_page($data, 'form_busqueda');
             }else{
 
                 if (ctype_digit(trim($this->input->get("recibo"))) ) {                

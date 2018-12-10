@@ -91,9 +91,10 @@
         
         $_num =  get_random();
         $this->create_tmp_productos_solicitados(0 , $_num,  $param);        
-        $query_get = "SELECT * FROM tmp_productos_$_num ORDER BY num_keywords DESC";
-        $result =  $this->db->query($query_get);
-        $data_complete["info_productos"] = $result->result_array();
+        $query_get      =   
+        "SELECT * FROM tmp_productos_$_num ORDER BY num_keywords DESC";
+        $result         =   $this->db->query($query_get);
+        $data_complete  =   $result->result_array();
         
         $this->create_tmp_productos_solicitados(1 , $_num,  $param);
         return $data_complete;
@@ -130,6 +131,8 @@
                         '".$param["fecha_inicio"]."'  
                       AND 
                         '".$param["fecha_termino"]."'
+                        AND
+                        LENGTH(keyword) > 2
                       GROUP BY keyword";
 
         $this->db->query($query_get);
@@ -234,7 +237,7 @@
         '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."' 
         ORDER 
         BY 
-        vista 
+        deseado
         DESC
         ";        
         return $this->db->query($query_get)->result_array();

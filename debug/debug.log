@@ -26778,3 +26778,877 @@ DEBUG - TYPE array 2018-12-07 03:01:35 --> Array
 
 )
 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                   DEBUG - TYPE array 2018-12-09 13:20:30 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-09 13:38:10 --> llefa
+DEBUG - TYPE string 2018-12-09 13:38:26 --> 8888
+DEBUG - TYPE string 2018-12-09 13:38:26 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-09 13:38:26 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-09 13:38:40 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 5
+                    [accesos_a_intento_compra] => 0
+                    [accesos_contacto] => 0
+                    [accesos_area_cliente] => 0
+                    [usuarios] => 1
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 1
+                                    [compras_efectivas] => 0
+                                    [solicitudes] => 1
+                                    [envios] => 0
+                                    [cancelaciones] => 0
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-09 13:38:44 --> llefa
+DEBUG - TYPE string 2018-12-09 13:39:26 --> llefa
+DEBUG - TYPE string 2018-12-09 13:39:28 --> llefa
+DEBUG - TYPE string 2018-12-09 13:39:32 --> llefa
+DEBUG - TYPE string 2018-12-09 13:42:02 --> llefa
+DEBUG - TYPE string 2018-12-09 13:42:14 --> 8888
+DEBUG - TYPE string 2018-12-09 13:42:14 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-09 13:42:14 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-09 13:42:20 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 290
+    [id_usuario_venta] => 1
+    [id_servicio] => 243
+    [id_usuario] => 1
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-09 13:42:22 --> llefa
+DEBUG - TYPE string 2018-12-09 13:42:24 --> llefa
+DEBUG - TYPE string 2018-12-09 13:42:27 --> llefa
+DEBUG - TYPE string 2018-12-09 13:43:20 --> 8888
+DEBUG - TYPE string 2018-12-09 13:43:20 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-09 13:43:20 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-09 13:43:25 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 291
+    [id_usuario_venta] => 1
+    [id_servicio] => 249
+    [id_usuario] => 1
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE string 2018-12-09 13:43:29 --> llefa
+DEBUG - TYPE string 2018-12-09 13:43:58 --> llefa
+DEBUG - TYPE string 2018-12-09 13:44:50 --> llefa
+DEBUG - TYPE string 2018-12-09 13:44:54 --> llefa
+DEBUG - TYPE string 2018-12-09 13:45:17 --> llefa
+DEBUG - TYPE array 2018-12-09 13:45:58 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 8
+                    [accesos_a_intento_compra] => 2
+                    [accesos_contacto] => 0
+                    [accesos_area_cliente] => 0
+                    [usuarios] => 1
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 3
+                                    [compras_efectivas] => 0
+                                    [solicitudes] => 3
+                                    [envios] => 0
+                                    [cancelaciones] => 0
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-09 13:56:20 --> llefa
+DEBUG - TYPE array 2018-12-09 14:00:49 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 8
+                    [accesos_a_intento_compra] => 2
+                    [accesos_contacto] => 0
+                    [accesos_area_cliente] => 0
+                    [usuarios] => 1
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 3
+                                    [compras_efectivas] => 0
+                                    [solicitudes] => 3
+                                    [envios] => 0
+                                    [cancelaciones] => 0
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-09 14:04:27 --> llefa
+DEBUG - TYPE string 2018-12-09 14:04:59 --> llefa
+DEBUG - TYPE array 2018-12-09 19:58:15 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 16
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-09 19:58:27 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 292
+    [id_usuario_venta] => 1
+    [id_servicio] => 249
+    [id_usuario] => 630
+    [telefono] => 776766767
+    [nombre] => ghsdghfsdf
+    [email] => hghgasghdhg@kd.lo
+    [es_usuario_nuevo] => 1
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-09 20:23:51 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-09 20:24:00 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-09 21:39:24 --> <div class="pagination"><li class="active"><span>1<span></span></span></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-09 21:40:41 --> <div class="pagination"><li class="active"><span>1<span></span></span></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-09 21:43:32 --> <div class="pagination"><li class="active"><span>1<span></span></span></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-09 21:54:51 --> <div class="pagination"><li class="active"><span>1<span></span></span></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-09 21:54:56 --> <div class="pagination"><li><a href="?q=" data-ci-pagination-page="1" rel="prev">«</a></li><li><a href="?q=" data-ci-pagination-page="1" rel="start">1</a></li><li class="active"><span>2<span></span></span></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-09 21:55:01 --> <div class="pagination"><li><a href="?q=" data-ci-pagination-page="1" rel="prev">«</a></li><li><a href="?q=" data-ci-pagination-page="1" rel="start">1</a></li><li class="active"><span>2<span></span></span></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-09 21:55:03 --> <div class="pagination"><li class="active"><span>1<span></span></span></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-09 22:05:05 --> <div class="pagination"><li class="active"><span>1<span></span></span></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE array 2018-12-09 22:14:45 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-09 23:50:46 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-09 23:50:51 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-09 23:53:52 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-09 23:54:00 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-09 23:54:19 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-09 23:54:53 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-09 23:55:57 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-09 23:57:30 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-10 00:02:29 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-10 00:16:02 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-10 00:16:13 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-10 00:16:34 --> Array
+(
+)
+
+DEBUG - TYPE string 2018-12-10 00:17:42 --> <div class="pagination"><li class="active"><span>1<span></span></span></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-10 00:18:05 --> <div class="pagination"><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="prev">«</a></li><li><a href="?q=" data-ci-pagination-page="1" rel="start">1</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li class="active"><span>3<span></span></span></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-10 00:20:10 --> llefa
+DEBUG - TYPE string 2018-12-10 00:20:15 --> llefa
+DEBUG - TYPE string 2018-12-10 00:22:21 --> llefa
+DEBUG - TYPE string 2018-12-10 00:22:54 --> 8888
+DEBUG - TYPE string 2018-12-10 00:22:54 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-10 00:22:55 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-10 00:24:28 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 292
+)
+
+DEBUG - TYPE array 2018-12-10 00:26:19 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 292
+)
+
+DEBUG - TYPE array 2018-12-10 00:26:30 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 292
+)
+
+DEBUG - TYPE array 2018-12-10 00:30:42 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 292
+)
+
+DEBUG - TYPE array 2018-12-10 00:32:38 --> Array
+(
+    [resumen] => Array
+        (
+            [0] => Array
+                (
+                    [accesos] => 6
+                    [accesos_a_intento_compra] => 1
+                    [accesos_contacto] => 0
+                    [accesos_area_cliente] => 0
+                    [usuarios] => 1
+                    [ventas] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [total] => 1
+                                    [compras_efectivas] => 0
+                                    [solicitudes] => 1
+                                    [envios] => 0
+                                    [cancelaciones] => 0
+                                )
+
+                        )
+
+                    [contacto] => 0
+                    [labores_resueltas] => 0
+                    [valoraciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num_valoraciones] => 0
+                                    [si_recomendarian] => 
+                                    [no_recomendarian] => 
+                                )
+
+                        )
+
+                    [valoraciones_productos] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [productos_valorados] => 0
+                                )
+
+                        )
+
+                    [correos] => 
+                    [servicios_creados] => 
+                    [conversaciones] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 
+                                    [leidas_por_vendedor] => 
+                                    [leidas_por_cliente] => 
+                                )
+
+                        )
+
+                    [lista_deseo] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [num] => 0
+                                )
+
+                        )
+
+                )
+
+        )
+
+)
+

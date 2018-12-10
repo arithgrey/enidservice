@@ -5,7 +5,7 @@
         "class"     =>"closebtn closebtn_lateral" ,
         "onclick"   =>"closeNav()"
     ])?>        
-    <?=div(anchor_enid(img_enid([]), ["href"  =>  "../search/?q2=0&q="]) ,  ["class" =>"logo_lateral_login"])?>
+    <?=div(anchor_enid(img_enid([]), ["href"  =>  "../"]) ,  ["class" =>"logo_lateral_login"])?>
     <?=n_row_12()?>              
         <form class="form" action="../search">                       
             <?=input(["name"=>"q" , "placeholder"=>"Articulo ó servicio" , "class"=>"input_search"])?>

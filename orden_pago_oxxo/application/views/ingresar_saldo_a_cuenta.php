@@ -39,7 +39,8 @@
               "value" =>  $concepto
 
             ])?> 
-            <?=guardar("IMPRIMIR" , ["class"=>"a_enid_blue imprimir"] ,1,1)?>  			    
+            <?=guardar("IMPRIMIR" , ["class"=>" imprimir" , "style" => "background:#0a0e39!important;"] ,1,1)?>  			    
+            <br>
           </form>
 		    </div>
 	    </div>

@@ -21,14 +21,26 @@
                 $id_servicio    =   $row["id_servicio"];
                 $url            =    "../producto/?producto=".$id_servicio;
                 $src_img        =   "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
+                $id_error  =  "imagen_".$id_servicio;
         ?>
                 	
                 		
         <div class='col-lg-3'>
-            <?=anchor_enid(icon(["src"=> $src_img , "class"=>'img_servicio']) ,["href"=> $url])?>
+
+            <?=anchor_enid(icon(
+                    [
+                            "src"       =>  $src_img ,
+                            "class"     =>  'img_servicio',
+                            "id"        =>  $id_error,
+                            "onerror"   =>  "reloload_img( '".$id_error."','".$url_img."');"
+
+
+                    ]) ,["href"=> $url
+                ]
+            )?>
             <?=div($num_deseo , 
                     [
-                    "class" =>  "num_deseo_producto" 
+                    "class" =>  "num_deseo_producto",
                     "title" =>  "Personas que agregaron a la lista de deseos este producto"
             ])?>                
         </div>

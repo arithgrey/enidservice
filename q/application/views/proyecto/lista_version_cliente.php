@@ -37,6 +37,7 @@ if($ordenes!=0){
         $url_imagen_error       =   '../img_tema/portafolio/producto.png';                
 		$lista_info_attr        =   " info_proyecto= '".$resumen_pedido."'  info_status =  '".$estado."' ";
 
+        $id_error           =   "imagen_".$id_servicio;
     ?>
     <?=n_row_12()?>
         <div class="contenedor_articulo">                
@@ -44,8 +45,9 @@ if($ordenes!=0){
                 <?=anchor_enid(
                         img([
                             "src"       =>  $url_imagen_servicio,
-                            "onerror"   =>  "this.src='".$url_imagen_error."'",
-                            "class"     =>  'imagen_articulo'
+                            "onerror"   =>  "reloload_img( '".$id_error."','".$url_imagen_servicio."');",
+                            "class"     =>  'imagen_articulo',
+                            "id"        =>  $id_error
                             ]),  
                     ["href"  => $url_servicio]
                 )?>                        

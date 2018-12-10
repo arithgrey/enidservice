@@ -379,8 +379,14 @@ if(!function_exists('invierte_date_time')){
 
 		for ($a=0; $a < $num_ciclos_contratados ; $a++) { 
 					
-			$link 	= 	link_imagen_servicio($id_servicio); 	
-			$img 	= 	img(["src" => $link , "class" => "img_servicio"]);
+			$link 	    = 	link_imagen_servicio($id_servicio);
+			$id_error   =   "imagen_".$id_servicio;
+			$img 	= 	img([
+			    "src"   =>  $link ,
+                "class" =>  "img_servicio",
+                "id"    =>  $id_error,
+                'onerror' => "reloload_img( '".$id_error."','".$link."');"
+            ]);
 			
 			
 			$text_producto = 

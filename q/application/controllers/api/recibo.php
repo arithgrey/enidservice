@@ -351,8 +351,7 @@ class recibo extends REST_Controller{
 
             if ($param["v"] ==  1) {
                 /*cargo vista*/
-                $response =  create_resumen_pedidos($response , 
-                    $this->get_estatus_enid_service($param));
+                $response =  create_resumen_pedidos($response , $this->get_estatus_enid_service($param));
                 
             }
             

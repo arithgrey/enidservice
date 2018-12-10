@@ -48,9 +48,15 @@ if(!function_exists('invierte_date_time')){
 
       $tb   .= "<tr id='".$recibo."' class='desglose_orden cursor_pointer ".$extra."' >";
 
-      $id_servicio =  $row["id_servicio"];
-      $url_img     =  "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
-      $img    = img(["src"=> $url_img , "style"=>"width: 40px !important"]);
+      $id_servicio  =  $row["id_servicio"];
+      $url_img      =  "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
+      $id_error     =  "imagen_".$id_servicio;
+      $img    = img([
+          "src"     =>  $url_img ,
+          "id"      =>  $id_error,
+          "style"   =>  "width:40px!important;height:40px!important;",
+          'onerror' =>  "reloload_img( '".$id_error."','".$url_img."');"
+      ]);
         $tb  .= get_td($recibo);
         $tb  .= get_td($img);
         $tb  .= get_td($estado_compra);

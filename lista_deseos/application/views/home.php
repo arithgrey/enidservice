@@ -10,11 +10,15 @@
 
         $id_servicio    =   $row["id_servicio"];
         $url            =   "../producto/?producto=".$id_servicio;
-        $src_img        = "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
+        $src_img        =   "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
+
+        $id_error         = "imagen_".$id_servicio;
         $config         = [
 
             'src'   => $src_img ,
-            'style' => 'width:100%!important;height:250px!important;'
+            'id'    => $id_error,
+            'style' => 'width:100%!important;height:250px!important;',
+            'onerror' => "reloload_img( '".$id_error."','".$src_img."');"
         ];
 
         $img        =  img($config);                    

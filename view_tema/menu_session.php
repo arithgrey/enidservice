@@ -14,10 +14,10 @@
         ["href"=>"../login" ,  "class" =>'links white']);
 
 
-        $list = [$link_vender , $links_envio_msj , $links_session]; 
+        $list = [ $links_session , $link_vender];
     ?>
     <?php if(!isset($proceso_compra)  || (isset($proceso_compra) && $proceso_compra ==  0)){
-        echo ul($list , ["class"  => "largenav pull-right"]);
+        echo div(ul($list , ["class"  => "largenav pull-right"]) ,  ["class"]);
     }?>
-    
-<?php endif; ?>               
+
+<?php endif; ?>

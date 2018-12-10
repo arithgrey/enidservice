@@ -4,52 +4,44 @@
 <?=$this->load->view("../../../view_tema/header_meta_enid")?>
 <div id="flipkart-navbar">
     <div class="container">        
-        <?=$this->load->view("../../../view_tema/menu_session")?>
-        <?=$this->load->view("../../../view_tema/tmp_menu")?>
+
+
+        <!--
         <div class="extra_menu_simple" style="display: none;">
-            <?php $img_enid   = img_enid(["style"=>"width: 50px!important;"] ); ?>
+            <?php $img_enid   = img_enid(["style"=>"width: 45px!important;"] ); ?>
             <?=anchor_enid($img_enid ,["href"=>"../"])?>
         </div>
-        
+        -->
+
+        <?php if($is_mobile <  1 && $in_session ==  0):?>
             <div class="menu_completo_enid_service">
-
-                <div class="col-lg-3">
-                    <?=div(
-                        "☰ ENID SERVICE",
-                        [
-                            "class" =>  "smallnav menu white", 
-                            "style" =>  "", 
-                            "onclick"=> "openNav()"
-                        ])?>
-                    <?=anchor_enid($img_enid, 
-                        ["href"  =>  "../"]
-                    )?>
-
-                </div>
-
-                <?php if(!isset($proceso_compra) || (isset($proceso_compra) && $proceso_compra == 0) ):?>
-                <div class="col-lg-9 contenedor_busqueda_global_enid_service">
-                    <form action="../search" class="search_principal_form" >
-                        <?=div($clasificaciones_departamentos , ["class"=>"col-lg-3"])?>
-                        <?=input(
-                            [
-                            "class"         =>  "col-lg-7 input_busqueda_producto input_enid", 
-                            "type"          =>  "text", 
-                            "style"         =>  "margin-top: 5px;", 
-                            "placeholder"   =>  "Búsqueda",  
-                            "name"          =>  "q",
-                            "onKeyup"       =>  "evita_basura();"
-                        ])?>                
-                        <?=guardar(icon("fa fa-search "),
-                            [                       
-                            "class"         =>  
-                            " col-lg-1 button_busqueda_producto  flipkart-navbar-button"],
-                            0,
-                        0)?>
-                    </form>
-                </div>
+                <!--1-->
+                <?=get_logo($is_mobile)?>
+                <!--8-->
+                <?php if($is_mobile ==  0 && !isset($proceso_compra) || (isset($proceso_compra) && $proceso_compra == 0) ):?>
+                    <?=$this->load->view("../../../view_tema/formularios/form_busqueda_departamentos")?>
                 <?php endif;?>
-            </div>        
+                <!--3-->
+                <?=$this->load->view("../../../view_tema/menu_session")?>
+            </div>
+        <?php elseif($is_mobile ==  1 &&  $in_session ==  0):?>
+            <!--12-->
+            <?=get_logo($is_mobile , $in_session)?>
+
+        <?php  elseif($is_mobile ==  1 &&  $in_session ==  1  ):?>
+            <?=get_logo($is_mobile , $in_session)?>
+            <div class="col-lg-11">
+                <?=$this->load->view("../../../view_tema/tmp_menu")?>
+            </div>
+
+
+        <?php  elseif($is_mobile == 0 &&  $in_session ==  1  ):?>
+            <?=get_logo($is_mobile , $in_session)?>
+            <div class="col-lg-11">
+                <?=$this->load->view("../../../view_tema/tmp_menu")?>
+            </div>
+        <?php endif;?>
+
 
     </div>
 </div>

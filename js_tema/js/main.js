@@ -527,10 +527,12 @@ function get_option(key){
 
 /****/
 function valida_menu_superior(){
+	/*
 	width_dispositivo =  $(window).width();
 	if (width_dispositivo< 800){
 		display_elements([".contenedor_busqueda_global_enid_service" ,  ".boton_vender_global"] ,  0);		
 	}
+	*/
 }
 /**/
 function openNav() {
@@ -757,4 +759,15 @@ var show_confirm = function(text ,  text_complemento , text_continuar=0 , on_nex
 		        cancel: on_cancel
 		    }
 	});
+}
+var reloload_img =  function ( id,  url) {
+	console.log(id );
+	console.log(url);
+	window.setInterval(reload_imgs(id, url),20000);
+
+}
+var reload_imgs = function (id,  url) {
+
+	document.getElementById(id).src = url;
+	console.log(url);
 }

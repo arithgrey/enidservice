@@ -66,7 +66,9 @@
 			</select>
 		</div>
 		<div class="col-lg-5">
-			<?=$this->load->view("../../../view_tema/inputs_fecha_busqueda")?>
+            <div class="row">
+			    <?=$this->load->view("../../../view_tema/inputs_fecha_busqueda")?>
+            </div>
 		</div>
 	</form>	
 	<form class="form_search" action="" method="GET">

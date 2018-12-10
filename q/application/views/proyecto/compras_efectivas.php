@@ -12,14 +12,16 @@
             $monto_a_pagar          =  $row["monto_a_pagar"];                                
             $url_imagen_servicio    =  "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
             $url_imagen_error       =  '../img_tema/portafolio/producto.png';     
-            $fecha_registro         =  $row["fecha_registro"];           		
+            $fecha_registro         =  $row["fecha_registro"];
+            $id_error               =  "imagen_".$id_servicio;
     	?>
     	<?=n_row_12()?>
             <div class="contenedor_articulo">
                 <div class="col-lg-3">                      
                 <?=img([
             		"src" 		=> 	$url_imagen_servicio,
-                    "onerror" 	=>	"this.src='".$url_imagen_error."' ",
+                    "id"        =>  $id_error,
+                    "onerror"   =>  "reloload_img( '".$id_error."','".$url_imagen_servicio."');",
                     "class" 	=> 	'imagen_articulo'
             	])?>
                 </div>    

@@ -4,11 +4,9 @@
 
 	$z =0;
 	foreach ($info_productos["info_productos"] as $row) {
-		$keyword =  $row["keyword"];
-		$num_keywords =  $row["num_keywords"];
-
-
-		?>	
+		$keyword 		=  $row["keyword"];
+		$num_keywords 	=  $row["num_keywords"];
+	?>	
 		<?php if($z == 0){?>
 		       
 		    <table>
@@ -51,4 +49,3 @@
 
 	}
 ?>
-

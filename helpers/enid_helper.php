@@ -1190,3 +1190,42 @@ function add_hour($num_hours){
   $date = date('H:i:s', strtotime($nowtime . ' + '.$num_hours.' minute'));
   return $date;
 }
+function get_logo($is_mobile , $tipo = 0 ){
+
+    if ($is_mobile ==  1){
+
+        $en_mobile  =  div("☰ ENID SERVICE", [ "class" =>  "smallnav menu white", "onclick"=> "openNav()" ]);
+        $class      =  "col-lg-12";
+        switch ($tipo) {
+            case 0:
+                $class =  "col-lg-12";
+                break;
+            case 1:
+                $class =  "col-lg-3";
+                break;
+            case 2:
+                $class =  "col-lg-1";
+                break;
+        }
+
+        return div($en_mobile , ["class" => $class]);
+
+    }else{
+
+        $img_enid   =  img_enid(["style"=>"width: 50px!important;"] );
+        $en_pc      =  anchor_enid($img_enid, ["href"  =>  "../"] );
+        return div($en_pc, ["class" => "col-lg-1"]);
+    }
+
+}
+function get_img_usuario($id_usuario){
+    $img_conf  = [
+        "id"      =>  "imagen_usuario" ,
+        "src"     =>  "../imgs/index.php/enid/imagen_usuario/".$id_usuario ,
+        "onerror" =>  "this.src='../img_tema/user/user.png'" ,
+        "style"   =>  "width: 40px!important;height: 35px!important;"
+    ];
+
+    return   img($img_conf);
+
+}

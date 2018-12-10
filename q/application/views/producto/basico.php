@@ -56,14 +56,16 @@
             $existencia =  $servicio["existencia"];     
             $vista =  $servicio["vista"];
         }
-        
+
+        $id_error =  "imagen_".$id_servicio;
         $atributos_imagen = 
             [
-                'src'   => $url_img, 
+                'src'   => $url_img,
+                'id'    => $id_error,
                 'title' => 'Ver artículo', 
                 'class' => 'imagen_producto',
                 'alt'   => $metakeyword,
-                'onerror' => "this.onerror=null;this.src='".$url_img."';"
+                'onerror' => "reloload_img( '".$id_error."','".$url_img."');"
             ];
         $img =  img($atributos_imagen);                          
         

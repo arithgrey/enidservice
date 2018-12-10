@@ -6,52 +6,72 @@ class Enid extends CI_Controller {
         $this->load->library(lib_def());          
     }
     private function img_faq($id_faq){
-        $this->construye_img_format($this->get_img_faq($id_faq));                
+        return $this->construye_img_format($this->get_img_faq($id_faq));
     }
     function imagen($id_imagen){
 
         $img_src="";
         foreach ($this->get_img($id_imagen) as $row ){ 
             $img_src =  $row["img"];
+            header('Content-Type: image/png');
             echo  $img_src;
         }        
     }       
     function img($id_imagen){
 
-        $img_src="";
         foreach ($this->get_img($id_imagen) as $row ){ 
             $img_src =  $row["img"];
+            header('Content-Type: image/png');
             echo  $img_src;
         }         
     }
     /**/     
     function imagen_usuario($id_usuario){        
         $img_usuario =  $this->get_img_usuario($id_usuario);
-        $this->construye_img_format($img_usuario );        
+        return  $this->construye_img_format($img_usuario );
     }        
     /**/
     function imagen_servicio($id_servicio){
 
-        $this->construye_img_format($this->get_img_servicio($id_servicio));        
+        $imagen = $this->get_img_servicio($id_servicio);
+        if (is_array($imagen) &&  count($imagen) > 0){
+            return  $this->construye_img_format($imagen);
+        }else{
+            sleep(2);
+            $imagen = $this->get_img_servicio($id_servicio);
+            if (count($imagen) > 0 ){
+                return  $this->construye_img_format($imagen);
+            }else{
+                /**/
+            }
+
+        }
+
     }
     /**/
     private function construye_img_format($response){
             
         if ( count($response) > 0 ) {            
-            $id_imagen =  $response[0]["id_imagen"];              
-            $img       = $this->costruye_imagen($id_imagen);
-            
+            $id_imagen  =  $response[0]["id_imagen"];
+            $data       = $this->costruye_imagen($id_imagen);
+            $im         = imagecreatefromstring($data);
+
+            header('Content-Disposition: Attachment;filename=image.png');
             header('Content-Type: image/png');
-            echo $img;            
+            if ($im !== false) {
+                $img =  imagepng($im);
+                imagedestroy($im);
+                return $img;
+            }
         }         
     }
     /**/
     private function costruye_imagen($id_imagen){
-        $img_src="";
+
         foreach ($this->get_img($id_imagen) as $row ){ 
-            $img_src =  $row["img"];
+            return $row["img"];
         }     
-        return  $img_src;
+
     }
     private function get_img_faq($id_faq){
 
@@ -76,4 +96,4 @@ class Enid extends CI_Controller {
         $api                =  "imagen_servicio/servicio/format/json/";
         return $this->principal->api( $api , $q);            
     }
-}?>
+}
