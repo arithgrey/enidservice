@@ -267,10 +267,8 @@ class Cobranza extends REST_Controller{
                 
 
                 
-                $id_recibo        = $this->genera_orden_compra($data_orden);                
-                //debug($id_recibo);
+                $id_recibo        = $this->genera_orden_compra($data_orden);
 
-                
                 $q["id_servicio"] = $id_servicio;
                 $q["valor"]       = 2;
                 $this->gamificacion_deseo($q);            

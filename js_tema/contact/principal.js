@@ -5,8 +5,7 @@ $(document).ready(function(){
 	
 });
 var muestra_opciones = function(){
-
-	var id 			= 	get_parameter_enid($(this) , "id");
+	var id 			= 	get_parameter_enid( $(this) , "id");
 	$(".text_selector").hide();
 	switch(id){
 
@@ -28,11 +27,11 @@ var muestra_opciones = function(){
 var envia_correo = function(e){
 	
 
-	var nombre 	= 	get_parameter(".nombre_correo").length;
-	var correo 	= 	get_parameter(".correo_electronico").length;
-	
-	if ( nombre > 5 && correo > 5 ){
-		
+	var nombre 	= 	get_parameter(".nombre");
+	var correo 	= 	get_parameter(".correo_electronico");
+
+	if ( nombre.length > 5 && correo.length > 5 ){
+
 		var password 	 = 	""+CryptoJS.SHA1(randomString(8));					
 		var data_send 	 = 	$(".form_correo").serialize()+"&"+$.param({"password":password});			
 		var url 		 = 	"../q/index.php/api/usuario/vendedor/format/json/";
@@ -61,7 +60,7 @@ var envia_whatsapp = function(e){
 		var data_send 	 = $(".form_whatsapp").serialize()+"&"+$.param({"password":password});					
 		var url 		 = "../q/index.php/api/usuario/whatsapp/format/json/";
 		bloquea_form(".form_whatsapp");
-		request_enid("POST",  data_send , url , response_send_email);			
+		request_enid("POST",  data_send , url , response_send_whatsApp);
 
 	}else{			
 		var inputs = [".tel" ,".nombre_whatsapp"];
@@ -70,4 +69,10 @@ var envia_whatsapp = function(e){
 	}
 
 	e.preventDefault();		
+}
+var response_send_whatsApp = function (data) {
+
+	var usuario = data.id_usuario;
+	set_parameter(".usuario" , usuario);
+	$(".form_proceso_compra").submit();
 }

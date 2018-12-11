@@ -326,10 +326,14 @@ class usuario extends REST_Controller{
     }
     /**/
     function es_POST(){        
-        $param          = $this->post();                
-        $params         = [ "idusuario","nombre","email","fecha_registro","idempresa"];
-        $params_where   = ["email" => $param["email"] , "password" => $param["secret"]];
-        $response       = $this->usuario_model->get($params , $params_where);
+        $param          = $this->post();
+        $response       =   [];
+        if (if_ext($param ,"email,secret")){
+            $params         = [ "idusuario","nombre","email","fecha_registro","idempresa"];
+            $params_where   = ["email" => $param["email"] , "password" => $param["secret"]];
+            $response       = $this->usuario_model->get($params , $params_where);
+
+        }
         $this->response($response);
     }
     function num_registros_preriodo_GET(){
@@ -492,52 +496,81 @@ class usuario extends REST_Controller{
         
 
         if($this->input->is_ajax_request()){             
-            $param = $this->post();        
-            
+            $param = $this->post();
             $param["email"]                      =  $param["whatsapp"]."@gmail.com";            
             $response["usuario_existe"]          =  $this->usuario_model->evalua_usuario_existente($param);
-            $response["usuario_registrado"] = 0;
+            $response["usuario_registrado"]      =  0;
+            $id_servicio                         =  $param["servicio"];
+            $id_usuario                          =  0;
             if ($response["usuario_existe"] == 0 ){
 
-                $email              =  $param["email"];
-                $id_departamento    =  9;      
-                $password           =  $param["password"];            
-                $nombre             =  $param["nombre"];        
-                $id_usuario_referencia = 180; 
-                $whatsapp           =  $param["whatsapp"]; 
+                $response["usuario"] = $this->agrega_usuario_whatsApp($param);
 
-                $params = [
-                  "email"                   =>  $email,
-                  "idempresa"               =>  '1',
-                  "id_departamento"         =>  $id_departamento,
-                  "password"                =>  $password,
-                  "nombre"                  =>  $nombre,
-                  "id_usuario_referencia"   =>  $id_usuario_referencia ,
-                  "tel_contacto"            =>  $whatsapp
-                ];
-                $response["id_usuario"] = $this->usuario_model->insert($params , 1);
-                
-                if ( $response["id_usuario"]>0){
-                    $q["id_usuario"]    =  $response["id_usuario"]; 
-                    $q["puesto"]        =  20; 
-                    $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);   
-                    if ($response["usuario_permisos"] > 0) {
-                        $response["email"]              =  $email;
-                        $response["usuario_registrado"] =  1;
-                        /*Ahora notifico al usuario */
-                        
+            }else{
+                $in         =  ["email" => $param["email"] ];
+                $id_usuario =  $this->usuario_model->get(["idusuario"], $in)[0]["idusuario"];
 
-
-                    }
-                }
-                
             }
+
+            $id_usuario     = ($response["usuario_existe"] == 0 ) ? $response["usuario"]["id_usuario"] : $id_usuario;
+
+            /*Agrego a la lista de deseos del usuario el pedido*/
+            $response["lista_deseos"] = $this->agrega_lista_deseos($id_usuario , $id_servicio);
+            $session    = $this->create_session($param);
+            $this->principal->set_userdata($session);
+
             $this->response($response);
         } 
-        $this->response("Error");    
+        $this->response(false);
     }
-    
+    private function create_session($q){
 
+        $api            =     "sess/start";
+        $q["t"]         =     "x=0.,!><!$#";
+        $q["secret"]    =     $q["password"];
+        return $this->principal->api($api,$q,"json","POST",0,1,"login");
+    }
+    private function agrega_lista_deseos($id_usuario ,$id_servicio){
+
+        $q["id_usuario"]    = $id_usuario;
+        $q["id_servicio"]   = $id_servicio;
+        $api = "usuario_deseo/add_lista_deseos";
+        return  $this->principal->api( $api , $q , "json", "PUT");
+    }
+    private function  agrega_usuario_whatsApp($param){
+
+        $email              =  $param["email"];
+        $id_departamento    =  9;
+        $password           =  $param["password"];
+        $nombre             =  $param["nombre"];
+        $id_usuario_referencia = 180;
+        $whatsapp           =  $param["whatsapp"];
+
+        $params = [
+            "email"                   =>  $email,
+            "idempresa"               =>  '1',
+            "id_departamento"         =>  $id_departamento,
+            "password"                =>  $password,
+            "nombre"                  =>  $nombre,
+            "id_usuario_referencia"   =>  $id_usuario_referencia ,
+            "tel_contacto"            =>  $whatsapp
+        ];
+        $response["id_usuario"] = $this->usuario_model->insert($params , 1);
+
+        if ( $response["id_usuario"]>0){
+            $q["id_usuario"]    =  $response["id_usuario"];
+            $q["puesto"]        =  20;
+            $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);
+            if ($response["usuario_permisos"] > 0) {
+                $response["email"]              =  $email;
+                $response["usuario_registrado"] =  1;
+                /*Ahora notifico al usuario */
+
+            }
+        }
+        return $response;
+
+    }
     function miembros_activos_GET(){
 
         $param                                  =   $this->get();
@@ -583,12 +616,14 @@ class usuario extends REST_Controller{
         
     }
 
+    /*
     function prospecto_subscrito_POST(){
     
         $param =  $this->post();             
-        $response =  $this->usuario_model->registrar_prospecto($param);                    
+        $response =  $this->usuario_model->registrar_prospecto($param);
         $this->response($response);    
     }
+    */
      function afiliado_POST(){
 
         $param      =  $this->post();  
@@ -642,7 +677,7 @@ class usuario extends REST_Controller{
                 $q["id_usuario"]    =  $response["id_usuario"]; 
                 $q["puesto"]        =  20; 
                 $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);   
-                //debug($response["usuario_permisos"]);
+
                 if ($response["usuario_permisos"] > 0) {
                     $response["email"]              =  $email;
                     $response["usuario_registrado"] = 1;

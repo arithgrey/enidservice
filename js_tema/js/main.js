@@ -26,6 +26,31 @@ $("footer").ready(function(){
 	$("footer").ready(valida_menu_superior);
 	
 });
+var show_confirm = function(text ,  text_complemento , text_continuar=0 , on_next = 0 , on_cancel= 0){
+
+	if (on_next == 0 ) {
+		on_next = function(){}
+	}if (on_cancel == 0) {
+		on_cancel = function(){}
+	}
+	if(text_continuar ==  0){
+		text_continuar =  "CONTINUAR Y MODIFICAR";
+	}
+	$.confirm({
+		title: text,
+		content: text_complemento,
+		type: 'green',
+		buttons: {
+			ok: {
+				text: text_continuar,
+				btnClass: 'btn-primary',
+				keys: ['enter'],
+				action: on_next
+			},
+			cancel: on_cancel
+		}
+	});
+}
 /**/
 function existeFecha2(fecha){
     var fechaf = fecha.split("-");
@@ -601,11 +626,7 @@ function get_parameter_enid(element , param){
 		return false;
 	}
 }
-/*Regresa el valor que esta en el nodo html*/
-function get_parameter(element){	 		
-	var param = $(element).val();
-	return param;
-}
+
 /*ingresa valor al input*/
 function set_parameter(element , valor ){	 		
 	$(element).val(valor);	
@@ -735,31 +756,7 @@ var evita_basura  = function(){
 	var 	text = text.replace(/["|]/g, "");
 	set_parameter(".input_busqueda_producto" , text);	
 }
-var show_confirm = function(text ,  text_complemento , text_continuar=0 , on_next = 0 , on_cancel= 0){
 
-	if (on_next == 0 ) {
-		on_next = function(){}
-	}if (on_cancel == 0) {
-		on_cancel = function(){}	
-	}
-	if(text_continuar ==  0){
-		text_continuar =  "CONTINUAR Y MODIFICAR";
-	}
-	$.confirm({
-		    title: text,
-		    content: text_complemento,
-		    type: 'green',
-		    buttons: {   
-		        ok: {
-		            text: text_continuar,
-		            btnClass: 'btn-primary',
-		            keys: ['enter'],
-		            action: on_next
-		        },
-		        cancel: on_cancel
-		    }
-	});
-}
 var reloload_img =  function ( id,  url) {
 	console.log(id );
 	console.log(url);
@@ -770,4 +767,9 @@ var reload_imgs = function (id,  url) {
 
 	document.getElementById(id).src = url;
 	console.log(url);
+}
+/*Regresa el valor que esta en el nodo html*/
+var get_parameter = function(element){
+	var param = $(element).val();
+	return param;
 }

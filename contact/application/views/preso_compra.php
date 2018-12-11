@@ -2,7 +2,7 @@
 <div class="col-lg-10 col-lg-offset-1">
 	<center>
 		<?=heading_enid("Recibe nuestra ubicación" , 2 ,[ "class" => "strong" ])?>
-		<?=div("¿Donde quieres recibir la información?" ,["class" => "text_selector"])?>
+		<?=div("¿A través de qué medio?" ,["class" => "text_selector"])?>
 	</center>
 	
 </div>
@@ -70,13 +70,19 @@
 					  			"id"  			=>	"whatsapp" ,
 					  			"name" 			=>	"whatsapp" ,
 					  			"type"			=>	"tel" ,					  			
-					  			"class"			=>	"form-control input-md tel "
+					  			"class"			=>	"form-control input-md tel telefono_info_contacto",
+                                "required"      =>  true
 					  		])?>				  		
 					  	<?=span("INGRESA TU WHATSAPP PARA RECIBIR NUESTRA UBICACIÓN")?>
 					  </div>
-					  <?=guardar("RECIBIR  UBICACIÓN" ,["class" =>"top_20"])?>
+                    <?=input_hidden(["class" => "servicio" , "value" => $servicio , "name" => "servicio" ])?>
+                    <?=guardar("RECIBIR  UBICACIÓN" ,["class" =>"top_20"])?>
 				</div>				
 			</form>
 		</div>
 	</div>
 </div>
+<form action="../contact/?w=1" method="post" class="form_proceso_compra">
+    <?=input_hidden(["class" => "proceso_compra" , "value" => 1 , "name" => "proceso_compra" ])?>
+
+</form>

@@ -27652,3 +27652,559 @@ DEBUG - TYPE array 2018-12-10 00:32:38 --> Array
 
 )
 
+DEBUG - TYPE array 2018-12-10 23:50:52 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 00:05:28 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 00:11:46 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 00:14:21 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 00:27:14 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 292
+)
+
+DEBUG - TYPE array 2018-12-11 00:27:24 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 292
+)
+
+DEBUG - TYPE array 2018-12-11 00:27:37 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 292
+)
+
+DEBUG - TYPE array 2018-12-11 00:27:41 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 292
+)
+
+DEBUG - TYPE array 2018-12-11 00:30:21 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 00:44:45 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 00:56:24 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 01:10:53 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 01:35:21 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 01:49:04 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 01:50:42 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 01:55:33 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 02:01:58 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 02:17:08 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 02:18:56 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 02:20:00 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 02:20:47 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 02:21:33 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 02:23:51 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 02:29:30 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE string 2018-12-11 02:54:22 --> 8888
+DEBUG - TYPE string 2018-12-11 02:54:22 --> SELECT                         
+                        s.id_servicio ,  
+                        s.nombre_servicio, 
+                        s.flag_servicio, 
+                        s.flag_envio_gratis,
+                        s.metakeyword, 
+                        s.primer_nivel , 
+                        s.segundo_nivel ,
+                        s.tercer_nivel ,
+                        s.cuarto_nivel , 
+                        s.quinto_nivel, 
+                        s.color,
+                        s.precio,
+                        s.id_ciclo_facturacion
+                    FROM usuario_deseo us
+                    INNER JOIN servicio s  
+                    ON us.id_servicio =  s.id_servicio
+                    WHERE 
+                       us.id_usuario = '1' 
+                       AND  
+                       s.status = 1 
+                    ORDER BY 
+                    us.num_deseo DESC LIMIT 7 
+DEBUG - TYPE array 2018-12-11 02:54:22 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 272
+            [nombre_servicio] => MEMORIA USB KINGSTON 32GB G4 3.1 
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Computación,Memorias Portátiles USB/FLASH,32 GB,MEMORIA USB KINGSTON 32GB G4 3.1 ,170
+            [primer_nivel] => 10
+            [segundo_nivel] => 149
+            [tercer_nivel] => 554
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #ecf0f1
+            [precio] => 170
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+    [1] => Array
+        (
+            [id_servicio] => 247
+            [nombre_servicio] => ROMPECABEZAS
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 0
+            [metakeyword] => Otras Categorías,ROMPECABEZAS,100
+            [primer_nivel] => 26
+            [segundo_nivel] => 0
+            [tercer_nivel] => 0
+            [cuarto_nivel] => 0
+            [quinto_nivel] => 0
+            [color] => #3498db,#2ecc71
+            [precio] => 100
+            [id_ciclo_facturacion] => 5
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 100
+                    [costo_envio_vendedor] => 0
+                    [text_envio] => Array
+                        (
+                            [ventas_configuracion] => EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO
+                            [cliente_solo_text] => Más 100 MXN de envío
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> MÁS 100 MXN DE ENVÍO</div>
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 03:04:15 --> Array
+(
+)
+
+DEBUG - TYPE array 2018-12-11 03:15:13 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+
+DEBUG - TYPE array 2018-12-11 03:22:12 --> Array
+(
+    [0] => Array
+        (
+            [id_servicio] => 243
+            [nombre_servicio] => BOCINA
+            [flag_servicio] => 0
+            [flag_envio_gratis] => 1
+            [metakeyword] => Accesorios para Vehículos,Accesorios para Celulares,Bocinas para Celulares,BOCINA,180
+            [color] => #2980b9
+            [precio] => 280
+            [existencia] => 10
+            [id_ciclo_facturacion] => 5
+            [vista] => 17
+            [valoracion] => 0
+            [deseado] => 20
+            [costo_envio] => Array
+                (
+                    [costo_envio_cliente] => 0
+                    [costo_envio_vendedor] => 100
+                    [text_envio] => Array
+                        (
+                            [cliente] => <div  class="texto_envio" ><i class='fa fas fa-bus'  ></i><span ></span> ENVÍO GRATIS!</div>
+                            [cliente_solo_text] => ENVÍO GRATIS!
+                            [ventas_configuracion] => TU PRECIO YA INCLUYE EL ENVÍO
+                        )
+
+                )
+
+        )
+
+)
+

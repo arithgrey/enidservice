@@ -1,5 +1,4 @@
-<section id="hero" 
-style="background-image: url(../img_tema/portafolio/llamada_gratis_2.png);">
+<section id="hero"
     <div class="container ">
         <div class="row top_50 bottom_50">
             <div class="col-lg-3">
@@ -122,3 +121,4 @@ style="background-image: url(../img_tema/portafolio/llamada_gratis_2.png);">
             </div>
         <?php endif;?>
 </section>
+<?=input_hidden(["value" => $ubicacion , "class" => "ubicacion"])?>
