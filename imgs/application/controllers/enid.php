@@ -10,7 +10,6 @@ class Enid extends CI_Controller {
     }
     function imagen($id_imagen){
 
-        $img_src="";
         foreach ($this->get_img($id_imagen) as $row ){ 
             $img_src =  $row["img"];
             header('Content-Type: image/png');
@@ -25,12 +24,10 @@ class Enid extends CI_Controller {
             echo  $img_src;
         }         
     }
-    /**/     
     function imagen_usuario($id_usuario){        
         $img_usuario =  $this->get_img_usuario($id_usuario);
         return  $this->construye_img_format($img_usuario );
-    }        
-    /**/
+    }
     function imagen_servicio($id_servicio){
 
         $imagen = $this->get_img_servicio($id_servicio);
@@ -42,13 +39,10 @@ class Enid extends CI_Controller {
             if (count($imagen) > 0 ){
                 return  $this->construye_img_format($imagen);
             }else{
-                /**/
+
             }
-
         }
-
     }
-    /**/
     private function construye_img_format($response){
             
         if ( count($response) > 0 ) {            
@@ -65,7 +59,6 @@ class Enid extends CI_Controller {
             }
         }         
     }
-    /**/
     private function costruye_imagen($id_imagen){
 
         foreach ($this->get_img($id_imagen) as $row ){ 

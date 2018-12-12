@@ -8,51 +8,50 @@ class Home extends CI_Controller{
     function index(){
 
 
-        $data = $this->principal->val_session("");            
-        $data["respuesta"] =  "";
-        $data["faqs_categoria"] ="";
-        $data["r_sim"] ="";
-        $session =  $data["in_session"]; 
-        /**/
-        $faq =  $this->input->get("faq");
-        $faqs =  $this->input->get("faqs");
-        $categoria = $this->input->get("categoria");
-        
-        
-        $data["categorias_publicas_venta"] = $this->get_categorias_por_tipo(1);
-        $data["categorias_temas_de_ayuda"] = $this->get_categorias_por_tipo(5);
-        $data["categorias_programa_de_afiliados"] = $this->get_categorias_por_tipo(6);
-        $data["perfil"]  = $this->principal->getperfiles();
+        $data                       =   $this->principal->val_session("");
+        $data["respuesta"]          =   "";
+        $data["faqs_categoria"]     =   "";
+        $data["r_sim"]              =   "";
+        $session                    =   $data["in_session"];
 
-        $flag_busqueda_q =  get_info_serviciosq($faq);           
-        $data["flag_busqueda_q"]     =  $flag_busqueda_q;
+        $faq                        =   $this->input->get("faq");
+        $faqs                       =   $this->input->get("faqs");
+        $categoria                  =   $this->input->get("categoria");
+        
+        
+        $data["categorias_publicas_venta"]          = $this->get_categorias_por_tipo(1);
+        $data["categorias_temas_de_ayuda"]          = $this->get_categorias_por_tipo(5);
+        $data["categorias_programa_de_afiliados"]   = $this->get_categorias_por_tipo(6);
+        $data["perfil"]                             = $this->principal->getperfiles();
+
+        $flag_busqueda_q                =  get_info_serviciosq($faq);
+        $data["flag_busqueda_q"]        =  $flag_busqueda_q;
         //$data["lista_categorias"]    =  $this->get_categorias_by_status(1);        
 
-        /**/
-        $data["meta_keywords"] =  " Preguntas frecuentes, Enid Service";
-        $data["desc_web"] =  " Preguntas frecuentes, Enid Service";
-        $data["url_img_post"] = create_url_preview("faq.png");    
-        /**/
+
+        $data["meta_keywords"]          =  " Preguntas frecuentes, Enid Service";
+        $data["desc_web"]               =  " Preguntas frecuentes, Enid Service";
+        $data["url_img_post"]           = create_url_preview("faq.png");
+
         /*CUANDO SE SOLICITA LA RESPUESTA ALGÚN FAQ POR ID*/        
         if($flag_busqueda_q ==  1){
             
-            $respuesta =  $this->principal->get_faq($faq , $session );
-            $data["respuesta"] =  $respuesta;            
-            $info_respuesta = $respuesta[0];
+            $respuesta          =   $this->principal->get_faq($faq , $session );
+            $data["respuesta"]  =   $respuesta;
+            $info_respuesta     =   $respuesta[0];
 
 
-            $id_faq =  $info_respuesta["id_faq"];
-            $id_categoria =  $info_respuesta["id_categoria"];    
+            $id_faq             =  $info_respuesta["id_faq"];
+            $id_categoria       =  $info_respuesta["id_categoria"];
+            $titulo             =  $info_respuesta["titulo"];
             
-            $titulo =  $info_respuesta["titulo"];
-            
-            $data["meta_keywords"] =  $titulo;
-            $data["desc_web"] =  $titulo;
-            $data["url_img_post"] = 
+            $data["meta_keywords"]  =  $titulo;
+            $data["desc_web"]       =  $titulo;
+            $data["url_img_post"]   =
             "http://enidservice.com/inicio/imgs/index.php/enid/img_faq/".$id_faq."/";
             $resp_sim_faq = $this->principal->get_respuestas_similares($id_faq , $id_categoria);
             $data["r_sim"] =  $resp_sim_faq;                          
-            /**/            
+
         }
 
         
@@ -68,7 +67,7 @@ class Home extends CI_Controller{
             $data["meta_keywords"] =  " Preguntas frecuentes, ".$info_categoria["nombre_categoria"].", ";
             $data["desc_web"] =  " Preguntas frecuentes, ".$info_categoria["nombre_categoria"];
             $data["url_img_post"] = create_url_preview("faq.png");            
-            /**/
+
         }
         /**/
         $flag_busqueda_personalidaza =  get_info_serviciosq($faqs);     
@@ -87,7 +86,7 @@ class Home extends CI_Controller{
         }    
         $clasificaciones_departamentos          =   $this->principal->get_departamentos("nosotros");        
         $data["clasificaciones_departamentos"]  =   $clasificaciones_departamentos;
-        $data["js"]                             =   ["../js_tema/faq/principal.js"];       
+        $data["js"]                             =   ["faq/principal.js"];       
         $data["css"]                            =   ["faqs.css" , "faqs_second.css"];
         $data["css_external"]                   = 
         ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];       
@@ -107,12 +106,10 @@ class Home extends CI_Controller{
 
         $api        =  "faqs/qsearch/format/json/";
         $response   =  $this->principal->api($api , $q);
-//        debug($response , 1);
         return $response;
 
-    } 
-    /**/
-    function get_categorias_por_tipo($tipo){
+    }
+    private function get_categorias_por_tipo($tipo){
 
         $q["tipo"]  = $tipo;
         $api        = "categoria/categorias_por_tipo/format/json/";
@@ -120,21 +117,19 @@ class Home extends CI_Controller{
         debug($response ,1);
 
         return $response;
-    }   
-    /**/
-    function get_categorias_by_status($status = 1 ){
+    }
+    private function get_categorias_by_status($status = 1 ){
 
         $q["tipo"]  = 1;
         $api        = "empresa/q/format/json/";
         return  $this->principal->api( $api  , $q );
     }
-    /**/
-    function search_faqs($q){        
+    private function search_faqs($q){
         $param["q"]     = $q;
         $api        = "faqs/search/format/json/";
         return  $this->principal->api( $api  , $param );
     }
-    function get_info_categoria($id){
+    private function get_info_categoria($id){
         
         $param["id"]  = $id;
         $api                    = "categoria/id/format/json/";

@@ -5,7 +5,8 @@ class Home extends CI_Controller{
         parent::__construct();                            
         $this->load->library(lib_def());    
     }        
-    function index(){    
+    function index(){
+
         $data                   =
         $this->principal->val_session("Solicita una llamada aquí");
         $data["meta_keywords"]  =   "Solicita una llamada aquí";
@@ -15,13 +16,10 @@ class Home extends CI_Controller{
         $data["clasificaciones_departamentos"]  = $this->principal->get_departamentos();
         $data["css"]            =  ["contact.css"];
 
-
         $param                  =  $this->input->post();
-        if (get_param_def($param , "proceso_compra", 0 , 1 )){
+        if (get_param_def($param , "proceso_compra", 0 , 1 ) > 0 ){
 
-            $data["js"]    = [
-                "../js_tema/contact/proceso_compra_direccion.js"
-            ];
+            $data["js"]    = ["contact/proceso_compra_direccion.js"];
             $this->principal->show_data_page($data, 'preso_deseo_compra');
         }else{
 
@@ -38,8 +36,8 @@ class Home extends CI_Controller{
 
 
             $data["js"]    = [
-                "../js_tema/login/sha1.js",
-                "../js_tema/contact/principal.js"
+                "login/sha1.js",
+                "contact/principal.js"
             ];
             $data["servicio"] =  $param["servicio"];
             $this->principal->show_data_page($data, 'preso_compra');
@@ -55,12 +53,10 @@ class Home extends CI_Controller{
         }
     }
 
-    /**/
-    function get_departamentos_enid(){ 
-     
+    private function get_departamentos_enid(){
+
         $api       =  "departamento/index/format/json/";        
         return  $this->principal->api( $api );
-
     }       
     
 }

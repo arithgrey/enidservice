@@ -19,18 +19,18 @@ class Inicio extends CI_Controller {
         $data["clasificaciones_departamentos"]  =   $this->principal->get_departamentos();
 
         $data["js"]      = [
-            "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
-            "../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-            "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-            "../js_tema/js/bootstrap-daterangepicker/moment.min.js",
-            "../js_tema/js/bootstrap-daterangepicker/daterangepicker.js",
-            "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-            "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-            "../js_tema/js/pickers-init.js",    
-            '../js_tema/usuarios_enid/principal.js',
-            '../js_tema/usuarios_enid/notificaciones.js',
-            '../js_tema/usuarios_enid/categorias.js',
-            "../js_tema/js/clasificaciones.js"
+            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
+            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+            "js/bootstrap-daterangepicker/moment.min.js",
+            "js/bootstrap-daterangepicker/daterangepicker.js",
+            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+            "js/pickers-init.js",    
+            'usuarios_enid/principal.js',
+            'usuarios_enid/notificaciones.js',
+            'usuarios_enid/categorias.js',
+            "js/clasificaciones.js"
         ];
 
         $data["css"] = [           
@@ -40,14 +40,14 @@ class Inicio extends CI_Controller {
         ];
 
         $data["css_external"] =  [
-            "../js_tema/js/bootstrap-colorpicker/css/colorpicker.css" ,
-            "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css" ,
-            "../js_tema/js/bootstrap-datepicker/css/datepicker.css" ,
-            "../js_tema/js/bootstrap-daterangepicker/daterangepicker.css" ,
-            "../js_tema/js/bootstrap-datetimepicker/css/datetimepicker-custom.css" ,
-            "../js_tema/js/bootstrap-datetimepicker/css/datetimepicker.css",
-            "../js_tema/js/bootstrap-timepicker/css/timepicker.css" ,
-            "../js_tema/js/bootstrap-wysihtml5/bootstrap-wysihtml5.css", 
+            "js/bootstrap-colorpicker/css/colorpicker.css" ,
+            "js/bootstrap-datepicker/css/datepicker-custom.css" ,
+            "js/bootstrap-datepicker/css/datepicker.css" ,
+            "js/bootstrap-daterangepicker/daterangepicker.css" ,
+            "js/bootstrap-datetimepicker/css/datetimepicker-custom.css" ,
+            "js/bootstrap-datetimepicker/css/datetimepicker.css",
+            "js/bootstrap-timepicker/css/timepicker.css" ,
+            "js/bootstrap-wysihtml5/bootstrap-wysihtml5.css", 
         ];
     
         $this->principal->show_data_page( $data , 'empresas_enid');			    	                	

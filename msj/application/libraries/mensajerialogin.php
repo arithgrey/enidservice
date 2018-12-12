@@ -16,7 +16,7 @@
 
       $mail        =   trim($param["mail"]);
       $new_pass    =   $param["new_pass"];
-      $cuerpo     .=   "<html>";
+      $cuerpo      =   "<html>";
       $cuerpo     .=   div("Solicitaste la recuperación de tu contraseña Enid Service");      
       $cuerpo     .=   anchor_enid("ACCEDER AHORA" , ["href"  =>  'http://enidservice.com/inicio/login/']);
       $cuerpo     .=   div("Usuario :  ". $mail );

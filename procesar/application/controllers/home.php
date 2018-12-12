@@ -6,24 +6,14 @@ class Home extends CI_Controller{
         $this->load->helper("procesar");
         $this->load->library(lib_def());        
     }   
-    /**/
-    private function get_option($key)
-    {
-        return $this->option[$key];
-    }
-    /**/
-    private function set_option($key , $val){
-        $this->option[$key] =  $val;
-    }
-    private function crea_data_costo_envio($servicio){        
+    private function crea_data_costo_envio($servicio){
         $param["flag_envio_gratis"]=  $servicio[0]["flag_envio_gratis"];   
         return $param;
     }
-    /**/    
     function index(){
         
     
-        $param =  $this->input->post();
+        $param  =  $this->input->post();
         if( array_key_exists("num_ciclos", $param)
             && ctype_digit($param["num_ciclos"])
             && $param["num_ciclos"] >0 && array_key_exists("ciclo_facturacion", $param)
@@ -49,11 +39,12 @@ class Home extends CI_Controller{
         
         
         $data["js"]     =  [
-            "../js_tema/domicilio/direccion_pedido_registrado.js" ,
-            "../js_tema/js/direccion.js"];
-        $data["css"]            =   ["procesar_pago.css"]; 
-        $param["id_recibo"]     =   $this->input->post("recibo");                
-        $param["id_usuario"]    =   $this->principal->get_session("idusuario"); 
+            "domicilio/direccion_pedido_registrado.js" ,
+            "js/direccion.js"
+        ];
+        $data["css"]                =   ["procesar_pago.css"];
+        $param["id_recibo"]         =   $param["recibo"];
+        $param["id_usuario"]        =   $this->principal->get_session("idusuario");
         $data["carga_ficha_direccion_envio"] = $this->carga_ficha_direccion_envio($param);
         $this->principal->show_data_page($data, 'secciones_2/domicilio_entrega');                          
     }
@@ -64,9 +55,9 @@ class Home extends CI_Controller{
         $data["meta_keywords"]  = '';
         $data["desc_web"]       = "Registra tu cuenta  y recibe  asistencia al momento.";
         $data["url_img_post"]   = create_url_preview("recomendacion.jpg");
-        $num_hist               = get_info_usuario( $this->input->get("q"));   
+        $num_hist               = get_info_usuario( $this->input->get("q"));
         $num_usuario_referencia = get_info_usuario( $this->input->get("q2"));
-        $data["q2"]             = $num_usuario_referencia;        
+        $data["q2"]             = $num_usuario_referencia;
         $data["servicio"]       = $this->resumen_servicio($param["plan"]);                 
         $data["costo_envio"]    = "";
 
@@ -76,23 +67,21 @@ class Home extends CI_Controller{
             
         }   
         
-        $data["info_solicitud_extra"]           =  $param;         
-        $data["clasificaciones_departamentos"]  = "";
-        $this->principal->crea_historico( 2892 , 0, 0 );                 
-        $data["vendedor"] ="";        
-        if($data["servicio"][0]["telefono_visible"]==1){
+        $data["info_solicitud_extra"]           =   $param;
+        $data["clasificaciones_departamentos"]  =   "";
+        $data["vendedor"]                       =   "";
+        if($data["servicio"][0]["telefono_visible"]== 1 ){
             $data["vendedor"] =
             $this->principal->get_info_usuario($data["servicio"][0]["id_usuario"]);            
         }
-        $data["js"]     =  ["../js_tema/js/direccion.js" ,  
-                            '../js_tema/procesar/principal.js',
-                            '../js_tema/procesar/sha1.js'];
+        $data["js"]     =  ["js/direccion.js" ,  
+                            'procesar/principal.js',
+                            'procesar/sha1.js'];
 
         $data["css"]    = array("procesar_pago.css"); 
         $this->principal->show_data_page($data, 'home');                          
         
-    }       
-    /**/
+    }
     private function calcula_costo_envio($q){
         $api    = "cobranza/calcula_costo_envio/format/json/";
         return $this->principal->api(  $api , $q);

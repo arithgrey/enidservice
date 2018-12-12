@@ -56,7 +56,7 @@ class Home extends CI_Controller{
                 }
                 
                 $data["css"] = ["recomendacion_principal.css"];
-                $data["js"]  = ["../js_tema/recomendaciones/principal.js"];
+                $data["js"]  = ["recomendaciones/principal.js"];
                 $this->principal->show_data_page($data, 'home');                          
             
             }else{

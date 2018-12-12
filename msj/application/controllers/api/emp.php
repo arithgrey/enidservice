@@ -9,7 +9,6 @@ class Emp extends REST_Controller{
         $this->load->library("mensajeria_lead");            
         $this->load->library(lib_def());              
     }
-    /**/
     function salir_list_email($q){
         $api = "prospecto/salir_list_email";
         return $this->principal->api( $api , $q , "json" , "PUT");
@@ -21,45 +20,44 @@ class Emp extends REST_Controller{
         switch ($param["type"]) {
             /*Correos de promoción*/
             case 1:                
-                $response =   $this->salir_list_email($q);
+                $response =   $this->salir_list_email($param);
                 $this->response($response);        
                 break;
-            /*Recordatorios de compra*/
+
             case 2:
 
-                $param["url_request"] = get_url_request("");
-                $param["in_session"]  = 0;
-                $uri_request          = "cobranza/cancelar_envio_recordatorio/format/json/";
-                $param["v"]           = rand();
-                $response             = 
-                $this->principal->api( $uri_request, $param, "json", "PUT");
+                $this->cancela_recordatorio($param);
+                break;
 
-                /*Agregamos gamifición*/
-                $gamificion     =  $this->aplica_gamification_servicio($param);
-                /*Lanzamos último aviso de recuperación venta*/                        
-                $this->load->view(  "mensaje/evaluacion" , $param );
-                break;            
-            
-            /*Recordatorios publicar productos*/
-            case 3:                
+            case 3:
                 /*Se cancelan los recordatorios de publicacion servicio*/
-                $param["url_request"] = get_url_request("");
-                $param["in_session"]  = 0;
-                $uri_request          = 
-                "equipo/cancelar_envio_recordatorio/format/json/";
-                $param["v"]           = rand();                                    
-                $gamificion           =  $this->aplica_gamification_servicio($param);
-                /*Se cancela*/    
-                $response             = 
-                $this->principal->api( $uri_request , $param, "json", "PUT");                
-                $this->load->view(  "mensaje/evaluacion" , $param );
-                
+                $this->cancelar_recordatorio_servicio($param);
                 break;
             
             default:
                 
                 break;
         }    
+    }
+    private function cancelar_recordatorio_servicio($param){
+
+        $param["url_request"] = get_url_request("");
+        $param["in_session"]  = 0;
+        $uri_request          = "equipo/cancelar_envio_recordatorio";
+        $param["v"]           = rand();
+        $this->aplica_gamification_servicio($param);
+        $this->principal->api( $uri_request , $param, "json", "PUT");
+        $this->load->view("mensaje/evaluacion" , $param );
+    }
+    private function cancela_recordatorio($param){
+
+        $param["url_request"] = get_url_request("");
+        $param["in_session"]  = 0;
+        $uri_request          = "cobranza/cancelar_envio_recordatorio";
+        $param["v"]           = rand();
+        $this->principal->api( $uri_request, $param, "json", "PUT");
+        $this->aplica_gamification_servicio($param);
+        $this->load->view(  "mensaje/evaluacion" , $param );
     }
     /**/
     private function aplica_gamification_servicio($param){
@@ -109,7 +107,6 @@ class Emp extends REST_Controller{
         $this->response(1);                                    
     }
     */
-    /***/
     private function carga_mensaje_bienvenida_afiliado($param){
         $api =  "emp/mensaje_inicial_afiliado/format/html/"; 
         return $this->principal->api($api ,$param, "html");

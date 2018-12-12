@@ -180,7 +180,7 @@ if ( ! function_exists('add_element'))
 }
 function sub_categorias_destacadas($param){
 
-      $nombres_primer_nivel =   $param["nombres_primer_nivel"];
+      //$nombres_primer_nivel =   $param["nombres_primer_nivel"];
       $z                    =   0;
       $data_complete        =   [];              
 
@@ -423,7 +423,7 @@ if ( ! function_exists('icon'))
 }
 if ( ! function_exists('template_table_enid'))
 {
- function template_table_enid($param=''){
+ function template_table_enid(){
         $template = array(
           'table_open'            => '<table  cellpadding="4" cellspacing="0" 
           class="table_enid text-center" border=1>',
@@ -507,7 +507,6 @@ if ( ! function_exists('push_element_json'))
 {
  function push_element_json($arr ,  $element){
 
-
     $exists =0;
     if (is_array($arr)) { 
 
@@ -520,7 +519,6 @@ if ( ! function_exists('push_element_json'))
       return $arr;
     }
  }
- /**/
 }
 if ( ! function_exists('unset_element_array'))
 {
@@ -573,7 +571,7 @@ if ( ! function_exists('create_button_easy_select'))
       $easy_selet =  "";
 
       foreach ($arr as $row) {          
-          $text          =  $row[$attributes["text_button"]];     
+          //$text          =  $row[$attributes["text_button"]];
           $attr          =  add_attributes($extra);  
           $id               =  $row[$campo_id];
           
@@ -715,7 +713,7 @@ if ( ! function_exists('get_info_variable')){
   }
 }
 if ( ! function_exists('get_info_servicio')){
-  function get_info_servicio($q){
+  function get_info_servicio( $q='' ){
       $num_hist= 9990890;                                    
       return $num_hist;      
   }
@@ -1133,99 +1131,121 @@ if ( ! function_exists('center'))
   }
 }
 /*Ordena el arreglo de a cuerdo al tipo de indice que se indique*/
-function sksort(&$array, $subkey="id", $sort_ascending=false){
-        if (count($array))
-            $temp_array[key($array)] = array_shift($array);
-        foreach($array as $key => $val){
-            $offset = 0;
-            $found = false;
-            foreach($temp_array as $tmp_key => $tmp_val)
-            {
-                if(!$found and strtolower($val[$subkey]) > strtolower($tmp_val[$subkey]))
-                {
-                    $temp_array = array_merge(    (array)array_slice($temp_array,0,$offset),
-                                                array($key => $val),
-                                                array_slice($temp_array,$offset)
-                                              );
-                    $found = true;
-                }
-                $offset++;
-            }
-            if(!$found) $temp_array = array_merge($temp_array, array($key => $val));
-        }
-        if ($sort_ascending) $array = array_reverse($temp_array);
-        else $array = $temp_array;
-}
-function date_difference($date_1, $date_2, $differenceFormat = '%a')
+if ( ! function_exists('sksort'))
 {
-    $datetime1  = date_create($date_1);
-    $datetime2  = date_create($date_2);
-    $interval   = date_diff($datetime1, $datetime2);
-    return $interval->format($differenceFormat);
+    function sksort(&$array, $subkey="id", $sort_ascending=false){
+            if (count($array))
+                $temp_array[key($array)] = array_shift($array);
+            foreach($array as $key => $val){
+                $offset = 0;
+                $found = false;
+                foreach($temp_array as $tmp_key => $tmp_val)
+                {
+                    if(!$found and strtolower($val[$subkey]) > strtolower($tmp_val[$subkey]))
+                    {
+                        $temp_array = array_merge(    (array)array_slice($temp_array,0,$offset),
+                                                    array($key => $val),
+                                                    array_slice($temp_array,$offset)
+                                                  );
+                        $found = true;
+                    }
+                    $offset++;
+                }
+                if(!$found) $temp_array = array_merge($temp_array, array($key => $val));
+            }
+            if ($sort_ascending) $array = array_reverse($temp_array);
+            else $array = $temp_array;
+    }
 }
-function add_date($inicio , $dias){
-
-  $fecha = date_create($inicio);
-  date_add($fecha, date_interval_create_from_date_string($dias.' days'));
-  return date_format($fecha, 'Y-m-d');
+if ( ! function_exists('date_difference'))
+{
+    function date_difference($date_1, $date_2, $differenceFormat = '%a')
+    {
+        $datetime1  = date_create($date_1);
+        $datetime2  = date_create($date_2);
+        $interval   = date_diff($datetime1, $datetime2);
+        return $interval->format($differenceFormat);
+    }
 }
-function evita_basura($text){
+if ( ! function_exists('add_date'))
+{
+    function add_date($inicio , $dias){
 
-  $basura =   ["'","?","=","|","*"];
-  $b      =   0;
-  for ($a=0; $a < count($basura); $a++) { 
-      
-      if(strpos($text, $basura[$a]) !== FALSE){          
-          $b ++;
+      $fecha = date_create($inicio);
+      date_add($fecha, date_interval_create_from_date_string($dias.' days'));
+      return date_format($fecha, 'Y-m-d');
+    }
+}
+if ( ! function_exists('evita_basura'))
+{
+    function evita_basura($text){
+
+      $basura =   ["'","?","=","|","*"];
+      $b      =   0;
+      for ($a=0; $a < count($basura); $a++) {
+
+          if(strpos($text, $basura[$a]) !== FALSE){
+              $b ++;
+          }
       }
-  }  
-  if ($b > 0 ) {    
-    redirect("https://www.google.com/" , "refresh" ,302);    
-  }
-  return $b;  
+      if ($b > 0 ) {
+        redirect("https://www.google.com/" , "refresh" ,302);
+      }
+      return $b;
+    }
 }
-function add_hour($num_hours){
-  $nowtime = date("Y-m-d H:i:s"); 
-  $num_hours = $num_hours *  60;
-  $date = date('H:i:s', strtotime($nowtime . ' + '.$num_hours.' minute'));
-  return $date;
+if ( ! function_exists('add_hour'))
+{
+    function add_hour($num_hours){
+      $nowtime = date("Y-m-d H:i:s");
+      $num_hours = $num_hours *  60;
+      $date = date('H:i:s', strtotime($nowtime . ' + '.$num_hours.' minute'));
+      return $date;
+    }
 }
-function get_logo($is_mobile , $tipo = 0 ){
 
-    if ($is_mobile ==  1){
+if ( ! function_exists('get_logo'))
+{
+    function get_logo($is_mobile , $tipo = 0 ){
 
-        $en_mobile  =  div("☰ ENID SERVICE", [ "class" =>  "smallnav menu white", "onclick"=> "openNav()" ]);
-        $class      =  "col-lg-12";
-        switch ($tipo) {
-            case 0:
-                $class =  "col-lg-12";
-                break;
-            case 1:
-                $class =  "col-lg-3";
-                break;
-            case 2:
-                $class =  "col-lg-1";
-                break;
+        if ($is_mobile ==  1){
+
+            $en_mobile  =  div("☰ ENID SERVICE", [ "class" =>  "smallnav menu white", "onclick"=> "openNav()" ]);
+            $class      =  "col-lg-12";
+            switch ($tipo) {
+                case 0:
+                    $class =  "col-lg-12";
+                    break;
+                case 1:
+                    $class =  "col-lg-3";
+                    break;
+                case 2:
+                    $class =  "col-lg-1";
+                    break;
+            }
+
+            return div($en_mobile , ["class" => $class]);
+
+        }else{
+
+            $img_enid   =  img_enid(["style"=>"width: 50px!important;"] );
+            $en_pc      =  anchor_enid($img_enid, ["href"  =>  "../"] );
+            return div($en_pc, ["class" => "col-lg-1"]);
         }
 
-        return div($en_mobile , ["class" => $class]);
-
-    }else{
-
-        $img_enid   =  img_enid(["style"=>"width: 50px!important;"] );
-        $en_pc      =  anchor_enid($img_enid, ["href"  =>  "../"] );
-        return div($en_pc, ["class" => "col-lg-1"]);
     }
-
 }
-function get_img_usuario($id_usuario){
-    $img_conf  = [
-        "id"      =>  "imagen_usuario" ,
-        "src"     =>  "../imgs/index.php/enid/imagen_usuario/".$id_usuario ,
-        "onerror" =>  "this.src='../img_tema/user/user.png'" ,
-        "style"   =>  "width: 40px!important;height: 35px!important;"
-    ];
+if ( ! function_exists('get_img_usuario'))
+{
+    function get_img_usuario($id_usuario){
+        $img_conf  = [
+            "id"      =>  "imagen_usuario" ,
+            "src"     =>  "../imgs/index.php/enid/imagen_usuario/".$id_usuario ,
+            "onerror" =>  "this.src='../img_tema/user/user.png'" ,
+            "style"   =>  "width: 40px!important;height: 35px!important;"
+        ];
 
-    return   img($img_conf);
+        return   img($img_conf);
 
+    }
 }

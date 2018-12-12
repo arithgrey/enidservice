@@ -39,7 +39,7 @@ class Home extends CI_Controller{
             
             /*Cargamos reseñas de otros días*/    
             $data["css"]    =  ["valoracion_servicio.css"];
-            $data["js"]     =  ["../js_tema/valoracion/principal.js"];
+            $data["js"]     =  ["valoracion/principal.js"];
             $this->principal->show_data_page($data, 'home');                              
         }else{
             header("location:../?q2=0&q=");

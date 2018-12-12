@@ -13,6 +13,7 @@ class Home extends CI_Controller{
         if (get_param_def($this->input->get() , "transfer" ) > 0 ) {
             
         }else{
+
             $this->principal->acceso();
             $data["meta_keywords"]                  =   "";    
             $data["desc_web"]                       =   "";        
@@ -26,18 +27,18 @@ class Home extends CI_Controller{
             $data["alcance"]                        =   crea_alcance($alcance);
             
             $data["js"] =  [
-                '../js_tema/area_cliente/principal.js',
-                '../js_tema/area_cliente/proyectos_persona.js',
-                '../js_tema/area_cliente/cobranza.js',
-                "../js_tema/js/direccion.js",
-                '../js_tema/area_cliente/buzon.js'
+                'area_cliente/principal.js',
+                'area_cliente/proyectos_persona.js',
+                'area_cliente/cobranza.js',
+                'js/direccion.js',
+                'area_cliente/buzon.js'
             ];
 
             $data["css"] = [
-            "css_tienda_cliente.css",
-            "valoracion.css",
-            "area_cliente.css",
-            "preguntas.css"
+                "css_tienda_cliente.css",
+                "valoracion.css",
+                "area_cliente.css",
+                "preguntas.css"
             ];
             
             $data["ticket"] =  get_info_variable( $this->input->get() , "ticket" );
@@ -46,15 +47,13 @@ class Home extends CI_Controller{
                              
         
         
-    }        
-    
+    }
     private function resumen_valoraciones($id_usuario){
 
         $q["id_usuario"] =  $id_usuario;
         $api             =  "valoracion/usuario/format/json/";
         return $this->principal->api( $api, $q);
     }
-    /**/    
     private function get_alcance($id_usuario){
 
         $q["id_usuario"]    =  $id_usuario;
@@ -62,4 +61,4 @@ class Home extends CI_Controller{
         return              $this->principal->api( $api, $q );    
 
     }
-}?>
+}

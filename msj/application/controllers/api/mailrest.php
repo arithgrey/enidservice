@@ -2,14 +2,13 @@
 require APPPATH.'../../librerias/REST_Controller.php';
 class Mailrest extends REST_Controller{
 	function __construct(){
-	    parent::__construct();	  
-	    //$this->load->model("enidmodel");  
+	    parent::__construct();
 	    $this->load->library('mensajerialogin');   
 	    $this->load->library(lib_def());       
-	}    
-	/**/
+	}
 	function recupera_password_POST(){
 
+	    $response   =  false;
 		if($this->input->is_ajax_request()){ 
 
 			$param 					=  	$this->post();		
@@ -18,16 +17,12 @@ class Mailrest extends REST_Controller{
 			if ($response["status_send"] ==  1){					
 				$response["info_mail"] =  $this->mensajerialogin->mail_recuperacion_pw($response);			
 			}
-			$this->response(1);
-		}else{
-			$this->response("Error");
+            $response =  1;
 		}
+        $this->response($response);
 	}
-	/**/
 	private function set_pass($q){
-		
 		$api 	=  "usuario/pass/";
 		return  $this->principal->api( $api , $q , 'json', 'PUT');
 	}
-	/**/
-}?>
+}

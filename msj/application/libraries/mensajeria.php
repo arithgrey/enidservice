@@ -41,16 +41,14 @@
       /**/
       function notificacion_new_user($mail , $pass){   
 
-         $mail               =  $mail;
-         $datos["mail_send"] =  $mail;
-         $datos["pass_send"] =  $pass;
-         $destinatario      = "ventas@enidservice.com"; 
-         $asunto  = "Accesos a tu cuenta Enid Service"; 
-         $cuerpo .= "<html>";
-
-         $img_presentacion  = img(["src" => base_url('application/img/mail/presentacion.png')]);
-         $text              = 
-         "Hola buen día has ha sido invitado a ser miembro de la cuenta Enid service te estamos haciendo entrega de sus datos de acceso.";
+         $mail                  =   $mail;
+         $datos["mail_send"]    =   $mail;
+         $datos["pass_send"]    =   $pass;
+         $destinatario          =   "ventas@enidservice.com";
+         $asunto                =   "Accesos a tu cuenta Enid Service";
+         $cuerpo                =   "<html>";
+         $img_presentacion      =   img(["src" => base_url('../../img_tema/presentacion.png')]);
+         $text                  =   "Hola buen día has ha sido invitado a ser miembro de la cuenta Enid service te estamos haciendo entrega de sus datos de acceso.";
 
          $cuerpo .= anchor_enid($img_presentacion . $text,  ["href"=>base_url('index.php/startsession')]);
          $config_button = [
@@ -91,8 +89,7 @@
         $info          .=  div(strong("TELÉFONO:" . $tel));
         $info          .=  div(strong("Mensaje:" . $mensaje));
                  
-        $text           = "Buen día ".$email." -
-         tienes un nuevo contacto comercial estos son sus datos para que lo contactes ";
+        $text           = "Buen día ".$email." - tienes un nuevo contacto comercial estos son sus datos para que lo contactes ";
 
 
         $cuerpo  = "<html>"; 
@@ -133,8 +130,8 @@
         $destinatario = "ventas@enidservice.com";         
         $asunto         = 
         "Gracias por creer en nosotros! Si lo prefieres puedes contactarnos directamente al 
-        (55)5296-7027 y (55)3269-3811";       
-        $email_contacto =  $param["email"];        
+        (55)5296-7027 y (55)3269-3811";
+        $email_contacto =  $param["email"];
         $info           =  "Gracias por contactarnos, pronto tendrás noticias nuestras!"; 
 
         $cuerpo  = "<html>";

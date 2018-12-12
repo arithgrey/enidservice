@@ -24,20 +24,20 @@ class Inicio extends CI_Controller {
         $data["categorias_destacadas"] =  $this->carga_categorias_destacadas("");
 
         $data["js"] = array(
-            "../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-            "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-            "../js_tema/js/bootstrap-daterangepicker/moment.min.js",
-            "../js_tema/js/bootstrap-daterangepicker/daterangepicker.js",
-            "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-            "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-            "../js_tema/js/pickers-init.js",
-            "../js_tema/repo_enid/principal.js"
+            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+            "js/bootstrap-daterangepicker/moment.min.js",
+            "js/bootstrap-daterangepicker/daterangepicker.js",
+            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+            "js/pickers-init.js",
+            "repo_enid/principal.js"
         );
 
 
         $data["css"] = [
-            "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css",
-            "../js_tema/js/bootstrap-timepicker/css/timepicker.css"
+            "js/bootstrap-datepicker/css/datepicker-custom.css",
+            "js/bootstrap-timepicker/css/timepicker.css"
             
         ];
 

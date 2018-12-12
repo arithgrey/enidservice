@@ -10,9 +10,7 @@ class Sess extends REST_Controller{
         
         $param          =   $this->post();            
         $url            =   $this->create_url();            
-        if($this->input->is_ajax_request() || 
-            ( array_key_exists("t", $param) && $param["t"] == "x=0.,!><!$#" ) 
-        ){
+        if($this->input->is_ajax_request() || ( array_key_exists("t", $param) && $param["t"] == "x=0.,!><!$#" ) ){
 
 
             if (if_ext($param ,"email,secret")) {
@@ -39,47 +37,45 @@ class Sess extends REST_Controller{
         $this->response(false);
         
     }
-    function get_es_usuario($q){    
+    private function get_es_usuario($q){
         $api = "usuario/es";
         return $this->principal->api( $api , $q , "json",  "POST");
-    }    
-    /**/
-    function get_perfil_user($id_usuario){
+    }
+    private function get_perfil_user($id_usuario){
 
         $q["id_usuario"]    =  $id_usuario;
         $api                =  "usuario_perfil/usuario/format/json/";
         return $this->principal->api( $api , $q);
     }    
-    function get_empresa($id_empresa){                        
+    private function get_empresa($id_empresa){
         $q["id_empresa"]    =  $id_empresa;
         $api                =  "empresa/id/format/json/";
         return $this->principal->api( $api , $q);
     }    
-    function get_perfil_data($id_usuario){
+    private function get_perfil_data($id_usuario){
         
         $q["id_usuario"]   =  $id_usuario;
         $api                =  "perfiles/data_usuario/format/json/";
         return $this->principal->api( $api , $q);
     }
-    function get_empresa_permiso($id_empresa){
+    private function get_empresa_permiso($id_empresa){
 
         $q["id_empresa"]      =  $id_empresa;
         $api                  =  "empresa_permiso/empresa/format/json/";
         return $this->principal->api( $api , $q);   
     }
-    function get_empresa_recursos($id_empresa){
+    private function get_empresa_recursos($id_empresa){
         $q["id_empresa"]    =  $id_empresa;
         $api                =  "empresa_recurso/recursos/format/json/";
         return $this->principal->api( $api , $q);   
     }
-    function get_recursos_perfiles($q){        
+    private function get_recursos_perfiles($q){
         
         $q["id_perfil"]        =  $q[0]["idperfil"];
         $api                =  "recurso/navegacion/format/json/";
         return $this->principal->api( $api , $q);      
     }
-    /**/
-     function crea_session($id_usuario, $nombre , $email ,$id_empresa){                            
+    private function crea_session($id_usuario, $nombre , $email ,$id_empresa){
         
         $empresa            =  $this->get_empresa($id_empresa);                    
         $perfiles           =  $this->get_perfil_user($id_usuario);
@@ -107,7 +103,6 @@ class Sess extends REST_Controller{
                 ];               
                 $this->principal->set_userdata($session);
                 return $session;
-
             }
             return 0;        
         } 

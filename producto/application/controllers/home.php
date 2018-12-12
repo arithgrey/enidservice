@@ -33,7 +33,7 @@ class Home extends CI_Controller{
         $data["desc_web"]           =   "";
         $data["url_img_post"]       =   "";            
         $data["css"]                =   ["pre.css"];
-        $data["js"]                 =   ["../js_tema/servicio/pre.js"];
+        $data["js"]                 =   ["servicio/pre.js"];
         $data["id_servicio"]        =   $this->input->get("producto");
         $data["proceso_compra"]     =   1;
         
@@ -95,7 +95,7 @@ class Home extends CI_Controller{
         $data["desc_web"]           =   "";
         $data["url_img_post"]       =   "";            
         $data["css"]                =   ["pre.css"];
-        $data["js"]                 =   ["../js_tema/servicio/pre.js"];
+        $data["js"]                 =   ["servicio/pre.js"];
         $data["id_servicio"]        =   $this->input->get("servicio");
         $data["recibo"]             =   $this->input->get("recibo");
 

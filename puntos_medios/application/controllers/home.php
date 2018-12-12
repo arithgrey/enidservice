@@ -42,22 +42,22 @@ class Home extends CI_Controller{
             $data["tipos_puntos_encuentro"] =  $this->get_tipos_puntos_encuentro($param);
             $data["punto_encuentro"]        =  0;
             $data["css"] = [
-                "../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css",
-                "../js_tema/js/bootstrap-timepicker/css/timepicker.css",
+                "js/bootstrap-datepicker/css/datepicker-custom.css",
+                "js/bootstrap-timepicker/css/timepicker.css",
                 "puntos_encuentro.css"
             
             ];
 
 
-            $data["js"]         =  ["../js_tema/login/sha1.js" , 
-                                    "../js_tema/puntos_medios/principal.js",
-                                    "../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-                                    "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-                                    "../js_tema/js/bootstrap-daterangepicker/moment.min.js",
-                                    "../js_tema/js/bootstrap-daterangepicker/daterangepicker.js",
-                                    "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-                                    "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-                                    "../js_tema/js/pickers-init.js",
+            $data["js"]         =  ["login/sha1.js" , 
+                                    "puntos_medios/principal.js",
+                                    "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                                    "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+                                    "js/bootstrap-daterangepicker/moment.min.js",
+                                    "js/bootstrap-daterangepicker/daterangepicker.js",
+                                    "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                                    "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                                    "js/pickers-init.js",
                                     
             ];
 

@@ -103,7 +103,7 @@ class Home extends CI_Controller{
                                                 ];
 
 
-            $data["js"]         =   ["../js_tema/search/principal.js"];
+            $data["js"]         =   ["search/principal.js"];
             $data["filtros"]    =   $this->get_orden();
             $data["order"]      =   $data_send["order"];
             //$data["is_mobile"]  =   1;

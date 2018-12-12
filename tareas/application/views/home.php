@@ -32,21 +32,21 @@
 </script>
 
 
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-datepicker/css/datepicker-custom.css" />
-<link rel="stylesheet" type="text/css" href="../js_tema/js/bootstrap-timepicker/css/timepicker.css" />
-<script type="text/javascript" src="../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js">    
+<link rel="stylesheet" type="text/css" href="js/bootstrap-datepicker/css/datepicker-custom.css" />
+<link rel="stylesheet" type="text/css" href="js/bootstrap-timepicker/css/timepicker.css" />
+<script type="text/javascript" src="js/bootstrap-datepicker/js/bootstrap-datepicker.js">    
 </script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js">    
+<script type="text/javascript" src="js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js">    
 </script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-daterangepicker/moment.min.js">    
+<script type="text/javascript" src="js/bootstrap-daterangepicker/moment.min.js">    
 </script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-daterangepicker/daterangepicker.js">    
+<script type="text/javascript" src="js/bootstrap-daterangepicker/daterangepicker.js">    
 </script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js">    
+<script type="text/javascript" src="js/bootstrap-colorpicker/js/bootstrap-colorpicker.js">    
 </script>
-<script type="text/javascript" src="../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js">    
+<script type="text/javascript" src="js/bootstrap-timepicker/js/bootstrap-timepicker.js">    
 </script>
-<script src="../js_tema/js/pickers-init.js">    
+<script src="js/pickers-init.js">    
 </script>
 
 
@@ -54,7 +54,7 @@
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 
-<script src="../js_tema/js/summernote.js">    
+<script src="js/summernote.js">    
 </script>
 -->
 <?=textarea([

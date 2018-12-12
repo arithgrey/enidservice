@@ -26,13 +26,13 @@ class Inicio extends CI_Controller {
         $data["css"]                =   ["desarrollo_principal.css"];
         
         $data["js"] = [
-                "../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
-                "../js_tema/js/bootstrap-datepicker/js/bootstrap-datepicker.js",                
-                "../js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-                "../js_tema/js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-                "../js_tema/js/pickers-init.js",
-                '../js_tema/desarrollo/principal.js',
-                '../js_tema/js/summernote.js'                
+                "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
+                "js/bootstrap-datepicker/js/bootstrap-datepicker.js",                
+                "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                "js/pickers-init.js",
+                'desarrollo/principal.js',
+                'js/summernote.js'                
 
         ];        
         $this->principal->show_data_page( $data , 'empresas_enid');                                 

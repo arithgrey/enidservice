@@ -3,16 +3,13 @@ class Sessionclass extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->library("session");			
-	}	
-	/**/
+	}
 	function set_userdata($session_data){
 		$this->session->set_userdata($session_data);	
 	}
-	/**/
 	function get_info_empresa(){
 		return $this->session->userdata('info_empresa');
 	}
-	/**/
 	function is_logged_in(){			
 		$is_logged_in = $this->session->userdata('logged_in');	
 		if(!isset($is_logged_in) || $is_logged_in != true) {			
@@ -49,36 +46,30 @@ class Sessionclass extends CI_Controller{
 	}	
 	function getuserdataperfil(){
 		return $this->session->userdata('perfildata');
-	}	
-	/*Nombre del perfil del usuario actual */
+	}
 	function getnameperfilactual(){
 		$dataperfil = $this->getuserdataperfil();
-		$nombre ="";		
+		$nombre     =   "";
 		foreach ($dataperfil as $row) {			
 			$nombre = $row["nombreperfil"];
 		}
 		return $nombre;
 	}
-	/**/
 	function get_empresa_permiso(){
 		return $this->session->userdata('empresa_permiso');	
 	}
-	/**/
 	function get_empresa_recurso(){
 		return $this->session->userdata('empresa_recurso');	
 	}
-	/**/
 	function get_user_data_navegacion(){
 		return $this->session->userdata("data_navegacion");
 	}
-	/*Generamos menú*/
 	function create_contenido_menu(){
 		
-		$perfiles 	= 	$this->getperfiles();
+
 		$data 		= 	$this->get_user_data_navegacion();
 		$menu 		=	'';
-		$id_empresa = 	$this->getidempresa();		
-		$flag 		= 	0; 	
+		$id_empresa = 	$this->getidempresa();
 		$b 			= 	0;	
 		foreach ($data as $row) {
 
@@ -90,12 +81,6 @@ class Sessionclass extends CI_Controller{
 			}
 
 			$icono 			= 	$row["iconorecurso"];
-			$descripcion	= 	$row["descripcionrecurso"];			
-			$extra 			=	"";
-			$order_negocio 	=  	$row["order_negocio"];
-
-
-			$style = 	( $order_negocio >9) ? "style='background:rgb(2, 17, 29);' " : "";
 			$menu .= 	li(
 							anchor_enid(icon($icono). $nombre , 
 							[
@@ -107,4 +92,4 @@ class Sessionclass extends CI_Controller{
 		}	
 		return $menu;
 	}
-}?>
+}

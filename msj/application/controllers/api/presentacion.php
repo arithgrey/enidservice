@@ -4,15 +4,13 @@ class Presentacion extends REST_Controller{
     function __construct(){
         parent::__construct();    
         $this->load->library(lib_def());                                                        
-    }    
-    /**/
+    }
     function notificacion_duda_vendedor_GET(){
 
         $param              =   $this->get();
         $data["vendedor"]   =   $param;        
         $this->load->view("ventas/notificacion_pregunta" , $data);
     }
-    /**/
     function notificacion_respuesta_a_cliente_GET(){
     	
     	$param               = $this->get();
@@ -24,6 +22,5 @@ class Presentacion extends REST_Controller{
 
         $param["info"] =  $this->get();
         $this->load->view("registro/subscrito" , $param);
-    } 
-
-}?>
+    }
+}

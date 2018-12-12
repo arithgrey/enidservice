@@ -15,8 +15,7 @@
             $b ++;
     	}
     	return $data_respuesta;    	
-    } 		 	
-	/**/
+    }
     function notifica_prospecto($asunto , $mensaje , $prospecto ){
 
         $url_mensaje_leido  = 

@@ -27,10 +27,12 @@ if(!function_exists('invierte_date_time')){
 			
 			$id 						= $row["id"];
 			$nombre 					= $row["nombre"];
+			/*
 			$status 					= $row["status"];
 			$id_tipo_punto_encuentro 	= $row["id_tipo_punto_encuentro"];
 			$id_linea_metro 			= $row["id_linea_metro"];
 			$costo_envio 				= $row["costo_envio"];
+			*/
 
 
 
@@ -61,22 +63,24 @@ if(!function_exists('invierte_date_time')){
 
 			$id_direccion  			= $row["id_direccion"];
 			$calle  				= $row["calle"];
-		    $entre_calles  			= $row["entre_calles"];
-		    $numero_exterior  		= $row["numero_exterior"];
+		    /*
+			$entre_calles  			= $row["entre_calles"];
+            $id_codigo_postal  		= $row["id_codigo_postal"];
+            $telefono_receptor 		= $row["telefono_receptor"];
+            $nombre_receptor  		= $row["nombre_receptor"];
+            $ciudad  				= $row["ciudad"];
+            $idtipo_asentamiento  	= $row["idtipo_asentamiento"];
+            $id_estado_republica  	= $row["id_estado_republica"];
+            $pais  					= $row["pais"];
+            $id_pais  				= $row["id_pais"];
+            */
+
+            $numero_exterior  		= $row["numero_exterior"];
 		    $numero_interior  		= $row["numero_interior"];
-		    $id_codigo_postal  		= $row["id_codigo_postal"];
-		    $telefono_receptor 		= $row["telefono_receptor"];
-		    $nombre_receptor  		= $row["nombre_receptor"];
 		    $cp  					= $row["cp"];
 		    $asentamiento  			= $row["asentamiento"];
 		    $municipio  			= $row["municipio"];
-		    $ciudad  				= $row["ciudad"];
 		    $estado  				= $row["estado"];
-		    $idtipo_asentamiento  	= $row["idtipo_asentamiento"];
-		    $id_estado_republica  	= $row["id_estado_republica"];
-		    $pais  					= $row["pais"]; 
-		    $id_pais  				= $row["id_pais"]; 
-
 		    $text .=  "<li class='list-group-item'>";
 
 		    $direccion =  
