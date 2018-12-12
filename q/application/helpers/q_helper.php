@@ -123,8 +123,9 @@ if(!function_exists('invierte_date_time')){
       }
       return $new_flag;
     }
-  
+  /*
   function add_productos_publicados($num){
+
 
       $lista_pendientes ="";
       $flag_notificaciones = 0;           
@@ -141,7 +142,8 @@ if(!function_exists('invierte_date_time')){
       $data_complete["flag"] =  $flag_notificaciones;
       return $data_complete;
 
-    }    
+    }
+  */
   
   function add_direccion_envio($num_direccion){
 
@@ -377,11 +379,7 @@ if(!function_exists('invierte_date_time')){
       $flag               = $flag + $direccion["flag"];
       $lista_pendientes  .= $direccion["html"];        
       
-      
-      $direccion          = add_productos_publicados($info["productos_anunciados"]);
-      
-      $flag               = $flag + $direccion["flag"];
-      $lista_pendientes  .= $direccion["html"];              
+
     
       $numtelefonico      = add_numero_telefonico($num_telefonico);
       $flag               = $flag + $numtelefonico["flag"];

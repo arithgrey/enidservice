@@ -38,7 +38,9 @@
 						  			"type"			=>	"email" ,
 						  			"placeholder"	=>	"@",
 						  			"class"			=>	"form-control input-md correo_electronico"
-						  		])?>				  		
+						  		])?>
+
+                            <?=input_hidden(["class" => "servicio" , "value" => $servicio , "name" => "servicio" ])?>
 					  	<?=span("INGRESA TU EMAIL  PARA RECIBIR NUESTRA UBICACIÓN")?>
 					  </div>
 					  <br>

@@ -1,73 +1,93 @@
-.criterio_busqueda:hover{
-	cursor: pointer;
-	background: #083ef9;
-	color: white!important;		
+.criterio_busqueda:hover {
+    cursor: pointer;
+    background: #083ef9;
+    color: white !important;
 }
-.escribir_valoracion{
-	background: #015ec8;
-	padding: 10px;
-	color: white;
-	font-weight: bold;
+
+.escribir_valoracion {
+    background: #015ec8;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
 }
-.escribir_valoracion:hover{
-	cursor: pointer;
-	background: #074e9f;	
+
+.escribir_valoracion:hover {
+    cursor: pointer;
+    background: #074e9f;
 }
-.btn_escribir_valoracion{
-	margin-top: 10px;
+
+.btn_escribir_valoracion {
+    margin-top: 10px;
 }
-.promedio_num{
-	font-size: 2em;
-	font-weight: bold;
+
+.promedio_num {
+    font-size: 2em;
+    font-weight: bold;
 }
-.contenedor_promodios{
-	margin-top: 20px;
+
+.contenedor_promodios {
+    margin-top: 20px;
 }
-.info_comentarios{
-	font-weight: bold;
-	font-size: 1.2em;	
+
+.info_comentarios {
+    font-weight: bold;
+    font-size: 1.2em;
 }
-.porcentaje_recomiendan{
-	font-size: 3em;
+
+.porcentaje_recomiendan {
+    font-size: 3em;
 }
-.titulo_valoracion{
-	font-weight: bold;font-size: 1.3em;
+
+.titulo_valoracion {
+    font-weight: bold;
+    font-size: 1.3em;
 }
-.comentario_valoracion{
-	font-size: .9em;
+
+.comentario_valoracion {
+    font-size: .9em;
 }
-.recomendaria_valoracion{
-	color: green;	
+
+.recomendaria_valoracion {
+    color: green;
 }
-.cargar_mas_valoraciones{
-	background: black;
-	padding: 10px;
-	color: white;
-	font-weight: bold;
+
+.cargar_mas_valoraciones {
+    background: black;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
 }
-.cargar_mas_valoraciones:hover{
-	cursor: pointer;
+
+.cargar_mas_valoraciones:hover {
+    cursor: pointer;
 }
-.nombre_comentario_valoracion{
-	color: grey;
+
+.nombre_comentario_valoracion {
+    color: grey;
 }
-.contenedor_utilidad{	
-	text-align: right;
+
+.contenedor_utilidad {
+    text-align: right;
 }
-.num_respuesta{
-	color: grey!important;
+
+.num_respuesta {
+    color: grey !important;
 }
-.respuesta_ok , .respuesta_no{
-	color: blue!important;
+
+.respuesta_ok, .respuesta_no {
+    color: blue !important;
 }
-.text_recibimos_valoracion{
-	border: solid 1px;
-	padding: 2px;
-	border-color: grey;
+
+.text_recibimos_valoracion {
+    border: solid 1px;
+    padding: 2px;
+    border-color: grey;
 }
-.ordenar_valoraciones_button:hover{
-	cursor: pointer;
+
+.ordenar_valoraciones_button:hover {
+    cursor: pointer;
 }
-.registro_cuenta{
-	font-size: 1.4em;
+
+.registro_cuenta {
+    font-size: 1.4em;
 }

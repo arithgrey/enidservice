@@ -19,7 +19,22 @@ class usuario_deseo extends REST_Controller{
         $param      =   $this->put();        
         $response   =  $this->procesa_deseo($param);
         $this->response($response);
-    }    
+    }
+    function servicio_POST(){
+
+        $param      =   $this->post();
+        if(if_ext($param , "servicio") > 0   && $this->id_usuario > 0 ){
+
+            $params = [
+                "id_usuario"    => $this->id_usuario,
+                "id_servicio"   => $param["servicio"]
+            ];
+            $response =  $this->usuario_deseo_model->insert($params);
+
+        }
+
+        $this->response($response);
+    }
     function procesa_deseo($param){
         
         $response   =   0;
