@@ -1,73 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3afd426a-5e1f-46fc-b28d-f46ef8e485df" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/administracion_cuenta/application/controllers/recursocontroller.php" beforeDir="false" afterPath="$PROJECT_DIR$/administracion_cuenta/application/controllers/recursocontroller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area_cliente/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/area_cliente/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area_cliente/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/contact/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desarrollo/application/controllers/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/desarrollo/application/controllers/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desarrollo/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/faq/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/faq/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/faq/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/forma_pago/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/forma_pago/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forma_pago/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/enid_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/enid_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imgs/application/controllers/enid.php" beforeDir="false" afterPath="$PROJECT_DIR$/imgs/application/controllers/enid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/librerias/sessionclass.php" beforeDir="false" afterPath="$PROJECT_DIR$/librerias/sessionclass.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lista_deseos/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/lista_deseos/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lista_deseos/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/application/controllers/api/sess.php" beforeDir="false" afterPath="$PROJECT_DIR$/login/application/controllers/api/sess.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/application/controllers/startsession.php" beforeDir="false" afterPath="$PROJECT_DIR$/login/application/controllers/startsession.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/movimientos/application/controllers/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/controllers/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movimientos/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/controllers/api/emp.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/controllers/api/emp.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/controllers/api/mailrest.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/controllers/api/mailrest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/controllers/api/pregunta.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/controllers/api/pregunta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/controllers/api/presentacion.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/controllers/api/presentacion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/helpers/areaclienteshelp_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/helpers/areaclienteshelp_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/libraries/mensajeria.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/libraries/mensajeria.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/libraries/mensajeria_mail_marketing.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/libraries/mensajeria_mail_marketing.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/libraries/mensajeria_servicios_ofertados.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/libraries/mensajeria_servicios_ofertados.php_" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/libraries/mensajerialogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/libraries/mensajerialogin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/orden_pago_oxxo/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/orden_pago_oxxo/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orden_pago_oxxo/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/planes_servicios/application/controllers/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/planes_servicios/application/controllers/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/planes_servicios/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pregunta/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/pregunta/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pregunta/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/procesar/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/procesar/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/procesar/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/producto/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/producto/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/puntos_medios/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/puntos_medios/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/puntos_medios/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recomendacion/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/recomendacion/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recomendacion/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reporte_enid/application/controllers/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/reporte_enid/application/controllers/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reporte_enid/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/search/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/search/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sobre_enidservice/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/sobre_enidservice/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sobre_enidservice/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tareas/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tareas/application/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/tareas/application/views/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tareas_complejas/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/tareas_complejas/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tareas_complejas/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/terminos-y-condiciones/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/unete_a_nuestro_equipo/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios_enid_service/application/controllers/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios_enid_service/application/controllers/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios_enid_service/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/valoracion/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/valoracion/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/valoracion/application/logs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view_tema/footer_template.php" beforeDir="false" afterPath="$PROJECT_DIR$/view_tema/footer_template.php" afterDir="false" />
-    </list>
+    <list default="true" id="3afd426a-5e1f-46fc-b28d-f46ef8e485df" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +14,7 @@
       <file leaf-file-name="home.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/procesar/application/controllers/home.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="548">
+            <state relative-caret-position="106">
               <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
             </state>
           </provider>
@@ -294,12 +228,12 @@
       <workItem from="1544383116984" duration="14186000" />
       <workItem from="1544415941070" duration="8215000" />
       <workItem from="1544507313043" duration="12698000" />
-      <workItem from="1544566526162" duration="10024000" />
+      <workItem from="1544566526162" duration="10138000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56864000" />
+    <option name="totallyTimeSpent" value="56978000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -697,7 +631,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/procesar/application/controllers/home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
+        <state relative-caret-position="106">
           <caret line="72" column="56" selection-start-line="72" selection-start-column="56" selection-end-line="72" selection-end-column="56" />
         </state>
       </provider>
