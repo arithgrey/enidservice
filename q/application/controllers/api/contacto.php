@@ -7,19 +7,20 @@ class contacto extends REST_Controller{
         $this->load->library(lib_def());                      
     }
     function index_POST(){        
-        $param      =  $this->post();
-        
-        $params = [
-            "nombre"              =>  $param["nombre"],
-            "email"               =>  $param["email"],
-            "mensaje"             =>  $param["mensaje"],
-            "id_empresa"          =>  $param["empresa"],
-            "id_tipo_contacto"    =>  $param["tipo"],
-            "telefono"            =>  $param["tel"]
-        ];
-        $response   =  $this->contactosmodel->insert($params);  
-        /*ahora creo ticket*/
-        $this->abre_ticket($param);
+        $param      =   $this->post();
+        $response   =   false;
+        if (if_ext($param , "nombre,email,mensaje,empresa,tipo,tel")){
+            $params = [
+                "nombre"              =>  $param["nombre"],
+                "email"               =>  $param["email"],
+                "mensaje"             =>  $param["mensaje"],
+                "id_empresa"          =>  $param["empresa"],
+                "id_tipo_contacto"    =>  $param["tipo"],
+                "telefono"            =>  $param["tel"]
+            ];
+            $response   =  $this->contactosmodel->insert($params);
+            $this->abre_ticket($param);
+        }
         $this->response($response);
     }
     /**/
@@ -30,10 +31,7 @@ class contacto extends REST_Controller{
         $q["asunto"]            =   "Solicitud  buzón de contacto";
         $q["id_proyecto"]       =   38;
         $q["id_usuario"]        =   180;                  
-        $api                    =   "tickets/index";     
-        
+        $api                    =   "tickets/index";
         return $this->principal->api(  $api , $q ,"json" ,"POST");
     }
-
-
-}?>
+}

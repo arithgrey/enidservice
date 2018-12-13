@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ffbfef24-1c57-4135-bcb0-af960c244fba" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/js_tema/servicio/pre.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/servicio/pre.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pregunta/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/pregunta/application/controllers/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/procesar/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/procesar/application/controllers/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/controllers/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/helpers/producto_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/helpers/producto_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/english/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/english/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/calendar_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/calendar_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/date_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/date_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/db_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/db_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/email_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/email_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/form_validation_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/form_validation_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/ftp_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/ftp_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/imglib_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/imglib_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/migration_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/migration_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/number_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/number_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/pagination_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/pagination_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/profiler_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/profiler_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/unit_test_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/unit_test_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/language/spanish/upload_lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/language_/spanish/upload_lang.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/puntos_medios/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/puntos_medios/application/controllers/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/archivo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/archivo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/areacliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/areacliente.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/banco.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/banco.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/blog.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/blog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/categoria.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/categoria.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/ciclo_facturacion.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/ciclo_facturacion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/clasificacion.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/clasificacion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/cobranza.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/cobranza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/codigo_postal.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/codigo_postal.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/comentario.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/comentario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/contacto.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/contacto.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/cotizaciones.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/cotizaciones.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/countries.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/countries.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/cron.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/cron.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/cuenta_pago.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/cuenta_pago.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/cuentas.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/cuentas.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/departamento.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/departamento.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/desarrollo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/desarrollo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/direccion.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/direccion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/empresa.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/empresa.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/empresa_permiso.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/empresa_permiso.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/empresa_recurso.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/empresa_recurso.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/enid.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/enid.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/estado_republica.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/estado_republica.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/servicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/servicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/helpers/clasificaciones_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/helpers/clasificaciones_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/clasificacion_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/clasificacion_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/desarrollomodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/desarrollomodel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/facturacion_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/facturacion_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/recibo_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/recibo_model.php" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>set_clasificacion_talla</find>
+      <find>num_servicio_nombre</find>
+      <find>get_servicio_nivel</find>
+      <find>div</find>
+      <find>tallas</find>
+      <find>get_tallas_servicio</find>
+      <find>get_tallas_en_servicio</find>
+      <find>q_upda</find>
+      <find>cancelar_cobranza_email</find>
+      <find>cancelar_envio_recordatorio</find>
+      <find>*/</find>
+      <find>cobranzamodel</find>
+      <find>cobranza</find>
+      <find>registra_direccion_usuario</find>
+      <find>size</find>
+      <find>registra_direccion_envio</find>
+      <find>get_id_codigo_postal_por_patron</find>
+      <find>get_colonia_delegacion</find>
+      <find>get_id_usuario</find>
+      <find>get_pais_por_id</find>
+      <find>get_contactos</find>
+      <find>get_usuarios_activos_perfil</find>
+      <find>regitra_cuenta_bancaria</find>
+      <find>regitra_tarjeta</find>
+      <find>get_tareas_pendientes_usuario</find>
+      <find>id_departamentoget_tareas_pendientes_usuario</find>
+      <find>get_resumen_desarrollo</find>
+      <find>create_tmp_tareas_horario</find>
+      <find>get_comparativa_desarrollo_calidad</find>
+      <find>get_comparativa_desarrollo</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/js_tema/servicio/pre.js" />
+        <option value="$PROJECT_DIR$/pregunta/application/controllers/home.php" />
+        <option value="$PROJECT_DIR$/procesar/application/controllers/home.php" />
+        <option value="$PROJECT_DIR$/producto/application/helpers/producto_helper.php" />
+        <option value="$PROJECT_DIR$/producto/application/controllers/home.php" />
+        <option value="$PROJECT_DIR$/puntos_medios/application/controllers/home.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/archivo.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/areacliente.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/banco.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/blog.php" />
+        <option value="$PROJECT_DIR$/q/application/helpers/blog_helper.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/categoria.php" />
+        <option value="$PROJECT_DIR$/q/application/models/facturacion_model.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/ciclo_facturacion.php" />
+        <option value="$PROJECT_DIR$/q/application/models/clasificacion_model.php" />
+        <option value="$PROJECT_DIR$/q/application/helpers/clasificaciones_helper.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/servicio.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/clasificacion.php" />
+        <option value="$PROJECT_DIR$/q/application/models/recibo_model.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/recibo.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/cobranza.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/codigo_postal.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/comentario.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/contacto.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/cotizaciones.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/countries.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/cron.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/cuenta_pago.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/cuentas.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/departamento.php" />
+        <option value="$PROJECT_DIR$/q/application/models/desarrollomodel.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/desarrollo.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/direccion.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/empresa.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/empresa_permiso.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/enid.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/estado_republica.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/empresa_recurso.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/librerias/jquery-zoom/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="973" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="pregunta" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="pregunta" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="pregunta" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="procesar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="procesar" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="procesar" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="programacion" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="puntos_medios" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="puntos_medios" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="puntos_medios" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ffbfef24-1c57-4135-bcb0-af960c244fba" name="Default" comment="" />
+      <created>1544720836385</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1544720836385</updated>
+      <workItem from="1544720837723" duration="9456000" />
+      <workItem from="1544737532995" duration="3004000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="12460000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1920" height="973" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.118743345" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/js_tema/contact/proceso_compra_direccion.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/pedidos/principal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2300" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/pedidos/seguimiento.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-434" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/servicio/pre.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-330">
+          <caret column="34" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movimientos/application/controllers/inicio.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pregunta/application/controllers/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="26" column="56" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/procesar/application/controllers/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="102" column="1" lean-forward="true" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/producto/application/helpers/producto_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/producto/application/controllers/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/puntos_medios/application/controllers/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="96" column="21" selection-start-line="96" selection-start-column="21" selection-end-line="96" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/afiliacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1029">
+          <caret line="47" column="18" lean-forward="true" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/areacliente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1640">
+          <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/banco.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="50" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/banco_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="20" column="23" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/blog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/helpers/blog_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="3" column="22" lean-forward="true" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/categoria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/facturacion_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/ciclo_facturacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/imagen_servicio_model.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/serviciosmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="706" column="53" lean-forward="true" selection-start-line="706" selection-start-column="53" selection-end-line="706" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/usuario_clasificacion_model.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/enid_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="460" column="10" selection-start-line="460" selection-start-column="10" selection-end-line="460" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/clasificacion_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="73" column="127" selection-start-line="73" selection-start-column="122" selection-end-line="73" selection-end-column="127" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/helpers/clasificaciones_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/servicio.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="581">
+          <caret line="254" column="31" selection-start-line="254" selection-start-column="31" selection-end-line="254" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/clasificacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-274">
+          <caret line="345" column="30" selection-start-line="345" selection-start-column="30" selection-end-line="345" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/recibo_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="550" selection-start-line="550" selection-end-line="550" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="24" column="40" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/cobranza.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="133" column="38" selection-start-line="133" selection-start-column="30" selection-end-line="133" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/archivo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="86" column="13" selection-start-line="86" selection-start-column="13" selection-end-line="86" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/codigo_postal_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="66" column="35" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/codigo_postal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3588">
+          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/contacto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="33" column="52" selection-start-line="33" selection-start-column="52" selection-end-line="33" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/comentario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/cotizaciones.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/contactosmodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="85" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/countries.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="30" lean-forward="true" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/cron.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="8" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/cuenta_pago.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/cuenta_pago_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-14">
+          <caret line="36" column="55" selection-start-line="36" selection-start-column="55" selection-end-line="36" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/cuentas.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="820">
+          <caret line="41" column="12" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/departamento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/desarrollo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-334">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/desarrollomodel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="24" column="64" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/direccion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/empresa.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="38" lean-forward="true" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/empresa_permiso.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/enid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1520">
+          <caret line="76" column="1" lean-forward="true" selection-start-line="76" selection-start-column="1" selection-end-line="76" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/empresa_recurso.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/estado_republica.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="81" selection-start-line="11" selection-start-column="72" selection-end-line="11" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

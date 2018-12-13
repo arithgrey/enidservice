@@ -16,13 +16,10 @@
         }       
         return $this->db->get('ciclo_facturacion')->result_array();
     }
-    /**/
     function not_ciclo_facturacion($param){
 
-        $query_get  =   
-        "SELECT * FROM ciclo_facturacion WHERE id_ciclo_facturacion!=5";
-        $result     =   $this->db->query($query_get);
-        return $result->result_array();
+        $query_get  =   "SELECT * FROM ciclo_facturacion WHERE id_ciclo_facturacion!=5";
+        return  $this->db->query($query_get)->result_array();
     }   
   
 }

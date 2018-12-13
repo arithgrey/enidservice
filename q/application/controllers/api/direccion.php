@@ -15,22 +15,25 @@ class direccion extends REST_Controller{
         $this->response($response);
     }
     function index_POST(){        
-        $param      =   $this->post();        
-        $receptor         =   get_param_def($param ,"nombre_receptor" , "");
-        $tel_receptor     =   get_param_def($param ,"telefono_receptor" , 0);    
+        $param            =     $this->post();
+        $response         =     false;
+        $receptor         =     get_param_def($param ,"nombre_receptor" , "");
+        $tel_receptor     =     get_param_def($param ,"telefono_receptor" , 0);
+        if (if_ext($param,"calle,referencia,numero_exterior,numero_interior,id_codigo_postal")){
+            $params = [
+                "calle"               =>  $param["calle"],
+                "entre_calles"        =>  $param["referencia"],
+                "numero_exterior"     =>  $param["numero_exterior"],
+                "numero_interior"     =>  $param["numero_interior"],
+                "id_codigo_postal"    =>  $param["id_codigo_postal"],
+                "nombre_receptor"     =>  $receptor,
+                "telefono_receptor"   =>  $tel_receptor
+            ];
+            $response                 =  $this->direccion_model->insert($params , 1);
 
-        $params = [
-            "calle"               =>  $param["calle"],
-            "entre_calles"        =>  $param["referencia"],
-            "numero_exterior"     =>  $param["numero_exterior"],
-            "numero_interior"     =>  $param["numero_interior"],
-            "id_codigo_postal"    =>  $param["id_codigo_postal"],
-            "nombre_receptor"     =>  $receptor,
-            "telefono_receptor"   =>  $tel_receptor
-        ];      
-        $response                 =  $this->direccion_model->insert($params , 1);
+        }
         $this->response($response);
     }           
     
     
-}?>
+}

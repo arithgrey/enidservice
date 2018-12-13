@@ -17,27 +17,33 @@ class Cuentas extends REST_Controller{
     */
     /**/
     function usuario_POST(){    
-        /**/        
-        $param = $this->post();
 
-        if($param["metodos_disponibles"] ==  1){
+        $param      = $this->post();
+        $response   = false;
+        if (if_ext($param , "metodos_disponibles")){
+            if($param["metodos_disponibles"] ==  1){
 
-            /*Agregamos pequeño filtro de validacion*/
-            $cuentas =  $this->cuenta_pago_model->get_cuentas_usuario($param);
-            $this->response($cuentas);    
+                $response   =  $this->cuenta_pago_model->get_cuentas_usuario($param);
+            }
         }
-    } 
-    /**/
+        $this->response($response);
+
+    }
     function bancaria_POST(){
 
-        $param =  $this->post();
-        $registro ="";
+        $param       =   $this->post();
+        $response    =   false;
+
         if ($param["tipo"] ==0 ){
-            $registro =  $this->cuenta_pago_model->regitra_cuenta_bancaria($param);    
+            if (if_ext($param , "id_usuario,clabe,banco")){
+                $response   =  $this->cuenta_pago_model->regitra_cuenta_bancaria($param);
+            }
         }else{
-            $registro =  $this->cuenta_pago_model->regitra_tarjeta($param);    
+
+            //$response   =  $this->cuenta_pago_model->regitra_tarjeta($param);
         }
-        $this->response($registro);
+        $this->response($response);
+
     }    
     
-}?>
+}

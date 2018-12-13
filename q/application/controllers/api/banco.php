@@ -8,10 +8,9 @@ class Banco extends REST_Controller{
     }
     function index_GET(){
 
-      //$this->response("898");
-      $param    =  $this->get();
-      $response = $this->banco_model->get_bancos($param);
+      $param    =   $this->get();
+      $response =   $this->banco_model->get_bancos($param);
       $this->response($response);
     }
 
-}?>
+}

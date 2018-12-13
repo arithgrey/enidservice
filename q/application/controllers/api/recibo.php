@@ -22,8 +22,18 @@ class recibo extends REST_Controller{
         $this->response($response);        
     }    
     */
-    
-    
+    function cancelar_envio_recordatorio_PUT(){
+
+        $param      =  $this->put();
+        $response   = false;
+        if (if_ext($param, "id")){
+            $id         = $param["id"];
+            $response = $this->recibo_model->q_up("cancela_email" , 1, $id);
+        }
+        $this->response($response);
+
+
+    }
     function servicio_ppfp_GET(){
         
         $param          =   $this->get();                

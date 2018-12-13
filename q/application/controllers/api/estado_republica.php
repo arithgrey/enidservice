@@ -13,4 +13,4 @@ class estado_republica extends REST_Controller{
         $this->response($response);
 
     }
-}?>
+}

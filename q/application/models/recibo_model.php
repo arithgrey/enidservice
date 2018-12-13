@@ -548,7 +548,7 @@
       return $result->result_array()[0]["num_ventas"];
 
     }
-    
+
   
   
     /*
@@ -1290,19 +1290,7 @@
     
     
     
-    
-    function cancelar_cobranza_email($param){
 
-        $id  = $param["id"];
-        $query_update =  "UPDATE 
-                            proyecto_persona_forma_pago 
-                          SET cancela_email =1
-                          WHERE 
-                          id_proyecto_persona_forma_pago = '".$id."' LIMIT 1";
-        
-        
-        return $this->db->query($query_update);
-    }
     
   */
     

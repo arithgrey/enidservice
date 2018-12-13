@@ -8,7 +8,6 @@ class Blog extends REST_Controller{
         $this->load->model("blog_model");        
         $this->load->library(lib_def());                    
     }
-    /**/
     function fecha_GET(){        
 
         $param              =   $this->get();
@@ -16,5 +15,4 @@ class Blog extends REST_Controller{
         $table              =   create_table_blog($data);
         $this->response($table);
     }
-    /**/ 
-}?>
+}

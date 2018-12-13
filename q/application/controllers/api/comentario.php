@@ -7,4 +7,4 @@ class Comentario extends REST_Controller{
         $this->load->library(lib_def());                    
     }
     
-}?>
+}

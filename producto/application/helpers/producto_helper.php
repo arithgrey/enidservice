@@ -1,17 +1,37 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
+    function get_url_imagen_post($id_servicio){
+        return "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/".$id_servicio."/";
+    }
+    function costruye_meta_keyword($servicio){
 
-function select_cantidad_compra($flag_servicio, $existencia){
+        $metakeyword            =  $servicio["metakeyword"];
+        $metakeyword_usuario    =  $servicio["metakeyword_usuario"];
+        $nombre_servicio        =  $servicio["nombre_servicio"];
+        $descripcion            =  $servicio["descripcion"];
 
-    $config =  [      
-      "name"    =>  "num_ciclos",                 
+
+        $array                  =  explode(",", $metakeyword);
+        array_push($array, $nombre_servicio );
+        array_push($array, $descripcion );
+        array_push($array, " precio " );
+        if (strlen(trim($metakeyword_usuario)) > 0 ) {
+            array_push($array, $metakeyword_usuario );
+        }
+        $meta_keyword =  implode(",", $array);
+        return strip_tags($meta_keyword);
+    }
+    function select_cantidad_compra($flag_servicio, $existencia){
+
+    $config =  [
+      "name"    =>  "num_ciclos",
       "class"   =>  "telefono_info_contacto form-control"
     ];
 
-    $select   =  "<select ".add_attributes($config) .">";  
-    for ($a=1; $a < valida_maximo_compra($flag_servicio, $existencia); $a++) { 
+    $select   =  "<select ".add_attributes($config) .">";
+    for ($a=1; $a < valida_maximo_compra($flag_servicio, $existencia); $a++) {
 
-        $select .=  "<option value=".$a.">".$a."</option>";  
+        $select .=  "<option value=".$a.">".$a."</option>";
     }
     $select .=  "</select>";
     return $select;

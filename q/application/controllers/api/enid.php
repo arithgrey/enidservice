@@ -60,8 +60,6 @@ class Enid extends REST_Controller{
         $response["tiempo_empleado"]        =   ($inicio - $fin); 
         $response["actividad_enid_service"] =   $data["resumen"];        
 
-        debug($data , 1);
-
         if ($param["vista"] == 1){
             /*Reporte 1 */
             $this->load->view("cotizador/principal", $response);    
@@ -71,10 +69,9 @@ class Enid extends REST_Controller{
             $this->response($data);
         }       
     }
-    /**/
     function microtime_float(){
         list($useg, $seg) = explode(" ", microtime());
         return ((float)$useg + (float)$seg);
     }
-    /**/ 
-}?>
+
+}
