@@ -1,33 +1,40 @@
-.contenedor_busqueda_global_enid_service{
-	display: none!important;
+.contenedor_busqueda_global_enid_service {
+    display: none !important;
 }
-.largenav{
-	display: none;
+
+.largenav {
+    display: none;
 }
-.contenedor_informacion_envio{
-	width: 50%;
-	margin: 0 auto;
+
+.contenedor_informacion_envio {
+    width: 50%;
+    margin: 0 auto;
 }
-.contenedor_deuda_para_envio{
-	width: 60%;
-	margin: 0 auto;	
+
+.contenedor_deuda_para_envio {
+    width: 60%;
+    margin: 0 auto;
 }
-.link_acceso{
-	color: #005db3!important;
-	font-size: 1.2em;
-	text-decoration: underline;
+
+.link_acceso {
+    color: #005db3 !important;
+    font-size: 1.2em;
+    text-decoration: underline;
 }
-.info_metodos_pago{
-	display: none;
+
+.info_metodos_pago {
+    display: none;
 }
+
 @media only screen and (max-width: 768px) {
-	.contenedor_informacion_envio{
-		margin-top: 25px!important;
-		width: 100%;
-		margin: 0 auto;
-	}	
-	.contenedor_deuda_para_envio{
-		width: 100%;
-		margin: 0 auto;	
-	}
+    .contenedor_informacion_envio {
+        margin-top: 25px !important;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .contenedor_deuda_para_envio {
+        width: 100%;
+        margin: 0 auto;
+    }
 }

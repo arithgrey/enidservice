@@ -350,12 +350,10 @@ function set_places(){
 		$(place[x]).empty();
 	}
 }
-/**/
 function showonehideone( elementomostrar , elementoocultar  ){
 	$(elementomostrar).show();
 	$(elementoocultar).hide();
 }
-/**/	
 function selecciona_select(class_select , valor_a_seleccionar){
 	$( class_select +' > option[value="'+ valor_a_seleccionar +'"]').attr('selected', 'selected');				
 }

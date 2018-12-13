@@ -1,17 +1,21 @@
-.base_compras,.base_paginas_extra,.info_metodos_pago,.contenedor_eleccion_whatsapp{
-	display: none;
+.base_compras, .base_paginas_extra, .info_metodos_pago, .contenedor_eleccion_whatsapp {
+    display: none;
 }
-.contenedor_eleccion{
-	display: flex;
-	justify-content: center;		
+
+.contenedor_eleccion {
+    display: flex;
+    justify-content: center;
 }
-.selector:hover{
-	color: blue;
+
+.selector:hover {
+    color: blue;
 }
-.contendor_in_correo{
-	background: #f6f6f6;	
-	padding: 10px;
+
+.contendor_in_correo {
+    background: #f6f6f6;
+    padding: 10px;
 }
-.contenedor_eleccion_correo_electronico{
-	display: none;
+
+.contenedor_eleccion_correo_electronico {
+    display: none;
 }

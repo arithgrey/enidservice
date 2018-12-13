@@ -1,73 +1,89 @@
-.sin_domicilio{
-  background: #d20c2f;
-}
-.entregado{
-	background: #0055d7;
-	color: white;
-}
-.funny_error_message{
-	background:#10094e;
-	color: white;	
-}
-.busqueda_mensaje{
-	font-size: 2em;
-	font-weight: bold;
-	color: black;
-}
-.busqueda_mensaje:hover{	
-	color: black!important;
-}
-.busqueda_mensaje_text{
-	text-align: center;
-}
-.contenedor_domicilio ,.contenedor_cliente{
-	border: solid .9px;
-	background: #070350;
-	padding: 8px;
-	margin-top: 10px;
-}
-.encabezado_domicilio,.encabezado_cliente{
-	background: #06429e;	
-	color: white;
-	padding: 5px;
-}
-.contenido_domicilio, .contenido_domicilio{
-	background: white;	
-	padding: 5px;	
-}
-.status_compra{
-	background: #0b2b47;
-	color: white;
-	padding: 5px;
+.sin_domicilio {
+    background: #d20c2f;
 }
 
-.resumen_pago{
-	background: #f4f6fb;
+.entregado {
+    background: #0055d7;
+    color: white;
+}
+
+.funny_error_message {
+    background: #10094e;
+    color: white;
+}
+
+.busqueda_mensaje {
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+}
+
+.busqueda_mensaje:hover {
+    color: black !important;
+}
+
+.busqueda_mensaje_text {
+    text-align: center;
+}
+
+.contenedor_domicilio, .contenedor_cliente {
+    border: solid .9px;
+    background: #070350;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+.encabezado_domicilio, .encabezado_cliente {
+    background: #06429e;
+    color: white;
+    padding: 5px;
+}
+
+.contenido_domicilio, .contenido_domicilio {
+    background: white;
+    padding: 5px;
+}
+
+.status_compra {
+    background: #0b2b47;
+    color: white;
+    padding: 5px;
+}
+
+.resumen_pago {
+    background: #f4f6fb;
 
 }
-.text_precio_producto{
-	font-size: 1.5em;
+
+.text_precio_producto {
+    font-size: 1.5em;
 }
-.sin_pago{
-	color: #c21818;
-	font-size: 1.5em;
+
+.sin_pago {
+    color: #c21818;
+    font-size: 1.5em;
 }
-.pago_realizado{
-	color: blue;
-	font-size: 1.5em;	
+
+.pago_realizado {
+    color: blue;
+    font-size: 1.5em;
 }
-.mxn{
-	font-size: 1.6em;
-	color: #000060;	
-	font-weight: bold;
+
+.mxn {
+    font-size: 1.6em;
+    color: #000060;
+    font-weight: bold;
 }
-.seccion_tipificacion{
-	background: white;
+
+.seccion_tipificacion {
+    background: white;
 }
-.global_tipificaciones{
-	background: #0b1f33;
-	padding: 5px;
+
+.global_tipificaciones {
+    background: #0b1f33;
+    padding: 5px;
 }
-.form_edicion_tipo_entrega{
-	display: none;
+
+.form_edicion_tipo_entrega {
+    display: none;
 }

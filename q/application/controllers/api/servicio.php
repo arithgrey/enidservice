@@ -1383,9 +1383,10 @@ class Servicio extends REST_Controller{
               $url_img          =   "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
               $img            = img(
                 [
-                    "src" => $url_img,
-                    "style"  => "width:50px!important;height:50px!important;",
-                    'onerror' => "reloload_img( '".$id_error."','".$url_img."');"
+                    "src"       => $url_img,
+                    "id"        => $id_error,
+                    "style"     => "width:50px!important;height:50px!important;",
+                    'onerror'   => "reloload_img( '".$id_error."','".$url_img."');"
                 ]);
               
 

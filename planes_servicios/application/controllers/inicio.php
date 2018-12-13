@@ -7,21 +7,22 @@ class Inicio extends CI_Controller {
         $this->principal->acceso();
     }
     function index(){
-        
-		$data                           =   $this->principal->val_session("");
+
         $param                          =   $this->input->get();
+		$data                           =   $this->principal->val_session("");
         $data["action"]                 =   valida_action($param , "action");
         $data["considera_segundo"]      =   0;
         $data["extra_servicio"]         =   0;
         $data                           =   $this->prevenir_acceso($param , $data);
         $id_usuario                     =   $data["id_usuario"];
-        $msj                            =   $param["mensaje"];
+
+        $msj                            =   get_param_def($param , "mensaje", "" );
         $data["error_registro"]         =   valida_extension($msj , 5 , "");
         $data["top_servicios"]          =   $this->get_top_servicios_usuario($id_usuario);
         $data["ciclo_facturacion"]      =   $this->create_ciclo_facturacion();
         $data["clasificaciones_departamentos"]  =   "";    
-        $data["is_mobile"] = (  $this->agent->is_mobile() === FALSE ) ? 0 : 1;
-        
+        $data["is_mobile"]              =   (  $this->agent->is_mobile() === FALSE ) ? 0 : 1;
+
         
         
         $data["js"] =['planes_servicios/principal.js', 
@@ -57,6 +58,7 @@ class Inicio extends CI_Controller {
                 $this->principal->logout();
             }
         }
+        return $data;
     }
     private function valida_servicio_usuario($q){        
 

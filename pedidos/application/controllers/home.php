@@ -15,7 +15,9 @@ class Home extends CI_Controller{
         $data["url_img_post"]                   =   create_url_preview("");                
         $data["clasificaciones_departamentos"]  =   $this->principal->get_departamentos();
         
-        if ( get_param_def($data , "seguimiento") > 0 && ctype_digit(trim($data["seguimiento"] ) ) && $param["seguimiento"] > 0) {
+        if ( get_param_def($param , "seguimiento") > 0 && ctype_digit($param["seguimiento"] ) ) {
+
+
 
             $this->carga_vista_seguimiento($param , $data);
 
