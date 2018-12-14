@@ -8,36 +8,45 @@ class Perfiles extends REST_Controller{
   } 
   
   function get_GET(){
-    
-    $param    =   $this->get();
+
     $response =  $this->perfil_model->get( [], [] , 50);
     $this->response($response);
   }  
   /**/
   function  id_departamento_by_id_perfil_GET(){
 
-    $param           = $this->get();
-    $id_departamento = $this->get(["id_departamento"] , ["idperfil" => $param["id_perfil"] ])[0]["id_departamento"];
-    $this->response($id_departamento);
+    $param      = $this->get();
+    $response   = false;
+    if(if_ext($param, "id_perfil")){
+        $response   = $this->get(["id_departamento"] , ["idperfil" => $param["id_perfil"] ])[0]["id_departamento"];
+    }
+    $this->response($response);
   }
   function data_usuario_GET(){
 
-    $param          =  $this->get();
-    $id_usuario     =  $param["id_usuario"];
-    $response       =  $this->perfil_model->get_usuario($id_usuario);
+    $param      =   $this->get();
+    $response   =   false;
+    if(if_ext($param,"id_usuario")){
+        $id_usuario     =  $param["id_usuario"];
+        $response       =  $this->perfil_model->get_usuario($id_usuario);
+    }
     $this->response($response);
   }
   function puesto_cargo_GET(){
 
-    $param      =   $this->get();    
-    $puestos    = $this->perfil_model->get( [] ,["id_departamento" =>  $param["id_departamento"] ] , 100);
-    $select     =   create_select(
-      $puestos , 
-      "puesto" , 
-      "form-control input-sm puesto" , 
-      "puesto" , "nombreperfil" , "idperfil");
-      $this->response($select);
+    $param      =   $this->get();
+    $response   =   false;
+    if(if_ext($param,"id_usuario")) {
 
+          $puestos = $this->perfil_model->get([], ["id_departamento" => $param["id_departamento"]], 100);
+          $response = create_select($puestos,
+              "puesto",
+              "form-control input-sm puesto",
+              "puesto",
+              "nombreperfil",
+              "idperfil");
+      }
+      $this->response($response);
   }
 
   /*
@@ -87,4 +96,4 @@ class Perfiles extends REST_Controller{
   /**/
   
    
-}?>
+}

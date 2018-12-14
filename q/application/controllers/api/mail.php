@@ -23,7 +23,6 @@ class Mail extends REST_Controller{
         }        
         
     }
-    /**/
     function agrega_ventas($email){
 
         $nueva_data = [];
@@ -39,18 +38,16 @@ class Mail extends REST_Controller{
         }
         return $nueva_data;
     }
-    /**/
     function get_solicitudes_ventas_dia($fecha){
         
         $q["fecha"] =  $fecha;
         $api =  "ganancias/solicitudes_fecha/format/json/"; 
         return $this->principal->api( $api , $q );        
     }
-    /**/
     function get_ventas_dia($fecha){
         $q["fecha"] =  $fecha;
         $api =  "ganancias/ganancias_fecha/format/json/"; 
         return $this->principal->api( $api , $q );                
     }    
-    /**/ 
-}?>
+
+}

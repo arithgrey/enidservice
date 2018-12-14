@@ -11,12 +11,11 @@ class Keyword extends REST_Controller{
     function index_POST(){
 
         $param      =   $this->post();
-        $response   =   2;
+        $response   =   false;
         
-        if (if_ext($param , "q")) {            
+        if (if_ext($param , "q")) {
+            $response   =   [];
             $params     =   [ "keyword"  => $param["q"] ];
-
-
             if (array_key_exists("id_usuario", $param)) {
                 $params["id_usuario"] = $param["id_usuario"];
             }
@@ -27,4 +26,4 @@ class Keyword extends REST_Controller{
     }
 
     
-}?>
+}

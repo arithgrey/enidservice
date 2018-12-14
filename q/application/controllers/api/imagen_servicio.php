@@ -36,7 +36,6 @@ class Imagen_servicio extends REST_Controller{
     }
     $this->response($response);
   }
-  /**/
   function principal_PUT(){
     $param    =  $this->put();
     $response = 2;
@@ -101,6 +100,5 @@ class Imagen_servicio extends REST_Controller{
     $api      =  "servicio/status_imagen";
     $q["existencia"]  = 0;
     return    $this->principal->api($api , $q , "json" , "PUT");
-  }  
-  /**/
-}?>
+  }
+}

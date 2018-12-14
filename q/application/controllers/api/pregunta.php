@@ -12,7 +12,10 @@ class pregunta extends REST_Controller{
 	function visto_pregunta_PUT(){
 
         $param      = $this->put();
-        $response   = $this->pregunta_model->set_visto_pregunta($param); 
+        $response   = false;
+        if(if_ext($param,"id_pregunta,modalidad")){
+            $response   = $this->pregunta_model->set_visto_pregunta($param);
+        }
         $this->response($response);
     }
     function index_POST(){      
@@ -31,41 +34,20 @@ class pregunta extends REST_Controller{
         }        
         $this->response($response);        
     }
-    /*
-    private function envia_pregunta_a_vendedor($q){
-        $api =  "pregunta/pregunta_vendedor/format/json/"; 
-        return $this->principal->api( $api , $q );
-    }
-    */
-    /*
-    function pregunta_POST(){
-
-        $param      =  $this->post();
-        $response   =  $this->registro_pregunta($param);                        
-        $respuesta_notificacion = "";
-        if($response){                                            
-            $respuesta_notificacion = $this->envia_pregunta_a_vendedor($param);
-        }        
-        $this->response($respuesta_notificacion);
-
-    }
-    */
-    function agrega_pregunta_servicio($q){
-
-        $api = "pregunta_servicio/index";
-        return $this->principal->api( $api , $q , "json", "POST");
-    }
     function periodo_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->pregunta_model->num_periodo($param);
+        $response   =   false;
+        if(if_ext($param, "fecha_inicio,fecha_termino")){
+            $response   =   $this->pregunta_model->num_periodo($param);
+        }
         $this->response($response);        
     }
     function buzon_GET(){
 
         $param               =  $this->get();        
         $param["id_usuario"] =  $this->id_usuario;
-        //$nombre_usuario_actual =  $this->principal->get_session("nombre");
+
         $data_complete["modalidad"] = $param["modalidad"];
         /*Consulta preguntas hechas con proposito de compras*/
         if($param["modalidad"] ==  1){                                                    
@@ -77,9 +59,7 @@ class pregunta extends REST_Controller{
 
             $preguntas =  $this->pregunta_model->get_preguntas_realizadas($param);
             $data_complete["preguntas"] =  $this->add_num_respuestas_preguntas($preguntas);
-                                    
-        }   
-        
+        }
         $this->load->view("valoraciones/preguntas" ,  $data_complete);                 
     }
     function preguntas_sin_leer_GET(){        
@@ -115,20 +95,47 @@ class pregunta extends REST_Controller{
       }
       return $data_complete;
     }
-    function get_num_respuestas_sin_leer($id_pregunta){
 
-        
+    function usuario_por_pregunta_GET(){
+
+        $param      =   $this->get();
+        $response   =   false;
+        if(if_ext($param,"id_pregunta")){
+            $usuario    =   $this->pregunta_model->get_usuario_por_id_pregunta($param);
+            $response   =   $usuario[0]["id_usuario"];
+        }
+        $this->response($response);
+    }
+    private function get_num_respuestas_sin_leer($id_pregunta){
+
+
         $q["id_pregunta"] =  $id_pregunta;
         $api              =  "respuesta/num_respuestas_sin_leer/format/json/";
         return $this->principal->api( $api , $q);
     }
-    function usuario_por_pregunta_GET(){
+    private function agrega_pregunta_servicio($q){
 
-        $param      =   $this->get();                        
-        $usuario    =   $this->pregunta_model->get_usuario_por_id_pregunta($param);
-        $id_usuario =   $usuario[0]["id_usuario"];     
-        $this->response($id_usuario);
+        $api = "pregunta_servicio/index";
+        return $this->principal->api( $api , $q , "json", "POST");
     }
-    
-        
-}?>
+
+    /*
+   private function envia_pregunta_a_vendedor($q){
+       $api =  "pregunta/pregunta_vendedor/format/json/";
+       return $this->principal->api( $api , $q );
+   }
+   */
+    /*
+    function pregunta_POST(){
+
+        $param      =  $this->post();
+        $response   =  $this->registro_pregunta($param);
+        $respuesta_notificacion = "";
+        if($response){
+            $respuesta_notificacion = $this->envia_pregunta_a_vendedor($param);
+        }
+        $this->response($respuesta_notificacion);
+
+    }
+    */
+}

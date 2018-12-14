@@ -12,9 +12,8 @@ class Pagina_web extends REST_Controller{
     function index_POST(){
 
         $param    =  $this->post();
-        $response =  [];
+        $response =  false;
         if (if_ext($param , "q,q2")) {
-            
             $params   =  $param["q"];
             $q2       =  $param["q2"];                        
             if ($q2 == 0) {
@@ -22,22 +21,18 @@ class Pagina_web extends REST_Controller{
             }else{
                 $response = $this->pagina_web_model->insert($params, 1 , 0, "pagina_web_bot");
             }
-            
         }        
         $this->response($response);
 
     }
     function dia_GET(){
-
-      $param    =   $this->get();
       $response =   $this->pagina_web_model->accesos_enid_service();
       $this->response($response);
-
     }
     function productividad_GET(){
 
         $param      = $this->get();        
-        $response   = [];
+        $response   = false;
         if (if_ext($param , "fecha_inicio,fecha_termino")) {
             
             $f_inicio = $param["fecha_inicio"];
@@ -69,18 +64,11 @@ class Pagina_web extends REST_Controller{
             
 
             $response["url_referencia"]
-            =  
-            $this->pagina_web_model->get_num_field($f_inicio , $f_termino, 
-            	"url_referencia"); 
-            
-
+            = $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "url_referencia");
 
             if ($param["v"] ==  1) {
-            	$this->response($this->genera_reporte($response));
+                $response   = $this->genera_reporte($response);
             }
-
-
-
         }        
         $this->response($response);
     }  
@@ -101,8 +89,5 @@ class Pagina_web extends REST_Controller{
 
    		}
    		return $l;
-
-   	}  
-
-
-}?>
+   	}
+}

@@ -13,4 +13,4 @@ class forma_pago extends REST_Controller{
         $this->response($response);
     }
     
-}?>
+}

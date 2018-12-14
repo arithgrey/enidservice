@@ -59,21 +59,27 @@ class img_model extends CI_Model {
     
     $this->db->query($query_insert);
     return $this->db->insert_id();     
-  }  
-  
-  
-  /*
-  function get_img($id_imagen){
-    return $this->get(["img"] , [ "idimagen" => $id_imagen]);
   }
-  function insert_imgen_servicio($param){
-              
-    $id_servicio  = $param["servicio"];
-    $id_imagen    = $this->insert_img($param , 1 );          
-    $params       = [ "id_imagen"   =>  $id_imagen , "id_servicio" =>  $id_servicio];
-    return  $this->insert("imagen_servicio" ,  $params , 1);    
-}
-*/
+
+    function get_img_faq($id_faq){
+
+        $query_get =  "select  id_imagen from imagen_faq WHERE id_faq =$id_faq LIMIT 1";
+        $result = $this->db->query($query_get);
+        return $result->result_array();
+    }
+
+    /*
+    function get_img($id_imagen){
+      return $this->get(["img"] , [ "idimagen" => $id_imagen]);
+    }
+    function insert_imgen_servicio($param){
+
+      $id_servicio  = $param["servicio"];
+      $id_imagen    = $this->insert_img($param , 1 );
+      $params       = [ "id_imagen"   =>  $id_imagen , "id_servicio" =>  $id_servicio];
+      return  $this->insert("imagen_servicio" ,  $params , 1);
+  }
+  */
 
 
 /*
@@ -85,12 +91,6 @@ function elimina_imagen($id_imagen){
   return $result;
 }
 
-function get_img_faq($id_faq){
-
-  $query_get =  "select  id_imagen from imagen_faq WHERE id_faq =$id_faq LIMIT 1";
-  $result = $this->db->query($query_get);
-  return $result->result_array();
-}
 
 function elimina_pre_img_faq($param){
 

@@ -9,10 +9,8 @@ class Intento_compra extends REST_Controller{
     function  index_POST(){
 
         $param      =  $this->post();
-        $response   =  [];
-
+        $response   =  false;
         if (if_ext($param , "tipo,recibo")) {
-
           $params  = [
             "id_recibo"     =>  $param["recibo"]  ,  
             "id_forma_pago" =>  $param["tipo"]
@@ -21,7 +19,5 @@ class Intento_compra extends REST_Controller{
           $response  =  $this->intento_compra_model->insert($params , 1 );  
         }
         $this->response($response);
-        
-    }      
-    
-}?>
+    }
+}

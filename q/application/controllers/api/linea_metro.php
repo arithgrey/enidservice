@@ -9,10 +9,10 @@ class Linea_metro extends REST_Controller{
     }
     function index_GET(){
 
-        $param      =  $this->get();
+        $param      =   $this->get();
+        $response   =   false;
 
         if (if_ext($param , "v,tipo")) {
-            
             $params     =  ["tipo" => $param["tipo"]];
             $response   =  $this->linea_metro_model->get([], $params , 100 );
             
@@ -25,4 +25,4 @@ class Linea_metro extends REST_Controller{
         $this->response($response);
     }
     
-}?>
+}
