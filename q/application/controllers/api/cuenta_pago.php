@@ -35,4 +35,4 @@ class cuenta_pago extends REST_Controller{
     }
 
 
-}?>
+}

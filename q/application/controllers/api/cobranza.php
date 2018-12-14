@@ -8,28 +8,23 @@ class Cobranza extends REST_Controller{
         $this->load->helper("cobranza");                        
         $this->load->library(lib_def());            
         $this->id_usuario = $this->principal->get_session("idusuario");
-    }     
-    /*Se cancela recordatorio de pago pendiente por email*/
-    function cancelar_envio_recordatorio_PUT(){
-        
-        $param  =  $this->put();
-        $response =  $this->cobranzamodel->cancelar_cobranza_email($param);
-        $this->response($response);        
     }
-    /**/
+    /*
     function resumen_compras_usuario_GET(){        
         
-        $param          = $this->get(); 
-        $data_complete  = [];
-
-        if($param["modalidad"] ==  1){
-            $data_complete =  $this->cobranzamodel->get_ventas_usuario($param);
-        }else{
-            $data_complete =  $this->cobranzamodel->get_compras_usuario($param);                  
-        }        
-        $data_complete["status_enid_service"] = $this->cobranzamodel->get_estatus_servicio_enid_service();        
-        $this->response($data_complete);
+        $param          = $this->get();
+        $response       = false;
+        if (if_ext($param, "modalidad")){
+            if($param["modalidad"] ==  1){
+                $response   =  $this->cobranzamodel->get_ventas_usuario($param);
+            }else{
+                $response =  $this->cobranzamodel->get_compras_usuario($param);
+            }
+            $response["status_enid_service"] = $this->cobranzamodel->get_estatus_servicio_enid_service();
+        }
+        $this->response($response);
     }
+    */
     /**/
     function calcula_costo_envio_GET(){        
         $param =  $this->get();                
@@ -46,19 +41,20 @@ class Cobranza extends REST_Controller{
         $costo["text_envio"]["cliente"] = $texto_cliente;
         return $costo;
     }        
-    /**/
+    /*
     function notifica_recordatorio_cobranza_PUT(){
 
         $param = $this->put();
         $info =  $this->cobranzamodel->notifica_email_enviado_recordatorio($param);
         $this->response($info);
     }
+    */
     /**/
     function get_pago($q){
         $api = "recibo/resumen_desglose_pago"; 
         return $this->principal->api( $api , $q , "html" );
     }        
-    /*Carga cuentas por */
+   /*
     function cuentas_por_cobrar_GET(){
 
         $recibos =  $this->cobranzamodel->get_usuarios_deuda_pendiente();        
@@ -78,11 +74,12 @@ class Cobranza extends REST_Controller{
             
         }
         $this->response($nueva_data);
-        /**/
+
     }
-    /**/
+    */
+    /*
     function resumen_proyecto_persona_GET(){
-        /**/
+
         $param =  $this->get();  
         $id_proyecto_persona = $param["id_proyecto_persona"]; 
         $data["info_proyecto"] =  $this->cobranzamodel->get_resumen_proyecto_persona($param);    
@@ -92,8 +89,7 @@ class Cobranza extends REST_Controller{
         $data["info_request"] =  $param;
         $this->load->view("cobranza/renovaciones" , $data);        
 
-    }
-    /**/
+    }*/
     /**/
     function valida_estado_pago_GET(){
 
@@ -101,7 +97,7 @@ class Cobranza extends REST_Controller{
         $id_proyecto_persona_forma_pago= $param["id_proyecto_persona_forma_pago"];  
         $this->response("<span class='blue_enid white'>" .$id_proyecto_persona_forma_pago ."</span>");
     }
-    /**/
+    /*
     function comentario_notificacion_pago_POST(){
         
         $param =  $this->post();    
@@ -109,6 +105,7 @@ class Cobranza extends REST_Controller{
         $response =  $this->cobranzamodel->registra_comentario_pago_notificado($param);
         $this->response($response);        
     }
+    */
     /**/
     function form_comentario_notificacion_pago_GET(){
         $this->load->view("pagos_notificados/comentarios_pago");
@@ -119,7 +116,7 @@ class Cobranza extends REST_Controller{
         $api =  "notificacion_pago/pago_resumen/format/json/";
         return $this->principal->api( $api , $q);
     }
-    /**/
+    /*
     function notificacion_pago_GET(){
 
         $param            =  $this->get();        
@@ -131,24 +128,25 @@ class Cobranza extends REST_Controller{
         $data_complete["ficha"] =  get_ficha_pago($info_notificados , $comentarios);        
         
         $data_complete["info_pago_notificado"] = $info_notificados;        
-        /**/
+
         $id_proyecto_persona_forma_pago =  $info_notificados[0]["num_recibo"];
-        /**/
+
         $id_servicio = $this->cobranzamodel->get_id_servicio_por_ppfp($id_proyecto_persona_forma_pago);
         $data_complete["id_servicio"] = $id_servicio;
-        /*Carga info pago pendiente*/
+
         $id_proyecto_persona=  
         $this->cobranzamodel->get_id_proyecto_servicio_por_ppfp($id_proyecto_persona_forma_pago);
         $data_complete["id_proyecto_persona"] = $id_proyecto_persona;
 
         $this->response($data_complete);        
     }
+    */
     function verifica_pago_notificado($q){
         
         $api =  "notificacion_pago/es_notificado/format/json/";
         return  $this->principal->api( $api ,$q);
     }
-    /**/
+    /*
     function info_saldo_pendiente_GET(){
 
         $param =  $this->get();      
@@ -163,17 +161,15 @@ class Cobranza extends REST_Controller{
         if (count($info_saldo_pendiente) > 0 ) {
             
             $id_proyecto_persona_forma_pago = $param["recibo"];
-            /**/
-            $data_complete["id_servicio"] 
-            = 
-            $this->cobranzamodel->get_id_servicio_por_ppfp($id_proyecto_persona_forma_pago);            
-            /**/
+
+            $data_complete["id_servicio"] = $this->cobranzamodel->get_id_servicio_por_ppfp($id_proyecto_persona_forma_pago);
             $param["id_recibo"] = $id_proyecto_persona_forma_pago;
             $data_complete["data_servicio"] = $this->carga_servicio_por_recibo($param);
         }        
         $this->response($data_complete);
         
     }
+    */
     /**/
     function carga_servicio_por_recibo($q){
         $api = "tickets/servicio_recibo/format/json/"; 
@@ -446,7 +442,7 @@ class Cobranza extends REST_Controller{
         }
     }
     /**/
-    function notifica_registro_usuario($param){       
+    function notifica_registro_usuario($q){
         $api = "emp/solicitud_usuario"; 
         return $this->principal->api($api , $q);  
     }    
@@ -507,7 +503,7 @@ class Cobranza extends REST_Controller{
         }
         return $nueva_data;
     }    
-    /**/    
+    /*
     function resumen_pendientes_persona_GET(){
         
         $param =  $this->get(); 
@@ -516,9 +512,9 @@ class Cobranza extends REST_Controller{
         $data["saldos_pendientes"] = 
         $this->cobranzamodel->get_saldos_pendientes_usuario($param);        
         $this->load->view("cobranza/principal_persona", $data);
-        
     }
-    /**/
+    */
+    /*
     function resumen_realizados_persona_GET(){        
         
         $param =  $this->get();                    
@@ -527,7 +523,7 @@ class Cobranza extends REST_Controller{
         $saldos =  $this->agrega_estatus_enid_service($saldos);        
         $data["saldos_pendientes"] = $saldos;
         $this->load->view("cobranza/principal_persona_realizados", $data);        
-    }   
+    }  */
     function agrega_estatus_enid_service($saldos){
         
         $nueva_data = [];
@@ -547,17 +543,18 @@ class Cobranza extends REST_Controller{
         $api = "servicio/nombre_estado_enid/format/json/";
         return $this->principal->api( $api ,  $q);
     } 
-    /**/
+    /*
     function resumen_num_pendientes_GET(){
 
         $param =  $this->get();  
-        /**/
+
         $param["id_usuario"] =  $this->id_usuario;
         $num_pendientes  = 
         $this->cobranzamodel->get_num_saldos_pendientes($param);        
         $this->response($num_pendientes);
     }
-    /**/
+*/
+    /*
      function resumen_num_pendientes_persona_GET(){
         $param              =  $this->get();                        
         $num_pendientes     = 
@@ -573,6 +570,7 @@ class Cobranza extends REST_Controller{
         
         $this->response($new_response);
     }
+    */
     /**/
     
     /**/
@@ -595,19 +593,22 @@ class Cobranza extends REST_Controller{
         $param =  $this->get();     
         $this->response(7);
     }
-    /**/
+    /*
     function recibo_por_pagar_GET(){
 
         $param = $this->get();
         $data_respose =  $this->cobranzamodel->valida_recibo_por_pagar($param);
         $this->response(crea_data_deuda_pendiente($data_respose) );
     }
+    */
+    /*
     function recibo_por_enviar_usuario_GET()
     {
         $param = $this->get();
         $data_respose =  $this->cobranzamodel->valida_recibo_por_enviar_usuario($param);
         $this->response(crea_data_deuda_pendiente($data_respose) );   
     }
+    */
     /*
     function ticket_pendiente_pago($param , $recibo , $data_complete){
 
@@ -639,13 +640,15 @@ class Cobranza extends REST_Controller{
                
     }
     */
-    /**/
+    /*
     function ganancias_fecha_GET(){
         
         $param =  $this->get();
         $num_ventas =  $this->cobranzamodel->get_ventas_dia($param);
         $this->response($num_ventas);
     }
+
+    */
     /*
     function solicitudes_fecha_GET(){
         

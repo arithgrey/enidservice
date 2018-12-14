@@ -17,14 +17,14 @@ class Home extends CI_Controller{
         if($servicio > 0 && ctype_digit($servicio)){
 
             $data["clasificaciones_departamentos"]  =   $this->principal->get_departamentos("");
-            $send["in_session"]             =   $this->principal->is_logged_in();
-            $send["id_servicio"]            =   $servicio;
-            $send["id_usuario"]             =   ($send["in_session"] == 1) ? $this->principal->get_session("idusuario") :  0;
-            $data["formulario_valoracion"]  =   $this->carga_formulario_valoracion($send);
-            $data["in_session"]             =   $this->principal->is_logged_in();
-            $data["id_servicio"]            =   $servicio;
-            $data["js"]                     =  ["pregunta/principal.js"];
-            $data["css"]                    =  ["producto.css" , "sugerencias.css" , "valoracion.css"];
+            $send["in_session"]                     =   $this->principal->is_logged_in();
+            $send["id_servicio"]                    =   $servicio;
+            $send["id_usuario"]                     =   ($send["in_session"] == 1) ? $this->principal->get_session("idusuario") :  0;
+            $data["formulario_valoracion"]          =   $this->carga_formulario_valoracion($send);
+            $data["in_session"]                     =   $this->principal->is_logged_in();
+            $data["id_servicio"]                    =   $servicio;
+            $data["js"]                             =   ["pregunta/principal.js"];
+            $data["css"]                            =   ["producto.css" , "sugerencias.css" , "valoracion.css"];
             $this->principal->show_data_page($data, 'home');
             
         

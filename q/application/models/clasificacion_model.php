@@ -81,9 +81,12 @@ class clasificacion_model extends CI_Model{
         return $this->get(["id_clasificacion","nombre_clasificacion" ],  ["padre"  => $padre] , 100);        
     }    
     function get_nombre_clasificacion_por_id_clasificacion($param){        
-        $response =  $this->q_get(["nombre_clasificacion"], $param["id_clasificacion"]);
-        return $response[0]["nombre_clasificacion"];
-
+        $response   =  $this->q_get(["nombre_clasificacion"], $param["id_clasificacion"]);
+        $nombre     =  "";
+        if (count($response)>0){
+            $nombre =  $response[0]["nombre_clasificacion"];
+        }
+        return $nombre;
     }    
     function get_clasificaciones_por_nivel($param){ 
         $params       = ["id_clasificacion","nombre_clasificacion", "flag_servicio"  ];
@@ -103,7 +106,7 @@ class clasificacion_model extends CI_Model{
         }
         return $nueva_data;
     }
-    
+
     function get_clasificaciones_por_id_clasificacion($param){
 
         $fields = ["id_clasificacion", "nombre_clasificacion"];

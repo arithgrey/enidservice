@@ -1,4 +1,4 @@
-$(document).ready(function () {
+if(get_option("in_session") == 0){$(document).ready(function () {
     set_option("flag_carga", 0);
 });
 var carga_opcion_entrega = function (id, id_servicio, orden_pedido) {

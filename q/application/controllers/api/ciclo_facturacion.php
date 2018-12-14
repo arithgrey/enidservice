@@ -17,12 +17,8 @@ class Ciclo_facturacion extends REST_Controller{
     */
     /**/
     function not_ciclo_facturacion_GET(){
-        $param  =  $this->get();                
-        $ciclos =  $this->facturacion_model->not_ciclo_facturacion($param);
-        $this->response($ciclos);
+        $param  =  $this->get();
+        $this->response($this->facturacion_model->not_ciclo_facturacion($param));
     }     
-    /**/
 
-
-   
-}?>
+}

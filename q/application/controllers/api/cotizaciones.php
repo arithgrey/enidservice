@@ -7,13 +7,14 @@ class cotizaciones extends REST_Controller{
         $this->load->model("contactosmodel");
         $this->load->library(lib_def());                      
     }
-    /**/
     function contactos_GET(){        
         
-        $param = $this->get();        
-        $data["contactos"] = $this->contactosmodel->get_contactos($param);
-        $this->load->view("cotizador/contactos_dia" , $data);
-        
-    }    
-    /**/ 
-}?>
+        $param = $this->get();
+        if (if_ext($param, "fecha_inicio,fecha_termino")){
+            $data["contactos"] = $this->contactosmodel->get_contactos($param);
+            $this->load->view("cotizador/contactos_dia" , $data);
+        }else{
+            $this->response(false);
+        }
+    }
+}

@@ -42,10 +42,11 @@ class Home extends CI_Controller{
             "domicilio/direccion_pedido_registrado.js" ,
             "js/direccion.js"
         ];
-        $data["css"]                =   ["procesar_pago.css"];
-        $param["id_recibo"]         =   $param["recibo"];
-        $param["id_usuario"]        =   $this->principal->get_session("idusuario");
-        $data["carga_ficha_direccion_envio"] = $this->carga_ficha_direccion_envio($param);
+
+        $data["css"]                            =   ["procesar_pago.css"];
+        $param["id_recibo"]                     =   $param["recibo"];
+        $param["id_usuario"]                    =   $this->principal->get_session("idusuario");
+        $data["carga_ficha_direccion_envio"]    =   $this->carga_ficha_direccion_envio($param);
         $this->principal->show_data_page($data, 'secciones_2/domicilio_entrega');                          
     }
     /**/
@@ -99,4 +100,4 @@ class Home extends CI_Controller{
         $api                    =   "usuario_direccion/direccion_envio_pedido"; 
         return $this->principal->api( $api , $q , "html");  
     }
-}?>
+}

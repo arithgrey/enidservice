@@ -6,13 +6,15 @@ class categoria extends REST_Controller{
         $this->load->model("categoria_model");
         $this->load->library(lib_def());                      
     }
-    /**/
     function categorias_por_tipo_GET(){
 
       $param    =   $this->get();
-      $response =  $this->categoria_model->get_categorias_por_tipo($param["tipo"]); 
+      $response =   [];
+      if (if_ext($param , "tipo")){
+          $tipo =  $param["tipo"];
+          $response =  $this->categoria_model->get_categorias_por_tipo($tipo);
+      }
       $this->response($response);
-      
   	}
     function id_GET(){
 
@@ -27,4 +29,4 @@ class categoria extends REST_Controller{
 
     }
 
-}?>
+}

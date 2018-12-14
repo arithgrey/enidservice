@@ -237,7 +237,27 @@
         return $data_complete;
 
     }
-    
+    function get_tareas_pendientes_usuario($param){
+
+          $id_usuario       =   $param["id_usuario"];
+          $id_departamento  =   $param["id_departamento"];
+
+          $query_get ="SELECT 
+                        count(0)num_tareas_pendientes 
+                    FROM tarea t 
+                    INNER JOIN 
+                    ticket ti
+                    ON t.id_ticket =  
+                    ti.id_ticket
+                    WHERE 
+                    t.status = 0
+                    and 
+                    ti.id_departamento = '".$id_departamento."' ";
+
+          $result =  $this->db->query($query_get);
+          return $result->result_array()[0]["num_tareas_pendientes"];
+
+    }
     /*
 
     
@@ -252,27 +272,7 @@
     
     
     
-    function get_tareas_pendientes_usuario($param){
 
-      $id_usuario = $param["id_usuario"];
-      $id_departamento =  $param["id_departamento"];
-
-        $query_get ="SELECT 
-                        count(0)num_tareas_pendientes 
-                    FROM tarea t 
-                    INNER JOIN 
-                    ticket ti
-                    ON t.id_ticket =  
-                    ti.id_ticket
-                    WHERE 
-                    t.status = 0
-                    and 
-                    ti.id_departamento = '".$id_departamento."' ";
-
-        $result =  $this->db->query($query_get);
-        return $result->result_array()[0]["num_tareas_pendientes"];
-
-    }
     */
     
 }

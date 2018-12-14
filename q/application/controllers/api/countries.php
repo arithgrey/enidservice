@@ -8,9 +8,13 @@ class countries extends REST_Controller{
     } 
     function pais_GET(){
 
-        $param      =  $this->get();                
-        $response   =  $this->countries_model->get([] , ["idCountry" => $id_pais]);
+        $param      =   $this->get();
+        $response   =   false;
+        if (if_ext($param, "id")){
+            $id =   $param["id"];
+            $response   =  $this->countries_model->get([] , ["idCountry" => $id ]);
+        }
         $this->response($response);
     }     
    
-}?>
+}

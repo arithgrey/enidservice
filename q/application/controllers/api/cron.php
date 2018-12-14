@@ -8,11 +8,9 @@ class Cron extends REST_Controller{
     }    
     /**/
     function encuesta_evaluacion_servicios_GET(){
-        
 
-        $lista =  $this->get_usuarios_activos_perfil();
-        
         /*
+        $lista =  $this->get_usuarios_activos_perfil();
         $q = array('q' =>  1 );        
         $api      = "cron/evaluacion_servicios";
         $response = $this->principal->api( $api , $q  );
@@ -33,19 +31,19 @@ class Cron extends REST_Controller{
         */
         //$this->response($lista);
     }
-    /**/
+    /*
     private function get_usuarios_activos_perfil(){
 
         $param["id_perfil"]     =  20;
         $api                    =  "usuario/usuarios_perfil/format/json/";
         return  $this->principal->api( $api , $param);
     }
+    */
     private function get_usuarios_sin_publicar_articulos($q){
         $param["id_perfil"]     =  20;
         $api                    =  "usuario/sin_publicar_articulos/format/json/";
         return  $this->principal->api( $api , $param);
     }
-    /**/
     function recordatorio_publicaciones_GET(){
 
         $param          = $this->get();
@@ -70,31 +68,25 @@ class Cron extends REST_Controller{
         }
         $this->response($a);        
     }
-    /**/
     private function get_mensaje_recordatorio_publicacion($param){
         $api =  "cron/recordatorio_publicar_articulos"; 
         $this->principal->api( $api , $param );
     }
-    /**/
     function recordatorio_publicar_articulos_GET(){        
         $param =  $this->get();
         $this->load->view("mensaje/recordar_publicaciones" ,$param);
     }
-    /**/
     function base_promocion_GET(){
         $this->load->view("mensaje/mensaje_promocion");
     }
-    /**/
     function evaluacion_servicios_GET(){
         $this->load->view("mensaje/mensaje_evaluacion_servicios");
     }
-    /**/
     function notificacion_ganancias_afiliado_GET(){
         $param =  $this->get();
         $data["info_usuario"] =  $param;
         $this->load->view("mensaje/ganancias_afiliado" , $data);
     }
-    /**/
     function cancelacion_venta_GET(){
 
         $param["info"] =  $this->get();        
@@ -104,4 +96,4 @@ class Cron extends REST_Controller{
         $param =  $this->get();                
         $this->load->view("mensaje/ticket_soporte" , $param);  
     }
-}?>
+}

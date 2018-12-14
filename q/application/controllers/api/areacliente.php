@@ -10,15 +10,18 @@ class Areacliente extends REST_Controller{
     function pago_pendiente_web_GET(){
 
         
-        $param                  = $this->get();        
-        $cuerpo_correo          = $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);        
-        //debug($cuerpo_correo ,1);
+        $param                  =   $this->get();
+        $response               =   false;
+        if (if_ext($param , "id_recibo, email")){
+            $cuerpo_correo          =   $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);
+            $param["info_correo"]   =   $cuerpo_correo;
+            $param["asunto"]        =   "Notificacion de compra o renovación pendiente";
+            $correo_dirigido_a      =   $param["email"];
+            $this->mensajeria_lead->notificacion_email($param , $correo_dirigido_a);
+            $response               =  $cuerpo_correo;
 
-        $param["info_correo"]   =   $cuerpo_correo;
-        $param["asunto"]        =   "Notificacion de compra o renovación pendiente";
-        $correo_dirigido_a      =   $param["email"];            
-        $this->mensajeria_lead->notificacion_email($param , $correo_dirigido_a);
-        $this->response($cuerpo_correo);
+        }
+        $this->response($response);
         
     }    
     function carga_pago_pendiente_por_recibo($id_recibo){
@@ -42,12 +45,13 @@ class Areacliente extends REST_Controller{
     
 
     */
+    /*
     function reporte_direccion_GET(){
 
-        $param = $this->get();        
-        $db_respose = $this->areaclientemodel->get_fechas_7();         
-        $result =  $db_respose[0]; 
-        $hoy =  $result["hoy"];
+        $param          = $this->get();
+        $db_respose     = $this->areaclientemodel->get_fechas_7();
+        $result         =  $db_respose[0];
+        $hoy            =  $result["hoy"];
         $menos_7 =  $result["menos_7"];
         
         $q = [
@@ -68,14 +72,14 @@ class Areacliente extends REST_Controller{
         $this->response($response);
             
     }
+    */
     /**/
-    
+
     function enviar_POST(){
 
         $param      =  $this->post();  
         $response   = 2;
         if (if_ext($param , "mensaje,asunto,lista_correo_dirigido_a")) {
-            
 
             $mensaje    =   $param["mensaje"]; 
             $asunto     =   $param["asunto"];
@@ -92,4 +96,4 @@ class Areacliente extends REST_Controller{
         $this->response($response);        
     }
 
-}?>
+}

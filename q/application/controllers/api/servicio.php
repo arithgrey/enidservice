@@ -239,15 +239,20 @@ class Servicio extends REST_Controller{
   */ 
   /**/
   function tallas_GET(){    
-    $param            =  $this->get();      
-    $params           = [ "primer_nivel",
-                          "segundo_nivel",
-                          "tercer_nivel",
-                          "cuarto_nivel", 
-                          "quinto_nivel" , 
-                          "id_servicio",
-                          "talla"];                
-    $this->response($this->serviciosmodel->q_get($params , $param["id_servicio"]));
+    $param            =  $this->get();
+    $response         = false;
+    if (if_ext($param, "id_servicio")){
+        $params           = [ "primer_nivel",
+            "segundo_nivel",
+            "tercer_nivel",
+            "cuarto_nivel",
+            "quinto_nivel" ,
+            "id_servicio",
+            "talla"];
+        $response = $this->serviciosmodel->q_get($params , $param["id_servicio"]);
+
+    }
+    $this->response($response);
   }  
   function index_POST(){      
       
