@@ -26,7 +26,11 @@ class Archivo extends REST_Controller{
 
             $this->proceso_registro_imagen($param, $extensiones);
 
-        }        
+        } else if($_FILES['imagen']['error'] === 1 ){
+
+            $this->response("TAMAÑO DE LA IMAGEN MUY GRANDE, INTENTA CON OTRA");
+
+        }
     }
     private function proceso_registro_imagen($param , $extensiones){
 

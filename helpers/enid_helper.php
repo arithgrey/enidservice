@@ -1071,7 +1071,8 @@ function debug($msg, $array = 0)
     
     for ($a=0; $a < count($keys); $a++){           
       if (!array_key_exists(trim($keys[$a]), $param)  ||  strlen(trim($param[$keys[$a]])) < $num ){
-        $z  = 0;          
+        $z  = 0;
+        debug("NO se recibió el parametro->" .$keys[$a]);
       }
 
     }

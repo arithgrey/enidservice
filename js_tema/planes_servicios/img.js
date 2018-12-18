@@ -18,13 +18,16 @@ function response_cargar_form(data){
 /**/
 function upload_imgs_enid_pre(){    
 
-    debugger;
+    
     var i = 0, len = this.files.length , img, reader, file;        
     file = this.files[i];    
     reader = new FileReader();
     reader.onloadend = function(e){
         showonehideone(".guardar_img_enid" , ".imagen_img");
-        mostrar_img_upload(e.target.result , 'place_load_img');    
+        var im =e.target.result;
+        //redimensionar(im,1000,1000);
+        mostrar_img_upload(im , 'place_load_img');
+
         recorrepage(".guardar_img_enid");                
         $("#form_img_enid").submit(registra_img_servicio);            
     };
@@ -32,9 +35,27 @@ function upload_imgs_enid_pre(){
 }
 /**/
 function registra_img_servicio(e){
-
     e.preventDefault();
-    var formData    = new FormData(document.getElementById("form_img_enid"));        
+    //debugger;
+
+
+
+
+    var formData        = new FormData();
+    var q               = get_parameter(".q_imagen");
+    var q2              = get_parameter(".q2_imagen");
+    var dinamic_img     = get_parameter(".dinamic_img");
+
+
+    formData.append("imagen", $('input[type=file]')[0].files[0] );
+    formData.append("q", q);
+    formData.append("servicio", q2);
+    formData.append("dinamic_img", dinamic_img);
+
+
+
+
+
     var url         = "../q/index.php/api/archivo/imgs";
     $.ajax({
             url: url,
@@ -43,7 +64,7 @@ function registra_img_servicio(e){
             data: formData,
             cache: false,
             contentType: false,
-            processData: false , 
+            processData: false ,
             beforeSend : function(){
                 $(".guardar_img_enid").hide();
                 recorrepage(".carga_informacion_servicio");
@@ -54,8 +75,28 @@ function registra_img_servicio(e){
         show_error_enid(".place_load_img" , "Falla al actualizar al cargar la imagen" );   
         carga_informacion_servicio(1);
     });
-    $.removeData(formData);
-}        
+
+    //$.removeData(formData);
+
+}
+/*function redimensionar(im,maxWidth,maxHeight){
+    var i=new Image();
+    i.onload=function(){
+        var w=this.width,
+            h=this.height,
+            scale=Math.min(maxWidth/w,maxHeight/h),
+            canvas=document.createElement('canvas'),
+            ctx=canvas.getContext('2d');
+        canvas.width=w*scale;
+        canvas.height=h*scale;
+        ctx.drawImage(i,0,0,w*scale,h*scale);
+        $('redimensionada').innerHTML='<img src="'+canvas.toDataURL()+'">';
+        $('base64Redimensionada').innerHTML=canvas.toDataURL();
+
+    }
+    i.src=im;
+}
+*/
 /**/     
 var response_load_image = function(data){
 
@@ -79,4 +120,18 @@ var response_load_image = function(data){
     }
 
     
+}
+function preview(campo) {
+    // campo = document.getElementById('upload').value;
+    alert("Antes: "+campo);
+
+    ruta = 'file:///'+ campo;
+    ruta = escape(ruta);
+    ruta = ruta.replace(/%5C/g, "/");
+    ruta = ruta.replace(/%3A/g, ":");
+    alert("Despues: "+ruta);
+    imagen.src = ruta;
+    imagen.style.display = 'block';
+    imagen.style.width = "200px";
+    imagen.style.height = "150px";
 }

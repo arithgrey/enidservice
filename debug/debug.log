@@ -28450,3 +28450,46 @@ DEBUG - TYPE array 2018-12-12 01:19:37 --> Array
 
 DEBUG - TYPE string 2018-12-12 02:07:09 --> 
 DEBUG - TYPE string 2018-12-12 02:09:09 --> 
+DEBUG - TYPE array 2018-12-13 23:51:43 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 299
+    [id_usuario_venta] => 1
+    [id_servicio] => 249
+    [id_usuario] => 1
+    [es_usuario_nuevo] => 0
+    [text_direccion] => Dirección de Envio
+    [externo] => 1
+)
+
+DEBUG - TYPE array 2018-12-13 23:51:55 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 299
+)
+
+DEBUG - TYPE array 2018-12-13 23:51:57 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 299
+)
+
+DEBUG - TYPE array 2018-12-13 23:52:01 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 299
+)
+
+DEBUG - TYPE array 2018-12-13 23:53:15 --> Array
+(
+    [format] => json
+    [.json] => 
+    [id_recibo] => 299
+)
+
+DEBUG - TYPE string 2018-12-14 00:06:06 --> <div class="pagination"><li class="active"><span>1<span></span></span></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2">2</a></li><li><a href="?q=&amp;page=3" data-ci-pagination-page="3">3</a></li><li><a href="?q=&amp;page=4" data-ci-pagination-page="4">4</a></li><li><a href="?q=&amp;page=5" data-ci-pagination-page="5">5</a></li><li><a href="?q=&amp;page=6" data-ci-pagination-page="6">6</a></li><li><a href="?q=&amp;page=7" data-ci-pagination-page="7">7</a></li><li><a href="?q=&amp;page=8" data-ci-pagination-page="8">8</a></li><li><a href="?q=&amp;page=9" data-ci-pagination-page="9">9</a></li><li><a href="?q=&amp;page=10" data-ci-pagination-page="10">10</a></li><li><a href="?q=&amp;page=2" data-ci-pagination-page="2" rel="next"><span class="white">›</span></a></li></div>
+DEBUG - TYPE string 2018-12-14 01:11:36 --> NO se recibió el parametro->servicio

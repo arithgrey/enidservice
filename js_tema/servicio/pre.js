@@ -1,5 +1,5 @@
-if(get_option("in_session") == 0){$(document).ready(function () {
-    set_option("flag_carga", 0);
+$(document).ready(function(){   
+    set_option("flag_carga" , 0);
 });
 var carga_opcion_entrega = function (id, id_servicio, orden_pedido) {
 
@@ -47,8 +47,7 @@ var response_opcion_entrega = function (data) {
     }
 }
 var agrega_lista_deseos = function(){
-
-    debugger;
+    
     var servicio    =   get_parameter(".form_pre_pedido_contact  .servicio");
     var data_send   =   {servicio : servicio};
     var url         =   "../q/index.php/api/usuario_deseo/servicio/format/json/";

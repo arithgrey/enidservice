@@ -577,13 +577,18 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/q",
-		"/var/www/html/inicio/q/application",
-		"/var/www/html/inicio/q/application/views",
-		"/var/www/html/inicio/q/application/views/producto"
+		"/var/www/html/inicio/js_tema",
+		"/var/www/html/inicio/js_tema/alerts",
+		"/var/www/html/inicio/js_tema/area_cliente",
+		"/var/www/html/inicio/js_tema/planes_servicios"
 	],
 	"file_history":
 	[
+		"/var/www/html/inicio/js_tema/planes_servicios/img.js",
+		"/var/www/html/inicio/q/application/views/imgs/servicio_producto_servicio.php",
+		"/var/www/html/inicio/js_tema/servicio/pre.js",
+		"/var/www/html/inicio/js_tema/login/ini.js",
+		"/var/www/html/inicio/producto/application/js/principal.js",
 		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
 		"/var/www/html/inicio/q/application/views/producto/principal.php",
 		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
@@ -612,7 +617,6 @@
 		"/var/www/html/inicio/helpers/enid_helper.php",
 		"/var/www/html/inicio/producto/application/views/pre.php",
 		"/var/www/html/inicio/pedidos/application/views/seguimiento.php",
-		"/var/www/html/inicio/js_tema/servicio/pre.js",
 		"/var/www/html/inicio/procesar/application/views/secciones_2/domicilio_entrega.php",
 		"/var/www/html/inicio/procesar/application/controllers/home.php",
 		"/var/www/html/inicio/js_tema/js/direccion.js",
@@ -707,11 +711,7 @@
 		"/var/www/html/inicio/programacion/evaluacion_servicios_mensual.php",
 		"/var/www/html/inicio/q/application/models/usuario_punto_encuentro_model.php",
 		"/var/www/html/inicio/q/application/models/usuario_direccion_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario_direccion.php",
-		"/var/www/html/inicio/js_tema/pedidos/principal.js",
-		"/var/www/html/inicio/css_tema/template/pedido_domicilio.css",
-		"/var/www/html/inicio/js_tema/administracion_cuenta/privacidad_seguridad.js",
-		"/var/www/html/inicio/css_tema/template/main.css"
+		"/var/www/html/inicio/q/application/controllers/api/usuario_direccion.php"
 	],
 	"find":
 	{
@@ -722,6 +722,8 @@
 		"height": 116.0,
 		"where_history":
 		[
+			"*.js",
+			"*.php",
 			"",
 			"*.php",
 			"*.js",
@@ -847,9 +849,7 @@
 			"*.php",
 			"*.js",
 			"*.php",
-			"",
-			"*.js",
-			"*.php"
+			""
 		]
 	},
 	"find_state":
@@ -857,6 +857,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"guardar_img_enid",
+			"guardar_img_enid   a_enid_blue white completo btn_guardar",
+			"carga_opcion_entrega",
 			"width:50px!important;",
 			"width: 40px !important",
 			"this->table->add_row",
@@ -981,10 +984,7 @@
 			"create_pagination",
 			"config_paginacion",
 			"pagin",
-			"            ",
-			"pagin",
-			"paginacion",
-			"pagina_"
+			"            "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1078,6 +1078,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"producto.js",
+				"producto/application/js/principal.js"
+			],
 			[
 				"producto/principal",
 				"q/application/views/producto/principal.php"
@@ -1585,10 +1589,6 @@
 			[
 				"he",
 				"planes_servicios/application/views/home_enid.php"
-			],
-			[
-				"autolo",
-				"config/autoload.php"
 			]
 		],
 		"width": 0.0
