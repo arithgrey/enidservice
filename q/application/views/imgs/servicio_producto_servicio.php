@@ -12,7 +12,7 @@
         "class"     =>  "imagen_img" ,
         "name"      =>  "imagen",
         "enctype"   =>  "multipart/form-data",
-        "onchange"  =>  "preview(this.value)"
+        "size"      =>  "20"
     ])?>
 
     <?=input_hidden(["name" => 'q', "value"   => $q , "class"   =>    "q_imagen" ])?>
@@ -34,6 +34,7 @@
         
     )?>    
 </form>
+
 <div class="previsualizacion" id="previsualizacion"></div>
 
 

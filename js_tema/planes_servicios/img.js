@@ -1,5 +1,4 @@
-function carga_form_img(){	
-    /**/    
+function carga_form_img(){
     showonehideone( ".contenedor_agregar_imagenes" , ".contenedor_global_servicio");    
     display_elements([".titulo_articulos_venta" , ".guardar_img_enid"], 0);
 	var url        = "../q/index.php/api/img/form_img_servicio_producto/format/json/";
@@ -25,7 +24,6 @@ function upload_imgs_enid_pre(){
     reader.onloadend = function(e){
         showonehideone(".guardar_img_enid" , ".imagen_img");
         var im =e.target.result;
-        //redimensionar(im,1000,1000);
         mostrar_img_upload(im , 'place_load_img');
 
         recorrepage(".guardar_img_enid");                
@@ -36,11 +34,6 @@ function upload_imgs_enid_pre(){
 /**/
 function registra_img_servicio(e){
     e.preventDefault();
-    //debugger;
-
-
-
-
     var formData        = new FormData();
     var q               = get_parameter(".q_imagen");
     var q2              = get_parameter(".q2_imagen");
@@ -51,10 +44,6 @@ function registra_img_servicio(e){
     formData.append("q", q);
     formData.append("servicio", q2);
     formData.append("dinamic_img", dinamic_img);
-
-
-
-
 
     var url         = "../q/index.php/api/archivo/imgs";
     $.ajax({
@@ -76,62 +65,31 @@ function registra_img_servicio(e){
         carga_informacion_servicio(1);
     });
 
-    //$.removeData(formData);
+    $.removeData(formData);
 
 }
-/*function redimensionar(im,maxWidth,maxHeight){
-    var i=new Image();
-    i.onload=function(){
-        var w=this.width,
-            h=this.height,
-            scale=Math.min(maxWidth/w,maxHeight/h),
-            canvas=document.createElement('canvas'),
-            ctx=canvas.getContext('2d');
-        canvas.width=w*scale;
-        canvas.height=h*scale;
-        ctx.drawImage(i,0,0,w*scale,h*scale);
-        $('redimensionada').innerHTML='<img src="'+canvas.toDataURL()+'">';
-        $('base64Redimensionada').innerHTML=canvas.toDataURL();
-
-    }
-    i.src=im;
-}
-*/
-/**/     
 var response_load_image = function(data){
 
-    if(array_key_exists("session_exp", data)){        
-        /*Session exp*/
-        redirect("");
+    debugger;
+    var status = array_key_exists("status_imagen_servicio", data);
+    if(status ==  true){
+        data =1;
     }
-    if (data.status_imagen_servicio != true) {
+    switch(data) {
+        case 1:
+            show_response_ok_enid(".place_load_img" , "SE AGREGÓ LA IMAGEN!" );
+            carga_informacion_servicio(1);
+            set_option("seccion_a_recorrer", ".contenedor_global_servicio");
+            recorrepage(".carga_informacion_servicio");
 
+            break;
+        case 2:
 
-        llenaelementoHTML(".info_form" , "Intenta cargar otra imagen!" );                         
-        recorrepage(".info_form");
-        carga_form_img();
+            llenaelementoHTML(".place_load_img" , "AGREGA UNA IMAGEN MÁS PEQUEÑA" );
+            carga_form_img();
+            break;
+        default:
 
-    }else{
-        
-        show_response_ok_enid(".place_load_img" , "Imagen cargada con éxito" );                         
-        carga_informacion_servicio(1);        
-        set_option("seccion_a_recorrer", ".contenedor_global_servicio");
-        recorrepage(".carga_informacion_servicio");    
+            break;
     }
-
-    
-}
-function preview(campo) {
-    // campo = document.getElementById('upload').value;
-    alert("Antes: "+campo);
-
-    ruta = 'file:///'+ campo;
-    ruta = escape(ruta);
-    ruta = ruta.replace(/%5C/g, "/");
-    ruta = ruta.replace(/%3A/g, ":");
-    alert("Despues: "+ruta);
-    imagen.src = ruta;
-    imagen.style.display = 'block';
-    imagen.style.width = "200px";
-    imagen.style.height = "150px";
 }

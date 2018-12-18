@@ -560,5 +560,27 @@ if ( ! function_exists('html_escape'))
 		}
 	}
 }
+function &get_mimes()
+{
+    static $_mimes;
+
+    if (empty($_mimes))
+    {
+        if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/mimes.php'))
+        {
+            $_mimes = include(APPPATH.'config/'.ENVIRONMENT.'/mimes.php');
+        }
+        elseif (file_exists(APPPATH.'config/mimes.php'))
+        {
+            $_mimes = include(APPPATH.'config/mimes.php');
+        }
+        else
+        {
+            $_mimes = array();
+        }
+    }
+
+    return $_mimes;
+}
 /* End of file Common.php */
 /* Location: ./system/core/Common.php */

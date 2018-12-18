@@ -753,10 +753,16 @@ if ( ! function_exists('now_enid')){
   }
 }  
 if ( ! function_exists('porcentaje')){
-  function porcentaje($cantidad,$porciento,$decimales=2) {
-    if(is_numeric($cantidad) ==  is_numeric($porciento)) {      
-      $total = number_format($cantidad*$porciento/100 ,$decimales);      
-      return $total;
+  function porcentaje($cantidad,$porciento,$decimales=2 , $numeric_format = 1) {
+    if(is_numeric($cantidad) ==  is_numeric($porciento)) {
+        if($numeric_format ==  1){
+            $total = number_format($cantidad*$porciento/100 ,$decimales);
+            return $total;
+        }else{
+            $total = $cantidad*$porciento/100;
+            return $total;
+        }
+
     }
   }
 }
