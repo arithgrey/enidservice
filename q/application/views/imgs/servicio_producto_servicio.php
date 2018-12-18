@@ -8,21 +8,19 @@
 ] )?>
     <?=input([
         "type"      =>  "file" ,
-        "id"        =>  'imagen_img' ,
-        "class"     =>  'imagen_img' ,
+        "id"        =>  "imagen_img" ,
+        "class"     =>  "imagen_img" ,
         "name"      =>  "imagen",
-        "enctype"   =>  "multipart/form-data"
+        "enctype"   =>  "multipart/form-data",
+        "size"      =>  "20"
     ])?>
-    <?=input_hidden(["name" => 'q', "value"   => $q])?>
-    <?=input_hidden(["name" => $q2, "value"   => $q3])?>
+
+    <?=input_hidden(["name" => 'q', "value"   => $q , "class"   =>    "q_imagen" ])?>
+    <?=input_hidden(["name" => $q2, "value"   => $q3 , "class"   =>   "q2_imagen" ])?>
     <?=input_hidden(["class"=>'dinamic_img', "id"=>'dinamic_img' ,"name"=>'dinamic_img' ])?>
 
     <?=place("separate-enid")?>
     <?=place("place_load_img" , ["id"   =>  'place_load_img'] )?>
-
-
-
-   
 
     <?=place("separate-enid")?>
     <?=guardar(
@@ -36,6 +34,8 @@
         
     )?>    
 </form>
+
+<div class="previsualizacion" id="previsualizacion"></div>
 
 
  

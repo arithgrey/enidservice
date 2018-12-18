@@ -26,7 +26,14 @@
 						<?=div(heading_enid("POR MENSAJERÍA",3) ,  ["class"=>"title"])?>
 						<?=div(span("QUE LLEGUE A TU CASA U OFICINA") , ["class" => "text"])?>
 					 </div>
-				</div>	 
+				</div>
+                <div class="<?=$class_contenedor?>" onclick="carga_opcion_entrega(1, <?=$id_servicio?> , <?=$orden_pedido?>);">
+                    <div class="box-part text-center">
+                        <?=icon('fa fa-space-shuttle fa-3x')?>
+                        <?=div(heading_enid("ENCONTRÉMONOS",3) ,  ["class"=>"title"])?>
+                        <?=div(span("ACORDEMOS UN PUNTO MEDIO") , ["class" => "text"])?>
+                    </div>
+                </div>
 				<?php if($orden_pedido == 1):?>
 					<div class="<?=$class_contenedor?>" onclick="carga_opcion_entrega(3 , <?=$id_servicio?> , <?=$orden_pedido?>);">               
 						<div class="box-part text-center">                       
@@ -36,13 +43,7 @@
 						 </div>
 					</div>	 
 				<?php endif;?>
-				<div class="<?=$class_contenedor?>" onclick="carga_opcion_entrega(1, <?=$id_servicio?> , <?=$orden_pedido?>);">
-					<div class="box-part text-center">                       
-                        <?=icon('fa fa-space-shuttle fa-3x')?>  
-						<?=div(heading_enid("ENCONTRÉMONOS",3) ,  ["class"=>"title"])?>
-						<?=div(span("ACORDEMOS UN PUNTO MEDIO") , ["class" => "text"])?>
-					 </div>
-				</div>	 						
+
 			</div>
 		</div>		
     </div>

@@ -36,7 +36,7 @@
                                     		"src" 	    =>  link_imagen_servicio($id_servicio) ,
                                     		"class"	    =>	"rounded-circle",
                                     		"id"        =>  $id_error,
-                                    		"onerror"   =>  "reloload_img( '".$id_error."','".link_imagen_servicio($id_servicio)$url_img."');",
+                                    		"onerror"   =>  "reloload_img( '".$id_error."','".link_imagen_servicio($id_servicio)."');",
                                     		"style"	    =>	"width:50px!important;height:50px!important;"
 
                                     ]),
