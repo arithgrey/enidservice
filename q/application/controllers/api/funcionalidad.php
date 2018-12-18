@@ -10,29 +10,30 @@ class funcionalidad extends REST_Controller{
     }
     function add_usuario_PUT(){
 
-        $param         =  $this->put();
-        $funcionalidades =  $this->funcionalidad_model->get([], [] , 100);        
-        $response = 
-        $this->funcionalidad_model->add_conceptos($funcionalidades , $param["id_usuario"]);
+        $param              =   $this->put();
+        $response           =   false;
+        if(if_ext($param , "id_usuario")){
+            $funcionalidades    =   $this->funcionalidad_model->get([], [] , 100);
+            $response           =   $this->add_conceptos($funcionalidades , $param["id_usuario"]);
+        }
         $this->response($response);
     }
     function usuario_GET(){
         
-        $param                =  $this->get();    
+        $param                =  $this->get();
         $funcionalidad        =  $this->funcionalidad_model->get([], [] , 100);        
         $data["conceptos"]= $this->add_conceptos($funcionalidad , $this->id_usuario);
         $this->load->view("privacidad/conceptos" , $data);
     }  
     function add_conceptos($funcionalidades , $id_usuario){
 
-        $data_complete =[];
+        $data_complete          =   [];
         $a =0;
         foreach($funcionalidades as $row){
 
-            $data_complete[$a] =  $row;
-            $id_funcionalidad =  $row["id_funcionalidad"];
-            $data_complete[$a]["conceptos"] =  
-            $this->get_conceptos_por_funcionalidad_usuario($id_funcionalidad , $id_usuario);
+            $data_complete[$a]  =  $row;
+            $id_funcionalidad   =  $row["id_funcionalidad"];
+            $data_complete[$a]["conceptos"] = $this->get_conceptos_por_funcionalidad_usuario($id_funcionalidad , $id_usuario);
             $a ++;
         }
         return $data_complete;
@@ -45,4 +46,4 @@ class funcionalidad extends REST_Controller{
         return $this->principal->api( $api , $q);
     }    
 
-}?>
+}

@@ -8,7 +8,7 @@ class Paginacion extends REST_Controller{
     function create_GET(){
 
         $param              =   $this->get();                  
-        $response           =   [];
+        $response           =   false;
         if (if_ext($param , "totales_elementos,per_page,q")) {
 
             $totales_elementos  =   $param["totales_elementos"];
@@ -56,12 +56,11 @@ class Paginacion extends REST_Controller{
             $config['enable_query_strings'] = TRUE;                
             $config['query_string_segment'] = 'page';
             
-            $this->pagination->initialize($config);        
-
+            $this->pagination->initialize($config);
             $response  =   $this->pagination->create_links();              
 
         }
         $this->response($response);
         
     }
-}?>
+}

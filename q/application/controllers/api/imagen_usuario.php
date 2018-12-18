@@ -7,23 +7,27 @@ class Imagen_usuario extends REST_Controller{
         $this->load->library(lib_def());                    
     } 
     function usuario_GET(){
-      $param      =  $this->get();
-      $response   =  $this->imagen_usuario_model->get_img_usuario($param["id_usuario"]);
+      $param        =  $this->get();
+      $response     =  false;
+      if (if_ext($param, "id_usuario")){
+          $response   =  $this->imagen_usuario_model->get_img_usuario($param["id_usuario"]);
+      }
       $this->response($response);   
   	}
-    /**/    
     function index_POST(){
 
       $param      =   $this->post();           
-      $response   =   false;      
-      if ($this->delete_usuario($param) ==  1) {
+      $response   =   false;
+      if (if_ext($param , "id_imagen,id_usuario")){
+          if ($this->delete_usuario($param) ==  1) {
 
-          $params     = [
-            "id_imagen" => $param["id_imagen"],
-            "idusuario" => $param["id_usuario"]
-          ];          
-          $response   =   $this->imagen_usuario_model->insert($params);        
-      }      
+              $params     = [
+                  "id_imagen" => $param["id_imagen"],
+                  "idusuario" => $param["id_usuario"]
+              ];
+              $response   =   $this->imagen_usuario_model->insert($params);
+          }
+      }
       $this->response($response);
     }
     private function delete_usuario($param){
@@ -34,9 +38,7 @@ class Imagen_usuario extends REST_Controller{
       foreach ($imagenes as $row){
 
         $this->imagen_usuario_model->delete($in , 10);
-        $response = $this->delete_imagen($row["id_imagen"]);
-        //debug($response);
-
+        $this->delete_imagen($row["id_imagen"]);
       }
       return 1;
     }    
@@ -49,8 +51,11 @@ class Imagen_usuario extends REST_Controller{
     function img_perfil_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->imagen_usuario_model->img_perfil($param);
+        $response   =   false;
+        if (if_ext($param,"fecha_inicio,fecha_termino")){
+            $response   =   $this->imagen_usuario_model->img_perfil($param);
+        }
         $this->response($response);        
     }   
 
-}?>
+}

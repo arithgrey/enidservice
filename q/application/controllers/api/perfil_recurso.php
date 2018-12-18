@@ -9,19 +9,19 @@ class perfil_recurso extends REST_Controller{
     function permiso_PUT(){
         
         $param      = $this->put();
-        $params =  [
-              "idrecurso" => $param["id_recurso"] , 
-              "idperfil"  => $param["id_perfil"]
-        ];
-        $num        = $this->perfil_recurso_model->get_num($param);          
-        if ($num > 0){
-
-            $this->response($this->perfil_recurso_model->delete($params , 10));
-
-        }else{
-            $this->response($this->perfil_recurso_model->insert($params ));
+        $response   = false;
+        if(if_ext($param , "id_recurso,id_perfil")){
+            $params =  [
+                "idrecurso" => $param["id_recurso"] ,
+                "idperfil"  => $param["id_perfil"]
+            ];
+            $num        = $this->perfil_recurso_model->get_num($param);
+            if ($num > 0){
+                $response = $this->perfil_recurso_model->delete($params , 10);
+            }else{
+                $response = $this->perfil_recurso_model->insert($params );
+            }
         }
-
-        
+        $this->response($response);
     }
-}?>
+}

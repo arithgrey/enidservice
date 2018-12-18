@@ -11,7 +11,6 @@ class desarrollo extends REST_Controller{
 
         $param      = $this->get();
         $response   =  false;
-
         if (if_ext($param, "id_departamento,id_usuario")){
             $num_tareas_pendientes  = $this->desarrollomodel->get_tareas_pendientes_usuario($param);
 

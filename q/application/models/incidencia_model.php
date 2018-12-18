@@ -4,17 +4,6 @@
         parent::__construct();        
         $this->load->database();
     }
-    function reporta_error($param){
-		$descripcion =  (array_key_exists("descripcion", $param )) ? $param["descripcion"]:"Error desde js";		      
-	    $params = [ 
-	      "descripcion_incidencia"  => $descripcion
-	      "idtipo_incidencia"       =>  4 
-	      "idcalificacion"          =>  1
-	      "id_user"                 =>  1
-	    ];
-	    return $this->insert($params);
-	    
-	}
 	function get($params=[], $params_where =[] , $limit =1, $order = '', $type_order='DESC'){
         
         $params = implode(",", $params);
