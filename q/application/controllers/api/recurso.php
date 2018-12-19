@@ -8,7 +8,7 @@ class recurso extends REST_Controller{
     }
     function index_POST(){
 
-        $param      =  $this->post();
+        $param      =   $this->post();
         $response   =   false;        
         if(if_ext($param , "nombre,urlpaginaweb")){
             $params = [ 
@@ -23,16 +23,21 @@ class recurso extends REST_Controller{
         $this->response($response);
     }
     function navegacion_GET(){                
-        $param    = $this->get();        
-        $response = $this->recurso_model->recursos_perfiles($param);                
+        $param      =   $this->get();
+        $response   =   false;
+        if(if_ext($param , "id_perfil")){
+            $response = $this->recurso_model->recursos_perfiles($param);
+        }
         $this->response($response);
     }
-    
-    function mapa_perfiles_permisos_GET(){        
-        $param            = $this->get();        
-        $data["recursos"] = $this->recurso_model->get_perfiles_permisos($param);              
-        $this->load->view("equipo/tabla_recursos" , $data);
-    }   
+    function mapa_perfiles_permisos_GET(){
 
-    
-}?>
+        $param              =   $this->get();
+        $response           =   false;
+        if(if_ext($param , "id_perfil")) {
+            $data["recursos"] = $this->recurso_model->get_perfiles_permisos($param);
+            $this->load->view("equipo/tabla_recursos" , $data);
+        }
+        $this->response($response);
+    }
+}

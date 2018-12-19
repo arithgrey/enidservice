@@ -1,6 +1,41 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-if(!function_exists('invierte_date_time')){	
-	function get_estado_publicacion($status , $id_servicio){
+if(!function_exists('invierte_date_time')){
+
+    function get_config_categorias($data , $param){
+
+        $nivel=  "nivel_".$data["nivel"];
+        $config  = array(
+            'class' => 'num_clasificacion '.$nivel.' selector_categoria ' ,
+            'size'  =>'20' );
+
+        if ($param["is_mobile"] ==  1) {
+
+            $config  = array(
+                'class'   => 'num_clasificacion '.$nivel.' 
+                          num_clasificacion_phone selector_categoria '
+            );
+        }
+
+        $info_categorias =  $data["info_categorias"];
+        $select  =  select_enid($info_categorias ,
+            "nombre_clasificacion" ,
+            "id_clasificacion" ,
+            $config);
+        return $select;
+
+    }
+    function get_add_categorias($data , $param){
+
+        $data["padre"] = $param["padre"];
+        $select =  div(
+            "AGREGAR NUEVO" .icon('fa fa-angle-double-right')  ,
+            ["class"  =>  "a_enid_black nueva_categoria_producto top_20",
+                "id"      =>  $data["padre"]
+            ],
+            1);
+        return $select;
+    }
+    function get_estado_publicacion($status , $id_servicio){
 
 		$text = ($status ==  1) ?  "PAUSAR PUBLICACIÓN": "ACTIVAR PUBLICACIÓN";
 		$btn =  

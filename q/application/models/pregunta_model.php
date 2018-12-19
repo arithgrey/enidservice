@@ -59,7 +59,7 @@
       return $result->result_array();
     }
     function get_respuestas_sin_leer($param){
-      
+      $id_usuario =  $param["id_usuario"];
       $q = ["id_usuario"    =>  $id_usuario ,"leido_cliente" => 0 ];
       return  $this->get(["COUNT(0)num"] , $q )[0]["num"];
     } 
@@ -243,4 +243,5 @@
     function update_gamificacion_pregunta($param){    
       return $this->q_up('gamificacion' , 1 , $param["id_pregunta"] );
     }
+
 }

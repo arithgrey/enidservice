@@ -5,14 +5,12 @@ class Perfiles extends REST_Controller{
       parent::__construct();                                             
       $this->load->model("perfil_model");        
       $this->load->library(lib_def());  
-  } 
-  
+  }
   function get_GET(){
 
     $response =  $this->perfil_model->get( [], [] , 50);
     $this->response($response);
-  }  
-  /**/
+  }
   function  id_departamento_by_id_perfil_GET(){
 
     $param      = $this->get();

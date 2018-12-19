@@ -8,13 +8,10 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller{
     }
     function index_POST(){
 
-      
       $param    =  $this->post();
-
       $response = false;
       if (if_ext($param , "id_recibo,punto_encuentro")) {
 
-        
         $in     = ["id_proyecto_persona_forma_pago" =>   $param["id_recibo"] ];            
         if ($this->proyecto_persona_forma_pago_punto_encuentro_model->delete($in , 10)) {
 
@@ -26,33 +23,28 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller{
             $response = 
             $this->proyecto_persona_forma_pago_punto_encuentro_model->insert($params);    
         }
-
-        
       }
       $this->response($response);
     }
-    /**/
     function punto_encuentro_recibo_GET(){
 
       $param    =  $this->get();
       $response = false;
 
       if (if_ext($param , "id_recibo")) {
-
-        $response = $this->get_id_proyecto_persona_forma_pago($param["id_recibo"]);        
-
+        $response = $this->get_id_proyecto_persona_forma_pago($param["id_recibo"]);
       }
       $this->response($response);
     }
     
     function complete_GET(){
 
-      $param    =  $this->get();
-      $response = false;
+      $param    =   $this->get();
+      $response =   false;
 
       if (if_ext($param , "id_recibo")) {
         
-        $punto_encuentro = $this->get_id_proyecto_persona_forma_pago($param["id_recibo"]);        
+        $punto_encuentro          = $this->get_id_proyecto_persona_forma_pago($param["id_recibo"]);
         if (count($punto_encuentro) > 0 && $punto_encuentro[0]["id_punto_encuentro"]) {
             
             $id_punto_encuentro   =  $punto_encuentro[0]["id_punto_encuentro"];
@@ -73,4 +65,4 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller{
         return  $this->proyecto_persona_forma_pago_punto_encuentro_model->get(["id_punto_encuentro"], $in );
     }
 
-}?>
+}

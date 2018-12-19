@@ -3,7 +3,8 @@
     function __construct(){      
         parent::__construct();        
         $this->load->database();
-    }   
+    }
+    /*
     private function get( $params=[], $params_where =[] , $limit =1, $order = '', $type_order='DESC'){
         $params = implode(",", $params);
         $this->db->limit($limit);
@@ -16,5 +17,6 @@
         }
         return $this->db->get($table)->result_array();
     }
+    */
     
 }

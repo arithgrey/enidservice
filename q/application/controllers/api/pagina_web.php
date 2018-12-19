@@ -34,37 +34,16 @@ class Pagina_web extends REST_Controller{
         $param      = $this->get();        
         $response   = false;
         if (if_ext($param , "fecha_inicio,fecha_termino")) {
-            
-            $f_inicio = $param["fecha_inicio"];
-            $f_termino = $param["fecha_termino"];
-            
-            $response["mobile"]
-            =  
-            $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "mobile"); 
-            
-            
-            
-            $response["is_browser"]
-            =  
-            $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "is_browser");
 
-            $response["is_mobile"]
-            =  
-            $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "is_mobile"); 
-
-
-            $response["url"]
-            =  
-            $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "url"); 
-
-
-            $response["platform"]
-            =  
-            $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "platform"); 
+            $f_inicio       =   $param["fecha_inicio"];
+            $f_termino      =   $param["fecha_termino"];
             
-
-            $response["url_referencia"]
-            = $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "url_referencia");
+            $response["mobile"]         = $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "mobile");
+            $response["is_browser"]     = $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "is_browser");
+            $response["is_mobile"]      = $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "is_mobile");
+            $response["url"]            = $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "url");
+            $response["platform"]       = $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "platform");
+            $response["url_referencia"] = $this->pagina_web_model->get_num_field($f_inicio , $f_termino, "url_referencia");
 
             if ($param["v"] ==  1) {
                 $response   = $this->genera_reporte($response);
@@ -75,11 +54,10 @@ class Pagina_web extends REST_Controller{
    	
    	private function genera_reporte($param){
 
-
    		$search =  ["mobile","is_browser","is_mobile","url","platform","url_referencia"];
    		$titulo =  ["Movile","Es browser","Es mobile","url","plataforma","URL Referencia"];
-   		
    		$l 		=  "";
+
    		for ($a=0; $a < count($search); $a++) { 
    			
    			$this->table->set_heading( '#' , $titulo[$a] );
@@ -89,5 +67,6 @@ class Pagina_web extends REST_Controller{
 
    		}
    		return $l;
+
    	}
 }

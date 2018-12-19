@@ -704,7 +704,7 @@
         return $this->get( $params , ["id_servicio" => $id_servicio]);
 
     }
-    function  get_clasificaciones_destacadas($param){
+    function  get_clasificaciones_destacadas(){
         
         $query_get ="SELECT primer_nivel, count(0)total
                     FROM servicio 

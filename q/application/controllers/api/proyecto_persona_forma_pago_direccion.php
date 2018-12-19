@@ -8,16 +8,17 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller{
     }    
     function index_DELETE(){
     	
-    	$param 		=  $this->delete();   
-    	$response 	= 
-    	$this->proyecto_persona_forma_pago_direccion_model->delete_por_id_recibo($param["id_recibo"]);
+    	$param 		=   $this->delete();
+    	$response   =   false;
+    	if (if_ext($param , "id_recibo")){
+            $response 	=   $this->proyecto_persona_forma_pago_direccion_model->delete_por_id_recibo($param["id_recibo"]);
+        }
     	$this->response($response);    
     }
     function recibo_GET(){
 
         $param      =   $this->get();
-        $response   = false;
-        debug($param ,1);
+        $response   =   false;
         if (if_ext($param , 'id_recibo')) {
 
             $response   =  
@@ -43,10 +44,9 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller{
                 $this->proyecto_persona_forma_pago_direccion_model->delete_por_id_recibo($param["id_recibo"]);
             }
             /*Agrego la nueva dirección*/
-            $response =  
-            $this->proyecto_persona_forma_pago_direccion_model->insert($params);    
+            $response = $this->proyecto_persona_forma_pago_direccion_model->insert($params);
         }
         $this->response($response);
     }
 
-}?>
+}

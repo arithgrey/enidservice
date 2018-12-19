@@ -12,11 +12,10 @@ class Punto_encuentro extends REST_Controller{
 
         $param      =  $this->get();
         $response   = [];
-        
         if (if_ext($param , "id")) {
         
-            $params_where = ["id_tipo_punto_encuentro" =>  $param["id"]];
-            $response = $this->punto_encuentro_model->get([], $params_where , 100);         
+            $params_where   = ["id_tipo_punto_encuentro" =>  $param["id"]];
+            $response       = $this->punto_encuentro_model->get([], $params_where , 100);
         }
         $this->response($response);
     }
@@ -49,9 +48,7 @@ class Punto_encuentro extends REST_Controller{
         $param      =  $this->get();
         $response   =  [];
         if (if_ext($param , "punto_encuentro")) {
-
-            $id       =  $param["punto_encuentro"];
-            $response = $this->punto_encuentro_model->q_get(["costo_envio"], $id);
+            $response = $this->punto_encuentro_model->q_get(["costo_envio"], $param["punto_encuentro"]);
         }
         $this->response($response);
     }
@@ -79,4 +76,4 @@ class Punto_encuentro extends REST_Controller{
         
     }
 
-}?>
+}

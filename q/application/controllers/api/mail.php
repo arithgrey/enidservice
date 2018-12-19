@@ -13,10 +13,8 @@ class Mail extends REST_Controller{
         $param     = $this->get();
         $response  = false;
         if (if_ext($param , 'fecha_inicio,fecha_termino') ) {
-
-            $email          = $this->email_model->get_correos_enviados_accesos($param);                
-            $nuevo_email    =  $this->agrega_ventas($email);        
-            $data["email"]  = $nuevo_email;
+            $email          =   $this->email_model->get_correos_enviados_accesos($param);
+            $data["email"]  =   $this->agrega_ventas($email);
             $this->load->view("enid/actividad_mail_marketing/principal" , $data);                    
         }else{
             $this->response($response);    
@@ -41,12 +39,12 @@ class Mail extends REST_Controller{
     function get_solicitudes_ventas_dia($fecha){
         
         $q["fecha"] =  $fecha;
-        $api =  "ganancias/solicitudes_fecha/format/json/"; 
+        $api        =  "ganancias/solicitudes_fecha/format/json/";
         return $this->principal->api( $api , $q );        
     }
     function get_ventas_dia($fecha){
         $q["fecha"] =  $fecha;
-        $api =  "ganancias/ganancias_fecha/format/json/"; 
+        $api        =  "ganancias/ganancias_fecha/format/json/";
         return $this->principal->api( $api , $q );                
     }    
 

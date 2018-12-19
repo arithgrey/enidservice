@@ -8,13 +8,16 @@ class Pregunta_servicio extends REST_Controller{
     } 
     function index_POST(){
 
-        $param     = $this->post();
-        $params = [
-            "id_pregunta"   =>  $param["id_pregunta"] , 
-            "id_servicio"   =>  $param["servicio"]
-        ];
-        $response  = $this->pregunta_servicio_model->insert($params);
+        $param      = $this->post();
+        $response   = false;
+        if (if_ext($param , "id_pregunta,servicio")){
+            $params = [
+                "id_pregunta"   =>  $param["id_pregunta"] ,
+                "id_servicio"   =>  $param["servicio"]
+            ];
+            $response  = $this->pregunta_servicio_model->insert($params);
+        }
         $this->response($response);
     }
    
-}?>
+}

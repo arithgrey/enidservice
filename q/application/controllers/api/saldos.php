@@ -6,8 +6,8 @@ class Saldos extends REST_Controller{
         parent::__construct();                                        
         $this->load->model("saldos_model");
         $this->load->library(lib_def());                                 
-    } 
-    /**/
+    }
+    /*
     function usuario_POST(){
         
         $param =  $this->post();
@@ -21,11 +21,11 @@ class Saldos extends REST_Controller{
 
         }
         $this->response($nueva_data);
-    }        
-    /**/
-    private function get_porcentaje_comision($q){        
-        $api = "cobranza/comision/format/json/";
-        return $this->principal->api(  $api, $q );          
     }
-   
-}?>
+    private function get_porcentaje_comision($q){
+        $api = "cobranza/comision/format/json/";
+        return $this->principal->api(  $api, $q );
+    }
+    */
+
+}

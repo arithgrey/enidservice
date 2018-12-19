@@ -9,10 +9,13 @@ class Respon extends REST_Controller{
         $this->id_usuario = $this->principal->get_session("idusuario");
     } 
     function respuestas_pregunta_GET(){
-    	debug("ok---");
-    	$param 		= $this->get();
-    	$response 	= $this->response_model->get_respuestas_pregunta($param);
+
+        $param 		= $this->get();
+        $response   = false;
+        if(if_ext($param , "id_pregunta")){
+            $response 	= $this->response_model->get_respuestas_pregunta($param);
+        }
     	$this->response($response);
     }
    
-}?>
+}

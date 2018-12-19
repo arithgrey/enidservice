@@ -10,14 +10,12 @@ class Negocio extends REST_Controller{
     }
     /**/
     function index_GET(){
-        
-        $this->get();
-        $id_usuario =  $this->id_usuario;           
-        $data["entregas_en_casa"]=  $this->get_tipo_entregas($id_usuario);           
+
+        $id_usuario                 =  $this->id_usuario;
+        $data["entregas_en_casa"]   =  $this->get_tipo_entregas($id_usuario);
         $this->load->view("negocio/principal" ,  $data);
         
     }
-    /**/    
     private function get_tipo_entregas($id_usuario){    
         $q["id_usuario"] =  $id_usuario;   
         $api             = "usuario/entregas_en_casa/format/json/";     
@@ -34,4 +32,4 @@ class Negocio extends REST_Controller{
     */   
     /**/
        
-}?>
+}

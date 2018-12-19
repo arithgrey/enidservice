@@ -6,7 +6,6 @@ class Img extends REST_Controller{
       $this->load->model("img_model");
       $this->load->library(lib_def());
   }
-
   function index_DELETE(){
 
     $param    =  $this->delete();
@@ -26,13 +25,11 @@ class Img extends REST_Controller{
     $imgs   =  $this->img_model->get_imagenes_por_servicio($param);
     $this->response($imgs);
   }
-
   function form_faq_GET(){            
     
     $data["id_faq"] =  $this->get("id_faq");
     $this->load->view("imgs/faq" ,  $data);    
   }
-
   function form_img_user_GET(){
 
     $param =  $this->get();
@@ -52,7 +49,6 @@ class Img extends REST_Controller{
     }else{
         $this->response($response);
     }
-
   }
   function imagen_servicio_DELETE(){
 
@@ -61,7 +57,6 @@ class Img extends REST_Controller{
     $this->response($response);
     
   }
-
   function img_faq_GE(){
 
       $param        =   $this->get();

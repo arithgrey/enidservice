@@ -34,14 +34,9 @@
     function get_num_respuestas_sin_leer($id_pregunta){ 
       return $this->get(["COUNT(0)respuestas"] , ["id_pregunta" =>  $id_pregunta] );
     }
-    /*
-  	function actualiza_estado_pregunta($param){
-
-      $id_pregunta =  $param["pregunta"];    
-      $type =  ($param["modalidad"]== 1) ? 1:0;
-      return $this->update("pregunta", ["leido_vendedor" => $type ]  , ["id_pregunta" =>  $id_pregunta]);
+    function q_up($q , $q2 , $id){
+        return $this->update([$q => $q2 ] , ["id_servicio" => $id ]);
     }
-    */
     function get_respuestas($param){
     
       

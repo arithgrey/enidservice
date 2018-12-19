@@ -32,4 +32,4 @@ class Privacidad_usuario extends REST_Controller{
         $this->response($response);                 
     }
     
-}?>
+}

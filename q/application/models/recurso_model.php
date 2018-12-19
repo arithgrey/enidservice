@@ -33,11 +33,8 @@
         return $this->db->query($query_get)->result_array();          
     }
     function recursos_perfiles($param){
-
-
         $b              =   0;
         $info           =   [];
-        $data_complete  =   [];        
         $id_perfil      =   $param["id_perfil"];        
         $data           =   $this->get_recurso_perfil_recurso($id_perfil);
         for ($i=0; $i <  count($data); $i++) {                             
@@ -46,8 +43,6 @@
                 $b++;                    
             }
         }
-        
-        
         return $info;
     } 
     function get_perfiles_permisos($param){
