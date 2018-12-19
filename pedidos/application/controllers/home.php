@@ -62,7 +62,7 @@ class Home extends CI_Controller{
             $this->principal->show_data_page($data, 'form_busqueda');
         }else{
 
-            $this->load_detalle_pedido();
+            $this->load_detalle_pedido($param , $data);
 
         }
     }

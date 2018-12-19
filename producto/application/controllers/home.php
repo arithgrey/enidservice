@@ -24,8 +24,7 @@ class Home extends CI_Controller{
         $data        = $this->principal->val_session("");  
         $data["clasificaciones_departamentos"] = "";        
         if($this->agent->is_mobile() == FALSE){                    
-            $data["clasificaciones_departamentos"] = 
-            $this->principal->get_departamentos("nosotros");
+            $data["clasificaciones_departamentos"] = $this->principal->get_departamentos("nosotros");
         }
         $data["meta_keywords"]      =   "";
         $data["desc_web"]           =   "";
@@ -45,8 +44,7 @@ class Home extends CI_Controller{
         $data["orden_pedido"]       =   1;
         $this->principal->show_data_page($data, 'pre'); 
 
-    }
-    /**/    
+    }    
     function index(){                
         $param              = $this->input->get();
         evita_basura($this->input->get("producto"));

@@ -185,6 +185,7 @@ class Cobranza extends REST_Controller{
     /**/
     function solicitud_proceso_pago_POST(){
 
+
         $param                  =   $this->post();                      
         $param["plan"]          =   (!array_key_exists("plan", $param)) ? $param["servicio"] : $param["plan"];
         $id_servicio            =   $param["plan"]; 
@@ -218,13 +219,12 @@ class Cobranza extends REST_Controller{
                 $data_orden["id_ciclo_facturacion"]         = $new_precio["id_ciclo_facturacion"];
                 $data_orden["precio"]                       = $new_precio["precio"];
                 $data_orden["existencia"]                   = $info_existencia;
-                /**/
+
                 
                 $data_orden["servicio"] = $info_existencia["info_servicio"][0];                
-                /*Consultamos el precio de envio del producto*/                
+
                 
                 if($data_orden["servicio"]["flag_servicio"]== 0){
-                    //debug($param ,1);
                     if (array_key_exists("tipo_entrega", $param) && $param["tipo_entrega"] ==  1 ) {
                         
                         $prm_envio["flag_envio_gratis"] = 0;
@@ -276,7 +276,8 @@ class Cobranza extends REST_Controller{
                 
                 if($es_usuario_nuevo == 0){
                     
-                    $data_acciones_posteriores["id_usuario"] = $data_orden["id_usuario"];
+                    $data_acciones_posteriores["id_usuario"]    =   $data_orden["id_usuario"];
+                    $data_acciones_posteriores["email"]       =   $this->principal->get_session("email");
 
                 }else{
 
@@ -431,7 +432,8 @@ class Cobranza extends REST_Controller{
         return $this->principal->api( $api , $q);
     }
     /**/
-    function acciones_posterior_orden_pago($param){        
+    function acciones_posterior_orden_pago($param){
+
         $this->notifica_deuda_cliente($param);                   
         $this->crea_comentario_pedido($param);                    
     }

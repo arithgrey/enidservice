@@ -75,7 +75,7 @@ class recibo extends REST_Controller{
 
         $param      =   $this->post();
         $response   =   false;
-        if (if_ext($param , "data_por_usuario,id_usuario,servicio,id_ciclo_facturacion,talla")){
+        if (if_ext($param, "id_usuario,id_ciclo_facturacion,talla") ){
             $response   =  $this->recibo_model->crea_orden_de_compra($param);
         }
         $this->response($response);

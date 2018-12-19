@@ -54,9 +54,10 @@
     $utilidad = 0;
     if ($flag_servicio ==  0) {
         
-        $comision  =   porcentaje(floatval($precio),$porcentaje_comision);        
+        $comision  =   porcentaje(floatval($precio),$porcentaje_comision);
+        $comision_num  =   porcentaje(floatval($precio),$porcentaje_comision,2,2);
         $utilidad  =   floatval($precio) - $costo_envio_vendedor;        
-        $utilidad  =   $utilidad - $comision;    
+        $utilidad  =   $utilidad - $comision_num;
 
     }
     
