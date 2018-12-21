@@ -42,11 +42,10 @@
         $id             = $param["id"];
         return $this->get([] , ["id" => $id] );
     }
-    **/
-    function update_talla_clasificacion($param){        
+    function update_talla_clasificacion($param){
         return $this->q_up("clasificacion" ,  $param["clasificaciones"] ,  $param["id"]);
     }
-    function get_tallas_clasificacion($param=''){
-        return $this->get(["id" , "tipo" , "clasificacion"] , [] , 10 );
-    } 
+    **/
+
+
 }

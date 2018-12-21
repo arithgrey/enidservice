@@ -8,44 +8,48 @@ class Tarea extends REST_Controller{
         $this->load->library(lib_def());     
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
-    /**/    
     function estado_PUT(){
-        $param =  $this->put();
-        $response = $this->tareasmodel->update_estado_tarea($param);
+
+        $param      =   $this->put();
+        $response   =   false;
+        if (if_ext($param , "nuevo_valor,id_tarea")){
+            $response = $this->tareasmodel->update_estado_tarea($param);
+        }
         $this->response($response);
     }
-    /**/
     function index_POST(){
         
-        $param               =  $this->post();
-        $param["id_usuario"] =  $this->principal->get_session("idusuario");
-        $response            =  false;
-        if ($param["id_usuario"] > 0 ) {
-            $params = [
-                "descripcion"       =>  $param["tarea"] ,
-                "id_ticket"         =>  $param["id_ticket"] ,
-                "usuario_registro"  =>  $param["id_usuario"]
-            ];
-            
-            $response  =  $this->tareasmodel->insert($params);
-            if ($response == true) {                                
-                $this->set_stado_ticket($this->valida_tareas_pendientes($param));
-            }    
+        $param      =   $this->post();
+        $response   =   false;
+        if (if_ext($param, "tarea,id_ticket")){
+            $param["id_usuario"] =  $this->principal->get_session("idusuario");
+
+            if ($param["id_usuario"] > 0 ) {
+                $params = [
+                    "descripcion"       =>  $param["tarea"] ,
+                    "id_ticket"         =>  $param["id_ticket"] ,
+                    "usuario_registro"  =>  $param["id_usuario"]
+                ];
+
+                $response  =  $this->tareasmodel->insert($params);
+
+                if ($response == true) {
+                    $this->set_stado_ticket($this->valida_tareas_pendientes($param));
+                }
+            }
         }
         $this->response($response);        
     }
-    /**/
-    function set_stado_ticket($q){        
+    private function set_stado_ticket($q){
+
         $api =  "tickets/estado";
         return $this->principal->api( $api , $q , "json", "PUT");
+
     }
-    /**/    
-    function valida_tareas_pendientes($param){
+    private function valida_tareas_pendientes($param){
 
-        
-        $num_pendientes      =  $this->tareasmodel->get_tareas_ticket_num($param)[0]["pendientes"];    
-        $status = ($num_pendientes > 0 ) ? 0 : 1;
-
+        $num_pendientes     =  $this->tareasmodel->get_tareas_ticket_num($param)[0]["pendientes"];
+        $status             = ($num_pendientes > 0 ) ? 0 : 1;
         $q    = [
                     "status"        =>  $status  , 
                     "id_ticket"     =>  $param["id_ticket"],
@@ -63,30 +67,27 @@ class Tarea extends REST_Controller{
     */
     function buzon_POST(){
 
-        $param =  $this->post();       
-        $params = [
-            "descripcion"       =>  $param["tarea"] ,
-            "id_ticket"         =>  $param["id_ticket"] ,
-            "usuario_registro"  =>  $param["id_usuario"]
-        ];
-        $response = $this->tareasmodel->insert($params);
+        $param      =   $this->post();
+        $response   =   false;
+        if (if_ext($param , "tarea,id_ticket,id_usuario")){
+            $params = [
+                "descripcion"       =>  $param["tarea"] ,
+                "id_ticket"         =>  $param["id_ticket"] ,
+                "usuario_registro"  =>  $param["id_usuario"]
+            ];
+            $response = $this->tareasmodel->insert($params);
+        }
         $this->response($response);        
     }
     function ticket_GET(){
 
         $param      =   $this->get();       
         $response   =   [];        
-        if (if_ext($param , "id_ticket")) {            
-
-
+        if (if_ext($param , "id_ticket")) {
             $response =     $this->tareasmodel->get_tareas_ticket($param); 
             $response =     $this->clean($response);
             $response =     $this->cleanTagsInArray($response);
-
-            
-           
-        }        
-        
+        }
         $this->response($response);
     }
     function cleanTagsInArray(array $input, $easy = false, $throwByFoundObject = true)
@@ -124,12 +125,8 @@ class Tarea extends REST_Controller{
     } 
     private function clean($array){
 
-
-        
-        
-
-        $list =  [];
-        $a      = 0;
+        $list   =  [];
+        $a      =   0;
         foreach ($array as $row) {
             
                 $descripcion = strip_tags(trim($row["descripcion"])); 
@@ -153,4 +150,4 @@ class Tarea extends REST_Controller{
         }
         return $list;
     }
-}?>
+}

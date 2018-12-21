@@ -89,15 +89,13 @@
     }
     function get_productos_solicitados($param){
         
-        $_num =  get_random();
+        $_num           =  get_random();
         $this->create_tmp_productos_solicitados(0 , $_num,  $param);        
-        $query_get      =   
-        "SELECT * FROM tmp_productos_$_num ORDER BY num_keywords DESC";
+        $query_get      =   "SELECT * FROM tmp_productos_$_num ORDER BY num_keywords DESC";
         $result         =   $this->db->query($query_get);
-        $data_complete  =   $result->result_array();
-        
+        $response       =   $result->result_array();
         $this->create_tmp_productos_solicitados(1 , $_num,  $param);
-        return $data_complete;
+        return $response;
       
     }
     function set_vista($param){
@@ -214,9 +212,7 @@
       }
     }     
     
-    function busqueda_meta_key_word($arreglo_tags , $tag){        
-        return  array_search($tag, $arreglo_tags); 
-    }
+
     function get_tipos_entregas($param){
 
         $query_get = "SELECT
@@ -397,32 +393,22 @@
     }
     function get_sql_servicio($param , $flag_conteo){
             
-            $q          =  $param["q"]; 
-            $limit      = ($flag_conteo == 0)?$this->get_limit($param):" ";
+            $q          =   $param["q"];
+            $limit      =   ($flag_conteo == 0)?$this->get_limit($param):" ";
             $extra_clasificacion = $this->get_extra_clasificacion($param);
-            $num_q      =  strlen(trim($q));             
-            $id_usuario =  $param["id_usuario"];
+            $num_q      =   strlen(trim($q));
+            $id_usuario =   $param["id_usuario"];
+            $sql_extra  =   "";
+            $extra_existencia       = ($id_usuario > 0)?" ":" AND existencia >0 ";
+            $sql_considera_imagenes = ($id_usuario > 0)?" ":" AND flag_imagen = 1 ";
 
-           
-            $sql_extra  ="";
-            
-            $extra_existencia      = 
-                ($id_usuario > 0)?" ":" AND existencia >0 ";
-            
-            $sql_considera_imagenes = 
-                ($id_usuario > 0)?" ":" AND flag_imagen = 1 ";
-
-            $extra_empresa = 
-                ($id_usuario > 0)?" AND id_usuario = " . $id_usuario :"";
+            $extra_empresa = ($id_usuario > 0)?" AND id_usuario = " . $id_usuario :"";
 
             
 
-            $vendedor =  $param["vendedor"];    
-            $extra_vendedor =
-            ( $vendedor > 0)?" AND id_usuario =  '".$vendedor."'" : "";
-
-            
-            $orden = $this->get_orden($param);    
+            $vendedor       =   $param["vendedor"];
+            $extra_vendedor =   ( $vendedor > 0)?" AND id_usuario =  '".$vendedor."'" : "";
+            $orden          =   $this->get_orden($param);
             
             $sql_match = ($num_q >0 )?
             "   AND MATCH(metakeyword , 
@@ -518,10 +504,10 @@
                 break;
         }        
     }
-    
+
+    /*
     function get_informacion_basica_servicio_disponible($param){
 
-        //$articulos_solicitados  =  $param["articulos_solicitados"];
         $params  =  [   "id_servicio",
                         "nombre_servicio" , 
                         "status" , 
@@ -536,42 +522,10 @@
 
         return  $this->q_get($params, $param["id_servicio"] );
        
-    }  
-    function get_base($param){
-
-        $id_servicio    = $param["id_servicio"];        
-        $params         = [
-            "id_servicio" ,
-            "nombre_servicio" ,
-            "descripcion" ,
-            "status" ,
-            "id_clasificacion" ,
-            "flag_servicio" ,
-            "flag_envio_gratis" ,
-            "flag_precio_definido" ,
-            "flag_nuevo" , 
-            "url_vide_youtube" , 
-            "metakeyword",
-            "metakeyword_usuario", 
-            "existencia", 
-            "color",
-            "id_usuario",
-            "precio", 
-            "id_ciclo_facturacion",
-            "entregas_en_casa", 
-            "telefono_visible",
-            "venta_mayoreo",
-            "tiempo_promedio_entrega",
-            "talla",
-            "url_ml"
-        ];
-        return $this->get( $params , ["id_servicio" => $id_servicio]  );
-      }      
-    function get_num_existencia($id_servicio){
-
-        return $this->q_get(["existencia" ], $id_servicio)[0]["existencia"];            
     }
-    function agrega_elemento_distinto($distinto){        
+    */
+
+    function agrega_elemento_distinto($distinto){
         $nuevo = " AND id_servicio != $distinto";
         $sql = $this->get_option("sql_distintos");
         $nuevo_sql =  $sql . $nuevo;
@@ -682,16 +636,12 @@
 
         return $this->db->query($query_get)->result_array();
     }
-    
+    /*
     function es_servicio_usuario($param){
         
-        $params_where = [
-        "id_usuario"    =>  $param["id_usuario"],
-        "id_servicio"   =>  $param["id_servicio"]
-        ];
-        return $this->get( ["COUNT(0)num"], $params_where  )[0]["num"];
 
     }
+    */
     function get_clasificaciones_por_id_servicio($id_servicio){
         
         $params =   [   "id_servicio",
@@ -741,32 +691,23 @@
                         ON  
                             s.id_ciclo_facturacion = cf.id_ciclo_facturacion
                         WHERE 
-                            s.id_servicio ='".$id_servicio."' LIMIT 1";          
-            $result =  $this->db->query($query_get);
-            return $result ->result_array();
-
+                            s.id_servicio ='".$id_servicio."' LIMIT 1";
+        return   $this->db->query($query_get)->result_array();
     }
-    
-    
     function busqueda_producto($param){
         
-        $data_complete["num_servicios"] =  
-            $this->get_resultados_posibles($param);                    
-            $_num =  get_random();
-            $this->create_productos_disponibles(0 , $_num , $param);                
-                    $data_complete["sql"]   =   $this->get_option("sql");
-                    $query_get              =   "SELECT * FROM tmp_producto_$_num ";
-                    $result                 =  $this->db->query($query_get);
-                    $servicios =  $result->result_array();
-                
-                    $data_complete["servicio"] =  $servicios;
-                    
-                    if($param["agrega_clasificaciones"] ==  1){                        
-                        $data_complete["clasificaciones_niveles"] =  
-                        $this->get_clasificaciones_disponibles($_num);                      
-                    }
-                    
-            $this->create_productos_disponibles(1 , $_num , $param);
+        $data_complete["num_servicios"] = $this->get_resultados_posibles($param);
+        $_num =  get_random();
+        $this->create_productos_disponibles(0 , $_num , $param);
+        $data_complete["sql"]       =   $this->get_option("sql");
+        $query_get                  =   "SELECT * FROM tmp_producto_$_num ";
+        $result                     =  $this->db->query($query_get);
+        $servicios                  =  $result->result_array();
+        $data_complete["servicio"]  =  $servicios;
+        if($param["agrega_clasificaciones"] ==  1){
+            $data_complete["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
+        }
+        $this->create_productos_disponibles(1 , $_num , $param);
         return  $data_complete;
         
     }
@@ -777,8 +718,7 @@
                         COUNT(0)num_servicios 
                     FROM 
                         servicio  ".$query_where;
-        $result = $this->db->query($query_get);
-        return $result->result_array()[0]["num_servicios"];
+        return $this->db->query($query_get)[0]["num_servicios"];
             
     }
     function create_productos_disponibles($flag , $_num , $param){
@@ -839,8 +779,8 @@
         AND 
         existencia >0
         LIMIT 1";
-        $result =  $this->db->query($query_get);
-        return $result->result_array()[0]["num"];
+        return   $this->db->query($query_get)->result_array()[0]["num"];
+
     }
     function get_num_lectura_valoraciones($param){
         $id_usuario =  $param["id_usuario"];
@@ -858,14 +798,13 @@
             AND
                 leido_vendedor =0";
 
-        $result =  $this->db->query($query_get);
-        return $result->result_array()[0]["num"];
+        return $this->db->query($query_get)->result_array()[0]["num"];
+
     }   
     function set_preferencia_entrega($tipo , $id_servicio){
-        $query_update =  
-        "UPDATE servicio SET ".$tipo." = ".$tipo." + 1 WHERE id_servicio = $id_servicio LIMIT 1";
 
-        debug($query_update);
+
+        $query_update = "UPDATE servicio SET ".$tipo." = ".$tipo." + 1 WHERE id_servicio = $id_servicio LIMIT 1";
         return $this->db->query($query_update);
     }
     

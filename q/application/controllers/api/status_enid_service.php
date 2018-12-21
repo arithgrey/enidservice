@@ -6,28 +6,25 @@ class Status_enid_service extends REST_Controller{
         $this->load->model("status_enid_service_model");        
         $this->load->library(lib_def());                    
     }
-    /**/
     function servicio_GET(){        
 
-        $param    = $this->get();    
-        $response =  $this->status_enid_service_model->get_estatus_servicio_enid_service($param);
+        $param      =    $this->get();
+        $params     =   ["id_estatus_enid_service","nombre","text_cliente","text_vendedor" ];
+        $response   =   $this->status_enid_service_model->get($params, ["pago"=> 1], 10);
         $this->response($response);
+
     }
-    /*get_nombre_estado_enid_service*/ 
     function nombre_GET($param){
         
         $param      =   $this->get();
         $response   =   false;
-        if ($param["id_estatus"] > 0) {
-            $respnse    =   
-            $this->status_enid_service_model->q_get(["nombre"] ,  $param["id_estatus"])[0]["nombre"];
+        if ( if_ext($param , "id_estatus") ) {
+            $respnse    = $this->status_enid_service_model->q_get(["nombre"] ,  $param["id_estatus"])[0]["nombre"];
         }
         $this->response($response);
     }
     function index_GET(){
-        $param      =   $this->get();
-        $response   =   [];                
         $this->response($this->status_enid_service_model->get([] ,[] ,100));
     }
     
-}?>
+}

@@ -12,6 +12,7 @@
       $this->db->limit($limit);
       return $this->db->update("metakeyword_usuario", $data);    
     }
+    /*
     function delete_tag_servicio($param){
         
         $tag            =   $param["tag"];
@@ -22,7 +23,8 @@
         unset($tag_arreglo[$posicion]);
         $param["metakeyword_usuario"] =   implode(",", $tag_arreglo);
         return $param;
-    }    
+    }
+    */
     function set_metakeyword_usuario($param){
         return $this->update($param["metakeyword_usuario"] ,  ["id_usuario" =>  $param["id_usuario"] ]);    
     }     

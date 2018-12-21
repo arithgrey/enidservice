@@ -32,7 +32,6 @@ class Servicio extends REST_Controller{
   function clasificaciones_destacadas_GET(){
 
     $this->response($this->serviciosmodel->get_clasificaciones_destacadas());
-
   }
   function nombre_servicio_GET(){
 
@@ -71,12 +70,30 @@ class Servicio extends REST_Controller{
       }
       $this->response($response);
   }
+  function  delete_tag_servicio($param){
+
+      $tag            =   $param["tag"];
+      $id_servicio    =   $param["id_servicio"];
+      $palabras_clave =   $this->serviciosmodel->q_get(["metakeyword"], $id_servicio)[0]["metakeyword"];
+      $tag_arreglo    =   explode(",", $palabras_clave);
+      $posicion       =   $this->busqueda_meta_key_word($tag_arreglo , $tag);
+      unset($tag_arreglo[$posicion]);
+      $param["metakeyword_usuario"] =   implode(",", $tag_arreglo);
+      return $param;
+  }
+  function busqueda_meta_key_word($arreglo_tags , $tag){
+      return  array_search($tag, $arreglo_tags);
+  }
   function metakeyword_usuario_DELETE(){
 
-    $param      =  $this->delete();
-    $response   =  $this->serviciosmodel->delete_tag_servicio($param);    
-    $response   =  $this->set_metakeyword_usuario($param);        
+    $param      =   $this->delete();
+    $response   =   false;
+    if (if_ext($param, "tag,id_servicio")){
+        $response   =  $this->delete_tag_servicio($param);
+        $response   =  $this->set_metakeyword_usuario($response);
+    }
     $this->response($response);
+
   }
   function get_categorias_servicios($q){
 
@@ -157,17 +174,21 @@ class Servicio extends REST_Controller{
     $this->response($response);
 
   }
-  function tallas_GET(){    
-    $param            =  $this->get();
-    $response         = false;
+  function tallas_GET(){
+
+    $param            =     $this->get();
+    $response         =     false;
     if (if_ext($param, "id_servicio")){
-        $params           = [ "primer_nivel",
-            "segundo_nivel",
-            "tercer_nivel",
-            "cuarto_nivel",
-            "quinto_nivel" ,
-            "id_servicio",
-            "talla"];
+        $params           =
+            [
+                "primer_nivel",
+                "segundo_nivel",
+                "tercer_nivel",
+                "cuarto_nivel",
+                "quinto_nivel" ,
+                "id_servicio",
+                "talla"
+            ];
         $response = $this->serviciosmodel->q_get($params , $param["id_servicio"]);
 
     }
@@ -175,22 +196,18 @@ class Servicio extends REST_Controller{
   }  
   function index_POST(){      
       
-      if($this->input->is_ajax_request()){         
-        $param      =   $this->post();
-
-        $response   =   false;
-        if (if_ext($param , "precio,flag_servicio")){
-            $response["registro"] = (ctype_digit($param["precio"]) && $param["precio"] >= 0)?$this->registra_data_servicio($param):0;
-        }
-        $this->response($response);
-
-        
+      if($this->input->is_ajax_request()){
+          $param      =   $this->post();
+          $response   =   false;
+          if (if_ext($param , "precio,flag_servicio")){
+              $response["registro"] = (ctype_digit($param["precio"]) && $param["precio"] >= 0)?$this->registra_data_servicio($param):0;
+          }
+          $this->response($response);
       }else{
         $this->response(false);
       }
   }
-
-  function registra_data_servicio($param){
+  private function registra_data_servicio($param){
 
         $next =  ($param["flag_servicio"] == 0 && $param["precio"] == 0)?0:1;         
         $data_complete["mensaje"] =  ($next ==1)?"":"TU PRODUCTO DEBE TENER ALGÚN PRECIO";
@@ -323,91 +340,77 @@ class Servicio extends REST_Controller{
             $a =0;
             foreach ($response as $row){
 
-                $id_servicio  =  $row["id_servicio"];
-                $nombre       =
-                    $this->serviciosmodel->q_get(["nombre_servicio"],$id_servicio)[0]["nombre_servicio"];
+                $id_servicio  =     $row["id_servicio"];
+                $nombre       =     $this->serviciosmodel->q_get(["nombre_servicio"],$id_servicio)[0]["nombre_servicio"];
                 $data_complete[$a] =  $row;
                 $data_complete[$a]["nombre_servicio"] =  $nombre;
                 $a ++;
             }
+            $this->response($data_complete);
         }
-        $this->response($data_complete);
-
+        $this->response($response);
   }
-
-
-  function grupo_form_POST(){          
-      $param =  $this->post();
-      $response =  $this->serviciosmodel->create_grupo($param);
-      $this->response($response);
+  private function crea_data_costo_envio(){
+      $param["flag_envio_gratis"] = $this->get_option("servicio")[0]["flag_envio_gratis"];
+      return $param;
   }
-  /**/
-  function grupo_form_GET(){    
-      /**/
-      $param =  $this->get();
-      $this->load->view("servicio/form_grupo");
-  }
-  /**/
-  function precio_GET(){
-    /**/
-    $param =  $this->get();
-    $response = $this->serviciosmodel->get_precio_servicio($param);
-    $this->response($response);
-  }
-  /**/
-  
-  /**/
-  function servicios_grupo_GET(){
-      
-    $param =  $this->get();
-    $response =  $this->serviciosmodel->get_servicios_grupo_left_join($param);
-    $data["servicios"] = $response;
-    $this->load->view("servicio/lista_servicios_grupo" , $data);
-  }
-  function crea_data_costo_envio(){        
-    $param["flag_envio_gratis"] = $this->get_option("servicio")[0]["flag_envio_gratis"];   
-    return $param;
-  }
-  /**/
-  function get_porcentaje_comision($q){    
-
-      $api =  "cobranza/comision/format/json/";
-      return $this->principal->api( $api, $q );
-  }
-  /**/
   function especificacion_GET(){
 
-      $param                    =   $this->get();      
-      $this->set_option("id_servicio" ,  $param["id_servicio"]);
-      $id_servicio              =   $this->get_option("id_servicio");  
-      $servicio                 =   
-      $this->serviciosmodel->get([] , ["id_servicio" =>  $param["id_servicio"] ]);
-      $data["servicio"]         =    $servicio;
-      $this->set_option("servicio" , $servicio);      
-      if($servicio[0]["flag_servicio"] ==  0){
-        $this->crea_data_costo_envio();            
-        $data["costo_envio"]    = 
-        $this->principal->calcula_costo_envio($this->crea_data_costo_envio());  
-      }
+      $param    =   $this->get();
+      $response =   false;
 
-      $data["clasificaciones"]    =   $this->carga_clasificaciones($data["servicio"]);
-      $data["ciclos"]             =   $this->get_not_ciclo_facturacion($param);
-      $data["id_usuario"]         =   $this->id_usuario;          
-      $imagenes                   =   $this->carga_imagenes_servicio($id_servicio);
-      $data["url_request"]        =   get_url_request("");
-      $prm["id_servicio"]         =   $id_servicio;           
-      $data["num"]                =   $param["num"];      
-      $prm["id_servicio"]         =   $id_servicio;
-      $data["porcentaje_comision"]=   $this->get_porcentaje_comision($prm);      
-      $data["is_mobile"]          =   ($this->agent->is_mobile() === FALSE)?0:1;            
-      $data["has_phone"]          =   $this->usuario_tiene_numero($data["id_usuario"]);
-      $data["num_imagenes"]       =   count($imagenes);
-      $data["images"]             =   $this->create_table_images($imagenes , $data["is_mobile"]);
-      $data["id_perfil"]          =   $this->principal->getperfiles();
-      $this->load->view("servicio/detalle" , $data);        
+      if (if_ext($param , "id_servicio")){
+
+          $this->set_option("id_servicio" ,  $param["id_servicio"]);
+          $id_servicio              =       $this->get_option("id_servicio");
+          $servicio                 =
+              $this->serviciosmodel->get([] , ["id_servicio" =>  $param["id_servicio"] ]);
+          $data["servicio"]         =    $servicio;
+          $this->set_option("servicio" , $servicio);
+          if($servicio[0]["flag_servicio"] ==  0){
+              $this->crea_data_costo_envio();
+              $data["costo_envio"]    =
+                  $this->principal->calcula_costo_envio($this->crea_data_costo_envio());
+          }
+
+          $data["clasificaciones"]    =   $this->carga_clasificaciones($data["servicio"]);
+          $data["ciclos"]             =   $this->get_not_ciclo_facturacion($param);
+          $data["id_usuario"]         =   $this->id_usuario;
+          $imagenes                   =   $this->carga_imagenes_servicio($id_servicio);
+          $data["url_request"]        =   get_url_request("");
+          $prm["id_servicio"]         =   $id_servicio;
+          $data["num"]                =   $param["num"];
+          $prm["id_servicio"]         =   $id_servicio;
+          $data["porcentaje_comision"]=   $this->get_porcentaje_comision($prm);
+          $data["is_mobile"]          =   ($this->agent->is_mobile() === FALSE)?0:1;
+          $data["has_phone"]          =   $this->usuario_tiene_numero($data["id_usuario"]);
+          $data["num_imagenes"]       =   count($imagenes);
+          $data["images"]             =   $this->create_table_images($imagenes , $data["is_mobile"]);
+          $data["id_perfil"]          =   $this->principal->getperfiles();
+          $this->load->view("servicio/detalle" , $data);
+      }
+      $this->response($response);
+
       
-  }    
-  /**/  
+  }
+  private function create_imgs_tb($row, $is_mobile){
+      $id_imagen    =   $row["id_imagen"];
+      $url_imagen   =   get_url_request("imgs/index.php/enid/imagen/".$id_imagen);
+      $extra_imagen =   ($is_mobile == 0 ) ?  'position:relative;width:150px!important;height:150px!important;': 'position:relative;width:170px!important;height:150px!important;';
+      $id_error     =   "imagen_".$id_imagen;
+      $img = img([
+          'src'      =>     $url_imagen,
+          'style'    =>     $extra_imagen,
+          'id'       =>     $id_error,
+          'onerror' =>      "reloload_img( '".$id_error."','".$url_imagen."');"
+      ]);
+
+      $config_imagen      = create_dropdown_button($id_imagen , $row["principal"]);
+      $extra_principal    = ["class"  =>  "selector_principal"];
+      $informacion_imagen = $config_imagen.$img;
+      $contenedor_imagen  = ($row["principal"] ==  0) ? $informacion_imagen : div($informacion_imagen, $extra_principal);
+      return $contenedor_imagen;
+  }
   private function create_table_images($imagenes , $is_mobile){
 
     
@@ -415,30 +418,11 @@ class Servicio extends REST_Controller{
     $this->table->set_heading('', '', '' , '','', '', ''  );
     $images_complete = [];
     foreach ($imagenes as $row) {                          
-      
-      $id_imagen    =  $row["id_imagen"];
-      $url_imagen   = get_url_request("imgs/index.php/enid/imagen/".$id_imagen);
-      $extra_imagen = ($is_mobile == 0 ) ?  'position:relative;width:150px!important;height:150px!important;': 'position:relative;width:170px!important;height:150px!important;';
-      $id_error     = "imagen_".$id_imagen;
-      $img = img([
-          'src'      => $url_imagen,
-          'style'    => $extra_imagen,
-          'id'       => $id_error,
-          'onerror' => "reloload_img( '".$id_error."','".$url_imagen."');"
-      ]);
 
-
-      $config_imagen      = create_dropdown_button($id_imagen , $row["principal"]);     
-      $extra_principal    = ["class"  =>  "selector_principal"];    
-      $informacion_imagen = $config_imagen.$img;
-      $contenedor_imagen  = 
-      ($row["principal"] ==  0) ? $informacion_imagen : div($informacion_imagen, $extra_principal);
-      $images_complete[$num_imgs] =  $contenedor_imagen;    
+      $images_complete[] =  $this->create_imgs_tb($row , $is_mobile);
       
       $num_imgs ++;      
     }
-
-    /**/    
     if ($num_imgs < 7 ) {
       
       $url_imagen   = get_url_request("img_tema/tienda_en_linea/agregar_imagen.png");
@@ -469,6 +453,21 @@ class Servicio extends REST_Controller{
     $this->table->add_row($images_complete);   
     return $this->table->generate();
   }
+  private function get_view_empresa($servicios, $param){
+
+      $config_paginacion["totales_elementos"] =     $servicios["num_servicios"];
+      $config_paginacion["per_page"]          =     12;
+      $config_paginacion["q"]                 =     $param["q"];
+      $config_paginacion["q2"]                =     0;
+      $config_paginacion["page"]              =     get_info_variable($this->input->get() , "page" );
+      $data["busqueda"]                       =     $param["q"];
+      $data["num_servicios"]                  =     $servicios["num_servicios"];
+      $this->set_option("in_session" , 1);
+      $this->set_option("id_usuario" , $this->id_usuario);
+      $data["lista_productos"]                =     $this->agrega_vista_servicios($servicios["servicios"]);
+      $data["paginacion"]                     =     $this->principal->create_pagination($config_paginacion);
+      $this->load->view("producto/basico_empresa" , $data);
+  }
   function empresa_GET(){
     
 
@@ -486,28 +485,9 @@ class Servicio extends REST_Controller{
       $servicios =  $this->get_servicios_empresa($param);        
       
       if (count($servicios) > 0){    
-        if($servicios["num_servicios"] > 0){                                    
-                        
-          $config_paginacion["totales_elementos"] =  $servicios["num_servicios"];
-          $config_paginacion["per_page"]          = 12;
-          $config_paginacion["q"]                 = $param["q"];                                
-          $config_paginacion["q2"]                = 0;   
-          $config_paginacion["page"]              = get_info_variable($this->input->get() , "page" );
-
-          $data["busqueda"]                       =  $param["q"];                                             
-          $data["num_servicios"]                  =  $servicios["num_servicios"];
-          $this->set_option("in_session" , 1);
-          $this->set_option("id_usuario" , $this->id_usuario);
-          $data["lista_productos"]                = $this->agrega_vista_servicios($servicios["servicios"]);
-          
-          $data["paginacion"]                     = $this->principal->create_pagination($config_paginacion);
-          debug($data["paginacion"]);
-          $this->load->view("producto/basico_empresa" , $data);                    
-          
-          
-
-        }      
-
+        if($servicios["num_servicios"] > 0){
+            $this->get_view_empresa($servicios, $param);
+        }
       }else{
             $data_complete["num_servicios"] = 0;            
             $data_complete["info_servicios"] = 
@@ -519,55 +499,34 @@ class Servicio extends REST_Controller{
     }
     
   }      
-  function agrega_vista_servicios($data_servicio){
-    $data_complete = [];
-    $a = 0;
-    foreach ($data_servicio as $row){        
+  private function agrega_vista_servicios($data){
+    $response  = [];
+    $a         = 0;
+    foreach ($data as $row){
       $data_complete[$a] =  $this->get_vista_servicio($row);
       $a ++;            
     }
-    return $data_complete;
+    return $response;
   }  
-  function get_vista_servicio($q){
-        
-        $q["in_session"] =  $this->get_option("in_session");
-        $q["id_usuario"] =  $this->get_option("id_usuario");        
-        $api  =  "servicio/crea_vista_producto/format/html/";
-        return $this->principal->api(  $api , $q , "html" );  
+  private function get_vista_servicio($q){
+      $q["in_session"] =  $this->get_option("in_session");
+      $q["id_usuario"] =  $this->get_option("id_usuario");
+      $api             =  "servicio/crea_vista_producto/format/html/";
+      return $this->principal->api(  $api , $q , "html" );
   }
-  function get_servicios_empresa($q){
-    $q["es_empresa"] = 1;
-    $api  =  "servicio/q/format/json/";
-    return  $this->principal->api(  $api , $q);  
-  }
-  /**/
-  function get_not_ciclo_facturacion($q){
-
-    $api =  "ciclo_facturacion/not_ciclo_facturacion/format/json/";
-    return $this->principal->api( $api , $q  );      
-  } 
-  /**/
-  function get_info_ciclo_facturacion_servicio($q){
-    $api =  "cobranza/calcula_costo_envio/format/json/";
-    return $this->principal->api( $api , $q  );          
-  }
-  /**/  
-  function get_costo_envio($q){
-    $api = "cobranza/calcula_costo_envio/format/json/";
-    return $this->principal->api( $api , $q  );                    
-  }
-  /**/
-  function carga_clasificaciones($servicio){
+  private function carga_clasificaciones($servicio){
     
-    $lista_clasificaciones = ["primer_nivel" , 
-    "segundo_nivel" , 
-    "tercer_nivel"  , 
-    "cuarto_nivel"  , 
-    "quinto_nivel"];
+    $clasificaciones = [
+        "primer_nivel" ,
+        "segundo_nivel" ,
+        "tercer_nivel"  ,
+        "cuarto_nivel"  ,
+        "quinto_nivel"
+    ];
 
     $lista = [];
-    for ($a=0; $a < count($lista_clasificaciones); $a++){       
-      $id_clasificacion =  $servicio[0][$lista_clasificaciones[$a]];
+    for ($a=0; $a < count($clasificaciones); $a++){
+      $id_clasificacion =  $servicio[0][$clasificaciones[$a]];
       if($id_clasificacion > 0) {
         $data_clasificacion = $this->get_clasificacion_por_id($id_clasificacion);
         if (count($data_clasificacion)>0) {          
@@ -577,127 +536,24 @@ class Servicio extends REST_Controller{
     }
     return $lista;
   }
-  /**/
-  function get_clasificacion_por_id($id_clasificacion){
-    
-    $q["id_clasificacion"] =  $id_clasificacion;
-    $api = "clasificacion/id/format/json/";
-    return $this->principal->api( $api , $q  );      
-  }
-  /**/
-  function carga_imagenes_servicio($id_servicio){
-
-    $q["id_servicio"] =  $id_servicio;
-    $api = "imagen_servicio/servicio/format/json/";
-    return $this->principal->api( $api , $q  );              
-  }  
-  /**/
-  function terminos_servicios_POST(){
-
-    $param =  $this->post();
-    $response =  $this->serviciosmodel->create_termino_servicio($param);
-    $this->response($response);
-  }
-  
-  
-  /**/
-  function grupos_GET(){
-
-      $param                        =  $this->get();
-      $info_grupos                  =  $this->serviciosmodel->get_grupos($param);
-      $data_complete["info_grupos"] = $info_grupos;            
-      $this->load->view("servicio/grupo" , $data_complete);         
-  }
-  /**/
-  function grupo_GET(){
-    $param                 =  $this->get();
-    $servicios             =  $this->serviciosmodel->get_servicios_grupo($param);
-    $caracteristicas_grupo =  $this->serviciosmodel->get_caracteristicas_globales_grupo_servicios($param);
-    
-    $data["table"]         =  $this->get_table_servicios($servicios , $caracteristicas_grupo , 1);
-
-    $data["grupo"] =  $param["grupo"];
-    $data["caracteristicas_grupo"] = $caracteristicas_grupo;
-    $this->load->view("servicio/lista_grupos_servicios" , $data);
-    
-  }
-  /**/
-  function get_table_servicios($servicios ,$caracteristicas_grupo , $in_session){
-
-        $data_complete =  get_titulos_precios($servicios , $in_session );  
-        $table_header =  $data_complete["table_header"];
-        $tmp_servicios = $data_complete["tmp_servicios"];
-
-
-        $list ="";      
-        foreach ($caracteristicas_grupo as $row){   
-
-            $caracteristica = $row["caracteristica"];
-            $id_caracteristica =  $row["id_caracteristica"];
-            $list .="<tr>";
-                $list .= "<td >" .$caracteristica ."</td>";
-                for ($a=0; $a < count($tmp_servicios); $a++){    
-
-                    $num_exist =  
-                    $this->serviciosmodel->valida_termino_aplicable(
-                        $tmp_servicios[$a], 
-                        $id_caracteristica );
-
-                    $text =icon("fa fa-check-circle");
-                    if ($num_exist == 0 ) {
-                        
-                        $text =icon('fa fa-times red_enid_background white' , ["style"=>"padding: 5px;"]);  
-                    }
-                    $list .= get_td($text);                
-                }
-
-            $list .="</tr>";
-        }
-
-        $table_header = $table_header.$list;
-        return $table_header;
-    } 
-  /**/
-  private function get_entregas_en_casa_usuario($id_usuario){    
-    
-    $q["id_usuario"] =  $id_usuario;
-    $api = "usuario/entregas_en_casa/format/json/";
-    return $this->principal->api( $api , $q  );         
-  }
-  /**/
-  private function get_terminos_privacidad_productos($id_usuario){
-    
-    $q["id_usuario"] =  $id_usuario;
-    $api = "privacidad_usuario/servicio/format/json/";
-    return $this->principal->api( $api , $q  );         
-  }  
-  /**/
-  private function usuario_tiene_numero($id_usuario){
-    
-    $q["id_usuario"] =  $id_usuario;
-    $api             = "usuario/has_phone/format/json/";
-    return   $this->principal->api( $api , $q );            
-  }    
-  /**/
   function talla_GET(){
 
-    $param              =  $this->get();    
-    $id_servicio        =  $param["id_servicio"];
-    $servicio           =  $this->serviciosmodel->q_get(["talla"] , $id_servicio);    
-    $servicio_tallas    =  $this->add_tallas($servicio);    
-    
+    $param              =   $this->get();
+    $response           =   false;
+    if (if_ext($param, "id_servicio")){
+        $id_servicio        =  $param["id_servicio"];
+        $servicio           =  $this->serviciosmodel->q_get(["talla"] , $id_servicio);
+        $servicio_tallas    =  $this->add_tallas($servicio);
+        if ($param["v"] ==  1) {
 
-    
-    if ($param["v"] ==  1) {  
+            $response         = (count($servicio_tallas)>0) ? $this->create_button_easy_select_tienda($servicio_tallas):"";
 
-      $response   = 
-      (count($servicio_tallas)>0) ? $this->create_button_easy_select_tienda($servicio_tallas):"";      
-      $this->response($response);
+        }else{
 
-    }else{
-      $this->response($servicio_tallas);  
-
-    }    
+            $response       = $servicio_tallas;
+        }
+    }
+    $this->response($response);
   }
   private function create_button_easy_select_tienda($servicio_tallas){
 
@@ -743,17 +599,6 @@ class Servicio extends REST_Controller{
     }
     return $data_complete;
     
-  }
-  private function get_talla_id($id_talla , $parametros){
-    $param["id"]          =   $id_talla;
-    $param["fields"]      =   $parametros;
-    return $this->principal->api( "talla/id/format/json/" , $param  );
-  }
-  private function add_gamificacion_usuario_servicio($param, $valoracion){
-    $api                  =  
-    "servicio/gamificacion_usuario_servicios/format/json/";
-    $param["valoracion"]  = $valoracion;
-    return   $this->principal->api(  $api , $param, "json" , "PUT");
   }
   function url_ml_PUT(){
 
@@ -867,107 +712,120 @@ class Servicio extends REST_Controller{
     $response =  $this->serviciosmodel->q_up("precio" , $param["precio"], $param["id_servicio"]);
     $this->response($response);
   }
+  private function gamificaCancelacion($param){
 
+      $response["tipo"]               = "USUARIO CANCELA COMPRA";
+      /*Se notifica que el usuario cancela su compra*/
+      $api                            = "usuario/cancelacion_compra/format/json/";
+      $cancelacion_compra             = $this->principal->api( $api, $param, "json" , "PUT" );
+      $response["gamificacion_cancelacion_compra"] = $cancelacion_compra;
+
+      /*ahora se baja califición interes compra - Servicio*/
+      $response["gamificacion_servicio"]  = $this->add_gamificacion_usuario_servicio($param ,  -1);
+      return $response;
+
+  }
+  private function gamificaRecordatorio($param){
+      $response["tipo"]                   =
+          "YA NO QUIERE RECORDATORIOS SOBRE QUE DEBE PUBLICAR PRODUCTOS";
+      /*ahora se baja califición interes compra - Servicio*/
+      $response["gamificacion_servicio"]  = $this->add_gamificacion_usuario_servicio($param ,  -3);
+      return $response;
+
+  }
+  private function gamificaSinRespuesta($param){
+      $response["tipo"] = "EL USUARIO NO CONTESTA A LAS PREGUNTAS DENTRO DEL PERIMÉTRO QUE EXIGE EL CLIENTE";
+      /*ahora se baja califición interes compra - Servicio*/
+      $response["gamificacion_servicio"]  = $this->add_gamificacion_usuario_servicio($param ,  -3);
+      /*ahora actualizo la gamificación*/
+      return $response;
+  }
   function add_gamification_servicio_PUT(){
 
     $param    = $this->put();
-    $response = [];
+    $response = false;
+    if(if_ext($param , "type")){
+        $response = [];
+        switch ($param["type"]) {
 
-    switch ($param["type"]) {
+            /*USUARIO CANCELA COMPRA*/
+            case 2:
+                $response = $this->gamificaCancelacion($param);
+                break;
 
-      /*USUARIO CANCELA COMPRA*/
-      case 2:
-        
-        $response["tipo"]               = "USUARIO CANCELA COMPRA";
-        /*Se notifica que el usuario cancela su compra*/
-        
-        $api                            = "usuario/cancelacion_compra/format/json/";
-        $cancelacion_compra             = $this->principal->api( $api, $param, "json" , "PUT" );
-        $response["gamificacion_cancelacion_compra"] = $cancelacion_compra;
-        
-        /*ahora se baja califición interes compra - Servicio*/
-        $response["gamificacion_servicio"]  = $this->add_gamificacion_usuario_servicio($param ,  -1);
-        
+            /*YA NO QUIERE RECORDATORIOS SOBRE QUE DEBE PUBLICAR PRODUCTOS*/
+            case 3:
 
-        break;
+                $response = $this->gamificaRecordatorio($param);
+                break;
 
-      /*YA NO QUIERE RECORDATORIOS SOBRE QUE DEBE PUBLICAR PRODUCTOS*/  
-      case 3:
-        
-        $response["tipo"]                   = 
-        "YA NO QUIERE RECORDATORIOS SOBRE QUE DEBE PUBLICAR PRODUCTOS";
-        /*ahora se baja califición interes compra - Servicio*/
-        $response["gamificacion_servicio"]  = 
-        $this->add_gamificacion_usuario_servicio($param ,  -3);
-        
-        break;
-      
-      /*EL USUARIO NO CONTESTA A LAS PREGUNTAS DENTRO DEL PERIMÉTRO QUE EXIGE EL CLIENTE*/
-      case 4:
-        
-        $response["tipo"] = 
-        "EL USUARIO NO CONTESTA A LAS PREGUNTAS DENTRO DEL PERIMÉTRO QUE EXIGE EL CLIENTE";
-        /*ahora se baja califición interes compra - Servicio*/
-        $response["gamificacion_servicio"]  = 
-        $this->add_gamificacion_usuario_servicio($param ,  -3);
-        /*ahora actualizo la gamificación*/      
-        break;
-      
-      default:
-        $this->response("ok llega");    
-        break;
-    }
-    $this->response($response);    
-  }
-  /**/
-  function num_venta_usuario_GET(){
-        
-        $param    =  $this->get(); 
-        $response = $this->serviciosmodel->get_num_en_venta_usuario($param);
+            /*EL USUARIO NO CONTESTA A LAS PREGUNTAS DENTRO DEL PERIMÉTRO QUE EXIGE EL CLIENTE*/
+            case 4:
+                $response = $this->gamificaSinRespuesta($param);
+
+                break;
+
+            default:
+                $this->response("ok llega");
+                break;
+        }
         $this->response($response);
+    }
+    $this->response($response);
+
+  }
+  function num_venta_usuario_GET(){
+
+      $param    =  $this->get();
+      $response = false;
+      if (if_ext($param , "id_usuario")){
+          $response = $this->serviciosmodel->get_num_en_venta_usuario($param);
+      }
+      $this->response($response);
   }  
   function q_GET(){
         
-    $param =  $this->get();        
-
-    $id_usuario = 
-    ($this->principal->is_logged_in())?$this->id_usuario:get_info_variable($param , "id_usuario" );
-    $param["id_usuario"] =  $id_usuario;
-
+    $param                  =   $this->get();
+    $id_usuario             =   ($this->principal->is_logged_in())?$this->id_usuario:get_info_variable($param , "id_usuario" );
+    $param["id_usuario"]    =   $id_usuario;
     if (array_key_exists("es_empresa", $param) != false ){
         $this->add_gamificacion_search($param);          
     } 
     $servicios_complete =  $this->serviciosmodel->busqueda($param);
-    
-      if( count($servicios_complete["servicio"])>0 ){
-        $servicios          =  $this->agrega_costo_envio($servicios_complete["servicio"]);         
 
-        $data["servicios"] = $servicios;            
-        $data["url_request"] =  get_url_request(""); 
-        $data["num_servicios"] =  $servicios_complete["num_servicios"];                
-        if($param["agrega_clasificaciones"] == 1){
-          $data["clasificaciones_niveles"]  =  $servicios_complete["clasificaciones_niveles"];    
-        }                          
-        $this->response($data);                         
-      }else{
+    if( count($servicios_complete["servicio"])>0 ){
+
+        $this->response($this->get_servicio_costo_envio($servicios_complete, $param));
+
+    }else{
+
         $data["num_servicios"] =0;
-        $this->response($data);         
+        $this->response($data);
       } 
                     
     }
-    function agrega_costo_envio($servicios){
+    private function get_servicio_costo_envio($servicios, $param){
+
+        $response["servicios"]          =   $this->agrega_costo_envio($servicios["servicio"]);
+        $response["url_request"]        =   get_url_request("");
+        $response["num_servicios"]      =   $servicios["num_servicios"];
+        if($param["agrega_clasificaciones"] == 1){
+            $response["clasificaciones_niveles"]  =  $servicios["clasificaciones_niveles"];
+        }
+        return $response;
+    }
+    private function agrega_costo_envio($servicios){
      
-        $nueva_data =[];
-        $a =0;
+        $nueva_data     =   [];
+        $a              =   0;
         foreach($servicios as $row){
             
             $nueva_data[$a] = $row;                        
             $flag_servicio  = $row["flag_servicio"];
             
             if($flag_servicio == 0){
-                $prm["flag_envio_gratis"]       =  $row["flag_envio_gratis"];
-                $nueva_data[$a]["costo_envio"]  = 
-                $this->principal->calcula_costo_envio($prm);    
+                $prm["flag_envio_gratis"]       =   $row["flag_envio_gratis"];
+                $nueva_data[$a]["costo_envio"]  =   $this->principal->calcula_costo_envio($prm);
             }             
             $a ++;
         }        
@@ -975,162 +833,225 @@ class Servicio extends REST_Controller{
         
     } 
     function info_disponibilidad_servicio_GET(){
-        $param       =  $this->get();
-        $id_servicio =  $param["id_servicio"];
-        $servicio =  $this->serviciosmodel->get_informacion_basica_servicio_disponible($param);
-        
-        $num_servicios                  =   count($servicio); 
-        $response["en_existencia"] =   0;
-        $response["info_servicio"] =   $servicio;
 
-        if($num_servicios > 0){
-            $response["en_existencia"] =1;                
-        }else{            
-            $response["numero_servicios_disponinble_para_compra"] 
-            =  
-            $this->serviciosmodel->get_num_existencia($id_servicio);
-        }  
-        $this->response($response);
-    }  
-    /**/
+
+      $param          =     $this->get();
+      $response       =     false;
+      if (if_ext($param , "id_servicio")){
+          $id_servicio    =     $param["id_servicio"];
+          $params  =  [
+              "id_servicio",
+              "nombre_servicio" ,
+              "status" ,
+              "existencia" ,
+              "flag_envio_gratis",
+              "flag_servicio" ,
+              "flag_nuevo" ,
+              "id_usuario id_usuario_venta" ,
+              "precio" ,
+              "id_ciclo_facturacion",
+              "existencia"
+          ];
+
+          $servicio                       =     $this->serviciosmodel->q_get($params, $id_servicio );
+          $num_servicios                  =     count($servicio);
+          $response["en_existencia"]      =     0;
+          $response["info_servicio"]      =     $servicio;
+
+          if($num_servicios > 0){
+              $response["en_existencia"]  =  1;
+          }
+      }
+      $this->response($response);
+
+    }
     function existencia_GET(){
 
-      $param        =  $this->get();
-      $id_servicio  =  $param["id_servicio"];
-      $this->response($this->serviciosmodel->get_num_existencia($id_servicio));
+      $param        =   $this->get();
+      $response     =   false;
+      if (if_ext($param , "id_servicio")){
+
+          $response     =   $this->serviciosmodel->q_get(["existencia" ], $param["id_servicio"])[0]["existencia"];
+
+      }
+      $this->response($response);
     }
-    /**/
     function basic_GET(){  
 
-        $param          = $this->get();
-        $params         =  ["nombre_servicio" , "telefono_visible" ,"id_usuario" ];
-        $id_servicio    =  $param["id_servicio"];
-        $response       = $this->serviciosmodel->q_get($params, $id_servicio);
+        $param          =   $this->get();
+        $response       =   false;
+        if (if_ext($param , "id_servicio")){
+            $params         =   ["nombre_servicio" , "telefono_visible" ,"id_usuario" ];
+            $id_servicio    =   $param["id_servicio"];
+            $response       =   $this->serviciosmodel->q_get($params, $id_servicio);
+        }
         $this->response($response);
-    }    
-    /**/
-    function add_gamificacion_search($q){
+    }
+    private function add_gamificacion_search($q){
         if(array_key_exists("q", $q) >0 && strlen(trim($q["q"]))>1 ){
             $api =  "metakeyword/gamificacion_search/format/json/";
             $this->principal->api( $api , $q , "json" , "POST");
         }                    
-    }    
-
+    }
     function por_clasificacion_GET(){
           
         $param      =  $this->get();                 
-        $response   =  [];
-        if (if_ext(
-          $param, 
-          "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel")) {
-
-            $servicios  =  
-            $this->serviciosmodel->get_producto_por_clasificacion($param);
-            $response   =  
-            $this->agrega_costo_envio($servicios);                        
+        $response   =  false;
+        if (if_ext($param, "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel")) {
+            $response   = $this->agrega_costo_envio($this->serviciosmodel->get_producto_por_clasificacion($param));
         }        
         $this->response($response);        
     }
     function qmetakeyword_GET(){
 
-        $param          =  $this->get();        
-        $q              = (array_key_exists("q", $param))? $param["q"]:"";
-        $param["q2"]    = 0;
-        $param["q"]     = $q;
-        $param["order"] =  1;
-        $param["id_clasificacion"]  =1;
-        $param["id_usuario"]        =0;
-        $param["vendedor"]          =0;
-        $param["resultados_por_pagina"]     = $param["limit"];
-        $param["agrega_clasificaciones"]    =0;
-        $servicios =  $this->serviciosmodel->busqueda_producto($param);
+        $param              =   $this->get();
+        $response           =   false;
 
-        if (count($servicios)>0) {
-            $response = $this->agrega_costo_envio($servicios["servicio"]);
-            $this->response($response);    
-        }else{
-            $this->response(array());    
-        }        
+        if (if_ext($param , "limit")){
+
+            $q                  =   (array_key_exists("q", $param))? $param["q"]:"";
+            $param["q2"]        =   0;
+            $param["q"]         =   $q;
+            $param["order"]     =   1;
+            $param["id_clasificacion"]  =   1;
+            $param["id_usuario"]        =   0;
+            $param["vendedor"]          =   0;
+            $param["resultados_por_pagina"]     =   $param["limit"];
+            $param["agrega_clasificaciones"]    =   0;
+            $servicios                          =   $this->serviciosmodel->busqueda_producto($param);
+
+            $response   = [];
+            if (count($servicios)>0) {
+                $response = $this->agrega_costo_envio($servicios["servicio"]);
+            }
+
+        }
+        $this->response($response);
     }
     function base_GET(){
-        
-        $param    =  $this->get();        
-        $response =  $this->serviciosmodel->get_base($param); 
-        $this->response($response);
-    }    
-    /**/
+
+      $param    =   $this->get();
+      $response =   false;
+
+      if (if_ext($param , "id_servicio")){
+          $id_servicio    = $param["id_servicio"];
+          $params         = [
+              "id_servicio" ,
+              "nombre_servicio" ,
+              "descripcion" ,
+              "status" ,
+              "id_clasificacion" ,
+              "flag_servicio" ,
+              "flag_envio_gratis" ,
+              "flag_precio_definido" ,
+              "flag_nuevo" ,
+              "url_vide_youtube" ,
+              "metakeyword",
+              "metakeyword_usuario",
+              "existencia",
+              "color",
+              "id_usuario",
+              "precio",
+              "id_ciclo_facturacion",
+              "entregas_en_casa",
+              "telefono_visible",
+              "venta_mayoreo",
+              "tiempo_promedio_entrega",
+              "talla",
+              "url_ml"
+          ];
+          $response     = $this->serviciosmodel->get( $params , ["id_servicio" => $id_servicio]  );
+      }
+      $this->response($response);
+    }
     function periodo_GET(){
-        $param      =  $this->get();
-        $response   = $this->serviciosmodel->periodo($param);
 
-        $v =  (array_key_exists("v", $param) && $param["v"] > 0 ) ?  $param["v"] : 0;
+      $param      =  $this->get();
+      $response   = false;
+      if (if_ext($param , "fecha_inicio", "fecha_termino")){
+          $response   =     $this->serviciosmodel->periodo($param);
+          $v          =     (array_key_exists("v", $param) && $param["v"] > 0 ) ?  $param["v"] : 0;
+          switch ($v) {
+              case 1:
+                  $data["servicios"]  =  $response;
+                  $this->load->view("producto/simple" , $data);
 
-        switch ($v) {
-          case 1:
-            
-            $data["servicios"]  =  $response;
-            $this->load->view("producto/simple" , $data);            
-            break;
-          
-          default:
-            $this->response($response);
-            break;
-        }
-        
+                  break;
+
+              default:
+
+                  break;
+          }
+      }
+      $this->response($response);
 
     }
     function es_servicio_usuario_GET(){
-        $param =  $this->get();
-        $this->response($this->serviciosmodel->es_servicio_usuario($param));
+
+      $param      =   $this->get();
+        $response   =   false;
+        if (if_ext($param , "id_usuario,id_servicio")){
+            $params_where = [
+                "id_usuario"    =>  $param["id_usuario"],
+                "id_servicio"   =>  $param["id_servicio"]
+            ];
+            $response         = $this->serviciosmodel->get( ["COUNT(0)num"], $params_where  )[0]["num"];
+        }
+        $this->response($response);
     }
     function usuario_por_servicio_GET(){
-        $param    =  $this->get();
-        $response = $this->serviciosmodel->q_get(["id_usuario"] , $param["id_servicio"]);
+        $param    =     $this->get();
+        $response =     false;
+        if (if_ext($param , "id_servicio")){
+            $response =     $this->serviciosmodel->q_get(["id_usuario"] , $param["id_servicio"]);
+        }
         $this->response($response);
     }
     function resumen_GET(){
 
         $param =  $this->get();
-        $response = $this->serviciosmodel->get_resumen($param);
+        if(if_ext($param, "id_servicio")){
+            $response = $this->serviciosmodel->get_resumen($param);
+        }
         $this->response($response);
     }
-    function colores_GET(){        
-        $this->load->view("servicio/tabla_colores");
-    }  
     function metakeyword_usuario_POST(){
         
-        if($this->input->is_ajax_request()){ 
-          
-          $param                        =   $this->post();
-          $param["id_usuario"]          =   $this->id_usuario;      
-          $param["metakeyword_usuario"] =   remove_comma($param["metakeyword_usuario"]);        
-          $meta                         =   $this->serviciosmodel->get_palabras_clave($param["id_servicio"]);
-          $metakeyword_usuario          =   $param["metakeyword_usuario"]; 
-          $metakeyword_usuario          =   $meta .",".$metakeyword_usuario;
-          
-          $response["add"]              =   
-          $this->serviciosmodel->q_up("metakeyword_usuario" , $metakeyword_usuario , $param["id_servicio"]);
-          $response["add_catalogo"]     = $this->agrega_metakeyword_catalogo($param);
+        if($this->input->is_ajax_request()){
+            $param                        =   $this->post();
+            if (if_ext($param , "metakeyword_usuario,id_servicio")){
 
-          $this->response($response);
-         
+                $param["id_usuario"]          =   $this->id_usuario;
+                $param["metakeyword_usuario"] =   remove_comma($param["metakeyword_usuario"]);
+                $meta                         =   $this->serviciosmodel->get_palabras_clave($param["id_servicio"]);
+                $metakeyword_usuario          =   $param["metakeyword_usuario"];
+                $metakeyword_usuario          =   $meta .",".$metakeyword_usuario;
+
+                $response["add"]              =   $this->serviciosmodel->q_up("metakeyword_usuario" , $metakeyword_usuario , $param["id_servicio"]);
+                $response["add_catalogo"]     =   $this->agrega_metakeyword_catalogo($param);
+
+                $this->response($response);
+            }
         }       
     } 
     function num_periodo_GET($param){
       
       $param    =  $this->get();
-      $response =  $this->serviciosmodel->num_periodo($param);
+      $response = false;
+      if (if_ext($param , "fecha_inicio,fecha_termino")){
+          $response =  $this->serviciosmodel->num_periodo($param);
+      }
       $this->response($response);
+
     }
     function num_anuncios_GET(){
 
-      $param    =  $this->get();
-      $response =  $this->serviciosmodel->get_num_anuncios($param);
+      $param    =   $this->get();
+      $response =   false;
+      if (if_ext($param , "id_usuario")){
+          $response =  $this->serviciosmodel->get_num_anuncios($param);
+      }
       $this->response($response);
-    }
-    function agrega_metakeyword_catalogo($q){
-      $api =  "metakeyword/add";
-      return $this->principal->api( $api , $q , "json"  , "POST");
     }
     function alcance_usuario_GET(){
                 
@@ -1144,33 +1065,36 @@ class Servicio extends REST_Controller{
         $data["url_request"]    =   get_url_request("");                
         $this->load->view("producto/basico" , $data);
     }
-
     function metricas_productos_solicitados_GET(){
 
-        $param      =  $this->get();
+        $param      =   $this->get();
+        $response   =   false;
+        if (if_ext($param , "fecha_inicio,fecha_termino")){
 
-        $articulos  =  
-        $this->serviciosmodel->get_productos_solicitados($param);
+            $articulos  = $this->serviciosmodel->get_productos_solicitados($param);
 
-        //$this->load->view("producto/principal" , $data);
-        $this->table->set_heading(
-              "ARTÍCULO",
-              'SOLICITES'
-              );
+            $this->table->set_heading(
+                "ARTÍCULO",
+                'SOLICITES'
+            );
 
-        foreach ($articulos as $row) {
+            foreach ($articulos as $row) {
 
-          
-          $this->table->add_row($row["keyword"] ,  $row["num_keywords"]);  
-          
+                $this->table->add_row($row["keyword"] ,  $row["num_keywords"]);
+
+            }
+            $response = $this->table->generate();
+
         }
-        
-        $table = $this->table->generate();
-        $this->response($table);
+        $this->response($response);
     }    
     function num_lectura_valoraciones_GET(){
-        $param    =  $this->get();
-        $response =  $this->serviciosmodel->get_num_lectura_valoraciones($param);
+
+      $param    =     $this->get();
+        $response =     false;
+        if (if_ext($param , "id_usuario")){
+            $response =  $this->serviciosmodel->get_num_lectura_valoraciones($param);
+        }
         $this->response($response);
     }
     function tiempo_entrega_PUT(){
@@ -1178,19 +1102,18 @@ class Servicio extends REST_Controller{
         $param    =   $this->put();
         $response =   []; 
         if(if_ext($param , "tiempo_entrega,id_servicio")){
-          $response   = 
-          $this->serviciosmodel->q_up("tiempo_promedio_entrega" , $param["tiempo_entrega"] , $param["id_servicio"]);  
+          $response   =     $this->serviciosmodel->q_up("tiempo_promedio_entrega" , $param["tiempo_entrega"] , $param["id_servicio"]);
         }  
         $this->response($response);        
     }
     function tipo_entrega_PUT(){
 
         $param    =   $this->put();
-        $response =   []; 
+        $response =   false;
         if(if_ext($param , "tipo,id_servicio")){
           
 
-          $tipo =  "";
+          $tipo     =  "";
           switch ($param["tipo"]) {
             case 1:
               $tipo =  "tipo_entrega_envio";
@@ -1211,7 +1134,6 @@ class Servicio extends REST_Controller{
         $this->response($response);        
 
     }
-    /**/
     function tipos_entregas_GET(){
       
       $param      =   $this->get();
@@ -1252,11 +1174,8 @@ class Servicio extends REST_Controller{
               $valoracion                   = $row["valoracion"];
               $id_servicio                  = $row["id_servicio"];
 
-  
-
-
-              $id_error         = "imagen_".$id_servicio;
-              $url_img          =   "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
+              $id_error                     = "imagen_".$id_servicio;
+              $url_img                      = "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
               $img            = img(
                 [
                     "src"       => $url_img,
@@ -1290,8 +1209,6 @@ class Servicio extends REST_Controller{
             $tb_headers  = $this->get_headers_tipo_entrega($servicios);
             $total       = $tb_headers .br().hr().br(). $tb_general;
             $response    = $total;
-                      
-                      
 
 
         }
@@ -1383,6 +1300,31 @@ class Servicio extends REST_Controller{
 
         return  $this->table->generate();
     }
+    function agrega_metakeyword_catalogo($q){
+        $api =  "metakeyword/add";
+        return $this->principal->api( $api , $q , "json"  , "POST");
+    }
+    function colores_GET(){
+        $this->load->view("servicio/tabla_colores");
+    }
+    private function get_servicios_empresa($q){
+        $q["es_empresa"] = 1;
+        $api             =  "servicio/q/format/json/";
+        return  $this->principal->api(  $api , $q);
+    }
+    function get_not_ciclo_facturacion($q){
+
+        $api =  "ciclo_facturacion/not_ciclo_facturacion/format/json/";
+        return $this->principal->api( $api , $q  );
+    }
+    function get_info_ciclo_facturacion_servicio($q){
+        $api =  "cobranza/calcula_costo_envio/format/json/";
+        return $this->principal->api( $api , $q  );
+    }
+    function get_costo_envio($q){
+        $api = "cobranza/calcula_costo_envio/format/json/";
+        return $this->principal->api( $api , $q  );
+    }
     private function busqueda_producto_por_palabra_clave($q){
         $api  =  "servicio/qmetakeyword/format/json/";
         return $this->principal->api(  $api , $q );             
@@ -1405,6 +1347,12 @@ class Servicio extends REST_Controller{
         $api = "clasificacion/clasificacion_padre_nivel/format/json/";
         return $this->principal->api( $api , $q);
     }
+    private function get_terminos_privacidad_productos($id_usuario){
+
+        $q["id_usuario"] =  $id_usuario;
+        $api = "privacidad_usuario/servicio/format/json/";
+        return $this->principal->api( $api , $q  );
+    }
     private function set_ultima_publicacion($id_usuario){
         $q["id_usuario"]  =  $id_usuario;
         $api              = "usuario/ultima_publicacion";
@@ -1425,7 +1373,64 @@ class Servicio extends REST_Controller{
         $api  = "clasificacion/coincidencia_servicio/format/json/";
         return  $this->principal->api( $api , $q);
     }
+    private function get_porcentaje_comision($q){
 
+        $api =  "cobranza/comision/format/json/";
+        return $this->principal->api( $api, $q );
+    }
+    private function get_clasificacion_por_id($id_clasificacion){
+
+        $q["id_clasificacion"] =  $id_clasificacion;
+        $api                   = "clasificacion/id/format/json/";
+        return $this->principal->api( $api , $q  );
+    }
+    private function carga_imagenes_servicio($id_servicio){
+
+        $q["id_servicio"]   =  $id_servicio;
+        $api                = "imagen_servicio/servicio/format/json/";
+        return $this->principal->api( $api , $q  );
+    }
+    private function usuario_tiene_numero($id_usuario){
+
+        $q["id_usuario"] =  $id_usuario;
+        $api             = "usuario/has_phone/format/json/";
+        return   $this->principal->api( $api , $q );
+    }
+    private function get_talla_id($id_talla , $parametros){
+        $param["id"]          =   $id_talla;
+        $param["fields"]      =   $parametros;
+        return $this->principal->api( "talla/id/format/json/" , $param  );
+    }
+    private function add_gamificacion_usuario_servicio($param, $valoracion){
+        $api                  =
+            "servicio/gamificacion_usuario_servicios/format/json/";
+        $param["valoracion"]  = $valoracion;
+        return   $this->principal->api(  $api , $param, "json" , "PUT");
+    }
+
+    /*
+  function grupos_GET(){
+
+      $param                        =  $this->get();
+      $info_grupos                  =  $this->serviciosmodel->get_grupos($param);
+      $data_complete["info_grupos"] = $info_grupos;
+      $this->load->view("servicio/grupo" , $data_complete);
+  }
+
+
+  function grupo_GET(){
+    $param                 =  $this->get();
+    $servicios             =  $this->serviciosmodel->get_servicios_grupo($param);
+    $caracteristicas_grupo =  $this->serviciosmodel->get_caracteristicas_globales_grupo_servicios($param);
+
+    $data["table"]         =  $this->get_table_servicios($servicios , $caracteristicas_grupo , 1);
+
+    $data["grupo"] =  $param["grupo"];
+    $data["caracteristicas_grupo"] = $caracteristicas_grupo;
+    $this->load->view("servicio/lista_grupos_servicios" , $data);
+
+  }
+  */
     /*
   function nombre_estado_enid_GET(){
 
@@ -1485,4 +1490,86 @@ class Servicio extends REST_Controller{
     */
     /**/
     /**/
+
+    /*
+    function grupo_form_POST(){
+        $param        =  $this->post();
+        $response     =  $this->serviciosmodel->create_grupo($param);
+        $this->response($response);
+    }
+    function grupo_form_GET(){
+
+        $param =  $this->get();
+        $this->load->view("servicio/form_grupo");
+    }
+
+    function precio_GET(){
+
+      $param =  $this->get();
+      $response = $this->serviciosmodel->get_precio_servicio($param);
+      $this->response($response);
+    }
+    */
+    /*
+    function servicios_grupo_GET(){
+
+      $param =  $this->get();
+      $response =  $this->serviciosmodel->get_servicios_grupo_left_join($param);
+      $data["servicios"] = $response;
+      $this->load->view("servicio/lista_servicios_grupo" , $data);
+    }
+    */
+    /*
+  function terminos_servicios_POST(){
+
+    $param =  $this->post();
+    $response =  $this->serviciosmodel->create_termino_servicio($param);
+    $this->response($response);
+  }
+*/
+    /*
+  function get_table_servicios($servicios ,$caracteristicas_grupo , $in_session){
+
+        $data_complete =  get_titulos_precios($servicios , $in_session );
+        $table_header =  $data_complete["table_header"];
+        $tmp_servicios = $data_complete["tmp_servicios"];
+
+
+        $list ="";
+        foreach ($caracteristicas_grupo as $row){
+
+            $caracteristica = $row["caracteristica"];
+            $id_caracteristica =  $row["id_caracteristica"];
+            $list .="<tr>";
+                $list .= "<td >" .$caracteristica ."</td>";
+                for ($a=0; $a < count($tmp_servicios); $a++){
+
+                    $num_exist =
+                    $this->serviciosmodel->valida_termino_aplicable(
+                        $tmp_servicios[$a],
+                        $id_caracteristica );
+
+                    $text =icon("fa fa-check-circle");
+                    if ($num_exist == 0 ) {
+
+                        $text =icon('fa fa-times red_enid_background white' , ["style"=>"padding: 5px;"]);
+                    }
+                    $list .= get_td($text);
+                }
+
+            $list .="</tr>";
+        }
+
+        $table_header = $table_header.$list;
+        return $table_header;
+    }
+  */
+    /*
+  private function get_entregas_en_casa_usuario($id_usuario){
+
+    $q["id_usuario"] =  $id_usuario;
+    $api = "usuario/entregas_en_casa/format/json/";
+    return $this->principal->api( $api , $q  );
+  }
+  */
 }
