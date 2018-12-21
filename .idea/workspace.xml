@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffbfef24-1c57-4135-bcb0-af960c244fba" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/servicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/servicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/status_enid_service.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/status_enid_service.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/talla.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/talla.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tarea.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tarea.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/models/metakeyword_usuario_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/metakeyword_usuario_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/models/serviciosmodel.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/serviciosmodel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/models/status_enid_service_model.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/models/talla_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/talla_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tickets.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tickets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tipificacion.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tipificacion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tipificacion_recibo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tipificacion_recibo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tipo_entrega.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tipo_entrega.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tipo_negocio.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tipo_negocio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tipo_punto_encuentro.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tipo_punto_encuentro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tipo_talla.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tipo_talla.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/usuario.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q/application/models/tipo_talla_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/tipo_talla_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/usuario_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/usuario_model.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,40 +21,59 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="usuario.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/usuario.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="225" column="24" selection-start-line="225" selection-start-column="24" selection-end-line="225" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usuario_model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/q/application/models/usuario_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>serviciosmodelserviciosmodel</find>
-      <find>add_gamificacion_search</find>
-      <find>get_resultados_posibles</find>
-      <find>especificacion</find>
-      <find>get_productos_solicitados</find>
-      <find>get_num_existencia</find>
-      <find>exis</find>
-      <find>existencia</find>
-      <find>existenc</find>
-      <find>get_base</find>
-      <find>get_sql_servicio</find>
-      <find>periodo</find>
-      <find>es_servicio_usuario</find>
-      <find>get_resumen</find>
-      <find>servicio/resumen</find>
-      <find>busqueda_producto</find>
-      <find>num_periodo</find>
-      <find>get_num_anuncios</find>
-      <find>get_num_lectura_valoraciones</find>
-      <find>get_resumen_tipos_entregas</find>
-      <find>get_servicios_por_clasificaciones</find>
-      <find>set_preferencia_entrega</find>
-      <find>get_estatus_servicio_enid_service</find>
-      <find>get_tipo_talla</find>
-      <find>update_talla_clasificacion</find>
-      <find>get_tallas_clasificacion</find>
-      <find>get_tallas_countries</find>
-      <find>update_estado_tarea</find>
-      <find>set_stado_ticket</find>
-      <find>valida_tareas_pendientes</find>
+      <find>get_like_clasificacion</find>
+      <find>set_ultima_publicacion</find>
+      <find>get_usuarios_sin_publicar_articulos</find>
+      <find>$response   = $this-&gt;usuario_model-&gt;get_miembro($param);</find>
+      <find>get_miembro</find>
+      <find>get_productos_interes</find>
+      <find>get_usuarios_perfil</find>
+      <find>set_telefono</find>
+      <find>update</find>
+      <find>set_cancelacion_compra</find>
+      <find>usuario_model</find>
+      <find>create_table_usabilidad</find>
+      <find>set_password_forget</find>
+      <find>set_miembro</find>
+      <find>crea_usuario_enid_service</find>
+      <find>registrar_afiliado</find>
+      <find>emailevalua_usuario_existente</find>
+      <find>evalua_usuario_existente</find>
+      <find>num_registros_periodo</find>
+      <find>get_nun_activos_con_direcciones</find>
+      <find>get_num_registros_periodo</find>
+      <find>usuario_por_servicio</find>
+      <find>id_usuario</find>
+      <find>add_usuario_deseo</find>
+      <find>valuenum_q</find>
+      <find>num_q</find>
+      <find>nombre_usuario</find>
+      <find>get_usuario_por_servicio</find>
+      <find>get_usuario_cliente</find>
+      <find>usuario_clien</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -63,17 +82,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/q/application/controllers/api/funcionalidad.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/imagen_servicio.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/imagen_usuario.php" />
-        <option value="$PROJECT_DIR$/q/application/models/img_model.php" />
-        <option value="$PROJECT_DIR$/q/application/models/incidencia_model.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/intento_compra.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/intento_tipo_entrega.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/keyword.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/linea_metro.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/metakeyword_usuario.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/objetivos.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/paginacion.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/perfil_recurso.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/pregunta.php" />
@@ -111,9 +119,20 @@
         <option value="$PROJECT_DIR$/q/application/models/status_enid_service_model.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/status_enid_service.php" />
         <option value="$PROJECT_DIR$/q/application/models/talla_model.php" />
-        <option value="$PROJECT_DIR$/q/application/models/tipo_talla_model.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/talla.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/tarea.php" />
+        <option value="$PROJECT_DIR$/q/application/models/tickets_model.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/cobranza.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/tickets.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/tipificacion.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/tipificacion_recibo.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/tipo_entrega.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/tipo_negocio.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/tipo_punto_encuentro.php" />
+        <option value="$PROJECT_DIR$/q/application/models/tipo_talla_model.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/tipo_talla.php" />
+        <option value="$PROJECT_DIR$/q/application/models/usuario_model.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/usuario.php" />
       </list>
     </option>
   </component>
@@ -142,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -186,7 +206,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -221,14 +240,16 @@
       <workItem from="1545169391525" duration="728000" />
       <workItem from="1545173237367" duration="7823000" />
       <workItem from="1545332670828" duration="10581000" />
+      <workItem from="1545416313489" duration="7766000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38013000" />
+    <option name="totallyTimeSpent" value="45779000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="973" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -237,7 +258,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.12087327" />
-      <window_info active="true" anchor="bottom" id="Docker" order="7" visible="true" weight="0.15357561" />
+      <window_info anchor="bottom" id="Docker" order="7" visible="true" weight="0.15357561" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -258,83 +279,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/mail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/models/metakeyword_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="35" column="55" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/negocio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="34" column="1" lean-forward="true" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/metakeyword_usuario.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/models/notificacion_pago_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="64" column="78" selection-start-line="64" selection-start-column="58" selection-end-line="64" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/notificacion_pago.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/objetivos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/paginacion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1160">
-          <caret line="58" column="51" selection-start-line="58" selection-start-column="51" selection-end-line="58" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/perfil_recurso.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/perfiles.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/pregunta_servicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/q/application/controllers/api/privacidad.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -537,13 +481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/servicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1416">
-          <caret line="1228" column="68" selection-start-line="1228" selection-start-column="35" selection-end-line="1228" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/q/application/models/serviciosmodel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -579,13 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/models/tipo_talla_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/q/application/controllers/api/talla.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="577">
@@ -604,6 +534,97 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="128" column="20" selection-start-line="128" selection-start-column="20" selection-end-line="128" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/tickets_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="51" column="35" selection-start-line="51" selection-start-column="35" selection-end-line="51" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/cobranza.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="611" column="5" lean-forward="true" selection-start-line="606" selection-start-column="4" selection-end-line="611" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/tickets.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3945">
+          <caret line="263" column="8" selection-start-line="263" selection-start-column="8" selection-end-line="263" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/tipificacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/tipificacion_recibo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/tipo_entrega.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/tipo_negocio.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/tipo_punto_encuentro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="74" lean-forward="true" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/tipo_talla_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="35" column="60" selection-start-line="35" selection-start-column="60" selection-end-line="35" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/tipo_talla.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="56" column="16" lean-forward="true" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/servicio.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="1001" column="33" selection-start-line="1001" selection-start-column="13" selection-end-line="1001" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/usuario_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/usuario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="225" column="24" selection-start-line="225" selection-start-column="24" selection-end-line="225" selection-end-column="24" />
         </state>
       </provider>
     </entry>

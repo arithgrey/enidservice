@@ -7,8 +7,7 @@
     function set_ultima_publicacion($param){                
 
         $id_usuario     = $param["id_usuario"];
-        $query_update   =  
-        "UPDATE usuario SET ultima_publicacion = CURRENT_TIMESTAMP() WHERE idusuario =  $id_usuario";
+        $query_update   = "UPDATE usuario SET ultima_publicacion = CURRENT_TIMESTAMP() WHERE idusuario =  $id_usuario";
         return  $this->db->query($query_update);
     } 
     /**/
@@ -121,16 +120,12 @@
         return $this->update( $params , $params_where );        
     }
     */
+    /*
     function set_telefono($param){
         
-        $params         =  
-        [
-            "tel_contacto"  =>  $param["telefono"] , 
-            "tel_lada"      =>  $param["lada"]
-        ];      
-        $params_where   = ["idusuario" => $param["id_usuario"]];
-        return $this->update( $params , $params_where );        
+
     }
+    */
     /*
     function set_pass($param){
     
@@ -167,22 +162,12 @@
       $insert   = $this->db->insert("usuario", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
+    /*
     function get_usuario_cliente($param){
 
-        $params =  ["idusuario id_usuario", 
-                    "nombre" , 
-                    "apellido_paterno" , 
-                    "apellido_materno" ,
-                    "email",
-                    "nombre_usuario",
-                    "tel_contacto",
-                    "tel_contacto_alterno",
-                    "lada_negocio",
-                    "tel_lada"
-                    ];
 
-        return $this->q_get($params, $param["id_usuario"]);
-    } 
+    }
+    */
     function has_phone($param){
 
         $id_usuario =  $param["id_usuario"];        
@@ -332,9 +317,11 @@
         }
     }
     /**/
+      /*
     function set_cancelacion_compra($id){
-        return $this->q_up("num_cancelaciones" , "num_cancelaciones + 1 " , $id);        
-    }    
+        return $this->q_up("num_cancelaciones" , "num_cancelaciones + 1 " , $id);
+    }
+      */
     function valida_pass($antes , $id_usuario)
     {           
         $q = [
@@ -482,8 +469,8 @@
                     ultima_publicacion 
                     < DATE_ADD(CURRENT_DATE() , INTERVAL - 30 DAY )
                     AND id_departamento =9 ";
-      $result      =  $this->db->query($query_get);
-      return $result->result_array();
+      return   $this->db->query($query_get)->result_array();
+
     }
     function verifica_registro_telefono($param){
 
@@ -554,7 +541,8 @@
       }
    }
    function set_miembro($param){
-       
+
+        $id_usuario =  $param["id_usuario"];
         $params =  [
           "nombre"                =>  $param["nombre"],              
           "email"                 =>  $param["email"],                                                   
@@ -567,7 +555,9 @@
           "id_departamento"       =>  $param["departamento"], 
           "status"                =>  $param["status"]
         ];
-        
+
+        $tel_contacto =  $param["tel_contacto"];
+
         if(strlen($tel_contacto)>3) {      
             $params["tel_contacto"] =  $tel_contacto;
         }
@@ -580,9 +570,6 @@
     } 
     function crea_usuario_enid_service($param){
 
-      //$puesto               =  $param["puesto"];
-      //$id_usuario           =  $param["id_usuario"];
-      //$editar               =  $param["editar"];
 
       $params = [
         "nombre"             => $param["nombre"],
@@ -605,8 +592,8 @@
     }
     function registrar_afiliado($param){
 
-      $data_complete["usuario_existe"] =  $this->evalua_usuario_existente($param);
-      $data_complete["usuario_registrado"] = 0;
+      $data_complete["usuario_existe"]      =   $this->evalua_usuario_existente($param);
+      $data_complete["usuario_registrado"]  =   0;
       
       if($data_complete["usuario_existe"] == 0 ){
       

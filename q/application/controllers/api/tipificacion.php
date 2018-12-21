@@ -17,7 +17,6 @@ class tipificacion extends REST_Controller{
         }else{
             $response   =  $this->tipificacion_model->get([] ,[] ,100);
         }
-
         if (array_key_exists("v", $param) && $param["v"] ==  1) {
 
             $extra      =  (array_key_exists("text", $param)) ? div(strong($param["text"]) , 1) : "";
@@ -38,4 +37,4 @@ class tipificacion extends REST_Controller{
 
     }
 
-}?>
+}

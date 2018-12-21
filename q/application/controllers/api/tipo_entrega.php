@@ -5,12 +5,9 @@ class Tipo_entrega extends REST_Controller{
         parent::__construct();           
         $this->load->model("tipo_entrega_model"); 
         $this->load->library(lib_def());       
-  }  
-  /**/
-  function index_GET(){    
-    $param    =  $this->get();
-    $response =  $this->tipo_entrega_model->get([] , [] , 1000);  
-    $this->response($response);  
+  }
+  function index_GET(){
+    $this->response($this->tipo_entrega_model->get([] , [] , 1000));
   }    
 
-}?>
+}

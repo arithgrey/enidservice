@@ -33,8 +33,7 @@
         " WHERE tipo LIKE '%".$param["clasificacion"]."%' LIMIT 10":" LIMIT 30"; 
         
         $query_get      = "SELECT * FROM tipo_talla".$extra;  
-        $result         = $this->db->query($query_get);
-        return            $result->result_array();
+        return $this->db->query($query_get)->result_array();
 
     }
     /*

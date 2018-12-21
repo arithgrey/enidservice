@@ -9,12 +9,11 @@ class tipificacion_recibo extends REST_Controller{
     function index_POST(){
         
         $param      =  $this->post();
-        $response   =  [];
+        $response   =  false;
         if (if_ext($param ,  "recibo,tipificacion")) {
             
             /*paso a 0 las tipificaciones previas*/    
             $id_recibo  =  $param["recibo"];
-            
             if ($this->set_null($id_recibo) == true) {
                 
                 $params = [
@@ -29,8 +28,7 @@ class tipificacion_recibo extends REST_Controller{
     }
     private function set_null($id_recibo){
 
-        return  
-        $this->tipificacion_recibo_model->update(
+        return $this->tipificacion_recibo_model->update(
             ["status"       => 0] ,
             ["id_recibo"    => $id_recibo ] ,
             1000 );
@@ -38,12 +36,11 @@ class tipificacion_recibo extends REST_Controller{
     function recibo_GET(){
 
         $param      =   $this->get();
-        $response   =   [];
+        $response   =   false;
         if(if_ext($param , "recibo")){
             
-            $response =  
-            $this->tipificacion_recibo_model->get_recibo($param);            
+            $response = $this->tipificacion_recibo_model->get_recibo($param);
         }
         $this->response($response);
     }
-}?>
+}

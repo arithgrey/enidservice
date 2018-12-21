@@ -9,11 +9,8 @@ class tipo_talla extends REST_Controller{
     }
     function index_GET(){
 
-        $param      =  $this->get();
-        $response   =  $this->tipo_talla_model->get([] , [] , 1000);
-        $this->response($response);
+        $this->response($this->tipo_talla_model->get([] , [] , 1000));
     }
-    /**/ 
     function like_clasificacion_GET(){
 
         $param          =   $this->get();
@@ -22,14 +19,14 @@ class tipo_talla extends REST_Controller{
         if ($v == 1){
             $table      =  $this->create_table_tallas($response);
             $this->response($table);
-        }else{
-            $this->response($response);    
         }
+        $this->response($response);
+
     }
     private function create_table_tallas($param){
 
         $heading = [
-            "#" ,                  
+            "#" ,
             "TIPO",
             "CLASIFICACIÓNES ENLAZADAS"
         ];
@@ -38,13 +35,13 @@ class tipo_talla extends REST_Controller{
 
         foreach ($param as $row) {
                 
-                $id                     =  $row["id"];
-                $config                 = anchor_enid(
+                $id                     =   $row["id"];
+                $config                 =   anchor_enid(
                                             icon("fa fa-cog"),
-                                            array(
+                                            [
                                                 'class' => 'configurar_talla' ,
                                                 'id'    => $id
-                                        ));
+                                            ]);
                 
                 $array_clasificiones    =  get_array_json($row["clasificacion"]);     
                 $tipo                   =  $row["tipo"];
@@ -57,7 +54,7 @@ class tipo_talla extends REST_Controller{
                 $this->table->add_row($config, $tipo, $num_clasificaciones);
             }
 
-        return     $this->table->generate();
+        return  $this->table->generate();
 
     }
-}?>
+}
