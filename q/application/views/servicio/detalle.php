@@ -1,7 +1,6 @@
 <?php            
     $en_servicios = [];
     $en_productos = [];
-    /*INFO SERVICIO */
     $id_servicio                =   "";
     $nombre_servicio            =   "";
     $status                     =   "";    
@@ -21,6 +20,7 @@
     $telefono_visible           =   0;
     $venta_mayoreo              =   0;
     $url_ml                     =   "";
+    $link_dropshipping          =   "";
     foreach ($servicio  as $row){
         
         $id_servicio                =   $row["id_servicio"];
@@ -43,7 +43,9 @@
         $venta_mayoreo              =   $row["venta_mayoreo"];
         $tiempo_promedio_entrega    =   $row["tiempo_promedio_entrega"];
         $url_ml                     =   $row["url_ml"];
-    }    
+        $link_dropshipping          =   $row["link_dropshipping"];
+    }
+
     $url_web_servicio = $url_request."producto/?producto=".$id_servicio;    
     $url_productos_publico  = "../producto/?producto=".$id_servicio."&q2=".$id_usuario;            
     /*INFO costoS SERVICIO */        
@@ -114,11 +116,9 @@
     $extra_extrega_casa_no  =   valida_activo_entregas_en_casa(0 , $entregas_en_casa); 
     $activo_visita_telefono =   valida_activo_vista_telefono(1 , $telefono_visible);  
     $baja_visita_telefono   =   valida_activo_vista_telefono(0 , $telefono_visible);  
-    $data["activo_ventas_mayoreo"]  
-    =   valida_activo_ventas_mayoreo(1 , $venta_mayoreo); 
+    $data["activo_ventas_mayoreo"]  =   valida_activo_ventas_mayoreo(1 , $venta_mayoreo);
     $data["baja_ventas_mayoreo"]    =  valida_activo_ventas_mayoreo(0 , $venta_mayoreo); 
-    
-    /**/
+
     $extra_1                    =  valida_active_pane($num , 1);  
     $extra_2                    =  valida_active_pane($num , 2);  
     $extra_3                    =  valida_active_pane($num , 3);  
@@ -195,7 +195,7 @@
     $icantidad       =  icon('fa fa-pencil text_cantidad');
     $metatags_format =  create_meta_tags($metakeyword_usuario , $id_servicio);
 
-    /**/
+
     $i_tags =  input([
         "type" => "hidden" , 
         "name"  => "id_servicio" , 
@@ -277,6 +277,8 @@
         <!--IMAGENES +  YOUTUBE-->
         <div class="tab-pane <?=$extra_1?>" id="tab_imagenes">
 
+            <?=valida_descartar_promocion($num_imagenes , $id_servicio)?>
+
             <?=$notificacion_imagenes;?>
             <?=div($images, ["class"   => "contenedor_imagen_muestra"],1 )?>
             
@@ -335,6 +337,9 @@
                 [   "name"=>"tiempo_entrega" , 
                     "class"=> "tiempo_entrega form-control"
                 ])?>
+            <form action="../q/index.php/api/servicio/dropshiping/format/json/" class="form_dropshipping">
+                <?=get_link_dropshipping($id_perfil , $id_servicio , $link_dropshipping)?>
+            </form>
 
             <?=heading_enid($titulo_compra_en_casa,4);?>
             <table  class='seccion_compras_casa'>

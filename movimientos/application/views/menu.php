@@ -4,7 +4,7 @@
             <div class="panel-body">
                 <?=div(icon('icon fa fa-money') , ["class"=>"icon"])?>
                 <?=div("Saldo disponible")?>
-                <?=heading_enid("$". number_format($saldo_disponible,2). "MXN" ,
+                <?=heading_enid("$". number_format(get_data_saldo($saldo_disponible),2). "MXN" ,
                     2, 
                     ["class"    =>  "value white"]
                 )?>

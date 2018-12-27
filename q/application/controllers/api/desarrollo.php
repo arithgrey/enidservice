@@ -30,7 +30,7 @@ class desarrollo extends REST_Controller{
         $response   =   false;
         if (if_ext($param, "fecha_inicio,fecha_termino")){
             $data["info_global"]=  $this->desarrollomodel->get_resumen_desarrollo($param);
-            $this->load->view("desarrollo/global" , $data);
+            return $this->load->view("desarrollo/global" , $data);
         }
         $this->response($response);
     }
@@ -40,7 +40,7 @@ class desarrollo extends REST_Controller{
         $response   =   false;
         if (if_ext($param, "fecha_inicio,fecha_termino")) {
             $data["info_global"] = $this->desarrollomodel->get_comparativa_desarrollo_calidad($param);
-            $this->load->view("desarrollo/global_calidad", $data);
+            return $this->load->view("desarrollo/global_calidad", $data);
         }
         $this->response($response);
     }
@@ -50,8 +50,8 @@ class desarrollo extends REST_Controller{
         $response           =   false;
         
         if (if_ext($param,"tiempo")){
-            $data["info_global"]=  $this->desarrollomodel->get_comparativa_desarrollo($param);
-            $this->load->view("desarrollo/comparativa" , $data);
+            $data["info_global"] =  $this->desarrollomodel->get_comparativa_desarrollo($param);
+            return $this->load->view("desarrollo/comparativa" , $data);
         }
         $this->response($response);
     }

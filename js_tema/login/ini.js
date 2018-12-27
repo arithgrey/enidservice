@@ -139,7 +139,7 @@ function agrega_usuario(e){
 			set_option("tmp_password" , tmp_password);			
 			set_option("email" , email);	
 			set_option("nombre" ,nombre);	
-			var  data_send = {"nombre" : nombre , "email" : email , "password": tmp_password}												
+			var  data_send = {"nombre" : nombre , "email" : email , "password": tmp_password , "simple" : 1 }
 			request_enid("POST",  data_send , url , response_usuario_registro);			
 		}
 	}

@@ -1667,9 +1667,9 @@ abstract class CI_DB_query_builder extends CI_DB_driver {
 		);
 
 		$this->_reset_write();
-		if ($debug ==  1) {
+		//if ($debug ==  1) {
 			debug($sql);	
-		}		
+		//}
 		return $this->query($sql);
 	}
 

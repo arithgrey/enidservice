@@ -22,13 +22,14 @@ class Home extends CI_Controller{
         $q                          =  get_param_def($param     , "q", "" , 1);            
         evita_basura($q);
         $param["num_hist"]          =  get_info_servicio($q);                        
-        $this->create_keyword($param);
+
         $this->load_data($param);                
     }
     private function load_data($param){
         
 
         $data                           =   $this->principal->val_session("");
+
         $data["meta_keywords"]          =   "Comprar y vender tus artículos y servicios";
         $data["desc_web"]               =   "";
         $data["url_img_post"]           =   create_url_preview("promo.png");        
@@ -56,11 +57,8 @@ class Home extends CI_Controller{
             
         }
         
-        $servicios              =  $this->busqueda_producto_por_palabra_clave($data_send);        
-        
+        $servicios              =  $this->busqueda_producto_por_palabra_clave($data_send);
         $data["servicios"]      =  $servicios;
-
-
 
         if ($servicios["num_servicios"] > 0) {
             
@@ -107,6 +105,7 @@ class Home extends CI_Controller{
             $data["filtros"]    =   $this->get_orden();
             $data["order"]      =   $data_send["order"];
             //$data["is_mobile"]  =   1;
+            $this->create_keyword($param);
             $this->principal->show_data_page($data, 'home');
             
         }else{
@@ -221,12 +220,18 @@ class Home extends CI_Controller{
     }
     return $data_complete;
   }  
-  private function create_keyword($q){    
-    if ($this->id_usuario > 0) {
-        $q["id_usuario"] =  $this->id_usuario;
+  private function create_keyword($q){
+
+    if(array_key_exists("q", $q)){
+        if ($this->id_usuario > 0) {
+            $q["id_usuario"] =  $this->id_usuario;
+        }
+        $api =  "keyword/index";
+        return $this->principal->api($api , $q, "json" , "POST");
     }
-    $api =  "keyword/index";
-    return $this->principal->api($api , $q, "json" , "POST");
+
+
+
   }
 
-}?>
+}

@@ -368,8 +368,14 @@ class usuario extends REST_Controller{
                         $response["email"]              =  $email;
                         $response["usuario_registrado"] =  1;
                     }
-                    $id_servicio =  $param["servicio"];
-                    $this->inicia_proceso_compra($param , $response["id_usuario"]  , $id_servicio);
+
+                    $simple     =  (get_param_def( $param  , "simple")  > 0 )  ? 1 : 0;
+                    if($simple  ==  0){
+                        $id_servicio =  $param["servicio"];
+                        $this->inicia_proceso_compra($param , $response["id_usuario"]  , $id_servicio);
+                    }
+
+
                 }
                 
             }
@@ -464,6 +470,23 @@ class usuario extends REST_Controller{
         
         $this->load->view("equipo/miembros" , $data);                
         
+    }
+    function usuarios_GET(){
+
+        $param                                  =   $this->get();
+        $total                                  =   $this->get_num_registros_periodo($param);
+        $per_page                               =   10;
+        $param["resultados_por_pagina"]         =   $per_page;
+        $data["miembros"]                       =   $this->usuario_model->get_usuarios_periodo($param);
+        $config_paginacion["page"]              =   get_info_variable($param , "page" );
+        $config_paginacion["totales_elementos"] =   $total;
+        $config_paginacion["per_page"]          =   $per_page;
+        $config_paginacion["q"]                 =   "";
+        $config_paginacion["q2"]                =   "";
+        $paginacion                             =   $this->principal->create_pagination($config_paginacion);
+        $data["paginacion"]                     =   $paginacion;
+        $data["modo_edicion"]                   =   0;
+        $this->load->view("equipo/miembros" , $data);
     }
     function miembro_POST(){
         
@@ -594,6 +617,7 @@ class usuario extends REST_Controller{
         }
         $this->response($response);
     }
+
     private function create_table_usabilidad($param){
 
         $heading = [

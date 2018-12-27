@@ -9,10 +9,9 @@
 }
 
 .asignado_actualmente {
-    background: blue;
-    color: white;
+    background: #eaf2f6;
+    color: #000208;
 }
-
 .asignado_actualmente .text-muted {
-    color: white !important;
+    color: #eaf2f6;!important;
 }

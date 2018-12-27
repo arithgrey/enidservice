@@ -1,18 +1,16 @@
-function carga_form_imagenes_usuario(){    
-    
+function carga_form_imagenes_usuario(){
+    recorrepage(".contenedor_principal_enid");
     display_elements(  [".imagen_usuario_completa" , ".menu_info_usuario" , ".contenedor_lateral" , ".registro_telefono_usuario_lada_negocio" , ".editar_imagen_perfil"] , 0  );
     var data_send   = {};
     var url         =  "../q/index.php/api/img/form_img_user/format/json/";
     request_enid( "GET",  data_send, url, response_carga_form_imagenes, ".place_form_img"); 
 }
-/**/
 function response_carga_form_imagenes(data)
 {
     llenaelementoHTML(".place_form_img" ,  data);
     $(".imagen_img").change(upload_imgs_enid_pre);
         
 }
-/**/
 function upload_imgs_enid_pre(){    
 
     var i = 0, len = this.files.length , img, reader, file;        
@@ -42,8 +40,7 @@ function registra_img_usr(e){
             contentType: false,
             processData: false , 
             beforeSend : function(){
-               //show_load_enid(".place_img_registrada", "Cargando ... " , 2);                 
-               //$(".guardar_img_enid").hide();
+
             }
     }).done(function(data){    
         
@@ -54,5 +51,4 @@ function registra_img_usr(e){
         show_error_enid(".place_load_img" , "Falla al actualizar al cargar la imagen" );   
     });
     $.removeData(formData);
-}        
-/**/     
+}

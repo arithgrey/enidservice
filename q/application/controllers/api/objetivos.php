@@ -37,10 +37,16 @@ class objetivos extends REST_Controller{
         $data["metas"] = $this->productividad_model->relacion_ingresos($param);
         $this->load->view("productividad/ingresos" , $data );
     }
+
+    */
     function perfil_GET(){
-        $param      = $this->get();        
-        $response   = $this->objetivos_model->get([] , ["id_perfil" => $param["id_perfil"]] , 100);
+
+        $param      = $this->get();
+        $response   =  false;
+        if(if_ext($param , "id_perfil")){
+            $response   = $this->objetivos_model->get([] , ["id_perfil" => $param["id_perfil"]] , 100);
+        }
         $this->response($response);
     }
-    */
 }
+

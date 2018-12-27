@@ -150,8 +150,8 @@
 
           if ($flag ==  0){
 
-            $fecha_inicio =  $param["fecha_inicio"];
-            $fecha_termino =  $param["fecha_termino"];
+            $fecha_inicio   =  $param["fecha_inicio"];
+            $fecha_termino  =  $param["fecha_termino"];
                           
             $query_create =  "CREATE TABLE tmp_tareas_solicitadas_$_num AS 
                               SELECT 

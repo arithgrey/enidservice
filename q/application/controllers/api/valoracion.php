@@ -180,20 +180,6 @@ class Valoracion extends REST_Controller{
         $data["numero_valoraciones"]  =  $valoraciones;
         $data["respuesta_valorada"]   =  $param["respuesta_valorada"];            
         $this->load->view("valoraciones/articulo", $data);        
-          
-        /*
-        if($valoraciones[0]["num_valoraciones"] > 0){
-            
-            $data["comentarios"]          =  $this->valoracion_model->get_valoraciones($param);    
-            $data["numero_valoraciones"]  =  $valoraciones;
-            $data["respuesta_valorada"]   =  $param["respuesta_valorada"];            
-            $this->load->view("valoraciones/articulo", $data);        
-            
-        }else{
-            $this->load->view("valoraciones/se_el_primero", $data);        
-        } 
-        */
-        
 
     }
     /**/

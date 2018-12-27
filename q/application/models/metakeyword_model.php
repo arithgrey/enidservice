@@ -28,7 +28,8 @@
         }       
         return $this->db->get("metakeyword")->result_array();
     }
-    function insert( $params , $return_id=0){        
+    function insert( $params , $return_id=0){
+        debug(9999);
       $insert   = $this->db->insert("metakeyword", $params);     
       return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }

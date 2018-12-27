@@ -1,6 +1,6 @@
 <?php if($is_mobile == 0 ):?>
 <ul class="nav tabs contenedor_menu_enid_service_lateral">      
-    <li class="<?=valida_active_tab('nuevo' , $action)?>">                       
+    <li class="<?=valida_active_tab('nuevo' , $action)?> li_menu ">
         <?=anchor_enid(
             icon('fa fa-cart-plus')." VENDER PRODUCTOS " ,
             [
@@ -9,7 +9,7 @@
             ]
         );?>        
     </li>          
-    <li class='li_menu li_menu_servicio btn_servicios 
+    <li class='li_menu li_menu_servicio btn_servicios
         <?=valida_active_tab('lista' , $action)?>'>                
             <?=anchor_enid(
                 icon("fa fa-shopping-cart")." TUS ARTÍCULOS EN VENTA",

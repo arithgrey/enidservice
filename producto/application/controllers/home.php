@@ -63,7 +63,7 @@ class Home extends CI_Controller{
                 }
                 
             }else{
-                $this->load_servicio($this->input->get());    
+                $this->load_servicio($param);
             }
             
         }else{
@@ -100,7 +100,6 @@ class Home extends CI_Controller{
         $this->principal->show_data_page($data, 'pre'); 
 
     }
-    /**/
     private function load_servicio($param){
 
         $id_servicio    =  get_info_producto($param["producto"]);
@@ -133,12 +132,13 @@ class Home extends CI_Controller{
     private function get_tallas($id_servicio){
         $api            =   "servicio/talla/format/json/";        
         $q              =   [
-            "id"    =>  $id_servicio ,
-            "v"     =>  "1"
+            "id"            =>  $id_servicio ,
+            "v"             =>  "1",
+            "id_servicio"   =>  $id_servicio
+
         ];
         return    $this->principal->api( $api , $q ); 
     }
-    /**/
     private function vista($param , $data){
         
         $id_servicio    =   $this->get_option("id_servicio");                              
@@ -191,9 +191,9 @@ class Home extends CI_Controller{
                                     "producto_principal.css",
                                     "sugerencias.css",
                                     "producto.css"
-                                    ];
+        ];
 
-        $data["js"] = [base_url('application/js/principal.js')];
+        $data["js"] = ['producto/principal.js'];
         $this->principal->show_data_page($data, 'home');         
 
     }    

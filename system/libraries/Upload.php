@@ -1261,7 +1261,7 @@ class CI_Upload {
 				? 'file --brief --mime '.escapeshellarg($file['tmp_name']).' 2>&1'
 				: 'file --brief --mime '.$file['tmp_name'].' 2>&1';
 
-			if (function_usable('exec'))
+			if (function_exists('exec'))
 			{
 				/* This might look confusing, as $mime is being populated with all of the output when set in the second parameter.
 				 * However, we only need the last line, which is the actual return value of exec(), and as such - it overwrites

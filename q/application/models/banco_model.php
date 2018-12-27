@@ -17,10 +17,7 @@
         }       
         return $this->db->get("banco")->result_array();
     }    
-   	/**/
-    function get_bancos($param){          
-      return $this->get([] , ["status" => 1] , 100);
-    }
+
     
 }
 	

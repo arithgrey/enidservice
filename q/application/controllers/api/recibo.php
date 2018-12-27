@@ -10,6 +10,15 @@ class recibo extends REST_Controller{
         $this->load->library(lib_def());                    
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
+    function saldo_POST(){
+
+        $param     = $this->post();
+        $response  = false;
+        if(if_ext($param , "id_usuario")){
+            $response =  $this->recibo_model->get_saldo_usuario($param);
+        }
+        $this->response($response);
+    }
     /*
     function en_proceso_GET(){
         $param =  $this->get();
@@ -540,6 +549,30 @@ class recibo extends REST_Controller{
             $response =  $this->recibo_model->q_up("notificacion_pago" , 1 , $param["recibo"]);
         }
         $this->response($response);
+    }
+    function compras_GET(){
+
+        $param    =      $this->get();
+        $response =      false;
+        if(if_ext($param , "fecha_inicio,fecha_termino,tipo")){
+            $response                       =  $this->recibo_model->get_compras_tipo_periodo($param);
+            $data["compras"]                =  $response;
+            $data["tipo"]                   =  $param["tipo"];
+            $data["status_enid_service"]    =  $this->get_status_enid_service();
+
+            $v     =  $param["v"];
+            if ($v == 1 ) {
+                return  $this->load->view("ventas/compras" , $data);
+            }
+        }
+        $this->response($response);
+
+
+
+    }
+    private function get_status_enid_service($q=[]){
+        $api    =  "status_enid_service/index/format/json/";
+        return $this->principal->api( $api , $q );
     }
 
 }

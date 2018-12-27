@@ -134,14 +134,16 @@ function respuesta_informacion_servicio(data) {
 		$(".detalle").click(carga_tallas);
 		$(".activar_publicacion").click(activa_publicacion);
 		$(".tiempo_entrega").change(set_tiempo_entrega);
-
 		$(".btn_url_ml").click(set_url_ml);
+
+		$(".form_dropshipping").submit(modifica_dropshipping);
 		if( get_option("flag_nueva_categoria")  == 1 ) {
 			recorrepage("#seccion_metakeywords_servicio");
 		}
 		if (get_option("flag_recorrido") != undefined) {
 			recorrepage(get_option("seccion_a_recorrer"));
 		}
+		$(".descartar_promocion").click(descartar_promocion);
 		$('#summernote').summernote();		
 		display_elements([".contenedor_busqueda_articulos" , ".agregar_servicio btn_agregar_servicios" , ".titulo_articulos_venta"] , 0 );
 		
@@ -1191,4 +1193,38 @@ var activa_publicacion = function(){
 		carga_informacion_servicio(4);
 	} );
 
+}
+var descartar_promocion = function(){
+
+	var id_servicio =  	get_parameter_enid( $(this),  "id");
+
+	if( id_servicio > 0 ){
+		set_option("id_servicio" , id_servicio);
+		show_confirm("NO SE PUBLICARÁ MÁS ESTE ARTÍCULO ¿ESTAS DE ACUERTO?",  "" , "SI, DESCARTAR PROMOCIÓN" , descarta_promocion  );
+
+	}
+}
+var descarta_promocion = function(){
+
+
+	var id_servicio =  	get_option("id_servicio");
+	var data_send 	= 	{"status": 1 , "id_servicio" : id_servicio };
+	var url 		= 	"../q/index.php/api/servicio/status/format/json/";
+	request_enid( "PUT",  data_send, url, function(){
+		carga_servicios();
+	} );
+
+}
+var muestra_cambio_link_dropshipping = function(id_servicio){
+	showonehideone(   ".input_link_dropshipping"   , ".text_link_dropshipping" );
+
+}
+var modifica_dropshipping = function(e){
+
+	var data_send 	= $(".form_dropshipping").serialize();
+	var url 		= $(".form_dropshipping").attr("action");
+	request_enid( "PUT",  data_send, url, function(){
+		carga_informacion_servicio(4);
+	} );
+	e.preventDefault();
 }

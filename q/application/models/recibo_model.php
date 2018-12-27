@@ -79,13 +79,15 @@
         
         
         $id_usuario =  $param["id_usuario"];                
-        $params  = ["saldo_cubierto",
-                    "monto_a_pagar",
-                    "flag_envio_gratis", 
-                    "costo_envio_cliente",
-                    "num_ciclos_contratados",
-                    "costo_envio_vendedor",
-                    "saldo_cubierto_envio"];
+        $params     = [
+            "saldo_cubierto",
+            "monto_a_pagar",
+            "flag_envio_gratis",
+            "costo_envio_cliente",
+            "num_ciclos_contratados",
+            "costo_envio_vendedor",
+            "saldo_cubierto_envio"
+        ];
 
         $keys       = get_keys($params); 
         $query_get  = "SELECT 
@@ -98,8 +100,8 @@
                         entregado = 0
                     AND 
                         saldo_cubierto>0";
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
+        return $this->db->query($query_get)->result_array();
+
     } 
     function carga_actividad_pendiente($param){
 
@@ -142,9 +144,63 @@
                     AND 
                        ".$where;
                     
-                    $result =  $this->db->query($query_get);
-                    return $result->result_array();
-    }    
+                    return  $this->db->query($query_get)->result_array();
+    }
+      function get_where_tiempo($param){
+
+          $fecha_inicio   =  $param["fecha_inicio"];
+          $fecha_termino  =  $param["fecha_termino"];
+          $tipo =  $param["tipo"];
+          switch ($tipo){
+              case 6:
+
+                  return " DATE(fecha_registro)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+                  break;
+              case 2:
+
+                  return " (fecha_termino)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+                  break;
+
+              case 3:
+
+                  return " (fecha_actualizacion)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+                  break;
+
+              case 7:
+
+                  return " (fecha_pago)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+                  break;
+
+
+              case 9:
+
+                  return " (fecha_pago)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+                  break;
+
+
+              case 10:
+
+                  return " (fecha_cancelacion)
+                   BETWEEN 
+                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+                  break;
+
+              default:
+
+                  break;
+          }
+
+      }
     /**/
     function cancela_orden_compra($param){
       

@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){ 	
-  
+
+
   if ( ! function_exists('get_resumen_cuenta'))
   {
     function get_resumen_cuenta($text){
@@ -40,4 +41,11 @@ if(!function_exists('invierte_date_time')){
   function valida_nombre_propietario($nombre_persona , $propietario_tarjeta ){
       return $nombre_persona; 
   }
+  function get_data_saldo($saldo){
+
+      $text = ( get_param_def( $saldo , "saldo") > 0  ) ?  $saldo["saldo"] : 0;
+      return $text;
+
+  }
+
 }/*Termina el helper*/

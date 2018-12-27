@@ -31,14 +31,18 @@ class Home extends CI_Controller{
                 'area_cliente/proyectos_persona.js',
                 'area_cliente/cobranza.js',
                 'js/direccion.js',
-                'area_cliente/buzon.js'
+                'area_cliente/buzon.js',
+                "alerts/jquery-confirm.js"
+
             ];
+
 
             $data["css"] = [
                 "css_tienda_cliente.css",
                 "valoracion.css",
                 "area_cliente.css",
-                "preguntas.css"
+                "preguntas.css",
+                "confirm-alert.css"
             ];
             
             $data["ticket"] =  get_info_variable( $this->input->get() , "ticket" );

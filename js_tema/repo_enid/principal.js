@@ -411,9 +411,9 @@ function response_carga_metricas_desarrollo(data){
 }
 /**/
 function carga_comparativas(){
-	
+
 	var url 		=  "../q/index.php/api/desarrollo/comparativas/format/json/";	
-	var data_send 	=  {};
+	var data_send 	=  { tiempo: 1 };
 	request_enid( "GET",  data_send, url, response_carga_comparativa, ".place_metricas_comparativa" , 0 , ".place_metricas_comparativa"  );
 	e.preventDefault();	
 }
@@ -478,7 +478,7 @@ function resumen_usuarios(){
 
 	var  	fecha_inicio 	=  	get_attr(this, "fecha_inicio"); 
 	var 	fecha_termino 	= 	get_attr(this, "fecha_termino"); 
-	var 	url 			=  "../persona/index.php/api/equipo/usuarios/format/json/";	
+	var 	url 			=  "../q/index.php/api/usuario/usuarios/format/json/";
 	var 	data_send 		=  {"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino ,  "page" : get_option("page")};
 	request_enid( "GET",  data_send , url, response_resumen_usuarios, ".place_reporte"); 
 }
@@ -516,7 +516,7 @@ function resumen_compras(){
 	var 	fecha_termino 	= 	get_attr(this, "fecha_termino"); 	
 	var 	tipo 			=  	get_attr(this, "tipo_compra");
 	var  	data_send 		=  	{"fecha_inicio":fecha_inicio , "fecha_termino":  fecha_termino , "tipo" : tipo ,  "v" : 1};
-	var 	url 			=  	"../pagos/index.php/api/tickets/compras/format/json/";	
+	var 	url 			=  	"../q/index.php/api/recibo/compras/format/json/";
 	request_enid( "GET",  data_send, url, 1, ".place_reporte", 0 , ".place_reporte" );  
 }
 /**/

@@ -134,14 +134,15 @@
   }
  
   private function create_tmp_solicitud_pago_usuario($flag , $_num , $param){
-    $this->db->query(get_drop("tmp_solicitud_pago_usuario_$_num"));
-    if ($flag ==  0){
-      $id_usuario =  $param["id_usuario"];
-      $query_create ="CREATE TABLE tmp_solicitud_pago_usuario_$_num
-      AS
-      SELECT id_solicitud FROM solicitud_pago_usuario 
-      WHERE id_usuario =$id_usuario
-      AND status =0 ";            
+
+        $this->db->query(get_drop("tmp_solicitud_pago_usuario_$_num"));
+        if ($flag ==  0){
+            $id_usuario =  $param["id_usuario"];
+            $query_create =   "CREATE TABLE tmp_solicitud_pago_usuario_$_num
+                              AS
+                              SELECT id_solicitud FROM solicitud_pago_usuario 
+                              WHERE id_usuario =$id_usuario
+                              AND status =0 ";
       $this->db->query($query_create);
     }        
   }
@@ -149,14 +150,14 @@
                
         $_num =  get_random();
         $this->create_tmp_solicitud_pago_usuario(0, $_num, $param);
-            
             $query_get ="SELECT * FROM tmp_solicitud_pago_usuario_$_num s 
                         INNER JOIN solicitud_pago sp
                         ON s.id_solicitud = sp.id_solicitud";            
             $data_complete =  $this->db->query($query_get)->result_array();
         $this->create_tmp_solicitud_pago_usuario(1, $_num, $param);
         return $data_complete;        
-    }    
+    }
+    /*
     function get_where_tiempo($param){
 
       $fecha_inicio   =  $param["fecha_inicio"];
@@ -206,7 +207,7 @@
       }
       
     }       
-
+    */
     function get_num($param){
 
       
@@ -216,9 +217,7 @@
       ];
       return $this->get(["count(*)num"] , $params_where)[0]["num"];
     } 
-     /*  
-    
-    */
+
     /*
     function registra_solicitud_pago_amigo($param){
 

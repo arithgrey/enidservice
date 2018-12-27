@@ -9,7 +9,7 @@
             <div style="width: 80%;margin: 0 auto;margin-top: 20px;">
                 <select style="width: 100%" class="form-control">
                     <option class="de" id='de' value="1">                            
-                        De saldo Enid Service $<?=$saldo_disponible?>MXN
+                        De saldo Enid Service $<?=get_data_saldo($saldo_disponible)?> MXN
                     </option>                  
                 </select>
             </div>

@@ -41,14 +41,7 @@
                             "class"       => 'black  tab_privacidad_seguridad'
                         ])?>
                 </li>                                     
-                <li>
-                    <?=anchor_enid("TUS PRODUCTOS EN VENTA" ,                
-                        [
-                            "class" =>  "btn_cuenta_personal" ,
-                            "href"  => "../search/?q3=".$id_usuario."&tienda=1"
-                        ]
-                    )?>
-                </li>
+
                 <li>
                     <?=anchor_enid("INTERESES Y PREFERENCIAS" ,  
                     [
@@ -56,6 +49,14 @@
                         "href"  => "../lista_deseos/?q=preferencias"
                     ])?>
                     
+                </li>
+                <li>
+                    <?=anchor_enid("TUS PRODUCTOS EN VENTA" ,
+                        [
+                            "class" =>  "btn_cuenta_personal" ,
+                            "href"  => "../search/?q3=".$id_usuario."&tienda=1"
+                        ]
+                    )?>
                 </li>
                 <li >
                     <div class="contenedor_compartir_redes_sociales">            

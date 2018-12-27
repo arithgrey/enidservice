@@ -89,14 +89,21 @@ function valida_activo_informes_por_telefono($valor , $valor_usuario){
   function  valida_text_imagenes($tipo_promocion, $num_images){
       
       $tipo_promocion =  strtoupper($tipo_promocion); 
-      if($num_images == 0){                             
-          
-          $msj    =  "MUESTRA IMAGENES SOBRE TU ".$tipo_promocion." A POSIBLES CLIENTES"; 
-          $text   =  heading_enid($msj ,  4 , ["class"  =>  'mensaje_imagenes_visible'] , 1);
-          $notificacion  =  "TU ". $tipo_promocion ." NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES";
-          $text         .= div($notificacion, ["class" => "notificacion_publicar_imagenes"], 1);    
+      if($num_images == 0){
+
+
+          $msj              =  "MUESTRA IMAGENES SOBRE TU ".$tipo_promocion." A TUS CLIENTES";
+          $text             =  heading_enid($msj ,  4 , ["class"  =>  'mensaje_imagenes_visible'] , 1);
+          $notificacion     =  "TU ". $tipo_promocion ." NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES";
+          $text             .= div($notificacion, ["class" => "notificacion_publicar_imagenes"], 1);
         return  $text;
       }      
   }
+    function valida_descartar_promocion($num_images , $id_servicio){
+
+        if($num_images == 0){
+            return div(anchor_enid("DESCARTAR PROMOCIÓN" , ["class"=>'descartar_promocion' ,  "id" => $id_servicio] ) , ["class" => "text-right"]);
+        }
+    }
  
 }

@@ -182,71 +182,83 @@ if(!function_exists('invierte_date_time')){
 
 			if ($flag == 0) {						
 				$activo 	=  0;
-				
 				if ($id_estado ==  $status["estado"]) {
 					$activo = 1;	
 					$flag ++;
 				}
 			}
-			
 
 
-			
-			$class 		=  ($activo ==  1) ? "timeline__item__date_active": "timeline__item__date";
-			$seccion 	=  div(icon("fa fa-check-circle-o") , ["class"=>$class]); 
-
-			$seccion_2 	= 	
-					div(p($status["text"] , 
-			        	[
-			        		"class"	=>	"timeline__item__content__description"
-			        	]), 
-			        ["class"	=>"timeline__item__content"]);
 
 
-			
+            switch ($i) {
+
+                case 2:
+                    $class      =   (tiene_domilio($domicilio , 1) ==  0) ? "timeline__item__date" : "timeline__item__date_active";
+                    $seccion_2  =   get_seccion_domicilio($domicilio , $id_recibo , $tipo_entrega );
+
+                    break;
+                case 3:
+                    $seccion_2 = get_seccion_compra($recibo , $id_recibo);
+                    break;
+
+                default:
+                    $class 		=   ($activo ==  1 ) ? "timeline__item__date_active": "timeline__item__date";
+                    $seccion_2 	= 	get_seccion_base($status);
+                    break;
+
+            }
 
 
-			
-			if ($i == 2 ) {				
-
-				$texto_entrega 	 =  "DOMICILIO DE ENTREGA CONFIRMADO ".icon("fa fa-check");
-				if (tiene_domilio($domicilio , 1) ==  0) {
-					$texto_entrega = ($tipo_entrega ==  1 ) ? 
-					"REGISTRA TU DIRECCIÓN DE ENTREGA":"INDICA TU PUNTO DE DE ENTREGA";	
-				}
-				
-
-				$url 		= 
-				"../pedidos/?seguimiento=".$id_recibo."&domicilio=1";
-
-				$seccion_2 	= 	div(p(anchor_enid($texto_entrega , ["href" =>  $url]), 
-			        	[
-			        		"class"	=>	"timeline__item__content__description"
-			        	]), 
-			        ["class"	=>"timeline__item__content"]);
-			}
-
-			if ($i == 3 ) {				
-
-				$text_realizo_compra 	= 	
-					( $recibo["saldo_cubierto"] > 0  ) ?  
-					"REALIZASTE TU COMPRA".icon("fa fa-check") : "REALIZA TU COMPRA";
-
-
-				$url 		=  "../area_cliente/?action=compras&ticket=".$id_recibo;				
-				$seccion_2 	= 	
-					div(p(anchor_enid($text_realizo_compra , ["href" =>  $url]), 
-			        	[
-			        		"class"	=>	"timeline__item__content__description"
-			        	]), 
-			        ["class"	=>"timeline__item__content"]);
-			}
-
+            $seccion 	=   div(icon("fa fa-check-circle-o") , ["class" => $class]);
 			$linea .=  div($seccion.$seccion_2 , ["class"=>"timeline__item"]);
 		
 		}
 		return $linea;
 	}
+	function get_seccion_base($status){
+        $seccion 	=
+            div(p($status["text"] ,
+                [
+                    "class"	=>	"timeline__item__content__description"
+                ]),
+                ["class"	=>"timeline__item__content"]);
+
+        return $seccion;
+
+    }
+	function get_seccion_compra($recibo , $id_recibo ){
+
+	    $text 	    =   ( $recibo["saldo_cubierto"] > 0  ) ? "REALIZASTE TU COMPRA".icon("fa fa-check") : "REALIZA TU COMPRA";
+        $url 		=   "../area_cliente/?action=compras&ticket=".$id_recibo;
+        $seccion 	=   div(p(anchor_enid($text , ["href" =>  $url]),
+                [
+                    "class"	=>	"timeline__item__content__description"
+                ]),
+                ["class"	=>"timeline__item__content"]);
+
+        return  $seccion;
+    }
+	function get_seccion_domicilio($domicilio , $id_recibo , $tipo_entrega ){
+
+        $texto_entrega 	 =  "DOMICILIO DE ENTREGA CONFIRMADO ".icon("fa fa-check");
+
+        if (tiene_domilio($domicilio , 1) ==  0) {
+            $texto_entrega = ($tipo_entrega ==  1 ) ?
+                "REGISTRA TU DIRECCIÓN DE ENTREGA":"INDICA TU PUNTO DE DE ENTREGA";
+            $class_item =  "timeline__item__content";
+        }
+
+
+        $url 		= "../pedidos/?seguimiento=".$id_recibo."&domicilio=1";
+
+        $seccion 	= 	div(p(anchor_enid($texto_entrega , ["href" =>  $url]),
+            [
+                "class"	=>	"timeline__item__content__description"
+            ]),
+            ["class"	=>"timeline__item__content"]);
+        return $seccion;
+    }
 	function get_texto_status($status , $recibo){
 
 		$status_recibo 	= $recibo["status"];
@@ -290,11 +302,11 @@ if(!function_exists('invierte_date_time')){
 		return $data_complete;
 
 	}
-	function create_seccion_linea_tiempo($recibo , $status , $activo=0){
+	/*function create_seccion_linea_tiempo($recibo , $status , $activo=0 , $direccion_activa = 0 ){
 
 
-		$status_recibo = $recibo[0]["status"];
-		$text  = "";
+		$status_recibo  = $recibo[0]["status"];
+		$text           = "";
 		switch ($status) {
 			case 1:
 				$text = "PAGO VERIFICADO";	
@@ -325,11 +337,9 @@ if(!function_exists('invierte_date_time')){
 
 		$class 		=  ($activo ==  1) ? "timeline__item__date_active": "timeline__item__date";
 
-		$seccion 	=  
-				div(icon("fa fa-check-circle-o") , 
-					["class"=>$class]);        
-		$seccion_2 	= 	
-				div(p($text , 
+		$seccion 	= div(icon("fa fa-check-circle-o") , ["class"=>$class]);
+
+		$seccion_2 	= div(p($text ,
 		        	[
 		        		"class"	=>	"timeline__item__content__description"
 		        	]), 
@@ -339,6 +349,7 @@ if(!function_exists('invierte_date_time')){
 		
 
 	}
+	*/
 	function create_seccion_tipificaciones($data){
 
 		$tipificaciones  =	"";

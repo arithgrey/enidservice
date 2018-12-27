@@ -424,7 +424,6 @@ if(!function_exists('invierte_date_time')){
   		if ($id_perfil ==  3) {
 
   			$att 		= 	add_attributes($attributes);
-
   			$titulo    	=  	heading_enid("DÍAS PROMEDIO DE ENTREGA" , 4);  			
 	  		$select  	.= 	"<select ".$att.">";
 
@@ -443,6 +442,34 @@ if(!function_exists('invierte_date_time')){
   		}  		
   		
   	}
+    function get_link_dropshipping($id_perfil, $id_servicio , $link_dropshipping  ){
+
+        $select 		=  "";
+        if ($id_perfil ==  3) {
+
+            $link_dropshipping = (strlen($link_dropshipping) > 3 ) ?  $link_dropshipping : icon("fa fa fa-pencil");
+            $titulo    	 =  	heading_enid("LINK DROPSHIPPING" , 4);
+            $select     .=      div($link_dropshipping, [ "class" => "text_link_dropshipping" , "onclick" => "muestra_cambio_link_dropshipping('".$id_servicio."')" ]);
+            $select     .=      div( input([
+                    "class"         => "form-control" ,
+                    "name"          => "link_dropshipping"  ,
+                    "required"      => "true"  ,
+                    "placeholder"   => "Link de compra",
+                    "type"          => "url",
+                    "value"         =>  $link_dropshipping
+                ]) . guardar( "GUARDAR" )
+                                ,
+                                ["class" => "input_link_dropshipping"]);
+            $select     .=      place("response_link_dropshipping");
+            $select     .=      input_hidden(["name" => "servicio" , "value" => $id_servicio]);
+
+
+
+            return div(div($titulo ,  ["class" =>"col-lg-6"]) . div($select ,  ["class" =>"col-lg-6"]) , 1);
+        }
+
+    }
+
 
 	function sumatoria_array($array ,$key) {
 		return array_sum(array_column($array, $key));

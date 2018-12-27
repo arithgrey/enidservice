@@ -15,36 +15,10 @@
           $this->db->order_by($order, $type_order);  
         }       
         return $this->db->get("cuentas")->result_array();
-    }   
-       
-    
+    }
     function insert( $params , $return_id=0 , $debug=0){        
         $insert   = $this->db->insert("cuenta_pago", $params , $debug);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
-    }  
-    function regitra_cuenta_bancaria($param){
-
-      $data_complete["registro_cuenta"] = 0;    
-      $data_complete["banco_es_numerico"] = 0;    
-      $data_complete["clabe_es_corta"] = 1;    
-
-      if(is_numeric($banco)){          
-          $data_complete["banco_es_numerico"] = 1;              
-          if(strlen(trim($clabe)) ==  18){
-            $data_complete["clabe_es_corta"] = 0;    
-
-            $params = [
-              "id_usuario"  =>   $param["id_usuario"] ,
-              "clabe"       =>   $param["clabe"] ,
-              "id_banco"    =>   $param["banco"],
-              "tipo"        =>   0
-            ];
-                        
-            $data_complete["registro_cuenta"]= $this->insert($params);
-          }
-      }
-      return $data_complete;
-      
     }
     function get_cuentas_usuario($param){
     

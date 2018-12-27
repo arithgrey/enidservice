@@ -59,30 +59,35 @@ if(!function_exists('invierte_date_time')){
   }  
   
   function crea_seccion_de_busqueda_extra($info , $busqueda){
-      
-      $seccion  = "";
-      $flag     = 0;
 
-      $lista    = [];
-      for ($z=0; $z < count($info); $z++) {           
-          $data = $info[$z];
-          foreach ($data as $row) {
-          
-            $id_clasificacion     = $row["id_clasificacion"];  
-            $nombre_clasificacion = $row["nombre_clasificacion"];  
+      if(is_array($info)){
 
-            $url      = "../search/?q=".$busqueda."&q2=".$id_clasificacion;
-            $lista[]  = 
-            anchor_enid($nombre_clasificacion , ["href"=> $url , "class"=>'categoria_text black'] );
-            
-            $flag ++; 
+          $seccion  = "";
+          $flag     = 0;
+
+          $lista    = [];
+          for ($z=0; $z < count($info); $z++) {
+              $data = $info[$z];
+              foreach ($data as $row) {
+
+                  $id_clasificacion     = $row["id_clasificacion"];
+                  $nombre_clasificacion = $row["nombre_clasificacion"];
+
+                  $url      = "../search/?q=".$busqueda."&q2=".$id_clasificacion;
+                  $lista[]  =
+                      anchor_enid($nombre_clasificacion , ["href"=> $url , "class"=>'categoria_text black'] );
+
+                  $flag ++;
+              }
           }
+
+          $info_seccion["html"]           =  ul($lista);
+          $info_seccion["num_categorias"] =  $flag;
+          return $info_seccion;
+
       }
-      
-      $info_seccion["html"]           =  ul($lista);
-      $info_seccion["num_categorias"] =  $flag; 
-      return $info_seccion;
-      
+
     }
+
     
 }

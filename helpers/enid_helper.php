@@ -570,13 +570,10 @@ if ( ! function_exists('create_button_easy_select'))
       $campo_id   =   $attributes["campo_id"];
       $easy_selet =  "";
 
-      foreach ($arr as $row) {          
-          //$text          =  $row[$attributes["text_button"]];
+      foreach ($arr as $row) {
           $attr          =  add_attributes($extra);  
           $id               =  $row[$campo_id];
-          
           $easy_selet   .=  "<a ".$attr." id=".$id."  >". $row["talla"] ."</a>";
-        
       }
       return $easy_selet;     
     }
@@ -1078,7 +1075,7 @@ function debug($msg, $array = 0)
     for ($a=0; $a < count($keys); $a++){           
       if (!array_key_exists(trim($keys[$a]), $param)  ||  strlen(trim($param[$keys[$a]])) < $num ){
         $z  = 0;
-        debug("NO se recibió el parametro->" .$keys[$a]);
+        debug("NO se recibió el parametro->" .$keys[$a]  );
       }
 
     }

@@ -83,9 +83,10 @@ function response_carga_metricas(data){
 }
 /**/
 function carga_comparativas(){
-	
-	var url =  "../q/index.php/api/desarrollo/comparativas/format/json/";	
-	var data_send =  {};
+
+	debugger;
+	var url 		=  "../q/index.php/api/desarrollo/comparativas/format/json/";
+	var data_send 	=  { tiempo: 1 };
 
 	request_enid( "GET" ,  data_send, url, function(){
 		llenaelementoHTML(".place_metricas_comparativa" , data);

@@ -73,24 +73,19 @@
             if ($es_movil == 0){                            
                 if ($bloque_primer_nivel["num_categorias"] > 0) {
                     echo $bloque_primer_nivel["html"];
-
                 }
-                /**/
                 if($bloque_segundo_nivel["num_categorias"] > 0){
                     echo hr();
                     echo $bloque_segundo_nivel["html"];
                 }
-                /**/
                 if($bloque_tercer_nivel["num_categorias"] > 0){
                     echo hr();
                     echo $bloque_tercer_nivel["html"];
                 }
-                /**/
                 if($bloque_cuarto_nivel["num_categorias"] > 0){
                     echo hr();
                     echo $bloque_cuarto_nivel["html"];
                 }
-                /**/
                 if($bloque_quinto_nivel["num_categorias"] > 0){
                     echo hr();
                     echo $bloque_quinto_nivel["html"];

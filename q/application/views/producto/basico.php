@@ -21,7 +21,8 @@
     $precio             =   $servicio["precio"];           
     $costo_envio ="";
     if($flag_servicio == 0){
-        $costo_envio    =  $servicio["costo_envio"]["text_envio"]["cliente_solo_text"];                 
+
+        $costo_envio    =  (get_param_def($servicio, "costo_envio") !==  0 ) ? $servicio["costo_envio"]["text_envio"]["cliente_solo_text"]: "";
     } 
     $id_ciclo_facturacion =  $servicio["id_ciclo_facturacion"];
         

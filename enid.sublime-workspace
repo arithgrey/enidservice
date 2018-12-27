@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"resul",
+				"result_array"
+			],
+			[
 				"para",
 				"param"
 			],
@@ -510,10 +514,6 @@
 			[
 				"n",
 				"nombre"
-			],
-			[
-				"ali",
-				"align-self\tproperty"
 			]
 		]
 	},
@@ -577,13 +577,14 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
-		"/var/www/html/inicio/js_tema",
-		"/var/www/html/inicio/js_tema/alerts",
-		"/var/www/html/inicio/js_tema/area_cliente",
-		"/var/www/html/inicio/js_tema/planes_servicios"
+		"/var/www/html/inicio/producto",
+		"/var/www/html/inicio/producto/application",
+		"/var/www/html/inicio/producto/application/controllers"
 	],
 	"file_history":
 	[
+		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
+		"/var/www/html/inicio/producto/application/controllers/home.php",
 		"/var/www/html/inicio/js_tema/planes_servicios/img.js",
 		"/var/www/html/inicio/q/application/views/imgs/servicio_producto_servicio.php",
 		"/var/www/html/inicio/js_tema/servicio/pre.js",
@@ -591,7 +592,6 @@
 		"/var/www/html/inicio/producto/application/js/principal.js",
 		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
 		"/var/www/html/inicio/q/application/views/producto/principal.php",
-		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
 		"/var/www/html/inicio/q/application/helpers/recibo_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
 		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
@@ -620,7 +620,6 @@
 		"/var/www/html/inicio/procesar/application/views/secciones_2/domicilio_entrega.php",
 		"/var/www/html/inicio/procesar/application/controllers/home.php",
 		"/var/www/html/inicio/js_tema/js/direccion.js",
-		"/var/www/html/inicio/producto/application/controllers/home.php",
 		"/var/www/html/inicio/js_tema/domicilio/direccion_pedido_registrado.js",
 		"/var/www/html/inicio/planes_servicios/application/controllers/inicio.php",
 		"/var/www/html/inicio/js_tema/js/main.js",
@@ -857,6 +856,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"get_resultados_posibles",
+			"modificado:",
+			"\",\"",
 			"guardar_img_enid",
 			"guardar_img_enid   a_enid_blue white completo btn_guardar",
 			"carga_opcion_entrega",
@@ -981,10 +983,7 @@
 			"$param[\"id_clasificacion\"]",
 			"create_pagination",
 			"config_paginacion",
-			"create_pagination",
-			"config_paginacion",
-			"pagin",
-			"            "
+			"create_pagination"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1078,6 +1077,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"serviciosmodel.php",
+				"q/application/models/serviciosmodel.php"
+			],
 			[
 				"producto.js",
 				"producto/application/js/principal.js"
@@ -1585,10 +1588,6 @@
 			[
 				"header",
 				"view_tema/header_template.php"
-			],
-			[
-				"he",
-				"planes_servicios/application/views/home_enid.php"
 			]
 		],
 		"width": 0.0
@@ -1682,8 +1681,8 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
-	"side_bar_width": 221.0,
+	"side_bar_visible": false,
+	"side_bar_width": 210.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

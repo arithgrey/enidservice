@@ -272,8 +272,8 @@
             $param["metakeyword"] =     $q2;    
             $param["id_servicio"] =     $servicio;
             $response             =  $this->agrega_metakeyword_sistema($param);
-        }        
-        $this->response($response);
+        }
+        return $response;
     }
     function elimina_color_servicio($param){
         
@@ -718,7 +718,7 @@
                         COUNT(0)num_servicios 
                     FROM 
                         servicio  ".$query_where;
-        return $this->db->query($query_get)[0]["num_servicios"];
+        return $this->db->query($query_get)->result_array()[0]["num_servicios"];
             
     }
     function create_productos_disponibles($flag , $_num , $param){

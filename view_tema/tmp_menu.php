@@ -29,7 +29,6 @@
 
     <div class="pull-right">
         <li class="dropdown  menu_notificaciones_progreso_dia">
-
             <?=anchor_enid(
                 icon("fa fa-bell white").
                 span("", ["class"=>"num_tareas_dia_pendientes_usr"]),
@@ -59,6 +58,4 @@
                 [ "class"=>"dropdown-menu menu_usuario"]
             )?>
         </li>
-
-
     </div>

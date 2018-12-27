@@ -27,13 +27,16 @@ class Inicio extends CI_Controller {
         
         $data["js"] =['planes_servicios/principal.js', 
                       'planes_servicios/img.js',
-                      'js/summernote.js'];
+                      'js/summernote.js',
+            'alerts/jquery-confirm.js'
+        ];
 
         $data["css"]=[
             "css_tienda.css", 
             "vender.css" ,
             "planes_servicios.css",
-            "producto.css"
+            "producto.css",
+            "confirm-alert.css"
         ];
 
         $data["css_external"]   = ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];
@@ -47,10 +50,12 @@ class Inicio extends CI_Controller {
         if ( $data["action"] ==  2 ){
 
             $data["considera_segundo"]  = 1;
-            if (ctype_digit($param["servicio"]) && $data["in_session"] ==  1 && $data["id_usuario"]>0 ){
+            if (ctype_digit( $param["servicio"] ) && $data["in_session"] ===  1 && $data["id_usuario"] > 0 ){
 
-                $param["id_usuario"] =  $data["id_usuario"];
-                if ( $this->valida_servicio_usuario($param) != 1 ){
+                $param["id_usuario"]    =  $data["id_usuario"];
+                $param["id_servicio"]   =  $param["servicio"];
+                $es_usuario             =  $this->valida_servicio_usuario($param);
+                if ( $es_usuario  != 1 ){
                     $this->principal->logout();
                 }
                 $data["extra_servicio"] = $param["servicio"];
@@ -62,7 +67,7 @@ class Inicio extends CI_Controller {
     }
     private function valida_servicio_usuario($q){        
 
-        $api = "producto/es_servicio_usuario/format/json/";
+        $api = "servicio/es_servicio_usuario/format/json/";
         return  $this->principal->api($api , $q );
     }
     /*Regresa el top de servicios*/

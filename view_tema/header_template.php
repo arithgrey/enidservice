@@ -3,17 +3,9 @@
 <head>
 <?=$this->load->view("../../../view_tema/header_meta_enid")?>
 <div id="flipkart-navbar">
-    <div class="container">        
-
-
-        <!--
-        <div class="extra_menu_simple" style="display: none;">
-            <?php $img_enid   = img_enid(["style"=>"width: 45px!important;"] ); ?>
-            <?=anchor_enid($img_enid ,["href"=>"../"])?>
-        </div>
-        -->
-
+    <div class="container">
         <?php if($is_mobile <  1 && $in_session ==  0):?>
+
             <div class="menu_completo_enid_service">
                 <!--1-->
                 <?=get_logo($is_mobile)?>
@@ -25,7 +17,6 @@
                 <?=$this->load->view("../../../view_tema/menu_session")?>
             </div>
         <?php elseif($is_mobile ==  1 &&  $in_session ==  0):?>
-            <!--12-->
             <?=get_logo($is_mobile , $in_session)?>
 
         <?php  elseif($is_mobile ==  1 &&  $in_session ==  1  ):?>
@@ -33,11 +24,10 @@
             <div class="col-lg-11">
                 <?=$this->load->view("../../../view_tema/tmp_menu")?>
             </div>
-
-
         <?php  elseif($is_mobile == 0 &&  $in_session ==  1  ):?>
             <?=get_logo($is_mobile , $in_session)?>
             <div class="col-lg-11">
+                <?=$this->load->view("../../../view_tema/formularios/form_busqueda_departamentos")?>
                 <?=$this->load->view("../../../view_tema/tmp_menu")?>
             </div>
         <?php endif;?>

@@ -29,29 +29,11 @@ class Tickets extends REST_Controller{
             $data["info_tareas"]        =   $this->get_tareas_ticket($param);
             $data["info_num_tareas"]    =   $this->get_tareas_ticket_num($param);
             $data["perfil"]             =   $perfil;
-            $this->load->view("tickets/detalle" , $data );
+            return $this->load->view("tickets/detalle" , $data );
 
         }
         $this->response($response);
     }
-    /*
-    function compras_GET(){
-
-        $param                          =  $this->get();
-        $response                       =  $this->tickets_model->get_compras_tipo_periodo($param);
-        $data["compras"]                =  $response;
-        $data["tipo"]                   =  $param["tipo"];
-        $data["status_enid_service"]    =  $this->tickets_model->get_status_enid_service($param);
-
-        $v     =  $param["v"];
-        if ($v == 1 ) {
-            $this->load->view("ventas/compras" , $data);
-        }else{
-            $this->response($response);
-        }
-
-    }
-    */
     function index_POST(){        
 
         $param                  = $this->post();
@@ -187,18 +169,20 @@ class Tickets extends REST_Controller{
         $response["gamificacion"]   =  $this->gamificacion_negativa($id_servicio , $param["id_usuario"]);
         return $response;                
     }
+    /*
     function solicitud_amigo_POST(){
 
-        $param =  $this->post();
-        $param["id_usuario"] =   $this->id_usuario;
-        $response =  $this->tickets_model->registra_solicitud_pago_amigo($param);
+        $param                  =   $this->post();
+        $param["id_usuario"]    =   $this->id_usuario;
+        $response               =   $this->tickets_model->registra_solicitud_pago_amigo($param);
         $this->response($response);        
     }
+    */
     function movimientos_usuario_GET(){
         
-        $param                          =  $this->get();
+        $param                          =   $this->get();
         $param["id_usuario"]            =   $this->id_usuario;
-        $response["solicitud_saldo"]    =  $this->tickets_model->get_solicitudes_saldo($param);
+        $response["solicitud_saldo"]    =   $this->tickets_model->get_solicitudes_saldo($param);
         $this->load->view("tickets/solicitudes_saldo" , $response);               
     }
     function ticket_desarrollo_GET(){
@@ -230,7 +214,7 @@ class Tickets extends REST_Controller{
 
                     break;
             }
-            $this->load->view("tickets/principal_desarollo" , $data );
+            return $this->load->view("tickets/principal_desarollo" , $data );
 
         }
         $this->response($response);

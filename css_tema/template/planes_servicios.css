@@ -3,6 +3,9 @@
     margin-bottom: 3px;
     text-decoration: underline !important;
 }
+.input_link_dropshipping{
+    display:none;
+}
 
 .selector_principal {
     padding: .5px;

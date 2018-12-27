@@ -273,10 +273,9 @@
                         AND  
                           '".$fecha_termino."'
                         GROUP BY DATE(fecha_registro)";
-        $result = $this->db->query($query_get);                
-        return $result->result_array();
+        return $this->db->query($query_get)->result_array();
     }
-    
+
     function get_usuarios_perfil($param){      
         
         $id_perfil          =   $param["id_perfil"];
@@ -451,8 +450,7 @@
                     ORDER BY 
                     us.num_deseo DESC LIMIT $limit ";
         
-        debug("8888");
-        debug($query_get);
+
         return   $this->db->query($query_get)->result_array();
         
     }

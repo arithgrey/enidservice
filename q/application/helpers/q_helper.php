@@ -400,7 +400,6 @@ if(!function_exists('invierte_date_time')){
   /**/
   function get_tareas_pendienetes_usuario($info){
 
-    
     $inf                          =   $info["info_notificaciones"];    
     $lista_pendientes             =   "";      
     $meta_ventas                  =   0;    
