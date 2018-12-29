@@ -8,8 +8,8 @@
 	if($flag_busqueda_q ==  1){		
 		$this->load->view("secciones_2/respuesta");
 	}
-	/**/
-?>
+
+
 
 
 

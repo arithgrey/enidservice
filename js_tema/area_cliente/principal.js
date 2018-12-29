@@ -150,4 +150,4 @@ var notifica_tipo_compra =  function(tipo, recibo){
 	var data_send 	=  {tipo : tipo , recibo : recibo};			
 	request_enid( "POST",  data_send, url);	
 	
-}
+};

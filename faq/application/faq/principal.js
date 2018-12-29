@@ -59,9 +59,9 @@ function carga_info_faq(){
 function response_carga_info_faq(data){
 	/*form_respuesta*/
 	var id_categoria =  data[0].id_categoria;
-	var status       =  data[0].status        
+	var status       =  data[0].status;
 	var titulo       =  data[0].titulo;
-	var respuesta    =  data[0].respuesta     	
+	var respuesta    =  data[0].respuesta;
 				
 	selecciona_select(".form_respuesta .categoria", id_categoria);
 	selecciona_select(".form_respuesta .tipo_respuesta", status);

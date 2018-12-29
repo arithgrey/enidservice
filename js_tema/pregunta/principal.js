@@ -48,7 +48,7 @@ function before_registro_valoracion(){
 /**/
 function carga_productos_sugeridos(){	
 	var url =  "../q/index.php/api/servicio/sugerencia/format/json/";		
-	var data_send = {"id_servicio" : get_option("servicio") }	
+	var data_send = {"id_servicio" : get_option("servicio") };
 	request_enid( "GET",  data_send, url, response_carga_productos_sugeridos, ".place_tambien_podria_interezar");
 }
 /**/
@@ -62,7 +62,7 @@ function response_carga_productos_sugeridos(data){
 /**/
 function carga_valoraciones(){
 	url =  "../q/index.php/api/valoracion/articulo/format/json/";		
-	data_send = {"id_servicio" : get_option("servicio") , "respuesta_valorada" : get_option("respuesta_valorada")}	
+	data_send = {"id_servicio" : get_option("servicio") , "respuesta_valorada" : get_option("respuesta_valorada")};
 	request_enid( "GET",  data_send, url, response_carga_valoraciones, ".place_registro_afiliado");	
 }
 /**/
@@ -97,7 +97,7 @@ function ordenar_valoraciones(e){
 					  -1 : (+$(a).attr('numero_utilidad') < +$(b).attr('numero_utilidad')) ? 
 					   1 : 0;
 
-					})
+					});
 				llenaelementoHTML(".contenedor_global_recomendaciones" , listitems);
 				set_option("orden" , "asc");
 			
@@ -117,7 +117,7 @@ function ordenar_valoraciones(e){
 				  -1 : (+$(a).attr('fecha_info_registro') < +$(b).attr('fecha_info_registro')) ? 
 				   1 : 0;
 
-				})
+				});
 
 			llenaelementoHTML(".contenedor_global_recomendaciones" , listitems);
 			

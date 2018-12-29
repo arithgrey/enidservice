@@ -27,7 +27,7 @@ function carga_productos_sugeridos(){
 
 	var url 		=  "../q/index.php/api/servicio/sugerencia/format/json/";		
 	var q 			=  get_parameter(".qservicio");  	
-	var data_send 	= {"id_servicio" : get_option("servicio") , "q" :  q}	
+	var data_send 	= {"id_servicio" : get_option("servicio") , "q" :  q};
 	request_enid( "GET",  data_send, url, response_carga_productos);
 }
 /**/
@@ -39,7 +39,7 @@ function response_carga_productos(data){
 /**/
 function carga_valoraciones(){
 	var url 		=  "../q/index.php/api/valoracion/articulo/format/json/";		
-	var data_send	= {"id_servicio" : get_option("servicio") , "respuesta_valorada" : get_option("respuesta_valorada")}	
+	var data_send	= {"id_servicio" : get_option("servicio") , "respuesta_valorada" : get_option("respuesta_valorada")};
 	request_enid( "GET",  data_send, url, response_carga_valoraciones);
 }
 /**/
@@ -61,7 +61,7 @@ function response_carga_valoraciones(data){
 function agrega_valoracion_respuesta(valoracion , num){
 
 	var url =  "../q/index.php/api/valoracion/utilidad/format/json/";			
-	var data_send = {"valoracion" : valoracion,  "utilidad" :  num}	
+	var data_send = {"valoracion" : valoracion,  "utilidad" :  num};
 	set_option("respuesta_valorada" , valoracion);		
 	request_enid( "PUT",  data_send, url, carga_valoraciones);
 }
@@ -80,7 +80,7 @@ function ordenar_valoraciones(e){
 					  -1 : (+$(a).attr('numero_utilidad') < +$(b).attr('numero_utilidad')) ? 
 					   1 : 0;
 
-					})
+					});
 				llenaelementoHTML(".contenedor_global_recomendaciones" , listitems);
 				set_option("orden" , "asc");			
 		break;
@@ -94,7 +94,7 @@ function ordenar_valoraciones(e){
 				  -1 : (+$(a).attr('fecha_info_registro') < +$(b).attr('fecha_info_registro')) ? 
 				   1 : 0;
 
-				})
+				});
 			llenaelementoHTML(".contenedor_global_recomendaciones" , listitems);
 			
 		break;
@@ -106,7 +106,7 @@ function ordenar_valoraciones(e){
 /**/
 function agregar_a_lista_deseos(){	
 	var url =  "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";		
-	var data_send = {"id_servicio" : get_option("servicio")}		
+	var data_send = {"id_servicio" : get_option("servicio")};
 	request_enid( "PUT",  data_send, url, respuesta_add_valoracion);
 }
 /**/

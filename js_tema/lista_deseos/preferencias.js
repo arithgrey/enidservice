@@ -7,7 +7,7 @@ $(document).ready(function(){
 
     var timer = function() {
         setInterval(changeSlide, 7500);
-    }
+    };
 
     function changeSlide() {
         var a = slidesWrapper.find('.active');

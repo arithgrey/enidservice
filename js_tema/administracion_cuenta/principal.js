@@ -165,7 +165,7 @@ function set_password(e){
 /**/
 var termina_session = function(){
 	redirect('../login/index.php/startsession/logout/');	
-}
+};
 function  actualiza_password(anterior , nuevo , confirma){
 	
 	var 		url 		=	"../q/index.php/api/usuario/pass/format/json/";	
@@ -181,7 +181,7 @@ var resp_actualizacion_pass = function(data){
 	}else{
 		llenaelementoHTML(".msj_password" , data );			
 	}
-}
+};
 
 /*
 function auto_completa_direccion(){

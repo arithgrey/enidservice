@@ -33,7 +33,7 @@ var busqueda_pedidos =  function(e){
 			
 	}
 	e.preventDefault();
-}
+};
 var response_pedidos =  function(data){	
 
 	llenaelementoHTML(".place_pedidos" ,data );
@@ -45,7 +45,7 @@ var response_pedidos =  function(data){
 		$(".form_search").submit();
 	});
 	
-}
+};
 var cambio_estado = function(){
 	
 	var recibo  =  	get_parameter_enid($(this) , "id");	
@@ -58,7 +58,7 @@ var cambio_estado = function(){
 	$(".status_venta_registro option[value='"+status_venta_registro+"']").attr("disabled", "disabled");
 	
 
-}
+};
 var modidica_estado = function(){
 
 
@@ -87,7 +87,7 @@ var modidica_estado = function(){
 		    }
 		});
 	} 
-}
+};
 var guarda_nuevo_estado = function(){
 	var status_venta 			= parseInt(get_valor_selected(".selector_estados_ventas .status_venta"));		
 	var status_venta_registro	= parseInt(get_parameter(".status_venta_registro"));		
@@ -123,7 +123,7 @@ var guarda_nuevo_estado = function(){
 		    break;	
 		}
 	}       
-}
+};
 var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 
 
@@ -143,7 +143,7 @@ var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 		set_option("es_proceso_compra"  , 1);
 		registra_data_nuevo_estado(status_venta);
 	}
-}
+};
 
 var registra_saldo_cubierto = function(e){
 
@@ -158,7 +158,7 @@ var registra_saldo_cubierto = function(e){
 
 	}
 	e.preventDefault();
-}
+};
 var response_saldo_cubierto = function(data){
 	
 	if (data ==  true) {
@@ -172,7 +172,7 @@ var response_saldo_cubierto = function(data){
 		$(".mensaje_saldo_cubierto").show();
 		llenaelementoHTML(".mensaje_saldo_cubierto", data);
 	}	
-}
+};
 var response_status_venta = function(data){
 
 
@@ -187,7 +187,7 @@ var response_status_venta = function(data){
 		llenaelementoHTML(".mensaje_saldo_cubierto_post_venta", data);
 	}
 
-}
+};
 var pre_cancelacion = function(){
 		
 	var tipo 		=	0;	
@@ -221,12 +221,12 @@ var pre_cancelacion = function(){
 	var url 		= "../q/index.php/api/tipificacion/index/format/json/";	
 	request_enid( "GET",  data_send, url, response_pre_cancelacion)		
 
-}
+};
 var response_pre_cancelacion = function(data){
 
 	llenaelementoHTML(".place_tipificaciones" , data);
 	$(".tipificacion").change(registra_motivo_cancelacion);
-}
+};
 var registra_motivo_cancelacion  = function(){
 	
 	var status_venta 	= 	get_valor_selected(".status_venta");
@@ -235,7 +235,7 @@ var registra_motivo_cancelacion  = function(){
 	var url 			= 	"../q/index.php/api/recibo/status/format/json/";		
 	bloquea_form(".selector_estados_ventas");
 	request_enid( "PUT",  data_send, url, response_status_venta);	
-}
+};
 var cambio_tipo_entrega = function(){
 
 	var tipo_entrega 			=  get_valor_selected(".form_edicion_tipo_entrega .tipo_entrega");
@@ -267,7 +267,7 @@ var cambio_tipo_entrega = function(){
 		
 	}
 
-}
+};
 var set_tipo_entrega = function(tipo_entrega , tipo_entrega_actual){
 	
 	if (tipo_entrega != tipo_entrega_actual) {
@@ -297,23 +297,23 @@ var set_tipo_entrega = function(tipo_entrega , tipo_entrega_actual){
 		registra_tipo_entrega(tipo_entrega, get_parameter(".recibo"));
 	}
 
-}
+};
 var registra_tipo_entrega = function(tipo_entrega, recibo){
 
 	var text_tipo_entrega=  get_parameter(".text_tipo_entrega"); 
 	var data_send = {"tipo_entrega" : tipo_entrega ,  recibo: recibo , text_tipo_entrega:text_tipo_entrega};
 	var url 	  = "../q/index.php/api/recibo/tipo_entrega/format/json/";  
 	request_enid( "PUT",  data_send, url, response_tipo_entrega);
-}
+};
 var response_tipo_entrega = function(data){
 	var url = "../pedidos/?recibo="+get_parameter(".recibo");
 	redirect(url);
-}
+};
 var pre_tipo_entrega = function(){
 	$(".form_edicion_tipo_entrega").show();	
 	var tipo_entrega_actual 	=  get_parameter(".tipo_entrega_def");
 	selecciona_valor_select(".form_edicion_tipo_entrega .tipo_entrega" ,  tipo_entrega_actual);
-}
+};
 var verifica_pago_previo = function(){
 	var saldo_cubierto =  get_parameter(".saldo_actual_cubierto");	
 	if (saldo_cubierto > 0 ) {
@@ -324,14 +324,14 @@ var verifica_pago_previo = function(){
 	}else{
 		modifica_status(6 , 1);
 	}
-}
+};
 var oculta_opciones_estados =  function(){
 	display_elements([".selector_estados_ventas" , 0]);
-}
+};
 var procesa_cambio_estado = function(){
-	set_option("es_proceso_compra" , 1)
+	set_option("es_proceso_compra" , 1);
 	modifica_status(6 , 1);	
-}
+};
 var registra_data_nuevo_estado = function(status_venta){
 
 	bloquea_form(".selector_estados_ventas");
@@ -339,4 +339,4 @@ var registra_data_nuevo_estado = function(status_venta){
 	set_option("es_proceso_compra" , 0);
 	var  url 		= "../q/index.php/api/recibo/status/format/json/";		
 	request_enid( "PUT",  data_send, url, response_status_venta)	
-}
+};

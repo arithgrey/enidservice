@@ -604,4 +604,4 @@ var carga_repo_tipos_entregas = function(e){
 		focus_input(".form_tipos_entregas #datetimepicker5");
 	}	
 	e.preventDefault();		
-}
+};

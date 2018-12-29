@@ -23,7 +23,7 @@ var muestra_opciones = function(){
 
 		break;
 	}
-}
+};
 var envia_correo = function(e){
 	
 
@@ -44,10 +44,10 @@ var envia_correo = function(e){
 	}
 	e.preventDefault();	
 	
-}
+};
 var response_send_email = function(data){
 	redirect("../contact/?ubicacion=1#direccion");
-}
+};
 var envia_whatsapp = function(e){
 	
 	var nombre 	= 	get_parameter(".nombre_whatsapp").length;
@@ -69,10 +69,10 @@ var envia_whatsapp = function(e){
 	}
 
 	e.preventDefault();		
-}
+};
 var response_send_whatsApp = function (data) {
 
 	var usuario = data.id_usuario;
 	set_parameter(".usuario" , usuario);
 	$(".form_proceso_compra").submit();
-}
+};

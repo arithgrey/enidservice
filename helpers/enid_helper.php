@@ -1,72 +1,5 @@
 <?php
-/*
-https://youtu.be/FwXskdcCRIk
 
-grep -r "libraries/REST_Controller.php"  /Users/jonathan.medrano/Documents/example
-perl -p -i -e 's/pero/pero_____/g' ex.php 
-sed -i 's/;();/;/g' 'pagos/application/controllers/api/afiliados.php'
-
-
-
-https://youtu.be/_dwdRNckUGk
-https://www.youtube.com/watch?v=DhpZ9EFshXI
-https://youtu.be/Baxq-kJvKgA
-https://www.youtube.com/watch?v=1JGzDfEmQrw
-IMPORTANT 
-MAP
-function cube($n)
-{
-    return($n * $n * $n);
-}
-
-$a = array(1, 2, 3, 4, 5);
-$b = array_map("cube", $a);
-____________________
-filter
-function impar($var)
-{
-    // Retorna siempre que el número entero sea impar
-    return($var & 1);
-}
-
-function par($var)
-{
-    // Retorna siempre que el número entero sea par
-    return(!($var & 1));
-}
-
-$array1 = array("a"=>1, "b"=>2, "c"=>3, "d"=>4, "e"=>5);
-$array2 = array(6, 7, 8, 9, 10, 11, 12);
-
-echo "Impar :\n";
-print_r(array_filter($array1, "impar"));
-echo "Par:\n";
-print_r(array_filter($array2, "par"));
-_______________
-REDUCE
-function suma($carry, $item)
-{
-    $carry += $item;
-    return $carry;
-}
-
-function producto($carry, $item)
-{
-    $carry *= $item;
-    return $carry;
-}
-
-$a = array(1, 2, 3, 4, 5);
-$x = array();
-
-var_dump(array_reduce($a, "suma")); // int(15)
-var_dump(array_reduce($a, "producto", 10)); // int(1200), ya que: 10*1*2*3*4*5
-var_dump(array_reduce($x, "suma", "No hay datos a reducir")); // string(22) "No hay datos a reducir"
-
-
-FUNCIONES LAMBDA -> http://fabien.potencier.org/on-php-5-3-lambda-functions-and-closures.html
-https://translate.google.com/translate?sl=en&tl=es&js=y&prev=_t&hl=es&ie=UTF-8&u=https%3A%2F%2Fwww.codeigniter.com%2Fuser_guide%2Flibraries%2Floader.html&edit-text=
-*/
 if ( ! function_exists('heading'))
 {
   function heading($data = '', $h = '1', $attributes = '')
@@ -108,13 +41,11 @@ if ( ! function_exists('span'))
       if ($row == 0) {
         return "<span ".$attr.">".$info."</span>";  
       }else{
-        return n_row_12()."<span".$attr.">".$info."</span>".end_row();
+        return n_row_12()."<span ".$attr.">".$info."</span>".end_row();
       }
       
   }
 }
-
-/**/
 if ( ! function_exists('p'))
 {
   function p( $info , $attributes='', $row = 0 )
@@ -162,7 +93,6 @@ if ( ! function_exists('guardar'))
       }      
   }
 }
-/**/
 if ( ! function_exists('add_element'))
 {
   function add_element( $info , $type , $attributes ='' , $row_12 =0 )
@@ -180,7 +110,6 @@ if ( ! function_exists('add_element'))
 }
 function sub_categorias_destacadas($param){
 
-      //$nombres_primer_nivel =   $param["nombres_primer_nivel"];
       $z                    =   0;
       $data_complete        =   [];              
 
@@ -206,8 +135,7 @@ function sub_categorias_destacadas($param){
         }                
         return $data_complete; 
 
-}  
-/**/
+}
 if ( ! function_exists('div'))
 {
   function div( $info , $attributes='' , $row_12 =0 )
@@ -226,7 +154,6 @@ if ( ! function_exists('div'))
       
   }
 }
-/**/
 if ( ! function_exists('input'))
 {
   function input( $attributes='' , $e = 0)
@@ -253,8 +180,6 @@ if ( ! function_exists('input_hidden'))
       
   }
 }
-
-/**/
 if ( ! function_exists('add_attributes'))
 {
   function add_attributes($attributes='')
@@ -263,7 +188,6 @@ if ( ! function_exists('add_attributes'))
     {
       return ($attributes != '') ? ' '.$attributes : '';
     }
-
     $att = '';
     foreach ($attributes as $key => $val)
     {    
@@ -304,7 +228,6 @@ if ( ! function_exists('end_row'))
     return $row;
   }
 }
-/**/
 if ( ! function_exists('n_row_12'))
 {
 function n_row_12( $attributes = ''){
@@ -345,7 +268,6 @@ if ( ! function_exists('anchor_enid'))
     }    
   }
 }
-
 if ( ! function_exists('get_td'))
 {
   function get_td($val='' , $attributes = '' ){
@@ -362,7 +284,6 @@ if ( ! function_exists('get_th'))
       return "<th ". $attr ." NOWRAP >". $val ."</th>";
   }
 }
-
 if ( ! function_exists('select_enid'))
 {
   function select_enid($data , $text_option , $val ,  $attributes ='' ){
@@ -455,7 +376,6 @@ if ( ! function_exists('template_table_enid'))
       return $template;
   }
 }
-/**/
 if ( ! function_exists('create_tag'))
 {
  function create_tag($param , $class ,  $val_id , $text){
@@ -476,7 +396,6 @@ if ( ! function_exists('create_tag'))
     return $new_tags;
   }
 }
-/**/
 if ( ! function_exists('get_array_json'))
 {
  function get_array_json($val){
@@ -489,7 +408,6 @@ if ( ! function_exists('get_array_json'))
     }
  }
 }
-/**/
 if ( ! function_exists('get_json_array'))
 {
  function get_json_array($arr){
@@ -502,7 +420,6 @@ if ( ! function_exists('get_json_array'))
     }
  }
 }
-/**/
 if ( ! function_exists('push_element_json'))
 {
  function push_element_json($arr ,  $element){
@@ -536,7 +453,6 @@ if ( ! function_exists('unset_element_array'))
     return $new_array;
    
  }
- /**/
 }
 if ( ! function_exists('create_button_easy_select'))
 {
@@ -582,7 +498,6 @@ if ( ! function_exists('create_button_easy_select'))
 }
 if ( ! function_exists('create_select'))
 {
-  /**/
   function create_select($data , $name , $class , $id , $text_option , $val , $row=0 , $def=0 , $valor=0 , $text_def= ""){
 
       $select = "<select name='". $name ."'  class='".$class ."'  id='". $id ."'> ";
@@ -607,10 +522,8 @@ if ( ! function_exists('create_select'))
       }
   }
 }
-/**/
 if ( ! function_exists('get_param_def'))
 {
-  /**/
   function get_param_def($data , $key , $val_def = 0 , $valida_basura = 0 ){
     $val = ( is_array($data) && array_key_exists($key, $data) ) ? $data[$key] : $val_def;
 
@@ -627,7 +540,6 @@ if ( ! function_exists('get_param_def'))
 
 if ( ! function_exists('exists_array_def'))
 {
-  /**/
   function exists_array_def($data , $key , $exists =1 , $fail = 0){
     $val = ( is_array($data) && array_key_exists($key, $data) ) ? $exists : $fail;
     return $val;
@@ -646,10 +558,8 @@ if ( ! function_exists('label'))
       }      
   }
 }
-/**/
 if ( ! function_exists('place'))
 {
-  /**/
   function place($class , $attributes = [] , $row =1){         
 
     $attributes["class"]  = $class;      
@@ -660,10 +570,8 @@ if ( ! function_exists('place'))
     }          
   }
 }
-/**/
 if ( ! function_exists('img_enid'))
 {
-  /**/
   function img_enid($extra = [] , $row_12 =0 ){
       
       $conf["src"]    =   "../img_tema/enid_service_logo.jpg";
@@ -1016,7 +924,7 @@ function debug($msg, $array = 0)
 { 
     
 
-    /*if($_SERVER['HTTP_HOST'] ==  "localhost") {*/
+    if($_SERVER['HTTP_HOST'] ==  "localhost") {
 
       $_date_fmt  = 'Y-m-d H:i:s';
       $filepath   = BASEPATH."../debug/debug.log"; 
@@ -1035,53 +943,46 @@ function debug($msg, $array = 0)
       fwrite($fp, $message);
       flock($fp, LOCK_UN);
       fclose($fp);
-
       //@chmod($filepath, FILE_WRITE_MODE);
       return TRUE;  
-    /*}*/
-    
-  }
-  function get_costo_envio($param){
-    
-    
-    $flag_envio_gratis  =  $param["flag_envio_gratis"];
-    $data_complete      = [];
-    
-    if($flag_envio_gratis ==  1){      
-      
-      $data_complete["costo_envio_cliente"]= 0;
-      $data_complete["costo_envio_vendedor"]= 100;
-      
-      $data_complete["text_envio"] =  texto_costo_envio_info_publico(
-        $flag_envio_gratis, 
-        $data_complete["costo_envio_cliente"], 
-        $data_complete["costo_envio_vendedor"]);
-    }else{
-      $data_complete["costo_envio_cliente"]= 100;
-      $data_complete["costo_envio_vendedor"]= 0;
-      $data_complete["text_envio"] =  texto_costo_envio_info_publico(
-        $flag_envio_gratis , 
-        $data_complete["costo_envio_cliente"] , 
-        $data_complete["costo_envio_vendedor"]);
     }
-    return $data_complete;
-  }
-  /**/
-  function if_ext($param , $k='', $num=0){
-
-    $keys = explode(",", $k);  
-    $z    = 1;
     
-    for ($a=0; $a < count($keys); $a++){           
-      if (!array_key_exists(trim($keys[$a]), $param)  ||  strlen(trim($param[$keys[$a]])) < $num ){
-        $z  = 0;
-        debug("NO se recibió el parametro->" .$keys[$a]  );
+  }
+  if ( ! function_exists('get_costo_envio')) {
+      function get_costo_envio($param){
+
+        $flag_envio_gratis  =   $param["flag_envio_gratis"];
+        $response      =   [];
+
+        if($flag_envio_gratis ==  1){
+
+            $response["costo_envio_cliente"]    =   0;
+            $response["costo_envio_vendedor"]   =   100;
+            $response["text_envio"]             =   texto_costo_envio_info_publico($flag_envio_gratis, $response["costo_envio_cliente"], $response["costo_envio_vendedor"]);
+        }else{
+            $response["costo_envio_cliente"]= 100;
+            $response["costo_envio_vendedor"]= 0;
+            $response["text_envio"] =  texto_costo_envio_info_publico($flag_envio_gratis , $response["costo_envio_cliente"] , $response["costo_envio_vendedor"]);
+        }
+        return $response;
       }
-
-    }
-    return $z;
   }
+  if ( ! function_exists('if_ext')) {
+      function if_ext($param , $k='', $num=0){
 
+        $keys = explode(",", $k);
+        $z    = 1;
+
+        for ($a=0; $a < count($keys); $a++){
+          if (!array_key_exists(trim($keys[$a]), $param)  ||  strlen(trim($param[$keys[$a]])) < $num ){
+            $z  = 0;
+            debug("NO se recibió el parametro->" .$keys[$a]  );
+          }
+
+        }
+        return $z;
+      }
+  }
 }
 
 if ( ! function_exists('textarea'))
@@ -1100,7 +1001,6 @@ if ( ! function_exists('textarea'))
 
   }
 }
-
 if ( ! function_exists('iframe'))
 {
   function iframe($attributes = '' ,  $row_12 = 0)
@@ -1117,7 +1017,6 @@ if ( ! function_exists('iframe'))
 
   }
 }
-
 if ( ! function_exists('center'))
 {
   function center($attributes = '' ,  $row_12 = 0)
@@ -1207,7 +1106,6 @@ if ( ! function_exists('add_hour'))
       return $date;
     }
 }
-
 if ( ! function_exists('get_logo'))
 {
     function get_logo($is_mobile , $tipo = 0 ){
@@ -1252,7 +1150,8 @@ if ( ! function_exists('get_img_usuario'))
         return   img($img_conf);
 
     }
-}if ( ! function_exists('microtime_float'))
+}
+if ( ! function_exists('microtime_float'))
 {
     function microtime_float(){
         list($useg, $seg) = explode(" ", microtime());

@@ -336,4 +336,4 @@ var agregar_tarea = function(){
 		height: 100
 	});
 		
-}
+};

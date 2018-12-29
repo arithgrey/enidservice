@@ -64,4 +64,4 @@ class Inicio extends CI_Controller {
         $api            = "departamento/index/format/json/";                
         return $this->principal->api( $api , $q);
     }
-}?>
+}

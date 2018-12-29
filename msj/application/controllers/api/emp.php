@@ -280,4 +280,4 @@ class Emp extends REST_Controller{
         $this->response("No hay usuarios a quienes gamificar");
     }
     
-}?>
+}

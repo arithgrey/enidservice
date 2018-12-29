@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
-  
+
+    /*
  	function forma_info_accesos_area_cliente_usuario($param){
         
         $password   =  $param["password"];
@@ -25,7 +26,8 @@ if(!function_exists('invierte_date_time')){
           $l  .="</table>";
           return $l;
   }
-  /**/
+    */
+    /*
   function forma_info_accesos_area_cliente_usuario_simple($param){
         
     $password =  $param["password"];        
@@ -39,4 +41,5 @@ if(!function_exists('invierte_date_time')){
     return $texto;
 
   }
+    */
 }

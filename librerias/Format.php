@@ -303,4 +303,4 @@ class Format {
 		return unserialize(trim($string));
 	}
 
-}?>
+}

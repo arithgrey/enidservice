@@ -24,7 +24,7 @@ function inicio_session(){
 
 
 	var url 		= get_option("url");
-	var data_send	= { secret:get_option("tmp_password") , "email" : get_option("email") }	
+	var data_send	= { secret:get_option("tmp_password") , "email" : get_option("email") };
 	if (get_parameter("#mail").length > 5 &&  get_parameter("#pw").length > 5){
 		request_enid( "POST",  data_send , url , response_inicio_session , 1 , before_inicio_session); 
 	}else{		
@@ -139,7 +139,7 @@ function agrega_usuario(e){
 			set_option("tmp_password" , tmp_password);			
 			set_option("email" , email);	
 			set_option("nombre" ,nombre);	
-			var  data_send = {"nombre" : nombre , "email" : email , "password": tmp_password , "simple" : 1 }
+			var  data_send = {"nombre" : nombre , "email" : email , "password": tmp_password , "simple" : 1 };
 			request_enid("POST",  data_send , url , response_usuario_registro);			
 		}
 	}
@@ -192,4 +192,4 @@ function valida_seccion_inicial(){
 var facilita_acceso = function(){	
 	var secciones = [".olvide_pass"  , ".registrar_cuenta" ,".btn_soy_nuevo" , ".iniciar_sesion_lateral" , ".call_to_action_anuncio" , ".contenedor-lateral-menu"];
 	display_elements(secciones , 0);	
-}
+};

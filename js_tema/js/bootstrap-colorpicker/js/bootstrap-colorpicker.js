@@ -343,7 +343,7 @@
 			});
 			return false;
 		}
-	}
+	};
 
 	$.fn.colorpicker = function ( option ) {
 		return this.each(function () {
@@ -533,8 +533,8 @@
 							'<div class="colorpicker-saturation"><i><b></b></i></div>'+
 							'<div class="colorpicker-hue"><i></i></div>'+
 							'<div class="colorpicker-alpha"><i></i></div>'+
-							'<div class="colorpicker-color"><div /></div>'+
+							'<div class="colorpicker-color"><div/></div>'+
 						'</div>'
 	};
 
-}( window.jQuery )
+}( window.jQuery );

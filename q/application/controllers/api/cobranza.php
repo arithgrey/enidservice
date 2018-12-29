@@ -686,4 +686,4 @@ class Cobranza extends REST_Controller{
         $api  = "usuario_punto_encuentro/index";
         return $this->principal->api( $api ,  $q , "json" , "POST");    
     }
-}?>
+}
