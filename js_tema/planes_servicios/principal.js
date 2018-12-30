@@ -39,7 +39,7 @@ function carga_servicios() {
 	display_elements(	[".texto_ventas_titulo" ,  ".contenedor_busqueda" , ".contenedor_busqueda_articulos" ] , 1  );
 	var 	url 		= 	"../q/index.php/api/servicio/empresa/format/json/";
 	var  	orden 		=  	get_parameter("#orden");	
-	var 	data_send 	= 	{ "q" : get_parameter(".q_emp") , "id_clasificacion" : get_option("id_clasificacion") , "page" : get_option("page"),"order": orden}	
+	var 	data_send 	= 	{ "q" : get_parameter(".q_emp") , "id_clasificacion" : get_option("id_clasificacion") , "page" : get_option("page"),"order": orden};
 
 	request_enid( "GET",  data_send , url , respuesta_carga_servicios , ".place_servicios" , function(){
 
@@ -84,7 +84,7 @@ function carga_informacion_servicio(num = 1) {
 	
 	display_elements([".contenedor_busqueda"] ,  0);
 	var 	url 		= "../q/index.php/api/servicio/especificacion/format/json/";
-	var  	data_send 	= {id_servicio : get_option("servicio"),"num" : num}
+	var  	data_send 	= {id_servicio : get_option("servicio"),"num" : num};
 	request_enid("GET" , data_send , url , respuesta_informacion_servicio  , ".place_servicios" , function(){
 		recorrepage(".contenedor_principal_enid");	
 
@@ -389,7 +389,7 @@ function registrar_ciclo_facturacion(e) {
 /**/
 function carga_grupos() {
 	var  url 		= "../q/index.php/api/servicio/grupos/format/json/";
-	var  data_send 	= {}
+	var  data_send 	= {};
 	request_enid("GET" ,  data_send , url , respuesta_grupos );	
 }
 /**/
@@ -411,7 +411,7 @@ function carga_info_grupos() {
 		set_option("grupo" , grupo);
 	}
 	var url 		= "../q/index.php/api/servicio/grupo/format/json/";
-	var data_send 	= {grupo : get_option("grupo")}
+	var data_send 	= {grupo : get_option("grupo")};
 	request_enid("GET",  data_send , url , respuesta_info_grupos );
 	
 }
@@ -426,7 +426,7 @@ function respuesta_info_grupos(data){
 function carga_form_nuevo_grupo() {
 
 	var  url 		= "../q/index.php/api/servicio/grupo_form/format/json/";
-	var  data_send 	= {}
+	var  data_send 	= {};
 	request_enid( "GET", data_send , url , respuesta_nuevo_grupo , ".place_info_grupos" );	
 }
 /**/
@@ -856,7 +856,7 @@ function registra_nuevo_servicio() {
 		"tercer_nivel" 		: get_option("tercer_nivel"),
 		"cuarto_nivel" 		: get_option("cuarto_nivel"),
 		"quinto_nivel" 		: get_option("quinto_nivel")
-	}	
+	};
 	request_enid("POST", data_send , url , response_registro);	
 }
 /**/
@@ -881,7 +881,7 @@ function elimina_foto_producto(e) {
 
 	var url 		= "../q/index.php/api/imagen_servicio/index/format/json/";
 	if (get_parameter_enid( $(this),  "id") > 0) {
-		var data_send 	= {"id_imagen" : get_parameter_enid( $(this),  "id") , "id_servicio" : get_option("servicio")}
+		var data_send 	= {"id_imagen" : get_parameter_enid( $(this),  "id") , "id_servicio" : get_option("servicio")};
 		request_enid("DELETE", data_send , url , function(){
 			carga_informacion_servicio(1);
 		} , ".place_servicios");
@@ -1157,7 +1157,7 @@ var respuesta_tiempo_entrega = function(data){
 
 	$(".response_tiempo_entrega").empty();
 	debugger;
-}
+};
 var set_imagen_principal = function(){
 	var id 			=  get_parameter_enid($(this) ,  	"id");
 	if (id > 0 ) {
@@ -1166,7 +1166,7 @@ var set_imagen_principal = function(){
 		var  	data_send  	=  {"id_servicio" : get_option("servicio") , "id_imagen" : id };
 		request_enid("PUT",  data_send , url , carga_informacion_servicio(1), ".place_servicios");
 	}
-}
+};
 var set_url_ml = function(){
 	
 	var url_ml =  get_parameter(".url_mercado_libre");
@@ -1183,7 +1183,7 @@ var set_url_ml = function(){
 		focus_input(".url_mercado_libre");
 	}
 	
-}
+};
 var activa_publicacion = function(){
 	var status 		=  	get_parameter_enid( $(this),  "status"); 
 	var id_servicio =  	get_parameter_enid( $(this),  "id"); 
@@ -1193,7 +1193,7 @@ var activa_publicacion = function(){
 		carga_informacion_servicio(4);
 	} );
 
-}
+};
 var descartar_promocion = function(){
 
 	var id_servicio =  	get_parameter_enid( $(this),  "id");
@@ -1203,7 +1203,7 @@ var descartar_promocion = function(){
 		show_confirm("NO SE PUBLICARÁ MÁS ESTE ARTÍCULO ¿ESTAS DE ACUERTO?",  "" , "SI, DESCARTAR PROMOCIÓN" , descarta_promocion  );
 
 	}
-}
+};
 var descarta_promocion = function(){
 
 
@@ -1214,11 +1214,11 @@ var descarta_promocion = function(){
 		carga_servicios();
 	} );
 
-}
+};
 var muestra_cambio_link_dropshipping = function(id_servicio){
 	showonehideone(   ".input_link_dropshipping"   , ".text_link_dropshipping" );
 
-}
+};
 var modifica_dropshipping = function(e){
 
 	var data_send 	= $(".form_dropshipping").serialize();
@@ -1227,4 +1227,4 @@ var modifica_dropshipping = function(e){
 		carga_informacion_servicio(4);
 	} );
 	e.preventDefault();
-}
+};

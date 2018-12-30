@@ -5,8 +5,8 @@
             <div style="padding: 10px;">
                 <?=div(icon("fa fa-pencil editar_imagen_perfil white") , ["class"=>"text-left"] , 1)?>
                 <?=img([
-                    "src"       =>"../imgs/index.php/enid/imagen_usuario/".$id_usuario 
-                    "onerror"    =>"this.src='../img_tema/user/user.png'"
+                    "src"        => "../imgs/index.php/enid/imagen_usuario/".$id_usuario ,
+                    "onerror"    => "this.src='../img_tema/user/user.png'"
                 ])?>
             </div>            
             <div class="row coach-info">                

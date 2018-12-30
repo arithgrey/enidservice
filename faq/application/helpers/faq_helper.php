@@ -9,7 +9,6 @@ if(!function_exists('invierte_date_time')){
     $status = (isset($q) && strlen($q)>0) ? 1 : 0;
     return $status;    
   }
-  /**/
   function get_btn_registro_faq($in_session , $perfil){
 
     if ($in_session ==  1){
@@ -31,16 +30,14 @@ if(!function_exists('invierte_date_time')){
     $l = "";
     foreach($categorias as $row){
       
-      $id_categoria       =   $row["id_categoria"];
-      $nombre_categoria   =   $row["nombre_categoria"];
-      $faqs               =   $row["faqs"];   
+      $id_categoria         =   $row["id_categoria"];
+      $nombre_categoria     =   $row["nombre_categoria"];
+      $faqs                 =   $row["faqs"];
        
-      $href ="?categoria=".$id_categoria;
-      $link = anchor_enid(icon("fa fa-file-text-o") .div($nombre_categoria . "(".$faqs.")") , ["href"=> $href ]);  
-      $l   .= div($link , ["class"=>"col-lg-4"]);
+      $href                 =   "?categoria=".$id_categoria;
+      $link                 =   anchor_enid(icon("fa fa-file-text-o") .div($nombre_categoria . "(".$faqs.")") , ["href"=> $href ]);
+      $l                    .=  div($link , ["class"=>"col-lg-4"]);
     }
     return $l; 
   }
-
-
 }

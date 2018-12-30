@@ -31,7 +31,7 @@ var iniciar_proceso_entrega = function(){
 	        break;
 	} 
 
-}
+};
 /**/
 var muestra_lineas_metro = function(tipo){
 	
@@ -41,12 +41,12 @@ var muestra_lineas_metro = function(tipo){
 	set_option("tipo" , tipo);
 	request_enid( "GET",  data_send, url, response_lineas_metro);
 
-}
+};
 var response_lineas_metro = function(data){	
 	
 	llenaelementoHTML(".place_lineas" , data);
 	$(".linea_metro").click(muestra_estaciones);
-}
+};
 var muestra_estaciones = function(){
 
 	
@@ -71,7 +71,7 @@ var muestra_estaciones = function(){
 			request_enid( "GET",  data_send, url, response_estaciones);	
 		}
 	}
-}
+};
 var response_estaciones = function(data){
 
 
@@ -100,7 +100,7 @@ var response_estaciones = function(data){
 	llenaelementoHTML(".place_lineas" , data);
 	llenaelementoHTML(".nombre_linea_metro" ,  texto_centro);
 	$(".punto_encuentro").click(muestra_horarios);	
-}
+};
 var muestra_horarios = function(){
 	
 	var id 			 		=  get_parameter_enid($(this) , "id");	
@@ -114,7 +114,7 @@ var muestra_horarios = function(){
 		$(".mensaje_cobro_envio").hide();
 		set_parameter(".punto_encuentro_form" , id);
 		set_option("id_punto_encuentro" , id);	
-		llenaelementoHTML(".nombre_estacion_punto_encuentro" , "<span class='strong'>ESTACIÓN:</span> "+nombre_estacion)
+		llenaelementoHTML(".nombre_estacion_punto_encuentro" , "<span class='strong'>ESTACIÓN:</span> "+nombre_estacion);
 		$(".nombre_estacion_punto_encuentro").addClass("nombre_estacion_punto_encuentro_extra");
 
 
@@ -123,7 +123,7 @@ var muestra_horarios = function(){
 		var texto_cargos_gratis  =  "<span class='text_costo_envio_gratis'>ENVÍO GRATIS!</span>";
 
 		var texto_cargos_entrega = (flag_envio_gratis ==  1 ) ? texto_cargos_gratis: texto_cargos_entrega;
-		llenaelementoHTML(".cargos_por_entrega" ,  "<span class='strong'>CARGO POR ENTREGA:</span>"+ texto_cargos_entrega)
+		llenaelementoHTML(".cargos_por_entrega" ,  "<span class='strong'>CARGO POR ENTREGA:</span>"+ texto_cargos_entrega);
 		$(".cargos_por_entrega").addClass("cargos_por_entrega_extra");
 		$(".contenedor_estaciones").hide();
 		
@@ -139,13 +139,13 @@ var muestra_horarios = function(){
 
 	}
 
-}
+};
 var muestra_quien_recibe = function(){
 
 	display_elements([".resumen_encuentro",".titulo_principal_puntos_encuentro"],0);
 	display_elements([".formulario_quien_recibe"] ,1);
 	
-}
+};
 
 var registra_usuario = function(e){
 	
@@ -169,7 +169,7 @@ var registra_usuario = function(e){
 	}
 	e.preventDefault();	
 	
-}
+};
 var response_registro_usuario = function(data){
 
 	display_elements([".place_notificacion_punto_encuentro_registro"] , 0);
@@ -184,7 +184,7 @@ var response_registro_usuario = function(data){
 		redirect("../area_cliente/?action=compras&ticket="+data.id_recibo);
 	}
 
-}
+};
 var set_link = function(){
 			
 	var plan 			  = get_parameter_enid($(this) , "plan");	
@@ -193,16 +193,16 @@ var set_link = function(){
 	var url				  = "../login/index.php/api/sess/servicio/format/json/"; 
 	request_enid( "POST",  data_send, url, response_set_link);
 	
-}
+};
 var response_set_link = function(data){
 	redirect("../login");
-}
+};
 var  quita_espacios_en_telefono = function(){
 	
 	var valor 	= 	get_parameter(".telefono");
 	var nuevo 	=  	quitar_espacios_numericos(valor);
 	$(".telefono").val(nuevo);	
-}
+};
 var notifica_punto_entrega = function(e){
 
 	debugger;
@@ -214,7 +214,7 @@ var notifica_punto_entrega = function(e){
 	bloquea_form(".form_punto_encuentro_horario");
 	request_enid("POST",  data_send , url , response_notificacion_punto_entrega , ".place_notificacion_punto_encuentro");						
 	e.preventDefault();
-}
+};
 var response_notificacion_punto_entrega = function(data){	
 	display_elements([".place_notificacion_punto_encuentro" , ".form_punto_encuentro_horario"] , 0);	
 	if (get_parameter(".primer_registro") ==  1) {		
@@ -222,4 +222,4 @@ var response_notificacion_punto_entrega = function(data){
 	}else{
 		redirect("../pedidos/?seguimiento="+get_parameter(".recibo")+"&domicilio=1");			
 	}
-}
+};

@@ -101,8 +101,8 @@ function response_carga_data_usuario(data){
 	var info_usuario =  data[0];
 
 	nombre 				= 	info_usuario.nombre; 		
-	apellido_paterno 	= 	info_usuario.apellido_paterno 
-	apellido_materno 	= 	info_usuario.apellido_materno 
+	apellido_paterno 	= 	info_usuario.apellido_paterno;
+	apellido_materno 	= 	info_usuario.apellido_materno;
 	email 				=  	info_usuario.email;
 	id_departamento 	= 	info_usuario.id_departamento;		
 	inicio_labor 		=  	info_usuario.inicio_labor;

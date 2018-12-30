@@ -13,8 +13,14 @@ class Imprimir
 		
 		$pdf = new Fpdi();
 		$pageCount = $pdf->setSourceFile('ordern_pago.pdf');
-		$pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
-		$pdf->addPage("P","A4");
+        try {
+
+            $pageId = $pdf->importPage(1, PdfReader\PageBoundaries::MEDIA_BOX);
+
+        } catch (PdfReader\PdfReaderException $e) {
+
+        }
+        $pdf->addPage("P","A4");
 		$pdf->useImportedPage($pageId, 10, 10, 190 );
 		/**/
 		$beneficiario =  $param["beneficiario"];

@@ -1,1 +1,1 @@
-<?php require_once "../def.php";?>
+<?php require_once "../def.php";

@@ -36,4 +36,4 @@ class usuario_perfil extends REST_Controller{
       $this->response($response);      
     }
 
-}?>
+}

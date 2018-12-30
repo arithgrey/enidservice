@@ -50,7 +50,7 @@ var show_confirm = function(text ,  text_complemento , text_continuar=0 , on_nex
 			cancel: on_cancel
 		}
 	});
-}
+};
 /**/
 function existeFecha2(fecha){
     var fechaf = fecha.split("-");
@@ -217,7 +217,7 @@ function valida_tel_form(input ,  place_msj ){
 }	
 /**/
 function valEmail(valor){
-    var re 		=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/
+    var re 		=/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
     var valor 	= (!re.exec(valor)) ? false  : true ; 
     return valor;
 }
@@ -298,7 +298,7 @@ function envia_comentario(e){
 
 			f =  valida_tel_form("#tel" ,  ".place_tel_contacto" );
 			if (f ==  1 ) {				
-				set_places()
+				set_places();
 				recorrepage("#btn_envio_mensaje");
 				var  id_empresa = 1;
 				var  data_send =   $("#form_contacto").serialize()  + "&"+ $.param({"empresa" : id_empresa , "tipo" : 2 });
@@ -509,7 +509,7 @@ function quita_espacios_en_input_num(valor){
 /**/
 function comparer(index) {
     return function(a, b) {
-        var valA = getCellValue(a, index), valB = getCellValue(b, index)
+        var valA = getCellValue(a, index), valB = getCellValue(b, index);
         return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
     }
 }
@@ -519,9 +519,9 @@ function getCellValue(row, index){
 /**/
 function ordena_table_general(){
 
-	var table = $(this).parents('table').eq(0)
-	var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
-	this.asc = !this.asc
+	var table = $(this).parents('table').eq(0);
+	var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+	this.asc = !this.asc;
 	if (!this.asc){rows = rows.reverse()}
 	for (var i = 0; i < rows.length; i++){table.append(rows[i])}
 }
@@ -706,21 +706,21 @@ var focus_input = function(input){
 	}else{
 		$(input).css("border" , "1px solid rgb(13, 62, 86)");
 	}	
-}
+};
 /*Bloque todos los elementos del formulario*/
 var bloquea_form = function(form){	
 	$("*", form).prop('disabled',true);
-}
+};
 var desbloqueda_form = function(form){
 	$("*", form).prop('disabled',false);
-}
+};
 var flex = function(elemento){
 
 	$(elemento).css("display" ,  "flex");	
-}
+};
 var get_valor_selected = function(select){
 	return get_parameter(select +" option:selected");
-}
+};
 function randomString(len, charSet) {
     charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var randomString = '';
@@ -738,13 +738,13 @@ var  recorrepage = function(contenedor = 0 ){
 	}else{			
 		$('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top -100 }, 'slow');
 	}
-}
+};
 var transforma_mayusculas = function(x){
 	var text =  x.value; 
 	text.trim();
 	text_mayusculas =  text.toUpperCase();  	
 	x.value =  text_mayusculas;
-}
+};
 var evita_basura  = function(){
 
 	var 	text = 	get_parameter(".input_busqueda_producto");
@@ -753,21 +753,21 @@ var evita_basura  = function(){
 	var 	text = text.replace(/["=]/g, "");
 	var 	text = text.replace(/["|]/g, "");
 	set_parameter(".input_busqueda_producto" , text);	
-}
+};
 
 var reloload_img =  function ( id,  url) {
 	console.log(id );
 	console.log(url);
 	window.setInterval(reload_imgs(id, url),20000);
 
-}
+};
 var reload_imgs = function (id,  url) {
 
 	document.getElementById(id).src = url;
 	console.log(url);
-}
+};
 /*Regresa el valor que esta en el nodo html*/
 var get_parameter = function(element){
 	var param = $(element).val();
 	return param;
-}
+};

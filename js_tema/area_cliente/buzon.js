@@ -22,7 +22,7 @@ function carga_respuestas(){
 	if( id_pregunta > 0 ){
 		
 		set_option("pregunta" , id_pregunta);		
-		var data_send = {"id_pregunta":id_pregunta , "pregunta" : pregunta, "registro" : registro , "usuario_pregunta" : usuario_pregunta , "modalidad" : get_option("modalidad_ventas") , "nombre_servicio":nombre_servicio , "id_servicio" :servicio}		
+		var data_send = {"id_pregunta":id_pregunta , "pregunta" : pregunta, "registro" : registro , "usuario_pregunta" : usuario_pregunta , "modalidad" : get_option("modalidad_ventas") , "nombre_servicio":nombre_servicio , "id_servicio" :servicio};
 		set_option("data_pregunta" , data_send);		
 		carga_respuesta_complete();		
 	}

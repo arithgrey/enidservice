@@ -57,13 +57,12 @@ class usuario_clasificacion extends REST_Controller{
         $this->response(true);
         
         
-    } 
-    /**/
+    }
     function get_clasificaciones_servicio($q){     
         
         $api =  "servicio/tallas/format/json/";
         return $this->principal->api( $api , $q);
     }   
-    /**/ 
 
-}?>
+
+}

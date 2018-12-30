@@ -104,7 +104,7 @@ function carga_data_contactos_efectivos(e){
 	/**/		
 	var fecha_registro 	=  get_parameter_enid($(this) , "id");			
 	var url 			=  "../persona/index.php/api/posiblesclientes/tipificacion/format/json/";		
-	var data_send 		= {"fecha_registro" : fecha_registro ,  "tipificacion" :  get_tipificacion() , "id_usuario": get_id_usuario()}	
+	var data_send 		= {"fecha_registro" : fecha_registro ,  "tipificacion" :  get_tipificacion() , "id_usuario": get_id_usuario()};
 	request_enid( "GET",  data_send , url , response_carga_data_contactos_efectivos , ".place_info_posibles_clientes");
 	e.preventDefault();	
 }

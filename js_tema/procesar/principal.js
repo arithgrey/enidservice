@@ -96,7 +96,7 @@ var respuesta_registro = function(data){
 		redirect("../");
 	}
 	
-}
+};
 /**/
 function procesar_pedido_usuario_activo(){
 
@@ -183,7 +183,7 @@ var set_link = function(){
 	var url				  = "../login/index.php/api/sess/servicio/format/json/"; 
 	request_enid( "POST",  data_send, url, response_set_link);
 	
-}
+};
 var response_set_link = function(data){
 	redirect("../login");
-}
+};

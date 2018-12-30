@@ -13,7 +13,7 @@ var carga_opcion_entrega = function (id, id_servicio, orden_pedido) {
         var url = "../q/index.php/api/intento_tipo_entrega/index/format/json/";
         request_enid("POST", data_send, url, response_opcion_entrega);
     }
-}
+};
 
 var response_opcion_entrega = function (data) {
 
@@ -45,14 +45,14 @@ var response_opcion_entrega = function (data) {
 
         default:
     }
-}
+};
 var agrega_lista_deseos = function(){
     
     var servicio    =   get_parameter(".form_pre_pedido_contact  .servicio");
     var data_send   =   {servicio : servicio};
     var url         =   "../q/index.php/api/usuario_deseo/servicio/format/json/";
     request_enid( "POST",  data_send , url , response_lista_deseos)
-}
+};
 var response_lista_deseos = function(data){
     $(".form_pre_pedido_contact").submit();
-}
+};

@@ -23,14 +23,19 @@
   }
   function create_seccion_saldo_pendiente($saldo_pendiente){
     return $saldo_pendiente;
-  }  
-  function crea_estrellas($calificacion , $sm=0){
+  }
 
-      $estrellas_valoraciones ="";
-      $restantes = ""; 
-      $num_restantes =1;
-      $size="2em";
-      
+      /**
+       * @param $calificacion
+       * @param int $sm
+       * @return string
+       */
+      function crea_estrellas($calificacion , $sm=0){
+
+      $estrellas_valoraciones   =   "";
+      $restantes                =   "";
+      $num_restantes            =   1;
+
       for($x=1; $x <= $calificacion; $x++){         
         $extra = "font-size: 2em;";          
         $estrellas_valoraciones .=  label("★" ,["class"=>'estrella' , "style" => $extra]);

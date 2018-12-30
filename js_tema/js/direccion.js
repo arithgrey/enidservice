@@ -89,7 +89,7 @@ var  response_registro_direccion = function(data){
 		format_error( ".notificacion_direccion", "VERIFICA LOS DATOS DE TU DIRECCIÓN");
 		recorrepage(".notificacion_direccion");	
 	}	
-}
+};
 /**/
 function oculta_delegacion_estado_pais(flag){
 

@@ -1481,7 +1481,7 @@
 				seps = $.extend([], format.separators);
 			for (var i=0, cnt = format.parts.length; i < cnt; i++) {
 				if (seps.length)
-					date.push(seps.shift())
+					date.push(seps.shift());
 				date.push(val[format.parts[i]]);
 			}
 			return date.join('');
@@ -1514,7 +1514,7 @@
 		},
 		headTemplate: '<thead>'+
 							'<tr>'+
-								'<th class="prev"><i class="fa fa-angle-left"/></th>'+
+								'<th class="prev"><i class="fa fa-angle-left"></i></th>'+
 								'<th colspan="5" class="switch"></th>'+
 								'<th class="next"><i class="fa fa-angle-right"/></th>'+
 							'</tr>'+

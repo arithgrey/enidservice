@@ -95,5 +95,4 @@ class Home extends CI_Controller{
             $this->principal->api( $api, $q, 'json', 'PUT');
         }                
     }
-    /***/
-}?>
+}

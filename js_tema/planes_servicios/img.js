@@ -92,4 +92,4 @@ var response_load_image = function(data){
 
             break;
     }
-}
+};

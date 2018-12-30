@@ -79,6 +79,9 @@ class Tarea extends REST_Controller{
         }
         $this->response($response);        
     }
+    /**
+     * @throws Exception
+     */
     function ticket_GET(){
 
         $param      =   $this->get();       
@@ -86,7 +89,11 @@ class Tarea extends REST_Controller{
         if (if_ext($param , "id_ticket")) {
             $response =     $this->tareasmodel->get_tareas_ticket($param); 
             $response =     $this->clean($response);
-            $response =     $this->cleanTagsInArray($response);
+            try {
+                $response = $this->cleanTagsInArray($response);
+            } catch (Exception $e) {
+
+            }
         }
         $this->response($response);
     }
