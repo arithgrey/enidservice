@@ -30174,3 +30174,7 @@ DEBUG - TYPE string 2018-12-27 15:29:57 --> INSERT INTO `solicitud_pago` (`email
 DEBUG - TYPE string 2018-12-27 15:30:13 --> INSERT INTO `solicitud_pago_usuario` (`id_usuario`, `id_solicitud`) VALUES ('717', '9')
 DEBUG - TYPE string 2018-12-27 15:30:45 --> INSERT INTO `solicitud_pago` (`email_solicitado`, `monto_solicitado`) VALUES ('njasdjjasd@kjs.lo', '66556')
 DEBUG - TYPE string 2018-12-27 15:30:45 --> INSERT INTO `solicitud_pago_usuario` (`id_usuario`, `id_solicitud`) VALUES ('717', '10')
+DEBUG - TYPE string 2018-12-27 15:32:22 --> INSERT INTO `solicitud_pago` (`email_solicitado`, `monto_solicitado`) VALUES ('jasdhjasdhj@kjs.lo', '7999')
+DEBUG - TYPE string 2018-12-27 15:32:22 --> INSERT INTO `solicitud_pago_usuario` (`id_usuario`, `id_solicitud`) VALUES ('717', '11')
+DEBUG - TYPE string 2018-12-27 15:33:55 --> INSERT INTO `solicitud_pago` (`email_solicitado`, `monto_solicitado`) VALUES ('hhasdhhasd@kjs.lo', '655656')
+DEBUG - TYPE string 2018-12-27 15:34:08 --> INSERT INTO `solicitud_pago_usuario` (`id_usuario`, `id_solicitud`) VALUES ('717', '12')

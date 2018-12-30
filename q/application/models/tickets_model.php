@@ -219,32 +219,7 @@
     } 
 
     /*
-    function registra_solicitud_pago_amigo($param){
 
-        $monto =  $param["monto"];
-        $email_amigo =  $param["email_amigo"];        
-        $query_insert  = "INSERT INTO 
-                          solicitud_pago(email_solicitado ,  monto_solicitado) 
-                          VALUES('".$email_amigo."' ,  '".$monto."')";        
-        $this->db->query($query_insert);
-        $param["id_solicitud"] = $this->db->insert_id();                
-        return $this->agrega_solicitud_usuario_amigo($param);
-    } 
-    
-    function agrega_solicitud_usuario_amigo($param){
-
-        $id_usuario =  $param["id_usuario"]; 
-        $id_solicitud =  $param["id_solicitud"]; 
-        
-        $query_insert ="INSERT INTO solicitud_pago_usuario(id_solicitud , id_usuario ) 
-              VALUES('".$id_solicitud ."' ,  '".$id_usuario."')";
-        return $this->db->query($query_insert);
-    }
-    
-    
-    
-    
-   
     private function get_limit($param){
         
         $page = (isset($param['page'])&& !empty($param['page']))?
