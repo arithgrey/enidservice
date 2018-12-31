@@ -10,10 +10,9 @@ class Talla extends REST_Controller{
 
     $param        =     $this->get();
     $response     =     false;
-    if (if_ext($param , "fields,id")){
-        $params       =     $param["fields"];
+    if (if_ext($param , "id")){
         $id_talla     =     $param["id"];
-        $response     =     $this->talla_model->q_get($params , $id_talla);
+        $response     =     $this->talla_model->q_get(["id_talla" , "talla" , "id_country"] , $id_talla);
     }
     $this->response($response);
 
@@ -32,6 +31,7 @@ class Talla extends REST_Controller{
       return      $this->principal->api( $api, $q);
   }
   */
+  /*
   function clasificacion_PUT(){
 
     $param        =   $this->put();
@@ -41,18 +41,22 @@ class Talla extends REST_Controller{
     }
     $this->response($response);
   }
+  */
   function clasificacion_GET(){
 
     $param        =   $this->put();
     $response     =   $this->talla_model->get(["id" , "tipo" , "clasificacion"] , [] , 10 );
     $this->response($response);
   }
-  /*
+
   function tallas_countries_GET(){
     
-    $param        =   $this->get();    
-    $response     =   $this->talla_model->get_tallas_countries($param);
+    $param      =   $this->get();
+    $response   =   false;
+    if(if_ext($param , "id_tipo_talla")){
+        $response     =   $this->talla_model->get_tallas_countries($param);
+    }
     $this->response($response);
   }
-  */
+
 }

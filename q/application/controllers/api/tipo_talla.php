@@ -23,6 +23,15 @@ class tipo_talla extends REST_Controller{
         $this->response($response);
 
     }
+    function clasificacion_PUT(){
+
+        $param        =   $this->put();
+        $response     =   false;
+        if (if_ext($param , "id")){
+            $response     = $this->tipo_talla_model->q_up("clasificacion" ,  $param["clasificaciones"] ,  $param["id"]);
+        }
+        $this->response($response);
+    }
     private function create_table_tallas($param){
 
         $heading = [

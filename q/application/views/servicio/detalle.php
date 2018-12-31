@@ -298,15 +298,19 @@
         </div> 
 
         <!--DESCRIPCION DEL PRODUCTO-->
-        <div class="tab-pane <?=$extra_2?>" id="tab_info_producto">            
-            <?=$nuevo_titulo_seleccion_producto;?>        
-            <?=$info_nueva_descripcion?>            
+        <div class="tab-pane <?=$extra_2?>" id="tab_info_producto">
+
+            <?=$nuevo_titulo_seleccion_producto;?>
+
+            <?=place("place_tallas_disponibles")?>
+            
+            <?=$info_nueva_descripcion?>
+
             <?=form_open("",
             ["class"=>"form_servicio_desc input_desc_servicio_facturacion"])?>
                 <?=$i_descripcion?>
                 <?=$isummer_descripcion?>    
                 <?=guardar("GUARDAR" ,["class" => "btn_guardar_desc "] , 1 )?>
-                <?=div("" , ["class" => "place_tallas_disponibles"] , 1)?>
             <?=form_close()?>          
             
             <?php if($flag_servicio ==  0): ?>                

@@ -1,5 +1,13 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
     if (!function_exists('invierte_date_time')) {
+        function valida_maximo_compra($flag_servicio, $existencia){
+
+          if($flag_servicio ==  1){
+            return 100;
+          }else{
+            return $existencia;
+          }
+        }
         if (!function_exists('get_url_imagen_post')) {
             function get_url_imagen_post($id_servicio)
             {
@@ -320,7 +328,6 @@
                 return $url;
             }
         }
-        /*
         if ( ! function_exists('get_info_producto')) {
             function get_info_producto($q2){
 
@@ -330,8 +337,7 @@
                 }
                 return $id_producto;
             }
-        }
-        */
+        }        
         if (!function_exists('get_tienda_vendedor')) {
             function get_tienda_vendedor($proceso_compra, $id_vendedor)
             {

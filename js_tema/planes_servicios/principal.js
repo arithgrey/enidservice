@@ -1129,6 +1129,7 @@ function carga_tallas(){
 }
 /**/
 function muestra_clasificaciones_servicio(data){
+
 	if (array_key_exists("options", data)) {
 		llenaelementoHTML(".place_tallas_disponibles" , data.options);	
 		$(".talla_servicio").click(actualiza_talla_servicio);

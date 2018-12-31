@@ -6,7 +6,7 @@ if(!function_exists('invierte_date_time')){
         function valida_action($param , $key ){
 
             $action =0;
-            if ( get_param_def($param , $key) != 0 ) {
+            if ( get_param_def($param , $key) !== 0 ) {
                 $action = $param[$key];
                 switch ($action) {
                     case 'nuevo':

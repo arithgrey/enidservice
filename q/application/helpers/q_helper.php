@@ -11,13 +11,6 @@
                 $start .= label("★", $base);
                 $start .= label("★", $base);
                 $start .= label("★", $base);
-
-                /*
-                $base = [
-                    "class" => 'estrella'
-                ];
-                $starts = div($start) . span("Mira los comentarios aquí!", ["class" => 'blue_enid_background white']);
-                */
                 return $start;
             }
         }
@@ -140,16 +133,16 @@
         }
 
         if (!function_exists('crea_tareas_pendientes_info')) {
-            function crea_tareas_pendientes_info($flag)
+            function crea_tareas_pendientes_info($f)
             {
 
                 $new_flag = "";
-                if ($flag > 0) {
+                if ($f > 0) {
 
-                    $new_flag = span($flag,
+                    $new_flag = span($f,
                         [
                             "class" => 'notificacion_tareas_pendientes_enid_service',
-                            "id" => $flag
+                            "id" => $f
                         ]);
                 }
                 return $new_flag;
@@ -161,16 +154,17 @@
             {
 
                 $lista   = "";
-                $flag    = 0;
+                $f    = 0;
                 if ($num_direccion < 1) {
 
-                    $lista  .= inicio_base_notificacion("../administracion_cuenta/", "fa fa-map-marker");
-                    $lista  .= 'Registra tu dirección de compra y venta';
-                    $lista  .= fin_base_notificacion();
-                    $flag ++;
+                    $text   = 'Registra tu dirección de compra y venta';
+                    $lista  = base_notificacion("../administracion_cuenta/", "fa fa-map-marker" , $text);
+
+
+                    $f ++;
                 }
                 $response["html"] = $lista;
-                $response["flag"] = $flag;
+                $response["flag"] = $f;
                 return $response;
 
             }
@@ -181,16 +175,17 @@
             {
 
                 $lista = "";
-                $flag = 0;
+                $f = 0;
                 if ($meta > $hecho) {
-                    $restantes = ($meta - $hecho);
-                    $lista .= inicio_base_notificacion("../desarrollo/?q=1", "fa fa-credit-card ");
-                    $lista .= "Hace falta por resolver " . $restantes . " tareas!";
-                    $lista .= fin_base_notificacion();
-                    $flag ++;
+
+                    $restantes  = ($meta - $hecho);
+                    $text       = "Hace falta por resolver " . $restantes . " tareas!";
+                    $lista      = base_notificacion("../desarrollo/?q=1", "fa fa-credit-card " , $text);
+
+                    $f ++;
                 }
                 $response["html"] = $lista;
-                $response["flag"] = $flag;
+                $response["flag"] = $f;
                 return $response;
             }
 
@@ -199,17 +194,16 @@
             function add_envios_a_ventas($meta, $hecho)
             {
 
-                $lista = "";
-                $flag = 0;
+                $lista  = "";
+                $f      = 0;
                 if ($meta > $hecho) {
-                    $restantes = ($meta - $hecho);
-                    $lista .= inicio_base_notificacion("../reporte_enid/?q=2", " fa fa-money ");
-                    $lista .= "Apresúrate completa tu logro sólo hace falta " . $restantes . " venta para completar tus labores del día!";
-                    $lista .= fin_base_notificacion();
-                    $flag   ++;
+                    $restantes  = ($meta - $hecho);
+                    $text       = "Apresúrate completa tu logro sólo hace falta " . $restantes . " venta para completar tus labores del día!";
+                    $lista      = base_notificacion("../reporte_enid/?q=2", " fa fa-money " , $text);
+                    $f   ++;
                 }
                 $response["html"] = $lista;
-                $response["flag"] = $flag;
+                $response["flag"] = $f;
                 return $response;
             }
         }
@@ -219,17 +213,16 @@
             {
 
                 $lista  = "";
-                $flag   = 0;
+                $f      = 0;
                 if ($meta > $hecho) {
                     $restantes = ($meta - $hecho);
-                    $lista .= inicio_base_notificacion("../tareas/?q=2", " fa fa-clock-o ");
-                    $lista .= "Otros usuarios ya han compartido sus productos en redes sociales, alcanza a tu competencia sólo te hacen falta  
-                                " . $restantes . " vistas a tus productos";
-                    $lista .= fin_base_notificacion();
-                    $flag   ++;
+
+                    $text   = "Otros usuarios ya han compartido sus productos en redes sociales, alcanza a tu competencia sólo te hacen falta  " . $restantes . " vistas a tus productos";
+                    $lista  = base_notificacion("../tareas/?q=2", " fa fa-clock-o " , $text);
+                    $f   ++;
                 }
                 $response["html"] = $lista;
-                $response["flag"] = $flag;
+                $response["flag"] = $f;
                 return $response;
             }
         }
@@ -239,17 +232,16 @@
             {
 
                 $lista  = "";
-                $flag   = 0;
+                $f   = 0;
                 if ($meta_email > $email_enviados_enid_service) {
 
                     $email_restantes = ($meta_email - $email_enviados_enid_service);
-                    $lista          .= inicio_base_notificacion("../tareas/?q=2", "fa fa-bullhorn ");
-                    $lista          .= 'Te hacen falta enviar ' . $email_restantes . ' correos a posibles clientes para cumplir tu meta de prospección';
-                    $lista          .= fin_base_notificacion();
-                    $flag++;
+                    $text            = 'Te hacen falta enviar ' . $email_restantes . ' correos a posibles clientes para cumplir tu meta de prospección';
+                    $lista           = base_notificacion("../tareas/?q=2", "fa fa-bullhorn " , $text);
+                    $f  ++;
                 }
                 $response["html"] = $lista;
-                $response["flag"] = $flag;
+                $response["flag"] = $f;
                 return $response;
             }
         }
@@ -258,70 +250,50 @@
             {
 
                 $lista  = "";
-                $flag   = 0;
+                $f   = 0;
                 if ($num > 0) {
 
-                    $lista .= inicio_base_notificacion("../administracion_cuenta/", "fa fa-mobile-alt");
                     $text   = "Agrega un número para compras o ventas";
-                    $lista .= $text;
-                    $lista .= fin_base_notificacion();
-                    $flag++;
+                    $lista  = base_notificacion("../administracion_cuenta/", "fa fa-mobile-alt" , $text);
+
+                    $f++;
                 }
                 $response["html"] = $lista;
-                $response["flag"] = $flag;
+                $response["flag"] = $f;
                 return $response;
             }
         }
 
         function add_valoraciones_sin_leer($num, $id_usuario)
         {
-            $lista = "";
-            $flag = 0;
+            $lista  = "";
+            $f      = 0;
             if ($num > 0) {
 
-                $lista .=
-                    inicio_base_notificacion("../recomendacion/?q=" . $id_usuario, "fa fa-star");
-
-                $text = div(
-                        "Alguien han agregado sus comentarios sobre uno de tus artículos en venta ", 1) .
-                    base_valoracion();
-                if ($num > 1) {
-                    $text =
-                        div($num . " personas han agregado sus comentarios sobre tus 
-            artículos", 1) . base_valoracion();
-
-                }
-                $lista .= $text;
-                $lista .= fin_base_notificacion();
-                $flag++;
+                $text_comentario    =   div("Alguien han agregado sus comentarios sobre uno de tus artículos en venta ", 1) . base_valoracion();
+                $text               =   div($num . " personas han agregado sus comentarios sobre tus artículos", 1) . base_valoracion();
+                $text               =   ($num > 1) ? $text : $text_comentario;
+                $lista              =   base_notificacion("../recomendacion/?q=" . $id_usuario, "fa fa-star" , $text);
+                $f  ++;
             }
             $response["html"] = $lista;
-            $response["flag"] = $flag;
+            $response["flag"] = $f;
             return $response;
         }
-
         function add_pedidos_sin_direccion($param)
         {
 
-            $sin_direcciones = $param["sin_direcciones"];
-            $lista = "";
-            $flag = 0;
+            $sin_direcciones =  $param["sin_direcciones"];
+            $lista           =  "";
+            $f               =  0;
             if ($sin_direcciones > 0) {
 
-                $lista .=
-                    inicio_base_notificacion("../area_cliente/?action=compras", "fa fa-bus ");
-
-                if ($sin_direcciones > 1) {
-                    $lista .= $sin_direcciones . " de tus compras solicitadas, aún no cuentan con tu dirección de envio";
-                } else {
-                    $lista .= "Tu compra aún,  no cuentan con tu dirección de envio";
-                }
-
-                $lista .= fin_base_notificacion();
-                $flag++;
+                $text   = ($sin_direcciones > 1) ? $sin_direcciones . " de tus compras solicitadas, aún no cuentan con tu dirección de envio" : "Tu compra aún,  no cuentan con tu dirección de envio";
+                $lista  = base_notificacion("../area_cliente/?action=compras", "fa fa-bus " , $text);
+                $f++;
             }
             $response["html"] = $lista;
-            $response["flag"] = $flag;
+            $response["flag"] = $f;
             return $response;
         }
 
@@ -329,134 +301,118 @@
         function add_saldo_pendiente($param)
         {
 
-            $adeudos_cliente = $param["total_deuda"];
-            $lista = "";
-            $flag = 0;
+            $adeudos_cliente    = $param["total_deuda"];
+            $lista              = "";
+            $f                  = 0;
             if ($adeudos_cliente > 0) {
 
-                $lista .=
-                    inicio_base_notificacion("../area_cliente/?action=compras", "fa fa-credit-card");
                 $total_pendiente = round($adeudos_cliente, 2);
-                $lista .= 'Saldo por liquidar ' .
-                    span($total_pendiente . 'MXN',
-                        ["class" => "saldo_pendiente_notificacion",
+                $text            =
+                    'Saldo por liquidar ' . span($total_pendiente . 'MXN', ["class" => "saldo_pendiente_notificacion",
                             "deuda_cliente" => $total_pendiente
                         ]);
 
-                $lista .= fin_base_notificacion();
-                $flag++;
+                $lista = base_notificacion("../area_cliente/?action=compras", "fa fa-credit-card"  , $text);
+
+                $f++;
             }
             $response["html"] = $lista;
-            $response["flag"] = $flag;
+            $response["flag"] = $f;
             return $response;
         }
 
-        function fin_base_notificacion()
+        function base_notificacion($url = '', $class_icono = '' , $text = '')
         {
-            $fin = "</div></a><hr>";
-            return $fin;
+            return anchor_enid(icon($class_icono) . $text, ["href" => $url] , 1);
         }
-
-        function inicio_base_notificacion($url = '', $class_icono = '')
-        {
-            return n_row_12() . anchor_enid(icon($class_icono), ["href" => $url]);
-
-        }
-
         function add_mensajes_respuestas_vendedor($param, $tipo)
         {
 
             $lista = "";
-            $flag = 0;
+            $f = 0;
 
             $num = ($tipo == 1) ? $param["modo_vendedor"] : $param["modo_cliente"];
 
             if ($num > 0) {
 
-                $lista .=
-                    inicio_base_notificacion("../area_cliente/?action=preguntas", "fa fa-comments");
-                $text = ($tipo == 1) ? "Alguien quiere saber más sobre tu producto" : "Tienes una nueva respuesta en tu buzón";
-                $lista .= $text;
-                $lista .= fin_base_notificacion();
-                $flag++;
+                $text   = ($tipo == 1) ? "Alguien quiere saber más sobre tu producto" : "Tienes una nueva respuesta en tu buzón";
+                $lista  = base_notificacion("../area_cliente/?action=preguntas", "fa fa-comments" , $text);
+                $f++;
 
             }
             $response["html"] = $lista;
-            $response["flag"] = $flag;
+            $response["flag"] = $f;
             return $response;
         }
 
         function get_tareas_pendienetes_usuario_cliente($info)
         {
 
-            $num_telefonico =
-                $info["info_notificaciones"]["numero_telefonico"];
-            $flag = 0;
-            $inf_notificacion = $info["info_notificaciones"];
+            $num_telefonico     = $info["info_notificaciones"]["numero_telefonico"];
+            $f                  = 0;
+            $inf_notificacion   = $info["info_notificaciones"];
 
 
-            $lista = "";
-            $deuda = add_saldo_pendiente($inf_notificacion["adeudos_cliente"]);
-            $flag = $flag + $deuda["flag"];
-            $lista .= $deuda["html"];
+            $lista              = "";
+            $deuda              = add_saldo_pendiente($inf_notificacion["adeudos_cliente"]);
+            $f                  = $f + $deuda["flag"];
+            $lista             .= $deuda["html"];
 
             $deuda = add_pedidos_sin_direccion($inf_notificacion["adeudos_cliente"]);
-            $flag = $flag + $deuda["flag"];
+            $f = $f + $deuda["flag"];
             $lista .= $deuda["html"];
             $direccion = add_direccion_envio($info["flag_direccion"]);
-            $flag = $flag + $direccion["flag"];
+            $f = $f + $direccion["flag"];
             $lista .= $direccion["html"];
 
 
             $numtelefonico = add_numero_telefonico($num_telefonico);
-            $flag = $flag + $numtelefonico["flag"];
+            $f = $f + $numtelefonico["flag"];
             $lista .= $numtelefonico["html"];
 
             $mensajes_sin_leer =
                 add_mensajes_respuestas_vendedor($inf_notificacion["mensajes"], 1);
-            $flag = $flag + $mensajes_sin_leer["flag"];
+            $f = $f + $mensajes_sin_leer["flag"];
             $lista .= $mensajes_sin_leer["html"];
 
 
-            $response["num_tareas_pendientes_text"] = $flag;
-            $response["num_tareas_pendientes"] = crea_tareas_pendientes_info($flag);
-            $response["lista_pendientes"] = get_mensaje_inicial_notificaciones(1, $flag) . $lista;
+            $response["num_tareas_pendientes_text"] = $f;
+            $response["num_tareas_pendientes"] = crea_tareas_pendientes_info($f);
+            $response["lista_pendientes"] = get_mensaje_inicial_notificaciones(1, $f) . $lista;
             return $response;
 
         }
-
-        /**/
         function get_tareas_pendienetes_usuario($info)
         {
 
             $inf = $info["info_notificaciones"];
             $lista = "";
 
-            $flag = 0;
+            $f = 0;
             $ventas_enid_service = $info["ventas_enid_service"];
             $email_enviados_enid_service = $inf["email_enviados_enid_service"];
             $accesos_enid_service = $inf["accesos_enid_service"];
             $tareas_enid_service = $inf["tareas_enid_service"];
             $num_telefonico = $inf["numero_telefonico"];
             $mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf["mensajes"], 1);
-            $flag = $flag + $mensajes_sin_leer["flag"];
+            $f = $f + $mensajes_sin_leer["flag"];
             $lista .= $mensajes_sin_leer["html"];
             $mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf["mensajes"], 2);
-            $flag = $flag + $mensajes_sin_leer["flag"];
+            $f = $f + $mensajes_sin_leer["flag"];
             $lista .= $mensajes_sin_leer["html"];
             $deuda = add_saldo_pendiente($inf["adeudos_cliente"]);
-            $flag = $flag + $deuda["flag"];
+            $f = $f + $deuda["flag"];
             $lista .= $deuda["html"];
             $deuda = add_pedidos_sin_direccion($inf["adeudos_cliente"]);
-            $flag = $flag + $deuda["flag"];
+            $f = $f + $deuda["flag"];
             $lista .= $deuda["html"];
             $deuda = add_valoraciones_sin_leer($inf["valoraciones_sin_leer"], $info["id_usuario"]);
-            $flag = $flag + $deuda["flag"];
+            $f = $f + $deuda["flag"];
             $lista .= $deuda["html"];
 
 
             $num_telefonico = add_numero_telefonico($num_telefonico);
-            $flag = $flag + $num_telefonico["flag"];
+            $f = $f + $num_telefonico["flag"];
             $lista .= $num_telefonico["html"];
 
 
@@ -469,7 +425,7 @@
                         $notificacion =
                             add_envios_a_ventas($meta_ventas, $ventas_enid_service);
                         $lista .= $notificacion["html"];
-                        $flag = $flag + $notificacion["flag"];
+                        $f = $f + $notificacion["flag"];
 
                         break;
 
@@ -479,7 +435,7 @@
                         $meta_email = $row["cantidad"];
                         $notificacion_email = add_email_pendientes_por_enviar($meta_email, $email_enviados_enid_service);
                         $lista .= $notificacion_email["html"];
-                        $flag = $flag + $notificacion_email["flag"];
+                        $f = $f + $notificacion_email["flag"];
                         break;
 
                     case "Accesos":
@@ -487,7 +443,7 @@
                         $notificacion =
                             add_accesos_pendientes($meta_accesos, $accesos_enid_service);
                         $lista .= $notificacion["html"];
-                        $flag = $flag + $notificacion["flag"];
+                        $f = $f + $notificacion["flag"];
 
                         break;
 
@@ -497,7 +453,7 @@
                         $notificacion =
                             add_tareas_pendientes($meta_tareas, $tareas_enid_service);
                         $lista .= $notificacion["html"];
-                        $flag = $flag + $notificacion["flag"];
+                        $f = $f + $notificacion["flag"];
                         break;
                     default:
                         break;
@@ -507,19 +463,19 @@
 
 
             $new_flag = "";
-            if ($flag > 0) {
+            if ($f > 0) {
 
-                $new_flag = span($flag,
+                $new_flag = span($f,
                     [
-                        "id" => $flag,
+                        "id" => $f,
                         "class" => 'notificacion_tareas_pendientes_enid_service'
                     ]);
 
             }
-            $response["num_tareas_pendientes_text"] = $flag;
+            $response["num_tareas_pendientes_text"] = $f;
             $response["num_tareas_pendientes"] = $new_flag;
             $response["lista_pendientes"] =
-                get_mensaje_inicial_notificaciones(1, $flag) . $lista;
+                get_mensaje_inicial_notificaciones(1, $f) . $lista;
             return $response;
 
         }
@@ -591,7 +547,7 @@
 
         }
 
-        function simula_img($url , $class, $id , $title , $flag , $letra ='A' ){
+        function simula_img($url , $class, $id , $title , $f , $letra ='A' ){
           $color_random = 'background : rgb(174, 13, 80); color:white; padding:50px;';
           return  "<div style = '". $color_random."' class='img-icon-enid". $class ." ' id='".$id  ."'  title='". $title ."' >". $letra ."</div>";
 
@@ -942,14 +898,14 @@
 
 
         $new_flag = "";
-        if ($flag > 0 ) {
-          $new_flag =  "<span id='".$flag."' class='notificacion_tareas_pendientes_enid_service'>".$flag."</span>";
+        if ($f > 0 ) {
+          $new_flag =  "<span id='".$f."' class='notificacion_tareas_pendientes_enid_service'>".$f."</span>";
         }
-        $response["num_tareas_pendientes_text"] = $flag;
+        $response["num_tareas_pendientes_text"] = $f;
         $response["num_tareas_pendientes"] = $new_flag;
 
         $response["lista_pendientes"]=
-        get_mensaje_inicial_notificaciones(1 , $flag). $lista;
+        get_mensaje_inicial_notificaciones(1 , $f). $lista;
         return $response;
 
 
@@ -1005,18 +961,18 @@
 
 
          $lista ="";
-         $flag = 0;
+         $f = 0;
          if($num < 1 ){
              $lista   .=
-             inicio_base_notificacion("../planes_servicios/?action=nuevo" ,"");
+             base_notificacion("../planes_servicios/?action=nuevo" ,"");
              $lista   .=
              div("¿TE GUSTARÍA ANUNCIAR TUS PRODUCTOS O SERVICIOS?");
              $lista   .= div("INICIA AQUÍ");
-             $lista   .= fin_base_notificacion();
-             $flag ++;
+
+             $f ++;
          }
          $response["html"] =  $lista;
-         $response["flag"] =  $flag;
+         $response["flag"] =  $f;
          return $response;
 
        }

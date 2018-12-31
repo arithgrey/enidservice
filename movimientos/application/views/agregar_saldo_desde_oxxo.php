@@ -10,7 +10,7 @@
 		"type"	=>	"number" ,
 		"name"	=>	"q" ,
 		"class"		=>	"form-control input-sm input monto_a_ingresar",
-		"require" 	=>	""]); 
+		"required" 	=>	true]); 
 	$input_1	=  input_hidden(["name"	=>"q2" , "value"=> $id_usuario ]);
 	$input_2	=  input_hidden(["name"	=>"concepto" , "value"=>"1"]);
 	$input_3	=  input_hidden(["name"	=>"q3" , "value"=>$id_usuario]);

@@ -546,58 +546,50 @@ class Servicio extends REST_Controller{
         $servicio_tallas    =  $this->add_tallas($servicio);
         if ($param["v"] ==  1) {
 
-            $response         = (count($servicio_tallas)>0) ? $this->create_button_easy_select_tienda($servicio_tallas):"";
-
+            $response           = ( count( $servicio_tallas ) > 0 ) ? $this->create_button_easy_select_tienda($servicio_tallas):"";
         }else{
-
-            $response       = $servicio_tallas;
+            $response           =   $servicio_tallas;
         }
     }
     $this->response($response);
+
   }
   private function create_button_easy_select_tienda($servicio_tallas){
 
     $config     =   [ 'text_button'     =>  'talla',
                       'campo_id'        =>  'id_talla',
-                      'extra'           => 
-                        array(
-                          'class'       => 'easy_selec facil_selec talla '
-                        )
+                      'extra'           =>  ['class'       => 'easy_selec facil_selec talla ']
                       ];
                       
     $easy_butons      =  create_button_easy_select($servicio_tallas , $config , 2);         
     
     $config =  ['class'       =>  'dropdown-toggle strong',
                 'id'          =>  "dropdownMenuButton",
-                'data-toggle' =>  "dropdown"];
+                'data-toggle' =>  "dropdown"
+                ];
 
     $icon             =  icon('fa fa-angle-right ');
-    $boton_seleccion  =  add_element($icon.$icon ." ELIGE TU TALLA ", "div" , $config );
-
-    $contenedor       =  
-    add_element($easy_butons,"div", array("class" => "dropdown-menu "));
-    $menu             =  
-    add_element( $boton_seleccion.$contenedor, "div" , 
-      array('class'=> 'dropdown boton-tallas-disponibles'));
-    return $menu; 
-
+    $boton_seleccion  =  div($icon  ,  $config );
+    $contenedor       =  div($easy_butons , ["class" => "dropdown-menu "]);
+    $menu             =  div($boton_seleccion.$contenedor ,  ['class'=> 'dropdown boton-tallas-disponibles']);
+    return $menu;
   }
-  /**/
   function add_tallas($talla_servicio){
 
-    $data_complete =  [];
-    $a =0;
-    $fields               = ["id_talla" , "talla" , "id_country"];
-    $tallas_en_servicio   = get_array_json($talla_servicio[0]["talla"]);
+    $response             = [];
 
+    $tallas_en_servicio   = get_array_json($talla_servicio[0]["talla"]);
+    $b                    = 0;
     for ($a=0; $a < count($tallas_en_servicio); $a++) { 
 
-        $id_talla =   $tallas_en_servicio[$a];        
-        $talla    =   $this->get_talla_id($id_talla , $fields);        
-        $talla    =   (count($talla)>0) ? $talla[0]: array();        
-        $data_complete[$a]    = $talla;
+        $id_talla       =   $tallas_en_servicio[$a];
+        $talla          =   $this->get_talla_id($id_talla);
+        if( count( $talla ) > 0 ){
+            $response[$b]   =   $talla[0];
+            $b ++;
+        }
     }
-    return $data_complete;
+    return $response;
     
   }
   function url_ml_PUT(){
@@ -1421,10 +1413,11 @@ class Servicio extends REST_Controller{
         $api             = "usuario/has_phone/format/json/";
         return   $this->principal->api( $api , $q );
     }
-    private function get_talla_id($id_talla , $parametros){
-        $param["id"]          =   $id_talla;
-        $param["fields"]      =   $parametros;
-        return $this->principal->api( "talla/id/format/json/" , $param  );
+    private function get_talla_id($id_talla){
+
+        $param["id"]          =     $id_talla;
+        $api                  =     "talla/id/format/json/";
+        return $this->principal->api( $api , $param  );
     }
     private function add_gamificacion_usuario_servicio($param, $valoracion){
         $api                  =
