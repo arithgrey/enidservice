@@ -35,16 +35,20 @@ class Pregunta extends REST_Controller{
     function pregunta_vendedor_GET(){
 
         $param      =   $this->get();
-        $prm        =   $this->get_info_vendedor_por_servicio($param["servicio"]);
-        $response   =   "No se envió el mensaje";
-        if(count($prm)>0){                
-            $email_vendedor           =  $prm[0]["email"];                
-            $prm_email["info_correo"] =  $this->crea_vista_notificacion_pregunta($prm);    
-            $prm_email["asunto"]      = "Notificación, un nuevo cliente te ha enviado una pregunta, apresúrate!";
-            $this->envia_email($prm_email , $email_vendedor); 
-            $response                 = true;
-            
+        $response   =   false;
+
+        if (if_ext($param,  "servicio")){
+            $prm        =   $this->get_info_vendedor_por_servicio($param["servicio"]);
+            $response   =   "No se envió el mensaje";
+            if( count($prm) > 0 ){
+                $email_vendedor           =  $prm[0]["email"];
+                $prm_email["info_correo"] =  $this->crea_vista_notificacion_pregunta($prm);
+                $prm_email["asunto"]      = "Notificación, un nuevo cliente te ha enviado una pregunta, apresúrate!";
+                $this->envia_email($prm_email , $email_vendedor);
+                $response                 = true;
+            }
         }
+
         $this->response($response);
     }
     private function crea_vista_notificacion_pregunta($q){

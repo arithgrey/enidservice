@@ -26,7 +26,6 @@
                 ,"class"         =>'black strong base_tab_clientes'
                 ])?>                        
                 <?=place('place_tareas_pendientes')?>
-            </a>
         </li>       
     </ul>
 </nav> 

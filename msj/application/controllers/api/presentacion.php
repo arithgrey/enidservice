@@ -17,7 +17,6 @@ class Presentacion extends REST_Controller{
         $data["cliente"]     = $param;        
         $this->load->view("ventas/notificacion_respuesta" , $data);	
     }
-    /*Manda mensaje a la persona que se registra desde el buzón de novedades y descuentos en el footer*/
     function bienvenida_enid_service_usuario_subscrito_GET(){
 
         $param["info"] =  $this->get();

@@ -126,7 +126,7 @@ class Archivo extends REST_Controller{
 
         
               default:
-
+                  return "";
                 break;
         }        
     }

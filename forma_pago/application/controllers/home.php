@@ -6,9 +6,7 @@ class Home extends CI_Controller{
     }
     function index(){
 
-
         $param = $this->input->get();
-
         if (get_param_def($param , "info" ) > 0 ) {
             $this->crea_info();    
         }else{            
@@ -27,17 +25,17 @@ class Home extends CI_Controller{
     private function crea_orden(){
 
         $data                   =   $this->principal->val_session("");
-        $data["meta_keywords"]  =   '';
+        $data["meta_keywords"]  =   "";
         $data["desc_web"]       =   "";                
         $data["url_img_post"]   =   create_url_preview("formas_pago_enid.png");            
         $id_recibo              =   $this->input->get("recibo");                
         $data["recibo"]         =   $id_recibo;        
         $data["info_recibo"]    =   $this->get_recibo_forma_pago($id_recibo);
 
-        /**/
-        $num_hist               = get_info_servicio( $this->input->get("q"));            
-        $num_usuario            = get_info_usuario( $this->input->get("q2"));        
-        $num_servicio           = get_info_usuario( $this->input->get("q3"));        
+        //$num_hist             =   get_info_servicio( $this->input->get("q"));
+        $param                  =   $this->input->get();
+        $num_usuario            =   get_info_usuario($param);
+        $num_servicio           =   get_info_usuario($param);
         $this->principal->crea_historico(5669877 , $num_usuario , $num_servicio );
         $data["clasificaciones_departamentos"] = "";        
         $this->principal->show_data_page($data, 'home');                          

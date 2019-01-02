@@ -13,10 +13,10 @@ class Home extends CI_Controller{
         $data["faqs_categoria"]     =   "";
         $data["r_sim"]              =   "";
         $session                    =   $data["in_session"];
-
-        $faq                        =   $this->input->get("faq");
-        $faqs                       =   $this->input->get("faqs");
-        $categoria                  =   $this->input->get("categoria");
+        $param                      =   $this->input->get();
+        $faq                        =   $param["faq"];
+        $faqs                       =   $param["faqs"];
+        $categoria                  =   $param["categoria"];
         
         
         $data["categorias_publicas_venta"]          = $this->get_categorias_por_tipo(1);
@@ -29,9 +29,9 @@ class Home extends CI_Controller{
         //$data["lista_categorias"]    =  $this->get_categorias_by_status(1);        
 
 
-        $data["meta_keywords"]          =  " Preguntas frecuentes, Enid Service";
-        $data["desc_web"]               =  " Preguntas frecuentes, Enid Service";
-        $data["url_img_post"]           = create_url_preview("faq.png");
+        $data["meta_keywords"]          =   " Preguntas frecuentes, Enid Service";
+        $data["desc_web"]               =   " Preguntas frecuentes, Enid Service";
+        $data["url_img_post"]           =   create_url_preview("faq.png");
 
         /*CUANDO SE SOLICITA LA RESPUESTA ALGÚN FAQ POR ID*/        
         if($flag_busqueda_q ==  1){
@@ -69,9 +69,8 @@ class Home extends CI_Controller{
             $data["url_img_post"] = create_url_preview("faq.png");            
 
         }
-        /**/
-        $flag_busqueda_personalidaza =  get_info_serviciosq($faqs);     
-        $data["flag_busqueda_personalidaza"] =  $flag_busqueda_personalidaza;        
+        $flag_busqueda_personalidaza            =  get_info_serviciosq($faqs);
+        $data["flag_busqueda_personalidaza"]    =  $flag_busqueda_personalidaza;
 
         /*CUANDO LA PERSONA REALIZA BÚSQUEDA DE FORMA PERSONALIZADA*/        
         if ($flag_busqueda_personalidaza ==  1){
@@ -86,10 +85,7 @@ class Home extends CI_Controller{
         }    
         $clasificaciones_departamentos          =   $this->principal->get_departamentos("nosotros");        
         $data["clasificaciones_departamentos"]  =   $clasificaciones_departamentos;
-        $data["js"]                             =   ["faq/principal.js"];       
-        $data["css"]                            =   ["faqs.css" , "faqs_second.css"];
-        $data["css_external"]                   = 
-        ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];       
+        $data                                   =   $this->getCssJs($data);
         $this->principal->show_data_page($data, 'home');                          
     }   
     function get_faqs_categoria($id_categoria , $data){
@@ -108,6 +104,12 @@ class Home extends CI_Controller{
         $response   =  $this->principal->api($api , $q);
         return $response;
 
+    }
+    private function getCssJs($data){
+        $data["js"]                             =   ["faq/principal.js"];
+        $data["css"]                            =   ["faqs.css" , "faqs_second.css"];
+        $data["css_external"]                   =   ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];
+        return $data;
     }
     private function get_categorias_por_tipo($tipo){
 
@@ -131,10 +133,9 @@ class Home extends CI_Controller{
     }
     private function get_info_categoria($id){
         
-        $param["id"]  = $id;
-        $api                    = "categoria/id/format/json/";
-        $response =   $this->principal->api( $api  , $param );   
-        //debug($response,1);
+        $param["id"]    =   $id;
+        $api            =   "categoria/id/format/json/";
+        $response       =   $this->principal->api( $api  , $param );
         return $response[0];
     }
 }

@@ -32,7 +32,6 @@ foreach ($info_envio_direccion as $row){
     $id_codigo_postal = $row["id_codigo_postal"];
     $pais ="";
 }
-/**/
 ?>
 
 

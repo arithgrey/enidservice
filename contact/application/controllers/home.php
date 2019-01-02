@@ -7,15 +7,13 @@ class Home extends CI_Controller{
     }        
     function index(){
 
-        $data                   =
-        $this->principal->val_session("Solicita una llamada aquí");
+        $data                   =   $this->principal->val_session("Solicita una llamada aquí");
         $data["meta_keywords"]  =   "Solicita una llamada aquí";
         $data["desc_web"]       =   "Solicita una llamada aquí";
         $data["url_img_post"]   =   create_url_preview("images_1.jpg");            
         $data["departamentos"]  =   $this->get_departamentos_enid();         
         $data["clasificaciones_departamentos"]  = $this->principal->get_departamentos();
         $data["css"]            =  ["contact.css"];
-
         $param                  =  $this->input->post();
         if (get_param_def($param , "proceso_compra", 0 , 1 ) > 0 ){
 
@@ -27,7 +25,7 @@ class Home extends CI_Controller{
 
         }
     }
-    function  load_ubicacion($data , $param ){
+    private function  load_ubicacion($data , $param ){
 
 
         $data["telefono"]           =  ( $data["id_usuario"] > 0 ) ?  $this->principal->get_info_usuario($data["id_usuario"])[0]["tel_contacto"] : "";
@@ -52,7 +50,6 @@ class Home extends CI_Controller{
             $this->principal->show_data_page($data, 'home');
         }
     }
-
     private function get_departamentos_enid(){
 
         $api       =  "departamento/index/format/json/";        

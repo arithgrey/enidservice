@@ -10,8 +10,8 @@
   $costo_envio_cliente    = 0;  
   $text_envio             = "";
   if($servicio[0]["flag_servicio"] ==  0){
-    $costo_envio_cliente= $costo_envio["costo_envio_cliente"];  
-    $text_envio           =  $costo_envio["text_envio"]["cliente"];
+    $costo_envio_cliente    = $costo_envio["costo_envio_cliente"];
+    $text_envio             =  $costo_envio["text_envio"]["cliente"];
   }
   
   $monto_total_con_envio  =  $monto_total + $costo_envio_cliente;
@@ -183,7 +183,5 @@ $talla                =
 </div>
         </div>
     </div>
-    <?=end_row()?>  
-  </div>  
-</div>  
+    <?=end_row()?>
 <hr>        

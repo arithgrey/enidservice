@@ -1,16 +1,17 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
   class Mensajerialogin{         
-    function mail_recuperacion_pw($param){      
-      $mail               =   trim($param["mail"]);
-      $new_pass           =   $param["new_pass"];
-      $datos["mail"]      =   $mail;
-      $datos["new_pass"]  =   $new_pass;      
-      $destinatario       =   "arithgrey@enidservice.com"; 
-      $asunto             =   "Recuperación password - Enid Service"; 
-      $cuerpo             =   $this->get_cuerpo($param);
-      $headers            =   $this->get_headers($mail);
-      mail($destinatario, '=?UTF-8?B?'.base64_encode($asunto).'?=' ,$cuerpo,$headers);      
-      return $datos;  
+
+      function mail_recuperacion_pw($param){
+          $mail               =   trim($param["mail"]);
+          $new_pass           =   $param["new_pass"];
+          $datos["mail"]      =   $mail;
+          $datos["new_pass"]  =   $new_pass;
+          $destinatario       =   "arithgrey@enidservice.com";
+          $asunto             =   "Recuperación password - Enid Service";
+          $cuerpo             =   $this->get_cuerpo($param);
+          $headers            =   $this->get_headers($mail);
+          mail($destinatario, '=?UTF-8?B?'.base64_encode($asunto).'?=' ,$cuerpo,$headers);
+          return $datos;
     }      
     function get_cuerpo($param){
 

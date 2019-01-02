@@ -29,7 +29,6 @@ class Clasificacion extends REST_Controller{
         $param          =  $this->get();
         $this->response($this->clasificacion_model->get_clasificaciones_por_id($param));
     }
-    /**/
     function primer_nivel_GET(){
 
         $param                          =   $this->get();
@@ -169,10 +168,8 @@ class Clasificacion extends REST_Controller{
             }
             return $this->load->view("tallas/principal", $data);
 
-
-        }else{
-            $this->response($response);    
         }
+        $this->response($response);
         
     }
     private function get_data_clasificaciones($response, $data){
@@ -362,7 +359,7 @@ class Clasificacion extends REST_Controller{
         $api    =  "servicio/tallas/format/json/";
         return  $this->principal->api( $api, $q);     
     }  
-    function get_tipo_talla(){
+    private function get_tipo_talla(){
 
         $q["info"]  = 1;
         $api        =  "tipo_talla/index/format/json/";

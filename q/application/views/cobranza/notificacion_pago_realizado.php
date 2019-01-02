@@ -1,16 +1,15 @@
 <?php 
 	
-	$saldo_cubierto =  get_campo($recibo , "saldo_cubierto");
-	$costo_envio_cliente =  get_campo($recibo , "costo_envio_cliente");
-	$total_cubierto =  $saldo_cubierto + $costo_envio_cliente;
-	$resumen_pedido =  get_campo($recibo , "resumen_pedido");
-	$cantidad =  get_campo($recibo , "num_ciclos_contratados");
-	$precio =  get_campo($recibo , "precio");
-	$monto_a_pagar = get_campo($recibo , "monto_a_pagar");
+	$saldo_cubierto         =  get_campo($recibo , "saldo_cubierto");
+	$costo_envio_cliente    =  get_campo($recibo , "costo_envio_cliente");
+	$total_cubierto         =  $saldo_cubierto + $costo_envio_cliente;
+	$resumen_pedido         =  get_campo($recibo , "resumen_pedido");
+	$cantidad               =  get_campo($recibo , "num_ciclos_contratados");
+	$precio                 =  get_campo($recibo , "precio");
+	$monto_a_pagar          = get_campo($recibo , "monto_a_pagar");
 	
 
 ?>
-
 	<?php if ($modalidad ==  1):?>
 		<?=anchor_enid("CANCELAR VENTA", 
 			[
@@ -69,5 +68,4 @@
 			</tr>
 		</table>
 	</div>
-</div>	
 

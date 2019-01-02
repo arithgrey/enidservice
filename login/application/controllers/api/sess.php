@@ -9,32 +9,32 @@ class Sess extends REST_Controller{
         
         
         $param          =   $this->post();            
-        $url            =   $this->create_url();            
+        $url            =   $this->create_url();
+        $response       =   false;
         if($this->input->is_ajax_request() || ( array_key_exists("t", $param) && $param["t"] == "x=0.,!><!$#" ) ){
 
-
             if (if_ext($param ,"email,secret")) {
-                $usuario = $this->get_es_usuario($param);
+                $usuario    = $this->get_es_usuario($param);
+                $response   = 0;
                 if (count($usuario) == 1) {
 
                     $usuario            = $usuario[0];
                     $id_usuario         = $usuario["idusuario"];
                     $nombre             = $usuario["nombre"];
                     $email              = $usuario["email"];
-                    $fecha_registro     = $usuario["fecha_registro"];
+                    //$fecha_registro     = $usuario["fecha_registro"];
                     $id_empresa         = $usuario["idempresa"];
                     $response           = $this->crea_session($id_usuario, $nombre, $email, $id_empresa);
                     if (array_key_exists("t", $param) && $param["t"] == "x=0.,!><!$#") {
                         $this->response($response);
                     }
                     $response           = ($response != 0) ? $url : 0;
-                    $this->response($response);
-
                 }
-                $this->response(0);
+
+
             }
         }
-        $this->response(false);
+        $this->response($response);
         
     }
     private function get_es_usuario($q){

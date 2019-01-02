@@ -12,18 +12,14 @@ class Enid extends CI_Controller {
     */
     function imagen($id_imagen){
 
-        $img_src="";
         foreach ($this->get_img($id_imagen) as $row ){
+
             $img_src =  $row["img"];
             if(strlen($img_src) < 200){
-
                 return $this->get_img_contents($row);
-
             }else{
-
                 return $this->get_img_contents($img_src , 2 );
             }
-
         }
     }
     private function get_img_contents($data , $p = 1 ){
@@ -49,18 +45,20 @@ class Enid extends CI_Controller {
                 return $img;
             }
         }
-
     }
-    function imagen_usuario($id_usuario){
+    /*
+    private function imagen_usuario($id_usuario){
         $img_usuario =  $this->get_img_usuario($id_usuario);
         return  $this->construye_img_format($img_usuario );
     }
-    function imagen_servicio($id_servicio){
+    private function imagen_servicio($id_servicio){
         $imagen         = $this->get_img_servicio($id_servicio);
         if (is_array($imagen) &&  count($imagen) > 0){
             return $this->construye_img_format($imagen);
         }
     }
+    */
+    /*
     private function construye_img_format($response){
 
         if ( count($response) > 0 ) {
@@ -77,12 +75,15 @@ class Enid extends CI_Controller {
             }
         }
     }
+    */
+    /*
     private function costruye_imagen($id_imagen){
 
         foreach ($this->get_img($id_imagen) as $row ){
             return $row;
         }
     }
+    */
     /*
     private function get_img_faq($id_faq){
 

@@ -1,36 +1,36 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-   class Mensajeria{         
-      function notifica_mail_marketing( $plantilla  , $p_nombre, $p_descripcion,$id_tipo_publicidad  ,  $mail , $nombre ,  $email  , $email_alterno , $imgs){        
+   class Mensajeria{
 
-        $part_imgs =  ""; 
-        foreach ($imgs as $row){
+       /*
+       function notifica_mail_marketing( $plantilla  , $p_nombre, $p_descripcion,$id_tipo_publicidad  ,  $mail , $nombre ,  $email  , $email_alterno , $imgs){
 
-          $id_imagen  = $row["idimagen"];
-          $url        =  base_url('index.php/enid/img')."/".$id_imagen;
-          $part_imgs .=  img(["src" => $url], ["width"=>"100%;"]);
-          
-        }
-      $destinatario = "ventas@enidservice.com"; 
-      $contenido_plantilla =  $this->get_contenido_plantilla($plantilla);
-      $asunto = $p_nombre; 
+          $part_imgs =  "";
+          foreach ($imgs as $row){
+              $id_imagen  = $row["idimagen"];
+              $url        =  base_url('index.php/enid/img')."/".$id_imagen;
+              $part_imgs .=  img(["src" => $url], ["width"=>"100%;"]);
+          }
 
-      $cuerpo  = "<html>";
-      $cuerpo .= "<meta charset='utf-8' >";
-      $cuerpo .= label("Buen día ".$nombre." - ".$mail, ["style"  => 'font-weight:bold; font-size:1.2em;']);
-      $cuerpo .=  center($part_imgs);
-      $cuerpo .=  div($p_descripcion);
-      $cuerpo .=  div($contenido_plantilla);
+          $destinatario         =   "ventas@enidservice.com";
+          $contenido_plantilla  =   $this->get_contenido_plantilla($plantilla);
+          $asunto               =   $p_nombre;
 
-        
-      $this->get_headers_mail($mail);
-      $headers =  $this->get_headers_mail($mail);
-      mail($destinatario , '=?UTF-8?B?'.base64_encode($asunto).'?=' , $cuerpo , $headers);
-      return $cuerpo;
+          $cuerpo  = "<html>";
+          $cuerpo .= "<meta charset='utf-8' >";
+          $cuerpo .= label("Buen día ".$nombre." - ".$mail, ["style"  => 'font-weight:bold; font-size:1.2em;']);
+          $cuerpo .=  center($part_imgs);
+          $cuerpo .=  div($p_descripcion);
+          $cuerpo .=  div($contenido_plantilla);
+
+          $this->get_headers_mail($mail);
+          $headers =  $this->get_headers_mail($mail);
+          mail($destinatario , '=?UTF-8?B?'.base64_encode($asunto).'?=' , $cuerpo , $headers);
+
+          return $cuerpo;
 
       }
-  
-      
-      function get_headers_mail($mail){
+       */
+      private function get_headers_mail($mail){
 
         $headers  = "MIME-Version: 1.0\r\n"; 
         $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";         
@@ -38,7 +38,7 @@
         $headers .= "Cc: $mail\r\n"; 
         return $headers;           
       }
-      /**/
+      /*
       function notificacion_new_user($mail , $pass){   
 
          $mail                  =   $mail;
@@ -74,7 +74,8 @@
          mail($destinatario, '=?UTF-8?B?'.base64_encode($asunto).'?=' ,$cuerpo,$headers);
          return $datos;       
       }           
-      /**/
+      */
+      /*
       function notifica_nuevo_contacto($param ,  $email ){
 
         $destinatario   = "ventas@enidservice.com";         
@@ -103,7 +104,7 @@
         return $cuerpo;
 
       }
-      /**/
+      */
       function notifica_nuevo_contacto_subscrito($param ,  $email ){
 
         $destinatario   = "ventas@enidservice.com";         
@@ -124,7 +125,6 @@
         mail($destinatario , '=?UTF-8?B?'.base64_encode($asunto).'?=' , $cuerpo , $headers);
         return $cuerpo;
       }
-      /**/
       function notifica_agradecimiento_por_subscripcion($param ,  $email){
 
         $destinatario = "ventas@enidservice.com";         
@@ -164,7 +164,6 @@
         return $cuerpo;
 
       }
-      /**/
       function get_mensaje_base_agradecimiento(){
 
         $cuerpo =  heading_enid("Gracias por contactarse!");

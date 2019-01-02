@@ -406,47 +406,51 @@
             $query_create ="CREATE TABLE $tabla AS ".$sql;
             $this->db->query($query_create);   
       }    
-    }    
-    function get_where_tiempo($param ,  $tipo){
+    }
 
-      $fecha_inicio =  $param["fecha_inicio"];
-      $fecha_termino =  $param["fecha_termino"];
+      /**
+       * @param $param
+       * @param $tipo
+       * @return string
+       */
+      function get_where_tiempo($param , $tipo){
+          $fecha_inicio     =  $param["fecha_inicio"];
+          $fecha_termino    =  $param["fecha_termino"];
 
-      switch ($tipo){
-        case 1:          
-          
-          return " DATE(fecha_registro)
-                   BETWEEN 
-                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
-          break;
-        case 2:
-          
-          return " (fecha_termino)
-                   BETWEEN 
-                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
-          break;
-        
-        case 3:
-          
-          return " (fecha_actualizacion)
-                   BETWEEN 
-                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
-          break;
+          switch ($tipo){
+            case 1:
 
-        case 4:
-          
-          return " (fecha_cancelacion)
-                   BETWEEN 
-                   '".$fecha_inicio."' AND  '".$fecha_termino."' ";
-          break;
+              return " DATE(fecha_registro)
+                       BETWEEN 
+                       '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+              break;
+            case 2:
 
-        default:
-          
-          break;
-      }
+              return " (fecha_termino)
+                       BETWEEN 
+                       '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+              break;
+
+            case 3:
+
+              return " (fecha_actualizacion)
+                       BETWEEN 
+                       '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+              break;
+
+            case 4:
+
+              return " (fecha_cancelacion)
+                       BETWEEN 
+                       '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+              break;
+
+            default:
+              return "";
+              break;
+          }
       
-    }      
-    
+    }
     function crea_visitas_por_periodo($param){
 
         $where =  $this->get_where_tiempo($param , 1);

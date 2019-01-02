@@ -5,11 +5,10 @@ class Home extends CI_Controller{
         $this->load->helper("area");                          
         $this->load->library(lib_def());   
         $this->principal->acceso();               
-    }       
-    function index(){        
+    }
+    function index(){
 
-        $data                                   =   $this->principal->val_session("");     
-
+        $data   =   $this->principal->val_session("");
         if (get_param_def($this->input->get() , "transfer" ) > 0 ) {
             
         }else{

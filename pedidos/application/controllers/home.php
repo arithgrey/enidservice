@@ -66,7 +66,7 @@ class Home extends CI_Controller{
 
         }
     }
-    function load_detalle_pedido($param , $data){
+    private  function load_detalle_pedido($param , $data){
 
         if (ctype_digit($param["recibo"])){
 
@@ -76,7 +76,7 @@ class Home extends CI_Controller{
             redirect("../../?q=");
         }
     }
-    function carga_detalle_pedido($id_recibo , $data){
+    private function carga_detalle_pedido($id_recibo , $data){
 
         $recibo     =  $this->get_recibo($id_recibo);
         if ( count($recibo)>0 ) {
@@ -95,7 +95,7 @@ class Home extends CI_Controller{
         }
         
     }    
-    function get_domicilio_entrega($id_recibo , $recibo){
+    private function get_domicilio_entrega($id_recibo , $recibo){
 
 
         $recibo                        =    $recibo[0];
@@ -114,7 +114,7 @@ class Home extends CI_Controller{
         $data_complete["domicilio"]    = $domicilio;
         return $data_complete;
     }
-    function carga_vista_seguimiento($param , $data){
+    private function carga_vista_seguimiento($param , $data){
 
         
         $data["css"]    =   ["seguimiento_pedido.css" , "confirm-alert.css"];

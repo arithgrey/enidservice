@@ -1,12 +1,8 @@
-<?php 
-	
-	/*headings*/
+<?php
+
 	$heading_1	= heading_enid("TUS PREFERENCIAS E INTERESES" );	
 	$p1 		= p("CUÉNTANOS TUS INTERESES PARA  MEJORAR TU EXPERIENCIA"); 
 	$tmp 		=  div( $heading_1 .  $p1  , ['class' => "col-lg-4"] );
-
-
-
 ?>
 <div class="contenedor_principal_enid">
 <?=n_row_12()?>	
