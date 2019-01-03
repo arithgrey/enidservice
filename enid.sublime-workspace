@@ -519,6 +519,77 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "hola que tal si tengo aun 2 ,  decoran muy bien la casa, mantienen muy frescos los cereales y son muy atractivos para los niños, hacemos entregas en alguna estación del metro  y también hacemos envíos a domicilio, en lo que te pueda ayudar estoy a tus ordenes puedes ver más detalles de el aquí http://enidservice.com/inicio/producto/?producto=259 o sin problema me puedes mandar whatsApp al 5552967027 y también tengo más modelos por si los deseas ver aquí \n\nSimples en -> 600 \n\nhttps://www.facebook.com/enidservicemx/videos/951181428404241/\n\nDobles blancos en -> 850\n\nhttps://www.facebook.com/enidservicemx/videos/244689246215115/\n\nDobles negros en -> 850\nhttps://www.facebook.com/enidservicemx/videos/756862184671703/\n",
+			"settings":
+			{
+				"buffer_size": 721,
+				"line_ending": "Unix",
+				"name": "hola que tal si tengo aun 2 ,  decoran muy bien la"
+			}
+		},
+		{
+			"file": "/var/www/html/inicio_3/portafolio/application/controllers/api/clasificacion.php",
+			"settings":
+			{
+				"buffer_size": 12811,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 1204 files for \"AÑADE SALDO A TU CUENTA DE\"\n\n/var/www/html/inicio/movimientos/application/views/agregar_saldo.php:\n    2  \t<div class='contenedor_principal_enid'>\n    3  \t\t<div class=\"col-lg-4 col-lg-offset-4\">\n    4: \t\t\t<?=heading_enid(\"AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR \" , 3)?>\n    5  \n    6  \t\t\t<a href=\"?q=transfer&action=7\">\n\n/var/www/html/inicio/movimientos/application/views/agregar_saldo_desde_oxxo.php:\n    2  \t$heading_enid_1\t= \n    3  \theading_enid(\n    4: \t\t\"AÑADE SALDO A TU CUENTA DE ENID SERVICE AL \n    5  \t\tREALIZAR DEPÓSITO DESDE CUALQUIER SUCURSAL OXXO\", \n    6  \t\t3 );\n\n2 matches across 2 files\n\n\nSearching 9752 files for \"get_tallas_servicio\"\n\n/var/www/html/inicio_3/portafolio/application/controllers/api/clasificacion.php:\n  196          $param              =   $this->get();\n  197          $param[\"id\"]        =   $param[\"servicio\"];\n  198:         $clasificaciones    =   $this->get_tallas_servicio($param);            \n  199          \n  200  \n  ...\n  236              $tallas_disponibles_categoria \n  237              =  \n  238:             $this->clasificacion_model->get_tallas_servicio($param);            \n  239  \n  240              $data_complete[\"tallas_servicio\"]  =  \n  ...\n  313      }\n  314      /**/\n  315:     function  get_tallas_servicio($q){    \n  316  \n  317          $api  =  \"servicio/tallas_clasificacion/format/json/\";\n\n/var/www/html/inicio_3/portafolio/application/models/clasificacion_model.php:\n  127    \n  128    \n  129:   function get_tallas_servicio($param){\n  130  \n  131      $id_tipo_talla  =   $param[\"id_tipo_talla\"];\n\n4 matches across 2 files\n",
+			"settings":
+			{
+				"buffer_size": 1630,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "/var/www/html/inicio_3/portafolio/application/models/clasificacion_model.php",
+			"settings":
+			{
+				"buffer_size": 4869,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "movimientos/application/views/agregar_saldo_desde_oxxo.php",
+			"settings":
+			{
+				"buffer_size": 1140,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "planes_servicios/application/controllers/inicio.php",
+			"settings":
+			{
+				"buffer_size": 3993,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "planes_servicios/application/helpers/planes_helper.php",
+			"settings":
+			{
+				"buffer_size": 1262,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "desc servicio;",
+			"settings":
+			{
+				"buffer_size": 14,
+				"line_ending": "Unix",
+				"name": "desc servicio;"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -576,15 +647,13 @@
 	},
 	"expanded_folders":
 	[
-		"/var/www/html/inicio",
-		"/var/www/html/inicio/producto",
-		"/var/www/html/inicio/producto/application",
-		"/var/www/html/inicio/producto/application/controllers"
 	],
 	"file_history":
 	[
-		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
 		"/var/www/html/inicio/producto/application/controllers/home.php",
+		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
+		"/var/www/html/inicio/debug/debug.log",
+		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
 		"/var/www/html/inicio/js_tema/planes_servicios/img.js",
 		"/var/www/html/inicio/q/application/views/imgs/servicio_producto_servicio.php",
 		"/var/www/html/inicio/js_tema/servicio/pre.js",
@@ -708,19 +777,18 @@
 		"/var/www/html/inicio/q/application/controllers/api/usuario_clasificacion.php",
 		"/var/www/html/inicio/q/application/controllers/api/valoracion.php",
 		"/var/www/html/inicio/programacion/evaluacion_servicios_mensual.php",
-		"/var/www/html/inicio/q/application/models/usuario_punto_encuentro_model.php",
-		"/var/www/html/inicio/q/application/models/usuario_direccion_model.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario_direccion.php"
+		"/var/www/html/inicio/q/application/models/usuario_punto_encuentro_model.php"
 	],
 	"find":
 	{
-		"height": 28.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
 		"height": 116.0,
 		"where_history":
 		[
+			"*.php",
 			"*.js",
 			"*.php",
 			"",
@@ -847,8 +915,7 @@
 			"*.js",
 			"*.php",
 			"*.js",
-			"*.php",
-			""
+			"*.php"
 		]
 	},
 	"find_state":
@@ -856,6 +923,16 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			">",
+			"get_tallas_servicio",
+			"get_tallas_en_servicio",
+			"monto_a_ingresar",
+			"AÑADE SALDO A TU CUENTA DE",
+			"valida_action",
+			"planes_servicios",
+			"valida_maximo_compra",
+			"get_info_producto",
+			"\t",
 			"get_resultados_posibles",
 			"modificado:",
 			"\",\"",
@@ -973,17 +1050,7 @@
 			"            ",
 			"              ",
 			"             ",
-			"            ",
-			"paginacion",
-			"config",
-			"create_pagination",
-			"            $this->create_pagination($totales_elementos,\n",
-			"create_pagination",
-			"vendedor",
-			"$param[\"id_clasificacion\"]",
-			"create_pagination",
-			"config_paginacion",
-			"create_pagination"
+			"            "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1020,14 +1087,286 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 721,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								721,
+								721
+							]
+						],
+						"settings":
+						{
+							"auto_name": "hola que tal si tengo aun 2 ,  decoran muy bien la",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/var/www/html/inicio_3/portafolio/application/controllers/api/clasificacion.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12811,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9251,
+								9251
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3720.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1630,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										248,
+										274
+									],
+									[
+										500,
+										526
+									],
+									[
+										933,
+										952
+									],
+									[
+										1124,
+										1143
+									],
+									[
+										1287,
+										1306
+									],
+									[
+										1511,
+										1530
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								1522,
+								1522
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 2,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 306.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/var/www/html/inicio_3/portafolio/application/models/clasificacion_model.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4869,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4841,
+								4841
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1867.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "movimientos/application/views/agregar_saldo_desde_oxxo.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1140,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								301,
+								301
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "planes_servicios/application/controllers/inicio.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3993,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								544,
+								544
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "planes_servicios/application/helpers/planes_helper.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1262,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								299,
+								299
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "desc servicio;",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 28.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1068,7 +1407,7 @@
 	"project": "enid.sublime-project",
 	"replace":
 	{
-		"height": 52.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1077,6 +1416,14 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"clasificacion.php",
+				"portafolio/application/controllers/api/clasificacion.php"
+			],
+			[
+				"debu",
+				"debug/debug.log"
+			],
 			[
 				"serviciosmodel.php",
 				"q/application/models/serviciosmodel.php"
@@ -1580,14 +1927,6 @@
 			[
 				"pedidos.js",
 				"js_tema/pedidos/principal.js"
-			],
-			[
-				"libraries/Session.php",
-				"system/libraries/Session.php"
-			],
-			[
-				"header",
-				"view_tema/header_template.php"
 			]
 		],
 		"width": 0.0

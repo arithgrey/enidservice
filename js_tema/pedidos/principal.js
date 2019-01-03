@@ -3,24 +3,36 @@ $(document).ready(function(){
 	$('.datetimepicker4').datepicker();
 	$('.datetimepicker5').datepicker();						
 	$(".form_busqueda_pedidos").submit(busqueda_pedidos);
+	$(".form_fecha_entrega").submit(editar_horario_entrega);
 	$(".editar_estado").click(cambio_estado);
 	$(".editar_tipo_entrega").click(pre_tipo_entrega);
 	$(".status_venta").change(modidica_estado);
 	$(".form_cantidad").submit(registra_saldo_cubierto);
-	$(".saldo_cubierto").keyup();	
+
 	$(".saldo_cubierto_pos_venta").keyup(function(e) {
-  
-    var code = (e.keyCode ? e.keyCode : e.which);
+    	var code = (e.keyCode ? e.keyCode : e.which);
 	    if (code==13) {	    	
 	    	modifica_status(get_valor_selected(".status_venta"));
 	    }
-    
 	});
-
 	$(".form_edicion_tipo_entrega").change(cambio_tipo_entrega);
 
 
 });
+var editar_horario_entrega = function(e){
+
+	var data_send 		=  $(".form_fecha_entrega").serialize();
+	var url 			=  "../q/index.php/api/recibo/fecha_entrega/format/json/";
+	request_enid( "PUT",  data_send, url, response_horario_entrega , ".place_fecha_entrega");
+	e.preventDefault();
+}
+var response_horario_entrega = function(data){
+
+	$(".place_fecha_entrega").empty();
+	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+	redirect(url);
+
+}
 var busqueda_pedidos =  function(e){
 	
 	var fecha_inicio 	=  get_parameter("#datetimepicker4");  
@@ -30,22 +42,21 @@ var busqueda_pedidos =  function(e){
 		var data_send 		=  $(".form_busqueda_pedidos").serialize();
 		var url 			=  "../q/index.php/api/recibo/pedidos/format/json/";  
 		request_enid( "GET",  data_send, url, response_pedidos, ".place_pedidos");
-			
+
 	}
 	e.preventDefault();
-};
+}
 var response_pedidos =  function(data){	
 
-	llenaelementoHTML(".place_pedidos" ,data );
+	llenaelementoHTML(".place_pedidos" , data );
 	$('th').click(ordena_table_general);
 	$(".desglose_orden").click(function(){		
 		var recibo  =  	get_parameter_enid($(this) , "id");
 		$(".numero_recibo").val(recibo);
-
 		$(".form_search").submit();
 	});
 	
-};
+}
 var cambio_estado = function(){
 	
 	var recibo  =  	get_parameter_enid($(this) , "id");	
@@ -53,12 +64,9 @@ var cambio_estado = function(){
 	var  status_venta_actual =  get_parameter(".status_venta_registro");
 	selecciona_valor_select(".selector_estados_ventas .status_venta" ,  status_venta_actual);
 	var status_venta_registro = parseInt(get_parameter(".status_venta_registro"));
-	
-
 	$(".status_venta_registro option[value='"+status_venta_registro+"']").attr("disabled", "disabled");
-	
 
-};
+}
 var modidica_estado = function(){
 
 
@@ -87,7 +95,7 @@ var modidica_estado = function(){
 		    }
 		});
 	} 
-};
+}
 var guarda_nuevo_estado = function(){
 	var status_venta 			= parseInt(get_valor_selected(".selector_estados_ventas .status_venta"));		
 	var status_venta_registro	= parseInt(get_parameter(".status_venta_registro"));		
@@ -123,7 +131,7 @@ var guarda_nuevo_estado = function(){
 		    break;	
 		}
 	}       
-};
+}
 var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 
 
@@ -143,8 +151,7 @@ var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 		set_option("es_proceso_compra"  , 1);
 		registra_data_nuevo_estado(status_venta);
 	}
-};
-
+}
 var registra_saldo_cubierto = function(e){
 
 	var is_num =  valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" );
@@ -158,7 +165,7 @@ var registra_saldo_cubierto = function(e){
 
 	}
 	e.preventDefault();
-};
+}
 var response_saldo_cubierto = function(data){
 	
 	if (data ==  true) {
@@ -172,7 +179,7 @@ var response_saldo_cubierto = function(data){
 		$(".mensaje_saldo_cubierto").show();
 		llenaelementoHTML(".mensaje_saldo_cubierto", data);
 	}	
-};
+}
 var response_status_venta = function(data){
 
 
@@ -187,11 +194,11 @@ var response_status_venta = function(data){
 		llenaelementoHTML(".mensaje_saldo_cubierto_post_venta", data);
 	}
 
-};
+}
 var pre_cancelacion = function(){
 		
 	var tipo 		=	0;	
-	switch(parseInt( get_parameter(".tipo_entrega_def"))) {
+	switch(parseInt( get_parameter(".tipo_entrega_def")) ) {
 		
 		/*opciones en punto de encuentro*/
 	    case 1:
@@ -221,12 +228,12 @@ var pre_cancelacion = function(){
 	var url 		= "../q/index.php/api/tipificacion/index/format/json/";	
 	request_enid( "GET",  data_send, url, response_pre_cancelacion)		
 
-};
+}
 var response_pre_cancelacion = function(data){
 
 	llenaelementoHTML(".place_tipificaciones" , data);
 	$(".tipificacion").change(registra_motivo_cancelacion);
-};
+}
 var registra_motivo_cancelacion  = function(){
 	
 	var status_venta 	= 	get_valor_selected(".status_venta");
@@ -235,13 +242,11 @@ var registra_motivo_cancelacion  = function(){
 	var url 			= 	"../q/index.php/api/recibo/status/format/json/";		
 	bloquea_form(".selector_estados_ventas");
 	request_enid( "PUT",  data_send, url, response_status_venta);	
-};
+}
 var cambio_tipo_entrega = function(){
 
 	var tipo_entrega 			=  get_valor_selected(".form_edicion_tipo_entrega .tipo_entrega");
 	var tipo_entrega_actual 	=  get_parameter(".tipo_entrega_def");
-	
-
 	
 	if (tipo_entrega > 0 && tipo_entrega != tipo_entrega_actual) {
 		var text 	= "¿REALMENTE DESEAS MODIFICAR EL TIPO DE ENTREGA?";
@@ -267,7 +272,7 @@ var cambio_tipo_entrega = function(){
 		
 	}
 
-};
+}
 var set_tipo_entrega = function(tipo_entrega , tipo_entrega_actual){
 	
 	if (tipo_entrega != tipo_entrega_actual) {
@@ -291,29 +296,30 @@ var set_tipo_entrega = function(tipo_entrega , tipo_entrega_actual){
 		        break;	    
 
 		    default:
+
 		    break;
 		        
 		}
 		registra_tipo_entrega(tipo_entrega, get_parameter(".recibo"));
 	}
 
-};
+}
 var registra_tipo_entrega = function(tipo_entrega, recibo){
 
 	var text_tipo_entrega=  get_parameter(".text_tipo_entrega"); 
 	var data_send = {"tipo_entrega" : tipo_entrega ,  recibo: recibo , text_tipo_entrega:text_tipo_entrega};
 	var url 	  = "../q/index.php/api/recibo/tipo_entrega/format/json/";  
 	request_enid( "PUT",  data_send, url, response_tipo_entrega);
-};
+}
 var response_tipo_entrega = function(data){
 	var url = "../pedidos/?recibo="+get_parameter(".recibo");
 	redirect(url);
-};
+}
 var pre_tipo_entrega = function(){
 	$(".form_edicion_tipo_entrega").show();	
 	var tipo_entrega_actual 	=  get_parameter(".tipo_entrega_def");
 	selecciona_valor_select(".form_edicion_tipo_entrega .tipo_entrega" ,  tipo_entrega_actual);
-};
+}
 var verifica_pago_previo = function(){
 	var saldo_cubierto =  get_parameter(".saldo_actual_cubierto");	
 	if (saldo_cubierto > 0 ) {
@@ -324,14 +330,14 @@ var verifica_pago_previo = function(){
 	}else{
 		modifica_status(6 , 1);
 	}
-};
+}
 var oculta_opciones_estados =  function(){
 	display_elements([".selector_estados_ventas" , 0]);
-};
+}
 var procesa_cambio_estado = function(){
 	set_option("es_proceso_compra" , 1);
 	modifica_status(6 , 1);	
-};
+}
 var registra_data_nuevo_estado = function(status_venta){
 
 	bloquea_form(".selector_estados_ventas");
@@ -339,4 +345,33 @@ var registra_data_nuevo_estado = function(status_venta){
 	set_option("es_proceso_compra" , 0);
 	var  url 		= "../q/index.php/api/recibo/status/format/json/";		
 	request_enid( "PUT",  data_send, url, response_status_venta)	
-};
+}
+var confirma_cambio_horario = function(id_recibo , status  , saldo_cubierto_envio , monto_a_pagar , se_cancela , fecha_entrega){
+
+	debugger;
+	var text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
+	var text_confirmacion = "";
+	switch(parseInt(status)) {
+		case 9:
+			var text = "LA ORDEN YA FUÉ ENTREGADA!";
+			var text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
+
+			break;
+		case 10:
+			var text = "LA ORDEN FUÉ CANCELADA!";
+			var text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
+			break;
+
+		default:
+			var text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
+			var text_confirmacion = "";
+			break;
+	}
+
+	show_confirm(text ,  text_confirmacion , "SI" , function(){
+		var url =  "../pedidos/?recibo="+id_recibo+"&fecha_entrega=1";
+		redirect(url);
+	});
+
+
+}

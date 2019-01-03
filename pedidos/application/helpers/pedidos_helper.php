@@ -419,9 +419,20 @@ if(!function_exists('invierte_date_time')){
         function create_fecha_contra_entrega($recibo , $domicilio){
 
             if ( get_param_def($domicilio , "domicilio") > 0  && count($recibo) > 0) {
-                $recibo 				=  $recibo[0];
-                $text 					=  div("HORARIO DE ENTREGA" , 1).div($recibo["fecha_contra_entrega"] ,1);
-                $fecha_contra_entrega   =  ($recibo["tipo_entrega"] == 1) ? $text:"";
+                $recibo 				=   $recibo[0];
+                $id_recibo              =   $recibo["id_proyecto_persona_forma_pago"];
+                $status                 =   $recibo["status"];
+                $saldo_cubierto_envio   =   $recibo["saldo_cubierto_envio"];
+                $monto_a_pagar          =   $recibo["monto_a_pagar"];
+                $se_cancela             =   $recibo["se_cancela"];
+                $fecha_entrega          =   $recibo["fecha_entrega"];
+                $text 					=   div(icon("fa fa fa fa-pencil ") ,
+                                            [
+                                                "class"     => "editar_horario_entrega  text-right " ,
+                                                "id"        => $id_recibo,
+                                                "onclick"   => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , {$fecha_entrega})"
+                                            ]).div(div("HORARIO DE ENTREGA" , 1).div($recibo["fecha_contra_entrega"] ,1) , ["class"=> "contenedor_entrega"]);
+                $fecha_contra_entrega   =   ($recibo["tipo_entrega"] == 1) ? $text:"";
                 return $fecha_contra_entrega;
             }
         }

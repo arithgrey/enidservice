@@ -33,8 +33,8 @@ class recibo extends REST_Controller{
     */
     function cancelar_envio_recordatorio_PUT(){
 
-        $param      =  $this->put();
-        $response   = false;
+        $param      =   $this->put();
+        $response   =   false;
         if (if_ext($param, "id")){
             $id         = $param["id"];
             $response = $this->recibo_model->q_up("cancela_email" , 1, $id);
@@ -326,6 +326,19 @@ class recibo extends REST_Controller{
 
             }
 
+        }
+        $this->response($response);
+
+    }
+    function fecha_entrega_PUT(){
+
+        $param      = $this->put();
+        $response   = false;
+        if(if_ext($param, "fecha_entrega,horario_entrega,recibo")){
+
+            $fecha_contra_entrega   =   $param["fecha_entrega"]." ".$param["horario_entrega"].":00";
+            $id_recibo              =   $param["recibo"];
+            $response               =   $this->recibo_model->q_up("fecha_contra_entrega" , $fecha_contra_entrega , $id_recibo);
         }
         $this->response($response);
 

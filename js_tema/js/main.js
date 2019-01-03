@@ -754,13 +754,6 @@ var evita_basura  = function(){
 	var 	text = text.replace(/["|]/g, "");
 	set_parameter(".input_busqueda_producto" , text);	
 };
-
-var reloload_img =  function ( id,  url) {
-	console.log(id );
-	console.log(url);
-	window.setInterval(reload_imgs(id, url),20000);
-
-};
 var reload_imgs = function (id,  url) {
 
 	document.getElementById(id).src = url;
@@ -770,4 +763,9 @@ var reload_imgs = function (id,  url) {
 var get_parameter = function(element){
 	var param = $(element).val();
 	return param;
+};
+var reloload_img =  function( id ,  url) {
+    console.log(id );
+    console.log(url);
+    window.setInterval(reload_imgs(id, url) , 30000);
 };

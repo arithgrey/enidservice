@@ -1140,10 +1140,13 @@ if ( ! function_exists('get_logo'))
 if ( ! function_exists('get_img_usuario'))
 {
     function get_img_usuario($id_usuario){
-        $img_conf  = [
+        $url_img    = "../imgs/index.php/enid/imagen_usuario/".$id_usuario;
+        $img_conf   = [
             "id"      =>  "imagen_usuario" ,
-            "src"     =>  "../imgs/index.php/enid/imagen_usuario/".$id_usuario ,
+            "class"   =>  "imagen_usuario" ,
+            "src"     =>  $url_img ,
             "onerror" =>  "this.src='../img_tema/user/user.png'" ,
+            //'onerror' =>  "reloload_img( 'imagen_usuario','".$url_img."');",
             "style"   =>  "width: 40px!important;height: 35px!important;"
         ];
 
@@ -1156,5 +1159,39 @@ if ( ! function_exists('microtime_float'))
     function microtime_float(){
         list($useg, $seg) = explode(" ", microtime());
         return ((float)$useg + (float)$seg);
+    }
+}
+if (!function_exists('lista_horarios')) {
+    function lista_horarios()
+    {
+
+        $horarios = [
+            "09:00",
+            "09:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:30",
+            "17:00",
+            "17:30",
+            "18:00",
+        ];
+
+        $select = "<select name='horario_entrega' class='form-control input-sm '  > ";
+        foreach ($horarios as $row) {
+            $select .= "<option value='" . $row . "'>" . $row . "</option>";
+        }
+        $select .= "</select>";
+        return $select;
+
     }
 }

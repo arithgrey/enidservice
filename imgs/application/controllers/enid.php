@@ -46,27 +46,17 @@ class Enid extends CI_Controller {
             }
         }
     }
-    /*
-    private function imagen_usuario($id_usuario){
+    function imagen_usuario($id_usuario){
         $img_usuario =  $this->get_img_usuario($id_usuario);
         return  $this->construye_img_format($img_usuario );
     }
-    private function imagen_servicio($id_servicio){
-        $imagen         = $this->get_img_servicio($id_servicio);
-        if (is_array($imagen) &&  count($imagen) > 0){
-            return $this->construye_img_format($imagen);
-        }
-    }
-    */
-    /*
     private function construye_img_format($response){
 
         if ( count($response) > 0 ) {
             $id_imagen  =   $response[0]["id_imagen"];
             $data       =   $this->costruye_imagen($id_imagen);
-
             $img_src    =   $data["img"];
-            if(strlen($img_src) < 200){
+            if(strlen($img_src) < 300){
 
                 return $this->get_img_contents($data , 1);
 
@@ -75,14 +65,25 @@ class Enid extends CI_Controller {
             }
         }
     }
-    */
-    /*
     private function costruye_imagen($id_imagen){
 
         foreach ($this->get_img($id_imagen) as $row ){
             return $row;
         }
     }
+    /*
+    private function imagen_servicio($id_servicio){
+        $imagen         = $this->get_img_servicio($id_servicio);
+        if (is_array($imagen) &&  count($imagen) > 0){
+            return $this->construye_img_format($imagen);
+        }
+    }
+    */
+    /*
+
+    */
+    /*
+
     */
     /*
     private function get_img_faq($id_faq){

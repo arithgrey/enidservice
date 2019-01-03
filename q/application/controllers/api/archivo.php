@@ -148,7 +148,7 @@ class Archivo extends REST_Controller{
     }
     function create_imagen_usuario($q){
         
-        $api = "imagen_usuario/index";
+        $api        = "imagen_usuario/index";
         return $this->principal->api( $api , $q , "json", "POST");
     }
     private function create_perfil_usuario($param){

@@ -49,8 +49,9 @@ class Home extends CI_Controller{
             "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
             "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
             "js/pickers-init.js",
-            "pedidos/principal.js",
-            "alerts/jquery-confirm.js"
+            "alerts/jquery-confirm.js",
+            "pedidos/principal.js"
+
 
         ];
 
@@ -70,25 +71,35 @@ class Home extends CI_Controller{
 
         if (ctype_digit($param["recibo"])){
 
-            $this->carga_detalle_pedido($param["recibo"] , $data);
+            $this->carga_detalle_pedido($param , $data);
 
         }else{
             redirect("../../?q=");
         }
     }
-    private function carga_detalle_pedido($id_recibo , $data){
+    private function carga_detalle_pedido($param , $data){
 
-        $recibo     =  $this->get_recibo($id_recibo);
+        $id_recibo                  =   $param["recibo"];
+        $recibo                     =   $this->get_recibo($id_recibo);
         if ( count($recibo)>0 ) {
+
 
             $data["orden"]          =   $id_recibo;
             $data["recibo"]         =   $recibo;
-            $data["domicilio"]      =   $this->get_domicilio_entrega($id_recibo , $recibo);
-            $data["usuario"]        =   $this->get_usuario($recibo[0]["id_usuario"]);
-            $data["status_ventas"]  =   $this->get_estatus_enid_service();
-            $data["tipificaciones"] =   $this->get_tipificaciones($id_recibo);
 
-            $this->principal->show_data_page($data, 'detalle');          
+            if(get_param_def($param , "fecha_entrega" ) >  0){
+                //$data["js"]         =
+                $this->principal->show_data_page($data, 'form_fecha');
+
+            }else{
+
+                $data["domicilio"]      =   $this->get_domicilio_entrega($id_recibo , $recibo);
+                $data["usuario"]        =   $this->get_usuario($recibo[0]["id_usuario"]);
+                $data["status_ventas"]  =   $this->get_estatus_enid_service();
+                $data["tipificaciones"] =   $this->get_tipificaciones($id_recibo);
+                $this->principal->show_data_page($data, 'detalle');
+            }
+
 
         }else{
             $this->principal->show_data_page($data, 'error');          
@@ -149,7 +160,6 @@ class Home extends CI_Controller{
     }
     private function load_view_seguimiento($data , $param , $recibo , $id_recibo){
 
-
         $notificacion_pago          =   (get_param_def($param , "notificar" ) > 0 ) ? 1 : 0; 
         $notificacion_pago          =   
         ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago;
@@ -161,7 +171,6 @@ class Home extends CI_Controller{
     }
     private function load_view_domicilios_pedidos($data){
 
-        
         $data["css"]               = [
             "bootstrap_1.min.css" , 
             "pedido_domicilio.css", 
@@ -233,5 +242,4 @@ class Home extends CI_Controller{
         $api                =   "usuario_punto_encuentro/usuario/format/json/";
         return $this->principal->api( $api ,  $q);             
     }
-    
 }

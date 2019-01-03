@@ -24,7 +24,7 @@
                       "src"     =>  $url_imagen ,
                       "style"   =>  'width: 44px!important;height: 44px;',
                       "id"      =>  $id_error,
-                      'onerror' =>  "reloload_img( '".$id_error."','".$url_imagen."');"
+                      'onerror' =>  "reloload_img('".$id_error."','".$url_imagen."');"
                   ])?>
                   <?=span($nombre_servicio . "|".  $precio ."MXN")?>
                   <?=div($fecha_registro ."|".  "alcance" . $vista)?>                  
