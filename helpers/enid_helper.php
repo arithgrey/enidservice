@@ -1154,7 +1154,7 @@ if ( ! function_exists('get_img_usuario'))
 
     }
 }
-if ( ! function_exists('microtime_float'))
+if ( ! function_exists('lista_horarios'))
 {
     function microtime_float(){
         list($useg, $seg) = explode(" ", microtime());

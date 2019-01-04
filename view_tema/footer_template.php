@@ -5,21 +5,11 @@ $list = [
         [   "class"=>'black ', 
             "href"=>"../contact/#envio_msj" 
         ]),
-    
     anchor_enid("-Términos y condiciones",  ["class"=>'black ', "href"=>"../terminos-y-condiciones" ])
 ];
 
-$list2 = [
-    heading_enid("TEMAS RELACIONADOS" , 4, ["class"=>"strong"]) ,
-    
-    anchor_enid("- Temas de ayuda",  ["class"=>'black ', "href"=>"../faq/" ])
-];
-
-$list3 = [
-    heading_enid("ESPECIALES" , 4, ["class"=>"strong"]) ,
-    
-    anchor_enid("- Trabaja en nuestro equipo",  ["class"=>'black ', "href"=>"../unete_a_nuestro_equipo" ])
-];
+$list2 = [heading_enid("TEMAS RELACIONADOS" , 4, ["class"=>"strong"]) , anchor_enid("- Temas de ayuda",  ["class"=>'black ', "href"=>"../faq/" ])];
+$list3 = [heading_enid("ESPECIALES" , 4, ["class"=>"strong"]) , anchor_enid("- Trabaja en nuestro equipo",  ["class"=>'black ', "href"=>"../unete_a_nuestro_equipo" ])];
 
 
 $list4 = [
@@ -30,12 +20,14 @@ $list4 = [
         ["class"=>'black ', "href"=>"../sobre_enidservice"  ])
 ];
 
-          
-$list_footer = [
-div(ul($list) , ["class"=>"col-lg-3 col-sm-6 inner"]),
-div(ul($list2) , ["class"=>"col-lg-3 col-sm-6 inner"]),
-div(ul($list3) , ["class"=>"col-lg-3 col-sm-6 inner"]),
-div(ul($list4) , ["class"=>"col-lg-3 col-sm-6 inner"])];
+$base        = "col-lg-3 col-sm-6 inner";
+
+$list_footer =
+    [
+            div(ul($list)   , ["class"  =>  $base   ]),
+        div(ul($list2)  , ["class"  =>  $base   ]),
+        div(ul($list3)  , ["class"  =>  $base   ]),
+        div(ul($list4)  , ["class"  =>  $base   ])];
 
 ?>
 <?=div("", [ "class"=>"separador-footer" ], 1 )?>    

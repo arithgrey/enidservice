@@ -12,48 +12,37 @@ class usuario_direccion extends REST_Controller{
     function principal_PUT(){
 
         $param      = $this->put();
-        
         $response   = false;
-        if ($param["id_usuario"]  > 0 && $param["id_direccion"] > 0) {
-            
-                        
-            $params_where   =  ["id_usuario" => $param["id_usuario"]];
-            $response       =  
-            $this->usuario_direccion_model->delete($params_where, 10 );
-            //debug($response ,1);
-            /*
-            if ($response == 1) {
-                
-                $params         =  ["status" => 1];
-                $params_where   =  [
-                    "id_usuario"    => $param["id_usuario"] ,
-                    "id_direccion"  => $param["id_direccion"]
+        if (if_ext($param, "id_usuario,id_direccion")){
+            if ($param["id_usuario"]  > 0 && $param["id_direccion"] > 0) {
 
-                ];
-                $response       =  
-                $this->usuario_direccion_model->update($params , $params_where , 1);
-    
+                $params_where   =  ["id_usuario" => $param["id_usuario"]];
+                $response       =
+                    $this->usuario_direccion_model->delete($params_where, 10 );
+
             }
-            */
-                        
         }
         $this->response($response);
         
     }
     function id_GET(){
 
-        $param      =  $this->get();
-        $id_usuario =  $param["id_usuario"]; 
-        $response   = $this->usuario_direccion_model->get_usuario_direccion($id_usuario);
+        $param      =   $this->get();
+        $response   =   false;
+        if (if_ext($param , "id_usuario")){
+            $response   = $this->usuario_direccion_model->get_usuario_direccion($param["id_usuario"]);
+        }
         $this->response($response);
     }    
     function num_GET(){
 
         $param      =  $this->get();
-        $response   = $this->usuario_direccion_model->get_num($param);
+        $response   = false;
+        if (if_ext($param , "id_usuario")){
+            $response   = $this->usuario_direccion_model->get_num($param);
+        }
         $this->response($response);
     }
-    /**/
     function index_GET(){
 
 
@@ -139,7 +128,6 @@ class usuario_direccion extends REST_Controller{
         $id_usuario             =   $this->get_id_usuario($param);                
         $data["id_usuario"]     =   $id_usuario;
         $param["id_usuario"]    =   $data["id_usuario"];
-        //debug($param , 1);
         $domicilio              =   $this->get_direccion_pedido($param);        
         $data["registro_direccion"] = 0;
         
@@ -197,8 +185,11 @@ class usuario_direccion extends REST_Controller{
     function index_POST(){
 
         $param      =   $this->post();
-        $params     =   ["id_usuario" => $param["id_usuario"] , 'id_direccion' => $param["id_direccion"] ];
-        $response   =  $this->usuario_direccion_model->insert($params);
+        $response   =   false;
+        if (if_ext($param , "id_usuario,id_direccion")){
+            $params     =   ["id_usuario" => $param["id_usuario"] , 'id_direccion' => $param["id_direccion"] ];
+            $response   =  $this->usuario_direccion_model->insert($params);
+        }
         $this->response($response);        
     }
     function activos_con_direcciones_GET(){

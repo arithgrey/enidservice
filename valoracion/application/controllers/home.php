@@ -3,8 +3,7 @@ class Home extends CI_Controller{
     function __construct(){        
         parent::__construct();                            
         $this->load->library(lib_def());              
-    }            
-    /**/
+    }
     function index(){
 
         $data                   = $this->principal->val_session("");
@@ -15,12 +14,13 @@ class Home extends CI_Controller{
         $servicio =  $this->input->get("servicio");
         if($servicio > 0 && ctype_digit($servicio) ){
             
-            $num_hist           = get_info_servicio( $this->input->get("q"));            
-            $num_usuario        = get_info_usuario( $this->input->get("q2"));        
-            $num_servicio       = get_info_usuario( $this->input->get("q3"));        
+            //$num_hist             = get_info_servicio( $this->input->get("q"));
+            $param                  = $this->input->get();
+            $num_usuario            = get_info_usuario($param["q2"]);
+            $num_servicio           = get_info_usuario($param["q3"]);
             $this->principal->crea_historico(56698727 , $num_usuario , $num_servicio );         
             $clasificaciones_departamentos          =   $this->principal->get_departamentos("nosotros");    
-            $data["clasificaciones_departamentos"]  = $clasificaciones_departamentos;    
+            $data["clasificaciones_departamentos"]  =   $clasificaciones_departamentos;
             
             
             $prm["in_session"]                      =   0;    
@@ -33,23 +33,20 @@ class Home extends CI_Controller{
                 $prm["id_usuario"]  =   $data["id_usuario"];                 
             }
 
-            $prm["id_servicio"] =  $servicio;
-            $data["formulario_valoracion"]=
-            $this->carga_formulario_valoracion($prm);
-            
-            /*Cargamos reseñas de otros días*/    
-            $data["css"]    =  ["valoracion_servicio.css"];
-            $data["js"]     =  ["valoracion/principal.js"];
+            $prm["id_servicio"]             =   $servicio;
+            $data["formulario_valoracion"]  =   $this->carga_formulario_valoracion($prm);
+            $data["css"]                    =   ["valoracion_servicio.css"];
+            $data["js"]                     =   ["valoracion/principal.js"];
             $this->principal->show_data_page($data, 'home');                              
         }else{
             header("location:../?q2=0&q=");
         }
 
     }
-    /**/
-    function carga_formulario_valoracion($q){
+    private function carga_formulario_valoracion($q){
 
         $api  =  "valoracion/valoracion_form/format/json/";
-        return $this->principal->api(  $api , $q , "html" );  
+        return $this->principal->api(  $api , $q , "html" );
+
     }    
 }

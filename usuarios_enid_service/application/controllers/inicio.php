@@ -5,7 +5,7 @@ class Inicio extends CI_Controller {
 	    $this->load->library(lib_def());    
         $this->principal->acceso();
     }    
-    /**/
+
     function index(){
 
 		$data = $this->principal->val_session("Grupo ventas - Enid Service - ");
@@ -17,8 +17,12 @@ class Inicio extends CI_Controller {
         $data["departamentos"]                  =   $this->get_departamentos_enid();
         $data["perfiles_enid_service"]          =   $this->get_perfiles_enid_service();         
         $data["clasificaciones_departamentos"]  =   $this->principal->get_departamentos();
+        $data                                   =   $this->getCssJs($data);
+        $this->principal->show_data_page( $data , 'empresas_enid');			    	                	
+    }
+    function getCssJs($data){
 
-        $data["js"]      = [
+	    $data["js"]      = [
             "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
             "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
             "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
@@ -26,14 +30,14 @@ class Inicio extends CI_Controller {
             "js/bootstrap-daterangepicker/daterangepicker.js",
             "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
             "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-            "js/pickers-init.js",    
+            "js/pickers-init.js",
             'usuarios_enid/principal.js',
             'usuarios_enid/notificaciones.js',
             'usuarios_enid/categorias.js',
             "js/clasificaciones.js"
         ];
 
-        $data["css"] = [           
+        $data["css"] = [
             "usuarios_enid_service_principal.css",
             "template_card.css",
 
@@ -47,17 +51,15 @@ class Inicio extends CI_Controller {
             "js/bootstrap-datetimepicker/css/datetimepicker-custom.css" ,
             "js/bootstrap-datetimepicker/css/datetimepicker.css",
             "js/bootstrap-timepicker/css/timepicker.css" ,
-            "js/bootstrap-wysihtml5/bootstrap-wysihtml5.css", 
+            "js/bootstrap-wysihtml5/bootstrap-wysihtml5.css",
         ];
-    
-        $this->principal->show_data_page( $data , 'empresas_enid');			    	                	
-    }    	
+        return $data;
+    }
     private function get_perfiles_enid_service(){
         
         $api = "perfiles/get/format/json/";                
         return $this->principal->api( $api , []);
     }
-    /**/
     private function get_departamentos_enid(){
 
         $q["estado"]    =  1;

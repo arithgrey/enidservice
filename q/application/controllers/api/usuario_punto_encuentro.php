@@ -8,10 +8,8 @@ class Usuario_punto_encuentro extends REST_Controller{
   }       
   function index_POST(){
 
-    $param    = $this->post();
-    $response = [];
-
-    
+    $param      = $this->post();
+    $response   = [];
     if (if_ext($param , "punto_encuentro,id_usuario") ) {
         
 
@@ -31,7 +29,6 @@ class Usuario_punto_encuentro extends REST_Controller{
     }    
     $this->response($response);
   }
-  /**/
   function usuario_GET(){
 
     $param    =  $this->get();

@@ -9,23 +9,22 @@
             $this->load->library(lib_def());
             $this->principal->acceso();
         }
-
-        /**/
         function index()
         {
-
-
-            $data = $this->principal->val_session("Métricas Enid Service");
+            $data       = $this->principal->val_session("Métricas Enid Service");
             $num_perfil = $this->principal->getperfiles();
-            $module = $this->module_redirect($num_perfil);
+            $module     = $this->module_redirect($num_perfil);
 
             if ($module != 1) {
                 header($module);
             }
-
-
             $data["clasificaciones_departamentos"] = "";
-            $data["categorias_destacadas"] = $this->carga_categorias_destacadas("");
+            $data["categorias_destacadas"]  = $this->carga_categorias_destacadas("");
+            $data                           = $this->getCssJs($data);
+            $this->principal->show_data_page($data, 'empresas_enid');
+
+        }
+        private function getCssJs($data){
 
             $data["js"] = array(
                 "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
@@ -38,7 +37,6 @@
                 "repo_enid/principal.js"
             );
 
-
             $data["css"] = [
                 "js/bootstrap-datepicker/css/datepicker-custom.css",
                 "js/bootstrap-timepicker/css/timepicker.css"
@@ -46,14 +44,9 @@
             ];
 
             $data["css"] = ["metricas.css", "lista_deseos.css", "productos_solicitados.css"];
-            $this->principal->show_data_page($data, 'empresas_enid');
-
+            return $data;
         }
 
-        /**
-         * @param $num_perfil
-         * @return int|string
-         */
         private function module_redirect($num_perfil)
         {
 
@@ -99,10 +92,8 @@
             return $module;
 
         }
-
         private function carga_categorias_destacadas($q)
         {
-
             $api = "clasificacion/categorias_destacadas/format/json/";
             return $this->principal->api($api, $q);
         }
