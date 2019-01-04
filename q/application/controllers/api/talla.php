@@ -44,9 +44,8 @@ class Talla extends REST_Controller{
   */
   function clasificacion_GET(){
 
-    $param        =   $this->put();
-    $response     =   $this->talla_model->get(["id" , "tipo" , "clasificacion"] , [] , 10 );
-    $this->response($response);
+    $this->response($this->talla_model->get(["id" , "tipo" , "clasificacion"] , [] , 10 ));
+
   }
 
   function tallas_countries_GET(){

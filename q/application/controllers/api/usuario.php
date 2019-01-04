@@ -147,11 +147,14 @@ class usuario extends REST_Controller{
     }
     private function set_password_forget($param){
 
-        $new_pass                   =   randomString();                     
-        $params                     =   ["password" => sha1($new_pass)];    
-        $params_where               =   ["email"    => trim($param["mail"]) ];
-        $response["status_send"]    =   $this->usuario_model->update($params, $params_where );        
-        $response["new_pass"]       =   $new_pass;                        
+        $response                   =   false;
+        if (if_ext($param , "mail")){
+            $new_pass                   =   randomString();
+            $params                     =   ["password" => sha1($new_pass)];
+            $params_where               =   ["email"    => trim($param["mail"]) ];
+            $response["status_send"]    =   $this->usuario_model->update($params, $params_where );
+            $response["new_pass"]       =   $new_pass;
+        }
         return $response;
 
     }
@@ -167,24 +170,7 @@ class usuario extends REST_Controller{
                     break;
 
                 case 2:
-
-                    $param              = $this->put();
-                    $anterior           = $param['anterior'];
-                    $nuevo              = $param['nuevo'];
-                    $confirm            = $param['confirma'];
-
-                    if($nuevo == $confirm){
-                        $id_usuario   = $this->principal->get_session("idusuario");
-                        $existe = $this->usuario_model->valida_pass($anterior , $id_usuario);
-                        if($existe != 1){
-                            $response   = "La contraseña ingresada no corresponde a su contraseña actual";
-
-                        }else{
-                            $response   = $this->usuario_model->q_up("password" , $nuevo , $id_usuario);
-                        }
-                    }else{
-                        $response = "Contraseñas distintas";
-                    }
+                    $response = $this->set_password_usuario($param);
 
                     break;
                 default:
@@ -194,6 +180,28 @@ class usuario extends REST_Controller{
 
         }
         $this->response($response);
+    }
+    private function set_password_usuario($param){
+
+        $response = false;
+        if (if_ext($param, "anterior,nuevo,confirma")){
+            $anterior           = $param['anterior'];
+            $nuevo              = $param['nuevo'];
+            $confirm            = $param['confirma'];
+            if($nuevo == $confirm){
+                $id_usuario     = $this->principal->get_session("idusuario");
+                $existe         = $this->usuario_model->valida_pass($anterior , $id_usuario);
+                if($existe != 1){
+                    $response   = "La contraseña ingresada no corresponde a su contraseña actual";
+
+                }else{
+                    $response   = $this->usuario_model->q_up("password" , $nuevo , $id_usuario);
+                }
+            }else{
+                $response       = "Contraseñas distintas";
+            }
+        }
+        return $response;
     }
     function usuario_existencia_GET(){
 
@@ -217,16 +225,22 @@ class usuario extends REST_Controller{
     function id_usuario_por_id_servicio_GET(){
         
         $param      = $this->get();
-        $response   = $this->get_usuario_por_servicio($param);
+        $response   = false;
+        if (if_ext($param , "id_servicio")){
+            $response   = $this->get_usuario_por_servicio($param);
+        }
         $this->response($response);
-
     }
     function entregas_en_casa_GET(){
-        $param      =    $this->get();
-        $response   =    $this->usuario_model->get_tipo_entregas($param);
+        $param      =   $this->get();
+        $response   =   false;
+        if (if_ext($param , "id_usuario")){
+
+            $response     =   $this->usuario_model->q_get(["tipo_entregas", "entregas_en_casa" ], $param["id_usuario"] );
+
+        }
         $this->response($response);        
     }
-    /**/
     function entregas_en_casa_PUT(){
         
         $param              = $this->put();
@@ -235,46 +249,51 @@ class usuario extends REST_Controller{
         $response           = $this->usuario_model->q_up("entregas_en_casa" , $entregas , $id_usuario);
         $this->response($response);
     }
-    /**/
     function informes_por_telefono_GET(){
         
-        $param = $this->get();
-        $response=  $this->usuario_model->get_informes_por_telefono($param);
+        $param      = $this->get();
+        $response   = false;
+        if (if_ext($param , "id_usuario")){
+            $response=  $this->usuario_model->q_get(["informes_telefono"], $param["id_usuario"]);
+        }
         $this->response($response);           
     }
-    /**/
-    function terminos_privacidad_GET(){
-
-        $param = $this->get();
-        $response=  $this->usuario_model->get_terminos_privacidad($param);
-        $this->response($response);              
-    }    
-    /**/
     function has_phone_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->usuario_model->has_phone($param);
-        //debug($response);        
+        $response   =   false;
+        if (if_ext($param, "id_usuario")){
+            $response   =   $this->usuario_model->has_phone($param);
+        }
         $this->response($response);                 
     }
-    /**/
     function num_registros_periodo_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->usuario_model->num_registros_periodo($param);
+        $response   =   false;
+        if (if_ext($param , "fecha_inicio,fecha_termino")){
+            $response   =   $this->usuario_model->num_registros_periodo($param);
+        }
+
         $this->response($response);        
-    }    
-    /**/    
+    }
     function publican_periodo_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->usuario_model->publican_periodo($param);
+        $response   =   false;
+        if (if_ext($param , "fecha_inicio,fecha_termino")){
+            $response   =   $this->usuario_model->publican_periodo($param);
+        }
+
         $this->response($response);        
     }
     function registros_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->usuario_model->registros($param);
+        $response   =   false;
+        if (if_ext($param , "fecha_inicio,fecha_termino")) {
+            $response = $this->usuario_model->registros($param);
+        }
         $this->response($response);
 
     }
@@ -295,13 +314,17 @@ class usuario extends REST_Controller{
     function num_registros_preriodo_GET(){
         
         $param      =   $this->get();
-        $total      =   $this->usuario_model->num_registros_preriodo($param);        
+        if (if_ext($param , "fecha_inicio,fecha_termino")) {
+            $total = $this->usuario_model->num_registros_preriodo($param);
+        }
         $this->response($total);
     }
     function registros_periodo_GET(){
         
         $param      =   $this->get();
-        $total      =   $this->usuario_model->registros_periodo($param);        
+        if (if_ext($param , "fecha_inicio,fecha_termino")) {
+            $total = $this->usuario_model->registros_periodo($param);
+        }
         $this->response($total);
     }
     function num_total_GET(){
@@ -312,16 +335,13 @@ class usuario extends REST_Controller{
     }    
     function lista_deseos_sugerencias_GET(){    
 
-        $param               = $this->get();    
-        
+        $param               = $this->get();
         $response            = [];
 
         if ($this->id_usuario > 0 || array_key_exists("id_usuario", $param)) {
 
-            $param["id_usuario"]    = 
-            ( array_key_exists("id_usuario", $param) ) ? $param["id_usuario"]: $this->id_usuario;
-            $response               =  $this->usuario_model->get_productos_deseados_sugerencias($param);
-            //$response            = $this->agrega_costo_envio($servicios);    
+            $param["id_usuario"]    =   ( array_key_exists("id_usuario", $param) ) ? $param["id_usuario"]: $this->id_usuario;
+            $response               =   $this->usuario_model->get_productos_deseados_sugerencias($param);
         }
         
         $this->response($response);
@@ -329,8 +349,11 @@ class usuario extends REST_Controller{
 
     function verifica_registro_telefono_GET(){
         
-        $param      = $this->get();        
-        $response   =  $this->usuario_model->verifica_registro_telefono($param);
+        $param      = $this->get();
+        $response   = false;
+        if(if_ext($param , "id_usuario")){
+            $response   =  $this->usuario_model->verifica_registro_telefono($param);
+        }
         $this->response($response);
 
     }
@@ -338,10 +361,10 @@ class usuario extends REST_Controller{
         
 
         if($this->input->is_ajax_request()){             
-            $param = $this->post();        
+            $param = $this->post();
             
-            $response["usuario_existe"]          =  $this->usuario_model->evalua_usuario_existente($param);
-            $response["usuario_registrado"] = 0;
+            $response["usuario_existe"]             =  $this->usuario_model->evalua_usuario_existente($param);
+            $response["usuario_registrado"]         =  0;
             if ($response["usuario_existe"] == 0 ){
 
                 $email              =  $param["email"];
@@ -453,22 +476,25 @@ class usuario extends REST_Controller{
     }
     function miembros_activos_GET(){
 
-        $param                                  =   $this->get();
-        $total                                  =   $this->usuario_model->num_total($param);
-        $per_page                               =   10;
-        $param["resultados_por_pagina"]         =   $per_page;
-        $data["miembros"]                       =   $this->usuario_model->get_equipo_enid_service($param);    
-        $config_paginacion["page"]              =   get_info_variable($param , "page" );
-        $config_paginacion["totales_elementos"] =   $total;
-        $config_paginacion["per_page"]          =   $per_page;        
-        $config_paginacion["q"]                 =   "";            
-        $config_paginacion["q2"]                =   "";                   
-        $paginacion                             =   $this->principal->create_pagination($config_paginacion);
-        $data["paginacion"]                     =   $paginacion;
-        $data["modo_edicion"]                   =   1;
+        $param      =   $this->get();
+        $response   = false;
+        if(if_ext($param , "id_departamento")){
+            $total                                  =   $this->usuario_model->num_total($param);
+            $per_page                               =   10;
+            $param["resultados_por_pagina"]         =   $per_page;
+            $data["miembros"]                       =   $this->usuario_model->get_equipo_enid_service($param);
+            $config_paginacion["page"]              =   get_info_variable($param , "page" );
+            $config_paginacion["totales_elementos"] =   $total;
+            $config_paginacion["per_page"]          =   $per_page;
+            $config_paginacion["q"]                 =   "";
+            $config_paginacion["q2"]                =   "";
+            $paginacion                             =   $this->principal->create_pagination($config_paginacion);
+            $data["paginacion"]                     =   $paginacion;
+            $data["modo_edicion"]                   =   1;
+            return                                  $this->load->view("equipo/miembros" , $data);
+        }
+        $this->response($response);
 
-        
-        $this->load->view("equipo/miembros" , $data);                
         
     }
     function usuarios_GET(){
@@ -516,8 +542,8 @@ class usuario extends REST_Controller{
     }
     function afiliado_POST(){
 
-        $param      =  $this->post();
-        $response   = false;
+        $param      =   $this->post();
+        $response   =   false;
         if (if_ext($param, "email,password,nombre,telefono")){
             $response   =  $this->usuario_model->registrar_afiliado($param);
             if($response["usuario_existe"] == 0 && $response["usuario_registrado"] == 1){
@@ -537,43 +563,47 @@ class usuario extends REST_Controller{
             $response["usuario_registrado"] = 0;
             if ($response["usuario_existe"] == 0 ){
 
+                $response =  $this->registro_prospecto($param);
 
-                $email              =  $param["email"];
-                $id_departamento    =  9;
-                $password           =  $param["password"];
-                $nombre             =  $param["nombre"];
-                $telefono           =  $param["telefono"];
-                $id_usuario_referencia        = get_info_usuario_valor_variable($param , "usuario_referencia");
-
-                $params = [
-                    "email"                   =>   $email,
-                    "idempresa"               =>   '1',
-                    "id_departamento"         =>   $id_departamento,
-                    "password"                =>   $password,
-                    "nombre"                  =>   $nombre,
-                    "tel_contacto"            =>   $telefono,
-                    "id_usuario_referencia"   =>   $id_usuario_referencia
-                ];
-
-                $response["id_usuario"]       =    $this->usuario_model->insert($params , 1);
-
-                if ( $response["id_usuario"]>0 ){
-
-                    $q["id_usuario"]    =  $response["id_usuario"];
-                    $q["puesto"]        =  20;
-                    $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);
-
-                    if ($response["usuario_permisos"] > 0) {
-                        $response["email"]              =  $email;
-                        $response["usuario_registrado"] = 1;
-                    }
-                }
 
             }
         }
         $this->response($response);    
                  
-    }         
+    }
+    private function registro_prospecto($param){
+        $email              =  $param["email"];
+        $id_departamento    =  9;
+        $password           =  $param["password"];
+        $nombre             =  $param["nombre"];
+        $telefono           =  $param["telefono"];
+        $id_usuario_referencia        = get_info_usuario_valor_variable($param , "usuario_referencia");
+
+        $params = [
+            "email"                   =>   $email,
+            "idempresa"               =>   '1',
+            "id_departamento"         =>   $id_departamento,
+            "password"                =>   $password,
+            "nombre"                  =>   $nombre,
+            "tel_contacto"            =>   $telefono,
+            "id_usuario_referencia"   =>   $id_usuario_referencia
+        ];
+
+        $response["id_usuario"]       =    $this->usuario_model->insert($params , 1);
+
+        if ( $response["id_usuario"]>0 ){
+
+            $q["id_usuario"]    =  $response["id_usuario"];
+            $q["puesto"]        =  20;
+            $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);
+
+            if ($response["usuario_permisos"] > 0) {
+                $response["email"]              =  $email;
+                $response["usuario_registrado"] = 1;
+            }
+        }
+        return $response;
+    }
     function cancelar_envio_recordatorio_PUT(){
         
         $param      =   $this->put();
@@ -764,6 +794,14 @@ class usuario extends REST_Controller{
         $api =  "servicio/num_periodo/format/json/";
         return $this->principal->api($api , $q );
     }
+    /*
+    function terminos_privacidad_GET(){
+
+        $param = $this->get();
+        $response=  $this->usuario_model->get_terminos_privacidad($param);
+        $this->response($response);
+    }
+    */
     /*
    function usuario_deseo_POST(){
 

@@ -11,7 +11,10 @@ class usuario_clasificacion extends REST_Controller{
     function agregan_clasificaciones_periodo_GET(){
 
         $param      =   $this->get();
-        $response   =   $this->usuario_clasificacion_model->agregan_clasificaciones_periodo($param);
+        $response   =   false;
+        if (if_ext($param, "fecha_inicio,fecha_termino")){
+            $response   =   $this->usuario_clasificacion_model->agregan_clasificaciones_periodo($param);
+        }
         $this->response($response);        
     }
     function interes_PUT(){
@@ -19,10 +22,9 @@ class usuario_clasificacion extends REST_Controller{
         $param                  =   $this->put();         
         $id_usuario             =   $this->id_usuario;        
         $param["id_usuario"]    =   $id_usuario;
-        $num                    =   $this->usuario_clasificacion_model->get_interes_usuario($param);        
-        
-        $response         = false;
-        if ($id_usuario > 0 ) {
+        $num                    =   $this->get_interes_usuario($param);
+        $response               =   false;
+        if ($id_usuario > 0 && $num !==  false) {
 
             $response["tipo"] =0;
             $params = [ 
@@ -39,26 +41,41 @@ class usuario_clasificacion extends REST_Controller{
         }
         $this->response($response);        
     }
-    
+    private function get_interes_usuario($param)
+    {
+
+        $response   = false;
+        if (if_ext($param ,"id_usuario,id_clasificacion")){
+            $q =[
+                "tipo"              =>  2 ,
+                "id_usuario"        =>  $param["id_usuario"],
+                "id_clasificacion"  =>  $param["id_clasificacion"]
+            ];
+            $response   = $this->usuario_clasificacion_model->get(["COUNT(0)num"] , $q )[0]["num"];
+        }
+        return $response;
+
+    }
+    /*V
     function interes_POST(){
         
         $param              =   $this->post();                
-        $id_clasificacion   =   $this->get_clasificaciones_servicio($param)[0]["primer_nivel"];        
+        $id_clasificacion   =   $this->get_clasificaciones_servicio($param)[0]["primer_nivel"];
+
         $params             = [
             "id_usuario"        => $this->id_usuario,
             "id_clasificacion"  => $param["id_servicio"]
         ];    
-        $num =  $this->usuario_clasificacion_model->get_num_usuario_clasificacion($this->id_usuario  , 
-            $param["id_servicio"]);
+        $num =  $this->usuario_clasificacion_model->get_num_usuario_clasificacion($this->id_usuario  , $id_clasificacion);
         
         if ($num == 1 ){
             $this->response($this->usuario_clasificacion_model->insert("usuario_clasificacion" , $params));    
         }
         $this->response(true);
-        
-        
+
     }
-    function get_clasificaciones_servicio($q){     
+    */
+    private function get_clasificaciones_servicio($q){
         
         $api =  "servicio/tallas/format/json/";
         return $this->principal->api( $api , $q);

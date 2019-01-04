@@ -47,17 +47,7 @@
         return $result->result_array();
 
     }
-    function get_interes_usuario($param)
-    {   
-            
-        $q =[
-            "tipo"              =>  2 ,
-            "id_usuario"        =>  $param["id_usuario"],
-            "id_clasificacion"  =>  $param["id_clasificacion"]
-        ];
-        return $this->get(["COUNT(0)num"] , $q )[0]["num"];
-    }
-    
+
     
     /*   
     function create($param)

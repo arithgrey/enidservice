@@ -19,7 +19,7 @@ class Status_enid_service extends REST_Controller{
         $param      =   $this->get();
         $response   =   false;
         if ( if_ext($param , "id_estatus") ) {
-            $respnse    = $this->status_enid_service_model->q_get(["nombre"] ,  $param["id_estatus"])[0]["nombre"];
+            $response    = $this->status_enid_service_model->q_get(["nombre"] ,  $param["id_estatus"])[0]["nombre"];
         }
         $this->response($response);
     }

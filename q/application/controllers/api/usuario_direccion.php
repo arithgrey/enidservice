@@ -8,7 +8,28 @@ class usuario_direccion extends REST_Controller{
         $this->load->model("usuario_direccion_model");        
         $this->load->library(lib_def());   
         $this->id_usuario = $this->principal->get_session("idusuario");
-    }    
+    }
+    function index_PUT(){
+
+        $param        =  $this->put();
+        $response     =  [];
+
+        if (if_ext($param , "id_usuario,id_direccion,principal")) {
+
+            $id_usuario   =  $param["id_usuario"];
+
+            if ($param["principal"] ==  1) {
+
+                $set    = ["principal"  =>  0 ];
+                $in     = ["id_usuario" =>  $id_usuario ];
+                $this->usuario_direccion_model->update($set , $in , 10 );
+            }
+            $response     =  $this->usuario_direccion_model->insert($param , 1);
+        }
+
+        $this->response($response);
+
+    }
     function principal_PUT(){
 
         $param      = $this->put();
@@ -43,38 +64,91 @@ class usuario_direccion extends REST_Controller{
         }
         $this->response($response);
     }
+    function direccion_envio_pedido_GET(){
+
+        $param                      =   $this->get();
+        $id_usuario                 =   $this->get_id_usuario($param);
+        $data["id_usuario"]         =   $id_usuario;
+        $param["id_usuario"]        =   $data["id_usuario"];
+        $domicilio                  =   $this->get_direccion_pedido($param);
+        $data["registro_direccion"] = 0;
+
+        if(count($domicilio) == 0 ){
+            $domicilio  = $this->get_domicilio_cliente($param);
+            if(count($domicilio) >0 ){
+                $data["registro_direccion"] =   1;
+            }
+        }
+
+        if (count($domicilio) > 0){
+            $domicilio  = $this->get_data_direccion($domicilio[0]["id_direccion"]);
+        }
+        $data["data_saldo_pendiente"]   =   $this->get_recibo_saldo_pendiente($param);
+        $data["info_envio_direccion"]   =   $domicilio;
+        $data["param"]                  =   $param;
+        if($data["registro_direccion"] ==  0){
+            $data["info_usuario"] =  $this->principal->get_info_usuario($id_usuario);
+        }
+        $this->load->view("proyecto/domicilio_envio" , $data);
+
+    }
+    function index_POST(){
+
+        $param      =   $this->post();
+        $response   =   false;
+        if (if_ext($param , "id_usuario,id_direccion")){
+            $params     =   ["id_usuario" => $param["id_usuario"] , 'id_direccion' => $param["id_direccion"] ];
+            $response   =  $this->usuario_direccion_model->insert($params);
+        }
+        $this->response($response);
+    }
+    function activos_con_direcciones_GET(){
+
+        $param      =   $this->get();
+        $response   =   false;
+
+        if( if_ext($param , 'fecha_inicio,fecha_termino') ){
+            $response   =   $this->usuario_direccion_model->activos_con_direcciones($param);
+
+        }
+        $this->response($response);
+    }
     function index_GET(){
 
+        $param                          =   $this->get();
+        $response                       =   false;
+        $param["id_usuario"]            =   $this->id_usuario;
+        if ($param["id_usuario"] > 0){
 
-        $param                          =   $this->get();                
-        $param["id_usuario"]            =   $this->id_usuario;        
-        $domicilio                      =   $this->get_domicilio_cliente($param);         
-        $data["info_envio_direccion"]   =   $domicilio;
+            $domicilio                      =   $this->get_domicilio_cliente($param);
+            $data["info_envio_direccion"]   =   $domicilio;
+            $data["param"]                  =   $param;
 
-        $data["param"]                  =   $param;
 
-        switch($param["v"]){
-          
-            case 0:
-                $this->response($data);
-                break;
-          
-            case 1:
+            switch($param["v"]){
 
-                if(count($domicilio)>0){
-                    $this->load->view("proyecto/domicilio_resumen" , $data);
-                }else{
-                    
-                    $this->load->view("proyecto/domicilio" , $data);
-                }                
-                break;                        
-            case 2:
-                $this->load->view("proyecto/domicilio" , $data);                        
-                break;                        
-            default:
-                $this->load->view("proyecto/domicilio" , $data);                        
-                break;
-        }        
+                case 0:
+                    $response = $data;
+                    break;
+
+                case 1:
+
+                    if(count($domicilio)>0){
+                        return $this->load->view("proyecto/domicilio_resumen" , $data);
+                    }else{
+
+                        return $this->load->view("proyecto/domicilio" , $data);
+                    }
+                    break;
+                case 2:
+                    return $this->load->view("proyecto/domicilio" , $data);
+                    break;
+                default:
+                    return $this->load->view("proyecto/domicilio" , $data);
+                    break;
+            }
+        }
+        $this->response($response);
         
     }
     function all_GET(){
@@ -84,10 +158,9 @@ class usuario_direccion extends REST_Controller{
         
         if (if_ext($param , "id_usuario") ) {
             
-            $id_usuario   =  $param["id_usuario"];
-            $params_where =  [ "id_usuario" => $id_usuario ,  "status" =>  1 ];
-
-            $direcciones  = $this->usuario_direccion_model->get( 
+            $id_usuario   =     $param["id_usuario"];
+            $params_where =     [ "id_usuario" => $id_usuario ,  "status" =>  1 ];
+            $direcciones  =     $this->usuario_direccion_model->get(
                 [], 
                 $params_where, 
                 10 , 
@@ -101,7 +174,7 @@ class usuario_direccion extends REST_Controller{
         $this->response($response);
 
     }
-    function get_domicilio_cliente($param){
+    private function get_domicilio_cliente($param){
         
         $direccion = $this->usuario_direccion_model->get_usuario_direccion($param["id_usuario"]);              
         if(count($direccion) > 0){              
@@ -109,10 +182,10 @@ class usuario_direccion extends REST_Controller{
         }
         return $direccion;
     }
-    function get_data_direccion($id_direccion){
+    private function get_data_direccion($id_direccion){
 
         $q["id_direccion"]  =   $id_direccion;
-        $api =  "direccion/data_direccion/format/json/";
+        $api                =   "direccion/data_direccion/format/json/";
         return $this->principal->api( $api, $q);
     }
     private function get_direccion_pedido($q){
@@ -121,87 +194,14 @@ class usuario_direccion extends REST_Controller{
         return   $this->principal->api( $api, $q);     
         
     }
-    function direccion_envio_pedido_GET(){
-
-
-        $param                  =   $this->get();                     
-        $id_usuario             =   $this->get_id_usuario($param);                
-        $data["id_usuario"]     =   $id_usuario;
-        $param["id_usuario"]    =   $data["id_usuario"];
-        $domicilio              =   $this->get_direccion_pedido($param);        
-        $data["registro_direccion"] = 0;
-        
-        if(count($domicilio) == 0 ){
-            $domicilio  = $this->get_domicilio_cliente($param);            
-            if(count($domicilio) >0 ){ 
-                $data["registro_direccion"] =   1;              
-            }
-        }
-        
-        if (count($domicilio) > 0){            
-            $domicilio  = $this->get_data_direccion($domicilio[0]["id_direccion"]);
-        }
-        $data["data_saldo_pendiente"]   =   $this->get_recibo_saldo_pendiente($param);        
-        $data["info_envio_direccion"]   =   $domicilio;
-        $data["param"]                  =   $param;        
-        if($data["registro_direccion"] ==  0){
-            $data["info_usuario"] =  $this->principal->get_info_usuario($id_usuario);    
-        }        
-        $this->load->view("proyecto/domicilio_envio" , $data);                
-        
-    }    
-    function get_recibo_saldo_pendiente($q){                 
+    private function get_recibo_saldo_pendiente($q){
         
         $api     =  "recibo/saldo_pendiente_recibo/format/json/";
         return   $this->principal->api( $api, $q);     
     }
-    function get_id_usuario($param){        
+    private  function get_id_usuario($param){
         $in_session = $this->principal->is_logged_in();                
         $id_usuario = ($in_session == 1) ?  $this->id_usuario :  $param["id_usuario"];        
         return  $id_usuario;
     }
-    function index_PUT(){
-
-        $param        =  $this->put();        
-        $response     =  [];
-
-        if (if_ext($param , "id_usuario,id_direccion,principal")) {
-            
-            $id_usuario   =  $param["id_usuario"]; 
-            $params_where = ["id_usuario" => $id_usuario ];
-            
-            if ($param["principal"] ==  1) {
-
-                $set    = ["principal"  =>  0 ];
-                $in     = ["id_usuario" =>  $id_usuario ];
-                $this->usuario_direccion_model->update($set , $in , 10 );                    
-            }
-            $response     =  $this->usuario_direccion_model->insert($param , 1);    
-        }
-        
-        $this->response($response);    
-                
-    }
-    function index_POST(){
-
-        $param      =   $this->post();
-        $response   =   false;
-        if (if_ext($param , "id_usuario,id_direccion")){
-            $params     =   ["id_usuario" => $param["id_usuario"] , 'id_direccion' => $param["id_direccion"] ];
-            $response   =  $this->usuario_direccion_model->insert($params);
-        }
-        $this->response($response);        
-    }
-    function activos_con_direcciones_GET(){
-
-        $param      =   $this->get();
-        $response   =   false;
-        
-        if( if_ext($param , 'fecha_inicio,fecha_termino') ){
-            $response   =   $this->usuario_direccion_model->activos_con_direcciones($param);
-            
-        }
-        $this->response($response);                
-    }
-    
 }

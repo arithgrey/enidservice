@@ -57,14 +57,7 @@ class Tarea extends REST_Controller{
                 ]; 
         return $q;
     } 
-    /*
-    private function get_pendientes_ticket($q){
 
-        $api    = "tickets/num/format/json/";
-        return  $this->principal->api($api , $q);
-
-    }
-    */
     function buzon_POST(){
 
         $param      =   $this->post();
@@ -79,9 +72,6 @@ class Tarea extends REST_Controller{
         }
         $this->response($response);        
     }
-    /**
-     * @throws Exception
-     */
     function ticket_GET(){
 
         $param      =   $this->get();       
@@ -157,4 +147,12 @@ class Tarea extends REST_Controller{
         }
         return $list;
     }
+    /*
+    private function get_pendientes_ticket($q){
+
+        $api    = "tickets/num/format/json/";
+        return  $this->principal->api($api , $q);
+
+    }
+    */
 }

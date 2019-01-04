@@ -29,10 +29,12 @@
         }      
         return $this->db->get('usuario_deseo')->result_array();
     }
+    /*
     function get_num_deseo_servicio_usuario($param){
         $q      = ["id_usuario" => $param["id_usuario"] , "id_servicio" =>  $param["id_servicio"]];
         return  $this->get(["COUNT(0)num"], $q)[0]["num"]; 
     }
+    */
     function aumenta_deseo($param){
         
         $id_usuario     =  $param["id_usuario"];
@@ -86,8 +88,6 @@
                     ORDER BY num_deseo DESC";
         
         return  $this->db->query($query_get)->result_array();        
-    }   
-    function get_por_usuario($param){        
-        return $this->get([] , ["id_usuario" => $param["id_usuario"] ] , 30 , 'num_deseo' );
     }
+
 }
