@@ -9,6 +9,7 @@ jobs:
       # specify the version you desire here
       #- image: circleci/php:7.1-browsers
       - image: php:5.6-apache
+      - image: mysql:5.7
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
