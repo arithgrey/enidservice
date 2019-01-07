@@ -29,8 +29,17 @@
       <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="11" column="24" lean-forward="true" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+            <state relative-caret-position="320">
+              <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="docker-compose.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="660">
+              <caret line="33" column="44" lean-forward="true" selection-start-line="31" selection-start-column="6" selection-end-line="33" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -168,11 +177,6 @@
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name=".circleci" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -226,12 +230,12 @@
       <workItem from="1546625207530" duration="8761000" />
       <workItem from="1546804181324" duration="11000" />
       <workItem from="1546804311612" duration="20169000" />
-      <workItem from="1546889760584" duration="4668000" />
+      <workItem from="1546889760584" duration="5085000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134174000" />
+    <option name="totallyTimeSpent" value="134591000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -252,7 +256,7 @@
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32942554" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info content_ui="combo" id="Project" order="2" weight="0.18157615" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.18157615" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" weight="0.15357561" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.2954279" />
@@ -552,15 +556,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="39" column="29" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+        <state relative-caret-position="660">
+          <caret line="33" column="44" lean-forward="true" selection-start-line="31" selection-start-column="6" selection-end-line="33" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="11" column="24" lean-forward="true" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+        <state relative-caret-position="320">
+          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
         </state>
       </provider>
     </entry>
