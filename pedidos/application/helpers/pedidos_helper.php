@@ -348,6 +348,28 @@ if(!function_exists('invierte_date_time')){
 
 	}
 	*/
+	if(! function_exists('create_seccion_comentarios')){
+        function create_seccion_comentarios($data , $id_recibo)
+        {
+
+            $notas  =	"";
+            foreach ($data as $row) {
+
+                $fecha_registro      	= div(icon("fa fa-clock-o").$row["fecha_registro"] , ["class" => "col-lg-3"]);
+                $comentario             = div($row["comentario"] , ["class" => "col-lg-9"]);
+                $nota                   = div($fecha_registro.$comentario , 1);
+                $notas                 .= div($nota , ["class" => "seccion_tipificacion top_20 padding_10"]);
+
+            }
+
+            $button =   guardar("+ Agregar" , ["class" => "agregar_comentario" , "onClick" => "agregar_nota();"]);
+            $title	=   heading_enid("NOTAS" ,4 ,["class" => "white"]);
+            return $button.br().div($title.$notas , ["class" => "global_tipificaciones"]);
+
+
+
+        }
+    }
     if ( ! function_exists('create_seccion_tipificaciones'))
     {
         function create_seccion_tipificaciones($data){
@@ -356,7 +378,7 @@ if(!function_exists('invierte_date_time')){
 
             foreach ($data as $row) {
 
-                $fecha_registro      	= div(icon("fa fa-clock-o").$row["fecha_registro"] , ["class" => "col-lg-3"]);
+                $fecha_registro      	= div(icon("fa fa-clock-o").$row["fecha_registro"] , ["class" => "col-lg-3 fecha_registro_text" ]);
                 $nombre_tipificacion    = div($row["nombre_tipificacion"] , ["class" => "col-lg-9"]);
                 $tipificacion           = div($fecha_registro.$nombre_tipificacion , 1);
                 $tipificaciones        .= div($tipificacion , ["class" => "seccion_tipificacion top_20 padding_10"]);
@@ -430,7 +452,7 @@ if(!function_exists('invierte_date_time')){
                                             [
                                                 "class"     => "editar_horario_entrega  text-right " ,
                                                 "id"        => $id_recibo,
-                                                "onclick"   => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , {$fecha_entrega})"
+                                                "onclick"   => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '{$fecha_entrega}' )"
                                             ]).div(div("HORARIO DE ENTREGA" , 1).div($recibo["fecha_contra_entrega"] ,1) , ["class"=> "contenedor_entrega"]);
                 $fecha_contra_entrega   =   ($recibo["tipo_entrega"] == 1) ? $text:"";
                 return $fecha_contra_entrega;

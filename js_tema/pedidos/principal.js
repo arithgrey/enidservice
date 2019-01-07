@@ -16,6 +16,7 @@ $(document).ready(function(){
 	    }
 	});
 	$(".form_edicion_tipo_entrega").change(cambio_tipo_entrega);
+	$(".form_notas").submit(registrar_nota);
 
 
 });
@@ -154,9 +155,9 @@ var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 }
 var registra_saldo_cubierto = function(e){
 
-	var is_num =  valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" );
 
-	if (is_num == 1) {
+
+	if (is_num =  valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" ) == 1) {
 		var data_send	=  $(".form_cantidad").serialize();
 		$(".mensaje_saldo_cubierto").empty();
 		var  url 		= "../q/index.php/api/recibo/saldo_cubierto/format/json/";
@@ -374,4 +375,28 @@ var confirma_cambio_horario = function(id_recibo , status  , saldo_cubierto_envi
 	});
 
 
+}
+var agregar_nota = function(){
+	showonehideone(".form_notas", ".agregar_comentario");
+	recorrepage(".form_nota");
+}
+var registrar_nota = function(e){
+
+	debugger;
+	var url 		=  "../q/index.php/api/recibo_comentario/index/format/json/";
+	var comentario 	=  	get_parameter(".comentarios");
+	var texto  		= 	comentario.trim().length;
+	if( texto > 10 ){
+		var data_send 	=  $(".form_notas").serialize();
+		request_enid( "POST",  data_send, url, response_registro_nota , ".place_nota");
+	}else{
+		format_error( ".place_nota", "comentario muy corto");
+	}
+
+	e.preventDefault();
+}
+var response_registro_nota = function(data){
+	$(".place_nota").empty();
+	redirect("");
+	debugger;
 }

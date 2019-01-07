@@ -26,14 +26,17 @@
 
       $extra_extatus_venta  = ($status_venta == 0 ) ? "" : "  AND status = '".$status_venta."' ";
 
+
       $query_get .=  $ext_contra_entrega .$extra_extatus_venta. $ext_fecha." ORDER BY fecha_registro DESC";
 
-  
+
 
       return $this->db->query($query_get)->result_array();
 
     }
-    
+    private function get_tipo_entrega($param){
+
+    }
     function get_adeudo_cliente($param){
 
         $id_usuario =  $param["id_usuario"];        

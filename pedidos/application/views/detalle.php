@@ -84,16 +84,34 @@
 		
 
 		<?=div("REGISTRO ". $recibo[0]["fecha_registro"]	, ["class" => "fecha_registro"] , 1)?>
-		<?=div(crea_fecha_entrega($recibo))?>		
-		<?=crea_seccion_productos($recibo)?>		
+		<?=div(crea_fecha_entrega($recibo))?>
+
+		<?=crea_seccion_productos($recibo)?>
 
 		
 		<br>
-		<br>
-		<?=n_row_12()?>
+        <br>
+        <?=create_fecha_contra_entrega($recibo , $domicilio)?>
+
+        <?=n_row_12()?>
 			<?=create_seccion_tipificaciones($tipificaciones)?>
 		<?=end_row()?>
-		
+        <br>
+
+        <?=n_row_12()?>
+                <form class="form_notas" style="display:none;" >
+                    <?=div("NOTA",["class" => "strong" ,    "style" => "font-size:1.5em;"])?>
+                    <?=textarea(["name" => "comentarios" , "class" => "comentarios form-control"])?>
+                    <?=input_hidden(["name" => "id_recibo", "value" =>  $recibo[0]["id_proyecto_persona_forma_pago"] ])?>
+                    <?=guardar( "AGREGAR", ["name" => "comentarios"])?>
+                </form>
+        <?=place("place_nota")?>
+        <?=end_row()?>
+        <?=br()?>
+        <?=n_row_12()?>
+            <?=create_seccion_comentarios($comentarios, $recibo[0]["id_proyecto_persona_forma_pago"])?>
+        <?=end_row()?>
+
 	</div>
 	<div class="col-lg-4">
 			
@@ -124,8 +142,6 @@
 
 		<?=create_seccion_domicilio($domicilio)?>
 		<?=create_seccion_recordatorios($recibo)?>
-		<br>
-		<?=create_fecha_contra_entrega($recibo , $domicilio)?>
 		<br>
 		<?=n_row_12()?>
 		<div class="padding_10 resumen_pago">

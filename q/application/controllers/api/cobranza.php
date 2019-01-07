@@ -263,7 +263,7 @@ class Cobranza extends REST_Controller{
                 
 
                 
-                $id_recibo        = $this->genera_orden_compra($data_orden);
+                $id_recibo        = $this->genera_orden_compra($data_orden, $param);
 
                 $q["id_servicio"] = $id_servicio;
                 $q["valor"]       = 2;
@@ -422,9 +422,19 @@ class Cobranza extends REST_Controller{
         return $this->principal->api( $api , $q , "json" , "PUT");
     }
     /*aquí creamos en base de datos*/
-    private function genera_orden_compra($q){            
-        $api    =  "recibo/orden_de_compra";    
-        return  $this->principal->api( $api, $q , "json" , "POST");
+    private function genera_orden_compra($q, $param){
+        $api        =  "recibo/orden_de_compra";
+        $id_recibo  =  $this->principal->api( $api, $q , "json" , "POST");
+        if($id_recibo > 0 && get_param_def($param , "comentarios") !==  0  && strlen(trim($param["comentarios"])) > 5 ) {
+            $param["id_recibo"] =  $id_recibo;
+            $this->agrega_notas_pedido($param);
+        }
+        return $id_recibo;
+    }
+    private function agrega_notas_pedido($q){
+
+        $api = "recibo_comentario/index";
+        return $this->principal->api( $api , $q , "json" , "POST");
     }
     /**/
     function consulta_disponibilidad_servicio($q){     
@@ -485,13 +495,11 @@ class Cobranza extends REST_Controller{
         return $this->principal->api( $api ,$data_send);  
         
     }
-    /**/
     function notifica_deuda_cliente($q){
 
         $api = "areacliente/pago_pendiente_web/format/json/"; 
         return $this->principal->api( $api ,$q);  
-    }   
-    /**/
+    }
     function agrega_data_cliente($data){
 
         $nueva_data = [];

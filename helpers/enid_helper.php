@@ -1180,10 +1180,11 @@ if (!function_exists('lista_horarios')) {
             "14:30",
             "15:00",
             "15:30",
+            "16:00",
             "16:30",
             "17:00",
             "17:30",
-            "18:00",
+            "18:00"
         ];
 
         $select = "<select name='horario_entrega' class='form-control input-sm '  > ";

@@ -7,58 +7,142 @@
   <component name="ChangeListManager">
     <list default="true" id="ffbfef24-1c57-4135-bcb0-af960c244fba" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/status_enid_service.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/status_enid_service.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/talla.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/talla.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tarea.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tarea.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/usuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/usuario_clasificacion.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/usuario_clasificacion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/usuario_deseo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/usuario_deseo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/usuario_direccion.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/usuario_direccion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/models/usuario_clasificacion_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/usuario_clasificacion_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/models/usuario_deseo_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/usuario_deseo_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css_tema/template/pedidos.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/pedidos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css_tema/template/puntos_encuentro.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/puntos_encuentro.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enid.sublime-project" beforeDir="false" afterPath="$PROJECT_DIR$/enid.sublime-project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enid.sublime-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/enid.sublime-workspace" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/enid_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/enid_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/application/controllers/enid.php" beforeDir="false" afterPath="$PROJECT_DIR$/imgs/application/controllers/enid.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js_tema/pedidos/principal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/pedidos/principal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js_tema/puntos_medios/principal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/puntos_medios/principal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedidos/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/controllers/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedidos/application/views/detalle.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/views/detalle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedidos/application/views/form_fecha.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/views/form_fecha.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/views/pre.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/views/pre.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/puntos_medios/application/views/form_horario.php" beforeDir="false" afterPath="$PROJECT_DIR$/puntos_medios/application/views/form_horario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/puntos_medios/application/views/quien_recibe.php" beforeDir="false" afterPath="$PROJECT_DIR$/puntos_medios/application/views/quien_recibe.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/cobranza.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/cobranza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/recibo_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/recibo_model.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pedidos/application/controllers/home.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="169">
+              <caret line="100" column="64" selection-start-line="100" selection-start-column="57" selection-end-line="100" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pedidos/application/views/detalle.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
+              <folding>
+                <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/css_tema/template/pedidos.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="214">
+              <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="380" column="115" lean-forward="true" selection-start-line="380" selection-start-column="115" selection-end-line="380" selection-end-column="134" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js_tema/pedidos/principal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="163">
+              <caret line="380" column="13" selection-start-line="380" selection-start-column="13" selection-end-line="380" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js_tema/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="733" column="5" selection-start-line="733" selection-start-column="5" selection-end-line="733" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo_comentario.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="25" column="124" selection-start-line="25" selection-start-column="124" selection-end-line="25" selection-end-column="124" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/q/application/models/recibo_comentario_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-78" />
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>usuario_deseo_model</find>
-      <find>get_num_deseo_servicio_usuario</find>
-      <find>agregan_lista_deseos_periodo</find>
-      <find>get_clasificaciones_servicio</find>
-      <find>agregan_clasificaciones_periodo</find>
-      <find>get_interes_usuario</find>
-      <find>get_num_usuario_clasificacion</find>
-      <find>usuario_clasificacion_model</find>
-      <find>set_ultima_publicacion</find>
-      <find>get_usuarios_sin_publicar_articulos</find>
-      <find>change</find>
-      <find>set_password_usuario</find>
-      <find>usuario_por_servicio</find>
-      <find>get_usuario_ventas</find>
-      <find>get_usuario_por_servicio</find>
-      <find>get_tipo_entregas</find>
-      <find>usuario_model</find>
-      <find>get_informes_por_telefono</find>
-      <find>get_terminos_privacidad</find>
-      <find>has_phone</find>
-      <find>num_registros_periodo</find>
-      <find>publican_periodo</find>
-      <find>registros</find>
-      <find>num_registros_preriodo</find>
-      <find>registros_periodo</find>
-      <find>verifica_registro_telefono</find>
-      <find>num_total</find>
-      <find>get_equipo_enid_service</find>
-      <find>get_num_registros_periodo</find>
-      <find>get_like_clasificacion</find>
+      <find>confirma_cambio_horario</find>
+      <find>pedidos</find>
+      <find>$entrega</find>
+      <find>get_q</find>
+      <find>$status_venta</find>
+      <find>seguimiento_pedido</find>
+      <find>get_tipificaciones</find>
+      <find>get_comentarios</find>
+      <find>recibo_come</find>
+      <find>get_comentarios_recibo</find>
+      <find>get_comentario_recibo</find>
+      <find>comen</find>
+      <find>get_recibo_comentarios</find>
+      <find>create_seccion_tipificaciones</find>
+      <find>reque</find>
+      <find>request_enid( &quot;PUT&quot;,  data_send, url, response_horario_entrega , &quot;.place_fecha_entrega&quot;);</find>
+      <find>registrar_nota</find>
+      <find>registrar_nota</find>
+      <find>agregar_nota</find>
+      <find>comentarios</find>
+      <find>error</find>
+      <find>format_error</find>
+      <find>comentario</find>
+      <find>global_tipi</find>
+      <find>fecha_registro</find>
+      <find>resumen_pago</find>
+      <find>hora</find>
+      <find>HORARIO</find>
+      <find>contenedor_entrega</find>
+      <find>status_</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -67,16 +151,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/puntos_medios/application/config/index.php" />
-        <option value="$PROJECT_DIR$/reporte_enid/application/config/index.php" />
-        <option value="$PROJECT_DIR$/unete_a_nuestro_equipo/index.php" />
-        <option value="$PROJECT_DIR$/terminos-y-condiciones/index.php" />
-        <option value="$PROJECT_DIR$/usuarios_enid_service/application/controllers/inicio.php" />
-        <option value="$PROJECT_DIR$/sobre_enidservice/application/config/index.php" />
-        <option value="$PROJECT_DIR$/tareas_complejas/application/config/index.php" />
-        <option value="$PROJECT_DIR$/administracion_cuenta/application/config/index.php" />
-        <option value="$PROJECT_DIR$/usuarios_enid_service/application/config/index.php" />
-        <option value="$PROJECT_DIR$/terminos-y-condiciones/application/config/index.php" />
         <option value="$PROJECT_DIR$/unete_a_nuestro_equipo/application/config/index.php" />
         <option value="$PROJECT_DIR$/desarrollo/application/controllers/inicio.php" />
         <option value="$PROJECT_DIR$/js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js" />
@@ -96,18 +170,10 @@
         <option value="$PROJECT_DIR$/q/application/controllers/api/servicio.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/archivo.php" />
         <option value="$PROJECT_DIR$/imgs/application/controllers/enid.php" />
-        <option value="$PROJECT_DIR$/css_tema/template/pedidos.css" />
         <option value="$PROJECT_DIR$/js_tema/pedidos/seguimiento.js" />
-        <option value="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" />
         <option value="$PROJECT_DIR$/puntos_medios/application/helpers/puntoencuentro_helper.php" />
-        <option value="$PROJECT_DIR$/helpers/enid_helper.php" />
-        <option value="$PROJECT_DIR$/puntos_medios/application/views/form_horario.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/recibo.php" />
-        <option value="$PROJECT_DIR$/pedidos/application/views/form_fecha.php" />
-        <option value="$PROJECT_DIR$/pedidos/application/controllers/home.php" />
         <option value="$PROJECT_DIR$/q/application/views/producto/simple.php" />
         <option value="$PROJECT_DIR$/js_tema/js/main.js" />
-        <option value="$PROJECT_DIR$/js_tema/pedidos/principal.js" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/usuario_direccion.php" />
         <option value="$PROJECT_DIR$/q/application/models/usuario_deseo_model.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/usuario_deseo.php" />
@@ -118,17 +184,26 @@
         <option value="$PROJECT_DIR$/q/application/controllers/api/tarea.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/talla.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/status_enid_service.php" />
+        <option value="$PROJECT_DIR$/producto/application/views/pre.php" />
+        <option value="$PROJECT_DIR$/puntos_medios/application/views/form_horario.php" />
+        <option value="$PROJECT_DIR$/helpers/enid_helper.php" />
+        <option value="$PROJECT_DIR$/js_tema/puntos_medios/principal.js" />
+        <option value="$PROJECT_DIR$/css_tema/template/puntos_encuentro.css" />
+        <option value="$PROJECT_DIR$/q/application/models/recibo_comentario_model.php" />
+        <option value="$PROJECT_DIR$/pedidos/application/views/form_fecha.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/cobranza.php" />
+        <option value="$PROJECT_DIR$/puntos_medios/application/views/quien_recibe.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/recibo.php" />
+        <option value="$PROJECT_DIR$/q/application/models/recibo_model.php" />
+        <option value="$PROJECT_DIR$/pedidos/application/controllers/home.php" />
+        <option value="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/recibo_comentario.php" />
+        <option value="$PROJECT_DIR$/js_tema/pedidos/principal.js" />
+        <option value="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" />
+        <option value="$PROJECT_DIR$/pedidos/application/views/detalle.php" />
+        <option value="$PROJECT_DIR$/css_tema/template/pedidos.css" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
   </component>
   <component name="PhpServers">
     <servers>
@@ -139,10 +214,11 @@
       </server>
     </servers>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="973" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="77" />
+    <option name="y" value="47" />
+    <option name="width" value="1111" />
+    <option name="height" value="641" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -150,36 +226,44 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="recomendacion" type="462c0819:PsiDirectoryNode" />
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="recomendacion" type="462c0819:PsiDirectoryNode" />
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="recomendacion" type="462c0819:PsiDirectoryNode" />
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -202,7 +286,9 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" browser="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" server_name="localhost" />
+    <configuration name="localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" browser="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" server_name="localhost">
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -227,11 +313,13 @@
       <workItem from="1546471763366" duration="516000" />
       <workItem from="1546489958696" duration="11760000" />
       <workItem from="1546625207530" duration="8761000" />
+      <workItem from="1546804181324" duration="11000" />
+      <workItem from="1546804311612" duration="19001000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109326000" />
+    <option name="totallyTimeSpent" value="128338000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -243,137 +331,35 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="973" extended-state="0" />
+    <frame x="67" y="25" width="1299" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="2" weight="0.18104367" />
+      <window_info id="Structure" order="0" side_tool="true" weight="0.24980047" />
+      <window_info id="Favorites" order="1" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.17956904" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.2954279" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.31918505" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32942554" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" weight="0.15357561" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32942554" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info id="Structure" order="0" side_tool="true" weight="0.24980047" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.31918505" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32942554" />
+      <window_info active="true" anchor="bottom" id="Inspection Results" order="12" visible="true" weight="0.5334115" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Inspection Results" order="12" visible="true" weight="0.5334115" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.2954279" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/pedidos/application/controllers/home.php</url>
-          <line>81</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/q/application/models/imagen_usuario_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/models/img_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/imagen_usuario.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imgs/application/controllers/enid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/system/core/CodeIgniter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="396" selection-start-line="396" selection-end-line="396" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/imgs/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css_tema/template/pedidos.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="87" column="23" selection-start-line="87" selection-start-column="23" selection-end-line="87" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pedidos/application/views/detalle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="127" column="11" selection-start-line="127" selection-start-column="11" selection-end-line="127" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view_tema/formularios/busqueda_tickets.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view_tema/footer_template.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view_tema/inputs_fecha_busqueda.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="22" selection-end-line="22" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view_tema/formularios/form_busqueda_departamentos.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view_tema/header_meta_enid.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="421" selection-start-line="421" selection-end-line="421" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/puntos_medios/application/views/quien_recibe.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="70" column="39" lean-forward="true" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/puntos_medios/application/helpers/puntoencuentro_helper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -381,69 +367,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/puntos_medios/application/views/form_horario.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/models/recibo_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="329" column="38" lean-forward="true" selection-start-line="329" selection-start-column="11" selection-end-line="329" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/helpers/enid_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="562" column="11" selection-start-line="562" selection-start-column="11" selection-end-line="562" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pedidos/application/views/form_fecha.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="25" column="30" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/q/application/views/producto/simple.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_tema/pedidos/seguimiento.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_tema/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13400">
-          <caret line="670" column="9" selection-start-line="670" selection-start-column="9" selection-end-line="670" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_tema/pedidos/principal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="25" column="66" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="343" lean-forward="true" selection-start-line="343" selection-end-line="343" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pedidos/application/controllers/home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="94" selection-start-line="94" selection-end-line="94" />
         </state>
       </provider>
     </entry>
@@ -489,9 +416,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_11.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_11.php" />
     <entry file="file://$PROJECT_DIR$/q/application/controllers/api/servicio.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -499,9 +424,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_12.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_12.php" />
     <entry file="file://$PROJECT_DIR$/q/application/models/usuario_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
@@ -516,13 +439,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_13.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_13.php" />
     <entry file="file://$PROJECT_DIR$/q/application/models/tipo_talla_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="348">
@@ -586,6 +503,163 @@
     <entry file="file://$PROJECT_DIR$/recomendacion/application/controllers/home.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-134" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/puntos_medios/application/views/form_horario.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/producto/application/views/pre.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css_tema/template/puntos_encuentro.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/recurso_model.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/talla_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="34" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/punto_encuentro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-438">
+          <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/puntos_medios/principal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="210" column="83" selection-start-line="210" selection-start-column="61" selection-end-line="210" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/puntos_medios/application/views/quien_recibe.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/cobranza.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="118" column="6" lean-forward="true" selection-start-line="118" selection-start-column="6" selection-end-line="118" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pedidos/application/views/form_fecha.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/pedidos/seguimiento.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="28" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/recibo_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-240">
+          <caret line="29" column="74" selection-start-line="29" selection-start-column="64" selection-end-line="29" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="315" column="16" selection-start-line="315" selection-start-column="16" selection-end-line="315" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/core/CodeIgniter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="379" selection-start-line="379" selection-end-line="379" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pedidos/application/controllers/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="100" column="64" selection-start-line="100" selection-start-column="57" selection-end-line="100" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/helpers/recibo_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/enid_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="63" column="99" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo_comentario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="25" column="124" selection-start-line="25" selection-start-column="124" selection-end-line="25" selection-end-column="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/recibo_comentario_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-78" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/pedidos/principal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="380" column="13" selection-start-line="380" selection-start-column="13" selection-end-line="380" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="733" column="5" selection-start-line="733" selection-start-column="5" selection-end-line="733" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="380" column="115" lean-forward="true" selection-start-line="380" selection-start-column="115" selection-end-line="380" selection-end-column="134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pedidos/application/views/detalle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
+          <folding>
+            <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css_tema/template/pedidos.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+        </state>
       </provider>
     </entry>
   </component>

@@ -66,14 +66,22 @@
 							  
 							<?=label( icon("fa fa-clock-o") ." HORA DE ENCUENTRO", 
 							  		["class" =>	"col-lg-4 control-label"]
-							)?>  
+							)?>
+
+
 							<div class="col-lg-8">
 								<?=lista_horarios()?>							  	    
 							</div>
-						    
+                            <?=div("+ agregar nota" , ["class" => "col-lg-12 cursor_pointer text_agregar_nota" , "onclick" =>  "agregar_nota();"])?>
+                            <div class="input_notas" >
+                                <?=div("NOTAS" , ["class" => "strong col-lg-12" ])?>
+                                <?=textarea(["name" => "comentarios"] , 1)?>
+                            </div>
 
 
-						  <?=input_hidden(["name" => "punto_encuentro" , "class"  =>"punto_encuentro_form" ])?>
+
+
+                        <?=input_hidden(["name" => "punto_encuentro" , "class"  =>"punto_encuentro_form" ])?>
 
 						  <?=input_hidden(["name" => "num_ciclos" 	   , "class"  =>"num_ciclos" , "value" => $num_ciclos])?>
 
@@ -128,13 +136,20 @@
 					"max"				=> add_date(date("Y-m-d") , 4)
 				])?>        
 			</div>
+
 			<?=label( icon("fa fa-clock-o") ." HORA DE ENCUENTRO", 
 				["class" =>	"col-lg-4 control-label"]
 									)?>  
 			<div class="col-lg-8">
 				<?=lista_horarios()?>							  	    
 			</div>
-			
+            <?=div("+ agregar nota" , ["class" => "col-lg-12 cursor_pointer text_agregar_nota" , "onclick" =>  "agregar_nota();"])?>
+
+            <div class="input_notas" >
+                <?=div("NOTAS" , ["class" => "strong col-lg-12" ])?>
+                <?=textarea(["name" => "comentarios"] , 1)?>
+            </div>
+
 			<?=input_hidden([
 				"name" 		=> 	"punto_encuentro" , 
 				"class"  	=>	"punto_encuentro_form" ])?>

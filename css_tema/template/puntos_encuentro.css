@@ -66,11 +66,19 @@
     padding: 10px;
     color: white;
 }
-
 .nombre_linea_metrobus {
     background: #ec1606;
     height: 50px;
     text-align: center;
     color: white;
     font-size: 2em;
+}
+.text_agregar_nota{
+    color: #021a35;
+    font-size: 1.3em;
+    text-decoration: underline;
+    font-weight: bold
+}
+.input_notas{
+    display:none;
 }

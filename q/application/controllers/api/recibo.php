@@ -311,7 +311,9 @@ class recibo extends REST_Controller{
                 "tipo_entrega",
                 "fecha_entrega",
                 "costo_envio_cliente",
-                "id_servicio"
+                "id_servicio",
+                "fecha_cancelacion",
+                "fecha_pago"
             ];
             if ($param["recibo"] > 0) {
                 /*Busqueda por número recibo*/
@@ -322,7 +324,7 @@ class recibo extends REST_Controller{
             }
             if ($param["v"] ==  1) {
                 /*cargo vista*/
-                $response =  create_resumen_pedidos($response , $this->get_estatus_enid_service($param));
+                $response =  create_resumen_pedidos($response , $this->get_estatus_enid_service($param) , $param);
 
             }
 

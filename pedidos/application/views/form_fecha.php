@@ -19,6 +19,8 @@
         <?=label( icon("fa fa-clock-o") ." HORA DE ENCUENTRO",
             ["class" =>	"col-lg-4 control-label"]
         )?>
+
+
         <div class="col-lg-8">
             <?=lista_horarios()?>
         </div>

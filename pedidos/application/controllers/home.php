@@ -70,7 +70,7 @@ class Home extends CI_Controller{
     private  function load_detalle_pedido($param , $data){
 
         if (ctype_digit($param["recibo"])){
-
+            /*aquí*/
             $this->carga_detalle_pedido($param , $data);
 
         }else{
@@ -88,7 +88,7 @@ class Home extends CI_Controller{
             $data["recibo"]         =   $recibo;
 
             if(get_param_def($param , "fecha_entrega" ) >  0){
-                //$data["js"]         =
+
                 $this->principal->show_data_page($data, 'form_fecha');
 
             }else{
@@ -97,6 +97,7 @@ class Home extends CI_Controller{
                 $data["usuario"]        =   $this->get_usuario($recibo[0]["id_usuario"]);
                 $data["status_ventas"]  =   $this->get_estatus_enid_service();
                 $data["tipificaciones"] =   $this->get_tipificaciones($id_recibo);
+                $data["comentarios"]    =   $this->get_recibo_comentarios($id_recibo);
                 $this->principal->show_data_page($data, 'detalle');
             }
 
@@ -105,7 +106,12 @@ class Home extends CI_Controller{
             $this->principal->show_data_page($data, 'error');          
         }
         
-    }    
+    }
+    private function get_recibo_comentarios($id_recibo){
+        $q["id_recibo"]     =   $id_recibo;
+        $api                =   "recibo_comentario/index/format/json/";
+        return $this->principal->api( $api , $q );
+    }
     private function get_domicilio_entrega($id_recibo , $recibo){
 
 

@@ -223,3 +223,6 @@ var response_notificacion_punto_entrega = function(data){
 		redirect("../pedidos/?seguimiento="+get_parameter(".recibo")+"&domicilio=1");			
 	}
 };
+var agregar_nota = function(){
+	showonehideone(".input_notas", ".text_agregar_nota");
+}

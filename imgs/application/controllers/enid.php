@@ -22,7 +22,7 @@ class Enid extends CI_Controller {
             }
         }
     }
-    private function get_img_contents($data , $p = 1 ){
+    function get_img_contents($data , $p = 1 ){
 
         if($p ==  1){
             $path       = "http://".$_SERVER['HTTP_HOST']."/inicio/img_tema/productos/".$data["nombre_imagen"];
@@ -50,7 +50,7 @@ class Enid extends CI_Controller {
         $img_usuario =  $this->get_img_usuario($id_usuario);
         return  $this->construye_img_format($img_usuario );
     }
-    private function construye_img_format($response){
+    function construye_img_format($response){
 
         if ( count($response) > 0 ) {
             $id_imagen  =   $response[0]["id_imagen"];
@@ -65,19 +65,20 @@ class Enid extends CI_Controller {
             }
         }
     }
-    private function costruye_imagen($id_imagen){
+    function costruye_imagen($id_imagen){
 
         foreach ($this->get_img($id_imagen) as $row ){
             return $row;
         }
     }
-    /*
-    private function imagen_servicio($id_servicio){
+    function imagen_servicio($id_servicio){
         $imagen         = $this->get_img_servicio($id_servicio);
         if (is_array($imagen) &&  count($imagen) > 0){
             return $this->construye_img_format($imagen);
         }
     }
+    /*
+    private 
     */
     /*
 
@@ -93,17 +94,17 @@ class Enid extends CI_Controller {
         return $this->principal->api( $api , $q);
     }
     */
-    private function get_img($id_imagen){
+    function get_img($id_imagen){
 
         return $this->img_model->get_img($id_imagen);
     }
-    private function get_img_usuario($id_usuario){
+    function get_img_usuario($id_usuario){
 
         $q["id_usuario"]   =  $id_usuario;
         $api               =  "imagen_usuario/usuario/format/json/";
         return $this->principal->api( $api , $q);
     }
-    private function get_img_servicio($id_servicio){
+    function get_img_servicio($id_servicio){
 
         $q["id_servicio"]   =  $id_servicio;
         $q["limit"]         =  1;
