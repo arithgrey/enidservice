@@ -1,0 +1,41 @@
+version: '2'
+services:
+  web:
+      image: apachephp:5.5
+      expose:
+         - "9000"
+      ports:
+          - "80:80"
+          - "443:443"
+          - "8116:22"
+      volumes:
+          - ./:/var/www/html
+          - ~/.ssh:/home/magento2/.ssh
+          - ../apache_vhost:/etc/apache2/sites-available/
+      extra_hosts:
+          - "backend.local.com:127.0.0.1"
+      environment:
+        PHP_XDEBUG_ENABLED: 1
+
+        XDEBUG_CONFIG: remote_host=192.168.1.171
+        PHP_IDE_CONFIG: "serverName=local"
+
+        WEBSERVER_USER: www-data
+        MAGENTO_USER: magento2
+        CURRENT_USER_UID: 1000
+        MAGENTO_GROUP: 2000
+      links:
+          - mysql
+      container_name: backend-web
+  mysql:
+      image: mysql:5.7
+      volumes:
+      - ../mysql/config:/etc/mysql/conf.d
+      - ../mysql/databasedata:/var/lib/mysql
+      ports:
+        - 3307:3306
+      environment:
+          - MYSQL_ROOT_PASSWORD=mysql
+          - MYSQL_DATABASE=backend_db
+      container_name: backend-db
+
