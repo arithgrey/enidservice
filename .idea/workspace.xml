@@ -7,26 +7,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ffbfef24-1c57-4135-bcb0-af960c244fba" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css_tema/template/pedidos.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/pedidos.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css_tema/template/puntos_encuentro.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/puntos_encuentro.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enid.sublime-project" beforeDir="false" afterPath="$PROJECT_DIR$/enid.sublime-project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enid.sublime-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/enid.sublime-workspace" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/enid_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/enid_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imgs/application/controllers/enid.php" beforeDir="false" afterPath="$PROJECT_DIR$/imgs/application/controllers/enid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js_tema/pedidos/principal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/pedidos/principal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js_tema/puntos_medios/principal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/puntos_medios/principal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/views/detalle.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/views/detalle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/views/form_fecha.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/views/form_fecha.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css_tema/template/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css_tema/template/pre.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/pre.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/producto/application/views/pre.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/views/pre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/puntos_medios/application/views/form_horario.php" beforeDir="false" afterPath="$PROJECT_DIR$/puntos_medios/application/views/form_horario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/puntos_medios/application/views/quien_recibe.php" beforeDir="false" afterPath="$PROJECT_DIR$/puntos_medios/application/views/quien_recibe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/cobranza.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/cobranza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/models/recibo_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/recibo_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/puntos_medios/application/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/puntos_medios/application/views/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/helpers/lineametro_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/helpers/lineametro_helper.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,15 +21,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pedidos/application/controllers/home.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="100" column="64" selection-start-line="100" selection-start-column="57" selection-end-line="100" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pedidos/application/views/detalle.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -57,11 +33,47 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css_tema/template/pedidos.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+            <state relative-caret-position="289">
+              <caret line="53" column="23" lean-forward="true" selection-start-line="52" selection-start-column="4" selection-end-line="53" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/producto/application/views/pre.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="179">
+              <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css_tema/template/pre.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="507">
+              <caret line="39" lean-forward="true" selection-start-line="37" selection-end-line="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/puntos_medios/application/views/home.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="15" column="26" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/q/application/helpers/lineametro_helper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="262">
+              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -94,15 +106,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo_comentario.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="25" column="124" selection-start-line="25" selection-start-column="124" selection-end-line="25" selection-end-column="124" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/q/application/models/recibo_comentario_model.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-78" />
@@ -113,15 +116,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>confirma_cambio_horario</find>
-      <find>pedidos</find>
-      <find>$entrega</find>
-      <find>get_q</find>
-      <find>$status_venta</find>
-      <find>seguimiento_pedido</find>
-      <find>get_tipificaciones</find>
-      <find>get_comentarios</find>
-      <find>recibo_come</find>
       <find>get_comentarios_recibo</find>
       <find>get_comentario_recibo</find>
       <find>comen</find>
@@ -143,6 +137,15 @@
       <find>HORARIO</find>
       <find>contenedor_entrega</find>
       <find>status_</find>
+      <find>flipkart-navbar</find>
+      <find>f6f6f6</find>
+      <find>carga_opcion_entrega(</find>
+      <find>class_contenedor</find>
+      <find>contenedor_opcion</find>
+      <find>pre.css</find>
+      <find>ACORDEMOS UN PUNTO MEDIO</find>
+      <find>place_lineas</find>
+      <find>linea_metro</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -151,10 +154,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/unete_a_nuestro_equipo/application/config/index.php" />
-        <option value="$PROJECT_DIR$/desarrollo/application/controllers/inicio.php" />
-        <option value="$PROJECT_DIR$/js_tema/js/bootstrap-colorpicker/js/bootstrap-colorpicker.js" />
-        <option value="$PROJECT_DIR$/js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js" />
         <option value="$PROJECT_DIR$/reporte_enid/application/controllers/inicio.php" />
         <option value="$PROJECT_DIR$/administracion_cuenta/application/views/micuenta/info_usuario.php" />
         <option value="$PROJECT_DIR$/q/application/helpers/valoracion_helper.php" />
@@ -184,7 +183,6 @@
         <option value="$PROJECT_DIR$/q/application/controllers/api/tarea.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/talla.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/status_enid_service.php" />
-        <option value="$PROJECT_DIR$/producto/application/views/pre.php" />
         <option value="$PROJECT_DIR$/puntos_medios/application/views/form_horario.php" />
         <option value="$PROJECT_DIR$/helpers/enid_helper.php" />
         <option value="$PROJECT_DIR$/js_tema/puntos_medios/principal.js" />
@@ -202,6 +200,11 @@
         <option value="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" />
         <option value="$PROJECT_DIR$/pedidos/application/views/detalle.php" />
         <option value="$PROJECT_DIR$/css_tema/template/pedidos.css" />
+        <option value="$PROJECT_DIR$/css_tema/template/main.css" />
+        <option value="$PROJECT_DIR$/css_tema/template/pre.css" />
+        <option value="$PROJECT_DIR$/producto/application/views/pre.php" />
+        <option value="$PROJECT_DIR$/puntos_medios/application/views/home.php" />
+        <option value="$PROJECT_DIR$/q/application/helpers/lineametro_helper.php" />
       </list>
     </option>
   </component>
@@ -314,12 +317,12 @@
       <workItem from="1546489958696" duration="11760000" />
       <workItem from="1546625207530" duration="8761000" />
       <workItem from="1546804181324" duration="11000" />
-      <workItem from="1546804311612" duration="19001000" />
+      <workItem from="1546804311612" duration="20169000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="128338000" />
+    <option name="totallyTimeSpent" value="129506000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -360,34 +363,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/puntos_medios/application/helpers/puntoencuentro_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/producto/simple.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/usuario_perfil.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="40" column="41" lean-forward="true" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/usuario_direccion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2925">
-          <caret line="195" column="5" selection-start-line="195" selection-start-column="5" selection-end-line="195" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/q/application/models/usuario_deseo_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="707">
@@ -507,13 +482,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/puntos_medios/application/views/form_horario.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/producto/application/views/pre.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css_tema/template/puntos_encuentro.css">
       <provider selected="true" editor-type-id="text-editor" />
@@ -657,8 +625,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css_tema/template/pedidos.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+        <state relative-caret-position="289">
+          <caret line="53" column="23" lean-forward="true" selection-start-line="52" selection-start-column="4" selection-end-line="53" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css_tema/template/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="6811" column="29" selection-start-line="6811" selection-start-column="29" selection-end-line="6811" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/producto/application/views/pre.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="35" column="82" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css_tema/template/pre.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="39" lean-forward="true" selection-start-line="37" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/puntos_medios/application/views/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="26" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/helpers/lineametro_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
         </state>
       </provider>
     </entry>

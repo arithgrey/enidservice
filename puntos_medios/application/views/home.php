@@ -13,8 +13,7 @@
 	</center>
 </div>
 <br>
-<?=div(place("place_lineas") , ["class" => "col-lg-10 col-lg-offset-1"] ,1)?>
-
+<?=div(place("place_lineas") , ["class" => "col-lg-8 col-lg-offset-2"] ,1)?>
 
 <?php  if($primer_registro == 1 ):?>
 

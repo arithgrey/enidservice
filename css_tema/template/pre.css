@@ -1,12 +1,6 @@
 .titulo_preferencia {
     font-size: 2.6em;
 }
-
-body {
-    background: #f6f6f6;
-
-}
-
 .base_compras, .base_paginas_extra, .info_metodos_pago {
     display: none;
 }
@@ -36,7 +30,12 @@ body {
     -o-transition: all 1s ease-out;
     transition: all 1s ease-out;
 }
-
 .box-part .fa {
     color: black;
+}
+.contenedor_opcion{
+
+    border-bottom: 10px solid #00385D;
+    border-radius: 6px;
+
 }

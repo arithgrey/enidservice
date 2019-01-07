@@ -4,6 +4,7 @@
 	($orden_pedido ==  1) ? 
 	"contenedor_opcion col-lg-6 col-md-6 col-xs-12 cursor_pointer":
 	"contenedor_opcion col-lg-6 col-md-6 col-xs-12 cursor_pointer";
+
 ?>
 <div class="col-lg-6 col-lg-offset-3">
 	<?=n_row_12()?>
@@ -32,7 +33,7 @@
                     <div class="box-part text-center">
                         <?=icon('fa fa-space-shuttle fa-3x')?>
                         <?=div(heading_enid("ENCONTRÉMONOS",3) ,  ["class"=>"title"])?>
-                        <?=div(span("ACORDEMOS UN PUNTO MEDIO") , ["class" => "text"])?>
+                        <?=div(span("ACORDEMOS UN PUNTO MEDIO (PAGO CONTRA ENTREGA)") , ["class" => "text"])?>
                     </div>
                 </div>
 

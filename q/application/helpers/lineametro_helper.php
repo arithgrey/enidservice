@@ -18,9 +18,9 @@
                     "class" => "cursor_pointer linea_metro",
                     "nombre_linea" => $nombre
                 ]);
-                $l .= div($img, ["class" => "col-lg-3"]);
+                $l .= div($img, ["class" => "col-lg-4"]);
             }
-            return $l;
+            return br().$l;
         }
         function create_listado_metrobus($array)
         {
