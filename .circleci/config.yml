@@ -10,8 +10,7 @@ jobs:
       #- image: circleci/php:7.1-browsers
       - image: php:5.6-apache
       - image: mysql:5.7
-          ports:
-            - 3307:3306
+          ports: 3306
           environment:
             - MYSQL_ROOT_PASSWORD=mysql
             - MYSQL_DATABASE=testdb
