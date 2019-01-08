@@ -12,9 +12,9 @@ jobs:
       - image: mysql:5.7
           ports:
             - 3307:3306
-        environment:
-          - MYSQL_ROOT_PASSWORD=mysql
-          - MYSQL_DATABASE=testdb
+          environment:
+            - MYSQL_ROOT_PASSWORD=mysql
+            - MYSQL_DATABASE=testdb
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
