@@ -4,38 +4,85 @@
         parent::__construct();        
         $this->load->database();
     }
+    function set_status_orden($saldo_cubierto, $status, $id , $tipo_fecha){
+        $query_update =  "UPDATE 
+                            proyecto_persona_forma_pago 
+                          SET 
+                            saldo_cubierto  =  {$saldo_cubierto} , 
+                            status          =  {$status} ,
+                            {$tipo_fecha}   =   CURRENT_TIMESTAMP()  
+                            
+                          WHERE id_proyecto_persona_forma_pago =  {$id} LIMIT 1";
+        return $this->db->query($query_update);
+    }
     function get_q($params ,$param){
 
 
-      $f              =  get_keys($params);  
-      $fecha_inicio   =  $param["fecha_inicio"];
-      $fecha_termino  =  $param["fecha_termino"];
-      $tipo_entrega   =  $param["tipo_entrega"];
-      $status_venta   =  $param["status_venta"];
-      $tipo_orden     =  $param["tipo_orden"];
-      
-      $ops_tipo_orden =  ["", "fecha_registro" , "fecha_entrega" , "fecha_cancelacion", "fecha_pago"];
+      $f                    =  get_keys($params);
+      $tipo_entrega         =  $param["tipo_entrega"];
+      $status_venta         =  $param["status_venta"];
+      $query_get            =  "SELECT ".$f." FROM proyecto_persona_forma_pago p  ";
+      $ext_usuario          =   $this->get_usuario($param);
+      $ext_contra_entrega   =   ($tipo_entrega == 0 )? "":" AND  tipo_entrega = '".$tipo_entrega."'";
+      $extra_extatus_venta  =   ($status_venta == 0 ) ? "" : "  AND status = '".$status_venta."' ";
+      $ext_fecha            =   $this->get_fecha($param);
 
-      $query_get ="SELECT ".$f." FROM proyecto_persona_forma_pago WHERE 1=1 ";      
-      $ext_fecha
-      =  " AND DATE(".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
-      
-
-      $ext_contra_entrega   = ($tipo_entrega == 0 )? "":" AND  tipo_entrega = '".$tipo_entrega."'";
-
-
-      $extra_extatus_venta  = ($status_venta == 0 ) ? "" : "  AND status = '".$status_venta."' ";
-
-
-      $query_get .=  $ext_contra_entrega .$extra_extatus_venta. $ext_fecha." ORDER BY fecha_registro DESC";
-
-
-
+      $query_get            .=  $ext_usuario.$ext_contra_entrega .$extra_extatus_venta. $ext_fecha." ORDER BY fecha_registro DESC";
       return $this->db->query($query_get)->result_array();
 
     }
-    private function get_tipo_entrega($param){
+    private function get_usuario($param){
 
+        $sql            =  " WHERE 1=1 ";
+        if(strlen(trim($param["cliente"]))  > 0 ){
+            $cliente        =  $param["cliente"];
+            $sql            =  " INNER JOIN usuario u ON 
+                                    p.id_usuario =  u.idusuario 
+                                    WHERE 
+                                        u.nombre LIKE '%{$cliente}%' 
+                                    OR
+                                        u.apellido_paterno LIKE '%{$cliente}%'
+                                    OR
+                                        u.apellido_materno LIKE '%{$cliente}%'
+                                    OR
+                                        u.tel_contacto LIKE '%{$cliente}%'
+                                    OR
+                                        u.email        LIKE '%{$cliente}%'
+                                    ";
+        }
+        return $sql;
+    }
+    private function get_fecha($param){
+
+        $fecha_inicio     =  $param["fecha_inicio"];
+        $fecha_termino    =  $param["fecha_termino"];
+        $tipo_orden       =  $param["tipo_orden"];
+        $ops_tipo_orden   =  ["", "fecha_registro" , "fecha_entrega" , "fecha_cancelacion", "fecha_pago", "fecha_contra_entrega"];
+        $tipo_entrega     =  $param["tipo_entrega"];
+
+        $extra            =  " AND DATE(p.".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
+        switch ($tipo_orden) {
+            case 0:
+
+                break;
+            case 1:
+
+
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+                $extra            =  " AND DATE(".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."' AND status = 1 ";
+                break;
+        }
+
+
+        return $extra;
     }
     function get_adeudo_cliente($param){
 
@@ -226,7 +273,7 @@
       if($param["modalidad"] == 1){
           $campo_usuario ="id_usuario_venta";  
       }
-      
+
       $params_where = [
             "status"        => 9 , 
             $campo_usuario  =>  $param["id_usuario"]

@@ -1,5 +1,14 @@
 <div class="col-lg-12 ">
 	<form class="form_busqueda_pedidos row" method="post">
+        <div class="col-lg-3">
+            <?=strong("CLIENTE")?>
+            <?=input([
+                "name"          => "cliente" ,
+                "class"         =>  "form-control",
+                "placeholder"   =>  "Nombre, correo, telefono ..."
+            ])?>
+
+        </div>
 		<div class="col-lg-2">
 			<?=strong("#Recibo")?>
 			<?=input([
@@ -16,7 +25,7 @@
 		
 
 
-		<div class="col-lg-2">
+		<div class="col-lg-3">
 			<?=strong("TIPO ENTREGA")?>
 			
 			
@@ -33,7 +42,7 @@
 		</div>
 		
 
-		<div class="col-lg-2">			
+		<div class="col-lg-3">
 			<?=strong("STATUS")?>
 			<?=create_select(
 				$status_ventas , 
@@ -48,12 +57,15 @@
 				"-"
 			)?>
 		</div>
-		<div class="col-lg-1">
+		<div class="col-lg-3">
 			<?=strong("ORDENAR")?>
 			<select name="tipo_orden" class="form-control">
 				<option value="1">
 					FECHA REGISTRO
 				</option>
+                <option value="5">
+                    FECHA CONTRA ENTREGA
+                </option>
 				<option value="2">
 					FECHA ENTREGA
 				</option>
@@ -63,9 +75,10 @@
 				<option value="4">
 					FECHA PAGO
 				</option>
-			</select>
+
+            </select>
 		</div>
-		<div class="col-lg-5">
+		<div class="col-lg-6">
             <div class="row">
 			    <?=$this->load->view("../../../view_tema/inputs_fecha_busqueda")?>
             </div>

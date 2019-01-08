@@ -4,9 +4,9 @@ if (!function_exists('invierte_date_time')) {
     function create_resumen_pedidos($recibos, $lista_estados, $param)
     {
 
-        $tipo_orden = $param["tipo_orden"];
-        $ops_tipo_orden = ["", "fecha_registro", "fecha_entrega", "fecha_cancelacion", "fecha_pago"];
-        $ops_tipo_orden_text = ["", "FECHA REGISTRO", "FECHA ENTREGA", "FECHA CANCELACIÓN", "FECHA DE PAGO"];
+        $tipo_orden             = $param["tipo_orden"];
+        $ops_tipo_orden         = ["", "fecha_registro", "fecha_entrega", "fecha_cancelacion", "fecha_pago", "fecha_contra_entrega"];
+        $ops_tipo_orden_text    = ["", "FECHA REGISTRO", "FECHA ENTREGA", "FECHA CANCELACIÓN", "FECHA DE PAGO", "FECHA CONTRA ENTREGA"];
 
         $default = ["class" => "header_table_recibos"];
         $tb = "<hr class='top_20'><table class='table_enid_service top_20' ><thead>";

@@ -299,27 +299,47 @@ class recibo extends REST_Controller{
         $response   = [];
         if (if_ext($param , "fecha_inicio,fecha_termino,tipo_entrega,recibo,v")) {
 
-            $params   =  [      "id_proyecto_persona_forma_pago recibo" ,
-                "saldo_cubierto" ,
-                "fecha_registro" ,
-                "monto_a_pagar" ,
-                "num_ciclos_contratados",
-                "cancela_cliente",
-                "se_cancela",
-                "status",
-                "fecha_contra_entrega",
-                "tipo_entrega",
-                "fecha_entrega",
-                "costo_envio_cliente",
-                "id_servicio",
-                "fecha_cancelacion",
-                "fecha_pago"
+            $params   =  [
+                "p.id_proyecto_persona_forma_pago recibo" ,
+                "p.saldo_cubierto" ,
+                "p.fecha_registro" ,
+                "p.monto_a_pagar" ,
+                "p.num_ciclos_contratados",
+                "p.cancela_cliente",
+                "p.se_cancela",
+                "p.status",
+                "p.fecha_contra_entrega",
+                "p.tipo_entrega",
+                "p.fecha_entrega",
+                "p.costo_envio_cliente",
+                "p.id_servicio",
+                "p.fecha_cancelacion",
+                "p.fecha_pago"
             ];
             if ($param["recibo"] > 0) {
                 /*Busqueda por número recibo*/
+                $params   =  [
+                    "id_proyecto_persona_forma_pago recibo" ,
+                    "saldo_cubierto" ,
+                    "fecha_registro" ,
+                    "monto_a_pagar" ,
+                    "num_ciclos_contratados",
+                    "cancela_cliente",
+                    "se_cancela",
+                    "status",
+                    "fecha_contra_entrega",
+                    "tipo_entrega",
+                    "fecha_entrega",
+                    "costo_envio_cliente",
+                    "id_servicio",
+                    "fecha_cancelacion",
+                    "fecha_pago"
+                ];
                 $response =  $this->recibo_model->q_get($params, $param["recibo"]);
 
             }else{
+
+
                 $response =  $this->recibo_model->get_q($params , $param);
             }
             if ($param["v"] ==  1) {
@@ -450,13 +470,8 @@ class recibo extends REST_Controller{
         $response           =   "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR ".$pago_pendiente."MXN";
         if ($param["saldo_cubierto"] > 0 && $param["saldo_cubierto"] >= $pago_pendiente || ( $pago_pendiente - $param["saldo_cubierto"] ) < 101){
 
+            $response =  $this->recibo_model->set_status_orden( $param["saldo_cubierto"] , 1 , $param["recibo"] , 'fecha_pago');
 
-            $params =  [
-                "saldo_cubierto"    => $param["saldo_cubierto"],
-                "status"            => 1
-            ];
-            $in                     = ["id_proyecto_persona_forma_pago" => $param["recibo"]];
-            $response =  $this->recibo_model->update($params , $in );
         }
         return $response;
     }
@@ -484,14 +499,7 @@ class recibo extends REST_Controller{
 
         if ($param["saldo_cubierto"] > 0 && $param["saldo_cubierto"] >= $pago_pendiente || ( $pago_pendiente - $param["saldo_cubierto"] ) < 101){
 
-
-            $params =  [
-                "saldo_cubierto"    => $param["saldo_cubierto"],
-                "status"            => $param["status"]
-            ];
-
-            $in                     = ["id_proyecto_persona_forma_pago" => $param["recibo"]];
-            $response =  $this->recibo_model->update($params , $in );
+            $response =  $this->recibo_model->set_status_orden($param["saldo_cubierto"] , $param["status"] , $param["recibo"] , 'fecha_entrega');
         }
         return $response;
     }
@@ -501,13 +509,7 @@ class recibo extends REST_Controller{
         
         if (if_ext($param , "status,tipificacion,recibo")) {
 
-            $params     =  [                            
-                "status"            => $param["status"]
-            ];
-                    
-            $in                     =  
-            ["id_proyecto_persona_forma_pago" => $param["recibo"]];
-            $response =  $this->recibo_model->update($params , $in );       
+            $response =  $this->recibo_model->set_status_orden( 0 , $param["status"] , $param["recibo"] , 'fecha_cancelacion');
             if ($response ==  true) {
                 $response   =  $this->add_tipificacion($param);
             }

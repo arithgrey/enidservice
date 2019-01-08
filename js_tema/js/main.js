@@ -755,9 +755,10 @@ var evita_basura  = function(){
 	set_parameter(".input_busqueda_producto" , text);	
 };
 var reload_imgs = function (id,  url) {
-
+	/*
 	document.getElementById(id).src = url;
 	console.log(url);
+	*/
 };
 /*Regresa el valor que esta en el nodo html*/
 var get_parameter = function(element){
