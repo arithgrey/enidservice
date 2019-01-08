@@ -30,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+              <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -230,12 +230,12 @@
       <workItem from="1546625207530" duration="8761000" />
       <workItem from="1546804181324" duration="11000" />
       <workItem from="1546804311612" duration="20169000" />
-      <workItem from="1546889760584" duration="5839000" />
+      <workItem from="1546889760584" duration="5881000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135345000" />
+    <option name="totallyTimeSpent" value="135387000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -564,7 +564,7 @@
     <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
         </state>
       </provider>
     </entry>
