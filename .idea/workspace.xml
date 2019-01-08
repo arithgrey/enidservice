@@ -6,14 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ffbfef24-1c57-4135-bcb0-af960c244fba" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debug/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js_tema/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/views/form_busqueda.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/views/form_busqueda.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q/application/models/recibo_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/recibo_model.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,19 +17,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/q/application/models/recibo_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
-              <caret line="49" column="55" selection-start-line="49" selection-start-column="55" selection-end-line="49" selection-end-column="55" />
+            <state relative-caret-position="18">
+              <caret line="54" column="16" lean-forward="true" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pedidos/application/views/form_busqueda.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="-705">
               <caret line="7" column="65" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
             </state>
           </provider>
@@ -142,8 +135,8 @@
         <option value="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" />
         <option value="$PROJECT_DIR$/js_tema/js/main.js" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/recibo.php" />
-        <option value="$PROJECT_DIR$/q/application/models/recibo_model.php" />
         <option value="$PROJECT_DIR$/pedidos/application/views/form_busqueda.php" />
+        <option value="$PROJECT_DIR$/q/application/models/recibo_model.php" />
       </list>
     </option>
   </component>
@@ -232,12 +225,12 @@
       <workItem from="1546804181324" duration="11000" />
       <workItem from="1546804311612" duration="20169000" />
       <workItem from="1546889760584" duration="7582000" />
-      <workItem from="1546922872473" duration="8587000" />
+      <workItem from="1546922872473" duration="10549000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="145675000" />
+    <option name="totallyTimeSpent" value="147637000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -577,17 +570,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/models/recibo_model.php">
+    <entry file="file://$PROJECT_DIR$/pedidos/application/views/form_busqueda.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="49" column="55" selection-start-line="49" selection-start-column="55" selection-end-line="49" selection-end-column="55" />
+        <state relative-caret-position="-705">
+          <caret line="7" column="65" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pedidos/application/views/form_busqueda.php">
+    <entry file="file://$PROJECT_DIR$/q/application/models/recibo_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="65" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
+        <state relative-caret-position="18">
+          <caret line="54" column="16" lean-forward="true" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
         </state>
       </provider>
     </entry>

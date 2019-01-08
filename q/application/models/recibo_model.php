@@ -23,11 +23,11 @@
       $status_venta         =  $param["status_venta"];
       $query_get            =  "SELECT ".$f." FROM proyecto_persona_forma_pago p  ";
       $ext_usuario          =   $this->get_usuario($param);
-      $ext_contra_entrega   =   ($tipo_entrega == 0 )? "":" AND  tipo_entrega = '".$tipo_entrega."'";
-      $extra_extatus_venta  =   ($status_venta == 0 ) ? "" : "  AND status = '".$status_venta."' ";
+      $ext_contra_entrega   =   ($tipo_entrega == 0 )? "":" AND  p.tipo_entrega = '".$tipo_entrega."'";
+      $extra_extatus_venta  =   ($status_venta == 0 ) ? "" : "  AND p.status = '".$status_venta."' ";
       $ext_fecha            =   $this->get_fecha($param);
 
-      $query_get            .=  $ext_usuario.$ext_contra_entrega .$extra_extatus_venta. $ext_fecha." ORDER BY fecha_registro DESC";
+      $query_get            .=  $ext_usuario.$ext_contra_entrega .$extra_extatus_venta. $ext_fecha." ORDER BY p.fecha_registro DESC";
       return $this->db->query($query_get)->result_array();
 
     }
@@ -77,7 +77,7 @@
 
                 break;
             case 4:
-                $extra            =  " AND DATE(".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."' AND status = 1 ";
+                $extra            =  " AND DATE(p.".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."' AND p.status = 1 ";
                 break;
         }
 

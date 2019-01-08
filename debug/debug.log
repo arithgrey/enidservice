@@ -6,3 +6,6 @@ DEBUG - TYPE string 2019-01-07 00:12:41 --> NO se recibió el parametro->id_reci
 DEBUG - TYPE string 2019-01-07 00:12:46 --> NO se recibió el parametro->id_recibo
 DEBUG - TYPE string 2019-01-07 00:13:13 --> NO se recibió el parametro->id_recibo
 DEBUG - TYPE string 2019-01-08 00:23:11 --> NO se recibió el parametro->id_usuario
+DEBUG - TYPE string 2019-01-08 01:21:17 --> NO se recibió el parametro->id_usuario
+DEBUG - TYPE string 2019-01-08 01:21:24 --> NO se recibió el parametro->id_usuario
+DEBUG - TYPE string 2019-01-08 01:21:37 --> NO se recibió el parametro->id_usuario
