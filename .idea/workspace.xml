@@ -5,9 +5,7 @@
     <option name="CUSTOM_SCOPE_NAME" value="Project Files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffbfef24-1c57-4135-bcb0-af960c244fba" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
-    </list>
+    <list default="true" id="ffbfef24-1c57-4135-bcb0-af960c244fba" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -230,12 +228,12 @@
       <workItem from="1546625207530" duration="8761000" />
       <workItem from="1546804181324" duration="11000" />
       <workItem from="1546804311612" duration="20169000" />
-      <workItem from="1546889760584" duration="7311000" />
+      <workItem from="1546889760584" duration="7582000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136817000" />
+    <option name="totallyTimeSpent" value="137088000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
