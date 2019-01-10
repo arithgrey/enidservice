@@ -24,25 +24,28 @@ class Inicio extends CI_Controller {
         $data["is_mobile"]              =   (  $this->agent->is_mobile() === FALSE ) ? 0 : 1;
 
         
-        
-        $data["js"] =['planes_servicios/principal.js', 
-                      'planes_servicios/img.js',
-                      'js/summernote.js',
+        $data                   = $this->getCssJs($data);
+        $data["css_external"]   = ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];
+        $data["list_orden"]     = $this->get_orden();
+        $this->principal->show_data_page( $data , 'home_enid');			
+          	        	
+    }
+    private function getCssJs($data){
+
+        $data["js"] =['planes_servicios/principal.js',
+            'planes_servicios/img.js',
+            'js/summernote.js',
             'alerts/jquery-confirm.js'
         ];
 
         $data["css"]=[
-            "css_tienda.css", 
+            "css_tienda.css",
             "vender.css" ,
             "planes_servicios.css",
             "producto.css",
             "confirm-alert.css"
         ];
-
-        $data["css_external"]   = ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];
-        $data["list_orden"]     = $this->get_orden();
-        $this->principal->show_data_page( $data , 'home_enid');			
-          	        	
+        return $data;
     }
     private function prevenir_acceso($param , $data){
 
@@ -70,7 +73,6 @@ class Inicio extends CI_Controller {
         $api = "servicio/es_servicio_usuario/format/json/";
         return  $this->principal->api($api , $q );
     }
-    /*Regresa el top de servicios*/
     private function get_top_servicios_usuario($id_usuario){    
 
         $q["id_usuario"] = $id_usuario;        
@@ -91,7 +93,6 @@ class Inicio extends CI_Controller {
                      ];
         return $response;
     }
-    /*Crea request  dentro de Enid METHOD PUT*/    
     private function create_ciclo_facturacion(){
 
         $q          = array();

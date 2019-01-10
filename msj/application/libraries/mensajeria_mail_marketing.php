@@ -18,17 +18,16 @@
     }
     function notifica_prospecto($asunto , $mensaje , $prospecto ){
 
-        $url_mensaje_leido  = 
-        "http://enidservice.com/inicio/msj/index.php/api/marketing/mensaje_leido/?email=".$prospecto;        
+        $url_mensaje_leido  = "http://enidservice.com/inicio/msj/index.php/api/marketing/mensaje_leido/?email=".$prospecto;
         $img_mensaje_leido  = img([
             "style" =>  'display:none;' , 
             "src"   =>  $url_mensaje_leido
         ]);
 
-        $info       = $mensaje;        
+        $info       = $mensaje;
         $info      .= $img_mensaje_leido;            
         $cuerpo     = $info;                 
-        $headers    =  $this->get_headers_mail();         
+        $headers    = get_headers_e();
         
         $estado_enviado =  mail(trim($prospecto) , '=?UTF-8?B?'.trim($asunto).'?=' , $cuerpo , $headers);
 
@@ -40,12 +39,6 @@
         $data["email_info"]         = $info_enviado;
         $data["mensaje_enviado"]    = $cuerpo;
         return $data;
-    }    
-    function get_headers_mail(){
-
-        $headers     = "MIME-Version: 1.0\r\n"; 
-        $headers    .= "Content-type: text/html; charset=iso-8859-1\r\n";         
-        $headers    .= "From: Enid Service <arithgrey@enidservice.com>\r\n";             
-        return $headers;           
     }
+
 }

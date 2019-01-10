@@ -49,7 +49,6 @@ class Home extends CI_Controller{
         $data["carga_ficha_direccion_envio"]    =   $this->carga_ficha_direccion_envio($param);
         $this->principal->show_data_page($data, 'secciones_2/domicilio_entrega');                          
     }
-    /**/
     private function crea_orden_compra($param){
         
         $data                   = $this->principal->val_session("");         

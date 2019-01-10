@@ -250,8 +250,7 @@
                   break;
           }
 
-      }
-    /**/
+    }
     function cancela_orden_compra($param){
       
         $cancelar         =   ($param["cancela_cliente"] ==  1) ? 1 : 0;

@@ -11,8 +11,11 @@ class Blog extends REST_Controller{
     function fecha_GET(){        
 
         $param              =   $this->get();
-        $data               =   $this->blog_model->get_url_blog_fecha($param);
-        $table              =   create_table_blog($data);
-        $this->response($table);
+        $response           = false;
+        if (if_ext($param, "fecha")){
+            $data               =   $this->blog_model->get(["id_faq", "titulo" ,"id_categoria"  , "fecha_registro"], [ "DATE(fecha_registro) " => $param["fecha"]] , 1000);
+            $response           =   create_table_blog($data);
+        }
+        $this->response($response);
     }
 }

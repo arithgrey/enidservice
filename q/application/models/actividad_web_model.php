@@ -16,7 +16,6 @@
         }       
         return $this->db->get($table)->result_array();
     }
-    
     function visitas_enid_semana($_num){
       $query_get = "SELECT 
         HOUR(fecha_registro)horario,
@@ -38,7 +37,6 @@
       return $this->db->query($query_get)->result_array();
           
     }
-      
     function get_correos_enviados($tabla){
     
       $query_get = "SELECT SUM(CASE WHEN total  > 0  THEN total ELSE 0 END) correos_enviados FROM $tabla";
@@ -594,27 +592,7 @@
 
     }
     
-    
-    
- 
-    
-  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     function get_servicios_creados($tabla){
 

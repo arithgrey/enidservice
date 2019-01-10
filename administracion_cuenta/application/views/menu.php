@@ -1,7 +1,7 @@
     <div class="col-lg-2" >       
         <nav class="nav-sidebar">
             <ul class="nav tabs">                                               
-                <li >
+                <li>
                         <?=anchor_enid(icon("fa fa-address-book-o") ."Cuenta" 
                             , 
                             [
@@ -58,7 +58,7 @@
                         ]
                     )?>
                 </li>
-                <li >
+                <li>
                     <div class="contenedor_compartir_redes_sociales">            
                         <?=get_url_facebook(get_url_tienda($id_usuario) , 1)?>
                         <?=get_url_twitter(get_url_tienda($id_usuario), 

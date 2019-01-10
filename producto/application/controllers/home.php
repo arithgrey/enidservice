@@ -196,25 +196,21 @@ class Home extends CI_Controller{
         $data["js"] = ['producto/principal.js'];
         $this->principal->show_data_page($data, 'home');         
 
-    }    
-    /**/
+    }
     private function get_existencia($id_servicio){                
         $q["id_servicio"]   =  $id_servicio;
         $api  = "servicio/existencia/format/json/";
         return $this->principal->api( $api, $q);    
     }
-    /**/
     private function calcula_costo_envio($q){                
         $api  = "cobranza/calcula_costo_envio/format/json/";
         return $this->principal->api( $api, $q);    
     }
-    /**/
     private function get_descripcion_mensaje($id_mensaje){        
         $mensaje =  $this->principal->get_info_mensaje($id_mensaje);                 
         $descripcion_mensaje  =  $mensaje[0]["descripcion"];  
         $this->set_mensaje_descripcion(strip_tags($descripcion_mensaje));
     }
-    /**/    
     private function get_imagenes_productos($id_servicio){
         
         $q["id_servicio"] = $id_servicio;

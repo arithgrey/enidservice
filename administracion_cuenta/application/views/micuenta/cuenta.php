@@ -9,9 +9,7 @@
                     ]),  ["class"   => "imagen_usuario_completa"])?>                
                     <?=anchor_enid("MODIFICAR" , ["class"=>"editar_imagen_perfil "] )?>
                 </div>
-                <center>
-                    <?=place("place_form_img")?>
-                </center>
+                <?=place("place_form_img")?>
             </div>
         <?=end_row()?>
         

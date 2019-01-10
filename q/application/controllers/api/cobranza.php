@@ -54,43 +54,7 @@ class Cobranza extends REST_Controller{
         $api = "recibo/resumen_desglose_pago"; 
         return $this->principal->api( $api , $q , "html" );
     }        
-   /*
-    function cuentas_por_cobrar_GET(){
 
-        $recibos =  $this->cobranzamodel->get_usuarios_deuda_pendiente();        
-        $nueva_data = [];
-        $x = 0;
-        foreach($recibos as $row){            
-            
-            $id_usuario                             =   $row["id_usuario"];
-            $usuario                                =   
-            $this->principal->get_info_usuario($id_usuario);
-            $nueva_data[$x]["usuario"]              =   $usuario;
-            $nueva_data[$x]["cuenta_por_cobrar"]    =   $row;
-            $prm["id_recibo"]                       =   
-            $row["id_proyecto_persona_forma_pago"];
-            $nueva_data[$x]["recibo"]               =   $this->get_pago($prm);
-            $x ++;
-            
-        }
-        $this->response($nueva_data);
-
-    }
-    */
-    /*
-    function resumen_proyecto_persona_GET(){
-
-        $param =  $this->get();  
-        $id_proyecto_persona = $param["id_proyecto_persona"]; 
-        $data["info_proyecto"] =  $this->cobranzamodel->get_resumen_proyecto_persona($param);    
-        $data["info_persona"] =  
-        $this->cobranzamodel->get_info_persona($data["info_proyecto"][0]);        
-        $data["historial_pagos"] =  $this->cobranzamodel->get_historial_pagos($param);         
-        $data["info_request"] =  $param;
-        $this->load->view("cobranza/renovaciones" , $data);        
-
-    }*/
-    /**/
     function valida_estado_pago_GET(){
 
         $param =  $this->get();
@@ -116,6 +80,43 @@ class Cobranza extends REST_Controller{
         $api =  "notificacion_pago/pago_resumen/format/json/";
         return $this->principal->api( $api , $q);
     }
+    /*
+    function cuentas_por_cobrar_GET(){
+
+        $recibos =  $this->cobranzamodel->get_usuarios_deuda_pendiente();
+        $nueva_data = [];
+        $x = 0;
+        foreach($recibos as $row){
+
+            $id_usuario                             =   $row["id_usuario"];
+            $usuario                                =
+            $this->principal->get_info_usuario($id_usuario);
+            $nueva_data[$x]["usuario"]              =   $usuario;
+            $nueva_data[$x]["cuenta_por_cobrar"]    =   $row;
+            $prm["id_recibo"]                       =
+            $row["id_proyecto_persona_forma_pago"];
+            $nueva_data[$x]["recibo"]               =   $this->get_pago($prm);
+            $x ++;
+
+        }
+        $this->response($nueva_data);
+
+    }
+    */
+    /*
+    function resumen_proyecto_persona_GET(){
+
+        $param =  $this->get();
+        $id_proyecto_persona = $param["id_proyecto_persona"];
+        $data["info_proyecto"] =  $this->cobranzamodel->get_resumen_proyecto_persona($param);
+        $data["info_persona"] =
+        $this->cobranzamodel->get_info_persona($data["info_proyecto"][0]);
+        $data["historial_pagos"] =  $this->cobranzamodel->get_historial_pagos($param);
+        $data["info_request"] =  $param;
+        $this->load->view("cobranza/renovaciones" , $data);
+
+    }*/
+    /**/
     /*
     function notificacion_pago_GET(){
 

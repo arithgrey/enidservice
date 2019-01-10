@@ -27,14 +27,7 @@ class Home extends CI_Controller{
 
         }
     }
-    function seguimiento_pedido($param , $data){
-
-        $num_perfil         =  $this->principal->getperfiles();
-        if ($num_perfil != 3) {
-            $module =  "location:../area_cliente";
-            header( $module );
-        }
-
+    private function getCssJs($data){
         $data["css"] = [
             "js/bootstrap-datepicker/css/datepicker-custom.css",
             "js/bootstrap-timepicker/css/timepicker.css",
@@ -54,7 +47,18 @@ class Home extends CI_Controller{
 
 
         ];
+        return $data;
+    }
+    function seguimiento_pedido($param , $data){
 
+        $num_perfil         =  $this->principal->getperfiles();
+        if ($num_perfil != 3) {
+            $module =  "location:../area_cliente";
+            header( $module );
+        }
+
+
+        $data                   =   $this->getCssJs($data);
         $es_recibo              =   get_info_variable( $param , "recibo" );
         $data["tipos_entregas"] =   $this->get_tipos_entregas(array());
         $data["status_ventas"]  =   $this->get_estatus_enid_service();

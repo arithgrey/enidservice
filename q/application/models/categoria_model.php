@@ -32,12 +32,10 @@
         }
         return $this->db->get("categoria")->result_array();
     }
-    /**/
     function insert( $params , $return_id=0){        
         $insert   = $this->db->insert("categoria", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;
     }
-    
     function q_get($params=[], $id){
         return $this->get($params, ["id_categoria" => $id ] );
     }   

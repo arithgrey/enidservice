@@ -1196,3 +1196,12 @@ if (!function_exists('lista_horarios')) {
 
     }
 }
+if (!function_exists('get_headers_e')) {
+    function get_headers_e(){
+
+        $headers     = "MIME-Version: 1.0\r\n";
+        $headers    .= "Content-type: text/html; charset=iso-8859-1\r\n";
+        $headers    .= "From: Enid Service <arithgrey@enidservice.com>\r\n";
+        return $headers;
+    }
+}
