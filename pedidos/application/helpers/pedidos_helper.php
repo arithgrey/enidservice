@@ -94,21 +94,13 @@ if(!function_exists('invierte_date_time')){
 
                 $domicilio 				= $data_direccion["domicilio"][0];
                 $calle  				= $domicilio["calle"];
-                //$entre_calles  			= $domicilio["entre_calles"];
+
                 $numero_exterior  		= $domicilio["numero_exterior"];
                 $numero_interior  		= $domicilio["numero_interior"];
-                //$id_codigo_postal  		= $domicilio["id_codigo_postal"];
-                //$telefono_receptor 		= $domicilio["telefono_receptor"];
-                //$nombre_receptor  		= $domicilio["nombre_receptor"];
                 $cp  					= $domicilio["cp"];
                 $asentamiento  			= $domicilio["asentamiento"];
                 $municipio  			= $domicilio["municipio"];
-                $ciudad  				= $domicilio["ciudad"];
                 $estado  				= $domicilio["estado"];
-                //$idtipo_asentamiento  	= $domicilio["idtipo_asentamiento"];
-                //$id_estado_republica  	= $domicilio["id_estado_republica"];
-                //$pais  					= $domicilio["pais"];
-                //$id_pais  				= $domicilio["id_pais"];
 
                 $text
                     =
@@ -299,55 +291,6 @@ if(!function_exists('invierte_date_time')){
 
         }
     }
-
-	/*function create_seccion_linea_tiempo($recibo , $status , $activo=0 , $direccion_activa = 0 ){
-
-
-		$status_recibo  = $recibo[0]["status"];
-		$text           = "";
-		switch ($status) {
-			case 1:
-				$text = "PAGO VERIFICADO";	
-				break;
-			
-			case 6:
-				$text = "ORDEN REALIZADA";	
-				break;
-
-
-			case 7:
-				$text = "PEDIDO EN CAMINO";	
-				break;
-
-			case 9:
-				$text = "ENTREGADO";	
-				break;
-
-			case 12:
-				$text = "EMPACADO";	
-				break;
-			
-			default:
-				
-				break;
-		}
-
-
-		$class 		=  ($activo ==  1) ? "timeline__item__date_active": "timeline__item__date";
-
-		$seccion 	= div(icon("fa fa-check-circle-o") , ["class"=>$class]);
-
-		$seccion_2 	= div(p($text ,
-		        	[
-		        		"class"	=>	"timeline__item__content__description"
-		        	]), 
-		        ["class"	=>"timeline__item__content"]);
-
-		return  div($seccion.$seccion_2 , ["class"=>"timeline__item"]);
-		
-
-	}
-	*/
 	if(! function_exists('create_seccion_comentarios')){
         function create_seccion_comentarios($data , $id_recibo)
         {
@@ -685,3 +628,51 @@ if(!function_exists('invierte_date_time')){
         }
     }
 }
+    /*function create_seccion_linea_tiempo($recibo , $status , $activo=0 , $direccion_activa = 0 ){
+
+
+            $status_recibo  = $recibo[0]["status"];
+            $text           = "";
+            switch ($status) {
+                case 1:
+                    $text = "PAGO VERIFICADO";
+                    break;
+
+                case 6:
+                    $text = "ORDEN REALIZADA";
+                    break;
+
+
+                case 7:
+                    $text = "PEDIDO EN CAMINO";
+                    break;
+
+                case 9:
+                    $text = "ENTREGADO";
+                    break;
+
+                case 12:
+                    $text = "EMPACADO";
+                    break;
+
+                default:
+
+                    break;
+            }
+
+
+            $class 		=  ($activo ==  1) ? "timeline__item__date_active": "timeline__item__date";
+
+            $seccion 	= div(icon("fa fa-check-circle-o") , ["class"=>$class]);
+
+            $seccion_2 	= div(p($text ,
+                        [
+                            "class"	=>	"timeline__item__content__description"
+                        ]),
+                    ["class"	=>"timeline__item__content"]);
+
+            return  div($seccion.$seccion_2 , ["class"=>"timeline__item"]);
+
+
+        }
+        */

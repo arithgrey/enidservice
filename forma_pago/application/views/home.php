@@ -4,7 +4,7 @@
 	, 
 	1
 )?>		
-		
+	<!--
 <style type="text/css">
 	.contenedor-info-ventas{
 		display: none!important;
@@ -19,3 +19,4 @@
 		display: none!important;
 	}	
 </style>
+    -->

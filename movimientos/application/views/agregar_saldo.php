@@ -2,7 +2,6 @@
 	<div class='contenedor_principal_enid'>
 		<div class="col-lg-4 col-lg-offset-4">
 			<?=heading_enid("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR " , 3)?>
-
 			<a href="?q=transfer&action=7">
 				<div class="option_ingresar_saldo tipo_pago">					
 					<?=div("UN PAGO EN EFECTIVO EN OXXO "  ,
@@ -19,7 +18,6 @@
 					1)?>
 				</div>
 			</a>
-			
 			<a href="?q=transfer&action=9">
 				<div class="option_ingresar_saldo">				
 					<?=div("SOLICITA SALDO A UN AMIGO" ,

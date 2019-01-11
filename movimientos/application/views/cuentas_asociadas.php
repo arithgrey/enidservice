@@ -44,7 +44,7 @@
                 <?=div(substr($row["numero_tarjeta"], 0 ,4) .  "********")?>
               </div>
             </div>
-        <?php endforeach; ?>
+      <?php endforeach; ?>
         <a href="?q=transfer&action=1&tarjeta=1">
             <div class="col-lg-6 contenedir_agregar_tarjeta">              
               <?=div("Agregar tarjeta")?>

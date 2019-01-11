@@ -32,12 +32,7 @@ class Home extends CI_Controller{
         $data["recibo"]         =   $id_recibo;        
         $data["info_recibo"]    =   $this->get_recibo_forma_pago($id_recibo);
 
-        //$num_hist             =   get_info_servicio( $this->input->get("q"));
-        $param                  =   $this->input->get();
-        //$num_usuario            =   get_info_usuario($param);
-        //$num_servicio           =   get_info_usuario($param);
-        //$this->principal->crea_historico(5669877 , $num_usuario , $num_servicio );
-        $data["clasificaciones_departamentos"] = "";        
+        $data["clasificaciones_departamentos"] = "";
         $this->principal->show_data_page($data, 'home');                          
     }
     private function get_recibo_forma_pago($id_recibo){

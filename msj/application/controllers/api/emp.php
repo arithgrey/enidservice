@@ -9,9 +9,84 @@ class Emp extends REST_Controller{
         $this->load->library("mensajeria_lead");            
         $this->load->library(lib_def());              
     }
-    function salir_list_email($q){
-        $api = "prospecto/salir_list_email";
-        return $this->principal->api( $api , $q , "json" , "PUT");
+    function gamifica_usuarios_sin_contestar_cliente_GET(){
+        /*solicito los servicio que no han dado respuesta al cliente*/
+        $param      =  $this->get();
+        $api        =  "valoracion/servicios_pregunta_sin_contestar/format/json/";
+        $servicios  =  $this->principal->api( $api , $param);
+
+        if (count($servicios)>0) {
+
+            $data_complete  = [];
+            $a =0;
+            foreach ($servicios as $row) {
+
+                $id_servicio                =  $row["id_servicio"];
+                $id_pregunta                =  $row["id_pregunta"];
+                $prm["servicio"]            =  $id_servicio;
+                $api                        =  "usuario/id_usuario_por_id_servicio/format/json/";
+                $usuario                    =  $this->principal->api( $api  , $prm  );
+
+                $id_usuario                 =   $usuario[0]["id_usuario"];
+                $data_complete[$a]["id"]    =   $id_usuario;
+
+                $data_send["id"]            =   $id_usuario;
+                $data_send["type"]          =   4;
+                $data_complete[$a]["gamificacion"] =  $this->aplica_gamification_servicio($data_send);
+                /*ahora actualizo la gamificacion en preguntas*/
+
+                $prm["id_pregunta"]         =  $id_pregunta;
+                $api                        =  "valoracion/gamificacion_pregunta/format/json/";
+                $data_complete[$a]["nueva_gamificacion"]    =
+                    $this->principal->api( $api , $prm , "json" , "PUT");
+
+                $a ++;
+            }
+            $this->response($data_complete);
+
+        }
+        $this->response("No hay usuarios a quienes gamificar");
+    }
+    function contacto_POST(){
+
+        $param                  =   $this->post();
+        $response               =   $this->insert_contacto($param);
+        $param["url_registro"]  =   $_SERVER['HTTP_REFERER'];
+        $ticket                 =   $this->abre_ticket($param);
+        $this->response($ticket);
+        $param["id_ticket"]     =   $ticket;
+        $response               =   $this->agrega_tarea_ticket($param);
+
+        if ($param["tipo"] ==  2 ){
+            $email  =  "enidservice@gmail.com";
+            $info   =  $this->mensajeria->notifica_nuevo_contacto( $param ,  $email);
+            $info   =  $this->mensajeria->notifica_agradecimiento_contacto($param);
+        }
+        $this->response($response);
+    }
+    function notifica_pago_POST(){
+
+        $param      =  $this->post();
+        $response   =  $this->get_notificacion_pago($param);
+        $msj_result =  $this->mensajeria_lead->notifica_registro_de_pago_efectuado($response);
+        $msj_result2 =
+            $this->mensajeria_lead->notifica_registro_de_pago_efectuado_cliente($response);
+        $this->response($msj_result2);
+    }
+    function solicitud_usuario_POST(){
+
+        $param      =  $this->post();
+        $usuario    =  $this->empresamodel->get_usuario($param);
+        $msj        =  $this->mensajeria_lead->notifica_usuario_en_proceso_compra($usuario);
+        $this->response($msj);
+    }
+    function solicitud_pagina_web_POST(){
+
+        $param =  $this->post();
+        $response =  $this->empresamodel->get_usuario($param);
+        $msj_result =  $this->mensajeria_lead->notifica_usuario_pagina_web($response);
+        $this->mensajeria_lead->notifica_usuario_pagina_web_notificacion($response);
+        $this->response($msj_result);
     }
     function salir_GET(){
 
@@ -39,26 +114,6 @@ class Emp extends REST_Controller{
         }
         $this->response($response);
     }
-    private function cancelar_recordatorio_servicio($param){
-
-        $param["url_request"] = get_url_request("");
-        $param["in_session"]  = 0;
-        $uri_request          = "equipo/cancelar_envio_recordatorio";
-        $param["v"]           = rand();
-        $this->aplica_gamification_servicio($param);
-        $this->principal->api( $uri_request , $param, "json", "PUT");
-        $this->load->view("mensaje/evaluacion" , $param );
-    }
-    private function cancela_recordatorio($param){
-
-        $param["url_request"] = get_url_request("");
-        $param["in_session"]  = 0;
-        $uri_request          = "cobranza/cancelar_envio_recordatorio";
-        $param["v"]           = rand();
-        $this->principal->api( $uri_request, $param, "json", "PUT");
-        $this->aplica_gamification_servicio($param);
-        $this->load->view(  "mensaje/evaluacion" , $param );
-    }
     private function aplica_gamification_servicio($param){
 
         $url    =  "servicio/add_gamification_servicio/format/json/"; 
@@ -69,25 +124,6 @@ class Emp extends REST_Controller{
         $api    =  "notificacion_pago/resumen/format/json/"; 
         return $this->principal->api( $api , $q);
     }
-    function notifica_pago_POST(){
-
-        $param      =  $this->post();
-        $response   =  $this->get_notificacion_pago($param);                        
-        $msj_result =  $this->mensajeria_lead->notifica_registro_de_pago_efectuado($response);        
-        $msj_result2 = 
-        $this->mensajeria_lead->notifica_registro_de_pago_efectuado_cliente($response);     
-        $this->response($msj_result2);        
-    }
-    /**/
-    function solicitud_pagina_web_POST(){
-        
-        $param =  $this->post();
-        $response =  $this->empresamodel->get_usuario($param);                         
-        $msj_result =  $this->mensajeria_lead->notifica_usuario_pagina_web($response);
-        $this->mensajeria_lead->notifica_usuario_pagina_web_notificacion($response);
-        $this->response($msj_result);                            
-    }
-
     private function carga_mensaje_bienvenida_afiliado($param){
         $api =  "emp/mensaje_inicial_afiliado/format/html/"; 
         return $this->principal->api($api ,$param, "html");
@@ -97,33 +133,7 @@ class Emp extends REST_Controller{
         $param["info_persona"] =  $this->get();        
         $this->load->view("registro/mensaje_inicial_afiliado" , $param);
     }
-    function solicitud_usuario_POST(){
-
-        $param      =  $this->post();
-        $usuario    =  $this->empresamodel->get_usuario($param);
-        $msj        =  $this->mensajeria_lead->notifica_usuario_en_proceso_compra($usuario);
-        $this->response($msj);
-    }    
-
-    function contacto_POST(){
-        
-        $param                  =   $this->post();
-        $response               =   $this->insert_contacto($param);  
-        $param["url_registro"]  =   $_SERVER['HTTP_REFERER'];              
-        $ticket                 =   $this->abre_ticket($param);
-        $this->response($ticket);
-        $param["id_ticket"]     =   $ticket;        
-        $response               =   $this->agrega_tarea_ticket($param);
-    
-        if ($param["tipo"] ==  2 ){          
-            $email  =  "enidservice@gmail.com";
-            $info   =  $this->mensajeria->notifica_nuevo_contacto( $param ,  $email);
-            $info   =  $this->mensajeria->notifica_agradecimiento_contacto($param);
-        }        
-        $this->response($response);
-    }
-
-    function agrega_tarea_ticket($param){
+    private function agrega_tarea_ticket($param){
 
 
         $nombre     = $param["nombre"];
@@ -145,48 +155,31 @@ class Emp extends REST_Controller{
         return $param["id_ticket"];
         $this->principal->api("tarea/buzon", $data_send , "json" ,"POST");
 
-
     }   
     /*Se califica al cliente con base en su respuesta al cliente*/
-    function gamifica_usuarios_sin_contestar_cliente_GET(){        
-        /*solicito los servicio que no han dado respuesta al cliente*/                
-        $param      =  $this->get();
-        $api        =  "valoracion/servicios_pregunta_sin_contestar/format/json/";
-        $servicios  =  $this->principal->api( $api , $param);
+    private function cancelar_recordatorio_servicio($param){
 
-        if (count($servicios)>0) {
-            /**/
-            $data_complete  = [];
-            $a =0;
-            foreach ($servicios as $row) {
-                
-                $id_servicio                =  $row["id_servicio"];                
-                $id_pregunta                =  $row["id_pregunta"];                
-                $prm["servicio"]            =  $id_servicio;
-                $api                        =  "usuario/id_usuario_por_id_servicio/format/json/";
-                $usuario                    =  $this->principal->api( $api  , $prm  );
+        $param["url_request"] = get_url_request("");
+        $param["in_session"]  = 0;
+        $uri_request          = "equipo/cancelar_envio_recordatorio";
+        $param["v"]           = rand();
+        $this->aplica_gamification_servicio($param);
+        $this->principal->api( $uri_request , $param, "json", "PUT");
+        $this->load->view("mensaje/evaluacion" , $param );
+    }
+    private function cancela_recordatorio($param){
 
-                $id_usuario                 =   $usuario[0]["id_usuario"];
-                $data_complete[$a]["id"]    =   $id_usuario;
-                
-                $data_send["id"]            =   $id_usuario;
-                $data_send["type"]          =   4;
-                $data_complete[$a]["gamificacion"]  
-                =  
-                $this->aplica_gamification_servicio($data_send);
-                /*ahora actualizo la gamificacion en preguntas*/
-                
-                $prm["id_pregunta"]         =  $id_pregunta;
-                $api                        =  "valoracion/gamificacion_pregunta/format/json/";
-                $data_complete[$a]["nueva_gamificacion"]    =  
-                $this->principal->api( $api , $prm , "json" , "PUT");
-
-                $a ++;
-            }
-            $this->response($data_complete);
-
-        }    
-        $this->response("No hay usuarios a quienes gamificar");
+        $param["url_request"] = get_url_request("");
+        $param["in_session"]  = 0;
+        $uri_request          = "cobranza/cancelar_envio_recordatorio";
+        $param["v"]           = rand();
+        $this->principal->api( $uri_request, $param, "json", "PUT");
+        $this->aplica_gamification_servicio($param);
+        $this->load->view(  "mensaje/evaluacion" , $param );
+    }
+    private function salir_list_email($q){
+        $api = "prospecto/salir_list_email";
+        return $this->principal->api( $api , $q , "json" , "PUT");
     }
     /*
     function solicitud_sitio_web_POST(){

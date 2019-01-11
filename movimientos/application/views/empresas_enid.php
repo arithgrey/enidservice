@@ -3,5 +3,4 @@
         <?=$this->load->view("menu")?>
     </div>
     <?=div(place("place_movimientos"), ["class"	=>	'col-lg-9'])?>
-
 </div>

@@ -217,11 +217,6 @@ class Home extends CI_Controller{
         $api =  "imagen_servicio/servicio/format/json/";
         return $this->principal->api( $api , $q);
     }
-    /*
-    function logout(){                      
-        $this->principal->logout();      
-    }
-    */
     function set_mensaje_descripcion($mensaje_descripcion){
         $this->mensaje_descripcion= $mensaje_descripcion;
     }
@@ -248,13 +243,6 @@ class Home extends CI_Controller{
         $text=  strip_tags($nombre_servicio)." ".strip_tags($precio_unidad)." ".strip_tags($descripcion);
         $this->set_option( "desc_web" , $text);        
     }
-    /*
-    private function get_categorias_por_producto($id_clasificacion){        
-        $q["id_clasificacion"] =  $id_clasificacion;
-        $api                   = "clasificacion/clasificaciones_por_servicio/format/json/";
-        return $this->principal->api( $api , $q );
-    }
-    */
     private function get_vista_no_encontrado(){
         return "../../../view_tema/producto_no_encontrado";
     }

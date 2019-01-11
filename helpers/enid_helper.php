@@ -1205,3 +1205,6 @@ if (!function_exists('get_headers_e')) {
         return $headers;
     }
 }
+//https://www.codeigniter.com/user_guide/general/styleguide.html
+//https://www.codeigniter.com/user_guide/libraries/config.html
+//Poder modificar el punto de entrega desde el mondulo de pedidos

@@ -16,8 +16,7 @@ class Home extends CI_Controller{
         $data["clasificaciones_departamentos"]  =   $this->principal->get_departamentos();
         
         if ( get_param_def($param , "seguimiento") > 0 && ctype_digit($param["seguimiento"] ) ) {
-
-
+            
 
             $this->carga_vista_seguimiento($param , $data);
 
@@ -74,7 +73,7 @@ class Home extends CI_Controller{
     private  function load_detalle_pedido($param , $data){
 
         if (ctype_digit($param["recibo"])){
-            /*aquí*/
+
             $this->carga_detalle_pedido($param , $data);
 
         }else{

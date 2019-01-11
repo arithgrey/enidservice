@@ -5,11 +5,8 @@ class Pregunta extends REST_Controller{
         parent::__construct();                                                  
         $this->load->library("mensajeria_lead");        
         $this->load->library(lib_def());     
-    }        
-    /**/
-    function envia_email($param , $email_a_quien_se_envia){            
-        $this->mensajeria_lead->notificacion_email($param , $email_a_quien_se_envia);
     }
+
     function respuesta_vendedor_GET(){
 
 
@@ -50,6 +47,9 @@ class Pregunta extends REST_Controller{
         }
 
         $this->response($response);
+    }
+    private function envia_email($param , $email_a_quien_se_envia){
+        $this->mensajeria_lead->notificacion_email($param , $email_a_quien_se_envia);
     }
     private function crea_vista_notificacion_pregunta($q){
         $api    = "presentacion/notificacion_duda_vendedor/format/html/"; 
