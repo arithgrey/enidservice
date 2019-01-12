@@ -34,25 +34,15 @@ $config['cookie_prefix']	= '';
 $config['cookie_domain']	= '';
 $config['cookie_path']		= '/';
 
-$config['global_xss_filtering'] = FALSE;
-
 $config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 
 $config['compress_output'] = FALSE;
-/*
-|--------------------------------------------------------------------------
-| Master Time Reference
-|--------------------------------------------------------------------------
-|
-| Options are 'local' or 'gmt'.  This pref tells the system whether to use
-| your server's local time as the master 'now' reference, or convert it to
-| GMT.  See the 'date helper' page of the user guide for information
-| regarding date handling.
-|
-*/
+$config['global_xss_filtering'] = TRUE;
+
+
 $config['time_reference'] = 'America/Mexico_City';
 $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';

@@ -21,9 +21,7 @@
                             <?php if($error == 1): ?>
                                 <?=div(
                                     "SE PRESENTARON ERRORES AL ASOCIAR CUENTA, VERIFIQUE SU INFORMACIÓN ENVIADA",
-                                    ["style"=>"background: #004bff; color: white;padding: 5px;"]
-                                )?>
-                                
+                                    ["style"=>"background: #004bff; color: white;padding: 5px;"] )?>
                             <?php endif; ?>
                             <?=div(heading($nombre_persona , 4) , 
                                 ["style"    =>  "border-bottom-style: solid;border-width: 1px;"]
@@ -102,7 +100,6 @@
                     style="background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;">
                     
                     <?=heading("ASOCIAR CUENTA BANCARIA Ó TARJETA DE CRÉDITO O DÉBITO", 3)?>
-
                     <a href="?q=transfer&action=1&tarjeta=1" style="color:black;">
                         <?=div("Asociar  tarjeta de crédito o débito" , 
                             [
@@ -111,7 +108,6 @@
                                 "border-style: solid;border-width: .9px;padding: 10px;margin-top: 50px;"]
                         )?>
                     </a>
-
                     <a href="?q=transfer&action=1"  class="white" style="color: white!important">
                         <?=div("Asociar cuenta bancaria" ,
                         [

@@ -30,25 +30,6 @@ class Home extends CI_Controller{
             
         }    
     }
-    private function add_domicilio_entrega($param){
-
-        $data                   = $this->principal->val_session("");         
-        $data["meta_keywords"]  = '';
-        $data["desc_web"]       = "Registra tu cuenta  y recibe  asistencia al momento.";
-        $data["clasificaciones_departamentos"]  = "";        
-        
-        
-        $data["js"]     =  [
-            "domicilio/direccion_pedido_registrado.js" ,
-            "js/direccion.js"
-        ];
-
-        $data["css"]                            =   ["procesar_pago.css"];
-        $param["id_recibo"]                     =   $param["recibo"];
-        $param["id_usuario"]                    =   $this->principal->get_session("idusuario");
-        $data["carga_ficha_direccion_envio"]    =   $this->carga_ficha_direccion_envio($param);
-        $this->principal->show_data_page($data, 'secciones_2/domicilio_entrega');                          
-    }
     private function crea_orden_compra($param){
         
         $data                   = $this->principal->val_session("");         
@@ -81,6 +62,25 @@ class Home extends CI_Controller{
         $data["css"]    = array("procesar_pago.css"); 
         $this->principal->show_data_page($data, 'home');                          
         
+    }
+    private function add_domicilio_entrega($param){
+
+        $data                   = $this->principal->val_session("");
+        $data["meta_keywords"]  = '';
+        $data["desc_web"]       = "Registra tu cuenta  y recibe  asistencia al momento.";
+        $data["clasificaciones_departamentos"]  = "";
+
+
+        $data["js"]     =  [
+            "domicilio/direccion_pedido_registrado.js" ,
+            "js/direccion.js"
+        ];
+
+        $data["css"]                            =   ["procesar_pago.css"];
+        $param["id_recibo"]                     =   $param["recibo"];
+        $param["id_usuario"]                    =   $this->principal->get_session("idusuario");
+        $data["carga_ficha_direccion_envio"]    =   $this->carga_ficha_direccion_envio($param);
+        $this->principal->show_data_page($data, 'secciones_2/domicilio_entrega');
     }
     private function calcula_costo_envio($q){
         $api    = "cobranza/calcula_costo_envio/format/json/";

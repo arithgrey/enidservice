@@ -13,7 +13,8 @@
         }
         if($order !=  ''){
           $this->db->order_by($order, $type_order);  
-        }       
+        }
+        $this->db->cache_on();
         return $this->db->get("forma_pago")->result_array();
     }       
     
