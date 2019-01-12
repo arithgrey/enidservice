@@ -8,7 +8,15 @@
                     "href"        =>    "../pedidos",                     
                     "class"       =>    "black   dispositivos"
                 ]);?>                    
-            </li>                
+            </li>
+            <li>
+                <?=anchor_enid(icon("fa-shopping-bag")."COMPRAS" ,
+                    [
+                        "id"          =>    "btn_servicios",
+                        "href"        =>    "../compras",
+                        "class"       =>    "black   dispositivos"
+                    ]);?>
+            </li>
             <li class="active"> 
                 <?=anchor_enid(icon('fa fa-globe')."INDICADORES" , 
                 [
@@ -39,7 +47,7 @@
 
 
             <li>
-                <?=anchor_enid(icon("fa-shopping-bag")."ACTIVIDAD USUARIOS" ,  
+                <?=anchor_enid(icon("fa fa-user")."ACTIVIDAD USUARIOS" ,
                 [
                     "id"          =>    "btn_usuarios",
                     "href"        =>    "#tab_usuarios", 

@@ -4,6 +4,24 @@
         parent::__construct();        
         $this->load->database();
     }
+    function get_solicitudes_periodo_servicio($id_servicio){
+        $query_get =  "
+        SELECT 
+         id_servicio, 
+         count(0) solicitudes, 
+         date(fecha_contra_entrega)fecha_contra_entrega  
+         FROM proyecto_persona_forma_pago 
+         WHERE   
+            id_servicio = {$id_servicio}
+            AND
+            DATE(fecha_contra_entrega)
+            BETWEEN DATE_ADD(CURRENT_DATE() , INTERVAL - 1 MONTH ) 
+            AND  DATE(CURRENT_DATE())
+         GROUP BY date(fecha_contra_entrega)";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
     function set_status_orden($saldo_cubierto, $status, $id , $tipo_fecha){
         $query_update =  "UPDATE 
                             proyecto_persona_forma_pago 

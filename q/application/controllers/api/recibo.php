@@ -591,5 +591,14 @@ class recibo extends REST_Controller{
         $api    =  "status_enid_service/index/format/json/";
         return $this->principal->api( $api , $q );
     }
+    function solicitudes_periodo_servicio_GET(){
+        $param      = $this->get();
+        $response   = false;
+        if(if_ext($param , "id_servicio")){
+
+            $response =  $this->recibo_model->get_solicitudes_periodo_servicio($param["id_servicio"]);
+        }
+        $this->response($response);
+    }
 
 }
