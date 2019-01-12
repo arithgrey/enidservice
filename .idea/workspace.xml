@@ -7,37 +7,16 @@
   <component name="ChangeListManager">
     <list default="true" id="ffbfef24-1c57-4135-bcb0-af960c244fba" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact/application/views/preso_deseo_compra.php" beforeDir="false" afterPath="$PROJECT_DIR$/contact/application/views/preso_deseo_compra.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forma_pago/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/forma_pago/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forma_pago/application/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/forma_pago/application/views/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forma_pago/application/views/info_formas_pago.php" beforeDir="false" afterPath="$PROJECT_DIR$/forma_pago/application/views/info_formas_pago.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/enid_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/enid_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lista_deseos/application/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/lista_deseos/application/views/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lista_deseos/application/views/home_preferencias.php" beforeDir="false" afterPath="$PROJECT_DIR$/lista_deseos/application/views/home_preferencias.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lista_deseos/application/views/home_sin_productos.php" beforeDir="false" afterPath="$PROJECT_DIR$/lista_deseos/application/views/home_sin_productos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lista_deseos/application/views/secciones/home_sin_productos.php" beforeDir="false" afterPath="$PROJECT_DIR$/lista_deseos/application/views/secciones/home_sin_productos.php_" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movimientos/application/views/agregar_saldo.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/agregar_saldo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movimientos/application/views/agregar_saldo_desde_oxxo.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/agregar_saldo_desde_oxxo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movimientos/application/views/cuentas_asociadas.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/cuentas_asociadas.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movimientos/application/views/empresas_enid.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/empresas_enid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movimientos/application/views/metodos_disponibles.php" beforeDir="false" afterPath="$PROJECT_DIR$/movimientos/application/views/metodos_disponibles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/controllers/api/emp.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/controllers/api/emp.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/controllers/api/pregunta.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/controllers/api/pregunta.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/helpers/areaclienteshelp_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/helpers/areaclienteshelp_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/libraries/mensajeria.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/libraries/mensajeria.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orden_pago_oxxo/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/orden_pago_oxxo/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/procesar/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/procesar/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/producto/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/producto/application/helpers/producto_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/helpers/producto_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/producto/application/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/views/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/producto/application/views/pre.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/views/pre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/producto/application/views/social.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/views/social.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/libraries/mensajeria_lead.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/libraries/mensajeria_lead.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/models/valoracion_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/valoracion_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/index.html_" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/forma_pago_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/forma_pago_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/usuario_clasificacion_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/usuario_clasificacion_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/usuario_deseo_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/usuario_deseo_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/usuario_direccion_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/usuario_direccion_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/usuario_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/usuario_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/usuario_perfil_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/usuario_perfil_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/models/usuario_punto_encuentro_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/usuario_punto_encuentro_model.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recomendacion/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/recomendacion/application/controllers/home.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,42 +26,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="enid_helper.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/helpers/enid_helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="943">
-              <caret line="1209" column="65" selection-start-line="1209" selection-start-column="65" selection-end-line="1209" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion_cuenta/application/config/config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="38" lean-forward="true" selection-start-column="38" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>function salir_list_email</find>
-      <find>salir_list_email</find>
-      <find>cancelar_recordatorio_servicio</find>
-      <find>cancela_recordatorio</find>
       <find>agrega_tarea_ticket</find>
       <find>gamifica_usuarios_sin_contestar_cliente</find>
       <find>emp/contacto</find>
@@ -109,6 +56,10 @@
       <find>envia_correo_notificacion</find>
       <find>notifica_usuario_pagina_web</find>
       <find>global_xss_filtering</find>
+      <find>get_miembro</find>
+      <find>usuario_punto_encuentro_model-&gt;get_num</find>
+      <find>get_desglose_valoraciones_vendedor</find>
+      <find>get_limit</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -125,15 +76,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/q/application/models/actividad_web_model.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/blog.php" />
-        <option value="$PROJECT_DIR$/q/application/models/blog_model.php" />
-        <option value="$PROJECT_DIR$/q/application/models/categoria_model.php" />
-        <option value="$PROJECT_DIR$/q/application/models/clasificacion_model.php" />
-        <option value="$PROJECT_DIR$/q/application/models/comentario_model.php" />
-        <option value="$PROJECT_DIR$/q/application/models/desarrollomodel.php" />
-        <option value="$PROJECT_DIR$/q/application/models/email_model.php" />
-        <option value="$PROJECT_DIR$/q/application/models/faqsmodel.php" />
         <option value="$PROJECT_DIR$/q/application/models/imagen_servicio_model.php" />
         <option value="$PROJECT_DIR$/q/application/models/imagen_usuario_model.php" />
         <option value="$PROJECT_DIR$/q/application/models/img_model.php" />
@@ -173,9 +115,18 @@
         <option value="$PROJECT_DIR$/producto/application/views/pre.php" />
         <option value="$PROJECT_DIR$/producto/application/views/social.php" />
         <option value="$PROJECT_DIR$/q/application/libraries/mensajeria_lead.php" />
-        <option value="$PROJECT_DIR$/q/application/models/valoracion_model.php" />
-        <option value="$PROJECT_DIR$/helpers/enid_helper.php" />
         <option value="$PROJECT_DIR$/config/config.php" />
+        <option value="$PROJECT_DIR$/q/application/models/usuario_clasificacion_model.php" />
+        <option value="$PROJECT_DIR$/q/application/models/usuario_deseo_model.php" />
+        <option value="$PROJECT_DIR$/q/application/models/usuario_direccion_model.php" />
+        <option value="$PROJECT_DIR$/q/application/models/usuario_model.php" />
+        <option value="$PROJECT_DIR$/q/application/models/usuario_perfil_model.php" />
+        <option value="$PROJECT_DIR$/q/application/models/usuario_punto_encuentro_model.php" />
+        <option value="$PROJECT_DIR$/q/application/models/valoracion_model.php" />
+        <option value="$PROJECT_DIR$/recomendacion/application/controllers/home.php" />
+        <option value="$PROJECT_DIR$/search/application/controllers/home.php" />
+        <option value="$PROJECT_DIR$/helpers/enid_helper.php" />
+        <option value="$PROJECT_DIR$/q/application/models/forma_pago_model.php" />
       </list>
     </option>
   </component>
@@ -208,7 +159,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -219,83 +169,6 @@
             <path>
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="msj" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="msj" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="msj" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="helpers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="msj" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="libraries" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="msj" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="msj" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="registro" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="msj" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="ventas" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="orden_pago_oxxo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="orden_pago_oxxo" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="orden_pago_oxxo" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="pdf" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="pdf" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="pedidos" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -418,13 +291,6 @@
             <path>
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="q" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="recomendacion" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -439,11 +305,48 @@
               <item name="recomendacion" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="reporte_enid" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="reporte_enid" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -499,12 +402,13 @@
       <workItem from="1547133940530" duration="221000" />
       <workItem from="1547139153918" duration="1972000" />
       <workItem from="1547148499893" duration="1141000" />
-      <workItem from="1547156312837" duration="5591000" />
+      <workItem from="1547156312837" duration="6975000" />
+      <workItem from="1547228540344" duration="1786000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="162337000" />
+    <option name="totallyTimeSpent" value="165507000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -517,7 +421,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="973" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32942554" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -525,7 +428,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32942554" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49875313" weight="0.17252396" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49875313" visible="true" weight="0.17412141" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" weight="0.15357561" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.2954279" />
@@ -564,62 +467,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/desarrollo/application/controllers/inicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-394" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/desarrollo/application/views/empresas_enid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forma_pago/application/controllers/home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forma_pago/application/views/home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" column="7" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/forma_pago/application/views/info_formas_pago.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movimientos/application/views/metodos_transferencia.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-474" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movimientos/application/views/pagar_con_saldo_enid.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movimientos/application/views/sub_menu.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movimientos/application/views/solicitar_a_un_amigo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-274" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/msj/application/controllers/api/emp.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1579">
-          <caret line="63" column="9" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/msj/application/controllers/api/mailrest.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -784,11 +631,6 @@
     <entry file="file://$PROJECT_DIR$/planes_servicios/application/helpers/planes_helper.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/procesar/application/helpers/procesar_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1194" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/producto/application/helpers/producto_helper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6969">
@@ -821,28 +663,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
           <caret line="42" column="44" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
-          <folding>
-            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/models/valoracion_model.php">
+    <entry file="file://$PROJECT_DIR$/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-958">
-          <caret line="145" lean-forward="true" selection-start-line="133" selection-start-column="11" selection-end-line="145" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recomendacion/application/controllers/home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-422" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/helpers/enid_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="943">
-          <caret line="1209" column="65" selection-start-line="1209" selection-start-column="65" selection-end-line="1209" selection-end-column="65" />
+        <state relative-caret-position="880">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
         </state>
       </provider>
     </entry>
@@ -853,10 +680,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.php">
+    <entry file="file://$PROJECT_DIR$/q/application/models/usuario_clasificacion_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+        <state relative-caret-position="590">
+          <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/usuario_deseo_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/usuario_direccion_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-394">
+          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/usuario_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8729">
+          <caret line="587" column="8" selection-start-line="587" selection-start-column="8" selection-end-line="587" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/usuario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15565">
+          <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/usuario_perfil_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/usuario_punto_encuentro_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="31" column="24" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/valoracion_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4320">
+          <caret line="216" column="34" selection-start-line="216" selection-start-column="25" selection-end-line="216" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recomendacion/application/controllers/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="90" column="9" selection-start-line="90" selection-start-column="9" selection-end-line="90" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/procesar/application/helpers/procesar_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-804" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/application/controllers/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2339" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/application/helpers/search_helper.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/enid_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="766">
+          <caret line="1228" column="66" selection-start-line="1228" selection-start-column="66" selection-end-line="1228" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/forma_pago_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
         </state>
       </provider>
     </entry>

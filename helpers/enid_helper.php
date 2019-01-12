@@ -1208,3 +1208,23 @@ if (!function_exists('get_headers_e')) {
 //https://www.codeigniter.com/user_guide/general/styleguide.html
 //https://www.codeigniter.com/user_guide/libraries/config.html
 //Poder modificar el punto de entrega desde el mondulo de pedidos
+//https://www.codeigniter.com/user_guide/libraries/email.html
+/*$this->load->add_package_path(APPPATH.'third_party/foo_bar/')
+        ->library('foo_bar');
+
+
+
+
+https://www.codeigniter.com/user_guide/libraries/output.html
+$this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode(array('foo' => 'bar')));
+
+$this->output
+        ->set_content_type('jpeg') // You could also use ".jpeg" which will have the full stop removed before looking in config/mimes.php
+        ->set_output(file_get_contents('files/something.jpg'));
+
+
+
+https://www.codeigniter.com/user_guide/database/configuration.html
+ * */
