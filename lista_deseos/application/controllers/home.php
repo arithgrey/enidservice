@@ -3,6 +3,7 @@ class Home extends CI_Controller{
     function __construct(){        
         parent::__construct();                            
         $this->load->library(lib_def());
+        $this->load->helper("deseos");
         $this->principal->acceso();           
     }       
     function index(){        

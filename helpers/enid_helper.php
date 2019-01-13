@@ -656,7 +656,8 @@ if ( ! function_exists('now_enid')){
   function now_enid(){
       return  date('Y-m-d');
   }
-}  
+}
+
 if ( ! function_exists('porcentaje')){
   function porcentaje($cantidad,$porciento,$decimales=2 , $numeric_format = 1) {
     if(is_numeric($cantidad) ==  is_numeric($porciento)) {
@@ -670,6 +671,14 @@ if ( ! function_exists('porcentaje')){
 
     }
   }
+}
+if ( ! function_exists('porcentaje_total')){
+    function porcentaje_total($cantidad,$total,$decimales=2 ) {
+
+            $total = $cantidad*100/$total;
+            return $total;
+
+    }
 }
 if ( ! function_exists('get_info_usuario_valor_variable')){
   function get_info_usuario_valor_variable($q2 , $campo ){
@@ -1204,7 +1213,16 @@ if (!function_exists('get_headers_e')) {
         $headers    .= "From: Enid Service <arithgrey@enidservice.com>\r\n";
         return $headers;
     }
+
 }
+if (!function_exists('get_url_servicio')) {
+    function get_url_servicio($id_servicio){
+
+        return  "../producto/?producto=".$id_servicio;
+
+    }
+}
+
 //https://www.codeigniter.com/user_guide/general/styleguide.html
 //https://www.codeigniter.com/user_guide/libraries/config.html
 //Poder modificar el punto de entrega desde el mondulo de pedidos

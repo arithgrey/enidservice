@@ -592,13 +592,58 @@ class recibo extends REST_Controller{
         return $this->principal->api( $api , $q );
     }
     function solicitudes_periodo_servicio_GET(){
+
         $param      = $this->get();
         $response   = false;
-        if(if_ext($param , "id_servicio")){
+        if(if_ext($param , "id_servicio,tipo")){
 
-            $response =  $this->recibo_model->get_solicitudes_periodo_servicio($param["id_servicio"]);
+            $interval =  "";
+            switch ($param["tipo"]) {
+                case 1;
+
+                    $interval = " - 1 MONTH ";
+
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+
+                case 3:
+                    $interval = " - 3 MONTH ";
+
+                    break;
+
+                case 6:
+                    $interval = " - 6 MONTH ";
+
+                    break;
+
+                case 12;
+
+                    $interval = " - 1 YEAR ";
+
+                    break;
+            }
+
+            $response["solicitudes"]    =  $this->recibo_model->get_solicitudes_periodo_servicio($param["id_servicio"] , $interval);
+            $response["entregas"]       =  $this->recibo_model->get_solicitudes_entregadas_periodo_servicio($param["id_servicio"] , $interval);
         }
         $this->response($response);
+    }
+    function compras_por_enviar_GET(){
+
+        $param      = $this->get();
+        $response   = false;
+        $this->response($this->recibo_model->get_compras_por_enviar());
+
+    }
+    private function set_stock_servicio($q){
+
+        $api =  "servicio/stock";
+        return  $this->principal->api( $api , $q , "json" , "PUT");
     }
 
 }
