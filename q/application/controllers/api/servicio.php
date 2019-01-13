@@ -33,6 +33,31 @@ class Servicio extends REST_Controller{
 
     $this->response($this->serviciosmodel->get_clasificaciones_destacadas());
   }
+  function stock_GET(){
+
+      $param =  $this->get();
+      if(if_ext($param , "id_servicio")){
+          $id_servicio  =   $param["id_servicio"];
+          $response     =   $this->serviciosmodel->q_get(["stock"] , $id_servicio)[0]["stock"];
+      }
+      $this->response($response);
+  }
+  function stock_PUT(){
+
+        $param =  $this->put();
+        if(if_ext($param , "id_servicio,stock")){
+            $id_servicio  =   $param["id_servicio"];
+            if(get_param_def($param , "compra") > 0){
+
+                $response     =   $this->serviciosmodel->set_compra_stock($param["stock"] , $id_servicio);
+
+            }else{
+                $response     =   $this->serviciosmodel->q_up("stock" , $param["stock"] , $id_servicio);
+            }
+
+        }
+        $this->response($response);
+  }
   function nombre_servicio_GET(){
 
     $param      =   $this->get();
@@ -65,8 +90,8 @@ class Servicio extends REST_Controller{
       $param        = $this->get();
       $response     = false;
       if (if_ext($param , "id_servicio")) {
-          $id_servicio = $param["id_servicio"];
-          $response = $this->serviciosmodel->get_clasificaciones_por_id_servicio($id_servicio);
+          $id_servicio  = $param["id_servicio"];
+          $response     = $this->serviciosmodel->get_clasificaciones_por_id_servicio($id_servicio);
       }
       $this->response($response);
   }
@@ -361,11 +386,10 @@ class Servicio extends REST_Controller{
 
       if (if_ext($param , "id_servicio")){
 
-          $this->set_option("id_servicio" ,  $param["id_servicio"]);
-          $id_servicio              =       $this->get_option("id_servicio");
-          $servicio                 =
-              $this->serviciosmodel->get([] , ["id_servicio" =>  $param["id_servicio"] ]);
-          $data["servicio"]         =    $servicio;
+          $this->set_option("id_servicio" ,     $param["id_servicio"]);
+          $id_servicio              =           $this->get_option("id_servicio");
+          $servicio                 =           $this->serviciosmodel->get([] , ["id_servicio" =>  $param["id_servicio"] ]);
+          $data["servicio"]         =           $servicio;
           $this->set_option("servicio" , $servicio);
           if($servicio[0]["flag_servicio"] ==  0){
               $this->crea_data_costo_envio();

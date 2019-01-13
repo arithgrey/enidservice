@@ -417,17 +417,18 @@ if(!function_exists('invierte_date_time')){
           }
       	}
   	}
-  	function get_rango_entrega($id_perfil, $actual, $attributes=''){
+
+  	function get_rango_entrega($id_perfil, $actual, $attributes='' , $titulo , $minimo = 1 , $maximo = 10){
 
   		
   		$select 		=  "";
   		if ($id_perfil ==  3) {
 
   			$att 		= 	add_attributes($attributes);
-  			$titulo    	=  	heading_enid("DÍAS PROMEDIO DE ENTREGA" , 4);  			
+  			$titulo    	=  	heading_enid($titulo , 4);
 	  		$select  	.= 	"<select ".$att.">";
 
-	  		for ($a=1; $a < 10 ; $a++) { 
+	  		for ($a = $minimo; $a < $maximo ; $a++) {
 	  			if ($a ==  $actual) {
 	  				$select  	.= "<option value='".$a."' selected>".$a."</option>";
 	  			}else{

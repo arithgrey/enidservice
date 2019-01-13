@@ -135,7 +135,7 @@ var guarda_nuevo_estado = function(){
 }
 var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 
-
+	debugger;
 	var saldo_cubierto  =  get_parameter(".saldo_actual_cubierto");
 
 	if (es_proceso_compra_sin_filtro == 0) {
@@ -155,9 +155,8 @@ var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 }
 var registra_saldo_cubierto = function(e){
 
-
-
 	if (is_num =  valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" ) == 1) {
+
 		var data_send	=  $(".form_cantidad").serialize();
 		$(".mensaje_saldo_cubierto").empty();
 		var  url 		= "../q/index.php/api/recibo/saldo_cubierto/format/json/";
@@ -168,11 +167,18 @@ var registra_saldo_cubierto = function(e){
 	e.preventDefault();
 }
 var response_saldo_cubierto = function(data){
-	
+
+	debugger;
 	if (data ==  true) {
-		
-		var url = "../pedidos/?recibo="+get_parameter(".recibo");
-		redirect(url);
+
+		var status_venta 	= 	get_valor_selected(".status_venta");
+		//alert(status_venta);
+		if(status_venta == 6 || status_venta == 9 ){
+			next_status();
+		}else{
+			show_confirm("¿QUIERES DESCONTAR LOS ARTICULOS DEL STOCK?" ,  "" , 0 , descontar_articulos_stock, next_status );
+		}
+
 
 	}else{
 
@@ -181,14 +187,31 @@ var response_saldo_cubierto = function(data){
 		llenaelementoHTML(".mensaje_saldo_cubierto", data);
 	}	
 }
+var next_status = function(){
+
+	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+	redirect(url);
+}
+var descontar_articulos_stock =  function(){
+
+	var id_servicio = 	 	get_parameter(".id_servicio");
+	var stock 		= 	 	get_parameter(".articulos");
+	var data_send 	=		$.param({"id_servicio" : id_servicio,  "stock" : stock , "compra" : 1});
+	var  url 		= 		"../q/index.php/api/servicio/stock/format/json/";
+	request_enid( "PUT",  data_send, url, response_articulos_stock);
+
+}
+var response_articulos_stock = function(data){
+	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+	redirect(url);
+}
 var response_status_venta = function(data){
 
 
 	desbloqueda_form(".selector_estados_ventas");
-	if (data ==  true) {		
+	if (data ==  true) {
 
-		var url = "../pedidos/?recibo="+get_parameter(".recibo");
-		redirect(url);
+		show_confirm("¿QUIERES DESCONTAR LOS ARTICULOS DEL STOCK?" ,  "" , 0 , descontar_articulos_stock, next_status );
 
 	}else{
 		
@@ -387,10 +410,14 @@ var registrar_nota = function(e){
 	var comentario 	=  	get_parameter(".comentarios");
 	var texto  		= 	comentario.trim().length;
 	if( texto > 10 ){
+
 		var data_send 	=  $(".form_notas").serialize();
 		request_enid( "POST",  data_send, url, response_registro_nota , ".place_nota");
+
 	}else{
+
 		format_error( ".place_nota", "comentario muy corto");
+
 	}
 
 	e.preventDefault();

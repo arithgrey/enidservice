@@ -173,3 +173,15 @@
 		"name" 	=> "tipo_entrega",
 		"value"	=> $recibo[0]["tipo_entrega"]
 ])?>
+<?=input_hidden(
+    [
+        "class" => "id_servicio" ,
+        "name" 	=> "id_servicio",
+        "value"	=> $recibo[0]["id_servicio"]
+])?>
+<?=input_hidden(
+    [
+        "class" => "articulos" ,
+        "name" 	=> "articulos",
+        "value"	=> $recibo[0]["num_ciclos_contratados"]
+])?>

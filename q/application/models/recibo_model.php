@@ -4,33 +4,73 @@
         parent::__construct();        
         $this->load->database();
     }
-    function get_solicitudes_periodo_servicio($id_servicio){
+
+
+      function get_compras_por_enviar(){
+
+          $query_get =  "SELECT tipo_entrega, id_servicio, SUM(num_ciclos_contratados)ventas_pagas_sin_envio FROM proyecto_persona_forma_pago
+                        WHERE
+                        DATE(fecha_registro )
+                        BETWEEN DATE_ADD(CURRENT_DATE() , INTERVAL - 1 DAY )
+                        AND  DATE_ADD(CURRENT_DATE() , INTERVAL 1 DAY )
+                        AND  saldo_cubierto > 0 and status in( 1 , 11 )
+                        group by id_servicio , tipo_entrega";
+
+          return $this->db->query($query_get)->result_array();
+
+      }
+    function get_solicitudes_periodo_servicio($id_servicio , $interval){
+
         $query_get =  "
-        SELECT 
-         id_servicio, 
-         count(0) solicitudes, 
-         date(fecha_contra_entrega)fecha_contra_entrega  
-         FROM proyecto_persona_forma_pago 
-         WHERE   
-            id_servicio = {$id_servicio}
-            AND
-            DATE(fecha_contra_entrega)
-            BETWEEN DATE_ADD(CURRENT_DATE() , INTERVAL - 1 MONTH ) 
-            AND  DATE(CURRENT_DATE())
-         GROUP BY date(fecha_contra_entrega)";
+            SELECT 
+             id_servicio, 
+             count(0) solicitudes, 
+             date(fecha_contra_entrega)fecha_contra_entrega  
+             FROM proyecto_persona_forma_pago 
+             WHERE   
+                id_servicio = {$id_servicio}
+                AND
+                DATE(fecha_contra_entrega)
+                BETWEEN DATE_ADD(CURRENT_DATE() , INTERVAL ".$interval." ) 
+                AND  DATE(CURRENT_DATE())
+                AND tipo_entrega =  1
+             GROUP BY date(fecha_contra_entrega)";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+    function get_solicitudes_entregadas_periodo_servicio($id_servicio , $interval){
+
+        $query_get =  "SELECT 
+                    id_servicio, 
+                    count(0) solicitudes, 
+                    date(fecha_entrega)fecha_entrega  
+                    FROM proyecto_persona_forma_pago 
+                    WHERE   
+                    id_servicio = {$id_servicio}
+                    AND
+                    DATE(fecha_entrega)
+                    BETWEEN DATE_ADD(CURRENT_DATE() , INTERVAL ".$interval." ) 
+                    AND  
+                    DATE(CURRENT_DATE())
+                    AND tipo_entrega =  1
+                    AND status = 9
+                    GROUP BY date(fecha_entrega)";
 
         return $this->db->query($query_get)->result_array();
 
     }
     function set_status_orden($saldo_cubierto, $status, $id , $tipo_fecha){
+
         $query_update =  "UPDATE 
                             proyecto_persona_forma_pago 
                           SET 
                             saldo_cubierto  =  {$saldo_cubierto} , 
                             status          =  {$status} ,
-                            {$tipo_fecha}   =   CURRENT_TIMESTAMP()  
-                            
-                          WHERE id_proyecto_persona_forma_pago =  {$id} LIMIT 1";
+                            {$tipo_fecha}   =   CURRENT_TIMESTAMP()                            
+                          WHERE 
+                            id_proyecto_persona_forma_pago =  {$id} 
+                          LIMIT 1";
         return $this->db->query($query_update);
     }
     function get_q($params ,$param){

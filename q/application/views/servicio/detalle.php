@@ -21,6 +21,7 @@
     $venta_mayoreo              =   0;
     $url_ml                     =   "";
     $link_dropshipping          =   "";
+    $stock                      =   0;
     foreach ($servicio  as $row){
         
         $id_servicio                =   $row["id_servicio"];
@@ -44,6 +45,7 @@
         $tiempo_promedio_entrega    =   $row["tiempo_promedio_entrega"];
         $url_ml                     =   $row["url_ml"];
         $link_dropshipping          =   $row["link_dropshipping"];
+        $stock                      =   $row["stock"];
     }
 
     $url_web_servicio = $url_request."producto/?producto=".$id_servicio;    
@@ -63,13 +65,11 @@
 
     }
     
-    $param["precio"]        =  $precio;
-    $ganancias_afiliados    =  0; 
-    $ganancias_vendedores   = 0; 
-
-    /***/
-    $text_meses ="No aplica";
-    $text_num_mensualidades =  "No aplica";
+    $param["precio"]        =   $precio;
+    $ganancias_afiliados    =   0;
+    $ganancias_vendedores   =   0;
+    $text_meses             =   "No aplica";
+    $text_num_mensualidades =   "No aplica";
 
     $costo_envio_cliente                = 
     ($flag_servicio == 0 )?$costo_envio["costo_envio_cliente"]:0;        
@@ -146,7 +146,7 @@
 
     $info_nueva_descripcion      =  
     div($nueva_descripcion , ["class" => "text_desc_servicio contenedor_descripcion"],1);
-    /**inputs**/
+
     /*NOMBRE*/
     $i_nombre = input_hidden([        
         "name"  =>  "q" , 
@@ -195,11 +195,12 @@
     $icantidad       =  icon('fa fa-pencil text_cantidad');
     $metatags_format =  create_meta_tags($metakeyword_usuario , $id_servicio);
 
-
     $i_tags =  input([
         "type" => "hidden" , 
-        "name"  => "id_servicio" , 
-        "value" => $id_servicio]);
+        "name"  => "id_servicio" ,
+        "class" => "id_servicio",
+        "value" => $id_servicio
+    ]);
 
     $i_tag_usuario =  input([  
         "type"          =>"text" ,
@@ -210,7 +211,7 @@
         "class"         =>
         "input-md metakeyword_usuario"]);
 
-    /*BUTTONS*/
+
     $btn_confirm_entrega_casa =  
         anchor_enid(
         "SI" , 
@@ -340,9 +341,23 @@
                 $tiempo_promedio_entrega, 
                 [   "name"=>"tiempo_entrega" , 
                     "class"=> "tiempo_entrega form-control"
-                ])?>
+                ],
+                "DÍAS PROMEDIO DE ENTREGA")?>
             <form action="../q/index.php/api/servicio/dropshiping/format/json/" class="form_dropshipping">
                 <?=get_link_dropshipping($id_perfil , $id_servicio , $link_dropshipping)?>
+            </form>
+
+            <form action="../q/index.php/api/servicio/stock/format/json/" class="form_stock">
+
+                <?=get_rango_entrega(
+                    $id_perfil,
+                    $stock,
+                    [   "name"  =>  "stock" ,
+                        "class" =>  "stock form-control"
+                    ],
+                    "ARTICULOS EN STOCK", 0 , 100)?>
+
+
             </form>
 
             <?=heading_enid($titulo_compra_en_casa,4);?>
