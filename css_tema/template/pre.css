@@ -1,6 +1,7 @@
 .titulo_preferencia {
     font-size: 2.6em;
 }
+
 .base_compras, .base_paginas_extra, .info_metodos_pago {
     display: none;
 }
@@ -30,12 +31,24 @@
     -o-transition: all 1s ease-out;
     transition: all 1s ease-out;
 }
+
 .box-part .fa {
     color: black;
 }
-.contenedor_opcion{
 
+.contenedor_opcion {
     border-bottom: 10px solid #00385D;
     border-radius: 6px;
+}
 
+.contenedor_opcion:hover {
+    border-bottom: 10px solid blue;
+    border-radius: 6px;
+}
+
+.icono_metro {
+    width: 40px !important;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1, 100);
+    background-attachment: fixed;
 }

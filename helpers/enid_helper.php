@@ -1243,6 +1243,5 @@ $this->output
         ->set_output(file_get_contents('files/something.jpg'));
 
 
-
 https://www.codeigniter.com/user_guide/database/configuration.html
  * */

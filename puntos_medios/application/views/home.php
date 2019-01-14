@@ -4,7 +4,7 @@
 		<?=heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO" , 2 ,[ "class" => "strong titulo_punto_encuentro" ])?>		
 		<?=create_select($tipos_puntos_encuentro , 
 		"tipos_puntos_encuentro" , 
-		"tipos_puntos_encuentro" , 
+		"tipos_puntos_encuentro hide" ,
 		"tipos_puntos_encuentro" , 
 		"tipo" ,
 		"id" 

@@ -1330,11 +1330,10 @@ var set_cantidad_en_stock = function(){
 
     var stock       = get_parameter(".stock");
     var id_servicio = get_parameter(".id_servicio");
-    alert(id_servicio);
-
     var data_send   = $.param({"stock":  stock , "id_servicio" : id_servicio });
     var url         = $(".form_stock").attr("action");
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
     });
+
 }

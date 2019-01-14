@@ -60,6 +60,20 @@
         return $this->db->query($query_get)->result_array();
 
     }
+    function cancela_orden($saldo_cubierto, $status, $id , $tipo_fecha){
+
+          $query_update =  "UPDATE 
+                            proyecto_persona_forma_pago 
+                          SET 
+                            saldo_cubierto  =  {$saldo_cubierto} , 
+                            status          =  {$status} ,
+                            {$tipo_fecha}   =   CURRENT_TIMESTAMP(),
+                            se_cancela      =  1                  
+                          WHERE 
+                            id_proyecto_persona_forma_pago =  {$id} 
+                          LIMIT 1";
+          return $this->db->query($query_update);
+    }
     function set_status_orden($saldo_cubierto, $status, $id , $tipo_fecha){
 
         $query_update =  "UPDATE 
@@ -72,6 +86,20 @@
                             id_proyecto_persona_forma_pago =  {$id} 
                           LIMIT 1";
         return $this->db->query($query_update);
+    }
+    function notifica_entrega($saldo_cubierto, $status, $id , $tipo_fecha){
+
+          $query_update =  "UPDATE 
+                            proyecto_persona_forma_pago 
+                          SET 
+                            saldo_cubierto  =  {$saldo_cubierto} , 
+                            status          =  {$status} ,
+                            {$tipo_fecha}   =   CURRENT_TIMESTAMP()   ,
+                            entregado       =   1                         
+                          WHERE 
+                            id_proyecto_persona_forma_pago =  {$id} 
+                          LIMIT 1";
+          return $this->db->query($query_update);
     }
     function get_q($params ,$param){
 
@@ -118,21 +146,20 @@
         $ops_tipo_orden   =  ["", "fecha_registro" , "fecha_entrega" , "fecha_cancelacion", "fecha_pago", "fecha_contra_entrega"];
         $tipo_entrega     =  $param["tipo_entrega"];
 
-        $extra            =  " AND DATE(p.".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."'";
+        $extra            =  " AND DATE(p.".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."' ";
         switch ($tipo_orden) {
             case 0:
 
                 break;
             case 1:
-
-
+                $extra            =  " AND DATE(p.".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND DATE_ADD('".$fecha_termino."' ,  INTERVAL 1 DAY)  ";
 
                 break;
             case 2:
-
+                $extra            =  " AND DATE(p.".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND DATE_ADD('".$fecha_termino."' ,  INTERVAL 1 DAY)  AND entregado = 1 ";
                 break;
             case 3:
-
+                $extra            =  " AND DATE(p.".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND DATE_ADD('".$fecha_termino."' ,  INTERVAL 1 DAY)  AND (se_cancela =  1 OR cancela_cliente = 1) ";
                 break;
             case 4:
                 $extra            =  " AND DATE(p.".$ops_tipo_orden[$tipo_orden].") BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."' AND p.status = 1 ";
