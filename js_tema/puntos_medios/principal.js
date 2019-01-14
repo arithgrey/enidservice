@@ -1,12 +1,13 @@
 $(document).ready(function(){
-	$(".tipos_puntos_encuentro").change(iniciar_proceso_entrega);
+	//$(".tipos_puntos_encuentro").change(iniciar_proceso_entrega);
+	muestra_lineas_metro(1);
 	$('.datetimepicker5').datepicker();						 
 	$(".form_punto_encuentro").submit(registra_usuario);
 	$(".form_punto_encuentro_horario").submit(notifica_punto_entrega);	
 	$(".link_acceso").click(set_link);
 	$(".telefono").keyup(quita_espacios_en_telefono);
 });
-
+/*
 var iniciar_proceso_entrega = function(){
 
 	var opcion  =  parseInt(get_valor_selected(".tipos_puntos_encuentro"));	
@@ -32,7 +33,7 @@ var iniciar_proceso_entrega = function(){
 	} 
 
 };
-/**/
+*/
 var muestra_lineas_metro = function(tipo){
 	
 	var url  	   	= "../q/index.php/api/linea_metro/index/format/json/";	

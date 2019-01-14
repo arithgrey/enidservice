@@ -1335,5 +1335,5 @@ var set_cantidad_en_stock = function(){
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
     });
-    
+
 }

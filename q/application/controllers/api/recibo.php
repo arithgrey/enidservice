@@ -499,7 +499,10 @@ class recibo extends REST_Controller{
 
         if ($param["saldo_cubierto"] > 0 && $param["saldo_cubierto"] >= $pago_pendiente || ( $pago_pendiente - $param["saldo_cubierto"] ) < 101){
 
-            $response =  $this->recibo_model->set_status_orden($param["saldo_cubierto"] , $param["status"] , $param["recibo"] , 'fecha_entrega');
+
+                $response =  $this->recibo_model->notifica_entrega($param["saldo_cubierto"] , $param["status"] , $param["recibo"] , 'fecha_entrega');
+
+
         }
         return $response;
     }
@@ -509,7 +512,7 @@ class recibo extends REST_Controller{
         
         if (if_ext($param , "status,tipificacion,recibo")) {
 
-            $response =  $this->recibo_model->set_status_orden( 0 , $param["status"] , $param["recibo"] , 'fecha_cancelacion');
+            $response =  $this->recibo_model->cancela_orden( 0 , $param["status"] , $param["recibo"] , 'fecha_cancelacion');
             if ($response ==  true) {
                 $response   =  $this->add_tipificacion($param);
             }
