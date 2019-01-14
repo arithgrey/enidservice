@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a3bc9853-1196-4a24-abd8-2fc7fc89d465" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/js_tema/planes_servicios/principal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/planes_servicios/principal.js" afterDir="false" />
-    </list>
+    <list default="true" id="a3bc9853-1196-4a24-abd8-2fc7fc89d465" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,12 +213,12 @@
       <option name="presentableId" value="Default" />
       <updated>1547380700884</updated>
       <workItem from="1547380711887" duration="7681000" />
-      <workItem from="1547429349139" duration="836000" />
+      <workItem from="1547429349139" duration="1441000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8517000" />
+    <option name="totallyTimeSpent" value="9122000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
