@@ -42,8 +42,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js_tema/planes_servicios/principal.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="1331" column="52" selection-start-line="1331" selection-start-column="52" selection-end-line="1331" selection-end-column="52" />
+            <state relative-caret-position="435">
+              <caret line="1337" column="4" selection-start-line="1337" selection-start-column="4" selection-end-line="1337" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -215,12 +215,12 @@
       <option name="presentableId" value="Default" />
       <updated>1547380700884</updated>
       <workItem from="1547380711887" duration="7681000" />
-      <workItem from="1547429349139" duration="1753000" />
+      <workItem from="1547429349139" duration="1871000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9434000" />
+    <option name="totallyTimeSpent" value="9552000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
@@ -374,8 +374,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js_tema/planes_servicios/principal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="1331" column="52" selection-start-line="1331" selection-start-column="52" selection-end-line="1331" selection-end-column="52" />
+        <state relative-caret-position="435">
+          <caret line="1337" column="4" selection-start-line="1337" selection-start-column="4" selection-end-line="1337" selection-end-column="4" />
         </state>
       </provider>
     </entry>
