@@ -323,6 +323,9 @@ function response_actualiza_tareas(data){
 		carga_info_detalle_ticket();					
 	}	
 }
+var show_section_dinamic_button = function(seccion) {
+    var x = ($(seccion).is(":visible")) ? $(seccion).hide() : $(seccion).show();
+}
 var agregar_tarea = function(){
 
 	show_section_dinamic_button(".seccion_nueva_tarea");

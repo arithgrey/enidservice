@@ -123,7 +123,7 @@ function registra_img_faq(e){
         /**/
                
         $(".place_load_img_faq").html(data);
-        muestra_alert_segundos(".place_load_img_faq");         
+        //muestra_alert_segundos(".place_load_img_faq");
         $("#lista_imagenes_faq").html("");  
         
         new_url = "../faq/?faq="+get_option("faq");				
