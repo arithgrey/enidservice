@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function(){
 	display_elements([".selector_estados_ventas" , ".form_cantidad", ".form_cantidad_post_venta"] , 0);
 	$('.datetimepicker4').datepicker();

@@ -1,4 +1,5 @@
-var editar_respuesta = 0; 
+"use strict";
+var editar_respuesta = 0;
 var faq = 0; 
 $(document).ready(function(){	
 	$("footer").ready(function() {

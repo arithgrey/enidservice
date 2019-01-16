@@ -17,7 +17,7 @@ $("footer").ready(function () {
     });
     */
 
-    $(".form_enid_contacto").submit(registra_lead);
+    //$(".form_enid_contacto").submit(registra_lead);
     $(".menu_notificaciones_progreso_dia").click(metricas_perfil);
     metricas_perfil();
     set_titulo_web(get_parameter(".titulo_web"));
@@ -97,24 +97,6 @@ var valida_text_form = function (input, place_msj, len, nom) {
     }
     return flag;
 }
-var valida_num_form = function (input, place_msj) {
-
-    $(place_msj).show();
-    var valor_registrado = get_parameter(input);
-    var mensaje_user = "";
-    var f = 1;
-    $(place_msj).empty();
-    if (isNaN(valor_registrado)) {
-        mensaje_user = "Registre sólo números ";
-        f = 0;
-    }
-    /*Lanzamos mensaje y si es necesario mostramos border*/
-    if (f == 0) {
-        $(input).css("border", "1px solid rgb(13, 62, 86)");
-    }
-    format_error(place_msj, mensaje_user);
-    return f;
-}
 var format_error = function (place_msj, msj) {
 
     llenaelementoHTML(place_msj, "<div class='col-lg-12 alerta_enid padding_5 top_10 bottom_10'>" + msj + "</div>");
@@ -192,39 +174,11 @@ function mostrar_img_upload(source, id_section) {
     li.appendChild(img);
     list.appendChild(li);
 }
+
 function response_mensaje_contacto(data) {
 
     show_response_ok_enid(".place_registro_contacto", "<div class='contacto_enviado'> Gracias por enviarnos tu mensaje, pronto sabrás de nosotros. ! </div>");
     document.getElementById("form_contacto").reset();
-}
-
-var registra_lead = function (e) {
-
-    var url = $(".form_enid_contacto").attr("action");
-    var f = valida_email_form("#btn_cotizacion", ".place_mail_contacto");
-
-
-    if (f == 1) {
-        set_places();
-        var flag = valida_text_form(".nombre_lead", ".place_nombre_lead", 5, "Nombre");
-        if (flag == 1) {
-            empty_elements([".place_nombre_lead"]);
-            var flag = valida_text_form(".telefono_lead", ".place_telefono_lead", 5, "Teléfono");
-            if (flag == 1) {
-                $(".telefono_lead").empty();
-                var data_send = $(".form_enid_contacto").serialize() + "&" + $.param({"empresa": 1});
-                request_enid("POST", data_send, url, response_registro_lead, ".place_registro_contacto");
-            }
-        }
-    }
-    e.preventDefault();
-}
-
-function response_registro_lead(data) {
-    empty_elements([".place_mail_contacto", ".place_registro_contacto"]);
-    show_response_ok_enid(".place_registro_contacto", " Gracias por enviarnos tu mensaje, pronto sabrás de nosotros. !");
-    document.getElementById("form_enid_contacto").reset();
-    llenaelementoHTML(".place_registro_contacto", "Desde hoy recibirás nuestras ultimas noticias y promociones ");
 }
 
 function set_places() {
@@ -280,8 +234,10 @@ function response_metricas_perfil(data) {
         llenaelementoHTML(".place_num_pagos_por_realizar", "<span class='notificacion_enid'>" + deuda_cliente + "MXN</span>");
     }
 }
-
-function notifica_usuario_pendientes(num_pendientes) {
+var termina_session = function(){
+    redirect('../login/index.php/startsession/logout/');
+};
+var  notifica_usuario_pendientes = function(num_pendientes) {
     if (document.visibilityState == 'hidden') {
         if (num_pendientes > 0) {
 
@@ -290,8 +246,8 @@ function notifica_usuario_pendientes(num_pendientes) {
         }
     } else {
 
-            set_option("flag_activa_notificaciones", 0);
-            set_titulo_web(get_parameter(".titulo_web"));
+        set_option("flag_activa_notificaciones", 0);
+        set_titulo_web(get_parameter(".titulo_web"));
     }
 }
 
@@ -314,13 +270,14 @@ function rotulo_title() {
         setTimeout("rotulo_title()", espera);
     }
 }
+
 var set_titulo_web = function (n_titulo_web) {
 
     var titulo_web = n_titulo_web;
     set_option("titulo_web", n_titulo_web);
     document.title = titulo_web;
 }
-var  registra_respuesta_pregunta = function(e) {
+var registra_respuesta_pregunta = function (e) {
     alert("-----!");
     var url = "../q/index.php/api/respuesta/index/format/json/";
     var data_send = $(".form_respuesta_ticket").serialize();
@@ -329,6 +286,7 @@ var  registra_respuesta_pregunta = function(e) {
     request_enid("POST", data_send, url, carga_comentarios_terea_simple);
     e.preventDefault();
 }
+
 function quitar_espacios_numericos(nuevo_valor) {
 
     var valor_numerico = "";
@@ -371,6 +329,7 @@ function quita_espacios_input_precio() {
 }
 
 function validar_si_numero(numero) {
+
     return (!/^([0-9])*$/.test(numero)) ? false : true;
 }
 
@@ -387,11 +346,11 @@ function comparer(index) {
     }
 }
 
-function getCellValue(row, index) {
+var getCellValue = function (row, index) {
+
     return $(row).children('td').eq(index).text()
 }
-
-function ordena_table_general() {
+var ordena_table_general = function () {
 
     var table = $(this).parents('table').eq(0);
     var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
@@ -472,8 +431,9 @@ function empty_elements(array) {
         $(array[x]).empty();
     }
 }
+
 /*Regresa el valor que esta en el nodo html*/
-var  get_parameter_enid = function(element, param) {
+var get_parameter_enid = function (element, param) {
 
     var val = element.attr(param);
     if (typeof val !== undefined) {
@@ -483,6 +443,7 @@ var  get_parameter_enid = function(element, param) {
         return false;
     }
 }
+
 /*ingresa valor al input*/
 function set_parameter(element, valor) {
     $(element).val(valor);
@@ -490,6 +451,7 @@ function set_parameter(element, valor) {
 
 /*El dispositivo en el que se accede es telefono?*/
 function is_mobile() {
+
     return get_option("is_mobile");
 }
 
@@ -655,6 +617,53 @@ var envia_comentario = function (e) {
 }
 
 /*
+var valida_num_formvalida_num_form = function (input, place_msj) {
+
+    $(place_msj).show();
+    var valor_registrado = get_parameter(input);
+    var mensaje_user = "";
+    var f = 1;
+    $(place_msj).empty();
+    if (isNaN(valor_registrado)) {
+        mensaje_user = "Registre sólo números ";
+        f = 0;
+    }
+
+if (f == 0) {
+    $(input).css("border", "1px solid rgb(13, 62, 86)");
+}
+
+format_error(place_msj, mensaje_user);
+return f;
+}
+var registra_lead = function (e) {
+
+    var url = $(".form_enid_contacto").attr("action");
+    var f = valida_email_form("#btn_cotizacion", ".place_mail_contacto");
+
+
+    if (f == 1) {
+        set_places();
+        var flag = valida_text_form(".nombre_lead", ".place_nombre_lead", 5, "Nombre");
+        if (flag == 1) {
+            empty_elements([".place_nombre_lead"]);
+            var flag = valida_text_form(".telefono_lead", ".place_telefono_lead", 5, "Teléfono");
+            if (flag == 1) {
+                $(".telefono_lead").empty();
+                var data_send = $(".form_enid_contacto").serialize() + "&" + $.param({"empresa": 1});
+                request_enid("POST", data_send, url, response_registro_lead, ".place_registro_contacto");
+            }
+        }
+    }
+    e.preventDefault();
+}
+function response_registro_lead(data) {
+    empty_elements([".place_mail_contacto", ".place_registro_contacto"]);
+    show_response_ok_enid(".place_registro_contacto", " Gracias por enviarnos tu mensaje, pronto sabrás de nosotros. !");
+    document.getElementById("form_enid_contacto").reset();
+    llenaelementoHTML(".place_registro_contacto", "Desde hoy recibirás nuestras ultimas noticias y promociones ");
+}
+
 function replace_val_text(input_val, label_place, valor, text) {
     llenaelementoHTML(label_place, text);
     valorHTML(input_val, valor);

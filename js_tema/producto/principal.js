@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function(){
 	/**/
 	set_option("servicio" , get_parameter(".servicio"));
@@ -8,19 +9,7 @@ $(document).ready(function(){
 	set_option("orden" ,"desc");	
 	$(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);	
 	$(".talla").click(agregar_talla);
-	/*
-	$('#imagen_tab_0').zoom();
-	$('#imagen_tab_1').zoom();
-	$('#imagen_tab_2').zoom();
-	$('#imagen_tab_3').zoom();
-	$('#imagen_tab_4').zoom();
-	$('#imagen_tab_5').zoom();
-	$('#imagen_tab_6').zoom();
-	$('#imagen_tab_7').zoom();
-	$('#imagen_tab_8').zoom();
-	$('#imagen_tab_9').zoom();
-	$('#imagen_tab_10').zoom();
-	*/
+
 });
 /**/
 function carga_productos_sugeridos(){

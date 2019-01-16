@@ -1,3 +1,4 @@
+"use strict";
 function carga_form_img(){
     showonehideone( ".contenedor_agregar_imagenes" , ".contenedor_global_servicio");    
     display_elements([".titulo_articulos_venta" , ".guardar_img_enid"], 0);

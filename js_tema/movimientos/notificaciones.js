@@ -1,3 +1,4 @@
+"use strict";
 function num_accesos_afiliados(){
 	
 	var url =  "../q/index.php/api/productividad/accesos_afiliados/format/json/";		

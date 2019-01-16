@@ -1,4 +1,5 @@
-$(document).ready(function(){	
+"use strict";
+$(document).ready(function(){
 	$(".numero_tarjeta").keyup(function(){
 
 		var valor = get_parameter(".numero_tarjeta");

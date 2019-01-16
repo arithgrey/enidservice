@@ -1,5 +1,5 @@
-/**/
-function cargar_info_resumen_pago_pendiente(e){	
+"use strict";
+var cargar_info_resumen_pago_pendiente = function(e){
 	
 	
 	recorrepage();
@@ -16,8 +16,7 @@ function cargar_info_resumen_pago_pendiente(e){
 		request_enid( "GET",  data_send, url, response_carga_info_resumen_pago_pendiente , ".place_resumen_servicio");
 	}
 }
-/**/
-function response_carga_info_resumen_pago_pendiente(data){
+var response_carga_info_resumen_pago_pendiente = function(data){
 
 	
 	$(".resumen_pagos_pendientes").tab("show");
@@ -25,25 +24,11 @@ function response_carga_info_resumen_pago_pendiente(data){
 	//$(".cancelar_compra").click(confirmar_cancelacion_compra);		
 	$(".btn_direccion_envio").click(carga_informacion_envio);
 }
-/*
-function confirmar_cancelacion_compra(){
-
-	set_option("modalidad_ventas" 	, get_attr(this, "modalidad"));
-	set_option("id_recibo" 			, get_attr(this, "id"));	
-	if( get_option("id_recibo")>0) {
-		var url 		=  "../q/index.php/api/tickets/cancelar_form/format/json/";		
-		var data_send 	=  {"id_recibo" : get_option("id_recibo") , "modalidad" :  get_option("modalidad_ventas")};							
-		request_enid( "GET",  data_send, url, resposponse_confirma_cancelacion);
-	}
-}
-*/
-/**/
-function resposponse_confirma_cancelacion(data){
+var resposponse_confirma_cancelacion = function(data){
 	llenaelementoHTML(".place_resumen_servicio" , data);				
 	$(".cancelar_orden_compra").click(cancela_compra);
 }
-/**/
-function cancela_compra(e){
+var cancela_compra = function(e){
 	
 	var id_recibo 	=  get_parameter_enid($(this) , "id");
 	set_option(id_recibo);
@@ -51,8 +36,7 @@ function cancela_compra(e){
 	var data_send 	=  {"id_recibo" : get_option("id_recibo") , "modalidad" : get_option("modalidad_ventas") };					
 	request_enid( "PUT",  data_send, url, response_cancelacion_compra);
 }
-/**/
-function response_cancelacion_compra(data){
+var response_cancelacion_compra = function(data){
 	
 	debugger;
 	if(get_option("modalidad_ventas") ==  1){			
@@ -73,3 +57,15 @@ function response_cancelacion_compra(data){
 	}		
 	metricas_perfil();
 }
+/*
+function confirmar_cancelacion_compra(){
+
+	set_option("modalidad_ventas" 	, get_attr(this, "modalidad"));
+	set_option("id_recibo" 			, get_attr(this, "id"));
+	if( get_option("id_recibo")>0) {
+		var url 		=  "../q/index.php/api/tickets/cancelar_form/format/json/";
+		var data_send 	=  {"id_recibo" : get_option("id_recibo") , "modalidad" :  get_option("modalidad_ventas")};
+		request_enid( "GET",  data_send, url, resposponse_confirma_cancelacion);
+	}
+}
+*/

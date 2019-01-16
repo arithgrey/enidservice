@@ -1,4 +1,5 @@
-$(document).on("ready", function(){	
+"use strict";
+$(document).on("ready", function(){
 	//$(".upper-links").css("display", "none");
 	$("footer").ready(valida_seccion_inicial);
 	$(".btn_soy_nuevo").click(mostrar_seccion_nuevo_usuario);

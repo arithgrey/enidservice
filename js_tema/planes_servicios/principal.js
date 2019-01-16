@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function () {
     set_option("page", 1);
     $("footer").ready(valida_action_inicial);

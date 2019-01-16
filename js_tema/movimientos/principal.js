@@ -1,34 +1,22 @@
+"use strict";
 var id_tarea = 0;
-var nombre_persona = 0;
 var flageditable  =0; 
-var llamada =  0;
-var campos_disponibles = 0; 
 var persona = 0;
 var tipo_negocio = 0;
-var fuente = 0;
 var telefono = 0;
 var flag_base_telefonica =0;
 var id_proyecto = 0; 
 var id_usuario = 0;
 var id_ticket = 0;
-var nombre_tipo_negocio = "";
-var num_agendados ="";
 var flag_mostrar_solo_pendientes = 0;
-var referencia_email = 0;
-var flag_estoy_en_agendado = 0; 
+var flag_estoy_en_agendado = 0;
 var id_base_telefonica = 0;  
-var tmp_tel = 0; 
 var menu_actual = "clientes";
-var num_accesos =0;
-var num_usuarios_referencia =0;
-var num_proceso_compra =0;
-var venta_efectiva =0;
-var enviar_pagos =0;
 var banco =0;
 var numero_tarjeta =0;
 var propietario ="";
 var id_proyecto_persona_forma_pago =0;
-var tipo_video =1; 
+
 $(document).ready(function(){	
 	$("footer").ready(cargar_ultimos_movimientos);
 });

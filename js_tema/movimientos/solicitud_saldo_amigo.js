@@ -1,4 +1,5 @@
-$(document).ready(function(){		
+"use strict";
+$(document).ready(function(){
 	$(".monto_a_ingresar").keyup(valida_monto_ingreso);	
 	$(".solicitar_saldo_amigo_form").submit(solicita_saldo_amigo);
 });

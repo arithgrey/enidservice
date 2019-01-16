@@ -1,3 +1,4 @@
+"use strict";
 var plan = 0;
 var num_ciclos =  0;
 var dominio =  0;

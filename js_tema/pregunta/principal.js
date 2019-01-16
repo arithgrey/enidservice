@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function(){
 	/*Valores por default*/
 	set_option("recomendaria", 3);

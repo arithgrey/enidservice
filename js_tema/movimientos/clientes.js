@@ -1,3 +1,4 @@
+"use strict";
 function mostrar_campos_editables(){
 
 	if (get_option("flageditable") ==  0 ){
