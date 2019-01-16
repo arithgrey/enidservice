@@ -9,8 +9,7 @@ $(document).ready(function(){
 	$("footer").ready(evalua_propietario);
 	
 });
-
-function configura_recomendaria(e){	
+var configura_recomendaria = function(e){
 
 	var recomendaria =  get_parameter_enid($(this) , "id");
 	set_option("recomendaria" , parseInt(recomendaria));
@@ -20,7 +19,7 @@ function configura_recomendaria(e){
 	$(this).css("color" , "blue");
 	$(".place_recomendaria").empty();
 }
-function configura_calificacion(e){
+var configura_calificacion = function(e){
 	var calificacion =  get_parameter_enid($(this) , "id");
 	set_option("calificacion" , parseInt(calificacion));		
 	
@@ -43,7 +42,7 @@ function configura_calificacion(e){
 
 	}	
 }
-function registra_valoracion(e){
+var registra_valoracion = function(e){
 
 	var recomendaria =  get_option("recomendaria");
 	if (recomendaria == 3){
@@ -63,11 +62,11 @@ function registra_valoracion(e){
 		
 	e.preventDefault();
 }
-function before_registro_valoracion(){
+var before_registro_valoracion = function(){
 	show_load_enid(".place_registro_valoracion" ,  "Validando datos " , 1 );					
 	bloquea_form(".form_valoracion");
 }
-function response_registro_valoracion(data){	
+var response_registro_valoracion = function(data){
 	var url_producto = "../producto/?producto="+data.id_servicio+"&valoracion=1";
 	var mira_tu_valoracion = "mira tu valoración <a class='blue_enid_background white'  href='"+url_producto+"' style='padding:5px;color:white!important;' > aquí </a>";
 	var extra_invitacion_a_enid ="";
@@ -88,7 +87,7 @@ function response_registro_valoracion(data){
 	}
 	recorrepage(".place_registro_valoracion");
 }
-function evalua_propietario(){
+var evalua_propietario = function(){
 	
 	if (get_parameter(".propietario") == 1){		
 		bloquea_form(".form_valoracion");

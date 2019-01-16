@@ -1,8 +1,8 @@
 "use strict";
-function agrega_info_form(e){
+var agrega_info_form = function(e){
+
 	recorre_web_version_movil();	
 }
-
 /**
  *
  *

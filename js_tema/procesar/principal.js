@@ -35,15 +35,14 @@ $(document).ready(function(){
 
 });
 
-function registro(e){
-
+var registro = function(e){
 
 
 	var text_password =  $.trim($(".password").val());	
 	if (text_password.length>7 ) {
-		flag =  valida_num_form(".telefono" , ".place_telefono" ); 
+		var flag =  valida_num_form(".telefono" , ".place_telefono" );
 		if (flag == 1 ){
-				flag2 =  valida_text_form(".telefono" , ".place_telefono" , 6 , "Número telefónico" );
+				var flag2 =  valida_text_form(".telefono" , ".place_telefono" , 6 , "Número telefónico" );
 				if (flag2 ==  1 ) {
 
 					
@@ -71,12 +70,12 @@ function registro(e){
 
 	e.preventDefault();
 }
+var before_registro_afiliado = function(){
 
-function before_registro_afiliado(){
 	bloquea_form(".form-miembro-enid-service");											
 	show_load_enid(".place_registro_afiliado" ,  "Validando datos " , 1 );
 }
-/***/
+
 var respuesta_registro = function(data){
 
 	if (data != -1) {								
@@ -102,7 +101,7 @@ var respuesta_registro = function(data){
 	
 };
 
-function procesar_pedido_usuario_activo(){
+var procesar_pedido_usuario_activo = function(){
 
 	var url 			= "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";		
 	set_option("talla"	, $(".talla").val());		
@@ -111,17 +110,12 @@ function procesar_pedido_usuario_activo(){
 
 }
 
-function before_procesar_pedido_activo(){
+var before_procesar_pedido_activo = function(){
 	$('.btn_procesar_pedido_cliente').prop('disabled', true);
 	show_load_enid(".place_proceso_compra" ,  "Validando datos " , 1 );
 }
 
-function response_procesar_pedido_activo(data){
-	show_error_enid(".place_proceso_compra" , "Error al iniciar sessión");			
-}
-
-function respuesta_proceso_venta_usuario_activo(data){				
-
+var  respuesta_proceso_venta_usuario_activo = function(data){
 
 	set_option("data_registro" , data);
 	set_option("registro" , 0);
@@ -129,27 +123,13 @@ function respuesta_proceso_venta_usuario_activo(data){
 	config_direccion();	
 }
 
-function quita_espacios_en_telefono(){
+var quita_espacios_en_telefono = function(){
 	
 	var valor 	= 	get_parameter(".telefono");
 	var nuevo 	=  	quitar_espacios_numericos(valor);
 	$(".telefono").val(nuevo);	
 }
-
-
-function get_usuario_referencia(){
-	return usuario_referencia;
-}
-
-function get_direccion(){
-	return direccion;
-}
-
-function set_direccion(n_direccion){
-	direccion =  n_direccion;
-}
-
-function config_direccion(){
+var config_direccion = function(){
 
 	var data_registro =  get_option("data_registro");		
 	var ficha 	      =	 "";
@@ -191,3 +171,22 @@ var set_link = function(){
 var response_set_link = function(data){
 	redirect("../login");
 };
+/*
+
+*
+* function response_procesar_pedido_activo(data){
+	show_error_enid(".place_proceso_compra" , "Error al iniciar sessión");
+}
+function get_usuario_referencia(){
+	return usuario_referencia;
+}
+function get_direccion(){
+	return direccion;
+}
+function set_direccion(n_direccion){
+	direccion =  n_direccion;
+}
+
+
+
+*/

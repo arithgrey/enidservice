@@ -52,7 +52,7 @@ var valida_form_session =  function(e){
 	var  email 	= get_parameter('#mail');	
 	if(	valida_formato_pass(pw) == valida_formato_email(email) ){		
 
-		tmp_password = ""+CryptoJS.SHA1(pw);
+		var tmp_password = ""+CryptoJS.SHA1(pw);
 		set_option("tmp_password" , tmp_password);	
 		set_option("url" , $("#in").attr("action"));
 		set_option("email" , email);
@@ -78,7 +78,9 @@ var  response_recupera_password  = function(data){
 	show_response_ok_enid(".place_status_inicio" , "El correo de recuperación se ha enviado con éxito.!");		
 }
 var  carga_mail =  function(){
+
 	$("#email_recuperacion").val(get_parameter("#mail"));
+
 }
 var  valida_formato_pass =  function(text){
 	var estado = 0;
@@ -109,7 +111,6 @@ var  desabilita_botones  =  function(){
 		document.getElementsByTagName('input')[a].disabled = true;
 	}
 }
-
 var  mostrar_seccion_nuevo_usuario =  function(){
 
 	display_elements( [".contenedor_recuperacion_password" , ".wrapper_login"], 0);
@@ -153,12 +154,10 @@ var  response_usuario_registro =  function(data){
 		}				
 	}				
 }
-
 var  muestra_seccion_acceso = function(){
 	display_elements([".wrapper_login"] , 1);
 	display_elements([".contenedor_recuperacion_password" , ".seccion_registro_nuevo_usuario_enid_service" ] ,  0);
 }
-
 var muestra_contenedor_recuperacion =  function(){
 	
 	display_elements([".wrapper_login" , ".seccion_registro_nuevo_usuario_enid_service" ] , 0 );

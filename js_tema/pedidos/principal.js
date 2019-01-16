@@ -159,7 +159,7 @@ var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 }
 var registra_saldo_cubierto = function(e){
 
-	if (is_num =  valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" ) == 1) {
+	if (valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" ) == 1) {
 
 		var data_send	=  $(".form_cantidad").serialize();
 		$(".mensaje_saldo_cubierto").empty();

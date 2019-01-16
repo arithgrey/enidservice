@@ -1,13 +1,12 @@
 "use strict";
-function carga_form_img(){
+var carga_form_img = function(){
     showonehideone( ".contenedor_agregar_imagenes" , ".contenedor_global_servicio");    
     display_elements([".titulo_articulos_venta" , ".guardar_img_enid"], 0);
 	var url        = "../q/index.php/api/img/form_img_servicio_producto/format/json/";
 	var data_send  = $.param({"id_servicio" : get_option("servicio")});		    
     request_enid("GET", data_send , url , response_cargar_form , ".place_img_producto" );					
 }
-/**/
-function response_cargar_form(data){   
+var response_cargar_form = function(data){
 
     
     llenaelementoHTML(".place_img_producto" , data);
@@ -15,8 +14,7 @@ function response_cargar_form(data){
     $(".imagen_img").change(upload_imgs_enid_pre);
     recorrepage("#guardar_img");
 }
-/**/
-function upload_imgs_enid_pre(){    
+var upload_imgs_enid_pre = function(){
 
     
     var i = 0, len = this.files.length , img, reader, file;        
@@ -32,8 +30,7 @@ function upload_imgs_enid_pre(){
     };
     reader.readAsDataURL(file);
 }
-/**/
-function registra_img_servicio(e){
+var registra_img_servicio = function(e){
     e.preventDefault();
     var formData        = new FormData();
     var q               = get_parameter(".q_imagen");

@@ -42,8 +42,8 @@ $(document).ready(function(){
         $(this).css({'opacity': 0.5});
     });
 });
-/**/
-function agrega_interes(e){
+
+var agrega_interes = function(e){
 	
     var id_clasificacion = get_parameter_enid($(this) , "id");
     set_option("id_clasificacion" , id_clasificacion);
@@ -51,8 +51,8 @@ function agrega_interes(e){
 	var data_send = {id_clasificacion : id_clasificacion};
     request_enid( "PUT",  data_send, url, response_agrega_interes, ".place_resumen_servicio");
 }
-/**/
-function response_agrega_interes(data){
+
+var response_agrega_interes = function(data){
     var preferencia =".preferencia_"+get_option("id_clasificacion");
     if (data.tipo ==  1) {          
         $(preferencia).addClass("selected_clasificacion");  
