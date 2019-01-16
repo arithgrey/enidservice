@@ -92,6 +92,7 @@
 		<br>
         <br>
         <?=create_fecha_contra_entrega($recibo , $domicilio)?>
+        <?=notificacion_por_cambio_fecha($recibo);?>
 
         <?=n_row_12()?>
 			<?=create_seccion_tipificaciones($tipificaciones)?>

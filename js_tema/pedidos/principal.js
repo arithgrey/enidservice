@@ -25,6 +25,7 @@ var editar_horario_entrega = function(e){
 
 	var data_send 		=  $(".form_fecha_entrega").serialize();
 	var url 			=  "../q/index.php/api/recibo/fecha_entrega/format/json/";
+	bloquea_form(".form_fecha_entrega");
 	request_enid( "PUT",  data_send, url, response_horario_entrega , ".place_fecha_entrega");
 	e.preventDefault();
 }
@@ -32,7 +33,9 @@ var response_horario_entrega = function(data){
 
 	$(".place_fecha_entrega").empty();
 	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+	desbloqueda_form(".form_fecha_entrega");
 	redirect(url);
+
 
 }
 var busqueda_pedidos =  function(e){

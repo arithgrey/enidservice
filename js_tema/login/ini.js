@@ -1,6 +1,6 @@
-"use strict";
+//"use strict";
 $(document).on("ready", function(){
-	//$(".upper-links").css("display", "none");
+
 	$("footer").ready(valida_seccion_inicial);
 	$(".btn_soy_nuevo").click(mostrar_seccion_nuevo_usuario);
 	$(".btn_soy_nuevo_simple").click(mostrar_seccion_nuevo_usuario);
@@ -16,12 +16,12 @@ $(document).on("ready", function(){
 	});
 	display_elements([".extra_menu_simple"] , 1  );	
 	display_elements([".base_compras" ,".base_paginas_extra" , ".info_metodos_pago"] , 0  );
-	
-	
-	
+	$("#mail").keyup(function(){
+		sin_espacios("#mail");
+	});
+
 });
-/*****************************/
-function inicio_session(){
+var inicio_session =  function(){
 
 
 	var url 		= get_option("url");
@@ -33,13 +33,11 @@ function inicio_session(){
 		focus_input(inputs);				
 	}
 }
-/**/
-function before_inicio_session(){
+var before_inicio_session =  function(){
 	desabilita_botones();
 	show_load_enid(".place_acceso_sistema" ,  "Validando datos " , 1 );
 }
-/**/
-function response_inicio_session(data){
+var response_inicio_session =  function(data){
 
 	if(data != 0){
 		redirect(data);
@@ -48,9 +46,8 @@ function response_inicio_session(data){
 		format_error(".place_acceso_sistema" , "Error en los datos de acceso");
 	}
 }
-/**/
-function valida_form_session(e){
-	/**/
+var valida_form_session =  function(e){
+
 	var  pw 	= $.trim(get_parameter("#pw"));	
 	var  email 	= get_parameter('#mail');	
 	if(	valida_formato_pass(pw) == valida_formato_email(email) ){		
@@ -63,10 +60,8 @@ function valida_form_session(e){
 	}
 	e.preventDefault();
 }
-/**/
-function recupera_password(e){
-	
-	//$(".wrapper_login").empty();
+var recupera_password =  function(e){
+
 	var  flag= valida_email_form("#email_recuperacion" ,  ".place_recuperacion_pw" );  	
 	if (flag ==1 ){
 		$(".place_recuperacion_pw").empty();
@@ -76,19 +71,16 @@ function recupera_password(e){
 	}
 	e.preventDefault();	
 }
-/**/
-function response_recupera_password(data){
+var  response_recupera_password  = function(data){
 
 	$('#contenedor-form-recuperacion').find('input, textarea, button, select').attr('disabled','disabled');			
 	llenaelementoHTML(".place_recuperacion_pw" ,  "El correo de recuperación se ha enviado con éxito.!" ); 			
 	show_response_ok_enid(".place_status_inicio" , "El correo de recuperación se ha enviado con éxito.!");		
 }
-/**/
-function carga_mail(){
+var  carga_mail =  function(){
 	$("#email_recuperacion").val(get_parameter("#mail"));
 }
-/**/
-function valida_formato_pass(text){
+var  valida_formato_pass =  function(text){
 	var estado = 0;
 	if(text.length >= 8){
 		estado =1;
@@ -97,8 +89,7 @@ function valida_formato_pass(text){
 	}
 	return estado;
 }
-/**/
-function valida_formato_email(email){
+var  valida_formato_email =  function(email){
 	estado = 1;
 	expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	if (!expr.test(email)){		
@@ -107,26 +98,25 @@ function valida_formato_email(email){
 	}
 	return estado;
 }
-function habilita_botones(){
+var  habilita_botones =  function(){
 	for (a=0; a < document.getElementsByTagName('input').length; a++){
 		document.getElementsByTagName('input')[a].disabled = false;		
 	}
 }
-function desabilita_botones(){
+var  desabilita_botones  =  function(){
 	
 	for(a=0; a < document.getElementsByTagName('input').length; a++){
 		document.getElementsByTagName('input')[a].disabled = true;
 	}
 }
-/**/
-function mostrar_seccion_nuevo_usuario(){	
+
+var  mostrar_seccion_nuevo_usuario =  function(){
 
 	display_elements( [".contenedor_recuperacion_password" , ".wrapper_login"], 0);
 	display_elements( [".seccion_registro_nuevo_usuario_enid_service"], 1);
 	
 }
-/**/
-function agrega_usuario(e){
+var  agrega_usuario =  function(e){
 
 	var url 		= "../q/index.php/api/usuario/vendedor/format/json/";
 	var password 	=  get_parameter(".form-miembro-enid-service .password");
@@ -146,8 +136,7 @@ function agrega_usuario(e){
 	}
 	e.preventDefault();
 }
-/**/
-function response_usuario_registro(data){
+var  response_usuario_registro =  function(data){
 
 	
 	if (data.usuario_registrado ==   1) {						
@@ -164,19 +153,18 @@ function response_usuario_registro(data){
 		}				
 	}				
 }
-/**/
-function muestra_seccion_acceso(){
+
+var  muestra_seccion_acceso = function(){
 	display_elements([".wrapper_login"] , 1);
 	display_elements([".contenedor_recuperacion_password" , ".seccion_registro_nuevo_usuario_enid_service" ] ,  0);
 }
-/**/
-function muestra_contenedor_recuperacion(){
+
+var muestra_contenedor_recuperacion =  function(){
 	
 	display_elements([".wrapper_login" , ".seccion_registro_nuevo_usuario_enid_service" ] , 0 );
 	display_elements([".contenedor_recuperacion_password" ] , 1 );
 }
-/**/
-function valida_seccion_inicial(){	
+var  valida_seccion_inicial = function(){
 	switch(get_parameter(".action")){
 	    case "nuevo":
 			mostrar_seccion_nuevo_usuario();

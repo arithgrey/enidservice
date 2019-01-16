@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 var titulo_web = "";
 var flag_titulo_web = 0;
 var tarea = 0;
@@ -26,6 +26,13 @@ $("footer").ready(function () {
     //$(".correo_electrionico_lead").keyup(muestra_campos_adicionales_lead);
 
 });
+var  set_option =  function(key, value) {
+    option[key] = value;
+}
+var get_option = function(key) {
+    return option[key];
+}
+
 var show_confirm = function (text, text_complemento, text_continuar = 0, on_next = 0, on_cancel = 0) {
 
     if (on_next == 0) {
@@ -287,23 +294,43 @@ var registra_respuesta_pregunta = function (e) {
     e.preventDefault();
 }
 
-function quitar_espacios_numericos(nuevo_valor) {
+function quitar_espacios_numericos(nuevo_valor , texto = 0) {
 
-    var valor_numerico = "";
-    for (var a = 0; a < nuevo_valor.length; a++) {
-        if (nuevo_valor[a] != " ") {
 
-            var is_num = validar_si_numero(nuevo_valor[a]);
-            if (is_num == true) {
-                if (a < 13) {
-                    valor_numerico += nuevo_valor[a];
+    if(texto == 0){
+        var valor_numerico = "";
+        for (var a = 0; a < nuevo_valor.length; a++) {
+            if (nuevo_valor[a] != " ") {
+
+                var is_num = validar_si_numero(nuevo_valor[a]);
+                if (is_num == true) {
+                    if (a < 13) {
+                        valor_numerico += nuevo_valor[a];
+                    }
                 }
             }
         }
-    }
-    return valor_numerico;
-}
+        return valor_numerico;
+    }else{
 
+        var valor_numerico = "";
+        for (var a = 0; a < nuevo_valor.length; a++) {
+            if (nuevo_valor[a] != " ") {
+
+                valor_numerico += nuevo_valor[a];
+            }
+        }
+        return valor_numerico;
+    }
+
+}
+var sin_espacios = function(input){
+
+    var valor = get_parameter(input);
+    var nuevo = quitar_espacios_numericos(valor , 1);
+    set_parameter(input , nuevo);
+
+}
 var quita_espacios_input = function () {
 
     var valor = get_parameter(".telefono_info_contacto");
@@ -367,14 +394,6 @@ function minusculas(e) {
     e.value = e.value.toLowerCase();
 }
 
-function set_option(key, value) {
-    option[key] = value;
-}
-
-function get_option(key) {
-    return option[key];
-}
-
 function openNav() {
     document.getElementById("mySidenav").style.width = "70%";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
@@ -431,7 +450,6 @@ function empty_elements(array) {
         $(array[x]).empty();
     }
 }
-
 /*Regresa el valor que esta en el nodo html*/
 var get_parameter_enid = function (element, param) {
 
@@ -443,7 +461,6 @@ var get_parameter_enid = function (element, param) {
         return false;
     }
 }
-
 /*ingresa valor al input*/
 function set_parameter(element, valor) {
     $(element).val(valor);
@@ -506,8 +523,7 @@ function set_black(array) {
         set_parameter(array[x], "");
     }
 }
-
-var focus_input = function (input) {
+var focus_input = function(input) {
     if (isArray(input)) {
 
         for (var i = 0 in input) {

@@ -29,9 +29,12 @@ $(document).ready(function(){
 	$(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
 	$(".telefono").keyup(quita_espacios_en_telefono);
 	$(".link_acceso").click(set_link);
+	$(".email").keyup(function(){
+		sin_espacios(".email");
+	});
 
 });
-/**/
+
 function registro(e){
 
 
@@ -68,7 +71,7 @@ function registro(e){
 
 	e.preventDefault();
 }
-/**/
+
 function before_registro_afiliado(){
 	bloquea_form(".form-miembro-enid-service");											
 	show_load_enid(".place_registro_afiliado" ,  "Validando datos " , 1 );
@@ -98,7 +101,7 @@ var respuesta_registro = function(data){
 	}
 	
 };
-/**/
+
 function procesar_pedido_usuario_activo(){
 
 	var url 			= "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";		
@@ -107,16 +110,16 @@ function procesar_pedido_usuario_activo(){
 	request_enid( "POST",  data_send, url, respuesta_proceso_venta_usuario_activo, "" , before_procesar_pedido_activo);
 
 }
-/**/
+
 function before_procesar_pedido_activo(){
 	$('.btn_procesar_pedido_cliente').prop('disabled', true);
 	show_load_enid(".place_proceso_compra" ,  "Validando datos " , 1 );
 }
-/**/
+
 function response_procesar_pedido_activo(data){
 	show_error_enid(".place_proceso_compra" , "Error al iniciar sessión");			
 }
-/**/
+
 function respuesta_proceso_venta_usuario_activo(data){				
 
 
@@ -125,27 +128,27 @@ function respuesta_proceso_venta_usuario_activo(data){
 	set_option("usuario_nuevo" , 0);
 	config_direccion();	
 }
-/**/
+
 function quita_espacios_en_telefono(){
 	
 	var valor 	= 	get_parameter(".telefono");
 	var nuevo 	=  	quitar_espacios_numericos(valor);
 	$(".telefono").val(nuevo);	
 }
-/**/
-/**/
+
+
 function get_usuario_referencia(){
 	return usuario_referencia;
 }
-/**/
+
 function get_direccion(){
 	return direccion;
 }
-/**/
+
 function set_direccion(n_direccion){
 	direccion =  n_direccion;
 }
-/**/
+
 function config_direccion(){
 
 	var data_registro =  get_option("data_registro");		

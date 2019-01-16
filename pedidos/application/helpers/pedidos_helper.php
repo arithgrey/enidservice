@@ -402,6 +402,40 @@ if(!function_exists('invierte_date_time')){
             }
         }
     }
+    if ( ! function_exists('notificacion_por_cambio_fecha'))
+    {
+        function notificacion_por_cambio_fecha($recibo){
+
+
+            $tipo           =  $recibo[0]["tipo_entrega"];
+            if($tipo ==  1){
+                $cambio_fecha       =   $recibo[0]["modificacion_fecha"];
+                $class              =   'nula';
+                $text_probabilidad  =  "PROBABILIDAD NULA DE COMPRA";
+                switch ($cambio_fecha) {
+
+                    case 0:
+                        $class              =   'alta';
+                        $text_probabilidad  =   "PROBABILIDAD ALTA DE COMPRA";
+                        break;
+                    case 1:
+                        $class          =   'media';
+                        $text_probabilidad  =   "PROBABILIDAD MEDIA DE COMPRA";
+                        break;
+                    case 2:
+                        $class          =   'baja';
+                        $text_probabilidad  =   "PROBABILIDAD BAJA DE COMPRA";
+                        break;
+                }
+
+                return div($text_probabilidad , ["class" => $class] , 1);
+
+            }
+
+
+        }
+    }
+
     if ( ! function_exists('create_seccion_saldos'))
     {
         function create_seccion_saldos($recibo){

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PhpProjectServersManager">
     <servers>
-      <server host="localhost" id="763ae856-b642-4ca5-b441-7c2c28cff9ba" name="localhost" use_path_mappings="true">
+      <server host="localhost" id="763ae856-b642-4ca5-b441-7c2c28cff9ba" name="local" use_path_mappings="true">
         <path_mappings>
           <mapping local-root="$PROJECT_DIR$" remote-root="/var/www/html/inicio" />
         </path_mappings>

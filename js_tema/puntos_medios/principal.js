@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 $(document).ready(function(){
 	//$(".tipos_puntos_encuentro").change(iniciar_proceso_entrega);
 	muestra_lineas_metro(1);
@@ -7,8 +7,10 @@ $(document).ready(function(){
 	$(".form_punto_encuentro_horario").submit(notifica_punto_entrega);	
 	$(".link_acceso").click(set_link);
 	$(".telefono").keyup(quita_espacios_en_telefono);
+	$(".correo").keyup(function(){
+		sin_espacios(".correo");
+	});
 });
-
 var muestra_lineas_metro = function(tipo){
 	
 	var url  	   	= "../q/index.php/api/linea_metro/index/format/json/";	

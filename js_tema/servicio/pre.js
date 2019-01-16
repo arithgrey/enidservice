@@ -1,7 +1,4 @@
-"use strict";
-$(document).ready(function(){
-    set_option("flag_carga" , 0);
-});
+set_option("flag_carga" , 0);
 var carga_opcion_entrega = function (id, id_servicio, orden_pedido) {
 
 
