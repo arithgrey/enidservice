@@ -1,7 +1,8 @@
-function cargar_num_envios_a_validacion(){
+"use strict";
+var cargar_num_envios_a_validacion = function (){
 	
-	url =  "../q/index.php/api/ventas_tel/num_agendados_validacion/format/json/";		
-	data_send =  {"id_usuario" : get_id_usuario()};				
+	var url =  "../q/index.php/api/ventas_tel/num_agendados_validacion/format/json/";
+	var data_send =  {"id_usuario" : get_id_usuario()};
 
 	$.ajax({
 			url : url , 
@@ -11,18 +12,18 @@ function cargar_num_envios_a_validacion(){
 	}).done(function(data){																						
 		llenaelementoHTML(".place_num_envios_a_validacion" , data);
 		recorre_web_version_movil();
-		/**/	
+
 	}).fail(function(){			
 		show_error_enid(".place_correo_envio" , "Error al cargar número de agendados en email");
 	});	
-	/**/
+
 
 }
-/**/
-function  cargar_num_agendados_email(){
+
+var cargar_num_agendados_email = function(){
 	
-	url =  "../q/index.php/api/ventas_tel/num_agendados_email/format/json/";		
-	data_send =  {"id_usuario" : get_id_usuario()};				
+	var url =  "../q/index.php/api/ventas_tel/num_agendados_email/format/json/";
+	var data_send =  {"id_usuario" : get_id_usuario()};
 
 	$.ajax({
 			url : url , 
@@ -31,16 +32,16 @@ function  cargar_num_agendados_email(){
 			beforeSend: function(){}
 	}).done(function(data){																						
 		llenaelementoHTML(".place_numero_agendados_email" , data);
-		/**/	
+
 	}).fail(function(){			
 		show_error_enid(".place_correo_envio" , "Error al cargar número de agendados en email");
 	});		
 }
-/**/
-function  cargar_num_agendados(){
+
+var   cargar_num_agendados = function(){
 	
-	url =  "../q/index.php/api/ventas_tel/num_agendados/format/json/";		
-	data_send =  {"id_usuario" : get_id_usuario()};				
+	var url =  "../q/index.php/api/ventas_tel/num_agendados/format/json/";
+	var data_send =  {"id_usuario" : get_id_usuario()};
 	$.ajax({
 			url : url , 
 			type: "GET",
@@ -61,11 +62,11 @@ function  cargar_num_agendados(){
 		show_error_enid(".place_llamada_hecha" , "Error ... ");
 	});		
 }
-/**/
-function  cargar_num_clientes_restantes(){
 
-	url =  "../q/index.php/api/ventas_tel/num_clientes_restantes/format/json/";		
-	data_send =  {"id_usuario" : get_id_usuario()};				
+var   cargar_num_clientes_restantes = function(){
+
+	var url =  "../q/index.php/api/ventas_tel/num_clientes_restantes/format/json/";
+	var data_send =  {"id_usuario" : get_id_usuario()};
 	$.ajax({
 			url : url , 
 			type: "GET",

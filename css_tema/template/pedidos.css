@@ -98,3 +98,26 @@
 .fecha_registro{
     font-size:1.3em;
 }
+.media{
+    background: yellow;
+    padding: 5px;
+    margin-top: 2px;
+}
+.baja{
+    background: #d10000;
+    color: white;
+    margin-top: 2px;
+    padding: 5px;
+}
+.alta{
+    background: #078167;
+    color: white;
+    margin-top: 2px;
+    padding: 5px;
+}
+.nula{
+    background: red;
+    color: white;
+    margin-top: 2px;
+    padding: 5px;
+}

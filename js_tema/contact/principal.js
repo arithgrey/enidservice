@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function(){
 	$(".selector").click(muestra_opciones);
 	$(".form_correo").submit(envia_correo);

@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
   class Mensajerialogin{
       function mail_recuperacion_pw($param){
+
           $mail               =   trim($param["mail"]);
           $new_pass           =   $param["new_pass"];
           $datos["mail"]      =   $mail;

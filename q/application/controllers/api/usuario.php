@@ -160,9 +160,9 @@ class usuario extends REST_Controller{
     }
     function pass_PUT(){
 
-        $param      =  $this->put();
-        $response   = false;
-        if (if_ext($param , "mail")){
+        $param      =   $this->put();
+        $response   =   false;
+        if (if_ext($param , "mail,type")){
             switch ($param["type"]) {
                 case 1:
 

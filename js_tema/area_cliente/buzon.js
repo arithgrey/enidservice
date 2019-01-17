@@ -1,17 +1,16 @@
-function carga_buzon(){
+"use strict";
+var carga_buzon = function(){
 
 	$(".contenedor_opciones_buzon").show();
 	var url =  "../q/index.php/api/pregunta/buzon/format/json/";		
 	var data_send =  {"modalidad" : get_option("modalidad_ventas")};	
 	request_enid( "GET",  data_send, url, response_buzon, ".place_buzon" );	
 }
-/**/
-function response_buzon(data){
+var response_buzon = function(data){
 	llenaelementoHTML(".place_buzon"  , data);										
 	$(".pregunta").click(carga_respuestas);		
 }
-/**/
-function carga_respuestas(){	
+var carga_respuestas = function(){
 
 	var id_pregunta 		=  	parseInt(get_attr(this, "id"));	
 	var pregunta 			=  	get_attr(this, "pregunta");		
@@ -28,24 +27,21 @@ function carga_respuestas(){
 	}
 	
 }
-/**/
-function carga_respuesta_complete(){		
+var carga_respuesta_complete = function(){
 
 	var data_send	 	=  get_option("data_pregunta");
 	console.log(data_send);
 	var url 			=  "../q/index.php/api/respuesta/respuesta_pregunta/format/json/";		
 	request_enid( "GET",  data_send, url, response_respuesta_complete,".place_buzon" );
 }
-/**/
-function response_respuesta_complete(data){
+var response_respuesta_complete = function(data){
 
 	$(".contenedor_opciones_buzon").hide();
 	llenaelementoHTML(".place_buzon" , data);
 	$(".form_valoracion_pregunta").submit(enviar_respuesta);
 	carga_num_preguntas();
 }
-/**/
-function enviar_respuesta(e){
+var enviar_respuesta = function(e){
 	
 	var data_send 	=  $(".form_valoracion_pregunta").serialize()+"&"+$.param({"pregunta" : get_option("pregunta") , "modalidad" : get_option("modalidad_ventas")});				
 	var url 		=  "../q/index.php/api/respuesta/respuesta_pregunta/format/json/";			

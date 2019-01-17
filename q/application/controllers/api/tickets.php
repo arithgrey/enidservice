@@ -185,6 +185,7 @@ class Tickets extends REST_Controller{
         $response["solicitud_saldo"]    =   $this->tickets_model->get_solicitudes_saldo($param);
         $this->load->view("tickets/solicitudes_saldo" , $response);               
     }
+
     function ticket_desarrollo_GET(){
 
         $param      =   $this->get();
@@ -220,7 +221,6 @@ class Tickets extends REST_Controller{
         $this->response($response);
 
     }
-    
     function formulario_respuesta_GET(){
 
         $param              =   $this->get();

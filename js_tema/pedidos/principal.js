@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function(){
 	display_elements([".selector_estados_ventas" , ".form_cantidad", ".form_cantidad_post_venta"] , 0);
 	$('.datetimepicker4').datepicker();
@@ -24,6 +25,7 @@ var editar_horario_entrega = function(e){
 
 	var data_send 		=  $(".form_fecha_entrega").serialize();
 	var url 			=  "../q/index.php/api/recibo/fecha_entrega/format/json/";
+	bloquea_form(".form_fecha_entrega");
 	request_enid( "PUT",  data_send, url, response_horario_entrega , ".place_fecha_entrega");
 	e.preventDefault();
 }
@@ -31,7 +33,9 @@ var response_horario_entrega = function(data){
 
 	$(".place_fecha_entrega").empty();
 	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+	desbloqueda_form(".form_fecha_entrega");
 	redirect(url);
+
 
 }
 var busqueda_pedidos =  function(e){
@@ -155,7 +159,7 @@ var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 }
 var registra_saldo_cubierto = function(e){
 
-	if (is_num =  valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" ) == 1) {
+	if (valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" ) == 1) {
 
 		var data_send	=  $(".form_cantidad").serialize();
 		$(".mensaje_saldo_cubierto").empty();

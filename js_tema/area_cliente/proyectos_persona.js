@@ -1,8 +1,9 @@
-function get_lugar_por_stus_compra(){	
+"use strict";
+var get_lugar_por_stus_compra= function(){
 
 	var nuevo_place ="";	
 	if(get_option("modalidad_ventas") == 0){		
-		/**/
+
 		switch(parseFloat(get_option("estado_compra"))){
 			case 10:
 		        nuevo_place = ".place_resumen_servicio";	        
@@ -22,8 +23,7 @@ function get_lugar_por_stus_compra(){
 	}
 	return nuevo_place;
 }
-/**/
-function carga_compras_usuario(){
+var carga_compras_usuario = function(){
 	
 	recorrepage();
 	var modalidad 	=  get_option("modalidad_ventas");  	
@@ -31,8 +31,7 @@ function carga_compras_usuario(){
 	var data_send 	=  { "status": get_option("estado_compra") , "modalidad" : modalidad };				
 	request_enid( "GET",  data_send, url, response_carga_compras_usuario);
 }
-/**/
-function response_carga_compras_usuario(data){
+var response_carga_compras_usuario = function(data){
 	
 	var place 	= get_lugar_por_stus_compra(); 	
 	llenaelementoHTML(place  , data);								
@@ -48,14 +47,13 @@ function response_carga_compras_usuario(data){
 	$(".ver_mas_compras_o_ventas").click(carga_compras_o_ventas_concluidas);
 	carga_num_preguntas();
 }
-/**/
-function carga_informacion_envio(e){
+var carga_informacion_envio = function(e){
 	
 	var id_recibo =  get_parameter_enid($(this) , "id");	
 	set_option("recibo" , id_recibo);	
 	carga_informacion_envio_complete();
 }
-function carga_compras_o_ventas_concluidas(){	
+var carga_compras_o_ventas_concluidas = function(){
 
 	var modalidad 	=  	get_option("modalidad_ventas"); 
 	var page 		= 	get_option("page");	
@@ -63,8 +61,7 @@ function carga_compras_o_ventas_concluidas(){
 	var data_send 	=  	{"modalidad" : modalidad, "page" : page };				
 	request_enid( "GET",  data_send, url, reponse_carga_compras_o_ventas_concluidas);
 }
-/**/
-function reponse_carga_compras_o_ventas_concluidas(data){
+var reponse_carga_compras_o_ventas_concluidas = function(data){
 
 
 	var place 		= get_lugar_por_stus_compra();  		

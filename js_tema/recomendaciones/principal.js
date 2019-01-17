@@ -1,6 +1,4 @@
-$(document).ready(function(){
-	
-});
+"use strict";
 function agrega_valoracion_respuesta(valoracion , num){
 
 	var url =  "../q/index.php/api/valoracion/utilidad/format/json/";			

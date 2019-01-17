@@ -360,10 +360,10 @@ class recibo extends REST_Controller{
 
             $fecha_contra_entrega   =   $param["fecha_entrega"]." ".$param["horario_entrega"].":00";
             $id_recibo              =   $param["recibo"];
-            $response               =   $this->recibo_model->q_up("fecha_contra_entrega" , $fecha_contra_entrega , $id_recibo);
+
+            $response               =   $this->recibo_model->set_fecha_contra_entrega($id_recibo , $fecha_contra_entrega);
         }
         $this->response($response);
-
     }
     function compras_efectivas_GET(){        
         

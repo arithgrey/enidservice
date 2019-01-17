@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function(){
 	$(".codigo_postal").keyup(auto_completa_direccion);						
 	$(".numero_exterior").keyup(function (){quita_espacios(".numero_exterior");});
