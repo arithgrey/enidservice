@@ -84,7 +84,6 @@
 	        $paginacion =  $this->api($api , $q );        	              	        
 	        return $paginacion;
 	    }
-		/**/		
 		function get_valor_numerico_bool($bool){
 
 			$valor =0;
@@ -94,7 +93,7 @@
 		    return $valor;
 		}	
 		function crea_historico($tipo,$id_evento = 0,$id_usuario = 0,$id_empresa = 0 ,$id_servicio =0){	
-
+            /*
 			$pagina_url 	=  	base_url(uri_string());         
 	        $ip 			= 	$this->input->ip_address();               
 	        $dispositivo  	= 	$this->agent->agent_string();        
@@ -146,40 +145,35 @@
 
 			$params["q2"]=  ($is_robot ==  1)? 1 : 0;	        		        
 	        $api 		=  "pagina_web/index";
-	        $this->api($api, $params, 'json', $type='POST');		               		
+	        $this->api($api, $params, 'json', $type='POST');
+	        */
 	                       		
-      	}   
-      	/**/
+      	}
       	function validate_user_sesssion(){      	
 
     	    if( $this->sessionclass->is_logged_in() == 1) {
     	    	redirect(url_home());
     	    }
       	}
-      	/**/
       	function acceso(){
       		if( $this->sessionclass->is_logged_in() != 1) {
     	    	$this->logout();
     	    }
       	}
-      	/**/
       	function is_logged_in(){
       		return $this->sessionclass->is_logged_in();
       	}
       	function set_userdata($session_data){
       		$this->sessionclass->set_userdata($session_data);
       	}
-		/**/
 		function show_data_page($data, $center_page , $tema = 0 ){           
 	        $this->load->view("../../../view_tema/header_template", $data);
 	        $this->load->view($center_page , $data);            
 	        $this->load->view("../../../view_tema/footer_template", $data);
 	    }
-	    /**/
 	    function getperfiles(){
 	    	return $this->sessionclass->getperfiles();
 	    }
-	    /**/
 	    function val_session($titulo){
 	    	
 	        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
@@ -210,7 +204,6 @@
 	            $data["email"] 		= 	"";                                    
 	            $data["telefono"]	= 	"";  
 	            return $data;
-	        }   
-	       
+	        }
 	    } 	    
 }
