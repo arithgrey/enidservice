@@ -14,6 +14,7 @@ class Mailrest extends REST_Controller{
 			if(if_ext($param , "mail")){
                 $param["type"]			= 	1;
                 $response 				=  	$this->set_pass($param);
+
                 if ($response["status_send"] ==  1){
                     $response["info_mail"] =  $this->mensajerialogin->mail_recuperacion_pw($response);
                 }
@@ -23,7 +24,7 @@ class Mailrest extends REST_Controller{
         $this->response($response);
 	}
 	private function set_pass($q){
-		$api 	=  "usuario/pass/";
+		$api 	=  "usuario/pass";
 		return  $this->principal->api( $api , $q , 'json', 'PUT');
 	}
 }

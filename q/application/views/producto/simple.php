@@ -1,6 +1,4 @@
-<h3 style="font-size: 3em;">    
-  SERVICIOS POSTULADOS
-</h3>
+<?=heading_enid("SERVICIOS POSTULADOS" ,3)?>
 <?php   
     $l          =   "";
     $url_imagen =   "";
@@ -36,8 +34,3 @@
 
 <?=$l;?>
 
-<?php if ( isset($css) && is_array($css) && count($css)>0 ):?>
-    <?php  foreach($css as $c): $link = get_url_request("css_tema/template/".$c); ?>
-        <link rel="stylesheet"  type="text/css"  href="<?=$link;?>?<?=version_enid?>">
-    <?php endforeach;?>
-<?php  endif; ?>

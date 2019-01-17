@@ -243,8 +243,8 @@ var registra_tarea = function(e){
 	var data_send 		=  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_option("id_ticket") , "tarea": requerimiento });				
 	request_enid( "POST",  data_send, url, carga_info_detalle_ticket, ".place_proyectos");
 	e.preventDefault();
-}
 
+}
 var muestra_tareas_por_estatus = function(){
 
 	showonehideone( ".mostrar_todas_las_tareas" , ".tarea_pendiente"  );
@@ -269,9 +269,9 @@ var carga_tikets_usuario = function(){
 	var keyword 	= 	get_parameter(".q"); 	
 	set_option("keyword" , keyword);	
 	var url 		=  	"../q/index.php/api/tickets/ticket_desarrollo/format/json/";			
-	var data_send 	= 	{ "status" : status_ticket , "id_departamento" :  get_option("id_depto") , "keyword" : get_option("keyword"), "modulo": get_option("modulo") };				
-	
+	var data_send 	= 	{ "status" : status_ticket , "id_departamento" :  get_option("id_depto") , "keyword" : get_option("keyword"), "modulo": get_option("modulo") };
 	request_enid( "GET",  data_send, url, response_carga_tickets, ".place_proyectos" );
+
 	
 }
 var response_carga_tickets = function(data){
@@ -326,3 +326,20 @@ var agregar_tarea = function(){
 	});
 		
 };
+var cerrar_ticket = function(id){
+
+	var id =  parseInt(id)
+	if( id > 0 ){
+		set_option("id_ticket" , id );
+		show_confirm("¿DESEAS CERRAR EL TICKET?", "Se descartarán todas sus tareas incluidas", "CERRAR TICKET", confirmacion_cerrar_ticket);
+	}
+
+}
+var confirmacion_cerrar_ticket = function(){
+
+	var id_ticket 	=  	get_option("id_ticket");
+	var url 		=  	"../q/index.php/api/tickets/estado/format/json/";
+	var data_send 	= 	{"status" : 2 , "id_ticket": id_ticket};
+	request_enid( "PUT",  data_send, url, carga_tikets_usuario);
+
+}

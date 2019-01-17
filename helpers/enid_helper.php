@@ -66,8 +66,7 @@ if ( ! function_exists('guardar'))
     
       if ($submit == 1) {
           $attributes["type"] = "submit";        
-      }    
-
+      }
       if($type_button == 1) {
         $existe =  array_key_exists("class", $attributes)?1:0;              
         if ($existe ==  1) {
