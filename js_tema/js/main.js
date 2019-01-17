@@ -632,8 +632,7 @@ var envia_comentario = function (e) {
     e.preventDefault();
 }
 
-/*
-var valida_num_formvalida_num_form = function (input, place_msj) {
+var valida_num_form = function (input, place_msj) {
 
     $(place_msj).show();
     var valor_registrado = get_parameter(input);
@@ -645,13 +644,15 @@ var valida_num_formvalida_num_form = function (input, place_msj) {
         f = 0;
     }
 
-if (f == 0) {
-    $(input).css("border", "1px solid rgb(13, 62, 86)");
-}
+    if (f == 0) {
+        $(input).css("border", "1px solid rgb(13, 62, 86)");
+    }
 
-format_error(place_msj, mensaje_user);
-return f;
+    format_error(place_msj, mensaje_user);
+    return f;
 }
+/*
+
 var registra_lead = function (e) {
 
     var url = $(".form_enid_contacto").attr("action");

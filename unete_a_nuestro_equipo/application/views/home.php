@@ -4,7 +4,7 @@
         <?=heading_enid("¿Tienes alguna duda?" , 4)?>    
         <?=p("¡Llámanos! Podemos ayudarte.".icon('fa icon-mobile contact'))?>
         <?=anchor_enid(
-            "(55)5296-7027" ,  
+            "" ,
             [   
             "class"     => "black strong",
             "target"    => "_blank" ,
