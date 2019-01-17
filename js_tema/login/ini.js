@@ -19,6 +19,10 @@ $(document).on("ready", function(){
 	$("#mail").keyup(function(){
 		sin_espacios("#mail");
 	});
+	$("#email_recuperacion").keyup(function(){
+		sin_espacios("#email_recuperacion");
+	});
+
 
 });
 var inicio_session =  function(){
@@ -67,15 +71,24 @@ var recupera_password =  function(e){
 		$(".place_recuperacion_pw").empty();
 		var url = $(".form-pass").attr("action");		
 		var data_send =  $(".form-pass").serialize();
+		bloquea_form(".form-pass");
 		request_enid( "POST",  data_send , url , response_recupera_password  , ".place_status_inicio");
 	}
 	e.preventDefault();	
 }
 var  response_recupera_password  = function(data){
 
-	$('#contenedor-form-recuperacion').find('input, textarea, button, select').attr('disabled','disabled');			
-	llenaelementoHTML(".place_recuperacion_pw" ,  "El correo de recuperación se ha enviado con éxito.!" ); 			
-	show_response_ok_enid(".place_status_inicio" , "El correo de recuperación se ha enviado con éxito.!");		
+	if(data ==  1){
+
+		$('#contenedor-form-recuperacion').find('input, textarea, button, select').attr('disabled','disabled');
+		var newDiv = document.createElement("div" );
+		newDiv.setAttribute("class", "envio_correcto");
+		var newContent = document.createTextNode("El correo de recuperación se ha enviado con éxito.!");
+		newDiv.appendChild(newContent);
+		llenaelementoHTML(".place_recuperacion_pw" ,  newDiv);
+		show_response_ok_enid(".place_status_inicio" , newDiv);
+	}
+
 }
 var  carga_mail =  function(){
 

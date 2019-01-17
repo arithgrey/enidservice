@@ -94,3 +94,9 @@ form button:hover {
         display: none;
     }
 }
+.envio_correcto{
+    background: #000092;
+    margin-top: 10px;
+    color: white;
+    padding: 5px;
+}

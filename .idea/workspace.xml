@@ -6,23 +6,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3bc9853-1196-4a24-abd8-2fc7fc89d465" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/lllllo.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/localhsot.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css_tema/template/desarrollo_principal.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/desarrollo_principal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/desarrollo/application/controllers/inicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/desarrollo/application/controllers/inicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/enid_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/enid_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js_tema/desarrollo/principal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/desarrollo/principal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css_tema/template/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js_tema/login/ini.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/login/ini.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login/application/views/signin.php" beforeDir="false" afterPath="$PROJECT_DIR$/login/application/views/signin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msj/application/controllers/api/mailrest.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/controllers/api/mailrest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/tickets.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/tickets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/usuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/models/tickets_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/models/tickets_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/views/cotizador/contactos_dia.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/views/cotizador/contactos_dia.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/views/producto/simple.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/views/producto/simple.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/views/tickets/detalle.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/views/tickets/detalle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/views/tickets/principal_desarollo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/views/tickets/principal_desarollo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msj/application/libraries/mensajerialogin.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/libraries/mensajerialogin.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,11 +21,65 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/msj/application/controllers/api/mailrest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+            <state relative-caret-position="122">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js_tema/login/ini.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/css_tema/template/login.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="100" column="17" selection-start-line="100" selection-start-column="17" selection-end-line="100" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/login/application/views/signin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="94">
+              <caret line="84" column="37" lean-forward="true" selection-start-line="84" selection-start-column="37" selection-end-line="85" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/msj/application/libraries/mensajerialogin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css_tema/template/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="7271" column="13" selection-start-line="7271" selection-start-column="13" selection-end-line="7271" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js_tema/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="214">
+              <caret line="536" column="17" selection-start-line="536" selection-start-column="4" selection-end-line="536" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -45,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/q/application/controllers/api/usuario.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="100">
-              <caret line="181" selection-start-line="181" selection-end-line="181" />
+              <caret line="149" selection-start-line="149" selection-end-line="149" />
             </state>
           </provider>
         </entry>
@@ -54,11 +97,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>listado_pendientes</find>
-      <find>estado_tarea</find>
-      <find>$estado_tarea</find>
-      <find>a_enid_blue white completo</find>
-      <find>popup-box chat-popup</find>
       <find>enid_hel</find>
       <find>onerror</find>
       <find>get_img_usuario($id_usuario)</find>
@@ -84,6 +122,11 @@
       <find>recupera_password</find>
       <find>usuario</find>
       <find>pass</find>
+      <find>RECUPERA TUS DATOS DE ACCESO</find>
+      <find>ecupera_password</find>
+      <find>bloque</find>
+      <find>mail_recuperacion_pw</find>
+      <find>El correo de recuperación se ha enviado con éxito.!</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/planes_servicios/application/helpers</dir>
@@ -100,9 +143,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js_tema/domicilio/domicilio_entrega.js" />
-        <option value="$PROJECT_DIR$/js_tema/pedidos/seguimiento.js" />
-        <option value="$PROJECT_DIR$/js_tema/puntos_medios/principal.js" />
         <option value="$PROJECT_DIR$/js_tema/recomendaciones/principal.js" />
         <option value="$PROJECT_DIR$/js_tema/sobre_enid_service/principal.js" />
         <option value="$PROJECT_DIR$/js_tema/tareas_complejas/principal.js" />
@@ -120,7 +160,6 @@
         <option value="$PROJECT_DIR$/js_tema/faq/principal.js" />
         <option value="$PROJECT_DIR$/js_tema/lista_deseos/preferencias.js" />
         <option value="$PROJECT_DIR$/js_tema/lista_deseos/principal.js" />
-        <option value="$PROJECT_DIR$/js_tema/login/ini.js" />
         <option value="$PROJECT_DIR$/js_tema/movimientos/asociar.js" />
         <option value="$PROJECT_DIR$/js_tema/movimientos/clientes.js" />
         <option value="$PROJECT_DIR$/js_tema/movimientos/movimientos.js" />
@@ -150,11 +189,14 @@
         <option value="$PROJECT_DIR$/q/application/models/tickets_model.php" />
         <option value="$PROJECT_DIR$/js_tema/desarrollo/principal.js" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/usuario.php" />
+        <option value="$PROJECT_DIR$/login/application/views/signin.php" />
+        <option value="$PROJECT_DIR$/msj/application/libraries/mensajerialogin.php" />
         <option value="$PROJECT_DIR$/msj/application/controllers/api/mailrest.php" />
+        <option value="$PROJECT_DIR$/js_tema/login/ini.js" />
+        <option value="$PROJECT_DIR$/css_tema/template/login.css" />
       </list>
     </option>
   </component>
-  <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="763ae856-b642-4ca5-b441-7c2c28cff9ba" name="local" use_path_mappings="true">
@@ -223,12 +265,12 @@
       <workItem from="1547493203931" duration="5355000" />
       <workItem from="1547571635517" duration="6781000" />
       <workItem from="1547595511600" duration="14819000" />
-      <workItem from="1547704998278" duration="4626000" />
+      <workItem from="1547704998278" duration="5892000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48908000" />
+    <option name="totallyTimeSpent" value="50174000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
@@ -282,62 +324,14 @@
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/q/application/controllers/api/usuario.php</url>
-          <line>149</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/msj/application/controllers/api/mailrest.php</url>
-          <line>17</line>
-          <option name="timeStamp" value="22" />
+          <url>file://$PROJECT_DIR$/msj/application/libraries/mensajerialogin.php</url>
+          <line>4</line>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js_tema/movimientos/principal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1488">
-          <caret line="124" column="41" selection-start-line="124" selection-start-column="41" selection-end-line="124" selection-end-column="41" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_tema/movimientos/solicitud_oxxo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_tema/movimientos/solicitud_saldo_amigo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_tema/notificar/principal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="101" column="34" selection-start-line="101" selection-start-column="34" selection-end-line="101" selection-end-column="34" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_tema/pedidos/seguimiento.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js_tema/pedidos/principal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -599,13 +593,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js_tema/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="495" column="115" lean-forward="true" selection-start-line="495" selection-start-column="9" selection-end-line="495" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/desarrollo/application/controllers/inicio.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
@@ -641,17 +628,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/login/application/views/signin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="84" column="37" lean-forward="true" selection-start-line="84" selection-start-column="37" selection-end-line="85" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="536" column="17" selection-start-line="536" selection-start-column="4" selection-end-line="536" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css_tema/template/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="7271" column="13" selection-start-line="7271" selection-start-column="13" selection-end-line="7271" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/q/application/controllers/api/usuario.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
-          <caret line="181" selection-start-line="181" selection-end-line="181" />
+          <caret line="149" selection-start-line="149" selection-end-line="149" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/msj/application/controllers/api/mailrest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        <state relative-caret-position="122">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/msj/application/libraries/mensajerialogin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/login/ini.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css_tema/template/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="100" column="17" selection-start-line="100" selection-start-column="17" selection-end-line="100" selection-end-column="17" />
         </state>
       </provider>
     </entry>

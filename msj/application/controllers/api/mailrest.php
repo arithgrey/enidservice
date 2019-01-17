@@ -16,7 +16,8 @@ class Mailrest extends REST_Controller{
                 $response 				=  	$this->set_pass($param);
 
                 if ($response["status_send"] ==  1){
-                    $response["info_mail"] =  $this->mensajerialogin->mail_recuperacion_pw($response);
+                    $response["mail"]       =   $param["mail"];
+                    $response["info_mail"]  =   $this->mensajerialogin->mail_recuperacion_pw($response);
                 }
                 $response =  1;
             }
