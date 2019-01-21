@@ -1,7 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Recursocontroller extends CI_Controller {
 	function __construct(){		
-        parent::__construct();				
+        parent::__construct();
+        $this->load->helper("cuenta");
 		$this->load->library(lib_def());    				
         $this->principal->acceso();
 	}

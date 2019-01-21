@@ -1,8 +1,13 @@
 <?=n_row_12()?>
 <div class="contenedor_principal_enid">
     <div class="contenedor_principal_enid_service">
-    <?=$this->load->view("secciones/menu");?>    
-    <div class='col-lg-10'>
+        <div class="col-lg-2">
+            <nav class="nav-sidebar">
+                <?=get_menu()?>
+            </nav>
+        </div>
+
+        <div class='col-lg-10'>
         <div class="tab-content">   
             <div class="tab-pane" id='reporte'>
                 <?=place("place_reporte" )?>                

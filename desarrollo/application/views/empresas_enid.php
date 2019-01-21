@@ -1,7 +1,11 @@
 <?=n_row_12()?>
     <div class="contenedor_principal_enid_service">        
-        <div class="col-lg-2">                                          
-            <?=$this->load->view("desarrollo/menu")?>
+        <div class="col-lg-2">
+            <nav class="nav-sidebar">
+                <ul class="nav tabs">
+                    <?=get_menu($activa)?>
+                </ul>
+            </nav>
         </div>            
         <div class='col-lg-10'>
             <div class="tab-content">        

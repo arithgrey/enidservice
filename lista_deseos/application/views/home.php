@@ -1,7 +1,7 @@
 <?=n_row_12()?>
 <div class="contenedor_principal_enid">        
     <div class="col-lg-2">
-        <?=$this->load->view("secciones/menu");?>
+        <?=get_menu()?>
     </div>  
     <div class="col-lg-7">
         <?=get_lista_deseo($productos_deseados)?>

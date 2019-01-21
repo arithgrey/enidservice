@@ -21,7 +21,6 @@
 				            	"class"		=>	'form-control input-sm',
 				             	"required" 	=>  true 
 				            ])?>
-				            
 				            <?=place('place_pw_2')?>
 				            <?=div("Confirmar nueva", 1)?>
 				            <?=input([

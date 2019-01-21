@@ -11,6 +11,8 @@
                 <?=span("Monto expresado en Pesos Mexicanos")?>
             </div>
         </div>
-    </div>          
-    <?=$this->load->view("sub_menu")?>
+    </div>
+    <div class="card" style="width: 100%">
+        <?=get_submenu()?>
+    </div>
 <?=end_row()?>

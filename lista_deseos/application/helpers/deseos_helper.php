@@ -1,6 +1,25 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
     if (!function_exists('invierte_date_time')) {
 
+        if (!function_exists('get_menu')) {
+
+            function get_menu()
+            {
+                $preferencias = anchor_enid(
+                    "TUS PREFERENCIAS E INTERESES",
+                    ["id" => "mis_ventas", "href" => "?q=preferencias", "class" => 'btn_mis_ventas']);
+
+                $articulos_deseados
+                    = anchor_enid(
+                    "TU LISTA DE ARTÍCULOS DESEADOS",
+                    ["id" => "mis_compras", "href" => "../lista_deseos",
+                        "class" => 'btn_cobranza mis_compras']);
+
+                $list = [$preferencias, $articulos_deseados];
+                return ul($list);
+            }
+
+        }
         if (!function_exists('get_lista_deseo')) {
             function get_lista_deseo($productos_deseados)
             {
@@ -35,9 +54,9 @@
 
                 return div(img(
                     [
-                        "src"=>"https://media.giphy.com/media/VTXzh4qtahZS/giphy.gif" ,
+                        "src" => "https://media.giphy.com/media/VTXzh4qtahZS/giphy.gif",
                         "style" => "border-radius:100%;"
-                    ]) ,
+                    ]),
                     [
                         "class" => "col-lg-4 col-lg-offset-4",
                         "style" => "background:#011220;padding:20px;"
