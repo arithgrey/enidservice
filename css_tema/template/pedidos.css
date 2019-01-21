@@ -121,3 +121,15 @@
     margin-top: 2px;
     padding: 5px;
 }
+.seccion_recordatorio{
+    margin-top:20px;
+}
+.contenedor_opciones_pedido{
+
+    width: 240px;
+    padding: 10px!important;
+}
+.contenedor_opciones_pedido div a{
+    color:black;
+    text-decoration:underline;
+}

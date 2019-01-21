@@ -305,12 +305,37 @@ if(!function_exists('invierte_date_time')){
 
             }
 
-            $button =   guardar("+ Agregar" , ["class" => "agregar_comentario" , "onClick" => "agregar_nota();"]);
-            $title	=   heading_enid("NOTAS" ,4 ,["class" => "white"]);
-            return $button.br().div($title.$notas , ["class" => "global_tipificaciones"]);
+            //$button       =   guardar("+ Agregar" , ["class" => "agregar_comentario" , "onClick" => "agregar_nota();"]);
+            //$button     =   heading_enid("COMENTARIOS" , 4);
+            $title	    =   heading_enid("NOTAS" ,4 ,["class" => "white"]);
+            return br().div($title.$notas , ["class" => "global_tipificaciones"]);
+
+        }
+    }
+	if(! function_exists('crea_seccion_recordatorios')){
+	    function crea_seccion_recordatorios($recordatorios , $tipo_recortario){
 
 
+            $list  = [];
+            foreach($recordatorios as $row){
 
+                $id_recordatorio    =   $row["id_recordatorio"];
+                $status             =   ($row["status"] > 0 ) ? 0 :1;
+                $fecha_cordatorio   =   $row["fecha_cordatorio"];
+                $id_tipo            =   $row["id_tipo"];
+                $text_tipo          =   $row["tipo"];
+
+                $config             =   ["type"=>"checkbox" , "class" => "form-control item_recordatorio", "onclick"  =>  "modifica_status_recordatorio({$id_recordatorio} , {$status})"];
+                if($row["status"] > 0 ){
+                    $config      =   ["checked" => true, "type"=>"checkbox" , "class" => "form-control item_recordatorio", "onclick"  =>  "modifica_status_recordatorio({$id_recordatorio} , {$status})"];
+                }
+                $check           =   input($config);
+                $item            =   div($check.$row["descripcion"] , 1) .
+                                     div(icon("fa fa-clock-o").$fecha_cordatorio ,1).
+                                        div($text_tipo);
+                $list[]          =   li($item);
+            }
+            return ul($list);
         }
     }
     if ( ! function_exists('create_seccion_tipificaciones'))
@@ -391,12 +416,10 @@ if(!function_exists('invierte_date_time')){
                 $monto_a_pagar          =   $recibo["monto_a_pagar"];
                 $se_cancela             =   $recibo["se_cancela"];
                 $fecha_entrega          =   $recibo["fecha_entrega"];
-                $text 					=   div(icon("fa fa fa fa-pencil ") ,
-                                            [
-                                                "class"     => "editar_horario_entrega  text-right " ,
-                                                "id"        => $id_recibo,
-                                                "onclick"   => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '{$fecha_entrega}' )"
-                                            ]).div(div("HORARIO DE ENTREGA" , 1).div($recibo["fecha_contra_entrega"] ,1) , ["class"=> "contenedor_entrega"]);
+
+                $text 					=   div(div("HORARIO DE ENTREGA" , 1).div($recibo["fecha_contra_entrega"] ,1) , ["class"=> "contenedor_entrega"]);
+
+
                 $fecha_contra_entrega   =   ($recibo["tipo_entrega"] == 1) ? $text:"";
                 return $fecha_contra_entrega;
             }
@@ -592,6 +615,53 @@ if(!function_exists('invierte_date_time')){
                 $text = ($recibo[0]["status"] == 6) ? "EMAIL RECORDATORIOS COMPRA ".$recibo[0]["num_email_recordatorio"]:"";
                 return $text;
             }
+
+        }
+    }
+
+
+    if ( ! function_exists('get_link_nota'))
+    {
+        function get_link_nota(){
+            return div(anchor_enid("NOTA" , ["class" => "agregar_comentario" , "onClick" => "agregar_nota();"]) , 1);
+        }
+    }
+
+    if ( ! function_exists('get_link_cambio_fecha'))
+    {
+        function get_link_cambio_fecha($domicilio, $recibo){
+
+            if ( get_param_def($domicilio , "domicilio") > 0  && count($recibo) > 0) {
+                $recibo 				=   $recibo[0];
+                $id_recibo              =   $recibo["id_proyecto_persona_forma_pago"];
+                $status                 =   $recibo["status"];
+                $saldo_cubierto_envio   =   $recibo["saldo_cubierto_envio"];
+                $monto_a_pagar          =   $recibo["monto_a_pagar"];
+                $se_cancela             =   $recibo["se_cancela"];
+                $fecha_entrega          =   $recibo["fecha_entrega"];
+
+                $text 					=   div(div("HORARIO DE ENTREGA" , 1).div($recibo["fecha_contra_entrega"] ,1) , ["class"=> "contenedor_entrega"]);
+
+                $fecha_contra_entrega   =   ($recibo["tipo_entrega"] == 1) ? $text:"";
+                return div(anchor_enid("FECHA DE ENTREGA" ,
+                    [
+                        "class"     => "editar_horario_entrega  text-right " ,
+                        "id"        => $id_recibo,
+                        "onclick"   => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '{$fecha_entrega}' )"
+                    ]),1);
+
+            }
+
+
+
+        }
+    }
+    if ( ! function_exists('get_link_recordatorio'))
+    {
+        function get_link_recordatorio($id_recibo){
+
+            $url   = "../pedidos/?recibo=".$id_recibo."&recordatorio=1";
+            return div(anchor_enid("RECORDATORIO" , ["href" =>  $url]) , 1);
 
         }
     }
