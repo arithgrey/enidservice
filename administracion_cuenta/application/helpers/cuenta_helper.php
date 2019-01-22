@@ -16,7 +16,7 @@
 
                 $list = [
                     li(
-                        anchor_enid(icon("fa fa-address-book-o") . "Cuenta"
+                        anchor_enid(icon("fa fa-address-book-o") . "CUENTA"
                             ,
                             [
                                 "href" => "#tab_mis_datos",
@@ -27,7 +27,7 @@
                         )
                     ),
 
-                    li(anchor_enid(icon("fa  fa-fighter-jet") . "Dirección de envío",
+                    li(anchor_enid(icon("fa  fa-fighter-jet") . "DIRECCIÓN DE ENVÍO",
                             [
                                 "href" => "#tab_direccion",
                                 "data-toggle" => "tab",
@@ -39,7 +39,7 @@
                     ),
 
 
-                    li(anchor_enid(icon("fa fa-unlock-alt") . "Contraseña", [
+                    li(anchor_enid(icon("fa fa-unlock-alt") . "CONTRASEÑA", [
                             "href" => "#tab_privacidad",
                             "data-toggle" => "tab",
                             "id" => 'base_tab_privacidad',
@@ -49,7 +49,7 @@
 
 
                     li(anchor_enid(
-                            icon("fa fa-shield") . "Privacidad y seguridad",
+                            icon("fa fa-shield") . "PRIVACIDAD Y SEGURIDAD",
                             [
                                 "href" => "#tab_privacidad_seguridad",
                                 "data-toggle" => "tab",
@@ -58,7 +58,7 @@
                     ),
 
 
-                    li(anchor_enid("INTERESES Y PREFERENCIAS",
+                    li(icon("fa fa-gift" , ["style" => "font-size:1.2em!important;"]).anchor_enid("INTERESES Y PREFERENCIAS",
                             [
                                 "class" => "btn_intereses",
                                 "href" => "../lista_deseos/?q=preferencias"
@@ -66,7 +66,7 @@
                     ),
 
 
-                    li(anchor_enid("TUS PRODUCTOS EN VENTA",
+                    li(icon("fa fa-credit-card-alt").anchor_enid("TUS PRODUCTOS EN VENTA",
                             [
                                 "class" => "btn_cuenta_personal",
                                 "href" => "../search/?q3=" . $id_usuario . "&tienda=1"

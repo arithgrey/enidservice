@@ -53,7 +53,7 @@
         }
         function valida_existencia_imagenes($num_images)
         {
-            return ($num_images > 0) ? "" : " style='display:none;' ";
+            return ($num_images > 0) ? "" : " display:none; ";
         }
 
         function text_agregar_telefono($has_phone, $telefono_visible)

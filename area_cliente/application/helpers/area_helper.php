@@ -32,7 +32,7 @@ if(!function_exists('invierte_date_time')){
     }  
     return $status;
   }
-  function get_menu(){
+  function get_menu($action){
       $a_tab_pagos = anchor_enid("",
           [
               "href" => "#tab_pagos",

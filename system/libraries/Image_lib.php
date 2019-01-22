@@ -893,7 +893,7 @@ class CI_Image_lib {
 
 		$retval = 1;
 		// exec() might be disabled
-		if (function_usable('exec'))
+		if (function_exists('exec'))
 		{
 			@exec($cmd, $output, $retval);
 		}
@@ -976,7 +976,7 @@ class CI_Image_lib {
 
 		$retval = 1;
 		// exec() might be disabled
-		if (function_usable('exec'))
+		if (function_exists('exec'))
 		{
 			@exec($cmd, $output, $retval);
 		}

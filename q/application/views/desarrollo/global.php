@@ -27,7 +27,11 @@
 		$list .="</tr>";	
 
 	}
+
+
 ?>
+
+<?=br()?>
 <?=div("Atención al cliente/ tareas resueltas" , ["class"=>"blue_enid_background white padding_10"],1)?>
 <?=n_row_12()?>	
 	<div style='overflow-x:auto;' class="text-center">

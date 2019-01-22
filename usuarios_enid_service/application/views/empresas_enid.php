@@ -2,7 +2,7 @@
     <div class="contenedor_principal_enid">     
         <div class="col-lg-2" >
             <nav class="nav-sidebar">
-                <?=get_menu()?>
+                <?=get_menu($in_session)?>
             </nav>
         </div>    
         <div class='col-lg-10'>

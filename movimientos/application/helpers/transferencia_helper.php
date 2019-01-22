@@ -55,6 +55,7 @@ if(!function_exists('invierte_date_time')){
     if ( ! function_exists('get_submenu'))
     {
         function get_submenu(){
+
             $list = [
                 li(anchor_enid("Añadir ó solicitar saldo", ["href"=>"?q=transfer&action=6", "class"=>"black"]) , ["class" => "list-group-item"] ),
                 li(anchor_enid("Trasnferir fondos ".icon("fa fa-fighter-jet") , ["href"=>"?q=transfer&action=2" , "class"=>"black"]  ) , ["class" => "list-group-item"] ),
@@ -63,10 +64,10 @@ if(!function_exists('invierte_date_time')){
                 li(anchor_enid("Asociar tarjeta de crédito o débito".icon("fa fa-credit-card-alt") ,  ["href"=>"?q=transfer&action=1&tarjeta=1" , "class"=>"black"] ) , ["class"=>"list-group-item metodo_pago_disponible"])
 
             ];
+
             return ul($list, ["class"=>"list-group list-group-flush"]);
         }
     }
-
     /*
     if ( ! function_exists('valida_nombre_propietario'))
     {

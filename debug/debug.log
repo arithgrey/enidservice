@@ -28,3 +28,733 @@ DEBUG - TYPE string 2019-01-17 01:15:18 --> [{"id_tarea":"277","descripcion":"De
 DEBUG - TYPE string 2019-01-17 01:15:34 --> [{"id_tarea":"277","descripcion":"Desarrollo y manipulaci\u00f3n del\n    producto:\tConsiste en perfeccionar los productos ya\n    existentes, introducir nuevos productos, darles otro uso o\n    aplicaci\u00f3n, hacerle modificaciones a sus estilos,\n    colores,\n    modelos,\n    eliminaci\u00f3n de los productos pasados de moda,\n    observaci\u00f3n del desarrollo de los\n    productos elaborados por la competencia, su\n    envase, accesorios del producto, de su eficiencia, sus\n    caracter\u00edsticas distintivas y su nombre","fecha_registro":"2017-09-24 22:55:24","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"278","descripcion":"Distribuci\u00f3n f\u00edsica:\n    Responsabilidad que cae sobre el gerente de\n    ventas la cual es compartida con el de tr\u00e1fico y\n    env\u00edos. El gerente de ventas coordina estas con el\n    tr\u00e1fico, en los problemas\n    relativos al manejo de\n    materiales de los productos desde la f\u00e1brica hasta\n    el consumidor, que comprende los costos y\n    m\u00e9todos\n    de transporte,\n    la localizaci\u00f3n de almacenes, los\n    costos de manejo, los inventarios, la\n    reducci\u00f3n de reclamaciones por retrasos y perjuicios de\n    ventas","fecha_registro":"2017-09-24 22:55:44","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"279","descripcion":"Estrategias de ventas: son algunas\n    pr\u00e1cticas que regulan las relaciones con los agentes\n    distribuidores, minoristas y clientes. Tiene que ver con las\n    condiciones de ventas, reclamaciones y ajustes, calidad del\n    producto, m\u00e9todo de distribuci\u00f3n, cr\u00e9ditos y cobros, servicio\n    mec\u00e1nico, funcionamiento de las sucursales y entrega de\n    los pedidos","fecha_registro":"2017-09-24 22:56:23","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"280","descripcion":"Financiamiento de las ventas: Las operaciones a\n    cr\u00e9dito y a contado son esenciales para\n    el desenvolvimiento de las transacciones que requieren de la\n    distribuci\u00f3n de bienes y\n    servicios\n    desde el productor al mayorista, vendedores al por mayor y\n    consumidores. Para financiar ventas a plazo es necesario que el\n    gerente de ventas este ampliamente relacionado con el de\n    cr\u00e9dito, para determinar los planes de pago que deben\n    adoptarse, la duraci\u00f3n del per\u00edodo de\n    cr\u00e9dito, el premio por pronto pago o el castigo por pago\n    retrasado, es decir, todo lo relacionado con la pr\u00e1ctica\n    crediticia.","fecha_registro":"2017-09-24 22:56:41","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"281","descripcion":"Costos y Presupuestos\n    de Ventas: Para controlar los gastos y\n    planear la ganancia, el ejecutivo de ventas, previa consulta\n    con el personal\n    investigador del mercado con el de contabilidad\n    y el de presupuestos, debe calcular el volumen\n    probable de ventas y sus costos para todo el\n    a\u00f1o.","fecha_registro":"2017-09-24 22:56:58","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"282","descripcion":"Estudio de mercado: El conocimiento\n    de los mercados, las preferencias del consumidor, sus\n    h\u00e1bitos de compra y su aceptaci\u00f3n del producto o\n    servicio es fundamental para una buena administraci\u00f3n de ventas, debido a que se\n    debe recoger, registrar y analizar los datos relativos\n    al car\u00e1cter, cantidad y tendencia de la\n    demanda, el\n    estudio de\n    mercado debe incluir el an\u00e1lisis y la investigaci\u00f3n de ventas, estudios\n    estad\u00edsticos de las ventas o productos, territorio,\n    distribuidores y temporadas; los costos de los agentes de\n    ventas, costos de venta y de\n    operaci\u00f3n.","fecha_registro":"2017-09-24 22:57:10","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"283","descripcion":"Promociones de venta y publicidad:\n    Estas ayudan a estimular la demanda de consumo y\n    contribuir a que los agentes de venta de la fabrica, los\n    mayoristas y los minoristas vendan los productos: el agente de\n    ventas aprueba los planes de promoci\u00f3n y publicidad, los\n    horarios de trabajo, las asignaciones presupuestarias, los\n    medios de propaganda,\n    las promociones especiales y la publicidad en\n    colaboraci\u00f3n con los comerciantes.","fecha_registro":"2017-09-24 22:57:28","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"284","descripcion":"Planeaci\u00f3n de Ventas: El administrador\n    de ventas debe fijar los objetivos de las mismas y determinar\n    las actividades mercantiles necesarias para lograr las metas\n    establecidas. La planeaci\u00f3n de ventas debe coordinar las\n    actividades de los agentes, comerciantes y personal anunciador,\n    la distribuci\u00f3n f\u00edsica; el personal de ventas,\n    las fechas de los planes de producci\u00f3n, los inventarios,\n    los presupuestos y el control de\n    los agentes de ventas","fecha_registro":"2017-09-24 22:57:41","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"285","descripcion":"Servicios t\u00e9cnicos o mec\u00e1nicos:\n    Corresponde a los gerentes de ventas cuyos productos\n    mec\u00e1nicos requieren de servicios de instalaci\u00f3n y\n    t\u00e9cnicos, establecer normas al\n    respecto; tener el equipo y los locales destinados por la\n    empresa vendedora para tal servicio","fecha_registro":"2017-09-24 22:57:54","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"286","descripcion":"Relaciones con los distribuidores y\n    minoristas: Las buenas relaciones con estos requieren\n    proporcionarles asistencia de ventas, servicios\n    mec\u00e1nicos de entrega y ajuste, informarles sobre los\n    productos, servicios, t\u00e1cticas y normas de la\n    compa\u00f1\u00eda y contestar pronta y detalladamente a\n    sus preguntas.","fecha_registro":"2017-09-24 22:58:13","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"287","descripcion":"El personal de ventas: Consiste en desarrollar\n    de la manera m\u00e1s eficiente el proceso de integraci\u00f3n el cual comprende buscar,\n    seleccionar y adiestrar a los agentes de ventas; as\u00ed\n    como de su compensaci\u00f3n econ\u00f3mica, supervisi\u00f3n, motivaci\u00f3n y control.","fecha_registro":"2017-09-24 22:58:25","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"288","descripcion":"Administraci\u00f3n del departamento de\n    ventas: Es responsabilidad de los gerentes de la misma, el\n    cual debe establecer la\n    organizaci\u00f3n, determinar los procedimientos,\n    dirigir el personal administrativo, coordinar el trabajo\n    de los miembros del departamento, llevar el registro de las\n    ventas y asignar tareas a los jefes de las diversas secciones\n    de este departamento.","fecha_registro":"2017-09-24 22:58:43","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"1192","descripcion":"asdasd","fecha_registro":"2019-01-17 08:14:59","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:14:59","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1193","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:02","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:02","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1194","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:04","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:04","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1195","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:07","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:07","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1196","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:10","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:10","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1197","descripcion":"asdasdas","fecha_registro":"2019-01-17 08:15:12","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:12","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1198","descripcion":"asdasdasd","fecha_registro":"2019-01-17 08:15:15","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:15","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1199","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:18","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:18","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1200","descripcion":"","fecha_registro":"2019-01-17 08:15:34","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:34","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"}]
 DEBUG - TYPE string 2019-01-17 01:15:57 --> [{"id_tarea":"277","descripcion":"Desarrollo y manipulaci\u00f3n del\n    producto:\tConsiste en perfeccionar los productos ya\n    existentes, introducir nuevos productos, darles otro uso o\n    aplicaci\u00f3n, hacerle modificaciones a sus estilos,\n    colores,\n    modelos,\n    eliminaci\u00f3n de los productos pasados de moda,\n    observaci\u00f3n del desarrollo de los\n    productos elaborados por la competencia, su\n    envase, accesorios del producto, de su eficiencia, sus\n    caracter\u00edsticas distintivas y su nombre","fecha_registro":"2017-09-24 22:55:24","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"278","descripcion":"Distribuci\u00f3n f\u00edsica:\n    Responsabilidad que cae sobre el gerente de\n    ventas la cual es compartida con el de tr\u00e1fico y\n    env\u00edos. El gerente de ventas coordina estas con el\n    tr\u00e1fico, en los problemas\n    relativos al manejo de\n    materiales de los productos desde la f\u00e1brica hasta\n    el consumidor, que comprende los costos y\n    m\u00e9todos\n    de transporte,\n    la localizaci\u00f3n de almacenes, los\n    costos de manejo, los inventarios, la\n    reducci\u00f3n de reclamaciones por retrasos y perjuicios de\n    ventas","fecha_registro":"2017-09-24 22:55:44","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"279","descripcion":"Estrategias de ventas: son algunas\n    pr\u00e1cticas que regulan las relaciones con los agentes\n    distribuidores, minoristas y clientes. Tiene que ver con las\n    condiciones de ventas, reclamaciones y ajustes, calidad del\n    producto, m\u00e9todo de distribuci\u00f3n, cr\u00e9ditos y cobros, servicio\n    mec\u00e1nico, funcionamiento de las sucursales y entrega de\n    los pedidos","fecha_registro":"2017-09-24 22:56:23","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"280","descripcion":"Financiamiento de las ventas: Las operaciones a\n    cr\u00e9dito y a contado son esenciales para\n    el desenvolvimiento de las transacciones que requieren de la\n    distribuci\u00f3n de bienes y\n    servicios\n    desde el productor al mayorista, vendedores al por mayor y\n    consumidores. Para financiar ventas a plazo es necesario que el\n    gerente de ventas este ampliamente relacionado con el de\n    cr\u00e9dito, para determinar los planes de pago que deben\n    adoptarse, la duraci\u00f3n del per\u00edodo de\n    cr\u00e9dito, el premio por pronto pago o el castigo por pago\n    retrasado, es decir, todo lo relacionado con la pr\u00e1ctica\n    crediticia.","fecha_registro":"2017-09-24 22:56:41","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"281","descripcion":"Costos y Presupuestos\n    de Ventas: Para controlar los gastos y\n    planear la ganancia, el ejecutivo de ventas, previa consulta\n    con el personal\n    investigador del mercado con el de contabilidad\n    y el de presupuestos, debe calcular el volumen\n    probable de ventas y sus costos para todo el\n    a\u00f1o.","fecha_registro":"2017-09-24 22:56:58","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"282","descripcion":"Estudio de mercado: El conocimiento\n    de los mercados, las preferencias del consumidor, sus\n    h\u00e1bitos de compra y su aceptaci\u00f3n del producto o\n    servicio es fundamental para una buena administraci\u00f3n de ventas, debido a que se\n    debe recoger, registrar y analizar los datos relativos\n    al car\u00e1cter, cantidad y tendencia de la\n    demanda, el\n    estudio de\n    mercado debe incluir el an\u00e1lisis y la investigaci\u00f3n de ventas, estudios\n    estad\u00edsticos de las ventas o productos, territorio,\n    distribuidores y temporadas; los costos de los agentes de\n    ventas, costos de venta y de\n    operaci\u00f3n.","fecha_registro":"2017-09-24 22:57:10","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"283","descripcion":"Promociones de venta y publicidad:\n    Estas ayudan a estimular la demanda de consumo y\n    contribuir a que los agentes de venta de la fabrica, los\n    mayoristas y los minoristas vendan los productos: el agente de\n    ventas aprueba los planes de promoci\u00f3n y publicidad, los\n    horarios de trabajo, las asignaciones presupuestarias, los\n    medios de propaganda,\n    las promociones especiales y la publicidad en\n    colaboraci\u00f3n con los comerciantes.","fecha_registro":"2017-09-24 22:57:28","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"284","descripcion":"Planeaci\u00f3n de Ventas: El administrador\n    de ventas debe fijar los objetivos de las mismas y determinar\n    las actividades mercantiles necesarias para lograr las metas\n    establecidas. La planeaci\u00f3n de ventas debe coordinar las\n    actividades de los agentes, comerciantes y personal anunciador,\n    la distribuci\u00f3n f\u00edsica; el personal de ventas,\n    las fechas de los planes de producci\u00f3n, los inventarios,\n    los presupuestos y el control de\n    los agentes de ventas","fecha_registro":"2017-09-24 22:57:41","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"285","descripcion":"Servicios t\u00e9cnicos o mec\u00e1nicos:\n    Corresponde a los gerentes de ventas cuyos productos\n    mec\u00e1nicos requieren de servicios de instalaci\u00f3n y\n    t\u00e9cnicos, establecer normas al\n    respecto; tener el equipo y los locales destinados por la\n    empresa vendedora para tal servicio","fecha_registro":"2017-09-24 22:57:54","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"286","descripcion":"Relaciones con los distribuidores y\n    minoristas: Las buenas relaciones con estos requieren\n    proporcionarles asistencia de ventas, servicios\n    mec\u00e1nicos de entrega y ajuste, informarles sobre los\n    productos, servicios, t\u00e1cticas y normas de la\n    compa\u00f1\u00eda y contestar pronta y detalladamente a\n    sus preguntas.","fecha_registro":"2017-09-24 22:58:13","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"287","descripcion":"El personal de ventas: Consiste en desarrollar\n    de la manera m\u00e1s eficiente el proceso de integraci\u00f3n el cual comprende buscar,\n    seleccionar y adiestrar a los agentes de ventas; as\u00ed\n    como de su compensaci\u00f3n econ\u00f3mica, supervisi\u00f3n, motivaci\u00f3n y control.","fecha_registro":"2017-09-24 22:58:25","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"288","descripcion":"Administraci\u00f3n del departamento de\n    ventas: Es responsabilidad de los gerentes de la misma, el\n    cual debe establecer la\n    organizaci\u00f3n, determinar los procedimientos,\n    dirigir el personal administrativo, coordinar el trabajo\n    de los miembros del departamento, llevar el registro de las\n    ventas y asignar tareas a los jefes de las diversas secciones\n    de este departamento.","fecha_registro":"2017-09-24 22:58:43","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"1192","descripcion":"asdasd","fecha_registro":"2019-01-17 08:14:59","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:14:59","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1193","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:02","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:02","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1194","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:04","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:04","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1195","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:07","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:07","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1196","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:10","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:10","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1197","descripcion":"asdasdas","fecha_registro":"2019-01-17 08:15:12","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:12","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1198","descripcion":"asdasdasd","fecha_registro":"2019-01-17 08:15:15","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:15","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1199","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:18","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:18","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1200","descripcion":"","fecha_registro":"2019-01-17 08:15:34","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:34","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1201","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:56","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:56","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"}]
 DEBUG - TYPE string 2019-01-17 01:16:37 --> [{"id_tarea":"277","descripcion":"Desarrollo y manipulaci\u00f3n del\n    producto:\tConsiste en perfeccionar los productos ya\n    existentes, introducir nuevos productos, darles otro uso o\n    aplicaci\u00f3n, hacerle modificaciones a sus estilos,\n    colores,\n    modelos,\n    eliminaci\u00f3n de los productos pasados de moda,\n    observaci\u00f3n del desarrollo de los\n    productos elaborados por la competencia, su\n    envase, accesorios del producto, de su eficiencia, sus\n    caracter\u00edsticas distintivas y su nombre","fecha_registro":"2017-09-24 22:55:24","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"278","descripcion":"Distribuci\u00f3n f\u00edsica:\n    Responsabilidad que cae sobre el gerente de\n    ventas la cual es compartida con el de tr\u00e1fico y\n    env\u00edos. El gerente de ventas coordina estas con el\n    tr\u00e1fico, en los problemas\n    relativos al manejo de\n    materiales de los productos desde la f\u00e1brica hasta\n    el consumidor, que comprende los costos y\n    m\u00e9todos\n    de transporte,\n    la localizaci\u00f3n de almacenes, los\n    costos de manejo, los inventarios, la\n    reducci\u00f3n de reclamaciones por retrasos y perjuicios de\n    ventas","fecha_registro":"2017-09-24 22:55:44","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"279","descripcion":"Estrategias de ventas: son algunas\n    pr\u00e1cticas que regulan las relaciones con los agentes\n    distribuidores, minoristas y clientes. Tiene que ver con las\n    condiciones de ventas, reclamaciones y ajustes, calidad del\n    producto, m\u00e9todo de distribuci\u00f3n, cr\u00e9ditos y cobros, servicio\n    mec\u00e1nico, funcionamiento de las sucursales y entrega de\n    los pedidos","fecha_registro":"2017-09-24 22:56:23","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"280","descripcion":"Financiamiento de las ventas: Las operaciones a\n    cr\u00e9dito y a contado son esenciales para\n    el desenvolvimiento de las transacciones que requieren de la\n    distribuci\u00f3n de bienes y\n    servicios\n    desde el productor al mayorista, vendedores al por mayor y\n    consumidores. Para financiar ventas a plazo es necesario que el\n    gerente de ventas este ampliamente relacionado con el de\n    cr\u00e9dito, para determinar los planes de pago que deben\n    adoptarse, la duraci\u00f3n del per\u00edodo de\n    cr\u00e9dito, el premio por pronto pago o el castigo por pago\n    retrasado, es decir, todo lo relacionado con la pr\u00e1ctica\n    crediticia.","fecha_registro":"2017-09-24 22:56:41","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"281","descripcion":"Costos y Presupuestos\n    de Ventas: Para controlar los gastos y\n    planear la ganancia, el ejecutivo de ventas, previa consulta\n    con el personal\n    investigador del mercado con el de contabilidad\n    y el de presupuestos, debe calcular el volumen\n    probable de ventas y sus costos para todo el\n    a\u00f1o.","fecha_registro":"2017-09-24 22:56:58","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"282","descripcion":"Estudio de mercado: El conocimiento\n    de los mercados, las preferencias del consumidor, sus\n    h\u00e1bitos de compra y su aceptaci\u00f3n del producto o\n    servicio es fundamental para una buena administraci\u00f3n de ventas, debido a que se\n    debe recoger, registrar y analizar los datos relativos\n    al car\u00e1cter, cantidad y tendencia de la\n    demanda, el\n    estudio de\n    mercado debe incluir el an\u00e1lisis y la investigaci\u00f3n de ventas, estudios\n    estad\u00edsticos de las ventas o productos, territorio,\n    distribuidores y temporadas; los costos de los agentes de\n    ventas, costos de venta y de\n    operaci\u00f3n.","fecha_registro":"2017-09-24 22:57:10","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"283","descripcion":"Promociones de venta y publicidad:\n    Estas ayudan a estimular la demanda de consumo y\n    contribuir a que los agentes de venta de la fabrica, los\n    mayoristas y los minoristas vendan los productos: el agente de\n    ventas aprueba los planes de promoci\u00f3n y publicidad, los\n    horarios de trabajo, las asignaciones presupuestarias, los\n    medios de propaganda,\n    las promociones especiales y la publicidad en\n    colaboraci\u00f3n con los comerciantes.","fecha_registro":"2017-09-24 22:57:28","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"284","descripcion":"Planeaci\u00f3n de Ventas: El administrador\n    de ventas debe fijar los objetivos de las mismas y determinar\n    las actividades mercantiles necesarias para lograr las metas\n    establecidas. La planeaci\u00f3n de ventas debe coordinar las\n    actividades de los agentes, comerciantes y personal anunciador,\n    la distribuci\u00f3n f\u00edsica; el personal de ventas,\n    las fechas de los planes de producci\u00f3n, los inventarios,\n    los presupuestos y el control de\n    los agentes de ventas","fecha_registro":"2017-09-24 22:57:41","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"285","descripcion":"Servicios t\u00e9cnicos o mec\u00e1nicos:\n    Corresponde a los gerentes de ventas cuyos productos\n    mec\u00e1nicos requieren de servicios de instalaci\u00f3n y\n    t\u00e9cnicos, establecer normas al\n    respecto; tener el equipo y los locales destinados por la\n    empresa vendedora para tal servicio","fecha_registro":"2017-09-24 22:57:54","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"286","descripcion":"Relaciones con los distribuidores y\n    minoristas: Las buenas relaciones con estos requieren\n    proporcionarles asistencia de ventas, servicios\n    mec\u00e1nicos de entrega y ajuste, informarles sobre los\n    productos, servicios, t\u00e1cticas y normas de la\n    compa\u00f1\u00eda y contestar pronta y detalladamente a\n    sus preguntas.","fecha_registro":"2017-09-24 22:58:13","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"287","descripcion":"El personal de ventas: Consiste en desarrollar\n    de la manera m\u00e1s eficiente el proceso de integraci\u00f3n el cual comprende buscar,\n    seleccionar y adiestrar a los agentes de ventas; as\u00ed\n    como de su compensaci\u00f3n econ\u00f3mica, supervisi\u00f3n, motivaci\u00f3n y control.","fecha_registro":"2017-09-24 22:58:25","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"288","descripcion":"Administraci\u00f3n del departamento de\n    ventas: Es responsabilidad de los gerentes de la misma, el\n    cual debe establecer la\n    organizaci\u00f3n, determinar los procedimientos,\n    dirigir el personal administrativo, coordinar el trabajo\n    de los miembros del departamento, llevar el registro de las\n    ventas y asignar tareas a los jefes de las diversas secciones\n    de este departamento.","fecha_registro":"2017-09-24 22:58:43","status":"0","id_ticket":"59","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"1192","descripcion":"asdasd","fecha_registro":"2019-01-17 08:14:59","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:14:59","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1193","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:02","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:02","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1194","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:04","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:04","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1195","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:07","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:07","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1196","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:10","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:10","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1197","descripcion":"asdasdas","fecha_registro":"2019-01-17 08:15:12","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:12","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1198","descripcion":"asdasdasd","fecha_registro":"2019-01-17 08:15:15","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:15","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1199","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:18","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:18","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1200","descripcion":"","fecha_registro":"2019-01-17 08:15:34","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:34","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1201","descripcion":"asdasd","fecha_registro":"2019-01-17 08:15:56","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:15:56","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1202","descripcion":"asdasd","fecha_registro":"2019-01-17 08:16:37","status":"0","id_ticket":"59","fecha_termino":"2019-01-17 08:16:37","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"}]
+DEBUG - TYPE array 2019-01-21 23:57:54 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 1
+            [nombre_categoria] => Correo Electrónico
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 4
+            [nombre_categoria] => Recomendaciones
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 5
+            [nombre_categoria] => Páginas web
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 6
+            [nombre_categoria] => Gestores de contenidos
+            [faqs] => 0
+        )
+
+    [4] => Array
+        (
+            [id_categoria] => 7
+            [nombre_categoria] => Google adwords
+            [faqs] => 0
+        )
+
+    [5] => Array
+        (
+            [id_categoria] => 8
+            [nombre_categoria] => Tienda en línea
+            [faqs] => 0
+        )
+
+    [6] => Array
+        (
+            [id_categoria] => 9
+            [nombre_categoria] => CRM
+            [faqs] => 0
+        )
+
+    [7] => Array
+        (
+            [id_categoria] => 10
+            [nombre_categoria] => Dominios
+            [faqs] => 0
+        )
+
+    [8] => Array
+        (
+            [id_categoria] => 11
+            [nombre_categoria] => Web Hosting
+            [faqs] => 0
+        )
+
+    [9] => Array
+        (
+            [id_categoria] => 12
+            [nombre_categoria] => Medios de contacto
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:57:54 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 13
+            [nombre_categoria] => Desarrollo de software
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 14
+            [nombre_categoria] => Wordpress
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 21
+            [nombre_categoria] => Flujos de trabajo
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 22
+            [nombre_categoria] => Comparativas
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:57:54 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 15
+            [nombre_categoria] => Programa de afiliados 
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:58:42 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 1
+            [nombre_categoria] => Correo Electrónico
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 4
+            [nombre_categoria] => Recomendaciones
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 5
+            [nombre_categoria] => Páginas web
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 6
+            [nombre_categoria] => Gestores de contenidos
+            [faqs] => 0
+        )
+
+    [4] => Array
+        (
+            [id_categoria] => 7
+            [nombre_categoria] => Google adwords
+            [faqs] => 0
+        )
+
+    [5] => Array
+        (
+            [id_categoria] => 8
+            [nombre_categoria] => Tienda en línea
+            [faqs] => 0
+        )
+
+    [6] => Array
+        (
+            [id_categoria] => 9
+            [nombre_categoria] => CRM
+            [faqs] => 0
+        )
+
+    [7] => Array
+        (
+            [id_categoria] => 10
+            [nombre_categoria] => Dominios
+            [faqs] => 0
+        )
+
+    [8] => Array
+        (
+            [id_categoria] => 11
+            [nombre_categoria] => Web Hosting
+            [faqs] => 0
+        )
+
+    [9] => Array
+        (
+            [id_categoria] => 12
+            [nombre_categoria] => Medios de contacto
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:58:42 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 13
+            [nombre_categoria] => Desarrollo de software
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 14
+            [nombre_categoria] => Wordpress
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 21
+            [nombre_categoria] => Flujos de trabajo
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 22
+            [nombre_categoria] => Comparativas
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:58:42 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 15
+            [nombre_categoria] => Programa de afiliados 
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:58:44 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 1
+            [nombre_categoria] => Correo Electrónico
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 4
+            [nombre_categoria] => Recomendaciones
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 5
+            [nombre_categoria] => Páginas web
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 6
+            [nombre_categoria] => Gestores de contenidos
+            [faqs] => 0
+        )
+
+    [4] => Array
+        (
+            [id_categoria] => 7
+            [nombre_categoria] => Google adwords
+            [faqs] => 0
+        )
+
+    [5] => Array
+        (
+            [id_categoria] => 8
+            [nombre_categoria] => Tienda en línea
+            [faqs] => 0
+        )
+
+    [6] => Array
+        (
+            [id_categoria] => 9
+            [nombre_categoria] => CRM
+            [faqs] => 0
+        )
+
+    [7] => Array
+        (
+            [id_categoria] => 10
+            [nombre_categoria] => Dominios
+            [faqs] => 0
+        )
+
+    [8] => Array
+        (
+            [id_categoria] => 11
+            [nombre_categoria] => Web Hosting
+            [faqs] => 0
+        )
+
+    [9] => Array
+        (
+            [id_categoria] => 12
+            [nombre_categoria] => Medios de contacto
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:58:44 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 13
+            [nombre_categoria] => Desarrollo de software
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 14
+            [nombre_categoria] => Wordpress
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 21
+            [nombre_categoria] => Flujos de trabajo
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 22
+            [nombre_categoria] => Comparativas
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:58:45 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 15
+            [nombre_categoria] => Programa de afiliados 
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:59:27 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 1
+            [nombre_categoria] => Correo Electrónico
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 4
+            [nombre_categoria] => Recomendaciones
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 5
+            [nombre_categoria] => Páginas web
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 6
+            [nombre_categoria] => Gestores de contenidos
+            [faqs] => 0
+        )
+
+    [4] => Array
+        (
+            [id_categoria] => 7
+            [nombre_categoria] => Google adwords
+            [faqs] => 0
+        )
+
+    [5] => Array
+        (
+            [id_categoria] => 8
+            [nombre_categoria] => Tienda en línea
+            [faqs] => 0
+        )
+
+    [6] => Array
+        (
+            [id_categoria] => 9
+            [nombre_categoria] => CRM
+            [faqs] => 0
+        )
+
+    [7] => Array
+        (
+            [id_categoria] => 10
+            [nombre_categoria] => Dominios
+            [faqs] => 0
+        )
+
+    [8] => Array
+        (
+            [id_categoria] => 11
+            [nombre_categoria] => Web Hosting
+            [faqs] => 0
+        )
+
+    [9] => Array
+        (
+            [id_categoria] => 12
+            [nombre_categoria] => Medios de contacto
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:59:27 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 13
+            [nombre_categoria] => Desarrollo de software
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 14
+            [nombre_categoria] => Wordpress
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 21
+            [nombre_categoria] => Flujos de trabajo
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 22
+            [nombre_categoria] => Comparativas
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:59:27 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 15
+            [nombre_categoria] => Programa de afiliados 
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:59:30 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 1
+            [nombre_categoria] => Correo Electrónico
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 4
+            [nombre_categoria] => Recomendaciones
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 5
+            [nombre_categoria] => Páginas web
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 6
+            [nombre_categoria] => Gestores de contenidos
+            [faqs] => 0
+        )
+
+    [4] => Array
+        (
+            [id_categoria] => 7
+            [nombre_categoria] => Google adwords
+            [faqs] => 0
+        )
+
+    [5] => Array
+        (
+            [id_categoria] => 8
+            [nombre_categoria] => Tienda en línea
+            [faqs] => 0
+        )
+
+    [6] => Array
+        (
+            [id_categoria] => 9
+            [nombre_categoria] => CRM
+            [faqs] => 0
+        )
+
+    [7] => Array
+        (
+            [id_categoria] => 10
+            [nombre_categoria] => Dominios
+            [faqs] => 0
+        )
+
+    [8] => Array
+        (
+            [id_categoria] => 11
+            [nombre_categoria] => Web Hosting
+            [faqs] => 0
+        )
+
+    [9] => Array
+        (
+            [id_categoria] => 12
+            [nombre_categoria] => Medios de contacto
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:59:31 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 13
+            [nombre_categoria] => Desarrollo de software
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 14
+            [nombre_categoria] => Wordpress
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 21
+            [nombre_categoria] => Flujos de trabajo
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 22
+            [nombre_categoria] => Comparativas
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:59:31 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 15
+            [nombre_categoria] => Programa de afiliados 
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:59:32 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 1
+            [nombre_categoria] => Correo Electrónico
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 4
+            [nombre_categoria] => Recomendaciones
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 5
+            [nombre_categoria] => Páginas web
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 6
+            [nombre_categoria] => Gestores de contenidos
+            [faqs] => 0
+        )
+
+    [4] => Array
+        (
+            [id_categoria] => 7
+            [nombre_categoria] => Google adwords
+            [faqs] => 0
+        )
+
+    [5] => Array
+        (
+            [id_categoria] => 8
+            [nombre_categoria] => Tienda en línea
+            [faqs] => 0
+        )
+
+    [6] => Array
+        (
+            [id_categoria] => 9
+            [nombre_categoria] => CRM
+            [faqs] => 0
+        )
+
+    [7] => Array
+        (
+            [id_categoria] => 10
+            [nombre_categoria] => Dominios
+            [faqs] => 0
+        )
+
+    [8] => Array
+        (
+            [id_categoria] => 11
+            [nombre_categoria] => Web Hosting
+            [faqs] => 0
+        )
+
+    [9] => Array
+        (
+            [id_categoria] => 12
+            [nombre_categoria] => Medios de contacto
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:59:32 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 13
+            [nombre_categoria] => Desarrollo de software
+            [faqs] => 0
+        )
+
+    [1] => Array
+        (
+            [id_categoria] => 14
+            [nombre_categoria] => Wordpress
+            [faqs] => 0
+        )
+
+    [2] => Array
+        (
+            [id_categoria] => 21
+            [nombre_categoria] => Flujos de trabajo
+            [faqs] => 0
+        )
+
+    [3] => Array
+        (
+            [id_categoria] => 22
+            [nombre_categoria] => Comparativas
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE array 2019-01-21 23:59:32 --> Array
+(
+    [0] => Array
+        (
+            [id_categoria] => 15
+            [nombre_categoria] => Programa de afiliados 
+            [faqs] => 0
+        )
+
+)
+
+DEBUG - TYPE string 2019-01-22 00:00:55 --> []
+DEBUG - TYPE string 2019-01-22 00:01:00 --> [{"id_tarea":"1203","descripcion":"kjas dkas dkj \u00a0\u00a0\u00a0\u00a0","fecha_registro":"2019-01-22 07:01:00","status":"0","id_ticket":"211","fecha_termino":"2019-01-22 07:01:00","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"}]
+DEBUG - TYPE string 2019-01-22 00:01:03 --> [{"id_tarea":"1203","descripcion":"kjas dkas dkj \u00a0\u00a0\u00a0\u00a0","fecha_registro":"2019-01-22 07:01:00","status":"0","id_ticket":"211","fecha_termino":"2019-01-22 07:01:00","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1204","descripcion":"asdasdasd","fecha_registro":"2019-01-22 07:01:03","status":"0","id_ticket":"211","fecha_termino":"2019-01-22 07:01:03","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"}]
+DEBUG - TYPE string 2019-01-22 00:01:08 --> [{"id_tarea":"1203","descripcion":"kjas dkas dkj \u00a0\u00a0\u00a0\u00a0","fecha_registro":"2019-01-22 07:01:00","status":"0","id_ticket":"211","fecha_termino":"2019-01-22 07:01:00","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1204","descripcion":"asdasdasd","fecha_registro":"2019-01-22 07:01:03","status":"0","id_ticket":"211","fecha_termino":"2019-01-22 07:01:03","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"},{"id_tarea":"1205","descripcion":"asdasdasd","fecha_registro":"2019-01-22 07:01:08","status":"0","id_ticket":"211","fecha_termino":"2019-01-22 07:01:08","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"}]
+DEBUG - TYPE string 2019-01-22 00:01:31 --> []
+DEBUG - TYPE string 2019-01-22 00:01:42 --> [{"id_tarea":"1206","descripcion":"jh jjh jh","fecha_registro":"2019-01-22 07:01:42","status":"0","id_ticket":"212","fecha_termino":"2019-01-22 07:01:42","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"}]
+DEBUG - TYPE string 2019-01-22 00:02:50 --> []
+DEBUG - TYPE string 2019-01-22 00:41:07 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:43:49 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:46:36 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:46:58 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:47:13 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:48:28 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:53:42 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:54:08 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:55:08 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:56:33 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:57:51 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 00:59:59 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 01:00:14 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 01:02:15 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 01:03:20 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 01:03:43 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 01:04:17 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 01:05:33 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 01:06:09 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 01:08:46 --> Error al enviar email
+DEBUG - TYPE string 2019-01-22 01:11:15 --> Error al enviar email

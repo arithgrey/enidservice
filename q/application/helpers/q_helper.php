@@ -323,7 +323,7 @@
 
         function base_notificacion($url = '', $class_icono = '' , $text = '')
         {
-            return anchor_enid(icon($class_icono) . $text, ["href" => $url] , 1);
+            return li(anchor_enid(icon($class_icono) . $text, ["href" => $url , "class" => "black notificacion_restante"] ));
         }
         function add_mensajes_respuestas_vendedor($param, $tipo)
         {
@@ -356,37 +356,47 @@
             $lista              = "";
             $deuda              = add_saldo_pendiente($inf_notificacion["adeudos_cliente"]);
             $f                  = $f + $deuda["flag"];
-            $lista             .= $deuda["html"];
 
-            $deuda = add_pedidos_sin_direccion($inf_notificacion["adeudos_cliente"]);
-            $f = $f + $deuda["flag"];
-            $lista .= $deuda["html"];
-            $direccion = add_direccion_envio($info["flag_direccion"]);
+
+            $direccion              = add_pedidos_sin_direccion($inf_notificacion["adeudos_cliente"]);
             $f = $f + $direccion["flag"];
-            $lista .= $direccion["html"];
 
 
-            $numtelefonico = add_numero_telefonico($num_telefonico);
+            $direccion_envio          = add_direccion_envio($info["flag_direccion"]);
+            $f = $f + $direccion_envio["flag"];
+
+
+
+            $numtelefonico      = add_numero_telefonico($num_telefonico);
             $f = $f + $numtelefonico["flag"];
-            $lista .= $numtelefonico["html"];
 
-            $mensajes_sin_leer =
-                add_mensajes_respuestas_vendedor($inf_notificacion["mensajes"], 1);
+
+            $mensajes_sin_leer  = add_mensajes_respuestas_vendedor($inf_notificacion["mensajes"], 1);
             $f = $f + $mensajes_sin_leer["flag"];
-            $lista .= $mensajes_sin_leer["html"];
+
 
 
             $response["num_tareas_pendientes_text"] = $f;
             $response["num_tareas_pendientes"] = crea_tareas_pendientes_info($f);
-            $response["lista_pendientes"] = get_mensaje_inicial_notificaciones(1, $f) . $lista;
+
+            $list =  [
+                $deuda,
+                $direccion,
+                $direccion_envio,
+                $numtelefonico,
+                $mensajes_sin_leer
+
+            ];
+            $response["lista_pendientes"] = get_mensaje_inicial_notificaciones(1, $f) . ul($list);
+
             return $response;
 
         }
         function get_tareas_pendienetes_usuario($info)
         {
 
-            $inf = $info["info_notificaciones"];
-            $lista = "";
+            $inf    = $info["info_notificaciones"];
+            $lista  = "";
 
             $f = 0;
             $ventas_enid_service = $info["ventas_enid_service"];

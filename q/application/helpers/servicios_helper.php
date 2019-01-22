@@ -3,6 +3,7 @@ if(!function_exists('invierte_date_time')){
 
 
     function get_menu_config($num, $num_imagenes, $url_productos_publico){
+
         $foto_config    =  ['href' => "#tab_imagenes" , 'data-toggle'    => "tab" ];
         $precios_config =  ['href' => "#tab_info_precios" , 'data-toggle'   => "tab" ];
 
@@ -14,24 +15,20 @@ if(!function_exists('invierte_date_time')){
 
         $meta_inf       =   ['href' => "#tab_terminos_de_busqueda" ,'data-toggle'   => "tab"];
 
-
-
         $list = [
                 li(anchor_enid( icon('fa fa-picture-o') , $foto_config) , ["class"  => valida_active($num , 1)]),
-                li(valida_existencia_imagenes($num_imagenes).anchor_enid( icon('fa fa-credit-card') , $precios_config ) ,  ["class" => valida_active($num , 4 ) ]) ,
-                li(anchor_enid( icon('fa fa-info detalle') , $precios_inf ), ["class"   => valida_existencia_imagenes($num_imagenes)]),
-                li(
-                    valida_existencia_imagenes($num_imagenes).
-                    anchor_enid( icon('fa fa-fighter-jet menu_meta_key_words'), $meta_inf ),
-                    ["class"    =>  valida_active($num , 3)]
+                li(anchor_enid( icon('fa fa-credit-card') , $precios_config ) ,  ["class" => valida_active($num , 4 )  , "style"    => valida_existencia_imagenes($num_imagenes)]) ,
+                li(anchor_enid( icon('fa fa-info detalle') , $precios_inf ), ["style"   => valida_existencia_imagenes($num_imagenes)]),
+                li(anchor_enid( icon('fa fa-fighter-jet menu_meta_key_words'), $meta_inf ),
+                    ["class"    =>  valida_active($num , 3) ,  "style"=>valida_existencia_imagenes($num_imagenes)]
                 ),
                 li(anchor_enid(icon("fa fa-shopping-bag")."VER PUBLICACIÓN" ,
                     [
                         "href"    => $url_productos_publico,
                         "target"  => "_blank",
                         "style"   => 'background: #002565;color: white!important;'
-                    ]), ["class" => valida_existencia_imagenes($num_imagenes)
-                ])
+                    ]), ["style" => valida_existencia_imagenes($num_imagenes)]
+                )
         ];
 
         return ul($list, ["class"   =>  "nav nav-tabs"]);

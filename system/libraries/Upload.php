@@ -1253,7 +1253,7 @@ class CI_Upload {
 		 * Notes:
 		 *	- the DIRECTORY_SEPARATOR comparison ensures that we're not on a Windows system
 		 *	- many system admins would disable the exec(), shell_exec(), popen() and similar functions
-		 *	  due to security concerns, hence the function_usable() checks
+		 *	  due to security concerns, hence the function_exists() checks
 		 */
 		if (DIRECTORY_SEPARATOR !== '\\')
 		{
@@ -1276,7 +1276,7 @@ class CI_Upload {
 				}
 			}
 
-			if ( ! ini_get('safe_mode') && function_usable('shell_exec'))
+			if ( ! ini_get('safe_mode') && function_exists('shell_exec'))
 			{
 				$mime = @shell_exec($cmd);
 				if (strlen($mime) > 0)
@@ -1290,7 +1290,7 @@ class CI_Upload {
 				}
 			}
 
-			if (function_usable('popen'))
+			if (function_exists('popen'))
 			{
 				$proc = @popen($cmd, 'r');
 				if (is_resource($proc))

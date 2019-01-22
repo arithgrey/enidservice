@@ -8,7 +8,7 @@
             </nav>
         </div>            
         <div class='col-lg-10'>
-            <div class="tab-content">        
+            <div class="tab-content">
                 <?=input_hidden(["type"=>'hidden', "class"=>'id_usuario', "value"=> $id_usuario])?>
                 <div class="tab-pane <?=valida_seccion_activa(2 , $activa)?>" id='tab_charts'>
                     <?=n_row_12()?>                        

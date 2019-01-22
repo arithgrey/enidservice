@@ -19,7 +19,7 @@
 <div class="contenedor_principal_enid">
     <div class="col-lg-2">
         <nav class="nav-sidebar">
-            <?= get_menu() ?>
+            <?= get_menu($action) ?>
         </nav>
     </div>
     <div class='col-lg-10'>

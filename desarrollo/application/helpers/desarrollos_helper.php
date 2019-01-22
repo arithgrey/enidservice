@@ -7,13 +7,14 @@
 
 
                 $list = [
-                    li(anchor_enid("ABRIR TICKET",
+                    li(
+                        anchor_enid("ABRIR TICKET",
                         [
                             "href" => "#tab_nuevo_ticket",
                             "data-toggle" => "tab",
                             "class" => "a_enid_blue abrir_ticket"
                         ]),
-                        ["class" => 'black li_menu ' . valida_seccion_activa(3, $activa)]
+                        ["class" => 'black  ' . valida_seccion_activa(3, $activa)]
 
                     ),
 
@@ -24,11 +25,11 @@
                             , "data-toggle" => "tab"
                             , "id" => "ver_avances"
                             , "class" => 'black strong'
-                        ]), ["class" => 'black li_menu' . valida_seccion_activa(2, $activa), "style" => 'background:white;']),
+                        ]), ["class" => 'black top_20 ' . valida_seccion_activa(2, $activa), "style" => 'background:white;']),
 
 
                     li(
-                        anchor_enid("Pendientes" . icon('fa fa-check-circle'),
+                        anchor_enid(icon('fa fa-check-circle')."Pendientes" ,
                             [
                                 "href" => "#tab_abrir_ticket"
                                 , "data-toggle" => "tab"
@@ -37,7 +38,7 @@
                             ]) . place('place_tareas_pendientes'),
 
 
-                        ["class" => 'black li_menu ' . valida_seccion_activa(1, $activa), "style" => 'background:white;']
+                        ["class" => 'black  ' . valida_seccion_activa(1, $activa), "style" => 'background:white;']
                     )
 
 
