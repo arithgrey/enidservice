@@ -1,6 +1,10 @@
 	<?=n_row_12()?>	 	
 		<div class="contenedor_principal_enid">
-			<?=$this->load->view("menu");?>				
+            <div class="col-lg-2">
+                <nav class="nav-sidebar">
+                    <?=get_menu($id_usuario);?>
+                </nav>
+            </div>
 			<div class="col-lg-10">			
 				<div class="tab-content">								
 				    <div class="tab-pane active"  id="tab_mis_datos">

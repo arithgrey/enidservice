@@ -92,6 +92,12 @@
 		<br>
         <br>
         <?=create_fecha_contra_entrega($recibo , $domicilio)?>
+        <?=notificacion_por_cambio_fecha($recibo);?>
+        <?=br()?>
+        <?=n_row_12()?>
+            <?=crea_seccion_recordatorios($recordatorios ,$tipo_recortario)?>
+        <?=end_row()?>
+        <?=br()?>
 
         <?=n_row_12()?>
 			<?=create_seccion_tipificaciones($tipificaciones)?>
@@ -100,16 +106,16 @@
 
         <?=n_row_12()?>
                 <form class="form_notas" style="display:none;" >
-                    <?=div("NOTA",["class" => "strong" ,    "style" => "font-size:1.5em;"])?>
+                    <?=div("NOTA",["class" => "strong text_nota" ,    "style" => "font-size:1.5em;"])?>
                     <?=textarea(["name" => "comentarios" , "class" => "comentarios form-control"])?>
-                    <?=input_hidden(["name" => "id_recibo", "value" =>  $recibo[0]["id_proyecto_persona_forma_pago"] ])?>
+                    <?=input_hidden(["name" => "id_recibo", "value" =>  $id_recibo ])?>
                     <?=guardar( "AGREGAR", ["name" => "comentarios"])?>
                 </form>
         <?=place("place_nota")?>
         <?=end_row()?>
         <?=br()?>
         <?=n_row_12()?>
-            <?=create_seccion_comentarios($comentarios, $recibo[0]["id_proyecto_persona_forma_pago"])?>
+            <?=create_seccion_comentarios($comentarios, $id_recibo)?>
         <?=end_row()?>
 
 	</div>
@@ -142,6 +148,8 @@
 
 		<?=create_seccion_domicilio($domicilio)?>
 		<?=create_seccion_recordatorios($recibo)?>
+
+
 		<br>
 		<?=n_row_12()?>
 		<div class="padding_10 resumen_pago">
@@ -149,7 +157,19 @@
 		</div>
 		<?=end_row()?>
 
-		<br>
+        <div class="dropdown pull-right top_20 ">
+            <?=div(icon("fa fa-plus-circle fa-3x") , ["class"=>" dropdown-toggle" ,"data-toggle"=>"dropdown"])?>
+            <div class="dropdown-menu contenedor_opciones_pedido" aria-labelledby="dropdownMenuButton">
+                <?=get_link_cambio_fecha($domicilio, $recibo)?>
+                <?=get_link_recordatorio($id_recibo)?>
+                <?=get_link_nota()?>
+
+            </div>
+        </div>
+
+
+
+        <br>
 
 	</div>
 </div>

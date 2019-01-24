@@ -1,10 +1,14 @@
 <?=n_row_12()?>
     <div class="contenedor_principal_enid_service">        
-        <div class="col-lg-2">                                          
-            <?=$this->load->view("desarrollo/menu")?>
+        <div class="col-lg-2">
+            <nav class="nav-sidebar">
+                <ul class="nav tabs">
+                    <?=get_menu($activa)?>
+                </ul>
+            </nav>
         </div>            
         <div class='col-lg-10'>
-            <div class="tab-content">        
+            <div class="tab-content">
                 <?=input_hidden(["type"=>'hidden', "class"=>'id_usuario', "value"=> $id_usuario])?>
                 <div class="tab-pane <?=valida_seccion_activa(2 , $activa)?>" id='tab_charts'>
                     <?=n_row_12()?>                        

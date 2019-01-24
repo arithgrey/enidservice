@@ -1,5 +1,5 @@
-<section id="hero"
-    <div class="container ">
+<section id="hero" class="imagen_principal">
+    <div class="container" >
         <div class="row top_50 bottom_50">
             <div class="col-lg-3">
                 <div style="background: #000 !important;opacity: .85;padding: .1px;opacity: .8">
@@ -52,7 +52,7 @@
         </div>
         <?php if($ubicacion == 0):?>
             <div class="col-lg-6">
-                <form  id="form_contacto"   action="../q/index.php/api/contacto"  method="post">
+                <form  id="form_contacto"   action="../q/index.php/api/contacto/format/json/"  method="post">
                     
                         <?=div(p("Departamento " , ['class'=> 'white'] ) , ["class"=>"col-sm-3"])?>
                         <?=div(create_select(

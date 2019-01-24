@@ -17,7 +17,7 @@
     <?=div("" , ["class"=>"col-lg-2"])?>
     <div class="col-lg-6">
         <?=get_resumen_cuenta($info_usuario)?>
-        <?=p("DETALLES", [] , 1)?>
+        <?=p("DETALLES", 1)?>
         <?=div("Número de Servicios/Productos" . anchor_enid("(".$num_proyectos. " ) ver" , ["href"=>"../area_cliente" ,  "class"=>"blue_enid strong"]) ,   1 )?>
         <?=div(anchor_enid("Tickets de soporte:" , ["href"=>"../area_cliente" ,  "class"=>"blue_enid strong"]) ,  [] , 1 )?>        
         <?=div("Tareas de soporte:" . anchor_enid("(".$num_proyectos. " ) ver" , ["href"=>"../area_cliente" ,  "class"=>"blue_enid strong"]) ,  1 )?>        

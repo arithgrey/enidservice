@@ -1,8 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Inicio extends CI_Controller {
 	function __construct(){        
-        parent::__construct();            			
-	    $this->load->library(lib_def());      
+        parent::__construct();
+        $this->load->helper("desarrollos");
+        $this->load->library(lib_def());
         $this->principal->acceso();
     }
     function index(){
@@ -32,7 +33,7 @@ class Inicio extends CI_Controller {
         return  $this->principal->api( $api , $q );   
     }
     private function getCssJS($data){
-        $data["css"]                =   ["desarrollo_principal.css"];
+        $data["css"]                =   ["desarrollo_principal.css" , "confirm-alert.css"];
 
         $data["js"] = [
             "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
@@ -40,8 +41,9 @@ class Inicio extends CI_Controller {
             "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
             "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
             "js/pickers-init.js",
-            'desarrollo/principal.js',
-            'js/summernote.js'
+            "desarrollo/principal.js",
+            "alerts/jquery-confirm.js",
+            "js/summernote.js"
 
         ];
 

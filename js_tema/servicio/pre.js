@@ -1,6 +1,4 @@
-$(document).ready(function(){   
-    set_option("flag_carga" , 0);
-});
+set_option("flag_carga" , 0);
 var carga_opcion_entrega = function (id, id_servicio, orden_pedido) {
 
 
@@ -16,12 +14,7 @@ var carga_opcion_entrega = function (id, id_servicio, orden_pedido) {
 };
 
 var response_opcion_entrega = function (data) {
-
-
     set_option("flag_carga", 1);
-    var id_servicio     = get_option("id_servicio");
-    var url             = "";
-
     switch (get_option("tipo")) {
         case 1:
 
@@ -40,7 +33,6 @@ var response_opcion_entrega = function (data) {
             }else{
                 agrega_lista_deseos();
             }
-
             break;
 
         default:

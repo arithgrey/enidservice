@@ -1,6 +1,7 @@
-function get_proyectos_persona(){
-	url =  "../q/index.php/api/portafolio/proyecto_persona/format/json/";	
-	data_send =  {"id_persona" : get_persona()};				
+"use strict";
+var get_proyectos_persona = function(){
+	var url =  "../q/index.php/api/portafolio/proyecto_persona/format/json/";
+    var data_send =  {"id_persona" : get_persona()};
 
 	$.ajax({
 			url : url , 
@@ -10,7 +11,7 @@ function get_proyectos_persona(){
 				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){							
-		/**/
+
 		llenaelementoHTML(".place_proyectos" , data);				
 
 		$(".solicitar_desarrollo").click(function(e){
@@ -18,7 +19,7 @@ function get_proyectos_persona(){
 			set_proyecto(id_proyecto);
 			carga_tikets_usuario();
 		});
-		/**/
+
 		$(".btn_clientes").click(carga_clientes);
 		
 
@@ -27,11 +28,10 @@ function get_proyectos_persona(){
 	});		
 
 }
-/**/
-function carga_form_solicitar_desarrollo(e){
+var carga_form_solicitar_desarrollo = function(e){
 
-	url =  "../q/index.php/api/tickets/form/format/json/";	
-	data_send =  {"id_persona" : get_persona() , id_proyecto : get_proyecto()};				
+    var url =  "../q/index.php/api/tickets/form/format/json/";
+    var  data_send =  {"id_persona" : get_persona() , id_proyecto : get_proyecto()};
 
 
 		$.ajax({
@@ -55,12 +55,11 @@ function carga_form_solicitar_desarrollo(e){
 	});				
 
 }
-/**/
-function registra_ticket(e){
+var registra_ticket = function(e){
 
 
-	url =  "../q/index.php/api/tickets/ticket/format/json/";	
-	data_send = $(".form_ticket").serialize()+"&"+ $.param({"id_proyecto" : get_proyecto() , "id_usuario" : get_id_usuario()});				
+	var url =  "../q/index.php/api/tickets/ticket/format/json/";
+	var data_send = $(".form_ticket").serialize()+"&"+ $.param({"id_proyecto" : get_proyecto() , "id_usuario" : get_id_usuario()});
 
 		$.ajax({
 				url : url , 
@@ -74,7 +73,7 @@ function registra_ticket(e){
 			llenaelementoHTML(".place_registro_ticket" , "A la brevedad se realizará su solicitud!");							
 			set_id_ticket(data); 
 			carga_info_detalle_ticket();
-			/**/
+
 
 								
 
@@ -84,19 +83,17 @@ function registra_ticket(e){
 					
 	e.preventDefault();
 }
-/**/
-/**/
-function carga_tikets_usuario(){
+var carga_tikets_usuario = function(){
 	
 	recorre_web_version_movil();
-	status_ticket = 0; 	
+    var status_ticket = 0;
 	if (document.querySelector(".estatus_tickets")) {		
 		status_ticket =  $(".estatus_tickets").val();
 	}
-	
-	
-	url =  "../q/index.php/api/tickets/ticket/format/json/";		
-	data_send =  {id_proyecto : get_proyecto() , "status" : status_ticket };				
+
+
+    var url =  "../q/index.php/api/tickets/ticket/format/json/";
+    var data_send =  {id_proyecto : get_proyecto() , "status" : status_ticket };
 
 
 		$.ajax({
@@ -108,7 +105,7 @@ function carga_tikets_usuario(){
 				}
 		}).done(function(data){													
 
-			/**/
+
 			llenaelementoHTML(".place_proyectos" , data);										
 			$(".solicitar_desarrollo_form").click(carga_form_solicitar_desarrollo);
 			/*Ver detalle ticket completo*/
@@ -116,31 +113,26 @@ function carga_tikets_usuario(){
 				set_id_ticket(get_parameter_enid($(this) , "id")); 
 				carga_info_detalle_ticket();
 			});
-			/**/
+
 			$(".btn_refresh").click(function(){
 				carga_tikets_usuario();
 			});
-			/**/
+
 			$(".estatus_tickets").change(function(){
 				carga_tikets_usuario();
 			});
 			$(".regresar_serivicios_cliente").click(get_proyectos_persona);	
 
-			/**/
-			
 
-			
-
-			/**/
 		}).fail(function(){			
 			show_error_enid(".place_proyectos" , "Error ... ");
 	});				
 }
-/**/
-function carga_info_detalle_ticket(){
 
-	url =  "../q/index.php/api/tickets/detalle/format/json/";	
-	data_send =  {"id_ticket" : get_id_ticket()};				
+var carga_info_detalle_ticket = function(){
+
+	var url =  "../q/index.php/api/tickets/detalle/format/json/";
+	var data_send =  {"id_ticket" : get_id_ticket()};
 
 	$.ajax({
 			url : url , 
@@ -155,14 +147,13 @@ function carga_info_detalle_ticket(){
 		$('.summernote').summernote();
 		$(".asunto_ticket").click(modificar_asunto);
 		$(".btn_mod_ticket").click(actualizar_estatus_ticket);
-		/*Agregar tarea*/
 		$(".form_agregar_tarea").submit(registra_tarea);
 		$(".tarea").click(actualiza_tareas);
 		recorrepage("#asunto_ticket");
-		/**/
+
 			$(".mostrar_tareas_pendientes").click(muestra_tareas_por_estatus);
 			$(".mostrar_todas_las_tareas").click(muestra_todas_las_tareas);
-		/**/
+
 		$(".ver_tickets").click(function(){
 			carga_tikets_usuario();
 		});
@@ -172,7 +163,7 @@ function carga_info_detalle_ticket(){
 		}
 		recorrepage(".mostrar_todas_las_tareas");
 		
-		/**/
+
 
 		
 
@@ -180,12 +171,12 @@ function carga_info_detalle_ticket(){
 		show_error_enid(".place_proyectos" , "Error ... ");
 	});		
 }
-/**/
-function actualizar_estatus_ticket(e){
+
+var  actualizar_estatus_ticket = function(e){
 	
-	nuevo_estado= get_parameter_enid($(this) , "id");
-	url =  "../q/index.php/api/tickets/status/format/json/";	
-	data_send =  {"id_ticket" : get_id_ticket() , "status" : nuevo_estado };				
+	var nuevo_estado= get_parameter_enid($(this) , "id");
+	var url =  "../q/index.php/api/tickets/status/format/json/";
+	var data_send =  {"id_ticket" : get_id_ticket() , "status" : nuevo_estado };
 
 	$.ajax({
 			url : url , 
@@ -200,14 +191,14 @@ function actualizar_estatus_ticket(e){
 		show_error_enid(".place_proyectos" , "Error ... ");
 	});		
 }
-/**/
-function registra_tarea(e){
+
+var  registra_tarea = function(e){
 	
-	requerimiento =  $(".note-editable").html();
+	var requerimiento =  $(".note-editable").html();
 	$(".tarea_pendiente").val(requerimiento);
 	
-	url =  "../q/index.php/api/tarea/index/format/json/";	
-	data_send =  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_id_ticket() });				
+	var url =  "../q/index.php/api/tarea/index/format/json/";
+	var data_send =  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_id_ticket() });
 
 	$.ajax({
 			url : url , 
@@ -224,15 +215,15 @@ function registra_tarea(e){
 
 	e.preventDefault();
 }
-/**/
-function actualiza_tareas(e){
+
+var  actualiza_tareas = function(e){
 		
 
 	set_id_tarea(get_parameter_enid($(this) , "id"));
-	nuevo_valor = this.value;
+	var nuevo_valor = this.value;
 
-	url =  "../q/index.php/api/tarea/estado/format/json/";	
-	data_send = {"id_tarea" : get_id_tarea() ,  "nuevo_valor" : nuevo_valor , "id_ticket" : get_id_ticket() };				
+	var url =  "../q/index.php/api/tarea/estado/format/json/";
+	var data_send = {"id_tarea" : get_id_tarea() ,  "nuevo_valor" : nuevo_valor , "id_ticket" : get_id_ticket() };
 	
 	$.ajax({
 			url : url , 
@@ -252,10 +243,10 @@ function actualiza_tareas(e){
 		show_error_enid(".place_proyectos" , "Error ... ");
 	});			
 }
-/**/
-function regresar_list_posible_cliente(){
 
-	menu = get_menu_actual();  
+var regresar_list_posible_cliente = function(){
+
+	var menu = get_menu_actual();
 	switch(menu){
 
 		case "envios_a_validar":
@@ -275,19 +266,19 @@ function regresar_list_posible_cliente(){
 			break; 		
 	}
 }
-/**/
-function modificar_asunto(e){
+
+var  modificar_asunto = function(e){
 	
 	recorre_web_version_movil();
 	asunto_ticket = get_parameter_enid($(this) , "id");
 	$(".mof_asunto").val(asunto_ticket);
-	/**/
+
 	$(".form-actualizar-asunto").submit(actualiza_asunto_ticket);
 }
-function actualiza_asunto_ticket(e){
+var actualiza_asunto_ticket = function(e){
 	
-	data_send = $(".form-actualizar-asunto").serialize()+"&"+$.param({"id_ticket" : get_id_ticket()});	
-	url =  "../q/index.php/api/tickets/asunto/format/json/";	
+	var data_send = $(".form-actualizar-asunto").serialize()+"&"+$.param({"id_ticket" : get_id_ticket()});
+	var url =  "../q/index.php/api/tickets/asunto/format/json/";
 	
 	$.ajax({
 			url : url , 
@@ -298,7 +289,7 @@ function actualiza_asunto_ticket(e){
 			}
 	}).done(function(data){							
 
-		/**/
+
 		$('.agregar_posible_cliente_btn').tab('show'); 							
 		$(".btn_abrir_ticket").tab("show");
 
@@ -311,50 +302,49 @@ function actualiza_asunto_ticket(e){
 
 	e.preventDefault();
 }
-/**/
-function set_menu_actual(n_menu_actual){
-	menu_actual =  n_menu_actual;
-}
-/**/
-function get_menu_actual(){
+var get_menu_actual = function(){
 	return menu_actual;
 }
-/**/
-function muestra_tareas_por_estatus(){
+
+var muestra_tareas_por_estatus = function(){
 
 	showonehideone( ".mostrar_todas_las_tareas" , ".tarea_pendiente"  );
 	$(".mostrar_tareas_pendientes").hide();
 	set_flag_mostrar_solo_pendientes(1);
 }
-/**/
-function muestra_todas_las_tareas(){
+
+var muestra_todas_las_tareas = function(){
 
 	showonehideone( ".tarea_pendiente"  , ".mostrar_todas_las_tareas");	
 	$(".mostrar_tareas_pendientes").show();
 	set_flag_mostrar_solo_pendientes(0);	
 }
-/**/
-function set_flag_mostrar_solo_pendientes(n_val){
+
+var set_flag_mostrar_solo_pendientes = function(n_val){
 	flag_mostrar_solo_pendientes = n_val;
 }
-/**/
-function get_flag_mostrar_solo_pendientes(){
+
+var get_flag_mostrar_solo_pendientes = function(){
 	return  flag_mostrar_solo_pendientes;	
 }
-/**/
-function set_flag_estoy_en_agendado(n_flag_estoy_en_agendado){
-	flag_estoy_en_agendado = n_flag_estoy_en_agendado;
-}
-/**/
-function get_flag_estoy_en_agendado(){
+
+
+var get_flag_estoy_en_agendado = function(){
 	return flag_estoy_en_agendado;
 }
-/**/
+/*
+function set_flag_estoy_en_agendado(n_flag_estoy_en_agendado){
+    flag_estoy_en_agendado = n_flag_estoy_en_agendado;
+}
+
 function get_id_base_telefonica(){
 	return id_base_telefonica; 
 }
-/**/
+
 function set_id_base_telefonica(n_id_base_telefonica){
 	id_base_telefonica =  n_id_base_telefonica;
 }
-/**/
+function set_menu_actual(n_menu_actual){
+    menu_actual =  n_menu_actual;
+}
+*/

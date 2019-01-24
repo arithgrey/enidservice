@@ -271,11 +271,10 @@
         <?=form_close()?>
     <?=end_row()?>
     <?=n_row_12()?>
-        <?=$this->load->view("servicio/menu_tabs" , $data);?>                       
+        <?=get_menu_config($num, $num_imagenes, $url_productos_publico)?>
     <?=end_row()?>
 
-    <div class="tab-content">                
-        <!--IMAGENES +  YOUTUBE-->
+    <div class="tab-content">
         <div class="tab-pane <?=$extra_1?>" id="tab_imagenes">
 
             <?=valida_descartar_promocion($num_imagenes , $id_servicio)?>

@@ -72,7 +72,7 @@
                       ON 
                         t.id_ticket =  tp.id_ticket
                     WHERE                    
-                      t.status =  '". $param["keyword"] ."'
+                      t.status =  '". $param["status"] ."'
                       ";
 
 

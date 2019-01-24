@@ -7,7 +7,7 @@
 <div class="contenedor_principal_enid">
     <?= n_row_12() ?>
     <div class="col-lg-2">
-        <?= $this->load->view("secciones/menu"); ?>
+        <?=get_menu()?>
     </div>
     <div class="col-lg-10">
         <?php if ($is_mobile == 1): ?>

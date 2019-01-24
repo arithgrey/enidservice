@@ -1,9 +1,11 @@
+"use strict";
 $(document).ready(function(){
 	display_elements([".selector_estados_ventas" , ".form_cantidad", ".form_cantidad_post_venta"] , 0);
 	$('.datetimepicker4').datepicker();
 	$('.datetimepicker5').datepicker();						
 	$(".form_busqueda_pedidos").submit(busqueda_pedidos);
 	$(".form_fecha_entrega").submit(editar_horario_entrega);
+	$(".form_fecha_recordatorio").submit(crea_recordatorio);
 	$(".editar_estado").click(cambio_estado);
 	$(".editar_tipo_entrega").click(pre_tipo_entrega);
 	$(".status_venta").change(modidica_estado);
@@ -18,19 +20,38 @@ $(document).ready(function(){
 	$(".form_edicion_tipo_entrega").change(cambio_tipo_entrega);
 	$(".form_notas").submit(registrar_nota);
 
-
 });
 var editar_horario_entrega = function(e){
 
 	var data_send 		=  $(".form_fecha_entrega").serialize();
 	var url 			=  "../q/index.php/api/recibo/fecha_entrega/format/json/";
+	bloquea_form(".form_fecha_entrega");
 	request_enid( "PUT",  data_send, url, response_horario_entrega , ".place_fecha_entrega");
 	e.preventDefault();
+}
+var crea_recordatorio = function(e){
+
+	var data_send 		=  $(".form_fecha_recordatorio").serialize();
+	var url 			=  "../q/index.php/api/recordatorio/index/format/json/";
+	bloquea_form(".form_fecha_recordatorio");
+	request_enid( "POST",  data_send, url, response_recordatorio , ".place_recordatorio");
+	e.preventDefault();
+}
+var response_recordatorio = function(data){
+
+	if(data ==  true){
+		$(".place_recordatorio").empty();
+		var url = "../pedidos/?recibo="+get_parameter(".recibo");
+		redirect(url);
+	}else{
+		desbloqueda_form(".form_fecha_recordatorio");
+	}
 }
 var response_horario_entrega = function(data){
 
 	$(".place_fecha_entrega").empty();
 	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+	desbloqueda_form(".form_fecha_entrega");
 	redirect(url);
 
 }
@@ -155,7 +176,7 @@ var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 }
 var registra_saldo_cubierto = function(e){
 
-	if (is_num =  valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" ) == 1) {
+	if (valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" ) == 1) {
 
 		var data_send	=  $(".form_cantidad").serialize();
 		$(".mensaje_saldo_cubierto").empty();
@@ -426,4 +447,12 @@ var response_registro_nota = function(data){
 	$(".place_nota").empty();
 	redirect("");
 	debugger;
+}
+var modifica_status_recordatorio = function(id_recordatorio , status){
+	if(id_recordatorio > 0){
+
+		var url 		=  	"../q/index.php/api/recordatorio/status/format/json/";
+		var data_send 	= 	{id_recordatorio:id_recordatorio  , status:status};
+		request_enid( "PUT",  data_send, url);
+	}
 }

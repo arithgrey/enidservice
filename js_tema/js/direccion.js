@@ -1,4 +1,5 @@
-function auto_completa_direccion(){
+"use strict";
+var auto_completa_direccion = function(){
 
 	quita_espacios(".codigo_postal"); 	
 	var cp 					= get_parameter(".codigo_postal");
@@ -9,7 +10,6 @@ function auto_completa_direccion(){
 		request_enid( "GET",  data_send , url , response_auto_complete_direccion );
 	}
 }
-/**/
 function response_auto_complete_direccion(data){
 
 	
@@ -29,7 +29,7 @@ function response_auto_complete_direccion(data){
 		set_option("existe_codigo_postal", 1);
 
 	}else{
-		/**/		
+
 		var elementos  =  [".delegacion" , ".place_colonias_info"];
 		set_black(elementos);		
 		$(".parte_colonia_delegacion").hide();
@@ -37,7 +37,6 @@ function response_auto_complete_direccion(data){
 		muestra_error_codigo(1);	
 	}	
 }
-/**/
 function muestra_error_codigo(flag_error){
 	llenaelementoHTML( ".place_codigo_postal" ,  "");
 	if (flag_error ==  1) {
@@ -48,7 +47,6 @@ function muestra_error_codigo(flag_error){
 	}
 }
 
-/**/
 function registra_nueva_direccion(e){
 
 	if(get_option("existe_codigo_postal") ==  1){
@@ -59,7 +57,6 @@ function registra_nueva_direccion(e){
 	}
 	e.preventDefault();
 }
-/**/
 function registro_direccion(){
 	
 	if (asentamiento != 0 ){
@@ -73,7 +70,6 @@ function registro_direccion(){
 		llenaelementoHTML( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");
 	}
 }
-/**/
 var  response_registro_direccion = function(data){
 
 	
@@ -90,20 +86,6 @@ var  response_registro_direccion = function(data){
 		recorrepage(".notificacion_direccion");	
 	}	
 };
-/**/
-function oculta_delegacion_estado_pais(flag){
-
-
-	var elementos = [".delegacion_c" , ".estado_c" , ".pais_c" , ".button_c" , ".direccion_principal_c"];
-	for(var x in elementos){
-		if (flag ==  "1") {
-			$(elementos[x]).hide();	
-		}else{
-			$(elementos[x]).show();
-		}
-		x ++;
-	}
-}
 function carga_informacion_envio_complete(){
 	
 	var url 		=  	"../q/index.php/api/usuario_direccion/direccion_envio_pedido/format/json/";		
@@ -116,7 +98,6 @@ function carga_informacion_envio_complete(){
 		response_carga_informacion_envio_complete(data , place_info)	
 	});	
 }
-/**/
 function response_carga_informacion_envio_complete(data , place_info){
 
 		llenaelementoHTML(place_info , data);				
@@ -124,7 +105,6 @@ function response_carga_informacion_envio_complete(data , place_info){
 		$(".editar_envio_btn").click(function(){
 			showonehideone(".contenedor_form_envio" ,  ".contenedor_form_envio_text" );
 		});
-		/**/
 		$(".codigo_postal").keyup(auto_completa_direccion);
 		
 		$(".numero_exterior").keyup(function (){
@@ -136,6 +116,7 @@ function response_carga_informacion_envio_complete(data , place_info){
 		
 		$(".form_direccion_envio").submit(registra_nueva_direccion);
 }
+/*
 function informacion_envio_complete(){
 
 	var url 		=  "../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";	
@@ -145,3 +126,18 @@ function informacion_envio_complete(){
 		recorrepage(".contenedo_compra_info");
 	}  , ".place_direccion_envio");
 }
+function oculta_delegacion_estado_pais(flag){
+
+
+	var elementos = [".delegacion_c" , ".estado_c" , ".pais_c" , ".button_c" , ".direccion_principal_c"];
+	for(var x in elementos){
+		if (flag ==  "1") {
+			$(elementos[x]).hide();
+		}else{
+			$(elementos[x]).show();
+		}
+		x ++;
+	}
+}
+
+*/

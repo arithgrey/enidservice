@@ -1,48 +1,30 @@
+"use strict";
 var id_tarea = 0;
-var nombre_persona = 0;
-var flageditable  =0; 
-var llamada =  0;
-var campos_disponibles = 0; 
 var persona = 0;
 var tipo_negocio = 0;
-var fuente = 0;
 var telefono = 0;
-var flag_base_telefonica =0;
 var id_proyecto = 0; 
 var id_usuario = 0;
 var id_ticket = 0;
-var nombre_tipo_negocio = "";
-var num_agendados ="";
 var flag_mostrar_solo_pendientes = 0;
-var referencia_email = 0;
-var flag_estoy_en_agendado = 0; 
-var id_base_telefonica = 0;  
-var tmp_tel = 0; 
+var flag_estoy_en_agendado = 0;
 var menu_actual = "clientes";
-var num_accesos =0;
-var num_usuarios_referencia =0;
-var num_proceso_compra =0;
-var venta_efectiva =0;
-var enviar_pagos =0;
 var banco =0;
 var numero_tarjeta =0;
 var propietario ="";
 var id_proyecto_persona_forma_pago =0;
-var tipo_video =1; 
+
 $(document).ready(function(){	
 	$("footer").ready(cargar_ultimos_movimientos);
 });
-/**/
-function metodos_de_envio_disponibles(){
+var  metodos_de_envio_disponibles = function(){
 
 	var url =  "../pagos/index.php/api/afiliados/metodos_disponibles_pago/format/json/";	
 	var data_send = {};	
 	request_enid( method,  data_send, url, response_metodos_envio, ".place_info_cuentas_pago" );
 }
-/**/
-function response_metodos_envio(data){
+var response_metodos_envio = function(data){
 		llenaelementoHTML(".place_info_cuentas_pago" , data);
-		/**/
 		$(".actualizar_form").click(registra_actualizacion_banco_persona);
 		$(".siguiente_banco").click(valida_banco_seleccionado);
 		$(".siguiente_numero_tarjeta").click(valida_tarjeta_registrada);
@@ -86,8 +68,7 @@ function response_metodos_envio(data){
         });
        
 }
-/**/
-function muestra_imagen_banco(){
+var muestra_imagen_banco = function(){
 
 	
 	var banco 		=  get_parameter(".banco_cuenta");
@@ -95,15 +76,14 @@ function muestra_imagen_banco(){
 	var bancos_imgs = [ "", "1.png", "2.png" , "3.png", "4.png", "5.png", "6.png", "7.png" , "8.png", "9.png"];
 
 	if (get_option("banco")>0) {
-		url_img_banco 	=  "../img_tema/bancos/"+bancos_imgs[banco];	    	
-	    imagen 			= "<img src='"+url_img_banco+"' style='width:100%'>";
+		var url_img_banco 	=  "../img_tema/bancos/"+bancos_imgs[banco];
+	    var imagen 			= "<img src='"+url_img_banco+"' style='width:100%'>";
 	    llenaelementoHTML(".place_imagen_banco" , imagen);
 	}else{
 		llenaelementoHTML(".place_imagen_banco" , "");	
 	}	    
 }
-/**/
-function registra_actualizacion_banco_persona(){
+var registra_actualizacion_banco_persona = function(){
 
 	var flag_1 =  valida_banco_seleccionado();	
 	var flag_2 =  valida_tarjeta_registrada();
@@ -117,8 +97,7 @@ function registra_actualizacion_banco_persona(){
 	}
 	
 }
-/**/
-function valida_banco_seleccionado(){
+var valida_banco_seleccionado = function(){
 	
 	banco =  get_parameter(".banco_cuenta");
 	set_option("banco", banco);
@@ -137,15 +116,13 @@ function valida_banco_seleccionado(){
 		return 1;
 	}	
 }
-/**/
-function valida_tarjeta_registrada(){	
+var valida_tarjeta_registrada = function(){
 
 	set_option("numero_tarjeta" , get_parameter(".numero_tarjeta"));		
 	return  valida_text_form(".numero_tarjeta" , ".place_numero_tarjeta" , 16 , "Número de tarjeta" );		
 	
 }
-/**/
-function valida_propietario_tarjeta(){
+var valida_propietario_tarjeta = function(){
 	
 	set_optino("propietario" , get_parameter(".propietario"));
 	return valida_text_form(".propietario" , ".place_propietario_tarjeta" , 5 , "Propietario de la tarjeta" );				

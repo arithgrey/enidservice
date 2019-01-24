@@ -66,8 +66,7 @@ if ( ! function_exists('guardar'))
     
       if ($submit == 1) {
           $attributes["type"] = "submit";        
-      }    
-
+      }
       if($type_button == 1) {
         $existe =  array_key_exists("class", $attributes)?1:0;              
         if ($existe ==  1) {
@@ -328,6 +327,19 @@ if ( ! function_exists('get_url_request'))
   }
   
 }
+if ( ! function_exists('es_local'))
+{
+
+    function es_local(){
+
+        $es_local    =   ($_SERVER['HTTP_HOST'] !== "localhost") ?  0 : 1;
+        return $es_local;
+
+
+    }
+
+}
+
 if ( ! function_exists('icon'))
 {
   function icon($class , $attributes ='' , $row_12 = 0 , $extra_text ='' ){
@@ -1223,6 +1235,19 @@ if (!function_exists('get_url_servicio')) {
     }
 }
 
+if ( ! function_exists('get_request_email'))
+{
+    function get_request_email($email, $asunto , $cuerpo)
+    {
+        $request =  [
+            "para"      =>   $email,
+            "asunto"    =>   $asunto,
+            "cuerpo"    =>   $cuerpo
+
+        ];
+        return $request;
+    }
+}
 //https://www.codeigniter.com/user_guide/general/styleguide.html
 //https://www.codeigniter.com/user_guide/libraries/config.html
 //Poder modificar el punto de entrega desde el mondulo de pedidos

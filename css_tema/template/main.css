@@ -7272,3 +7272,6 @@ h2 {
 .white:hover {
     color: white !important;
 }
+.place_notificaciones_usuario{
+    padding:10px;
+}

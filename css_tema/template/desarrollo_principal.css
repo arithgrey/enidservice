@@ -245,3 +245,11 @@
     border-style: solid;
     border-width: 1px;
 }
+.cerrar_ticket{
+    padding:5px;
+    color:black;
+    text-decoration:under-line;
+}
+.cerrar_ticket:hover{
+    color:blue;
+}

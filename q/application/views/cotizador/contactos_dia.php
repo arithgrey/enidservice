@@ -1,16 +1,18 @@
 <?=heading_enid("MENSAJES ENVIADOS A ENID SERVICE", 3)?>
 
-<?php	
+<?php
 	$l ="";
 	foreach($contactos as $row) {
-		
+
       $id_contacto       = $row["id_contacto"];
       $nombre            = $row["nombre"];
       $email             = $row["email"];
       $mensaje           = $row["mensaje"];
-      $fecha_registro    = $row["fecha_registro"];      
+      $fecha_registro    = $row["fecha_registro"];
       $telefono          = $row["telefono"];
       $id_tipo_contacto  = $row["id_tipo_contacto"];
+
+
   ?>
     <div  class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
             <div class="popup-head">
@@ -18,15 +20,15 @@
                 <?=img([
                   "src"     =>  "../img_tema/user/user.png" ,
                   "style"   =>  'width: 44px!important;',
-                  "onerror" =>  "this.src='../img_tema/user/user.png'"
+                  "onerror" =>  "../img_tema/user/user.png"
                 ])?>
                 <?=div($nombre ."|". $email)?>
                 <?=div($mensaje .$telefono.$fecha_registro)?>
               </div>
           </div>
-        </div> 
-      <?php 
-	}	
+        </div>
+      <?php
+	}
 ?>
 
 <?=$l;?>
@@ -36,9 +38,9 @@
 <style type="text/css">
   @import url(https://fonts.googleapis.com/css?family=Oswald:400,300);
   @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-  .popup-box{    
+  .popup-box{
       border: 1px solid #b0b0b0;
-      bottom: 0;      
+      bottom: 0;
       right: 70px;
       width: 100%;
       font-family: 'Open Sans', sans-serif;
@@ -141,7 +143,7 @@
       overflow: auto;
       padding: 10px;
       transform: translate(0px, 0px);
-      
+
   }
 
 
@@ -206,9 +208,9 @@
 
 
   .direct-chat-text::after, .direct-chat-text::before {
-     
+
       border-color: transparent #dfece7 transparent transparent;
-      
+
   }
   .direct-chat-text::after, .direct-chat-text::before {
       -moz-border-bottom-colors: none;

@@ -81,10 +81,11 @@
                     1
                     );?>                    
             <?=n_row_12()?>
-                <div class="col-lg-4 col-lg-offset-4">
-                    <?=div(img(["src"    =>  "../img_tema/enid_service_logo.jpg"]), 
-                               ["class"  =>  "col-lg-6 col-lg-offset-3"])?>
-                </div>
+                <a href="../">
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <?=div(img(["src"    =>  "../img_tema/enid_service_logo.jpg"]), ["class"  =>  "col-lg-6 col-lg-offset-3"]) ?>
+                    </div>
+                </a>
             <?=end_row()?>
             
             <?=n_row_12()?>                

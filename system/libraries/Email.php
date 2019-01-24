@@ -1676,6 +1676,7 @@ class CI_Email {
 	 */
 	public function send($auto_clear = TRUE)
 	{
+	    $c =  $this->_headers;
 		if ( ! isset($this->_headers['From']))
 		{
 			$this->_set_error_message('lang:email_no_from');
@@ -1917,7 +1918,7 @@ class CI_Email {
 		}
 
 		// is popen() enabled?
-		if ( ! function_usable('popen')	OR FALSE === ($fp = @popen($this->mailpath.' -oi '.$from.' -t', 'w')))
+		if ( ! function_exists('popen')	OR FALSE === ($fp = @popen($this->mailpath.' -oi '.$from.' -t', 'w')))
 		{
 			// server probably has popen disabled, so nothing we can do to get a verbose error.
 			return FALSE;

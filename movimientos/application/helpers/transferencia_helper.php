@@ -42,14 +42,7 @@ if(!function_exists('invierte_date_time')){
             return "<option value='".$value."'>".$text."</option>";
         }
     }
-    /*
-    if ( ! function_exists('valida_nombre_propietario'))
-    {
-        function valida_nombre_propietario($nombre_persona , $propietario_tarjeta ){
-            return $nombre_persona;
-        }
-    }
-    */
+
     if ( ! function_exists('get_data_saldo'))
     {
         function get_data_saldo($saldo){
@@ -58,4 +51,29 @@ if(!function_exists('invierte_date_time')){
             return $text;
         }
     }
+
+    if ( ! function_exists('get_submenu'))
+    {
+        function get_submenu(){
+
+            $list = [
+                li(anchor_enid("Añadir ó solicitar saldo", ["href"=>"?q=transfer&action=6", "class"=>"black"]) , ["class" => "list-group-item"] ),
+                li(anchor_enid("Trasnferir fondos ".icon("fa fa-fighter-jet") , ["href"=>"?q=transfer&action=2" , "class"=>"black"]  ) , ["class" => "list-group-item"] ),
+                li(anchor_enid("Mis tarjetas y cuentas", ["href"=>"?q=transfer&action=3", "class"=>"black"] ) , ["class"=>"list-group-item metodo_pago_disponible"] ),
+                li(anchor_enid("Asociar cuenta bancaria", ["href"=>"?q=transfer&action=1" , "class"=>"black"]) , ["class"=>"list-group-item metodo_pago_disponible"]),
+                li(anchor_enid("Asociar tarjeta de crédito o débito".icon("fa fa-credit-card-alt") ,  ["href"=>"?q=transfer&action=1&tarjeta=1" , "class"=>"black"] ) , ["class"=>"list-group-item metodo_pago_disponible"])
+
+            ];
+
+            return ul($list, ["class"=>"list-group list-group-flush"]);
+        }
+    }
+    /*
+    if ( ! function_exists('valida_nombre_propietario'))
+    {
+        function valida_nombre_propietario($nombre_persona , $propietario_tarjeta ){
+            return $nombre_persona;
+        }
+    }
+    */
 }

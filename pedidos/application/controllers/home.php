@@ -94,6 +94,11 @@ class Home extends CI_Controller{
 
                 $this->principal->show_data_page($data, 'form_fecha');
 
+            }elseif(get_param_def($param , "recordatorio" ) >  0){
+
+                $data["tipo_recortario"] =  $this->get_tipo_recordatorio();
+                $this->principal->show_data_page($data, 'form_fecha_recordatorio');
+
             }else{
 
                 $data["domicilio"]      =   $this->get_domicilio_entrega($id_recibo , $recibo);
@@ -101,9 +106,13 @@ class Home extends CI_Controller{
                 $data["status_ventas"]  =   $this->get_estatus_enid_service();
                 $data["tipificaciones"] =   $this->get_tipificaciones($id_recibo);
                 $data["comentarios"]    =   $this->get_recibo_comentarios($id_recibo);
+                $data["recordatorios"]  =   $this->get_recordatorios($id_recibo);
+                $data["id_recibo"]      =   $id_recibo;
+                $data["tipo_recortario"] =  $this->get_tipo_recordatorio();
+
+
                 $this->principal->show_data_page($data, 'detalle');
             }
-
 
         }else{
             $this->principal->show_data_page($data, 'error');          
@@ -251,4 +260,17 @@ class Home extends CI_Controller{
         $api                =   "usuario_punto_encuentro/usuario/format/json/";
         return $this->principal->api( $api ,  $q);             
     }
+    private function get_recordatorios($id_recibo){
+
+        $q["id_recibo"]     =   $id_recibo;
+        $api                =   "recordatorio/index/format/json/";
+        return $this->principal->api( $api ,  $q);
+    }
+    private function get_tipo_recordatorio(){
+
+        $q["z"]     =   [];
+        $api                =   "tipo_recordatorio/index/format/json/";
+        return $this->principal->api( $api ,  $q);
+    }
+
 }

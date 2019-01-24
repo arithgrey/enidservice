@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function(){
 	$(".agregar_direccion_pedido").click(agregar_direccion_pedido);
 	$(".agregar_punto_encuentro_pedido").click(agregar_punto_encuentro_pedido);

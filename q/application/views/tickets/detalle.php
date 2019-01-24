@@ -17,9 +17,6 @@
 <?=end_row()?>
 <br>
 <hr>
-
-
-
 <?=n_row_12()?>
 	<div class="seccion_nueva_tarea top_20">					
 		<?=heading_enid("SOLICITAR TAREA", 1)?>			
@@ -56,15 +53,15 @@
 			$estado_tarea = "tarea_pendiente"; 					
 		}
 
-		$tipo_usuario 	=  valida_tipo_usuario_tarea($perfil);
-		$extra_checkbox =" ";	
+		$tipo_usuario 	        =  valida_tipo_usuario_tarea($perfil);
+		$extra_checkbox         =   " ";
 				
 		$input 					=	valida_check_tarea($id_tarea,$valor_actualizar,$status,$perfil);
 		$seccion_respuesta_num 	=	"seccion_respuesta_".$id_tarea;
 		
 ?>	
-<div class="listado_pendientes">
-	<div class='<?=$estado_tarea?> top_20 contenedor_tarea_ticket'>
+<div>
+	<div class='<?=$estado_tarea?> top_20 contenedor_tarea_ticket listado_pendientes'>
 		<?=n_row_12()?>	
 			<table>
 				<tr>				
@@ -95,10 +92,8 @@
 						)?>
 				</tr>
 			</table>
-												
 		<?=end_row()?>				
 		<?=place($seccion_respuesta_num , ["id" => $id_tarea])?>
-
 	</div>		
 	<hr>			
 </div>

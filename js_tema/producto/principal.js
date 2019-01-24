@@ -1,5 +1,6 @@
+"use strict";
 $(document).ready(function(){
-	/**/
+
 	set_option("servicio" , get_parameter(".servicio"));
 	set_option("respuesta_valorada" , 0);		
 	$("footer").ready(carga_productos_sugeridos);
@@ -8,42 +9,29 @@ $(document).ready(function(){
 	set_option("orden" ,"desc");	
 	$(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);	
 	$(".talla").click(agregar_talla);
-	/*
-	$('#imagen_tab_0').zoom();
-	$('#imagen_tab_1').zoom();
-	$('#imagen_tab_2').zoom();
-	$('#imagen_tab_3').zoom();
-	$('#imagen_tab_4').zoom();
-	$('#imagen_tab_5').zoom();
-	$('#imagen_tab_6').zoom();
-	$('#imagen_tab_7').zoom();
-	$('#imagen_tab_8').zoom();
-	$('#imagen_tab_9').zoom();
-	$('#imagen_tab_10').zoom();
-	*/
+
 });
-/**/
-function carga_productos_sugeridos(){
+var carga_productos_sugeridos = function(){
 
 	var url 		=  "../q/index.php/api/servicio/sugerencia/format/json/";		
 	var q 			=  get_parameter(".qservicio");  	
 	var data_send 	= {"id_servicio" : get_option("servicio") , "q" :  q};
 	request_enid( "GET",  data_send, url, response_carga_productos);
 }
-/**/
-function response_carga_productos(data){
+
+var response_carga_productos = function(data){
 	if (data["sugerencias"] == undefined ){				
 		llenaelementoHTML(".place_tambien_podria_interezar" , data);						
 	}
 }
-/**/
-function carga_valoraciones(){
+
+var carga_valoraciones = function(){
 	var url 		=  "../q/index.php/api/valoracion/articulo/format/json/";		
 	var data_send	= {"id_servicio" : get_option("servicio") , "respuesta_valorada" : get_option("respuesta_valorada")};
 	request_enid( "GET",  data_send, url, response_carga_valoraciones);
 }
-/**/
-function response_carga_valoraciones(data){
+
+var response_carga_valoraciones = function(data){
 	llenaelementoHTML(".place_valoraciones" , data);
 
 	if(get_option("desde_valoracion") ==  1){
@@ -51,24 +39,24 @@ function response_carga_valoraciones(data){
 		set_option("desde_valoracion" , 0);
 	}
 	$(".ordenar_valoraciones_button").click(ordenar_valoraciones);			
-	valoracion_persona=  $(".contenedor_promedios").html();
+	var valoracion_persona =  $(".contenedor_promedios").html();
 	llenaelementoHTML(".valoracion_persona" , valoracion_persona);
 	$(".valoracion_persona_principal .valoracion_persona .estrella").css("font-size" , "1.2em");
 	$(".valoracion_persona_principal .valoracion_persona .promedio_num").css("font-size" , "1.2em");
 			
 }
-/**/
-function agrega_valoracion_respuesta(valoracion , num){
+
+var agrega_valoracion_respuesta = function(valoracion , num){
 
 	var url =  "../q/index.php/api/valoracion/utilidad/format/json/";			
 	var data_send = {"valoracion" : valoracion,  "utilidad" :  num};
 	set_option("respuesta_valorada" , valoracion);		
 	request_enid( "PUT",  data_send, url, carga_valoraciones);
 }
-/**/
-function ordenar_valoraciones(e){
 
-	tipo_ordenamiento=  get_parameter_enid($(this) , "id");  
+var ordenar_valoraciones = function(e){
+
+	var tipo_ordenamiento=  get_parameter_enid($(this) , "id");
 	switch(parseInt(tipo_ordenamiento)){
 		case 0:
 			/*Ordenamos por los que tienen más votos*/			
@@ -103,14 +91,13 @@ function ordenar_valoraciones(e){
 		default:
 	}
 }
-/**/
-function agregar_a_lista_deseos(){	
+var agregar_a_lista_deseos = function(){
 	var url =  "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";		
 	var data_send = {"id_servicio" : get_option("servicio")};
 	request_enid( "PUT",  data_send, url, respuesta_add_valoracion);
 }
-/**/
-function respuesta_add_valoracion(data){	
+
+var respuesta_add_valoracion = function(data){
 	
 	
 	$("#agregar_a_lista_deseos_add").empty();	
@@ -119,8 +106,8 @@ function respuesta_add_valoracion(data){
 	
 	
 }
-/**/
-function  agregar_talla(){
+
+var  agregar_talla = function(){
 	
 	var id_seleccion  =  get_attr(this, "id");
 	$(".talla ").each(function(index) {      

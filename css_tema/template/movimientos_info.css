@@ -170,10 +170,12 @@ style >
 .trasnferir_divisas:hover {
     cursor: pointer;
 }
-
+.list-group-item:hover  a{
+    color:white!important;
+}
 .list-group-item:hover {
     background: blue;
-    color: white;
+    color: white!important;
     cursor: pointer;
 }
 
