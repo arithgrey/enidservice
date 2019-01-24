@@ -758,3 +758,497 @@ DEBUG - TYPE string 2019-01-22 01:05:33 --> Error al enviar email
 DEBUG - TYPE string 2019-01-22 01:06:09 --> Error al enviar email
 DEBUG - TYPE string 2019-01-22 01:08:46 --> Error al enviar email
 DEBUG - TYPE string 2019-01-22 01:11:15 --> Error al enviar email
+DEBUG - TYPE string 2019-01-23 22:20:51 --> []
+DEBUG - TYPE string 2019-01-23 22:20:54 --> [{"id_tarea":"1207","descripcion":"asdasdasd","fecha_registro":"2019-01-24 05:20:54","status":"0","id_ticket":"214","fecha_termino":"2019-01-24 05:20:54","usuario_registro":"1","idusuario":"1","nombre":"enidservice","apellido_paterno":"Medrano","apellido_materno":"Salazar","num_comentarios":"0"}]
+DEBUG - TYPE string 2019-01-23 22:22:21 --> [{"id_tarea":"309","descripcion":"Como usuario quiero poder ver im\u00e1genes de las diferentes secciones del la p\u00e1gina web de Enid Service","fecha_registro":"2017-09-26 00:39:26","status":"0","id_ticket":"57","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"},{"id_tarea":"345","descripcion":"Crear un catalogo de cada uno de nuestros clientes","fecha_registro":"2017-09-29 18:13:05","status":"0","id_ticket":"57","fecha_termino":"0000-00-00 00:00:00","usuario_registro":null,"idusuario":null,"nombre":"","apellido_paterno":null,"apellido_materno":null,"num_comentarios":"0"}]
+DEBUG - TYPE string 2019-01-23 23:22:29 --> NO se recibió el parametro->para
+DEBUG - TYPE string 2019-01-23 23:22:29 --> NO se recibió el parametro->subject
+DEBUG - TYPE string 2019-01-23 23:22:29 --> NO se recibió el parametro->cuerpo
+DEBUG - TYPE string 2019-01-23 23:22:43 --> NO se recibió el parametro->para
+DEBUG - TYPE string 2019-01-23 23:22:43 --> NO se recibió el parametro->subject
+DEBUG - TYPE string 2019-01-23 23:22:43 --> NO se recibió el parametro->cuerpo
+DEBUG - TYPE string 2019-01-24 07:32:09 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:32:34 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:32:36 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:33:08 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:33:53 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:34:22 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:34:27 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:35:29 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:35:43 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:36:34 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:37:25 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:37:38 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 07:38:23 --> <html>
+<head>
+<title>Error</title>
+<style type="text/css">
+
+body {
+background-color:	#fff;
+margin:				40px;
+font-family:		Lucida Grande, Verdana, Sans-serif;
+font-size:			12px;
+color:				#000;
+}
+
+#content  {
+border:				#999 1px solid;
+background-color:	#fff;
+padding:			20px 20px 12px 20px;
+}
+
+h1 {
+font-weight:		normal;
+font-size:			14px;
+color:				#990000;
+margin:				0 0 4px 0;
+}
+</style>
+</head>
+<body>
+	<div id="content">
+		<h1>An Error Was Encountered</h1>
+		<p>Unable to load your default controller. Please make sure the controller specified in your Routes.php file is valid.</p>	</div>
+</body>
+</html>
+DEBUG - TYPE string 2019-01-24 08:58:31 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:58:32 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:58:32 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 08:58:32 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:58:42 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:58:43 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:58:43 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 08:58:43 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:58:49 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:58:50 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:58:50 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 08:58:50 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:07 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:07 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:07 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 08:59:07 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:11 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:12 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:12 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 08:59:12 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:27 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:36 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:37 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 08:59:37 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:41 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:41 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 08:59:41 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 08:59:42 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:00:07 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:00:08 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:00:08 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 09:00:08 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:00:23 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:00:37 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:00:38 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 09:00:38 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:05:24 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:05:24 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:05:24 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 09:05:25 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:05:52 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:05:53 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:05:53 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 09:05:53 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:08:39 --> NO se recibió el parametro->asunto
+DEBUG - TYPE string 2019-01-24 09:13:05 --> NO se recibió el parametro->asunto
+DEBUG - TYPE string 2019-01-24 09:13:51 --> NO se recibió el parametro->asunto
+DEBUG - TYPE string 2019-01-24 09:15:32 --> NO se recibió el parametro->asunto
+DEBUG - TYPE string 2019-01-24 09:16:26 --> NO se recibió el parametro->asunto
+DEBUG - TYPE string 2019-01-24 09:17:51 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:17:51 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:17:51 --> NO se recibió el parametro->id_direccion
+DEBUG - TYPE string 2019-01-24 09:17:51 --> NO se recibió el parametro->id_recibo
+DEBUG - TYPE string 2019-01-24 09:18:23 --> NO se recibió el parametro->asunto
+DEBUG - TYPE string 2019-01-24 09:18:55 --> NO se recibió el parametro->asunto
+DEBUG - TYPE string 2019-01-24 09:20:03 --> NO se recibió el parametro->asunto

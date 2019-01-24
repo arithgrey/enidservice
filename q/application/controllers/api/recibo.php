@@ -208,8 +208,7 @@ class recibo extends REST_Controller{
 
                 if($monto_a_pagar > $saldo_cubierto ){
 
-
-                    $this->ticket_pendiente_pago($param , $recibo , $data_complete);
+                   return  $this->ticket_pendiente_pago($param , $recibo , $data_complete);
 
                 }else{
 
@@ -220,7 +219,7 @@ class recibo extends REST_Controller{
                     $usuario                        =   $this->principal->get_info_usuario($id_usuario_venta);
                     $data_complete["usuario_venta"] =   $usuario;
                     $data_complete["modalidad"] =1;
-                    $this->load->view("cobranza/notificacion_pago_realizado" , $data_complete);
+                    return $this->load->view("cobranza/notificacion_pago_realizado" , $data_complete);
 
                 }
             }
@@ -235,7 +234,7 @@ class recibo extends REST_Controller{
         $data_complete["costo_envio_sistema"]  =  get_costo_envio($recibo[0]);                
         if ($recibo[0]["tipo_entrega"] ==  1) {
 
-           $this->ticket_pendiente_pago_contra_entrega($param , $recibo , $data_complete );
+           return $this->ticket_pendiente_pago_contra_entrega($param , $recibo , $data_complete );
 
         }else{
 
@@ -243,13 +242,13 @@ class recibo extends REST_Controller{
 
 
                 $data_complete  = $this->get_data_saldo($param, $recibo , $data_complete );
-                $this->load->view("cobranza/pago_al_momento" , $data_complete);    
+                return $this->load->view("cobranza/pago_al_momento" , $data_complete);
 
             }else{            
                 
                 $data_complete["usuario"]             =     $this->principal->get_info_usuario($id_usuario);
                 $data_complete["costo_envio_sistema"] =     get_costo_envio($recibo[0]);
-                $this->load->view("cobranza/resumen_no_aplica" , $data_complete);    
+                return $this->load->view("cobranza/resumen_no_aplica" , $data_complete);
             }
 
         }

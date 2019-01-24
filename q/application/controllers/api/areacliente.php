@@ -3,7 +3,7 @@ require APPPATH.'../../librerias/REST_Controller.php';
 class Areacliente extends REST_Controller{          
     function __construct(){
         parent::__construct();                                  
-        //$this->load->model("areaclientemodel");        
+
         $this->load->library("mensajeria_lead");
         $this->load->library(lib_def());     
     }
@@ -13,12 +13,15 @@ class Areacliente extends REST_Controller{
         $param                  =   $this->get();
         $response               =   false;
         if (if_ext($param , "id_recibo, email")){
-            $cuerpo_correo          =   $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);
-            $param["info_correo"]   =   $cuerpo_correo;
-            $param["asunto"]        =   "Notificacion de compra o renovación pendiente";
-            $correo_dirigido_a      =   $param["email"];
-            $this->mensajeria_lead->notificacion_email($param , $correo_dirigido_a);
-            $response               =  $cuerpo_correo;
+
+            $cuerpo                 =   $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);
+            $respose                =   true;
+            if(strlen($cuerpo)>30){
+                $asunto                 =   "Notificacion de compra o renovación pendiente";
+                $email                  =   $param["email"];
+                $q                      =   get_request_email($email, $asunto , $cuerpo);
+                $this->principal->send_email_enid($q ,1);
+            }
 
         }
         $this->response($response);
@@ -27,8 +30,8 @@ class Areacliente extends REST_Controller{
     function carga_pago_pendiente_por_recibo($id_recibo){
 
         $q["id_recibo"] =  $id_recibo;        
-        $api            = "recibo/resumen_desglose_pago/format/html/"; 
-        return $this->principal->api( $api , $q ,"html"  );
+        $api            = "recibo/resumen_desglose_pago/format/html/";
+        return $this->principal->api( $api , $q , "HTML");
     }
     /*
     function notifica_accesos_nuevo_usuario_POST(){

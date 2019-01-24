@@ -6,58 +6,29 @@ class Enid extends CI_Controller {
         $this->load->library(lib_def());
     }
     function imagen($id_imagen){
-
+        
         foreach ($this->get_img($id_imagen) as $row ){
 
-            $img_src =  $row["img"];
-            if(strlen($img_src) < 200){
-                return $this->get_img_contents($row);
-            }else{
-                return $this->get_img_contents($img_src , 2 );
-            }
+            return $this->get_img_contents($row);            
         }
+
     }
-    function get_img_contents($data , $p = 1 ){
+    function get_img_contents($data){
 
-        if($p ==  1){
-            $path       = "http://".$_SERVER['HTTP_HOST']."/inicio/img_tema/productos/".$data["nombre_imagen"];
-            $im         = imagecreatefromstring(file_get_contents($path) );
-            header('Content-Disposition: Attachment;filename=image-1.png');
-            header('Content-Type: image/png');
-            if ($im !== false) {
-                $img =  imagepng($im);
-                imagedestroy($im);
-                return $img;
-            }
-        }else{
-
-            $im         = imagecreatefromstring($data );
-            header('Content-Disposition: Attachment;filename=image-1.png');
-            header('Content-Type: image/png');
-            if ($im !== false) {
-                $img =  imagepng($im);
-                imagedestroy($im);
-                return $img;
-            }
-        }
+        $path       = "http://".$_SERVER['HTTP_HOST']."/inicio/img_tema/productos/".$data["nombre_imagen"];
+        return      $this->output->set_content_type('png')->set_output(file_get_contents($path));        
     }
     function imagen_usuario($id_usuario){
-        $img_usuario =  $this->get_img_usuario($id_usuario);
-        return  $this->construye_img_format($img_usuario );
+            
+        return  $this->construye_img_format($this->get_img_usuario($id_usuario));
     }
     function construye_img_format($response){
 
         if ( count($response) > 0 ) {
+            
             $id_imagen  =   $response[0]["id_imagen"];
-            $data       =   $this->costruye_imagen($id_imagen);
-            $img_src    =   $data["img"];
-            if(strlen($img_src) < 300){
-
-                return $this->get_img_contents($data , 1);
-
-            }else{
-                return $this->get_img_contents($img_src , 2);
-            }
+            $data       =   $this->costruye_imagen($id_imagen);            
+            return $this->get_img_contents($data);            
         }
     }
     function costruye_imagen($id_imagen){

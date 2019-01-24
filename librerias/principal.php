@@ -67,6 +67,12 @@
 		    $api  = "cobranza/calcula_costo_envio/format/json/";
 		    return $this->api( $api, $q );  
 		}
+		function send_email_enid($q , $test = 0){
+
+            $api        = "sender/index";
+            $q["test"]  = $test;
+            return $this->api( $api, $q ,'json' ,"POST", 0 , 1, "msj" );
+        }
 		function get_info_usuario($id_usuario){
 			
 			$q["id_usuario"] =  $id_usuario;

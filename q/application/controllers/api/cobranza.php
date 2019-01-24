@@ -373,7 +373,7 @@ class Cobranza extends REST_Controller{
     function create_session($q){
 
         $api            =     "sess/start";
-        $q["t"]         =     "x=0.,!><!$#";
+        $q["t"]         =     $this->config->item('barer');
         $q["secret"]    =     $q["password"]; 
         return $this->principal->api($api,$q,"json","POST",0,1,"login");                
     }

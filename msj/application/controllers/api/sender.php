@@ -6,35 +6,42 @@ class Sender extends REST_Controller{
         $this->load->library('email');
         $this->load->library(lib_def());
     }
-    function index_GET(){
+    function index_POST(){
 
-        $this->email->clear();
-        $config['protocol'] = 'sendmail';
-        $config['charset'] = 'iso-8859-1';
-        $config['wordwrap'] = TRUE;
-        $this->email->initialize($config);
-        $this->email->from('compras@enidservice.com', 'compras@enidservice.com' );
-        $this->email->set_mailtype("html");
-        $this->email->set_header('MIME-Version', '1.0; charset=utf-8');
-        $this->email->set_header('Content-type', 'text/html');
-        $this->email->set_header('From', "hola@enidservice.com");
+        $param      =  $this->post();
+        $response   = false;
+        $test       =  $param["test"];
+        if(if_ext($param , "para,asunto,cuerpo") ){
+            $response = 2;
+            if(filter_var($param["para"], FILTER_VALIDATE_EMAIL)){
+                $response = 0;
+                $this->email->clear();
 
-        $para       = ['arithgrey@gmail.com'];
-        $subject    = 'This is my subject';
-        $message    = 'This is my message';
+                $sender_email = $this->config->item('senderEmail');
+                $this->email->initialize($sender_email);
+                $this->email->from('hola@enidservice.com', 'Enid Service' , 'arithgrey@gmail.com');
+
+                $para       =   $param["para"];
+                $subject    =   $param["asunto"];
+                $message    =   $param["cuerpo"];
 
 
-        $this->email->to($para);
-        $this->email->subject($subject);
-        $this->email->message($message);
+                $this->email->to($para);
+                $this->email->subject($subject);
+                $this->email->message($message);
 
-        /*if ( ! $this->email->send())
-        {
-            debug("Error al enviar email");
+
+                if(es_local() > 0){
+                    if($test    >   0){
+                        $response   =  $this->email->print_debugger($this->email->send());
+                    }
+
+                }else{
+                    $response   =  $this->email->print_debugger($this->email->send());
+                }
+            }
         }
-        */
-        $debug =  $this->email->print_debugger($this->email->send());
-        $this->response($debug);
+        $this->response($response);
 
     }
 

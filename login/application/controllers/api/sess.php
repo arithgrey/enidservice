@@ -11,7 +11,7 @@ class Sess extends REST_Controller{
         $param          =   $this->post();            
         $url            =   $this->create_url();
         $response       =   false;
-        if($this->input->is_ajax_request() || ( array_key_exists("t", $param) && $param["t"] == "x=0.,!><!$#" ) ){
+        if($this->input->is_ajax_request() || ( array_key_exists("t", $param) && $param["t"] == $this->config->item('barer')) ){
 
             if (if_ext($param ,"email,secret")) {
                 $usuario    = $this->get_es_usuario($param);
@@ -25,7 +25,7 @@ class Sess extends REST_Controller{
                     //$fecha_registro     = $usuario["fecha_registro"];
                     $id_empresa         = $usuario["idempresa"];
                     $response           = $this->crea_session($id_usuario, $nombre, $email, $id_empresa);
-                    if (array_key_exists("t", $param) && $param["t"] == "x=0.,!><!$#") {
+                    if (array_key_exists("t", $param) && $param["t"] == $this->config->item('barer')) {
                         $this->response($response);
                     }
                     $response           = ($response != 0) ? $url : 0;

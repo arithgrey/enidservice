@@ -285,7 +285,7 @@ var set_titulo_web = function (n_titulo_web) {
     document.title = titulo_web;
 }
 var registra_respuesta_pregunta = function (e) {
-    alert("-----!");
+
     var url = "../q/index.php/api/respuesta/index/format/json/";
     var data_send = $(".form_respuesta_ticket").serialize();
     var seccion = ".seccion_respuesta_" + get_option("tarea");
