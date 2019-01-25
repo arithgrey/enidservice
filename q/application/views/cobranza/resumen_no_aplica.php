@@ -1,5 +1,4 @@
 <?php
-
 $costo_envio_cliente_sistema = $costo_envio_sistema["costo_envio_cliente"];
 $recibo = $recibo[0];
 $id_forma_pago = $recibo["id_forma_pago"];
@@ -31,7 +30,6 @@ $nombre = $usuario["nombre"];
 $apellido_paterno = ($usuario["apellido_paterno"] !== null) ? $usuario["apellido_paterno"] : "";
 $apellido_materno = ($usuario["apellido_materno"] !== null) ? $usuario["apellido_materno"] : "";
 $email = $usuario["email"];
-$url_request = $url_request;
 $cliente = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
 
 
@@ -51,8 +49,7 @@ if ($flag_servicio == 0) {
 }
 
 
-$url_pago_oxxo =
-    $url_request . "orden_pago_oxxo/?q=" . $saldo_pendiente . "&q2=" . $id_recibo . "&q3=" . $id_usuario;
+$url_pago_oxxo = $url_request . "orden_pago_oxxo/?q=" . $saldo_pendiente . "&q2=" . $id_recibo . "&q3=" . $id_usuario;
 $data_oxxo["url_pago_oxxo"] = $url_pago_oxxo;
 $data_oxxo["id_usuario"] = $id_usuario;
 /*Data para notificar el pago*/
@@ -76,37 +73,37 @@ $data["recibo"] = $recibo;
 $data_extra["cliente"] = $cliente;
 $url_logo = $url_request . "img_tema/enid_service_logo.jpg";
 $config_log = ['src' => $url_logo, 'width' => '100'];
-$url_cancelacion =
-    $url_request . "msj/index.php/api/emp/salir/format/json/?type=2&id=" . $id_proyecto_persona_forma_pago;
+$url_cancelacion = $url_request . "msj/index.php/api/emp/salir/format/json/?type=2&id=" . $id_proyecto_persona_forma_pago;
 
+$img_pago_oxxo = $url_request . "img_tema/pago-oxxo.jpeg";
+$img_pago_paypal = $url_request . "img_tema/explicacion-pago-en-linea.png";
+$url_seguimiento_pago = $url_request . "pedidos/?seguimiento=$id_recibo&notificar=1";
 
 ?>
 <div style="margin: 0 auto;width: 76%;">
     <div style="background: #3e6fff;color: white;padding: 10px;">
-        <?= div("Buen día " . $cliente . ", Primeramente un cordial saludo. ") ?>
-        <?= div("El presente mensaje es para informar que el servicio solicitado ahora (Nueva Compra) o previamente (Recordatorio de Renovación) tiene los siguientes detalles:",
+
+        <?= div(strong("Buen día " . $cliente . ", Primeramente un cordial saludo. ")) ?>
+        <?= div("El presente mensaje es para informar que el 
+        servicio solicitado ahora (Nueva Compra) o previamente (Recordatorio de Renovación) tiene los siguientes detalles:",
             ["style" => "text-align: justify;text-justify: inter-word;margin-top: 10px;"]
         ) ?>
         <?= div("Detalles de Orden de Compra") ?>
     </div>
-    <center>
-        <?= div(img($config_log), ["style" => "width: 200px;"]) ?>
-    </center>
+    <?= div(img($config_log), ["style" => "width: 200px;"]) ?>
+
     <?= heading_enid("#Recibo: " . $id_recibo) ?>
 
     <div style="background: #fcfcfc;padding: 5px;">
         <?= div("Concepto") ?>
         <?= div($resumen_pedido) ?>
         <?= div(valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion)) ?>
-        <?= div("Precio $" . $monto_a_pagar) ?>
+        <?= div("Precio " . $monto_a_pagar) ?>
         <?= div($text_envio_cliente_sistema) ?>
         <?= div(" Ordén de compra " . $primer_registro . "| Límite de pago " . $fecha_vencimiento) ?>
 
-        <div style="border-style: solid;text-align: right;">
-            <?= div(strong("Monto total pendiente "), 1) ?>
-            <?= div($saldo_pendiente . "Pesos Mexicanos", ["style" => "background: green; color:white;padding: 3px;"]) ?>
-
-        </div>
+        <?= div(strong("Monto total pendiente ")) ?>
+        <?= div($saldo_pendiente . "Pesos Mexicanos", ["style" => "background: green; color:white;padding: 3px;"]) ?>
     </div>
     <?= hr() ?>
     <?= heading_enid("Formas de pago Enid Service", 2) ?>
@@ -114,11 +111,12 @@ $url_cancelacion =
 
     <?= div(
         strong("** NINGÚN CARGO A TARJETA ES AUTOMÁTICO. 
-                    SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO "),
-        [
-            "style" => "background: black; color: white;padding: 5px;"
-        ]
-    ) ?>
+                    SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO "
+           ,
+            ["style" => "background: black; color: white;padding: 5px;"]
+        )
+
+    ); ?>
 
 
     <?= div("1.- ", ["style" => "background: black;padding: 5px;color: white;"]) ?>
@@ -126,20 +124,15 @@ $url_cancelacion =
     <?= div("(OXXO) ") ?>
     <?= div("y transferencia bancaria en línea para bancos  ") ?>
     <?= div("BBVA Bancomer.  ") ?>
-
-
-    <?= anchor_enid(img(["src" => $url_request . "img_tema/pago-oxxo.jpeg", "style" => "width: 100%"]), ["href" => $url_pago_oxxo], 1) ?>
+    <?= anchor_enid(img(["src" => $img_pago_oxxo, "style" => "width: 100%"]), ["href" => $url_pago_oxxo]) ?>
     <?= anchor_enid("Imprimir órden de pago",
         [
             "href" => $url_pago_oxxo,
             "style" => "background-color: #005780 !important; color: white!important;padding: 15px;margin-top:30px;margin-bottom:30px;"
-        ],
-        1) ?>
-
-
+        ]
+    ) ?>
 
     <?= hr() ?>
-
 
     <?= div(
         "2.-",
@@ -151,8 +144,8 @@ $url_cancelacion =
     <?= anchor_enid("PayPal", ["href" => $url_pago_paypal]) ?>
     <?= div("por Internet.") ?>
 
-    <?= anchor_enid(img(["src" => $url_request . "img_tema/explicacion-pago-en-linea.png", "style" => "width: 100%"]), ["href" => $url_pago_paypal], 1) ?>
-    <?= anchor_enid("Comprar ahora!", ["href" => $url_pago_paypal, "style" => "background: blue;padding: 15px;color: white!important"], 1) ?>
+    <?= anchor_enid(img(["src" => $img_pago_paypal, "style" => "width: 100%;"]), ["href" => $url_pago_paypal]) ?>
+    <?= anchor_enid("Comprar ahora!", ["href" => $url_pago_paypal, "style" => "background: blue;padding: 15px;color: white!important;"]) ?>
 
 
     <div style="background: #001a30!important;padding: 5px;">
@@ -167,25 +160,24 @@ $url_cancelacion =
                 ["style" => "color:white;"]
             ),
             [
-                "style" => "padding: 4px;",
-                "class" => "white"
-            ]) ?>
+                "style" => "padding: 4px;"
+            ]); ?>
 
         <?= anchor_enid("dando click aquí. ",
             [
-                "href" => $url_request . "pedidos/?seguimiento=$id_recibo&notificar=1",
+                "href" => $url_seguimiento_pago,
                 "style" => "background:white;color: black!important;padding: 5px;"
-            ]) ?>
+            ]); ?>
     </div>
-    <hr>
+    <?=hr()?>
 
     <?= div(
         anchor_enid(
             "YA NO QUIERO RECIBIR ESTE CORREO",
             [
                 'href' => $url_cancelacion,
-                'style' => 'color:black;font-size:.9em;font-weight:bold'
-            ])
-    ) ?>
-</div>
+                'style' => 'color:black;font-size:.9em;font-weight:bold;'
+            ]
+        )
+    );?>
 </div>	

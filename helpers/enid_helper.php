@@ -223,8 +223,7 @@ if ( ! function_exists('add_fields'))
 if ( ! function_exists('end_row'))
 {
   function end_row(){
-    $row= "</div>"."</div>";
-    return $row;
+    return "</div>"."</div>";
   }
 }
 if ( ! function_exists('n_row_12'))
@@ -235,9 +234,9 @@ function n_row_12( $attributes = ''){
     {
       $attributes = _parse_attributes($attributes);
     }
-    $row= "<div class='row'>
+    return  "<div class='row'>
             <div class='col-lg-12 col-lg-12 col-sm-12 ". $attributes  ." '>";
-    return $row;
+
   }
 }
 if ( ! function_exists('anchor_enid'))
@@ -254,16 +253,16 @@ if ( ! function_exists('anchor_enid'))
       }    
     }
     
-    if ($attributes != '')
+    if ($attributes !== '')
     {
       $attributes = _parse_attributes($attributes);
     }
-    if ($row_12 == 0 ) {
+    if ($row_12 === 0 ) {
       
       return '<a '.$attributes.'>'.$title.'</a>';  
     }else{
       
-      return n_row_12(). '<a '.$attributes.'>'.$title.'</a>' . end_row()."<br>";  
+      return n_row_12(). '<a '.$attributes.'>'.$title.'</a>' . end_row().br();
     }    
   }
 }
@@ -919,7 +918,7 @@ if ( ! function_exists('strong'))
   {
     
     $extra      = add_attributes($attributes);  
-    return "<strong ".$extra." > ". $text . "</strong>";
+    return "<strong ".$extra." > ". $text . " </strong>";
 
   }
 }

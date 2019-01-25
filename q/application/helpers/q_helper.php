@@ -1,5 +1,41 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
     if (!function_exists('invierte_date_time')) {
+
+
+
+
+        if (!function_exists('get_mensaje_bienvenida')) {
+            function get_mensaje_bienvenida($param){
+
+                $nombre     =   $param["nombre"];
+                $email      =   $param["email"];
+
+                $l          =   heading("Buen día " . $nombre . " ". $email);
+                $l         .=   div(img([
+                    "src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg",
+                    "style" => "width: 100%"
+                ]),
+                    [
+                        "style" => "width: 30%;margin: 0 auto;"
+                    ]);
+
+                $l  .=  div("TU USUARIO SE HA REGISTRADO!", ["style" => "font-size: 1.4em;font-weight: bold"]);
+                $l  .=  hr();
+                $l  .=  div("Desde ahora podrás adquirir y vender las mejores promociones a lo largo de México");
+                $l  .=  br();
+                $l  .=  anchor_enid("ACCEDE A TU CUENTA AHORA!",
+                    [
+                        "href" => "http://enidservice.com/inicio/login/",
+                        "target" => "_blank",
+                        "style" => "background: #001936;padding: 10px;color: white;margin-top: 23px;text-decoration: none;"
+                    ]);
+                return $l;
+
+            }
+        }
+
+
 
         if (!function_exists('base_valoracion')) {
             function base_valoracion()

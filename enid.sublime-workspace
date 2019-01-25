@@ -519,6 +519,46 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "CREATE TABLE IF NOT EXISTS `enidserv_web`.`tipo_recordatorio` (\n  `idtipo_recordatorio` INT NOT NULL AUTO_INCREMENT,\n  `tipo` VARCHAR(100) NOT NULL,\n  `status` INT NOT NULL DEFAULT 0,\n  PRIMARY KEY (`idtipo_recordatorio`))\nENGINE = InnoDB;\n\n\nINSERT INTO tipo_recordatorio(tipo) VALUE(\"WhatsApp\");\nINSERT INTO tipo_recordatorio(tipo) VALUE(\"Telefono\");\nINSERT INTO tipo_recordatorio(tipo) VALUE(\"Correo\");\nINSERT INTO tipo_recordatorio(tipo) VALUE(\"Messenger\");\n\n\n\n-- -----------------------------------------------------\n-- Table `enidserv_web`.`recordatorio`\n-- -----------------------------------------------------\nCREATE TABLE IF NOT EXISTS `enidserv_web`.`recordatorio` (\n  `id_recordatorio` INT NOT NULL AUTO_INCREMENT,\n  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),\n  `fecha_cordatorio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),\n  `status` INT NOT NULL DEFAULT 0,\n  `id_recibo` INT(11) NOT NULL,\n  `id_tipo` INT NOT NULL,\n  PRIMARY KEY (`id_recordatorio`),\n  INDEX `fk_recordatorio_proyecto_persona_forma_pago1_idx` (`id_recibo` ASC),\n  INDEX `fk_recordatorio_tipo_recordatorio1_idx` (`id_tipo` ASC),\n  CONSTRAINT `fk_recordatorio_proyecto_persona_forma_pago1`\n    FOREIGN KEY (`id_recibo`)\n    REFERENCES `enidserv_web`.`proyecto_persona_forma_pago` (`id_proyecto_persona_forma_pago`)\n    ON DELETE NO ACTION\n    ON UPDATE NO ACTION,\n  CONSTRAINT `fk_recordatorio_tipo_recordatorio1`\n    FOREIGN KEY (`id_tipo`)\n    REFERENCES `enidserv_web`.`tipo_recordatorio` (`idtipo_recordatorio`)\n    ON DELETE NO ACTION\n    ON UPDATE NO ACTION)\nENGINE = InnoDB;\n\n\n\n\n\n\nalter table recordatorio add descripcion text;\n\n\nC~Dz}#[~P*(0",
+			"settings":
+			{
+				"buffer_size": 1652,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/var/www/html/config.php",
+			"settings":
+			{
+				"buffer_size": 2051,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/autoload.php",
+			"settings":
+			{
+				"buffer_size": 423,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "config/config.php",
+			"settings":
+			{
+				"buffer_size": 34,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -577,16 +617,55 @@
 	"expanded_folders":
 	[
 		"/var/www/html/inicio",
+		"/var/www/html/inicio/db",
+		"/var/www/html/inicio/imgs",
+		"/var/www/html/inicio/imgs/application",
+		"/var/www/html/inicio/imgs/application/controllers",
 		"/var/www/html/inicio/reporte_enid",
 		"/var/www/html/inicio/reporte_enid/application"
 	],
 	"file_history":
 	[
+		"/var/www/html/database.php",
+		"/var/www/html/inicio/administracion_cuenta/application/config/config.php",
+		"/var/www/html/inicio/area_cliente/application/config/config.php",
+		"/var/www/html/inicio/compras/application/config/config.php",
+		"/var/www/html/inicio/contact/application/config/config.php",
+		"/var/www/html/inicio/desarrollo/application/config/config.php",
+		"/var/www/html/inicio/faq/application/config/config.php",
+		"/var/www/html/inicio/forma_pago/application/config/config.php",
+		"/var/www/html/inicio/imgs/application/config/config.php",
+		"/var/www/html/inicio/lista_deseos/application/config/config.php",
+		"/var/www/html/inicio/login/application/config/config.php",
+		"/var/www/html/inicio/movimientos/application/config/config.php",
+		"/var/www/html/inicio/msj/application/config/config.php",
+		"/var/www/html/inicio/orden_pago_oxxo/application/config/config.php",
+		"/var/www/html/inicio/pedidos/application/config/config.php",
+		"/var/www/html/inicio/planes_servicios/application/config/config.php",
+		"/var/www/html/inicio/pregunta/application/config/config.php",
+		"/var/www/html/inicio/procesar/application/config/config.php",
+		"/var/www/html/inicio/puntos_medios/application/config/config.php",
+		"/var/www/html/inicio/q/application/config/config.php",
+		"/var/www/html/inicio/recomendacion/application/config/config.php",
+		"/var/www/html/inicio/reporte_enid/application/config/config.php",
+		"/var/www/html/inicio/search/application/config/config.php",
+		"/var/www/html/inicio/sobre_enidservice/application/config/config.php",
+		"/var/www/html/inicio/tareas_complejas/application/config/config.php",
+		"/var/www/html/inicio/terminos-y-condiciones/application/config/config.php",
+		"/var/www/html/inicio/unete_a_nuestro_equipo/application/config/config.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/config/config.php",
+		"/var/www/html/inicio/valoracion/application/config/config.php",
+		"/var/www/html/inicio/system/libraries/Email.php",
+		"/var/www/html/inicio/producto/application/config/config.php",
+		"/var/www/html/config.php",
+		"/var/www/html/inicio/helpers/enid_helper.php",
+		"/var/www/html/inicio/imgs/application/controllers/enid.php",
+		"/var/www/html/inicio/system/libraries/Image_lib.php",
+		"/var/www/html/inicio/system/libraries/Upload.php",
 		"/var/www/html/inicio/js_tema/js/main.js",
 		"/var/www/html/inicio/q/application/models/actividad_web_model.php",
 		"/var/www/html/inicio/extra_1.sql",
 		"/var/www/html/inicio/pedidos/application/controllers/home.php",
-		"/var/www/html/inicio/imgs/application/controllers/enid.php",
 		"/var/www/html/inicio/planes_servicios/application/helpers/planes_helper.php",
 		"/var/www/html/inicio/movimientos/application/views/agregar_saldo_desde_oxxo.php",
 		"/var/www/html/inicio_3/portafolio/application/models/clasificacion_model.php",
@@ -624,7 +703,6 @@
 		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
 		"/var/www/html/inicio/js_tema/domicilio/domicilio_entrega.js",
-		"/var/www/html/inicio/helpers/enid_helper.php",
 		"/var/www/html/inicio/producto/application/views/pre.php",
 		"/var/www/html/inicio/pedidos/application/views/seguimiento.php",
 		"/var/www/html/inicio/procesar/application/views/secciones_2/domicilio_entrega.php",
@@ -675,41 +753,7 @@
 		"/var/www/html/inicio/q/application/controllers/api/img.php",
 		"/var/www/html/inicio/q/application/controllers/api/imagen_usuario.php",
 		"/var/www/html/inicio/q/application/controllers/api/imagen_servicio.php",
-		"/var/www/html/inicio/q/application/controllers/api/funcionalidad.php",
-		"/var/www/html/inicio/q/application/controllers/api/forma_pago.php",
-		"/var/www/html/inicio/q/application/controllers/api/estado_republica.php",
-		"/var/www/html/inicio/q/application/controllers/api/empresa_recurso.php",
-		"/var/www/html/inicio/q/application/controllers/api/direccion.php",
-		"/var/www/html/inicio/q/application/controllers/api/desarrollo.php",
-		"/var/www/html/inicio/q/application/controllers/api/cuentas.php",
-		"/var/www/html/inicio/q/application/controllers/api/cuenta_pago.php",
-		"/var/www/html/inicio/q/application/controllers/api/cron.php",
-		"/var/www/html/inicio/programacion/recordatorio_publicaciones.php",
-		"/var/www/html/inicio/q/application/controllers/api/cotizaciones.php",
-		"/var/www/html/inicio/q/application/controllers/api/contacto.php",
-		"/var/www/html/inicio/q/application/controllers/api/codigo_postal.php",
-		"/var/www/html/inicio/q/application/controllers/api/categoria.php",
-		"/var/www/html/inicio/q/application/controllers/api/blog.php",
-		"/var/www/html/inicio/q/application/controllers/api/banco.php",
-		"/var/www/html/inicio/q/application/controllers/api/areacliente.php",
-		"/var/www/html/inicio/msj/application/controllers/api/emp.php",
-		"/var/www/html/inicio/programacion/recordatorio_cobranza.php",
-		"/var/www/html/inicio/programacion/gamificacion_respuestas_a_cliente.php",
-		"/var/www/html/inicio/q/application/controllers/api/paginacion.php",
-		"/var/www/html/inicio/q/application/controllers/api/perfiles.php",
-		"/var/www/html/inicio/q/application/controllers/api/pregunta.php",
-		"/var/www/html/inicio/q/application/controllers/api/pregunta_servicio.php",
-		"/var/www/html/inicio/q/application/controllers/api/privacidad.php",
-		"/var/www/html/inicio/q/application/controllers/api/privacidad_usuario.php",
-		"/var/www/html/inicio/q/application/controllers/api/productividad.php",
-		"/var/www/html/inicio/q/application/controllers/api/prospecto.php",
-		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php",
-		"/var/www/html/inicio/q/application/controllers/api/recurso.php",
-		"/var/www/html/inicio/q/application/controllers/api/respon.php",
-		"/var/www/html/inicio/q/application/controllers/api/saldos.php",
-		"/var/www/html/inicio/q/application/controllers/api/talla.php",
-		"/var/www/html/inicio/q/application/controllers/api/tipificacion.php",
-		"/var/www/html/inicio/q/application/controllers/api/tipificacion_recibo.php"
+		"/var/www/html/inicio/q/application/controllers/api/funcionalidad.php"
 	],
 	"find":
 	{
@@ -720,6 +764,9 @@
 		"height": 116.0,
 		"where_history":
 		[
+			"",
+			"*.php",
+			"*.js",
 			"*.php",
 			"*.PHP",
 			"",
@@ -844,10 +891,7 @@
 			"",
 			"*.js",
 			"*.php",
-			"",
-			"*.js",
-			"*.php",
-			"*.js"
+			""
 		]
 	},
 	"find_state":
@@ -855,6 +899,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"<?php include(\"../../../config.php\");",
+			"<?php include(\"../../../config.php\"); ",
+			"<?php include(\"../config/config.php\");",
+			"construye_img_format",
+			"get_img_contents",
+			"construye_img_format",
+			"costruye_imagen",
+			"get_img_contents",
+			"function_usable",
+			"\tmodificado:",
+			"modificado:",
+			"\"use strict\";",
+			"modificado:",
 			"                          ",
 			"BETWEEN",
 			"DATEADD",
@@ -969,20 +1026,7 @@
 			"Agregar punto de encuentro",
 			"realiza",
 			"get_texto_status",
-			"id_proyecto_persona_forma_pago",
-			"load_view_seguimiento",
-			"seguimiento",
-			"        \n",
-			"quitar_espacios_numericos",
-			"quita_espacios_en_telefono",
-			"tele",
-			"telefono form-control",
-			"}?>\n",
-			"gamificacion_respuestas_a_cliente.php on line 2",
-			"resumen_dia.php",
-			"resumen_dia.php on line 3",
-			"recordatorio_cobranza.php on line 3",
-			"empresamode"
+			"id_proyecto_persona_forma_pago"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -990,6 +1034,10 @@
 		"regex": false,
 		"replace_history":
 		[
+			"<?php include(\"../config/config.php\");",
+			"<?php include(\"../../../config.php\");",
+			"<?php include(\"../../config.php\");",
+			"function_exists",
 			"<?php require_once \"../def.php\";?>",
 			"../q/index.php/api/servicio/sugerencia/format/json/",
 			"tipo_entrega",
@@ -1019,8 +1067,153 @@
 	"groups":
 	[
 		{
+			"selected": 3,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1652,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1652,
+								1652
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 216.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/var/www/html/config.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2051,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1736,
+								1736
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 624.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "config/autoload.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 423,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "config/config.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								27,
+								27
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1076,6 +1269,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"enid_",
+				"helpers/enid_helper.php"
+			],
 			[
 				"main",
 				"js_tema/js/main.js"
@@ -1583,10 +1780,6 @@
 			[
 				"pedidos.cs",
 				"css_tema/template/pedidos.css"
-			],
-			[
-				"pedidos.js",
-				"js_tema/pedidos/principal.js"
 			]
 		],
 		"width": 0.0
