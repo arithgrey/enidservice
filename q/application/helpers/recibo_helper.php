@@ -1,6 +1,58 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_saludo($cliente , $config_log , $id_recibo){
+
+         $text   =      heading_enid("Buen día " . $cliente . ", Primeramente un cordial saludo. ",3);
+         $text  .=      div("El presente mensaje es para informar que el servicio solicitado ahora (Nueva Compra) o previamente (Recordatorio de Renovación) tiene los siguientes detalles:");
+         $text  .=      div("Detalles de Orden de Compra");
+         $text  .=      div(img($config_log));
+         $text  .=      heading_enid("#Recibo: " . $id_recibo);
+         return $text;
+    }
+    function get_text_saldo_pendiente($resumen_pedido ,
+                                      $num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion ,
+                                      $text_envio_cliente_sistema , $primer_registro , $fecha_vencimiento ,
+                                      $monto_a_pagar , $saldo_pendiente ){
+
+
+        $resumen_pedido = ($resumen_pedido !== null ) ? $resumen_pedido : " ";
+        $text  =    div("Concepto");
+        $text .=    div($resumen_pedido);
+        $text .=    valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion);
+        $text .=    div("Precio " . $monto_a_pagar);
+        $text .=    div($text_envio_cliente_sistema);
+        $text .=    div("Ordén de compra " . $primer_registro . " Límite de pago " . $fecha_vencimiento);
+        $text .=    div("Monto total pendiente ");
+        $text .=    heading_enid($saldo_pendiente . " Pesos Mexicanos" ,2);
+        $text .=    hr();
+        return $text;
+
+    }
+    function get_text_forma_pago($img_pago_oxxo , $url_pago_oxxo , $url_pago_paypal , $img_pago_paypal){
+
+        $text  =    heading_enid("Formas de pago Enid Service", 2);
+        $text .=    hr();
+        $text .=    heading_enid("NINGÚN CARGO A TARJETA ES AUTOMÁTICO. SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO " ,2);
+        $text .=    div("1.- Aceptamos pagos en tiendas de autoservicio OXXO  y transferencia bancaria en línea para bancos BBVA Bancomer.");
+        $text .=    anchor_enid(img(["src" => $img_pago_oxxo , "style" => "width: 100%;"]), ["href" => $url_pago_oxxo] );
+        $text .=    div(anchor_enid("Imprimir órden de pago", ["href" => $url_pago_oxxo]));
+        $text .=    hr();
+        $text .=    div("2.- Podrás compra en línea de forma segura con tu con tu tarjeta bancaria (tarjeta de crédito o débito) a través de");
+        $text .=    anchor_enid("PayPal", ["href" => $url_pago_paypal]);
+        $text .=    anchor_enid(img(["src" => $img_pago_paypal, "style" => "width: 100%;"]), ["href" => $url_pago_paypal]);
+        $text .=    div(anchor_enid("Comprar ahora!", ["href" => $url_pago_paypal] ));
+        return $text;
+
+    }
+    function get_text_notificacion_pago($url_seguimiento_pago , $url_cancelacion ){
+
+        $text  =    heading_enid("¿Ya realizaste tu pago?", 2);
+        $text .=    div("Notifica tu pago para que podamos procesarlo");
+        $text .=    anchor_enid("Dando click aquí", ["href" => $url_seguimiento_pago ]);
+        return $text;
+
+    }
     function create_resumen_pedidos($recibos, $lista_estados, $param)
     {
 
@@ -446,6 +498,7 @@ if (!function_exists('invierte_date_time')) {
 
             $text = "Ciclos contratados: " . $periodos . " " . $text_ciclos;
         } else {
+
             $text = ($periodos > 1) ? "Piezas " : "Pieza ";
             $text = heading_enid($periodos . " " . $text, 3);
         }

@@ -78,7 +78,7 @@ if ( ! function_exists('br'))
 {
 	function br($num = 1)
 	{
-		return str_repeat("<br />", $num);
+		return str_repeat("\n"."<br>"."\n", $num);
 	}
 }
 

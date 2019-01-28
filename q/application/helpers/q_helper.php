@@ -3,7 +3,17 @@
     if (!function_exists('invierte_date_time')) {
 
 
+        if (!function_exists('get_mensaje_modificacion_pwd')) {
+            function get_mensaje_modificacion_pwd($nombre){
 
+                $text   =     heading_enid("HOLA, ".strtoupper($nombre) , 3);
+                $text   .=    div(img(["src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg", "style" => "width: 100%"]));
+                $text   .=    div("Observamos un cambio de contraseña en tu cuenta. ¿Fuiste tú?");
+                $text   .=    div("Si es así ignora este correo, en caso contrario notificanos aquí http://enidservice.com/inicio/contact/");
+                return $text;
+
+            }
+        }
 
         if (!function_exists('get_mensaje_bienvenida')) {
             function get_mensaje_bienvenida($param){

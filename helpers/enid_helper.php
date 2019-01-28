@@ -9,7 +9,6 @@ if ( ! function_exists('heading'))
   }
 }
 
-
 if ( ! function_exists('ul'))
 {
   function ul($list, $attributes = '')
@@ -37,13 +36,11 @@ if ( ! function_exists('span'))
 {
   function span( $info , $attributes='', $row = 0 )
   {          
-      $attr =  add_attributes($attributes);       
-      if ($row == 0) {
-        return "<span ".$attr.">".$info."</span>";  
-      }else{
-        return n_row_12()."<span ".$attr.">".$info."</span>".end_row();
-      }
-      
+      $attr =   add_attributes($attributes);
+      $base =   "<span".$attr.">".$info."</span>";
+      $span =   ( $row == 0 )? $base : addNrow($base);
+      return  $span;
+
   }
 }
 if ( ! function_exists('p'))
@@ -94,16 +91,13 @@ if ( ! function_exists('guardar'))
 }
 if ( ! function_exists('add_element'))
 {
-  function add_element( $info , $type , $attributes ='' , $row_12 =0 )
+  function add_element( $info , $type , $attributes ='' , $row =0 )
   {    
       
-      $attr =  add_attributes($attributes);
-      if ($row_12 == 0 ) {
-          return "<".$type." ".$attr." >".$info."</".$type.">";  
-      }else{
-          return 
-          n_row_12() . "<".$type." ".$attr." >".$info."</".$type.">" . end_row();
-      }
+      $attr     =  add_attributes($attributes);
+      $base     =  "<".$type." ".$attr." >".$info."</".$type.">";
+      $e        =   ($row ==  0 ) ? $base : addNRow($base);
+      return $e;
       
   }
 }
@@ -137,19 +131,18 @@ function sub_categorias_destacadas($param){
 }
 if ( ! function_exists('div'))
 {
-  function div( $info , $attributes='' , $row_12 =0 )
+  function div( $info , $attributes='' , $row =0 )
   {          
       
       if ($attributes == 1) {
-          return n_row_12()."<div >".$info."</div>".end_row();  
-      }
-      if ($row_12 == 0 ) {
-          $attr =  add_attributes($attributes);
-          return "<div ".$attr." >".$info."</div>";  
+          return addNRow($info);
       }else{
-          $attr =  add_attributes($attributes);
-          return n_row_12()."<div ".$attr." >".$info."</div>".end_row();  
+          $attr =   add_attributes($attributes);
+          $base =   "\n"."<div".$attr.">"."\n".$info."\n"."</div>"."\n";
+          $div  =   ($row == 0 ) ?  $base : addNRow($base);
+          return $div;
       }
+
       
   }
 }
@@ -170,13 +163,11 @@ if ( ! function_exists('input_hidden'))
 {
   function input_hidden( $attributes='' , $e = 0)
   {    
-      $attr =  add_attributes($attributes);
-      if ($e == 0) {
-        return "<input type='hidden'  ".$attr." >";  
-      }else{
-        return n_row_12() . "<input type='hidden' ".$attr." >" . end_row();  
-      }
-      
+      $attr     =   add_attributes($attributes);
+      $input    =   "<input type='hidden'  ".$attr." >";
+      $base     =   ( $e == 0 ) ? $input : addNRow($input);
+      return  $base;
+
   }
 }
 if ( ! function_exists('add_attributes'))
@@ -223,7 +214,7 @@ if ( ! function_exists('add_fields'))
 if ( ! function_exists('end_row'))
 {
   function end_row(){
-    return "</div>"."</div>";
+    return "</div>"."\n"."</div>";
   }
 }
 if ( ! function_exists('n_row_12'))
@@ -234,8 +225,7 @@ function n_row_12( $attributes = ''){
     {
       $attributes = _parse_attributes($attributes);
     }
-    return  "<div class='row'>
-            <div class='col-lg-12 col-lg-12 col-sm-12 ". $attributes  ." '>";
+    return  "<div class='row'>"."\n"."<div class='col-lg-12' ".$attributes .">"."\n";
 
   }
 }
@@ -257,13 +247,11 @@ if ( ! function_exists('anchor_enid'))
     {
       $attributes = _parse_attributes($attributes);
     }
-    if ($row_12 === 0 ) {
-      
-      return '<a '.$attributes.'>'.$title.'</a>';  
-    }else{
-      
-      return n_row_12(). '<a '.$attributes.'>'.$title.'</a>' . end_row().br();
-    }    
+
+    $base   =   "\n".'<a'.$attributes.'>'."\n".$title."\n".'</a>'."\n";
+    $e      =   ($row_12 == 0 ) ? $base : addNRow($base);
+    return  $e;
+
   }
 }
 if ( ! function_exists('get_td'))
@@ -307,13 +295,13 @@ if ( ! function_exists('remove_comma'))
 }
 if ( ! function_exists('heading_enid'))
 {
-  function heading_enid($data = '', $h = '1', $attributes = '' , $row_12 =0)
+  function heading_enid($data = '', $h = 1, $attributes = '' , $row_12 =0)
   {    
-    $attr =  add_attributes($attributes);   
-    if ($row_12 == 1) {
-      return n_row_12()."<h".$h. $attr.">".$data."</h".$h.">".end_row();
-    }
-    return "<h".$h. $attr.">".$data."</h".$h.">";      
+    $attr   =  add_attributes($attributes);
+    $label  =  "\n"."<h$h$attr>"."\n".$data."\n"."</h$h>"."\n";
+    $e      =  ($row_12 == 1) ? addNRow($label) : $label;
+    return $e;
+
   }
 }
 if ( ! function_exists('get_url_request'))
@@ -334,23 +322,19 @@ if ( ! function_exists('es_local'))
         $es_local    =   ($_SERVER['HTTP_HOST'] !== "localhost") ?  0 : 1;
         return $es_local;
 
-
     }
-
 }
 
 if ( ! function_exists('icon'))
 {
   function icon($class , $attributes ='' , $row_12 = 0 , $extra_text ='' ){
-    $attr =  add_attributes($attributes);   
-    if ($row_12 == 0) {
-      return 
-      "<i class='fa ".$class."' ". $attr." ></i>".
-      span($extra_text , $attributes);  
-    }else{
-      return n_row_12(). "<i class='fa ".$class."' ". $attr." ></i>" . end_row().
-      span($extra_text , $attributes);  
-    }    
+
+      $attr   =     add_attributes($attributes);
+      $base   =     "<i class='fa ".$class."' ". $attr." ></i>";
+      $base2  =     span($extra_text , $attributes);
+      $e      =     ($row_12 == 0) ? $base. $base2 :  addNRow($base).$base2;
+      return $e;
+
   }
 }
 if ( ! function_exists('template_table_enid'))
@@ -561,24 +545,29 @@ if ( ! function_exists('label'))
 {  
   function label($label_text = '',  $attributes = '' , $row = 0 ){
       
-      $attr =  add_attributes($attributes);
-      if ($row == 0 ) {
-        return "<label ".$attr.">".$label_text ."</label>";
-      }else{
-        return n_row_12(). "<label ".$attr.">".$label_text ."</label>" . end_row();
-      }      
+      $attr     =  add_attributes($attributes);
+      $base     =  "<label".$attr.">".$label_text ."</label>";
+      $label    =  ( $row == 0 ) ? $base : addNRow($base);
+      return  $label;
+
   }
 }
+if ( ! function_exists('addNRow'))
+{
+    function addNRow($e){
+
+        return n_row_12(). $e .end_row();
+
+    }
+}
+
 if ( ! function_exists('place'))
 {
   function place($class , $attributes = [] , $row =1){         
 
-    $attributes["class"]  = $class;      
-    if ($row == 1) {
-      return div("",  $attributes  , 1); 
-    }else{
-      return div("",  $attributes );  
-    }          
+    $attributes["class"]  = $class;
+    return div("",  $attributes  , $row);
+
   }
 }
 if ( ! function_exists('img_enid'))
@@ -645,7 +634,10 @@ if ( ! function_exists('get_campo')){
       if($add_label == 1){      
         return $label ."  ". $param[0][$key];    
       }else{
-        return $param[0][$key];    
+          if(count($param)>0){
+              return $param[0][$key];
+          }
+
       }    
   }
 }
@@ -914,37 +906,32 @@ if ( ! function_exists('small'))
 
 if ( ! function_exists('strong'))
 {
-  function strong($text, $attributes = '')
+  function strong($text, $attributes = '' , $row = 0)
   {
     
-    $extra      = add_attributes($attributes);  
-    return "<strong ".$extra." > ". $text . " </strong>";
+    $extra      =   add_attributes($attributes);
+    $base       =   "\n"."<strong".$extra.">"."\n". $text ."\n". "</strong>"."\n";
+    $e          =   ( $row == 0 )? $base : addNRow($base);
+    return $e;
 
   }
 }
-
-
 if ( ! function_exists('hr'))
 {
-  function hr($row=1, $attributes = '')
+  function hr($row=0, $attributes = '' )
   {
-    $extra      = add_attributes($attributes);  
-    if ($row == 1) {
-      return n_row_12()."<hr ".$extra." >".end_row();  
-    }else{
-      return "<hr ".$extra." >";  
-    }
-    
+    $extra      =   add_attributes($attributes);
+    $base       =   "\n"."<hr".$extra.">"."\n";
+    $e          =   ($row == 0 ) ? $base : addNRow($base);
+    return      $e;
   }
 }
 
 if ( ! function_exists('debug'))
 {
 function debug($msg, $array = 0)
-{ 
-    
-
-    if($_SERVER['HTTP_HOST'] ==  "localhost") {
+{
+    if(es_local() >  0) {
 
       $_date_fmt  = 'Y-m-d H:i:s';
       $filepath   = BASEPATH."../debug/debug.log"; 
@@ -963,7 +950,6 @@ function debug($msg, $array = 0)
       fwrite($fp, $message);
       flock($fp, LOCK_UN);
       fclose($fp);
-      //@chmod($filepath, FILE_WRITE_MODE);
       return TRUE;  
     }
     
@@ -1009,15 +995,10 @@ if ( ! function_exists('textarea'))
 {
   function textarea($attributes = '' ,  $row_12 = 0 , $def='')
   {
-      $attr =  add_attributes($attributes);
-      if ($row_12 == 0 ) {
-          
-          return "<textarea ".$attr." ></textarea>";  
-      }else{
-      
-          return n_row_12()."<textarea ".$attr." ></textarea>".end_row();  
-      }
-      
+      $attr     =   add_attributes($attributes);
+      $base     =   "<textarea ".$attr." ></textarea>";
+      $e        =   ($row_12 == 0 ) ? $base : addNRow($base);
+      return        $e;
 
   }
 }
@@ -1025,15 +1006,13 @@ if ( ! function_exists('iframe'))
 {
   function iframe($attributes = '' ,  $row_12 = 0)
   {
-      $attr =  add_attributes($attributes);
-      if ($row_12 == 0 ) {
-          
-          return "<iframe ".$attr." ></iframe>";  
-      }else{
-      
-          return n_row_12()."<iframe ".$attr." ></iframe>".end_row();  
-      }
-      
+
+
+      $attr =   add_attributes($attributes);
+      $base =   "<iframe ".$attr." ></iframe>";
+      $e    =    ($row_12 == 0 ) ? $base : addNRow($base);
+      return $e;
+
 
   }
 }
@@ -1041,15 +1020,10 @@ if ( ! function_exists('center'))
 {
   function center($attributes = '' ,  $row_12 = 0)
   {
-      $attr =  add_attributes($attributes);
-      if ($row_12 == 0 ) {
-          
-          return "<center ".$attr." ></center>";  
-      }else{
-      
-          return n_row_12()."<center ".$attr." ></center>".end_row();  
-      }
-      
+      $attr =   add_attributes($attributes);
+      $base =   "<center ".$attr." ></center>";
+      $e    =   ($row_12 == 0 ) ? $base : addNRow($base);
+      return $e;
 
   }
 }
@@ -1166,7 +1140,6 @@ if ( ! function_exists('get_img_usuario'))
             "class"   =>  "imagen_usuario" ,
             "src"     =>  $url_img ,
             "onerror" =>  "this.src='../img_tema/user/user.png'" ,
-            //'onerror' =>  "reloload_img( 'imagen_usuario','".$url_img."');",
             "style"   =>  "width: 40px!important;height: 35px!important;"
         ];
 
@@ -1215,16 +1188,6 @@ if (!function_exists('lista_horarios')) {
         return $select;
 
     }
-}
-if (!function_exists('get_headers_e')) {
-    function get_headers_e(){
-
-        $headers     = "MIME-Version: 1.0\r\n";
-        $headers    .= "Content-type: text/html; charset=iso-8859-1\r\n";
-        $headers    .= "From: Enid Service <arithgrey@enidservice.com>\r\n";
-        return $headers;
-    }
-
 }
 if (!function_exists('get_url_servicio')) {
     function get_url_servicio($id_servicio){

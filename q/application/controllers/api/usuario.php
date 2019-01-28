@@ -162,7 +162,7 @@ class usuario extends REST_Controller{
 
         $param      =   $this->put();
         $response   =   false;
-        if (if_ext($param , "mail,type")){
+        if (if_ext($param , "type")){
             switch ($param["type"]) {
                 case 1:
 
@@ -170,6 +170,7 @@ class usuario extends REST_Controller{
                     break;
 
                 case 2:
+
                     $response = $this->set_password_usuario($param);
 
                     break;
@@ -195,7 +196,12 @@ class usuario extends REST_Controller{
                     $response   = "La contraseña ingresada no corresponde a su contraseña actual";
 
                 }else{
-                    $response   = $this->usuario_model->q_up("password" , $nuevo , $id_usuario);
+                    $response =  $this->usuario_model->q_up("password" , $nuevo , $id_usuario);
+                    if($response){
+                        $this->notifica_modificacion_password();
+                    }
+
+
                 }
             }else{
                 $response       = "Contraseñas distintas";
@@ -758,6 +764,17 @@ class usuario extends REST_Controller{
             }
         }
         return $num;
+    }
+    private function notifica_modificacion_password(){
+
+
+        $email      =   $this->principal->get_session("email");
+        $nombre     =   $this->principal->get_session("nombre");
+        $asunto     =   "Alerta de cambio de contraseña";
+        $cuerpo     =   get_mensaje_modificacion_pwd($nombre);
+        $q          =   get_request_email($email, $asunto , $cuerpo);
+        return  $this->principal->send_email_enid($q , 1);
+
     }
     private function notifica_registro_exitoso($q){
         $api = "emp/solicitud_afiliado/format/json/";
