@@ -24,9 +24,6 @@
 	$servicio 				= 	$servicio[0];
 	$flag_servicio 			=  	$servicio["flag_servicio"];
 	$tipo_entrega      		= 	$recibo["tipo_entrega"];
-	
-	
-	
 	$deuda 					=  get_saldo_pendiente(
 								$monto_a_pagar,
 								$num_ciclos_contratados,
@@ -38,12 +35,6 @@
 
 	
 	$saldo_pendiente 		= 	$deuda["total_mas_envio"];
-	
-
-
-	
-	
-
 	$url_pago_oxxo 			= 	get_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
 	$url_pago_saldo_enid 	= 	get_link_saldo_enid($id_usuario_venta , $id_recibo);	
 	$url_img_servicio 		=  	link_imagen_servicio($id_servicio);
@@ -51,13 +42,10 @@
 	$data["url_pago_paypal"]= 	$url_pago_paypal;
 	$data["recibo"] 		=	$recibo;
 	$text_forma_compra 	    =   ($tipo_entrega) ?  "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
-
-
 	$link_seguimiento 		=	"../pedidos/?seguimiento=".$id_recibo;
 ?>
 
 <div class="col-lg-8">
-
 	<?php if($tipo_entrega == 1 ):?>	
 		<?php 
 			$costo_envio =  $punto_encuentro[0]["costo_envio"];
@@ -71,20 +59,15 @@
 		<?=heading_enid("LUGAR DE ENCUENTRO" , 3, ["class" => "top_20"])?>
 		<?=div($tipo. " ". $nombre_estacion ." ". $numero." COLOR ". $color ,1)?>		
 		<?=div("ESTACIÓN ".$lugar_entrega , ["class" => "strong"],1)?>		
-		<br>
+		<?=br()?>
 		<?=div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"])?>
-		<br>	
+        <?=br()?>
 		<?=div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de ".$costo_envio." pesos por concepto de gastos de envío" , 
 		["class" => "contenedor_text_entrega"])?>
-		
-		
-
 	<?php endif;?>
-	<hr>		
-	<?=heading_enid(icon("fa fa-credit-card") . $text_forma_compra , 3 , ["class" => 'top_20' ])?>	
-	<hr>
-
-
+	<?=hr()?>
+	<?=heading_enid(icon("fa fa-credit-card") . $text_forma_compra , 3 , ["class" => 'top_20' ])?>
+    <?=hr()?>
 	<?=guardar(
 				"PAGOS EN TIENDAS DE AUTOSERVICIO (OXXO)", 
 				[
@@ -180,8 +163,8 @@
 				)?>
 			<?php endif;?>
 		</div>
-	<?php endif;?>		
-		<hr>
+	<?php endif;?>
+    <?=hr()?>
 		
 
 
@@ -213,8 +196,6 @@
 		1)?>		
 	<?=end_row()?>	
 
-
-
 </div>
 <div class="col-lg-4">
 	<div style="border-style: solid;padding: 10px;border-width: 1px;">
@@ -230,7 +211,6 @@
 	    <?=heading_enid($saldo_pendiente ."MXN", 4 ,   	["class" => 'blue_enid strong'] )?>
 	    <?=heading_enid("Pesos Mexicanos" , 4 , 		["class"=> 'strong'])?>
 	</div>
-	<?=div(img($url_img_servicio),  1)?>	        
-
+	<?=div(img($url_img_servicio),  1)?>
 </div>
 

@@ -7,21 +7,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a3bc9853-1196-4a24-abd8-2fc7fc89d465" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/administracion_cuenta/application/views/micuenta/privacidad.php" beforeDir="false" afterPath="$PROJECT_DIR$/administracion_cuenta/application/views/micuenta/privacidad.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/enid.sublime-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/enid.sublime-workspace" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helpers/enid_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/enid_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js_tema/administracion_cuenta/principal.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/administracion_cuenta/principal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msj/application/libraries/mensajeria.php" beforeDir="false" afterPath="$PROJECT_DIR$/msj/application/libraries/mensajeria.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/usuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/usuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/helpers/q_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/helpers/q_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/areacliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/areacliente.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/recibo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/libraries/mensajeria_lead.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/libraries/mensajeria_lead.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/views/cobranza/pago-paypal.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/views/cobranza/pago-paypal.php_" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/views/cobranza/pago_oxxo.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/views/cobranza/pago_oxxo.php_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/views/cobranza/pago_al_momento.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/views/cobranza/pago_al_momento.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/q/application/views/cobranza/resumen_no_aplica.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/views/cobranza/resumen_no_aplica.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/views/cobranza/saludo_inicial.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/views/cobranza/saludo_inicial.php_" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/helpers/html_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/helpers/html_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/view_tema/footer_template.php" beforeDir="false" afterPath="$PROJECT_DIR$/view_tema/footer_template.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,64 +24,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/usuario.php">
+        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="775" selection-start-line="775" selection-end-line="775" />
+            <state relative-caret-position="-1556">
+              <caret line="308" column="80" selection-start-line="308" selection-start-column="80" selection-end-line="308" selection-end-column="80" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/msj/application/controllers/api/sender.php">
+        <entry file="file://$PROJECT_DIR$/q/application/helpers/recibo_helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="240">
+              <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/q/application/helpers/q_helper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="75" selection-start-line="8" selection-start-column="75" selection-end-line="8" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/helpers/enid_helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="1201" column="57" selection-start-line="1201" selection-start-column="13" selection-end-line="1201" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/librerias/principal.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="69" column="48" lean-forward="true" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js_tema/administracion_cuenta/principal.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="138" column="21" selection-start-line="138" selection-start-column="21" selection-end-line="138" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administracion_cuenta/application/views/micuenta/privacidad.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+            <state relative-caret-position="277">
+              <caret line="137" column="26" lean-forward="true" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -98,22 +54,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>n_row_12</find>
-      <find>forma</find>
-      <find>div</find>
-      <find>f</find>
-      <find>br</find>
-      <find>br(</find>
-      <find>strong</find>
-      <find>hr</find>
-      <find>hr(</find>
-      <find>impo</find>
-      <find>background</find>
-      <find>$flag_servicio</find>
-      <find>piea</find>
-      <find>valida_texto_periodos_contratados</find>
-      <find>concepto</find>
-      <find>form-miembro-enid-service</find>
       <find>usuario.php</find>
       <find>vendedo</find>
       <find>sern</find>
@@ -128,6 +68,22 @@
       <find>notifi</find>
       <find>enid_helper</find>
       <find>send</find>
+      <find>&lt;?=</find>
+      <find>?&gt;</find>
+      <find>$data_complete</find>
+      <find>get_mensaje_no_aplica</find>
+      <find>anchor</find>
+      <find>div</find>
+      <find>add_attributes</find>
+      <find>resumen_desglose_pago</find>
+      <find>ticket_pendiente_pago</find>
+      <find>&quot;\n&quot;.</find>
+      <find>.&quot;\n&quot;</find>
+      <find>span</find>
+      <find>br</find>
+      <find>img</find>
+      <find>senderEmail</find>
+      <find>$url_request</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/planes_servicios/application/helpers</dir>
@@ -147,8 +103,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/planes_servicios/application/views/home_enid.php" />
-        <option value="$PROJECT_DIR$/q/application/views/servicio/menu_tabs.php" />
         <option value="$PROJECT_DIR$/q/application/views/servicio/detalle.php" />
         <option value="$PROJECT_DIR$/area_cliente/application/helpers/area_helper.php" />
         <option value="$PROJECT_DIR$/area_cliente/application/views/home.php" />
@@ -180,8 +134,6 @@
         <option value="$PROJECT_DIR$/msj/application/libraries/mensajerialogin.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/productividad.php" />
         <option value="$PROJECT_DIR$/librerias/principal.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/areacliente.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/recibo.php" />
         <option value="$PROJECT_DIR$/q/application/views/cobranza/pago_oxxo.php" />
         <option value="$PROJECT_DIR$/msj/application/controllers/api/mailrest.php" />
         <option value="$PROJECT_DIR$/q/application/views/usuario/registro.php" />
@@ -191,17 +143,20 @@
         <option value="$PROJECT_DIR$/q/application/libraries/mensajeria_lead.php" />
         <option value="$PROJECT_DIR$/view_tema/footer_template.php" />
         <option value="$PROJECT_DIR$/system/helpers/html_helper.php" />
-        <option value="$PROJECT_DIR$/q/application/views/cobranza/resumen_no_aplica.php" />
-        <option value="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" />
-        <option value="$PROJECT_DIR$/helpers/enid_helper.php" />
         <option value="$PROJECT_DIR$/js_tema/administracion_cuenta/principal.js" />
         <option value="$PROJECT_DIR$/administracion_cuenta/application/views/micuenta/privacidad.php" />
         <option value="$PROJECT_DIR$/q/application/controllers/api/usuario.php" />
         <option value="$PROJECT_DIR$/q/application/helpers/q_helper.php" />
+        <option value="$PROJECT_DIR$/q/application/views/cobranza/resumen_no_aplica.php" />
+        <option value="$PROJECT_DIR$/q/application/views/cobranza/pago_al_momento.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/areacliente.php" />
+        <option value="$PROJECT_DIR$/system/helpers/url_helper.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/recibo.php" />
+        <option value="$PROJECT_DIR$/q/application/helpers/recibo_helper.php" />
+        <option value="$PROJECT_DIR$/helpers/enid_helper.php" />
       </list>
     </option>
   </component>
-  <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpServers">
     <servers>
       <server host="localhost" id="763ae856-b642-4ca5-b441-7c2c28cff9ba" name="local" use_path_mappings="true">
@@ -234,42 +189,28 @@
             <path>
               <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
               <item name="inicio" type="462c0819:PsiDirectoryNode" />
-              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="msj" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
               <item name="inicio" type="462c0819:PsiDirectoryNode" />
-              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="msj" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
               <item name="inicio" type="462c0819:PsiDirectoryNode" />
-              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="msj" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
               <item name="inicio" type="462c0819:PsiDirectoryNode" />
-              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="msj" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="helpers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
-              <item name="inicio" type="462c0819:PsiDirectoryNode" />
-              <item name="q" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
-              <item name="inicio" type="462c0819:PsiDirectoryNode" />
-              <item name="q" type="462c0819:PsiDirectoryNode" />
-              <item name="application" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="cobranza" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -325,24 +266,24 @@
       <workItem from="1548396133559" duration="6349000" />
       <workItem from="1548522056465" duration="6015000" />
       <workItem from="1548565559054" duration="12852000" />
-      <workItem from="1548638186355" duration="3409000" />
+      <workItem from="1548638186355" duration="14760000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125944000" />
+    <option name="totallyTimeSpent" value="137295000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.66754615" visible="true" weight="0.08699122" />
-      <window_info id="Structure" order="1" sideWeight="0.33245382" side_tool="true" weight="0.08699122" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6689304" visible="true" weight="0.21707901" />
+      <window_info id="Structure" order="1" sideWeight="0.33106962" side_tool="true" visible="true" weight="0.21707901" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32942554" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49561054" visible="true" weight="0.3565365" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49561054" weight="0.3565365" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -390,11 +331,6 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/q/application/controllers/api/recibo.php</url>
-          <line>478</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/q/application/models/recibo_model.php</url>
           <line>249</line>
           <option name="timeStamp" value="14" />
@@ -423,16 +359,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/q/application/views/ventas/compras.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/producto/application/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -575,24 +501,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/cobranza/pago_al_momento.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/q/application/libraries/mensajeria_lead.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1053">
           <caret line="159" column="14" selection-start-line="159" selection-start-column="14" selection-end-line="159" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/areacliente.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
@@ -602,9 +514,6 @@
           <caret line="42" column="14" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="14" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo.php">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/system/libraries/Table.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -620,20 +529,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/core/CodeIgniter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="363" selection-start-line="363" selection-end-line="363" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/librerias/REST_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="441" selection-start-line="441" selection-end-line="441" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/system/core/Loader.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -641,45 +536,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/system/helpers/html_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-128">
-          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/cobranza/resumen_no_aplica.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1245">
-          <caret line="83" column="19" selection-start-line="83" selection-start-column="19" selection-end-line="83" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/helpers/recibo_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="5" column="99" selection-start-line="5" selection-start-column="99" selection-end-line="5" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js_tema/login/ini.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
           <caret line="134" column="58" selection-start-line="134" selection-start-column="50" selection-end-line="134" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js_tema/administracion_cuenta/principal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="138" column="21" selection-start-line="138" selection-start-column="21" selection-end-line="138" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/administracion_cuenta/application/views/micuenta/privacidad.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -697,10 +557,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/helpers/enid_helper.php">
+    <entry file="file://$PROJECT_DIR$/js_tema/administracion_cuenta/principal.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="1201" column="57" selection-start-line="1201" selection-start-column="13" selection-end-line="1201" selection-end-column="57" />
+        <state relative-caret-position="342">
+          <caret line="138" column="21" selection-start-line="138" selection-start-column="21" selection-end-line="138" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administracion_cuenta/application/views/micuenta/privacidad.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -714,14 +581,7 @@
     <entry file="file://$PROJECT_DIR$/q/application/controllers/api/usuario.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
-          <caret line="775" selection-start-line="775" selection-end-line="775" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/msj/application/controllers/api/sender.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
+          <caret line="775" column="56" selection-start-line="775" selection-start-column="56" selection-end-line="775" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -729,6 +589,92 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="75" selection-start-line="8" selection-start-column="75" selection-end-line="8" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/librerias/REST_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="441" selection-start-line="441" selection-end-line="441" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/core/CodeIgniter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="396" selection-start-line="396" selection-end-line="396" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/views/cobranza/resumen_no_aplica.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/areacliente.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="32" column="67" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/views/cobranza/pago_al_momento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2415">
+          <caret line="1" column="12" lean-forward="true" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/helpers/url_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="95" column="13" selection-start-line="95" selection-start-column="13" selection-end-line="95" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-495" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system/helpers/html_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/msj/application/controllers/api/sender.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="7" column="5" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1556">
+          <caret line="308" column="80" selection-start-line="308" selection-start-column="80" selection-end-line="308" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/helpers/recibo_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/enid_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="137" column="26" lean-forward="true" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
         </state>
       </provider>
     </entry>

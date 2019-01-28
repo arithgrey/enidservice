@@ -38,8 +38,8 @@ if ( ! function_exists('span'))
   {          
       $attr =   add_attributes($attributes);
       $base =   "<span".$attr.">".$info."</span>";
-      $span =   ( $row == 0 )? $base : addNrow($base);
-      return  $span;
+      $e    =   ( $row == 0 )? $base : addNrow($base);
+      return  $e;
 
   }
 }
@@ -47,12 +47,10 @@ if ( ! function_exists('p'))
 {
   function p( $info , $attributes='', $row = 0 )
   {   
-      $attr =  add_attributes($attributes);       
-      if ($row == 0) {
-        return "<p ".$attr.">".$info."</p>";  
-      }else{
-        return n_row_12()."<p".$attr.">".$info."</p>".end_row();
-      }
+      $attr =  add_attributes($attributes);
+      $base = "<p ".$attr.">".$info."</p>";
+      $e    =  ($row == 0) ? $base : addNRow($base);
+      return $e;
       
   }
 }
@@ -132,13 +130,17 @@ function sub_categorias_destacadas($param){
 if ( ! function_exists('div'))
 {
   function div( $info , $attributes='' , $row =0 )
-  {          
-      
-      if ($attributes == 1) {
-          return addNRow($info);
+  {
+
+
+      $base =   "<div".add_attributes($attributes).">".$info."</div>";
+
+      if ( $attributes == 1 ) {
+
+          return addNRow($base);
+
       }else{
-          $attr =   add_attributes($attributes);
-          $base =   "\n"."<div".$attr.">"."\n".$info."\n"."</div>"."\n";
+
           $div  =   ($row == 0 ) ?  $base : addNRow($base);
           return $div;
       }
@@ -174,16 +176,22 @@ if ( ! function_exists('add_attributes'))
 {
   function add_attributes($attributes='')
   {
-    if (is_string($attributes))
+    if (is_array($attributes))
     {
-      return ($attributes != '') ? ' '.$attributes : '';
+
+
+        $att = '';
+        foreach ($attributes as $key => $val)
+        {
+            $att .= ' ' . $key . '="' . $val . '"';
+        }
+        return $att;
+
+
+    }else{
+        return ($attributes != '') ? ' '.$attributes : '';
     }
-    $att = '';
-    foreach ($attributes as $key => $val)
-    {    
-        $att .= ' ' . $key . '="' . $val . '"';    
-    }
-    return $att;
+
   }
 }
 if ( ! function_exists('add_fields'))
@@ -214,18 +222,14 @@ if ( ! function_exists('add_fields'))
 if ( ! function_exists('end_row'))
 {
   function end_row(){
-    return "</div>"."\n"."</div>";
+    return "</div></div>";
   }
 }
 if ( ! function_exists('n_row_12'))
 {
 function n_row_12( $attributes = ''){
 
-    if ($attributes != '')
-    {
-      $attributes = _parse_attributes($attributes);
-    }
-    return  "<div class='row'>"."\n"."<div class='col-lg-12' ".$attributes .">"."\n";
+    return  "<div class='row'><div class='col-lg-12' "._parse_attributes($attributes) .">";
 
   }
 }
@@ -233,7 +237,8 @@ if ( ! function_exists('anchor_enid'))
 {
   function anchor_enid($title= '',$attributes= '',$row_12 = 0 , $type_button = 0 )
   {
-    
+
+      /*
     if($type_button == 1) {
       $existe =  array_key_exists("class", $attributes)?1:0;            
       if ($existe ==  1) {
@@ -241,14 +246,12 @@ if ( ! function_exists('anchor_enid'))
       }else{
         $attributes["class"] =  "a_enid_blue white completo ";
       }    
-    }
+    }*/
     
-    if ($attributes !== '')
-    {
       $attributes = _parse_attributes($attributes);
-    }
 
-    $base   =   "\n".'<a'.$attributes.'>'."\n".$title."\n".'</a>'."\n";
+
+    $base   =   "<a".$attributes.">".$title."</a>";
     $e      =   ($row_12 == 0 ) ? $base : addNRow($base);
     return  $e;
 
@@ -266,16 +269,16 @@ if ( ! function_exists('get_th'))
 {
   function get_th($val='' , $attributes = '' ){
 
-      $attr =  add_attributes($attributes);   
-      return "<th ". $attr ." NOWRAP >". $val ."</th>";
+
+      return "<th ".add_attributes($attributes)." NOWRAP >". $val ."</th>";
   }
 }
 if ( ! function_exists('select_enid'))
 {
   function select_enid($data , $text_option , $val ,  $attributes ='' ){
 
-      $attr =  add_attributes($attributes);   
-      $select ="<select ".$attr."> ";
+
+      $select ="<select ".add_attributes($attributes)."> ";
 
         foreach ($data as $row) {      
           $select .=  
@@ -297,9 +300,9 @@ if ( ! function_exists('heading_enid'))
 {
   function heading_enid($data = '', $h = 1, $attributes = '' , $row_12 =0)
   {    
-    $attr   =  add_attributes($attributes);
-    $label  =  "\n"."<h$h$attr>"."\n".$data."\n"."</h$h>"."\n";
-    $e      =  ($row_12 == 1) ? addNRow($label) : $label;
+
+    $label  =  "<h$h ".add_attributes($attributes).">".$data."</h$h>";
+    $e      =  ($row_12 > 0 ) ? addNRow($label) : $label;
     return $e;
 
   }
@@ -575,13 +578,11 @@ if ( ! function_exists('img_enid'))
   function img_enid($extra = [] , $row_12 =0 ){
       
       $conf["src"]    =   "../img_tema/enid_service_logo.jpg";
-      
       foreach ($extra as $key => $value){        
         $conf[$key]   = $value;
       }
-
       $img            =   img($conf);         
-      return ($row_12 ==  0 ) ?  $img : n_row_12(). $img .end_row();      
+      return ($row_12 ==  0 ) ?  $img : addNRow($img);
   }  
 }
 if ( ! function_exists('url_recuperacion_password')){
@@ -908,9 +909,8 @@ if ( ! function_exists('strong'))
 {
   function strong($text, $attributes = '' , $row = 0)
   {
-    
-    $extra      =   add_attributes($attributes);
-    $base       =   "\n"."<strong".$extra.">"."\n". $text ."\n". "</strong>"."\n";
+
+    $base       =   "<strong".add_attributes($attributes).">". $text . "</strong>";
     $e          =   ( $row == 0 )? $base : addNRow($base);
     return $e;
 
@@ -920,8 +920,8 @@ if ( ! function_exists('hr'))
 {
   function hr($row=0, $attributes = '' )
   {
-    $extra      =   add_attributes($attributes);
-    $base       =   "\n"."<hr".$extra.">"."\n";
+
+    $base       =   "<hr".add_attributes($attributes).">";
     $e          =   ($row == 0 ) ? $base : addNRow($base);
     return      $e;
   }
@@ -940,10 +940,10 @@ function debug($msg, $array = 0)
 
       if ($array == 0) {
         $message .= 
-        'DEBUG'.' -' .' TYPE '. gettype($msg).' '.date($_date_fmt). ' --> '.$msg."\n";
+        'DEBUG'.' -' .' TYPE '. gettype($msg).' '.date($_date_fmt). ' --> '.$msg;
       }else{
         $message .= 
-        'DEBUG'.' -' .' TYPE '. gettype($msg).' '.date($_date_fmt). ' --> '.print_r($msg, true)."\n";
+        'DEBUG'.' -' .' TYPE '. gettype($msg).' '.date($_date_fmt). ' --> '.print_r($msg, true);
       }
           
       flock($fp, LOCK_EX);
@@ -995,8 +995,7 @@ if ( ! function_exists('textarea'))
 {
   function textarea($attributes = '' ,  $row_12 = 0 , $def='')
   {
-      $attr     =   add_attributes($attributes);
-      $base     =   "<textarea ".$attr." ></textarea>";
+      $base     =   "<textarea ".add_attributes($attributes)." ></textarea>";
       $e        =   ($row_12 == 0 ) ? $base : addNRow($base);
       return        $e;
 
@@ -1006,10 +1005,7 @@ if ( ! function_exists('iframe'))
 {
   function iframe($attributes = '' ,  $row_12 = 0)
   {
-
-
-      $attr =   add_attributes($attributes);
-      $base =   "<iframe ".$attr." ></iframe>";
+      $base =   "<iframe ".add_attributes($attributes)." ></iframe>";
       $e    =    ($row_12 == 0 ) ? $base : addNRow($base);
       return $e;
 
@@ -1020,8 +1016,8 @@ if ( ! function_exists('center'))
 {
   function center($attributes = '' ,  $row_12 = 0)
   {
-      $attr =   add_attributes($attributes);
-      $base =   "<center ".$attr." ></center>";
+
+      $base =   "<center ".add_attributes($attributes)." ></center>";
       $e    =   ($row_12 == 0 ) ? $base : addNRow($base);
       return $e;
 

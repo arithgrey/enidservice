@@ -191,8 +191,8 @@ class recibo extends REST_Controller{
     }
     function resumen_desglose_pago_GET(){
         
-        $param      =  $this->get();
-        $response   = false;
+        $param      =   $this->get();
+        $response   =   false;
         if (if_ext($param , "id_recibo")){
             $recibo     =  $this->recibo_model->q_get([],  $param["id_recibo"] );
             if(count($recibo) >0 ){
@@ -208,7 +208,8 @@ class recibo extends REST_Controller{
 
                 if($monto_a_pagar > $saldo_cubierto ){
 
-                   return  $this->ticket_pendiente_pago($param , $recibo , $data_complete);
+                   $response =  $this->ticket_pendiente_pago($param , $recibo , $data_complete);
+
 
                 }else{
 
@@ -223,9 +224,8 @@ class recibo extends REST_Controller{
 
                 }
             }
-        }else{
-            $this->response($response);
         }
+        $this->response($response);
     }      
 
     function ticket_pendiente_pago($param , $recibo , $data_complete){
@@ -242,17 +242,110 @@ class recibo extends REST_Controller{
 
 
                 $data_complete  = $this->get_data_saldo($param, $recibo , $data_complete );
-                return $this->load->view("cobranza/pago_al_momento" , $data_complete);
+                $this->load->view("cobranza/pago_al_momento" , $data_complete);
 
             }else{            
-                
-                $data_complete["usuario"]             =     $this->principal->get_info_usuario($id_usuario);
-                $data_complete["costo_envio_sistema"] =     get_costo_envio($recibo[0]);
-                return $this->load->view("cobranza/resumen_no_aplica" , $data_complete);
+
+
+                $usuario             =     $this->principal->get_info_usuario($id_usuario);
+                $costo_envio_sistema =     get_costo_envio($recibo[0]);
+                return $this->get_mensaje_no_aplica($recibo ,$costo_envio_sistema , $usuario , $data_complete);
+
             }
 
         }
                        
+    }
+    private function get_mensaje_no_aplica($recibo , $costo_envio_sistema , $usuario , $data_complete){
+
+        $costo_envio_cliente_sistema    = $costo_envio_sistema["costo_envio_cliente"];
+        $recibo                         = $recibo[0];
+        $id_forma_pago                  = $recibo["id_forma_pago"];
+        $saldo_cubierto                 = $recibo["saldo_cubierto"];
+        $fecha_registro                 = $recibo["fecha_registro"];
+        $status                         = $recibo["status"];
+        $fecha_vencimiento              = $recibo["fecha_vencimiento"];
+        $monto_a_pagar                  = $recibo["monto_a_pagar"];
+        $id_proyecto_persona_forma_pago = $recibo["id_proyecto_persona_forma_pago"];
+        $id_recibo                      = $id_proyecto_persona_forma_pago;
+        $num_email_recordatorio         = $recibo["num_email_recordatorio"];
+        $id_usuario_referencia          = $recibo["id_usuario_referencia"];
+        $flag_pago_comision             = $recibo["flag_pago_comision"];
+        $flag_envio_gratis              = $recibo["flag_envio_gratis"];
+        $costo_envio_cliente            = $recibo["costo_envio_cliente"];
+        $id_usuario_venta               = $recibo["id_usuario_venta"];
+        $id_ciclo_facturacion           = $recibo["id_ciclo_facturacion"];
+        $num_ciclos_contratados         = $recibo["num_ciclos_contratados"];
+        $id_usuario                     = $recibo["id_usuario"];
+        $precio                         = $recibo["precio"];
+        $costo_envio_vendedor           = $recibo["costo_envio_vendedor"];
+        $id_servicio                    = $recibo["id_servicio"];
+        $resumen_pedido                 = $recibo["resumen_pedido"];
+
+        $usuario                        = $usuario[0];
+        $id_usuario                     = $usuario["id_usuario"];
+        $nombre                         = $usuario["nombre"];
+        $apellido_paterno               = ($usuario["apellido_paterno"] !== null) ? $usuario["apellido_paterno"] : "";
+        $apellido_materno               = ($usuario["apellido_materno"] !== null) ? $usuario["apellido_materno"] : "";
+        $email                          = $usuario["email"];
+        $cliente                        = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
+
+
+        if ($costo_envio_cliente_sistema > $costo_envio_vendedor) {
+            $costo_envio_cliente = $costo_envio_cliente_sistema;
+        }
+        $saldo_pendiente = ($monto_a_pagar * $num_ciclos_contratados) - $saldo_cubierto;
+
+
+        $servicio                        = $data_complete["servicio"][0];
+        $flag_servicio = $servicio["flag_servicio"];
+        $text_envio_cliente_sistema = "";
+        if ($flag_servicio == 0) {
+            $saldo_pendiente                = $saldo_pendiente + $costo_envio_cliente;
+            $text_envio_cliente_sistema     = $costo_envio_sistema["text_envio"]["cliente"];
+        }
+
+
+        $url_request                        =   "https://enidservice.com/inicio/";
+        $url_pago_oxxo                      =   $url_request . "orden_pago_oxxo/?q=" . $saldo_pendiente . "&q2=" . $id_recibo . "&q3=" . $id_usuario;
+        $data_oxxo["url_pago_oxxo"]         =   $url_pago_oxxo;
+        $data_oxxo["id_usuario"]            =   $id_usuario;
+        $data_notificacion["id_recibo"]     =   $id_recibo;
+
+
+        $flag_servicio = $servicio["flag_servicio"];
+        $nombre_servicio = $servicio["nombre_servicio"];
+        $proyecto = $servicio;
+        $detalles = $resumen_pedido;
+        $ciclo_de_facturacion = $id_ciclo_facturacion;
+        $saldo_cubierto = $saldo_cubierto;
+        $monto_a_pagar = $monto_a_pagar;
+        $primer_registro = $fecha_registro;
+        $estado_text = ($saldo_cubierto < $monto_a_pagar) ? "Pendiente" : "";
+        $data["saldo_pendiente"] = $saldo_pendiente;
+        $url_pago_paypal = "https://www.paypal.me/eniservice/" . $saldo_pendiente;
+        $data["url_pago_paypal"] = $url_pago_paypal;
+        $data["recibo"] = $recibo;
+
+        $data_extra["cliente"]  = $cliente;
+        $url_logo               = "https://enidservice.com/inicio/img_tema/enid_service_logo.jpg";
+        $config_log             = ['src' => $url_logo, 'width' => '100'];
+        $url_cancelacion        = $url_request . "msj/index.php/api/emp/salir/format/json/?type=2&id=" . $id_proyecto_persona_forma_pago;
+
+        $img_pago_oxxo = "https://enidservice.com/inicio/img_tema/pago-oxxo.jpeg";
+        $img_pago_paypal = "https://enidservice.com/inicio/img_tema/explicacion-pago-en-linea.png";
+        $url_seguimiento_pago = $url_request . "pedidos/?seguimiento=$id_recibo&notificar=1";
+
+
+
+        $text  =  "";
+        $text .=  get_saludo($cliente , $config_log , $id_recibo);
+        $text .=  get_text_saldo_pendiente($resumen_pedido , $num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion , $text_envio_cliente_sistema , $primer_registro , $fecha_vencimiento , $monto_a_pagar , $saldo_pendiente );
+        $text .=  get_text_forma_pago($img_pago_oxxo , $url_pago_oxxo , $url_pago_paypal , $img_pago_paypal);
+        $text .=  get_text_notificacion_pago($url_seguimiento_pago , $url_cancelacion );
+
+        return  div($text, ["style"=>"width: 100%;"] );
+
     }
     private function get_data_saldo($param, $recibo , $data_complete ){
 

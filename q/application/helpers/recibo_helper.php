@@ -22,8 +22,8 @@ if (!function_exists('invierte_date_time')) {
         $text .=    valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion);
         $text .=    div("Precio " . $monto_a_pagar);
         $text .=    div($text_envio_cliente_sistema);
-        $text .=    div("Ordén de compra " . $primer_registro . " Límite de pago " . $fecha_vencimiento);
-        $text .=    div("Monto total pendiente ");
+        $text .=    div("Ordén de compra {$primer_registro } Límite de pago  {$fecha_vencimiento} ");
+        $text .=    div("Monto total pendiente");
         $text .=    heading_enid($saldo_pendiente . " Pesos Mexicanos" ,2);
         $text .=    hr();
         return $text;
@@ -32,16 +32,16 @@ if (!function_exists('invierte_date_time')) {
     function get_text_forma_pago($img_pago_oxxo , $url_pago_oxxo , $url_pago_paypal , $img_pago_paypal){
 
         $text  =    heading_enid("Formas de pago Enid Service", 2);
-        $text .=    hr();
         $text .=    heading_enid("NINGÚN CARGO A TARJETA ES AUTOMÁTICO. SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO " ,2);
-        $text .=    div("1.- Aceptamos pagos en tiendas de autoservicio OXXO  y transferencia bancaria en línea para bancos BBVA Bancomer.");
-        $text .=    anchor_enid(img(["src" => $img_pago_oxxo , "style" => "width: 100%;"]), ["href" => $url_pago_oxxo] );
-        $text .=    div(anchor_enid("Imprimir órden de pago", ["href" => $url_pago_oxxo]));
+        $text .=    div("1.- Podrás compra en línea de forma segura con tu con tu tarjeta bancaria (tarjeta de crédito o débito) a través de");
+        $text .=    anchor($url_pago_paypal , "PayPal");
+        $text .=    anchor($url_pago_paypal , img($img_pago_paypal) );
+        $text .=    anchor($url_pago_paypal,"Comprar ahora!" );
         $text .=    hr();
-        $text .=    div("2.- Podrás compra en línea de forma segura con tu con tu tarjeta bancaria (tarjeta de crédito o débito) a través de");
-        $text .=    anchor_enid("PayPal", ["href" => $url_pago_paypal]);
-        $text .=    anchor_enid(img(["src" => $img_pago_paypal, "style" => "width: 100%;"]), ["href" => $url_pago_paypal]);
-        $text .=    div(anchor_enid("Comprar ahora!", ["href" => $url_pago_paypal] ));
+        $text .=    div("2.- Aceptamos pagos en tiendas de autoservicio OXXO y transferencia bancaria en línea para bancos BBVA Bancomer",1);
+        $text .=    anchor($url_pago_oxxo,heading_enid("OXXO" ,4));
+        $text .=    anchor($url_pago_oxxo,"Imprimir órden de pago");
+        $text .=    anchor($url_pago_oxxo,img($img_pago_oxxo ) );
         return $text;
 
     }
@@ -437,9 +437,7 @@ if (!function_exists('invierte_date_time')) {
             ]);
         return div($text, ["class" => 'btn_comprar']);
     }
-
-    function texto_costo_envio_info_publico(
-        $flag_envio_gratis, $costo_envio_cliente, $costo_envio_vendedor)
+    function texto_costo_envio_info_publico($flag_envio_gratis, $costo_envio_cliente, $costo_envio_vendedor)
     {
 
         $data_complete = [];
@@ -448,13 +446,11 @@ if (!function_exists('invierte_date_time')) {
             $text = "ENVÍO GRATIS!";
             $data_complete["cliente"] = $text;
             $data_complete["cliente_solo_text"] = "ENVÍO GRATIS!";
-            $data_complete["ventas_configuracion"] =
-                "TU PRECIO YA INCLUYE EL ENVÍO";
+            $data_complete["ventas_configuracion"] = "TU PRECIO YA INCLUYE EL ENVÍO";
         } else {
-            $data_complete["ventas_configuracion"] =
-                "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO";
+            $data_complete["ventas_configuracion"] = "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO";
             $text = "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO";
-            $data_complete["cliente_solo_text"] = "Más " . $costo_envio_cliente . " MXN de envío";
+            $data_complete["cliente_solo_text"] = "MÁS ".$costo_envio_cliente ." MXN DE ENVÍO";
             $data_complete["cliente"] = $text;
         }
         return $data_complete;
