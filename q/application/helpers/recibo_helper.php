@@ -535,5 +535,100 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
+    function format_direccion_envio($inf , $id_recibo , $recibo){
+        $resumen  = "";
+        $resumen .=  div(
+            icon("fa fa-pencil" ,
+                [
+                    "class"			=> 	"btn_direccion_envio ",
+                    "id" 			=> 	$id_recibo,
+                    "href"			=> 	"#tab_mis_pagos",
+                    "data-toggle"	=> 	"tab"
+                ],
+                1
+            ),
+            ["class" =>	"top_20"], 1);
 
+
+        $envio =    "";
+        $envio .= get_campo($inf , "direccion" );
+        $envio .= get_campo($inf , "calle" );
+        $envio .= get_campo($inf , "numero_exterior");
+        $envio .= get_campo($inf , "numero_interior");
+        $envio .= get_campo($inf , "entre_calles");
+        $envio .= get_campo($inf , "cp");
+        $envio .= get_campo($inf , "asentamiento");
+        $envio .= get_campo($inf , "municipio");
+        $envio .= get_campo($inf , "ciudad" );
+        $envio .= get_campo($inf , "estado" );
+        $resumen  .= div($envio , ["class"=>'texto_direccion_envio_pedido top_20' ]);
+
+        $resumen .= div("¿Quíen más puede recibir tu pedido?");
+        $resumen .= div(get_campo($inf , "nombre_receptor" ));
+        $resumen .= div(get_campo($inf , "telefono_receptor" ));
+        $text .=  div($resumen , ["class"=>"informacion_resumen_envio"] );
+
+        return $text;
+    }
+    function agregar_direccion_envio($id_recibo){
+
+        return div(
+            icon("fa fa-bus")." Agrega la dirección de envío de tu pedido!",
+            [
+                "class"				=>
+                    "btn_direccion_envio
+								contenedor_agregar_direccion_envio_pedido
+								a_enid_black cursor_pointer",
+                "id"				=>	$id_recibo,
+                "href"				=>	"#tab_mis_pagos",
+                "data-toggle"		=>	"tab"
+            ],
+            1
+        );
+
+    }
+    function format_imagen_direccion($id_recibo, $resumen_pedido , $num_ciclos_contratados ,
+                                     $flag_servicio,$id_ciclo_facturacion ,
+                                     $saldo_pendiente ,  $url_img_servicio ,$monto_a_pagar
+    ,$deuda){
+
+        $concepto =  "";
+        $concepto .= heading_enid("#Recibo: ".$id_recibo);
+        $concepto .= div("Concepto");
+        $concepto .= div($resumen_pedido);
+        $concepto .= valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio , $id_ciclo_facturacion);
+        $concepto .= div("Precio $".$monto_a_pagar);
+        $concepto .= div($deuda["text_envio"]);
+
+        $text = div($concepto , ["style"=>"border-style: solid;padding: 10px;border-width: 1px;"]);
+
+        $monto =   heading_enid("Monto total pendiente-", 3, 	['class' 	=> 'strong'] );
+        $monto .=  heading_enid($saldo_pendiente ."MXN", 4 ,   	["class" => 'blue_enid strong'] );
+        $monto .=  heading_enid("Pesos Mexicanos" , 4 , 		["class"=> 'strong']);
+
+        $text .= div($monto , ["style"=>"border-style: solid;text-align: center;"]);
+        $text .= div(img($url_img_servicio),  1);
+        return div($text , ["col-lg-4"]);
+
+    }
+    function get_format_punto_encuentro($data_complete , $recibo , $costo_envio){
+
+        $p                  =   $data_complete["punto_encuentro"][0];
+        $costo_envio        =   $p["costo_envio"];
+        $tipo 		        = 	$p["tipo"];
+        $color 		        = 	$p["color"];
+        $nombre_estacion    = 	$p["nombre"];
+        $lugar_entrega 		=   $p["lugar_entrega"];
+        $numero 	        = 	"NÚMERO ".$p["numero"];
+
+
+        $t = heading_enid("LUGAR DE ENCUENTRO" , 3, ["class" => "top_20"]);
+        $t .= div($tipo. " ". $nombre_estacion ." ". $numero." COLOR ". $color ,1);
+        $t .= div("ESTACIÓN ".$lugar_entrega , ["class" => "strong"],1);
+        $t .= br();
+        $t .= div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"]);
+        $t .= br();
+        $t .= div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de ".$costo_envio." pesos por concepto de gastos de envío" , ["class" => "contenedor_text_entrega"]);
+        return $t;
+    }
 }

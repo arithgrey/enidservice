@@ -242,7 +242,8 @@ class recibo extends REST_Controller{
 
 
                 $data_complete  = $this->get_data_saldo($param, $recibo , $data_complete );
-                $this->load->view("cobranza/pago_al_momento" , $data_complete);
+
+                return  $this->get_mensaje_pago_al_memento($data_complete,$data_complete["costo_envio_sistema"]);
 
             }else{            
 
@@ -255,6 +256,156 @@ class recibo extends REST_Controller{
 
         }
                        
+    }
+    private function get_mensaje_pago_al_memento($data_complete , $costo_envio_sistema){
+
+        $servicio               =   $data_complete["servicio"];
+        $recibo                 =   $data_complete["recibo"];
+        $url_request            =   $data_complete["url_request"];
+        $recibo 				=  	$recibo[0];
+        $id_forma_pago  		=  	$recibo["id_forma_pago"];
+        $saldo_cubierto  		=  	$recibo["saldo_cubierto"];
+        $fecha_registro  		=  	$recibo["fecha_registro"];
+        $status  				=  	$recibo["status"];
+        $fecha_vencimiento  	=  	$recibo["fecha_vencimiento"];
+        $monto_a_pagar  		=  	$recibo["monto_a_pagar"];
+        $id_recibo 				=  	$recibo["id_proyecto_persona_forma_pago"];
+        $num_email_recordatorio =  	$recibo["num_email_recordatorio"];
+        $id_usuario_referencia  =  	$recibo["id_usuario_referencia"];
+        $flag_pago_comision  	=  	$recibo["flag_pago_comision"];
+        $flag_envio_gratis  	=  	$recibo["flag_envio_gratis"];
+        $costo_envio_cliente 	=  	$recibo["costo_envio_cliente"];
+        $id_usuario_venta  		=  	$recibo["id_usuario_venta"];
+        $id_ciclo_facturacion	=  	$recibo["id_ciclo_facturacion"];
+        $num_ciclos_contratados =  	$recibo["num_ciclos_contratados"];
+        $id_usuario  			=  	$recibo["id_usuario"];
+        $precio  				=  	$recibo["precio"];
+        $costo_envio_vendedor  	=  	$recibo["costo_envio_vendedor"];
+        $id_servicio  			=  	$recibo["id_servicio"];
+        $resumen_pedido  		=  	$recibo["resumen_pedido"];
+        $servicio 				= 	$servicio[0];
+        $flag_servicio 			=  	$servicio["flag_servicio"];
+        $tipo_entrega      		= 	$recibo["tipo_entrega"];
+
+        $deuda 					=  get_saldo_pendiente(
+            $monto_a_pagar,
+            $num_ciclos_contratados,
+            $saldo_cubierto,
+            $costo_envio_cliente,
+            $costo_envio_sistema,
+            $tipo_entrega
+        );
+
+
+        $saldo_pendiente 		= 	$deuda["total_mas_envio"];
+        $url_pago_oxxo 			= 	get_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
+        $url_pago_saldo_enid 	= 	get_link_saldo_enid($id_usuario_venta , $id_recibo);
+        $url_img_servicio 		=  	link_imagen_servicio($id_servicio);
+        $url_pago_paypal 		=	get_link_paypal($saldo_pendiente);
+        $data["url_pago_paypal"]= 	$url_pago_paypal;
+        $data["recibo"] 		=	$recibo;
+        $text_forma_compra 	    =   ($tipo_entrega) ?  "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
+        $link_seguimiento 		=	"../pedidos/?seguimiento=".$id_recibo;
+
+
+
+        $text               =  "";
+        $pencuentro         =
+            ($tipo_entrega == 1 ) ? get_format_punto_encuentro($data_complete , $recibo , $costo_envio) : "";
+        $text              .=  $pencuentro;
+
+        $text .= hr();
+        $text .= heading_enid(icon("fa fa-credit-card") . $text_forma_compra , 3 , ["class" => 'top_20' ]);
+        $text .= hr();
+        $text .= guardar(
+            "PAGOS EN TIENDAS DE AUTOSERVICIO (OXXO)",
+            [
+                "class" 	=> "top_10 text-left",
+                "onclick" 	=> "notifica_tipo_compra(4 ,  '".$id_recibo."');"
+
+            ],
+            1,
+            1,
+            0,
+            $url_pago_oxxo
+        );
+
+
+        $text .= guardar(
+            "A TRAVÉS DE PAYPAL" ,
+            [
+                "class" => "top_10 text-left" ,
+                "recibo" 	=> $id_recibo ,
+                "onclick" 	=> "notifica_tipo_compra(2 ,  '".$id_recibo."');"
+            ],
+            1,
+            1,
+            0,
+            $url_pago_paypal
+        );
+
+        $text .= guardar(
+            "SALDO  ENID SERVICE" ,
+            [
+                "class" => "top_10 text-left",
+                "onclick" 	=> "notifica_tipo_compra(1 ,  '".$id_recibo."');"
+            ],
+            1,
+            1,
+            0,
+            $url_pago_saldo_enid
+        );
+
+
+        $text .= n_row_12();
+
+
+        if($tipo_entrega == 0 ){
+
+		    $text     .=  heading_enid("Dirección de envío" , 3);
+		    $direccion =  ( count($informacion_envio) > 0 ) ?  format_direccion_envio($inf , $id_recibo , $recibo) : agregar_direccion_envio($id_recibo);
+            $text .= $direccion;
+        }
+
+        $text .= hr();
+
+	    $text .=  guardar(
+				"RASTREA TU PEDIDO".icon("fa fa-map-signs"),
+				[
+					"class" 	=> "top_20 text-left",
+					"style" 	=> "border-style: solid!important;border-width: 2px!important;border-color: black!important;color: black !important;background: #f1f2f5 !important;"
+ 				],
+				1,
+				1,
+				0,
+				$link_seguimiento
+	    );
+
+
+
+        $text .= div(
+		anchor_enid('CANCELAR COMPRA',
+		[
+			"class"		=> 	"cancelar_compra",
+			"id"		=> 	 $id_recibo,
+			"modalidad"	=> 	'0'
+		]
+		) ,
+		["class" => "top_20"],
+		1);
+
+        $text .=    end_row();
+
+
+
+        $f  = format_imagen_direccion($id_recibo, $resumen_pedido , $num_ciclos_contratados , $flag_servicio,$id_ciclo_facturacion ,
+            $saldo_pendiente , $url_img_servicio , $monto_a_pagar ,$deuda);
+
+
+        $r =    div($text,  ["class" => "col-lg-8"]);
+        $t =    $r.$f;
+        return $t;
+
     }
     private function get_mensaje_no_aplica($recibo , $costo_envio_sistema , $usuario , $data_complete){
 
@@ -375,7 +526,7 @@ class recibo extends REST_Controller{
                 
                 $id_punto_encuentro                     =  $this->get_punto_encuentro_recibo($id_recibo);
                 $data_complete["punto_encuentro"]       =  $this->get_punto_encuentro($id_punto_encuentro);
-                $this->load->view("cobranza/pago_al_momento" , $data_complete);
+                return $this->load->view("cobranza/pago_al_momento" , $data_complete);
             }
         }else{
             
