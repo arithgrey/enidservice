@@ -44,7 +44,7 @@
                     <?= heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3) ?>
 
                         <?= $valoraciones; ?>
-                    
+                    a bue
                     <br>
 
                         <?= anchor_enid("VER COMENTARIOS",

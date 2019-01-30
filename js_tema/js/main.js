@@ -587,6 +587,7 @@ var evita_basura = function () {
     set_parameter(".input_busqueda_producto", text);
 };
 var reload_imgs = function (id, url) {
+
     if(document.location.hostname !=  "localhost"){
         document.getElementById(id).src = url;
         console.log(url);

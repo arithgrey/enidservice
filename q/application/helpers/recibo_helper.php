@@ -168,8 +168,6 @@ if (!function_exists('invierte_date_time')) {
         return $url;
 
     }
-
-    /**/
     function get_saldo_pendiente($monto,
                                  $ciclos,
                                  $cubierto,
@@ -193,12 +191,8 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-            /*Lo que pertenece a puntos de encuentro*/
-            $text_envio =
-                ($envio_cliente > 0) ?
-                    "Cargos de entrega " . $envio_cliente . "MXN" : $envio_sistema["text_envio"]["cliente"];
 
-
+            $text_envio = ($envio_cliente > 0) ?    "Cargos de entrega " . $envio_cliente . "MXN" : $envio_sistema["text_envio"]["cliente"];
             $cargo_envio = ($envio_cliente > 0) ? $envio_cliente : 0;
 
         }
@@ -212,8 +206,6 @@ if (!function_exists('invierte_date_time')) {
         return $response;
 
     }
-
-    /**/
     function crea_data_deuda_pendiente($param)
     {
 
@@ -311,30 +303,34 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_numero_articulos_en_venta_usuario($modalidad, $numero_articulos_en_venta)
+    function get_total_articulos_promocion($modalidad, $total = 0)
     {
 
+        $response =  "";
         if ($modalidad == 1) {
 
-            $link = anchor_enid(
-                icon("fa fa-cart-plus") . " Artículos en promoción",
+            $l = anchor_enid(
+                icon("fa fa-cart-plus") . " Artículos en promoción" .$total,
                 ["href" => '../planes_servicios/',
                     "class" => 'vender_mas_productos']
             );
 
-            $link2 = anchor_enid(
+            $l2 = anchor_enid(
                 " Agregar",
                 [
                     "href" => '../planes_servicios/?action=nuevo',
                     "class" => 'vender_mas_productos']
             );
 
-            return div($link . $link2, 1);
+            $response = div($l . $l2, 1);
         }
+        return $response;
     }
 
-    function evalua_texto_envios_compras($modalidad_ventas, $num_orden, $tipo)
+    function evalua_texto_envios_compras($modalidad_ventas, $total, $tipo)
     {
+
+
 
         $text = "";
 
@@ -346,8 +342,8 @@ if (!function_exists('invierte_date_time')) {
                     $text_2 = "
                 Date prisa, 
                 mantén una buena reputación enviando 
-                tus  $num_orden articulos vendidos de forma puntual";
-                    $text = ($num_orden == 1) ? $text : $text_2;
+                tus  $total articulos vendidos de forma puntual";
+                    $text = ($total == 1) ? $text : $text_2;
 
                 }
 
@@ -365,6 +361,8 @@ if (!function_exists('invierte_date_time')) {
 
                 break;
         }
+
+        $text = div($text ,  ['class' => 'alert alert-info' , 'style' => 'margin-top: 10px;background: #001541;color: white']);
         return $text;
     }
 
@@ -501,7 +499,7 @@ if (!function_exists('invierte_date_time')) {
         return $text;
     }
 
-    function get_text_modalidad_compra($modalidad, $ordenes)
+    function get_text_modalidad($modalidad, $ordenes)
     {
 
         $text = ($modalidad == 1) ? "TUS VENTAS" : "TUS COMPRAS";
@@ -509,15 +507,15 @@ if (!function_exists('invierte_date_time')) {
             return "";
         }
         return heading_enid($text, 2);
-
     }
 
-    function get_mensaje_compra($modalidad, $ordenes)
+    function get_mensaje_compra($modalidad, $num_ordenes)
     {
 
         /*Compras*/
-        if ($modalidad == 0 && $ordenes == 0) {
-            $final = div(img([
+        $response =  "";
+        if ($modalidad == 0 && $num_ordenes == 0) {
+            $f = div(img([
                     "src" => "../img_tema/tienda_en_linea/carrito_compra.jpg",
                     "class" => "img_invitacion_compra"
                 ])
@@ -525,15 +523,14 @@ if (!function_exists('invierte_date_time')) {
                 ["class" => "img_center_compra"]
             );
 
-            $final = anchor_enid($final, ["href" => "../"]);
-            $final .= anchor_enid(heading_enid("EXPLORAR TIENDA", 3, ["class" => "text-center text_explorar_tienda"]),
+            $f  = anchor_enid($final, ["href" => "../"]);
+            $f .= anchor_enid(heading_enid("EXPLORAR TIENDA", 3, ["class" => "text-center text_explorar_tienda"]),
                 [
                     "href" => "../"
                 ]);
-            return $final;
-
-
+            $response =  $f;
         }
+        return $response;
     }
     function format_direccion_envio($inf , $id_recibo , $recibo){
         $resumen  = "";
@@ -587,10 +584,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
     }
-    function format_imagen_direccion($id_recibo, $resumen_pedido , $num_ciclos_contratados ,
+    function format_concepto($id_recibo, $resumen_pedido , $num_ciclos_contratados ,
                                      $flag_servicio,$id_ciclo_facturacion ,
-                                     $saldo_pendiente ,  $url_img_servicio ,$monto_a_pagar
-    ,$deuda){
+                                     $saldo_pendiente ,  $url_img_servicio ,$monto_a_pagar , $deuda){
 
         $concepto =  "";
         $concepto .= heading_enid("#Recibo: ".$id_recibo);
@@ -608,7 +604,7 @@ if (!function_exists('invierte_date_time')) {
 
         $text .= div($monto , ["style"=>"border-style: solid;text-align: center;"]);
         $text .= div(img($url_img_servicio),  1);
-        return div($text , ["col-lg-4"]);
+        return div($text , ["class"=>"col-lg-4"]);
 
     }
     function get_format_punto_encuentro($data_complete , $recibo ){
@@ -622,7 +618,7 @@ if (!function_exists('invierte_date_time')) {
         $numero 	        = 	"NÚMERO ".$p["numero"];
 
 
-        $t = heading_enid("LUGAR DE ENCUENTRO" , 3, ["class" => "top_20"]);
+        $t  = heading_enid("LUGAR DE ENCUENTRO" , 3, ["class" => "top_20"]);
         $t .= div($tipo. " ". $nombre_estacion ." ". $numero." COLOR ". $color ,1);
         $t .= div("ESTACIÓN ".$lugar_entrega , ["class" => "strong"],1);
         $t .= br();
@@ -634,7 +630,7 @@ if (!function_exists('invierte_date_time')) {
     function get_botones_seguimiento($id_recibo){
 
         $link_seguimiento 		=	"../pedidos/?seguimiento=".$id_recibo;
-        $text =  guardar(
+        $t =  guardar(
             "RASTREA TU PEDIDO".icon("fa fa-map-signs"),
             [
                 "class" 	=> "top_20 text-left",
@@ -647,7 +643,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $text .= div(
+        $t .= div(
             anchor_enid('CANCELAR COMPRA',
                 [
                     "class"		=> 	"cancelar_compra",
@@ -658,18 +654,17 @@ if (!function_exists('invierte_date_time')) {
             ["class" => "top_20"],
             1);
 
-        return $text;
+        return $t;
 
     }
-    function getPayButtons($id_recibo , $url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta){
+    function getPayButtons($id_recibo , $url_request,$saldo_pendiente,$id_usuario_venta){
 
 
         $url_pago_oxxo 			= 	get_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
         $url_pago_paypal 		=	get_link_paypal($saldo_pendiente);
         $url_pago_saldo_enid 	= 	get_link_saldo_enid($id_usuario_venta , $id_recibo);
-        //$data["url_pago_paypal"]= 	$url_pago_paypal;
 
-        $text = guardar(
+        $t = guardar(
             "PAGOS EN TIENDAS DE AUTOSERVICIO (OXXO)",
             [
                 "class" 	=> "top_10 text-left",
@@ -683,7 +678,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $text .= guardar(
+        $t .= guardar(
             "A TRAVÉS DE PAYPAL" ,
             [
                 "class" => "top_10 text-left" ,
@@ -696,7 +691,7 @@ if (!function_exists('invierte_date_time')) {
             $url_pago_paypal
         );
 
-        $text .= guardar(
+        $t .= guardar(
             "SALDO  ENID SERVICE" ,
             [
                 "class" => "top_10 text-left",
@@ -708,7 +703,82 @@ if (!function_exists('invierte_date_time')) {
             $url_pago_saldo_enid
         );
 
-        return $text;
+        return $t;
 
+    }
+    function get_vista_cliente($data){
+
+        $modalidad  =   $data["modalidad"];
+        $ordenes    =   $data["ordenes"];
+        $status     =   $data["status"];
+        $status_enid_service    = $data["status_enid_service"];
+        $en_proceso =   $data["en_proceso"];
+        $anteriores =   $data["anteriores"];
+
+        $t          =   get_text_modalidad($modalidad, $ordenes);
+        $total      =   ($modalidad  < 1 ) ? count($ordenes) :  0;
+        $t         .=   get_total_articulos_promocion($modalidad , $total);
+        $t         .=   get_mensaje_compra($modalidad , $total);
+        $t         .=   evalua_texto_envios_compras($modalidad , $total , $status);
+        $t         .=   create_listado_compra_venta($ordenes , $status_enid_service, $modalidad);
+        $t         .=   evalua_acciones_modalidad($en_proceso , $modalidad);
+        $t         .=   evalua_acciones_modalidad_anteriores($anteriores , $modalidad);
+        $t         .=   place("contenedor_ventas_compras_anteriores");
+        return      div($t,1);
+    }
+    function create_listado_compra_venta($ordenes , $status_enid_service, $modalidad){
+
+        $list = [];
+        foreach($ordenes as $row){
+
+                $id_recibo              =   $row["id_proyecto_persona_forma_pago"];
+                $resumen_pedido         =   ($row["resumen_pedido"] !==  null ) ? $row["resumen_pedido"] : "";
+                $id_servicio            =   $row["id_servicio"];
+                $estado                 =   $row["status"];
+                $monto_a_pagar          =   $row["monto_a_pagar"];
+                $costo_envio_cliente    =   $row["costo_envio_cliente"];
+                $saldo_cubierto         =   $row["saldo_cubierto"];
+                $direccion_registrada   =   $row["direccion_registrada"];
+                $num_ciclos_contratados = $row["num_ciclos_contratados"];
+                $estado_envio           =   $row["estado_envio"];
+                $url_servicio           =  "../producto/?producto=".$id_servicio;
+                $monto_a_liquidar       =     monto_pendiente_cliente(
+                    $monto_a_pagar ,
+                    $saldo_cubierto ,
+                    $costo_envio_cliente,
+                    $num_ciclos_contratados
+                );
+
+                $url_imagen_servicio    =   "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
+                $url_imagen_error       =   '../img_tema/portafolio/producto.png';
+                $lista_info_attr        =   " info_proyecto= '".$resumen_pedido."'  info_status =  '".$estado."' ";
+
+                $id_error           =   "imagen_".$id_servicio;
+
+
+                $t = div(
+                        anchor_enid(
+                            img([
+                                "src"       =>  $url_imagen_servicio,
+                                "onerror"   =>  "reloload_img( '".$id_error."','".$url_imagen_servicio."');",
+                                "class"     =>  'imagen_articulo',
+                                "id"        =>  $id_error
+                            ]),
+                            ["href"  => $url_servicio]
+                        ),
+                        ["class"=>"col-lg-3"]
+                    );
+
+                $t .=  div(div(
+                            div(carga_estado_compra($monto_a_liquidar, $id_recibo, $estado , $status_enid_service, $modalidad), ["class"=>"btn_estado_cuenta"]
+                            ),
+                            ["class"=>"contenedor_articulo_text"]
+                        )
+                        ,["class" => "col-lg-9"]
+                );
+
+            $list[]     = div($t ,  ["class" => "contenedor_articulo"]);
+        }
+        return ul($list , ["class" => "row"]);
     }
 }

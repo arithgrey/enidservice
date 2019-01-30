@@ -1,22 +1,17 @@
 <?=get_text_modalidad_compra($modalidad, $ordenes)?>
 <?=get_numero_articulos_en_venta_usuario($modalidad,  $numero_articulos_en_venta)?>    
 <?=get_mensaje_compra($modalidad , $ordenes)?>
-<?php if($ordenes != 0 ):?>
-    <?=div(evalua_texto_envios_compras($modalidad , count($ordenes) , $status) ,  
-        [
-            'class' => 'alert alert-info' ,
-            'style' => 'margin-top: 10px;background: #001541;color: white'
-    ])?>        
+<?=evalua_texto_envios_compras($modalidad , count($ordenes) , $status) ?>
 
-<?php endif;?>
+
 
 <?php    
     
-if($ordenes!=0){
+if(is_array($ordenes)){
 	foreach($ordenes as $row){
 	        
         $id_recibo            =   $row["id_proyecto_persona_forma_pago"];
-		$resumen_pedido       =   $row["resumen_pedido"];		
+		$resumen_pedido       =   ($row["resumen_pedido"] !==  null ) ? $row["resumen_pedido"] : "";
         $id_servicio          =   $row["id_servicio"];
 		$estado               =   $row["status"];		        
         $monto_a_pagar        =   $row["monto_a_pagar"];
@@ -41,38 +36,34 @@ if($ordenes!=0){
     ?>
     <?=n_row_12()?>
         <div class="contenedor_articulo">                
-            <div class="col-lg-3">                
-                <?=anchor_enid(
-                        img([
-                            "src"       =>  $url_imagen_servicio,
-                            "onerror"   =>  "reloload_img( '".$id_error."','".$url_imagen_servicio."');",
-                            "class"     =>  'imagen_articulo',
-                            "id"        =>  $id_error
-                            ]),  
-                    ["href"  => $url_servicio]
-                )?>                        
-            </div>    
-            <div class="col-lg-9">                      
-                <div class="contenedor_articulo_text">                        
-                    <?=n_row_12()?>                                                                          
-                        <?=div(
-                            carga_estado_compra(
-                                $monto_a_liquidar,
-                                $id_recibo,
-                                $estado , 
-                                $status_enid_service,
-                                $modalidad
-                            ),
-                            ["class"=>"btn_estado_cuenta"]
 
-                        )?>
-                        
-                    <?=end_row()?>
-                </div>  
-            </div>          
+                <?=div(
+                        anchor_enid(
+                                img([
+                                "src"       =>  $url_imagen_servicio,
+                                "onerror"   =>  "reloload_img( '".$id_error."','".$url_imagen_servicio."');",
+                                "class"     =>  'imagen_articulo',
+                                "id"        =>  $id_error
+                            ]),
+                            ["href"  => $url_servicio]
+                    ),
+                    ["class"=>"col-lg-3"]
+                )?>
+
+            <?=div(div(
+                        div(carga_estado_compra($monto_a_liquidar, $id_recibo, $estado , $status_enid_service, $modalidad), ["class"=>"btn_estado_cuenta"]
+                    ),
+                        ["class"=>"contenedor_articulo_text"]
+                    )
+            ,["class" => "col-lg-9"]
+            )?>
+
+
         </div>
     <?=end_row()?>
-<?php }}?>
+
+<?php }
+}?>
 <?=evalua_acciones_modalidad($en_proceso , $modalidad)?>
 <?=evalua_acciones_modalidad_anteriores($anteriores , $modalidad)?>
 <?=place("contenedor_ventas_compras_anteriores")?>

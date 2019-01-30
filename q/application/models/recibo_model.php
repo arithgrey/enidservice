@@ -264,10 +264,9 @@ class Recibo_model extends CI_Model
     function carga_actividad_pendiente($param)
     {
 
-        $campo_usuario = "id_usuario";
-        if ($param["modalidad"] == 1) {
-            $campo_usuario = "id_usuario_venta";
-        }
+
+        $campo_usuario  =  ($param["modalidad"] >  0 ) ? "id_usuario_venta" : "id_usuario";
+
         $params_where = [
             "status" => 7,
             $campo_usuario => $param["id_usuario"]
@@ -411,6 +410,18 @@ class Recibo_model extends CI_Model
         return $this->get(["count(0)num"], $params_where)[0]["num"];
 
     }
+    function compras_ventas_efectivas_usuario($param)
+    {
+
+        $id_usuario = $param["id_usuario"];
+        $campo_usuario = "id_usuario";
+        if ($param["modalidad"] == 1) {
+            $campo_usuario = "id_usuario_venta";
+        }
+        $params_where = [$campo_usuario => $id_usuario, "status" => 9];
+        return $this->get([], $params_where);
+
+    }
 
     function get_monto_pendiente_proyecto_persona_forma_pago($param)
     {
@@ -468,7 +479,7 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get)->result_array();
 
     }
-
+    /*
     function get_ventas_usuario($param)
     {
 
@@ -489,6 +500,29 @@ class Recibo_model extends CI_Model
                         " . $where . " ORDER BY fecha_registro DESC";
         $response["data"] = $this->db->query($query_get)->result_array();
         return $response;
+    }
+    */
+    function get_compras_usuario($param , $status = 0)
+    {
+
+        $where = $this->get_where_estado_venta($param , $status);
+        $query_get = "SELECT
+                    id_proyecto_persona_forma_pago ,
+                    resumen_pedido,
+                    id_servicio,
+                    monto_a_pagar,
+                    costo_envio_cliente,
+                    saldo_cubierto,
+                    status,
+                    fecha_registro,
+                    num_ciclos_contratados,
+                    estado_envio
+                  FROM
+                  proyecto_persona_forma_pago
+                  " . $where . " ORDER BY fecha_registro DESC";
+
+
+        return $this->db->query($query_get)->result_array();
     }
 
     private function insert($tabla = 'proyecto', $params, $return_id = 0)
@@ -569,11 +603,9 @@ class Recibo_model extends CI_Model
                 case 1:
 
                     $sql = "WHERE 
-                    id_usuario_venta = $id_usuario  
-                    AND  
-                      status = 1
+                    id_usuario_venta = $id_usuario                     
                     AND 
-                      saldo_cubierto>=monto_a_pagar";
+                      saldo_cubierto >= monto_a_pagar";
                     break;
                 case 6:
 
@@ -620,30 +652,6 @@ class Recibo_model extends CI_Model
         }
         return $sql;
     }
-
-    function get_compras_usuario($param)
-    {
-
-        $where = $this->get_where_estado_venta($param);
-        $query_get = "SELECT 
-                    id_proyecto_persona_forma_pago ,
-                    resumen_pedido,
-                    id_servicio,
-                    monto_a_pagar, 
-                    costo_envio_cliente,
-                    saldo_cubierto,
-                    status,
-                    fecha_registro,
-                    num_ciclos_contratados,
-                    estado_envio
-                  FROM 
-                  proyecto_persona_forma_pago 
-                  " . $where . " ORDER BY fecha_registro DESC";
-
-        $data_complete["data"] = $this->db->query($query_get)->result_array();
-        return $data_complete;
-    }
-
     function crea_resumen_compra($servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega = 0)
     {
 

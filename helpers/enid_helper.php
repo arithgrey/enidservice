@@ -132,17 +132,14 @@ if ( ! function_exists('div'))
   function div( $info , $attributes='' , $row =0 )
   {
 
-
-      $base =   "<div".add_attributes($attributes).">".$info."</div>";
-
       if ( $attributes == 1 ) {
 
-          return addNRow($base);
+          return addNRow($info);
 
       }else{
-
-          $div  =   ($row == 0 ) ?  $base : addNRow($base);
-          return $div;
+          $base =   "<div".add_attributes($attributes).">".$info."</div>";
+          $d    =   ($row > 0 ) ?   addNRow($base) : $base;
+          return $d;
       }
 
   }
@@ -574,9 +571,10 @@ if ( ! function_exists('place'))
 }
 if ( ! function_exists('img_enid'))
 {
-  function img_enid($extra = [] , $row_12 =0 ){
+  function img_enid($extra = [] , $row_12 =0  , $external = 0 ){
       
-      $conf["src"]    =   "../img_tema/enid_service_logo.jpg";
+
+      $conf["src"]    =   ($external == 0 ) ? "../img_tema/enid_service_logo.jpg" :  "https://enidservice.com/inicio/img_tema/enid_service_logo.jpg";
       foreach ($extra as $key => $value){        
         $conf[$key]   = $value;
       }

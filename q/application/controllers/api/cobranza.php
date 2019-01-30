@@ -446,7 +446,7 @@ class Cobranza extends REST_Controller{
     function acciones_posterior_orden_pago($param){
 
         $this->notifica_deuda_cliente($param);                   
-        $this->crea_comentario_pedido($param);                    
+        $this->crea_comentario_pedido($param);
     }
     /**/
     function valida_envio_notificacion_nuevo_usuario($param){
@@ -468,33 +468,21 @@ class Cobranza extends REST_Controller{
         return $this->principal->api( $api , $q , "html");  
 
     }
-    /**/
-    function crea_comentario_pedido($param){
+    private function crea_comentario_pedido($param){
 
-        $data_send["id_usuario"] =  $param["id_usuario"];            
-        $data_send["id_usuario_venta"] =  $param["id_usuario_venta"];
-        $data_send["id_servicio"] =  $param["id_servicio"];
+        $id_recibo  =  $param["id_recibo"];
+        $email      =  $param["email"];
 
-        if(get_info_usuario_valor_variable($param , "es_usuario_nuevo" )>0){                     
+        $text    =   "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE ".$email ." RECIBO NÚMERO ".$id_recibo;
+        if(get_param_def($param , "es_usuario_nuevo" ) >  0 ){
                         
-            $comentario = $param["nombre"]." - ".$param["email"]." - ".$param["telefono"]." 
-                                    está interesado en comprar, 
-                                    cuando haya realizado su compra 
-                                    serás notificado(a)";
-                
-            $data_send["comentario"]= $comentario;
-
-        }else{
-            $text ="Está interesado(a) en comprar, 
-                cuando haya realizado su compra seras notificado(a)";
-            $data_send["comentario"]= $text;
-
+            $text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE ".$param["nombre"]." - ".$param["email"]." - ".$param["telefono"] ." RECIBO NÚMERO ".$id_recibo;
         }
-            
+        $asunto = "NUEVA ORDEN DE COMPRA EN PROCESO, RECIBO #".$id_recibo;
+        $cuerpo =  img_enid([] , 1  , 1  ).heading_enid($text , 3);
+        $q      =  get_request_email("enidservice@gmail.com", $asunto , $cuerpo);
+        $this->principal->send_email_enid($q);
 
-        $api = "comentario/comentario_pedido"; 
-        return $this->principal->api( $api ,$data_send);  
-        
     }
     function notifica_deuda_cliente($q){
 
