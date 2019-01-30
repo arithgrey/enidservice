@@ -611,7 +611,7 @@ if (!function_exists('invierte_date_time')) {
         return div($text , ["col-lg-4"]);
 
     }
-    function get_format_punto_encuentro($data_complete , $recibo , $costo_envio){
+    function get_format_punto_encuentro($data_complete , $recibo ){
 
         $p                  =   $data_complete["punto_encuentro"][0];
         $costo_envio        =   $p["costo_envio"];
@@ -630,5 +630,85 @@ if (!function_exists('invierte_date_time')) {
         $t .= br();
         $t .= div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de ".$costo_envio." pesos por concepto de gastos de envío" , ["class" => "contenedor_text_entrega"]);
         return $t;
+    }
+    function get_botones_seguimiento($id_recibo){
+
+        $link_seguimiento 		=	"../pedidos/?seguimiento=".$id_recibo;
+        $text =  guardar(
+            "RASTREA TU PEDIDO".icon("fa fa-map-signs"),
+            [
+                "class" 	=> "top_20 text-left",
+                "style" 	=> "border-style: solid!important;border-width: 2px!important;border-color: black!important;color: black !important;background: #f1f2f5 !important;"
+            ],
+            1,
+            1,
+            0,
+            $link_seguimiento
+        );
+
+
+        $text .= div(
+            anchor_enid('CANCELAR COMPRA',
+                [
+                    "class"		=> 	"cancelar_compra",
+                    "id"		=> 	 $id_recibo,
+                    "modalidad"	=> 	'0'
+                ]
+            ) ,
+            ["class" => "top_20"],
+            1);
+
+        return $text;
+
+    }
+    function getPayButtons($id_recibo , $url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta){
+
+
+        $url_pago_oxxo 			= 	get_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
+        $url_pago_paypal 		=	get_link_paypal($saldo_pendiente);
+        $url_pago_saldo_enid 	= 	get_link_saldo_enid($id_usuario_venta , $id_recibo);
+        //$data["url_pago_paypal"]= 	$url_pago_paypal;
+
+        $text = guardar(
+            "PAGOS EN TIENDAS DE AUTOSERVICIO (OXXO)",
+            [
+                "class" 	=> "top_10 text-left",
+                "onclick" 	=> "notifica_tipo_compra(4 ,  '".$id_recibo."');"
+
+            ],
+            1,
+            1,
+            0,
+            $url_pago_oxxo
+        );
+
+
+        $text .= guardar(
+            "A TRAVÉS DE PAYPAL" ,
+            [
+                "class" => "top_10 text-left" ,
+                "recibo" 	=> $id_recibo ,
+                "onclick" 	=> "notifica_tipo_compra(2 ,  '".$id_recibo."');"
+            ],
+            1,
+            1,
+            0,
+            $url_pago_paypal
+        );
+
+        $text .= guardar(
+            "SALDO  ENID SERVICE" ,
+            [
+                "class" => "top_10 text-left",
+                "onclick" 	=> "notifica_tipo_compra(1 ,  '".$id_recibo."');"
+            ],
+            1,
+            1,
+            0,
+            $url_pago_saldo_enid
+        );
+
+        return $text;
+
     }
 }

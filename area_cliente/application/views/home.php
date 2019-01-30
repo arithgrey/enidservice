@@ -42,11 +42,11 @@
                 <?= div(place("place_ventas_usuario"), ["class" => "col-lg-9"]) ?>
                 <div class="col-lg-3">
                     <?= heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3) ?>
-                    <center>
+
                         <?= $valoraciones; ?>
-                    </center>
+                    
                     <br>
-                    <CENTER>
+
                         <?= anchor_enid("VER COMENTARIOS",
                             [
                                 "href" => "../recomendacion/?q=" . $id_usuario,
@@ -55,7 +55,7 @@
                             1,
                             1
                         ) ?>
-                    </CENTER>
+
                     <?= div($alcance, 1) ?>
                 </div>
 

@@ -19,18 +19,6 @@ class recibo extends REST_Controller{
         }
         $this->response($response);
     }
-    /*
-    function en_proceso_GET(){
-        $param =  $this->get();
-        $response =  $this->recibo_model->carga_actividad_pendiente($param);        
-        $this->response($response);
-    } 
-    function verifica_anteriores_GET(){        
-        $param =  $this->get();        
-        $response = $this->tickets_model->num_compras_efectivas_usuario($param);        
-        $this->response($response);        
-    }    
-    */
     function cancelar_envio_recordatorio_PUT(){
 
         $param      =   $this->put();
@@ -175,13 +163,6 @@ class recibo extends REST_Controller{
         }
         return $ordenes;
     }
-    /*
-    function verifica_anteriores($q){
-
-        $api        =  "tickets/verifica_anteriores/format/json/";
-        return       $this->principal->api($api, $q);
-    }
-    */
     private function en_proceso($q){            
         return $this->recibo_model->carga_actividad_pendiente($q);            
     }    
@@ -219,7 +200,7 @@ class recibo extends REST_Controller{
                     $id_usuario_venta               =   $recibo[0]["id_usuario_venta"];
                     $usuario                        =   $this->principal->get_info_usuario($id_usuario_venta);
                     $data_complete["usuario_venta"] =   $usuario;
-                    $data_complete["modalidad"] =1;
+                    $data_complete["modalidad"]     =   1;
                     return $this->load->view("cobranza/notificacion_pago_realizado" , $data_complete);
 
                 }
@@ -229,9 +210,10 @@ class recibo extends REST_Controller{
     }      
 
     function ticket_pendiente_pago($param , $recibo , $data_complete){
-
+        $response   = false;
         $id_usuario =  $recibo[0]["id_usuario"];               
         $data_complete["costo_envio_sistema"]  =  get_costo_envio($recibo[0]);                
+
         if ($recibo[0]["tipo_entrega"] ==  1) {
 
            return $this->ticket_pendiente_pago_contra_entrega($param , $recibo , $data_complete );
@@ -243,202 +225,124 @@ class recibo extends REST_Controller{
 
                 $data_complete  = $this->get_data_saldo($param, $recibo , $data_complete );
 
-                return  $this->get_mensaje_pago_al_memento($data_complete,$data_complete["costo_envio_sistema"]);
+                $response = $this->get_mensaje_pago_al_memento($data_complete,$data_complete["costo_envio_sistema"]);
 
-            }else{            
+            }else{
 
-
-                $usuario             =     $this->principal->get_info_usuario($id_usuario);
-                $costo_envio_sistema =     get_costo_envio($recibo[0]);
-                return $this->get_mensaje_no_aplica($recibo ,$costo_envio_sistema , $usuario , $data_complete);
+                $usuario             =      $this->principal->get_info_usuario($id_usuario);
+                $costo_envio_sistema =      get_costo_envio($recibo[0]);
+                $response            =      $this->get_mensaje_no_aplica($recibo ,$costo_envio_sistema , $usuario , $data_complete);
 
             }
 
         }
+        return $response;
                        
     }
     private function get_mensaje_pago_al_memento($data_complete , $costo_envio_sistema){
 
+        //$fecha_registro  		=  	$recibo["fecha_registro"];
+        //$status  				=  	$recibo["status"];
+        //$fecha_vencimiento  	=  	$recibo["fecha_vencimiento"];
+        //$id_forma_pago  		=  	$recibo["id_forma_pago"];
+        //$num_email_recordatorio =  	$recibo["num_email_recordatorio"];
+        //$id_usuario_referencia  =  	$recibo["id_usuario_referencia"];
+        //$flag_pago_comision  	=  	$recibo["flag_pago_comision"];
+        //$flag_envio_gratis  	=  	$recibo["flag_envio_gratis"];
+        //$id_usuario  			=  	$recibo["id_usuario"];
+        //$precio  				=  	$recibo["precio"];
+        //$costo_envio_vendedor  	=  	$recibo["costo_envio_vendedor"];
+
+        $informacion_envio      =   $data_complete["informacion_envio"];
         $servicio               =   $data_complete["servicio"];
         $recibo                 =   $data_complete["recibo"];
         $url_request            =   $data_complete["url_request"];
         $recibo 				=  	$recibo[0];
-        $id_forma_pago  		=  	$recibo["id_forma_pago"];
         $saldo_cubierto  		=  	$recibo["saldo_cubierto"];
-        $fecha_registro  		=  	$recibo["fecha_registro"];
-        $status  				=  	$recibo["status"];
-        $fecha_vencimiento  	=  	$recibo["fecha_vencimiento"];
         $monto_a_pagar  		=  	$recibo["monto_a_pagar"];
         $id_recibo 				=  	$recibo["id_proyecto_persona_forma_pago"];
-        $num_email_recordatorio =  	$recibo["num_email_recordatorio"];
-        $id_usuario_referencia  =  	$recibo["id_usuario_referencia"];
-        $flag_pago_comision  	=  	$recibo["flag_pago_comision"];
-        $flag_envio_gratis  	=  	$recibo["flag_envio_gratis"];
         $costo_envio_cliente 	=  	$recibo["costo_envio_cliente"];
         $id_usuario_venta  		=  	$recibo["id_usuario_venta"];
         $id_ciclo_facturacion	=  	$recibo["id_ciclo_facturacion"];
         $num_ciclos_contratados =  	$recibo["num_ciclos_contratados"];
-        $id_usuario  			=  	$recibo["id_usuario"];
-        $precio  				=  	$recibo["precio"];
-        $costo_envio_vendedor  	=  	$recibo["costo_envio_vendedor"];
         $id_servicio  			=  	$recibo["id_servicio"];
         $resumen_pedido  		=  	$recibo["resumen_pedido"];
         $servicio 				= 	$servicio[0];
         $flag_servicio 			=  	$servicio["flag_servicio"];
         $tipo_entrega      		= 	$recibo["tipo_entrega"];
 
-        $deuda 					=  get_saldo_pendiente(
-            $monto_a_pagar,
-            $num_ciclos_contratados,
-            $saldo_cubierto,
-            $costo_envio_cliente,
-            $costo_envio_sistema,
-            $tipo_entrega
-        );
-
-
+        $deuda 					=  get_saldo_pendiente($monto_a_pagar, $num_ciclos_contratados, $saldo_cubierto, $costo_envio_cliente, $costo_envio_sistema, $tipo_entrega);
         $saldo_pendiente 		= 	$deuda["total_mas_envio"];
-        $url_pago_oxxo 			= 	get_link_oxxo($url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
-        $url_pago_saldo_enid 	= 	get_link_saldo_enid($id_usuario_venta , $id_recibo);
         $url_img_servicio 		=  	link_imagen_servicio($id_servicio);
-        $url_pago_paypal 		=	get_link_paypal($saldo_pendiente);
-        $data["url_pago_paypal"]= 	$url_pago_paypal;
         $data["recibo"] 		=	$recibo;
         $text_forma_compra 	    =   ($tipo_entrega) ?  "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
-        $link_seguimiento 		=	"../pedidos/?seguimiento=".$id_recibo;
 
 
 
-        $text               =  "";
-        $pencuentro         =
-            ($tipo_entrega == 1 ) ? get_format_punto_encuentro($data_complete , $recibo , $costo_envio) : "";
-        $text              .=  $pencuentro;
 
-        $text .= hr();
-        $text .= heading_enid(icon("fa fa-credit-card") . $text_forma_compra , 3 , ["class" => 'top_20' ]);
-        $text .= hr();
-        $text .= guardar(
-            "PAGOS EN TIENDAS DE AUTOSERVICIO (OXXO)",
-            [
-                "class" 	=> "top_10 text-left",
-                "onclick" 	=> "notifica_tipo_compra(4 ,  '".$id_recibo."');"
+        $text               =   "";
+        $pencuentro         =   ($tipo_entrega == 1 ) ? get_format_punto_encuentro($data_complete , $recibo ) : "";
+        $text              .=   $pencuentro;
 
-            ],
-            1,
-            1,
-            0,
-            $url_pago_oxxo
-        );
+        $text               .= hr();
+        $text               .= heading_enid(icon("fa fa-credit-card") . $text_forma_compra , 3 , ["class" => 'top_20' ]);
+        $text               .= hr();
+        $text               .= getPayButtons($id_recibo , $url_request,$saldo_pendiente,$id_recibo,$id_usuario_venta);
 
 
-        $text .= guardar(
-            "A TRAVÉS DE PAYPAL" ,
-            [
-                "class" => "top_10 text-left" ,
-                "recibo" 	=> $id_recibo ,
-                "onclick" 	=> "notifica_tipo_compra(2 ,  '".$id_recibo."');"
-            ],
-            1,
-            1,
-            0,
-            $url_pago_paypal
-        );
-
-        $text .= guardar(
-            "SALDO  ENID SERVICE" ,
-            [
-                "class" => "top_10 text-left",
-                "onclick" 	=> "notifica_tipo_compra(1 ,  '".$id_recibo."');"
-            ],
-            1,
-            1,
-            0,
-            $url_pago_saldo_enid
-        );
-
-
-        $text .= n_row_12();
-
+//        $text .= n_row_12();
 
         if($tipo_entrega == 0 ){
-
 		    $text     .=  heading_enid("Dirección de envío" , 3);
-		    $direccion =  ( count($informacion_envio) > 0 ) ?  format_direccion_envio($inf , $id_recibo , $recibo) : agregar_direccion_envio($id_recibo);
+		    $direccion =  ( count($informacion_envio) > 0 ) ?  format_direccion_envio($informacion_envio , $id_recibo , $recibo) : agregar_direccion_envio($id_recibo);
             $text .= $direccion;
         }
 
-        $text .= hr();
-
-	    $text .=  guardar(
-				"RASTREA TU PEDIDO".icon("fa fa-map-signs"),
-				[
-					"class" 	=> "top_20 text-left",
-					"style" 	=> "border-style: solid!important;border-width: 2px!important;border-color: black!important;color: black !important;background: #f1f2f5 !important;"
- 				],
-				1,
-				1,
-				0,
-				$link_seguimiento
-	    );
-
-
-
-        $text .= div(
-		anchor_enid('CANCELAR COMPRA',
-		[
-			"class"		=> 	"cancelar_compra",
-			"id"		=> 	 $id_recibo,
-			"modalidad"	=> 	'0'
-		]
-		) ,
-		["class" => "top_20"],
-		1);
-
-        $text .=    end_row();
-
-
-
-        $f  = format_imagen_direccion($id_recibo, $resumen_pedido , $num_ciclos_contratados , $flag_servicio,$id_ciclo_facturacion ,
-            $saldo_pendiente , $url_img_servicio , $monto_a_pagar ,$deuda);
-
-
-        $r =    div($text,  ["class" => "col-lg-8"]);
-        $t =    $r.$f;
+        $text   .=   hr();
+	    $text   .=  get_botones_seguimiento($id_recibo);
+        //$text .= end_row();
+        $f      =   format_imagen_direccion($id_recibo, $resumen_pedido , $num_ciclos_contratados , $flag_servicio,$id_ciclo_facturacion , $saldo_pendiente , $url_img_servicio , $monto_a_pagar ,$deuda);
+        $r      =   div($text,  ["class" => "col-lg-8"]);
+        $t      =   $r.$f;
         return $t;
 
     }
     private function get_mensaje_no_aplica($recibo , $costo_envio_sistema , $usuario , $data_complete){
-
-        $costo_envio_cliente_sistema    = $costo_envio_sistema["costo_envio_cliente"];
-        $recibo                         = $recibo[0];
+        /*
         $id_forma_pago                  = $recibo["id_forma_pago"];
-        $saldo_cubierto                 = $recibo["saldo_cubierto"];
-        $fecha_registro                 = $recibo["fecha_registro"];
         $status                         = $recibo["status"];
-        $fecha_vencimiento              = $recibo["fecha_vencimiento"];
-        $monto_a_pagar                  = $recibo["monto_a_pagar"];
-        $id_proyecto_persona_forma_pago = $recibo["id_proyecto_persona_forma_pago"];
-        $id_recibo                      = $id_proyecto_persona_forma_pago;
         $num_email_recordatorio         = $recibo["num_email_recordatorio"];
         $id_usuario_referencia          = $recibo["id_usuario_referencia"];
         $flag_pago_comision             = $recibo["flag_pago_comision"];
         $flag_envio_gratis              = $recibo["flag_envio_gratis"];
-        $costo_envio_cliente            = $recibo["costo_envio_cliente"];
         $id_usuario_venta               = $recibo["id_usuario_venta"];
-        $id_ciclo_facturacion           = $recibo["id_ciclo_facturacion"];
-        $num_ciclos_contratados         = $recibo["num_ciclos_contratados"];
         $id_usuario                     = $recibo["id_usuario"];
         $precio                         = $recibo["precio"];
-        $costo_envio_vendedor           = $recibo["costo_envio_vendedor"];
         $id_servicio                    = $recibo["id_servicio"];
-        $resumen_pedido                 = $recibo["resumen_pedido"];
+        $email                          = $usuario["email"];
+        */
 
+
+        $costo_envio_cliente_sistema    = $costo_envio_sistema["costo_envio_cliente"];
+        $recibo                         = $recibo[0];
+        $saldo_cubierto                 = $recibo["saldo_cubierto"];
+        $fecha_registro                 = $recibo["fecha_registro"];
+
+        $fecha_vencimiento              = $recibo["fecha_vencimiento"];
+        $monto_a_pagar                  = $recibo["monto_a_pagar"];
+        $id_proyecto_persona_forma_pago = $recibo["id_proyecto_persona_forma_pago"];
+        $id_recibo                      = $id_proyecto_persona_forma_pago;
+        $costo_envio_cliente            = $recibo["costo_envio_cliente"];
+        $id_ciclo_facturacion           = $recibo["id_ciclo_facturacion"];
+        $num_ciclos_contratados         = $recibo["num_ciclos_contratados"];
+        $costo_envio_vendedor           = $recibo["costo_envio_vendedor"];
+        $resumen_pedido                 = $recibo["resumen_pedido"];
         $usuario                        = $usuario[0];
         $id_usuario                     = $usuario["id_usuario"];
         $nombre                         = $usuario["nombre"];
         $apellido_paterno               = ($usuario["apellido_paterno"] !== null) ? $usuario["apellido_paterno"] : "";
         $apellido_materno               = ($usuario["apellido_materno"] !== null) ? $usuario["apellido_materno"] : "";
-        $email                          = $usuario["email"];
+
         $cliente                        = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
 
 
@@ -466,9 +370,9 @@ class recibo extends REST_Controller{
 
         $flag_servicio = $servicio["flag_servicio"];
         $nombre_servicio = $servicio["nombre_servicio"];
-        $proyecto = $servicio;
-        $detalles = $resumen_pedido;
-        $ciclo_de_facturacion = $id_ciclo_facturacion;
+        //$proyecto = $servicio;
+        //$detalles = $resumen_pedido;
+        //$ciclo_de_facturacion = $id_ciclo_facturacion;
         $saldo_cubierto = $saldo_cubierto;
         $monto_a_pagar = $monto_a_pagar;
         $primer_registro = $fecha_registro;
@@ -514,9 +418,8 @@ class recibo extends REST_Controller{
     }
     function ticket_pendiente_pago_contra_entrega($param , $recibo , $data_complete){
 
-        $id_recibo =  $param["id_recibo"];
-
-
+        $id_recibo  =  $param["id_recibo"];
+        $response   = false;
         /*Cuando se puede pagar al momento*/
         if (get_info_usuario_valor_variable($param , "cobranza") ==  1){
             
@@ -526,15 +429,19 @@ class recibo extends REST_Controller{
                 
                 $id_punto_encuentro                     =  $this->get_punto_encuentro_recibo($id_recibo);
                 $data_complete["punto_encuentro"]       =  $this->get_punto_encuentro($id_punto_encuentro);
-                return $this->load->view("cobranza/pago_al_momento" , $data_complete);
+                //return $this->load->view("cobranza/pago_al_momento" , $data_complete);
+                $response =   $this->get_mensaje_pago_al_memento($data_complete,$data_complete["costo_envio_sistema"]);
             }
         }else{
             
-            $id_usuario                           = $recibo[0]["id_usuario"]; 
-            $data_complete["usuario"]             = $this->principal->get_info_usuario($id_usuario);
+
+            $usuario                              = $this->principal->get_info_usuario($recibo[0]["id_usuario"]);
             //$data_complete["costo_envio_sistema"] =  get_costo_envio($recibo[0]);
-            $this->load->view("cobranza/resumen_no_aplica" , $data_complete);    
+            //$this->load->view("cobranza/resumen_no_aplica" , $data_complete);
+            $costo_envio_sistema =     get_costo_envio($recibo[0]);
+            $response = $this->get_mensaje_no_aplica($recibo , $costo_envio_sistema , $usuario , $data_complete);
         }
+        return $response;
     }
     function pedidos_GET(){
 
@@ -881,15 +788,35 @@ class recibo extends REST_Controller{
     }
     function compras_por_enviar_GET(){
 
-        $param      = $this->get();
-        $response   = false;
         $this->response($this->recibo_model->get_compras_por_enviar());
 
     }
+    /*
     private function set_stock_servicio($q){
 
         $api =  "servicio/stock";
         return  $this->principal->api( $api , $q , "json" , "PUT");
     }
+    */
+    /*
+    function verifica_anteriores($q){
+
+        $api        =  "tickets/verifica_anteriores/format/json/";
+        return       $this->principal->api($api, $q);
+    }
+    */
+    /*
+   function en_proceso_GET(){
+       $param =  $this->get();
+       $response =  $this->recibo_model->carga_actividad_pendiente($param);
+       $this->response($response);
+   }
+   function verifica_anteriores_GET(){
+       $param =  $this->get();
+       $response = $this->tickets_model->num_compras_efectivas_usuario($param);
+       $this->response($response);
+   }
+   */
+
 
 }
