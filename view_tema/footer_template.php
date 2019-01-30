@@ -135,21 +135,5 @@ rel="stylesheet" id="bootstrap-css">
 rel="stylesheet" 
 href="../css_tema/font-asome2/css/font-awesome.min.css?<?=version_enid?>">
 
-<!--<script src="../js_tema/js/librerias/clipboard.min.js"></script>
-<script>
-    var clipboard = new Clipboard('.btn_copiar_enlace_pagina_contacto');
-    clipboard.on('success', function(e) {
-        console.info('Accion:', e.action);
-        console.info('Texto:', e.text);
-        console.info('Trigger:', e.trigger);
-
-        e.clearSelection();
-    });
-    clipboard.on('error', function(e) {
-        console.error('Accion:', e.action);
-        console.error('Trigger:', e.trigger);
-    });
-</script>
--->
 </body>
 </html>

@@ -30,8 +30,8 @@ class Areacliente extends REST_Controller{
     function carga_pago_pendiente_por_recibo($id_recibo){
 
         $q["id_recibo"] =  $id_recibo;        
-        $api            = "recibo/resumen_desglose_pago/format/html/";
-        return $this->principal->api( $api , $q , "HTML");
+        $api            = "recibo/resumen_desglose_pago/format/json/";
+        return $this->principal->api( $api , $q );
     }
     /*
     function notifica_accesos_nuevo_usuario_POST(){

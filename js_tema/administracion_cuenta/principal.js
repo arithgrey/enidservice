@@ -122,17 +122,21 @@ var  set_password = function(e){
 	var flag 			=  valida_text_form("#password" , ".place_pw_1" , 7 , "Texto " );			
 	var flag2 			=  valida_text_form("#pw_nueva" , ".place_pw_2" , 7 , "Texto " );			
 	var flag3 			=  valida_text_form("#pw_nueva_confirm" , ".place_pw_3" , 7 , "Texto " );			
-	var nueva_password 	= 0;
+	var n_password  	= 0;
 	
 	if (flag == flag2 && flag ==  flag3) {	
 		/*Ahora validamos que no sean las mismas que la antigua*/		
-		nueva_password = (get_parameter("#password") !=  get_parameter("#pw_nueva") ) ? 1: 2;
-		if (get_parameter("#password") !=  get_parameter("#pw_nueva_confirm") ){nueva_password =  1;}else{nueva_passwor	 =  2;}		
+		var n_password = (get_parameter("#password") !=  get_parameter("#pw_nueva") ) ? 1: 2;
+		if (get_parameter("#password") !=  get_parameter("#pw_nueva_confirm") ){
+			var n_password  =  1;
+		}else{
+			var n_password 	 =  2;
+		}
 
 	}
 
 
-	switch(nueva_password){
+	switch(n_password){
 		case 1: 
 			
 			var a = get_parameter("#password");

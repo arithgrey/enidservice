@@ -20,7 +20,7 @@
             $cuerpo .= $info;
             $cuerpo .= "</html>";
 
-            $headers = get_headers_e();
+            //$headers = get_headers_e();
             mail($destinatario, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, $headers);
             return $cuerpo;
         }
@@ -40,7 +40,7 @@
             $cuerpo .= div("Buen día " . $email . " - " . $info);
             $cuerpo .= "</html>";
 
-            $headers = get_headers_e($email);
+            //$headers = get_headers_e($email);
             mail($destinatario, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, $headers);
             return $cuerpo;
         }

@@ -13,7 +13,7 @@
 				              	"required"		=>  true
 				             ])?>
 					        <?=place('place_pw_1')?>
-				            <?=div("nueva", 1)?>
+				            <?=div("Nueva", 1)?>
 				            <?=input([
 				            	"name"		=>	"pw_nueva" ,
 				            	"id"		=>	"pw_nueva" ,

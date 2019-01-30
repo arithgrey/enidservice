@@ -162,7 +162,7 @@ class usuario extends REST_Controller{
 
         $param      =   $this->put();
         $response   =   false;
-        if (if_ext($param , "mail,type")){
+        if (if_ext($param , "type")){
             switch ($param["type"]) {
                 case 1:
 
@@ -170,6 +170,7 @@ class usuario extends REST_Controller{
                     break;
 
                 case 2:
+
                     $response = $this->set_password_usuario($param);
 
                     break;
@@ -195,7 +196,12 @@ class usuario extends REST_Controller{
                     $response   = "La contraseña ingresada no corresponde a su contraseña actual";
 
                 }else{
-                    $response   = $this->usuario_model->q_up("password" , $nuevo , $id_usuario);
+                    $response =  $this->usuario_model->q_up("password" , $nuevo , $id_usuario);
+                    if($response){
+                        $this->notifica_modificacion_password();
+                    }
+
+
                 }
             }else{
                 $response       = "Contraseñas distintas";
@@ -381,9 +387,11 @@ class usuario extends REST_Controller{
                   "nombre"                  =>  $nombre,
                   "id_usuario_referencia"   =>  $id_usuario_referencia 
                 ];
+
                 $response["id_usuario"] = $this->usuario_model->insert($params , 1);
                 
                 if ( $response["id_usuario"]>0){
+
                     $q["id_usuario"]    =  $response["id_usuario"]; 
                     $q["puesto"]        =  20; 
                     $response["usuario_permisos"]  =   $this->agrega_permisos_usuario($q);   
@@ -397,16 +405,14 @@ class usuario extends REST_Controller{
                         $id_servicio =  $param["servicio"];
                         $this->inicia_proceso_compra($param , $response["id_usuario"]  , $id_servicio);
                     }
-
+                    $this->notifica_registro_usuario($params);
 
                 }
-                
             }
             $this->response($response);
         } 
         $this->response("Error");    
     }
-
     function whatsapp_POST(){        
         
 
@@ -433,6 +439,23 @@ class usuario extends REST_Controller{
             $this->response($response);
         } 
         $this->response(false);
+    }
+
+    function notifica_registro_usuario($param){
+
+        $response  =  false;
+        if(if_ext($param ,  "nombre,email")){
+
+            $email      =   $param["email"];
+            $asunto     =   "TU USUARIO SE REGISTRÓ!";
+            $cuerpo     =   get_mensaje_bienvenida($param);
+            $q          =   get_request_email($email, $asunto , $cuerpo);
+            $response   =   $this->principal->send_email_enid($q);
+
+        }
+        return $response;
+
+
     }
     private function inicia_proceso_compra($param , $id_usuario , $id_servicio){
 
@@ -742,6 +765,17 @@ class usuario extends REST_Controller{
         }
         return $num;
     }
+    private function notifica_modificacion_password(){
+
+
+        $email      =   $this->principal->get_session("email");
+        $nombre     =   $this->principal->get_session("nombre");
+        $asunto     =   "Alerta de cambio de contraseña";
+        $cuerpo     =   get_mensaje_modificacion_pwd($nombre);
+        $q          =   get_request_email($email, $asunto , $cuerpo);
+        return  $this->principal->send_email_enid($q , 1);
+
+    }
     private function notifica_registro_exitoso($q){
         $api = "emp/solicitud_afiliado/format/json/";
         return  $this->principal->api( $api , $q);
@@ -794,148 +828,4 @@ class usuario extends REST_Controller{
         $api =  "servicio/num_periodo/format/json/";
         return $this->principal->api($api , $q );
     }
-    /*
-    function terminos_privacidad_GET(){
-
-        $param = $this->get();
-        $response=  $this->usuario_model->get_terminos_privacidad($param);
-        $this->response($response);
-    }
-    */
-    /*
-   function usuario_deseo_POST(){
-
-       $param      =  $this->post();
-       $response   =  $this->usuario_model->add_usuario_deseo($param);
-       $this->response($response);
-   }
-   */
-    /*
-    function nombre_usuario_GET(){
-
-        $param      =   $this->get();
-        $response   =   $this->usuario_model->nombre_usuario($param);
-        $this->response($response);
-    }
-    */
-    /*
-    private function crear_proceso_compra($param){
-        
-
-        if ($response["usuario_registrado"] ==  1 && $response["id_usuario"]>0 ){                
-                $param["id_usuario"]                = $response["id_usuario"];       
-                $param["usuario_nuevo"]             = 1;        
-
-                $orden_de_compra["siguiente"]       = $this->crea_orden_de_compra($param);
-                $orden_de_compra["usuario_existe"]  = 0;
-            return $orden_de_compra;           
-                            
-        }else{
-            return $response;    
-        } 
-
-
-    }
-    */
-    /*
-  function productos_interes_GET(){
-
-      $param    =   $this->get();
-      //No existe la función en el modelo
-      $response =   $this->usuario_model->get_productos_interes($param);
-      $this->response($response);
-  }
-  */
-    /*
-    function registrar_prospecto($param){
-
-      $existe =  $this->evalua_usuario_existente($param);
-      $data_complete["usuario_registrado"] = 0;
-
-      if($existe == 0 ){
-
-        $email =  $param["email"];
-        $id_departamento =  9;
-        $password =  $param["password"];
-        $nombre =  $param["nombre"];
-        $telefono =  $param["telefono"];
-        $id_usuario_referencia        =
-        get_info_usuario_valor_variable($param , "usuario_referencia");
-        $params = [
-            "email"                   =>   $email,
-            "idempresa"               =>   '1',
-            "id_departamento"         =>   $id_departamento,
-            "password"                =>   $password,
-            "nombre"                  =>   $nombre,
-            "tel_contacto"            =>   $telefono,
-            "id_usuario_referencia"   =>   $id_usuario_referencia
-        ];
-
-        $id_nuevo_usuario                   =     $this->insert("usuario", $params , 1);
-        $data_complete["id_usuario"]        =     $id_nuevo_usuario;
-        $data_complete["puesto"]            =     20;
-        $data_complete["usuario_permisos"]  =     $this->agrega_permisos_usuario($data_complete);
-        $data_complete["email"]             =  $email;
-        $data_complete["usuario_registrado"] = 1;
-
-      }
-      return $data_complete;
-
-    }
-    */
-
-
-    /*
-    function set_exist_pass($param)
-    {
-      $existe = count($this->validarPassword($antes, $id_usuario));
-
-      if($existe != 1){
-        return "La contraseña ingresada no corresponde a su contraseña actual";
-      }else{
-
-          $this->update("usuario", ["password" => $nuevo ], ["idusuario" => $id_usuario ]);
-      }
-    }
-
-    */
-    /*
-function prospecto_subscrito_POST(){
-
-    $param =  $this->post();
-    $response =  $this->usuario_model->registrar_prospecto($param);
-    $this->response($response);
-}
-*/
-    /*
-    function agrega_costo_envio($servicios){
-
-        $nueva_data =[];
-        $a =0;
-        foreach($servicios as $row){
-
-            $nueva_data[$a] = $row;
-            $flag_servicio  = $row["flag_servicio"];
-
-            if($flag_servicio == 0){
-                $prm["flag_envio_gratis"]       =  $row["flag_envio_gratis"];
-                $nueva_data[$a]["costo_envio"]  =
-                $this->principal->calcula_costo_envio($prm);
-            }
-
-            $a ++;
-        }
-        return $nueva_data;
-
-    }
-    */
-    /**/
-    /*
-    function usuario_cobranza_GET(){
-
-        $param = $this->get();
-        $usuario = $this->usuario_model->get_usuario_cobranza($param);
-        $this->response($usuario);
-    }
-    */
 }

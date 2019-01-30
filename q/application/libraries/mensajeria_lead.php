@@ -35,7 +35,7 @@
                       " . $info_correo . "
                     </html>";
 
-            $headers = get_headers_e($email);
+            //$headers = get_headers_e($email);
             mail($destinatario, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, $headers);
             return $cuerpo;
 
@@ -111,7 +111,7 @@
                       " . $info . "
                     </html>";
 
-            $headers = get_headers_e($email);
+            //$headers = get_headers_e($email);
             mail($destinatario, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, $headers);
             return $cuerpo;
 
@@ -128,7 +128,7 @@
                       " . $info . "
                     </html>";
 
-            $headers = get_headers_e($email_contacto);
+            //$headers = get_headers_e($email_contacto);
             mail($destinatario, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, $headers);
             return $cuerpo;
         }
@@ -144,7 +144,7 @@
                       " . $info . "
                     </html>";
 
-            $headers = get_headers_e($email_contacto);
+            //$headers = get_headers_e($email_contacto);
             mail($destinatario, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, $headers);
             return $cuerpo;
         }
@@ -157,7 +157,7 @@
                       " . $info_correo . "
                     </html>";
 
-            $headers = get_headers_e($email);
+            //$headers = get_headers_e($email);
             mail($destinatario, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, $headers);
             return $cuerpo;
         }

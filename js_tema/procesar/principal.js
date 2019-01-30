@@ -87,6 +87,7 @@ var respuesta_registro = function(data){
 			$(".place_registro_afiliado").empty();
 			recorrepage(".usuario_existente");
 			$(".informacion_extra").show();
+
 		}else{									
 
 			set_option("data_registro" , data);
