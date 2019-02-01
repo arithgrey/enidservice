@@ -1,17 +1,17 @@
 "use strict";
-var plan = 0;
-var num_ciclos =  0;
-var dominio =  0;
-var descripcion_servicio ="";
-var ciclo_facturacion = 0;
-var id_persona = 0;
-var id_proyecto_persona_forma_pago =0;
-var email = "";
-var nombre = "";
-var telefono =  ""; 
-var usuario_referencia =  0;
-var direccion ="";
-var option =[];
+let plan = 0;
+let num_ciclos =  0;
+let dominio =  0;
+let descripcion_servicio ="";
+let ciclo_facturacion = 0;
+let id_persona = 0;
+let id_proyecto_persona_forma_pago =0;
+let email = "";
+let nombre = "";
+let telefono =  ""; 
+let usuario_referencia =  0;
+let direccion ="";
+let option =[];
 $(document).ready(function(){
 
 	$(".base_compras").hide();
@@ -35,30 +35,30 @@ $(document).ready(function(){
 
 });
 
-var registro = function(e){
+let registro = function(e){
 
 
-	var text_password =  $.trim($(".password").val());	
+	let text_password =  $.trim($(".password").val());	
 	if (text_password.length>7 ) {
-		var flag =  valida_num_form(".telefono" , ".place_telefono" );
+		let flag =  valida_num_form(".telefono" , ".place_telefono" );
 		if (flag == 1 ){
-				var flag2 =  valida_text_form(".telefono" , ".place_telefono" , 6 , "Número telefónico" );
+				let flag2 =  valida_text_form(".telefono" , ".place_telefono" , 6 , "Número telefónico" );
 				if (flag2 ==  1 ) {
 
 					
 					$(".resumen_productos_solicitados").hide();					
 					recorrepage(".contenedor_formulario_compra");					
 					bloquea_form(".form-miembro-enid-service");
-					var url 	= 	"../q/index.php/api/cobranza/primer_orden/format/json/";				
-					var pw 		= 	$.trim($(".password").val());	
-					var pwpost 	= 	""+CryptoJS.SHA1(pw);
+					let url 	= 	"../q/index.php/api/cobranza/primer_orden/format/json/";				
+					let pw 		= 	$.trim($(".password").val());	
+					let pwpost 	= 	""+CryptoJS.SHA1(pw);
 
 					set_option("email", $(".email").val());					
 					set_option("nombre" ,$(".nombre").val());					
 					set_option("telefono",$(".telefono").val());		
 					set_option("usuario_referencia", $(".q2").val());																
 					set_option("talla"	, $(".talla").val());																				
-					var data_send =  {"password": pwpost , "email" : get_option("email") , "nombre" : get_option("nombre"), "telefono": get_option("telefono") , "plan" : get_option("plan") , "num_ciclos" : get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"), "ciclo_facturacion":get_option("ciclo_facturacion"), "usuario_referencia":get_option("usuario_referencia") , "talla" : get_option("talla") , "tipo_entrega": 2};				
+					let data_send =  {"password": pwpost , "email" : get_option("email") , "nombre" : get_option("nombre"), "telefono": get_option("telefono") , "plan" : get_option("plan") , "num_ciclos" : get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"), "ciclo_facturacion":get_option("ciclo_facturacion"), "usuario_referencia":get_option("usuario_referencia") , "talla" : get_option("talla") , "tipo_entrega": 2};				
 					$(".informacion_extra").hide();
 					request_enid("POST", data_send, url, respuesta_registro, 0 , before_registro_afiliado);	
 				}			
@@ -70,13 +70,13 @@ var registro = function(e){
 
 	e.preventDefault();
 }
-var before_registro_afiliado = function(){
+let before_registro_afiliado = function(){
 
 	bloquea_form(".form-miembro-enid-service");											
 	show_load_enid(".place_registro_afiliado" ,  "Validando datos " , 1 );
 }
 
-var respuesta_registro = function(data){
+let respuesta_registro = function(data){
 
 	if (data != -1) {								
 
@@ -102,21 +102,21 @@ var respuesta_registro = function(data){
 	
 };
 
-var procesar_pedido_usuario_activo = function(){
+let procesar_pedido_usuario_activo = function(){
 
-	var url 			= "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";		
+	let url 			= "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";		
 	set_option("talla"	, $(".talla").val());		
-	var data_send 		=  {"plan" : get_option("plan") , "num_ciclos": get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"),"ciclo_facturacion":get_option("ciclo_facturacion") ,  "talla" : get_option("talla"), "tipo_entrega" : 2 };
+	let data_send 		=  {"plan" : get_option("plan") , "num_ciclos": get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"),"ciclo_facturacion":get_option("ciclo_facturacion") ,  "talla" : get_option("talla"), "tipo_entrega" : 2 };
 	request_enid( "POST",  data_send, url, respuesta_proceso_venta_usuario_activo, "" , before_procesar_pedido_activo);
 
 }
 
-var before_procesar_pedido_activo = function(){
+let before_procesar_pedido_activo = function(){
 	$('.btn_procesar_pedido_cliente').prop('disabled', true);
 	show_load_enid(".place_proceso_compra" ,  "Validando datos " , 1 );
 }
 
-var  respuesta_proceso_venta_usuario_activo = function(data){
+let  respuesta_proceso_venta_usuario_activo = function(data){
 
 	set_option("data_registro" , data);
 	set_option("registro" , 0);
@@ -124,16 +124,16 @@ var  respuesta_proceso_venta_usuario_activo = function(data){
 	config_direccion();	
 }
 
-var quita_espacios_en_telefono = function(){
+let quita_espacios_en_telefono = function(){
 	
-	var valor 	= 	get_parameter(".telefono");
-	var nuevo 	=  	quitar_espacios_numericos(valor);
+	let valor 	= 	get_parameter(".telefono");
+	let nuevo 	=  	quitar_espacios_numericos(valor);
 	$(".telefono").val(nuevo);	
 }
-var config_direccion = function(){
+let config_direccion = function(){
 
-	var data_registro =  get_option("data_registro");		
-	var ficha 	      =	 "";
+	let data_registro =  get_option("data_registro");		
+	let ficha 	      =	 "";
 	if (get_option("usuario_nuevo") == 1){
 		
 		ficha =  data_registro.ficha;		
@@ -155,21 +155,21 @@ var config_direccion = function(){
 	$(".form_direccion_envio").submit(registra_nueva_direccion);							
 	
 }
-var set_link = function(){
+let set_link = function(){
 			
-	var plan 			  = get_parameter_enid($(this) , "plan");	
-	var extension_dominio = get_parameter_enid($(this) , "extension_dominio");	
-	var ciclo_facturacion = get_parameter_enid($(this) , "ciclo_facturacion");	
-	var is_servicio 	  = get_parameter_enid($(this) , "is_servicio");	
-	var q2 	  		      = get_parameter_enid($(this) , "q2");	
-	var num_ciclos 	      = get_parameter_enid($(this) , "num_ciclos");	
+	let plan 			  = get_parameter_enid($(this) , "plan");	
+	let extension_dominio = get_parameter_enid($(this) , "extension_dominio");	
+	let ciclo_facturacion = get_parameter_enid($(this) , "ciclo_facturacion");	
+	let is_servicio 	  = get_parameter_enid($(this) , "is_servicio");	
+	let q2 	  		      = get_parameter_enid($(this) , "q2");	
+	let num_ciclos 	      = get_parameter_enid($(this) , "num_ciclos");	
 	
-	var data_send         = $.param({"plan" : plan , "extension_dominio" : extension_dominio , "ciclo_facturacion" : ciclo_facturacion , is_servicio : is_servicio , "q2": q2 , "num_ciclos": num_ciclos});
-	var url				  = "../login/index.php/api/sess/servicio/format/json/"; 
+	let data_send         = $.param({"plan" : plan , "extension_dominio" : extension_dominio , "ciclo_facturacion" : ciclo_facturacion , is_servicio : is_servicio , "q2": q2 , "num_ciclos": num_ciclos});
+	let url				  = "../login/index.php/api/sess/servicio/format/json/"; 
 	request_enid( "POST",  data_send, url, response_set_link);
 	
 };
-var response_set_link = function(data){
+let response_set_link = function(data){
 	redirect("../login");
 };
 /*

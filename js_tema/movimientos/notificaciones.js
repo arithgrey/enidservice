@@ -10,8 +10,8 @@ function response_num_accesos(data){
 
 function num_accesos_afiliados(){
 
-	var url =  "../q/index.php/api/productividad/accesos_afiliados/format/json/";
-	var data_send =  {};
+	let url =  "../q/index.php/api/productividad/accesos_afiliados/format/json/";
+	let data_send =  {};
 	request_enid( "GET",  data_send, url, response_num_accesos);
 }
 

@@ -12,7 +12,7 @@ $(document).ready(function(){
 	$(".form_cantidad").submit(registra_saldo_cubierto);
 
 	$(".saldo_cubierto_pos_venta").keyup(function(e) {
-    	var code = (e.keyCode ? e.keyCode : e.which);
+    	let code = (e.keyCode ? e.keyCode : e.which);
 	    if (code==13) {	    	
 	    	modifica_status(get_valor_selected(".status_venta"));
 	    }
@@ -21,75 +21,75 @@ $(document).ready(function(){
 	$(".form_notas").submit(registrar_nota);
 
 });
-var editar_horario_entrega = function(e){
+let editar_horario_entrega = function(e){
 
-	var data_send 		=  $(".form_fecha_entrega").serialize();
-	var url 			=  "../q/index.php/api/recibo/fecha_entrega/format/json/";
+	let data_send 		=  $(".form_fecha_entrega").serialize();
+	let url 			=  "../q/index.php/api/recibo/fecha_entrega/format/json/";
 	bloquea_form(".form_fecha_entrega");
 	request_enid( "PUT",  data_send, url, response_horario_entrega , ".place_fecha_entrega");
 	e.preventDefault();
 }
-var crea_recordatorio = function(e){
+let crea_recordatorio = function(e){
 
-	var data_send 		=  $(".form_fecha_recordatorio").serialize();
-	var url 			=  "../q/index.php/api/recordatorio/index/format/json/";
+	let data_send 		=  $(".form_fecha_recordatorio").serialize();
+	let url 			=  "../q/index.php/api/recordatorio/index/format/json/";
 	bloquea_form(".form_fecha_recordatorio");
 	request_enid( "POST",  data_send, url, response_recordatorio , ".place_recordatorio");
 	e.preventDefault();
 }
-var response_recordatorio = function(data){
+let response_recordatorio = function(data){
 
 	if(data ==  true){
 		$(".place_recordatorio").empty();
-		var url = "../pedidos/?recibo="+get_parameter(".recibo");
+		let url = "../pedidos/?recibo="+get_parameter(".recibo");
 		redirect(url);
 	}else{
 		desbloqueda_form(".form_fecha_recordatorio");
 	}
 }
-var response_horario_entrega = function(data){
+let response_horario_entrega = function(data){
 
 	$(".place_fecha_entrega").empty();
-	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+	let url = "../pedidos/?recibo="+get_parameter(".recibo");
 	desbloqueda_form(".form_fecha_entrega");
 	redirect(url);
 
 }
-var busqueda_pedidos =  function(e){
+let busqueda_pedidos =  function(e){
 	
-	var fecha_inicio 	=  get_parameter("#datetimepicker4");  
-	var fecha_termino 	=  get_parameter("#datetimepicker5");  			
+	let fecha_inicio 	=  get_parameter("#datetimepicker4");  
+	let fecha_termino 	=  get_parameter("#datetimepicker5");  			
 	if (fecha_inicio.length > 8 && fecha_termino.length > 8 ) {
 		
-		var data_send 		=  $(".form_busqueda_pedidos").serialize();
-		var url 			=  "../q/index.php/api/recibo/pedidos/format/json/";  
+		let data_send 		=  $(".form_busqueda_pedidos").serialize();
+		let url 			=  "../q/index.php/api/recibo/pedidos/format/json/";  
 		request_enid( "GET",  data_send, url, response_pedidos, ".place_pedidos");
 
 	}
 	e.preventDefault();
 }
-var response_pedidos =  function(data){	
+let response_pedidos =  function(data){	
 
 	llenaelementoHTML(".place_pedidos" , data );
 	$('th').click(ordena_table_general);
 	$(".desglose_orden").click(function(){		
-		var recibo  =  	get_parameter_enid($(this) , "id");
+		let recibo  =  	get_parameter_enid($(this) , "id");
 		$(".numero_recibo").val(recibo);
 		$(".form_search").submit();
 	});
 	
 }
-var cambio_estado = function(){
+let cambio_estado = function(){
 	
-	var recibo  =  	get_parameter_enid($(this) , "id");	
+	let recibo  =  	get_parameter_enid($(this) , "id");	
 	$(".selector_estados_ventas").show();		
-	var  status_venta_actual =  get_parameter(".status_venta_registro");
+	let  status_venta_actual =  get_parameter(".status_venta_registro");
 	selecciona_valor_select(".selector_estados_ventas .status_venta" ,  status_venta_actual);
-	var status_venta_registro = parseInt(get_parameter(".status_venta_registro"));
+	let status_venta_registro = parseInt(get_parameter(".status_venta_registro"));
 	$(".status_venta_registro option[value='"+status_venta_registro+"']").attr("disabled", "disabled");
 
 }
-var modidica_estado = function(){
+let modidica_estado = function(){
 
 
 	if(get_parameter(".status_venta_registro") != 9){
@@ -97,7 +97,7 @@ var modidica_estado = function(){
 		guarda_nuevo_estado();
 		
 	}else{
-		var text = "ESTE PEDIDO YA FUÉ NOTIFICADO COMO ENTREGADO, ¿AÚN ASÍ DESEAS MODIFICAR SU ESTADO?";
+		let text = "ESTE PEDIDO YA FUÉ NOTIFICADO COMO ENTREGADO, ¿AÚN ASÍ DESEAS MODIFICAR SU ESTADO?";
 		$.confirm({
 		    title: text,
 		    content: '',
@@ -118,9 +118,9 @@ var modidica_estado = function(){
 		});
 	} 
 }
-var guarda_nuevo_estado = function(){
-	var status_venta 			= parseInt(get_valor_selected(".selector_estados_ventas .status_venta"));		
-	var status_venta_registro	= parseInt(get_parameter(".status_venta_registro"));		
+let guarda_nuevo_estado = function(){
+	let status_venta 			= parseInt(get_valor_selected(".selector_estados_ventas .status_venta"));		
+	let status_venta_registro	= parseInt(get_parameter(".status_venta_registro"));		
 	
 	if (status_venta != status_venta_registro ) {
 		$(".form_cantidad").hide();
@@ -154,10 +154,10 @@ var guarda_nuevo_estado = function(){
 		}
 	}       
 }
-var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
+let modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 
 	debugger;
-	var saldo_cubierto  =  get_parameter(".saldo_actual_cubierto");
+	let saldo_cubierto  =  get_parameter(".saldo_actual_cubierto");
 
 	if (es_proceso_compra_sin_filtro == 0) {
 
@@ -174,25 +174,25 @@ var modifica_status = function(status_venta , es_proceso_compra_sin_filtro = 0){
 		registra_data_nuevo_estado(status_venta);
 	}
 }
-var registra_saldo_cubierto = function(e){
+let registra_saldo_cubierto = function(e){
 
 	if (valida_num_form(".saldo_cubierto" , ".mensaje_saldo_cubierto" ) == 1) {
 
-		var data_send	=  $(".form_cantidad").serialize();
+		let data_send	=  $(".form_cantidad").serialize();
 		$(".mensaje_saldo_cubierto").empty();
-		var  url 		= "../q/index.php/api/recibo/saldo_cubierto/format/json/";
+		let  url 		= "../q/index.php/api/recibo/saldo_cubierto/format/json/";
 		bloquea_form(".form_cantidad");
 		request_enid( "PUT",  data_send, url, response_saldo_cubierto)	
 
 	}
 	e.preventDefault();
 }
-var response_saldo_cubierto = function(data){
+let response_saldo_cubierto = function(data){
 
 	debugger;
 	if (data ==  true) {
 
-		var status_venta 	= 	get_valor_selected(".status_venta");
+		let status_venta 	= 	get_valor_selected(".status_venta");
 		//alert(status_venta);
 		if(status_venta == 6 || status_venta == 9 ){
 			next_status();
@@ -208,25 +208,25 @@ var response_saldo_cubierto = function(data){
 		llenaelementoHTML(".mensaje_saldo_cubierto", data);
 	}	
 }
-var next_status = function(){
+let next_status = function(){
 
-	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+	let url = "../pedidos/?recibo="+get_parameter(".recibo");
 	redirect(url);
 }
-var descontar_articulos_stock =  function(){
+let descontar_articulos_stock =  function(){
 
-	var id_servicio = 	 	get_parameter(".id_servicio");
-	var stock 		= 	 	get_parameter(".articulos");
-	var data_send 	=		$.param({"id_servicio" : id_servicio,  "stock" : stock , "compra" : 1});
-	var  url 		= 		"../q/index.php/api/servicio/stock/format/json/";
+	let id_servicio = 	 	get_parameter(".id_servicio");
+	let stock 		= 	 	get_parameter(".articulos");
+	let data_send 	=		$.param({"id_servicio" : id_servicio,  "stock" : stock , "compra" : 1});
+	let  url 		= 		"../q/index.php/api/servicio/stock/format/json/";
 	request_enid( "PUT",  data_send, url, response_articulos_stock);
 
 }
-var response_articulos_stock = function(data){
-	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+let response_articulos_stock = function(data){
+	let url = "../pedidos/?recibo="+get_parameter(".recibo");
 	redirect(url);
 }
-var response_status_venta = function(data){
+let response_status_venta = function(data){
 
 
 	desbloqueda_form(".selector_estados_ventas");
@@ -240,9 +240,9 @@ var response_status_venta = function(data){
 	}
 
 }
-var pre_cancelacion = function(){
+let pre_cancelacion = function(){
 		
-	var tipo 		=	0;	
+	let tipo 		=	0;	
 	switch(parseInt( get_parameter(".tipo_entrega_def")) ) {
 		
 		/*opciones en punto de encuentro*/
@@ -269,33 +269,33 @@ var pre_cancelacion = function(){
 	        
 	}
 
-	var data_send 	= {"v":1 , tipo: tipo , "text":"MOTIVO DE CANCELACIÓN" };
-	var url 		= "../q/index.php/api/tipificacion/index/format/json/";	
+	let data_send 	= {"v":1 , tipo: tipo , "text":"MOTIVO DE CANCELACIÓN" };
+	let url 		= "../q/index.php/api/tipificacion/index/format/json/";	
 	request_enid( "GET",  data_send, url, response_pre_cancelacion)		
 
 }
-var response_pre_cancelacion = function(data){
+let response_pre_cancelacion = function(data){
 
 	llenaelementoHTML(".place_tipificaciones" , data);
 	$(".tipificacion").change(registra_motivo_cancelacion);
 }
-var registra_motivo_cancelacion  = function(){
+let registra_motivo_cancelacion  = function(){
 	
-	var status_venta 	= 	get_valor_selected(".status_venta");
-	var tipificacion 	=  	get_valor_selected(".tipificacion");  
-	var data_send		=  	$.param({"recibo" : get_parameter(".recibo") , "status":status_venta , "tipificacion": tipificacion , "cancelacion":1});		
-	var url 			= 	"../q/index.php/api/recibo/status/format/json/";		
+	let status_venta 	= 	get_valor_selected(".status_venta");
+	let tipificacion 	=  	get_valor_selected(".tipificacion");  
+	let data_send		=  	$.param({"recibo" : get_parameter(".recibo") , "status":status_venta , "tipificacion": tipificacion , "cancelacion":1});		
+	let url 			= 	"../q/index.php/api/recibo/status/format/json/";		
 	bloquea_form(".selector_estados_ventas");
 	request_enid( "PUT",  data_send, url, response_status_venta);	
 }
-var cambio_tipo_entrega = function(){
+let cambio_tipo_entrega = function(){
 
-	var tipo_entrega 			=  get_valor_selected(".form_edicion_tipo_entrega .tipo_entrega");
-	var tipo_entrega_actual 	=  get_parameter(".tipo_entrega_def");
+	let tipo_entrega 			=  get_valor_selected(".form_edicion_tipo_entrega .tipo_entrega");
+	let tipo_entrega_actual 	=  get_parameter(".tipo_entrega_def");
 	
 	if (tipo_entrega > 0 && tipo_entrega != tipo_entrega_actual) {
-		var text 	= "¿REALMENTE DESEAS MODIFICAR EL TIPO DE ENTREGA?";
-		var mensaje = "ACTUAL: " + get_parameter(".text_tipo_entrega");
+		let text 	= "¿REALMENTE DESEAS MODIFICAR EL TIPO DE ENTREGA?";
+		let mensaje = "ACTUAL: " + get_parameter(".text_tipo_entrega");
 		$.confirm({
 			    title: text,
 			    content: mensaje,
@@ -318,7 +318,7 @@ var cambio_tipo_entrega = function(){
 	}
 
 }
-var set_tipo_entrega = function(tipo_entrega , tipo_entrega_actual){
+let set_tipo_entrega = function(tipo_entrega , tipo_entrega_actual){
 	
 	if (tipo_entrega != tipo_entrega_actual) {
 		switch(tipo_entrega) {
@@ -349,90 +349,90 @@ var set_tipo_entrega = function(tipo_entrega , tipo_entrega_actual){
 	}
 
 }
-var registra_tipo_entrega = function(tipo_entrega, recibo){
+let registra_tipo_entrega = function(tipo_entrega, recibo){
 
-	var text_tipo_entrega=  get_parameter(".text_tipo_entrega"); 
-	var data_send = {"tipo_entrega" : tipo_entrega ,  recibo: recibo , text_tipo_entrega:text_tipo_entrega};
-	var url 	  = "../q/index.php/api/recibo/tipo_entrega/format/json/";  
+	let text_tipo_entrega=  get_parameter(".text_tipo_entrega"); 
+	let data_send = {"tipo_entrega" : tipo_entrega ,  recibo: recibo , text_tipo_entrega:text_tipo_entrega};
+	let url 	  = "../q/index.php/api/recibo/tipo_entrega/format/json/";  
 	request_enid( "PUT",  data_send, url, response_tipo_entrega);
 }
-var response_tipo_entrega = function(data){
-	var url = "../pedidos/?recibo="+get_parameter(".recibo");
+let response_tipo_entrega = function(data){
+	let url = "../pedidos/?recibo="+get_parameter(".recibo");
 	redirect(url);
 }
-var pre_tipo_entrega = function(){
+let pre_tipo_entrega = function(){
 	$(".form_edicion_tipo_entrega").show();	
-	var tipo_entrega_actual 	=  get_parameter(".tipo_entrega_def");
+	let tipo_entrega_actual 	=  get_parameter(".tipo_entrega_def");
 	selecciona_valor_select(".form_edicion_tipo_entrega .tipo_entrega" ,  tipo_entrega_actual);
 }
-var verifica_pago_previo = function(){
-	var saldo_cubierto =  get_parameter(".saldo_actual_cubierto");	
+let verifica_pago_previo = function(){
+	let saldo_cubierto =  get_parameter(".saldo_actual_cubierto");	
 	if (saldo_cubierto > 0 ) {
-		var text 		     =  "ESTA ORDEN  CUENTA CON UN SALDO REGISTRADO DE "+saldo_cubierto+"MXN ¿AUN ASÍ DESEAS NOTIFICAR SU FALTA DE PAGO?";		
-		var text_complemento =  "EL SALDO DE LA ORDEN PASARÁ A 0 MXN AL REALIZAR ESTA ACCIÓN";
-		var text_continuar	 = 	"DEJAR EN 0MXN";
+		let text 		     =  "ESTA ORDEN  CUENTA CON UN SALDO REGISTRADO DE "+saldo_cubierto+"MXN ¿AUN ASÍ DESEAS NOTIFICAR SU FALTA DE PAGO?";		
+		let text_complemento =  "EL SALDO DE LA ORDEN PASARÁ A 0 MXN AL REALIZAR ESTA ACCIÓN";
+		let text_continuar	 = 	"DEJAR EN 0MXN";
 		show_confirm(text ,  text_complemento , text_continuar, procesa_cambio_estado, oculta_opciones_estados );
 	}else{
 		modifica_status(6 , 1);
 	}
 }
-var oculta_opciones_estados =  function(){
+let oculta_opciones_estados =  function(){
 	display_elements([".selector_estados_ventas" , 0]);
 }
-var procesa_cambio_estado = function(){
+let procesa_cambio_estado = function(){
 	set_option("es_proceso_compra" , 1);
 	modifica_status(6 , 1);	
 }
-var registra_data_nuevo_estado = function(status_venta){
+let registra_data_nuevo_estado = function(status_venta){
 
 	bloquea_form(".selector_estados_ventas");
-	var data_send	=  $.param({"recibo" : get_parameter(".recibo") , "status":status_venta , "saldo_cubierto":get_parameter(".saldo_cubierto_pos_venta") , "es_proceso_compra" : get_option("es_proceso_compra")});		
+	let data_send	=  $.param({"recibo" : get_parameter(".recibo") , "status":status_venta , "saldo_cubierto":get_parameter(".saldo_cubierto_pos_venta") , "es_proceso_compra" : get_option("es_proceso_compra")});		
 	set_option("es_proceso_compra" , 0);
-	var  url 		= "../q/index.php/api/recibo/status/format/json/";		
+	let  url 		= "../q/index.php/api/recibo/status/format/json/";		
 	request_enid( "PUT",  data_send, url, response_status_venta)	
 }
-var confirma_cambio_horario = function(id_recibo , status  , saldo_cubierto_envio , monto_a_pagar , se_cancela , fecha_entrega){
+let confirma_cambio_horario = function(id_recibo , status  , saldo_cubierto_envio , monto_a_pagar , se_cancela , fecha_entrega){
 
 	debugger;
-	var text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
-	var text_confirmacion = "";
+	let text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
+	let text_confirmacion = "";
 	switch(parseInt(status)) {
 		case 9:
-			var text = "LA ORDEN YA FUÉ ENTREGADA!";
-			var text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
+			let text = "LA ORDEN YA FUÉ ENTREGADA!";
+			let text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
 
 			break;
 		case 10:
-			var text = "LA ORDEN FUÉ CANCELADA!";
-			var text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
+			let text = "LA ORDEN FUÉ CANCELADA!";
+			let text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
 			break;
 
 		default:
-			var text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
-			var text_confirmacion = "";
+			let text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
+			let text_confirmacion = "";
 			break;
 	}
 
 	show_confirm(text ,  text_confirmacion , "SI" , function(){
-		var url =  "../pedidos/?recibo="+id_recibo+"&fecha_entrega=1";
+		let url =  "../pedidos/?recibo="+id_recibo+"&fecha_entrega=1";
 		redirect(url);
 	});
 
 
 }
-var agregar_nota = function(){
+let agregar_nota = function(){
 	showonehideone(".form_notas", ".agregar_comentario");
 	recorrepage(".form_nota");
 }
-var registrar_nota = function(e){
+let registrar_nota = function(e){
 
 	debugger;
-	var url 		=  "../q/index.php/api/recibo_comentario/index/format/json/";
-	var comentario 	=  	get_parameter(".comentarios");
-	var texto  		= 	comentario.trim().length;
+	let url 		=  "../q/index.php/api/recibo_comentario/index/format/json/";
+	let comentario 	=  	get_parameter(".comentarios");
+	let texto  		= 	comentario.trim().length;
 	if( texto > 10 ){
 
-		var data_send 	=  $(".form_notas").serialize();
+		let data_send 	=  $(".form_notas").serialize();
 		request_enid( "POST",  data_send, url, response_registro_nota , ".place_nota");
 
 	}else{
@@ -443,16 +443,16 @@ var registrar_nota = function(e){
 
 	e.preventDefault();
 }
-var response_registro_nota = function(data){
+let response_registro_nota = function(data){
 	$(".place_nota").empty();
 	redirect("");
 	debugger;
 }
-var modifica_status_recordatorio = function(id_recordatorio , status){
+let modifica_status_recordatorio = function(id_recordatorio , status){
 	if(id_recordatorio > 0){
 
-		var url 		=  	"../q/index.php/api/recordatorio/status/format/json/";
-		var data_send 	= 	{id_recordatorio:id_recordatorio  , status:status};
+		let url 		=  	"../q/index.php/api/recordatorio/status/format/json/";
+		let data_send 	= 	{id_recordatorio:id_recordatorio  , status:status};
 		request_enid( "PUT",  data_send, url);
 	}
 }

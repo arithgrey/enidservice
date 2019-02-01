@@ -1,20 +1,20 @@
 "use strict";
-var agenda_correo = function (e) {
+let agenda_correo = function (e) {
 
 
     if (get_flag_estoy_en_agendado() == 1) {
         marca_llama_hecha_comentario();
     }
-    var flag_fecha_agenda = valida_text_form(".contenedor_persona_registrada_correo .input_f_agenda", ".contenedor_persona_registrada_correo .place_place_validador_fecha_agenda", 5, "Formato de fecha");
-    var flag_hora_agenda = valida_text_form(".contenedor_persona_registrada_correo .input_h_agenda", ".contenedor_persona_registrada_correo .place_place_validador_hora_agenda", 3, "Formato de hora");
+    let flag_fecha_agenda = valida_text_form(".contenedor_persona_registrada_correo .input_f_agenda", ".contenedor_persona_registrada_correo .place_place_validador_fecha_agenda", 5, "Formato de fecha");
+    let flag_hora_agenda = valida_text_form(".contenedor_persona_registrada_correo .input_h_agenda", ".contenedor_persona_registrada_correo .place_place_validador_hora_agenda", 3, "Formato de hora");
 
     if (flag_fecha_agenda == 1) {
 
         if (flag_hora_agenda == 1) {
 
 
-            var url = "../persona/index.php/api/persona/agendar_email/format/json/";
-            var data_send = $(".form_agendar_correo_electronico").serialize() + "&" + $.param({id_persona: get_persona()});
+            let url = "../persona/index.php/api/persona/agendar_email/format/json/";
+            let data_send = $(".form_agendar_correo_electronico").serialize() + "&" + $.param({id_persona: get_persona()});
 
             $.ajax({
                 url: url,
@@ -46,7 +46,7 @@ var agenda_correo = function (e) {
 
 }
 
-var agenda_correo_usuario_registrado = function (e) {
+let agenda_correo_usuario_registrado = function (e) {
 
     id_persona = get_parameter_enid($(this), "id");
     set_option("persona", id_persona);
@@ -55,10 +55,10 @@ var agenda_correo_usuario_registrado = function (e) {
 
 
 /*
-var cargar_info_agendados_email = function(){
+let cargar_info_agendados_email = function(){
 
-	var     url =  "../q/index.php/api/ventas_tel/agendadosemail/format/json/";
-	var  data_send =  $(".form_busqueda_agendados").serialize();
+	let     url =  "../q/index.php/api/ventas_tel/agendadosemail/format/json/";
+	let  data_send =  $(".form_busqueda_agendados").serialize();
 
 	$.ajax({
 			url : url ,

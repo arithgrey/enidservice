@@ -1,7 +1,7 @@
 "use strict";
-var get_lugar_por_stus_compra= function(){
+let get_lugar_por_stus_compra= function(){
 
-	var nuevo_place ="";	
+	let nuevo_place ="";	
 	if(get_option("modalidad_ventas") == 0){		
 
 		switch(parseFloat(get_option("estado_compra"))){
@@ -23,21 +23,21 @@ var get_lugar_por_stus_compra= function(){
 	}
 	return nuevo_place;
 }
-var carga_compras_usuario = function(){
+let carga_compras_usuario = function(){
 	
 	recorrepage();
-	var modalidad 	=  get_option("modalidad_ventas");  	
-	var url 		=  "../q/index.php/api/recibo/proyecto_persona_info/format/json/";		
-	var data_send 	=  { "status": get_option("estado_compra") , "modalidad" : modalidad };				
+	let modalidad 	=  get_option("modalidad_ventas");  	
+	let url 		=  "../q/index.php/api/recibo/proyecto_persona_info/format/json/";		
+	let data_send 	=  { "status": get_option("estado_compra") , "modalidad" : modalidad };				
 	request_enid( "GET",  data_send, url, response_carga_compras_usuario);
 }
-var response_carga_compras_usuario = function(data){
+let response_carga_compras_usuario = function(data){
 	
-	var place 	= get_lugar_por_stus_compra(); 	
+	let place 	= get_lugar_por_stus_compra(); 	
 	llenaelementoHTML(place  , data);								
 	$(".solicitar_desarrollo").click(function(e){
 		
-		var id_proyecto 	=  get_parameter_enid($(this) , "id");	
+		let id_proyecto 	=  get_parameter_enid($(this) , "id");	
 		set_option("id_proyecto" , id_proyecto);
 		carga_tikets_usuario_servicio();
 	});				
@@ -47,24 +47,24 @@ var response_carga_compras_usuario = function(data){
 	$(".ver_mas_compras_o_ventas").click(carga_compras_o_ventas_concluidas);
 	carga_num_preguntas();
 }
-var carga_informacion_envio = function(e){
+let carga_informacion_envio = function(e){
 	
-	var id_recibo =  get_parameter_enid($(this) , "id");	
+	let id_recibo =  get_parameter_enid($(this) , "id");	
 	set_option("recibo" , id_recibo);	
 	carga_informacion_envio_complete();
 }
-var carga_compras_o_ventas_concluidas = function(){
+let carga_compras_o_ventas_concluidas = function(){
 
-	var modalidad 	=  	get_option("modalidad_ventas"); 
-	var page 		= 	get_option("page");	
-	var url 		=  	"../q/index.php/api/recibo/compras_efectivas/format/json/";		
-	var data_send 	=  	{"modalidad" : modalidad, "page" : page };				
+	let modalidad 	=  	get_option("modalidad_ventas"); 
+	let page 		= 	get_option("page");	
+	let url 		=  	"../q/index.php/api/recibo/compras_efectivas/format/json/";		
+	let data_send 	=  	{"modalidad" : modalidad, "page" : page };				
 	request_enid( "GET",  data_send, url, reponse_carga_compras_o_ventas_concluidas);
 }
-var reponse_carga_compras_o_ventas_concluidas = function(data){
+let reponse_carga_compras_o_ventas_concluidas = function(data){
 
 
-	var place 		= get_lugar_por_stus_compra();  		
+	let place 		= get_lugar_por_stus_compra();  		
 	llenaelementoHTML(place  , data);								
 	$(".pagination > li > a, .pagination > li > span").css("color" , "white");	
 	$(".pagination > li > a, .pagination > li > span").click(function(e){				

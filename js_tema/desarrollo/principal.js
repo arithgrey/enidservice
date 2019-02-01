@@ -1,17 +1,17 @@
 "use strict";
 $(document).ready(function(){
 
-	var num_departamento = get_parameter(".num_departamento"); 
+	let num_departamento = get_parameter(".num_departamento"); 
 	set_option("modulo", 2);
 
 	$("footer").ready(function(){
-		var  id_depto = get_parameter(".num_departamento");		
+		let  id_depto = get_parameter(".num_departamento");		
 		set_option("id_depto", id_depto);
 	});
 
 	$(".depto").change(function(){
 
-		var id_depto 	= get_parameter(".depto");						
+		let id_depto 	= get_parameter(".depto");						
 		set_option("id_depto", id_depto);
 		carga_tikets_usuario();
 	});
@@ -47,42 +47,42 @@ $(document).ready(function(){
 
 });
 
-var cargar_productividad = function(e){
+let cargar_productividad = function(e){
 		
-	var url =  "../q/index.php/api/productividad/usuario/format/json/";
+	let url =  "../q/index.php/api/productividad/usuario/format/json/";
 	request_enid( "GET",  data_send, url, 1, ".place_productividad",  0 ,".place_productividad");
 	e.preventDefault();
 }
-var recorre_web_version_movil = function(){
+let recorre_web_version_movil = function(){
 	recorrepage(".tab-content");
 }
-var  carga_metricas_desarrollo = function(e){
+let  carga_metricas_desarrollo = function(e){
 
 
 	if (get_parameter(".form_busqueda_desarrollo #datetimepicker4").length > 5 &&  get_parameter(".form_busqueda_desarrollo #datetimepicker5").length > 5){
 
-		var url 		=  "../q/index.php/api/desarrollo/global/format/json/";	
-		var data_send 	=  $(".form_busqueda_desarrollo").serialize();
+		let url 		=  "../q/index.php/api/desarrollo/global/format/json/";	
+		let data_send 	=  $(".form_busqueda_desarrollo").serialize();
 		bloquea_form(".form_busqueda_desarrollo");
 		request_enid( "GET",  data_send, url, response_carga_metricas, ".place_metricas_desarrollo");
 
 	}else{
 		
-		var inputs = [".form_busqueda_desarrollo #datetimepicker4" , ".form_busqueda_desarrollo #datetimepicker5"];
+		let inputs = [".form_busqueda_desarrollo #datetimepicker4" , ".form_busqueda_desarrollo #datetimepicker5"];
 		focus_input(inputs);		
 	}
 	e.preventDefault();
 }
-var response_carga_metricas = function(data){
+let response_carga_metricas = function(data){
 
 	llenaelementoHTML(".place_metricas_desarrollo" , data);
 	$('th').click(ordena_table_general);		
 }
-var carga_comparativas = function(){
+let carga_comparativas = function(){
 
 	debugger;
-	var url 		=  "../q/index.php/api/desarrollo/comparativas/format/json/";
-	var data_send 	=  { tiempo: 1 };
+	let url 		=  "../q/index.php/api/desarrollo/comparativas/format/json/";
+	let data_send 	=  { tiempo: 1 };
 
 	request_enid( "GET" ,  data_send, url, function(){
 		llenaelementoHTML(".place_metricas_comparativa" , data);
@@ -90,55 +90,55 @@ var carga_comparativas = function(){
 		
 	}, ".place_metricas_comparativa");
 }
-var carga_solicitudes_cliente = function(e){
+let carga_solicitudes_cliente = function(e){
 
 	
 	if (get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker4").length > 5 &&  get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker5").length > 5){
 		
-		var url =  "../q/index.php/api/desarrollo/global_calidad/format/json/";	
-		var data_send =  $(".form_busqueda_desarrollo_solicitudes").serialize();
+		let url =  "../q/index.php/api/desarrollo/global_calidad/format/json/";	
+		let data_send =  $(".form_busqueda_desarrollo_solicitudes").serialize();
 		request_enid( "GET",  data_send, url, response_carga_solicitudes,".place_metricas_servicio");
 	}else{
 		
-		var  inputs = [".form_busqueda_desarrollo_solicitudes #datetimepicker4", ".form_busqueda_desarrollo_solicitudes #datetimepicker5"];
+		let  inputs = [".form_busqueda_desarrollo_solicitudes #datetimepicker4", ".form_busqueda_desarrollo_solicitudes #datetimepicker5"];
 		focus_input(inputs);
 		
 	}
 	e.preventDefault();
 }
-var response_carga_solicitudes= function(data){
+let response_carga_solicitudes= function(data){
 	llenaelementoHTML(".place_metricas_servicio" , data);
 	$('th').click(ordena_table_general);		
 }
 
-var carga_num_pendientes = function(){
+let carga_num_pendientes = function(){
 
-	var url =  "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";		
-	var data_send =  {"id_usuario" : get_option("id_usuario") , "id_departamento" :  get_option("id_depto") };				
+	let url =  "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";		
+	let data_send =  {"id_usuario" : get_option("id_usuario") , "id_departamento" :  get_option("id_depto") };				
 	request_enid( "GET",  data_send, url, 1, ".place_tareas_pendientes" ,".place_tareas_pendientes" );
 }
 
-var form_nuevo_ticket = function(){
+let form_nuevo_ticket = function(){
 		
-	var url =  "../q/index.php/api/tickets/form/format/json/";	
-	var data_send =  {};					
+	let url =  "../q/index.php/api/tickets/form/format/json/";	
+	let data_send =  {};					
 	request_enid( "GET",  data_send, url, response_form_nuevo_ticket,".place_form_tickets" );
 }
 
-var response_form_nuevo_ticket = function(data){
+let response_form_nuevo_ticket = function(data){
 	llenaelementoHTML(".place_form_tickets" , data);							
 	$(".form_ticket").submit(registra_ticket);				
 }
 
-var registra_ticket = function(e){
+let registra_ticket = function(e){
 
-	var url =  "../q/index.php/api/tickets/index/format/json/";
-	var data_send = $(".form_ticket").serialize();				
+	let url =  "../q/index.php/api/tickets/index/format/json/";
+	let data_send = $(".form_ticket").serialize();				
 	request_enid( "POST",  data_send, url, response_registro_ticket, ".place_registro_ticket" );
 	e.preventDefault();
 	
 }
-var response_registro_ticket = function(data){
+let response_registro_ticket = function(data){
 	llenaelementoHTML(".place_registro_ticket" , "A la brevedad se realizará su solicitud!");							
 	set_option("id_ticket", data); 
 	$("#ver_avances").tab("show");
@@ -146,21 +146,21 @@ var response_registro_ticket = function(data){
 	carga_info_detalle_ticket();
 }
 
-var set_estatus_ticket =  function(e){
+let set_estatus_ticket =  function(e){
 	
-	var nuevo_estado 	= 	get_parameter_enid($(this) , "id");
-	var url 			=  	"../q/index.php/api/tickets/status/format/json/";	
-	var data_send 		=  	{"id_ticket" : get_option("id_ticket") , "status" : nuevo_estado };				
+	let nuevo_estado 	= 	get_parameter_enid($(this) , "id");
+	let url 			=  	"../q/index.php/api/tickets/status/format/json/";	
+	let data_send 		=  	{"id_ticket" : get_option("id_ticket") , "status" : nuevo_estado };				
 	request_enid( "PUT",  data_send, url, function(){}, ".place_proyectos");
 }
-var carga_info_detalle_ticket = function(){
+let carga_info_detalle_ticket = function(){
 
-	var url =  "../q/index.php/api/tickets/detalle/format/json/";	
-	var data_send =  {"id_ticket" : get_option("id_ticket")};				
+	let url =  "../q/index.php/api/tickets/detalle/format/json/";	
+	let data_send =  {"id_ticket" : get_option("id_ticket")};				
 	request_enid( "GET",  data_send, url, response_carga_ticket);
 }
 
-var response_carga_ticket = function(data){
+let response_carga_ticket = function(data){
 
 	
 	llenaelementoHTML(".place_proyectos" , data);	
@@ -184,13 +184,13 @@ var response_carga_ticket = function(data){
 	}
 
 }
-var carga_formulario_respuesta_ticket = function(e){
+let carga_formulario_respuesta_ticket = function(e){
 	
-	var tarea 		= get_parameter_enid($(this) , "id");
+	let tarea 		= get_parameter_enid($(this) , "id");
 	set_option("tarea", tarea);	
-	var url 		=  	"../q/index.php/api/tickets/formulario_respuesta/format/json/";	
-	var data_send 	=  	{"tarea" : tarea};				
-	var seccion 	=	".seccion_respuesta_"+get_option("tarea");
+	let url 		=  	"../q/index.php/api/tickets/formulario_respuesta/format/json/";	
+	let data_send 	=  	{"tarea" : tarea};				
+	let seccion 	=	".seccion_respuesta_"+get_option("tarea");
 
 	request_enid( "GET",  data_send, url, function(data){
 		llenaelementoHTML(seccion , data);
@@ -199,35 +199,35 @@ var carga_formulario_respuesta_ticket = function(e){
 	}, seccion);
 }
 
-var carga_comentarios_tareas = function(e){
+let carga_comentarios_tareas = function(e){
 
 	
 	showonehideone( ".ocultar_comentarios" , ".comentarios_tarea");
-	var tarea 		= 	get_parameter_enid($(this) , "id");
+	let tarea 		= 	get_parameter_enid($(this) , "id");
 	set_option("tarea", tarea);	
-	var url 		=  	"../q/index.php/api/respuesta/respuestas/format/json/";	
-	var data_send 	=  	{"tarea" : tarea};				
-	var seccion 	=	".seccion_respuesta_"+get_option("tarea");
+	let url 		=  	"../q/index.php/api/respuesta/respuestas/format/json/";	
+	let data_send 	=  	{"tarea" : tarea};				
+	let seccion 	=	".seccion_respuesta_"+get_option("tarea");
 	set_option("seccion" , seccion);
 	request_enid( "GET",  data_send, url, response_carga_comentario_tareas);
 	
 
 }
 
-var carga_comentarios_terea_simple = function(){
+let carga_comentarios_terea_simple = function(){
 
-	var tarea 		=   get_option("tarea");	
-	var url 		=  	"../q/index.php/api/respuesta/respuestas/format/json/";	
-	var data_send 	=  	{"tarea" : tarea};				
-	var seccion 	=	".seccion_respuesta_"+tarea;
+	let tarea 		=   get_option("tarea");	
+	let url 		=  	"../q/index.php/api/respuesta/respuestas/format/json/";	
+	let data_send 	=  	{"tarea" : tarea};				
+	let seccion 	=	".seccion_respuesta_"+tarea;
 	set_option("seccion" , seccion);
 	request_enid( "GET",  data_send, url, response_carga_comentario_tareas);
 	
 }
 
-var  response_carga_comentario_tareas = function(data){
+let  response_carga_comentario_tareas = function(data){
 	
-	var seccion = get_option("seccion");
+	let seccion = get_option("seccion");
 	llenaelementoHTML(seccion , data);
 	$(".ocultar_comentarios").click(function(e){
 		set_option("tarea", get_parameter_enid($(this) , "id"));		
@@ -236,45 +236,45 @@ var  response_carga_comentario_tareas = function(data){
 	
 }
 
-var registra_tarea = function(e){
+let registra_tarea = function(e){
 
-	var requerimiento 	=  $(".form_agregar_tarea .note-editable").html();		
-	var url 			=  "../q/index.php/api/tarea/index/format/json/";	
-	var data_send 		=  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_option("id_ticket") , "tarea": requerimiento });				
+	let requerimiento 	=  $(".form_agregar_tarea .note-editable").html();		
+	let url 			=  "../q/index.php/api/tarea/index/format/json/";	
+	let data_send 		=  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_option("id_ticket") , "tarea": requerimiento });				
 	request_enid( "POST",  data_send, url, carga_info_detalle_ticket, ".place_proyectos");
 	e.preventDefault();
 
 }
-var muestra_tareas_por_estatus = function(){
+let muestra_tareas_por_estatus = function(){
 
 	showonehideone( ".mostrar_todas_las_tareas" , ".tarea_pendiente"  );
 	$(".mostrar_tareas_pendientes").hide();
 	set_option("flag_mostrar_solo_pendientes", 1);
 }
 
-var  muestra_todas_las_tareas = function(){
+let  muestra_todas_las_tareas = function(){
 
 	showonehideone( ".tarea_pendiente"  , ".mostrar_todas_las_tareas");	
 	$(".mostrar_tareas_pendientes").show();
 	set_option("flag_mostrar_solo_pendientes", 0);	
 }
-var carga_tikets_usuario = function(){
+let carga_tikets_usuario = function(){
 	
 	
 	recorre_web_version_movil();
-	var status_ticket = 0; 	
+	let status_ticket = 0; 	
 	if (document.querySelector(".estatus_tickets")) {		
 		status_ticket =  get_parameter(".estatus_tickets");
 	}
-	var keyword 	= 	get_parameter(".q"); 	
+	let keyword 	= 	get_parameter(".q"); 	
 	set_option("keyword" , keyword);	
-	var url 		=  	"../q/index.php/api/tickets/ticket_desarrollo/format/json/";			
-	var data_send 	= 	{ "status" : status_ticket , "id_departamento" :  get_option("id_depto") , "keyword" : get_option("keyword"), "modulo": get_option("modulo") };
+	let url 		=  	"../q/index.php/api/tickets/ticket_desarrollo/format/json/";			
+	let data_send 	= 	{ "status" : status_ticket , "id_departamento" :  get_option("id_depto") , "keyword" : get_option("keyword"), "modulo": get_option("modulo") };
 	request_enid( "GET",  data_send, url, response_carga_tickets, ".place_proyectos" );
 
 	
 }
-var response_carga_tickets = function(data){
+let response_carga_tickets = function(data){
 	
 	llenaelementoHTML(".place_proyectos" , data);
 	$(".ver_detalle_ticket").click(function(e){
@@ -292,16 +292,16 @@ var response_carga_tickets = function(data){
 	});	
 	carga_num_pendientes();
 }
-var  actualiza_tareas = function(e){
+let  actualiza_tareas = function(e){
 
 	set_option("id_tarea" , get_parameter_enid($(this) , "id"));
-	var nuevo_valor 	= this.value;
-	var url 			=  "../q/index.php/api/tarea/estado/format/json/";	
-	var data_send 		= {"id_tarea" : get_option("id_tarea") ,  "nuevo_valor" : nuevo_valor , "id_ticket" : get_option("id_ticket") };				
+	let nuevo_valor 	= this.value;
+	let url 			=  "../q/index.php/api/tarea/estado/format/json/";	
+	let data_send 		= {"id_tarea" : get_option("id_tarea") ,  "nuevo_valor" : nuevo_valor , "id_ticket" : get_option("id_ticket") };				
 	request_enid( "PUT",  data_send, url, response_actualiza_tareas, ".place_proyectos");	
 }
 
-var response_actualiza_tareas = function(data){
+let response_actualiza_tareas = function(data){
 
 	if (data ==  "cerrado") {
 		carga_tikets_usuario();
@@ -309,10 +309,10 @@ var response_actualiza_tareas = function(data){
 		carga_info_detalle_ticket();					
 	}	
 }
-var show_section_dinamic_button = function(seccion) {
-    var x = ($(seccion).is(":visible")) ? $(seccion).hide() : $(seccion).show();
+let show_section_dinamic_button = function(seccion) {
+    let x = ($(seccion).is(":visible")) ? $(seccion).hide() : $(seccion).show();
 }
-var agregar_tarea = function(){
+let agregar_tarea = function(){
 
 	show_section_dinamic_button(".seccion_nueva_tarea");
 	show_section_dinamic_button(".btn_agregar_tarea");
@@ -326,20 +326,20 @@ var agregar_tarea = function(){
 	});
 		
 };
-var cerrar_ticket = function(id){
+let cerrar_ticket = function(id){
 
-	var id =  parseInt(id)
+	let id =  parseInt(id)
 	if( id > 0 ){
 		set_option("id_ticket" , id );
 		show_confirm("¿DESEAS CERRAR EL TICKET?", "Se descartarán todas sus tareas incluidas", "CERRAR TICKET", confirmacion_cerrar_ticket);
 	}
 
 }
-var confirmacion_cerrar_ticket = function(){
+let confirmacion_cerrar_ticket = function(){
 
-	var id_ticket 	=  	get_option("id_ticket");
-	var url 		=  	"../q/index.php/api/tickets/estado/format/json/";
-	var data_send 	= 	{"status" : 2 , "id_ticket": id_ticket};
+	let id_ticket 	=  	get_option("id_ticket");
+	let url 		=  	"../q/index.php/api/tickets/estado/format/json/";
+	let data_send 	= 	{"status" : 2 , "id_ticket": id_ticket};
 	request_enid( "PUT",  data_send, url, carga_tikets_usuario);
 
 }
