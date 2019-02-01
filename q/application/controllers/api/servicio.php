@@ -486,13 +486,15 @@ class Servicio extends REST_Controller{
       $config_paginacion["q"]                 =     $param["q"];
       $config_paginacion["q2"]                =     0;
       $config_paginacion["page"]              =     get_info_variable($this->input->get() , "page" );
-      $data["busqueda"]                       =     $param["q"];
-      $data["num_servicios"]                  =     $servicios["num_servicios"];
+      $busqueda                       =     $param["q"];
+      $num_servicios                  =     $servicios["num_servicios"];
       $this->set_option("in_session" , 1);
       $this->set_option("id_usuario" , $this->id_usuario);
-      $data["lista_productos"]                =     $this->agrega_vista_servicios($servicios["servicios"]);
-      $data["paginacion"]                     =     $this->principal->create_pagination($config_paginacion);
-      $this->load->view("producto/basico_empresa" , $data);
+      $lista_productos                =     $this->agrega_vista_servicios($servicios["servicios"]);
+      $paginacion                     =     $this->principal->create_pagination($config_paginacion);
+      return  get_base_empresa($paginacion , $busqueda , $num_servicios , $lista_productos);
+
+
   }
   function empresa_GET(){
     
@@ -512,7 +514,7 @@ class Servicio extends REST_Controller{
       
       if (count($servicios) > 0){    
         if($servicios["num_servicios"] > 0){
-            $this->get_view_empresa($servicios, $param);
+            $this->response($this->get_view_empresa($servicios, $param));
         }
       }else{
             $data_complete["num_servicios"] = 0;            
@@ -531,12 +533,12 @@ class Servicio extends REST_Controller{
           $response[]   =  $this->get_vista_servicio($row);
       }
       return $response;
-  }  
+  }
   private function get_vista_servicio($q){
-      $q["in_session"] =  $this->get_option("in_session");
-      $q["id_usuario"] =  $this->get_option("id_usuario");
-      $api             =  "servicio/crea_vista_producto/format/html/";
-      return $this->principal->api(  $api , $q , "html" );
+
+      $q["in_session"]      =  $this->get_option("in_session");
+      $q["id_usuario"]      =  $this->get_option("id_usuario");
+      return create_vista($q);
   }
   private function carga_clasificaciones($servicio){
     
@@ -637,8 +639,7 @@ class Servicio extends REST_Controller{
         }
         $this->response($response);
 
-    }
-  /**/
+  }
   function gamificacion_deseo_PUT(){    
 
     $param    =   $this->put();        
@@ -1090,11 +1091,12 @@ class Servicio extends REST_Controller{
         $alcance =  $this->serviciosmodel->get_alcance_productos_usuario($param);
         $this->response($alcance);
     }
-    function crea_vista_producto_GET(){        
-        
-        $data["servicio"]       =   $this->get();        
-        $data["url_request"]    =   get_url_request("");                
-        $this->load->view("producto/basico" , $data);
+    function crea_vista_producto_GET(){
+
+        $servicio    =   $this->get();
+        $response    =  create_vista($servicio);
+        $this->response($response);
+
     }
     function metricas_productos_solicitados_GET(){
 

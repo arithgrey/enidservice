@@ -155,7 +155,13 @@ class Recibo_model extends CI_Model
         }
         return $sql;
     }
+    function get_total_compras_usuario($id_usuario){
 
+
+        $query_get =
+            "SELECT COUNT(0)num FROM proyecto_persona_forma_pago WHERE saldo_cubierto >  0 AND id_usuario = " .$id_usuario;
+        return $this->db->query($query_get)->result_array()[0]["num"];
+    }
     private function get_fecha($param)
     {
 

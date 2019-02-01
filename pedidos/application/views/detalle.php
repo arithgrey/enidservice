@@ -92,7 +92,7 @@
 		<br>
         <br>
         <?=create_fecha_contra_entrega($recibo , $domicilio)?>
-        <?=notificacion_por_cambio_fecha($recibo);?>
+        <?=notificacion_por_cambio_fecha($recibo ,  $num_compras , $recibo[0]["saldo_cubierto"]);?>
         <?=br()?>
         <?=n_row_12()?>
             <?=crea_seccion_recordatorios($recordatorios ,$tipo_recortario)?>
@@ -141,15 +141,11 @@
 
 	)?>
 		<?=tiene_domilio($domicilio)?>
-
-
 		<br>
+        <?=resumen_compras_cliente($num_compras)?>
 		<?=create_seccion_usuario($usuario)?>
-
 		<?=create_seccion_domicilio($domicilio)?>
 		<?=create_seccion_recordatorios($recibo)?>
-
-
 		<br>
 		<?=n_row_12()?>
 		<div class="padding_10 resumen_pago">

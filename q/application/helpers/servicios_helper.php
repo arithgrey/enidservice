@@ -1,7 +1,105 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+    function create_vista($servicio){
 
+
+        $extra_color        =   "";
+        $list               =   "";
+        $flag               =   0;
+        $nombre_servicio    =   $servicio["nombre_servicio"];
+        $id_servicio        =   $servicio["id_servicio"];
+        $flag_envio_gratis  =   $servicio["flag_envio_gratis"];
+        $text_extra         =   is_servicio($servicio);
+        $url_img            =   get_url_request("imgs/index.php/enid/imagen_servicio/".$id_servicio);
+        $metakeyword        =   $servicio["metakeyword"];
+        $color              =   (get_param_def($servicio , "color" ) > 0 ) ? $servicio["color"] : "";
+        $flag_servicio      =   $servicio["flag_servicio"];
+        $precio             =   $servicio["precio"];
+        $costo_envio ="";
+        if($flag_servicio == 0){
+
+            $costo_envio    =  (get_param_def($servicio, "costo_envio") !==  0 ) ? $servicio["costo_envio"]["text_envio"]["cliente_solo_text"]: "";
+        }
+
+        $id_ciclo_facturacion =  $servicio["id_ciclo_facturacion"];
+        $extra_url =  "";
+        if($servicio["in_session"] > 0){
+
+            $id_usuario = get_info_variable($servicio , "id_usuario" );
+            $id_usuario =  ($id_usuario ==  0 ) ? "": $id_usuario;
+            $extra_url  =  "&q2=".$id_usuario;
+            $id_usuario_registro_servicio =  $id_usuario;
+        }
+
+        $url_info_producto  =  get_url_servicio($id_servicio.$extra_url);
+
+        $existencia =0;
+        $vista =0;
+        $in_session =  $servicio["in_session"];
+        if($in_session ==  1){
+            $existencia =  $servicio["existencia"];
+            $vista =  $servicio["vista"];
+        }
+
+        $id_error =  "imagen_".$id_servicio;
+        $config = [
+                                'src'   => $url_img,
+                                'id'    => $id_error,
+                                'title' => 'Ver artículo',
+                                'class' => 'imagen_producto',
+                                'alt'   => $metakeyword,
+                                'onerror' => "reloload_img( '".$id_error."','".$url_img."');"
+                            ];
+
+        $img     =  img($config);
+        $p       =  addNRow(get_session_color($color,$flag_servicio,$url_info_producto ,$extra_color,$existencia,$in_session));
+        $p      .=  div(div(get_text_nombre_servicio($nombre_servicio),["style"=>"margin-left: 5px;text-align: left!important;"]),1);
+        $p      .=  div(muestra_vistas_servicio($in_session,$vista) , 1);
+        $producto            =  div($p , ["style"=>"position:relative;"]);
+        $contenedor_producto =  div($producto, ['class'=>'contenedor_principal_informacion_producto card-block']);
+        $text_costo_envio    =  get_text_costo_envio($flag_servicio , $costo_envio);
+
+
+        $b =  "";
+        $b .= div(get_precio_producto($url_info_producto,$precio,$costo_envio,$flag_servicio, $id_ciclo_facturacion) ,["style"=>"position:absolute;top:250px;margin-left:5px;z-index: 100"],1);
+        $b .= div(anchor_enid($img ,  ["href"=> $url_info_producto ]),["class"    =>  'contenedor_principal_imagen_producto'],1);
+        $b .= $contenedor_producto;
+        $b .= $text_costo_envio;
+
+        $bloque_producto = div($b , ["class"=>'info_producto']);
+        return $bloque_producto;
+
+    }
+    function get_base_empresa($paginacion , $busqueda , $num_servicios , $productos){
+
+        $paginacion =   addNRow(div($paginacion , 1));
+        $l          =   "";
+        foreach($productos as $row){
+            $l .=  div($row , ["class" => 'col-lg-3', "style"=>'margin-top:30px;']  );
+        }
+        $t      =   addNRow(icon("fa fa-search") . "Tu búsqueda de" . $busqueda . "(". $num_servicios ."Productos)");
+        $t     .=   addNRow($paginacion);
+        $bloque =   addNRow(div($t .$l , 1));
+        $bloque .=  addNRow($paginacion);
+        return $bloque;
+
+    }
+    function get_text_costo_envio($es_servicio , $costo_envio){
+
+        $text =  ($es_servicio ==  0 ) ? div($costo_envio ,["class"=>'informacion_costo_envio'] ,1) :  "";
+        return $text;
+
+    }
+    function get_session_color($color,$flag_servicio,$url_info_producto ,$extra_color,$existencia,$in_session){
+
+        $color          =   get_td(get_numero_colores($color,$flag_servicio,$url_info_producto ,$extra_color));
+        $existencia     =   get_td(get_en_existencia($existencia,$flag_servicio,$in_session));
+        $t              =   "<tr>" . $color .$existencia. "<tr>";
+        $table          =   "<table class='resumen_colores_producto'>" . $t . "</table>";
+        return $table;
+
+    }
     function get_menu_config($num, $num_imagenes, $url_productos_publico){
 
         $foto_config    =  ['href' => "#tab_imagenes" , 'data-toggle'    => "tab" ];
@@ -446,7 +544,7 @@ if(!function_exists('invierte_date_time')){
           $id_servicio        =  $param["id_servicio"];
           $id_usuario_actual  =   $param["id_usuario"];
           if( $id_usuario_actual ==  $id_usuario_registro_servicio){
-            return div("" , ["class"=>'servicio fa fa-pencil' ,  "id"=> $id_servicio]);
+            return icon("servicio fa fa-pencil" ,  ["id" => $id_servicio]);
           }
       	}
   	}
@@ -503,11 +601,11 @@ if(!function_exists('invierte_date_time')){
         }
 
     }
-
-
 	function sumatoria_array($array ,$key) {
-		return array_sum(array_column($array, $key));
-	}
-	
 
-}/*Termina el helper*/
+		return array_sum(array_column($array, $key));
+
+	}
+
+
+}

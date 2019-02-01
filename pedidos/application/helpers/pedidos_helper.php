@@ -427,11 +427,12 @@ if(!function_exists('invierte_date_time')){
     }
     if ( ! function_exists('notificacion_por_cambio_fecha'))
     {
-        function notificacion_por_cambio_fecha($recibo){
+        function notificacion_por_cambio_fecha($recibo , $num_compras , $saldo_cubierto){
+
 
 
             $tipo           =  $recibo[0]["tipo_entrega"];
-            if($tipo ==  1){
+            if($tipo ==  1 && $saldo_cubierto < 1  ){
                 $cambio_fecha       =   $recibo[0]["modificacion_fecha"];
                 $class              =   'nula';
                 $text_probabilidad  =  "PROBABILIDAD NULA DE COMPRA";
@@ -442,18 +443,32 @@ if(!function_exists('invierte_date_time')){
                         $text_probabilidad  =   "PROBABILIDAD ALTA DE COMPRA";
                         break;
                     case 1:
-                        $class          =   'media';
+
+                        $class              =   'media';
                         $text_probabilidad  =   "PROBABILIDAD MEDIA DE COMPRA";
+                        if($num_compras >  0){
+                            $class              =   'alta';
+                            $text_probabilidad  =   "PROBABILIDAD ALTA DE COMPRA";
+                        }
+
+
                         break;
                     case 2:
                         $class          =   'baja';
                         $text_probabilidad  =   "PROBABILIDAD BAJA DE COMPRA";
+                        if($num_compras >  0){
+                            $class              =   'media';
+                            $text_probabilidad  =   "PROBABILIDAD MEDIA DE COMPRA";
+
+                        }
+
                         break;
                 }
 
                 return div($text_probabilidad , ["class" => $class] , 1);
 
             }
+
 
 
         }
@@ -564,6 +579,15 @@ if(!function_exists('invierte_date_time')){
 
         }
     }
+    if ( ! function_exists('resumen_compras_cliente'))
+    {
+        function resumen_compras_cliente($num){
+
+            $text =  ($num >  0 ) ?  $num  . " COMPRAS A LO LARGO DEL TIEMPO " : "NUEVO PROSPECTO";
+            return div($text , ["class" => "compras_en_tiempo"]);
+        }
+    }
+
     if ( ! function_exists('tiene_domilio'))
     {
         function tiene_domilio($domicilio , $numero = 0 ){

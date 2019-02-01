@@ -441,9 +441,9 @@ if (!function_exists('invierte_date_time')) {
         $data_complete = [];
         if ($flag_envio_gratis > 0) {
 
-            $text = "ENVÍO GRATIS!";
+            $text = "ENTREGA GRATIS!";
             $data_complete["cliente"] = $text;
-            $data_complete["cliente_solo_text"] = "ENVÍO GRATIS!";
+            $data_complete["cliente_solo_text"] = "ENTREGA GRATIS!";
             $data_complete["ventas_configuracion"] = "TU PRECIO YA INCLUYE EL ENVÍO";
         } else {
             $data_complete["ventas_configuracion"] = "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO";

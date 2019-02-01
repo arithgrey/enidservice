@@ -125,11 +125,11 @@ class Home extends CI_Controller{
         return  $this->options[$key];
     }
     private function get_vista_servicio($servicio){
-        
+
         $q               =  $servicio;
         $q["in_session"] =  $this->get_option("in_session");                
-        $api             =  "servicio/crea_vista_producto/format/html/";
-        return $this->principal->api( $api, $q , 'html'); 
+        $api             =  "servicio/crea_vista_producto/format/json/";
+        return $this->principal->api( $api, $q );
     }
     private function create_pagination($totales_elementos ,  $per_page , $q , $id_clasificacion, $vendedor ,  $order , $page){
         $config["totales_elementos"] =   $totales_elementos;
