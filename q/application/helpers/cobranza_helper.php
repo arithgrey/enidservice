@@ -7,13 +7,13 @@
             if ($flag_envio_gratis > 0) {
 
 
-                $response["cliente"]                = "ENVÍO GRATIS!";
-                $response["cliente_solo_text"]      = "ENVÍO GRATIS!";
+                $response["cliente"]                = "ENTREGA GRATIS!";
+                $response["cliente_solo_text"]      = "ENTREGA GRATIS!";
                 $response["ventas_configuracion"]   = "TU PRECIO YA INCLUYE EL ENVÍO";
             } else {
                 $response["ventas_configuracion"]   = "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO";
                 $text                               = "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO";
-                $response["cliente_solo_text"]      = "Más " . $costo_envio_cliente . " MXN de envío";
+                $response["cliente_solo_text"]      = "MÁS " . $costo_envio_cliente . " MXN DE TU ENTREGA";
                 $response["cliente"] = $text;
             }
             return $response;

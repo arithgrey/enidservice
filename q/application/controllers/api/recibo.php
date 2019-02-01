@@ -771,7 +771,17 @@ class recibo extends REST_Controller{
 
         $this->response($this->recibo_model->get_compras_por_enviar());
     }
+    function num_compras_usuario_GET(){
 
+        $param      = $this->get();
+        $response   = false;
+        if(if_ext($param , "id_usuario")){
+
+            $id_usuario =  $param["id_usuario"];
+            $response   =  $this->recibo_model->get_total_compras_usuario($id_usuario);
+        }
+        $this->response($response);
+    }
     /*
     private function set_stock_servicio($q){
 

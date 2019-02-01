@@ -133,3 +133,10 @@
     color:black;
     text-decoration:underline;
 }
+.compras_en_tiempo{
+    background: #a1c4ff;
+    color: white;
+    padding: 10px;
+    border-style: solid;
+    border-block-end-color: #0b309b;
+}

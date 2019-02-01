@@ -101,15 +101,16 @@ class Home extends CI_Controller{
 
             }else{
 
+                $id_usuario             =   $recibo[0]["id_usuario"];
                 $data["domicilio"]      =   $this->get_domicilio_entrega($id_recibo , $recibo);
-                $data["usuario"]        =   $this->get_usuario($recibo[0]["id_usuario"]);
+                $data["usuario"]        =   $this->get_usuario($id_usuario);
                 $data["status_ventas"]  =   $this->get_estatus_enid_service();
                 $data["tipificaciones"] =   $this->get_tipificaciones($id_recibo);
                 $data["comentarios"]    =   $this->get_recibo_comentarios($id_recibo);
                 $data["recordatorios"]  =   $this->get_recordatorios($id_recibo);
                 $data["id_recibo"]      =   $id_recibo;
                 $data["tipo_recortario"] =  $this->get_tipo_recordatorio();
-
+                $data["num_compras"]     =  $this->get_num_compras($id_usuario);
 
                 $this->principal->show_data_page($data, 'detalle');
             }
@@ -118,6 +119,13 @@ class Home extends CI_Controller{
             $this->principal->show_data_page($data, 'error');          
         }
         
+    }
+    private function get_num_compras($id_usuario){
+
+        $q["id_usuario"]    =   $id_usuario;
+        $api                =   "recibo/num_compras_usuario/format/json/";
+        return $this->principal->api( $api , $q );
+
     }
     private function get_recibo_comentarios($id_recibo){
         $q["id_recibo"]     =   $id_recibo;
