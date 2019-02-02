@@ -7,7 +7,6 @@ class Archivo extends REST_Controller{
         $this->load->model("img_model");
         $this->load->library('upload');
         $this->load->library('image_lib');
-
         $this->load->library(lib_def());                   
         $this->id_usuario   =  $this->principal->get_session("idusuario");          
     }
@@ -66,40 +65,7 @@ class Archivo extends REST_Controller{
             $this->response($response);
         }
     }
-    /*
-    function imgs_POST(){
-        
-        $param          =   $this->post();
-        $extensiones    =   ["jpg","jpeg","gif","png","bmp","image/jpg","image/jpeg","image/gif","image/png"];
 
-        if($_FILES['imagen']['error'] === 4) {
-            $this->response( false);
-        
-        }else if($_FILES['imagen']['error'] === 0 ){
-
-            $this->proceso_registro_imagen($param, $extensiones);
-
-        } else if($_FILES['imagen']['error'] === 1 ){
-            $this->response(2);
-        }
-    }
-    private function proceso_registro_imagen($param , $extensiones){
-
-        $binario                =   addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
-        $nombre                 =   $_FILES['imagen']['name'];
-        $extension              =   $this->extension($nombre);
-
-        if(!in_array($extension, $extensiones)) {
-            $msj =  'Sólo se permiten archivos con las siguientes extensiones: ';
-            $this->response( $msj.implode(', ', $extensiones) );
-        }
-        $param["imagenBinaria"]   =   $binario;
-        $param["nombre_archivo"]  =   $nombre;
-        $param["extension"]       =   $extension;
-        $this->response($this->gestiona_imagenes($param));
-    }
-    */
-    /**/
     function gestiona_imagenes($param){ 
 
         $param["id_empresa"]        =   $this->principal->get_session("idempresa");
@@ -187,4 +153,38 @@ class Archivo extends REST_Controller{
         $response["session_exp"] = 1;
         return $response;        
     }
+    /*
+    function imgs_POST(){
+
+        $param          =   $this->post();
+        $extensiones    =   ["jpg","jpeg","gif","png","bmp","image/jpg","image/jpeg","image/gif","image/png"];
+
+        if($_FILES['imagen']['error'] === 4) {
+            $this->response( false);
+
+        }else if($_FILES['imagen']['error'] === 0 ){
+
+            $this->proceso_registro_imagen($param, $extensiones);
+
+        } else if($_FILES['imagen']['error'] === 1 ){
+            $this->response(2);
+        }
+    }
+    private function proceso_registro_imagen($param , $extensiones){
+
+        $binario                =   addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
+        $nombre                 =   $_FILES['imagen']['name'];
+        $extension              =   $this->extension($nombre);
+
+        if(!in_array($extension, $extensiones)) {
+            $msj =  'Sólo se permiten archivos con las siguientes extensiones: ';
+            $this->response( $msj.implode(', ', $extensiones) );
+        }
+        $param["imagenBinaria"]   =   $binario;
+        $param["nombre_archivo"]  =   $nombre;
+        $param["extension"]       =   $extension;
+        $this->response($this->gestiona_imagenes($param));
+    }
+    */
+    
 }

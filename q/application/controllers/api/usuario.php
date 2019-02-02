@@ -320,18 +320,20 @@ class usuario extends REST_Controller{
     function num_registros_preriodo_GET(){
         
         $param      =   $this->get();
+        $response   =   false;
         if (if_ext($param , "fecha_inicio,fecha_termino")) {
-            $total = $this->usuario_model->num_registros_preriodo($param);
+            $response = $this->usuario_model->num_registros_preriodo($param);
         }
-        $this->response($total);
+        $this->response($response);
     }
     function registros_periodo_GET(){
         
         $param      =   $this->get();
+        $response   =   false;
         if (if_ext($param , "fecha_inicio,fecha_termino")) {
-            $total = $this->usuario_model->registros_periodo($param);
+            $response = $this->usuario_model->registros_periodo($param);
         }
-        $this->response($total);
+        $this->response($response);
     }
     function num_total_GET(){
 
@@ -352,7 +354,6 @@ class usuario extends REST_Controller{
         
         $this->response($response);
     }
-
     function verifica_registro_telefono_GET(){
         
         $param      = $this->get();
@@ -415,7 +416,7 @@ class usuario extends REST_Controller{
     }
     function whatsapp_POST(){        
         
-
+        $response = false;
         if($this->input->is_ajax_request()){             
             $param                               =  $this->post();
             $param["email"]                      =  $param["whatsapp"]."@gmail.com";            
@@ -454,7 +455,6 @@ class usuario extends REST_Controller{
 
         }
         return $response;
-
 
     }
     private function inicia_proceso_compra($param , $id_usuario , $id_servicio){
@@ -500,7 +500,7 @@ class usuario extends REST_Controller{
     function miembros_activos_GET(){
 
         $param      =   $this->get();
-        $response   = false;
+        $response   =   false;
         if(if_ext($param , "id_departamento")){
             $total                                  =   $this->usuario_model->num_total($param);
             $per_page                               =   10;
@@ -518,7 +518,6 @@ class usuario extends REST_Controller{
         }
         $this->response($response);
 
-        
     }
     function usuarios_GET(){
 
@@ -555,13 +554,12 @@ class usuario extends REST_Controller{
                     $response["registro_usuario"] =  $this->usuario_model->crea_usuario_enid_service($param);
                     $this->agrega_permisos_usuario($response);
                 }else{
-                    $response["usuario_existente"] =
-                        "Este usuario ya se encuentra registrado, verifique los datos";
+                    $response["usuario_existente"] = "Este usuario ya se encuentra registrado, verifique los datos";
                 }
             }
         }
         $this->response($response);
-        
+
     }
     function afiliado_POST(){
 
@@ -587,11 +585,9 @@ class usuario extends REST_Controller{
             if ($response["usuario_existe"] == 0 ){
 
                 $response =  $this->registro_prospecto($param);
-
-
             }
         }
-        $this->response($response);    
+        $this->response($response);
                  
     }
     private function registro_prospecto($param){

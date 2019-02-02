@@ -6,7 +6,7 @@ class Cron extends REST_Controller{
         //$this->load->library("mensajeria_lead");                
         $this->load->library(lib_def());  
     }    
-    /**/
+    
     function encuesta_evaluacion_servicios_GET(){
 
         /*
@@ -31,14 +31,7 @@ class Cron extends REST_Controller{
         */
         //$this->response($lista);
     }
-    /*
-    private function get_usuarios_activos_perfil(){
 
-        $param["id_perfil"]     =  20;
-        $api                    =  "usuario/usuarios_perfil/format/json/";
-        return  $this->principal->api( $api , $param);
-    }
-    */
     private function get_usuarios_sin_publicar_articulos($q){
         $param["id_perfil"]     =  20;
         $api                    =  "usuario/sin_publicar_articulos/format/json/";
@@ -96,4 +89,12 @@ class Cron extends REST_Controller{
         $param =  $this->get();                
         $this->load->view("mensaje/ticket_soporte" , $param);  
     }
+    /*
+    private function get_usuarios_activos_perfil(){
+
+        $param["id_perfil"]     =  20;
+        $api                    =  "usuario/usuarios_perfil/format/json/";
+        return  $this->principal->api( $api , $param);
+    }
+    */
 }

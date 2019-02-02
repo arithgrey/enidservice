@@ -55,9 +55,11 @@ class Punto_encuentro extends REST_Controller{
     function id_GET(){
 
         $param      =  $this->get();
-        $response   =  [];
+        $response   =  false;
         if (if_ext($param , "id")) {            
-            $response = $this->punto_encuentro_model->get_tipo($param);        
+
+            $response = $this->punto_encuentro_model->get_tipo($param);
+
         }
         $this->response($response);
     }

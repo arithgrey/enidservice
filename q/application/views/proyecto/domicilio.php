@@ -1,6 +1,6 @@
 <?php
 
-/**/
+
 $id_codigo_postal = 0;
 $direccion= "";
 $calle ="";

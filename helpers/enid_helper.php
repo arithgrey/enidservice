@@ -1189,6 +1189,17 @@ if (!function_exists('get_url_servicio')) {
 
     }
 }
+if ( ! function_exists('append_data')) {
+
+    function append_data($array)
+    {
+        $response =  "";
+        for ($a = 0; $a < count($array); $a ++){
+            $response .=  " ".$array[$a];
+        }
+        return $response;
+    }
+}
 
 if ( ! function_exists('get_request_email'))
 {
@@ -1203,6 +1214,9 @@ if ( ! function_exists('get_request_email'))
         return $request;
     }
 }
+
+
+
 //https://www.codeigniter.com/user_guide/general/styleguide.html
 //https://www.codeigniter.com/user_guide/libraries/config.html
 //Poder modificar el punto de entrega desde el mondulo de pedidos

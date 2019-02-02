@@ -311,7 +311,7 @@
             return $this->agrega_color($param, 0 , "");
         }    
     }        
-    /**/
+    
     function agrega_color($param , $flag , $color_anterior ){
 
         $color     =  $param["color"];         
@@ -633,7 +633,7 @@
 
                     
     } 
-    /**/
+    
     function periodo($param){
 
         $query_get =  "SELECT * FROM servicio WHERE DATE(fecha_registro) 

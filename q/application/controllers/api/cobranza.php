@@ -25,12 +25,12 @@ class Cobranza extends REST_Controller{
         $this->response($response);
     }
     */
-    /**/
+    
     function calcula_costo_envio_GET(){        
         $param =  $this->get();                
         $this->response($this->get_costo_envio($param));
     }
-    /**/
+    
     function get_costo_envio($param){
      
         $costo          = get_costo_envio($param);
@@ -49,7 +49,7 @@ class Cobranza extends REST_Controller{
         $this->response($info);
     }
     */
-    /**/
+    
     function get_pago($q){
         $api = "recibo/resumen_desglose_pago"; 
         return $this->principal->api( $api , $q , "html" );
@@ -70,11 +70,11 @@ class Cobranza extends REST_Controller{
         $this->response($response);        
     }
     */
-    /**/
+    
     function form_comentario_notificacion_pago_GET(){
         $this->load->view("pagos_notificados/comentarios_pago");
     }
-    /**/
+    
     function get_notificacion_pago($q){
 
         $api =  "notificacion_pago/pago_resumen/format/json/";
@@ -116,7 +116,7 @@ class Cobranza extends REST_Controller{
         $this->load->view("cobranza/renovaciones" , $data);
 
     }*/
-    /**/
+    
     /*
     function notificacion_pago_GET(){
 
@@ -171,19 +171,19 @@ class Cobranza extends REST_Controller{
         
     }
     */
-    /**/
+    
     function carga_servicio_por_recibo($q){
         $api = "tickets/servicio_recibo/format/json/"; 
         return $this->principal->api( $api , $q);
     }
-    /**/
+    
     function get_precio_id_servicio($id_servicio){
 
         $q["id_servicio"] = $id_servicio;
         $api              = "recibo/precio_servicio/format/json/"; 
         return $this->principal->api( $api , $q);   
     }
-    /**/
+    
     function solicitud_proceso_pago_POST(){
 
 
@@ -369,7 +369,7 @@ class Cobranza extends REST_Controller{
             $this->response(-1);
         }
     }   
-    /**/
+    
     function create_session($q){
 
         $api            =     "sess/start";
@@ -377,7 +377,7 @@ class Cobranza extends REST_Controller{
         $q["secret"]    =     $q["password"]; 
         return $this->principal->api($api,$q,"json","POST",0,1,"login");                
     }
-    /**/ 
+     
     function crea_orden($q){
 
         $api =  "cobranza/solicitud_proceso_pago";
@@ -411,7 +411,7 @@ class Cobranza extends REST_Controller{
         return false;
                
     }
-    /**/
+    
     function crea_usuario($q){
 
         $api =  "usuario/prospecto";
@@ -437,29 +437,29 @@ class Cobranza extends REST_Controller{
         $api = "recibo_comentario/index";
         return $this->principal->api( $api , $q , "json" , "POST");
     }
-    /**/
+    
     function consulta_disponibilidad_servicio($q){     
         $api = "servicio/info_disponibilidad_servicio/format/json/"; 
         return $this->principal->api( $api , $q);
     }
-    /**/
+    
     function acciones_posterior_orden_pago($param){
 
         $this->notifica_deuda_cliente($param);                   
         $this->crea_comentario_pedido($param);
     }
-    /**/
+    
     function valida_envio_notificacion_nuevo_usuario($param){
         if(get_info_usuario_valor_variable($param , "usuario_nuevo" )>0){
             $this->notifica_registro_usuario($param);      
         }
     }
-    /**/
+    
     function notifica_registro_usuario($q){
         $api = "emp/solicitud_usuario"; 
         return $this->principal->api($api , $q);  
     }    
-    /**/
+    
     function carga_ficha_direccion_envio($q){
 
         $q["text_direccion"]    =  "Dirección de Envio";
@@ -537,7 +537,7 @@ class Cobranza extends REST_Controller{
         }
         return $nueva_data;
     }
-    /**/
+    
     function get_estatus_enid_service($q){        
         $api = "servicio/nombre_estado_enid/format/json/";
         return $this->principal->api( $api ,  $q);
@@ -570,9 +570,9 @@ class Cobranza extends REST_Controller{
         $this->response($new_response);
     }
     */
-    /**/
     
-    /**/
+    
+    
     function simulamos_datos_creacion_proyecto_maps($param){
 
         $param["proyecto"]  ="Registro o renovación de Negocio en Google MAPS";      
@@ -580,11 +580,11 @@ class Cobranza extends REST_Controller{
         $param["id_servicio"]=  $param["servicio"];        
         return  $param;
     }    
-    /**/
+    
     private function set_option($key, $value){
         $this->option[$key] = $value;
     }
-    /**/
+    
     private function get_option($key){
         return $this->option[$key];
     }    
@@ -656,7 +656,7 @@ class Cobranza extends REST_Controller{
         $this->response($num_ventas);
     } 
     */   
-    /**/
+    
     private function get_direccion_pedido($id_recibo){
             
         $q["id_recibo"]     = $id_recibo;

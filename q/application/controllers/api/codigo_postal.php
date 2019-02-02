@@ -194,13 +194,6 @@ class codigo_postal extends REST_Controller{
         $api    =  "codigo_postal/colonia_delegacion/format/json/";
         return $this->principal->api( $api, $q);
     }
-    /*
-    private function get_pais_por_id($q)
-    {
-        $api = "contries/pais/format/json/";
-        return $this->principal->api( $api , $q);
-    }
-    */
     private function get_data_direccion($q){
 
         $api    =  "direccion/data_direccion/format/json/";
@@ -253,5 +246,4 @@ class codigo_postal extends REST_Controller{
         $api    = "direccion/index";
         return  $this->principal->api( $api , $q , "json", "POST");
     }
-
 }

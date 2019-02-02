@@ -153,13 +153,13 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    /**/
+    
     function get_link_saldo_enid($id_usuario, $id_recibo)
     {
         return "../movimientos/?q=transfer&action=8&operacion=" . $id_usuario . "&recibo=" . $id_recibo;
     }
 
-    /**/
+    
     function get_link_oxxo($url_request, $saldo, $id_recibo, $id_usuario)
     {
 

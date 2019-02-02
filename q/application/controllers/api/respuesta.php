@@ -12,7 +12,6 @@ class Respuesta extends REST_Controller{
     function respuesta_pregunta_POST(){        
         
         $param                  =   $this->post();
-
         $param["id_usuario"]    =   $this->id_usuario;
         $this->respuesta_model->insert($param);
         $this->set_visto_pregunta($param);
@@ -61,8 +60,7 @@ class Respuesta extends REST_Controller{
         $response["respuestas"] =   $this->get_respuestas_pregunta($param);
         $response["info_usuario"]   = 0;
         if ($param["modalidad"] ==  1) {            
-            $response["info_usuario"] 
-            = $this->principal->get_info_usuario($param["usuario_pregunta"]);
+            $response["info_usuario"] = $this->principal->get_info_usuario($param["usuario_pregunta"]);
         }
         $this->load->view("valoraciones/form_respuesta" , $response);        
         
