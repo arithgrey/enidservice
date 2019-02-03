@@ -1,5 +1,5 @@
 "use strict";
-var agrega_info_form = function(e){
+let agrega_info_form = function(e){
 
 	recorre_web_version_movil();	
 }
@@ -18,8 +18,8 @@ valorHTML("#comentario_previo_a_venta" , comentario_previo_a_venta );
 function carga_info_validacion(){
 
 
-	var url =  "../persona/index.php/api/validacion/q/format/json/";
-	var data_send = {"tipo" : 4 , "id_usuario" : get_id_usuario() };
+	let url =  "../persona/index.php/api/validacion/q/format/json/";
+	let data_send = {"tipo" : 4 , "id_usuario" : get_id_usuario() };
 
 
 	$.ajax({
@@ -46,8 +46,8 @@ e.preventDefault();
 }
  function registrar_info_envio_validacion(e){
 
-	var url =  "../persona/index.php/api/validacion/envio_info/format/json/";
-	var data_send =  $(".info_envio_valida").serialize()+"&"+$.param({ "id_persona" : get_persona() });
+	let url =  "../persona/index.php/api/validacion/envio_info/format/json/";
+	let data_send =  $(".info_envio_valida").serialize()+"&"+$.param({ "id_persona" : get_persona() });
 
 	$.ajax({
 			url : url ,

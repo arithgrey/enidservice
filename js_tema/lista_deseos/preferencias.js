@@ -1,19 +1,19 @@
 "use strict";
 $(document).ready(function(){
 	$(".item_preferencias").click(agrega_interes);
-	var slider = $('#slider');
-    var slidesWrapper = $('.slides');
-    var slides = $('.slides li');
-    var activeSlide = $('.slides.active');
+	let slider = $('#slider');
+    let slidesWrapper = $('.slides');
+    let slides = $('.slides li');
+    let activeSlide = $('.slides.active');
 
-    var timer = function() {
+    let timer = function() {
         setInterval(changeSlide, 7500);
     };
 
     function changeSlide() {
-        var a = slidesWrapper.find('.active');
+        let a = slidesWrapper.find('.active');
         
-        var b = a.next('li');
+        let b = a.next('li');
         
         if( b.length === 0 ) {
             console.log();
@@ -43,17 +43,17 @@ $(document).ready(function(){
     });
 });
 
-var agrega_interes = function(e){
+let agrega_interes = function(e){
 	
-    var id_clasificacion = get_parameter_enid($(this) , "id");
+    let id_clasificacion = get_parameter_enid($(this) , "id");
     set_option("id_clasificacion" , id_clasificacion);
-	var url = "../q/index.php/api/usuario_clasificacion/interes/format/json/";
-	var data_send = {id_clasificacion : id_clasificacion};
+	let url = "../q/index.php/api/usuario_clasificacion/interes/format/json/";
+	let data_send = {id_clasificacion : id_clasificacion};
     request_enid( "PUT",  data_send, url, response_agrega_interes, ".place_resumen_servicio");
 }
 
-var response_agrega_interes = function(data){
-    var preferencia =".preferencia_"+get_option("id_clasificacion");
+let response_agrega_interes = function(data){
+    let preferencia =".preferencia_"+get_option("id_clasificacion");
     if (data.tipo ==  1) {          
         $(preferencia).addClass("selected_clasificacion");  
     }else{

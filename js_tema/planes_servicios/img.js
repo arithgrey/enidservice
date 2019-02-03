@@ -1,12 +1,12 @@
 "use strict";
-var carga_form_img = function(){
+let carga_form_img = function(){
     showonehideone( ".contenedor_agregar_imagenes" , ".contenedor_global_servicio");    
     display_elements([".titulo_articulos_venta" , ".guardar_img_enid"], 0);
-	var url        = "../q/index.php/api/img/form_img_servicio_producto/format/json/";
-	var data_send  = $.param({"id_servicio" : get_option("servicio")});		    
+	let url        = "../q/index.php/api/img/form_img_servicio_producto/format/json/";
+	let data_send  = $.param({"id_servicio" : get_option("servicio")});		    
     request_enid("GET", data_send , url , response_cargar_form , ".place_img_producto" );					
 }
-var response_cargar_form = function(data){
+let response_cargar_form = function(data){
 
     
     llenaelementoHTML(".place_img_producto" , data);
@@ -14,15 +14,15 @@ var response_cargar_form = function(data){
     $(".imagen_img").change(upload_imgs_enid_pre);
     recorrepage("#guardar_img");
 }
-var upload_imgs_enid_pre = function(){
+let upload_imgs_enid_pre = function(){
 
     
-    var i = 0, len = this.files.length , img, reader, file;        
+    let i = 0, len = this.files.length , img, reader, file;        
     file = this.files[i];    
     reader = new FileReader();
     reader.onloadend = function(e){
         showonehideone(".guardar_img_enid" , ".imagen_img");
-        var im =e.target.result;
+        let im =e.target.result;
         mostrar_img_upload(im , 'place_load_img');
 
         recorrepage(".guardar_img_enid");                
@@ -30,12 +30,12 @@ var upload_imgs_enid_pre = function(){
     };
     reader.readAsDataURL(file);
 }
-var registra_img_servicio = function(e){
+let registra_img_servicio = function(e){
     e.preventDefault();
-    var formData        = new FormData();
-    var q               = get_parameter(".q_imagen");
-    var q2              = get_parameter(".q2_imagen");
-    var dinamic_img     = get_parameter(".dinamic_img");
+    let formData        = new FormData();
+    let q               = get_parameter(".q_imagen");
+    let q2              = get_parameter(".q2_imagen");
+    let dinamic_img     = get_parameter(".dinamic_img");
 
 
     formData.append("imagen", $('input[type=file]')[0].files[0] );
@@ -43,7 +43,7 @@ var registra_img_servicio = function(e){
     formData.append("servicio", q2);
     formData.append("dinamic_img", dinamic_img);
 
-    var url         = "../q/index.php/api/archivo/imgs";
+    let url         = "../q/index.php/api/archivo/imgs";
     $.ajax({
             url: url,
             type: "POST",
@@ -66,10 +66,10 @@ var registra_img_servicio = function(e){
     $.removeData(formData);
 
 }
-var response_load_image = function(data){
+let response_load_image = function(data){
 
     debugger;
-    var status = array_key_exists("status_imagen_servicio", data);
+    let status = array_key_exists("status_imagen_servicio", data);
     if(status ==  true){
         data =1;
     }

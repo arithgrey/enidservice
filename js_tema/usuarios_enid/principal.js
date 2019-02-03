@@ -25,7 +25,7 @@ $(document).ready(function(){
 		carga_usuarios();
 	});
 	$(".equipo_enid_service").click(function(e){				
-		var estado_usuario  = get_attr(this, "id");
+		let estado_usuario  = get_attr(this, "id");
 		set_option("page" , 1);	
 		set_option("depto" , 0);
 		set_option("estado_usuario" , estado_usuario);
@@ -38,8 +38,8 @@ $(document).ready(function(){
 	});
 
 });
-var get_place_usuarios = function(){
-	var nuevo_place ="";
+let get_place_usuarios = function(){
+	let nuevo_place ="";
 	switch(parseFloat(get_option("depto") )){
 		    case 0:
 		        nuevo_place = ".usuarios_enid_service";	        
@@ -51,15 +51,15 @@ var get_place_usuarios = function(){
 	} 	
 	return nuevo_place;
 }
-var carga_usuarios = function(){
+let carga_usuarios = function(){
 	
-	var place 		= 	get_place_usuarios();	
-	var url 		=  	"../q/index.php/api/usuario/miembros_activos/format/json/";	
-	var data_send 	= 	{"status": get_option("estado_usuario") , "id_departamento" : get_option("depto") , "page" : get_option("page") };					
+	let place 		= 	get_place_usuarios();	
+	let url 		=  	"../q/index.php/api/usuario/miembros_activos/format/json/";	
+	let data_send 	= 	{"status": get_option("estado_usuario") , "id_departamento" : get_option("depto") , "page" : get_option("page") };					
 	request_enid( "GET",  data_send, url, response_carga_usuario);
 }
-var response_carga_usuario = function(data){
-	var place 		= 	get_place_usuarios();	
+let response_carga_usuario = function(data){
+	let place 		= 	get_place_usuarios();	
 	llenaelementoHTML(place , data);		
 	$(".pagination > li > a, .pagination > li > span").click(function(e){				
 			set_option("page", $(this).text());
@@ -70,14 +70,14 @@ var response_carga_usuario = function(data){
 	recorrepage(".tab-content");	
 	$(".usuario_enid_service").click(carga_data_usuario);
 }
-var pre_nuevo_usuario = function(){
+let pre_nuevo_usuario = function(){
 	get_puestos_por_cargo();
 	$(".email").removeAttr("readonly");	
 	set_option("flag_editar",0);	
 	document.getElementById("form-miembro-enid-service").reset();	
 	$(".place_correo_incorrecto").empty();
 }
-var carga_data_usuario = function(e){
+let carga_data_usuario = function(e){
 
 	document.getElementById("form-miembro-enid-service").reset();	
 	$(".place_correo_incorrecto").empty();
@@ -85,24 +85,24 @@ var carga_data_usuario = function(e){
 	set_option("id_usuario", get_parameter_enid($(this) , "id"));
 	set_option("flag_editar",1);
 
-	var url 		=  	"../q/index.php/api/usuario/miembro/format/json/";	
-	var data_send 	= 	{"id_usuario" : get_option("id_usuario")};					
+	let url 		=  	"../q/index.php/api/usuario/miembro/format/json/";	
+	let data_send 	= 	{"id_usuario" : get_option("id_usuario")};					
 	request_enid( "GET",  data_send, url, response_carga_data_usuario);
 }
-var response_carga_data_usuario = function (data){
+let response_carga_data_usuario = function (data){
 
 	$(".place_config_usuario").empty();
-	var info_usuario =  data[0];
+	let info_usuario =  data[0];
 
 	nombre 				= 	info_usuario.nombre; 		
-	var apellido_paterno 	= 	info_usuario.apellido_paterno;
-	var apellido_materno 	= 	info_usuario.apellido_materno;
-	var email 				=  	info_usuario.email;
-	var id_departamento 	= 	info_usuario.id_departamento;
-	var inicio_labor 		=  	info_usuario.inicio_labor;
-	var fin_labor 			=  	info_usuario.fin_labor;
-	var turno 				=  	info_usuario.turno;
-	var sexo 				=  	info_usuario.sexo;
+	let apellido_paterno 	= 	info_usuario.apellido_paterno;
+	let apellido_materno 	= 	info_usuario.apellido_materno;
+	let email 				=  	info_usuario.email;
+	let id_departamento 	= 	info_usuario.id_departamento;
+	let inicio_labor 		=  	info_usuario.inicio_labor;
+	let fin_labor 			=  	info_usuario.fin_labor;
+	let turno 				=  	info_usuario.turno;
+	let sexo 				=  	info_usuario.sexo;
 	status 				=  	info_usuario.status;
 
 	set_option("perfil", info_usuario.idperfil);
@@ -122,28 +122,28 @@ var response_carga_data_usuario = function (data){
 
 	get_puestos_por_cargo();
 }
-var get_puestos_por_cargo = function(){
+let get_puestos_por_cargo = function(){
 
-	var url 		=  	"../q/index.php/api/perfiles/puesto_cargo/format/json/";		
-	var depto 		=  	$(".form-miembro-enid-service .depto" ).val();	
-	var data_send 	= 	{id_departamento : depto};					
+	let url 		=  	"../q/index.php/api/perfiles/puesto_cargo/format/json/";		
+	let depto 		=  	$(".form-miembro-enid-service .depto" ).val();	
+	let data_send 	= 	{id_departamento : depto};					
 	request_enid( "GET", data_send, url, response_puesto_por_cargo);
 }
-var response_puesto_por_cargo = function(data){
+let response_puesto_por_cargo = function(data){
 
 	llenaelementoHTML(".place_puestos", data);
 	selecciona_select(".form-miembro-enid-service .puesto" , get_option("perfil"));		
 }
-var actualizacion_usuario = function(e){
+let actualizacion_usuario = function(e){
 
-	var data_send 	=  $(".form-miembro-enid-service").serialize()+"&"+$.param({"id_usuario" : get_option("id_usuario"), "editar" : get_option("flag_editar") });	
-	var url 		=  "../q/index.php/api/usuario/miembro/format/json/";			
+	let data_send 	=  $(".form-miembro-enid-service").serialize()+"&"+$.param({"id_usuario" : get_option("id_usuario"), "editar" : get_option("flag_editar") });	
+	let url 		=  "../q/index.php/api/usuario/miembro/format/json/";			
 	request_enid("POST", data_send, url, function(data){
 		response_actualizacion_usuario(data, data_send);		
 	});	
 	e.preventDefault();
 }
-var response_actualizacion_usuario = function(data , data_send){
+let response_actualizacion_usuario = function(data , data_send){
 
 	llenaelementoHTML(".place_correo_incorrecto" , "");		
 	if (data_send.usuario_existente != "0") {
@@ -159,33 +159,33 @@ var response_actualizacion_usuario = function(data , data_send){
 		$("#tab_equipo_enid_service").tab("show");	
 	}	
 }
-var  carga_mapa_menu = function(){
+let  carga_mapa_menu = function(){
 
-	var url 		=  	"../q/index.php/api/recurso/mapa_perfiles_permisos/format/json/";	
+	let url 		=  	"../q/index.php/api/recurso/mapa_perfiles_permisos/format/json/";	
 	set_option("id_perfil" , $(".perfil_enid_service").val());  
-	var data_send 	= 	{"id_perfil" : get_option("id_perfil") };						
+	let data_send 	= 	{"id_perfil" : get_option("id_perfil") };						
 	request_enid( "GET",  data_send, url, response_carga_mapa);
 	
 }
-var response_carga_mapa = function(data){
+let response_carga_mapa = function(data){
 	llenaelementoHTML(".place_perfilles_permisos" , data);		
 	recorrepage(".tab-content");
 	$(".perfil_recurso").click(modifica_accesos_usuario);
 }
-var modifica_accesos_usuario = function(e){
+let modifica_accesos_usuario = function(e){
 	
 	set_option("id_recurso", get_parameter_enid($(this) , "id"));	
-	var url 		=  	"../q/index.php/api/perfil_recurso/permiso/format/json/";	
-	var data_send 	= 	{"id_perfil" : get_option("id_perfil"),  "id_recurso" : get_option("id_recurso")};					
+	let url 		=  	"../q/index.php/api/perfil_recurso/permiso/format/json/";	
+	let data_send 	= 	{"id_perfil" : get_option("id_perfil"),  "id_recurso" : get_option("id_recurso")};					
 	request_enid( "PUT",  data_send, url , carga_mapa_menu );	
 }
-var  registra_recurso = function(e){
-	var data_send 	=  $(".form_recurso").serialize();	
-	var url 		=  "../q/index.php/api/recurso/index/format/json/";	
+let  registra_recurso = function(e){
+	let data_send 	=  $(".form_recurso").serialize();	
+	let url 		=  "../q/index.php/api/recurso/index/format/json/";	
 	request_enid( "POST",  data_send, url, response_registro_recurso);
 	e.preventDefault();
 }
-var  response_registro_recurso = function(data){
+let  response_registro_recurso = function(data){
 
 	$(".place_recurso").empty();
 	document.getElementById("form_recurso").reset();					

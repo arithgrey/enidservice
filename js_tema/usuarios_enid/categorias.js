@@ -6,10 +6,10 @@ function simula_envio_categoria(e) {
     e.preventDefault();
 }
 
-var valida_existencia_clasificacion = function () {
+let valida_existencia_clasificacion = function () {
 
-    var data_send = $(".form_categoria").serialize();
-    var url = "../q/index.php/api/clasificacion/existencia/format/json/";
+    let data_send = $(".form_categoria").serialize();
+    let url = "../q/index.php/api/clasificacion/existencia/format/json/";
     $.ajax({
         url: url,
         type: "GET",
@@ -19,7 +19,7 @@ var valida_existencia_clasificacion = function () {
     }).done(next_step_add_clasificacion).fail(function () {
     });
 }
-var next_step_add_clasificacion = function (data) {
+let next_step_add_clasificacion = function (data) {
 
     if (data.existencia == 0) {
         /**Se cargan los padres*/
@@ -30,17 +30,17 @@ var next_step_add_clasificacion = function (data) {
     }
 }
 
-var load_niveles = function () {
+let load_niveles = function () {
 
     $(".msj_existencia").empty();
     $(".form_categoria").hide();
-    var es_servicio = get_parameter(".servicio option:selected");
+    let es_servicio = get_parameter(".servicio option:selected");
     set_option("es_servicio", es_servicio);
-    var nivel = 1;
-    var padre = 0;
+    let nivel = 1;
+    let padre = 0;
 
-    var data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
-    var url = "../q/index.php/api/clasificacion/nivel/format/json/";
+    let data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
+    let url = "../q/index.php/api/clasificacion/nivel/format/json/";
     $.ajax({
         url: url,
         type: "GET",
@@ -50,22 +50,22 @@ var load_niveles = function () {
 
 }
 
-var muestra_sugerencias_primer_nivel = function (data) {
+let muestra_sugerencias_primer_nivel = function (data) {
 
     llenaelementoHTML(".primer_nivel", data);
     $(".primer_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones);
 }
 
-var muestra_mas_opciones = function (e) {
+let muestra_mas_opciones = function (e) {
 
     clean_categorias(0);
 
-    var padre = e.target.value;
+    let padre = e.target.value;
     if (padre > 0) {
-        var nivel = 2;
-        var es_servicio = get_option("es_servicio");
-        var data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
-        var url = "../q/index.php/api/clasificacion/nivel/format/json/";
+        let nivel = 2;
+        let es_servicio = get_option("es_servicio");
+        let data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
+        let url = "../q/index.php/api/clasificacion/nivel/format/json/";
         $.ajax({
             url: url,
             type: "GET",
@@ -75,7 +75,7 @@ var muestra_mas_opciones = function (e) {
 
     }
 }
-var muestra_sugerencias_segundo_nivel = function (data) {
+let muestra_sugerencias_segundo_nivel = function (data) {
 
 
     llenaelementoHTML(".segundo_nivel", data);
@@ -85,16 +85,16 @@ var muestra_sugerencias_segundo_nivel = function (data) {
     $(".segundo_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_segundo);
 }
 
-var muestra_mas_opciones_segundo = function (e) {
+let muestra_mas_opciones_segundo = function (e) {
 
     clean_categorias(1);
 
-    var padre = e.target.value;
+    let padre = e.target.value;
     if (padre > 0) {
-        var nivel = 3;
-        var es_servicio = get_option("es_servicio");
-        var data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
-        var url = "../q/index.php/api/clasificacion/nivel/format/json/";
+        let nivel = 3;
+        let es_servicio = get_option("es_servicio");
+        let data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
+        let url = "../q/index.php/api/clasificacion/nivel/format/json/";
         $.ajax({
             url: url,
             type: "GET",
@@ -105,7 +105,7 @@ var muestra_mas_opciones_segundo = function (e) {
     }
 }
 
-var muestra_sugerencias_tercer_nivel = function (data) {
+let muestra_sugerencias_tercer_nivel = function (data) {
 
     llenaelementoHTML(".tercer_nivel", data);
     $(".seleccion_3").click(function () {
@@ -115,15 +115,15 @@ var muestra_sugerencias_tercer_nivel = function (data) {
     $(".tercer_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_tercer);
 }
 
-var muestra_mas_opciones_tercer = function (e) {
+let muestra_mas_opciones_tercer = function (e) {
 
     clean_categorias(2);
-    var padre = e.target.value;
+    let padre = e.target.value;
     if (padre > 0) {
-        var nivel = 4;
-        var es_servicio = get_option("es_servicio");
-        var data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
-        var url = "../q/index.php/api/clasificacion/nivel/format/json/";
+        let nivel = 4;
+        let es_servicio = get_option("es_servicio");
+        let data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
+        let url = "../q/index.php/api/clasificacion/nivel/format/json/";
         $.ajax({
             url: url,
             type: "GET",
@@ -134,7 +134,7 @@ var muestra_mas_opciones_tercer = function (e) {
     }
 }
 
-var muestra_sugerencias_cuarto = function (data) {
+let muestra_sugerencias_cuarto = function (data) {
 
     llenaelementoHTML(".cuarto_nivel", data);
     $(".seleccion_4").click(function () {
@@ -145,14 +145,14 @@ var muestra_sugerencias_cuarto = function (data) {
     $(".cuarto_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_quinto);
 }
 
-var muestra_mas_opciones_quinto = function (e) {
+let muestra_mas_opciones_quinto = function (e) {
     clean_categorias(3);
-    var padre = e.target.value;
+    let padre = e.target.value;
     if (padre > 0) {
-        var nivel = 5;
-        var es_servicio = get_option("es_servicio");
-        var data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
-        var url = "../q/index.php/api/clasificacion/nivel/format/json/";
+        let nivel = 5;
+        let es_servicio = get_option("es_servicio");
+        let data_send = {es_servicio: es_servicio, nivel: nivel, padre: padre};
+        let url = "../q/index.php/api/clasificacion/nivel/format/json/";
         $.ajax({
             url: url,
             type: "GET",
@@ -163,7 +163,7 @@ var muestra_mas_opciones_quinto = function (e) {
     }
 }
 
-var muestra_sugerencias_quinto = function (data) {
+let muestra_sugerencias_quinto = function (data) {
     clean_categorias(4);
     $(".seleccion_4").hide();
     llenaelementoHTML(".quinto_nivel", data);
@@ -172,26 +172,26 @@ var muestra_sugerencias_quinto = function (data) {
     });
 }
 
-var clean_categorias = function (inicio) {
+let clean_categorias = function (inicio) {
 
-    var categorias = [".primer_nivel",
+    let categorias = [".primer_nivel",
         ".segundo_nivel",
         ".tercer_nivel",
         ".cuarto_nivel",
         ".quinto_nivel"];
 
-    for (var x in categorias) {
+    for (let x in categorias) {
         if (x > inicio) {
             $(categorias[x]).empty();
         }
     }
 }
-var add_categoria = function (nivel, padre, tipo) {
+let add_categoria = function (nivel, padre, tipo) {
 
 
-    var clasificacion = get_parameter(".clasificacion");
-    var data_send = {clasificacion: clasificacion, tipo: tipo, padre: padre, nivel: nivel};
-    var url = "../q/index.php/api/clasificacion/nivel/format/json/";
+    let clasificacion = get_parameter(".clasificacion");
+    let data_send = {clasificacion: clasificacion, tipo: tipo, padre: padre, nivel: nivel};
+    let url = "../q/index.php/api/clasificacion/nivel/format/json/";
 
     $.ajax({
         url: url,
@@ -203,7 +203,7 @@ var add_categoria = function (nivel, padre, tipo) {
     });
 }
 
-var next_add = function (data) {
+let next_add = function (data) {
 
     clean_categorias(-1);
     $(".form_categoria").show();

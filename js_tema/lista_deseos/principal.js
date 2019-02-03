@@ -1,18 +1,18 @@
 "use strict";
-var id_tarea = 0;
-var flageditable = 0;
-var persona = 0;
-var tipo_negocio = 0;
-var telefono = 0;
-var id_proyecto = 0;
-var id_usuario = 0;
-var id_ticket = 0;
-var flag_mostrar_solo_pendientes = 0;
-var id_proyecto_persona_forma_pago = "";
-var menu_actual = "clientes";
-var id_servicio = 0;
-var id_proyecto_persona_forma_pago = 0;
-var id_persona = 0;
+let id_tarea = 0;
+let flageditable = 0;
+let persona = 0;
+let tipo_negocio = 0;
+let telefono = 0;
+let id_proyecto = 0;
+let id_usuario = 0;
+let id_ticket = 0;
+let flag_mostrar_solo_pendientes = 0;
+let id_proyecto_persona_forma_pago = "";
+let menu_actual = "clientes";
+let id_servicio = 0;
+let id_proyecto_persona_forma_pago = 0;
+let id_persona = 0;
 
 $(document).ready(function () {
 
@@ -66,11 +66,11 @@ $(document).ready(function () {
 
 });
 
-var carga_num_preguntas = function () {
+let carga_num_preguntas = function () {
 
     set_option("modalidad_ventas", 1);
-    var url = "../q/index.php/api/pregunta/preguntas_sin_leer/format/json/";
-    var data_send = {"modalidad": get_option("modalidad_ventas")};
+    let url = "../q/index.php/api/pregunta/preguntas_sin_leer/format/json/";
+    let data_send = {"modalidad": get_option("modalidad_ventas")};
 
     $.ajax({
         url: url,
@@ -83,14 +83,14 @@ var carga_num_preguntas = function () {
 
         $(".notificacion_preguntas_sin_leer_ventas").empty();
         $(".notificacion_preguntas_sin_leer_cliente").empty();
-        var total_sin_leer = 0;
+        let total_sin_leer = 0;
         if (data.modo_vendedor > 0) {
             llenaelementoHTML(".notificacion_preguntas_sin_leer_ventas", "<span class='notificacion_preguntas_no_leida'>" + data.modo_vendedor + "</span>");
-            var total_sin_leer = total_sin_leer + parseInt(data.modo_vendedor);
+            let total_sin_leer = total_sin_leer + parseInt(data.modo_vendedor);
         }
         if (data.modo_cliente > 0) {
             llenaelementoHTML(".notificacion_preguntas_sin_leer_cliente", "<span class='notificacion_preguntas_no_leida'>" + data.modo_cliente + "</span>");
-            var total_sin_leer = total_sin_leer + parseInt(data.modo_cliente);
+            let total_sin_leer = total_sin_leer + parseInt(data.modo_cliente);
         }
         if (total_sin_leer > 0) {
             llenaelementoHTML(".notificacion_preguntas_sin_leer_cliente_buzon", "<span class='notificacion_preguntas_no_leida white'>" + total_sin_leer + "</span>");
@@ -101,9 +101,9 @@ var carga_num_preguntas = function () {
     });
 }
 
-var valida_accion_inicial = function () {
+let valida_accion_inicial = function () {
 
-    var action = get_option("action");
+    let action = get_option("action");
     switch (action) {
         case "ventas":
             set_option("modalidad_ventas", 1);
@@ -126,11 +126,11 @@ var valida_accion_inicial = function () {
     }
 }
 
-var alcance_producto = function (e) {
+let alcance_producto = function (e) {
 
-    var tipo = get_parameter_enid($(this), "id");
-    var url = "../q/index.php/api/servicio/alcance_producto/format/json/";
-    var data_send = {tipo: tipo};
+    let tipo = get_parameter_enid($(this), "id");
+    let url = "../q/index.php/api/servicio/alcance_producto/format/json/";
+    let data_send = {tipo: tipo};
     $.ajax({
         url: url,
         type: "GET",

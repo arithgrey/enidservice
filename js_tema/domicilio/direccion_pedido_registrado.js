@@ -24,8 +24,8 @@ function registro_direccion(){
 	if (asentamiento != 0 ){
 		
 		set_option("id_recibo" , $(".id_recibo").val());
-		var data_send 		=  	$(".form_direccion_envio").serialize();		
-		var url =  	"../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
+		let data_send 		=  	$(".form_direccion_envio").serialize();		
+		let url =  	"../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
 		request_enid( "POST",  data_send , url , response_registro_direccion);
 	}else{
 		recorrepage("#asentamiento");										
@@ -36,16 +36,16 @@ function muestra_error_codigo(flag_error){
 	llenaelementoHTML( ".place_codigo_postal" ,  "");
 	if (flag_error ==  1) {
 		$(".codigo_postal").css("border" , "1px solid rgb(13, 62, 86)");			
-		var mensaje_user =  "Codigo postal invalido, verifique"; 		
+		let mensaje_user =  "Codigo postal invalido, verifique"; 		
 		llenaelementoHTML( ".place_codigo_postal" ,  "<span class='alerta_enid'>" + mensaje_user + "</span>");
 		recorrepage("#codigo_postal");
 	}
 }
-var  response_registro_direccion = function(data){
+let  response_registro_direccion = function(data){
 
 	if (data != -1 ){
 		
-		var url =  "../pedidos/?seguimiento="+get_option("id_recibo")+"&domicilio=1";		
+		let url =  "../pedidos/?seguimiento="+get_option("id_recibo")+"&domicilio=1";		
 		alert(url);
 		redirect(url);
 	}else{

@@ -1,8 +1,8 @@
 "use strict";
-var cargar_num_envios_a_validacion = function (){
+let cargar_num_envios_a_validacion = function (){
 	
-	var url =  "../q/index.php/api/ventas_tel/num_agendados_validacion/format/json/";
-	var data_send =  {"id_usuario" : get_id_usuario()};
+	let url =  "../q/index.php/api/ventas_tel/num_agendados_validacion/format/json/";
+	let data_send =  {"id_usuario" : get_id_usuario()};
 
 	$.ajax({
 			url : url , 
@@ -20,10 +20,10 @@ var cargar_num_envios_a_validacion = function (){
 
 }
 
-var cargar_num_agendados_email = function(){
+let cargar_num_agendados_email = function(){
 	
-	var url =  "../q/index.php/api/ventas_tel/num_agendados_email/format/json/";
-	var data_send =  {"id_usuario" : get_id_usuario()};
+	let url =  "../q/index.php/api/ventas_tel/num_agendados_email/format/json/";
+	let data_send =  {"id_usuario" : get_id_usuario()};
 
 	$.ajax({
 			url : url , 
@@ -38,10 +38,10 @@ var cargar_num_agendados_email = function(){
 	});		
 }
 
-var   cargar_num_agendados = function(){
+let   cargar_num_agendados = function(){
 	
-	var url =  "../q/index.php/api/ventas_tel/num_agendados/format/json/";
-	var data_send =  {"id_usuario" : get_id_usuario()};
+	let url =  "../q/index.php/api/ventas_tel/num_agendados/format/json/";
+	let data_send =  {"id_usuario" : get_id_usuario()};
 	$.ajax({
 			url : url , 
 			type: "GET",
@@ -63,10 +63,10 @@ var   cargar_num_agendados = function(){
 	});		
 }
 
-var   cargar_num_clientes_restantes = function(){
+let   cargar_num_clientes_restantes = function(){
 
-	var url =  "../q/index.php/api/ventas_tel/num_clientes_restantes/format/json/";
-	var data_send =  {"id_usuario" : get_id_usuario()};
+	let url =  "../q/index.php/api/ventas_tel/num_clientes_restantes/format/json/";
+	let data_send =  {"id_usuario" : get_id_usuario()};
 	$.ajax({
 			url : url , 
 			type: "GET",

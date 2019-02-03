@@ -1,8 +1,8 @@
 "use strict";
 function carga_info_persona(){
 
-	var url =  "../persona/index.php/api/clientes/persona/format/json/";
-	var data_send =  {"id_persona" : get_persona()};
+	let url =  "../persona/index.php/api/clientes/persona/format/json/";
+	let data_send =  {"id_persona" : get_persona()};
 
 	$.ajax({
 			url : url , 
@@ -200,7 +200,7 @@ function agenda_llamada_recicle(e){
 	e.preventDefault();
 }
 function evalua_menu_tipificacion(){
-	var tipificacion =  get_parameter(".tipificacion");
+	let tipificacion =  get_parameter(".tipificacion");
 	if (tipificacion ==  2 ) {
 		$('.btn_agendar_llamada').tab('show');
 	}
@@ -213,8 +213,8 @@ function  set_tipo_negocio(n_tipo_negocio){
 function carga_info_ventas_mensuales(){
 
 	set_option(menu_actual, "envios_a_validar");
-	var url =  "../persona/index.php/api/clientes/cliente/format/json/";
-	var data_send =  $(".form_busqueda_clientes").serialize()+"&"+$.param({"tipo" : 2 , "usuario_validacion" : 0 , "mensual":1});
+	let url =  "../persona/index.php/api/clientes/cliente/format/json/";
+	let data_send =  $(".form_busqueda_clientes").serialize()+"&"+$.param({"tipo" : 2 , "usuario_validacion" : 0 , "mensual":1});
 
 	$.ajax({
 			url : url ,

@@ -1,7 +1,7 @@
 "use strict";
-var get_proyectos_persona = function(){
-	var url =  "../q/index.php/api/portafolio/proyecto_persona/format/json/";
-    var data_send =  {"id_persona" : get_persona()};
+let get_proyectos_persona = function(){
+	let url =  "../q/index.php/api/portafolio/proyecto_persona/format/json/";
+    let data_send =  {"id_persona" : get_persona()};
 
 	$.ajax({
 			url : url , 
@@ -28,10 +28,10 @@ var get_proyectos_persona = function(){
 	});		
 
 }
-var carga_form_solicitar_desarrollo = function(e){
+let carga_form_solicitar_desarrollo = function(e){
 
-    var url =  "../q/index.php/api/tickets/form/format/json/";
-    var  data_send =  {"id_persona" : get_persona() , id_proyecto : get_proyecto()};
+    let url =  "../q/index.php/api/tickets/form/format/json/";
+    let  data_send =  {"id_persona" : get_persona() , id_proyecto : get_proyecto()};
 
 
 		$.ajax({
@@ -55,11 +55,11 @@ var carga_form_solicitar_desarrollo = function(e){
 	});				
 
 }
-var registra_ticket = function(e){
+let registra_ticket = function(e){
 
 
-	var url =  "../q/index.php/api/tickets/ticket/format/json/";
-	var data_send = $(".form_ticket").serialize()+"&"+ $.param({"id_proyecto" : get_proyecto() , "id_usuario" : get_id_usuario()});
+	let url =  "../q/index.php/api/tickets/ticket/format/json/";
+	let data_send = $(".form_ticket").serialize()+"&"+ $.param({"id_proyecto" : get_proyecto() , "id_usuario" : get_id_usuario()});
 
 		$.ajax({
 				url : url , 
@@ -83,17 +83,17 @@ var registra_ticket = function(e){
 					
 	e.preventDefault();
 }
-var carga_tikets_usuario = function(){
+let carga_tikets_usuario = function(){
 	
 	recorre_web_version_movil();
-    var status_ticket = 0;
+    let status_ticket = 0;
 	if (document.querySelector(".estatus_tickets")) {		
 		status_ticket =  $(".estatus_tickets").val();
 	}
 
 
-    var url =  "../q/index.php/api/tickets/ticket/format/json/";
-    var data_send =  {id_proyecto : get_proyecto() , "status" : status_ticket };
+    let url =  "../q/index.php/api/tickets/ticket/format/json/";
+    let data_send =  {id_proyecto : get_proyecto() , "status" : status_ticket };
 
 
 		$.ajax({
@@ -129,10 +129,10 @@ var carga_tikets_usuario = function(){
 	});				
 }
 
-var carga_info_detalle_ticket = function(){
+let carga_info_detalle_ticket = function(){
 
-	var url =  "../q/index.php/api/tickets/detalle/format/json/";
-	var data_send =  {"id_ticket" : get_id_ticket()};
+	let url =  "../q/index.php/api/tickets/detalle/format/json/";
+	let data_send =  {"id_ticket" : get_id_ticket()};
 
 	$.ajax({
 			url : url , 
@@ -172,11 +172,11 @@ var carga_info_detalle_ticket = function(){
 	});		
 }
 
-var  actualizar_estatus_ticket = function(e){
+let  actualizar_estatus_ticket = function(e){
 	
-	var nuevo_estado= get_parameter_enid($(this) , "id");
-	var url =  "../q/index.php/api/tickets/status/format/json/";
-	var data_send =  {"id_ticket" : get_id_ticket() , "status" : nuevo_estado };
+	let nuevo_estado= get_parameter_enid($(this) , "id");
+	let url =  "../q/index.php/api/tickets/status/format/json/";
+	let data_send =  {"id_ticket" : get_id_ticket() , "status" : nuevo_estado };
 
 	$.ajax({
 			url : url , 
@@ -192,13 +192,13 @@ var  actualizar_estatus_ticket = function(e){
 	});		
 }
 
-var  registra_tarea = function(e){
+let  registra_tarea = function(e){
 	
-	var requerimiento =  $(".note-editable").html();
+	let requerimiento =  $(".note-editable").html();
 	$(".tarea_pendiente").val(requerimiento);
 	
-	var url =  "../q/index.php/api/tarea/index/format/json/";
-	var data_send =  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_id_ticket() });
+	let url =  "../q/index.php/api/tarea/index/format/json/";
+	let data_send =  $(".form_agregar_tarea").serialize()+"&"+ $.param({"id_ticket" : get_id_ticket() });
 
 	$.ajax({
 			url : url , 
@@ -216,14 +216,14 @@ var  registra_tarea = function(e){
 	e.preventDefault();
 }
 
-var  actualiza_tareas = function(e){
+let  actualiza_tareas = function(e){
 		
 
 	set_id_tarea(get_parameter_enid($(this) , "id"));
-	var nuevo_valor = this.value;
+	let nuevo_valor = this.value;
 
-	var url =  "../q/index.php/api/tarea/estado/format/json/";
-	var data_send = {"id_tarea" : get_id_tarea() ,  "nuevo_valor" : nuevo_valor , "id_ticket" : get_id_ticket() };
+	let url =  "../q/index.php/api/tarea/estado/format/json/";
+	let data_send = {"id_tarea" : get_id_tarea() ,  "nuevo_valor" : nuevo_valor , "id_ticket" : get_id_ticket() };
 	
 	$.ajax({
 			url : url , 
@@ -244,9 +244,9 @@ var  actualiza_tareas = function(e){
 	});			
 }
 
-var regresar_list_posible_cliente = function(){
+let regresar_list_posible_cliente = function(){
 
-	var menu = get_menu_actual();
+	let menu = get_menu_actual();
 	switch(menu){
 
 		case "envios_a_validar":
@@ -267,7 +267,7 @@ var regresar_list_posible_cliente = function(){
 	}
 }
 
-var  modificar_asunto = function(e){
+let  modificar_asunto = function(e){
 	
 	recorre_web_version_movil();
 	asunto_ticket = get_parameter_enid($(this) , "id");
@@ -275,10 +275,10 @@ var  modificar_asunto = function(e){
 
 	$(".form-actualizar-asunto").submit(actualiza_asunto_ticket);
 }
-var actualiza_asunto_ticket = function(e){
+let actualiza_asunto_ticket = function(e){
 	
-	var data_send = $(".form-actualizar-asunto").serialize()+"&"+$.param({"id_ticket" : get_id_ticket()});
-	var url =  "../q/index.php/api/tickets/asunto/format/json/";
+	let data_send = $(".form-actualizar-asunto").serialize()+"&"+$.param({"id_ticket" : get_id_ticket()});
+	let url =  "../q/index.php/api/tickets/asunto/format/json/";
 	
 	$.ajax({
 			url : url , 
@@ -302,34 +302,34 @@ var actualiza_asunto_ticket = function(e){
 
 	e.preventDefault();
 }
-var get_menu_actual = function(){
+let get_menu_actual = function(){
 	return menu_actual;
 }
 
-var muestra_tareas_por_estatus = function(){
+let muestra_tareas_por_estatus = function(){
 
 	showonehideone( ".mostrar_todas_las_tareas" , ".tarea_pendiente"  );
 	$(".mostrar_tareas_pendientes").hide();
 	set_flag_mostrar_solo_pendientes(1);
 }
 
-var muestra_todas_las_tareas = function(){
+let muestra_todas_las_tareas = function(){
 
 	showonehideone( ".tarea_pendiente"  , ".mostrar_todas_las_tareas");	
 	$(".mostrar_tareas_pendientes").show();
 	set_flag_mostrar_solo_pendientes(0);	
 }
 
-var set_flag_mostrar_solo_pendientes = function(n_val){
+let set_flag_mostrar_solo_pendientes = function(n_val){
 	flag_mostrar_solo_pendientes = n_val;
 }
 
-var get_flag_mostrar_solo_pendientes = function(){
+let get_flag_mostrar_solo_pendientes = function(){
 	return  flag_mostrar_solo_pendientes;	
 }
 
 
-var get_flag_estoy_en_agendado = function(){
+let get_flag_estoy_en_agendado = function(){
 	return flag_estoy_en_agendado;
 }
 /*
