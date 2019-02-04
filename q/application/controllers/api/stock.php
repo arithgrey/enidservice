@@ -95,7 +95,7 @@ class Stock extends REST_Controller{
     }
     private function get_format_resumen($resumen , $pedidos , $pedidos_contra_entrega){
 
-        $resumen        =  anchor_enid($resumen , ["class"    =>  "dropdown-toggle" , "href"=>"#",  "id"=>"dropdownMenuLink"]);
+        //$resumen        =  anchor_enid($resumen , ["class"    =>  "dropdown-toggle" , "href"=>"#",  "id"=>"dropdownMenuLink"]);
         $solicitudes    =  $pedidos["solicitudes"];
         $entregas       =  $pedidos["entregas"];
 
@@ -153,12 +153,11 @@ class Stock extends REST_Controller{
 
         $table             .=   "</table>";
         $tabla_porcentaje   =   $this->get_tabla_porcentajes($media , $pedidos_contra_entrega , count($relevante));
-        //$tabla_porcentaje2  =   $this->get_tabla_porcentajes($secundaria , $pedidos_contra_entrega , count($secundaria));
+
         $totales_casos      =   $this->get_max_min($tabla_porcentaje["totales"]);
         $completo           =   $totales_casos["completo"];
         asort($completo);
         $min                =   (count($completo) > 0) ? $completo[0] : 0;
-
         $max                =   $totales_casos["max"];
         $text_resumen       =   count($relevante);
         $text               =   div($text_resumen.div($table .$tabla_porcentaje["table"], ["class"    =>  "dropdown-menu"]) , ["class"=>"dropdown"]);
@@ -209,7 +208,7 @@ class Stock extends REST_Controller{
             $z ++;
         }
         $table   .=  "</table>";
-        $r =  $totales;
+        //$r =  $totales;
         $response = ["table" => $table  , "totales" => $totales ];
         return $response;
     }

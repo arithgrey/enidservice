@@ -21,9 +21,8 @@ class categoria extends REST_Controller{
       $param    = $this->get();
       $response = [];
       if (if_ext($param , "id") ) {
-        
-        $params = [];
-        $response =  $this->categoria_model->q_get($params, $param["id"]);
+
+          $response =  $this->categoria_model->q_get([], $param["id"]);
       }
       $this->response($response);
 

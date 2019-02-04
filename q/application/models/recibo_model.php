@@ -450,7 +450,7 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
-    /**/
+    
     function valida_recibo_por_pagar_usuario($param)
     {
 
@@ -678,7 +678,7 @@ class Recibo_model extends CI_Model
 
     }
 
-    /**/
+    
     function get_precio_servicio($param)
     {
         $id_servicio = $param["id_servicio"];

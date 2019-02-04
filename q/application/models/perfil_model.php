@@ -16,7 +16,7 @@
         }       
         return $this->db->get("perfil")->result_array();
     }
-    /**/
+    
     function insert( $params , $return_id=0){        
         $insert   = $this->db->insert("perfil", $params);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;

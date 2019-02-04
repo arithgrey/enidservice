@@ -26,9 +26,9 @@ class Imagen_servicio extends REST_Controller{
   function index_POST(){              
     
     $param    =  $this->post();          
-    $response = 2;
+    $response =  false;
     if (if_ext($param , "id_imagen,id_servicio" )) {
-      $params = [ 
+      $params = [
           "id_imagen"   =>  $param["id_imagen"] ,
           "id_servicio" =>  $param["id_servicio"]
       ];
@@ -76,7 +76,7 @@ class Imagen_servicio extends REST_Controller{
 
     $this->response($response);   
   }
-  /**/
+  
   private function delete_imagen($q){
     $api =  "img/index";
     return $this->principal->api($api , $q , "json" , "DELETE");

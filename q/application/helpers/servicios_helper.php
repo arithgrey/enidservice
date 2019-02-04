@@ -290,7 +290,7 @@ if(!function_exists('invierte_date_time')){
         $tipo = ($param[0]["flag_servicio"] ==  1) ? "SERVICIO": "PRODUCTO";
         return $tipo;
     }
-    /**/
+    
 	function get_nombre_ciclo_facturacion($ciclos , $id_ciclo){
 		foreach($ciclos as $row){
 			$id_ciclo_facturacion = $row["id_ciclo_facturacion"];
@@ -299,7 +299,7 @@ if(!function_exists('invierte_date_time')){
 			}
 		}
 	}
-	/**/
+	
 	function create_colores_disponibles($text_colores){
 		
 		$arreglo_colores =  explode("," , $text_colores);		
@@ -313,7 +313,7 @@ if(!function_exists('invierte_date_time')){
 		}		
 		return div($lista_completa, ["id"	=>	'contenedor_colores_disponibles'] );
 	}
-	/**/
+	
 	function valida_text_numero_articulos($num){	
 
 		$text 	=  span("Alerta" , ["class"=>'mjs_articulo_no_disponible'])."este artúculo no se encuentra disponible, agregar nuevo";
@@ -324,7 +324,7 @@ if(!function_exists('invierte_date_time')){
 		}
 		return $text;
 	}
-	/**/
+	
 	function agrega_data_servicio($data , $key , $valor ){
 		
 		$data[$key] =  $valor;
@@ -342,7 +342,7 @@ if(!function_exists('invierte_date_time')){
 		$costo =  ($flag_envio_gratis ==  1 ) ? -100 : 100;
 		return $costo;
 	}
-	/**/
+	
 	function select_producto_usado($valor_actual){
 
 		$usado = [ "No" , "Si"];
@@ -361,7 +361,7 @@ if(!function_exists('invierte_date_time')){
 		$usado = [ "No" , "Si"];
 		return $usado[$tipo];
 	}		
-	/**/
+	
 	function create_url_procesar_compra($producto_text, 
                                     $id_servicio ,  
                                     $total ,
@@ -377,7 +377,7 @@ if(!function_exists('invierte_date_time')){
 	  return $url_procesar_compra;
 	  
 	}
-	/**/
+	
 	function create_table_servicios($servicios){
 		
 		$list ="";
@@ -407,7 +407,7 @@ if(!function_exists('invierte_date_time')){
 		$extra = 	($num_terminos > 3) ? "scroll_terms" : "";
 		return $extra;		
 	}
-	/**/
+	
 	function get_text_ciclo_facturacion($id_ciclo_facturacion){
 
 	  	$nuevo_text ="";

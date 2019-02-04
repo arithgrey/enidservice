@@ -56,30 +56,31 @@ class usuario_clasificacion extends REST_Controller{
         return $response;
 
     }
-    /*V
-    function interes_POST(){
-        
-        $param              =   $this->post();                
-        $id_clasificacion   =   $this->get_clasificaciones_servicio($param)[0]["primer_nivel"];
 
-        $params             = [
-            "id_usuario"        => $this->id_usuario,
-            "id_clasificacion"  => $param["id_servicio"]
-        ];    
-        $num =  $this->usuario_clasificacion_model->get_num_usuario_clasificacion($this->id_usuario  , $id_clasificacion);
-        
-        if ($num == 1 ){
-            $this->response($this->usuario_clasificacion_model->insert("usuario_clasificacion" , $params));    
-        }
-        $this->response(true);
 
-    }
-    */
-    private function get_clasificaciones_servicio($q){
-        
+    /*
+     * private function get_clasificaciones_servicio($q){
+
         $api =  "servicio/tallas/format/json/";
         return $this->principal->api( $api , $q);
-    }   
+    }
+   function interes_POST(){
 
+       $param              =   $this->post();
+       $id_clasificacion   =   $this->get_clasificaciones_servicio($param)[0]["primer_nivel"];
+
+       $params             = [
+           "id_usuario"        => $this->id_usuario,
+           "id_clasificacion"  => $param["id_servicio"]
+       ];
+       $num =  $this->usuario_clasificacion_model->get_num_usuario_clasificacion($this->id_usuario  , $id_clasificacion);
+
+       if ($num == 1 ){
+           $this->response($this->usuario_clasificacion_model->insert("usuario_clasificacion" , $params));
+       }
+       $this->response(true);
+
+   }
+   */
 
 }

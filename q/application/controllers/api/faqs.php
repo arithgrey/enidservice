@@ -9,24 +9,15 @@ class Faqs extends REST_Controller{
   }  
   function qsearch_GET(){
 
-
     $param    = $this->get();
-    $response =  [];
+    $response =  false;
     if (if_ext($param , "id_categoria,extra")) {
-        
+
         $response =  $this->faqsmodel->qsearch($param);
+
     }
     $this->response($response);
-
   }
-  /*
-  function q_GET(){
-    $param      = $this->get();
-    $response   =  $this->faqsmodel->q($param);
-    $this->response($response);    
-  }
-  */
-  /**/
   function search_GET(){    
     $param    =     $this->get();
     $response =     false;
@@ -35,7 +26,7 @@ class Faqs extends REST_Controller{
     }
     $this->response($response);
   }
-  /**/  
+    
   function respuesta_POST(){
 
     $param      =   $this->post();
@@ -73,7 +64,7 @@ class Faqs extends REST_Controller{
     $this->response($response);
     
   }
-  /**/
+  
   function respuesta_GET(){
 
       $param    = $this->get();
@@ -83,6 +74,13 @@ class Faqs extends REST_Controller{
       }
       $this->response($response);      
   }
+    /*
+    function q_GET(){
+      $param      = $this->get();
+      $response   =  $this->faqsmodel->q($param);
+      $this->response($response);
+    }
+    */
   /*
   function categorias_extras_GET(){
 

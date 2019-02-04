@@ -27,16 +27,17 @@ if(!function_exists('invierte_date_time')){
   }
   function lista_categorias($categorias){
     
-    $l = "";
-    foreach($categorias as $row){
+
+      $l = "";
+      foreach($categorias as $row){
       
-      $id_categoria         =   $row["id_categoria"];
-      $nombre_categoria     =   $row["nombre_categoria"];
-      $faqs                 =   $row["faqs"];
-       
-      $href                 =   "?categoria=".$id_categoria;
-      $link                 =   anchor_enid(icon("fa fa-file-text-o") .div($nombre_categoria . "(".$faqs.")") , ["href"=> $href ]);
-      $l                    .=  div($link , ["class"=>"col-lg-4"]);
+          $id_categoria         =   $row["id_categoria"];
+          $nombre_categoria     =   $row["nombre_categoria"];
+          $faqs                 =   $row["faqs"];
+
+          $href                 =   "?categoria=".$id_categoria;
+          $link                 =   anchor_enid(icon("fa fa-file-text-o") .div($nombre_categoria . "(".$faqs.")") , ["href"=> $href ]);
+          $l                    =   div($link , ["class"=>"col-lg-4"]);
     }
     return $l; 
   }

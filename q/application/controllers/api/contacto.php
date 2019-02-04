@@ -23,7 +23,6 @@ class contacto extends REST_Controller{
         }
         $this->response($response);
     }
-    /**/
     function abre_ticket($param){
 
         $q["prioridad"]         =   1;

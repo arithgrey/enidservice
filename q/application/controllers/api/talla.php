@@ -17,6 +17,20 @@ class Talla extends REST_Controller{
     $this->response($response);
 
   }
+  function clasificacion_GET(){
+
+    $this->response($this->talla_model->get(["id" , "tipo" , "clasificacion"] , [] , 10 ));
+
+  }
+  function tallas_countries_GET(){
+    
+    $param      =   $this->get();
+    $response   =   false;
+    if(if_ext($param , "id_tipo_talla")){
+        $response     =   $this->talla_model->get_tallas_countries($param);
+    }
+    $this->response($response);
+  }
   /*
   function tipo_talla_id_GET(){
 
@@ -31,31 +45,16 @@ class Talla extends REST_Controller{
       return      $this->principal->api( $api, $q);
   }
   */
-  /*
-  function clasificacion_PUT(){
+    /*
+    function clasificacion_PUT(){
 
-    $param        =   $this->put();
-    $response     =   false;
-    if (if_ext($param , "id")){
-        $response     = $this->talla_model->q_up("clasificacion" ,  $param["clasificaciones"] ,  $param["id"]);
+      $param        =   $this->put();
+      $response     =   false;
+      if (if_ext($param , "id")){
+          $response     = $this->talla_model->q_up("clasificacion" ,  $param["clasificaciones"] ,  $param["id"]);
+      }
+      $this->response($response);
     }
-    $this->response($response);
-  }
-  */
-  function clasificacion_GET(){
-
-    $this->response($this->talla_model->get(["id" , "tipo" , "clasificacion"] , [] , 10 ));
-
-  }
-
-  function tallas_countries_GET(){
-    
-    $param      =   $this->get();
-    $response   =   false;
-    if(if_ext($param , "id_tipo_talla")){
-        $response     =   $this->talla_model->get_tallas_countries($param);
-    }
-    $this->response($response);
-  }
+    */
 
 }

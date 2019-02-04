@@ -8,7 +8,7 @@ class Negocio extends REST_Controller{
         $this->load->library(lib_def());              
         $this->id_usuario   =  $this->principal->get_session("idusuario");           
     }
-    /**/
+    
     function index_GET(){
 
         $id_usuario                 =  $this->id_usuario;
@@ -30,6 +30,6 @@ class Negocio extends REST_Controller{
         $this->response($response);
     } 
     */   
-    /**/
+    
        
 }

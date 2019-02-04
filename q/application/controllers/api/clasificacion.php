@@ -5,7 +5,6 @@ class Clasificacion extends REST_Controller{
         parent::__construct();             
         $this->load->helper("clasificaciones");
         $this->load->model("clasificacion_model");
-        //$this->load->library('table');       
         $this->load->library(lib_def());  
     }
     function categorias_servicios_GET(){
@@ -52,7 +51,7 @@ class Clasificacion extends REST_Controller{
         
         $this->response($select);
     }
-    /**/
+    
     function interes_usuario_GET($param){
         
         $param      =   $this->get();
@@ -62,7 +61,7 @@ class Clasificacion extends REST_Controller{
         }
         $this->response($response);
     }
-    /**/
+    
     function nombre_GET(){
         
         $param      =  $this->get();
@@ -99,7 +98,7 @@ class Clasificacion extends REST_Controller{
         }
         $this->response($response);
     }
-    /**/
+    
     function clasificacion_padre_nivel_GET(){
 
         $param          = $this->get();        
@@ -111,7 +110,7 @@ class Clasificacion extends REST_Controller{
         }
         $this->response($response);
     }
-    /**/
+    
     function tipo_talla_clasificacion_GET(){
         
         $param              =   $this->get();
@@ -122,7 +121,7 @@ class Clasificacion extends REST_Controller{
         }
         $this->response($response);
     }  
-    /**/
+    
     function tipo_talla_clasificacion_POST(){
 
         $param      =   $this->post();
@@ -141,20 +140,6 @@ class Clasificacion extends REST_Controller{
         }
         $this->response($response);
     }
-    /*
-    function tipo_tallas_GET(){
-
-        $param          =   $this->get();
-        $response       =   $this->get_tipo_tallas($param);
-        $v              =   $param["v"];
-        if ($v == 1){
-            $table      =  $this->create_table_tallas($response);
-            $this->response($table);
-        }else{
-            $this->response($response);    
-        }
-    }
-    */
     function tipo_talla_GET(){
 
         $param          =   $this->get();
@@ -186,7 +171,7 @@ class Clasificacion extends REST_Controller{
         return $data;
 
     }
-    /**/
+    
     private function get_clasificaciones_por_id($array){
 
         $data_complete =  [];
@@ -199,7 +184,7 @@ class Clasificacion extends REST_Controller{
         }
         return $data_complete;
     }
-    /**/
+    
     function existencia_GET(){
         $param                    =  $this->get();
         $response                 = false;
@@ -225,7 +210,7 @@ class Clasificacion extends REST_Controller{
         }
         $this->response($response);
     }
-    /**/
+    
     function nivel_GET(){
 
         $param      =   $this->get();
@@ -334,7 +319,7 @@ class Clasificacion extends REST_Controller{
         }
         return $data_complete;
     }
-    /**/
+    
     private function quita_cero_clasificacacion($clasificaciones){
 
         $data_complete =  [];
@@ -349,12 +334,12 @@ class Clasificacion extends REST_Controller{
         }
         return $data_complete;    
     }
-    /**/
+    
     function  get_tallas_countries($q){            
         $api    =  "talla/tallas_countries/format/json/";
         return  $this->principal->api( $api, $q);     
     }  
-    /**/
+    
     function  get_tallas_servicio($q){            
         $api    =  "servicio/tallas/format/json/";
         return  $this->principal->api( $api, $q);     
@@ -370,7 +355,7 @@ class Clasificacion extends REST_Controller{
         $response   =  $this->clasificacion_model->get_coincidencia($param);
         $this->response($response);
     }
-    /**/
+    
     private function get_clasificaciones_destacadas($q){
         $api    = "servicio/clasificaciones_destacadas/format/json/";
         return  $this->principal->api( $api , $q);
@@ -379,5 +364,18 @@ class Clasificacion extends REST_Controller{
         $api    = "tipo_talla/clasificacion";
         return  $this->principal->api( $api , $q , "json" , "PUT");
     }
+    /*
+    function tipo_tallas_GET(){
 
+        $param          =   $this->get();
+        $response       =   $this->get_tipo_tallas($param);
+        $v              =   $param["v"];
+        if ($v == 1){
+            $table      =  $this->create_table_tallas($response);
+            $this->response($table);
+        }else{
+            $this->response($response);
+        }
+    }
+    */
 }

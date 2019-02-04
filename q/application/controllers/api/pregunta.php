@@ -85,17 +85,15 @@ class pregunta extends REST_Controller{
     }
     function add_num_respuestas_preguntas($data){
 
-      $data_complete = [];
-      $a =0;
-      foreach($data as $row){          
-        $data_complete[$a] =  $row;
-        $data_complete[$a]["respuestas"] = 
-        $this->get_num_respuestas_sin_leer($row["id_pregunta"]);
-        $a ++;
+      $response =  [];
+      $a             =  0;
+      foreach($data as $row){
+          $response[$a] =  $row;
+          $response[$a]["respuestas"] = $this->get_num_respuestas_sin_leer($row["id_pregunta"]);
+          $a ++;
       }
-      return $data_complete;
+      return $response;
     }
-
     function usuario_por_pregunta_GET(){
 
         $param      =   $this->get();
@@ -107,7 +105,6 @@ class pregunta extends REST_Controller{
         $this->response($response);
     }
     private function get_num_respuestas_sin_leer($id_pregunta){
-
 
         $q["id_pregunta"] =  $id_pregunta;
         $api              =  "respuesta/num_respuestas_sin_leer/format/json/";
