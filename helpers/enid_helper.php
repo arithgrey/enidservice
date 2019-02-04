@@ -554,9 +554,9 @@ if ( ! function_exists('label'))
 }
 if ( ! function_exists('addNRow'))
 {
-    function addNRow($e){
+    function addNRow($e,  $attributes = []){
 
-        return n_row_12(). $e .end_row();
+        return n_row_12($attributes). $e .end_row();
 
     }
 }
@@ -916,7 +916,7 @@ if ( ! function_exists('strong'))
 }
 if ( ! function_exists('hr'))
 {
-  function hr($row=0, $attributes = '' )
+  function hr($attributes = '' , $row=1 )
   {
 
     $base       =   "<hr".add_attributes($attributes).">";
@@ -1190,6 +1190,22 @@ if (!function_exists('get_url_servicio')) {
 
     }
 }
+if (!function_exists('get_img_servicio')) {
+    function get_img_servicio($id){
+
+        $url = get_url_request("imgs/index.php/enid/imagen_servicio/".$id);
+        $id_error = "imagen_" . $id;
+        $img = [
+            'src'       => $url,
+            'id'        => $id_error,
+            'class'     => 'imagen-producto',
+            'onerror'   => "reloload_img( '" . $id_error . "','" . $url . "');"
+        ];
+        return img($img);
+
+    }
+}
+
 if ( ! function_exists('append_data')) {
 
     function append_data($array)

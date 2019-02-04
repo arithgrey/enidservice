@@ -1,7 +1,7 @@
 <?php if(count($servicios)>0): ?>  
-<?=heading_enid("TAMBIÉN PODRÍA INTEREZARTE" , 3 , [] , 1)?>
+<?=heading_enid("TAMBIÉN PODRÍA INTEREZARTE" , 2 ,["class"=>"strong"])?>
 <?php endif;?>
-<div>  
+<div class="row">
   <?php foreach ($servicios as $row):?>
   <?php 
     $extra_color ="style='margin-left:5px;color: black;font-weight:bold;'";

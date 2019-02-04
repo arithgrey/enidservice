@@ -48,7 +48,7 @@
     }
 
 
-    $imagenes = construye_seccion_imagen_lateral($imgs, $nombre_servicio, $url_vide_youtube);
+    $imagenes                   = construye_seccion_imagen_lateral($imgs, $nombre_servicio, $url_vide_youtube);
     $info_compra["id_servicio"] = $id_servicio;
     $info_compra["proceso_compra"] = $proceso_compra;
     $info_compra["flag_servicio"] = $flag_servicio;
@@ -183,16 +183,18 @@
                 </div>
             <?php endif; ?>
         </div>
-        <div class="col-lg-12">
-            <?= get_descripcion_servicio($descripcion, $flag_servicio) ?>
-            <?= valida_url_youtube($url_vide_youtube, $is_mobile) ?>
-        </div>
-        <?= place("separador") ?>
-        <?= place("place_valoraciones") ?>
-        <?= place("place_tambien_podria_interezar") ?>
+
     </div>
 <?= end_row() ?>
 
+<?=addNRow(div(get_descripcion_servicio($descripcion, $flag_servicio) , ["class" => "col-lg-10 col-lg-offset-1"])) ?>
+<?=addNRow(div(valida_url_youtube($url_vide_youtube, $is_mobile) , ["class" => "col-lg-10 col-lg-offset-1"])) ?>
+<?=br(2)?>
+<?=addNRow(place("separador"))?>
+<?=br(2)?>
+<?=addNRow(div(place("place_valoraciones") , ["class" => "col-lg-10 col-lg-offset-1" , "style"=>"background: white;"]) , ["style"=> "background: #002693;"]) ?>
+<?=br(4)?>
+<?=addNRow(div(place("place_tambien_podria_interezar") , ["class" => "col-lg-10 col-lg-offset-1" , "style"=>"background: white;"]))?>
 <?= input_hidden(["class" => "qservicio", "value" => $nombre_servicio]) ?>
 <?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]) ?>
 <?= input_hidden(["name" => "desde_valoracion", "value" => $desde_valoracion, "class" => 'desde_valoracion']) ?>

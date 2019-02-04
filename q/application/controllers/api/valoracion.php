@@ -32,14 +32,8 @@
             $data["id_servicio"]    = $param["id_servicio"];
             $servicio               = $this->principal->get_base_servicio($param["id_servicio"]);
             $data["servicio"]       = $servicio;
-            $data["in_session"]     = $param["in_session"];
-            $data["id_usuario"]     = $param["id_usuario"];
-            $data["vendedor"]       = "";
-            if ($data["in_session"] == 1) {
-
-                $data["vendedor"] = $this->principal->get_info_usuario($servicio[0]["id_usuario"]);
-            }
-            $data["propietario"] = ($servicio[0]["id_usuario"] != $data["id_usuario"]) ? 0 : 1;
+            $data["vendedor"]       = $this->principal->get_info_usuario($servicio[0]["id_usuario"]);
+            $data["propietario"]    = ($servicio[0]["id_usuario"] != $param["id_usuario"]) ? 0 : 1;
             $this->load->view("valoraciones/pregunta_consumudor", $data);
         }
         function gamificacion_pregunta_PUT()

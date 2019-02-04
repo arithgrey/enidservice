@@ -7,7 +7,7 @@ class pregunta extends REST_Controller{
         $this->load->helper("pregunta");
        	$this->load->model("pregunta_model");
         $this->load->library(lib_def());     
-        $this->id_usuario = $this->principal->get_session("idusuario");
+        //$this->id_usuario = $this->principal->get_session("idusuario");
     }
 	function visto_pregunta_PUT(){
 
@@ -18,22 +18,28 @@ class pregunta extends REST_Controller{
         }
         $this->response($response);
     }
-    function index_POST(){      
-      
-        $param          = $this->post();        
-        $response       = false;
-        if( if_ext($param , 'pregunta,usuario') ){
+    function index_POST(){
 
-            $q            =  ["pregunta" => $param["pregunta"] , "id_usuario"  => $param["usuario"]];
-            $id_pregunta  = $this->pregunta_model->insert($q, 1);        
-            if ($id_pregunta >0 ) {
-                $param["id_pregunta"] =  $id_pregunta;
-                $response             =  $this->agrega_pregunta_servicio($param);    
+        $param                          =   $this->post();
+        $response["in_session"]         =   0;
+        if($this->principal->is_logged_in() ){
+            $response         = false;
+            $param["usuario"]=  $this->principal->get_session("idusuario");
+            if( if_ext($param , 'pregunta,usuario') ){
+
+                $q            =     ["pregunta" => $param["pregunta"] , "id_usuario"  => $param["usuario"]];
+                $id_pregunta  =     $this->pregunta_model->insert($q, 1);
+
+                if ( $id_pregunta > 0 ) {
+                    $param["id_pregunta"] =  $id_pregunta;
+                    $response             =  $this->agrega_pregunta_servicio($param);
+                    //$this->notifica_vendedor();
+                }
             }
-    
-        }        
+        }
         $this->response($response);        
     }
+
     function periodo_GET(){
 
         $param      =   $this->get();
@@ -46,7 +52,7 @@ class pregunta extends REST_Controller{
     function buzon_GET(){
 
         $param               =  $this->get();        
-        $param["id_usuario"] =  $this->id_usuario;
+        $param["id_usuario"] =  $this->principal->get_session("idusuario");
 
         $data_complete["modalidad"] = $param["modalidad"];
         /*Consulta preguntas hechas con proposito de compras*/
@@ -65,12 +71,12 @@ class pregunta extends REST_Controller{
     function preguntas_sin_leer_GET(){        
 
         $param =  $this->get();
-        $param["id_usuario"]   = $this->id_usuario;
+        $param["id_usuario"]   = $this->principal->get_session("idusuario");
 
         if ($param["modalidad"] ==  1) {          
 
             if( !isset($param["id_usuario"]) ){
-                $param["id_usuario"] = $this->id_usuario;
+                $param["id_usuario"] = $this->principal->get_session("idusuario");
             }  
             /*Modo vendedor*/
             $data_complete["modo_vendedor"]=
