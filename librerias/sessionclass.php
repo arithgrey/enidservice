@@ -5,10 +5,9 @@ class Sessionclass extends CI_Controller{
 		$this->load->library("session");			
 	}
 	function set_userdata($session_data){
-		$this->session->set_userdata($session_data);	
-	}
-	function get_info_empresa(){
-		return $this->session->userdata('info_empresa');
+
+		$this->session->set_userdata($session_data);
+
 	}
 	function is_logged_in(){			
 		$is_logged_in = $this->session->userdata('logged_in');	
@@ -23,53 +22,34 @@ class Sessionclass extends CI_Controller{
 		redirect("../../login");
 	}
 	function get_session($key){
-		return $this->session->userdata($key);
+
+	    return $this->session->userdata($key);
+
 	}
-	function getemailuser(){
-		return $this->session->userdata('email');
-	}	
-	function getnombre(){
-		return $this->session->userdata('nombre');
-	}
-	function getidusuario(){
-		return $this->session->userdata('idusuario');
-	}
-	function getfecharegistro(){
-		return $this->session->userdata('fecha_registro');
-	}
-	function getperfiles(){		
-		return $this->session->userdata('perfiles')[0]["idperfil"];  
-	}
-	function getidempresa(){
-		
-		return $this->session->userdata('idempresa');	
-	}	
-	function getuserdataperfil(){
-		return $this->session->userdata('perfildata');
-	}
-	function getnameperfilactual(){
-		$dataperfil = $this->getuserdataperfil();
+	function getperfiles(){
+
+        return $this->session->userdata('perfiles')[0]["idperfil"];
+    }
+	function get_nombre_perfil(){
+		$dataperfil = $this->get_session("perfildata");
 		$nombre     =   "";
-		foreach ($dataperfil as $row) {			
+		foreach ($dataperfil as $row) {
 			$nombre = $row["nombreperfil"];
 		}
 		return $nombre;
 	}
-	function get_empresa_permiso(){
-		return $this->session->userdata('empresa_permiso');	
-	}
-	function get_empresa_recurso(){
-		return $this->session->userdata('empresa_recurso');	
-	}
+
 	function get_user_data_navegacion(){
+
 		return $this->session->userdata("data_navegacion");
+
 	}
 	function create_contenido_menu(){
 		
 
 		$data 		= 	$this->get_user_data_navegacion();
 		$menu 		=	'';
-		$id_empresa = 	$this->getidempresa();
+		$id_empresa = 	$this->get_session("idempresa");
 		$b 			= 	0;	
 		foreach ($data as $row) {
 
@@ -81,7 +61,7 @@ class Sessionclass extends CI_Controller{
 			}
 
 			$icono 			= 	$row["iconorecurso"];
-			$menu .= 	li(
+			$menu           .= 	li(
 							anchor_enid(icon($icono). $nombre , 
 							[
 								"href"=> $url ,  
@@ -92,4 +72,5 @@ class Sessionclass extends CI_Controller{
 		}	
 		return $menu;
 	}
+
 }

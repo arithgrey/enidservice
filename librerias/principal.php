@@ -90,14 +90,6 @@
 	        $paginacion =  $this->api($api , $q );        	              	        
 	        return $paginacion;
 	    }
-		function get_valor_numerico_bool($bool){
-
-			$valor =0;
-			if ($bool ==  true ){
-		        $valor =  1;
-		    }
-		    return $valor;
-		}	
 		function crea_historico($tipo,$id_evento = 0,$id_usuario = 0,$id_empresa = 0 ,$id_servicio =0){	
             /*
 			$pagina_url 	=  	base_url(uri_string());         
@@ -157,20 +149,27 @@
       	}
       	function validate_user_sesssion(){      	
 
-    	    if( $this->sessionclass->is_logged_in() == 1) {
+    	    if( $this->sessionclass->is_logged_in() > 0 ) {
     	    	redirect(url_home());
     	    }
       	}
       	function acceso(){
+
       		if( $this->sessionclass->is_logged_in() != 1) {
+
     	    	$this->logout();
     	    }
       	}
+
       	function is_logged_in(){
+
       		return $this->sessionclass->is_logged_in();
+
       	}
       	function set_userdata($session_data){
+
       		$this->sessionclass->set_userdata($session_data);
+
       	}
 		function show_data_page($data, $center_page , $tema = 0 ){           
 	        $this->load->view("../../../view_tema/header_template", $data);
@@ -191,7 +190,7 @@
 	            $data["menu"] 			= 	$menu;              
 	            $data["nombre"]			= 	$nombre;                                               
 	            $data["email"]			= 	$this->get_session("email");
-	            $data["perfilactual"] 	=  	$this->sessionclass->getnameperfilactual();                
+	            $data["perfilactual"] 	=  	$this->sessionclass->get_nombre_perfil();
 	            $data["in_session"] 	= 	1;
 	            $data["no_publics"] 	=	1;
 	            $data["meta_keywords"] 	=  	"";

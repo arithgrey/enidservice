@@ -7,11 +7,6 @@ $(document).ready(function () {
     set_option("respuesta_valorada", 0);
     $(".form_valoracion").submit(registra_valoracion);
 
-    let envio_pregunta = get_parameter(".envio_pregunta");
-    if (envio_pregunta != 1) {
-        bloquea_form(".form_valoracion");
-        $(".contenedor_registro").show();
-    }
     if (get_parameter(".propietario") == 1) {
         bloquea_form(".form_valoracion");
     }
@@ -24,6 +19,7 @@ let registra_valoracion = function(e) {
 
     let flag = valida_text_form("#pregunta", ".place_area_pregunta", 5, "Pregunta");
     if (flag == 1) {
+
         let url = "../q/index.php/api/pregunta/index/format/json/";
         let data_send = $(".form_valoracion").serialize();
         request_enid("POST", data_send, url, response_registro_valoracion, ".place_registro_valoracion");
@@ -33,14 +29,19 @@ let registra_valoracion = function(e) {
 
 let response_registro_valoracion = function(data) {
 
+    debugger;
+    if( data ==  true ) {
 
-    if (data == 1) {
-        if (get_option("in_session") == 1) {
-            redirect("../area_cliente/?action=preguntas");
-        }
+
         $(".registro_pregunta").show();
-        $(".place_registro_valoracion").empty();
+        //$(".place_registro_valoracion").empty();
+        recorrepage("#place_valoraciones");
+        bloquea_form(".form_valoracion");
+
+    }else{
+        redirect("../area_cliente/?action=preguntas");
     }
+
 }
 
 let before_registro_valoracion = function() {
@@ -87,11 +88,13 @@ let response_carga_valoraciones = function(data) {
 let ordenar_valoraciones = function(e) {
 
     let tipo_ordenamiento = get_parameter_enid($(this), "id");
+    let div = $(".contenedor_global_recomendaciones");
+    let listitems = div.children('.contenedor_valoracion_info').get();
     switch (parseInt(tipo_ordenamiento)) {
         case 0:
             /*Ordenamos por los que tienen más votos*/
-            let div = $(".contenedor_global_recomendaciones");
-            let listitems = div.children('.contenedor_valoracion_info').get();
+
+
             listitems.sort(function (a, b) {
 
                 return (+$(a).attr('numero_utilidad') > +$(b).attr('numero_utilidad')) ?
@@ -106,9 +109,7 @@ let ordenar_valoraciones = function(e) {
             break;
         case 1:
 
-            let div = $(".contenedor_global_recomendaciones");
 
-            let listitems = div.children('.contenedor_valoracion_info').get();
             listitems.sort(function (a, b) {
 
                 return (+$(a).attr('fecha_info_registro') > +$(b).attr('fecha_info_registro')) ?

@@ -558,8 +558,9 @@ function randomString(len, charSet) {
 
 /*Recorre a sección*/
 let recorrepage = function (contenedor = 0) {
-
-    if ($(contenedor).length > 2) {
+    debugger;
+    let l =  contenedor.length;
+    if ( l > 2) {
         $('html, body').animate({scrollTop: $(contenedor).offset().top - 100}, 'slow');
     } else {
         $('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top - 100}, 'slow');
