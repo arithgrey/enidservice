@@ -6,17 +6,17 @@ class Enid extends CI_Controller {
         $this->load->library(lib_def());
     }
     function imagen($id_imagen){
-        
-        foreach ($this->get_img($id_imagen) as $row ){
 
-            return $this->get_img_contents($row);            
+        $img    =  $this->get_img($id_imagen);
+        if(count($img) > 0 ){
+            $this->get_img_contents($img[0]);
         }
-
     }
     function get_img_contents($data){
 
         $path       = "http://".$_SERVER['HTTP_HOST']."/inicio/img_tema/productos/".$data["nombre_imagen"];
-        return      $this->output->set_content_type('png')->set_output(file_get_contents($path));        
+        return      $this->output->set_content_type('png')->set_output(file_get_contents($path));
+
     }
     function imagen_usuario($id_usuario){
             
@@ -45,7 +45,7 @@ class Enid extends CI_Controller {
     }
     function get_img($id_imagen){
 
-        return $this->img_model->get_img($id_imagen);
+        return $this->img_model->q_get(["nombre_imagen"] , $id_imagen );
     }
     function get_img_usuario($id_usuario){
 

@@ -252,9 +252,9 @@
 
                 foreach ($param as $row) {
 
-                    $id_imagen = $row["id_imagen"];
-                    $url = "../imgs/index.php/enid/imagen/" . $id_imagen;
-                    $extra_class = '';
+                    $id_imagen      = $row["id_imagen"];
+                    $url            = "../imgs/index.php/enid/imagen/" . $id_imagen;
+                    $extra_class    = "";
                     $extra_class_contenido = '';
 
                     if ($z == 0) {

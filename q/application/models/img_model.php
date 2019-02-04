@@ -63,14 +63,15 @@
             return $this->db->insert_id();
         }
 
-        function get_img_faq($id_faq)
+
+        /*
+         * function get_img_faq($id_faq)
         {
 
             $query_get = "select  id_imagen from imagen_faq WHERE id_faq =$id_faq LIMIT 1";
             $result = $this->db->query($query_get);
             return $result->result_array();
         }
-        /*
        function elimina_img($id_imagen)
        {
            $query_delete = "DELETE FROM imagen WHERE  idimagen  = '" . $id_imagen . "' LIMIT 1";
