@@ -36,9 +36,9 @@ class Img extends REST_Controller{
   }
   function form_img_user_GET(){
 
-    $param =  $this->get();
-    $param["id_usuario"] = $this->principal->get_session("idusuario");   
-    $this->load->view("imgs/usuario" ,  $param);       
+    $param      =  $this->get();
+    $response   =  form_img_usuario();
+    $this->response($response);
     
   }
   function form_img_servicio_producto_GET(){    
@@ -46,11 +46,8 @@ class Img extends REST_Controller{
     $param          =   $this->get();
     $response       =   false;
     if (if_ext($param,"id_servicio" )){
-        $q      =     "servicio";
-        $q2     =     "servicio";
-        $q3     =     $param["id_servicio"];
-        $response  =     form_img($q , $q2 , $q3 );
 
+        $response  =     form_img("servicio" , "servicio" , $param["id_servicio"] );
     }
     $this->response($response);
   }

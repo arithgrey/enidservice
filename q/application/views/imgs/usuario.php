@@ -10,15 +10,9 @@
     "id"          => 'imagen_img' ,
     "class"       => 'imagen_img' ,
     "name"        => "imagen"
-    ])?>          
-    <br>
-    <?=input_hidden(["name"=>'q', "value"=>'perfil_usuario'])?>    
-    <?=input_hidden([
-        "class" =>  'dinamic_img' ,
-        "id"    =>  'dinamic_img' ,
-        "name"  =>  'dinamic_img' 
     ])?>
-    
+    <?=input_hidden(["name"=>'q', "value"=>'perfil_usuario'])?>    
+    <?=input_hidden(["class" =>  'dinamic_img' , "id"    =>  'dinamic_img' , "name"  =>  'dinamic_img'])?>
     <?=place("place_load_img" , ["id"   =>  'place_load_img'])?>    
     <?=guardar("ACTUALIZAR" , 
     [

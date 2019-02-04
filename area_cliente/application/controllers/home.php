@@ -46,9 +46,7 @@ class Home extends CI_Controller{
             
             $data["ticket"] =  get_info_variable( $this->input->get() , "ticket" );
             $this->principal->show_data_page($data, 'home');   
-        }                   
-                             
-        
+        }
         
     }
     private function resumen_valoraciones($id_usuario){
@@ -61,7 +59,7 @@ class Home extends CI_Controller{
 
         $q["id_usuario"]    =  $id_usuario;
         $api                =  "servicio/alcance_usuario/format/json/";
-        return              $this->principal->api( $api, $q );    
+        return              $this->principal->api( $api, $q );
 
     }
 }

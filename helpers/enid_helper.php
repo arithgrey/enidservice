@@ -519,15 +519,16 @@ if ( ! function_exists('create_select'))
 if ( ! function_exists('get_param_def'))
 {
   function get_param_def($data , $key , $val_def = 0 , $valida_basura = 0 ){
-    $val = ( is_array($data) && array_key_exists($key, $data) ) ? $data[$key] : $val_def;
 
-    if ($valida_basura ==  1) {
+      $val = ( is_array($data) && array_key_exists($key, $data)  &&  $data[$key] !== null ) ? $data[$key] : $val_def;
+
+      if ($valida_basura ==  1) {
         
         if (( is_array($data) && array_key_exists($key, $data) ) ) {
-            evita_basura($data[$key]);    
-        }      
-    }
-    return $val;
+            evita_basura($data[$key]);
+        }
+      }
+      return $val;
 
   }
 }
