@@ -26,7 +26,7 @@ let configura_calificacion = function(e){
 	/*DEJAMOS EN BLANCO TODAS PARA INICIAR*/
 	for(let i = 1; i <= 5; i++) {
 		
-		estrella_ = ".estrella_"+i;		
+		let estrella_ = ".estrella_"+i;
 	    //-webkit-text-stroke-color: #004afc;
 		$(estrella_).css("-webkit-text-fill-color" ,"white");
 		$(estrella_).css("-webkit-text-stroke-color" ,"#004afc");

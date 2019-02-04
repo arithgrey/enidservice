@@ -100,7 +100,7 @@ let muestra_horarios = function(){
 		let texto_cargos_entrega =  "<span class='text_costo_envio'>"+costo_envio+"MXN</span>";
 		let texto_cargos_gratis  =  "<span class='text_costo_envio_gratis'>ENVÍO GRATIS!</span>";
 
-		let texto_cargos_entrega = (flag_envio_gratis ==  1 ) ? texto_cargos_gratis: texto_cargos_entrega;
+		texto_cargos_entrega = (flag_envio_gratis ==  1 ) ? texto_cargos_gratis: texto_cargos_entrega;
 		llenaelementoHTML(".cargos_por_entrega" ,  "<span class='strong'>CARGO POR ENTREGA:</span>"+ texto_cargos_entrega);
 		$(".cargos_por_entrega").addClass("cargos_por_entrega_extra");
 		$(".contenedor_estaciones").hide();
@@ -185,7 +185,7 @@ let notifica_punto_entrega = function(e){
 
 	debugger;
 	let url 		 	= 	"../q/index.php/api/cobranza/solicitud_cambio_punto_entrega/format/json/";
-	if (get_parameter(".primer_registro") ==  1) {
+	if (get_parameter(".primer_registro") >  0 ) {
 		let url 		 	= 	"../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";	
 	}	
 	let data_send 		=  $(".form_punto_encuentro_horario").serialize()+"&"+$.param({"tipo_entrega":1});			

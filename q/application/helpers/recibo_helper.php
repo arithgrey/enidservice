@@ -145,7 +145,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($saldo_pendiente > 0) {
             /*Aplico la comisión del paypal 3**/
-            $comision_paypal = porcentaje($saldo_pendiente, 3.7);
+            $comision_paypal = porcentaje($saldo_pendiente, 3.7,2 , 0);
             $saldo = $saldo_pendiente + $comision_paypal;
             return "https://www.paypal.me/eniservice/" . $saldo;
         }
@@ -563,7 +563,7 @@ if (!function_exists('invierte_date_time')) {
         $resumen .= div("¿Quíen más puede recibir tu pedido?");
         $resumen .= div(get_campo($inf , "nombre_receptor" ));
         $resumen .= div(get_campo($inf , "telefono_receptor" ));
-        $text .=  div($resumen , ["class"=>"informacion_resumen_envio"] );
+        $text    =  div($resumen , ["class"=>"informacion_resumen_envio"] );
 
         return $text;
     }

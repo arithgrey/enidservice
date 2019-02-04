@@ -186,7 +186,7 @@ class Cobranza extends REST_Controller{
     /**/
     function solicitud_proceso_pago_POST(){
 
-
+        $a   =0;
         $param                  =   $this->post();                      
         $param["plan"]          =   (!array_key_exists("plan", $param)) ? $param["servicio"] : $param["plan"];
         $id_servicio            =   $param["plan"]; 

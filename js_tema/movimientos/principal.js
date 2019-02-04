@@ -1,7 +1,6 @@
 "use strict";
 let id_tarea = 0;
 let persona = 0;
-let tipo_negocio = 0;
 let telefono = 0;
 let id_proyecto = 0; 
 let id_usuario = 0;
