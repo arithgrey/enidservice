@@ -660,7 +660,7 @@ if ( ! function_exists('now_enid')){
 }
 
 if ( ! function_exists('porcentaje')){
-  function porcentaje($cantidad,$porciento,$decimales=2 , $numeric_format = 1) {
+  function porcentaje($cantidad,$porciento,$decimales=2 , $numeric_format = 0) {
     if(is_numeric($cantidad) ==  is_numeric($porciento)) {
         if($numeric_format ==  1){
             $total = number_format($cantidad*$porciento/100 ,$decimales);

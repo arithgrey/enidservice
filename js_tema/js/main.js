@@ -1,39 +1,32 @@
-//"use strict";
-var titulo_web = "";
-var flag_titulo_web = 0;
-var tarea = 0;
-var tipo_negocio = 0;
-var option = [];
+"use strict";
+let titulo_web = "";
+let flag_titulo_web = 0;
+let tarea = 0;
+let tipo_negocio = 0;
+let option = [];
 $("footer").ready(function () {
 
-    //var now = get_parameter(".now");
-    var in_session = get_parameter(".in_session");
+
+    let in_session = get_parameter(".in_session");
     set_option("in_session", in_session);
     set_option("is_mobile", get_parameter(".es_movil"));
     $("#form_contacto").submit(envia_comentario);
-    /*
-    $(".btn_enviar_email_prospecto").click(function () {
-        $(".form_enid_contacto").submit();
-    });
-    */
-
-    //$(".form_enid_contacto").submit(registra_lead);
     $(".menu_notificaciones_progreso_dia").click(metricas_perfil);
     metricas_perfil();
     set_titulo_web(get_parameter(".titulo_web"));
     $(".telefono_info_contacto").keyup(quita_espacios_input);
     $(".precio").keyup(quita_espacios_input_precio);
-    //$(".correo_electrionico_lead").keyup(muestra_campos_adicionales_lead);
+
 
 });
-var  set_option =  function(key, value) {
+let  set_option =  function(key, value) {
     option[key] = value;
 }
-var get_option = function(key) {
+let get_option = function(key) {
     return option[key];
 }
 
-var show_confirm = function (text, text_complemento, text_continuar = 0, on_next = 0, on_cancel = 0) {
+let show_confirm = function (text, text_complemento, text_continuar = 0, on_next = 0, on_cancel = 0) {
 
     if (on_next == 0) {
         on_next = function () {
@@ -61,14 +54,14 @@ var show_confirm = function (text, text_complemento, text_continuar = 0, on_next
         }
     });
 };
-var show_load_enid = function (place) {
+let show_load_enid = function (place) {
 
-    var bar = "Cargando ... ";
+    let bar = "Cargando ... ";
     bar += '<div class="progress progress-striped active page-progress-bar">';
     bar += '<div class="progress-bar" style="width: 100%;"></div> </div>';
     llenaelementoHTML(place, bar);
 }
-var show_response_ok_enid = function (place, msj) {
+let show_response_ok_enid = function (place, msj) {
 
     $(place).show();
     llenaelementoHTML(place, "<span class='response_ok_enid'>" + msj + "</span>");
@@ -77,17 +70,17 @@ var show_response_ok_enid = function (place, msj) {
         $(place).fadeOut(1500);
     }, 1500);
 }
-var selecciona_valor_select = function (opcion_a_seleccionar, posicion) {
+let selecciona_valor_select = function (opcion_a_seleccionar, posicion) {
 
     $(opcion_a_seleccionar + " option[value='" + posicion + "']").attr("selected", true);
 
 }
-var valida_text_form = function (input, place_msj, len, nom) {
+let valida_text_form = function (input, place_msj, len, nom) {
 
     $(place_msj).show();
-    var valor_registrado = $.trim(get_parameter(input));
-    var mensaje_user = "";
-    var flag = 1;
+    let valor_registrado = $.trim(get_parameter(input));
+    let mensaje_user = "";
+    let flag = 1;
     if (valor_registrado.length < len) {
         mensaje_user = nom + " demasiado corto ";
         flag = 0;
@@ -104,16 +97,16 @@ var valida_text_form = function (input, place_msj, len, nom) {
     }
     return flag;
 }
-var format_error = function (place_msj, msj) {
+let format_error = function (place_msj, msj) {
 
     llenaelementoHTML(place_msj, "<div class='col-lg-12 alerta_enid padding_5 top_10 bottom_10'>" + msj + "</div>");
 }
-var valida_email_form = function (input, place_msj) {
+let valida_email_form = function (input, place_msj) {
 
     display_elements([place_msj], 1);
-    var valor_registrado = $(input).val();
-    var mensaje_user = "";
-    var flag = 1;
+    let valor_registrado = $(input).val();
+    let mensaje_user = "";
+    let flag = 1;
     if (valor_registrado.length < 8) {
         mensaje_user = "Correo electrónico demasiado corto";
         flag = 0;
@@ -122,7 +115,7 @@ var valida_email_form = function (input, place_msj) {
         mensaje_user = "Registre correo electrónico correcto";
         flag = 0;
     }
-    var emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+    let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
     if (emailRegex.test(valor_registrado)) {
         flag = 1;
     } else {
@@ -137,12 +130,12 @@ var valida_email_form = function (input, place_msj) {
     format_error(place_msj, mensaje_user);
     return flag;
 }
-var valida_tel_form = function (input, place_msj) {
+let valida_tel_form = function (input, place_msj) {
 
     display_elements([place_msj], 1);
-    var valor_registrado = get_parameter(input);
-    var mensaje_user = "";
-    var flag = 1;
+    let valor_registrado = get_parameter(input);
+    let mensaje_user = "";
+    let flag = 1;
     if (valor_registrado.length < 8) {
         mensaje_user = "Número telefónico demasiado corto";
         flag = 0;
@@ -162,19 +155,19 @@ var valida_tel_form = function (input, place_msj) {
     format_error(place_msj, mensaje_user);
     return flag;
 }
-var valEmail = function (valor) {
+let valEmail = function (valor) {
 
-    var re = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
-    var valor = (!re.exec(valor)) ? false : true;
-    return valor;
+    let re = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
+    let v = (!re.exec(valor)) ? false : true;
+    return v;
 }
 
 function mostrar_img_upload(source, id_section) {
 
-    var list = document.getElementById(id_section);
+    let list = document.getElementById(id_section);
     $.removeData(list);
-    var li = document.createElement('li');
-    var img = document.createElement('img');
+    let li = document.createElement('li');
+    let img = document.createElement('img');
     img.setAttribute('width', '100%');
     img.setAttribute('height', '100%');
     img.src = source;
@@ -189,8 +182,8 @@ function response_mensaje_contacto(data) {
 }
 
 function set_places() {
-    var place = [".place_mail_contacto", ".place_tel_contacto"];
-    for (var x in place) {
+    let place = [".place_mail_contacto", ".place_tel_contacto"];
+    for (let x in place) {
         $(place[x]).empty();
     }
 }
@@ -204,12 +197,12 @@ function selecciona_select(class_select, valor_a_seleccionar) {
     $(class_select + ' > option[value="' + valor_a_seleccionar + '"]').attr('selected', 'selected');
 }
 
-var metricas_perfil = function () {
+let metricas_perfil = function () {
 
     if (get_option("in_session") == 1) {
 
-        var url = "../q/index.php/api/productividad/notificaciones/format/json/";
-        var data_send = {"id_usuario": get_parameter(".id_usuario")};
+        let url = "../q/index.php/api/productividad/notificaciones/format/json/";
+        let data_send = {"id_usuario": get_parameter(".id_usuario")};
         request_enid("GET", data_send, url, response_metricas_perfil);
     }
 }
@@ -218,33 +211,33 @@ function response_metricas_perfil(data) {
 
     llenaelementoHTML(".num_tareas_dia_pendientes_usr", data.num_tareas_pendientes);
     llenaelementoHTML(".place_notificaciones_usuario", data.lista_pendientes);
-    var num_pendientes = data.num_tareas_pendientes_text;
+    let num_pendientes = data.num_tareas_pendientes_text;
     set_option("num_pendientes", num_pendientes);
     $(document).on('visibilitychange', function () {
         notifica_usuario_pendientes(num_pendientes);
     });
 
-    var ventas_pendientes = $(".ventas_pendientes").attr("id");
+    let ventas_pendientes = $(".ventas_pendientes").attr("id");
     ventas_pendientes = parseInt(ventas_pendientes);
     if (ventas_pendientes > 0) {
         llenaelementoHTML(".num_ventas_pendientes_dia", "<span class='alerta_notificacion_fail' >" + ventas_pendientes + "</span>");
     }
 
-    var num_tareas_pendientes = data.num_tareas_pendientes_text;
-    var num_tareas_pendientes = parseInt(num_tareas_pendientes);
+    let num_tareas_pendientes = data.num_tareas_pendientes_text;
+    num_tareas_pendientes = parseInt(num_tareas_pendientes);
     if (num_tareas_pendientes > 1) {
         llenaelementoHTML(".tareas_pendientes_productividad", "<span class='alerta_notificacion_fail' >" + num_tareas_pendientes + "</span>");
     }
-    var deuda_cliente = $(".saldo_pendiente_notificacion").attr("deuda_cliente");
+    let deuda_cliente = $(".saldo_pendiente_notificacion").attr("deuda_cliente");
     $(".place_num_pagos_por_realizar").empty();
     if (parseInt(deuda_cliente) > 0) {
         llenaelementoHTML(".place_num_pagos_por_realizar", "<span class='notificacion_enid'>" + deuda_cliente + "MXN</span>");
     }
 }
-var termina_session = function(){
+let termina_session = function(){
     redirect('../login/index.php/startsession/logout/');
 };
-var  notifica_usuario_pendientes = function(num_pendientes) {
+let  notifica_usuario_pendientes = function(num_pendientes) {
     if (document.visibilityState == 'hidden') {
         if (num_pendientes > 0) {
 
@@ -260,35 +253,35 @@ var  notifica_usuario_pendientes = function(num_pendientes) {
 
 function rotulo_title() {
 
-    var num_pendientes = get_option("num_pendientes");
+    let num_pendientes = get_option("num_pendientes");
     if (get_option("flag_activa_notificaciones") == 1) {
         if (flag_titulo_web == 0) {
 
-            var nuevo_titulo = " Tienes " + num_pendientes + " pendientes!";
+            let nuevo_titulo = " Tienes " + num_pendientes + " pendientes!";
             set_titulo_web(nuevo_titulo);
             flag_titulo_web++;
 
         } else {
-            var nuevo_titulo = "Hola tienes " + num_pendientes + " tareas pendientes!";
+            let nuevo_titulo = "Hola tienes " + num_pendientes + " tareas pendientes!";
             set_titulo_web(nuevo_titulo);
             flag_titulo_web = 0;
         }
-        var espera = 3000;
+        let espera = 3000;
         setTimeout("rotulo_title()", espera);
     }
 }
 
-var set_titulo_web = function (n_titulo_web) {
+let set_titulo_web = function (n_titulo_web) {
 
-    var titulo_web = n_titulo_web;
+    let titulo_web = n_titulo_web;
     set_option("titulo_web", n_titulo_web);
     document.title = titulo_web;
 }
-var registra_respuesta_pregunta = function (e) {
+let registra_respuesta_pregunta = function (e) {
 
-    var url = "../q/index.php/api/respuesta/index/format/json/";
-    var data_send = $(".form_respuesta_ticket").serialize();
-    var seccion = ".seccion_respuesta_" + get_option("tarea");
+    let url = "../q/index.php/api/respuesta/index/format/json/";
+    let data_send = $(".form_respuesta_ticket").serialize();
+    let seccion = ".seccion_respuesta_" + get_option("tarea");
     set_option("seccion", seccion);
     request_enid("POST", data_send, url, carga_comentarios_terea_simple);
     e.preventDefault();
@@ -298,11 +291,11 @@ function quitar_espacios_numericos(nuevo_valor , texto = 0) {
 
 
     if(texto == 0){
-        var valor_numerico = "";
-        for (var a = 0; a < nuevo_valor.length; a++) {
+        let valor_numerico = "";
+        for (let a = 0; a < nuevo_valor.length; a++) {
             if (nuevo_valor[a] != " ") {
 
-                var is_num = validar_si_numero(nuevo_valor[a]);
+                let is_num = validar_si_numero(nuevo_valor[a]);
                 if (is_num == true) {
                     if (a < 13) {
                         valor_numerico += nuevo_valor[a];
@@ -313,8 +306,8 @@ function quitar_espacios_numericos(nuevo_valor , texto = 0) {
         return valor_numerico;
     }else{
 
-        var valor_numerico = "";
-        for (var a = 0; a < nuevo_valor.length; a++) {
+        let valor_numerico = "";
+        for (let a = 0; a < nuevo_valor.length; a++) {
             if (nuevo_valor[a] != " ") {
 
                 valor_numerico += nuevo_valor[a];
@@ -324,33 +317,33 @@ function quitar_espacios_numericos(nuevo_valor , texto = 0) {
     }
 
 }
-var sin_espacios = function(input){
+let sin_espacios = function(input){
 
-    var valor = get_parameter(input);
-    var nuevo = quitar_espacios_numericos(valor , 1);
+    let valor = get_parameter(input);
+    let nuevo = quitar_espacios_numericos(valor , 1);
     set_parameter(input , nuevo);
 
 }
-var quita_espacios_input = function () {
+let quita_espacios_input = function () {
 
-    var valor = get_parameter(".telefono_info_contacto");
-    var nuevo = quitar_espacios_numericos(valor);
+    let valor = get_parameter(".telefono_info_contacto");
+    let nuevo = quitar_espacios_numericos(valor);
     $(".telefono_info_contacto").val(nuevo);
 
 }
 
-var quita_espacios = function (input) {
+let quita_espacios = function (input) {
 
-    var valor = get_parameter(input);
-    var nuevo = quitar_espacios_numericos(valor);
+    let valor = get_parameter(input);
+    let nuevo = quitar_espacios_numericos(valor);
     $(input).val(nuevo);
 
 }
 
 function quita_espacios_input_precio() {
 
-    var valor = get_parameter(".precio");
-    var nuevo = quitar_espacios_numericos(valor);
+    let valor = get_parameter(".precio");
+    let nuevo = quitar_espacios_numericos(valor);
     $(".precio").val(nuevo);
 
 }
@@ -362,30 +355,30 @@ function validar_si_numero(numero) {
 
 function quita_espacios_en_input_num(valor) {
 
-    var nuevo = quitar_espacios_numericos(get_parameter(valor));
+    let nuevo = quitar_espacios_numericos(get_parameter(valor));
     $(this).val(nuevo);
 }
 
 function comparer(index) {
     return function (a, b) {
-        var valA = getCellValue(a, index), valB = getCellValue(b, index);
+        let valA = getCellValue(a, index), valB = getCellValue(b, index);
         return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
     }
 }
 
-var getCellValue = function (row, index) {
+let getCellValue = function (row, index) {
 
     return $(row).children('td').eq(index).text()
 }
-var ordena_table_general = function () {
+let ordena_table_general = function () {
 
-    var table = $(this).parents('table').eq(0);
-    var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
+    let table = $(this).parents('table').eq(0);
+    let rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
     this.asc = !this.asc;
     if (!this.asc) {
         rows = rows.reverse()
     }
-    for (var i = 0; i < rows.length; i++) {
+    for (let i = 0; i < rows.length; i++) {
         table.append(rows[i])
     }
 }
@@ -410,8 +403,8 @@ function reset_form(id) {
 
 function array_key_exists(key, array) {
 
-    var exists = array.hasOwnProperty(key);
-    var second_exists = (key in array);
+    let exists = array.hasOwnProperty(key);
+    let second_exists = (key in array);
     if (exists == true && second_exists == true) {
         console.log("existe");
         return true;
@@ -420,10 +413,10 @@ function array_key_exists(key, array) {
     }
 }
 
-var isArray = function (param) {
+let isArray = function (param) {
     return Array.isArray(param);
 }
-var getObjkeys = function (param) {
+let getObjkeys = function (param) {
     return Object.keys(param);
 }
 
@@ -432,7 +425,7 @@ function getMaxOfArray(numArray) {
 }
 
 function display_elements(array, tipo) {
-    for (var x in array) {
+    for (let x in array) {
         /*Cuando se muestra*/
         if (tipo == 1) {
             $(array[x]).css("display", "block");
@@ -445,15 +438,15 @@ function display_elements(array, tipo) {
 
 /*SE ELIMINAN EL CONTENIDO LOS ELEMENTOS*/
 function empty_elements(array) {
-    for (var x in array) {
+    for (let x in array) {
         /*Cuando se muestra*/
         $(array[x]).empty();
     }
 }
 /*Regresa el valor que esta en el nodo html*/
-var get_parameter_enid = function (element, param) {
+let get_parameter_enid = function (element, param) {
 
-    var val = element.attr(param);
+    let val = element.attr(param);
     if (typeof val !== undefined) {
         return val;
     } else {
@@ -494,17 +487,17 @@ function get_attr(e, elemento) {
 }
 
 function request_enid(method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "") {
-    if (before_send == 0) {
+    if (before_send < 1) {
         if (place_before_send.length > 0) {
-            var before_send = function () {
+            let before_send = function () {
                 show_load_enid(place_before_send, "", "");
             }
         } else {
-            var before_send = function () {
+            let before_send = function () {
             }
         }
     }
-    if (call_back == 1) {
+    if (call_back > 0) {
         var call_back = function (data) {
             llenaelementoHTML(place_render, data);
             $('th').click(ordena_table_general);
@@ -519,14 +512,15 @@ function request_enid(method, data_send, url, call_back, place_before_send = 0, 
 }
 
 function set_black(array) {
-    for (var x in array) {
+    for (let x in array) {
         set_parameter(array[x], "");
     }
 }
-var focus_input = function(input) {
+let focus_input = function(input) {
+
     if (isArray(input)) {
 
-        for (var i = 0 in input) {
+        for (const i in input) {
             $(input[i]).css("border", "1px solid rgb(13, 62, 86)");
         }
     } else {
@@ -534,36 +528,36 @@ var focus_input = function(input) {
     }
 };
 /*Bloque todos los elementos del formulario*/
-var bloquea_form = function (form) {
+let bloquea_form = function (form) {
 
     $("*", form).prop('disabled', true);
 
 };
-var desbloqueda_form = function (form) {
+let desbloqueda_form = function (form) {
 
     $("*", form).prop('disabled', false);
 
 };
-var flex = function (elemento) {
+let flex = function (elemento) {
 
     $(elemento).css("display", "flex");
 };
-var get_valor_selected = function (select) {
+let get_valor_selected = function (select) {
     return get_parameter(select + " option:selected");
 };
 
 function randomString(len, charSet) {
     charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var randomString = '';
-    for (var i = 0; i < len; i++) {
-        var randomPoz = Math.floor(Math.random() * charSet.length);
+    let randomString = '';
+    for (let i = 0; i < len; i++) {
+        let randomPoz = Math.floor(Math.random() * charSet.length);
         randomString += charSet.substring(randomPoz, randomPoz + 1);
     }
     return randomString;
 }
 
 /*Recorre a sección*/
-var recorrepage = function (contenedor = 0) {
+let recorrepage = function (contenedor = 0) {
 
     if ($(contenedor).length > 2) {
         $('html, body').animate({scrollTop: $(contenedor).offset().top - 100}, 'slow');
@@ -571,22 +565,22 @@ var recorrepage = function (contenedor = 0) {
         $('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top - 100}, 'slow');
     }
 };
-var transforma_mayusculas = function (x) {
-    var text = x.value;
+let transforma_mayusculas = function (x) {
+    let text = x.value;
     text.trim();
-    var text_mayusculas = text.toUpperCase();
+    let text_mayusculas = text.toUpperCase();
     x.value = text_mayusculas;
 };
-var evita_basura = function () {
+let evita_basura = function () {
 
-    var text = get_parameter(".input_busqueda_producto");
-    var text = text.replace(/["']/g, "");
-    var text = text.replace(/["?]/g, "");
-    var text = text.replace(/["=]/g, "");
-    var text = text.replace(/["|]/g, "");
+    let text = get_parameter(".input_busqueda_producto");
+    text = text.replace(/["']/g, "");
+    text = text.replace(/["?]/g, "");
+    text = text.replace(/["=]/g, "");
+    text = text.replace(/["|]/g, "");
     set_parameter(".input_busqueda_producto", text);
 };
-var reload_imgs = function (id, url) {
+let reload_imgs = function (id, url) {
 
     if(document.location.hostname !=  "localhost"){
         document.getElementById(id).src = url;
@@ -594,30 +588,30 @@ var reload_imgs = function (id, url) {
     }
 };
 /*Regresa el valor que esta en el nodo html*/
-var get_parameter = function (element) {
-    var param = $(element).val();
+let get_parameter = function (element) {
+    let param = $(element).val();
     return param;
 };
-var reloload_img = function (id, url) {
+let reloload_img = function (id, url) {
     console.log(id);
     console.log(url);
     window.setInterval(reload_imgs(id, url), 40000);
 };
-var show_error_enid = function () {
+let show_error_enid = function () {
 
-    var url = "../bug/index.php/api/reportes/reporte_sistema/format/json/";
-    var URLactual = window.location;
-    var data_send = {"descripcion": mensaje_error};
-    var mensaje = "Se presentó error en " + URLactual + "  URLactual";
+    let url = "../bug/index.php/api/reportes/reporte_sistema/format/json/";
+    let URLactual = window.location;
+    let data_send = {"descripcion": mensaje_error};
+    let mensaje = "Se presentó error en " + URLactual + "  URLactual";
     console.log(mensaje);
     request_enid("POST", data_send, url, function () {
 
     });
 }
-var envia_comentario = function (e) {
+let envia_comentario = function (e) {
 
-    var url = $("#form_contacto").attr("action");
-    var f = valida_email_form("#emp_email", ".place_mail_contacto");
+    let url = $("#form_contacto").attr("action");
+    let f = valida_email_form("#emp_email", ".place_mail_contacto");
     if (f == 1) {
         set_places();
 
@@ -625,20 +619,20 @@ var envia_comentario = function (e) {
         if (f == 1) {
             set_places();
             recorrepage("#btn_envio_mensaje");
-            var id_empresa = 1;
-            var data_send = $("#form_contacto").serialize() + "&" + $.param({"empresa": id_empresa, "tipo": 2});
+            let id_empresa = 1;
+            let data_send = $("#form_contacto").serialize() + "&" + $.param({"empresa": id_empresa, "tipo": 2});
             request_enid("POST", data_send, url, response_mensaje_contacto, ".place_registro_contacto");
         }
     }
     e.preventDefault();
 }
 
-var valida_num_form = function (input, place_msj) {
+let valida_num_form = function (input, place_msj) {
 
     $(place_msj).show();
-    var valor_registrado = get_parameter(input);
-    var mensaje_user = "";
-    var f = 1;
+    let valor_registrado = get_parameter(input);
+    let mensaje_user = "";
+    let f = 1;
     $(place_msj).empty();
     if (isNaN(valor_registrado)) {
         mensaje_user = "Registre sólo números ";
@@ -654,21 +648,21 @@ var valida_num_form = function (input, place_msj) {
 }
 /*
 
-var registra_lead = function (e) {
+let registra_lead = function (e) {
 
-    var url = $(".form_enid_contacto").attr("action");
-    var f = valida_email_form("#btn_cotizacion", ".place_mail_contacto");
+    let url = $(".form_enid_contacto").attr("action");
+    let f = valida_email_form("#btn_cotizacion", ".place_mail_contacto");
 
 
     if (f == 1) {
         set_places();
-        var flag = valida_text_form(".nombre_lead", ".place_nombre_lead", 5, "Nombre");
+        let flag = valida_text_form(".nombre_lead", ".place_nombre_lead", 5, "Nombre");
         if (flag == 1) {
             empty_elements([".place_nombre_lead"]);
-            var flag = valida_text_form(".telefono_lead", ".place_telefono_lead", 5, "Teléfono");
+            let flag = valida_text_form(".telefono_lead", ".place_telefono_lead", 5, "Teléfono");
             if (flag == 1) {
                 $(".telefono_lead").empty();
-                var data_send = $(".form_enid_contacto").serialize() + "&" + $.param({"empresa": 1});
+                let data_send = $(".form_enid_contacto").serialize() + "&" + $.param({"empresa": 1});
                 request_enid("POST", data_send, url, response_registro_lead, ".place_registro_contacto");
             }
         }
@@ -710,13 +704,13 @@ function exporta_excel() {
 }
 
 function reset_fields(fields) {
-    for (var x in fields) {
+    for (let x in fields) {
         $(fields[x]).val("");
     }
 }
 
 function set_tarea(n_tarea) {
-    var tarea = n_tarea;
+    let tarea = n_tarea;
 }
 
 function set_text_element(text_tag, texto) {
@@ -727,15 +721,15 @@ function muestra_campos_adicionales_lead() {
     $(".parte_oculta_lead").show();
 }
 function reset_checks(inputs) {
-    for (var x in inputs) {
+    for (let x in inputs) {
         document.getElementById(inputs[x]).checked = false;
     }
 }
 function valida_l_precio(input, l, place, mensaje_user) {
 
-    var val = get_parameter(input);
-    var val_length = val.length;
-    var flag = 0;
+    let val = get_parameter(input);
+    let val_length = val.length;
+    let flag = 0;
 
     if (val_length <= l) {
         $(place).empty();
@@ -751,39 +745,39 @@ function valida_l_precio(input, l, place, mensaje_user) {
 
 
 function asigna_imagen_preview_user(id_usuario) {
-    var usuario_ = "#usuario_" + id_usuario;
+    let usuario_ = "#usuario_" + id_usuario;
     $(usuario_).attr("src", "../img_tema/user/user.png");
 }
 
 function valida_url_form(place, input, msj) {
 
-    var url = $.trim($(input).val());
-    var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    var response = (RegExp.test(url)) ? true : false;
+    let url = $.trim($(input).val());
+    let RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+    let response = (RegExp.test(url)) ? true : false;
     return response;
 }
 
 function  url_editar_user( url , text ){
-	var url_next =  "<a href='"+url+"' style='color:white;'>"+ text+"<i class='fa fa-pencil-square-o'></i></a>";
+	let url_next =  "<a href='"+url+"' style='color:white;'>"+ text+"<i class='fa fa-pencil-square-o'></i></a>";
 	return  url_next;
 }
 
 function existeFecha2(fecha){
-    var fechaf = fecha.split("-");
-    var y = fechaf[0];
-    var m = fechaf[1];
-    var d = fechaf[2];
+    let fechaf = fecha.split("-");
+    let y = fechaf[0];
+    let m = fechaf[1];
+    let d = fechaf[2];
 	return m > 0 && m < 13 && y > 0 && y < 32768 && d > 0 && d <= (new Date(y, m, 0)).getDate();
 }
 function validate_format_num_pass( input , place , num  ){
 
-	var  valor_registrado 	=   get_parameter(input);
-	var  text_registro 		=   $.trim(valor_registrado);
-	var flag 				= 	0;
+	let  valor_registrado 	=   get_parameter(input);
+	let  text_registro 		=   $.trim(valor_registrado);
+	let flag 				= 	0;
 	if ( text_registro.length > num ) {
 		flag =1;
 	}
-	var  mensaje_user =  "";
+	let  mensaje_user =  "";
 	if (flag == 0) {
 		$(input).css("border" , "1px solid rgb(13, 62, 86)");
 		flag  = 0;

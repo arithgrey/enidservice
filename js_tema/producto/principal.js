@@ -57,11 +57,13 @@ let agrega_valoracion_respuesta = function(valoracion , num){
 let ordenar_valoraciones = function(e){
 
 	let tipo_ordenamiento=  get_parameter_enid($(this) , "id");
+	let div = $(".contenedor_global_recomendaciones");
+	let listitems = div.children('.contenedor_valoracion_info').get();
 	switch(parseInt(tipo_ordenamiento)){
 		case 0:
 			/*Ordenamos por los que tienen más votos*/			
-			let div = $(".contenedor_global_recomendaciones");			
-			let listitems = div.children('.contenedor_valoracion_info').get();			
+
+
 			listitems.sort(function (a, b) {
 
 					 return (+$(a).attr('numero_utilidad') > +$(b).attr('numero_utilidad')) ?
@@ -74,8 +76,8 @@ let ordenar_valoraciones = function(e){
 		break;
 		case 1:
 			
-			let div = $(".contenedor_global_recomendaciones");			
-			let listitems = div.children('.contenedor_valoracion_info').get();			
+
+
 			listitems.sort(function (a, b) {
 
 				 return (+$(a).attr('fecha_info_registro') > +$(b).attr('fecha_info_registro')) ?

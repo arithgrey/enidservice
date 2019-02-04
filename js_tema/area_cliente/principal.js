@@ -1,7 +1,6 @@
 let id_tarea = 0;
 let flageditable  =0;
 let persona = 0;
-let tipo_negocio = 0;
 let telefono = 0;
 let id_proyecto = 0; 
 let id_usuario = 0;
@@ -9,8 +8,7 @@ let id_ticket = 0;
 let flag_mostrar_solo_pendientes = 0;
 let id_proyecto_persona_forma_pago =  "";
 let menu_actual = "clientes";
-let id_servicio = 0; 
-let id_proyecto_persona_forma_pago = 0;
+let id_servicio = 0;
 let id_persona = 0;
 
 $(document).ready(function(){	

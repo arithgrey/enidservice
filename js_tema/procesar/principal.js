@@ -1,17 +1,4 @@
 "use strict";
-let plan = 0;
-let num_ciclos =  0;
-let dominio =  0;
-let descripcion_servicio ="";
-let ciclo_facturacion = 0;
-let id_persona = 0;
-let id_proyecto_persona_forma_pago =0;
-let email = "";
-let nombre = "";
-let telefono =  ""; 
-let usuario_referencia =  0;
-let direccion ="";
-let option =[];
 $(document).ready(function(){
 
 	$(".base_compras").hide();
@@ -34,7 +21,6 @@ $(document).ready(function(){
 	});
 
 });
-
 let registro = function(e){
 
 
@@ -173,7 +159,6 @@ let response_set_link = function(data){
 	redirect("../login");
 };
 /*
-
 *
 * function response_procesar_pedido_activo(data){
 	show_error_enid(".place_proceso_compra" , "Error al iniciar sessión");

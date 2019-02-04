@@ -41,7 +41,7 @@ class Home extends CI_Controller{
 
             $primer_registro                        =   (get_param_def($param, "recibo" ) == 0 ) ? 1 : 0;
             $data["primer_registro"]                =   $primer_registro;
-            if ($primer_registro ==  1) {
+            if ($primer_registro > 0) {
 
                 $data["servicio"]   =  $param["servicio"]; 
                 $data["num_ciclos"] =  $param["num_ciclos"];    

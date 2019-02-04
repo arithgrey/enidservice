@@ -519,57 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "CREATE TABLE IF NOT EXISTS `enidserv_web`.`tipo_recordatorio` (\n  `idtipo_recordatorio` INT NOT NULL AUTO_INCREMENT,\n  `tipo` VARCHAR(100) NOT NULL,\n  `status` INT NOT NULL DEFAULT 0,\n  PRIMARY KEY (`idtipo_recordatorio`))\nENGINE = InnoDB;\n\n\nINSERT INTO tipo_recordatorio(tipo) VALUE(\"WhatsApp\");\nINSERT INTO tipo_recordatorio(tipo) VALUE(\"Telefono\");\nINSERT INTO tipo_recordatorio(tipo) VALUE(\"Correo\");\nINSERT INTO tipo_recordatorio(tipo) VALUE(\"Messenger\");\n\n\n\n-- -----------------------------------------------------\n-- Table `enidserv_web`.`recordatorio`\n-- -----------------------------------------------------\nCREATE TABLE IF NOT EXISTS `enidserv_web`.`recordatorio` (\n  `id_recordatorio` INT NOT NULL AUTO_INCREMENT,\n  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),\n  `fecha_cordatorio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),\n  `status` INT NOT NULL DEFAULT 0,\n  `id_recibo` INT(11) NOT NULL,\n  `id_tipo` INT NOT NULL,\n  PRIMARY KEY (`id_recordatorio`),\n  INDEX `fk_recordatorio_proyecto_persona_forma_pago1_idx` (`id_recibo` ASC),\n  INDEX `fk_recordatorio_tipo_recordatorio1_idx` (`id_tipo` ASC),\n  CONSTRAINT `fk_recordatorio_proyecto_persona_forma_pago1`\n    FOREIGN KEY (`id_recibo`)\n    REFERENCES `enidserv_web`.`proyecto_persona_forma_pago` (`id_proyecto_persona_forma_pago`)\n    ON DELETE NO ACTION\n    ON UPDATE NO ACTION,\n  CONSTRAINT `fk_recordatorio_tipo_recordatorio1`\n    FOREIGN KEY (`id_tipo`)\n    REFERENCES `enidserv_web`.`tipo_recordatorio` (`idtipo_recordatorio`)\n    ON DELETE NO ACTION\n    ON UPDATE NO ACTION)\nENGINE = InnoDB;\n\n\n\n\n\n\nalter table recordatorio add descripcion text;\n\n\nC~Dz}#[~P*(0",
-			"settings":
-			{
-				"buffer_size": 1652,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/var/www/html/config.php",
-			"settings":
-			{
-				"buffer_size": 2051,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "config/autoload.php",
-			"settings":
-			{
-				"buffer_size": 423,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "<?php include(\"../../config.php\");\n",
-			"file": "config/config.php",
-			"file_size": 34,
-			"file_write_time": 131927948636100151,
-			"settings":
-			{
-				"buffer_size": 35,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "\n\n<a href=\"http://localhost/inicio/orden_pago_oxxo/?q=562&q2=100&q3=\">\n\t\t<img src=\"http://localhost/inicio/img_tema/pago-oxxo.jpeg\" style=\"width: 100%\" alt=\"\"/>\n</a>\n\t\n<a href=\"https://www.paypal.me/eniservice/562\">\n\t<img src=\"http://localhost/inicio/img_tema/explicacion-pago-en-linea.png\" style=\"width: 100%;\" alt=\"\"/>\n</a>\n",
-			"settings":
-			{
-				"buffer_size": 326,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -625,18 +574,10 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/var/www/html/inicio",
-		"/var/www/html/inicio/db",
-		"/var/www/html/inicio/imgs",
-		"/var/www/html/inicio/imgs/application",
-		"/var/www/html/inicio/imgs/application/controllers",
-		"/var/www/html/inicio/reporte_enid",
-		"/var/www/html/inicio/reporte_enid/application"
-	],
 	"file_history":
 	[
+		"/var/www/html/config.php",
+		"/var/www/html/inicio/config/config.php",
 		"/var/www/html/database.php",
 		"/var/www/html/inicio/administracion_cuenta/application/config/config.php",
 		"/var/www/html/inicio/area_cliente/application/config/config.php",
@@ -668,7 +609,6 @@
 		"/var/www/html/inicio/valoracion/application/config/config.php",
 		"/var/www/html/inicio/system/libraries/Email.php",
 		"/var/www/html/inicio/producto/application/config/config.php",
-		"/var/www/html/config.php",
 		"/var/www/html/inicio/helpers/enid_helper.php",
 		"/var/www/html/inicio/imgs/application/controllers/enid.php",
 		"/var/www/html/inicio/system/libraries/Image_lib.php",
@@ -763,8 +703,7 @@
 		"/var/www/html/inicio/q/application/controllers/api/incidencia.php",
 		"/var/www/html/inicio/q/application/controllers/api/img.php",
 		"/var/www/html/inicio/q/application/controllers/api/imagen_usuario.php",
-		"/var/www/html/inicio/q/application/controllers/api/imagen_servicio.php",
-		"/var/www/html/inicio/q/application/controllers/api/funcionalidad.php"
+		"/var/www/html/inicio/q/application/controllers/api/imagen_servicio.php"
 	],
 	"find":
 	{
@@ -910,6 +849,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"./",
 			"<?php include(\"../../../config.php\");",
 			"<?php include(\"../../../config.php\"); ",
 			"<?php include(\"../config/config.php\");",
@@ -1036,8 +976,7 @@
 			"agregar_punto_encuentro_pedido",
 			"Agregar punto de encuentro",
 			"realiza",
-			"get_texto_status",
-			"id_proyecto_persona_forma_pago"
+			"get_texto_status"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1078,181 +1017,8 @@
 	"groups":
 	[
 		{
-			"selected": 4,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1652,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1652,
-								1652
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/SQL/SQL.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 216.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/var/www/html/config.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2051,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1736,
-								1736
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 624.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "config/autoload.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 423,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "config/config.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 35,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								35,
-								35
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 326,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								161,
-								161
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				}
 			]
 		}
 	],
