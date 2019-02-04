@@ -23,7 +23,7 @@
 	$extra_deseos = 
 	["style"=> 	'text-align: center;background: #ff0048;color: white !important;'];
 
-	/**/
+	
 	$accesos 					=	"";		
 	$accesos_a_intento_compra 	= 	"";
 	$accesos_contacto 			=  	"";
@@ -289,7 +289,7 @@
 			$transacciones .=  get_td($table);
 
 		}
-		/**/
+		
 		$contacto .= get_td($row["contacto"]);		
 		
 		$table ="<table width='100%' border=1  style='text-align: center;'>";
@@ -325,7 +325,7 @@
 		if(count($row["valoraciones"]) > 0){
 			
 
-			/**/
+			
 			$valoraciones = $row["valoraciones"][0];
 			$total_val =  $valoraciones["num_valoraciones"];
 			$si_recomendarian  = $valoraciones["si_recomendarian"];
@@ -359,7 +359,7 @@
 			$total_valoraciones .=  get_td($table);
 
 		}else{
-			/**/
+			
 
 			$table ="<table width='100%' border=1>";
 				$table .="<tr>";	
@@ -381,7 +381,7 @@
 			
 		}
 
-		/**/
+		
 		if (count($row["lista_deseo"]) >0 ) {
 
 			$extra_lista_deseos = " 

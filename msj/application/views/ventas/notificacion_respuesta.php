@@ -1,5 +1,5 @@
 <?php 
-	/**/
+	
 	$nombre =  strtoupper(trim( get_campo($cliente , "nombre"  ))); 
 	$apellido_paterno =  strtoupper(trim(get_campo($cliente , "apellido_paterno"))); 
 	$apellido_materno =  strtoupper(trim(get_campo($cliente , "apellido_materno"  ))); 

@@ -8,7 +8,7 @@ class Status_enid_service extends REST_Controller{
     }
     function servicio_GET(){        
 
-        $param      =    $this->get();
+
         $params     =   ["id_estatus_enid_service","nombre","text_cliente","text_vendedor" ];
         $response   =   $this->status_enid_service_model->get($params, ["pago"=> 1], 10);
         $this->response($response);

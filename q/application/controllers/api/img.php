@@ -4,6 +4,7 @@ class Img extends REST_Controller{
   function __construct(){
       parent::__construct();
       $this->load->model("img_model");
+      $this->load->helper("img");
       $this->load->library(lib_def());
   }
   function index_DELETE(){
@@ -21,9 +22,12 @@ class Img extends REST_Controller{
   }
   function imgs_servicio_GET(){
 
-    $param  =  $this->get();       
-    $imgs   =  $this->img_model->get_imagenes_por_servicio($param);
-    $this->response($imgs);
+    $param      =  $this->get();
+    $response   = false;
+    if(if_ext($param , "id_servicio")){
+        $response   =  $this->img_model->get_imagenes_por_servicio($param);
+    }
+    $this->response($response);
   }
   function form_faq_GET(){            
     
@@ -32,9 +36,9 @@ class Img extends REST_Controller{
   }
   function form_img_user_GET(){
 
-    $param =  $this->get();
-    $param["id_usuario"] = $this->principal->get_session("idusuario");   
-    $this->load->view("imgs/usuario" ,  $param);       
+    $param      =  $this->get();
+    $response   =  form_img_usuario();
+    $this->response($response);
     
   }
   function form_img_servicio_producto_GET(){    
@@ -42,18 +46,15 @@ class Img extends REST_Controller{
     $param          =   $this->get();
     $response       =   false;
     if (if_ext($param,"id_servicio" )){
-        $param["q"]   =   "servicio";
-        $param["q2"]  =   "servicio";
-        $param["q3"]  =   $param["id_servicio"];
-        $this->load->view("imgs/servicio_producto_servicio" ,  $param);
-    }else{
-        $this->response($response);
+
+        $response  =     form_img("servicio" , "servicio" , $param["id_servicio"] );
     }
+    $this->response($response);
   }
   function imagen_servicio_DELETE(){
 
-    $param =  $this->delete();    
-    $response =  $this->img_model->delete_imagen_servicio($param);
+    $param      =  $this->delete();
+    $response   =  $this->img_model->delete_imagen_servicio($param);
     $this->response($response);
     
   }

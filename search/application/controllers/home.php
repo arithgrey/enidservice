@@ -16,9 +16,9 @@ class Home extends CI_Controller{
         $param["vendedor"]          =  get_info_variable($param , "q3"  , 1);        
         $q                          =  get_param_def($param     , "q", "" , 1);            
         evita_basura($q);
-        $param["num_hist"]          =  get_info_servicio($q);                        
+        $param["num_hist"]          =  get_info_servicio($q);
 
-        $this->load_data($param);                
+        $this->load_data($param);
     }
     private function load_data($param){
         
@@ -49,6 +49,7 @@ class Home extends CI_Controller{
             $data["clasificaciones_departamentos"] = $this->principal->get_departamentos("");
 
         }
+
         $servicios              =  $this->busqueda_producto_por_palabra_clave($data_send);
         $data["servicios"]      =  $servicios;
 
@@ -102,9 +103,11 @@ class Home extends CI_Controller{
         $this->set_option("in_session" , 0);
 
 
-        $categorias_destacadas          =   $this->carga_categorias_destacadas();
+
         $data["lista_productos"]        =   $this->agrega_vista_servicios($servicios["servicios"]);
         $data["q"]                      =   $q;
+
+        $categorias_destacadas          =   $this->carga_categorias_destacadas();
         $data["categorias_destacadas"]  =   $categorias_destacadas;
         $data["css"]                    =   [ "search_main.css" ,
             "css_tienda.css",
@@ -126,12 +129,13 @@ class Home extends CI_Controller{
     }
     private function get_vista_servicio($servicio){
 
-        $q               =  $servicio;
-        $q["in_session"] =  $this->get_option("in_session");                
+        $servicio["in_session"] = 0;
+        $servicio["id_usuario_actual"] = 0;
         $api             =  "servicio/crea_vista_producto/format/json/";
-        return $this->principal->api( $api, $q );
+        return $this->principal->api( $api, $servicio );
     }
     private function create_pagination($totales_elementos ,  $per_page , $q , $id_clasificacion, $vendedor ,  $order , $page){
+
         $config["totales_elementos"] =   $totales_elementos;
         $config["per_page"]          =   $per_page;
         $config["q"]                 =   $q;
@@ -177,9 +181,6 @@ class Home extends CI_Controller{
         $api =  "servicio/q/format/json/";        
         return $this->principal->api( $api, $q);
     }
-    private function logout(){                      
-        $this->principal->logout();      
-    }         
     private function get_info_clasificacion($id_clasificacion){
 
         $q["id_clasificacion"] =  $id_clasificacion;
@@ -206,14 +207,14 @@ class Home extends CI_Controller{
                     "Sólo productos"];
         return $response;
     }
-    private function agrega_vista_servicios($data_servicio){
-        $data_complete = [];
-        $a = 0;
-        foreach ($data_servicio as $row){
-            $data_complete[$a] =  $this->get_vista_servicio($row);
-            $a ++;
+    private function agrega_vista_servicios($servicio){
+
+        $servicios = [];
+
+        foreach ($servicio as $row){
+            $servicios[] =  $this->get_vista_servicio($row);
         }
-        return $data_complete;
+        return $servicios;
   }  
   private function create_keyword($q){
 

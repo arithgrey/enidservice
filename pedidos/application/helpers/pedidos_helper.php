@@ -30,17 +30,20 @@ if(!function_exists('invierte_date_time')){
                 $id 		=   $row["id"];
                 $nombre 	=   $row["nombre"];
                 $extra      =   ($id ===  $asignado  ) ? "asignado_actualmente" : "";
-                $lista      .=  "<li class='list-group-item ".$extra." '>";
-                $lista      .= div("#".$a ,  ["class"=>"h6 text-muted"]);
-                $lista      .= div( strtoupper($nombre)  ,  ["class"=>"h5"]);
-                $lista      .= div("ESTABLECER COMO PUNTO DE ENTREGA" ,
-                [
-                    "class"		=>	"h6 text-muted text-right establecer_punto_encuentro cursor_pointer",
-                    "id"		=>	$id,
-                    "id_recibo"	=>	$id_recibo
 
-                ]);
-                $lista .=  "</li>";
+
+                $encuentro       = div("#".$a ,  ["class"=>"h6 text-muted"]);
+                $encuentro      .= div( strtoupper($nombre)  ,  ["class"=>"h5"]);
+                $encuentro      .= div("ESTABLECER COMO PUNTO DE ENTREGA" ,
+                    [
+                        "class"		=>	"h6 text-muted text-right establecer_punto_encuentro cursor_pointer",
+                        "id"		=>	$id,
+                        "id_recibo"	=>	$id_recibo
+
+                    ]
+                );
+
+                $lista .= li($encuentro ,  ["class" => "list-group-item ".$extra ] );
                 $a ++;
             }
             return $lista;

@@ -67,9 +67,11 @@ class Inicio extends CI_Controller {
         
     }
     private function  saldo_amigo($data, $param , $id_usuario){
+
 	    $data["css"]    = ["/movimientos.css"];
 	    $data["js"]     = ['movimientos/solicitud_saldo_amigo.js'];
 	    $this->principal->show_data_page($data , 'solicitar_a_un_amigo');
+
     }
     private function saldo_oxxo($data, $param , $id_usuario){
 

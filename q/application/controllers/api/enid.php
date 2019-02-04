@@ -19,21 +19,6 @@ class Enid extends REST_Controller{
         $this->response($response);
         
     }
-    /*
-    function dispositivos_dia_GET(){
-        
-        $data["dispositivos"] =   $this->enidmodel->get_dispositivos_dia();
-        $this->load->view("enid/market/dispositivos_visitados" ,  $data);
-    }
-    */
-    /*     
-    function sitios_dia_GET(){
-        
-        $data["sitios_visitados"] =   $this->enidmodel->get_sitios_dia();
-        $this->load->view("enid/market/sitios_visitados" ,  $data);
-    }
-    */
-    /**/
     function usabilidad_landing_pages_GET(){    
 
         if($this->input->is_ajax_request()){ 
@@ -44,7 +29,7 @@ class Enid extends REST_Controller{
             $this->response("Error");
         }    
     }        
-    /**/
+    
     function metricas_cotizaciones_GET(){        
 
         $param      =   $this->get();
@@ -63,6 +48,19 @@ class Enid extends REST_Controller{
             $this->response($data);
         }
     }
+    /*
+    function dispositivos_dia_GET(){
 
+        $data["dispositivos"] =   $this->enidmodel->get_dispositivos_dia();
+        $this->load->view("enid/market/dispositivos_visitados" ,  $data);
+    }
+    */
+    /*
+    function sitios_dia_GET(){
+
+        $data["sitios_visitados"] =   $this->enidmodel->get_sitios_dia();
+        $this->load->view("enid/market/sitios_visitados" ,  $data);
+    }
+    */
 
 }

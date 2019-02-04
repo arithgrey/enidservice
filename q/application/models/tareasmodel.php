@@ -52,7 +52,7 @@ class tareasmodel extends CI_Model{
     ];
     return  $this->get($f , [ "id_ticket" => $param["id_ticket"]]);
   }
-  /**/  
+    
   function get_tareas_ticket($param){
 
     $query_get = "SELECT 

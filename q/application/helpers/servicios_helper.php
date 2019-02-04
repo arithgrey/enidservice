@@ -3,44 +3,26 @@ if(!function_exists('invierte_date_time')){
 
     function create_vista($servicio){
 
-
+        $in_session         =   $servicio["in_session"];
         $extra_color        =   "";
         $list               =   "";
-        $flag               =   0;
         $nombre_servicio    =   $servicio["nombre_servicio"];
         $id_servicio        =   $servicio["id_servicio"];
-        $flag_envio_gratis  =   $servicio["flag_envio_gratis"];
-        $text_extra         =   is_servicio($servicio);
         $url_img            =   get_url_request("imgs/index.php/enid/imagen_servicio/".$id_servicio);
         $metakeyword        =   $servicio["metakeyword"];
-        $color              =   (get_param_def($servicio , "color" ) > 0 ) ? $servicio["color"] : "";
+        $color              =   (get_param_def($servicio , "color" ) !== 0 ) ? $servicio["color"] : "";
         $flag_servicio      =   $servicio["flag_servicio"];
         $precio             =   $servicio["precio"];
-        $costo_envio ="";
-        if($flag_servicio == 0){
+        $id_usuario         =   $servicio["id_usuario"];
+        $id_usuario_actual  =   $servicio["id_usuario_actual"];
 
-            $costo_envio    =  (get_param_def($servicio, "costo_envio") !==  0 ) ? $servicio["costo_envio"]["text_envio"]["cliente_solo_text"]: "";
-        }
 
-        $id_ciclo_facturacion =  $servicio["id_ciclo_facturacion"];
-        $extra_url =  "";
-        if($servicio["in_session"] > 0){
 
-            $id_usuario = get_info_variable($servicio , "id_usuario" );
-            $id_usuario =  ($id_usuario ==  0 ) ? "": $id_usuario;
-            $extra_url  =  "&q2=".$id_usuario;
-            $id_usuario_registro_servicio =  $id_usuario;
-        }
+        $url_info_producto  =  get_url_servicio($id_servicio);
+        $vista              = ($in_session >  0 ) ? $servicio["vista"] : 0;
+        $existencia         = ($in_session >  0 ) ? $servicio["existencia"] : 0;
 
-        $url_info_producto  =  get_url_servicio($id_servicio.$extra_url);
 
-        $existencia =0;
-        $vista =0;
-        $in_session =  $servicio["in_session"];
-        if($in_session ==  1){
-            $existencia =  $servicio["existencia"];
-            $vista =  $servicio["vista"];
-        }
 
         $id_error =  "imagen_".$id_servicio;
         $config = [
@@ -54,19 +36,16 @@ if(!function_exists('invierte_date_time')){
 
         $img     =  img($config);
         $p       =  addNRow(get_session_color($color,$flag_servicio,$url_info_producto ,$extra_color,$existencia,$in_session));
+        $p       =  valida_botton_editar_servicio($in_session, $id_servicio ,$id_usuario, $id_usuario_actual);
         $p      .=  div(div(get_text_nombre_servicio($nombre_servicio),["style"=>"margin-left: 5px;text-align: left!important;"]),1);
         $p      .=  div(muestra_vistas_servicio($in_session,$vista) , 1);
         $producto            =  div($p , ["style"=>"position:relative;"]);
         $contenedor_producto =  div($producto, ['class'=>'contenedor_principal_informacion_producto card-block']);
-        $text_costo_envio    =  get_text_costo_envio($flag_servicio , $costo_envio);
-
 
         $b =  "";
-        $b .= div(get_precio_producto($url_info_producto,$precio,$costo_envio,$flag_servicio, $id_ciclo_facturacion) ,["style"=>"position:absolute;top:250px;margin-left:5px;z-index: 100"],1);
+        $b .= div(get_precio_producto($url_info_producto,$precio) ,["style"=>"position:absolute;top:250px;margin-left:5px;z-index: 100"],1);
         $b .= div(anchor_enid($img ,  ["href"=> $url_info_producto ]),["class"    =>  'contenedor_principal_imagen_producto'],1);
         $b .= $contenedor_producto;
-        $b .= $text_costo_envio;
-
         $bloque_producto = div($b , ["class"=>'info_producto']);
         return $bloque_producto;
 
@@ -290,7 +269,7 @@ if(!function_exists('invierte_date_time')){
         $tipo = ($param[0]["flag_servicio"] ==  1) ? "SERVICIO": "PRODUCTO";
         return $tipo;
     }
-    /**/
+    
 	function get_nombre_ciclo_facturacion($ciclos , $id_ciclo){
 		foreach($ciclos as $row){
 			$id_ciclo_facturacion = $row["id_ciclo_facturacion"];
@@ -299,7 +278,7 @@ if(!function_exists('invierte_date_time')){
 			}
 		}
 	}
-	/**/
+	
 	function create_colores_disponibles($text_colores){
 		
 		$arreglo_colores =  explode("," , $text_colores);		
@@ -313,7 +292,7 @@ if(!function_exists('invierte_date_time')){
 		}		
 		return div($lista_completa, ["id"	=>	'contenedor_colores_disponibles'] );
 	}
-	/**/
+	
 	function valida_text_numero_articulos($num){	
 
 		$text 	=  span("Alerta" , ["class"=>'mjs_articulo_no_disponible'])."este artúculo no se encuentra disponible, agregar nuevo";
@@ -324,7 +303,7 @@ if(!function_exists('invierte_date_time')){
 		}
 		return $text;
 	}
-	/**/
+	
 	function agrega_data_servicio($data , $key , $valor ){
 		
 		$data[$key] =  $valor;
@@ -342,7 +321,7 @@ if(!function_exists('invierte_date_time')){
 		$costo =  ($flag_envio_gratis ==  1 ) ? -100 : 100;
 		return $costo;
 	}
-	/**/
+	
 	function select_producto_usado($valor_actual){
 
 		$usado = [ "No" , "Si"];
@@ -361,7 +340,7 @@ if(!function_exists('invierte_date_time')){
 		$usado = [ "No" , "Si"];
 		return $usado[$tipo];
 	}		
-	/**/
+	
 	function create_url_procesar_compra($producto_text, 
                                     $id_servicio ,  
                                     $total ,
@@ -377,7 +356,7 @@ if(!function_exists('invierte_date_time')){
 	  return $url_procesar_compra;
 	  
 	}
-	/**/
+	
 	function create_table_servicios($servicios){
 		
 		$list ="";
@@ -407,7 +386,7 @@ if(!function_exists('invierte_date_time')){
 		$extra = 	($num_terminos > 3) ? "scroll_terms" : "";
 		return $extra;		
 	}
-	/**/
+	
 	function get_text_ciclo_facturacion($id_ciclo_facturacion){
 
 	  	$nuevo_text ="";
@@ -483,19 +462,11 @@ if(!function_exists('invierte_date_time')){
       return $extra;
     }
     
-    function get_precio_producto($url_info_producto , $precio, $costo_envio , $flag_servicio , $id_ciclo_facturacion){
-    
-		if($flag_servicio ==  0){    
-		      $seccion = anchor_enid($precio.'MXN', ["href"  =>  $url_info_producto , 
-		      	"class" => "text_precio" ]);
-		}else{
+    function get_precio_producto($url_info_producto , $precio){
 
-			$s1 	 =  anchor_enid($precio.'MXN' , ["href"=> $url_info_producto , "class" => "text_precio"] , 1 );
-			$s2 	 =  anchor_enid(' A CONVENIR' , ["href"=> $url_info_producto , "class" => "text_precio"] , 1 );
-			$seccion = ($id_ciclo_facturacion != 9 && $precio>0 ) ? $s1 : $s2;
-		      
-	    }
-	    return $seccion;
+        $precio 	 =  anchor_enid($precio.'MXN' , ["href"=> $url_info_producto , "class" => "text_precio"] , 1 );
+	    return $precio;
+
   	}
   	function get_numero_colores($color , $flag_servicio , $url_info_producto , $extra ){
 
@@ -537,16 +508,15 @@ if(!function_exists('invierte_date_time')){
 	       return div($vistas." personas alcanzadas");
 	    } 
   	}
-  	function valida_botton_editar_servicio($param, $id_usuario_registro_servicio ){
+  	function valida_botton_editar_servicio($in_session, $id_servicio ,$id_usuario, $id_usuario_registro_servicio){
 
-      $in_session = $param["in_session"];
-      	if($in_session ==  1){
-          $id_servicio        =  $param["id_servicio"];
-          $id_usuario_actual  =   $param["id_usuario"];
-          if( $id_usuario_actual ==  $id_usuario_registro_servicio){
+
+      	if($in_session >  0){
+          if( $id_usuario ==  $id_usuario_registro_servicio){
             return icon("servicio fa fa-pencil" ,  ["id" => $id_servicio]);
           }
-      	}
+        }
+
   	}
 
   	function get_rango_entrega($id_perfil, $actual, $attributes='' , $titulo , $minimo = 1 , $maximo = 10){

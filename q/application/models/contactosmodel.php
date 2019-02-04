@@ -5,7 +5,7 @@
         $this->load->database();
 
     }
-    /**/
+    
     function insert($params , $return_id=0 , $debug=0){        
         $insert   = $this->db->insert("contact", $params , $debug);     
         return ($return_id ==  1) ? $this->db->insert_id() : $insert;

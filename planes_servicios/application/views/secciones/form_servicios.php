@@ -13,7 +13,7 @@ $tipo_promocion_servicio
 		"id"		=>"1"
 	]);
 
-/**/
+
 $t_tipo_promocion = heading_enid(
 					icon('fa fa-shopping-bag')."ARTÍCULO", "4",
 						['class'	=>	'text_modalidad',
@@ -36,7 +36,7 @@ $t_costo 	=
 		],1);
 
 
-/**/
+
 $i_tipo_promocion = input(
 					[
 						"id"			=> 	"nombre_producto" ,

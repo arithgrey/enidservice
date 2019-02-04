@@ -6,7 +6,7 @@ if(!function_exists('invierte_date_time')){
     $minimo   =   $alcance[0]["minimo"];
     $promedio =   $alcance[0]["promedio"];
     
-    $text =  heading_enid("ALCANCE DE TUS PRODUCTOS" , 3 , []);    
+    $text =  heading_enid("ALCANCE DE TUS PRODUCTOS" , 3 );
     $text .=  "<table>";
     $text .=  "<tr>";
       $text .=  get_td($maximo  , ["class"=>'num_alcance', "id"=> $maximo ]);

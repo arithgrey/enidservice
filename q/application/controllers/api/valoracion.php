@@ -13,8 +13,12 @@
         }
         function lectura_PUT()
         {
-            $param = $this->put();
-            return $this->valoracion_model->lectura_usuario($param);
+            $param      = $this->put();
+            $response   = false;
+            if (if_ext($param , "id_usuario")){
+                $response   = $this->valoracion_model->lectura_usuario($param);
+            }
+            $this->response($response);
         }
         function gamificacion_negativa_PUT()
         {
@@ -24,35 +28,25 @@
         function pregunta_consumudor_form_GET()
         {
 
-            $param = $this->get();
-            $data["id_servicio"] = $param["id_servicio"];
-            $servicio = $this->principal->get_base_servicio($param["id_servicio"]);
-            $data["servicio"] = $servicio;
-            $data["in_session"] = $param["in_session"];
-            $data["id_usuario"] = $param["id_usuario"];
-            $data["vendedor"] = "";
+            $param                  = $this->get();
+            $data["id_servicio"]    = $param["id_servicio"];
+            $servicio               = $this->principal->get_base_servicio($param["id_servicio"]);
+            $data["servicio"]       = $servicio;
+            $data["in_session"]     = $param["in_session"];
+            $data["id_usuario"]     = $param["id_usuario"];
+            $data["vendedor"]       = "";
             if ($data["in_session"] == 1) {
 
-                $data["vendedor"] =
-                    $this->principal->get_info_usuario($servicio[0]["id_usuario"]);
+                $data["vendedor"] = $this->principal->get_info_usuario($servicio[0]["id_usuario"]);
             }
             $data["propietario"] = ($servicio[0]["id_usuario"] != $data["id_usuario"]) ? 0 : 1;
             $this->load->view("valoraciones/pregunta_consumudor", $data);
         }
-
-        function servicios_pregunta_sin_contestar_GET()
-        {
-
-            $param = $this->get();
-            $response =
-                $this->valoracion_model->get_servicios_pregunta_sin_contestar($param);
-            $this->response($response);
-        }
         function gamificacion_pregunta_PUT()
         {
 
-            $param = $this->put();
-            $response = $this->valoracion_model->update_gamificacion_pregunta($param);
+            $param      = $this->put();
+            $response   = $this->valoracion_model->update_gamificacion_pregunta($param);
             $this->response($response);
         }
         function resumen_valoraciones_vendedor_GET()
@@ -169,13 +163,6 @@
             $api = "usuario/usuario_existencia/format/json/";
             return $this->principal->api($api, $q);
         }
-
-        private function set_visto_pregunta($q)
-        {
-            $api = "pregunta/visto_pregunta";
-            return $this->principal->api($api, $q, "json", "PUT");
-
-        }
         private function get_usuario_por_servicio($q)
         {
 
@@ -188,6 +175,24 @@
             $api = "producto/producto_por_id/format/json/";
             return $this->principal->api($api, $q);
         }
+        /*
+        private function set_visto_pregunta($q)
+        {
+            $api = "pregunta/visto_pregunta";
+            return $this->principal->api($api, $q, "json", "PUT");
+
+        }
+
+         function servicios_pregunta_sin_contestar_GET()
+        {
+
+            $param      = $this->get();
+
+            $response   = $this->valoracion_model->get_servicios_pregunta_sin_contestar($param);
+            $this->response($response);
+
+        }
+
         /*
         function q_up($q, $q2, $id_usuario)
         {
@@ -251,5 +256,5 @@
           */
 
 
-        /**/
+        
     }

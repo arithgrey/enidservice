@@ -6,37 +6,7 @@ class notificacion_pago extends REST_Controller{
       $this->load->model("notificacion_pago_model");                                    
       $this->load->library(lib_def());               
   }
-  /*
-  function resumen_GET(){
 
-    $param    = $this->get();
-    $response = false;
-    if(if_ext($param , "id_notificacion_pago")){
-        $response = $this->notificacion_pago_model->get_notificacion_pago($param);
-    }
-    $this->response($response);
-  }
-  function es_notificado_GET(){
-
-    $param      = $this->get();
-    $response   = false;
-    if(if_ext($param , "recibo")) {
-        $response = $this->notificacion_pago_model->verifica_pago_notificado($param);
-    }
-    $this->response($response);
-
-  }
-  function pago_resumen_GET(){
-
-    $param    = $this->get();
-    $response = false;
-    if(if_ext($param , "id_notificacion_pago")) {
-        $response = $this->notificacion_pago_model->get_notificacion_pago_resumen($param);
-    }
-    $this->response($response);
-
-  }
-  */
   function notifica_pago_usuario_POST(){
       $param    =  $this->post();
       $response =  false;
@@ -64,6 +34,37 @@ class notificacion_pago extends REST_Controller{
         if (if_ext($param,"estado,id_notificacion_pago")){
             $response   = $this->notificacion_pago_model->q_up("status", $param["estado"], $param["id_notificacion_pago"]);
         }
-        $this->response($response);    
+        $this->response($response);
+  }
+    /*
+    function resumen_GET(){
+
+      $param    = $this->get();
+      $response = false;
+      if(if_ext($param , "id_notificacion_pago")){
+          $response = $this->notificacion_pago_model->get_notificacion_pago($param);
+      }
+      $this->response($response);
     }
+    function es_notificado_GET(){
+
+      $param      = $this->get();
+      $response   = false;
+      if(if_ext($param , "recibo")) {
+          $response = $this->notificacion_pago_model->verifica_pago_notificado($param);
+      }
+      $this->response($response);
+
+    }
+    function pago_resumen_GET(){
+
+      $param    = $this->get();
+      $response = false;
+      if(if_ext($param , "id_notificacion_pago")) {
+          $response = $this->notificacion_pago_model->get_notificacion_pago_resumen($param);
+      }
+      $this->response($response);
+
+    }
+    */
 }

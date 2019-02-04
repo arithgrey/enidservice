@@ -22,14 +22,14 @@ class Imprimir
         }
         $pdf->addPage("P","A4");
 		$pdf->useImportedPage($pageId, 10, 10, 190 );
-		/**/
+		
 		$beneficiario =  $param["beneficiario"];
 		$folio =  $param["folio"];
 		$monto =  $param["monto"];
 		$numero_cuenta = $param["numero_cuenta"];
 		$concepto =  $param["concepto"];
 
-		/**/
+		
 		$pdf->SetFont('Arial','B',14);		
 		$pdf->SetTextColor(255 , 255, 255);
 		$pdf->Text(46, 62, $concepto);
@@ -49,14 +49,14 @@ class Imprimir
 		$pdf->SetTextColor(0,0,0);
 		$pdf->Text(28, 160, $numero_cuenta);
 
-		/**/
+		
 		$pdf->Image("http://enidservice.com/inicio/img_tema/enid_service_logo.jpg", 
 			120,
 			90, 
 			60 , 
 			60, 
 			"jpg");
-		/**/
+		
 		$pdf->Output();	
 	}
 }

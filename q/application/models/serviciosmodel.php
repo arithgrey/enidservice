@@ -311,7 +311,7 @@
             return $this->agrega_color($param, 0 , "");
         }    
     }        
-    /**/
+    
     function agrega_color($param , $flag , $color_anterior ){
 
         $color     =  $param["color"];         
@@ -354,17 +354,16 @@
         return  $this->db->query($query_get)->result_array()[0]["num_servicios"];
     }
     function busqueda($param){        
-        $data_complete["num_servicios"] =  
-            $this->get_resultados_posibles($param);                    
+        $data_complete["num_servicios"] = $this->get_resultados_posibles($param);
             $_num =  get_random();
             $this->create_productos_disponibles(0 , $_num , $param);                
-                $data_complete["sql"]       =       $this->get_option("sql");                            
+                $data_complete["sql"]       =       $this->get_option("sql");
                 $data_complete["servicio"]  =       $this->db->get("tmp_producto_$_num")->result_array();
-                if($param["agrega_clasificaciones"] ==  1){                        
+                if($param["agrega_clasificaciones"] ==  1){
                     $data_complete["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
-                }                 
+                }
             $this->create_productos_disponibles(1 , $_num , $param);
-        return  $data_complete;        
+        return  $data_complete;
     }
     function get_clasificaciones_disponibles($_num){
 
@@ -633,7 +632,7 @@
 
                     
     } 
-    /**/
+    
     function periodo($param){
 
         $query_get =  "SELECT * FROM servicio WHERE DATE(fecha_registro) 
@@ -661,14 +660,16 @@
     }
     function  get_clasificaciones_destacadas(){
         
-        $query_get ="SELECT primer_nivel, count(0)total
+        $query_get ="SELECT 
+                    primer_nivel, 
+                    count(0)total
                     FROM servicio 
                     WHERE 
                     status =1 
                     AND existencia >0 
                     GROUP BY 
                     primer_nivel
-                    ORDER BY count(0) DESC";
+                    ORDER BY count(0) DESC  LIMIT 5";
         return  $this->db->query($query_get)->result_array();
         
     }
@@ -740,6 +741,7 @@
                 $query_create ="CREATE TABLE tmp_producto_$_num AS 
                             SELECT  
                                 id_servicio ,  
+                                id_usuario,
                                 nombre_servicio, 
                                 flag_servicio, 
                                 flag_envio_gratis,

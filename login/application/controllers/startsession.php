@@ -16,12 +16,14 @@ class Startsession extends CI_Controller{
         
     }
     private function getCssJs($data){
+
         $data["desc_web"]       =   "COMPRA Y VENDE EN ENID SERVICE";
         $data["meta_keywords"]  =   "COMPRA Y VENDE ARTÍCULOS Y SERVICIOS  EN ENID SERVICE ";
         $data["url_img_post"]   =   create_url_preview("promo.png");
         $data["css"]            =   ["login.css"];
         $data["js"]             =   ["login/sha1.js" ,"login/ini.js"];
 	    return $data;
+
     }
     function logout(){
 

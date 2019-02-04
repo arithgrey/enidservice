@@ -586,7 +586,7 @@
           return $result->result_array();
       }
       */
-        /**/
+        
         /*
       function set_cancelacion_compra($id){
           return $this->q_up("num_cancelaciones" , "num_cancelaciones + 1 " , $id);
@@ -654,5 +654,5 @@
             return $result->result_array();
         }
         */
-        /**/
+        
     }

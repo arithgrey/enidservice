@@ -7,42 +7,16 @@ class Afiliacion extends REST_Controller{
         parent::__construct();                  
         $this->load->helper("q");                                     
         $this->load->helper("afiliados");             
-        $this->load->model("afiliacion_model");  
-        //$this->load->model("afiliados_model");  
+        $this->load->model("afiliacion_model");
         $this->load->library(lib_def()); 
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
-    /**/    
-    /**/
     function set_option($key , $value){
         $this->options[$key] = $value;        
     }
-    /**/
     function get_option($key){
         return $this->options[$key];
     }
-    /*
-    function afiliados_GET(){
-        $param =  $this->get();
-        $data["afiliados"]=  $this->afiliados_model->get_pendiente_asesoria($param);
-        $this->load->view("afiliados/lista" , $data);
-    }
-    */
-    /*
-    function afiliados_productividad_GET(){
-
-        $param =  $this->get();        
-        $usuarios =  $this->afiliados_model->get_usuarios_productivos($param);    
-        $this->set_option("usuarios_afiliados" , $usuarios);        
-      
-        $this->agrega_ganancias_afiliado();
-      
-        $data["info_usuarios"] =   $this->get_option("usuarios_afiliados");
-        $this->load->view("afiliados/productividad"  , $data);
-        
-    }   
-    */ 
-    /**/
     function agrega_ganancias_afiliado(){
 
         $usuarios =  $this->get_option("usuarios_afiliados");
@@ -61,8 +35,7 @@ class Afiliacion extends REST_Controller{
 
         }
         $this->set_option("usuarios_afiliados" , $afiliados);
-    }    
-    /**/
+    }
     function carga_ganancias_pendientes_por_pagar($id_usuario){
         
         $q["id_usuario"] =  $id_usuario;
@@ -75,7 +48,6 @@ class Afiliacion extends REST_Controller{
         return json_decode($info, true);
         
     }
-    /**/
     function get_ventas_afiliados($param){
 
         
@@ -87,7 +59,6 @@ class Afiliacion extends REST_Controller{
         $precio_publico =  $result->response;
         return json_decode($precio_publico , true);
     }
-    /**/
     function get_accesos($param){
         
         $url = "q/index.php/api/";         
@@ -98,7 +69,7 @@ class Afiliacion extends REST_Controller{
         $precio_publico =  $result->response;
         return json_decode($precio_publico , true);
     }
-    /**/
+
     function metricas_GET(){        
 
         $param                      =   $this->get();        
@@ -108,27 +79,6 @@ class Afiliacion extends REST_Controller{
         $this->load->view("afiliados/principal" , $data);
 
     }
-    /*
-    function reporte_global_GET(){
-
-        $param = $this->get();        
-        $param["id_usuario"] = $this->id_usuario;
-        $data  = $this->afiliados_model->get_reporte_global($param);
-        $this->response($data);        
-    } 
-    */
-    /*   
-    function ventas_GET(){
-
-        $param=  $this->get(); 
-        $param["id_usuario"] = $this->id_usuario;        
-        $info_ventas =  $this->afiliados_model->get_resumen_ventas($param);          
-        $data["info_ventas"]  =  $this->agrega_precio_publico($info_ventas);
-        $this->load->view("afiliados/ventas_afiliado" , $data);                        
-        
-    }
-    */
-    /**/
     function agrega_precio_publico($data){
 
         $nueva_data = [];
@@ -143,10 +93,8 @@ class Afiliacion extends REST_Controller{
             $z ++;            
 
         }
-        /**/
         return  $nueva_data;    
     }
-    /***/
     function get_precio_venta($costo){
 
         $q["costo"] =  $costo;

@@ -1,5 +1,5 @@
 <?php	
-    /**/
+    
     $id_recibo =  $param["id_recibo"];    
     $id_codigo_postal = 0;
     $direccion= "";
@@ -35,7 +35,7 @@
         $nombre_receptor =  $row["nombre_receptor"];
         $telefono_receptor =  $row["telefono_receptor"];
     }
-    /**/
+    
 
 
     if($registro_direccion ==  0) {

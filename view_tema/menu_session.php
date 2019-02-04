@@ -4,7 +4,7 @@
         anchor_enid("Vender". icon("fa fa-shopping-cart") , 
         ["href"=>"../login/?action=nuevo" ,  "class" =>'links white']);
 
-        /**/
+        
         $links_envio_msj =
         anchor_enid("Envía mensaje". icon("fa fa-paper-plane") , 
         ["href"=>"../contact/#envio_msj" ,  "class" =>'links white']);

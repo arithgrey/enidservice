@@ -519,15 +519,16 @@ if ( ! function_exists('create_select'))
 if ( ! function_exists('get_param_def'))
 {
   function get_param_def($data , $key , $val_def = 0 , $valida_basura = 0 ){
-    $val = ( is_array($data) && array_key_exists($key, $data) ) ? $data[$key] : $val_def;
 
-    if ($valida_basura ==  1) {
+      $val = ( is_array($data) && array_key_exists($key, $data)  &&  $data[$key] !== null ) ? $data[$key] : $val_def;
+
+      if ($valida_basura ==  1) {
         
         if (( is_array($data) && array_key_exists($key, $data) ) ) {
-            evita_basura($data[$key]);    
-        }      
-    }
-    return $val;
+            evita_basura($data[$key]);
+        }
+      }
+      return $val;
 
   }
 }
@@ -1189,6 +1190,17 @@ if (!function_exists('get_url_servicio')) {
 
     }
 }
+if ( ! function_exists('append_data')) {
+
+    function append_data($array)
+    {
+        $response =  "";
+        for ($a = 0; $a < count($array); $a ++){
+            $response .=  " ".$array[$a];
+        }
+        return $response;
+    }
+}
 
 if ( ! function_exists('get_request_email'))
 {
@@ -1203,6 +1215,9 @@ if ( ! function_exists('get_request_email'))
         return $request;
     }
 }
+
+
+
 //https://www.codeigniter.com/user_guide/general/styleguide.html
 //https://www.codeigniter.com/user_guide/libraries/config.html
 //Poder modificar el punto de entrega desde el mondulo de pedidos

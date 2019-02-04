@@ -58,7 +58,7 @@
 		$num_tareas_pendientes =  $row["num_tareas_pendientes"];
 
 
-		/**/
+		
 
 
 		if ($tmp_cliente != $proyecto){

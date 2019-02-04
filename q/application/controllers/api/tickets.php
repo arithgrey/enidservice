@@ -12,7 +12,7 @@ class Tickets extends REST_Controller{
     function num_GET(){
 
         $param      =   $this->get();
-        $response   =   [];        
+        $response   =   false;
         if (if_ext($param,"id_ticket")) {
             $response   =  $this->tickets_model->get_num($param);    
         }        
@@ -84,24 +84,8 @@ class Tickets extends REST_Controller{
         return $this->enviar($q);
         
     }
-    /*
-    function costos_envios_por_recibo_GET(){
-        
-        $param              =   $this->get();
-        $id_servicio        =   $this->tickets_model->get_id_servicio_por_id_recibo($param);
-        $flag_envio_gratis  =   $this->tickets_model->get_flag_envio_gratis_por_id_recibo($param);
-        $this->response($flag_envio_gratis);
-    }
-    */
-    /*
-    function servicio_recibo_GET(){
-        
-        $param      =  $this->get();
-        $response   =  $this->tickets_model->get_servicio_por_recibo($param);
-        $this->response($response );
-    }
-    */
     function form_GET(){
+
         $param                  =   $this->get();                 
         $data["departamentos"]  =   $this->get_departamentos($param);
         $this->load->view("secciones/form_tickets" , $data );        
@@ -169,15 +153,6 @@ class Tickets extends REST_Controller{
         $response["gamificacion"]   =  $this->gamificacion_negativa($id_servicio , $param["id_usuario"]);
         return $response;                
     }
-    /*
-    function solicitud_amigo_POST(){
-
-        $param                  =   $this->post();
-        $param["id_usuario"]    =   $this->id_usuario;
-        $response               =   $this->tickets_model->registra_solicitud_pago_amigo($param);
-        $this->response($response);        
-    }
-    */
     function movimientos_usuario_GET(){
         
         $param                          =   $this->get();
@@ -185,7 +160,6 @@ class Tickets extends REST_Controller{
         $response["solicitud_saldo"]    =   $this->tickets_model->get_solicitudes_saldo($param);
         $this->load->view("tickets/solicitudes_saldo" , $response);               
     }
-
     function ticket_desarrollo_GET(){
 
         $param      =   $this->get();
@@ -257,6 +231,7 @@ class Tickets extends REST_Controller{
 
         $api    =  "tarea/tareas_ticket_num/format/json/";
         return  $this->principal->api( $api , $q);
+
     }
     private function cancela_orden_compra($q){
 
@@ -306,5 +281,31 @@ class Tickets extends REST_Controller{
         $api                =  "usuario_perfil/es_cliente/format/json/";
         return $this->principal->api(  $api , $q);
     }
+    /*
+    function solicitud_amigo_POST(){
+
+        $param                  =   $this->post();
+        $param["id_usuario"]    =   $this->id_usuario;
+        $response               =   $this->tickets_model->registra_solicitud_pago_amigo($param);
+        $this->response($response);
+    }
+    */
+    /*
+    function costos_envios_por_recibo_GET(){
+
+        $param              =   $this->get();
+        $id_servicio        =   $this->tickets_model->get_id_servicio_por_id_recibo($param);
+        $flag_envio_gratis  =   $this->tickets_model->get_flag_envio_gratis_por_id_recibo($param);
+        $this->response($flag_envio_gratis);
+    }
+    */
+    /*
+    function servicio_recibo_GET(){
+
+        $param      =  $this->get();
+        $response   =  $this->tickets_model->get_servicio_por_recibo($param);
+        $this->response($response );
+    }
+    */
 
 }
