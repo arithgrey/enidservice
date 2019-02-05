@@ -134,23 +134,42 @@
         function index_POST()
         {
 
-            $param = $this->post();
-            $id_servicio = $param["id_servicio"];
-            $params = [
-                "valoracion" => $param["calificacion"],
-                "titulo" => $param["titulo"],
-                "comentario" => $param["comentario"],
-                "recomendaria" => $param["recomendaria"],
-                "email" => $param["email"],
-                "nombre" => $param["nombre"],
-                "id_servicio" => $id_servicio
-            ];
-            $id_valoracion = $this->valoracion_model->insert($params, 1);
-            $data_complete["id_servicio"] = $id_servicio;
-            $prm["key"] = "email";
-            $prm["value"] = $param["email"];
-            $data_complete["existencia_usuario"] = $this->valida_existencia_usuario($prm);
-            $this->response($data_complete);
+            $param      = $this->post();
+            $response   = false;
+            if(if_ext($param , "id_servicio,calificacion,titulo,comentario,email,nombre")){
+
+
+                $id_servicio = $param["id_servicio"];
+                $params = [
+                    "valoracion" => $param["calificacion"],
+                    "titulo" => $param["titulo"],
+                    "comentario" => $param["comentario"],
+                    "recomendaria" => $param["recomendaria"],
+                    "email" => $param["email"],
+                    "nombre" => $param["nombre"],
+                    "id_servicio" => $id_servicio
+                ];
+                $id_valoracion = $this->valoracion_model->insert($params, 1);
+                $response["id_servicio"] = $id_servicio;
+                $prm["key"] = "email";
+                $prm["value"] = $param["email"];
+                $response["existencia_usuario"] = $this->valida_existencia_usuario($prm);
+                $this->notifica_vendedor($id_servicio);
+            }
+            $this->response($response);
+        }
+        private function notifica_vendedor($id_servicio){
+
+            $usuario     = $this->get_usuario_servicio($id_servicio);
+            $sender      = get_notificacion_valoracion($usuario , $id_servicio);
+            $this->principal->send_email_enid($sender , 1);
+
+        }
+        private function get_usuario_servicio($id_servicio){
+
+            $q["id_servicio"]   = $id_servicio;
+            $api                = "usuario/usuario_servicio/format/json/";
+            return $this->principal->api($api,$q);
         }
         function valida_existencia_usuario($q)
         {

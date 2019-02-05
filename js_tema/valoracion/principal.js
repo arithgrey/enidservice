@@ -67,6 +67,7 @@ let before_registro_valoracion = function(){
 	bloquea_form(".form_valoracion");
 }
 let response_registro_valoracion = function(data){
+
 	let url_producto = "../producto/?producto="+data.id_servicio+"&valoracion=1";
 	let mira_tu_valoracion = "mira tu valoración <a class='blue_enid_background white'  href='"+url_producto+"' style='padding:5px;color:white!important;' > aquí </a>";
 	let extra_invitacion_a_enid ="";

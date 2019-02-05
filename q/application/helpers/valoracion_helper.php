@@ -1,7 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
   if(!function_exists('invierte_date_time')){
-  
-  function valida_readonly($text){
+
+      function get_notificacion_valoracion($usuario, $id_servicio){
+
+          $nombre     =   $usuario[0]["nombre"];
+          $email      =   $usuario[0]["email"];
+          $asunto     =   "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
+          $text       =   "Que tal {$nombre}  un nuevo cliente dejó una reseña sobre uno de tus artículos 
+          puedes consultarla aquí ".anchor_enid("buzón aquí", ["href" =>  "https://enidservice.com/inicio/producto/?producto={$id_servicio}&valoracion=1"]);
+          $cuerpo     =  img_enid([] , 1  , 1  ).heading_enid($text , 5);
+          $sender     =   get_request_email($email, $asunto , $cuerpo);
+          return $sender;
+
+      }
+
+
+      function valida_readonly($text){
     if(trim(strlen($text)) > 1) {
         return "readonly";
     }
