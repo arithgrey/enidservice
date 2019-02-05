@@ -186,7 +186,7 @@ let notifica_punto_entrega = function(e){
 	debugger;
 	let url 		 	= 	"../q/index.php/api/cobranza/solicitud_cambio_punto_entrega/format/json/";
 	if (get_parameter(".primer_registro") >  0 ) {
-		let url 		 	= 	"../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";	
+		url 		 	= 	"../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
 	}	
 	let data_send 		=  $(".form_punto_encuentro_horario").serialize()+"&"+$.param({"tipo_entrega":1});			
 	bloquea_form(".form_punto_encuentro_horario");

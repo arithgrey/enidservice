@@ -398,18 +398,18 @@ let confirma_cambio_horario = function(id_recibo , status  , saldo_cubierto_envi
 	let text_confirmacion = "";
 	switch(parseInt(status)) {
 		case 9:
-			let text = "LA ORDEN YA FUÉ ENTREGADA!";
-			let text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
+			text = "LA ORDEN YA FUÉ ENTREGADA!";
+			text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
 
 			break;
 		case 10:
-			let text = "LA ORDEN FUÉ CANCELADA!";
-			let text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
+			text = "LA ORDEN FUÉ CANCELADA!";
+			text_confirmacion = "¿EDITAR HORARIO DE ENTREGA AÚN ASÍ?";
 			break;
 
 		default:
-			let text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
-			let text_confirmacion = "";
+			text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
+			text_confirmacion = "";
 			break;
 	}
 
