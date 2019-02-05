@@ -574,8 +574,45 @@ if(!function_exists('invierte_date_time')){
 	function sumatoria_array($array ,$key) {
 
 		return array_sum(array_column($array, $key));
-
 	}
+    function agregar_imgs(){
 
+        $cancelar =  anchor_enid(
+            icon('fa fa fa-times'),
+            [
+                'class' =>  'btn_enid_blue cancelar_carga_imagen cancelar_img pull-right' ,
+                'style' => "color:white!important"
+            ]
+            ,1
+        );
+
+        $agregar =  heading_enid("AGREGAR IMAGENES", 3 , ["class"     =>  "titulo_agregar_imagenes"]  , 1);
+        $place   =  place("place_img_producto");
+        $imgs    =  div(append_data([$agregar, $place]) ,  ["class"=>"col-lg-4 col-lg-offset-4"]);
+
+        return div(append_data([$cancelar ,$imgs]) , ["class"=>"contenedor_agregar_imagenes"]);
+
+    }
+
+    function get_base_youtube($url){
+
+        $text =  "";
+        $f    =  0;
+        for( $a = strlen($url)-1; $a > 1; $a -- ){
+
+            if($url[$a] === "=" || $url[$a] === "/"){
+
+                $f =  $a;
+                break;
+            }
+        }
+
+        for($b = ($f+1);  $b < strlen($url); $b ++){
+            $text .=  $url[$b];
+        }
+        $url =  "https://www.youtube.com/embed/".$text;
+        return $url;
+
+    }
 
 }

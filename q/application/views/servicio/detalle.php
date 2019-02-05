@@ -257,43 +257,41 @@
 
 ?>
 
-<?=$this->load->view("servicio/agregar_imagenes" , $data);?>
+<?=agregar_imgs()?>
 <div class="contenedor_global_servicio">                
+
+
+
     <?=n_row_12()?>
-        <?=heading_enid($nombre_servicio_heading, 4 ,[] , 1)?>    
-        <?=form_open("",
-            [ 'class' => 'form_servicio_nombre_info input_nombre_servicio_facturacion ']
-            );?>  
+        <?=heading_enid($nombre_servicio_heading, 4 )?>
+        <?=form_open("", [ 'class' => 'form_servicio_nombre_info input_nombre_servicio_facturacion ']);?>
             <?=$i_nombre?>          
             <?=div($ie_nombre ,['class'=> 'col-lg-9'])?>
-            <?=div(guardar("GUARDAR",["class" => "info_guardar_nombre_servicio"],1)
-             ,['class'=> 'col-lg-3'])?>
+            <?=div(guardar("GUARDAR",["class" => "info_guardar_nombre_servicio"],1) ,['class'=> 'col-lg-3'])?>
         <?=form_close()?>
     <?=end_row()?>
-    <?=n_row_12()?>
-        <?=get_menu_config($num, $num_imagenes, $url_productos_publico)?>
-    <?=end_row()?>
+
+    <?=addNRow(get_menu_config($num, $num_imagenes, $url_productos_publico))?>
+
 
     <div class="tab-content">
         <div class="tab-pane <?=$extra_1?>" id="tab_imagenes">
 
-            <?=valida_descartar_promocion($num_imagenes , $id_servicio)?>
+            <?=addNRow(valida_descartar_promocion($num_imagenes , $id_servicio))?>
 
-            <?=$notificacion_imagenes;?>
+
+            <?=addNRow($notificacion_imagenes);?>
             <?=div($images, ["class"   => "contenedor_imagen_muestra"],1 )?>
             
-            <?=heading_enid($llamada_accion_youtube , 4 ,[] ,1)?>
+            <?=heading_enid($llamada_accion_youtube , 4 )?>
 
-            <?=div($text_llamada_accion_youtube , [] , 1)?>
+            <?=div($text_llamada_accion_youtube , 1)?>
             <?=div($val_youtube , ["class"    =>  "text_video_servicio"] , 1 )?>
             <?=form_open("",  
-                [
-                "class"=>
-                "form_servicio_youtube input_url_youtube contenedor_info_youtube row"])?>
+                ["class"=> "form_servicio_youtube input_url_youtube contenedor_info_youtube row"])?>
                 <?=$ih_youtube?>
                 <?=div($i_youtube.$place_youtube , ['class' => 'col-lg-9'])?>                
-                <?=div(guardar("GUARDAR", ["class" =>"guardar_video_btn"] ,1) ,
-                ['class' => 'col-lg-3'])?>
+                <?=div(guardar("GUARDAR", ["class" =>"guardar_video_btn"] ,1) , ['class' => 'col-lg-3'])?>
             <?=form_close()?>
         </div> 
 

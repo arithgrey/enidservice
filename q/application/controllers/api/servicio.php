@@ -699,7 +699,17 @@ class Servicio extends REST_Controller{
   function q_PUT(){
 
     $param      =   $this->put();
-    $response   =   $this->serviciosmodel->set_q_servicio($param);
+    $response   =   false;
+    if(if_ext($param , "q,q2,id_servicio")){
+
+
+        if($param["q"] ===  "url_vide_youtube"){
+
+            $param["q2"] =  get_base_youtube($param["q2"]);
+        }
+        $response   =   $this->serviciosmodel->set_q_servicio($param);
+
+    }
     $this->response($response);
 
   }

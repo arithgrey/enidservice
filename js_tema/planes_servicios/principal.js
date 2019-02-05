@@ -140,6 +140,7 @@ let respuesta_informacion_servicio = function(data) {
     $(".actilet_publicacion").click(activa_publicacion);
     $(".tiempo_entrega").change(set_tiempo_entrega);
     $(".btn_url_ml").click(set_url_ml);
+    $(".activar_publicacion").click(activa_publicacion);
 
     $(".form_dropshipping").submit(modifica_dropshipping);
     if (get_option("flag_nueva_categoria") == 1) {
@@ -333,13 +334,13 @@ let actualiza_dato_servicio_afiliado = function(e) {
 
 
 let valida_url_youtube = function() {
-
+    debugger;
     let url = get_parameter(".url_youtube");
     let text_youtube = "youtu";
 
     let input = ".url_youtube";
     let place_msj = ".place_url_youtube";
-    let mensaje_user = "Url no valida!, ingrese url de youtube <span class='url_youtube_alert'><i class='fa fa-youtube-play'></i> Youtube! </span>";
+    let mensaje_user = "Url no valida!, ingrese url de youtube <div class='url_youtube_alert'><i class='fa fa-youtube-play'></i> Youtube! </div>";
 
     if (url.indexOf(text_youtube) != -1) {
         $(place_msj).empty();
@@ -347,8 +348,7 @@ let valida_url_youtube = function() {
     } else {
 
         $(input).css("border", "1px solid rgb(13, 62, 86)");
-        llenaelementoHTML(place_msj, "<span class='alerta_enid'>"
-            + mensaje_user + "</span>");
+        llenaelementoHTML(place_msj, "<div class='alerta_enid'>" + mensaje_user + "</div>");
         return 0;
     }
 

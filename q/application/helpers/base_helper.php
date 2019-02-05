@@ -119,7 +119,7 @@
         {
 
             if ($num_images == 0) {
-                return div(anchor_enid("DESCARTAR PROMOCIÓN", ["class" => 'descartar_promocion', "id" => $id_servicio]), ["class" => "text-right"]);
+                return div(anchor_enid("DESCARTAR PROMOCIÓN", ["class" => 'descartar_promocion', "id" => $id_servicio]), ["class" => "text-right"]).br(2);
             }
         }
 
