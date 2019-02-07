@@ -10,6 +10,8 @@ $(document).ready(function(){
 	$(".editar_tipo_entrega").click(pre_tipo_entrega);
 	$(".status_venta").change(modidica_estado);
 	$(".form_cantidad").submit(registra_saldo_cubierto);
+	$(".configurara_informacion_cliente").click(muestra_form_usuario);
+	$(".form_set_usuario").submit(registro_usuario);
 
 	$(".saldo_cubierto_pos_venta").keyup(function(e) {
     	let code = (e.keyCode ? e.keyCode : e.which);
@@ -455,4 +457,19 @@ let modifica_status_recordatorio = function(id_recordatorio , status){
 		let data_send 	= 	{id_recordatorio:id_recordatorio  , status:status};
 		request_enid( "PUT",  data_send, url);
 	}
+}
+let registro_usuario  = function(e){
+
+	let url			= 	$(".form_set_usuario").attr("action");
+	let data_send 	= 	$(".form_set_usuario").serialize();
+	request_enid( "PUT",  data_send, url , response_usuario , ".place_form_set_usuario" , bloquea_form(".form_set_usuario") , ".form_set_usuario");
+	e.preventDefault();
+}
+let response_usuario = function(data){
+
+	redirect("");
+}
+let muestra_form_usuario = function(){
+	showonehideone("#contenedor_form_usuario", ".contenedor_cliente");
+	//display_elements(["#form_set_usuario" , 1]);
 }

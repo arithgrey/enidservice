@@ -6,10 +6,24 @@ class usuario extends REST_Controller{
         parent::__construct(); 
         $this->load->helper("q");                                      
         $this->load->model('usuario_model');    
-        $this->load->library('table');  
+        $this->load->library('table');
         $this->load->library(lib_def());   
         $this->id_usuario   =  $this->principal->get_session("idusuario");  
-    } 
+    }
+    function index_PUT(){
+        $param      =  $this->put();
+        $response   = false;
+        if(if_ext($param , "nombre,apellido_paterno,apellido_materno,email,tel_contacto,id_usuario")){
+
+
+            $id_usuario = $param["id_usuario"];
+            unset($param["id_usuario"]);
+            $response =  $this->usuario_model->update($param, ["idusuario" => $id_usuario ]);
+
+        }
+        $this->response($response);
+
+    }
     function ultima_publicacion_PUT(){
         
         $param      =   $this->put();

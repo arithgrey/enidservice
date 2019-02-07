@@ -16,6 +16,9 @@ $("footer").ready(function () {
     set_titulo_web(get_parameter(".titulo_web"));
     $(".telefono_info_contacto").keyup(quita_espacios_input);
     $(".precio").keyup(quita_espacios_input_precio);
+    $(".email").keyup(function(){
+        sin_espacios(".email");
+    });
 
 
 });
@@ -25,7 +28,6 @@ let  set_option =  function(key, value) {
 let get_option = function(key) {
     return option[key];
 }
-
 let show_confirm = function (text, text_complemento, text_continuar = 0, on_next = 0, on_cancel = 0) {
 
     if (on_next == 0) {
@@ -188,11 +190,11 @@ function set_places() {
     }
 }
 
-function showonehideone(elementomostrar, elementoocultar) {
-    $(elementomostrar).show();
-    $(elementoocultar).hide();
+function showonehideone(show, hide) {
+    $(show).show();
+    flex(show);
+    $(hide).hide();
 }
-
 function selecciona_select(class_select, valor_a_seleccionar) {
     $(class_select + ' > option[value="' + valor_a_seleccionar + '"]').attr('selected', 'selected');
 }
@@ -489,11 +491,11 @@ function get_attr(e, elemento) {
 function request_enid(method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "") {
     if (before_send < 1) {
         if (place_before_send.length > 0) {
-            let before_send = function () {
+            var before_send = function () {
                 show_load_enid(place_before_send, "", "");
             }
         } else {
-            let before_send = function () {
+            var before_send = function () {
             }
         }
     }
@@ -594,9 +596,8 @@ let get_parameter = function (element) {
     return param;
 };
 let reloload_img = function (id, url) {
-    console.log(id);
-    console.log(url);
-    window.setInterval(reload_imgs(id, url), 40000);
+
+    window.setInterval(reload_imgs(id, url), 50000);
 };
 let show_error_enid = function () {
 
