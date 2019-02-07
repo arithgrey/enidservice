@@ -471,5 +471,5 @@ let response_usuario = function(data){
 }
 let muestra_form_usuario = function(){
 	showonehideone("#contenedor_form_usuario", ".contenedor_cliente");
-	//display_elements(["#form_set_usuario" , 1]);
+
 }
