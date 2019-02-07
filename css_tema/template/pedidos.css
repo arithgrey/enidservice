@@ -140,3 +140,6 @@
     border-style: solid;
     border-block-end-color: #0b309b;
 }
+#contenedor_form_usuario{
+    display:none;
+}

@@ -556,7 +556,7 @@ if ( ! function_exists('addNRow'))
 {
     function addNRow($e,  $attributes = []){
 
-        return n_row_12($attributes). $e .end_row();
+        return n_row_12($attributes). $e . end_row();
 
     }
 }

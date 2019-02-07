@@ -144,6 +144,8 @@
 		<br>
         <?=resumen_compras_cliente($num_compras)?>
 		<?=create_seccion_usuario($usuario)?>
+        <?=get_form_usuario($usuario)?>
+
 		<?=create_seccion_domicilio($domicilio)?>
 		<?=create_seccion_recordatorios($recibo)?>
 		<br>

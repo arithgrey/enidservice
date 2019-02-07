@@ -561,6 +561,7 @@ if(!function_exists('invierte_date_time')){
     {
         function create_seccion_usuario($usuario){
 
+
             $text  				= 	"";
             foreach ($usuario as $row) {
 
@@ -571,14 +572,21 @@ if(!function_exists('invierte_date_time')){
                 $tel_contacto 			=  $row["tel_contacto"];
                 $tel_contacto_alterno 	=  $row["tel_contacto_alterno"];
 
-                $text .=  div($nombre ." " . $apellido_paterno . " " .$apellido_materno , 1);
+                $text .=  div(strtoupper(append_data([$nombre, $apellido_paterno , $apellido_materno])) , 1);
                 $text .=  div($email , 1);
                 $text .=  div($tel_contacto , 1);
                 $text .=  div($tel_contacto_alterno , 1);
+
+
+                $icon  =  icon("fa-pencil configurara_informacion_cliente black" );
+                $text .=  div( $icon, ["class" => "pull-right dropdown"] ,1);
+
             }
-            $encabezado 	= 	div("CLIENTE",	["class" =>"encabezado_cliente"] ,1);
-            $text_usuario 	=  	div(strtoupper($text) ,["class" =>"contenido_domicilio"] , 1);
-            return div($encabezado.$text_usuario , ["class" => "contenedor_cliente"] ,1).hr();
+
+            $encabezado 	= 	div("CLIENTE",	["class" =>"encabezado_cliente"] );
+            $text_usuario 	=  	div($text,["class" =>"contenido_domicilio"]);
+
+            return div($encabezado.$text_usuario , ["class" => "contenedor_cliente"] ).hr();
 
         }
     }
@@ -756,6 +764,73 @@ if(!function_exists('invierte_date_time')){
             $encabezado = 	div("DOMICIO DEL ENVIO",	["class" =>"encabezado_domicilio"] ,1);
             $direccion 	=  	div(strtoupper($direccion) ,["class" =>"contenido_domicilio"] , 1);
             return div($encabezado.$direccion , ["class" => "contenedor_domicilio"] ,1).hr();
+        }
+    }
+    if ( ! function_exists('get_form_usuario'))
+    {
+        function get_form_usuario($usuario){
+
+
+            if(count($usuario) > 0 ){
+
+                $usuario            =   $usuario[0];
+                $nombre             =   $usuario["nombre"];
+                $apellido_paterno   =   $usuario["apellido_paterno"];
+                $apellido_materno   =   $usuario["apellido_materno"];
+                $email              =   $usuario["email"];
+                $telefono           =   $usuario["tel_contacto"];
+                $id_usuario         =   $usuario["id_usuario"];
+
+
+                $action  =   "../../q/index.php/api/usuario/index/format/json/";
+                $attr    =   ["METHOD" => "PUT" ,  "id"  => "form_set_usuario" , "class" => "form_set_usuario"];
+
+                $form    =   form_open($action , $attr );
+                $form   .=   div("NOMBRE:", ["class"=> "strong"],1);
+                $form   .=   input(["name" =>  "nombre" , "value" => $nombre, "type" => "text", "required" => "true"]);
+                $form   .=   div("APELLIDO PATERNO:",["class"=> "strong"],1);
+                $form   .=   input(["name" => "apellido_paterno", "value"=> $apellido_paterno , "type" => "text"] );
+                $form   .=   div("APELLIDO MATERNO:",["class"=> "strong"],1);
+                $form   .=   form_input( ["name" => "apellido_materno", "value"=> $apellido_materno, "type" => "text"] );
+                $form   .=   div("EMAIL:",["class"=> "strong"],1);
+
+
+                $form    .= form_input([
+                    'name'          =>  'email',
+                    'value'         =>  $email,
+                    "required"      =>  "true",
+                    "class"         =>  "input-sm email email",
+                    "onkeypress"    =>  "minusculas(this);"
+                ]);
+
+
+                $form   .=   div("TELÉFONO:",["class"=> "strong"],1);
+
+                $form    .= form_input([
+                    'name'          =>  'tel_contacto',
+                    'value'         =>  $telefono,
+                    "required"      =>  "true",
+                    'type'          =>  "tel",
+                    "maxlength"     =>  13,
+                    "minlength"     =>  8,
+                    "class"         => "form-control input-sm  telefono telefono_info_contacto"
+                ]);
+
+                $form .= form_input([
+                    "value" =>  $id_usuario ,
+                    "name"  => "id_usuario",
+                    "type"  =>  "hidden"
+
+                ]);
+
+
+                $form .=  guardar( "GUARDAR" );
+                $form .= form_close(place("place_form_set_usuario"));
+                $f     = addNRow($form , ["id" => "contenedor_form_usuario" ]);
+                return $f;
+            }
+
+
         }
     }
 }
