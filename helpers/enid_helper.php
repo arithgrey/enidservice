@@ -1231,7 +1231,26 @@ if ( ! function_exists('get_request_email'))
         return $request;
     }
 }
+if ( ! function_exists('es_email_valido')){
 
+    function es_email_valido($email)
+    {
+        $f = 0;
+        $b = 0;
+        if( !is_null($email)){
+            $f ++;
+            for($a = 0; $a < strlen($email); $a ++ ){
+                if( ctype_digit($email[$a]) ){
+                    $b ++;
+                }
+            }
+        }
+        $es_valido = ($b < 6 && $f > 0 ) ?  1 : 0;
+        return $es_valido;
+
+
+    }
+}
 
 
 //https://www.codeigniter.com/user_guide/general/styleguide.html

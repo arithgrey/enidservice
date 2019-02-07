@@ -1,6 +1,25 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_notificacion_solicitud_valoracion($usuario, $id_servicio)
+    {
+
+        $nombre = $usuario[0]["nombre"];
+        $email  = $usuario[0]["email"];
+        $asunto = "Hola  {$nombre} ¡Tu paquete ya se entregó! ";
+
+
+        $url    = "https://enidservice.com/inicio/valoracion/?servicio=".$id_servicio;
+        $img    = img_enid([], 1, 1) . heading_enid($text, 5);
+        $text   = heading("¿Valorarías tu experiencia de compra en Enid Service?",3);
+        $text  .= div("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor").br();
+        $text  .= div(anchor_enid("Déjanos tus comentarios aquí!" , ["href" => $url]));
+
+        $cuerpo = append_data([$img, $text]);
+        $sender = get_request_email($email, $asunto, $cuerpo);
+        return $sender;
+
+    }
     function get_saludo($cliente , $config_log , $id_recibo){
 
          $text   =      heading_enid("Buen día " . $cliente . ", Primeramente un cordial saludo. ",3);

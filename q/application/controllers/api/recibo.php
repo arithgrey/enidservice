@@ -584,9 +584,13 @@ class recibo extends REST_Controller{
         }
         $response   = false;
         if (if_ext($param , "saldo_cubierto,recibo,status")) {
+
             $this->response($this->set_status($param) );
+
         }else{
+
             $this->response($response);
+
         }
 
     }
@@ -598,7 +602,9 @@ class recibo extends REST_Controller{
         if ($param["saldo_cubierto"] > 0 && $param["saldo_cubierto"] >= $pago_pendiente || ( $pago_pendiente - $param["saldo_cubierto"] ) < 101){
 
 
-                $response =  $this->recibo_model->notifica_entrega($param["saldo_cubierto"] , $param["status"] , $param["recibo"] , 'fecha_entrega');
+            $response =  $this->recibo_model->notifica_entrega($param["saldo_cubierto"] , $param["status"] , $param["recibo"] , 'fecha_entrega');
+            $this->solicita_encuenta($param["id_recibo"]);
+
 
 
         }
@@ -748,6 +754,32 @@ class recibo extends REST_Controller{
             $response   =  $this->recibo_model->get_total_compras_usuario($id_usuario);
         }
         $this->response($response);
+    }
+    private function solicita_encuenta($id_recibo){
+
+        $recibo          =  $this->recibo_model->q_get(["notificacion_encuesta" , "id_usuario" ,"id_servicio"], $id_recibo);
+        if(count($recibo) > 0 ){
+            $notificacion_encuesta  =   $recibo[0]["notificacion_encuesta"];
+            $id_servicio            =   $recibo[0]["id_servicio"];
+
+            if($notificacion_encuesta < 1 ){
+                $id_usuario = $recibo[0]["id_usuario"];
+                /*usuario que compra*/
+                $usuario =  $this->principal->get_info_usuario($id_usuario);
+                if( count( $usuario ) > 0){
+
+
+                    $es_valido =  es_email_valido($usuario[0]["email"]);
+                    if( $es_valido > 0 ){
+                        $sender =  get_notificacion_solicitud_valoracion($usuario, $id_servicio);
+                        $this->principal->send_email_enid($sender , 1);
+
+                        $status = $this->recibo_model->q_up("notificacion_encuesta", 1, $id_recibo);
+
+                    }
+                }
+            }
+        }
     }
     /*
     private function set_stock_servicio($q){
