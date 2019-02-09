@@ -19,7 +19,7 @@
         "required"  =>   "true"
       ])?>          
     </div>
-    <?=guardar("Registrar", [], 1)?>                            
+    <?=guardar("Registrar")?>
     <?=place("place_recurso")?>
   </form>              
 <?=end_row()?>

@@ -1,5 +1,5 @@
 <?php 
-	$seccion_video ="";
+	$svideo ="";
 
 	foreach ($videos as $row){
 					
@@ -11,10 +11,9 @@
 	
 		$url_video_facebook =  $row["url_video_facebook"];
 		$url_vide_youtube  	= $row["url_vide_youtube"]; 
-		$seccion_video 		.= n_row_12();		
-		$seccion_video 		.=  valida_url_youtube($url_vide_youtube);  	
-				
-				$copi= icon('btn_copiar_enlace_pagina_contacto fa fa-clone ', ["data-clipboard-text"=> $url_vide_youtube] );	
+
+		$svideo 		.=  valida_url_youtube($url_vide_youtube);
+		$copi= icon('btn_copiar_enlace_pagina_contacto fa fa-clone ', ["data-clipboard-text"=> $url_vide_youtube] );
 
 				if (strlen($url_video_facebook) < 5){
 
@@ -39,19 +38,17 @@
 						"target"	=>	'_black'
 					]);
 
-				$seccion_video .= div($nombre_servicio , 
+				$svideo .= div($nombre_servicio ,
 					[
 						"class"	=>	'strong  white',
 						"style"	=>	'padding:5px;background:#072430!important;font-size:.8em;'
-					] )
+					] );
 				
-				$seccion_video .= div( $copi . $copi_facebook);
-				$seccion_video .= end_row();
-				$seccion_video .= "<hr>";		
+				$svideo .= div( $copi . $copi_facebook);
+
 			
 		}
 		
 ?>
+<?php /*$svideo;*/?>
 
-
-<?=$seccion_video;?>

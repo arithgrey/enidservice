@@ -24,9 +24,10 @@
 						"placeholder"	=>			"Nombre",
 						"class"			=>			"nombre",
 						"type"			=>			"text",
-						"required"		=> "true"
+						"required"		=>          "true"
 					])?>					  
-			</div>			
+			</div>
+
 			<div class="col-lg-4">
 				<?=div("A.paterno")?>
 				<?=input([						
@@ -37,7 +38,7 @@
 						"required"		=> 	true 
 					])?>					
 			</div>
-				<!-- Text input-->
+
 			<div class="col-lg-4">
 				<?=div("A.Materno")?>
 				<?=input(
@@ -61,7 +62,6 @@
 				])?>
 				<?=place("place_correo_incorrecto")?>	
 			</div>
-			<!-- Text input-->
 			<div class="col-lg-4">				
 				<?=div("Departamento")?>				
 				<?=create_select(
@@ -87,8 +87,6 @@
 				  	<option value='9AM'>9AM</option>
 				</select>
 			</div>
-
-
 			<div class="col-lg-4">
 				<?=div("Fin de labores")?>			
 				<select class="form-control fin_labor" name="fin_labor">

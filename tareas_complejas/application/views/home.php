@@ -41,8 +41,7 @@
               <?=end_row()?>
               
               <?=anchor_enid("Iniciemos conversación" , ["href"=>"../contact"] )?>
-              <hr style="color:black;height: 1px;border: 0;background-color: black;">
-
+                <?=hr()?>
             </div>
           </div>                   
         </div>      

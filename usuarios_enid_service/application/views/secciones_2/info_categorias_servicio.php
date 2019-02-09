@@ -3,7 +3,6 @@
 		<form class="form-horizontal form_categoria" id="form_categoria">
 		<div class="form-group">
 		  <?=div("¿ES SERVICIO?" ,  ["class"	=> "col-lg-4"])?>
-		  
 		  <div class="col-lg-8">		  
 		    <select id="servicio" name="servicio" class="form-control servicio">
 		      <option value="0">NO</option>
@@ -11,8 +10,6 @@
 		    </select>
 		  </div>
 		</div>
-
-		
 		<div class="form-group">
 			<?=div("CATEGORÍA" ,  ["class"	=> "col-lg-4"])?>		  
 		  	<div class="col-lg-8">

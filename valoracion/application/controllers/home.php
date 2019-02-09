@@ -13,8 +13,7 @@ class Home extends CI_Controller{
 
         $servicio =  $this->input->get("servicio");
         if($servicio > 0 && ctype_digit($servicio) ){
-            
-            //$num_hist             = get_info_servicio( $this->input->get("q"));
+
             $param                  = $this->input->get();
                      
             $clasificaciones_departamentos          =   $this->principal->get_departamentos("nosotros");    
@@ -39,7 +38,6 @@ class Home extends CI_Controller{
         }else{
             header("location:../?q2=0&q=");
         }
-
     }
     private function carga_formulario_valoracion($q){
 
