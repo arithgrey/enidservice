@@ -10,7 +10,7 @@
 	
 
 ?>
-	<?php if ($modalidad ==  1):?>
+	<?php if ($modalidad ==  1 && $total_cubierto < 1):?>
 		<?=anchor_enid("CANCELAR VENTA", 
 			[
 				"class"			=>	"cancelar_compra padding_10" ,

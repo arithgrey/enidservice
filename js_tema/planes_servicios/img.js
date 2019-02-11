@@ -54,12 +54,12 @@ let registra_img_servicio = function(e){
             processData: false ,
             beforeSend : function(){
                 $(".guardar_img_enid").hide();
-                recorrepage(".carga_informacion_servicio");
+                //recorrepage(".carga_informacion_servicio");
                 show_load_enid(".place_load_img");
             }
 
     }).done(response_load_image).fail(function(){
-        show_error_enid(".place_load_img" , "Falla al actualizar al cargar la imagen" );   
+
         carga_informacion_servicio(1);
     });
 
@@ -68,12 +68,7 @@ let registra_img_servicio = function(e){
 }
 let response_load_image = function(data){
 
-    debugger;
-    let status = array_key_exists("status_imagen_servicio", data);
-    if(status ==  true){
-        data =1;
-    }
-    switch(data) {
+    switch(array_key_exists("status_imagen_servicio", data)) {
         case 1:
             show_response_ok_enid(".place_load_img" , "SE AGREGÓ LA IMAGEN!" );
             carga_informacion_servicio(1);

@@ -14,7 +14,7 @@
                     <?=$this->load->view("../../../view_tema/formularios/form_busqueda_departamentos")?>
                 <?php endif;?>
                 <!--3-->
-                <?=$this->load->view("../../../view_tema/menu_session")?>
+                <?=get_menu_session($in_session , $proceso_compra )?>
             </div>
         <?php elseif($is_mobile ==  1 &&  $in_session ==  0):?>
             <?=get_logo($is_mobile , $in_session)?>

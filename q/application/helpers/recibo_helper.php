@@ -725,6 +725,20 @@ if (!function_exists('invierte_date_time')) {
         return $t;
 
     }
+
+    function get_vista_compras_efectivas($data , $status_enid_service){
+
+        $response =  "";
+        if($data["total"] > 0 ){
+
+            $ordenes   =   $data["compras"];
+
+            $listado   =   create_listado_compra_venta($ordenes , $status_enid_service, 1);
+            $response  =  div($listado,1);
+        }
+        return $response;
+
+    }
     function get_vista_cliente($data){
 
         $modalidad  =   $data["modalidad"];
@@ -757,7 +771,7 @@ if (!function_exists('invierte_date_time')) {
                 $monto_a_pagar          =   $row["monto_a_pagar"];
                 $costo_envio_cliente    =   $row["costo_envio_cliente"];
                 $saldo_cubierto         =   $row["saldo_cubierto"];
-                $direccion_registrada   =   $row["direccion_registrada"];
+                //$direccion_registrada   =   $row["direccion_registrada"];
                 $num_ciclos_contratados = $row["num_ciclos_contratados"];
                 $estado_envio           =   $row["estado_envio"];
                 $url_servicio           =  "../producto/?producto=".$id_servicio;

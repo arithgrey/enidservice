@@ -7,6 +7,22 @@ if(!function_exists('invierte_date_time')){
     }
     return $text;
   }
+  function get_form_cancelar_compra($recibo , $modalidad){
+
+	$heading_1	=  	heading_enid("¿REALMENTE DESEAS CANCELAR LA COMPRA?" ,	3 );
+	$div 		=  	div(strtoupper($recibo["resumen"]) );
+	$tmp 		= 	div(div(append_data([ $heading_1 . $div ]), ["class" => "padding_20"]) , ['class' => 'jumbotron' ]);
+    $btn        =  guardar("CANCELAR ÓRDEN DE COMPRA" ,
+          [
+              "class"				=>		"cancelar_orden_compra" ,
+              "id"				    =>		$recibo['id_recibo'] ,
+              "modalidad"			=>		$modalidad
+          ],
+          1,
+          1);
+
+    return append_data([$tmp , $btn]);
+  }
   function valida_check_tarea($id_tarea, $valor_actualizar,$status,$id_perfil){    
 
     if($id_perfil !=  20 ){          

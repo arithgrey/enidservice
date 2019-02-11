@@ -1,7 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Home extends CI_Controller{
     function __construct(){        
-        parent::__construct();                            
+        parent::__construct();
+        $this->load->helper("val");
         $this->load->library(lib_def());              
     }
     function index(){

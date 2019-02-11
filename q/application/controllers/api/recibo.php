@@ -90,12 +90,20 @@ class recibo extends REST_Controller{
 
         $param                  =   $this->get();
         $param["id_usuario"]    =   $this->id_usuario;
+        if(if_ext($param , "modalidad,id_usuario")){
+            $modalidad              =   $param["modalidad"];
 
-        $response["total"]      =   $this->recibo_model->total_compras_ventas_efectivas_usuario($param);
+            $response["total"]      =   $this->recibo_model->total_compras_ventas_efectivas_usuario($param);
+            if($response["total"] > 0 ){
 
-        if($response["total"] > 0 ){
-            $response["compras"] = $this->recibo_model->compras_ventas_efectivas_usuario($param);
+                $response["compras"] = $this->recibo_model->compras_ventas_efectivas_usuario($param);
+
+            }
+
+            $status_enid_service            =   $this->get_estatus_servicio_enid_service($param);
+            $response                       =  get_vista_compras_efectivas($response , $status_enid_service , $modalidad);
         }
+
         $this->response($response);
     }
     function get_estatus_servicio_enid_service($q){
@@ -780,6 +788,20 @@ class recibo extends REST_Controller{
                 }
             }
         }
+    }
+    function recibo_por_enviar_usuario_GET()
+    {
+        $param                  =   $this->get();
+        $response               =   false;
+        if(if_ext($param , "id_recibo,id_usuario")){
+
+
+            $data_respose           =   $this->recibo_model->valida_recibo_por_enviar_usuario($param);
+            $this->response(crea_data_deuda_pendiente($data_respose) );
+        }
+
+        $this->response($response);
+
     }
     /*
     private function set_stock_servicio($q){

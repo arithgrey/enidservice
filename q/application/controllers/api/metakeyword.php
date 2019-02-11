@@ -92,11 +92,12 @@ class Metakeyword extends REST_Controller{
       $response             =   $this->metakeyword_model->get_metakeyword_catalogo_usuario($param);
       if ($param["v"] == 1) {
         
-        $data["catalogo"] =  create_arr_tags($response);
-        $this->load->view("servicio/catalogo_metakeyword" , $data);  
-      }else{
-        $this->response($response);
+        $catalogo   =   create_arr_tags($response);
+        $response   =   get_catalogo_metakeyword($catalogo);
+
       }
+      $this->response($response);
+
   }
   private function create($param)
   {

@@ -12,24 +12,21 @@
 		$apellido_materno     =   $row["apellido_materno"]; 
 		$usuario_respuesta    =   $nombre ." " . $apellido_paterno;
 		$idperfil             =   $row["idperfil"];
-		$text_perfil          = ($idperfil != 20 ) ? "Equipo Enid Service" :  "Cliente";
-		
+		$text_perfil          =   ($idperfil != 20 ) ? "Equipo Enid Service" :  "Cliente";
 
-        $respuestas .= "<div class='contenedor_respuestas_tickect_tarea'>";
-            $respuestas .=  anchor_enid(img(["class"=>'media-object']) , ["class"=>'pull-left'] );            
-            $respuestas .=  small(icon('fa fa-clock-o') . $fecha_registro , ["class"=>'pull-right time'] );
-            $respuestas .=  div($usuario_respuesta."  | ".$text_perfil , ["class" => 'media-heading']);
-            $respuestas .=  div($respuesta  );            
-        $respuestas .= "</div>";
-        $respuestas .= "<hr>";
+
+
+        $r   =  anchor_enid(img(["class"=>'media-object']) , ["class"=>'pull-left'] );
+        $r  .=  small(icon('fa fa-clock-o') . $fecha_registro , ["class"=>'pull-right time'] );
+        $r  .=  div($usuario_respuesta."  | ".$text_perfil , ["class" => 'media-heading']);
+        $r  .=  div($respuesta );
+
+        $respuestas .= div($r, ["class"=>"contenedor_respuestas_tickect_tarea"]);
+        $respuestas .= hr();
                 	
 	}
 	
-	$oculta_comentarios = 
-    (count($info_respuestas) >0 ) ? div("Ocultar " , 
-        ["class"=>'ocultar_comentarios strong blue_enid' , "id"=> $id_tarea ]) : "";
-	
-		
+	$oculta_comentarios = (count($info_respuestas) >0 ) ? div("Ocultar " , ["class"=>'ocultar_comentarios strong blue_enid' , "id"=> $id_tarea ]) : "";
 
 ?>
 

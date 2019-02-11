@@ -10,6 +10,14 @@ class Cobranza extends REST_Controller{
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
     /*
+    function recibo_por_enviar_usuario_GET()
+    {
+        $param = $this->get();
+        $data_respose =  $this->cobranzamodel->valida_recibo_por_enviar_usuario($param);
+        $this->response(crea_data_deuda_pendiente($data_respose) );
+    }
+    */
+    /*
     function resumen_compras_usuario_GET(){        
         
         $param          = $this->get();
@@ -601,12 +609,7 @@ class Cobranza extends REST_Controller{
     }
     */
     /*
-    function recibo_por_enviar_usuario_GET()
-    {
-        $param = $this->get();
-        $data_respose =  $this->cobranzamodel->valida_recibo_por_enviar_usuario($param);
-        $this->response(crea_data_deuda_pendiente($data_respose) );   
-    }
+
     */
     /*
     function ticket_pendiente_pago($param , $recibo , $data_complete){

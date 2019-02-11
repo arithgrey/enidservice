@@ -75,7 +75,25 @@ if (!function_exists('invierte_date_time')) {
         $estrellas = $estrellas_valoraciones . $restantes;
         return $estrellas;
     }
-
+    function get_criterios_busqueda(){
+        $criterios  =   array("RELEVANTE" , "RECIENTE" );
+        $l =  "";
+        for($z=0; $z <count($criterios); $z++){
+            $extra_criterios = [
+                "class"		=>	'criterio_busqueda ordenar_valoraciones_button',
+                "id"		=> $z
+            ];
+            if($z == 0) {
+                $extra_criterios = [
+								"style"	=>	'padding:8px;background:#002753;color:white' ,
+								"class"	=>	'criterio_busqueda ordenar_valoraciones_button' ,
+								"id"	=>	$z
+                ];
+            }
+            $l .=  get_td($criterios[$z], $extra_criterios);
+        }
+        return $l;
+    }
     function crea_resumen_valoracion($numero_valoraciones, $persona = 0)
     {
 
@@ -183,7 +201,60 @@ if (!function_exists('invierte_date_time')) {
                         </div>";
         return $lista_comentario;
     }
+    function get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio){
+        $text = "";
+        if(count($comentarios) > 5 ){
 
+
+            if($numero_valoraciones[0]["num_valoraciones"] > 6){
+
+                $text   = anchor_enid("CARGAR MÁS" .icon("fa fa-chevron-right ir"),
+                    [
+                        "class" =>	"cargar_mas_valoraciones" ,
+                        "style" =>	"color:white!important"
+                    ]);
+            }else{
+                $text  = anchor_enid("ESCRIBE UNA RESEÑA ". icon("fa fa-chevron-right ir") ,
+                    [
+                        "class"	=>	"escribir_valoracion" ,
+                        "href"	=>	"../valoracion?servicio=".$servicio,
+                        "style"	=>	"color:white!important",
+                    ]);
+            }
+
+        }
+        return $text;
+    }
+    function get_posibles_calificaciones($calificacion){
+
+
+        $response = [];
+        for ($x = 1; $x <= 5; $x++) {
+            $id_input = "radio" . $x;
+            $num_estrella = "estrella_" . $x;
+
+
+            array_push($response,  input([
+                "id" => $id_input,
+                "value" => $x,
+                "class" => 'input-start',
+                "type" => "radio"
+            ]));
+
+
+            array_push($response, label("★",
+                ["class" => 'estrella ' . $num_estrella,
+                    "for" => "$id_input",
+                    "id" => $x,
+                    "title" => $x . " - " . $calificacion[$x]
+                ]
+            ));
+
+        }
+        return append_data($response);
+
+
+    }
     /*
     function evalua_acciones_modalidad_anteriores($num_acciones , $modalidad_ventas){
       $text = "";

@@ -1251,7 +1251,26 @@ if ( ! function_exists('es_email_valido')){
 
     }
 }
+if ( ! function_exists('get_menu_session')){
+    function get_menu_session($in_session , $proceso_compra = 1)
+    {
 
+        if($in_session < 1 ){
+
+            $vender    = anchor_enid("Vender". icon("fa fa-shopping-cart") , ["href"=>"../login/?action=nuevo" ,  "class" =>'links white']);
+            $envio_msj = anchor_enid("Envía mensaje". icon("fa fa-paper-plane") , ["href"=>"../contact/#envio_msj" ,  "class" =>'links white']);
+            $l_session = anchor_enid("Iniciar sesión". icon("fa fa-user") , ["href"=>"../login" ,  "class" =>'links white']);
+
+            $list = [ $l_session , $vender];
+            if($proceso_compra < 1 ){
+                return div(ul($list , ["class"  => "largenav pull-right"]) ,  ["class"]);
+            }
+
+
+        }
+
+    }
+}
 
 //https://www.codeigniter.com/user_guide/general/styleguide.html
 //https://www.codeigniter.com/user_guide/libraries/config.html

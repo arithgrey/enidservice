@@ -181,7 +181,8 @@
 	    }
 	    function val_session($titulo){
 	    	
-	        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE)?0:1;
+	        $data["is_mobile"]      = ($this->agent->is_mobile() == FALSE)?0:1;
+            $data["proceso_compra"] = 0;
 	        if( $this->sessionclass->is_logged_in() == 1){                 
 	                
 	            $menu 					= 	$this->sessionclass->create_contenido_menu();
@@ -198,16 +199,19 @@
 	            $data["id_usuario"] 	= 	$this->get_session("idusuario");                  
 	            $data["id_empresa"] 	=  	$this->get_session("idempresa"); 
 	            $data["info_empresa"] 	=  	$this->get_session("info_empresa");      
-	            $data["desc_web"] 		= 	"";	            
+	            $data["desc_web"] 		= 	"";
+
 	            return $data;
 	                
-	        }else{   	        
-	            $data['titulo']		= 	$titulo;              
-	            $data["in_session"] = 	0; 
-	            $data["id_usuario"] =	"";                                   	            
-	            $data["nombre"] 	= 	"";                                    
-	            $data["email"] 		= 	"";                                    
-	            $data["telefono"]	= 	"";  
+	        }else{
+
+	            $data['titulo']		    = 	$titulo;
+	            $data["in_session"]     = 	0;
+	            $data["id_usuario"]     =	"";
+	            $data["nombre"] 	    = 	"";
+	            $data["email"] 		    = 	"";
+	            $data["telefono"]	    = 	"";
+
 	            return $data;
 	        }
 	    } 	    

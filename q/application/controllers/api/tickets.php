@@ -94,15 +94,21 @@ class Tickets extends REST_Controller{
         
         $param                  =  $this->get();
         $param["id_usuario"]    =  $this->id_usuario;
-        $data["modalidad"]      =  $param["modalidad"];
+        $response               = false;
+        if(if_ext($param ,  "id_recibo,modalidad")){
+            $modalidad              =  $param["modalidad"];
 
-        if($param["modalidad"] ==1){            
-            $data["recibo"] = $this->get_recibo_por_enviar($param);        
-        }else{
-            $data["recibo"] = $this->get_recibo_por_pagar($param);        
+            if($modalidad ==1){
+
+                $recibo = $this->get_recibo_por_enviar($param);
+
+            }else{
+                $recibo = $this->get_recibo_por_pagar($param);
+            }
+
+            $response   =  get_form_cancelar_compra($recibo , $modalidad);
         }
-        
-        $this->load->view("cobranza/form_cancelar_compra" , $data);            
+        $this->response($response);
 
     }
     function cancelar_PUT(){
@@ -260,7 +266,7 @@ class Tickets extends REST_Controller{
     }
     private function get_recibo_por_enviar($q){
 
-        $api = "cobranza/recibo_por_enviar_usuario/format/json/";
+        $api = "recibo/recibo_por_enviar_usuario/format/json/";
         return $this->principal->api(  $api, $q );
     }
     private function notifica_venta_cancelada_a_cliente($q){

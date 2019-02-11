@@ -24,6 +24,7 @@ foreach($compras as $row) {
     $id_servicio                    =  $row["id_servicio"];
     $resumen_pedido                 =  $row["resumen_pedido"];
 
+
     $url_imagen =  "../imgs/index.php/enid/imagen_servicio/".$id_servicio;
     ?>
     <div
@@ -44,9 +45,7 @@ foreach($compras as $row) {
                     icon("fa fa-envelope"),
                     $num_email_recordatorio
                 ])?>
-                <div >
-                    <?=$fecha_registro?>
-                </div>
+                <?=div($fecha_registro)?>
             </div>
         </div>
     </div>

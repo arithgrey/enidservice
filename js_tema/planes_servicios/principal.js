@@ -91,6 +91,7 @@ let carga_informacion_servicio = function(num = 1) {
     let url = "../q/index.php/api/servicio/especificacion/format/json/";
     let data_send = {id_servicio: get_option("servicio"), "num": num};
     request_enid("GET", data_send, url, respuesta_informacion_servicio, ".place_servicios", function () {
+
         recorrepage(".contenedor_principal_enid");
 
     });
@@ -437,6 +438,7 @@ let carga_info_grupos = function() {
 
 }
 let respuesta_info_grupos = function(data) {
+
     llenaelementoHTML(".place_info_grupos", data);
     $(".servicio").click(carga_info_servicio);
     $(".nuevo_grupo_servicios").click(carga_form_nuevo_grupo);

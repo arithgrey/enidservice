@@ -24,24 +24,7 @@
 						<tr>
 							<?=get_td(strong("Valoración*" , ["class" => "text-valoracion"]))?>
 							<td>
-								<?php for($x=1; $x <= 5; $x++){ 
-									$id_input ="radio".$x;
-									$num_estrella ="estrella_".$x;
-								?>	
-								<?=input([
-									"id"	=>  $id_input,
-									"value"	=> $x ,
-									"class"	=>'input-start' ,
-									"type"	=>"radio"
-								])?>		
-								<?=label( "★" , [	"class"		=>'estrella '.$num_estrella, 
-													"for"		=>"$id_input" ,
-													"id"		=>$x,
-													"title"		=> $x." - ".$calificacion[$x]
-												]
-											)?>
-										
-								<?php }?>
+								<?=get_posibles_calificaciones($calificacion)?>
 							</td>
 						</tr>
 					</table>
@@ -68,7 +51,7 @@
 				<?=place("place_recomendaria")?>
 				
 			<?=end_row()?>
-			<div class="nuevo"></div>
+            <?=place("nuevo")?>
 			<?=n_row_12()?>
 				<table style='width:100%'>
 					<tr>
@@ -90,7 +73,7 @@
 					</tr>	
 				</table>
 			<?=end_row()?>
-			<div class="nuevo"></div>
+            <?=place("nuevo")?>
 			<?=n_row_12()?>
 				<table style='width:100%'>
 					<tr>
@@ -126,7 +109,7 @@
 
 				</table>
 			<?=end_row()?>
-			<div class="nuevo"></div>
+            <?=place("nuevo")?>
 			<?=n_row_12()?>
 				<table style='width:100%'>
 					<tr>

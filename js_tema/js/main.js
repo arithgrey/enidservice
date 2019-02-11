@@ -198,7 +198,6 @@ function showonehideone(show, hide) {
 function selecciona_select(class_select, valor_a_seleccionar) {
     $(class_select + ' > option[value="' + valor_a_seleccionar + '"]').attr('selected', 'selected');
 }
-
 let metricas_perfil = function () {
 
     if (get_option("in_session") == 1) {
@@ -208,8 +207,7 @@ let metricas_perfil = function () {
         request_enid("GET", data_send, url, response_metricas_perfil);
     }
 }
-
-function response_metricas_perfil(data) {
+let response_metricas_perfil = function(data) {
 
     llenaelementoHTML(".num_tareas_dia_pendientes_usr", data.num_tareas_pendientes);
     llenaelementoHTML(".place_notificaciones_usuario", data.lista_pendientes);
@@ -252,8 +250,7 @@ let  notifica_usuario_pendientes = function(num_pendientes) {
         set_titulo_web(get_parameter(".titulo_web"));
     }
 }
-
-function rotulo_title() {
+let rotulo_title = function() {
 
     let num_pendientes = get_option("num_pendientes");
     if (get_option("flag_activa_notificaciones") == 1) {
@@ -288,8 +285,7 @@ let registra_respuesta_pregunta = function (e) {
     request_enid("POST", data_send, url, carga_comentarios_terea_simple);
     e.preventDefault();
 }
-
-function quitar_espacios_numericos(nuevo_valor , texto = 0) {
+let quitar_espacios_numericos = function(nuevo_valor , texto = 0) {
 
 
     if(texto == 0){
@@ -342,26 +338,24 @@ let quita_espacios = function (input) {
 
 }
 
-function quita_espacios_input_precio() {
+let quita_espacios_input_precio = function() {
 
     let valor = get_parameter(".precio");
     let nuevo = quitar_espacios_numericos(valor);
     $(".precio").val(nuevo);
 
 }
-
-function validar_si_numero(numero) {
+let validar_si_numero  = function(numero) {
 
     return (!/^([0-9])*$/.test(numero)) ? false : true;
 }
-
-function quita_espacios_en_input_num(valor) {
+let quita_espacios_en_input_num = function(valor) {
 
     let nuevo = quitar_espacios_numericos(get_parameter(valor));
     $(this).val(nuevo);
 }
 
-function comparer(index) {
+let comparer  = function(index) {
     return function (a, b) {
         let valA = getCellValue(a, index), valB = getCellValue(b, index);
         return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
@@ -394,27 +388,29 @@ function openNav() {
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
 
-function closeNav() {
+let closeNav  = function() {
     document.getElementById("mySidenav").style.width = "0";
     document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
+let reset_form = function(id) {
 
-function reset_form(id) {
     document.getElementById(id).reset();
+
 }
+let  array_key_exists =  function(key, array) {
 
-function array_key_exists(key, array) {
-
-    let exists = array.hasOwnProperty(key);
-    let second_exists = (key in array);
-    if (exists == true && second_exists == true) {
-        console.log("existe");
-        return true;
-    } else {
-        return false;
+    debugger;
+    let $response  =  0;
+    if(array.hasOwnProperty(key)){
+        let second_exists = (key in array);
+        if (second_exists == true) {
+            console.log("existe");
+            $response =  1;
+        }
     }
-}
+    return $response;
 
+}
 let isArray = function (param) {
     return Array.isArray(param);
 }
@@ -488,7 +484,7 @@ function get_attr(e, elemento) {
     return $(e).attr(elemento);
 }
 
-function request_enid(method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "") {
+let request_enid = function(method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "") {
     if (before_send < 1) {
         if (place_before_send.length > 0) {
             var before_send = function () {
@@ -513,7 +509,7 @@ function request_enid(method, data_send, url, call_back, place_before_send = 0, 
     }).done(call_back);
 }
 
-function set_black(array) {
+let  set_black = function(array) {
     for (let x in array) {
         set_parameter(array[x], "");
     }
@@ -528,27 +524,25 @@ let focus_input = function(input) {
     } else {
         $(input).css("border", "1px solid rgb(13, 62, 86)");
     }
-};
-/*Bloque todos los elementos del formulario*/
+}
 let bloquea_form = function (form) {
 
     $("*", form).prop('disabled', true);
 
-};
+}
 let desbloqueda_form = function (form) {
 
     $("*", form).prop('disabled', false);
 
-};
+}
 let flex = function (elemento) {
 
     $(elemento).css("display", "flex");
-};
+}
 let get_valor_selected = function (select) {
     return get_parameter(select + " option:selected");
-};
-
-function randomString(len, charSet) {
+}
+let randomString = function(len, charSet) {
     charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomString = '';
     for (let i = 0; i < len; i++) {
