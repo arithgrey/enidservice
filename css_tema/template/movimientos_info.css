@@ -1,0 +1,199 @@
+.btn_transfer:hover {
+    cursor: pointer;
+    background: #0656F9 !important;
+    color: white !important;
+    border-style: solid;
+    border-width: .9px;
+    font-weight: bold;
+}
+
+.option_ingresar_saldo {
+    border-style: solid;
+    border-width: .5px;
+    margin-top: 10px;
+    font-weight: bold;
+    padding: 10px;
+
+}
+
+.option_ingresar_saldo:hover,
+.option_ingresar_saldo:hover .tipo_pago,
+.option_ingresar_saldo:hover .tipo_pago_descripcion {
+    cursor: pointer;
+    background: #0054ff;
+    color: white !important;
+}
+
+.campo_avanzado {
+    display: none;
+}
+
+.btn_mostrar_mas_campos {
+    background: #0485D7;
+    padding: 4px;
+    color: white;
+}
+
+.btn_ocultar_mas_campos:hover, .btn_mostrar_mas_campos:hover {
+    cursor: pointer;
+}
+
+.agendar_llamada_btn {
+    background: #0485D7;
+    padding: 4px;
+    color: white;
+}
+
+.campo_avanzado_agenda {
+    display: none;
+}
+
+.alerta_llamadas_agendadas {
+    background: #0a399b;
+    padding: 5px;
+    color: white;
+    font-size: .8em !important;
+}
+
+.contenedor_form_agenda {
+    display: none;
+}
+
+.agendar_llamada_btn:hover {
+    cursor: pointer;
+}
+
+.li_menu {
+    font-size: .8em !important;
+}
+
+.regresar_btn:hover {
+    cursor: pointer;
+}
+
+.agregar_info_validacion:hover {
+    cursor: pointer;
+}
+
+.agregar_info_validacion {
+    font-size: .8em;
+    background: white;
+    padding: 4px;
+}
+
+.alerta_red_notificacion {
+
+    background: red;
+    padding: 5px;
+    color: white;
+    font-size: .8em !important;
+}
+
+.regresar_btn_posible_cliente:hover {
+    cursor: pointer;
+}
+
+.btn_convertir_persona {
+    display: none;
+}
+
+.btn_agendar_correo {
+    display: none;
+}
+
+.btn_agendar_llamada {
+    display: none;
+}
+
+.btn_agregar_comentario {
+    display: none;
+}
+
+.regresar_btn_posible_cliente {
+    display: none;
+}
+
+.btn_llamar {
+    display: none;
+}
+
+<
+/
+style >
+< style type
+
+=
+"text/css"
+>
+#sum_box h4 {
+    text-align: left;
+    margin-top: 0px;
+    font-size: 30px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+
+#sum_box .db:hover {
+    background: #40516f;
+    color: #fff;
+}
+
+
+#sum_box .db:hover .icon {
+    opacity: 1;
+    color: #999999;
+}
+
+#sum_box .icon {
+    color: #fff;
+    font-size: 55px;
+    margin-top: 7px;
+    margin-bottom: 0px;
+    float: right;
+}
+
+.panel.income.db.mbm {
+    background-color: #0065ff;
+    color: white !important;
+}
+
+.panel.profit.db.mbm {
+    background-color: #5bc0de;
+}
+
+
+.panel.task.db.mbm {
+    background-color: #f0ad4e;
+}
+
+.trasnferir_divisas:hover {
+    cursor: pointer;
+}
+.list-group-item:hover  a{
+    color:white!important;
+}
+.list-group-item:hover {
+    background: blue;
+    color: white!important;
+    cursor: pointer;
+}
+
+.banco_cuenta {
+    width: 100%;
+}
+
+.asociar_tarjeta:hover, .asociar_cuenta_bancaria:hover {
+    background: black !important;
+    color: white !important;
+
+}
+
+.btn_transfer:hover {
+    cursor: pointer;
+    background: #0656F9 !important;
+    color: white !important;
+    border-style: solid;
+    border-width: .9px;
+    font-weight: bold;
+}

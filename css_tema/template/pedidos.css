@@ -1,0 +1,145 @@
+.sin_domicilio {
+    background: #d20c2f;
+}
+.entregado {
+    background: #0055d7;
+    color: white;
+}
+.funny_error_message {
+    background: #10094e;
+    color: white;
+}
+
+.busqueda_mensaje {
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+}
+
+.busqueda_mensaje:hover {
+    color: black !important;
+}
+
+.busqueda_mensaje_text {
+    text-align: center;
+}
+
+.contenedor_domicilio, .contenedor_cliente {
+    border: solid .9px;
+    background: #070350;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+.encabezado_domicilio, .encabezado_cliente {
+    background: #06429e;
+    color: white;
+    padding: 5px;
+}
+
+.contenido_domicilio, .contenido_domicilio {
+    background: white;
+    padding: 5px;
+}
+
+.status_compra {
+    background: #071929;
+    color: white;
+    padding: 5px;
+}
+
+.resumen_pago {
+    background: #f9fafe;
+    border-bottom: 10px solid #00385D;
+    border-radius: 6px;
+
+}
+.text_precio_producto {
+    font-size: 1.5em;
+}
+
+.sin_pago {
+    color: #c21818;
+    font-size: 1.5em;
+}
+
+.pago_realizado {
+    color: blue;
+    font-size: 1.5em;
+}
+
+.mxn {
+    font-size: 1.6em;
+    color: #000060;
+    font-weight: bold;
+}
+.seccion_tipificacion {
+    background: white;
+}
+
+.global_tipificaciones {
+    background: #030d17;
+    padding: 5px;
+}
+
+.form_edicion_tipo_entrega {
+    display: none;
+}
+.contenedor_entrega{
+    background: #fcfcfc;
+    color: black;
+    padding: 10px;
+    border-bottom: 5px solid #01263E;
+    border-radius: 6px;
+    font-weight:bold;
+    font-size:1.2em;
+
+}
+.fecha_registro{
+    font-size:1.3em;
+}
+.media{
+    background: yellow;
+    padding: 5px;
+    margin-top: 2px;
+}
+.baja{
+    background: #d10000;
+    color: white;
+    margin-top: 2px;
+    padding: 5px;
+}
+.alta{
+    background: #078167;
+    color: white;
+    margin-top: 2px;
+    padding: 5px;
+}
+.nula{
+    background: red;
+    color: white;
+    margin-top: 2px;
+    padding: 5px;
+}
+.seccion_recordatorio{
+    margin-top:20px;
+}
+.contenedor_opciones_pedido{
+
+    width: 240px;
+    padding: 10px!important;
+}
+.contenedor_opciones_pedido div a{
+    color:black;
+    text-decoration:underline;
+}
+.compras_en_tiempo{
+    background: #a1c4ff;
+    color: white;
+    padding: 10px;
+    border-style: solid;
+    border-block-end-color: #0b309b;
+}
+#contenedor_form_usuario{
+    display:none;
+}

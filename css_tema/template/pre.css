@@ -1,0 +1,54 @@
+.titulo_preferencia {
+    font-size: 2.6em;
+}
+
+.base_compras, .base_paginas_extra, .info_metodos_pago {
+    display: none;
+}
+
+.box {
+    padding: 60px 0px;
+}
+
+.box-part {
+    background: #FFF;
+    border-radius: 2px;
+    padding: 40px 5px;
+    margin: 20px 0px;
+}
+
+.box-part:hover {
+    background: #0C0C14;
+}
+
+.box-part:hover .fa,
+.box-part:hover .title,
+.box-part:hover .text,
+.box-part:hover a {
+    color: #FFF;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    transition: all 1s ease-out;
+}
+
+.box-part .fa {
+    color: black;
+}
+
+.contenedor_opcion {
+    border-bottom: 10px solid #00385D;
+    border-radius: 6px;
+}
+
+.contenedor_opcion:hover {
+    border-bottom: 10px solid blue;
+    border-radius: 6px;
+}
+
+.icono_metro {
+    width: 40px !important;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1, 100);
+    background-attachment: fixed;
+}

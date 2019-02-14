@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 09d632e52d1600fc1e6dbe53b0e248f6a28c68c7 arithgrey <arithgrey@gmail.com> 1547431009 +0100	branch: Created from HEAD
+09d632e52d1600fc1e6dbe53b0e248f6a28c68c7 6b97a6dc1edc73ce2a082bf53e2a4a11e2ddd84c arithgrey <arithgrey@gmail.com> 1547431030 +0100	commit: [chore]
+6b97a6dc1edc73ce2a082bf53e2a4a11e2ddd84c a8eb206d2e09da4b0816fdc1c1abe0813d47f754 arithgrey <arithgrey@gmail.com> 1547431149 +0100	commit: [chore]
+a8eb206d2e09da4b0816fdc1c1abe0813d47f754 cee170dea947c36eadfaa15edb6f3271ab99df15 arithgrey <arithgrey@gmail.com> 1547431301 +0100	commit: [chore]
+cee170dea947c36eadfaa15edb6f3271ab99df15 09cbe796876e780459c808a4070ed5994fb8d135 arithgrey <arithgrey@gmail.com> 1547432929 +0100	pull origin notificacion_ventas_sin_calificar: Fast-forward
+09cbe796876e780459c808a4070ed5994fb8d135 74640b8bdc7b7606fdb7804a6e6f6d99ef538c50 arithgrey <arithgrey@gmail.com> 1547438392 +0100	commit: [FIX] the filter is improved in order to be able to inspect the orders correctly

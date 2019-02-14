@@ -1,0 +1,178 @@
+"use strict";
+$(document).ready(function(){
+
+	$(".base_compras").hide();
+	$(".nav-sidebar").hide();
+	$(".base_paginas_extra").hide();
+	recorrepage(".contenedor_compra");	
+	$(".form-miembro-enid-service").submit(registro);
+
+	set_option( "plan", $(".plan").val());
+	set_option( "dominio" , $(".dominio").val());	
+	set_option( "num_ciclos" , $(".num_ciclos").val());
+	set_option( "ciclo_facturacion" , $(".ciclo_facturacion").val());
+	set_option( "descripcion_servicio" , $(".resumen_producto").val());
+
+	$(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
+	$(".telefono").keyup(quita_espacios_en_telefono);
+	$(".link_acceso").click(set_link);
+	$(".email").keyup(function(){
+		sin_espacios(".email");
+	});
+
+});
+let registro = function(e){
+
+
+	let text_password =  $.trim($(".password").val());	
+	if (text_password.length>7 ) {
+		let flag =  valida_num_form(".telefono" , ".place_telefono" );
+		if (flag == 1 ){
+				let flag2 =  valida_text_form(".telefono" , ".place_telefono" , 6 , "Número telefónico" );
+				if (flag2 ==  1 ) {
+
+					
+					$(".resumen_productos_solicitados").hide();					
+					recorrepage(".contenedor_formulario_compra");					
+					bloquea_form(".form-miembro-enid-service");
+					let url 	= 	"../q/index.php/api/cobranza/primer_orden/format/json/";				
+					let pw 		= 	$.trim($(".password").val());	
+					let pwpost 	= 	""+CryptoJS.SHA1(pw);
+
+					set_option("email", $(".email").val());					
+					set_option("nombre" ,$(".nombre").val());					
+					set_option("telefono",$(".telefono").val());		
+					set_option("usuario_referencia", $(".q2").val());																
+					set_option("talla"	, $(".talla").val());																				
+					let data_send =  {"password": pwpost , "email" : get_option("email") , "nombre" : get_option("nombre"), "telefono": get_option("telefono") , "plan" : get_option("plan") , "num_ciclos" : get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"), "ciclo_facturacion":get_option("ciclo_facturacion"), "usuario_referencia":get_option("usuario_referencia") , "talla" : get_option("talla") , "tipo_entrega": 2};				
+					$(".informacion_extra").hide();
+					request_enid("POST", data_send, url, respuesta_registro, 0 , before_registro_afiliado);	
+				}			
+			}		
+		}else{
+			desbloqueda_form(".form-miembro-enid-service");
+			llenaelementoHTML( ".place_password_afiliado" ,  "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
+		}
+
+	e.preventDefault();
+}
+let before_registro_afiliado = function(){
+
+	bloquea_form(".form-miembro-enid-service");											
+	show_load_enid(".place_registro_afiliado" ,  "Validando datos " , 1 );
+}
+
+let respuesta_registro = function(data){
+
+	if (data != -1) {								
+
+		desbloqueda_form(".form-miembro-enid-service");
+		if(data.usuario_existe > 0){
+
+			flex(".usuario_existente");						
+			$(".place_registro_afiliado").empty();
+			recorrepage(".usuario_existente");
+			$(".informacion_extra").show();
+
+		}else{									
+
+			set_option("data_registro" , data);
+			set_option("registro" , 1);
+			set_option("usuario_nuevo" , 1);
+			config_direccion();
+		}
+	
+	}else{								
+		redirect("../");
+	}
+	
+};
+
+let procesar_pedido_usuario_activo = function(){
+
+	let url 			= "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";		
+	set_option("talla"	, $(".talla").val());		
+	let data_send 		=  {"plan" : get_option("plan") , "num_ciclos": get_option("num_ciclos"), "descripcion_servicio" : get_option("descripcion_servicio"),"ciclo_facturacion":get_option("ciclo_facturacion") ,  "talla" : get_option("talla"), "tipo_entrega" : 2 };
+	request_enid( "POST",  data_send, url, respuesta_proceso_venta_usuario_activo, "" , before_procesar_pedido_activo);
+
+}
+
+let before_procesar_pedido_activo = function(){
+	$('.btn_procesar_pedido_cliente').prop('disabled', true);
+	show_load_enid(".place_proceso_compra" ,  "Validando datos " , 1 );
+}
+
+let  respuesta_proceso_venta_usuario_activo = function(data){
+
+	set_option("data_registro" , data);
+	set_option("registro" , 0);
+	set_option("usuario_nuevo" , 0);
+	config_direccion();	
+}
+
+let quita_espacios_en_telefono = function(){
+	
+	let valor 	= 	get_parameter(".telefono");
+	let nuevo 	=  	quitar_espacios_numericos(valor);
+	$(".telefono").val(nuevo);	
+}
+let config_direccion = function(){
+
+	let data_registro =  get_option("data_registro");		
+	let ficha 	      =	 "";
+	if (get_option("usuario_nuevo") == 1){
+		
+		ficha =  data_registro.ficha;		
+	}else{
+		data_registro =  get_option("data_registro");		
+		ficha =  data_registro.ficha; 	
+	}
+
+	$(".contenedo_compra_info").show();
+	llenaelementoHTML(".contenedo_compra_info" , ficha);
+	recorrepage(".contenedor_compra");	
+	$(".codigo_postal").keyup(auto_completa_direccion);		
+	$(".numero_exterior").keyup(function (){
+		quita_espacios(".numero_exterior");
+	});						
+	$(".numero_interior").keyup(function (){
+		quita_espacios(".numero_interior"); 
+	});
+	$(".form_direccion_envio").submit(registra_nueva_direccion);							
+	
+}
+let set_link = function(){
+			
+	let plan 			  = get_parameter_enid($(this) , "plan");	
+	let extension_dominio = get_parameter_enid($(this) , "extension_dominio");	
+	let ciclo_facturacion = get_parameter_enid($(this) , "ciclo_facturacion");	
+	let is_servicio 	  = get_parameter_enid($(this) , "is_servicio");	
+	let q2 	  		      = get_parameter_enid($(this) , "q2");	
+	let num_ciclos 	      = get_parameter_enid($(this) , "num_ciclos");	
+	
+	let data_send         = $.param({"plan" : plan , "extension_dominio" : extension_dominio , "ciclo_facturacion" : ciclo_facturacion , is_servicio : is_servicio , "q2": q2 , "num_ciclos": num_ciclos});
+	let url				  = "../login/index.php/api/sess/servicio/format/json/"; 
+	request_enid( "POST",  data_send, url, response_set_link);
+	
+};
+let response_set_link = function(data){
+	redirect("../login");
+};
+/*
+*
+* function response_procesar_pedido_activo(data){
+	show_error_enid(".place_proceso_compra" , "Error al iniciar sessión");
+}
+function get_usuario_referencia(){
+	return usuario_referencia;
+}
+function get_direccion(){
+	return direccion;
+}
+function set_direccion(n_direccion){
+	direccion =  n_direccion;
+}
+
+
+
+*/

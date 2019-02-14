@@ -1,0 +1,61 @@
+.btn-ventas-mayoreo {
+    margin-top: 20px;
+}
+
+.config_precio_envio {
+    display: none;
+    margin-top: 20px;
+}
+
+.titulo_producto_servicio {
+    margin-top: 20px;
+}
+
+.tutulo_compras_en_casa {
+    margin-top: 20px;
+}
+
+.selector_compras_en_casa {
+    margin-top: 20px;
+}
+
+.selector_telefono_visible {
+    margin-top: 20px;
+}
+.contenedor-articulo:hover {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(15, 51, 158, 0.1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(15, 51, 158, 0.1);
+    box-shadow: 10px 10px 5px 0px rgba(15, 51, 158, 0.1);
+}
+
+.categoria_text:hover {
+    text-decoration: block !important;
+    color: black !important;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: white !important;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background: black !important;
+    padding: 7px;
+}
+
+.texto_existencia {
+    font-size: 1.3em;
+}
+
+.no_tel {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 400px) {
+    .productos_sugeridos {
+        width: 100%;
+    }
+
+    .info_producto {
+        width: 285px !important;
+    }
+}

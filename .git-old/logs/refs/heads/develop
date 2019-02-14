@@ -1,0 +1,8 @@
+0000000000000000000000000000000000000000 348a76f018c793e893b181f18672890a912420e2 arithgrey <arithgrey@gmail.com> 1547711781 +0100	branch: Created from HEAD
+348a76f018c793e893b181f18672890a912420e2 47e1aac828c48e578cb9aef49faab01e66f31ec3 arithgrey <arithgrey@gmail.com> 1547711947 +0100	pull origin develop: Fast-forward
+47e1aac828c48e578cb9aef49faab01e66f31ec3 717140ed3e44584b64cc2a22c5584125e4ac88f8 arithgrey <arithgrey@gmail.com> 1547713688 +0100	commit: [chore]
+717140ed3e44584b64cc2a22c5584125e4ac88f8 99ca9f21281b98e6a9c5bffecc14ca959a8c3c05 arithgrey <arithgrey@gmail.com> 1547714800 +0100	commit: [FIX] js deprected
+99ca9f21281b98e6a9c5bffecc14ca959a8c3c05 b6e009557458f4bd9d9edc8e6e8b41d3d22047f0 arithgrey <arithgrey@gmail.com> 1548084496 +0100	commit: [REF]
+b6e009557458f4bd9d9edc8e6e8b41d3d22047f0 23941872d3b61281265c03f3cb45a682cc6cdea2 arithgrey <arithgrey@gmail.com> 1548133069 +0100	pull origin develop: Fast-forward
+23941872d3b61281265c03f3cb45a682cc6cdea2 7eb036c2e04faea270bb0cc4596dd396e3511873 arithgrey <arithgrey@gmail.com> 1548171710 +0100	commit: [REF]
+7eb036c2e04faea270bb0cc4596dd396e3511873 d05e0d77a6309b07a01f07e16b7344dadfbd7e5a arithgrey <arithgrey@gmail.com> 1548321149 +0100	commit: [REF] REFACTOR EN MODULO DE EMAIL

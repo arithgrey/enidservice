@@ -1,0 +1,84 @@
+.contenedor_estaciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.nombre_estacion {
+    padding: 20px;
+    margin-top: 20px;
+    border-style: solid;
+}
+
+.nombre_estacion_punto_encuentro_extra {
+    padding: 20px;
+    margin-top: 20px;
+    border-style: solid;
+    font-size: 1.1em;
+}
+
+.cargos_por_entrega_extra {
+    padding: 20px;
+    margin-top: 20px;
+    border-style: solid;
+    font-size: 1.1em;
+}
+
+.text_costo_envio {
+    font-size: 1.7em;
+    color: #0167c9;
+    font-weight: bold
+}
+
+.text_costo_envio_gratis {
+    font-size: 1.2em;
+    color: #0167c9;
+    font-weight: bold
+}
+
+.nombre_estacion:hover {
+    color: blue;
+}
+
+.nombre_linea_metro {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.mensaje_cobro_envio {
+    color: #fdfeff;
+    margin-top: 10px;
+    background: #0b3cd8;
+    padding: 10px;
+}
+
+.btn_continuar_punto_encuentro {
+    display: none;
+    margin-top: 20px;
+}
+
+.contenedor_fecha_entrega {
+    background: red;
+}
+
+.titulo_horario_entra {
+    background: #005acf;
+    padding: 10px;
+    color: white;
+}
+.nombre_linea_metrobus {
+    background: #ec1606;
+    height: 50px;
+    text-align: center;
+    color: white;
+    font-size: 2em;
+}
+.text_agregar_nota{
+    color: #021a35;
+    font-size: 1.3em;
+    text-decoration: underline;
+    font-weight: bold
+}
+.input_notas{
+    display:none;
+}
