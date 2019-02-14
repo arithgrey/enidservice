@@ -1,6 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 if(!function_exists('invierte_date_time')){
 
+    if ( ! function_exists('get_form_nota')) {
+        function get_form_nota($id_recibo)
+        {
+
+            $r[] = form_open("", ["class" => "form_notas", "style" => "display:none;"]);
+            $r[] = div("NOTA", ["class" => "strong text_nota", "style" => "font-size:1.5em;"]);
+            $r[] = textarea(["name" => "comentarios", "class" => "comentarios form-control"]);
+            $r[] = input_hidden(["name" => "id_recibo", "value" => $id_recibo]);
+            $r[] = guardar("AGREGAR", ["name" => "comentarios"]);
+            $r[] = form_close(place("place_nota"));
+            return append_data($r);
+
+        }
+    }
     if ( ! function_exists('agregar_nueva_direccion'))
     {
         function agregar_nueva_direccion($direccion = 1){

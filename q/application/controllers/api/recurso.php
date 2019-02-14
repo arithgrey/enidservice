@@ -36,7 +36,9 @@ class recurso extends REST_Controller{
         $response           =   false;
         if(if_ext($param , "id_perfil")) {
             $data["recursos"] = $this->recurso_model->get_perfiles_permisos($param);
+
             return $this->load->view("equipo/tabla_recursos" , $data);
+
         }
         $this->response($response);
     }
