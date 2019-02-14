@@ -32,7 +32,7 @@
   	</div>
   	<div class="col-lg-3 ">
   		<div class="row sugerencias">
-  			<?=heading_enid("CLASIFICACIONES",  '3' )?>  			
+  			<?=heading_enid("CLASIFICACIONES",  3 )?>
 			<form class="form-agregar-clasificacion-talla">
 				<?=input(["type"=>"text","name"=>"clasificacion","placeholder"=>"Busca por clasificación"])?>
 		    </form>

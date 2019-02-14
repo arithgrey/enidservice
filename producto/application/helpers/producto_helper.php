@@ -208,7 +208,7 @@
                     $text = "APRESÚRATE! SOLO HAY " . $existencia . " EN EXISTENCIA ";
                     $text = div($text, ['class' => 'text-en-existencia']);
                     if (strlen($url_ml) > 10) {
-                        $text .= "<br>" . anchor_enid("Adquiéralo en Mercado libre", ["href" => $url_ml, "class" => "black"]);
+                        $text .= "<?=br()?>" . anchor_enid("Adquiéralo en Mercado libre", ["href" => $url_ml, "class" => "black"]);
                     }
                     return $text;
                 }

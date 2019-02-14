@@ -25,7 +25,7 @@
         <?php if($ubicacion == 1):?>
             <div class="col-lg-6">
                 <?=heading("VISÍTANOS!", 1, ["class" => "white"])?>
-                <br>
+                <?=br()?>
                 <?=heading(
                     "Eje Central Lázaro Cárdenas 38, Centro Histórico C.P. 06000 CDMX, local número 406" ,
                      4, 

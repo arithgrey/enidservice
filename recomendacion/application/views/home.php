@@ -1,7 +1,7 @@
 <div class="contenedor_principal_enid">
 	<div class="col-lg-6 col-lg-offset-3">
 	<?=heading_enid("RESEÑAS Y VALORACIONES SOBRE" , 1 )?>
-		<br>
+		<?=br()?>
 		<?=anchor_enid(
 		icon('fa fa-shopping-cart').get_campo($usuario, "nombre" ),
 			[	

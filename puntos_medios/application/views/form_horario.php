@@ -4,7 +4,7 @@
             4,
             ["class" =>"strong titulo_horario_entra"])?>
 
-        <br>
+        <?=br()?>
         <?=label(icon("fa fa-calendar-o") ." FECHA ",["class" =>"col-lg-4 control-label"])?>
         <div class="col-lg-8">
             <?=input([
@@ -33,7 +33,7 @@
 
         <?=input_hidden(["name" => "punto_encuentro" , "class"  => "punto_encuentro_form" , "value" => $punto_encuentro])?>
 
-        <br>
+        <?=br()?>
         <?=guardar("CONTINUAR" ,["class" =>"top_20"])?>
         <?=place("place_notificacion_punto_encuentro")?>
     </form>

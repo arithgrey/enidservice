@@ -27,25 +27,25 @@ if (!function_exists('invierte_date_time')) {
         $config = [
             'src' => $url_img,
             'id' => $id_error,
-            'title' => 'Ver artículo',
             'class' => 'imagen_producto',
             'alt' => $metakeyword,
             'onerror' => "reloload_img( '" . $id_error . "','" . $url_img . "');"
         ];
 
-        $img = img($config);
-        $p = addNRow(get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session));
-        $p = valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_actual);
-        $p .= div(div(get_text_nombre_servicio($nombre_servicio), ["style" => "margin-left: 5px;text-align: left!important;"]), 1);
-        $p .= div(muestra_vistas_servicio($in_session, $vista), 1);
-        $producto = div($p, ["style" => "position:relative;"]);
-        $contenedor_producto = div($producto, ['class' => 'contenedor_principal_informacion_producto card-block']);
+        $img    = img($config);
 
-        $b = "";
-        $b .= div(get_precio_producto($url_info_producto, $precio), ["style" => "position:absolute;top:250px;margin-left:5px;z-index: 100"], 1);
-        $b .= div(anchor_enid($img, ["href" => $url_info_producto]), ["class" => 'contenedor_principal_imagen_producto'], 1);
-        $b .= $contenedor_producto;
-        $bloque_producto = div($b, ["class" => 'info_producto']);
+        $p[]        =   addNRow(get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session));
+        $p[]        =   valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_actual);
+        $p[]        =   div(div(get_text_nombre_servicio($nombre_servicio), []), 1);
+        $p[]        =   div(muestra_vistas_servicio($in_session, $vista), 1);
+        $producto   =   div(append_data($p));
+        $contenedor_producto = div($producto);
+
+
+        $b[] =  div(anchor_enid($img, ["href" => $url_info_producto]), 1);
+        $b[] =  div(get_precio_producto($url_info_producto, $precio), 1);
+        $b[] =  $contenedor_producto;
+        $bloque_producto = div(append_data($b), ["class" => "producto_base"]);
         return $bloque_producto;
 
     }
@@ -923,7 +923,69 @@ if (!function_exists('invierte_date_time')) {
         return append_data($r);
 
     }
+    function get_tabla_colores(){
+
+        $colores_esp        = ["Turquesa", "Emerland", "Peterriver", "Amatista", "Wetasphalt", "Mar verde", "Nefritis", "Belizehole", "Glicinas", "Medianoche azul", "Girasol", "Zanahoria", "Alizarina", "Nubes", "Hormigón", "Naranja", "Calabaza", "Granada", "Plata", "Amianto", "Blanco", "Blue", "Cafe", "Morado", "Morado 2", "Azul", "Azul", "Verde", "Verde", "Verde 2", "Amarillo", "Amarillo 2", "Amarillo 3", "Amarillo 4", "Amarillo 5 ", "Gris", "Gris 2", "Gris 3", "Gris 4", "Gris 5", "Gris 6"];
+        $codigo_colores     = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400",
+            "#c0392b", "#bdc3c7", "#7f8c8d", "#fbfcfc", "#1b4f72", "#641e16", "#512e5f", "#4a235a", "#154360", "#1b4f72", " #0e6251", " #0b5345", " #186a3b", " #7d6608", " #7e5109", "#784212", "#6e2c00", "#626567", "#7b7d7d", "#626567", "#4d5656", " #424949", " #1b2631", "#17202a"];
+
+        $response           = [];
+        for ($a = 0; $a < count($colores_esp); $a++) {
+
+            $response[] =  div("" ,
+                ["class" => "colores" , "style" => "background:{$codigo_colores[$a]}" , "id" => $codigo_colores[$a]]);
+
+        }
+        return  div(append_data($response) , ["class" => "colores_disponibles"]);
+
+    }
+
+    function get_view_sugerencias($servicios ,$is_mobile )
+    {
 
 
+        $r = [];
+        $imagenes =  [];
+        foreach ($servicios as $row) {
+
+            $extra_color = "style='margin-left:5px;color: black;font-weight:bold;'";
+            $list = "";
+            $flag = 0;
+            $nombre_servicio = $row["nombre_servicio"];
+            $id_servicio = $row["id_servicio"];
+            $flag_envio_gratis = $row["flag_envio_gratis"];
+            $url_img = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id_servicio);
+
+            $metakeyword = $row["metakeyword"];
+            $color = isset($row["color"]) ? $row["color"] : "";
+            $flag_servicio = $row["flag_servicio"];
+            $precio = $row["precio"];
+            $costo_envio = "";
+            if ($flag_servicio == 0) {
+                $costo_envio = $row["costo_envio"]["text_envio"]["cliente_solo_text"];
+            }
+            $url_info_producto = "../producto/?producto=" . $id_servicio;
+            $url_venta = "../../producto/?producto=" . $id_servicio;
+            $extra = "";
+            $flag = 0;
+            $flag++;
+
+            $existencia = 0;
+            $vista = 0;
+
+            $img = img([
+                'src' => $url_img,
+                'title' => 'Ver artículo',
+                'alt' => $metakeyword,
+                'onerror' => "this.onerror=null;this.src='" . $url_img . "';"
+            ]);
+
+            $imagenes[] = div(anchor_enid( $img ,["href" => $url_info_producto]), ["class" => "img_sugerencia"]);
+
+        }
+        $r[] =  div(append_data($imagenes), ["class" => "contenedor_sugeridos"]);
+        return append_data($r);
+
+    }
 
 }

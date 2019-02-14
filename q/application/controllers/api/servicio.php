@@ -1286,10 +1286,13 @@ class Servicio extends REST_Controller{
           }
           $servicios    = $this->completa_servicios_sugeridos($response , $param);
           if (count($servicios) > 0 ){
-                $data["servicios"]  =  $servicios;
-                $data["url_request"]=  get_url_request("");
-                $data["is_mobile"]  = $this->get_option("is_mobile");
-                return $this->load->view("producto/sugeridos" , $data);
+
+
+                $is_mobile  = $this->get_option("is_mobile");
+
+                //return $this->load->view("producto/sugeridos" , $data);
+              $response = get_view_sugerencias($servicios , $is_mobile );
+
           }else{
               $data_response["sugerencias"] =0;
               $this->response($data_response);
@@ -1361,7 +1364,10 @@ class Servicio extends REST_Controller{
         return $this->principal->api( $api , $q , "json"  , "POST");
     }
     function colores_GET(){
-        $this->load->view("servicio/tabla_colores");
+
+      $response = get_tabla_colores();
+      $this->response($response);
+
     }
     private function get_servicios_empresa($q){
         $q["es_empresa"] = 1;

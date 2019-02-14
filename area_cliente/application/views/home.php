@@ -45,7 +45,7 @@
 
                         <?= $valoraciones; ?>
                     a bue
-                    <br>
+                    <?=br()?>
 
                         <?= anchor_enid("VER COMENTARIOS",
                             [

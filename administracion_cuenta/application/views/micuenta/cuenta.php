@@ -18,7 +18,7 @@
 
             <div class="page-header menu_info_usuario" >
             <?=heading_enid("Cuenta" , 1 , ['class'=>'strong'] , 1)?>   
-            <br>  
+            <?=br()?>  
             <?=n_row_12()?>
                 <form class="f_nombre_usuario">
                     <?=div('Nombre de usuario',  ['class'=> 'strong'] , 1)?>
@@ -54,7 +54,7 @@
                     <?=div('El correo electrónico NO se mostrará públicamente', ['class'=> 'blue_enid '], 1)?>
                 </form>
               <?=end_row()?>
-              <br>
+              <?=br()?>
 
             
               <?=n_row_12()?>
@@ -154,7 +154,7 @@
                 <?=n_row_12()?>
                     <?=get_campo($usuario , "tel_contacto" , "Tu prime apellido" , 1)?>
                 <?=end_row()?>
-                <br>
+                <?=br()?>
                 <?=n_row_12()?>
                     <?=anchor_enid("MI DIRECCIÓN" . icon('fa  fa-fighter-jet') ,
                         [  "class"=>"a_enid_black btn_direccion top_20", 

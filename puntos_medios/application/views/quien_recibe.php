@@ -43,8 +43,8 @@
 							  		])?>				  							  	
 
 						  	</div>
-						  	<br>
-						  	<br>
+						  	<?=br()?>
+						  	<?=br()?>
 						  	<center>
 						  		<?=heading_enid("¿En qué horario te gustaría recibir tu pedido?",
 						  		4,
@@ -86,11 +86,11 @@
 						  <?=input_hidden(["name" => "num_ciclos" 	   , "class"  =>"num_ciclos" , "value" => $num_ciclos])?>
 
 						
-						<br>
+						<?=br()?>
 						  	<?=guardar("CONTINUAR" ,["class" =>"top_20"])?>
 						  	<?php if($in_session == 0):?>
 						  		<div class="contenedor_ya_tienes_cuenta">
-							  		<br>
+							  		<?=br()?>
 							  		<?=heading_enid("YA TIENES UN USUARIO REGISTRADO",2,
 							  		["class" => "display_none text_usuario_registrado"])?>
 							  		<?=heading_enid("¿Ya tienes una cuenta? ",3 , 
@@ -123,7 +123,7 @@
 				4, 
 			["class" =>"strong titulo_horario_entra"])?>				
 			
-			<br>  	
+			<?=br()?>  	
 			<?=label(icon("fa fa-calendar-o") ." FECHA ",["class" =>"col-lg-4 control-label"])?>  
 			<div class="col-lg-8">
 				<?=input([
@@ -163,7 +163,7 @@
 				"class" =>  "num_ciclos" , 
 				"value" => 	$num_ciclos]
 			)?>
-			<br>
+			<?=br()?>
 			<?=guardar("CONTINUAR" ,["class" =>"top_20"])?>
 			<?=place("place_notificacion_punto_encuentro")?>
 		</form>	 	

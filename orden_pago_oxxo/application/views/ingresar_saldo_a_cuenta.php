@@ -40,7 +40,7 @@
 
             ])?> 
             <?=guardar("IMPRIMIR" , ["class"=>" imprimir" , "style" => "background:#0a0e39!important;"] ,1,1)?>  			    
-            <br>
+            <?=br()?>
           </form>
 		    </div>
 	    </div>

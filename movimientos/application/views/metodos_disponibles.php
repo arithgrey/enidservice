@@ -80,7 +80,7 @@
                                 
                             <?php endif; ?>
                             <?=input_hidden([ "name"=>"tipo", "value"=> $banca])?>
-                            <br>
+                            <?=br()?>
                             <?=guardar("ASOCIAR" . icon("fa fa-chevron-right") , [] ,1 ,1 )?>
 
                             <?=div(p("Al asociar tu cuenta, podrás transferir tu saldo de 

@@ -30,7 +30,7 @@ class Stock extends REST_Controller{
     }
     private function create_table_compras($servicios,$compras_por_enviar){
 
-        $this->table->set_heading('#', 'Servicio', 'stock<br> actual' , "Pedidos <br>contra entrega" , "CASOS <br>IDENTICO", "PRONOSTICO <BR>VENTAS (A)","PRONOSTICO <BR>VENTAS (B)", "ADQUIRIDAS <br>ENID" , "OTRAS PLATAFORMAS", "COMPRAR<BR>OPCIÓN (A)" , "COMPRAR<BR>OPCIÓN (B)");
+        $this->table->set_heading('#', 'Servicio', 'stock<?=br()?> actual' , "Pedidos <?=br()?>contra entrega" , "CASOS <?=br()?>IDENTICO", "PRONOSTICO <?=br()?>VENTAS (A)","PRONOSTICO <?=br()?>VENTAS (B)", "ADQUIRIDAS <?=br()?>ENID" , "OTRAS PLATAFORMAS", "COMPRAR<?=br()?>OPCIÓN (A)" , "COMPRAR<?=br()?>OPCIÓN (B)");
         $b = 1;
         for($a = 0; $a< count($servicios); $a ++){
 

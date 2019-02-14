@@ -1,4 +1,4 @@
-<br><br>
+<?=br()?><?=br()?>
 <div class="col-lg-10 col-lg-offset-1 titulo_principal_puntos_encuentro">
 	<center>
 		<?=heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO" , 2 ,[ "class" => "strong titulo_punto_encuentro" ])?>		
@@ -12,7 +12,7 @@
 
 	</center>
 </div>
-<br>
+<?=br()?>
 <?=div(place("place_lineas") , ["class" => "col-lg-8 col-lg-offset-2"] ,1)?>
 
 <?php  if($primer_registro == 1 ):?>

@@ -519,6 +519,14 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "\n\n\n\nLos simples  650 \n\nhttps://www.facebook.com/enidservicemx/videos/951181428404241/\n\n\n\ny estos son en rojo simples 650 \n\nhttps://www.facebook.com/enidservicemx/videos/343785929681973/\n\n\n\nhola 600 con ellas tú hogar se verá como ninguno y todos querrán que les consigas unas 😉 mira aquí hay un video \nhttps://www.facebook.com/enidservicemx/videos/343785929681973/\n\n\n\nEn dobles 850 y en simples 600 y es en alguna estación del metro e igual hacemos envios a domicilio pasame tu whatsApp para quedar\n\n\nhola sip con ellas tú hogar se verá como ninguno y todos querrán que les consigas unas 😉\n\n\nHola sip con ellas tú hogar se verá como ninguno y todos querrán que les consigas unas 😉 las dobles las tenemos en 850 ya sean blancas o negras y en simples rojas o negras en 600 \n\n\n\nLas tenemos en 650 y en negras en 639 quieres ver un video?\n\n\n\n650 así en Rojas y en 600 negras y en dobles en 850 ya sean blancas y negras quieres ver un video?\n\n\n\n\n\nHola las tenemos en 2 modelos dobles en 850  y simples en 600 con ellas tú hogar se verá como ninguno y todos querrán que les consigas unas 😉\n\n\n\n\n\nasí\n\n\n\nDobles 850 y en individuales 600 las quieres ver en video?\n\n\n\nAsí son individuales \nhttps://www.facebook.com/enidservicemx/videos/343785929681973/\n\n\n\n\nMira estos son los dobles blancos y cuestan 850 \n\nhttps://www.facebook.com/enidservicemx/videos/244689246215115/\n\n\n\n\nAsí las dobles negras\nhttps://www.facebook.com/enidservicemx/videos/756862184671703/\n\n\n\n\n",
+			"settings":
+			{
+				"buffer_size": 1453,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -577,6 +585,15 @@
 	"file_history":
 	[
 		"/var/www/html/config.php",
+		"/var/www/html/inicio (copia)/css_tema/template/vender.css",
+		"/var/www/html/inicio (copia)/css_tema/template/css_tienda.css",
+		"/var/www/html/inicio (copia)/q/application/helpers/servicios_helper.php",
+		"/var/www/html/inicio (copia)/q/application/helpers/base_helper.php",
+		"/var/www/html/inicio (copia)/css_tema/template/planes_servicios.css",
+		"/var/www/html/inicio (copia)/js_tema/planes_servicios/principal.js",
+		"/var/www/html/inicio (copia)/helpers/enid_helper.php",
+		"/var/www/html/inicio (copia)/q/application/views/servicio/precios.php",
+		"/var/www/html/inicio (copia)/q/application/views/servicio/detalle.php",
 		"/var/www/html/inicio/config/config.php",
 		"/var/www/html/database.php",
 		"/var/www/html/inicio/administracion_cuenta/application/config/config.php",
@@ -694,20 +711,11 @@
 		"/var/www/html/inicio/librerias/sessionclass.php",
 		"/var/www/html/inicio/system/libraries/Pagination.php",
 		"/var/www/html/inicio/programacion/resumen_dia.php",
-		"/var/www/html/inicio/q/application/controllers/api/objetivos.php",
-		"/var/www/html/inicio/q/application/controllers/api/notificacion_pago.php",
-		"/var/www/html/inicio/q/application/controllers/api/negocio.php",
-		"/var/www/html/inicio/q/application/controllers/api/metakeyword_usuario.php",
-		"/var/www/html/inicio/q/application/controllers/api/metakeyword.php",
-		"/var/www/html/inicio/q/application/controllers/api/intento_compra.php",
-		"/var/www/html/inicio/q/application/controllers/api/incidencia.php",
-		"/var/www/html/inicio/q/application/controllers/api/img.php",
-		"/var/www/html/inicio/q/application/controllers/api/imagen_usuario.php",
-		"/var/www/html/inicio/q/application/controllers/api/imagen_servicio.php"
+		"/var/www/html/inicio/q/application/controllers/api/objetivos.php"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
@@ -849,6 +857,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"global_xss_filtering",
+			"><",
 			"./",
 			"<?php include(\"../../../config.php\");",
 			"<?php include(\"../../../config.php\"); ",
@@ -974,9 +984,7 @@
 			"form_registro_direccion",
 			"agregar_direccion_pedido",
 			"agregar_punto_encuentro_pedido",
-			"Agregar punto de encuentro",
-			"realiza",
-			"get_texto_status"
+			"Agregar punto de encuentro"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1017,8 +1025,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1453,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1092,
+								1092
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 743.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1077,6 +1114,38 @@
 			[
 				"enid_",
 				"helpers/enid_helper.php"
+			],
+			[
+				"planes_servicios/principal.js",
+				"js_tema/planes_servicios/principal.js"
+			],
+			[
+				"planes_ser",
+				"css_tema/template/planes_servicios.css"
+			],
+			[
+				"base_helper.php",
+				"q/application/helpers/base_helper.php"
+			],
+			[
+				"servicios_helper.php",
+				"q/application/helpers/servicios_helper.php"
+			],
+			[
+				"tienda.css",
+				"css_tema/template/css_tienda.css"
+			],
+			[
+				"vender.css",
+				"css_tema/template/vender.css"
+			],
+			[
+				"precio.php",
+				"q/application/views/servicio/precios.php"
+			],
+			[
+				"detalle.php",
+				"q/application/views/servicio/detalle.php"
 			],
 			[
 				"main",
@@ -1553,38 +1622,6 @@
 			[
 				"direccion.php",
 				"q/application/controllers/api/direccion.php"
-			],
-			[
-				"punto",
-				"q/application/controllers/api/punto_encuentro.php"
-			],
-			[
-				"punt",
-				"css_tema/template/puntos_encuentro.css"
-			],
-			[
-				"servii",
-				"q/application/models/serviciosmodel.php"
-			],
-			[
-				"tipo_entrega_model",
-				"q/application/models/intento_tipo_entrega_model.php"
-			],
-			[
-				"tipo_e",
-				"q/application/controllers/api/intento_tipo_entrega.php"
-			],
-			[
-				"pedidos",
-				"q/application/views/recibo/pedidos.php"
-			],
-			[
-				"pedidos.",
-				"q/application/views/recibo/pedidos.php"
-			],
-			[
-				"pedidos.cs",
-				"css_tema/template/pedidos.css"
 			]
 		],
 		"width": 0.0

@@ -5,12 +5,12 @@
     $num_ciclos     =   $recibo[0]["num_ciclos_contratados"];
     $id_error       =   "imagen_".$id_servicio;
 ?>
-	<br>
+	<?=br()?>
     <div class="container-fluid gedf-wrapper">
 
         <div class="row">
             <div class="col-md-3">
-                <br>
+                <?=br()?>
                 <?=div("TUS DIRECCIONES DE ENTREGA REGISTRADAS", ["class" => "text_direcciones_registradas"])?>
                 <?=agregar_nueva_direccion(0);?>
                 <div class="card">
@@ -18,8 +18,8 @@
                     	<?=create_lista_direcciones($lista_direcciones , $id_recibo)?>
                     </ul>
                 </div>
-                <br>
-                <br>
+                <?=br()?>
+                <?=br()?>
 
 
 
@@ -76,7 +76,7 @@
 
             </div>
             <div class="col-md-3">
-                <br>
+                <?=br()?>
                 <?=div("TUS PUNTOS DE ENCUENTRO REGISTRADOS" , ["class" => "text_puntos_registrados"])?>
                 <?=agregar_nueva_direccion(1);?>
                 <div class="card">
@@ -84,8 +84,8 @@
                         <?=get_lista_puntos_encuentro($puntos_encuentro , $id_recibo , $domicilio)?>
                     </ul>
                 </div>
-                <br>
-                <br>
+                <?=br()?>
+                <?=br()?>
 
 
             </div>

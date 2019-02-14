@@ -103,12 +103,12 @@
                         <?= place("separador") ?>
                         <?= get_tiempo_entrega($proceso_compra, $tiempo_entrega) ?>
                         <?php if ($proceso_compra == 0): ?>
-                            <br>
+                            <?=br()?>
                             <?= n_row_12() ?>
                             <?= $this->load->view("social", $info_social) ?>
                             <?= end_row() ?>
                         <?php endif; ?>
-                        <br>
+                        <?=br()?>
                         <?= get_tienda_vendedor($proceso_compra, $id_publicador) ?>
                         <?= place("", ["style" => "border: solid 1px"]) ?>
                     </div>

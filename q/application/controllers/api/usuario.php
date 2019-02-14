@@ -317,9 +317,16 @@ class usuario extends REST_Controller{
         $this->response($response);
 
     }
+    /*
     function social_icons_GET(){
-        $this->load->view("servicio/social_icons");
+
+        //$this->load->view("servicio/social_icons");
+        $response  = get_social_icons();
+        $this->response($response);
+
+
     }
+    */
     function es_POST(){        
         $param          = $this->post();
         $response       =   [];
@@ -673,7 +680,7 @@ class usuario extends REST_Controller{
             if ($param["v"] ==1) {
 
                 $response    = $this->create_table_usabilidad($param);
-                $response   .= "<br>";
+                $response   .= "<?=br()?>";
                 $response   .= $this->create_table_promotion($param);
                 $this->response($response);
             }

@@ -1299,4 +1299,5 @@ $this->output
 
 
 https://www.codeigniter.com/user_guide/database/configuration.html
+chown -R www-data:www-data
  * */

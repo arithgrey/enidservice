@@ -3,7 +3,7 @@
         <?=heading_enid("RECORDATORIO",
             4,
             ["class" =>"strong titulo_horario_entra"])?>
-        <br>
+        <?=br()?>
         <?=label(icon("fa fa-calendar-o") ." FECHA ",["class" =>"col-lg-4 control-label"])?>
         <div class="col-lg-8">
             <?=input([
@@ -29,7 +29,7 @@
             "name"	=> "recibo",
             "value"	=> $orden
         ])?>
-        <br>
+        <?=br()?>
         <?=label(  " TIPO",
             ["class" =>	"col-lg-4 control-label"]
         )?>

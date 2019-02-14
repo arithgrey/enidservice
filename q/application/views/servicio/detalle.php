@@ -77,7 +77,7 @@ $info_colores                       =  create_colores_disponibles($color);
 $en_productos["flag_nuevo"]         =  $flag_nuevo;
 $en_productos["existencia"]         =  $existencia;
 
-$en_servicios["ciclos_disponibles"]= $ciclos;
+
 $en_servicios["id_ciclo_facturacion"] =  $id_ciclo_facturacion;
 
 $text_clasificacion ="";
@@ -220,7 +220,7 @@ $icantidad       =  icon('fa fa-pencil text_cantidad');
 
         <div class="tab-pane <?=$extra_4?>" id="tab_info_precios">
 
-            <br>
+            <?=br()?>
 
             <?=addNRow(div(get_estado_publicacion($status , $id_servicio) , ["class" => "text-right"]))?>
 
@@ -270,14 +270,29 @@ $icantidad       =  icon('fa fa-pencil text_cantidad');
                     </table>
                 </div>
             <?php else: ?>
-                <?php $this->load->view("servicios/seccion_servicios" , $en_servicios); ?>
+
+                <div class="contenedor_inf_servicios contenedor_inf_servicios_ciclo_facturacion">
+
+                    <?=icon('fa fa-pencil text_ciclo_facturacion')?>
+                    <?=icon('CICLO DE FACTURACIÓN' , [ "class" => "titulo_producto_servicio"])?>
+                    <?=div(get_nombre_ciclo_facturacion($ciclos,$id_ciclo_facturacion ))?>
+                    <div class="input_ciclo_facturacion" style="display: none;" >
+                        <?=create_select_selected($ciclos ,
+                            "id_ciclo_facturacion" ,
+                            "ciclo" ,
+                            $id_ciclo_facturacion ,
+                            "ciclo_facturacion" ,
+                            "ciclo_facturacion form-control"
+                        )?>
+                        <?=guardar("GUARDAR", ['class' => 'btn_guardar_ciclo_facturacion'])?>
+                    </div>
+                </div>
+
             <?php endif; ?>
 
-            <?php if($flag_servicio == 0 || $id_ciclo_facturacion == 9): ?>
-
+            <?php if($flag_servicio < 1 ): ?>
                 <?=$this->load->view("servicio/precios" , $data);?>
             <?php endif; ?>
-
 
         </div>
         <!--BUSQUEDA AVANZADA-->

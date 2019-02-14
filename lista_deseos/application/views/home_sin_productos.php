@@ -1,4 +1,4 @@
-<br>
+<?=br()?>
 <?=get_msj_busqueda_error()?>
 <div class="col-lg-4 col-lg-offset-4">
 		<?=heading_enid("UPS AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA" , 

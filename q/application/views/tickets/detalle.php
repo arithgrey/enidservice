@@ -15,7 +15,7 @@
 		</table>			
 	</div>					
 <?=end_row()?>
-<br>
+<?=br()?>
 <hr>
 <?=n_row_12()?>
 	<div class="seccion_nueva_tarea top_20">					

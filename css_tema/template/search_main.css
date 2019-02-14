@@ -8,9 +8,12 @@
 }
 
 .contenedor_anuncios_home {
-    width: 100%;
-    margin: 0 auto;
-    background: #00223f;
+
+    background: #02111e;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 4px;
 }
 
 .anuncia_articulos, .btn_formas_pago {

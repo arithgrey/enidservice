@@ -25,7 +25,7 @@
 <?=div("Atención al cliente/ tareas resueltas" , 
 ["class"=>"blue_enid_background white"] ,
 1)?>
-<br>
+<?=br()?>
 <?=n_row_12()?>	
 	<div style='overflow-x:auto;'>	
 		<table class='table_enid_service text-center' border="1" width="100%">		

@@ -70,34 +70,38 @@
         )?>            
         <div class='contenedor_menu_productos_sugeridos'>
             <?php
-            if ($es_movil == 0){                            
+            if ($es_movil < 1){
+
+                $r =  [];
                 if ($bloque_primer_nivel["num_categorias"] > 0) {
-                    echo $bloque_primer_nivel["html"];
+                    $r[] = $bloque_primer_nivel["html"];
                 }
                 if($bloque_segundo_nivel["num_categorias"] > 0){
-                    echo hr();
-                    echo $bloque_segundo_nivel["html"];
+                    $r[] =  hr();
+                    $r[] =  $bloque_segundo_nivel["html"];
                 }
                 if($bloque_tercer_nivel["num_categorias"] > 0){
-                    echo hr();
-                    echo $bloque_tercer_nivel["html"];
+                    $r[] =  hr();
+                    $r[] =  $bloque_tercer_nivel["html"];
                 }
                 if($bloque_cuarto_nivel["num_categorias"] > 0){
-                    echo hr();
-                    echo $bloque_cuarto_nivel["html"];
+                    $r[] =  hr();
+                    $r[] =  $bloque_cuarto_nivel["html"];
                 }
                 if($bloque_quinto_nivel["num_categorias"] > 0){
-                    echo hr();
-                    echo $bloque_quinto_nivel["html"];
+                    $r[] =  hr();
+                    $r[] =  $bloque_quinto_nivel["html"];
                 }
+                echo div(append_data($r) , ["class" => "contenedor_sub_categorias"]);
             }
+
             ?>
         </div>
     </div>
 
 
     <div class="col-lg-10">
-        <br>
+        <?=br()?>
         <?=n_row_12()?>
             <div class="col-lg-3">
                 <select class="form-control order" name="order" id="order">
@@ -117,7 +121,7 @@
             
             <?=div(div($paginacion , ['class'=>"pull-right"]) , ["class"=>"col-lg-9"])?>
         <?=end_row()?>
-        <br>
+        <?=br()?>
         <?php
         $list   =   "";  
         $flag   =   0;    
@@ -141,7 +145,7 @@
     </div>
 
 <?=end_row()?>
-<br>
+<?=br()?>
 <?=n_row_12()?>         
     <?=div("", ["class" => "col-lg-2"])?>
     <div class="col-lg-10">

@@ -9,7 +9,7 @@
           ['class' =>'strong']
           , 
           1)?> 
-          <br>
+          <?=br()?>
                  
         <?=div(
             anchor_enid("ANUNCIA TU PRIMER PRODUCTO ".icon('fa fa-chevron-right ir'),

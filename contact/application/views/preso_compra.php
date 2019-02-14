@@ -1,4 +1,4 @@
-<br><br>
+<?=br()?><?=br()?>
 <div class="col-lg-10 col-lg-offset-1">
 	<center>
 		<?=heading_enid("Recibe nuestra ubicación" , 2 ,[ "class" => "strong" ])?>
@@ -43,7 +43,7 @@
                             <?=input_hidden(["class" => "servicio" , "value" => $servicio , "name" => "servicio" ])?>
 					  	<?=span("INGRESA TU EMAIL  PARA RECIBIR NUESTRA UBICACIÓN")?>
 					  </div>
-					  <br>
+					  <?=br()?>
 					  <?=guardar("RECIBIR  UBICACIÓN" ,["class" =>"top_20"])?>
 				</div>
 				

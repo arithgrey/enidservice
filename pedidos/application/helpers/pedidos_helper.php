@@ -504,11 +504,11 @@ if(!function_exists('invierte_date_time')){
             $cargos_envio 			=  $recibo["costo_envio_cliente"];
             $total_a_pagar  		=  $precio * $num_ciclos_contratados + $costo_envio_cliente;
             $base                   = "col-lg-4 text_saldo_pendiente";
-            $text 			        =   div(strong("CARGO DE ENVIO")."<br>"	. $cargos_envio ."MXN" ,  ["class" => $base]);
-            $text 			       .=   div(strong("MONTO DEL PEDIDO")."<br>". $total_a_pagar ."MXN" ,  ["class" => $base]);
+            $text 			        =   div(strong("CARGO DE ENVIO")."<?=br()?>"	. $cargos_envio ."MXN" ,  ["class" => $base]);
+            $text 			       .=   div(strong("MONTO DEL PEDIDO")."<?=br()?>". $total_a_pagar ."MXN" ,  ["class" => $base]);
             $saldo_cubierto         =   $saldo_cubierto."MXN";
             $saldo_cubierto         =   ($saldo_cubierto == 0) ? span($saldo_cubierto,  ["class" => "sin_pago"]) : span($saldo_cubierto,  ["class" => "pago_realizado"]);
-            $text 			       .= div(strong("MONTO TOTAL CUBIERTO")."<br>". $saldo_cubierto  , ["class" => "col-lg-4 text_saldo_cubierto"]);
+            $text 			       .= div(strong("MONTO TOTAL CUBIERTO")."<?=br()?>". $saldo_cubierto  , ["class" => "col-lg-4 text_saldo_cubierto"]);
             return div($text , ["class" =>  "row"]);
 
         }
