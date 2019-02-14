@@ -899,9 +899,9 @@ if (!function_exists('invierte_date_time')) {
         array_push($r,heading_enid("PRECIO POR UNIDAD", 4 ));
 
         array_push($r, anchor_enid(
-            $text_precio_unidad,
-            ["class"    =>  "a_precio_unidad text_costo informacion_precio_unidad"],
-            1)
+                $text_precio_unidad,
+                ["class"    =>  "a_precio_unidad text_costo informacion_precio_unidad"],
+                1)
         );
 
         array_push($r, form_open("", ["class" => "form_costo input_costo contenedor_costo"]));

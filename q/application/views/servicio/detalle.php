@@ -1,148 +1,148 @@
 <?php
-    $en_servicios = [];
-    $en_productos = [];
-    $id_servicio                =   "";
-    $nombre_servicio            =   "";
-    $status                     =   "";    
-    $url_vide_youtube           =   "";
-    $url_video_facebook         =   "";
-    $url_productos_publico      =   "";
-    $metakeyword                =   "";
-    $metakeyword_usuario        =   "";
-    $flag_nuevo                 =   0;
-    $flag_envio_gratis          =   0;
-    $flag_servicio              =   0;
-    $existencia                 =   0;
-    $color                      =   "";
-    $precio                     =   0;
-    $id_ciclo_facturacion       =   0;
-    $entregas_en_casa           =   0;
-    $telefono_visible           =   0;
-    $venta_mayoreo              =   0;
-    $url_ml                     =   "";
-    $link_dropshipping          =   "";
-    $stock                      =   0;
-    foreach ($servicio  as $row){
-        
-        $id_servicio                =   $row["id_servicio"];
-        $nombre_servicio            =   $row["nombre_servicio"];
-        $param["nombre_servicio"]   =   $nombre_servicio;
-        $status                     =   $row["status"];                
-        $url_vide_youtube           =   $row["url_vide_youtube"];
-        $url_video_facebook         =   $row["url_video_facebook"];
-        $metakeyword                =   $row["metakeyword"];
-        $metakeyword_usuario        =   $row["metakeyword_usuario"];
-        $flag_nuevo                 =   $row["flag_nuevo"];
-        $flag_envio_gratis          =   $row["flag_envio_gratis"];
-        $flag_servicio              =   $row["flag_servicio"];
-        $existencia                 =   $row["existencia"];
-        $color                      =   $row["color"];
-        $precio                     =   $row["precio"];
-        $id_ciclo_facturacion       =   $row["id_ciclo_facturacion"];
-        $entregas_en_casa           =   $row["entregas_en_casa"];
-        $telefono_visible           =   $row["telefono_visible"];
-        $venta_mayoreo              =   $row["venta_mayoreo"];
-        $tiempo_promedio_entrega    =   $row["tiempo_promedio_entrega"];
-        $url_ml                     =   $row["url_ml"];
-        $link_dropshipping          =   $row["link_dropshipping"];
-        $stock                      =   $row["stock"];
-    }
+$en_servicios = [];
+$en_productos = [];
+$id_servicio                =   "";
+$nombre_servicio            =   "";
+$status                     =   "";
+$url_vide_youtube           =   "";
+$url_video_facebook         =   "";
+$url_productos_publico      =   "";
+$metakeyword                =   "";
+$metakeyword_usuario        =   "";
+$flag_nuevo                 =   0;
+$flag_envio_gratis          =   0;
+$flag_servicio              =   0;
+$existencia                 =   0;
+$color                      =   "";
+$precio                     =   0;
+$id_ciclo_facturacion       =   0;
+$entregas_en_casa           =   0;
+$telefono_visible           =   0;
+$venta_mayoreo              =   0;
+$url_ml                     =   "";
+$link_dropshipping          =   "";
+$stock                      =   0;
+foreach ($servicio  as $row){
 
-    $url_web_servicio = $url_request."producto/?producto=".$id_servicio;    
-    $url_productos_publico  = "../producto/?producto=".$id_servicio."&q2=".$id_usuario;            
-    /*INFO costoS SERVICIO */        
-    $costo_envio_vendedor   =  
-    ($flag_servicio == 0 )?floatval($costo_envio["costo_envio_vendedor"]):0;    
+    $id_servicio                =   $row["id_servicio"];
+    $nombre_servicio            =   $row["nombre_servicio"];
+    $param["nombre_servicio"]   =   $nombre_servicio;
+    $status                     =   $row["status"];
+    $url_vide_youtube           =   $row["url_vide_youtube"];
+    $url_video_facebook         =   $row["url_video_facebook"];
+    $metakeyword                =   $row["metakeyword"];
+    $metakeyword_usuario        =   $row["metakeyword_usuario"];
+    $flag_nuevo                 =   $row["flag_nuevo"];
+    $flag_envio_gratis          =   $row["flag_envio_gratis"];
+    $flag_servicio              =   $row["flag_servicio"];
+    $existencia                 =   $row["existencia"];
+    $color                      =   $row["color"];
+    $precio                     =   $row["precio"];
+    $id_ciclo_facturacion       =   $row["id_ciclo_facturacion"];
+    $entregas_en_casa           =   $row["entregas_en_casa"];
+    $telefono_visible           =   $row["telefono_visible"];
+    $venta_mayoreo              =   $row["venta_mayoreo"];
+    $tiempo_promedio_entrega    =   $row["tiempo_promedio_entrega"];
+    $url_ml                     =   $row["url_ml"];
+    $link_dropshipping          =   $row["link_dropshipping"];
+    $stock                      =   $row["stock"];
+}
 
-    $comision = 0;
-    $utilidad = 0;
-    if ($flag_servicio ==  0) {
-        
-        $comision  =   porcentaje(floatval($precio),$porcentaje_comision);
-        $comision_num  =   porcentaje(floatval($precio),$porcentaje_comision,2,2);
-        $utilidad  =   floatval($precio) - $costo_envio_vendedor;        
-        $utilidad  =   $utilidad - $comision_num;
+$url_web_servicio = $url_request."producto/?producto=".$id_servicio;
+$url_productos_publico  = "../producto/?producto=".$id_servicio."&q2=".$id_usuario;
+/*INFO costoS SERVICIO */
+$costo_envio_vendedor   =
+    ($flag_servicio == 0 )?floatval($costo_envio["costo_envio_vendedor"]):0;
 
-    }
-    
-    $param["precio"]        =   $precio;
-    $ganancias_afiliados    =   0;
-    $ganancias_vendedores   =   0;
-    $text_meses             =   "No aplica";
-    $text_num_mensualidades =   "No aplica";
+$comision = 0;
+$utilidad = 0;
+if ($flag_servicio ==  0) {
 
-    $costo_envio_cliente                = 
-    ($flag_servicio == 0 )?$costo_envio["costo_envio_cliente"]:0;        
-    $info_colores                       =  create_colores_disponibles($color);
-    $en_productos["flag_nuevo"]         =  $flag_nuevo;
-    $en_productos["existencia"]         =  $existencia;
-     
-    $en_servicios["ciclos_disponibles"]= $ciclos;
-    $en_servicios["id_ciclo_facturacion"] =  $id_ciclo_facturacion;
-    
-    $text_clasificacion ="";
-    foreach($clasificaciones as $row){
-        $id_clasificacion = $row["id_clasificacion"];
-        $nombre_clasificacion = $row["nombre_clasificacion"];
-        $text_clasificacion .=  $nombre_clasificacion." /";
-    }     
-    $data["tipo_promocion"]=  $tipo_promocion =  valida_tipo_promocion($servicio);    
-    $data["servicio"] = $servicio;
-    $data["url_productos_publico"] =  $url_productos_publico;    
-    $data["precio"] = $precio;
-    $data["utilidad"] =  $utilidad;
-    $data["comision"] = $comision;
-    $data["url_ml"]   = $url_ml;
+    $comision  =   porcentaje(floatval($precio),$porcentaje_comision);
+    $comision_num  =   porcentaje(floatval($precio),$porcentaje_comision,2,2);
+    $utilidad  =   floatval($precio) - $costo_envio_vendedor;
+    $utilidad  =   $utilidad - $comision_num;
+
+}
+
+$param["precio"]        =   $precio;
+$ganancias_afiliados    =   0;
+$ganancias_vendedores   =   0;
+$text_meses             =   "No aplica";
+$text_num_mensualidades =   "No aplica";
+
+$costo_envio_cliente                =
+    ($flag_servicio == 0 )?$costo_envio["costo_envio_cliente"]:0;
+$info_colores                       =  create_colores_disponibles($color);
+$en_productos["flag_nuevo"]         =  $flag_nuevo;
+$en_productos["existencia"]         =  $existencia;
+
+$en_servicios["ciclos_disponibles"]= $ciclos;
+$en_servicios["id_ciclo_facturacion"] =  $id_ciclo_facturacion;
+
+$text_clasificacion ="";
+foreach($clasificaciones as $row){
+    $id_clasificacion = $row["id_clasificacion"];
+    $nombre_clasificacion = $row["nombre_clasificacion"];
+    $text_clasificacion .=  $nombre_clasificacion." /";
+}
+$data["tipo_promocion"]=  $tipo_promocion =  valida_tipo_promocion($servicio);
+$data["servicio"] = $servicio;
+$data["url_productos_publico"] =  $url_productos_publico;
+$data["precio"] = $precio;
+$data["utilidad"] =  $utilidad;
+$data["comision"] = $comision;
+$data["url_ml"]   = $url_ml;
 
 
-    $titulo_compra_en_casa = ($flag_servicio==1)?
+$titulo_compra_en_casa = ($flag_servicio==1)?
     "OFRECES SERVICIO EN TU NEGOCIO?":"¿CLIENTES TAMBIÉN PUEDEN RECOGER SUS COMPRAS EN TU NEGOCIO?";
 
 
 
 
-    $msj_ver_telefono =  ($flag_servicio==1)?
+$msj_ver_telefono =  ($flag_servicio==1)?
     "¿PERSONAS PUEDEN VER TU NÚMERO TELEFÓNICO PARA SOLICITARTE MÁS 
     INFORMES?":"¿PERSONAS PUEDEN SOLICITARTE MÁS INFORMES POR TELÉFONO?";
-    
-    $data["flag_servicio"]      =  get_campo($servicio , "flag_servicio");         
-    $text_notificacion_imagenes =  valida_text_imagenes($tipo_promocion, $num_imagenes);
 
-    $notificacion_imagenes  
-    = 
+$data["flag_servicio"]      =  get_campo($servicio , "flag_servicio");
+$text_notificacion_imagenes =  valida_text_imagenes($tipo_promocion, $num_imagenes);
+
+$notificacion_imagenes
+    =
     heading_enid( $text_notificacion_imagenes, 2 ,["class"    =>  "titulo_seccion_producto"]);
 
-    $extra_extrega_casa_no  =   valida_activo_entregas_en_casa(0 , $entregas_en_casa);
-    $activo_visita_telefono =   valida_activo_vista_telefono(1 , $telefono_visible);  
-    $baja_visita_telefono   =   valida_activo_vista_telefono(0 , $telefono_visible);  
-    $data["venta_mayoreo"]  =   $venta_mayoreo;
+$extra_extrega_casa_no  =   valida_activo_entregas_en_casa(0 , $entregas_en_casa);
+$activo_visita_telefono =   valida_activo_vista_telefono(1 , $telefono_visible);
+$baja_visita_telefono   =   valida_activo_vista_telefono(0 , $telefono_visible);
+$data["venta_mayoreo"]  =   $venta_mayoreo;
 
 
-    $extra_1                    =  valida_active_pane($num , 1);  
-    $extra_2                    =  valida_active_pane($num , 2);  
-    $extra_3                    =  valida_active_pane($num , 3);  
-    $extra_4                    =  valida_active_pane($num , 4);  
-    $num_articulos              =  valida_text_numero_articulos($existencia);     
-    $llamada_accion_youtube     =  
+$extra_1                    =  valida_active_pane($num , 1);
+$extra_2                    =  valida_active_pane($num , 2);
+$extra_3                    =  valida_active_pane($num , 3);
+$extra_4                    =  valida_active_pane($num , 4);
+$num_articulos              =  valida_text_numero_articulos($existencia);
+$llamada_accion_youtube     =
     "¿TIENES ALGÚN VIDEO SOBRE TU ".$tipo_promocion."?";
-    $text_llamada_accion_youtube =  icon('fa fa-youtube-play') ." VIDEO DE YOUTUBE ";
-    $valor_youtube               =  get_campo($servicio , "url_vide_youtube");
-    $val_youtube                 =  icon('fa fa-pencil text_url_youtube').$valor_youtube;
-    $nuevo_nombre_servicio       =  get_campo($servicio ,"nombre_servicio");
+$text_llamada_accion_youtube =  icon('fa fa-youtube-play') ." VIDEO DE YOUTUBE ";
+$valor_youtube               =  get_campo($servicio , "url_vide_youtube");
+$val_youtube                 =  icon('fa fa-pencil text_url_youtube').$valor_youtube;
+$nuevo_nombre_servicio       =  get_campo($servicio ,"nombre_servicio");
 
-    $text_titulo_seccion_producto=
+$text_titulo_seccion_producto=
     "INFORMACIÓN SOBRE TU ".$nuevo_nombre_servicio.
     icon('fa fa-pencil text_desc_servicio icon-pencil');
-    $nueva_descripcion          = get_campo($servicio , 'descripcion');
+$nueva_descripcion          = get_campo($servicio , 'descripcion');
 
 
 
-    $nuevo_titulo_seleccion_producto =  div(
-        $text_titulo_seccion_producto ,
-        ["class"=>"titulo_seccion_producto titulo_producto_servicio"],
-        1);
+$nuevo_titulo_seleccion_producto =  div(
+    $text_titulo_seccion_producto ,
+    ["class"=>"titulo_seccion_producto titulo_producto_servicio"],
+    1);
 
-    $info_nueva_descripcion      =
+$info_nueva_descripcion      =
     div($nueva_descripcion , ["class" => "text_desc_servicio contenedor_descripcion"],1);
 
 
@@ -150,18 +150,18 @@
 
 
 
-    $i_cantidad =  input([
-                        "type"      =>"number" ,
-                        "name"      =>"existencia" ,
-                        "class"     =>"existencia" ,
-                        "required"  =>"" ,
-                        "value"     => $existencia,
-                    ],
-                    1);
+$i_cantidad =  input([
+    "type"      =>"number" ,
+    "name"      =>"existencia" ,
+    "class"     =>"existencia" ,
+    "required"  =>"" ,
+    "value"     => $existencia,
+],
+    1);
 
 
 
-    $icantidad       =  icon('fa fa-pencil text_cantidad');
+$icantidad       =  icon('fa fa-pencil text_cantidad');
 
 
 
@@ -193,7 +193,7 @@
             <?=div($text_llamada_accion_youtube , 1)?>
             <?=div($val_youtube , ["class"    =>  "text_video_servicio"] , 1 )?>
             <?=get_form_youtube($valor_youtube)?>
-        </div> 
+        </div>
 
         <!--DESCRIPCION DEL PRODUCTO-->
         <div class="tab-pane <?=$extra_2?>" id="tab_info_producto">
@@ -202,23 +202,23 @@
             <?=place("place_tallas_disponibles")?>
             <?=$info_nueva_descripcion?>
             <?=get_form_descripcion($nueva_descripcion);?>
-            
-            <?php if($flag_servicio ==  0): ?>                
+
+            <?php if($flag_servicio ==  0): ?>
                 <div class="contenedor_inf_servicios">
                     <?=heading_enid("COLORES" , 4 )?>
                     <?=div("+ AGREGAR COLORES", ["class" =>"text_agregar_color "],1);?>
-                    <?=heading_enid("COLORES DISPONIBLES" , 4 )?>       
+                    <?=heading_enid("COLORES DISPONIBLES" , 4 )?>
                     <?=div($info_colores , 1)?>
                     <div class="input_servicio_color" >
                         <?=div("" ,["id"    =>  "seccion_colores_info"], 1)?>
                         <?=div("" ,["class" =>  "place_colores_disponibles"] , 1)?>
-                    </div>          
+                    </div>
                 </div>
             <?php endif; ?>
         </div>
 
-    
-        <div class="tab-pane <?=$extra_4?>" id="tab_info_precios">            
+
+        <div class="tab-pane <?=$extra_4?>" id="tab_info_precios">
 
             <br>
 
@@ -226,9 +226,9 @@
 
 
             <?=get_rango_entrega(
-                $id_perfil, 
-                $tiempo_promedio_entrega, 
-                [   "name"=>"tiempo_entrega" , 
+                $id_perfil,
+                $tiempo_promedio_entrega,
+                [   "name"=>"tiempo_entrega" ,
                     "class"=> "tiempo_entrega form-control"
                 ],
                 "DÍAS PROMEDIO DE ENTREGA")?>
@@ -240,43 +240,43 @@
             <?=get_seccion_telefono_publico($has_phone, $telefono_visible, $activo_visita_telefono, $baja_visita_telefono)?>
 
 
-        
-    
-        <?php if ($flag_servicio == 0): ?>                    
-            <div class="contenedor_inf_servicios contenedor_inf_servicios_novedad">
-                <div class="contenedor_es_nuevo">                    
-                    <?=heading_enid("¿ES NUEVO?", 4 )?>
-                    <?=div(icon('fa fa-pencil text_nuevo').get_producto_usado($flag_nuevo))?>
+
+
+            <?php if ($flag_servicio == 0): ?>
+                <div class="contenedor_inf_servicios contenedor_inf_servicios_novedad">
+                    <div class="contenedor_es_nuevo">
+                        <?=heading_enid("¿ES NUEVO?", 4 )?>
+                        <?=div(icon('fa fa-pencil text_nuevo').get_producto_usado($flag_nuevo))?>
+                    </div>
+                    <table class="input_nuevo seccion_es_nuevo">
+                        <tr>
+                            <?=get_td(select_producto_usado($flag_nuevo),
+                                ['class'=>'col-lg-9'])?>
+                            <?=get_td(guardar("GUARDAR",
+                                ["class" => "btn_guardar_producto_nuevo es_nuevo col-lg-3"]))?>
+                        </tr>
+                    </table>
+
+                    <div class="contenedor_articulos_disponibles">
+                        <?=heading_enid('¿ARTÍCULOS DISPONIBLES?', 4 ,[]);?>
+                        <?=div($icantidad.$num_articulos,["class" => "text_numero_existencia"])?>
+                    </div>
+                    <table class="input_cantidad seccion_cantidad">
+                        <tr>
+                            <?=get_td($i_cantidad , ['col-lg-9'])?>
+                            <?=get_td(guardar("GUARDAR" ,
+                                ["class"=> "es_disponible btn_guardar_cantidad_productos col-lg-3"]))?>
+                        </tr>
+                    </table>
                 </div>
-                <table class="input_nuevo seccion_es_nuevo">
-                    <tr>
-                        <?=get_td(select_producto_usado($flag_nuevo),
-                        ['class'=>'col-lg-9'])?>
-                        <?=get_td(guardar("GUARDAR", 
-                        ["class" => "btn_guardar_producto_nuevo es_nuevo col-lg-3"]))?>
-                    </tr>
-                </table>
+            <?php else: ?>
+                <?php $this->load->view("servicios/seccion_servicios" , $en_servicios); ?>
+            <?php endif; ?>
 
-                <div class="contenedor_articulos_disponibles">
-                    <?=heading_enid('¿ARTÍCULOS DISPONIBLES?', 4 ,[]);?>
-                    <?=div($icantidad.$num_articulos,["class" => "text_numero_existencia"])?>
-                </div>  
-                <table class="input_cantidad seccion_cantidad">
-                    <tr>
-                        <?=get_td($i_cantidad , ['col-lg-9'])?>        
-                        <?=get_td(guardar("GUARDAR" , 
-                            ["class"=> "es_disponible btn_guardar_cantidad_productos col-lg-3"]))?>
-                    </tr>
-                </table>                                    
-            </div>
-        <?php else: ?>
-        <?php $this->load->view("servicios/seccion_servicios" , $en_servicios); ?>
-        <?php endif; ?>        
-        
-        <?php if($flag_servicio == 0 || $id_ciclo_facturacion == 9): ?>
+            <?php if($flag_servicio == 0 || $id_ciclo_facturacion == 9): ?>
 
-            <?=$this->load->view("servicio/precios" , $data);?>
-        <?php endif; ?>
+                <?=$this->load->view("servicio/precios" , $data);?>
+            <?php endif; ?>
 
 
         </div>
