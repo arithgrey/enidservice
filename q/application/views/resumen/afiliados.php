@@ -9,8 +9,7 @@
 		
 		$nombre     = $row["nombre"];
 		$tel        = $row["tel_contacto"];
-		$correo = $row["email"];
-
+		$correo     = $row["email"];
 		$nombre_completo =$nombre;
 
 		$list .="<tr>";

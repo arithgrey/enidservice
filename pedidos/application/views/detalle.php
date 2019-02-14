@@ -1,4 +1,4 @@
-<br>
+<?=br()?>
 <div class="col-lg-10 col-lg-offset-1">
 	<div class="col-lg-8">	
 		<div class="encabezado_numero_orden">
@@ -11,8 +11,6 @@
 		])?>
 
 		<?=div(crea_estado_venta($status_ventas , $recibo) , 1)?>
-
-		
 		<div class="selector_estados_ventas top_20 bottom_20">
 			<?=div(strong("STATUS DE LA COMPRA"))?>
 			<?=create_select(
@@ -85,38 +83,20 @@
 
 		<?=div("REGISTRO ". $recibo[0]["fecha_registro"]	, ["class" => "fecha_registro"] , 1)?>
 		<?=div(crea_fecha_entrega($recibo))?>
-
 		<?=crea_seccion_productos($recibo)?>
 
-		
-		<br>
-        <br>
+        <?=br(2)?>
         <?=create_fecha_contra_entrega($recibo , $domicilio)?>
         <?=notificacion_por_cambio_fecha($recibo ,  $num_compras , $recibo[0]["saldo_cubierto"]);?>
         <?=br()?>
-        <?=n_row_12()?>
-            <?=crea_seccion_recordatorios($recordatorios ,$tipo_recortario)?>
-        <?=end_row()?>
+        <?=addNRow(crea_seccion_recordatorios($recordatorios ,$tipo_recortario))?>
         <?=br()?>
-
-        <?=n_row_12()?>
-			<?=create_seccion_tipificaciones($tipificaciones)?>
-		<?=end_row()?>
-        <br>
-
-        <?=n_row_12()?>
-                <form class="form_notas" style="display:none;" >
-                    <?=div("NOTA",["class" => "strong text_nota" ,    "style" => "font-size:1.5em;"])?>
-                    <?=textarea(["name" => "comentarios" , "class" => "comentarios form-control"])?>
-                    <?=input_hidden(["name" => "id_recibo", "value" =>  $id_recibo ])?>
-                    <?=guardar( "AGREGAR", ["name" => "comentarios"])?>
-                </form>
-        <?=place("place_nota")?>
-        <?=end_row()?>
+        <?=addNRow(create_seccion_tipificaciones($tipificaciones))?>
         <?=br()?>
-        <?=n_row_12()?>
-            <?=create_seccion_comentarios($comentarios, $id_recibo)?>
-        <?=end_row()?>
+        <?=addNRow(get_form_nota($id_recibo))?>
+        <?=br()?>
+        <?=addNRow(create_seccion_comentarios($comentarios, $id_recibo))?>
+
 
 	</div>
 	<div class="col-lg-4">
@@ -124,7 +104,6 @@
 
 		<?=div(icon("fa fa fa-pencil") , ["class" => "editar_tipo_entrega text-right"])?>
 		<?=create_seccion_tipo_entrega($recibo , $tipos_entregas)?>
-
 		<?=div(create_select(
 			$tipos_entregas , 
 			"tipo_entrega" , 
@@ -141,34 +120,23 @@
 
 	)?>
 		<?=tiene_domilio($domicilio)?>
-		<br>
+		<?=br()?>
         <?=resumen_compras_cliente($num_compras)?>
 		<?=create_seccion_usuario($usuario)?>
         <?=get_form_usuario($usuario)?>
-
 		<?=create_seccion_domicilio($domicilio)?>
 		<?=create_seccion_recordatorios($recibo)?>
-		<br>
-		<?=n_row_12()?>
-		<div class="padding_10 resumen_pago">
-			<?=create_seccion_saldos($recibo)?>
-		</div>
-		<?=end_row()?>
-
+		<?=br()?>
+        <?=addNRow(div(create_seccion_saldos($recibo) , ["class"=>"padding_10 resumen_pago"]))?>
         <div class="dropdown pull-right top_20 ">
             <?=div(icon("fa fa-plus-circle fa-3x") , ["class"=>" dropdown-toggle" ,"data-toggle"=>"dropdown"])?>
             <div class="dropdown-menu contenedor_opciones_pedido" aria-labelledby="dropdownMenuButton">
                 <?=get_link_cambio_fecha($domicilio, $recibo)?>
                 <?=get_link_recordatorio($id_recibo)?>
                 <?=get_link_nota()?>
-
             </div>
         </div>
-
-
-
-        <br>
-
+        <?=br()?>
 	</div>
 </div>
 

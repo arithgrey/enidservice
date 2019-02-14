@@ -157,7 +157,7 @@ $talla                =
         "required"    =>  "true"
     ])?>
     <?=place("place_telefono")?>        
-    <?=guardar("CREA UNA CUENTA", [] , 1)?>            
+    <?=guardar("CREA UNA CUENTA")?>
 
     <?=div(anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO" ,
       [

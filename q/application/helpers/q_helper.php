@@ -551,6 +551,106 @@
             }
             return $valor;
         }
+        function get_comparativa($info_sistema){
+
+            $info_uso 	= 	"";
+            $b 						=	1;
+            $x 						=	0;
+            $total_d_m_1 			= 	0;
+            $formas_pago_1 			= 	0;
+            $faq_1	 				=	0;
+            $sobre_enid_1 			=	0;
+            $afiliados_1 			= 	0;
+            $nosotros_1 			= 	0;
+            $procesar_compra_1 		= 	0;
+            $total_visitas 			=	0;
+            $total_faqs 			=	0;
+            $total_formas_pago 		=	0;
+            $total_contacto 		=	0;
+            $total_principal 		=	0;
+            $total_afiliado 		=	0;
+            $total_home 			=	0;
+
+            $total_procesar_compra 		=0;
+            foreach ($info_sistema["semanal"] as $row) {
+
+                $f_registro 			=  	$row["horario"];
+                $total_registrado 		= 	valida_total_menos1($total_d_m_1 ,  $row["total_registrado"]);
+                $total_visitas 			= 	$total_visitas +$row["total_registrado"];
+                $faq 					= 	valida_total_menos1($faq_1 , $row["faq"] );
+                $faq_1 					= 	$row["faq"];
+                $total_faqs				= 	$total_faqs +$row["faq"];
+                $formas_pago 			= 	valida_total_menos1($formas_pago_1 , $row["formas_pago"] );
+                $formas_pago_1 			= 	$row["formas_pago"];
+                $total_formas_pago  	= 	$total_formas_pago + $row["formas_pago"];
+                $sobre_enid 			= 	valida_total_menos1($sobre_enid_1 , $row["sobre_enid"] );
+                $sobre_enid_1 			=	$row["sobre_enid"];
+                $total_principal 		=  	$total_principal + $row["sobre_enid"];
+                $procesar_compra 		= 	valida_total_menos1($procesar_compra_1 , $row["procesar_compra"] );
+                $procesar_compra_1 		= 	$row["procesar_compra"];
+
+                $total_procesar_compra = $total_procesar_compra + $row["procesar_compra"];
+
+                $afiliados 			= 	valida_total_menos1($afiliados_1 , $row["afiliados"] );
+                $total_afiliado 	=  	$total_afiliado + $row["afiliados"];
+                $afiliados_1 		= 	$row["afiliados"];
+                $nosotros 			= 	valida_total_menos1($nosotros_1 , $row["nosotros"] );
+                $nosotros_1 		= 	$row["nosotros"];
+                $total_home  		=  	$total_home + $row["nosotros"];
+                $contacto 				=  	$row["contacto"];
+                $total_contacto 		=	$total_contacto + $contacto;
+                $cotizaciones 			=  	$row["cotizaciones"];
+                $style 					=	"";
+
+
+                $info_uso .='<tr  '.$style.'>';
+
+                $info_uso .= get_td($f_registro);
+                $info_uso .=  $total_registrado;
+                $info_uso .=  $faq;
+                $info_uso .= $formas_pago;
+                $info_uso .= get_td($contacto);
+                $info_uso .= $sobre_enid;
+                $info_uso .= $afiliados;
+                $info_uso .= $nosotros;
+                $info_uso .= $procesar_compra;
+
+                $info_uso .='</tr>';
+                $b++;
+                $x ++;
+            }
+
+            $t  = [];
+            $t[]="<tr  style=\"background: #000;color: white;text-align: center!important;\">";
+                $t[]= get_td("Horario");
+                $t[]= get_td("Total");
+                $t[]= get_td("FAQ");
+                $t[]= get_td("Formas de pago");
+                $t[]= get_td("Contacto");
+                $t[]= get_td("Sobre Enid");
+                $t[]= get_td("Afiliados");
+                $t[]= get_td("Home");
+                $t[]= get_td("Procesar compra" );
+            $t[]= "</tr>";
+
+            $t[]= $info_uso;
+
+            $t[]= "<tr style=\"background: #000;color: white;text-align: center!important;\">";
+                $t[]= get_td("Total");
+                $t[]= get_td($total_visitas);
+                $t[]= get_td($total_faqs);
+                $t[]= get_td($total_formas_pago);
+                $t[]= get_td($total_contacto);
+                $t[]= get_td($total_principal);
+                $t[]= get_td($total_afiliado);
+                $t[]= get_td($total_home);
+                $t[]= get_td($total_procesar_compra);
+            $t[]= "</tr>";
+
+            $table = "<table class='table_enid_service' border=1>".append_data($t)."</table>";
+            return $table;
+
+        }
         /*
 
 

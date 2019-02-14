@@ -21,13 +21,15 @@ class Enid extends REST_Controller{
     }
     function usabilidad_landing_pages_GET(){    
 
+
+        $response           = false;
         if($this->input->is_ajax_request()){ 
-            $param = $this->get();
-            $data["info_sistema"] =  $this->actividad_web_model->get_comparativa_landing_page($param);
-            $this->load->view("enid/uso_sistema" , $data );        
-        }else{
-            $this->response("Error");
-        }    
+            $param          = $this->get();
+            $info_sistema   =  $this->actividad_web_model->get_comparativa_landing_page($param);
+            $response       =  get_comparativa($info_sistema);
+        }
+        $this->response($response);
+
     }        
     
     function metricas_cotizaciones_GET(){        
