@@ -6,7 +6,6 @@
 				"Ingresa el monto y correo que solicitas a tu amigo para contar con saldo en tu cuenta." ,
 				["class"=>"desc_solicitud"]
 			)?>
-			
 			<form class='solicitar_saldo_amigo_form'>
 				<?=n_row_12()?>
 					<table>

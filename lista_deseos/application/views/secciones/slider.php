@@ -38,8 +38,7 @@
                     <?=$div_preferencias?>                    
                     <div class="slide-content">
                         <?=div($div_nueva_temporada ,   ["class"=>"animate"] )?>
-                        <?=div(heading_enid("ENCUENTRA" , 2 , 
-                            [ "class"=> "from-bottom"]) ,  ["class"=>"animate"])?>
+                        <?=div(heading_enid("ENCUENTRA" , 2 , [ "class"=> "from-bottom"]) ,  ["class"=>"animate"])?>
                         <?=div(heading_enid(
                             "ROPA PARA CADA OCACIÓN" , 2 , 
                             [ "class"=> "from-bottom"]) ,
@@ -53,9 +52,7 @@
 
                 <li class="single-slide slide-3">
                     <div class="slide-label">Bags</div>
-                    <div class="slide-image animate">
-                        <?=$img_preferencias_2?>
-                    </div>    
+                    <?=div($img_preferencias_2 , ["class"=>"slide-image animate"])?>
                     <div class="slide-content">
                         <?=div(div("Accesorios" ,  
                         ["class"=>"product-type from-bottom"]) ,  ["class" => "animate" ])?>
@@ -87,10 +84,11 @@
                     </div>
                 </li>
             </ul>
-            <div class="slider-nav">                
-                <?=div($img_up ,    ["class"    =>  "slide-nav-up"])?>
-                <?=div($img_down ,  ["class"    =>  "slide-nav-down"])?>
-            </div>
+            <?=get_btw(
+                div($img_up ,    ["class"    =>  "slide-nav-up"]) ,
+                div($img_down ,  ["class"    =>  "slide-nav-down"]),
+                "slider-nav"
+            )?>
         </div>    
         </div>
       <hr>

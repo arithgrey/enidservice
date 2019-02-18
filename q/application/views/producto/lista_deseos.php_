@@ -10,12 +10,14 @@
     </div>
 <?=end_row()?>
 
+
 <?=n_row_12()?>
     <div class='col-lg-10 col-lg-offset-1'>
     	<?php n_row_12()?>
         <?php
         $a =0;
-            foreach ($productos_deseados as $row):
+
+        foreach ($productos_deseados as $row):
                 	   
                 $num_deseo      =   $row["num_deseo"];
                 $id_servicio    =   $row["id_servicio"];

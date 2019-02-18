@@ -1,5 +1,5 @@
 <div class="contenedor_categorias_servicios">
-	<?=heading_enid("GRUPO AL CUAL PERTENECE TU PRODUCTO" , "3" )?>			  	
+	<?=heading_enid("GRUPO AL CUAL PERTENECE TU PRODUCTO" , 3 )?>
 	<?=anchor_enid(
 		"CANCELAR" ,  
 		[
@@ -7,7 +7,7 @@
 			"style"	=>	"color: white!important"
 		] , 
 		1);?>
-	<hr>
+	<?=hr()?>
 	<?=n_row_12()?>
 		<?=div(place("primer_nivel_seccion"), ["class" => "info_categoria"])?>
   	    <?=div(place("segundo_nivel_seccion"), ["class" => "info_categoria"])?>

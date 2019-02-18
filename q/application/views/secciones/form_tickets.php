@@ -1,6 +1,4 @@
-<div class="col-lg-6 col-lg-offset-3">
-  <?=div("ABRIR SOLICITUD" ,  ["class"=>"titulo_enid"])?>
-</div>
+<?=div(div("ABRIR SOLICITUD" ,  ["class"=>"titulo_enid"])   , ["class"=>"col-lg-6 col-lg-offset-3"])?>
 <div class="col-lg-6 col-lg-offset-3" style="margin-top: 50px;">
   <form class='form_ticket'>                      
       <?=input_hidden([
@@ -13,29 +11,24 @@
         "class"  => "mensaje"
       ])?>      
       <?=div("DEPARTAMENTO AL CUAL SOLICITAS" ,  1)?>
-
-      <?=n_row_12()?>
-        <?=create_select(
+      <?=addNRow(create_select(
             $departamentos,
-            "departamento" , 
-            "form-control" , 
-            "departamento" , 
-            "nombre" , 
-            "id_departamento" 
-        );?>          
-      <?=end_row()?>
+            "departamento" ,
+            "form-control" ,
+            "departamento" ,
+            "nombre" ,
+            "id_departamento"
+        ));?>
       <?=n_row_12()?>
-          <div class="input-group" >
-            <?=div("MODULO, ASUNTO, TÓPICO" , ["class"=>"input-group-addon"])?>
-            <?=input([
-                "id"              =>  "asunto" ,
-                "name"            =>  "asunto" ,
-                "class"           =>  "form-control" ,
-                "placeholder"     =>  "MODULO, ASUNTO, TÓPICO" ,
-                "required"        =>  "true" ,
-                "type"            =>  "text"
-            ])?>
-          </div>                        
+          <?=div("MODULO, ASUNTO, TÓPICO" , ["class"=>"input-group-addon"])?>
+          <?=input([
+                    "id"              =>  "asunto" ,
+                    "name"            =>  "asunto" ,
+                    "class"           =>  "form-control" ,
+                    "placeholder"     =>  "MODULO, ASUNTO, TÓPICO" ,
+                    "required"        =>  "true" ,
+                    "type"            =>  "text"
+          ])?>
       <?=end_row()?>          
       <?=guardar("ABRIR TICKET")?>    
   </form>

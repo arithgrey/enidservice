@@ -687,14 +687,15 @@ class recibo extends REST_Controller{
         $param    =      $this->get();
         $response =      false;
         if(if_ext($param , "fecha_inicio,fecha_termino,tipo")){
-            $response                       =  $this->recibo_model->get_compras_tipo_periodo($param);
-            $data["compras"]                =  $response;
-            $data["tipo"]                   =  $param["tipo"];
-            $data["status_enid_service"]    =  $this->get_status_enid_service();
+            $response               =  $this->recibo_model->get_compras_tipo_periodo($param);
+            $compras                =  $response;
+            $tipo                   =  $param["tipo"];
+            $status_enid_service    =  $this->get_status_enid_service();
 
             $v     =  $param["v"];
             if ($v == 1 ) {
-                return  $this->load->view("ventas/compras" , $data);
+                $response  = get_view_compras($status_enid_service, $compras , $tipo  );
+
             }
         }
         $this->response($response);

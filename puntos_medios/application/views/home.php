@@ -1,4 +1,4 @@
-<?=br()?><?=br()?>
+<?=br(2)?>
 <div class="col-lg-10 col-lg-offset-1 titulo_principal_puntos_encuentro">
 	<center>
 		<?=heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO" , 2 ,[ "class" => "strong titulo_punto_encuentro" ])?>		
@@ -23,9 +23,8 @@
 	</div>
 
 <?php else:?>
-
 	<div class='formulario_quien_recibe display_none'>
-		<?=$this->load->view("form_horario")?>
+        <?=div(get_form_punto_encuentro_horario($recibo , $punto_encuentro) , ["class"=>"col-lg-6 col-lg-offset-3"] )?>
 	</div>
 <?php endif;?>
 <?=input_hidden(["class"=>"primer_registro" , "value" => $primer_registro])?>

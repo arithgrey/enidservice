@@ -20,7 +20,7 @@
         }       
         return $this->db->get("privacidad_usuario")->result_array();
     }
-    private function delete( $params_where =[] , $limit =1){              
+    function delete( $params_where =[] , $limit =1){
         $this->db->limit($limit);        
         foreach ($params_where as $key => $value) {
           $this->db->where($key , $value);

@@ -41,17 +41,13 @@
 
 					]), 
 					["class"=> "col-lg-10"])?>
-										
 					<?=div("MXN" , ["class" =>"mxn col-lg-2"])?>
-
 				</div>				
 			</div>
 			<?=place("mensaje_saldo_cubierto_post_venta")?>
 
 			<form class="form_cantidad top_20">
 				<?=div(strong("SALDO CUBIERTO") ,1)?>
-				
-
 				<div class="row">
 					<?=div(input(
 							[
@@ -65,7 +61,6 @@
 
 					]), 
 					["class"=> "col-lg-10"])?>
-					
 					<?=input_hidden(
 						[
 							"name"	=>	"recibo",
@@ -84,7 +79,6 @@
 		<?=div("REGISTRO ". $recibo[0]["fecha_registro"]	, ["class" => "fecha_registro"] , 1)?>
 		<?=div(crea_fecha_entrega($recibo))?>
 		<?=crea_seccion_productos($recibo)?>
-
         <?=br(2)?>
         <?=create_fecha_contra_entrega($recibo , $domicilio)?>
         <?=notificacion_por_cambio_fecha($recibo ,  $num_compras , $recibo[0]["saldo_cubierto"]);?>
@@ -96,8 +90,6 @@
         <?=addNRow(get_form_nota($id_recibo))?>
         <?=br()?>
         <?=addNRow(create_seccion_comentarios($comentarios, $id_recibo))?>
-
-
 	</div>
 	<div class="col-lg-4">
 			

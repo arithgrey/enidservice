@@ -7,23 +7,15 @@
 ?>
 	<?=br()?>
     <div class="container-fluid gedf-wrapper">
-
         <div class="row">
             <div class="col-md-3">
                 <?=br()?>
                 <?=div("TUS DIRECCIONES DE ENTREGA REGISTRADAS", ["class" => "text_direcciones_registradas"])?>
                 <?=agregar_nueva_direccion(0);?>
                 <div class="card">
-                    <ul class="list-group list-group-flush">
-                    	<?=create_lista_direcciones($lista_direcciones , $id_recibo)?>
-                    </ul>
+                    <?=ul(create_lista_direcciones($lista_direcciones , $id_recibo) , ["class"=>"list-group list-group-flush"])?>
                 </div>
-                <?=br()?>
-                <?=br()?>
-
-
-
-
+                <?=br(2)?>
             </div>
             <div class="col-md-6 gedf-main">
                 <div class="card gedf-card">
@@ -52,7 +44,7 @@
                             <div>
                                 <div class="dropdown">
                                     <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h"></i>
+                                        <?=icon("fa fa-ellipsis-h")?>
                                     </button>
 
                                 </div>
@@ -60,18 +52,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-
-                        <a class="card-link" href="#">
-                            <h5 class="card-title">
-
-                            </h5>
-                        </a>
-                        <p class="card-text">
-                        	<?=create_descripcion_direccion_entrega($domicilio)?>
-                            <?=valida_accion_pago($recibo)?>
-                        </p>
+                        <?=create_descripcion_direccion_entrega($domicilio)?>
+                        <?=valida_accion_pago($recibo)?>
                     </div>
-
                 </div>
 
             </div>
@@ -79,48 +62,11 @@
                 <?=br()?>
                 <?=div("TUS PUNTOS DE ENCUENTRO REGISTRADOS" , ["class" => "text_puntos_registrados"])?>
                 <?=agregar_nueva_direccion(1);?>
-                <div class="card">
-                    <ul class="list-group list-group-flush">
-                        <?=get_lista_puntos_encuentro($puntos_encuentro , $id_recibo , $domicilio)?>
-                    </ul>
-                </div>
-                <?=br()?>
-                <?=br()?>
-
-
+                <?=div(ul([get_lista_puntos_encuentro($puntos_encuentro , $id_recibo , $domicilio)] , ["class"=>"list-group list-group-flush"]))?>
+                <?=br(2)?>
             </div>
         </div>
     </div>
-
-    <form class="form_registro_direccion" action="../procesar/?w=1" method="POST">
-       <?=input_hidden(["class" => "recibo" , "name" => "recibo", "value"=>  $id_recibo])?>
-    </form>
-
-
-    <form   class="form_puntos_medios"
-            action="../puntos_medios/?recibo=<?=$id_recibo?>"
-            method="POST">
-
-           <?=input_hidden([
-            "name"  => "recibo" ,
-            "value"=>  $id_recibo
-           ])?>
-    </form>
-    <form   class="form_puntos_medios_avanzado"
-            action="../puntos_medios/?recibo=<?=$id_recibo?>"
-            method="POST">
-        <?=input_hidden([
-            "name"  => "recibo" ,
-            "value"=>  $id_recibo
-        ])?>
-        <?=input_hidden([
-            "name"  => "avanzado" ,
-            "value"=>  1
-        ])?>
-        <?=input_hidden([
-            "class" => "punto_encuentro_asignado" ,
-            "name"  => "punto_encuentro" ,
-            "value" =>  0
-        ])?>
-
-    </form>
+    <?=get_form_registro_direccion($id_recibo);?>
+    <?=get_form_puntos_medios($id_recibo);?>
+    <?=get_form_puntos_medios_avanzado($id_recibo);?>

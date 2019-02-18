@@ -9,5 +9,13 @@
             $response   = div($btn, ["class" => $mas_nivel]);
             return $response;
         }
+        function get_form_clasificacion_talla(){
+
+            $r[] =  form_open("" , ["class"=>"form-agregar-clasificacion-talla"]);
+            $r[] =  input(["type"=>"text","name"=>"clasificacion","placeholder"=>"Busca por clasificación"]);
+            $r[] =  form_close(place("info_tags"));
+            return  append_data($r);
+
+        }
 
     }

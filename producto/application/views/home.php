@@ -69,7 +69,6 @@
 <?= n_row_12() ?>
     <div class="product-detail contenedor_info_producto">
         <div class="col-lg-8">
-
             <div class="col-lg-8">
                 <div class="row">
                     <?= n_row_12() ?>
@@ -80,7 +79,6 @@
                     <?= end_row() ?>
                 </div>
             </div>
-
             <div class="col-lg-4">
                 <div class="row">
                     <div class="contenedor_central_info">
@@ -88,14 +86,12 @@
                         <?php if ($proceso_compra == 1): ?>
                             <?= get_tiempo_entrega(0, $tiempo_entrega) ?>
                         <?php endif; ?>
-
                         <?= creta_tabla_colores($color, $flag_servicio) ?>
                         <?= place("separador") ?>
                         <?= div(valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo), 1) ?>
                         <?= div(get_tipo_articulo($flag_nuevo, $flag_servicio), 1) ?>
                         <?= place("separador") ?>
                         <?= get_nombre_vendedor($proceso_compra, $usuario, $id_publicador) ?>
-
                         <?= n_row_12() ?>
                         <?= div(get_entrega_en_casa($entregas_en_casa, $flag_servicio), ['class' => 'strong']) ?>
                         <?= get_contacto_cliente($proceso_compra, $telefono_visible, $in_session, $usuario) ?>
@@ -115,8 +111,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="col-lg-4">
             <?php if ($flag_servicio == 0): ?>
                 <?php if ($existencia > 0): ?>
@@ -142,19 +136,17 @@
                                 ["class" => "card-title pricing-card-title"]
                             ) ?>
 
-                            <ul class="list-unstyled mt-3 mb-4">
-                                <li>
-                                    Artículo temporalmente agotado
-                                </li>
-                                <li>
-                                    <?= anchor_enid(
-                                        "Preguntar cuando estará disponible",
-                                        ["href" => "../pregunta/?tag=<?=$id_servicio?>&disponible=1"],
-                                        1,
-                                        1
-                                    ) ?>
-                                </li>
-                            </ul>
+                            <?=ul([
+                                "Artículo temporalmente agotado",
+                                anchor_enid(
+                                    "Preguntar cuando estará disponible",
+                                    ["href" => "../pregunta/?tag=<?=$id_servicio?>&disponible=1"],
+                                    1,
+                                    1
+                                )
+
+                            ],
+                                ["class"=>"list-unstyled mt-3 mb-4"])?>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -179,14 +171,12 @@
                         ]
                     ) ?>
                     <?= $this->load->view("form_compra", $info_compra) ?>
-
                 </div>
             <?php endif; ?>
         </div>
 
     </div>
 <?= end_row() ?>
-
 <?=addNRow(div(get_descripcion_servicio($descripcion, $flag_servicio) , ["class" => "col-lg-10 col-lg-offset-1"])) ?>
 <?=addNRow(div(valida_url_youtube($url_vide_youtube, $is_mobile) , ["class" => "col-lg-10 col-lg-offset-1"])) ?>
 <?=br(2)?>

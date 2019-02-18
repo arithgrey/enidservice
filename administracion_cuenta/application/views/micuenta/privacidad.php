@@ -1,10 +1,10 @@
 
 	<div class="col-lg-4 col-lg-offset-4">
 		<?=heading_enid("ACTUALIZAR DATOS DE ACCESO" , 3)?>
-		<?=n_row_12()?>
+
 					<form id="form_update_password" class="form-horizontal" method="POST">            			
 						<div class="form-group">            
-							<?=div("Contraseña actual", 1)?>
+							<?=div("CONTRASEÑA ACTUAL", 1)?>
 				            <?=input([
 				              	"name"			=> 	"password" ,
 				              	"id"			=> 	"password" ,
@@ -13,7 +13,7 @@
 				              	"required"		=>  true
 				             ])?>
 					        <?=place('place_pw_1')?>
-				            <?=div("Nueva", 1)?>
+				            <?=div("NUEVA", 1)?>
 				            <?=input([
 				            	"name"		=>	"pw_nueva" ,
 				            	"id"		=>	"pw_nueva" ,
@@ -22,7 +22,7 @@
 				             	"required" 	=>  true 
 				            ])?>
 				            <?=place('place_pw_2')?>
-				            <?=div("Confirmar nueva", 1)?>
+				            <?=div("CONFIRMAR NUEVA", 1)?>
 				            <?=input([
 				            	"name"			=> "pw_nueva_confirm" ,
 				            	"id"			=> "pw_nueva_confirm"  ,
@@ -34,8 +34,6 @@
 				            <?=place('place_pw_3')?>
 				            <?=div("", ["id"=>"reportesession", "class"=>"reportesession"])?>
 				            <?=guardar("Actualizar" , ["id"	=>	"inbutton",  "class"=>"btn btn_save input-sm"])?>
-				        </div>    
-			      	</form>
-		<?=end_row()?>
-		<?=place("msj_password")?>
+				        </div>
+                    <?=form_close(place("msj_password"))?>
 	</div>
