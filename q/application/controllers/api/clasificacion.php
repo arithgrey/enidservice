@@ -151,7 +151,11 @@ class Clasificacion extends REST_Controller{
             if (count($response)>0){
                   $data =  $this->get_data_clasificaciones($response, $data);
             }
+
             return $this->load->view("tallas/principal", $data);
+
+
+
 
         }
         $this->response($response);

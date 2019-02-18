@@ -1,11 +1,8 @@
-<div class="col-lg-12 col-lg-12 col-sm-12  "> 
-
-  <?=anchor_enid(
+<?=anchor_enid(
     icon('fa fa-chevron-circle-left'). "Regresar a mis tickets abiertos" ,
-    ["class"  =>  "regresar_tickets_usuario strong  black"]
-  )?>  
-</div>
-        
+    ["class"  =>  "regresar_tickets_usuario strong  black"],
+    1
+)?>
 <div class='col-lg-8 col-lg-offset-2'>
   <form class='form_ticket'>      
       <div class="col-lg-12">              
@@ -16,8 +13,7 @@
         "cliente" , 
         "nombre" , 
         "id_persona" );?>
-        <?=label("Servicio")?>        
-
+        <?=label("Servicio")?>
         <?=div(create_select(
               $servicios_cliente , 
               "id_proyecto" , 
@@ -29,8 +25,6 @@
         );?>        
         <?=anchor_enid("Siguiente" , ["class"=>"input-sm btn btn_siguiente_ticket"],1)?>
       </div>
-                 
-      
       <div style="display: none;" class="contenedor_formulario_ticket">
         <div class="col-lg-6">
           <?=label("Prioridad" , 
@@ -38,7 +32,6 @@
             "class" =>  "col-lg-3 control-label blue_enid_background white" ,
             "for"   =>  "prioridad"
           ])?>
-          
           <div class="col-lg-9">
             <select id="prioridad" name="prioridad" class="form-control">
               <option value="1">Alta
@@ -50,27 +43,20 @@
             </select>
           </div>
         </div>
-        
         <div class="col-lg-6">
-          <label class="col-lg-4 control-label blue_enid_background white" for="departamento">
-            Departamento
-          </label>
-          <div class="col-lg-8 contenedor_form_depto">
-
-            <?=create_select(
-              $departamentos,
-              "departamento" , 
-              "form-control depto" , 
-              "departamento" , 
-              "nombre" , 
-              "id_departamento" 
-              );?>          
-          </div>
+            <?=div("Departamento" , ["class"=>"col-lg-4 control-label blue_enid_background white",  "for"=>"departamento"])?>
+            <?=div(create_select(
+                $departamentos,
+                "departamento" ,
+                "form-control depto" ,
+                "departamento" ,
+                "nombre" ,
+                "id_departamento"
+            ), ["class"=>"col-lg-8 contenedor_form_depto"]);?>
         </div>
-
         <div class="col-lg-12">            
             <div class="input-group">
-              <?=span("Asunto" , ["class"=>"input-group-addon"])?>
+              <?=div("Asunto" , ["class"=>"input-group-addon"])?>
               <?=input([
                 "id"            =>  "asunto", 
                 "name"          =>  "asunto", 
@@ -80,8 +66,6 @@
               ])?>                            
             </div>                  
         </div>
-        
-        
         <!-- Textarea -->
         <div class="col-lg-12" style="display: none;">
           <?=label("Descripción" , 

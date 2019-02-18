@@ -6,6 +6,7 @@ let get_conceptos = function () {
     request_enid("GET", data_send, url, response_conceptos)
 }
 let response_conceptos = function (data) {
+
     llenaelementoHTML(".contenedor_conceptos_privacidad", data);
     $(".concepto_privacidad").click(update_conceptos_privacidad);
 

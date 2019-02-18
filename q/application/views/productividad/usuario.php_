@@ -44,18 +44,4 @@
 				</tr>
 			</table>
 		</div>
-	
 	<?=end_row()?>
-
-<style type="text/css">
-.table_enid_service{
-	width: 100%;
-}
-.table_enid_service .f-enid{
-	text-align: center;
-	color: white !important;
-}
-table {
-	text-align: center;
-}
-</style>

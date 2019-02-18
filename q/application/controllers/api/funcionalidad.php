@@ -5,6 +5,7 @@ class funcionalidad extends REST_Controller{
     function __construct(){
         parent::__construct();         
         $this->load->model("funcionalidad_model");
+        $this->load->helper("funcionalidad");
         $this->load->library(lib_def());                      
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
@@ -22,8 +23,10 @@ class funcionalidad extends REST_Controller{
         
         $param                =  $this->get();
         $funcionalidad        =  $this->funcionalidad_model->get([], [] , 100);        
-        $data["conceptos"]= $this->add_conceptos($funcionalidad , $this->id_usuario);
-        $this->load->view("privacidad/conceptos" , $data);
+        $conceptos            =  $this->add_conceptos($funcionalidad , $this->id_usuario);
+        //$this->load->view("privacidad/conceptos" , $data);
+        $response =  get_terminos($conceptos);
+        $this->response($response);
     }  
     function add_conceptos($funcionalidades , $id_usuario){
 

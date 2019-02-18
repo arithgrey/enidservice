@@ -43,12 +43,3 @@
 
 
 </div>
-<!--
-<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
-<link href="<?=$url_request?>css_tema/template/bootstrap.min.css?v=<?=$v?>" 
-rel="stylesheet" id="bootstrap-css">
-<link 
-rel="stylesheet" 
-type="text/css"
-href="<?=$url_request?>css_tema/template/notificacion-no-email.css?v=<?=$v?>">
--->

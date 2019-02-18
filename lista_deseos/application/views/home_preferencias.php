@@ -24,16 +24,15 @@
                 <div class="col-lg-4">
                     <?php endif; ?>
                     <?php
-                        $extra = ($row["id_usuario"] != null) ? "selected_clasificacion" : "";
+                        $extra = (array_key_exists("id_usuario" , $row) && !is_null($row["id_usuario"]) ) ? "selected_clasificacion" : "";
                         $preferencia_ = "preferencia_" . $row['id_clasificacion'];
-                        $config
-                            = [
+                        $config = [
                             'class' => 'list-preferencias item_preferencias ' . $preferencia_ . ' ' . $extra . ' ',
                             'id' => $row['id_clasificacion']
                         ];
 
-                        $extraIcon = ($row["id_usuario"] != null) ? icon("fa fa-check-circle-o ") : "";
-                        $clasificacion = div($extraIcon . $row["nombre_clasificacion"], $config);
+                        $extraIcon = (array_key_exists("id_usuario" , $row) && !is_null($row["id_usuario"]) ) ? icon("fa fa-check-circle-o ") : "";
+                        $clasificacion = div(append_data([$extraIcon , $row["nombre_clasificacion"]]) , $config);
                         echo div($clasificacion, 1);
                     ?>
                     <?php $z++;

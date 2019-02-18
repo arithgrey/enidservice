@@ -11,26 +11,24 @@
         $precio             =   $row["precio"];
         $vista              =   $row["vista"];
         $id_error           =   "imagen_".$id_servicio;
-    ?>
+
+
+        $r[] =  img([
+            "src"     =>  $url_imagen ,
+            "style"   =>  'width: 44px!important;height: 44px;',
+            "id"      =>  $id_error,
+            'onerror' =>  "reloload_img('".$id_error."','".$url_imagen."');"
+        ]);
+        $r[] =  div($nombre_servicio . "|".  $precio ."MXN");
+        $r[] =  div($fecha_registro ."|".  "alcance" . $vista);
+
+        ?>
       <a href="../producto/?producto=<?=$id_servicio?>" class='contenedor_resumen_servicio'>
-        <div  
-          class="popup-box chat-popup" id="qnimate" 
-            style="margin-top: 4px;">
-              <div class="popup-head">
-                <div class="popup-head-left pull-left">                  
-                  <?=img([    
-                      "src"     =>  $url_imagen ,
-                      "style"   =>  'width: 44px!important;height: 44px;',
-                      "id"      =>  $id_error,
-                      'onerror' =>  "reloload_img('".$id_error."','".$url_imagen."');"
-                  ])?>
-                  <?=span($nombre_servicio . "|".  $precio ."MXN")?>
-                  <?=div($fecha_registro ."|".  "alcance" . $vista)?>                  
-                </div>                
+        <div class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
+            <div class="popup-head">
+                <?=div(append_data($r) , ["class"=>"popup-head-left pull-left"])?>
             </div>
           </div> 
       </a>
   <?php } ?>
-
 <?=$l;?>
-

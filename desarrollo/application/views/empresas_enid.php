@@ -2,9 +2,7 @@
     <div class="contenedor_principal_enid_service">        
         <div class="col-lg-2">
             <nav class="nav-sidebar">
-                <ul class="nav tabs">
-                    <?=get_menu($activa)?>
-                </ul>
+                <?=ul(get_menu($activa) ,  ["class"=>"nav tabs"])?>
             </nav>
         </div>            
         <div class='col-lg-10'>
@@ -16,14 +14,11 @@
                     <?=end_row()?>
                 </div>
                 <div class="tab-pane <?=valida_seccion_activa(1 , $activa)?>" id='tab_abrir_ticket'>
-                                        
                     <?=n_row_12()?>
                         <?=$this->load->view("../../../view_tema/formularios/busqueda_tickets")?>
                     <?=end_row()?>
                 </div>
-                <div class="tab-pane <?=valida_seccion_activa(3 , $activa)?>" id="tab_nuevo_ticket">
-                    <?=place("place_form_tickets")?>                        
-                </div>                
+                <?=div(place("place_form_tickets") , [ "class"=>"tab-pane ".valida_seccion_activa(3 , $activa) , "id"=>"tab_nuevo_ticket"])?>
             </div>
         </div>    
     </div>    

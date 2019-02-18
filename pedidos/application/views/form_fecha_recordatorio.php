@@ -5,8 +5,7 @@
             ["class" =>"strong titulo_horario_entra"])?>
         <?=br()?>
         <?=label(icon("fa fa-calendar-o") ." FECHA ",["class" =>"col-lg-4 control-label"])?>
-        <div class="col-lg-8">
-            <?=input([
+        <?=div(input([
                 "data-date-format"  =>  "yyyy-mm-dd",
                 "name"              =>  'fecha_cordatorio',
                 "class"             =>  "form-control input-sm " ,
@@ -14,16 +13,13 @@
                 "value"             =>  date("Y-m-d"),
                 "min"				=>  add_date(date("Y-m-d") , -15),
                 "max"				=>  add_date(date("Y-m-d") , 15)
-            ])?>
-        </div>
+            ]),
+            ["class"=>"col-lg-8"])?>
+
         <?=label( icon("fa fa-clock-o") ." HORA",
             ["class" =>	"col-lg-4 control-label"]
         )?>
-
-
-        <div class="col-lg-8">
-            <?=lista_horarios()?>
-        </div>
+        <?=div(lista_horarios() , ["class"=>"col-lg-8"])?>
         <?=input_hidden([
             "class" => "recibo",
             "name"	=> "recibo",
@@ -33,12 +29,9 @@
         <?=label(  " TIPO",
             ["class" =>	"col-lg-4 control-label"]
         )?>
-        <div class="col-lg-8">
-            <?=create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo" , "idtipo_recordatorio")?>
-        </div>
+        <?=div(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo" , "idtipo_recordatorio"), ["class"=>"col-lg-8"])?>
         <?=textarea(["name" => "descripcion" , "class" => "form-control"]);?>
         <?=guardar("CONTINUAR" ,["class" =>"top_20"])?>
-
     </form>
 </div>
 <?=place("place_recordatorio")?>

@@ -81,7 +81,7 @@
                             <?php endif; ?>
                             <?=input_hidden([ "name"=>"tipo", "value"=> $banca])?>
                             <?=br()?>
-                            <?=guardar("ASOCIAR" . icon("fa fa-chevron-right") , [] ,1 ,1 )?>
+                            <?=guardar("ASOCIAR" . icon("fa fa-chevron-right") )?>
 
                             <?=div(p("Al asociar tu cuenta, podrás transferir tu saldo de 
                                     Enid Service a tu cuenta personal" , 
@@ -100,23 +100,27 @@
                     style="background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;">
                     
                     <?=heading("ASOCIAR CUENTA BANCARIA Ó TARJETA DE CRÉDITO O DÉBITO", 3)?>
-                    <a href="?q=transfer&action=1&tarjeta=1" style="color:black;">
-                        <?=div("Asociar  tarjeta de crédito o débito" , 
-                            [
-                                "class"     =>   "asociar_cuenta_bancaria" ,
-                                "style"     =>   
-                                "border-style: solid;border-width: .9px;padding: 10px;margin-top: 50px;"]
-                        )?>
-                    </a>
-                    <a href="?q=transfer&action=1"  class="white" style="color: white!important">
-                        <?=div("Asociar cuenta bancaria" ,
+
+                        <?=anchor_enid(
+                                div("Asociar  tarjeta de crédito o débito" ,
+
+                                    [
+                                        "class"     =>   "asociar_cuenta_bancaria" ,
+                                        "style"     => "border-style: solid;border-width: .9px;padding: 10px;margin-top: 50px;"
+                                    ]
+                                ),
+                                ["href"=>"?q=transfer&action=1&tarjeta=1" ,"class"=>"black"])?>
+
+
+                        <?=anchor_enid(div("Asociar cuenta bancaria" ,
                         [
                             "style" =>  "border-style: solid;border-width: .9px;padding: 10px;
                             margin-top: 10px;color: white!important!important" ,
                             "class" =>  "a_enid_blue asociar_tarjeta"
-                        ] )?>
+                        ] ) ,
+                        ["href"=>"?q=transfer&action=1"  , "class"=>"white" ,  "style"=>"color: white!important"])?>
                         
-                    </a>                    
+
             </div>
         <?php endif; ?>
     </div>

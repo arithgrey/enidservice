@@ -5,6 +5,7 @@
         function __construct()
         {
             parent::__construct();
+            $this->load->helper("saldos");
             $this->load->library(lib_def());
         }
         function index()

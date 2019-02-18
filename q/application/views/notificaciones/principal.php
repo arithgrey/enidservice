@@ -1,6 +1,6 @@
 <?php
 	
-	$pendientes ="";	
+	$pendientes 						= [];
 	/*Metas u objetivos*/	
 	$meta_ventas 						= 	0;
 	$meta_envios_a_validar 				= 	0;
@@ -30,12 +30,8 @@
 
 				if ($meta_ventas > $ventas_enid_service){						
 						
-					$ventas_restantes = ($meta_ventas - $ventas_enid_service);					
-					$pendientes .= "<li> ";
-					$pendientes .= icon('fa fa-credit-card');
-					$pendientes .= "Ventas";							
-					$pendientes .= span($ventas_restantes , $style);							
-					$pendientes .= "</li>";	
+					$ventas_restantes = ($meta_ventas - $ventas_enid_service);
+					$pendientes [] =  li(append_data([icon('fa fa-credit-card')  ,  "Ventas" ,  span($ventas_restantes , $style) ]));
 						
 				}
 
@@ -49,11 +45,14 @@
 				if ($meta_envios_a_validar  > $envios_a_validar){						
 
 					$envios_a_validar_restantes =($meta_envios_a_validar - $envios_a_validar);
-					$pendientes .= "<li class='black'>";
-					$pendientes .= icon('fa fa-paper-plane');
-					$pendientes .= "Envios a validar";
-					$pendientes .= span($envios_a_validar_restantes , $style_pedientes);
-					$pendientes .= "</li>";									         
+
+					$pendientes [] =  li(append_data([
+
+						icon('fa fa-paper-plane') ,
+						"Envios a validar",
+						span($envios_a_validar_restantes , $style_pedientes)
+
+						]));
 				}
 
 				break;
@@ -65,11 +64,14 @@
 				if($meta_llamadas  > $llamadas_enid_service){						
 
 					$llamadas_restantes  = ($meta_llamadas - $llamadas_enid_service);
-					$pendientes 	.= 	"<li> ";
-					$pendientes 	.= 	icon('fa fa-mobile');
-					$pendientes 	.= 	"Llamadas";
-					$pendientes 	.= 	span($llamadas_restantes , $style_pedientes);
-					$pendientes 	.= 	"</li>";									         
+
+					$pendientes [] =  li(append_data([
+						icon('fa fa-mobile'),
+						"Llamadas",
+						span($llamadas_restantes , $style_pedientes)
+					]));
+
+
 				}
 
 
@@ -82,11 +84,13 @@
 				if($meta_contactos  > $contactos_enid_service){						
 						
 					$contactos_restantes  = ($meta_contactos - $contactos_enid_service);
-					$pendientes .= "<li> ";
-					$pendientes .= icon('fa fa-user');
-					$pendientes .= "Contactos";
-					$pendientes .= span($contactos_restantes , $style_pedientes);
-					$pendientes .= "</li>";									         
+					$pendientes [] =  li(append_data([
+						icon('fa fa-user'),
+						"Contactos",
+						span($contactos_restantes , $style_pedientes)
+					]));
+
+
 				}
 				break;		
 
@@ -95,12 +99,14 @@
 
 
 				if ($meta_email  > $email_enviados_enid_service){						
+
 					$email_restantes = ($meta_email -  $email_enviados_enid_service);
-					$pendientes .= "<li> ";
-					$pendientes .= icon('fa fa-envelope-o');
-					$pendientes .= "Email ";
-					$pendientes .= span($email_restantes , $style_pedientes);
-					$pendientes .= "</li>";									         
+					$pendientes [] =  li(append_data([
+						icon('fa fa-envelope-o'),
+						"Email ",
+						span($email_restantes , $style_pedientes)
+					]));
+
 				}
 				break;
 
@@ -108,12 +114,13 @@
 				$meta_accesos = $row["cantidad"];			
 
 				if ($meta_accesos  > $accesos_enid_service){						
+
 					$accesos_restantes  = ($meta_accesos - $accesos_enid_service);
-					$pendientes .= "<li> ";
-					$pendientes .= icon('fa fa-globe');
-					$pendientes .= "Accesos";
-					$pendientes .= span($accesos_restantes , $style_pedientes);
-					$pendientes .= "</li>";									         
+					$pendientes [] =  li(append_data([
+						icon('fa fa-globe'),
+						"Accesos",
+						span($accesos_restantes , $style_pedientes)
+					]));
 				}
 
 				break;
@@ -123,12 +130,13 @@
 
 				if ($meta_tareas  > $tareas_enid_service){						
 
-					$tareas_restantes  = ($meta_tareas - $tareas_enid_service);					
-					$pendientes .= "<li> ";
-					$pendientes .= icon('fa fa-code');
-					$pendientes .= "Desarrollo web";
-					$pendientes .= span($tareas_restantes , $style_pedientes);
-					$pendientes .= "</li>";									         
+					$tareas_restantes  = ($meta_tareas - $tareas_enid_service);
+					$pendientes [] =  li(append_data([
+						icon('fa fa-code'),
+						"Desarrollo web",
+						span($tareas_restantes , $style_pedientes)
+					]));
+
 				}
 
 
@@ -141,13 +149,13 @@
 				if ($meta_email_registrados  > $correos_registrados_enid_service){						
 
 					$correos_pendientes  = ($meta_email_registrados - $correos_registrados_enid_service);
-					$pendientes .= "<li> ";
-					$pendientes .= icon('fa fa-code');
-					$pendientes .= "Correos por cargar al sistema";
-					$pendientes .= span($correos_pendientes , $style_pedientes);
-					$pendientes .= "</li>";									         
-				}
+					$pendientes [] =  li(append_data([
+						icon('fa fa-code'),
+						"Correos por cargar al sistema",
+						span($correos_pendientes , $style_pedientes)
+					]));
 
+				}
 				break;
 
 			default:
@@ -156,4 +164,4 @@
 		}
 	}
 ?>
-<?=$pendientes;?>
+<?=appped_data($pendientes);?>
