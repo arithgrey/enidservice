@@ -26,13 +26,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.0.3
+ * @package    CodeIgniter
+ * @author    EllisLab Dev Team
+ * @copyright    Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright    Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license    http://opensource.org/licenses/MIT	MIT License
+ * @link    https://codeigniter.com
+ * @since    Version 2.0.3
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -42,16 +42,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  * This class extends the parent result class: CI_DB_result
  *
- * @category	Database
- * @author		EllisLab Dev Team
- * @link		https://codeigniter.com/user_guide/database/
+ * @category    Database
+ * @author        EllisLab Dev Team
+ * @link        https://codeigniter.com/user_guide/database/
  */
-class CI_DB_sqlsrv_result extends CI_DB_result {
+class CI_DB_sqlsrv_result extends CI_DB_result
+{
 
 	/**
 	 * Scrollable flag
 	 *
-	 * @var	mixed
+	 * @var    mixed
 	 */
 	public $scrollable;
 
@@ -60,8 +61,8 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	/**
 	 * Constructor
 	 *
-	 * @param	object	$driver_object
-	 * @return	void
+	 * @param    object $driver_object
+	 * @return    void
 	 */
 	public function __construct(&$driver_object)
 	{
@@ -75,13 +76,12 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	/**
 	 * Number of rows in the result set
 	 *
-	 * @return	int
+	 * @return    int
 	 */
 	public function num_rows()
 	{
 		// sqlsrv_num_rows() doesn't work with the FORWARD and DYNAMIC cursors (FALSE is the same as FORWARD)
-		if ( ! in_array($this->scrollable, array(FALSE, SQLSRV_CURSOR_FORWARD, SQLSRV_CURSOR_DYNAMIC), TRUE))
-		{
+		if (!in_array($this->scrollable, array(FALSE, SQLSRV_CURSOR_FORWARD, SQLSRV_CURSOR_DYNAMIC), TRUE)) {
 			return parent::num_rows();
 		}
 
@@ -95,7 +95,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	/**
 	 * Number of fields in the result set
 	 *
-	 * @return	int
+	 * @return    int
 	 */
 	public function num_fields()
 	{
@@ -109,13 +109,12 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	 *
 	 * Generates an array of column names
 	 *
-	 * @return	array
+	 * @return    array
 	 */
 	public function list_fields()
 	{
 		$field_names = array();
-		foreach (sqlsrv_field_metadata($this->result_id) as $offset => $field)
-		{
+		foreach (sqlsrv_field_metadata($this->result_id) as $offset => $field) {
 			$field_names[] = $field['Name'];
 		}
 
@@ -129,17 +128,16 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	 *
 	 * Generates an array of objects containing field meta-data
 	 *
-	 * @return	array
+	 * @return    array
 	 */
 	public function field_data()
 	{
 		$retval = array();
-		foreach (sqlsrv_field_metadata($this->result_id) as $i => $field)
-		{
-			$retval[$i]		= new stdClass();
-			$retval[$i]->name	= $field['Name'];
-			$retval[$i]->type	= $field['Type'];
-			$retval[$i]->max_length	= $field['Size'];
+		foreach (sqlsrv_field_metadata($this->result_id) as $i => $field) {
+			$retval[$i] = new stdClass();
+			$retval[$i]->name = $field['Name'];
+			$retval[$i]->type = $field['Type'];
+			$retval[$i]->max_length = $field['Size'];
 		}
 
 		return $retval;
@@ -150,12 +148,11 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	/**
 	 * Free the result
 	 *
-	 * @return	void
+	 * @return    void
 	 */
 	public function free_result()
 	{
-		if (is_resource($this->result_id))
-		{
+		if (is_resource($this->result_id)) {
 			sqlsrv_free_stmt($this->result_id);
 			$this->result_id = FALSE;
 		}
@@ -168,7 +165,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an array
 	 *
-	 * @return	array
+	 * @return    array
 	 */
 	protected function _fetch_assoc()
 	{
@@ -182,8 +179,8 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	 *
 	 * Returns the result set as an object
 	 *
-	 * @param	string	$class_name
-	 * @return	object
+	 * @param    string $class_name
+	 * @return    object
 	 */
 	protected function _fetch_object($class_name = 'stdClass')
 	{

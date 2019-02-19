@@ -6,26 +6,26 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit1cc3836380ec919f22f754725120e9f5
 {
-    public static $prefixLengthsPsr4 = array (
-        'S' => 
-        array (
-            'Statickidz\\' => 11,
-        ),
-    );
+	public static $prefixLengthsPsr4 = array(
+		'S' =>
+			array(
+				'Statickidz\\' => 11,
+			),
+	);
 
-    public static $prefixDirsPsr4 = array (
-        'Statickidz\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/statickidz/php-google-translate-free/src',
-        ),
-    );
+	public static $prefixDirsPsr4 = array(
+		'Statickidz\\' =>
+			array(
+				0 => __DIR__ . '/..' . '/statickidz/php-google-translate-free/src',
+			),
+	);
 
-    public static function getInitializer(ClassLoader $loader)
-    {
-        return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1cc3836380ec919f22f754725120e9f5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1cc3836380ec919f22f754725120e9f5::$prefixDirsPsr4;
+	public static function getInitializer(ClassLoader $loader)
+	{
+		return \Closure::bind(function () use ($loader) {
+			$loader->prefixLengthsPsr4 = ComposerStaticInit1cc3836380ec919f22f754725120e9f5::$prefixLengthsPsr4;
+			$loader->prefixDirsPsr4 = ComposerStaticInit1cc3836380ec919f22f754725120e9f5::$prefixDirsPsr4;
 
-        }, null, ClassLoader::class);
-    }
+		}, null, ClassLoader::class);
+	}
 }

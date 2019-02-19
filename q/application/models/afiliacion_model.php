@@ -1,39 +1,45 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-  class afiliacion_model extends CI_Model {
-    function __construct(){      
-        parent::__construct();        
-        $this->load->database();
-    }
-    function repo_afiliaciones($param){
 
-      $_num =  get_random();
-      $this->create_tmp_fechas(0 , $_num , $param);      
-        $this->create_tmp_afiliados(0 , $_num , $param);
+class afiliacion_model extends CI_Model
+{
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->database();
+	}
 
-         $query_get ="SELECT * FROM 
+	function repo_afiliaciones($param)
+	{
+
+		$_num = get_random();
+		$this->create_tmp_fechas(0, $_num, $param);
+		$this->create_tmp_afiliados(0, $_num, $param);
+
+		$query_get = "SELECT * FROM 
                       tmp_accesos_fechas_$_num a
                       LEFT OUTER JOIN 
                         tmp_table_afiliados_$_num  af
                       ON 
                       a.fecha =  af.fecha_registro
-                      ORDER BY a.fecha ASC"; 
-                      $result  =  $this->db->query($query_get);
-                      $data_complete = $result->result_array();
-                      
-        $this->create_tmp_afiliados(1 , $_num , $param);      
-      $this->create_tmp_fechas(1 , $_num , $param);
-      return $data_complete;
+                      ORDER BY a.fecha ASC";
+		$result = $this->db->query($query_get);
+		$data_complete = $result->result_array();
 
-    }    
-   
-   function create_tmp_afiliados($flag , $_num , $param){
+		$this->create_tmp_afiliados(1, $_num, $param);
+		$this->create_tmp_fechas(1, $_num, $param);
+		return $data_complete;
 
-      
-      $response = $this->db->query(get_drop("tmp_table_afiliados_$_num"));
-        
-      if($flag == 0 ){
+	}
 
-        $query_create = "CREATE TABLE tmp_table_afiliados_$_num 
+	function create_tmp_afiliados($flag, $_num, $param)
+	{
+
+
+		$response = $this->db->query(get_drop("tmp_table_afiliados_$_num"));
+
+		if ($flag == 0) {
+
+			$query_create = "CREATE TABLE tmp_table_afiliados_$_num 
         AS      
         SELECT 
           DATE(fecha_registro)fecha_registro,
@@ -44,24 +50,25 @@
           idperfil = 19 
         AND
         DATE(fecha_registro)BETWEEN 
-        '".$param["fecha_inicio"]."' 
+        '" . $param["fecha_inicio"] . "' 
         AND 
-        '".$param["fecha_termino"]."' 
+        '" . $param["fecha_termino"] . "' 
         GROUP BY
         DATE(fecha_registro)";
 
-        $this->db->query($query_create);
-      }
-      return $response;
+			$this->db->query($query_create);
+		}
+		return $response;
 
-    }
-    
-    function create_tmp_fechas($flag , $_num , $param){  
-      
-      $this->db->query(get_drop("tmp_accesos_$_num") );
-      if($flag ==  0){
-        $query_create   =  
-        "CREATE TABLE tmp_accesos_$_num AS 
+	}
+
+	function create_tmp_fechas($flag, $_num, $param)
+	{
+
+		$this->db->query(get_drop("tmp_accesos_$_num"));
+		if ($flag == 0) {
+			$query_create =
+				"CREATE TABLE tmp_accesos_$_num AS 
             SELECT 
             DATE(fecha_registro)fecha 
         FROM 
@@ -69,20 +76,20 @@
             WHERE                                    
             DATE(fecha_registro)                             
             BETWEEN    
-            '".$param["fecha_inicio"]."' AND '".$param["fecha_termino"]."'";
-        $this->db->query($query_create);
-        
-        $query_create =  "CREATE TABLE tmp_accesos_fechas_$_num AS 
+            '" . $param["fecha_inicio"] . "' AND '" . $param["fecha_termino"] . "'";
+			$this->db->query($query_create);
+
+			$query_create = "CREATE TABLE tmp_accesos_fechas_$_num AS 
                               SELECT 
                                 fecha 
                               FROM 
                               tmp_accesos_$_num 
                               GROUP BY fecha";
 
-        $this->db->query($query_create);
-            
-      }
-    }
- 
- 
+			$this->db->query($query_create);
+
+		}
+	}
+
+
 }

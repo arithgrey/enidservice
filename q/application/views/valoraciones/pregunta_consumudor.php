@@ -1,10 +1,10 @@
 <?php
 $f = [];
 array_push($f, textarea([
-    "class" => "form-control",
-    "id" => "pregunta",
-    "name" => "pregunta",
-    "placeholder" => "Tu pregunta"
+	"class" => "form-control",
+	"id" => "pregunta",
+	"name" => "pregunta",
+	"placeholder" => "Tu pregunta"
 ]));
 
 array_push($f, input_hidden(["name" => "servicio", "value" => $id_servicio]));
@@ -18,5 +18,5 @@ array_push($f, place(".place_registro_valoracion"));
 <?= div("SOBRE SU" . $servicio[0]["nombre_servicio"]) ?>
 <?= br(2) ?>
 <form class="form_valoracion ">
-    <?= append_data($f) ?>
+	<?= append_data($f) ?>
 </form>

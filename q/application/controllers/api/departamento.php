@@ -1,14 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-require APPPATH.'../../librerias/REST_Controller.php';
-class Departamento extends REST_Controller{
-  function __construct(){
-        parent::__construct();            
-        $this->load->model("departamento_model");                                 
-        $this->load->library(lib_def());    
-  }  
-  function index_GET(){
+require APPPATH . '../../librerias/REST_Controller.php';
 
-      $this->response($this->departamento_model->get([] , [] , 100));
+class Departamento extends REST_Controller
+{
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model("departamento_model");
+		$this->load->library(lib_def());
+	}
 
-  }
+	function index_GET()
+	{
+
+		$this->response($this->departamento_model->get([], [], 100));
+
+	}
 }
