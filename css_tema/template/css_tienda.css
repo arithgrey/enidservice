@@ -1,3 +1,7 @@
+.text_piezas{
+    font-size: 2em;
+    color: #000045;
+}
 .btn-ventas-mayoreo {
     margin-top: 20px;
 }
@@ -75,8 +79,12 @@
 
 }
 .img_sugerencia{
-
-
+    
     width: 250px;
     align-self: flex-end;
+}
+.text_existencia{
+    font-size: 1.3em;
+    color: #000045;
+    font-weight: bold;
 }

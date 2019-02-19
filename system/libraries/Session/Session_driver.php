@@ -26,13 +26,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 3.0.0
+ * @package    CodeIgniter
+ * @author    EllisLab Dev Team
+ * @copyright    Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright    Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license    http://opensource.org/licenses/MIT	MIT License
+ * @link    https://codeigniter.com
+ * @since    Version 3.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -40,27 +40,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter Session Driver Class
  *
- * @package	CodeIgniter
- * @subpackage	Libraries
- * @category	Sessions
- * @author	Andrey Andreev
- * @link	https://codeigniter.com/user_guide/libraries/sessions.html
+ * @package    CodeIgniter
+ * @subpackage    Libraries
+ * @category    Sessions
+ * @author    Andrey Andreev
+ * @link    https://codeigniter.com/user_guide/libraries/sessions.html
  */
-abstract class CI_Session_driver implements SessionHandlerInterface {
+abstract class CI_Session_driver implements SessionHandlerInterface
+{
 
 	protected $_config;
 
 	/**
 	 * Data fingerprint
 	 *
-	 * @var	bool
+	 * @var    bool
 	 */
 	protected $_fingerprint;
 
 	/**
 	 * Lock placeholder
 	 *
-	 * @var	mixed
+	 * @var    mixed
 	 */
 	protected $_lock = FALSE;
 
@@ -70,7 +71,7 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	 * Used to detect session_regenerate_id() calls because PHP only calls
 	 * write() after regenerating the ID.
 	 *
-	 * @var	string
+	 * @var    string
 	 */
 	protected $_session_id;
 
@@ -81,8 +82,8 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	 * from userspace handlers are not handled properly. PHP 7 fixes the
 	 * bug, so we need to return different values depending on the version.
 	 *
-	 * @see	https://wiki.php.net/rfc/session.user.return-value
-	 * @var	mixed
+	 * @see    https://wiki.php.net/rfc/session.user.return-value
+	 * @var    mixed
 	 */
 	protected $_success, $_failure;
 
@@ -91,20 +92,17 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	/**
 	 * Class constructor
 	 *
-	 * @param	array	$params	Configuration parameters
-	 * @return	void
+	 * @param    array $params Configuration parameters
+	 * @return    void
 	 */
 	public function __construct(&$params)
 	{
 		$this->_config =& $params;
 
-		if (is_php('7'))
-		{
+		if (is_php('7')) {
 			$this->_success = TRUE;
 			$this->_failure = FALSE;
-		}
-		else
-		{
+		} else {
 			$this->_success = 0;
 			$this->_failure = -1;
 		}
@@ -118,7 +116,7 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	 * Internal method to force removal of a cookie by the client
 	 * when session_destroy() is called.
 	 *
-	 * @return	bool
+	 * @return    bool
 	 */
 	protected function _cookie_destroy()
 	{
@@ -142,8 +140,8 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	 * (databases other than PostgreSQL and MySQL) to act as if they
 	 * do acquire a lock.
 	 *
-	 * @param	string	$session_id
-	 * @return	bool
+	 * @param    string $session_id
+	 * @return    bool
 	 */
 	protected function _get_lock($session_id)
 	{
@@ -156,12 +154,11 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	/**
 	 * Release lock
 	 *
-	 * @return	bool
+	 * @return    bool
 	 */
 	protected function _release_lock()
 	{
-		if ($this->_lock)
-		{
+		if ($this->_lock) {
 			$this->_lock = FALSE;
 		}
 
@@ -181,7 +178,7 @@ abstract class CI_Session_driver implements SessionHandlerInterface {
 	 * so that the INI is set just in time for the error message to
 	 * be properly generated.
 	 *
-	 * @return	mixed
+	 * @return    mixed
 	 */
 	protected function _fail()
 	{

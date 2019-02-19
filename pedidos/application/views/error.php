@@ -1,1 +1,1 @@
-<?=get_error_message()?>
+<?= get_error_message() ?>

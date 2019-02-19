@@ -26,13 +26,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
- * @package	CodeIgniter
- * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
- * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	https://codeigniter.com
- * @since	Version 2.0.0
+ * @package    CodeIgniter
+ * @author    EllisLab Dev Team
+ * @copyright    Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright    Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
+ * @license    http://opensource.org/licenses/MIT	MIT License
+ * @link    https://codeigniter.com
+ * @since    Version 2.0.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -40,13 +40,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * CodeIgniter APC Caching Class
  *
- * @package		CodeIgniter
- * @subpackage	Libraries
- * @category	Core
- * @author		EllisLab Dev Team
+ * @package        CodeIgniter
+ * @subpackage    Libraries
+ * @category    Core
+ * @author        EllisLab Dev Team
  * @link
  */
-class CI_Cache_apc extends CI_Driver {
+class CI_Cache_apc extends CI_Driver
+{
 
 	/**
 	 * Class constructor
@@ -54,12 +55,11 @@ class CI_Cache_apc extends CI_Driver {
 	 * Only present so that an error message is logged
 	 * if APC is not available.
 	 *
-	 * @return	void
+	 * @return    void
 	 */
 	public function __construct()
 	{
-		if ( ! $this->is_supported())
-		{
+		if (!$this->is_supported()) {
 			log_message('error', 'Cache: Failed to initialize APC; extension not loaded/enabled?');
 		}
 	}
@@ -72,8 +72,8 @@ class CI_Cache_apc extends CI_Driver {
 	 * Look for a value in the cache. If it exists, return the data
 	 * if not, return FALSE
 	 *
-	 * @param	string
-	 * @return	mixed	value that is stored/FALSE on failure
+	 * @param    string
+	 * @return    mixed    value that is stored/FALSE on failure
 	 */
 	public function get($id)
 	{
@@ -88,15 +88,15 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Cache Save
 	 *
-	 * @param	string	$id	Cache ID
-	 * @param	mixed	$data	Data to store
-	 * @param	int	$ttl	Length of time (in seconds) to cache the data
-	 * @param	bool	$raw	Whether to store the raw value (unused)
-	 * @return	bool	TRUE on success, FALSE on failure
+	 * @param    string $id Cache ID
+	 * @param    mixed $data Data to store
+	 * @param    int $ttl Length of time (in seconds) to cache the data
+	 * @param    bool $raw Whether to store the raw value (unused)
+	 * @return    bool    TRUE on success, FALSE on failure
 	 */
 	public function save($id, $data, $ttl = 60, $raw = FALSE)
 	{
-		return apc_store($id, $data, (int) $ttl);
+		return apc_store($id, $data, (int)$ttl);
 	}
 
 	// ------------------------------------------------------------------------
@@ -104,8 +104,8 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Delete from Cache
 	 *
-	 * @param	mixed	unique identifier of the item in the cache
-	 * @return	bool	true on success/false on failure
+	 * @param    mixed    unique identifier of the item in the cache
+	 * @return    bool    true on success/false on failure
 	 */
 	public function delete($id)
 	{
@@ -117,9 +117,9 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Increment a raw value
 	 *
-	 * @param	string	$id	Cache ID
-	 * @param	int	$offset	Step/value to add
-	 * @return	mixed	New value on success or FALSE on failure
+	 * @param    string $id Cache ID
+	 * @param    int $offset Step/value to add
+	 * @return    mixed    New value on success or FALSE on failure
 	 */
 	public function increment($id, $offset = 1)
 	{
@@ -131,9 +131,9 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Decrement a raw value
 	 *
-	 * @param	string	$id	Cache ID
-	 * @param	int	$offset	Step/value to reduce by
-	 * @return	mixed	New value on success or FALSE on failure
+	 * @param    string $id Cache ID
+	 * @param    int $offset Step/value to reduce by
+	 * @return    mixed    New value on success or FALSE on failure
 	 */
 	public function decrement($id, $offset = 1)
 	{
@@ -145,7 +145,7 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Clean the cache
 	 *
-	 * @return	bool	false on failure/true on success
+	 * @return    bool    false on failure/true on success
 	 */
 	public function clean()
 	{
@@ -157,42 +157,39 @@ class CI_Cache_apc extends CI_Driver {
 	/**
 	 * Cache Info
 	 *
-	 * @param	string	user/filehits
-	 * @return	mixed	array on success, false on failure
+	 * @param    string    user/filehits
+	 * @return    mixed    array on success, false on failure
 	 */
-	 public function cache_info($type = NULL)
-	 {
-		 return apc_cache_info($type);
-	 }
+	public function cache_info($type = NULL)
+	{
+		return apc_cache_info($type);
+	}
 
 	// ------------------------------------------------------------------------
 
 	/**
 	 * Get Cache Metadata
 	 *
-	 * @param	mixed	key to get cache metadata on
-	 * @return	mixed	array on success/false on failure
+	 * @param    mixed    key to get cache metadata on
+	 * @return    mixed    array on success/false on failure
 	 */
 	public function get_metadata($id)
 	{
 		$cache_info = apc_cache_info('user', FALSE);
-		if (empty($cache_info) OR empty($cache_info['cache_list']))
-		{
+		if (empty($cache_info) OR empty($cache_info['cache_list'])) {
 			return FALSE;
 		}
 
-		foreach ($cache_info['cache_list'] as &$entry)
-		{
-			if ($entry['info'] !== $id)
-			{
+		foreach ($cache_info['cache_list'] as &$entry) {
+			if ($entry['info'] !== $id) {
 				continue;
 			}
 
-			$success  = FALSE;
+			$success = FALSE;
 			$metadata = array(
 				'expire' => ($entry['ttl'] ? $entry['mtime'] + $entry['ttl'] : 0),
-				'mtime'  => $entry['ttl'],
-				'data'   => apc_fetch($id, $success)
+				'mtime' => $entry['ttl'],
+				'data' => apc_fetch($id, $success)
 			);
 
 			return ($success === TRUE) ? $metadata : FALSE;
@@ -208,7 +205,7 @@ class CI_Cache_apc extends CI_Driver {
 	 *
 	 * Check to see if APC is available on this system, bail if it isn't.
 	 *
-	 * @return	bool
+	 * @return    bool
 	 */
 	public function is_supported()
 	{

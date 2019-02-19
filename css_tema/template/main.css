@@ -3468,7 +3468,7 @@ blockquote:before {
 
 #owl-main .caption h1.tint-bg span, #owl-main .caption p.tint-bg span {
     background: #0656F9 !important;
-    box-shadow: -.500em 0 0 #0656F9 !important, .500 em 0 0 #0656F9 !important;
+    box-shadow: -.500em 0 0 #0656F9, .500 em 0 0 #0656F9 !important;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone
 }
@@ -3650,7 +3650,7 @@ blockquote:before {
 }
 
 .forms ol li {
-    line-height: auto;
+    
     list-style: none
 }
 
@@ -4813,7 +4813,7 @@ input:focus:-ms-input-placeholder {
 
 .btn-modal:hover, .btn-modal:focus, .btn-modal:active, .btn-modal.active {
     background: #edf0f2 !important;
-    color: #0656F9 !important !important
+    color: #0656F9 !important;
 }
 
 @media (min-width: 1200px) {
@@ -7179,6 +7179,10 @@ table {
 .top_20 {
     margin-top: 20px;
 }
+.top_30 {
+    margin-top: 30px;
+}
+
 
 .top_50 {
     margin-top: 50px;

@@ -58,8 +58,8 @@ let show_confirm = function (text, text_complemento, text_continuar = 0, on_next
 };
 let show_load_enid = function (place) {
 
-    let bar = "Cargando ... ";
-    bar += '<div class="progress progress-striped active page-progress-bar">';
+
+    let bar = '<div class="progress progress-striped active page-progress-bar">';
     bar += '<div class="progress-bar" style="width: 100%;"></div> </div>';
     llenaelementoHTML(place, bar);
 }

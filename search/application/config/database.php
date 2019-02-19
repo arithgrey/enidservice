@@ -1,1 +1,1 @@
-<?php   include("../db/database.php");
+<?php include("../db/database.php");
