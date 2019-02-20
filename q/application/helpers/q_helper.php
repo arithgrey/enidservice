@@ -303,23 +303,25 @@ if (!function_exists('invierte_date_time')) {
             return $response;
         }
     }
+    if (!function_exists('add_valoraciones_sin_leer')) {
+        function add_valoraciones_sin_leer($num, $id_usuario)
+        {
+            $lista = "";
+            $f = 0;
+            if ($num > 0) {
 
-    function add_valoraciones_sin_leer($num, $id_usuario)
-    {
-        $lista = "";
-        $f = 0;
-        if ($num > 0) {
-
-            $text_comentario = div("Alguien han agregado sus comentarios sobre uno de tus artículos en venta ", 1) . base_valoracion();
-            $text = div($num . " personas han agregado sus comentarios sobre tus artículos", 1) . base_valoracion();
-            $text = ($num > 1) ? $text : $text_comentario;
-            $lista = base_notificacion("../recomendacion/?q=" . $id_usuario, "fa fa-star", $text);
-            $f++;
+                $text_comentario = div("Alguien han agregado sus comentarios sobre uno de tus artículos en venta ", 1) . base_valoracion();
+                $text = div($num . " personas han agregado sus comentarios sobre tus artículos", 1) . base_valoracion();
+                $text = ($num > 1) ? $text : $text_comentario;
+                $lista = base_notificacion("../recomendacion/?q=" . $id_usuario, "fa fa-star", $text);
+                $f++;
+            }
+            $response["html"] = $lista;
+            $response["flag"] = $f;
+            return $response;
         }
-        $response["html"] = $lista;
-        $response["flag"] = $f;
-        return $response;
     }
+
 
     function add_pedidos_sin_direccion($param)
     {
@@ -642,8 +644,8 @@ if (!function_exists('invierte_date_time')) {
         $t[] = get_td($total_procesar_compra);
         $t[] = "</tr>";
 
-        $table = "<table class='table_enid_service' border=1>" . append_data($t) . "</table>";
-        return $table;
+        $t[] = "<table class='table_enid_service' border=1>" . append_data($t) . "</table>";
+        return append_data($t);
 
     }
 }
