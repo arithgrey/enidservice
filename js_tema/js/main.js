@@ -16,6 +16,8 @@ $("footer").ready(function () {
     set_titulo_web(get_parameter(".titulo_web"));
     $(".telefono_info_contacto").keyup(quita_espacios_input);
     $(".precio").keyup(quita_espacios_input_precio);
+
+
     $(".email").keyup(function(){
         sin_espacios(".email");
     });
@@ -580,8 +582,11 @@ let evita_basura = function () {
 let reload_imgs = function (id, url) {
 
     if(document.location.hostname !=  "localhost"){
-        document.getElementById(id).src = url;
-        console.log(url);
+
+        if(document.getElementById(id).src != null  || document.getElementById(id).src  !=  undefined){
+            document.getElementById(id).src = url;
+            console.log(url);
+        }
     }
 };
 /*Regresa el valor que esta en el nodo html*/

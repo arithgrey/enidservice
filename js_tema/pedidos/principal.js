@@ -1,5 +1,6 @@
 "use strict";
 $(document).ready(function(){
+
 	display_elements([".selector_estados_ventas" , ".form_cantidad", ".form_cantidad_post_venta"] , 0);
 	$('.datetimepicker4').datepicker();
 	$('.datetimepicker5').datepicker();						
@@ -13,6 +14,7 @@ $(document).ready(function(){
 	$(".configurara_informacion_cliente").click(muestra_form_usuario);
 	$(".form_set_usuario").submit(registro_usuario);
 
+	$(".form_costos").submit(registro_costo_operativo);
 	$(".saldo_cubierto_pos_venta").keyup(function(e) {
     	let code = (e.keyCode ? e.keyCode : e.which);
 	    if (code==13) {	    	

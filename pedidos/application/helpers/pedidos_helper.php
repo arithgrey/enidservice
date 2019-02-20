@@ -1,6 +1,46 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+	if (!function_exists('get_form_costos')) {
+
+
+		function get_form_costos($tipo_costos , $id_recibo)
+		{
+
+
+			$r[] = form_open("", ["class" => "form_costos"], ["recibo" => $id_recibo] );
+
+			$a = div("MONTO GASTADO" , ["class" => "text_gasto strong"]);
+			$b = input([
+				"type" => "number",
+				"required" => true,
+				"class" =>  "form-control input precio",
+				"name" => "costo"
+			]);
+
+			$r[] = get_btw($a , $b , "display_flex_enid top_30");
+
+			$r[] = create_select(
+				$tipo_costos,
+				"tipo",
+				"id_tipo_costo form-control",
+				"tipo",
+				"tipo",
+				"id_tipo_costo")
+			;
+
+
+			$r[] = guardar("AGREGAR" , ["class" => "top_20"]);
+
+
+			$r[] = form_close(place("notificacion_registro_costo"));
+			return append_data($r);
+
+		}
+
+
+	}
 	if (!function_exists('get_error_message')) {
 		function get_error_message()
 		{
@@ -197,7 +237,7 @@ if (!function_exists('invierte_date_time')) {
 				$text
 					=
 					$calle . " " . " NÚMERO " . $numero_exterior . " NÚMERO INTERIOR " . $numero_interior . " COLONIA " . $asentamiento . " DELEGACIÓN/MUNICIPIO " . $municipio . " ESTADO " . $estado . " CÓDIGO POSTAL " . $cp;
-				$text =   p(strtoupper($text), ["class" => "card-text"]);
+				$text = p(strtoupper($text), ["class" => "card-text"]);
 
 			} else {
 
@@ -217,9 +257,9 @@ if (!function_exists('invierte_date_time')) {
 				}
 
 			}
-
+			return $text;
 		}
-		return $text;
+
 	}
 	if (!function_exists('valida_accion_pago')) {
 		function valida_accion_pago($recibo)
@@ -501,14 +541,14 @@ if (!function_exists('invierte_date_time')) {
 
 			if (get_param_def($domicilio, "domicilio") > 0 && count($recibo) > 0) {
 				$recibo = $recibo[0];
-                /*
+				/*
 				$id_recibo = $recibo["id_proyecto_persona_forma_pago"];
 				$status = $recibo["status"];
 				$saldo_cubierto_envio = $recibo["saldo_cubierto_envio"];
 				$monto_a_pagar = $recibo["monto_a_pagar"];
 				$se_cancela = $recibo["se_cancela"];
 				$fecha_entrega = $recibo["fecha_entrega"];
-                */
+				*/
 				$text = div(div("HORARIO DE ENTREGA", 1) . div($recibo["fecha_contra_entrega"], 1), ["class" => "contenedor_entrega"]);
 
 
@@ -710,17 +750,17 @@ if (!function_exists('invierte_date_time')) {
 	if (!function_exists('create_seccion_domicilio')) {
 		function create_seccion_domicilio($domicilio)
 		{
-		    $response =  "";
+			$response = "";
 
 			if (array_key_exists("domicilio", $domicilio) && is_array($domicilio["domicilio"]) && count($domicilio["domicilio"]) > 0) {
 
 				$data_domicilio = $domicilio["domicilio"];
 				if ($domicilio["tipo_entrega"] != 1) {
 
-					 $response = create_domicilio_entrega($data_domicilio);
+					$response = create_domicilio_entrega($data_domicilio);
 				} else {
 
-                    $response = create_punto_entrega($data_domicilio);
+					$response = create_punto_entrega($data_domicilio);
 				}
 
 			} else {
@@ -734,9 +774,9 @@ if (!function_exists('invierte_date_time')) {
 		function create_seccion_recordatorios($recibo)
 		{
 
-		    $response = "";
+			$response = "";
 			if (count($recibo) > 0) {
-				$response  = ($recibo[0]["status"] == 6) ? "EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"] : "";
+				$response = ($recibo[0]["status"] == 6) ? "EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"] : "";
 			}
 			return $response;
 		}
@@ -748,6 +788,21 @@ if (!function_exists('invierte_date_time')) {
 			return div(anchor_enid("NOTA", ["class" => "agregar_comentario", "onClick" => "agregar_nota();"]), 1);
 		}
 	}
+	if (!function_exists('get_link_costo')) {
+		function get_link_costo($id_recibo , $recibo)
+		{
+
+
+
+			$recibo = $recibo[0];
+			$saldo_cubierto = $recibo["saldo_cubierto"];
+
+			$url = "../pedidos/?costos_operacion=" . $id_recibo."&saldado=".$saldo_cubierto;
+			return div(anchor_enid("COSTO DE OPERACIÓN", ["href" => $url]), 1);
+
+		}
+	}
+
 
 	if (!function_exists('get_link_cambio_fecha')) {
 		function get_link_cambio_fecha($domicilio, $recibo)

@@ -126,6 +126,7 @@
 					<?= get_link_cambio_fecha($domicilio, $recibo) ?>
 					<?= get_link_recordatorio($id_recibo) ?>
 					<?= get_link_nota() ?>
+					<?=get_link_costo($id_recibo , $recibo)?>
 				</div>
 			</div>
 			<?= br() ?>

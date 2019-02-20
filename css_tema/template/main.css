@@ -6311,7 +6311,7 @@ th:hover {
 }
 
 .red_enid {
-    color: #F94206 !important;
+    color: #C8180B !important;
 }
 
 .blue_enid {
@@ -7283,4 +7283,7 @@ h2 {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+.font_m{
+    font-size: 1.5em;
 }

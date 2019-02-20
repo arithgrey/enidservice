@@ -5,10 +5,11 @@ class Home extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+
 		$this->load->helper("pedidos");
+		$this->load->library("table");
 		$this->load->library(lib_def());
 	}
-
 	function index()
 	{
 
@@ -27,7 +28,16 @@ class Home extends CI_Controller
 
 		} else {
 
-			$this->seguimiento_pedido($param, $data);
+			if (get_param_def($param, "costos_operacion") > 0 && ctype_digit($param["costos_operacion"])){
+
+				$this->carga_vista_costos_operacion($param, $data);
+
+			}else{
+
+				$this->seguimiento_pedido($param, $data);
+			}
+
+
 
 		}
 	}
@@ -49,7 +59,8 @@ class Home extends CI_Controller
 			"js/bootstrap-timepicker/js/bootstrap-timepicker.js",
 			"js/pickers-init.js",
 			"alerts/jquery-confirm.js",
-			"pedidos/principal.js"
+			"pedidos/principal.js",
+			"pedidos/costos_operacion.js"
 
 
 		];
@@ -78,6 +89,43 @@ class Home extends CI_Controller
 			$this->load_detalle_pedido($param, $data);
 
 		}
+	}
+
+	function carga_vista_costos_operacion($param, $data)
+	{
+
+		$data = $this->getCssJs($data);
+
+		$costos_operacion =  $this->get_costo_operacion($param["costos_operacion"]);
+
+
+
+		$this->table->set_heading(array('MONTO', 'CONCEPTO', 'REGISTO'));
+		$total  = 0 ;
+		foreach ($costos_operacion  as $row){
+
+			$total = $total + $row["monto"];
+
+			$this->table->add_row(array($row["monto"], $row["tipo"], $row["fecha_registro"]));
+		}
+
+
+
+
+
+		$c = ($total < $param["saldado"]) ? "blue_enid" :  "red_enid";
+		$total =  div("TOTAL EN GASTOS " .$total . "MXN" , ["class" => "strong font_m " .$c] );
+		$this->table->add_row(array(div($total), "", ""));
+		$total =  div("SALDADO " .$param["saldado"] . "MXN" , ["class" => "strong  font_m"] );
+		$this->table->add_row(array(div($total), "", ""));
+
+
+		$data["table_costos"]= $this->table->generate();
+		$data["tipo_costos"]    =  $this->get_tipo_costo_operacion();
+		$data["id_recibo"]      =  $param["costos_operacion"];
+
+		$this->principal->show_data_page($data, 'costos_operativos');
+
 	}
 
 	private function load_detalle_pedido($param, $data)
@@ -328,5 +376,26 @@ class Home extends CI_Controller
 		$api = "tipo_recordatorio/index/format/json/";
 		return $this->principal->api($api, $q);
 	}
+
+	private function get_costo_operacion($id_recibo)
+	{
+
+		$q["recibo"] = $id_recibo;
+		$api = "costo_operacion/recibo/format/json/";
+		return $this->principal->api($api, $q);
+
+	}
+
+	private function get_tipo_costo_operacion()
+	{
+
+		$q["x"] = 1;
+		$api = "tipo_costo/index/format/json/";
+		return $this->principal->api($api, $q);
+
+	}
+
+
+
 
 }
