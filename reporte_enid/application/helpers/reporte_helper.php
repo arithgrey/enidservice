@@ -4,10 +4,10 @@ if (!function_exists('invierte_date_time')) {
 		function crea_repo_categorias_destacadas($param)
 		{
 			$z = 0;
-			$data_complete = [];
+			//$data_complete = [];
 			foreach ($param as $row) {
 
-				$primer_nivel = $row["primer_nivel"];
+				//$primer_nivel = $row["primer_nivel"];
 				$total = $row["total"];
 				$nombre_clasificacion = $row["nombre_clasificacion"];
 

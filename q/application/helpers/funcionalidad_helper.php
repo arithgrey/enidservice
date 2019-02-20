@@ -3,14 +3,12 @@ if (!function_exists('invierte_date_time')) {
 
 	function get_terminos($conceptos)
 	{
-		$tb = "";
+
+	    $tb = [];
 		foreach ($conceptos as $row) {
 
-			$funcionalidad = $row["funcionalidad"];
 			$conceptos = $row["conceptos"];
-			//$tb .= get_td($funcionalidad);
-			$tb .= "<table style='width:100%;margin-top:30px;' >";
-
+            $tb[] =  "<table style='width:100%;margin-top:30px;' >";
 			foreach ($conceptos as $row2) {
 
 				$privacidad = $row2["privacidad"];
@@ -24,7 +22,7 @@ if (!function_exists('invierte_date_time')) {
 					$termino_asociado = 1;
 				}
 
-				$tb .= "<tr>";
+                $tb[] =  "<tr>";
 
 				$attr = add_attributes([
 					"id" => $id_privacidad,
@@ -32,16 +30,16 @@ if (!function_exists('invierte_date_time')) {
 					"termino_asociado" => $termino_asociado,
 					"type" => 'checkbox'
 				]);
-				$tb .= get_td("<input " . $attr . " " . $extra_seleccion . ">");
-				$tb .= get_td(strtoupper($privacidad));
-
-				$tb .= "</tr>";
+                $tb[] =  get_td("<input " . $attr . " " . $extra_seleccion . ">");
+                $tb[] =  get_td(strtoupper($privacidad));
+                $tb[] =  "</tr>";
 
 			}
-			$tb .= "</table>";
+            $tb[] =  "</table>";
 		}
 
-		return $tb;
+		return append_data($tb);
+
 	}
 
 }

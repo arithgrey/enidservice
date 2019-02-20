@@ -197,7 +197,7 @@ if (!function_exists('invierte_date_time')) {
 				$text
 					=
 					$calle . " " . " NÚMERO " . $numero_exterior . " NÚMERO INTERIOR " . $numero_interior . " COLONIA " . $asentamiento . " DELEGACIÓN/MUNICIPIO " . $municipio . " ESTADO " . $estado . " CÓDIGO POSTAL " . $cp;
-				return p(strtoupper($text), ["class" => "card-text"]);
+				$text =   p(strtoupper($text), ["class" => "card-text"]);
 
 			} else {
 
@@ -212,13 +212,14 @@ if (!function_exists('invierte_date_time')) {
 					$text = heading_enid("LUGAR DE ENCUENTRO", 3, ["class" => "top_20"]);
 					$text .= div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, 1);
 					$text .= div("ESTACIÓN " . $lugar_entrega, ["class" => "strong"], 1);
-					return $text;
+
 
 				}
 
 			}
 
 		}
+		return $text;
 	}
 	if (!function_exists('valida_accion_pago')) {
 		function valida_accion_pago($recibo)
@@ -341,7 +342,6 @@ if (!function_exists('invierte_date_time')) {
 		function get_texto_status($status, $recibo)
 		{
 
-			//$status_recibo 	= $recibo["status"];
 			$text = "";
 			$response = [];
 			$estado = 6;
@@ -397,8 +397,6 @@ if (!function_exists('invierte_date_time')) {
 
 			}
 
-			//$button       =   guardar("+ Agregar" , ["class" => "agregar_comentario" , "onClick" => "agregar_nota();"]);
-			//$button     =   heading_enid("COMENTARIOS" , 4);
 			$title = heading_enid("NOTAS", 4, ["class" => "white"]);
 			return br() . div($title . $notas, ["class" => "global_tipificaciones"]);
 
@@ -503,13 +501,14 @@ if (!function_exists('invierte_date_time')) {
 
 			if (get_param_def($domicilio, "domicilio") > 0 && count($recibo) > 0) {
 				$recibo = $recibo[0];
+                /*
 				$id_recibo = $recibo["id_proyecto_persona_forma_pago"];
 				$status = $recibo["status"];
 				$saldo_cubierto_envio = $recibo["saldo_cubierto_envio"];
 				$monto_a_pagar = $recibo["monto_a_pagar"];
 				$se_cancela = $recibo["se_cancela"];
 				$fecha_entrega = $recibo["fecha_entrega"];
-
+                */
 				$text = div(div("HORARIO DE ENTREGA", 1) . div($recibo["fecha_contra_entrega"], 1), ["class" => "contenedor_entrega"]);
 
 
@@ -570,7 +569,6 @@ if (!function_exists('invierte_date_time')) {
 		{
 
 			$recibo = $recibo[0];
-			//$saldo_cubierto 		=  $recibo["saldo_cubierto"];
 			$saldo_cubierto = $recibo["saldo_cubierto"];
 			$precio = $recibo["precio"];
 			$num_ciclos_contratados = $recibo["num_ciclos_contratados"];
@@ -712,35 +710,37 @@ if (!function_exists('invierte_date_time')) {
 	if (!function_exists('create_seccion_domicilio')) {
 		function create_seccion_domicilio($domicilio)
 		{
+		    $response =  "";
 
 			if (array_key_exists("domicilio", $domicilio) && is_array($domicilio["domicilio"]) && count($domicilio["domicilio"]) > 0) {
-
 
 				$data_domicilio = $domicilio["domicilio"];
 				if ($domicilio["tipo_entrega"] != 1) {
 
-					return create_domicilio_entrega($data_domicilio);
+					 $response = create_domicilio_entrega($data_domicilio);
 				} else {
 
-					return create_punto_entrega($data_domicilio);
+                    $response = create_punto_entrega($data_domicilio);
 				}
+
 			} else {
 				/*solicita dirección de envio*/
 			}
+
+			return $response;
 		}
 	}
 	if (!function_exists('create_seccion_recordatorios')) {
 		function create_seccion_recordatorios($recibo)
 		{
 
+		    $response = "";
 			if (count($recibo) > 0) {
-				$text = ($recibo[0]["status"] == 6) ? "EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"] : "";
-				return $text;
+				$response  = ($recibo[0]["status"] == 6) ? "EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"] : "";
 			}
-
+			return $response;
 		}
 	}
-
 
 	if (!function_exists('get_link_nota')) {
 		function get_link_nota()
@@ -764,7 +764,7 @@ if (!function_exists('invierte_date_time')) {
 
 				$text = div(div("HORARIO DE ENTREGA", 1) . div($recibo["fecha_contra_entrega"], 1), ["class" => "contenedor_entrega"]);
 
-				$fecha_contra_entrega = ($recibo["tipo_entrega"] == 1) ? $text : "";
+				//$fecha_contra_entrega = ($recibo["tipo_entrega"] == 1) ? $text : "";
 				return div(anchor_enid("FECHA DE ENTREGA",
 					[
 						"class" => "editar_horario_entrega  text-right ",
@@ -920,51 +920,3 @@ if (!function_exists('invierte_date_time')) {
 		}
 	}
 }
-/*function create_seccion_linea_tiempo($recibo , $status , $activo=0 , $direccion_activa = 0 ){
-
-
-        $status_recibo  = $recibo[0]["status"];
-        $text           = "";
-        switch ($status) {
-            case 1:
-                $text = "PAGO VERIFICADO";
-                break;
-
-            case 6:
-                $text = "ORDEN REALIZADA";
-                break;
-
-
-            case 7:
-                $text = "PEDIDO EN CAMINO";
-                break;
-
-            case 9:
-                $text = "ENTREGADO";
-                break;
-
-            case 12:
-                $text = "EMPACADO";
-                break;
-
-            default:
-
-                break;
-        }
-
-
-        $class 		=  ($activo ==  1) ? "timeline__item__date_active": "timeline__item__date";
-
-        $seccion 	= div(icon("fa fa-check-circle-o") , ["class"=>$class]);
-
-        $seccion_2 	= div(p($text ,
-                    [
-                        "class"	=>	"timeline__item__content__description"
-                    ]),
-                ["class"	=>"timeline__item__content"]);
-
-        return  div($seccion.$seccion_2 , ["class"=>"timeline__item"]);
-
-
-    }
-    */

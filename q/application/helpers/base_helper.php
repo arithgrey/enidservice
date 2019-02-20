@@ -6,7 +6,6 @@ if (!function_exists('invierte_date_time')) {
 			return ' class="active" ';
 		}
 	}
-
 	function lista_categorias($categorias)
 	{
 
@@ -28,7 +27,6 @@ if (!function_exists('invierte_date_time')) {
 	{
 
 		$tags = explode(",", $string);
-		$listado_tag = "";
 		$lista_tags = "";
 		foreach ($tags as $row) {
 

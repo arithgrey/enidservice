@@ -138,15 +138,7 @@ if (!function_exists('invierte_date_time')) {
 			}
 		}
 	}
-	/*
-	if (!function_exists('get_text_periodo_compra')) {
-		function get_text_periodo_compra($flag_servicio, $existencia)
-		{
-			$response = ($flag_servicio == 1) ? 100 : $existencia;
-			return $response;
-		}
-	}
-	*/
+
 	if (!function_exists('get_text_costo_envio')) {
 		function get_text_costo_envio($flag_servicio, $param)
 		{
@@ -442,13 +434,13 @@ if (!function_exists('invierte_date_time')) {
 		function get_solicitud_informacion($proceso_compra, $id_servicio)
 		{
 
-			//if ($proceso_compra == 0) {
+
 			return anchor_enid(
 					div("SOLICITAR INFORMACIÓN", ['class' => 'black_enid_background white padding_1'], 1),
 					[
 						"href" => "../pregunta?tag=" . $id_servicio
 					]) . br();
-			//}
+
 		}
 	}
 	if (!function_exists('agregar_lista_deseos')) {
