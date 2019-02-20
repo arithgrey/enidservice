@@ -131,37 +131,37 @@ if (!function_exists('invierte_date_time')) {
 
 		<?= n_row_12() ?>
 		<?php echo "<table class='table_resumen_ticket'>"; ?>
-		<?php echo "<tr>"; ?>
-		<?= get_td(heading_enid($asunto, 3, ["class" => "white"])); ?>
-		<?= get_td("#TAREAS " . $tareas); ?>
-		<?= get_td("#PENDIENTES " . $pendientes) ?>
-		<?php echo "</tr>"; ?>
+			<?php echo "<tr>"; ?>
+			<?= get_td(heading_enid($asunto, 3, ["class" => "white"])); ?>
+			<?= get_td("#TAREAS " . $tareas); ?>
+			<?= get_td("#PENDIENTES " . $pendientes) ?>
+			<?php echo "</tr>"; ?>
 
-		<?php echo "<tr>"; ?>
-		<?= get_td($info_ticket[0]["asunto"], ["colspan" => 3]); ?>
-		<?php echo "</tr>"; ?>
+			<?php echo "<tr>"; ?>
+			<?= get_td($info_ticket[0]["asunto"], ["colspan" => 3]); ?>
+			<?php echo "</tr>"; ?>
 
-		<?php echo "<tr>"; ?>
-		<?= get_td(div($info_ticket[0]["mensaje"])); ?>
-		<?php echo "</tr>"; ?>
+			<?php echo "<tr>"; ?>
+			<?= get_td(div($info_ticket[0]["mensaje"])); ?>
+			<?php echo "</tr>"; ?>
 
-		<?php echo "</tr>"; ?>
+			<?php echo "</tr>"; ?>
 		<?php echo "</table>"; ?>
 		<?= end_row() ?>
 
 		<?= n_row_12() ?>
 		<?php echo "<table>"; ?>
-		<?php echo "<tr>"; ?>
-		<?php get_td("TICKET # " . $id_ticket) ?>
+			<?php echo "<tr>"; ?>
+			<?php get_td("TICKET # " . $id_ticket) ?>
 
-		<?php get_td("DEPARTAMENTO " . strtoupper($nombre_departamento)) ?>
+			<?php get_td("DEPARTAMENTO " . strtoupper($nombre_departamento)) ?>
 
-		<?php get_td("ESTADO " . strtoupper($lista_status[$status])) ?>
+			<?php get_td("ESTADO " . strtoupper($lista_status[$status])) ?>
 
-		<?php get_td("PRIORIDAD " . strtoupper($lista_prioridad[$prioridad])) ?>
+			<?php get_td("PRIORIDAD " . strtoupper($lista_prioridad[$prioridad])) ?>
 
-		<?php get_td("ALTA " . strtoupper($fecha_registro)) ?>
-		<?php echo "</tr>"; ?>
+			<?php get_td("ALTA " . strtoupper($fecha_registro)) ?>
+			<?php echo "</tr>"; ?>
 		<?php echo "</table>"; ?>
 		<?= end_row() ?>
 

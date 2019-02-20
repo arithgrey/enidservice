@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
 		if (get_info_usuario_valor_variable($param, "externo") == 1) {
 
 			$url = "../forma_pago/?recibo=" . $id_proyecto_persona_forma_pago;
-			$extra = "";
+			//$extra = "";
 			$f_btn = anchor_enid("LIQUIDAR AHORA!",
 				[
 					'class' => 'resumen_pagos_pendientes top_20',

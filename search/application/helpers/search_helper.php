@@ -4,31 +4,32 @@ if (!function_exists('invierte_date_time')) {
 	{
 
 		$z = 0;
-		$data_complete = [];
+
+        $response =  [];
 		foreach ($param as $row) {
 
-			$primer_nivel = $row["primer_nivel"];
-			$total = $row["total"];
+			//$primer_nivel = $row["primer_nivel"];
+			//$total = $row["total"];
 			$nombre_clasificacion = $row["nombre_clasificacion"];
 
 			if ($z == 0) {
-				echo "<ul class='clasificaciones_sub_menu_ul'>";
+                $response [] =  "<ul class='clasificaciones_sub_menu_ul'>";
 			}
 			$href = "?q=&q2=" . $row["primer_nivel"];
-			echo li(anchor_enid($nombre_clasificacion, ["href" => $href, "class" => 'text_categoria_sub_menu']));
+            $response [] =   li(anchor_enid($nombre_clasificacion, ["href" => $href, "class" => 'text_categoria_sub_menu']));
 			$z++;
 			if ($z == 5) {
 				$z = 0;
-				echo "</ul>";
+                $response [] =  "</ul>";
 			}
-
 		}
+		return append_data($response);
 	}
 
 	function crea_menu_principal_web($param)
 	{
 
-		$nombres_primer_nivel = $param["nombres_primer_nivel"];
+		//$nombres_primer_nivel = $param["nombres_primer_nivel"];
 		$z = 0;
 		$data_complete = [];
 

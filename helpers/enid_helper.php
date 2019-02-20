@@ -219,19 +219,7 @@ if (!function_exists('anchor_enid')) {
 	function anchor_enid($title = '', $attributes = '', $row_12 = 0, $type_button = 0)
 	{
 
-		/*
-	  if($type_button == 1) {
-		$existe =  array_key_exists("class", $attributes)?1:0;
-		if ($existe ==  1) {
-		  $attributes["class"] = $attributes["class"]." " ." a_enid_blue white completo ";
-		}else{
-		  $attributes["class"] =  "a_enid_blue white completo ";
-		}
-	  }*/
-
 		$attributes = _parse_attributes($attributes);
-
-
 		$base = "<a" . $attributes . ">" . $title . "</a>";
 		$e = ($row_12 == 0) ? $base : addNRow($base);
 		return $e;

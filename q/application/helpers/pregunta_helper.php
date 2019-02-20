@@ -40,12 +40,7 @@ if (!function_exists('invierte_date_time')) {
 	function valida_respuestas_nuevas($modalidad, $param)
 	{
 
-		$text = "";
-		if ($modalidad == 0) {
-			$text = carga_iconos_buzon_compras($param);
-		} else {
-			$text = carga_iconos_buzon_ventas($param);
-		}
+		$text = ($modalidad == 0) ?   carga_iconos_buzon_compras($param)  : carga_iconos_buzon_ventas($param);
 		return $text;
 	}
 

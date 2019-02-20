@@ -45,12 +45,6 @@ if (!function_exists('invierte_date_time')) {
 	{
 		return $saldo_pendiente;
 	}
-
-	/**
-	 * @param $calificacion
-	 * @param int $sm
-	 * @return string
-	 */
 	function crea_estrellas($calificacion, $sm = 0)
 	{
 
@@ -162,8 +156,8 @@ if (!function_exists('invierte_date_time')) {
 					["class" => 'recomendaria_valoracion']);
 			}
 			$lista_comentario .= div($nombre . "- " . $fecha_registro, ["class" => 'nombre_comentario_valoracion']);
-			$function_valoracion_funciona = 'onclick="agrega_valoracion_respuesta(' . $id_valoracion . ' , 1)"';
-			$function_valoracion_NO_funciona = 'onclick="agrega_valoracion_respuesta(' . $id_valoracion . ' , 0)"';
+			//$function_valoracion_funciona = 'onclick="agrega_valoracion_respuesta(' . $id_valoracion . ' , 1)"';
+			//$function_valoracion_NO_funciona = 'onclick="agrega_valoracion_respuesta(' . $id_valoracion . ' , 0)"';
 			$texto_valoracion = "";
 			if ($respuesta_valorada == $id_valoracion) {
 				$texto_valoracion = div("Recibimos tu valoracion! ", ["class" => 'text_recibimos_valoracion']);

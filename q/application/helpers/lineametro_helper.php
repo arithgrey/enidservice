@@ -1,49 +1,46 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-	function create_listado_linea_metro($array)
-	{
-		$l = "";
-		foreach ($array as $row) {
+    function create_listado_linea_metro($array)
+    {
+        $r = [];
+        foreach ($array as $row) {
 
-			$nombre = $row["nombre"];
-			$id = $row["id"];
-			//$numero = $row["numero"];
-			$icon = $row["icon"];
+            $nombre = $row["nombre"];
+            $id = $row["id"];
+            $icon = $row["icon"];
 
+            $img = img([
+                "src" => $icon,
+                "id" => $id,
+                "class" => "cursor_pointer linea_metro",
+                "nombre_linea" => $nombre
+            ]);
+            $r[] = div($img, ["class" => "col-lg-4"]);
+        }
+        return append_data($r);
+    }
 
-			$img = img([
-				"src" => $icon,
-				"id" => $id,
-				"class" => "cursor_pointer linea_metro",
-				"nombre_linea" => $nombre
-			]);
-			$l .= div($img, ["class" => "col-lg-4"]);
-		}
-		return br() . $l;
-	}
+    function create_listado_metrobus($array)
+    {
+        $r = [];
+        foreach ($array as $row) {
 
-	function create_listado_metrobus($array)
-	{
-		$l = "";
-		foreach ($array as $row) {
-
-			$nombre = $row["nombre"];
-			$id = $row["id"];
-			$numero = $row["numero"];
-			//$icon = $row["icon"];
+            $nombre = $row["nombre"];
+            $id = $row["id"];
+            $numero = $row["numero"];
 
 
-			$linea = div("LINEA " . $numero, [
-				"id" => $id,
-				"class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
-				"nombre_linea" => $nombre
-			]);
+            $linea = div("LINEA " . $numero, [
+                "id" => $id,
+                "class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
+                "nombre_linea" => $nombre
+            ]);
 
-			$l .= div($linea, ["class" => "col-lg-3"]);
-		}
-		return $l;
-	}
+             $r[] = div($linea, ["class" => "col-lg-3"]);
+        }
+        return append_data($r);
+    }
 
 
 }
