@@ -32,27 +32,20 @@ $llamadas_recibidas = anchor_enid(
 			</div>
 			<?= div(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']) ?>
 			<div class="tab-pane <?= valida_active_tab('ventas', $action) ?>" id='tab_mis_ventas'>
-
 				<?= div(place("place_ventas_usuario"), ["class" => "col-lg-9"]) ?>
 				<div class="col-lg-3">
 					<?= heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3) ?>
 					<?= $valoraciones; ?>
-					a bue
 					<?= br() ?>
 					<?= anchor_enid("VER COMENTARIOS",
 						[
 							"href" => "../recomendacion/?q=" . $id_usuario,
 							"class" => "a_enid_blue text-center top_10"
-						],
-						1,
-						1
+						]
 					) ?>
-
 					<?= div($alcance, 1) ?>
 				</div>
-			
 			</div>
-
 			<?= div(place("place_pagar_ahora"), ["class" => "tab-pane", "id" => "tab_pagos"]) ?>
 			<?= div(place("place_resumen_servicio"), ["class" => "tab-pane", "id" => "tab_renovar_servicio"]) ?>
 		</div>

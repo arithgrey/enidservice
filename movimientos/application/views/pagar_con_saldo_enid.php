@@ -37,7 +37,7 @@
 
 					<?= div(anchor_enid("Agregar saldo a tu cuenta",
 						["href" => "?q=transfer&action=6"], 1, 1),
-						["style" => "width: 80%;margin: 0 auto;margin-top: 20px;" "class"=>"text-right"])?>
+						["style" => "width: 80%;margin: 0 auto;margin-top: 20px;", "class"=>"text-right"])?>
 
             <?php endif; ?>
 			</div>

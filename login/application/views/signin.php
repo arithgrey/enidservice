@@ -8,16 +8,14 @@
             'style' => "color:white!important"
 
         ]) ?>
+
     <?= addNRow(div(div(anchor_enid(img(["src" => "../img_tema/enid_service_logo.jpg"])), ["class" => "col-lg-6 col-lg-offset-3"]), ["class" => "col-lg-4 col-lg-offset-4"])) ?>
     <?= addNRow(div(heading('ÚNETE A ENID SERVICE', 3), ["class" => "col-lg-4 col-lg-offset-4"])) ?>
-    <div class="col-lg-4 col-lg-offset-4">
-        <?= get_form_registro() ?>
-    </div>
+    <?= div(get_form_registro() , ["class"=>"col-lg-4 col-lg-offset-4"] ) ?>
 
 </div>
-
 <!--RECUPERAR CONTRASEÑA-->
-<div class="contenedor_recuperacion_password" style="display: none;">
+<div class="contenedor_recuperacion_password display_none" >
 
     <?= anchor_enid("ACCEDER AHORA!",
         [
@@ -29,7 +27,6 @@
     ); ?>
     <?= anchor_enid(div(div(img(["src" => "../img_tema/enid_service_logo.jpg"]), ["class" => "col-lg-6 col-lg-offset-3"]), ["class" => "col-lg-4 col-lg-offset-4"]), ["href" => "../"], 1) ?>
 
-
     <div class="col-lg-4 col-lg-offset-4">
         <?= heading('RECUPERA TUS DATOS DE ACCESO', '3') ?>
         <?= get_form_recuperacion() ?>
@@ -37,8 +34,6 @@
 
 
 </div>
-
-<!--ACCEDER-->
 <div class="wrapper_login">
 
     <?= anchor_enid(
@@ -59,9 +54,8 @@
 
     </div>
 
-    <div class="col-lg-4 col-lg-offset-4">
-        <?= get_form_login() ?>
-    </div>
+    <?=div(get_form_login() ,  ["class"=>"col-lg-4 col-lg-offset-4"])  ?>
+
 
     <div class="col-lg-4 col-lg-offset-4">
         <?= place("place_acceso_sistema top_20 bottom_20") ?>

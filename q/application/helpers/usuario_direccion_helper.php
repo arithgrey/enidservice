@@ -1,6 +1,24 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+
+    function get_format_domicilio($info_envio_direccion){
+
+        $r[] =  get_campo($info_envio_direccion, "direccion", "Dirección", 1) ;
+        $r[] =  get_campo($info_envio_direccion, "calle", "Calle", 1) ;
+        $r[] =  get_campo($info_envio_direccion, "numero_exterior", " Número exterior ", 1) ;
+        $r[] =  get_campo($info_envio_direccion, "numero_interior", " Número interior ", 1) ;
+        $r[] =  get_campo($info_envio_direccion, "entre_calles", "Entre ", 1) ;
+        $r[] =  get_campo($info_envio_direccion, "cp", " C.P. ", 1) ;
+        $r[] =  get_campo($info_envio_direccion, "asentamiento", " Colonia ", 1) ;
+        $r[] =  get_campo($info_envio_direccion, "municipio", " Delegación/Municipio ", 1) ;
+        $r[] =  get_campo($info_envio_direccion, "ciudad", " Ciudad ", 1) ;
+        $r[] =  get_campo($info_envio_direccion, "estado", " Estado ", 1) ;
+
+
+    }
+    /**/
 	function val_btn_pago($param, $id_proyecto_persona_forma_pago)
 	{
 

@@ -53,7 +53,6 @@ if ($registro_direccion == 0) {
 		<hr>
 		<form class="form-horizontal form_direccion_envio">
 			<?= n_row_12() ?>
-			<div class="row">
 				<div class="col-lg-6">
 					<?= div("Persona que recibe", ["class" => "titulo_enid_sm_sm"]) ?>
 					<?= input([
@@ -68,6 +67,7 @@ if ($registro_direccion == 0) {
 					]) ?>
 				
 				</div>
+
 				<div class="col-lg-6">
 					<?= div("Teléfono", ["class" => "titulo_enid_sm_sm"]) ?>
 					<?= input([
@@ -81,7 +81,6 @@ if ($registro_direccion == 0) {
 						"type" => "text"
 					]) ?>
 				</div>
-			</div>
 			<?= end_row() ?>
 			<?= n_row_12() ?>
 			<?= div("Código postal", ["class" => "titulo_enid_sm_sm"]) ?>
@@ -124,7 +123,7 @@ if ($registro_direccion == 0) {
 			]) ?>
 			<?= end_row() ?>
 			<?= n_row_12() ?>
-			<div class="row">
+
 				<div class="col-lg-6">
 					<?= div("Número Exterior", ["class" => "titulo_enid_sm_sm"]) ?>
 					<?= input([
@@ -150,7 +149,7 @@ if ($registro_direccion == 0) {
 						"required " => "true"
 					]) ?>
 				</div>
-			</div>
+
 			<?= end_row() ?>
 			<div <?= $direccion_visible ?> class="parte_colonia_delegacion">
 				<?= n_row_12() ?>
@@ -181,14 +180,14 @@ if ($registro_direccion == 0) {
 				<?= n_row_12() ?>
 				<div class=" district  estado_c">
 					<?= div("Estado", ["class" => "titulo_enid_sm_sm"]) ?>
-					<div class="place_estado_info">
-						<?= input([
+
+						<?= div(input([
 							"type" => "text",
 							"name" => "estado",
 							"value" => $estado,
 							"readonly" => "true"
-						]) ?>
-					</div>
+						]) , ["class" => "place_estado_info"])?>
+
 				</div>
 				<?= end_row() ?>
 				<?= n_row_12() ?>
@@ -219,8 +218,6 @@ if ($registro_direccion == 0) {
 					["class" => "button_c"]
 				) ?>
 				<?= place("notificacion_direccion") ?>
-			
-			
 			</div>
 		</form>
 	</div>

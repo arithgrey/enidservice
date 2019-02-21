@@ -26,6 +26,6 @@
 		<?= br() ?>
 		<?= guardar("CONTINUAR", ["class" => "top_20"]) ?>
 		<?= place("place_notificacion_punto_encuentro") ?>
-	</form>
+        <?=form_close()?>
 </div>
 <?= place("place_fecha_entrega") ?>

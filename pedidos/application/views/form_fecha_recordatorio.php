@@ -32,6 +32,6 @@
 		<?= div(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo", "idtipo_recordatorio"), ["class" => "col-lg-8"]) ?>
 		<?= textarea(["name" => "descripcion", "class" => "form-control"]); ?>
 		<?= guardar("CONTINUAR", ["class" => "top_20"]) ?>
-	</form>
+	    <?=form_close()?>
 </div>
 <?= place("place_recordatorio") ?>

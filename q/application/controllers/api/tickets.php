@@ -103,6 +103,8 @@ class Tickets extends REST_Controller
 		$param = $this->get();
 		$data["departamentos"] = $this->get_departamentos($param);
 		$this->load->view("secciones/form_tickets", $data);
+
+		//
 	}
 
 	function cancelar_form_GET()

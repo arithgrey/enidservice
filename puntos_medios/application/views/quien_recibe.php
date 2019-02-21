@@ -99,51 +99,54 @@
 <?php else: ?>
 	<div>
 		<div class="col-lg-6 col-lg-offset-3">
-			
-			<form class="form_punto_encuentro_horario">
-				<?= heading_enid("¿En qué horario te gustaría recibir tu pedido?",
-					4,
-					["class" => "strong titulo_horario_entra"]) ?>
-				<?= br() ?>
-				<?= label(icon("fa fa-calendar-o") . " FECHA ", ["class" => "col-lg-4 control-label"]) ?>
-				<div class="col-lg-8">
-					<?= input([
-						"data-date-format" => "yyyy-mm-dd",
-						"name" => 'fecha_entrega',
-						"class" => "form-control input-sm ",
-						"type" => 'date',
-						"value" => date("Y-m-d"),
-						"min" => date("Y-m-d"),
-						"max" => add_date(date("Y-m-d"), 4)
-					]) ?>
-				</div>
-				<?= label(icon("fa fa-clock-o") . " HORA DE ENCUENTRO",
-					["class" => "col-lg-4 control-label"]
-				) ?>
-				<?= div(lista_horarios(), ["class" => "col-lg-8"]) ?>
-				<?= div("+ agregar nota", ["class" => "col-lg-12 cursor_pointer text_agregar_nota", "onclick" => "agregar_nota();"]) ?>
-				
-				<div class="input_notas">
-					<?= div("NOTAS", ["class" => "strong col-lg-12"]) ?>
-					<?= textarea(["name" => "comentarios"], 1) ?>
-				</div>
-				<?= input_hidden([
-					"name" => "punto_encuentro",
-					"class" => "punto_encuentro_form"]) ?>
-				<?= input_hidden([
-					"name" => "servicio",
-					"class" => "servicio",
-					"value" => $servicio]) ?>
 
-				<?= input_hidden([
-						"name" => "num_ciclos",
-						"class" => "num_ciclos",
-						"value" => $num_ciclos]
-				) ?>
-				<?= br() ?>
-				<?= guardar("CONTINUAR", ["class" => "top_20"]) ?>
-				<?= place("place_notificacion_punto_encuentro") ?>
-			</form>
+<!--			<form class="form_punto_encuentro_horario">-->
+<!--				--><?//= heading_enid("¿En qué horario te gustaría recibir tu pedido?",
+//					4,
+//					["class" => "strong titulo_horario_entra"]) ?>
+<!--				--><?//= br() ?>
+<!--				--><?//= label(icon("fa fa-calendar-o") . " FECHA ", ["class" => "col-lg-4 control-label"]) ?>
+<!--				<div class="col-lg-8">-->
+<!--					--><?//= input([
+//						"data-date-format" => "yyyy-mm-dd",
+//						"name" => 'fecha_entrega',
+//						"class" => "form-control input-sm ",
+//						"type" => 'date',
+//						"value" => date("Y-m-d"),
+//						"min" => date("Y-m-d"),
+//						"max" => add_date(date("Y-m-d"), 4)
+//					]) ?>
+<!--				</div>-->
+<!--				--><?//= label(icon("fa fa-clock-o") . " HORA DE ENCUENTRO",
+//					["class" => "col-lg-4 control-label"]
+//				) ?>
+<!--				--><?//= div(lista_horarios(), ["class" => "col-lg-8"]) ?>
+<!--				--><?//= div("+ agregar nota", ["class" => "col-lg-12 cursor_pointer text_agregar_nota", "onclick" => "agregar_nota();"]) ?>
+<!--				-->
+<!--				<div class="input_notas">-->
+<!--					--><?//= div("NOTAS", ["class" => "strong col-lg-12"]) ?>
+<!--					--><?//= textarea(["name" => "comentarios"], 1) ?>
+<!--				</div>-->
+<!--				--><?//= input_hidden([
+//					"name" => "punto_encuentro",
+//					"class" => "punto_encuentro_form"]) ?>
+<!--				--><?//= input_hidden([
+//					"name" => "servicio",
+//					"class" => "servicio",
+//					"value" => $servicio]) ?>
+<!---->
+<!--				--><?//= input_hidden([
+//						"name" => "num_ciclos",
+//						"class" => "num_ciclos",
+//						"value" => $num_ciclos]
+//				) ?>
+<!--				--><?//= br() ?>
+<!--				--><?//= guardar("CONTINUAR", ["class" => "top_20"]) ?>
+<!--				--><?//= place("place_notificacion_punto_encuentro") ?>
+<!--			</form>-->
+            <?=get_form_punto_encuentro_horario($recibo, $punto_encuentro)?>
+
+
 		</div>
 	</div>
 <?php endif; ?>

@@ -10,7 +10,7 @@ $monto_a_pagar = get_campo($recibo, "monto_a_pagar");
 
 
 ?>
-<?php if ($modalidad == 1 && $total_cubierto < 1): ?>
+<?php if ( $total_cubierto < 1): ?>
 	<?= anchor_enid("CANCELAR VENTA",
 		[
 			"class" => "cancelar_compra padding_10",

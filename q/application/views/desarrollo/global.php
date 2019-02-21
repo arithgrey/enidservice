@@ -1,4 +1,4 @@
-<?php
+jaja<?php
 
 $franja_horaria = get_franja_horaria();
 $lista_fechas = get_arreglo_valor($info_global, "fecha");

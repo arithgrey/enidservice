@@ -154,7 +154,6 @@ $monto_total_con_envio = $monto_total + $costo_envio_cliente;
 							]) ?>
 							<?= place("place_telefono") ?>
 							<?= guardar("CREA UNA CUENTA") ?>
-
 							<?= div(anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
 								[
 									'class' => "white",

@@ -1,6 +1,27 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    if (!function_exists('get_format_clasificaciones')) {
+
+        function get_format_clasificaciones($row){
+
+            $extra = (array_key_exists("id_usuario", $row) && !is_null($row["id_usuario"])) ? "selected_clasificacion" : "";
+            $preferencia_ = "preferencia_" . $row['id_clasificacion'];
+
+            $config = [
+                'class' => 'list-preferencias item_preferencias ' . $preferencia_ . ' ' . $extra . ' ',
+                'id' => $row['id_clasificacion']
+            ];
+
+            $extraIcon = (array_key_exists("id_usuario", $row) && !is_null($row["id_usuario"])) ? icon("fa fa-check-circle-o ") : "";
+            $clasificacion = div(append_data([$extraIcon, $row["nombre_clasificacion"]]), $config);
+            return  div($clasificacion, 1);
+
+
+        }
+    }
+
 	if (!function_exists('get_menu')) {
 
 		function get_menu()

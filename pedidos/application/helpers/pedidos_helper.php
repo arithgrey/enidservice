@@ -2,6 +2,43 @@
 if (!function_exists('invierte_date_time')) {
 
 
+
+    if (!function_exists('get_form_cantidad')) {
+        function get_form_cantidad($recibo, $orden){
+
+
+            $r[] =  '<form class="form_cantidad top_20">';
+            $r[] =  div(strong("SALDO CUBIERTO"), 1) ;
+
+            $r[] =  div(input(
+                [
+                    "class" => "form-control saldo_cubierto",
+                    "id" => "saldo_cubierto",
+                    "type" => "number",
+                    "step" => "any",
+                    "required" => "true",
+                    "name" => "saldo_cubierto",
+                    "value" => $recibo[0]["saldo_cubierto"]
+
+                ]),
+                ["class" => "col-lg-10"]) ;
+            $r[] =  input_hidden(
+                [
+                    "name" => "recibo",
+                    "class" => "recibo",
+                    "value" => $orden
+                ]) ;
+            $r[] =  div("MXN", ["class" => "mxn col-lg-2"]) ;
+
+            $r[] =  place("mensaje_saldo_cubierto") ;
+            $r[] =  form_close();
+
+            return append_data($r);
+
+        }
+
+    }
+
 	if (!function_exists('get_form_costos')) {
 
 
