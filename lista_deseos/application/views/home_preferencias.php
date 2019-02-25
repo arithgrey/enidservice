@@ -1,12 +1,8 @@
 <?php
-
-$heading_1 = heading_enid("TUS PREFERENCIAS E INTERESES");
 $p1 = p("CUÉNTANOS TUS INTERESES PARA  MEJORAR TU EXPERIENCIA");
-$tmp = div($heading_1 . $p1, ['class' => "col-lg-4"]);
+$tmp = div(heading_enid("TUS PREFERENCIAS E INTERESES") . $p1, ['class' => "col-lg-4"]);
 ?>
 <div class="contenedor_principal_enid">
-    <?= n_row_12() ?>
-
     <?= div(get_menu(), ["class" => "col-lg-2"]) ?>
     <div class="col-lg-10">
         <?php if ($is_mobile == 1): ?>
@@ -39,8 +35,4 @@ $tmp = div($heading_1 . $p1, ['class' => "col-lg-4"]);
         <?= $tmp ?>
     <?php endif; ?>
 </div>
-<?= n_row_12() ?>
 <?= $this->load->view("secciones/slider"); ?>
-<?= end_row() ?>
-<?= end_row() ?>
-</div>

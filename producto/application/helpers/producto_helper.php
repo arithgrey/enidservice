@@ -2,17 +2,73 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    function form_pre_pedido_contact($plan , $num_ciclos){
+    function get_contenedor_central($proceso_compra, $id_servicio,$tiempo_entrega, $color, $flag_servicio,$flag_nuevo,$usuario, $id_publicador, $url_actual, $desc_web)
+    {
 
 
-        $r[] ='<form class="form_pre_pedido_contact" action="../contact/?w=1" method="POST">';
+        $url_facebook = get_url_facebook($url_actual);
+        $url_twitter = get_url_twitter($url_actual, $desc_web);
+        $url_pinterest = get_url_pinterest($url_actual, $desc_web);
+        $url_tumblr = get_url_tumblr($url_actual, $desc_web);
+
+
+        $r[] = get_solicitud_informacion($proceso_compra, $id_servicio);
+
+        if ($proceso_compra == 1){
+            $r[] = get_tiempo_entrega(0, $tiempo_entrega);
+        }
+
+        $r[] = creta_tabla_colores($color, $flag_servicio);
+        $r[] = place("separador");
+        $r[] = div(get_tipo_articulo($flag_nuevo, $flag_servicio), 1);
+        $r[] = place("separador");
+        $r[] = get_nombre_vendedor($proceso_compra, $usuario, $id_publicador);
+        $r[] = place("separador");
+        $r[] = get_tiempo_entrega($proceso_compra, $tiempo_entrega);
+        $r[] = br();
+        $r[] = get_social($url_actual, $url_facebook, $url_twitter, $url_pinterest, $url_tumblr, $proceso_compra);
+        $r[] = br();
+        $r[] = get_tienda_vendedor($proceso_compra, $id_publicador);
+        $r[] = place("", ["style" => "border: solid 1px"]);
+
+        return append_data($r);
+
+    }
+
+    function get_seccion_pre_pedido($orden_pedido, $plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $id_servicio)
+    {
+
+        $r = [];
+
+        if ($orden_pedido > 0) {
+
+            $url = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
+            $r[] = get_form_pre_pedido();
+            $r[] = get_form_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos);
+            $r[] = form_pre_pedido_contact($plan, $num_ciclos);
+            $r[] = form_pre_puntos_medios($plan, $num_ciclos);
+            $r[] = addNRow(div(img(["src" => $url]), ["class" => "col-lg-4 col-lg-offset-4"]));
+
+        }
+        return append_data($r);
+
+
+    }
+
+    function form_pre_pedido_contact($plan, $num_ciclos)
+    {
+
+
+        $r[] = '<form class="form_pre_pedido_contact" action="../contact/?w=1" method="POST">';
         $r[] = input_hidden(["class" => "servicio", "name" => "servicio", "value" => $plan]);
-        $r[] = input_hidden(["class" => "num_ciclos", "name" => "num_ciclos", "value" => $num_ciclos]) ;
+        $r[] = input_hidden(["class" => "num_ciclos", "name" => "num_ciclos", "value" => $num_ciclos]);
         $r[] = form_close();
         return append_data($r);
 
     }
-    function form_pre_puntos_medios($plan ,$num_ciclos ){
+
+    function form_pre_puntos_medios($plan, $num_ciclos)
+    {
 
         $r[] = '<form class="form_pre_puntos_medios" action="../puntos_medios/?producto=<?= $plan ?>" method="POST">';
         $r[] = input_hidden([
@@ -31,6 +87,7 @@ if (!function_exists('invierte_date_time')) {
         return append_data($r);
 
     }
+
     function get_form_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos)
     {
 

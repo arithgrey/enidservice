@@ -1,4 +1,3 @@
-<?= n_row_12() ?>
 <div class="contenedor_principal_enid">
 	<div class="col-lg-2">
 		<nav class="nav-sidebar">
@@ -22,5 +21,5 @@
 		</div>
 	</div>
 </div>
-<?= end_row() ?>
+
 	

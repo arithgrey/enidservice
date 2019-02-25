@@ -1,5 +1,4 @@
 <div class="seccion_registro_nuevo_usuario_enid_service">
-
     <?= anchor_enid(
         "ACCEDER AHORA",
         [
@@ -11,11 +10,11 @@
 
     <?= addNRow(div(div(anchor_enid(img(["src" => "../img_tema/enid_service_logo.jpg"])), ["class" => "col-lg-6 col-lg-offset-3"]), ["class" => "col-lg-4 col-lg-offset-4"])) ?>
     <?= addNRow(div(heading('ÚNETE A ENID SERVICE', 3), ["class" => "col-lg-4 col-lg-offset-4"])) ?>
-    <?= div(get_form_registro() , ["class"=>"col-lg-4 col-lg-offset-4"] ) ?>
+    <?= div(get_form_registro(), ["class" => "col-lg-4 col-lg-offset-4"]) ?>
 
 </div>
-<!--RECUPERAR CONTRASEÑA-->
-<div class="contenedor_recuperacion_password display_none" >
+
+<div class="contenedor_recuperacion_password display_none">
 
     <?= anchor_enid("ACCEDER AHORA!",
         [
@@ -43,7 +42,6 @@
 
 
     <div class="col-lg-4 col-lg-offset-4">
-
         <?= div(anchor_enid(
             img(
                 ["src" => "../img_tema/enid_service_logo.jpg"]),
@@ -53,9 +51,7 @@
         ) ?>
 
     </div>
-
-    <?=div(get_form_login() ,  ["class"=>"col-lg-4 col-lg-offset-4"])  ?>
-
+    <?= div(get_form_login(), ["class" => "col-lg-4 col-lg-offset-4"]) ?>
 
     <div class="col-lg-4 col-lg-offset-4">
         <?= place("place_acceso_sistema top_20 bottom_20") ?>
@@ -72,10 +68,7 @@
             ,
             ['class' => 'registrar-cuenta registrar_cuenta']
         ) ?>
-
-        <?php if ($action === "registro") { ?>
-            <?= div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", ["class" => "mensaje_bienvenida"]) ?>
-        <?php } ?>
+        <?= get_mensaje_cuenta($action) ?>
     </div>
 </div>
 <?= input_hidden(

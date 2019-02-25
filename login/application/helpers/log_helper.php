@@ -1,6 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_mensaje_cuenta($action){
+
+        $text =  ($action === "registro") ? div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", ["class" => "mensaje_bienvenida"]) : "";
+        return $text;
+    }
     function get_form_recuperacion()
     {
 

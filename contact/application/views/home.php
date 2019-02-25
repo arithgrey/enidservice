@@ -45,59 +45,7 @@
         </div>
         <?php if ($ubicacion == 0): ?>
             <div class="col-lg-6">
-                <form id="form_contacto" action="../q/index.php/api/contacto/format/json/" method="post">
-                    <?= div(p("Departamento ", ['class' => 'white']), ["class" => "col-sm-3"]) ?>
-                    <?= div(create_select(
-                        $departamentos,
-                        "departamento",
-                        "departamento form-control input_enid",
-                        "departamento",
-                        "nombre",
-                        "id_departamento"), ["class" => "col-sm-9"]) ?>
-                    <?= div(p("Nombre", ['class' => 'white']), ["class" => "col-sm-2"]) ?>
-                    <?= div(input([
-                        "type" => "text"
-                        , "id" => "nombre"
-                        , "name" => "nombre"
-                        , "class" => "input-sm input input_enid"
-                        , "placeholder" => "Nombre"
-                        , "value" => $nombre
-                    ]), ["class" => "col-sm-10"]) ?>
-
-                    <?= div(p("Correo", ['class' => 'white']), ["class" => "col-sm-2"]) ?>
-                    <?= div(input([
-                        "onkeypress" => "minusculas(this);",
-                        "type" => "email",
-                        "id" => "emp_email",
-                        "name" => "email",
-                        "value" => $email,
-                        "class" => "input-sm input_enid",
-                        "placeholder" => "Email"
-                    ]), ["class" => "col-sm-10"]) ?>
-                    <?= place('place_mail_contacto', ["id" => 'place_mail_contacto']) ?>
-                    <?= div(p("Teléfono", ['class' => 'white']), ["class" => "col-sm-2"]) ?>
-                    <?= div(input([
-                        "id" => "tel",
-                        "name" => "tel",
-                        "type" => "tel",
-                        "class" => "input-sm telefono_info_contacto input_enid",
-                        "placeholder" => "Teléfono  de contacto",
-                        "value" => $telefono
-                    ]), ["class" => "col-sm-10"]) ?>
-                    <?= place('place_tel_contacto', ["id" => 'place_tel_contacto']) ?>
-
-
-                    <?= p("Mensaje", ['class' => 'white']) ?>
-
-                    <?= textarea([
-                        "id" => "message",
-                        "name" => "mensaje",
-                        "placeholder" => "Mensaje"
-                    ]) ?>
-
-                    <?= place("place_registro_contacto") ?>
-                    <?= addNRow(guardar("Enviar mensaje", ["id" => 'btn_envio_mensaje'], 1)) ?>
-                    <?= form_close() ?>
+                <?=get_form_contactar($departamentos, $nombre, $email, $telefono)?>
             </div>
         <?php endif; ?>
 </section>

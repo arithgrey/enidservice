@@ -1,9 +1,5 @@
 <?php
 
-$url_facebook = get_url_facebook($url_actual);
-$url_twitter = get_url_twitter($url_actual, $desc_web);
-$url_pinterest = get_url_pinterest($url_actual, $desc_web);
-$url_tumblr = get_url_tumblr($url_actual, $desc_web);
 
 $url_vide_youtube = "";
 $id_servicio = "";
@@ -82,47 +78,25 @@ $estrellas = anchor_enid(div("", $config), ['class' => 'lee_valoraciones', 'href
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="row">
-                    <div class="contenedor_central_info">
-                        <?= get_solicitud_informacion($proceso_compra, $id_servicio) ?>
-                        <?php if ($proceso_compra == 1): ?>
-                            <?= get_tiempo_entrega(0, $tiempo_entrega) ?>
-                        <?php endif; ?>
-                        <?= creta_tabla_colores($color, $flag_servicio) ?>
-                        <?= place("separador") ?>
-                        <?= div(get_tipo_articulo($flag_nuevo, $flag_servicio), 1) ?>
-                        <?= place("separador") ?>
-                        <?= get_nombre_vendedor($proceso_compra, $usuario, $id_publicador) ?>
-
-                        <?= place("separador") ?>
-                        <?= get_tiempo_entrega($proceso_compra, $tiempo_entrega) ?>
-                        <?= br() ?>
-                        <?= get_social($url_actual, $url_facebook, $url_twitter, $url_pinterest, $url_tumblr, $proceso_compra) ?>
-                        <?= br() ?>
-                        <?= get_tienda_vendedor($proceso_compra, $id_publicador) ?>
-                        <?= place("", ["style" => "border: solid 1px"]) ?>
-                    </div>
+                <div class="contenedor_central_info">
+                    <?=get_contenedor_central($proceso_compra, $id_servicio,$tiempo_entrega, $color, $flag_servicio,$flag_nuevo,$usuario, $id_publicador, $url_actual, $desc_web)?>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <?php if ($flag_servicio == 0): ?>
                 <?php if ($existencia > 0): ?>
-                    <?= n_row_12() ?>
                     <div class="info-venta">
                         <?= $boton_editar ?>
                         <?= $estrellas ?>
                         <?= $nombre_producto ?>
                         <?= heading_enid($nuevo_nombre_servicio, 3) ?>
-
                         <?= $this->load->view("form_compra", $info_compra) ?>
                         <?= $tallas ?>
                         <?= $texto_en_existencia ?>
                         <?= get_info_vendedor($entregas_en_casa, $flag_servicio, $proceso_compra, $telefono_visible, $in_session, $usuario) ?>
                         <?= div(valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo), 1) ?>
                     </div>
-                    <?= end_row() ?>
-
                 <?php else: ?>
                     <div class="card box-shadow">
                         <?= div($nombre_producto, ["class" => "card-header"]) ?>

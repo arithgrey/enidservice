@@ -9,9 +9,8 @@
         </div>
         <?= place("place_form_img") ?>
     </div>
-    <div class="page-header menu_info_usuario">
-        <?= get_format_user($usuario) ?>
-    </div>
+    <?= div(get_format_user($usuario), ["class" => "page-header menu_info_usuario"]) ?>
+
     <?= div("Mantén la calma esta información será solo será visible si tú lo permites ",
         ['class' => 'registro_telefono_usuario_lada_negocio blue_enid_background2 white padding_1'], 1) ?>
 </div>

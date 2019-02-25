@@ -1,5 +1,4 @@
 <?php
-
 $id_recibo = $recibo[0]["id_proyecto_persona_forma_pago"];
 $id_servicio = $recibo[0]["id_servicio"];
 $num_ciclos = $recibo[0]["num_ciclos_contratados"];
@@ -22,7 +21,6 @@ $id_error = "imagen_" . $id_servicio;
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex justify-content-between align-items-center">
-
                             <?= div(img(
                                 [
                                     "src" => link_imagen_servicio($id_servicio),

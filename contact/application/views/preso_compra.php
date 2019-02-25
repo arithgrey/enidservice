@@ -4,7 +4,6 @@
         <?= heading_enid("Recibe nuestra ubicación", 2, ["class" => "strong"]) ?>
         <?= div("¿A través de qué medio?", ["class" => "text_selector"]) ?>
     </center>
-
 </div>
 <div class="col-lg-10 col-lg-offset-1">
     <div class="contenedor_eleccion">
@@ -18,67 +17,14 @@
 <div class="contenedor_eleccion_correo_electronico">
     <div class="col-lg-6 col-lg-offset-3">
         <div class="contendor_in_correo top_20">
-            <form class="form-horizontal form_correo">
-                <div class="form-group">
-                    <?= label(" NOMBRE ", ["class" => "col-lg-4 control-label"]) ?>
-                    <div class="col-lg-8">
-                        <?= input([
-                            "id" => "nombre",
-                            "name" => "nombre",
-                            "type" => "text",
-                            "placeholder" => "Tu nombre ",
-                            "class" => "form-control input-md nombre"
-                        ]) ?>
-                    </div>
-                    <?= label(icon("fa fa-envelope-o") . " CORREO ", ["class" => "col-lg-4 control-label"]) ?>
-                    <div class="col-lg-8">
-                        <?= input([
-                            "id" => "correo",
-                            "name" => "email",
-                            "type" => "email",
-                            "placeholder" => "@",
-                            "class" => "form-control input-md correo_electronico"
-                        ]) ?>
-
-                        <?= input_hidden(["class" => "servicio", "value" => $servicio, "name" => "servicio"]) ?>
-                        <?= div("INGRESA TU EMAIL  PARA RECIBIR NUESTRA UBICACIÓN") ?>
-                    </div>
-                    <?= br() ?>
-                    <?= guardar("RECIBIR  UBICACIÓN", ["class" => "top_20"]) ?>
-                </div>
-
-            </form>
+            <?= get_form_ubicacion($servicio) ?>
         </div>
     </div>
 </div>
 <div class="contenedor_eleccion_whatsapp">
     <div class="col-lg-6 col-lg-offset-3">
         <div class="contendor_in_correo top_20">
-            <form class="form-horizontal form_whatsapp">
-                <div class="form-group">
-                    <?= label(" NOMBRE ", ["class" => "col-lg-4 control-label"]) ?>
-                    <?= div(input([
-                        "id" => "nombre",
-                        "name" => "nombre",
-                        "type" => "text",
-                        "placeholder" => "Tu nombre ",
-                        "class" => "form-control input-md nombre_whatsapp"
-                    ]), ["class" => "col-lg-8"]) ?>
-
-                    <?= label(icon(".fa fa-whatsapp") . " WHATSAPP", ["class" => "col-lg-4 control-label"]) ?>
-
-                    <?= div(input([
-                        "id" => "whatsapp",
-                        "name" => "whatsapp",
-                        "type" => "tel",
-                        "class" => "form-control input-md tel telefono_info_contacto",
-                        "required" => true
-                    ]), ["class" => "col-lg-8"]) ?>
-                    <?= div("INGRESA TU WHATSAPP PARA RECIBIR NUESTRA UBICACIÓN") ?>
-                    <?= input_hidden(["class" => "servicio", "value" => $servicio, "name" => "servicio"]) ?>
-                    <?= guardar("RECIBIR  UBICACIÓN", ["class" => "top_20"]) ?>
-                </div>
-            </form>
+            <?= get_form_whatsapp($servicio) ?>
         </div>
     </div>
 </div>
