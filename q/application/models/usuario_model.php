@@ -540,7 +540,7 @@ class usuario_model extends CI_Model
 			$param["puesto"] = 19;
 			$data_complete["usuario_permisos"] = $this->agrega_permisos_usuario($param);
 			$data_complete["id_usuario"] = $id_usuario;
-			$data_complete["email"] = $email;
+			$data_complete["email"] = $param["email"];
 			$data_complete["usuario_registrado"] = 1;
 		}
 		return $data_complete;

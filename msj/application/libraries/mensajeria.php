@@ -3,6 +3,8 @@
 class Mensajeria
 {
 
+
+    /*
 	function notifica_nuevo_contacto_subscrito($param, $email)
 	{
 
@@ -24,7 +26,8 @@ class Mensajeria
 		mail($destinatario, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, $headers);
 		return $cuerpo;
 	}
-
+    */
+    /*
 	function notifica_agradecimiento_por_subscripcion($param, $email)
 	{
 
@@ -44,6 +47,7 @@ class Mensajeria
 		mail($destinatario, '=?UTF-8?B?' . base64_encode($asunto) . '?=', $cuerpo, $headers);
 		return $cuerpo;
 	}
+    */
 
 	function notifica_agradecimiento_contacto($param)
 	{

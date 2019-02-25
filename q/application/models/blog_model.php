@@ -10,7 +10,7 @@ class blog_model extends CI_Model
 
 	function insert($params, $return_id = 0)
 	{
-		$insert = $this->db->insert($tabla, $params);
+		$insert = $this->db->insert("blog", $params);
 		return ($return_id == 1) ? $this->db->insert_id() : $insert;
 	}
 

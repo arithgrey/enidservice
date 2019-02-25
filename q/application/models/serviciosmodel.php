@@ -314,9 +314,10 @@ class serviciosmodel extends CI_Model
 		$response = $this->q_up($q, $q2, $id_servicio);
 		if ($q == "nombre_servicio") {
 
-			$param["id_servicio"] = $servicio;
+			//$param["id_servicio"] = $servicio;
+
 			$param["metakeyword"] = $q2;
-			$param["id_servicio"] = $servicio;
+			$param["id_servicio"] = $id_servicio;
 			$response = $this->agrega_metakeyword_sistema($param);
 		}
 		return $response;
