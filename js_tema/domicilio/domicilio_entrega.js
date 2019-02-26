@@ -39,7 +39,10 @@ let asignar_punto_encuentro_existente_pedido= function(){
 let proceso_asignar_punto_encuentro = function (id_punto_encuentro , id_recibo) {
 
 	if (id_punto_encuentro > 0 ){
+
 		set_parameter(".punto_encuentro_asignado" , id_punto_encuentro);
+		set_parameter(".id_recibo" , id_recibo);
+
 		$(".form_puntos_medios_avanzado").submit();
 	}
 };

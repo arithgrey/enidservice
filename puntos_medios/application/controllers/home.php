@@ -70,7 +70,7 @@ class Home extends CI_Controller
 
 			/*solo tomamos la hora del pedido*/
 			$data["punto_encuentro"] = $param["punto_encuentro"];
-			$this->principal->show_data_page($data, 'horario_entrega');
+			$this->principal->show_data_page($data, 'form_horario');
 		} else {
 			$this->principal->show_data_page($data, 'home');
 		}
