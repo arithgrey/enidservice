@@ -9,6 +9,8 @@ $precio = get_campo($recibo, "precio");
 $monto_a_pagar = get_campo($recibo, "monto_a_pagar");
 
 
+$url_seguimiento =  "../pedidos/?seguimiento=".$id_recibo;
+
 ?>
 <?php if ( $total_cubierto < 1): ?>
 	<?= anchor_enid("CANCELAR VENTA",
@@ -67,5 +69,7 @@ $monto_a_pagar = get_campo($recibo, "monto_a_pagar");
 			<?= get_td("$" . $monto_a_pagar . "MXN") ?>
 		</tr>
 	</table>
+
+	<?=guardar("RASTREAR PEDIDO",["href"=> $url_seguimiento ],1,1,0,$url_seguimiento)?>
 </div>
 

@@ -352,7 +352,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => 'vender_mas_productos']
             );
 
-            $response = div($l . $l2, 1);
+	        $response =  get_btw($l ,$l2 , "col-lg-12");
         }
         return $response;
     }
@@ -445,7 +445,7 @@ if (!function_exists('invierte_date_time')) {
         return $estado_venta;
     }
 
-    function carga_estado_compra($monto_por_liquidar, $id_recibo, $status, $status_enid_service, $vendedor = 0)
+    function carga_estado_compra( $id_recibo, $vendedor = 0)
     {
 
 
@@ -767,8 +767,8 @@ if (!function_exists('invierte_date_time')) {
         $t = get_text_modalidad($modalidad, $ordenes);
         $total = ($modalidad < 1) ? count($ordenes) : 0;
         $t .= get_total_articulos_promocion($modalidad, $total);
-        $t .= get_mensaje_compra($modalidad, $total);
-        $t .= evalua_texto_envios_compras($modalidad, $total, $status);
+        //$t .= get_mensaje_compra($modalidad, $total);
+        //$t .= evalua_texto_envios_compras($modalidad, $total, $status);
         $t .= create_listado_compra_venta($ordenes, $status_enid_service, $modalidad);
         $t .= evalua_acciones_modalidad($en_proceso, $modalidad);
         $t .= evalua_acciones_modalidad_anteriores($anteriores, $modalidad);
@@ -782,14 +782,8 @@ if (!function_exists('invierte_date_time')) {
         $list = [];
         foreach ($ordenes as $row) {
 
-            //$direccion_registrada   =   $row["direccion_registrada"];
-            //$url_imagen_error = '../img_tema/portafolio/producto.png';
-            //s$lista_info_attr = " info_proyecto= '" . $resumen_pedido . "'  info_status =  '" . $estado . "' ";
-            //$estado_envio = $row["estado_envio"];
-            //$resumen_pedido = ($row["resumen_pedido"] !== null) ? $row["resumen_pedido"] : "";
 
             $id_recibo = $row["id_proyecto_persona_forma_pago"];
-
             $id_servicio = $row["id_servicio"];
             $estado = $row["status"];
             $monto_a_pagar = $row["monto_a_pagar"];
@@ -809,32 +803,24 @@ if (!function_exists('invierte_date_time')) {
             $url_imagen_servicio = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
 
             $id_error = "imagen_" . $id_servicio;
-
-
-            $t = div(
-                anchor_enid(
+            
+            $t = anchor_enid(
                     img([
                         "src" => $url_imagen_servicio,
                         "onerror" => "reloload_img( '" . $id_error . "','" . $url_imagen_servicio . "');",
                         "class" => 'imagen_articulo',
                         "id" => $id_error
                     ]),
-                    ["href" => $url_servicio]
-                ),
-                ["class" => "col-lg-3"]
-            );
+                    ["href" => $url_servicio ]
+                );
 
-            $t .= div(div(
-                    div(carga_estado_compra($monto_a_liquidar, $id_recibo, $estado, $status_enid_service, $modalidad), ["class" => "btn_estado_cuenta"]
-                    ),
-                    ["class" => "contenedor_articulo_text"]
-                )
-                , ["class" => "col-lg-9"]
-            );
 
-            $list[] = div($t, ["class" => "contenedor_articulo"]);
+
+            $t .= carga_estado_compra($id_recibo, $modalidad);
+
+            $list[] = div($t, ["class" => "display_flex_enid"]);
         }
-        return ul($list, ["class" => "row"]);
+        return div(ul($list) ,  ["class"=> "col-lg-8"]).div("", ["class"=> "col-lg-4"]);
     }
 
     function get_view_compras($status_enid_service, $compras, $tipo)

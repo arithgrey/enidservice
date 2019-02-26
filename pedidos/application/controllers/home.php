@@ -241,10 +241,21 @@ class Home extends CI_Controller
 
 		$id_recibo = $this->input->get("seguimiento");
 		$recibo = $this->get_recibo($id_recibo);
-		$id_usuario_compra = $recibo[0]["id_usuario"];
+		$id_usuario_compra  = $recibo[0]["id_usuario"];
+		$id_usuario_venta   = $recibo[0]["id_usuario_venta"];
 
 
-		if (count($recibo) > 0 && $data["in_session"] == 1 && $data["id_usuario"] > 0 && $id_usuario_compra == $data["id_usuario"]) {
+		if (
+			count($recibo) > 0 &&
+			$data["in_session"] == 1 &&
+			$data["id_usuario"] > 0 &&
+			$id_usuario_compra == $data["id_usuario"]
+			||
+			$id_usuario_venta == $data["id_usuario"]
+
+
+
+		) {
 
 
 			$data["domicilio"] = $this->get_domicilio_entrega($id_recibo, $recibo);
