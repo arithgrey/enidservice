@@ -114,10 +114,22 @@ class Home extends CI_Controller
 
 
 		$c = ($total < $param["saldado"]) ? "blue_enid" :  "red_enid";
-		$total =  div("TOTAL EN GASTOS " .$total . "MXN" , ["class" => "strong font_m " .$c] );
-		$this->table->add_row(array(div($total), "", ""));
-		$total =  div("SALDADO " .$param["saldado"] . "MXN" , ["class" => "strong  font_m"] );
-		$this->table->add_row(array(div($total), "", ""));
+		$gastos =  div("TOTAL EN GASTOS: " .$total . "MXN"  );
+		$this->table->add_row(array(div($gastos), "", ""));
+		$gastos =  div("SALDADO: " .$param["saldado"] . "MXN" );
+		$this->table->add_row(array(div($gastos), "", ""));
+
+
+		$utilidad = $param["saldado"] - $total;
+		$total =  div("UTILIDAD: " . $utilidad  . "MXN"  );
+		$this->table->add_row(array(div($total, ["class"=> "strong fm"]), "", ""));
+
+
+
+
+
+
+
 
 
 		$data["table_costos"]= $this->table->generate();

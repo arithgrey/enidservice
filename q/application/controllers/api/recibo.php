@@ -133,13 +133,6 @@ class recibo extends REST_Controller
 		return $this->principal->api($api, $q);
 	}
 
-	function get_estatus_enid_service($q)
-	{
-
-		$api = "status_enid_service/index/format/json/";
-		return $this->principal->api($api, $q);
-	}
-
 	function proyecto_persona_info_GET()
 	{
 
@@ -278,6 +271,51 @@ class recibo extends REST_Controller
 
 	}
 
+	function ticket_pendiente_pago_contra_entrega($param, $recibo, $data_complete)
+	{
+
+		$id_recibo = $param["id_recibo"];
+		$response = false;
+		$data_complete["es_punto_encuentro"] = 0;
+		/*Cuando se puede pagar al momento*/
+		if (get_info_usuario_valor_variable($param, "cobranza") == 1) {
+
+			/*Cuando no se ha entregado y no está cancelado*/
+			if ($recibo[0]["entregado"] == 0 && $recibo[0]["se_cancela"] == 0) {
+				/*Muestro la fecha de entrega acordada más el recordatorio y las forma de pago*/
+
+				$id_punto_encuentro = $this->get_punto_encuentro_recibo($id_recibo);
+				$data_complete["punto_encuentro"] = $this->get_punto_encuentro($id_punto_encuentro);
+				$data_complete["es_punto_encuentro"] = 1;
+				$response = $this->get_mensaje_pago_al_memento($data_complete, $data_complete["costo_envio_sistema"]);
+			}
+		} else {
+
+
+			$usuario = $this->principal->get_info_usuario($recibo[0]["id_usuario"]);
+			$costo_envio_sistema = get_costo_envio($recibo[0]);
+			$response = $this->get_mensaje_no_aplica($recibo, $costo_envio_sistema, $usuario, $data_complete);
+		}
+		return $response;
+	}
+
+	private function get_punto_encuentro_recibo($id_recibo)
+	{
+
+		$q["id_recibo"] = $id_recibo;
+		$api =
+			"proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/";
+		return $this->principal->api($api, $q)[0]["id_punto_encuentro"];
+	}
+
+	private function get_punto_encuentro($id_punto_encuentro)
+	{
+
+		$q["id"] = $id_punto_encuentro;
+		$api = "punto_encuentro/id/format/json/";
+		return $this->principal->api($api, $q);
+	}
+
 	private function get_mensaje_pago_al_memento($data_complete, $costo_envio_sistema)
 	{
 
@@ -407,48 +445,12 @@ class recibo extends REST_Controller
 
 	private function get_data_saldo($param, $recibo, $data_complete)
 	{
-
 		/*Cargamos el saldo que tiene la persona*/
 		$data_complete["id_recibo"] = $param["id_recibo"];
 		$id_usuario_venta = $recibo[0]["id_usuario_venta"];
 		$data_complete["id_usuario_venta"] = $id_usuario_venta;
-		//$direccion = $this->get_direccion_pedido($param["id_recibo"]);
 		$data_complete["informacion_envio"] = [];
-
-		/*if (count($direccion) > 0) {
-			$id_direccion = $direccion[0]["id_direccion"];
-			$data_complete["informacion_envio"] = $this->get_direccion_por_id($id_direccion);
-		}
-		*/
 		return $data_complete;
-	}
-
-	function ticket_pendiente_pago_contra_entrega($param, $recibo, $data_complete)
-	{
-
-		$id_recibo = $param["id_recibo"];
-		$response = false;
-		$data_complete["es_punto_encuentro"] = 0;
-		/*Cuando se puede pagar al momento*/
-		if (get_info_usuario_valor_variable($param, "cobranza") == 1) {
-
-			/*Cuando no se ha entregado y no está cancelado*/
-			if ($recibo[0]["entregado"] == 0 && $recibo[0]["se_cancela"] == 0) {
-				/*Muestro la fecha de entrega acordada más el recordatorio y las forma de pago*/
-
-				$id_punto_encuentro = $this->get_punto_encuentro_recibo($id_recibo);
-				$data_complete["punto_encuentro"] = $this->get_punto_encuentro($id_punto_encuentro);
-				$data_complete["es_punto_encuentro"] = 1;
-				$response = $this->get_mensaje_pago_al_memento($data_complete, $data_complete["costo_envio_sistema"]);
-			}
-		} else {
-
-
-			$usuario = $this->principal->get_info_usuario($recibo[0]["id_usuario"]);
-			$costo_envio_sistema = get_costo_envio($recibo[0]);
-			$response = $this->get_mensaje_no_aplica($recibo, $costo_envio_sistema, $usuario, $data_complete);
-		}
-		return $response;
 	}
 
 	function pedidos_GET()
@@ -512,6 +514,13 @@ class recibo extends REST_Controller
 
 	}
 
+	function get_estatus_enid_service($q)
+	{
+
+		$api = "status_enid_service/index/format/json/";
+		return $this->principal->api($api, $q);
+	}
+
 	function fecha_entrega_PUT()
 	{
 
@@ -559,39 +568,6 @@ class recibo extends REST_Controller
 			$response = $this->recibo_model->get_adeudo_cliente($param);
 		}
 		$this->response($response);
-	}
-
-	private function get_direccion_pedido($id_recibo)
-	{
-
-		$q["id_recibo"] = $id_recibo;
-		$api = "proyecto_persona_forma_pago_direccion/recibo/format/json/";
-		return $this->principal->api($api, $q);
-	}
-
-	private function get_direccion_por_id($id_direccion)
-	{
-
-		$q["id_direccion"] = $id_direccion;
-		$api = "direccion/data_direccion/format/json/";
-		return $this->principal->api($api, $q);
-	}
-
-	private function get_punto_encuentro_recibo($id_recibo)
-	{
-
-		$q["id_recibo"] = $id_recibo;
-		$api =
-			"proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/";
-		return $this->principal->api($api, $q)[0]["id_punto_encuentro"];
-	}
-
-	private function get_punto_encuentro($id_punto_encuentro)
-	{
-
-		$q["id"] = $id_punto_encuentro;
-		$api = "punto_encuentro/id/format/json/";
-		return $this->principal->api($api, $q);
 	}
 
 	function dia_GET()
@@ -670,23 +646,6 @@ class recibo extends REST_Controller
 
 	}
 
-	private function set_status($param)
-	{
-		$param["id_recibo"] = $param["recibo"];
-		$pago_pendiente = $this->get_saldo_pendiente_recibo($param);
-		$response = "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR " . $pago_pendiente . "MXN";
-
-		if ($param["saldo_cubierto"] > 0 && $param["saldo_cubierto"] >= $pago_pendiente || ($pago_pendiente - $param["saldo_cubierto"]) < 101) {
-
-
-			$response = $this->recibo_model->notifica_entrega($param["saldo_cubierto"], $param["status"], $param["recibo"], 'fecha_entrega');
-			$this->solicita_encuenta($param["id_recibo"]);
-
-
-		}
-		return $response;
-	}
-
 	function set_cancelacion($param)
 	{
 
@@ -702,24 +661,10 @@ class recibo extends REST_Controller
 		return $response;
 	}
 
-	function tipo_entrega_PUT()
+	private function add_tipificacion($q)
 	{
-
-		$param = $this->put();
-		$response = [];
-		if (if_ext($param, "recibo,tipo_entrega")) {
-
-			$tipo_entrega = $param["tipo_entrega"];
-			$id_recibo = $param["recibo"];
-			$response = $this->recibo_model->q_up("tipo_entrega", $tipo_entrega, $id_recibo);
-
-			if ($response == true) {
-				$param["tipificacion"] = 31;
-				$this->add_tipificacion($param);
-			}
-		}
-		$this->response($response);
-
+		$api = "tipificacion_recibo/index";
+		return $this->principal->api($api, $q, "json", "POST");
 	}
 
 	function set_default_orden($param)
@@ -744,10 +689,69 @@ class recibo extends REST_Controller
 		return $response;
 	}
 
-	private function add_tipificacion($q)
+	private function set_status($param)
 	{
-		$api = "tipificacion_recibo/index";
-		return $this->principal->api($api, $q, "json", "POST");
+		$param["id_recibo"] = $param["recibo"];
+		$pago_pendiente = $this->get_saldo_pendiente_recibo($param);
+		$response = "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR " . $pago_pendiente . "MXN";
+
+		if ($param["saldo_cubierto"] > 0 && $param["saldo_cubierto"] >= $pago_pendiente || ($pago_pendiente - $param["saldo_cubierto"]) < 101) {
+
+
+			$response = $this->recibo_model->notifica_entrega($param["saldo_cubierto"], $param["status"], $param["recibo"], 'fecha_entrega');
+			$this->solicita_encuenta($param["id_recibo"]);
+
+
+		}
+		return $response;
+	}
+
+	private function solicita_encuenta($id_recibo)
+	{
+
+		$recibo = $this->recibo_model->q_get(["notificacion_encuesta", "id_usuario", "id_servicio"], $id_recibo);
+		if (count($recibo) > 0) {
+			$notificacion_encuesta = $recibo[0]["notificacion_encuesta"];
+			$id_servicio = $recibo[0]["id_servicio"];
+
+			if ($notificacion_encuesta < 1) {
+				$id_usuario = $recibo[0]["id_usuario"];
+				/*usuario que compra*/
+				$usuario = $this->principal->get_info_usuario($id_usuario);
+				if (count($usuario) > 0) {
+
+
+					$es_valido = es_email_valido($usuario[0]["email"]);
+					if ($es_valido > 0) {
+						$sender = get_notificacion_solicitud_valoracion($usuario, $id_servicio);
+						$this->principal->send_email_enid($sender, 1);
+
+						$status = $this->recibo_model->q_up("notificacion_encuesta", 1, $id_recibo);
+
+					}
+				}
+			}
+		}
+	}
+
+	function tipo_entrega_PUT()
+	{
+
+		$param = $this->put();
+		$response = [];
+		if (if_ext($param, "recibo,tipo_entrega")) {
+
+			$tipo_entrega = $param["tipo_entrega"];
+			$id_recibo = $param["recibo"];
+			$response = $this->recibo_model->q_up("tipo_entrega", $tipo_entrega, $id_recibo);
+
+			if ($response == true) {
+				$param["tipificacion"] = 31;
+				$this->add_tipificacion($param);
+			}
+		}
+		$this->response($response);
+
 	}
 
 	function notificacion_pago_PUT()
@@ -852,34 +856,6 @@ class recibo extends REST_Controller
 		$this->response($response);
 	}
 
-	private function solicita_encuenta($id_recibo)
-	{
-
-		$recibo = $this->recibo_model->q_get(["notificacion_encuesta", "id_usuario", "id_servicio"], $id_recibo);
-		if (count($recibo) > 0) {
-			$notificacion_encuesta = $recibo[0]["notificacion_encuesta"];
-			$id_servicio = $recibo[0]["id_servicio"];
-
-			if ($notificacion_encuesta < 1) {
-				$id_usuario = $recibo[0]["id_usuario"];
-				/*usuario que compra*/
-				$usuario = $this->principal->get_info_usuario($id_usuario);
-				if (count($usuario) > 0) {
-
-
-					$es_valido = es_email_valido($usuario[0]["email"]);
-					if ($es_valido > 0) {
-						$sender = get_notificacion_solicitud_valoracion($usuario, $id_servicio);
-						$this->principal->send_email_enid($sender, 1);
-
-						$status = $this->recibo_model->q_up("notificacion_encuesta", 1, $id_recibo);
-
-					}
-				}
-			}
-		}
-	}
-
 	function recibo_por_enviar_usuario_GET()
 	{
 		$param = $this->get();
@@ -893,6 +869,22 @@ class recibo extends REST_Controller
 
 		$this->response($response);
 
+	}
+
+	private function get_direccion_pedido($id_recibo)
+	{
+
+		$q["id_recibo"] = $id_recibo;
+		$api = "proyecto_persona_forma_pago_direccion/recibo/format/json/";
+		return $this->principal->api($api, $q);
+	}
+
+	private function get_direccion_por_id($id_direccion)
+	{
+
+		$q["id_direccion"] = $id_direccion;
+		$api = "direccion/data_direccion/format/json/";
+		return $this->principal->api($api, $q);
 	}
 	/*
 	private function set_stock_servicio($q){
