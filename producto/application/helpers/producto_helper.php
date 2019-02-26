@@ -43,7 +43,7 @@ if (!function_exists('invierte_date_time')) {
         if ($orden_pedido > 0) {
 
             $url = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
-            $r[] = get_form_pre_pedido();
+
             $r[] = get_form_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos);
             $r[] = form_pre_pedido_contact($plan, $num_ciclos);
             $r[] = form_pre_puntos_medios($plan, $num_ciclos);

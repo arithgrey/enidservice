@@ -48,11 +48,12 @@ if ($registro_direccion == 0) {
 ?>
 
 <div class='contenedor_informacion_envio'>
-	<?= heading_enid("DIRECCIÓN DE ENVÍO", 2, [], 1) ?>
+	<?= heading_enid("DIRECCIÓN DE ENVÍO", 2) ?>
 	<div id='modificar_direccion_seccion' class="contenedor_form_envio">
-		<hr>
+		<?= hr() ?>
 		<form class="form-horizontal form_direccion_envio">
-			<?= n_row_12() ?>
+
+			<div class="row">
 				<div class="col-lg-6">
 					<?= div("Persona que recibe", ["class" => "titulo_enid_sm_sm"]) ?>
 					<?= input([
@@ -65,7 +66,7 @@ if ($registro_direccion == 0) {
 						"id" => "nombre_receptor",
 						"type" => "text"
 					]) ?>
-				
+
 				</div>
 
 				<div class="col-lg-6">
@@ -81,8 +82,7 @@ if ($registro_direccion == 0) {
 						"type" => "text"
 					]) ?>
 				</div>
-			<?= end_row() ?>
-			<?= n_row_12() ?>
+			</div>
 			<?= div("Código postal", ["class" => "titulo_enid_sm_sm"]) ?>
 			<?= input([
 				"maxlength" => "5",
@@ -96,8 +96,7 @@ if ($registro_direccion == 0) {
 			]) ?>
 			<?= place('place_codigo_postal') ?>
 			<?= input_hidden(["name" => "id_usuario", "value" => $id_usuario]) ?>
-			<?= end_row() ?>
-			<?= n_row_12() ?>
+
 			<?= div("Calle", ["class" => "titulo_enid_sm_sm"]) ?>
 			<?= input([
 				"class" => "textinput address1",
@@ -108,8 +107,7 @@ if ($registro_direccion == 0) {
 				"autocorrect" => "off",
 				"type" => "text"
 			]) ?>
-			<?= end_row() ?>
-			<?= n_row_12() ?>
+
 			<?= div("Entre la calle y la calle, o información adicional",
 				["class" => "titulo_enid_sm_sm"]) ?>
 			<?= input([
@@ -121,9 +119,7 @@ if ($registro_direccion == 0) {
 				"Entre la calle y la calle, o información adicional",
 				"type" => "text"
 			]) ?>
-			<?= end_row() ?>
-			<?= n_row_12() ?>
-
+			<div class="row">
 				<div class="col-lg-6">
 					<?= div("Número Exterior", ["class" => "titulo_enid_sm_sm"]) ?>
 					<?= input([
@@ -135,7 +131,6 @@ if ($registro_direccion == 0) {
 						"required" => "true",
 						"type" => "text"
 					]) ?>
-				
 				</div>
 				<div class="col-lg-6">
 					<?= div("Número Interior", ["class" => "titulo_enid_sm_sm"]) ?>
@@ -149,10 +144,11 @@ if ($registro_direccion == 0) {
 						"required " => "true"
 					]) ?>
 				</div>
+			</div>
 
-			<?= end_row() ?>
+
 			<div <?= $direccion_visible ?> class="parte_colonia_delegacion">
-				<?= n_row_12() ?>
+
 				<?= div("Colonia", ["class" => "titulo_enid_sm_sm"]) ?>
 
 				<?= div(input([
@@ -165,8 +161,6 @@ if ($registro_direccion == 0) {
 				), ["class" => "place_colonias_info"]) ?>
 
 				<?= place('place_asentamiento') ?>
-				<?= end_row() ?>
-				<?= n_row_12() ?>
 				<div class=" district delegacion_c">
 					<?= div("Delegación o Municipio", ["class" => "titulo_enid_sm_sm"]) ?>
 					<?= div(input([
@@ -176,27 +170,21 @@ if ($registro_direccion == 0) {
 						"readonly" => true
 					]), ["class" => "place_delegaciones_info"]) ?>
 				</div>
-				<?= end_row() ?>
-				<?= n_row_12() ?>
 				<div class=" district  estado_c">
 					<?= div("Estado", ["class" => "titulo_enid_sm_sm"]) ?>
 
-						<?= div(input([
-							"type" => "text",
-							"name" => "estado",
-							"value" => $estado,
-							"readonly" => "true"
-						]) , ["class" => "place_estado_info"])?>
+					<?= div(input([
+						"type" => "text",
+						"name" => "estado",
+						"value" => $estado,
+						"readonly" => "true"
+					]), ["class" => "place_estado_info"]) ?>
 
 				</div>
-				<?= end_row() ?>
-				<?= n_row_12() ?>
 				<div class=" district pais_c">
 					<?= div("País", ["class" => "titulo_enid_sm_sm"]) ?>
-					<?= place("place_pais_info") ?>
+					<?=place("place_pais_info")?>
 				</div>
-				<?= end_row() ?>
-				<?= n_row_12() ?>
 				<div class="direccion_principal_c">
 					<?= div("Esta es mi dirección principal ",
 						["class" => "titulo_enid_sm_sm"]) ?>
@@ -211,7 +199,7 @@ if ($registro_direccion == 0) {
 					"value" => $id_recibo,
 					"class" => "id_recibo"
 				]) ?>
-				<?= end_row() ?>
+
 				<?= div(
 					guardar("Registrar dirección ",
 						['class' => "text_btn_direccion_envio"]),
