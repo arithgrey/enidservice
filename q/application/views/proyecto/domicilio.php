@@ -104,7 +104,7 @@ foreach ($info_envio_direccion as $row) {
 				"name"  => "pais",
 				"value" => $id_pais
 			]) ?>
-			
+
 			<div class="direccion_principal_c">
 				<?= div("Esta es mi dirección principal", ["class" => "strong"]) ?>
 				<select name='direccion_principal'>

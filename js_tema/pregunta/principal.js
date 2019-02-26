@@ -56,9 +56,10 @@ let carga_productos_sugeridos = function() {
 
 let response_carga_productos_sugeridos = function(data) {
 
-    if (data["sugerencias"] == undefined) {
-        llenaelementoHTML(".place_tambien_podria_interezar", data);
+    $(".place_tambien_podria_interezar").empty();
+    if (data.sugerencias == undefined && data.sugerencias != 0 ) {
 
+        llenaelementoHTML(".place_tambien_podria_interezar", data);
     }
 }
 

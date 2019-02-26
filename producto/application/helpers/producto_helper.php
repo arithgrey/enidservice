@@ -70,7 +70,8 @@ if (!function_exists('invierte_date_time')) {
     function form_pre_puntos_medios($plan, $num_ciclos)
     {
 
-        $r[] = '<form class="form_pre_puntos_medios" action="../puntos_medios/?producto=<?= $plan ?>" method="POST">';
+    	$url  = "../puntos_medios/?producto=".$plan;
+        $r[] = '<form class="form_pre_puntos_medios" action="'.$url.'"  method="POST">';
         $r[] = input_hidden([
             "class" => "servicio",
             "name" => "servicio",

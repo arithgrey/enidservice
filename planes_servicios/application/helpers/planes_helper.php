@@ -10,13 +10,15 @@ if (!function_exists('invierte_date_time')) {
             if ($class > 0 ){
 
                 $text = append_data(
+					[
+						div(place("primer_nivel_seccion"), ["class" => "info_categoria"]),
+						div(place("segundo_nivel_seccion"), ["class" => "info_categoria"]),
+						div(place("tercer_nivel_seccion"), ["class" => "info_categoria"]),
+						div(place("cuarto_nivel_seccion"), ["class" => "info_categoria"]),
+						div(place("quinto_nivel_seccion"), ["class" => "info_categoria"]),
+						div(place("sexto_nivel_seccion"), ["class" => "info_categoria"])
+					]
 
-                    div(place("primer_nivel_seccion"), ["class" => "info_categoria"]),
-                    div(place("segundo_nivel_seccion"), ["class" => "info_categoria"]),
-                    div(place("tercer_nivel_seccion"), ["class" => "info_categoria"]),
-                    div(place("cuarto_nivel_seccion"), ["class" => "info_categoria"]),
-                    div(place("quinto_nivel_seccion"), ["class" => "info_categoria"]),
-                    div(place("sexto_nivel_seccion"), ["class" => "info_categoria"])
                 );
 
                 $response = addNRow($text);

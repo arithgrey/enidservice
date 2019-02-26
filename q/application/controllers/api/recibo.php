@@ -412,12 +412,14 @@ class recibo extends REST_Controller
 		$data_complete["id_recibo"] = $param["id_recibo"];
 		$id_usuario_venta = $recibo[0]["id_usuario_venta"];
 		$data_complete["id_usuario_venta"] = $id_usuario_venta;
-		$direccion = $this->get_direccion_pedido($param["id_recibo"]);
+		//$direccion = $this->get_direccion_pedido($param["id_recibo"]);
 		$data_complete["informacion_envio"] = [];
-		if (count($direccion) > 0) {
+
+		/*if (count($direccion) > 0) {
 			$id_direccion = $direccion[0]["id_direccion"];
 			$data_complete["informacion_envio"] = $this->get_direccion_por_id($id_direccion);
 		}
+		*/
 		return $data_complete;
 	}
 

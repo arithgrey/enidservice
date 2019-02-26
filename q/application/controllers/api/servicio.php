@@ -168,16 +168,19 @@ class Servicio extends REST_Controller
 
 		$param = $this->get();
 		$data["info_categorias"] = $this->get_categorias_servicios($param);
-		$data["nivel"] = $param["nivel"];
-
+		$data["nivel"]  = $param["nivel"];
+		$response       = [];
 		if (count($data["info_categorias"]) > 0) {
 
-			$this->response(get_config_categorias($data, $param));
+			$response   =  get_config_categorias($data, $param);
+
 
 		} else {
 
-			$this->response(get_add_categorias($data, $param));
+			$response   = get_add_categorias($data, $param);
+
 		}
+		$this->response($response);
 	}
 
 	function get_categorias_servicios($q)

@@ -401,16 +401,15 @@ let reset_form = function(id) {
 }
 let  array_key_exists =  function(key, array) {
 
-    debugger;
-    let $response  =  0;
+    let response  =  0;
     if(array.hasOwnProperty(key)){
         let second_exists = (key in array);
         if (second_exists == true) {
             console.log("existe");
-            $response =  1;
+            response =  1;
         }
     }
-    return $response;
+    return response;
 
 }
 let isArray = function (param) {
@@ -556,7 +555,7 @@ let randomString = function(len, charSet) {
 
 /*Recorre a sección*/
 let recorrepage = function (contenedor = 0) {
-    debugger;
+
     let l =  contenedor.length;
     if ( l > 2) {
         $('html, body').animate({scrollTop: $(contenedor).offset().top - 100}, 'slow');
