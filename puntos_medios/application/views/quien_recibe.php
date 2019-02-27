@@ -5,8 +5,8 @@
 			<?= heading_enid("¿Quién recibe?", 2, ["class" => "strong"]) ?>
 			<div class="contendor_in_correo ">
 				<form class="form-horizontal form_punto_encuentro">
-					<?= label(" NOMBRE ", ["class" => "col-lg-2 "]) ?>
-					<div class="col-lg-10">
+					<?= label(" NOMBRE ", ["class" => "col-lg-3 "]) ?>
+					<div class="col-lg-9">
 						<?= input([
 							"id" => "nombre",
 							"name" => "nombre",
@@ -16,8 +16,8 @@
 							"required" => true
 						]) ?>
 					</div>
-					<?= label("CORREO ", ["class" => "col-lg-2 "]) ?>
-					<div class="col-lg-10">
+					<?= label("CORREO ", ["class" => "col-lg-3 "]) ?>
+					<div class="col-lg-9">
 						<?= input([
 							"id" => "correo",
 							"name" => "email",
@@ -27,8 +27,8 @@
 							"required" => true
 						]) ?>
 					</div>
-					<?= label(" TELÉFONO ", ["class" => "col-lg-2 "]) ?>
-					<div class="col-lg-10">
+					<?= label(" TELÉFONO ", ["class" => "col-lg-3 "]) ?>
+					<div class="col-lg-9">
 						<?= input([
 							"id" => "tel",
 							"name" => "telefono",
@@ -38,6 +38,21 @@
 						]) ?>
 
 					</div>
+
+					<?= label(" CONTRASEÑA", ["class" => "col-lg-3 "]) ?>
+					<div class="col-lg-9">
+						<?= input([
+							"id" => "pw",
+							"name" => "password",
+							"type" => "password",
+							"class" => "form-control input-md ",
+							"required" => true
+						]) ?>
+
+					</div>
+
+
+
 					<?= br(2) ?>
 
 					<?= div(heading_enid("¿En qué horario te gustaría recibir tu pedido?",
@@ -61,6 +76,11 @@
 						["class" => "col-lg-4 "]
 					) ?>
 					<?= div(lista_horarios(), ["class" => "col-lg-8"]) ?>
+
+
+
+
+
 					<?= div("+ agregar nota", ["class" => "col-lg-12 cursor_pointer text_agregar_nota", "onclick" => "agregar_nota();"]) ?>
 					<div class="input_notas">
 						<?= div("NOTAS", ["class" => "strong col-lg-12"]) ?>

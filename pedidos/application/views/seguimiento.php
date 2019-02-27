@@ -1,8 +1,8 @@
 <div class="col-lg-8">
     <div class="page-section ">
         <div class="wrapper">
-            <?= heading_enid("RASTREAR PAQUETE " . icon("fa fa-map-signs"), 3) ?>
-            <?= div(create_linea_tiempo($recibo, $domicilio), ["class" => "timeline"]) ?>
+            <?= heading_enid("RASTREAR PEDIDO" . icon("fa fa-map-signs"), 3) ?>
+            <?= div(create_linea_tiempo($recibo, $domicilio, $es_vendedor), ["class" => "timeline"]) ?>
         </div>
     </div>
 </div>

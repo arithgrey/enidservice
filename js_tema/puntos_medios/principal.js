@@ -126,28 +126,47 @@ let muestra_quien_recibe = function(){
 };
 
 let registra_usuario = function(e){
-	
+
+	debugger;
 	let nombre 		= 	get_parameter(".form_punto_encuentro .nombre").length;
 	let correo 		= 	get_parameter(".form_punto_encuentro .correo").length;
 	let telefono 	= 	get_parameter(".form_punto_encuentro .telefono").length;
+	let pwlength 	= 	get_parameter(".form_punto_encuentro #pw").length;
 	
-	if ( nombre > 4 && correo > 5 && telefono > 5){
-		
-		let password 	 = 	""+CryptoJS.SHA1(randomString(8));					
-		let data_send 	 = 	$(".form_punto_encuentro").serialize()+"&"+$.param({"password":password , "servicio" : get_parameter(".servicio")});					
+	if ( nombre > 4 && correo > 5 && telefono > 7 && pwlength >  5 ){
+
+
+
+		let pw 		 	=  get_parameter(".form_punto_encuentro #pw");
+		let password 	= 	""+CryptoJS.SHA1(pw);
+		let data_send 	= 	$(".form_punto_encuentro").serialize()+"&"+$.param({"password":password , "servicio" : get_parameter(".servicio")});
 
 		let url 		 = 	"../q/index.php/api/cobranza/primer_orden/format/json/";
 		bloquea_form(".form_punto_encuentro");	
 		$(".contenedor_ya_tienes_cuenta").hide();			
-		request_enid("POST",  data_send , url , response_registro_usuario , ".place_notificacion_punto_encuentro_registro");					
+		request_enid("POST",  data_send , url , response_registro_usuario , ".place_notificacion_punto_encuentro_registro");
+
 
 	}else{
-		
-		focus_input([".form_punto_encuentro .nombre" ,".form_punto_encuentro .correo" , ".form_punto_encuentro .telefono"]);
+		focus_inputs_form(nombre, correo,telefono, pwlength);
+
+
 	}
 	e.preventDefault();	
 	
 };
+let focus_inputs_form = function(nombre, correo,telefono, pwlength){
+
+	if (nombre < 5){
+		focus_input([".form_punto_encuentro .nombre"] );
+	}if (correo < 6 ){
+		focus_input([".form_punto_encuentro .correo" ]);
+	}if (telefono  < 8){
+		focus_input([ ".form_punto_encuentro .telefono"]);
+	}if (pwlength < 8){
+		focus_input([".form_punto_encuentro #pw"]);
+	}
+}
 let response_registro_usuario = function(data){
 
 	display_elements([".place_notificacion_punto_encuentro_registro"] , 0);
