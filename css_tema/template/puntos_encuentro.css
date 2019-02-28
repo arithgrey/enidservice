@@ -82,3 +82,8 @@
 .input_notas{
     display:none;
 }
+.focus_error{
+    
+    border: 1px solid rgb(13, 62, 86)!important;
+    
+}

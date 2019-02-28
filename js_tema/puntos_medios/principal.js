@@ -131,9 +131,9 @@ let registra_usuario = function(e){
 	let nombre 		= 	get_parameter(".form_punto_encuentro .nombre").length;
 	let correo 		= 	get_parameter(".form_punto_encuentro .correo").length;
 	let telefono 	= 	get_parameter(".form_punto_encuentro .telefono").length;
-	let pwlength 	= 	get_parameter(".form_punto_encuentro #pw").length;
+	let pwlength 	= 	get_parameter(".form_punto_encuentro .pw").length;
 	
-	if ( nombre > 4 && correo > 5 && telefono > 7 && pwlength >  5 ){
+	if ( nombre > 4 && correo > 7 && telefono > 7 && pwlength >  5 ){
 
 
 
@@ -157,15 +157,26 @@ let registra_usuario = function(e){
 };
 let focus_inputs_form = function(nombre, correo,telefono, pwlength){
 
-	if (nombre < 5){
-		focus_input([".form_punto_encuentro .nombre"] );
-	}if (correo < 6 ){
-		focus_input([".form_punto_encuentro .correo" ]);
-	}if (telefono  < 8){
-		focus_input([ ".form_punto_encuentro .telefono"]);
-	}if (pwlength < 8){
-		focus_input([".form_punto_encuentro #pw"]);
+	let clases =  [".form_punto_encuentro .nombre", ".form_punto_encuentro .correo", ".form_punto_encuentro .telefono", ".form_punto_encuentro .pw"];
+	for (var x in clases){
+		$(clases[x]).removeClass("focus_error");
 	}
+
+	if (nombre < 5){
+		$(".form_punto_encuentro .nombre").addClass("focus_error");
+	}if (correo < 8 ){
+
+		$(".form_punto_encuentro .correo").addClass("focus_error");
+
+
+	}if (telefono  < 8){
+		$(".form_punto_encuentro .telefono").addClass("focus_error");
+
+	}if (pwlength < 8){
+
+		$(".form_punto_encuentro .pw").addClass("focus_error");
+	}
+
 }
 let response_registro_usuario = function(data){
 

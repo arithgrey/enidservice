@@ -45,7 +45,7 @@
 							"id" => "pw",
 							"name" => "password",
 							"type" => "password",
-							"class" => "form-control input-md ",
+							"class" => "form-control input-md  pw",
 							"required" => true
 						]) ?>
 
