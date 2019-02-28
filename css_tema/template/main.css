@@ -6987,16 +6987,9 @@ input {
     .largenav {
         display: block;
     }
-
-    /*
-    .smallnav{
-        display: none;
-    }
-    smallnav
-    .smallsearch{
-        margin: 0px;
-    }
-    */
+    
+    
+    
 }
 
 /*Sidenav*/
@@ -7034,8 +7027,8 @@ input {
 }
 
 @media only screen and (max-width: 768px) {
-
-
+    
+    
     .contenedor-lateral-menu {
         background-color: black;
         position: fixed;
@@ -7219,13 +7212,10 @@ table {
 .btn_guardar {
     border: 0 !important;
 }
-
 .btn_guardar:hover {
     cursor: pointer;
     padding: 10px;
-
 }
-
 ::placeholder {
     text-transform: uppercase;
 }
@@ -7289,4 +7279,14 @@ h2 {
 }
 .focus_error{
     border: 1px solid rgb(13, 62, 86)!important;
+}
+.notificaciones_enid{
+    left: -300px!important;
+}
+.notificaciones_enid_mb{
+    left: -190px!important;
+}
+
+.menu_usuario{
+    left: -180px!important;
 }

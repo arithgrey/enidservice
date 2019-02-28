@@ -51,11 +51,13 @@ class Enid extends CI_Controller
 		}
 	}
 
-	function imagen_servicio($id_servicio)
+	function imagen_servicio($id_servicio = 0)
 	{
-		$imagen = $this->get_img_servicio($id_servicio);
-		if (is_array($imagen) && count($imagen) > 0) {
-			return $this->construye_img_format($imagen);
+		if ($id_servicio >  0){
+			$imagen = $this->get_img_servicio($id_servicio);
+			if (is_array($imagen) && count($imagen) > 0) {
+				return $this->construye_img_format($imagen);
+			}
 		}
 	}
 

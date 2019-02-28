@@ -24,12 +24,13 @@ let get_lugar_por_stus_compra= function(){
 	return nuevo_place;
 }
 let carga_compras_usuario = function(){
-	
+
 	recorrepage();
-	let modalidad 	=  get_option("modalidad_ventas");  	
+	let modalidad 	=  get_option("modalidad_ventas");
 	let url 		=  "../q/index.php/api/recibo/proyecto_persona_info/format/json/";		
-	let data_send 	=  { "status": get_option("estado_compra") , "modalidad" : modalidad };				
+	let data_send 	=  { "status": get_option("estado_compra") , "modalidad" : modalidad };
 	request_enid( "GET",  data_send, url, response_carga_compras_usuario);
+
 }
 let response_carga_compras_usuario = function(data){
 	

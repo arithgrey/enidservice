@@ -20,9 +20,11 @@ $(document).ready(function(){
 
 	
 	$(".btn_mis_ventas").click(function(){			
-		set_option("estado_compra" , 1);			
+
+		set_option("estado_compra" , 1);
 		set_option("modalidad_ventas" , 1);		
-		carga_compras_usuario();	
+		carga_compras_usuario();
+
 	});
 
 	$(".btn_cobranza").click(function(){				
@@ -83,9 +85,12 @@ let response_carga_num_preguntas = function (data){
 }
 let valida_accion_inicial = function(){
 
+
 	switch(get_parameter(".action")){
 	    case "ventas":
-			set_option("modalidad_ventas" , 1);		
+
+			set_option("modalidad_ventas" , 1);
+			set_option("estado_compra" , 1);
 			carga_compras_usuario();		
 	        break;
 	    case "compras":

@@ -37,22 +37,22 @@ $li = [
 
 <div class="pull-right">
 	<li class="dropdown  menu_notificaciones_progreso_dia">
+		<?php $class_notificacion =  ($is_mobile >  0 ) ? " notificaciones_enid_mb ": " notificaciones_enid "; ?>
 		<?= anchor_enid(
-			icon("fa fa-bell white") .
-			span("", ["class" => "num_tareas_dia_pendientes_usr"]),
+			get_btw(icon("fa fa-bell white")  ,  div("", ["class" => "num_tareas_dia_pendientes_usr"]) ,  "display_flex_enid") ,
 			[
 				"class" => "blue_enid dropdown-toggle",
 				"data-toggle" => "dropdown"
-			]) ?>
-
+			]
+		) ?>
 		<?= ul(
 			[place("place_notificaciones_usuario")],
 			[
-				"class" => "dropdown-menu ",
-				"style" => "width:500px!important;"
+				"class" => "dropdown-menu ".$class_notificacion
 			]
 		) ?>
 	</li>
+
 	<li class="dropdown ">
 		<?= get_img_usuario($id_usuario) ?>
 		<?= ul(
