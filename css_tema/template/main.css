@@ -7265,9 +7265,7 @@ h2 {
 .white:hover {
     color: white !important;
 }
-.place_notificaciones_usuario{
-    padding:10px;
-}
+
 .display_flex_enid{
     display: flex;
     flex-direction: row;

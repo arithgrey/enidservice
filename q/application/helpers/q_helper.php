@@ -420,11 +420,11 @@ if (!function_exists('invierte_date_time')) {
 		$response["num_tareas_pendientes"] = crea_tareas_pendientes_info($f);
 
 		$list = [
-			$deuda,
-			$direccion,
-			$direccion_envio,
-			$numtelefonico,
-			$mensajes_sin_leer
+			$deuda["html"],
+			$direccion["html"],
+			$direccion_envio["html"],
+			$numtelefonico["html"],
+			$mensajes_sin_leer["html"]
 
 		];
 		$response["lista_pendientes"] = get_mensaje_inicial_notificaciones(1, $f) . ul($list);
