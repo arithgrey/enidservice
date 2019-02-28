@@ -1,37 +1,8 @@
 <div class="seccion_registro_nuevo_usuario_enid_service">
-    <?= anchor_enid(
-        "ACCEDER AHORA",
-        [
-            "class" => "btn_acceder_cuenta_enid a_enid_blue",
-            "id" => "btn_acceder_cuenta_enid",
-            'style' => "color:white!important"
-
-        ]) ?>
-
-    <?= addNRow(div(div(anchor_enid(img(["src" => "../img_tema/enid_service_logo.jpg"])), ["class" => "col-lg-6 col-lg-offset-3"]), ["class" => "col-lg-4 col-lg-offset-4"])) ?>
-    <?= addNRow(div(heading('ÚNETE A ENID SERVICE', 3), ["class" => "col-lg-4 col-lg-offset-4"])) ?>
-    <?= div(get_form_registro(), ["class" => "col-lg-4 col-lg-offset-4"]) ?>
-
+    <?= get_format_nuevo_usuario() ?>
 </div>
-
 <div class="contenedor_recuperacion_password display_none">
-
-    <?= anchor_enid("ACCEDER AHORA!",
-        [
-            "class" => "btn_acceder_cuenta_enid a_enid_blue",
-            "id" => "btn_acceder_cuenta_enid",
-            "style" => "color: white!important"
-        ],
-        1
-    ); ?>
-    <?= anchor_enid(div(div(img(["src" => "../img_tema/enid_service_logo.jpg"]), ["class" => "col-lg-6 col-lg-offset-3"]), ["class" => "col-lg-4 col-lg-offset-4"]), ["href" => "../"], 1) ?>
-
-    <div class="col-lg-4 col-lg-offset-4">
-        <?= heading('RECUPERA TUS DATOS DE ACCESO', '3') ?>
-        <?= get_form_recuperacion() ?>
-    </div>
-
-
+    <?= get_format_recuperacion_pw() ?>
 </div>
 <div class="wrapper_login">
 
@@ -42,11 +13,12 @@
 
 
     <div class="col-lg-4 col-lg-offset-4">
-        <?= div(anchor_enid(
-            img(
-                ["src" => "../img_tema/enid_service_logo.jpg"]),
-            ["href" => "../"],
-            1),
+        <?= div(
+            anchor_enid(
+                img(
+                    ["src" => "../img_tema/enid_service_logo.jpg"]),
+                ["href" => "../"],
+                1),
             ["class" => "col-lg-6 col-lg-offset-3"]
         ) ?>
 

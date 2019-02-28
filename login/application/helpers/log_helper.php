@@ -1,11 +1,52 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function get_mensaje_cuenta($action){
+    function get_format_recuperacion_pw(){
+        $r[] =  anchor_enid("ACCEDER AHORA!",
+            [
+                "class" => "btn_acceder_cuenta_enid a_enid_blue",
+                "id" => "btn_acceder_cuenta_enid",
+                "style" => "color: white!important"
+            ],
+            1
+        );
+        $r[] =  anchor_enid(div(div(img(["src" => "../img_tema/enid_service_logo.jpg"]), ["class" => "col-lg-6 col-lg-offset-3"]), ["class" => "col-lg-4 col-lg-offset-4"]), ["href" => "../"], 1);
 
-        $text =  ($action === "registro") ? div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", ["class" => "mensaje_bienvenida"]) : "";
+        $r[] = get_btw(
+                heading('RECUPERA TUS DATOS DE ACCESO', 3),
+                get_form_recuperacion(),
+            "col-lg-4 col-lg-offset-4"
+
+        );
+        return append_data($r);
+
+    }
+    function get_format_nuevo_usuario()
+    {
+        $r[] = anchor_enid(
+            "ACCEDER AHORA",
+            [
+                "class" => "btn_acceder_cuenta_enid a_enid_blue",
+                "id" => "btn_acceder_cuenta_enid",
+                'style' => "color:white!important"
+
+            ]
+        );
+        $r[] = addNRow(div(div(anchor_enid(img(["src" => "../img_tema/enid_service_logo.jpg"])), ["class" => "col-lg-6 col-lg-offset-3"]), ["class" => "col-lg-4 col-lg-offset-4"]));
+        $r[] = addNRow(div(heading('ÚNETE A ENID SERVICE', 3), ["class" => "col-lg-4 col-lg-offset-4"]));
+        $r[] = div(get_form_registro(), ["class" => "col-lg-4 col-lg-offset-4"]);
+        return append_data($r);
+
+
+    }
+
+    function get_mensaje_cuenta($action)
+    {
+
+        $text = ($action === "registro") ? div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", ["class" => "mensaje_bienvenida"]) : "";
         return $text;
     }
+
     function get_form_recuperacion()
     {
 

@@ -2,18 +2,16 @@
 <?= get_menu_metricas() ?>
 <div class="tab-content">
     <div class="tab-pane fade in active" id="tab_1_actividad">
-        <form class='form_busqueda_desarrollo'>
+        <?=form_open("", ["class"=>'form_busqueda_desarrollo'] )?>
             <?= $this->load->view("../../../view_tema/inputs_fecha_busqueda") ?>
-        </form>
-        <?= place("place_metricas_desarrollo") ?>
+        <?=form_close(place("place_metricas_desarrollo"))?>
     </div>
     <div class="tab-pane fade" id="tab_2_comparativa">
         <?= place("place_metricas_comparativa") ?>
     </div>
     <div class="tab-pane fade" id="tab_3_comparativa">
-        <form class='form_busqueda_desarrollo_solicitudes'>
+        <?=form_open("", ["class"=>'form_busqueda_desarrollo_solicitudes'] )?>
             <?= $this->load->view("../../../view_tema/inputs_fecha_busqueda") ?>
-        </form>
-        <?= place("place_metricas_servicio") ?>
+        <?=form_close(place("place_metricas_servicio"))?>
     </div>
 </div>

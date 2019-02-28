@@ -1,4 +1,4 @@
-<?= br() ?><?= br() ?>
+<?= br(2) ?>
 <div class="col-lg-10 col-lg-offset-1">
     <center>
         <?= heading_enid("Recibe nuestra ubicación", 2, ["class" => "strong"]) ?>

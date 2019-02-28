@@ -1,10 +1,33 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
+
+
+    if (!function_exists('get_format_valoraciones')) {
+        function get_format_valoraciones($valoraciones, $id_usuario, $alcance)
+        {
+
+            $r[] = place("place_ventas_usuario col-lg-9", 0);
+            $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
+            $x[] = $valoraciones;
+            $x[] = br();
+            $x[] = anchor_enid("VER COMENTARIOS",
+                [
+                    "href" => "../recomendacion/?q=" . $id_usuario,
+                    "class" => "a_enid_blue text-center top_10"
+                ]
+            );
+            $x[] = div($alcance, 1);
+            $r[] = div(append_data($x), ["class" => "col-lg-3"]);
+
+            return append_data($r);
+
+        }
+    }
     function crea_alcance($alcance)
     {
 
-        $response =  "";
-        if (is_array($alcance) && count($alcance ) >  0){
+        $response = "";
+        if (is_array($alcance) && count($alcance) > 0) {
             $maximo = $alcance[0]["maximo"];
             $minimo = $alcance[0]["minimo"];
             $promedio = $alcance[0]["promedio"];

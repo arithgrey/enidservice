@@ -1,7 +1,3 @@
-<?php
-$p1 = p("CUÉNTANOS TUS INTERESES PARA  MEJORAR TU EXPERIENCIA");
-$tmp = div(heading_enid("TUS PREFERENCIAS E INTERESES") . $p1, ['class' => "col-lg-4"]);
-?>
 <div class="contenedor_principal_enid">
     <?= div(get_menu(), ["class" => "col-lg-2"]) ?>
     <div class="col-lg-10">

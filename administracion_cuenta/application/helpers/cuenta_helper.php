@@ -2,8 +2,98 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('get_format_privacidad_seguridad')) {
+        function get_format_privacidad_seguridad(){
+
+
+            $x[]    = heading_enid("INFORMACIÓN PERSONAL", 3);
+            $x[]    = hr();
+            $x[]    = place("place_registro_conceptos");
+            $x[]    = place("contenedor_conceptos_privacidad");
+
+            $r[]    =  div(append_data($x),  ["class"=>"col-lg-7"]);
+            $r[]    = div(heading_enid("PRIVACIDAD Y SEGURIDAD", 3), ["class" => "col-lg-5"]);
+
+            return append_data($r);
+        }
+    }
+
+    if (!function_exists('get_format_calma')) {
+        function get_format_calma()
+        {
+
+
+            $r[] = div(append_data(
+                [
+                    heading_enid("MANTEN LA CALMA!", 3),
+                    div("Tu dirección NO  se mostrará públicamente y solo podrán tener acceso a ella, personas que han comprado tus productos o las personas que te enviarán tus compras", 1),
+                    hr(),
+                    place("direcciones")
+                ]
+
+            ), ["class" => "col-lg-7"]);
+
+
+            $r[] = div(
+                append_data([
+                    heading_enid("DIRECCIÓN DE ENVÍO O RECEPCIÓN", 3),
+                    div("El lugar donde compras o recibes tus compras o ventas", 1),
+                    hr()
+
+                ]),
+                ["class" => "col-lg-5"]
+            );
+
+            return append_data($r);
+
+        }
+    }
+    if (!function_exists('get_format_perfil_usuario')) {
+
+        function get_format_perfil_usuario($id_usuario)
+        {
+
+
+            $r[] = div(img([
+                "src" => "../imgs/index.php/enid/imagen_usuario/" . $id_usuario,
+                "onerror" => "this.src='../img_tema/user/user.png'"
+            ]), ["class" => "imagen_usuario_completa"]);
+
+            $r[] = anchor_enid("MODIFICAR", ["class" => "editar_imagen_perfil "]);
+
+            return append_data($r);
+
+        }
+
+    }
+
+    if (!function_exists('get_format_resumen_cuenta')) {
+
+        function get_format_resumen_cuenta($usuario)
+        {
+
+            $r[] = heading_enid("TU CUENTA ENID SERVICE", 3);
+            $r[] = get_format_user($usuario, 1);
+            $r[] = addNRow(div(get_campo($usuario, "email", ""), ["class" => "top_20"], 1));
+            $r[] = addNRow(get_campo($usuario, "tel_contacto", "Tu prime apellido", 1));
+            $r[] = br();
+            $r[] = anchor_enid("MI DIRECCIÓN" . icon('fa  fa-fighter-jet'),
+                ["class" => "a_enid_black btn_direccion top_20",
+                    "href" => "#tab_direccion",
+                    "data-toggle" => "tab"
+                ],
+                1,
+                1);
+            $r[] = hr();
+
+            return append_data($r);
+
+        }
+
+    }
     if (!function_exists('get_form_set_password')) {
-        function get_form_set_password(){
+        function get_form_set_password()
+        {
 
             $r[] = form_open("", ["id" => "form_update_password", "class" => "form-horizontal", "method" => "POST"]);
             $r[] = div("CONTRASEÑA ACTUAL", 1);
