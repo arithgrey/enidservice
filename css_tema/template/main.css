@@ -7287,3 +7287,6 @@ h2 {
 .font_m{
     font-size: 1.5em;
 }
+.focus_error{
+    border: 1px solid rgb(13, 62, 86)!important;
+}
