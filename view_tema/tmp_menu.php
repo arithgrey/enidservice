@@ -1,18 +1,9 @@
 <?php
 
+$privacidad = anchor_enid("Configuración y privacidad", ["href" => "../administracion_cuenta/"]);
+$cerra_session = anchor_enid("Cerrar sessión", ["href" => "../login/index.php/startsession/logout"]);
+$estrellas = str_repeat(span('★', ["class" => "estrella", "style" => "color: #0070dd;"]), 4);
 
-$privacidad =
-	anchor_enid("Configuración y privacidad", ["href" => "../administracion_cuenta/"]);
-
-$cerra_session =
-	anchor_enid("Cerrar sessión", ["href" => "../login/index.php/startsession/logout"]);
-
-
-$estrellas = "";
-for ($a = 0; $a < 4; $a++) {
-	$estrellas .=
-		span('★', ["class" => "estrella", "style" => "color: #0070dd;"]);
-}
 $estrellas .= span('★',
 	[
 		"class" => "estrella",
@@ -35,24 +26,24 @@ $li = [
 
 ?>
 
-<div class="pull-right">
+<div class="text-right">
 	<li class="dropdown  menu_notificaciones_progreso_dia">
+		<?php $class_notificacion = ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid "; ?>
 		<?= anchor_enid(
-			icon("fa fa-bell white") .
-			span("", ["class" => "num_tareas_dia_pendientes_usr"]),
+			get_btw(icon("fa fa-bell white"), div("", ["class" => "num_tareas_dia_pendientes_usr"]), "display_flex_enid"),
 			[
 				"class" => "blue_enid dropdown-toggle",
 				"data-toggle" => "dropdown"
-			]) ?>
-
+			]
+		) ?>
 		<?= ul(
 			[place("place_notificaciones_usuario")],
 			[
-				"class" => "dropdown-menu ",
-				"style" => "width:500px!important;"
+				"class" => "dropdown-menu " . $class_notificacion
 			]
 		) ?>
 	</li>
+
 	<li class="dropdown ">
 		<?= get_img_usuario($id_usuario) ?>
 		<?= ul(

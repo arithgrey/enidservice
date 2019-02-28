@@ -22,7 +22,7 @@ class Home extends CI_Controller
 
 			$param = $this->input->get();
 
-			$clasificaciones_departamentos = $this->principal->get_departamentos("nosotros");
+			$clasificaciones_departamentos = $this->principal->get_departamentos();
 			$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
 
 

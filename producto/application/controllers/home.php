@@ -54,7 +54,7 @@ class Home extends CI_Controller
 		$data = $this->principal->val_session("");
 		$data["clasificaciones_departamentos"] = "";
 		if ($this->agent->is_mobile() == FALSE) {
-			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos("nosotros");
+			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 		}
 		$data["meta_keywords"] = "";
 		$data["desc_web"] = "";
@@ -90,7 +90,7 @@ class Home extends CI_Controller
 
 		$data["clasificaciones_departamentos"] = "";
 		if ($this->agent->is_mobile() == FALSE) {
-			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos("");
+			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 		}
 
 		if ($id_servicio == 0) {
@@ -279,7 +279,7 @@ class Home extends CI_Controller
 		$data = $this->principal->val_session("");
 		$data["clasificaciones_departamentos"] = "";
 		if ($this->agent->is_mobile() == FALSE) {
-			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos("nosotros");
+			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 		}
 
 		$param = $this->input->get();

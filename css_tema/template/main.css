@@ -6610,6 +6610,7 @@ li {
 }
 
 .custom-select {
+    /*
     display: inline-block;
     max-width: 100%;
     height: calc(2.25rem + 2px);
@@ -6624,6 +6625,7 @@ li {
     border-radius: .25rem;
     -moz-appearance: none;
     -webkit-appearance: none
+    */
 }
 
 .a_enid_blue {
@@ -6809,7 +6811,7 @@ input {
 
 #flipkart-navbar {
 
-    background-color: #091d4b;
+    background-color: #0020d1;
     color: #FFFFFF;
 }
 
@@ -6987,16 +6989,9 @@ input {
     .largenav {
         display: block;
     }
-
-    /*
-    .smallnav{
-        display: none;
-    }
-    smallnav
-    .smallsearch{
-        margin: 0px;
-    }
-    */
+    
+    
+    
 }
 
 /*Sidenav*/
@@ -7034,8 +7029,8 @@ input {
 }
 
 @media only screen and (max-width: 768px) {
-
-
+    
+    
     .contenedor-lateral-menu {
         background-color: black;
         position: fixed;
@@ -7219,13 +7214,10 @@ table {
 .btn_guardar {
     border: 0 !important;
 }
-
 .btn_guardar:hover {
     cursor: pointer;
     padding: 10px;
-
 }
-
 ::placeholder {
     text-transform: uppercase;
 }
@@ -7275,9 +7267,7 @@ h2 {
 .white:hover {
     color: white !important;
 }
-.place_notificaciones_usuario{
-    padding:10px;
-}
+
 .display_flex_enid{
     display: flex;
     flex-direction: row;
@@ -7289,4 +7279,24 @@ h2 {
 }
 .focus_error{
     border: 1px solid rgb(13, 62, 86)!important;
+}
+.notificaciones_enid{
+    left: -300px!important;
+}
+.notificaciones_enid_mb{
+    left: -190px!important;
+}
+
+.menu_usuario{
+    left: -180px!important;
+}
+.search_principal_form{
+	display: flex;
+	flex-direction: row;
+}
+.input_select_busqueda{
+    width: 45%!important;
+}
+.flipkart-navbar-button{
+    height: 30px!important;
 }

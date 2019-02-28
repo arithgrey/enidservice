@@ -341,31 +341,5 @@ class Tickets extends REST_Controller
 		$api = "usuario_perfil/es_cliente/format/json/";
 		return $this->principal->api($api, $q);
 	}
-	/*
-	function solicitud_amigo_POST(){
-
-		$param                  =   $this->post();
-		$param["id_usuario"]    =   $this->id_usuario;
-		$response               =   $this->tickets_model->registra_solicitud_pago_amigo($param);
-		$this->response($response);
-	}
-	*/
-	/*
-	function costos_envios_por_recibo_GET(){
-
-		$param              =   $this->get();
-		$id_servicio        =   $this->tickets_model->get_id_servicio_por_id_recibo($param);
-		$flag_envio_gratis  =   $this->tickets_model->get_flag_envio_gratis_por_id_recibo($param);
-		$this->response($flag_envio_gratis);
-	}
-	*/
-	/*
-	function servicio_recibo_GET(){
-
-		$param      =  $this->get();
-		$response   =  $this->tickets_model->get_servicio_por_recibo($param);
-		$this->response($response );
-	}
-	*/
 
 }

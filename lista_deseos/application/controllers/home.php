@@ -17,7 +17,7 @@ class Home extends CI_Controller
 		$data["meta_keywords"] = "";
 		$data["desc_web"] = "";
 		$data["url_img_post"] = "";
-		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos("");
+		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 		$param = $this->input->get();
 
 		if (get_param_def($param, "q") === "preferencias") {

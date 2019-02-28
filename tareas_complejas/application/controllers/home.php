@@ -16,7 +16,7 @@ class Home extends CI_Controller
 		$data["desc_web"] = "";
 		$data["url_img_post"] = create_url_preview("paginas_web_ii.jpeg");
 		$data["f_pago"] = 1;
-		$clasificaciones_departamentos = $this->principal->get_departamentos("nosotros");
+		$clasificaciones_departamentos = $this->principal->get_departamentos();
 		$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
 
 		$data["js"] = [base_url('application/js/principal.js'), "tareas_complejas/principal.css"];

@@ -16,7 +16,7 @@ class Recursocontroller extends CI_Controller
 		$data = $this->principal->val_session("");
 		$id_usuario = $this->principal->get_session("idusuario");
 		$data["usuario"] = $this->principal->get_info_usuario($id_usuario);
-		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos("nosotros");
+		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 
 		$data["js"] = [
 			'administracion_cuenta/principal.js',

@@ -473,18 +473,19 @@ if (!function_exists('create_select')) {
 			$select .= "<option value='" . $valor . "'>" . strtoupper($text_def) . " </option>";
 
 		}
-		foreach ($data as $row) {
+		foreach ($data as $item) {
 			$select .=
-				"<option value='" . $row[$val] . "'>" . strtoupper($row[$text_option]) . " </option>";
+				"<option value='" . $item[$val] . "'>" . strtoupper($item[$text_option]) . " </option>";
 		}
 		$select .= "</select>";
 
-		if ($row == 0) {
+		if ($row < 1) {
 
 			return $select;
+
 		} else {
 
-			return n_row_12() . $select . end_row();
+			return addNRow($select );
 		}
 	}
 }
@@ -1110,7 +1111,7 @@ if (!function_exists('get_logo')) {
 
 			$img_enid = img_enid(["style" => "width: 50px!important;"]);
 			$en_pc = anchor_enid($img_enid, ["href" => "../"]);
-			return div($en_pc, ["class" => "col-lg-1"]);
+			return div($en_pc, ["class" => "padding_5"]);
 		}
 
 	}
@@ -1249,12 +1250,12 @@ if (!function_exists('get_menu_session')) {
 		if ($in_session < 1) {
 
 			$vender = anchor_enid("Vender" . icon("fa fa-shopping-cart"), ["href" => "../login/?action=nuevo", "class" => 'links white']);
-			$envio_msj = anchor_enid("Envía mensaje" . icon("fa fa-paper-plane"), ["href" => "../contact/#envio_msj", "class" => 'links white']);
+
 			$l_session = anchor_enid("Iniciar sesión" . icon("fa fa-user"), ["href" => "../login", "class" => 'links white']);
 
-			$list = [$l_session, $vender];
+			$list = [li($l_session), li($vender)];
 			if ($proceso_compra < 1) {
-				return div(ul($list, ["class" => "largenav pull-right"]), ["class"]);
+				return div(ul($list, ["class" => "largenav "]), ["class" =>"text-right"]);
 			}
 
 

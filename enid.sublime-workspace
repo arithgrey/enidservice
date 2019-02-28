@@ -519,14 +519,6 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "\n\n\n\nLos simples  650 \n\nhttps://www.facebook.com/enidservicemx/videos/951181428404241/\n\n\n\ny estos son en rojo simples 650 \n\nhttps://www.facebook.com/enidservicemx/videos/343785929681973/\n\n\n\nhola 600 con ellas tú hogar se verá como ninguno y todos querrán que les consigas unas 😉 mira aquí hay un video \nhttps://www.facebook.com/enidservicemx/videos/343785929681973/\n\n\n\nEn dobles 850 y en simples 600 y es en alguna estación del metro e igual hacemos envios a domicilio pasame tu whatsApp para quedar\n\n\nhola sip con ellas tú hogar se verá como ninguno y todos querrán que les consigas unas 😉\n\n\nHola sip con ellas tú hogar se verá como ninguno y todos querrán que les consigas unas 😉 las dobles las tenemos en 850 ya sean blancas o negras y en simples rojas o negras en 600 \n\n\n\nLas tenemos en 650 y en negras en 639 quieres ver un video?\n\n\n\n650 así en Rojas y en 600 negras y en dobles en 850 ya sean blancas y negras quieres ver un video?\n\n\n\n\n\nHola las tenemos en 2 modelos dobles en 850  y simples en 600 con ellas tú hogar se verá como ninguno y todos querrán que les consigas unas 😉\n\n\n\n\n\nasí\n\n\n\nDobles 850 y en individuales 600 las quieres ver en video?\n\n\n\nAsí son individuales \nhttps://www.facebook.com/enidservicemx/videos/343785929681973/\n\n\n\n\nMira estos son los dobles blancos y cuestan 850 \n\nhttps://www.facebook.com/enidservicemx/videos/244689246215115/\n\n\n\n\nAsí las dobles negras\nhttps://www.facebook.com/enidservicemx/videos/756862184671703/\n\n\n\n\n",
-			"settings":
-			{
-				"buffer_size": 1453,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -582,8 +574,58 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/var/www/html/inicio"
+	],
 	"file_history":
 	[
+		"/var/www/html/inicio/desarrollo/application/controllers/inicio.php",
+		"/var/www/html/inicio/administracion_cuenta/application/controllers/recursocontroller.php",
+		"/var/www/html/inicio/area_cliente/application/controllers/home.php",
+		"/var/www/html/inicio/compras/application/controllers/home.php",
+		"/var/www/html/inicio/contact/application/controllers/home.php",
+		"/var/www/html/inicio/faq/application/controllers/home.php",
+		"/var/www/html/inicio/lista_deseos/application/controllers/home.php",
+		"/var/www/html/inicio/pedidos/application/controllers/home.php",
+		"/var/www/html/inicio/pregunta/application/controllers/home.php",
+		"/var/www/html/inicio/producto/application/controllers/home.php",
+		"/var/www/html/inicio/puntos_medios/application/controllers/home.php",
+		"/var/www/html/inicio/recomendacion/application/controllers/home.php",
+		"/var/www/html/inicio/search/application/controllers/home.php",
+		"/var/www/html/inicio/sobre_enidservice/application/controllers/home.php",
+		"/var/www/html/inicio/tareas_complejas/application/controllers/home.php",
+		"/var/www/html/inicio/terminos-y-condiciones/application/controllers/home.php",
+		"/var/www/html/inicio/unete_a_nuestro_equipo/application/controllers/home.php",
+		"/var/www/html/inicio/usuarios_enid_service/application/controllers/inicio.php",
+		"/var/www/html/inicio/valoracion/application/controllers/home.php",
+		"/var/www/html/inicio/js_tema/domicilio/domicilio_entrega.js",
+		"/var/www/html/inicio/recomendacion/application/views/home.php",
+		"/var/www/html/inicio/search/application/views/home.php",
+		"/var/www/html/inicio/search/application/views/sin_resultados_tienda.php",
+		"/var/www/html/inicio/administracion_cuenta/application/views/micuenta/cuenta.php",
+		"/var/www/html/inicio/area_cliente/application/views/home.php",
+		"/var/www/html/inicio/contact/application/views/home.php",
+		"/var/www/html/inicio/contact/application/views/preso_compra.php",
+		"/var/www/html/inicio/lista_deseos/application/views/home_sin_productos.php",
+		"/var/www/html/inicio/movimientos/application/views/metodos_disponibles.php",
+		"/var/www/html/inicio/orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php",
+		"/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php",
+		"/var/www/html/inicio/pedidos/application/views/domicilio.php",
+		"/var/www/html/inicio/pedidos/application/views/form_fecha.php",
+		"/var/www/html/inicio/pedidos/application/views/form_fecha_recordatorio.php",
+		"/var/www/html/inicio/planes_servicios/application/views/secciones/form_servicios.php",
+		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
+		"/var/www/html/inicio/producto/application/views/home.php",
+		"/var/www/html/inicio/puntos_medios/application/views/form_horario.php",
+		"/var/www/html/inicio/puntos_medios/application/views/home.php",
+		"/var/www/html/inicio/puntos_medios/application/views/quien_recibe.php",
+		"/var/www/html/inicio/q/application/controllers/api/stock.php",
+		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
+		"/var/www/html/inicio/q/application/views/desarrollo/global_calidad.php",
+		"/var/www/html/inicio/q/application/views/servicio/detalle.php",
+		"/var/www/html/inicio/q/application/views/tickets/detalle.php",
+		"/var/www/html/inicio/system/helpers/html_helper.php",
 		"/var/www/html/config.php",
 		"/var/www/html/inicio (copia)/css_tema/template/vender.css",
 		"/var/www/html/inicio (copia)/css_tema/template/css_tienda.css",
@@ -633,14 +675,11 @@
 		"/var/www/html/inicio/js_tema/js/main.js",
 		"/var/www/html/inicio/q/application/models/actividad_web_model.php",
 		"/var/www/html/inicio/extra_1.sql",
-		"/var/www/html/inicio/pedidos/application/controllers/home.php",
 		"/var/www/html/inicio/planes_servicios/application/helpers/planes_helper.php",
 		"/var/www/html/inicio/movimientos/application/views/agregar_saldo_desde_oxxo.php",
 		"/var/www/html/inicio_3/portafolio/application/models/clasificacion_model.php",
 		"/var/www/html/inicio_3/imgs/application/controllers/enid.php",
 		"/var/www/html/inicio_3/portafolio/application/controllers/api/clasificacion.php",
-		"/var/www/html/inicio/producto/application/controllers/home.php",
-		"/var/www/html/inicio/producto/application/helpers/producto_helper.php",
 		"/var/www/html/inicio/debug/debug.log",
 		"/var/www/html/inicio/q/application/models/serviciosmodel.php",
 		"/var/www/html/inicio/js_tema/planes_servicios/img.js",
@@ -651,77 +690,37 @@
 		"/var/www/html/inicio/q/application/controllers/api/servicio.php",
 		"/var/www/html/inicio/q/application/views/producto/principal.php",
 		"/var/www/html/inicio/q/application/helpers/recibo_helper.php",
-		"/var/www/html/inicio/q/application/controllers/api/usuario.php",
 		"/var/www/html/inicio/q/application/views/cobranza/pago_al_momento.php",
-		"/var/www/html/inicio/pedidos/application/views/domicilio.php",
-		"/var/www/html/inicio/pedidos/application/helpers/pedidos_helper.php",
-		"/var/www/html/inicio/orden_pago_oxxo/application/views/ingresar_saldo_a_cuenta.php",
 		"/var/www/html/inicio/js_tema/puntos_medios/principal.js",
 		"/var/www/html/inicio/q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php",
 		"/var/www/html/inicio/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php",
 		"/var/www/html/inicio/q/application/controllers/api/cobranza.php",
 		"/var/www/html/inicio/q/application/controllers/api/usuario_punto_encuentro.php",
-		"/var/www/html/inicio/puntos_medios/application/views/home.php",
-		"/var/www/html/inicio/puntos_medios/application/views/quien_recibe.php",
 		"/var/www/html/inicio/q/application/models/imagen_servicio_model.php",
-		"/var/www/html/inicio/puntos_medios/application/controllers/home.php",
 		"/var/www/html/inicio/q/application/helpers/lineametro_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/punto_encuentro.php",
 		"/var/www/html/inicio/q/application/controllers/api/linea_metro.php",
 		"/var/www/html/inicio/q/application/helpers/puntoencuentro_helper.php",
 		"/var/www/html/inicio/q/application/controllers/api/recibo.php",
-		"/var/www/html/inicio/js_tema/domicilio/domicilio_entrega.js",
 		"/var/www/html/inicio/producto/application/views/pre.php",
 		"/var/www/html/inicio/pedidos/application/views/seguimiento.php",
 		"/var/www/html/inicio/procesar/application/views/secciones_2/domicilio_entrega.php",
 		"/var/www/html/inicio/procesar/application/controllers/home.php",
 		"/var/www/html/inicio/js_tema/js/direccion.js",
-		"/var/www/html/inicio/js_tema/domicilio/direccion_pedido_registrado.js",
-		"/var/www/html/inicio/planes_servicios/application/controllers/inicio.php",
-		"/var/www/html/inicio/procesar/application/views/secciones_2/paginas_web.php",
-		"/var/www/html/inicio/js_tema/procesar/principal.js",
-		"/var/www/html/inicio/reporte_enid/application/controllers/inicio.php",
-		"/var/www/html/inicio/recomendacion/application/controllers/home.php",
-		"/var/www/html/inicio/pregunta/application/controllers/home.php",
-		"/var/www/html/inicio/orden_pago_oxxo/application/controllers/home.php",
-		"/var/www/html/inicio/msj/application/controllers/api/presentacion.php",
-		"/var/www/html/inicio/msj/application/controllers/api/pregunta.php",
-		"/var/www/html/inicio/msj/application/controllers/api/mailrest.php",
-		"/var/www/html/inicio/movimientos/application/controllers/inicio.php",
-		"/var/www/html/inicio/login/application/controllers/startsession.php",
-		"/var/www/html/inicio/lista_deseos/application/controllers/home.php",
-		"/var/www/html/inicio/forma_pago/application/controllers/home.php",
-		"/var/www/html/inicio/faq/application/controllers/home.php",
-		"/var/www/html/inicio/desarrollo/application/controllers/inicio.php",
-		"/var/www/html/inicio/contact/application/controllers/home.php",
-		"/var/www/html/inicio/area_cliente/application/controllers/home.php",
-		"/var/www/html/inicio/administracion_cuenta/application/controllers/recursocontroller.php",
-		"/var/www/html/inicio/search/application/controllers/home.php",
-		"/var/www/html/inicio/sobre_enidservice/application/controllers/home.php",
-		"/var/www/html/inicio/tareas/application/controllers/home.php",
-		"/var/www/html/inicio/tareas_complejas/application/controllers/home.php",
-		"/var/www/html/inicio/terminos-y-condiciones/application/controllers/home.php",
-		"/var/www/html/inicio/unete_a_nuestro_equipo/application/controllers/home.php",
-		"/var/www/html/inicio/usuarios_enid_service/application/controllers/inicio.php",
-		"/var/www/html/inicio/valoracion/application/controllers/home.php",
-		"/var/www/html/inicio/librerias/Format.php",
-		"/var/www/html/inicio/librerias/principal.php",
-		"/var/www/html/inicio/librerias/REST_Controller.php",
-		"/var/www/html/inicio/librerias/restclient.php",
-		"/var/www/html/inicio/librerias/sessionclass.php",
-		"/var/www/html/inicio/system/libraries/Pagination.php",
-		"/var/www/html/inicio/programacion/resumen_dia.php",
-		"/var/www/html/inicio/q/application/controllers/api/objetivos.php"
+		"/var/www/html/inicio/js_tema/domicilio/direccion_pedido_registrado.js"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
 		"height": 116.0,
 		"where_history":
 		[
+			"*.php",
+			"*.js",
+			"*.php",
 			"",
 			"*.php",
 			"*.js",
@@ -846,9 +845,6 @@
 			"*.php",
 			"",
 			"*.php",
-			"",
-			"*.js",
-			"*.php",
 			""
 		]
 	},
@@ -857,6 +853,36 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"$this->principal->get_departamentos",
+			"$this->principal->get_departamentos(\"\",1);",
+			"$this->principal->get_departamentos(\"\");",
+			"recibo",
+			"<?=",
+			"?>",
+			"costo",
+			"?>",
+			"<?=",
+			"?>",
+			"<?=",
+			"\t.",
+			"<?=",
+			"?>",
+			"<?=",
+			"bro",
+			"?>",
+			"<?=",
+			"?>",
+			"<?=",
+			"?>",
+			"<?=",
+			"form_puntos_medios_avanzado",
+			"?>",
+			"<?=",
+			"?>",
+			"<?=",
+			"<br>",
+			"?>",
+			"<?=",
 			"global_xss_filtering",
 			"><",
 			"./",
@@ -954,37 +980,7 @@
 			"linea_metro_GET",
 			"response_estaciones",
 			"place_lineas",
-			"muestra_lineas_metro",
-			"muestra_estaciones",
-			"linea_metro",
-			"formulario_quien_recibe",
-			"form_puntos_medios",
-			"puntos_medios",
-			"form_pre_puntos_medios",
-			"form_puntos",
-			"form_puntos_medios",
-			"agregar_punto_encuentro_pedido",
-			"form_pre_puntos_medios",
-			"num_ciclos",
-			"$num_ciclos_contratados",
-			"form_pre_puntos_medios",
-			"carga_opcion_entrega",
-			"carga_opcion_entrega(",
-			"agregar_punto_encuentro_pedido",
-			"Agregar punto",
-			"url_seguimiento",
-			"carga_ficha_direccion_envio",
-			"post",
-			"form_registro_direccion",
-			"agregar_direccion_pedido",
-			"TUS DIRECCIONES DE ENTREGA REGISTRADAS",
-			"Agregar dirección",
-			"form_orden_direccion",
-			"view_recibo_registrado",
-			"form_registro_direccion",
-			"agregar_direccion_pedido",
-			"agregar_punto_encuentro_pedido",
-			"Agregar punto de encuentro"
+			"muestra_lineas_metro"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -992,6 +988,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"$this->principal->get_departamentos();",
+			"<?=br()?>",
 			"<?php include(\"../config/config.php\");",
 			"<?php include(\"../../../config.php\");",
 			"<?php include(\"../../config.php\");",
@@ -1025,37 +1023,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1453,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1092,
-								1092
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 743.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

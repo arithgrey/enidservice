@@ -25,7 +25,7 @@ class Home extends CI_Controller
 			$data["action"] = $this->input->get("action");
 			$valoraciones = $this->resumen_valoraciones($data["id_usuario"]);
 			$data["valoraciones"] = $valoraciones["info_valoraciones"];
-			$class_departamentos = $this->principal->get_departamentos("nosotros");
+			$class_departamentos = $this->principal->get_departamentos();
 			$data["clasificaciones_departamentos"] = $class_departamentos;
 			$alcance = $this->get_alcance($data["id_usuario"]);
 			$data["alcance"] = crea_alcance($alcance);

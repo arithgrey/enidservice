@@ -88,7 +88,7 @@ class Home extends CI_Controller
 			$data["faqs_categoria"] = $resumen_respuestas;
 
 		}
-		$clasificaciones_departamentos = $this->principal->get_departamentos("nosotros");
+		$clasificaciones_departamentos = $this->principal->get_departamentos();
 		$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
 		$data = $this->getCssJs($data);
 		$this->principal->show_data_page($data, 'home');

@@ -17,7 +17,7 @@ class Home extends CI_Controller
 		$data["meta_keywords"] = "";
 		$data["desc_web"] = "";
 		$data["url_img_post"] = create_url_preview("");
-		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos("nosotros");
+		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 		$vista = "secciones/terminos_condiciones";
 		$titulo = "TÉRMINOS Y CONDICIONES";
 		$data["vista"] = $vista;
