@@ -53,7 +53,7 @@ class Home extends CI_Controller
 
 		} else {
 
-			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos("");
+			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 
 		}
 

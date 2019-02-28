@@ -62,7 +62,7 @@ class principal extends CI_Controller
 		$this->sessionclass->logout();
 	}
 
-	function get_departamentos($param = '', $format_html = 1)
+	function get_departamentos($format_html = 1)
 	{
 
 		if ($format_html == 1) {

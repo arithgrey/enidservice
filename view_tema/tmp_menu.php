@@ -26,7 +26,7 @@ $li = [
 
 ?>
 
-<div class="pull-right">
+<div class="text-right">
 	<li class="dropdown  menu_notificaciones_progreso_dia">
 		<?php $class_notificacion = ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid "; ?>
 		<?= anchor_enid(

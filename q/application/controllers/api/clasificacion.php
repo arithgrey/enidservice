@@ -41,14 +41,13 @@ class Clasificacion extends REST_Controller
 
 		$param = $this->get();
 		$param["nivel"] = 1;
-		$primer_nivel = $this->clasificacion_model->get_clasificaciones_por_nivel($param);
-		$clasificaciones = $this->clasificacion_model->get_clasificaciones_segundo($primer_nivel);
+		$clasificacion = $this->clasificacion_model->get_clasificaciones_segundo($this->clasificacion_model->get_clasificaciones_por_nivel($param));
 
 
 		$select = create_select(
-			$clasificaciones,
+			$clasificacion,
 			"q2",
-			"custom-select",
+			"form-control input-sm input_select_busqueda",
 			"id_clasificacion",
 			"nombre_clasificacion",
 			"id_clasificacion",
@@ -105,6 +104,12 @@ class Clasificacion extends REST_Controller
 		$this->response($response);
 	}
 
+	private function get_clasificaciones_destacadas($q)
+	{
+		$api = "servicio/clasificaciones_destacadas/format/json/";
+		return $this->principal->api($api, $q);
+	}
+
 	function clasificaciones_nivel_GET()
 	{
 
@@ -159,6 +164,20 @@ class Clasificacion extends REST_Controller
 
 		}
 		$this->response($response);
+	}
+
+	private function get_tipo_talla()
+	{
+
+		$q["info"] = 1;
+		$api = "tipo_talla/index/format/json/";
+		return $this->principal->api($api, $q);
+	}
+
+	private function set_clasificacion_talla($q)
+	{
+		$api = "tipo_talla/clasificacion";
+		return $this->principal->api($api, $q, "json", "PUT");
 	}
 
 	function tipo_talla_GET()
@@ -316,44 +335,10 @@ class Clasificacion extends REST_Controller
 		$this->response($response);
 	}
 
-	private function create_easy_buttons_tallas($data_complete)
+	function get_tallas_servicio($q)
 	{
-		$config =
-			[
-				'class_selected' => 'talla_seleccionada talla_servicio',
-				'class_disponible' =>
-					'talla_disponible talla_servicio',
-				'text_button' => 'talla',
-				'campo_comparacion' => 'en_servicio',
-				'valor_esperado' => 1,
-				'valor_id' => 'id_talla'
-			];
-
-
-		$easy_butons = create_button_easy_select($data_complete["tallas_servicio"], $config);
-		$easy_butons = add_element($easy_butons, "div", ['class' => 'contenedor_tallas_disponibles']);
-		$titulo = add_element("TALLAS QUE TIENES DISPONIBLES", "div", ['class' => 'titulo_talla']);
-		$easy_butons = add_element($titulo . $easy_butons, "div", ['class' => 'contenedor_tallas']);
-		$data_complete["options"] = $easy_butons;
-		return $data_complete;
-	}
-
-	private function get_tallas_en_servicio($tallas_disponibles, $tallas_en_servicio_json)
-	{
-
-		$array_tallas_en_servicio = get_array_json($tallas_en_servicio_json);
-		sort($array_tallas_en_servicio);
-		$data_complete = [];
-		$a = 0;
-		foreach ($tallas_disponibles as $row) {
-			$data_complete[$a] = $row;
-			$talla = $row["talla"];
-			$id_talla = $row["id_talla"];
-			$data_complete[$a]["en_servicio"]
-				= (in_array($id_talla, $array_tallas_en_servicio)) ? 1 : 0;
-			$a++;
-		}
-		return $data_complete;
+		$api = "servicio/tallas/format/json/";
+		return $this->principal->api($api, $q);
 	}
 
 	private function quita_cero_clasificacacion($clasificaciones)
@@ -378,18 +363,44 @@ class Clasificacion extends REST_Controller
 		return $this->principal->api($api, $q);
 	}
 
-	function get_tallas_servicio($q)
+	private function get_tallas_en_servicio($tallas_disponibles, $tallas_en_servicio_json)
 	{
-		$api = "servicio/tallas/format/json/";
-		return $this->principal->api($api, $q);
+
+		$array_tallas_en_servicio = get_array_json($tallas_en_servicio_json);
+		sort($array_tallas_en_servicio);
+		$data_complete = [];
+		$a = 0;
+		foreach ($tallas_disponibles as $row) {
+			$data_complete[$a] = $row;
+			$talla = $row["talla"];
+			$id_talla = $row["id_talla"];
+			$data_complete[$a]["en_servicio"]
+				= (in_array($id_talla, $array_tallas_en_servicio)) ? 1 : 0;
+			$a++;
+		}
+		return $data_complete;
 	}
 
-	private function get_tipo_talla()
+	private function create_easy_buttons_tallas($data_complete)
 	{
+		$config =
+			[
+				'class_selected' => 'talla_seleccionada talla_servicio',
+				'class_disponible' =>
+					'talla_disponible talla_servicio',
+				'text_button' => 'talla',
+				'campo_comparacion' => 'en_servicio',
+				'valor_esperado' => 1,
+				'valor_id' => 'id_talla'
+			];
 
-		$q["info"] = 1;
-		$api = "tipo_talla/index/format/json/";
-		return $this->principal->api($api, $q);
+
+		$easy_butons = create_button_easy_select($data_complete["tallas_servicio"], $config);
+		$easy_butons = add_element($easy_butons, "div", ['class' => 'contenedor_tallas_disponibles']);
+		$titulo = add_element("TALLAS QUE TIENES DISPONIBLES", "div", ['class' => 'titulo_talla']);
+		$easy_butons = add_element($titulo . $easy_butons, "div", ['class' => 'contenedor_tallas']);
+		$data_complete["options"] = $easy_butons;
+		return $data_complete;
 	}
 
 	function coincidencia_servicio_GET()
@@ -397,18 +408,6 @@ class Clasificacion extends REST_Controller
 		$param = $this->get();
 		$response = $this->clasificacion_model->get_coincidencia($param);
 		$this->response($response);
-	}
-
-	private function get_clasificaciones_destacadas($q)
-	{
-		$api = "servicio/clasificaciones_destacadas/format/json/";
-		return $this->principal->api($api, $q);
-	}
-
-	private function set_clasificacion_talla($q)
-	{
-		$api = "tipo_talla/clasificacion";
-		return $this->principal->api($api, $q, "json", "PUT");
 	}
 	/*
 	function tipo_tallas_GET(){

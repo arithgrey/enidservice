@@ -21,7 +21,7 @@ class Home extends CI_Controller
 			$data["meta_keywords"] = '';
 			$data["desc_web"] = "";
 			$data["url_img_post"] = create_url_preview("");
-			$clasificaciones_departamentos = $this->principal->get_departamentos("nosotros");
+			$clasificaciones_departamentos = $this->principal->get_departamentos();
 			$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
 
 

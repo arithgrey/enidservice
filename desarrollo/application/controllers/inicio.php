@@ -17,9 +17,8 @@ class Inicio extends CI_Controller
 		$num_perfil = $this->principal->getperfiles(2, "idperfil");
 		$data["num_departamento"] = $this->get_id_departamento_by_id_perfil($num_perfil);
 		$data["departamentos"] = $this->get_departamentos_enid();
-		$data["clasificaciones_departamentos"]
-			= $this->principal->get_departamentos("", 1);
-		//$x                          =   ($num_perfil == 20 ) ? header("location:../area_cliente") : "";
+		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos(1);
+
 		$activa = get_info_variable($this->input->get(), "q");
 		$data["activa"] = ($activa === "") ? 1 : $activa;
 		$data = $this->getCssJS($data);
