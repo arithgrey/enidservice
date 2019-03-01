@@ -1,6 +1,129 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    if (!function_exists('get_format_cuentas_existentes')) {
+
+        function get_format_cuentas_existentes($cuentas_gravadas)
+        {
+            return div(anchor_enid(agrega_cuentas_existencia($cuentas_gravadas),
+                [
+                    "href" => "?q=transfer&action=1&seleccion=1",
+                    "class" => "white",
+                    "style" => "color: white!important;background:#004faa;padding: 3px;"
+                ]), ["style" => "width: 80%;margin: 0 auto;margin-top: 20px;"]);
+
+        }
+
+    }
+    if (!function_exists('get_format_fondos')) {
+        function get_format_fondos($saldo_disponible)
+        {
+
+            $response = div(div("AUN NO CUENTAS CON FONDOS EN TU CUENTA",
+                [
+                    "style" => "border-radius:20px;background: black;padding:10px;color: white;"
+                ]), ["style" => "width: 80%;margin: 0 auto;margin-top: 20px;"]);
+
+
+            if ($saldo_disponible > 100) {
+
+                $response = div(div("CONTINUAR " . icon("fa fa-chevron-right"),
+                    [
+                        "class" => "btn_transfer",
+                        "style" => "border-radius: 20px;background: black;padding: 10px;color: white;"
+                    ]),
+                    ["style" => "width: 80%;margin: 0 auto;margin-top: 20px;"]);
+
+
+            }
+            return $response;
+
+
+        }
+
+    }
+    if (!function_exists('get_format_saldo_disponible')) {
+        function get_format_saldo_disponible($saldo_disponible)
+        {
+
+            return ul([
+                div(icon('icon fa fa-money'), ["class" => "icon"]),
+                div("Saldo disponible"),
+                heading_enid("$" . number_format(get_data_saldo($saldo_disponible), 2) . "MXN", 2, ["class" => "value white"]),
+                div("Monto expresado en Pesos Mexicanos")
+            ]);
+
+        }
+    }
+    if (!function_exists('get_format_agregar_saldo_cuenta')) {
+        function get_format_agregar_saldo_cuenta()
+        {
+
+            $r[] = heading_enid("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR ", 3);
+            $r[] = get_format_pago_efectivo();
+            $r[] = get_format_solicitud_amigo();
+            return append_data($r);
+
+        }
+    }
+    if (!function_exists('get_format_solicitud_amigo')) {
+        function get_format_solicitud_amigo()
+        {
+
+            return anchor_enid(get_btw(
+
+                div("SOLICITA SALDO A UN AMIGO",
+                    [
+                        "class" => "tipo_pago underline"
+                    ]
+                    ,
+                    1
+                ),
+
+                div(
+                    "Pide a un amigo que te transfira saldo desde su cuenta",
+                    [
+                        "style" => "text-decoration: underline;",
+                        "class" => "tipo_pago_descripcion"
+                    ]
+                    ,
+                    1),
+
+                "option_ingresar_saldo"
+
+            ), ["href" => "?q=transfer&action=9"]);
+
+        }
+    }
+    if (!function_exists('get_format_pago_efectivo')) {
+
+        function get_format_pago_efectivo()
+        {
+
+            return anchor_enid(get_btw(
+
+                div("UN PAGO EN EFECTIVO EN OXXO ",
+                    [
+                        "class" => "tipo_pago",
+                        "style" => "text-decoration: underline;color: black"
+                    ],
+                    1),
+
+                div(
+                    "Depositas 
+						saldo a tu cuenta de Enid service desde  cualquier sucursal de oxxo ",
+                    ["class" => "tipo_pago_descripcion"],
+                    1),
+
+                "option_ingresar_saldo tipo_pago"
+
+            ), ["href" => "?q=transfer&action=7"]);
+
+
+        }
+
+    }
     if (!function_exists('get_form_pago_oxxo')) {
         function get_form_pago_oxxo($id_usuario)
         {

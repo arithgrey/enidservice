@@ -1,6 +1,27 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    function get_format_olvide_pw($action){
+
+        $r[] = place("place_acceso_sistema top_20 bottom_20");
+        $r[] = anchor_enid(
+            "¿OLVIDASTE TU CONTRASEÑA?",
+            [
+                "id" => "olvide-pass",
+                "class" => "recupara-pass  olvide_pass "
+            ],
+            1
+        );
+        $r[] = anchor_enid(
+            div(strong("¿ERES NUEVO?", ["class" => "black"]) . "  REGISTRA UNA AHORA!", ['class' => 'llamada-a-la-accion '])
+            ,
+            ['class' => 'registrar-cuenta registrar_cuenta']
+        ) ;
+        $r[] = get_mensaje_cuenta($action);
+        return append_data($r);
+
+    }
     function get_format_recuperacion_pw(){
         $r[] =  anchor_enid("ACCEDER AHORA!",
             [
