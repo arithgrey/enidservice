@@ -7,6 +7,7 @@ services:
       volumes:
            - ./:/var/www/html
            - ./site.conf:/etc/nginx/conf.d/site.conf
+           - ../logs:/var/log/
       extra_hosts:
           - "backend.de.com:127.0.0.1"      
       environment:

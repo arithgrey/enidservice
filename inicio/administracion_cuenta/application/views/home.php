@@ -20,7 +20,7 @@
                 <?= get_format_privacidad_seguridad() ?>
             </div>
             <div class="tab-pane " id="tab_direccion">
-                <?= get_format_calma ?>
+                <?= get_format_calma() ?>
             </div>
         </div>
     </div>
