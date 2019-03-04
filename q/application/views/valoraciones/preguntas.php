@@ -1,5 +1,4 @@
 <?= get_titulo_modalidad($modalidad) ?>
-<?= n_row_12() ?>
 <?php
 $l = "";
 foreach ($preguntas as $row) {
@@ -31,4 +30,3 @@ foreach ($preguntas as $row) {
 }
 ?>
 <?= $l; ?>
-<?= end_row() ?>

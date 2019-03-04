@@ -3,8 +3,6 @@
 <?= get_mensaje_compra($modalidad, $ordenes) ?>
 <?= evalua_texto_envios_compras($modalidad, count($ordenes), $status) ?>
 
-
-
 <?php
 
 if (is_array($ordenes)) {
@@ -34,7 +32,7 @@ if (is_array($ordenes)) {
 
 		$id_error = "imagen_" . $id_servicio;
 		?>
-		<?= n_row_12() ?>
+
 		<div class="contenedor_articulo">
 
 			<?= div(
@@ -60,7 +58,7 @@ if (is_array($ordenes)) {
 		
 		
 		</div>
-		<?= end_row() ?>
+		
 
 	<?php }
 } ?>

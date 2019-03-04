@@ -1,4 +1,4 @@
-jaja<?php
+<?php
 
 $franja_horaria = get_franja_horaria();
 $lista_fechas = get_arreglo_valor($info_global, "fecha");
@@ -30,14 +30,11 @@ foreach ($franja_horaria as $row) {
 
 
 ?>
-
 <?= br() ?>
 <?= div("Atención al cliente/ tareas resueltas", ["class" => "blue_enid_background white padding_10"], 1) ?>
-<?= n_row_12() ?>
-	<div style='overflow-x:auto;' class="text-center">
-		<table class='table_enid_service text-center' border="1">
-			<?= $fechas; ?>
-			<?= $list ?>
-		</table>
-	</div>
-<?= end_row() ?>
+<div style='overflow-x:auto;' class="text-center">
+	<table class='table_enid_service text-center' border="1">
+		<?= $fechas; ?>
+		<?= $list ?>
+	</table>
+</div>

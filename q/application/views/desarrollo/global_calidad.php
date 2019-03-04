@@ -21,27 +21,24 @@ foreach ($info_global["lista_fechas"] as $row) {
 	$lista_terminos .= get_td($valor_terminos, $style);
 }
 ?>
-
 <?= div("Atención al cliente/ tareas resueltas",
 	["class" => "blue_enid_background white"],
 	1) ?>
 <?= br() ?>
-<?= n_row_12() ?>
-	<div style='overflow-x:auto;'>
-		<table class='table_enid_service text-center' border="1" width="100%">
-			<tr class='f-enid' style="background: #0022B7;color: white;">
-				<?= $lista_fechas_text ?>
-			</tr>
-			<tr>
-				<?= get_td("Solicitudes", $style_solicitudes); ?>
-				<?= get_td($totales_solicitudes, $style_solicitudes) ?>
-				<?= $lista_solicitudes ?>
-			</tr>
-			<tr>
-				<?= get_td("Términos", $style_terminos) ?>
-				<?= get_td($totales_realizadas, $style_terminos); ?>
-				<?= $lista_terminos ?>
-			</tr>
-		</table>
-	</div>
-<?= end_row() ?>
+<div style='overflow-x:auto;'>
+	<table class='table_enid_service text-center' border="1" width="100%">
+		<tr class='f-enid' style="background: #0022B7;color: white;">
+			<?= $lista_fechas_text ?>
+		</tr>
+		<tr>
+			<?= get_td("Solicitudes", $style_solicitudes); ?>
+			<?= get_td($totales_solicitudes, $style_solicitudes) ?>
+			<?= $lista_solicitudes ?>
+		</tr>
+		<tr>
+			<?= get_td("Términos", $style_terminos) ?>
+			<?= get_td($totales_realizadas, $style_terminos); ?>
+			<?= $lista_terminos ?>
+		</tr>
+	</table>
+</div>

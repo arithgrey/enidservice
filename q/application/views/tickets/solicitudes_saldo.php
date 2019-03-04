@@ -1,10 +1,8 @@
 <?= div(heading_enid("ULTIMOS MOVIMIENTOS", 1, ["class" => "titulo_enid"]), ["class" => "jumbotron"]) ?>
-<?= n_row_12(); ?>
 <?php if (count($solicitud_saldo) > 0): ?>
 	<?= div("SOLICITUDES DE SALDO A TUS AMIGOS", ["class" => 'titulo_enid_sm_sm']) ?>
 <?php endif; ?>
 <?php foreach ($solicitud_saldo as $row): ?>
-	<?= n_row_12(); ?>
 	<div class='list-group-item-movimiento '>
 		<table style='width:100%'>
 			<tr>
@@ -23,7 +21,4 @@
 			</tr>
 		</table>
 	</div>
-	<?= end_row(); ?>
-
 <?php endforeach; ?>
-<?= end_row(); ?>

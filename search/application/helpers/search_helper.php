@@ -8,8 +8,6 @@ if (!function_exists('invierte_date_time')) {
         $response =  [];
 		foreach ($param as $row) {
 
-			//$primer_nivel = $row["primer_nivel"];
-			//$total = $row["total"];
 			$nombre_clasificacion = $row["nombre_clasificacion"];
 
 			if ($z == 0) {
@@ -29,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
 	function crea_menu_principal_web($param)
 	{
 
-		//$nombres_primer_nivel = $param["nombres_primer_nivel"];
+
 		$z = 0;
 		$data_complete = [];
 

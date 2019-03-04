@@ -26,9 +26,10 @@ $tipo_talla = heading_enid(
 		<?= div(append_data([$tipo_talla, $msj_clasificaciones, $clasificaciones_existentes]), ["class" => "row agregadas"]) ?>
 	</div>
 	<div class="col-lg-3 ">
-		<div class="row sugerencias">
-			<?= heading_enid("CLASIFICACIONES", 3) ?>
-			<?= get_form_clasificacion_talla() ?>
-		</div>
+		<?= get_btw(
+			heading_enid("CLASIFICACIONES", 3),
+			get_form_clasificacion_talla(),
+			"row sugerencias"
+		) ?>
 	</div>
 </div>

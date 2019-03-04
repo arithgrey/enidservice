@@ -1,6 +1,18 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+	if (!function_exists('get_form_monto_pago')) {
+
+
+		function get_form_monto_pago($info_pago){
+
+			$r[] =  heading("MONTO A PAGAR") ;
+			$r[] =  heading("$" . $info_pago["q"] . "MXN") ;
+			$r[] =  div("OXXO Cobrará una comisión adicional al momento de realizar el pago") ;
+			return append_data($r);
+		}
+
+	}
 	if (!function_exists('get_form_saldos')) {
 		function get_form_saldos($beneficiario, $folio, $monto, $concepto)
 		{

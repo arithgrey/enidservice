@@ -1,7 +1,38 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+	if (!function_exists('get_formar_hiddens')) {
 
+		function get_formar_hiddens($is_mobile,$action,$extra_servicio){
+
+
+			$r[] = input_hidden(
+			    [
+
+			        "name" => "version_movil",
+			        "value" => $is_mobile,
+			        "class" => 'es_movil'
+			    ]
+			);
+			$r[] = input_hidden(
+			    [
+
+			        "value" => $action,
+			        "class" => "q_action"
+			    ]
+			);
+			$r[] = input_hidden(
+			    [
+
+			        "value" => $extra_servicio,
+			        "class" => "extra_servicio"
+			    ]
+			);
+
+			return append_data($r);
+
+		}
+	}
     if (!function_exists('get_places')) {
         function get_places($class=1)
         {

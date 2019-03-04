@@ -30,7 +30,7 @@ foreach ($info_envio_direccion as $row) {
 	$direccion_visible = "";
 	$id_codigo_postal = $row["id_codigo_postal"];
 	$pais = $row["pais"];
-	$id_pais =  $row["id_pais"];
+	$id_pais = $row["id_pais"];
 }
 ?>
 
@@ -101,7 +101,7 @@ foreach ($info_envio_direccion as $row) {
 				"district pais_c"
 			) ?>
 			<?= input_hidden([
-				"name"  => "pais",
+				"name" => "pais",
 				"value" => $id_pais
 			]) ?>
 

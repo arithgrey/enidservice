@@ -1,33 +1,27 @@
-<?= n_row_12() ?>
 <?= crea_tabla_resumen_ticket($info_ticket, $info_num_tareas); ?>
-<?= end_row() ?>
-<?= n_row_12() ?>
-<div class="col-lg-8">
-</div>
-<div class="col-lg-4">
-	<table class="top_20 ">
-		<tr>
-			<?= get_td(div("+ AGREGAR",
-				["class" => "blue_enid_background btn_agregar_tarea padding_1 white cursor_pointer"])) ?>
-			<?= get_td(valida_mostrar_tareas($info_tareas)) ?>
-		</tr>
-	</table>
-</div>
-<?= end_row() ?>
+	<div class="col-lg-8">
+	</div>
+	<div class="col-lg-4">
+		<table class="top_20 ">
+			<tr>
+				<?= get_td(div("+ AGREGAR",
+					["class" => "blue_enid_background btn_agregar_tarea padding_1 white cursor_pointer"])) ?>
+				<?= get_td(valida_mostrar_tareas($info_tareas)) ?>
+			</tr>
+		</table>
+	</div>
 <?= br() ?>
-<hr>
-<?= n_row_12() ?>
-<div class="seccion_nueva_tarea top_20">
-	<?= heading_enid("SOLICITAR TAREA", 1) ?>
-	<?= n_row_12() ?>
-	<form class='form_agregar_tarea'>
-		<?= div("-", ["id" => "summernote", "class" => "summernote"], 1) ?>
-		<?= input_hidden(["class" => 'tarea_pendiente', "name" => 'tarea']) ?>
-		<?= guardar("Solicitar", [], 1) ?>
-	</form>
-	<?= end_row() ?>
-</div>
-<?= end_row() ?>
+	<hr>
+
+	<div class="seccion_nueva_tarea top_20">
+		<?= heading_enid("SOLICITAR TAREA", 1) ?>
+		<form class='form_agregar_tarea'>
+			<?= div("-", ["id" => "summernote", "class" => "summernote"], 1) ?>
+			<?= input_hidden(["class" => 'tarea_pendiente', "name" => 'tarea']) ?>
+			<?= guardar("Solicitar", [], 1) ?>
+		</form>
+	</div>
+
 <?php
 $z = 1;
 $l = "";
@@ -61,7 +55,7 @@ foreach ($info_tareas as $row) {
 	?>
 	<div>
 		<div class='<?= $estado_tarea ?> top_20 contenedor_tarea_ticket listado_pendientes'>
-			<?= n_row_12() ?>
+
 			<table>
 				<tr>
 					<?= get_td($nombre_usuario_registro, ["class" => "usuario_abre_tarea"]) ?>
@@ -91,7 +85,7 @@ foreach ($info_tareas as $row) {
 					) ?>
 				</tr>
 			</table>
-			<?= end_row() ?>
+
 			<?= place($seccion_respuesta_num, ["id" => $id_tarea]) ?>
 		</div>
 		<hr>

@@ -2,6 +2,31 @@
 if (!function_exists('invierte_date_time')) {
 
 
+	if (!function_exists('get_form_proceso_compra')) {
+
+		function get_form_proceso_compra(){
+
+			$r[] =  '<form action="../contact/?w=1" method="post" class="form_proceso_compra">';
+			$r[] =  input_hidden(["class" => "proceso_compra", "value" => 1, "name" => "proceso_compra"]);
+			$r[] = form_close();
+			return append_data($r);
+
+		}
+
+	}
+	if (!function_exists('format_direccion')) {
+
+		function format_direccion($ubicacion,$departamentos, $nombre, $email, $telefono){
+
+			$r[] =  get_format_visitanos($ubicacion) ;
+	        $r[] =  format_direccion_map($ubicacion) ;
+	        $r[] =  get_form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono) ;
+
+	        return append_data($r);
+
+		}
+
+	}
     if (!function_exists('format_direccion_map')) {
         function format_direccion_map($ubicacion)
         {

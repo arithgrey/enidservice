@@ -57,10 +57,13 @@ $text_precio_unidad = $i_precio_unidad . "PRECIO POR UNIDAD: $" . $precio . "MXN
 <?= get_btw(heading_enid($text_comision_venta, 4), heading_enid("GANANCIA FINAL " . $utilidad . "MXN"), "contenedor_inf_servicios contenedor_inf_servicios_precios_finales") ?>
 <?= hr() ?>
 <?php if ($flag_servicio < 1): ?>
-	<div class="contenedor_inf_servicios seccion_ventas_mayoreo top_50">
-		<?= heading_enid($text_envios_mayoreo, 4) ?>
-		<?= get_seccion_ventas_mayoreo($venta_mayoreo) ?>
-	</div>
+
+
+	<?= get_btw(
+		heading_enid($text_envios_mayoreo, 4),
+		get_seccion_ventas_mayoreo($venta_mayoreo),
+		"contenedor_inf_servicios seccion_ventas_mayoreo top_50"
+	) ?>
 	<div class="contenedor_pago_ml top_50">
 		<?= heading_enid("¿CUENTAS CON ALGÚN ENLACE DE PAGO EN MERCADO LIBRE?", 4) ?>
 		<?= input([

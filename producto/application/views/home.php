@@ -69,12 +69,10 @@ $estrellas = anchor_enid(div("", $config), ['class' => 'lee_valoraciones', 'href
         <div class="col-lg-8">
             <div class="col-lg-8">
                 <div class="row">
-                    <?= n_row_12() ?>
                     <div class="left-col contenedor_izquierdo">
                         <?= div($imagenes["preview"], ["class" => "thumbs"]) ?>
                         <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
                     </div>
-                    <?= end_row() ?>
                 </div>
             </div>
             <div class="col-lg-4">

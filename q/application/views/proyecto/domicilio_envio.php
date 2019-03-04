@@ -120,9 +120,10 @@ if ($registro_direccion == 0) {
 				"type" => "text"
 			]) ?>
 			<div class="row">
-				<div class="col-lg-6">
-					<?= div("Número Exterior", ["class" => "titulo_enid_sm_sm"]) ?>
-					<?= input([
+
+				<?= get_btw(
+					div("Número Exterior", ["class" => "titulo_enid_sm_sm"]),
+					input([
 						"class" => "required numero_exterior",
 						"name" => "numero_exterior",
 						"value" => $numero_exterior,
@@ -130,11 +131,16 @@ if ($registro_direccion == 0) {
 						"placeholder" => "* Número Exterior",
 						"required" => "true",
 						"type" => "text"
-					]) ?>
-				</div>
-				<div class="col-lg-6">
-					<?= div("Número Interior", ["class" => "titulo_enid_sm_sm"]) ?>
-					<?= input([
+					]),
+					"col-lg-6"
+				) ?>
+
+
+
+				<?= get_btw(
+
+					div("Número Interior", ["class" => "titulo_enid_sm_sm"]),
+					input([
 						"class" => "numero_interior",
 						"name" => "numero_interior",
 						"value" => $numero_interior,
@@ -142,8 +148,11 @@ if ($registro_direccion == 0) {
 						"autocorrect" => "off",
 						"type" => "text",
 						"required " => "true"
-					]) ?>
-				</div>
+					]),
+					"col-lg-6"
+
+
+				) ?>
 			</div>
 
 
@@ -161,30 +170,40 @@ if ($registro_direccion == 0) {
 				), ["class" => "place_colonias_info"]) ?>
 
 				<?= place('place_asentamiento') ?>
-				<div class=" district delegacion_c">
-					<?= div("Delegación o Municipio", ["class" => "titulo_enid_sm_sm"]) ?>
-					<?= div(input([
+
+				<?= get_btw(
+
+					div("Delegación o Municipio", ["class" => "titulo_enid_sm_sm"]),
+					div(input([
 						"type" => "text",
 						"name" => "delegacion",
 						"value" => $municipio,
 						"readonly" => true
-					]), ["class" => "place_delegaciones_info"]) ?>
-				</div>
-				<div class=" district  estado_c">
-					<?= div("Estado", ["class" => "titulo_enid_sm_sm"]) ?>
+					]), ["class" => "place_delegaciones_info"]),
+					" district delegacion_c"
+				) ?>
 
-					<?= div(input([
+
+
+				<?= get_btw(
+					div("Estado", ["class" => "titulo_enid_sm_sm"]),
+					div(input([
 						"type" => "text",
 						"name" => "estado",
 						"value" => $estado,
 						"readonly" => "true"
-					]), ["class" => "place_estado_info"]) ?>
+					]), ["class" => "place_estado_info"]),
+					"district  estado_c"
+				)
+				?>
 
-				</div>
-				<div class=" district pais_c">
-					<?= div("País", ["class" => "titulo_enid_sm_sm"]) ?>
-					<?=place("place_pais_info")?>
-				</div>
+				<?= get_btw(
+					div("País", ["class" => "titulo_enid_sm_sm"]),
+					place("place_pais_info"),
+					" district pais_c"
+
+				) ?>
+
 				<div class="direccion_principal_c">
 					<?= div("Esta es mi dirección principal ",
 						["class" => "titulo_enid_sm_sm"]) ?>

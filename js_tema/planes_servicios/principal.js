@@ -1,6 +1,7 @@
 "use strict";
 $(document).ready(function () {
     set_option("page", 1);
+    set_option("modalidad", 0);
     $("footer").ready(valida_action_inicial);
     $(".btn_servicios").click(carga_servicios);
     $(".tipo_promocion").click(configuracion_inicial);
@@ -335,7 +336,7 @@ let actualiza_dato_servicio_afiliado = function (e) {
 
 
 let valida_url_youtube = function () {
-    debugger;
+
     let url = get_parameter(".url_youtube");
     let text_youtube = "youtu";
 
@@ -535,7 +536,7 @@ let muestra_seccion_porcentaje_ganancia_afiliados = function () {
     }
 }
 
-let configuracion_inicial = function (e) {
+let configuracion_inicial = function () {
 
 
     set_option("modalidad", get_parameter_enid($(this), "id"));
@@ -584,9 +585,10 @@ let simula_envio = function (e) {
 }
 let verifica_existencia_categoria = function () {
 
+
     let url = "../q/index.php/api/servicio/verifica_existencia_clasificacion/format/json/";
     let nombre = get_parameter(".nuevo_producto_nombre");
-    let data_send = {clasificacion: nombre, id_servicio: get_option("modalidad")};
+    let data_send = {"clasificacion": nombre, "id_servicio": get_option("modalidad")};
     request_enid("GET", data_send, url, listar_categorias);
 }
 
@@ -599,6 +601,7 @@ let def_categorias = function () {
 }
 
 let listar_categorias = function (data) {
+
 
     def_categorias();
     if (array_key_exists("total", data) == true && data.total > 0) {
@@ -680,6 +683,7 @@ let clean_data_categorias = function () {
 
 let carga_listado_categorias = function () {
 
+    debugger;
     let nombre = get_parameter(".nuevo_producto_nombre");
     clean_data_categorias();
     let data_send = {
@@ -695,6 +699,7 @@ let carga_listado_categorias = function () {
 
 
 let respuestas_primer_nivel = function (data) {
+
 
     llenaelementoHTML(".primer_nivel_seccion", data);
     if (get_option("selected_1") == 1) {
@@ -1211,7 +1216,7 @@ let set_tiempo_entrega = function () {
 let respuesta_tiempo_entrega = function (data) {
 
     $(".response_tiempo_entrega").empty();
-    debugger;
+
 };
 let set_imagen_principal = function () {
     let id = get_parameter_enid($(this), "id");

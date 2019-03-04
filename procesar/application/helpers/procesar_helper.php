@@ -1,6 +1,49 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+	if (!function_exists('get_form_miembro_enid_service_hidden')) {
+
+		function get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla)
+		{
+
+
+			return append_data([
+
+				input_hidden([
+					"name" => "descripcion",
+					"value" => ""
+				]),
+				input_hidden([
+					"name" => "usuario_referencia",
+					"value" => $q2,
+					"class" => 'q2'
+				]),
+				input_hidden([
+					"name" => "plan",
+					"class" => "plan",
+					"value" => $plan
+				]),
+				input_hidden([
+					"name" => "num_ciclos",
+					"class" => "num_ciclos",
+					"value" => $num_ciclos
+				]),
+				input_hidden([
+					"name" => "ciclo_facturacion",
+					"class" => "ciclo_facturacion",
+					"value" => $ciclo_facturacion
+				]),
+				input_hidden([
+					"name" => "talla",
+					"class" => "talla",
+					"value" => $talla
+				])
+
+			]);
+
+
+		}
+	}
 	if (!function_exists('get_text_duracion')) {
 		function get_text_duracion($id_ciclo_facturacion, $num_ciclos, $is_servicio)
 		{

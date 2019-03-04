@@ -406,7 +406,10 @@ class Clasificacion extends REST_Controller
 	function coincidencia_servicio_GET()
 	{
 		$param = $this->get();
-		$response = $this->clasificacion_model->get_coincidencia($param);
+		$response = false;
+		if (if_ext($param, "clasificacion")) {
+			$response = $this->clasificacion_model->get_coincidencia($param);
+		}
 		$this->response($response);
 	}
 	/*

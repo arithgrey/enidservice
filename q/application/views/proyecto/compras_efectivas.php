@@ -15,7 +15,7 @@
         $fecha_registro = $row["fecha_registro"];
         $id_error = "imagen_" . $id_servicio;
         ?>
-        <?= n_row_12() ?>
+
         <div class="contenedor_articulo">
             <div class="col-lg-3">
                 <?= img([
@@ -38,6 +38,6 @@
                 </div>
             </div>
         </div>
-        <?= end_row() ?>
+
     <?php } ?>
 <?php endif; ?>

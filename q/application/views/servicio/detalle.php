@@ -205,10 +205,7 @@ $icantidad = icon('fa fa-pencil text_cantidad');
 		<div class="tab-pane <?= $extra_4 ?>" id="tab_info_precios">
 
 			<?= br() ?>
-
 			<?= addNRow(div(get_estado_publicacion($status, $id_servicio), ["class" => "text-right"])) ?>
-
-
 			<?= get_rango_entrega(
 				$id_perfil,
 				$tiempo_promedio_entrega,
@@ -222,8 +219,6 @@ $icantidad = icon('fa fa-pencil text_cantidad');
 			<?= get_seccion_compras_casa($flag_servicio, $entregas_en_casa) ?>
 			<?= heading_enid($ver_telefono, 4) ?>
 			<?= get_seccion_telefono_publico($has_phone, $telefono_visible, $activo_visita_telefono, $baja_visita_telefono) ?>
-
-
 			<?= heading_enid("¿VENDES ESTA ARTÍCULO CONTRA ENTREGA?", 4) ?>
 			<?= get_configuracion_contra_entrega($contra_entrega, $id_servicio) ?>
 
@@ -281,7 +276,6 @@ $icantidad = icon('fa fa-pencil text_cantidad');
 			<?php endif; ?>
 
 		</div>
-		<!--BUSQUEDA AVANZADA-->
 		<div class="tab-pane <?= $extra_3 ?>" id="tab_terminos_de_busqueda">
 			<?= get_form_tags($id_servicio, $metakeyword_usuario) ?>
 		</div>
