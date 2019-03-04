@@ -1,7 +1,6 @@
 <main>
 	<div class="contenedor_principal_enid_service">
 		<?= place("separador_inicial") ?>
-		<?= n_row_12() ?>
 		<div class="inf_sugerencias">
 			<?= heading_enid("NO HAY PRODUCTOS QUE COINCIDAN CON TU BÚSQUEDA", 3, ["class" => "info_sin_encontrar"]) ?>
 			<?= div("SUGERENCIAS", ["class" => "contenedor_sugerencias sugerencias"]) ?>
@@ -29,7 +28,6 @@
 				</ul>
 			</div>
 		</div>
-		<?= end_row() ?>
 		<?= place("separador_final") ?>
 	</div>
 </main>

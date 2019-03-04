@@ -86,7 +86,6 @@ foreach ($info_tickets as $row) {
 	</div>
 	<div class="col-lg-6">
 		<div class="pull-right">
-
 			<?= label("Mostrar", ["class" => "strong black"]) ?>
 			<select class='estatus_tickets text-center input-sm'>
 				<option value=''>
@@ -111,17 +110,3 @@ foreach ($info_tickets as $row) {
 	<?= $l; ?>
 	<?= $this->load->view("../../../view_tema/footer_table") ?>
 </div>
-<!--
-<style type="text/css">
-.estado_abierto{
-	background: #041E7B!important;
-	color: white;
-}.estado_cerrado{
-	background: #0594FE!important;
-	color: white;
-}.estado_visto{
-	background: #F94206 !important;
-	color: white;
-}
-</style>
--->

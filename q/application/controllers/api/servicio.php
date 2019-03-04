@@ -168,16 +168,16 @@ class Servicio extends REST_Controller
 
 		$param = $this->get();
 		$data["info_categorias"] = $this->get_categorias_servicios($param);
-		$data["nivel"]  = $param["nivel"];
-		$response       = [];
+		$data["nivel"] = $param["nivel"];
+		$response = [];
 		if (count($data["info_categorias"]) > 0) {
 
-			$response   =  get_config_categorias($data, $param);
+			$response = get_config_categorias($data, $param);
 
 
 		} else {
 
-			$response   = get_add_categorias($data, $param);
+			$response = get_add_categorias($data, $param);
 
 		}
 		$this->response($response);
@@ -196,13 +196,13 @@ class Servicio extends REST_Controller
 		$param = $this->get();
 		$response = false;
 		if (if_ext($param, "clasificacion,id_servicio")) {
-			$response = $this->get_coincidencias_busqueda($param);
 
+			$response = $this->get_coincidencias_busqueda($param);
 		}
 		$this->response($response);
 	}
 
-	function get_coincidencias_busqueda($param)
+	private function get_coincidencias_busqueda($param)
 	{
 
 		$coincidencia = $this->get_coincidencia_servicio($param);

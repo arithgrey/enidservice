@@ -519,6 +519,136 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "Deja de trabajar para otro, genera tu propios ingresos y ya no recibas ordenes. \n\n\nRento moto para que conductor Uber Eats, Rappi, Postmates.\n\n\n\nmoda -> uñas \nropa \nzapatos\nbolsas \n\npreocupaciones \n\n\tla seguridad \n\tprimavera verano \n\ttrabajo exitos\n\ttrabajo osbtaculos\n\thombres \n\tsexo \n\tViajes\n\tMás exito laboral\n\tSeguir teniendo amigos\n\tMejorar ambiente familiar \n\t\n\n\n\n\n\n\n",
+			"settings":
+			{
+				"buffer_size": 373,
+				"line_ending": "Unix",
+				"name": "Deja de trabajar para otro, genera tu propios ingr"
+			}
+		},
+		{
+			"file": "/home/arithgrey/Documentos/r/docker-compose.yml",
+			"settings":
+			{
+				"buffer_size": 939,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "",
+			"file": "/home/arithgrey/Documentos/config.php",
+			"file_size": 0,
+			"file_write_time": 131960245163936292,
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "",
+			"file": "/home/arithgrey/Documentos/database.php",
+			"file_size": 0,
+			"file_write_time": 131960246909219790,
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/arithgrey/Documentos/r/inicio/db/database.php",
+			"settings":
+			{
+				"buffer_size": 30,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');\n\n$active_group = 'default';\n$query_builder = TRUE;\n\n$db['default'] = array(\n\t'hostname' => 'backend_developer_db',\n\t'username' => 'root',\n\t'password' => 'mysql',\n\t'database' => 'enidserv_web',\n\t'dbdriver' => 'mysqli',\n\t'dbprefix' => '',\n\t'pconnect' => TRUE,\n\t'db_debug' => TRUE,\n\t'cache_on' => TRUE,\n\t'cachedir' => '',\n\t'char_set' => 'utf8',\n\t'dbcollat' => 'utf8_general_ci',\n\t'swap_pre' => '',\n\t'encrypt' => FALSE,\n\t'compress' => FALSE,\n\t'stricton' => FALSE,\n\t'failover' => array(),\n\t'save_queries' => TRUE,\n    'port' => 3306\n);\n\n",
+			"file": "/home/arithgrey/Documentos/r/database.php",
+			"file_size": 608,
+			"file_write_time": 131960246965538661,
+			"settings":
+			{
+				"buffer_size": 608,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/arithgrey/Documentos/r/db.php",
+			"settings":
+			{
+				"buffer_size": 608,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "kjasdjkjaksdjk@kjs.lo",
+			"settings":
+			{
+				"buffer_size": 21,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<div class=\"row\">\n\t\t\t<div class=\"btn_escribir_valoracion\"><a class=\"escribir_valoracion\" href=\"../valoracion?servicio=259\">ESCRIBE UNA RESEÑA<i class=\"fa fa fa-chevron-right ir\"></i><span></span></a></div>\t\t\t<div class=\"contenedor_promedios\"><label class=\"estrella\" style=\"font-size: 2em;\">★</label><label class=\"estrella\" style=\"font-size: 2em;\">★</label><label class=\"estrella\" style=\"font-size: 2em;\">★</label><label class=\"estrella\" style=\"font-size: 2em;\">★</label><label class=\"estrella\" style=\"font-size: 2em;-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);\">★</label><span class=\"promedio_num\">4.5</span></div><table>\n                            <tbody><tr>\n                              <td class=\"info_comentarios\" nowrap=\"\">2COMENTARIOS</td>\n                            </tr>\n                          </tbody></table><div class=\"porcentaje_recomiendan\">0.04%</div><div>de los consumidores recomiendan este producto</div>\t\t</div>",
+			"settings":
+			{
+				"buffer_size": 966,
+				"line_ending": "Unix",
+				"name": "<div class=\"row\">"
+			}
+		},
+		{
+			"contents": "git commit -m \"[hotfix\n1.-\tQuitar la dirección en el resumen de compra cuando no es punto de entrega\n2.-\tDar la opció de agregar contraseña al momento de registrar una compra\n3.-\tmostrar los procesos en ventas en la sección de ventas para los vendedores y mostrar estos con un diferenciador\n4.-\tRearar el menú de notificaciones\n5.-\tReparar el menu de notificaciones en la versión del cliente\n6-\tReparar el menú de búsqueda en versión web\n7.-\tReparar el error que sale en ventas\n]\"\n",
+			"settings":
+			{
+				"buffer_size": 481,
+				"line_ending": "Unix",
+				"name": "git commit -m \"[hotfix"
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/arithgrey/Documentos/r/inicio/config/config.php",
+			"settings":
+			{
+				"buffer_size": 34,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/arithgrey/Documentos/r/config.php",
+			"settings":
+			{
+				"buffer_size": 2047,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/arithgrey/Documentos/r/Dockerfile",
+			"settings":
+			{
+				"buffer_size": 264,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -853,6 +983,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Auto-fusionando",
+			"database",
+			"data",
 			"$this->principal->get_departamentos",
 			"$this->principal->get_departamentos(\"\",1);",
 			"$this->principal->get_departamentos(\"\");",
@@ -977,10 +1110,7 @@
 			"form_puntos_medios",
 			"agregar_punto_encuentro_pedido",
 			"servicio",
-			"linea_metro_GET",
-			"response_estaciones",
-			"place_lineas",
-			"muestra_lineas_metro"
+			"linea_metro_GET"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1023,8 +1153,410 @@
 	"groups":
 	[
 		{
+			"selected": 10,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 373,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								373,
+								373
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Deja de trabajar para otro, genera tu propios ingr",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 255.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/arithgrey/Documentos/r/docker-compose.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 939,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								893,
+								893
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/arithgrey/Documentos/config.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/arithgrey/Documentos/database.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/arithgrey/Documentos/r/inicio/db/database.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 30,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								23
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/arithgrey/Documentos/r/database.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 608,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/home/arithgrey/Documentos/r/db.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 608,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								603,
+								603
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 21,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 966,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								87,
+								87
+							]
+						],
+						"settings":
+						{
+							"auto_name": "<div class=\"row\">",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								481,
+								481
+							]
+						],
+						"settings":
+						{
+							"auto_name": "git commit -m \"[hotfix",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "/home/arithgrey/Documentos/r/inicio/config/config.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								27,
+								27
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "/home/arithgrey/Documentos/r/config.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2047,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								990,
+								990
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "/home/arithgrey/Documentos/r/Dockerfile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 264,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17,
+								17
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				}
 			]
 		}
 	],

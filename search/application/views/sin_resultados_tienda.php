@@ -1,7 +1,6 @@
 <main>
 	<div class="contenedor_principal_enid_service">
 		<?= place("separador_inicial") ?>
-		<?= n_row_12() ?>
 		<div class="col-lg-6  col-lg-offset-3">
 			<center>
 				<?= heading_enid("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA",
@@ -22,7 +21,6 @@
 				); ?>
 			</center>
 		</div>
-		<?= end_row() ?>
 		<?= place("separador_final") ?>
 	</div>
 </main>

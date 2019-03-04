@@ -1,5 +1,4 @@
 <?php
-
 $respuestas = "";
 foreach ($info_respuestas as $row) {
 
@@ -28,12 +27,10 @@ foreach ($info_respuestas as $row) {
 $oculta_comentarios = (count($info_respuestas) > 0) ? div("Ocultar ", ["class" => 'ocultar_comentarios strong blue_enid', "id" => $id_tarea]) : "";
 
 ?>
-
-<div class="col-lg-12">
-	<?= $oculta_comentarios ?>
-	<?= div(div($respuestas, ["class" => "msg-wrap"]), ["class" => "Message-wrap"]) ?>
-</div>
-
-
+<?= get_btw(
+	$oculta_comentarios,
+	div(div($respuestas, ["class" => "msg-wrap"]), ["class" => "Message-wrap"]),
+	"col-lg-12"
+) ?>
 
 

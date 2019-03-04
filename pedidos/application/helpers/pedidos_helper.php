@@ -2,30 +2,223 @@
 if (!function_exists('invierte_date_time')) {
 
 
+
+
+
+	if (!function_exists('form_form_search')) {
+		function form_form_search(){
+
+			$r[] = form_open("", ["class"=>"form_search",  "method"=>"GET"]);
+			$r[] = input_hidden(["name" => "recibo", "value" => "", "class" => "numero_recibo"]);
+			$r[] = form_close();
+			return append_data($r);
+
+		}
+
+	}
+	if (!function_exists('form_busqueda_pedidos')) {
+
+		function form_busqueda_pedidos($tipos_entregas, $status_ventas)
+		{
+
+
+			$r[] = get_btw(
+				strong("CLIENTE"),
+				input([
+					"name" => "cliente",
+					"class" => "form-control",
+					"placeholder" => "Nombre, correo, telefono ..."
+				]),
+				"col-lg-3"
+			);
+			$r[] = input_hidden([
+				"name" => "v",
+				'value' => 1
+
+			]);
+			$r[] = get_btw(
+				strong("#Recibo"),
+				input([
+					"name" => "recibo",
+					"class" => "form-control"
+				]),
+				"col-lg-2"
+			);
+
+			$r[] = get_btw(
+				strong("TIPO ENTREGA"),
+
+				create_select($tipos_entregas,
+					"tipo_entrega",
+					"tipo_entrega form-control",
+					"tipo_entrega",
+					"nombre",
+					"id",
+					0,
+					1,
+					0,
+					"-"),
+				"col-lg-3"
+
+			);
+			$r[] = get_btw(
+				strong("STATUS"),
+				create_select(
+					$status_ventas,
+					"status_venta",
+					"status_venta  form-control",
+					"status_venta",
+					"text_vendedor",
+					"id_estatus_enid_service",
+					0,
+					1,
+					0,
+					"-"
+				),
+				"col-lg-3"
+
+			);
+
+
+			return append_data($r);
+
+		}
+	}
+
+	if (!function_exists('get_format_pre_orden')) {
+
+		function get_format_pre_orden($id_servicio, $id_error, $recibo)
+		{
+
+
+			$r[] = div(img(
+				[
+					"src" => link_imagen_servicio($id_servicio),
+					"class" => "rounded-circle",
+					"id" => $id_error,
+					"onerror" => "reloload_img( '" . $id_error . "','" . link_imagen_servicio($id_servicio) . "');",
+					"style" => "width:100px!important;height:100px!important;"
+
+				]),
+				["class" => "mr-2"]);
+
+			$r[] = div(heading_enid(
+				"ORDEN #" . $recibo["id_proyecto_persona_forma_pago"],
+				5,
+				["class" => "h5 m-0"]
+			),
+				["class" => "ml-2"]
+			);
+
+			return append_data($r);
+
+
+		}
+
+	}
+	if (!function_exists('get_format_listado_puntos_encuentro')) {
+		function get_format_listado_puntos_encuentro($puntos_encuentro, $id_recibo, $domicilio)
+		{
+
+			$r[] = br();
+			$r[] = div("TUS PUNTOS DE ENCUENTRO ", ["class" => "text_puntos_registrados"]);
+			$r[] = agregar_nueva_direccion(1);
+			$r[] = ul([get_lista_puntos_encuentro($puntos_encuentro, $id_recibo, $domicilio)]);
+			$r[] = br(2);
+
+			return append_data($r);
+		}
+
+	}
+	if (!function_exists('get_hiddens_detalle')) {
+
+		function get_hiddens_detalle($recibo)
+		{
+
+			$r[] = input_hidden(
+				[
+					"class" => "status_venta_registro",
+					"name" => "status_venta",
+					"value" => $recibo[0]["status"],
+					"id" => "status_venta_registro"
+				]);
+			$r[] = input_hidden(
+				[
+					"class" => "saldo_actual_cubierto",
+					"name" => "saldo_cubierto",
+					"value" => $recibo[0]["saldo_cubierto"]
+				]);
+			$r[] = input_hidden(
+				[
+					"class" => "tipo_entrega_def",
+					"name" => "tipo_entrega",
+					"value" => $recibo[0]["tipo_entrega"]
+				]);
+			$r[] = input_hidden(
+				[
+					"class" => "id_servicio",
+					"name" => "id_servicio",
+					"value" => $recibo[0]["id_servicio"]
+				]);
+			$r[] = input_hidden(
+				[
+					"class" => "articulos",
+					"name" => "articulos",
+					"value" => $recibo[0]["num_ciclos_contratados"]
+				]);
+
+			return append_data($r);
+
+		}
+	}
+	if (!function_exists('get_format_menu')) {
+
+		function get_format_menu($domicilio, $recibo, $id_recibo)
+		{
+
+
+			$x[] = get_link_cambio_fecha($domicilio, $recibo);
+			$x[] = get_link_recordatorio($id_recibo);
+			$x[] = get_link_nota();
+			$x[] = get_link_costo($id_recibo, $recibo);
+
+			$r[] = div(icon("fa fa-plus-circle fa-3x"), ["class" => " dropdown-toggle", "data-toggle" => "dropdown"]);
+			$r[] = div(append_data($x), ["class" => "dropdown-menu contenedor_opciones_pedido", "aria-labelledby" => "dropdownMenuButton"]);
+
+
+			return div(append_data($r), ["class" => "dropdown pull-right top_20 "]);
+
+
+		}
+
+	}
+
 	if (!function_exists('get_motificacion_evaluacion')) {
 
-		function get_motificacion_evaluacion($recibo , $es_vendedor , $evaluacion ){
+		function get_motificacion_evaluacion($recibo, $es_vendedor, $evaluacion)
+		{
 
 
-			$response =  "";
+			$response = "";
 
-			if ($recibo[0]["status"]  ==  9 && $es_vendedor < 1 && $evaluacion == 0){
+			if ($recibo[0]["status"] == 9 && $es_vendedor < 1 && $evaluacion == 0) {
 
-				$id_servicio  =  $recibo[0]["id_servicio"];
-				$url        =  "../valoracion/?servicio=".$id_servicio;
-				$text       = guardar("ESCRIBE UNA RESEÑA" );
-				$text       .=  div(str_repeat("★" , 5) , ["class" => "text-center f2" , "style" => "color: #010148;"]);
-				$response = anchor_enid($text , ["href" => $url]);
+				$id_servicio = $recibo[0]["id_servicio"];
+				$url = "../valoracion/?servicio=" . $id_servicio;
+				$text = guardar("ESCRIBE UNA RESEÑA");
+				$text .= div(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
+				$response = anchor_enid($text, ["href" => $url]);
 
-			}elseif ($recibo[0]["status"]  ==  9 && $es_vendedor < 1 && $evaluacion > 0){
+			} elseif ($recibo[0]["status"] == 9 && $es_vendedor < 1 && $evaluacion > 0) {
 
-				$id_servicio  =  $recibo[0]["id_servicio"];
-				$url        =  "../producto/?producto=".$id_servicio."&valoracion=1";
-				$text       = guardar("ESCRIBE UNA RESEÑA" );
-				$text       .=  div(str_repeat("★" , 5) , ["class" => "text-center f2" , "style" => "color: #010148;"]);
-				$response = anchor_enid($text , ["href" => $url]);
+				$id_servicio = $recibo[0]["id_servicio"];
+				$url = "../producto/?producto=" . $id_servicio . "&valoracion=1";
+				$text = guardar("ESCRIBE UNA RESEÑA");
+				$text .= div(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
+				$response = anchor_enid($text, ["href" => $url]);
 
-			}else{}
+			} else {
+			}
 			return $response;
 
 
@@ -433,7 +626,7 @@ if (!function_exists('invierte_date_time')) {
 	}
 	if (!function_exists('create_linea_tiempo')) {
 
-		function create_linea_tiempo($status_ventas , $recibo, $domicilio, $es_vendedor)
+		function create_linea_tiempo($status_ventas, $recibo, $domicilio, $es_vendedor)
 		{
 
 			$linea = "";
@@ -466,20 +659,19 @@ if (!function_exists('invierte_date_time')) {
 						break;
 					case 3:
 
-						$class =  ($recibo["saldo_cubierto"] > 0)  ? "timeline__item__date_active" : "timeline__item__date";
+						$class = ($recibo["saldo_cubierto"] > 0) ? "timeline__item__date_active" : "timeline__item__date";
 						$seccion_2 = get_seccion_compra($recibo, $id_recibo, $es_vendedor);
 
 						break;
 
 
-						/*
-					case 4:
-						$class =  ($recibo["id_proyecto_persona_forma_pago"] ==  7 || $recibo["id_proyecto_persona_forma_pago"] ==  9 )  ? "timeline__item__date_active" : "timeline__item__date";
-						$seccion_2 = get_seccion_compra($recibo, $id_recibo, $es_vendedor);
+					/*
+				case 4:
+					$class =  ($recibo["id_proyecto_persona_forma_pago"] ==  7 || $recibo["id_proyecto_persona_forma_pago"] ==  9 )  ? "timeline__item__date_active" : "timeline__item__date";
+					$seccion_2 = get_seccion_compra($recibo, $id_recibo, $es_vendedor);
 
-						break;
-						*/
-
+					break;
+					*/
 
 
 					default:
@@ -490,7 +682,7 @@ if (!function_exists('invierte_date_time')) {
 				}
 				$seccion = div(icon("fa fa-check-circle-o"), ["class" => $class]);
 
-				$linea  .= div($seccion . $seccion_2, ["class" => "timeline__item"]);
+				$linea .= div($seccion . $seccion_2, ["class" => "timeline__item"]);
 
 				$linea .= div($seccion . $seccion_2, ["class" => "timeline__item"]);
 
@@ -524,7 +716,7 @@ if (!function_exists('invierte_date_time')) {
 			$seccion = div(p(
 				anchor_enid($text,
 					[
-						"href"  => $url,
+						"href" => $url,
 						"class" => "text-line-tiempo"
 					]
 				),
@@ -577,7 +769,7 @@ if (!function_exists('invierte_date_time')) {
 					break;
 
 				case 1:
-					$text = "ORDEN REALIZADA" .icon("fa fa-check");
+					$text = "ORDEN REALIZADA" . icon("fa fa-check");
 					$estado = 6;
 					break;
 

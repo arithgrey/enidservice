@@ -1,7 +1,6 @@
 <?php
 
 $pendientes = [];
-/*Metas u objetivos*/
 $meta_ventas = 0;
 $meta_envios_a_validar = 0;
 $meta_email = 0;

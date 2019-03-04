@@ -1,7 +1,6 @@
 <div class="col-lg-8">
     <div class="page-section ">
         <div class="wrapper">
-
 	        <?=get_motificacion_evaluacion($recibo, $es_vendedor , $evaluacion)?>
             <?= heading_enid("RASTREAR PEDIDO" . icon("fa fa-map-signs"), 3) ?>
             <?= div(create_linea_tiempo($status_ventas , $recibo, $domicilio, $es_vendedor), ["class" => "timeline"]) ?>

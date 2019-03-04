@@ -1,6 +1,45 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+	if (!function_exists('get_form_recurso')) {
+		function get_form_recurso()
+		{
+
+			$r[] = form_open("", ["class" => "form_recurso", "id" => 'form_recurso']);
+			$r[] = get_btw(
+
+				div("Nombre"),
+				input([
+					"type" => "text",
+					"name" => "nombre",
+					"class" => "form-control",
+					"required" => "true"
+				])
+				,
+				"col-lg-6"
+			);
+
+			$r[] = get_btw(
+
+				div("../Url recurso"),
+				input([
+					"type" => "text",
+					"name" => "urlpaginaweb",
+					"class" => "form-control",
+					"required" => "true"
+				])
+				,
+				"col-lg-6"
+			);
+			$r[] = guardar("Registrar");
+			$r[] = place("place_recurso");
+			$r[] = form_close();
+
+			return append_data($r);
+
+		}
+
+	}
 	if (!function_exists('get_menu')) {
 		function get_menu($in_session)
 		{
