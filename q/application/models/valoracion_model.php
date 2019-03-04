@@ -146,15 +146,11 @@ class valoracion_model extends CI_Model
 		$params_where = ["id_servicio" => $id_servicio];
 		return $this->get($params, $params_where);
 	}
-
-
-
 	function get_valoraciones_articulo($param)
 	{
 		$id_servicio = $param["id_servicio"];
 		return $this->get_numero_valoraciones_servicio($id_servicio);
 	}
-
 	function get_desglose_valoraciones_periodo($param)
 	{
 

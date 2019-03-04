@@ -25,7 +25,6 @@ class Archivo extends REST_Controller
 
 	function imgs_POST()
 	{
-
 		$config['upload_path'] = APPPATH . '../../img_tema/productos/';
 		$config['allowed_types'] = "*";
 		$config['max_size'] = 3500;

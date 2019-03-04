@@ -175,6 +175,7 @@ class Home extends CI_Controller
 	private function load_view_seguimiento($data, $param, $recibo, $id_recibo)
 	{
 
+
 		$notificacion_pago          = (get_param_def($param, "notificar") > 0) ? 1 : 0;
 		$notificacion_pago          = ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago;
 		$data["notificacion_pago"]  = $notificacion_pago;
@@ -198,6 +199,7 @@ class Home extends CI_Controller
 		return $this->principal->api($api, $q);
 
 	}
+
 	private function get_estatus_enid_service($q = [])
 	{
 		$api = "status_enid_service/index/format/json/";

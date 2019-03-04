@@ -9,7 +9,6 @@
     </div>
 </div>
 <div class="col-lg-4">
-
     <?= get_btw(
         heading("ORDEN #" . $recibo[0]["id_proyecto_persona_forma_pago"]),
         img(["src" => link_imagen_servicio($recibo[0]["id_servicio"])]),

@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
 	if (!function_exists('get_motificacion_evaluacion')) {
 
 		function get_motificacion_evaluacion($recibo , $es_vendedor , $evaluacion ){
@@ -431,6 +432,7 @@ if (!function_exists('invierte_date_time')) {
 		}
 	}
 	if (!function_exists('create_linea_tiempo')) {
+
 		function create_linea_tiempo($status_ventas , $recibo, $domicilio, $es_vendedor)
 		{
 
@@ -463,6 +465,7 @@ if (!function_exists('invierte_date_time')) {
 
 						break;
 					case 3:
+
 						$class =  ($recibo["saldo_cubierto"] > 0)  ? "timeline__item__date_active" : "timeline__item__date";
 						$seccion_2 = get_seccion_compra($recibo, $id_recibo, $es_vendedor);
 
@@ -486,7 +489,11 @@ if (!function_exists('invierte_date_time')) {
 
 				}
 				$seccion = div(icon("fa fa-check-circle-o"), ["class" => $class]);
+
 				$linea  .= div($seccion . $seccion_2, ["class" => "timeline__item"]);
+
+				$linea .= div($seccion . $seccion_2, ["class" => "timeline__item"]);
+
 
 			}
 			return $linea;

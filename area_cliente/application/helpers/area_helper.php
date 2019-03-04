@@ -6,6 +6,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_valoraciones($valoraciones, $id_usuario, $alcance)
         {
 
+
             $r[] = place("place_ventas_usuario col-lg-9");
             $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
             $x[] = $valoraciones;

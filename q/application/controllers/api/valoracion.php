@@ -13,6 +13,7 @@ class Valoracion extends REST_Controller
 		$this->load->library(lib_def());
 		$this->id_usuario = $this->principal->get_session("idusuario");
 	}
+
 	function num_GET(){
 
 
@@ -181,6 +182,7 @@ class Valoracion extends REST_Controller
 				"nombre" => $param["nombre"],
 				"id_servicio" => $id_servicio
 			];
+
 
 			if ($this->id_usuario > 0 ){
 				$params["id_usuario"] =  $this->id_usuario;
