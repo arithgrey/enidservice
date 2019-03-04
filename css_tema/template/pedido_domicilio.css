@@ -1,0 +1,21 @@
+.establecer_direccion, .establecer_punto_encuentro {
+    color: #f7f7ff !important;
+    background: #000312;
+    padding: 5px;
+}
+
+.text_puntos_registrados, .text_direcciones_registradas {
+    font-size: 1.5em;
+}
+
+.asignado_actualmente {
+    background: #fbfbfb;
+    color: #000208;
+}
+.asignado_actualmente .text-muted {
+    color: #eaf2f6;!important;
+}
+.list-group-item{
+    margin-top: 30px;
+    height: 215px;
+}

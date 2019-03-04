@@ -1,0 +1,38 @@
+.titulo_preferencia {
+}
+.base_compras, .base_paginas_extra, .info_metodos_pago {
+    display: none;
+}
+
+.box-part {
+    background: #FFF;
+    border-radius: 2px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.box-part:hover {
+    background: #F8F8F8;
+}
+
+
+.box-part .fa {
+    color: black;
+}
+
+.contenedor_opcion {
+    border-bottom: 10px solid #00385D;
+    border-radius: 6px;
+}
+
+.contenedor_opcion:hover {
+    border-bottom: 10px solid blue;
+    border-radius: 6px;
+}
+
+.icono_metro {
+    width: 40px !important;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1, 100);
+    background-attachment: fixed;
+}

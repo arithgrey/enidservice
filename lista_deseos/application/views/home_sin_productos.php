@@ -1,0 +1,1 @@
+<?=get_format_sin_productos()?>

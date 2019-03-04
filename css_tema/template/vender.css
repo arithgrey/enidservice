@@ -1,0 +1,303 @@
+.input_nuevo, .contenedor_costo, .contenedor_info_youtube, .input_desc_servicio_facturacion, .input_servicio_color, .input_cantidad {
+    display: none;
+}
+
+.text_agregar_color {
+    background: black;
+    padding: 5px;
+    color: white;
+}
+
+.icon-pencil {
+    margin-left: 10px;
+}
+
+.fa-youtube-play {
+    color: red;
+}
+
+.agregar_img_servicio_img:hover {
+    padding: 5px !important;
+    margin-right: 1px;
+}
+
+.contenedor_imagen_muestra {
+    overflow-x: scroll;
+    overflow-x: hidden;
+}
+
+.contenedor_imagen_muestra_producto {
+    border-style: solid;
+    position: absolute;
+    z-index: 2000;
+    color: white;
+    background: black;
+}
+
+.notificacion_publicar_imagenes {
+    margin-top: 10px;
+    font-size: .9em !important;
+    margin-bottom: 10px;
+}
+
+.input_nombre_servicio_facturacion {
+    display: none;
+}
+
+.tag_catalogo {
+    background: #295d98;
+    padding: 3px;
+    color: white;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: .95em;
+}
+
+.tag_catalogo:hover {
+    cursor: pointer;
+    background: #002d60;
+}
+
+.invitacion_registro_telefono {
+    color: white !important;
+}
+
+.add_phone {
+    background: #060436;
+    font-size:: .9em;
+    padding: 3px;
+}
+
+.hr_producto {
+    display: none;
+}
+
+.texto_ventas_titulo {
+    font-weight: bold;
+    color: black;
+}
+
+.url_youtube_alert {
+    background: red;
+    padding: 10px;
+    color: white;
+}
+
+.text_articulos_disponibles {
+    background: #2a5790 !important;
+    padding: 5px;
+    color: white;
+}
+
+.text_numero_existencia {
+    margin-top: 10px;
+}
+
+.mjs_articulo_no_disponible {
+    background: red;
+    padding: 3px;
+    color: white;
+}
+
+.mensaje_imagenes_visible {
+    background: #0d0542;
+    padding: 3px;
+    color: white;
+    font-weight: bold;
+
+}
+
+.num_clasificacion option:hover {
+    cursor: pointer;
+    color: white;
+    background: black;
+}
+
+.text_deseas_anunciar {
+    font-weight: bold;
+}
+
+.btn_siguiente_registrar_servicio {
+    width: 100% !important;
+    background: black !important;
+    padding: 5px;
+    color: white;
+    margin-bottom: 50px;
+}
+
+.num_clasificacion_phone {
+    margin-top: 25px !important;
+}
+
+.nav > li > a {
+    padding: 5px !important;
+    color: black !important;
+}
+
+.nav-tabs > li {
+    min-width: 25px !important;
+}
+
+.guardar_video_btn, .es_nuevo, .es_disponible {
+    width: 100% !important;
+    background: black !important;
+    padding: 5px;
+    color: white;
+}
+
+.es_nuevo, .es_disponible {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.contenedor_inf_servicios_novedad {
+    margin-top: 25px;
+}
+
+.ciclo_facturacion {
+    width: 100%;
+}
+
+.btn_siguiente_registrar_servicio, .btn_guardar_ciclo_facturacion, .btn_precio_servicio,
+.btn_guardar_desc {
+    width: 100% !important;
+    background: black !important;
+    padding: 5px;
+    color: white;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.contenedor_inf_servicios_precios_finales {
+    display: flex;
+    flex-direction: column-reverse;
+    background: #f7f9ff;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.contenedor_inf_servicios_precios_finales{
+    display: flex;
+    flex-direction: column-reverse;
+    background: #041623;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    border-bottom: solid;
+}
+.mxn{
+    font-size: 2em;
+    margin-left: 10px;
+    font-weight: bold;
+    color: #02233c;
+}
+.table_info_precios {
+    width: 30%;
+
+}
+
+.info_comision_venta_total {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.info_ganancia {
+    background: #0468e9;
+    color: white;
+}
+
+.informacion_costo {
+    background: #f7fafc;
+}
+
+.a_precio_unidad {
+    font-weight: bold;
+    color: black !important;
+}
+
+.text_info_envio {
+    font-weight: bold;
+    color: black !important;
+}
+
+.text_info_envio_editable {
+    margin-top: 30px;
+}
+
+.informacion_costo_envio {
+    font-weight: bold;
+    color: black !important;
+}
+
+.info_meta_tags {
+    height: 50px;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .text_deseas_anunciar {
+        font-size: 1em;
+        padding: 5px;
+        color: white;
+        font-weight: bold;
+        background: #07206b !important;
+    }
+
+    .btn_siguiente_registrar_servicio, .btn_guardar_ciclo_facturacion {
+        width: 100% !important;
+        background: black !important;
+        padding: 5px;
+        color: white;
+        margin-bottom: 50px;
+
+    }
+
+    .info_recoge_en_casa, .info_telefonos_visibles {
+        margin-top: 30px;
+    }
+
+    .contenedor_infor_telefonos {
+        margin-top: 30px;
+    }
+
+    .contenedor_articulos_disponibles {
+        margin-top: 35px;
+    }
+
+    .contenedor_inf_servicios_ciclo_facturacion {
+        margin-top: 30px;
+    }
+
+    .info_comision_venta {
+        padding: 5px;
+    }
+
+    .informacion_costo_envio {
+        margin-top: 40px;
+    }
+
+    .contenedor_inf_servicios {
+        margin-top: 40px !important;
+        margin-bottom: 30px;
+    }
+
+    .info_meta_tags {
+        height: 100px;
+        overflow: auto;
+        margin-top: 25px;
+        margin-bottom: 30px;
+    }
+
+    .titulo_producto_servicio {
+        font-size: 1.6em !important;
+        font-weight: bold !important;
+        background: #ededed !important;
+    }
+
+    .hr_producto {
+        display: block;
+    }
+
+}
