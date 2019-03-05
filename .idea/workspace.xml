@@ -2,36 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1fb341ff-e3a5-45ac-a560-632e2e57cf13" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/area_cliente/application/helpers/area_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/area_cliente/application/helpers/area_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css_tema/template/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css_tema/template/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/Screenshot_2018-12-17_Traje_Deportivo_Para_Perro_Mascota_Adidog_Azul_4xl_Schepped_-_1,142_00.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/Screenshot_2019-01-16_PETMATE_24232_Aspen_Pet_LeBistro_-_Alimentador_de_Mascotas_con_Control_Programable_de_Porciones,_Negr...(1).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/a.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/bicicleta-6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_51.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_510.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_511.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_52.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_53.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_54.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_55.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_56.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_57.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_58.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/cerealeras_rojas_59.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/dispensador-cafe-enid-service-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/luces-bicicleta-2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/luces-bicicleta-4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img_tema/productos/perrito_adidog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/servicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/servicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/q/application/helpers/servicios_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/helpers/servicios_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recomendacion/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/recomendacion/application/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search/application/helpers/search_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/search/application/helpers/search_helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search/application/views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/search/application/views/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js_tema/domicilio/domicilio_entrega.js" beforeDir="false" afterPath="$PROJECT_DIR$/js_tema/domicilio/domicilio_entrega.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pedidos/application/views/seguimiento.php" beforeDir="false" afterPath="$PROJECT_DIR$/pedidos/application/views/seguimiento.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/producto/application/helpers/producto_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/producto/application/helpers/producto_helper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php" beforeDir="false" afterPath="$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search/application/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/search/application/controllers/home.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,46 +19,46 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/q/application/helpers/servicios_helper.php">
+        <entry file="file://$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="8" column="25" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="25" />
+            <state relative-caret-position="237">
+              <caret line="598" column="73" lean-forward="true" selection-start-line="598" selection-start-column="73" selection-end-line="598" selection-end-column="73" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css_tema/template/producto.css">
+        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/recomendacion/application/controllers/home.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="33" column="23" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
+            <state relative-caret-position="269">
+              <caret line="74" column="30" selection-start-line="74" selection-start-column="30" selection-end-line="74" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/search/application/views/home.php">
+        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/cobranza.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="15" column="99" selection-start-line="15" selection-start-column="99" selection-end-line="15" selection-end-column="99" />
+            <state relative-caret-position="173">
+              <caret line="324" column="53" selection-start-line="324" selection-start-column="27" selection-end-line="324" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/search/application/helpers/search_helper.php">
+        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="317">
+              <caret line="87" selection-start-line="87" selection-end-line="87" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="752" selection-start-line="752" selection-end-line="752" />
             </state>
           </provider>
         </entry>
@@ -90,18 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>debugger;</find>
-      <find>get_option</find>
-      <find>ticke/form_respuesta</find>
-      <find>get_format_temas_ayuda</find>
-      <find>$bloque_primer_nivel</find>
-      <find>$busqueda</find>
-      <find>$categorias_destacadas_orden</find>
-      <find>$categorias_destacadas</find>
-      <find>$anunciar</find>
-      <find>$url_anunciar</find>
-      <find>$servicios</find>
-      <find>$num_servicios_encontrados</find>
       <find>?&gt;</find>
       <find>&lt;?=</find>
       <find>apped_data</find>
@@ -119,7 +84,19 @@
       <find>text_precio text-center</find>
       <find>get_precio_producto</find>
       <find>create_vista</find>
+      <find>VENTAS MAYORISTAS</find>
+      <find>valida_informacion_precio_mayoreo</find>
+      <find>get_contacto_cliente</find>
       <find>producto_base</find>
+      <find>seguimiento</find>
+      <find>dirección de seguimiento</find>
+      <find>index</find>
+      <find>delete_por_id_recibo</find>
+      <find>api</find>
+      <find>delete_direccion_punto_encuentro</find>
+      <find>solicitud_cambio_punto_entrega</find>
+      <find>agrega_punto_encuentro_usuario</find>
+      <find>create_orden_punto_entrega</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -131,13 +108,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/q/application/views/desarrollo/comparativa.php" />
-        <option value="$PROJECT_DIR$/q/application/views/desarrollo/global.php" />
-        <option value="$PROJECT_DIR$/q/application/views/desarrollo/global_calidad.php" />
-        <option value="$PROJECT_DIR$/q/application/controllers/api/clasificacion.php" />
-        <option value="$PROJECT_DIR$/q/application/models/clasificacion_model.php" />
-        <option value="$PROJECT_DIR$/planes_servicios/application/helpers/planes_helper.php" />
-        <option value="$PROJECT_DIR$/js_tema/planes_servicios/principal.js" />
         <option value="$PROJECT_DIR$/q/application/views/imgs/servicio_producto_servicio.php" />
         <option value="$PROJECT_DIR$/q/application/views/notificaciones/principal.php" />
         <option value="$PROJECT_DIR$/q/application/views/proyecto/compras_efectivas.php" />
@@ -182,6 +152,13 @@
         <option value="$PROJECT_DIR$/q/application/helpers/servicios_helper.php" />
         <option value="$PROJECT_DIR$/search/application/helpers/search_helper.php" />
         <option value="$PROJECT_DIR$/search/application/views/home.php" />
+        <option value="$PROJECT_DIR$/producto/application/helpers/producto_helper.php" />
+        <option value="$PROJECT_DIR$/search/application/controllers/home.php" />
+        <option value="$PROJECT_DIR$/pedidos/application/views/seguimiento.php" />
+        <option value="$PROJECT_DIR$/js_tema/domicilio/domicilio_entrega.js" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php" />
+        <option value="$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php" />
+        <option value="$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php" />
       </list>
     </option>
   </component>
@@ -212,6 +189,39 @@
             <path>
               <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
               <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="q" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
               <item name="search" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -219,6 +229,13 @@
               <item name="inicio" type="462c0819:PsiDirectoryNode" />
               <item name="search" type="462c0819:PsiDirectoryNode" />
               <item name="application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="inicio" type="462c0819:PsiDirectoryNode" />
+              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="application" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="inicio" type="b2602c69:ProjectViewProjectNode" />
@@ -270,19 +287,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35961000" />
+    <option name="totallyTimeSpent" value="39780000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7589577" visible="true" weight="0.15562649" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7589577" visible="true" weight="0.20351157" />
       <window_info id="Structure" order="1" sideWeight="0.24104235" side_tool="true" weight="0.21388668" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.29153094" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.16449511" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -339,118 +355,20 @@
           <line>195</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php</url>
+          <line>41</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/q/application/controllers/api/recibo.php</url>
+          <line>739</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/q/application/views/servicio/precios.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="60" lean-forward="true" selection-end-line="79" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/tallas/principal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="34" column="6" selection-end-line="34" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/tickets/detalle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-897">
-          <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/tickets/principal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1775">
-          <caret line="112" lean-forward="true" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/tickets/form_respuesta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/tickets/principal_desarollo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="51" column="1" lean-forward="true" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/tickets/principal_desarollo_persona.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="135" column="6" selection-start-line="135" selection-start-column="6" selection-end-line="135" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/tickets/respuestas.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/tickets/solicitudes_saldo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/valoraciones/form_respuesta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-752">
-          <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/valoraciones/form_servicio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="68" column="35" lean-forward="true" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/valoraciones/pregunta_consumudor.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-65" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/q/application/views/valoraciones/preguntas.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/search/application/views/sin_resultados_tienda.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view_tema/footer_template.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-911" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view_tema/header_meta_enid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/valoracion/application/views/home.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -640,7 +558,7 @@
     <entry file="file://$PROJECT_DIR$/css_tema/template/producto.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="466">
-          <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
+          <caret line="133" selection-start-line="133" selection-end-line="133" />
         </state>
       </provider>
     </entry>
@@ -658,6 +576,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/search/application/views/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="99" selection-start-line="15" selection-start-column="99" selection-end-line="15" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/producto/application/helpers/producto_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="308" column="28" selection-start-line="308" selection-start-column="28" selection-end-line="308" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/producto/application/views/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="94" column="39" lean-forward="true" selection-start-line="94" selection-start-column="39" selection-end-line="94" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/search/application/helpers/search_helper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
@@ -665,10 +604,95 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/search/application/views/home.php">
+    <entry file="file://$PROJECT_DIR$/pedidos/application/controllers/home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="99" selection-start-line="15" selection-start-column="99" selection-end-line="15" selection-end-column="99" />
+        <state relative-caret-position="459">
+          <caret line="191" column="60" selection-start-line="191" selection-start-column="49" selection-end-line="191" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search/application/controllers/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pedidos/application/views/seguimiento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css_tema/template/pedido_domicilio.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js_tema/domicilio/domicilio_entrega.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="24" column="80" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/clasificacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="109" column="47" lean-forward="true" selection-start-line="108" selection-start-column="8" selection-end-line="109" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/punto_encuentro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1171" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/librerias/principal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="10" column="99" lean-forward="true" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/models/proyecto_persona_forma_pago_punto_encuentro_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="51" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pedidos/application/helpers/pedidos_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="598" column="73" lean-forward="true" selection-start-line="598" selection-start-column="73" selection-end-line="598" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/recibo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="752" selection-start-line="752" selection-end-line="752" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_punto_encuentro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/proyecto_persona_forma_pago_direccion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="74" column="30" selection-start-line="74" selection-start-column="30" selection-end-line="74" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/q/application/controllers/api/cobranza.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="324" column="53" selection-start-line="324" selection-start-column="27" selection-end-line="324" selection-end-column="53" />
         </state>
       </provider>
     </entry>

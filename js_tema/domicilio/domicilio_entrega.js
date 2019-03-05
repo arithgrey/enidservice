@@ -20,7 +20,8 @@ let asignar_direccion_existente_pedido = function(){
 	show_confirm("¿DESEAS ENVIAR A ESTA DIRECCIÓN TU PEDIDO?",  "" , "CONTINUAR" , function(){proceso_asignar_direccion(id_direccion , id_recibo)} );
 };
 let proceso_asignar_direccion = function(id_direccion , id_recibo){
-		
+
+	debugger;
 	let url  		=  "../q/index.php/api/proyecto_persona_forma_pago_direccion/index/format/json/";
 	let data_send 	= {"id_direccion" : id_direccion , "id_recibo":id_recibo , "asignacion" : 1};
 	request_enid( "POST",  data_send, url, response_proceso_asignacion);

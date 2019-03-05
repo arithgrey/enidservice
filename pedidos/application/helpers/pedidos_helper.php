@@ -564,42 +564,50 @@ if (!function_exists('invierte_date_time')) {
 		{
 
 			$text = "";
-			if ($data_direccion["tipo_entrega"] == 2 && count($data_direccion["domicilio"]) > 0) {
+
+			if (is_array($data_direccion)){
+				if ($data_direccion["tipo_entrega"] == 2 && count($data_direccion["domicilio"]) > 0) {
 
 
-				$domicilio = $data_direccion["domicilio"][0];
-				$calle = $domicilio["calle"];
+					$domicilio = $data_direccion["domicilio"][0];
+					$calle = $domicilio["calle"];
 
-				$numero_exterior = $domicilio["numero_exterior"];
-				$numero_interior = $domicilio["numero_interior"];
-				$cp = $domicilio["cp"];
-				$asentamiento = $domicilio["asentamiento"];
-				$municipio = $domicilio["municipio"];
-				$estado = $domicilio["estado"];
+					$numero_exterior = $domicilio["numero_exterior"];
+					$numero_interior = $domicilio["numero_interior"];
+					$cp = $domicilio["cp"];
+					$asentamiento = $domicilio["asentamiento"];
+					$municipio = $domicilio["municipio"];
+					$estado = $domicilio["estado"];
 
-				$text
-					=
-					$calle . " " . " NÚMERO " . $numero_exterior . " NÚMERO INTERIOR " . $numero_interior . " COLONIA " . $asentamiento . " DELEGACIÓN/MUNICIPIO " . $municipio . " ESTADO " . $estado . " CÓDIGO POSTAL " . $cp;
-				$text = p(strtoupper($text), ["class" => "card-text"]);
+					$text
+						=
+						$calle . " " . " NÚMERO " . $numero_exterior . " NÚMERO INTERIOR " . $numero_interior . " COLONIA " . $asentamiento . " DELEGACIÓN/MUNICIPIO " . $municipio . " ESTADO " . $estado . " CÓDIGO POSTAL " . $cp;
+					$text = p(strtoupper($text), ["class" => "card-text"]);
 
-			} else {
+				} else {
 
-				if (is_array($data_direccion) && count($data_direccion["domicilio"]) > 0) {
-					$punto_encuentro = $data_direccion["domicilio"][0];
-					$costo_envio = $punto_encuentro["costo_envio"];
-					$tipo = $punto_encuentro["tipo"];
-					$color = $punto_encuentro["color"];
-					$nombre_estacion = $punto_encuentro["nombre"];
-					$lugar_entrega = $punto_encuentro["lugar_entrega"];
-					$numero = "NÚMERO " . $punto_encuentro["numero"];
-					$text = heading_enid("LUGAR DE ENCUENTRO", 3, ["class" => "top_20"]);
-					$text .= div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, 1);
-					$text .= div("ESTACIÓN " . $lugar_entrega, ["class" => "strong"], 1);
+					if (is_array($data_direccion)
+						&& array_key_exists("domicilio" , $data_direccion)
+						&& is_array($data_direccion["domicilio"])
+						&& count($data_direccion["domicilio"]) > 0) {
 
+						$punto_encuentro = $data_direccion["domicilio"][0];
+						//$costo_envio = $punto_encuentro["costo_envio"];
+						$tipo = $punto_encuentro["tipo"];
+						$color = $punto_encuentro["color"];
+						$nombre_estacion = $punto_encuentro["nombre"];
+						$lugar_entrega = $punto_encuentro["lugar_entrega"];
+						$numero = "NÚMERO " . $punto_encuentro["numero"];
+						$text = heading_enid("LUGAR DE ENCUENTRO", 3, ["class" => "top_20"]);
+						$text .= div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, 1);
+						$text .= div("ESTACIÓN " . $lugar_entrega, ["class" => "strong"], 1);
+
+
+					}
 
 				}
-
 			}
+
 			return $text;
 		}
 
@@ -665,14 +673,6 @@ if (!function_exists('invierte_date_time')) {
 						break;
 
 
-					/*
-				case 4:
-					$class =  ($recibo["id_proyecto_persona_forma_pago"] ==  7 || $recibo["id_proyecto_persona_forma_pago"] ==  9 )  ? "timeline__item__date_active" : "timeline__item__date";
-					$seccion_2 = get_seccion_compra($recibo, $id_recibo, $es_vendedor);
-
-					break;
-					*/
-
 
 					default:
 						$class = ($activo == 1) ? "timeline__item__date_active" : "timeline__item__date";
@@ -681,9 +681,6 @@ if (!function_exists('invierte_date_time')) {
 
 				}
 				$seccion = div(icon("fa fa-check-circle-o"), ["class" => $class]);
-
-				$linea .= div($seccion . $seccion_2, ["class" => "timeline__item"]);
-
 				$linea .= div($seccion . $seccion_2, ["class" => "timeline__item"]);
 
 

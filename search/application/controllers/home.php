@@ -65,7 +65,9 @@ class Home extends CI_Controller
 			$this->muetra_servicios($data, $param, $q, $data_send, $servicios, $per_page);
 
 		} else {
+
 			$this->muestra_sin_resultados($param, $data);
+
 		}
 
 	}

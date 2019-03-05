@@ -271,6 +271,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $inf = "";
+            $response =  "";
             if ($tel_visible == 1 && $proceso_compra == 0) {
                 $usr = $usuario[0];
                 $ftel = 1;
@@ -287,8 +288,11 @@ if (!function_exists('invierte_date_time')) {
                     $lada = (strlen($usr["lada_negocio"]) > 0) ? "(" . $usr["lada_negocio"] . ")" : "";
                     $inf .= div(icon('fa fa-phone') . $lada . $tel2);
                 }
-                return div($inf, 1);
+                $response =  div($inf, 1);
             }
+            return $response;
+
+
         }
     }
     if (!function_exists('get_entrega_en_casa')) {
@@ -296,11 +300,13 @@ if (!function_exists('invierte_date_time')) {
         function get_entrega_en_casa($entregas_en_casa, $flag_servicio)
         {
 
-            $text = "";
+            $response = "";
             if ($entregas_en_casa == 1) {
                 $text = ($flag_servicio == 1) ? "EL VENDEDOR TAMBIÉN BRINDA ATENCIÓN EN SU NEGOCIO" : "PUEDES COMPRAR EN EL NEGOCIO DEL VENDEDOR";
+
+                $response = icon("fa fa-check-circle") . $text;
             }
-            return icon("fa fa-check-circle") . $text;
+            return $response;
         }
 
     }
@@ -334,8 +340,11 @@ if (!function_exists('invierte_date_time')) {
         function valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo)
         {
 
-            $text = ($flag_servicio == 0 && $venta_mayoreo == 1) ? icon('fa fa-check-circle') . "VENTAS MAYORISTAS " : "";
-            return div($text, ["class" => "strong"]);
+            $text   = ($flag_servicio == 0 && $venta_mayoreo == 1) ? icon('fa fa-check-circle') . "VENTAS MAYORISTAS " : "";
+            $r[]    =  div($text, ["class" => "strong"]) ;
+	        $r[]    =  div(icon('fa fa-check-circle') ."COMPRAS CONTRA ENTREGA", ["class" => "strong"]) ;
+	        return append_data($r);
+
 
         }
     }

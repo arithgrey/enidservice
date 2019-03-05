@@ -76,5 +76,16 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
 		$in = ["id_proyecto_persona_forma_pago" => $id_recibo];
 		return $this->proyecto_persona_forma_pago_punto_encuentro_model->get(["id_punto_encuentro"], $in);
 	}
+	function  index_DELETE(){
+
+		$param = $this->delete();
+		$response = false;
+		if (if_ext($param, "id_recibo")) {
+
+			$in       =  ["id_proyecto_persona_forma_pago" => $param["id_recibo"]];
+			$response = $this->proyecto_persona_forma_pago_punto_encuentro_model->delete($in,  10);
+		}
+		$this->response($response);
+	}
 
 }
