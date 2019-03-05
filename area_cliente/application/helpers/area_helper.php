@@ -6,7 +6,7 @@ if (!function_exists('invierte_date_time')) {
 
 		function get_hiddens_tickects($action, $ticket)
 		{
-			return apped_data([
+			return append_data([
 				input_hidden(["class" => "action", "value" => $action]),
 				input_hidden(["class" => "ticket", "value" => $ticket])
 			]);

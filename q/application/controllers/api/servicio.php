@@ -509,6 +509,7 @@ class Servicio extends REST_Controller
 			$data["images"] = $this->create_table_images($imagenes, $data["is_mobile"]);
 			$data["id_perfil"] = $this->principal->getperfiles();
 			$this->load->view("servicio/detalle", $data);
+
 		} else {
 			$this->response($response);
 		}
@@ -623,7 +624,6 @@ class Servicio extends REST_Controller
 
 			for ($num_imgs = $num_imgs; $num_imgs < 7; $num_imgs++) {
 
-				$info = "";
 				$icon = icon("fa fa-camera agregar_img_servicio");
 				$interior = div($icon,
 					[
@@ -632,8 +632,8 @@ class Servicio extends REST_Controller
 							"border-style: solid;position:absolute;z-index:2000;
                             margin-left: 10px;padding: 3px;margin-top: 3px;"
 					]);
-				$info = $interior . $img;
-				$img_preview = div($info);
+
+				$img_preview = div(append_data([$interior , $img]));
 				$images_complete[$num_imgs] = $img_preview;
 
 			}
