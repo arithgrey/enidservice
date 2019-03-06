@@ -1,6 +1,35 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_format_transaccion($id_recibo)
+    {
+
+        $r[] = div(img_enid(), ["style" => "width: 200px;"]);
+        $r[] = heading_enid("Detalles de la transacción", 2);
+        $r[] = heading_enid("#Recibo: " . $id_recibo, 3);
+        $r[] = hr();
+        return $r;
+
+    }
+    function validate_format_cancelacion($total_cubierto, $id_recibo, $modalidad)
+    {
+
+
+        $text = ($total_cubierto < 1) ?
+            anchor_enid("CANCELAR VENTA",
+                [
+                    "class" => "cancelar_compra padding_10",
+                    "id" => $id_recibo,
+                    "modalidad" => $modalidad,
+                    "style" => "background: #f00 !important;color:white !important;font-weight: bold !important;"
+                ],
+                1
+            ) : "";
+
+        return $text;
+
+    }
+
     function get_notificacion_solicitud_valoracion($usuario, $id_servicio)
     {
 
@@ -352,7 +381,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => 'vender_mas_productos']
             );
 
-	        $response =  get_btw($l ,$l2 , "col-lg-12");
+            $response = get_btw($l, $l2, "col-lg-12");
         }
         return $response;
     }
@@ -445,7 +474,7 @@ if (!function_exists('invierte_date_time')) {
         return $estado_venta;
     }
 
-    function carga_estado_compra( $id_recibo, $vendedor = 0)
+    function carga_estado_compra($id_recibo, $vendedor = 0)
     {
 
 
@@ -803,24 +832,23 @@ if (!function_exists('invierte_date_time')) {
             $url_imagen_servicio = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
 
             $id_error = "imagen_" . $id_servicio;
-            
-            $t = anchor_enid(
-                    img([
-                        "src" => $url_imagen_servicio,
-                        "onerror" => "reloload_img( '" . $id_error . "','" . $url_imagen_servicio . "');",
-                        "class" => 'imagen_articulo',
-                        "id" => $id_error
-                    ]),
-                    ["href" => $url_servicio ]
-                );
 
+            $t = anchor_enid(
+                img([
+                    "src" => $url_imagen_servicio,
+                    "onerror" => "reloload_img( '" . $id_error . "','" . $url_imagen_servicio . "');",
+                    "class" => 'imagen_articulo',
+                    "id" => $id_error
+                ]),
+                ["href" => $url_servicio]
+            );
 
 
             $t .= carga_estado_compra($id_recibo, $modalidad);
 
             $list[] = div($t, ["class" => "display_flex_enid"]);
         }
-        return div(ul($list) ,  ["class"=> "col-lg-8"]).div("", ["class"=> "col-lg-4"]);
+        return div(ul($list), ["class" => "col-lg-8"]) . div("", ["class" => "col-lg-4"]);
     }
 
     function get_view_compras($status_enid_service, $compras, $tipo)

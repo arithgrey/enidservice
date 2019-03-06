@@ -1,6 +1,5 @@
 <?php
 
-
 $url_vide_youtube = "";
 $id_servicio = "";
 $nombre_servicio = "";
@@ -64,20 +63,18 @@ $estrellas = anchor_enid(div("", $config), ['class' => 'lee_valoraciones', 'href
 
 
 ?>
-<?= n_row_12() ?>
+
     <div class="product-detail contenedor_info_producto">
         <div class="col-lg-8">
             <div class="col-lg-8">
-                <div class="row">
-                    <div class="left-col contenedor_izquierdo">
-                        <?= div($imagenes["preview"], ["class" => "thumbs"]) ?>
-                        <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
-                    </div>
+                <div class="left-col contenedor_izquierdo">
+                    <?= div($imagenes["preview"], ["class" => "thumbs"]) ?>
+                    <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="contenedor_central_info">
-                    <?=get_contenedor_central($proceso_compra, $id_servicio,$tiempo_entrega, $color, $flag_servicio,$flag_nuevo,$usuario, $id_publicador, $url_actual, $desc_web)?>
+                    <?= get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web) ?>
                 </div>
             </div>
         </div>
@@ -142,9 +139,9 @@ $estrellas = anchor_enid(div("", $config), ['class' => 'lee_valoraciones', 'href
             <?php endif; ?>
         </div>
     </div>
-<?= end_row() ?>
+
 <?= addNRow(div(get_descripcion_servicio($descripcion, $flag_servicio), ["class" => "col-lg-10 col-lg-offset-1"])) ?>
-<?=div("",  ["id" => "video"])?>
+<?= div("", ["id" => "video"]) ?>
 <?= addNRow(div(valida_url_youtube($url_vide_youtube, $is_mobile), ["class" => "col-lg-10 col-lg-offset-1"])) ?>
 <?= br(2) ?>
 <?= addNRow(place("separador")) ?>

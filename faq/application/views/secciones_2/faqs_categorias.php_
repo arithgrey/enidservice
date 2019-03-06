@@ -1,1 +1,0 @@
-<?=get_format_faq_categorias($faqs_categoria)?>

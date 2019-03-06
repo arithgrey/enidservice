@@ -3,7 +3,7 @@
 	<?php $extra_estilos = ($action == 1) ? "display:none" : ""; ?>
 	<div class="contenedor_top" style="<?= $extra_estilos ?>">
 
-		<?= heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 3, ['class' => 'strong'], 1) ?>
+		<?= heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 3) ?>
 		<?php foreach ($top_servicios as $row):
 			$url = "../producto/?producto=" . $row['id_servicio'];
 			$icon = icon('fa fa-angle-right');

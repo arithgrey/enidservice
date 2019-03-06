@@ -2,7 +2,27 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    function get_contenedor_central($proceso_compra, $id_servicio,$tiempo_entrega, $color, $flag_servicio,$flag_nuevo,$usuario, $id_publicador, $url_actual, $desc_web)
+    function get_format_eleccion_contra_entrega()
+    {
+
+        $r[] = img(["src" => "..//img_tema/linea_metro/metro.jpg", "class" => "icono_metro"]);
+        $r[] = div(heading_enid("PAGO CONTRA ENTREGA", 3), ["class" => "title"]);
+        $r[] = div(div("ACORDEMOS UN PUNTO MEDIO "), ["class" => "text"]);
+        return div(append_data($r), ["class"=>"box-part text-center"]);
+
+    }
+
+    function get_format_eleccion_mensajeria()
+    {
+
+        $r[] = icon('fa fa-truck fa-3x');
+        $r[] = div(heading_enid("POR MENSAJERÍA", 3), ["class" => "title"]);
+        $r[] = div(div("QUE LLEGUE A TU CASA U OFICINA"), ["class" => "text"]);
+        return div(append_data($r), ["class" => "box-part text-center"]);
+
+    }
+
+    function get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web)
     {
 
 
@@ -14,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = get_solicitud_informacion($proceso_compra, $id_servicio);
 
-        if ($proceso_compra == 1){
+        if ($proceso_compra == 1) {
             $r[] = get_tiempo_entrega(0, $tiempo_entrega);
         }
 
@@ -70,8 +90,8 @@ if (!function_exists('invierte_date_time')) {
     function form_pre_puntos_medios($plan, $num_ciclos)
     {
 
-    	$url  = "../puntos_medios/?producto=".$plan;
-        $r[] = '<form class="form_pre_puntos_medios" action="'.$url.'"  method="POST">';
+        $url = "../puntos_medios/?producto=" . $plan;
+        $r[] = '<form class="form_pre_puntos_medios" action="' . $url . '"  method="POST">';
         $r[] = input_hidden([
             "class" => "servicio",
             "name" => "servicio",
@@ -271,7 +291,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $inf = "";
-            $response =  "";
+            $response = "";
             if ($tel_visible == 1 && $proceso_compra == 0) {
                 $usr = $usuario[0];
                 $ftel = 1;
@@ -288,7 +308,7 @@ if (!function_exists('invierte_date_time')) {
                     $lada = (strlen($usr["lada_negocio"]) > 0) ? "(" . $usr["lada_negocio"] . ")" : "";
                     $inf .= div(icon('fa fa-phone') . $lada . $tel2);
                 }
-                $response =  div($inf, 1);
+                $response = div($inf, 1);
             }
             return $response;
 
@@ -340,10 +360,10 @@ if (!function_exists('invierte_date_time')) {
         function valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo)
         {
 
-            $text   = ($flag_servicio == 0 && $venta_mayoreo == 1) ? icon('fa fa-check-circle') . "VENTAS MAYORISTAS " : "";
-            $r[]    =  div($text, ["class" => "strong"]) ;
-	        $r[]    =  div(icon('fa fa-check-circle') ."COMPRAS CONTRA ENTREGA", ["class" => "strong"]) ;
-	        return append_data($r);
+            $text = ($flag_servicio == 0 && $venta_mayoreo == 1) ? icon('fa fa-check-circle') . "VENTAS MAYORISTAS " : "";
+            $r[] = div($text, ["class" => "strong"]);
+            $r[] = div(icon('fa fa-check-circle') . "COMPRAS CONTRA ENTREGA", ["class" => "strong"]);
+            return append_data($r);
 
 
         }

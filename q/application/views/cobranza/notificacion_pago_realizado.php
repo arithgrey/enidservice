@@ -10,22 +10,9 @@ $monto_a_pagar = get_campo($recibo, "monto_a_pagar");
 $url_seguimiento =  "../pedidos/?seguimiento=".$id_recibo;
 
 ?>
-<?php if ( $total_cubierto < 1): ?>
-	<?= anchor_enid("CANCELAR VENTA",
-		[
-			"class" => "cancelar_compra padding_10",
-			"id" => $id_recibo,
-			"modalidad" => $modalidad,
-			"style" => "background: #f00 !important;color:white !important;font-weight: bold !important;"
-		],
-		1
-	) ?>
-<?php endif; ?>
+<?=validate_format_cancelacion($total_cubierto, $id_recibo, $modalidad)?>
 <div style="margin: 0 auto;width: 66%;">
-	<?= div(img_enid(), ["style" => "width: 200px;"]) ?>
-	<?= heading_enid("Detalles de la transacción", 2) ?>
-	<?= heading_enid("#Recibo: " . $id_recibo, 3) ?>
-	<hr>
+	<?=get_format_transaccion($id_recibo)?>
 	<table>
 		<tr class='tb_pagos'>
 			<?= get_td(heading_enid("Pago enviado a ", 4)) ?>
@@ -67,7 +54,6 @@ $url_seguimiento =  "../pedidos/?seguimiento=".$id_recibo;
 			<?= get_td("$" . $monto_a_pagar . "MXN") ?>
 		</tr>
 	</table>
-
 	<?=guardar("RASTREAR PEDIDO",["href"=> $url_seguimiento ],1,1,0,$url_seguimiento)?>
 </div>
 

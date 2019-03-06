@@ -1,62 +1,132 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-	if (!function_exists('get_formar_hiddens')) {
-
-		function get_formar_hiddens($is_mobile,$action,$extra_servicio){
-
-
-			$r[] = input_hidden(
-			    [
-
-			        "name" => "version_movil",
-			        "value" => $is_mobile,
-			        "class" => 'es_movil'
-			    ]
-			);
-			$r[] = input_hidden(
-			    [
-
-			        "value" => $action,
-			        "class" => "q_action"
-			    ]
-			);
-			$r[] = input_hidden(
-			    [
-
-			        "value" => $extra_servicio,
-			        "class" => "extra_servicio"
-			    ]
-			);
-
-			return append_data($r);
-
-		}
-	}
-    if (!function_exists('get_places')) {
-        function get_places($class=1)
+    if (!function_exists('get_top_articulos')) {
+        function get_top_articulos($top_servicios, $is_mobile)
         {
 
             $response = "";
-            if ($class > 0 ){
+            if (count($top_servicios) > 0 && $is_mobile > 0) {
+
+                $r = [];
+                foreach ($top_servicios as $row):
+
+                    $r[] = icon("fa fa-angle-right");
+                    $articulo = (trim(strlen($row["nombre_servicio"])) > 22) ? substr($row["nombre_servicio"], 0, 22) . "..." : strlen($row["nombre_servicio"]);
+                    $r[] = $articulo;
+                    $r[] = div(span($row["vistas"], ["class" => "a_enid_black_sm_sm"]),
+                        [
+                            "class" => "pull-right",
+                            "title" => "Personas que han visualizado este  producto"
+                        ]);
+
+
+                    $r[] = anchor_enid(append_data($r), ["href" => "../producto/?producto=" . $row['id_servicio']]);
+                endforeach;
+
+
+                if (count($top_servicios) > 0) {
+
+                    array_pop($r, heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 2));
+                }
+
+                $response = div(append_data($r), ["class" => "card contenedor_articulos_mobil"]);
+
+            }
+            return $response;
+        }
+    }
+    if (!function_exists('get_selector_categoria')) {
+        function get_selector_categoria($is_mobile)
+        {
+
+            $z = [];
+            if ($is_mobile > 0) {
+
+
+                $r[] = heading_enid('SELECIONA LAS CATEGORÍAS', 3);
+                $r[] = hr();
+                $r[] = get_places(0);
+
+
+            } else {
+
+
+                $r[] = heading_enid("GRUPO AL CUAL PERTENECE TU PRODUCTO", 3);
+                $r[] = anchor_enid(
+                    "CANCELAR",
+                    [
+                        "class" => "cancelar_registro",
+                        "style" => "color: white!important"
+                    ],
+                    1);
+                $r[] = hr();
+                $r[] = get_places();
+
+
+            }
+
+            return div(append_data($z), ["class" => "contenedor_categorias_servicios"]);
+
+        }
+    }
+    if (!function_exists('get_formar_hiddens')) {
+
+        function get_formar_hiddens($is_mobile, $action, $extra_servicio)
+        {
+
+
+            $r[] = input_hidden(
+                [
+
+                    "name" => "version_movil",
+                    "value" => $is_mobile,
+                    "class" => 'es_movil'
+                ]
+            );
+            $r[] = input_hidden(
+                [
+
+                    "value" => $action,
+                    "class" => "q_action"
+                ]
+            );
+            $r[] = input_hidden(
+                [
+
+                    "value" => $extra_servicio,
+                    "class" => "extra_servicio"
+                ]
+            );
+
+            return append_data($r);
+
+        }
+    }
+    if (!function_exists('get_places')) {
+        function get_places($class = 1)
+        {
+
+            $response = "";
+            if ($class > 0) {
 
                 $text = append_data(
-					[
-						div(place("primer_nivel_seccion"), ["class" => "info_categoria"]),
-						div(place("segundo_nivel_seccion"), ["class" => "info_categoria"]),
-						div(place("tercer_nivel_seccion"), ["class" => "info_categoria"]),
-						div(place("cuarto_nivel_seccion"), ["class" => "info_categoria"]),
-						div(place("quinto_nivel_seccion"), ["class" => "info_categoria"]),
-						div(place("sexto_nivel_seccion"), ["class" => "info_categoria"])
-					]
+                    [
+                        div(place("primer_nivel_seccion"), ["class" => "info_categoria"]),
+                        div(place("segundo_nivel_seccion"), ["class" => "info_categoria"]),
+                        div(place("tercer_nivel_seccion"), ["class" => "info_categoria"]),
+                        div(place("cuarto_nivel_seccion"), ["class" => "info_categoria"]),
+                        div(place("quinto_nivel_seccion"), ["class" => "info_categoria"]),
+                        div(place("sexto_nivel_seccion"), ["class" => "info_categoria"])
+                    ]
 
                 );
 
                 $response = addNRow($text);
 
 
-            }else{
-                $response =  ul([
+            } else {
+                $response = ul([
                     place("primer_nivel_seccion"),
                     place("segundo_nivel_seccion"),
                     place("tercer_nivel_seccion"),
