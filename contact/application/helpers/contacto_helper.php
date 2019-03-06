@@ -2,6 +2,24 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('get_selector_direccion')) {
+        function get_selector_direccion(){
+
+            $r[] = anchor_enid(div(icon("fa fa-shopping-cart") . " SI",
+        ["class" => "easy_select_enid cursor_pointer selector selector_proceso",
+            "id" => 1]),
+        ["href" => "../lista_deseos"]);
+
+            $r[] = anchor_enid(div(icon("fa fa-map-marker") . "NO, VER DIRECCIÓN DE COMPRA",
+        [
+            "class" => "easy_select_enid cursor_pointer selector selector_proceso",
+            "id" => 2
+        ]), ["href" => "../contact/?ubicacion=1#direccion"]);
+
+            return append_data($r);
+
+        }
+    }
 	if (!function_exists('get_form_proceso_compra')) {
 
 		function get_form_proceso_compra(){
