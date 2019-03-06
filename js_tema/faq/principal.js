@@ -2,9 +2,7 @@
 let editar_respuesta = 0;
 let faq = 0; 
 $(document).ready(function(){	
-	$("footer").ready(function() {
-		recorrepage("#info_articulo");		
-	});
+
 	if($(".in_session").val() == 1 ) {
 		$('#summernote').summernote();  			
 		$(".form_respuesta").submit(registra_respuesta);	
@@ -27,8 +25,8 @@ let registra_respuesta = function(e){
 }
 
 let response_registro_respuesta = function(data){
-
-	show_response_ok_enid(".place_refitro_respuesta" , "Respuesta registrada!");										
+	debugger;
+	show_response_ok_enid(".place_refitro_respuesta" , "Respuesta registrada!");
 	document.getElementById("form_respuesta").reset(); 				
 	let new_url = "../faq/?faq="+data;				
 	redirect(new_url);

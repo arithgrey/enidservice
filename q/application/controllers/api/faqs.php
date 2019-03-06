@@ -11,6 +11,18 @@ class Faqs extends REST_Controller
 		$this->load->library(lib_def());
 	}
 
+	function id_GET()
+	{
+
+		$param = $this->get();
+		$response = false;
+		if (if_ext($param, "id")) {
+
+			$response = $this->faqsmodel->q_get([], $param["id"]);
+		}
+		$this->response($response);
+	}
+
 	function qsearch_GET()
 	{
 
@@ -39,7 +51,7 @@ class Faqs extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "editar_respuesta,id_faq,respuesta,categoria,titulo,status,id_usuario")) {
+		if (if_ext($param, "editar_respuesta,id_faq,respuesta,categoria,titulo,status")) {
 			$param["id_usuario"] = $this->principal->get_session("idusuario");
 			$editar_respuesta = $param["editar_respuesta"];
 			$id_faq = $param["id_faq"];
@@ -50,7 +62,7 @@ class Faqs extends REST_Controller
 			$id_usuario = $param["id_usuario"];
 
 
-			if ($editar_respuesta == 0) {
+			if ($editar_respuesta < 1) {
 				$params = [
 					"titulo" => $titulo,
 					"respuesta" => $respuesta,
@@ -58,7 +70,7 @@ class Faqs extends REST_Controller
 					"status" => $status,
 					"id_usuario" => $id_usuario
 				];
-				$response = $this->faqsmodel->insert("faq", $params, 1);
+				$response = $this->faqsmodel->insert($params, 1);
 			} else {
 				$params = [
 					"titulo" => $titulo,
@@ -66,7 +78,7 @@ class Faqs extends REST_Controller
 					"id_categoria" => $categoria,
 					"status" => $status
 				];
-				$response = $this->faqsmodel->update('faq', $params, ["id_faq" => $id_faq]);
+				$response = $this->faqsmodel->update($params, ["id_faq" => $id_faq]);
 			}
 		}
 		$this->response($response);

@@ -23,9 +23,9 @@ class faqsmodel extends CI_Model
 		return $this->update([$q => $q2], ["idusuario" => $id_usuario]);
 	}
 
-	private function q_get($params = [], $id)
+	function q_get($params = [], $id)
 	{
-		return $this->get($params, ["id_servicio" => $id]);
+		return $this->get($params, ["id_faq" => $id]);
 	}
 
 	private function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')

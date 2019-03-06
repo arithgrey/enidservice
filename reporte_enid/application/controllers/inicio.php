@@ -74,13 +74,7 @@ class Inicio extends CI_Controller
 				$module = "location:../desarrollo";
 				break;
 
-			case 17:
-				$module = "location:../programa_afiliados";
-				break;
 
-			case 19:
-				$module = "location:../programa_afiliados";
-				break;
 
 			case 20:
 
