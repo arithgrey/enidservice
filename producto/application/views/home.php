@@ -144,6 +144,7 @@ $estrellas = anchor_enid(div("", $config), ['class' => 'lee_valoraciones', 'href
     </div>
 <?= end_row() ?>
 <?= addNRow(div(get_descripcion_servicio($descripcion, $flag_servicio), ["class" => "col-lg-10 col-lg-offset-1"])) ?>
+<?=div("",  ["id" => "video"])?>
 <?= addNRow(div(valida_url_youtube($url_vide_youtube, $is_mobile), ["class" => "col-lg-10 col-lg-offset-1"])) ?>
 <?= br(2) ?>
 <?= addNRow(place("separador")) ?>
