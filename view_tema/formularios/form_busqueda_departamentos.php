@@ -14,5 +14,5 @@
 				"class" => " button_busqueda_producto  flipkart-navbar-button"],
 			0,
 			0) ?>
-	</form>
+	<?=form_close()?>
 </div>

@@ -1,5 +1,5 @@
 <div class="container inner">
-	<?= n_row_12() ?>
+
 	<table style="width: 100%;">
 		<tr>
 			<?= get_td("MÉTODOS DE PAGO",
@@ -36,7 +36,7 @@
 				'src' => "../img_tema/bancos/banamex.png"))) ?>
 		</tr>
 	</table>
-	<?= end_row() ?>
+
 </div>
 <div class="container inner">
 	<table>

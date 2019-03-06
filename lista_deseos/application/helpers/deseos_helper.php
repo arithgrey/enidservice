@@ -1,7 +1,45 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    if (!function_exists('get_list_clasificaciones')) {
 
+        function get_list_clasificaciones($is_mobile, $preferencias, $tmp)
+        {
+
+            if ($is_mobile == 1) {
+                $r[] = $tmp;
+            }
+            $r[] = '<div class="col-lg-8">';
+
+            $r = 0;
+            $z = 0;
+            foreach ($preferencias as $row):
+
+                if ($z == 0):
+
+                    $r[] = '<div class="col-lg-4">';
+                endif;
+                $r[] = get_format_clasificaciones($row);
+                $z++;
+                if ($z == 9):
+                    $r[] = '</div>';
+                    $z = 0;
+                endif;
+                $r++;
+                if ($r == 26):
+                    $r[] = '</div>';
+                endif;
+            endforeach;
+
+            $r[] = '</div>';
+
+            if ($is_mobile == 1) {
+                $r[] = $tmp;
+            }
+            return append_data($r);
+
+        }
+    }
     if (!function_exists('get_format_sin_productos')) {
 
         function get_format_sin_productos()

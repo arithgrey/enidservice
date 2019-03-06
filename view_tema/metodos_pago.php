@@ -1,7 +1,7 @@
 <div class="row info_metodos_pago">
 	<div class="col-lg-10">
 		<div class="col-lg-6 ">
-			<table>
+            <table>
 				<tr>
 					<?= get_td(heading_enid("MÉTODOS DE PAGO", 5, ["class" => "strong"]),
 						['colspan' => 7, "class" => "black"]) ?>
@@ -45,6 +45,7 @@
 
 				</tr>
 			</table>
+
 		</div>
 	</div>
 	<div class="col-lg-2">

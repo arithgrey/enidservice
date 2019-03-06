@@ -9,6 +9,8 @@ $list = [heading_enid("ASISTENCIA", 4, ["class" => "strong"]), anchor_enid("- Se
 $list2 = [heading_enid("TEMAS RELACIONADOS", 4, ["class" => "strong"]), anchor_enid("- Temas de ayuda", ["class" => 'black ', "href" => "../faq/"])];
 $list3 = [heading_enid("ESPECIALES", 4, ["class" => "strong"]), anchor_enid("- Trabaja en nuestro equipo", ["class" => 'black ', "href" => "../unete_a_nuestro_equipo"])];
 $list4 = [heading_enid("ACERCA DE NOSOTROS", 4, ["class" => "strong"]), anchor_enid(img(["src" => "../img_tema/enid_service_logo.jpg"]), ["class" => 'black ', "href" => "../sobre_enidservice"])];
+
+
 $base = "col-lg-3 col-sm-6 inner";
 
 $list_footer = [
@@ -28,8 +30,8 @@ $list_footer = [
     "class" => "titulo_web",
     "value" => $titulo
 ]) ?>
-<?php if (!is_null($in_session) && $in_session === 0): ?>
-    <?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>
+<?php if (!is_null($in_session) && $in_session < 1): ?>
+    <?php if ( !is_null($proceso_compra) && !isset($proceso_compra) || $proceso_compra == 0): ?>
         <div class="base_compras">
             <div class='col-lg-4'>
                 <?= div(icon('fa  fa-fighter-jet'), ['class' => 'col-lg-2']) ?>
@@ -50,13 +52,11 @@ $list_footer = [
                 ])) ?>
             </div>
             <div class='col-lg-4'>
-
                 <?= div(icon('fa fa-lock '), ['class' => 'col-lg-2']) ?>
                 <?= div(append_data([
                     div(" COMPRAS SEGURAS", ['class' => 'strong']),
                     div("Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!", 1)
                 ])) ?>
-
             </div>
         </div>
     <?php endif; ?>
@@ -65,45 +65,41 @@ $list_footer = [
 
 
 <?php if ($in_session == 0): ?>
-    <?php if (!isset($proceso_compra) || !is_null($proceso_compra) || $proceso_compra == 0): ?>
+    <?php if ( !is_null($proceso_compra)  && !isset($proceso_compra) && $proceso_compra == 0): ?>
         <?= div(print_footer($list_footer), ["class" => "base_paginas_extra"], 1) ?>
     <?php endif ?>
-    <?= n_row_12() ?>
+
     <?php if (!is_null($is_mobile) && $is_mobile == 0): ?>
         <?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>
             <?= $this->load->view("../../../view_tema/metodos_pago"); ?>
         <?php endif ?>
     <?php endif ?>
-    <?= end_row() ?>
-    <?= div("© 2018 ENID SERVICE.", ['class' => 'white footer-enid']) ?>
+    <?= div("© 2019 ENID SERVICE.", ['class' => 'white footer-enid']) ?>
 <?php endif; ?>
 
+
+
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css?<?= version_enid ?>">
-<link href="../css_tema/template/bootstrap.min.css?<?= version_enid ?>"
-      rel="stylesheet" id="bootstrap-css">
-<?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
+<link href="../css_tema/template/bootstrap.min.css?<?= version_enid ?>" rel="stylesheet" id="bootstrap-css">
+<?php if ( !is_null($css)  && isset($css) && is_array($css) && count($css) > 0): ?>
     <?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>
         <link rel="stylesheet" type="text/css" href="<?= $link; ?>?<?= version_enid ?>">
     <?php endforeach; ?>
 <?php endif; ?>
-
-<?php if (isset($css_external) && !is_null($css_external) && is_array($css_external)): ?>
+<?php if (!is_null($css_external)  && isset($css_external)  && is_array($css_external)): ?>
     <?php foreach ($css_external as $c): ?>
-        <link
-                rel="stylesheet"
-                type="text/css"
-                href="<?php echo $c; ?>?<?= version_enid ?>">
+        <link  rel="stylesheet" type="text/css" href="<?php echo $c; ?>?<?= version_enid ?>">
     <?php endforeach; ?>
 <?php endif; ?>
 <script src="../js_tema/js/main.js?<?= version_enid ?>"></script>
-<?php if (isset($js) && !is_null($js) && is_array($js)): ?>
+<?php if ( !is_null($js)  && isset($js) && is_array($js)): ?>
     <?php $s = "../js_tema/";
     foreach ($js as $script): ?>
         <script type='text/javascript' src='<?php echo $s . $script; ?>?<?= version_enid ?>'></script>
     <?php endforeach; ?>
 <?php endif; ?>
 
-<?php if (isset($js_extra) && !is_null($js_extra) && is_array($js_extra)): ?>
+<?php if (!is_null($js_extra)  && isset($js_extra)  && is_array($js_extra)): ?>
     <?php foreach ($js_extra as $script): ?>
         <script type='text/javascript' src='<?php echo $script; ?>'></script>
     <?php endforeach; ?>

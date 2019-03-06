@@ -7,8 +7,6 @@ $resumen_pedido = get_campo($recibo, "resumen_pedido");
 $cantidad = get_campo($recibo, "num_ciclos_contratados");
 $precio = get_campo($recibo, "precio");
 $monto_a_pagar = get_campo($recibo, "monto_a_pagar");
-
-
 $url_seguimiento =  "../pedidos/?seguimiento=".$id_recibo;
 
 ?>

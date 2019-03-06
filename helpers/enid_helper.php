@@ -1269,27 +1269,42 @@ if (!function_exists('get_btw')) {
 		return div(append_data([$a, $b]), ["class" => $class]);
 	}
 }
+if (!function_exists('get_format_fecha_busqueda')) {
 
-//https://www.codeigniter.com/user_guide/general/styleguide.html
-//https://www.codeigniter.com/user_guide/libraries/config.html
-//Poder modificar el punto de entrega desde el mondulo de pedidos
-//https://www.codeigniter.com/user_guide/libraries/email.html
-/*$this->load->add_package_path(APPPATH.'third_party/foo_bar/')
-        ->library('foo_bar');
+    function get_format_fecha_busqueda(){
 
+        $r[] =  div(append_data([
+            div("Inicio", ["class" => 'strong']),
+            input([
+                "data-date-format" => "yyyy-mm-dd",
+                "name" => 'fecha_inicio',
+                "class" => "form-control input-sm datetimepicker4",
+                "id" => 'datetimepicker4',
+                "value" => date("Y-m-d")
+            ])
 
-
-
-https://www.codeigniter.com/user_guide/libraries/output.html
-$this->output
-        ->set_content_type('application/json')
-        ->set_output(json_encode(array('foo' => 'bar')));
-
-$this->output
-        ->set_content_type('jpeg') // You could also use ".jpeg" which will have the full stop removed before looking in config/mimes.php
-        ->set_output(file_get_contents('files/something.jpg'));
+        ]),
+            ["class" => 'col-lg-4']);
 
 
-https://www.codeigniter.com/user_guide/database/configuration.html
-chown -R www-data:www-data
- * */
+        $r[] =   div(append_data([
+            div("Fin", ["class" => 'strong']),
+            input(
+                [
+                    "data-date-format" => "yyyy-mm-dd",
+                    "name" => 'fecha_termino',
+                    "class" => "form-control input-sm datetimepicker5",
+                    "id" => 'datetimepicker5',
+                    "value" => date("Y-m-d")
+                ]
+            )
+        ]),
+            ["class" => 'col-lg-4']);
+
+        $r[] =  div(guardar("Búsqueda " . icon("fa fa-chevron-right") . icon("fa fa-chevron-right")), ["class" => 'col-lg-4']);
+
+        return append_data($r);
+
+
+    }
+}
