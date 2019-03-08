@@ -232,8 +232,8 @@ class Tickets extends REST_Controller
 	{
 
 		$param = $this->get();
-		$data["request"] = $param;
-		$this->load->view("tickets/form_respuesta", $data);
+		$response = get_form_respuesta($param["tarea"]);
+		$this->response($response);
 	}
 
 	function estado_PUT()

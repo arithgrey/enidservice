@@ -1,6 +1,88 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_form_punto_encuentro($num_ciclos, $in_session, $servicio)
+    {
+        $r[] = form_open("", ["class" => "form-horizontal form_punto_encuentro"]);
+        $r[] = label(" NOMBRE ", ["class" => "col-lg-3 "]);
+        $r[] = div(input([
+            "id" => "nombre",
+            "name" => "nombre",
+            "type" => "text",
+            "placeholder" => "Persona que recibe",
+            "class" => "form-control input-md nombre",
+            "required" => true
+        ]), ["class" => "col-lg-9"]);
+
+        $r[] = label("CORREO ", ["class" => "col-lg-3 "]);
+        $r[] = div(input([
+            "id" => "correo",
+            "name" => "email",
+            "type" => "email",
+            "placeholder" => "@",
+            "class" => "form-control input-md correo",
+            "required" => true
+        ]), ["class" => "col-lg-9"]);
+
+        $r[] = label(" TELÉFONO ", ["class" => "col-lg-3 "]);
+        $r[] = div(input([
+            "id" => "tel",
+            "name" => "telefono",
+            "type" => "tel",
+            "class" => "form-control input-md  telefono",
+            "required" => true
+        ]), ["class" => "col-lg-9"]);
+
+        $r[] = label(" CONTRASEÑA", ["class" => "col-lg-3 "]);
+
+        $r[] = div(input([
+            "id" => "pw",
+            "name" => "password",
+            "type" => "password",
+            "class" => "form-control input-md  pw",
+            "required" => true
+        ]), ["class" => "col-lg-9"]);
+
+        $r[] = br(2);
+        $r[] = div(heading_enid("¿En qué horario te gustaría recibir tu pedido?",
+            4,
+            ["class" => "strong pull-right"]), ["class" => "col-lg-12"]);
+
+        $r[] = label(icon("fa fa-calendar-o") . " FECHA ", ["class" => "col-lg-2 "]);
+
+        $r[] = div(input(
+            [
+                "data-date-format" => "yyyy-mm-dd",
+                "name" => 'fecha_entrega',
+                "class" => "form-control input-sm ",
+                "type" => 'date',
+                "value" => date("Y-m-d"),
+                "min" => date("Y-m-d"),
+                "max" => add_date(date("Y-m-d"), 4)
+            ]), ["class" => "col-lg-8"]);
+
+        $r[] = label(icon("fa fa-clock-o") . " HORA DE ENCUENTRO",
+            ["class" => "col-lg-4 "]
+        );
+        $r[] = div(lista_horarios(), ["class" => "col-lg-8"]);
+
+        $r[] = div("+ agregar nota", ["class" => "col-lg-12 cursor_pointer text_agregar_nota", "onclick" => "agregar_nota();"]);
+        $r[] = get_btw(
+            div("NOTAS", ["class" => "strong col-lg-12"]),
+            textarea(["name" => "comentarios"], 1),
+            "input_notas"
+        );
+        $r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form"]);
+        $r[] = input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]);
+        $r[] = br();
+        $r[] = guardar("CONTINUAR", ["class" => "top_20"]);
+        $r[] = get_formar_usuario_registrado($in_session, $servicio, $num_ciclos);
+        $r[] = form_close();
+        return append_data($r);
+
+
+    }
+
     function get_formar_usuario_registrado($in_session, $servicio, $num_ciclos)
     {
 

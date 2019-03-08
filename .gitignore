@@ -5,3 +5,4 @@
 *.sql
 img_tema
 *.idea
+*error_log

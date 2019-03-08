@@ -1,226 +1,253 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_format_sin_resultados_tienda()
+    {
+        $r[] = place("separador_inicial");
+        $r[] = get_btw(
+            heading_enid("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA",
+                1,
+                ['class' => 'strong']
+                ,
+                1),
 
-	function get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil)
-	{
+            div(
+                anchor_enid("ANUNCIA TU PRIMER PRODUCTO " . icon('fa fa-chevron-right ir'),
+                    ["href" => "../planes_servicios/?action=nuevo",
+                        "class" => "a_enid_black2 boton_primer_producto top_30",
+                        "style" => "color: white!important"
+                    ],
+                    1,
+                    1)
+            )
+            ,
+            "col-lg-6  col-lg-offset-3"
+        );
+        $r[] = place("separador_final");
 
+        return append_data($r);
 
-		if ($es_movil > 0) {
+    }
 
-			$response = div(get_format_filtro($filtros, $order), 1);
-
-		} else {
-			$response = get_btw(
-				div(get_format_filtro($filtros, $order)),
-				div($paginacion),
-				"display_flex_enid"
-			);
-		}
-		return $response;
-
-
-	}
-
-	function val_principal_img($q)
-	{
-		$response = (strlen(trim($q)) == 0) ? place("contenedor_img_principal") : "";
-		return $response;
-
-	}
-
-	function get_format_listado_productos($lista_productos)
-	{
-		$response = [];
-
-
-		foreach ($lista_productos as $row) {
-			$response[] = div($row, ["class" => 'col-lg-3']);
-
-		}
-		return append_data($response);
-	}
-
-	function get_format_filtro($filtros, $order)
-	{
-
-		$r[] = '<select class="form-control order" name="order" id="order">';
-		$a = 0;
-		foreach ($filtros as $row):
-			if ($a == $order):
-
-				$r[] = '<option value="' . $a . '" selected>';
-				$r[] = $row;
-				$r[] = '</option>';
-			else:
-				$r[] = '<option value="' . $a . '" selected>';
-				$r[] = $row;
-				$r[] = '</option>';
-
-			endif;
-			$a++;
-		endforeach;
-		$r[] = '</select>';
-
-		return append_data($r);
-
-	}
-
-	function get_format_menu_categorias_destacadas($es_movil, $categorias_destacadas)
-	{
-
-		$r = [];
-		if ($es_movil < 1) {
-
-			foreach (crea_menu_principal_web($categorias_destacadas) as $row):
-
-				$r[] =
-					anchor_enid(mayus($row["nombre_clasificacion"]),
-						[
-							"href" => "?q=&q2=" . $row['primer_nivel'],
-							"class" => 'categorias_mas_vistas'
-						]);
-			endforeach;
-
-		}
-		return append_data($r);
+    function get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil)
+    {
 
 
-	}
+        if ($es_movil > 0) {
 
-	function get_formar_menu_sugerencias($es_movil, $bloque_busqueda, $busqueda)
-	{
+            $response = div(get_format_filtro($filtros, $order), 1);
 
-		$response = "";
-		if ($es_movil < 1) {
-
-			$primer_nivel = $bloque_busqueda["primer_nivel"];
-			$segundo_nivel = $bloque_busqueda["segundo_nivel"];
-			$tercer_nivel = $bloque_busqueda["tercer_nivel"];
-			$cuarto_nivel = $bloque_busqueda["cuarto_nivel"];
-			$quinto_nivel = $bloque_busqueda["quinto_nivel"];
-
-			$bloque_primer_nivel = crea_seccion_de_busqueda_extra($primer_nivel, $busqueda);
-			$bloque_segundo_nivel = crea_seccion_de_busqueda_extra($segundo_nivel, $busqueda);
-			$bloque_tercer_nivel = crea_seccion_de_busqueda_extra($tercer_nivel, $busqueda);
-			$bloque_cuarto_nivel = crea_seccion_de_busqueda_extra($cuarto_nivel, $busqueda);
-			$bloque_quinto_nivel = crea_seccion_de_busqueda_extra($quinto_nivel, $busqueda);
-
-			$r = [];
-			if ($bloque_primer_nivel["num_categorias"] > 0) {
-				$r[] = $bloque_primer_nivel["html"];
-			}
-			if ($bloque_segundo_nivel["num_categorias"] > 0) {
-				$r[] = hr();
-				$r[] = $bloque_segundo_nivel["html"];
-			}
-			if ($bloque_tercer_nivel["num_categorias"] > 0) {
-				$r[] = hr();
-				$r[] = $bloque_tercer_nivel["html"];
-			}
-			if ($bloque_cuarto_nivel["num_categorias"] > 0) {
-				$r[] = hr();
-				$r[] = $bloque_cuarto_nivel["html"];
-			}
-			if ($bloque_quinto_nivel["num_categorias"] > 0) {
-				$r[] = hr();
-				$r[] = $bloque_quinto_nivel["html"];
-			}
-			$response = div(append_data($r), ["class" => "contenedor_sub_categorias"]);
-			$response = div($response, ["class" => 'contenedor_menu_productos_sugeridos']);
-
-		}
-		return $response;
-	}
-
-	function crea_sub_menu_categorias_destacadas($param)
-	{
-		$z = 0;
-		$response = [];
-		foreach ($param as $row) {
-
-			$nombre_clasificacion = $row["nombre_clasificacion"];
-
-			if ($z == 0) {
-				$response [] = "<ul class='clasificaciones_sub_menu_ul'>";
-			}
-			$href = "?q=&q2=" . $row["primer_nivel"];
-			$response [] = li(anchor_enid($nombre_clasificacion, ["href" => $href, "class" => 'text_categoria_sub_menu']));
-			$z++;
-			if ($z == 5) {
-				$z = 0;
-				$response [] = "</ul>";
-			}
-		}
-		return append_data($response);
-	}
-
-	function crea_menu_principal_web($param)
-	{
+        } else {
+            $response = get_btw(
+                div(get_format_filtro($filtros, $order)),
+                div($paginacion),
+                "display_flex_enid"
+            );
+        }
+        return $response;
 
 
-		$z = 0;
-		$data_complete = [];
+    }
 
-		foreach ($param["clasificaciones"] as $row) {
+    function val_principal_img($q)
+    {
+        $response = (strlen(trim($q)) == 0) ? place("contenedor_img_principal") : "";
+        return $response;
 
-			$primer_nivel = $row["primer_nivel"];
-			$total = $row["total"];
-			$nombre_clasificacion = "";
-			foreach ($param["nombres_primer_nivel"] as $row2) {
+    }
 
-				$id_clasificacion = $row2["id_clasificacion"];
-				if ($primer_nivel == $id_clasificacion) {
-					$nombre_clasificacion = $row2["nombre_clasificacion"];
-					break;
-				}
+    function get_format_listado_productos($lista_productos)
+    {
+        $response = [];
 
 
-			}
-			$data_complete[$z]["primer_nivel"] = $primer_nivel;
-			$data_complete[$z]["total"] = $total;
-			$data_complete[$z]["nombre_clasificacion"] = $nombre_clasificacion;
+        foreach ($lista_productos as $row) {
+            $response[] = div($row, ["class" => 'col-lg-3']);
 
-			if ($z == 4) {
-				break;
-			}
-			$z++;
+        }
+        return append_data($response);
+    }
 
-		}
-		return $data_complete;
-	}
+    function get_format_filtro($filtros, $order)
+    {
 
-	function crea_seccion_de_busqueda_extra($info, $busqueda)
-	{
+        $r[] = '<select class="form-control order" name="order" id="order">';
+        $a = 0;
+        foreach ($filtros as $row):
+            if ($a == $order):
 
-		if (is_array($info)) {
+                $r[] = '<option value="' . $a . '" selected>';
+                $r[] = $row;
+                $r[] = '</option>';
+            else:
+                $r[] = '<option value="' . $a . '" selected>';
+                $r[] = $row;
+                $r[] = '</option>';
 
-			$seccion = "";
-			$flag = 0;
+            endif;
+            $a++;
+        endforeach;
+        $r[] = '</select>';
 
-			$lista = [];
-			for ($z = 0; $z < count($info); $z++) {
-				$data = $info[$z];
-				foreach ($data as $row) {
+        return append_data($r);
 
-					$id_clasificacion = $row["id_clasificacion"];
-					$nombre_clasificacion = $row["nombre_clasificacion"];
+    }
 
-					$url = "../search/?q=" . $busqueda . "&q2=" . $id_clasificacion;
-					$lista[] =
-						anchor_enid($nombre_clasificacion, ["href" => $url, "class" => 'categoria_text black']);
+    function get_format_menu_categorias_destacadas($es_movil, $categorias_destacadas)
+    {
 
-					$flag++;
-				}
-			}
+        $r = [];
+        if ($es_movil < 1) {
 
-			$info_seccion["html"] = ul($lista);
-			$info_seccion["num_categorias"] = $flag;
-			return $info_seccion;
+            foreach (crea_menu_principal_web($categorias_destacadas) as $row):
 
-		}
+                $r[] =
+                    anchor_enid(mayus($row["nombre_clasificacion"]),
+                        [
+                            "href" => "?q=&q2=" . $row['primer_nivel'],
+                            "class" => 'categorias_mas_vistas'
+                        ]);
+            endforeach;
 
-	}
+        }
+        return append_data($r);
+
+
+    }
+
+    function get_formar_menu_sugerencias($es_movil, $bloque_busqueda, $busqueda)
+    {
+
+        $response = "";
+        if ($es_movil < 1) {
+
+            $primer_nivel = $bloque_busqueda["primer_nivel"];
+            $segundo_nivel = $bloque_busqueda["segundo_nivel"];
+            $tercer_nivel = $bloque_busqueda["tercer_nivel"];
+            $cuarto_nivel = $bloque_busqueda["cuarto_nivel"];
+            $quinto_nivel = $bloque_busqueda["quinto_nivel"];
+
+            $bloque_primer_nivel = crea_seccion_de_busqueda_extra($primer_nivel, $busqueda);
+            $bloque_segundo_nivel = crea_seccion_de_busqueda_extra($segundo_nivel, $busqueda);
+            $bloque_tercer_nivel = crea_seccion_de_busqueda_extra($tercer_nivel, $busqueda);
+            $bloque_cuarto_nivel = crea_seccion_de_busqueda_extra($cuarto_nivel, $busqueda);
+            $bloque_quinto_nivel = crea_seccion_de_busqueda_extra($quinto_nivel, $busqueda);
+
+            $r = [];
+            if ($bloque_primer_nivel["num_categorias"] > 0) {
+                $r[] = $bloque_primer_nivel["html"];
+            }
+            if ($bloque_segundo_nivel["num_categorias"] > 0) {
+                $r[] = hr();
+                $r[] = $bloque_segundo_nivel["html"];
+            }
+            if ($bloque_tercer_nivel["num_categorias"] > 0) {
+                $r[] = hr();
+                $r[] = $bloque_tercer_nivel["html"];
+            }
+            if ($bloque_cuarto_nivel["num_categorias"] > 0) {
+                $r[] = hr();
+                $r[] = $bloque_cuarto_nivel["html"];
+            }
+            if ($bloque_quinto_nivel["num_categorias"] > 0) {
+                $r[] = hr();
+                $r[] = $bloque_quinto_nivel["html"];
+            }
+            $response = div(append_data($r), ["class" => "contenedor_sub_categorias"]);
+            $response = div($response, ["class" => 'contenedor_menu_productos_sugeridos']);
+
+        }
+        return $response;
+    }
+
+    function crea_sub_menu_categorias_destacadas($param)
+    {
+        $z = 0;
+        $response = [];
+        foreach ($param as $row) {
+
+            $nombre_clasificacion = $row["nombre_clasificacion"];
+
+            if ($z == 0) {
+                $response [] = "<ul class='clasificaciones_sub_menu_ul'>";
+            }
+            $href = "?q=&q2=" . $row["primer_nivel"];
+            $response [] = li(anchor_enid($nombre_clasificacion, ["href" => $href, "class" => 'text_categoria_sub_menu']));
+            $z++;
+            if ($z == 5) {
+                $z = 0;
+                $response [] = "</ul>";
+            }
+        }
+        return append_data($response);
+    }
+
+    function crea_menu_principal_web($param)
+    {
+
+
+        $z = 0;
+        $data_complete = [];
+
+        foreach ($param["clasificaciones"] as $row) {
+
+            $primer_nivel = $row["primer_nivel"];
+            $total = $row["total"];
+            $nombre_clasificacion = "";
+            foreach ($param["nombres_primer_nivel"] as $row2) {
+
+                $id_clasificacion = $row2["id_clasificacion"];
+                if ($primer_nivel == $id_clasificacion) {
+                    $nombre_clasificacion = $row2["nombre_clasificacion"];
+                    break;
+                }
+
+
+            }
+            $data_complete[$z]["primer_nivel"] = $primer_nivel;
+            $data_complete[$z]["total"] = $total;
+            $data_complete[$z]["nombre_clasificacion"] = $nombre_clasificacion;
+
+            if ($z == 4) {
+                break;
+            }
+            $z++;
+
+        }
+        return $data_complete;
+    }
+
+    function crea_seccion_de_busqueda_extra($info, $busqueda)
+    {
+
+        if (is_array($info)) {
+
+            $seccion = "";
+            $flag = 0;
+
+            $lista = [];
+            for ($z = 0; $z < count($info); $z++) {
+                $data = $info[$z];
+                foreach ($data as $row) {
+
+                    $id_clasificacion = $row["id_clasificacion"];
+                    $nombre_clasificacion = $row["nombre_clasificacion"];
+
+                    $url = "../search/?q=" . $busqueda . "&q2=" . $id_clasificacion;
+                    $lista[] =
+                        anchor_enid($nombre_clasificacion, ["href" => $url, "class" => 'categoria_text black']);
+
+                    $flag++;
+                }
+            }
+
+            $info_seccion["html"] = ul($lista);
+            $info_seccion["num_categorias"] = $flag;
+            return $info_seccion;
+
+        }
+
+    }
 
 
 }

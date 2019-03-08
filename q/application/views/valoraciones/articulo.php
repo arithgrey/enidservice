@@ -1,14 +1,4 @@
-<?php
-$a = anchor_enid("MÁS SOBRE EL VENDEDOR" . icon("fa fa-chevron-right ir"),
-    [
-        "class" => "a_enid_black",
-        "href" => "../recomendacion/?q=" . $id_usuario,
-        "style" => "color: white!important"
-    ]);
-
-$h = append_data([heading_enid("VALORACIONES Y RESEÑAS", 2, ["class" => "strong"]), $a]);
-?>
-<?= addNRow($h) ?>
+<?= get_title_valoraciones($id_usuario) ?>
 <?= hr() ?>
 <table style="width: 100%">
     <tr>
@@ -20,7 +10,6 @@ $h = append_data([heading_enid("VALORACIONES Y RESEÑAS", 2, ["class" => "strong
             <table border="1">
                 <tr>
                     <?= get_criterios_busqueda() ?>
-
                 </tr>
             </table>
         </td>
@@ -28,7 +17,6 @@ $h = append_data([heading_enid("VALORACIONES Y RESEÑAS", 2, ["class" => "strong
 </table>
 <?= hr() ?>
 <div class="col-lg-4">
-
     <?= div(anchor_enid("ESCRIBE UNA RESEÑA" . icon("fa fa-chevron-right ir"),
         [
             "class" => "escribir_valoracion",
@@ -37,12 +25,10 @@ $h = append_data([heading_enid("VALORACIONES Y RESEÑAS", 2, ["class" => "strong
         ]),
         ["class" => "btn_escribir_valoracion"]) ?>
     <?= crea_resumen_valoracion($numero_valoraciones); ?>
-
 </div>
 <div class="col-lg-8">
     <div class="contenedor_comentarios">
         <?= crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada); ?>
         <?= div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio), ["class" => "btn_escribir_valoracion"]) ?>
-
     </div>
 </div>

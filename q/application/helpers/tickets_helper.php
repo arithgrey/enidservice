@@ -1,6 +1,23 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_form_respuesta($tarea)
+    {
+
+        $r[] = form_open("", ["class" => "form_respuesta_ticket top_20"]);
+        $r[] = heading_enid("COMENTARIO", 3);
+        $r[] = textarea([
+            "class" => "form-control",
+            "id" => "mensaje",
+            "name" => "mensaje",
+            "required" => ""
+        ]);
+        $r[] = input_hidden(["name" => "tarea", "value" => $tarea ]);
+        $r[] = guardar("Enviar");
+        $r[] = form_close();
+        return append_data($r);
+
+    }
 
     function get_form_ticket($departamentos)
     {

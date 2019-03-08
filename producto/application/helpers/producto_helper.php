@@ -1,6 +1,69 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio){
+
+        $r[] = div($nombre_producto, ["class" => "card-header"]);
+        $r[] = get_format_disponibilidad($precio, $existencia, $flag_servicio, $url_ml, $id_servicio);
+        return div(append_data($r), ["class"=>"card box-shadow"]);
+
+    }
+    function get_format_disponibilidad($precio, $existencia, $flag_servicio, $url_ml, $id_servicio)
+    {
+
+        $r[] = heading($precio . "MXN" . get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml),
+            1,
+            ["class" => "card-title pricing-card-title"]
+        );
+
+        $r[] = ul([
+            "Artículo temporalmente agotado",
+            anchor_enid(
+                "Preguntar cuando estará disponible",
+                ["href" => "../pregunta/?tag=" . $id_servicio . "&disponible=1"],
+                1,
+                1
+            )
+
+        ],
+            ["class" => "list-unstyled mt-3 mb-4"]);
+        return append_data($r);
+
+    }
+
+    function get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
+                                       $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
+                                       $telefono_visible, $usuario, $venta_mayoreo)
+    {
+
+        $r[] = $boton_editar;
+        $r[] = $estrellas;
+        $r[] = $nombre_producto;
+        $r[] = heading_enid($nuevo_nombre_servicio, 3);
+        $r[] = validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion);
+        $r[] = $tallas;
+        $r[] = $texto_en_existencia;
+        $r[] = get_info_vendedor($entregas_en_casa, $flag_servicio, $proceso_compra, $telefono_visible, $in_session, $usuario);
+        $r[] = div(valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo), 1);
+        return append_data($r);
+
+    }
+
+    function validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion)
+    {
+
+        $response = "";
+        if ($flag_servicio == 0):
+            if ($existencia > 0):
+                $response = get_form_compra($id_servicio, $flag_servicio, $existencia, $in_session, $q2);
+            endif;
+        else:
+            if ($precio > 0 && $id_ciclo_facturacion != 9): ;
+                $response = get_form_compra($id_servicio, $flag_servicio, $existencia, $in_session, $q2);
+            endif;
+        endif;
+        return $response;
+    }
 
     function get_format_eleccion_contra_entrega()
     {
@@ -8,7 +71,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = img(["src" => "..//img_tema/linea_metro/metro.jpg", "class" => "icono_metro"]);
         $r[] = div(heading_enid("PAGO CONTRA ENTREGA", 3), ["class" => "title"]);
         $r[] = div(div("ACORDEMOS UN PUNTO MEDIO "), ["class" => "text"]);
-        return div(append_data($r), ["class"=>"box-part text-center"]);
+        return div(append_data($r), ["class" => "box-part text-center"]);
 
     }
 

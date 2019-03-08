@@ -44,22 +44,16 @@ foreach ($info_servicio["servicio"] as $row) {
 
 }
 
-
 $imagenes = construye_seccion_imagen_lateral($imgs, $nombre_servicio, $url_vide_youtube);
-$info_compra["id_servicio"] = $id_servicio;
-$info_compra["proceso_compra"] = $proceso_compra;
-$info_compra["flag_servicio"] = $flag_servicio;
-$info_compra["precio"] = $precio;
-$info_compra["id_ciclo_facturacion"] = $id_ciclo_facturacion;
-$url_tienda = '../search/?q3=' . $id_publicador;
 $vendedor_valoracion = anchor_enid("", ['class' => 'valoracion_persona_principal valoracion_persona']);
 $nombre_servicio = substr(strtoupper($nombre_servicio), 0, 70);
 $nombre_producto = heading_enid($nombre_servicio, 1, ['class' => "strong"]);
 $nuevo_nombre_servicio = valida_text_servicio($flag_servicio, $precio, $id_ciclo_facturacion);
 $boton_editar = valida_editar_servicio($id_usuario_servicio, $id_usuario, $in_session, $id_servicio);
 $texto_en_existencia = get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml);
-$config = ['class' => 'valoracion_persona_principal valoracion_persona'];
-$estrellas = anchor_enid(div("", $config), ['class' => 'lee_valoraciones', 'href' => $url_tienda]);
+
+
+$estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valoracion_persona']), ['class' => 'lee_valoraciones', 'href' => '../search/?q3=' . $id_publicador]);
 
 
 ?>
@@ -79,48 +73,21 @@ $estrellas = anchor_enid(div("", $config), ['class' => 'lee_valoraciones', 'href
             </div>
         </div>
         <div class="col-lg-4">
-            <?php if ($flag_servicio == 0): ?>
+            <?php if ($flag_servicio < 1): ?>
                 <?php if ($existencia > 0): ?>
+
                     <div class="info-venta">
-                        <?= $boton_editar ?>
-                        <?= $estrellas ?>
-                        <?= $nombre_producto ?>
-                        <?= heading_enid($nuevo_nombre_servicio, 3) ?>
-                        <?= $this->load->view("form_compra", $info_compra) ?>
-                        <?= $tallas ?>
-                        <?= $texto_en_existencia ?>
-                        <?= get_info_vendedor($entregas_en_casa, $flag_servicio, $proceso_compra, $telefono_visible, $in_session, $usuario) ?>
-                        <?= div(valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo), 1) ?>
+                        <?= get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
+                            $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
+                            $telefono_visible, $usuario, $venta_mayoreo) ?>
                     </div>
                 <?php else: ?>
-                    <div class="card box-shadow">
-                        <?= div($nombre_producto, ["class" => "card-header"]) ?>
-                        <div class="card-body">
-                            <?= heading($precio . "MXN" . get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml),
-                                1,
-                                ["class" => "card-title pricing-card-title"]
-                            ) ?>
-
-                            <?= ul([
-                                "Artículo temporalmente agotado",
-                                anchor_enid(
-                                    "Preguntar cuando estará disponible",
-                                    ["href" => "../pregunta/?tag=<?=$id_servicio?>&disponible=1"],
-                                    1,
-                                    1
-                                )
-
-                            ],
-                                ["class" => "list-unstyled mt-3 mb-4"]) ?>
-                        </div>
-                    </div>
+                    <?= get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio) ?>
                 <?php endif; ?>
 
             <?php else: ?>
                 <div class="card box-shadow">
-                    <?= div(heading_enid(substr(strtoupper($nombre_servicio), 0, 70), 1),
-                        ["class" => "card-header"]
-                    ) ?>
+                    <?= div(heading_enid(substr(strtoupper($nombre_servicio), 0, 70), 1), ["class" => "card-header"]) ?>
                     <?= heading_enid(
                         valida_text_servicio(
                             $flag_servicio,
@@ -134,7 +101,7 @@ $estrellas = anchor_enid(div("", $config), ['class' => 'lee_valoraciones', 'href
                         ["href" => "../pregunta/?tag=" . $id_servicio . "?>&disponible=1"
                         ]
                     ) ?>
-                    <?= $this->load->view("form_compra", $info_compra) ?>
+                    <?= validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion) ?>
                 </div>
             <?php endif; ?>
         </div>

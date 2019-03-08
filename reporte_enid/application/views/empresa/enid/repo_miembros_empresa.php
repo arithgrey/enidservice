@@ -72,14 +72,3 @@ foreach ($miembros as $row) {
 		<?= $lis_miembros; ?>
 	</table>
 </div>
-<style type="text/css">
-	.tipo_text {
-		background: #166781;
-		color: white;
-	}
-	
-	.campo_contacto {
-		background: #3C5E79;
-		color: white;
-	}
-</style>
