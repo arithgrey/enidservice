@@ -1,6 +1,16 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+	function valida_format_respuestas_menu($in_session, $lista_categorias){
+
+
+		$response =  "";
+		if ($in_session > 0){
+			$response =  div(get_form_respuesta($lista_categorias) ,[ "class"=>"tab-pane fade" , "id"=>"tab2default"]);
+		}
+		return $response;
+
+	}
 
     function get_format_faqs($flag_categoria , $flag_busqueda_q, $categorias_publicas_venta, $categorias_temas_de_ayuda, $faqs_categoria, $respuesta, $in_session, $perfil){
 

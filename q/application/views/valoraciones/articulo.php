@@ -15,7 +15,7 @@
         </td>
     </tr>
 </table>
-<?= hr() ?>
+
 <div class="col-lg-4">
     <?= div(anchor_enid("ESCRIBE UNA RESEÑA" . icon("fa fa-chevron-right ir"),
         [

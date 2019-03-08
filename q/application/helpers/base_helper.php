@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
 			$nombre_categoria = $row["nombre_categoria"];
 			$faqs = $row["faqs"];
 			$href = "?categoria=" . $id_categoria;
-			$text_lista = icon("fa fa-file-text-o") . span($nombre_categoria . "(" . $faqs . ")");
+			$text_lista = span($nombre_categoria . "(" . $faqs . ")");
 			$link = anchor_enid($text_lista, ['href' => $href]);
 			$l .= div($link, ["class" => "col-lg-4"]);
 		}

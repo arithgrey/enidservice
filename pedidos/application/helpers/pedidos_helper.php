@@ -271,7 +271,7 @@ if (!function_exists('invierte_date_time')) {
 		}
 	}
 	if (!function_exists('get_form_fecha_entrega')) {
-		function get_form_fecha_entrega($r, $orden)
+		function get_form_fecha_entrega( $orden)
 		{
 
 

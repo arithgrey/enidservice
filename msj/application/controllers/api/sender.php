@@ -37,12 +37,14 @@ class Sender extends REST_Controller
 
 
 				if (es_local() > 0) {
+
 					if ($test > 0) {
-						$response = $this->email->print_debugger($this->email->send());
+						//$response = $this->email->print_debugger($this->email->send());
 					} else {
 						debug("Se imprimiría aquí!", 1);
 
 					}
+
 
 				} else {
 					$response = $this->email->print_debugger($this->email->send());

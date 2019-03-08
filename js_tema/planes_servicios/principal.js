@@ -700,7 +700,6 @@ let carga_listado_categorias = function () {
 
 let respuestas_primer_nivel = function (data) {
 
-
     llenaelementoHTML(".primer_nivel_seccion", data);
     if (get_option("selected_1") == 1) {
         selecciona_valor_select(".nivel_1", get_option("selected_num_1"));

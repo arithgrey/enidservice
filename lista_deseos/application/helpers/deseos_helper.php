@@ -6,18 +6,20 @@ if (!function_exists('invierte_date_time')) {
         function get_list_clasificaciones($is_mobile, $preferencias, $tmp)
         {
 
+	        $r = [];
             if ($is_mobile == 1) {
                 $r[] = $tmp;
             }
             $r[] = '<div class="col-lg-8">';
 
-            $r = 0;
+            $t = 0;
             $z = 0;
             foreach ($preferencias as $row):
 
                 if ($z == 0):
 
                     $r[] = '<div class="col-lg-4">';
+
                 endif;
                 $r[] = get_format_clasificaciones($row);
                 $z++;
@@ -25,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
                     $r[] = '</div>';
                     $z = 0;
                 endif;
-                $r++;
+                $t++;
                 if ($r == 26):
                     $r[] = '</div>';
                 endif;

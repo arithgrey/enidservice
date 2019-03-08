@@ -40,7 +40,7 @@ if (!function_exists('invierte_date_time')) {
         function get_selector_categoria($is_mobile)
         {
 
-            $z = [];
+            $r = [];
             if ($is_mobile > 0) {
 
 
@@ -66,7 +66,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
-            return div(append_data($z), ["class" => "contenedor_categorias_servicios"]);
+            return div(append_data($r), ["class" => "contenedor_categorias_servicios"]);
 
         }
     }

@@ -95,44 +95,39 @@ class Faqs extends REST_Controller
 		}
 		$this->response($response);
 	}
-	/*
-	function q_GET(){
-	  $param      = $this->get();
-	  $response   =  $this->faqsmodel->q($param);
-	  $this->response($response);
-	}
-	*/
-	/*
-	function categorias_extras_GET(){
-  
-	  $in_session =  $this->principal->is_logged_in();
-	  if ($in_session ==  false ){
-		
-		$this->response("");
-  
-	  }else{
-  
-		$perfiles     =  $this->principal->getperfiles();
-		$id_perfil    =  $perfiles[0]["idperfil"];
-		  
-		switch ($id_perfil) {
-			case 20:
-			  $data_complete["categorias_cliente"]=  $this->get_categorias_por_tipo(3);
-			  $this->load->view("faq/categorias" , $data_complete);
-			  break;
-			
-			default:          
-  
-			  $data_complete["categorias_cliente"]=  $this->get_categorias_por_tipo(3);
-			  $data_complete["labor_venta"]       =  $this->get_categorias_por_tipo(4);
-			  $this->load->view("faq/categorias_usuario_enid_service" , $data_complete);
-  
-			  break;
-		  }  
-		
-		
-	  }
-	}
-	*/
 
+	function categorias_extras_GET()
+	{
+
+		$in_session = $this->principal->is_logged_in();
+		$response = "";
+		if ($in_session != false) {
+
+			$perfil = $this->principal->getperfiles();
+			switch ($perfil) {
+				case 20:
+					$categorias = $this->get_categorias_por_tipo(3);
+					$response = lista_categorias($categorias);
+					break;
+
+				default:
+
+					$r[] = lista_categorias($this->get_categorias_por_tipo(3));
+					$r[] = lista_categorias($this->get_categorias_por_tipo(4));
+					$response = append_data($r);
+					break;
+
+			}
+		}
+
+		$this->response($response);
+	}
+
+	private function get_categorias_por_tipo($tipo)
+	{
+
+		$q["tipo"] = $tipo;
+		$api = "categoria/categorias_por_tipo/format/json/";
+		return $this->principal->api($api, $q);
+	}
 }

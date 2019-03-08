@@ -19,7 +19,8 @@ if (!function_exists('invierte_date_time')) {
 
             $r = [];
             if ($in_session < 1) {
-                $r[] = get_btw(
+
+            	$x[] = get_btw(
                     div("Nombre *")
                     ,
                     div(input([
@@ -33,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
                     " col-lg-6"
                 );
 
-                $r[] = div(append_data([
+                $x[] = div(append_data([
 
                     div("Correo Electrónico  *")
                     ,
@@ -50,6 +51,10 @@ if (!function_exists('invierte_date_time')) {
 
                 ]), ["class" => " col-lg-6"]);
 
+
+
+
+				$r[] = div(append_data($x)  , ["class" => "row"]);
 
                 $r[] = div(icon('fa fa-unlock-alt') . "Escribe una contraseña");
                 $r[] = input([

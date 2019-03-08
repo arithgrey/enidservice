@@ -31,8 +31,6 @@ let muestra_estaciones = function(){
 	$(".tipos_puntos_encuentro").hide();
 	let id 			 =  get_parameter_enid($(this) , "id");
 	let nombre_linea =  get_parameter_enid($(this) , "nombre_linea");
-	
-	
 	set_option("nombre_linea" ,nombre_linea);
 	if (id > 0 ) {		
 		if (get_parameter(".primer_registro") ==  1 ) {
@@ -43,7 +41,6 @@ let muestra_estaciones = function(){
 			request_enid( "GET",  data_send, url, response_estaciones);			
 		}else{
 
-			/*Pre registro*/
 			let url  	   = "../q/index.php/api/punto_encuentro/linea_metro/format/json/";
 			let data_send  = {"id":id , "v":2 , "recibo" : get_parameter(".recibo")};					
 			request_enid( "GET",  data_send, url, response_estaciones);	

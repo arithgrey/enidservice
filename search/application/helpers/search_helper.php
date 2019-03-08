@@ -5,23 +5,17 @@ if (!function_exists('invierte_date_time')) {
     {
         $r[] = place("separador_inicial");
         $r[] = get_btw(
-            heading_enid("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA",
-                1,
-                ['class' => 'strong']
-                ,
-                1),
 
-            div(
-                anchor_enid("ANUNCIA TU PRIMER PRODUCTO " . icon('fa fa-chevron-right ir'),
-                    ["href" => "../planes_servicios/?action=nuevo",
-                        "class" => "a_enid_black2 boton_primer_producto top_30",
-                        "style" => "color: white!important"
-                    ],
-                    1,
-                    1)
+        	heading_enid("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA", 1),
+            guardar("ANUNCIA TU PRIMER PRODUCTO " . icon('fa fa-chevron-right ir'),
+                    ["class" => "top_30"],
+	            1,
+	            1,
+	            1,
+                     "../planes_servicios/?action=nuevo"
             )
             ,
-            "col-lg-6  col-lg-offset-3"
+            "col-lg-6  col-lg-offset-3 text-center"
         );
         $r[] = place("separador_final");
 

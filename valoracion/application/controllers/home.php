@@ -50,7 +50,7 @@ class Home extends CI_Controller
 	{
 
 		$api = "valoracion/valoracion_form/format/json/";
-		return $this->principal->api($api, $q, "html");
+		return $this->principal->api($api, $q);
 
 	}
 }

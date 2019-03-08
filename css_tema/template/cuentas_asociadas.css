@@ -6,14 +6,12 @@
 }
 
 .info_cuenta {
-    background: white;
-    color: black;
-    border-width: .5px;
+    
+    color: #00137d;
     border-style: solid;
-    border-radius: 10px;
     padding: 10px;
-    height: 90px;
-    margin-top: 20px;
+    text-align: center;
+    
 }
 
 .contenedor_info_trasnfer {

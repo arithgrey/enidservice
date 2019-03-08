@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_open("", ["class" => "form_valoracion"]);
         $r[] = place("nuevo");
         $r[] = get_btw(
-            strong("Valoración*", ["class" => "text-valoracion"]),
+            div("Valoración*", ["class" => "text-valoracion"]),
             get_posibles_calificaciones(["", "Insuficiente", "Aceptable", "Promedio", "Bueno", "Excelente"]),
             "displa_flex_enid"
         );
@@ -61,17 +61,31 @@ if (!function_exists('invierte_date_time')) {
 
         );
         $r[] = place("nuevo");
+
+        $input =
+	        '<input type="text" name="nombre" 
+	        placeholder="Por ejemplo: Jonathan" 
+	        value="' . $nombre . '"  '. valida_readonly($nombre) .' 
+            required>';
+
         $r[] = get_btw(
-            div(strong("Nombre*", ["class" => "text-valoracion"])),
-            '<input type="text" name="nombre" placeholder="Por ejemplo: Jonathan" value="' . $nombre . '" valida_readonly($nombre) ; required>',
+            div("Nombre*", ["class" => "text-valoracion strong"]),
+            $input,
+
             "display_flex_enid"
 
         );
         $r[] = input_hidden(["name" => "id_servicio", "value" => $id_servicio]);
         $r[] = place("nuevo");
+
+        $in =  '<input type="email" 
+        name="email" 
+        placeholder="Por ejemplo: jmedrano@enidservice.com" 
+        required ' . valida_readonly($email) . ' value="' . $email . '">';
+
         $r[] = get_btw(
             div(strong("Tu correo electrónico*", ["class" => "text-valoracion"])),
-            '<input type="email" name="email" placeholder="Por ejemplo: jmedrano@enidservice.com" required ' . valida_readonly($email) . ' value="' . $email . '">',
+            $in,
             "display_flex_enid"
 
         );

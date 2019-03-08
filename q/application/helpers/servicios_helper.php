@@ -168,7 +168,7 @@ if (!function_exists('invierte_date_time')) {
 					"status" => $status,
 					"class" => 'button_enid_eleccion activar_publicacion'
 				],
-				1);
+				1).br(2);
 		return $btn;
 
 
@@ -570,7 +570,17 @@ if (!function_exists('invierte_date_time')) {
 			$select .= "</select>";
 			$select .= place("response_tiempo_entrega");
 
-			return div(div($titulo, ["class" => "col-lg-6"]) . div($select, ["class" => "col-lg-6"]), 1);
+
+
+
+			$response = get_btw(
+				$titulo,
+				$select,
+				"display_flex_enid"
+				);
+
+			return  $response;
+
 		}
 
 	}
@@ -598,7 +608,9 @@ if (!function_exists('invierte_date_time')) {
 			$select .= input_hidden(["name" => "servicio", "value" => $id_servicio]);
 
 
-			return div(div($titulo, ["class" => "col-lg-6"]) . div($select, ["class" => "col-lg-6"]), 1);
+
+			$response =  get_btw($titulo, $select , "display_flex_enid");
+			return $response;
 		}
 
 	}
