@@ -46,4 +46,5 @@ class Recibo_comentario_model extends CI_Model
 	{
 		return $this->get($params, ["id_recibo_comentario" => $id]);
 	}
+
 }

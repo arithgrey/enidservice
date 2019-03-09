@@ -422,6 +422,42 @@ if (!function_exists('invierte_date_time')) {
 
 
 	}
+
+	function add_compras_sin_cierre($recibos){
+
+		$r =  [];
+		$f =  0;
+		foreach ($recibos as $row){
+
+
+			$id_recibo =  $row["id_recibo"];
+			$id_servicio =  $row["id_servicio"];
+			$total =  div($row["total"]."MXN" , ["class" => "text_monto_sin_cierre text-left"]);
+			$text =  get_btw(
+				div(get_img_servicio($id_servicio) , ["style" => "width:50px"]),
+				$total,
+				"display_flex_enid"
+			);
+
+			$url = "../pedidos/?recibo=".$id_recibo;
+			$r[] =  anchor_enid($text, ["href" =>   $url ] );
+			$f  ++;
+		}
+
+
+
+		array_unshift($r, "VENTAS EN PROCESO" );
+		$response =  [
+			"html" => append_data($r),
+			"flag" => $f,
+
+		];
+		return $response;
+
+
+
+	}
+
 	function get_tareas_pendienetes_usuario_cliente($info)
 	{
 
@@ -488,6 +524,15 @@ if (!function_exists('invierte_date_time')) {
 
 
 
+
+		$compras_sin_cierre =  add_compras_sin_cierre($info["compras_sin_cierre"]);
+		$lista .= $compras_sin_cierre["html"];
+		$f = $f + $compras_sin_cierre["flag"];
+
+
+
+
+
 		$mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf["mensajes"], 2);
 		$f = $f + $mensajes_sin_leer["flag"];
 		$lista .= $mensajes_sin_leer["html"];
@@ -521,22 +566,7 @@ if (!function_exists('invierte_date_time')) {
 					break;
 
 
-				case "Email":
 
-					$meta_email = $row["cantidad"];
-					$notificacion_email = add_email_pendientes_por_enviar($meta_email, $email_enviados_enid_service);
-					$lista .= $notificacion_email["html"];
-					$f = $f + $notificacion_email["flag"];
-					break;
-
-				case "Accesos":
-					$meta_accesos = $row["cantidad"];
-					$notificacion =
-						add_accesos_pendientes($meta_accesos, $accesos_enid_service);
-					$lista .= $notificacion["html"];
-					$f = $f + $notificacion["flag"];
-
-					break;
 
 				case "Desarrollo_web":
 

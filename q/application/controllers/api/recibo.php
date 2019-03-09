@@ -14,7 +14,18 @@ class recibo extends REST_Controller
 		$this->load->library(lib_def());
 		$this->id_usuario = $this->principal->get_session("idusuario");
 	}
+	function pendientes_sin_cierre_GET(){
 
+		$param = $this->get();
+		$response = false;
+		if (if_ext($param, "id_usuario")) {
+
+			$id_usuario = $param["id_usuario"];
+			$response = $this->recibo_model->pendientes_sin_cierre($id_usuario);
+		}
+		$this->response($response);
+
+	}
 	function saldo_POST()
 	{
 

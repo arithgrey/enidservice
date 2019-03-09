@@ -25,7 +25,7 @@ class productividad extends REST_Controller
 		$response["info_notificaciones"] = $this->get_notificaciones_usuario_perfil($param);
 		$response["id_perfil"] = $param["id_perfil"];
 		if ($param["id_perfil"] == 3 || $response["info_notificaciones"] == 4) {
-			$data_complete["envios_a_validar_enid_service"] = $this->envios_a_validar_enid_service();
+			//$data_complete["envios_a_validar_enid_service"] = $this->envios_a_validar_enid_service();
 		}
 
 		$id_perfil = $param["id_perfil"];
@@ -37,11 +37,14 @@ class productividad extends REST_Controller
 		$response["info_notificaciones"]["numero_telefonico"] = $this->verifica_registro_telefono($prm);
 
 
+
 		switch ($id_perfil) {
 
 			case 3:
 
+
 				$response["recordatorios"]       = $this->get_recordatorios($id_usuario);
+				$response["compras_sin_cierre"]  =  $this->pendientes_ventas_usuario($id_usuario);
 				$response["ventas_enid_service"] = $this->get_ventas_enid_service();
 				$response = get_tareas_pendienetes_usuario($response);
 
@@ -133,12 +136,13 @@ class productividad extends REST_Controller
 		$api = "recibo/dia/format/json/";
 		return $this->principal->api($api, $q);
 	}
-
-	private function envios_a_validar_enid_service()
+	private function pendientes_ventas_usuario($id_usuario)
 	{
+		$q["id_usuario"] = $id_usuario;
+		$api = "recibo/pendientes_sin_cierre/format/json/";
+		return $this->principal->api($api, $q);
 
 	}
-
 	private function get_adeudo_cliente($q)
 	{
 		$api = "recibo/deuda_cliente/format/json/";
