@@ -1301,7 +1301,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
         ]),
             ["class" => 'col-lg-4']);
 
-        $r[] =  div(guardar("Búsqueda " . icon("fa fa-chevron-right") . icon("fa fa-chevron-right")), ["class" => 'col-lg-4']);
+        $r[] =  div(guardar("Búsqueda " . icon("fa fa-chevron-right") . icon("fa fa-chevron-right")), ["class" => 'col-lg-4 top_10']);
 
         return append_data($r);
 

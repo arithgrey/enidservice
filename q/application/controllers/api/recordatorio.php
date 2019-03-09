@@ -3,7 +3,6 @@ require APPPATH . '../../librerias/REST_Controller.php';
 
 class recordatorio extends REST_Controller
 {
-	private $id_usuario;
 
 	function __construct()
 	{
@@ -32,13 +31,16 @@ class recordatorio extends REST_Controller
 			$id_recibo = $param["recibo"];
 			$tipo = $param["tipo"];
 			$descripcion = $param["descripcion"];
+			$id_usuario =   $this->principal->get_session("idusuario");
+
 
 			$params = [
 
 				"fecha_cordatorio" => $fecha,
 				"id_recibo" => $id_recibo,
 				"id_tipo" => $tipo,
-				"descripcion" => $descripcion
+				"descripcion" => $descripcion,
+				"id_usuario" => $id_usuario
 
 			];
 			$response = $this->recordatorio_model->insert($params);

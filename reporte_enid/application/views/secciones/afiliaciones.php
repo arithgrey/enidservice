@@ -16,7 +16,7 @@
             </div>
             <div class="tab-pane" id="tab_reporte_lista_afiliados">
                 <?= form_open("", ["class" => 'form_busqueda_afiliacion_productividad']) ?>
-                <?= $this->load->view("../../../view_tema/inputs_fecha_busqueda") ?>
+                <?=get_format_fecha_busqueda()?>                            
                 <?= form_close() ?>
                 <?= place("place_repo_afiliacion_productividad") ?>
             </div>

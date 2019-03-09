@@ -2,13 +2,51 @@
 if (!function_exists('invierte_date_time')) {
 
 
+	if (!function_exists('get_form_busqueda_pedidos')) {
+
+		function get_form_busqueda_pedidos($tipos_entregas, $status_ventas)
+		{
 
 
+			$fechas[] = array(
+				"fecha" => "FECHA REGISTRO",
+				"val" => 1
+			);
+			$fechas[] = array(
+				"fecha" => "FECHA CONTRA ENTREGA",
+				"val" => 5
+			);
+			$fechas[] = array(
+				"fecha" => "FECHA ENTREGA",
+				"val" => 2
+			);
+			$fechas[] = array(
+				"fecha" => "FECHA CANCELACION",
+				"val" => 3
+			);
+			$fechas[] = array(
+				"fecha" => "FECHA PAGO",
+				"val" => 4
+			);
+
+			$r[] = form_open("", ["class" => "form_busqueda_pedidos ", "method" => "post"]);
+			$r[] = form_busqueda_pedidos($tipos_entregas, $status_ventas);
+			$x[] = strong("ORDENAR");
+			$x[] = create_select($fechas, "tipo_orden", "form-control", "tipo_orden", "fecha", "val");
+			$r[] = div(append_data($x), ["class" => "col-lg-3"]);
+			$r[] = div(get_format_fecha_busqueda(), ["class" => "col-lg-6"]);
+			$r[] = form_close(place("place_pedidos"));
+			$r[] = form_form_search();
+			return append_data($r);
+
+		}
+	}
 
 	if (!function_exists('form_form_search')) {
-		function form_form_search(){
+		function form_form_search()
+		{
 
-			$r[] = form_open("", ["class"=>"form_search",  "method"=>"GET"]);
+			$r[] = form_open("", ["class" => "form_search", "method" => "GET"]);
 			$r[] = input_hidden(["name" => "recibo", "value" => "", "class" => "numero_recibo"]);
 			$r[] = form_close();
 			return append_data($r);
@@ -37,7 +75,7 @@ if (!function_exists('invierte_date_time')) {
 
 			]);
 			$r[] = get_btw(
-				strong("#Recibo"),
+				strong("#RECIBO"),
 				input([
 					"name" => "recibo",
 					"class" => "form-control"
@@ -271,7 +309,7 @@ if (!function_exists('invierte_date_time')) {
 		}
 	}
 	if (!function_exists('get_form_fecha_entrega')) {
-		function get_form_fecha_entrega( $orden)
+		function get_form_fecha_entrega($orden)
 		{
 
 
@@ -565,7 +603,7 @@ if (!function_exists('invierte_date_time')) {
 
 			$text = "";
 
-			if (is_array($data_direccion)){
+			if (is_array($data_direccion)) {
 				if ($data_direccion["tipo_entrega"] == 2 && count($data_direccion["domicilio"]) > 0) {
 
 
@@ -587,7 +625,7 @@ if (!function_exists('invierte_date_time')) {
 				} else {
 
 					if (is_array($data_direccion)
-						&& array_key_exists("domicilio" , $data_direccion)
+						&& array_key_exists("domicilio", $data_direccion)
 						&& is_array($data_direccion["domicilio"])
 						&& count($data_direccion["domicilio"]) > 0) {
 
@@ -671,7 +709,6 @@ if (!function_exists('invierte_date_time')) {
 						$seccion_2 = get_seccion_compra($recibo, $id_recibo, $es_vendedor);
 
 						break;
-
 
 
 					default:

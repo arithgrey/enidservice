@@ -159,6 +159,9 @@ class recibo extends REST_Controller
 				$data["anteriores"] = $this->recibo_model->num_compras_efectivas_usuario($param);
 				$data["modalidad"] = $modalidad;
 				$data["status_enid_service"] = $status_enid_service = $this->get_estatus_servicio_enid_service($param);
+
+
+				$data["id_perfil"] =  $this->principal->getperfiles();
 				$response = get_vista_cliente($data);
 
 			}
@@ -232,6 +235,7 @@ class recibo extends REST_Controller
 					$usuario = $this->principal->get_info_usuario($id_usuario_venta);
 					$data_complete["usuario_venta"] = $usuario;
 					$data_complete["modalidad"] = 1;
+
 					return $this->load->view("cobranza/notificacion_pago_realizado", $data_complete);
 
 				}
@@ -445,7 +449,6 @@ class recibo extends REST_Controller
 
 	private function get_data_saldo($param, $recibo, $data_complete)
 	{
-		/*Cargamos el saldo que tiene la persona*/
 		$data_complete["id_recibo"] = $param["id_recibo"];
 		$id_usuario_venta = $recibo[0]["id_usuario_venta"];
 		$data_complete["id_usuario_venta"] = $id_usuario_venta;
@@ -504,11 +507,10 @@ class recibo extends REST_Controller
 				$response = $this->recibo_model->get_q($params, $param);
 			}
 			if ($param["v"] == 1) {
-				/*cargo vista*/
+
 				$response = create_resumen_pedidos($response, $this->get_estatus_enid_service($param), $param);
 
 			}
-
 		}
 		$this->response($response);
 

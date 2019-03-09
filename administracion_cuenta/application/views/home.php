@@ -1,13 +1,11 @@
 <div class="contenedor_principal_enid">
     <div class="col-lg-2">
-        <nav class="nav-sidebar">
-            <?= get_menu($id_usuario); ?>
-        </nav>
+		<?= get_menu($id_usuario); ?>
     </div>
     <div class="col-lg-10">
         <div class="tab-content">
             <div class="tab-pane active" id="tab_mis_datos">
-                <?= $this->load->view("micuenta/cuenta"); ?>
+	            <?=get_format_foto_usuario($id_usuario, $usuario)?>
             </div>
             <div class="tab-pane " id="tab_privacidad">
                 <?= get_btw(
@@ -26,4 +24,3 @@
     </div>
 </div>
 
-	

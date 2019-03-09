@@ -5,12 +5,8 @@ $apellido_materno = get_campo($usuario, "apellido_materno");
 $nombre_persona = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
 $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJETA DE DÉDITO O CRÉDITO";
 ?>
-
-
-<?= n_row_12() ?>
 <div class='contenedor_principal_enid'>
 	<?php if ($seleccion == 0): ?>
-	<?= n_row_12() ?>
 	<div class="col-lg-4 col-lg-offset-4"
 	     style="background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;">
 		<?= heading($text_tipo_ingreso, 3) ?>
@@ -81,7 +77,6 @@ $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJET
 				<?= input_hidden(["name" => "tipo", "value" => $banca]) ?>
 				<?= br() ?>
 				<?= guardar("ASOCIAR" . icon("fa fa-chevron-right")) ?>
-
 				<?= div(p("Al asociar tu cuenta, podrás transferir tu saldo de 
                                     Enid Service a tu cuenta personal",
 						["class" => "white"])
@@ -90,10 +85,8 @@ $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJET
 				) ?>
 			</div>
 	</div>
-	</form>
+	<?=form_close()?>
 </div>
-<?= end_row() ?>
-
 <?php else: ?>
 	<div class="col-lg-4 col-lg-offset-4"
 	     style="background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;">
@@ -101,6 +94,5 @@ $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJET
 	</div>
 <?php endif; ?>
 </div>
-<?= end_row() ?>
 
 

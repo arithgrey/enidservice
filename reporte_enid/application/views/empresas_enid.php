@@ -14,37 +14,37 @@
 					<?= div("INDICADORES ENID SERVICE",
 						["class" => "titulo_enid_sm", 1]) ?>
 					<?= form_open("", ["class" => 'form_busqueda_global_enid']) ?>
-					<?= $this->load->view("../../../view_tema/inputs_fecha_busqueda") ?>
+					<?=get_format_fecha_busqueda()?>            					
 					<?= form_close(place("place_usabilidad")) ?>
 				</div>
 				<div class="tab-pane" id='tab_default_2'>
 					<?= div("VISITAS WEB ", ["class" => "titulo_enid_sm"], 1) ?>
 					<?= form_open("", ["class" => 'f_usabilidad']) ?>
-					<?= $this->load->view("../../../view_tema/inputs_fecha_busqueda") ?>
+					<?=get_format_fecha_busqueda()?>            					
 					<?= form_close(place("place_usabilidad_general")) ?>
 				</div>
 				<div class="tab-pane" id='tab_tipos_entregas'>
 					<?= div("TIPOS DE ENTREGAS ", ["class" => "titulo_enid_sm"], 1) ?>
 					<?= form_open("", ["class" => 'form_tipos_entregas']) ?>
-					<?= $this->load->view("../../../view_tema/inputs_fecha_busqueda") ?>
+					<?=get_format_fecha_busqueda()?>            					
 					<?= form_close(place("place_tipos_entregas")) ?>
 				</div>
 				<div class="tab-pane" id='tab_usuarios'>
 					<?= div("ACTIVIDAD ", ["class" => "titulo_enid_sm", 1]) ?>
 					<?= form_open("", ["class" => 'f_actividad_productos_usuarios ']) ?>
-					<?= $this->load->view("../../../view_tema/inputs_fecha_busqueda") ?>
+					<?=get_format_fecha_busqueda()?>            					
 					<?= form_close(place("repo_usabilidad")) ?>
 				</div>
 				<div class="tab-pane" id='tab_dispositivos'>
 					<?= div("DISPOSITIVOS ", ["class" => "titulo_enid_sm", 1]) ?>
 					<?= form_open("", ["class" => 'f_dipositivos ']) ?>
-					<?= $this->load->view("../../../view_tema/inputs_fecha_busqueda") ?>
+					<?=get_format_fecha_busqueda()?>            					
 					<?= form_close(place("repo_dispositivos")) ?>
 				</div>
 				<div class="tab-pane" id='tab_default_3'>
 					<?= div("EMAIL ENVIADOS ", ["class" => "titulo_enid_sm", 1]) ?>
 					<?= form_open("", ["class" => 'form_busqueda_mail_enid']) ?>
-					<?= $this->load->view("../../../view_tema/inputs_fecha_busqueda") ?>
+					<?=get_format_fecha_busqueda()?>            					
 					<?= form_close(place("place_envios")) ?>
 					<?= place("place_mail_marketing") ?>
 				</div>

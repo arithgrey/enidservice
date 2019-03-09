@@ -16,13 +16,13 @@
 
 		<?= heading_enid("TARJETAS DE CRÉDITO Y DÉBITO", 3) ?>
 		<?php foreach ($tarjetas as $row): ?>
-			<div class="info_cuenta">
-				<?= $row["nombre"] ?>
-				<?= icon("fa fa-credit-card ") ?>
-				<?= div(substr($row["numero_tarjeta"], 0, 4) . "********") ?>
-			</div>
-		<?php endforeach; ?>
+			<?= div(append_data([
+				$row["nombre"],
+				icon("fa fa-credit-card "),
+				div(substr($row["numero_tarjeta"], 0, 4) . "********")
 
+			]), ["class" => "info_cuenta"]) ?>
+		<?php endforeach; ?>
 		<?= guardar("Agregar cuenta " . icon("fa fa-plus-circle "),
 			["class" => "top_20"],
 			1, 1, 0

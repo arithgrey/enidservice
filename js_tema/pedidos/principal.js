@@ -76,7 +76,7 @@ let response_pedidos =  function(data){
 
 	llenaelementoHTML(".place_pedidos" , data );
 	$('th').click(ordena_table_general);
-	$(".desglose_orden").click(function(){		
+	$(".desglose_orden").click(function(){
 		let recibo  =  	get_parameter_enid($(this) , "id");
 		$(".numero_recibo").val(recibo);
 		$(".form_search").submit();
