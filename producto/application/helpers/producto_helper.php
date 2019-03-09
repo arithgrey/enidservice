@@ -31,9 +31,19 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function get_format_ventas_efectivas($deseado){
+
+
+    	$text =
+		    ($deseado > 0)  ? div($deseado . " VENTAS EN LOS ÚLTIMOS 2 MESES" , ["class"=> "top_50 text_ventas"] ): "";
+    	return $text;
+
+
+
+    }
     function get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
                                        $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
-                                       $telefono_visible, $usuario, $venta_mayoreo)
+                                       $telefono_visible, $usuario, $venta_mayoreo, $deseado)
     {
 
         $r[] = $boton_editar;
@@ -42,9 +52,13 @@ if (!function_exists('invierte_date_time')) {
         $r[] = heading_enid($nuevo_nombre_servicio, 3);
         $r[] = validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion);
         $r[] = $tallas;
+	    $r[] = get_format_ventas_efectivas($deseado);
         $r[] = $texto_en_existencia;
+
         $r[] = get_info_vendedor($entregas_en_casa, $flag_servicio, $proceso_compra, $telefono_visible, $in_session, $usuario);
+
         $r[] = div(valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo), 1);
+
         return append_data($r);
 
     }

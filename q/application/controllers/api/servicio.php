@@ -1263,7 +1263,8 @@ class Servicio extends REST_Controller
 				"tiempo_promedio_entrega",
 				"talla",
 				"url_ml",
-				"contra_entrega"
+				"contra_entrega",
+				"deseado"
 			];
 			$response = $this->serviciosmodel->get($params, ["id_servicio" => $id_servicio]);
 		}

@@ -18,6 +18,7 @@ $entregas_en_casa = 0;
 $telefono_visible = 0;
 $venta_mayoreo = 0;
 $url_ml = "";
+$deseado =  "";
 foreach ($info_servicio["servicio"] as $row) {
 
     $id_servicio = $row["id_servicio"];
@@ -41,6 +42,7 @@ foreach ($info_servicio["servicio"] as $row) {
     $venta_mayoreo = $row["venta_mayoreo"];
     $url_ml = $row["url_ml"];
     $contra_entrega = $row["contra_entrega"];
+    $deseado =  $row["deseado"];
 
 }
 
@@ -75,17 +77,17 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
         <div class="col-lg-4">
             <?php if ($flag_servicio < 1): ?>
                 <?php if ($existencia > 0): ?>
-
                     <div class="info-venta">
                         <?= get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
                             $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
-                            $telefono_visible, $usuario, $venta_mayoreo) ?>
+                            $telefono_visible, $usuario, $venta_mayoreo, $deseado) ?>
                     </div>
                 <?php else: ?>
                     <?= get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio) ?>
                 <?php endif; ?>
 
             <?php else: ?>
+
                 <div class="card box-shadow">
                     <?= div(heading_enid(substr(strtoupper($nombre_servicio), 0, 70), 1), ["class" => "card-header"]) ?>
                     <?= heading_enid(

@@ -1,3 +1,13 @@
+.text_ventas{
+    background: #003e84;
+    padding: 3px;
+    margin-top: 50px;
+    font-size: 1.2em;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
 .base_paginas_extra {
     display: none;
 }
