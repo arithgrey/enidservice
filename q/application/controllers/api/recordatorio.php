@@ -60,4 +60,17 @@ class recordatorio extends REST_Controller
 		}
 		$this->response($response);
 	}
+	function  usuario_GET(){
+
+		$param      =  $this->get();
+		$response   =  false;
+		if (if_ext($param, "id_usuario")){
+
+			$in  = ["id_usuario" =>  $param["id_usuario"] , "status" => 0];
+			$response =  $this->recordatorio_model->get([], $in, 10, 'fecha_registro', 'ASC');
+
+		}
+		$this->response($response);
+
+	}
 }

@@ -876,7 +876,7 @@ if (!function_exists('invierte_date_time')) {
 					div($text_tipo);
 				$list[] = li($item);
 			}
-			return ul($list);
+			return ul($list, ["id" => "listado_recordatorios"]);
 		}
 	}
 	if (!function_exists('create_seccion_tipificaciones')) {

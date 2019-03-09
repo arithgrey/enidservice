@@ -41,6 +41,7 @@ class productividad extends REST_Controller
 
 			case 3:
 
+				$response["recordatorios"]       = $this->get_recordatorios($id_usuario);
 				$response["ventas_enid_service"] = $this->get_ventas_enid_service();
 				$response = get_tareas_pendienetes_usuario($response);
 
@@ -55,7 +56,13 @@ class productividad extends REST_Controller
 		$this->response($response);
 
 	}
+	function get_recordatorios($id_usuario){
 
+		$q["id_usuario"]    =  $id_usuario;
+		$api                = "recordatorio/usuario/format/json/";
+		return $this->principal->api($api, $q);
+
+	}
 	function get_notificaciones_usuario_perfil($param)
 	{
 

@@ -388,7 +388,40 @@ if (!function_exists('invierte_date_time')) {
 		$response["flag"] = $f;
 		return $response;
 	}
+	function add_recordatorios($recordatorios)
+	{
 
+
+		$r =  [];
+		$f =  0;
+		foreach ($recordatorios as $row){
+
+
+			$fecha_cordatorio =  $row["fecha_cordatorio"];
+			$id_recibo =  $row["id_recibo"];
+			$desc =  $row["descripcion"];
+
+			$text =  get_btw(
+
+				div(icon("fa  fa fa-clock-o ").$fecha_cordatorio),
+				div($desc),
+				""
+
+			);
+
+			$url = "../pedidos/?recibo=".$id_recibo."#listado_recordatorios";
+			$r[] =  anchor_enid($text, ["href" =>   $url ] );
+			$f  ++;
+		}
+		$response =  [
+			"html" => append_data($r),
+			"flag" => $f,
+
+		];
+		return $response;
+
+
+	}
 	function get_tareas_pendienetes_usuario_cliente($info)
 	{
 
@@ -438,7 +471,6 @@ if (!function_exists('invierte_date_time')) {
 
 		$inf = $info["info_notificaciones"];
 		$lista = "";
-
 		$f = 0;
 		$ventas_enid_service = $info["ventas_enid_service"];
 		$email_enviados_enid_service = $inf["email_enviados_enid_service"];
@@ -448,6 +480,14 @@ if (!function_exists('invierte_date_time')) {
 		$mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf["mensajes"], 1);
 		$f = $f + $mensajes_sin_leer["flag"];
 		$lista .= $mensajes_sin_leer["html"];
+
+
+		$recordatorios =  add_recordatorios($info["recordatorios"]);
+		$lista .= $recordatorios["html"];
+		$f = $f + $recordatorios["flag"];
+
+
+
 		$mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf["mensajes"], 2);
 		$f = $f + $mensajes_sin_leer["flag"];
 		$lista .= $mensajes_sin_leer["html"];

@@ -54,6 +54,7 @@
 		<?= create_fecha_contra_entrega($recibo, $domicilio) ?>
 		<?= notificacion_por_cambio_fecha($recibo, $num_compras, $recibo[0]["saldo_cubierto"]); ?>
 		<?= br() ?>
+
 		<?= addNRow(crea_seccion_recordatorios($recordatorios, $tipo_recortario)) ?>
 		<?= br() ?>
 		<?= addNRow(create_seccion_tipificaciones($tipificaciones)) ?>
