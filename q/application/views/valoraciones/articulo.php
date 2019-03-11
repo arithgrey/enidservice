@@ -1,6 +1,6 @@
 <?= get_title_valoraciones($id_usuario) ?>
 <?= hr() ?>
-<table style="width: 100%">
+<table>
     <tr>
         <?= get_td("", ["class" => "table_orden_1"]) ?>
         <td class="table_orden_2">
@@ -15,7 +15,6 @@
         </td>
     </tr>
 </table>
-
 <div class="col-lg-4">
     <?= div(anchor_enid("ESCRIBE UNA RESEÑA" . icon("fa fa-chevron-right ir"),
         [
@@ -27,8 +26,9 @@
     <?= crea_resumen_valoracion($numero_valoraciones); ?>
 </div>
 <div class="col-lg-8">
-    <div class="contenedor_comentarios">
-        <?= crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada); ?>
-        <?= div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio), ["class" => "btn_escribir_valoracion"]) ?>
-    </div>
+    <?= get_btw(
+        crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada),
+        div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio), ["class" => "btn_escribir_valoracion"]),
+        "contenedor_comentarios"
+    ) ?>
 </div>

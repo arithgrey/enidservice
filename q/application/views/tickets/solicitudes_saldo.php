@@ -4,7 +4,7 @@
 <?php endif; ?>
 <?php foreach ($solicitud_saldo as $row): ?>
 	<div class='list-group-item-movimiento '>
-		<table style='width:100%'>
+		<table>
 			<tr>
 				<?= get_td(div("Folio # " . $row["id_solicitud"], ["class" => 'folio']), ["colspan" => "2"]) ?>
 			</tr>

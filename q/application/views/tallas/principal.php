@@ -15,17 +15,18 @@ $msj_exists = heading_enid(
 );
 
 $msj_clasificaciones = ($num_clasificaciones > 0) ? $msj_exists : "";
-$tipo_talla = heading_enid(
-    $tipo,
-    2,
-    ['class' => 'info-tipo-talla']
-);
+
 ?>
-<div>
-    <?= div(append_data([$tipo_talla, $msj_clasificaciones, $clasificaciones_existentes]), ["class" => "agregadas col-lg-9"]) ?>
-    <?= get_btw(
-        heading_enid("CLASIFICACIONES", 3),
-        get_form_clasificacion_talla(),
-        " sugerencias col-lg-3"
-    ) ?>
-</div>
+<?= div(append_data([
+
+    heading_enid(
+        $tipo,
+        2,
+        ['class' => 'info-tipo-talla']
+    )
+    , $msj_clasificaciones, $clasificaciones_existentes]), ["class" => "agregadas col-lg-9"]) ?>
+<?= get_btw(
+    heading_enid("CLASIFICACIONES", 3),
+    get_form_clasificacion_talla(),
+    " sugerencias col-lg-3"
+) ?>

@@ -18,6 +18,7 @@ foreach ($miembros as $row) {
 	<div class="popup-box chat-popup" id="qnimate">
 		<div class="popup-head">
 			<div class="popup-head-left pull-left">
+
 				<?= img([
 					"src" => $url_imagen,
 					"style" => 'width: 44px!important;',
@@ -28,7 +29,6 @@ foreach ($miembros as $row) {
 			</div>
 			<?php if ($modo_edicion == 1): ?>
 				<div class="popup-head-right pull-right">
-
 					<?= div(icon("fa fa-envelope"), ["title" => "Email de recordatorio enviados"]) ?>
 					<div class="btn-group">
 						<?= guardar(

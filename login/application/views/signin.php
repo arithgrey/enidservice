@@ -9,18 +9,16 @@
         "SOY NUEVO, CREAR UNA CUENTA!",
         ["class" => "btn_soy_nuevo",
             "style" => "color: white!important;"], 1); ?>
+    <?= div(
+        anchor_enid(
+            img(
+                ["src" => "../img_tema/enid_service_logo.jpg"]),
+            ["href" => "../"],
+            1),
+        ["class" => "col-lg-6 col-lg-offset-3"]
+        , ["class" => "col-lg-4 col-lg-offset-4"]) ?>
 
-    <div class="col-lg-4 col-lg-offset-4">
-        <?= div(
-            anchor_enid(
-                img(
-                    ["src" => "../img_tema/enid_service_logo.jpg"]),
-                ["href" => "../"],
-                1),
-            ["class" => "col-lg-6 col-lg-offset-3"]
-        ) ?>
 
-    </div>
     <?= div(get_form_login(), ["class" => "col-lg-4 col-lg-offset-4"]) ?>
     <div class="col-lg-4 col-lg-offset-4">
         <?= get_format_olvide_pw($action) ?>

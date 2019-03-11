@@ -301,7 +301,7 @@ if (!function_exists('invierte_date_time')) {
 			$r[] = div(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo", "idtipo_recordatorio"), ["class" => "col-lg-8"]);
 			$r[] = textarea(["name" => "descripcion", "class" => "form-control"]);;
 			$r[] = guardar("CONTINUAR", ["class" => "top_20"]);
-			$r[] = form_close();
+			$r[] = form_close(place("place_recordatorio"));
 
 			return append_data($r);
 

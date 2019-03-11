@@ -26,20 +26,16 @@ foreach ($info_tickets as $row) {
     <div class="popup-box chat-popup" id="qnimate">
         <div class="popup-head">
             <div class="popup-head-left pull-left">
-
                 <?= get_img_usuario($id_usuario) ?>
                 <?= div($asunto) ?>
-
                 <?= div("#Tareas pendientes:" . $num_tareas_pendientes,
                     $tareas_pendientes,
                     ["class" => "cursor_pointer"]) ?>
             </div>
-
             <div class="dropdown pull-right">
                 <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
                     <?= icon("fa fa-plus") ?>
                 </button>
-
                 <?= div(anchor_enid("CERRAR TICKET",
                     [
                         "class" => "cerrar_ticket",

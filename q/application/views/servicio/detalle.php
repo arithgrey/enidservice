@@ -176,15 +176,12 @@ $icantidad = icon('fa fa-pencil text_cantidad');
             <?= div($val_youtube, ["class" => "text_video_servicio"], 1) ?>
             <?= get_form_youtube($valor_youtube) ?>
         </div>
-
         <!--DESCRIPCION DEL PRODUCTO-->
         <div class="tab-pane <?= $extra_2 ?>" id="tab_info_producto">
-
             <?= $nuevo_titulo_seleccion_producto; ?>
             <?= place("place_tallas_disponibles") ?>
             <?= $info_nueva_descripcion ?>
             <?= get_form_descripcion($nueva_descripcion); ?>
-
             <?php if ($flag_servicio == 0): ?>
                 <div class="contenedor_inf_servicios">
                     <?= heading_enid("COLORES", 4) ?>
@@ -220,7 +217,6 @@ $icantidad = icon('fa fa-pencil text_cantidad');
 
             <?php if ($flag_servicio == 0): ?>
                 <div class="contenedor_inf_servicios contenedor_inf_servicios_novedad">
-
                     <?= get_btw(
                         heading_enid("¿ES NUEVO?", 4),
                         div(icon('fa fa-pencil text_nuevo') . get_producto_usado($flag_nuevo)),
@@ -245,7 +241,6 @@ $icantidad = icon('fa fa-pencil text_cantidad');
                         get_td(guardar("GUARDAR", ["class" => "es_disponible btn_guardar_cantidad_productos col-lg-3"])),
                         "display_flex_enid input_cantidad seccion_cantidad"
                     ) ?>
-
                 </div>
             <?php else: ?>
 
@@ -253,16 +248,18 @@ $icantidad = icon('fa fa-pencil text_cantidad');
                     <?= icon('fa fa-pencil text_ciclo_facturacion') ?>
                     <?= icon('CICLO DE FACTURACIÓN', ["class" => "titulo_producto_servicio"]) ?>
                     <?= div(get_nombre_ciclo_facturacion($ciclos, $id_ciclo_facturacion)) ?>
-                    <div class="input_ciclo_facturacion" style="display: none;">
-                        <?= create_select_selected($ciclos,
+                    <?= get_btw(
+                        create_select_selected($ciclos,
                             "id_ciclo_facturacion",
                             "ciclo",
                             $id_ciclo_facturacion,
                             "ciclo_facturacion",
                             "ciclo_facturacion form-control"
-                        ) ?>
-                        <?= guardar("GUARDAR", ['class' => 'btn_guardar_ciclo_facturacion']) ?>
-                    </div>
+                        )
+                        ,
+                        guardar("GUARDAR", ['class' => 'btn_guardar_ciclo_facturacion']),
+                        "input_ciclo_facturacion display_none"
+                    ) ?>
                 </div>
 
             <?php endif; ?>

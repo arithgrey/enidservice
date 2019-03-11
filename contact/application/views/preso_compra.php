@@ -1,9 +1,11 @@
 <?= br(2) ?>
 <div class="col-lg-10 col-lg-offset-1">
-	<center>
-		<?= heading_enid("Recibe nuestra ubicación", 2, ["class" => "strong"]) ?>
-		<?= div("¿A través de qué medio?", ["class" => "text_selector"]) ?>
-	</center>
+    <?=get_btw(
+        heading_enid("Recibe nuestra ubicación", 2, ["class" => "strong"]),
+        div("¿A través de qué medio?", ["class" => "text_selector"]),
+        "text-center"
+    )?>
+
 </div>
 <div class="col-lg-10 col-lg-offset-1">
 	<div class="contenedor_eleccion">

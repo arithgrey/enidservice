@@ -1,6 +1,26 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    if (!function_exists('get_form_busqueda_desarrollo_solicitudes')) {
+        function form_busqueda_desarrollo_solicitudes(){
+
+            $r[] =  form_open("", ["class"=>'form_busqueda_desarrollo_solicitudes'] );
+            $r[] =  get_format_fecha_busqueda();
+            $r[] =  form_close(place("place_metricas_servicio"));
+            return append_data($r);
+
+        }
+    }
+    if (!function_exists('get_form_busqueda_desarrollo')) {
+        function get_form_busqueda_desarrollo(){
+
+            $r[] =  form_open("", ["class"=>'form_busqueda_desarrollo'] );
+            $r[] =  get_format_fecha_busqueda();
+            $r[] =  form_close(place("place_metricas_desarrollo"));
+            return append_data($r);
+
+        }
+    }
 	if (!function_exists('get_menu')) {
 		function get_menu($activa)
 		{

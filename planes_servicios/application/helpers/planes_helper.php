@@ -1,6 +1,45 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    if (!function_exists('get_format_busqueda')) {
+        function get_format_busqueda($list_orden)
+        {
+
+            $r[] = div("BUSCAR ENTRE TUS ARTÍCULOS", ["class" => "col-lg-4"]);
+            $r[] = div(get_list_orden($list_orden), ["class" => "col-lg-4"]);
+            $r[] = div(input([
+                "id" => "textinput",
+                "name" => "textinput",
+                "placeholder" => "Nombre de tu producto o servicio",
+                "class" => "form-control input-sm q_emp",
+                "onkeyup" => "onkeyup_colfield_check(event);"
+            ]),
+                ["class" => "col-lg-4"]);
+            return append_data($r);
+
+        }
+
+    }
+    if (!function_exists('get_list_orden')) {
+        function get_list_orden($list_orden)
+        {
+
+            $r[] = '<select class="form-control" name="orden" id="orden">';
+            $a = 1;
+            foreach ($list_orden as $row) {
+                $r[] = '<option value="' . $a . '">';
+                $r[] = $row;
+                $r[] = '</option>';
+                $a++;
+            }
+            $r[] = '</select>';
+
+            return append_data($r);
+
+        }
+
+
+    }
     if (!function_exists('get_top_articulos')) {
         function get_top_articulos($top_servicios, $is_mobile)
         {
