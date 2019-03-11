@@ -578,24 +578,15 @@ let evita_basura = function () {
     text = text.replace(/["|]/g, "");
     set_parameter(".input_busqueda_producto", text);
 };
-let reload_imgs = function (id, url) {
 
-    if(document.location.hostname !=  "localhost"){
-
-        if(document.getElementById(id).src != null  || document.getElementById(id).src  !=  undefined){
-            document.getElementById(id).src = url;
-            console.log(url);
-        }
-    }
-};
 /*Regresa el valor que esta en el nodo html*/
 let get_parameter = function (element) {
     let param = $(element).val();
     return param;
 };
-let reloload_img = function (id, url) {
+let reloload_img = function (id, url, flag=0) {
 
-    window.setInterval(reload_imgs(id, url), 50000);
+    window.setInterval(reload_imgs(id, url , flag), 50000);
 };
 let show_error_enid = function () {
 

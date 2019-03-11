@@ -128,14 +128,13 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(append_data($x), ["class" => "text-right"]);
 
 
-            if ($in_session == 1):
-                $r[] = guardar("ORDENAR COMPRA", ['class' => 'btn_procesar_pedido_cliente'], 1, 1);
-                $r[] = place('place_proceso_compra');
+            if ($in_session > 0){
+	            $r[] = guardar("ORDENAR COMPRA", ['class' => 'btn_procesar_pedido_cliente'], 1, 1);
+	            $r[] = place('place_proceso_compra');
 
-            endif;
+            }
             $r[] = hr();
-
-            return append_data($x);
+            return append_data($r);
         }
 
     }

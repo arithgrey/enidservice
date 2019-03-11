@@ -309,6 +309,7 @@ class Home extends CI_Controller
 		$es_recibo = get_info_variable($param, "recibo");
 		$data["tipos_entregas"] = $this->get_tipos_entregas(array());
 		$data["status_ventas"] = $this->get_estatus_enid_service();
+
 		if ($es_recibo == 0) {
 
 			$this->principal->show_data_page($data, 'form_busqueda');

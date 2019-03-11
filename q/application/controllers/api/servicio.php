@@ -652,7 +652,7 @@ class Servicio extends REST_Controller
 			'src' => $url_imagen,
 			'style' => $extra_imagen,
 			'id' => $id_error,
-			'onerror' => "reloload_img( '" . $id_error . "','" . $url_imagen . "');"
+			'onerror' => "reloload_img( '" . $id_error . "','" . $url_imagen . "', 1);"
 		]);
 
 		$config_imagen = create_dropdown_button($id_imagen, $row["principal"]);

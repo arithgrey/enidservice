@@ -1192,7 +1192,7 @@ if (!function_exists('get_img_servicio')) {
 			'src' => $url,
 			'id' => $id_error,
 			'class' => 'imagen-producto',
-			'onerror' => "reloload_img( '" . $id_error . "','" . $url . "');"
+			'onerror' => "reloload_img( '" . $id_error . "','" . $url . "', 1);"
 		];
 		return img($img);
 

@@ -21,9 +21,9 @@
     <div class="contenedor_compra">
         <div class="contenedo_compra_info">
             <div class="col-lg-10 col-lg-offset-1">
-                <div class="resumen_productos_solicitados">
+
                     <?= get_format_resumen($resumen_producto, $text_envio, $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session) ?>
-                </div>
+
                 <div class="contenedor_formulario_compra">
                     <?php
                     $info_ext = $info_solicitud_extra;

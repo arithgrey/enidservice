@@ -554,7 +554,7 @@ if (!function_exists('invierte_date_time')) {
                     'alt' => $nombre_servicio,
                     'id' => $id_error,
                     'class' => 'imagen-producto',
-                    'onerror' => "reloload_img( '" . $id_error . "','" . $url . "');"
+                    'onerror' => "reloload_img( '" . $id_error . "','" . $url . "' , 1);"
                 ];
 
                 $preview .= anchor_enid(img($img_pro),
@@ -573,7 +573,7 @@ if (!function_exists('invierte_date_time')) {
                     'src' => $url,
                     'id' => $id_error,
                     "class" => "imagen_producto_completa",
-                    'onerror' => "reloload_img( '" . $id_error . "','" . $url . "');"
+                    'onerror' => "reloload_img( '" . $id_error . "','" . $url . "' , 1);"
                 ];
                 $imgs_grandes .= div(img($image_properties),
                     [

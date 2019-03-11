@@ -33,7 +33,7 @@ if (!function_exists('invierte_date_time')) {
 			'id' => $id_error,
 			'class' => 'imagen_producto',
 			'alt' => $metakeyword,
-			'onerror' => "reloload_img( '" . $id_error . "','" . $url_img . "');"
+			'onerror' => "reloload_img( '" . $id_error . "','" . $url_img . "' , 1);"
 		];
 
 

@@ -123,14 +123,16 @@ let modidica_estado = function(){
 	} 
 }
 let guarda_nuevo_estado = function(){
+
 	let status_venta 			= parseInt(get_valor_selected(".selector_estados_ventas .status_venta"));		
 	let status_venta_registro	= parseInt(get_parameter(".status_venta_registro"));		
-	
+
 	if (status_venta != status_venta_registro ) {
 		$(".form_cantidad").hide();
 		$(".place_tipificaciones").empty();
 		switch(status_venta) {
-		    case 0:		        
+		    case 0:
+
 		        break;
 		    case 1:
 		        $(".form_cantidad").show();
@@ -197,7 +199,6 @@ let response_saldo_cubierto = function(data){
 	if (data ==  true) {
 
 		let status_venta 	= 	get_valor_selected(".status_venta");
-		//alert(status_venta);
 		if(status_venta == 6 || status_venta == 9 ){
 			next_status();
 		}else{
@@ -246,9 +247,13 @@ let response_status_venta = function(data){
 }
 let pre_cancelacion = function(){
 		
-	let tipo 		=	0;	
+	let tipo 		=	0;
 	switch(parseInt( get_parameter(".tipo_entrega_def")) ) {
-		
+
+		case 0:
+			tipo = 2;
+			break;
+
 		/*opciones en punto de encuentro*/
 	    case 1:
 	        tipo = 2;
