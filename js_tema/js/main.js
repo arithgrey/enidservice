@@ -588,6 +588,17 @@ let reloload_img = function (id, url, flag=0) {
 
     window.setInterval(reload_imgs(id, url , flag), 50000);
 };
+let reload_imgs = function (id, url, flag = 0) {
+
+    if(document.location.hostname !=  "localhost" && flag > 0){
+
+        if(document.getElementById(id).src != null  || document.getElementById(id).src  !=  undefined){
+            document.getElementById(id).src = url;
+            console.log(url);
+        }
+    }
+};
+
 let show_error_enid = function () {
 
     let url = "../bug/index.php/api/reportes/reporte_sistema/format/json/";

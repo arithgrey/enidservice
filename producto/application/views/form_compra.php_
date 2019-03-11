@@ -1,1 +1,0 @@
-<?=validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion)?>
