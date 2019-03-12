@@ -29,8 +29,6 @@ let registra_valoracion = function(e) {
 
 let response_registro_valoracion = function(data) {
 
-    debugger;
-
     if( data ==  true ) {
 
         $(".registro_pregunta").show();
@@ -40,8 +38,7 @@ let response_registro_valoracion = function(data) {
 
     }else{
 
-        $(".place_registro_valoracion").empty();
-        desbloqueda_form(".form_valoracion");
+        redirect("../area_cliente/?action=preguntas");
 
     }
 

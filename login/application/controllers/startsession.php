@@ -5,13 +5,13 @@ class Startsession extends CI_Controller
     function __construct()
     {
         parent::__construct();
+
         $this->load->helper("log");
         $this->load->library(lib_def());
     }
 
     function index()
     {
-
 
         $data = $this->principal->val_session("");
         $data = $this->getCssJs($data);
