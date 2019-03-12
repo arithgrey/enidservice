@@ -55,7 +55,6 @@
                 <div class="tab-pane" id="tab_afiliaciones">
                     <?= div("PERSONAS QUE PROMOCIONAN LOS PRODUCTOS Y SERVICIOS",
                         ["class" => "titulo_enid_sm"], 1) ?>
-                    <?= $this->load->view("secciones/afiliaciones"); ?>
                 </div>
                 <div class="tab-pane" id="tab_busqueda_productos">
                     <?= div("PRODUCTOS MÁS BUSCADOS POR CLIENTES",
