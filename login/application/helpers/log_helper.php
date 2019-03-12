@@ -1,6 +1,18 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+	function get_form_acceso($action)
+	{
+		$r[] = anchor_enid(
+			"CREAR UNA CUENTA!",
+			["class" => "btn_soy_nuevo",
+				"style" => "color: white!important;"], 1);;
+		$r[] = div(anchor_enid(img_enid(), ["href" => "../"]), ["class" => "col-lg-4  col-lg-offset-4"]);
+		$r[] = div(get_form_login(), ["class" => "col-lg-4 col-lg-offset-4"]);
+		$r[] = div(get_format_olvide_pw($action), ["class" => "col-lg-4 col-lg-offset-4"]);
+		return append_data($r);
+
+	}
 
 	function get_format_olvide_pw($action)
 	{
@@ -34,7 +46,7 @@ if (!function_exists('invierte_date_time')) {
 			],
 			1
 		);
-		$r[] = anchor_enid(div(div(img(["src" => "../img_tema/enid_service_logo.jpg"]), ["class" => "col-lg-6 col-lg-offset-3"]), ["class" => "col-lg-4 col-lg-offset-4"]), ["href" => "../"], 1);
+		$r[] = div(anchor_enid(img_enid(), ["href" => "../"]), ["class" => "col-lg-4  col-lg-offset-4"]);
 
 		$r[] = get_btw(
 			heading('RECUPERA TUS DATOS DE ACCESO', 3),
@@ -48,7 +60,7 @@ if (!function_exists('invierte_date_time')) {
 
 	function get_format_nuevo_usuario()
 	{
-		$r[] = anchor_enid(
+		$r[] = div(anchor_enid(
 			"ACCEDER AHORA",
 			[
 				"class" => "btn_acceder_cuenta_enid a_enid_blue",
@@ -56,9 +68,11 @@ if (!function_exists('invierte_date_time')) {
 				'style' => "color:white!important"
 
 			]
-		);
-		$r[] = addNRow(div(div(anchor_enid(img(["src" => "../img_tema/enid_service_logo.jpg"])), ["class" => "col-lg-6 col-lg-offset-3"]), ["class" => "col-lg-4 col-lg-offset-4"]));
-		$r[] = addNRow(div(heading('ÚNETE A ENID SERVICE', 3), ["class" => "col-lg-4 col-lg-offset-4"]));
+		), ["class" => "text-left"]);
+
+
+		$r[] = div(anchor_enid(img_enid(), ["href" => "../"]), ["class" => "col-lg-4  col-lg-offset-4"]);
+		$r[] = heading('ÚNETE A ENID SERVICE', 3, ["class" => "col-lg-4 col-lg-offset-4"]);
 		$r[] = div(get_form_registro(), ["class" => "col-lg-4 col-lg-offset-4"]);
 		return append_data($r);
 
