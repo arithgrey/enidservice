@@ -42,7 +42,7 @@ class Home extends CI_Controller
 	{
 
 		$api = "valoracion/pregunta_consumudor_form/format/json/";
-		return $this->principal->api($api, $q, "html", "GET");
+		return $this->principal->api($api, $q);
 	}
 
 }

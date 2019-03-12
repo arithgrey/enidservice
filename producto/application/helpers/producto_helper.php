@@ -209,17 +209,18 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         if ($proceso_compra < 1) {
 
-            $r[] = anchor_enid("",
-                ["class" => "btn_copiar_enlace_pagina_contacto fa fa-clone black",
-                    "data-clipboard-text" => $url_actual
-                ]);
 
             $r[] = anchor_enid("", [
                 "href" => $url_facebook,
                 "target" => "_black",
-                "class" => "fa fa-facebook black",
-                "title" => "Compartir en Facebook"
+                "class" => "fa fa-facebook black"
             ]);
+
+	        $r[] = anchor_enid("", [
+		        "href" => "https://www.instagram.com/enid_service/",
+		        "class" => "fa fa-instagram  black",
+		        "title" => "Tumblr"
+	        ]);
 
             $r[] = anchor_enid("",
                 [
@@ -240,7 +241,10 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "fa fa-tumblr black",
                 "title" => "Tumblr"
             ]);
-            $r[] = mailto("ventas@enidservice.com", icon("fa fa-envelope-open black"));
+
+
+
+            //$r[] = mailto("ventas@enidservice.com", icon("fa fa-envelope-open black"));
 
             $social = append_data($r);
             $response = div($social, ["class" => "contenedor_social display_flex_enid"]);

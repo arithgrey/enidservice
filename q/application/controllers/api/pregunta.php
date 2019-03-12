@@ -11,9 +11,7 @@ class pregunta extends REST_Controller
 		$this->load->helper("pregunta");
 		$this->load->model("pregunta_model");
 		$this->load->library(lib_def());
-		//$this->id_usuario = $this->principal->get_session("idusuario");
 	}
-
 	function visto_pregunta_PUT()
 	{
 
@@ -41,7 +39,7 @@ class pregunta extends REST_Controller
 				if ($id_pregunta > 0) {
 					$param["id_pregunta"] = $id_pregunta;
 					$response = $this->agrega_pregunta_servicio($param);
-					//$this->notifica_vendedor();
+
 				}
 			}
 		}
@@ -135,7 +133,6 @@ class pregunta extends REST_Controller
 		$api = "respuesta/num_respuestas_sin_leer/format/json/";
 		return $this->principal->api($api, $q);
 	}
-
 	private function agrega_pregunta_servicio($q)
 	{
 
@@ -143,23 +140,4 @@ class pregunta extends REST_Controller
 		return $this->principal->api($api, $q, "json", "POST");
 	}
 
-	/*
-   private function envia_pregunta_a_vendedor($q){
-	   $api =  "pregunta/pregunta_vendedor/format/json/";
-	   return $this->principal->api( $api , $q );
-   }
-   */
-	/*
-	function pregunta_POST(){
-
-		$param      =  $this->post();
-		$response   =  $this->registro_pregunta($param);
-		$respuesta_notificacion = "";
-		if($response){
-			$respuesta_notificacion = $this->envia_pregunta_a_vendedor($param);
-		}
-		$this->response($respuesta_notificacion);
-
-	}
-	*/
 }

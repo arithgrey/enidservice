@@ -10,6 +10,8 @@ $concepto = "Saldo a cuenta Enid Service";
         <div class='contenido_orden_pago'>
             <div class="info_orden_compra">
                 <?= append_data(
+
+                		[
                     div(img(
                             [
                                 'src' => "http://enidservice.com/inicio/img_tema/portafolio/oxxo-logo.png",
@@ -20,7 +22,7 @@ $concepto = "Saldo a cuenta Enid Service";
                     div($concepto . "Beneficiario" . $beneficiario . "Folio #" . $folio, ["style" => "background: #0000f5;padding: 5px;color: white;color: white;"]),
                     get_monto_pago($monto),
                     get_instruccion_pago()
-                ) ?>
+		                ]) ?>
             </div>
         </div>
     </div>

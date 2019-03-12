@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Recursocontroller extends CI_Controller
+class Home extends CI_Controller
 {
 	function __construct()
 	{
@@ -10,7 +10,7 @@ class Recursocontroller extends CI_Controller
 		$this->principal->acceso();
 	}
 
-	function informacioncuenta()
+	function index()
 	{
 
 		$data = $this->principal->val_session("");

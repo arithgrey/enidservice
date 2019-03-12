@@ -30,16 +30,19 @@ let registra_valoracion = function(e) {
 let response_registro_valoracion = function(data) {
 
     debugger;
+
     if( data ==  true ) {
 
-
         $(".registro_pregunta").show();
-        //$(".place_registro_valoracion").empty();
-        recorrepage("#place_valoraciones");
+        $(".place_registro_valoracion").empty();
+        recorrepage(".place_valoraciones");
         bloquea_form(".form_valoracion");
 
     }else{
-        redirect("../area_cliente/?action=preguntas");
+
+        $(".place_registro_valoracion").empty();
+        desbloqueda_form(".form_valoracion");
+
     }
 
 }

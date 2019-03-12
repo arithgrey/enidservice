@@ -5,10 +5,7 @@ $menu = [li(heading_enid("¿Tienes alguna duda?", ["class" => 'strong'])),
     li(div("Síguenos en", 1)),
 
 
-    li(anchor_enid("",
-        ["class" => "btn_copiar_enlace_pagina_contacto fa fa-clone black",
-            "data-clipboard-text" => $url_actual
-        ])),
+
 
     li(anchor_enid("", [
         "href" => $url_facebook,

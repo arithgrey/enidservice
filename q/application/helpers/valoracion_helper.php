@@ -116,7 +116,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = guardar("ENVIAR PREGUNTA" . icon("fa fa-chevron-right ir"));
         $r[] = place("place_registro_valoracion");
 
-        $z[] = heading_enid("ESCRIBE UNA PREGUNTA " . strtoupper($vendedor[0]["nombre"] . " " . $vendedor[0]["apellido_paterno"]), 2);
+
+        $text=  strtoupper($vendedor[0]["nombre"] . " " . $vendedor[0]["apellido_paterno"]);
+        $z[] = heading_enid("ESCRIBE UNA PREGUNTA " . $text , 2);
         $z[] = div("SOBRE SU" . $servicio[0]["nombre_servicio"]);
         $z[] = br(2);
         $z[] = form_open("", ["class" => "form_valoracion "]);
