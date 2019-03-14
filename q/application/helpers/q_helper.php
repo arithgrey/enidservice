@@ -388,32 +388,33 @@ if (!function_exists('invierte_date_time')) {
 		$response["flag"] = $f;
 		return $response;
 	}
+
 	function add_recordatorios($recordatorios)
 	{
 
 
-		$r =  [];
-		$f =  0;
-		foreach ($recordatorios as $row){
+		$r = [];
+		$f = 0;
+		foreach ($recordatorios as $row) {
 
 
-			$fecha_cordatorio =  $row["fecha_cordatorio"];
-			$id_recibo =  $row["id_recibo"];
-			$desc =  $row["descripcion"];
+			$fecha_cordatorio = $row["fecha_cordatorio"];
+			$id_recibo = $row["id_recibo"];
+			$desc = $row["descripcion"];
 
-			$text =  get_btw(
+			$text = get_btw(
 
-				div(icon("fa  fa fa-clock-o ").$fecha_cordatorio),
+				div(icon("fa  fa fa-clock-o ") . $fecha_cordatorio),
 				div($desc),
 				""
 
 			);
 
-			$url = "../pedidos/?recibo=".$id_recibo."#listado_recordatorios";
-			$r[] =  anchor_enid($text, ["href" =>   $url ] );
-			$f  ++;
+			$url = "../pedidos/?recibo=" . $id_recibo . "#listado_recordatorios";
+			$r[] = anchor_enid($text, ["href" => $url]);
+			$f++;
 		}
-		$response =  [
+		$response = [
 			"html" => append_data($r),
 			"flag" => $f,
 
@@ -423,37 +424,36 @@ if (!function_exists('invierte_date_time')) {
 
 	}
 
-	function add_compras_sin_cierre($recibos){
+	function add_compras_sin_cierre($recibos)
+	{
 
-		$r =  [];
-		$f =  0;
-		foreach ($recibos as $row){
+		$r = [];
+		$f = 0;
+		foreach ($recibos as $row) {
 
 
-			$id_recibo =  $row["id_recibo"];
-			$id_servicio =  $row["id_servicio"];
-			$total =  div($row["total"]."MXN" , ["class" => "text_monto_sin_cierre text-left"]);
-			$text =  get_btw(
-				div(get_img_servicio($id_servicio) , ["style" => "width:50px"]),
+			$id_recibo = $row["id_recibo"];
+			$id_servicio = $row["id_servicio"];
+			$total = div($row["total"] . "MXN", ["class" => "text_monto_sin_cierre text-left"]);
+			$text = get_btw(
+				div(get_img_servicio($id_servicio), ["style" => "width:50px"]),
 				$total,
 				"display_flex_enid"
 			);
 
-			$url = "../pedidos/?recibo=".$id_recibo;
-			$r[] =  anchor_enid($text, ["href" =>   $url ] );
-			$f  ++;
+			$url = "../pedidos/?recibo=" . $id_recibo;
+			$r[] = anchor_enid($text, ["href" => $url]);
+			$f++;
 		}
 
 
-
-		array_unshift($r, "VENTAS EN PROCESO" );
-		$response =  [
+		array_unshift($r, "VENTAS EN PROCESO");
+		$response = [
 			"html" => append_data($r),
 			"flag" => $f,
 
 		];
 		return $response;
-
 
 
 	}
@@ -468,6 +468,10 @@ if (!function_exists('invierte_date_time')) {
 		$deuda = add_saldo_pendiente($inf_notificacion["adeudos_cliente"]);
 		$f = $f + $deuda["flag"];
 
+		$preguntas = add_preguntas_sin_lectura($info["preguntas"]);
+
+		$f = $f + $preguntas["flag"];
+
 
 		$direccion = add_pedidos_sin_direccion($inf_notificacion["adeudos_cliente"]);
 		$f = $f + $direccion["flag"];
@@ -481,10 +485,6 @@ if (!function_exists('invierte_date_time')) {
 		$f = $f + $numtelefonico["flag"];
 
 
-		$mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf_notificacion["mensajes"], 1);
-		$f = $f + $mensajes_sin_leer["flag"];
-
-
 		$response["num_tareas_pendientes_text"] = $f;
 		$response["num_tareas_pendientes"] = crea_tareas_pendientes_info($f);
 
@@ -493,7 +493,8 @@ if (!function_exists('invierte_date_time')) {
 			$direccion["html"],
 			$direccion_envio["html"],
 			$numtelefonico["html"],
-			$mensajes_sin_leer["html"]
+			$preguntas["html"]
+
 
 		];
 		$response["lista_pendientes"] = get_mensaje_inicial_notificaciones(1, $f) . ul($list);
@@ -502,50 +503,85 @@ if (!function_exists('invierte_date_time')) {
 
 	}
 
+	function add_preguntas_sin_lectura($preguntas)
+	{
+
+		$r = [];
+		$f = 0;
+		foreach ($preguntas as $row) {
+
+
+			$id_pregunta = $row["id_pregunta"];
+			$pregunta = $row["pregunta"];
+			$id_servicio = $row["id_servicio"];
+			$id_usuario = $row["id_usuario"];
+			$pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
+			$pregunta = div($pregunta, ["class" => "black"]);
+
+
+			$imagenes =  get_btw(
+
+					div(get_img_servicio($id_servicio), ["style" => "width:50px"]) ,
+					get_img_usuario($id_usuario),
+				"display_flex_enid"
+
+			);
+			$t[] = get_btw($imagenes, $pregunta, "display_flex_enid");
+			$text = append_data($t);
+
+			$url = "../pregunta/?id=" . $id_pregunta . "&id_servicio=" . $id_servicio;
+			$r[] = anchor_enid($text, ["href" => $url]) . hr();
+			$f++;
+		}
+
+		array_unshift($r, "LO QUE COMPRADORES TE PREGUNTAN");
+		$response = [
+			"html" => append_data($r),
+			"flag" => $f,
+
+		];
+		return $response;
+
+	}
+
 	function get_tareas_pendienetes_usuario($info)
 	{
+
 
 		$inf = $info["info_notificaciones"];
 		$lista = "";
 		$f = 0;
 		$ventas_enid_service = $info["ventas_enid_service"];
-		$email_enviados_enid_service = $inf["email_enviados_enid_service"];
-		$accesos_enid_service = $inf["accesos_enid_service"];
 		$tareas_enid_service = $inf["tareas_enid_service"];
 		$num_telefonico = $inf["numero_telefonico"];
-		$mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf["mensajes"], 1);
-		$f = $f + $mensajes_sin_leer["flag"];
-		$lista .= $mensajes_sin_leer["html"];
 
 
-		$recordatorios =  add_recordatorios($info["recordatorios"]);
+		$recordatorios = add_recordatorios($info["recordatorios"]);
 		$lista .= $recordatorios["html"];
 		$f = $f + $recordatorios["flag"];
 
 
-
-
-		$compras_sin_cierre =  add_compras_sin_cierre($info["compras_sin_cierre"]);
+		$compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
 		$lista .= $compras_sin_cierre["html"];
 		$f = $f + $compras_sin_cierre["flag"];
 
 
+		$preguntas = add_preguntas_sin_lectura($info["preguntas"]);
+		$lista .= $preguntas["html"];
+		$f = $f + $preguntas["flag"];
 
 
-
-		$mensajes_sin_leer = add_mensajes_respuestas_vendedor($inf["mensajes"], 2);
-		$f = $f + $mensajes_sin_leer["flag"];
-		$lista .= $mensajes_sin_leer["html"];
 		$deuda = add_saldo_pendiente($inf["adeudos_cliente"]);
 		$f = $f + $deuda["flag"];
 		$lista .= $deuda["html"];
+
 		$deuda = add_pedidos_sin_direccion($inf["adeudos_cliente"]);
 		$f = $f + $deuda["flag"];
 		$lista .= $deuda["html"];
+
 		$deuda = add_valoraciones_sin_leer($inf["valoraciones_sin_leer"], $info["id_usuario"]);
 		$f = $f + $deuda["flag"];
 		$lista .= $deuda["html"];
-
 
 		$num_telefonico = add_numero_telefonico($num_telefonico);
 		$f = $f + $num_telefonico["flag"];
@@ -564,8 +600,6 @@ if (!function_exists('invierte_date_time')) {
 					$f = $f + $notificacion["flag"];
 
 					break;
-
-
 
 
 				case "Desarrollo_web":
