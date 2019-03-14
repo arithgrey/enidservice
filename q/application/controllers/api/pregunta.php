@@ -56,6 +56,7 @@ class pregunta extends REST_Controller
 		}
 		$this->response($response);
 	}
+
 	private function get_usuario_servicio($id_servicio)
 	{
 		$q["id_servicio"] = $id_servicio;
@@ -157,19 +158,39 @@ class pregunta extends REST_Controller
 		}
 		$this->response($response);
 	}
-	function vendedor_GET(){
+
+	function vendedor_GET()
+	{
 
 		$param = $this->get();
 		$response = false;
 		if (if_ext($param, "id_vendedor")) {
 
-			$id_vendedor =  $param["id_vendedor"];
-			$in =  [
+			$id_vendedor = $param["id_vendedor"];
+			$in = [
 				"id_vendedor" => $id_vendedor,
 				"status" => 0
 			];
-			$response  =
-				$this->pregunta_model->get( [], $in,  5, 'fecha_registro', 'DESC');
+			$response =
+				$this->pregunta_model->get([], $in, 5, 'fecha_registro', 'DESC');
+
+		}
+		$this->response($response);
+
+	}
+	function cliente_GET()
+	{
+		$param = $this->get();
+		$response = false;
+		if (if_ext($param, "id_usuario")) {
+
+			$id_usuario = $param["id_usuario"];
+			$in = [
+				"id_usuario" => $id_usuario,
+				"status" => 0
+			];
+
+			$response = $this->pregunta_model->get([], $in, 50, 'fecha_registro', 'DESC');
 
 		}
 		$this->response($response);

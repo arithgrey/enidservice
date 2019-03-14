@@ -65,11 +65,11 @@ $list_footer = [
 
 
 <?php if ($in_session == 0): ?>
-	<?php if ( !isset($proceso_compra)    && !is_null($proceso_compra) && $proceso_compra == 0): ?>
+	<?php if (!isset($proceso_compra) && !is_null($proceso_compra) && $proceso_compra == 0): ?>
 		<?= div(print_footer($list_footer), ["class" => "base_paginas_extra"], 1) ?>
 	<?php endif ?>
 
-	<?php if ( isset($is_mobile)  &&  !is_null($is_mobile) && $is_mobile < 1): ?>
+	<?php if (isset($is_mobile) && !is_null($is_mobile) && $is_mobile < 1): ?>
 		<?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>
 			<?= $this->load->view("../../../view_tema/metodos_pago"); ?>
 		<?php endif ?>
@@ -80,30 +80,49 @@ $list_footer = [
 
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css?<?= version_enid ?>">
 <link href="../css_tema/template/bootstrap.min.css?<?= version_enid ?>" rel="stylesheet" id="bootstrap-css">
-<?php if (isset($css) && !is_null($css) &&    is_array($css) && count($css) > 0): ?>
+<?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
 	<?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>
-		<link rel="stylesheet" type="text/css" href="<?= $link; ?>?<?= version_enid ?>">
+
+		<?php if (file_exists($link)): ?>
+			<link rel="stylesheet" type="text/css" href="<?= $link; ?>?<?= version_enid ?>">
+		<?php else: ?>
+			NO SE CARGO ->  <?= print_r($link) ?><br>
+		<?php endif; ?>
+
 	<?php endforeach; ?>
 <?php endif; ?>
+
 <?php if (isset($css_external) && !is_null($css_external) && is_array($css_external)): ?>
 	<?php foreach ($css_external as $c): ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo $c; ?>?<?= version_enid ?>">
+		<?php if (file_exists($c)): ?>
+			<link rel="stylesheet" type="text/css" href="<?php echo $c; ?>?<?= version_enid ?>">
+		<?php else: ?>
+			NO SE CARGO ->  <?= print_r($c) ?><br>
+		<?php endif; ?>
 	<?php endforeach; ?>
 <?php endif; ?>
 <script src="../js_tema/js/main.js?<?= version_enid ?>"></script>
 <?php if (isset($js) && !is_null($js) && is_array($js)): ?>
 	<?php $s = "../js_tema/";
 	foreach ($js as $script): ?>
-		<script type='text/javascript' src='<?php echo $s . $script; ?>?<?= version_enid ?>'></script>
+		<?php $file = $s . $script;
+		if (file_exists($file)): ?>
+			<script type='text/javascript' src='<?php echo $file; ?>?<?= version_enid ?>'></script>
+		<?php else: ?>
+			NO SE CARGO ->  <?= print_r($script) ?><br>
+		<?php endif; ?>
 	<?php endforeach; ?>
 <?php endif; ?>
 
 <?php if (isset($js_extra) && !is_null($js_extra) && is_array($js_extra)): ?>
 	<?php foreach ($js_extra as $script): ?>
-		<script type='text/javascript' src='<?php echo $script; ?>'></script>
+		<?php if (file_exists($script)): ?>
+			<script type='text/javascript' src='<?php echo $script; ?>'></script>
+		<?php else: ?>
+			NO SE CARGO <?= print_r($script) ?><br>
+		<?php endif; ?>
 	<?php endforeach; ?>
 <?php endif; ?>
 <link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css?<?= version_enid ?>">
-
 </body>
 </html>

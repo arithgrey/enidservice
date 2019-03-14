@@ -38,10 +38,9 @@ let response_registro_valoracion = function(data) {
 
     }else{
 
-        redirect("../area_cliente/?action=preguntas");
+        redirect("../pregunta/?action=hechas");
 
     }
-
 }
 
 let before_registro_valoracion = function() {

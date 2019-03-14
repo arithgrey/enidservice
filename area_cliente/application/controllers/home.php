@@ -35,7 +35,6 @@ class Home extends CI_Controller
 				'area_cliente/proyectos_persona.js',
 				'area_cliente/cobranza.js',
 				'js/direccion.js',
-				'area_cliente/buzon.js',
 				"alerts/jquery-confirm.js"
 
 			];
@@ -45,7 +44,6 @@ class Home extends CI_Controller
 				"css_tienda_cliente.css",
 				"valoracion.css",
 				"area_cliente.css",
-				"preguntas.css",
 				"confirm-alert.css"
 			];
 

@@ -5,12 +5,27 @@ class Home extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-
 		$this->load->helper("validador");
 		$this->load->library(lib_def());
 
 	}
+
 	function index()
+	{
+
+		$param = $this->input->get();
+		if (array_key_exists("tag", $param)) {
+
+			$this->get_form();
+
+		} else {
+
+			$this->get_listado();
+
+		}
+	}
+
+	private function get_form()
 	{
 
 		$data = $this->principal->val_session("");
@@ -22,9 +37,9 @@ class Home extends CI_Controller
 		if ($servicio > 0 && ctype_digit($servicio)) {
 
 			$send["in_session"] = $this->principal->is_logged_in();
-			if ($send["in_session"] === false){
+			if ($send["in_session"] === false) {
 
-				$session_data =  [
+				$session_data = [
 					"servicio_pregunta" => $servicio
 
 				];
@@ -32,7 +47,7 @@ class Home extends CI_Controller
 				redirect("../../login");
 
 
-			}else{
+			} else {
 
 				$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 				$send["id_servicio"] = $servicio;
@@ -46,7 +61,6 @@ class Home extends CI_Controller
 			}
 
 
-
 		} else {
 			header("location:../?q2=0&q=");
 		}
@@ -58,5 +72,63 @@ class Home extends CI_Controller
 		$api = "valoracion/pregunta_consumudor_form/format/json/";
 		return $this->principal->api($api, $q);
 	}
+
+	private function get_listado()
+	{
+
+		$param = $this->input->get();
+		$data = $this->principal->val_session("");
+		$id_usuario = $data["id_usuario"];
+
+		if (array_key_exists("action", $param) && $data["in_session"] > 0) {
+
+			$action = $param["action"];
+			switch ($action) {
+
+				case "hechas":
+					$this->get_hechas($id_usuario, $data);
+					break;
+				case 1:
+
+					break;
+				case 2:
+
+					break;
+			}
+
+
+		} else {
+
+			header("location:../?q2=0&q=");
+
+		}
+	}
+
+	private function get_hechas($id_usuario, $data)
+	{
+
+		$preguntas = $this->get_preguntas_hechas_cliente($id_usuario);
+		$data["preguntas_format"] = get_format_preguntas($preguntas);
+		$data["meta_keywords"] = '';
+		$data["desc_web"] = "";
+		$data["url_img_post"] = create_url_preview("");
+		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+		$data["js"] = ["pregunta/listado.js"];
+		$data["css"] = ["pregunta_listado.css"];
+
+		$this->principal->show_data_page($data, 'listado');
+
+
+	}
+
+	function get_preguntas_hechas_cliente($id_usuario)
+	{
+
+		$q["id_usuario"] = $id_usuario;
+		$api = "pregunta/cliente/format/json/";
+		return $this->principal->api($api, $q);
+
+	}
+
 
 }

@@ -1,0 +1,11 @@
+h1{
+	letter-spacing: .9em;
+	font-weight: bold;
+}
+.descripcion_pregunta{
+	background: #f1f2f8;
+}
+.bloque_texto{
+	text-align: right;
+	line-height: 2;
+}

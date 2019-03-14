@@ -102,15 +102,9 @@ let valida_accion_inicial = function(){
 	    	}else{
 	    		carga_compras_usuario();		
 	    	}
-			
 
 	        break;
-	    case "preguntas":
-	    	set_option("modalidad_ventas" , 0);				
-	    	carga_num_preguntas();
-			carga_buzon();
 
-	        break;
 	    default:
 	    	set_option("modalidad_ventas" , 0);				
 			carga_compras_usuario();		
