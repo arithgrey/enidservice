@@ -167,12 +167,27 @@ class pregunta extends REST_Controller
 		if (if_ext($param, "id_vendedor")) {
 
 			$id_vendedor = $param["id_vendedor"];
+
 			$in = [
 				"id_vendedor" => $id_vendedor,
 				"status" => 0
 			];
-			$response =
-				$this->pregunta_model->get([], $in, 5, 'fecha_registro', 'DESC');
+			if (array_key_exists("recepcion" , $param)){
+				$in = [
+					"id_vendedor" => $id_vendedor
+				];
+			}
+
+
+			if (array_key_exists("id_pregunta" , $param)){
+
+				$in["id_pregunta"] =  $param["id_pregunta"];
+			}
+
+
+			$limit =  (array_key_exists("recepcion" , $param)) ? 30 : 5;
+
+			$response = $this->pregunta_model->get([], $in, $limit, 'fecha_registro', 'DESC');
 
 		}
 		$this->response($response);
@@ -196,5 +211,6 @@ class pregunta extends REST_Controller
 		$this->response($response);
 
 	}
+
 
 }

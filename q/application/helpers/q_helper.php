@@ -529,7 +529,8 @@ if (!function_exists('invierte_date_time')) {
 			$t[] = get_btw($imagenes, $pregunta, "display_flex_enid");
 			$text = append_data($t);
 
-			$url = "../pregunta/?id=" . $id_pregunta . "&id_servicio=" . $id_servicio;
+			$id =  "#pregunta".$id_pregunta;
+			$url = "../pregunta/?action=recepcion&id=" . $id_pregunta . "&id_servicio=" . $id_servicio.$id;
 			$r[] = anchor_enid($text, ["href" => $url]) . hr();
 			$f++;
 		}

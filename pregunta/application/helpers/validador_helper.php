@@ -3,18 +3,20 @@ if (!function_exists('invierte_date_time')) {
 
 
 	if (!function_exists('get_format_preguntas')) {
-		function get_format_preguntas($preguntas)
+		function get_format_preguntas($preguntas , $es_vendedor = 0)
 		{
 
 			$r =  [];
 			foreach ($preguntas  as $row){
 
-				$id_pregunta =  $row["id_pregunta"];
 				$pregunta=  $row["pregunta"];
 				$fecha_registro =   $row["fecha_registro"];
-				$status =  $row["status"];
 				$id_servicio  = $row["id_servicio"];
 				$id_vendedor =  $row["id_vendedor"];
+				$id_usuario =  $row["id_usuario"];
+				$id_pregunta =  $row["id_pregunta"];
+
+
 
 				$p =  [];
 				$p[]    =  div($pregunta ,  ["class" => "texto_pregunta"]);
@@ -32,7 +34,12 @@ if (!function_exists('invierte_date_time')) {
 					div($texto, ["class" => "col-lg-10"]),
 					""
 				);
-				$r[] =  div($principal_seccion ,  ["class" => "descripcion_pregunta top_10 padding_20 col-lg-8 col-lg-offset-2"] );
+				$id =  "pregunta".$id_pregunta;
+				$r[] =  div($principal_seccion ,
+					[
+						"class" => "descripcion_pregunta top_10 padding_20 col-lg-8 col-lg-offset-2",
+						"id" => $id
+					] );
 			}
 
 

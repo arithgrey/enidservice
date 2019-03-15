@@ -88,7 +88,10 @@ class Home extends CI_Controller
 				case "hechas":
 					$this->get_hechas($id_usuario, $data);
 					break;
-				case 1:
+				case "recepcion":
+
+					$id_pregunta = (array_key_exists("id", $param) && $param["id"] > 0) ? $param["id"] :  0;
+					$this->get_recibidas($id_usuario, $data, $id_pregunta);
 
 					break;
 				case 2:
@@ -104,6 +107,38 @@ class Home extends CI_Controller
 		}
 	}
 
+
+	private function get_recibidas($id_usuario, $data , $id_pregunta)
+	{
+
+		$preguntas = $this->get_preguntas_recibidas_vendedor($id_usuario , $id_pregunta);
+		$data["preguntas_format"] = get_format_preguntas($preguntas, 1);
+		$data["meta_keywords"] = '';
+		$data["desc_web"] = "";
+		$data["url_img_post"] = create_url_preview("");
+		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+		$data["js"] = ["pregunta/listado.js"];
+		$data["css"] = ["pregunta_listado.css"];
+		$this->principal->show_data_page($data, 'listado');
+
+
+	}
+	private function get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta){
+
+
+
+		$q["id_pregunta"] =  $id_pregunta;
+		$q["id_vendedor"] = $id_usuario;
+		$q["recepcion"] = 1;
+		$api = "pregunta/vendedor/format/json/";
+		return $this->principal->api($api, $q);
+
+
+	}
+	private  function  get_preguntas_recibidas($id_usuario){
+
+
+	}
 	private function get_hechas($id_usuario, $data)
 	{
 
