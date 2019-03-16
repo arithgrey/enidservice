@@ -1,5 +1,5 @@
 <div class="col-lg-2">
-    <?= $this->load->view("../../../view_tema/izquierdo.php") ?>
+    <?=get_format_izquierdo($in_session)?>
 </div>
 <div class='col-lg-10'>
 	<?= get_format_menu($in_session, $perfil) ?>

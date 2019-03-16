@@ -9,9 +9,11 @@ class Mailrest extends REST_Controller
 		$this->load->library(lib_def());
 	}
 
+	/*
 	function recupera_password_POST()
 	{
 
+	    /*
 		$response = false;
 		if ($this->input->is_ajax_request()) {
 			$param = $this->post();
@@ -35,8 +37,11 @@ class Mailrest extends REST_Controller
 			}
 		}
 		$this->response($response);
-	}
 
+	}
+	    */
+
+	/*
 	private function get_cuerpo($param)
 	{
 
@@ -55,4 +60,6 @@ class Mailrest extends REST_Controller
 		$api = "usuario/pass";
 		return $this->principal->api($api, $q, 'json', 'PUT');
 	}
+	*/
+
 }

@@ -5,15 +5,10 @@
         div("¿A través de qué medio?", ["class" => "text_selector"]),
         "text-center"
     )?>
-
 </div>
 <div class="col-lg-10 col-lg-offset-1">
 	<div class="contenedor_eleccion">
-		<?= div(icon("fa fa-envelope-o") . " CORREO", ["class" => "easy_select_enid cursor_pointer selector",
-			"id" => 1]) ?>
-		<?= div(icon("fa fa-whatsapp") . " WHATSAPP", ["class" => "easy_select_enid cursor_pointer selector"
-			,
-			"id" => 2]) ?>
+		<?=get_format_eleccion()?>
 	</div>
 </div>
 <div class="contenedor_eleccion_correo_electronico">

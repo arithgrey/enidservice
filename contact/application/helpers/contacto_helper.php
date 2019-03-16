@@ -1,50 +1,67 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    if (!function_exists('get_format_eleccion')) {
+        function get_format_eleccion()
+        {
 
-    if (!function_exists('get_selector_direccion')) {
-        function get_selector_direccion(){
+            $r[] = div(icon("fa fa-envelope-o") . " CORREO", ["class" => "easy_select_enid cursor_pointer selector",
+                "id" => 1]);
 
-            $r[] = anchor_enid(div(icon("fa fa-shopping-cart") . " SI",
-        ["class" => "easy_select_enid cursor_pointer selector selector_proceso",
-            "id" => 1]),
-        ["href" => "../lista_deseos"]);
-
-            $r[] = anchor_enid(div(icon("fa fa-map-marker") . "NO, VER DIRECCIÓN DE COMPRA",
-        [
-            "class" => "easy_select_enid cursor_pointer selector selector_proceso",
-            "id" => 2
-        ]), ["href" => "../contact/?ubicacion=1#direccion"]);
+            $r[] = div(icon("fa fa-whatsapp") . " WHATSAPP", ["class" => "easy_select_enid cursor_pointer selector"
+                ,
+                "id" => 2]);
 
             return append_data($r);
 
         }
     }
-	if (!function_exists('get_form_proceso_compra')) {
+    if (!function_exists('get_selector_direccion')) {
+        function get_selector_direccion()
+        {
 
-		function get_form_proceso_compra(){
+            $r[] = anchor_enid(div(icon("fa fa-shopping-cart") . " SI",
+                ["class" => "easy_select_enid cursor_pointer selector selector_proceso",
+                    "id" => 1]),
+                ["href" => "../lista_deseos"]);
 
-			$r[] =  '<form action="../contact/?w=1" method="post" class="form_proceso_compra">';
-			$r[] =  input_hidden(["class" => "proceso_compra", "value" => 1, "name" => "proceso_compra"]);
-			$r[] = form_close();
-			return append_data($r);
+            $r[] = anchor_enid(div(icon("fa fa-map-marker") . "NO, VER DIRECCIÓN DE COMPRA",
+                [
+                    "class" => "easy_select_enid cursor_pointer selector selector_proceso",
+                    "id" => 2
+                ]), ["href" => "../contact/?ubicacion=1#direccion"]);
 
-		}
+            return append_data($r);
 
-	}
-	if (!function_exists('format_direccion')) {
+        }
+    }
+    if (!function_exists('get_form_proceso_compra')) {
 
-		function format_direccion($ubicacion,$departamentos, $nombre, $email, $telefono){
+        function get_form_proceso_compra()
+        {
 
-			$r[] =  get_format_visitanos($ubicacion) ;
-	        $r[] =  format_direccion_map($ubicacion) ;
-	        $r[] =  get_form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono) ;
+            $r[] = '<form action="../contact/?w=1" method="post" class="form_proceso_compra">';
+            $r[] = input_hidden(["class" => "proceso_compra", "value" => 1, "name" => "proceso_compra"]);
+            $r[] = form_close();
+            return append_data($r);
 
-	        return append_data($r);
+        }
 
-		}
+    }
+    if (!function_exists('format_direccion')) {
 
-	}
+        function format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono)
+        {
+
+            $r[] = get_format_visitanos($ubicacion);
+            $r[] = format_direccion_map($ubicacion);
+            $r[] = get_form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono);
+
+            return append_data($r);
+
+        }
+
+    }
     if (!function_exists('format_direccion_map')) {
         function format_direccion_map($ubicacion)
         {

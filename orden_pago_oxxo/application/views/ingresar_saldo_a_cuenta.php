@@ -11,18 +11,18 @@ $concepto = "Saldo a cuenta Enid Service";
             <div class="info_orden_compra">
                 <?= append_data(
 
-                		[
-                    div(img(
-                            [
-                                'src' => "http://enidservice.com/inicio/img_tema/portafolio/oxxo-logo.png",
-                                'style' => "width:100px!important"
-                            ]
-                        ) . "ORDEN DE PAGO EN SUCURSALES OXXO"),
+                    [
+                        div(img(
+                                [
+                                    'src' => "http://enidservice.com/inicio/img_tema/portafolio/oxxo-logo.png",
+                                    'style' => "width:100px!important"
+                                ]
+                            ) . "ORDEN DE PAGO EN SUCURSALES OXXO"),
 
-                    div($concepto . "Beneficiario" . $beneficiario . "Folio #" . $folio, ["style" => "background: #0000f5;padding: 5px;color: white;color: white;"]),
-                    get_monto_pago($monto),
-                    get_instruccion_pago()
-		                ]) ?>
+                        div($concepto . "Beneficiario" . $beneficiario . "Folio #" . $folio, ["style" => "background: #0000f5;padding: 5px;color: white;color: white;"]),
+                        get_monto_pago($monto),
+                        get_instruccion_pago()
+                    ]) ?>
             </div>
         </div>
     </div>

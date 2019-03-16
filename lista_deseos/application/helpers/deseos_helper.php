@@ -1,12 +1,86 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    if (!function_exists('get_format_temporadas')) {
+        function get_format_temporadas()
+        {
+            $response = append_data([
+                div("Apparel", ["class" => "slide-label"]),
+
+                div(img([
+                    "src" => "../img_tema/preferencias/preferencias-1.jpg",
+                    "class" => "from-left"
+                ]), ["class" => "slide-image animate"]),
+
+                div(get_format_temporada(), ["class" => "slide-content"])
+
+            ]);
+            return $response;
+
+        }
+
+    }
+    if (!function_exists('get_format_images_preferencias')) {
+        function get_format_images_preferencias()
+        {
+
+            $response = append_data([
+                div("Bags", ["class" => "slide-label"]),
+                div(img([
+                        "src" => "../img_tema/preferencias/preferencias-2.jpg",
+                        "class" => "from-left"
+                    ])
+                    , ["class" => "slide-image animate"]),
+
+                div(get_format_slide_accesorios(), ["class" => "slide-content"])
+
+            ]);
+            return $response;
+
+        }
+
+    }
+    if (!function_exists('get_format_images')) {
+        function get_format_images()
+        {
+
+            $r[] = div("Diferentes estilos", ["class" => "slide-label"]);
+            $r[] = div(img(["src" => "../img_tema/preferencias/preferencias-4.jpg",
+                "class" => "from-left",
+                "alt" => "image-3"]), ["class" => "slide-image animate"]);
+
+
+            $r[] = div(append_data([
+                div(
+                    heading_enid("Encuentra entre múltiples opciones", 3,
+
+                        ["class" => "from-bottom"]),
+                    ["class" => "animate"]),
+
+                p("Para Dama y Caballero"),
+
+                heading_enid(
+                    "Mira las opciones", 3,
+                    [
+                        "class" => "shop-now",
+                        "href" => "../search"],
+                    1)
+
+            ]),
+                ["class" => "slide-content"]);
+
+            return append_data($r);
+
+        }
+
+    }
     if (!function_exists('get_list_clasificaciones')) {
 
         function get_list_clasificaciones($is_mobile, $preferencias, $tmp)
         {
 
-	        $r = [];
+            $r = [];
             if ($is_mobile == 1) {
                 $r[] = $tmp;
             }

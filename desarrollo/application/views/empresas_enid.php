@@ -6,7 +6,7 @@
         <div class="tab-content">
             <?= input_hidden(["type" => 'hidden', "class" => 'id_usuario', "value" => $id_usuario]) ?>
             <div class="tab-pane <?= valida_seccion_activa(2, $activa) ?>" id='tab_charts'>
-                <?= $this->load->view("tickets/charts") ?>
+                <?= get_format_charts() ?>
             </div>
             <div class="tab-pane <?= valida_seccion_activa(1, $activa) ?>" id='tab_abrir_ticket'>
                 <?= $this->load->view("../../../view_tema/formularios/busqueda_tickets") ?>
