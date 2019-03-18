@@ -47,7 +47,7 @@ class Response_model extends CI_Model
 	  return $this->insert($params);
 	}
 	*/
-	function get_respuestas_pregunta($param)
+	function get_respuestas_pregunta($id_pregunta)
 	{
 
 
@@ -64,12 +64,12 @@ class Response_model extends CI_Model
                         usuario u 
                         ON r.id_usuario = u.idusuario
                       WHERE 
-                        r.id_pregunta =  '" . $param["id_pregunta"] . "'
+                        r.id_pregunta =  '" . $id_pregunta . "'
                       ORDER BY 
-                      fecha_registro
-                      DESC LIMIT 10";
-		$result = $this->db->query($query_get);
-		return $result->result_array();
+                      fecha_registro ASC
+                      LIMIT 20";
+
+		return $this->db->query($query_get)->result_array();
 	}
 
 }

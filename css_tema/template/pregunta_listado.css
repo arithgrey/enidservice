@@ -1,11 +1,35 @@
-h1{
+h1 {
 	letter-spacing: .9em;
 	font-weight: bold;
 }
-.descripcion_pregunta{
+
+.descripcion_pregunta {
 	background: #f1f2f8;
 }
-.bloque_texto{
+
+.bloque_texto {
 	text-align: right;
 	line-height: 2;
+}
+
+.contenedor_respuestas {
+	height: 270px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background: white;
+	
+}
+
+.contenedor_respuestas_formulario {
+	background: #e7eaed;
+}
+.descripcion_usuario{
+	display: flex;
+	flex-direction: column;
+	font-size: .9em;
+}
+.descripcion_respuesta{
+	display: flex;
+	flex-direction: column;
+	font-size: .9em;
 }

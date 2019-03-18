@@ -117,8 +117,10 @@ class Home extends CI_Controller
 		$data["desc_web"] = "";
 		$data["url_img_post"] = create_url_preview("");
 		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
-		$data["js"] = ["pregunta/listado.js"];
-		$data["css"] = ["pregunta_listado.css"];
+
+		$data["js"] = ["js/summernote.js" , "pregunta/listado.js"];
+		$data["css"] = ["pregunta_listado.css" , "summernote.css"];
+
 		$this->principal->show_data_page($data, 'listado');
 
 
@@ -130,6 +132,7 @@ class Home extends CI_Controller
 		$q["id_pregunta"] =  $id_pregunta;
 		$q["id_vendedor"] = $id_usuario;
 		$q["recepcion"] = 1;
+		$q["num_respuesta"] =  1;
 		$api = "pregunta/vendedor/format/json/";
 		return $this->principal->api($api, $q);
 
@@ -148,8 +151,12 @@ class Home extends CI_Controller
 		$data["desc_web"] = "";
 		$data["url_img_post"] = create_url_preview("");
 		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
-		$data["js"] = ["pregunta/listado.js"];
+		$data["js"] = ["js/summernote.js" , "pregunta/listado.js"];
 		$data["css"] = ["pregunta_listado.css"];
+		$data["css_external"] = [
+			"http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
+		];
+
 
 		$this->principal->show_data_page($data, 'listado');
 

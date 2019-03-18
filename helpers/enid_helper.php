@@ -1183,18 +1183,28 @@ if (!function_exists('get_url_servicio')) {
     }
 }
 if (!function_exists('get_img_servicio')) {
-    function get_img_servicio($id)
+    function get_img_servicio($id, $external  = 0 )
     {
+	    $url = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
+		if ($external >  0 ){
+			$url = "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id;
+		}
 
-        $url = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
+
         $id_error = "imagen_" . $id;
         $img = [
             'src' => $url,
             'id' => $id_error,
-            'class' => 'imagen-producto',
-            'onerror' => "reloload_img( '" . $id_error . "','" . $url . "', 1);"
+            'class' => 'imagen-producto'
         ];
+
+        if($external < 1 ){
+
+	        $img['onerror'] = "reloload_img( '" . $id_error . "','" . $url . "', 1);";
+        }
+
         return img($img);
+
 
     }
 }

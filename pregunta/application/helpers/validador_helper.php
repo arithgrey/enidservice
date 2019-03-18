@@ -3,47 +3,80 @@ if (!function_exists('invierte_date_time')) {
 
 
 	if (!function_exists('get_format_preguntas')) {
-		function get_format_preguntas($preguntas , $es_vendedor = 0)
+		function get_format_preguntas($preguntas, $es_vendedor = 0)
 		{
 
-			$r =  [];
-			foreach ($preguntas  as $row){
+			$r = [];
+			foreach ($preguntas as $row) {
 
-				$pregunta=  $row["pregunta"];
-				$fecha_registro =   $row["fecha_registro"];
-				$id_servicio  = $row["id_servicio"];
-				$id_vendedor =  $row["id_vendedor"];
-				$id_usuario =  $row["id_usuario"];
-				$id_pregunta =  $row["id_pregunta"];
+				$pregunta = $row["pregunta"];
+				$fecha_registro = $row["fecha_registro"];
+				$id_servicio = $row["id_servicio"];
+				$id_vendedor = $row["id_vendedor"];
+				$id_usuario = $row["id_usuario"];
+				$id_pregunta = $row["id_pregunta"];
+				$num = $row["num"];
 
 
+				$p = [];
+				$p[] = div($pregunta, ["class" => "texto_pregunta"]);
+				$p[] = div(icon("fa fa-clock-o") . $fecha_registro, ["class" => "fecha_registro"]);
 
-				$p =  [];
-				$p[]    =  div($pregunta ,  ["class" => "texto_pregunta"]);
-				$p[]    =  div(icon("fa fa-clock-o") . $fecha_registro ,  ["class" => "fecha_registro"]);
-				$texto  =  div(append_data($p) , ["class" => "bloque_texto top_20"]);
+				if ($num >  0 ){
 
-				$img_servicio       =  anchor_enid(get_img_servicio($id_servicio) ,
+					$t  =  ($num >  1 ) ?  $num . " COMENTATIRIOS" : " COMENTARIO ";
+
+					$p[] =  div($t ,
+						[
+							"class" => "cursor_pointer",
+							"onclick" => "carga_respuestas('".$id_pregunta."', '".$es_vendedor."');"
+						]);
+				}else{
+
+					$p[] =  div(icon("fa fa-comment")." AGREGAR RESPUESTA " ,
+						[
+							"class" => "cursor_pointer",
+							"onclick" => "carga_respuestas('".$id_pregunta."' , '".$es_vendedor."');"
+						]);
+
+				}
+
+				$texto = div(append_data($p), ["class" => "bloque_texto top_20"]);
+				$img_servicio = anchor_enid(get_img_servicio($id_servicio),
 					[
 						"href" => get_url_servicio($id_servicio),
 						"class" => "anchor_imagen_servicio"
 
 					]);
-				$principal_seccion  =    get_btw(
-					div($img_servicio , ["class" => "col-lg-2"]),
+				$principal_seccion = get_btw(
+					div($img_servicio, ["class" => "col-lg-2"]),
 					div($texto, ["class" => "col-lg-10"]),
 					""
 				);
-				$id =  "pregunta".$id_pregunta;
-				$r[] =  div($principal_seccion ,
+
+
+				$id = "pregunta" . $id_pregunta;
+				$id_pĺace = "comentarios_" . $id_pregunta;
+
+				$r[] = div($principal_seccion,
 					[
 						"class" => "descripcion_pregunta top_10 padding_20 col-lg-8 col-lg-offset-2",
 						"id" => $id
-					] );
+					]);
+
+
+				$r[] = div(place($id_pĺace),
+					[
+						"class" => "top_10 padding_20 col-lg-8 col-lg-offset-2"
+					]);
+
+
+
+
 			}
 
 
-			return div(append_data($r) , ["class"=> "contenedor_pregunta"] );
+			return div(append_data($r), ["class" => "contenedor_pregunta"]);
 
 		}
 	}

@@ -12,7 +12,24 @@ class pregunta extends REST_Controller
 		$this->load->model("pregunta_model");
 		$this->load->library(lib_def());
 	}
+	function noficacion_respuesta_POST(){
 
+		$param = $this->post();
+		$response = false;
+		if (if_ext($param, "id_pregunta")) {
+
+
+			$id_pregunta =  $param["id_pregunta"];
+			$response =  $this->pregunta_model->q_up("se_responde", 1 , $id_pregunta);
+			if ($response == true){
+
+				$this->envia_respuesta_cliente($id_pregunta);
+			}
+
+		}
+		$this->response($response);
+
+	}
 	function visto_pregunta_PUT()
 	{
 
@@ -178,19 +195,44 @@ class pregunta extends REST_Controller
 				];
 			}
 
-
 			if (array_key_exists("id_pregunta" , $param)){
 
 				$in["id_pregunta"] =  $param["id_pregunta"];
 			}
 
-
 			$limit =  (array_key_exists("recepcion" , $param)) ? 30 : 5;
 
-			$response = $this->pregunta_model->get([], $in, $limit, 'fecha_registro', 'DESC');
+
+			if(array_key_exists("num_respuesta" , $param)){
+
+				$where = $this->add_filter($in);
+				$response = $this->pregunta_model->get_num($limit,  $where);
+
+			}else{
+
+				$response = $this->pregunta_model->get([], $in, $limit, 'fecha_registro', 'DESC');
+			}
+
 
 		}
 		$this->response($response);
+
+	}
+	private function add_filter($in){
+
+		$extra =  " ";
+
+		if (count($in) >  0  ){
+
+			foreach ($in as $clave => $valor) {
+				$extra .=   "p.{$clave} = {$valor} AND ";
+
+			}
+			$extra .= " 1 = 1 ";
+
+		}
+
+		return $extra;
 
 	}
 	function cliente_GET()
@@ -211,6 +253,35 @@ class pregunta extends REST_Controller
 		$this->response($response);
 
 	}
+	private function  envia_respuesta_cliente($id_pregunta){
 
+
+		$pregunta =  $this->pregunta_model->q_get(["id_usuario" , "id_servicio"], $id_pregunta);
+		if (count($pregunta) >  0  ) {
+
+			$id_usuario  =  $pregunta[0]["id_usuario"];
+			$id_servicio = $pregunta[0]["id_servicio"];
+
+
+			if ($id_usuario >  0 ){
+
+				$usuario =  $this->principal->get_info_usuario($id_usuario);
+				if (count($usuario) >  0 ){
+
+					$cliente  =     $usuario[0];
+					$nombre   =     strtoupper($cliente["nombre"] . " " .  $cliente["apellido_paterno"]);
+					$email    =     $cliente["email"];
+
+					$sender    =     get_format_respuesta_cliente($email ,  $nombre, $id_servicio );
+					$response  =  $this->principal->send_email_enid($sender, 1 );
+
+
+				}
+
+			}
+
+		}
+
+	}
 
 }

@@ -1,5 +1,26 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
+
+	function get_format_respuesta_cliente($email ,  $nombre, $id_servicio ){
+
+		$asunto = "HOLA {$nombre} TIENES UNA NUEVA RESPUESTA EN TU BUZÓN";
+
+		$text = "Que tal {$nombre} el vendedor a contestado tu pregunta, puedes ver la respuesta que 
+            te envió en tu !" . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
+
+		$img =  get_img_servicio($id_servicio ,1);
+		$cuerpo = append_data([
+
+				img_enid([], 1, 1),
+				heading_enid($text, 3),
+				$img
+
+			]) ;
+
+		$sender =   get_request_email($email, $asunto, $cuerpo);
+		return $sender;
+
+	}
 	function get_notificacion_pregunta($usuario)
 	{
 
