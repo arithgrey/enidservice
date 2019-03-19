@@ -83,14 +83,15 @@ class Home extends CI_Controller
 		if (array_key_exists("action", $param) && $data["in_session"] > 0) {
 
 			$action = $param["action"];
+			$id_pregunta = (array_key_exists("id", $param) && $param["id"] > 0) ? $param["id"] : 0;
 			switch ($action) {
 
 				case "hechas":
-					$this->get_hechas($id_usuario, $data);
+
+					$this->get_hechas($id_usuario, $data, $id_pregunta);
 					break;
 				case "recepcion":
 
-					$id_pregunta = (array_key_exists("id", $param) && $param["id"] > 0) ? $param["id"] :  0;
 					$this->get_recibidas($id_usuario, $data, $id_pregunta);
 
 					break;
@@ -107,67 +108,65 @@ class Home extends CI_Controller
 		}
 	}
 
-
-	private function get_recibidas($id_usuario, $data , $id_pregunta)
+	private function get_hechas($id_usuario, $data , $id_pregunta)
 	{
 
-		$preguntas = $this->get_preguntas_recibidas_vendedor($id_usuario , $id_pregunta);
+		$preguntas = $this->get_preguntas_hechas_cliente($id_usuario, $id_pregunta);
+
+		$data["preguntas_format"] = get_format_preguntas($preguntas , 0);
+		$data["meta_keywords"] = '';
+		$data["desc_web"] = "";
+		$data["url_img_post"] = create_url_preview("");
+		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+		$data["js"] = ["js/summernote.js", "pregunta/listado.js"];
+		$data["css"] = ["pregunta_listado.css",  "summernote.css"];
+
+		$this->principal->show_data_page($data, 'listado');
+
+
+	}
+
+	function get_preguntas_hechas_cliente($id_usuario, $id_pregunta)
+	{
+
+
+		$q["id_pregunta"] = $id_pregunta;
+		$q["id_usuario"] = $id_usuario;
+		$q["recepcion"] = 1;
+		$q["num_respuesta"] = 1;
+
+		$api = "pregunta/cliente/format/json/";
+		return $this->principal->api($api, $q);
+
+	}
+
+	private function get_recibidas($id_usuario, $data, $id_pregunta)
+	{
+
+		$preguntas = $this->get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta);
 		$data["preguntas_format"] = get_format_preguntas($preguntas, 1);
 		$data["meta_keywords"] = '';
 		$data["desc_web"] = "";
 		$data["url_img_post"] = create_url_preview("");
 		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 
-		$data["js"] = ["js/summernote.js" , "pregunta/listado.js"];
-		$data["css"] = ["pregunta_listado.css" , "summernote.css"];
+		$data["js"] = ["js/summernote.js", "pregunta/listado.js"];
+		$data["css"] = ["pregunta_listado.css", "summernote.css"];
 
 		$this->principal->show_data_page($data, 'listado');
 
 
 	}
-	private function get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta){
+
+	private function get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta)
+	{
 
 
-
-		$q["id_pregunta"] =  $id_pregunta;
+		$q["id_pregunta"] = $id_pregunta;
 		$q["id_vendedor"] = $id_usuario;
 		$q["recepcion"] = 1;
-		$q["num_respuesta"] =  1;
+		$q["num_respuesta"] = 1;
 		$api = "pregunta/vendedor/format/json/";
-		return $this->principal->api($api, $q);
-
-
-	}
-	private  function  get_preguntas_recibidas($id_usuario){
-
-
-	}
-	private function get_hechas($id_usuario, $data)
-	{
-
-		$preguntas = $this->get_preguntas_hechas_cliente($id_usuario);
-		$data["preguntas_format"] = get_format_preguntas($preguntas);
-		$data["meta_keywords"] = '';
-		$data["desc_web"] = "";
-		$data["url_img_post"] = create_url_preview("");
-		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
-		$data["js"] = ["js/summernote.js" , "pregunta/listado.js"];
-		$data["css"] = ["pregunta_listado.css"];
-		$data["css_external"] = [
-			"http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
-		];
-
-
-		$this->principal->show_data_page($data, 'listado');
-
-
-	}
-
-	function get_preguntas_hechas_cliente($id_usuario)
-	{
-
-		$q["id_usuario"] = $id_usuario;
-		$api = "pregunta/cliente/format/json/";
 		return $this->principal->api($api, $q);
 
 	}

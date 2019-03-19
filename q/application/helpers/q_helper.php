@@ -469,8 +469,13 @@ if (!function_exists('invierte_date_time')) {
 		$f = $f + $deuda["flag"];
 
 		$preguntas = add_preguntas_sin_lectura($info["preguntas"]);
-
 		$f = $f + $preguntas["flag"];
+
+
+		$respuestas = add_respuestas_sin_lectura($info["respuestas"]);
+
+		$f = $f + $respuestas["flag"];
+
 
 
 		$direccion = add_pedidos_sin_direccion($inf_notificacion["adeudos_cliente"]);
@@ -493,7 +498,8 @@ if (!function_exists('invierte_date_time')) {
 			$direccion["html"],
 			$direccion_envio["html"],
 			$numtelefonico["html"],
-			$preguntas["html"]
+			$preguntas["html"],
+			$respuestas["html"]
 
 
 		];
@@ -503,7 +509,7 @@ if (!function_exists('invierte_date_time')) {
 
 	}
 
-	function add_preguntas_sin_lectura($preguntas)
+	function add_preguntas_sin_lectura($preguntas , $es_vendedor = 0 )
 	{
 
 		$r = [];
@@ -526,6 +532,7 @@ if (!function_exists('invierte_date_time')) {
 				"display_flex_enid"
 
 			);
+			$t =  [];
 			$t[] = get_btw($imagenes, $pregunta, "display_flex_enid");
 			$text = append_data($t);
 
@@ -535,7 +542,12 @@ if (!function_exists('invierte_date_time')) {
 			$f++;
 		}
 
-		array_unshift($r, "LO QUE COMPRADORES TE PREGUNTAN");
+
+
+		if (count($r) > 0 ){
+			array_unshift($r, "LO QUE COMPRADORES TE PREGUNTAN" );
+		}
+
 		$response = [
 			"html" => append_data($r),
 			"flag" => $f,
@@ -545,6 +557,51 @@ if (!function_exists('invierte_date_time')) {
 
 	}
 
+	function add_respuestas_sin_lectura($respuestas){
+
+		$r = [];
+		$f = 0;
+		foreach ($respuestas as $row) {
+
+
+			$id_pregunta = $row["id_pregunta"];
+			$pregunta = $row["pregunta"];
+			$id_servicio = $row["id_servicio"];
+			$id_usuario = $row["id_usuario"];
+			$pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
+			$pregunta = div($pregunta, ["class" => "black"]);
+
+
+			$imagenes =  get_btw(
+
+				div(get_img_servicio($id_servicio), ["style" => "width:50px"]) ,
+				get_img_usuario($id_usuario),
+				"display_flex_enid"
+
+			);
+			$t   =[];
+			$t[] = get_btw($imagenes, $pregunta, "display_flex_enid");
+			$text = append_data($t);
+
+			$id =  "#pregunta".$id_pregunta;
+			$url = "../pregunta/?action=hechas&id=" . $id_pregunta . "&id_servicio=" . $id_servicio.$id;
+			$r[] = anchor_enid($text, ["href" => $url]) . hr();
+			$f++;
+		}
+
+		if (count($r) >  0){
+
+			array_unshift($r, "TU BUZÓN");
+		}
+
+		$response = [
+			"html" => append_data($r),
+			"flag" => $f,
+
+		];
+		return $response;
+
+	}
 	function get_tareas_pendienetes_usuario($info)
 	{
 
@@ -567,9 +624,15 @@ if (!function_exists('invierte_date_time')) {
 		$f = $f + $compras_sin_cierre["flag"];
 
 
-		$preguntas = add_preguntas_sin_lectura($info["preguntas"]);
+		$preguntas = add_preguntas_sin_lectura($info["preguntas"] );
 		$lista .= $preguntas["html"];
 		$f = $f + $preguntas["flag"];
+
+
+		$respuestas = add_respuestas_sin_lectura($info["respuestas"] );
+		$lista .= $respuestas["html"];
+		$f = $f + $respuestas["flag"];
+
 
 
 		$deuda = add_saldo_pendiente($inf["adeudos_cliente"]);
