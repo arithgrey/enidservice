@@ -12,24 +12,119 @@ class pregunta extends REST_Controller
 		$this->load->model("pregunta_model");
 		$this->load->library(lib_def());
 	}
-	function noficacion_respuesta_POST(){
+
+	function noficacion_respuesta_POST()
+	{
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "id_pregunta")) {
+		if (if_ext($param, "id_pregunta,es_vendedor" , 1)) {
+
+			$id_pregunta = $param["id_pregunta"];
+			if ($param["es_vendedor"] > 0) {
 
 
-			$id_pregunta =  $param["id_pregunta"];
-			$response =  $this->pregunta_model->q_up("se_responde", 1 , $id_pregunta);
-			if ($response == true){
+				$filter = [
+					"se_lee" => 0,
+					"se_responde" => 1,
+					"se_ve_vendedor" => 1,
+					"se_ve_cliente" => 0
+				];
+				$response = $this->pregunta_model->update($filter, ["id_pregunta" => $id_pregunta]);
 
-				$this->envia_respuesta_cliente($id_pregunta);
+				if ($response == true) {
+
+					$this->envia_respuesta_cliente($id_pregunta);
+				}
+
+			} else {
+
+
+				$filter = [
+					"se_lee" => 1,
+					"se_responde" => 0,
+					"se_ve_vendedor" => 0,
+					"se_ve_cliente" => 1
+				];
+				$response = $this->pregunta_model->update($filter, ["id_pregunta" => $id_pregunta]);
+
+				if ($response == true) {
+
+					$this->envia_respuesta_vendedor($id_pregunta);
+				}
+
 			}
+
 
 		}
 		$this->response($response);
 
 	}
+
+	private function envia_respuesta_cliente($id_pregunta)
+	{
+
+
+		$pregunta = $this->pregunta_model->q_get(["id_usuario", "id_servicio"], $id_pregunta);
+		if (count($pregunta) > 0) {
+
+			$id_usuario = $pregunta[0]["id_usuario"];
+			$id_servicio = $pregunta[0]["id_servicio"];
+
+
+			if ($id_usuario > 0) {
+
+				$usuario = $this->principal->get_info_usuario($id_usuario);
+				if (count($usuario) > 0) {
+
+					$cliente = $usuario[0];
+					$nombre = strtoupper($cliente["nombre"] . " " . $cliente["apellido_paterno"]);
+					$email = $cliente["email"];
+
+					$sender = get_format_respuesta_cliente($email, $nombre, $id_servicio);
+					$response = $this->principal->send_email_enid($sender, 1);
+
+
+				}
+
+			}
+
+		}
+
+	}
+
+	private function envia_respuesta_vendedor($id_pregunta)
+	{
+
+
+		$pregunta = $this->pregunta_model->q_get(["id_vendedor", "id_servicio"], $id_pregunta);
+		if (count($pregunta) > 0) {
+
+			$id_usuario = $pregunta[0]["id_vendedor"];
+			$id_servicio = $pregunta[0]["id_servicio"];
+
+
+			if ($id_usuario > 0) {
+
+				$usuario = $this->principal->get_info_usuario($id_usuario);
+				if (count($usuario) > 0) {
+
+					$cliente = $usuario[0];
+					$nombre = strtoupper($cliente["nombre"] . " " . $cliente["apellido_paterno"]);
+					$email = $cliente["email"];
+
+					$sender = get_format_respuesta_vendedor($email, $nombre, $id_servicio);
+					$response = $this->principal->send_email_enid($sender, 1);
+
+
+				}
+
+			}
+
+		}
+
+	}
+
 	function visto_pregunta_PUT()
 	{
 
@@ -61,10 +156,16 @@ class pregunta extends REST_Controller
 					["pregunta" => $pregunta,
 						"id_usuario" => $id_usuario,
 						"id_servicio" => $id_servicio,
-						"id_vendedor" => $id_vendedor
+						"id_vendedor" => $id_vendedor,
+						"se_responde"   => 0,
+						"se_lee"        => 1,
+						"se_ve_cliente"  => 1,
+						"se_ve_vendedor" => 0
+
+
 					];
 				$id_pregunta = $this->pregunta_model->insert($q, 1);
-
+				$response = $id_pregunta;
 				if ($id_pregunta > 0) {
 
 					$this->notifica_vendedor($usuario);
@@ -189,43 +290,47 @@ class pregunta extends REST_Controller
 				"id_vendedor" => $id_vendedor,
 				"status" => 0
 			];
-			if (array_key_exists("recepcion" , $param)){
+			if (array_key_exists("recepcion", $param)) {
 				$in = [
 					"id_vendedor" => $id_vendedor
 				];
+			}if (array_key_exists("id_pregunta", $param) && $param["id_pregunta"] >  0) {
+
+				$in["id_pregunta"] = $param["id_pregunta"];
+
+			}if (array_key_exists("se_responde", $param)) {
+
+				$in["se_responde"] = $param["se_responde"];
 			}
 
-			if (array_key_exists("id_pregunta" , $param)){
 
-				$in["id_pregunta"] =  $param["id_pregunta"];
-			}
-
-			$limit =  (array_key_exists("recepcion" , $param)) ? 30 : 5;
+			$limit = (array_key_exists("recepcion", $param)) ? 30 : 5;
 
 
-			if(array_key_exists("num_respuesta" , $param)){
+			if (array_key_exists("num_respuesta", $param)) {
 
 				$where = $this->add_filter($in);
-				$response = $this->pregunta_model->get_num($limit,  $where);
+				$response = $this->pregunta_model->get_num($limit, $where);
 
-			}else{
+			} else {
 
 				$response = $this->pregunta_model->get([], $in, $limit, 'fecha_registro', 'DESC');
 			}
-
 
 		}
 		$this->response($response);
 
 	}
-	private function add_filter($in){
 
-		$extra =  " ";
+	private function add_filter($in)
+	{
 
-		if (count($in) >  0  ){
+		$extra = " ";
+
+		if (count($in) > 0) {
 
 			foreach ($in as $clave => $valor) {
-				$extra .=   "p.{$clave} = {$valor} AND ";
+				$extra .= "p.{$clave} = {$valor} AND ";
 
 			}
 			$extra .= " 1 = 1 ";
@@ -235,6 +340,7 @@ class pregunta extends REST_Controller
 		return $extra;
 
 	}
+
 	function cliente_GET()
 	{
 		$param = $this->get();
@@ -242,45 +348,64 @@ class pregunta extends REST_Controller
 		if (if_ext($param, "id_usuario")) {
 
 			$id_usuario = $param["id_usuario"];
+
 			$in = [
 				"id_usuario" => $id_usuario,
 				"status" => 0
 			];
 
-			$response = $this->pregunta_model->get([], $in, 50, 'fecha_registro', 'DESC');
+			if (array_key_exists("recepcion", $param)) {
+
+				$in = [
+					"id_usuario" => $id_usuario
+				];
+
+			}if (array_key_exists("id_pregunta", $param) && $param["id_pregunta"] >  0) {
+
+				$in["id_pregunta"] = $param["id_pregunta"];
+
+			}if (array_key_exists("se_lee", $param)) {
+
+				$in["se_lee"] = $param["se_lee"];
+
+			}if (array_key_exists("se_ve_cliente", $param)) {
+
+				$in["se_ve_cliente"] = $param["se_ve_cliente"];
+			}
+
+			$limit = (array_key_exists("recepcion", $param)) ? 30 : 5;
+
+
+			if (array_key_exists("num_respuesta", $param)) {
+
+				$where = $this->add_filter($in);
+				$response = $this->pregunta_model->get_num($limit, $where);
+
+			} else {
+
+				$response = $this->pregunta_model->get([], $in, $limit, 'fecha_registro', 'DESC');
+			}
+
 
 		}
 		$this->response($response);
 
+
 	}
-	private function  envia_respuesta_cliente($id_pregunta){
+	function notifica_lectura_cliente_PUT(){
 
+		$param = $this->put();
+		$response = false;
+		if (if_ext($param, "id_pregunta,id_usuario")) {
 
-		$pregunta =  $this->pregunta_model->q_get(["id_usuario" , "id_servicio"], $id_pregunta);
-		if (count($pregunta) >  0  ) {
+			$filter = [
+				"se_ve_cliente" => 1
+			];
+			$response = $this->pregunta_model->update($filter, ["id_pregunta" => $param["id_pregunta"]]);
 
-			$id_usuario  =  $pregunta[0]["id_usuario"];
-			$id_servicio = $pregunta[0]["id_servicio"];
-
-
-			if ($id_usuario >  0 ){
-
-				$usuario =  $this->principal->get_info_usuario($id_usuario);
-				if (count($usuario) >  0 ){
-
-					$cliente  =     $usuario[0];
-					$nombre   =     strtoupper($cliente["nombre"] . " " .  $cliente["apellido_paterno"]);
-					$email    =     $cliente["email"];
-
-					$sender    =     get_format_respuesta_cliente($email ,  $nombre, $id_servicio );
-					$response  =  $this->principal->send_email_enid($sender, 1 );
-
-
-				}
-
-			}
 
 		}
+		$this->response($response);
 
 	}
 

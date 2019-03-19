@@ -10,7 +10,6 @@ class Pregunta_model extends CI_Model
 
 	function  get_num($limit,  $where){
 
-		$a =1;
 		$query_get = "SELECT p.* , COUNT(r.id_pregunta) num  FROM pregunta p  
 					LEFT OUTER JOIN response r ON p.id_pregunta  = r.id_pregunta  
 					WHERE {$where} LIMIT {$limit} ";

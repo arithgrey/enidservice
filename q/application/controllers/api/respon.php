@@ -23,11 +23,16 @@ class Respon extends REST_Controller
 		if (if_ext($param, "id_pregunta,v,es_vendedor")) {
 			$id_pregunta = $param["id_pregunta"];
 			$response = $this->response_model->get_respuestas_pregunta($id_pregunta);
+			$es_vendedor = $param["es_vendedor"];
 
 			if ($param["v"] > 0) {
 
-				$es_vendedor = $param["es_vendedor"];
 				$response = get_format_listado($response, $id_pregunta, $es_vendedor);
+			}
+			if ($es_vendedor < 1){
+
+				$this->notifica_lectura_cliente($this->id_usuario , $id_pregunta);
+
 			}
 		}
 		$this->response($response);
@@ -39,7 +44,7 @@ class Respon extends REST_Controller
 		$param = $this->post();
 		$response = false;
 		if (if_ext($param, "id_pregunta,respuesta,es_vendedor")) {
-
+			$es_vendedor  =  $param["es_vendedor"];
 			$id_pregunta = $param["id_pregunta"];
 
 			$params = [
@@ -48,10 +53,12 @@ class Respon extends REST_Controller
 				"id_usuario" => $this->id_usuario
 			];
 
+
 			$response = $this->response_model->insert($params);
 			if ($response == true) {
 
-				$this->notifica_respuesta($id_pregunta);
+
+				$this->notifica_respuesta($id_pregunta, $es_vendedor);
 
 			}
 
@@ -59,14 +66,27 @@ class Respon extends REST_Controller
 		$this->response($response);
 	}
 
-	private function notifica_respuesta($id_pregunta)
+	private function notifica_respuesta($id_pregunta, $es_vendedor)
 	{
 
 
 		$q["id_pregunta"] = $id_pregunta;
+		$q["es_vendedor"] = $es_vendedor;
 		$api = "pregunta/noficacion_respuesta";
 		return $this->principal->api($api, $q, "json", "POST");
 
 	}
+	private function notifica_lectura_cliente($id_usuario, $id_pregunta)
+	{
+
+
+		$q["id_pregunta"] = $id_pregunta;
+		$q["id_usuario"] = $id_usuario;
+		$api = "pregunta/notifica_lectura_cliente";
+		return $this->principal->api($api, $q, "json", "PUT");
+
+	}
+
+
 
 }

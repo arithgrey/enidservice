@@ -22,6 +22,12 @@ let registra_valoracion = function(e) {
 
         let url = "../q/index.php/api/pregunta/index/format/json/";
         let data_send = $(".form_valoracion").serialize();
+
+        $(".registro_pregunta").show();
+        $(".place_registro_valoracion").empty();
+        recorrepage(".place_valoraciones");
+        bloquea_form(".form_valoracion");
+
         request_enid("POST", data_send, url, response_registro_valoracion, ".place_registro_valoracion");
     }
     e.preventDefault();
@@ -29,17 +35,11 @@ let registra_valoracion = function(e) {
 
 let response_registro_valoracion = function(data) {
 
-    if( data ==  true ) {
+    debugger;
+    if( data !=  false ) {
 
-        $(".registro_pregunta").show();
-        $(".place_registro_valoracion").empty();
-        recorrepage(".place_valoraciones");
-        bloquea_form(".form_valoracion");
-
-    }else{
-
-        redirect("../pregunta/?action=hechas");
-
+        let url =  "../pregunta/?action=hechas&id="+data+"&#pregunta86";
+        redirect(url);
     }
 }
 

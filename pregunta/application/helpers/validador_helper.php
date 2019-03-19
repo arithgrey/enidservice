@@ -3,7 +3,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 	if (!function_exists('get_format_preguntas')) {
-		function get_format_preguntas($preguntas, $es_vendedor = 0)
+		function get_format_preguntas($preguntas, $es_vendedor )
 		{
 
 			$r = [];
@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
 
 				if ($num >  0 ){
 
-					$t  =  ($num >  1 ) ?  $num . " COMENTATIRIOS" : " COMENTARIO ";
+					$t  =  ($num >  1 ) ?  $num . " COMENTARIOS" : "1 COMENTARIO ";
 
 					$p[] =  div($t ,
 						[

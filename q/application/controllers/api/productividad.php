@@ -14,7 +14,6 @@ class productividad extends REST_Controller
 	function notificaciones_GET()
 	{
 
-
 		$param = $this->get();
 		$id_usuario = $this->principal->get_session('idusuario');
 		$param["id_perfil"] = $this->principal->getperfiles();
@@ -31,6 +30,10 @@ class productividad extends REST_Controller
 		$response["id_usuario"] = $id_usuario;
 		$response["info_notificaciones"]["numero_telefonico"] = $this->verifica_registro_telefono($prm);
 		$response["preguntas"] =  $this->get_preguntas($id_usuario);
+		$response["respuestas"] =  $this->get_respuestas($id_usuario);
+
+
+
 
 		switch ($id_perfil) {
 
@@ -54,9 +57,19 @@ class productividad extends REST_Controller
 		$this->response($response);
 
 	}
+	private function get_respuestas($id_usuario){
+
+		$q["id_usuario"] =  $id_usuario;
+		$q["se_lee"] =  0;
+		$q["se_ve_cliente"] = 0;
+		$api = "pregunta/cliente/format/json/";
+		return $this->principal->api($api, $q);
+
+	}
 	private function get_preguntas($id_vendedor){
 
 		$q["id_vendedor"] =  $id_vendedor;
+		$q["se_responde"] =  0;
 		$api = "pregunta/vendedor/format/json/";
 		return $this->principal->api($api, $q);
 
