@@ -13,27 +13,24 @@ if (!function_exists('invierte_date_time')) {
 		$extra_color = "";
 		$nombre_servicio = $servicio["nombre_servicio"];
 		$id_servicio = $servicio["id_servicio"];
-		$url_img = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id_servicio);
 		$metakeyword = $servicio["metakeyword"];
 		$color = (get_param_def($servicio, "color") !== 0) ? $servicio["color"] : "";
 		$flag_servicio = $servicio["flag_servicio"];
 		$precio = $servicio["precio"];
 		$id_usuario = $servicio["id_usuario"];
 		$id_usuario_actual = $servicio["id_usuario_actual"];
-
-
 		$url_info_producto = get_url_servicio($id_servicio);
 		$vista = ($in_session > 0) ? $servicio["vista"] : 0;
 		$existencia = ($in_session > 0) ? $servicio["existencia"] : 0;
-
+		$url_img_servicio =  $servicio["url_img_servicio"];
 
 		$id_error = "imagen_" . $id_servicio;
 		$config = [
-			'src' => $url_img,
+			'src' => $url_img_servicio,
 			'id' => $id_error,
 			'class' => 'imagen_producto',
 			'alt' => $metakeyword,
-			'onerror' => "reloload_img( '" . $id_error . "','" . $url_img . "' , 1);"
+			/*'onerror' => "reloload_img( '" . $id_error . "','" . $url_img . "' , 1);"*/
 		];
 
 
@@ -970,40 +967,17 @@ if (!function_exists('invierte_date_time')) {
 		$imagenes = [];
 		foreach ($servicios as $row) {
 
-			/*
-			$extra_color = "style='margin-left:5px;color: black;font-weight:bold;'";
-			$list = "";
-			$flag = 0;
-			$nombre_servicio = $row["nombre_servicio"];
-			$flag_envio_gratis = $row["flag_envio_gratis"];
-			$color = isset($row["color"]) ? $row["color"] : "";
-			$precio = $row["precio"];
-			$costo_envio = "";
-			$url_venta = "../../producto/?producto=" . $id_servicio;
-			$extra = "";
-			$flag++;
-			$existencia = 0;
-			$vista = 0;
-			$flag = 0;
-			*/
-			//$flag_servicio = $row["flag_servicio"];
-			/*
-			if ($flag_servicio == 0) {
-				$costo_envio = $row["costo_envio"]["text_envio"]["cliente_solo_text"];
-			}
-			*/
-
 
 			$id_servicio = $row["id_servicio"];
-			$url_img = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id_servicio);
+			$url_img = $row["url_img_servicio"];
 			$metakeyword = $row["metakeyword"];
 			$url_info_producto = "../producto/?producto=" . $id_servicio;
 
+
 			$img = img([
 				'src' => $url_img,
-				'title' => 'Ver artículo',
 				'alt' => $metakeyword,
-				'onerror' => "this.onerror=null;this.src='" . $url_img . "';"
+
 			]);
 			$imagenes[] = div(anchor_enid($img, ["href" => $url_info_producto]), ["class" => "img_sugerencia"]);
 

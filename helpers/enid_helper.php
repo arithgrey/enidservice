@@ -1175,10 +1175,18 @@ if (!function_exists('lista_horarios')) {
     }
 }
 if (!function_exists('get_url_servicio')) {
-    function get_url_servicio($id_servicio)
+    function get_url_servicio($id_servicio , $n=0 )
     {
 
-        return "../producto/?producto=" . $id_servicio;
+    	if ($n >  0 ){
+
+		    return "../img_tema/productos/" . $id_servicio;
+
+	    }else{
+
+		    return "../producto/?producto=" . $id_servicio;
+	    }
+
 
     }
 }
@@ -1352,3 +1360,20 @@ if (!function_exists('get_format_izquierdo')) {
     }
 
 }
+if (!function_exists('get_img_serv')) {
+	function get_img_serv($img){
+
+		$path =  "";
+		if (is_array($img) && count($img) >  0){
+
+			$nombre_imagen =  $img[0]["nombre_imagen"];
+			$path =  get_url_servicio($nombre_imagen , 1);
+
+		}
+		return $path;
+
+
+	}
+}
+
+

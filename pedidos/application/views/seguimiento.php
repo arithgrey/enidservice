@@ -6,7 +6,7 @@
 <div class="col-lg-4">
 	<?= get_btw(
 		heading("ORDEN #" . $recibo[0]["id_proyecto_persona_forma_pago"] , 3),
-		img(["src" => link_imagen_servicio($recibo[0]["id_servicio"])]),
+		img(["src" => $recibo[0]["url_img_servicio"]]),
 		"page-section "
 	) ?>
 </div>

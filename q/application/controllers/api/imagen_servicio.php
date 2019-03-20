@@ -17,13 +17,26 @@ class Imagen_servicio extends REST_Controller
 		$response = 2;
 		if (if_ext($param, "id_servicio")) {
 
-			$limit = 8;
-			if (get_param_def($param, "limit") > 0) {
-				$limit = $param["limit"];
+			$id_servicio = $param["id_servicio"];
+
+			if (array_key_exists("c" , $param ) &&  $param["c"] >  0 ){
+
+
+
+				$limit =  (array_key_exists("l" , $param) && $param["l"] > 0) ? $param["l"] :  1;
+				$response =  $this->imagen_servicio_model->get_imagen_servicio($id_servicio, $limit );
+
+			}else{
+
+				$limit = 8;
+				if (get_param_def($param, "limit") > 0) {
+					$limit = $param["limit"];
+				}
+				$in = ["id_servicio" => $id_servicio];
+				$f = ["id_imagen", "principal"];
+				$response = $this->imagen_servicio_model->get($f, $in, $limit, "principal");
 			}
-			$in = ["id_servicio" => $param["id_servicio"]];
-			$f = ["id_imagen", "principal"];
-			$response = $this->imagen_servicio_model->get($f, $in, $limit, "principal");
+
 
 		}
 		$this->response($response);
@@ -117,4 +130,5 @@ class Imagen_servicio extends REST_Controller
 		$q["existencia"] = 0;
 		return $this->principal->api($api, $q, "json", "PUT");
 	}
+
 }

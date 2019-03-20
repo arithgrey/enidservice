@@ -160,7 +160,7 @@ if (!function_exists('invierte_date_time')) {
 			$tb .= "<tr id='" . $recibo . "' class='desglose_orden cursor_pointer entregado" . $extra . "' >";
 
 			$id_servicio = $row["id_servicio"];
-			$url_img = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
+			$url_img = $row["url_img_servicio"];
 			$id_error = "imagen_" . $id_servicio;
 			$img = img([
 				"src" => $url_img,
@@ -789,7 +789,7 @@ if (!function_exists('invierte_date_time')) {
 
 		$modalidad = $data["modalidad"];
 		$ordenes = $data["ordenes"];
-		$status = $data["status"];
+		//$status = $data["status"];
 		$status_enid_service = $data["status_enid_service"];
 		$en_proceso = $data["en_proceso"];
 		$anteriores = $data["anteriores"];
@@ -815,14 +815,13 @@ if (!function_exists('invierte_date_time')) {
 			$id_recibo = $row["id_proyecto_persona_forma_pago"];
 			$id_servicio = $row["id_servicio"];
 			$url_servicio = "../producto/?producto=" . $id_servicio;
-			$url_imagen_servicio = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
-
+			$url_imagen_servicio = $row["url_img_servicio"];
 			$id_error = "imagen_" . $id_servicio;
 
 			$t = anchor_enid(
 				img([
 					"src" => $url_imagen_servicio,
-					"onerror" => "reloload_img( '" . $id_error . "','" . $url_imagen_servicio . "');",
+					/*"onerror" => "reloload_img( '" . $id_error . "','" . $url_imagen_servicio . "');",*/
 					"class" => 'imagen_articulo',
 					"id" => $id_error
 				]),

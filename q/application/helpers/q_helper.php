@@ -427,27 +427,34 @@ if (!function_exists('invierte_date_time')) {
 	function add_compras_sin_cierre($recibos)
 	{
 
+
 		$r = [];
 		$f = 0;
-		foreach ($recibos as $row) {
+
+		if (is_array($recibos)){
+			foreach ($recibos as $row) {
 
 
-			$id_recibo = $row["id_recibo"];
-			$id_servicio = $row["id_servicio"];
-			$total = div($row["total"] . "MXN", ["class" => "text_monto_sin_cierre text-left"]);
-			$text = get_btw(
-				div(get_img_servicio($id_servicio), ["style" => "width:50px"]),
-				$total,
-				"display_flex_enid"
-			);
+				$id_recibo = $row["id_recibo"];
+				$id_servicio = $row["id_servicio"];
+				$total = div($row["total"] . "MXN", ["class" => "text_monto_sin_cierre text-left"]);
+				$text = get_btw(
+					div(get_img_servicio($id_servicio), ["style" => "width:50px"]),
+					$total,
+					"display_flex_enid"
+				);
 
-			$url = "../pedidos/?recibo=" . $id_recibo;
-			$r[] = anchor_enid($text, ["href" => $url]);
-			$f++;
+				$url = "../pedidos/?recibo=" . $id_recibo;
+				$r[] = anchor_enid($text, ["href" => $url]);
+				$f++;
+			}
+
+			if(count($r) > 0){
+				array_unshift($r, "VENTAS EN PROCESO");
+			}
+
 		}
 
-
-		array_unshift($r, "VENTAS EN PROCESO");
 		$response = [
 			"html" => append_data($r),
 			"flag" => $f,
@@ -652,33 +659,40 @@ if (!function_exists('invierte_date_time')) {
 		$lista .= $num_telefonico["html"];
 
 
-		foreach ($info["objetivos_perfil"] as $row) {
+		if (is_array($inf) && array_key_exists("objetivos_perfil" , $inf)){
+			foreach ($inf["objetivos_perfil"] as $row) {
 
-			switch ($row["nombre_objetivo"]) {
-				case "Ventas":
+				switch ($row["nombre_objetivo"]) {
+					case "Ventas":
 
-					$meta_ventas = $row["cantidad"];
-					$notificacion =
-						add_envios_a_ventas($meta_ventas, $ventas_enid_service);
-					$lista .= $notificacion["html"];
-					$f = $f + $notificacion["flag"];
+						$meta_ventas = $row["cantidad"];
+						$notificacion =
+							add_envios_a_ventas($meta_ventas, $ventas_enid_service);
+						$lista .= $notificacion["html"];
+						$f = $f + $notificacion["flag"];
 
-					break;
+						break;
 
 
-				case "Desarrollo_web":
+					case "Desarrollo_web":
 
-					$meta_tareas = $row["cantidad"];
-					$notificacion =
-						add_tareas_pendientes($meta_tareas, $tareas_enid_service);
-					$lista .= $notificacion["html"];
-					$f = $f + $notificacion["flag"];
-					break;
-				default:
-					break;
+						$meta_tareas = $row["cantidad"];
+						$notificacion =
+							add_tareas_pendientes($meta_tareas, $tareas_enid_service);
+						$lista .= $notificacion["html"];
+						$f = $f + $notificacion["flag"];
+						break;
+					default:
+						break;
+				}
+
 			}
 
 		}
+
+
+
+
 
 
 		$new_flag = "";

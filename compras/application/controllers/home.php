@@ -35,8 +35,6 @@ class Home extends CI_Controller
 	private function getCssJs($data)
 	{
 		$data["css"] = [
-			"js/bootstrap-datepicker/css/datepicker-custom.css",
-			"js/bootstrap-timepicker/css/timepicker.css",
 			"confirm-alert.css",
 			"compras.css"
 

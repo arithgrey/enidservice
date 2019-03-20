@@ -949,11 +949,12 @@ if (!function_exists('invierte_date_time')) {
             $num_ciclos_contratados = $recibo["num_ciclos_contratados"];
             $precio = $recibo["precio"];
             $id_servicio = $recibo["id_servicio"];
+            $link  = $recibo["url_img_servicio"];
             $response = "";
+
 
             for ($a = 0; $a < $num_ciclos_contratados; $a++) {
 
-                $link = link_imagen_servicio($id_servicio);
                 $id_error = "imagen_" . $id_servicio;
                 $img = img([
                     "src" => $link,
