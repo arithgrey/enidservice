@@ -61,7 +61,20 @@ class principal extends CI_Controller
 	{
 		$this->sessionclass->logout();
 	}
+	function get_imagenes_productos($id_servicio, $completo = 0 , $limit = 1 , $path=0)
+	{
 
+		$q["id_servicio"] = $id_servicio;
+		$q["c"] = $completo;
+		$q["l"] = $limit;
+		$api = "imagen_servicio/servicio/format/json/";
+		$response  =  $this->api($api, $q);
+		if ($path >  0 ) {
+			$response =  get_img_serv($response);
+		}
+		return $response;
+
+	}
 	function get_departamentos($format_html = 1)
 	{
 

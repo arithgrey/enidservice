@@ -497,7 +497,7 @@ class Servicio extends REST_Controller
 			$data["clasificaciones"] = $this->carga_clasificaciones($data["servicio"]);
 			$data["ciclos"] = $this->get_not_ciclo_facturacion($param);
 			$data["id_usuario"] = $this->id_usuario;
-			$imagenes = $this->carga_imagenes_servicio($id_servicio);
+			$imagenes           = $this->principal->get_imagenes_productos($id_servicio, 1,  10 );
 			$data["url_request"] = get_url_request("");
 			$prm["id_servicio"] = $id_servicio;
 			$data["num"] = $param["num"];
@@ -645,7 +645,7 @@ class Servicio extends REST_Controller
 	private function create_imgs_tb($row, $is_mobile)
 	{
 		$id_imagen = $row["id_imagen"];
-		$url_imagen = get_url_request("imgs/index.php/enid/imagen/" . $id_imagen);
+		$url_imagen = get_url_servicio($row["nombre_imagen"] , 1);
 		$extra_imagen = ($is_mobile == 0) ? 'position:relative;width:150px!important;height:150px!important;' : 'position:relative;width:170px!important;height:150px!important;';
 		$id_error = "imagen_" . $id_imagen;
 		$img = img([
@@ -686,9 +686,14 @@ class Servicio extends REST_Controller
 
 				}
 			} else {
+
 				$data_complete["num_servicios"] = 0;
-				$data_complete["info_servicios"] =
-					icon("fa fa-search") . span("Tu búsqueda de " . $param["q"] . " (0 Productos) ");
+				$data_complete["info_servicios"] = get_btw(
+					icon("fa fa-search")
+					,
+					"Tu búsqueda de " . $param["q"] . " (0 Productos) ",
+					""
+				);
 				$this->response($data_complete);
 			}
 		} else {
@@ -716,7 +721,10 @@ class Servicio extends REST_Controller
 		$num_servicios = $servicios["num_servicios"];
 		$this->set_option("in_session", 1);
 		$this->set_option("id_usuario", $this->id_usuario);
+
 		$lista_productos = $this->agrega_vista_servicios($servicios["servicios"]);
+
+
 		$paginacion = $this->principal->create_pagination($config);
 		return get_base_empresa($paginacion, $busqueda, $num_servicios, $lista_productos);
 
@@ -732,6 +740,8 @@ class Servicio extends REST_Controller
 		foreach ($data as $row) {
 			$row["in_session"] = $in_session;
 			$row["id_usuario_actual"] = $id_usuario;
+			$id_servicio =  $row["id_servicio"];
+			$row["url_img_servicio"] = $this->principal->get_imagenes_productos($id_servicio, 1, 1 , 1);
 			$response[] = create_vista($row);
 		}
 		return $response;
@@ -1383,10 +1393,12 @@ class Servicio extends REST_Controller
 	{
 
 		$servicio = $this->get();
+		$servicio["url_img_servicio"]    =   $this->principal->get_imagenes_productos($servicio["id_servicio"], 1 , 1 ,1);
 		$response = create_vista($servicio);
 		$this->response($response);
 
 	}
+
 
 	function metricas_productos_solicitados_GET()
 	{
@@ -1603,9 +1615,10 @@ class Servicio extends REST_Controller
 			if (count($servicios) > 0) {
 
 
-				$is_mobile = $this->get_option("is_mobile");
 
-				//return $this->load->view("producto/sugeridos" , $data);
+				$is_mobile = $this->get_option("is_mobile");
+				$servicios =  $this->add_imgs_sugerencias($servicios);
+
 				$response = get_view_sugerencias($servicios, $is_mobile);
 
 			} else {
@@ -1615,7 +1628,21 @@ class Servicio extends REST_Controller
 		}
 		$this->response($response);
 	}
+	private function add_imgs_sugerencias($servicios){
 
+		$response =  [];
+		$a  = 0;
+		foreach ($servicios as $row){
+
+			$servicio       =  $row;
+			$id_servicio    =  $servicios[$a]["id_servicio"];
+			$servicio["url_img_servicio"]   =  $this->principal->get_imagenes_productos($id_servicio, 1 , 1, 1);
+			$a ++;
+			$response[]     =  $servicio;
+		}
+		return $response;
+
+	}
 	private function get_servicios_por_clasificaciones($q)
 	{
 

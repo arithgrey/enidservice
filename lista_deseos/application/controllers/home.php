@@ -40,7 +40,8 @@ class Home extends CI_Controller
     private function load_lista_deseos($data)
     {
 
-        $data["productos_deseados"] = $this->get_lista_deseos($data["id_usuario"]);
+        $productos_deseados = $this->get_lista_deseos($data["id_usuario"]);
+        $data["productos_deseados"]= $this->add_imagenes($productos_deseados);
         if (count($data["productos_deseados"]) > 0) {
             $data["css"] = array("lista_deseos.css");
             $this->principal->show_data_page($data, 'home');
@@ -48,7 +49,21 @@ class Home extends CI_Controller
             $this->principal->show_data_page($data, 'home_sin_productos');
         }
     }
+	private function add_imagenes($servicios)
+	{
+		$response =  [];
+		$a  = 0;
+		foreach ($servicios as $row){
 
+			$servicio       =  $row;
+			$id_servicio    =  $servicios[$a]["id_servicio"];
+			$servicio["url_img_servicio"]   =  $this->principal->get_imagenes_productos($id_servicio, 1 , 1, 1);
+			$a ++;
+			$response[]     =  $servicio;
+		}
+		return $response;
+
+	}
     private function get_lista_deseos($id_usuario)
     {
 

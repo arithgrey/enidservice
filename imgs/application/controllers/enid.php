@@ -6,7 +6,7 @@ class Enid extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model("img_model");
-		$this->load->library(lib_def());
+
 	}
 
 	function imagen($id_imagen)
@@ -70,6 +70,7 @@ class Enid extends CI_Controller
 	function get_img_usuario($id_usuario)
 	{
 
+		$this->load->library(lib_def());
 		$q["id_usuario"] = $id_usuario;
 		$api = "imagen_usuario/usuario/format/json/";
 		return $this->principal->api($api, $q);
@@ -78,6 +79,7 @@ class Enid extends CI_Controller
 	function get_img_servicio($id_servicio)
 	{
 
+		$this->load->library(lib_def());
 		$q["id_servicio"] = $id_servicio;
 		$q["limit"] = 1;
 		$api = "imagen_servicio/servicio/format/json/";

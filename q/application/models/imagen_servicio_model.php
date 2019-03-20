@@ -57,4 +57,18 @@ class Imagen_servicio_model extends CI_Model
 		$this->db->limit($limit);
 		return $this->db->update("imagen_servicio", $data);
 	}
+	function  get_imagen_servicio($id_servicio, $limit){
+
+		$query_get =  "SELECT i.nombre_imagen , iss.* FROM  
+							imagen_servicio  iss 
+							INNER JOIN imagen i 
+							ON  
+							iss.id_imagen =  i.idimagen
+							WHERE iss.id_servicio =  $id_servicio 
+							ORDER BY iss.principal DESC LIMIT $limit ";
+
+		return  $this->db->query($query_get)->result_array();
+
+
+	}
 }

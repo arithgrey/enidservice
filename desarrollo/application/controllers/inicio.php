@@ -59,9 +59,6 @@ class Inicio extends CI_Controller
 
 		];
 
-		$data["css_external"] = [
-			"http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
-		];
 
 		return $data;
 	}

@@ -72,6 +72,11 @@ class Home extends CI_Controller
 		$data["q2"] = $param["q2"];
 		$data["num_ciclos"] = $param["num_ciclos"];
 		$data["orden_pedido"] = 1;
+
+
+		$img    = $this->principal->get_imagenes_productos($param["plan"], 1 , 1);
+		$data["url_imagen_servicio"] =  get_img_serv($img);
+
 		$this->principal->show_data_page($data, 'pre');
 
 	}
@@ -153,7 +158,10 @@ class Home extends CI_Controller
 		}
 
 		$this->set_option("flag_precio_definido", 0);
-		$data["imgs"] = $this->get_imagenes_productos($id_servicio);
+
+
+		$data["imgs"]    = $this->principal->get_imagenes_productos($id_servicio, 1 ,10);
+
 		$this->set_option("meta_keywords", costruye_meta_keyword($this->get_option("servicio")[0]));
 
 		$data["meta_keywords"] = $this->get_option("meta_keywords");
@@ -232,13 +240,7 @@ class Home extends CI_Controller
 		return $tiempo_entrega;
 	}
 
-	private function get_imagenes_productos($id_servicio)
-	{
 
-		$q["id_servicio"] = $id_servicio;
-		$api = "imagen_servicio/servicio/format/json/";
-		return $this->principal->api($api, $q);
-	}
 
 	private function costruye_descripcion_producto()
 	{
@@ -302,6 +304,12 @@ class Home extends CI_Controller
 		return $this->nombre_servicio;
 	}
 
+
+	function set_mensaje_descripcion($mensaje_descripcion)
+	{
+		$this->mensaje_descripcion = $mensaje_descripcion;
+	}
+	/*
 	private function get_descripcion_mensaje($id_mensaje)
 	{
 		$mensaje = $this->principal->get_info_mensaje($id_mensaje);
@@ -309,11 +317,6 @@ class Home extends CI_Controller
 		$this->set_mensaje_descripcion(strip_tags($descripcion_mensaje));
 	}
 
-	function set_mensaje_descripcion($mensaje_descripcion)
-	{
-		$this->mensaje_descripcion = $mensaje_descripcion;
-	}
-	/*
 	private function get_precio_venta_mayoreo($costo){
 		$q["costo"] =  $costo;
 		$api =  "cobranza/calcula_precio_producto_mayoreo";

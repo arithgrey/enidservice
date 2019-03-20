@@ -154,8 +154,9 @@ class recibo extends REST_Controller
 			$modalidad = $param["modalidad"];
 			$id_usuario = $this->id_usuario;
 			$param["id_usuario"] = $id_usuario;
-			$ordenes = $this->recibo_model->get_compras_usuario($param, $modalidad);
-			$response = "";
+			$ordenes    = $this->recibo_model->get_compras_usuario($param, $modalidad);
+			$ordenes    = $this->add_imgs_servicio($ordenes);
+			$response   = "";
 			if (count($ordenes) > 0) {
 
 
@@ -230,12 +231,14 @@ class recibo extends REST_Controller
 				$data_complete["recibo"] = $recibo;
 				$id_servicio = $recibo[0]["id_servicio"];
 
+				$url_img_servicio =  $this->principal->get_imagenes_productos($id_servicio, 1 , 1 , 1);
+
 				/*Validamos que exista un monto por pagar*/
 				$data_complete["servicio"] = $this->principal->get_base_servicio($id_servicio);
 
 				if ($monto_a_pagar > $saldo_cubierto) {
 
-					$response = $this->ticket_pendiente_pago($param, $recibo, $data_complete);
+					$response = $this->ticket_pendiente_pago($param, $recibo, $data_complete , $url_img_servicio);
 
 				} else {
 
@@ -255,7 +258,7 @@ class recibo extends REST_Controller
 		$this->response($response);
 	}
 
-	function ticket_pendiente_pago($param, $recibo, $data_complete)
+	function ticket_pendiente_pago($param, $recibo, $data_complete, $url_img_servicio)
 	{
 		$response = false;
 		$id_usuario = $recibo[0]["id_usuario"];
@@ -263,7 +266,7 @@ class recibo extends REST_Controller
 
 		if ($recibo[0]["tipo_entrega"] == 1) {
 
-			return $this->ticket_pendiente_pago_contra_entrega($param, $recibo, $data_complete);
+			return $this->ticket_pendiente_pago_contra_entrega($param, $recibo, $data_complete, $url_img_servicio);
 
 		} else {
 
@@ -272,7 +275,7 @@ class recibo extends REST_Controller
 
 				$data_complete = $this->get_data_saldo($param, $recibo, $data_complete);
 				$data_complete["es_punto_encuentro"] = 0;
-				$response = $this->get_mensaje_pago_al_memento($data_complete, $data_complete["costo_envio_sistema"]);
+				$response = $this->get_mensaje_pago_al_memento($data_complete, $data_complete["costo_envio_sistema"] , $url_img_servicio);
 
 			} else {
 
@@ -286,7 +289,7 @@ class recibo extends REST_Controller
 
 	}
 
-	function ticket_pendiente_pago_contra_entrega($param, $recibo, $data_complete)
+	function ticket_pendiente_pago_contra_entrega($param, $recibo, $data_complete , $url_img_servicio)
 	{
 
 		$id_recibo = $param["id_recibo"];
@@ -302,7 +305,7 @@ class recibo extends REST_Controller
 				$id_punto_encuentro = $this->get_punto_encuentro_recibo($id_recibo);
 				$data_complete["punto_encuentro"] = $this->get_punto_encuentro($id_punto_encuentro);
 				$data_complete["es_punto_encuentro"] = 1;
-				$response = $this->get_mensaje_pago_al_memento($data_complete, $data_complete["costo_envio_sistema"]);
+				$response = $this->get_mensaje_pago_al_memento($data_complete, $data_complete["costo_envio_sistema"], $url_img_servicio);
 			}
 		} else {
 
@@ -331,7 +334,7 @@ class recibo extends REST_Controller
 		return $this->principal->api($api, $q);
 	}
 
-	private function get_mensaje_pago_al_memento($data_complete, $costo_envio_sistema)
+	private function get_mensaje_pago_al_memento($data_complete, $costo_envio_sistema , $url_img_servicio)
 	{
 
 
@@ -354,7 +357,7 @@ class recibo extends REST_Controller
 
 		$deuda = get_saldo_pendiente($monto_a_pagar, $num_ciclos_contratados, $saldo_cubierto, $costo_envio_cliente, $costo_envio_sistema, $tipo_entrega);
 		$saldo_pendiente = $deuda["total_mas_envio"];
-		$url_img_servicio = link_imagen_servicio($id_servicio);
+		//$url_img_servicio = link_imagen_servicio($id_servicio);
 		$data["recibo"] = $recibo;
 		$text_forma_compra = ($tipo_entrega) ? "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
 
@@ -518,7 +521,7 @@ class recibo extends REST_Controller
 				$response = $this->recibo_model->get_q($params, $param);
 			}
 			if ($param["v"] == 1) {
-
+				$response =  $this->add_imgs_servicio($response);
 				$response = create_resumen_pedidos($response, $this->get_estatus_enid_service($param), $param);
 
 			}
@@ -884,6 +887,22 @@ class recibo extends REST_Controller
 
 	}
 
+	private function  add_imgs_servicio($ordenes){
+
+		$a = 0;
+		$response =  [];
+		foreach ($ordenes as $row){
+
+			$orden       =  $row;
+			$id_servicio    =  $ordenes[$a]["id_servicio"];
+			$orden["url_img_servicio"]   =  $this->principal->get_imagenes_productos($id_servicio, 1 , 1, 1);
+			$a ++;
+			$response[]     =  $orden;
+		}
+		return $response;
+
+
+	}
 	private function get_direccion_pedido($id_recibo)
 	{
 

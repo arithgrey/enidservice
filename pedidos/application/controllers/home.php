@@ -50,7 +50,7 @@ class Home extends CI_Controller
 		$data["js"] = ["alerts/jquery-confirm.js", "pedidos/seguimiento.js"];
 
 		$id_recibo = $this->input->get("seguimiento");
-		$recibo = $this->get_recibo($id_recibo);
+		$recibo = $this->get_recibo($id_recibo ,1);
 		$id_usuario_compra = $recibo[0]["id_usuario"];
 		$id_usuario_venta = $recibo[0]["id_usuario_venta"];
 
@@ -81,12 +81,19 @@ class Home extends CI_Controller
 
 	}
 
-	private function get_recibo($id_recibo)
+	private function get_recibo($id_recibo , $add_img = 0 )
 	{
 
 		$q["id"] = $id_recibo;
 		$api = "recibo/id/format/json/";
-		return $this->principal->api($api, $q);
+		$response =  $this->principal->api($api, $q);
+
+		if (is_array($response) && count($response)>  0 & $add_img >  0){
+
+
+			$response[0]["url_img_servicio"] =  $this->principal->get_imagenes_productos($response[0]["id_servicio"],1,1,1);
+		}
+		return $response;
 	}
 
 	private function get_domicilio_entrega($id_recibo, $recibo)
@@ -256,7 +263,7 @@ class Home extends CI_Controller
 	{
 		$data["css"] = [
 			/**"js/bootstrap-datepicker/css/datepicker-custom.css",
-			"js/bootstrap-timepicker/css/timepicker.css",*/
+			"js/bootstrap-timepicker/css/timepicker.css",**/
 			"pedidos.css",
 			"confirm-alert.css"
 		];
@@ -313,6 +320,7 @@ class Home extends CI_Controller
 		if ($es_recibo == 0) {
 
 			$this->principal->show_data_page($data, 'form_busqueda');
+
 		} else {
 
 			$this->load_detalle_pedido($param, $data);
@@ -342,7 +350,8 @@ class Home extends CI_Controller
 	{
 
 		$id_recibo = $param["recibo"];
-		$recibo = $this->get_recibo($id_recibo);
+		$recibo = $this->get_recibo($id_recibo , 1);
+
 		if (count($recibo) > 0) {
 
 

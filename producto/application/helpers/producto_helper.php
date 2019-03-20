@@ -132,19 +132,21 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_seccion_pre_pedido($orden_pedido, $plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $id_servicio)
+    function get_seccion_pre_pedido($url_imagen_servicio ,  $orden_pedido, $plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $id_servicio)
     {
 
         $r = [];
 
         if ($orden_pedido > 0) {
 
-            $url = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
+
+
+
 
             $r[] = get_form_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos);
             $r[] = form_pre_pedido_contact($plan, $num_ciclos);
             $r[] = form_pre_puntos_medios($plan, $num_ciclos);
-            $r[] = addNRow(div(img(["src" => $url]), ["class" => "col-lg-4 col-lg-offset-4"]));
+            $r[] = addNRow(div(img(["src" => $url_imagen_servicio]), ["class" => "col-lg-4 col-lg-offset-4"]));
 
         }
         return append_data($r);
@@ -532,66 +534,67 @@ if (!function_exists('invierte_date_time')) {
         function construye_seccion_imagen_lateral($param, $nombre_servicio, $url_youtube)
         {
 
-            $preview = "";
-            $z = 0;
-            $imgs_grandes = "";
 
-            foreach ($param as $row) {
+	        $preview = "";
+	        $z = 0;
+	        $imgs_grandes = "";
 
-                $id_imagen = $row["id_imagen"];
-                $url = "../imgs/index.php/enid/imagen/" . $id_imagen;
-                $extra_class = "";
-                $extra_class_contenido = '';
+	        foreach ($param as $row) {
 
-                if ($z == 0) {
-                    $extra_class = ' active ';
-                    $extra_class_contenido = ' in active ';
-                }
+		        $nombre_imagen = $row["nombre_imagen"];
+		        $url = get_url_servicio($nombre_imagen, 1 );
+		        $extra_class = "";
+		        $extra_class_contenido = '';
 
-                $producto_tab = "#imagen_tab_" . $z;
-                $producto_tab_s = "imagen_tab_" . $z;
+		        if ($z == 0) {
+			        $extra_class = ' active ';
+			        $extra_class_contenido = ' in active ';
+		        }
 
-
-                $id_error = "imagen_" . $z;
-                $img_pro = [
-                    'src' => $url,
-                    'alt' => $nombre_servicio,
-                    'id' => $id_error,
-                    'class' => 'imagen-producto',
-                    'onerror' => "reloload_img( '" . $id_error . "','" . $url . "' , 1);"
-                ];
-
-                $preview .= anchor_enid(img($img_pro),
-                    [
-                        'id' => $z,
-                        'data-toggle' => 'tab',
-                        'class' => ' preview_enid ' . $extra_class,
-                        'href' => $producto_tab
-                    ]
+		        $producto_tab = "#imagen_tab_" . $z;
+		        $producto_tab_s = "imagen_tab_" . $z;
 
 
-                );
+		        $id_error = "imagen_" . $z;
+		        $img_pro = [
+			        'src' => $url,
+			        'alt' => $nombre_servicio,
+			        'id' => $id_error,
+			        'class' => 'imagen-producto',
+			        'onerror' => "reloload_img( '" . $id_error . "','" . $url . "' , 1);"
+		        ];
 
-                $id_error = "imagen_" . $id_imagen;
-                $image_properties = [
-                    'src' => $url,
-                    'id' => $id_error,
-                    "class" => "imagen_producto_completa",
-                    'onerror' => "reloload_img( '" . $id_error . "','" . $url . "' , 1);"
-                ];
-                $imgs_grandes .= div(img($image_properties),
-                    [
-                        "id" => $producto_tab_s,
-                        "class" => "tab-pane fade zoom " . $extra_class_contenido . " "
-                    ]);
+		        $preview .= anchor_enid(img($img_pro),
+			        [
+				        'id' => $z,
+				        'data-toggle' => 'tab',
+				        'class' => ' preview_enid ' . $extra_class,
+				        'href' => $producto_tab
+			        ]
 
-                $z++;
 
-            }
-            $response["preview"] = $preview;
-            $response["num_imagenes"] = count($param);
-            $response["imagenes_contenido"] = $imgs_grandes;
-            return $response;
+		        );
+
+
+		        $image_properties = [
+			        'src' => $url,
+			        'id' => $id_error,
+			        "class" => "imagen_producto_completa"
+		        ];
+		        $imgs_grandes .= div(img($image_properties),
+			        [
+				        "id" => $producto_tab_s,
+				        "class" => "tab-pane fade zoom " . $extra_class_contenido . " "
+			        ]);
+
+		        $z++;
+
+	        }
+	        $response["preview"] = $preview;
+	        $response["num_imagenes"] = count($param);
+	        $response["imagenes_contenido"] = $imgs_grandes;
+	        return $response;
+
         }
     }
     if (!function_exists('valida_url_youtube')) {

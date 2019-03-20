@@ -248,7 +248,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_servicio = $row["id_servicio"];
                 $url = "../producto/?producto=" . $id_servicio;
-                $src_img = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
+                $src_img = $row["url_img_servicio"];
 
                 $id_error = "imagen_" . $id_servicio;
                 $config = [
