@@ -111,7 +111,18 @@ class usuario_deseo extends REST_Controller
 		$param = $this->get();
 		$response = false;
 		if (if_ext($param, "id_usuario")) {
-			$response = $this->usuario_deseo_model->get([], ["id_usuario" => $param["id_usuario"]], 30, 'num_deseo');
+
+			$id_usuario =  $param["id_usuario"];
+			if (array_key_exists("c" , $param) && $param["c"] >  0) {
+
+				$response = $this->usuario_deseo_model->get_usuario_deseo($id_usuario);
+
+			}else{
+
+				$response = $this->usuario_deseo_model->get([], ["id_usuario" =>  $id_usuario], 30, 'num_deseo');
+
+			}
+
 		}
 		$this->response($response);
 	}

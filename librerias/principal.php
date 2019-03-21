@@ -61,8 +61,31 @@ class principal extends CI_Controller
 	{
 		$this->sessionclass->logout();
 	}
-	function get_imagenes_productos($id_servicio, $completo = 0 , $limit = 1 , $path=0)
+	function get_imagenes_productos($id_servicio, $completo = 0 , $limit = 1 , $path=0, $data =[])
 	{
+		$response =  [];
+		$a  = 0;
+		if (count($data) > 0){
+
+			foreach ($data as $row){
+
+				$servicio       =  $row;
+				$id             =  $data[$a]["id_servicio"];
+				$servicio["url_img_servicio"]   =  $this->get_img($id, 1 , 1  , 1);
+				$a ++;
+				$response[]     =  $servicio;
+			}
+
+		}else{
+
+			$response =  $this->get_img($id_servicio, $completo , $limit  , $path);
+
+		}
+		return $response;
+
+
+	}
+	private function get_img($id_servicio, $completo = 0 , $limit = 1 , $path=0){
 
 		$q["id_servicio"] = $id_servicio;
 		$q["c"] = $completo;
@@ -72,8 +95,8 @@ class principal extends CI_Controller
 		if ($path >  0 ) {
 			$response =  get_img_serv($response);
 		}
-		return $response;
 
+		return $response;
 	}
 	function get_departamentos($format_html = 1)
 	{

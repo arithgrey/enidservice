@@ -1119,20 +1119,28 @@ if (!function_exists('invierte_date_time')) {
         function crea_estado_venta($status_ventas, $recibo)
         {
 
-            $status = $recibo[0]["status"];
-            $text_status = "";
-            foreach ($status_ventas as $row) {
+        	$response  = "";
+        	/**NO canceladas*/
+	        if($recibo[0]["se_cancela"] <  1  && $recibo[0]["status"] != 10 && $recibo[0]["cancela_cliente"] <  1){
 
-                $id_estatus_enid_service = $row["id_estatus_enid_service"];
-                $text_vendedor = $row["text_vendedor"];
+		        $status = $recibo[0]["status"];
+		        $text_status = "";
+		        foreach ($status_ventas as $row) {
 
-                if ($status == $id_estatus_enid_service) {
+			        $id_estatus_enid_service = $row["id_estatus_enid_service"];
+			        $text_vendedor = $row["text_vendedor"];
 
-                    $text_status = $text_vendedor;
-                    break;
-                }
+			        if ($status == $id_estatus_enid_service) {
+				        $text_status = $text_vendedor;
+				        break;
+			        }
+		        }
+		        $response = div($text_status, ["class" => "status_compra"]);
             }
-            return div($text_status, ["class" => "status_compra"]);
+
+	        return $response;
+
+
         }
     }
     if (!function_exists('create_seccion_usuario')) {

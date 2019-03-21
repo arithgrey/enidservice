@@ -2,7 +2,7 @@
 <div class='contenedor_anuncios_home'>
     <?= get_format_menu_categorias_destacadas($es_movil, $categorias_destacadas) ?>
 </div>
-<div class="col-lg-2">
+<div class="col-lg-2 border-right top_20">
     <?= heading("FILTRA TU BÚSQUEDA", 5) ?>
     <?= div(
         icon("fa fa-search") . $busqueda . "(" . $num_servicios . "PRODUCTOS)",

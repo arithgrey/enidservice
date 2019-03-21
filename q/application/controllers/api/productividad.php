@@ -24,6 +24,9 @@ class productividad extends REST_Controller
 		$response["info_notificaciones"] = $this->get_notificaciones_usuario_perfil($param);
 		$response["id_perfil"] = $param["id_perfil"];
 
+
+
+
 		$id_perfil = $param["id_perfil"];
 		$prm["modalidad"] = 1;
 		$prm["id_usuario"] = $id_usuario;
@@ -188,7 +191,9 @@ class productividad extends REST_Controller
 	{
 		$q["id_usuario"] = $id_usuario;
 		$api = "recibo/pendientes_sin_cierre/format/json/";
-		return $this->principal->api($api, $q);
+		$response =   $this->principal->api($api, $q);
+		$response =  $this->principal->get_imagenes_productos(0, 1 , 1 , 1, $response);
+		return $response;
 
 	}
 

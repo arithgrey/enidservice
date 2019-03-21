@@ -66,8 +66,8 @@ class Home extends CI_Controller
 	}
     private function get_lista_deseos($id_usuario)
     {
-
         $q["id_usuario"] = $id_usuario;
+        $q["c"] = 1;
         $api = "usuario_deseo/usuario/format/json/";
         return $this->principal->api($api, $q);
     }

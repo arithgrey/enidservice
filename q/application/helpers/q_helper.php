@@ -436,10 +436,9 @@ if (!function_exists('invierte_date_time')) {
 
 
 				$id_recibo = $row["id_recibo"];
-				$id_servicio = $row["id_servicio"];
 				$total = div($row["total"] . "MXN", ["class" => "text_monto_sin_cierre text-left"]);
 				$text = get_btw(
-					div(get_img_servicio($id_servicio), ["style" => "width:50px"]),
+					div(img($row["url_img_servicio"]), ["style" => "width:50px"]),
 					$total,
 					"display_flex_enid"
 				);

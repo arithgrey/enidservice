@@ -99,8 +99,6 @@ class Home extends CI_Controller
 	private function appendJSCss($data)
 	{
 		$data["css"] = [
-			"js/bootstrap-datepicker/css/datepicker-custom.css",
-			"js/bootstrap-timepicker/css/timepicker.css",
 			"puntos_encuentro.css"
 
 		];

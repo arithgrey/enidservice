@@ -89,7 +89,14 @@ class Usuario_deseo_model extends CI_Model
 			"UPDATE usuario_deseo SET num_deseo = num_deseo + 1 WHERE id_usuario = $id_usuario AND  id_servicio = $id_servicio LIMIT 1";
 		return $this->db->query($query_update);
 	}
+	function  get_usuario_deseo($id_usuario){
 
+		$query_get ="SELECT u.num_deseo, s.*  FROM  usuario_deseo u 
+				INNER JOIN servicio s  
+				ON u.id_servicio =  s.id_servicio 
+				WHERE  u.id_usuario =  $id_usuario  LIMIT 10";
+		return  $this->db->query($query_get)->result_array();
+	}
 	/*
 	function add_usuario_deseo($param){
 		$params = [

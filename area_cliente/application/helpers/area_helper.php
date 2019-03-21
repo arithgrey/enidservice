@@ -51,7 +51,7 @@ if (!function_exists('invierte_date_time')) {
 		{
 
 
-			$r[] = place("place_ventas_usuario col-lg-9");
+
 			$x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
 			$x[] = $valoraciones;
 			$x[] = br(2);
@@ -65,7 +65,11 @@ if (!function_exists('invierte_date_time')) {
 					]
 				), ["class" => "text-center"]);
 			$x[] = div($alcance, ["class" => " text-center "]);
+
+
+
 			$r[] = div(append_data($x), ["class" => "col-lg-3"]);
+			$r[] = div(place("place_ventas_usuario") ,["class" => "col-lg-9"]);
 
 			return div(append_data($r), ["class" => "text-center"]);
 

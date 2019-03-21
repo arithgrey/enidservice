@@ -62,19 +62,19 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 
     <div class="product-detail contenedor_info_producto">
         <div class="col-lg-8">
-            <div class="col-lg-8">
+            <div class="col-lg-8 col-sm-12">
                 <div class="left-col contenedor_izquierdo">
                     <?= div($imagenes["preview"], ["class" => "thumbs"]) ?>
                     <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="contenedor_central_info">
+            <div class="col-lg-4 col-sm-12">
+                <!--<div class="contenedor_central_info">-->
                     <?= get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web) ?>
-                </div>
+                <!--</div>-->
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-sm-12">
             <?php if ($flag_servicio < 1): ?>
                 <?php if ($existencia > 0): ?>
                     <div class="info-venta">
