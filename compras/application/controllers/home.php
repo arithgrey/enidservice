@@ -20,12 +20,11 @@ class Home extends CI_Controller
 		$data["url_img_post"] = create_url_preview("");
 		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 
-		$this->carga_vista_compras($param, $data);
-
+		$this->carga_vista_compras($data);
 
 	}
 
-	private function carga_vista_compras($param, $data)
+	private function carga_vista_compras($data)
 	{
 
 		$data = $this->getCssJs($data);

@@ -8,9 +8,8 @@ $nombre_cliente = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
 ?>
 <div class="jumbotron"
      style="padding: 2rem 1rem;margin-bottom: 2rem;background-color: #fbfbfb;border-radius: .3rem;">
-	<h1 class="display-4">
-		Buen día <?= $nombre_cliente ?>
-	</h1>
+    <?=heading("Buen día ".$nombre_cliente)?>
+
 	<p class="lead">
 		Tienes una nueva respuesta en tu buzón
 		<a class="btn btn-primary btn-lg"

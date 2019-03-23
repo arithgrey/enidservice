@@ -40,7 +40,7 @@ class Inicio extends CI_Controller
 					break;
 
 				case 4:
-					$this->crea_cuenta($data, $param, $id_usuario);
+					$this->crea_cuenta($id_usuario);
 					break;
 				case 5:
 
@@ -58,7 +58,7 @@ class Inicio extends CI_Controller
 					$this->saldo_oxxo($data, $param, $id_usuario);
 					break;
 				case 9:
-					$this->saldo_amigo($data, $param, $id_usuario);
+					$this->saldo_amigo($data);
 					break;
 
 				default:
@@ -72,7 +72,7 @@ class Inicio extends CI_Controller
 
 	}
 
-	private function saldo_amigo($data, $param, $id_usuario)
+	private function saldo_amigo($data)
 	{
 
 		$data["css"] = ["/movimientos.css"];
@@ -104,7 +104,7 @@ class Inicio extends CI_Controller
 		$this->principal->show_data_page($data, 'agregar_saldo_desde_oxxo');
 	}
 
-	private function crea_cuenta($data, $param, $id_usuario)
+	private function crea_cuenta($id_usuario)
 	{
 
 		if ($this->input->post()) {
@@ -190,12 +190,13 @@ class Inicio extends CI_Controller
 		return $this->principal->api($api, $q, "json", "POST");
 	}
 
+	/*
 	private function carga_metodos_pago_usuario($q)
 	{
 		$api = "cuentas/metodos_disponibles_pago/";
 		return $this->principal->api($api, $q, "html");
 	}
-
+    */
 	private function get_cuentas_usuario($id_usuario, $tipo)
 	{
 

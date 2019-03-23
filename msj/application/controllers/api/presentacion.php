@@ -3,32 +3,34 @@ require APPPATH . '../../librerias/REST_Controller.php';
 
 class Presentacion extends REST_Controller
 {
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->library(lib_def());
-	}
+    function __construct()
+    {
+        parent::__construct();
 
-	function notificacion_duda_vendedor_GET()
-	{
+        $this->load->helper("pregunta");
+        $this->load->library(lib_def());
+    }
 
-		$param = $this->get();
-		$data["vendedor"] = $param;
-		$this->load->view("ventas/notificacion_pregunta", $data);
-	}
+    function notificacion_duda_vendedor_GET()
+    {
 
-	function notificacion_respuesta_a_cliente_GET()
-	{
+        $param = $this->get();
+        $response =get_notificacion_interes_compra($param);
+        $this->response($response);
+    }
 
-		$param = $this->get();
-		$data["cliente"] = $param;
-		$this->load->view("ventas/notificacion_respuesta", $data);
-	}
+    function notificacion_respuesta_a_cliente_GET()
+    {
 
-	function bienvenida_enid_service_usuario_subscrito_GET()
-	{
+        $param = $this->get();
+        $data["cliente"] = $param;
+        $this->load->view("ventas/notificacion_respuesta", $data);
+    }
 
-		$param["info"] = $this->get();
-		$this->load->view("registro/subscrito", $param);
-	}
+    function bienvenida_enid_service_usuario_subscrito_GET()
+    {
+
+        $param["info"] = $this->get();
+        $this->load->view("registro/subscrito", $param);
+    }
 }

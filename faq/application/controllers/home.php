@@ -115,6 +115,7 @@ class Home extends CI_Controller
 
 	}
 
+	/*
 	private function get_info_categoria($id)
 	{
 
@@ -123,6 +124,7 @@ class Home extends CI_Controller
 		$response = $this->principal->api($api, $param);
 		return $response[0];
 	}
+	*/
 
 	private function search_faqs($q)
 	{
