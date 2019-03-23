@@ -19,9 +19,7 @@
 						["style" => "background: #0000f5;padding: 5px;color: white;"]) ?>
 
 					<div style="margin-top:20px; ">
-						<div style="width: 80%;margin: 0 auto;">
-							<?= get_form_monto_pago($info_pago) ?>
-						</div>
+						<?= div(get_form_monto_pago($info_pago), ["style" => "width: 80%;margin: 0 auto;"]) ?>
 					</div>
 
 					<div style="width: 80%;margin: 0 auto;">
@@ -31,6 +29,7 @@
 						]),
 							1) ?>
 						<?= heading("4152 3131 0230 5609", 5) ?>
+
 					</div>
 					<?= get_instrucciones() ?>
 				</div>
