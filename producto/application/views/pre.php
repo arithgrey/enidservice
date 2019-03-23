@@ -3,7 +3,13 @@
     <?= div(heading_enid("¿CÓMO PREFIERES TU ENTREGA?", 3, ["class" => "titulo_preferencia strong"]), ["class" => "text-center"]) ?>
 </div>
 <?= get_btw(
-    div(get_format_eleccion_mensajeria(), ["class" => $class_contenedor, "onclick" => "carga_opcion_entrega(2, " . $id_servicio . "  ,  " . $orden_pedido . " );"]),
+    div(
+    		get_format_eleccion_mensajeria(),
+		    [
+		    		"class" => $class_contenedor,
+			    "onclick" => "carga_opcion_entrega(2, " . $id_servicio . "  ,  " . $orden_pedido . " );"
+		    ]
+    ),
     div(get_format_eleccion_contra_entrega(), ["class" => $class_contenedor, "onclick" => "carga_opcion_entrega(1, " . $id_servicio . "  ,  " . $orden_pedido . " );"]),
     "col-lg-6 col-lg-offset-3"
 ) ?>

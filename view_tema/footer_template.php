@@ -78,6 +78,12 @@ $list_footer = [
 <?php endif; ?>
 
 
+<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+<style>
+	body{
+		font-family: 'Ubuntu', sans-serif!important;
+	}
+</style>
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css?<?= version_enid ?>">
 <link href="../css_tema/template/bootstrap.min.css?<?= version_enid ?>" rel="stylesheet" id="bootstrap-css">
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>

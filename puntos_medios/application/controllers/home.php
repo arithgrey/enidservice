@@ -71,14 +71,19 @@ class Home extends CI_Controller
 			&& get_param_def($param, "punto_encuentro", 0, 1)) {
 
 			/*solo tomamos la hora del pedido*/
-			$data["punto_encuentro"] = $param["punto_encuentro"];
-			$this->principal->show_data_page($data, 'form_horario');
+			$punto_encuentro = $param["punto_encuentro"];
+
+
+			$response =  get_format_pagina_form_horario($data["recibo"], $punto_encuentro);
+			$this->principal->show_data_page($data, $response  ,1);
+
 		} else {
 
 
 			$this->principal->show_data_page($data, 'home');
 		}
 	}
+
 	private function  get_lineas_metro( $tipo){
 
 		$q =  [

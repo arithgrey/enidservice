@@ -50,7 +50,7 @@ class Home extends CI_Controller
 		$data["js"] = ["alerts/jquery-confirm.js", "pedidos/seguimiento.js"];
 
 		$id_recibo = $this->input->get("seguimiento");
-		$recibo = $this->get_recibo($id_recibo ,1);
+		$recibo = $this->get_recibo($id_recibo, 1);
 		$id_usuario_compra = $recibo[0]["id_usuario"];
 		$id_usuario_venta = $recibo[0]["id_usuario_venta"];
 
@@ -81,17 +81,17 @@ class Home extends CI_Controller
 
 	}
 
-	private function get_recibo($id_recibo , $add_img = 0 )
+	private function get_recibo($id_recibo, $add_img = 0)
 	{
 
 		$q["id"] = $id_recibo;
 		$api = "recibo/id/format/json/";
-		$response =  $this->principal->api($api, $q);
+		$response = $this->principal->api($api, $q);
 
-		if (is_array($response) && count($response)>  0 & $add_img >  0){
+		if (is_array($response) && count($response) > 0 & $add_img > 0) {
 
 
-			$response[0]["url_img_servicio"] =  $this->principal->get_imagenes_productos($response[0]["id_servicio"],1,1,1);
+			$response[0]["url_img_servicio"] = $this->principal->get_imagenes_productos($response[0]["id_servicio"], 1, 1, 1);
 		}
 		return $response;
 	}
@@ -183,34 +183,36 @@ class Home extends CI_Controller
 	{
 
 
-		$notificacion_pago          = (get_param_def($param, "notificar") > 0) ? 1 : 0;
-		$notificacion_pago          = ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago;
-		$data["notificacion_pago"]  = $notificacion_pago;
-		$data["orden"]              = $id_recibo;
-		$data["status_ventas"]      = $this->get_estatus_enid_service();
+		$notificacion_pago = (get_param_def($param, "notificar") > 0) ? 1 : 0;
+		$notificacion_pago = ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago;
+		$data["notificacion_pago"] = $notificacion_pago;
+		$data["orden"] = $id_recibo;
+		$data["status_ventas"] = $this->get_estatus_enid_service();
 
-		$data["evaluacion"]         = 1;
-		if ($recibo[0]["saldo_cubierto"] >  0 && $recibo[0]["se_cancela"] == 0 && $data["es_vendedor"] < 1 ){
+		$data["evaluacion"] = 1;
+		if ($recibo[0]["saldo_cubierto"] > 0 && $recibo[0]["se_cancela"] == 0 && $data["es_vendedor"] < 1) {
 
-			$data["evaluacion"]  =  $this->verifica_evaluacion($recibo[0]["id_usuario"] , $recibo[0]["id_servicio"]);
+			$data["evaluacion"] = $this->verifica_evaluacion($recibo[0]["id_usuario"], $recibo[0]["id_servicio"]);
 
 		}
-		$data["tipificaciones"]     = $this->get_tipificaciones($id_recibo);
+		$data["tipificaciones"] = $this->get_tipificaciones($id_recibo);
 		$this->principal->show_data_page($data, 'seguimiento');
-	}
-	private function verifica_evaluacion($id_usuario , $id_servicio){
-
-		$q["id_usuario"] =  $id_usuario;
-		$q["id_servicio"] =  $id_servicio;
-		$api = "valoracion/num/format/json/";
-		return $this->principal->api($api, $q);
-
 	}
 
 	private function get_estatus_enid_service($q = [])
 	{
 		$api = "status_enid_service/index/format/json/";
 		return $this->principal->api($api, $q);
+	}
+
+	private function verifica_evaluacion($id_usuario, $id_servicio)
+	{
+
+		$q["id_usuario"] = $id_usuario;
+		$q["id_servicio"] = $id_servicio;
+		$api = "valoracion/num/format/json/";
+		return $this->principal->api($api, $q);
+
 	}
 
 	private function get_tipificaciones($id_recibo)
@@ -263,7 +265,7 @@ class Home extends CI_Controller
 	{
 		$data["css"] = [
 			/**"js/bootstrap-datepicker/css/datepicker-custom.css",
-			"js/bootstrap-timepicker/css/timepicker.css",**/
+			 * "js/bootstrap-timepicker/css/timepicker.css",**/
 			"pedidos.css",
 			"confirm-alert.css"
 		];
@@ -311,15 +313,19 @@ class Home extends CI_Controller
 			header($module);
 		}
 
-
 		$data = $this->getCssJs($data);
 		$es_recibo = get_info_variable($param, "recibo");
 		$data["tipos_entregas"] = $this->get_tipos_entregas(array());
 		$data["status_ventas"] = $this->get_estatus_enid_service();
 
+
 		if ($es_recibo == 0) {
 
-			$this->principal->show_data_page($data, 'form_busqueda');
+			$response = get_form_busqueda_pedidos($data["tipos_entregas"], $data["status_ventas"]);
+
+			$this->principal->show_data_page($data,
+				$response,
+				1);
 
 		} else {
 
@@ -350,7 +356,7 @@ class Home extends CI_Controller
 	{
 
 		$id_recibo = $param["recibo"];
-		$recibo = $this->get_recibo($id_recibo , 1);
+		$recibo = $this->get_recibo($id_recibo, 1);
 
 		if (count($recibo) > 0) {
 
@@ -360,12 +366,15 @@ class Home extends CI_Controller
 
 			if (get_param_def($param, "fecha_entrega") > 0) {
 
-				$this->principal->show_data_page($data, 'form_fecha');
+
+				$this->principal->show_data_page($data, get_form_fecha_entrega($data), 1);
+
 
 			} elseif (get_param_def($param, "recordatorio") > 0) {
 
-				$data["tipo_recortario"] = $this->get_tipo_recordatorio();
-				$this->principal->show_data_page($data, 'form_fecha_recordatorio');
+				$tipo_recortario = $this->get_tipo_recordatorio();
+				$response  =  form_fecha_recordatorio($data["orden"], $tipo_recortario);
+				$this->principal->show_data_page($data, $response , 1);
 
 			} else {
 
@@ -384,10 +393,12 @@ class Home extends CI_Controller
 			}
 
 		} else {
-			$this->principal->show_data_page($data, 'error');
+
+			$this->principal->show_data_page($data, get_error_message(), 1);
 		}
 
 	}
+
 
 	private function get_tipo_recordatorio()
 	{

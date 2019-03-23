@@ -77,11 +77,11 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
         <div class="col-lg-4 col-sm-12">
             <?php if ($flag_servicio < 1): ?>
                 <?php if ($existencia > 0): ?>
-                    <div class="info-venta">
+                    <!--<div class="info-venta">-->
                         <?= get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
                             $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
                             $telefono_visible, $usuario, $venta_mayoreo, $deseado) ?>
-                    </div>
+                    <!---</div>-->
                 <?php else: ?>
                     <?= get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio) ?>
                 <?php endif; ?>

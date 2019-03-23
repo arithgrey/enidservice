@@ -76,11 +76,11 @@ class Home extends CI_Controller
 	{
 
 		$data["css"] = ["search_sin_encontrar.css"];
-		$tienda = get_param_def($param, "tienda", 1);
-		if ($tienda == 0) {
-			$this->principal->show_data_page($data, 'sin_resultados');
+		$tienda = get_param_def($param, "tienda", 0);
+		if ($tienda < 1) {
+			$this->principal->show_data_page($data, get_format_sin_resultados() ,1);
 		} else {
-			$this->principal->show_data_page($data, 'sin_resultados_tienda');
+			$this->principal->show_data_page($data, get_format_sin_resultados_tienda() ,1);
 		}
 	}
 

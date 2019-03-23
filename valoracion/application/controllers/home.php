@@ -37,10 +37,12 @@ class Home extends CI_Controller
 			}
 
 			$prm["id_servicio"] = $servicio;
-			$data["formulario_valoracion"] = $this->carga_formulario_valoracion($prm);
+			$formulario_valoracion = $this->carga_formulario_valoracion($prm);
 			$data["css"] = ["valoracion_servicio.css"];
 			$data["js"] = ["valoracion/principal.js"];
-			$this->principal->show_data_page($data, 'home');
+
+			$response =  div($formulario_valoracion, ["class" => "col-lg-10 col-lg-offset-1 top_20"]);
+			$this->principal->show_data_page($data, $response ,1);
 		} else {
 			header("location:../?q2=0&q=");
 		}

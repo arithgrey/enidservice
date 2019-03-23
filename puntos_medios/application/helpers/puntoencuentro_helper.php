@@ -1,6 +1,23 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+	function get_format_pagina_form_horario($recibo, $punto_encuentro)
+	{
+
+		$response = get_form_punto_encuentro_horario([
+			input_hidden([
+				"class" => "recibo",
+				"name" => "recibo",
+				"value" => $recibo
+			]),
+
+			input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro])
+		]);
+
+		$response =  div($response , ["class"=>"col-lg-6 col-lg-offset-3"]);
+		return $response;
+	}
+
 	function get_form_punto_encuentro($num_ciclos, $in_session, $servicio)
 	{
 		$r[] = form_open("", ["class" => "form-horizontal form_punto_encuentro"]);
@@ -139,7 +156,7 @@ if (!function_exists('invierte_date_time')) {
 			]
 		), ["class" => "col-lg-6 col-lg-offset-3"]);
 
-		$response  = div(append_data($r), ["class" => 'formulario_quien_recibe display_none']);
+		$response = div(append_data($r), ["class" => 'formulario_quien_recibe display_none']);
 
 		return $response;
 

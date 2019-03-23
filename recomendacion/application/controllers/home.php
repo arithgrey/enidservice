@@ -51,12 +51,12 @@ class Home extends CI_Controller
 			$id_usuario_actual = $data["id_usuario"];
 			$this->notifica_lectura($id_usuario, $id_usuario_actual);
 		}
-		$data["resumen_recomendacion"] = $data_recomendacion["info_valoraciones"];
+		$resumen_recomendacion = $data_recomendacion["info_valoraciones"];
 
 
 		$prm["page"] = get_info_variable($this->input->get(), "page");
 		$prm["resultados_por_pagina"] = 5;
-		$data["resumen_valoraciones_vendedor"] = $this->resumen_valoraciones_vendedor($prm);
+		$resumen_valoraciones_vendedor = $this->resumen_valoraciones_vendedor($prm);
 		$prm["totales_elementos"] = $data_recomendacion["data"][0]["num_valoraciones"];
 
 		$data["paginacion"] = "";
@@ -68,19 +68,29 @@ class Home extends CI_Controller
 		}
 		$data["css"] = ["recomendacion_principal.css"];
 		$data["js"] = ["recomendaciones/principal.js"];
-		$this->principal->show_data_page($data, 'home');
 
-	}
+		$response = get_formar_recomendacion($data["usuario"],
+			$resumen_recomendacion,
+			$data["paginacion"],
+			$resumen_valoraciones_vendedor);
+		$this->principal->show_data_page($data, $response, 1);
 
-	private function go_home()
-	{
-		redirect("../../", 'POST');
 	}
 
 	private function busqueda_recomendacion($q)
 	{
 		$api = "valoracion/usuario/format/json/";
 		return $this->principal->api($api, $q);
+	}
+
+	private function notifica_lectura($id_usuario, $id_usuario_valoracion)
+	{
+
+		if ($id_usuario == $id_usuario_valoracion) {
+			$q["id_usuario"] = $id_usuario;
+			$api = "valoracion/lectura/format/json/";
+			$this->principal->api($api, $q, 'json', 'PUT');
+		}
 	}
 
 	private function resumen_valoraciones_vendedor($q)
@@ -95,13 +105,8 @@ class Home extends CI_Controller
 		return $this->principal->api($api, $q);
 	}
 
-	private function notifica_lectura($id_usuario, $id_usuario_valoracion)
+	private function go_home()
 	{
-
-		if ($id_usuario == $id_usuario_valoracion) {
-			$q["id_usuario"] = $id_usuario;
-			$api = "valoracion/lectura/format/json/";
-			$this->principal->api($api, $q, 'json', 'PUT');
-		}
+		redirect("../../", 'POST');
 	}
 }

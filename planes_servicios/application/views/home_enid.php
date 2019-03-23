@@ -5,7 +5,7 @@
     <div class='col-lg-10'>
         <div class="tab-content">
             <div class="tab-pane <?= valida_active_tab(0, $action, $considera_segundo) ?>" id='tab_servicios'>
-                <?= $this->load->view("secciones/servicios"); ?>
+                <?=get_format_articulos_venta($list_orden)?>
             </div>
             <div class="tab-pane <?= valida_active_tab(1, $action) ?>" id='tab_form_servicio'>
                 <?= $this->load->view("secciones/form_servicios") ?>

@@ -238,10 +238,19 @@ class principal extends CI_Controller
 
 	}
 
-	function show_data_page($data, $center_page, $tema = 0)
+	function show_data_page($data, $center_page, $pagina_base = 0)
 	{
 		$this->load->view("../../../view_tema/header_template", $data);
-		$this->load->view($center_page, $data);
+		if ($pagina_base>  0){
+
+			$data["page"] =  $center_page;
+			$this->load->view("../../../view_tema/base", $data);
+
+		}else{
+
+			$this->load->view($center_page, $data);
+		}
+
 		$this->load->view("../../../view_tema/footer_template", $data);
 	}
 

@@ -52,12 +52,18 @@ class Home extends CI_Controller
 				$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 				$send["id_servicio"] = $servicio;
 				$send["id_usuario"] = ($send["in_session"] == 1) ? $this->principal->get_session("idusuario") : 0;
-				$data["formulario_valoracion"] = $this->carga_formulario_valoracion($send);
+				$formulario_valoracion = $this->carga_formulario_valoracion($send);
 				$data["in_session"] = $this->principal->is_logged_in();
 				$data["id_servicio"] = $servicio;
 				$data["js"] = ["pregunta/principal.js"];
 				$data["css"] = ["producto.css", "sugerencias.css", "valoracion.css"];
-				$this->principal->show_data_page($data, 'home');
+
+				$response =  get_view_pregunta($formulario_valoracion, $send["id_servicio"]);
+
+				$this->principal->show_data_page(
+					$data,
+					$response ,
+					1);
 			}
 
 
@@ -121,7 +127,10 @@ class Home extends CI_Controller
 		$data["js"] = ["js/summernote.js", "pregunta/listado.js"];
 		$data["css"] = ["pregunta_listado.css",  "summernote.css"];
 
-		$this->principal->show_data_page($data, 'listado');
+
+		$response=  get_format_listado(get_format_preguntas($preguntas, 0));
+
+		$this->principal->show_data_page($data, $response , 1);
 
 
 	}
@@ -144,7 +153,7 @@ class Home extends CI_Controller
 	{
 
 		$preguntas = $this->get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta);
-		$data["preguntas_format"] = get_format_preguntas($preguntas, 1);
+
 		$data["meta_keywords"] = '';
 		$data["desc_web"] = "";
 		$data["url_img_post"] = create_url_preview("");
@@ -153,11 +162,12 @@ class Home extends CI_Controller
 		$data["js"] = ["js/summernote.js", "pregunta/listado.js"];
 		$data["css"] = ["pregunta_listado.css", "summernote.css"];
 
-		$this->principal->show_data_page($data, 'listado');
+		$response=  get_format_listado(get_format_preguntas($preguntas, 1));
+		$this->principal->show_data_page($data, $response , 1);
+
 
 
 	}
-
 	private function get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta)
 	{
 

@@ -20,7 +20,10 @@ if (!function_exists('invierte_date_time')) {
             $r[] =  div($resumen_valoraciones_vendedor, 1) ;
             $r[] =  div($paginacion, 1) ;
 
-            return append_data($r);
+
+            $response = append_data($r);
+            $response =  div($response ,["class"=>"col-lg-6 col-lg-offset-3"]);
+            return $response;
         }
     }
 

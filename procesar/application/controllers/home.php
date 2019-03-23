@@ -91,8 +91,9 @@ class Home extends CI_Controller
 		$data["css"] = ["procesar_pago.css"];
 		$param["id_recibo"] = $param["recibo"];
 		$param["id_usuario"] = $this->principal->get_session("idusuario");
-		$data["carga_ficha_direccion_envio"] = $this->carga_ficha_direccion_envio($param);
-		$this->principal->show_data_page($data, 'secciones_2/domicilio_entrega');
+		$response = $this->carga_ficha_direccion_envio($param,1);
+		$this->principal->show_data_page($data, $response , 1);
+
 	}
 
 	private function calcula_costo_envio($q)
@@ -109,12 +110,17 @@ class Home extends CI_Controller
 		return $this->principal->api($api, $q);
 	}
 
-	private function carga_ficha_direccion_envio($q)
+	private function carga_ficha_direccion_envio($q,$v=0)
 	{
 
 		$q["text_direccion"] = "Dirección de Envio";
 		$q["externo"] = 1;
 		$api = "usuario_direccion/direccion_envio_pedido";
-		return $this->principal->api($api, $q, "html");
+		$response =  $this->principal->api($api, $q, "html");
+		if ($v>  0){
+			$response =
+				append_data([$response ,input_hidden(["class" => "es_seguimiento", "value" => 1])]);
+		}
+		return $response;
 	}
 }

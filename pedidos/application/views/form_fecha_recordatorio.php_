@@ -1,3 +1,0 @@
-
-
-<?=form_fecha_recordatorio($orden, $tipo_recortario)?>

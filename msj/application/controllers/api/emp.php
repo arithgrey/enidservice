@@ -6,10 +6,7 @@ class Emp extends REST_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model("empresamodel");
         $this->load->library("mensajeria");
-        $this->load->library("mensajeria_servicios_ofertados");
-        $this->load->library("mensajeria_lead");
         $this->load->library(lib_def());
     }
 
@@ -44,14 +41,6 @@ class Emp extends REST_Controller
         $this->response($msj_result2);
     }
 
-    function solicitud_usuario_POST()
-    {
-
-        $param = $this->post();
-        $usuario = $this->empresamodel->get_usuario($param);
-        $msj = $this->mensajeria_lead->notifica_usuario_en_proceso_compra($usuario);
-        $this->response($msj);
-    }
 
     function salir_GET()
     {

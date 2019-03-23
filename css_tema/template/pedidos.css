@@ -26,15 +26,15 @@
 
 .contenedor_domicilio, .contenedor_cliente {
     border: solid .9px;
-    background: #070350;
+    background: #f0effc;
     padding: 8px;
     margin-top: 10px;
 }
 
 .encabezado_domicilio, .encabezado_cliente {
-    background: #06429e;
+    background: #1e2023;
     color: white;
-    padding: 5px;
+    padding: 0px 10px;
 }
 
 .contenido_domicilio, .contenido_domicilio {
@@ -134,11 +134,8 @@
     text-decoration:underline;
 }
 .compras_en_tiempo{
-    background: #a1c4ff;
-    color: white;
-    padding: 10px;
     border-style: solid;
-    border-block-end-color: #0b309b;
+
 }
 #contenedor_form_usuario{
     display:none;

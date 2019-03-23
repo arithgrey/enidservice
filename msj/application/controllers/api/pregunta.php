@@ -6,7 +6,6 @@ class Pregunta extends REST_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->library("mensajeria_lead");
 		$this->load->library(lib_def());
 	}
 

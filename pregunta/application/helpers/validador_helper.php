@@ -1,7 +1,17 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+	if (!function_exists('get_format_listado')) {
+		function get_format_listado($preguntas_format){
 
+			$r[] =  div(heading_enid("TUS PREGUNTAS ENVIADAS"), ["class" => "col-lg-8 col-lg-offset-2 top_20"]);
+			$r[] =  $preguntas_format;
+			return append_data($r);
+
+
+		}
+
+	}
 	if (!function_exists('get_format_preguntas')) {
 		function get_format_preguntas($preguntas, $es_vendedor )
 		{

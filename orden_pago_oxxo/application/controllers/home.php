@@ -25,7 +25,7 @@ class Home extends CI_Controller
 			$data["concepto"] = get_info_variable($param, "concepto");
 			$data["usuario"] = $this->principal->get_info_usuario($id_usuario);
 			$data["css"] = ["pago_oxxo.css"];
-			$this->principal->show_data_page($data, 'ingresar_saldo_a_cuenta');
+			$this->principal->show_data_page($data, get_format_orden_compra($data["usuario"], $param) , 1);
 		} else {
 			redirect("../../movimientos/?q=transfer&action=7");
 		}
