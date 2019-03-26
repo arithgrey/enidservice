@@ -248,6 +248,7 @@ if (!function_exists('invierte_date_time')) {
 			foreach ($productos_deseados as $row) {
 
 
+				$id          = $row["id"];
 				$id_producto = $row["id_servicio"];
 				$src_img = $row["url_img_servicio"];
 				$nombre_servicio =  $row["nombre_servicio"];
@@ -255,6 +256,8 @@ if (!function_exists('invierte_date_time')) {
 				$deseado  = $row["deseado"];
 				$valoracion =  $row["valoracion"];
 				$precio   = $row["precio"];
+				$articulos = $row["articulos"];
+
 
 				$descripcion = preg_replace('/<[^<|>]+?>/', '', htmlspecialchars_decode($descripcion));
 				$descripcion = htmlentities($descripcion, ENT_QUOTES, "UTF-8");
@@ -266,11 +269,28 @@ if (!function_exists('invierte_date_time')) {
 				$r =  [];
 				$r[] = div(img($src_img), ["class" => "col-sm-3 border"]);
 				$x = [];
-				$x[] = heading_enid($nombre_servicio , 4);
+
+
+				$url_servicio  =  get_url_servicio($id_producto);
+				$title =  anchor_enid($nombre_servicio , ["href" => $url_servicio , "target"=>"_blank" , "class"=> "black"]);
+				$x[] = heading_enid($title, 4);
 				$x[] = str_repeat(icon("fa fa-star"), 5);
+
 				$x[] = div($deseado ." veces comprado", ["class" => "label-rating"]);
 
-				$x[] = div($valoracion." reseñas", ["class" => "label-rating"]);
+
+				$opiniones =  anchor_enid($valoracion." reseñas", ["href"=> $url_servicio."#opiniones"]);
+				$x[] = div($opiniones, ["class" => "label-rating"]);
+
+
+
+				$text_productos =  ($articulos >  1 ) ?  $articulos. " productos ":  " un producto";
+				$opiniones =  div(" Cancelar ".$text_productos,
+					[
+						"class"=> "cursor_pointer hover_black",
+						"onclick"=> "cancela_productos('{$id}');"
+					]);
+				$x[] = div($opiniones, ["class" => "label-rating"]);
 
 				$x[] = br(3);
 				$x[] = p($descripcion);
@@ -278,10 +298,12 @@ if (!function_exists('invierte_date_time')) {
 
 
 				$z = [];
-				$z[] = heading_enid($precio."MXN");
+
+				$text_precio  = $precio *  $articulos;
+				$z[] = heading_enid($text_precio  ."MXN");
 				$z[] = div($text_envio, ["class" => "text-success text-center"]);
 				$z[] = br();
-				$z[] = get_form_pre_pedido($id_producto, $extension_dominio="", 1, 0, 1, 1);
+				$z[] = get_form_pre_pedido($id,$id_producto, "", 5, 0, 1, $articulos);
 				$z[] = br();
 
 				$z[] = guardar("Detalles" ,[],1,1, 0, get_url_servicio($id_producto));
@@ -294,7 +316,7 @@ if (!function_exists('invierte_date_time')) {
 		}
 	}
 
-	function get_form_pre_pedido($id_servicio, $extension_dominio="", $ciclo_facturacion, $is_servicio, $q2, $num_ciclos)
+	function get_form_pre_pedido($id,$id_servicio, $extension_dominio="", $ciclo_facturacion, $is_servicio, $q2, $num_ciclos)
 	{
 
 		$url = "../producto/?producto=" . $id_servicio . "&pre=1";
@@ -306,6 +328,8 @@ if (!function_exists('invierte_date_time')) {
 		$r[] = input_hidden(["class" => "is_servicio", "name" => "is_servicio", "value" => $is_servicio]);
 		$r[] = input_hidden(["class" => "q2", "name" => "q2", "value" => $q2]);
 		$r[] = input_hidden(["class" => "num_ciclos", "name" => "num_ciclos", "value" => $num_ciclos]);
+		$r[] = input_hidden(["class" => "carro_compras", "name" => "carro_compras", "value" => 1]);
+		$r[] = input_hidden(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id]);
 		$r[] = guardar("Comprar " ,[],1,1, 0, get_url_servicio($id_servicio));
 		$r[] = form_close();
 

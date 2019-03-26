@@ -50,16 +50,6 @@ class Inicio extends CI_Controller
 
 		];
 
-		$data["css_external"] = [
-			"js/bootstrap-colorpicker/css/colorpicker.css",
-			"js/bootstrap-datepicker/css/datepicker-custom.css",
-			"js/bootstrap-datepicker/css/datepicker.css",
-			"js/bootstrap-daterangepicker/daterangepicker.css",
-			"js/bootstrap-datetimepicker/css/datetimepicker-custom.css",
-			"js/bootstrap-datetimepicker/css/datetimepicker.css",
-			"js/bootstrap-timepicker/css/timepicker.css",
-			"js/bootstrap-wysihtml5/bootstrap-wysihtml5.css",
-		];
 		return $data;
 	}
 

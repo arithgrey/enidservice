@@ -135,7 +135,7 @@ if (!function_exists('invierte_date_time')) {
 
 	}
 
-	function get_seccion_pre_pedido($url_imagen_servicio, $orden_pedido, $plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $id_servicio)
+	function get_seccion_pre_pedido($url_imagen_servicio, $orden_pedido, $plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $id_servicio, $carro_compras, $id_carro_compras)
 	{
 
 		$r = [];
@@ -143,9 +143,9 @@ if (!function_exists('invierte_date_time')) {
 		if ($orden_pedido > 0) {
 
 
-			$r[] = get_form_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos);
-			$r[] = form_pre_pedido_contact($plan, $num_ciclos);
-			$r[] = form_pre_puntos_medios($plan, $num_ciclos);
+			$r[] = get_form_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos,$carro_compras, $id_carro_compras);
+			$r[] = form_pre_pedido_contact($plan, $num_ciclos, $carro_compras, $id_carro_compras);
+			$r[] = form_pre_puntos_medios($plan, $num_ciclos, $carro_compras, $id_carro_compras);
 			$r[] = addNRow(div(img(["src" => $url_imagen_servicio]), ["class" => "col-lg-4 col-lg-offset-4"]));
 
 		}
@@ -154,19 +154,21 @@ if (!function_exists('invierte_date_time')) {
 
 	}
 
-	function form_pre_pedido_contact($plan, $num_ciclos)
+	function form_pre_pedido_contact($plan, $num_ciclos, $carro_compras, $id_carro_compras)
 	{
 
 
 		$r[] = '<form class="form_pre_pedido_contact" action="../contact/?w=1" method="POST">';
 		$r[] = input_hidden(["class" => "servicio", "name" => "servicio", "value" => $plan]);
 		$r[] = input_hidden(["class" => "num_ciclos", "name" => "num_ciclos", "value" => $num_ciclos]);
+		$r[] = input_hidden(["class" => "carro_compras", "name" => "carro_compras", "value" => $carro_compras]);
+		$r[] = input_hidden(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id_carro_compras]);
 		$r[] = form_close();
 		return append_data($r);
 
 	}
 
-	function form_pre_puntos_medios($plan, $num_ciclos)
+	function form_pre_puntos_medios($plan, $num_ciclos, $carro_compras, $id_carro_compras)
 	{
 
 		$url = "../puntos_medios/?producto=" . $plan;
@@ -183,12 +185,16 @@ if (!function_exists('invierte_date_time')) {
 			"value" => $num_ciclos
 		]);
 
+
+		$r[] = input_hidden(["class" => "carro_compras", "name" => "carro_compras", "value" => $carro_compras]);
+		$r[] = input_hidden(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id_carro_compras]);
+
 		$r[] = form_close();
 		return append_data($r);
 
 	}
 
-	function get_form_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos)
+	function get_form_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $carro_compras, $id_carro_compras)
 	{
 
 		$r[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
@@ -198,6 +204,9 @@ if (!function_exists('invierte_date_time')) {
 		$r[] = input_hidden(["class" => "is_servicio", "name" => "is_servicio", "value" => $is_servicio]);
 		$r[] = input_hidden(["class" => "q2", "name" => "q2", "value" => $q2]);
 		$r[] = input_hidden(["class" => "num_ciclos", "name" => "num_ciclos", "value" => $num_ciclos]);
+		$r[] = input_hidden(["class" => "carro_compras", "name" => "carro_compras", "value" => $carro_compras]);
+		$r[] = input_hidden(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id_carro_compras]);
+
 		$r[] = form_close();
 
 		return append_data($r);
@@ -325,7 +334,8 @@ if (!function_exists('invierte_date_time')) {
 
 			$config = [
 				"name" => "num_ciclos",
-				"class" => "telefono_info_contacto form-control"
+				"class" => "telefono_info_contacto form-control",
+				"id" => "num_ciclos"
 			];
 
 			$select = "<select " . add_attributes($config) . ">";
@@ -530,7 +540,7 @@ if (!function_exists('invierte_date_time')) {
 
 	}
 	if (!function_exists('construye_seccion_imagen_lateral')) {
-		function construye_seccion_imagen_lateral($param, $nombre_servicio, $url_youtube="")
+		function construye_seccion_imagen_lateral($param, $nombre_servicio, $url_youtube = "")
 		{
 
 			$preview = [];

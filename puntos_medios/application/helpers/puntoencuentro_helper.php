@@ -18,7 +18,7 @@ if (!function_exists('invierte_date_time')) {
 		return $response;
 	}
 
-	function get_form_punto_encuentro($num_ciclos, $in_session, $servicio)
+	function get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras , $id_carro_compras)
 	{
 		$r[] = form_open("", ["class" => "form-horizontal form_punto_encuentro"]);
 		$r[] = label(" NOMBRE ", ["class" => "col-lg-3 "]);
@@ -91,6 +91,10 @@ if (!function_exists('invierte_date_time')) {
 		);
 		$r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form"]);
 		$r[] = input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]);
+
+		$r[] = input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value"=> $carro_compras]);
+		$r[] = input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value"=> $id_carro_compras]);
+
 		$r[] = br();
 		$r[] = guardar("CONTINUAR", ["class" => "top_20"]);
 		$r[] = get_formar_usuario_registrado($in_session, $servicio, $num_ciclos);

@@ -7,7 +7,7 @@
 
 			<?= div(get_btw(
 				heading_enid("¿Quién recibe?", 2),
-				div(get_form_punto_encuentro($num_ciclos, $in_session, $servicio), ["class" => "contendor_in_correo"]),
+				div(get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras , $id_carro_compras), ["class" => "contendor_in_correo"]),
 				"col-lg-6 col-lg-offset-3"
 			), ["class" => "contenedor_eleccion_correo_electronico"]) ?>
 
@@ -17,7 +17,10 @@
 				<?= get_form_punto_encuentro_horario([
 					input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro]),
 					input_hidden(["class" => "servicio", "name" => "servicio", "value" => $servicio]),
-					input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos])
+					input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]),
+					input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]),
+					input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras])
+
 				]) ?>
 			</div>
 		<?php endif; ?>

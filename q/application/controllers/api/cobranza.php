@@ -200,14 +200,6 @@ class Cobranza extends REST_Controller
 		return $this->principal->api($api, $q);
 	}
 
-	function get_precio_id_servicio($id_servicio)
-	{
-
-		$q["id_servicio"] = $id_servicio;
-		$api = "recibo/precio_servicio/format/json/";
-		return $this->principal->api($api, $q);
-	}
-
 	function solicitud_proceso_pago_POST()
 	{
 
@@ -249,7 +241,7 @@ class Cobranza extends REST_Controller
 				$data_orden["servicio"] = $info_existencia["info_servicio"][0];
 
 
-				if ($data_orden["servicio"]["flag_servicio"] == 0) {
+				if ($data_orden["servicio"]["flag_servicio"] < 1) {
 					if (array_key_exists("tipo_entrega", $param) && $param["tipo_entrega"] == 1) {
 
 						$prm_envio["flag_envio_gratis"] = 0;
@@ -266,6 +258,9 @@ class Cobranza extends REST_Controller
 							$this->get_costo_envio($prm_envio);
 
 					}
+
+					$this->quita_carro_compras($param);
+
 
 				}
 
@@ -333,6 +328,138 @@ class Cobranza extends REST_Controller
 		$this->response($data_orden);
 	}
 
+	function get_precio_id_servicio($id_servicio)
+	{
+
+		$q["id_servicio"] = $id_servicio;
+		$api = "recibo/precio_servicio/format/json/";
+		return $this->principal->api($api, $q);
+	}
+
+	function consulta_disponibilidad_servicio($q)
+	{
+		$api = "servicio/info_disponibilidad_servicio/format/json/";
+		return $this->principal->api($api, $q);
+	}
+
+	private function get_costo_envio_punto_encuentro($q)
+	{
+
+		$api = "punto_encuentro/costo_entrega/format/json/";
+		$response = $this->principal->api($api, $q);
+		if (is_array($response) && count($response) > 0) {
+			return $response[0]["costo_envio"];
+		} else {
+			return 50;
+		}
+	}
+
+	private function quita_carro_compras($param)
+	{
+
+		if (array_key_exists("carro_compras", $param)
+			&&
+			$param["carro_compras"] > 0
+			&&
+			array_key_exists("id_carro_compras", $param)
+			&&
+			$param["id_carro_compras"] > 0
+		) {
+
+
+			$q["status"] = 1;
+			$q["id"] = $param["id_carro_compras"];
+			$api = "usuario_deseo/status";
+			return $this->principal->api($api, $q , "json", "PUT");
+
+
+
+		}
+	}
+
+	private function genera_orden_compra($q, $param)
+	{
+		$api = "recibo/orden_de_compra";
+		$id_recibo = $this->principal->api($api, $q, "json", "POST");
+		if ($id_recibo > 0 && get_param_def($param, "comentarios") !== 0 && strlen(trim($param["comentarios"])) > 5) {
+			$param["id_recibo"] = $id_recibo;
+			$this->agrega_notas_pedido($param);
+		}
+		return $id_recibo;
+	}
+
+	private function agrega_notas_pedido($q)
+	{
+
+		$api = "recibo_comentario/index";
+		return $this->principal->api($api, $q, "json", "POST");
+	}
+
+	private function gamificacion_deseo($q)
+	{
+
+		$api = "servicio/gamificacion_deseo";
+		return $this->principal->api($api, $q, "json", "PUT");
+	}
+
+	function acciones_posterior_orden_pago($param)
+	{
+
+		$this->notifica_deuda_cliente($param);
+		$this->crea_comentario_pedido($param);
+	}
+
+	function notifica_deuda_cliente($q)
+	{
+
+		$api = "areacliente/pago_pendiente_web/format/json/";
+		return $this->principal->api($api, $q);
+	}
+
+	/*aquí creamos en base de datos*/
+
+	private function crea_comentario_pedido($param)
+	{
+
+		$id_recibo = $param["id_recibo"];
+		$email = $param["email"];
+
+		$text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $email . " RECIBO NÚMERO " . $id_recibo;
+		if (get_param_def($param, "es_usuario_nuevo") > 0) {
+
+			$text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $param["nombre"] . " - " . $param["email"] . " - " . $param["telefono"] . " RECIBO NÚMERO " . $id_recibo;
+		}
+		$asunto = "NUEVA ORDEN DE COMPRA EN PROCESO, RECIBO #" . $id_recibo;
+		$cuerpo = img_enid([], 1, 1) . heading_enid($text, 3);
+		$q = get_request_email("enidservice@gmail.com", $asunto, $cuerpo);
+		$this->principal->send_email_enid($q);
+
+	}
+
+	function carga_ficha_direccion_envio($q)
+	{
+
+		$q["text_direccion"] = "Dirección de Envio";
+		$q["externo"] = 1;
+		$api = "usuario_direccion/direccion_envio_pedido";
+		return $this->principal->api($api, $q, "html");
+
+	}
+
+	private function create_orden_punto_entrega($q)
+	{
+
+		$api = "proyecto_persona_forma_pago_punto_encuentro/index";
+		return $this->principal->api($api, $q, "json", "POST");
+	}
+
+	private function agrega_punto_encuentro_usuario($q)
+	{
+
+		$api = "usuario_punto_encuentro/index";
+		return $this->principal->api($api, $q, "json", "POST");
+	}
+
 	function solicitud_cambio_punto_entrega_POST()
 	{
 
@@ -397,19 +524,10 @@ class Cobranza extends REST_Controller
 		}
 	}
 
-	function create_session($q)
+	function crea_usuario($q)
 	{
 
-		$api = "sess/start";
-		$q["t"] = $this->config->item('barer');
-		$q["secret"] = $q["password"];
-		return $this->principal->api($api, $q, "json", "POST", 0, 1, "login");
-	}
-
-	function crea_orden($q)
-	{
-
-		$api = "cobranza/solicitud_proceso_pago";
+		$api = "usuario/prospecto";
 		return $this->principal->api($api, $q, "json", "POST");
 	}
 
@@ -443,113 +561,20 @@ class Cobranza extends REST_Controller
 
 	}
 
-	function crea_usuario($q)
+	function crea_orden($q)
 	{
 
-		$api = "usuario/prospecto";
+		$api = "cobranza/solicitud_proceso_pago";
 		return $this->principal->api($api, $q, "json", "POST");
 	}
 
-	private function gamificacion_deseo($q)
+	function create_session($q)
 	{
 
-		$api = "servicio/gamificacion_deseo";
-		return $this->principal->api($api, $q, "json", "PUT");
-	}
-
-	/*aquí creamos en base de datos*/
-	private function genera_orden_compra($q, $param)
-	{
-		$api = "recibo/orden_de_compra";
-		$id_recibo = $this->principal->api($api, $q, "json", "POST");
-		if ($id_recibo > 0 && get_param_def($param, "comentarios") !== 0 && strlen(trim($param["comentarios"])) > 5) {
-			$param["id_recibo"] = $id_recibo;
-			$this->agrega_notas_pedido($param);
-		}
-		return $id_recibo;
-	}
-
-	private function agrega_notas_pedido($q)
-	{
-
-		$api = "recibo_comentario/index";
-		return $this->principal->api($api, $q, "json", "POST");
-	}
-
-	function consulta_disponibilidad_servicio($q)
-	{
-		$api = "servicio/info_disponibilidad_servicio/format/json/";
-		return $this->principal->api($api, $q);
-	}
-
-	function acciones_posterior_orden_pago($param)
-	{
-
-		$this->notifica_deuda_cliente($param);
-		$this->crea_comentario_pedido($param);
-	}
-
-	function valida_envio_notificacion_nuevo_usuario($param)
-	{
-		if (get_info_usuario_valor_variable($param, "usuario_nuevo") > 0) {
-			$this->notifica_registro_usuario($param);
-		}
-	}
-
-	function notifica_registro_usuario($q)
-	{
-		$api = "emp/solicitud_usuario";
-		return $this->principal->api($api, $q);
-	}
-
-	function carga_ficha_direccion_envio($q)
-	{
-
-		$q["text_direccion"] = "Dirección de Envio";
-		$q["externo"] = 1;
-		$api = "usuario_direccion/direccion_envio_pedido";
-		return $this->principal->api($api, $q, "html");
-
-	}
-
-	private function crea_comentario_pedido($param)
-	{
-
-		$id_recibo = $param["id_recibo"];
-		$email = $param["email"];
-
-		$text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $email . " RECIBO NÚMERO " . $id_recibo;
-		if (get_param_def($param, "es_usuario_nuevo") > 0) {
-
-			$text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $param["nombre"] . " - " . $param["email"] . " - " . $param["telefono"] . " RECIBO NÚMERO " . $id_recibo;
-		}
-		$asunto = "NUEVA ORDEN DE COMPRA EN PROCESO, RECIBO #" . $id_recibo;
-		$cuerpo = img_enid([], 1, 1) . heading_enid($text, 3);
-		$q = get_request_email("enidservice@gmail.com", $asunto, $cuerpo);
-		$this->principal->send_email_enid($q);
-
-	}
-
-	function notifica_deuda_cliente($q)
-	{
-
-		$api = "areacliente/pago_pendiente_web/format/json/";
-		return $this->principal->api($api, $q);
-	}
-
-	function agrega_data_cliente($data)
-	{
-
-		$nueva_data = [];
-		$x = 0;
-		foreach ($data as $row) {
-
-			$nueva_data[$x] = $row;
-			$nueva_data[$x]["cliente"] =
-				$this->principal->get_info_usuario($row["id_usuario"]);
-			$x++;
-		}
-		return $nueva_data;
+		$api = "sess/start";
+		$q["t"] = $this->config->item('barer');
+		$q["secret"] = $q["password"];
+		return $this->principal->api($api, $q, "json", "POST", 0, 1, "login");
 	}
 	/*
 	function resumen_pendientes_persona_GET(){
@@ -572,25 +597,17 @@ class Cobranza extends REST_Controller
 		$data["saldos_pendientes"] = $saldos;
 		$this->load->view("cobranza/principal_persona_realizados", $data);
 	}  */
-	function agrega_estatus_enid_service($saldos)
+
+	function valida_envio_notificacion_nuevo_usuario($param)
 	{
-
-		$nueva_data = [];
-		$a = 0;
-		foreach ($saldos as $row) {
-			$nueva_data[$a] = $row;
-			$prm["id_estatus"] = $row["status"];
-			$nueva_data[$a]["estatus_enid_service"] =
-				$this->get_estatus_enid_service($prm);
-			$a++;
-
+		if (get_info_usuario_valor_variable($param, "usuario_nuevo") > 0) {
+			$this->notifica_registro_usuario($param);
 		}
-		return $nueva_data;
 	}
 
-	function get_estatus_enid_service($q)
+	function notifica_registro_usuario($q)
 	{
-		$api = "servicio/nombre_estado_enid/format/json/";
+		$api = "emp/solicitud_usuario";
 		return $this->principal->api($api, $q);
 	}
 	/*
@@ -622,6 +639,42 @@ class Cobranza extends REST_Controller
 	}
 	*/
 
+	function agrega_data_cliente($data)
+	{
+
+		$nueva_data = [];
+		$x = 0;
+		foreach ($data as $row) {
+
+			$nueva_data[$x] = $row;
+			$nueva_data[$x]["cliente"] =
+				$this->principal->get_info_usuario($row["id_usuario"]);
+			$x++;
+		}
+		return $nueva_data;
+	}
+
+	function agrega_estatus_enid_service($saldos)
+	{
+
+		$nueva_data = [];
+		$a = 0;
+		foreach ($saldos as $row) {
+			$nueva_data[$a] = $row;
+			$prm["id_estatus"] = $row["status"];
+			$nueva_data[$a]["estatus_enid_service"] =
+				$this->get_estatus_enid_service($prm);
+			$a++;
+
+		}
+		return $nueva_data;
+	}
+
+	function get_estatus_enid_service($q)
+	{
+		$api = "servicio/nombre_estado_enid/format/json/";
+		return $this->principal->api($api, $q);
+	}
 
 	function simulamos_datos_creacion_proyecto_maps($param)
 	{
@@ -630,22 +683,6 @@ class Cobranza extends REST_Controller
 		$param["url"] = "";
 		$param["id_servicio"] = $param["servicio"];
 		return $param;
-	}
-
-	private function set_option($key, $value)
-	{
-		$this->option[$key] = $value;
-	}
-
-	private function get_option($key)
-	{
-		return $this->option[$key];
-	}
-
-	function comision_GET()
-	{
-		$param = $this->get();
-		$this->response(7);
 	}
 	/*
 	function recibo_por_pagar_GET(){
@@ -707,37 +744,27 @@ class Cobranza extends REST_Controller
 	}
 	*/
 
+	function comision_GET()
+	{
+		$param = $this->get();
+		$this->response(7);
+	}
+
+	private function set_option($key, $value)
+	{
+		$this->option[$key] = $value;
+	}
+
+	private function get_option($key)
+	{
+		return $this->option[$key];
+	}
+
 	private function get_direccion_pedido($id_recibo)
 	{
 
 		$q["id_recibo"] = $id_recibo;
 		$api = "portafolio/direccion_pedido/format/json/";
 		return $this->principal->api($api, $q);
-	}
-
-	private function get_costo_envio_punto_encuentro($q)
-	{
-
-		$api = "punto_encuentro/costo_entrega/format/json/";
-		$response = $this->principal->api($api, $q);
-		if (is_array($response) && count($response) > 0) {
-			return $response[0]["costo_envio"];
-		} else {
-			return 50;
-		}
-	}
-
-	private function create_orden_punto_entrega($q)
-	{
-
-		$api = "proyecto_persona_forma_pago_punto_encuentro/index";
-		return $this->principal->api($api, $q, "json", "POST");
-	}
-
-	private function agrega_punto_encuentro_usuario($q)
-	{
-
-		$api = "usuario_punto_encuentro/index";
-		return $this->principal->api($api, $q, "json", "POST");
 	}
 }

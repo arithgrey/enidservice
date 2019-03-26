@@ -38,6 +38,20 @@ class usuario_deseo extends REST_Controller
 		$this->response($response);
 	}
 
+	function status_PUT()
+	{
+		$param    = $this->put();
+		$response = false;
+		if (if_ext($param, "id")) {
+
+
+			$response =  $this->usuario_deseo_model->q_up("status", 2, $param["id"]);
+
+		}
+		$this->response($response);
+	}
+
+
 	function add_lista_deseos_PUT()
 	{
 
@@ -67,18 +81,24 @@ class usuario_deseo extends REST_Controller
 		$response = false;
 		if (if_ext($param, "id_usuario,id_servicio")) {
 			$response = 0;
-			if ($this->get_num_deseo_servicio_usuario($param) == 0) {
+			/*if ($this->get_num_deseo_servicio_usuario($param) == 0) {*/
 
 				$params = [
 					"id_usuario" => $param["id_usuario"],
-					"id_servicio" => $param["id_servicio"]
+					"id_servicio" => $param["id_servicio"],
+					"articulos"=> $param["articulos"]
+
 				];
+
 				$response = $this->usuario_deseo_model->insert($params);
 
-
+	/*
 			} else {
+
 				$response = $this->usuario_deseo_model->aumenta_deseo($param);
+
 			}
+		*/
 		}
 		return $response;
 	}
@@ -139,6 +159,7 @@ class usuario_deseo extends REST_Controller
 		$api = "servicio/gamificacion_deseo";
 		return $this->principal->api($api, $q, "json", "PUT");
 	}
+
 	/*
 	function add_lista_deseos($q){
 		$api    =  "usuario_deseo/add_lista_deseos/format/json/";

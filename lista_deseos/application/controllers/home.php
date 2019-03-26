@@ -44,6 +44,7 @@ class Home extends CI_Controller
         $data["productos_deseados"]= $this->add_imagenes($productos_deseados);
         if (count($data["productos_deseados"]) > 0) {
             $data["css"] = array("lista_deseos.css");
+	        $data["js"] = ["lista_deseos/carro_compras.js"];
             $this->principal->show_data_page($data, 'home');
         } else {
             $this->principal->show_data_page($data, 'home_sin_productos');

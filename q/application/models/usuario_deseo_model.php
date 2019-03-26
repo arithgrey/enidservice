@@ -7,7 +7,10 @@ class Usuario_deseo_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
-
+	function q_up($q, $q2, $id)
+	{
+		return $this->update([$q => $q2], ["id" => $id]);
+	}
 	function insert($params, $return_id = 0, $debug = 0)
 	{
 		$insert = $this->db->insert('usuario_deseo', $params, $debug);
@@ -91,10 +94,19 @@ class Usuario_deseo_model extends CI_Model
 	}
 	function  get_usuario_deseo($id_usuario){
 
-		$query_get ="SELECT u.num_deseo, s.*  FROM  usuario_deseo u 
+		$query_get ="SELECT 
+				u.id, 
+				u.num_deseo,
+				u.articulos,
+				s.*  
+				FROM  usuario_deseo u 
 				INNER JOIN servicio s  
 				ON u.id_servicio =  s.id_servicio 
-				WHERE  u.id_usuario =  $id_usuario  LIMIT 10";
+				WHERE  u.id_usuario =  $id_usuario
+				AND 
+				u.status =  0
+				ORDER BY u.fecha_registro desc   
+				LIMIT 20";
 		return  $this->db->query($query_get)->result_array();
 	}
 	/*

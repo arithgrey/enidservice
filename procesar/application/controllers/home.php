@@ -70,6 +70,9 @@ class Home extends CI_Controller
 			'procesar/sha1.js'];
 
 		$data["css"] = array("procesar_pago.css");
+		$data["carro_compras"] =  $param["carro_compras"];
+		$data["id_carro_compras"] =  $param["id_carro_compras"];
+
 		$this->principal->show_data_page($data, 'home');
 
 	}

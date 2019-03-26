@@ -140,7 +140,7 @@ if (!function_exists('invierte_date_time')) {
             ]);
 
         $h = append_data([heading_enid("VALORACIONES Y RESEÑAS", 2, ["class" => "strong"]), $a]);
-        return addNRow($h);
+        return addNRow($h, ["id"=> "opiniones"]);
 
     }
 

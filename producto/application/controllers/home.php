@@ -72,6 +72,9 @@ class Home extends CI_Controller
 		$data["q2"] = $param["q2"];
 		$data["num_ciclos"] = $param["num_ciclos"];
 		$data["orden_pedido"] = 1;
+			$data["carro_compras"]      =  (array_key_exists("carro_compras", $param)) ? $param["carro_compras"] : 0;
+		$data["id_carro_compras"]   =  (array_key_exists("id_carro_compras", $param)) ? $param["id_carro_compras"] : 0;
+
 
 
 		$img    = $this->principal->get_imagenes_productos($param["plan"], 1 , 1);

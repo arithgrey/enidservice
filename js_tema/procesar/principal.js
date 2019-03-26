@@ -139,15 +139,18 @@ let respuesta_registro = function (data) {
 let procesar_pedido_usuario_activo = function () {
 
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
-    set_option("talla", $(".talla").val());
+
     let data_send = {
         "plan": get_option("plan"),
         "num_ciclos": get_option("num_ciclos"),
         "descripcion_servicio": get_option("descripcion_servicio"),
         "ciclo_facturacion": get_option("ciclo_facturacion"),
         "talla": get_option("talla"),
-        "tipo_entrega": 2
+        "tipo_entrega": 2,
+        "id_carro_compras": get_parameter(".id_carro_compras"),
+        "carro_compras": get_parameter(".carro_compras"),
     };
+
     request_enid("POST", data_send, url, respuesta_proceso_venta_usuario_activo, "", before_procesar_pedido_activo);
 
 }

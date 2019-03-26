@@ -94,9 +94,16 @@ let ordenar_valoraciones = function(e){
 	}
 }
 let agregar_a_lista_deseos = function(){
-	let url =  "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";		
-	let data_send = {"id_servicio" : get_option("servicio")};
-	request_enid( "PUT",  data_send, url, respuesta_add_valoracion);
+
+
+	let articulos =  get_valor_selected("#num_ciclos");
+
+	if(articulos > 0){
+
+		let url =  "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
+		let data_send = {"id_servicio" : get_option("servicio") , "articulos" : articulos};
+		request_enid( "PUT",  data_send, url, respuesta_add_valoracion);
+	}
 }
 
 let respuesta_add_valoracion = function(data){

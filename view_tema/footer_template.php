@@ -85,6 +85,8 @@ $list_footer = [
 	}
 </style>
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css?<?= version_enid ?>">
+
+
 <link href="../css_tema/template/bootstrap.min.css?<?= version_enid ?>" rel="stylesheet" id="bootstrap-css">
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
 	<?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>

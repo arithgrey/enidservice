@@ -140,7 +140,7 @@ if (!function_exists('invierte_date_time')) {
     }
     if (!function_exists('get_form_miembro_enid_service_hidden')) {
 
-        function get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla)
+        function get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla,$carro_compras,$id_carro_compras)
         {
 
 
@@ -175,6 +175,20 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "talla",
                     "value" => $talla
                 ])
+	            ,
+	            input_hidden([
+		            "name" => "carro_compras",
+		            "class" => "carro_compras",
+		            "value" => $carro_compras
+	            ])
+	            ,
+	            input_hidden([
+		            "name" => "id_carro_compras",
+		            "class" => "id_carro_compras",
+		            "value" => $id_carro_compras
+	            ])
+
+
 
             ]);
 

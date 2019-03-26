@@ -66,7 +66,10 @@ class Home extends CI_Controller
 	private function load_vistas_punto_encuentro($param, $data)
 	{
 
+		$data["carro_compras"] =  $param["carro_compras"];
+		$data["id_carro_compras"] =  $param["id_carro_compras"];
 		$data["leneas_metro"] =  $this->get_lineas_metro( 1);
+
 		if (get_param_def($param, "avanzado", 0, 1) > 0
 			&& get_param_def($param, "punto_encuentro", 0, 1)) {
 
@@ -75,6 +78,7 @@ class Home extends CI_Controller
 
 
 			$response =  get_format_pagina_form_horario($data["recibo"], $punto_encuentro);
+
 			$this->principal->show_data_page($data, $response  ,1);
 
 		} else {

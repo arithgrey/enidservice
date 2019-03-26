@@ -32,7 +32,8 @@
                     ?>
                     <?= validate_text_title($in_session, $is_mobile) ?>
                     <?= form_open("", ["class" => "form-miembro-enid-service", "id" => "form-miembro-enid-service"]) ?>
-                    <?= get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla) ?>
+                    <?= get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla,$carro_compras,$id_carro_compras) ?>
+
                     <?= get_format_form_primer_registro($in_session, $is_mobile, $info_ext) ?>
                     <?= place("place_registro_afiliado") ?>
                 </div>
