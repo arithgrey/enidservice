@@ -5,7 +5,6 @@ class Startsession extends CI_Controller
     function __construct()
     {
         parent::__construct();
-
         $this->load->helper("log");
         $this->load->library(lib_def());
     }
@@ -15,10 +14,10 @@ class Startsession extends CI_Controller
 
         $data = $this->principal->val_session("");
         $data = $this->getCssJs($data);
-        $data["action"] = get_info_variable($this->input->get(), "action");
+        $action = get_info_variable($this->input->get(), "action");
         $this->principal->validate_user_sesssion();
         $data["clasificaciones_departamentos"] = "";
-        $this->principal->show_data_page($data, "signin");
+        $this->principal->show_data_page($data, get_page_sigin($action) ,1);
 
 
     }

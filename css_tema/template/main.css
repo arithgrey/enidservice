@@ -426,8 +426,9 @@ li {
 	background: black !important;
 	padding: 10px !important;
 	color: white !important;
-	font-weight: bold !important;
-	width: 100% !important;
+	display: block;
+	text-transform: uppercase;
+	text-decoration: none!important;
 }
 
 .a_enid_black:hover {
@@ -568,18 +569,28 @@ input {
 }
 
 .contenedor_img_principal {
-	width: 100%;
-	height: 300px;
+	
+	height: 270px;
 	background-image: url('../../img_tema/portafolio/llamada_gratis_2.png');
 }
 
 .pagination > li > a, .pagination > li > span {
-	font-size: 10px !important;
+	font-size: .8em!important;
 	background: #000 !important;
+	letter-spacing: 10px;
+}
+div.pagination li.active span{
+	background: white!important;
+	color: black!important;
+}
+
+div.pagination li.active span:hover{
+	background: white!important;
+	color: black!important;
 }
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-	background-color: #06f !important;
+	//background-color: #06f !important;
 }
 
 .contenedor_footer_iniciar_sesion {
@@ -588,7 +599,7 @@ input {
 
 #flipkart-navbar {
 	
-	background-color: #0020d1;
+	background-color: #02111e;
 	color: #FFFFFF;
 }
 
@@ -853,9 +864,11 @@ input {
 }
 
 img {
+	
 	object-fit: cover !important;
 	width: 100% !important;
 	height: 100% !important;
+	
 }
 
 .table_enid {
@@ -930,23 +943,28 @@ table {
 
 .top_10 {
 	margin-top: 10px;
+	display: block;
 }
 
 .top_15 {
 	margin-top: 15px;
+	display: block;
 }
 
 .top_20 {
 	margin-top: 20px;
+	display: block;
 }
 
 .top_30 {
 	margin-top: 30px;
+	display: block;
 }
 
 
 .top_50 {
 	margin-top: 50px;
+	display: block;
 }
 
 .bottom_10 {
@@ -959,10 +977,16 @@ table {
 
 .bottom_20 {
 	margin-bottom: 20px;
+	display: block;
 }
 
 .bottom_50 {
 	margin-bottom: 50px;
+	display: block;
+}
+.bottom_100{
+	margin-bottom: 100px;
+	display: block;
 }
 
 .cursor_pointer:hover, .cursor:hover {
@@ -1014,12 +1038,15 @@ h2 {
 
 .categoria_text {
 	text-transform: uppercase;
+	text-transform: uppercase;
+	letter-spacing: 1.3px;
+	display: block;
+	margin-top: 5px;
 }
-
 .nombre_servicio {
-	font-size: 1.1em;
+	font-size: 1em;
+	letter-spacing: .3em;
 }
-
 .text_precio {
 	
 	color: white;
@@ -1043,7 +1070,11 @@ h2 {
 	justify-content: space-between;
 	align-items: center;
 }
-
+.display_flex_colum_enid{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
 .font_m {
 	font-size: 1.5em;
 }
@@ -1084,4 +1115,43 @@ h2 {
 .hover_black:hover {
 	color: black;
 	font-weight: bold;
+}
+.text_categoria_sub_menu{
+	letter-spacing: 1.3px;
+	
+}
+select{
+	border: none;
+	border-bottom-color: currentcolor;
+	border-bottom-style: none;
+	border-bottom-width: medium;
+	border-bottom: solid 1px #ccc;
+	border-radius: 0px;
+	color: #000;
+	font-size: 12px;
+	height: 40px;
+	padding: 0px 0px 0px 0px;
+	text-align: center;
+	width: 100%;
+}
+.letter-spacing-15{
+	letter-spacing: 1.5px;
+}
+.letter-spacing-10{
+	letter-spacing: 10px;
+}
+.producto_enid{
+	height:310px!important;
+}
+
+.texto_precio{
+	background: #030a27;
+	padding: 5px;
+	text-align: center;
+}
+.texto_precio a{
+	color: white;
+}
+.texto_precio a:hover{
+	color: white!important;
 }

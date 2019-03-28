@@ -69,17 +69,22 @@ form button:hover {
     color: #000306 !important;
 }
 
+.olvide_pass{
+    font-size: 1.4em;
+}
 .mensaje_bienvenida {
     background: #09052f;
     color: white;
     padding: 10px;
 }
 
-.registrar-cuenta {
+.registrar-cuenta ,.btn_acceder_cuenta_enid{
+    
     font-weight: bold;
-    color: #00090f;
+    font-size: 1.7em;
+    letter-spacing: 12px;
+    
 }
-
 .registrar-cuenta:hover {
     color: black !important;
 }

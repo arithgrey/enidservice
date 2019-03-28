@@ -226,16 +226,16 @@ class Home extends CI_Controller
 	private function get_orden()
 	{
 		$response = ["ORDENAR POR",
-			"Las novedades primero",
-			"Lo     más vendido",
-			"Los más votados",
-			"Los más populares ",
-			"Precio [de mayor a menor]",
-			"Precio [de menor a mayor]",
-			"Nombre del producto [A-Z]",
-			"Nombre del producto [Z-A]",
-			"Sólo servicios",
-			"Sólo productos"];
+			"LAS NOVEDADES PRIMERO",
+			"LO MÁS VENDIDO",
+			"LOS MÁS VOTADOS",
+			"LOS MÁS POPULARES ",
+			"PRECIO  [de mayor a menor]",
+			"PRECIO  [de menor a mayor]",
+			"NOMBRE DEL PRODUCTO [A-Z]",
+			"NOMBRE DEL PRODUCTO [Z-A]",
+			"SÓLO  SERVICIO",
+			"SÓLO PRODUCTOS"];
 		return $response;
 	}
 

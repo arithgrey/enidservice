@@ -88,3 +88,16 @@
     color: #000045;
     font-weight: bold;
 }
+.tiempo_entrega_promedio{
+    letter-spacing: 3px;
+}
+.contenedor_central_producto .row{
+    margin-top: 30px!important;
+}
+.informacion_vendedor_descripcion{
+    text-transform: uppercase;
+    text-justify: auto;
+}
+.nombre_producto_carrito{
+    font-size: 1.5em;
+}

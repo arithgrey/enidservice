@@ -43,29 +43,13 @@
 }
 
 .tiempo_promedio {
-    background: #ededed;
+    background: #051224;
     padding: 5px;
-    color: #000509;
-    font-weight: bold;
+    color: white;
+    line-height: 1.7em
 }
 
-.product-detail {
-    padding-top: 15px;
-}
 
-.product-detail .cols {
-
-    margin-left: auto;
-    margin-right: auto;
-    padding: 35px 0 58px;
-}
-
-.product-detail .left-col {
-    width: 48.27586%;
-    float: left;
-    margin-right: 3.44828%;
-
-}
 
 .product-detail .left-col .thumbs {
     width: 15.25424%;
@@ -105,14 +89,6 @@
     float: right;
     margin-right: 0;
 }
-
-.product-detail a {
-    font-size: 100%;
-    line-height: 123.07692%;
-    color: #b5b6bd;
-    text-decoration: underline;
-}
-
 .product-detail a:hover {
     color: #086fcf;
 }

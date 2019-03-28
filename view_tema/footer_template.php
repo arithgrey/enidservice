@@ -20,7 +20,7 @@ $list_footer = [
 	div(ul($list4), ["class" => $base])
 ];
 ?>
-<?= div("", ["class" => "separador-footer"], 1) ?>
+
 <?= input_hidden([
 	"class" => "in_session",
 	"value" => $in_session
@@ -74,7 +74,7 @@ $list_footer = [
 			<?= $this->load->view("../../../view_tema/metodos_pago"); ?>
 		<?php endif ?>
 	<?php endif ?>
-	<?= div("© 2019 ENID SERVICE.", ['class' => 'white footer-enid']) ?>
+	<?= div("© 2019 ENID SERVICE.", ['class' => 'white footer-enid page-footer']) ?>
 <?php endif; ?>
 
 
@@ -85,7 +85,7 @@ $list_footer = [
 	}
 </style>
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css?<?= version_enid ?>">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <link href="../css_tema/template/bootstrap.min.css?<?= version_enid ?>" rel="stylesheet" id="bootstrap-css">
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>

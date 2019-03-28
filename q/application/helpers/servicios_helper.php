@@ -11,7 +11,6 @@ if (!function_exists('invierte_date_time')) {
 
 		$in_session = $servicio["in_session"];
 		$extra_color = "";
-		$nombre_servicio = $servicio["nombre_servicio"];
 		$id_servicio = $servicio["id_servicio"];
 		$metakeyword = $servicio["metakeyword"];
 		$color = (get_param_def($servicio, "color") !== 0) ? $servicio["color"] : "";
@@ -24,24 +23,26 @@ if (!function_exists('invierte_date_time')) {
 		$existencia = ($in_session > 0) ? $servicio["existencia"] : 0;
 		$url_img_servicio =  $servicio["url_img_servicio"];
 
-		$id_error = "imagen_" . $id_servicio;
+
 		$config = [
 			'src' => $url_img_servicio,
-			'id' => $id_error,
-			'class' => 'imagen_producto',
 			'alt' => $metakeyword,
-			/*'onerror' => "reloload_img( '" . $id_error . "','" . $url_img . "' , 1);"*/
 		];
 
+		$p[] = div(img($config),1);
 
-		$p[] = div(get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session),1);
-		$p[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_actual) , 1);
-		$p[] = div(get_text_nombre_servicio($nombre_servicio), 1);
-		$p[] = div(muestra_vistas_servicio($in_session, $vista), 1);
-		$b[] = div(anchor_enid(img($config) , ["href" => $url_info_producto]), 1);
-		$b[] = div(append_data($p) , 1);
-		$b[] = div(get_precio_producto($url_info_producto, $precio), 1);
-		$bloque_producto = div(append_data($b), ["style" => "height:400px!important;display: flex;flex-wrap: wrap;"] , 1);
+
+		if($in_session >  0){
+			$p[] = div(get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session),
+				["class"=> "text-center"],1);
+			$p[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_actual) , 1);
+			$p[] = div(muestra_vistas_servicio($in_session, $vista), 1);
+
+		}
+
+
+		$r   = anchor_enid(append_data($p),["href"=> get_url_servicio($id_servicio)]);
+		$bloque_producto = div($r, ["class" => "producto_enid d-flex flex-column justify-content-center"] );
 		return $bloque_producto;
 
 	}
@@ -73,11 +74,17 @@ if (!function_exists('invierte_date_time')) {
 	function get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session)
 	{
 
-		$color = get_td(get_numero_colores($color, $flag_servicio, $url_info_producto, $extra_color));
-		$existencia = get_td(get_en_existencia($existencia, $flag_servicio, $in_session));
-		$t = "<tr>" . $color . $existencia . "<tr>";
-		$table = "<table class='resumen_colores_producto'>" . $t . "</table>";
-		return $table;
+		$color = get_numero_colores($color, $flag_servicio, $url_info_producto, $extra_color);
+		$existencia = get_en_existencia($existencia, $flag_servicio, $in_session);
+
+
+		$response  =  get_btw(
+			$color ,
+			$existencia,
+			""
+		);
+		return $response;
+
 
 	}
 
@@ -478,7 +485,7 @@ if (!function_exists('invierte_date_time')) {
 	function get_precio_producto($url_info_producto, $precio)
 	{
 
-		$precio = anchor_enid(div($precio . 'MXN' , [ "class" => "text_precio text-center"]), ["href" => $url_info_producto]);
+		$precio = div(div(anchor_enid($precio . 'MXN' , ["href" => $url_info_producto]) , ["class"=> "texto_precio"]),1);
 		return $precio;
 
 	}
@@ -492,23 +499,17 @@ if (!function_exists('invierte_date_time')) {
 			if ($num_colores > 0) {
 				if ($num_colores > 1) {
 
-					return anchor_enid($num_colores . " colores", ["href" => $url_info_producto]);
+					return $num_colores . " colores";
 
 				} else {
 
-					return anchor_enid($num_colores . " color", ["href" => $url_info_producto]);
+					return $num_colores . " color";
 				}
 
 			}
 		}
 	}
 
-	function get_text_nombre_servicio($nombre_servicio)
-	{
-		$text_nombre_servicio = heading_enid(substr($nombre_servicio, 0, 70), 3,
-			["class" => "nombre_servicio"]);
-		return $text_nombre_servicio;
-	}
 
 	function get_en_existencia($existencia, $flag_servicio, $in_session)
 	{
@@ -528,23 +529,23 @@ if (!function_exists('invierte_date_time')) {
 
 	function muestra_vistas_servicio($in_session, $vistas)
 	{
-		if ($in_session == 1) {
-			return div($vistas . " personas alcanzadas");
-		}
+
+		$response=  ($in_session == 1) ?  div($vistas . " personas alcanzadas") : "";
+		return $response;
 	}
 
 	function valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_registro_servicio)
 	{
 
-
+		$response  ="";
 		if ($in_session > 0) {
 			if ($id_usuario == $id_usuario_registro_servicio) {
-				return icon("servicio fa fa-pencil", ["id" => $id_servicio]);
+				$response =  icon("servicio fa fa-pencil", ["id" => $id_servicio]);
 			}
 		}
+		return $response;
 
 	}
-
 	function get_rango_entrega($id_perfil, $actual, $attributes = '', $titulo, $minimo = 1, $maximo = 10)
 	{
 

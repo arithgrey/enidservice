@@ -52,14 +52,15 @@ if (!function_exists('invierte_date_time')) {
 	function get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil)
 	{
 
+		$filtro = get_format_filtro($filtros, $order);
 
 		if ($es_movil > 0) {
 
-			$response = div(get_format_filtro($filtros, $order), 1);
+			$response = div($filtro, 1);
 
 		} else {
 			$response = get_btw(
-				div(get_format_filtro($filtros, $order)),
+				div($filtro),
 				div($paginacion),
 				"display_flex_enid"
 			);
@@ -82,7 +83,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 		foreach ($lista_productos as $row) {
-			$response[] = div($row, ["class" => 'col-lg-3']);
+			$response[] = div(div($row,["class"=> "border-bottom mt-3"],1), ["class" => 'col-lg-3']);
 
 		}
 		return append_data($response);
@@ -192,7 +193,7 @@ if (!function_exists('invierte_date_time')) {
 				$response [] = "<ul class='clasificaciones_sub_menu_ul'>";
 			}
 			$href = "?q=&q2=" . $row["primer_nivel"];
-			$response [] = li(anchor_enid($nombre_clasificacion, ["href" => $href, "class" => 'text_categoria_sub_menu']));
+			$response [] = li(anchor_enid($nombre_clasificacion, ["href" => $href, "class" => 'text_categoria_sub_menu white text-uppercase']));
 			$z++;
 			if ($z == 5) {
 				$z = 0;
@@ -242,9 +243,7 @@ if (!function_exists('invierte_date_time')) {
 
 		if (is_array($info)) {
 
-			$seccion = "";
 			$flag = 0;
-
 			$lista = [];
 			for ($z = 0; $z < count($info); $z++) {
 				$data = $info[$z];
@@ -254,14 +253,13 @@ if (!function_exists('invierte_date_time')) {
 					$nombre_clasificacion = $row["nombre_clasificacion"];
 
 					$url = "../search/?q=" . $busqueda . "&q2=" . $id_clasificacion;
-					$lista[] =
-						anchor_enid($nombre_clasificacion, ["href" => $url, "class" => 'categoria_text black']);
+					$lista[] = anchor_enid($nombre_clasificacion, ["href" => $url, "class" => 'categoria_text black'] , 1);
 
 					$flag++;
 				}
 			}
 
-			$info_seccion["html"] = ul($lista);
+			$info_seccion["html"] = append_data($lista);
 			$info_seccion["num_categorias"] = $flag;
 			return $info_seccion;
 

@@ -1111,7 +1111,7 @@ if (!function_exists('get_logo')) {
 
             $img_enid = img_enid(["style" => "width: 50px!important;"]);
             $en_pc = anchor_enid($img_enid, ["href" => "../"]);
-            return div($en_pc, ["class" => "padding_5"]);
+            return div($en_pc, ["class" => "padding_10"]);
         }
 
     }
@@ -1267,11 +1267,41 @@ if (!function_exists('get_menu_session')) {
 
         if ($in_session < 1) {
 
-            $vender = anchor_enid("Vender" . icon("fa fa-shopping-cart"), ["href" => "../login/?action=nuevo", "class" => 'links white']);
 
-            $l_session = anchor_enid("Iniciar sesión" . icon("fa fa-user"), ["href" => "../login", "class" => 'links white']);
+	        $text =  get_btw(
+		        div("Vender", ["style"=> "font-size:.8em;"]),
+		        icon("fa fa-shopping-cart", ["style"=> "margin-left:5px;font-size:1.1em;"]),
+		        "display_flex_enid"
 
-            $list = [li($l_session), li($vender)];
+	        );
+
+
+	        $vender = anchor_enid($text,
+		        [
+			        "href" => "../login/?action=nuevo",
+			        "class" => ' white text-uppercase letter-spacing-15',
+
+		        ]
+	        );
+
+
+
+	        $text =  get_btw(
+		        div(" Iniciar sesión ", ["style"=> "font-size:.8em;"]),
+		        icon("fa fa-user", ["style"=> "margin-left:5px;font-size:1.1em;"]),
+		        "display_flex_enid"
+
+	        );
+	        $l_session = anchor_enid($text,
+		        [
+		        	"href" => "../login",
+			        "class" => " white text-uppercase letter-spacing-15"
+		        ]
+	        );
+
+
+            $list = div(append_data([$vender,$l_session]),["class"=> "display_flex_enid"]);
+
             if ($proceso_compra < 1) {
                 return div(ul($list, ["class" => "largenav "]), ["class" => "text-right"]);
             }
@@ -1282,9 +1312,13 @@ if (!function_exists('get_menu_session')) {
     }
 }
 if (!function_exists('get_btw')) {
-    function get_btw($a, $b, $class = '')
+    function get_btw($a, $b, $class = '', $row=0)
     {
-        return div(append_data([$a, $b]), ["class" => $class]);
+        $response =  div(append_data([$a, $b]), ["class" => $class]);
+        if ($row > 0){
+	        $response =  div(div(append_data([$a, $b]), ["class" => $class] ) , ["class"=> "row"]);
+        }
+        return $response;
     }
 }
 if (!function_exists('get_format_fecha_busqueda')) {

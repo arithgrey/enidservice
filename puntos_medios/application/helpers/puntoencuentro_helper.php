@@ -14,11 +14,11 @@ if (!function_exists('invierte_date_time')) {
 			input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro])
 		]);
 
-		$response =  div($response , ["class"=>"col-lg-6 col-lg-offset-3"]);
+		$response = div($response, ["class" => "col-lg-6 col-lg-offset-3"]);
 		return $response;
 	}
 
-	function get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras , $id_carro_compras)
+	function get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras)
 	{
 		$r[] = form_open("", ["class" => "form-horizontal form_punto_encuentro"]);
 		$r[] = label(" NOMBRE ", ["class" => "col-lg-3 "]);
@@ -92,8 +92,8 @@ if (!function_exists('invierte_date_time')) {
 		$r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form"]);
 		$r[] = input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]);
 
-		$r[] = input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value"=> $carro_compras]);
-		$r[] = input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value"=> $id_carro_compras]);
+		$r[] = input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras]);
+		$r[] = input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]);
 
 		$r[] = br();
 		$r[] = guardar("CONTINUAR", ["class" => "top_20"]);
@@ -142,7 +142,8 @@ if (!function_exists('invierte_date_time')) {
 			"id"
 			, 0, 1, 0, "-");
 
-		return div(append_data($r), ["class" => "col-lg-10 col-lg-offset-1 titulo_principal_puntos_encuentro"]);
+		$response = div(append_data($r), ["class" => "col-lg-8 col-lg-offset-2"]);
+		return div($response, 1);
 
 
 	}

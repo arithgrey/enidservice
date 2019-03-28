@@ -49,32 +49,32 @@ foreach ($info_servicio["servicio"] as $row) {
 $imagenes = construye_seccion_imagen_lateral($imgs, $nombre_servicio, $url_vide_youtube);
 $vendedor_valoracion = anchor_enid("", ['class' => 'valoracion_persona_principal valoracion_persona']);
 $nombre_servicio = substr(strtoupper($nombre_servicio), 0, 70);
-$nombre_producto = heading_enid($nombre_servicio, 1, ['class' => "strong"]);
+$nombre_producto = heading_enid($nombre_servicio, 1, ['class' => "text-justify nombre_producto_carrito strong"]);
 $nuevo_nombre_servicio = valida_text_servicio($flag_servicio, $precio, $id_ciclo_facturacion);
 $boton_editar = valida_editar_servicio($id_usuario_servicio, $id_usuario, $in_session, $id_servicio);
 $texto_en_existencia = get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml);
 
 
-$estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valoracion_persona']), ['class' => 'lee_valoraciones', 'href' => '../search/?q3=' . $id_publicador]);
+$estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valoracion_persona']), ['class' => 'lee_valoraciones text-right', 'href' => '../search/?q3=' . $id_publicador]);
 
 
 ?>
-
-    <div class="product-detail contenedor_info_producto">
-        <div class="col-lg-8">
-            <div class="col-lg-8 col-sm-12">
+<?=n_row_12()?>
+    <div class="product-detail contenedor_info_producto mt-5">
+        <div class="col-lg-9">
+            <div class="col-lg-7 col-sm-12">
                 <div class="left-col contenedor_izquierdo">
                     <?= div($imagenes["preview"], ["class" => "thumbs"]) ?>
                     <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
                 </div>
             </div>
-            <div class="col-lg-4 col-sm-12">
+            <div class="col-lg-5 d-flex flex-column justify-content-center align-content-between contenedor_central_producto" style="height: 400px;">
                 <!--<div class="contenedor_central_info">-->
                     <?= get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web) ?>
                 <!--</div>-->
             </div>
         </div>
-        <div class="col-lg-4 col-sm-12">
+        <div class="col-lg-3 p-5 border" >
             <?php if ($flag_servicio < 1): ?>
                 <?php if ($existencia > 0): ?>
                     <!--<div class="info-venta">-->
@@ -108,15 +108,16 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
             <?php endif; ?>
         </div>
     </div>
-
+<?=end_row()?>
+<?=hr(["class"=> "mr-50 mb-5"])?>
 <?= addNRow(div(get_descripcion_servicio($descripcion, $flag_servicio), ["class" => "col-lg-10 col-lg-offset-1"])) ?>
 <?= div("", ["id" => "video"]) ?>
 <?= addNRow(div(valida_url_youtube($url_vide_youtube, $is_mobile), ["class" => "col-lg-10 col-lg-offset-1"])) ?>
-<?= br(2) ?>
+
 <?= addNRow(place("separador")) ?>
-<?= br(2) ?>
+
 <?= addNRow(div(place("place_valoraciones"), ["class" => "col-lg-10 col-lg-offset-1", "style" => "background: white;"]), ["style" => "background: #002693;"]) ?>
-<?= br(4) ?>
+
 <?= addNRow(div(place("place_tambien_podria_interezar"), ["class" => "col-lg-10 col-lg-offset-1", "style" => "background: white;"])) ?>
 <?= input_hidden(["class" => "qservicio", "value" => $nombre_servicio]) ?>
 <?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]) ?>

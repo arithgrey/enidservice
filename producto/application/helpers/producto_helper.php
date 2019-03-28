@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 		$text =
-			($deseado > 0) ? div($deseado . " VENTAS EN LOS ÚLTIMOS 2 MESES", ["class" => "top_50 text_ventas"]) : "";
+			($deseado > 0) ? div($deseado . " VENTAS EN LOS ÚLTIMOS 2 MESES", ["class" => "top_50 "]) : "";
 		return $text;
 
 
@@ -50,8 +50,9 @@ if (!function_exists('invierte_date_time')) {
 	{
 
 		$r[] = $boton_editar;
-		$r[] = $estrellas;
+
 		$r[] = $nombre_producto;
+		$r[] = $estrellas;
 		$r[] = heading_enid($nuevo_nombre_servicio, 3);
 		$r[] = validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion);
 		$r[] = $tallas;
@@ -87,8 +88,8 @@ if (!function_exists('invierte_date_time')) {
 
 		$r[] = img(["src" => "..//img_tema/linea_metro/metro.jpg", "class" => "icono_metro"]);
 		$r[] = div(heading_enid("PAGO CONTRA ENTREGA", 3), ["class" => "title"]);
-		$r[] = div(div("ACORDEMOS UN PUNTO MEDIO "), ["class" => "text"]);
-		return div(append_data($r), ["class" => "box-part text-center"]);
+		$r[] = div(div("UN PUNTO MEDIO "), ["class" => "text"]);
+		return div(append_data($r), ["class" => "box-part text-center border"]);
 
 	}
 
@@ -98,7 +99,7 @@ if (!function_exists('invierte_date_time')) {
 		$r[] = icon('fa fa-truck fa-3x');
 		$r[] = div(heading_enid("POR MENSAJERÍA", 3), ["class" => "title"]);
 		$r[] = div(div("QUE LLEGUE A TU CASA U OFICINA"), ["class" => "text"]);
-		return div(append_data($r), ["class" => "box-part text-center"]);
+		return div(append_data($r), ["class" => "box-part text-center border"]);
 
 	}
 
@@ -119,15 +120,10 @@ if (!function_exists('invierte_date_time')) {
 		}
 
 		$r[] = creta_tabla_colores($color, $flag_servicio);
-		$r[] = place("separador");
-		$r[] = div(get_tipo_articulo($flag_nuevo, $flag_servicio), 1);
-		$r[] = place("separador");
+		$r[] = get_tipo_articulo($flag_nuevo, $flag_servicio);
 		$r[] = get_nombre_vendedor($proceso_compra, $usuario, $id_publicador);
-		$r[] = place("separador");
 		$r[] = get_tiempo_entrega($proceso_compra, $tiempo_entrega);
-		$r[] = br();
 		$r[] = get_social($url_actual, $url_facebook, $url_twitter, $url_pinterest, $url_tumblr, $proceso_compra);
-		$r[] = br();
 		$r[] = get_tienda_vendedor($proceso_compra, $id_publicador);
 		$r[] = place("", ["style" => "border: solid 1px"]);
 
@@ -146,10 +142,18 @@ if (!function_exists('invierte_date_time')) {
 			$r[] = get_form_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos,$carro_compras, $id_carro_compras);
 			$r[] = form_pre_pedido_contact($plan, $num_ciclos, $carro_compras, $id_carro_compras);
 			$r[] = form_pre_puntos_medios($plan, $num_ciclos, $carro_compras, $id_carro_compras);
-			$r[] = addNRow(div(img(["src" => $url_imagen_servicio]), ["class" => "col-lg-4 col-lg-offset-4"]));
+			$r[] = div(
+					img(
+						[
+							"src" => $url_imagen_servicio,
+							"class" => "col-lg-2 "
+						]
+					)
+			);
 
 		}
-		return append_data($r);
+		$response =  div(append_data($r) ,1);
+		return $response;
 
 
 	}
@@ -257,7 +261,7 @@ if (!function_exists('invierte_date_time')) {
 			//$r[] = mailto("ventas@enidservice.com", icon("fa fa-envelope-open black"));
 
 			$social = append_data($r);
-			$response = div($social, ["class" => "contenedor_social display_flex_enid"]);
+			$response = div($social, ["class" => "contenedor_social display_flex_enid mt-5"]);
 		}
 		return div($response, 1);
 
@@ -275,7 +279,7 @@ if (!function_exists('invierte_date_time')) {
 			"is_servicio" => $flag_servicio,
 			"q2" => $q2
 		]);
-		$r[] = get_btw(div("PIEZAS", ["class" => "text_piezas"]), select_cantidad_compra($flag_servicio, $existencia), "display_flex_enid");
+		$r[] = get_btw(div("PIEZAS", ["class" => "text_piezas mr-3"]), select_cantidad_compra($flag_servicio, $existencia), "display_flex_enid");
 
 		$r[] = guardar("ORDENAR ",
 			[
@@ -429,13 +433,13 @@ if (!function_exists('invierte_date_time')) {
 			$nombre = $usuario[0]["nombre"];
 			$tienda = '../search/?q3=' . $id_usuario . '&vendedor=' . $nombre;
 			$a = anchor_enid(
-				"POR " . strtoupper($nombre),
+				"VENDIDO POR " . span($nombre,["class"=> "nombre_vendedor underline "]),
 				[
 					"href" => $tienda,
-					'class' => 'informacion_vendedor_descripcion'
+					'class' => 'informacion_vendedor_descripcion text-justify black '
 				]);
 
-			return "VENDEDOR " . $a;
+			return  $a;
 
 		}
 	}
@@ -454,7 +458,7 @@ if (!function_exists('invierte_date_time')) {
 
 			$text = ($flag_servicio == 0 && $venta_mayoreo == 1) ? icon('fa fa-check-circle') . "VENTAS MAYORISTAS " : "";
 			$r[] = div($text, ["class" => "strong"]);
-			$r[] = div(icon('fa fa-check-circle') . "COMPRAS CONTRA ENTREGA", ["class" => "strong"]);
+			$r[] = div(icon('fa fa-check-circle') . "COMPRAS CONTRA ENTREGA");
 			return append_data($r);
 
 
@@ -465,33 +469,41 @@ if (!function_exists('invierte_date_time')) {
 		function creta_tabla_colores($text_color, $flag_servicio)
 		{
 
-			$final = "";
-			if ($flag_servicio == 0) {
-				$arreglo_colores = explode(",", $text_color);
-				$num_colores = count($arreglo_colores);
-				$info_title = "";
 
-				if ($num_colores > 0) {
-					$info_title = ($num_colores > 1) ? "COLORES DISPONIBLES" : "COLOR DISPONIBLE";
-				}
-				$info = "";
-				$v = 0;
-				for ($z = 0; $z < count($arreglo_colores); $z++) {
-					$color = $arreglo_colores[$z];
-					$style = "background:$color;height:40px; ";
-					$info .= div("", ["style" => $style, "class" => "col-lg-4"]);
-					$v++;
-				}
-				if ($v > 0) {
+			$response =  "";
+			if(!is_null($text_color)){
+				$final = "";
+				if ($flag_servicio == 0) {
+					$arreglo_colores = explode(",", $text_color);
+					$num_colores = count($arreglo_colores);
+					$info_title = "";
 
-					$final = "";
-					$final .= div($info_title, ["class" => 'informacion_colores_disponibles']);
-					$final .= $info;
-					$final = div($final, ['class' => 'contenedor_informacion_colores']);
+					if (count($arreglo_colores) > 0) {
+						$info_title = ($num_colores > 1) ? "COLORES DISPONIBLES" : "COLOR DISPONIBLE";
+					}
+					$info = "";
+					$v = 0;
+					for ($z = 0; $z < count($arreglo_colores); $z++) {
+						$color = $arreglo_colores[$z];
+						$style = "background:$color;height:40px; ";
+						$info .= div("", ["style" => $style, "class" => "col-lg-4"]);
+						$v++;
+					}
+					if ($v > 0) {
 
+						$final = "";
+						$final .= div($info_title, ["class" => 'informacion_colores_disponibles letter-spacing-10']);
+						$final .= $info;
+						$final = div($final, ['class' => 'contenedor_informacion_colores']);
+
+					}
+					$response =   div($final, 1);
 				}
-				return div($final, 1);
+
 			}
+			return $response;
+
+
 
 		}
 
@@ -500,10 +512,10 @@ if (!function_exists('invierte_date_time')) {
 		function get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml = '')
 		{
 			if ($flag_servicio == 0 && $existencia > 0) {
-				$text = div("APRESÚRATE! SOLO HAY " . $existencia . " EN EXISTENCIA ", ["class" => "bottom_20 text_existencia"]);
+				$text = div("APRESÚRATE! SOLO HAY 2 EN EXISTENCIA ", ["class" => "mt-3 bottom_20 text_existencia"]);
 				$text = div($text, ['class' => 'text-en-existencia']);
 				if (strlen($url_ml) > 10) {
-					$text .= anchor_enid(icon('fa fa-check-circle') . "ADQUIÉRELO EN MERCADO LIBRE", ["href" => $url_ml, "class" => "black strong"]);
+					$text .= anchor_enid(icon('fa fa-check-circle') . "ADQUIÉRELO EN MERCADO LIBRE", ["href" => $url_ml, "class" => "black "]);
 				}
 				return $text;
 			}
@@ -526,16 +538,16 @@ if (!function_exists('invierte_date_time')) {
 		function valida_text_servicio($flag_servicio, $precio_unidad, $id_ciclo_facturacion)
 		{
 
-			$text = "1 Pza " . $precio_unidad . "MXN";
+			$response = "";
 			if ($flag_servicio == 1) {
 
-				$text = ($id_ciclo_facturacion != 9 && $precio_unidad > 0) ? $precio_unidad . "MXN" : "A CONVENIR";
+				$response = ($id_ciclo_facturacion != 9 && $precio_unidad > 0) ? $precio_unidad . "MXN" : "A CONVENIR";
 
 			} else {
 
-				$text = ($precio_unidad > 0) ? $precio_unidad . "MXN" : "A CONVENIR";
+				$response = ($precio_unidad > 0) ? $precio_unidad . "MXN" : "A CONVENIR";
 			}
-			return $text;
+			return $response;
 		}
 
 	}
@@ -631,18 +643,20 @@ if (!function_exists('invierte_date_time')) {
 		function get_tienda_vendedor($proceso_compra, $id_vendedor)
 		{
 
+			$response   = "";
 			if ($proceso_compra == 0) {
-				return anchor_enid(
+
+				$response =   anchor_enid(
 					"Ir a la tienda del vendedor",
 					[
 						'href' => "../search/?q3=" . $id_vendedor,
-						'class' => "a_enid_black"
+						'class' => "a_enid_black d-block"
 					]
-					,
-					1,
-					1
 				);
+				$response =  div($response,1);
+
 			}
+			return $response;
 		}
 
 	}
@@ -652,11 +666,11 @@ if (!function_exists('invierte_date_time')) {
 
 
 			return
-				div(anchor_enid(
-					div("SOLICITAR INFORMACIÓN", ['class' => 'black_enid_background white padding_1'], 1),
+				anchor_enid(
+					div("SOLICITAR INFORMACIÓN", ['class' => 'black_enid_background white padding_10'], 1),
 					[
 						"href" => "../pregunta?tag=" . $id_servicio
-					]));
+					]);
 
 		}
 	}
@@ -701,7 +715,10 @@ if (!function_exists('invierte_date_time')) {
 		function get_nombre_vendedor($proceso_compra, $usuario, $id_vendedor)
 		{
 
-			return ($proceso_compra == 0) ? div(crea_nombre_publicador_info($usuario, $id_vendedor), 1) . place("separador") : "";
+			$response = ($proceso_compra == 0) ? div(crea_nombre_publicador_info($usuario, $id_vendedor), 1) : "";
+
+			return $response;
+
 
 		}
 	}
@@ -710,7 +727,7 @@ if (!function_exists('invierte_date_time')) {
 		function get_info_vendedor($entregas_en_casa, $flag_servicio, $proceso_compra, $telefono_visible, $in_session, $usuario)
 		{
 
-			$r[] = div(get_entrega_en_casa($entregas_en_casa, $flag_servicio), ['class' => 'strong']);
+			$r[] = div(get_entrega_en_casa($entregas_en_casa, $flag_servicio));
 			$r[] = get_contacto_cliente($proceso_compra, $telefono_visible, $in_session, $usuario);
 			return div(append_data($r), 1);
 

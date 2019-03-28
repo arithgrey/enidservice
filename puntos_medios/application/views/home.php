@@ -1,5 +1,5 @@
 <?= get_format_identificacion($tipos_puntos_encuentro) ?>
-<?= div(div($leneas_metro , ["class"=> "place_lineas"]), ["class" => "col-lg-8 col-lg-offset-2"], 1) ?>
+<?= div($leneas_metro , ["class" => "col-lg-8 col-lg-offset-2 place_lineas"],1) ?>
 <?php if ($primer_registro > 0): ?>
 	<?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $servicio]) ?>
 	<div class='formulario_quien_recibe display_none'>
