@@ -63,9 +63,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("nuevo");
 
         $input =
-	        '<input type="text" name="nombre" 
+            '<input type="text" name="nombre" 
 	        placeholder="Por ejemplo: Jonathan" 
-	        value="' . $nombre . '"  '. valida_readonly($nombre) .' 
+	        value="' . $nombre . '"  ' . valida_readonly($nombre) . ' 
             required>';
 
         $r[] = get_btw(
@@ -78,7 +78,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => "id_servicio", "value" => $id_servicio]);
         $r[] = place("nuevo");
 
-        $in =  '<input type="email" 
+        $in = '<input type="email" 
         name="email" 
         placeholder="Por ejemplo: jmedrano@enidservice.com" 
         required ' . valida_readonly($email) . ' value="' . $email . '">';
@@ -117,8 +117,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("place_registro_valoracion");
 
 
-        $text=  strtoupper($vendedor[0]["nombre"] . " " . $vendedor[0]["apellido_paterno"]);
-        $z[] = heading_enid("ESCRIBE UNA PREGUNTA " . $text , 2);
+        $text = strtoupper($vendedor[0]["nombre"] . " " . $vendedor[0]["apellido_paterno"]);
+        $z[] = heading_enid("ESCRIBE UNA PREGUNTA " . $text, 2);
         $z[] = div("SOBRE SU" . $servicio[0]["nombre_servicio"]);
         $z[] = br(2);
         $z[] = form_open("", ["class" => "form_valoracion "]);
@@ -140,7 +140,7 @@ if (!function_exists('invierte_date_time')) {
             ]);
 
         $h = append_data([heading_enid("VALORACIONES Y RESEÑAS", 2, ["class" => "strong"]), $a]);
-        return addNRow($h, ["id"=> "opiniones"]);
+        return addNRow($h, ["id" => "opiniones"]);
 
     }
 
@@ -160,28 +160,24 @@ if (!function_exists('invierte_date_time')) {
 
     function valida_readonly($text)
     {
-        if (trim(strlen($text)) > 1) {
-            return "readonly";
-        }
+
+        $response = (trim(strlen($text)) > 1) ? "readonly" : "";
+        return $response;
     }
 
     function get_texto_por_modalidad($modalidad)
     {
 
-        $texto = "VENTAS";
-        if ($modalidad == 1) {
-            $texto = "COMPRAS ";
-        }
-        $texto_modalidad = "TU HISTORIAL DE " . $texto;
-        return $texto_modalidad;
+        $response = ($modalidad == 1) ? " TU HISTORIAL DE COMPRAS " : "TU HISTORIAL DE VENTAS";
+        return $response;
     }
 
     function ver_totalidad_por_modalidad($modalidad, $total)
     {
 
         $icon = icon("fa fa-shopping-bag");
-        $texto_compras = ($modalidad == 1) ? $icon . "TUS VENTAS HASTA EL MOMENTO " . $total : $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
-        return $texto_compras;
+        $resposne = ($modalidad == 1) ? $icon . "TUS VENTAS HASTA EL MOMENTO " . $total : $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
+        return $resposne;
     }
 
     function create_seccion_saldo_pendiente($saldo_pendiente)
@@ -217,7 +213,7 @@ if (!function_exists('invierte_date_time')) {
 
     function get_criterios_busqueda()
     {
-        $criterios = array("RELEVANTE", "RECIENTE");
+        $criterios = ["RELEVANTE", "RECIENTE"];
         $l = "";
         for ($z = 0; $z < count($criterios); $z++) {
             $extra_criterios = [
@@ -280,7 +276,7 @@ if (!function_exists('invierte_date_time')) {
             $comentario = $row["comentario"];
             $recomendaria = $row["recomendaria"];
             $nombre = $row["nombre"];
-            $fecha_registro = $row["fecha_registro"];
+            //$fecha_registro = $row["fecha_registro"];
             $fecha_registro = $row["fecha_registro"];
 
             $config_comentarios = [
@@ -346,19 +342,18 @@ if (!function_exists('invierte_date_time')) {
 
     function get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio)
     {
-        $text = "";
+        $response = "";
         if (count($comentarios) > 5) {
-
 
             if ($numero_valoraciones[0]["num_valoraciones"] > 6) {
 
-                $text = anchor_enid("CARGAR MÁS" . icon("fa fa-chevron-right ir"),
+                $response = anchor_enid("CARGAR MÁS" . icon("fa fa-chevron-right ir"),
                     [
                         "class" => "cargar_mas_valoraciones",
                         "style" => "color:white!important"
                     ]);
             } else {
-                $text = anchor_enid("ESCRIBE UNA RESEÑA " . icon("fa fa-chevron-right ir"),
+                $response = anchor_enid("ESCRIBE UNA RESEÑA " . icon("fa fa-chevron-right ir"),
                     [
                         "class" => "escribir_valoracion",
                         "href" => "../valoracion?servicio=" . $servicio,
@@ -367,7 +362,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
         }
-        return $text;
+        return $response;
     }
 
     function get_posibles_calificaciones($calificacion)
@@ -380,227 +375,23 @@ if (!function_exists('invierte_date_time')) {
             $num_estrella = "estrella_" . $x;
 
 
-            array_push($response, input([
+            $response[] = input([
                 "id" => $id_input,
                 "value" => $x,
                 "class" => 'input-start',
                 "type" => "radio"
-            ]));
+            ]);
 
-
-            array_push($response, label("★",
+            $response[] = label("★",
                 ["class" => 'estrella ' . $num_estrella,
                     "for" => "$id_input",
                     "id" => $x,
                     "title" => $x . " - " . $calificacion[$x]
                 ]
-            ));
+            );
 
         }
         return append_data($response);
-
-
+        
     }
-
-    /*
-    function evalua_acciones_modalidad_anteriores($num_acciones , $modalidad_ventas){
-      $text = "";
-      if($num_acciones > 0){
-        if($modalidad_ventas ==  1){
-          $text = "MIRA TUS ULTIMAS VENTAS";
-          if($num_acciones >1){
-            $text = "MIRA TUS ÚLTIMAS $num_acciones  VENTAS";
-          }
-        }else{
-          $text = "MIRA TUS ÚLTIMAS COMPRAS";
-        }
-      }
-      $config = ["class"=> "a_enid_black ver_mas_compras_o_ventas"];
-      return anchor_enid($text , $config);
-    }
-    */
-
-
-    /*
-
-
-    function carga_imagen_usuario_respuesta($id_usuario){
-
-        return "../imgs/index.php/enid/imagen_usuario/".$id_usuario;
-    }
-
-
-
-
-
-
-
-    function get_texto_usuario($modalidad ,  $param){
-
-      $texto ="";
-
-      if($modalidad == 0){
-          $texto ="TU A - ";
-      }
-      return $texto;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function valida_url_facebook($url_facebook){
-
-      $url ="";
-      if(strlen($url_facebook) > 5){
-
-        $url = "<iframe width='560'
-                height='315'
-                src='". $url_facebook ."'
-                allow='autoplay; encrypted-media' allowfullscreen>
-                </iframe>";
-      }
-      return $url;
-    }
-
-    function valida_url_youtube($url_youtube){
-
-      $url ="";
-      if(strlen($url_youtube)>5){
-        $url = "<iframe width='560'
-                height='315' src='".$url_youtube."'
-                frameborder='0'
-                allow='autoplay; encrypted-media' allowfullscreen>
-                </iframe>";
-      }
-      return $url;
-    }
-
-    function get_direccion_envio($monto_por_liquidar ,
-                                $id_proyecto_persona_forma_pago ,
-                                $proyecto ,
-                                $estado ){
-
-      $lista_info_attr = " info_proyecto= '$proyecto' info_status =  '$estado' ";
-      $btn_config_direccion_envio = "<i  class='black btn_direccion_envio fa fa-bus'
-                                          id='".$id_proyecto_persona_forma_pago."'
-                                      $lista_info_attr >
-                                    ";
-
-      $btn_articulo_enviado = "icon('black fa fa-bus'')
-                                  <span >
-                                    Enviado!
-                                  <span>";
-
-      $btn_direccion_envio = ($monto_por_liquidar <= 0) ? $btn_articulo_enviado :
-      $btn_config_direccion_envio;
-      return $btn_direccion_envio;
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    function get_bnt_retorno($id_perfil){
-
-        if ($id_perfil != 20 ){
-          return "
-          <a  href='#tab_clientes'
-              data-toggle='tab'
-              class='btn_clientes strong  black'>
-              icon('fa fa-chevron-circle-left'>
-
-              Regresar a clientes
-          </a>";
-        }
-    }
-
-
-    function get_nombre_saldo($modulo){
-
-      $nombre_saldo ="Saldo cubierto";
-      if ($modulo ==  "ventas") {
-        $nombre_saldo ="Monto mínimo para arrancar el proyecto";
-      }
-    }
-
-    function get_lista_status($valor_actual){
-
-      $lista_servicios = ["Pendiente", "Proyecto activo y público", "Muestra - público" ];
-      $lista_servicios_val = [0, 1, 2,3];
-
-      $select ="<select class='input-sm form-control' name='status'>";
-
-        for ($z=0; $z <count($lista_servicios); $z++) {
-
-
-          if($valor_actual == $lista_servicios_val[$z] ){
-            $select .="<option value='".$lista_servicios_val[$z]."' selected>
-                          ".$lista_servicios[$z]."
-                       </option>";
-          }else{
-            $select .="<option value='".$lista_servicios_val[$z]."' >
-                          ".$lista_servicios[$z]."
-                       </option>";
-          }
-
-        }
-
-      $select .="</select>";
-      return $select;
-    }
-
-    function get_text_ciclo_facturacion($ciclo){
-
-      $ciclo_facturacion = ["", "Anual","Mensual","Semanal"];
-      return $ciclo_facturacion[$ciclo];
-
-
-    }
-
-    function valida_btn_agregar_servicio($info_recibida ){
-
-      if(isset($info_recibida["usuario_validacion"])) {
-
-        if ($info_recibida["usuario_validacion"] ==  1) {
-
-          $extra_tab ="
-          id='tab_registrar_servicio_persona'
-          href='#tab_registrar_servicio'
-          data-toggle='tab'";
-
-
-
-          return "<button
-                    ".$extra_tab."
-                    class='agregar_proyecto_btn input-sm btn'
-                    id='".$info_recibida["id_persona"]."'
-                    style='background:black!important;'>
-                    +  Agregar servicio
-                  </button>";
-        }
-
-      }
-    }
-
-
-  */
-
 }
