@@ -81,8 +81,8 @@ if (!function_exists('invierte_date_time')) {
 
 			$l5 = li(anchor_enid(icon("fa fa-percent") . "TALLAS", $config4));
 			$list = [$l1, $l2, $l3 . $l4, $l5];
-
 			return ul($list, ["class" => "nav tabs"]);
+
 
 		}
 	}

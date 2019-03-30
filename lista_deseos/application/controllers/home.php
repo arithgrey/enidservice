@@ -47,7 +47,8 @@ class Home extends CI_Controller
 	        $data["js"] = ["lista_deseos/carro_compras.js"];
             $this->principal->show_data_page($data, 'home');
         } else {
-            $this->principal->show_data_page($data, 'home_sin_productos');
+            $response =   get_format_sin_productos();
+            $this->principal->show_data_page($data,  $response , 1);
         }
     }
 	private function add_imagenes($servicios)

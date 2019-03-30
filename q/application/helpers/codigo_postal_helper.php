@@ -2,16 +2,16 @@
 if (!function_exists('invierte_date_time')) {
 
 
-	function create_select_colonia($data, $name, $class, $id, $text_option, $val)
-	{
-		$select = "<select name='" . $name . "'  class='" . $class . "'  id='" . $id . "'> ";
-		$select .= "<option value='0'>Seccione </option>";
-		foreach ($data as $row) {
-			$select .= "<option value='" . $row[$val] . "'>" . $row[$text_option] . " </option>";
-		}
-		$select .= "</select>";
-		return $select;
-	}
+    function create_select_colonia($data, $name, $class, $id, $text_option, $val)
+    {
+        $r[] = "<select name='" . $name . "'  class='" . $class . "'  id='" . $id . "'> ";
+        $r[] = "<option value='0'>Seccione </option>";
+        foreach ($data as $row) {
+            $r[] = "<option value='" . $row[$val] . "'>" . $row[$text_option] . " </option>";
+        }
+        $r[] = "</select>";
+        return append_data($r);
+    }
 
 }
 

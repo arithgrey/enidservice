@@ -12,7 +12,6 @@ class Home extends CI_Controller
 
     function index()
     {
-
         $data = $this->principal->val_session("");
         if (get_param_def($this->input->get(), "transfer") > 0) {
 
@@ -67,6 +66,5 @@ class Home extends CI_Controller
         $q["id_usuario"] = $id_usuario;
         $api = "servicio/alcance_usuario/format/json/";
         return $this->principal->api($api, $q);
-
     }
 }

@@ -5,8 +5,14 @@ if (!function_exists('invierte_date_time')) {
         function get_format_eleccion()
         {
 
-            $r[] = div(icon("fa fa-envelope-o") . " CORREO", ["class" => "easy_select_enid cursor_pointer selector",
-                "id" => 1]);
+            $config = [
+                "class" => "easy_select_enid cursor_pointer selector",
+                "id" => 1
+            ];
+
+            $r[] = div(icon("fa fa-envelope-o") . " CORREO",
+                $config
+            );
 
             $r[] = div(icon("fa fa-whatsapp") . " WHATSAPP", ["class" => "easy_select_enid cursor_pointer selector"
                 ,

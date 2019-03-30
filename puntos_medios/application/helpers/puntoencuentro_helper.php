@@ -215,7 +215,7 @@ if (!function_exists('invierte_date_time')) {
 		$r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro]);
 		*/
 
-		$r[] = br();
+
 		$r[] = guardar("CONTINUAR", ["class" => "top_20"]);
 		$r[] = form_close(place("place_notificacion_punto_encuentro"));
 		return append_data($r);

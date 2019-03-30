@@ -3,32 +3,32 @@ if (!function_exists('invierte_date_time')) {
 
 	function texto_costo_envio_info_publico($flag_envio_gratis, $costo_envio_cliente, $costo_envio_vendedor)
 	{
-		$response = [];
+		$r = [];
 		if ($flag_envio_gratis > 0) {
 
 
-			$response["cliente"] = "ENTREGA GRATIS!";
-			$response["cliente_solo_text"] = "ENTREGA GRATIS!";
-			$response["ventas_configuracion"] = "TU PRECIO YA INCLUYE EL ENVÍO";
+			$r["cliente"] = "ENTREGA GRATIS!";
+			$r["cliente_solo_text"] = "ENTREGA GRATIS!";
+			$r["ventas_configuracion"] = "TU PRECIO YA INCLUYE EL ENVÍO";
 		} else {
-			$response["ventas_configuracion"] = "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO";
+			$r["ventas_configuracion"] = "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO";
 			$text = "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO";
-			$response["cliente_solo_text"] = "MÁS " . $costo_envio_cliente . " MXN DE TU ENTREGA";
-			$response["cliente"] = $text;
+			$r["cliente_solo_text"] = "MÁS " . $costo_envio_cliente . " MXN DE TU ENTREGA";
+			$r["cliente"] = $text;
 		}
-		return $response;
+		return $r;
 	}
 
 	function valida_fecha_entrega($fecha_entrega)
 	{
 
-		$response = 0;
+		$r = 0;
 		$hoy = date("Y-m-d");
 		$dias_entrega = date_difference($hoy, $fecha_entrega);
 		if (strlen($fecha_entrega) == 10 && $dias_entrega >= 0 && $dias_entrega <= 4) {
-			$response = 1;
+			$r = 1;
 		}
-		return $response;
+		return $r;
 	}
 
 	function valida_horario_entrega($horario_entrega)
