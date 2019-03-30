@@ -156,7 +156,6 @@ class Sess extends REST_Controller
 		$api = "recurso/navegacion/format/json/";
 		return $this->principal->api($api, $q);
 	}
-
 	function servicio_POST()
 	{
 

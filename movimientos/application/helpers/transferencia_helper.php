@@ -261,12 +261,5 @@ if (!function_exists('invierte_date_time')) {
 			return ul($list, ["class" => "list-group list-group-flush"]);
 		}
 	}
-	/*
-	if ( ! function_exists('valida_nombre_propietario'))
-	{
-		function valida_nombre_propietario($nombre_persona , $propietario_tarjeta ){
-			return $nombre_persona;
-		}
-	}
-	*/
+
 }

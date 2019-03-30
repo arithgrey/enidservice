@@ -26,6 +26,7 @@ class Home extends CI_Controller
 
             $data["js"] = ["contact/proceso_compra_direccion.js"];
             $this->principal->show_data_page($data, 'preso_deseo_compra');
+
         } else {
 
             $this->load_ubicacion($data, $param);

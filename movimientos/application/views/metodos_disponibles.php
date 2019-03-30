@@ -75,7 +75,6 @@ $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJET
 
 				<?php endif; ?>
 				<?= input_hidden(["name" => "tipo", "value" => $banca]) ?>
-				<?= br() ?>
 				<?= guardar("ASOCIAR" . icon("fa fa-chevron-right")) ?>
 				<?= div(p("Al asociar tu cuenta, podrás transferir tu saldo de 
                                     Enid Service a tu cuenta personal",

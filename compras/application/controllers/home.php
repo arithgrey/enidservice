@@ -29,6 +29,7 @@ class Home extends CI_Controller
 
 		$data = $this->getCssJs($data);
 		$this->principal->show_data_page($data, 'principal');
+
 	}
 
 	private function getCssJs($data)

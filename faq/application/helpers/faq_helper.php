@@ -1,43 +1,48 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-	function valida_format_respuestas_menu($in_session, $lista_categorias){
+    function valida_format_respuestas_menu($in_session, $lista_categorias)
+    {
 
 
-		$response =  "";
-		if ($in_session > 0){
-			$response =  div(get_form_respuesta($lista_categorias) ,[ "class"=>"tab-pane fade" , "id"=>"tab2default"]);
-		}
-		return $response;
+        $response = "";
+        if ($in_session > 0) {
+            $response = div(get_form_respuesta($lista_categorias), ["class" => "tab-pane fade", "id" => "tab2default"]);
+        }
+        return $response;
 
-	}
+    }
 
-    function get_format_faqs($flag_categoria , $flag_busqueda_q, $categorias_publicas_venta, $categorias_temas_de_ayuda, $faqs_categoria, $respuesta, $in_session, $perfil){
+    function get_format_faqs($flag_categoria, $flag_busqueda_q, $categorias_publicas_venta, $categorias_temas_de_ayuda, $faqs_categoria, $respuesta, $in_session, $perfil)
+    {
 
 
         $r = [];
         if ($flag_categoria < 1 && $flag_busqueda_q < 1) {
 
-            $r[] =  get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda);
+            $r[] = get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda);
         }
         if ($flag_categoria > 0) {
-            $r[] =  get_format_faq_categorias($faqs_categoria);
+            $r[] = get_format_faq_categorias($faqs_categoria);
         }
         if ($flag_busqueda_q > 0) {
-            $r[] =  get_formar_respuesta($respuesta, $in_session, $perfil);
+            $r[] = get_formar_respuesta($respuesta, $in_session, $perfil);
         }
         return append_data($r);
 
     }
-    function get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda){
 
-        $r[] =  heading_enid("LO MÁS BUSCADO", 2);
-        $r[] =  div(lista_categorias($categorias_publicas_venta));
-        $r[] =  place("place_categorias_extras");
-        $r[] =  div(lista_categorias($categorias_temas_de_ayuda));
+    function get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda)
+    {
+
+        $r[] = heading_enid("LO MÁS BUSCADO", 2);
+        $r[] = div(lista_categorias($categorias_publicas_venta));
+        $r[] = place("place_categorias_extras");
+        $r[] = div(lista_categorias($categorias_temas_de_ayuda));
         return append_data($r);
 
     }
+
     function get_form_respuesta($lista_categorias)
     {
 
@@ -67,6 +72,7 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
+
     function get_format_faq_categorias($faqs_categoria)
     {
 
@@ -155,20 +161,18 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = "";
-        if ($in_session == 1) {
 
-            if ($perfil != 20 && $perfil != 19 && $perfil != 17) {
-                $response = anchor_enid(icon("fa fa-plus-circle") . "AGREGAR",
-                    [
-                        "href" => "#tab2default",
-                        "id" => "enviados_a_validacion",
-                        "data-toggle" => "tab",
-                        "class" => "btn_registro_respuesta "
-                    ]);
-
-            }
+        if ($in_session == 1 && $perfil != 20 && $perfil != 19 && $perfil != 17) {
+            $response = anchor_enid(icon("fa fa-plus-circle") . "AGREGAR",
+                [
+                    "href" => "#tab2default",
+                    "id" => "enviados_a_validacion",
+                    "data-toggle" => "tab",
+                    "class" => "btn_registro_respuesta "
+                ]);
 
         }
+
         return $response;
     }
 
