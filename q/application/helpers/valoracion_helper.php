@@ -12,8 +12,8 @@ if (!function_exists('invierte_date_time')) {
             $email = $extra["email"];
         }
 
-        $r[] = heading_enid("ESCRIBE UNA RESEÑA", 3, ["class" => "3em"]);
-        $r[] = div("Sobre  " . $servicio[0]["nombre_servicio"], ["style" => "font-size: 1.4em"]);
+        $r[] = heading_enid("ESCRIBE UNA RESEÑA", 3);
+        $r[] = div("Sobre  " . $servicio[0]["nombre_servicio"]);
         $r[] = form_open("", ["class" => "form_valoracion"]);
         $r[] = place("nuevo");
         $r[] = get_btw(
@@ -132,15 +132,17 @@ if (!function_exists('invierte_date_time')) {
     function get_title_valoraciones($id_usuario)
     {
 
-        $a = anchor_enid("MÁS SOBRE EL VENDEDOR" . icon("fa fa-chevron-right ir"),
+        $r[] =  heading_enid("VALORACIONES Y RESEÑAS", 3);
+        $r[] =  div(anchor_enid("MÁS SOBRE EL VENDEDOR" . icon("fa fa-chevron-right ir"),
             [
-                "class" => "a_enid_black",
+                "class" => "a_enid_black hover_padding",
                 "href" => "../recomendacion/?q=" . $id_usuario,
                 "style" => "color: white!important"
-            ]);
+            ]),["class"=> "mt-5 mb-5"]);
 
-        $h = append_data([heading_enid("VALORACIONES Y RESEÑAS", 2, ["class" => "strong"]), $a]);
-        return addNRow($h, ["id" => "opiniones"]);
+
+        $response = append_data($r);
+        return $response;
 
     }
 
@@ -214,22 +216,23 @@ if (!function_exists('invierte_date_time')) {
     function get_criterios_busqueda()
     {
         $criterios = ["RELEVANTE", "RECIENTE"];
-        $l = "";
+        $l = [];
         for ($z = 0; $z < count($criterios); $z++) {
             $extra_criterios = [
-                "class" => 'criterio_busqueda ordenar_valoraciones_button',
+                "class" => 'criterio_busqueda ordenar_valoraciones_button col-lg-6 padding_5 border ',
                 "id" => $z
             ];
             if ($z == 0) {
+
                 $extra_criterios = [
-                    "style" => 'padding:8px;background:#002753;color:white',
-                    "class" => 'criterio_busqueda ordenar_valoraciones_button',
+                    "style" => 'background:#04013c;color:white',
+                    "class" => 'criterio_busqueda ordenar_valoraciones_button col-lg-6 padding_5 white',
                     "id" => $z
                 ];
             }
-            $l .= get_td($criterios[$z], $extra_criterios);
+            $l[] = div($criterios[$z], $extra_criterios);
         }
-        return $l;
+        return div(append_data($l),["class"=> "top_20 bottom_20"]);
     }
 
     function crea_resumen_valoracion($numero_valoraciones, $persona = 0)
@@ -280,7 +283,7 @@ if (!function_exists('invierte_date_time')) {
             $fecha_registro = $row["fecha_registro"];
 
             $config_comentarios = [
-                "class" => 'contenedor_valoracion_info',
+                "class" => 'contenedor_valoracion_info ',
                 "numero_utilidad" => $num_util,
                 "fecha_info_registro" => $fecha_registro
             ];
@@ -292,12 +295,9 @@ if (!function_exists('invierte_date_time')) {
             $lista_comentario .= div($comentario, ["class" => 'comentario_valoracion']);
 
             if ($recomendaria == 1) {
-                $lista_comentario .= div(icon("fa fa-check-circle") . "Recomiendo este producto",
-                    ["class" => 'recomendaria_valoracion']);
+                $lista_comentario .= div(icon("fa fa-check-circle") . "Recomiendo este producto", ["class" => 'recomendaria_valoracion strong', "style"=> "color:#02071a"]);
             }
-            $lista_comentario .= div($nombre . "- " . $fecha_registro, ["class" => 'nombre_comentario_valoracion']);
-            //$function_valoracion_funciona = 'onclick="agrega_valoracion_respuesta(' . $id_valoracion . ' , 1)"';
-            //$function_valoracion_NO_funciona = 'onclick="agrega_valoracion_respuesta(' . $id_valoracion . ' , 0)"';
+            $lista_comentario .= div($nombre . br(). $fecha_registro, ["class" => 'nombre_comentario_valoracion']);
             $texto_valoracion = "";
             if ($respuesta_valorada == $id_valoracion) {
                 $texto_valoracion = div("Recibimos tu valoracion! ", ["class" => 'text_recibimos_valoracion']);
@@ -306,14 +306,14 @@ if (!function_exists('invierte_date_time')) {
 
             $btn_es_util = anchor_enid("SI" . span("[" . $num_util . "]", ["class" => 'num_respuesta']),
                 [
-                    "class" => 'respuesta_util respuesta_ok valorar_respuesta',
+                    "class" => 'respuesta_util respuesta_ok valorar_respuesta mr-4 blue_enid',
                     "id" => $id_valoracion,
                     "onclick" => "agrega_valoracion_respuesta('" . $id_valoracion . "' , 1)"
                 ]);
 
             $btn_no_util = anchor_enid("NO" . span("[" . $num_no_util . "]", ["class" => 'num_respuesta']),
                 [
-                    "class" => 'respuesta_no valorar_respuesta',
+                    "class" => 'respuesta_no valorar_respuesta mr-4 blue_enid',
                     "id" => $id_valoracion,
                     "onclick" => "agrega_valoracion_respuesta('" . $id_valoracion . "' , 0)"
                 ]);
@@ -323,7 +323,7 @@ if (!function_exists('invierte_date_time')) {
                             <div class='contenedor_utilidad'>
                               <table>
                                 <tr>
-                                  " . get_td(span("¿Te ha resultado útil?", ['class' => 'strong'])) . "
+                                  " . get_td(heading_enid("¿Te ha resultado útil?",5 ,["class"=> "letter-spacing-5 strong"])) . "
                                   " . get_td($btn_es_util . $btn_no_util) . "
                                 </tr>
                                 <tr>

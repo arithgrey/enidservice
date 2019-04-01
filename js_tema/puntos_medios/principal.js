@@ -15,7 +15,7 @@ $(document).ready(function () {
 });
 let muestra_estaciones = function () {
 
-
+    $(".titulo_punto_encuentro").hide();
     $(".tipos_puntos_encuentro").hide();
     let id = get_parameter_enid($(this), "id");
     let nombre_linea = get_parameter_enid($(this), "nombre_linea");

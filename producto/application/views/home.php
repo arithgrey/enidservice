@@ -18,7 +18,7 @@ $entregas_en_casa = 0;
 $telefono_visible = 0;
 $venta_mayoreo = 0;
 $url_ml = "";
-$deseado =  "";
+$deseado = "";
 foreach ($info_servicio["servicio"] as $row) {
 
     $id_servicio = $row["id_servicio"];
@@ -42,7 +42,7 @@ foreach ($info_servicio["servicio"] as $row) {
     $venta_mayoreo = $row["venta_mayoreo"];
     $url_ml = $row["url_ml"];
     $contra_entrega = $row["contra_entrega"];
-    $deseado =  $row["deseado"];
+    $deseado = $row["deseado"];
 
 }
 
@@ -59,28 +59,26 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 
 
 ?>
-<?=n_row_12()?>
+<?= n_row_12() ?>
     <div class="product-detail contenedor_info_producto mt-5">
-        <div class="col-lg-9">
-            <div class="col-lg-7 col-sm-12">
-                <div class="left-col contenedor_izquierdo">
-                    <?= div($imagenes["preview"], ["class" => "thumbs"]) ?>
-                    <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
-                </div>
-            </div>
-            <div class="col-lg-5 d-flex flex-column justify-content-center align-content-between contenedor_central_producto" style="height: 400px;">
-                <!--<div class="contenedor_central_info">-->
-                    <?= get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web) ?>
-                <!--</div>-->
-            </div>
+        <div class="col-lg-6 left-col contenedor_izquierdo">
+
+            <?=n_row_12()?>
+                <?= div($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"]) ?>
+                <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
+            <?=end_row()?>
+
         </div>
-        <div class="col-lg-3 p-5 border" >
+        <div class="col-lg-3">
+            <?= get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web) ?>
+        </div>
+        <div class="col-lg-3  border shadow">
             <?php if ($flag_servicio < 1): ?>
                 <?php if ($existencia > 0): ?>
                     <!--<div class="info-venta">-->
-                        <?= get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
-                            $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
-                            $telefono_visible, $usuario, $venta_mayoreo, $deseado) ?>
+                    <?= get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
+                        $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
+                        $telefono_visible, $usuario, $venta_mayoreo, $deseado) ?>
                     <!---</div>-->
                 <?php else: ?>
                     <?= get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio) ?>
@@ -107,16 +105,17 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
                 </div>
             <?php endif; ?>
         </div>
+
+
     </div>
-<?=end_row()?>
-<?=hr(["class"=> "mr-50 mb-5"])?>
-<?= addNRow(div(get_descripcion_servicio($descripcion, $flag_servicio), ["class" => "col-lg-10 col-lg-offset-1"])) ?>
-<?= div("", ["id" => "video"]) ?>
-<?= addNRow(div(valida_url_youtube($url_vide_youtube, $is_mobile), ["class" => "col-lg-10 col-lg-offset-1"])) ?>
+<?= end_row() ?>
 
-<?= addNRow(place("separador")) ?>
+<?= hr(["class" => "mr-50 mb-5"]) ?>
 
-<?= addNRow(div(place("place_valoraciones"), ["class" => "col-lg-10 col-lg-offset-1", "style" => "background: white;"]), ["style" => "background: #002693;"]) ?>
+<?= get_descripcion_servicio($descripcion, $flag_servicio, $url_vide_youtube, $is_mobile) ?>
+
+
+<?= place("place_valoraciones col-lg-12") ?>
 
 <?= addNRow(div(place("place_tambien_podria_interezar"), ["class" => "col-lg-10 col-lg-offset-1", "style" => "background: white;"])) ?>
 <?= input_hidden(["class" => "qservicio", "value" => $nombre_servicio]) ?>

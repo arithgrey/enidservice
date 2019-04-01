@@ -20,12 +20,17 @@ if (!function_exists('invierte_date_time')) {
         $url_img_servicio = $servicio["url_img_servicio"];
 
 
-        $config = [
+        $p[] =
+            img([
             'src' => $url_img_servicio,
             'alt' => $metakeyword,
-        ];
+                'style'=> "max-height: 270px !important",
+                'class'=> "padding_5 top_10 hover_padding"
+        ]);
 
-        $p[] = div(img($config), 1);
+
+
+
 
 
         if ($in_session > 0) {
@@ -37,9 +42,16 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        $r = anchor_enid(append_data($p), ["href" => get_url_servicio($id_servicio)]);
-        $bloque_producto = div($r, ["class" => "producto_enid d-flex flex-column justify-content-center"]);
-        return $bloque_producto;
+        $response = anchor_enid(
+            append_data($p),
+            [
+                "href" => get_url_servicio($id_servicio) ,
+                "class" => "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 "
+
+            ]
+        );
+
+        return $response;
 
     }
 

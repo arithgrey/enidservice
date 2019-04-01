@@ -556,12 +556,16 @@ let randomString = function(len, charSet) {
 /*Recorre a sección*/
 let recorrepage = function (contenedor = 0) {
 
-    let l =  contenedor.length;
-    if ( l > 2) {
-        $('html, body').animate({scrollTop: $(contenedor).offset().top - 100}, 'slow');
-    } else {
-        $('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top - 100}, 'slow');
+    if($(contenedor).val()!=  undefined){
+        let l =  contenedor.length;
+        if ( l > 2) {
+            $('html, body').animate({scrollTop: $(contenedor).offset().top - 100}, 'slow');
+        } else {
+            $('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top - 100}, 'slow');
+        }
     }
+
+
 };
 let transforma_mayusculas = function (x) {
     let text = x.value;

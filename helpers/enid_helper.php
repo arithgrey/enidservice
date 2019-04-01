@@ -124,9 +124,32 @@ if (!function_exists('div')) {
     function div($info, $attributes = '', $row = 0)
     {
 
-        if ($attributes == 1) {
+        if (is_numeric($attributes)) {
 
-            return addNRow($info);
+            switch ($attributes) {
+                case 1:
+                    return addNRow($info);
+                    break;
+                case 2:
+                    return "<div class='row'>" . $info . "</div>";
+                    break;
+                case 3:
+                    return "<div class='col-lg-3'>" . $info . "</div>";
+                    break;
+                case 4:
+                    return "<div class='col-lg-4'>" . $info . "</div>";
+                    break;
+                case 5:
+                    return "<div class='col-lg-5'>" . $info . "</div>";
+                    break;
+                case 6:
+                    return "<div class='col-lg-6'>" . $info . "</div>";
+                    break;
+                case 8:
+                    return "<div class='col-lg-8'>" . $info . "</div>";
+                    break;
+
+            }
 
         } else {
             $base = "<div" . add_attributes($attributes) . ">" . $info . "</div>";
@@ -137,8 +160,16 @@ if (!function_exists('div')) {
     }
 }
 if (!function_exists('input')) {
-    function input($attributes = '', $e = 0)
+    function input($attributes = [], $e = 0)
     {
+
+
+        if(array_key_exists("class" , $attributes)){
+            $attributes["class"] = $attributes["class"]. " form-control ";
+        }else{
+            $attributes["class"]= " form-control ";
+        }
+
         $attr = add_attributes($attributes);
         if ($e == 0) {
             return "<input " . $attr . " >";
@@ -269,9 +300,16 @@ if (!function_exists('heading_enid')) {
     function heading_enid($data = '', $h = 1, $attributes = '', $row_12 = 0)
     {
 
-        $label = "<h$h " . add_attributes($attributes) . ">" . $data . "</h$h>";
-        $e = ($row_12 > 0) ? addNRow($label) : $label;
-        return $e;
+        if (is_numeric($attributes) && $attributes > 0) {
+            $label = "<h$h>" . $data . "</h$h>";
+            $e = addNRow($label);
+            return $e;
+        } else {
+            $label = "<h$h " . add_attributes($attributes) . ">" . $data . "</h$h>";
+            $e = ($row_12 > 0) ? addNRow($label) : $label;
+            return $e;
+        }
+
 
     }
 }
@@ -987,8 +1025,16 @@ if (!function_exists('debug')) {
 }
 
 if (!function_exists('textarea')) {
-    function textarea($attributes = '', $row_12 = 0, $def = '')
+    function textarea($attributes = [], $row_12 = 0, $def = '')
     {
+
+        $attributes["rows"] = "5";
+
+        if (array_key_exists("class", $attributes)) {
+            $attributes["class"] = $attributes["class"] . " form-control rounded-0";
+        } else {
+            $attributes["class"] = " form-control rounded-0";
+        }
         $base = "<textarea " . add_attributes($attributes) . " ></textarea>";
         $e = ($row_12 == 0) ? $base : addNRow($base);
         return $e;
@@ -1175,28 +1221,28 @@ if (!function_exists('lista_horarios')) {
     }
 }
 if (!function_exists('get_url_servicio')) {
-    function get_url_servicio($id_servicio , $n=0 )
+    function get_url_servicio($id_servicio, $n = 0)
     {
 
-    	if ($n >  0 ){
+        if ($n > 0) {
 
-		    return "../img_tema/productos/" . $id_servicio;
+            return "../img_tema/productos/" . $id_servicio;
 
-	    }else{
+        } else {
 
-		    return "../producto/?producto=" . $id_servicio;
-	    }
+            return "../producto/?producto=" . $id_servicio;
+        }
 
 
     }
 }
 if (!function_exists('get_img_servicio')) {
-    function get_img_servicio($id, $external  = 0 )
+    function get_img_servicio($id, $external = 0)
     {
-	    $url = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
-		if ($external >  0 ){
-			$url = "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id;
-		}
+        $url = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
+        if ($external > 0) {
+            $url = "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id;
+        }
 
 
         $id_error = "imagen_" . $id;
@@ -1206,9 +1252,9 @@ if (!function_exists('get_img_servicio')) {
             'class' => 'imagen-producto'
         ];
 
-        if($external < 1 ){
+        if ($external < 1) {
 
-	        $img['onerror'] = "reloload_img( '" . $id_error . "','" . $url . "', 1);";
+            $img['onerror'] = "reloload_img( '" . $id_error . "','" . $url . "', 1);";
         }
 
         return img($img);
@@ -1268,39 +1314,38 @@ if (!function_exists('get_menu_session')) {
         if ($in_session < 1) {
 
 
-	        $text =  get_btw(
-		        div("Vender", ["style"=> "font-size:.8em;"]),
-		        icon("fa fa-shopping-cart", ["style"=> "margin-left:5px;font-size:1.1em;"]),
-		        "display_flex_enid"
+            $text = get_btw(
+                div("Vender", ["style" => "font-size:.8em;"]),
+                icon("fa fa-shopping-cart", ["style" => "margin-left:5px;font-size:1.1em;"]),
+                "display_flex_enid"
 
-	        );
-
-
-	        $vender = anchor_enid($text,
-		        [
-			        "href" => "../login/?action=nuevo",
-			        "class" => ' white text-uppercase letter-spacing-15',
-
-		        ]
-	        );
+            );
 
 
+            $vender = anchor_enid($text,
+                [
+                    "href" => "../login/?action=nuevo",
+                    "class" => ' white text-uppercase letter-spacing-15',
 
-	        $text =  get_btw(
-		        div(" Iniciar sesión ", ["style"=> "font-size:.8em;"]),
-		        icon("fa fa-user", ["style"=> "margin-left:5px;font-size:1.1em;"]),
-		        "display_flex_enid"
-
-	        );
-	        $l_session = anchor_enid($text,
-		        [
-		        	"href" => "../login",
-			        "class" => " white text-uppercase letter-spacing-15"
-		        ]
-	        );
+                ]
+            );
 
 
-            $list = div(append_data([$vender,$l_session]),["class"=> "display_flex_enid"]);
+            $text = get_btw(
+                div(" Iniciar sesión ", ["style" => "font-size:.8em;"]),
+                icon("fa fa-user", ["style" => "margin-left:5px;font-size:1.1em;"]),
+                "display_flex_enid"
+
+            );
+            $l_session = anchor_enid($text,
+                [
+                    "href" => "../login",
+                    "class" => " white text-uppercase letter-spacing-15"
+                ]
+            );
+
+
+            $list = div(append_data([$vender, $l_session]), ["class" => "display_flex_enid"]);
 
             if ($proceso_compra < 1) {
                 return div(ul($list, ["class" => "largenav "]), ["class" => "text-right"]);
@@ -1312,11 +1357,11 @@ if (!function_exists('get_menu_session')) {
     }
 }
 if (!function_exists('get_btw')) {
-    function get_btw($a, $b, $class = '', $row=0)
+    function get_btw($a, $b, $class = '', $row = 0)
     {
-        $response =  div(append_data([$a, $b]), ["class" => $class]);
-        if ($row > 0){
-	        $response =  div(div(append_data([$a, $b]), ["class" => $class] ) , ["class"=> "row"]);
+        $response = div(append_data([$a, $b]), ["class" => $class]);
+        if ($row > 0) {
+            $response = div(div(append_data([$a, $b]), ["class" => $class]), ["class" => "row"]);
         }
         return $response;
     }
@@ -1395,19 +1440,20 @@ if (!function_exists('get_format_izquierdo')) {
 
 }
 if (!function_exists('get_img_serv')) {
-	function get_img_serv($img){
+    function get_img_serv($img)
+    {
 
-		$path =  "";
-		if (is_array($img) && count($img) >  0){
+        $path = "";
+        if (is_array($img) && count($img) > 0) {
 
-			$nombre_imagen =  $img[0]["nombre_imagen"];
-			$path =  get_url_servicio($nombre_imagen , 1);
+            $nombre_imagen = $img[0]["nombre_imagen"];
+            $path = get_url_servicio($nombre_imagen, 1);
 
-		}
-		return $path;
+        }
+        return $path;
 
 
-	}
+    }
 }
 
 

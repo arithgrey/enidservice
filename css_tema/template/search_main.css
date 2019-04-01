@@ -1,5 +1,5 @@
 .text_filtro{
-    background-color: #090323;
+
     -webkit-box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.16);
     -moz-box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.16);
     box-shadow: 3px 3px 0px 0px rgba(33, 59, 254, 0.16);
@@ -103,4 +103,3 @@
 
     }
 }
-

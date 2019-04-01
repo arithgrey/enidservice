@@ -89,11 +89,13 @@
     font-weight: bold;
 }
 .tiempo_entrega_promedio{
+
     letter-spacing: 3px;
+    line-height: 1.9em;
+
+
 }
-.contenedor_central_producto .row{
-    margin-top: 30px!important;
-}
+
 .informacion_vendedor_descripcion{
     text-transform: uppercase;
     text-justify: auto;

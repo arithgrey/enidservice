@@ -40,7 +40,7 @@ class Home extends CI_Controller
 		$data_send["id_clasificacion"] = $param["id_clasificacion"];
 		$data_send["extra"] = $param;
 		$data_send["order"] = get_param_def($param, "order", 11, 1);
-		$per_page = 8;
+		$per_page = 20;
 		$data_send["resultados_por_pagina"] = $per_page;
 		$data_send["agrega_clasificaciones"] = 1;
 		$data_send["in_session"] = 0;

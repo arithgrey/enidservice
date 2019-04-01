@@ -4,7 +4,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('validate_text_title')) {
         function validate_text_title($in_session, $is_mobile)
         {
-            $text = ($in_session == 0 && $is_mobile == 0) ? heading_enid("QUIEN ERES", 2) : "";
+            $text = ($in_session == 0 && $is_mobile == 0) ? heading_enid("¿QUIEN ERES?",3) : "";
             return $text;
         }
 
@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
             if ($in_session < 1) {
 
             	$x[] = get_btw(
-                    div("Nombre *")
+                    div("Nombre *" )
                     ,
                     div(input([
                         "name" => "nombre",
@@ -84,7 +84,7 @@ if (!function_exists('invierte_date_time')) {
 
                     ]),
                     [
-                        'class' => "usuario_existente black_enid_background padding_1 white top_20 enid_hide"
+                        'class' => "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
                     ],
                     1);
 
@@ -105,14 +105,15 @@ if (!function_exists('invierte_date_time')) {
 
         function get_format_resumen($resumen_producto, $text_envio, $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session)
         {
-            $r[] = heading_enid(
+            $r[] = div(heading_enid(
                 'RESUMEN DE TU PEDIDO' . icon("fa fa-shopping-bag")
                 ,
                 2,
-                ['class' => 'strong']
-            );
-            $r[] = div($resumen_producto, 1);
-            $r[] = div($text_envio, 1);
+                ['class' => ' letter-spacing-5']
+            ),1);
+
+            $r[] = div($resumen_producto, ["class"=> "mt-3"],1);
+            $r[] = div($text_envio, ["class"=> "mt-3"],1);
             $r[] = input_hidden([
                 "name" => "resumen_producto",
                 "class" => "resumen_producto",
@@ -125,7 +126,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = div("Precios expresados en Pesos Mexicanos.", ["class" => "bottom_10"]);
 
 
-            $r[] = div(append_data($x), ["class" => "text-right"]);
+            $r[] = div(append_data($x), ["class" => "text-right top_20"]);
 
 
             if ($in_session > 0){
@@ -286,13 +287,13 @@ if (!function_exists('invierte_date_time')) {
                     "is_servicio" => $is_servicio,
                     "q2" => $q2,
                     "num_ciclos" => $num_ciclos,
-                    "class" => "link_acceso cursor_pointer"
+                    "class" => "link_acceso cursor_pointer    white  padding_10 link_acceso cursor_pointer text-center col-lg-4 col-lg-offset-4 text-center text-uppercase letter-spacing-10  top_30 mb-5 white bg_black"
                 ];
 
 
-            $text = heading_enid('¿Ya tienes una cuenta? ', 3);
+            $text = heading_enid("¿Ya tienes una cuenta? ", 3, ["class" => " text_usuario_registrado_pregunta text-center text-uppercase letter-spacing-10"]);
             $text .= div("ACCEDE AHORA!", $extra, 1);
-            return div($text, ["class" => "informacion_extra"]);
+            return $text;
 
         }
     }

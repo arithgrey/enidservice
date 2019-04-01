@@ -127,7 +127,11 @@ if (!function_exists('invierte_date_time')) {
 		$r[] = get_tienda_vendedor($proceso_compra, $id_publicador);
 		$r[] = place("", ["style" => "border: solid 1px"]);
 
-		return div(append_data($r), 1);
+		return div(append_data($r),
+            [
+                "class"=>" d-flex flex-column justify-content-between ",
+                "style"=> "height: 450px;"
+            ],1);
 
 	}
 
@@ -146,7 +150,7 @@ if (!function_exists('invierte_date_time')) {
 					img(
 						[
 							"src" => $url_imagen_servicio,
-							"class" => "col-lg-2 "
+							"class" => "col-lg-2 col-lg-offset-5"
 						]
 					)
 			);
@@ -370,15 +374,29 @@ if (!function_exists('invierte_date_time')) {
 		}
 	}
 	if (!function_exists('get_descripcion_servicio')) {
-		function get_descripcion_servicio($descripcion, $flag_servicio)
+		function get_descripcion_servicio($descripcion, $flag_servicio , $url_vide_youtube, $is_mobile )
 		{
 
 			$servicio = ($flag_servicio == 1) ? "SOBRE EL SERVICIO" : "SOBRE EL PRODUCTO";
+			$r =  [];
 			if (strlen(trim(strip_tags($descripcion))) > 10) {
-				$text = heading_enid($servicio, 2, ["class" => 'titulo_sobre_el_producto strong']);
-				$text .= div(p(strip_tags($descripcion)));
-				return $text;
+
+			    $r[] = div("", ["id" => "video"] , 1);
+				$x[] = heading_enid($servicio, 3, ["class" => 'titulo_sobre_el_producto letter-spacing-10']);
+                $x[] = div(strip_tags($descripcion) , ["class"=> "mt-5"]);
+
+                $text =  div(append_data($x),
+                    [
+                        "class"=> "d-flex flex-column justify-content-center sobre_el_producto"
+                    ]
+                );
+                $r[]  =  div($text  , 6);
+                $r[] = div(valida_url_youtube($url_vide_youtube, $is_mobile),6);
+
 			}
+            $response =  append_data($r);
+			return addNRow($response);
+
 		}
 
 	}
@@ -577,7 +595,7 @@ if (!function_exists('invierte_date_time')) {
 				$preview[] = div(img([
 					'src' => $url,
 					'alt' => $nombre_servicio,
-					'class' => 'imagen-producto'
+					'class' => 'imagen-producto border border padding_5 top_10 bg_white shadow  rounded hover_padding'
 				]),
 					[
 						'id' => $z,

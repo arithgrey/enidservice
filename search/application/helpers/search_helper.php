@@ -83,7 +83,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 		foreach ($lista_productos as $row) {
-			$response[] = div(div($row,["class"=> "border-bottom mt-3"],1), ["class" => 'col-lg-3']);
+			$response[] = $row;
 
 		}
 		return append_data($response);
