@@ -1,5 +1,3 @@
-<?= div(div("ABRIR SOLICITUD", ["class" => "titulo_enid"]), ["class" => "col-lg-6 col-lg-offset-3"]) ?>
-	<div class="col-lg-6 col-lg-offset-3 top_50" >
-		<?=get_form_ticket($departamentos)?>
-	</div>
+<?= div(div("ABRIR SOLICITUD", ["class" => "titulo_enid"]), 6,1 ) ?>
+<?= div(get_form_ticket($departamentos), 6, 1) ?>
 <?= place("place_registro_ticket") ?>

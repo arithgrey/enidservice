@@ -37,6 +37,6 @@
             </tr>
         </table>
         <?= guardar("SOLICITAR SALDO", ["class" => "btn_solicitud_saldo"]) ?>
-    </form>
-    <?= place("place_solicitud_amigo") ?>
+        <?= form_close(place("place_solicitud_amigo")) ?>
+
 </div>

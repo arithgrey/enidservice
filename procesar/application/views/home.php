@@ -27,7 +27,6 @@ $talla = (array_key_exists("talla", $info_solicitud_extra)) ? $info_solicitud_ex
 <?= n_row_12() ?>
 <div class="col-lg-6 col-lg-offset-3">
 <?= place("info_articulo", ["id" => 'info_articulo']) ?>
-
     <div class="contenedor_compra">
         <div class="contenedo_compra_info">
             <?= get_format_resumen($resumen_producto, $text_envio, $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session) ?>

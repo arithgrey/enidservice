@@ -9,6 +9,7 @@
         "nombreperfil",
         "idperfil") ?>
 </div>
+
 <div class='col-lg-9'>
     <div class="tab-content">
 

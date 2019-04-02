@@ -69,7 +69,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 			$r[] = div(append_data($x), ["class" => "col-lg-3"]);
-			$r[] = div(place("place_ventas_usuario") ,["class" => "col-lg-9"]);
+			$r[] = div(place("place_ventas_usuario") ,9);
 
 			return div(append_data($r), ["class" => "text-center"]);
 

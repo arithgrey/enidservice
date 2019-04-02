@@ -13,9 +13,8 @@ if (!function_exists('invierte_date_time')) {
 			);
 			$r[] = div(get_format_user($usuario), ["class" => "page-header menu_info_usuario"]);
 			$r[] = div("Mantén la calma esta información será solo será visible si tú lo permites ", ['class' => 'registro_telefono_usuario_lada_negocio blue_enid_background2 white padding_1'], 1);
-
 			$x[] = div(append_data($r), ["class" => "col-lg-8"]);
-			$x[] = div(get_format_resumen_cuenta($usuario), ["class" => "col-lg-4"]);
+			$x[] = div(get_format_resumen_cuenta($usuario), 4);
 			return append_data($x);
 		}
 	}

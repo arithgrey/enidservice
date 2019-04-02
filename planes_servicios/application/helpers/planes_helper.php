@@ -45,8 +45,8 @@ if (!function_exists('invierte_date_time')) {
 		function get_format_busqueda($list_orden)
 		{
 
-			$r[] = div("BUSCAR ENTRE TUS ARTÍCULOS", ["class" => "col-lg-4"]);
-			$r[] = div(get_list_orden($list_orden), ["class" => "col-lg-4"]);
+			$r[] = div("BUSCAR ENTRE TUS ARTÍCULOS", 4);
+			$r[] = div(get_list_orden($list_orden), 4);
 			$r[] = div(input([
 				"id" => "textinput",
 				"name" => "textinput",
@@ -54,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
 				"class" => "form-control input-sm q_emp",
 				"onkeyup" => "onkeyup_colfield_check(event);"
 			]),
-				["class" => "col-lg-4"]);
+				4);
 			return append_data($r);
 
 		}

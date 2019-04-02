@@ -1,6 +1,18 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    if (!function_exists('get_format_proceso_compra')) {
+        function get_format_proceso_compra()
+        {
+
+            $r[] = div(heading_enid("¿Quieres aparta tu pedido?", 2, ["class" => "strong"]), ["class" => "col-lg-10 col-lg-offset-1"]);
+            $r[] = div(get_selector_direccion(), ["class" => "col-lg-10 col-lg-offset-1"]);
+            return append_data($r);
+
+
+        }
+    }
     if (!function_exists('get_format_eleccion')) {
         function get_format_eleccion()
         {

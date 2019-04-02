@@ -12,10 +12,11 @@
             , "Términos y condiciones de uso del sitio"])
 
     ]),
-        ["class" => "col-lg-3"]) ?>
+        3) ?>
 
     <div class="col-lg-9">
         <?= heading_enid($titulo) ?>
         <?= $this->load->view($vista); ?>
     </div>
+
 </div>

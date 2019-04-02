@@ -9,10 +9,9 @@
 			<?= $this->load->view("../../../view_tema/social_enid") ?>
 		</div>
 	</div>
-	<?= div("", ["class" => "col-lg-9"]) ?>
+    <?=div("",9)?>
 </section>
 <section style='background:#0012dd !important;'>
-	<?= div(format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono),
-		["class" => "container inner", "id" => "direccion"]) ?>
+	<?= div(format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono), ["class" => "container inner", "id" => "direccion"]) ?>
 </section>
 <?= input_hidden(["value" => $ubicacion, "class" => "ubicacion"]) ?>

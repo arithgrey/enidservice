@@ -17,14 +17,12 @@
         ?>
 
         <div class="contenedor_articulo">
-            <div class="col-lg-3">
-                <?= img([
-                    "src" => $url_imagen_servicio,
-                    "id" => $id_error,
-                    "onerror" => "reloload_img( '" . $id_error . "','" . $url_imagen_servicio . "');",
-                    "class" => 'imagen_articulo'
-                ]) ?>
-            </div>
+            <?= div(img([
+                "src" => $url_imagen_servicio,
+                "id" => $id_error,
+                "onerror" => "reloload_img( '" . $id_error . "','" . $url_imagen_servicio . "');",
+                "class" => 'imagen_articulo'
+            ]), 3) ?>
             <div class="col-lg-9">
                 <div class="contenedor_articulo_text">
                     <?= append_data(

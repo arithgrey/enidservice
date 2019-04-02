@@ -646,7 +646,7 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] = heading_enid("AGREGAR IMAGENES", 3, ["class" => "titulo_agregar_imagenes"], 1);
         $x[] = place("place_img_producto");
-        $r[] = div(append_data($x), ["class" => "col-lg-4 col-lg-offset-4"]);
+        $r[] = div(append_data($x), 1,4);
         return div(append_data($r), ["class" => "contenedor_agregar_imagenes"]);
 
     }

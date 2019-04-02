@@ -53,7 +53,7 @@ if (is_array($ordenes)) {
 					),
 					["class" => "contenedor_articulo_text"]
 				)
-				, ["class" => "col-lg-9"]
+				, 9
 			) ?>
 		
 		

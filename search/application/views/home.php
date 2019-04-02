@@ -11,10 +11,8 @@
                 ,
                 3,
                 ["class" => "text_filtro bg_black"]) ?>
+            <?= get_formar_menu_sugerencias($es_movil, $bloque_busqueda, $busqueda) ?>
 
-            <div class="border-right padding_5">
-                <?= get_formar_menu_sugerencias($es_movil, $bloque_busqueda, $busqueda) ?>
-            </div>
         </div>
     </div>
     <div class="col-lg-9">
@@ -23,7 +21,6 @@
             <?= get_format_listado_productos($lista_productos); ?>
         </div>
         <?= div($paginacion, 1) ?>
-
     </div>
 </div>
 

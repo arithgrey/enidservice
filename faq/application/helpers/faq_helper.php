@@ -187,7 +187,7 @@ if (!function_exists('invierte_date_time')) {
             $faqs = $row["faqs"];
             $href = "?categoria=" . $id_categoria;
             $link = anchor_enid(div($nombre_categoria . "(" . $faqs . ")"), ["href" => $href]);
-            $l[] = div($link, ["class" => "col-lg-4"]);
+            $l[] = div($link, 4);
         }
         return append_data($l);
     }

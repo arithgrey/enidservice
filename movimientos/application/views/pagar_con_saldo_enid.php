@@ -1,7 +1,7 @@
 <?= n_row_12() ?>
 
     <div class="col-lg-4 col-lg-offset-4">
-        <?= n_row_12() ?>
+
         <div class="jumbotron"
              style="background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;">
 
@@ -41,7 +41,7 @@
 
             <?php endif; ?>
         </div>
-        <?= end_row() ?>
+
     </div>
 
 <?= end_row() ?>

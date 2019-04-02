@@ -25,7 +25,9 @@ class Home extends CI_Controller
         if (get_param_def($param, "proceso_compra", 0, 1) > 0) {
 
             $data["js"] = ["contact/proceso_compra_direccion.js"];
-            $this->principal->show_data_page($data, 'preso_deseo_compra');
+
+            $response =  get_format_proceso_compra();
+            $this->principal->show_data_page($data, $response  , 1);
 
         } else {
 

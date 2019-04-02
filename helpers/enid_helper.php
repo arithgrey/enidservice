@@ -137,16 +137,33 @@ if (!function_exists('div')) {
                     return "<div class='col-lg-3'>" . $info . "</div>";
                     break;
                 case 4:
-                    return "<div class='col-lg-4'>" . $info . "</div>";
+                    $response = ($row > 0) ? "<div class='col-lg-4 col-lg-offset-4'>" . $info . "</div>" : "<div class='col-lg-4'>" . $info . "</div>";
+                    return $response;
                     break;
                 case 5:
                     return "<div class='col-lg-5'>" . $info . "</div>";
                     break;
                 case 6:
-                    return "<div class='col-lg-6'>" . $info . "</div>";
+
+                    $response = ($row > 0) ? "<div class='col-lg-6 col-lg-offset-3'>" . $info . "</div>" : "<div class='col-lg-6'>" . $info . "</div>";
+                    return $response;
                     break;
                 case 8:
-                    return "<div class='col-lg-8'>" . $info . "</div>";
+
+                    $response = ($row > 0) ? "<div class='col-lg-8 col-lg-offset-2'>" . $info . "</div>" : "<div class='col-lg-8'>" . $info . "</div>";
+                    return $response;
+                    break;
+                case 9:
+                    return "<div class='col-lg-9'>" . $info . "</div>";
+                    break;
+
+                case 10:
+
+
+                    $response = ($row > 0) ? "<div class='col-lg-10 col-lg-offset-1'>" . $info . "</div>" : "<div class='col-lg-10'>" . $info . "</div>";
+                    return $response;
+
+
                     break;
 
             }
@@ -164,10 +181,10 @@ if (!function_exists('input')) {
     {
 
 
-        if(array_key_exists("class" , $attributes)){
-            $attributes["class"] = $attributes["class"]. " form-control ";
-        }else{
-            $attributes["class"]= " form-control ";
+        if (array_key_exists("class", $attributes)) {
+            $attributes["class"] = $attributes["class"] . " form-control ";
+        } else {
+            $attributes["class"] = " form-control ";
         }
 
         $attr = add_attributes($attributes);
@@ -949,7 +966,7 @@ if (!function_exists('strong')) {
     }
 }
 if (!function_exists('hr')) {
-    function hr($attributes = '', $row = 1)
+    function hr($attributes = [], $row = 1)
     {
 
         $base = "<hr" . add_attributes($attributes) . ">";
@@ -1265,11 +1282,18 @@ if (!function_exists('get_img_servicio')) {
 
 if (!function_exists('append_data')) {
 
-    function append_data($array)
+    function append_data($array, $col = 0, $num_col = 0)
     {
         $response = "";
         for ($a = 0; $a < count($array); $a++) {
+
             $response .= " " . $array[$a];
+        }
+
+        if ($col > 0) {
+
+            $response = ($num_col > 0) ? div($response, $num_col) : div($response);
+
         }
         return $response;
     }
