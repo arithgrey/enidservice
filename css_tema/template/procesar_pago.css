@@ -11,9 +11,9 @@
     display: none;
 }
 
-.contenedor_informacion_envio {
-    width: 50%;
-    margin: 0 auto;
+.form_direccion_envio{
+    text-transform: uppercase;
+    min-height: 400px;
 }
 
 .contenedor_deuda_para_envio {

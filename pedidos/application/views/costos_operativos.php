@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-lg-offset-3">
+<div class="col-lg-6 col-lg-offset-3 top_50">
     <div class="contenedor_costos_registrados">
         <?= div(heading_enid("COSTOS DE OPERACIÓN", 3), ["class" => "jumbotron text-center"]) ?>
         <?= get_formar_add_pedidos($table_costos) ?>

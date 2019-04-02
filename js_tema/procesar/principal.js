@@ -112,6 +112,7 @@ let before_registro_afiliado = function () {
 
 let respuesta_registro = function (data) {
 
+    $(".place_registro_afiliado").empty();
     if (data != -1) {
 
         desbloqueda_form(".form-miembro-enid-service");

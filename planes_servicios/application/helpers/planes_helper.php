@@ -34,9 +34,9 @@ if (!function_exists('invierte_date_time')) {
 		function get_format_articulos_venta($list_orden)
 		{
 
-			$r[] = heading_enid("TUS ARTÍCULOS EN VENTA", "2", ["class" => "titulo_articulos_venta"]);
-			$r[] = div(get_format_busqueda($list_orden), ["class" => "contenedor_busqueda_articulos"]);
-			$r[] = place("place_servicios");
+			$r[] = heading_enid("TUS ARTÍCULOS EN VENTA", 3);
+			$r[] = div(get_format_busqueda($list_orden), ["class" => "contenedor_busqueda_articulos row top_50"]);
+			$r[] = div(place("place_servicios top_50"),1);
 			return append_data($r);
 
 		}
@@ -45,7 +45,7 @@ if (!function_exists('invierte_date_time')) {
 		function get_format_busqueda($list_orden)
 		{
 
-			$r[] = div("BUSCAR ENTRE TUS ARTÍCULOS", 4);
+			$r[] = div("BUSCAR ENTRE TUS ARTÍCULOS", ["class"=>"col-lg-4 align-self-center"]);
 			$r[] = div(get_list_orden($list_orden), 4);
 			$r[] = div(input([
 				"id" => "textinput",
@@ -55,7 +55,7 @@ if (!function_exists('invierte_date_time')) {
 				"onkeyup" => "onkeyup_colfield_check(event);"
 			]),
 				4);
-			return append_data($r);
+			return div(append_data($r),["class"=>"--"]);
 
 		}
 

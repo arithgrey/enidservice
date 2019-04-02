@@ -20,36 +20,50 @@ if (!function_exists('invierte_date_time')) {
         $url_img_servicio = $servicio["url_img_servicio"];
 
 
-        $p[] =
-            img([
-            'src' => $url_img_servicio,
-            'alt' => $metakeyword,
-                'style'=> "max-height: 270px !important",
-                'class'=> "padding_5 top_10 hover_padding"
-        ]);
 
-
-
-
-
-
-        if ($in_session > 0) {
-            $p[] = div(get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session),
-                ["class" => "text-center"], 1);
-            $p[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_actual), 1);
-            $p[] = div(muestra_vistas_servicio($in_session, $vista), 1);
+        if ($in_session > 0 ){
+            $p[] =
+                div(img([
+                    'src' => $url_img_servicio,
+                    'alt' => $metakeyword,
+                    'style' => "max-height: 270px !important",
+                    'class' => "padding_5 top_10 hover_padding"
+                ]),1);
+        }else{
+            $p[] =
+                img([
+                    'src' => $url_img_servicio,
+                    'alt' => $metakeyword,
+                    'style' => "max-height: 270px !important",
+                    'class' => "padding_5 top_10 hover_padding"
+                ]);
 
         }
+
+
 
 
         $response = anchor_enid(
             append_data($p),
             [
-                "href" => get_url_servicio($id_servicio) ,
+                "href" => get_url_servicio($id_servicio),
                 "class" => "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 "
 
             ]
         );
+
+        if ($in_session > 0) {
+
+            $p[] = div(get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session),1);
+            $p[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_actual),1);
+            $p[] = div(muestra_vistas_servicio($in_session, $vista),1);
+
+            $r =  div($response ,["class"=> "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 "],1);
+            $response =  $r. append_data($p);
+            $response =  div($response ,["class"=> "producto_enid d-flex flex-column justify-content-center border" , "style"=> "height:600px"]);
+
+        }
+
 
         return $response;
 
@@ -646,7 +660,7 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] = heading_enid("AGREGAR IMAGENES", 3, ["class" => "titulo_agregar_imagenes"], 1);
         $x[] = place("place_img_producto");
-        $r[] = div(append_data($x), 1,4);
+        $r[] = div(append_data($x), 1, 4);
         return div(append_data($r), ["class" => "contenedor_agregar_imagenes"]);
 
     }
@@ -990,12 +1004,16 @@ if (!function_exists('invierte_date_time')) {
             $img = img([
                 'src' => $url_img,
                 'alt' => $metakeyword,
+                "class" => "imagen_sugerencia padding_5 top_10 hover_padding  "
 
             ]);
-            $imagenes[] = div(anchor_enid($img, ["href" => $url_info_producto]), ["class" => "img_sugerencia"]);
+            $imagenes[] = div(anchor_enid($img, ["href" => $url_info_producto]), ["class" => "img_sugerencia align-self-center "]);
 
         }
-        $r[] = div(append_data($imagenes), ["class" => "contenedor_sugeridos"]);
+        $r[] = div(append_data($imagenes),
+            [
+                "class" => "contenedor_sugeridos contenedor_sugeridos d-flex  justify-content-center     align-items-center align-self-center"
+            ]);
         return append_data($r);
 
     }
