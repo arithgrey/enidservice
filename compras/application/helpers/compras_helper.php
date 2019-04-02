@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
 							"id" => 'datetimepicker4',
 							"value" => date("Y-m-d")
 						]),
-                    "col-lg-6"
+                    6
 					);
 
         }

@@ -26,17 +26,17 @@
 
 
 <div class="row white top_30" style="background:  #080221;;">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-10">
-        <?= get_btw(
-            heading(
-                "CATEGORIAS DESTACADAS",
-                3
-            )
-            ,
-            div(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)), 1)
-            ,
-            ""
-        ) ?>
-    </div>
+
+    <?= div("", 2) ?>
+    <?= div(get_btw(
+        heading(
+            "CATEGORIAS DESTACADAS",
+            3
+        )
+        ,
+        div(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)), 1)
+        ,
+        ""
+    ), 10) ?>
+
 </div>

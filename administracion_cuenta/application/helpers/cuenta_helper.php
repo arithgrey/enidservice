@@ -93,7 +93,6 @@ if (!function_exists('invierte_date_time')) {
 			$r[] = get_format_user($usuario, 1);
 			$r[] = addNRow(div(get_campo($usuario, "email", ""), ["class" => "top_20"], 1));
 			$r[] = addNRow(get_campo($usuario, "tel_contacto", "Tu prime apellido", 1));
-			$r[] = br();
 			$r[] = anchor_enid("MI DIRECCIÓN" . icon('fa  fa-fighter-jet'),
 				["class" => "a_enid_black btn_direccion top_20",
 					"href" => "#tab_direccion",
@@ -158,7 +157,6 @@ if (!function_exists('invierte_date_time')) {
 			$r = [];
 			if ($vista < 1) {
 				$r[] = heading_enid("Cuenta", 1, ['class' => 'strong'], 1);
-				$r[] = br();
 				$r[] = addNRow(get_form_nombre($usuario));
 				$r[] = addNRow(get_form_email($usuario));
 
@@ -183,7 +181,7 @@ if (!function_exists('invierte_date_time')) {
 
 			$r[] = form_open("", ["class" => "f_telefono_usuario_negocio"]);
 			$r[] = div("Teléfono de negocio", ["class" => "col-lg-3 strong"]);
-			$r[] = get_btw(form_input(
+			$r[] = get_btw(input(
 				[
 					'name' => 'lada_negocio',
 					'id' => 'lada',
@@ -204,7 +202,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 			$r[] = get_btw(
-				form_input(
+				input(
 					[
 						'name' => 'telefono_negocio',
 						'id' => 'telefono',
@@ -271,7 +269,7 @@ if (!function_exists('invierte_date_time')) {
 				,
 				"col-lg-5"
 			);
-			$r[] = div(guardar("Actualizar", ["class" => "input_enid"]), ["class" => "col-lg-2"]);
+			$r[] = div(guardar("Actualizar", ["class" => "input_enid"]), 2);
 			$r[] = form_close();
 			return append_data($r);
 
@@ -317,7 +315,7 @@ if (!function_exists('invierte_date_time')) {
 				"value" => get_campo($usuario, 'nombre_usuario'),
 				"maxlength" => "15"
 			]);
-			$r[] = div(div("", ['class' => 'registro_nombre_usuario']), ['class' => '"col-lg-7"']);
+			$r[] = place("registro_nombre_usuario");
 			$r[] = form_close();
 
 			return append_data($r);

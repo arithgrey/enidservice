@@ -18,5 +18,4 @@
         <?= heading_enid($titulo) ?>
         <?= $this->load->view($vista); ?>
     </div>
-
 </div>

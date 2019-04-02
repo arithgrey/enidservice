@@ -91,19 +91,9 @@ foreach ($info_tickets as $row) {
 
 <div class='row'>
     <div class="col-lg-12 faq_btn">
-        <div class="pull-right">
-            <a class="input-sm btn"  href="../faq">
-                Preguntas frecuentes
-                <?= icon('fa fa-info-circle') ?>
-            </a>
-        </div>
+        <?= anchor_enid("Preguntas frecuentes" . icon('fa fa-info-circle'), ["class" => "input-sm btn", "href" => "../faq"]) ?>
     </div>
-    <div class='col-lg-6'>
-        <button class='btn input-sm  solicitar_desarrollo_form'>
-            Abrir
-            ticket
-        </button>
-    </div>
+    <?= div(guardar("Abrir ticket", ["class" => 'btn input-sm  solicitar_desarrollo_form']), 6) ?>
     <div class="col-lg-6">
         <div class="pull-right">
             <?= div("Mostrar") ?>

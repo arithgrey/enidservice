@@ -38,10 +38,8 @@
                         <?= p("Marco de trabajo en el cual los usuarios finales del producto son quiénes marcan las necesidades y se despliegan bajo los principios de desarrollo y gestión con eficacia, simplicidad, flexibilidad y control.") ?>
                     </div>
                     <?= end_row() ?>
-
                     <?= anchor_enid("Iniciemos conversación", ["href" => "../contact"]) ?>
                     <?= hr() ?>
-
                 </div>
             </div>
         </div>

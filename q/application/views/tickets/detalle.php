@@ -13,11 +13,11 @@
     <?= hr() ?>
     <div class="seccion_nueva_tarea top_20">
         <?= heading_enid("SOLICITAR TAREA", 1) ?>
-        <form class='form_agregar_tarea'>
-            <?= div("-", ["id" => "summernote", "class" => "summernote"], 1) ?>
-            <?= input_hidden(["class" => 'tarea_pendiente', "name" => 'tarea']) ?>
-            <?= guardar("Solicitar", [], 1) ?>
-        </form>
+        <?= form_open("", ["class" => 'form_agregar_tarea']) ?>
+        <?= div("-", ["id" => "summernote", "class" => "summernote"], 1) ?>
+        <?= input_hidden(["class" => 'tarea_pendiente', "name" => 'tarea']) ?>
+        <?= guardar("Solicitar", [], 1) ?>
+        <?= form_close() ?>
     </div>
 
 <?php

@@ -133,7 +133,11 @@ if (!function_exists('div')) {
 
                     break;
                 case 2:
-                    return "<div class='row'>" . $info . "</div>";
+
+                    $response = ($row > 0) ? "<div class='col-lg-2 col-lg-offset-5'>" . $info . "</div>" : "<div class='col-lg-2'>" . $info . "</div>";
+                    return $response;
+
+
                     break;
                 case 3:
                     return "<div class='col-lg-3'>" . $info . "</div>";
@@ -150,6 +154,13 @@ if (!function_exists('div')) {
                     $response = ($row > 0) ? "<div class='col-lg-6 col-lg-offset-3'>" . $info . "</div>" : "<div class='col-lg-6'>" . $info . "</div>";
                     return $response;
                     break;
+
+                case 7:
+
+                    return "<div class='col-lg-7'>" . $info . "</div>";
+                    break;
+
+
                 case 8:
 
                     $response = ($row > 0) ? "<div class='col-lg-8 col-lg-offset-2'>" . $info . "</div>" : "<div class='col-lg-8'>" . $info . "</div>";
@@ -173,6 +184,13 @@ if (!function_exists('div')) {
                     return "<div class='col-lg-12'>" . $info . "</div>";
 
                     break;
+
+                case 13:
+
+                    return "<div class='row'>" . $info . "</div>";
+
+                    break;
+
 
             }
 
@@ -1393,7 +1411,16 @@ if (!function_exists('get_btw')) {
     {
         $response = div(append_data([$a, $b]), ["class" => $class]);
         if ($row > 0) {
+
+            if (is_numeric($class)){
+                $class =  " col-lg-".$class;
+                if ($row > 0){
+                    $class =  $class  . " col-lg-offset- ".$class;
+                }
+
+            }
             $response = div(div(append_data([$a, $b]), ["class" => $class]), ["class" => "row"]);
+
         }
         return $response;
     }

@@ -22,7 +22,6 @@
     "name" => 'dinamic_user',
     "value" => '0'
 ]) ?>
-
 <?= guardar("CARGAR") ?>
 <?= place("lista_imagenes_user", ["id" => 'lista_imagenes_user']) ?>
 <?= form_close() ?>

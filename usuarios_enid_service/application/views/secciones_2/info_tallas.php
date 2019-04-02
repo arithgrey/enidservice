@@ -1,5 +1,5 @@
 <div class="col-lg-6 col-lg-offset-3">
-    <?= div(div("TIPO CLASIFICACIÓN"), ["class" => "col-lg-3"]) ?>
+    <?= div(div("TIPO CLASIFICACIÓN"), 3) ?>
     <?= append_data(
         [
             form_open("", ["class" => "form-tipo-talla"]),

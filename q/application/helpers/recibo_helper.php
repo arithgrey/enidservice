@@ -41,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
         $url = "https://enidservice.com/inicio/valoracion/?servicio=" . $id_servicio;
         $r[] = img_enid([], 1, 1);
         $r[] = heading("¿Valorarías tu experiencia de compra en Enid Service?", 3);
-        $r[] = div("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor") . br();
+        $r[] = div("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor");
         $r[] = div(anchor_enid("Déjanos tus comentarios aquí!", ["href" => $url]));
 
         $cuerpo = append_data([$r]);
@@ -121,7 +121,7 @@ if (!function_exists('invierte_date_time')) {
         $ops_tipo_orden_text = ["", "FECHA REGISTRO", "FECHA ENTREGA", "FECHA CANCELACIÓN", "FECHA DE PAGO", "FECHA CONTRA ENTREGA"];
 
         $default = ["class" => "header_table_recibos"];
-        $tb = "<hr class='top_20'><table class='table_enid_service top_20' ><thead>";
+        $tb = hr()."<table class='table_enid_service top_20' ><thead>";
         $tb .= "<tr class='header_table'>";
         $tb .= get_th("ORDEN", $default);
         $tb .= get_th("", $default);
@@ -385,7 +385,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => 'vender_mas_productos']
             );
 
-            $response = get_btw($l, $l2, "col-lg-12");
+            $response = get_btw($l, $l2, 12);
         }
         return $response;
     }

@@ -135,5 +135,19 @@ $list_footer = [
     <?php endforeach; ?>
 <?php endif; ?>
 <link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css?<?= version_enid ?>">
+<div class="modal" tabindex="-1" role="dialog" id="modal-error-message">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="font-weight-bold text-dark">
+                    <span class="text-order-name-error"></span>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

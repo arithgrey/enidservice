@@ -1,5 +1,5 @@
-<?= div(get_menu(), ["class" => "col-lg-2"]) ?>
-<?= div(get_list_clasificaciones($is_mobile, $preferencias, $tmp), ["class" => "col-lg-10"]) ?>
+<?= div(get_menu(),2) ?>
+<?= div(get_list_clasificaciones($is_mobile, $preferencias, $tmp), 10) ?>
 <?= hr() ?>
 <div class="col-lg-8 col-lg-offset-2">
     <div id="slider">

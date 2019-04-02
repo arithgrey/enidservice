@@ -116,15 +116,6 @@
 .btn_llamar {
     display: none;
 }
-
-<
-/
-style >
-< style type
-
-=
-"text/css"
->
 #sum_box h4 {
     text-align: left;
     margin-top: 0px;
@@ -196,4 +187,11 @@ style >
     border-style: solid;
     border-width: .9px;
     font-weight: bold;
+}
+.contenedor_asociar_cuenta{
+    background: #fbfbfb;
+    border-right-style: solid;
+    border-width: .9px;
+    border-left-style: solid;
+
 }

@@ -30,7 +30,7 @@ $oculta_comentarios = (count($info_respuestas) > 0) ? div("Ocultar ", ["class" =
 <?= get_btw(
 	$oculta_comentarios,
 	div(div($respuestas, ["class" => "msg-wrap"]), ["class" => "Message-wrap"]),
-	"col-lg-12"
+	12
 ) ?>
 
 

@@ -1,10 +1,6 @@
 <div class="contenedor_principal_enid">
     <div class="contenedor_principal_enid_service">
-        <div class="col-lg-2">
-            <nav class="nav-sidebar">
-                <?= get_menu() ?>
-            </nav>
-        </div>
+        <?= div(get_menu(), 2) ?>
         <div class='col-lg-10'>
             <div class="tab-content">
                 <div class="tab-pane" id='reporte'>
@@ -60,7 +56,7 @@
                     <?= div("PRODUCTOS MÁS BUSCADOS POR CLIENTES",
                         ["class" => "titulo_enid_sm"], 1) ?>
 
-                   <?=get_form_busqueda_productos_solicitados()?>
+                    <?= get_form_busqueda_productos_solicitados() ?>
 
                 </div>
                 <div class="tab-pane" id="tab_productos_publicos">

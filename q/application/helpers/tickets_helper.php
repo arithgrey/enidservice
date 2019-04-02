@@ -41,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
             "departamento",
             "nombre",
             "id_departamento"
-        ));;
+        ));
         $r[] = n_row_12();
         $r[] = div("MODULO, ASUNTO, TÓPICO", ["class" => "input-group-addon"]);
         $r[] = input([

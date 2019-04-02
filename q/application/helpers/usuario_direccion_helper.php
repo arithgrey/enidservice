@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "text"
             ])
             ,
-            "col-lg-6"
+            6
         );
 
         $b = get_btw(
@@ -41,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "telefono_receptor",
                 "type" => "text"
             ]),
-            "col-lg-6 "
+            6
         );
         $r[] = get_btw($a, $b, "row mt-5");
         $r[] = div("Código postal");
@@ -91,7 +91,7 @@ if (!function_exists('invierte_date_time')) {
                 "required" => "true",
                 "type" => "text"
             ]),
-            "col-lg-6"
+            6
         );
         $b = get_btw(
 
@@ -105,7 +105,7 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "text",
                 "required " => "true"
             ]),
-            "col-lg-6"
+            6
 
         );
 

@@ -75,12 +75,13 @@ if (!function_exists('invierte_date_time')) {
 		function get_format_saldo_disponible($saldo_disponible)
 		{
 
-			return ul([
+			$response =   ul([
 				div(icon('icon fa fa-money'), ["class" => "icon"]),
 				div("Saldo disponible"),
 				heading_enid("$" . number_format(get_data_saldo($saldo_disponible), 2) . "MXN", 2, ["class" => "value white"]),
 				div("Monto expresado en Pesos Mexicanos")
 			]);
+			return div($response, ["class"=>"panel income db mbm"]);
 
 		}
 	}

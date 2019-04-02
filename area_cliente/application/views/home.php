@@ -1,7 +1,6 @@
 <div class="contenedor_principal_enid">
-    <div class="col-lg-2">
-        <?= get_menu($action) ?>
-    </div>
+
+    <?= div(get_menu($action), 2) ?>
     <div class='col-lg-10'>
         <div class="tab-content">
             <?= div(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']) ?>

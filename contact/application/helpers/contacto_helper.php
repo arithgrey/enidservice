@@ -6,9 +6,9 @@ if (!function_exists('invierte_date_time')) {
         function get_format_proceso_compra()
         {
 
-            $r[] = div(heading_enid("¿Quieres aparta tu pedido?", 2, ["class" => "strong"]), ["class" => "col-lg-10 col-lg-offset-1"]);
-            $r[] = div(get_selector_direccion(), ["class" => "col-lg-10 col-lg-offset-1"]);
-            return append_data($r);
+            $r[] = div(heading_enid("¿Quieres aparta tu pedido?", 2, ["class" => "strong"]), 1);
+            $r[] = div(get_selector_direccion(), 1);
+            return div(append_data($r), 10, 1);
 
 
         }
@@ -91,7 +91,7 @@ if (!function_exists('invierte_date_time')) {
                 "height" => "380"
             ]);
 
-            return div(append_data($r), ["class" => "col-lg-6"]);
+            return div(append_data($r), 6);
         }
     }
     if (!function_exists('get_formar_direccion')) {
@@ -129,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
-                $response = div(append_data($r), ["class" => "col-lg-6"]);
+                $response = div(append_data($r), 6);
             }
             return $response;
 
@@ -152,7 +152,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "form-control input-md nombre"
             ]), ["class" => "col-lg-8"]);
 
-            $r[] = label(icon("fa fa-envelope-o") . " CORREO ", ["class" => "col-lg-4 control-label"]);
+            $r[] = label(icon("fa fa-envelope-o") . " CORREO ", 4);
             $r[] = input_hidden(["class" => "servicio", "value" => $servicio, "name" => "servicio"]);
 
             $r[] = div(append_data([
@@ -170,7 +170,7 @@ if (!function_exists('invierte_date_time')) {
                 div("INGRESA TU EMAIL  PARA RECIBIR NUESTRA UBICACIÓN")
 
 
-            ]), ["class" => "col-lg-8"]);
+            ]), 8);
 
 
             $r[] = guardar("RECIBIR  UBICACIÓN", ["class" => "top_20"]);
@@ -187,7 +187,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = form_open("", ["class" => "form-horizontal form_whatsapp"]);
-            $r[] = label(" NOMBRE ", ["class" => "col-lg-4 control-label"]);
+            $r[] = div(" NOMBRE ", 4);
 
             $r[] = div(input([
                 "id" => "nombre",
@@ -195,9 +195,9 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "text",
                 "placeholder" => "Tu nombre ",
                 "class" => "form-control input-md nombre_whatsapp"
-            ]), ["class" => "col-lg-8"]);
+            ]), 8);
 
-            $r[] = label(icon(".fa fa-whatsapp") . " WHATSAPP", ["class" => "col-lg-4 control-label"]);
+            $r[] = div(icon(".fa fa-whatsapp") . " WHATSAPP", 4);
             $r[] = div(input([
                 "id" => "whatsapp",
                 "name" => "whatsapp",
@@ -226,15 +226,15 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $r[] = '<form id="form_contacto" action="../q/index.php/api/contacto/format/json/" method="post">';
-                $r[] = div(p("Departamento ", ['class' => 'white']), ["class" => "col-sm-3"]);
+                $r[] = div(p("Departamento ", ['class' => 'white']), 3);
                 $r[] = div(create_select(
                     $departamentos,
                     "departamento",
                     "departamento form-control input_enid",
                     "departamento",
                     "nombre",
-                    "id_departamento"), ["class" => "col-sm-9"]);
-                $r[] = div(p("Nombre", ['class' => 'white']), ["class" => "col-sm-2"]);
+                    "id_departamento"), 9);
+                $r[] = div(p("Nombre", ['class' => 'white']), 2);
                 $r[] = div(input([
                     "type" => "text"
                     , "id" => "nombre"
@@ -242,9 +242,9 @@ if (!function_exists('invierte_date_time')) {
                     , "class" => "input-sm input input_enid"
                     , "placeholder" => "Nombre"
                     , "value" => $nombre
-                ]), ["class" => "col-sm-10"]);
+                ]), 10);
 
-                $r[] = div(p("Correo", ['class' => 'white']), ["class" => "col-sm-2"]);
+                $r[] = div(p("Correo", ['class' => 'white']), 2);
                 $r[] = div(input([
                     "onkeypress" => "minusculas(this);",
                     "type" => "email",
@@ -253,9 +253,9 @@ if (!function_exists('invierte_date_time')) {
                     "value" => $email,
                     "class" => "input-sm input_enid",
                     "placeholder" => "Email"
-                ]), ["class" => "col-sm-10"]);
+                ]), 10);
                 $r[] = place('place_mail_contacto', ["id" => 'place_mail_contacto']);
-                $r[] = div(p("Teléfono", ['class' => 'white']), ["class" => "col-sm-2"]);
+                $r[] = div(p("Teléfono", ['class' => 'white']), 2);
                 $r[] = div(input([
                     "id" => "tel",
                     "name" => "tel",
@@ -263,10 +263,9 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "input-sm telefono_info_contacto input_enid",
                     "placeholder" => "Teléfono  de contacto",
                     "value" => $telefono
-                ]), ["class" => "col-sm-10"]);
+                ]), 10);
+
                 $r[] = place('place_tel_contacto', ["id" => 'place_tel_contacto']);
-
-
                 $r[] = p("Mensaje", ['class' => 'white']);
 
                 $r[] = textarea([
@@ -279,7 +278,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = addNRow(guardar("Enviar mensaje", ["id" => 'btn_envio_mensaje'], 1));
                 $r[] = form_close();
 
-                $response = div(append_data($r), ["class" => "col-lg-6"]);
+                $response = div(append_data($r), 6);
 
             }
             return $response;
@@ -301,37 +300,37 @@ if (!function_exists('invierte_date_time')) {
                 "departamento",
                 "nombre",
                 "id_departamento");;
-            $r[] = div("Nombre", ["class" => "col-sm-2"]);
-            $r[] = input([
+            $r[] = div("Nombre", 2);
+            $r[] = div(input([
                 "type" => "text",
                 "id" => "nombre",
                 "name" => "nombre",
-                "class" => "input-sm input input_enid col-sm-10",
+                "class" => "input-sm input input_enid",
                 "placeholder" => "Nombre",
                 "value" => $departamentos
-            ]);
-            $r[] = div("Correo", ["class" => "col-sm-2"]);
-            $r[] = input([
+            ]), 10);
+            $r[] = div("Correo", 2);
+            $r[] = div(input([
                 "onkeypress" => "minusculas(this);",
                 "type" => "email",
                 "id" => "emp_email",
                 "name" => "email",
                 "value" => $email,
-                "class" => "input-sm input_enid col-sm-10",
+                "class" => "input-sm input_enid",
                 "placeholder" => "Email"
-            ]);
+            ]), 10);
             $r[] = place("place_mail_contacto", ["id" => "place_mail_contacto"]);
-            $r[] = div("Teléfono", ["class" => "col-sm-2"]);
-            $r[] = input([
+            $r[] = div("Teléfono", 2);
+            $r[] = div(input([
                 "id" => "tel",
                 "name" => "tel",
                 "type" => "tel",
-                "class" => "input-sm telefono_info_contacto input_enid col-sm-10",
+                "class" => "input-sm telefono_info_contacto input_enid",
                 "placeholder" => "Teléfono  de contacto",
                 "value" => $telefono
-            ]);
+            ]), 10);
             $r[] = place("place_tel_contacto", ["id" => 'place_tel_contacto']);
-            $r[] = div("Mensaje", ["class" => "col-sm-12"]);
+            $r[] = div("Mensaje", 12);
             $r[] = textarea([
                 "id" => "message",
                 "name" => "mensaje",
@@ -340,7 +339,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = place("place_registro_contacto");
             $r[] = div(guardar("Enviar mensaje",
                 ["type" => "submit", "class" => "btn input-sm", "id" => 'btn_envio_mensaje']),
-                ["class" => "col-lg-6"]);
+                6);
             $r[] = form_close();
 
             return append_data($r);

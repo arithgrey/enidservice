@@ -94,7 +94,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("place_registro_valoracion");
         $r[] = form_close();
 
-        $response = div(append_data($r), ["class" => "col-lg-6 col-lg-offset-3"]);
+        $response = div(append_data($r), 6,1);
         return $response;
 
     }

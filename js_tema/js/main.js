@@ -652,6 +652,11 @@ let valida_num_form = function (input, place_msj) {
     format_error(place_msj, mensaje_user);
     return f;
 }
+let advierte = function(text){
+
+    $(".text-order-name-error").text(text);
+    $("#modal-error-message").modal("show");
+}
 /*
 
 let registra_lead = function (e) {

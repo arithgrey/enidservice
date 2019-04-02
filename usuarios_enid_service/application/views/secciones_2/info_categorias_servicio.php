@@ -1,25 +1,22 @@
 <div class="col-lg-7">
     <?= form_open("", ["class" => "form-horizontal form_categoria", "id" => "form_categoria"]) ?>
-    <div class="form-group">
-        <?= div("¿ES SERVICIO?", 4) ?>
-        <div class="col-lg-8">
-            <select id="servicio" name="servicio" class="form-control servicio">
-                <option value="0">NO</option>
-                <option value="1">SI</option>
-            </select>
-        </div>
+    <?= div("¿ES SERVICIO?", 4) ?>
+    <div class="col-lg-8">
+        <select id="servicio" name="servicio" class="form-control servicio">
+            <option value="0">NO</option>
+            <option value="1">SI</option>
+        </select>
     </div>
-    <div class="form-group">
-        <?= div("CATEGORÍA", 4) ?>
-        <?= div(input([
-            "id" => "textinput",
-            "name" => "clasificacion",
-            "placeholder" => "CATEGORÍA",
-            "class" => "form-control input-md clasificacion",
-            "required" => "true",
-            "type" => "text"
-        ]), 8) ?>
-    </div>
+    <?= div("CATEGORÍA", 4) ?>
+    <?= div(input([
+        "id" => "textinput",
+        "name" => "clasificacion",
+        "placeholder" => "CATEGORÍA",
+        "class" => "form-control input-md clasificacion",
+        "required" => "true",
+        "type" => "text"
+    ]), 8) ?>
+
     <?= get_btw(
         guardar("SIGUIENTE", ["class" => "a_enid_blue add_categoria"]),
         place("msj_existencia"),

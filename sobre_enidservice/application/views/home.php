@@ -1,7 +1,5 @@
 <div class='row' id='info_antes_de_ayuda'>
-    <div class="col-lg-2">
-        <?= get_format_izquierdo($in_session) ?>
-    </div>
+    <?= div(get_format_izquierdo($in_session), 2) ?>
     <div class='col-lg-10'>
         <?= n_row_12() ?>
         <ul class="nav nav-tabs" role="tablist">

@@ -4,9 +4,6 @@ $menu = [li(heading_enid("¿Tienes alguna duda?", ["class" => 'strong'])),
 
     li(div("Síguenos en", 1)),
 
-
-
-
     li(anchor_enid("", [
         "href" => $url_facebook,
         "target" => "_black",

@@ -130,7 +130,8 @@ if (!function_exists('invierte_date_time')) {
 						"href" => "../",
 						"style" => "color: #040174;text-decoration: none;font-size: 1.5em;text-decoration: underline;"
 					]),
-				"col-lg-4 col-lg-offset-4"
+				4,
+                1
 			);
 
 			return append_data($r);
@@ -143,12 +144,12 @@ if (!function_exists('invierte_date_time')) {
 		{
 
 
-			$r[] = div(get_menu(), ["class" => "col-lg-2"]);
-			$r[] = div(get_lista_deseo($productos_deseados), ["class" => "col-lg-7"]);
+			$r[] = div(get_menu(), 2);
+			$r[] = div(get_lista_deseo($productos_deseados), 7);
 			$r[] = get_btw(
 				heading_enid("TU LISTA DE DESEOS", 3, ["class" => 'titulo_lista_deseos']),
 				anchor_enid("EXPLORAR MÁS ARTÍCULOS", ["href" => "../search/?q2=0&q="], 1),
-				"col-lg-3"
+				3
 			);
 
 			return append_data($r);
@@ -294,7 +295,7 @@ if (!function_exists('invierte_date_time')) {
 
 				$x[] = br(3);
 				$x[] = p($descripcion);
-				$r[] = div(append_data($x), ["class" => "col-sm-6 "]);
+				$r[] = div(append_data($x), 6);
 
 
 				$z = [];

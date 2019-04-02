@@ -5,7 +5,6 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] =  heading_enid("RESEÑAS Y VALORACIONES SOBRE", 1) ;
-            $r[] =  br() ;
             $r[] =  anchor_enid(
                 icon('fa fa-shopping-cart') . get_campo($usuario, "nombre"),
                 [
@@ -22,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $response = append_data($r);
-            $response =  div($response ,["class"=>"col-lg-6 col-lg-offset-3"]);
+            $response =  div($response ,6,1);
             return $response;
         }
     }

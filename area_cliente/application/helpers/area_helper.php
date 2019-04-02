@@ -18,7 +18,6 @@ if (!function_exists('invierte_date_time')) {
 		{
 
 			$r[] = heading_enid("BUZÓN", 3);
-			$r[] = hr();
 			$r[] = div(append_data(
 
 				anchor_enid("HECHAS" .
@@ -54,8 +53,6 @@ if (!function_exists('invierte_date_time')) {
 
 			$x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
 			$x[] = $valoraciones;
-			$x[] = br(2);
-
 			$url = "../recomendacion/?q=" . $id_usuario;
 			$x[] = div(
 				anchor_enid("VER COMENTARIOS",
@@ -68,7 +65,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-			$r[] = div(append_data($x), ["class" => "col-lg-3"]);
+			$r[] = div(append_data($x), 3);
 			$r[] = div(place("place_ventas_usuario") ,9);
 
 			return div(append_data($r), ["class" => "text-center"]);

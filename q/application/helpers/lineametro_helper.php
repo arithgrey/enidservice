@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "cursor_pointer linea_metro",
                 "nombre_linea" => $nombre
             ]);
-            $r[] = div($img, ["class" => "col-lg-3 top_20"]);
+            $r[] = div($img, 3);
         }
         return append_data($r);
     }
@@ -37,7 +37,7 @@ if (!function_exists('invierte_date_time')) {
                 "nombre_linea" => $nombre
             ]);
 
-             $r[] = div($linea, ["class" => "col-lg-3"]);
+             $r[] = div($linea, 3);
         }
         return append_data($r);
     }
