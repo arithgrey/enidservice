@@ -662,7 +662,7 @@ if (!function_exists('invierte_date_time')) {
 
         $text .= div($monto, ["style" => "border-style: solid;text-align: center;"]);
         $text .= div(img($url_img_servicio), 1);
-        return div($text, ["class" => "col-lg-4"]);
+        return div($text, 4);
 
     }
 
@@ -838,7 +838,7 @@ if (!function_exists('invierte_date_time')) {
 
             $list[] = div($t, ["class" => "display_flex_enid"]);
         }
-        return div(ul($list), ["class" => "col-lg-8"]) . div("", ["class" => "col-lg-4"]);
+        return div(ul($list), ["class" => "col-lg-8"]) . div("", 4);
     }
 
     function get_view_compras($status_enid_service, $compras, $tipo)

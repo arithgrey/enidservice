@@ -926,7 +926,7 @@ if (!function_exists('invierte_date_time')) {
             foreach ($data as $row) {
 
                 $fecha_registro = div(icon("fa fa-clock-o") . $row["fecha_registro"], ["class" => "col-lg-3"]);
-                $comentario = div($row["comentario"], ["class" => "col-lg-9"]);
+                $comentario = div($row["comentario"], 9);
                 $n = div($fecha_registro . $comentario, 1);
                 $notas[] = div($n, ["class" => "seccion_tipificacion top_20 padding_10"]);
 
@@ -1009,8 +1009,8 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $text_producto = div($precio . "MXN", ["class" => "text-center top_20 text_precio_producto"]);
-                $r = div($img, ["class" => "col-lg-4"]);
-                $r .= div($text_producto, ["class" => "col-lg-8"]);
+                $r = div($img, 4);
+                $r .= div($text_producto, 8);
 
                 $url_servicio = "../producto/?producto=" . $id_servicio;
                 $r =

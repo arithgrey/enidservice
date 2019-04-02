@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
 			1
 		);
 
-		$response =  div(append_data($r) , ["class"=> "col-lg-4 col-lg-offset-4"]);
+		$response =  div(append_data($r) , 1,4);
 
 		return div($response, 1);
 

@@ -4,4 +4,4 @@
     </div>
     <?= div(get_submenu(), ["class" => "card"]) ?>
 </div>
-<?= div(place("place_movimientos"), ["class" => 'col-lg-9']) ?>
+<?= div(place("place_movimientos"), 9) ?>

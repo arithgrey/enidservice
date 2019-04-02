@@ -1,6 +1,6 @@
 <?= crea_tabla_resumen_ticket($info_ticket, $info_num_tareas); ?>
-    <div class="col-lg-8">
-    </div>
+
+<?= div("", 8) ?>
     <div class="col-lg-4">
         <table class="top_20 ">
             <tr>
@@ -10,9 +10,7 @@
             </tr>
         </table>
     </div>
-<?= br() ?>
-    <hr>
-
+    <?= hr() ?>
     <div class="seccion_nueva_tarea top_20">
         <?= heading_enid("SOLICITAR TAREA", 1) ?>
         <form class='form_agregar_tarea'>

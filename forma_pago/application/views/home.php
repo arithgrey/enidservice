@@ -1,1 +1,1 @@
-<?= div($info_recibo, ["class" => "col-lg-8 col-lg-offset-2"]), ["class" => "contenedor_principal_enid"] ?>
+<?= div($info_recibo, ["class" => "col-lg-8 col-lg-offset-2 contenedor_principal_enid"]) ?>

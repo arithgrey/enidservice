@@ -28,7 +28,7 @@
     ,
     1
 ) ?>
-s<?= form_close() ?>
+<?= form_close() ?>
 <?= place("previsualizacion", ["id" => "previsualizacion"]) ?>
 
 

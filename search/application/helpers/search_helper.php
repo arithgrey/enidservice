@@ -178,7 +178,7 @@ if (!function_exists('invierte_date_time')) {
 			$response = div($response, ["class" => 'contenedor_menu_productos_sugeridos']);
 
 		}
-		return $response;
+		return div($response, ["class"=>"border-right padding_5"]);
 	}
 
 	function crea_sub_menu_categorias_destacadas($param)

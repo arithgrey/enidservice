@@ -1,7 +1,5 @@
 <div class="contenedor_principal_enid">
-    <div class="col-lg-2">
-        <?= get_menu($in_session) ?>
-    </div>
+    <?= div(get_menu($in_session), ["class" => "col-lg-2"]) ?>
     <div class='col-lg-10'>
         <div class="tab-content">
             <?= input_hidden([

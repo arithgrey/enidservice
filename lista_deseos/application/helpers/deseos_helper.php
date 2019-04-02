@@ -195,7 +195,7 @@ if (!function_exists('invierte_date_time')) {
 				p("CUÉNTANOS TUS INTERESES PARA  MEJORAR TU EXPERIENCIA")
 			]);
 
-			return div($text, ['class' => "col-lg-4"]);
+			return div($text, 4);
 
 		}
 

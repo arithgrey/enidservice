@@ -16,16 +16,19 @@
 
     <div class="col-lg-10 col-lg-offset-1">
 
-        <?= get_td("", ["class" => "table_orden_1"]) ?>
-        <div class="row mb-5">
-            <?= div(heading_enid("ORDENAR POR" , 4), 4) ?>
-            <?= div(get_criterios_busqueda(), 8) ?>
-        </div>
-
+        <?= div("", ["class" => "table_orden_1"]) ?>
         <?= get_btw(
-            crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada),
-            div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio), ["class" => "btn_escribir_valoracion"]),
-            "contenedor_comentarios"
+            div(heading_enid("ORDENAR POR", 4), 4),
+            div(get_criterios_busqueda(), 8),
+            "row mb-5"
+
         ) ?>
     </div>
+
+    <?= get_btw(
+        crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada),
+        div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio), ["class" => "btn_escribir_valoracion"]),
+        "contenedor_comentarios"
+    ) ?>
+</div>
 </div>

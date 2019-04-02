@@ -63,23 +63,23 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
     <div class="product-detail contenedor_info_producto mt-5">
         <div class="col-lg-6 left-col contenedor_izquierdo">
 
-            <?=n_row_12()?>
-                <?= div($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"]) ?>
-                <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
-            <?=end_row()?>
+            <?= n_row_12() ?>
+            <?= div($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"]) ?>
+            <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
+            <?= end_row() ?>
 
         </div>
-        <div class="col-lg-3">
-            <?= get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web) ?>
-        </div>
+
+        <?= div(get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web), 3) ?>
+
         <div class="col-lg-3  border shadow">
             <?php if ($flag_servicio < 1): ?>
                 <?php if ($existencia > 0): ?>
-                    <!--<div class="info-venta">-->
+
                     <?= get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
                         $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
                         $telefono_visible, $usuario, $venta_mayoreo, $deseado) ?>
-                    <!---</div>-->
+
                 <?php else: ?>
                     <?= get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio) ?>
                 <?php endif; ?>
@@ -116,8 +116,7 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 
 
 <?= place("place_valoraciones col-lg-12") ?>
-
-<?= addNRow(div(place("place_tambien_podria_interezar"), ["class" => "col-lg-10 col-lg-offset-1", "style" => "background: white;"])) ?>
+<?= addNRow(div(place("place_tambien_podria_interezar"), 10 , 1)) ?>
 <?= input_hidden(["class" => "qservicio", "value" => $nombre_servicio]) ?>
 <?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]) ?>
 <?= input_hidden(["name" => "desde_valoracion", "value" => $desde_valoracion, "class" => 'desde_valoracion']) ?>

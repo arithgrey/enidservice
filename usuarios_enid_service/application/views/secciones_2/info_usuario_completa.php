@@ -1,5 +1,5 @@
 <?= heading_enid("+ Nuevo miembro", 3) ?>
-<form class="form-miembro-enid-service" id='form-miembro-enid-service'>
+    <form class="form-miembro-enid-service" id='form-miembro-enid-service'>
     <div class="row">
         <div class="col-lg-4">
             <?= div("Estatus") ?>
@@ -166,6 +166,6 @@
 
         ) ?>
     </div>
-    <?= guardar("Registrar") ?>
-    <?= place("place_config_usuario") ?>
-</form>
+<?= guardar("Registrar") ?>
+<?= place("place_config_usuario") ?>
+<?= form_close() ?>
