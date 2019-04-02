@@ -30,7 +30,7 @@ class Inicio extends CI_Controller
 
 
 		$data = $this->getCssJs($data);
-		$data["css_external"] = ["http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"];
+
 		$data["list_orden"] = $this->get_orden();
 		$this->principal->show_data_page($data, 'home_enid');
 

@@ -337,8 +337,8 @@ if (!function_exists('invierte_date_time')) {
             } else {
                 $text = "MIRA TUS ÚLTIMAS COMPRAS";
             }
-            $config = ["class" => "a_enid_black ver_mas_compras_o_ventas"];
-            return anchor_enid($text, $config);
+            $config = ["class" => " ver_mas_compras_o_ventas"];
+            return div(anchor_enid(heading_enid($text,3), $config),["class"=> "col-lg-12 border_bottom top_50 bottom_50"]);
         }
         return $text;
     }
@@ -559,7 +559,7 @@ if (!function_exists('invierte_date_time')) {
         if ($modalidad == 0 && $ordenes == 0) {
             return "";
         }
-        return heading_enid($text, 2);
+        return div(heading_enid($text, 2),1);
     }
 
     function get_mensaje_compra($modalidad, $num_ordenes)
@@ -821,7 +821,7 @@ if (!function_exists('invierte_date_time')) {
             $t = anchor_enid(
                 img([
                     "src" => $url_imagen_servicio,
-                    /*"onerror" => "reloload_img( '" . $id_error . "','" . $url_imagen_servicio . "');",*/
+
                     "class" => 'imagen_articulo',
                     "id" => $id_error
                 ]),
@@ -836,9 +836,9 @@ if (!function_exists('invierte_date_time')) {
                 $t .= guardar("AVANZADO", [], 1, 1, 0, $url);
             }
 
-            $list[] = div($t, ["class" => "display_flex_enid"]);
+            $list[] = div($t, ["class" => "align-items-center  d-flex flex-row border row top_20 justify-content-between"]);
         }
-        return div(ul($list), ["class" => "col-lg-8"]) . div("", 4);
+        return div(append_data($list), 8) . div("", 4);
     }
 
     function get_view_compras($status_enid_service, $compras, $tipo)

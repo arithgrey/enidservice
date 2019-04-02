@@ -21,7 +21,7 @@
                         input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]),
                         input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras])
 
-                    ]), 6, 1) ?>
+                    ]), 8, 1) ?>
 
                 <?php endif; ?>
             </div>

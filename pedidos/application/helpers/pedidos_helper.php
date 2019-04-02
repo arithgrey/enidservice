@@ -111,9 +111,13 @@ if (!function_exists('invierte_date_time')) {
             $x[] = create_select($fechas, "tipo_orden", "form-control", "tipo_orden", "fecha", "val");
             $r[] = div(append_data($x), ["class" => "col-lg-3"]);
             $r[] = div(get_format_fecha_busqueda(), ["class" => "col-lg-6"]);
-            $r[] = form_close(place("place_pedidos"));
-            $r[] = form_form_search();
-            return append_data($r);
+            $r[] = form_close();
+
+
+            $z[] = div(append_data($r),1);
+            $z[] = div(place("place_pedidos top_50 bottom_50"),1);
+            $z[] = div(form_form_search(),1);
+            return div(append_data($z),8,1);
 
         }
     }
@@ -699,9 +703,8 @@ if (!function_exists('invierte_date_time')) {
                     $municipio = $domicilio["municipio"];
                     $estado = $domicilio["estado"];
 
-                    $text =
-                        $calle . " " . " NÚMERO " . $numero_exterior . " NÚMERO INTERIOR " . $numero_interior . " COLONIA " . $asentamiento . " DELEGACIÓN/MUNICIPIO " . $municipio . " ESTADO " . $estado . " CÓDIGO POSTAL " . $cp;
-                    $text[] = p(strtoupper($text), ["class" => "card-text"]);
+                    $t = $calle . " " . " NÚMERO " . $numero_exterior . " NÚMERO INTERIOR " . $numero_interior . " COLONIA " . $asentamiento . " DELEGACIÓN/MUNICIPIO " . $municipio . " ESTADO " . $estado . " CÓDIGO POSTAL " . $cp;
+                    $text[] = $t;
 
                 } else {
 
@@ -1191,7 +1194,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $text = "";
+            $text = [];
             foreach ($usuario as $row) {
 
                 $nombre = $row["nombre"];
@@ -1201,10 +1204,13 @@ if (!function_exists('invierte_date_time')) {
                 $tel_contacto = $row["tel_contacto"];
                 $tel_contacto_alterno = $row["tel_contacto_alterno"];
 
-                $text[] = div(strtoupper(append_data([$nombre, $apellido_paterno, $apellido_materno])), 1);
-                $text[] = div($email, 1);
-                $text[] = div($tel_contacto, 1);
-                $text[] = div($tel_contacto_alterno, 1);
+
+                $nombre_completo = append_data([$nombre, $apellido_paterno, $apellido_materno]);
+
+                $text[] = div($nombre_completo);
+                $text[] = div($email);
+                $text[] = div($tel_contacto);
+                $text[] = div($tel_contacto_alterno);
 
 
                 $icon = icon("fa-pencil configurara_informacion_cliente black");

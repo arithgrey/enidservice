@@ -121,14 +121,16 @@ function sub_categorias_destacadas($param)
 }
 
 if (!function_exists('div')) {
-    function div($info, $attributes = '', $row = 0)
+    function div($info, $attributes = [], $row = 0)
     {
 
         if (is_numeric($attributes)) {
 
             switch ($attributes) {
                 case 1:
+
                     return addNRow($info);
+
                     break;
                 case 2:
                     return "<div class='row'>" . $info . "</div>";
@@ -163,6 +165,12 @@ if (!function_exists('div')) {
                     $response = ($row > 0) ? "<div class='col-lg-10 col-lg-offset-1'>" . $info . "</div>" : "<div class='col-lg-10'>" . $info . "</div>";
                     return $response;
 
+                    break;
+
+                case 12:
+
+
+                    return "<div class='col-lg-12'>" . $info . "</div>";
 
                     break;
 

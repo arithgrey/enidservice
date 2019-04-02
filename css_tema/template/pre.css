@@ -36,3 +36,6 @@
     filter: grayscale(1, 100);
     background-attachment: fixed;
 }
+.mh-selector{
+    min-height: 210px;
+}

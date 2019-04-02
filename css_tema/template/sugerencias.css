@@ -95,17 +95,7 @@
 }
 .contenedor_sugeridos{
 
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-flex-flow: row wrap;
-    justify-content: center;
+    min-height: 300px;
 
 }
 .img_sugerencia{
@@ -113,4 +103,8 @@
 
     width: 250px;
     align-self: flex-end;
+}
+.imagen_sugerencia{
+    max-height: 270px;
+
 }
