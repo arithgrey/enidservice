@@ -39,7 +39,7 @@ $li = [
 		<?= ul(
 			[place("place_notificaciones_usuario")],
 			[
-				"class" => "dropdown-menu " . $class_notificacion
+				"class" => "dropdown-menu shadow " . $class_notificacion
 			]
 		) ?>
 	</li>
@@ -48,7 +48,7 @@ $li = [
 		<?= get_img_usuario($id_usuario) ?>
 		<?= ul(
 			$li,
-			["class" => "dropdown-menu menu_usuario"]
+			["class" => "dropdown-menu menu_usuario "]
 		) ?>
 	</li>
 </div>

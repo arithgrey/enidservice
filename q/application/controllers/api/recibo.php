@@ -364,7 +364,7 @@ class recibo extends REST_Controller
 		$text = "";
 		$pencuentro = ($tipo_entrega == 1) ? get_format_punto_encuentro($data_complete, $recibo) : "";
 		$text .= $pencuentro;
-		$text .= heading_enid(icon("fa fa-credit-card") . $text_forma_compra, 3, ["class" => 'top_20']);
+		$text .= heading_enid( $text_forma_compra .icon("fa fa-credit-card")  , 4, ["class" => 'top_50 letter-spacing-5 uderline']);
 		$text .= getPayButtons($id_recibo, $url_request, $saldo_pendiente, $id_usuario_venta);
 
 
@@ -378,7 +378,7 @@ class recibo extends REST_Controller
 
 		$text .= get_botones_seguimiento($id_recibo);
 		$f = format_concepto($id_recibo, $resumen_pedido, $num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion, $saldo_pendiente, $url_img_servicio, $monto_a_pagar, $deuda);
-		$r = div($text, ["class" => "col-lg-8"]);
+		$r = div($text, ["class" => "col-lg-8  shadow padding_10"]);
 		return div($r . $f, 1);
 
 	}

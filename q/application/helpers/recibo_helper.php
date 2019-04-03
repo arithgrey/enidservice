@@ -121,7 +121,7 @@ if (!function_exists('invierte_date_time')) {
         $ops_tipo_orden_text = ["", "FECHA REGISTRO", "FECHA ENTREGA", "FECHA CANCELACIÓN", "FECHA DE PAGO", "FECHA CONTRA ENTREGA"];
 
         $default = ["class" => "header_table_recibos"];
-        $tb = hr()."<table class='table_enid_service top_20' ><thead>";
+        $tb = hr() . "<table class='table_enid_service top_20' ><thead>";
         $tb .= "<tr class='header_table'>";
         $tb .= get_th("ORDEN", $default);
         $tb .= get_th("", $default);
@@ -338,7 +338,7 @@ if (!function_exists('invierte_date_time')) {
                 $text = "MIRA TUS ÚLTIMAS COMPRAS";
             }
             $config = ["class" => " ver_mas_compras_o_ventas"];
-            return div(anchor_enid(heading_enid($text,3), $config),["class"=> "col-lg-12 border_bottom top_50 bottom_50"]);
+            return div(anchor_enid(heading_enid($text, 3), $config), ["class" => "col-lg-12 border_bottom top_50 bottom_50"]);
         }
         return $text;
     }
@@ -366,26 +366,29 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_total_articulos_promocion($modalidad, $total = 0)
+    function get_total_articulos_promocion($modalidad)
     {
 
         $response = "";
-        if ($modalidad == 1) {
+        if ($modalidad > 0) {
 
             $l = anchor_enid(
-                icon("fa fa-cart-plus") . " Artículos en promoción" . $total,
-                ["href" => '../planes_servicios/',
-                    "class" => 'vender_mas_productos']
+                icon("fa fa-cart-plus") . " Artículos en promoción ",
+                [
+                    "href" => '../planes_servicios/',
+                    "class" => 'black vender_mas_productos text-uppercase letter-spacing-5'
+
+                ]
             );
 
             $l2 = anchor_enid(
                 " Agregar",
                 [
                     "href" => '../planes_servicios/?action=nuevo',
-                    "class" => 'vender_mas_productos']
+                    "class" => 'black vender_mas_productos text-uppercase letter-spacing-5']
             );
 
-            $response = get_btw($l, $l2, 12);
+            $response = get_btw(div($l), div($l2), " col-lg-8 col-lg-offset-2 d-flex align-items-center justify-content-between top_30");
         }
         return $response;
     }
@@ -484,14 +487,13 @@ if (!function_exists('invierte_date_time')) {
 
         $text_icono = ($vendedor == 1) ? "DETALLES DE LA COMPRA " : icon('fa fa-credit-card-alt') . "DETALLES DE TU COMPRA ";
 
-        $text = div($text_icono,
-            [
-                "class" => 'resumen_pagos_pendientes',
-                "id" => $id_recibo,
-                "href" => "#tab_renovar_servicio",
-                "data-toggle" => "tab"
-            ]);
-        return div($text, ["class" => 'btn_comprar']);
+        $text = guardar($text_icono, [
+            "class" => 'resumen_pagos_pendientes',
+            "id" => $id_recibo,
+            "href" => "#tab_renovar_servicio",
+            "data-toggle" => "tab"
+        ]);
+        return div($text);
     }
 
     function texto_costo_envio_info_publico($flag_envio_gratis, $costo_envio_cliente, $costo_envio_vendedor)
@@ -559,7 +561,7 @@ if (!function_exists('invierte_date_time')) {
         if ($modalidad == 0 && $ordenes == 0) {
             return "";
         }
-        return div(heading_enid($text, 2),1);
+        return div(heading_enid($text, 3), 1);
     }
 
     function get_mensaje_compra($modalidad, $num_ordenes)
@@ -651,17 +653,17 @@ if (!function_exists('invierte_date_time')) {
         $concepto .= div("Concepto");
         $concepto .= div($resumen_pedido);
         $concepto .= valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion);
-        $concepto .= div("Precio $" . $monto_a_pagar);
+        $concepto .= div("PRECIO " . span("$".$monto_a_pagar , ["class"=>"strong"]),["class"=>"top_30"]);
         $concepto .= div($deuda["text_envio"]);
 
-        $text = div($concepto, ["style" => "border-style: solid;padding: 10px;border-width: 1px;"]);
+        $text = div($concepto);
 
         $monto = heading_enid("Monto total pendiente-", 3, ['class' => 'strong']);
-        $monto .= heading_enid($saldo_pendiente . "MXN", 4, ["class" => 'blue_enid strong']);
+        $monto .= heading_enid($saldo_pendiente . "MXN", 2, ["class" => 'blue_enid ']);
         $monto .= heading_enid("Pesos Mexicanos", 4, ["class" => 'strong']);
 
-        $text .= div($monto, ["style" => "border-style: solid;text-align: center;"]);
-        $text .= div(img($url_img_servicio), 1);
+        $text .= div($monto, ["style" => "text-align: center;" , "class"=> "top_50"]);
+        $text .= div(img($url_img_servicio), ["class"=> "max-height: 250px;"],1);
         return div($text, 4);
 
     }
@@ -677,13 +679,16 @@ if (!function_exists('invierte_date_time')) {
         $lugar_entrega = $p["lugar_entrega"];
         $numero = "NÚMERO " . $p["numero"];
 
-        $r[] = heading_enid("LUGAR DE ENCUENTRO", 3, ["class" => "top_20"]);
-        $r[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, 1);
-        $r[] = div("ESTACIÓN " . $lugar_entrega, ["class" => "strong"], 1);
-        $r[] = br();
-        $r[] = div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"]);
-        $r[] = br();
-        $r[] = div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", ["class" => "contenedor_text_entrega"]);
+        $r[] = div(heading_enid("LUGAR DE ENCUENTRO", 3, ["class" => "top_30 underline "]),1);
+
+        $x[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, ["class"=> "top_20"],1);
+        $x[] = div("ESTACIÓN " . $lugar_entrega, ["class" => "strong"], 1);
+        $x[] = div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"], 1);
+
+        $r[] =  div(append_data($x), ["class"=> "contenedor_detalle_entrega"]);
+
+        $r[] = div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", ["class" => "contenedor_text_entrega border"]);
+
         return append_data($r);
     }
 
@@ -744,7 +749,7 @@ if (!function_exists('invierte_date_time')) {
         $t .= guardar(
             "A TRAVÉS DE PAYPAL",
             [
-                "class" => "top_10 text-left",
+                "class" => "top_20 text-left",
                 "recibo" => $id_recibo,
                 "onclick" => "notifica_tipo_compra(2 ,  '" . $id_recibo . "');"
             ],
@@ -757,7 +762,7 @@ if (!function_exists('invierte_date_time')) {
         $t .= guardar(
             "SALDO  ENID SERVICE",
             [
-                "class" => "top_10 text-left",
+                "class" => "top_30 text-left",
                 "onclick" => "notifica_tipo_compra(1 ,  '" . $id_recibo . "');"
             ],
             1,
@@ -777,7 +782,6 @@ if (!function_exists('invierte_date_time')) {
         if ($data["total"] > 0) {
 
             $ordenes = $data["compras"];
-
             $listado = create_listado_compra_venta($ordenes, $status_enid_service, 1);
             $response = div($listado, 1);
         }
@@ -796,8 +800,8 @@ if (!function_exists('invierte_date_time')) {
         $id_perfil = $data["id_perfil"];
 
         $r[] = get_text_modalidad($modalidad, $ordenes);
-        $total = ($modalidad < 1) ? count($ordenes) : 0;
-        $r[] = get_total_articulos_promocion($modalidad, $total);
+        //$total = ($modalidad < 1) ? count($ordenes) : 0;
+        $r[] = get_total_articulos_promocion($modalidad);
         $r[] = create_listado_compra_venta($ordenes, $status_enid_service, $modalidad, $id_perfil);
         $r[] = evalua_acciones_modalidad($en_proceso, $modalidad);
         $r[] = evalua_acciones_modalidad_anteriores($anteriores, $modalidad);
@@ -836,9 +840,20 @@ if (!function_exists('invierte_date_time')) {
                 $t .= guardar("AVANZADO", [], 1, 1, 0, $url);
             }
 
-            $list[] = div($t, ["class" => "align-items-center  d-flex flex-row border row top_20 justify-content-between"]);
+            $list[] = div($t, ["class" => "align-items-center  d-flex flex-row border row top_20 justify-content-between "]);
         }
-        return div(append_data($list), 8) . div("", 4);
+
+        if ($modalidad < 1) {
+
+
+            $response = div(append_data($list), 12);
+        } else {
+            $response = div(append_data($list), 8, 1);
+
+        }
+
+        return $response;
+
     }
 
     function get_view_compras($status_enid_service, $compras, $tipo)

@@ -165,7 +165,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
         }
-        $response = div(append_data($r), 2);
+        $response = div(append_data($r));
         return $response;
 
 

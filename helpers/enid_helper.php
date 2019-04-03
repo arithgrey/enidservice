@@ -1409,16 +1409,18 @@ if (!function_exists('get_menu_session')) {
 if (!function_exists('get_btw')) {
     function get_btw($a, $b, $class = '', $row = 0)
     {
+
+        if (is_numeric($class)){
+            $class =  " col-lg-".$class;
+            if ($row > 0){
+                $class =  $class  . " col-lg-offset- ".$class;
+            }
+
+        }
+
         $response = div(append_data([$a, $b]), ["class" => $class]);
         if ($row > 0) {
 
-            if (is_numeric($class)){
-                $class =  " col-lg-".$class;
-                if ($row > 0){
-                    $class =  $class  . " col-lg-offset- ".$class;
-                }
-
-            }
             $response = div(div(append_data([$a, $b]), ["class" => $class]), ["class" => "row"]);
 
         }

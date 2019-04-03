@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
             $email = $extra["email"];
         }
 
-        $r[] = heading_enid("ESCRIBE UNA RESEÑA", 3);
+        $r[] = heading_enid("ESCRIBE UNA RESEÑA", 3,["class"=> "underline   "]);
         $r[] = div("Sobre  " . $servicio[0]["nombre_servicio"]);
         $r[] = form_open("", ["class" => "form_valoracion"]);
         $r[] = place("nuevo");
@@ -26,7 +26,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_btw(
             anchor_enid("SI", ["class" => 'recomendaria', "id" => 1]),
             anchor_enid("NO", ["class" => 'recomendaria', "id" => 0]),
-            "display_flex_enid"
+            "display_flex_enid top_30 bottom_20"
 
         );
         $r[] = place("place_recomendaria");
@@ -63,10 +63,11 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("nuevo");
 
         $input =
-            '<input type="text" name="nombre" 
+            div('<input type="text" name="nombre" 
 	        placeholder="Por ejemplo: Jonathan" 
 	        value="' . $nombre . '"  ' . valida_readonly($nombre) . ' 
-            required>';
+	        class="input form-control"
+            required>');
 
         $r[] = get_btw(
             div("Nombre*", ["class" => "text-valoracion strong"]),
@@ -78,10 +79,11 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => "id_servicio", "value" => $id_servicio]);
         $r[] = place("nuevo");
 
-        $in = '<input type="email" 
+        $in = div('<input type="email" 
         name="email" 
+        	        class="input form-control"
         placeholder="Por ejemplo: jmedrano@enidservice.com" 
-        required ' . valida_readonly($email) . ' value="' . $email . '">';
+        required ' . valida_readonly($email) . ' value="' . $email . '">');
 
         $r[] = get_btw(
             div(strong("Tu correo electrónico*", ["class" => "text-valoracion"])),
@@ -90,11 +92,11 @@ if (!function_exists('invierte_date_time')) {
 
         );
         $r[] = place("nuevo");
-        $r[] = guardar("ENVIAR RESEÑA" . icon('fa fa-chevron-right ir'));
+        $r[] = guardar("ENVIAR RESEÑA " . icon('fa fa-chevron-right ir'), ["clas"=> "top_30 bottom_30"]);
         $r[] = place("place_registro_valoracion");
         $r[] = form_close();
 
-        $response = div(append_data($r), 6,1);
+        $response = div(append_data($r), ["class"=>"col-lg-6 col-lg-offset-3 shadow padding_10"]);
         return $response;
 
     }
@@ -118,10 +120,12 @@ if (!function_exists('invierte_date_time')) {
 
 
         $text = strtoupper($vendedor[0]["nombre"] . " " . $vendedor[0]["apellido_paterno"]);
-        $z[] = heading_enid("ESCRIBE UNA PREGUNTA " . $text, 2);
-        $z[] = div("SOBRE SU" . $servicio[0]["nombre_servicio"]);
-        $z[] = br(2);
-        $z[] = form_open("", ["class" => "form_valoracion "]);
+        $z[] = heading_enid("ESCRIBE UNA PREGUNTA " . $text, 3  );
+
+        $url =  get_url_servicio($id_servicio);
+        $nombre =  anchor_enid($servicio[0]["nombre_servicio"], ["class"=> "underline black strong" , "href"=>$url ]);
+        $z[] = div("SOBRE SU " . $nombre, ["class"=> "top_30  bottom_30"]);
+        $z[] = form_open("", ["class" => "form_valoracion top_30"]);
         $z[] = append_data($r);
         $z[] = form_close();
 

@@ -24,6 +24,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = heading_enid("¿Quién recibe?", 2, ["class" => "text-uppercase"]);
         $r[] = form_open("", ["class" => "form-horizontal form_punto_encuentro mt-5"]);
         $r[] = label(" NOMBRE ", ["class" => "col-lg-3 mt-3"]);
+
         $r[] = div(input([
             "id" => "nombre",
             "name" => "nombre",
@@ -136,16 +137,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO", 3, ["class" => " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10"]);
-        /*
-        $r[] = create_select($tipos_puntos_encuentro,
-            "tipos_puntos_encuentro",
-            "tipos_puntos_encuentro hide",
-            "tipos_puntos_encuentro",
-            "tipo",
-            "id"
-            , 0, 1, 0, "-");
-        */
-
 
         return append_data($r);
 

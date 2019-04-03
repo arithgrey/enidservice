@@ -85,8 +85,7 @@ $list_footer = [
     }
 </style>
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css?<?= version_enid ?>">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="../css_tema/template/4bootstrap.min.css">
 
 <link href="../css_tema/template/bootstrap.min.css?<?= version_enid ?>" rel="stylesheet" id="bootstrap-css">
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>

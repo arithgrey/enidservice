@@ -71,7 +71,11 @@ foreach ($info_tareas as $row) {
                             "class" => 'strong comentarios_tarea cursor_pointer',
                             "id" => $id_tarea
                         ])
-                    , ["colspan" => 2]) ?>
+                    , [
+                            "colspan" => 2
+
+
+                    ]) ?>
 
                 <?= get_td(div("+ agregar comentario",
                         [

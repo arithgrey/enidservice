@@ -412,7 +412,6 @@ li {
     background: #0a1521 !important;
     padding: 10px !important;
     color: white !important;
-    font-weight: bold !important;
     width: 100% !important;
     border: 0 !important;
 }
@@ -1099,14 +1098,17 @@ h2 {
 
 .notificaciones_enid {
     left: -300px !important;
+    min-height: 250px;
 }
 
 .notificaciones_enid_mb {
     left: -190px !important;
+
 }
 
 .menu_usuario {
     left: -180px !important;
+    min-height: 310px;
 }
 
 .search_principal_form {
@@ -1213,3 +1215,7 @@ h3 {
 .h-400 {
     height: 400px;
 }
+.text_notificacion{
+    min-height: 230px;
+}
+

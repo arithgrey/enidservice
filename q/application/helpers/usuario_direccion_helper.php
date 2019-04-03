@@ -13,7 +13,7 @@ if (!function_exists('invierte_date_time')) {
 
             div("Persona que recibe")
             ,
-            input([
+            div(input([
                 "maxlength" => "80",
                 "name" => "nombre_receptor",
                 "value" => $nombre_receptor,
@@ -22,7 +22,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "nombre_receptor",
                 "id" => "nombre_receptor",
                 "type" => "text"
-            ])
+            ]))
             ,
             6
         );
@@ -68,8 +68,7 @@ if (!function_exists('invierte_date_time')) {
             "autocorrect" => "off",
             "type" => "text"
         ]);
-        $r[] = div("Entre la calle y la calle, o información adicional",
-            ["class" => "titulo_enid_sm_sm"]);
+        $r[] = heading_enid("Entre la calle y la calle, o información adicional", 5, 1) ;
         $r[] = input([
             "required" => true,
             "class" => "textinput address3 ",

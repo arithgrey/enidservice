@@ -41,7 +41,7 @@ class Home extends CI_Controller
 			$data["css"] = ["valoracion_servicio.css"];
 			$data["js"] = ["valoracion/principal.js"];
 
-			$response =  div($formulario_valoracion, ["class" => "col-lg-10 col-lg-offset-1 top_20"]);
+			$response =  div($formulario_valoracion, ["class" => "top_20"]);
 			$this->principal->show_data_page($data, $response ,1);
 		} else {
 			header("location:../?q2=0&q=");

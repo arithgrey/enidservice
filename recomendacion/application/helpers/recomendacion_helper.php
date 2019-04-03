@@ -4,9 +4,8 @@ if (!function_exists('invierte_date_time')) {
         function get_formar_recomendacion($usuario,$resumen_recomendacion,$paginacion,$resumen_valoraciones_vendedor)
         {
 
-            $r[] =  heading_enid("RESEÑAS Y VALORACIONES SOBRE", 1) ;
-            $r[] =  anchor_enid(
-                icon('fa fa-shopping-cart') . get_campo($usuario, "nombre"),
+            $r[] =  heading_enid("RESEÑAS Y VALORACIONES SOBRE", 3,["class"=>"underline"]) ;
+            $r[] =  anchor_enid(icon('fa fa-shopping-cart') . get_campo($usuario, "nombre"),
                 [
 
                     "href" => "../search/?q3=" . get_campo($usuario, "id_usuario"),
@@ -18,10 +17,8 @@ if (!function_exists('invierte_date_time')) {
             $r[] =  div($paginacion, 1) ;
             $r[] =  div($resumen_valoraciones_vendedor, 1) ;
             $r[] =  div($paginacion, 1) ;
-
-
             $response = append_data($r);
-            $response =  div($response ,6,1);
+            $response =  div($response , ["class"=> "top_30 col-lg-6 col-lg-offset-3 shadow padding_10"]);
             return $response;
         }
     }

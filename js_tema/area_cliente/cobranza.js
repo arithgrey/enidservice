@@ -48,10 +48,13 @@ let response_cancelacion_compra = function(data){
 		let id_servicio=  data.registro.id_servicio; 
 		let href ="../valoracion/?servicio="+id_servicio;
 		let btn_cuenta_historia =  "<a href='"+href+"' class='a_enid_blue'>CUENTANOS TU EXPERIENCIA</a>";
-		let btn_ir_a_compras =  "<a class='a_enid_black mis_compras_btn' id='mis_compras' href='#tab_mis_pagos' data-toggle='tab'>VER MIS COMPRAS</a>";
-		let div= "<div class='cuenta_tu_experiencia'>"+btn_cuenta_historia+btn_ir_a_compras+"</div>";
-		let div2="<div class='titulo_enid'>¿NOS AYUDARÍAS A EVALUAR EL PRODUCTO QUE CANCELASTE?</div>";		
-		llenaelementoHTML(".place_resumen_servicio" ,  div2 +""+div);
+
+		let div= "<div class='cuenta_tu_experiencia'>"+btn_cuenta_historia+"</div>";
+		let div2="<h3>¿NOS AYUDARÍAS A EVALUAR EL PRODUCTO QUE CANCELASTE?</h3>";
+
+
+		let response =  "<div class='col-lg-8 col-lg-offset-2 text-center'>"+div2 +""+div+"</div>";
+		llenaelementoHTML(".place_resumen_servicio" , response  );
 		$(".mis_compras_btn").click(carga_compras_usuario);
 			
 	}		

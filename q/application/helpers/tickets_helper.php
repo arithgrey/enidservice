@@ -72,18 +72,37 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $x[] = heading_enid("¿REALMENTE DESEAS CANCELAR LA COMPRA?", 3);
-        $x[] = div(strtoupper($recibo["resumen"]));
-        $r[] = div(div(append_data([$x]), ["class" => "padding_20"]), ['class' => 'jumbotron']);
+        $x[] = div($recibo["resumen"]);
+        $r[] = div(div(append_data($x), ["class" => "padding_20"]));
+
+
+        $url  = "../area_cliente/?action=compras&ticket=".$recibo['id_recibo'];
+        $r[] = guardar("SEGUIR COMPRANDO",
+            [
+
+                "class" => "top_30",
+
+            ],
+            1,
+            1,0,$url  );
+
         $r[] = guardar("CANCELAR ÓRDEN DE COMPRA",
             [
-                "class" => "cancelar_orden_compra",
+                "class" => "cancelar_orden_compra top_20",
                 "id" => $recibo['id_recibo'],
                 "modalidad" => $modalidad
             ],
             1,
             1);
 
-        return append_data([$r]);
+
+
+
+
+
+
+
+        return div(append_data($r), 6,1);
     }
 
     function valida_check_tarea($id_tarea, $valor_actualizar, $status, $id_perfil)

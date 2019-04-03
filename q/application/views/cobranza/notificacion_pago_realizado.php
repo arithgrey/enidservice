@@ -11,7 +11,7 @@ $url_seguimiento =  "../pedidos/?seguimiento=".$id_recibo;
 
 ?>
 <?=validate_format_cancelacion($total_cubierto, $id_recibo, $modalidad)?>
-<div style="margin: 0 auto;width: 66%;">
+<div style="margin: 0 auto;width: 66%;" class="border padding_10 shadow">
 	<?=get_format_transaccion($id_recibo)?>
 	<table>
 		<tr class='tb_pagos'>
@@ -54,6 +54,6 @@ $url_seguimiento =  "../pedidos/?seguimiento=".$id_recibo;
 			<?= get_td("$" . $monto_a_pagar . "MXN") ?>
 		</tr>
 	</table>
-	<?=guardar("RASTREAR PEDIDO",["href"=> $url_seguimiento ],1,1,0,$url_seguimiento)?>
+	<?=guardar("RASTREAR PEDIDO",["href"=> $url_seguimiento , "class"=> "top_50 bottom_50"],1,1,0,$url_seguimiento)?>
 </div>
 

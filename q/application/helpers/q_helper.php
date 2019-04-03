@@ -505,7 +505,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         ];
-        $response["lista_pendientes"] = get_mensaje_inicial_notificaciones(1, $f) . ul($list);
+        $response["lista_pendientes"] =  ul($list,["class"=> "d-flex flex-column justify-content-between text_notificacion"  ]);
 
         return $response;
 
