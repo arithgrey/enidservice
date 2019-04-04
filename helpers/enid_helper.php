@@ -1310,18 +1310,26 @@ if (!function_exists('append_data')) {
 
     function append_data($array, $col = 0, $num_col = 0)
     {
-        $response = "";
-        for ($a = 0; $a < count($array); $a++) {
 
-            $response .= " " . $array[$a];
+
+        if (is_array($array)) {
+
+            $response = "";
+            for ($a = 0; $a < count($array); $a++) {
+
+                $response .= " " . $array[$a];
+            }
+
+            if ($col > 0) {
+
+                $response = ($num_col > 0) ? div($response, $num_col) : div($response);
+
+            }
+            return $response;
+        }else{
+            echo "No es array -> ". print_r($array);
         }
 
-        if ($col > 0) {
-
-            $response = ($num_col > 0) ? div($response, $num_col) : div($response);
-
-        }
-        return $response;
     }
 }
 
@@ -1410,10 +1418,10 @@ if (!function_exists('get_btw')) {
     function get_btw($a, $b, $class = '', $row = 0)
     {
 
-        if (is_numeric($class)){
-            $class =  " col-lg-".$class;
-            if ($row > 0){
-                $class =  $class  . " col-lg-offset- ".$class;
+        if (is_numeric($class)) {
+            $class = " col-lg-" . $class;
+            if ($row > 0) {
+                $class = $class . " col-lg-offset- " . $class;
             }
 
         }

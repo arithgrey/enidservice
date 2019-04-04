@@ -1,34 +1,6 @@
-img {
-    max-width: 100%;
-    height: auto;
-}
 
 .page-section {
     padding: 50px 0;
-
-}
-
-@media (min-width: 800px) {
-    .page-section {
-        padding: 100px 0;
-    }
-}
-
-@media (min-width: 800px) {
-    .section-title {
-        font-size: 55px;
-    }
-}
-
-.section-title--gray {
-    color: #9D9DA6;
-}
-
-
-/* _timeline.css */
-.timeline {
-    position: relative;
-    padding: 100px 0;
 
 }
 
@@ -40,13 +12,6 @@ img {
     width: 4px;
     height: 100%;
     background-color: #04174B;
-}
-
-@media (min-width: 800px) {
-    .timeline::before {
-        left: 50%;
-        margin-left: -2px;
-    }
 }
 
 .timeline__item {

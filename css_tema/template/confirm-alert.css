@@ -29,9 +29,6 @@
     }
 }
 
-body[class*=jconfirm-no-scroll-] {
-    overflow: hidden !important;
-}
 
 .jconfirm {
     position: fixed;
