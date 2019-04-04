@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/php:5.6-apache-browsers-legacy
-
     steps:
       - run:
           name: Update packages ...
@@ -11,10 +10,3 @@ jobs:
       - run:
           name: Check lint syntaxis LINT ENID...
           command: find . -name \*.php -exec php -l "{}" \;
-      - run:
-          name: Register succesfull tests
-          command: sudo python /var/www/html/.circleci/deploy_check.py pull_request_OK $CIRCLE_PULL_REQUEST /home/circleci/builds-pulls
-      - save_cache:
-          key: v4-build-pulls-json-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - /home/circleci/builds-pulls
