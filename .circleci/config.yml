@@ -15,6 +15,9 @@ jobs:
           name: Install packages 2/2 ...
           command: sudo apt-get install -y libxslt1-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev git vim openssh-server ocaml expect mysql-client
       - run:
+          name: Check lint syntaxis LINT ENID...
+          command: find . -name \*.php -exec php -l '{}' \;
+      - run:
           name: Active docker configure gd ...
           command: sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
       - run:
@@ -27,9 +30,6 @@ jobs:
           name: Install Composer ...
           command: curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
-      - run:
-          name: Check lint syntaxis LINT ENID...
-          command: find . -name \*.php -exec php -l {} \;
 
       - run:
           name: Check lint syntaxis ...
