@@ -29,9 +29,15 @@ jobs:
       - run:
           name: Install dependences ...
           command: composer install
+
+      - run:
+          name: Check lint syntaxis LINT ENID...
+          command: find . -name \*.php -exec php -l "{}" \;
+
       - run:
           name: Check lint syntaxis ...
           command: ./vendor/bin/parallel-lint --exclude vendor .
+
       - run:
           name: Check php unit test ...
           command: ./vendor/bin/phpunit
