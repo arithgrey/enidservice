@@ -109,8 +109,8 @@ if (!function_exists('invierte_date_time')) {
             $r[] = form_busqueda_pedidos($tipos_entregas, $status_ventas);
             $x[] = strong("ORDENAR");
             $x[] = create_select($fechas, "tipo_orden", "form-control", "tipo_orden", "fecha", "val");
-            $r[] = div(append_data($x), ["class" => "col-lg-3"]);
-            $r[] = div(get_format_fecha_busqueda(), ["class" => "col-lg-6"]);
+            $r[] = div(append_data($x), 3);
+            $r[] = div(get_format_fecha_busqueda(), 6);
             $r[] = form_close();
 
 

@@ -20,7 +20,6 @@ class Home extends CI_Controller
 		$servicio = $this->input->get("servicio");
 		if ($servicio > 0 && ctype_digit($servicio)) {
 
-			//$param = $this->input->get();
 
 			$clasificaciones_departamentos = $this->principal->get_departamentos();
 			$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;

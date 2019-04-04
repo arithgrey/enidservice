@@ -20,16 +20,15 @@ if (!function_exists('invierte_date_time')) {
         $url_img_servicio = $servicio["url_img_servicio"];
 
 
-
-        if ($in_session > 0 ){
+        if ($in_session > 0) {
             $p[] =
                 div(img([
                     'src' => $url_img_servicio,
                     'alt' => $metakeyword,
                     'style' => "max-height: 270px !important",
                     'class' => "padding_5 top_10 hover_padding"
-                ]),1);
-        }else{
+                ]), 1);
+        } else {
             $p[] =
                 img([
                     'src' => $url_img_servicio,
@@ -39,8 +38,6 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
         }
-
-
 
 
         $response = anchor_enid(
@@ -54,13 +51,13 @@ if (!function_exists('invierte_date_time')) {
 
         if ($in_session > 0) {
 
-            $p[] = div(get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session),1);
-            $p[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_actual),1);
-            $p[] = div(muestra_vistas_servicio($in_session, $vista),1);
+            $p[] = div(get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session), 1);
+            $p[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_actual), 1);
+            $p[] = div(muestra_vistas_servicio($in_session, $vista), 1);
 
-            $r =  div($response ,["class"=> "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 "],1);
-            $response =  $r. append_data($p);
-            $response =  div($response ,["class"=> "producto_enid d-flex flex-column justify-content-center border" , "style"=> "height:600px"]);
+            $r = div($response, ["class" => "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 "], 1);
+            $response = $r . append_data($p);
+            $response = div($response, ["class" => "producto_enid d-flex flex-column justify-content-center border", "style" => "height:600px"]);
 
         }
 
@@ -75,7 +72,7 @@ if (!function_exists('invierte_date_time')) {
         $paginacion = addNRow(div($paginacion, 1));
         $l = "";
         foreach ($productos as $row) {
-            $l .= div($row, ["class" => 'col-lg-3', "style" => 'margin-top:30px;']);
+            $l .= div($row, ["class" => 'col-lg-3 top_30']);
         }
         $t = addNRow(icon("fa fa-search") . "Tu búsqueda de" . $busqueda . "(" . $num_servicios . "Productos)");
         $t .= addNRow($paginacion);

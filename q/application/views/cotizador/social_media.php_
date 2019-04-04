@@ -1,5 +1,5 @@
 <?php $resumen = get_fechas_cotizador($info); ?>
-<?= heading_enid("Tu Productividad", 2, ["class" => 'titulo_repo']) ?>
+<?= heading_enid("Tu Productividad", 3]) ?>
 
 <div style='overflow-x:auto;'>
 	<table class='table_enid_service' border=1>

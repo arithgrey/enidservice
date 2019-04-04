@@ -153,7 +153,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $x[] = div("Esta es mi dirección principal ", ["class" => "mt-2 mb-2"]);
+        $x[] = div("Esta es mi dirección principal ", 2);
         $x[] = "<select name='direccion_principal'>";
         $x[] = '<option value="1">SI</option>';
         $x[] = '<option value="0">NO</option>';
