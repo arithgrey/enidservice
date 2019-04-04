@@ -24,17 +24,13 @@ jobs:
           name: Install docker php extensions ...
           command: sudo docker-php-ext-install bcmath mcrypt intl json gd pdo_mysql mysql mysqli soap xsl zip
       - run:
-          name: Install Composer ...
-          command: curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-      - run:
-          name: Install dependences ...
-          command: composer install
-
-      - run:
           name: Check lint syntaxis LINT ENID...
           command: find . -name \*.php -exec php -l "{}" \;
-
       - run:
+          name: Install Composer ...
+          command: curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
+     - run:
           name: Check lint syntaxis ...
           command: ./vendor/bin/parallel-lint --exclude vendor .
 
