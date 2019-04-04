@@ -6,9 +6,6 @@ jobs:
     working_directory: /var/www/html
     steps:
       - run:
-          name: Assign permission to deploy python file
-          command: sudo chmod 777 /var/www/html/.circleci/deploy_check.py
-      - run:
           name: Update packages ...
           command: sudo apt-get update
       - run:
