@@ -93,7 +93,7 @@ if (!function_exists('invierte_date_time')) {
         function get_call_to_action_registro($in_session)
         {
             if ($in_session != 1) {
-                return anchor_enid("ACCEDE A TU CUENTA PARA SOLICITAR INFORMACIÓN!", [], 1);
+                return anchor_enid("ACCEDE A TU CUENTA PARA SOLICITAR INFORMACIÓN!", 1);
             }
         }
     }
@@ -101,18 +101,13 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = addNRow(div($formulario_valoracion, 6,1));
+        $r[] = addNRow(div($formulario_valoracion, 6, 1));
         $r[] = input_hidden(["class" => "servicio", "value" => $id_servicio]);
-        $r[] = addNRow(div(div("ENVIAMOS TU PREGUNTA AL VENDEDOR!", ["class" => "registro_pregunta display_none padding_10 top_30"]), 6,1));
-
-
-        $r[] = div("",["class"=> "top_50"]);
-
-        $r[] = div(heading_enid("También te podría interesar" , 3),6,1);
-        $r[] = div(place("place_tambien_podria_interezar", ["id" => "place_tambien_podria_interezar"]),6,1);
-
-        $r[] = div(place("place_valoraciones top_50", ["id" => "place_valoraciones"]),6,1);
-
+        $r[] = addNRow(div(div("ENVIAMOS TU PREGUNTA AL VENDEDOR!", ["class" => "registro_pregunta display_none padding_10 top_30"]), 6, 1));
+        $r[] = div("", ["class" => "top_50"]);
+        $r[] = div(heading_enid("También te podría interesar", 3), 6, 1);
+        $r[] = div(place("place_tambien_podria_interezar", ["id" => "place_tambien_podria_interezar"]), 6, 1);
+        $r[] = div(place("place_valoraciones top_50", ["id" => "place_valoraciones"]), 6, 1);
 
 
         return append_data($r);

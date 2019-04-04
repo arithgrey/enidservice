@@ -53,11 +53,8 @@
                         ["class" => "titulo_enid_sm"], 1) ?>
                 </div>
                 <div class="tab-pane" id="tab_busqueda_productos">
-                    <?= div("PRODUCTOS MÁS BUSCADOS POR CLIENTES",
-                        ["class" => "titulo_enid_sm"], 1) ?>
-
+                    <?= div("PRODUCTOS MÁS BUSCADOS POR CLIENTES", ["class" => "titulo_enid_sm"], 1) ?>
                     <?= get_form_busqueda_productos_solicitados() ?>
-
                 </div>
                 <div class="tab-pane" id="tab_productos_publicos">
                     <?= div(

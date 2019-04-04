@@ -1,9 +1,7 @@
-<?= div(get_format_izquierdo($in_session), 2) ?>
-<div class='col-lg-10'>
-    <?= get_format_menu($in_session, $perfil) ?>
-    <?= valida_format_respuestas_menu($in_session, $lista_categorias) ?>
-    <?= div(get_format_faqs($flag_categoria, $flag_busqueda_q, $categorias_publicas_venta, $categorias_temas_de_ayuda, $faqs_categoria, $respuesta, $in_session, $perfil), ["class" => "tab-pane fade in active", "id" => "tab1default"]) ?>
-</div>
+<?= get_format_faqs($in_session, $perfil, $lista_categorias, $flag_categoria, $flag_busqueda_q, $categorias_publicas_venta, $categorias_temas_de_ayuda, $faqs_categoria, $respuesta) ?>
+
+
+
 
 
     

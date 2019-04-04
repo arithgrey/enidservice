@@ -33,9 +33,7 @@ foreach ($info_tickets as $row) {
                     ["class" => "cursor_pointer"]) ?>
             </div>
             <div class="dropdown pull-right">
-                <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-                    <?= icon("fa fa-plus") ?>
-                </button>
+                <?= guardar(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]) ?>
                 <?= div(anchor_enid("CERRAR TICKET",
                     [
                         "class" => "cerrar_ticket",

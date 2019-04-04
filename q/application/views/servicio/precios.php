@@ -9,7 +9,14 @@ $text_envios_mayoreo = "¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?";
 
 $i_precio_unidad = icon('fa fa-pencil');
 $text_precio_unidad = $i_precio_unidad . "PRECIO POR UNIDAD: $" . $precio . "MXN";
-
+$opt = array(
+    "text" => "NO, QUE SE CARGUE AL CLIENTE",
+    "v" => 0
+);
+$opt = array(
+    "text" => "SI - YO PAGO EL ENVIO",
+    "v" => 1
+);
 
 ?>
 
@@ -35,14 +42,7 @@ $text_precio_unidad = $i_precio_unidad . "PRECIO POR UNIDAD: $" . $precio . "MXN
             </div>
             <div class="input_envio config_precio_envio">
                 <?= heading_enid("¿EL PRECIO INCLUYE ENVÍO?", 4) ?>
-                <div class="col-lg-9">
-                    <select class="input_envio_incluido form-control">
-                        <option value="0">NO, QUE SE CARGUE AL CLIENTE
-                        </option>
-                        <option value="1">SI - YO PAGO EL ENVIO
-                        </option>
-                    </select>
-                </div>
+                <?= div(create_select($opt, "input_envio_incluido", "input_envio_incluido form-control", "input_envio_incluido", "text", "v"), 9) ?>
                 <?= guardar('GUARDAR', ["class" => "btn_guardar_envio col-lg-3"]) ?>
             </div>
         <?php endif; ?>

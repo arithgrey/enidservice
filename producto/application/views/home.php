@@ -109,12 +109,8 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 
     </div>
 <?= end_row() ?>
-
 <?= hr(["class" => "mr-50 mb-5"]) ?>
-
 <?= get_descripcion_servicio($descripcion, $flag_servicio, $url_vide_youtube, $is_mobile) ?>
-
-
 <?= place("place_valoraciones col-lg-12") ?>
 <?= addNRow(div(place("place_tambien_podria_interezar"), 10 , 1)) ?>
 <?= input_hidden(["class" => "qservicio", "value" => $nombre_servicio]) ?>

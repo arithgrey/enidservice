@@ -1,10 +1,21 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function valida_format_respuestas_menu($in_session, $lista_categorias)
+    function get_format_faqs($in_session, $perfil, $lista_categorias, $flag_categoria, $flag_busqueda_q, $categorias_publicas_venta, $categorias_temas_de_ayuda, $faqs_categoria, $respuesta)
     {
 
+        $r[] = div(get_format_izquierdo($in_session), 2);
+        $x[] = get_format_menu($in_session, $perfil);
+        $x[] = valida_format_respuestas_menu($in_session, $lista_categorias);
+        $x[] = div(get_format_faqs($flag_categoria, $flag_busqueda_q, $categorias_publicas_venta, $categorias_temas_de_ayuda, $faqs_categoria, $respuesta, $in_session, $perfil), ["class" => "tab-pane fade in active", "id" => "tab1default"]);
+        $r[] = div(append_data($x), 10);
+        return append_data($r);
 
+
+    }
+
+    function valida_format_respuestas_menu($in_session, $lista_categorias)
+    {
         $response = "";
         if ($in_session > 0) {
             $response = div(get_form_respuesta($lista_categorias), ["class" => "tab-pane fade", "id" => "tab2default"]);

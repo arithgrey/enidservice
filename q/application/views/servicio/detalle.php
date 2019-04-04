@@ -154,13 +154,9 @@ $i_cantidad = input([
     "value" => $existencia,
 ],
     1);
-
-
 $icantidad = icon('fa fa-pencil text_cantidad');
 
-
 ?>
-
 <?= agregar_imgs() ?>
 <div class="contenedor_global_servicio">
 
@@ -243,7 +239,6 @@ $icantidad = icon('fa fa-pencil text_cantidad');
                     ) ?>
                 </div>
             <?php else: ?>
-
                 <div class="contenedor_inf_servicios contenedor_inf_servicios_ciclo_facturacion">
                     <?= icon('fa fa-pencil text_ciclo_facturacion') ?>
                     <?= icon('CICLO DE FACTURACIÓN', ["class" => "titulo_producto_servicio"]) ?>
@@ -261,9 +256,7 @@ $icantidad = icon('fa fa-pencil text_cantidad');
                         "input_ciclo_facturacion display_none"
                     ) ?>
                 </div>
-
             <?php endif; ?>
-
             <?php if ($flag_servicio < 1): ?>
                 <?= $this->load->view("servicio/precios", $data); ?>
             <?php endif; ?>
@@ -272,6 +265,5 @@ $icantidad = icon('fa fa-pencil text_cantidad');
         <div class="tab-pane <?= $extra_3 ?>" id="tab_terminos_de_busqueda">
             <?= get_form_tags($id_servicio, $metakeyword_usuario) ?>
         </div>
-
     </div>
 </div>
