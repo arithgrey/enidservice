@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/php:5.6-apache-browsers-legacy
-    working_directory: /var/www/html
+
     steps:
       - run:
           name: Update packages ...
