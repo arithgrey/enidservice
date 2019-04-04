@@ -5,45 +5,12 @@ jobs:
       - image: circleci/php:5.6-apache-browsers-legacy
     working_directory: /var/www/html
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v4-build-pulls-json-{{ .Branch }}-{{ .Revision }}
-            - v4-build-pulls-json-{{ .Branch }}-
-            - v4-build-pulls-json-
-      - run:
-          name: Assign permission to deploy python file
-          command: sudo chmod 777 /var/www/html/.circleci/deploy_check.py
       - run:
           name: Update packages ...
           command: sudo apt-get update
       - run:
-          name: Install packages 1/2 ...
-          command: sudo apt-get install -y libmcrypt-dev python-pip libicu-dev libxml2-dev
-      - run:
-          name: Install packages 2/2 ...
-          command: sudo apt-get install -y libxslt1-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev git vim openssh-server ocaml expect mysql-client
-      - run:
-          name: Active docker configure gd ...
-          command: sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-      - run:
-          name: Active docker configure hash ...
-          command: sudo docker-php-ext-configure hash --with-mhash
-      - run:
-          name: Install docker php extensions ...
-          command: sudo docker-php-ext-install bcmath mcrypt intl json gd pdo_mysql mysql mysqli soap xsl zip
-      - run:
-          name: Install Composer ...
-          command: curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
-      - run:
-          name: Install dependences ...
-          command: composer install
-      - run:
-          name: Check lint syntaxis ...
-          command: ./vendor/bin/parallel-lint --exclude vendor .
-      - run:
-          name: Check php unit test ...
-          command: ./vendor/bin/phpunit
+          name: Check lint syntaxis LINT ENID...
+          command: find . -name \*.php -exec php -l "{}" \;
       - run:
           name: Register succesfull tests
           command: sudo python /var/www/html/.circleci/deploy_check.py pull_request_OK $CIRCLE_PULL_REQUEST /home/circleci/builds-pulls
