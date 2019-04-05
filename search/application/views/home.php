@@ -4,22 +4,23 @@
 </div>
 <div class="row mt-3">
     <div class="col-lg-3">
-        <div class="col-lg-10 col-lg-offset-1">
-            <?= heading("FILTRA TU BÚSQUEDA"
-                .
-                small($busqueda . "(" . $num_servicios . "PRODUCTOS)")
-                ,
-                3,
-                ["class" => "text_filtro bg_black"]) ?>
-            <?= get_formar_menu_sugerencias($es_movil, $bloque_busqueda, $busqueda) ?>
-
-        </div>
+        <?php
+        $r[] = heading("FILTRA TU BÚSQUEDA"
+            .
+            small($busqueda . "(" . $num_servicios . "PRODUCTOS)")
+            ,
+            3,
+            ["class" => "text_filtro bg_black"]);
+        $r[] = get_formar_menu_sugerencias($es_movil, $bloque_busqueda, $busqueda);
+        ?>
+        <?= div(append_data($r), 10, 1) ?>
     </div>
     <div class="col-lg-9">
-        <div class="col-lg-12">
-            <?= get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil) ?>
-            <?= get_format_listado_productos($lista_productos); ?>
-        </div>
+        <?php
+        $x[] = get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil);
+        $x[] = get_format_listado_productos($lista_productos);;
+        ?>
+        <?= div(append_data($x), 13) ?>
         <?= div($paginacion, 1) ?>
     </div>
 </div>

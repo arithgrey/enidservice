@@ -1,6 +1,17 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_format_tickets($departamentos)
+    {
+
+        $r[] = div(div("ABRIR SOLICITUD", ["class" => "titulo_enid"]), 6, 1);
+        $r[] = div(get_form_ticket($departamentos), 6, 1);
+        $r[] = place("place_registro_ticket");
+        return append_data($r);
+
+
+    }
+
     function get_form_respuesta($tarea)
     {
 
@@ -76,7 +87,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(div(append_data($x), ["class" => "padding_20"]));
 
 
-        $url  = "../area_cliente/?action=compras&ticket=".$recibo['id_recibo'];
+        $url = "../area_cliente/?action=compras&ticket=" . $recibo['id_recibo'];
         $r[] = guardar("SEGUIR COMPRANDO",
             [
 
@@ -84,7 +95,7 @@ if (!function_exists('invierte_date_time')) {
 
             ],
             1,
-            1,0,$url  );
+            1, 0, $url);
 
         $r[] = guardar("CANCELAR ÓRDEN DE COMPRA",
             [
@@ -96,13 +107,7 @@ if (!function_exists('invierte_date_time')) {
             1);
 
 
-
-
-
-
-
-
-        return div(append_data($r), 6,1);
+        return div(append_data($r), 6, 1);
     }
 
     function valida_check_tarea($id_tarea, $valor_actualizar, $status, $id_perfil)

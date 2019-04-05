@@ -46,20 +46,13 @@
         <?= div("REGISTRO " . $recibo[0]["fecha_registro"], ["class" => "fecha_registro"], 1) ?>
         <?= div(crea_fecha_entrega($recibo)) ?>
         <?= crea_seccion_productos($recibo) ?>
-
         <?= create_fecha_contra_entrega($recibo, $domicilio) ?>
         <?= notificacion_por_cambio_fecha($recibo, $num_compras, $recibo[0]["saldo_cubierto"]); ?>
-
         <?= addNRow(crea_seccion_recordatorios($recordatorios, $tipo_recortario)) ?>
-
         <?= addNRow(create_seccion_tipificaciones($tipificaciones)) ?>
-
         <?= addNRow(get_form_nota($id_recibo)) ?>
-
         <?= addNRow(create_seccion_comentarios($comentarios, $id_recibo)) ?>
     </div>
     <?= div(get_format_resumen_cliente_compra($recibo, $tipos_entregas, $domicilio, $num_compras, $usuario, $id_recibo), 4) ?>
-
-
 </div>
 <?= get_hiddens_detalle($recibo) ?>

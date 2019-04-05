@@ -21,7 +21,6 @@ $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJET
                         ["style" => "background: #004bff; color: white;padding: 5px;"]) ?>
                 <?php endif; ?>
                 <?= div(heading($nombre_persona, 4), ["style" => "border-bottom-style: solid;border-width: 1px;"]) ?>
-
                 <?= heading("1.- PAÍS", 4) ?>
 
                 <select class="form-control" name="pais">
@@ -54,14 +53,19 @@ $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJET
 
                 <?php else: ?>
                     <?= heading("4.- TIPO DE TARJETA ", 4) ?>
-                    <select class="form-control" name="tipo_tarjeta">
-                        <option value="0">
-                            Débito
-                        </option>
-                        <option value="1">
-                            Crédito
-                        </option>
-                    </select>
+                    <?php
+
+                    $opt = array(
+                        "text" => "Débito",
+                        "v" => 0
+                    );
+                    $opt = array(
+                        "text" => "Crédito",
+                        "v" => 1
+                    );
+
+                    ?>
+                    <?= create_select($opt, "tipo_tarjeta", "form-control", "tipo_tarjeta", "text", "v") ?>
                     <?= heading("5.- NÚMERO DE TARJETA " . icon("fa fa-credit-card-alt"), 4) ?>
                     <?= input([
                         "class" => "form-control numero_tarjeta",

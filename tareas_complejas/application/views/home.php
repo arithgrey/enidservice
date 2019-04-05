@@ -23,20 +23,27 @@
                     <?= p("y ... ya que empleamos metodologías ágiles, le brindamos alta capacidad de reacción ante los cambios de requerimientos generados por necesidades del cliente o evoluciones de su mercado.") ?>
 
                     <?= n_row_12() ?>
-                    <div class="col-lg-6">
-                        <?= img(["src" =>
-                            "../img_tema/metodologias/scrum.png"]) ?>
-                        <?= p("Proceso que integra las mejores prácticas para realizar la calendarización de entregas parciales dentro de un proyecto.") ?>
-                        <?= p("Es ideal cuando donde los requisitos son cambiantes y se necesita capacidad de reacción ante la competencia.") ?>
 
-                    </div>
-                    <div class="col-lg-6">
-                        <?= img(
+                    <?php
+
+                    $x[] = img(["src" => "../img_tema/metodologias/scrum.png"]);
+                    $x[] = p("Proceso que integra las mejores prácticas para realizar la calendarización de entregas parciales dentro de un proyecto.");
+                    $x[] = p("Es ideal cuando donde los requisitos son cambiantes y se necesita capacidad de reacción ante la competencia.");
+                    ?>
+
+                    <?= div(append_data($x), 6) ?>
+                    <?= get_btw(
+                        img(
                             ["src" =>
-                                "../img_tema/metodologias/xpprogramming.png"]) ?>
+                                "../img_tema/metodologias/xpprogramming.png"
+                            ]
+                        )
+                        ,
+                        p("Marco de trabajo en el cual los usuarios finales del producto son quiénes marcan las necesidades y se despliegan bajo los principios de desarrollo y gestión con eficacia, simplicidad, flexibilidad y control.")
+                        , 6
 
-                        <?= p("Marco de trabajo en el cual los usuarios finales del producto son quiénes marcan las necesidades y se despliegan bajo los principios de desarrollo y gestión con eficacia, simplicidad, flexibilidad y control.") ?>
-                    </div>
+
+                    ) ?>
                     <?= end_row() ?>
                     <?= anchor_enid("Iniciemos conversación", ["href" => "../contact"]) ?>
                     <?= hr() ?>

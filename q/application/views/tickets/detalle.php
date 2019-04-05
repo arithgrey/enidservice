@@ -1,5 +1,4 @@
 <?= crea_tabla_resumen_ticket($info_ticket, $info_num_tareas); ?>
-
 <?= div("", 8) ?>
     <div class="col-lg-4">
         <table class="top_20 ">
@@ -10,15 +9,19 @@
             </tr>
         </table>
     </div>
-    <?= hr() ?>
-    <div class="seccion_nueva_tarea top_20">
-        <?= heading_enid("SOLICITAR TAREA", 1) ?>
-        <?= form_open("", ["class" => 'form_agregar_tarea']) ?>
-        <?= div("-", ["id" => "summernote", "class" => "summernote"], 1) ?>
-        <?= input_hidden(["class" => 'tarea_pendiente', "name" => 'tarea']) ?>
-        <?= guardar("Solicitar", [], 1) ?>
-        <?= form_close() ?>
-    </div>
+<?= hr() ?>
+<?php
+
+$x[] = heading_enid("SOLICITAR TAREA", 1);
+$x[] = form_open("", ["class" => 'form_agregar_tarea']);
+$x[] = div("-", ["id" => "summernote", "class" => "summernote"], 1);
+$x[] = input_hidden(["class" => 'tarea_pendiente', "name" => 'tarea']);
+$x[] = guardar("Solicitar", [], 1);
+$x[] = form_close();
+
+?>
+
+<?= div(append_data($x), ["class" => "seccion_nueva_tarea top_20"]) ?>
 
 <?php
 $z = 1;
@@ -72,7 +75,7 @@ foreach ($info_tareas as $row) {
                             "id" => $id_tarea
                         ])
                     , [
-                            "colspan" => 2
+                        "colspan" => 2
 
 
                     ]) ?>
