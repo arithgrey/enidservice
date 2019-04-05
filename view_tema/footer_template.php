@@ -44,20 +44,29 @@ $list_footer = [
                     ]) ?>
                 <?php endif; ?>
             </div>
-            <div class='col-lg-4'>
-                <?= div(icon('fa fa-clock-o '), ['class' => 'col-lg-2']) ?>
-                <?= div(append_data([
-                    div("+ ENTREGAS PUNTUALES", ['class' => 'strong'], 1),
-                    div("Recibe lo que deseas en tiempo y forma", 1)
-                ])) ?>
-            </div>
-            <div class='col-lg-4'>
-                <?= div(icon('fa fa-lock '), ['class' => 'col-lg-2']) ?>
-                <?= div(append_data([
-                    div(" COMPRAS SEGURAS", ['class' => 'strong']),
-                    div("Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!", 1)
-                ])) ?>
-            </div>
+            <?php
+
+            $x = [];
+            $x[] = div(icon('fa fa-clock-o '), 2);
+            $x[] = div(append_data([
+                div("+ ENTREGAS PUNTUALES", ['class' => 'strong'], 1),
+                div("Recibe lo que deseas en tiempo y forma", 1)
+            ]));
+
+
+            ?>
+            <?= div(append_data($x), 4) ?>
+            <?php
+            $c = [];
+            $c[] = div(icon('fa fa-lock '), 2);
+            $c[] = div(append_data([
+                div(" COMPRAS SEGURAS", ['class' => 'strong']),
+                div("Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!", 1)
+            ]));
+
+            ?>
+            <?= div(append_data($c), 4) ?>
+
         </div>
     <?php endif; ?>
 <?php endif; ?>

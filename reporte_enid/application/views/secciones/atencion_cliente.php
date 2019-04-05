@@ -8,13 +8,7 @@
         ["class" => "nav nav-tabs"]) ?>
 </div>
 <div class="tab-content">
-    <div class="tab-pane fade in active" id="tab_1_actividad">
-        <?= get_form_busqueda_desarrollo() ?>
-    </div>
-    <div class="tab-pane fade" id="tab_2_comparativa">
-        <?= place("place_metricas_comparativa") ?>
-    </div>
-    <div class="tab-pane fade" id="tab_3_comparativa">
-        <?= get_form_busqueda_desarrollo_solicitudes() ?>
-    </div>
+    <?= div(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]) ?>
+    <?= div(place("place_metricas_comparativa"), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]) ?>
+    <?= div(get_form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]) ?>
 </div>

@@ -5,6 +5,7 @@
 <div class="row mt-3">
     <div class="col-lg-3">
         <?php
+        $r = [];
         $r[] = heading("FILTRA TU BÚSQUEDA"
             .
             small($busqueda . "(" . $num_servicios . "PRODUCTOS)")
@@ -17,6 +18,7 @@
     </div>
     <div class="col-lg-9">
         <?php
+        $x = [];
         $x[] = get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil);
         $x[] = get_format_listado_productos($lista_productos);;
         ?>
@@ -24,10 +26,7 @@
         <?= div($paginacion, 1) ?>
     </div>
 </div>
-
-
 <div class="row white top_30" style="background:  #080221;;">
-
     <?= div("", 2) ?>
     <?= div(get_btw(
         heading(
@@ -39,5 +38,4 @@
         ,
         ""
     ), 10) ?>
-
 </div>
