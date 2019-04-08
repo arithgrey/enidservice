@@ -20,10 +20,10 @@
         <?php
         $x = [];
         $x[] = get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil);
-        $x[] = get_format_listado_productos($lista_productos);;
+        $x[] = get_format_listado_productos($lista_productos);
         ?>
-        <?= div(append_data($x), 13) ?>
-        <?= div($paginacion, 1) ?>
+        <?= div(append_data($x), 12) ?>
+        <?= div($paginacion, 12) ?>
     </div>
 </div>
 <div class="row white top_30" style="background:  #080221;;">
@@ -38,4 +38,5 @@
         ,
         ""
     ), 10) ?>
+
 </div>

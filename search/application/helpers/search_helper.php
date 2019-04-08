@@ -56,7 +56,7 @@ if (!function_exists('invierte_date_time')) {
 
 		if ($es_movil > 0) {
 
-			$response = div($filtro, 1);
+			$response = div($filtro, 12);
 
 		} else {
 			$response = get_btw(

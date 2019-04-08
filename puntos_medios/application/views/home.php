@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row"  >
     <div class="col-lg-8 col-lg-offset-2">
         <?= get_format_identificacion($tipos_puntos_encuentro) ?>
         <?= div(div($leneas_metro, ["class" => "place_lineas col-lg-12"]), 13) ?>

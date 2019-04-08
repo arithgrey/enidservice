@@ -11,7 +11,7 @@
 					<?php if ($is_mobile < 1 && !isset($proceso_compra) || (isset($proceso_compra) && $proceso_compra < 1)): ?>
 						<?= $this->load->view("../../../view_tema/formularios/form_busqueda_departamentos") ?>
 					<?php endif; ?>
-					<?= get_menu_session($in_session, $proceso_compra) ?>
+					<?= get_menu_session($is_mobile,  $in_session, $proceso_compra) ?>
 				</div>
 			<?php elseif ($is_mobile > 0  && $in_session < 1): ?>
 				<?= get_logo($is_mobile, $in_session) ?>
