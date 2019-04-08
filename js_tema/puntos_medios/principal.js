@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
 
+
     $('.datetimepicker5').datepicker();
     $(".form_punto_encuentro").submit(registra_usuario);
     $(".form_punto_encuentro_horario").submit(notifica_punto_entrega);
@@ -10,6 +11,12 @@ $(document).ready(function () {
         sin_espacios(".correo");
     });
     $(".linea_metro").click(muestra_estaciones);
+
+
+    $("body").unload(function() {
+
+        return "Handler for .unload() called.";
+    });
 
 
 });
@@ -222,4 +229,8 @@ let response_notificacion_punto_entrega = function (data) {
 };
 let agregar_nota = function () {
     showonehideone(".input_notas", ".text_agregar_nota");
+}
+let filtra_acciones = function () {
+    alert();
+    return 0;
 }

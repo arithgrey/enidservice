@@ -121,7 +121,7 @@ function sub_categorias_destacadas($param)
 }
 
 if (!function_exists('div')) {
-    function div($info, $attributes = [], $row = 0)
+    function div($info, $attributes = [], $row = 0, $frow = 0)
     {
 
         if (is_numeric($attributes)) {
@@ -135,64 +135,65 @@ if (!function_exists('div')) {
                 case 2:
 
                     $response = ($row > 0) ? "<div class='col-lg-2 col-lg-offset-5'>" . $info . "</div>" : "<div class='col-lg-2'>" . $info . "</div>";
-                    return $response;
-
 
                     break;
                 case 3:
-                    return "<div class='col-lg-3'>" . $info . "</div>";
+                    $response = "<div class='col-lg-3'>" . $info . "</div>";
                     break;
                 case 4:
                     $response = ($row > 0) ? "<div class='col-lg-4 col-lg-offset-4'>" . $info . "</div>" : "<div class='col-lg-4'>" . $info . "</div>";
-                    return $response;
                     break;
                 case 5:
-                    return "<div class='col-lg-5'>" . $info . "</div>";
+                    $response = "<div class='col-lg-5'>" . $info . "</div>";
                     break;
                 case 6:
 
                     $response = ($row > 0) ? "<div class='col-lg-6 col-lg-offset-3'>" . $info . "</div>" : "<div class='col-lg-6'>" . $info . "</div>";
-                    return $response;
+
                     break;
 
                 case 7:
 
-                    return "<div class='col-lg-7'>" . $info . "</div>";
+                    $response = "<div class='col-lg-7'>" . $info . "</div>";
                     break;
 
 
                 case 8:
 
                     $response = ($row > 0) ? "<div class='col-lg-8 col-lg-offset-2'>" . $info . "</div>" : "<div class='col-lg-8'>" . $info . "</div>";
-                    return $response;
+
                     break;
                 case 9:
-                    return "<div class='col-lg-9'>" . $info . "</div>";
+                    $response = "<div class='col-lg-9'>" . $info . "</div>";
                     break;
 
                 case 10:
 
 
                     $response = ($row > 0) ? "<div class='col-lg-10 col-lg-offset-1'>" . $info . "</div>" : "<div class='col-lg-10'>" . $info . "</div>";
-                    return $response;
 
                     break;
 
                 case 12:
 
 
-                    return "<div class='col-lg-12'>" . $info . "</div>";
+                    $response = "<div class='col-lg-12'>" . $info . "</div>";
 
                     break;
 
                 case 13:
 
-                    return "<div class='row'>" . $info . "</div>";
+                    $response = "<div class='row'>" . $info . "</div>";
 
                     break;
 
 
             }
+
+            if ($frow > 0) {
+                $response = div($response, 13);
+            }
+            return $response;
 
         } else {
             $base = "<div" . add_attributes($attributes) . ">" . $info . "</div>";
@@ -1326,8 +1327,8 @@ if (!function_exists('append_data')) {
 
             }
             return $response;
-        }else{
-            echo "No es array -> ". print_r($array);
+        } else {
+            echo "No es array -> " . print_r($array);
         }
 
     }
@@ -1366,7 +1367,7 @@ if (!function_exists('es_email_valido')) {
     }
 }
 if (!function_exists('get_menu_session')) {
-    function get_menu_session($in_session, $proceso_compra = 1)
+    function get_menu_session($is_mobile, $in_session, $proceso_compra = 1)
     {
 
         if ($in_session < 1) {
@@ -1403,7 +1404,8 @@ if (!function_exists('get_menu_session')) {
             );
 
 
-            $list = div(append_data([$vender, $l_session]), ["class" => "display_flex_enid"]);
+            $type_display = ($is_mobile > 0) ? " d-flex flex-column justify-content-between " : " display_flex_enid ";
+            $list = div(append_data([$vender, $l_session]), ["class" => $type_display]);
 
             if ($proceso_compra < 1) {
                 return div(ul($list, ["class" => "largenav "]), ["class" => "text-right"]);
@@ -1415,23 +1417,55 @@ if (!function_exists('get_menu_session')) {
     }
 }
 if (!function_exists('get_btw')) {
-    function get_btw($a, $b, $class = '', $row = 0)
+    function get_btw($a, $b, $class = '', $row = 0, $frow = 0)
     {
 
+
         if (is_numeric($class)) {
-            $class = " col-lg-" . $class;
+
+            $n = intval($class);
+            $class = " col-lg-" . $n;
             if ($row > 0) {
-                $class = $class . " col-lg-offset- " . $class;
+
+                $offset = 0;
+
+
+                switch ($n) {
+
+                    case 2:
+                        $offset = 5;
+                        break;
+                    case 4:
+                        $offset = 4;
+                        break;
+                    case 6:
+                        $offset = 3;
+                        break;
+                    case 8:
+                        $offset = 2;
+                        break;
+
+                    case 10:
+                        $offset = 1;
+                        break;
+                }
+                $class = $class . " col-lg-offset-" . $offset;
             }
 
+            $response = div(append_data([$a, $b]), ["class" => $class]);
+
+            if ($frow > 0) {
+
+                $response = div(div(append_data([$a, $b]), ["class" => $class]), 13);
+            }
+
+
+        } else {
+
+
+            $response = div(append_data([$a, $b]), ["class" => $class]);
         }
 
-        $response = div(append_data([$a, $b]), ["class" => $class]);
-        if ($row > 0) {
-
-            $response = div(div(append_data([$a, $b]), ["class" => $class]), ["class" => "row"]);
-
-        }
         return $response;
     }
 }
