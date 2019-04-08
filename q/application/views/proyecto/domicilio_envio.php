@@ -47,8 +47,10 @@ if ($registro_direccion == 0) {
 }
 ?>
 
-<div class='contenedor_informacion_envio top_30'>
-    <?= heading_enid("DIRECCIÓN DE ENVÍO", 2, ["class"=> "letter-spacing-5"]) ?>
-    <?= get_format_direccion_envio_pedido($nombre_receptor, $telefono_receptor, $cp, $id_usuario, $entre_calles,
-        $calle, $numero_exterior, $numero_interior, $direccion_visible, $asentamiento, $municipio, $estado, $id_recibo) ?>
+<div class="col-lg-8 col-lg-offset-2">
+    <div class='contenedor_informacion_envio top_30'>
+        <?= heading_enid("DIRECCIÓN DE ENVÍO", 2, ["class" => "letter-spacing-5"]) ?>
+        <?= get_format_direccion_envio_pedido($nombre_receptor, $telefono_receptor, $cp, $id_usuario, $entre_calles,
+            $calle, $numero_exterior, $numero_interior, $direccion_visible, $asentamiento, $municipio, $estado, $id_recibo) ?>
+    </div>
 </div>

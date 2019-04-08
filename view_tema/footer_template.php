@@ -87,7 +87,8 @@ $list_footer = [
 <?php endif; ?>
 
 
-<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="../css_tema/template/font.css">
 <style>
     body {
         font-family: 'Ubuntu', sans-serif !important;

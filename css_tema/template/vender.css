@@ -34,11 +34,6 @@
     background: black;
 }
 
-.notificacion_publicar_imagenes {
-    margin-top: 10px;
-    font-size: .9em !important;
-    margin-bottom: 10px;
-}
 
 .input_nombre_servicio_facturacion {
     display: none;

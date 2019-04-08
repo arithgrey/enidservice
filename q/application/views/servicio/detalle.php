@@ -100,18 +100,15 @@ $data["comision"] = $comision;
 $data["url_ml"] = $url_ml;
 
 
-$titulo_compra_en_casa = ($flag_servicio == 1) ?
-    "OFRECES SERVICIO EN TU NEGOCIO?" : "¿CLIENTES TAMBIÉN PUEDEN RECOGER SUS COMPRAS EN TU NEGOCIO?";
+$titulo_compra_en_casa = ($flag_servicio == 1) ? "OFRECES SERVICIO EN TU NEGOCIO?" : "¿CLIENTES TAMBIÉN PUEDEN RECOGER SUS COMPRAS EN TU NEGOCIO?";
 
 
 $ver_telefono = ($flag_servicio == 1) ? "¿PERSONAS PUEDEN VER TU NÚMERO TELEFÓNICO PARA SOLICITARTE MÁS INFORMES?" : "¿PERSONAS PUEDEN SOLICITARTE MÁS INFORMES POR TELÉFONO?";
 
 $data["flag_servicio"] = get_campo($servicio, "flag_servicio");
-$text_notificacion_imagenes = valida_text_imagenes($tipo_promocion, $num_imagenes);
 
-$notificacion_imagenes
-    =
-    heading_enid($text_notificacion_imagenes, 2, ["class" => "titulo_seccion_producto"]);
+
+$notificacion_imagenes = heading_enid(valida_text_imagenes($tipo_promocion, $num_imagenes), 3);
 
 $extra_extrega_casa_no = valida_activo_entregas_en_casa(0, $entregas_en_casa);
 $activo_visita_telefono = valida_activo_vista_telefono(1, $telefono_visible);
@@ -164,8 +161,9 @@ $icantidad = icon('fa fa-pencil text_cantidad');
     <?= addNRow(get_menu_config($num, $num_imagenes, $url_productos_publico)) ?>
     <div class="tab-content">
         <div class="tab-pane <?= $extra_1 ?>" id="tab_imagenes">
-            <?= addNRow(valida_descartar_promocion($num_imagenes, $id_servicio)) ?>
+
             <?= addNRow($notificacion_imagenes); ?>
+            <?= addNRow(valida_descartar_promocion($num_imagenes, $id_servicio)) ?>
             <?= div($images, ["class" => "contenedor_imagen_muestra"], 1) ?>
             <?= heading_enid($llamada_accion_youtube, 4) ?>
             <?= div($text_llamada_accion_youtube, 1) ?>
@@ -192,7 +190,10 @@ $icantidad = icon('fa fa-pencil text_cantidad');
             <?php endif; ?>
         </div>
         <div class="tab-pane <?= $extra_4 ?>" id="tab_info_precios">
-            <?= br() ?>
+
+
+
+
             <?= addNRow(div(get_estado_publicacion($status, $id_servicio), ["class" => "text-right"])) ?>
             <?= get_rango_entrega(
                 $id_perfil,

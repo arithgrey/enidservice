@@ -1,6 +1,25 @@
+window.history.pushState({page: 1}, "", "");
+window.history.pushState({page: 2}, "", "");
+window.history.pushState({page: 3}, "", "");
+window.onpopstate = function (event) {
+
+    if (event) {
+
+        let vista = parseInt(get_option("vista"));
+        if (vista == 1) {
+
+            window.history.back();
+
+        } else {
+
+            valida_accion_retorno();
+        }
+
+
+    }
+}
+
 $(document).ready(function () {
-
-
 
     $('.datetimepicker5').datepicker();
     $(".form_punto_encuentro").submit(registra_usuario);
@@ -11,34 +30,35 @@ $(document).ready(function () {
         sin_espacios(".correo");
     });
     $(".linea_metro").click(muestra_estaciones);
-
-
-    $("body").unload(function() {
-
-        return "Handler for .unload() called.";
-    });
+    set_option("vista", 1);
+    set_option("punto_encuentro_previo", 0);
 
 
 });
 let muestra_estaciones = function () {
 
+
     $(".titulo_punto_encuentro").hide();
     $(".tipos_puntos_encuentro").hide();
     let id = get_parameter_enid($(this), "id");
+
     let nombre_linea = get_parameter_enid($(this), "nombre_linea");
     set_option("nombre_linea", nombre_linea);
     if (id > 0) {
+
         if (get_parameter(".primer_registro") == 1) {
 
             let servicio = get_parameter(".servicio");
             let url = "../q/index.php/api/punto_encuentro/linea_metro/format/json/";
             let data_send = {"id": id, "v": 1, "servicio": servicio};
             request_enid("GET", data_send, url, response_estaciones);
+
         } else {
 
             let url = "../q/index.php/api/punto_encuentro/linea_metro/format/json/";
             let data_send = {"id": id, "v": 2, "recibo": get_parameter(".recibo")};
             request_enid("GET", data_send, url, response_estaciones);
+
         }
     }
 };
@@ -66,20 +86,29 @@ let response_estaciones = function (data) {
 
             break;
     }
+    set_option("vista", 2);
 
-    llenaelementoHTML(".place_lineas", data);
+
+    showonehideone(".place_estaciones_metro", ".place_lineas");
+    //llenaelementoHTML(".place_lineas", data);
+    llenaelementoHTML(".place_estaciones_metro", data);
     llenaelementoHTML(".nombre_linea_metro", texto_centro);
     $(".punto_encuentro").click(muestra_horarios);
 };
 let muestra_horarios = function () {
 
+
+
     let id = get_parameter_enid($(this), "id");
-    set_option("punto_encuentro", id);
     let nombre_estacion = get_parameter_enid($(this), "nombre_estacion");
     let costo_envio = get_parameter_enid($(this), "costo_envio");
     let flag_envio_gratis = get_parameter_enid($(this), "flag_envio_gratis");
+
     if (id > 0) {
 
+
+        set_option("punto_encuentro_previo", id);
+        set_option("vista", 3);
         let text = "";
         $(".mensaje_cobro_envio").hide();
         set_parameter(".punto_encuentro_form", id);
@@ -91,17 +120,23 @@ let muestra_horarios = function () {
         let texto_cargos_entrega = "<span class='text_costo_envio'>" + costo_envio + "MXN</span>";
         let texto_cargos_gratis = "<span class='text_costo_envio_gratis'>ENVÍO GRATIS!</span>";
 
-        texto_cargos_entrega = (flag_envio_gratis == 1) ? texto_cargos_gratis : texto_cargos_entrega;
+        texto_cargos_entrega = (flag_envio_gratis > 0) ? texto_cargos_gratis : texto_cargos_entrega;
         llenaelementoHTML(".cargos_por_entrega", "<span class='strong'>CARGO POR ENTREGA:</span>" + texto_cargos_entrega);
         $(".cargos_por_entrega").addClass("cargos_por_entrega_extra");
         $(".contenedor_estaciones").hide();
 
-        if (flag_envio_gratis == 0) {
+
+        if (flag_envio_gratis < 1) {
+
             let text = "Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " + costo_envio + " pesos por concepto de gastos de envío";
             llenaelementoHTML(".mensaje_cobro_envio", text);
             $(".mensaje_cobro_envio").show();
         }
 
+
+
+        $(".resumen_encuentro").show();
+        showonehideone( ".resumen_encuentro", ".contenedor_estaciones");
 
         $(".btn_continuar_punto_encuentro").show();
         $(".btn_continuar_punto_encuentro").click(muestra_quien_recibe);
@@ -111,8 +146,11 @@ let muestra_horarios = function () {
 };
 let muestra_quien_recibe = function () {
 
+
     display_elements([".resumen_encuentro", ".titulo_principal_puntos_encuentro"], 0);
     display_elements([".formulario_quien_recibe"], 1);
+    set_option("vista", 4);
+
 
 };
 
@@ -230,7 +268,35 @@ let response_notificacion_punto_entrega = function (data) {
 let agregar_nota = function () {
     showonehideone(".input_notas", ".text_agregar_nota");
 }
-let filtra_acciones = function () {
-    alert();
-    return 0;
+let valida_accion_retorno = function () {
+
+    let vista = parseInt(get_option("vista"));
+    switch (vista) {
+        case 2:
+
+            set_option("vista", 1);
+            showonehideone(".place_lineas", ".place_estaciones_metro");
+            $(".titulo_punto_encuentro").show();
+
+            break;
+        case 3:
+            set_option("vista", 2);
+            $(".resumen_encuentro").hide();
+            showonehideone(".contenedor_estaciones", ".resumen_encuentro");
+
+            break;
+        case 4:
+
+            set_option("vista", 3);
+            display_elements([".resumen_encuentro", ".titulo_principal_puntos_encuentro"], 1);
+            display_elements([".formulario_quien_recibe"], 0);
+
+            break;
+
+        default:
+
+            break;
+    }
+
+
 }

@@ -353,15 +353,14 @@ if (!function_exists('invierte_date_time')) {
 
                 $response = anchor_enid("CARGAR MÁS" . icon("fa fa-chevron-right ir"),
                     [
-                        "class" => "cargar_mas_valoraciones",
-                        "style" => "color:white!important"
+                        "class" => "cargar_mas_valoraciones"
+
                     ]);
             } else {
-                $response = anchor_enid("ESCRIBE UNA RESEÑA " . icon("fa fa-chevron-right ir"),
+                $response = anchor_enid("ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA " . icon("fa fa-chevron-right ir"),
                     [
                         "class" => "escribir_valoracion",
-                        "href" => "../valoracion?servicio=" . $servicio,
-                        "style" => "color:white!important",
+                        "href" => "../valoracion?servicio=" . $servicio
                     ]);
             }
 

@@ -100,9 +100,9 @@ if (!function_exists('invierte_date_time')) {
 
 
             $msj = "MUESTRA IMAGENES SOBRE TU " . $tipo_promocion . " A TUS CLIENTES";
-            $text = heading_enid($msj, 4, ["class" => 'mensaje_imagenes_visible'], 1);
+            $text = heading_enid($msj, 4, ["class" => 'mensaje_imagenes_visible shadow'], 1);
             $notificacion = "TU " . $tipo_promocion . " NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES";
-            $text .= div($notificacion, ["class" => "notificacion_publicar_imagenes"], 1);
+            $text .= div($notificacion, ["class" => "notificacion_publicar_imagenes top_40 bottom_40"], 1);
             return $text;
         }
     }
@@ -110,7 +110,7 @@ if (!function_exists('invierte_date_time')) {
     function valida_descartar_promocion($num_images, $id_servicio)
     {
 
-        $response = ($num_images == 0) ? div(anchor_enid("DESCARTAR PROMOCIÓN", ["class" => 'descartar_promocion', "id" => $id_servicio]), ["class" => "text-right"]) : "";
+        $response = ($num_images == 0) ? div(anchor_enid("DESCARTAR PROMOCIÓN", ["class" => 'descartar_promocion border descartar_promocion padding_10 ', "id" => $id_servicio]), ["class" => "text-right top_30 bottom_50"]) : "";
         return $response;
     }
 

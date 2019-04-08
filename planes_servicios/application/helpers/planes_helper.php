@@ -271,7 +271,7 @@ if (!function_exists('invierte_date_time')) {
 								"class" => "agregar_servicio btn_agregar_servicios"
 							]
 						),
-						["class" => valida_active_tab('nuevo', $action) . " li_menu "]
+						["class" => valida_active_tab('nuevo', $action) . "  "]
 					),
 
 					li(
@@ -283,7 +283,7 @@ if (!function_exists('invierte_date_time')) {
 								'href' => "#tab_servicios"
 							]
 						),
-						["class" => 'li_menu li_menu_servicio btn_servicios ' . valida_active_tab('lista', $action)]
+						["class" => ' li_menu_servicio btn_servicios ' . valida_active_tab('lista', $action)]
 					)
 				];
 				return ul($list, ["class" => "nav tabs contenedor_menu_enid_service_lateral"]);

@@ -2,6 +2,8 @@
     <div class="col-lg-8 col-lg-offset-2">
         <?= get_format_identificacion($tipos_puntos_encuentro) ?>
         <?= div(div($leneas_metro, ["class" => "place_lineas col-lg-12"]), 13) ?>
+        <?= div(place("place_estaciones_metro"), 13) ?>
+
         <?php if ($primer_registro > 0): ?>
             <?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $servicio]) ?>
             <div class='formulario_quien_recibe display_none'>

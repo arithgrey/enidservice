@@ -34,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = place("quien_recibe");
         $x[] = div(append_data($l), ["class" => "contenedor_estaciones"],1);
 
-        return div(append_data($r), ["class" => 'resumen_encuentro']) . append_data($x);
+        return div(append_data($r), ["class" => 'resumen_encuentro']) . div(append_data($x), ["class" => 'resumen_mensaje_pago']);
     }
 
 }

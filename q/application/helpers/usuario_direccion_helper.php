@@ -148,17 +148,38 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_btw(
             div("País"),
             place("place_pais_info"),
-            " district pais_c"
+            " district pais_c display_none"
 
         );
 
 
-        $x[] = div("Esta es mi dirección principal ", 2);
-        $x[] = "<select name='direccion_principal'>";
-        $x[] = '<option value="1">SI</option>';
-        $x[] = '<option value="0">NO</option>';
-        $x[] = '</select>';
-        $r[] = div(append_data($x), ["class" => "direccion_principal_c"]);
+        $options[] = array(
+            "text" => "SI",
+            "val"  => 1
+        );
+        $options[] = array(
+            "text" => "NO",
+            "val"  => 0
+        );
+
+
+        $select  =  create_select($options, 'direccion_principal', 'direccion_principal','direccion_principal','text','val');
+
+        $r[] =
+         get_btw(
+
+                div("Esta es mi dirección principal ", 5)
+
+                ,
+
+                div($select  , 7)
+
+                ,
+            'direccion_principal_c row top_30 align-items-center '
+        );
+
+
+
         $r[] = input_hidden([
             "name" => "id_recibo",
             "value" => $id_recibo,

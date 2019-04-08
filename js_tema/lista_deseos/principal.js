@@ -36,7 +36,7 @@ $(document).ready(function () {
     });
     $(".btn_buzon").click(function () {
 
-        carga_num_preguntas();
+        //carga_num_preguntas();
         carga_buzon();
     });
 
@@ -61,11 +61,11 @@ $(document).ready(function () {
     });
 
     $(".num_alcance").click(alcance_producto);
-    $("footer").ready(carga_num_preguntas);
+    //$("footer").ready(carga_num_preguntas);
 
 
 });
-
+/*
 let carga_num_preguntas = function () {
 
     set_option("modalidad_ventas", 1);
@@ -100,6 +100,7 @@ let carga_num_preguntas = function () {
         show_error_enid(".place_buzon", "Error ... ");
     });
 }
+*/
 
 let valida_accion_inicial = function () {
 
@@ -112,12 +113,6 @@ let valida_accion_inicial = function () {
         case "compras":
             set_option("modalidad_ventas", 0);
             carga_compras_usuario();
-            break;
-        case "preguntas":
-            set_option("modalidad_ventas", 0);
-            carga_num_preguntas();
-            carga_buzon();
-
             break;
         default:
             set_option("modalidad_ventas", 0);
