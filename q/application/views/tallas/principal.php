@@ -24,7 +24,9 @@ $msj_clasificaciones = ($num_clasificaciones > 0) ? $msj_exists : "";
         2,
         ['class' => 'info-tipo-talla']
     )
-    , $msj_clasificaciones, $clasificaciones_existentes]), ["class" => "agregadas col-lg-9"]) ?>
+    , $msj_clasificaciones, $clasificaciones_existentes]),
+    ["class" => "agregadas col-lg-9"]
+) ?>
 <?= get_btw(
     heading_enid("CLASIFICACIONES", 3),
     get_form_clasificacion_talla(),

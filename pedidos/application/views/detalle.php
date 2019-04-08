@@ -24,22 +24,24 @@
             ) ?>
             <?= place("place_tipificaciones") ?>
 
-            <div class="form_cantidad_post_venta top_20">
-                <?= div(strong("SALDO CUBIERTO"), 1) ?>
-                <?= div(input(
-                    [
-                        "class" => "form-control saldo_cubierto_pos_venta",
-                        "id" => "saldo_cubierto_pos_venta",
-                        "type" => "number",
-                        "step" => "any",
-                        "required" => "true",
-                        "name" => "saldo_cubierto",
-                        "value" => $recibo[0]["saldo_cubierto"]
+            <?php
+            $f[] = div(strong("SALDO CUBIERTO"), 1);
+            $f[] = div(input(
+                [
+                    "class" => "form-control saldo_cubierto_pos_venta",
+                    "id" => "saldo_cubierto_pos_venta",
+                    "type" => "number",
+                    "step" => "any",
+                    "required" => "true",
+                    "name" => "saldo_cubierto",
+                    "value" => $recibo[0]["saldo_cubierto"]
 
-                    ]),
-                    ["class" => "col-lg-10"]) ?>
-                <?= div("MXN", ["class" => "mxn col-lg-2"]) ?>
-            </div>
+                ]),
+                10);
+            $f[] = div("MXN", ["class" => "mxn col-lg-2"]);
+
+            ?>
+            <?= div(append_data($f), ["class" => "form_cantidad_post_venta top_20"]) ?>
             <?= place("mensaje_saldo_cubierto_post_venta") ?>
             <?= get_form_cantidad($recibo, $orden) ?>
         </div>

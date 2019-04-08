@@ -18,7 +18,6 @@ foreach ($miembros as $row) {
 	<div class="popup-box chat-popup" id="qnimate">
 		<div class="popup-head">
 			<div class="popup-head-left pull-left">
-
 				<?= img([
 					"src" => $url_imagen,
 					"style" => 'width: 44px!important;',

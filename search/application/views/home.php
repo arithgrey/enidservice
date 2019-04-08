@@ -1,3 +1,9 @@
+<?php
+$x = [];
+$x[] = get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil);
+$x[] = get_format_listado_productos($lista_productos);
+?>
+
 <?= val_principal_img($q) ?>
 <div class='contenedor_anuncios_home'>
     <?= get_format_menu_categorias_destacadas($es_movil, $categorias_destacadas) ?>
@@ -16,15 +22,16 @@
         ?>
         <?= div(append_data($r), 10, 1) ?>
     </div>
-    <div class="col-lg-9">
-        <?php
-        $x = [];
-        $x[] = get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil);
-        $x[] = get_format_listado_productos($lista_productos);
-        ?>
-        <?= div(append_data($x), 12) ?>
-        <?= div($paginacion, 12) ?>
-    </div>
+
+    <?= get_btw(
+
+        div(append_data($x), 12)
+        ,
+        div($paginacion, 12)
+        ,
+        9
+    ) ?>
+
 </div>
 <div class="row white top_30" style="background:  #080221;;">
     <?= div("", 2) ?>

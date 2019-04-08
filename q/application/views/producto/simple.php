@@ -23,6 +23,7 @@ foreach ($servicios as $row) {
     $r[] = div($fecha_registro . "|" . "alcance" . $vista);
 
     ?>
+
     <a href="../producto/?producto=<?= $id_servicio ?>" class='contenedor_resumen_servicio'>
         <div class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
             <?= div(div(append_data($r), ["class" => "popup-head-left pull-left"]), ["class" => "popup-head"]) ?>
