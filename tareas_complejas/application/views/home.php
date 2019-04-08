@@ -1,7 +1,5 @@
 <div id='info_antes_de_ayuda'>
-    <div class="col-lg-2">
-        <?= get_format_izquierdo($in_session) ?>
-    </div>
+    <?= div(get_format_izquierdo($in_session), 2) ?>
     <div class='col-lg-10'>
         <?= n_row_12() ?>
         <div class="row">
@@ -26,6 +24,7 @@
 
                     <?php
 
+                    $x = [];
                     $x[] = img(["src" => "../img_tema/metodologias/scrum.png"]);
                     $x[] = p("Proceso que integra las mejores prácticas para realizar la calendarización de entregas parciales dentro de un proyecto.");
                     $x[] = p("Es ideal cuando donde los requisitos son cambiantes y se necesita capacidad de reacción ante la competencia.");
