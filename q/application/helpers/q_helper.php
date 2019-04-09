@@ -468,6 +468,12 @@ if (!function_exists('invierte_date_time')) {
         $f = 0;
         $inf_notificacion = $info["info_notificaciones"];
 
+
+        $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
+
+        $f = $f + $compras_sin_cierre["flag"];
+
+
         $deuda = add_saldo_pendiente($inf_notificacion["adeudos_cliente"]);
         $f = $f + $deuda["flag"];
 
@@ -501,7 +507,8 @@ if (!function_exists('invierte_date_time')) {
             $direccion_envio["html"],
             $numtelefonico["html"],
             $preguntas["html"],
-            $respuestas["html"]
+            $respuestas["html"],
+            $compras_sin_cierre["html"]
 
 
         ];

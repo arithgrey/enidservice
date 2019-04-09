@@ -834,7 +834,7 @@ class Recibo_model extends CI_Model
 						FROM  proyecto_persona_forma_pago 
 						WHERE  
 						saldo_cubierto < 1  
-						and id_usuario ='".$id_usuario."' 
+						and id_usuario_venta ='".$id_usuario."' 
 						AND  se_cancela = 0
 						AND 
 						

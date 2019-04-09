@@ -34,7 +34,7 @@ class productividad extends REST_Controller
 		$response["info_notificaciones"]["numero_telefonico"] = $this->verifica_registro_telefono($prm);
 		$response["preguntas"] =  $this->get_preguntas($id_usuario);
 		$response["respuestas"] =  $this->get_respuestas($id_usuario);
-
+        $response["compras_sin_cierre"] = $this->pendientes_ventas_usuario($id_usuario);
 
 
 
@@ -42,11 +42,11 @@ class productividad extends REST_Controller
 
 			case 3:
 
-
 				$response["recordatorios"] = $this->get_recordatorios($id_usuario);
-				$response["compras_sin_cierre"] = $this->pendientes_ventas_usuario($id_usuario);
+
 				$response["ventas_enid_service"] = $this->get_ventas_enid_service();
 				$response = get_tareas_pendienetes_usuario($response);
+
 
 				break;
 			case 20:
