@@ -23,7 +23,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     if (!function_exists('get_format_view_usuario')) {
-        function get_format_view_usuario()
+        function get_format_view_usuario($departamentos)
         {
 
             $opt_turnos[] = array(
@@ -177,7 +177,7 @@ if (!function_exists('invierte_date_time')) {
             $l[] = get_btw(
                 div("Inicio de labores")
                 ,
-                create_select($opt_horario, "inicio_labor", "form-control inicio_labor", "inicio_labor", "opcion", "val")
+                create_select($opt, "inicio_labor", "form-control inicio_labor", "inicio_labor", "opcion", "val")
                 , 4
             );
 
@@ -313,7 +313,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = form_open("", ["class" => "form-horizontal form_categoria", "id" => "form_categoria"]);
             $r[] = div("¿ES SERVICIO?", 4);
-            $r[] = div(create_select($options, "form-control servicio", "servicio", "opcion", "val"), 8);
+            $r[] = div(create_select($options, "form-control servicio", "servicio", "servicio", "opcion", "val"), 8);
             $r[] = div("CATEGORÍA", 4);
             $r[] = div(input([
                 "id" => "textinput",
