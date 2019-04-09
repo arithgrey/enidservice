@@ -1,6 +1,76 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_format_tiempo_entrega($data, $totales_servicios){
+
+        $response =  [];
+        $a = 0;
+        foreach ($data as $row ){
+
+            $response[$a] = $row;
+            $id_servicio =  $row["id_servicio"];
+            $total =  $row["total"];
+            $solicitudes = 0;
+            foreach ($totales_servicios as $row2 ){
+
+                $id_servicio_totales =  $row2["id_servicio"];
+                if ($id_servicio ==  $id_servicio_totales){
+
+
+                    $solicitudes =  $row2["total"];
+
+                    break;
+                }
+            }
+
+            $response[$a]["solicitudes"] = $solicitudes;
+            $porcentaje = porcentaje_total($total, $solicitudes);
+            $response[$a]["porcentaje"]  = substr($porcentaje,0,5);
+
+
+
+
+
+            $a ++;
+        }
+
+        return get_format_entrega($response);
+
+    }
+    function get_format_entrega($data){
+
+        $respose = [];
+        foreach ($data as $row){
+
+
+            $dias =  $row["dias"];
+            $total	 = $row["total"];
+            $id_servicio	= $row["id_servicio"];
+            $url_img_servicio	= $row["url_img_servicio"];
+            $solicitudes  =  $row["solicitudes"];
+            $porcentaje =  $row["porcentaje"];
+
+
+            $x = [];
+            $x[] =  div( img(["src"=>$url_img_servicio ,"class"=>"img_servicio_def padding_10" ]),3);
+            $text = [];
+            $text[] =  div(heading_enid($porcentaje."%",3), ["class"=>"text-center"]);
+            $text[] =  guardar($solicitudes. " SOLICITUDES "  );
+            $text[] =  guardar($total. " VENTAS " );
+
+
+
+            $x[]  =  div(append_data($text),["class"=>"col-lg-6 d-flex flex-column justify-content-between"]);
+
+            $texto  = heading_enid("Tiempo promedio de venta ".substr($dias,0,5)."días",4) ;
+            $x[]  =  div($texto,["class"=>"col-lg-3 text-center align-self-center"]);
+
+
+            $r[] = div(append_data($x),["class"=>"row border  top_30"]);
+
+        }
+        return append_data($r);
+    }
     function get_format_transaccion($id_recibo)
     {
 

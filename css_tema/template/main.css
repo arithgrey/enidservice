@@ -1239,3 +1239,6 @@ h3 {
 .f12{
     font-size: 1.2em;
 }
+.img_servicio_def{
+ max-height: 260px;
+}
