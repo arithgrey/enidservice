@@ -1,12 +1,15 @@
+<?php
+$opt[] = array(
+    "text" => "De saldo Enid Service $" . get_data_saldo($saldo_disponible) . "MXN",
+    "val" => 1
+);
+?>
 <div class="col-lg-4 col-lg-offset-4">
-    <div class="jumbotron"  style="background: #fbfbfb;border-right-style: solid;border-width:.9px;border-left-style: solid;">
+    <div class="jumbotron"
+         style="background: #fbfbfb;border-right-style: solid;border-width:.9px;border-left-style: solid;">
         <?= heading("TRANSFERIR FONDOS", 2) ?>
         <div style="width: 80%;margin: 0 auto;margin-top: 20px;">
-            <select style="width: 100%" class="form-control">
-                <option class="de" id='de' value="1">
-                    De saldo Enid Service $<?= get_data_saldo($saldo_disponible) ?> MXN
-                </option>
-            </select>
+            <?= create_select($opt, "", "form-control", "", "text", "val") ?>
         </div>
         <div style="width: 80%;margin: 0 auto;margin-top: 20px;">
             <select style="width: 100%" class="form-control"

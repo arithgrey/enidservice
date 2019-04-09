@@ -253,11 +253,13 @@ class Home extends CI_Controller
 		$this->table->add_row(array(div($total, ["class" => "strong fm"]), "", ""));
 
 
-		$data["table_costos"] = $this->table->generate();
-		$data["tipo_costos"] = $this->get_tipo_costo_operacion();
-		$data["id_recibo"] = $param["costos_operacion"];
+		$table_costos = $this->table->generate();
+		$tipo_costos = $this->get_tipo_costo_operacion();
+		$id_recibo = $param["costos_operacion"];
 
-		$this->principal->show_data_page($data, 'costos_operativos');
+
+		$response =  get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo );
+		$this->principal->show_data_page($data, $response  , 1);
 
 	}
 

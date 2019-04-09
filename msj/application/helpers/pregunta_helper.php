@@ -98,7 +98,7 @@ if (!function_exists('invierte_date_time')) {
 				"style" => "background: #015ec8;padding: 5px;color: white;margin-top: 23px;"
 			]);
 
-		$r[] = hr();
+
 		$r[] = hr();
 		$r[] = div("Desde ahora podrás comprar y vender tus productos o servicios ");
 		$r[] = anchor_enid("Accede a tu cuenta aquí!",

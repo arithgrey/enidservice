@@ -4,6 +4,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_format_charts')) {
         function get_format_charts()
         {
+
             $r[] = heading_enid("Indicadores", 3);
             $r[] = get_menu_metricas();
 

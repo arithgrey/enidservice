@@ -34,7 +34,6 @@
                 <?= hr() ?>
             </div>
             <div role="tabpanel" class="tab-pane" id="profile">
-
                 <?= p("Nuestra Misión") ?>
                 <?= img(["src" => "../img_tema/portafolio/bg-tecnologia.jpg"]) ?>
                 <?= p("Tenemos por misión, ayudar a negocios a desempeñarse mejor, reducir sus gastos de operación y adquirir igualdad y competencias entre mercados, con una mejor posición de gestión y administración a diferentes escalas y sectores, siempre alineándonos con sus estrategias y estableciendo un objetivo único y común a sus intereses.") ?>

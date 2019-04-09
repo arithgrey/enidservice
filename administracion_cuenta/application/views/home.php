@@ -2,9 +2,7 @@
     <?= div(get_menu($id_usuario), 2); ?>
     <div class="col-lg-10">
         <div class="tab-content">
-
             <?= div(get_format_foto_usuario($id_usuario, $usuario), ["class" => "tab-pane active", "id" => "tab_mis_datos"]) ?>
-
             <div class="tab-pane " id="tab_privacidad">
                 <?= get_btw(
 

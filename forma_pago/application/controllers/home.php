@@ -28,7 +28,8 @@ class Home extends CI_Controller
         $data["desc_web"] = "Formas de pago Enid Service";
         $data["url_img_post"] = create_url_preview("formas_pago_enid.png");
         $data["clasificaciones_departamentos"] = "";
-        $this->principal->show_data_page($data, 'info_formas_pago');
+        $response = div(get_format_pago(), 6, 1);
+        $this->principal->show_data_page($data, $response, 1);
     }
 
     private function crea_orden()
@@ -40,10 +41,13 @@ class Home extends CI_Controller
         $data["url_img_post"] = create_url_preview("formas_pago_enid.png");
         $id_recibo = $this->input->get("recibo");
         $data["recibo"] = $id_recibo;
-        $data["info_recibo"] = $this->get_recibo_forma_pago($id_recibo);
+        $info_recibo = $this->get_recibo_forma_pago($id_recibo);
 
         $data["clasificaciones_departamentos"] = "";
-        $this->principal->show_data_page($data, 'home');
+        //$this->principal->show_data_page($data, 'home');
+        $response = div($info_recibo, ["class" => "col-lg-8 col-lg-offset-2 contenedor_principal_enid"]);
+        $this->principal->show_data_page($data, $response, 1);
+
     }
 
     private function get_recibo_forma_pago($id_recibo)

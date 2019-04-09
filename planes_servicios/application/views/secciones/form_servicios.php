@@ -6,25 +6,25 @@
         .
         div(get_btw(
 
-            anchor_enid('UN PRODUCTO',
-                [
-                    "class" => "tipo_promocion tipo_producto easy_select_enid mr-1",
-                    "id" => "0",
-                    "style" => "color: blue;"
-                ]),
+                anchor_enid('UN PRODUCTO',
+                    [
+                        "class" => "tipo_promocion tipo_producto easy_select_enid mr-1",
+                        "id" => "0",
+                        "style" => "color: blue;"
+                    ]),
 
 
-            anchor_enid(
-                "UN SERVICIO",
-                [
-                    "class" => "tipo_promocion tipo_servicio",
-                    "id" => "1"
-                ])
+                anchor_enid(
+                    "UN SERVICIO",
+                    [
+                        "class" => "tipo_promocion tipo_servicio",
+                        "id" => "1"
+                    ])
 
-            ,
-            "display_flex_enid"
-        )
-        ,1)
+                ,
+                "display_flex_enid"
+            )
+            , 1)
         ,
         [
             "class" => " col-lg-3 top_30"
@@ -112,8 +112,7 @@
         ,
         ["class" => "col-lg-3 contenedor_precio seccion_menu_tipo_servicio top_30"]
     ) ?>
-    <?= div(guardar("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]),
-        ["class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50']); ?>
+    <?= div(guardar("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]), ["class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50']); ?>
     <?= form_close() ?>
 </div>
 <?= get_selector_categoria($is_mobile) ?>

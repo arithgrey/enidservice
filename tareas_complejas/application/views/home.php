@@ -14,8 +14,7 @@
                     <?= heading_enid("Solución a tareas complejas", 3) ?>
                     <?= img(["src" => "../img_tema/portafolio/ejemplo-personas.jpg"]) ?>
                     <?= p("El servicio de desarrollo de software") ?>
-                    <?= p("Enid Service, está pensado en empresas que atienden 
-                  las crecientes demandas del mercado, al tiempo que mejoran la eficiencia de sus procesos,es sinónimo a simplificación y automatización de tareas complejas.") ?>
+                    <?= p("Enid Service, está pensado en empresas que atienden las crecientes demandas del mercado, al tiempo que mejoran la eficiencia de sus procesos,es sinónimo a simplificación y automatización de tareas complejas.") ?>
                     <?= $this->load->view("secciones_2/beneficios") ?>
                     <?= p("y ... ya que empleamos metodologías ágiles, le brindamos alta capacidad de reacción ") ?>
                     <?= p("y ... ya que empleamos metodologías ágiles, le brindamos alta capacidad de reacción ante los cambios de requerimientos generados por necesidades del cliente o evoluciones de su mercado.") ?>

@@ -53,8 +53,6 @@ $nombre_producto = heading_enid($nombre_servicio, 1, ['class' => "text-justify n
 $nuevo_nombre_servicio = valida_text_servicio($flag_servicio, $precio, $id_ciclo_facturacion);
 $boton_editar = valida_editar_servicio($id_usuario_servicio, $id_usuario, $in_session, $id_servicio);
 $texto_en_existencia = get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml);
-
-
 $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valoracion_persona']), ['class' => 'lee_valoraciones text-right', 'href' => '../search/?q3=' . $id_publicador]);
 
 
@@ -62,12 +60,16 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 <?= n_row_12() ?>
     <div class="product-detail contenedor_info_producto mt-5">
         <div class="col-lg-6 left-col contenedor_izquierdo">
+            <?= get_btw(
 
-            <?= n_row_12() ?>
-            <?= div($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"]) ?>
-            <?= div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"]) ?>
-            <?= end_row() ?>
-
+                div($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"])
+                ,
+                div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"])
+                ,
+                ""
+                ,
+                1
+            ) ?>
         </div>
 
         <?= div(get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web), 3) ?>
@@ -105,14 +107,12 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
                 </div>
             <?php endif; ?>
         </div>
-
-
     </div>
 <?= end_row() ?>
 <?= hr(["class" => "mr-50 mb-5"]) ?>
 <?= get_descripcion_servicio($descripcion, $flag_servicio, $url_vide_youtube, $is_mobile) ?>
 <?= place("place_valoraciones col-lg-12") ?>
-<?= addNRow(div(place("place_tambien_podria_interezar"), 10 , 1)) ?>
+<?= addNRow(div(place("place_tambien_podria_interezar"), 10, 1)) ?>
 <?= input_hidden(["class" => "qservicio", "value" => $nombre_servicio]) ?>
 <?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]) ?>
 <?= input_hidden(["name" => "desde_valoracion", "value" => $desde_valoracion, "class" => 'desde_valoracion']) ?>

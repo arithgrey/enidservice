@@ -161,7 +161,6 @@ $icantidad = icon('fa fa-pencil text_cantidad');
     <?= addNRow(get_menu_config($num, $num_imagenes, $url_productos_publico)) ?>
     <div class="tab-content">
         <div class="tab-pane <?= $extra_1 ?>" id="tab_imagenes">
-
             <?= addNRow($notificacion_imagenes); ?>
             <?= addNRow(valida_descartar_promocion($num_imagenes, $id_servicio)) ?>
             <?= div($images, ["class" => "contenedor_imagen_muestra"], 1) ?>
@@ -182,17 +181,18 @@ $icantidad = icon('fa fa-pencil text_cantidad');
                     <?= div("+ AGREGAR COLORES", ["class" => "text_agregar_color "], 1); ?>
                     <?= heading_enid("COLORES DISPONIBLES", 4) ?>
                     <?= div($info_colores, 1) ?>
-                    <div class="input_servicio_color">
-                        <?= div("", ["id" => "seccion_colores_info"], 1) ?>
-                        <?= div("", ["class" => "place_colores_disponibles"], 1) ?>
-                    </div>
+                    <?= get_btw(
+
+                        div("", ["id" => "seccion_colores_info"], 1)
+                        ,
+                        div("", ["class" => "place_colores_disponibles"], 1)
+                        ,
+                        "input_servicio_color"
+                    ) ?>
                 </div>
             <?php endif; ?>
         </div>
         <div class="tab-pane <?= $extra_4 ?>" id="tab_info_precios">
-
-
-
 
             <?= addNRow(div(get_estado_publicacion($status, $id_servicio), ["class" => "text-right"])) ?>
             <?= get_rango_entrega(
@@ -261,10 +261,9 @@ $icantidad = icon('fa fa-pencil text_cantidad');
             <?php if ($flag_servicio < 1): ?>
                 <?= $this->load->view("servicio/precios", $data); ?>
             <?php endif; ?>
-
         </div>
-        <div class="tab-pane <?= $extra_3 ?>" id="tab_terminos_de_busqueda">
-            <?= get_form_tags($id_servicio, $metakeyword_usuario) ?>
-        </div>
+        <?= div(
+            get_form_tags($id_servicio, $metakeyword_usuario), ["class" => "tab-pane " . $extra_3, "id" => "tab_terminos_de_busqueda"]
+        ) ?>
     </div>
 </div>

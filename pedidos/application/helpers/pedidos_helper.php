@@ -1,6 +1,27 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo )
+    {
+
+
+        $r[] = get_btw(
+
+            div(heading_enid("COSTOS DE OPERACIÓN", 3), ["class" => "jumbotron text-center"])
+            ,
+            get_formar_add_pedidos($table_costos)
+            ,
+
+            "contenedor_costos_registrados"
+        );
+
+        $r[] = div(get_form_costos($tipo_costos, $id_recibo), ["class" => "display_none contenedor_form_costos_operacion"]);
+
+        return append_data($r);
+
+
+    }
+
     function get_format_resumen_cliente_compra($recibo, $tipos_entregas, $domicilio, $num_compras, $usuario, $id_recibo)
     {
 
@@ -204,33 +225,33 @@ if (!function_exists('invierte_date_time')) {
 
     if (!function_exists('get_format_pre_orden')) {
 
-        function get_format_pre_orden($id_servicio, $id_error, $recibo, $domicilio,$id_recibo, $lista_direcciones)
+        function get_format_pre_orden($id_servicio, $id_error, $recibo, $domicilio, $id_recibo, $lista_direcciones)
         {
 
             $r[] = div(heading_enid(
-                    "ORDEN #" . $recibo["id_proyecto_persona_forma_pago"],
-                    1
-                ),
-            1
+                "ORDEN #" . $recibo["id_proyecto_persona_forma_pago"],
+                1
+            ),
+                1
 
             );
 
             $x[] = div(img(
-                    [
-                        "src" => link_imagen_servicio($id_servicio),
-                        "class"=> "imagen_servicio top_30"
+                [
+                    "src" => link_imagen_servicio($id_servicio),
+                    "class" => "imagen_servicio top_30"
 
-                    ]
-                ),4
+                ]
+            ), 4
             );
-            $x[] = div("",8);
-            $r[] =  div(append_data($x),13);
+            $x[] = div("", 8);
+            $r[] = div(append_data($x), 13);
 
-            $r[] = div(heading_enid("DIRECCIÓN ENTREGA ESTABLECIDA",3),["class"=> "top_30",1]);
-            $r[] =  div(create_descripcion_direccion_entrega($domicilio), ["class"=>" border-bottom padding_10 top_30 f12"],1) ;
-            $r[] =  div(valida_accion_pago($recibo), 1) ;
+            $r[] = div(heading_enid("DIRECCIÓN ENTREGA ESTABLECIDA", 3), ["class" => "top_30", 1]);
+            $r[] = div(create_descripcion_direccion_entrega($domicilio), ["class" => " border-bottom padding_10 top_30 f12"], 1);
+            $r[] = div(valida_accion_pago($recibo), 1);
 
-            $r[] =  div(get_forms($id_recibo, $lista_direcciones), 1) ;
+            $r[] = div(get_forms($id_recibo, $lista_direcciones), 1);
             return append_data($r);
 
 
@@ -636,7 +657,7 @@ if (!function_exists('invierte_date_time')) {
                 $extra = ($id === $asignado) ? "asignado_actualmente" : "";
 
                 $encuentro = [];
-                $encuentro[] = div("#" . $a, ["class" => "f15"],1);
+                $encuentro[] = div("#" . $a, ["class" => "f15"], 1);
                 $encuentro[] = div($nombre, 1);
                 $encuentro[] = guardar("ESTABLECER COMO PUNTO DE ENTREGA",
                     [
@@ -646,7 +667,7 @@ if (!function_exists('invierte_date_time')) {
 
                     ]
                 );
-                $r[] = div(append_data($encuentro), ["class" =>   "top_50 border padding_10 contenedor_listado d-flex flex-column justify-content-between ".$extra]);
+                $r[] = div(append_data($encuentro), ["class" => "top_50 border padding_10 contenedor_listado d-flex flex-column justify-content-between " . $extra]);
 
                 $a++;
             }
@@ -757,12 +778,12 @@ if (!function_exists('invierte_date_time')) {
                 $response = div(guardar("PROCEDER A LA COMPRA " . icon("fa fa-2x fa-shopping-cart"),
                     [
                         "style" => "background:blue!important",
-                        "class"=> "top_30 f12"
+                        "class" => "top_30 f12"
                     ],
                     1,
                     1,
                     0,
-                    $url),1);
+                    $url), 1);
 
             }
             return $response;
