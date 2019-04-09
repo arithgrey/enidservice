@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $x = [];
-            $x[] =  div( img(["src"=>$url_img_servicio ,"class"=>"img_servicio_def padding_10" ]),3);
+            $x[] =  div(anchor_enid(img(["src"=>$url_img_servicio ,"class"=>"img_servicio_def padding_10" ]), ["href"=> get_url_servicio($id_servicio)]) ,3);
             $text = [];
             $text[] =  div(heading_enid($porcentaje."%",3), ["class"=>"text-center"]);
             $text[] =  guardar($solicitudes. " SOLICITUDES "  );
