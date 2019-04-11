@@ -1,23 +1,24 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function get_format_tiempo_entrega($data, $totales_servicios){
+    function get_format_tiempo_entrega($data, $totales_servicios)
+    {
 
-        $response =  [];
+        $response = [];
         $a = 0;
-        foreach ($data as $row ){
+        foreach ($data as $row) {
 
             $response[$a] = $row;
-            $id_servicio =  $row["id_servicio"];
-            $total =  $row["total"];
+            $id_servicio = $row["id_servicio"];
+            $total = $row["total"];
             $solicitudes = 0;
-            foreach ($totales_servicios as $row2 ){
+            foreach ($totales_servicios as $row2) {
 
-                $id_servicio_totales =  $row2["id_servicio"];
-                if ($id_servicio ==  $id_servicio_totales){
+                $id_servicio_totales = $row2["id_servicio"];
+                if ($id_servicio == $id_servicio_totales) {
 
 
-                    $solicitudes =  $row2["total"];
+                    $solicitudes = $row2["total"];
 
                     break;
                 }
@@ -25,52 +26,51 @@ if (!function_exists('invierte_date_time')) {
 
             $response[$a]["solicitudes"] = $solicitudes;
             $porcentaje = porcentaje_total($total, $solicitudes);
-            $response[$a]["porcentaje"]  = substr($porcentaje,0,5);
+            $response[$a]["porcentaje"] = substr($porcentaje, 0, 5);
 
 
-
-
-
-            $a ++;
+            $a++;
         }
 
         return get_format_entrega($response);
 
     }
-    function get_format_entrega($data){
+
+    function get_format_entrega($data)
+    {
 
         $respose = [];
-        foreach ($data as $row){
+        foreach ($data as $row) {
 
 
-            $dias =  $row["dias"];
-            $total	 = $row["total"];
-            $id_servicio	= $row["id_servicio"];
-            $url_img_servicio	= $row["url_img_servicio"];
-            $solicitudes  =  $row["solicitudes"];
-            $porcentaje =  $row["porcentaje"];
+            $dias = $row["dias"];
+            $total = $row["total"];
+            $id_servicio = $row["id_servicio"];
+            $url_img_servicio = $row["url_img_servicio"];
+            $solicitudes = $row["solicitudes"];
+            $porcentaje = $row["porcentaje"];
 
 
             $x = [];
-            $x[] =  div(anchor_enid(img(["src"=>$url_img_servicio ,"class"=>"img_servicio_def padding_10" ]), ["href"=> get_url_servicio($id_servicio)]) ,3);
+            $x[] = div(anchor_enid(img(["src" => $url_img_servicio, "class" => "img_servicio_def padding_10"]), ["href" => get_url_servicio($id_servicio)]), 3);
             $text = [];
-            $text[] =  div(heading_enid($porcentaje."%",3), ["class"=>"text-center"]);
-            $text[] =  guardar($solicitudes. " SOLICITUDES "  );
-            $text[] =  guardar($total. " VENTAS " );
+            $text[] = div(heading_enid($porcentaje . "%", 3), ["class" => "text-center"]);
+            $text[] = guardar($solicitudes . " SOLICITUDES ");
+            $text[] = guardar($total . " VENTAS ");
 
 
+            $x[] = div(append_data($text), ["class" => "col-lg-6 d-flex flex-column justify-content-between"]);
 
-            $x[]  =  div(append_data($text),["class"=>"col-lg-6 d-flex flex-column justify-content-between"]);
-
-            $texto  = heading_enid("Tiempo promedio de venta ".substr($dias,0,5)."días",4) ;
-            $x[]  =  div($texto,["class"=>"col-lg-3 text-center align-self-center"]);
+            $texto = heading_enid("Tiempo promedio de venta " . substr($dias, 0, 5) . "días", 4);
+            $x[] = div($texto, ["class" => "col-lg-3 text-center align-self-center"]);
 
 
-            $r[] = div(append_data($x),["class"=>"row border  top_30"]);
+            $r[] = div(append_data($x), ["class" => "row border  top_30"]);
 
         }
         return append_data($r);
     }
+
     function get_format_transaccion($id_recibo)
     {
 
@@ -191,7 +191,7 @@ if (!function_exists('invierte_date_time')) {
         $ops_tipo_orden_text = ["", "FECHA REGISTRO", "FECHA ENTREGA", "FECHA CANCELACIÓN", "FECHA DE PAGO", "FECHA CONTRA ENTREGA"];
 
         $default = ["class" => "header_table_recibos"];
-        $tb = hr() . "<table class='table_enid_service top_20' ><thead>";
+        $tb = hr() . "<table class='table_enid_service top_20 table ' ><thead>";
         $tb .= "<tr class='header_table'>";
         $tb .= get_th("ORDEN", $default);
         $tb .= get_th("", $default);
@@ -203,8 +203,6 @@ if (!function_exists('invierte_date_time')) {
         $tb .= "</thead></tr><tbody>";
         foreach ($recibos as $row) {
 
-            //$fecha_contra_entrega = $row["fecha_contra_entrega"];
-            //$fecha_entrega = $row["fecha_entrega"];
 
 
             $recibo = $row["recibo"];
@@ -227,10 +225,10 @@ if (!function_exists('invierte_date_time')) {
             $entrega = $row[$ops_tipo_orden[$tipo_orden]];
 
 
-            $extra = ($status == 9) ? "entregado" : "";
+            $extra = ( $status == 9 || $status == 7 || $status == 11 || $status == 12 ) ? " entregado" : "";
 
 
-            $tb .= "<tr id='" . $recibo . "' class='desglose_orden cursor_pointer entregado" . $extra . "' >";
+            $tb .= "<tr id='" . $recibo . "' class='desglose_orden cursor_pointer  " . $extra . "' >";
 
             $id_servicio = $row["id_servicio"];
             $url_img = $row["url_img_servicio"];
@@ -239,7 +237,6 @@ if (!function_exists('invierte_date_time')) {
                 "src" => $url_img,
                 "id" => $id_error,
                 "style" => "width:40px!important;height:40px!important;",
-                'onerror' => "reloload_img( '" . $id_error . "','" . $url_img . "');"
             ]);
             $tb .= get_td($recibo);
             $tb .= get_td($img);
@@ -397,70 +394,10 @@ if (!function_exists('invierte_date_time')) {
         return $total_deuda + $costo;
     }
 
-    function evalua_acciones_modalidad_anteriores($num_acciones, $modalidad_ventas)
+    function evalua_acciones_modalidad_anteriores($num_acciones, $modalidad)
     {
 
-        $text = "";
-        if ($num_acciones > 0) {
-            if ($modalidad_ventas == 1) {
-                $text = ($num_acciones > 1) ? "MIRA TUS ÚLTIMAS $num_acciones  VENTAS" : "MIRA TUS ULTIMAS VENTAS";
-            } else {
-                $text = "MIRA TUS ÚLTIMAS COMPRAS";
-            }
-            $config = ["class" => " ver_mas_compras_o_ventas"];
-            return div(anchor_enid(heading_enid($text, 3), $config), ["class" => "col-lg-12 border_bottom top_50 bottom_50"]);
-        }
-        return $text;
-    }
 
-    function evalua_acciones_modalidad($en_proceso, $modalidad_ventas)
-    {
-
-        $text = "";
-        $flag = 0;
-        $simbolo = icon("fa  fa-fighter-jet");
-        if ($modalidad_ventas == 0 && $en_proceso["num_pedidos"] > 0) {
-            $flag++;
-            $num = $en_proceso["num_pedidos"];
-            $text = ($num > 1) ? $simbolo . " TUS " . $num . " PEDIDOS ESTÁN EN CAMINO " : $simbolo . " TU PEDIDO ESTÁ EN CAMINO ";
-        }
-        if ($modalidad_ventas == 1 && $en_proceso["num_pedidos"] > 0) {
-            $flag++;
-            $num = $en_proceso["num_pedidos"];
-            $text = ($num > 1) ? $simbolo . " ENVIASTÉ $num PAQUETES QUE  ESTÁN POR LLEGAR A TU CLIENTE" : $simbolo . " TU ENVÍO ESTÁ EN CAMINO ";
-
-        }
-
-        $final = (strlen($text) > 10) ? div($text, ["class" => "alert alert-info text-center"]) : $text;
-        return $final;
-
-    }
-
-    function get_total_articulos_promocion($modalidad)
-    {
-
-        $response = "";
-        if ($modalidad > 0) {
-
-            $l = anchor_enid(
-                icon("fa fa-cart-plus") . " Artículos en promoción ",
-                [
-                    "href" => '../planes_servicios/',
-                    "class" => 'black vender_mas_productos text-uppercase letter-spacing-5'
-
-                ]
-            );
-
-            $l2 = anchor_enid(
-                " Agregar",
-                [
-                    "href" => '../planes_servicios/?action=nuevo',
-                    "class" => 'black vender_mas_productos text-uppercase letter-spacing-5']
-            );
-
-            $response = get_btw(div($l), div($l2), " col-lg-8 col-lg-offset-2 d-flex align-items-center justify-content-between top_30");
-        }
-        return $response;
     }
 
     function evalua_texto_envios_compras($modalidad_ventas, $total, $tipo)
@@ -631,7 +568,7 @@ if (!function_exists('invierte_date_time')) {
         if ($modalidad == 0 && $ordenes == 0) {
             return "";
         }
-        return div(heading_enid($text, 3), 1);
+        return div(heading_enid($text, 3),1);
     }
 
     function get_mensaje_compra($modalidad, $num_ordenes)
@@ -723,7 +660,7 @@ if (!function_exists('invierte_date_time')) {
         $concepto .= div("Concepto");
         $concepto .= div($resumen_pedido);
         $concepto .= valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion);
-        $concepto .= div("PRECIO " . span("$".$monto_a_pagar , ["class"=>"strong"]),["class"=>"top_30"]);
+        $concepto .= div("PRECIO " . span("$" . $monto_a_pagar, ["class" => "strong"]), ["class" => "top_30"]);
         $concepto .= div($deuda["text_envio"]);
 
         $text = div($concepto);
@@ -732,8 +669,8 @@ if (!function_exists('invierte_date_time')) {
         $monto .= heading_enid($saldo_pendiente . "MXN", 2, ["class" => 'blue_enid ']);
         $monto .= heading_enid("Pesos Mexicanos", 4, ["class" => 'strong']);
 
-        $text .= div($monto, ["style" => "text-align: center;" , "class"=> "top_50"]);
-        $text .= div(img($url_img_servicio), ["class"=> "max-height: 250px;"],1);
+        $text .= div($monto, ["style" => "text-align: center;", "class" => "top_50"]);
+        $text .= div(img($url_img_servicio), ["class" => "max-height: 250px;"], 1);
         return div($text, 4);
 
     }
@@ -749,13 +686,13 @@ if (!function_exists('invierte_date_time')) {
         $lugar_entrega = $p["lugar_entrega"];
         $numero = "NÚMERO " . $p["numero"];
 
-        $r[] = div(heading_enid("LUGAR DE ENCUENTRO", 3, ["class" => "top_30 underline "]),1);
+        $r[] = div(heading_enid("LUGAR DE ENCUENTRO", 3, ["class" => "top_30 underline "]), 1);
 
-        $x[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, ["class"=> "top_20"],1);
+        $x[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, ["class" => "top_20"], 1);
         $x[] = div("ESTACIÓN " . $lugar_entrega, ["class" => "strong"], 1);
         $x[] = div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"], 1);
 
-        $r[] =  div(append_data($x), ["class"=> "contenedor_detalle_entrega"]);
+        $r[] = div(append_data($x), ["class" => "contenedor_detalle_entrega"]);
 
         $r[] = div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", ["class" => "contenedor_text_entrega border"]);
 
@@ -845,16 +782,11 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_vista_compras_efectivas($data, $status_enid_service)
+    function get_vista_compras_efectivas($data, $modalidad)
     {
 
-        $response = "";
-        if ($data["total"] > 0) {
-
-            $ordenes = $data["compras"];
-            $listado = create_listado_compra_venta($ordenes, $status_enid_service, 1);
-            $response = div($listado, 1);
-        }
+        $listado = create_listado_compra_venta($data,  $modalidad);
+        $response = div($listado, 1);
         return $response;
 
     }
@@ -864,22 +796,16 @@ if (!function_exists('invierte_date_time')) {
 
         $modalidad = $data["modalidad"];
         $ordenes = $data["ordenes"];
-        $status_enid_service = $data["status_enid_service"];
-        $en_proceso = $data["en_proceso"];
-        $anteriores = $data["anteriores"];
         $id_perfil = $data["id_perfil"];
-
         $r[] = get_text_modalidad($modalidad, $ordenes);
-        //$total = ($modalidad < 1) ? count($ordenes) : 0;
-        $r[] = get_total_articulos_promocion($modalidad);
-        $r[] = create_listado_compra_venta($ordenes, $status_enid_service, $modalidad, $id_perfil);
-        $r[] = evalua_acciones_modalidad($en_proceso, $modalidad);
-        $r[] = evalua_acciones_modalidad_anteriores($anteriores, $modalidad);
-        $r[] = place("contenedor_ventas_compras_anteriores");
-        return div(append_data($r), 1);
+        $text = ($modalidad == 1) ? "VE TUS ÚLTIMAS VENTAS" : "VE TUS ÚLTIMAS COMPRAS";
+        $r[] = guardar($text, ["class" => "ver_mas_compras_o_ventas top_30 bottom_30"]);
+        $r[] = create_listado_compra_venta($ordenes,  $modalidad, $id_perfil);
+        $r[] = div(place("contenedor_ventas_compras_anteriores"), 13);
+        return div(append_data($r), 10, 1);
     }
 
-    function create_listado_compra_venta($ordenes, $status_enid_service, $modalidad, $id_perfil = 0)
+    function create_listado_compra_venta($ordenes, $modalidad, $id_perfil = 0)
     {
 
         $list = [];
@@ -890,14 +816,11 @@ if (!function_exists('invierte_date_time')) {
             $id_servicio = $row["id_servicio"];
             $url_servicio = "../producto/?producto=" . $id_servicio;
             $url_imagen_servicio = $row["url_img_servicio"];
-            $id_error = "imagen_" . $id_servicio;
 
             $t = anchor_enid(
                 img([
                     "src" => $url_imagen_servicio,
-
                     "class" => 'imagen_articulo',
-                    "id" => $id_error
                 ]),
                 ["href" => $url_servicio]
             );
@@ -910,17 +833,11 @@ if (!function_exists('invierte_date_time')) {
                 $t .= guardar("AVANZADO", [], 1, 1, 0, $url);
             }
 
-            $list[] = div($t, ["class" => "align-items-center  d-flex flex-row border row top_20 justify-content-between "]);
+            $list[] = div(div($t, ["class" => "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block "]),1);
         }
 
-        if ($modalidad < 1) {
+        $response = append_data($list);
 
-
-            $response = div(append_data($list), 12);
-        } else {
-            $response = div(append_data($list), 8, 1);
-
-        }
 
         return $response;
 

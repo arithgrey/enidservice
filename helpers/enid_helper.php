@@ -1463,7 +1463,16 @@ if (!function_exists('get_btw')) {
         } else {
 
 
-            $response = div(append_data([$a, $b]), ["class" => $class]);
+            if ($row > 0) {
+
+                $response = div(div(append_data([$a, $b]), ["class" => $class]), 1);
+
+            } else {
+
+                $response = div(append_data([$a, $b]), ["class" => $class]);
+            }
+
+
         }
 
         return $response;
@@ -1474,23 +1483,22 @@ if (!function_exists('get_format_fecha_busqueda')) {
     function get_format_fecha_busqueda()
     {
 
-        $r[] = div(append_data([
+        $r[] = get_btw(
             div("Inicio", ["class" => 'strong']),
-            input([
+            div(input([
                 "data-date-format" => "yyyy-mm-dd",
                 "name" => 'fecha_inicio',
                 "class" => "form-control input-sm datetimepicker4",
                 "id" => 'datetimepicker4',
                 "value" => date("Y-m-d")
-            ])
+            ])),
+            'col-lg-4 d-flex align-items-center justify-content-between'
+        );
 
-        ]),
-            ["class" => 'col-lg-4']);
 
-
-        $r[] = div(append_data([
+        $r[] = get_btw(
             div("Fin", ["class" => 'strong']),
-            input(
+            div(input(
                 [
                     "data-date-format" => "yyyy-mm-dd",
                     "name" => 'fecha_termino',
@@ -1498,11 +1506,11 @@ if (!function_exists('get_format_fecha_busqueda')) {
                     "id" => 'datetimepicker5',
                     "value" => date("Y-m-d")
                 ]
-            )
-        ]),
-            ["class" => 'col-lg-4']);
+            )),
+            'col-lg-4 d-flex align-items-center justify-content-between'
+        );
 
-        $r[] = div(guardar("Búsqueda " . icon("fa fa-chevron-right") . icon("fa fa-chevron-right")), ["class" => 'col-lg-4 top_10']);
+        $r[] = div(guardar("Búsqueda " . icon("fa fa-chevron-right") . icon("fa fa-chevron-right")), ["class" => 'col-lg-4 ']);
 
         return append_data($r);
 

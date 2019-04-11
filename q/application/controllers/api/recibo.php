@@ -41,8 +41,8 @@ class recibo extends REST_Controller
 
             $response = $this->recibo_model->get_tiempo_venta($param);
             $response = $this->principal->get_imagenes_productos(0, 1, 1, 1, $response);
-            $total_servicios  = $this->recibo_model->get_tiempo_venta($param,1 );
-            $response =  get_format_tiempo_entrega($response , $total_servicios  );
+            $total_servicios = $this->recibo_model->get_tiempo_venta($param, 1);
+            $response = get_format_tiempo_entrega($response, $total_servicios);
 
         }
 
@@ -146,17 +146,12 @@ class recibo extends REST_Controller
         $param = $this->get();
         $param["id_usuario"] = $this->id_usuario;
         if (if_ext($param, "modalidad,id_usuario")) {
-            $modalidad = $param["modalidad"];
 
-            $response["total"] = $this->recibo_model->total_compras_ventas_efectivas_usuario($param);
-            if ($response["total"] > 0) {
 
-                $response["compras"] = $this->recibo_model->compras_ventas_efectivas_usuario($param);
-
-            }
-
+            $compras = $this->recibo_model->compras_ventas_efectivas_usuario($param);
+            $compras = $this->principal->get_imagenes_productos(0, 1, 1, 1, $compras);
             $status_enid_service = $this->get_estatus_servicio_enid_service($param);
-            $response = get_vista_compras_efectivas($response, $status_enid_service, $modalidad);
+            $response = get_vista_compras_efectivas($compras, $param["modalidad"]);
         }
 
         $this->response($response);
@@ -181,23 +176,15 @@ class recibo extends REST_Controller
             $ordenes = $this->recibo_model->get_compras_usuario($param, $modalidad);
             $ordenes = $this->add_imgs_servicio($ordenes);
             $response = "";
+
+            $id_perfil =  $this->principal->getperfiles();
             if (count($ordenes) > 0) {
 
 
                 $data["id_usuario"] = $id_usuario;
-                $data["ordenes"] = $this->agrega_estados_direcciones_a_pedidos($ordenes);
-                $data["en_proceso"] = $this->en_proceso($modalidad, $id_usuario);
-                $data["numero_articulos_en_venta"] = 0;
-                if ($param["modalidad"] == 1) {
-                    $data["numero_articulos_en_venta"] = $this->carga_productos_en_venta($param);
-                }
-                $data["status"] = $param["status"];
-                $data["anteriores"] = $this->recibo_model->num_compras_efectivas_usuario($param);
+                $data["ordenes"] = $ordenes;
                 $data["modalidad"] = $modalidad;
-                $data["status_enid_service"] = $status_enid_service = $this->get_estatus_servicio_enid_service($param);
-
-
-                $data["id_perfil"] = $this->principal->getperfiles();
+                $data["id_perfil"] = $id_perfil;
                 $response = get_vista_cliente($data);
 
             }

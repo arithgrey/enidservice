@@ -51,22 +51,19 @@ if (!function_exists('invierte_date_time')) {
 
 
             $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
-            $x[] = $valoraciones;
-            $url = "../recomendacion/?q=" . $id_usuario;
+            $x[] = div($valoraciones, ["class" => "top_30"]);
+
             $x[] = div(
                 anchor_enid("VER COMENTARIOS",
                     [
-                        "href" => $url,
-                        "class" => "a_enid_blue "
+                        "href" => "../recomendacion/?q=" . $id_usuario,
+                        "class" => "a_enid_blue  top_30"
                     ]
                 ), ["class" => "text-center top_20"]);
-            $x[] = div($alcance, ["class" => " text-center "]);
+            $x[] = div($alcance, ["class" => " text-center top_30"]);
 
-
-            $r[] = div(append_data($x), 3);
-            $r[] = div(place("place_ventas_usuario"), 9);
-
-            return div(append_data($r), ["class" => "text-center"]);
+            $response = div(div(append_data($x), 6, 1), ["class" => "text-center"]);
+            return $response;
 
         }
     }
@@ -120,43 +117,66 @@ if (!function_exists('invierte_date_time')) {
                 "id" => 'btn_pagos'
             ]);
 
-        $a_vendedor = anchor_enid(div("VENDER"),
+        $a_vendedor = anchor_enid(div(icon("fa fa-flag")." VENDER"),
             [
-                "href" => "../planes_servicios/?action=nuevo",
-                "class" => 'black strong tab_pagos',
+                "href" => "../planes_servicios/?action=nuevo"
 
-            ]);
+            ]
+        );
 
 
-        $a_mis_ventas = anchor_enid(icon('fa fa-shopping-bag') . "TUS VENTAS" ,
+        $a_mis_ventas = anchor_enid(icon('fa fa-shopping-bag') . "VENTAS",
             ["id" => "mis_ventas",
                 "href" => "#tab_mis_ventas",
                 "data-toggle" => "tab",
-                "class" => 'black strong btn_mis_ventas'
+                "class" => 'btn_mis_ventas'
             ]);
         $place_ventas = place("place_num_pagos_notificados");
 
 
-        $icon = icon('fa fa-credit-card-alt');
-        $place = place("place_num_pagos_por_realizar");
-        $a_mis_compras = anchor_enid($icon . "TUS COMPRAS" . $place,
-            ["id" => "mis_compras", "href" => "#tab_mis_pagos", "data-toggle" => "tab", "class" => 'black strong btn_cobranza mis_compras']);
 
+        $a_mis_compras = anchor_enid(icon('fa fa-credit-card-alt') . " COMPRAS",
+            [
+                "id" => "mis_compras",
+                "href" => "#tab_mis_pagos",
+                "data-toggle" => "tab",
+                "class" => 'btn_cobranza mis_compras'
+            ]);
+
+        $notificacion =  anchor_enid( place("place_num_pagos_por_realizar"),    [
+                "id" => "mis_compras",
+                "href" => "#tab_mis_pagos",
+                "data-toggle" => "tab",
+                "class" => 'btn_cobranza mis_compras'
+        ]
+        );
+
+        $a_mis_valoraciones = anchor_enid(icon("fa fa-star")." VALORACIONES",
+            [
+                "id" => "mis_valoraciones",
+                "href" => "#tab_valoraciones",
+                "data-toggle" => "tab"
+            ]);
         $a_lista_deseo = anchor_enid(icon("fa fa-gift") . "LISTA DE DESEOS",
-            ["href" => "../lista_deseos/", "class" => 'black strong']);
+            [
+                "href" => "../lista_deseos/"
+            ]
+        );
 
 
         $list = [
 
-            li($a_vendedor, ["class" => "li_menu menu_vender " . valida_active_tab('ventas', $action)]),
-            li($a_mis_ventas, ["class" => 'li_menu']),
-            li($place_ventas, ["class" => 'li_menu']),
-            li($a_mis_compras, ["class" => 'li_menu ' . valida_active_tab('compras', $action)]),
-            li($a_lista_deseo, ["class" => 'li_menu']),
+            $a_vendedor,
+            $a_mis_ventas,
+            $place_ventas,
+            $a_mis_compras,
+            $notificacion ,
+            $a_mis_valoraciones,
+            $a_lista_deseo,
             li($a_tab_pagos, ["class" => 'li_menu', "style" => "display: none;"]),
 
         ];
-        return ul($list , ["class"=> "nav tabs shadow border padding_10"]);
+        return ul($list, ["class" => "shadow border padding_10 d-flex flex-column justify-content-between" , "style"=> "min-height: 220px;"]);
     }
 
 }

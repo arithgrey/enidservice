@@ -425,9 +425,13 @@ class Recibo_model extends CI_Model
 
         $id_usuario = $param["id_usuario"];
         $campo_usuario = "id_usuario";
-        if ($param["modalidad"] == 1) {
+
+        if ($param["modalidad"] > 0 ) {
+
             $campo_usuario = "id_usuario_venta";
+
         }
+
         $params_where = [$campo_usuario => $id_usuario, "status" => 9];
         return $this->get([], $params_where);
 

@@ -102,15 +102,15 @@ class Home extends CI_Controller
 			$data["es_movil"] = 0;
 		}
 
-
+        $npage =  get_info_variable($param, "page");
 		$data["paginacion"] = $this->create_pagination($totales_elementos,
 			$per_page,
 			$q,
 			$param["id_clasificacion"],
 			$param["vendedor"],
 			$data_send["order"],
-			get_info_variable($param, "page")
-		);
+            $npage
+        );
 
 		$this->set_option("in_session", 0);
 
@@ -151,7 +151,6 @@ class Home extends CI_Controller
 		$api = "servicio/crea_vista_producto/format/json/";
 		return $this->principal->api($api, $servicio);
 	}
-
 	private function create_pagination($totales_elementos, $per_page, $q, $id_clasificacion, $vendedor, $order, $page)
 	{
 

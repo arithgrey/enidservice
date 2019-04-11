@@ -407,12 +407,13 @@ class serviciosmodel extends CI_Model
 
 	function busqueda($param)
 	{
-		$data_complete["num_servicios"] = $this->get_resultados_posibles($param);
+
+	    $data_complete["num_servicios"] = $this->get_resultados_posibles($param);
 		$_num = get_random();
 		$this->create_productos_disponibles(0, $_num, $param);
 		$data_complete["sql"] = $this->get_option("sql");
-		$data_complete["servicio"] = $this->db->get("tmp_producto_$_num")->result_array();
-		if ($param["agrega_clasificaciones"] == 1) {
+		$data_complete["servicios"] = $this->db->get("tmp_producto_$_num")->result_array();
+		if ($param["agrega_clasificaciones"] > 0 ) {
 			$data_complete["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
 		}
 		$this->create_productos_disponibles(1, $_num, $param);

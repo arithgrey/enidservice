@@ -107,6 +107,7 @@ class actividad_web_model extends CI_Model
 		return $query_get;
 	}
 
+	/*
 	function crea_conversaciones($param)
 	{
 		$where = $this->get_where_tiempo($param, 1);
@@ -125,6 +126,7 @@ class actividad_web_model extends CI_Model
                       DATE(fecha_registro)";
 		return $query_get;
 	}
+	*/
 
 	function crea_servicios_creados($param)
 	{
@@ -366,8 +368,6 @@ class actividad_web_model extends CI_Model
 			$sql_servicios = $this->crea_servicios_creados($param);
 			$this->crea_tabla_temploral($tb_servicios, $sql_servicios, 0);
 
-			$sql_preguntas = $this->crea_conversaciones($param);
-			$this->crea_tabla_temploral($tb_preguntas, $sql_preguntas, 0);
 
 			$sql_deseo = $this->crea_tb_deseo($param);
 			$this->crea_tabla_temploral($tb_deseo_usuario, $sql_deseo, 0);
@@ -408,8 +408,7 @@ class actividad_web_model extends CI_Model
 				$data_complete[$a]["servicios_creados"]
 					= $this->get_total_tabla($tb_servicios);
 
-				$data_complete[$a]["conversaciones"]
-					= $this->get_total_conversaciones($tb_preguntas);
+
 
 				$data_complete[$a]["lista_deseo"]
 					= $this->get_total_lista_deseo($tb_deseo_usuario);
@@ -427,7 +426,7 @@ class actividad_web_model extends CI_Model
 			$this->crea_tabla_temploral($tabla_contacto, $sql_contacto, 1);
 			$this->crea_tabla_temploral($tabla_ventas, $sql_ventas, 1);
 			$this->crea_tabla_temploral($tabla_usuarios, $sql_usuarios, 1);
-			$this->crea_tabla_temploral($tb_preguntas, $sql_preguntas, 1);
+
 		}
 		return $data_complete;
 	}
@@ -519,146 +518,6 @@ class actividad_web_model extends CI_Model
 		return $data_complete;
 	}
 
-	/*
-
-	function get_fechas_funnel_dia($param){
-
-		$where_fecha = "DATE(fecha_registro) =  DATE(CURRENT_DATE())";
-
-		if (isset($param["fecha_inicio"])){
-
-			$fecha_inicio =  $param["fecha_inicio"];
-			$fecha_termino =  $param["fecha_termino"];
-
-			$where_fecha = "DATE(fecha_registro )
-						 BETWEEN '".$fecha_inicio."' AND '".$fecha_termino."' ";
-		}
-		return $where_fecha;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-	function get_actividad_mail_marketing($param){
-
-	  $_num =  get_random();
-	  $this->creta_tmp_mail_marketing($_num ,  0);
-	  $query_get = "SELECT
-					COUNT(0)num_enviados ,
-					DATE(fecha_registro) fecha_registro
-					FROM tmp_mail_marketig_$_num
-					GROUP BY DATE(fecha_registro)";
-
-
-	  $result = $this->db->query($query_get);
-	  $data_complete["envios"] = $result->result_array();
-	  $data_complete["registros"]=  $this->get_num_prospectos($param);
-
-
-	  $this->creta_tmp_mail_marketing($_num ,  1 );
-	  return $data_complete;
-	}
-
-	function creta_tmp_mail_marketing($_num ,  $flag){
-
-	  $query_drop = "DROP TABLE IF exists tmp_mail_marketig_$_num";
-	  $response = $this->db->query($query_drop);
-
-	  if($flag == 0 ){
-
-		$query_create ="CREATE TABLE tmp_mail_marketig_$_num
-						  AS
-						  SELECT fecha_registro FROM email_prospecto
-						  WHERE DATE(fecha_registro )
-						  BETWEEN DATE_ADD(CURRENT_DATE() , INTERVAL - 2 WEEK )
-						  AND  DATE(CURRENT_DATE())";
-		$response =  $this->db->query($query_create);
-	  }
-	  return $response;
-
-	}
-
-	function get_num_prospectos($param){
-
-	  $fecha_inicio =  $param["fecha_inicio"];
-	  $fecha_termino =  $param["fecha_termino"];
-	  $where_fecha = " WHERE date(fecha_registro)
-					  BETWEEN  '".$fecha_inicio."' AND '".$fecha_termino."'  ";
-
-	  $query_get ="SELECT DATE(fecha_registro)fecha_registro,
-				  COUNT(0)registros FROM prospecto
-				  $where_fecha GROUP BY DATE(fecha_registro);";
-
-				  $result = $this->db->query($query_get);
-				  return $result->result_array();
-
-	}
-
-
-	function create_tmp_visitas($flag , $_num , $param){
-
-	  $query_drop =  "drop table if exists visitas_tmp_global_$_num";
-	  $this->db->query($query_drop);
-
-	  $query_drop =  "drop table if exists visitas_tmp_$_num";
-	  $this->db->query($query_drop);
-
-
-	  if($flag ==  0){
-
-		$sql_tiempo =  $param["sql_tiempo"];
-
-		$query_create = "CREATE TABLE visitas_tmp_$_num  AS
-		  SELECT
-			DATE(fecha_registro)fecha ,
-			COUNT(0)visitas
-		  FROM
-		  pagina_web
-		  WHERE
-		  ".$sql_tiempo
-		  ." group by date(fecha_registro)";
-
-		$this->db->query($query_create);
-
-	  }
-
-	}
-
-
-
-	function get_servicios_creados($tabla){
-
-	  $query_get = "SELECT SUM(total)num FROM $tabla ";
-	  $result =  $this->db->query($query_get);
-	  return $result->result_array()[0]["num"];
-	}
-
-
-
-
-	function drop_tables_repo_general(){
-
-
-		$query_drop =  "drop table if exists proyecto_tmp";
-		$this->db->query($query_drop);
-
-
-		$query_drop =  "drop table if exists blog_tmp";
-		$this->db->query($query_drop);
-
-
-		$query_drop =  "drop table if exists tareas_resueltas";
-		$this->db->query($query_drop);
-	}
-  */
 	private function get_total_tabla($tabla)
 	{
 
@@ -667,16 +526,6 @@ class actividad_web_model extends CI_Model
 
 	}
 
-	private function get_total_conversaciones($tabla)
-	{
-		$query_get = "SELECT 
-                        SUM(total)num,
-                        SUM(leidas_por_vendedor)leidas_por_vendedor,
-                        SUM(leidas_por_cliente)leidas_por_cliente
-                       FROM $tabla ";
-		return $this->db->query($query_get)->result_array();
-
-	}
 
 	private function get_total_lista_deseo($tb_deseo_usuario)
 	{

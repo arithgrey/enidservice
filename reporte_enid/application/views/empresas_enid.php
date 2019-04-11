@@ -7,11 +7,13 @@
                     <?= place("place_reporte") ?>
                 </div>
                 <div class="tab-pane active" id='tab_default_1'>
-                    <?= div("INDICADORES ENID SERVICE",
-                        ["class" => "titulo_enid_sm", 1]) ?>
-                    <?= form_open("", ["class" => 'form_busqueda_global_enid']) ?>
-                    <?= get_format_fecha_busqueda() ?>
-                    <?= form_close(place("place_usabilidad")) ?>
+                    <?= n_row_12() ?>
+                        <?= div("INDICADORES ENID SERVICE", ["class" => "titulo_enid_sm", 1]) ?>
+                        <?= form_open("", ["class" => 'form_busqueda_global_enid']) ?>
+                        <?= get_format_fecha_busqueda() ?>
+                        <?= form_close() ?>
+                    <?= end_row() ?>
+                    <?= addNRow(place("place_usabilidad top_50")) ?>
                 </div>
                 <div class="tab-pane" id='tab_default_2'>
                     <?= div("VISITAS WEB ", ["class" => "titulo_enid_sm"], 1) ?>

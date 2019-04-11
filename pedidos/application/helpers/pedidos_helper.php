@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo )
+    function get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo)
     {
 
 
@@ -126,19 +126,17 @@ if (!function_exists('invierte_date_time')) {
                 "val" => 4
             );
 
+            $r[] = heading_enid("ORDENES DE COMPRA" , 3);
             $r[] = form_open("", ["class" => "form_busqueda_pedidos ", "method" => "post"]);
-            $r[] = form_busqueda_pedidos($tipos_entregas, $status_ventas);
-            $x[] = strong("ORDENAR");
-            $x[] = create_select($fechas, "tipo_orden", "form-control", "tipo_orden", "fecha", "val");
-            $r[] = div(append_data($x), 3);
-            $r[] = div(get_format_fecha_busqueda(), 6);
+            $r[] = form_busqueda_pedidos($tipos_entregas, $status_ventas , $fechas);
+            $r[] = div(get_format_fecha_busqueda());
             $r[] = form_close();
 
 
-            $z[] = div(append_data($r), 1);
+            $z[] = div(append_data($r), ["class"=>" border padding_10 shadow row seccion_form_pedidos top_50"]);
             $z[] = div(place("place_pedidos top_50 bottom_50"), 1);
             $z[] = div(form_form_search(), 1);
-            return div(append_data($z), 8, 1);
+            return div(append_data($z), 10, 1);
 
         }
     }
@@ -157,18 +155,18 @@ if (!function_exists('invierte_date_time')) {
     }
     if (!function_exists('form_busqueda_pedidos')) {
 
-        function form_busqueda_pedidos($tipos_entregas, $status_ventas)
+        function form_busqueda_pedidos($tipos_entregas, $status_ventas, $fechas)
         {
 
 
             $r[] = get_btw(
-                strong("CLIENTE"),
-                input([
+                div(strong("CLIENTE")),
+                div(input([
                     "name" => "cliente",
                     "class" => "form-control",
                     "placeholder" => "Nombre, correo, telefono ..."
-                ]),
-                "col-lg-3"
+                ])),
+                "col-lg-4 d-flex align-items-center justify-content-between"
             );
             $r[] = input_hidden([
                 "name" => "v",
@@ -176,18 +174,18 @@ if (!function_exists('invierte_date_time')) {
 
             ]);
             $r[] = get_btw(
-                strong("#RECIBO"),
-                input([
+                div(strong("#RECIBO")),
+                div(input([
                     "name" => "recibo",
                     "class" => "form-control"
-                ]),
-                "col-lg-2"
+                ])),
+                "col-lg-4 d-flex align-items-center justify-content-between"
             );
 
             $r[] = get_btw(
-                strong("TIPO ENTREGA"),
+                div(strong("TIPO ENTREGA")),
 
-                create_select($tipos_entregas,
+                div(create_select($tipos_entregas,
                     "tipo_entrega",
                     "tipo_entrega form-control",
                     "tipo_entrega",
@@ -196,13 +194,13 @@ if (!function_exists('invierte_date_time')) {
                     0,
                     1,
                     0,
-                    "-"),
-                "col-lg-3"
+                    "-")),
+                "col-lg-4 d-flex align-items-center justify-content-between"
 
             );
             $r[] = get_btw(
-                strong("STATUS"),
-                create_select(
+                div(strong("STATUS")),
+                div(create_select(
                     $status_ventas,
                     "status_venta",
                     "status_venta  form-control",
@@ -213,8 +211,16 @@ if (!function_exists('invierte_date_time')) {
                     1,
                     0,
                     "-"
-                ),
-                "col-lg-3"
+                )),
+                "col-lg-6 d-flex align-items-center justify-content-between"
+
+            );
+
+
+            $r[] = get_btw(
+                div(strong("ORDENAR")),
+                create_select($fechas, "tipo_orden", "form-control", "tipo_orden", "fecha", "val"),
+                "col-lg-6 d-flex align-items-center justify-content-between"
 
             );
 
@@ -1033,12 +1039,9 @@ if (!function_exists('invierte_date_time')) {
 
             for ($a = 0; $a < $num_ciclos_contratados; $a++) {
 
-                $id_error = "imagen_" . $id_servicio;
                 $img = img([
                     "src" => $link,
                     "class" => "img_servicio",
-                    "id" => $id_error,
-                    'onerror' => "reloload_img( '" . $id_error . "','" . $link . "');"
                 ]);
 
 
@@ -1187,7 +1190,7 @@ if (!function_exists('invierte_date_time')) {
 
             if (count($recibo) > 0) {
                 $recibo = $recibo[0];
-                $text = ($recibo["saldo_cubierto"] > 0 && $recibo["status"] == 9) ? icon("fa fa-check-circle") . "PEDIDO ENTREGADO EL " . $recibo["fecha_entrega"] : "";
+                $text = ($recibo["saldo_cubierto"] > 0 && $recibo["status"] == 9) ? icon("fa fa-check-circle") . "PEDIDO ENTREGADO EL ".br() . strong($recibo["fecha_entrega"]) : "";
                 return $text;
             }
         }
@@ -1212,7 +1215,7 @@ if (!function_exists('invierte_date_time')) {
                         break;
                     }
                 }
-                $response = div($text_status, ["class" => "status_compra"]);
+                $response = div($text_status, ["class" => "status_compra padding_20 white letter-spacing-5 bottom_20"]);
             }
 
             return $response;

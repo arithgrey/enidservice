@@ -44,8 +44,8 @@
 
 .status_compra {
     background: #071929;
-    color: white;
-    padding: 5px;
+
+
 }
 
 .resumen_pago {
@@ -143,4 +143,14 @@
 .fm{
     font-size: 1.3em;
     color:#001066;
+}
+.seccion_form_pedidos .col-lg-4{
+
+    margin-top: 25px;
+
+
+}
+.seccion_form_pedidos .col-lg-6{
+
+    margin-top: 25px;
 }

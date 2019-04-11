@@ -1086,11 +1086,13 @@ class Servicio extends REST_Controller
 		if (array_key_exists("es_empresa", $param) != false) {
 			$this->add_gamificacion_search($param);
 		}
+
 		$servicios = $this->serviciosmodel->busqueda($param);
 
-		if (count($servicios["servicio"]) > 0) {
+		if (count($servicios["servicios"]) > 0) {
 
-			$this->response($this->get_servicio_costo_envio($servicios, $param));
+            $servicios["url_request"] = get_url_request("");
+			$this->response($servicios);
 
 		} else {
 
@@ -1109,17 +1111,6 @@ class Servicio extends REST_Controller
 		}
 	}
 
-	private function get_servicio_costo_envio($servicios, $param)
-	{
-
-		$response["servicios"] = $servicios["servicio"];
-		$response["url_request"] = get_url_request("");
-		$response["num_servicios"] = $servicios["num_servicios"];
-		if ($param["agrega_clasificaciones"] == 1) {
-			$response["clasificaciones_niveles"] = $servicios["clasificaciones_niveles"];
-		}
-		return $response;
-	}
 
 	function info_disponibilidad_servicio_GET()
 	{
