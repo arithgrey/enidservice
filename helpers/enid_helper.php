@@ -196,9 +196,21 @@ if (!function_exists('div')) {
             return $response;
 
         } else {
-            $base = "<div" . add_attributes($attributes) . ">" . $info . "</div>";
-            $d = ($row > 0) ? addNRow($base) : $base;
-            return $d;
+
+            if(is_array($attributes)){
+
+                $base = "<div" . add_attributes($attributes) . ">" . $info . "</div>";
+                $d = ($row > 0) ? addNRow($base) : $base;
+                return $d;
+
+            }else{
+
+                $base = "<div class='{$attributes}'>" . $info . "</div>";
+                $d = ($row > 0) ? addNRow($base) : $base;
+                return $d;
+            }
+
+
         }
 
     }

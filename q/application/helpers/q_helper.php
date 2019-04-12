@@ -410,8 +410,8 @@ if (!function_exists('invierte_date_time')) {
 
             );
 
-            $url = "../pedidos/?recibo=" . $id_recibo . "#listado_recordatorios";
-            $r[] = anchor_enid($text, ["href" => $url]);
+
+            $r[] = anchor_enid($text, ["href" => "../pedidos/?recibo=" . $id_recibo . "#listado_recordatorios"]);
             $f++;
         }
         $response = [
