@@ -978,6 +978,10 @@ table {
     margin-top: 50px;
     display: block;
 }
+.top_80 {
+    margin-top: 80px;
+    display: block;
+}
 
 .bottom_10 {
     margin-bottom: 10px;
@@ -1002,6 +1006,10 @@ table {
 
 .bottom_50 {
     margin-bottom: 50px;
+    display: block;
+}
+.bottom_80 {
+    margin-bottom: 80px;
     display: block;
 }
 

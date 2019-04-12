@@ -1,10 +1,12 @@
 .sin_domicilio {
     background: #d20c2f;
 }
+
 .entregado {
     background: #0055d7;
     color: white;
 }
+
 .funny_error_message {
     background: #10094e;
     color: white;
@@ -24,17 +26,11 @@
     text-align: center;
 }
 
-.contenedor_domicilio, .contenedor_cliente {
-    border: solid .9px;
-    background: #f0effc;
-    padding: 8px;
-    margin-top: 10px;
-}
 
 .encabezado_domicilio, .encabezado_cliente {
     background: #1e2023;
     color: white;
-    padding: 0px 10px;
+    padding: 5px;
 }
 
 .contenido_domicilio, .contenido_domicilio {
@@ -54,6 +50,7 @@
     border-radius: 6px;
 
 }
+
 .text_precio_producto {
     font-size: 1.5em;
 }
@@ -73,6 +70,7 @@
     color: #000060;
     font-weight: bold;
 }
+
 .seccion_tipificacion {
     background: white;
 }
@@ -85,72 +83,94 @@
 .form_edicion_tipo_entrega {
     display: none;
 }
-.contenedor_entrega{
-    background: #fcfcfc;
-    color: black;
-    padding: 10px;
-    border-bottom: 5px solid #01263E;
-    border-radius: 6px;
-    font-weight:bold;
-    font-size:1.2em;
 
+.fecha_registro {
+    font-size: 1.3em;
 }
-.fecha_registro{
-    font-size:1.3em;
-}
-.media{
+
+.media {
     background: yellow;
     padding: 5px;
     margin-top: 2px;
 }
-.baja{
+
+.baja {
     background: #d10000;
     color: white;
     margin-top: 2px;
     padding: 5px;
 }
-.alta{
-    background: #078167;
+
+.alta {
+    background: #032c8d;
     color: white;
     margin-top: 2px;
-    padding: 5px;
+    padding: 10px;
 }
-.nula{
+
+.nula {
     background: red;
     color: white;
     margin-top: 2px;
     padding: 5px;
 }
-.seccion_recordatorio{
-    margin-top:20px;
+
+.seccion_recordatorio {
+    margin-top: 20px;
 }
-.contenedor_opciones_pedido{
+
+.contenedor_opciones_pedido {
 
     width: 240px;
-    padding: 10px!important;
+    padding: 10px !important;
 }
-.contenedor_opciones_pedido div a{
-    color:black;
-    text-decoration:underline;
+
+.contenedor_opciones_pedido div a {
+    color: black;
+    text-decoration: underline;
 }
-.compras_en_tiempo{
+
+.compras_en_tiempo {
     border-style: solid;
 
 }
-#contenedor_form_usuario{
-    display:none;
+
+#contenedor_form_usuario {
+    display: none;
+    margin-top: 40px;
+    margin-bottom: 80px;
+
 }
-.fm{
+
+.fm {
     font-size: 1.3em;
-    color:#001066;
+    color: #001066;
 }
-.seccion_form_pedidos .col-lg-4{
+
+.seccion_form_pedidos .col-lg-4 {
 
     margin-top: 25px;
 
 
 }
-.seccion_form_pedidos .col-lg-6{
+
+.seccion_form_pedidos .col-lg-6 {
 
     margin-top: 25px;
+}
+
+.contenedor_entregado {
+
+    background: #0046c0;
+    color: white;
+}
+
+.btn_opciones {
+    display: scroll;
+    position: fixed;
+    bottom: 320px;
+    right: 0px;
+}
+.encabezado_tipo_entrega{
+
 }
