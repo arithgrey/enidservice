@@ -2,6 +2,7 @@
 
     <div class="col-lg-8">
 
+        <div class="col-lg-12">
         <?= div(get_btw(
 
             div(heading_enid("# ORDEN " . $orden, 3), "numero_orden encabezado_numero_orden row")
@@ -91,8 +92,9 @@
         <?= create_seccion_tipificaciones($tipificaciones) ?>
         <?= addNRow(get_form_nota($id_recibo)) ?>
         <?= addNRow(create_seccion_comentarios($comentarios, $id_recibo)) ?>
-    </div>
 
+    </div>
+    </div>
     <?= div(get_format_resumen_cliente_compra($recibo, $tipos_entregas, $domicilio, $num_compras, $usuario, $id_recibo), 4) ?>
 
 </div>
