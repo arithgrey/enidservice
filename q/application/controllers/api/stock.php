@@ -23,13 +23,14 @@ class Stock extends REST_Controller
 
 			$pedidos_contra_entrega = $this->get_solicitudes_contra_entrega($param);
 			$pedidos_servicio = crea_resumen_servicios_solicitados($pedidos_contra_entrega);
-
 			$pedidos_servicio = $this->agrega_stock_servicios($pedidos_servicio);
 			$response = $this->asocia_servicio_solicitudes($pedidos_servicio, $param["tipo"]);
 			$compras_por_enviar = $this->get_compras_por_enviar();
 
 			if (get_param_def($param, "v") > 0) {
+
 				$response = $this->create_table_compras($response, $compras_por_enviar);
+
 			}
 		}
 		$this->response($response);
@@ -38,7 +39,18 @@ class Stock extends REST_Controller
 	private function create_table_compras($servicios, $compras_por_enviar)
 	{
 
-		$this->table->set_heading('#', 'Servicio', 'stock<?=br()?> actual', "Pedidos <?=br()?>contra entrega", "CASOS <?=br()?>IDENTICO", "PRONOSTICO <?=br()?>VENTAS (A)", "PRONOSTICO <?=br()?>VENTAS (B)", "ADQUIRIDAS <?=br()?>ENID", "OTRAS PLATAFORMAS", "COMPRAR<?=br()?>OPCIÓN (A)", "COMPRAR<?=br()?>OPCIÓN (B)");
+		$this->table->set_heading('#',
+            'SERVICIO',
+            'STOCK ACTUAL',
+            "PEDIDOS CONTRA ENTREGA",
+            "CASOS IDENTICO",
+            "PRONOSTICO  VENTAS (A)",
+            "PRONOSTICO VENTAS (B)",
+            "ADQUIRIDAS ENID",
+            "OTRAS PLATAFORMAS",
+            "COMPRAR OPCIÓN (A)",
+            "COMPRAR OPCIÓN (B)"
+        );
 		$b = 1;
 		for ($a = 0; $a < count($servicios); $a++) {
 
@@ -67,6 +79,9 @@ class Stock extends REST_Controller
 			$this->table->add_row($b, $img, $stock, $pedidos_contra_entrega, $resumen["text"], $sugerencia, $sugerencia_b, $total_enid, $total_otras, $total_compras, $total_compras_b);
 			$b++;
 		}
+
+
+        $this->table->set_template(template_table_enid());
 		return $this->table->generate();
 
 	}

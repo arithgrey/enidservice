@@ -28,12 +28,25 @@ if (!function_exists('add_input')) {
 }
 
 if (!function_exists('span')) {
-    function span($info, $attributes = '', $row = 0)
+    function span($info, $attributes = [], $row = 0)
     {
-        $attr = add_attributes($attributes);
+
+
+        if ( is_array($attributes) && count($attributes) > 0  ){
+
+            $attr = add_attributes($attributes);
+
+        }else{
+
+            $att = [];
+            $att["class"] = $attributes;
+            $attr = add_attributes($att);
+        }
+
         $base = "<span" . $attr . ">" . $info . "</span>";
         $e = ($row == 0) ? $base : addNrow($base);
         return $e;
+
 
     }
 }
@@ -120,8 +133,8 @@ function sub_categorias_destacadas($param)
 
 }
 
-if (!function_exists('div')) {
-    function div($info, $attributes = [], $row = 0, $frow = 0)
+if (!function_exists('get_base_html')) {
+    function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
     {
 
         if (is_numeric($attributes)) {
@@ -134,56 +147,56 @@ if (!function_exists('div')) {
                     break;
                 case 2:
 
-                    $response = ($row > 0) ? "<div class='col-lg-2 col-lg-offset-5'>" . $info . "</div>" : "<div class='col-lg-2'>" . $info . "</div>";
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-2 col-lg-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-2'>" . $info . "</{$tipo}>";
 
                     break;
                 case 3:
-                    $response = "<div class='col-lg-3'>" . $info . "</div>";
+                    $response = "<{$tipo} class='col-lg-3'>" . $info . "</{$tipo}>";
                     break;
                 case 4:
-                    $response = ($row > 0) ? "<div class='col-lg-4 col-lg-offset-4'>" . $info . "</div>" : "<div class='col-lg-4'>" . $info . "</div>";
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-4 col-lg-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-4'>" . $info . "</{$tipo}>";
                     break;
                 case 5:
-                    $response = "<div class='col-lg-5'>" . $info . "</div>";
+                    $response = "<{$tipo} class='col-lg-5'>" . $info . "</{$tipo}>";
                     break;
                 case 6:
 
-                    $response = ($row > 0) ? "<div class='col-lg-6 col-lg-offset-3'>" . $info . "</div>" : "<div class='col-lg-6'>" . $info . "</div>";
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-6 col-lg-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-6'>" . $info . "</{$tipo}>";
 
                     break;
 
                 case 7:
 
-                    $response = "<div class='col-lg-7'>" . $info . "</div>";
+                    $response = "<{$tipo} class='col-lg-7'>" . $info . "</{$tipo}>";
                     break;
 
 
                 case 8:
 
-                    $response = ($row > 0) ? "<div class='col-lg-8 col-lg-offset-2'>" . $info . "</div>" : "<div class='col-lg-8'>" . $info . "</div>";
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-8 col-lg-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-8'>" . $info . "</{$tipo}>";
 
                     break;
                 case 9:
-                    $response = "<div class='col-lg-9'>" . $info . "</div>";
+                    $response = "<{$tipo} class='col-lg-9'>" . $info . "</{$tipo}>";
                     break;
 
                 case 10:
 
 
-                    $response = ($row > 0) ? "<div class='col-lg-10 col-lg-offset-1'>" . $info . "</div>" : "<div class='col-lg-10'>" . $info . "</div>";
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-10 col-lg-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-10'>" . $info . "</{$tipo}>";
 
                     break;
 
                 case 12:
 
 
-                    $response = "<div class='col-lg-12'>" . $info . "</div>";
+                    $response = "<{$tipo} class='col-lg-12'>" . $info . "</{$tipo}>";
 
                     break;
 
                 case 13:
 
-                    $response = "<div class='row'>" . $info . "</div>";
+                    $response = "<{$tipo} class='row'>" . $info . "</{$tipo}>";
 
                     break;
 
@@ -191,21 +204,21 @@ if (!function_exists('div')) {
             }
 
             if ($frow > 0) {
-                $response = div($response, 13);
+                $response = $tipo($response, 13);
             }
             return $response;
 
         } else {
 
-            if(is_array($attributes)){
+            if (is_array($attributes)) {
 
-                $base = "<div" . add_attributes($attributes) . ">" . $info . "</div>";
+                $base = "<{$tipo}" . add_attributes($attributes) . ">" . $info . "</{$tipo}>";
                 $d = ($row > 0) ? addNRow($base) : $base;
                 return $d;
 
-            }else{
+            } else {
 
-                $base = "<div class='{$attributes}'>" . $info . "</div>";
+                $base = "<{$tipo} class='{$attributes}'>" . $info . "</{$tipo}>";
                 $d = ($row > 0) ? addNRow($base) : $base;
                 return $d;
             }
@@ -215,6 +228,25 @@ if (!function_exists('div')) {
 
     }
 }
+
+
+if (!function_exists('div')) {
+    function div($info, $attributes = [], $row = 0, $frow = 0)
+    {
+
+        return get_base_html("div", $info, $attributes, $row, $frow);
+
+    }
+}
+if (!function_exists('section')) {
+    function section($info, $attributes = [], $row = 0, $frow = 0)
+    {
+
+        return get_base_html("section", $info, $attributes, $row, $frow);
+
+    }
+}
+
 if (!function_exists('input')) {
     function input($attributes = [], $e = 0)
     {
@@ -406,11 +438,9 @@ if (!function_exists('template_table_enid')) {
     function template_table_enid()
     {
         $template = array(
-            'table_open' => '<table  cellpadding="4" cellspacing="0" 
-          class="table_enid text-center" border=1>',
+            'table_open' => '<table   class="table " >',
 
-            'thead_open' =>
-                '<thead class="blue_enid_background white text-center">',
+            'thead_open' => '<thead class="black_enid_background2 white ">',
             'thead_close' => '</thead>',
 
             'heading_row_start' => '<tr class="text-center">',

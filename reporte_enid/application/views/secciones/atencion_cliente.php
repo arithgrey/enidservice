@@ -10,6 +10,6 @@
 </div>
 <div class="tab-content">
     <?= div(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]) ?>
-    <?= div(place("place_metricas_comparativa"), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]) ?>
+    <?= div(addNRow(place("place_metricas_comparativa top_50")), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]) ?>
     <?= div(get_form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]) ?>
 </div>

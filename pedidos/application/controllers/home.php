@@ -231,34 +231,30 @@ class Home extends CI_Controller
 		$costos_operacion = $this->get_costo_operacion($param["costos_operacion"]);
 
 
-		$this->table->set_heading(array('MONTO', 'CONCEPTO', 'REGISTO'));
+		$this->table->set_heading(array('MONTO', 'CONCEPTO', 'REGISTO', ''));
 		$total = 0;
 		foreach ($costos_operacion as $row) {
 
 			$total = $total + $row["monto"];
-
-			$this->table->add_row(array($row["monto"], $row["tipo"], $row["fecha_registro"]));
+			$id = $row["id"];
+			$icon =  icon("fa fa-times " , ["onclick"=> "confirma_eliminar_concepto('{$id}')"]);
+			$this->table->add_row(array($row["monto"]." MXN", $row["tipo"], $row["fecha_registro"] , $icon ));
 		}
 
-
-		$c = ($total < $param["saldado"]) ? "blue_enid" : "red_enid";
-		$gastos = div("TOTAL EN GASTOS: " . $total . "MXN");
+		$gastos = div(span("TOTAL EN GASTOS: " , " strong ") . $total  . " MXN" , "top_50 f12");
 		$this->table->add_row(array(div($gastos), "", ""));
-		$gastos = div("SALDADO: " . $param["saldado"] . "MXN");
-		$this->table->add_row(array(div($gastos), "", ""));
+		$gastos = div(span("SALDADO: " , "strong"). $param["saldado"] . " MXN", "top_5 f12");
 
+		$this->table->add_row(array(div($gastos), "", ""));
 
 		$utilidad = $param["saldado"] - $total;
-		$total = div("UTILIDAD: " . $utilidad . "MXN");
-		$this->table->add_row(array(div($total, ["class" => "strong fm"]), "", ""));
+		$total = div(span("UTILIDAD:", " underline text-utilidad strong "). $utilidad  . "MXN" , "top_20 ");
+		$this->table->add_row(array(heading_enid($total, 4), "", ""));
 
 
-		$table_costos = $this->table->generate();
-		$tipo_costos = $this->get_tipo_costo_operacion();
-		$id_recibo = $param["costos_operacion"];
+        $this->table->set_template(template_table_enid());
 
-
-		$response =  get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo );
+		$response =  get_format_costo_operacion($this->table->generate(), $this->get_tipo_costo_operacion(), $param["costos_operacion"]);
 		$this->principal->show_data_page($data, $response  , 1);
 
 	}

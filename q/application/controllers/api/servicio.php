@@ -1410,6 +1410,7 @@ class Servicio extends REST_Controller
 				$this->table->add_row($row["keyword"], $row["num_keywords"]);
 
 			}
+            $this->table->set_template(template_table_enid());
 			$response = $this->table->generate();
 
 		}
@@ -1535,6 +1536,7 @@ class Servicio extends REST_Controller
 				}
 
 
+                $this->table->set_template(template_table_enid());
 				$tb_general = $this->table->generate();
 				$tb_headers = $this->get_headers_tipo_entrega($servicios);
 				$total = $tb_headers . br() . hr() . br() . $tb_general;

@@ -1,6 +1,8 @@
 "use strict";
 $(document).ready(function(){
 
+	$('html, body').scrollTop("footer");
+
 	display_elements([".selector_estados_ventas" , ".form_cantidad", ".form_cantidad_post_venta"] , 0);
 	$('.datetimepicker4').datepicker();
 	$('.datetimepicker5').datepicker();						
@@ -35,11 +37,21 @@ let editar_horario_entrega = function(e){
 }
 let crea_recordatorio = function(e){
 
-	let data_send 		=  $(".form_fecha_recordatorio").serialize();
-	let url 			=  "../q/index.php/api/recordatorio/index/format/json/";
-	bloquea_form(".form_fecha_recordatorio");
-	request_enid( "POST",  data_send, url, response_recordatorio , ".place_recordatorio");
+
+	let  descripcion  = get_parameter(".descripcion_recordatorio").trim();
+	if ( descripcion.length > 5 ){
+		let data_send 		=  $(".form_fecha_recordatorio").serialize();
+		let url 			=  "../q/index.php/api/recordatorio/index/format/json/";
+		bloquea_form(".form_fecha_recordatorio");
+		request_enid( "POST",  data_send, url, response_recordatorio , ".place_recordatorio");
+	}else{
+
+		format_error( ".nota_recordatorio", "Ingresa un  recordatorio");
+		$(".nota_recordatorio").show();
+	}
+
 	e.preventDefault();
+
 }
 let response_recordatorio = function(data){
 
@@ -430,8 +442,9 @@ let confirma_cambio_horario = function(id_recibo , status  , saldo_cubierto_envi
 
 }
 let agregar_nota = function(){
+
 	showonehideone(".form_notas", ".agregar_comentario");
-	recorrepage(".form_nota");
+	recorrepage(".form_notas");
 }
 let registrar_nota = function(e){
 
@@ -478,5 +491,23 @@ let response_usuario = function(data){
 }
 let muestra_form_usuario = function(){
 	showonehideone("#contenedor_form_usuario", ".contenedor_cliente");
+
+}
+let confirma_eliminar_concepto =  function (id) {
+
+	show_confirm("¿Seguro deseas eliminar este concepto?" ,  "","Eliminar" , function () {
+
+		elimina_costo_operacion(id);
+	} );
+}
+
+let elimina_costo_operacion = function (id) {
+
+
+	let data_send 		=  $.param({"id":id});
+	let url 			=  "../q/index.php/api/costo_operacion/index/format/json/";
+	request_enid( "DELETE",  data_send, url, function () {
+		redirect("");
+	});
 
 }

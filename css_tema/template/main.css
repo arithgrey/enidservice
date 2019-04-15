@@ -948,6 +948,33 @@ table {
 .black_enid_background {
     background: black;
 }
+.black_enid_background2 {
+    background: #020F29;
+}
+
+
+
+.top_menos_10{
+    margin-top: -10px;
+    display: block;
+}
+.top_menos_20{
+    margin-top: -20px;
+    display: block;
+}
+.top_menos_30{
+    margin-top: -30px;
+    display: block;
+}
+.top_menos_40{
+    margin-top: -40px;
+    display: block;
+}
+.top_menos_50{
+    margin-top: -50px;
+    display: block;
+}
+
 
 .top_10 {
     margin-top: 10px;
@@ -1117,14 +1144,10 @@ h2 {
 }
 
 .notificaciones_enid {
-    left: -300px !important;
+    left: -200px !important;
     min-height: 250px;
 }
 
-.notificaciones_enid_mb {
-    left: -190px !important;
-
-}
 
 .menu_usuario {
     left: -180px !important;
@@ -1232,6 +1255,15 @@ h3 {
     letter-spacing: 10px;
 }
 
+h4 {
+    letter-spacing: 10px;
+}
+
+h5 {
+    letter-spacing: 10px;
+}
+
+
 .h-400 {
     height: 400px;
 }
@@ -1252,4 +1284,11 @@ h3 {
 }
 .min_block{
     min-height: 220px;
+}
+.form_separador div{
+    margin-top: 20px;
+}
+.mh_notificaciones{
+
+    min-height: 40px;
 }

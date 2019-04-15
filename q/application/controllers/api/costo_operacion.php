@@ -3,40 +3,71 @@ require APPPATH . '../../librerias/REST_Controller.php';
 
 class costo_operacion extends REST_Controller
 {
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->model("costo_operacion_model");
-		$this->load->library(lib_def());
-	}
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model("costo_operacion_model");
+        $this->load->library(lib_def());
+    }
 
-	function recibo_GET()
-	{
-		$param = $this->get();
-		$response = false;
-		if (if_ext($param, "recibo")) {
-			$response = $this->costo_operacion_model->get_recibo($param["recibo"]);
-		}
-		$this->response($response);
-	}
-	function index_POST(){
+    function recibo_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (if_ext($param, "recibo")) {
+            $response = $this->costo_operacion_model->get_recibo($param["recibo"]);
+        }
+        $this->response($response);
+    }
 
-		$param = $this->post();
-		$response = false;
-		if (if_ext($param, "recibo,costo,tipo")) {
+    function index_POST()
+    {
 
-			$params =  [
+        $param = $this->post();
+        $response = false;
+        $num = 0;
+        if (if_ext($param, "recibo,costo,tipo")) {
 
-					"monto"    =>  $param["costo"],
-					"id_recibo" => $param["recibo"],
-					"id_tipo_costo" => $param["tipo"]
 
-			];
-			$response = $this->costo_operacion_model->insert($params);
+            $num = $this->costo_operacion_model->get_num_type($param["recibo"], $param["tipo"]);
+            $status = false;
 
-		}
-		$this->response($response);
+            if ($num < 1) {
 
-	}
+                $params = [
+                    "monto" => $param["costo"],
+                    "id_recibo" => $param["recibo"],
+                    "id_tipo_costo" => $param["tipo"]
+                ];
+
+                $status = $this->costo_operacion_model->insert($params);
+
+            }
+
+        }
+
+        $response = array(
+            "status" => $status,
+            "num" => $num
+        );
+
+        $this->response($response);
+
+    }
+
+    function index_DELETE()
+    {
+
+        $param = $this->delete();
+        $response = false;
+        if (if_ext($param, "id")) {
+
+            $response = $this->costo_operacion_model->q_delete($param["id"]);
+
+        }
+        $this->response($response);
+
+    }
+
 
 }

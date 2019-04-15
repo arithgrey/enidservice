@@ -802,6 +802,8 @@ class usuario extends REST_Controller
 		];
 		$this->table->set_heading($heading);
 		$this->table->add_row($inf);
+
+        $this->table->set_template(template_table_enid());
 		return $this->table->generate();
 	}
 
