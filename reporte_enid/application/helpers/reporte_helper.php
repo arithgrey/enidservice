@@ -7,10 +7,13 @@ if (!function_exists('invierte_date_time')) {
         function get_form_busqueda_productos_solicitados()
         {
 
+
             $r[] = form_open("", ["class" => 'form_busqueda_productos_solicitados']);
             $r[] = get_format_fecha_busqueda();
-            $r[] = form_close(place("place_keywords"));
-            return append_data($r);
+            $r[] = form_close();
+            $z[] = addNRow(append_data($r));
+            $z[] = addNRow(place("place_keywords top_50"));
+            return append_data($z);
 
         }
     }
@@ -18,9 +21,11 @@ if (!function_exists('invierte_date_time')) {
         function get_form_busqueda_desarrollo_solicitudes()
         {
 
-            $r[] = form_open("", ["class" => 'form_busqueda_desarrollo_solicitudes']);
-            $r[] = get_format_fecha_busqueda();
-            $r[] = form_close(place("place_metricas_servicio"));
+            $f[] = form_open("", ["class" => 'form_busqueda_desarrollo_solicitudes']);
+            $f[] = get_format_fecha_busqueda();
+            $f[] = form_close();
+            $r[] = addNRow(append_data($f));
+            $r[] = addNRow(place("place_metricas_servicio"));
             return append_data($r);
 
         }
@@ -30,9 +35,11 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = form_open("", ["class" => 'form_busqueda_desarrollo']);
-            $r[] = get_format_fecha_busqueda();
-            $r[] = form_close(place("place_metricas_desarrollo"));
+            $f[] = form_open("", ["class" => 'form_busqueda_desarrollo']);
+            $f[] = get_format_fecha_busqueda();
+            $f[] = form_close();
+            $r[] = addNRow(append_data($f));
+            $r[] = addNRow(place(" top_50 place_metricas_desarrollo"));
             return append_data($r);
 
         }
@@ -103,6 +110,16 @@ if (!function_exists('invierte_date_time')) {
                     ["class" => "active"]
                 ),
                 li(
+                    anchor_enid(icon('fa fa-clock-o') . "TIEMPO DE VENTA",
+                        [
+                            "href" => "../tiempo_venta/",
+                            "class" => ' black  '
+                        ]
+                    ),
+                    ["class" => "active"]
+                ),
+
+                li(
                     anchor_enid(icon("fa fa-shopping-cart") . "PRODUCTOS SOLICITADOS",
                         [
                             "href" => "#tab_busqueda_productos",
@@ -140,23 +157,6 @@ if (!function_exists('invierte_date_time')) {
                     )
                 ),
 
-                li(anchor_enid(icon("fa-envelope") . "MAIL MARKETING" .
-                        place('place_num_pagos_notificados'),
-                        [
-                            "id" => "btn_repo_afiliacion",
-                            "href" => "#tab_default_3",
-                            "data-toggle" => "tab",
-                            "class" => "black   btn_repo_afiliacion"
-                        ])
-                ),
-                li(anchor_enid(icon("fa fa-motorcycle") . "AFILIACIÓNES",
-                        [
-                            "id" => "btn_repo_afiliacion",
-                            "href" => "#tab_afiliaciones",
-                            "data-toggle" => "tab",
-                            "class" => "black   btn_repo_afiliacion"
-                        ])
-                ),
                 li(anchor_enid(icon("fa fa-handshake-o") . "ATENCIÓ AL CLIENTE",
                         [
                             "id" => "btn_repo_atencion_cliente",

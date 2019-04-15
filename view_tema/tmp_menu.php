@@ -33,7 +33,7 @@ $li = [
             ]
         ) ?>
         <?= ul(
-            [place("place_notificaciones_usuario")],
+            [place("place_notificaciones_usuario padding_10 shadow border")],
             [
                 "class" => "dropdown-menu shadow " . $class_notificacion
             ]

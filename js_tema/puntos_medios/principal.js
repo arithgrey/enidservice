@@ -21,6 +21,9 @@ window.onpopstate = function (event) {
 
 $(document).ready(function () {
 
+
+
+
     $('.datetimepicker5').datepicker();
     $(".form_punto_encuentro").submit(registra_usuario);
     $(".form_punto_encuentro_horario").submit(notifica_punto_entrega);
@@ -266,7 +269,9 @@ let response_notificacion_punto_entrega = function (data) {
     }
 };
 let agregar_nota = function () {
+    recorrepage(".comentarios");
     showonehideone(".input_notas", ".text_agregar_nota");
+
 }
 let valida_accion_retorno = function () {
 

@@ -12,7 +12,6 @@ class Home extends CI_Controller
 	function index()
 	{
 
-		$param = $this->input->get();
 		$data = $this->principal->val_session("");
 		$this->principal->acceso();
 		$data["meta_keywords"] = "";
@@ -27,8 +26,7 @@ class Home extends CI_Controller
 	private function carga_vista_compras($data)
 	{
 
-		$data = $this->getCssJs($data);
-		$this->principal->show_data_page($data, 'principal');
+		$this->principal->show_data_page($this->getCssJs($data), get_format_compras() , 1);
 
 	}
 

@@ -40,9 +40,13 @@ class recibo extends REST_Controller
         if (if_ext($param, "id_usuario,q")) {
 
             $response = $this->recibo_model->get_tiempo_venta($param);
-            $response = $this->principal->get_imagenes_productos(0, 1, 1, 1, $response);
-            $total_servicios = $this->recibo_model->get_tiempo_venta($param, 1);
-            $response = get_format_tiempo_entrega($response, $total_servicios);
+            if (count($response) > 0) {
+
+                $response = $this->principal->get_imagenes_productos(0, 1, 1, 1, $response);
+                $total_servicios = $this->recibo_model->get_tiempo_venta($param, 1);
+                $response = get_format_tiempo_entrega($response, $total_servicios);
+
+            }
 
         }
 
@@ -177,7 +181,7 @@ class recibo extends REST_Controller
             $ordenes = $this->add_imgs_servicio($ordenes);
             $response = "";
 
-            $id_perfil =  $this->principal->getperfiles();
+            $id_perfil = $this->principal->getperfiles();
             if (count($ordenes) > 0) {
 
 

@@ -18,7 +18,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = get_btw(
 
-            div(heading_enid("COSTOS DE OPERACIÓN", 3), ["class" => "jumbotron text-center"])
+            heading_enid("COSTOS DE OPERACIÓN", 3)
             ,
             get_formar_add_pedidos($table_costos)
             ,
@@ -26,9 +26,10 @@ if (!function_exists('invierte_date_time')) {
             "contenedor_costos_registrados"
         );
 
-        $r[] = div(get_form_costos($tipo_costos, $id_recibo), ["class" => "display_none contenedor_form_costos_operacion"]);
+        $r[] = div(get_form_costos($tipo_costos, $id_recibo), "display_none contenedor_form_costos_operacion");
 
-        return append_data($r);
+        $response = div(append_data($r), 8,1);
+        return div($response, "top_50");
 
 
     }
@@ -342,7 +343,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = get_link_costo($id_recibo, $recibo);
             $r[] = div(icon("fa fa-plus-circle fa-3x"), ["class" => " dropdown-toggle", "data-toggle" => "dropdown"]);
             $r[] = div(append_data($x), ["class" => "dropdown-menu contenedor_opciones_pedido", "aria-labelledby" => "dropdownMenuButton"]);
-            return div(append_data($r), ["class" => "dropdown pull-right  btn_opciones"]);
+            return div(append_data($r), ["class" => "dropdown pull-right  mr-5 btn_opciones"]);
 
 
         }
@@ -389,14 +390,12 @@ if (!function_exists('invierte_date_time')) {
         function form_fecha_recordatorio($orden, $tipo_recortario)
         {
 
+            $x = heading_enid("RECORDATORIO", 3, ["class"=> "top_50"]);
+            $r[] = form_open("", ["class" => "form_fecha_recordatorio letter-spacing-5 "]);
+            $r[] = div(icon("fa fa-calendar-o") . " FECHA ", 4);
 
-            $r[] = form_open("", ["class" => "form_fecha_recordatorio"]);
-            $r[] = heading_enid("RECORDATORIO",
-                4,
-                ["class" => "strong titulo_horario_entra"]);
-            $r[] = br();
-            $r[] = label(icon("fa fa-calendar-o") . " FECHA ", ["class" => "col-lg-4 control-label"]);
-            $r[] = div(input([
+            $r[] = div(input(
+                [
                 "data-date-format" => "yyyy-mm-dd",
                 "name" => 'fecha_cordatorio',
                 "class" => "form-control input-sm ",
@@ -405,27 +404,28 @@ if (!function_exists('invierte_date_time')) {
                 "min" => add_date(date("Y-m-d"), -15),
                 "max" => add_date(date("Y-m-d"), 15)
             ]),
-                ["class" => "col-lg-8"]);
-
-            $r[] = label(icon("fa fa-clock-o") . " HORA",
-                ["class" => "col-lg-4 control-label"]
+                8
             );
-            $r[] = div(lista_horarios(), ["class" => "col-lg-8"]);
+
+            $r[] = div(icon("fa fa-clock-o") . " HORA", 3);
+
+            $r[] = div(lista_horarios(), 9);
             $r[] = input_hidden([
                 "class" => "recibo",
                 "name" => "recibo",
                 "value" => $orden
             ]);
-            $r[] = br();
-            $r[] = label(" TIPO",
-                ["class" => "col-lg-4 control-label"]
-            );
-            $r[] = div(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo", "idtipo_recordatorio"), ["class" => "col-lg-8"]);
-            $r[] = textarea(["name" => "descripcion", "class" => "form-control"]);;
-            $r[] = guardar("CONTINUAR", ["class" => "top_20"]);
-            $r[] = form_close(place("place_recordatorio"));
 
-            $response = div(append_data($r), ["class" => "col-lg-6 col-lg-offset-3"]);
+            $r[] = div(" TIPO", 3);
+            $r[] = div(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo", "idtipo_recordatorio"), 9 );
+            $r[] = div(textarea(["name" => "descripcion", "class" => "descripcion_recordatorio"]), 12);
+            $r[] = section(place("nota_recordatorio display_none"), 12);
+            $r[] = div(guardar("CONTINUAR", ["class" => "top_menos_40"]),12);
+            $r[] = form_close();
+            $r[] = place("place_recordatorio");
+
+            $form =  div(append_data($r), "top_30 form_separador ");
+            $response = div($x.$form, 6,1);
             return $response;
 
 
@@ -514,31 +514,32 @@ if (!function_exists('invierte_date_time')) {
         function get_form_costos($tipo_costos, $id_recibo)
         {
 
+            $r[] = div(heading_enid("Gasto" , 3) , "col-lg-12 bottom_50");
+            $r[] = form_open("", ["class" => "form_costos letter-spacing-5"], ["recibo" => $id_recibo]);
 
-            $r[] = form_open("", ["class" => "form_costos"], ["recibo" => $id_recibo]);
+            $a = div("MONTO GASTADO", 4);
 
-            $a = div("MONTO GASTADO", ["class" => "text_gasto strong"]);
-            $b = input([
+            $b = div(input([
                 "type" => "number",
                 "required" => true,
                 "class" => "form-control input precio",
                 "name" => "costo"
-            ]);
+            ]),8 );
 
-            $r[] = get_btw($a, $b, "display_flex_enid top_30");
+            $r[] = get_btw($a, $b, "top_30");
 
-            $r[] = create_select(
+            $r[] = div(create_select(
                 $tipo_costos,
                 "tipo",
                 "id_tipo_costo form-control",
                 "tipo",
                 "tipo",
-                "id_tipo_costo");
+                "id_tipo_costo"),"col-lg-12 top_30");
 
 
-            $r[] = guardar("AGREGAR", ["class" => "top_20"]);
+            $r[] = div(guardar("AGREGAR", ["class" => "top_30"]),12);
             $r[] = form_close(place("notificacion_registro_costo"));
-            return append_data($r);
+            return div(append_data($r), 10,1);
 
         }
 
@@ -1222,10 +1223,7 @@ if (!function_exists('invierte_date_time')) {
             $total_a_pagar = $precio * $num_ciclos_contratados + $costo_envio_cliente;
 
 
-
-
-
-            $text[]  =  get_btw(
+            $text[] = get_btw(
                 div("ENVIO", "strong")
                 ,
                 div($cargos_envio . "MXN")
@@ -1235,23 +1233,21 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-
             $text[] =
                 get_btw(
                     div("ENVIO", "strong")
                     ,
                     div($total_a_pagar . "MXN")
                     ,
-                 4
-            );
+                    4
+                );
 
 
             $saldo_cubierto = $saldo_cubierto . "MXN";
             $saldo_cubierto = ($saldo_cubierto < 1) ? span($saldo_cubierto, ["class" => "sin_pago"]) : span($saldo_cubierto, ["class" => "pago_realizado"]);
 
 
-
-            $text[] =  get_btw(
+            $text[] = get_btw(
 
                 div("CUBIERTO", "strong")
                 ,
@@ -1385,11 +1381,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
 
-
-
-
-
-            $response =  get_btw(
+            $response = get_btw(
 
                 div("CLIENTE", "encabezado_cliente")
                 ,
@@ -1399,11 +1391,10 @@ if (!function_exists('invierte_date_time')) {
                 "shadow border padding_20 top_40"
 
 
-
             );
 
 
-            return $response ;
+            return $response;
 
         }
     }
@@ -1473,7 +1464,7 @@ if (!function_exists('invierte_date_time')) {
 
             $response = "";
             if (count($recibo) > 0) {
-                $response = ($recibo[0]["status"] == 6) ? div("EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"] ,""): "";
+                $response = ($recibo[0]["status"] == 6) ? div("EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"], "") : "";
             }
             return $response;
         }
@@ -1617,10 +1608,10 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $action = "../../q/index.php/api/usuario/index/format/json/";
-                $attr   = ["METHOD" => "PUT", "id" => "form_set_usuario", "class" => "border form_set_usuario padding_10 shadow"];
+                $attr = ["METHOD" => "PUT", "id" => "form_set_usuario", "class" => "border form_set_usuario padding_10 shadow"];
 
-                $form  = form_open($action, $attr);
-                $form .= div(heading_enid("Cliente" , 3), 1);
+                $form = form_open($action, $attr);
+                $form .= div(heading_enid("Cliente", 3), 1);
                 $form .= div("NOMBRE:", "top_10", 1);
                 $form .= input(["name" => "nombre", "value" => $nombre, "type" => "text", "required" => "true"]);
 
@@ -1661,7 +1652,7 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
 
-                $form .= guardar("GUARDAR",["class"=> "top_30 bottom_50"]);
+                $form .= guardar("GUARDAR", ["class" => "top_30 bottom_50"]);
                 $form .= form_close(place("place_form_set_usuario"));
                 $f = addNRow($form, ["id" => "contenedor_form_usuario"]);
                 return $f;

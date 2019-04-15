@@ -162,7 +162,7 @@ if (!function_exists('invierte_date_time')) {
             if ($num_tareas > 0) {
                 switch ($tipo) {
                     case 1:
-                        $seccion = div("NOTIFICACIONES ", 1);
+                        $seccion = div(heading_enid("NOTIFICACIONES ",5), 1);
                         break;
                     default:
                         break;
@@ -366,7 +366,7 @@ if (!function_exists('invierte_date_time')) {
 
     function base_notificacion($url = '', $class_icono = '', $text = '')
     {
-        return li(anchor_enid(icon($class_icono) . $text, ["href" => $url, "class" => "black notificacion_restante"]));
+        return li(anchor_enid(icon($class_icono) . $text, ["href" => $url, "class" => "black notificacion_restante top_10"]));
     }
 
     function add_mensajes_respuestas_vendedor($param, $tipo)
@@ -406,12 +406,15 @@ if (!function_exists('invierte_date_time')) {
 
                 div(icon("fa  fa fa-clock-o ") . $fecha_cordatorio),
                 div($desc),
-                ""
+                "col-lg-12 top_10  shadow padding_10 mh_notificaciones"
 
             );
 
 
-            $r[] = anchor_enid($text, ["href" => "../pedidos/?recibo=" . $id_recibo . "#listado_recordatorios"]);
+            $r[] = anchor_enid($text,
+                [
+                    "href" => "../pedidos/?recibo=" . $id_recibo . "#listado_recordatorios"
+            ]);
             $f++;
         }
         $response = [
@@ -437,7 +440,7 @@ if (!function_exists('invierte_date_time')) {
                 $text = get_btw(
                     div(img($row["url_img_servicio"]), ["style" => "width:50px"]),
                     $total,
-                    "display_flex_enid"
+                    "display_flex_enid top_10 border padding_10"
                 );
 
                 $url = "../pedidos/?recibo=" . $id_recibo;
@@ -446,7 +449,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
             if (count($r) > 0) {
-                array_unshift($r, "VENTAS EN PROCESO");
+                array_unshift($r, br(2).div(heading_enid("VENTAS EN PROCESO", 5 , ["class"=> "top_20"])));
             }
 
         }
@@ -508,7 +511,7 @@ if (!function_exists('invierte_date_time')) {
             $numtelefonico["html"],
             $preguntas["html"],
             $respuestas["html"],
-            $compras_sin_cierre["html"]
+            div($compras_sin_cierre["html"], "top_20")
 
 
         ];
@@ -630,7 +633,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
-        $lista .= $compras_sin_cierre["html"];
+        $lista .= div($compras_sin_cierre["html"], "top_20");
         $f = $f + $compras_sin_cierre["flag"];
 
 
@@ -823,8 +826,8 @@ if (!function_exists('invierte_date_time')) {
         $t[] = get_td($total_procesar_compra);
         $t[] = "</tr>";
 
-        $t[] = "<table class='table_enid_service' border=1>" . append_data($t) . "</table>";
-        return append_data($t);
+        $t = " <table class='table' >" . append_data($t) . "</table>";
+        return $t;
 
     }
 }

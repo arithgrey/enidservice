@@ -6,6 +6,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response = [];
         $a = 0;
+
         foreach ($data as $row) {
 
             $response[$a] = $row;
@@ -39,7 +40,8 @@ if (!function_exists('invierte_date_time')) {
     function get_format_entrega($data)
     {
 
-        $respose = [];
+        $response = [];
+
         foreach ($data as $row) {
 
 
@@ -60,15 +62,14 @@ if (!function_exists('invierte_date_time')) {
 
 
             $x[] = div(append_data($text), ["class" => "col-lg-6 d-flex flex-column justify-content-between"]);
-
             $texto = heading_enid("Tiempo promedio de venta " . substr($dias, 0, 5) . "días", 4);
             $x[] = div($texto, ["class" => "col-lg-3 text-center align-self-center"]);
 
 
-            $r[] = div(append_data($x), ["class" => "row border  top_30"]);
+            $response[] = div(append_data($x), ["class" => "row border  top_30"]);
 
         }
-        return append_data($r);
+        return append_data($response);
     }
 
     function get_format_transaccion($id_recibo)
@@ -204,7 +205,6 @@ if (!function_exists('invierte_date_time')) {
         foreach ($recibos as $row) {
 
 
-
             $recibo = $row["recibo"];
             $saldo_cubierto = $row["saldo_cubierto"];
             $fecha_registro = $row["fecha_registro"];
@@ -225,7 +225,7 @@ if (!function_exists('invierte_date_time')) {
             $entrega = $row[$ops_tipo_orden[$tipo_orden]];
 
 
-            $extra = ( $status == 9 || $status == 7 || $status == 11 || $status == 12 ) ? " entregado" : "";
+            $extra = ($status == 9 || $status == 7 || $status == 11 || $status == 12) ? " entregado" : "";
 
 
             $tb .= "<tr id='" . $recibo . "' class='desglose_orden cursor_pointer  " . $extra . "' >";
@@ -568,7 +568,7 @@ if (!function_exists('invierte_date_time')) {
         if ($modalidad == 0 && $ordenes == 0) {
             return "";
         }
-        return div(heading_enid($text, 3),1);
+        return div(heading_enid($text, 3), 1);
     }
 
     function get_mensaje_compra($modalidad, $num_ordenes)
@@ -785,7 +785,7 @@ if (!function_exists('invierte_date_time')) {
     function get_vista_compras_efectivas($data, $modalidad)
     {
 
-        $listado = create_listado_compra_venta($data,  $modalidad);
+        $listado = create_listado_compra_venta($data, $modalidad);
         $response = div($listado, 1);
         return $response;
 
@@ -800,7 +800,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_text_modalidad($modalidad, $ordenes);
         $text = ($modalidad == 1) ? "VE TUS ÚLTIMAS VENTAS" : "VE TUS ÚLTIMAS COMPRAS";
         $r[] = guardar($text, ["class" => "ver_mas_compras_o_ventas top_30 bottom_30"]);
-        $r[] = create_listado_compra_venta($ordenes,  $modalidad, $id_perfil);
+        $r[] = create_listado_compra_venta($ordenes, $modalidad, $id_perfil);
         $r[] = div(place("contenedor_ventas_compras_anteriores"), 13);
         return div(append_data($r), 10, 1);
     }
@@ -833,7 +833,7 @@ if (!function_exists('invierte_date_time')) {
                 $t .= guardar("AVANZADO", [], 1, 1, 0, $url);
             }
 
-            $list[] = div(div($t, ["class" => "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block "]),1);
+            $list[] = div(div($t, ["class" => "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block "]), 1);
         }
 
         $response = append_data($list);
