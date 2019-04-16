@@ -15,7 +15,8 @@ if (!function_exists('invierte_date_time')) {
                         "name" => 'fecha_inicio',
                         "class" => "form-control input-sm datetimepicker4",
                         "id" => 'datetimepicker4',
-                        "value" => date("Y-m-d")
+                        "value" => date("Y-m-d"),
+
                     ]))
                 ,
                 "col-lg-6  d-flex align-items-center justify-content-between"

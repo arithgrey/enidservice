@@ -118,7 +118,6 @@ if (!function_exists('invierte_date_time')) {
                     ),
                     ["class" => "active"]
                 ),
-
                 li(
                     anchor_enid(icon("fa fa-shopping-cart") . "PRODUCTOS SOLICITADOS",
                         [

@@ -37,14 +37,17 @@ class recibo extends REST_Controller
         $response = false;
 
 
-        if (if_ext($param, "id_usuario,q")) {
+        if (if_ext($param, "id_usuario,q,fecha_inicio,fecha_termino")) {
 
             $response = $this->recibo_model->get_tiempo_venta($param);
             if (count($response) > 0) {
 
                 $response = $this->principal->get_imagenes_productos(0, 1, 1, 1, $response);
                 $total_servicios = $this->recibo_model->get_tiempo_venta($param, 1);
-                $response = get_format_tiempo_entrega($response, $total_servicios);
+                $fecha_inicio =  $param["fecha_inicio"] ;
+                $fecha_termino =  $param["fecha_termino"] ;
+                $response = $this->get_costos_operativos($response, $fecha_inicio, $fecha_termino);
+                $response = get_format_tiempo_entrega($response, $total_servicios, $param);
 
             }
 
@@ -935,46 +938,54 @@ class recibo extends REST_Controller
         $api = "direccion/data_direccion/format/json/";
         return $this->principal->api($api, $q);
     }
-    /*
-    private function set_stock_servicio($q){
+    private function get_sumatoria_costos_operativos($in){
 
-        $api =  "servicio/stock";
-        return  $this->principal->api( $api , $q , "json" , "PUT");
+
+        $q["in"] = $in;
+        $api = "costo_operacion/qsum/format/json/";
+        return $this->principal->api($api, $q);
+
     }
-    */
-    /*
-    function verifica_anteriores($q){
-
-        $api        =  "tickets/verifica_anteriores/format/json/";
-        return       $this->principal->api($api, $q);
-    }
-    */
-    /*
-   function en_proceso_GET(){
-       $param =  $this->get();
-       $response =  $this->recibo_model->carga_actividad_pendiente($param);
-       $this->response($response);
-   }
-   function verifica_anteriores_GET(){
-       $param =  $this->get();
-       $response = $this->tickets_model->num_compras_efectivas_usuario($param);
-       $this->response($response);
-   }
-   */
-    /*
-           function resumen_compras_usuario($param){
+    private function  get_costos_operativos( $data, $fecha_inicio , $fecha_termino ){
 
 
-            $ordenes                =   $this->recibo_model->get_compras_usuario($param , $param["modalidad"]);
 
-            $status_enid_service    =   $this->get_estatus_servicio_enid_service($param);
+        $response  =  [];
+        $a = 0;
+        foreach ($data as $row){
 
-            $response = [
-                "ordenes"               => $ordenes ,
-                "status_enid_service"   => $status_enid_service
-            ];
-            return $response;
+            $response[$a]     =  $row;
+            $id_servicio    =  $row["id_servicio"];
+            $ids_recibo     =  $this->recibo_model->get_recibo_ventas_pagas_servicio($id_servicio, $fecha_inicio, $fecha_termino);
+
+            $total_costos_operativos  =  [];
+            if (count($ids_recibo) >  0 ){
+
+                $total_costos_operativos  =  $this->get_text_in($ids_recibo);
+
+            }
+            $response[$a]["total_costos_operativos"] = $total_costos_operativos;
+            $a  ++;
+
         }
-        */
+        return  $response;
+
+    }
+    private function get_text_in($data){
+
+        $response =  [];
+        $total = 0;
+        foreach ($data as $row){
+
+            $response[] = $row["recibo"];
+            $total = $total + $row["saldo_cubierto"];
+        }
+
+        $response =  add_fields($response);
+        $r["total_costos"] =  $this->get_sumatoria_costos_operativos($response);
+        $r["total_pagos"]  =  $total;
+
+        return $r;
+    }
 
 }

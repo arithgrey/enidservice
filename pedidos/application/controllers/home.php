@@ -14,6 +14,8 @@ class Home extends CI_Controller
 	function index()
 	{
 
+
+
 		$param = $this->input->get();
 		$data = $this->principal->val_session("");
 		$this->principal->acceso();
@@ -319,7 +321,11 @@ class Home extends CI_Controller
 
 		if ($es_recibo == 0) {
 
-			$response = get_form_busqueda_pedidos($data["tipos_entregas"], $data["status_ventas"]);
+
+
+
+
+		    $response = get_form_busqueda_pedidos($data["tipos_entregas"], $data["status_ventas"], $param);
 
 			$this->principal->show_data_page($data,
 				$response,
