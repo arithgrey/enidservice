@@ -28,7 +28,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = div(get_form_costos($tipo_costos, $id_recibo), "display_none contenedor_form_costos_operacion");
 
-        $response = div(append_data($r), 8,1);
+        $response = div(append_data($r), 8, 1);
         return div($response, "top_50");
 
 
@@ -113,8 +113,10 @@ if (!function_exists('invierte_date_time')) {
     }
     if (!function_exists('get_form_busqueda_pedidos')) {
 
-        function get_form_busqueda_pedidos($tipos_entregas, $status_ventas)
+        function get_form_busqueda_pedidos($tipos_entregas, $status_ventas, $param)
         {
+
+
 
 
             $fechas[] = array(
@@ -141,14 +143,37 @@ if (!function_exists('invierte_date_time')) {
             $r[] = heading_enid("ORDENES DE COMPRA", 3);
             $r[] = form_open("", ["class" => "form_busqueda_pedidos ", "method" => "post"]);
             $r[] = form_busqueda_pedidos($tipos_entregas, $status_ventas, $fechas);
-            $r[] = div(get_format_fecha_busqueda());
+
+            if (is_array($param) &&  array_key_exists("fecha_inicio", $param)
+
+                &&  array_key_exists("fecha_termino", $param)
+
+                &&  array_key_exists("type", $param)
+
+                &&  array_key_exists("servicio", $param)
+
+            ) {
+
+                $r[] = div(get_format_fecha_busqueda($param["fecha_inicio"] , $param["fecha_termino"]));
+                $r[] = input_hidden(["name"=>"consulta" , "class"=> "consulta" , "value"=> 1]);
+                $r[] = input_hidden(["name"=>"servicio" , "class"=> "servicio" , "value"=> $param["servicio"]]);
+                $r[] = input_hidden(["name"=>"type" , "class"=> "type" , "value"=> $param["type"]]);
+
+
+            }else{
+
+                $r[] = div(get_format_fecha_busqueda());
+            }
+
+
             $r[] = form_close();
-
-
             $z[] = div(append_data($r), ["class" => " border padding_10 shadow row seccion_form_pedidos top_50"]);
             $z[] = div(place("place_pedidos top_50 bottom_50"), 1);
             $z[] = div(form_form_search(), 1);
-            return div(append_data($z), 10, 1);
+
+            $response =  div(append_data($z), 10, 1);
+            return $response;
+
 
         }
     }
@@ -390,20 +415,20 @@ if (!function_exists('invierte_date_time')) {
         function form_fecha_recordatorio($orden, $tipo_recortario)
         {
 
-            $x = heading_enid("RECORDATORIO", 3, ["class"=> "top_50"]);
+            $x = heading_enid("RECORDATORIO", 3, ["class" => "top_50"]);
             $r[] = form_open("", ["class" => "form_fecha_recordatorio letter-spacing-5 "]);
             $r[] = div(icon("fa fa-calendar-o") . " FECHA ", 4);
 
             $r[] = div(input(
                 [
-                "data-date-format" => "yyyy-mm-dd",
-                "name" => 'fecha_cordatorio',
-                "class" => "form-control input-sm ",
-                "type" => 'date',
-                "value" => date("Y-m-d"),
-                "min" => add_date(date("Y-m-d"), -15),
-                "max" => add_date(date("Y-m-d"), 15)
-            ]),
+                    "data-date-format" => "yyyy-mm-dd",
+                    "name" => 'fecha_cordatorio',
+                    "class" => "form-control input-sm ",
+                    "type" => 'date',
+                    "value" => date("Y-m-d"),
+                    "min" => add_date(date("Y-m-d"), -15),
+                    "max" => add_date(date("Y-m-d"), 15)
+                ]),
                 8
             );
 
@@ -417,15 +442,15 @@ if (!function_exists('invierte_date_time')) {
             ]);
 
             $r[] = div(" TIPO", 3);
-            $r[] = div(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo", "idtipo_recordatorio"), 9 );
+            $r[] = div(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo", "idtipo_recordatorio"), 9);
             $r[] = div(textarea(["name" => "descripcion", "class" => "descripcion_recordatorio"]), 12);
             $r[] = section(place("nota_recordatorio display_none"), 12);
-            $r[] = div(guardar("CONTINUAR", ["class" => "top_menos_40"]),12);
+            $r[] = div(guardar("CONTINUAR", ["class" => "top_menos_40"]), 12);
             $r[] = form_close();
             $r[] = place("place_recordatorio");
 
-            $form =  div(append_data($r), "top_30 form_separador ");
-            $response = div($x.$form, 6,1);
+            $form = div(append_data($r), "top_30 form_separador ");
+            $response = div($x . $form, 6, 1);
             return $response;
 
 
@@ -514,7 +539,7 @@ if (!function_exists('invierte_date_time')) {
         function get_form_costos($tipo_costos, $id_recibo)
         {
 
-            $r[] = div(heading_enid("Gasto" , 3) , "col-lg-12 bottom_50");
+            $r[] = div(heading_enid("Gasto", 3), "col-lg-12 bottom_50");
             $r[] = form_open("", ["class" => "form_costos letter-spacing-5"], ["recibo" => $id_recibo]);
 
             $a = div("MONTO GASTADO", 4);
@@ -524,7 +549,7 @@ if (!function_exists('invierte_date_time')) {
                 "required" => true,
                 "class" => "form-control input precio",
                 "name" => "costo"
-            ]),8 );
+            ]), 8);
 
             $r[] = get_btw($a, $b, "top_30");
 
@@ -534,12 +559,12 @@ if (!function_exists('invierte_date_time')) {
                 "id_tipo_costo form-control",
                 "tipo",
                 "tipo",
-                "id_tipo_costo"),"col-lg-12 top_30");
+                "id_tipo_costo"), "col-lg-12 top_30");
 
 
-            $r[] = div(guardar("AGREGAR", ["class" => "top_30"]),12);
+            $r[] = div(guardar("AGREGAR", ["class" => "top_30"]), 12);
             $r[] = form_close(place("notificacion_registro_costo"));
-            return div(append_data($r), 10,1);
+            return div(append_data($r), 10, 1);
 
         }
 
@@ -1366,6 +1391,8 @@ if (!function_exists('invierte_date_time')) {
                 $tel_contacto = $row["tel_contacto"];
                 $tel_contacto_alterno = $row["tel_contacto_alterno"];
 
+                $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
+
 
                 $nombre_completo = append_data([$nombre, $apellido_paterno, $apellido_materno]);
 
@@ -1373,6 +1400,7 @@ if (!function_exists('invierte_date_time')) {
                 $text[] = div($email);
                 $text[] = div($tel_contacto);
                 $text[] = div($tel_contacto_alterno);
+                $text[] = div($opt[$row["sexo"]]);
 
 
                 $icon = icon("fa-pencil configurara_informacion_cliente black");
@@ -1605,6 +1633,7 @@ if (!function_exists('invierte_date_time')) {
                 $email = $usuario["email"];
                 $telefono = $usuario["tel_contacto"];
                 $id_usuario = $usuario["id_usuario"];
+                $sexo = $usuario["sexo"];
 
 
                 $action = "../../q/index.php/api/usuario/index/format/json/";
@@ -1651,7 +1680,24 @@ if (!function_exists('invierte_date_time')) {
 
                 ]);
 
+                $opt[] = array(
 
+                    "text" => "Femenino",
+                    "val" => 0
+                );
+                $opt[] = array(
+
+                    "text" => "Masculino",
+                    "val" => 1
+                );
+                $opt[] = array(
+
+                    "text" => "Indefinido",
+                    "val" => 2
+                );
+
+
+                $form .= div(create_select($opt, "sexo", "sexo", "sexo", "text", "val", 1, $sexo), "top_20");
                 $form .= guardar("GUARDAR", ["class" => "top_30 bottom_50"]);
                 $form .= form_close(place("place_form_set_usuario"));
                 $f = addNRow($form, ["id" => "contenedor_form_usuario"]);

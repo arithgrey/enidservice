@@ -32,11 +32,11 @@ if (!function_exists('span')) {
     {
 
 
-        if ( is_array($attributes) && count($attributes) > 0  ){
+        if (is_array($attributes) && count($attributes) > 0) {
 
             $attr = add_attributes($attributes);
 
-        }else{
+        } else {
 
             $att = [];
             $att["class"] = $attributes;
@@ -1522,17 +1522,22 @@ if (!function_exists('get_btw')) {
 }
 if (!function_exists('get_format_fecha_busqueda')) {
 
-    function get_format_fecha_busqueda()
+    function get_format_fecha_busqueda($def_inicio = 0, $def_fin = 0)
     {
+
+        $vinicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
+        $vfin = ($def_fin != 0) ? $def_fin : date("Y-m-d");
+
 
         $r[] = get_btw(
             div("Inicio", ["class" => 'strong']),
             div(input([
                 "data-date-format" => "yyyy-mm-dd",
                 "name" => 'fecha_inicio',
-                "class" => "form-control input-sm datetimepicker4",
+                "class" => "form-control input datetimepicker4",
                 "id" => 'datetimepicker4',
-                "value" => date("Y-m-d")
+                "value" => $vinicio,
+                "type" => "date"
             ])),
             'col-lg-4 d-flex align-items-center justify-content-between'
         );
@@ -1544,9 +1549,11 @@ if (!function_exists('get_format_fecha_busqueda')) {
                 [
                     "data-date-format" => "yyyy-mm-dd",
                     "name" => 'fecha_termino',
-                    "class" => "form-control input-sm datetimepicker5",
+                    "class" => "form-control input datetimepicker5",
                     "id" => 'datetimepicker5',
-                    "value" => date("Y-m-d")
+                    "value" => $vfin,
+                    "type" => "date"
+
                 ]
             )),
             'col-lg-4 d-flex align-items-center justify-content-between'

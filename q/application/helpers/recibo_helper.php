@@ -1,11 +1,12 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function get_format_tiempo_entrega($data, $totales_servicios)
+    function get_format_tiempo_entrega($data, $totales_servicios, $param)
     {
 
         $response = [];
         $a = 0;
+
 
         foreach ($data as $row) {
 
@@ -33,14 +34,18 @@ if (!function_exists('invierte_date_time')) {
             $a++;
         }
 
-        return get_format_entrega($response);
+        return get_format_entrega($response, $param);
 
     }
 
-    function get_format_entrega($data)
+    function get_format_entrega($data, $param)
     {
 
         $response = [];
+
+        $fecha_inicio = $param["fecha_inicio"];
+        $fecha_termino = $param["fecha_termino"];
+
 
         foreach ($data as $row) {
 
@@ -52,24 +57,66 @@ if (!function_exists('invierte_date_time')) {
             $solicitudes = $row["solicitudes"];
             $porcentaje = $row["porcentaje"];
 
-
             $x = [];
             $x[] = div(anchor_enid(img(["src" => $url_img_servicio, "class" => "img_servicio_def padding_10"]), ["href" => get_url_servicio($id_servicio)]), 3);
             $text = [];
             $text[] = div(heading_enid($porcentaje . "%", 3), ["class" => "text-center"]);
-            $text[] = guardar($solicitudes . " SOLICITUDES ");
-            $text[] = guardar($total . " VENTAS ");
 
 
-            $x[] = div(append_data($text), ["class" => "col-lg-6 d-flex flex-column justify-content-between"]);
+            $form = [];
+
+            $form[] = "<form action='../pedidos/?s=1' METHOD='GET'>";
+            $form[] = input_hidden(["name" => "fecha_inicio", "value" => $fecha_inicio]);
+            $form[] = input_hidden(["name" => "fecha_termino", "value" => $fecha_termino]);
+            $form[] = input_hidden(["name" => "type", "value" => 13]);
+            $form[] = input_hidden(["name" => "servicio", "value" => $id_servicio]);
+            $form[] = guardar($solicitudes . " SOLICITUDES ");
+            $form[] = form_close();
+            $text[] = append_data($form);
+
+
+            $form = [];
+
+            $form[] = "<form action='../pedidos/?s=1' METHOD='GET'>";
+            $form[] = input_hidden(["name" => "fecha_inicio", "value" => $fecha_inicio]);
+            $form[] = input_hidden(["name" => "fecha_termino", "value" => $fecha_termino]);
+            $form[] = input_hidden(["name" => "type", "value" => 14]);
+            $form[] = input_hidden(["name" => "servicio", "value" => $id_servicio]);
+            $form[] = guardar($total . " VENTAS");
+            $form[] = form_close();
+
+            $text[] = append_data($form);
+
+
+            $x[] = div(append_data($text), ["class" => "col-lg-3 d-flex flex-column justify-content-between"]);
+
+
+
+
             $texto = heading_enid("Tiempo promedio de venta " . substr($dias, 0, 5) . "días", 4);
             $x[] = div($texto, ["class" => "col-lg-3 text-center align-self-center"]);
+
+
+
+            $total_costos_operativos = $row["total_costos_operativos"];
+            $utilidad =  heading_enid("Sin costos operativos registrados" , 5);
+            if (count($total_costos_operativos ) > 0 ){
+
+                $total_costos =  $total_costos_operativos["total_costos"];
+                $total_pagos =  $total_costos_operativos["total_pagos"];
+
+                $utilidad =  ($total_pagos - $total_costos);
+            }
+            $x[] = div(heading_enid("UTILIDAD",3).br().heading_enid( $utilidad." MXN " ,  5), ["class" => "col-lg-3 text-center align-self-center"]);
 
 
             $response[] = div(append_data($x), ["class" => "row border  top_30"]);
 
         }
-        return append_data($response);
+
+        return $response;
+
+
     }
 
     function get_format_transaccion($id_recibo)
@@ -252,7 +299,9 @@ if (!function_exists('invierte_date_time')) {
 
         $tb .= "</tbody>";
         $tb .= "</table>";
-        return $tb;
+
+        $inicio = div(heading_enid(count($recibos) . "Elemtos encontrados ", 5));
+        return $inicio . $tb;
     }
 
     function get_text_status($lista, $estado_compra)

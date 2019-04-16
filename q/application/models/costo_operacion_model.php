@@ -66,5 +66,13 @@ class Costo_operacion_model extends CI_Model
         return $this->db->query($query_get)->result_array()[0]["num"];
 
     }
+    function get_qsum($in)
+    {
+
+        $query_get ="select  sum(monto)num from costo_operacion where id_recibo in( {$in} )";
+        return $this->db->query($query_get)->result_array()[0]["num"];
+
+    }
+
 
 }

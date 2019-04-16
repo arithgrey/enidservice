@@ -7,20 +7,23 @@ $r[] = div(
             "name" => "q",
             "placeholder" => "id, nombre"
         ]
-    )
+    ),4
 );
 
+$r[] =  div(get_format_fecha_busqueda(),8);
+
+
 $r[] = form_close();
-$form = append_data($r);
+$form = div(append_data($r),13);
 ?>
 
 <?= div(
     get_btw(
-        heading_enid("ARTÍCULO", 3, ["clas" => "align-self-center"])
+        heading_enid("ARTÍCULO", 3)
         ,
         $form
         ,
-        "col-lg-4  offset-4 d-flex align-items-center justify-content-between"
+        8,1
 
     )
     ,

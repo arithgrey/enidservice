@@ -68,6 +68,17 @@ class costo_operacion extends REST_Controller
         $this->response($response);
 
     }
+    function qsum_GET(){
 
+        $param = $this->get();
+        $response = false;
+        if (if_ext($param, "in")) {
+
+            $response = $this->costo_operacion_model->get_qsum($param["in"]);
+
+        }
+        $this->response($response);
+
+    }
 
 }

@@ -126,11 +126,21 @@ class Recibo_model extends CI_Model
         $ext_usuario = $this->get_usuario($param);
         $ext_contra_entrega = ($tipo_entrega == 0) ? "" : " AND  p.tipo_entrega = '" . $tipo_entrega . "'";
         $extra_extatus_venta = ($status_venta == 0) ? "" : "  AND p.status = '" . $status_venta . "' ";
-        $ext_fecha = $this->get_fecha($param);
+        $extra_extatus_venta = ($status_venta == 14) ? "AND p.saldo_cubierto >  0 " : $extra_extatus_venta;
 
-        $query_get .= $ext_usuario . $ext_contra_entrega . $extra_extatus_venta . $ext_fecha . " ORDER BY p.fecha_registro DESC";
+        $ext_fecha = $this->get_fecha($param);
+        $ext_servicio = $this->get_servicio($param);
+
+        $query_get .= $ext_usuario . $ext_contra_entrega . $extra_extatus_venta . $ext_fecha . $ext_servicio . " ORDER BY p.fecha_registro DESC";
         return $this->db->query($query_get)->result_array();
 
+    }
+
+    private function get_servicio($param)
+    {
+
+        $response = (array_key_exists("servicio", $param) && $param["servicio"] > 0) ? " AND  id_servicio = '" . $param["servicio"] . "' " : "";
+        return $response;
     }
 
     private function get_usuario($param)
@@ -426,7 +436,7 @@ class Recibo_model extends CI_Model
         $id_usuario = $param["id_usuario"];
         $campo_usuario = "id_usuario";
 
-        if ($param["modalidad"] > 0 ) {
+        if ($param["modalidad"] > 0) {
 
             $campo_usuario = "id_usuario_venta";
 
@@ -843,6 +853,7 @@ class Recibo_model extends CI_Model
 						saldo_cubierto < 1  
 						and id_usuario_venta ='" . $id_usuario . "' 
 						AND  se_cancela = 0
+						AND  status !=  10
 						AND 
 						
 						(
@@ -863,6 +874,7 @@ class Recibo_model extends CI_Model
 
         $extra = " ";
         $extra_innner = " WHERE 1 = 1 ";
+        $extra_tiempo = "";
         if (array_key_exists("id_usuario", $param) && $param["id_usuario"] > 0) {
 
             $extra = " AND id_usuario_venta = '" . $param["id_usuario"] . "' ";
@@ -871,12 +883,22 @@ class Recibo_model extends CI_Model
         if (array_key_exists("q", $param) && strlen($param["q"]) > 2) {
 
             $extra_innner = " LEFT OUTER JOIN  servicio s ON p.id_servicio = s.id_servicio 
-            WHERE nombre_servicio LIKE  '%".$param['q']." %'   ";
+            WHERE nombre_servicio LIKE  '%" . $param['q'] . " %'   ";
 
         }
 
-        $query_get  = "";
-        if($total >  0 ){
+        if ($param["fecha_inicio"] != $param["fecha_termino"]) {
+
+            $fecha_inicio = $param['fecha_inicio'];
+            $fecha_termino = $param['fecha_termino'];
+
+            $extra_tiempo = " AND p.fecha_registro BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'  ";
+
+        }
+
+
+        $query_get = "";
+        if ($total > 0) {
 
             $query_get = "
 	            SELECT  
@@ -889,6 +911,7 @@ class Recibo_model extends CI_Model
                 AND 
                 p.id_servicio >  0
                 " . $extra . "
+                " . $extra_tiempo . "
                 GROUP BY 
                 p.id_servicio 
                 ORDER BY  
@@ -896,11 +919,10 @@ class Recibo_model extends CI_Model
                 ";
 
 
-
-        }else{
+        } else {
 
             $query_get = "
-	    SELECT  
+	            SELECT  
                 AVG( DATEDIFF(p.fecha_entrega ,  p.fecha_registro ))dias,  
                 COUNT(0)total , 
                 p.id_servicio 
@@ -912,12 +934,12 @@ class Recibo_model extends CI_Model
                 AND 
                 p.id_servicio >  0
                 " . $extra . "
+                " . $extra_tiempo . "
                 GROUP BY 
                 p.id_servicio 
                 ORDER BY  
                 COUNT(0) desc
                 ";
-
 
 
         }
@@ -926,4 +948,25 @@ class Recibo_model extends CI_Model
 
     }
 
+    function get_recibo_ventas_pagas_servicio($id_servicio, $fecha_inicio, $fecha_termino)
+    {
+
+        $query_get = "SELECT 
+                            p.id_proyecto_persona_forma_pago  recibo,
+                            p.saldo_cubierto  
+                            FROM proyecto_persona_forma_pago p 
+                            WHERE                             
+                            p.saldo_cubierto > 1 
+                            AND 
+                            p.id_servicio > $id_servicio 
+                            AND  
+                            p.fecha_registro 
+                            BETWEEN '{$fecha_inicio}'
+                            AND 
+                            '{$fecha_termino}' ";
+
+
+        return $this->db->query($query_get)->result_array();
+
+    }
 }   
