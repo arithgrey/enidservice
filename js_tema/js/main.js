@@ -560,25 +560,27 @@ let randomString = function (len, charSet) {
 /*Recorre a sección*/
 let recorrepage = function (contenedor) {
 
+    if (typeof get_parameter(contenedor) !== 'undefined') {
+        let simple = contenedor.substring(1, contenedor.length);
+        let elementoIdW = document.getElementById(simple);
+        let elementoClassW = document.getElementsByClassName(simple);
+        if (elementoClassW != undefined || elementoClassW != null || elementoIdW != null || elementoIdW != undefined) {
 
-    let simple = contenedor.substring(1, contenedor.length);
-    let elementoIdW = document.getElementById(simple);
-    let elementoClassW = document.getElementsByClassName(simple);
-    if (elementoClassW != undefined || elementoClassW != null || elementoIdW != null || elementoIdW != undefined) {
-
-        if ($(contenedor).val() != undefined) {
-            let l = contenedor.length;
-            if (l > 2) {
-                $('html, body').animate({scrollTop: $(contenedor).offset().top - 100}, 'slow');
+            if ($(contenedor).val() != undefined) {
+                let l = contenedor.length;
+                if (l > 2) {
+                    $('html, body').animate({scrollTop: $(contenedor).offset().top - 100}, 'slow');
+                } else {
+                    $('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top - 100}, 'slow');
+                }
             } else {
-                $('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top - 100}, 'slow');
+                console.log("NO EXISTE -> " + contenedor);
             }
         } else {
             console.log("NO EXISTE -> " + contenedor);
         }
-    } else {
-        console.log("NO EXISTE -> " + contenedor);
     }
+
 
 
 };

@@ -76,8 +76,7 @@ $ganancias_vendedores = 0;
 $text_meses = "No aplica";
 $text_num_mensualidades = "No aplica";
 
-$costo_envio_cliente =
-    ($flag_servicio == 0) ? $costo_envio["costo_envio_cliente"] : 0;
+
 $info_colores = create_colores_disponibles($color);
 $en_productos["flag_nuevo"] = $flag_nuevo;
 $en_productos["existencia"] = $existencia;
@@ -100,16 +99,10 @@ $data["comision"] = $comision;
 $data["url_ml"] = $url_ml;
 
 
-$titulo_compra_en_casa = ($flag_servicio == 1) ? "OFRECES SERVICIO EN TU NEGOCIO?" : "¿CLIENTES TAMBIÉN PUEDEN RECOGER SUS COMPRAS EN TU NEGOCIO?";
-
-
-$ver_telefono = ($flag_servicio == 1) ? "¿PERSONAS PUEDEN VER TU NÚMERO TELEFÓNICO PARA SOLICITARTE MÁS INFORMES?" : "¿PERSONAS PUEDEN SOLICITARTE MÁS INFORMES POR TELÉFONO?";
-
 $data["flag_servicio"] = get_campo($servicio, "flag_servicio");
 
 
 $notificacion_imagenes = heading_enid(valida_text_imagenes($tipo_promocion, $num_imagenes), 3);
-
 $extra_extrega_casa_no = valida_activo_entregas_en_casa(0, $entregas_en_casa);
 $activo_visita_telefono = valida_activo_vista_telefono(1, $telefono_visible);
 $baja_visita_telefono = valida_activo_vista_telefono(0, $telefono_visible);
@@ -120,38 +113,23 @@ $extra_1 = valida_active_pane($num, 1);
 $extra_2 = valida_active_pane($num, 2);
 $extra_3 = valida_active_pane($num, 3);
 $extra_4 = valida_active_pane($num, 4);
-$num_articulos = valida_text_numero_articulos($existencia);
-$llamada_accion_youtube =
-    "¿TIENES ALGÚN VIDEO SOBRE TU " . $tipo_promocion . "?";
+
+
 $text_llamada_accion_youtube = icon('fa fa-youtube-play') . " VIDEO DE YOUTUBE ";
 $valor_youtube = get_campo($servicio, "url_vide_youtube");
 $val_youtube = icon('fa fa-pencil text_url_youtube') . $valor_youtube;
 $nuevo_nombre_servicio = get_campo($servicio, "nombre_servicio");
 
-$text_titulo_seccion_producto =
-    "INFORMACIÓN SOBRE TU " . $nuevo_nombre_servicio .
-    icon('fa fa-pencil text_desc_servicio icon-pencil');
+$text_titulo_seccion_producto = heading_enid("INFORMACIÓN SOBRE TU " . $nuevo_nombre_servicio . icon('fa fa-pencil text_desc_servicio icon-pencil') , 5);
 $nueva_descripcion = get_campo($servicio, 'descripcion');
 
 
-$nuevo_titulo_seleccion_producto = div(
-    $text_titulo_seccion_producto,
-    ["class" => "titulo_seccion_producto titulo_producto_servicio"],
-    1);
 
-$info_nueva_descripcion =
-    div($nueva_descripcion, ["class" => "text_desc_servicio contenedor_descripcion"], 1);
+$nuevo_titulo_seleccion_producto = div($text_titulo_seccion_producto, "top_50 titulo_seccion_producto titulo_producto_servicio", 1);
+$info_nueva_descripcion = div($nueva_descripcion, "text_desc_servicio contenedor_descripcion top_30", 1);
 
-
-$i_cantidad = input([
-    "type" => "number",
-    "name" => "existencia",
-    "class" => "existencia",
-    "required" => "",
-    "value" => $existencia,
-],
-    1);
-$icantidad = icon('fa fa-pencil text_cantidad');
+$text_comision_venta = "COMISIÓN POR VENTA" . $comision . "MXN";
+$text_envios_mayoreo = "¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?";
 
 ?>
 <?= agregar_imgs() ?>
@@ -164,106 +142,57 @@ $icantidad = icon('fa fa-pencil text_cantidad');
             <?= addNRow($notificacion_imagenes); ?>
             <?= addNRow(valida_descartar_promocion($num_imagenes, $id_servicio)) ?>
             <?= div($images, ["class" => "contenedor_imagen_muestra"], 1) ?>
-            <?= heading_enid($llamada_accion_youtube, 4) ?>
+            <?= heading_enid("¿TIENES ALGÚN VIDEO SOBRE TU " . $tipo_promocion . "?", 4) ?>
             <?= div($text_llamada_accion_youtube, 1) ?>
             <?= div($val_youtube, ["class" => "text_video_servicio"], 1) ?>
             <?= get_form_youtube($valor_youtube) ?>
         </div>
         <!--DESCRIPCION DEL PRODUCTO-->
         <div class="tab-pane <?= $extra_2 ?>" id="tab_info_producto">
+
             <?= $nuevo_titulo_seleccion_producto; ?>
             <?= place("place_tallas_disponibles") ?>
             <?= $info_nueva_descripcion ?>
             <?= get_form_descripcion($nueva_descripcion); ?>
-            <?php if ($flag_servicio == 0): ?>
-                <div class="contenedor_inf_servicios">
-                    <?= heading_enid("COLORES", 4) ?>
-                    <?= div("+ AGREGAR COLORES", ["class" => "text_agregar_color "], 1); ?>
-                    <?= heading_enid("COLORES DISPONIBLES", 4) ?>
-                    <?= div($info_colores, 1) ?>
-                    <?= get_btw(
+            <?=get_format_colores($flag_servicio,$info_colores)?>
 
-                        div("", ["id" => "seccion_colores_info"], 1)
-                        ,
-                        div("", ["class" => "place_colores_disponibles"], 1)
-                        ,
-                        "input_servicio_color"
-                    ) ?>
-                </div>
-            <?php endif; ?>
         </div>
         <div class="tab-pane <?= $extra_4 ?>" id="tab_info_precios">
 
-            <?= addNRow(div(get_estado_publicacion($status, $id_servicio), ["class" => "text-right"])) ?>
-            <?= get_rango_entrega(
-                $id_perfil,
-                $tiempo_promedio_entrega,
-                ["name" => "tiempo_entrega",
-                    "class" => "tiempo_entrega form-control"
-                ],
-                "DÍAS PROMEDIO DE ENTREGA") ?>
-            <?= get_form_link_drop_shipping($id_perfil, $id_servicio, $link_dropshipping) ?>
-            <?= get_form_rango_entrega($id_perfil, $stock) ?>
-            <?= heading_enid($titulo_compra_en_casa, 4); ?>
-            <?= get_seccion_compras_casa($flag_servicio, $entregas_en_casa) ?>
-            <?= heading_enid($ver_telefono, 4) ?>
-            <?= get_seccion_telefono_publico($has_phone, $telefono_visible, $activo_visita_telefono, $baja_visita_telefono) ?>
-            <?= heading_enid("¿VENDES ESTA ARTÍCULO CONTRA ENTREGA?", 4) ?>
-            <?= get_configuracion_contra_entrega($contra_entrega, $id_servicio) ?>
-
-
-            <?php if ($flag_servicio == 0): ?>
-                <div class="contenedor_inf_servicios contenedor_inf_servicios_novedad">
-                    <?= get_btw(
-                        heading_enid("¿ES NUEVO?", 4),
-                        div(icon('fa fa-pencil text_nuevo') . get_producto_usado($flag_nuevo)),
-                        "contenedor_es_nuevo"
-                    ) ?>
-                    <?= get_btw(
-
-                        div(select_producto_usado($flag_nuevo), ['class' => 'col-lg-9']),
-                        div(guardar("GUARDAR", ["class" => "btn_guardar_producto_nuevo es_nuevo col-lg-3"])),
-                        "input_nuevo seccion_es_nuevo display_flex_enid"
-
-                    ) ?>
-                    <?= get_btw(
-                        heading_enid('¿ARTÍCULOS DISPONIBLES?', 4),
-                        div($icantidad . $num_articulos, ["class" => "text_numero_existencia"]),
-                        "contenedor_articulos_disponibles"
-
-                    ) ?>
-                    <?= get_btw(
-
-                        get_td($i_cantidad, ['col-lg-9']),
-                        get_td(guardar("GUARDAR", ["class" => "es_disponible btn_guardar_cantidad_productos col-lg-3"])),
-                        "display_flex_enid input_cantidad seccion_cantidad"
-                    ) ?>
-                </div>
-            <?php else: ?>
-                <div class="contenedor_inf_servicios contenedor_inf_servicios_ciclo_facturacion">
-                    <?= icon('fa fa-pencil text_ciclo_facturacion') ?>
-                    <?= icon('CICLO DE FACTURACIÓN', ["class" => "titulo_producto_servicio"]) ?>
-                    <?= div(get_nombre_ciclo_facturacion($ciclos, $id_ciclo_facturacion)) ?>
-                    <?= get_btw(
-                        create_select_selected($ciclos,
-                            "id_ciclo_facturacion",
-                            "ciclo",
-                            $id_ciclo_facturacion,
-                            "ciclo_facturacion",
-                            "ciclo_facturacion form-control"
-                        )
+            <?= div(div(get_estado_publicacion($status, $id_servicio), "col-lg-4 top_30 bottom_20", 1), 12) ?>
+            <?= get_form_rango_entrega($flag_servicio , $id_perfil , $stock) ?>
+            <?= div(get_rango_entrega(
+                    $id_perfil,
+                    $tiempo_promedio_entrega,
+                    [
+                        "name" => "tiempo_entrega"
                         ,
-                        guardar("GUARDAR", ['class' => 'btn_guardar_ciclo_facturacion']),
-                        "input_ciclo_facturacion display_none"
-                    ) ?>
-                </div>
-            <?php endif; ?>
-            <?php if ($flag_servicio < 1): ?>
-                <?= $this->load->view("servicio/precios", $data); ?>
-            <?php endif; ?>
+                        "class" => "tiempo_entrega form-control"
+                    ],
+                    "DÍAS PROMEDIO DE ENTREGA")
+                ,
+                6
+            ) ?>
+            <?= div(
+                get_form_link_drop_shipping($id_perfil, $id_servicio, $link_dropshipping)
+                ,
+                6
+            ) ?>
+
+
+            <?= div(get_seccion_compras_casa($flag_servicio, $entregas_en_casa), 6) ?>
+            <?= div(get_seccion_telefono_publico($has_phone, $telefono_visible, $activo_visita_telefono, $baja_visita_telefono, $flag_servicio), 6) ?>
+            <?= get_configuracion_contra_entrega($flag_servicio, $contra_entrega, $id_servicio) ?>
+            <?= get_seccion_uso_disponibilidad($existencia,$flag_nuevo, $flag_servicio)?>
+            <?= get_seccion_ciclos_facturacion($ciclos, $id_ciclo_facturacion, $flag_servicio) ?>
+            <?= get_format_venta_mayoreo($flag_servicio , $text_envios_mayoreo, $venta_mayoreo)?>
+            <?= get_format_enlace_venta_extra($flag_servicio,$url_ml)?>
+            <?= get_form_costo_unidad($precio,$flag_servicio,$costo_envio) ?>
+            <?= get_format_utilidad($flag_servicio,$text_comision_venta, $utilidad )?>
+
+
+
         </div>
-        <?= div(
-            get_form_tags($id_servicio, $metakeyword_usuario), ["class" => "tab-pane " . $extra_3, "id" => "tab_terminos_de_busqueda"]
-        ) ?>
+        <?= div(get_form_tags($id_servicio, $metakeyword_usuario), ["class" => "tab-pane " . $extra_3, "id" => "tab_terminos_de_busqueda"]) ?>
     </div>
 </div>

@@ -1,4 +1,5 @@
 <div class="contenedor_agregar_servicio_form top_30">
+
     <?= heading_enid("DA A CONOCER TU PRODUCTO Ó SERVICIO", 3, 1) ?>
     <?= form_open('', ['class' => "form_nombre_producto ", "id" => 'form_nombre_producto']) ?>
     <?= div(

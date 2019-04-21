@@ -66,22 +66,8 @@
     justify-content: space-between;
     align-items: center;
 }
-.seccion_agregar_telefono{
-    display: flex;
-    flex-direction: column;
-}
 
-.contenedor_es_nuevo {
-    margin-top: 20px;
-}
 
-.seccion_es_nuevo {
-    margin-top: 20px;
-}
-
-.contenedor_articulos_disponibles {
-    margin-top: 20px;
-}
 
 .text_numero_existencia {
     margin-top: 20px;
@@ -91,9 +77,6 @@
     margin-top: 20px;
 }
 
-.seccion_precio_por_unidad {
-    margin-top: 25px;
-}
 
 .contenedor_costo {
     margin-top: 25px;
@@ -107,9 +90,6 @@
     margin-top: 25px;
 }
 
-.titulo_producto_servicio {
-    margin-top: 25px;
-}
 
 .costo_envio_text {
     margin-top: 20px;
@@ -226,18 +206,9 @@
 .contenedor_imagenes_info {
     border: solid 1px;
 }
-
-.titulo_seccion_producto {
-    font-weight: bold;
-    font-size: 1.5em;
-}
-
 .well {
     background: #fefefe !important;
 }
-
-
-
 .campo_avanzado {
     display: none;
 }

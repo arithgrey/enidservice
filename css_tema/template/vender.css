@@ -1,13 +1,10 @@
 .input_nuevo, .contenedor_costo, .contenedor_info_youtube, .input_desc_servicio_facturacion, .input_servicio_color, .input_cantidad {
     display: none;
 }
-
-.text_agregar_color {
-    background: black;
-    padding: 5px;
-    color: white;
+.text_agregar_color{
+    color: #010127;
+    font-size: 1.3em;
 }
-
 .icon-pencil {
     margin-left: 10px;
 }
@@ -59,7 +56,7 @@
 
 .add_phone {
     background: #060436;
-    font-size:: .9em;
+    font-size: .9em
     padding: 3px;
 }
 
@@ -94,13 +91,6 @@
     color: white;
 }
 
-.mensaje_imagenes_visible {
-    background: #0d0542;
-    padding: 3px;
-    color: white;
-    font-weight: bold;
-
-}
 
 .num_clasificacion option:hover {
     cursor: pointer;
@@ -140,14 +130,6 @@
     color: white;
 }
 
-.es_nuevo, .es_disponible {
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-.contenedor_inf_servicios_novedad {
-    margin-top: 25px;
-}
 
 .ciclo_facturacion {
     width: 100%;
@@ -163,24 +145,6 @@
     margin-top: 20px;
 }
 
-.contenedor_inf_servicios_precios_finales {
-    display: flex;
-    flex-direction: column-reverse;
-    background: #f7f9ff;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-.contenedor_inf_servicios_precios_finales{
-    display: flex;
-    flex-direction: column-reverse;
-    background: #041623;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    padding: 10px;
-    text-align: center;
-    color: white;
-    border-bottom: solid;
-}
 .mxn{
     font-size: 2em;
     margin-left: 10px;
@@ -225,10 +189,6 @@
     color: black !important;
 }
 
-.info_meta_tags {
-    height: 50px;
-    overflow: auto;
-}
 
 @media only screen and (max-width: 768px) {
 
@@ -257,9 +217,6 @@
         margin-top: 30px;
     }
 
-    .contenedor_articulos_disponibles {
-        margin-top: 35px;
-    }
 
     .contenedor_inf_servicios_ciclo_facturacion {
         margin-top: 30px;
@@ -272,25 +229,6 @@
     .informacion_costo_envio {
         margin-top: 40px;
     }
-
-    .contenedor_inf_servicios {
-        margin-top: 40px !important;
-        margin-bottom: 30px;
-    }
-
-    .info_meta_tags {
-        height: 100px;
-        overflow: auto;
-        margin-top: 25px;
-        margin-bottom: 30px;
-    }
-
-    .titulo_producto_servicio {
-        font-size: 1.6em !important;
-        font-weight: bold !important;
-        background: #ededed !important;
-    }
-
     .hr_producto {
         display: block;
     }

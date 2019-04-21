@@ -20,9 +20,7 @@ $(document).ready(function(){
 
 	$("footer").ready(carga_num_pendientes);		
 	$('.datetimepicker_persona').datepicker();
-	$('.datetimepicker4').datepicker();
-	$('.datetimepicker5').datepicker();					
-	$(".form_busqueda_actividad_enid").submit(cargar_productividad);		
+	$(".form_busqueda_actividad_enid").submit(cargar_productividad);
 
 
 	$('.datetimepicker1').timepicker();

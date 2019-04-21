@@ -11,8 +11,6 @@ $(document).ready(function () {
     $(".f_usabilidad").submit(carga_uso_sistema);
 
     $(".form_busqueda_global_enid").submit(indicadores);
-    $('.datetimepicker4').datepicker();
-    $('.datetimepicker5').datepicker();
     $("#form_metas").submit(registra_metas);
     $(".form_busqueda_desarrollo").submit(carga_metricas_desarrollo);
     $(".form_busqueda_desarrollo_solicitudes").submit(carga_solicitudes_cliente);

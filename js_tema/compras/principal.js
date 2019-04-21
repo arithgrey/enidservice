@@ -1,8 +1,7 @@
 "use strict";
 $(document).ready(function(){
 
-    $('.datetimepicker4').datepicker();
-    $('.datetimepicker5').datepicker();
+
     $(".form_compras").submit(busqueda);
 });
 let busqueda = function(e){

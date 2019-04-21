@@ -65,7 +65,7 @@ if (!function_exists('invierte_date_time')) {
             $link = anchor_enid('INDICA TU NÚMERO TELEFÓNICO', ['href' => '../administracion_cuenta/']);
 
         }
-        return $link;
+        return div(div($link,1), "top_30");
     }
 
     function valida_activo_ventas_mayoreo($estado_actual, $ventas_mayoreo)
@@ -99,11 +99,27 @@ if (!function_exists('invierte_date_time')) {
         if ($num_images == 0) {
 
 
-            $msj = "MUESTRA IMAGENES SOBRE TU " . $tipo_promocion . " A TUS CLIENTES";
-            $text = heading_enid($msj, 4, ["class" => 'mensaje_imagenes_visible shadow'], 1);
-            $notificacion = "TU " . $tipo_promocion . " NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES";
-            $text .= div($notificacion, ["class" => "notificacion_publicar_imagenes top_40 bottom_40"], 1);
-            return $text;
+
+            $text[] = heading_enid(
+                "MUESTRA IMAGENES SOBRE TU " . $tipo_promocion . " A TUS CLIENTES"
+                ,
+                5
+                ,
+                'mensaje_imagenes_visible white shadow padding_10 black_enid_background'
+                ,
+                1
+            );
+
+
+            $text[] = div(
+                "TU " . $tipo_promocion . " NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES"
+
+                ,
+                "notificacion_publicar_imagenes top_40 bottom_40"
+                ,
+                1);
+
+            return append_data($text);
         }
     }
 
