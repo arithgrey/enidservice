@@ -93,18 +93,6 @@
     color: white !important;
     font-size: 1.5em !important;
 }
-.contenedor_sugeridos{
-
-    min-height: 300px;
-
-}
 .img_sugerencia{
-
-
-    width: 250px;
-    align-self: flex-end;
-}
-.imagen_sugerencia{
-    max-height: 270px;
-
+    min-height: 230px;
 }

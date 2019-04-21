@@ -198,6 +198,7 @@ class Home extends CI_Controller
 
 		}
 		$data["tipificaciones"] = $this->get_tipificaciones($id_recibo);
+        $data["id_servicio"] =  $recibo[0]["id_servicio"];
 		$this->principal->show_data_page($data, 'seguimiento');
 	}
 

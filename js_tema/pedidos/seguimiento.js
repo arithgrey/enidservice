@@ -1,7 +1,7 @@
 "use strict";
 $(document).ready(function(){
-
 	valida_notificacion_pago();
+	carga_productos_sugeridos();
 });
 let valida_notificacion_pago = function(){
 
@@ -56,3 +56,16 @@ let procesa_notificacion = function(data){
 		    }
 		});
 };
+let carga_productos_sugeridos = function(){
+
+	let url 		=  "../q/index.php/api/servicio/sugerencia/format/json/";
+	let q 			=  get_parameter(".qservicio");
+	let data_send 	= {"id_servicio" :  q};
+	request_enid( "GET",  data_send, url, response_carga_productos);
+}
+let response_carga_productos = function(data){
+	if (data["sugerencias"] == undefined ){
+		$(".text_interes").removeClass("hidden");
+		llenaelementoHTML(".place_tambien_podria_interezar" , data);
+	}
+}

@@ -1307,15 +1307,15 @@ if (!function_exists('invierte_date_time')) {
             $img = img([
                 'src' => $url_img,
                 'alt' => $metakeyword,
-                "class" => "imagen_sugerencia padding_5 top_10 hover_padding  "
+                "class" => "padding_5 top_10 hover_padding  "
 
             ]);
-            $imagenes[] = div(anchor_enid($img, ["href" => $url_info_producto]), ["class" => "img_sugerencia align-self-center "]);
+            $imagenes[] = div(anchor_enid($img, ["href" => $url_info_producto]), ["class" => "col-lg-3 producto_enid_img   "]);
 
         }
         $r[] = div(append_data($imagenes),
             [
-                "class" => "contenedor_sugeridos contenedor_sugeridos d-flex  justify-content-center     align-items-center align-self-center"
+                "class" => "contenedor_sugeridos contenedor_sugeridos "
             ]);
         return append_data($r);
 
