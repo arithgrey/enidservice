@@ -268,7 +268,7 @@ let muestra_seccion_video_servicio_facebook = function () {
 
 
 let muestra_seccion_desc_servicio = function (e) {
-
+    $(".note-codable").hide();
     let visible = $(".text_desc_servicio").is(":visible");
     let x = (visible == true) ? showonehideone(".input_desc_servicio_facturacion", ".text_desc_servicio") : showonehideone(".input_desc_servicio_facturacion", ".text_desc_servicio");
 }
@@ -1005,7 +1005,7 @@ let actualiza_ciclo_facturacion = function () {
     let url = "../q/index.php/api/servicio/ciclo_facturacion/format/json/";
     let data_send = $.param({
         "id_servicio": get_option("servicio"),
-        "ciclo_facturacion": get_option("id_ciclo_facturacion")
+        "id_ciclo_facturacion": get_option("id_ciclo_facturacion")
     });
     request_enid("PUT", data_send, url, function (data) {
         carga_informacion_servicio(4);

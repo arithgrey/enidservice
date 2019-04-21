@@ -42,11 +42,12 @@ class recibo extends REST_Controller
             $response = $this->recibo_model->get_tiempo_venta($param);
             if (count($response) > 0) {
 
-                $response = $this->principal->get_imagenes_productos(0, 1, 1, 1, $response);
                 $total_servicios = $this->recibo_model->get_tiempo_venta($param, 1);
-                $fecha_inicio =  $param["fecha_inicio"] ;
-                $fecha_termino =  $param["fecha_termino"] ;
-                $response = $this->get_costos_operativos($response, $fecha_inicio, $fecha_termino);
+                $response = $this->principal->get_imagenes_productos(0, 1, 1, 1, $response);
+
+
+
+                $response = $this->get_costos_operativos($response, $param["fecha_inicio"], $param["fecha_termino"]);
                 $response = get_format_tiempo_entrega($response, $total_servicios, $param);
 
             }
@@ -956,6 +957,13 @@ class recibo extends REST_Controller
 
             $response[$a]     =  $row;
             $id_servicio    =  $row["id_servicio"];
+
+
+            if ($fecha_inicio ===  $fecha_termino ){
+                $fecha_inicio =  "";
+                $fecha_termino = "";
+            }
+
             $ids_recibo     =  $this->recibo_model->get_recibo_ventas_pagas_servicio($id_servicio, $fecha_inicio, $fecha_termino);
 
             $total_costos_operativos  =  [];
@@ -982,10 +990,10 @@ class recibo extends REST_Controller
         }
 
         $response =  add_fields($response);
-        $r["total_costos"] =  $this->get_sumatoria_costos_operativos($response);
-        $r["total_pagos"]  =  $total;
+        $res["total_costos"] =  intval($this->get_sumatoria_costos_operativos($response));
+        $res["total_pagos"]  =  $total;
 
-        return $r;
+        return $res;
     }
 
 }

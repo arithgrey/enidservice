@@ -3,8 +3,7 @@ $(document).ready(function () {
 
 
     display_elements([".selector_estados_ventas", ".form_cantidad", ".form_cantidad_post_venta"], 0);
-    $('.datetimepicker4').datepicker();
-    $('.datetimepicker5').datepicker();
+
     $(".form_busqueda_pedidos").submit(busqueda_pedidos);
     $(".form_fecha_entrega").submit(editar_horario_entrega);
     $(".form_fecha_recordatorio").submit(crea_recordatorio);

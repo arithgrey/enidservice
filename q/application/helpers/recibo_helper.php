@@ -42,10 +42,9 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = [];
-
         $fecha_inicio = $param["fecha_inicio"];
         $fecha_termino = $param["fecha_termino"];
-
+        $utilidad_global = 0;
 
         foreach ($data as $row) {
 
@@ -104,8 +103,8 @@ if (!function_exists('invierte_date_time')) {
 
                 $total_costos =  $total_costos_operativos["total_costos"];
                 $total_pagos =  $total_costos_operativos["total_pagos"];
-
                 $utilidad =  ($total_pagos - $total_costos);
+                $utilidad_global  = $utilidad_global  + $utilidad;
             }
             $x[] = div(heading_enid("UTILIDAD",3).br().heading_enid( $utilidad." MXN " ,  5), ["class" => "col-lg-3 text-center align-self-center"]);
 
@@ -114,7 +113,9 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        return $response;
+        $r[] =  heading_enid("UTILIDAD TOTAL: " . $utilidad_global . "MXN " ,4);
+        $r[] =  append_data($response);
+        return $r;
 
 
     }

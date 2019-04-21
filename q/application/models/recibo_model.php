@@ -183,14 +183,31 @@ class Recibo_model extends CI_Model
         $tipo_orden = $param["tipo_orden"];
         $ops_tipo_orden = ["", "fecha_registro", "fecha_entrega", "fecha_cancelacion", "fecha_pago", "fecha_contra_entrega"];
         $tipo_entrega = $param["tipo_entrega"];
-
         $extra = " AND DATE(p." . $ops_tipo_orden[$tipo_orden] . ") BETWEEN '" . $fecha_inicio . "' AND '" . $fecha_termino . "' ";
+
+
+
+
+
+
+
         switch ($tipo_orden) {
             case 0:
 
                 break;
             case 1:
-                $extra = " AND DATE(p." . $ops_tipo_orden[$tipo_orden] . ") BETWEEN '" . $fecha_inicio . "' AND DATE_ADD('" . $fecha_termino . "' ,  INTERVAL 1 DAY)  ";
+
+
+                if ( (array_key_exists("servicio", $param) && $param["servicio"] > 0) && $fecha_inicio === $fecha_termino  ){
+
+                    $extra = "";
+
+                }else{
+
+                    $extra = " AND DATE(p." . $ops_tipo_orden[$tipo_orden] . ") BETWEEN '" . $fecha_inicio . "' AND DATE_ADD('" . $fecha_termino . "' ,  INTERVAL 1 DAY)  ";
+                }
+
+
 
                 break;
             case 2:
@@ -891,11 +908,9 @@ class Recibo_model extends CI_Model
 
             $fecha_inicio = $param['fecha_inicio'];
             $fecha_termino = $param['fecha_termino'];
-
-            $extra_tiempo = " AND p.fecha_registro BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'  ";
+            $extra_tiempo = " AND DATE( p.fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'  ";
 
         }
-
 
         $query_get = "";
         if ($total > 0) {
@@ -942,6 +957,8 @@ class Recibo_model extends CI_Model
                 ";
 
 
+
+
         }
 
         return $this->db->query($query_get)->result_array();
@@ -951,19 +968,27 @@ class Recibo_model extends CI_Model
     function get_recibo_ventas_pagas_servicio($id_servicio, $fecha_inicio, $fecha_termino)
     {
 
+        $extra_fecha =  "";
+
+        if (strlen($fecha_inicio) > 3  && strlen($fecha_termino) >  3){
+
+            $extra_fecha =  "  
+                            AND  
+                            DATE(p.fecha_registro) 
+                            BETWEEN '{$fecha_inicio}'
+                            AND 
+                            '{$fecha_termino}' ";
+        }
         $query_get = "SELECT 
                             p.id_proyecto_persona_forma_pago  recibo,
                             p.saldo_cubierto  
                             FROM proyecto_persona_forma_pago p 
                             WHERE                             
-                            p.saldo_cubierto > 1 
+                            p.saldo_cubierto > 1
                             AND 
-                            p.id_servicio > $id_servicio 
-                            AND  
-                            p.fecha_registro 
-                            BETWEEN '{$fecha_inicio}'
-                            AND 
-                            '{$fecha_termino}' ";
+                                 id_servicio = {$id_servicio}                         
+                            " . $extra_fecha;
+
 
 
         return $this->db->query($query_get)->result_array();

@@ -11,9 +11,6 @@
     margin-top: 20px;
 }
 
-.titulo_producto_servicio {
-    margin-top: 20px;
-}
 
 .tutulo_compras_en_casa {
     margin-top: 20px;
@@ -50,9 +47,6 @@
     font-size: 1.3em;
 }
 
-.no_tel {
-    margin-left: 10px;
-}
 
 @media only screen and (max-width: 400px) {
     .productos_sugeridos {

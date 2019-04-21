@@ -356,6 +356,7 @@ if (!function_exists('invierte_date_time')) {
             ];
 
             $select = "<select " . add_attributes($config) . ">";
+
             for ($a = 1; $a < valida_maximo_compra($flag_servicio, $existencia); $a++) {
 
                 $select .= "<option value=" . $a . ">" . $a . "</option>";

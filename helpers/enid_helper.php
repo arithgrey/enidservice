@@ -31,16 +31,20 @@ if (!function_exists('span')) {
     function span($info, $attributes = [], $row = 0)
     {
 
-
+        $attr = "";
         if (is_array($attributes) && count($attributes) > 0) {
 
             $attr = add_attributes($attributes);
 
         } else {
 
-            $att = [];
-            $att["class"] = $attributes;
-            $attr = add_attributes($att);
+            if (is_string($attributes) && strlen(trim($attributes)) > 0) {
+                $att = [];
+                $att["class"] = $attributes;
+                $attr = add_attributes($att);
+
+            }
+
         }
 
         $base = "<span" . $attr . ">" . $info . "</span>";
@@ -346,11 +350,34 @@ if (!function_exists('anchor_enid')) {
     }
 }
 if (!function_exists('get_td')) {
-    function get_td($val = '', $attributes = '')
+    function get_td($val = '', $attributes = [])
     {
 
-        $attr = add_attributes($attributes);
-        return "<td " . $attr . " NOWRAP >" . $val . "</td>";
+        if (is_array($attributes)) {
+
+            $attr = add_attributes($attributes);
+            return "<td " . $attr . " NOWRAP >" . $val . "</td>";
+
+        } else {
+
+            if(is_string($attributes) && strlen($attributes) > 0 ){
+
+                $att["class"] = $attributes;
+                $attr = add_attributes($att);
+                return "<td " . $attr . " NOWRAP >" . $val . "</td>";
+
+
+            }else{
+
+                $attr = add_attributes($attributes);
+                return "<td " . $attr . " NOWRAP >" . $val . "</td>";
+
+            }
+
+
+
+        }
+
     }
 }
 if (!function_exists('get_th')) {
@@ -389,13 +416,28 @@ if (!function_exists('heading_enid')) {
     {
 
         if (is_numeric($attributes) && $attributes > 0) {
+
             $label = "<h$h>" . $data . "</h$h>";
             $e = addNRow($label);
             return $e;
+
         } else {
-            $label = "<h$h " . add_attributes($attributes) . ">" . $data . "</h$h>";
-            $e = ($row_12 > 0) ? addNRow($label) : $label;
-            return $e;
+
+            if (is_string($attributes)) {
+
+                $att["class"] = $attributes;
+                $label = "<h$h " . add_attributes($att) . ">" . $data . "</h$h>";
+                $e = ($row_12 > 0) ? addNRow($label) : $label;
+                return $e;
+
+            } else {
+
+                $label = "<h$h " . add_attributes($attributes) . ">" . $data . "</h$h>";
+                $e = ($row_12 > 0) ? addNRow($label) : $label;
+                return $e;
+            }
+
+
         }
 
 
@@ -587,6 +629,7 @@ if (!function_exists('create_button_easy_select')) {
     }
 }
 if (!function_exists('create_select')) {
+
     function create_select($data, $name, $class, $id, $text_option, $val, $row = 0, $def = 0, $valor = 0, $text_def = "")
     {
 

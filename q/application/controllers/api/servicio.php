@@ -488,10 +488,10 @@ class Servicio extends REST_Controller
 			$servicio = $this->serviciosmodel->get([], ["id_servicio" => $param["id_servicio"]]);
 			$data["servicio"] = $servicio;
 			$this->set_option("servicio", $servicio);
+            $data["costo_envio"] = 0;
 			if ($servicio[0]["flag_servicio"] == 0) {
 				$this->crea_data_costo_envio();
-				$data["costo_envio"] =
-					$this->principal->calcula_costo_envio($this->crea_data_costo_envio());
+				$data["costo_envio"] = $this->principal->calcula_costo_envio($this->crea_data_costo_envio());
 			}
 
 			$data["clasificaciones"] = $this->carga_clasificaciones($data["servicio"]);
