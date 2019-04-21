@@ -274,6 +274,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $extra = ($status == 9 || $status == 7 || $status == 11 || $status == 12) ? " entregado" : "";
+            $extra = ( $status == 10 ) ? " cancelado " : $extra;
 
 
             $tb .= "<tr id='" . $recibo . "' class='desglose_orden cursor_pointer  " . $extra . "' >";

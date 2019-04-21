@@ -1209,7 +1209,9 @@ select {
 .producto_enid {
     height: 310px !important;
 }
-
+.producto_enid_img{
+    height: 230px;
+}
 .texto_precio {
     background: #030a27;
     padding: 5px;

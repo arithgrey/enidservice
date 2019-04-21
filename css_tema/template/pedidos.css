@@ -3,7 +3,13 @@
 }
 
 .entregado {
-    background: #0055d7;
+
+    background: #033178;
+    color: white;
+}
+.cancelado {
+
+    background: #ff7266;
     color: white;
 }
 
