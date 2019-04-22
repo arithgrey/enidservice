@@ -825,10 +825,17 @@ if (!function_exists('invierte_date_time')) {
                 ]),
                 1
             );
-            $x[] = input_hidden(["name" => "servicio", "value" => $id_servicio]);
 
+            $x[] = input_hidden(["name" => "servicio", "value" => $id_servicio]);
             $x[] = div(guardar("GUARDAR", ["class" => "top_30"]), 1);
             $x[] = div(place("response_link_dropshipping"), 1);
+
+
+            if (strlen($link_dropshipping) >  10){
+
+                $r[] = anchor_enid("Link" , ["href"=> $link_dropshipping , "class"=> "underline" , "target" => "_black"]);
+            }
+
             $r[] = div(append_data($x), "input_link_dropshipping");
 
 
