@@ -321,7 +321,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_url_imagen_post')) {
         function get_url_imagen_post($id_servicio)
         {
-            return "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id_servicio . "/";
+            return "http://enidservice.com/inicio/img_tema/productos/".$id_servicio;
         }
     }
     if (!function_exists('costruye_meta_keyword')) {

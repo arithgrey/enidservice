@@ -172,7 +172,13 @@ class Home extends CI_Controller
 		$this->crea_historico_vista_servicio($id_servicio);
 		$data["url_actual"] = get_url_request("");
 		$data["meta_keywords"] = $this->get_option("meta_keywords");
-		$data["url_img_post"] = get_url_imagen_post($this->get_option("id_servicio"));
+
+        $data["url_img_post"] = "";
+		if (count($data["imgs"]) > 0 ){
+
+            $data["url_img_post"] = get_url_imagen_post($data["imgs"][0]["nombre_imagen"]);
+        }
+
 		$data["desc_web"] = $this->get_option("desc_web");
 		$data["id_servicio"] = $id_servicio;
 		$data["existencia"] = $this->get_existencia($id_servicio);
