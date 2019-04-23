@@ -175,7 +175,7 @@ class Home extends CI_Controller
 
         $data["url_img_post"] = "";
 		if (count($data["imgs"]) > 0 ){
-
+            
             $data["url_img_post"] = get_url_imagen_post($data["imgs"][0]["nombre_imagen"]);
         }
 
