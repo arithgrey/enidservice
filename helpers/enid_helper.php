@@ -1573,11 +1573,10 @@ if (!function_exists('get_format_fecha_busqueda')) {
 
 
         $r[] = get_btw(
-            div("Inicio", ["class" => 'strong']),
+            div("Inicio", 'strong top_30 '),
             div(input([
-                "data-date-format" => "yyyy-mm-dd",
                 "name" => 'fecha_inicio',
-                "class" => "form-control input datetimepicker4",
+                "class" => "form-control input-sm top_30",
                 "id" => 'datetimepicker4',
                 "value" => $vinicio,
                 "type" => "date"
@@ -1587,22 +1586,22 @@ if (!function_exists('get_format_fecha_busqueda')) {
 
 
         $r[] = get_btw(
-            div("Fin", ["class" => 'strong']),
+            div("Fin", 'strong top_30'),
             div(input(
                 [
-                    "data-date-format" => "yyyy-mm-dd",
+
                     "name" => 'fecha_termino',
-                    "class" => "form-control input datetimepicker5",
+                    "class" => "form-control input-sm top_30",
                     "id" => 'datetimepicker5',
                     "value" => $vfin,
                     "type" => "date"
 
                 ]
             )),
-            'col-lg-4 d-flex align-items-center justify-content-between'
+            'col-lg-4 d-flex align-items-center justify-content-between '
         );
 
-        $r[] = div(guardar("Búsqueda " . icon("fa fa-chevron-right") . icon("fa fa-chevron-right")), ["class" => 'col-lg-4 ']);
+        $r[] = div(guardar("Búsqueda " . icon("fa fa-chevron-right") . icon("fa fa-chevron-right")), 'col-lg-4 top_30');
 
         return append_data($r);
 

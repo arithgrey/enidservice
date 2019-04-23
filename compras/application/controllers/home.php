@@ -37,21 +37,7 @@ class Home extends CI_Controller
 			"compras.css"
 
 		];
-
-		$data["js"] =
-
-			[
-				"js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-				"js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-				"js/bootstrap-daterangepicker/moment.min.js",
-				"js/bootstrap-daterangepicker/daterangepicker.js",
-				"js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-				"js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-				"js/pickers-init.js",
-				"alerts/jquery-confirm.js",
-				"compras/principal.js"
-
-			];
+		$data["js"] = [ "compras/principal.js" ];
 		return $data;
 	}
 

@@ -2,24 +2,30 @@
 
 $r[] = form_open("", ["class" => "form_tiempo_entrega", "id" => "form_tiempo_entrega"]);
 $r[] = div(
-    input(
+
+    div(input(
+
         [
             "name" => "q",
-            "placeholder" => "id, nombre"
+            "placeholder" => "id, nombre",
+            "class" => "top_30 col-lg-12"
         ]
-    ),4
+    ),12)
+
+    ,
+    4
 );
 
 $r[] =  div(get_format_fecha_busqueda(),8);
 
 
 $r[] = form_close();
-$form = div(append_data($r),13);
+$form = div(append_data($r),1);
 ?>
-
+<?=br(3)?>
 <?= div(
     get_btw(
-        heading_enid("ARTÍCULO", 3)
+        div(heading_enid("ARTÍCULO", 3, ["class"=> "col-lg-12"]),1)
         ,
         $form
         ,

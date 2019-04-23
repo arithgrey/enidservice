@@ -12,15 +12,12 @@ foreach ($servicios as $row) {
     $vista = $row["vista"];
     $id_error = "imagen_" . $id_servicio;
 
-
+    $r = [];
     $r[] = img([
         "src" => $url_imagen,
         "style" => 'width: 44px!important;height: 44px;',
-        "id" => $id_error,
-        'onerror' => "reloload_img('" . $id_error . "','" . $url_imagen . "');"
     ]);
-    $r[] = div($nombre_servicio . "|" . $precio . "MXN");
-    $r[] = div($fecha_registro . "|" . "alcance" . $vista);
+    $r[] = div("alcance" . $vista);
 
     ?>
 
