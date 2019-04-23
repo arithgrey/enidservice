@@ -22,6 +22,14 @@ $(document).ready(function () {
     $(".f_actividad_productos_usuarios").submit(carga_repo_usabilidad);
     $(".f_dipositivos").submit(carga_repo_dispositivos);
     $(".form_tipos_entregas").submit(carga_repo_tipos_entregas);
+
+
+    $(".cotizaciones").click(function(){set_menu("#btn_menu_tab");} );
+    $(".btn_repo_afiliacion").click(function () {set_menu("#btn_usuarios");});
+
+
+
+
 });
 /*Aquí se carga la data de las métricas del visitas(día)*/
 let carga_uso_sistema = function(e) {
@@ -78,6 +86,9 @@ let carga_metricas_mail_marketing = function(e) {
     e.preventDefault();
 }
 let indicadores = function(e) {
+
+
+    
 
     let data_send = $(".form_busqueda_global_enid").serialize() + "&" + $.param({"vista": "1"});
     let url = "../q/index.php/api/enid/metricas_cotizaciones/format/json/";
@@ -327,252 +338,9 @@ let  comparativa_dia = function() {
     let data_send = {};
     request_enid("GET", data_send, url, response_comparativa_dia, ".place_prospectos_comparativa");
 }
+let set_menu = function (go) {
 
-
-/*
-function carga_info_cotizaciones(e) {
-    let num_cotizaciones = get_parameter_enid($(this), "num_cotizaciones");
-    if (num_cotizaciones > 0) {
-        $("#mas_info").modal("show");
-        let fecha = get_parameter_enid($(this), "id");
-        let data_send = {"fecha": fecha};
-        let url = "../q/index.php/api/cotizaciones/cotizaciones_sitios_web/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_mas_info", 0, ".place_mas_info");
-    }
-}
-
-function carga_info_descarga_paginas_web(e) {
-
-    let num_contactos = get_parameter_enid($(this), "num_contactos");
-    if (num_contactos > 0) {
-
-        $("#mas_info").modal("show");
-        let fecha = get_parameter_enid($(this), "id");
-        let data_send = {"fecha": fecha};
-        let url = "../q/index.php/api/cotizaciones/sitios_web/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_mas_info", 0, ".place_mas_info");
-
-    }
+    $("#btn_repo_afiliacion").tab("show");
+    $(go).tab("show");
 
 }
-
-let carga_info_descarga_crm = function(e) {
-
-    let num_contactos = get_attr(this, "num_contactos");
-    if (get_parameter_enid($(this), "num_contactos") > 0) {
-
-        $("#mas_info").modal("show");
-        let fecha = get_parameter_enid($(this), "id");
-        let data_send = {"fecha": fecha};
-        let url = "../q/index.php/api/cotizaciones/crm/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_mas_info", 0, ".place_mas_info");
-    }
-}
-let carga_info_registros = function(e) {
-
-    let num_contactos = get_attr(this, "num_contactos");
-    if (get_parameter_enid($(this), "num_contactos") > 0) {
-
-        $("#mas_info").modal("show");
-        let fecha = get_parameter_enid($(this), "id");
-        let data_send = {"fecha": fecha};
-        let url = "../q/index.php/api/base/registros/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_mas_info", 0, ".place_mas_info");
-    }
-}
-let carga_info_enviados = function(e) {
-
-    if (get_parameter_enid($(this), "num_contactos") > 0) {
-
-        $("#mas_info").modal("show");
-        let fecha = get_parameter_enid($(this), "id");
-        let data_send = {"fecha": fecha};
-        let url = "../q/index.php/api/base/enviados/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_mas_info", 0, ".place_mas_info");
-    }
-}
-let  carga_info_blogs = function(e) {
-
-    let num_blogs = get_attr(this, "num_blogs");
-    if (num_blogs > 0) {
-
-        $("#mas_info").modal("show");
-        let fecha = get_parameter_enid($(this), "id");
-        let data_send = {"fecha": fecha};
-        let url = "../q/index.php/api/blog/fecha/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_mas_info", 0, ".place_mas_info");
-    }
-
-}
-
-let cargar_info_clientes_prospecto = function(e) {
-
-    let valor = get_attr(this, "num_proyectos");
-
-    if (valor > 0) {
-
-        let fecha = get_parameter_enid($(this), "id");
-        set_option("fecha", fecha);
-        let data_send = {fecha: get_fecha(), "tipo": 1};
-        let url = "../q/index.php/api/productividad/num_clientes/format/json/";
-        request_enid("GET", data_send, url, response_carga_info_cliente_prospecto, ".place_mas_info");
-    }
-}
-let response_carga_info_cliente_prospecto = function(data) {
-
-    $("#mas_info").modal("show");
-    llenaelementoHTML(".place_mas_info", data);
-}
-let response_cargar_contactos_promociones = function(data){
-
-    $("#mas_info").modal("show");
-    llenaelementoHTML(".place_mas_info", data);
-}
-let cargar_contactos_promociones = function(e) {
-
-    let valor = get_attr(this, "num_contactos");
-    if (valor > 0) {
-
-        let fecha = get_parameter_enid($(this), "id");
-        set_option("fecha", fecha);
-        let data_send = {fecha: get_fecha(), "tipo": 15};
-        let url = "../q/index.php/api/productividad/contactos_lead/format/json/";
-        request_enid("GET", data_send, url, response_cargar_contactos_promociones, ".place_mas_info");
-    }
-}
-function cargar_info_sistema(e) {
-
-    let valor = get_attr(this, "num_proyectos");
-    if (valor > 0) {
-
-        let fecha = get_parameter_enid($(this), "id");
-        set_option("fecha", fecha);
-        let data_send = {fecha: get_fecha(), "tipo": 1};
-
-        let url = "../q/index.php/api/productividad/num_clientes_sistema/format/json/";
-        $.ajax({
-            url: url,
-            type: "GET",
-            data: data_send,
-            beforeSend: function () {
-                show_load_enid(".place_mas_info", "Cargando...");
-            }
-        }).done(function (data) {
-
-            $("#mas_info").modal("show");
-            llenaelementoHTML(".place_mas_info", data);
-
-        }).fail(function () {
-            show_error_enid(".place_mas_info", "Error al actualizar incidencia");
-        });
-
-    }
-}
-let response_info_afiliados = function(data) {
-    $("#mas_info").modal("show");
-    llenaelementoHTML(".place_mas_info", data);
-}
-
-let cargar_info_afiliados = function(e) {
-
-    let valor = get_attr(this, "num_afiliados");
-    if (valor > 0) {
-        let fecha = get_parameter_enid($(this), "id");
-        set_option("fecha", fecha);
-        let data_send = {fecha: get_fecha(), "tipo": 1};
-        let url = "../q/index.php/api/productividad/num_afiliados/format/json/";
-        request_enid("GET", data_send, url, response_info_afiliados, ".place_mas_info", 0, ".place_mas_info");
-    }
-}
-
-function evaluar(e) {
-
-    incidencia = get_parameter_enid($(this), "id");
-    set_option("inicidencia", incidencia);
-}
-
-function data_eventos_g(e){
-	let periodo 	=  get_parameter_enid($(this) , "id");
-	let url 		=  "../q/index.php/api/enid/resumen_global_admin_e/format/json/";
-	let data_send 	= {periodo :  periodo};
-	request_enid( "GET",  data_send, url, 1, ".info-resumen-prospecto" , "" , ".info-resumen-prospecto" );
-}
-function carga_info_descarga_adwords(e) {
-
-    if (get_parameter_enid($(this), "num_contactos") > 0) {
-
-        $("#mas_info").modal("show");
-        let fecha = get_parameter_enid($(this), "id");
-        let data_send = {"fecha": fecha};
-        let url = "../q/index.php/api/cotizaciones/adwords/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_mas_info", 0, ".place_mas_info");
-    }
-}
-function carga_miembros_empresa(e) {
-
-    $(".place_miembros").empty();
-    let empresa = get_parameter_enid($(this), "id");
-    let url = "../q/index.php/api/enid/miembros_cuenta/format/json/";
-    let data_send = {"id_empresa": empresa};
-
-    request_enid("GET", data_send, url,
-        function () {
-            llenaelementoHTML(".place_miembros", data);
-        }, ".place_miembros");
-}
-function carga_info_descarga_tienda_linea(e) {
-
-    if (get_parameter_enid($(this), "num_contactos") > 0) {
-
-        $("#mas_info").modal("show");
-        let fecha = get_parameter_enid($(this), "id");
-        let data_send = {"fecha": fecha};
-        let url = "../q/index.php/api/cotizaciones/tienda_en_linea/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_mas_info", 0, ".place_mas_info");
-    }
-
-}
-
-function cargar_info_clientes(e) {
-
-    let valor = get_attr(this, "num_proyectos");
-    if (valor > 0) {
-
-        let fecha = get_parameter_enid($(this), "id");
-        set_option("fecha", fecha);
-        let data_send = {fecha: get_fecha(), "tipo": 2};
-
-        let url = "../q/index.php/api/productividad/num_clientes/format/json/";
-        $.ajax({
-            url: url,
-            type: "GET",
-            data: data_send,
-            beforeSend: function () {
-                show_load_enid(".place_mas_info", "Cargando...");
-            }
-        }).done(function (data) {
-
-            $("#mas_info").modal("show");
-            llenaelementoHTML(".place_mas_info", data);
-
-        }).fail(function () {
-            show_error_enid(".place_mas_info", "Error al actualizar incidencia");
-        });
-
-    }
-}
-function carga_info_proyectos(e) {
-
-    let num_proyectos = get_attr(this, "num_proyectos");
-    if (num_proyectos > 0) {
-
-        $("#mas_info").modal("show");
-        let fecha = get_parameter_enid($(this), "id");
-        let data_send = {"fecha": fecha};
-        let url = "../q/index.php/api/portafolio/info_proyectos_fecha/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_mas_info", 0, ".place_mas_info");
-    }
-}
-
-
-*/

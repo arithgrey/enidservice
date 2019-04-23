@@ -30,13 +30,13 @@ class Inicio extends CI_Controller
 	{
 
 		$data["js"] = array(
-			"js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+			/*"js/bootstrap-datepicker/js/bootstrap-datepicker.js",
 			"js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
 			"js/bootstrap-daterangepicker/moment.min.js",
 			"js/bootstrap-daterangepicker/daterangepicker.js",
 			"js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
 			"js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-			"js/pickers-init.js",
+			"js/pickers-init.js",*/
 			"repo_enid/principal.js"
 		);
 

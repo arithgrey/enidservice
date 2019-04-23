@@ -10,6 +10,7 @@ $lista_terminos = "";
 $totales_solicitudes = 0;
 $totales_realizadas = 0;
 foreach ($info_global["lista_fechas"] as $row) {
+
     $fecha = $row["fecha"];
     $lista_fechas_text .= get_td($fecha, $style);
     $valor_solicitudes = get_valor_fecha_solicitudes($info_global["solicitudes"], $fecha);
@@ -18,6 +19,7 @@ foreach ($info_global["lista_fechas"] as $row) {
     $valor_terminos = tareas_realizadas($info_global["terminos"], $fecha);
     $totales_realizadas = $totales_realizadas + $valor_terminos;
     $lista_terminos .= get_td($valor_terminos, $style);
+
 }
 ?>
 <?= div("Atención al cliente/ tareas resueltas", ["class" => "blue_enid_background white"], 1) ?>
