@@ -14,16 +14,15 @@ if (!function_exists('invierte_date_time')) {
 
             $l[] = div($nombre,
                 [
-                    "class" =>
-                        "nombre_estacion cursor_pointer punto_encuentro",
+                    "class" => "nombre_estacion cursor_pointer punto_encuentro",
                     "id" => $id,
                     "nombre_estacion" => $nombre,
                     "costo_envio" => $costo_envio,
                     "flag_envio_gratis" => $flag_envio_gratis
 
-
                 ]);
         }
+
 
 
         $r[] = place("nombre_linea_metro");
@@ -32,9 +31,24 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("mensaje_cobro_envio");
         $r[] = guardar("CONTINUAR", ["class" => "btn_continuar_punto_encuentro"]);
         $x[] = place("quien_recibe");
-        $x[] = div(append_data($l), ["class" => "contenedor_estaciones"],1);
 
-        return div(append_data($r), ["class" => 'resumen_encuentro']) . div(append_data($x), ["class" => 'resumen_mensaje_pago']);
+
+
+        $x[] = div(
+            div(
+                input([
+                    "class" => "search",
+                    "name" => "q"
+                ]),
+                4
+                ,
+                1
+            ),13);
+
+
+        $x[] = div(append_data($l),  "contenedor_estaciones ",1);
+
+        return div(append_data($r), 'resumen_encuentro' ) . div(append_data($x), 'resumen_mensaje_pago' );
     }
 
 }

@@ -34,8 +34,19 @@ class Punto_encuentro extends REST_Controller
 
 		if (if_ext($param, "id,v")) {
 
-			$params_where = ["id_linea_metro" => $param["id"]];
-			$response = $this->punto_encuentro_model->get([], $params_where, 100);
+
+
+			if (strlen($param["q"]) >  2){
+
+                $response = $this->punto_encuentro_model->get_like($param["id"] ,  $param["q"]);
+
+            }else{
+
+                $response = $this->punto_encuentro_model->get([], ["id_linea_metro" => $param["id"]], 100);
+            }
+
+
+
 			if ($param["v"] == 1) {
 
 				$flag_envio_gratis = $this->get_flag_envio_gratis($param["servicio"]);
