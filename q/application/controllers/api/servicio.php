@@ -724,9 +724,7 @@ class Servicio extends REST_Controller
 
 		$lista_productos = $this->agrega_vista_servicios($servicios["servicios"]);
 
-
-		$paginacion = $this->principal->create_pagination($config);
-		return get_base_empresa($paginacion, $busqueda, $num_servicios, $lista_productos);
+		return get_base_empresa($this->principal->create_pagination($config) , $busqueda, $num_servicios, $lista_productos);
 
 
 	}

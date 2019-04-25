@@ -39,7 +39,8 @@ class Inicio extends CI_Controller
 	private function getCssJs($data)
 	{
 
-		$data["js"] = ['planes_servicios/principal.js',
+		$data["js"] = [
+		    'planes_servicios/principal.js',
 			'planes_servicios/img.js',
 			'js/summernote.js',
 			'alerts/jquery-confirm.js'
