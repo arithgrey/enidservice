@@ -7,7 +7,15 @@
             <div class="tab-pane <?= valida_seccion_activa(1, $activa) ?>" id='tab_abrir_ticket'>
                 <?= $this->load->view("../../../view_tema/formularios/busqueda_tickets") ?>
             </div>
-            <?= div(place("place_form_tickets"), ["class" => "tab-pane " . valida_seccion_activa(3, $activa), "id" => "tab_nuevo_ticket"]) ?>
+            <?= div(
+                    div(place("place_form_tickets"),1),
+
+                    [
+                            "class" => "tab-pane " . valida_seccion_activa(3, $activa),
+                        "id" => "tab_nuevo_ticket"
+                    ]
+            ) ?>
+
         </div>
     </div>
 </div>
