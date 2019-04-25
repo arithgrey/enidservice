@@ -196,30 +196,16 @@ if (!function_exists('invierte_date_time')) {
     function create_vista($servicio)
     {
 
-        $in_session = $servicio["in_session"];
-        $extra_color = "";
+
         $id_servicio = $servicio["id_servicio"];
         $metakeyword = $servicio["metakeyword"];
-        $color = (get_param_def($servicio, "color") !== 0) ? $servicio["color"] : "";
-        $flag_servicio = $servicio["flag_servicio"];
-        $id_usuario = $servicio["id_usuario"];
-        $id_usuario_actual = $servicio["id_usuario_actual"];
-        $url_info_producto = get_url_servicio($id_servicio);
-        $vista = ($in_session > 0) ? $servicio["vista"] : 0;
-        $existencia = ($in_session > 0) ? $servicio["existencia"] : 0;
         $url_img_servicio = $servicio["url_img_servicio"];
+        $in_session  =  $servicio["in_session"];
+        $id_usuario = $servicio["id_usuario"];
 
-        $p = [];
-        if ($in_session > 0) {
-            $p[] =
-                div(
-                    img([
-                        'src' => $url_img_servicio,
-                        'alt' => $metakeyword,
-                        'style' => "max-height: 270px !important",
-                        'class' => "padding_5 top_10 hover_padding"
-                    ]), 1);
-        } else {
+
+
+
             $p[] =
                 div(
                     img([
@@ -230,29 +216,38 @@ if (!function_exists('invierte_date_time')) {
                     ])
                 );
 
-        }
 
-
-        $response = anchor_enid(
-            append_data($p),
-            [
-                "href" => get_url_servicio($id_servicio),
-                "class" => "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 "
-
-            ]
-        );
 
         if ($in_session > 0) {
 
-            $p[] = div(get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session), 1);
-            $p[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_actual), 1);
-            $p[] = div(muestra_vistas_servicio($in_session, $vista), 1);
 
-            $r = div($response, ["class" => "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 "], 1);
-            $response = $r . append_data($p);
-            $response = div($response, ["class" => "producto_enid d-flex flex-column justify-content-center border", "style" => "height:600px"]);
 
+
+            $response[] = div(anchor_enid(
+                append_data($p),
+                [
+                    "href" => get_url_servicio($id_servicio),
+
+                ]
+            ));
+            $response[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $servicio["id_usuario_actual"]));
+
+            $response =  div(append_data($response), "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 ");
+
+
+        }else{
+            $response = anchor_enid(
+                append_data($p),
+                [
+                    "href" => get_url_servicio($id_servicio),
+                    "class" => "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 "
+
+                ]
+            );
         }
+
+
+
 
 
         return $response;
@@ -262,16 +257,20 @@ if (!function_exists('invierte_date_time')) {
     function get_base_empresa($paginacion, $busqueda, $num_servicios, $productos)
     {
 
+
+
         $paginacion = addNRow(div($paginacion, 1));
-        $l = "";
+        $r = [];
         foreach ($productos as $row) {
-            $l .= div($row, ["class" => 'col-lg-3 top_30']);
+            $r[] = div($row);
         }
-        $t = addNRow(icon("fa fa-search") . "Tu búsqueda de" . $busqueda . "(" . $num_servicios . "Productos)");
-        $t .= addNRow($paginacion);
-        $bloque = addNRow(div($t . $l, 1));
-        $bloque .= addNRow($paginacion);
-        return $bloque;
+        $t[] = addNRow(icon("fa fa-search") . "Tu búsqueda de" . $busqueda . "(" . $num_servicios . "Productos)");
+        $t[] = addNRow($paginacion);
+        $t[] = append_data($r);
+
+        $bloque[] = addNRow(div(append_data($t) , 1));
+        $bloque[] = addNRow($paginacion);
+        return append_data($bloque);
 
     }
 
@@ -754,7 +753,7 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         if ($in_session > 0) {
             if ($id_usuario == $id_usuario_registro_servicio) {
-                $response = icon("servicio fa fa-pencil", ["id" => $id_servicio]);
+                $response = icon("top_40  bottom_40 servicio fa fa-pencil", ["id" => $id_servicio]);
             }
         }
         return $response;

@@ -59,11 +59,13 @@ if (!function_exists('invierte_date_time')) {
 			$response = div($filtro, 12);
 
 		} else {
+
 			$response = get_btw(
-				div($filtro),
-				div($paginacion),
-				"display_flex_enid"
+				div(div($filtro, "pull-left"),6),
+				div(div($paginacion, "pull-right"), 6),
+				"row d-flex align-items-center justify-content-between"
 			);
+			$response = div($response, 12);
 		}
 		return $response;
 

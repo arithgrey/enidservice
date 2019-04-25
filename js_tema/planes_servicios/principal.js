@@ -37,6 +37,7 @@ let cancelar_registro = function () {
 
 let carga_servicios = function () {
 
+
     display_elements([".texto_ventas_titulo", ".contenedor_busqueda", ".contenedor_busqueda_articulos"], 1);
     let url = "../q/index.php/api/servicio/empresa/format/json/";
     let orden = get_parameter("#orden");
