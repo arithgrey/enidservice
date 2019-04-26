@@ -706,6 +706,7 @@ class Recibo_model extends CI_Model
         } else {
             $resumen = "";
             $resumen = $num_ciclos . " " . $servicio["nombre_servicio"];
+            return $resumen;
         }
 
     }
@@ -764,6 +765,10 @@ class Recibo_model extends CI_Model
         $costo_envio_cliente = 0;
         $costo_envio_vendedor = 0;
         $flag_servicio = ($tipo_entrega < 5) ? 0 : $servicio["flag_servicio"];
+        if ($servicio["flag_servicio"] > 0 ){
+            $flag_servicio  =  1;
+        }
+
         $monto_a_pagar = $precio;
         if ($flag_servicio == 0 && $tipo_entrega > 1) {
 
@@ -773,9 +778,11 @@ class Recibo_model extends CI_Model
 
         } else {
 
-            $costo_envio_cliente = $param["costo_envio"];
-            $costo_envio_vendedor = 0;
+            if (array_key_exists("costo_envio" , $param) && $param["costo_envio"] != null && $param["costo_envio"]  > 0 ){
 
+                $costo_envio_cliente = $param["costo_envio"];
+                $costo_envio_vendedor = 0;
+            }
         }
         $id_ciclo_facturacion = $param["id_ciclo_facturacion"];
         $talla = $param["talla"];

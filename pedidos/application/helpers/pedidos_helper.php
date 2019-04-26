@@ -693,6 +693,7 @@ if (!function_exists('invierte_date_time')) {
             $asignado = (is_array($domicilio) && $domicilio["tipo_entrega"] == 1) ? $domicilio["domicilio"][0]["id"] : 0;
             $lista = [];
             $a = 1;
+            $r = [];
             foreach ($puntos_encuentro as $row) {
 
                 $id = $row["id"];

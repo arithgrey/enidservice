@@ -64,7 +64,10 @@ class Home extends CI_Controller
 		$data["id_servicio"] = $this->input->get("producto");
 		$data["proceso_compra"] = 1;
 
+
 		$param = $this->input->post();
+
+
 		$data["plan"] = $param["plan"];
 		$data["extension_dominio"] = $param["extension_dominio"];
 		$data["ciclo_facturacion"] = $param["ciclo_facturacion"];
@@ -72,7 +75,7 @@ class Home extends CI_Controller
 		$data["q2"] = $param["q2"];
 		$data["num_ciclos"] = $param["num_ciclos"];
 		$data["orden_pedido"] = 1;
-			$data["carro_compras"]      =  (array_key_exists("carro_compras", $param)) ? $param["carro_compras"] : 0;
+		$data["carro_compras"]      =  (array_key_exists("carro_compras", $param)) ? $param["carro_compras"] : 0;
 		$data["id_carro_compras"]   =  (array_key_exists("id_carro_compras", $param)) ? $param["id_carro_compras"] : 0;
 
 
@@ -87,8 +90,8 @@ class Home extends CI_Controller
 	private function load_servicio($param)
 	{
 
-		$id_servicio = get_info_producto($param["producto"]);
 
+	    $id_servicio = get_info_producto($param["producto"]);
 		$this->set_option("id_servicio", $id_servicio);
 		$data = $this->principal->val_session("");
 		$data["proceso_compra"] = get_info_variable($param, "proceso");
@@ -152,20 +155,19 @@ class Home extends CI_Controller
 		$data["info_servicio"]["servicio"] = $servicio;
 		$data["costo_envio"] = "";
 		$data["tiempo_entrega"] = "";
-
+        $data["ciclos"] =  "";
 		if ($servicio[0]["flag_servicio"] == 0) {
 			$data["costo_envio"] = $this->calcula_costo_envio($this->crea_data_costo_envio());
 			$tiempo_promedio_entrega = $servicio[0]["tiempo_promedio_entrega"];
 			$data["tiempo_entrega"] = $this->valida_tiempo_entrega($tiempo_promedio_entrega);
 
 		}
-
 		$this->set_option("flag_precio_definido", 0);
 
 
 		$data["imgs"]    = $this->principal->get_imagenes_productos($id_servicio, 1 ,10);
-
 		$this->set_option("meta_keywords", costruye_meta_keyword($this->get_option("servicio")[0]));
+
 
 		$data["meta_keywords"] = $this->get_option("meta_keywords");
 		$this->costruye_descripcion_producto();
@@ -179,9 +181,12 @@ class Home extends CI_Controller
             $data["url_img_post"] = get_url_imagen_post($data["imgs"][0]["nombre_imagen"]);
         }
 
+
 		$data["desc_web"] = $this->get_option("desc_web");
 		$data["id_servicio"] = $id_servicio;
 		$data["existencia"] = $this->get_existencia($id_servicio);
+
+
 
 		$data["css"] = ["css_tienda.css",
 			"producto_principal.css",
@@ -189,10 +194,19 @@ class Home extends CI_Controller
 			"producto.css"
 		];
 
+
 		$data["js"] = ['producto/principal.js'];
 		$this->principal->show_data_page($data, 'home');
 
 	}
+
+	private function get_ciclos_facturacion(){
+
+	    $q =  [];
+	    $api = "ciclo_facturacion/not_ciclo_facturacion/format/json/";
+        return $this->principal->api($api, $q );
+
+    }
 
 	private function get_tallas($id_servicio)
 	{
