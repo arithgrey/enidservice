@@ -1,6 +1,26 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_format_info_servicio($servicio, $ciclos ){
+
+
+        $servicio                   =   $servicio[0];
+        $id_ciclo_facturacion       =   $servicio["id_ciclo_facturacion"];
+        $precio                     =   $servicio["precio"];
+        $id_servicio                =   $servicio["id_servicio"];
+
+        $response =  "";
+        if ($precio > 0 && $id_ciclo_facturacion == 9){
+            $response       =   guardar("Pedir más información",["class"=> "bottom_30"],1,1,1, "../pregunta/?tag=" . $id_servicio . "&disponible=1" );
+        }
+        return $response;
+
+
+
+
+
+    }
+
     function get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio)
     {
 
@@ -71,14 +91,14 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = "";
-        if ($flag_servicio == 0):
+        if ($flag_servicio < 1):
             if ($existencia > 0):
                 $response = get_form_compra($id_servicio, $flag_servicio, $existencia, $in_session, $q2);
             endif;
         else:
-            if ($precio > 0 && $id_ciclo_facturacion != 9): ;
-                $response = get_form_compra($id_servicio, $flag_servicio, $existencia, $in_session, $q2);
-            endif;
+            //if ($precio > 0 && $id_ciclo_facturacion != 9): ;
+                $response = get_form_compra_servicio($id_servicio);
+            //endif;
         endif;
         return $response;
     }
@@ -307,6 +327,27 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
+    function get_form_compra_servicio($id_servicio)
+    {
+
+        $url = "../procesar/?w=1";
+        $r[] = '<form action="' . $url . '" method="POST" >';
+        $r[] = form_hidden(["id_servicio" => $id_servicio, "es_servicio" => 1]);
+
+        $r[] = guardar(
+            "INICIAR COTIZACIÓN ",
+            [
+                'id' => 'AddToCart',
+                'class' => "top_30 bottom_30"
+            ],
+            1,
+            1);
+        $r[] = form_close();
+        return div(append_data($r), "contenedor_form");
+
+
+    }
+
 
     function valida_maximo_compra($flag_servicio, $existencia)
     {

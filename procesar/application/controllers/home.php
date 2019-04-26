@@ -26,9 +26,28 @@ class Home extends CI_Controller
 			&& ctype_digit($param["num_ciclos"])
 			&& $param["num_ciclos"] > 0 && array_key_exists("ciclo_facturacion", $param)
 			&& $param["num_ciclos"] > 0 && $param["num_ciclos"] < 10
-			&& ctype_digit($param["plan"]) && $param["plan"] > 0) {
-			$this->crea_orden_compra($param);
+			&& ctype_digit($param["plan"]) && $param["plan"] > 0
+
+            ||
+
+            array_key_exists("es_servicio" , $param)
+
+        ) {
+
+
+		    if (array_key_exists("es_servicio" , $param) &&  $param["es_servicio"] >  0){
+
+		        $this->crea_orden_compra_servicio($param);
+
+            }else{
+
+                $this->crea_orden_compra($param);
+            }
+
+
 		} else {
+
+
 			if (get_param_def($param, "recibo", 0, 1) > 0) {
 
 				$this->add_domicilio_entrega($param);
@@ -76,6 +95,29 @@ class Home extends CI_Controller
 		$this->principal->show_data_page($data, 'home');
 
 	}
+	function  crea_orden_compra_servicio($param){
+
+        $data = $this->principal->val_session("");
+        $data["meta_keywords"] = '';
+        $data["desc_web"] = "Registra tu cuenta  y recibe  asistencia al momento.";
+        $data["url_img_post"] = create_url_preview("recomendacion.jpg");
+        $data["servicio"] = $this->resumen_servicio($param["id_servicio"]);
+        $data["clasificaciones_departamentos"] = "";
+
+
+
+
+        $data["js"] = [
+            "js/direccion.js",
+            'procesar/principal.js',
+            'procesar/sha1.js'
+        ];
+        $data["css"] = ['procesar_contacto.css'];
+
+
+        $this->principal->show_data_page($data, 'procesar_contacto');
+
+    }
 
 	private function add_domicilio_entrega($param)
 	{

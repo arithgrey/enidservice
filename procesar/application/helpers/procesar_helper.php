@@ -2,9 +2,15 @@
 if (!function_exists('invierte_date_time')) {
 
     if (!function_exists('validate_text_title')) {
-        function validate_text_title($in_session, $is_mobile)
+        function validate_text_title($in_session, $is_mobile, $es_servicio = 0 )
         {
             $text = ($in_session == 0 && $is_mobile == 0) ? heading_enid("¿QUIEN ERES?",3) : "";
+            if($es_servicio > 0 ){
+                $text = ($in_session == 0 && $is_mobile == 0) ?
+                    heading_enid("INICIEMOS TU COTIZACIÓN! ",2 ,["class"=>"top_20"]).
+                    heading_enid("¿QUIEN ERES?",4,["class"=>"top_30 bottom_30"]) : "";
+            }
+
             return $text;
         }
 
@@ -101,6 +107,115 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
+
+
+    if (!function_exists('get_form_contacto_servicio')) {
+
+
+        function get_form_contacto_servicio($in_session, $servicio)
+        {
+
+            $servicio=  $servicio[0];
+
+            $r = [];
+            if ($in_session < 1) {
+
+                $x[] = get_btw(
+                    div("Nombre *" )
+                    ,
+                    div(input([
+                        "name" => "nombre",
+                        "placeholder" => "Nombre",
+                        "class" => " input-sm  nombre",
+                        "type" => "text",
+                        "required" => "true"
+                    ]))
+                    ,
+                    " col-lg-6 top_10"
+                );
+
+                $x[] = div(append_data([
+
+                    div("Correo Electrónico  *")
+                    ,
+                    div(input([
+                        "name" => "email",
+                        "placeholder" => "email",
+                        "class" => " input-sm  email",
+                        "type" => "email",
+                        "required" => "true",
+                        "onkeypress" => "minusculas(this);"
+                    ]))
+                    ,
+                    place('place_correo_incorrecto')
+
+                ]), " col-lg-6  top_10");
+
+
+
+
+                $r[] = div(append_data($x)  ,  "row" );
+
+                $r[] = div(icon('fa fa-unlock-alt') . "Escribe una contraseña", "top_20");
+                $r[] = input([
+                    "id" => "password",
+                    "class" => " input-sm password",
+                    "type" => "password",
+                    "required" => "true"
+                ]);
+                $r[] = place("place_password_afiliado");
+                $r[] = div(icon('fa fa-phone') . "Teléfono *", "top_20");
+                $r[] = input([
+                    "id" => "telefono",
+                    "class" => "telefono form-control",
+                    "type" => "tel",
+                    "pattern" => "^[0-9-+s()]*$",
+                    "maxlength" => 13,
+                    "minlength" => 8,
+                    "name" => "telefono",
+                    "required" => "true"
+                ]);
+                $r[] = input_hidden([
+                    "id" => "id_servicio",
+                    "class" => "id_servicio form-control",
+                    "name" => "id_servicio",
+                    "value"=> $servicio["id_servicio"]
+                ]);
+                $r[] = input_hidden([
+                    "class" => "id_ciclo_facturacion",
+                    "name" => "ciclo_facturacion",
+                    "value"=> $servicio["id_ciclo_facturacion"]
+                ]);
+
+
+                $r[] = div(textarea(["name"=> "comentarios" , "class"=> "comentario"] ), "top_30" );
+
+                $r[] = place("place_telefono");
+                $r[] = guardar("CREA UNA CUENTA" ,["class"=> "top_30"]);
+                $r[] = div(anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
+                    [
+                        'class' => "white",
+                        "href" => "../login"
+
+                    ]),
+                    [
+                        'class' => "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
+                    ],
+                    1);
+
+                $r[] = "</div >";
+                $r[] = "</div >";
+                $r[] = place("place_config_usuario");
+                $r[] = form_close();
+            }
+
+
+            return append_data($r);
+
+
+        }
+    }
+
     if (!function_exists('get_format_resumen')) {
 
         function get_format_resumen($resumen_producto, $text_envio, $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session)
@@ -261,7 +376,7 @@ if (!function_exists('invierte_date_time')) {
             $base = 'col-lg-4 tex-center';
             $resumen_completo = div(div("PRODUCTO") . $resumen_servicio, ["class" => $base]);
             $resumen_completo .= div($text_label . " " . $text_ciclos_contratados, ['class' => $base]);
-            $resumen_completo .= div(div("PRECIO") . $precio, ['class' => 'col-lg-4']);
+            $resumen_completo .= div(div("PRECIO") . $precio,  'col-lg-4' );
             $response["resumen_producto"] = $resumen_completo;
             $response["monto_total"] = $precio;
             $response["resumen_servicio_info"] = $info_servicio;

@@ -89,7 +89,8 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
             <?php else: ?>
 
                 <div class="card box-shadow">
-                    <?= div(heading_enid(substr(strtoupper($nombre_servicio), 0, 70), 1), ["class" => "card-header"]) ?>
+
+                    <?= div(heading_enid(substr(strtoupper($nombre_servicio), 0, 70), 1),  "card-header top_20") ?>
                     <?= heading_enid(
                         valida_text_servicio(
                             $flag_servicio,
@@ -98,11 +99,7 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
                         3,
                         ["class" => 'card-title pricing-card-title']
                     ) ?>
-                    <?= anchor_enid(
-                        "Pedir más información",
-                        ["href" => "../pregunta/?tag=" . $id_servicio . "?>&disponible=1"
-                        ]
-                    ) ?>
+
                     <?= validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion) ?>
                 </div>
             <?php endif; ?>
