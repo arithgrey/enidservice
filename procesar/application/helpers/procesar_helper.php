@@ -120,6 +120,7 @@ if (!function_exists('invierte_date_time')) {
             $r = [];
             if ($in_session < 1) {
 
+                $x[] =  form_open("", ["class" => "form-cotizacion-enid-service"]);
                 $x[] = get_btw(
                     div("Nombre *" )
                     ,
@@ -131,7 +132,7 @@ if (!function_exists('invierte_date_time')) {
                         "required" => "true"
                     ]))
                     ,
-                    " col-lg-6 top_10"
+                    " col-lg-6 top_10 "
                 );
 
                 $x[] = div(append_data([
@@ -207,6 +208,66 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = "</div >";
                 $r[] = place("place_config_usuario");
                 $r[] = form_close();
+
+            }else{
+
+                $r[] =  form_open("", ["class" => "form_cotizacion_enid_service"]);
+                $r[] =  heading_enid("SOLICITAR COTIZACIÓN" , 3 , "top_80 text-center");
+                $r[] =  div(p(span("ME GUSTARÍA OPTENER UNA COTIZACIÓN SOBRE: ","underline").$servicio["nombre_servicio"]));
+
+                $r[] =  div(p(span("¿TIENES ALGUNA PREGUNTA ADICIONAL?")), ["class"=> "top_30"]);
+                $r[] =  textarea(["name" => "descripcion"]);
+
+                $r[] = input_hidden([
+                    "id" => "id_servicio",
+                    "class" => "id_servicio form-control",
+                    "name" => "plan",
+                    "value"=> $servicio["id_servicio"]
+                ]);
+                $r[] = input_hidden([
+                    "class" => "num_ciclos",
+                    "name" => "num_ciclos",
+                    "value"=> 1
+                ]);
+
+                $r[] = input_hidden([
+                    "class" => "id_ciclo_facturacion",
+                    "name" => "ciclo_facturacion",
+                    "value"=> $servicio["id_ciclo_facturacion"]
+                ]);
+                $r[] = input_hidden([
+                    "class" => "talla",
+                    "name" => "talla",
+                    "value"=> ""
+                ]);
+                $r[] = input_hidden([
+                    "class" => "tipo_entrega",
+                    "name" => "tipo_entrega",
+                    "value"=> 2
+                ]);
+                $r[] = input_hidden([
+                    "class" => "id_carro_compras",
+                    "name" => "id_carro_compras",
+                    "value"=> 0
+                ]);
+                $r[] = input_hidden([
+                    "class" => "carro_compras",
+                    "name" => "carro_compras",
+                    "value"=> ""
+                ]);
+
+                $r[] = input_hidden([
+                    "class" => "servicio",
+                    "name" => "servicio",
+                    "value"=> $servicio["id_servicio"]
+                ]);
+
+
+                $r[] =  guardar("SOLICITAR COTIZACIÓN",["class"=> "top_30" , "name"=> "comentarios"],1,1,1);
+                $r[] =  place("place_config_usuario");
+
+                $r[] =  form_close();
+
             }
 
 
@@ -227,7 +288,7 @@ if (!function_exists('invierte_date_time')) {
                 ['class' => ' letter-spacing-5']
             ),1);
 
-            $r[] = div($resumen_producto, ["class"=> "mt-3"],1);
+            $r[] = div($resumen_producto, "mt-3",1);
             $r[] = div($text_envio, ["class"=> "mt-3"],1);
             $r[] = input_hidden([
                 "name" => "resumen_producto",
@@ -241,11 +302,12 @@ if (!function_exists('invierte_date_time')) {
             $x[] = div("Precios expresados en Pesos Mexicanos.", ["class" => "bottom_10"]);
 
 
-            $r[] = div(append_data($x), ["class" => "text-right top_20"]);
+            $r[] = div(append_data($x),  "text-right top_20");
 
 
             if ($in_session > 0){
-	            $r[] = guardar("ORDENAR COMPRA", ['class' => 'btn_procesar_pedido_cliente'], 1, 1);
+
+	            $r[] = guardar("ORDENAR COMPRA", ["class"=> 'btn_procesar_pedido_cliente'], 1, 1);
 	            $r[] = place('place_proceso_compra');
 
             }

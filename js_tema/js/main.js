@@ -674,7 +674,32 @@ let advierte = function (text) {
     $(".text-order-name-error").text(text);
     $("#modal-error-message").modal("show");
 }
+let div_enid = function(id_padre,  text, clase='') {
+
+    debugger;
+    var newDiv = document.createElement("div");
+    var newContent = document.createTextNode(text);
+
+
+    if (clase.length >  0){
+
+        let arrClass =  clase.split(" ");
+        for (var x in arrClass){
+            newDiv.className +=  arrClass[x] + " ";
+        }
+
+
+    }
+
+    newDiv.appendChild(newContent);
+    document.getElementById(id_padre).innerHTML= newDiv.outerHTML;
+
+
+}
+
+
 /*
+
 
 let registra_lead = function (e) {
 

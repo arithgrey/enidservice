@@ -65,7 +65,6 @@ class Home extends CI_Controller
 		$data["meta_keywords"] = '';
 		$data["desc_web"] = "Registra tu cuenta  y recibe  asistencia al momento.";
 		$data["url_img_post"] = create_url_preview("recomendacion.jpg");
-		$num_hist = get_info_usuario($this->input->get("q"));
 		$num_usuario_referencia = get_info_usuario($this->input->get("q2"));
 		$data["q2"] = $num_usuario_referencia;
 		$data["servicio"] = $this->resumen_servicio($param["plan"]);

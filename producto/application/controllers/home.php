@@ -188,7 +188,8 @@ class Home extends CI_Controller
 
 
 
-		$data["css"] = ["css_tienda.css",
+		$data["css"] = [
+		    "css_tienda.css",
 			"producto_principal.css",
 			"sugerencias.css",
 			"producto.css"

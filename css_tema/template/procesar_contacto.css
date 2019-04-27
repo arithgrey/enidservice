@@ -1,3 +1,7 @@
 .base_compras,.info_metodos_pago{
     display: none;
 }
+.texto_solicitud_enviada{
+    background: #0060ce;
+
+}

@@ -6,7 +6,8 @@ $(document).ready(function () {
     $(".base_paginas_extra").hide();
     recorrepage(".contenedor_compra");
     $(".form-miembro-enid-service").submit(registro);
-    $(".form-cotizacion-enid-service").submit(registro_cotizacion);
+    $(".form-cotizacion-enid-service").submit(solicitud_cotizacion);
+    $(".form_cotizacion_enid_service").submit(registro_cotizacion);
 
     set_option("plan", $(".plan").val());
     set_option("dominio", $(".dominio").val());
@@ -108,7 +109,7 @@ let registro = function (e) {
 }
 
 
-let registro_cotizacion = function (e) {
+let solicitud_cotizacion = function (e) {
 
 
 
@@ -191,6 +192,18 @@ let registro_cotizacion = function (e) {
 
     e.preventDefault();
 }
+let registro_cotizacion = function (e) {
+
+    let data_send =  $(".form_cotizacion_enid_service").serialize();
+    let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
+    bloquea_form(".form_cotizacion_enid_service");
+    request_enid("POST", data_send, url, respuesta_proceso_cotizacion_usuario_activo, ".place_config_usuario");
+
+    e.preventDefault();
+
+
+}
+
 
 let before_registro_afiliado = function () {
 
@@ -262,7 +275,12 @@ let respuesta_proceso_venta_usuario_activo = function (data) {
     set_option("usuario_nuevo", 0);
     config_direccion();
 }
+let respuesta_proceso_cotizacion_usuario_activo = function (data) {
 
+    div_enid("place_config_usuario" , "TU SOLICITUD SE ENVIÓ!" , "texto_solicitud_enviada top_30  border white padding_5 shadow ");
+    redirect("../area_cliente");
+
+}
 let quita_espacios_en_telefono = function () {
 
     let valor = get_parameter(".telefono");
