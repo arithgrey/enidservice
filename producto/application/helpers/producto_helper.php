@@ -133,7 +133,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web)
+    function get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web, $telefono_visible)
     {
 
 
@@ -149,10 +149,24 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_tiempo_entrega(0, $tiempo_entrega);
         }
 
+
         $r[] = creta_tabla_colores($color, $flag_servicio);
         $r[] = get_tipo_articulo($flag_nuevo, $flag_servicio);
         $r[] = get_nombre_vendedor($proceso_compra, $usuario, $id_publicador);
         $r[] = get_tiempo_entrega($proceso_compra, $tiempo_entrega);
+        if($telefono_visible >  0 && $flag_servicio >  0){
+
+
+            $phone =  format_phone($usuario[0]["tel_contacto"]);
+            $r[] =  div(get_btw(
+                div(
+                    div("COMUNÍCATE!" , "black"))
+                ,
+                div(heading_enid($phone , 6 , "f11 black_blue "), "underline  hover letter-spacing-3" )
+                ,
+                "col-lg-12 "
+            ), 13);
+        }
         $r[] = get_social($url_actual, $url_facebook, $url_twitter, $url_pinterest, $url_tumblr, $proceso_compra);
         $r[] = get_tienda_vendedor($proceso_compra, $id_publicador);
         $r[] = place("", ["style" => "border: solid 1px"]);

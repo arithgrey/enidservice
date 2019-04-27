@@ -331,6 +331,9 @@ a:hover {
 .black {
     color: black !important;
 }
+.black_blue{
+    color: #010121 !important;
+}
 
 .ver-public-lg-emp {
     background: #244684 !important;
@@ -1199,6 +1202,9 @@ select {
 .letter-spacing-15 {
     letter-spacing: 1.5px;
 }
+.letter-spacing-3 {
+    letter-spacing: 1.3px;
+}
 
 .letter-spacing-10 {
     letter-spacing: 10px;
@@ -1275,12 +1281,19 @@ h5 {
 .f2{
     font-size: 2em;
 }
+.fp8{
+    font-size: .8em !important;
+}
 .f15{
     font-size: 1.5em;
 }
 .f12{
     font-size: 1.2em;
 }
+.f11{
+    font-size: 1.1em;
+}
+
 .img_servicio_def{
  max-height: 260px;
 }

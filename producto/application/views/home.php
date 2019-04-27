@@ -1,5 +1,4 @@
 <?php
-
 $url_vide_youtube = "";
 $id_servicio = "";
 $nombre_servicio = "";
@@ -72,15 +71,45 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
             ) ?>
         </div>
 
-        <?= div(get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web), 3) ?>
+        <?= div(get_contenedor_central(
+                $proceso_compra,
+                $id_servicio,
+                $tiempo_entrega,
+                $color,
+                $flag_servicio,
+                $flag_nuevo,
+                $usuario,
+                $id_publicador,
+                $url_actual,
+                $desc_web,
+                $telefono_visible
+
+        ), 3) ?>
 
         <div class="col-lg-3  border shadow">
             <?php if ($flag_servicio < 1): ?>
                 <?php if ($existencia > 0): ?>
 
-                    <?= get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
-                        $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
-                        $telefono_visible, $usuario, $venta_mayoreo, $deseado) ?>
+                    <?= get_format_venta_producto(
+                            $boton_editar,
+                            $estrellas,
+                            $nombre_producto,
+                            $nuevo_nombre_servicio,
+                            $flag_servicio,
+                            $existencia,
+                            $id_servicio,
+                            $in_session,
+                            $q2,
+                            $precio,
+                            $id_ciclo_facturacion,
+                            $tallas,
+                            $texto_en_existencia,
+                            $entregas_en_casa,
+                            $proceso_compra,
+                            $telefono_visible,
+                            $usuario,
+                            $venta_mayoreo,
+                            $deseado) ?>
 
                 <?php else: ?>
                     <?= get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio) ?>
