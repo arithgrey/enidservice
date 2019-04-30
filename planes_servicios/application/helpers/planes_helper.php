@@ -48,7 +48,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_busqueda($list_orden)
         {
 
-            $r[] = div("BUSCAR ENTRE TUS ARTÍCULOS", ["class" => "col-lg-4 align-self-center"]);
+            $r[] = div("BUSCAR ENTRE TUS ARTÍCULOS", "col-lg-4 align-self-center");
             $r[] = div(get_list_orden($list_orden), 4);
             $r[] = div(input([
                 "id" => "textinput",
@@ -154,7 +154,7 @@ if (!function_exists('invierte_date_time')) {
     }
     if (!function_exists('get_formar_hiddens')) {
 
-        function get_formar_hiddens($is_mobile, $action, $extra_servicio)
+        function get_formar_hiddens($is_mobile, $action, $extra_servicio,$id_perfil)
         {
 
 
@@ -180,6 +180,8 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "extra_servicio"
                 ]
             );
+
+
 
             return append_data($r);
 
@@ -262,7 +264,7 @@ if (!function_exists('invierte_date_time')) {
         }
     }
     if (!function_exists('get_menu')) {
-        function get_menu($is_mobile, $action)
+        function get_menu($perfil ,$is_mobile, $action)
         {
             if ($is_mobile == 0) {
                 $list = [
@@ -276,19 +278,45 @@ if (!function_exists('invierte_date_time')) {
                         ),
                         ["class" => valida_active_tab('nuevo', $action) . "  "]
                     ),
-
                     li(
                         anchor_enid(
                             icon("fa fa-shopping-cart") . " TUS ARTÍCULOS EN VENTA",
                             [
                                 'data-toggle' => "tab",
                                 'class' => "black  btn_serv",
-                                'href' => "#tab_servicios"
+                                'href' => "#tab_servicios",
+
                             ]
                         ),
-                        ["class" => ' li_menu_servicio btn_servicios ' . valida_active_tab('lista', $action)]
+                        [
+                            "class" => ' li_menu_servicio btn_servicios ' . valida_active_tab('lista', $action) ,
+                            "id" => 0,
+                    ]
                     )
                 ];
+
+
+
+                if ( $perfil != 20 && $perfil > 0){
+
+                    $list[] =
+                    li(
+                        anchor_enid(
+                            icon("fa fa-globe") . " ARTÍCULOS EN VENTA",
+                            [
+                                'data-toggle' => "tab",
+                                'class' => "black  btn_serv",
+                                'href' => "#tab_servicios",
+                                "id" => 1
+                            ]
+                        ),
+                        [
+                            "class" => ' li_menu_servicio btn_servicios ' . valida_active_tab('lista', $action),
+                            "id" => 1,
+
+                        ]
+                    );
+                }
                 return ul($list, ["class" => "nav tabs contenedor_menu_enid_service_lateral"]);
             } else {
 

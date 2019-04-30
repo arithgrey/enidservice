@@ -38,6 +38,12 @@ let cancelar_registro = function () {
 let carga_servicios = function () {
 
 
+    let global  = (get_parameter_enid($(this), "id" ||   get_option("global" )) >  0 ) ? 1 : 0;
+    if ( global >  0 ){
+        set_option("global" , 1);
+    }else{
+        set_option("global" , 0 );
+    }
     display_elements([".texto_ventas_titulo", ".contenedor_busqueda", ".contenedor_busqueda_articulos"], 1);
     let url = "../q/index.php/api/servicio/empresa/format/json/";
     let orden = get_parameter("#orden");
@@ -45,7 +51,8 @@ let carga_servicios = function () {
         "q": get_parameter(".q_emp"),
         "id_clasificacion": get_option("id_clasificacion"),
         "page": get_option("page"),
-        "order": orden
+        "order": orden,
+        "global": global
     };
 
     request_enid("GET", data_send, url, respuesta_carga_servicios, ".place_servicios", function () {

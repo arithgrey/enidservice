@@ -604,14 +604,22 @@ if (!function_exists('invierte_date_time')) {
         }
     }
     if (!function_exists('valida_editar_servicio')) {
-        function valida_editar_servicio($usuario_servicio, $id_usuario, $in_session, $id_servicio)
+        function valida_editar_servicio($usuario_servicio, $id_usuario, $in_session, $id_servicio, $id_perfil)
         {
 
             $editar = "";
-            if ($in_session == 1) {
+            if ($in_session == 1 ) {
                 $href = "../planes_servicios/?action=editar&servicio=" . $id_servicio;
-                $editar_button = div(anchor_enid(icon('fa fa-pencil') . "EDITAR", ["href" => $href]), ["class" => 'a_enid_black_sm editar_button']);
-                $editar = ($id_usuario == $usuario_servicio) ? $editar_button : "";
+                $editar_button = div(
+                    anchor_enid(
+                        icon('fa fa-pencil') . "EDITAR",
+                        [
+                            "href" => $href , "class"=> "white"
+                        ]
+                    ), 'a_enid_black_sm editar_button'
+                );
+
+                $editar = ($id_usuario == $usuario_servicio || $id_perfil != 20 ) ? $editar_button : "";
             }
             return $editar;
         }

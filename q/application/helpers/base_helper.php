@@ -123,10 +123,10 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    function valida_descartar_promocion($num_images, $id_servicio)
+    function valida_descartar_promocion($num_images, $id_servicio, $id_perfil)
     {
 
-        $response = ($num_images == 0) ? div(anchor_enid("DESCARTAR PROMOCIÓN", ["class" => 'descartar_promocion border descartar_promocion padding_10 ', "id" => $id_servicio]), ["class" => "text-right top_30 bottom_50"]) : "";
+        $response = ($num_images == 0 || $id_perfil != 20 && $id_perfil > 0 ) ? div(anchor_enid("DESCARTAR PROMOCIÓN", ["class" => 'descartar_promocion border descartar_promocion padding_10 ', "id" => $id_servicio]), ["class" => "text-right top_30 bottom_50"]) : "";
         return $response;
     }
 

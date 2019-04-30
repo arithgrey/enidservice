@@ -280,6 +280,7 @@ class principal extends CI_Controller
             $data["nombre"] = $nombre;
             $data["email"] = $this->get_session("email");
             $data["perfilactual"] = $this->sessionclass->get_nombre_perfil();
+            $data["id_perfil"] = $this->getperfiles();
             $data["in_session"] = 1;
             $data["no_publics"] = 1;
             $data["meta_keywords"] = "";
@@ -299,6 +300,7 @@ class principal extends CI_Controller
             $data["nombre"] = "";
             $data["email"] = "";
             $data["telefono"] = "";
+            $data["id_perfil"] = 0;
 
             return $data;
         }
