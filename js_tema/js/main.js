@@ -292,14 +292,17 @@ let registra_respuesta_pregunta = function (e) {
 let quitar_espacios_numericos = function (nuevo_valor, texto = 0) {
 
 
+    let f_punto =  0;
     if (texto == 0) {
         let valor_numerico = "";
         for (let a = 0; a < nuevo_valor.length; a++) {
             if (nuevo_valor[a] != " ") {
 
                 let is_num = validar_si_numero(nuevo_valor[a]);
-                if (is_num == true) {
-                    if (a < 13) {
+                if (is_num == true || (nuevo_valor[a] == "." && f_punto  < 1)) {
+                    if (nuevo_valor[a] == "." ){
+                        f_punto ++;
+                    }if (a < 13) {
                         valor_numerico += nuevo_valor[a];
                     }
                 }
@@ -346,7 +349,7 @@ let quita_espacios_input_precio = function () {
 
     let valor = get_parameter(".precio");
     let nuevo = quitar_espacios_numericos(valor);
-    $(".precio").val(nuevo);
+    set_parameter(".precio" , nuevo);
 
 }
 let validar_si_numero = function (numero) {

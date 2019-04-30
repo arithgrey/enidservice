@@ -32,9 +32,12 @@ let response_proceso_asignacion = function(data){
 };
 let asignar_punto_encuentro_existente_pedido= function(){
 
+
+
 	let id_punto_encuentro =  get_parameter_enid($(this) , "id");
 	let id_recibo 	 =  get_parameter_enid($(this) , "id_recibo");
 	show_confirm("¿DESEAS QUE TU ENTREGA SEA EN ESTE PUNTO DE ENCUENTRO?",  "" , "CONTINUAR" , function(){proceso_asignar_punto_encuentro(id_punto_encuentro , id_recibo)} );
+
 };
 
 let proceso_asignar_punto_encuentro = function (id_punto_encuentro , id_recibo) {

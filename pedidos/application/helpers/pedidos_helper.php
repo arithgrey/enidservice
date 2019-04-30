@@ -302,13 +302,13 @@ if (!function_exists('invierte_date_time')) {
 
     }
     if (!function_exists('get_format_listado_puntos_encuentro')) {
-        function get_format_listado_puntos_encuentro($puntos_encuentro, $id_recibo, $domicilio)
+        function get_format_listado_puntos_encuentro($tipo_entrega,  $puntos_encuentro, $id_recibo, $domicilio)
         {
 
 
             $r[] = heading_enid("TUS PUNTOS DE ENCUENTRO ", 3);
             $r[] = agregar_nueva_direccion(1);
-            $list = get_lista_puntos_encuentro($puntos_encuentro, $id_recibo, $domicilio);
+            $list = get_lista_puntos_encuentro($tipo_entrega , $puntos_encuentro, $id_recibo, $domicilio);
 
             $r[] = ul($list);
             return append_data($r);
@@ -687,7 +687,7 @@ if (!function_exists('invierte_date_time')) {
         }
     }
     if (!function_exists('get_lista_puntos_encuentro')) {
-        function get_lista_puntos_encuentro($puntos_encuentro, $id_recibo, $domicilio = '')
+        function get_lista_puntos_encuentro( $tipo_entrega , $puntos_encuentro, $id_recibo, $domicilio = '')
         {
 
             $asignado = (is_array($domicilio) && $domicilio["tipo_entrega"] == 1) ? $domicilio["domicilio"][0]["id"] : 0;
@@ -698,14 +698,19 @@ if (!function_exists('invierte_date_time')) {
 
                 $id = $row["id"];
                 $nombre = $row["nombre"];
+
                 $extra = ($id === $asignado) ? "asignado_actualmente" : "";
+
 
                 $encuentro = [];
                 $encuentro[] = div("#" . $a, ["class" => "f15"], 1);
                 $encuentro[] = div($nombre, 1);
+
+                $modificar_encuentro =  ($tipo_entrega <  2) ? " establecer_punto_encuentro " : "";
+
                 $encuentro[] = guardar("ESTABLECER COMO PUNTO DE ENTREGA",
                     [
-                        "class" => "h6 text-muted text-right establecer_punto_encuentro cursor_pointer",
+                        "class" => "h6 text-muted text-right  cursor_pointer  btn_direccion  ".$modificar_encuentro,
                         "id" => $id,
                         "id_recibo" => $id_recibo
 
