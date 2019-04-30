@@ -150,7 +150,7 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "text",
                 "placeholder" => "Tu nombre ",
                 "class" => "form-control input-md nombre"
-            ]), ["class" => "col-lg-8"]);
+            ]), 8);
 
             $r[] = label(icon("fa fa-envelope-o") . " CORREO ", 4);
             $r[] = input_hidden(["class" => "servicio", "value" => $servicio, "name" => "servicio"]);
@@ -204,7 +204,7 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "tel",
                 "class" => "form-control input-md tel telefono_info_contacto",
                 "required" => true
-            ]), ["class" => "col-lg-8"]);
+            ]), 8);
 
             $r[] = div("INGRESA TU WHATSAPP PARA RECIBIR NUESTRA UBICACIÓN");
             $r[] = input_hidden(["class" => "servicio", "value" => $servicio, "name" => "servicio"]);
@@ -292,7 +292,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = '<form id="form_contacto" action="../msj/index.php/api/emp/contacto/format/json/" method="post">';
-            $r[] = div("Departamento ", ["class" => "col-sm-3 white strong"]);
+            $r[] = div("Departamento ", "col-sm-3 white strong" );
             $r[] = create_select(
                 $departamentos,
                 "departamento",

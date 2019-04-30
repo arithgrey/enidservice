@@ -160,8 +160,8 @@ if (!function_exists('invierte_date_time')) {
 				$r[] = addNRow(get_form_nombre($usuario));
 				$r[] = addNRow(get_form_email($usuario));
 
-				$r[] = addNRow(div(get_form_telefono($usuario) , ["class"=> "row top_30"]));
-				$r[] = addNRow(div(get_form_negocio($usuario),  ["class"=> "row"]) );
+				$r[] = addNRow(div(get_form_telefono($usuario) , "row top_30"));
+				$r[] = addNRow(div(get_form_negocio($usuario),  "row") );
 
 			} else {
 
@@ -293,7 +293,7 @@ if (!function_exists('invierte_date_time')) {
 				"readonly" => true
 			]);
 
-			$r[] = div('El correo electrónico NO se mostrará públicamente', ['class' => 'blue_enid '], 1);
+			$r[] = div('El correo electrónico NO se mostrará públicamente', 'blue_enid ', 1);
 			return append_data($r);
 
 
@@ -304,7 +304,7 @@ if (!function_exists('invierte_date_time')) {
 		{
 
 			$r[] = form_open("", ["class" => "f_nombre_usuario"]);
-			$r[] = div('Nombre de usuario', ['class' => 'strong'], 1);
+			$r[] = div('Nombre de usuario', 'strong', 1);
 			$r[] = input([
 				"id" => "nombre_usuario",
 				"name" => "nombre_usuario",

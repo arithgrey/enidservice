@@ -37,7 +37,7 @@ if (!function_exists('invierte_date_time')) {
                         "required" => "true"
                     ]))
                     ,
-                    " col-lg-6"
+                    6
                 );
 
                 $x[] = div(append_data([
@@ -55,12 +55,12 @@ if (!function_exists('invierte_date_time')) {
                     ,
                     place('place_correo_incorrecto')
 
-                ]), ["class" => " col-lg-6"]);
+                ]), 6);
 
 
 
 
-				$r[] = div(append_data($x)  , ["class" => "row"]);
+				$r[] = div(append_data($x)  , 13);
 
                 $r[] = div(icon('fa fa-unlock-alt') . "Escribe una contraseña");
                 $r[] = input([
@@ -89,9 +89,9 @@ if (!function_exists('invierte_date_time')) {
                         "href" => "../login"
 
                     ]),
-                    [
-                        'class' => "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
-                    ],
+
+                        "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
+                    ,
                     1);
 
                 $r[] = get_text_acceder_cuenta($is_mobile, $info_ext);
@@ -155,7 +155,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-                $r[] = div(append_data($x)  ,  "row" );
+                $r[] = div(append_data($x)  ,  13);
 
                 $r[] = div(icon('fa fa-unlock-alt') . "Escribe una contraseña", "top_20");
                 $r[] = input([
@@ -281,15 +281,15 @@ if (!function_exists('invierte_date_time')) {
 
         function get_format_resumen($resumen_producto, $text_envio, $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session)
         {
-            $r[] = div(heading_enid(
-                'RESUMEN DE TU PEDIDO' . icon("fa fa-shopping-bag")
+            $r[] = div(
+                heading_enid('RESUMEN DE TU PEDIDO' . icon("fa fa-shopping-bag")
                 ,
-                2,
+                    2,
                 ['class' => ' letter-spacing-5']
             ),1);
 
             $r[] = div($resumen_producto, "mt-3",1);
-            $r[] = div($text_envio, ["class"=> "mt-3"],1);
+            $r[] = div($text_envio,  "mt-3",1);
             $r[] = input_hidden([
                 "name" => "resumen_producto",
                 "class" => "resumen_producto",
@@ -299,7 +299,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = heading_enid("MONTO $" . $monto_total . "MXN", 4);
             $x[] = heading_enid("CARGOS DE ENVÍO $" . $costo_envio_cliente . "MXN", 4);
             $x[] = heading_enid("TOTAL $" . $monto_total_con_envio . "MXN", 3);
-            $x[] = div("Precios expresados en Pesos Mexicanos.", ["class" => "bottom_10"]);
+            $x[] = div("Precios expresados en Pesos Mexicanos.", "bottom_10" );
 
 
             $r[] = div(append_data($x),  "text-right top_20");

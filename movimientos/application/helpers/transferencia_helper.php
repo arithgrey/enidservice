@@ -81,7 +81,7 @@ if (!function_exists('invierte_date_time')) {
 				heading_enid("$" . number_format(get_data_saldo($saldo_disponible), 2) . "MXN", 2, ["class" => "value white"]),
 				div("Monto expresado en Pesos Mexicanos")
 			]);
-			return div($response, ["class"=>"panel income db mbm"]);
+			return div($response, "panel income db mbm");
 
 		}
 	}

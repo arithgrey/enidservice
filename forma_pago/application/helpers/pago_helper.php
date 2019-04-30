@@ -74,7 +74,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 ));
 
-            return div(append_data($r), ["class" => "display_flex_enid"]);
+            return div(append_data($r), "display_flex_enid");
 
         }
     }

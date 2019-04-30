@@ -5,7 +5,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_listado($preguntas_format)
         {
 
-            $r[] = div(heading_enid("TUS PREGUNTAS ENVIADAS"), ["class" => "col-lg-8 col-lg-offset-2 top_20"]);
+            $r[] = div(heading_enid("TUS PREGUNTAS ENVIADAS"), "col-lg-8 col-lg-offset-2 top_20" );
             $r[] = $preguntas_format;
             return append_data($r);
 
@@ -30,8 +30,8 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $p = [];
-                $p[] = div($pregunta, ["class" => "texto_pregunta"]);
-                $p[] = div(icon("fa fa-clock-o") . $fecha_registro, ["class" => "fecha_registro"]);
+                $p[] = div($pregunta, "texto_pregunta" );
+                $p[] = div(icon("fa fa-clock-o") . $fecha_registro, "fecha_registro" );
 
                 if ($num > 0) {
 
@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
 
                 }
 
-                $texto = div(append_data($p), ["class" => "bloque_texto top_20"]);
+                $texto = div(append_data($p), "bloque_texto top_20" );
                 $img_servicio = anchor_enid(get_img_servicio($id_servicio),
                     [
                         "href" => get_url_servicio($id_servicio),
@@ -60,8 +60,10 @@ if (!function_exists('invierte_date_time')) {
 
                     ]);
                 $principal_seccion = get_btw(
-                    div($img_servicio, ["class" => "col-lg-2"]),
-                    div($texto, ["class" => "col-lg-10"]),
+                    div($img_servicio, 2)
+                    ,
+                    div($texto, 10)
+                    ,
                     ""
                 );
 
@@ -76,16 +78,13 @@ if (!function_exists('invierte_date_time')) {
                     ]);
 
 
-                $r[] = div(place($id_pĺace),
-                    [
-                        "class" => "top_10 padding_20 col-lg-8 col-lg-offset-2"
-                    ]);
+                $r[] = div(place($id_pĺace), "top_10 padding_20 col-lg-8 col-lg-offset-2");
 
 
             }
 
 
-            return div(append_data($r), ["class" => "contenedor_pregunta"]);
+            return div(append_data($r), "contenedor_pregunta");
 
         }
     }
