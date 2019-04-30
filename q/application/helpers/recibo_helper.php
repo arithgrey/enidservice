@@ -163,7 +163,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor");
         $r[] = div(anchor_enid("Déjanos tus comentarios aquí!", ["href" => $url]));
 
-        $cuerpo = append_data([$r]);
+        $cuerpo = append_data($r);
         $sender = get_request_email($email, $asunto, $cuerpo);
         return $sender;
 
