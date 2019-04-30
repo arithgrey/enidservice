@@ -32,6 +32,7 @@ class Inicio extends CI_Controller
 		$data = $this->getCssJs($data);
 
 		$data["list_orden"] = $this->get_orden();
+        $data["id_perfil"] = $this->principal->getperfiles();
 		$this->principal->show_data_page($data, 'home_enid');
 
 	}
@@ -68,8 +69,10 @@ class Inicio extends CI_Controller
 				$param["id_usuario"] = $data["id_usuario"];
 				$param["id_servicio"] = $param["servicio"];
 				$es_usuario = $this->valida_servicio_usuario($param);
-				if ($es_usuario != 1) {
-					$this->principal->logout();
+				if ($es_usuario != 1 ) {
+				    if($data["id_perfil"] == 20 ){
+                        $this->principal->logout();
+                    }
 				}
 				$data["extra_servicio"] = $param["servicio"];
 			} else {

@@ -721,6 +721,12 @@ class Servicio extends REST_Controller
 		$num_servicios = $servicios["num_servicios"];
 		$this->set_option("in_session", 1);
 		$this->set_option("id_usuario", $this->id_usuario);
+        $this->set_option("id_perfil", 0);
+        if ($this->principal->is_logged_in()){
+
+            $this->set_option("id_perfil", $this->principal->getperfiles() );
+        }
+
 
 		$lista_productos = $this->agrega_vista_servicios($servicios["servicios"]);
 
@@ -734,9 +740,11 @@ class Servicio extends REST_Controller
 		$response = [];
 		$in_session = $this->get_option("in_session");
 		$id_usuario = $this->get_option("id_usuario");
+        $id_perfil = $this->get_option("id_perfil");
 
 		foreach ($data as $row) {
 			$row["in_session"] = $in_session;
+            $row["id_perfil"]  = $id_perfil;
 			$row["id_usuario_actual"] = $id_usuario;
 			$id_servicio =  $row["id_servicio"];
 			$row["url_img_servicio"] = $this->principal->get_imagenes_productos($id_servicio, 1, 1 , 1);

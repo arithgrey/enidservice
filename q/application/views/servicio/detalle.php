@@ -140,7 +140,7 @@ $text_envios_mayoreo = "¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?";
     <div class="tab-content">
         <div class="tab-pane <?= $extra_1 ?>" id="tab_imagenes">
             <?= addNRow($notificacion_imagenes); ?>
-            <?= addNRow(valida_descartar_promocion($num_imagenes, $id_servicio)) ?>
+            <?= addNRow(valida_descartar_promocion($num_imagenes, $id_servicio, $id_perfil)) ?>
             <?= div($images, ["class" => "contenedor_imagen_muestra"], 1) ?>
             <?= heading_enid("¿TIENES ALGÚN VIDEO SOBRE TU " . $tipo_promocion . "?", 4) ?>
             <?= div($text_llamada_accion_youtube, 1) ?>

@@ -197,11 +197,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $id_servicio = $servicio["id_servicio"];
-        $metakeyword = $servicio["metakeyword"];
-        $url_img_servicio = $servicio["url_img_servicio"];
-        $in_session  =  $servicio["in_session"];
-        $id_usuario = $servicio["id_usuario"];
+        $id_servicio        = $servicio["id_servicio"];
+        $metakeyword        = $servicio["metakeyword"];
+        $url_img_servicio   = $servicio["url_img_servicio"];
+        $in_session         = $servicio["in_session"];
+        $id_usuario         = $servicio["id_usuario"];
+        $id_perfil          = (get_param_def($servicio , "id_perfil") >  0 ) ? $servicio["id_perfil"] : 0;
 
 
 
@@ -230,7 +231,7 @@ if (!function_exists('invierte_date_time')) {
 
                 ]
             ));
-            $response[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $servicio["id_usuario_actual"]));
+            $response[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $servicio["id_usuario_actual"] , $id_perfil));
 
             $response =  div(append_data($response), "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 ");
 
@@ -747,12 +748,12 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
-    function valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_registro_servicio)
+    function valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_registro_servicio, $id_perfil)
     {
 
         $response = "";
-        if ($in_session > 0) {
-            if ($id_usuario == $id_usuario_registro_servicio) {
+        if ($in_session > 0 ) {
+            if ($id_usuario == $id_usuario_registro_servicio || ($id_perfil > 0 && $id_perfil !=  20 )) {
                 $response = icon("top_40  bottom_40 servicio fa fa-pencil", ["id" => $id_servicio]);
             }
         }

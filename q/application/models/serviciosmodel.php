@@ -464,14 +464,21 @@ class serviciosmodel extends CI_Model
 		$num_q = strlen(trim($q));
 		$id_usuario = $param["id_usuario"];
 		$sql_extra = "";
-		$extra_existencia = ($id_usuario > 0) ? " " : " AND existencia >0 ";
+
+		$extra_existencia = ( $id_usuario > 0 ) ? " " : " AND existencia > 0  ";
+
+
 		$sql_considera_imagenes = ($id_usuario > 0) ? " " : " AND flag_imagen = 1 ";
 
 		$extra_empresa = ($id_usuario > 0) ? " AND id_usuario = " . $id_usuario : "";
+        $extra_empresa  = ( get_param_def($param , "global") >  0  ) ? " " : $extra_empresa;
+
 
 
 		$vendedor = $param["vendedor"];
-		$extra_vendedor = ($vendedor > 0) ? " AND id_usuario =  '" . $vendedor . "'" : "";
+		$extra_vendedor = ( $vendedor > 0 ) ? " AND id_usuario =  '" . $vendedor . "'" : "";
+
+
 		$orden = $this->get_orden($param);
 
 		$sql_match = ($num_q > 0) ?
@@ -816,6 +823,7 @@ class serviciosmodel extends CI_Model
 		$this->db->query($query_drop);
 		if ($flag == 0) {
 			$query_where = $this->get_sql_servicio($param, 0);
+
 
 			$param_extra = ($param["agrega_clasificaciones"] == 1) ?
 				",primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 

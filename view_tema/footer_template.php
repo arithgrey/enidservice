@@ -32,9 +32,9 @@ $list_footer = [
 ]) ?>
 <?php if (!is_null($in_session) && $in_session < 1): ?>
     <?php if (!is_null($proceso_compra) && !isset($proceso_compra) || $proceso_compra == 0): ?>
-        <div class="base_compras">
+        <div class="base_compras top_50">
             <div class='col-lg-4'>
-                <?= div(icon('fa  fa-fighter-jet'), ['class' => 'col-lg-2']) ?>
+                <?= div(icon('fa  fa-fighter-jet'), 2) ?>
                 <?= div("FACILIDAD DE COMPRA", ['class' => 'strong']) ?>
                 <?= div("Compras seguras al momento") ?>
                 <?php if (!is_null($id_usuario) && isset($id_usuario)): ?>
@@ -60,13 +60,12 @@ $list_footer = [
             $c = [];
             $c[] = div(icon('fa fa-lock '), 2);
             $c[] = div(append_data([
-                div(" COMPRAS SEGURAS", ['class' => 'strong']),
+                div(" COMPRAS SEGURAS",  'strong'),
                 div("Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!", 1)
             ]));
 
             ?>
             <?= div(append_data($c), 4) ?>
-
         </div>
     <?php endif; ?>
 <?php endif; ?>
