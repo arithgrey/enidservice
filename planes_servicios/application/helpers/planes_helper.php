@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = heading_enid("TUS ARTÍCULOS EN VENTA", 3);
-            $r[] = div(get_format_busqueda($list_orden), ["class" => "contenedor_busqueda_articulos row top_50"]);
+            $r[] = div(get_format_busqueda($list_orden), "contenedor_busqueda_articulos row top_50" );
             $r[] = div(place("place_servicios top_50"), 1);
             return append_data($r);
 
@@ -112,7 +112,7 @@ if (!function_exists('invierte_date_time')) {
                     array_pop($r, heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 2));
                 }
 
-                $response = div(append_data($r), ["class" => "card contenedor_articulos_mobil"]);
+                $response = div(append_data($r),  "card contenedor_articulos_mobil" );
 
             }
             return $response;

@@ -51,7 +51,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
-            $x[] = div($valoraciones, ["class" => "top_30"]);
+            $x[] = div($valoraciones, "top_30" );
 
             $x[] = div(
                 anchor_enid("VER COMENTARIOS",
@@ -60,9 +60,9 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "a_enid_blue  top_30"
                     ]
                 ), ["class" => "text-center top_20"]);
-            $x[] = div($alcance, ["class" => " text-center top_30"]);
+            $x[] = div($alcance, " text-center top_30");
 
-            $response = div(div(append_data($x), 6, 1), ["class" => "text-center"]);
+            $response = div(div(append_data($x), 6, 1),  "text-center");
             return $response;
 
         }

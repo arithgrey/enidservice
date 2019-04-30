@@ -14,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
             input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro])
         ]);
 
-        $response = div($response, ["class" => "col-lg-6 col-lg-offset-3"]);
+        $response = div($response, 6,1);
         return $response;
     }
 
@@ -32,7 +32,7 @@ if (!function_exists('invierte_date_time')) {
             "placeholder" => "Persona que recibe",
             "class" => "form-control input-md nombre ",
             "required" => true
-        ]), ["class" => "col-lg-9 mt-3"]);
+        ]), "col-lg-9 mt-3" );
 
         $r[] = label("CORREO ", ["class" => "col-lg-3 mt-3"]);
         $r[] = div(input([
@@ -42,7 +42,7 @@ if (!function_exists('invierte_date_time')) {
             "placeholder" => "@",
             "class" => "form-control input-md correo",
             "required" => true
-        ]), ["class" => "col-lg-9 mt-3"]);
+        ]),  "col-lg-9 mt-3" );
 
         $r[] = label(" TELÉFONO ", ["class" => "col-lg-3 mt-3"]);
 
@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
             "type" => "tel",
             "class" => "form-control input-md  telefono ",
             "required" => true
-        ]), ["class" => "col-lg-9 mt-3"]);
+        ]),  "col-lg-9 mt-3" );
 
         $r[] = label(" CONTRASEÑA", ["class" => "col-lg-3 mt-3"]);
 
@@ -62,7 +62,7 @@ if (!function_exists('invierte_date_time')) {
             "type" => "password",
             "class" => "form-control input-md  pw ",
             "required" => true
-        ]), ["class" => "col-lg-9 mt-3"]);
+        ]),  "col-lg-9 mt-3" );
 
 
         $r[] = heading_enid("¿En qué horario te gustaría recibir tu pedido?", 4, ["class" => "col-lg-12 mt-3"]);
@@ -79,20 +79,20 @@ if (!function_exists('invierte_date_time')) {
                 "value" => date("Y-m-d"),
                 "min" => date("Y-m-d"),
                 "max" => add_date(date("Y-m-d"), 4)
-            ]), ["class" => "col-lg-10 mt-3"]);
+            ]), "col-lg-10 mt-3" );
 
 
         $r[] = label(icon("fa fa-clock-o") . " HORA DE ENCUENTRO",
             ["class" => "col-lg-4 mt-3"]
         );
 
-        $r[] = div(lista_horarios(), ["class" => "col-lg-8 mt-3"]);
+        $r[] = div(lista_horarios(),  "col-lg-8 mt-3" );
 
         $r[] = div("+ agregar nota", ["class" => "col-lg-12  mt-5 cursor_pointer text_agregar_nota", "onclick" => "agregar_nota();"]);
 
-        $x[] = div("NOTAS", ["class" => "strong mt-3"]);
+        $x[] = div("NOTAS", "strong mt-3" );
         $x[] = textarea(["name" => "comentarios", "class" => "mt-3"]);
-        $r[] = div(append_data($x), ["class" => "input_notas  col-lg-12 mt-3"]);
+        $r[] = div(append_data($x), "input_notas  col-lg-12 mt-3" );
 
 
         $r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form "]);
@@ -102,10 +102,10 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]);
 
 
-        $r[] = div(guardar("CONTINUAR"), ["class" => "col-lg-12 mt-5"]);
+        $r[] = div(guardar("CONTINUAR"),  "col-lg-12 mt-5");
         $r[] = get_formar_usuario_registrado($in_session, $servicio, $num_ciclos);
         $r[] = form_close();
-        return div(append_data($r), ["class" => "col-lg-10 col-lg-offset-1"]);
+        return div(append_data($r), 10,1);
 
 
     }
@@ -125,7 +125,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "padding_10 link_acceso cursor_pointer text-center col-lg-4 col-lg-offset-4 text-center text-uppercase letter-spacing-10  top_30 mb-5 white bg_black"
             ]);
 
-            $r[] = div(append_data($x), ["class" => "contenedor_ya_tienes_cuenta col-lg-12 top_50"]);
+            $r[] = div(append_data($x),  "contenedor_ya_tienes_cuenta col-lg-12 top_50");
             $r[] = place("place_notificacion_punto_encuentro_registro");
 
         }
@@ -154,7 +154,7 @@ if (!function_exists('invierte_date_time')) {
                 input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro]),
                 input_hidden(["class" => "recibo", "name" => "recibo", "value" => $recibo])
             ]
-        ), ["class" => "col-lg-6 col-lg-offset-3"]);
+        ), 6,1);
 
         $response = div(append_data($r), ["class" => 'formulario_quien_recibe display_none']);
 
@@ -183,8 +183,8 @@ if (!function_exists('invierte_date_time')) {
             8);
 
 
-        $r[] = div(icon("fa fa-clock-o") . " HORA DE ENCUENTRO", ["class" => "col-lg-4 top_30"]);
-        $r[] = div(lista_horarios(), ["class" => "col-lg-8 top_30"]);
+        $r[] = div(icon("fa fa-clock-o") . " HORA DE ENCUENTRO",  "col-lg-4 top_30" );
+        $r[] = div(lista_horarios(), "col-lg-8 top_30" );
 
 
         /*

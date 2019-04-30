@@ -42,7 +42,7 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        $r[] = div(append_data($x), ["class" => "text-center top_50 bottom_100"]);
+        $r[] = div(append_data($x), "text-center top_50 bottom_100");
         $r[] = ($action === "registro") ? div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", ["class" => "mensaje_bienvenida"]) : "";
         $response = div(append_data($r));
         return div($response, ["class" => "wrapper_login"], 1);
@@ -96,17 +96,17 @@ if (!function_exists('invierte_date_time')) {
         $r[] = anchor_enid(img_enid(), ["href" => "../", "class" => "col-lg-8 col-lg-offset-2"], 1);
         $r[] = heading('ÚNETE A ENID SERVICE', 3, 1);
         $r[] = div(get_form_registro(), 1);
-        $r[] = div(anchor_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
+        $r[] = div(
+            anchor_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
             [
                 'class' => 'btn_acceder_cuenta_enid top_50 inline-block bottom_100',
                 "id" => "btn_acceder_cuenta_enid"
             ]),
-            [
-                "class" => "text-center"
-            ]);
+            "text-center"
+            );
 
         $response = append_data($r);
-        $response = div($response, ["class" => "seccion_registro_nuevo_usuario_enid_service"], 1);
+        $response = div($response, "seccion_registro_nuevo_usuario_enid_service", 1);
         return $response;
 
 
