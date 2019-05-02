@@ -82,6 +82,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_info_vendedor($entregas_en_casa, $flag_servicio, $proceso_compra, $telefono_visible, $in_session, $usuario);
 
         $r[] = div(valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo), 1);
+        $r[] = div(valida_formas_pago(), 1);
 
         return append_data($r);
 
@@ -539,6 +540,7 @@ if (!function_exists('invierte_date_time')) {
         function valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo)
         {
 
+
             $text = ($flag_servicio == 0 && $venta_mayoreo == 1) ? icon('fa fa-check-circle') . "VENTAS MAYORISTAS " : "";
             $r[] = div($text, ["class" => "strong"]);
             $r[] = div(icon('fa fa-check-circle') . "COMPRAS CONTRA ENTREGA");
@@ -547,6 +549,27 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
+
+    if (!function_exists('valida_formas_pago')) {
+        function valida_formas_pago()
+        {
+
+            $r[] = div(icon("fa fa-shopping-cart").
+                anchor_enid(
+                    "FORMAS PAGO",
+                    [
+                        "href"      =>      path_enid("forma_pago"),
+                        "class"     =>      "black"
+                    ]
+                )
+            );
+            return append_data($r);
+
+
+        }
+    }
+
+
     if (!function_exists('creta_tabla_colores')) {
 
         function creta_tabla_colores($text_color, $flag_servicio)

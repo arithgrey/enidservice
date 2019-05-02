@@ -339,10 +339,19 @@ if (!function_exists('n_row_12')) {
     }
 }
 if (!function_exists('anchor_enid')) {
-    function anchor_enid($title = '', $attributes = '', $row_12 = 0, $type_button = 0)
+    function anchor_enid($title = '', $attributes = [], $row_12 = 0, $type_button = 0)
     {
 
-        $attributes = _parse_attributes($attributes);
+        if(is_string($attributes)){
+
+            $attr["href"] = $attributes;
+            $attributes = _parse_attributes($attr);
+
+        }else{
+
+            $attributes = _parse_attributes($attributes);
+        }
+
         $base = "<a" . $attributes . ">" . $title . "</a>";
         $e = ($row_12 == 0) ? $base : addNRow($base);
         return $e;
@@ -1675,4 +1684,15 @@ function format_phone($number)
         return $result;
     }
     return $number;
+}
+function path_enid($pos){
+
+
+    $base_url =  [
+        "forma_pago"    =>  "forma_pago/?info=1"
+
+    ];
+
+    return "../".$base_url[$pos];
+
 }
