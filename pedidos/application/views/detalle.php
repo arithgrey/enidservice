@@ -3,20 +3,24 @@
     <div class="col-lg-8">
 
         <div class="col-lg-12">
-        <?= div(get_btw(
-
-            div(heading_enid("# ORDEN " . $orden, 3), "numero_orden encabezado_numero_orden row")
-            ,
-
-            div(icon("fa fa-pencil"),
-                [
-                    "class" => "text-right editar_estado",
-                    "id" => $orden
-                ]),
-            "d-flex align-items-center justify-content-between bottom_30", 1
-
-
-        ) ,1)?>
+        <?= div(
+                get_btw(
+                        div(heading_enid("# ORDEN " . $orden, 3), "numero_orden encabezado_numero_orden row")
+                        ,
+                        div(
+                                icon("fa fa-pencil"),
+                                [
+                                        "class" => "text-right editar_estado",
+                                        "id" => $orden
+                                ]
+                        ),
+                        "d-flex align-items-center justify-content-between bottom_30"
+                        ,
+                        1
+                )
+                ,
+                1
+        )?>
 
         <?= div(crea_estado_venta($status_ventas, $recibo), 1) ?>
         <div class="selector_estados_ventas top_20 bottom_20">

@@ -301,6 +301,9 @@ class principal extends CI_Controller
             $data["email"] = "";
             $data["telefono"] = "";
             $data["id_perfil"] = 0;
+            $data["meta_keywords"] = "";
+            $data["desc_web"] = "";
+            $data["url_img_post"] = "";
 
             return $data;
         }

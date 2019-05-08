@@ -18,7 +18,7 @@ if (!function_exists('invierte_date_time')) {
             $href = "?categoria=" . $id_categoria;
             $text_lista = span($nombre_categoria . "(" . $faqs . ")");
             $link = anchor_enid($text_lista, ['href' => $href]);
-            $r[] = div($link, 4);
+            $r[] = div($link);
         }
         return append_data($r);
     }

@@ -3,20 +3,52 @@
 if (!function_exists('heading')) {
     function heading($data = '', $h = '1', $attributes = '')
     {
-        $attr = add_attributes($attributes);
-        return "<h" . $h . $attr . ">" . $data . "</h" . $h . ">";
+        if (is_string($attributes)){
+
+            $att["class"] = $attributes;
+            $attr = add_attributes($att);
+            return "<h" . $h . $attr . ">" . $data . "</h" . $h . ">";
+
+        }else{
+
+            $attr = add_attributes($attributes);
+            return "<h" . $h . $attr . ">" . $data . "</h" . $h . ">";
+        }
+
     }
 }
 if (!function_exists('ul')) {
-    function ul($list, $attributes = '')
+    function ul($list, $attributes = [])
     {
-        return _list('ul', $list, $attributes);
+        if (is_string($attributes)){
+
+            $attr["class"] = $attributes;
+
+            return _list('ul', $list, $attr);
+
+        }else{
+
+            return _list('ul', $list, $attributes);
+        }
+
     }
 }
 if (!function_exists('li')) {
-    function li($info, $attributes = '', $row_12 = 0)
+    function li($info, $attributes = [] , $row_12 = 0)
     {
-        return add_element($info, "li", $attributes, $row_12);
+
+
+        if (is_string($attributes)){
+
+            $att["class"] =  $attributes;
+
+            return add_element($info, "li", $att , $row_12);
+
+        }else{
+
+            return add_element($info, "li", $attributes, $row_12);
+        }
+
     }
 }
 if (!function_exists('add_input')) {
@@ -55,12 +87,26 @@ if (!function_exists('span')) {
     }
 }
 if (!function_exists('p')) {
-    function p($info, $attributes = '', $row = 0)
+    function p($info, $attributes = [], $row = 0)
     {
-        $attr = add_attributes($attributes);
-        $base = "<p " . $attr . ">" . $info . "</p>";
-        $e = ($row == 0) ? $base : addNRow($base);
-        return $e;
+
+        if (is_string($attributes)){
+
+            $att["class"] =  $attributes;
+            $attr = add_attributes($att);
+            $base = "<p " . $attr . ">" . $info . "</p>";
+            $e = ($row == 0) ? $base : addNRow($base);
+            return $e;
+
+        }else{
+
+            $attr = add_attributes($attributes);
+            $base = "<p " . $attr . ">" . $info . "</p>";
+            $e = ($row == 0) ? $base : addNRow($base);
+            return $e;
+
+        }
+
 
     }
 }
@@ -694,10 +740,22 @@ if (!function_exists('label')) {
     function label($label_text = '', $attributes = '', $row = 0)
     {
 
-        $attr = add_attributes($attributes);
-        $base = "<label" . $attr . ">" . $label_text . "</label>";
-        $label = ($row == 0) ? $base : addNRow($base);
-        return $label;
+
+        if (is_string($attributes)){
+
+            $att["class"] =  $attributes;
+            $attr = add_attributes($att);
+            $base = "<label" . $attr . ">" . $label_text . "</label>";
+            $label = ($row == 0) ? $base : addNRow($base);
+            return $label;
+
+        }else{
+            $attr = add_attributes($attributes);
+            $base = "<label" . $attr . ">" . $label_text . "</label>";
+            $label = ($row == 0) ? $base : addNRow($base);
+            return $label;
+        }
+
 
     }
 }
@@ -1621,20 +1679,24 @@ if (!function_exists('get_format_fecha_busqueda')) {
     }
 }
 if (!function_exists('get_format_izquierdo')) {
-    function get_format_izquierdo($in_session)
+    function get_format_izquierdo($categorias_publicas_venta, $categorias_temas_de_ayuda)
     {
         $r[] = anchor_enid(
             img(
-                ["src" => '../img_tema/enid_service_logo.jpg', 'width' => '100%']),
-            ['href' => "../contact/#envio_msj"]
-        );
-        $r[] = input_hidden(
+                [
+                    "src" => '../img_tema/enid_service_logo.jpg', 'width' => '100%'
+                ]
+            ),
             [
-                "class" => "in_session",
-                "value" => $in_session
-            ]);
+                'href' => "../contact/#envio_msj"
+            ]
+        );
+
+        $r[] = div(heading_enid("CATEGORIAS DESTACADAS" , 3));
+        $r[] = div(anchor_enid(heading_enid("Agregar" , 5 ,"underline top_20") , [ "href"=> path_enid("nfaq") , "class" => "black"]));
 
 
+        $r[] = get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda);
         $r[] = div(append_data([
             heading_enid("¿TIENES ALGUNA DUDA?", 3),
             anchor_enid("ENVIA TU MENSAJE",
@@ -1644,8 +1706,11 @@ if (!function_exists('get_format_izquierdo')) {
                 ])
 
         ]),
-            ["style" => "background: #f2f2f2;padding: 10px;"]);
-
+            [
+                "style" => "background: #f2f2f2;padding: 10px;",
+                "class" => "top_30"
+            ]
+        );
 
         return append_data($r);
 
@@ -1685,14 +1750,21 @@ function format_phone($number)
     }
     return $number;
 }
-function path_enid($pos){
+function path_enid($pos, $extra = 0 ){
 
 
     $base_url =  [
-        "forma_pago"    =>  "forma_pago/?info=1"
+        "forma_pago"    =>  "forma_pago/?info=1",
+        "nfaq" => "faq/?nueva=1",
+        "editar_faq" => "faq/?faq=",
+        "img_faq" =>  "img_tema/productos/"
+
 
     ];
 
-    return "../".$base_url[$pos];
+
+
+    $path =  ($extra !== 0 ) ?  "../".$base_url[$pos].$extra :  "../".$base_url[$pos];
+    return $path;
 
 }

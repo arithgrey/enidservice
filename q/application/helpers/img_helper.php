@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function get_format_faq()
+    function get_format_faq($id_faq)
     {
 
         $r[] = form_open("", [
@@ -17,21 +17,22 @@ if (!function_exists('invierte_date_time')) {
             "name" => "imagen"]);
         $r[] = input_hidden(["name" => 'q', "value" => 'faq']);
         $r[] = input_hidden(
-            ["class" => 'dinamic_img_faq',
+                ["class" => 'dinamic_img_faq',
                 "id" => 'dinamic_img_faq',
-                "name" => 'dinamic_img_faq',
+                "name" => 'id_faq',
                 "value" => $id_faq]
         );
-        $r[] = place("separate-enid");
-        $r[] = guardar(icon("fa fa-check"),
+
+        $x[] = place("lista_imagenes_faq", ["id" => 'lista_imagenes_faq']);
+        $x[] = guardar(icon("fa fa-check"). " AGREGAR ",
             [
                 "type" => "submit",
-                "class" => 'btn btn btn-sm guardar_img_enid pull-right',
                 "id" => 'guardar_img_faq',
                 "style" => 'color:white;'
             ]);
-        $r[] = place("separate-enid");
-        $r[] = place("lista_imagenes_faq", ["id" => 'lista_imagenes_faq']);
+
+        $r[] =  div(append_data($x),"col-lg-6  col-lg-offset-3  top_30");
+
         $r[] = form_close(place("place_load_img_faq"));
 
         return append_data($r);

@@ -68,7 +68,8 @@
                     'title' => "¿Qué vendes?"
                 ], 1)
             ,
-            create_select($ciclo_facturacion,
+            create_select(
+                    $ciclo_facturacion,
                 "ciclo",
                 "form-control ciclo_facturacion ci_facturacion top_10",
                 "ciclo",
@@ -107,11 +108,11 @@
                 ], 1
             )
             ,
-            div($error_registro, ["class" => "extra_precio"], 1)
+            div($error_registro,  "extra_precio" , 1)
 
         ])
         ,
-        ["class" => "col-lg-3 contenedor_precio seccion_menu_tipo_servicio top_30"]
+        "col-lg-3 contenedor_precio seccion_menu_tipo_servicio top_30"
     ) ?>
     <?= div(guardar("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]), ["class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50']); ?>
     <?= form_close() ?>

@@ -19,7 +19,7 @@ class Inicio extends CI_Controller
         $data["departamentos"] = $this->get_departamentos_enid();
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos(1);
 
-        $activa = get_info_variable($this->input->get(), "q");
+        $activa = get_info_variable($this->input->get(), "q" );
         $data["activa"] = ($activa === "") ? 1 : $activa;
         $data = $this->getCssJS($data);
         $this->principal->show_data_page($data, 'empresas_enid');

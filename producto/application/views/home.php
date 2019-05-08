@@ -63,7 +63,7 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 
                 div($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"])
                 ,
-                div(div($imagenes["imagenes_contenido"], ["class" => "tab-content"]), ["class" => "big"])
+                div(div($imagenes["imagenes_contenido"],  "tab-content" ), "big" )
                 ,
                 ""
                 ,
@@ -126,7 +126,7 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
                             $precio,
                             $id_ciclo_facturacion),
                         3,
-                        ["class" => 'card-title pricing-card-title']
+                        'card-title pricing-card-title'
                     ) ?>
 
                     <?= validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion) ?>

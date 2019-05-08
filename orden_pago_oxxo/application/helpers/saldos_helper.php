@@ -102,10 +102,22 @@ if (!function_exists('invierte_date_time')) {
 
             ]);
             $r[] = div(
-                guardar("IMPRIMIR", ["class" => " imprimir", "style" => "background:#0a0e39!important;"], 1, 1),
-                ["class" => "col-lg-3 pull-right row"],
+                guardar(
+                    "IMPRIMIR",
+                    [
+                        "class" => " imprimir",
+                        "style" => "background:#0a0e39!important;"
+                    ]
+                    ,
+                    1
+                    ,
+                    1
+                ),
+                [
+                    "class" => "col-lg-3 pull-right row"
+                ]
+                ,
                 1
-
             );
             $r[] = br();
             $r[] = form_close();
@@ -171,7 +183,11 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = heading_enid($numero_cuenta, 4, ["style" => "color:blue;margin-bottom:30px;"]);
             $r[] = get_instrucciones();
-            return addNRow(div(append_data($r), ["class" => "border padding_20 top_20"]));
+            return addNRow(
+                div(
+                    append_data($r), "border padding_20 top_20"
+                )
+            );
 
         }
     }

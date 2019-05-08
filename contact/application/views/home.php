@@ -12,5 +12,9 @@
     <?= div("", 9) ?>
 </section>
 
-<?= div(format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono), ["class" => "container inner", "id" => "direccion"]) ?>
+<?= div(format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono), ["class" => "padding_15
+Hola sip con ellas tú hogar se verá cómo ninguno y todos querrán que les consigas unas 😉 
+
+Están en 880 las quieres ver en video?
+  top_100 bottom_100  blue_enid3   text-uppercase container inner", "id" => "direccion"]) ?>
 <?= input_hidden(["value" => $ubicacion, "class" => "ubicacion"]) ?>

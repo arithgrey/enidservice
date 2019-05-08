@@ -40,8 +40,9 @@ class Img extends REST_Controller
 	function form_faq_GET()
 	{
 
-		$data["id_faq"] = $this->get("id_faq");
-		$this->load->view("imgs/faq", $data);
+		$param = $this->get();
+		$response =  get_format_faq($param["id_faq"]);
+		$this->response($response);
 	}
 
 	function form_img_user_GET()

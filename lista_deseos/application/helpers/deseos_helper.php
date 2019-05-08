@@ -8,12 +8,20 @@ if (!function_exists('invierte_date_time')) {
             $response = append_data([
                 div("Apparel", "slide-label" ),
 
-                div(img([
-                    "src" => "../img_tema/preferencias/preferencias-1.jpg",
-                    "class" => "from-left"
-                ]), "slide-image animate" ),
+                div(
+                    img(
+                        [
+                            "src" => "../img_tema/preferencias/preferencias-1.jpg",
+                            "class" => "from-left"
+                        ]
+                    ), "slide-image animate"
+                ),
 
-                div(get_format_temporada(), "slide-content")
+                div(
+                    get_format_temporada()
+                    ,
+                    "slide-content"
+                )
 
             ]);
             return $response;
@@ -27,13 +35,23 @@ if (!function_exists('invierte_date_time')) {
 
             $response = append_data([
                 div("Bags",  "slide-label" ),
-                div(img([
-                        "src" => "../img_tema/preferencias/preferencias-2.jpg",
-                        "class" => "from-left"
-                    ])
-                    , "slide-image animate" ),
+                div(
+                    img(
+                        [
 
-                div(get_format_slide_accesorios(),  "slide-content")
+                            "src" => "../img_tema/preferencias/preferencias-2.jpg",
+                            "class" => "from-left"
+                    ]
+                    )
+                    ,
+                    "slide-image animate"
+                ),
+
+                div(
+                    get_format_slide_accesorios()
+                    ,
+                    "slide-content"
+                )
 
             ]);
             return $response;

@@ -76,29 +76,29 @@ class Archivo extends REST_Controller
 		$param["id_usuario"] = $this->id_usuario;
 		$param["id_usuario"] = $this->id_usuario;
 
-
+        $response =  "";
 		switch ($param["q"]) {
 			case 'faq':
 
-				$response = $this->img_model->insert_img_faq($param);
-				return $this->response_status_img($response);
+				$response = $this->create_imagen_faq($param);
 				break;
 
 
 			case 'perfil_usuario':
 
-				return $this->create_perfil_usuario($param);
+				$response =   $this->create_perfil_usuario($param);
 				break;
 
 			case 'servicio':
-				return $this->create_imagen_servicio($param);
+                $response = $this->create_imagen_servicio($param);
 				break;
 
 
 			default:
-				return "";
+
 				break;
 		}
+		return $response;
 	}
 
 	function response_status_img($status)
@@ -122,7 +122,17 @@ class Archivo extends REST_Controller
 		$api = "imagen_servicio/index";
 		return $this->principal->api($api, $q, "json", "POST");
 	}
+    function  create_imagen_faq($param){
 
+        $param["id_imagen"]= $this->img_model->insert_img($param, 1);
+
+        if ($param["id_imagen"] > 0 ) {
+
+            $api = "imagen_faq/index";
+            $this->principal->api($api, $param, "json", "POST");
+            return $param["id_faq"];
+        }
+    }
 	function create_imagen_usuario($q)
 	{
 

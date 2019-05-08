@@ -322,10 +322,6 @@ class Home extends CI_Controller
 
 		if ($es_recibo == 0) {
 
-
-
-
-
 		    $response = get_form_busqueda_pedidos($data["tipos_entregas"], $data["status_ventas"], $param);
 
 			$this->principal->show_data_page($data,

@@ -78,7 +78,9 @@ class Faqs extends REST_Controller
 					"id_categoria" => $categoria,
 					"status" => $status
 				];
-				$response = $this->faqsmodel->update($params, ["id_faq" => $id_faq]);
+				$this->faqsmodel->update($params, ["id_faq" => $id_faq]);
+				$response  = $id_faq;
+
 			}
 		}
 		$this->response($response);
