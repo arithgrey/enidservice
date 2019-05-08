@@ -225,7 +225,7 @@ if (!function_exists('invierte_date_time')) {
             if ($ubicacion < 1) {
 
 
-                $r[] = '<form id="form_contacto" action="../q/index.php/api/contacto/format/json/" method="post">';
+                $r[] = '<form id="form_contacto" action="../q/index.php/api/contacto/format/json/" method="post" class="top_100">';
                 $r[] = div(p("Departamento ", ['class' => 'white']), 3);
                 $r[] = div(create_select(
                     $departamentos,

@@ -8,7 +8,7 @@ class faqsmodel extends CI_Model
 		$this->load->database();
 	}
 
-	private function update($data = [], $params_where = [], $limit = 1)
+	function update($data = [], $params_where = [], $limit = 1)
 	{
 
 		foreach ($params_where as $key => $value) {
@@ -64,15 +64,15 @@ class faqsmodel extends CI_Model
 	function qsearch($param)
 	{
 
-		$q = $param["id_categoria"];
-		$extra = $param["extra"];
 		$query_get = "SELECT 
         titulo, 
         id_faq  
         FROM 
         faq 
         WHERE 
-        id_categoria = '" . $q . "'   " . $extra . "  ";
+        id_categoria = '" .  $param["id_categoria"] . "'   " . $param["extra"] . "  ";
+
 		return $this->db->query($query_get)->result_array();
+
 	}
 }

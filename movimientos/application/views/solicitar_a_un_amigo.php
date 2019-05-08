@@ -1,8 +1,9 @@
 <div class="col-lg-4 col-lg-offset-4">
     <?= heading("SOLICITA SALDO A UN AMIGO", 3) ?>
     <?= div(
-        "Ingresa el monto y correo que solicitas a tu amigo para contar con saldo en tu cuenta.",
-        ["class" => "desc_solicitud"]
+        "Ingresa el monto y correo que solicitas a tu amigo para contar con saldo en tu cuenta."
+        ,
+        "desc_solicitud"
     ) ?>
     <?= form_open("", ["class" => 'solicitar_saldo_amigo_form']) ?>
     <table>
@@ -13,15 +14,15 @@
                 "name" => "monto",
                 "class" => "form-control input-sm input monto_a_ingresar",
                 "required" => true
-            ])) ?>
-            <?= get_td("MXN", ["class" => "strong top_10"]) ?>
+            ]))
+            ?>
+            <?= get_td("MXN", "strong top_10" ) ?>
         </tr>
         <tr>
             <?= get_td("¿MONTO?",
                 [
                     "colspan" => 2,
-                    "style" =>
-                        "color: black;text-decoration: underline;font-size: 2em;"]
+                    "style" => "color: black;text-decoration: underline;font-size: 2em;"]
             ) ?>
         </tr>
         <tr>
@@ -33,7 +34,7 @@
                 "placeholder" => "Ejemplo jmedrano@enidservice.com",
                 "required" => true
             ])) ?>
-            <?= get_td("Email", ["class" => 'strong']) ?>
+            <?= get_td("Email", 'strong') ?>
         </tr>
     </table>
     <?= guardar("SOLICITAR SALDO", ["class" => "btn_solicitud_saldo"]) ?>

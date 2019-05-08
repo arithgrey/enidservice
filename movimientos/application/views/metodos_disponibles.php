@@ -80,9 +80,10 @@ $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJET
                 <?php endif; ?>
                 <?= input_hidden(["name" => "tipo", "value" => $banca]) ?>
                 <?= guardar("ASOCIAR" . icon("fa fa-chevron-right")) ?>
-                <?= div(p("Al asociar tu cuenta, podrás transferir tu saldo de 
-                                    Enid Service a tu cuenta personal",
-                        ["class" => "white"])
+                <?= div(
+                        p(
+                                "Al asociar tu cuenta, podrás transferir tu saldo de Enid Service a tu cuenta personal", "white"
+                        )
                     ,
                     ["style" => "margin-top: 35px;background: #213668;padding: 10px;"]
                 ) ?>
@@ -91,7 +92,7 @@ $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJET
     <?= form_close() ?>
 </div>
 <?php else: ?>
-    <?= div(get_format_asociar_cuenta_bancaria(), ["class" => "col-lg-4 col-lg-offset-4 contenedor_asociar_cuenta"]) ?>
+    <?= div(get_format_asociar_cuenta_bancaria(), "col-lg-4 col-lg-offset-4 contenedor_asociar_cuenta" ) ?>
 <?php endif; ?>
 </div>
 

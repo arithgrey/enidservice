@@ -3,14 +3,17 @@ let editar_respuesta = 0;
 let faq = 0; 
 $(document).ready(function(){	
 
+
 	if($(".in_session").val() == 1 ) {
 		$('#summernote').summernote();  			
 		$(".form_respuesta").submit(registra_respuesta);	
 	}	
 	$(".btn_edicion_respuesta").click(pre_editar_respuesta);
-	$(".btn_img_avanzado").click(carga_form_imagenes_faq);
+	//$(".btn_img_avanzado").click(carga_form_imagenes_faq);
 	$(".btn_registro_respuesta").click(pre_registro_respuesta);
 	$("footer").ready(carga_categocias_extras);
+	$("footer").ready(valida_registro_respuesta);
+	$(".note-codable").hide();
 
 });
 
@@ -18,13 +21,14 @@ let registra_respuesta = function(e){
 
 
 	let respuesta 	=  $(".note-editable").html();
-	let data_send	= $(".form_respuesta").serialize()+"&"+$.param({"respuesta" : respuesta , "editar_respuesta" :  get_option("editar_respuesta") , "id_faq" : get_option("faq") });	
+	let data_send	= $(".form_respuesta").serialize()+"&"+$.param({"respuesta" : respuesta });
 	let url 		=  "../q/index.php/api/faqs/respuesta/format/json/";
 	request_enid( "POST",  data_send, url, response_registro_respuesta, ".place_refitro_respuesta" );
 	e.preventDefault();
 }
 
 let response_registro_respuesta = function(data){
+
 	debugger;
 	show_response_ok_enid(".place_refitro_respuesta" , "Respuesta registrada!");
 	document.getElementById("form_respuesta").reset(); 				
@@ -38,7 +42,7 @@ let pre_editar_respuesta = function(e){
 	set_option("faq", get_parameter_enid($(this) , "id"));
 	set_option("editar_respuesta", 1);
 	carga_info_faq();
-	carga_form_imagenes_faq();
+	//carga_form_imagenes_faq();
 	$(".btn_img_avanzado").show();
 }
 
@@ -68,32 +72,33 @@ let response_carga_info_faq = function(data){
 	$(".note-editable").html(respuesta);		
 }	
 
-let carga_form_imagenes_faq = function(){
+let agrega_img_faq = function(){
 
-
-	let url_img_faq = "../imgs/index.php/enid/img_faq/"+get_option("faq");
-	llenaelementoHTML(".place_img_actual_faq", "<img src='"+url_img_faq+"' style='width:100%;'>");
-    let url =  "../imgs/index.php/api/img_controller/form_faq/format/json/";    
+	let url =  "../q/index.php/api/img/form_faq/format/json/";
+    let data_send =  {"id_faq" : get_parameter(".id_faq")};
    	request_enid( "GET",  data_send, url, response_carga_form_imagenes, ".place_load_img_faq");
 }
 
 let response_carga_form_imagenes = function(data){
 
-	llenaelementoHTML(".place_load_img_faq" , data);    
-    carga_imgs_faq();
+	display_elements([".form_respuesta"],0);
+	recorrepage(".text_agregar_img");
+
+	llenaelementoHTML(".place_load_img_faq" , data);
+	$("#guardar_img_faq").hide();
+	$(".imagen_img_faq").change(upload_imgs_enid_faq);
 }
 
 
-let carga_imgs_faq = function(){
-    $("#guardar_img_faq").hide();
-    $(".imagen_img_faq").change(upload_imgs_enid_faq);
-}
 
 let upload_imgs_enid_faq = function(){
+
     let i = 0, len = this.files.length , img, reader, file;        
     file = this.files[i];
     reader = new FileReader();
     reader.onloadend = function(e){
+
+    	display_elements([".text_agregar_img" , ".imagen_img_faq"] ,0 );
         mostrar_img_upload(e.target.result , 'lista_imagenes_faq');            
         $("#guardar_img_faq").show();
         $("#form_img_enid_faq").submit(registra_img_faq);            
@@ -120,17 +125,9 @@ let registra_img_faq = function(e){
             } 
     }).done(function(data){        
 
-               
-        $(".place_load_img_faq").html(data);
-        $("#lista_imagenes_faq").html("");  
-        
-        let new_url = "../faq/?faq="+get_option("faq");
+        let new_url = "../faq/?faq="+data;
 		redirect(new_url);
 
-
-    }).fail(function(){        
-        show_error_enid(".place_load_img_faq" , "Error al registrar imagenes " ); 
-        
     });
     $.removeData(formData);
 }
@@ -139,4 +136,9 @@ let carga_categocias_extras = function(){
 	let url =  "../q/index.php/api/faqs/categorias_extras/format/json/";
 	let data_send = {}; 
 	request_enid( "GET",  data_send, url, 1 , ".place_categorias_extras" , 0 , ".place_categorias_extras");
+}
+let valida_registro_respuesta = function () {
+	let erespuesta =  get_parameter(".erespuesta");
+	$(".note-editable").html(erespuesta);
+
 }

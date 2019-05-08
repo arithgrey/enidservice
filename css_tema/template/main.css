@@ -1012,6 +1012,10 @@ table {
     margin-top: 80px;
     display: block;
 }
+.top_100 {
+    margin-top: 100px;
+    display: block;
+}
 
 .bottom_10 {
     margin-bottom: 10px;
@@ -1310,4 +1314,20 @@ h5 {
 .mh_350{
 
     min-height: 350px;
+}
+.mh_250{
+
+    min-height: 250px;
+}
+.mh_200{
+
+    min-height: 200px;
+}
+.mh_150{
+
+    min-height: 150px;
+}
+.mh_270{
+
+    max-height: 270px!important;
 }

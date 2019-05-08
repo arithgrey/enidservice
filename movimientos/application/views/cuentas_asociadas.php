@@ -3,19 +3,35 @@
     <?php foreach ($cuentas_bancarias as $row): ?>
         <?php $resumen_clabe = get_resumen_cuenta($row["clabe"]); ?>
 
-        <?= div(append_data(
+        <?= div(
+                append_data(
             [
                 $row["nombre"],
                 icon("fa fa-credit-card "),
                 div($resumen_clabe)
             ]
-        ), ["class" => "info_cuenta top_10"]) ?>
+        )
+                ,
+                "info_cuenta top_10"
+        ) ?>
 
     <?php endforeach; ?>
-    <?= guardar("Agregar cuenta " . icon("fa fa-plus-circle "),
-        ["class" => "top_20"],
-        1, 1, 0
-        , "?q=transfer&action=1") ?>
+    <?= guardar(
+            "Agregar cuenta " . icon("fa fa-plus-circle ")
+            ,
+            [
+                    "class" => "top_20"
+            ]
+            ,
+
+            1
+            ,
+            1
+            ,
+            0
+            ,
+            "?q=transfer&action=1"
+    ) ?>
 
     <?= heading_enid("TARJETAS DE CRÉDITO Y DÉBITO", 3) ?>
     <?php foreach ($tarjetas as $row): ?>
@@ -26,8 +42,19 @@
 
         ]), ["class" => "info_cuenta"]) ?>
     <?php endforeach; ?>
-    <?= guardar("Agregar cuenta " . icon("fa fa-plus-circle "),
-        ["class" => "top_20"],
-        1, 1, 0
-        , "?q=transfer&action=1&tarjeta=1") ?>
+    <?= guardar(
+            "Agregar cuenta " . icon("fa fa-plus-circle ")
+            ,
+            [
+                    "class" => "top_20"
+            ]
+            ,
+        1
+            ,
+            1
+            ,
+            0
+            ,
+            "?q=transfer&action=1&tarjeta=1"
+        ) ?>
 </div>

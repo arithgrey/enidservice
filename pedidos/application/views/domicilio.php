@@ -9,7 +9,7 @@ $tipo_entrega  = $recibo["tipo_entrega"];
 ?>
 
 <div class="top_50">
-    <?= div(div(get_format_pre_orden($id_servicio, $id_error, $recibo, $domicilio, $id_recibo, $lista_direcciones), ["class" => " padding_20 shadow"]), 5) ?>
+    <?= div(div(get_format_pre_orden($id_servicio, $id_error, $recibo, $domicilio, $id_recibo, $lista_direcciones), " padding_20 shadow" ), 5) ?>
     <?= get_btw(
 
         div(get_forms_domicilio_entrega($id_recibo, $lista_direcciones), 6)

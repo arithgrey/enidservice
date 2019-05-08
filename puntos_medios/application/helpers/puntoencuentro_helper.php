@@ -23,7 +23,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = heading_enid("¿Quién recibe?", 2, ["class" => "text-uppercase"]);
         $r[] = form_open("", ["class" => "form-horizontal form_punto_encuentro mt-5"]);
-        $r[] = label(" NOMBRE ", ["class" => "col-lg-3 mt-3"]);
+        $r[] = label(" NOMBRE ", "col-lg-3 mt-3" );
 
         $r[] = div(input([
             "id" => "nombre",
@@ -34,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
             "required" => true
         ]), "col-lg-9 mt-3" );
 
-        $r[] = label("CORREO ", ["class" => "col-lg-3 mt-3"]);
+        $r[] = label("CORREO ", "col-lg-3 mt-3");
         $r[] = div(input([
             "id" => "correo",
             "name" => "email",
@@ -44,7 +44,7 @@ if (!function_exists('invierte_date_time')) {
             "required" => true
         ]),  "col-lg-9 mt-3" );
 
-        $r[] = label(" TELÉFONO ", ["class" => "col-lg-3 mt-3"]);
+        $r[] = label(" TELÉFONO ", "col-lg-3 mt-3");
 
         $r[] = div(input([
             "id" => "tel",
@@ -54,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
             "required" => true
         ]),  "col-lg-9 mt-3" );
 
-        $r[] = label(" CONTRASEÑA", ["class" => "col-lg-3 mt-3"]);
+        $r[] = label(" CONTRASEÑA", "col-lg-3 mt-3" );
 
         $r[] = div(input([
             "id" => "pw",
@@ -65,9 +65,9 @@ if (!function_exists('invierte_date_time')) {
         ]),  "col-lg-9 mt-3" );
 
 
-        $r[] = heading_enid("¿En qué horario te gustaría recibir tu pedido?", 4, ["class" => "col-lg-12 mt-3"]);
+        $r[] = heading_enid("¿En qué horario te gustaría recibir tu pedido?", 4,  "col-lg-12 mt-3" );
 
-        $r[] = label(icon("fa fa-calendar-o") . " FECHA ", ["class" => "col-lg-2 mt-3"]);
+        $r[] = label(icon("fa fa-calendar-o") . " FECHA ", "col-lg-2 mt-3" );
 
 
         $r[] = div(input(
@@ -82,9 +82,7 @@ if (!function_exists('invierte_date_time')) {
             ]), "col-lg-10 mt-3" );
 
 
-        $r[] = label(icon("fa fa-clock-o") . " HORA DE ENCUENTRO",
-            ["class" => "col-lg-4 mt-3"]
-        );
+        $r[] = label(icon("fa fa-clock-o") . " HORA DE ENCUENTRO", "col-lg-4 mt-3" );
 
         $r[] = div(lista_horarios(),  "col-lg-8 mt-3" );
 

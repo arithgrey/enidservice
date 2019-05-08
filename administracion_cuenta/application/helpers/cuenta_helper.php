@@ -11,8 +11,8 @@ if (!function_exists('invierte_date_time')) {
 				place("place_form_img"),
 				5
 			);
-			$r[] = div(get_format_user($usuario), ["class" => "page-header menu_info_usuario"]);
-			$r[] = div("Mantén la calma esta información será solo será visible si tú lo permites ", ['class' => 'registro_telefono_usuario_lada_negocio blue_enid_background2 white padding_1'], 1);
+			$r[] = div(get_format_user($usuario), "page-header menu_info_usuario" );
+			$r[] = div("Mantén la calma esta información será solo será visible si tú lo permites ", 'registro_telefono_usuario_lada_negocio blue_enid_background2 white padding_1', 1);
 			$x[] = div(append_data($r), 8);
 			$x[] = div(get_format_resumen_cuenta($usuario), 4);
 			return append_data($x);
@@ -27,8 +27,7 @@ if (!function_exists('invierte_date_time')) {
 			$x[] = hr();
 			$x[] = place("place_registro_conceptos");
 			$x[] = place("contenedor_conceptos_privacidad");
-
-			$r[] = div(append_data($x), ["class" => "col-lg-7"]);
+			$r[] = div(append_data($x), 7 );
 			$r[] = div(heading_enid("PRIVACIDAD Y SEGURIDAD", 3), 5);
 
 			return append_data($r);
@@ -91,7 +90,7 @@ if (!function_exists('invierte_date_time')) {
 
 			$r[] = heading_enid("TU CUENTA ENID SERVICE", 3);
 			$r[] = get_format_user($usuario, 1);
-			$r[] = addNRow(div(get_campo($usuario, "email", ""), ["class" => "top_20"], 1));
+			$r[] = addNRow(div(get_campo($usuario, "email", ""), "top_20", 1));
 			$r[] = addNRow(get_campo($usuario, "tel_contacto", "Tu prime apellido", 1));
 			$r[] = anchor_enid("MI DIRECCIÓN" . icon('fa  fa-fighter-jet'),
 				["class" => "a_enid_black btn_direccion top_20",
@@ -267,7 +266,7 @@ if (!function_exists('invierte_date_time')) {
 				,
 				place("registro_telefono_usuario")
 				,
-				"col-lg-5"
+				5
 			);
 			$r[] = div(guardar("Actualizar", ["class" => "input_enid"]), 2);
 			$r[] = form_close();

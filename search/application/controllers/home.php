@@ -122,7 +122,7 @@ class Home extends CI_Controller
 		$data["categorias_destacadas"] = $categorias_destacadas;
 		$data["css"] = ["search_main.css",
 			"css_tienda.css",
-			"producto.css"
+			"get_format_faqs"
 		];
 
 
