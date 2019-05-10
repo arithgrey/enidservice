@@ -1,24 +1,28 @@
 version: '3'
 services:
   web:
-      image: php:7.1-apache      
+      build: .
+      tty: true                         
       ports:
           - "80:80"            
           - "443:443"
       volumes:
            - ./:/var/www/html
+           - ../docker_template/php.ini:/usr/local/etc/php          
       networks:
         - default                                   
       extra_hosts:
           - "backend.de.com:127.0.0.1"      
       environment:
-        PHP_XDEBUG_ENABLED: 1
-        XDEBUG_CONFIG: remote_host=192.168.1.4
+        PHP_XDEBUG_ENABLED: 1      
+        XDEBUG_CONFIG: remote_host=<ip local machine>
+        PHP_IDE_CONFIG: "serverName=Backend"
         #PHP_IDE_CONFIG: "serverName=developer"
-        WEBSERVER_USER: www-data                          
+        WEBSERVER_USER: www-data 
+        
       links:
         - db      
-      container_name: backend_developer_web
+      container_name: enid_web
       
   db:
     image: mysql
@@ -34,4 +38,4 @@ services:
       - ../mysql/databasedata:/var/lib/mysql
     ports:
         - 3306:3306      
-    container_name: backend_developer_db
+    container_name: enid_db
