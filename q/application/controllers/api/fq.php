@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
-class Faqs extends REST_Controller
+class Fq extends REST_Controller
 {
 	function __construct()
 	{
@@ -11,6 +11,11 @@ class Faqs extends REST_Controller
 		$this->load->library(lib_def());
 	}
 
+	function index_GET(){
+
+        $this->response($this->faqsmodel->get([],[],10, 'fecha_registro'));
+
+    }
 	function id_GET()
 	{
 
@@ -48,6 +53,7 @@ class Faqs extends REST_Controller
 
 	function respuesta_POST()
 	{
+
 
 		$param = $this->post();
 		$response = false;

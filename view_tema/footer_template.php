@@ -32,41 +32,70 @@ $list_footer = [
 ]) ?>
 <?php if (!is_null($in_session) && $in_session < 1): ?>
     <?php if (!is_null($proceso_compra) && !isset($proceso_compra) || $proceso_compra == 0): ?>
-        <div class="base_compras top_50">
-            <div class='col-lg-4'>
-                <?= div(icon('fa  fa-fighter-jet'), 2) ?>
-                <?= div("FACILIDAD DE COMPRA", ['class' => 'strong']) ?>
-                <?= div("Compras seguras al momento") ?>
-                <?php if (!is_null($id_usuario) && isset($id_usuario)): ?>
-                    <?= input_hidden([
-                        "class" => 'id_usuario',
-                        "value" => $id_usuario
-                    ]) ?>
-                <?php endif; ?>
+
+        <div class="row shadow bloque_general_info ">
+            <div class="base_compras col-lg-12 top_50 bottom_50 text-center">
+                <div class='col-lg-3'>
+                    <?= div(icon('fa  fa-fighter-jet'), 2) ?>
+                    <?= div("FACILIDAD DE COMPRA", 'strong') ?>
+                    <?= div("Compras seguras al momento") ?>
+                    <?php if (!is_null($id_usuario) && isset($id_usuario)): ?>
+                        <?= input_hidden([
+                            "class" => 'id_usuario',
+                            "value" => $id_usuario
+                        ]) ?>
+                    <?php endif; ?>
+                </div>
+                <?php
+
+                $x = [];
+                $x[] = div(icon('fa fa-clock-o '), 2);
+                $x[] = div(append_data([
+                    div("+ ENTREGAS PUNTUALES",  'strong', 1),
+                    div("Recibe lo que deseas en tiempo y forma", 1)
+                ]));
+                ?>
+                <?= div(append_data($x), 3) ?>
+
+
+
+
+
+
+
+
+
+                <?php
+                $c = [];
+                $c[] = div(icon('fa fa-lock '), 2);
+                $c[] = div(append_data([
+                    div(" COMPRAS SEGURAS",  'strong', 1),
+                    div("Tu dinero se entregará cuando confirmes tu entrega!", 1)
+                ]));
+
+                ?>
+                <?= div(append_data($c), 3) ?>
+
+
+                <?php
+                $c = [];
+                $c[] = div(icon('fa fa-angle-right'), 2);
+                $c[] = div(append_data([
+                    div(" FAQS",  'strong',1),
+                    div("Lo que te intereza saver!", 1)
+                ]));
+
+                ?>
+                <?= div(anchor_enid(append_data($c) ,
+                    [
+                            "href" => path_enid("faqs"),
+                            "class"=> "white"
+                    ]), 3) ?>
+
             </div>
-            <?php
 
-            $x = [];
-            $x[] = div(icon('fa fa-clock-o '), 2);
-            $x[] = div(append_data([
-                div("+ ENTREGAS PUNTUALES", ['class' => 'strong'], 1),
-                div("Recibe lo que deseas en tiempo y forma", 1)
-            ]));
-
-
-            ?>
-            <?= div(append_data($x), 4) ?>
-            <?php
-            $c = [];
-            $c[] = div(icon('fa fa-lock '), 2);
-            $c[] = div(append_data([
-                div(" COMPRAS SEGURAS",  'strong'),
-                div("Tu dinero se entregará al vendedor hasta que confirmes que recibiste tu pedido!", 1)
-            ]));
-
-            ?>
-            <?= div(append_data($c), 4) ?>
         </div>
+        <?=hr()?>
     <?php endif; ?>
 <?php endif; ?>
 
@@ -76,10 +105,9 @@ $list_footer = [
     <?php if (!isset($proceso_compra) && !is_null($proceso_compra) && $proceso_compra == 0): ?>
         <?= div(print_footer($list_footer), ["class" => "base_paginas_extra"], 1) ?>
     <?php endif ?>
-
     <?php if (isset($is_mobile) && !is_null($is_mobile) && $is_mobile < 1): ?>
         <?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>
-            <?= $this->load->view("../../../view_tema/metodos_pago"); ?>
+            <?=div(get_metodos_pago(sip ), 1)?>
         <?php endif ?>
     <?php endif ?>
     <?= div("© 2019 ENID SERVICE.", ['class' => 'white footer-enid page-footer']) ?>

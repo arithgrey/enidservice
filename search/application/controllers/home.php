@@ -121,8 +121,7 @@ class Home extends CI_Controller
 		$categorias_destacadas = $this->carga_categorias_destacadas();
 		$data["categorias_destacadas"] = $categorias_destacadas;
 		$data["css"] = ["search_main.css",
-			"css_tienda.css",
-			"get_format_faqs"
+			"css_tienda.css"
 		];
 
 

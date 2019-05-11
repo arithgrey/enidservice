@@ -22,7 +22,7 @@ let registra_respuesta = function(e){
 
 	let respuesta 	=  $(".note-editable").html();
 	let data_send	= $(".form_respuesta").serialize()+"&"+$.param({"respuesta" : respuesta });
-	let url 		=  "../q/index.php/api/faqs/respuesta/format/json/";
+	let url 		=  "../q/index.php/api/fq/respuesta/format/json/";
 	request_enid( "POST",  data_send, url, response_registro_respuesta, ".place_refitro_respuesta" );
 	e.preventDefault();
 }
@@ -133,7 +133,7 @@ let registra_img_faq = function(e){
 }
 
 let carga_categocias_extras = function(){
-	let url =  "../q/index.php/api/faqs/categorias_extras/format/json/";
+	let url =  "../q/index.php/api/fq/categorias_extras/format/json/";
 	let data_send = {}; 
 	request_enid( "GET",  data_send, url, 1 , ".place_categorias_extras" , 0 , ".place_categorias_extras");
 }
