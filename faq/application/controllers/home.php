@@ -30,16 +30,19 @@ class Home extends CI_Controller
         $data["flag_busqueda_q"] = $flag_busqueda_q;
         $data["lista_categorias"] = $this->get_categorias_tipo(1);
 
+        $f =  0 ;
         if ($flag_busqueda_q >  0 ) {
 
             $data["respuesta"] = $this->get_faq($faq);
+            $f ++ ;
 
         }
 
-        $flag_categoria = get_param_def($param, "categoria");
-        if ($flag_categoria >  0 ) {
+        if ( get_param_def($param, "categoria")>  0 ) {
 
             $data["faqs_categoria"] = $this->get_faqs_categoria($categoria, $data);
+            $f ++ ;
+
 
         }
 
@@ -49,15 +52,35 @@ class Home extends CI_Controller
         if ($flag_busqueda_personalidaza > 0 ) {
 
             $data["faqs_categoria"] = $this->search_faqs($faqs);
+            $f ++;
+
         }
+        if( $f < 1 ){
+
+            $response =  $this->get_recientes($param);
+            $data["faqs_categoria"]=  $this->append_imgs($response);
+
+        }
+
+
+
         $data["param"] = $this->input->get();
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
-
         $data = $this->getCssJs($data);
-        $this->principal->show_data_page($data, get_format_faqs($data)  , 1);
+
+
+
+        $response =  get_format_faqs($data);
+        $this->principal->show_data_page($data,   $response , 1);
 
     }
+    private function get_recientes($q){
 
+
+        $api = "fq/index/format/json/";
+        return $this->principal->api($api, $q);
+
+    }
     private function get_categorias_por_tipo($tipo)
     {
 
@@ -81,7 +104,7 @@ class Home extends CI_Controller
         $q["id_categoria"] = $id_categoria;
         $q["extra"] = $extra;
 
-        $api = "faqs/qsearch/format/json/";
+        $api = "fq/qsearch/format/json/";
         $response = $this->principal->api($api, $q);
 
         $response =  $this->append_imgs($response);
@@ -133,7 +156,7 @@ class Home extends CI_Controller
     {
 
         $q["id"] = $faq;
-        $api = "faqs/id/format/json/";
+        $api = "fq/id/format/json/";
         $response = $this->principal->api($api, $q);
         return $response;
 
@@ -142,7 +165,7 @@ class Home extends CI_Controller
     private function search_faqs($q)
     {
         $param["q"] = $q;
-        $api = "faqs/search/format/json/";
+        $api = "fq/search/format/json/";
         return $this->principal->api($api, $param);
     }
 

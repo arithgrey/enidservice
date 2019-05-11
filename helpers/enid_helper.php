@@ -1750,6 +1750,61 @@ function format_phone($number)
     }
     return $number;
 }
+function get_metodos_pago(){
+
+    $r[] =   div(img([
+        'class' => "logo_pago",
+        'style' => 'width:95px!important',
+        'src' => "../img_tema/bancos/masterDebito.png"])) ;
+
+    $r[] =   div(img([
+        'class' => "logo_pago",
+        'style' => 'width:65px!important',
+        'src' => "../img_tema/bancos/paypal2.png"])) ;
+
+    $r[] =   div(img([
+        'class' => "logo_pago",
+        'style' => 'width:95px!important',
+        'src' => "../img_tema/bancos/visaDebito.png"])) ;
+
+    $r[] =   div(img([
+        'class' => "logo_pago",
+        'style' => 'width:65px!important',
+        'src' => "../img_tema/bancos/oxxo-logo.png"])) ;
+
+    $r[] =   div(img([
+        'class' => "logo_pago",
+        'style' => 'width:85px!important',
+        'src' => "../img_tema/bancos/bancomer2.png"])) ;
+
+    $r[] =   div(img([
+        'class' => "logo_pago",
+        'style' => 'width:85px!important',
+        'src' => "../img_tema/bancos/santander.png"])) ;
+
+
+    $r[] =   div(img([
+        'class' => "logo_pago",
+        'style' => 'width:95px!important',
+        'src' => "../img_tema/bancos/banamex.png"])) ;
+
+
+    $r[] =   div(img([
+        'class' => "logo_pago",
+        'style' => 'width:65px!important',
+        'src' => "../img_tema/bancos/fedex.png"])) ;
+
+    $r[] =   div(img(
+        ['class' => "logo_pago",
+            'style' => 'width:75px!important',
+            'src' => "../img_tema/bancos/dhl2.png"]));
+
+
+    $response =  div(div(append_data($r), "col-lg-12 d-flex flex-row justify-content-between"),"info_metodos_pago row");
+    return $response;
+
+}
+
 function path_enid($pos, $extra = 0 ){
 
 
@@ -1757,12 +1812,11 @@ function path_enid($pos, $extra = 0 ){
         "forma_pago"    =>  "forma_pago/?info=1",
         "nfaq" => "faq/?nueva=1",
         "editar_faq" => "faq/?faq=",
-        "img_faq" =>  "img_tema/productos/"
+        "img_faq" =>  "img_tema/productos/",
+        "faqs" => "faq",
 
 
     ];
-
-
 
     $path =  ($extra !== 0 ) ?  "../".$base_url[$pos].$extra :  "../".$base_url[$pos];
     return $path;

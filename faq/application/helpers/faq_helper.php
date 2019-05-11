@@ -27,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
 
                 }else{
 
-                    $response =  get_lista_faq($data);
+                    $response =  get_lista_faq($data["respuesta"], $data);
                 }
 
             }else{
@@ -78,12 +78,11 @@ if (!function_exists('invierte_date_time')) {
         return append_data($r);
 
     }
-    function get_lista_faq($data){
+    function get_lista_faq($respuestas, $data){
 
         $r      =   [];
-        $respuesta =  $data["respuesta"];
 
-        foreach ($respuesta as $row ){
+        foreach ($respuestas as $row ){
 
             $id_faq =  $row["id_faq"];
             $titulo =  $row["titulo"];

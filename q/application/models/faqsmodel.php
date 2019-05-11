@@ -28,7 +28,7 @@ class faqsmodel extends CI_Model
 		return $this->get($params, ["id_faq" => $id]);
 	}
 
-	private function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
+	function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
 	{
 		$params = implode(",", $params);
 		$this->db->limit($limit);
