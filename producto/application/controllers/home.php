@@ -59,12 +59,10 @@ class Home extends CI_Controller
 		$data["meta_keywords"] = "";
 		$data["desc_web"] = "";
 		$data["url_img_post"] = "";
-		$data["css"] = ["pre.css"];
-		$data["js"] = ["servicio/pre.js"];
+
+        $data   =  $this->principal->getCSSJs($data, "producto_pre");
 		$data["id_servicio"] = $this->input->get("producto");
 		$data["proceso_compra"] = 1;
-
-
 		$param = $this->input->post();
 
 
@@ -79,10 +77,8 @@ class Home extends CI_Controller
 		$data["id_carro_compras"]   =  (array_key_exists("id_carro_compras", $param)) ? $param["id_carro_compras"] : 0;
 
 
-
 		$img    = $this->principal->get_imagenes_productos($param["plan"], 1 , 1);
 		$data["url_imagen_servicio"] =  get_img_serv($img);
-
 		$this->principal->show_data_page($data, 'pre');
 
 	}
@@ -91,7 +87,7 @@ class Home extends CI_Controller
 	{
 
 
-	    $id_servicio = get_info_producto($param["producto"]);
+	    $id_servicio = get_param_def($param, "producto" ,0,1);
 		$this->set_option("id_servicio", $id_servicio);
 		$data = $this->principal->val_session("");
 		$data["proceso_compra"] = get_info_variable($param, "proceso");
@@ -113,7 +109,7 @@ class Home extends CI_Controller
 
 		} else {
 
-			$data["desde_valoracion"] = get_info_usuario_valor_variable($param, "valoracion");
+			$data["desde_valoracion"] = get_param_def($param, "valoracion");
 			$this->vista($param, $data);
 		}
 	}
@@ -187,16 +183,7 @@ class Home extends CI_Controller
 		$data["existencia"] = $this->get_existencia($id_servicio);
 
 
-
-		$data["css"] = [
-		    "css_tienda.css",
-			"producto_principal.css",
-			"sugerencias.css",
-			"producto.css"
-		];
-
-
-		$data["js"] = ['producto/principal.js'];
+        $data   =  $this->principal->getCSSJs($data, "producto");
 
 		$this->principal->show_data_page($data, 'home');
 
@@ -306,17 +293,15 @@ class Home extends CI_Controller
 		if ($this->agent->is_mobile() == FALSE) {
 			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 		}
-
 		$param = $this->input->get();
 		$data["meta_keywords"] = "";
 		$data["desc_web"] = "";
 		$data["url_img_post"] = "";
-		$data["css"] = ["pre.css"];
-		$data["js"] = ["servicio/pre.js"];
 		$data["id_servicio"] = $param["servicio"];
 		$data["recibo"] = $param["recibo"];
 		$data["proceso_compra"] = 1;
 		$data["orden_pedido"] = 0;
+        $data   =  $this->principal->getCSSJs($data, "producto_recibo_registrado");
 
 		$this->principal->show_data_page($data, 'pre');
 

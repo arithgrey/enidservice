@@ -16,7 +16,10 @@ $(document).ready(function(){
 	});
 	$("#form_update_password").submit(set_password);	
 	$(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
-	$(".f_telefono_usuario").submit(actualiza_telefono_usuario);
+
+	$(".form_telefono_usuario").submit(actualiza_telefono);
+
+
 	$(".f_telefono_usuario_negocio").submit(set_telefono_usuario_negocio);
 
 	
@@ -74,13 +77,14 @@ let  actualiza_nombre_usuario = function(e){
 	},".registro_nombre_usuario" );
 	e.preventDefault();
 }
-let actualiza_telefono_usuario = function(e){
+let actualiza_telefono = function(e){
 
-	let data_send=  $(".f_telefono_usuario").serialize();  
+	let data_send=  $(".form_telefono_usuario").serialize();
 	let url =  "../q/index.php/api/usuario/telefono/format/json/";			
 	request_enid( "PUT",  data_send, url, function(){
 		show_response_ok_enid(".registro_telefono_usuario" , "Tu teléfono fue actualizado!");
 	},".registro_telefono_usuario");
+
 	e.preventDefault();
 }
 let  set_telefono_usuario_negocio = function(e){

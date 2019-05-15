@@ -18,9 +18,7 @@ class Home extends CI_Controller
 		$data["f_pago"] = 1;
 		$clasificaciones_departamentos = $this->principal->get_departamentos();
 		$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-
-		$data["js"] = [base_url('application/js/principal.js'), "tareas_complejas/principal.css"];
-		$data["css"] = ["tareas_complejas.css"];
+        $data = $this->principal->getCssJs($data, "tareas_complejas");
 		$this->principal->show_data_page($data, 'home');
 	}
 }

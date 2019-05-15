@@ -3,7 +3,7 @@
 
     <?= anchor_enid("ESCRIBE UNA RESEÑA" . icon("fa fa-chevron-right ir"),
         [
-            "class" => "escribir_valoracion white",
+            "class" => "escribir_valoracion white escribir",
             "href" => "../valoracion?servicio=" . $servicio,
 
         ]) ?>

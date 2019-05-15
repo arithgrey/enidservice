@@ -29,29 +29,15 @@ class Home extends CI_Controller
             $alcance = $this->get_alcance($data["id_usuario"]);
             $data["alcance"] = crea_alcance($alcance);
 
-            $data["js"] = [
-                'area_cliente/principal.js',
-                'area_cliente/proyectos_persona.js',
-                'area_cliente/cobranza.js',
-                'js/direccion.js',
-                "alerts/jquery-confirm.js"
-
-            ];
-
-
-            $data["css"] = [
-                "css_tienda_cliente.css",
-                "valoracion.css",
-                "area_cliente.css",
-                "confirm-alert.css"
-            ];
 
             $data["ticket"] = get_info_variable($this->input->get(), "ticket");
+            $data   =  $this->principal->getCSSJs($data, "area_cliente");
+
+
             $this->principal->show_data_page($data, 'home');
         }
 
     }
-
     private function resumen_valoraciones($id_usuario)
     {
 

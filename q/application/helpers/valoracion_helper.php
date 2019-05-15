@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
             $email = $extra["email"];
         }
 
-        $r[] = heading_enid("ESCRIBE UNA RESEÑA", 3,["class"=> "underline   "]);
+        $r[] = heading_enid("ESCRIBE UNA RESEÑA", 3, "underline");
         $r[] = div("Sobre  " . $servicio[0]["nombre_servicio"]);
         $r[] = form_open("", ["class" => "form_valoracion"]);
         $r[] = place("nuevo");

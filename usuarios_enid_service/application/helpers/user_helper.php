@@ -269,15 +269,17 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_format_tipo_clasificacion')) {
         function get_format_tipo_clasificacion()
         {
-            $x[] = div(div("TIPO CLASIFICACIÓN"), 3);
-            $x[] = append_data(
+            $x[] = div("TIPO CLASIFICACIÓN", 3);
+
+            $x[] = div(append_data(
                 [
                     form_open("", ["class" => "form-tipo-talla"]),
                     input(["type" => "text", "name" => "tipo_talla", "required" => true]),
                     form_close()
-                ], 1, 9
-            );
-            $r[] = div(append_data($x), 6, 1);
+                ]
+            ), 9 );
+
+            $r[] = div(div(append_data($x), 6, 1), 13);
             $r[] = place("place_tallas");
             return append_data($r);
 

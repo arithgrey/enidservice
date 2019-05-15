@@ -83,11 +83,8 @@ class Home extends CI_Controller
 			$data["vendedor"] =
 				$this->principal->get_info_usuario($data["servicio"][0]["id_usuario"]);
 		}
-		$data["js"] = ["js/direccion.js",
-			'procesar/principal.js',
-			'procesar/sha1.js'];
 
-		$data["css"] = array("procesar_pago.css");
+        $data   =  $this->principal->getCSSJs($data, "procesar");
 		$data["carro_compras"] =  $param["carro_compras"];
 		$data["id_carro_compras"] =  $param["id_carro_compras"];
 
@@ -102,18 +99,7 @@ class Home extends CI_Controller
         $data["url_img_post"] = create_url_preview("recomendacion.jpg");
         $data["servicio"] = $this->resumen_servicio($param["id_servicio"]);
         $data["clasificaciones_departamentos"] = "";
-
-
-
-
-        $data["js"] = [
-            "js/direccion.js",
-            'procesar/principal.js',
-            'procesar/sha1.js'
-        ];
-        $data["css"] = ['procesar_contacto.css'];
-
-
+        $data   =  $this->principal->getCSSJs($data, "procesar_crear");
         $this->principal->show_data_page($data, 'procesar_contacto');
 
     }
@@ -125,14 +111,9 @@ class Home extends CI_Controller
 		$data["meta_keywords"] = '';
 		$data["desc_web"] = "Registra tu cuenta  y recibe  asistencia al momento.";
 		$data["clasificaciones_departamentos"] = "";
+        $data   =  $this->principal->getCSSJs($data, "procesar_domicilio");
 
 
-		$data["js"] = [
-			"domicilio/direccion_pedido_registrado.js",
-			"js/direccion.js"
-		];
-
-		$data["css"] = ["procesar_pago.css"];
 		$param["id_recibo"] = $param["recibo"];
 		$param["id_usuario"] = $this->principal->get_session("idusuario");
 		$response = $this->carga_ficha_direccion_envio($param,1);

@@ -19,9 +19,9 @@ class Inicio extends CI_Controller
         $data["departamentos"] = $this->get_departamentos_enid();
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos(1);
 
-        $activa = get_info_variable($this->input->get(), "q" );
+        $activa = get_info_variable($this->input->get(), "q");
         $data["activa"] = ($activa === "") ? 1 : $activa;
-        $data = $this->getCssJS($data);
+        $data = $this->principal->getCssJS($data, "desarrollo");
         $this->principal->show_data_page($data, 'empresas_enid');
 
     }
@@ -42,24 +42,5 @@ class Inicio extends CI_Controller
         return $this->principal->api($api, $q);
     }
 
-    private function getCssJS($data)
-    {
-        $data["css"] = ["desarrollo_principal.css", "confirm-alert.css"];
-
-        $data["js"] = [
-            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
-            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-            "js/pickers-init.js",
-            "desarrollo/principal.js",
-            "alerts/jquery-confirm.js",
-            "js/summernote.js"
-
-        ];
-
-
-        return $data;
-    }
 
 }

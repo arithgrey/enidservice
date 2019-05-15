@@ -18,8 +18,7 @@ class Home extends CI_Controller
         $data["desc_web"] = "";
         $data["url_img_post"] = "";
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
-
-        $data["js"] = ['tiempo_entrega/principal.js'];
+        $data = $this->principal->getCssJs($data, "tiempo_venta");
         $this->principal->show_data_page($data, 'home');
 
 

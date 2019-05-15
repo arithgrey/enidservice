@@ -120,12 +120,9 @@ class Home extends CI_Controller
 
 		$categorias_destacadas = $this->carga_categorias_destacadas();
 		$data["categorias_destacadas"] = $categorias_destacadas;
-		$data["css"] = ["search_main.css",
-			"css_tienda.css"
-		];
 
+        $data = $this->principal->getCssJs($data, "search");
 
-		$data["js"] = ["search/principal.js"];
 		$data["filtros"] = $this->get_orden();
 		$data["order"] = $data_send["order"];
 		$this->create_keyword($param);

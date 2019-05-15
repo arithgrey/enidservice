@@ -41,7 +41,8 @@ class Home extends CI_Controller
 			$param = $this->input->post();
 			$data["tipos_puntos_encuentro"] = $this->get_tipos_puntos_encuentro($param);
 			$data["punto_encuentro"] = 0;
-			$data = $this->appendJSCss($data);
+
+			$data = $this->principal->getCSSJs($data, "puntos_medios");
 
 			$primer_registro = (get_param_def($param, "recibo") == 0) ? 1 : 0;
 			$data["primer_registro"] = $primer_registro;
@@ -103,28 +104,6 @@ class Home extends CI_Controller
 
 		$api = "tipo_punto_encuentro/index/format/json/";
 		return $this->principal->api($api, $q);
-	}
-
-	private function appendJSCss($data)
-	{
-		$data["css"] = [
-			"puntos_encuentro.css"
-
-		];
-
-
-		$data["js"] = ["login/sha1.js",
-			"puntos_medios/principal.js",
-			"js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-			"js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-			"js/bootstrap-daterangepicker/moment.min.js",
-			"js/bootstrap-daterangepicker/daterangepicker.js",
-			"js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-			"js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-			"js/pickers-init.js",
-
-		];
-		return $data;
 	}
 
 }

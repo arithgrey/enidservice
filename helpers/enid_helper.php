@@ -904,17 +904,6 @@ if (!function_exists('porcentaje_total')) {
 
     }
 }
-if (!function_exists('get_info_usuario_valor_variable')) {
-    function get_info_usuario_valor_variable($q2, $campo)
-    {
-
-        $val = 0;
-        if (isset($q2[$campo]) && $q2[$campo] != null) {
-            $val = $q2[$campo];
-        }
-        return $val;
-    }
-}
 
 if (!function_exists('get_url_tumblr')) {
     function get_url_tumblr($url, $icon = 0)

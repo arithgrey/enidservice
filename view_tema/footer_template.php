@@ -107,10 +107,18 @@ $list_footer = [
     <?php endif ?>
     <?php if (isset($is_mobile) && !is_null($is_mobile) && $is_mobile < 1): ?>
         <?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>
-            <?=div(get_metodos_pago(sip ), 1)?>
+            <?=div(get_metodos_pago(), 1)?>
         <?php endif ?>
     <?php endif ?>
-    <?= div("© 2019 ENID SERVICE.", ['class' => 'white footer-enid page-footer']) ?>
+    <?= div(
+            get_btw(
+                    div("© 2019 ENID SERVICE."  )
+                    ,
+                    div(anchor_enid("FAQS", ["class"=> "white" , "href" => path_enid("faqs")]))
+                    ,
+                'white footer-enid page-footer  d-flex align-items-center justify-content-between'
+
+    )) ?>
 <?php endif; ?>
 
 

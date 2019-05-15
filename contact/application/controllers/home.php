@@ -24,8 +24,7 @@ class Home extends CI_Controller
         $param = $this->input->post();
         if (get_param_def($param, "proceso_compra", 0, 1) > 0) {
 
-            $data["js"] = ["contact/proceso_compra_direccion.js"];
-
+            $data =  $this->principal->getCssJs($data, "contacto_proceso_compra");
             $response =  get_format_proceso_compra();
             $this->principal->show_data_page($data, $response  , 1);
 
@@ -44,11 +43,7 @@ class Home extends CI_Controller
 
         if ($data["in_session"] == 0 && get_param_def($param, "servicio", 0, 1) > 0) {
 
-            $data["js"] = [
-                "login/sha1.js",
-                "contact/principal.js"
-            ];
-
+            $data =  $this->principal->getCssJs($data, "contacto_ubicacion");
             $data["servicio"] = $param["servicio"];
             $this->principal->show_data_page($data, 'preso_compra');
 

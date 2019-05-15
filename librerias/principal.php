@@ -308,4 +308,695 @@ class principal extends CI_Controller
             return $data;
         }
     }
+
+    function getCSSJs($data, $key)
+    {
+
+        $response = [
+
+            "administracion_cuenta" =>
+                [
+
+                    "js" => [
+                        'administracion_cuenta/principal.js',
+                        'administracion_cuenta/privacidad_seguridad.js',
+                        'administracion_cuenta/img.js',
+                        'js/direccion.js',
+                        'administracion_cuenta/sha1.js'
+                    ],
+                    "css" => [
+                        "administracion_cuenta_principal.css",
+                        "administracion_cuenta_info_usuario.css"
+                    ]
+
+
+                ]
+            ,
+            "area_cliente" =>
+                [
+                    "js" =>
+                        [
+                            'area_cliente/principal.js',
+                            'area_cliente/proyectos_persona.js',
+                            'area_cliente/cobranza.js',
+                            'js/direccion.js',
+                            "alerts/jquery-confirm.js"
+
+                        ],
+
+                    "css" =>
+                        [
+                            "css_tienda_cliente.css",
+                            "valoracion.css",
+                            "area_cliente.css",
+                            "confirm-alert.css"
+                        ]
+
+                ]
+            ,
+            "compras" =>
+                [
+
+                    "css" =>
+                        [
+                            "confirm-alert.css",
+                            "compras.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "compras/principal.js"
+
+                        ]
+
+                ]
+            ,
+            "contacto_proceso_compra" =>
+                [
+
+                    "css" =>
+                        [
+
+                        ],
+                    "js" =>
+                        [
+                            "contact/proceso_compra_direccion.js"
+
+                        ]
+                ]
+            ,
+            "contacto_ubicacion" =>
+                [
+
+
+                    "css" =>
+                        [
+
+                        ],
+                    "js" =>
+                        [
+
+                            "login/sha1.js",
+                            "contact/principal.js"
+
+                        ]
+                ]
+            ,
+            "desarrollo" =>
+                [
+
+
+                    "css" =>
+                        [
+                            "desarrollo_principal.css",
+                            "confirm-alert.css"
+
+                        ],
+                    "js" =>
+                        [
+
+                            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
+                            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                            "js/pickers-init.js",
+                            "desarrollo/principal.js",
+                            "alerts/jquery-confirm.js",
+                            "js/summernote.js"
+
+                        ]
+                ]
+            ,
+            "faq" => [
+
+                "css" =>
+                    [
+
+                        "faqs.css",
+                        "faqs_second.css"
+
+                    ],
+                "js" =>
+                    [
+
+                        "js/summernote.js",
+                        "faq/principal.js"
+
+                    ]
+
+            ]
+            ,
+            "forma_pago" =>
+                [
+
+                    "css" =>
+                        [
+                            "formas_pago.css"
+
+                        ],
+                    "js" =>
+                        [
+
+
+                        ]
+
+                ],
+            "lista_deseos_preferencias" =>
+                [
+                    "css" =>
+                        [
+                            "preferencias.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "lista_deseos/preferencias.js"
+
+                        ]
+
+
+                ],
+            "lista_deseos_productos_deseados" => [
+                "css" =>
+                    [
+                        "lista_deseos.css"
+
+                    ],
+                "js" =>
+                    [
+                        "lista_deseos/carro_compras.js"
+
+                    ]
+
+            ],
+            "login" =>
+                [
+                    "css" =>
+                        [
+                            "login.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "login/sha1.js",
+                            "login/ini.js"
+
+                        ]
+                    ,
+                    "url_img_post" => "promo.png"
+                    ,
+                    "desc_web" => "COMPRA Y VENDE EN ENID SERVICE"
+                    ,
+                    "meta_keywords" => "COMPRA Y VENDE ARTÍCULOS Y SERVICIOS  EN ENID SERVICE "
+
+                ],
+            "pago_oxxo" =>
+                [
+                    "css" =>
+                        [
+
+                            "pago_oxxo.css"
+                        ],
+                    "js" =>
+                        [
+
+
+                        ]
+                    ,
+
+
+                ]
+            ,
+            "pedidos" =>
+                [
+
+                    "css" =>
+                        [
+
+                            /**"js/bootstrap-datepicker/css/datepicker-custom.css",
+                             * "js/bootstrap-timepicker/css/timepicker.css",**/
+                            "pedidos.css",
+                            "confirm-alert.css"
+
+                        ],
+                    "js" =>
+                        [
+
+                            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+                            "js/bootstrap-daterangepicker/moment.min.js",
+                            "js/bootstrap-daterangepicker/daterangepicker.js",
+                            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                            "js/pickers-init.js",
+                            "alerts/jquery-confirm.js",
+                            "pedidos/principal.js",
+                            "pedidos/costos_operacion.js"
+
+                        ]
+                    ,
+
+
+                ]
+            ,
+            "pedidos_domicilios_pedidos" =>
+                [
+                    "css" =>
+                        [
+
+                            "bootstrap_1.min.css",
+                            "pedido_domicilio.css",
+                            "confirm-alert.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "domicilio/domicilio_entrega.js",
+                            "alerts/jquery-confirm.js"
+                        ]
+                    ,
+
+
+                ]
+            ,
+            "pedidos_seguimiento" =>
+                [
+                    "css" =>
+                        [
+
+                            "seguimiento_pedido.css",
+                            "confirm-alert.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "alerts/jquery-confirm.js",
+                            "pedidos/seguimiento.js"
+                        ]
+                    ,
+
+
+                ],
+            "planes_servicios" =>
+                [
+                    "css" =>
+                        [
+
+                            "css_tienda.css",
+                            "vender.css",
+                            "planes_servicios.css",
+                            "producto.css",
+                            "confirm-alert.css"
+
+                        ],
+                    "js" =>
+                        [
+                            'planes_servicios/principal.js',
+                            'planes_servicios/img.js',
+                            'js/summernote.js',
+                            'alerts/jquery-confirm.js'
+
+                        ]
+                    ,
+
+
+                ]
+            ,
+            "pregunta" =>
+                [
+                    "css" =>
+                        [
+
+                            "producto.css",
+                            "sugerencias.css",
+                            "valoracion.css"
+
+
+                        ],
+                    "js" =>
+                        [
+                            "pregunta/principal.js"
+
+                        ]
+                    ,
+                    "meta_keywords" => '',
+                    "desc_web" => "",
+                    "url_img_post" => create_url_preview("formas_pago_enid.png")
+
+
+                ],
+            "pregunta_hechas" =>
+                [
+                    "css" =>
+                        [
+
+                            "pregunta_listado.css",
+                            "summernote.css"
+
+
+                        ],
+                    "js" =>
+                        [
+                            "js/summernote.js",
+                            "pregunta/listado.js"
+
+
+                        ]
+                    ,
+
+
+                ]
+            ,
+            "pregunta_recibida" =>
+                [
+                    "css" =>
+                        [
+
+                            "pregunta_listado.css",
+                            "summernote.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "js/summernote.js",
+                            "pregunta/listado.js"
+
+                        ]
+                    ,
+
+
+                ]
+            ,
+            "procesar" =>
+                [
+                    "css" =>
+                        [
+
+                            "procesar_pago.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "js/direccion.js",
+                            'procesar/principal.js',
+                            'procesar/sha1.js'
+
+                        ]
+                    ,
+
+
+                ]
+            ,
+            "procesar_crear" =>
+                [
+                    "css" =>
+                        [
+
+                            'procesar_contacto.css'
+
+                        ],
+                    "js" =>
+                        [
+                            "js/direccion.js",
+                            'procesar/principal.js',
+                            'procesar/sha1.js'
+
+                        ]
+
+                ],
+            "procesar_domicilio" =>
+                [
+                    "css" =>
+                        [
+                            "procesar_pago.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "domicilio/direccion_pedido_registrado.js",
+                            "js/direccion.js"
+
+
+                        ]
+                ]
+            ,
+            "producto" =>
+                [
+                    "css" =>
+                        [
+                            "css_tienda.css",
+                            "producto_principal.css",
+                            "sugerencias.css",
+                            "producto.css"
+
+
+                        ],
+                    "js" =>
+                        [
+                            'producto/principal.js'
+
+                        ]
+                ]
+            ,
+            "producto_recibo_registrado" =>
+                [
+                    "css" =>
+                        [
+                            "pre.css"
+
+
+                        ],
+                    "js" =>
+                        [
+                            "servicio/pre.js"
+
+                        ]
+                ]
+            ,
+            "producto_pre" =>
+                [
+                    "css" =>
+                        [
+                            "pre.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "servicio/pre.js"
+
+                        ]
+                ]
+            ,
+            "puntos_medios" =>
+                [
+                    "css" =>
+                        [
+                            "puntos_encuentro.css"
+
+                        ],
+                    "js" =>
+                        [
+                            "login/sha1.js",
+                            "puntos_medios/principal.js",
+                            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+                            "js/bootstrap-daterangepicker/moment.min.js",
+                            "js/bootstrap-daterangepicker/daterangepicker.js",
+                            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                            "js/pickers-init.js",
+
+
+                        ]
+                ]
+            ,
+            "recomendacion_vista" =>
+                [
+                    "css" =>
+                        [
+
+                            "recomendacion_principal.css"
+                        ],
+                    "js" =>
+                        [
+
+                            "recomendaciones/principal.js"
+                        ]
+                ]
+
+            ,
+            "reporte_enid" =>
+                [
+                    "css" =>
+                        [
+
+                            "metricas.css",
+                            "lista_deseos.css",
+                            "productos_solicitados.css"
+                        ],
+                    "js" =>
+                        [
+
+                            "repo_enid/principal.js"
+                        ]
+                ]
+
+            ,
+            "search" =>
+                [
+                    "css" =>
+                        [
+
+                            "search_main.css",
+                            "css_tienda.css"
+                        ],
+                    "js" =>
+                        [
+
+                            "search/principal.js"
+                        ]
+                ]
+
+            ,
+            "sobre_enid" =>
+                [
+                    "js" =>
+                        [
+
+                            base_url('application/js/principal.js'),
+                            'sobre_enidservice/principal.js'
+                        ]
+                ]
+            ,
+            "tareas_complejas" =>
+                [
+                    "js" =>
+                        [
+
+                            base_url('application/js/principal.js'),
+                            "tareas_complejas/principal.css"
+
+                        ],
+                    "css" => [
+
+                        "tareas_complejas.css"
+                    ]
+                ]
+
+
+            ,
+            "tiempo_venta" =>
+                [
+                    "js" =>
+                        [
+                            'tiempo_entrega/principal.js'
+                        ]
+                ]
+
+
+            ,
+            "usuarios_enid_service" =>
+                [
+                    "js" =>
+                        [
+
+
+                            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
+                            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+                            "js/bootstrap-daterangepicker/moment.min.js",
+                            "js/bootstrap-daterangepicker/daterangepicker.js",
+                            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                            "js/pickers-init.js",
+                            'usuarios_enid/principal.js',
+                            'usuarios_enid/notificaciones.js',
+                            'usuarios_enid/categorias.js',
+                            "js/clasificaciones.js"
+
+                        ],
+                    "css" => [
+
+                        "usuarios_enid_service_principal.css",
+                        "template_card.css",
+
+
+                    ]
+                ]
+            ,
+            "valoracion" =>
+                [
+                    "js" =>
+                        [
+                            "valoracion/principal.js"
+                        ],
+                    "css" => [
+
+                        "valoracion_servicio.css"
+
+                    ]
+                ]
+            ,
+            "movimientos" =>
+                [
+
+                    "css" =>
+                        [
+                            "movimientos_info.css"
+
+                        ]
+
+                ]
+            ,
+            "movimientos_general" =>
+                [
+                    "js" =>
+                        [
+
+                            'movimientos/principal.js',
+                            'movimientos/notificaciones.js',
+                            'movimientos/movimientos.js'
+                        ],
+
+                ]
+            ,
+            "movimientos_saldo_amigo" =>
+                [
+                    "js" =>
+                        [
+                            'movimientos/solicitud_saldo_amigo.js'
+
+                        ],
+                    "css" => [
+                        "movimientos.css"
+
+                    ]
+
+                ]
+            ,
+            "movimientos_saldo_oxxo" =>
+                [
+                    "js" =>
+                        [
+                            base_url('application/js/solicitud_oxxo.js')
+
+                        ]
+
+                ]
+
+
+
+        ];
+
+
+        foreach ($response[$key] as $clave => $valor) {
+
+            $data[$clave] = $valor;
+
+        }
+
+        return $data;
+
+    }
+
 }

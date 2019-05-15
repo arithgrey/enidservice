@@ -96,7 +96,7 @@ if (!function_exists('invierte_date_time')) {
             }
         }
     }
-    function get_view_pregunta($formulario_valoracion, $id_servicio)
+    function get_format_pregunta($formulario_valoracion, $id_servicio)
     {
 
 
@@ -108,7 +108,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(place("place_tambien_podria_interezar", ["id" => "place_tambien_podria_interezar"]), 8, 1);
         $r[] = div(place("place_valoraciones top_50", ["id" => "place_valoraciones"]), 8, 1);
 
-        return append_data($r);
+        return div(append_data($r),1);
     }
 
 }

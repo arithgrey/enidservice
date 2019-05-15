@@ -449,7 +449,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $r[] = div("", ["id" => "video"], 1);
                 $x[] = heading_enid($servicio, 3, ["class" => 'titulo_sobre_el_producto letter-spacing-10']);
-                $x[] = div(strip_tags($descripcion), ["class" => "mt-5"]);
+                $x[] = div($descripcion, ["class" => "mt-5"]);
 
                 $text = div(append_data($x),
                     [
@@ -739,17 +739,6 @@ if (!function_exists('invierte_date_time')) {
                 ]);
             }
             return $url;
-        }
-    }
-    if (!function_exists('get_info_producto')) {
-        function get_info_producto($q2)
-        {
-
-            $id_producto = 0;
-            if (isset($q2) && $q2 != null) {
-                $id_producto = $q2;
-            }
-            return $id_producto;
         }
     }
     if (!function_exists('get_tienda_vendedor')) {

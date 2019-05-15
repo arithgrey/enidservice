@@ -1,3 +1,6 @@
+.escribir:hover{
+    color:blue!important;
+}
 .escribir_valoracion {
     color: blue !important;
     font-size: 1.5em !important;

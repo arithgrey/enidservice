@@ -15,7 +15,8 @@ class Inicio extends CI_Controller
 
         $data = $this->principal->val_session("Enid Service");
         $data["clasificaciones_departamentos"] = "";
-        $data["css"] = ["movimientos_info.css"];
+        $data = $this->principal->getCSSJs($data ,  "movimientos");
+
         $param = $this->input->get();
         if ($data["in_session"] == 1) {
 
@@ -75,8 +76,7 @@ class Inicio extends CI_Controller
     private function saldo_amigo($data)
     {
 
-        $data["css"] = ["/movimientos.css"];
-        $data["js"] = ['movimientos/solicitud_saldo_amigo.js'];
+        $data =  $this->principal->getCssJs($data , "movimientos_saldo_amigo");
         $this->principal->show_data_page($data, 'solicitar_a_un_amigo');
 
     }
@@ -100,7 +100,9 @@ class Inicio extends CI_Controller
 
     private function agrega_saldo_oxxo($data, $param, $id_usuario)
     {
-        $data["js"] = [base_url('application/js/solicitud_oxxo.js')];
+
+
+        $data =    $this->principal->getCssJs($data, "movimientos_saldo_oxxo");
         $this->principal->show_data_page($data, 'agregar_saldo_desde_oxxo');
     }
 
@@ -134,6 +136,8 @@ class Inicio extends CI_Controller
         $data["cuentas_bancarias"] = $this->get_cuentas_usuario($id_usuario, 0);
         $data["tarjetas"] = $this->get_cuentas_usuario($id_usuario, 1);
         $data["css"] = ["cuentas_asociadas.css"];
+
+
         $this->principal->show_data_page($data, 'cuentas_asociadas');
     }
 
@@ -173,14 +177,11 @@ class Inicio extends CI_Controller
 
     private function load_view_general($data, $param, $id_usuario)
     {
-        $saldos = $this->get_saldo_usuario($id_usuario);
-        $data["saldo_disponible"] = $saldos;
-        $data["js"] = [
-            'movimientos/principal.js',
-            'movimientos/notificaciones.js',
-            'movimientos/movimientos.js'
-        ];
+
+        $data["saldo_disponible"] = $this->get_saldo_usuario($id_usuario);
+        $data = $this->principal->getCSSJs($data ,  "movimientos_general");
         $this->principal->show_data_page($data, 'empresas_enid');
+
     }
 
     private function get_saldo_usuario($id_usuario)

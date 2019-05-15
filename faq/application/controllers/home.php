@@ -66,7 +66,7 @@ class Home extends CI_Controller
 
         $data["param"] = $this->input->get();
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
-        $data = $this->getCssJs($data);
+        $data = $this->principal->getCssJs($data,"faq");
 
 
 
@@ -169,16 +169,4 @@ class Home extends CI_Controller
         return $this->principal->api($api, $param);
     }
 
-    private function getCssJs($data)
-    {
-        $data["js"] = [
-            "js/summernote.js",
-            "faq/principal.js"
-        ];
-        $data["css"] = [
-            "faqs.css",
-            "faqs_second.css"
-        ];
-        return $data;
-    }
 }

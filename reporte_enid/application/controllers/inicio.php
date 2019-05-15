@@ -21,35 +21,10 @@ class Inicio extends CI_Controller
 		}
 		$data["clasificaciones_departamentos"] = "";
 		$data["categorias_destacadas"] = $this->carga_categorias_destacadas("");
-		$data = $this->getCssJs($data);
+		$data = $this->principal->getCssJs($data, "reporte_enid");
 		$this->principal->show_data_page($data, 'empresas_enid');
 
 	}
-
-	private function getCssJs($data)
-	{
-
-		$data["js"] = array(
-			/*"js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-			"js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-			"js/bootstrap-daterangepicker/moment.min.js",
-			"js/bootstrap-daterangepicker/daterangepicker.js",
-			"js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-			"js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-			"js/pickers-init.js",*/
-			"repo_enid/principal.js"
-		);
-
-		$data["css"] = [
-			"js/bootstrap-datepicker/css/datepicker-custom.css",
-			"js/bootstrap-timepicker/css/timepicker.css"
-
-		];
-
-		$data["css"] = ["metricas.css", "lista_deseos.css", "productos_solicitados.css"];
-		return $data;
-	}
-
 	private function module_redirect($num_perfil)
 	{
 
