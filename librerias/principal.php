@@ -982,8 +982,20 @@ class principal extends CI_Controller
 
                         ]
 
-                ]
+                ],
 
+            "utilidades" =>
+                [
+
+                    "js" =>
+                        [
+                            "js/librerias/clipboard.js",
+                            "utilidades/principal.js"
+
+
+                        ]
+
+                ]
 
 
         ];
