@@ -29,34 +29,13 @@ class Inicio extends CI_Controller
 		$data["is_mobile"] = ($this->agent->is_mobile() === FALSE) ? 0 : 1;
 
 
-		$data = $this->getCssJs($data);
+		$data = $this->principal->getCssJs($data, "planes_servicios");
 
 		$data["list_orden"] = $this->get_orden();
         $data["id_perfil"] = $this->principal->getperfiles();
 		$this->principal->show_data_page($data, 'home_enid');
 
 	}
-
-	private function getCssJs($data)
-	{
-
-		$data["js"] = [
-		    'planes_servicios/principal.js',
-			'planes_servicios/img.js',
-			'js/summernote.js',
-			'alerts/jquery-confirm.js'
-		];
-
-		$data["css"] = [
-			"css_tienda.css",
-			"vender.css",
-			"planes_servicios.css",
-			"producto.css",
-			"confirm-alert.css"
-		];
-		return $data;
-	}
-
 	private function prevenir_acceso($param, $data)
 	{
 

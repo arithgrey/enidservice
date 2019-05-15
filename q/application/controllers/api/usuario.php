@@ -116,14 +116,17 @@ class usuario extends REST_Controller
 	{
 
 		$param = $this->put();
-		$response = false;
+		$response = [];
 		if (if_ext($param, "tel_contacto,lada")) {
+
 			$params = [
-				"tel_contacto" => $param["telefono"],
+				"tel_contacto" => $param["tel_contacto"],
 				"tel_lada" => $param["lada"]
 			];
+
 			$params_where = ["idusuario" => $this->id_usuario];
 			$response = $this->usuario_model->update($params, $params_where);
+
 		}
 		$this->response($response);
 	}

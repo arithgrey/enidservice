@@ -28,7 +28,9 @@ class Home extends CI_Controller
         $data["desc_web"] = "Formas de pago Enid Service";
         $data["url_img_post"] = create_url_preview("formas_pago_enid.png");
         $data["clasificaciones_departamentos"] = "";
-        $data["css"] = ["formas_pago.css"];
+
+        $data = $this->principal->getCssJs($data,"forma_pago");
+
         $this->principal->show_data_page($data, get_format_pago(), 1);
     }
 

@@ -66,9 +66,8 @@ class Home extends CI_Controller
 			$prm["q"] = $id_usuario;
 			$data["paginacion"] = $this->get_paginacion($prm);
 		}
-		$data["css"] = ["recomendacion_principal.css"];
-		$data["js"] = ["recomendaciones/principal.js"];
 
+        $data = $this->principal->getCSSJs($data, "recomendacion_vista");
 		$response = get_formar_recomendacion($data["usuario"],
 			$resumen_recomendacion,
 			$data["paginacion"],

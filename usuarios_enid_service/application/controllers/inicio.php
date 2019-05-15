@@ -18,41 +18,12 @@ class Inicio extends CI_Controller
 		if ($num_perfil == 20) {
 			header("location:../area_cliente");
 		}
-
 		$data["departamentos"] = $this->get_departamentos_enid();
 		$data["perfiles_enid_service"] = $this->get_perfiles_enid_service();
 		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
-		$data = $this->getCssJs($data);
+		$data = $this->principal->getCssJs($data, "usuarios_enid_service");
 		$this->principal->show_data_page($data, 'empresas_enid');
 	}
-
-	function getCssJs($data)
-	{
-
-		$data["js"] = [
-			"js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
-			"js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-			"js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-			"js/bootstrap-daterangepicker/moment.min.js",
-			"js/bootstrap-daterangepicker/daterangepicker.js",
-			"js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-			"js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-			"js/pickers-init.js",
-			'usuarios_enid/principal.js',
-			'usuarios_enid/notificaciones.js',
-			'usuarios_enid/categorias.js',
-			"js/clasificaciones.js"
-		];
-
-		$data["css"] = [
-			"usuarios_enid_service_principal.css",
-			"template_card.css",
-
-		];
-
-		return $data;
-	}
-
 	private function get_perfiles_enid_service()
 	{
 

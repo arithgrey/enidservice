@@ -159,7 +159,7 @@ if (!function_exists('invierte_date_time')) {
 				$r[] = addNRow(get_form_nombre($usuario));
 				$r[] = addNRow(get_form_email($usuario));
 
-				$r[] = addNRow(div(get_form_telefono($usuario) , "row top_30"));
+				$r[] = addNRow(div(get_form_telefono($usuario) , "row"));
 				$r[] = addNRow(div(get_form_negocio($usuario),  "row") );
 
 			} else {
@@ -229,9 +229,8 @@ if (!function_exists('invierte_date_time')) {
 		function get_form_telefono($usuario)
 		{
 
-			$r[] = form_open("", ["class" => "f_telefono_usuario"]);
-			$r[] = div("Teléfon Movil", 3);
-
+            $r =  [];
+            $r[] = div("Teléfon Movil1", 3);
 			$r[] = get_btw(
 				input([
 					"id" => "lada",
@@ -247,14 +246,14 @@ if (!function_exists('invierte_date_time')) {
 				,
 				place("registro_telefono_usuario_lada")
 				,
-				"col-lg-2"
+				2
 
 			);
 
 			$r[] = get_btw(
 				input([
 					"id" => "telefono",
-					"name" => "telefono",
+					"name" => "tel_contacto",
 					"placeholder" => "Teléfono",
 					"class" => "form-control input-sm input_enid telefono ",
 					"required" => true,
@@ -268,10 +267,11 @@ if (!function_exists('invierte_date_time')) {
 				,
 				5
 			);
-			$r[] = div(guardar("Actualizar", ["class" => "input_enid"]), 2);
-			$r[] = form_close();
-			return append_data($r);
+			$r[] = guardar("Actualizar", ["class" => "input_enid"],2);
 
+
+			$response = form_open("", ["class" => "form_telefono_usuario" ]) . append_data($r) . form_close();
+			return $response;
 
 		}
 	}
@@ -280,7 +280,7 @@ if (!function_exists('invierte_date_time')) {
 		{
 
 			$r[] = form_open("");
-			$r[] = div('Correo electrónico', ['class' => 'strong'], 1);
+			$r[] = div('Correo electrónico',  'strong', 1);
 			$r[] = input([
 				"id" => "correo_electronico",
 				"name" => "correo_electronico",
@@ -293,6 +293,8 @@ if (!function_exists('invierte_date_time')) {
 			]);
 
 			$r[] = div('El correo electrónico NO se mostrará públicamente', 'blue_enid ', 1);
+            $r[] = form_close();
+
 			return append_data($r);
 
 

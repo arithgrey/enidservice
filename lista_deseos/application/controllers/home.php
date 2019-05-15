@@ -31,9 +31,8 @@ class Home extends CI_Controller
     {
 
         $data["preferencias"] = $this->get_preferencias($data["id_usuario"]);
-        $data["css"]    = ["preferencias.css"];
-        $data["js"]     = ["lista_deseos/preferencias.js"];
         $data["tmp"]    = get_format_preferencias();
+        $data =  $this->principal->getCSSJs($data, "lista_deseos_preferencias");
         $this->principal->show_data_page($data, 'home_preferencias');
     }
 
@@ -43,8 +42,8 @@ class Home extends CI_Controller
         $productos_deseados = $this->get_lista_deseos($data["id_usuario"]);
         $data["productos_deseados"]= $this->add_imagenes($productos_deseados);
         if (count($data["productos_deseados"]) > 0) {
-            $data["css"] = array("lista_deseos.css");
-	        $data["js"] = ["lista_deseos/carro_compras.js"];
+
+            $data =  $this->principal->getCSSJs($data, "lista_deseos_productos_deseados");
             $this->principal->show_data_page($data, 'home');
         } else {
             $response =   get_format_sin_productos();

@@ -23,8 +23,6 @@ class Home extends CI_Controller
 
 			$clasificaciones_departamentos = $this->principal->get_departamentos();
 			$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-
-
 			$prm["in_session"] = 0;
 			$prm["id_usuario"] = 0;
 			if ($data["in_session"] == 1) {
@@ -37,10 +35,8 @@ class Home extends CI_Controller
 
 			$prm["id_servicio"] = $servicio;
 			$formulario_valoracion = $this->carga_formulario_valoracion($prm);
-			$data["css"] = ["valoracion_servicio.css"];
-			$data["js"] = ["valoracion/principal.js"];
-
-			$response =  div($formulario_valoracion, ["class" => "top_20"]);
+			$data = $this->principal->getCssJs($data, "valoracion");
+			$response =  div($formulario_valoracion, "top_20" ,1 );
 			$this->principal->show_data_page($data, $response ,1);
 		} else {
 			header("location:../?q2=0&q=");
