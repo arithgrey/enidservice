@@ -14,9 +14,6 @@ class Home extends CI_Controller
     {
         $data = $this->principal->val_session("");
         $this->principal->acceso();
-        $data["meta_keywords"] = "";
-        $data["desc_web"] = "";
-        $data["url_img_post"] = "";
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
         $data = $this->principal->getCssJs($data, "tiempo_venta");
         $this->principal->show_data_page($data, 'home');

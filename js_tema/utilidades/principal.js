@@ -30,7 +30,7 @@ let parsea_text = function (e) {
         if (texto.length > 6){
 
 
-            let nuevo  = "<button class='btn btn-info copy_text pull-right' data-clipboard-action='copy' data-clipboard-target=''#copy-target'>Copiar</button>" + "<div id='copy-target'>"+ texto+ "</div>";
+            let nuevo  = "<button class='btn btn-info copy_text pull-right' data-clipboard-action='copy' data-clipboard-target='#copy-target'>Copiar</button>" + "<div id='copy-target'>"+ texto+ "</div>";
             $(".texto_convertido").addClass("shadow padding_10  cursor_pointer");
             llenaelementoHTML(".texto_convertido" , nuevo);
             $(".copy_text").click(copia_texto);

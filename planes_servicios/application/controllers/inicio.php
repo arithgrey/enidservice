@@ -92,10 +92,10 @@ class Inicio extends CI_Controller
 		return $response;
 	}
 
-	private function create_ciclo_facturacion()
+	private function create_ciclo_facturacion( $q = [] )
 	{
 
-		$q = [];
+
 		$api = "ciclo_facturacion/not_ciclo_facturacion/format/json/";
 		return $this->principal->api($api, $q);
 	}

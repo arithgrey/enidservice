@@ -1668,7 +1668,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
     }
 }
 if (!function_exists('get_format_izquierdo')) {
-    function get_format_izquierdo($categorias_publicas_venta, $categorias_temas_de_ayuda)
+    function get_format_izquierdo($categorias_publicas_venta = [] , $categorias_temas_de_ayuda = [] , $agregar_categoria =  0 )
     {
         $r[] = anchor_enid(
             img(
@@ -1681,11 +1681,19 @@ if (!function_exists('get_format_izquierdo')) {
             ]
         );
 
-        $r[] = div(heading_enid("CATEGORIAS DESTACADAS" , 3));
-        $r[] = div(anchor_enid(heading_enid("Agregar" , 5 ,"underline top_20") , [ "href"=> path_enid("nfaq") , "class" => "black"]));
 
 
-        $r[] = get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda);
+
+        if($agregar_categoria  >  0){
+            $r[] = div(heading_enid("CATEGORIAS DESTACADAS" , 3));
+            $r[] = div(anchor_enid(heading_enid("Agregar" , 5 ,"underline top_20") , [ "href"=> path_enid("nfaq") , "class" => "black"]));
+
+        }
+        if(count($categorias_publicas_venta) >  0 || count($categorias_temas_de_ayuda) >  0 ){
+            $r[] = get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda);
+        }
+
+
         $r[] = div(append_data([
             heading_enid("¿TIENES ALGUNA DUDA?", 3),
             anchor_enid("ENVIA TU MENSAJE",
@@ -1803,6 +1811,9 @@ function path_enid($pos, $extra = 0 ){
         "editar_faq" => "faq/?faq=",
         "img_faq" =>  "img_tema/productos/",
         "faqs" => "faq",
+        "login" => "login",
+        "vender" => "planes_servicios",
+        "sobre_enid" => "sobre_enidservice"
 
 
     ];

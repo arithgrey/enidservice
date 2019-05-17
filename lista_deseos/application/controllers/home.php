@@ -14,15 +14,15 @@ class Home extends CI_Controller
     {
 
         $data = $this->principal->val_session("");
-        $data["meta_keywords"] = "";
-        $data["desc_web"] = "";
-        $data["url_img_post"] = "";
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
         $param = $this->input->get();
 
         if (get_param_def($param, "q") === "preferencias") {
+
             $this->load_preferencias($data);
+
         } else {
+
             $this->load_lista_deseos($data);
         }
     }
@@ -45,9 +45,10 @@ class Home extends CI_Controller
 
             $data =  $this->principal->getCSSJs($data, "lista_deseos_productos_deseados");
             $this->principal->show_data_page($data, 'home');
+
         } else {
-            $response =   get_format_sin_productos();
-            $this->principal->show_data_page($data,  $response , 1);
+
+            $this->principal->show_data_page($data,  get_format_sin_productos() , 1);
         }
     }
 	private function add_imagenes($servicios)

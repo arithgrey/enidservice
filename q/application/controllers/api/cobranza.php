@@ -266,7 +266,7 @@ class Cobranza extends REST_Controller
 
 
 				$data_orden["es_usuario_nuevo"] = 1;
-				$es_usuario_nuevo = get_info_usuario_valor_variable($param, "usuario_nuevo");
+				$es_usuario_nuevo = get_param_def($param, "usuario_nuevo");
 
 
 				if ($es_usuario_nuevo == 0) {
@@ -600,7 +600,7 @@ class Cobranza extends REST_Controller
 
 	function valida_envio_notificacion_nuevo_usuario($param)
 	{
-		if (get_info_usuario_valor_variable($param, "usuario_nuevo") > 0) {
+		if (get_param_def($param, "usuario_nuevo") > 0) {
 			$this->notifica_registro_usuario($param);
 		}
 	}
@@ -700,7 +700,7 @@ class Cobranza extends REST_Controller
 
 		$id_usuario =  $recibo[0]["id_usuario"];
 
-		if (get_info_usuario_valor_variable($param , "cobranza") ==  1){
+		if (get_param_def($param , "cobranza") ==  1){
 
 			$data_complete["costo_envio_sistema"]   =  $this->get_costo_envio($recibo[0]);
 

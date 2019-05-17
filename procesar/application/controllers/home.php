@@ -61,10 +61,13 @@ class Home extends CI_Controller
 	private function crea_orden_compra($param)
 	{
 
-		$data = $this->principal->val_session("");
-		$data["meta_keywords"] = '';
-		$data["desc_web"] = "Registra tu cuenta  y recibe  asistencia al momento.";
-		$data["url_img_post"] = create_url_preview("recomendacion.jpg");
+		$data = $this->principal->val_session(
+		    "",
+            "",
+            "Registra tu cuenta  y recibe  asistencia al momento.",
+            create_url_preview("recomendacion.jpg")
+        );
+
 		$num_usuario_referencia = get_info_usuario($this->input->get("q2"));
 		$data["q2"] = $num_usuario_referencia;
 		$data["servicio"] = $this->resumen_servicio($param["plan"]);
@@ -93,12 +96,14 @@ class Home extends CI_Controller
 	}
 	function  crea_orden_compra_servicio($param){
 
-        $data = $this->principal->val_session("");
-        $data["meta_keywords"] = '';
-        $data["desc_web"] = "Registra tu cuenta  y recibe  asistencia al momento.";
-        $data["url_img_post"] = create_url_preview("recomendacion.jpg");
+        $data = $this->principal->val_session(
+            "",
+            "",
+            "Registra tu cuenta  y recibe  asistencia al momento.",
+            create_url_preview("recomendacion.jpg")
+        );
+
         $data["servicio"] = $this->resumen_servicio($param["id_servicio"]);
-        $data["clasificaciones_departamentos"] = "";
         $data   =  $this->principal->getCSSJs($data, "procesar_crear");
         $this->principal->show_data_page($data, 'procesar_contacto');
 
@@ -107,12 +112,8 @@ class Home extends CI_Controller
 	private function add_domicilio_entrega($param)
 	{
 
-		$data = $this->principal->val_session("");
-		$data["meta_keywords"] = '';
-		$data["desc_web"] = "Registra tu cuenta  y recibe  asistencia al momento.";
-		$data["clasificaciones_departamentos"] = "";
+		$data = $this->principal->val_session("" ,"", "Registra tu cuenta  y recibe  asistencia al momento.");
         $data   =  $this->principal->getCSSJs($data, "procesar_domicilio");
-
 
 		$param["id_recibo"] = $param["recibo"];
 		$param["id_usuario"] = $this->principal->get_session("idusuario");

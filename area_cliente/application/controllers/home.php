@@ -18,9 +18,7 @@ class Home extends CI_Controller
         } else {
 
             $this->principal->acceso();
-            $data["meta_keywords"] = "";
-            $data["desc_web"] = "";
-            $data["url_img_post"] = "";
+
             $data["action"] = $this->input->get("action");
             $valoraciones = $this->resumen_valoraciones($data["id_usuario"]);
             $data["valoraciones"] = $valoraciones["info_valoraciones"];
@@ -28,12 +26,8 @@ class Home extends CI_Controller
             $data["clasificaciones_departamentos"] = $class_departamentos;
             $alcance = $this->get_alcance($data["id_usuario"]);
             $data["alcance"] = crea_alcance($alcance);
-
-
             $data["ticket"] = get_info_variable($this->input->get(), "ticket");
             $data   =  $this->principal->getCSSJs($data, "area_cliente");
-
-
             $this->principal->show_data_page($data, 'home');
         }
 

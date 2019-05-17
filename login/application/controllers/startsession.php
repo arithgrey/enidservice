@@ -17,13 +17,10 @@ class Startsession extends CI_Controller
         $data   =   $this->principal->getCssJs($data,"login");
         $data["action"] = get_info_variable($this->input->get(), "action");
         $this->principal->validate_user_sesssion();
-        $data["clasificaciones_departamentos"] = "";
         $this->principal->show_data_page($data, "signin");
 
 
     }
-
-
     function logout()
     {
 

@@ -56,9 +56,6 @@ class Home extends CI_Controller
 		if ($this->agent->is_mobile() == FALSE) {
 			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 		}
-		$data["meta_keywords"] = "";
-		$data["desc_web"] = "";
-		$data["url_img_post"] = "";
 
         $data   =  $this->principal->getCSSJs($data, "producto_pre");
 		$data["id_servicio"] = $this->input->get("producto");
@@ -75,7 +72,6 @@ class Home extends CI_Controller
 		$data["orden_pedido"] = 1;
 		$data["carro_compras"]      =  (array_key_exists("carro_compras", $param)) ? $param["carro_compras"] : 0;
 		$data["id_carro_compras"]   =  (array_key_exists("id_carro_compras", $param)) ? $param["id_carro_compras"] : 0;
-
 
 		$img    = $this->principal->get_imagenes_productos($param["plan"], 1 , 1);
 		$data["url_imagen_servicio"] =  get_img_serv($img);
@@ -102,9 +98,6 @@ class Home extends CI_Controller
 
 		if ($id_servicio == 0) {
 
-			$data["meta_keywords"] = "";
-			$data["desc_web"] = "";
-			$data["url_img_post"] = "";
 			$this->principal->show_data_page($data, $this->get_vista_no_encontrado());
 
 		} else {
@@ -189,13 +182,6 @@ class Home extends CI_Controller
 
 	}
 
-	private function get_ciclos_facturacion(){
-
-	    $q =  [];
-	    $api = "ciclo_facturacion/not_ciclo_facturacion/format/json/";
-        return $this->principal->api($api, $q );
-
-    }
 
 	private function get_tallas($id_servicio)
 	{
@@ -287,7 +273,6 @@ class Home extends CI_Controller
 	function view_recibo_registrado()
 	{
 
-
 		$data = $this->principal->val_session("");
 		$data["clasificaciones_departamentos"] = "";
 		if ($this->agent->is_mobile() == FALSE) {
@@ -331,4 +316,14 @@ class Home extends CI_Controller
 		return $this->principal->api( $api , $q , "html" );
 	}
 	*/
+    /*
+    private function get_ciclos_facturacion(){
+
+        $q =  [];
+        $api = "ciclo_facturacion/not_ciclo_facturacion/format/json/";
+        return $this->principal->api($api, $q );
+
+    }
+    */
+
 }

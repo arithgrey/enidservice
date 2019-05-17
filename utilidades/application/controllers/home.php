@@ -14,11 +14,7 @@ class Home extends CI_Controller
     function index()
     {
         $data = $this->principal->val_session("");
-
         $this->principal->acceso();
-        $data["meta_keywords"] = "";
-        $data["desc_web"] = "";
-        $data["url_img_post"] = "";
         $data["action"] = $this->input->get("action");
         $class_departamentos = $this->principal->get_departamentos();
         $data["clasificaciones_departamentos"] = $class_departamentos;

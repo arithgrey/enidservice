@@ -72,6 +72,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_forms_domicilio_entrega')) {
         function get_forms_domicilio_entrega($id_recibo, $lista_direcciones)
         {
+
             $r[] = heading_enid("DOMICILIOS DE ENTREGA ", 3);
             $r[] = agregar_nueva_direccion(0);
             $r[] = ul(create_lista_direcciones($lista_direcciones, $id_recibo),  "list-group list-group-flush");
@@ -733,8 +734,8 @@ if (!function_exists('invierte_date_time')) {
         function create_lista_direcciones($lista, $id_recibo)
         {
 
-
             $a = 1;
+            $r = [];
             foreach ($lista as $row) {
 
                 $id_direccion = $row["id_direccion"];

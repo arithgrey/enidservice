@@ -19,13 +19,8 @@ class Home extends CI_Controller
 
 			$id_usuario = $this->input->get("q");
 			$data = $this->principal->val_session("");
-			$data["meta_keywords"] = '';
-			$data["desc_web"] = "";
-			$data["url_img_post"] = create_url_preview("");
 			$clasificaciones_departamentos = $this->principal->get_departamentos();
 			$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
-
-
 			$prm["id_usuario"] = $id_usuario;
 			$data["usuario"] = $this->principal->get_info_usuario($id_usuario);
 
@@ -67,11 +62,15 @@ class Home extends CI_Controller
 			$data["paginacion"] = $this->get_paginacion($prm);
 		}
 
-        $data = $this->principal->getCSSJs($data, "recomendacion_vista");
+
+		$data = $this->principal->getCSSJs($data, "recomendacion_vista");
+
 		$response = get_formar_recomendacion($data["usuario"],
 			$resumen_recomendacion,
 			$data["paginacion"],
-			$resumen_valoraciones_vendedor);
+			$resumen_valoraciones_vendedor
+        );
+
 		$this->principal->show_data_page($data, $response, 1);
 
 	}

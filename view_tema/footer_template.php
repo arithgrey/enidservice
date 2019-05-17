@@ -114,7 +114,10 @@ $list_footer = [
             get_btw(
                     div("© 2019 ENID SERVICE."  )
                     ,
-                    div(anchor_enid("FAQS", ["class"=> "white" , "href" => path_enid("faqs")]))
+                    div(
+                            anchor_enid("FAQS", ["class"=> "white" , "href" => path_enid("faqs")]).
+                            anchor_enid("NOSOTROS", ["class"=> "white ml-5" , "href" => path_enid("sobre_enid")])
+                    )
                     ,
                 'white footer-enid page-footer  d-flex align-items-center justify-content-between'
 

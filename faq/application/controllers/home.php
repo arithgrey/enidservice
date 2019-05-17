@@ -62,16 +62,10 @@ class Home extends CI_Controller
 
         }
 
-
-
         $data["param"] = $this->input->get();
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
         $data = $this->principal->getCssJs($data,"faq");
-
-
-
-        $response =  get_format_faqs($data);
-        $this->principal->show_data_page($data,   $response , 1);
+        $this->principal->show_data_page($data,   get_format_faqs($data) , 1);
 
     }
     private function get_recientes($q){
@@ -106,7 +100,6 @@ class Home extends CI_Controller
 
         $api = "fq/qsearch/format/json/";
         $response = $this->principal->api($api, $q);
-
         $response =  $this->append_imgs($response);
 
         return $response;

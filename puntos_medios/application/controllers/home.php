@@ -14,13 +14,9 @@ class Home extends CI_Controller
 
 
 		$data = $this->principal->val_session("");
-		$data["meta_keywords"] = "";
-		$data["desc_web"] = "";
-		$data["url_img_post"] = create_url_preview("");
 		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 		$param = $this->input->post();
 		$data["proceso_compra"] = 1;
-
 
 		$method_request = $this->input->server('REQUEST_METHOD');
 		if (
@@ -75,12 +71,12 @@ class Home extends CI_Controller
 			&& get_param_def($param, "punto_encuentro", 0, 1)) {
 
 			/*solo tomamos la hora del pedido*/
-			$punto_encuentro = $param["punto_encuentro"];
 
 
-			$response =  get_format_pagina_form_horario($data["recibo"], $punto_encuentro);
-
-			$this->principal->show_data_page($data, $response  ,1);
+			$this->principal->show_data_page(
+			    $data,
+                get_format_pagina_form_horario($data["recibo"], $param["punto_encuentro"]) ,
+                1);
 
 		} else {
 
