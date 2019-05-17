@@ -18,13 +18,9 @@ class Home extends CI_Controller
         $param = $this->input->get();
         $data = $this->principal->val_session("");
         $this->principal->acceso();
-        $data["meta_keywords"] = "";
-        $data["desc_web"] = "";
-        $data["url_img_post"] = create_url_preview("");
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
 
         if (get_param_def($param, "seguimiento") > 0 && ctype_digit($param["seguimiento"])) {
-
 
             $this->carga_vista_seguimiento($param, $data);
 
@@ -403,6 +399,5 @@ class Home extends CI_Controller
         return $this->principal->api($api, $q);
 
     }
-
 
 }

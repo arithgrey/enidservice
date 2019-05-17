@@ -30,10 +30,13 @@ class Home extends CI_Controller
 	{
 
 
-		$data = $this->principal->val_session("");
-		$data["meta_keywords"] = "Comprar y vender tus artículos y servicios";
-		$data["desc_web"] = "";
-		$data["url_img_post"] = create_url_preview("promo.png");
+		$data = $this->principal->val_session(
+		    "",
+            "Comprar y vender tus artículos y servicios",
+            "",
+            create_url_preview("promo.png")
+        );
+
 		$q = (array_key_exists("q", $param)) ? $param["q"] : "";
 		$data_send["q"] = $q;
 		$data_send["vendedor"] = $param["vendedor"];
@@ -120,7 +123,6 @@ class Home extends CI_Controller
 
 		$categorias_destacadas = $this->carga_categorias_destacadas();
 		$data["categorias_destacadas"] = $categorias_destacadas;
-
         $data = $this->principal->getCssJs($data, "search");
 
 		$data["filtros"] = $this->get_orden();

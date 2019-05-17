@@ -15,13 +15,11 @@ class Home extends CI_Controller
     {
 
         $data = $this->principal->val_session("Solicita una llamada aquí");
-        $data["meta_keywords"] = "Solicita una llamada aquí";
-        $data["desc_web"] = "Solicita una llamada aquí";
-        $data["url_img_post"] = create_url_preview("images_1.jpg");
         $data["departamentos"] = $this->get_departamentos_enid();
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
-        $data["css"] = ["contact.css"];
+        $data =  $this->principal->getCssJs($data , "contacto");
         $param = $this->input->post();
+
         if (get_param_def($param, "proceso_compra", 0, 1) > 0) {
 
             $data =  $this->principal->getCssJs($data, "contacto_proceso_compra");
@@ -52,8 +50,7 @@ class Home extends CI_Controller
 
 
             $param = $this->input->get();
-            $ubicacion = exists_array_def($param, "ubicacion");
-            $data["ubicacion"] = $ubicacion;
+            $data["ubicacion"] = exists_array_def($param, "ubicacion");
             $this->principal->show_data_page($data, 'home');
         }
     }

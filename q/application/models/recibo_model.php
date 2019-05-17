@@ -748,7 +748,7 @@ class Recibo_model extends CI_Model
 
 
         $id_usuario_referencia =
-            (get_info_usuario_valor_variable($data_usuario, "usuario_referencia") == 0)
+            (get_param_def($data_usuario, "usuario_referencia") == 0)
                 ? $id_usuario : $data_usuario["usuario_referencia"];
 
 

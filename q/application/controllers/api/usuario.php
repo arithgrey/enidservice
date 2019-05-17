@@ -707,7 +707,7 @@ class usuario extends REST_Controller
 		$password = $param["password"];
 		$nombre = $param["nombre"];
 		$telefono = $param["telefono"];
-		$id_usuario_referencia = get_info_usuario_valor_variable($param, "usuario_referencia");
+		$id_usuario_referencia = get_param_def($param, "usuario_referencia",1);
 
 		$params = [
 			"email" => $email,

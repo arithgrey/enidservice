@@ -1209,6 +1209,9 @@ select {
 .letter-spacing-3 {
     letter-spacing: 1.3px;
 }
+.letter-spacing-2 {
+    letter-spacing: 1.2px;
+}
 
 .letter-spacing-10 {
     letter-spacing: 10px;
@@ -1288,8 +1291,14 @@ h5 {
 .fp8{
     font-size: .8em !important;
 }
+.f16{
+    font-size: 1.6em;
+}
 .f15{
     font-size: 1.5em;
+}
+.f14{
+    font-size: 1.4em;
 }
 .f12{
     font-size: 1.2em;
@@ -1331,6 +1340,11 @@ h5 {
 
     max-height: 270px!important;
 }
+.mah_500{
+
+    max-height: 500px!important;
+}
+
 .bloque_general_info{
     background: #00299c;
     color: white;;

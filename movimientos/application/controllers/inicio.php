@@ -51,7 +51,7 @@ class Inicio extends CI_Controller
                     break;
                 case 7:
 
-                    $this->agrega_saldo_oxxo($data, $param, $id_usuario);
+                    $this->agrega_saldo_oxxo($data);
                     break;
 
                 case 8:
@@ -76,8 +76,8 @@ class Inicio extends CI_Controller
     private function saldo_amigo($data)
     {
 
-        $data =  $this->principal->getCssJs($data , "movimientos_saldo_amigo");
-        $this->principal->show_data_page($data, 'solicitar_a_un_amigo');
+
+        $this->principal->show_data_page($this->principal->getCssJs($data , "movimientos_saldo_amigo"), 'solicitar_a_un_amigo');
 
     }
 
@@ -98,7 +98,7 @@ class Inicio extends CI_Controller
         }
     }
 
-    private function agrega_saldo_oxxo($data, $param, $id_usuario)
+    private function agrega_saldo_oxxo($data)
     {
 
 
@@ -136,8 +136,6 @@ class Inicio extends CI_Controller
         $data["cuentas_bancarias"] = $this->get_cuentas_usuario($id_usuario, 0);
         $data["tarjetas"] = $this->get_cuentas_usuario($id_usuario, 1);
         $data["css"] = ["cuentas_asociadas.css"];
-
-
         $this->principal->show_data_page($data, 'cuentas_asociadas');
     }
 

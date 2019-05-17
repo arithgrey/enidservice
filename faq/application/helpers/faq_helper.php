@@ -4,7 +4,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_faqs($data)
     {
 
-        $r[] = div(get_format_izquierdo($data["categorias_publicas_venta"], $data["categorias_temas_de_ayuda"]), 3);
+        $r[] = div(get_format_izquierdo($data["categorias_publicas_venta"], $data["categorias_temas_de_ayuda"] , 1 ), 3);
         $r[] = div(get_format_listado_fq($data),9);
         return div(append_data($r), 1);
 

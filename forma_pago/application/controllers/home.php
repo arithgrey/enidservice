@@ -23,31 +23,19 @@ class Home extends CI_Controller
     private function crea_info()
     {
 
-        $data = $this->principal->val_session("");
-        $data["meta_keywords"] = "";
-        $data["desc_web"] = "Formas de pago Enid Service";
-        $data["url_img_post"] = create_url_preview("formas_pago_enid.png");
-        $data["clasificaciones_departamentos"] = "";
-
-        $data = $this->principal->getCssJs($data,"forma_pago");
-
+        $data = $this->principal->getCssJs($this->principal->val_session(""),"forma_pago");
         $this->principal->show_data_page($data, get_format_pago(), 1);
     }
 
     private function crea_orden()
     {
 
-        $data = $this->principal->val_session("");
-        $data["meta_keywords"] = "";
-        $data["desc_web"] = "";
-        $data["url_img_post"] = create_url_preview("formas_pago_enid.png");
+        $data = $this->principal->val_session("", "" , "" , create_url_preview("formas_pago_enid.png"));
         $id_recibo = $this->input->get("recibo");
         $data["recibo"] = $id_recibo;
         $info_recibo = $this->get_recibo_forma_pago($id_recibo);
-
         $data["clasificaciones_departamentos"] = "";
-        $response = div($info_recibo, "col-lg-8 col-lg-offset-2 contenedor_principal_enid" );
-        $this->principal->show_data_page($data, $response, 1);
+        $this->principal->show_data_page($data, get_format_orden($info_recibo), 1);
 
     }
 

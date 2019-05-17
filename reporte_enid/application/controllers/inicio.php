@@ -19,8 +19,8 @@ class Inicio extends CI_Controller
 		if ($module != 1) {
 			header($module);
 		}
-		$data["clasificaciones_departamentos"] = "";
-		$data["categorias_destacadas"] = $this->carga_categorias_destacadas("");
+
+		$data["categorias_destacadas"] = $this->carga_categorias_destacadas();
 		$data = $this->principal->getCssJs($data, "reporte_enid");
 		$this->principal->show_data_page($data, 'empresas_enid');
 
@@ -65,7 +65,7 @@ class Inicio extends CI_Controller
 
 	}
 
-	private function carga_categorias_destacadas($q)
+	private function carga_categorias_destacadas($q=[])
 	{
 		$api = "clasificacion/categorias_destacadas/format/json/";
 		return $this->principal->api($api, $q);

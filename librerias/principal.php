@@ -266,12 +266,12 @@ class principal extends CI_Controller
         return $this->sessionclass->getperfiles();
     }
 
-    function val_session($titulo)
+    function val_session($titulo = "", $meta_keywords = "", $desc = "", $url_img_post = "")
     {
 
         $data["is_mobile"] = ($this->agent->is_mobile() == FALSE) ? 0 : 1;
         $data["proceso_compra"] = 0;
-        if ($this->sessionclass->is_logged_in() == 1) {
+        if ($this->sessionclass->is_logged_in() > 0) {
 
             $menu = $this->sessionclass->create_contenido_menu();
             $nombre = $this->get_session("nombre");
@@ -283,12 +283,12 @@ class principal extends CI_Controller
             $data["id_perfil"] = $this->getperfiles();
             $data["in_session"] = 1;
             $data["no_publics"] = 1;
-            $data["meta_keywords"] = "";
+            $data["meta_keywords"] = $meta_keywords;
             $data["url_img_post"] = "";
             $data["id_usuario"] = $this->get_session("idusuario");
             $data["id_empresa"] = $this->get_session("idempresa");
             $data["info_empresa"] = $this->get_session("info_empresa");
-            $data["desc_web"] = "";
+            $data["desc_web"] = $desc;
 
             return $data;
 
@@ -301,9 +301,9 @@ class principal extends CI_Controller
             $data["email"] = "";
             $data["telefono"] = "";
             $data["id_perfil"] = 0;
-            $data["meta_keywords"] = "";
-            $data["desc_web"] = "";
-            $data["url_img_post"] = "";
+            $data["meta_keywords"] = $meta_keywords;
+            $data["desc_web"] = $desc;
+            $data["url_img_post"] = (strlen($url_img_post) > 3) ? $url_img_post : create_url_preview("");
 
             return $data;
         }
@@ -350,7 +350,11 @@ class principal extends CI_Controller
                             "valoracion.css",
                             "area_cliente.css",
                             "confirm-alert.css"
-                        ]
+                        ],
+                    "meta_keywords" => "",
+                    "desc_web" => "",
+                    "url_img_post" => "",
+
 
                 ]
             ,
@@ -367,9 +371,27 @@ class principal extends CI_Controller
                         [
                             "compras/principal.js"
 
-                        ]
+                        ],
+                    "url_img_post" => create_url_preview(""),
+                    "meta_keywords" => "",
+                    "desc_web" => ""
+
 
                 ]
+            ,
+            "contacto" => [
+
+                "css" =>
+                    [
+                        "contact.css"
+
+                    ],
+                "url_img_post" => create_url_preview("images_1.jpg"),
+                "meta_keywords" => "Solicita una llamada aquí",
+                "desc_web" => "Solicita una llamada aquí"
+
+
+            ]
             ,
             "contacto_proceso_compra" =>
                 [
@@ -454,11 +476,11 @@ class principal extends CI_Controller
                             "formas_pago.css"
 
                         ],
-                    "js" =>
-                        [
+                    "meta_keywords" => "",
+                    "desc_web" => "Formas de pago Enid Service",
+                    "url_img_post" => create_url_preview("formas_pago_enid.png"),
+                    "clasificaciones_departamentos" => "",
 
-
-                        ]
 
                 ],
             "lista_deseos_preferencias" =>
@@ -508,6 +530,8 @@ class principal extends CI_Controller
                     "desc_web" => "COMPRA Y VENDE EN ENID SERVICE"
                     ,
                     "meta_keywords" => "COMPRA Y VENDE ARTÍCULOS Y SERVICIOS  EN ENID SERVICE "
+                    ,
+                    "clasificaciones_departamentos" => ""
 
                 ],
             "pago_oxxo" =>
@@ -523,6 +547,7 @@ class principal extends CI_Controller
 
                         ]
                     ,
+                    "clasificaciones_departamentos" => ""
 
 
                 ]
@@ -722,6 +747,8 @@ class principal extends CI_Controller
                             'procesar/sha1.js'
 
                         ]
+                    ,
+                    "clasificaciones_departamentos" => ""
 
                 ],
             "procesar_domicilio" =>
@@ -737,7 +764,8 @@ class principal extends CI_Controller
                             "js/direccion.js"
 
 
-                        ]
+                        ],
+                    "clasificaciones_departamentos" => ""
                 ]
             ,
             "producto" =>
@@ -838,7 +866,8 @@ class principal extends CI_Controller
                         [
 
                             "repo_enid/principal.js"
-                        ]
+                        ],
+                    "clasificaciones_departamentos" => ""
                 ]
 
             ,
@@ -863,8 +892,12 @@ class principal extends CI_Controller
                     "js" =>
                         [
 
-                            base_url('application/js/principal.js'),
-                            'sobre_enidservice/principal.js'
+                            'sobre_enid_service/principal.js'
+                        ]
+                    ,
+                    "css" =>
+                        [
+                            "sobre_enid.css"
                         ]
                 ]
             ,

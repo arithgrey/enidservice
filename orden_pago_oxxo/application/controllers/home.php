@@ -13,14 +13,12 @@ class Home extends CI_Controller
 	{
 
 		$data = $this->principal->val_session("Orden de compra");
-		$data["meta_keywords"] = "";
-		$data["desc_web"] = "";
-		$data["url_img_post"] = create_url_preview("");
 		$param = $this->input->get();
 		$q = get_info_variable($param, "q", 1);
+
 		if ($q > 0) {
+
 			$data["info_pago"] = $param;
-			$data["clasificaciones_departamentos"] = "";
 			$id_usuario = get_info_variable($param, "q3");
 			$data["concepto"] = get_info_variable($param, "concepto");
 			$data["usuario"] = $this->principal->get_info_usuario($id_usuario);

@@ -289,7 +289,7 @@ class recibo extends REST_Controller
 
         } else {
 
-            if (get_info_usuario_valor_variable($param, "cobranza") == 1) {
+            if (get_param_def($param, "cobranza") == 1) {
 
 
                 $data_complete = $this->get_data_saldo($param, $recibo, $data_complete);
@@ -315,7 +315,7 @@ class recibo extends REST_Controller
         $response = false;
         $data_complete["es_punto_encuentro"] = 0;
         /*Cuando se puede pagar al momento*/
-        if (get_info_usuario_valor_variable($param, "cobranza") == 1) {
+        if (get_param_def($param, "cobranza") == 1) {
 
             /*Cuando no se ha entregado y no está cancelado*/
             if ($recibo[0]["entregado"] == 0 && $recibo[0]["se_cancela"] == 0) {

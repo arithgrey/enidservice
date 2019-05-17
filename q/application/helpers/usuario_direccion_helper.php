@@ -307,7 +307,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r = [];
-        if (get_info_usuario_valor_variable($param, "externo") == 1) {
+        if (get_param_def($param, "externo") == 1) {
 
 
             $r[] = anchor_enid("LIQUIDAR AHORA!",

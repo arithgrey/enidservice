@@ -36,12 +36,7 @@ class Home extends CI_Controller
             $send["in_session"] = $data["in_session"];
             if ($send["in_session"] === false) {
 
-                $session_data = [
-
-                    "servicio_pregunta" => $servicio
-
-                ];
-
+                $session_data = [ "servicio_pregunta" => $servicio ];
                 $this->principal->set_userdata($session_data);
                 redirect("../../login");
 
@@ -111,16 +106,10 @@ class Home extends CI_Controller
     {
 
         $preguntas = $this->get_preguntas_hechas_cliente($id_usuario, $id_pregunta);
-
         $data["preguntas_format"] = get_format_preguntas($preguntas, 0);
-        $data["meta_keywords"] = '';
-        $data["desc_web"] = "";
-        $data["url_img_post"] = create_url_preview("");
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
-
         $data = $this->principal->getCssJs($data, "pregunta_hechas");
         $response = get_format_listado(get_format_preguntas($preguntas, 0));
-
         $this->principal->show_data_page($data, $response, 1);
 
 
@@ -144,10 +133,6 @@ class Home extends CI_Controller
     {
 
         $preguntas = $this->get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta);
-
-        $data["meta_keywords"] = '';
-        $data["desc_web"] = "";
-        $data["url_img_post"] = create_url_preview("");
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
         $data = $this->principal->getCssJs($data, "pregunta_recibida");
         $response = get_format_listado(get_format_preguntas($preguntas, 1));
@@ -158,7 +143,6 @@ class Home extends CI_Controller
 
     private function get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta)
     {
-
 
         $q["id_pregunta"] = $id_pregunta;
         $q["id_vendedor"] = $id_usuario;
