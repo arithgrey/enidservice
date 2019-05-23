@@ -17,12 +17,12 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_open("", ["class" => "form_valoracion"]);
         $r[] = place("nuevo");
         $r[] = get_btw(
-            div("Valoración*", ["class" => "text-valoracion"]),
+            div("Valoración*", "text-valoracion"),
             get_posibles_calificaciones(["", "Insuficiente", "Aceptable", "Promedio", "Bueno", "Excelente"]),
             "displa_flex_enid"
         );
         $r[] = place("nuevo");
-        $r[] = div(strong("¿Recomendarías este producto?*", ["class" => "text-valoracion"]));
+        $r[] = div(strong("¿Recomendarías este producto?*", "text-valoracion"));
         $r[] = get_btw(
             anchor_enid("SI", ["class" => 'recomendaria', "id" => 1]),
             anchor_enid("NO", ["class" => 'recomendaria', "id" => 0]),
@@ -32,7 +32,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("place_recomendaria");
         $r[] = place("nuevo");
         $r[] = get_btw(
-            div("Tu opinión en una frase*", ["class" => "text-valoracion strong"]),
+            div("Tu opinión en una frase*", "text-valoracion strong"),
             div(input([
                 "type" => "text",
                 "name" => "titulo",
@@ -49,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
         ]);
         $r[] = place("nuevo");
         $r[] = get_btw(
-            div(strong("Tu reseña*", ["class" => "text-valoracion"])),
+            div(strong("Tu reseña*", "text-valoracion")),
             div(input([
                 "type" => "text",
                 "name" => "comentario",
@@ -86,17 +86,22 @@ if (!function_exists('invierte_date_time')) {
         required ' . valida_readonly($email) . ' value="' . $email . '">');
 
         $r[] = get_btw(
-            div(strong("Tu correo electrónico*", ["class" => "text-valoracion"])),
+            div(
+                strong("Tu correo electrónico*", "text-valoracion")
+            ),
             $in,
             "display_flex_enid"
 
         );
         $r[] = place("nuevo");
-        $r[] = guardar("ENVIAR RESEÑA " . icon('fa fa-chevron-right ir'), ["clas"=> "top_30 bottom_30"]);
+        $r[] = br(3);
+        $r[] = guardar(text_icon('fa fa-chevron-right ir', "ENVIAR RESEÑA ", 0, 0), "top_40 bottom_40");
         $r[] = place("place_registro_valoracion");
         $r[] = form_close();
+        $r[] = br(3);
 
-        $response = div(append_data($r), ["class"=>"col-lg-6 col-lg-offset-3 shadow padding_10"]);
+
+        $response = div(div(append_data($r), 10, 1), "col-lg-6 col-lg-offset-3 shadow padding_10");
         return $response;
 
     }
@@ -120,11 +125,11 @@ if (!function_exists('invierte_date_time')) {
 
 
         $text = strtoupper($vendedor[0]["nombre"] . " " . $vendedor[0]["apellido_paterno"]);
-        $z[] = heading_enid("ESCRIBE UNA PREGUNTA " . $text, 3  );
+        $z[] = heading_enid("ESCRIBE UNA PREGUNTA " . $text, 3);
 
-        $url =  get_url_servicio($id_servicio);
-        $nombre =  anchor_enid($servicio[0]["nombre_servicio"], ["class"=> "underline black strong" , "href"=>$url ]);
-        $z[] = div("SOBRE SU " . $nombre, ["class"=> "top_30  bottom_30"]);
+        $url = get_url_servicio($id_servicio);
+        $nombre = anchor_enid($servicio[0]["nombre_servicio"], ["class" => "underline black strong", "href" => $url]);
+        $z[] = div("SOBRE SU " . $nombre, ["class" => "top_30  bottom_30"]);
         $z[] = form_open("", ["class" => "form_valoracion top_30"]);
         $z[] = append_data($r);
         $z[] = form_close();
@@ -136,13 +141,17 @@ if (!function_exists('invierte_date_time')) {
     function get_title_valoraciones($id_usuario)
     {
 
-        $r[] =  heading_enid("VALORACIONES Y RESEÑAS", 3);
-        $r[] =  div(anchor_enid("MÁS SOBRE EL VENDEDOR" . icon("fa fa-chevron-right ir"),
-            [
-                "class" => "a_enid_black hover_padding",
-                "href" => "../recomendacion/?q=" . $id_usuario,
-                "style" => "color: white!important"
-            ]),["class"=> "mt-5 mb-5"]);
+        $r[] = heading_enid("VALORACIONES Y RESEÑAS", 3);
+        $r[] = div(
+
+            anchor_enid(text_icon("fa fa-chevron-right ir", "MÁS SOBRE EL VENDEDOR",0,0)
+                ,
+                [
+                    "class" => "a_enid_black hover_padding",
+                    "href" => "../recomendacion/?q=" . $id_usuario,
+                    "style" => "color: white!important"
+                ]), "mt-5 mb-5"
+        );
 
 
         $response = append_data($r);
@@ -236,7 +245,7 @@ if (!function_exists('invierte_date_time')) {
             }
             $l[] = div($criterios[$z], $extra_criterios);
         }
-        return div(append_data($l),["class"=> "top_20 bottom_20"]);
+        return div(append_data($l), ["class" => "top_20 bottom_20"]);
     }
 
     function crea_resumen_valoracion($numero_valoraciones, $persona = 0)
@@ -295,27 +304,27 @@ if (!function_exists('invierte_date_time')) {
             $lista_comentario .= "<div class='contenedor_global_recomendaciones'>
                             <div " . $extra_config_comentarios . ">" . div(crea_estrellas($valoracion, 1));
 
-            $lista_comentario .= div($titulo, ["class" => 'titulo_valoracion']);
-            $lista_comentario .= div($comentario, ["class" => 'comentario_valoracion']);
+            $lista_comentario .= div($titulo, 'titulo_valoracion' );
+            $lista_comentario .= div($comentario,  'comentario_valoracion');
 
             if ($recomendaria == 1) {
-                $lista_comentario .= div(icon("fa fa-check-circle") . "Recomiendo este producto", ["class" => 'recomendaria_valoracion strong', "style"=> "color:#02071a"]);
+                $lista_comentario .= div(icon("fa fa-check-circle") . "Recomiendo este producto", ["class" => 'recomendaria_valoracion strong', "style" => "color:#02071a"]);
             }
-            $lista_comentario .= div($nombre . br(). $fecha_registro, ["class" => 'nombre_comentario_valoracion']);
+            $lista_comentario .= div($nombre . br() . $fecha_registro, 'nombre_comentario_valoracion' );
             $texto_valoracion = "";
             if ($respuesta_valorada == $id_valoracion) {
-                $texto_valoracion = div("Recibimos tu valoracion! ", ["class" => 'text_recibimos_valoracion']);
+                $texto_valoracion = div("Recibimos tu valoracion! ",  'text_recibimos_valoracion' );
             }
 
 
-            $btn_es_util = anchor_enid("SI" . span("[" . $num_util . "]", ["class" => 'num_respuesta']),
+            $btn_es_util = anchor_enid("SI" . span("[" . $num_util . "]",  'num_respuesta' ),
                 [
                     "class" => 'respuesta_util respuesta_ok valorar_respuesta mr-4 blue_enid',
                     "id" => $id_valoracion,
                     "onclick" => "agrega_valoracion_respuesta('" . $id_valoracion . "' , 1)"
                 ]);
 
-            $btn_no_util = anchor_enid("NO" . span("[" . $num_no_util . "]", ["class" => 'num_respuesta']),
+            $btn_no_util = anchor_enid("NO" . span("[" . $num_no_util . "]",  'num_respuesta' ),
                 [
                     "class" => 'respuesta_no valorar_respuesta mr-4 blue_enid',
                     "id" => $id_valoracion,
@@ -327,7 +336,7 @@ if (!function_exists('invierte_date_time')) {
                             <div class='contenedor_utilidad'>
                               <table>
                                 <tr>
-                                  " . get_td(heading_enid("¿Te ha resultado útil?",5 ,["class"=> "letter-spacing-5 strong"])) . "
+                                  " . get_td(heading_enid("¿Te ha resultado útil?", 5,  "letter-spacing-5 strong" )) . "
                                   " . get_td($btn_es_util . $btn_no_util) . "
                                 </tr>
                                 <tr>
@@ -351,13 +360,10 @@ if (!function_exists('invierte_date_time')) {
 
             if ($numero_valoraciones[0]["num_valoraciones"] > 6) {
 
-                $response = anchor_enid("CARGAR MÁS" . icon("fa fa-chevron-right ir"),
-                    [
-                        "class" => "cargar_mas_valoraciones"
+                $response = anchor_enid(text_icon("fa fa-chevron-right ir", "CARGAR MÁS"), "cargar_mas_valoraciones");
 
-                    ]);
             } else {
-                $response = anchor_enid("ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA " . icon("fa fa-chevron-right ir"),
+                $response = anchor_enid(text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA ") ,
                     [
                         "class" => "escribir_valoracion",
                         "href" => "../valoracion?servicio=" . $servicio
@@ -395,6 +401,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
         return append_data($response);
-        
+
     }
 }

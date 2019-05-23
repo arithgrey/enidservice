@@ -78,7 +78,7 @@ if (!function_exists('invierte_date_time')) {
 			$response =   ul([
 				div(icon('icon fa fa-money'), ["class" => "icon"]),
 				div("Saldo disponible"),
-				heading_enid("$" . number_format(get_data_saldo($saldo_disponible), 2) . "MXN", 2, ["class" => "value white"]),
+				heading_enid("$" . number_format(get_data_saldo($saldo_disponible), 2) . "MXN", 2, "value white" ),
 				div("Monto expresado en Pesos Mexicanos")
 			]);
 			return div($response, "panel income db mbm");
@@ -103,9 +103,9 @@ if (!function_exists('invierte_date_time')) {
 			return anchor_enid(get_btw(
 
 				div("SOLICITA SALDO A UN AMIGO",
-					[
-						"class" => "tipo_pago underline"
-					]
+
+						"tipo_pago underline"
+
 					,
 					1
 				),
@@ -259,7 +259,7 @@ if (!function_exists('invierte_date_time')) {
 
 			];
 
-			return ul($list, ["class" => "list-group list-group-flush"]);
+			return ul($list, "list-group list-group-flush" );
 		}
 	}
 

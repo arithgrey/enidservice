@@ -44,11 +44,13 @@ class Home extends CI_Controller
         if (count($data["productos_deseados"]) > 0) {
 
             $data =  $this->principal->getCSSJs($data, "lista_deseos_productos_deseados");
-            $this->principal->show_data_page($data, 'home');
+            $this->principal->show_data_page($data, get_productos_deseados($data["productos_deseados"]) ,1);
+
 
         } else {
 
             $this->principal->show_data_page($data,  get_format_sin_productos() , 1);
+
         }
     }
 	private function add_imagenes($servicios)

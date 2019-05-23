@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
 		$nombre_vendedor = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
 
 
-		$r[] = heading_enid("Buen día" . $nombre_vendedor, 1, ["class" => "display-4"]);
+		$r[] = heading_enid("Buen día" . $nombre_vendedor, 1, "display-4" );
 		$r[] = div("Un cliente está interesado en uno de tus productos que tienes en venta en");
 		$r[] = anchor_enid("Enid Service",
 			[
@@ -67,10 +67,7 @@ if (!function_exists('invierte_date_time')) {
 		$email = $q["email"];
 		$password_legible = $q["password_legible"];
 
-
-
 		$r[] = div(get_format_notificacion_subscrito($nombre), ["style" => "padding: 2rem 1rem;margin-bottom: 2rem;background-color: #fbfbfb;border-radius: .3rem;"]);
-
 		$r[] = div("Usuario: " . $email);
 		$r[] = div("Acceso:" . $password_legible);
 

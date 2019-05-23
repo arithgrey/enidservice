@@ -36,7 +36,7 @@ if ($info_usuario != 0) {
                         <li class="left clearfix">
                             <?= span(
                                 img([
-                                    "src" => carga_imagen_usuario_respuesta($id_usuario),
+                                    "src" => path_enid("imagen_usuario" , $id_usuario),
                                     "onerror" => "this.src='../img_tema/user/user.png'",
                                     "style" => "width: 40px!important;height: 32px!important;",
                                     "class" => "img-circle"
@@ -47,7 +47,7 @@ if ($info_usuario != 0) {
                             <div class="chat-body clearfix">
                                 <?= get_btw(
                                     strong($nombre . $apellido_paterno),
-                                    small(icon("fa fa-clock") . $fecha_registro, ["class" => "pull-right text-muted"]),
+                                    small(icon("fa fa-clock") . $fecha_registro, "pull-right text-muted" ),
                                     "header"
                                 ) ?>
                                 <?= p($respuesta) ?>

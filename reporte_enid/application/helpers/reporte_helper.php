@@ -59,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
                 if ($z == 0) {
                     echo "<ul class='clasificaciones_sub_menu_ul'>";
                 }
-                $href = "../search?q=&q2=" . $row["primer_nivel"];
+                $href = path_enid("search", "/?q=&q2=" . $row["primer_nivel"]);
                 echo "<table>
                   <tr>
                     " . get_td($total) . "
@@ -84,42 +84,50 @@ if (!function_exists('invierte_date_time')) {
         function get_menu()
         {
             $list = [
-                li(anchor_enid(icon("fa fa-money") . "PEDIDOS",
+                li(anchor_enid(text_icon("fa fa-money", "PEDIDOS"),
                         [
                             "id" => "btn_servicios",
-                            "href" => "../pedidos",
+                            "href" => path_enid("pedidos"),
                             "class" => "black   dispositivos"
                         ])
                 ),
 
-                li(anchor_enid(icon("fa-shopping-bag") . "COMPRAS",
+                li(anchor_enid(text_icon("fa-shopping-bag", "COMPRAS"),
                         [
                             "id" => "btn_servicios",
-                            "href" => "../compras",
+                            "href" => path_enid("compras"),
                             "class" => "black   dispositivos"
                         ])
                 ),
                 li(
-                    anchor_enid(icon('fa fa-globe') . "INDICADORES",
+                    anchor_enid(text_icon('fa fa-globe', "INDICADORES"),
                         [
                             "href" => "#tab_default_1",
                             "data-toggle" => "tab",
                             "class" => 'btn_menu_tab cotizaciones black  '
                         ]
-                    ),
-                    ["class" => "active"]
+                    )
                 ),
                 li(
-                    anchor_enid(icon('fa fa-clock-o') . "TIEMPO DE VENTA",
+                    anchor_enid(text_icon('fa fa-clock-o', "TIEMPO DE VENTA"),
                         [
-                            "href" => "../tiempo_venta/",
+                            "href" => path_enid("tiempo_venta"),
+                            "class" => ' black  '
+                        ]
+                    )
+
+                ),
+                li(
+                    anchor_enid(text_icon('fa fa-exchange', "VENTAS PUNTOS DE ENCUENTRO"),
+                        [
+                            "href" => path_enid("ventas_encuentro"),
                             "class" => ' black  '
                         ]
                     ),
-                    ["class" => "active"]
+                    "active"
                 ),
                 li(
-                    anchor_enid(icon("fa fa-shopping-cart") . "PRODUCTOS SOLICITADOS",
+                    anchor_enid(text_icon("fa fa-shopping-cart", "PRODUCTOS SOLICITADOS"),
                         [
                             "href" => "#tab_busqueda_productos",
                             "data-toggle" => "tab",
@@ -128,7 +136,7 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     )
                 ),
-                li(anchor_enid(icon("fa fa-fighter-jet") . "TIPOS ENTREGAS",
+                li(anchor_enid(text_icon("fa fa-fighter-jet", "TIPOS ENTREGAS"),
                         [
                             "href" => "#tab_tipos_entregas",
                             "data-toggle" => "tab",
@@ -138,7 +146,7 @@ if (!function_exists('invierte_date_time')) {
                     )
                 ),
 
-                li(anchor_enid(icon("fa fa-user") . "ACTIVIDAD USUARIOS",
+                li(anchor_enid(text_icon("fa fa-user", "ACTIVIDAD USUARIOS"),
                         [
                             "id" => "btn_usuarios",
                             "href" => "#tab_usuarios",
@@ -146,7 +154,7 @@ if (!function_exists('invierte_date_time')) {
                             "class" => "black   btn_repo_afiliacion"
                         ])
                 ),
-                li(anchor_enid(icon("fa-check-circle") . "CATEGORÍAS DESTACADAS",
+                li(anchor_enid(text_icon("fa-check-circle", "CATEGORÍAS DESTACADAS"),
                         [
                             "id" => "btn_repo_afiliacion",
                             "href" => "#tab_productos_publicos",
@@ -156,7 +164,7 @@ if (!function_exists('invierte_date_time')) {
                     )
                 ),
 
-                li(anchor_enid(icon("fa fa-handshake-o") . "ATENCIÓ AL CLIENTE",
+                li(anchor_enid(text_icon("fa fa-handshake-o", "ATENCIÓ AL CLIENTE"),
                         [
                             "id" => "btn_repo_atencion_cliente",
                             "href" => "#tab_atencion_cliente",
@@ -164,7 +172,7 @@ if (!function_exists('invierte_date_time')) {
                             "class" => "black   btn_repo_atencion_cliente"
                         ])
                 ),
-                li(anchor_enid(icon("fa fa-flag") . "ACTIVIDAD",
+                li(anchor_enid(text_icon("fa fa-flag", "ACTIVIDAD"),
                         [
                             "id" => "btn_servicios",
                             "href" => "#tab_default_2",
@@ -172,7 +180,7 @@ if (!function_exists('invierte_date_time')) {
                             "class" => "black   usabilidad_btn"
                         ])
                 ),
-                li(anchor_enid(icon("fa fa-mobile") . "DISPOSITIVOS",
+                li(anchor_enid(text_icon("fa fa-mobile", "DISPOSITIVOS"),
                         [
                             "id" => "btn_servicios",
                             "href" => "#tab_dispositivos",
@@ -184,7 +192,7 @@ if (!function_exists('invierte_date_time')) {
 
             ];
 
-            return ul($list, ["class" => "nav tabs"]);
+            return ul($list, "nav tabs");
         }
 
     }

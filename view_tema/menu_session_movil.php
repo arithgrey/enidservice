@@ -5,7 +5,14 @@
             "class" => "closebtn closebtn_lateral",
             "onclick" => "closeNav()"
         ]) ?>
-    <?= div(anchor_enid(img_enid([]), ["href" => "../"]), ["class" => "logo_lateral_login"]) ?>
+
+    <?= div(
+        anchor_enid(img_enid([]),
+            [
+                    "href" => path_enid("home")
+            ]
+        ), "logo_lateral_login"
+    ) ?>
 
 
     <form class="form" action="../search">
@@ -27,7 +34,7 @@
                     [
                         "class" => "call_to_action_anuncio",
                         "style" => "color: white!important;",
-                        "href" => "../login/?action=nuevo"
+                        "href" => path_enid("nuevo_usuario")
                     ],
                     1),
                 "contenedor-lateral-menu"

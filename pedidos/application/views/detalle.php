@@ -96,10 +96,8 @@
         <?= create_seccion_tipificaciones($tipificaciones) ?>
         <?= addNRow(get_form_nota($id_recibo)) ?>
         <?= addNRow(create_seccion_comentarios($comentarios, $id_recibo)) ?>
-
     </div>
     </div>
     <?= div(get_format_resumen_cliente_compra($recibo, $tipos_entregas, $domicilio, $num_compras, $usuario, $id_recibo), 4) ?>
-
 </div>
 <?= get_hiddens_detalle($recibo) ?>

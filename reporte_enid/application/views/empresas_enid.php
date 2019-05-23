@@ -8,7 +8,7 @@
                 </div>
                 <div class="tab-pane active" id='tab_default_1'>
                     <?= n_row_12() ?>
-                    <?= div("INDICADORES ENID SERVICE", ["class" => "titulo_enid_sm", 1]) ?>
+                    <?= div("INDICADORES ENID SERVICE", "titulo_enid_sm", 1) ?>
                     <?= form_open("", ["class" => 'form_busqueda_global_enid']) ?>
                     <?= get_format_fecha_busqueda() ?>
                     <?= form_close() ?>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="tab-pane" id='tab_default_2'>
                     <?= n_row_12() ?>
-                    <?= div("VISITAS WEB ", ["class" => "titulo_enid_sm"], 1) ?>
+                    <?= div("VISITAS WEB ", "titulo_enid_sm" , 1) ?>
                     <?= form_open("", ["class" => 'f_usabilidad']) ?>
                     <?= get_format_fecha_busqueda() ?>
                     <?= form_close() ?>
@@ -27,7 +27,7 @@
                 <div class="tab-pane" id='tab_tipos_entregas'>
 
                     <?=n_row_12()?>
-                    <?= div("TIPOS DE ENTREGAS ", ["class" => "titulo_enid_sm"], 1) ?>
+                    <?= div("TIPOS DE ENTREGAS ", "titulo_enid_sm" , 1) ?>
                     <?= form_open("", ["class" => 'form_tipos_entregas']) ?>
                     <?= get_format_fecha_busqueda() ?>
                     <?= form_close() ?>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="tab-pane" id='tab_usuarios'>
                     <?=n_row_12()?>
-                    <?= div("ACTIVIDAD ", ["class" => "titulo_enid_sm", 1]) ?>
+                    <?= div("ACTIVIDAD ", "titulo_enid_sm", 1 ) ?>
                     <?= form_open("", ["class" => 'f_actividad_productos_usuarios ']) ?>
                     <?= get_format_fecha_busqueda() ?>
                     <?= form_close() ?>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="tab-pane" id='tab_dispositivos'>
                     <?= n_row_12() ?>
-                    <?= div("DISPOSITIVOS ", ["class" => "titulo_enid_sm", 1]) ?>
+                    <?= div("DISPOSITIVOS ", "titulo_enid_sm", 1) ?>
                     <?= form_open("", ["class" => 'f_dipositivos ']) ?>
                     <?= get_format_fecha_busqueda() ?>
                     <?= form_close() ?>
@@ -54,16 +54,14 @@
                 </div>
                 <div class="tab-pane" id="tab_atencion_cliente">
 
-                    <?= div("TAREAS RESUELTAS", ["class" => "titulo_enid_sm"], 1) ?>
+                    <?= div("TAREAS RESUELTAS",  "titulo_enid_sm" , 1) ?>
                     <?= $this->load->view("secciones/atencion_cliente"); ?>
                 </div>
                 <div class="tab-pane" id="tab_afiliaciones">
-                    <?= div("PERSONAS QUE PROMOCIONAN LOS PRODUCTOS Y SERVICIOS",
-                        ["class" => "titulo_enid_sm"], 1) ?>
+                    <?= div("PERSONAS QUE PROMOCIONAN LOS PRODUCTOS Y SERVICIOS", "titulo_enid_sm", 1) ?>
                 </div>
                 <div class="tab-pane" id="tab_busqueda_productos">
-
-                    <?= div("PRODUCTOS MÁS BUSCADOS POR CLIENTES", ["class" => "titulo_enid_sm"], 1) ?>
+                    <?= div("PRODUCTOS MÁS BUSCADOS POR CLIENTES", "titulo_enid_sm", 1) ?>
                     <?= get_form_busqueda_productos_solicitados() ?>
                 </div>
                 <div class="tab-pane" id="tab_productos_publicos">
@@ -74,7 +72,7 @@
                         1) ?>
                     <?=div("", "top_50")?>
                     <?php $categorias_destacadas_orden = sub_categorias_destacadas($categorias_destacadas); ?>
-                    <?= div(crea_repo_categorias_destacadas($categorias_destacadas_orden), ["class" => "row"]) ?>
+                    <?= div(crea_repo_categorias_destacadas($categorias_destacadas_orden), "row" ) ?>
                 </div>
             </div>
         </div>

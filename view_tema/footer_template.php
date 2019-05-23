@@ -1,23 +1,65 @@
 <?php
-$list = [heading_enid("ASISTENCIA", 4, ["class" => "strong"]), anchor_enid("- Servicio al cliente",
-    ["class" => 'black ',
-        "href" => "../contact/#envio_msj"
-    ]),
-    anchor_enid("-Términos y condiciones", ["class" => 'black ', "href" => "../terminos-y-condiciones"])
+$list = [
+    heading_enid("ASISTENCIA", 4, "strong"),
+    anchor_enid("- Servicio al cliente",
+        [
+            "class" => 'black ',
+            "href" => path_enid("contacto")
+        ]),
+    anchor_enid("-Términos y condiciones",
+        [
+            "class" => 'black ',
+            "href" => path_enid("terminos-y-condiciones")
+        ]
+    )
 ];
 
-$list2 = [heading_enid("TEMAS RELACIONADOS", 4, ["class" => "strong"]), anchor_enid("- Temas de ayuda", ["class" => 'black ', "href" => "../faq/"])];
-$list3 = [heading_enid("ESPECIALES", 4, ["class" => "strong"]), anchor_enid("- Trabaja en nuestro equipo", ["class" => 'black ', "href" => "../unete_a_nuestro_equipo"])];
-$list4 = [heading_enid("ACERCA DE NOSOTROS", 4, ["class" => "strong"]), anchor_enid(img(["src" => "../img_tema/enid_service_logo.jpg"]), ["class" => 'black ', "href" => "../sobre_enidservice"])];
+$list2 = [
+    heading_enid(
+        "TEMAS RELACIONADOS"
+        ,
+        4
+        ,
+        "strong"
+    ),
+    anchor_enid(
+        "- Temas de ayuda",
+        [
+            "class" => 'black ',
+            "href" => path_enid("faqs")
+        ])
+];
+
+$list3 = [
+    heading_enid("ESPECIALES", 4, "strong"),
+    anchor_enid("- Trabaja en nuestro equipo",
+        [
+            "class" => 'black ',
+            "href" => "../unete_a_nuestro_equipo"
+        ])];
+
+$list4 = [
+    heading_enid("ACERCA DE NOSOTROS", 4, "strong"),
+    anchor_enid(
+        img(
+            [
+                "src" => path_enid("img_logo")
+            ]
+        ),
+        [
+            "class" => 'black ',
+            "href" => path_enid("sobre_enid")
+        ])
+];
 
 
 $base = "col-lg-3 col-sm-6 inner";
 
 $list_footer = [
-    div(ul($list), ["class" => $base]),
-    div(ul($list2), ["class" => $base]),
-    div(ul($list3), ["class" => $base]),
-    div(ul($list4), ["class" => $base])
+    div(ul($list), $base),
+    div(ul($list2), $base),
+    div(ul($list3), $base),
+    div(ul($list4), $base)
 ];
 ?>
 
@@ -51,25 +93,18 @@ $list_footer = [
                 $x = [];
                 $x[] = div(icon('fa fa-clock-o '), 2);
                 $x[] = div(append_data([
-                    div("+ ENTREGAS PUNTUALES",  'strong', 1),
+                    div("+ ENTREGAS PUNTUALES", 'strong', 1),
                     div("Recibe lo que deseas en tiempo y forma", 1)
                 ]));
                 ?>
                 <?= div(append_data($x), 3) ?>
 
 
-
-
-
-
-
-
-
                 <?php
                 $c = [];
                 $c[] = div(icon('fa fa-lock '), 2);
                 $c[] = div(append_data([
-                    div(" COMPRAS SEGURAS",  'strong', 1),
+                    div(" COMPRAS SEGURAS", 'strong', 1),
                     div("Tu dinero se entregará cuando confirmes tu entrega!", 1)
                 ]));
 
@@ -78,24 +113,25 @@ $list_footer = [
 
 
                 <?php
+
                 $c = [];
                 $c[] = div(icon('fa fa-angle-right'), 2);
                 $c[] = div(append_data([
-                    div(" FAQS",  'strong',1),
+                    div(" FAQS", 'strong', 1),
                     div("Lo que te intereza saver!", 1)
                 ]));
 
                 ?>
-                <?= div(anchor_enid(append_data($c) ,
+                <?= div(anchor_enid(append_data($c),
                     [
-                            "href" => path_enid("faqs"),
-                            "class"=> "white"
+                        "href" => path_enid("faqs"),
+                        "class" => "white"
                     ]), 3) ?>
 
             </div>
 
         </div>
-        <?=hr()?>
+        <?= hr() ?>
     <?php endif; ?>
 <?php endif; ?>
 
@@ -103,27 +139,26 @@ $list_footer = [
 
 <?php if ($in_session == 0): ?>
     <?php if (!isset($proceso_compra) && !is_null($proceso_compra) && $proceso_compra == 0): ?>
-        <?= div(print_footer($list_footer), ["class" => "base_paginas_extra"], 1) ?>
+        <?= div(print_footer($list_footer), "base_paginas_extra" , 1) ?>
     <?php endif ?>
     <?php if (isset($is_mobile) && !is_null($is_mobile) && $is_mobile < 1): ?>
         <?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>
-            <?=div(get_metodos_pago(), 1)?>
+            <?= div(get_metodos_pago(), 1) ?>
         <?php endif ?>
     <?php endif ?>
     <?= div(
-            get_btw(
-                    div("© 2019 ENID SERVICE."  )
-                    ,
-                    div(
-                            anchor_enid("FAQS", ["class"=> "white" , "href" => path_enid("faqs")]).
-                            anchor_enid("NOSOTROS", ["class"=> "white ml-5" , "href" => path_enid("sobre_enid")])
-                    )
-                    ,
-                'white footer-enid page-footer  d-flex align-items-center justify-content-between'
+        get_btw(
+            div("© 2019 ENID SERVICE.")
+            ,
+            div(
+                anchor_enid("FAQS", ["class" => "white", "href" => path_enid("faqs")]) .
+                anchor_enid("NOSOTROS", ["class" => "white ml-5", "href" => path_enid("sobre_enid")])
+            )
+            ,
+            'white footer-enid page-footer  d-flex align-items-center justify-content-between'
 
-    )) ?>
+        )) ?>
 <?php endif; ?>
-
 
 
 <link rel="stylesheet" type="text/css" href="../css_tema/template/font.css">
@@ -185,11 +220,15 @@ $list_footer = [
 <div class="modal" tabindex="-1" role="dialog" id="modal-error-message">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-body">
-                <p class="font-weight-bold text-dark">
-                    <span class="text-order-name-error"></span>
-                </p>
-            </div>
+                <?=div(
+                        p(
+                                span(
+                                        "", "text-order-name-error"
+                                )
+                                , "font-weight-bold text-dark"
+                        ) , "modal-body"
+                )?>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>

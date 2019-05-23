@@ -1,7 +1,11 @@
 <div class="col-lg-6 col-lg-offset-3">
     <?= div(anchor_enid(img(
-        ["src" => '../img_tema/enid_service_logo.jpg',
-            'width' => '100%']),
+        [
+                "src" => '../img_tema/enid_service_logo.jpg'
+            ,
+            'width' => '100%'
+        ]
+    ),
         ['href' => $url_request . "contact/#envio_msj"]), 4, 1) ?>
     <?= div(heading_enid('RECIBIMOS TU NOTIFICACIÓN!', 3, ["style" => "font-size: 2em;"]), 6, 1) ?>
     <?= hr() ?>

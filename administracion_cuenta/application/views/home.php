@@ -17,7 +17,6 @@
             </div>
             <?= div(get_format_privacidad_seguridad(), ["class" => "tab-pane ", "id" => "tab_privacidad_seguridad"]) ?>
             <?= div(get_format_calma(), ["class" => "tab-pane ", "id" => "tab_direccion"]) ?>
-
         </div>
     </div>
 </div>

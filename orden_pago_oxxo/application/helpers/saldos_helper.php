@@ -3,7 +3,7 @@ if (!function_exists('invierte_date_time')) {
 
 
     if (!function_exists('get_format_orden_compra')) {
-        function get_format_orden_compra($usuario, $pago)
+        function get_format_orden_compra($usuario, $pago, $numero_cuenta)
         {
 
 
@@ -17,11 +17,11 @@ if (!function_exists('invierte_date_time')) {
             ]);
 
 
-            $folio = $pago["q2"];
+            $folio = get_param_def($pago, "q2", "");
             $monto = $pago["q"];
             $concepto = "Saldo a cuenta Enid Service";
 
-            $r[] = div(get_form_saldos($beneficiario, $folio, $monto, $concepto), 1);
+            $r[] = div(get_form_saldos($beneficiario, $folio, $monto, $concepto, $numero_cuenta), 1);
 
 
             $contendor_oxoo = get_btw(
@@ -33,8 +33,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 ),
 
-                div("ORDEN DE PAGO EN SUCURSALES OXXO"),
-                "display_flex_enid"
+                div("ORDEN DE PAGO EN SUCURSALES OXXO"), "display_flex_enid"
             );
 
 
@@ -50,13 +49,12 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $r[] = div($text_beneficiario, ["style" => "background: #d7d7ff;padding: 5px;"]);
-
             $r[] = get_monto_pago($monto);
-            $r[] = get_instruccion_pago();
+            $r[] = get_instruccion_pago($numero_cuenta);
             return div(append_data($r), 6, 1);
 
 
-		}
+        }
     }
     if (!function_exists('get_form_monto_pago')) {
 
@@ -72,9 +70,9 @@ if (!function_exists('invierte_date_time')) {
 
     }
     if (!function_exists('get_form_saldos')) {
-        function get_form_saldos($beneficiario, $folio, $monto, $concepto)
+        function get_form_saldos($beneficiario, $folio, $monto, $concepto, $numero_cuenta)
         {
-            $numero_cuenta = "4152 3131 0230 5609";
+
             $r[] = '<form action="../pdf/orden_pago.php" method="POST">';
             $r[] = input_hidden([
                 "name" => "beneficiario",
@@ -113,9 +111,9 @@ if (!function_exists('invierte_date_time')) {
                     ,
                     1
                 ),
-                [
-                    "class" => "col-lg-3 pull-right row"
-                ]
+
+                "col-lg-3 pull-right row"
+
                 ,
                 1
             );
@@ -134,7 +132,9 @@ if (!function_exists('invierte_date_time')) {
 
             $r [] = div(
                 "INSTRUCCIONES",
-                ["style" => "background: #000b39;color: white;padding: 5px;"],
+                [
+                    "style" => "background: #000b39;color: white;padding: 5px;"
+                ],
                 1);
 
 
@@ -156,10 +156,10 @@ if (!function_exists('invierte_date_time')) {
             $r [] = div("Notifica tu pago  al área de ventas ventas@enidservice.com", 1);
             $r [] = div(
                 img([
-                        "src" => "../img_tema/enid_service_logo.jpg",
+                        "src" => path_enid("img_logo"),
                     ]
                 ),
-                ["class" => "col-lg-6 "]
+                "col-lg-6 "
                 , 1
             );
 
@@ -169,10 +169,9 @@ if (!function_exists('invierte_date_time')) {
         }
     }
     if (!function_exists('get_instruccion_pago')) {
-        function get_instruccion_pago()
+        function get_instruccion_pago($numero_cuenta)
         {
 
-            $numero_cuenta = "4152 3131 0230 5609";
 
             $r[] = img(
                 [

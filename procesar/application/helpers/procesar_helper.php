@@ -2,13 +2,13 @@
 if (!function_exists('invierte_date_time')) {
 
     if (!function_exists('validate_text_title')) {
-        function validate_text_title($in_session, $is_mobile, $es_servicio = 0 )
+        function validate_text_title($in_session, $is_mobile, $es_servicio = 0)
         {
-            $text = ($in_session == 0 && $is_mobile == 0) ? heading_enid("¿QUIEN ERES?",3) : "";
-            if($es_servicio > 0 ){
+            $text = ($in_session == 0 && $is_mobile == 0) ? heading_enid("¿QUIEN ERES?", 3) : "";
+            if ($es_servicio > 0) {
                 $text = ($in_session == 0 && $is_mobile == 0) ?
-                    heading_enid("INICIEMOS TU COTIZACIÓN! ",2 ,["class"=>"top_20"]).
-                    heading_enid("¿QUIEN ERES?",4,["class"=>"top_30 bottom_30"]) : "";
+                    heading_enid("INICIEMOS TU COTIZACIÓN! ", 2, ["class" => "top_20"]) .
+                    heading_enid("¿QUIEN ERES?", 4, ["class" => "top_30 bottom_30"]) : "";
             }
 
             return $text;
@@ -26,8 +26,8 @@ if (!function_exists('invierte_date_time')) {
             $r = [];
             if ($in_session < 1) {
 
-            	$x[] = get_btw(
-                    div("Nombre *" )
+                $x[] = get_btw(
+                    div("Nombre *")
                     ,
                     div(input([
                         "name" => "nombre",
@@ -58,9 +58,7 @@ if (!function_exists('invierte_date_time')) {
                 ]), 6);
 
 
-
-
-				$r[] = div(append_data($x)  , 13);
+                $r[] = div(append_data($x), 13);
 
                 $r[] = div(icon('fa fa-unlock-alt') . "Escribe una contraseña");
                 $r[] = input([
@@ -90,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
 
                     ]),
 
-                        "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
+                    "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
                     ,
                     1);
 
@@ -115,14 +113,14 @@ if (!function_exists('invierte_date_time')) {
         function get_form_contacto_servicio($in_session, $servicio)
         {
 
-            $servicio=  $servicio[0];
+            $servicio = $servicio[0];
 
             $r = [];
             if ($in_session < 1) {
 
-                $x[] =  form_open("", ["class" => "form-cotizacion-enid-service"]);
+                $x[] = form_open("", ["class" => "form-cotizacion-enid-service"]);
                 $x[] = get_btw(
-                    div("Nombre *" )
+                    div("Nombre *")
                     ,
                     div(input([
                         "name" => "nombre",
@@ -153,9 +151,7 @@ if (!function_exists('invierte_date_time')) {
                 ]), " col-lg-6  top_10");
 
 
-
-
-                $r[] = div(append_data($x)  ,  13);
+                $r[] = div(append_data($x), 13);
 
                 $r[] = div(icon('fa fa-unlock-alt') . "Escribe una contraseña", "top_20");
                 $r[] = input([
@@ -180,28 +176,29 @@ if (!function_exists('invierte_date_time')) {
                     "id" => "id_servicio",
                     "class" => "id_servicio form-control",
                     "name" => "id_servicio",
-                    "value"=> $servicio["id_servicio"]
+                    "value" => $servicio["id_servicio"]
                 ]);
                 $r[] = input_hidden([
                     "class" => "id_ciclo_facturacion",
                     "name" => "ciclo_facturacion",
-                    "value"=> $servicio["id_ciclo_facturacion"]
+                    "value" => $servicio["id_ciclo_facturacion"]
                 ]);
 
 
-                $r[] = div(textarea(["name"=> "comentarios" , "class"=> "comentario"] ), "top_30" );
+                $r[] = div(textarea(["name" => "comentarios", "class" => "comentario"]), "top_30");
 
                 $r[] = place("place_telefono");
-                $r[] = guardar("CREA UNA CUENTA" ,["class"=> "top_30"]);
-                $r[] = div(anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
-                    [
-                        'class' => "white",
-                        "href" => "../login"
+                $r[] = guardar("CREA UNA CUENTA", ["class" => "top_30"]);
+                $r[] = div(
+                    anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
+                        [
+                            'class' => "white",
+                            "href" => "../login"
 
-                    ]),
-                    [
-                        'class' => "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
-                    ],
+                        ]
+                    ),
+                    "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
+                    ,
                     1);
 
                 $r[] = "</div >";
@@ -209,64 +206,64 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = place("place_config_usuario");
                 $r[] = form_close();
 
-            }else{
+            } else {
 
-                $r[] =  form_open("", ["class" => "form_cotizacion_enid_service"]);
-                $r[] =  heading_enid("SOLICITAR COTIZACIÓN" , 3 , "top_80 text-center");
-                $r[] =  div(p(span("ME GUSTARÍA OPTENER UNA COTIZACIÓN SOBRE: ","underline").$servicio["nombre_servicio"]));
+                $r[] = form_open("", ["class" => "form_cotizacion_enid_service"]);
+                $r[] = heading_enid("SOLICITAR COTIZACIÓN", 3, "top_80 text-center");
+                $r[] = div(p(span("ME GUSTARÍA OPTENER UNA COTIZACIÓN SOBRE: ", "underline") . $servicio["nombre_servicio"]));
 
-                $r[] =  div(p(span("¿TIENES ALGUNA PREGUNTA ADICIONAL?")), ["class"=> "top_30"]);
-                $r[] =  textarea(["name" => "descripcion"]);
+                $r[] = div(p(span("¿TIENES ALGUNA PREGUNTA ADICIONAL?")), "top_30");
+                $r[] = textarea(["name" => "descripcion"]);
 
                 $r[] = input_hidden([
                     "id" => "id_servicio",
                     "class" => "id_servicio form-control",
                     "name" => "plan",
-                    "value"=> $servicio["id_servicio"]
+                    "value" => $servicio["id_servicio"]
                 ]);
                 $r[] = input_hidden([
                     "class" => "num_ciclos",
                     "name" => "num_ciclos",
-                    "value"=> 1
+                    "value" => 1
                 ]);
 
                 $r[] = input_hidden([
                     "class" => "id_ciclo_facturacion",
                     "name" => "ciclo_facturacion",
-                    "value"=> $servicio["id_ciclo_facturacion"]
+                    "value" => $servicio["id_ciclo_facturacion"]
                 ]);
                 $r[] = input_hidden([
                     "class" => "talla",
                     "name" => "talla",
-                    "value"=> ""
+                    "value" => ""
                 ]);
                 $r[] = input_hidden([
                     "class" => "tipo_entrega",
                     "name" => "tipo_entrega",
-                    "value"=> 2
+                    "value" => 2
                 ]);
                 $r[] = input_hidden([
                     "class" => "id_carro_compras",
                     "name" => "id_carro_compras",
-                    "value"=> 0
+                    "value" => 0
                 ]);
                 $r[] = input_hidden([
                     "class" => "carro_compras",
                     "name" => "carro_compras",
-                    "value"=> ""
+                    "value" => ""
                 ]);
 
                 $r[] = input_hidden([
                     "class" => "servicio",
                     "name" => "servicio",
-                    "value"=> $servicio["id_servicio"]
+                    "value" => $servicio["id_servicio"]
                 ]);
 
 
-                $r[] =  guardar("SOLICITAR COTIZACIÓN",["class"=> "top_30" , "name"=> "comentarios"],1,1,1);
-                $r[] =  place("place_config_usuario");
+                $r[] = guardar("SOLICITAR COTIZACIÓN", ["class" => "top_30", "name" => "comentarios"], 1, 1, 1);
+                $r[] = place("place_config_usuario");
 
-                $r[] =  form_close();
+                $r[] = form_close();
 
             }
 
@@ -283,13 +280,14 @@ if (!function_exists('invierte_date_time')) {
         {
             $r[] = div(
                 heading_enid('RESUMEN DE TU PEDIDO' . icon("fa fa-shopping-bag")
-                ,
+                    ,
                     2,
-                ['class' => ' letter-spacing-5']
-            ),1);
+                    ' letter-spacing-5'
 
-            $r[] = div($resumen_producto, "mt-3",1);
-            $r[] = div($text_envio,  "mt-3",1);
+                ), 1);
+
+            $r[] = div($resumen_producto, "mt-3", 1);
+            $r[] = div($text_envio, "mt-3", 1);
             $r[] = input_hidden([
                 "name" => "resumen_producto",
                 "class" => "resumen_producto",
@@ -299,16 +297,16 @@ if (!function_exists('invierte_date_time')) {
             $x[] = heading_enid("MONTO $" . $monto_total . "MXN", 4);
             $x[] = heading_enid("CARGOS DE ENVÍO $" . $costo_envio_cliente . "MXN", 4);
             $x[] = heading_enid("TOTAL $" . $monto_total_con_envio . "MXN", 3);
-            $x[] = div("Precios expresados en Pesos Mexicanos.", "bottom_10" );
+            $x[] = div("Precios expresados en Pesos Mexicanos.", "bottom_10");
 
 
-            $r[] = div(append_data($x),  "text-right top_20");
+            $r[] = div(append_data($x), "text-right top_20");
 
 
-            if ($in_session > 0){
+            if ($in_session > 0) {
 
-	            $r[] = guardar("ORDENAR COMPRA", ["class"=> 'btn_procesar_pedido_cliente'], 1, 1);
-	            $r[] = place('place_proceso_compra');
+                $r[] = guardar("ORDENAR COMPRA", ["class" => 'btn_procesar_pedido_cliente'], 1, 1);
+                $r[] = place('place_proceso_compra');
 
             }
             $r[] = hr();
@@ -318,7 +316,7 @@ if (!function_exists('invierte_date_time')) {
     }
     if (!function_exists('get_form_miembro_enid_service_hidden')) {
 
-        function get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla,$carro_compras,$id_carro_compras)
+        function get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla, $carro_compras, $id_carro_compras)
         {
 
 
@@ -353,19 +351,18 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "talla",
                     "value" => $talla
                 ])
-	            ,
-	            input_hidden([
-		            "name" => "carro_compras",
-		            "class" => "carro_compras",
-		            "value" => $carro_compras
-	            ])
-	            ,
-	            input_hidden([
-		            "name" => "id_carro_compras",
-		            "class" => "id_carro_compras",
-		            "value" => $id_carro_compras
-	            ])
-
+                ,
+                input_hidden([
+                    "name" => "carro_compras",
+                    "class" => "carro_compras",
+                    "value" => $carro_compras
+                ])
+                ,
+                input_hidden([
+                    "name" => "id_carro_compras",
+                    "class" => "id_carro_compras",
+                    "value" => $id_carro_compras
+                ])
 
 
             ]);
@@ -438,7 +435,7 @@ if (!function_exists('invierte_date_time')) {
             $base = 'col-lg-4 tex-center';
             $resumen_completo = div(div("PRODUCTO") . $resumen_servicio, ["class" => $base]);
             $resumen_completo .= div($text_label . " " . $text_ciclos_contratados, ['class' => $base]);
-            $resumen_completo .= div(div("PRECIO") . $precio,  'col-lg-4' );
+            $resumen_completo .= div(div("PRECIO") . $precio, 'col-lg-4');
             $response["resumen_producto"] = $resumen_completo;
             $response["monto_total"] = $precio;
             $response["resumen_servicio_info"] = $info_servicio;
@@ -468,7 +465,7 @@ if (!function_exists('invierte_date_time')) {
                 ];
 
 
-            $text = heading_enid("¿Ya tienes una cuenta? ", 3, ["class" => " text_usuario_registrado_pregunta text-center text-uppercase letter-spacing-10"]);
+            $text = heading_enid("¿Ya tienes una cuenta? ", 3, " text_usuario_registrado_pregunta text-center text-uppercase letter-spacing-10");
             $text .= div("ACCEDE AHORA!", $extra, 1);
             return $text;
 

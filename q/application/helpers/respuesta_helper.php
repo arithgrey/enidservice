@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $respuesta = div($row["respuesta"]);
-            $fecha_registro = div($row["fecha_registro"] . icon("fa fa fa-clock-o"));
+            $fecha_registro = div(text_icon("fa fa fa-clock-o", $row["fecha_registro"], [], 0));
             //$id_response = $row["id_pregunta"];
             $id_usuario = $row["id_usuario"];
             $sender = $row["nombre"] . " " . $row["apellido_paterno"];
@@ -30,7 +30,7 @@ if (!function_exists('invierte_date_time')) {
         if (count($respuestas) > 0) {
 
             $z[] = place("final");
-            $r[] = div(append_data($z), ["class" => "contenedor_respuestas padding_10"]);
+            $r[] = div(append_data($z), "contenedor_respuestas padding_10");
         }
 
 
@@ -42,7 +42,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = guardar("RESPONDER");
         $r[] = form_close(place("place_repuesta_pregunta"));
 
-        return div(append_data($r), ["class" => "contenedor_respuestas_formulario padding_10"]);
+        return div(append_data($r), "contenedor_respuestas_formulario padding_10");
     }
 
     function get_format_resumen_cliente($next, $nombre, $telefono)
@@ -51,12 +51,12 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         if ($next > 0):
             $x[] = strong("CLIENTE:");
-            $x[] = span(strtoupper($nombre), ["class" => "underline"]);
-            $r[] = div(append_data($x), ["class" => "top_15"]);
+            $x[] = span(strtoupper($nombre), "underline");
+            $r[] = div(append_data($x), "top_15");
 
             if (strlen($telefono) > 4) {
                 $r[] = strong("TELÉFONO DE CONTACTO:");
-                $r[] = span($telefono, ["class" => "underline"]);
+                $r[] = span($telefono, "underline");
 
             }
         endif;
@@ -69,13 +69,14 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = form_open("", ["class" => "form_valoracion_pregunta"]);
-        $r[] = input([
-            "id" => "btn-input",
-            "type" => "text",
-            "class" => "form-control input-sm",
-            "placeholder" => "Agrega una respuesta",
-            "name" => "respuesta"
-        ]);
+        $r[] = input(
+            [
+                "id" => "btn-input",
+                "type" => "text",
+                "class" => "form-control input-sm",
+                "placeholder" => "Agrega una respuesta",
+                "name" => "respuesta"
+            ]);
         $r[] = guardar("Enviar respuesta",
             [
                 "class" => "btn btn-warning btn-sm input-group-btn",
@@ -91,11 +92,6 @@ if (!function_exists('invierte_date_time')) {
         $response = ($num > 4) ? " scroll_chat_enid " : "";
         return $response;
 
-    }
-
-    function carga_imagen_usuario_respuesta($id_usuario)
-    {
-        return "../imgs/index.php/enid/imagen_usuario/" . $id_usuario;
     }
 
 }

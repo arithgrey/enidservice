@@ -23,7 +23,7 @@ class Home extends CI_Controller
 			$data["concepto"] = get_info_variable($param, "concepto");
 			$data["usuario"] = $this->principal->get_info_usuario($id_usuario);
 			$data =  $this->principal->getCSSJs($data, "pago_oxxo");
-			$this->principal->show_data_page($data, get_format_orden_compra($data["usuario"], $param) , 1);
+			$this->principal->show_data_page($data, get_format_orden_compra($data["usuario"], $param,$this->config->item('numero_cuenta')) , 1);
 
 		} else {
 			redirect("../../movimientos/?q=transfer&action=7");

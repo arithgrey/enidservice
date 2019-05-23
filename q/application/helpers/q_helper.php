@@ -24,10 +24,12 @@ if (!function_exists('invierte_date_time')) {
             $email = $param["email"];
 
             $r[] = heading("Buen día " . $nombre . " " . $email);
-            $r[] = div(img([
-                "src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg",
-                "style" => "width: 100%"
-            ]),
+            $r[] = div(
+                img(
+                    [
+                        "src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg",
+                        "style" => "width: 100%"
+                    ]),
                 [
                     "style" => "width: 30%;margin: 0 auto;"
                 ]);
@@ -52,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('base_valoracion')) {
         function base_valoracion()
         {
-            return str_repeat("\n" . label("★", ["class" => 'estrella']) . "\n", 5);
+            return str_repeat("\n" . label("★", 'estrella') . "\n", 5);
         }
     }
     if (!function_exists('tareas_realizadas')) {
@@ -162,7 +164,7 @@ if (!function_exists('invierte_date_time')) {
             if ($num_tareas > 0) {
                 switch ($tipo) {
                     case 1:
-                        $seccion = div(heading_enid("NOTIFICACIONES ",5), 1);
+                        $seccion = div(heading_enid("NOTIFICACIONES ", 5), 1);
                         break;
                     default:
                         break;
@@ -351,9 +353,11 @@ if (!function_exists('invierte_date_time')) {
 
             $total_pendiente = round($adeudos_cliente, 2);
             $text =
-                'Saldo por liquidar ' . span($total_pendiente . 'MXN', ["class" => "saldo_pendiente_notificacion",
-                    "deuda_cliente" => $total_pendiente
-                ]);
+                'Saldo por liquidar ' . span($total_pendiente . 'MXN',
+                    [
+                        "class" => "saldo_pendiente_notificacion",
+                        "deuda_cliente" => $total_pendiente
+                    ]);
 
             $lista = base_notificacion("../area_cliente/?action=compras", "fa fa-credit-card", $text);
 
@@ -414,7 +418,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = anchor_enid($text,
                 [
                     "href" => "../pedidos/?recibo=" . $id_recibo . "#listado_recordatorios"
-            ]);
+                ]);
             $f++;
         }
         $response = [
@@ -424,6 +428,7 @@ if (!function_exists('invierte_date_time')) {
         ];
         return $response;
     }
+
     function add_compras_sin_cierre($recibos)
     {
 
@@ -449,7 +454,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
             if (count($r) > 0) {
-                array_unshift($r, br(2).div(heading_enid("VENTAS EN PROCESO", 5 , ["class"=> "top_20"])));
+                array_unshift($r, br(2) . div(heading_enid("VENTAS EN PROCESO", 5, ["class" => "top_20"])));
             }
 
         }
@@ -515,7 +520,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         ];
-        $response["lista_pendientes"] =  ul($list,["class"=> "d-flex flex-column justify-content-between text_notificacion"  ]);
+        $response["lista_pendientes"] = ul($list, ["class" => "d-flex flex-column justify-content-between text_notificacion"]);
 
         return $response;
 

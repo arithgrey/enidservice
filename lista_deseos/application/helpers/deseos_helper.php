@@ -2,11 +2,51 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('get_format_slider_preferencias')) {
+        function get_format_slider_preferencias()
+        {
+
+
+            $r[] = ul([
+                li(get_format_temporadas(), "single-slide slide-2 active"),
+                li(get_format_images_preferencias(), "single-slide slide-3"),
+                li(get_format_images(), "single-slide slide-4"),
+
+            ],
+                "slides"
+            );
+
+            $r[] = get_btw(
+
+                div(img(["src" => "../img_tema/preferencias/up-arrow.png"]), "slide-nav-up")
+                ,
+                div(img(["src" => "../img_tema/preferencias/up-arrow.png"]), "slide-nav-down")
+                ,
+                "slider-nav"
+            );
+
+
+            $response = div(append_data($r), ["id" => "slider"]);
+            return div($response, 8, 1);
+
+
+        }
+
+    }
+    if (!function_exists('get_productos_deseados')) {
+        function get_productos_deseados($productos_deseados)
+        {
+            return div(get_format_productos_deseados($productos_deseados), "top_20");
+
+        }
+
+    }
+
     if (!function_exists('get_format_temporadas')) {
         function get_format_temporadas()
         {
             $response = append_data([
-                div("Apparel", "slide-label" ),
+                div("Apparel", "slide-label"),
 
                 div(
                     img(
@@ -34,14 +74,14 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $response = append_data([
-                div("Bags",  "slide-label" ),
+                div("Bags", "slide-label"),
                 div(
                     img(
                         [
 
                             "src" => "../img_tema/preferencias/preferencias-2.jpg",
                             "class" => "from-left"
-                    ]
+                        ]
                     )
                     ,
                     "slide-image animate"
@@ -63,7 +103,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_images()
         {
 
-            $r[] = div("Diferentes estilos",  "slide-label");
+            $r[] = div("Diferentes estilos", "slide-label");
             $r[] = div(
                 img(
                     [
@@ -93,7 +133,7 @@ if (!function_exists('invierte_date_time')) {
                     1)
 
             ]),
-                ["class" => "slide-content"]);
+                "slide-content");
 
             return append_data($r);
 
@@ -149,13 +189,14 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(get_msj_busqueda_error(), 1);
             $r[] = heading_enid("UPS AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
-            $r[]  =  guardar("Explorar ahora!",
+            $r[] = guardar("Explorar ahora!",
                 [
-                    "href" => "../",
+
                     "class" => "top_20"
 
-                ]);
-            return div(append_data($r),4,1);
+                ],1,1,0, path_enid("home")
+            );
+            return div(append_data($r), 4, 1);
 
 
         }
@@ -168,7 +209,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(get_menu(), 2);
             $r[] = div(get_lista_deseo($productos_deseados), 7);
             $r[] = get_btw(
-                heading_enid("TU LISTA DE DESEOS", 3, ["class" => 'titulo_lista_deseos'])
+                heading_enid("TU LISTA DE DESEOS", 3, 'titulo_lista_deseos')
                 ,
                 anchor_enid("EXPLORAR MÁS ARTÍCULOS", ["href" => "../search/?q2=0&q="], 1)
                 ,
@@ -184,8 +225,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_slide_accesorios()
         {
 
-            $r[] = div(div("Accesorios", ["class" => "product-type from-bottom"]), "animate");
-            $r[] = div(heading_enid("Lo que usas en viajes", 2, ["class" => "from-bottom"]), "animate");
+            $r[] = div(div("Accesorios", "product-type from-bottom"), "animate");
+            $r[] = div(heading_enid("Lo que usas en viajes", 2, "from-bottom"), "animate");
             $r[] = heading_enid("Explorar tienda", 3, ["class" => "shop-now", "href" => "../search"]);
             return append_data($r);
 
@@ -195,17 +236,14 @@ if (!function_exists('invierte_date_time')) {
         function get_format_temporada()
         {
 
-            $r[] = div(div("Nueva temporada", ["class" => "product-type from-bottom"]), "animate");
-            $r[] = div(heading_enid("ENCUENTRA", 2, ["class" => "from-bottom"]), "animate");
+            $r[] = div(div("Nueva temporada", "product-type from-bottom"), "animate");
+            $r[] = div(heading_enid("ENCUENTRA", 2, "from-bottom"), "animate");
             $r[] = div(heading_enid(
                 "ROPA PARA CADA OCACIÓN", 2,
                 ["class" => "from-bottom"]),
                 ["class" => "animate"]);
 
-            $r[] = heading_enid(
-                "EXPLORAR TIENDA", 2,
-                ["class" => "from-bottom"]);
-
+            $r[] = heading_enid("EXPLORAR TIENDA", 2, "from-bottom");
             return append_data($r);
 
         }
@@ -251,13 +289,20 @@ if (!function_exists('invierte_date_time')) {
         {
             $preferencias = anchor_enid(
                 "TUS PREFERENCIAS E INTERESES",
-                ["id" => "mis_ventas", "href" => "?q=preferencias", "class" => 'btn_mis_ventas']);
+                [
+                    "id" => "mis_ventas",
+                    "href" => "?q=preferencias",
+                    "class" => 'btn_mis_ventas'
+                ]);
 
             $articulos_deseados
                 = anchor_enid(
                 "TU LISTA DE ARTÍCULOS DESEADOS",
-                ["id" => "mis_compras", "href" => "../lista_deseos",
-                    "class" => 'btn_cobranza mis_compras']);
+                [
+                    "id" => "mis_compras",
+                    "href" => "../lista_deseos",
+                    "class" => 'btn_cobranza mis_compras'
+                ]);
 
             $list = [$preferencias, $articulos_deseados];
             return ul($list);
@@ -291,7 +336,7 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $r = [];
-                $r[] = div(img($src_img),  "col-sm-3 border");
+                $r[] = div(img($src_img), "col-sm-3 border");
                 $x = [];
 
 
@@ -300,11 +345,11 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = heading_enid($title, 4);
                 $x[] = str_repeat(icon("fa fa-star"), 5);
 
-                $x[] = div($deseado . " veces comprado",  "label-rating");
+                $x[] = div($deseado . " veces comprado", "label-rating");
 
 
                 $opiniones = anchor_enid($valoracion . " reseñas", ["href" => $url_servicio . "#opiniones"]);
-                $x[] = div($opiniones,  "label-rating");
+                $x[] = div($opiniones, "label-rating");
 
 
                 $text_productos = ($articulos > 1) ? $articulos . " productos " : " un producto";
@@ -313,7 +358,7 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "cursor_pointer hover_black",
                         "onclick" => "cancela_productos('{$id}');"
                     ]);
-                $x[] = div($opiniones,  "label-rating");
+                $x[] = div($opiniones, "label-rating");
 
                 $x[] = br(3);
                 $x[] = p($descripcion);
@@ -324,7 +369,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $text_precio = $precio * $articulos;
                 $z[] = heading_enid($text_precio . "MXN");
-                $z[] = div($text_envio, ["class" => "text-success text-center"]);
+                $z[] = div($text_envio, "text-success text-center" );
                 $z[] = br();
                 $z[] = get_form_pre_pedido($id, $id_producto, "", 5, 0, 1, $articulos);
                 $z[] = br();
@@ -368,8 +413,8 @@ if (!function_exists('invierte_date_time')) {
             return img(
                 [
                     "src" => "https://media.giphy.com/media/VTXzh4qtahZS/giphy.gif",
-                    "class"=> "top_30",
-                    "style"=> "max-height: 260px;"
+                    "class" => "top_30",
+                    "style" => "max-height: 260px;"
 
                 ]
             );

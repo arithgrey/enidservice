@@ -48,9 +48,7 @@ class Img extends REST_Controller
 	function form_img_user_GET()
 	{
 
-		$param = $this->get();
-		$response = form_img_usuario();
-		$this->response($response);
+		$this->response(form_img_usuario());
 
 	}
 
