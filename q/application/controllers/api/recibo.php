@@ -397,7 +397,7 @@ class recibo extends REST_Controller
 
         $text .= get_botones_seguimiento($id_recibo);
         $f = format_concepto($id_recibo, $resumen_pedido, $num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion, $saldo_pendiente, $url_img_servicio, $monto_a_pagar, $deuda);
-        $r = div($text, ["class" => "col-lg-8  shadow padding_10"]);
+        $r = div(div($text,10,1), "col-lg-8  shadow padding_10" );
         return div($r . $f, 1);
 
     }

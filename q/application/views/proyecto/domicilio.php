@@ -58,7 +58,8 @@ foreach ($info_envio_direccion as $row) {
         <?= place("place_asentamiento") ?>
 
 
-        <?= div(get_btw(
+        <?= div(
+                get_btw(
             div("Delegación o Municipio", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
             ,
             div(input([
@@ -71,7 +72,7 @@ foreach ($info_envio_direccion as $row) {
             "value"
 
 
-        ), ["class" => "district delegacion_c"]) ?>
+        ),  "district delegacion_c") ?>
 
 
 
@@ -92,7 +93,7 @@ foreach ($info_envio_direccion as $row) {
             )
             ,
             "value"
-        ), ["class" => " district  estado_c"]) ?>
+        ),  " district  estado_c") ?>
 
         <?= get_btw(
             div("País", ["class" => "label-off", "for" => "dwfrm_profile_address_district"]),

@@ -59,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
             $x = [];
             $x[] = div(anchor_enid(img(["src" => $url_img_servicio, "class" => "img_servicio_def padding_10"]), ["href" => get_url_servicio($id_servicio)]), 3);
             $text = [];
-            $text[] = div(heading_enid($porcentaje . "%", 3), ["class" => "text-center"]);
+            $text[] = div(heading_enid($porcentaje . "%", 3), "text-center");
 
 
             $form = [];
@@ -87,34 +87,31 @@ if (!function_exists('invierte_date_time')) {
             $text[] = append_data($form);
 
 
-            $x[] = div(append_data($text), ["class" => "col-lg-3 d-flex flex-column justify-content-between"]);
-
-
+            $x[] = div(append_data($text), "col-lg-3 d-flex flex-column justify-content-between");
 
 
             $texto = heading_enid("Tiempo promedio de venta " . substr($dias, 0, 5) . "días", 4);
-            $x[] = div($texto, ["class" => "col-lg-3 text-center align-self-center"]);
-
+            $x[] = div($texto, "col-lg-3 text-center align-self-center");
 
 
             $total_costos_operativos = $row["total_costos_operativos"];
-            $utilidad =  heading_enid("Sin costos operativos registrados" , 5);
-            if (count($total_costos_operativos ) > 0 ){
+            $utilidad = heading_enid("Sin costos operativos registrados", 5);
+            if (count($total_costos_operativos) > 0) {
 
-                $total_costos =  $total_costos_operativos["total_costos"];
-                $total_pagos =  $total_costos_operativos["total_pagos"];
-                $utilidad =  ($total_pagos - $total_costos);
-                $utilidad_global  = $utilidad_global  + $utilidad;
+                $total_costos = $total_costos_operativos["total_costos"];
+                $total_pagos = $total_costos_operativos["total_pagos"];
+                $utilidad = ($total_pagos - $total_costos);
+                $utilidad_global = $utilidad_global + $utilidad;
             }
-            $x[] = div(heading_enid("UTILIDAD",3).br().heading_enid( $utilidad." MXN " ,  5), ["class" => "col-lg-3 text-center align-self-center"]);
+            $x[] = div(heading_enid("UTILIDAD", 3) . br() . heading_enid($utilidad . " MXN ", 5), "col-lg-3 text-center align-self-center");
 
 
-            $response[] = div(append_data($x), ["class" => "row border  top_30"]);
+            $response[] = div(append_data($x), "row border  top_30");
 
         }
 
-        $r[] =  heading_enid("UTILIDAD TOTAL: " . $utilidad_global . "MXN " ,4);
-        $r[] =  append_data($response);
+        $r[] = heading_enid("UTILIDAD TOTAL: " . $utilidad_global . "MXN ", 4);
+        $r[] = append_data($response);
         return $r;
 
 
@@ -274,7 +271,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $extra = ($status == 9 || $status == 7 || $status == 11 || $status == 12) ? " entregado" : "";
-            $extra = ( $status == 10 ) ? " cancelado " : $extra;
+            $extra = ($status == 10) ? " cancelado " : $extra;
 
 
             $tb .= "<tr id='" . $recibo . "' class='desglose_orden cursor_pointer  " . $extra . "' >";
@@ -325,7 +322,8 @@ if (!function_exists('invierte_date_time')) {
             /*Aplico la comisión del paypal 3**/
             $comision_paypal = porcentaje($saldo_pendiente, 3.7, 2, 0);
             $saldo = $saldo_pendiente + $comision_paypal;
-            return "https://www.paypal.me/eniservice/" . $saldo;
+            return path_enid("paypal_enid",  $saldo,1);
+
         }
         return 0;
 
@@ -445,12 +443,6 @@ if (!function_exists('invierte_date_time')) {
         return $total_deuda + $costo;
     }
 
-    function evalua_acciones_modalidad_anteriores($num_acciones, $modalidad)
-    {
-
-
-    }
-
     function evalua_texto_envios_compras($modalidad_ventas, $total, $tipo)
     {
 
@@ -507,13 +499,15 @@ if (!function_exists('invierte_date_time')) {
                 }
 
             } else {
-                $texto = icon('fa fa-bus ', ["id" => $id_recibo]) .
-                    "¿DÓNDE ENVIAMOS TU PEDIDO?";
+                $texto = text_icon('fa fa-bus ', "¿DÓNDE ENVIAMOS TU PEDIDO?", ["id" => $id_recibo]);
             }
         } else {
 
             if ($direccion_registrada == 1) {
-                $texto = icon('fa fa-bus ', ["id" => $id_recibo]) . "VER DIRECCIÓN DE ENVÍO";
+
+
+                $texto = text_icon('fa fa-bus ', "VER DIRECCIÓN DE ENVÍO", ["id" => $id_recibo]);
+
             }
         }
 
@@ -543,7 +537,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $text_icono = ($vendedor == 1) ? "DETALLES DE LA COMPRA " : icon('fa fa-credit-card-alt') . "DETALLES DE TU COMPRA ";
+        $text_icono = ($vendedor == 1) ? "DETALLES DE LA COMPRA " : text_icon('fa fa-credit-card-alt', "DETALLES DE TU COMPRA ");
 
         $text = guardar($text_icono, [
             "class" => 'resumen_pagos_pendientes',
@@ -628,18 +622,26 @@ if (!function_exists('invierte_date_time')) {
 
         $response = "";
         if ($modalidad == 0 && $num_ordenes == 0) {
-            $final = div(img([
-                    "src" => "../img_tema/tienda_en_linea/carrito_compra.jpg",
-                    "class" => "img_invitacion_compra"
-                ])
+            $final = div(
+                img(
+                    [
+                        "src" => "../img_tema/tienda_en_linea/carrito_compra.jpg",
+                        "class" => "img_invitacion_compra"
+                    ]
+                )
                 ,
-                ["class" => "img_center_compra"]
+                "img_center_compra"
             );
 
-            $f = anchor_enid($final, ["href" => "../"]);
-            $f .= anchor_enid(heading_enid("EXPLORAR TIENDA", 3, ["class" => "text-center text_explorar_tienda"]),
+            $f = anchor_enid($final, ["href" => path_enid("home")]);
+            $f .= anchor_enid(
+                heading_enid(
+                    "EXPLORAR TIENDA"
+                    ,
+                    3, "text-center text_explorar_tienda"
+                ),
                 [
-                    "href" => "../"
+                    "href" => path_enid("home")
                 ]);
             $response = $f;
         }
@@ -659,7 +661,9 @@ if (!function_exists('invierte_date_time')) {
                 ],
                 1
             ),
-            ["class" => "top_20"], 1);
+            "top_20"
+            , 1
+        );
 
 
         $r[] = get_campo($inf, "direccion");
@@ -672,7 +676,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_campo($inf, "municipio");
         $r[] = get_campo($inf, "ciudad");
         $r[] = get_campo($inf, "estado");
-        $resumen .= div(append_data($r), ["class" => 'texto_direccion_envio_pedido top_20']);
+        $resumen .= div(append_data($r), 'texto_direccion_envio_pedido top_20');
 
         $resumen .= div("¿Quíen más puede recibir tu pedido?");
         $resumen .= div(get_campo($inf, "nombre_receptor"));
@@ -711,17 +715,17 @@ if (!function_exists('invierte_date_time')) {
         $concepto .= div("Concepto");
         $concepto .= div($resumen_pedido);
         $concepto .= valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion);
-        $concepto .= div("PRECIO " . span("$" . $monto_a_pagar, ["class" => "strong"]), ["class" => "top_30"]);
+        $concepto .= div("PRECIO " . span("$" . $monto_a_pagar, "strong"), "top_30");
         $concepto .= div($deuda["text_envio"]);
 
         $text = div($concepto);
 
-        $monto = heading_enid("Monto total pendiente-", 3, ['class' => 'strong']);
-        $monto .= heading_enid($saldo_pendiente . "MXN", 2, ["class" => 'blue_enid ']);
-        $monto .= heading_enid("Pesos Mexicanos", 4, ["class" => 'strong']);
+        $monto = heading_enid("Monto total pendiente-", 3, 'strong');
+        $monto .= heading_enid($saldo_pendiente . "MXN", 2, 'blue_enid ');
+        $monto .= heading_enid("Pesos Mexicanos", 4, 'strong');
 
         $text .= div($monto, ["style" => "text-align: center;", "class" => "top_50"]);
-        $text .= div(img($url_img_servicio), ["class" => "max-height: 250px;"], 1);
+        $text .= div(img($url_img_servicio), "max-height: 250px;", 1);
         return div($text, 4);
 
     }
@@ -737,15 +741,15 @@ if (!function_exists('invierte_date_time')) {
         $lugar_entrega = $p["lugar_entrega"];
         $numero = "NÚMERO " . $p["numero"];
 
-        $r[] = div(heading_enid("LUGAR DE ENCUENTRO", 3, ["class" => "top_30 underline "]), 1);
+        $r[] = div(heading_enid("LUGAR DE ENCUENTRO", 3, "top_30 underline "), 1);
 
-        $x[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, ["class" => "top_20"], 1);
-        $x[] = div("ESTACIÓN " . $lugar_entrega, ["class" => "strong"], 1);
+        $x[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, "top_20", 1);
+        $x[] = div("ESTACIÓN " . $lugar_entrega, "strong", 1);
         $x[] = div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"], 1);
 
-        $r[] = div(append_data($x), ["class" => "contenedor_detalle_entrega"]);
+        $r[] = div(append_data($x), "contenedor_detalle_entrega");
 
-        $r[] = div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", ["class" => "contenedor_text_entrega border"]);
+        $r[] = div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", "contenedor_text_entrega border");
 
         return append_data($r);
     }
@@ -753,7 +757,7 @@ if (!function_exists('invierte_date_time')) {
     function get_botones_seguimiento($id_recibo)
     {
 
-        $link_seguimiento = "../pedidos/?seguimiento=" . $id_recibo;
+
         $t = guardar(
             "RASTREA TU PEDIDO" . icon("fa fa-map-signs"),
             [
@@ -763,7 +767,7 @@ if (!function_exists('invierte_date_time')) {
             1,
             1,
             0,
-            $link_seguimiento
+            path_enid("pedido_seguimiento",  $id_recibo)
         );
 
 
@@ -865,7 +869,6 @@ if (!function_exists('invierte_date_time')) {
 
             $id_recibo = $row["id_proyecto_persona_forma_pago"];
             $id_servicio = $row["id_servicio"];
-            $url_servicio = "../producto/?producto=" . $id_servicio;
             $url_imagen_servicio = $row["url_img_servicio"];
 
             $t = anchor_enid(
@@ -873,18 +876,20 @@ if (!function_exists('invierte_date_time')) {
                     "src" => $url_imagen_servicio,
                     "class" => 'imagen_articulo',
                 ]),
-                ["href" => $url_servicio]
+                [
+                    "href" => path_enid("producto", $id_servicio)
+                ]
             );
 
 
             $t .= carga_estado_compra($id_recibo, $modalidad);
 
             if ($id_perfil == 3) {
-                $url = "../pedidos/?recibo=" . $id_recibo;
+                $url = path_enid("pedidos_recibo",$id_recibo);
                 $t .= guardar("AVANZADO", [], 1, 1, 0, $url);
             }
 
-            $list[] = div(div($t, ["class" => "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block "]), 1);
+            $list[] = div(div($t, "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block " ), 1);
         }
 
         $response = append_data($list);
@@ -932,13 +937,16 @@ if (!function_exists('invierte_date_time')) {
             $response [] = div(append_data($t));
             $response [] = div(["ARTICULOS SOLICITADOS ", $num_ciclos_contratados, "|", "SALDO CUBIERTO", $saldo_cubierto, "MXN"]);
             $response [] = append_data([
+
+
                 "LABOR DE COBRANZA",
-                icon("fa fa-envelope"),
+                icon("fa fa-envelope")
+                ,
                 $num_email_recordatorio
             ]);
 
             $response [] = div($fecha_registro);
-            $r[] = div(div(append_data($response), ["class" => "popup-head-left pull-left"]), ["class" => "popup-head"]);
+            $r[] = div(div(append_data($response), "popup-head-left pull-left" ), "popup-head");
 
         }
 

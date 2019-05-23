@@ -11,8 +11,9 @@
     </div>
 </div>
 <?= get_hiddens_tickects($action, $ticket) ?>
-<?= div("", [
-    "class" => "resumen_pagos_pendientes",
-    "href" => "#tab_renovar_servicio",
-    "data-toggle" => "tab"
-]) ?>
+<?= div("",
+    [
+        "class" => "resumen_pagos_pendientes",
+        "href" => "#tab_renovar_servicio",
+        "data-toggle" => "tab"
+    ]) ?>

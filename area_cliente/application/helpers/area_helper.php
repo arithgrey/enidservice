@@ -21,8 +21,9 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(append_data(
 
                 anchor_enid("HECHAS" .
-                    span("", ['class' => 'notificacion_preguntas_sin_leer_cliente']),
-                    ["class" => "a_enid_black preguntas btn_preguntas_compras",
+                    span("", 'notificacion_preguntas_sin_leer_cliente'),
+                    [
+                        "class" => "a_enid_black preguntas btn_preguntas_compras",
                         "id" => '0'
                     ]
                 )
@@ -30,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
 
                 anchor_enid(
                     "RECIBIDAS" .
-                    span("", ['class' => 'notificacion_preguntas_sin_leer_ventas'])
+                    span("", 'notificacion_preguntas_sin_leer_ventas')
                     ,
                     [
                         "class" => "a_enid_blue preguntas ",
@@ -51,18 +52,22 @@ if (!function_exists('invierte_date_time')) {
 
 
             $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
-            $x[] = div($valoraciones, "top_30" );
+            $x[] = div($valoraciones, "top_30");
 
             $x[] = div(
-                anchor_enid("VER COMENTARIOS",
+                anchor_enid(
+                    "VER COMENTARIOS",
                     [
-                        "href" => "../recomendacion/?q=" . $id_usuario,
+                        "href" => path_enid("recomendacion", $id_usuario),
                         "class" => "a_enid_blue  top_30"
                     ]
-                ), ["class" => "text-center top_20"]);
+                ),
+                "text-center top_20"
+            );
+
             $x[] = div($alcance, " text-center top_30");
 
-            $response = div(div(append_data($x), 6, 1),  "text-center");
+            $response = div(div(append_data($x), 6, 1), "text-center");
             return $response;
 
         }
@@ -117,16 +122,23 @@ if (!function_exists('invierte_date_time')) {
                 "id" => 'btn_pagos'
             ]);
 
-        $a_vendedor = anchor_enid(div(icon("fa fa-flag")." VENDER"),
-            [
-                "href" => "../planes_servicios/?action=nuevo"
+        $a_vendedor = anchor_enid(div(
+                text_icon("fa fa-flag", " VENDER"),
+                [
+                    "href" => path_enid("vender_nuevo")
 
-            ]
+                ]
+            )
         );
 
 
-        $a_mis_ventas = anchor_enid(icon('fa fa-shopping-bag') . "VENTAS",
-            ["id" => "mis_ventas",
+        $a_mis_ventas = anchor_enid(
+
+            text_icon('fa fa-shopping-bag', "VENTAS")
+
+            ,
+            [
+                "id" => "mis_ventas",
                 "href" => "#tab_mis_ventas",
                 "data-toggle" => "tab",
                 "class" => 'btn_mis_ventas'
@@ -134,8 +146,7 @@ if (!function_exists('invierte_date_time')) {
         $place_ventas = place("place_num_pagos_notificados");
 
 
-
-        $a_mis_compras = anchor_enid(icon('fa fa-credit-card-alt') . " COMPRAS",
+        $a_mis_compras = anchor_enid(text_icon('fa fa-credit-card-alt', " COMPRAS"),
             [
                 "id" => "mis_compras",
                 "href" => "#tab_mis_pagos",
@@ -143,15 +154,15 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'btn_cobranza mis_compras'
             ]);
 
-        $notificacion =  anchor_enid( place("place_num_pagos_por_realizar"),    [
+        $notificacion = anchor_enid(place("place_num_pagos_por_realizar"), [
                 "id" => "mis_compras",
                 "href" => "#tab_mis_pagos",
                 "data-toggle" => "tab",
                 "class" => 'btn_cobranza mis_compras'
-        ]
+            ]
         );
 
-        $a_mis_valoraciones = anchor_enid(icon("fa fa-star")." VALORACIONES",
+        $a_mis_valoraciones = anchor_enid(text_icon("fa fa-star", " VALORACIONES"),
             [
                 "id" => "mis_valoraciones",
                 "href" => "#tab_valoraciones",
@@ -159,7 +170,7 @@ if (!function_exists('invierte_date_time')) {
             ]);
         $a_lista_deseo = anchor_enid(icon("fa fa-gift") . "LISTA DE DESEOS",
             [
-                "href" => "../lista_deseos/"
+                "href" => path_enid("lista_deseos")
             ]
         );
 
@@ -170,13 +181,13 @@ if (!function_exists('invierte_date_time')) {
             $a_mis_ventas,
             $place_ventas,
             $a_mis_compras,
-            $notificacion ,
+            $notificacion,
             $a_mis_valoraciones,
             $a_lista_deseo,
             li($a_tab_pagos, ["class" => 'li_menu', "style" => "display: none;"]),
 
         ];
-        return ul($list, ["class" => "shadow border padding_10 d-flex flex-column justify-content-between" , "style"=> "min-height: 220px;"]);
+        return ul($list, ["class" => "shadow border padding_10 d-flex flex-column justify-content-between", "style" => "min-height: 220px;"]);
     }
 
 }

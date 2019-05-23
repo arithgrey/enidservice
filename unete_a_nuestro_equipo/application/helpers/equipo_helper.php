@@ -66,7 +66,10 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = anchor_enid(
                 "FAQS",
-                ["href" => "../faq/?categoria=5", "class" => "top_20"],
+                [
+                    "href" => path_enid("faqs", "/?categoria=5"),
+                    "class" => "top_20"
+                ],
                 1,
                 1,
                 1

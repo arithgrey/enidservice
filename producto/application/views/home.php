@@ -71,7 +71,8 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
             ) ?>
         </div>
 
-        <?= div(get_contenedor_central(
+        <?= div(
+                get_contenedor_central(
                 $proceso_compra,
                 $id_servicio,
                 $tiempo_entrega,
@@ -84,7 +85,8 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
                 $desc_web,
                 $telefono_visible
 
-        ), 3) ?>
+        ), 3
+        ) ?>
 
         <div class="col-lg-3  border shadow">
             <?php if ($flag_servicio < 1): ?>
@@ -118,7 +120,6 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
             <?php else: ?>
 
                 <div class="card box-shadow">
-
                     <?= div(heading_enid(substr(strtoupper($nombre_servicio), 0, 70), 1),  "card-header top_20") ?>
                     <?= heading_enid(
                         valida_text_servicio(
@@ -128,16 +129,15 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
                         3,
                         'card-title pricing-card-title'
                     ) ?>
-
                     <?= validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion) ?>
                 </div>
             <?php endif; ?>
         </div>
     </div>
 <?= end_row() ?>
-<?= hr(["class" => "mr-50 mb-5"]) ?>
-<?= get_descripcion_servicio($descripcion, $flag_servicio, $url_vide_youtube, $is_mobile) ?>
+<?= hr("mr-50 mb-5") ?>
 <?= place("place_valoraciones col-lg-12") ?>
+<?= get_descripcion_servicio($descripcion, $flag_servicio, $url_vide_youtube, $is_mobile) ?>
 <?= addNRow(div(place("place_tambien_podria_interezar"), 10, 1)) ?>
 <?= input_hidden(["class" => "qservicio", "value" => $nombre_servicio]) ?>
 <?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]) ?>

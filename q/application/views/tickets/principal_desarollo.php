@@ -34,11 +34,13 @@ foreach ($info_tickets as $row) {
             </div>
             <div class="dropdown pull-right">
                 <?= guardar(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]) ?>
-                <?= div(anchor_enid("CERRAR TICKET",
+                <?= div(
+                        anchor_enid("CERRAR TICKET",
                     [
                         "class" => "cerrar_ticket",
                         "onClick" => "cerrar_ticket({$id_ticket})"
-                    ]), ["class" => "dropdown-menu acciones_ticket"]); ?>
+                    ]
+                        ), "dropdown-menu acciones_ticket" ); ?>
             </div>
         </div>
     </div>

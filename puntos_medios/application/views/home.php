@@ -8,11 +8,7 @@
             <?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $servicio]) ?>
             <div class='formulario_quien_recibe display_none'>
                 <?php if ($in_session < 1): ?>
-                    <?= div(get_btw(
-                        "",
-                        get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras),
-                        ""
-                    ), ["class" => "contenedor_eleccion_correo_electronico"]) ?>
+                    <?= div(get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras), "contenedor_eleccion_correo_electronico" ) ?>
 
                 <?php else: ?>
 

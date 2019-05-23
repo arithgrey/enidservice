@@ -22,7 +22,8 @@ if (!function_exists('invierte_date_time')) {
 
                 anchor_enid("HECHAS" .
                     span("", ['class' => 'notificacion_preguntas_sin_leer_cliente']),
-                    ["class" => "a_enid_black preguntas btn_preguntas_compras",
+                    [
+                        "class" => "a_enid_black preguntas btn_preguntas_compras",
                         "id" => '0'
                     ]
                 )
@@ -52,7 +53,7 @@ if (!function_exists('invierte_date_time')) {
 
             $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
             $x[] = $valoraciones;
-            $url = "../recomendacion/?q=" . $id_usuario;
+            $url = path_enid("recomendacion", $id_usuario);
             $x[] = div(
                 anchor_enid("VER COMENTARIOS",
                     [
@@ -60,13 +61,13 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "a_enid_blue "
                     ]
                 ), ["class" => "text-center top_20"]);
-            $x[] = div($alcance, ["class" => " text-center "]);
+            $x[] = div($alcance, " text-center ");
 
 
             $r[] = div(append_data($x), 3);
             $r[] = div(place("place_ventas_usuario"), 9);
 
-            return div(append_data($r), ["class" => "text-center"]);
+            return div(append_data($r), "text-center");
 
         }
     }
@@ -122,14 +123,15 @@ if (!function_exists('invierte_date_time')) {
 
         $a_vendedor = anchor_enid(div("VENDER"),
             [
-                "href" => "../planes_servicios/?action=nuevo",
+                "href" => path_enid("vender", "/?action=nuevo"),
                 "class" => 'black strong tab_pagos',
 
             ]);
 
 
-        $a_mis_ventas = anchor_enid(icon('fa fa-shopping-bag') . "TUS VENTAS" ,
-            ["id" => "mis_ventas",
+        $a_mis_ventas = anchor_enid( text_icon('fa fa-shopping-bag', "TUS VENTAS") ,
+            [
+                "id" => "mis_ventas",
                 "href" => "#tab_mis_ventas",
                 "data-toggle" => "tab",
                 "class" => 'black strong btn_mis_ventas'
@@ -140,23 +142,32 @@ if (!function_exists('invierte_date_time')) {
         $icon = icon('fa fa-credit-card-alt');
         $place = place("place_num_pagos_por_realizar");
         $a_mis_compras = anchor_enid($icon . "TUS COMPRAS" . $place,
-            ["id" => "mis_compras", "href" => "#tab_mis_pagos", "data-toggle" => "tab", "class" => 'black strong btn_cobranza mis_compras']);
+            [
+                "id" => "mis_compras",
+                "href" => "#tab_mis_pagos",
+                "data-toggle" => "tab",
+                "class" => 'black strong btn_cobranza mis_compras'
+            ]);
 
-        $a_lista_deseo = anchor_enid(icon("fa fa-gift") . "LISTA DE DESEOS",
-            ["href" => "../lista_deseos/", "class" => 'black strong']);
+        $a_lista_deseo = anchor_enid(
+            text_icon("fa fa-gift", "LISTA DE DESEOS"),
+            [
+                "href" => path_enid("lista_deseos"),
+                "class" => 'black strong'
+            ]);
 
 
         $list = [
 
-            li($a_vendedor, ["class" => "li_menu menu_vender " . valida_active_tab('ventas', $action)]),
-            li($a_mis_ventas, ["class" => 'li_menu']),
-            li($place_ventas, ["class" => 'li_menu']),
-            li($a_mis_compras, ["class" => 'li_menu ' . valida_active_tab('compras', $action)]),
-            li($a_lista_deseo, ["class" => 'li_menu']),
+            li($a_vendedor, "li_menu menu_vender " . valida_active_tab('ventas', $action)),
+            li($a_mis_ventas, 'li_menu'),
+            li($place_ventas, 'li_menu'),
+            li($a_mis_compras, 'li_menu ' . valida_active_tab('compras', $action)),
+            li($a_lista_deseo, 'li_menu'),
             li($a_tab_pagos, ["class" => 'li_menu', "style" => "display: none;"]),
 
         ];
-        return ul($list , ["class"=> "nav tabs shadow border padding_10"]);
+        return ul($list, "nav tabs shadow border padding_10");
     }
 
 }

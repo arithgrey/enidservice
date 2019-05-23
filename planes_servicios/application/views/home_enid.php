@@ -15,7 +15,7 @@
         <div class="tab-content">
             <?= div(get_format_articulos_venta($list_orden), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_servicios']) ?>
             <div class="tab-pane <?= valida_active_tab(1, $action) ?>" id='tab_form_servicio'>
-                <?= $this->load->view("secciones/form_servicios") ?>
+                <?=get_form_ventas($ciclo_facturacion,$error_registro,$is_mobile)?>
             </div>
         </div>
     </div>

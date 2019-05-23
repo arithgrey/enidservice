@@ -16,8 +16,8 @@ $li = [
         div($estrellas, ["class" => "contenedor_promedios"]),
         ["href" => "../recomendacion/?q=" . $id_usuario]
     ),
-    anchor_enid("Configuración y privacidad", ["href" => "../administracion_cuenta/"]),
-    anchor_enid("Cerrar sessión", ["href" => "../login/index.php/startsession/logout"])
+    anchor_enid("Configuración y privacidad", ["href" => path_enid("administracion_cuenta") ]),
+    anchor_enid("Cerrar sessión", ["href" => path_enid("logout")])
 ];
 
 ?>
@@ -26,17 +26,16 @@ $li = [
     <li class="dropdown  menu_notificaciones_progreso_dia">
         <?php $class_notificacion = ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid "; ?>
         <?= anchor_enid(
-            get_btw(icon("fa fa-bell white"), div("", ["class" => "num_tareas_dia_pendientes_usr"]), "display_flex_enid"),
+            get_btw(icon("fa fa-bell white"), div("", "num_tareas_dia_pendientes_usr"), "display_flex_enid"),
             [
                 "class" => "blue_enid dropdown-toggle",
                 "data-toggle" => "dropdown"
             ]
         ) ?>
         <?= ul(
-            [place("place_notificaciones_usuario padding_10 shadow border")],
             [
-                "class" => "dropdown-menu shadow " . $class_notificacion
-            ]
+                    place("place_notificaciones_usuario padding_10 shadow border")],
+            "dropdown-menu shadow " . $class_notificacion
         ) ?>
     </li>
 
@@ -44,7 +43,7 @@ $li = [
         <?= get_img_usuario($id_usuario) ?>
         <?= ul(
             $li,
-            ["class" => "dropdown-menu menu_usuario "]
+             "dropdown-menu menu_usuario "
         ) ?>
     </li>
 </div>

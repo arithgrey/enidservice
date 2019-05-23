@@ -3,8 +3,8 @@ if (!function_exists('invierte_date_time')) {
 
 	function get_format_sin_resultados()
 	{
-		$r[] = heading_enid("NO HAY PRODUCTOS QUE COINCIDAN CON TU BÚSQUEDA", 3, ["class" => "info_sin_encontrar"]);
-		$r[] = div("SUGERENCIAS", ["class" => "contenedor_sugerencias sugerencias"]);
+		$r[] = heading_enid("NO HAY PRODUCTOS QUE COINCIDAN CON TU BÚSQUEDA", 3, "info_sin_encontrar");
+		$r[] = div("SUGERENCIAS", "contenedor_sugerencias sugerencias");
 
 		$r[] = ul([
 			"- REVISA LA " . strong("ORTOGRAFÍA DE LA PALABRA"),
@@ -13,15 +13,17 @@ if (!function_exists('invierte_date_time')) {
 
 
 		]);
-		$r[] = div(guardar("ANUNCIA ESTE PRODUCTO!" . icon('fa fa-chevron-right ir'),
+		$r[] = div(
+		    guardar("ANUNCIA ESTE PRODUCTO!" . icon('fa fa-chevron-right ir'),
 				[],
 				1,
 				1,
-				1, "../login")
+				1, path_enid("login")
+            )
 			,
-			["class" => "col-lg-5 top_20"], 1);
+			"col-lg-5 top_20", 1);
 
-		$response =   div(append_data($r) ,["class"=>"border padding_20 top_20 col-lg-10 col-lg-offset-1"] ,1);
+		$response =   div(append_data($r) , "border padding_20 top_20 col-lg-10 col-lg-offset-1"  ,1);
 		return $response;
 
 

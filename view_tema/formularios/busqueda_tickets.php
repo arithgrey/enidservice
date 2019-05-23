@@ -9,8 +9,17 @@
             ]),
                 4
             ) ?>
-            <?= div(append_data([
-                create_select($departamentos, "depto", "form-control input-sm depto", "depto", "nombre", "id_departamento"),
+            <?= div(
+                    append_data([
+
+                            create_select(
+                                    $departamentos,
+                                    "depto",
+                                    "form-control input-sm depto",
+                                    "depto",
+                                    "nombre",
+                                    "id_departamento"
+                            ),
                 input_hidden([
                     "name" => "departamento",
                     "value" => $num_departamento,

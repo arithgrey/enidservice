@@ -3,9 +3,8 @@
         ["class" => "a_enid_blue editar_direccion_persona"]
     )
     ,
-    [
-        "class" => "text-right"
-    ],
+    "text-right"
+    ,
     1
 ) ?>
 <?= div(

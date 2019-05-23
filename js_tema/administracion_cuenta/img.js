@@ -15,13 +15,13 @@ let response_carga_form_imagenes = function (data) {
 }
 let upload_imgs_enid_pre = function () {
 
+
     let i = 0, len = this.files.length, img, reader, file;
     file = this.files[i];
     reader = new FileReader();
     reader.onloadend = function (e) {
 
-        $(".contenedor_img_usuario").hide();
-        $(".guardar_img_enid").show();
+        showonehideone(".guardar_img_enid" , ".imagen_img");
         mostrar_img_upload(e.target.result, 'place_load_img');
         $("#form_img_enid").submit(registra_img_usr);
     };
@@ -45,7 +45,6 @@ let registra_img_usr = function (e) {
         }
     }).done(function (data) {
 
-        show_response_ok_enid(".place_load_img", "Imagen cargada con éxito");
         redirect("");
 
     });

@@ -54,7 +54,7 @@ let registra_img_servicio = function(e){
             processData: false ,
             beforeSend : function(){
                 $(".guardar_img_enid").hide();
-                //recorrepage(".carga_informacion_servicio");
+
                 show_load_enid(".place_load_img");
             }
 

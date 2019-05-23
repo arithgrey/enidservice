@@ -65,7 +65,7 @@ if (!function_exists('invierte_date_time')) {
             $link = anchor_enid('INDICA TU NÚMERO TELEFÓNICO', ['href' => '../administracion_cuenta/']);
 
         }
-        return div(div($link,1), "top_30");
+        return div(div($link, 1), "top_30");
     }
 
     function valida_activo_ventas_mayoreo($estado_actual, $ventas_mayoreo)
@@ -99,7 +99,6 @@ if (!function_exists('invierte_date_time')) {
         if ($num_images == 0) {
 
 
-
             $text[] = heading_enid(
                 "MUESTRA IMAGENES SOBRE TU " . $tipo_promocion . " A TUS CLIENTES"
                 ,
@@ -126,7 +125,14 @@ if (!function_exists('invierte_date_time')) {
     function valida_descartar_promocion($num_images, $id_servicio, $id_perfil)
     {
 
-        $response = ($num_images == 0 || $id_perfil != 20 && $id_perfil > 0 ) ? div(anchor_enid("DESCARTAR PROMOCIÓN", ["class" => 'descartar_promocion border descartar_promocion padding_10 ', "id" => $id_servicio]), ["class" => "text-right top_30 bottom_50"]) : "";
+        $response = ($num_images == 0 || $id_perfil != 20 && $id_perfil > 0) ?
+            div(
+                anchor_enid(
+                    "DESCARTAR PROMOCIÓN",
+                    [
+                        "class" => 'descartar_promocion border descartar_promocion padding_10 ', "id" => $id_servicio
+                    ]), "text-right top_30 bottom_50"
+            ) : "";
         return $response;
     }
 

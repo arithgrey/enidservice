@@ -36,6 +36,6 @@ $menu = [li(heading_enid("¿Tienes alguna duda?", ["class" => 'strong'])),
 
 ?>
 
-<?= anchor(img_enid(), ["href" => "../faq"]) ?>
+<?= anchor(img_enid(), ["href" => path_enid("faqs")]) ?>
 <?= hidden(["class" => "in_session", "value" => $in_session]) ?>
 <?= ul($menu) ?>

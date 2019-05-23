@@ -1066,6 +1066,7 @@ table {
 
 .btn_guardar {
     border: 0 !important;
+    letter-spacing: 5px;
 }
 
 .btn_guardar:hover {
@@ -1218,6 +1219,9 @@ select {
 }
 .letter-spacing-5{
     letter-spacing: 5px;
+}
+.letter-spacing-3{
+    letter-spacing: 3px;
 }
 .producto_enid {
     height: 310px !important;

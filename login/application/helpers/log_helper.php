@@ -43,9 +43,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = div(append_data($x), "text-center top_50 bottom_100");
-        $r[] = ($action === "registro") ? div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", ["class" => "mensaje_bienvenida"]) : "";
+        $r[] = ($action === "registro") ? div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", "mensaje_bienvenida") : "";
         $response = div(append_data($r));
-        return div($response, ["class" => "wrapper_login"], 1);
+        return div($response, "wrapper_login", 1);
 
     }
 
@@ -81,10 +81,10 @@ if (!function_exists('invierte_date_time')) {
                     "id" => "btn_acceder_cuenta_enid"
                 ]
             ),
-            ["class" => "text-center"]
+            "text-center"
         );
         $response = append_data($r);
-        $response = div($response, ["class" => "contenedor_recuperacion_password display_none"], 1);
+        $response = div($response, "contenedor_recuperacion_password display_none", 1);
         return $response;
 
     }
@@ -98,12 +98,12 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(get_form_registro(), 1);
         $r[] = div(
             anchor_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
-            [
-                'class' => 'btn_acceder_cuenta_enid top_50 inline-block bottom_100',
-                "id" => "btn_acceder_cuenta_enid"
-            ]),
+                [
+                    'class' => 'btn_acceder_cuenta_enid top_50 inline-block bottom_100',
+                    "id" => "btn_acceder_cuenta_enid"
+                ]),
             "text-center"
-            );
+        );
 
         $response = append_data($r);
         $response = div($response, "seccion_registro_nuevo_usuario_enid_service", 1);
@@ -116,34 +116,39 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = '<form class="form-miembro-enid-service" id="form-miembro-enid-service">';
-        $r[] = input([
-
-            "name" => "email",
-            "placeholder" => "CORREO ELECTRÓNICO",
-            "class" => "form-control input-sm email email",
-            "type" => "email",
-            "required" => true,
-            "onkeypress" => "minusculas(this);"]);
+        $r[] = input(
+            [
+                "name" => "email",
+                "placeholder" => "CORREO ELECTRÓNICO",
+                "class" => "form-control input-sm email email",
+                "type" => "email",
+                "required" => true,
+                "onkeypress" => "minusculas(this);"]);
 
         $r[] = place("place_correo_incorrecto");
 
-        $r[] = input([
-            "name" => "nombre",
-            "placeholder" => "TU NOMBRE",
-            "class" => "form-control input-sm  nombre nombre_persona top_10",
-            "type" => "text",
-            "required" => true]);
+        $r[] = input(
+            [
+                "name" => "nombre",
+                "placeholder" => "TU NOMBRE",
+                "class" => "form-control input-sm  nombre nombre_persona top_10",
+                "type" => "text",
+                "required" => true]);
         $r[] = place("place_nombre_info");
 
-        $r[] = input([
-            "id" => "password",
-            "placeholder" => "UNA CONTRASEÑA ",
-            "class" => "form-control input-sm password top_10",
-            "type" => "password",
-            "required" => true]);
+        $r[] = input(
+            [
+                "id" => "password",
+                "placeholder" => "UNA CONTRASEÑA ",
+                "class" => "form-control input-sm password top_10",
+                "type" => "password",
+                "required" => true]);
 
         $r[] = place("place_password_afiliado");
-        $r[] = guardar('Registrar', ["class" => "top_20"]);
+        $r[] = guardar('Registrar',
+            [
+                "class" => "top_20"
+            ]);
         $r[] = form_close(place("place_registro_miembro"));
         return append_data($r);
 

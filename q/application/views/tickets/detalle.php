@@ -3,8 +3,11 @@
     <div class="col-lg-4">
         <table class="top_20 ">
             <tr>
-                <?= get_td(div("+ AGREGAR",
-                    ["class" => "blue_enid_background btn_agregar_tarea padding_1 white cursor_pointer"])) ?>
+                <?= get_td(
+                        div(
+                                "+ AGREGAR",
+                                "blue_enid_background btn_agregar_tarea padding_1 white cursor_pointer")
+                ) ?>
                 <?= get_td(valida_mostrar_tareas($info_tareas)) ?>
             </tr>
         </table>
@@ -21,7 +24,7 @@ $x[] = form_close();
 
 ?>
 
-<?= div(append_data($x), ["class" => "seccion_nueva_tarea top_20"]) ?>
+<?= div(append_data($x),  "seccion_nueva_tarea top_20") ?>
 
 <?php
 $z = 1;

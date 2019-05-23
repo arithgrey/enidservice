@@ -10,7 +10,9 @@ if (!function_exists('invierte_date_time')) {
 			$r["cliente"] = "ENTREGA GRATIS!";
 			$r["cliente_solo_text"] = "ENTREGA GRATIS!";
 			$r["ventas_configuracion"] = "TU PRECIO YA INCLUYE EL ENVÍO";
+
 		} else {
+
 			$r["ventas_configuracion"] = "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO";
 			$text = "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO";
 			$r["cliente_solo_text"] = "MÁS " . $costo_envio_cliente . " MXN DE TU ENTREGA";

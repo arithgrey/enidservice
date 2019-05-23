@@ -763,7 +763,18 @@ if (!function_exists('addNRow')) {
     function addNRow($e, $attributes = [])
     {
 
-        return n_row_12($attributes) . $e . end_row();
+        if(is_string($attributes)){
+
+            $att["class"] =  $attributes;
+            return n_row_12($att) . $e . end_row();
+
+
+        }else{
+
+            return n_row_12($attributes) . $e . end_row();
+        }
+
+
 
     }
 }
@@ -1119,10 +1130,21 @@ if (!function_exists('select_vertical')) {
     }
 }
 if (!function_exists('small')) {
-    function small($text, $attributes = '')
+    function small($text, $attributes = [] )
     {
-        $extra = add_attributes($attributes);
-        return "<small " . $extra . " > " . $text . "</small>";
+
+        if(is_string($attributes)){
+
+            $att["class"] =  $attributes;
+            $extra = add_attributes($att);
+            return "<small " . $extra . " > " . $text . "</small>";
+
+        }else{
+
+            $extra = add_attributes($attributes);
+            return "<small " . $extra . " > " . $text . "</small>";
+        }
+
     }
 }
 
@@ -1130,9 +1152,21 @@ if (!function_exists('strong')) {
     function strong($text, $attributes = '', $row = 0)
     {
 
-        $base = "<strong" . add_attributes($attributes) . ">" . $text . "</strong>";
-        $e = ($row == 0) ? $base : addNRow($base);
-        return $e;
+        if(is_string($attributes)){
+
+            $att["class"] = $attributes;
+            $base = "<strong" . add_attributes($att) . ">" . $text . "</strong>";
+            $e = ($row == 0) ? $base : addNRow($base);
+            return $e;
+
+        }else{
+
+            $base = "<strong" . add_attributes($attributes) . ">" . $text . "</strong>";
+            $e = ($row == 0) ? $base : addNRow($base);
+            return $e;
+
+        }
+
 
     }
 }
@@ -1140,9 +1174,22 @@ if (!function_exists('hr')) {
     function hr($attributes = [], $row = 1)
     {
 
-        $base = "<hr" . add_attributes($attributes) . ">";
-        $e = ($row == 0) ? $base : addNRow($base);
-        return $e;
+        if(is_string($attributes)){
+
+            $att["class"] = $attributes;
+            $base = "<hr" . add_attributes($att) . ">";
+            $e = ($row == 0) ? $base : addNRow($base);
+            return $e;
+
+        }else{
+
+            $base = "<hr" . add_attributes($attributes) . ">";
+            $e = ($row == 0) ? $base : addNRow($base);
+            return $e;
+
+        }
+
+
     }
 }
 
@@ -1660,7 +1707,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
             'col-lg-4 d-flex align-items-center justify-content-between '
         );
 
-        $r[] = div(guardar("Búsqueda " . icon("fa fa-chevron-right") . icon("fa fa-chevron-right")), 'col-lg-4 top_30');
+        $r[] = div(guardar(text_icon("fa fa-chevron-right", "Búsqueda " ) ), 'col-lg-4 top_30');
 
         return append_data($r);
 
@@ -1802,7 +1849,7 @@ function get_metodos_pago(){
 
 }
 
-function path_enid($pos, $extra = 0 ){
+function path_enid($pos, $extra = 0 , $link_directo = 0 ){
 
 
     $base_url =  [
@@ -1813,12 +1860,62 @@ function path_enid($pos, $extra = 0 ){
         "faqs" => "faq",
         "login" => "login",
         "vender" => "planes_servicios",
-        "sobre_enid" => "sobre_enidservice"
-
+        "vender_nuevo" => "planes_servicios/?action=nuevo",
+        "sobre_enid" => "sobre_enidservice",
+        "img_logo" => "img_tema/enid_service_logo.jpg",
+        "pregunta" => "pregunta",
+        "search" => "search",
+        "paypal_enid" => "https://www.paypal.me/eniservice/",
+        "home" => "",
+        "pedidos" => "pedidos",
+        "pedido_seguimiento" => "pedidos/?seguimiento=",
+        "producto" => "producto/?producto=",
+        "pedidos_recibo" => "pedidos/?recibo=",
+        "imagen_usuario" => "imgs/index.php/enid/imagen_usuario/",
+        "youtube_embebed" => "https://www.youtube.com/embed/",
+        "area_cliente_compras" => "area_cliente/?action=compras&ticket=",
+        "area_cliente" => "area_cliente",
+        "instagram" => "https://www.instagram.com/enid_service/",
+        "twitter" => "https://twitter.com/enidservice",
+        "facebook" => "https://www.facebook.com/enidservicemx/",
+        "pinterest" => "https://es.pinterest.com/enid_service",
+        "linkeding" => "https://www.linkedin.com/in/enid-service-433651138",
+        "tumblr" => "https://enidservice.tumblr.com/",
+        "administracion_cuenta" => "administracion_cuenta",
+        "logout" => "login/index.php/startsession/logout",
+        "nuevo_usuario" => "login/?action=nuevo",
+        "lista_deseos" => "lista_deseos",
+        "terminos-y-condiciones" => "terminos-y-condiciones",
+        "contacto" => "contact/#envio_msj",
+        "recomendacion" => "recomendacion/?q=",
+        "compras" => "compras",
+        "tiempo_venta" => "tiempo_venta",
+        "ventas_encuentro" => "ventas_encuentro"
 
     ];
 
-    $path =  ($extra !== 0 ) ?  "../".$base_url[$pos].$extra :  "../".$base_url[$pos];
+    if( $link_directo > 0  ){
+
+        $path =  ($extra !== 0 ) ?  $base_url[$pos].$extra :  $base_url[$pos];
+
+    }else{
+
+        $path =  ($extra !== 0 ) ?  "../".$base_url[$pos].$extra :  "../".$base_url[$pos];
+
+    }
+
     return $path;
 
+}
+
+function text_icon($class_icono , $text  , $att = [], $left = 1 ){
+
+    if($left > 0){
+
+        return  icon($class_icono , $att )." ".$text;
+
+    }else{
+
+        return  $text." ".icon($class_icono , $att );
+    }
 }

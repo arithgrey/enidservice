@@ -1029,6 +1029,22 @@ class principal extends CI_Controller
                         ]
 
                 ]
+            ,
+            "ventas_encuentro" =>
+                [
+                    "js" =>
+                        [
+
+                            "ventas_encuentro/principal.js"
+
+
+                        ],
+                    "css" =>
+                        [
+                            "timeline.css"
+                        ]
+
+                ]
 
 
         ];

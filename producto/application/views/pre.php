@@ -10,5 +10,23 @@
     8, 1 ,1
 ) ?>
 
-<?= div(get_seccion_pre_pedido($url_imagen_servicio, $orden_pedido, $plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $id_servicio, $carro_compras, $id_carro_compras), 2, 1,1) ?>
+<?= div(
+    get_seccion_pre_pedido(
+        $url_imagen_servicio,
+        $orden_pedido,
+        $plan,
+        $extension_dominio,
+        $ciclo_facturacion,
+        $is_servicio,
+        $q2,
+        $num_ciclos,
+        $id_servicio,
+        $carro_compras,
+        $id_carro_compras
+    )
+    ,
+    2,
+    1,
+    1
+) ?>
 

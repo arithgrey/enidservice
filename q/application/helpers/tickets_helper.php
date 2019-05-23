@@ -4,7 +4,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_tickets($departamentos)
     {
 
-        $r[] = div(div("ABRIR SOLICITUD", ["class" => "titulo_enid"]), 6, 1);
+        $r[] = div(div("ABRIR SOLICITUD", "titulo_enid" ), 6, 1);
         $r[] = div(get_form_ticket($departamentos), 6, 1);
         $r[] = place("place_registro_ticket");
         return append_data($r);
@@ -54,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
             "id_departamento"
         ));
         $r[] = n_row_12();
-        $r[] = div("MODULO, ASUNTO, TÓPICO", ["class" => "input-group-addon"]);
+        $r[] = div("MODULO, ASUNTO, TÓPICO", "input-group-addon" );
         $r[] = input([
             "id" => "asunto",
             "name" => "asunto",
@@ -84,10 +84,9 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] = heading_enid("¿REALMENTE DESEAS CANCELAR LA COMPRA?", 3);
         $x[] = div($recibo["resumen"]);
-        $r[] = div(div(append_data($x), ["class" => "padding_20"]));
+        $r[] = div(div(append_data($x), "padding_20" ));
 
-
-        $url = "../area_cliente/?action=compras&ticket=" . $recibo['id_recibo'];
+        $url = path_enid("area_cliente_compras", $recibo['id_recibo']);;
         $r[] = guardar("SEGUIR COMPRANDO",
             [
 
@@ -138,12 +137,8 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         if (count($data) > 0) {
 
-            $config = ["class" => 'mostrar_tareas_pendientes a_enid_black cursor_pointer'];
-            $config2 = ["class" => 'mostrar_todas_las_tareas a_enid_black cursor_pointer'];
-
-
-            $r[] = div("MOSTRAR SÓLO TAREAS PENDIENTES", $config);
-            $r[] = div("MOSTRAR TODAS LAS TAREAS", $config2);
+            $r[] = div("MOSTRAR SÓLO TAREAS PENDIENTES", 'mostrar_tareas_pendientes a_enid_black cursor_pointer');
+            $r[] = div("MOSTRAR TODAS LAS TAREAS", 'mostrar_todas_las_tareas a_enid_black cursor_pointer');
 
         }
         return append_data($r);

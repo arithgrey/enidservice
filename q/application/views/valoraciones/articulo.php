@@ -24,7 +24,7 @@
     ) ?>
     <?= get_btw(
         crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada),
-        div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio), ["class" => "btn_escribir_valoracion"]),
+        div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio),  "btn_escribir_valoracion" ),
         "contenedor_comentarios"
     ) ?>
 </div>

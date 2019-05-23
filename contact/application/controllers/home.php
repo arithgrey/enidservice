@@ -42,8 +42,7 @@ class Home extends CI_Controller
         if ($data["in_session"] == 0 && get_param_def($param, "servicio", 0, 1) > 0) {
 
             $data =  $this->principal->getCssJs($data, "contacto_ubicacion");
-            $data["servicio"] = $param["servicio"];
-            $this->principal->show_data_page($data, 'preso_compra');
+            $this->principal->show_data_page($data, get_format_recibe_ubicacion($param["servicio"]) , 1);
 
 
         } else {

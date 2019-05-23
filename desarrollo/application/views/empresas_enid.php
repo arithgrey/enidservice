@@ -1,5 +1,5 @@
 <div class="contenedor_principal_enid_service">
-    <?= div(ul(get_menu($activa), ["class" => "nav tabs"]), 2) ?>
+    <?= div(ul(get_menu($activa), "nav tabs" ), 2) ?>
     <div class='col-lg-10'>
         <div class="tab-content">
             <?= input_hidden(["type" => 'hidden', "class" => 'id_usuario', "value" => $id_usuario]) ?>
@@ -15,7 +15,6 @@
                         "id" => "tab_nuevo_ticket"
                     ]
             ) ?>
-
         </div>
     </div>
 </div>

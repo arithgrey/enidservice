@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = div(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]);
             $x[] = div(place("place_metricas_comparativa"), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]);
             $x[] = div(form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
-            $r[] = div(append_data($x), "tab-content" );
+            $r[] = div(append_data($x), "tab-content");
             return append_data($r);
 
 
@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
                             "data-toggle" => "tab",
                             "class" => "a_enid_blue abrir_ticket"
                         ]),
-                    ["class" => 'black  ' . valida_seccion_activa(3, $activa)]
+                    'black  ' . valida_seccion_activa(3, $activa)
 
                 ),
 
@@ -92,18 +92,30 @@ if (!function_exists('invierte_date_time')) {
 
             $list = [
                 li(
-                    anchor_enid("Atención al cliente", ["href" => "#tab_1_actividad", "data-toggle" => "tab"]),
-                    ["class" => "active"]
+                    anchor_enid("Atención al cliente",
+                        [
+                            "href" => "#tab_1_actividad",
+                            "data-toggle" => "tab"
+                        ]),
+                    "active"
                 ),
                 li(
-                    anchor_enid("Comparativa", ["href" => "#tab_2_comparativa", "data-toggle" => "tab"]), ["class" => "comparativa"]
+                    anchor_enid("Comparativa",
+                        [
+                            "href" => "#tab_2_comparativa",
+                            "data-toggle" => "tab"
+                        ]), "comparativa"
                 ),
                 li(
-                    anchor_enid("Calidad y servicio", ["href" => "#tab_3_comparativa", "data-toggle" => "tab"]), ["class" => "calidad_servicio"]
+                    anchor_enid("Calidad y servicio",
+                        [
+                            "href" => "#tab_3_comparativa",
+                            "data-toggle" => "tab"
+                        ]), "calidad_servicio"
                 )
             ];
-            return ul($list, ["class" => "nav nav-tabs"]);
 
+            return ul($list, "nav nav-tabs");
 
         }
     }

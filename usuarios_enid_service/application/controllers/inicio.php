@@ -16,7 +16,7 @@ class Inicio extends CI_Controller
 		$data = $this->principal->val_session("Grupo ventas - Enid Service - ");
 		$num_perfil = $this->principal->getperfiles();
 		if ($num_perfil == 20) {
-			header("location:../area_cliente");
+			header("location:".path_enid("area_cliente"));
 		}
 		$data["departamentos"] = $this->get_departamentos_enid();
 		$data["perfiles_enid_service"] = $this->get_perfiles_enid_service();

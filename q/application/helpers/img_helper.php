@@ -66,7 +66,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = guardar("AGREGAR IMAGEN" . icon("fa fa-check"),
             [
-                "class" => 'guardar_img_enid display_none ',
+                "class" => 'guardar_img_enid display_none bottom_30',
                 "id" => 'guardar_img'
             ],
             1,
@@ -116,7 +116,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = guardar("AGREGAR IMAGEN" . icon("fa fa-check"),
             [
-                "class" => 'guardar_img_enid ',
+                "class" => 'guardar_img_enid bottom_30 letter-spacing-5 top_30',
                 "id" => 'guardar_img'
             ],
             1,
