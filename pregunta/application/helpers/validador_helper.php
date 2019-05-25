@@ -103,7 +103,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = addNRow(div($formulario_valoracion, 8, 1));
         $r[] = input_hidden(["class" => "servicio", "value" => $id_servicio]);
         $r[] = addNRow(div(div("ENVIAMOS TU PREGUNTA AL VENDEDOR!", "registro_pregunta display_none padding_10 top_30" ), 8, 1));
-        $r[] = div("", ["class" => "top_50"]);
+        $r[] = div("", "top_50" );
         $r[] = div(heading_enid("TAMBIÉN TE PODRÍA INTEREZAR", 3), 8, 1);
         $r[] = div(place("place_tambien_podria_interezar", ["id" => "place_tambien_podria_interezar"]), 8, 1);
         $r[] = div(place("place_valoraciones top_50", ["id" => "place_valoraciones"]), 8, 1);

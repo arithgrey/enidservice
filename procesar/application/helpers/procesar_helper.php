@@ -7,8 +7,8 @@ if (!function_exists('invierte_date_time')) {
             $text = ($in_session == 0 && $is_mobile == 0) ? heading_enid("¿QUIEN ERES?", 3) : "";
             if ($es_servicio > 0) {
                 $text = ($in_session == 0 && $is_mobile == 0) ?
-                    heading_enid("INICIEMOS TU COTIZACIÓN! ", 2, ["class" => "top_20"]) .
-                    heading_enid("¿QUIEN ERES?", 4, ["class" => "top_30 bottom_30"]) : "";
+                    heading_enid("INICIEMOS TU COTIZACIÓN! ", 2, "top_20") .
+                    heading_enid("¿QUIEN ERES?", 4, "top_30 bottom_30") : "";
             }
 
             return $text;
@@ -29,13 +29,17 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = get_btw(
                     div("Nombre *")
                     ,
-                    div(input([
-                        "name" => "nombre",
-                        "placeholder" => "Nombre",
-                        "class" => " input-sm  nombre",
-                        "type" => "text",
-                        "required" => "true"
-                    ]))
+                    div(
+                        input(
+                            [
+                                "name" => "nombre",
+                                "placeholder" => "Nombre",
+                                "class" => " input-sm  nombre",
+                                "type" => "text",
+                                "required" => "true"
+                            ]
+                        )
+                    )
                     ,
                     6
                 );
@@ -44,14 +48,16 @@ if (!function_exists('invierte_date_time')) {
 
                     div("Correo Electrónico  *")
                     ,
-                    div(input([
-                        "name" => "email",
-                        "placeholder" => "email",
-                        "class" => " input-sm  email",
-                        "type" => "email",
-                        "required" => "true",
-                        "onkeypress" => "minusculas(this);"
-                    ]))
+                    div(
+                        input(
+                            [
+                                "name" => "email",
+                                "placeholder" => "email",
+                                "class" => " input-sm  email",
+                                "type" => "email",
+                                "required" => "true",
+                                "onkeypress" => "minusculas(this);"
+                            ]))
                     ,
                     place('place_correo_incorrecto')
 
@@ -60,31 +66,36 @@ if (!function_exists('invierte_date_time')) {
 
                 $r[] = div(append_data($x), 13);
 
-                $r[] = div(icon('fa fa-unlock-alt') . "Escribe una contraseña");
-                $r[] = input([
-                    "id" => "password",
-                    "class" => " input-sm password",
-                    "type" => "password",
-                    "required" => "true"
-                ]);
+                $r[] = div(text_icon('fa fa-unlock-alt', "Escribe una contraseña"));
+                $r[] = input(
+                    [
+                        "id" => "password",
+                        "class" => " input-sm password",
+                        "type" => "password",
+                        "required" => "true"
+                    ]);
+
                 $r[] = place("place_password_afiliado");
-                $r[] = div(icon('fa fa-phone') . "Teléfono *");
-                $r[] = input([
-                    "id" => "telefono",
-                    "class" => "telefono form-control",
-                    "type" => "tel",
-                    "pattern" => "^[0-9-+s()]*$",
-                    "maxlength" => 13,
-                    "minlength" => 8,
-                    "name" => "telefono",
-                    "required" => "true"
-                ]);
+
+                $r[] = div(text_icon('fa fa-phone', "Teléfono *"));
+
+                $r[] = input(
+                    [
+                        "id" => "telefono",
+                        "class" => "telefono form-control",
+                        "type" => "tel",
+                        "pattern" => "^[0-9-+s()]*$",
+                        "maxlength" => 13,
+                        "minlength" => 8,
+                        "name" => "telefono",
+                        "required" => "true"
+                    ]);
                 $r[] = place("place_telefono");
                 $r[] = guardar("CREA UNA CUENTA");
                 $r[] = div(anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
                     [
                         'class' => "white",
-                        "href" => "../login"
+                        "href" => path_enid("login")
 
                     ]),
 
@@ -98,7 +109,6 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = place("place_config_usuario");
                 $r[] = form_close();
             }
-
 
             return append_data($r);
 
@@ -122,13 +132,16 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = get_btw(
                     div("Nombre *")
                     ,
-                    div(input([
-                        "name" => "nombre",
-                        "placeholder" => "Nombre",
-                        "class" => " input-sm  nombre",
-                        "type" => "text",
-                        "required" => "true"
-                    ]))
+                    div(input(
+                            [
+                                "name" => "nombre",
+                                "placeholder" => "Nombre",
+                                "class" => " input-sm  nombre",
+                                "type" => "text",
+                                "required" => "true"
+                            ]
+                        )
+                    )
                     ,
                     " col-lg-6 top_10 "
                 );
@@ -137,14 +150,15 @@ if (!function_exists('invierte_date_time')) {
 
                     div("Correo Electrónico  *")
                     ,
-                    div(input([
-                        "name" => "email",
-                        "placeholder" => "email",
-                        "class" => " input-sm  email",
-                        "type" => "email",
-                        "required" => "true",
-                        "onkeypress" => "minusculas(this);"
-                    ]))
+                    div(input(
+                        [
+                            "name" => "email",
+                            "placeholder" => "email",
+                            "class" => " input-sm  email",
+                            "type" => "email",
+                            "required" => "true",
+                            "onkeypress" => "minusculas(this);"
+                        ]))
                     ,
                     place('place_correo_incorrecto')
 
@@ -193,7 +207,7 @@ if (!function_exists('invierte_date_time')) {
                     anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
                         [
                             'class' => "white",
-                            "href" => "../login"
+                            "href" => path_enid("login")
 
                         ]
                     ),
@@ -215,58 +229,64 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = div(p(span("¿TIENES ALGUNA PREGUNTA ADICIONAL?")), "top_30");
                 $r[] = textarea(["name" => "descripcion"]);
 
-                $r[] = input_hidden([
-                    "id" => "id_servicio",
-                    "class" => "id_servicio form-control",
-                    "name" => "plan",
-                    "value" => $servicio["id_servicio"]
-                ]);
-                $r[] = input_hidden([
-                    "class" => "num_ciclos",
-                    "name" => "num_ciclos",
-                    "value" => 1
-                ]);
+                $r[] = input_hidden(
+                    [
+                        "id" => "id_servicio",
+                        "class" => "id_servicio form-control",
+                        "name" => "plan",
+                        "value" => $servicio["id_servicio"]
+                    ]);
+                $r[] = input_hidden(
+                    [
+                        "class" => "num_ciclos",
+                        "name" => "num_ciclos",
+                        "value" => 1
+                    ]);
 
-                $r[] = input_hidden([
-                    "class" => "id_ciclo_facturacion",
-                    "name" => "ciclo_facturacion",
-                    "value" => $servicio["id_ciclo_facturacion"]
-                ]);
-                $r[] = input_hidden([
-                    "class" => "talla",
-                    "name" => "talla",
-                    "value" => ""
-                ]);
-                $r[] = input_hidden([
-                    "class" => "tipo_entrega",
-                    "name" => "tipo_entrega",
-                    "value" => 2
-                ]);
-                $r[] = input_hidden([
-                    "class" => "id_carro_compras",
-                    "name" => "id_carro_compras",
-                    "value" => 0
-                ]);
-                $r[] = input_hidden([
-                    "class" => "carro_compras",
-                    "name" => "carro_compras",
-                    "value" => ""
-                ]);
+                $r[] = input_hidden(
+                    [
+                        "class" => "id_ciclo_facturacion",
+                        "name" => "ciclo_facturacion",
+                        "value" => $servicio["id_ciclo_facturacion"]
+                    ]);
+                $r[] = input_hidden(
+                    [
+                        "class" => "talla",
+                        "name" => "talla",
+                        "value" => ""
+                    ]);
+                $r[] = input_hidden(
+                    [
+                        "class" => "tipo_entrega",
+                        "name" => "tipo_entrega",
+                        "value" => 2
+                    ]);
+                $r[] = input_hidden(
+                    [
+                        "class" => "id_carro_compras",
+                        "name" => "id_carro_compras",
+                        "value" => 0
+                    ]);
+                $r[] = input_hidden(
+                    [
+                        "class" => "carro_compras",
+                        "name" => "carro_compras",
+                        "value" => ""
+                    ]);
 
-                $r[] = input_hidden([
-                    "class" => "servicio",
-                    "name" => "servicio",
-                    "value" => $servicio["id_servicio"]
-                ]);
+                $r[] = input_hidden(
+                    [
+                        "class" => "servicio",
+                        "name" => "servicio",
+                        "value" => $servicio["id_servicio"]
+                    ]);
 
 
                 $r[] = guardar("SOLICITAR COTIZACIÓN", ["class" => "top_30", "name" => "comentarios"], 1, 1, 1);
                 $r[] = place("place_config_usuario");
-
                 $r[] = form_close();
 
             }
-
 
             return append_data($r);
 
@@ -279,7 +299,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_resumen($resumen_producto, $text_envio, $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session)
         {
             $r[] = div(
-                heading_enid('RESUMEN DE TU PEDIDO' . icon("fa fa-shopping-bag")
+                heading_enid(
+                    text_icon("fa fa-shopping-bag", 'RESUMEN DE TU PEDIDO')
                     ,
                     2,
                     ' letter-spacing-5'

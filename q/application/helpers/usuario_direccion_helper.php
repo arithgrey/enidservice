@@ -13,16 +13,18 @@ if (!function_exists('invierte_date_time')) {
 
             div("Persona que recibe")
             ,
-            div(input([
-                "maxlength" => "80",
-                "name" => "nombre_receptor",
-                "value" => $nombre_receptor,
-                "placeholder" => "* Tu o quien más pueda recibir tu ,pedido",
-                "required" => "required",
-                "class" => "nombre_receptor",
-                "id" => "nombre_receptor",
-                "type" => "text"
-            ]))
+            div(
+                input(
+                    [
+                        "maxlength" => "80",
+                        "name" => "nombre_receptor",
+                        "value" => $nombre_receptor,
+                        "placeholder" => "* Tu o quien más pueda recibir tu ,pedido",
+                        "required" => "required",
+                        "class" => "nombre_receptor",
+                        "id" => "nombre_receptor",
+                        "type" => "text"
+                    ]))
             ,
             6
         );
@@ -31,16 +33,18 @@ if (!function_exists('invierte_date_time')) {
 
 
             div("Teléfono"),
-            input([
-                "maxlength" => "12",
-                "name" => "telefono_receptor",
-                "value" => $telefono_receptor,
-                "placeholder" => "* Algún número telefónico ",
-                "required" => "required",
-                "class" => "telefono_receptor",
-                "id" => "telefono_receptor",
-                "type" => "text"
-            ]),
+            input(
+                [
+                    "maxlength" => "12",
+                    "name" => "telefono_receptor",
+                    "value" => $telefono_receptor,
+                    "placeholder" => "* Algún número telefónico ",
+                    "required" => "required",
+                    "class" => "telefono_receptor",
+                    "id" => "telefono_receptor",
+                    "type" => "text"
+                ]
+            ),
             6
         );
         $r[] = get_btw($a, $b, "row mt-5");
@@ -68,7 +72,7 @@ if (!function_exists('invierte_date_time')) {
             "autocorrect" => "off",
             "type" => "text"
         ]);
-        $r[] = heading_enid("Entre la calle y la calle, o información adicional", 5, 1) ;
+        $r[] = heading_enid("Entre la calle y la calle, o información adicional", 5, 1);
         $r[] = input([
             "required" => true,
             "class" => "textinput address3 ",
@@ -113,25 +117,35 @@ if (!function_exists('invierte_date_time')) {
         $r[] = '<div  ' . $direccion_visible . ' class="parte_colonia_delegacion">';
 
         $r[] = div("Colonia");
-        $r[] = div(input([
-                "type" => "text",
-                "name" => "colonia",
-                "value" => $asentamiento,
-                "readonly" => true
-            ]
 
-        ), ["class" => "place_colonias_info"]);
+        $r[] = div(
+            input(
+                [
+                    "type" => "text",
+                    "name" => "colonia",
+                    "value" => $asentamiento,
+                    "readonly" => true
+                ]
+
+            ), "place_colonias_info"
+        );
+
 
         $r[] = place('place_asentamiento');
         $r[] = get_btw(
 
             div("Delegación o Municipio"),
-            div(input([
-                "type" => "text",
-                "name" => "delegacion",
-                "value" => $municipio,
-                "readonly" => true
-            ]), ["class" => "place_delegaciones_info"]),
+            div(
+                input(
+                    [
+                        "type" => "text",
+                        "name" => "delegacion",
+                        "value" => $municipio,
+                        "readonly" => true
+                    ]),
+                "place_delegaciones_info"
+            )
+            ,
             " district delegacion_c"
         );
         $r[] = get_btw(
@@ -155,61 +169,62 @@ if (!function_exists('invierte_date_time')) {
 
         $options[] = array(
             "text" => "SI",
-            "val"  => 1
+            "val" => 1
         );
         $options[] = array(
             "text" => "NO",
-            "val"  => 0
+            "val" => 0
         );
 
 
-        $select  =  create_select($options, 'direccion_principal', 'direccion_principal','direccion_principal','text','val');
+        $select = create_select($options, 'direccion_principal', 'direccion_principal', 'direccion_principal', 'text', 'val');
 
         $r[] =
-         get_btw(
+            get_btw(
 
                 div("Esta es mi dirección principal ", 5)
 
                 ,
 
-                div($select  , 7)
+                div($select, 7)
 
                 ,
-            'direccion_principal_c row top_30 align-items-center '
-        );
+                'direccion_principal_c row top_30 align-items-center '
+            );
 
 
-
-        $r[] = input_hidden([
-            "name" => "id_recibo",
-            "value" => $id_recibo,
-            "class" => "id_recibo"
-        ]);
+        $r[] = input_hidden(
+            [
+                "name" => "id_recibo",
+                "value" => $id_recibo,
+                "class" => "id_recibo"
+            ]);
         $r[] = guardar("Registrar dirección ", ['class' => "text_btn_direccion_envio top_30 bottom_20"]);
 
         $r[] = place("notificacion_direccion");
 
         $r[] = form_close();
-        $response =   append_data($r);
-        return div($response, ["class" => "contenedor_form_envio top_30"]);
+        $response = append_data($r);
+        return div($response, "contenedor_form_envio top_30");
 
     }
 
     function get_parte_direccion_envio($cp, $param, $calle, $entre_calles, $numero_exterior, $numero_interior)
     {
 
-        $r[] = div("Código postal", ["class" => "label-off"]);
-        $r[] = input([
-            "maxlength" => "5",
-            "name" => "cp",
-            "value" => $cp,
-            "placeholder" => "* Código postal",
-            "required" => "required",
-            "class" => "codigo_postal",
-            "id" => "codigo_postal",
-            "type" => "text",
+        $r[] = div("Código postal", "label-off");
+        $r[] = input(
+            [
+                "maxlength" => "5",
+                "name" => "cp",
+                "value" => $cp,
+                "placeholder" => "* Código postal",
+                "required" => "required",
+                "class" => "codigo_postal",
+                "id" => "codigo_postal",
+                "type" => "text",
 
-        ]);
+            ]);
         $r[] = place("place_codigo_postal");
         $r[] = input_hidden([
             "type" => "hidden",
@@ -218,65 +233,66 @@ if (!function_exists('invierte_date_time')) {
 
         ]);
         $r[] = get_btw(
-            div("Calle", ["class" => "label-off", "for" => "dwfrm_profile_address_address1"]),
+            div("Calle", "label-off"),
 
-            input([
-                "class" => "textinput",
-                "name" => "calle",
-                "value" => $calle,
-                "maxlength" => "30",
-                "placeholder" => "* Calle",
-                "required" => "required",
-                "autocorrect" => "off",
-                "type" => "text"
+            input(
+                [
+                    "class" => "textinput",
+                    "name" => "calle",
+                    "value" => $calle,
+                    "maxlength" => "30",
+                    "placeholder" => "* Calle",
+                    "required" => "required",
+                    "autocorrect" => "off",
+                    "type" => "text"
 
-            ]),
+                ]),
             "value"
         );
         $r[] = get_btw(
-            div("Entre la calle y la calle, o información adicional", ["class" => "label-off", "for" => "dwfrm_profile_address_address3"])
+            div("Entre la calle y la calle, o información adicional", "label-off")
             ,
-            input([
-                "required" => true,
-                "class" => "textinput address3",
-                "name" => "referencia",
-                "value" => $entre_calles,
-                "placeholder" => "Entre la calle y la calle, o información adicional",
-                "type" => "text"
-            ])
-            ,
-            "value"
-        );
-        $r[] = get_btw(
-            div("Número Exterior", ["class" => "label-off", "for" => "dwfrm_profile_address_houseNumber"])
-            ,
-            input([
-                "class" => "required numero_exterior",
-                "name" => "numero_exterior",
-                "value" => $numero_exterior,
-                "maxlength" => "8",
-                "placeholder" => "* Número Exterior",
-                "required" => "true",
-                "type" => "text"
-            ])
+            input(
+                [
+                    "required" => true,
+                    "class" => "textinput address3",
+                    "name" => "referencia",
+                    "value" => $entre_calles,
+                    "placeholder" => "Entre la calle y la calle, o información adicional",
+                    "type" => "text"
+                ])
             ,
             "value"
         );
         $r[] = get_btw(
-            div("Número Interior", [
-                "class" => "label-off",
-                "for" => "dwfrm_profile_address_address2"
-            ])
+            div("Número Exterior", "label-off")
             ,
-            input([
-                "class" => "numero_interior",
-                "name" => "numero_interior",
-                "value" => $numero_interior,
-                "maxlength" => "10",
-                "autocorrect" => "off",
-                "type" => "text",
-                "required" => "true"
-            ])
+            input(
+                [
+                    "class" => "required numero_exterior",
+                    "name" => "numero_exterior",
+                    "value" => $numero_exterior,
+                    "maxlength" => "8",
+                    "placeholder" => "* Número Exterior",
+                    "required" => "true",
+                    "type" => "text"
+                ])
+            ,
+            "value"
+        );
+        $r[] = get_btw(
+            div("Número Interior", "label-off")
+            ,
+            input(
+                [
+                    "class" => "numero_interior",
+                    "name" => "numero_interior",
+                    "value" => $numero_interior,
+                    "maxlength" => "10",
+                    "autocorrect" => "off",
+                    "type" => "text",
+                    "required" => "true"
+                ])
             ,
             "value"
         );
@@ -314,10 +330,11 @@ if (!function_exists('invierte_date_time')) {
                 [
                     'class' => 'resumen_pagos_pendientes top_20',
                     'id' => $id_proyecto_persona_forma_pago,
-                    'href' => "../forma_pago/?recibo=" . $id_proyecto_persona_forma_pago
+                    'href' => path_enid("forma_pago_search",$id_proyecto_persona_forma_pago)
                 ]);
 
-            $r[] = anchor_enid("ACCEDE A TU CUENTA PARA VER EL ESTADO DE TU PEDIDO",
+            $r[] = anchor_enid("ACCEDE A TU CUENTA PARA VER EL ESTADO DE TU PEDIDO"
+                ,
                 [
                     'class' => 'resumen_pagos_pendientes black top_20',
                     'id' => $id_proyecto_persona_forma_pago,

@@ -200,7 +200,7 @@ if (!function_exists('invierte_date_time')) {
             if ($num_direccion < 1) {
 
                 $text = 'Registra tu dirección de compra y venta';
-                $lista = base_notificacion("../administracion_cuenta/", "fa fa-map-marker", $text);
+                $lista = base_notificacion(path_enid("administracion_cuenta"), "fa fa-map-marker", $text);
 
 
                 $f++;

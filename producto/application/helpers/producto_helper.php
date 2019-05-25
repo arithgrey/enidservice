@@ -12,7 +12,16 @@ if (!function_exists('invierte_date_time')) {
 
         $response = "";
         if ($precio > 0 && $id_ciclo_facturacion == 9) {
-            $response = guardar("Pedir más información", ["class" => "bottom_30"], 1, 1, 1, "../pregunta/?tag=" . $id_servicio . "&disponible=1");
+            $response = guardar(
+                "Pedir más información",
+                [
+                    "class" => "bottom_30"
+                ],
+                1,
+                1,
+                1,
+                path_enid("pregunta_search", $id_servicio . "&disponible=1")
+            );
         }
         return $response;
 
@@ -41,7 +50,7 @@ if (!function_exists('invierte_date_time')) {
             anchor_enid(
                 "Preguntar cuando estará disponible",
                 [
-                    path_enid("pregunta", "/?tag=" . $id_servicio . "&disponible=1")
+                    path_enid("pregunta_search", $id_servicio . "&disponible=1")
                 ],
                 1,
                 1
@@ -105,7 +114,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_eleccion_contra_entrega($id_servicio, $orden_pedido)
     {
 
-        $r[] = div(img(["src" => "..//img_tema/linea_metro/metro.jpg", "class" => "icono_metro"]));
+        $r[] = div(img(["src" => "../img_tema/linea_metro/metro.jpg", "class" => "icono_metro"]));
         $r[] = div(heading_enid("PAGO CONTRA ENTREGA", 3), "title");
         $r[] = div(div("UN PUNTO MEDIO "), "text");
         $response = div(append_data($r), "shadow  align-items-center box-part text-center border mh-selector d-flex flex-column justify-content-center");
@@ -162,7 +171,8 @@ if (!function_exists('invierte_date_time')) {
             $phone = format_phone($usuario[0]["tel_contacto"]);
             $r[] = div(get_btw(
                 div(
-                    div("COMUNÍCATE!", "black"))
+                    div("COMUNÍCATE!", "black")
+                )
                 ,
                 div(heading_enid($phone, 6, "f11 black_blue "), "underline  hover letter-spacing-3")
                 ,
@@ -274,17 +284,19 @@ if (!function_exists('invierte_date_time')) {
         if ($proceso_compra < 1) {
 
 
-            $r[] = anchor_enid("", [
-                "href" => $url_facebook,
-                "target" => "_black",
-                "class" => "fa fa-facebook black"
-            ]);
+            $r[] = anchor_enid("",
+                [
+                    "href" => $url_facebook,
+                    "target" => "_black",
+                    "class" => "fa fa-facebook black"
+                ]);
 
-            $r[] = anchor_enid("", [
-                "href" => "https://www.instagram.com/enid_service/",
-                "class" => "fa fa-instagram  black",
-                "title" => "Tumblr"
-            ]);
+            $r[] = anchor_enid("",
+                [
+                    "href" => "https://www.instagram.com/enid_service/",
+                    "class" => "fa fa-instagram  black",
+                    "title" => "Tumblr"
+                ]);
 
             $r[] = anchor_enid("",
                 [
@@ -294,17 +306,19 @@ if (!function_exists('invierte_date_time')) {
                     "data-size" => "large",
                     "href" => $url_twitter,
                 ]);
-            $r[] = anchor_enid("", [
-                "href" => $url_pinterest,
-                "class" => "fa fa-pinterest-p black",
-                "title" => "Pin it"
-            ]);
+            $r[] = anchor_enid("",
+                [
+                    "href" => $url_pinterest,
+                    "class" => "fa fa-pinterest-p black",
+                    "title" => "Pin it"
+                ]);
 
-            $r[] = anchor_enid("", [
-                "href" => $url_tumblr,
-                "class" => "fa fa-tumblr black",
-                "title" => "Tumblr"
-            ]);
+            $r[] = anchor_enid("",
+                [
+                    "href" => $url_tumblr,
+                    "class" => "fa fa-tumblr black",
+                    "title" => "Tumblr"
+                ]);
 
             $social = append_data($r);
             $response = div($social, "contenedor_social display_flex_enid mt-5");
@@ -325,7 +339,7 @@ if (!function_exists('invierte_date_time')) {
             "is_servicio" => $flag_servicio,
             "q2" => $q2
         ]);
-        $r[] = get_btw(div("PIEZAS", ["class" => "text_piezas mr-3"]), select_cantidad_compra($flag_servicio, $existencia), "display_flex_enid");
+        $r[] = get_btw(div("PIEZAS", "text_piezas mr-3"), select_cantidad_compra($flag_servicio, $existencia), "display_flex_enid");
 
         $r[] = guardar("ORDENAR ",
             [
@@ -498,7 +512,7 @@ if (!function_exists('invierte_date_time')) {
             if ($entregas_en_casa == 1) {
                 $text = ($flag_servicio == 1) ? "EL VENDEDOR TAMBIÉN BRINDA ATENCIÓN EN SU NEGOCIO" : "PUEDES COMPRAR EN EL NEGOCIO DEL VENDEDOR";
 
-                $response = icon("fa fa-check-circle") . $text;
+                $response = text_icon("fa fa-check-circle", $text);
             }
             return $response;
         }
@@ -535,7 +549,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $text = ($flag_servicio == 0 && $venta_mayoreo == 1) ? text_icon('fa fa-check-circle',"VENTAS MAYORISTAS ") : "";
+            $text = ($flag_servicio == 0 && $venta_mayoreo == 1) ? text_icon('fa fa-check-circle', "VENTAS MAYORISTAS ") : "";
             $r[] = div($text, "strong");
             $r[] = div(icon('fa fa-check-circle') . "COMPRAS CONTRA ENTREGA");
             return append_data($r);
@@ -615,7 +629,8 @@ if (!function_exists('invierte_date_time')) {
                 $text = div($text, 'text-en-existencia');
                 if (strlen($url_ml) > 10) {
                     $text .= anchor_enid(
-                        icon('fa fa-check-circle') . "ADQUIÉRELO EN MERCADO LIBRE",
+                        text_icon('fa fa-check-circle', "ADQUIÉRELO EN MERCADO LIBRE")
+                        ,
                         [
                             "href" => $url_ml,
                             "class" => "black "
@@ -631,12 +646,13 @@ if (!function_exists('invierte_date_time')) {
 
             $editar = "";
             if ($in_session == 1) {
-                $href = "../planes_servicios/?action=editar&servicio=" . $id_servicio;
+                $href = path_enid("editar_producto", $id_servicio);
                 $editar_button = div(
                     anchor_enid(
-                        icon('fa fa-pencil') . "EDITAR",
+                        text_icon('fa fa-pencil', "EDITAR"),
                         [
-                            "href" => $href, "class" => "white"
+                            "href" => $href,
+                            "class" => "white"
                         ]
                     ), 'a_enid_black_sm editar_button'
                 );
@@ -686,11 +702,13 @@ if (!function_exists('invierte_date_time')) {
                 $producto_tab_s = "imagen_tab_" . $z;
 
 
-                $preview[] = div(img([
-                    'src' => $url,
-                    'alt' => $nombre_servicio,
-                    'class' => 'imagen-producto border border padding_5 top_10 bg_white shadow  rounded hover_padding'
-                ]),
+                $preview[] = div(
+                    img(
+                        [
+                            'src' => $url,
+                            'alt' => $nombre_servicio,
+                            'class' => 'imagen-producto border border padding_5 top_10 bg_white shadow  rounded hover_padding'
+                        ]),
                     [
                         'id' => $z,
                         'data-toggle' => 'tab',
@@ -700,10 +718,12 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
-                $imgs_grandes[] = div(img([
-                    'src' => $url,
-                    "class" => "imagen_producto_completa"
-                ]),
+                $imgs_grandes[] = div(
+                    img(
+                        [
+                            'src' => $url,
+                            "class" => "imagen_producto_completa"
+                        ]),
                     [
                         "id" => $producto_tab_s,
                         "class" => "tab-pane fade zoom " . $extra_class_contenido . " "
@@ -750,7 +770,7 @@ if (!function_exists('invierte_date_time')) {
                 $response = anchor_enid(
                     "Ir a la tienda del vendedor",
                     [
-                        'href' => "../search/?q3=" . $id_vendedor,
+                        'href' => path_enid("search_q3", $id_vendedor),
                         'class' => "a_enid_black d-block"
                     ]
                 );
@@ -770,7 +790,7 @@ if (!function_exists('invierte_date_time')) {
                 anchor_enid(
                     div("SOLICITAR INFORMACIÓN", 'black_enid_background white padding_10', 1),
                     [
-                        "href" => "../pregunta?tag=" . $id_servicio
+                        "href" => path_enid("pregunta_search",$id_servicio)
                     ]
                 );
 
@@ -783,18 +803,22 @@ if (!function_exists('invierte_date_time')) {
 
             if ($proceso_compra == 0) {
 
-                $btn = anchor_enid(div("AGREGAR A TU LISTA DE DESEOS " . icon("fa fa-gift fa-x2"),
-                    "a_enid_black", 1),
+                $btn = anchor_enid(div(
+                    text_icon("fa fa-gift fa-x2", "AGREGAR A TU LISTA DE DESEOS ")
+                     ,
+                    "a_enid_black"
+                    , 1
+                ),
                     [
                         'class' => 'agregar_a_lista',
-                        'href' => "../login/"
+                        'href' => path_enid("login")
                     ]
                 );
 
                 if ($in_session == 1) {
                     $btn = div(
                         div(
-                            text_icon( "fa fa-gift","AGREGAR A TU LISTA DE DESEOS"),
+                            text_icon("fa fa-gift", "AGREGAR A TU LISTA DE DESEOS"),
 
                             "a_enid_black agregar_a_lista_deseos"
                             , 1
@@ -839,6 +863,5 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-
 
 }

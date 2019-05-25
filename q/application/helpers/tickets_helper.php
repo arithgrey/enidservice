@@ -86,7 +86,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = div($recibo["resumen"]);
         $r[] = div(div(append_data($x), "padding_20" ));
 
-        $url = path_enid("area_cliente_compras", $recibo['id_recibo']);;
+        $url = path_enid("area_cliente_compras", $recibo['id_recibo']);
         $r[] = guardar("SEGUIR COMPRANDO",
             [
 
@@ -156,7 +156,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div("Cliente que solicita " . $nombre_usuario . "");
 
         $lista_prioridades = ["", "Alta", "Media", "Baja"];
-        //$lista = "";
+
         $asunto = "";
         $mensaje = "";
         $prioridad = "";

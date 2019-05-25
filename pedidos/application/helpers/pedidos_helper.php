@@ -426,7 +426,7 @@ if (!function_exists('invierte_date_time')) {
         function form_fecha_recordatorio($orden, $tipo_recortario)
         {
 
-            $x = heading_enid("RECORDATORIO", 3, ["class" => "top_50"]);
+            $x = heading_enid("RECORDATORIO", 3, "top_50");
             $r[] = form_open("", ["class" => "form_fecha_recordatorio letter-spacing-5 "]);
             $r[] = div(icon("fa fa-calendar-o") . " FECHA ", 4);
 
@@ -592,8 +592,14 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = div(heading_enid("UPS! NO ENCONTRAMOS EL NÚMERO DE ORDEN", 1, ["class" => "funny_error_message"]), "text-center");
-            $r[] = div(img(["src" => "../img_tema/gif/funny_error.gif"]));
+            $r[] = div(heading_enid("UPS! NO ENCONTRAMOS EL NÚMERO DE ORDEN", 1, "funny_error_message" ), "text-center");
+            $r[] = div(
+                img(
+                    [
+                        "src" => "../img_tema/gif/funny_error.gif"
+                    ]
+                )
+            );
             $r[] = div(anchor_enid("ENCUENTRA TU ORDEN AQUÍ",
                 [
                     "href" => "../pedidos",
@@ -1080,7 +1086,6 @@ if (!function_exists('invierte_date_time')) {
 
                 }
 
-
                 $r = [];
 
                 $r[] =
@@ -1485,7 +1490,7 @@ if (!function_exists('invierte_date_time')) {
                 $final_numeric++;
 
             } else {
-                $final_text = div("SIN DOMICIO REGISTRADO", ["class" => "sin_domicilio padding_10 white"], 1);
+                $final_text = div("SIN DOMICIO REGISTRADO", "sin_domicilio padding_10 white", 1);
             }
 
             $response = ($numero == 0) ? $final_text : $final_numeric;
@@ -1540,8 +1545,7 @@ if (!function_exists('invierte_date_time')) {
 
             $recibo = $recibo[0];
             $saldo_cubierto = $recibo["saldo_cubierto"];
-
-            $url = "../pedidos/?costos_operacion=" . $id_recibo . "&saldado=" . $saldo_cubierto;
+            $url = path_enid("pedidos", "/?costos_operacion=" . $id_recibo . "&saldado=" . $saldo_cubierto);
             return div(anchor_enid("COSTO DE OPERACIÓN", ["href" => $url]), 1);
 
         }
@@ -1577,7 +1581,7 @@ if (!function_exists('invierte_date_time')) {
         function get_link_recordatorio($id_recibo)
         {
 
-            $url = "../pedidos/?recibo=" . $id_recibo . "&recordatorio=1";
+            $url = path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1");
             return div(anchor_enid("RECORDATORIO", ["href" => $url]), 1);
 
         }

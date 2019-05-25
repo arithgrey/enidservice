@@ -151,14 +151,15 @@ if (!function_exists('invierte_date_time')) {
 
 
         $x[] = div(
-
-            input([
-                "type" => "number",
-                "name" => "existencia",
-                "class" => "existencia top_30",
-                "required" => "",
-                "value" => $existencia,
-            ]),
+            input(
+                [
+                    "type" => "number",
+                    "name" => "existencia",
+                    "class" => "existencia top_30",
+                    "required" => "",
+                    "value" => $existencia,
+                ]
+            ),
             9
 
         );
@@ -292,8 +293,14 @@ if (!function_exists('invierte_date_time')) {
     function get_menu_config($num, $num_imagenes, $url_productos_publico)
     {
 
-        $foto_config = ['href' => "#tab_imagenes", 'data-toggle' => "tab"];
-        $precios_config = ['href' => "#tab_info_precios", 'data-toggle' => "tab"];
+        $foto_config = [
+            'href' => "#tab_imagenes",
+            'data-toggle' => "tab"
+        ];
+        $precios_config = [
+            'href' => "#tab_info_precios",
+            'data-toggle' => "tab"
+        ];
 
         $precios_inf = ['href' => "#tab_info_producto",
             'data-toggle' => "tab",
@@ -442,27 +449,27 @@ if (!function_exists('invierte_date_time')) {
         $extra_principal = ($principal == 0) ? "" : "blue_enid";
 
         $definir = div(
-            icon('fa fa-star',
-                [
-
-                    "class" => "dropdown-item  " . $extra_principal
-                ]
-            ) . $text, ["class" => "top_20 cursor_pointer imagen_principal", "id" => $id_imagen]);
+            icon('fa fa-star', "dropdown-item  " . $extra_principal) .
+            $text,
+            [
+                "class" => "top_20 cursor_pointer imagen_principal",
+                "id" => $id_imagen
+            ]
+        );
 
 
         $quitar =
             div(
                 icon('fa fa-times',
-                    [
-                        "class" => "dropdown-item "
-                    ]
+                    "dropdown-item "
+
                 ) . "Quitar"
                 , ["class" => "top_20 cursor_pointer foto_producto", "id" => $id_imagen]);
 
 
-        $x[] = div(icon("fa fa fa-pencil"), ["class" => "dropdown-toggle "]);
+        $x[] = div(icon("fa fa fa-pencil"), "dropdown-toggle ");
         $x[] = ul([$definir, $quitar], ["class" => "dropdown-menu ", "style" => "height:100px"]);
-        $r[] = div(append_data($x), ["class" => "dropdown "]);
+        $r[] = div(append_data($x), "dropdown ");
         return append_data($r);
 
 
@@ -926,7 +933,7 @@ if (!function_exists('invierte_date_time')) {
             1);
 
 
-        $p = div("", ["class" => "place_url_youtube"], 1);
+        $p = div("", "place_url_youtube", 1);
 
         array_push($r, form_open("", ["class" => "form_servicio_youtube input_url_youtube contenedor_info_youtube"]));
 
@@ -938,7 +945,7 @@ if (!function_exists('invierte_date_time')) {
             "required" => true
         ], 1));
 
-        array_push($r, div($i . $p, ['class' => 'col-lg-9']));
+        array_push($r, div($i . $p, 9));
         array_push($r, div(guardar("GUARDAR", ["class" => "guardar_video_btn"], 1), 3));
         array_push($r, form_close());
 
@@ -1191,13 +1198,20 @@ if (!function_exists('invierte_date_time')) {
 
         array_push($r, form_open("", ["class" => "form_costo input_costo contenedor_costo top_30"]));
 
-        $in = get_btw(input([
-            "type" => "number",
-            "name" => "precio",
-            "step" => "any",
-            "class" => "form-control ",
-            "value" => $precio
-        ]), div("MXN", ["class" => "mxn"]), "display_flex_enid");
+        $in = get_btw(
+            input(
+                [
+                    "type" => "number",
+                    "name" => "precio",
+                    "step" => "any",
+                    "class" => "form-control ",
+                    "value" => $precio
+                ]
+            ),
+            div("MXN", "mxn" )
+            ,
+            "display_flex_enid"
+        );
 
         array_push($r, $in);
 
@@ -1315,11 +1329,4 @@ if (!function_exists('invierte_date_time')) {
         return append_data($r);
 
     }
-    /*
-    function get_url_venta($extra)
-    {
-        return "http://enidservice.com/inicio/producto/?producto=" . $extra;
-    }
-    */
-
 }

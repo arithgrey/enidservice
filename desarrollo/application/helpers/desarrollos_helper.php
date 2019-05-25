@@ -56,18 +56,24 @@ if (!function_exists('invierte_date_time')) {
 
                 ),
 
-                li(anchor_enid(
-                    icon("fa fa-area-chart") . "Métricas",
+                li(
+                    anchor_enid(
+                        text_icon("fa fa-area-chart", "Métricas"),
+                        [
+                            "href" => "#tab_charts"
+                            , "data-toggle" => "tab"
+                            , "id" => "ver_avances"
+                            , "class" => 'black strong'
+                        ]),
                     [
-                        "href" => "#tab_charts"
-                        , "data-toggle" => "tab"
-                        , "id" => "ver_avances"
-                        , "class" => 'black strong'
-                    ]), ["class" => 'black top_20 ' . valida_seccion_activa(2, $activa), "style" => 'background:white;']),
+                        "class" => 'black top_20 ' . valida_seccion_activa(2, $activa), "style" => 'background:white;'
+                    ]),
 
 
                 li(
-                    anchor_enid(icon('fa fa-check-circle') . "Pendientes",
+                    anchor_enid(
+                        text_icon('fa fa-check-circle', "Pendientes")
+                        ,
                         [
                             "href" => "#tab_abrir_ticket"
                             , "data-toggle" => "tab"
@@ -76,7 +82,10 @@ if (!function_exists('invierte_date_time')) {
                         ]) . place('place_tareas_pendientes'),
 
 
-                    ["class" => 'black  ' . valida_seccion_activa(1, $activa), "style" => 'background:white;']
+                    [
+                        "class" => 'black  ' . valida_seccion_activa(1, $activa),
+                        "style" => 'background:white;'
+                    ]
                 )
 
 

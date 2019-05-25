@@ -4,37 +4,39 @@ if (!function_exists('invierte_date_time')) {
     function get_format_faqs($data)
     {
 
-        $r[] = div(get_format_izquierdo($data["categorias_publicas_venta"], $data["categorias_temas_de_ayuda"] , 1 ), 3);
-        $r[] = div(get_format_listado_fq($data),9);
+        $r[] = div(get_format_izquierdo($data["categorias_publicas_venta"], $data["categorias_temas_de_ayuda"], 1), 3);
+        $r[] = div(get_format_listado_fq($data), 9);
         return div(append_data($r), 1);
 
     }
-    function get_format_listado_fq($data){
+
+    function get_format_listado_fq($data)
+    {
 
 
-        $response =  "";
-        if ( array_key_exists("faqs_categoria" , $data) && $data["faqs_categoria"] >  0 ){
+        $response = "";
+        if (array_key_exists("faqs_categoria", $data) && $data["faqs_categoria"] > 0) {
 
-            $response  = get_lista_categoria($data["faqs_categoria"]);
+            $response = get_lista_categoria($data["faqs_categoria"]);
 
-        }else{
+        } else {
 
-            if ( array_key_exists("respuesta" , $data) && $data["respuesta"] >  0 ){
+            if (array_key_exists("respuesta", $data) && $data["respuesta"] > 0) {
 
-                if(array_key_exists("param" , $data) && array_key_exists("config" , $data["param"] ) ){
+                if (array_key_exists("param", $data) && array_key_exists("config", $data["param"])) {
 
-                    $response =  get_form_respuesta($data,1);
+                    $response = get_form_respuesta($data, 1);
 
-                }else{
+                } else {
 
-                    $response =  get_lista_faq($data["respuesta"], $data);
+                    $response = get_lista_faq($data["respuesta"], $data);
                 }
 
-            }else{
+            } else {
 
-                if ($data["es_form"] >  0 ){
+                if ($data["es_form"] > 0) {
 
-                    $response =  get_form_respuesta($data);
+                    $response = get_form_respuesta($data);
 
                 }
             }
@@ -42,62 +44,65 @@ if (!function_exists('invierte_date_time')) {
         return $response;
 
     }
-    function get_lista_categoria($faqs){
 
-        $r      =   [];
+    function get_lista_categoria($faqs)
+    {
 
-        foreach ($faqs as $row ){
+        $r = [];
 
-
-            $id_faq =  $row["id_faq"];
-            $titulo =  $row["titulo"];
-            $url_img =  $row["url_img"];
+        foreach ($faqs as $row) {
 
 
-            $bloque  =  get_btw(
+            $id_faq = $row["id_faq"];
+            $titulo = $row["titulo"];
+            $url_img = $row["url_img"];
+
+            $bloque = get_btw(
                 div(
                     img(
                         [
-                            "src"=> $url_img,
+                            "src" => $url_img,
                             "class" => "mh_270"
                         ]
                     ),
                     3
                 )
                 ,
-                div(heading_enid($titulo,4 , "black text-uppercase"), 9)
+                div(heading_enid($titulo, 4, "black text-uppercase"), 9)
                 ,
                 "row mh_200 border top_30 "
 
             );
 
-            $r[]  =  anchor_enid($bloque, "../faq/?faq=".$id_faq );
+            $r[] = anchor_enid($bloque, path_enid("editar_faq", $id_faq));
 
         }
 
         return append_data($r);
 
     }
-    function get_lista_faq($respuestas, $data){
 
-        $r      =   [];
+    function get_lista_faq($respuestas, $data)
+    {
 
-        foreach ($respuestas as $row ){
+        $r = [];
 
-            $id_faq =  $row["id_faq"];
-            $titulo =  $row["titulo"];
-            $respuesta =  $row["respuesta"];
-            $fecha_registro=  $row["fecha_registro"];
+        foreach ($respuestas as $row) {
+
+            $id_faq = $row["id_faq"];
+            $titulo = $row["titulo"];
+            $respuesta = $row["respuesta"];
+            $fecha_registro = $row["fecha_registro"];
 
 
-            $extra = ( $data["in_session"] >  0 ) ? anchor_enid(icon("fa fa-cogs") , [ "href" => path_enid("editar_faq" , $id_faq."&config=1")])  : "";
-            $x[]  = div( heading_enid($extra.$titulo,4 , "black text-uppercase underline"),1);
-            $x[]  = div( p($respuesta, "black top_30"),1);
-            $x[]  = div( p($fecha_registro , "top_30"),1);
+            $extra = ($data["in_session"] > 0) ? anchor_enid(icon("fa fa-cogs"), ["href" => path_enid("editar_faq", $id_faq . "&config=1")]) : "";
+            $x[] = div(heading_enid($extra . $titulo, 4, "black text-uppercase underline"), 1);
+            $x[] = div(p($respuesta, "black top_30"), 1);
+            $x[] = div(p($fecha_registro, "top_30"), 1);
             $response = append_data($x);
 
 
-            $r[]  =  div(
+            $r[] = div(
                 $response
                 ,
                 "col-lg-12 top_30 padding_10 "
@@ -107,11 +112,18 @@ if (!function_exists('invierte_date_time')) {
 
         return append_data($r);
     }
+
     function valida_format_respuestas_menu($in_session, $lista_categorias)
     {
         $response = "";
         if ($in_session > 0) {
-            $response = div(get_form_respuesta($lista_categorias), ["class" => "tab-pane fade", "id" => "tab2default"]);
+            $response = div(
+                get_form_respuesta($lista_categorias),
+                [
+                    "class" => "tab-pane fade",
+                    "id" => "tab2default"
+                ]
+            );
         }
         return $response;
 
@@ -126,7 +138,8 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = get_format_faq_categorias($faqs_categoria);
 
-        }if ($flag_busqueda_q > 0) {
+        }
+        if ($flag_busqueda_q > 0) {
 
             $r[] = get_formar_respuesta($respuesta, $in_session, $perfil);
         }
@@ -144,32 +157,32 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_form_respuesta($data, $editar = 0 )
+    function get_form_respuesta($data, $editar = 0)
     {
 
         $lista_categorias = $data["lista_categorias"];
 
-        $id_faq   = 0;
-        $respuesta      = "";
-        $titulo =  "";
+        $id_faq = 0;
+        $respuesta = "";
+        $titulo = "";
         $id_categoria = 0;
         $status = 0;
-        if( $editar > 0 ){
+        if ($editar > 0) {
 
-            $res            = $data["respuesta"][0];
-            $id_faq         = $res["id_faq"];
-            $respuesta      = $res["respuesta"];
-            $titulo         = $res["titulo"];
-            $id_categoria   = $res["id_categoria"];
-            $status   = $res["status"];
+            $res = $data["respuesta"][0];
+            $id_faq = $res["id_faq"];
+            $respuesta = $res["respuesta"];
+            $titulo = $res["titulo"];
+            $id_categoria = $res["id_categoria"];
+            $status = $res["status"];
 
         }
 
 
         $r[] = form_open("", ["class" => "form_respuesta", "id" => 'form_respuesta']);
-        $r[] = div("CATEGORÍA",3);
+        $r[] = div("CATEGORÍA", 3);
 
-        if($editar >  0){
+        if ($editar > 0) {
 
             $r[] = div(create_select_selected(
                 $lista_categorias,
@@ -179,10 +192,10 @@ if (!function_exists('invierte_date_time')) {
                 "categoria",
                 "form-control categoria"
 
-            ) , 9 );
+            ), 9);
 
 
-        }else{
+        } else {
             $r[] = div(create_select(
                 $lista_categorias,
                 "categoria",
@@ -190,69 +203,74 @@ if (!function_exists('invierte_date_time')) {
                 "categoria",
                 "nombre_categoria",
                 "id_categoria"
-            ) , 9 );
+            ), 9);
 
         }
 
 
+        $r[] = div("TIPO", "col-lg-3 top_20");
 
-        $r[] = div("TIPO","col-lg-3 top_20");
 
-
-        $opt[] =  [
-                "val" => 1,
-                "text" => "Pública"
+        $opt[] = [
+            "val" => 1,
+            "text" => "Pública"
         ];
-        $opt[] =  [
+        $opt[] = [
             "val" => 0,
             "text" => "Privada"
         ];
-        $opt[] =  [
+        $opt[] = [
             "val" => 2,
             "text" => "Solo para labor de venta"
         ];
-        $opt[] =  [
+        $opt[] = [
             "val" => 3,
             "text" => "Pos venta"
         ];
 
 
+        if ($editar > 0) {
 
-        if($editar >  0){
+            $r[] = div(create_select_selected($opt, "val", "text", $status, "status", "form-control tipo_respuesta top_20"), 9);
 
-            $r[] = div(create_select_selected($opt , "val" , "text" ,$status ,"status", "form-control tipo_respuesta top_20" ), 9);
+        } else {
 
-        }else{
-
-            $r[] = div(create_select($opt , "status" , "form-control tipo_respuesta top_20" ,"tipo_respuesta" , "text" , "val"), 9);
+            $r[] = div(create_select($opt, "status", "form-control tipo_respuesta top_20", "tipo_respuesta", "text", "val"), 9);
         }
 
 
-        $r[] = div("TITULO","col-lg-4 top_20");
-        $r[] = div(input(["type" => "text", "name" => "titulo", "class" => 'form-control titulo  top_20', "required" => true , "value"=>  $titulo]) , 8);
-        $r[] = div(place("", ["id" => "summernote" ]),"col-lg-12 top_40");
+        $r[] = div("TITULO", "col-lg-4 top_20");
+        $r[] = div(input(["type" => "text", "name" => "titulo", "class" => 'form-control titulo  top_20', "required" => true, "value" => $titulo]), 8);
+        $r[] = div(place("", ["id" => "summernote"]), "col-lg-12 top_40");
 
 
+        $r[] = div(guardar("Registrar", ["class" => "btn", "type" => "submit"]), "col-lg-12 top_20");
 
-
-        $r[] = div(guardar("Registrar", ["class" => "btn", "type" => "submit"]),"col-lg-12 top_20");
-
-        $r[] = input_hidden(["class"=> "id_faq" , "value"=> $id_faq , "name" => "id_faq"]);
-        $r[] = input_hidden(["class"=> "erespuesta" , "value"=> $respuesta]);
-        $r[] = input_hidden(["class"=> "editar_respuesta" , "value"=> $editar , "name" => "editar_respuesta"]);
+        $r[] = input_hidden(
+            [
+                "class" => "id_faq",
+                "value" => $id_faq,
+                "name" => "id_faq"
+            ]
+        );
+        $r[] = input_hidden([
+            "class" => "erespuesta",
+            "value" => $respuesta
+        ]);
+        $r[] = input_hidden(["class" => "editar_respuesta", "value" => $editar, "name" => "editar_respuesta"]);
 
 
         $r[] = form_close();
-        $r[] = div(place("place_refitro_respuesta"),"col-lg-12 top_40");
+        $r[] = div(place("place_refitro_respuesta"), "col-lg-12 top_40");
 
-        if ($editar > 0){
+        if ($editar > 0) {
 
-            $r[] = div(heading_enid("+ imagen",4, [ "class" => "cursor_pointer text_agregar_img", "onclick"=> "agrega_img_faq()"]),"col-lg-12 top_40");
-            $r[] = div(div("", "place_load_img_faq"),"col-lg-12 top_40");
+            $r[] = div(heading_enid("+ imagen", 4, ["class" => "cursor_pointer text_agregar_img", "onclick" => "agrega_img_faq()"]), "col-lg-12 top_40");
+            $r[] = div(div("", "place_load_img_faq"), "col-lg-12 top_40");
 
         }
 
-        return div(div(append_data($r),8,1), "top_30");
+        return div(div(append_data($r), 8, 1), "top_30");
     }
 
     function get_format_faq_categorias($faqs_categoria)
@@ -297,7 +315,7 @@ if (!function_exists('invierte_date_time')) {
                     "id" => $id_faq
                 ]);
             }
-            $response = div(div($btn_conf . $titulo), "row" );
+            $response = div(div($btn_conf . $titulo), "row");
             $r[] = $response;
             $r[] = $respuesta;
 
@@ -310,29 +328,34 @@ if (!function_exists('invierte_date_time')) {
     {
 
         return ul([
-            anchor_enid(
-                icon("fa fa-question-circle") . "PREGUNTAS FRECUENTES",
-                [
-                    "href" => "#tab1default"
-                ]
-            )
-        ]
+                anchor_enid(
+                    path_enid("fa fa-question-circle", "PREGUNTAS FRECUENTES")
+                    ,
+                    [
+                        "href" => "#tab1default"
+                    ]
+                )
+            ]
             ,
             "nav nav-tabs"
         );
     }
+
     function get_btn_registro_faq($in_session, $perfil)
     {
 
         $response = "";
 
         if ($in_session == 1 && $perfil != 20 && $perfil != 19 && $perfil != 17) {
-            $response = anchor_enid(icon("fa fa-plus-circle") . "AGREGAR",
+            $response = anchor_enid(
+                text_icon("fa fa-plus-circle", "AGREGAR")
+                ,
                 [
                     "href" => "#tab2default",
                     "id" => "enviados_a_validacion",
                     "class" => "btn_registro_respuesta "
-                ]);
+                ]
+            );
 
         }
 
@@ -350,7 +373,7 @@ if (!function_exists('invierte_date_time')) {
             $faqs = $row["faqs"];
             $href = "?categoria=" . $id_categoria;
 
-            $l[]  = div(anchor_enid(div($nombre_categoria . "(" . $faqs . ")"), ["href" => $href]));
+            $l[] = div(anchor_enid(div($nombre_categoria . "(" . $faqs . ")"), ["href" => $href]));
         }
         return append_data($l);
     }

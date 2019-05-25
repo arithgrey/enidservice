@@ -19,7 +19,7 @@ if (!function_exists('invierte_date_time')) {
 				"target" => "_blank",
 				"style" => "background: #015ec8;padding: 5px;color: white;margin-top: 23px;"
 			]);
-		$r[] = hr(["class" => "my-4"]);
+		$r[] = hr("my-4" );
 		$r[] = p("Apresúrate, estás a un paso de realizar una nueva venta!");
 		$r[] = anchor_enid("Responde a tu cliente aquí!",
 			[
@@ -53,7 +53,12 @@ if (!function_exists('invierte_date_time')) {
 		$r[] = hr();
 		$r[] = p("Apresúrate, estás a un paso de tener tu pedido!");
 		$r[] = anchor_enid("Mira la respuesta aquí!", ["href" => "http://enidservice.com/inicio/login/"]);
-		$r[] = div(img("http://enidservice.com/inicio/img_tema/enid_service_logo.jpg"), ["style" => "width: 30%;margin: 0 auto;"]);
+		$r[] = div(
+		    img("http://enidservice.com/inicio/img_tema/enid_service_logo.jpg"),
+            [
+                "style" => "width: 30%;margin: 0 auto;"
+            ]
+        );
 		return append_data($r);
 
 

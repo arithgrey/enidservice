@@ -162,12 +162,14 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $a_mis_valoraciones = anchor_enid(text_icon("fa fa-star", " VALORACIONES"),
+        $a_mis_valoraciones = anchor_enid(
+            text_icon("fa fa-star", " VALORACIONES"),
             [
                 "id" => "mis_valoraciones",
                 "href" => "#tab_valoraciones",
                 "data-toggle" => "tab"
             ]);
+
         $a_lista_deseo = anchor_enid(icon("fa fa-gift") . "LISTA DE DESEOS",
             [
                 "href" => path_enid("lista_deseos")

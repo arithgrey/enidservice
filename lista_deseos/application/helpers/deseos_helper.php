@@ -227,7 +227,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(div("Accesorios", "product-type from-bottom"), "animate");
             $r[] = div(heading_enid("Lo que usas en viajes", 2, "from-bottom"), "animate");
-            $r[] = heading_enid("Explorar tienda", 3, ["class" => "shop-now", "href" => "../search"]);
+            $r[] = heading_enid("Explorar tienda", 3, ["class" => "shop-now", "href" => path_enid("search") ]);
             return append_data($r);
 
         }
@@ -375,7 +375,7 @@ if (!function_exists('invierte_date_time')) {
                 $z[] = br();
 
                 $z[] = guardar("Detalles", [], 1, 1, 0, get_url_servicio($id_producto));
-                $r[] = div(append_data($z), ["class" => "col-sm-3 "]);
+                $r[] = div(append_data($z), 3);
 
                 $response[] = addNRow(append_data($r), ["class" => "card "], ["class" => "border top_20"]);
 

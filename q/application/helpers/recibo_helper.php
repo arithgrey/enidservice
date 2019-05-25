@@ -322,7 +322,7 @@ if (!function_exists('invierte_date_time')) {
             /*Aplico la comisión del paypal 3**/
             $comision_paypal = porcentaje($saldo_pendiente, 3.7, 2, 0);
             $saldo = $saldo_pendiente + $comision_paypal;
-            return path_enid("paypal_enid",  $saldo,1);
+            return path_enid("paypal_enid", $saldo, 1);
 
         }
         return 0;
@@ -418,21 +418,20 @@ if (!function_exists('invierte_date_time')) {
         if ($modalidad_ventas == 1) {
 
             if ($monto_a_liquidar > 0) {
-                $text = div("MONTO DE LA COMPRA",
-                        ["class" => 'text-saldo-pendiente']) .
-                    div($monto_a_pagar . "MXN",
-                        ["class" => "text-saldo-pendiente-monto"]);
+                $text =
+                    div("MONTO DE LA COMPRA", 'text-saldo-pendiente') .
+                    div($monto_a_pagar . "MXN", "text-saldo-pendiente-monto");
             }
         } else {
 
             if ($monto_a_liquidar > 0) {
 
-                $text = div("SALDO PENDIENTE", ["class" => 'text-saldo-pendiente']);
-                $text .= div($monto_a_liquidar . "MXN", ["class" => "text-saldo-pendiente-monto"]);
+                $text = div("SALDO PENDIENTE", 'text-saldo-pendiente');
+                $text .= div($monto_a_liquidar . "MXN", "text-saldo-pendiente-monto");
             }
 
         }
-        return div($texto, ["class" => 'contenedor-saldo-pendiente']);
+        return div($texto, 'contenedor-saldo-pendiente');
 
     }
 
@@ -490,11 +489,11 @@ if (!function_exists('invierte_date_time')) {
             if ($direccion_registrada == 1) {
                 switch ($estado_envio) {
                     case 0:
-                        $texto = icon("fa fa-bus") . "A LA BREVEDAD EL VENDEDOR TE ENVIARÁ TU PEDIDO";
+                        $texto = text_icon("fa fa-bus", "A LA BREVEDAD EL VENDEDOR TE ENVIARÁ TU PEDIDO");
                         break;
 
                     default:
-                        $texto = icon('fa fa-bus', ["id" => $id_recibo]) . "DIRECCIÓN DE ENVÍO";
+                        $texto = text_icon('fa fa-bus', "DIRECCIÓN DE ENVÍO", ["id" => $id_recibo]);;
                         break;
                 }
 
@@ -539,12 +538,13 @@ if (!function_exists('invierte_date_time')) {
 
         $text_icono = ($vendedor == 1) ? "DETALLES DE LA COMPRA " : text_icon('fa fa-credit-card-alt', "DETALLES DE TU COMPRA ");
 
-        $text = guardar($text_icono, [
-            "class" => 'resumen_pagos_pendientes',
-            "id" => $id_recibo,
-            "href" => "#tab_renovar_servicio",
-            "data-toggle" => "tab"
-        ]);
+        $text = guardar($text_icono,
+            [
+                "class" => 'resumen_pagos_pendientes',
+                "id" => $id_recibo,
+                "href" => "#tab_renovar_servicio",
+                "data-toggle" => "tab"
+            ]);
         return div($text);
     }
 
@@ -633,7 +633,12 @@ if (!function_exists('invierte_date_time')) {
                 "img_center_compra"
             );
 
-            $f = anchor_enid($final, ["href" => path_enid("home")]);
+            $f = anchor_enid(
+                $final,
+                [
+                    "href" => path_enid("home")
+                ]
+            );
             $f .= anchor_enid(
                 heading_enid(
                     "EXPLORAR TIENDA"
@@ -676,8 +681,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_campo($inf, "municipio");
         $r[] = get_campo($inf, "ciudad");
         $r[] = get_campo($inf, "estado");
-        $resumen .= div(append_data($r), 'texto_direccion_envio_pedido top_20');
 
+        $resumen .= div(append_data($r), 'texto_direccion_envio_pedido top_20');
         $resumen .= div("¿Quíen más puede recibir tu pedido?");
         $resumen .= div(get_campo($inf, "nombre_receptor"));
         $resumen .= div(get_campo($inf, "telefono_receptor"));
@@ -690,12 +695,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         return div(
-            icon("fa fa-bus") . " Agrega la dirección de envío de tu pedido!",
+            text_icon("fa fa-bus", " Agrega la dirección de envío de tu pedido!")
+            ,
             [
-                "class" =>
-                    "btn_direccion_envio
-								contenedor_agregar_direccion_envio_pedido
-								a_enid_black cursor_pointer",
+                "class" => "btn_direccion_envio contenedor_agregar_direccion_envio_pedido a_enid_black cursor_pointer",
                 "id" => $id_recibo,
                 "href" => "#tab_mis_pagos",
                 "data-toggle" => "tab"
@@ -759,7 +762,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $t = guardar(
-            "RASTREA TU PEDIDO" . icon("fa fa-map-signs"),
+            text_icon("fa fa-map-signs" ,"RASTREA TU PEDIDO"),
             [
                 "class" => "top_20 text-left",
                 "style" => "border-style: solid!important;border-width: 2px!important;border-color: black!important;color: black !important;background: #f1f2f5 !important;"
@@ -767,7 +770,7 @@ if (!function_exists('invierte_date_time')) {
             1,
             1,
             0,
-            path_enid("pedido_seguimiento",  $id_recibo)
+            path_enid("pedido_seguimiento", $id_recibo)
         );
 
 
@@ -779,7 +782,7 @@ if (!function_exists('invierte_date_time')) {
                     "modalidad" => '0'
                 ]
             ),
-            ["class" => "top_20"],
+            "top_20",
             1);
 
         return $t;
@@ -885,11 +888,11 @@ if (!function_exists('invierte_date_time')) {
             $t .= carga_estado_compra($id_recibo, $modalidad);
 
             if ($id_perfil == 3) {
-                $url = path_enid("pedidos_recibo",$id_recibo);
+                $url = path_enid("pedidos_recibo", $id_recibo);
                 $t .= guardar("AVANZADO", [], 1, 1, 0, $url);
             }
 
-            $list[] = div(div($t, "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block " ), 1);
+            $list[] = div(div($t, "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block "), 1);
         }
 
         $response = append_data($list);
@@ -946,7 +949,7 @@ if (!function_exists('invierte_date_time')) {
             ]);
 
             $response [] = div($fecha_registro);
-            $r[] = div(div(append_data($response), "popup-head-left pull-left" ), "popup-head");
+            $r[] = div(div(append_data($response), "popup-head-left pull-left"), "popup-head");
 
         }
 

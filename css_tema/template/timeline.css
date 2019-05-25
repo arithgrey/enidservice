@@ -537,7 +537,7 @@ h4{text-align:center;margin:30px 0;color:#444}
 .main-timeline12 .timeline:hover .timeline-icon:before{background:#555}
 .main-timeline12 .timeline-icon i{width:45px;height:45px;line-height:45px;border-radius:50%;background:#39ae99;font-size:14px;color:#fff;transition:all .3s ease 0s}
 .main-timeline12 .timeline:hover .timeline-icon i{background:#555;animation:icon-load 2.5s ease 0s infinite}
-.main-timeline12 .border{height:15px;background:#39ae99;margin-bottom:0;transition:all .3s ease 0s}
+.main-timeline12 .border{height:15px;background:#051630;margin-bottom:0;transition:all .3s ease 0s}
 .main-timeline12 .timeline:hover .border{background:#555}
 .main-timeline12 .timeline:first-child .border{border-radius:4px 0 0 4px}
 .main-timeline12 .timeline:last-child .border{border-radius:0 4px 4px 0}
@@ -561,4 +561,8 @@ h4{text-align:center;margin:30px 0;color:#444}
     .main-timeline12 .border{margin-bottom:10px}
     .main-timeline12 .timeline:nth-child(2n) .border{margin:10px 0 0}
     .main-timeline12 .timeline-content{text-align:center}
+}
+.contenedor_general{
+    background: #edf1f6;
+
 }

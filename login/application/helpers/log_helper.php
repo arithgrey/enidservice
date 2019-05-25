@@ -1,10 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-
     function get_page_sigin($action)
     {
-
 
         $r[] = get_format_nuevo_usuario();
         $r[] = get_format_recuperacion_pw();
@@ -27,12 +25,18 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = anchor_enid(img_enid(), ["href" => "../", "class" => "col-lg-8 col-lg-offset-2"], 1);
+        $r[] = anchor_enid(img_enid(),
+            [
+                "href" => path_enid("home"),
+                "class" => "col-lg-8 col-lg-offset-2"
+            ]
+            , 1
+        );
         $r[] = div(get_form_login(), 1);
 
         $r[] = place("place_acceso_sistema top_20 bottom_20");
 
-        $x[] = anchor_enid("¿ERES NUEVO?   REGISTRATE!", ['class' => 'registrar-cuenta registrar_cuenta']);
+        $x[] = anchor_enid("¿ERES NUEVO?   REGISTRATE!", 'registrar-cuenta registrar_cuenta');
         $x[] = anchor_enid(
             "¿OLVIDASTE TU CONTRASEÑA?",
             [
@@ -52,26 +56,30 @@ if (!function_exists('invierte_date_time')) {
     function get_format_recuperacion_pw()
     {
 
-        $r[] = anchor_enid(img_enid(), ["href" => "../", "class" => "col-lg-8 col-lg-offset-2"], 1);
+        $r[] = anchor_enid(img_enid(),
+            [
+                "href" => path_enid("home"),
+                "class" => "col-lg-8 col-lg-offset-2"
+            ], 1
+        );
+
         $r[] = heading('RECUPERA TUS DATOS DE ACCESO', 3, 1);
 
         $r[] = "<form class='form-pass' id='form-pass' action='" . url_recuperacion_password() . "'>";
-        $r[] = input([
-            "type" => "email",
-            "id" => "email_recuperacion",
-            "name" => 'mail',
-            "placeholder" => "Email",
-            "class" => "form-control input-sm top_10",
-            "required" => true]);
-        $r[] = div(
-            "Ingresa tu correo electrónico para que tu contraseña pueda ser enviada",
+        $r[] = input(
             [
-                "class" => 'msj-recuperacion top_10'
-            ],
-            1
-        );
+                "type" => "email",
+                "id" => "email_recuperacion",
+                "name" => 'mail',
+                "placeholder" => "Email",
+                "class" => "form-control input-sm top_10",
+                "required" => true
+            ]);
+        $r[] = div("Ingresa tu correo electrónico para que tu contraseña pueda ser enviada", 'msj-recuperacion top_10', 1);
         $r[] = guardar("Enviar",
-            ["class" => "btn_nnuevo recupera_password  a_enid_blue top_20"]);
+            [
+                "class" => "btn_nnuevo recupera_password  a_enid_blue top_20"
+            ]);
 
         $r[] = form_close(append_data([place("place_recuperacion_pw"), place("recuperacion_pw")]));
         $r[] = div(

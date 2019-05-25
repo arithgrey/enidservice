@@ -1223,6 +1223,9 @@ select {
 .letter-spacing-3{
     letter-spacing: 3px;
 }
+.letter-spacing-1{
+    letter-spacing: 1px;
+}
 .producto_enid {
     height: 310px !important;
 }
