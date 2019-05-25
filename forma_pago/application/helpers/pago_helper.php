@@ -1,15 +1,14 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-
     if (!function_exists('get_format_orden')) {
-
 
         function get_format_orden($data)
         {
-            return  div($data, "col-lg-8 col-lg-offset-2 contenedor_principal_enid" );
-        }
 
+            return  div($data, "col-lg-8 col-lg-offset-2 contenedor_principal_enid" );
+
+        }
     }
 
     if (!function_exists('get_format_pago')) {

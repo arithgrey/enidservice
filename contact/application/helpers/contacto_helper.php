@@ -50,11 +50,11 @@ if (!function_exists('invierte_date_time')) {
                 "id" => 1
             ];
 
-            $r[] = div(icon("fa fa-envelope-o") . " CORREO",
+            $r[] = div(text_icon("fa fa-envelope-o", " CORREO"),
                 $config
             );
 
-            $r[] = div(icon("fa fa-whatsapp") . " WHATSAPP",
+            $r[] = div(text_icon("fa fa-whatsapp", " WHATSAPP"),
                 [
                     "class" => "easy_select_enid cursor_pointer selector",
                     "id" => 2
@@ -68,20 +68,27 @@ if (!function_exists('invierte_date_time')) {
         function get_selector_direccion()
         {
 
-            $r[] = anchor_enid(div(icon("fa fa-shopping-cart") . " SI",
+            $r[] = anchor_enid(
+                div(
+                    icon("fa fa-shopping-cart") . " SI",
+                    [
+                        "class" => "easy_select_enid cursor_pointer selector selector_proceso",
+                        "id" => 1
+                    ]),
                 [
-                    "class" => "easy_select_enid cursor_pointer selector selector_proceso",
-                    "id" => 1
-                ]),
-                [
-                    "href" => "../lista_deseos"
+                    "href" => path_enid("lista_deseos")
                 ]);
 
-            $r[] = anchor_enid(div(icon("fa fa-map-marker") . "NO, VER DIRECCIÓN DE COMPRA",
+            $r[] = anchor_enid(div(
+                text_icon("fa fa-map-marker", "NO, VER DIRECCIÓN DE COMPRA")
+                ,
                 [
                     "class" => "easy_select_enid cursor_pointer selector selector_proceso",
                     "id" => 2
-                ]), ["href" => "../contact/?ubicacion=1#direccion"]);
+                ]),
+                [
+                    "href" => path_enid("contact")
+                ]);
 
             return append_data($r);
 
@@ -153,7 +160,7 @@ if (!function_exists('invierte_date_time')) {
 
             $response = "";
             if ($ubicacion > 0) {
-                $r[] = heading("VISÍTANOS!", 1, ["class" => "white"]);
+                $r[] = heading("VISÍTANOS!", 1, "white");
                 $r[] = br();
                 $r[] = heading(
                     "Eje Central Lázaro Cárdenas 38, Centro Histórico C.P. 06000 CDMX, local número 406",
@@ -188,25 +195,31 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "form-control input-md nombre"
                     ]), 8);
 
-            $r[] = label(icon("fa fa-envelope-o") . " CORREO ", 4);
-            $r[] = input_hidden(["class" => "servicio", "value" => $servicio, "name" => "servicio"]);
+            $r[] = label(text_icon("fa fa-envelope-o", " CORREO "), 4);
+            $r[] = input_hidden(
+                [
+                    "class" => "servicio",
+                    "value" => $servicio,
+                    "name" => "servicio"
+                ]);
 
-            $r[] = div(append_data([
+            $r[] = div(
+                append_data([
 
-                input([
-                    "id" => "correo",
-                    "name" => "email",
-                    "type" => "email",
-                    "placeholder" => "@",
-                    "class" => "form-control input-md correo_electronico"
-                ])
-                ,
-
-
-                div("INGRESA TU EMAIL  PARA RECIBIR NUESTRA UBICACIÓN")
+                    input([
+                        "id" => "correo",
+                        "name" => "email",
+                        "type" => "email",
+                        "placeholder" => "@",
+                        "class" => "form-control input-md correo_electronico"
+                    ])
+                    ,
 
 
-            ]), 8);
+                    div("INGRESA TU EMAIL  PARA RECIBIR NUESTRA UBICACIÓN")
+
+
+                ]), 8);
 
 
             $r[] = guardar("RECIBIR  UBICACIÓN", ["class" => "top_20"]);
@@ -235,17 +248,25 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "form-control input-md nombre_whatsapp"
                     ]), 8);
 
-            $r[] = div(icon(".fa fa-whatsapp") . " WHATSAPP", 4);
-            $r[] = div(input([
-                "id" => "whatsapp",
-                "name" => "whatsapp",
-                "type" => "tel",
-                "class" => "form-control input-md tel telefono_info_contacto",
-                "required" => true
-            ]), 8);
+            $r[] = div(text_icon("fa fa-whatsapp", " WHATSAPP"), 4);
+
+            $r[] = div(
+                input(
+                    [
+                        "id" => "whatsapp",
+                        "name" => "whatsapp",
+                        "type" => "tel",
+                        "class" => "form-control input-md tel telefono_info_contacto",
+                        "required" => true
+                    ]), 8);
 
             $r[] = div("INGRESA TU WHATSAPP PARA RECIBIR NUESTRA UBICACIÓN");
-            $r[] = input_hidden(["class" => "servicio", "value" => $servicio, "name" => "servicio"]);
+            $r[] = input_hidden(
+                [
+                    "class" => "servicio",
+                    "value" => $servicio,
+                    "name" => "servicio"
+                ]);
 
             $r[] = guardar("RECIBIR  UBICACIÓN", ["class" => "top_20"]);
             $r[] = form_close();
@@ -276,14 +297,16 @@ if (!function_exists('invierte_date_time')) {
                     , 9
                 );
                 $r[] = div(p("Nombre", 'white'), 2);
-                $r[] = div(input([
-                    "type" => "text"
-                    , "id" => "nombre"
-                    , "name" => "nombre"
-                    , "class" => "input-sm input input_enid"
-                    , "placeholder" => "Nombre"
-                    , "value" => $nombre
-                ]), 10);
+                $r[] = div(
+                    input(
+                        [
+                            "type" => "text"
+                            , "id" => "nombre"
+                            , "name" => "nombre"
+                            , "class" => "input-sm input input_enid"
+                            , "placeholder" => "Nombre"
+                            , "value" => $nombre
+                        ]), 10);
 
                 $r[] = div(p("Correo", 'white'), 2);
                 $r[] = div(

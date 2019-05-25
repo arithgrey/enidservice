@@ -130,8 +130,10 @@ if (!function_exists('invierte_date_time')) {
                 anchor_enid(
                     "DESCARTAR PROMOCIÓN",
                     [
-                        "class" => 'descartar_promocion border descartar_promocion padding_10 ', "id" => $id_servicio
-                    ]), "text-right top_30 bottom_50"
+                        "class" => 'descartar_promocion border descartar_promocion padding_10 ',
+                        "id" => $id_servicio
+                    ]
+                ), "text-right top_30 bottom_50"
             ) : "";
         return $response;
     }

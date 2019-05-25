@@ -98,7 +98,8 @@ if (!function_exists('invierte_date_time')) {
             $r[] = addNRow(div(get_campo($usuario, "email", ""), "top_20", 1));
             $r[] = addNRow(get_campo($usuario, "tel_contacto", "Tu prime apellido", 1));
             $r[] = anchor_enid("MI DIRECCIÓN" . icon('fa  fa-fighter-jet'),
-                ["class" => "a_enid_black btn_direccion top_20",
+                [
+                    "class" => "a_enid_black btn_direccion top_20",
                     "href" => "#tab_direccion",
                     "data-toggle" => "tab"
                 ],
@@ -347,7 +348,9 @@ if (!function_exists('invierte_date_time')) {
 
             $list = [
                 li(
-                    anchor_enid(icon("fa fa-address-book-o") . "CUENTA"
+                    anchor_enid(
+                        text_icon("fa fa-address-book-o", "CUENTA")
+
                         ,
                         [
                             "href" => "#tab_mis_datos",
@@ -358,7 +361,9 @@ if (!function_exists('invierte_date_time')) {
                     )
                 ),
 
-                li(anchor_enid(icon("fa  fa-fighter-jet") . "DIRECCIÓN DE ENVÍO",
+                li(anchor_enid(
+                        text_icon("fa  fa-fighter-jet", "DIRECCIÓN DE ENVÍO")
+                        ,
                         [
                             "href" => "#tab_direccion",
                             "data-toggle" => "tab",
@@ -370,17 +375,21 @@ if (!function_exists('invierte_date_time')) {
                 ),
 
 
-                li(anchor_enid(icon("fa fa-unlock-alt") . "CONTRASEÑA", [
-                        "href" => "#tab_privacidad",
-                        "data-toggle" => "tab",
-                        "id" => 'base_tab_privacidad',
-                        "class" => 'black  base_tab_privacidad'
-                    ])
+                li(anchor_enid(
+                        text_icon("fa fa-unlock-alt", "CONTRASEÑA")
+                        ,
+                        [
+                            "href" => "#tab_privacidad",
+                            "data-toggle" => "tab",
+                            "id" => 'base_tab_privacidad',
+                            "class" => 'black  base_tab_privacidad'
+                        ])
                 ),
 
 
                 li(anchor_enid(
-                        icon("fa fa-shield") . "PRIVACIDAD Y SEGURIDAD",
+
+                        text_icon("fa fa-shield", "PRIVACIDAD Y SEGURIDAD"),
                         [
                             "href" => "#tab_privacidad_seguridad",
                             "data-toggle" => "tab",
@@ -389,7 +398,8 @@ if (!function_exists('invierte_date_time')) {
                 ),
 
 
-                li(icon("fa fa-gift", ["style" => "font-size:1.2em!important;"]) . anchor_enid("INTERESES Y PREFERENCIAS",
+                li(icon("fa fa-gift", ["style" => "font-size:1.2em!important;"]) . anchor_enid(
+                        "INTERESES Y PREFERENCIAS",
                         [
                             "class" => "btn_intereses",
                             "href" => "../lista_deseos/?q=preferencias"
@@ -397,12 +407,14 @@ if (!function_exists('invierte_date_time')) {
                 ),
 
 
-                li(icon("fa fa-credit-card-alt") . anchor_enid("TUS PRODUCTOS EN VENTA",
+                li(
+
+                    text_icon("fa fa-credit-card-alt", anchor_enid("TUS PRODUCTOS EN VENTA",
                         [
                             "class" => "btn_cuenta_personal",
                             "href" => "../search/?q3=" . $id_usuario . "&tienda=1"
                         ]
-                    )
+                    ))
                 ),
 
                 li(div($final, "contenedor_compartir_redes_sociales"))

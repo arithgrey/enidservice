@@ -39,7 +39,7 @@ class Home extends CI_Controller
 			$formulario_valoracion = $this->carga_formulario_valoracion($prm);
 			$data = $this->principal->getCssJs($data, "valoracion");
 			$response =  div($formulario_valoracion, "top_20" ,1 );
-			$this->principal->show_data_page($data, $response ,1);
+			$this->principal->show_data_page($data, $response , 1);
 		} else {
 			header("location:../?q2=0&q=");
 		}

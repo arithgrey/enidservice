@@ -2,7 +2,7 @@
 if (!function_exists('invierte_date_time')) {
 
     if (!function_exists('get_form_ventas')) {
-        function get_form_ventas($ciclo_facturacion,$error_registro,$is_mobile)
+        function get_form_ventas($ciclo_facturacion, $error_registro, $is_mobile)
         {
 
             $r[] = heading_enid("DA A CONOCER TU PRODUCTO Ó SERVICIO", 3, 1);
@@ -41,7 +41,8 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_btw(
 
                 heading_enid(
-                    icon('fa fa-shopping-bag') . " ARTÍCULO",
+                    text_icon('fa fa-shopping-bag', " ARTÍCULO")
+                    ,
                     4,
                     1
                 )
@@ -68,7 +69,7 @@ if (!function_exists('invierte_date_time')) {
                 append_data([
                     heading_enid(
                         "CICLO DE FACTURACIÓN",
-                        "4",
+                        4,
                         [
                             'title' => "¿Qué vendes?"
                         ], 1)
@@ -94,7 +95,8 @@ if (!function_exists('invierte_date_time')) {
                 append_data([
 
                     heading_enid(
-                        icon('fa fa-money') . " PRECIO", 4,
+                        text_icon('fa fa-money', " PRECIO"),
+                        4,
                         [
 
                         ],
@@ -119,7 +121,7 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 "col-lg-3 contenedor_precio seccion_menu_tipo_servicio top_30"
             );
-            $r[] = div(guardar("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]), ["class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50']);;
+            $r[] = div(guardar("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]), ["class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50']);
             $r[] = form_close();
             $re[] = div(append_data($r), "contenedor_agregar_servicio_form top_30");
             $re[] = get_selector_categoria($is_mobile);
@@ -139,19 +141,24 @@ if (!function_exists('invierte_date_time')) {
 
                 foreach ($top_servicios as $row) {
 
-                    $url = "../producto/?producto=" . $row['id_servicio'];
+                    $url = path_enid("producto", $row['id_servicio']);
                     $nombre = $row["nombre_servicio"];
                     $titulo_corto = substr($nombre, 0, 18) . "...";
                     $articulo = (strlen($nombre) > 18) ? $titulo_corto : $nombre;
                     $link_articulo =
                         anchor_enid($articulo,
-                            ['href' => $url, 'class' => 'black'], 1);
+                            [
+                                'href' => $url,
+                                'class' => 'black'
+                            ], 1
+                        );
 
 
                     $response[] = get_btw(
                         $link_articulo,
                         $row["vistas"],
-                        "display_flex_enid");
+                        "display_flex_enid"
+                    );
 
                 }
             }
@@ -225,14 +232,20 @@ if (!function_exists('invierte_date_time')) {
                     $r[] = icon("fa fa-angle-right");
                     $articulo = (trim(strlen($row["nombre_servicio"])) > 22) ? substr($row["nombre_servicio"], 0, 22) . "..." : strlen($row["nombre_servicio"]);
                     $r[] = $articulo;
-                    $r[] = div(span($row["vistas"], ["class" => "a_enid_black_sm_sm"]),
+                    $r[] = div(span($row["vistas"], "a_enid_black_sm_sm"),
                         [
                             "class" => "pull-right",
                             "title" => "Personas que han visualizado este  producto"
                         ]);
 
 
-                    $r[] = anchor_enid(append_data($r), ["href" => "../producto/?producto=" . $row['id_servicio']]);
+                    $r[] = anchor_enid(
+                        append_data($r),
+                        [
+                            "href" => path_enid("producto", $row['id_servicio'])
+                        ]
+                    );
+
                 endforeach;
 
 
@@ -404,7 +417,7 @@ if (!function_exists('invierte_date_time')) {
                                 "class" => "agregar_servicio btn_agregar_servicios"
                             ]
                         ),
-                        ["class" => valida_active_tab('nuevo', $action) . "  "]
+                        valida_active_tab('nuevo', $action) . "  "
                     ),
                     li(
                         anchor_enid(
@@ -467,11 +480,12 @@ if (!function_exists('invierte_date_time')) {
                             'href' => "#tab_servicios"
                         ]
                     ),
-                        ["class" => "li_menu li_menu_servicio btn_servicios " . valida_active_tab('lista', $action)]
+                        "li_menu li_menu_servicio btn_servicios " . valida_active_tab('lista', $action)
+
                     )
 
                 ];
-                return ul($list, "nav tabs contenedor_menu_enid_service_lateral" );
+                return ul($list, "nav tabs contenedor_menu_enid_service_lateral");
 
             }
         }
