@@ -418,8 +418,10 @@ let array_key_exists = function (key, array) {
 
 }
 let isArray = function (param) {
-    return Array.isArray(param);
+    //return Array.isArray(param);
+    return param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
 }
+
 let getObjkeys = function (param) {
     return Object.keys(param);
 }

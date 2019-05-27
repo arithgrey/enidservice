@@ -825,14 +825,7 @@ class principal extends CI_Controller
                     "js" =>
                         [
                             "login/sha1.js",
-                            "puntos_medios/principal.js",
-                            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-                            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
-                            "js/bootstrap-daterangepicker/moment.min.js",
-                            "js/bootstrap-daterangepicker/daterangepicker.js",
-                            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-                            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-                            "js/pickers-init.js",
+                            "puntos_medios/principal.js"
 
 
                         ]

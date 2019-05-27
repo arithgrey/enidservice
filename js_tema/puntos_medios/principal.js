@@ -21,10 +21,6 @@ window.onpopstate = function (event) {
 
 $(document).ready(function () {
 
-
-
-
-    $('.datetimepicker5').datepicker();
     $(".form_punto_encuentro").submit(registra_usuario);
     $(".form_punto_encuentro_horario").submit(notifica_punto_entrega);
     $(".link_acceso").click(set_link);
