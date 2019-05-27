@@ -20,6 +20,18 @@ if (!function_exists('invierte_date_time')) {
 
     function get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras)
     {
+        $horarios =  lista_horarios();
+        $lista_horarios =  $horarios["select"];
+        $nuevo_dia =   $horarios["nuevo_dia"];
+
+        $minimo = date_format(horario_enid(), 'Y-m-d');
+        $maximo = add_date($minimo,4);
+
+        if($nuevo_dia >  0 ){
+
+            $minimo =  add_date($minimo,1);
+        }
+
 
         $r[] = heading_enid("¿Quién recibe?", 2, ["class" => "text-uppercase"]);
         $r[] = form_open("", ["class" => "form-horizontal form_punto_encuentro mt-5"]);
@@ -79,15 +91,15 @@ if (!function_exists('invierte_date_time')) {
                     "name" => 'fecha_entrega',
                     "class" => "form-control input-sm ",
                     "type" => 'date',
-                    "value" => date("Y-m-d"),
-                    "min" => date("Y-m-d"),
-                    "max" => add_date(date("Y-m-d"), 4)
+                    "value" => $minimo,
+                    "min" => $minimo,
+                    "max" => $maximo
                 ]), "col-lg-10 mt-3");
 
 
         $r[] = label(icon("fa fa-clock-o") . " HORA DE ENCUENTRO", "col-lg-4 mt-3");
 
-        $r[] = div(lista_horarios(), "col-lg-8 mt-3");
+        $r[] = div($lista_horarios, "col-lg-8 mt-3");
 
         $r[] = div("+ agregar nota", ["class" => "col-lg-12  mt-5 cursor_pointer text_agregar_nota", "onclick" => "agregar_nota();"]);
 
@@ -173,6 +185,20 @@ if (!function_exists('invierte_date_time')) {
     function get_form_punto_encuentro_horario($extra = [])
     {
 
+        $horarios =  lista_horarios();
+        $lista_horarios =  $horarios["select"];
+        $nuevo_dia =   $horarios["nuevo_dia"];
+
+        $minimo = date_format(horario_enid(), 'Y-m-d');
+        $maximo = add_date($minimo,4);
+
+        if($nuevo_dia >  0 ){
+
+            $minimo =  add_date($minimo,1);
+        }
+
+
+
 
         $r[] = form_open("", ["class" => "form_punto_encuentro_horario top_50"]);
         $r[] = append_data($extra);
@@ -187,37 +213,14 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "form-control input-sm ",
                     "type" => 'date',
                     "value" => date("Y-m-d"),
-                    "min" => date("Y-m-d"),
-                    "max" => add_date(date("Y-m-d"), 4)
+                    "min" => $minimo,
+                    "max" => $maximo
                 ]),
             8);
 
 
         $r[] = div(icon("fa fa-clock-o") . " HORA DE ENCUENTRO", "col-lg-4 top_30");
-        $r[] = div(lista_horarios(), "col-lg-8 top_30");
-
-
-        /*
-        if ($tipo < 0 ) {
-            $r[] = input_hidden([
-                "class" => "recibo",
-                "name" => "recibo",
-                "value" => $recibo
-            ]);
-        }
-
-        if ($servicio > 0 ){
-
-            $r[] = input_hidden([
-                "class" => "servicio",
-                "name" => "servicio",
-                "value" => $servicio
-            ]);
-        }
-        $r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro]);
-        */
-
-
+        $r[] = div($lista_horarios, "col-lg-8 top_30");
         $r[] = div(guardar("CONTINUAR", ["class" => "top_50"]), 12);
         $r[] = place("place_notificacion_punto_encuentro");
         $r[] = form_close();

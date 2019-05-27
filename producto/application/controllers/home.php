@@ -17,7 +17,7 @@ class Home extends CI_Controller
 	function index()
 	{
 		$param = $this->input->get();
-		evita_basura($this->input->get("producto"));
+        evita_basura($this->input->get("producto"));
 		$request_method = $_SERVER['REQUEST_METHOD'];
 		if (ctype_digit(trim($this->input->get("producto")))) {
 

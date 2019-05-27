@@ -1413,7 +1413,7 @@ if (!function_exists('get_img_usuario')) {
 
     }
 }
-if (!function_exists('lista_horarios')) {
+if (!function_exists('microtime_float')) {
     function microtime_float()
     {
         list($useg, $seg) = explode(" ", microtime());
@@ -1424,7 +1424,14 @@ if (!function_exists('lista_horarios')) {
     function lista_horarios()
     {
 
-        $horarios = [
+        $fecha =   horario_enid();
+        $hora_actual = date_format($fecha, 'H');
+        $minuto_actual = date_format($fecha, 'i');
+        $hora_actual =  intval ( $hora_actual );
+        $minuto_actual  =  intval ( $minuto_actual );
+        $nuevo_dia = 0;
+
+        $base = [
             "09:00",
             "09:30",
             "10:00",
@@ -1446,12 +1453,49 @@ if (!function_exists('lista_horarios')) {
             "18:00"
         ];
 
+        $horarios =  [];
+        if($hora_actual < 9  || $hora_actual >= 18){
+
+            $horarios =  $base;
+            if($hora_actual >  18){$nuevo_dia ++;}
+
+
+        }else if( $hora_actual ==  17 ){
+
+            if($minuto_actual < 10 ){
+
+                $horarios[] = "18:00";
+
+            }else{
+
+                $horarios =  $base;
+                if($hora_actual >  18){$nuevo_dia ++;}
+            }
+
+        }else{
+
+            for ($a = 0; $a < count($base); $a ++ ){
+
+                $hora =  intval ( substr($base[$a], 0,2) );
+                if ( $hora >   $hora_actual  ) {
+
+                    $horarios[] =  $base[$a];
+
+                }
+            }
+        }
+
+
         $select = "<select name='horario_entrega' class='form-control input-sm '  > ";
         foreach ($horarios as $row) {
             $select .= "<option value='" . $row . "'>" . $row . "</option>";
         }
         $select .= "</select>";
-        return $select;
+        $response =   [
+                "select" => $select ,
+                "nuevo_dia" => $nuevo_dia
+            ];
+        return $response;
 
     }
 }
@@ -1923,4 +1967,10 @@ function text_icon($class_icono , $text  , $att = [], $left = 1 ){
 
         return  $text." ".icon($class_icono , $att );
     }
+}
+function horario_enid(){
+
+    $datetime = new DateTime('now', new DateTimeZone(config_item('time_reference')));
+    return $datetime;
+
 }
