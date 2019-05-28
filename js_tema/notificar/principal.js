@@ -27,7 +27,7 @@ let notifica_pago = function(e){
 		}else{
 
 			$(".num_recibo").css("border" , "1px solid rgb(13, 62, 86)");
-			llenaelementoHTML(".place_recibo" , "<span class='alerta_enid'>Este pago ya ha sido notificado previamente</span>");
+			render_enid(".place_recibo" , "<span class='alerta_enid'>Este pago ya ha sido notificado previamente</span>");
 			recorrepage(".num_recibo");	
 		}
 
@@ -40,7 +40,7 @@ let notifica_pago = function(e){
 
 let response_notificacion_pago = function(data){
 
-	llenaelementoHTML(".placa_notificador_pago" , "<span class='blue_enid_background white' style='padding:10px;'> Recibimos la notificación de tu pago, a la brevedad será procesado!.</span>");
+	render_enid(".placa_notificador_pago" , "<span class='blue_enid_background white' style='padding:10px;'> Recibimos la notificación de tu pago, a la brevedad será procesado!.</span>");
 	recorrepage(".placa_notificador_pago");
 	notifica_registro_pago(data);
 }
@@ -52,7 +52,7 @@ let notifica_registro_pago = function(data){
 	request_enid( "POST",  data_send, url, response_notificacion_registro_pago , ".placa_notificador_pago" );	
 }
 let response_notificacion_registro_pago = function(data){
-	llenaelementoHTML(".placa_notificador_pago" , "<div class='white' style='background:#04319E;padding:10px;font-size:.9em;'> Su pago ha sido notificado, a continuación será procesado, puede consultar más detalles desde su área de clientes <a href='../login' class='strong' style='color:white!important;'> ingresando aquí</a> </div> ");
+	render_enid(".placa_notificador_pago" , "<div class='white' style='background:#04319E;padding:10px;font-size:.9em;'> Su pago ha sido notificado, a continuación será procesado, puede consultar más detalles desde su área de clientes <a href='../login' class='strong' style='color:white!important;'> ingresando aquí</a> </div> ");
 	$(".form_notificacion :input").attr("disabled", true);
 			
 }
@@ -70,7 +70,7 @@ let response_autocomplete = function(data){
 	set_option("resultados" , resultados);
 	set_option("pago_notificado_previamente" , data.resultado_notificado);
 	if (resultados == 0 && get_option("flag_accesos") > 0){
-		llenaelementoHTML(".place_recibo" , "<span class='alerta_enid'>Recibo no encontrado</span>");
+		render_enid(".place_recibo" , "<span class='alerta_enid'>Recibo no encontrado</span>");
 	}else{						
 
 		set_option("flag_accesos" , 1);
@@ -91,7 +91,7 @@ let response_autocomplete = function(data){
 let notifica_recibo_en_proceso = function(saldo_cubierto , monto_a_pagar){
 	if(saldo_cubierto >= monto_a_pagar){
 		$(".place_recibo").show();		
-		llenaelementoHTML(".place_recibo" , "RECIBIMOS TU NOTIFICACIÓN!");
+		render_enid(".place_recibo" , "RECIBIMOS TU NOTIFICACIÓN!");
 	}
 }
 
@@ -108,7 +108,7 @@ let set_select_servicio = function(data_servicio){
 		select +=  "<option value='"+id_servicio+"'>"+nombre_servicio+"</option>";
 	}
 	select +="</select>";	
-	llenaelementoHTML("#servicio" , select );
+	render_enid("#servicio" , select );
 }
 /*
 * function response_valida_auto_complete(data){

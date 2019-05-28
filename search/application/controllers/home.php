@@ -17,8 +17,8 @@ class Home extends CI_Controller
 	{
 
 		$param = $this->input->get();
-		$param["id_clasificacion"] = get_info_variable($param, "q2", 1);
-		$param["vendedor"] = get_info_variable($param, "q3", 1);
+		$param["id_clasificacion"] = get_param_def($param, "q2", 1);
+		$param["vendedor"] = get_param_def($param, "q3", 1);
 		$q = get_param_def($param, "q", "", 1);
 		evita_basura($q);
 		$param["num_hist"] = get_info_servicio($q);
@@ -56,7 +56,7 @@ class Home extends CI_Controller
 
 		} else {
 
-			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+			
 
 		}
 
@@ -105,7 +105,7 @@ class Home extends CI_Controller
 			$data["es_movil"] = 0;
 		}
 
-        $npage =  get_info_variable($param, "page");
+        $npage =  get_param_def($param, "page");
 		$data["paginacion"] = $this->create_pagination($totales_elementos,
 			$per_page,
 			$q,

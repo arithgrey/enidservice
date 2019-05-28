@@ -35,7 +35,7 @@ let carga_compras_usuario = function(){
 let response_carga_compras_usuario = function(data){
 	
 	let place 	= get_lugar_por_stus_compra(); 	
-	llenaelementoHTML(place  , data);								
+	render_enid(place  , data);								
 	$(".solicitar_desarrollo").click(function(e){
 		
 		let id_proyecto 	=  get_parameter_enid($(this) , "id");	
@@ -66,7 +66,7 @@ let reponse_carga_compras_o_ventas_concluidas = function(data){
 
 
 	let place 		= get_lugar_por_stus_compra();  		
-	llenaelementoHTML(place  , data);
+	render_enid(place  , data);
 	$(".resumen_pagos_pendientes").click(cargar_info_resumen_pago_pendiente);
 	$(".pagination > li > a, .pagination > li > span").css("color" , "white");	
 	$(".pagination > li > a, .pagination > li > span").click(function(e){				

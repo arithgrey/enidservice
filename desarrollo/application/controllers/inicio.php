@@ -13,13 +13,14 @@ class Inicio extends CI_Controller
     function index()
     {
 
-        $data = $this->principal->val_session("");
-        $num_perfil = $this->principal->getperfiles(2, "idperfil");
-        $data["num_departamento"] = $this->get_id_departamento_by_id_perfil($num_perfil);
+        $data = $this->principal->val_session();
+        $param =  $this->input->get();
+
+        $data["num_departamento"] = $this->get_id_departamento_by_id_perfil($this->principal->getperfiles(2, "idperfil"));
         $data["departamentos"] = $this->get_departamentos_enid();
         $data["clasificaciones_departamentos"] = $this->principal->get_departamentos(1);
 
-        $activa = get_info_variable($this->input->get(), "q");
+        $activa = get_param_def($param, "q");
         $data["activa"] = ($activa === "") ? 1 : $activa;
         $data = $this->principal->getCssJS($data, "desarrollo");
         $this->principal->show_data_page($data, 'empresas_enid');

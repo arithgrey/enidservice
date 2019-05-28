@@ -12,21 +12,20 @@ class Home extends CI_Controller
 
     function index()
     {
-        $data = $this->principal->val_session("");
-        if (get_param_def($this->input->get(), "transfer") > 0) {
+        $data = $this->principal->val_session();
+        $param =  $this->input->get();
+        if (get_param_def($param, "transfer") > 0) {
 
         } else {
 
             $this->principal->acceso();
 
-            $data["action"] = $this->input->get("action");
-            $valoraciones = $this->resumen_valoraciones($data["id_usuario"]);
-            $data["valoraciones"] = $valoraciones["info_valoraciones"];
-            $class_departamentos = $this->principal->get_departamentos();
-            $data["clasificaciones_departamentos"] = $class_departamentos;
+            $data["action"] = $param["action"];
+            $data["valoraciones"] = $this->resumen_valoraciones($data["id_usuario"])["info_valoraciones"];
+            
             $alcance = $this->get_alcance($data["id_usuario"]);
             $data["alcance"] = crea_alcance($alcance);
-            $data["ticket"] = get_info_variable($this->input->get(), "ticket");
+            $data["ticket"] = get_param_def($param , "ticket");
             $data   =  $this->principal->getCSSJs($data, "area_cliente");
             $this->principal->show_data_page($data, 'home');
         }

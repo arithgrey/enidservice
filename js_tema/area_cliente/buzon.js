@@ -7,7 +7,7 @@ let carga_buzon = function(){
 	request_enid( "GET",  data_send, url, response_buzon, ".place_buzon" );	
 }
 let response_buzon = function(data){
-	llenaelementoHTML(".place_buzon"  , data);										
+	render_enid(".place_buzon"  , data);										
 	$(".pregunta").click(carga_respuestas);		
 }
 let carga_respuestas = function(){
@@ -37,7 +37,7 @@ let carga_respuesta_complete = function(){
 let response_respuesta_complete = function(data){
 
 	$(".contenedor_opciones_buzon").hide();
-	llenaelementoHTML(".place_buzon" , data);
+	render_enid(".place_buzon" , data);
 	$(".form_valoracion_pregunta").submit(enviar_respuesta);
 	carga_num_preguntas();
 }

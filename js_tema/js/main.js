@@ -63,12 +63,12 @@ let show_load_enid = function (place) {
 
     let bar = '<div class="progress progress-striped active page-progress-bar">';
     bar += '<div class="progress-bar" style="width: 100%;"></div> </div>';
-    llenaelementoHTML(place, bar);
+    render_enid(place, bar);
 }
 let show_response_ok_enid = function (place, msj) {
 
     $(place).show();
-    llenaelementoHTML(place, "<span class='response_ok_enid'>" + msj + "</span>");
+    render_enid(place, "<span class='response_ok_enid'>" + msj + "</span>");
 
     setTimeout(function () {
         $(place).fadeOut(1500);
@@ -103,7 +103,7 @@ let valida_text_form = function (input, place_msj, len, nom) {
 }
 let format_error = function (place_msj, msj) {
 
-    llenaelementoHTML(place_msj, "<div class='col-lg-12 alerta_enid padding_5 top_10 bottom_10'>" + msj + "</div>");
+    render_enid(place_msj, "<div class='col-lg-12 alerta_enid padding_5 top_10 bottom_10'>" + msj + "</div>");
 }
 let valida_email_form = function (input, place_msj) {
 
@@ -159,7 +159,7 @@ let valida_tel_form = function (input, place_msj) {
     format_error(place_msj, mensaje_user);
     return flag;
 }
-let valEmail = function (valor) {
+let valEmail = function(valor) {
 
     let re = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
     let v = (!re.exec(valor)) ? false : true;
@@ -213,8 +213,8 @@ let metricas_perfil = function () {
 }
 let response_metricas_perfil = function (data) {
 
-    llenaelementoHTML(".num_tareas_dia_pendientes_usr", data.num_tareas_pendientes);
-    llenaelementoHTML(".place_notificaciones_usuario", data.lista_pendientes);
+    render_enid(".num_tareas_dia_pendientes_usr", data.num_tareas_pendientes);
+    render_enid(".place_notificaciones_usuario", data.lista_pendientes);
     let num_pendientes = data.num_tareas_pendientes_text;
     set_option("num_pendientes", num_pendientes);
     $(document).on('visibilitychange', function () {
@@ -224,18 +224,18 @@ let response_metricas_perfil = function (data) {
     let ventas_pendientes = $(".ventas_pendientes").attr("id");
     ventas_pendientes = parseInt(ventas_pendientes);
     if (ventas_pendientes > 0) {
-        llenaelementoHTML(".num_ventas_pendientes_dia", "<span class='alerta_notificacion_fail' >" + ventas_pendientes + "</span>");
+        render_enid(".num_ventas_pendientes_dia", "<span class='alerta_notificacion_fail' >" + ventas_pendientes + "</span>");
     }
 
     let num_tareas_pendientes = data.num_tareas_pendientes_text;
     num_tareas_pendientes = parseInt(num_tareas_pendientes);
     if (num_tareas_pendientes > 1) {
-        llenaelementoHTML(".tareas_pendientes_productividad", "<span class='alerta_notificacion_fail' >" + num_tareas_pendientes + "</span>");
+        render_enid(".tareas_pendientes_productividad", "<span class='alerta_notificacion_fail' >" + num_tareas_pendientes + "</span>");
     }
     let deuda_cliente = $(".saldo_pendiente_notificacion").attr("deuda_cliente");
     $(".place_num_pagos_por_realizar").empty();
     if (parseInt(deuda_cliente) > 0) {
-        llenaelementoHTML(".place_num_pagos_por_realizar", "<span class='notificacion_enid'>" + deuda_cliente + "MXN</span>");
+        render_enid(".place_num_pagos_por_realizar", "<span class='notificacion_enid'>" + deuda_cliente + "MXN</span>");
     }
 }
 let termina_session = function () {
@@ -292,17 +292,18 @@ let registra_respuesta_pregunta = function (e) {
 let quitar_espacios_numericos = function (nuevo_valor, texto = 0) {
 
 
-    let f_punto =  0;
+    let f_punto = 0;
     if (texto == 0) {
         let valor_numerico = "";
         for (let a = 0; a < nuevo_valor.length; a++) {
             if (nuevo_valor[a] != " ") {
 
                 let is_num = validar_si_numero(nuevo_valor[a]);
-                if (is_num == true || (nuevo_valor[a] == "." && f_punto  < 1)) {
-                    if (nuevo_valor[a] == "." ){
-                        f_punto ++;
-                    }if (a < 13) {
+                if (is_num == true || (nuevo_valor[a] == "." && f_punto < 1)) {
+                    if (nuevo_valor[a] == ".") {
+                        f_punto++;
+                    }
+                    if (a < 13) {
                         valor_numerico += nuevo_valor[a];
                     }
                 }
@@ -349,7 +350,7 @@ let quita_espacios_input_precio = function () {
 
     let valor = get_parameter(".precio");
     let nuevo = quitar_espacios_numericos(valor);
-    set_parameter(".precio" , nuevo);
+    set_parameter(".precio", nuevo);
 
 }
 let validar_si_numero = function (numero) {
@@ -473,7 +474,7 @@ function is_mobile() {
     return get_option("is_mobile");
 }
 
-function llenaelementoHTML(idelement, data) {
+function render_enid(idelement, data) {
     $(idelement).html(data);
 }
 
@@ -507,7 +508,7 @@ let request_enid = function (method, data_send, url, call_back, place_before_sen
     }
     if (call_back > 0) {
         var call_back = function (data) {
-            llenaelementoHTML(place_render, data);
+            render_enid(place_render, data);
             $('th').click(ordena_table_general);
         }
     }
@@ -561,7 +562,6 @@ let randomString = function (len, charSet) {
     }
     return randomString;
 }
-
 /*Recorre a sección*/
 let recorrepage = function (contenedor) {
 
@@ -585,7 +585,6 @@ let recorrepage = function (contenedor) {
             console.log("NO EXISTE -> " + contenedor);
         }
     }
-
 
 
 };
@@ -679,25 +678,25 @@ let advierte = function (text) {
     $(".text-order-name-error").text(text);
     $("#modal-error-message").modal("show");
 }
-let div_enid = function(id_padre,  text, clase='') {
+let div_enid = function (id_padre, text, clase = '') {
 
     debugger;
     var newDiv = document.createElement("div");
     var newContent = document.createTextNode(text);
 
 
-    if (clase.length >  0){
+    if (clase.length > 0) {
 
-        let arrClass =  clase.split(" ");
-        for (var x in arrClass){
-            newDiv.className +=  arrClass[x] + " ";
+        let arrClass = clase.split(" ");
+        for (var x in arrClass) {
+            newDiv.className += arrClass[x] + " ";
         }
 
 
     }
 
     newDiv.appendChild(newContent);
-    document.getElementById(id_padre).innerHTML= newDiv.outerHTML;
+    document.getElementById(id_padre).innerHTML = newDiv.outerHTML;
 
 
 }

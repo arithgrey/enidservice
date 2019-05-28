@@ -271,6 +271,8 @@ class principal extends CI_Controller
 
         $data["is_mobile"] = ($this->agent->is_mobile() == FALSE) ? 0 : 1;
         $data["proceso_compra"] = 0;
+        $data["clasificaciones_departamentos"] = $this->get_departamentos();
+
         if ($this->sessionclass->is_logged_in() > 0) {
 
             $menu = $this->sessionclass->create_contenido_menu();

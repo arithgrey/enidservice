@@ -85,7 +85,7 @@ let busqueda_pedidos = function (e) {
 }
 let response_pedidos = function (data) {
 
-    llenaelementoHTML(".place_pedidos", data);
+    render_enid(".place_pedidos", data);
     $('th').click(ordena_table_general);
     $(".desglose_orden").click(function () {
         let recibo = get_parameter_enid($(this), "id");
@@ -221,7 +221,7 @@ let response_saldo_cubierto = function (data) {
 
         desbloqueda_form(".form_cantidad");
         $(".mensaje_saldo_cubierto").show();
-        llenaelementoHTML(".mensaje_saldo_cubierto", data);
+        render_enid(".mensaje_saldo_cubierto", data);
     }
 }
 let next_status = function () {
@@ -252,7 +252,7 @@ let response_status_venta = function (data) {
 
     } else {
 
-        llenaelementoHTML(".mensaje_saldo_cubierto_post_venta", data);
+        render_enid(".mensaje_saldo_cubierto_post_venta", data);
     }
 
 }
@@ -296,7 +296,7 @@ let pre_cancelacion = function () {
 }
 let response_pre_cancelacion = function (data) {
 
-    llenaelementoHTML(".place_tipificaciones", data);
+    render_enid(".place_tipificaciones", data);
     $(".tipificacion").change(registra_motivo_cancelacion);
 }
 let registra_motivo_cancelacion = function () {

@@ -84,7 +84,7 @@ let carga_metricas_desarrollo = function (e) {
 }
 let response_carga_metricas = function (data) {
 
-    llenaelementoHTML(".place_metricas_desarrollo", data);
+    render_enid(".place_metricas_desarrollo", data);
     $('th').click(ordena_table_general);
 }
 let carga_comparativas = function () {
@@ -94,7 +94,7 @@ let carga_comparativas = function () {
     let data_send = {tiempo: 1};
 
     request_enid("GET", data_send, url, function () {
-        llenaelementoHTML(".place_metricas_comparativa", data);
+        render_enid(".place_metricas_comparativa", data);
         $('th').click(ordena_table_general);
 
     }, ".place_metricas_comparativa");
@@ -116,7 +116,7 @@ let carga_solicitudes_cliente = function (e) {
     e.preventDefault();
 }
 let response_carga_solicitudes = function (data) {
-    llenaelementoHTML(".place_metricas_servicio", data);
+    render_enid(".place_metricas_servicio", data);
     $('th').click(ordena_table_general);
 }
 
@@ -135,7 +135,7 @@ let form_nuevo_ticket = function () {
 }
 
 let response_form_nuevo_ticket = function (data) {
-    llenaelementoHTML(".place_form_tickets", data);
+    render_enid(".place_form_tickets", data);
     $(".form_ticket").submit(registra_ticket);
 }
 
@@ -148,7 +148,7 @@ let registra_ticket = function (e) {
 
 }
 let response_registro_ticket = function (data) {
-    llenaelementoHTML(".place_registro_ticket", "A la brevedad se realizará su solicitud!");
+    render_enid(".place_registro_ticket", "A la brevedad se realizará su solicitud!");
     set_option("id_ticket", data);
     $("#ver_avances").tab("show");
     $("#base_tab_clientes").tab("show");
@@ -174,7 +174,7 @@ let carga_info_detalle_ticket = function () {
 let response_carga_ticket = function (data) {
 
 
-    llenaelementoHTML(".place_proyectos", data);
+    render_enid(".place_proyectos", data);
     display_elements([".seccion_nueva_tarea"], 0);
     $(".mostrar_tareas_pendientes").hide();
     $(".btn_mod_ticket").click(set_estatus_ticket);
@@ -204,7 +204,7 @@ let carga_formulario_respuesta_ticket = function (e) {
     let seccion = ".seccion_respuesta_" + get_option("tarea");
 
     request_enid("GET", data_send, url, function (data) {
-        llenaelementoHTML(seccion, data);
+        render_enid(seccion, data);
         $(".form_respuesta_ticket").submit(registra_respuesta_pregunta);
 
     }, seccion);
@@ -239,7 +239,7 @@ let carga_comentarios_terea_simple = function () {
 let response_carga_comentario_tareas = function (data) {
 
     let seccion = get_option("seccion");
-    llenaelementoHTML(seccion, data);
+    render_enid(seccion, data);
     $(".ocultar_comentarios").click(function (e) {
         set_option("tarea", get_parameter_enid($(this), "id"));
         $(seccion).empty();
@@ -295,7 +295,7 @@ let carga_tikets_usuario = function () {
 }
 let response_carga_tickets = function (data) {
 
-    llenaelementoHTML(".place_proyectos", data);
+    render_enid(".place_proyectos", data);
     $(".ver_detalle_ticket").click(function (e) {
 
         set_option("id_ticket", get_parameter_enid($(this), "id"));

@@ -10,7 +10,6 @@ window.onpopstate = function (event) {
 }
 
 let id_tarea = 0;
-//let flageditable  =0;
 let persona = 0;
 let telefono = 0;
 let id_proyecto = 0;

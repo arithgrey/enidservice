@@ -13,14 +13,14 @@ class Home extends CI_Controller
 	{
 
 		$param = $this->input->get();
-		$val = get_info_variable($param, "q");
+		$val = get_param_def($param, "q");
 		if (ctype_digit($val)) {
 
 
 			$id_usuario = $this->input->get("q");
-			$data = $this->principal->val_session("");
-			$clasificaciones_departamentos = $this->principal->get_departamentos();
-			$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
+			$data = $this->principal->val_session();
+			
+			
 			$prm["id_usuario"] = $id_usuario;
 			$data["usuario"] = $this->principal->get_info_usuario($id_usuario);
 
@@ -49,7 +49,7 @@ class Home extends CI_Controller
 		$resumen_recomendacion = $data_recomendacion["info_valoraciones"];
 
 
-		$prm["page"] = get_info_variable($this->input->get(), "page");
+		$prm["page"] = get_param_def($this->input->get(), "page");
 		$prm["resultados_por_pagina"] = 5;
 		$resumen_valoraciones_vendedor = $this->resumen_valoraciones_vendedor($prm);
 		$prm["totales_elementos"] = $data_recomendacion["data"][0]["num_valoraciones"];

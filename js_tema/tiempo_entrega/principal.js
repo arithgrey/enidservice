@@ -13,5 +13,5 @@ let busqueda =  function (e) {
 }
 let response_busqueda =  function (data) {
 
-    llenaelementoHTML(".place_tiempo_entrega" , data)
+    render_enid(".place_tiempo_entrega" , data)
 }

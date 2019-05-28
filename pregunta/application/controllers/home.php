@@ -28,7 +28,7 @@ class Home extends CI_Controller
     private function get_form()
     {
 
-        $data = $this->principal->val_session("");
+        $data = $this->principal->val_session();
         $servicio = $this->input->get("tag");
 
         if ($servicio > 0 && ctype_digit($servicio)) {
@@ -43,7 +43,7 @@ class Home extends CI_Controller
 
             } else {
 
-                $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+                
                 $send["id_servicio"] = $servicio;
                 $data["id_servicio"] = $servicio;
                 $send["id_usuario"] = ($send["in_session"] == 1) ? $this->principal->get_session("idusuario") : 0;
@@ -71,7 +71,7 @@ class Home extends CI_Controller
     {
 
         $param = $this->input->get();
-        $data = $this->principal->val_session("");
+        $data = $this->principal->val_session();
         $id_usuario = $data["id_usuario"];
 
         if (array_key_exists("action", $param) && $data["in_session"] > 0) {
@@ -107,7 +107,7 @@ class Home extends CI_Controller
 
         $preguntas = $this->get_preguntas_hechas_cliente($id_usuario, $id_pregunta);
         $data["preguntas_format"] = get_format_preguntas($preguntas, 0);
-        $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+        
         $data = $this->principal->getCssJs($data, "pregunta_hechas");
         $response = get_format_listado(get_format_preguntas($preguntas, 0));
         $this->principal->show_data_page($data, $response, 1);
@@ -133,7 +133,7 @@ class Home extends CI_Controller
     {
 
         $preguntas = $this->get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta);
-        $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+        
         $data = $this->principal->getCssJs($data, "pregunta_recibida");
         $response = get_format_listado(get_format_preguntas($preguntas, 1));
         $this->principal->show_data_page($data, $response, 1);

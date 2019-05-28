@@ -85,7 +85,7 @@ let  response_recupera_password  = function(data){
 		newDiv.setAttribute("class", "envio_correcto");
 		let newContent = document.createTextNode("El correo de recuperación se ha enviado con éxito.!");
 		newDiv.appendChild(newContent);
-		llenaelementoHTML(".place_recuperacion_pw" ,  newDiv);
+		render_enid(".place_recuperacion_pw" ,  newDiv);
 		show_response_ok_enid(".place_status_inicio" , newDiv);
 	}
 
@@ -154,13 +154,13 @@ let  response_usuario_registro =  function(data){
 
 	
 	if (data.usuario_registrado ==   1) {						
-		llenaelementoHTML(".place_acceso_sistema" ,  "<a class='acceder_btn'> Registro correcto! ahora puedes acceder aquí!</a>");
+		render_enid(".place_acceso_sistema" ,  "<a class='acceder_btn'> Registro correcto! ahora puedes acceder aquí!</a>");
 		habilita_botones();						
 		redirect("?action=registro");
 	}else{
 	
 		if(data.usuario_existe ==  1) {
-			llenaelementoHTML(".place_registro_miembro" , "<span class='alerta_enid'> Este usuario ya se encuentra registrado, <span class='acceso_a_cuenta'> accede a tu cuenta aquí </span> </span>");   			
+			render_enid(".place_registro_miembro" , "<span class='alerta_enid'> Este usuario ya se encuentra registrado, <span class='acceso_a_cuenta'> accede a tu cuenta aquí </span> </span>");   			
 			$(".acceso_a_cuenta").click(muestra_seccion_acceso);							
 			habilita_botones();
 

@@ -1,1 +1,1 @@
-<?php include("../config/config.php");
+<?php include(path_enid("config_path"));

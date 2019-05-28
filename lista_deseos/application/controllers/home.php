@@ -13,8 +13,7 @@ class Home extends CI_Controller
     function index()
     {
 
-        $data = $this->principal->val_session("");
-        $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+        $data = $this->principal->val_session();
         $param = $this->input->get();
 
         if (get_param_def($param, "q") === "preferencias") {
@@ -39,8 +38,8 @@ class Home extends CI_Controller
     private function load_lista_deseos($data)
     {
 
-        $productos_deseados = $this->get_lista_deseos($data["id_usuario"]);
-        $data["productos_deseados"]= $this->add_imagenes($productos_deseados);
+
+        $data["productos_deseados"]= $this->add_imagenes($this->get_lista_deseos($data["id_usuario"]));
         if (count($data["productos_deseados"]) > 0) {
 
             $data =  $this->principal->getCSSJs($data, "lista_deseos_productos_deseados");

@@ -23,8 +23,8 @@ class Home extends CI_Controller
 		if ($servicio > 0 && ctype_digit($servicio)) {
 
 
-			$clasificaciones_departamentos = $this->principal->get_departamentos();
-			$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
+			
+			
 			$prm["in_session"] = 0;
 			$prm["id_usuario"] = 0;
 			if ($data["in_session"] == 1) {

@@ -20,7 +20,7 @@ class Inicio extends CI_Controller
 		}
 		$data["departamentos"] = $this->get_departamentos_enid();
 		$data["perfiles_enid_service"] = $this->get_perfiles_enid_service();
-		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+		
 		$data = $this->principal->getCssJs($data, "usuarios_enid_service");
 		$this->principal->show_data_page($data, 'empresas_enid');
 	}

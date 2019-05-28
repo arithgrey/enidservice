@@ -26,7 +26,7 @@ let next_step_add_clasificacion = function (data) {
         load_niveles();
     } else {
 
-        llenaelementoHTML(".msj_existencia", "<span class='alerta_enid'>ÉSTA CATEGORÍA YA SE ENCUENTRA REGISTRADA</span>");
+        render_enid(".msj_existencia", "<span class='alerta_enid'>ÉSTA CATEGORÍA YA SE ENCUENTRA REGISTRADA</span>");
     }
 }
 
@@ -52,7 +52,7 @@ let load_niveles = function () {
 
 let muestra_sugerencias_primer_nivel = function (data) {
 
-    llenaelementoHTML(".primer_nivel", data);
+    render_enid(".primer_nivel", data);
     $(".primer_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones);
 }
 
@@ -78,7 +78,7 @@ let muestra_mas_opciones = function (e) {
 let muestra_sugerencias_segundo_nivel = function (data) {
 
 
-    llenaelementoHTML(".segundo_nivel", data);
+    render_enid(".segundo_nivel", data);
     $(".seleccion_2").click(function () {
         add_categoria(2, get_parameter(".primer_nivel option:selected"), get_parameter(".servicio option:selected"));
     });
@@ -107,7 +107,7 @@ let muestra_mas_opciones_segundo = function (e) {
 
 let muestra_sugerencias_tercer_nivel = function (data) {
 
-    llenaelementoHTML(".tercer_nivel", data);
+    render_enid(".tercer_nivel", data);
     $(".seleccion_3").click(function () {
         add_categoria(3, get_parameter(".segundo_nivel option:selected"), get_parameter(".servicio option:selected"));
     });
@@ -136,7 +136,7 @@ let muestra_mas_opciones_tercer = function (e) {
 
 let muestra_sugerencias_cuarto = function (data) {
 
-    llenaelementoHTML(".cuarto_nivel", data);
+    render_enid(".cuarto_nivel", data);
     $(".seleccion_4").click(function () {
         add_categoria(4, get_parameter(".tercer_nivel option:selected"), get_parameter(".servicio option:selected"));
     });
@@ -166,7 +166,7 @@ let muestra_mas_opciones_quinto = function (e) {
 let muestra_sugerencias_quinto = function (data) {
     clean_categorias(4);
     $(".seleccion_4").hide();
-    llenaelementoHTML(".quinto_nivel", data);
+    render_enid(".quinto_nivel", data);
     $(".seleccion_5").click(function () {
         add_categoria(5, get_parameter(".cuarto_nivel option:selected"), get_parameter(".servicio option:selected"));
     });
@@ -208,5 +208,5 @@ let next_add = function (data) {
     clean_categorias(-1);
     $(".form_categoria").show();
     reset_form("form_categoria");
-    llenaelementoHTML(".msj_existencia", "<a class='a_enid_black'>CATEGORÍA AGREGADA!</a>");
+    render_enid(".msj_existencia", "<a class='a_enid_black'>CATEGORÍA AGREGADA!</a>");
 }

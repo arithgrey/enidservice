@@ -16,9 +16,9 @@ class Home extends CI_Controller
 
 
         $param = $this->input->get();
-        $data = $this->principal->val_session("");
+        $data = $this->principal->val_session();
         $this->principal->acceso();
-        $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+        
 
         if (get_param_def($param, "seguimiento") > 0 && ctype_digit($param["seguimiento"])) {
 
@@ -274,7 +274,7 @@ class Home extends CI_Controller
         }
 
         $data = $this->principal->getCssJs($data, "pedidos");
-        $es_recibo = get_info_variable($param, "recibo");
+        $es_recibo = get_param_def($param, "recibo");
         $data["tipos_entregas"] = $this->get_tipos_entregas(array());
         $data["status_ventas"] = $this->get_estatus_enid_service();
 

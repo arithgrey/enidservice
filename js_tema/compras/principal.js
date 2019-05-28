@@ -13,5 +13,5 @@ let busqueda = function(e){
     e.preventDefault();
 }
 let response_busqueda = function(data){
-    llenaelementoHTML(".place_compras" , data);
+    render_enid(".place_compras" , data);
 }

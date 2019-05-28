@@ -66,6 +66,6 @@ let carga_productos_sugeridos = function(){
 let response_carga_productos = function(data){
 	if (data["sugerencias"] == undefined ){
 		$(".text_interes").removeClass("hidden");
-		llenaelementoHTML(".place_tambien_podria_interezar" , data);
+		render_enid(".place_tambien_podria_interezar" , data);
 	}
 }

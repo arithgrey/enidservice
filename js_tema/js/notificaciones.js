@@ -6,7 +6,7 @@ function cargar_num_envios_a_validacion(){
 }
 /**/
 function response_carga_numero_envios_a_validacion(data){
-	llenaelementoHTML(".place_num_envios_a_validacion" , data);
+	render_enid(".place_num_envios_a_validacion" , data);
 	recorre_web_version_movil();
 }
 /**/
@@ -17,8 +17,8 @@ function  cargar_num_agendados(){
 }
 /**/
 function response_num_agendados(data){
-	llenaelementoHTML(".place_num_agendados" , data.num_agendados_posibles_clientes);		
-	llenaelementoHTML(".place_num_tareas_pendientes" , data.num_tareas_pendientes);
+	render_enid(".place_num_agendados" , data.num_agendados_posibles_clientes);		
+	render_enid(".place_num_tareas_pendientes" , data.num_tareas_pendientes);
 }
 /**/
 function  cargar_num_clientes_restantes(){
@@ -29,7 +29,7 @@ function  cargar_num_clientes_restantes(){
 }
 /**/
 function response_carga_num_clientes_restantes(data){
-	llenaelementoHTML(".place_num_productividad" , data);
+	render_enid(".place_num_productividad" , data);
 }
 /**/
 function carga_num_pendientes(){
@@ -40,7 +40,7 @@ function carga_num_pendientes(){
 }
 /**/
 function response_carga_num_pendientes(data){
-	llenaelementoHTML(".place_tareas_pendientes" , data);
+	render_enid(".place_tareas_pendientes" , data);
 }
 /**/
 function set_depto(new_depto){

@@ -826,21 +826,6 @@ if (!function_exists('get_dominio')) {
         return $url[0];
     }
 }
-
-if (!function_exists('get_info_variable')) {
-    function get_info_variable($param, $variable, $valida_basura = 0)
-    {
-        $text = (!is_null($param) && is_array($param) && array_key_exists($variable, $param)) ? $param[$variable] : 0;
-
-        if ($valida_basura == 1) {
-            if ((!is_null($param) && is_array($param) && array_key_exists($variable, $param))) {
-                evita_basura($param[$variable]);
-            }
-        }
-        return $text;
-
-    }
-}
 if (!function_exists('get_info_servicio')) {
     function get_info_servicio($q = '')
     {
@@ -1939,8 +1924,11 @@ function path_enid($pos, $extra = 0 , $link_directo = 0 ){
         "recomendacion" => "recomendacion/?q=",
         "compras" => "compras",
         "tiempo_venta" => "tiempo_venta",
-        "ventas_encuentro" => "ventas_encuentro"
-
+        "ventas_encuentro" => "ventas_encuentro",
+        "config_path" => "config/config.php",
+        "config_mines" => "config/mimes.php",
+        "config_db" => "db/database.php",
+        "config_constants" => "config/constants.php"
     ];
 
     if( $link_directo > 0  ){
@@ -1974,3 +1962,19 @@ function horario_enid(){
     return $datetime;
 
 }
+/*
+if (!function_exists('get_param_def')) {
+    function get_param_def($param, $variable, $valida_basura = 0)
+    {
+        $text = (!is_null($param) && is_array($param) && array_key_exists($variable, $param)) ? $param[$variable] : 0;
+
+        if ($valida_basura == 1) {
+            if ((!is_null($param) && is_array($param) && array_key_exists($variable, $param))) {
+                evita_basura($param[$variable]);
+            }
+        }
+        return $text;
+
+    }
+}
+*/

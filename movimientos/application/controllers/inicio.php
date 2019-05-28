@@ -20,7 +20,7 @@ class Inicio extends CI_Controller
         $param = $this->input->get();
         if ($data["in_session"] == 1) {
 
-            $action = get_info_variable($param, "action");
+            $action = get_param_def($param, "action");
             $id_usuario = $data["id_usuario"];
             switch ($action) {
                 case 0:
@@ -161,14 +161,14 @@ class Inicio extends CI_Controller
         $prm["id_usuario"] = $id_usuario;
         $data["bancos"] = $this->get_bancos_disponibles($prm);
         $data["usuario"] = $this->principal->get_info_usuario($id_usuario);
-        $data["banca"] = get_info_variable($param, "tarjeta");
+        $data["banca"] = get_param_def($param, "tarjeta");
         $data["error"] = 0;
         $prm = $this->input->get();
 
         if (get_param_def($prm, "error") > 0) {
             $data["error"] = 1;
         }
-        $data["seleccion"] = get_info_variable($param, "seleccion");
+        $data["seleccion"] = get_param_def($param, "seleccion");
         $this->principal->show_data_page($data, 'metodos_disponibles');
 
     }

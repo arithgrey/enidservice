@@ -12,10 +12,10 @@ class Startsession extends CI_Controller
     function index()
     {
 
-
+        $param  =   $this->input->get();
         $data   =   $this->principal->val_session("");
         $data   =   $this->principal->getCssJs($data,"login");
-        $action =   get_info_variable($this->input->get(), "action");
+        $action =   get_param_def($param, "action");
         $this->principal->validate_user_sesssion();
         $this->principal->show_data_page($data, get_page_sigin($action) ,1);
 

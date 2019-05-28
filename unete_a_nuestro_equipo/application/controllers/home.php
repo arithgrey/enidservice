@@ -11,10 +11,10 @@ class Home extends CI_Controller
 
 	function index()
 	{
-		$data = $this->principal->val_session("");
+		$data = $this->principal->val_session();
 		$data["f_pago"] = 1;
-		$clasificaciones_departamentos = $this->principal->get_departamentos();
-		$data["clasificaciones_departamentos"] = $clasificaciones_departamentos;
+		
+		
 		$this->principal->show_data_page($data, 'home');
 	}
 
