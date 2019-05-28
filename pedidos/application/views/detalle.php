@@ -52,7 +52,7 @@
 
             <?= get_btw(
 
-                div(strong("SALDO CUBIERTO"))
+                div(strong("SALDO CUBIERTO "))
                 ,
                 div(
 

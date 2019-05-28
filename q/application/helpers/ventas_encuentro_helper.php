@@ -9,6 +9,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response = [];
         $r = [];
+        $puntos = 0;
         foreach ($data as $row) {
 
             $linea = $row["linea"];
@@ -43,6 +44,7 @@ if (!function_exists('invierte_date_time')) {
                     "timeline"
 
                 );
+            $puntos  ++;
 
         }
 
@@ -50,6 +52,8 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_linea(get_resumen($data));
         $response[] = br(2).hr();
         $response[] = heading_enid("VENTAS POR ESTACIÓN ", 4 , "text-left");
+        $response[] = heading_enid("ESTACIONES DE REPARTO: ".$puntos, 6 , "text-left underline");
+
         $response[] = div(div(div(append_data($r), "main-timeline2"), 12), 13);
 
 
@@ -62,14 +66,18 @@ if (!function_exists('invierte_date_time')) {
     function format_linea($data)
     {
 
-
+        $total  = 0;
         $r = [];
         $b = 0;
+        $lineas_reparto  = 0;
+
         for ($a = 0; $a < count($data); $a++) {
 
             $nombre_linea =  $data[$a]["nombre_linea"];
             $num =  $data[$a]["num"];
+            $total =  $total + $num;
 
+            $lineas_reparto ++;
             if ( $b < 1) {
 
                 $text = [];
@@ -107,7 +115,9 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $x[] = heading_enid("VENTAS POR LINEA DE METRO", 4 , "text-left");
+        $x[] = heading_enid("VENTAS EN LíNEAS DE METRO: ".$total, 4 , "text-left");
+        $x[] = heading_enid("LINEAS DE REPARTO: ".$lineas_reparto, 6 , "text-left underline");
+
         $x[] =  div(div(div(div(append_data($r), "main-timeline12"), "col-md-12 contenedor_general padding_20 "), "row"));
         return append_data($x);
 
