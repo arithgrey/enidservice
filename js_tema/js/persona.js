@@ -26,8 +26,8 @@ function carga_info_persona(){
 function response_carga_info_persona(data){
 	
 	recorre_web_version_movil();		
-	llenaelementoHTML(".place_info_posibles_clientes" , data);
-	llenaelementoHTML(".place_info_clientes" , data);	
+	render_enid(".place_info_posibles_clientes" , data);
+	render_enid(".place_info_clientes" , data);	
 	$(".btn_agendar_correo").hide();	
 	$(".btn_agregar_comentario").click(function(){
 		recorre_web_version_movil();
@@ -71,7 +71,7 @@ function convertir_cliente(e){
 function response_convertir_cliente(data){
 	if (valor_tipo_actual == 4 ) {
 			
-			llenaelementoHTML(".place_convertir_cliente" , "");
+			render_enid(".place_convertir_cliente" , "");
 			/**/				
 		}else{
 
@@ -111,7 +111,7 @@ function carga_data_contactos_efectivos(e){
 /**/
 function response_carga_data_contactos_efectivos(data){
 	/**/																		
-	llenaelementoHTML(".place_info_posibles_clientes" , data);
+	render_enid(".place_info_posibles_clientes" , data);
 	$(".info_persona").click(function(e){
 		id_persona =  get_parameter_enid($(this) , "id");
 		set_option("id_persona",id_persona);

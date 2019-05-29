@@ -15,11 +15,11 @@ function carga_info_persona(){
 
 		recorre_web_version_movil();
 		
-		llenaelementoHTML(".place_info_posibles_clientes" , data);
-		llenaelementoHTML(".place_info_agendados" , data);
-		llenaelementoHTML(".place_info_clientes" , data);	
-		llenaelementoHTML(".place_info_clientes_validacion" , data);
-		llenaelementoHTML(".place_info_correos_agendados" , data);
+		render_enid(".place_info_posibles_clientes" , data);
+		render_enid(".place_info_agendados" , data);
+		render_enid(".place_info_clientes" , data);	
+		render_enid(".place_info_clientes_validacion" , data);
+		render_enid(".place_info_correos_agendados" , data);
 
 
 		$(".btn_agregar_comentario").click(function(){
@@ -66,7 +66,7 @@ function carga_posibles_clientes(e){
 			}
 	}).done(function(data){
 
-		llenaelementoHTML(".place_info_posibles_clientes" , data);
+		render_enid(".place_info_posibles_clientes" , data);
 		$(".info_persona").click(function(e){
 			id_persona =  get_parameter_enid($(this) , "id");
 			set_option("persona", id_persona);
@@ -225,7 +225,7 @@ function carga_info_ventas_mensuales(){
 			}
 	}).done(function(data){
 
-		llenaelementoHTML(".place_info_clientes_del_mes" , data);
+		render_enid(".place_info_clientes_del_mes" , data);
 		$(".info_persona").click(function(e){
 			id_persona =  get_parameter_enid($(this) , "id");
 			set_option("persona", id_persona);

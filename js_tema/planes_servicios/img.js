@@ -9,7 +9,7 @@ let carga_form_img = function(){
 let response_cargar_form = function(data){
 
     
-    llenaelementoHTML(".place_img_producto" , data);
+    render_enid(".place_img_producto" , data);
     display_elements([".guardar_img_enid" , "#guardar_img"]);
     $(".imagen_img").change(upload_imgs_enid_pre);
     recorrepage("#guardar_img");
@@ -78,7 +78,7 @@ let response_load_image = function(data){
             break;
         case 2:
 
-            llenaelementoHTML(".place_load_img" , "AGREGA UNA IMAGEN MÁS PEQUEÑA" );
+            render_enid(".place_load_img" , "AGREGA UNA IMAGEN MÁS PEQUEÑA" );
             carga_form_img();
             break;
         default:

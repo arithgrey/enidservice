@@ -8,7 +8,7 @@ function carga_tipos_tallas(e){
 /**/
 function muestra_tipo_tallas(data){
 	
-	llenaelementoHTML(".place_tallas", data);
+	render_enid(".place_tallas", data);
 	$(".configurar_talla").click(carga_tipo_talla);
 }
 /**/
@@ -28,7 +28,7 @@ function carga_tipo_talla_por_id(id){
 }
 /**/
 function muestra_tipo_talla(data){
-	llenaelementoHTML(".place_tallas", data);
+	render_enid(".place_tallas", data);
 	$(".form-agregar-clasificacion-talla").submit(muestra_clasificacion_tipo_talla_disponibles	);
 }
 /***/
@@ -41,7 +41,7 @@ function muestra_clasificacion_tipo_talla_disponibles(e){
 }
 /**/
 function muestra_clasificaciones_disponibles(data){
-	llenaelementoHTML(".info_tags", data);
+	render_enid(".info_tags", data);
 	$(".tag").click(agregar_clasificacion_tipo_talla);
 }
 /**/

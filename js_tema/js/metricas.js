@@ -7,7 +7,7 @@ function carga_metricas_clientes_usuario(){
 }
 /**/
 function response_carga_metricas_cliente_usuario(data){
-	llenaelementoHTML(".place_metricas_labor_venta" , data);			
+	render_enid(".place_metricas_labor_venta" , data);			
 	
 	$(".ventas_info").click(function(){
 		set_tipificacion(2);

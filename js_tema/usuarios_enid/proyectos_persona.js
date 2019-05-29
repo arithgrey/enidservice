@@ -12,7 +12,7 @@ let get_proyectos_persona = function(){
 			}
 	}).done(function(data){							
 
-		llenaelementoHTML(".place_proyectos" , data);				
+		render_enid(".place_proyectos" , data);				
 
 		$(".solicitar_desarrollo").click(function(e){
 			id_proyecto =  get_parameter_enid($(this) , "id");	
@@ -42,7 +42,7 @@ let carga_form_solicitar_desarrollo = function(e){
 					show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
 				}
 		}).done(function(data){													
-			llenaelementoHTML(".place_proyectos" , data);							
+			render_enid(".place_proyectos" , data);							
 			$(".form_ticket").submit(registra_ticket);
 			
 			$(".regresar_tickets_usuario").click(function(){
@@ -70,7 +70,7 @@ let registra_ticket = function(e){
 				}
 		}).done(function(data){																
 
-			llenaelementoHTML(".place_registro_ticket" , "A la brevedad se realizará su solicitud!");							
+			render_enid(".place_registro_ticket" , "A la brevedad se realizará su solicitud!");							
 			set_id_ticket(data); 
 			carga_info_detalle_ticket();
 
@@ -106,7 +106,7 @@ let carga_tikets_usuario = function(){
 		}).done(function(data){													
 
 
-			llenaelementoHTML(".place_proyectos" , data);										
+			render_enid(".place_proyectos" , data);										
 			$(".solicitar_desarrollo_form").click(carga_form_solicitar_desarrollo);
 			/*Ver detalle ticket completo*/
 			$(".ver_detalle_ticket").click(function(e){
@@ -143,7 +143,7 @@ let carga_info_detalle_ticket = function(){
 			}
 	}).done(function(data){							
 
-		llenaelementoHTML(".place_proyectos" , data);				
+		render_enid(".place_proyectos" , data);				
 		$('.summernote').summernote();
 		$(".asunto_ticket").click(modificar_asunto);
 		$(".btn_mod_ticket").click(actualizar_estatus_ticket);

@@ -46,13 +46,13 @@ let carga_uso_sistema = function(e) {
 }
 let response_carga_uso_sistema = function(data) {
 
-    llenaelementoHTML(".place_usabilidad_general", data);
+    render_enid(".place_usabilidad_general", data);
     $('th').click(ordena_table_general);
 
 }
 let response_comparativa_dia = function(data) {
 
-    llenaelementoHTML(".place_prospectos_comparativa", data);
+    render_enid(".place_prospectos_comparativa", data);
     $(".info-dia-p").click(data_miembros_g);
     $(".info-d").click(data_eventos_g);
     console.log(data);
@@ -108,7 +108,7 @@ let indicadores = function(e) {
 let response_indicadores = function(data) {
 
     desbloqueda_form(".form_busqueda_global_enid");
-    llenaelementoHTML(".place_usabilidad", data);
+    render_enid(".place_usabilidad", data);
     $(".usuarios").click(resumen_usuarios);
     $(".contactos").click(resumen_mensajes);
     $(".solicitudes").click(resumen_compras);
@@ -148,7 +148,7 @@ let carga_metricas_desarrollo = function(e) {
 }
 let response_carga_metricas_desarrollo = function(data) {
 
-    llenaelementoHTML(".place_metricas_desarrollo", data);
+    render_enid(".place_metricas_desarrollo", data);
     $('th').click(ordena_table_general);
 }
 let carga_comparativas = function() {
@@ -159,7 +159,7 @@ let carga_comparativas = function() {
     e.preventDefault();
 }
 let response_carga_comparativa = function(data) {
-    llenaelementoHTML(".place_metricas_comparativa", data);
+    render_enid(".place_metricas_comparativa", data);
     $('th').click(ordena_table_general);
 }
 let  carga_solicitudes_cliente = function(e) {
@@ -171,7 +171,7 @@ let  carga_solicitudes_cliente = function(e) {
 }
 let response_carga_solicitudes_cliente = function(data) {
 
-    llenaelementoHTML(".place_metricas_servicio", data);
+    render_enid(".place_metricas_servicio", data);
     $('th').click(ordena_table_general);
 }
 let carga_repo_afiliacion = function(e) {
@@ -219,7 +219,7 @@ let resumen_usuarios = function() {
 }
 let response_resumen_usuarios = function(data) {
 
-    llenaelementoHTML(".place_reporte", data);
+    render_enid(".place_reporte", data);
     $(".pagination > li > a, .pagination > li > span").css("color", "white");
     $(".pagination > li > a, .pagination > li > span").click(function (e) {
         let page_html = $(this);
@@ -314,7 +314,7 @@ let  carga_repo_dispositivos = function(e) {
     e.preventDefault();
 }
 let info_usabilidad = function(data) {
-    llenaelementoHTML(".repo_usabilidad", data);
+    render_enid(".repo_usabilidad", data);
     $(".servicios").click(resumen_servicios);
     $(".usuarios").click(resumen_usuarios);
 }

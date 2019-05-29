@@ -29,15 +29,15 @@ function registro_direccion(){
 		request_enid( "POST",  data_send , url , response_registro_direccion);
 	}else{
 		recorrepage("#asentamiento");										
-		llenaelementoHTML( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");
+		render_enid( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");
 	}
 }
 function muestra_error_codigo(flag_error){
-	llenaelementoHTML( ".place_codigo_postal" ,  "");
+	render_enid( ".place_codigo_postal" ,  "");
 	if (flag_error ==  1) {
 		$(".codigo_postal").css("border" , "1px solid rgb(13, 62, 86)");			
 		let mensaje_user =  "Codigo postal invalido, verifique"; 		
-		llenaelementoHTML( ".place_codigo_postal" ,  "<span class='alerta_enid'>" + mensaje_user + "</span>");
+		render_enid( ".place_codigo_postal" ,  "<span class='alerta_enid'>" + mensaje_user + "</span>");
 		recorrepage("#codigo_postal");
 	}
 }

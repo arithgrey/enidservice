@@ -21,7 +21,7 @@ let carga_productos_sugeridos = function(){
 
 let response_carga_productos = function(data){
 	if (data["sugerencias"] == undefined ){				
-		llenaelementoHTML(".place_tambien_podria_interezar" , data);						
+		render_enid(".place_tambien_podria_interezar" , data);						
 	}
 }
 
@@ -32,7 +32,7 @@ let carga_valoraciones = function(){
 }
 
 let response_carga_valoraciones = function(data){
-	llenaelementoHTML(".place_valoraciones" , data);
+	render_enid(".place_valoraciones" , data);
 
 	if(get_option("desde_valoracion") ==  1){
 		recorrepage(".place_valoraciones");				
@@ -40,7 +40,7 @@ let response_carga_valoraciones = function(data){
 	}
 	$(".ordenar_valoraciones_button").click(ordenar_valoraciones);			
 	let valoracion_persona =  $(".contenedor_promedios").html();
-	llenaelementoHTML(".valoracion_persona" , valoracion_persona);
+	render_enid(".valoracion_persona" , valoracion_persona);
 	$(".valoracion_persona_principal .valoracion_persona .estrella").css("font-size" , "1.2em");
 	$(".valoracion_persona_principal .valoracion_persona .promedio_num").css("font-size" , "1.2em");
 			
@@ -71,7 +71,7 @@ let ordenar_valoraciones = function(e){
 					   1 : 0;
 
 					});
-				llenaelementoHTML(".contenedor_global_recomendaciones" , listitems);
+				render_enid(".contenedor_global_recomendaciones" , listitems);
 				set_option("orden" , "asc");			
 		break;
 		case 1:
@@ -85,7 +85,7 @@ let ordenar_valoraciones = function(e){
 				   1 : 0;
 
 				});
-			llenaelementoHTML(".contenedor_global_recomendaciones" , listitems);
+			render_enid(".contenedor_global_recomendaciones" , listitems);
 			
 		break;
 		case 2:
@@ -110,7 +110,7 @@ let respuesta_add_valoracion = function(data){
 	
 	
 	$("#agregar_a_lista_deseos_add").empty();	
-	llenaelementoHTML("#agregar_a_lista_deseos_add" , "<div class='btn_add_list'>AÑADISTE A TU LISTA DE DESEOS ESTE PRODUCTO! <i class='fa fa-gift'></i></div><br>");
+	render_enid("#agregar_a_lista_deseos_add" , "<div class='btn_add_list'>AÑADISTE A TU LISTA DE DESEOS ESTE PRODUCTO! <i class='fa fa-gift'></i></div><br>");
 	redirect("../lista_deseos");
 	
 	

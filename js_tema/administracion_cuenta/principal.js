@@ -34,7 +34,7 @@ let  carga_direccion_usuario = function(){
 let response_direccion_usuario = function(data){
 
 
-	llenaelementoHTML(".direcciones" , data);
+	render_enid(".direcciones" , data);
 	$(".codigo_postal").keyup(auto_completa_direccion);						
 	$(".numero_exterior").keyup(function (){quita_espacios(".numero_exterior");});
 	$(".numero_interior").keyup(function (){quita_espacios(".numero_interior"); });					
@@ -59,7 +59,7 @@ let  registra_direccion_usuario = function(e){
 			$(".place_asentamiento").empty();		
 		}else{
 			recorrepage("#asentamiento");										
-			llenaelementoHTML( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");					
+			render_enid( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");					
 		}		
 	}
 	e.preventDefault();
@@ -153,7 +153,7 @@ let  set_password = function(e){
 			actualiza_password(anterior , nuevo , confirma); 			
 			break;
 		case 2:			
-			llenaelementoHTML(".msj_password" , "La nueva contraseña no puede ser igual a la actual ");
+			render_enid(".msj_password" , "La nueva contraseña no puede ser igual a la actual ");
 			break;
 		default: 
 			break;
@@ -173,23 +173,6 @@ let resp_actualizacion_pass = function(data){
 		show_response_ok_enid(".msj_password" , "Contraseña actualizada, inicia sessión para verificar el cambio.");	
 		setInterval('termina_session()',3000);
 	}else{
-		llenaelementoHTML(".msj_password" , data );			
+		render_enid(".msj_password" , data );			
 	}
-};
-
-/*
-function auto_completa_direccion(){
-	
-
-	
-	quita_espacios(".codigo_postal"); 	
-	let cp = get_parameter(".codigo_postal");
-	let numero_caracteres = cp.length; 
-	if(numero_caracteres > 4 ) {
-		let url 		=  "../portafolio/index.php/api/portafolio/cp/format/json/";	
-		let data_send 	=  {"cp" : cp , "delegacion" : get_delegacion() };
-		request_enid( "GET",  data_send , url , response_auto_complete_direccion );
-	}
-
 }
-*/

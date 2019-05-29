@@ -65,10 +65,10 @@ let carga_servicios = function () {
 let respuesta_carga_servicios = function (data) {
 
     if (data.num_servicios != undefined) {
-        llenaelementoHTML(".place_servicios", data.info_servicios);
+        render_enid(".place_servicios", data.info_servicios);
     } else {
 
-        llenaelementoHTML(".place_servicios", data);
+        render_enid(".place_servicios", data);
         $(".servicio").click(carga_info_servicio);
         $(".pagination > li > a, .pagination > li > span").click(function (e) {
             let page_html = $(this);
@@ -108,7 +108,7 @@ let carga_informacion_servicio = function (num = 1) {
 
 let respuesta_informacion_servicio = function (data) {
 
-    llenaelementoHTML(".place_servicios", data);
+    render_enid(".place_servicios", data);
     $(".cancelar_carga_imagen").click(cancelar_carga_imagen);
     $(".menu_meta_key_words").click(carga_sugerencias_meta_key_words);
     $(".agregar_img_servicio").click(carga_form_img);
@@ -358,7 +358,7 @@ let valida_url_youtube = function () {
     } else {
 
         $(input).css("border", "1px solid rgb(13, 62, 86)");
-        llenaelementoHTML(place_msj, "<div class='alerta_enid'>" + mensaje_user + "</div>");
+        render_enid(place_msj, "<div class='alerta_enid'>" + mensaje_user + "</div>");
         return 0;
     }
 
@@ -424,7 +424,7 @@ let carga_grupos = function () {
 
 
 let respuesta_grupos = function (data) {
-    llenaelementoHTML(".place_grupos", data);
+    render_enid(".place_grupos", data);
     $(".grupo").change(function () {
         let nuevo_grupo = get_parameter(".grupo");
         set_option("nuevo_grupo", nuevo_grupo);
@@ -448,7 +448,7 @@ let carga_info_grupos = function () {
 }
 let respuesta_info_grupos = function (data) {
 
-    llenaelementoHTML(".place_info_grupos", data);
+    render_enid(".place_info_grupos", data);
     $(".servicio").click(carga_info_servicio);
     $(".nuevo_grupo_servicios").click(carga_form_nuevo_grupo);
     $(".agregar_servicios_grupo").click(agregar_servicio_grupo);
@@ -461,7 +461,7 @@ let carga_form_nuevo_grupo = function () {
     request_enid("GET", data_send, url, respuesta_nuevo_grupo, ".place_info_grupos");
 }
 let respuesta_nuevo_grupo = function (data) {
-    llenaelementoHTML(".place_grupos", data);
+    render_enid(".place_grupos", data);
     $(".form_grupo_sistema").submit(agregar_grupo_sistema);
 }
 let agregar_grupo_sistema = function (e) {
@@ -493,7 +493,7 @@ let cargar_lista_servicios_grupo = function () {
 
 
 let respuestas_cargar_lista_servicios = function (data) {
-    llenaelementoHTML(".place_servicios_en_grupos", data);
+    render_enid(".place_servicios_en_grupos", data);
     $(".grupo_servicio").click(agrega_quita_servicio_grupo);
 }
 
@@ -708,7 +708,7 @@ let carga_listado_categorias = function () {
 
 let respuestas_primer_nivel = function (data) {
 
-    llenaelementoHTML(".primer_nivel_seccion", data);
+    render_enid(".primer_nivel_seccion", data);
     if (get_option("selected_1") == 1) {
         selecciona_valor_select(".nivel_1", get_option("selected_num_1"));
     }
@@ -742,7 +742,7 @@ let carga_listado_categorias_segundo_nivel = function () {
 
 let muestra_segundo_nivel = function (data) {
 
-    llenaelementoHTML(".segundo_nivel_seccion", data);
+    render_enid(".segundo_nivel_seccion", data);
     if (get_option("selected_2") == 1) {
         selecciona_valor_select(".nivel_2", get_option("selected_num_2"));
     }
@@ -779,7 +779,7 @@ let carga_listado_categorias_tercer_nivel = function () {
 
 let muestra_t_nivel = function (data) {
 
-    llenaelementoHTML(".tercer_nivel_seccion", data);
+    render_enid(".tercer_nivel_seccion", data);
     if (get_option("selected_3") == 1) {
         selecciona_valor_select(".nivel_3", get_option("selected_num_3"));
     }
@@ -813,7 +813,7 @@ let carga_listado_categorias_cuarto_nivel = function () {
 
 let muestras_c_nivel = function (data) {
 
-    llenaelementoHTML(".cuarto_nivel_seccion", data);
+    render_enid(".cuarto_nivel_seccion", data);
     if (get_option("selected_4") == 1) {
         selecciona_valor_select(".nivel_4", get_option("selected_num_4"));
     }
@@ -851,7 +851,7 @@ let carga_listado_categorias_quinto_nivel = function () {
 
 let muestra_q_nivel = function (data) {
 
-    llenaelementoHTML(".quinto_nivel_seccion", data);
+    render_enid(".quinto_nivel_seccion", data);
     $(".quinto_nivel_seccion .nivel_5").change(carga_listado_categorias_sexto_nivel);
     $(".nueva_categoria_producto").click(agregar_categoria_servicio);
     recorrepage(".quinto_nivel_seccion");
@@ -881,7 +881,7 @@ let carga_listado_categorias_sexto_nivel = function () {
 
 let muestra_sexo_nivel = function (data) {
 
-    llenaelementoHTML(".sexto_nivel_seccion", data);
+    render_enid(".sexto_nivel_seccion", data);
     $(".nueva_categoria_producto").click(agregar_categoria_servicio);
     set_option("agregar_categoria_6", 0);
     add_cancelar_movil();
@@ -1064,7 +1064,7 @@ let carga_listado_colores = function () {
     request_enid("GET", data_send, url, respuesta_listado_colores, ".place_colores_disponibles");
 }
 let respuesta_listado_colores = function (data) {
-    llenaelementoHTML(".place_colores_disponibles", data);
+    render_enid(".place_colores_disponibles", data);
     $(".colores").click(agrega_color_servicio);
     recorrepage("#seccion_colores_info");
 }
@@ -1140,7 +1140,7 @@ let add_cancelar_movil = function () {
     empty_elements([".add_cancelar"]);
     if (is_mobile() == 1 && get_parameter(".nueva_categoria_producto") !== undefined) {
         let btn_cancelar = "<div class='cancelar_registro'>REGRESAR</div>";
-        llenaelementoHTML(".add_cancelar", btn_cancelar);
+        render_enid(".add_cancelar", btn_cancelar);
         $(".cancelar_registro").click(cancelar_registro);
     }
 }
@@ -1155,7 +1155,7 @@ let carga_sugerencias_meta_key_words = function () {
 
 let muestra_sugerencias_meta_key_words = function (data) {
 
-    llenaelementoHTML(".contenedor_sugerencias_tags", data);
+    render_enid(".contenedor_sugerencias_tags", data);
     let tag_servicio_registrados = $('.tag_servicio');
     let arr_registros = [];
     $.each(tag_servicio_registrados, function (i, val) {
@@ -1195,7 +1195,7 @@ let carga_tallas = function () {
 let muestra_clasificaciones_servicio = function (data) {
 
     if (array_key_exists("options", data)) {
-        llenaelementoHTML(".place_tallas_disponibles", data.options);
+        render_enid(".place_tallas_disponibles", data.options);
         $(".talla_servicio").click(actualiza_talla_servicio);
     }
 }

@@ -60,7 +60,7 @@ let carga_usuarios = function(){
 }
 let response_carga_usuario = function(data){
 	let place 		= 	get_place_usuarios();	
-	llenaelementoHTML(place , data);		
+	render_enid(place , data);		
 	$(".pagination > li > a, .pagination > li > span").click(function(e){				
 			set_option("page", $(this).text());
 			carga_usuarios();
@@ -131,7 +131,7 @@ let get_puestos_por_cargo = function(){
 }
 let response_puesto_por_cargo = function(data){
 
-	llenaelementoHTML(".place_puestos", data);
+	render_enid(".place_puestos", data);
 	selecciona_select(".form-miembro-enid-service .puesto" , get_option("perfil"));		
 }
 let actualizacion_usuario = function(e){
@@ -145,16 +145,16 @@ let actualizacion_usuario = function(e){
 }
 let response_actualizacion_usuario = function(data , data_send){
 
-	llenaelementoHTML(".place_correo_incorrecto" , "");		
+	render_enid(".place_correo_incorrecto" , "");		
 	if (data_send.usuario_existente != "0") {
-		llenaelementoHTML(".place_correo_incorrecto" , "<span class='alerta_enid'>" + data.usuario_existente+ "</span>");
+		render_enid(".place_correo_incorrecto" , "<span class='alerta_enid'>" + data.usuario_existente+ "</span>");
 	}if (data.registro_usuario == true ){			
-		llenaelementoHTML(".place_status_registro", data);			
+		render_enid(".place_status_registro", data);			
 		$("#tab_productividad").tab("show");		
 		$("#tab_equipo_enid_service").tab("show");	
 			
 	}if (data.modificacion_usuario ==  true) {
-		llenaelementoHTML(".place_status_registro", data);			
+		render_enid(".place_status_registro", data);			
 		$("#tab_productividad").tab("show");		
 		$("#tab_equipo_enid_service").tab("show");	
 	}	
@@ -168,7 +168,7 @@ let  carga_mapa_menu = function(){
 	
 }
 let response_carga_mapa = function(data){
-	llenaelementoHTML(".place_perfilles_permisos" , data);		
+	render_enid(".place_perfilles_permisos" , data);		
 	recorrepage(".tab-content");
 	$(".perfil_recurso").click(modifica_accesos_usuario);
 }

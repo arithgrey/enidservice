@@ -576,27 +576,7 @@ class Cobranza extends REST_Controller
 		$q["secret"] = $q["password"];
 		return $this->principal->api($api, $q, "json", "POST", 0, 1, "login");
 	}
-	/*
-	function resumen_pendientes_persona_GET(){
 
-		$param =  $this->get();
-		$param["id_usuario"] = $this->id_usuario;
-
-		$data["saldos_pendientes"] =
-		$this->cobranzamodel->get_saldos_pendientes_usuario($param);
-		$this->load->view("cobranza/principal_persona", $data);
-	}
-	*/
-	/*
-	function resumen_realizados_persona_GET(){
-
-		$param =  $this->get();
-		$param["id_usuario"] = $this->id_usuario;
-		$saldos =  $this->cobranzamodel->get_saldos_realizados_usuario($param);
-		$saldos =  $this->agrega_estatus_enid_service($saldos);
-		$data["saldos_pendientes"] = $saldos;
-		$this->load->view("cobranza/principal_persona_realizados", $data);
-	}  */
 
 	function valida_envio_notificacion_nuevo_usuario($param)
 	{
@@ -610,35 +590,6 @@ class Cobranza extends REST_Controller
 		$api = "emp/solicitud_usuario";
 		return $this->principal->api($api, $q);
 	}
-	/*
-	function resumen_num_pendientes_GET(){
-
-		$param =  $this->get();
-
-		$param["id_usuario"] =  $this->id_usuario;
-		$num_pendientes  =
-		$this->cobranzamodel->get_num_saldos_pendientes($param);
-		$this->response($num_pendientes);
-	}
-*/
-	/*
-	 function resumen_num_pendientes_persona_GET(){
-		$param              =  $this->get();
-		$num_pendientes     =
-		$this->cobranzamodel->get_num_saldos_pendientes_persona($param);
-		$new_response       = "";
-		if ($num_pendientes >0){
-
-			$new_response = "<span class='alerta_llamadas_agendadas'>
-								".$num_pendientes.icon('fa fa-usd')."
-
-							</span>";
-		}
-
-		$this->response($new_response);
-	}
-	*/
-
 	function agrega_data_cliente($data)
 	{
 
@@ -684,66 +635,6 @@ class Cobranza extends REST_Controller
 		$param["id_servicio"] = $param["servicio"];
 		return $param;
 	}
-	/*
-	function recibo_por_pagar_GET(){
-
-		$param = $this->get();
-		$data_respose =  $this->cobranzamodel->valida_recibo_por_pagar($param);
-		$this->response(crea_data_deuda_pendiente($data_respose) );
-	}
-	*/
-	/*
-
-	*/
-	/*
-	function ticket_pendiente_pago($param , $recibo , $data_complete){
-
-		$id_usuario =  $recibo[0]["id_usuario"];
-
-		if (get_param_def($param , "cobranza") ==  1){
-
-			$data_complete["costo_envio_sistema"]   =  $this->get_costo_envio($recibo[0]);
-
-
-
-
-			$data_complete["id_recibo"]             =   $param["id_recibo"];
-			$id_usuario_venta                       =   $recibo[0]["id_usuario_venta"];
-			$data_complete["id_usuario_venta"]      =   $id_usuario_venta;
-			$informacion_envio                      =   $this->get_direccion_pedido($param["id_recibo"]);
-			$data_complete["informacion_envio"]     =   $informacion_envio;
-			$this->load->view("cobranza/pago_al_momento" , $data_complete);
-
-
-		}else{
-
-			$data_complete["usuario"]             =
-			$this->principal->get_info_usuario($id_usuario);
-			$data_complete["costo_envio_sistema"] =  $this->get_costo_envio($recibo[0]);
-
-			$this->load->view("cobranza/resumen_no_aplica" , $data_complete);
-		}
-
-	}
-	*/
-	/*
-	function ganancias_fecha_GET(){
-
-		$param =  $this->get();
-		$num_ventas =  $this->cobranzamodel->get_ventas_dia($param);
-		$this->response($num_ventas);
-	}
-
-	*/
-	/*
-	function solicitudes_fecha_GET(){
-
-		$param      =  $this->get();
-		$num_ventas =  $this->cobranzamodel->get_solicitudes_venta_dia($param);
-		$this->response($num_ventas);
-	}
-	*/
-
 	function comision_GET()
 	{
 		$param = $this->get();

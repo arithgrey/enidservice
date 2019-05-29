@@ -13,10 +13,8 @@ class Home extends CI_Controller
     function index()
     {
 
-        $data = $this->principal->val_session("");
-        $id_usuario = $this->principal->get_session("idusuario");
-        $data["usuario"] = $this->principal->get_info_usuario($id_usuario);
-        $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+        $data = $this->principal->val_session();
+        $data["usuario"] = $this->principal->get_info_usuario($this->principal->get_session("idusuario"));
         $data = $this->principal->getCssJs($data, "administracion_cuenta");
         $this->principal->show_data_page($data, 'home');
 

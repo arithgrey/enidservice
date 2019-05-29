@@ -16,7 +16,7 @@ class Home extends CI_Controller
 
         $data = $this->principal->val_session("Solicita una llamada aquí");
         $data["departamentos"] = $this->get_departamentos_enid();
-        $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+        
         $data =  $this->principal->getCssJs($data , "contacto");
         $param = $this->input->post();
 

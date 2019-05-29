@@ -348,7 +348,7 @@ class Servicio extends REST_Controller
 			(array_key_exists("quinto_nivel", $param)) ? $param["quinto_nivel"] : 0;
 
 		$nombre_servicio = $param["nombre_servicio"];
-		$valor_precio = get_info_variable($param, "precio");
+		$valor_precio = get_param_def($param, "precio");
 
 		$lista_clasificaciones = [$primer_nivel, $segundo_nivel, $tercer_nivel, $cuarto_nivel, $quinto_nivel];
 
@@ -671,7 +671,7 @@ class Servicio extends REST_Controller
 			$param = $this->get();
 			$param["q"] = $this->get("q");
 			$param["id_usuario"] = $this->id_usuario;
-			$param["id_clasificacion"] = get_info_variable($param, "q2");
+			$param["id_clasificacion"] = get_param_def($param, "q2");
 			$param["extra"] = $param;
 			$param["resultados_por_pagina"] = 12;
 			$param["agrega_clasificaciones"] = 0;
@@ -716,7 +716,7 @@ class Servicio extends REST_Controller
 		$config["per_page"] = 12;
 		$config["q"] = $param["q"];
 		$config["q2"] = 0;
-		$config["page"] = get_info_variable($this->input->get(), "page");
+		$config["page"] = get_param_def($this->input->get(), "page");
 		$busqueda = $param["q"];
 		$num_servicios = $servicios["num_servicios"];
 		$this->set_option("in_session", 1);
@@ -1087,7 +1087,7 @@ class Servicio extends REST_Controller
 
 		$param = $this->get();
 		$in_session = $this->principal->is_logged_in();
-		$id_usuario = ($in_session) ? $this->id_usuario : get_info_variable($param, "id_usuario");
+		$id_usuario = ($in_session) ? $this->id_usuario : get_param_def($param, "id_usuario");
 		$param["id_usuario"] = $id_usuario;
 		if (array_key_exists("es_empresa", $param) != false) {
 			$this->add_gamificacion_search($param);

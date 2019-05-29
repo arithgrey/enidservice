@@ -31,7 +31,7 @@ function carga_info_validacion(){
 			}
 	}).done(function(data){
 
-llenaelementoHTML(".place_info_clientes_validacion" , data);
+render_enid(".place_info_clientes_validacion" , data);
 $(".info_persona").click(function(e){
     id_persona =  get_parameter_enid($(this) , "id");
     set_persona(id_persona);

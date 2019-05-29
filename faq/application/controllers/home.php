@@ -12,7 +12,7 @@ class Home extends CI_Controller
     function index()
     {
 
-        $data = $this->principal->val_session("");
+        $data = $this->principal->val_session();
         $data["respuesta"] = "";
         $data["faqs_categoria"] = "";
         $data["r_sim"] = "";
@@ -63,7 +63,7 @@ class Home extends CI_Controller
         }
 
         $data["param"] = $this->input->get();
-        $data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+        
         $data = $this->principal->getCssJs($data,"faq");
         $this->principal->show_data_page($data,   get_format_faqs($data) , 1);
 
