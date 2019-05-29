@@ -52,7 +52,7 @@ class codigo_postal extends REST_Controller
 				$id_usuario = $this->get_id_usuario($param);
 				$response["registro_direccion_usuario"] = $this->set_direcciones_usuario($id_usuario, $id_direccion, $param["direccion_principal"]);
 			}
-			$response["externo"] = get_info_variable($param, "externo");
+			$response["externo"] = get_param_def($param, "externo");
 		}
 
 		$this->response($response);

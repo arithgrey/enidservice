@@ -100,7 +100,7 @@ let registro = function (e) {
             }
         } else {
             desbloqueda_form(".form-miembro-enid-service");
-            llenaelementoHTML(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
+            render_enid(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
         }
 
     }
@@ -185,7 +185,7 @@ let solicitud_cotizacion = function (e) {
             }
         } else {
             desbloqueda_form(".form-miembro-enid-service");
-            llenaelementoHTML(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
+            render_enid(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
         }
 
     }
@@ -300,7 +300,7 @@ let config_direccion = function () {
     }
 
     $(".contenedo_compra_info").show();
-    llenaelementoHTML(".contenedo_compra_info", ficha);
+    render_enid(".contenedo_compra_info", ficha);
     recorrepage(".contenedor_compra");
     $(".codigo_postal").keyup(auto_completa_direccion);
     $(".numero_exterior").keyup(function () {

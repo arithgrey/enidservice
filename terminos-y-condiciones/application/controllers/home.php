@@ -13,8 +13,8 @@ class Home extends CI_Controller
 	function index()
 	{
 
-		$data = $this->principal->val_session("");
-		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+		$data = $this->principal->val_session();
+		
 		$vista = "secciones/terminos_condiciones";
 		$titulo = "TÉRMINOS Y CONDICIONES";
 		$data["vista"] = $vista;

@@ -122,8 +122,8 @@ let response_estaciones = function (data) {
 
 
     showonehideone(".place_estaciones_metro", ".place_lineas");
-    llenaelementoHTML(".place_estaciones_metro", data);
-    llenaelementoHTML(".nombre_linea_metro", texto_centro);
+    render_enid(".place_estaciones_metro", data);
+    render_enid(".nombre_linea_metro", texto_centro);
     $(".punto_encuentro").click(muestra_horarios);
     $(".search").keypress(function (e) {
 
@@ -154,7 +154,7 @@ let muestra_horarios = function () {
         $(".mensaje_cobro_envio").hide();
         set_parameter(".punto_encuentro_form", id);
         set_option("id_punto_encuentro", id);
-        llenaelementoHTML(".nombre_estacion_punto_encuentro", "<span class='strong'>ESTACIÓN:</span> " + nombre_estacion);
+        render_enid(".nombre_estacion_punto_encuentro", "<span class='strong'>ESTACIÓN:</span> " + nombre_estacion);
         $(".nombre_estacion_punto_encuentro").addClass("nombre_estacion_punto_encuentro_extra");
 
 
@@ -162,7 +162,7 @@ let muestra_horarios = function () {
         let texto_cargos_gratis = "<span class='text_costo_envio_gratis'>ENVÍO GRATIS!</span>";
 
         texto_cargos_entrega = (flag_envio_gratis > 0) ? texto_cargos_gratis : texto_cargos_entrega;
-        llenaelementoHTML(".cargos_por_entrega", "<span class='strong'>CARGO POR ENTREGA:</span>" + texto_cargos_entrega);
+        render_enid(".cargos_por_entrega", "<span class='strong'>CARGO POR ENTREGA:</span>" + texto_cargos_entrega);
         $(".cargos_por_entrega").addClass("cargos_por_entrega_extra");
         $(".contenedor_estaciones").hide();
 
@@ -170,7 +170,7 @@ let muestra_horarios = function () {
         if (flag_envio_gratis < 1) {
 
             let text = "Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " + costo_envio + " pesos por concepto de gastos de envío";
-            llenaelementoHTML(".mensaje_cobro_envio", text);
+            render_enid(".mensaje_cobro_envio", text);
             $(".mensaje_cobro_envio").show();
         }
 

@@ -17,7 +17,7 @@ let solicita_saldo_amigo = function (e) {
 let response_solicita_saldo_amigo = function (data) {
     let url_movimientos = "../movimientos";
     let msj = "Tu solicitud fue enviada, cuando tu amigo responda, tendrás un notificación, puedes consultar tus solicitudes <a href='" + url_movimientos + "' class='a_enid_blue_sm white'>aquí</a>";
-    llenaelementoHTML(".place_solicitud_amigo", "<br><div class='mensaje_envio_amigo'>" + msj + "</div>");
+    render_enid(".place_solicitud_amigo", "<br><div class='mensaje_envio_amigo'>" + msj + "</div>");
 }
 let before_solicitud_saldo = function () {
     bloquea_form(".solicitar_saldo_amigo_form");

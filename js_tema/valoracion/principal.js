@@ -47,7 +47,7 @@ let registra_valoracion = function(e){
 	let recomendaria =  get_option("recomendaria");
 	if (recomendaria == 3){
 		/*Agregamos comentario para que seleccione opción*/
-		llenaelementoHTML(".place_recomendaria" , "<span class='nota_recomendarias'>¿Recomendarías este artículo?</span>");				 				
+		render_enid(".place_recomendaria" , "<span class='nota_recomendarias'>¿Recomendarías este artículo?</span>");				 				
 	}else{
 
 		$(".place_recomendaria").empty();
@@ -78,7 +78,7 @@ let response_registro_valoracion = function(data){
 
 	}	
 
-	llenaelementoHTML(".place_registro_valoracion" , "Tu valoración quedó registrada!," + mira_tu_valoracion+extra_invitacion_a_enid);				
+	render_enid(".place_registro_valoracion" , "Tu valoración quedó registrada!," + mira_tu_valoracion+extra_invitacion_a_enid);				
 	if (data.existencia_usuario == 0){ 
 		$(".registro_cuenta").css("font-size", "1.5em");					
 		$(".registro_cuenta").css("color", "#0c4075");

@@ -7,7 +7,7 @@ let get_conceptos = function () {
 }
 let response_conceptos = function (data) {
 
-    llenaelementoHTML(".contenedor_conceptos_privacidad", data);
+    render_enid(".contenedor_conceptos_privacidad", data);
     $(".concepto_privacidad").click(update_conceptos_privacidad);
 
 }

@@ -607,7 +607,7 @@ class usuario extends REST_Controller
 			$per_page = 10;
 			$param["resultados_por_pagina"] = $per_page;
 			$data["miembros"] = $this->usuario_model->get_equipo_enid_service($param);
-			$config_paginacion["page"] = get_info_variable($param, "page");
+			$config_paginacion["page"] = get_param_def($param, "page");
 			$config_paginacion["totales_elementos"] = $total;
 			$config_paginacion["per_page"] = $per_page;
 			$config_paginacion["q"] = "";
@@ -629,7 +629,7 @@ class usuario extends REST_Controller
 		$per_page = 10;
 		$param["resultados_por_pagina"] = $per_page;
 		$data["miembros"] = $this->usuario_model->get_usuarios_periodo($param);
-		$config_paginacion["page"] = get_info_variable($param, "page");
+		$config_paginacion["page"] = get_param_def($param, "page");
 		$config_paginacion["totales_elementos"] = $total;
 		$config_paginacion["per_page"] = $per_page;
 		$config_paginacion["q"] = "";
@@ -815,7 +815,7 @@ class usuario extends REST_Controller
 	{
 
 		$api = "sess/start";
-		$q["t"] = "x=0.,!><!$#";
+		$q["t"] = $this->config->item('barer');
 		$q["secret"] = $q["password"];
 		return $this->principal->api($api, $q, "json", "POST", 0, 1, "login");
 	}

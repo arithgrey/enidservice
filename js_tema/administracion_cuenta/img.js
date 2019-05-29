@@ -9,7 +9,7 @@ let carga_form_imagenes_usuario = function () {
 }
 let response_carga_form_imagenes = function (data) {
 
-    llenaelementoHTML(".place_form_img", data);
+    render_enid(".place_form_img", data);
     $(".imagen_img").change(upload_imgs_enid_pre);
 
 }

@@ -58,7 +58,7 @@ let response_carga_productos_sugeridos = function(data) {
     $(".place_tambien_podria_interezar").empty();
     if (data.sugerencias == undefined && data.sugerencias != 0 ) {
 
-        llenaelementoHTML(".place_tambien_podria_interezar", data);
+        render_enid(".place_tambien_podria_interezar", data);
     }
 }
 
@@ -70,7 +70,7 @@ let carga_valoraciones = function() {
 
 let response_carga_valoraciones = function(data) {
 
-    llenaelementoHTML(".place_valoraciones", data);
+    render_enid(".place_valoraciones", data);
 
     if (get_option("desde_valoracion") == 1) {
         recorrepage(".place_valoraciones");
@@ -79,7 +79,7 @@ let response_carga_valoraciones = function(data) {
     }
     $(".ordenar_valoraciones_button").click(ordenar_valoraciones);
     let valoracion_persona = $(".contenedor_promedios").html();
-    llenaelementoHTML(".valoracion_persona", valoracion_persona);
+    render_enid(".valoracion_persona", valoracion_persona);
     $(".valoracion_persona_principal .valoracion_persona .estrella").css("font-size", "1.2em");
     $(".valoracion_persona_principal .valoracion_persona .promedio_num").css("font-size", "1.2em");
 
@@ -102,7 +102,7 @@ let ordenar_valoraciones = function(e) {
                         1 : 0;
 
             });
-            llenaelementoHTML(".contenedor_global_recomendaciones", listitems);
+            render_enid(".contenedor_global_recomendaciones", listitems);
             set_option("orden", "asc");
 
 
@@ -118,7 +118,7 @@ let ordenar_valoraciones = function(e) {
 
             });
 
-            llenaelementoHTML(".contenedor_global_recomendaciones", listitems);
+            render_enid(".contenedor_global_recomendaciones", listitems);
 
             break;
         case 2:

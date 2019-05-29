@@ -51,10 +51,10 @@ class Home extends CI_Controller
 	function load_pre()
 	{
 
-		$data = $this->principal->val_session("");
+		$data = $this->principal->val_session();
 		$data["clasificaciones_departamentos"] = "";
 		if ($this->agent->is_mobile() == FALSE) {
-			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+			
 		}
 
         $data   =  $this->principal->getCSSJs($data, "producto_pre");
@@ -85,15 +85,15 @@ class Home extends CI_Controller
 
 	    $id_servicio = get_param_def($param, "producto" ,0,1);
 		$this->set_option("id_servicio", $id_servicio);
-		$data = $this->principal->val_session("");
-		$data["proceso_compra"] = get_info_variable($param, "proceso");
+		$data = $this->principal->val_session();
+		$data["proceso_compra"] = get_param_def($param, "proceso");
 		if ($data["in_session"] == 1) {
 			$data["proceso_compra"] = 1;
 		}
 
 		$data["clasificaciones_departamentos"] = "";
 		if ($this->agent->is_mobile() == FALSE) {
-			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+			
 		}
 
 		if ($id_servicio == 0) {
@@ -121,7 +121,7 @@ class Home extends CI_Controller
 	{
 
 		$id_servicio = $this->get_option("id_servicio");
-		$data["q2"] = get_info_variable($param, "q2");
+		$data["q2"] = get_param_def($param, "q2");
 		$servicio = $this->principal->get_base_servicio($id_servicio);
 		$data["tallas"] = $this->get_tallas($id_servicio);
 		$id_usuario = 0;
@@ -273,10 +273,10 @@ class Home extends CI_Controller
 	function view_recibo_registrado()
 	{
 
-		$data = $this->principal->val_session("");
+		$data = $this->principal->val_session();
 		$data["clasificaciones_departamentos"] = "";
 		if ($this->agent->is_mobile() == FALSE) {
-			$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+			
 		}
 		$param = $this->input->get();
 		$data["meta_keywords"] = "";

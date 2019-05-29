@@ -14,13 +14,13 @@ class Home extends CI_Controller
 
 		$data = $this->principal->val_session("Orden de compra");
 		$param = $this->input->get();
-		$q = get_info_variable($param, "q", 1);
+		$q = get_param_def($param, "q", 1);
 
 		if ($q > 0) {
 
 			$data["info_pago"] = $param;
-			$id_usuario = get_info_variable($param, "q3");
-			$data["concepto"] = get_info_variable($param, "concepto");
+			$id_usuario = get_param_def($param, "q3");
+			$data["concepto"] = get_param_def($param, "concepto");
 			$data["usuario"] = $this->principal->get_info_usuario($id_usuario);
 			$data =  $this->principal->getCSSJs($data, "pago_oxxo");
 			$this->principal->show_data_page($data, get_format_orden_compra($data["usuario"], $param,$this->config->item('numero_cuenta')) , 1);

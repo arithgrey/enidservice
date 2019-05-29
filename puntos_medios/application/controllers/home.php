@@ -13,8 +13,8 @@ class Home extends CI_Controller
 	{
 
 
-		$data = $this->principal->val_session("");
-		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+		$data = $this->principal->val_session();
+		
 		$param = $this->input->post();
 		$data["proceso_compra"] = 1;
 

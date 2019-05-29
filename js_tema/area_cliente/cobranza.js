@@ -34,12 +34,12 @@ let response_carga_info_resumen_pago_pendiente = function (data) {
 
 
     $(".resumen_pagos_pendientes").tab("show");
-    llenaelementoHTML(".place_resumen_servicio", data);
+    render_enid(".place_resumen_servicio", data);
     $(".cancelar_compra").click(confirmar_cancelacion_compra);
     $(".btn_direccion_envio").click(carga_informacion_envio);
 }
 let resposponse_confirma_cancelacion = function (data) {
-    llenaelementoHTML(".place_resumen_servicio", data);
+    render_enid(".place_resumen_servicio", data);
     $(".cancelar_orden_compra").click(cancela_compra);
 }
 let cancela_compra = function (e) {
@@ -68,7 +68,7 @@ let response_cancelacion_compra = function (data) {
 
 
         let response = "<div class='col-lg-8 col-lg-offset-2 text-center'>" + div2 + "" + div + "</div>";
-        llenaelementoHTML(".place_resumen_servicio", response);
+        render_enid(".place_resumen_servicio", response);
         $(".mis_compras_btn").click(carga_compras_usuario);
 
     }

@@ -14,5 +14,5 @@ let busqueda = function (e) {
 }
 let response_ventas_encuentro  = function (data) {
 
-    llenaelementoHTML(".time_line_ventas_puntos_encuentro", data);
+    render_enid(".time_line_ventas_puntos_encuentro", data);
 }

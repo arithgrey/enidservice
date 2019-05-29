@@ -10,7 +10,7 @@ let cargar_num_envios_a_validacion = function (){
 			data: data_send, 
 			beforeSend: function(){}
 	}).done(function(data){																						
-		llenaelementoHTML(".place_num_envios_a_validacion" , data);
+		render_enid(".place_num_envios_a_validacion" , data);
 		recorre_web_version_movil();
 
 	}).fail(function(){			
@@ -31,7 +31,7 @@ let cargar_num_agendados_email = function(){
 			data: data_send, 
 			beforeSend: function(){}
 	}).done(function(data){																						
-		llenaelementoHTML(".place_numero_agendados_email" , data);
+		render_enid(".place_numero_agendados_email" , data);
 
 	}).fail(function(){			
 		show_error_enid(".place_correo_envio" , "Error al cargar número de agendados en email");
@@ -51,9 +51,9 @@ let   cargar_num_agendados = function(){
 			}
 	}).done(function(data){																						
 
-		llenaelementoHTML(".place_num_agendados" , data.num_agendados_posibles_clientes);
-		llenaelementoHTML(".place_num_agendados_totales" , data.totales);
-		llenaelementoHTML(".place_num_agendados_llamar_despues" , data.num_agendados_llamar_despues );
+		render_enid(".place_num_agendados" , data.num_agendados_posibles_clientes);
+		render_enid(".place_num_agendados_totales" , data.totales);
+		render_enid(".place_num_agendados_llamar_despues" , data.num_agendados_llamar_despues );
 
 		
 	
@@ -75,7 +75,7 @@ let   cargar_num_clientes_restantes = function(){
 				show_load_enid(".place_llamada_hecha" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){																						
-		llenaelementoHTML(".place_num_productividad" , data);
+		render_enid(".place_num_productividad" , data);
 
 	}).fail(function(){			
 		show_error_enid(".place_llamada_hecha" , "Error ... ");

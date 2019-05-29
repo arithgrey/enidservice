@@ -20,7 +20,7 @@ class Home extends CI_Controller
         );
 
 		$data["f_pago"] = 1;
-		$data["clasificaciones_departamentos"] = $this->principal->get_departamentos();
+		
         $data = $this->principal->getCssJs($data, "sobre_enid");
 		$this->principal->show_data_page($data, get_format_descripcion() , 1);
 	}

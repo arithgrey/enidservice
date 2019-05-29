@@ -14,7 +14,7 @@ let response_respuestas = function (data, id) {
 
 
     let p = ".comentarios_" + id;
-    llenaelementoHTML(p, data);
+    render_enid(p, data);
     $('.summernote').summernote({
         placeholder: '--',
         tabsize: 2,

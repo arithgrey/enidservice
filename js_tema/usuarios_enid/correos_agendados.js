@@ -68,7 +68,7 @@ let cargar_info_agendados_email = function(){
 				show_load_enid(".place_info_correos_agendados" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){
-		llenaelementoHTML(".place_info_correos_agendados" , data);
+		render_enid(".place_info_correos_agendados" , data);
 
 			$(".info_persona_agendados").click(function(e){
 				id_persona =  get_parameter_enid($(this) , "id");

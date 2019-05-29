@@ -84,7 +84,7 @@ let response_carga_form_imagenes = function(data){
 	display_elements([".form_respuesta"],0);
 	recorrepage(".text_agregar_img");
 
-	llenaelementoHTML(".place_load_img_faq" , data);
+	render_enid(".place_load_img_faq" , data);
 	$("#guardar_img_faq").hide();
 	$(".imagen_img_faq").change(upload_imgs_enid_faq);
 }
