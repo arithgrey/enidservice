@@ -425,6 +425,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_form_fecha_recordatorio')) {
         function form_fecha_recordatorio($orden, $tipo_recortario)
         {
+            $lista_horarios =  lista_horarios()["select"];
 
             $x = heading_enid("RECORDATORIO", 3, "top_50");
             $r[] = form_open("", ["class" => "form_fecha_recordatorio letter-spacing-5 "]);
@@ -446,7 +447,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(icon("fa fa-clock-o") . " HORA", 3);
 
-            $r[] = div(lista_horarios(), 9);
+            $r[] = div($lista_horarios, 9);
             $r[] = input_hidden(
                 [
                     "class" => "recibo",
@@ -473,7 +474,7 @@ if (!function_exists('invierte_date_time')) {
         function get_form_fecha_entrega($data)
         {
 
-
+            $lista_horarios =  lista_horarios()["select"];
             $orden = $data["orden"];
             $r[] = form_open("", ["class" => "form_fecha_entrega"]);
             $r[] = heading_enid("FECHA DE ENTREGA", 4, "strong titulo_horario_entra");
@@ -493,14 +494,14 @@ if (!function_exists('invierte_date_time')) {
                 8);
 
             $r[] = label(icon("fa fa-clock-o") . " HORA DE ENCUENTRO", "col-lg-4 control-label");
-            $r[] = div(lista_horarios(), 8);
+            $r[] = div($lista_horarios, 8);
             $r[] = input_hidden(
                 [
                     "class" => "recibo",
                     "name" => "recibo",
                     "value" => $orden
                 ]);
-            $r[] = guardar("CONTINUAR", ["class" => "top_20"]);
+            $r[] = div(guardar("CONTINUAR", ["class" => "top_20"]),12);
             $r[] = place("place_notificacion_punto_encuentro");
             $r[] = form_close(place("place_fecha_entrega"));
             $response = append_data($r);
@@ -517,6 +518,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = '<form class="form_cantidad top_20">';
+            /*
             $r[] = div("SALDO CUBIERTO", "strong", 1);
             $r[] = div(input(
                 [
@@ -530,6 +532,7 @@ if (!function_exists('invierte_date_time')) {
 
                 ]),
                 10);
+            */
             $r[] = input_hidden(
                 [
                     "name" => "recibo",
@@ -1626,7 +1629,7 @@ if (!function_exists('invierte_date_time')) {
             }
             $encabezado = div("PUNTO DE ENCUENTRO", "encabezado_domicilio", 1);
             $encuentro = div(strtoupper($punto_encuentro), "contenido_domicilio", 1);
-            return div($encabezado . $encuentro, "contenedor_domicilio shadow border padding_20 top_40", 1);
+            return div($encabezado . $encuentro, "contenedor_domicilio shadow border padding_20 top_40");
 
         }
     }

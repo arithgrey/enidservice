@@ -212,7 +212,7 @@ if (!function_exists('invierte_date_time')) {
                     "name" => 'fecha_entrega',
                     "class" => "form-control input-sm ",
                     "type" => 'date',
-                    "value" => date("Y-m-d"),
+                    "value" => $minimo,
                     "min" => $minimo,
                     "max" => $maximo
                 ]),
