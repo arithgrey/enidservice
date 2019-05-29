@@ -305,6 +305,40 @@ if (!function_exists('invierte_date_time')) {
             return $response;
         }
     }
+    if (!function_exists('add_recibos_sin_costo')) {
+        function add_recibos_sin_costo($recibos)
+        {
+
+            $r = [];
+            $f = 0;
+            foreach ($recibos as $row) {
+
+                $id_recibo = $row["id_recibo"];
+                $saldo_cubierto = $row["saldo_cubierto"];
+                $text = div(heading_enid(icon(" fa fa-ticket ") . $saldo_cubierto . " MXN ", 3), "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
+
+
+                $r[] = anchor_enid($text,
+                    [
+                        "href" => "../pedidos/?costos_operacion=" . $id_recibo . "&saldado=" . $saldo_cubierto
+                    ]
+                );
+
+                $f++;
+            }
+
+            $response =
+                [
+                    "html" => append_data($r),
+                    "flag" => $f,
+
+                ];
+
+            return $response;
+
+        }
+    }
+
     if (!function_exists('add_valoraciones_sin_leer')) {
         function add_valoraciones_sin_leer($num, $id_usuario)
         {
@@ -631,6 +665,10 @@ if (!function_exists('invierte_date_time')) {
         $tareas_enid_service = $inf["tareas_enid_service"];
         $num_telefonico = $inf["numero_telefonico"];
 
+        $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);
+        $f = $f + $recibos_sin_costos_operacion["flag"];
+        $lista .= $recibos_sin_costos_operacion["html"];
+
 
         $recordatorios = add_recordatorios($info["recordatorios"]);
         $lista .= $recordatorios["html"];
@@ -711,6 +749,7 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
         }
+
         $response["num_tareas_pendientes_text"] = $f;
         $response["num_tareas_pendientes"] = $new_flag;
         $response["lista_pendientes"] = get_mensaje_inicial_notificaciones(1, $f) . $lista;

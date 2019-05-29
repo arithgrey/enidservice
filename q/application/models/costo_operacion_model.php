@@ -60,19 +60,38 @@ class Costo_operacion_model extends CI_Model
         return $this->delete($params_where);
     }
 
-    function get_num_type($id_recibo,  $id_tipo)
+    function get_num_type($id_recibo, $id_tipo)
     {
-        $query_get ="select count(*)num from costo_operacion where id_recibo = {$id_recibo} and id_tipo_costo = {$id_tipo} ";
+        $query_get = "select count(*)num from costo_operacion where id_recibo = {$id_recibo} and id_tipo_costo = {$id_tipo} ";
         return $this->db->query($query_get)->result_array()[0]["num"];
 
     }
+
     function get_qsum($in)
     {
 
-        $query_get ="select  sum(monto)num from costo_operacion where id_recibo in( {$in} )";
+        $query_get = "select  sum(monto)num from costo_operacion where id_recibo in( {$in} )";
         return $this->db->query($query_get)->result_array()[0]["num"];
 
     }
 
+    function get_recibos_sin_costos($id_usuario)
+    {
+        $query_get = "SELECT 
+                        id_proyecto_persona_forma_pago id_recibo, 
+                        saldo_cubierto 
+                        FROM 
+                        proyecto_persona_forma_pago  p  
+                        WHERE
+                        id_usuario =  $id_usuario
+                        AND 
+                        saldo_cubierto >  0 
+                        AND 
+                        id_proyecto_persona_forma_pago 
+                        NOT IN (SELECT id_recibo from costo_operacion)
+                        ORDER BY  id_proyecto_persona_forma_pago DESC LIMIT 5 ";
+
+        return $this->db->query($query_get)->result_array();
+    }
 
 }

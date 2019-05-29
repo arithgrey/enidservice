@@ -104,7 +104,9 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "underline top_50",
                     "style" => "font-size: 1.4em;color: #031326;",
                     "onclick" => "muestra_formulario_costo();"
-                ]);
+                ]
+            );
+
             return append_data($r);
 
 
@@ -425,7 +427,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_form_fecha_recordatorio')) {
         function form_fecha_recordatorio($orden, $tipo_recortario)
         {
-            $lista_horarios =  lista_horarios()["select"];
+            $lista_horarios = lista_horarios()["select"];
 
             $x = heading_enid("RECORDATORIO", 3, "top_50");
             $r[] = form_open("", ["class" => "form_fecha_recordatorio letter-spacing-5 "]);
@@ -474,7 +476,7 @@ if (!function_exists('invierte_date_time')) {
         function get_form_fecha_entrega($data)
         {
 
-            $lista_horarios =  lista_horarios()["select"];
+            $lista_horarios = lista_horarios()["select"];
             $orden = $data["orden"];
             $r[] = form_open("", ["class" => "form_fecha_entrega"]);
             $r[] = heading_enid("FECHA DE ENTREGA", 4, "strong titulo_horario_entra");
@@ -501,7 +503,7 @@ if (!function_exists('invierte_date_time')) {
                     "name" => "recibo",
                     "value" => $orden
                 ]);
-            $r[] = div(guardar("CONTINUAR", ["class" => "top_20"]),12);
+            $r[] = div(guardar("CONTINUAR", ["class" => "top_20"]), 12);
             $r[] = place("place_notificacion_punto_encuentro");
             $r[] = form_close(place("place_fecha_entrega"));
             $response = append_data($r);
@@ -582,7 +584,7 @@ if (!function_exists('invierte_date_time')) {
                     "id_tipo_costo"), "col-lg-12 top_30");
 
 
-            $r[] = div(guardar("AGREGAR", "top_30"), 12);
+            $r[] = div(guardar("AGREGAR", ["class" => "top_30"]), 12);
             $r[] = form_close(place("notificacion_registro_costo"));
             return div(append_data($r), 10, 1);
 
@@ -595,7 +597,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = div(heading_enid("UPS! NO ENCONTRAMOS EL NÚMERO DE ORDEN", 1, "funny_error_message" ), "text-center");
+            $r[] = div(heading_enid("UPS! NO ENCONTRAMOS EL NÚMERO DE ORDEN", 1, "funny_error_message"), "text-center");
             $r[] = div(
                 img(
                     [
@@ -742,7 +744,7 @@ if (!function_exists('invierte_date_time')) {
 
                     ]
                 );
-                $r[] = div(append_data($encuentro), "top_50 border padding_10 contenedor_listado d-flex flex-column justify-content-between " . $extra );
+                $r[] = div(append_data($encuentro), "top_50 border padding_10 contenedor_listado d-flex flex-column justify-content-between " . $extra);
 
                 $a++;
             }
