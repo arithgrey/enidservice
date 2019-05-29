@@ -80,5 +80,18 @@ class costo_operacion extends REST_Controller
         $this->response($response);
 
     }
+    /*recibos sin costos de operación*/
+    function scostos_GET(){
+
+        $param = $this->get();
+        $response = false;
+        if (if_ext($param, "id_usuario")) {
+
+           $response =  $this->costo_operacion_model->get_recibos_sin_costos($param["id_usuario"]);
+        }
+
+        $this->response($response);
+
+    }
 
 }

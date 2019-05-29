@@ -236,13 +236,19 @@ class Home extends CI_Controller
 
         $utilidad = $param["saldado"] - $total;
         $total = div(span("UTILIDAD:", " underline text-utilidad strong ") . $utilidad . "MXN", "top_20 ");
-        $this->table->add_row(array(heading_enid($total, 4), "", ""));
-
+        $this->table->add_row(array(heading_enid($total, 4) , "", ""));
 
         $this->table->set_template(template_table_enid());
 
-        $response = get_format_costo_operacion($this->table->generate(), $this->get_tipo_costo_operacion(), $param["costos_operacion"]);
+        $response = get_format_costo_operacion(
+            $this->table->generate(),
+            $this->get_tipo_costo_operacion(),
+            $param["costos_operacion"]
+        );
+
         $this->principal->show_data_page($data, $response, 1);
+
+
 
     }
 

@@ -25,8 +25,6 @@ class productividad extends REST_Controller
 		$response["id_perfil"] = $param["id_perfil"];
 
 
-
-
 		$id_perfil = $param["id_perfil"];
 		$prm["modalidad"] = 1;
 		$prm["id_usuario"] = $id_usuario;
@@ -35,7 +33,7 @@ class productividad extends REST_Controller
 		$response["preguntas"] =  $this->get_preguntas($id_usuario);
 		$response["respuestas"] =  $this->get_respuestas($id_usuario);
         $response["compras_sin_cierre"] = $this->pendientes_ventas_usuario($id_usuario);
-
+        $response["recibos_sin_costos_operacion"] = $this->get_scostos($id_usuario);
 
 
 		switch ($id_perfil) {
@@ -43,15 +41,15 @@ class productividad extends REST_Controller
 			case 3:
 
 				$response["recordatorios"] = $this->get_recordatorios($id_usuario);
-
 				$response["ventas_enid_service"] = $this->get_ventas_enid_service();
 				$response = get_tareas_pendienetes_usuario($response);
 
-
 				break;
+
 			case 20:
 
 				$response = get_tareas_pendienetes_usuario_cliente($response);
+
 				break;
 			default:
 				break;
@@ -204,5 +202,14 @@ class productividad extends REST_Controller
 		$api = "recibo/dia/format/json/";
 		return $this->principal->api($api, $q);
 	}
+
+    private function get_scostos($id_usuario)
+    {
+
+        $q["id_usuario"] =  $id_usuario;
+        $api = "costo_operacion/scostos/format/json/";
+        return $this->principal->api($api, $q);
+
+    }
 
 }
