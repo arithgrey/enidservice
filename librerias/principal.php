@@ -590,11 +590,8 @@ class principal extends CI_Controller
                 [
                     "css" =>
                         [
-
-                            "bootstrap_1.min.css",
                             "pedido_domicilio.css",
                             "confirm-alert.css"
-
                         ],
                     "js" =>
                         [
