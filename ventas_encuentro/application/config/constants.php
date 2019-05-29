@@ -1,1 +1,1 @@
-<?php include(path_enid("config_constants"));
+<?php include("../config/constants.php");

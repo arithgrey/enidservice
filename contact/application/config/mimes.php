@@ -1,1 +1,2 @@
-<?php include(path_enid("config_mimes"));
+<?php include("../config/mimes.php"); 
+
