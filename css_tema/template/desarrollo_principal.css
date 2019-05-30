@@ -253,3 +253,10 @@
 .cerrar_ticket:hover{
     color:blue;
 }
+.note-codable{
+    display: none;
+
+}
+.contenedor_tareas{
+    background: #f0f3f6;
+}

@@ -34,6 +34,7 @@ class productividad extends REST_Controller
 		$response["respuestas"] =  $this->get_respuestas($id_usuario);
         $response["compras_sin_cierre"] = $this->pendientes_ventas_usuario($id_usuario);
         $response["recibos_sin_costos_operacion"] = $this->get_scostos($id_usuario);
+        $response["tareas"] = $this->get_tareas($id_usuario);
 
 
 		switch ($id_perfil) {
@@ -210,6 +211,12 @@ class productividad extends REST_Controller
         $api = "costo_operacion/scostos/format/json/";
         return $this->principal->api($api, $q);
 
+    }
+    function  get_tareas($id_usuario){
+
+        $q["id_usuario"] =  $id_usuario;
+        $api = "tickets/pendientes/format/json/";
+        return $this->principal->api($api, $q);
     }
 
 }

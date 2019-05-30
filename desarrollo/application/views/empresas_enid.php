@@ -1,5 +1,5 @@
 <div class="contenedor_principal_enid_service">
-    <?= div(ul(get_menu($activa), "nav tabs" ), 2) ?>
+    <?= div(ul(get_menu($activa), "nav tabs"), 2) ?>
     <div class='col-lg-10'>
         <div class="tab-content">
             <?= input_hidden(["type" => 'hidden', "class" => 'id_usuario', "value" => $id_usuario]) ?>
@@ -8,13 +8,17 @@
                 <?= $this->load->view("../../../view_tema/formularios/busqueda_tickets") ?>
             </div>
             <?= div(
-                    div(place("place_form_tickets"),1),
+                div(place("place_form_tickets"), 1),
 
-                    [
-                            "class" => "tab-pane " . valida_seccion_activa(3, $activa),
-                        "id" => "tab_nuevo_ticket"
-                    ]
+                [
+                    "class" => "tab-pane " . valida_seccion_activa(3, $activa),
+                    "id" => "tab_nuevo_ticket"
+                ]
             ) ?>
         </div>
     </div>
 </div>
+<?= input_hidden([
+    "class" => "ticket",
+    "value" => $ticket,
+]) ?>
