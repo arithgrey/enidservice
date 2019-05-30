@@ -14,6 +14,22 @@ class Tickets extends REST_Controller
         $this->id_usuario = $this->principal->get_session("idusuario");
     }
 
+    function pendientes_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (if_ext($param, "id_usuario")) {
+
+
+            $id_usuario = $param["id_usuario"];
+            $response = $this->tickets_model->get(["id_ticket", "asunto"], ["id_usuario" => $id_usuario]);
+
+        }
+        $this->response($response);
+
+    }
+
     function num_GET()
     {
 
@@ -32,12 +48,13 @@ class Tickets extends REST_Controller
         $response = false;
         if (if_ext($param, "id_ticket")) {
 
+
+            $info_ticket = $this->tickets_model->get_info_ticket($param);
+            $info_tareas = $this->get_tareas_ticket($param);
+            $info_num_tareas = $this->get_tareas_ticket_num($param);
             $perfil = $this->principal->getperfiles();
-            $data["info_ticket"] = $this->tickets_model->get_info_ticket($param);
-            $data["info_tareas"] = $this->get_tareas_ticket($param);
-            $data["info_num_tareas"] = $this->get_tareas_ticket_num($param);
-            $data["perfil"] = $perfil;
-            return $this->load->view("tickets/detalle", $data);
+            $response = format_tareas($info_ticket, $info_num_tareas, $info_tareas, $perfil);
+            $this->response($response);
 
         }
         $this->response($response);
@@ -341,5 +358,6 @@ class Tickets extends REST_Controller
         $api = "usuario_perfil/es_cliente/format/json/";
         return $this->principal->api($api, $q);
     }
+
 
 }

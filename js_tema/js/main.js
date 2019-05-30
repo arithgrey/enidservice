@@ -159,7 +159,7 @@ let valida_tel_form = function (input, place_msj) {
     format_error(place_msj, mensaje_user);
     return flag;
 }
-let valEmail = function(valor) {
+let valEmail = function (valor) {
 
     let re = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
     let v = (!re.exec(valor)) ? false : true;
@@ -605,9 +605,20 @@ let evita_basura = function () {
 };
 
 /*Regresa el valor que esta en el nodo html*/
-let get_parameter = function (element) {
+let get_parameter = function (element, parse_int = 0) {
+
     let param = $(element).val();
-    return param;
+    if (parse_int < 1) {
+
+        return param;
+
+    } else {
+
+        return parseInt(param);
+
+    }
+
+
 };
 let reloload_img = function (id, url, flag = 0) {
 

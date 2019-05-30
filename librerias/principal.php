@@ -439,15 +439,9 @@ class principal extends CI_Controller
                     "js" =>
                         [
 
-                            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
-                            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
-                            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
-                            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
-                            "js/pickers-init.js",
                             "desarrollo/principal.js",
                             "alerts/jquery-confirm.js",
                             "js/summernote.js"
-
                         ]
                 ]
             ,

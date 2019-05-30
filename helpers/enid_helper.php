@@ -3,13 +3,13 @@
 if (!function_exists('heading')) {
     function heading($data = '', $h = '1', $attributes = '')
     {
-        if (is_string($attributes)){
+        if (is_string($attributes)) {
 
             $att["class"] = $attributes;
             $attr = add_attributes($att);
             return "<h" . $h . $attr . ">" . $data . "</h" . $h . ">";
 
-        }else{
+        } else {
 
             $attr = add_attributes($attributes);
             return "<h" . $h . $attr . ">" . $data . "</h" . $h . ">";
@@ -20,13 +20,13 @@ if (!function_exists('heading')) {
 if (!function_exists('ul')) {
     function ul($list, $attributes = [])
     {
-        if (is_string($attributes)){
+        if (is_string($attributes)) {
 
             $attr["class"] = $attributes;
 
             return _list('ul', $list, $attr);
 
-        }else{
+        } else {
 
             return _list('ul', $list, $attributes);
         }
@@ -34,17 +34,17 @@ if (!function_exists('ul')) {
     }
 }
 if (!function_exists('li')) {
-    function li($info, $attributes = [] , $row_12 = 0)
+    function li($info, $attributes = [], $row_12 = 0)
     {
 
 
-        if (is_string($attributes)){
+        if (is_string($attributes)) {
 
-            $att["class"] =  $attributes;
+            $att["class"] = $attributes;
 
-            return add_element($info, "li", $att , $row_12);
+            return add_element($info, "li", $att, $row_12);
 
-        }else{
+        } else {
 
             return add_element($info, "li", $attributes, $row_12);
         }
@@ -90,15 +90,15 @@ if (!function_exists('p')) {
     function p($info, $attributes = [], $row = 0)
     {
 
-        if (is_string($attributes)){
+        if (is_string($attributes)) {
 
-            $att["class"] =  $attributes;
+            $att["class"] = $attributes;
             $attr = add_attributes($att);
             $base = "<p " . $attr . ">" . $info . "</p>";
             $e = ($row == 0) ? $base : addNRow($base);
             return $e;
 
-        }else{
+        } else {
 
             $attr = add_attributes($attributes);
             $base = "<p " . $attr . ">" . $info . "</p>";
@@ -388,12 +388,12 @@ if (!function_exists('anchor_enid')) {
     function anchor_enid($title = '', $attributes = [], $row_12 = 0, $type_button = 0)
     {
 
-        if(is_string($attributes)){
+        if (is_string($attributes)) {
 
             $attr["href"] = $attributes;
             $attributes = _parse_attributes($attr);
 
-        }else{
+        } else {
 
             $attributes = _parse_attributes($attributes);
         }
@@ -415,20 +415,19 @@ if (!function_exists('get_td')) {
 
         } else {
 
-            if(is_string($attributes) && strlen($attributes) > 0 ){
+            if (is_string($attributes) && strlen($attributes) > 0) {
 
                 $att["class"] = $attributes;
                 $attr = add_attributes($att);
                 return "<td " . $attr . " NOWRAP >" . $val . "</td>";
 
 
-            }else{
+            } else {
 
                 $attr = add_attributes($attributes);
                 return "<td " . $attr . " NOWRAP >" . $val . "</td>";
 
             }
-
 
 
         }
@@ -741,15 +740,15 @@ if (!function_exists('label')) {
     {
 
 
-        if (is_string($attributes)){
+        if (is_string($attributes)) {
 
-            $att["class"] =  $attributes;
+            $att["class"] = $attributes;
             $attr = add_attributes($att);
             $base = "<label" . $attr . ">" . $label_text . "</label>";
             $label = ($row == 0) ? $base : addNRow($base);
             return $label;
 
-        }else{
+        } else {
             $attr = add_attributes($attributes);
             $base = "<label" . $attr . ">" . $label_text . "</label>";
             $label = ($row == 0) ? $base : addNRow($base);
@@ -763,17 +762,16 @@ if (!function_exists('addNRow')) {
     function addNRow($e, $attributes = [])
     {
 
-        if(is_string($attributes)){
+        if (is_string($attributes)) {
 
-            $att["class"] =  $attributes;
+            $att["class"] = $attributes;
             return n_row_12($att) . $e . end_row();
 
 
-        }else{
+        } else {
 
             return n_row_12($attributes) . $e . end_row();
         }
-
 
 
     }
@@ -784,7 +782,7 @@ if (!function_exists('place')) {
     {
 
         $attributes["class"] = $class;
-        if(!array_key_exists("id", $attributes)){
+        if (!array_key_exists("id", $attributes)) {
             $attributes["id"] = $class;
         }
         return div("", $attributes, $row);
@@ -1115,16 +1113,16 @@ if (!function_exists('select_vertical')) {
     }
 }
 if (!function_exists('small')) {
-    function small($text, $attributes = [] )
+    function small($text, $attributes = [])
     {
 
-        if(is_string($attributes)){
+        if (is_string($attributes)) {
 
-            $att["class"] =  $attributes;
+            $att["class"] = $attributes;
             $extra = add_attributes($att);
             return "<small " . $extra . " > " . $text . "</small>";
 
-        }else{
+        } else {
 
             $extra = add_attributes($attributes);
             return "<small " . $extra . " > " . $text . "</small>";
@@ -1137,14 +1135,14 @@ if (!function_exists('strong')) {
     function strong($text, $attributes = '', $row = 0)
     {
 
-        if(is_string($attributes)){
+        if (is_string($attributes)) {
 
             $att["class"] = $attributes;
             $base = "<strong" . add_attributes($att) . ">" . $text . "</strong>";
             $e = ($row == 0) ? $base : addNRow($base);
             return $e;
 
-        }else{
+        } else {
 
             $base = "<strong" . add_attributes($attributes) . ">" . $text . "</strong>";
             $e = ($row == 0) ? $base : addNRow($base);
@@ -1159,14 +1157,14 @@ if (!function_exists('hr')) {
     function hr($attributes = [], $row = 1)
     {
 
-        if(is_string($attributes)){
+        if (is_string($attributes)) {
 
             $att["class"] = $attributes;
             $base = "<hr" . add_attributes($att) . ">";
             $e = ($row == 0) ? $base : addNRow($base);
             return $e;
 
-        }else{
+        } else {
 
             $base = "<hr" . add_attributes($attributes) . ">";
             $e = ($row == 0) ? $base : addNRow($base);
@@ -1409,11 +1407,11 @@ if (!function_exists('lista_horarios')) {
     function lista_horarios()
     {
 
-        $fecha =   horario_enid();
+        $fecha = horario_enid();
         $hora_actual = date_format($fecha, 'H');
         $minuto_actual = date_format($fecha, 'i');
-        $hora_actual =  intval ( $hora_actual );
-        $minuto_actual  =  intval ( $minuto_actual );
+        $hora_actual = intval($hora_actual);
+        $minuto_actual = intval($minuto_actual);
         $nuevo_dia = 0;
 
         $base = [
@@ -1438,33 +1436,37 @@ if (!function_exists('lista_horarios')) {
             "18:00"
         ];
 
-        $horarios =  [];
-        if($hora_actual < 9  || $hora_actual >= 18){
+        $horarios = [];
+        if ($hora_actual < 9 || $hora_actual >= 18) {
 
-            $horarios =  $base;
-            if($hora_actual >  18){$nuevo_dia ++;}
+            $horarios = $base;
+            if ($hora_actual > 18) {
+                $nuevo_dia++;
+            }
 
 
-        }else if( $hora_actual ==  17 ){
+        } else if ($hora_actual == 17) {
 
-            if($minuto_actual < 10 ){
+            if ($minuto_actual < 10) {
 
                 $horarios[] = "18:00";
 
-            }else{
+            } else {
 
-                $horarios =  $base;
-                if($hora_actual >  18){$nuevo_dia ++;}
+                $horarios = $base;
+                if ($hora_actual > 18) {
+                    $nuevo_dia++;
+                }
             }
 
-        }else{
+        } else {
 
-            for ($a = 0; $a < count($base); $a ++ ){
+            for ($a = 0; $a < count($base); $a++) {
 
-                $hora =  intval ( substr($base[$a], 0,2) );
-                if ( $hora >   $hora_actual  ) {
+                $hora = intval(substr($base[$a], 0, 2));
+                if ($hora > $hora_actual) {
 
-                    $horarios[] =  $base[$a];
+                    $horarios[] = $base[$a];
 
                 }
             }
@@ -1476,10 +1478,10 @@ if (!function_exists('lista_horarios')) {
             $select .= "<option value='" . $row . "'>" . $row . "</option>";
         }
         $select .= "</select>";
-        $response =   [
-                "select" => $select ,
-                "nuevo_dia" => $nuevo_dia
-            ];
+        $response = [
+            "select" => $select,
+            "nuevo_dia" => $nuevo_dia
+        ];
         return $response;
 
     }
@@ -1736,7 +1738,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
             'col-lg-4 d-flex align-items-center justify-content-between '
         );
 
-        $r[] = div(guardar(text_icon("fa fa-chevron-right", "Búsqueda " ) ), 'col-lg-4 top_30');
+        $r[] = div(guardar(text_icon("fa fa-chevron-right", "Búsqueda ")), 'col-lg-4 top_30');
 
         return append_data($r);
 
@@ -1744,7 +1746,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
     }
 }
 if (!function_exists('get_format_izquierdo')) {
-    function get_format_izquierdo($categorias_publicas_venta = [] , $categorias_temas_de_ayuda = [] , $agregar_categoria =  0 )
+    function get_format_izquierdo($categorias_publicas_venta = [], $categorias_temas_de_ayuda = [], $agregar_categoria = 0)
     {
         $r[] = anchor_enid(
             img(
@@ -1758,14 +1760,12 @@ if (!function_exists('get_format_izquierdo')) {
         );
 
 
-
-
-        if($agregar_categoria  >  0){
-            $r[] = div(heading_enid("CATEGORIAS DESTACADAS" , 3));
-            $r[] = div(anchor_enid(heading_enid("Agregar" , 5 ,"underline top_20") , [ "href"=> path_enid("nfaq") , "class" => "black"]));
+        if ($agregar_categoria > 0) {
+            $r[] = div(heading_enid("CATEGORIAS DESTACADAS", 3));
+            $r[] = div(anchor_enid(heading_enid("Agregar", 5, "underline top_20"), ["href" => path_enid("nfaq"), "class" => "black"]));
 
         }
-        if(count($categorias_publicas_venta) >  0 || count($categorias_temas_de_ayuda) >  0 ){
+        if (count($categorias_publicas_venta) > 0 || count($categorias_temas_de_ayuda) > 0) {
             $r[] = get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda);
         }
 
@@ -1809,84 +1809,87 @@ if (!function_exists('get_img_serv')) {
 }
 function format_phone($number)
 {
-    $txt = preg_replace('/[\s\-|\.|\(|\)]/','',$number);
+    $txt = preg_replace('/[\s\-|\.|\(|\)]/', '', $number);
     $format = '[$1?$1 :][$2?($2):x][$3: ]$4[$5: ]$6[$7? $7:]';
-    if( preg_match('/^(.*)(\d{3})([^\d]*)(\d{3})([^\d]*)(\d{4})([^\d]{0,1}.*)$/', $txt, $matches) ){
+    if (preg_match('/^(.*)(\d{3})([^\d]*)(\d{3})([^\d]*)(\d{4})([^\d]{0,1}.*)$/', $txt, $matches)) {
         $result = $format;
-        foreach( $matches AS $k => $v ){
-            $str = preg_match('/\[\$'.$k.'\?(.*?)\:(.*?)\]|\[\$'.$k.'\:(.*?)\]|(\$'.$k.'){1}/', $format, $filterMatch);
-            if( $filterMatch ){
-                $result = str_replace( $filterMatch[0], (!isset($filterMatch[3]) ? (strlen($v) ? str_replace( '$'.$k, $v, $filterMatch[1] ) : $filterMatch[2]) : (strlen($v) ? $v : (isset($filterMatch[4]) ? '' : (isset($filterMatch[3]) ? $filterMatch[3] : '')))), $result );
+        foreach ($matches AS $k => $v) {
+            $str = preg_match('/\[\$' . $k . '\?(.*?)\:(.*?)\]|\[\$' . $k . '\:(.*?)\]|(\$' . $k . '){1}/', $format, $filterMatch);
+            if ($filterMatch) {
+                $result = str_replace($filterMatch[0], (!isset($filterMatch[3]) ? (strlen($v) ? str_replace('$' . $k, $v, $filterMatch[1]) : $filterMatch[2]) : (strlen($v) ? $v : (isset($filterMatch[4]) ? '' : (isset($filterMatch[3]) ? $filterMatch[3] : '')))), $result);
             }
         }
         return $result;
     }
     return $number;
 }
-function get_metodos_pago(){
 
-    $r[] =   div(img([
+function get_metodos_pago()
+{
+
+    $r[] = div(img([
         'class' => "logo_pago",
         'style' => 'width:95px!important',
-        'src' => "../img_tema/bancos/masterDebito.png"])) ;
+        'src' => "../img_tema/bancos/masterDebito.png"]));
 
-    $r[] =   div(img([
+    $r[] = div(img([
         'class' => "logo_pago",
         'style' => 'width:65px!important',
-        'src' => "../img_tema/bancos/paypal2.png"])) ;
+        'src' => "../img_tema/bancos/paypal2.png"]));
 
-    $r[] =   div(img([
+    $r[] = div(img([
         'class' => "logo_pago",
         'style' => 'width:95px!important',
-        'src' => "../img_tema/bancos/visaDebito.png"])) ;
+        'src' => "../img_tema/bancos/visaDebito.png"]));
 
-    $r[] =   div(img([
+    $r[] = div(img([
         'class' => "logo_pago",
         'style' => 'width:65px!important',
-        'src' => "../img_tema/bancos/oxxo-logo.png"])) ;
+        'src' => "../img_tema/bancos/oxxo-logo.png"]));
 
-    $r[] =   div(img([
+    $r[] = div(img([
         'class' => "logo_pago",
         'style' => 'width:85px!important',
-        'src' => "../img_tema/bancos/bancomer2.png"])) ;
+        'src' => "../img_tema/bancos/bancomer2.png"]));
 
-    $r[] =   div(img([
+    $r[] = div(img([
         'class' => "logo_pago",
         'style' => 'width:85px!important',
-        'src' => "../img_tema/bancos/santander.png"])) ;
+        'src' => "../img_tema/bancos/santander.png"]));
 
 
-    $r[] =   div(img([
+    $r[] = div(img([
         'class' => "logo_pago",
         'style' => 'width:95px!important',
-        'src' => "../img_tema/bancos/banamex.png"])) ;
+        'src' => "../img_tema/bancos/banamex.png"]));
 
 
-    $r[] =   div(img([
+    $r[] = div(img([
         'class' => "logo_pago",
         'style' => 'width:65px!important',
-        'src' => "../img_tema/bancos/fedex.png"])) ;
+        'src' => "../img_tema/bancos/fedex.png"]));
 
-    $r[] =   div(img(
+    $r[] = div(img(
         ['class' => "logo_pago",
             'style' => 'width:75px!important',
             'src' => "../img_tema/bancos/dhl2.png"]));
 
 
-    $response =  div(div(append_data($r), "col-lg-12 d-flex flex-row justify-content-between"),"info_metodos_pago row");
+    $response = div(div(append_data($r), "col-lg-12 d-flex flex-row justify-content-between"), "info_metodos_pago row");
     return $response;
 
 }
 
-function path_enid($pos, $extra = 0 , $link_directo = 0 ){
+function path_enid($pos, $extra = 0, $link_directo = 0)
+{
 
 
-    $base_url =  [
-        "forma_pago"    =>  "forma_pago/?info=1",
-        "forma_pago_search"    =>  "forma_pago/?recibo=",
+    $base_url = [
+        "forma_pago" => "forma_pago/?info=1",
+        "forma_pago_search" => "forma_pago/?recibo=",
         "nfaq" => "faq/?nueva=1",
         "editar_faq" => "faq/?faq=",
-        "img_faq" =>  "img_tema/productos/",
+        "img_faq" => "img_tema/productos/",
         "faqs" => "faq",
         "login" => "login",
         "vender" => "planes_servicios",
@@ -1897,7 +1900,7 @@ function path_enid($pos, $extra = 0 , $link_directo = 0 ){
         "pregunta" => "pregunta",
         "pregunta_search" => "pregunta/?tag=",
         "search" => "search",
-        "search_q3" =>"search/?q3=",
+        "search_q3" => "search/?q3=",
         "paypal_enid" => "https://www.paypal.me/eniservice/",
         "home" => "",
         "pedidos" => "pedidos",
@@ -1931,13 +1934,13 @@ function path_enid($pos, $extra = 0 , $link_directo = 0 ){
         "config_constants" => "config/constants.php"
     ];
 
-    if( $link_directo > 0  ){
+    if ($link_directo > 0) {
 
-        $path =  ($extra !== 0 ) ?  $base_url[$pos].$extra :  $base_url[$pos];
+        $path = ($extra !== 0) ? $base_url[$pos] . $extra : $base_url[$pos];
 
-    }else{
+    } else {
 
-        $path =  ($extra !== 0 ) ?  "../".$base_url[$pos].$extra :  "../".$base_url[$pos];
+        $path = ($extra !== 0) ? "../" . $base_url[$pos] . $extra : "../" . $base_url[$pos];
 
     }
 
@@ -1945,23 +1948,38 @@ function path_enid($pos, $extra = 0 , $link_directo = 0 ){
 
 }
 
-function text_icon($class_icono , $text  , $att = [], $left = 1 ){
+function text_icon($class_icono, $text, $att = [], $left = 1)
+{
 
-    if($left > 0){
+    if ($left > 0) {
 
-        return  icon($class_icono , $att )." ".$text;
+        return icon($class_icono, $att) . " " . $text;
 
-    }else{
+    } else {
 
-        return  $text." ".icon($class_icono , $att );
+        return $text . " " . icon($class_icono, $att);
     }
 }
-function horario_enid(){
+
+function horario_enid()
+{
 
     $datetime = new DateTime('now', new DateTimeZone(config_item('time_reference')));
     return $datetime;
 
 }
+
+function add_text($a, $b ,$f = 0 )
+{
+
+
+    $response  =  ( $f > 0) ?  $a.$b : $a . " " . $b ;
+    return $response;
+
+
+
+}
+
 /*
 if (!function_exists('get_param_def')) {
     function get_param_def($param, $variable, $valida_basura = 0)

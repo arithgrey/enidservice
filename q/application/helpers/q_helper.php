@@ -212,6 +212,44 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
+
+
+    if (!function_exists('add_tareas')) {
+        function add_tareas($tareas)
+        {
+
+            $r = [];
+            $f = 0;
+            foreach ($tareas as $row) {
+
+
+
+                $id_ticket = $row["id_ticket"];
+                $text = div(substr($row["asunto"] , 0,30),"black");
+                $text = div(heading_enid(icon(" fas fa-tasks")   , 5). $text, "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
+
+
+                $r[] = anchor_enid($text,
+                    [
+                        "href" => "../desarrollo/?q=1&ticket=".$id_ticket
+                    ]
+                );
+
+                $f++;
+            }
+
+            $response =
+                [
+                    "html" => append_data($r),
+                    "flag" => $f,
+
+                ];
+
+            return $response;
+
+        }
+
+    }
     if (!function_exists('add_tareas_pendientes')) {
         function add_tareas_pendientes($meta, $hecho)
         {
@@ -664,6 +702,12 @@ if (!function_exists('invierte_date_time')) {
         $ventas_enid_service = $info["ventas_enid_service"];
         $tareas_enid_service = $inf["tareas_enid_service"];
         $num_telefonico = $inf["numero_telefonico"];
+
+
+
+        $tareas = add_tareas($info["tareas"]);
+        $f = $f + $tareas["flag"];
+        $lista .= $tareas["html"];
 
         $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);
         $f = $f + $recibos_sin_costos_operacion["flag"];

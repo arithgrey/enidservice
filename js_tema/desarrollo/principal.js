@@ -5,20 +5,26 @@ window.history.pushState({page: 3}, "", "");
 window.onpopstate = function (event) {
 
     if (event) {
-
         valida_retorno();
     }
 }
-
 $(document).ready(function () {
+
+
     set_option("s", 0);
     let num_departamento = get_parameter(".num_departamento");
     set_option("modulo", 2);
 
+
     $("footer").ready(function () {
+
         let id_depto = get_parameter(".num_departamento");
         set_option("id_depto", id_depto);
+        carga_num_pendientes();
     });
+
+
+
 
     $(".depto").change(function () {
 
@@ -29,17 +35,13 @@ $(document).ready(function () {
 
     $(".q").keyup(carga_tikets_usuario);
 
-    $("footer").ready(carga_num_pendientes);
-    $('.datetimepicker_persona').datepicker();
+
+
     $(".form_busqueda_actividad_enid").submit(cargar_productividad);
 
-
-    $('.datetimepicker1').timepicker();
-    $('.datetimepicker2').datepicker();
-    set_option("id_usuario", $(".id_usuario").val());
+    set_option("id_usuario", get_parameter(".id_usuario"));
 
     $(".li_menu").click(recorre_web_version_movil);
-    $("footer").ready(carga_tikets_usuario);
     $(".base_tab_clientes").click(carga_tikets_usuario);
     $(".form_busqueda_desarrollo").submit(carga_metricas_desarrollo);
     $(".form_busqueda_desarrollo_solicitudes").submit(carga_solicitudes_cliente);
@@ -53,6 +55,8 @@ $(document).ready(function () {
 
     $(".comparativa").click(carga_comparativas);
     $(".abrir_ticket").click(form_nuevo_ticket);
+
+    on_load();
 
 });
 
@@ -187,9 +191,7 @@ let response_carga_ticket = function (data) {
     $(".tarea").click(actualiza_tareas);
     $(".mostrar_tareas_pendientes").click(muestra_tareas_por_estatus);
     $(".mostrar_todas_las_tareas").click(muestra_todas_las_tareas);
-    $(".ver_tickets").click(function () {
-        carga_tikets_usuario();
-    });
+    $(".ver_tickets").click(carga_tikets_usuario);
     if (get_option("flag_mostrar_solo_pendientes") == 1) {
         muestra_tareas_por_estatus();
     }
@@ -274,8 +276,6 @@ let muestra_todas_las_tareas = function () {
 }
 let carga_tikets_usuario = function () {
 
-
-    recorre_web_version_movil();
     let status_ticket = 0;
     if (document.querySelector(".estatus_tickets")) {
         status_ticket = get_parameter(".estatus_tickets");
@@ -289,7 +289,7 @@ let carga_tikets_usuario = function () {
         "keyword": get_option("keyword"),
         "modulo": get_option("modulo")
     };
-    request_enid("GET", data_send, url, response_carga_tickets, ".place_proyectos");
+    request_enid("GET", data_send, url, response_carga_tickets);
 
 
 }
@@ -302,14 +302,11 @@ let response_carga_tickets = function (data) {
         carga_info_detalle_ticket();
     });
 
-    $(".btn_refresh").click(function () {
-        carga_tikets_usuario();
-    });
+    $(".btn_refresh").click(carga_tikets_usuario);
 
-    $(".estatus_tickets").change(function () {
-        carga_tikets_usuario();
-    });
+    $(".estatus_tickets").change(carga_tikets_usuario);
     carga_num_pendientes();
+
 }
 let actualiza_tareas = function (e) {
 
@@ -382,6 +379,17 @@ let valida_retorno = function () {
         default:
 
             break;
+    }
+
+}
+let on_load = function () {
+
+
+    let action = get_parameter(".ticket", 1);
+    if ( action >  0 ){
+
+        set_option("id_ticket", action);
+        carga_info_detalle_ticket();
     }
 
 }

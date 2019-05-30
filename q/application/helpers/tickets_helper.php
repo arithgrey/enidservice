@@ -4,7 +4,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_tickets($departamentos)
     {
 
-        $r[] = div(div("ABRIR SOLICITUD", "titulo_enid" ), 6, 1);
+        $r[] = div(div("ABRIR SOLICITUD", "titulo_enid"), 6, 1);
         $r[] = div(get_form_ticket($departamentos), 6, 1);
         $r[] = place("place_registro_ticket");
         return append_data($r);
@@ -54,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
             "id_departamento"
         ));
         $r[] = n_row_12();
-        $r[] = div("MODULO, ASUNTO, TÓPICO", "input-group-addon" );
+        $r[] = div("MODULO, ASUNTO, TÓPICO", "input-group-addon");
         $r[] = input([
             "id" => "asunto",
             "name" => "asunto",
@@ -84,7 +84,7 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] = heading_enid("¿REALMENTE DESEAS CANCELAR LA COMPRA?", 3);
         $x[] = div($recibo["resumen"]);
-        $r[] = div(div(append_data($x), "padding_20" ));
+        $r[] = div(div(append_data($x), "padding_20"));
 
         $url = path_enid("area_cliente_compras", $recibo['id_recibo']);
         $r[] = guardar("SEGUIR COMPRANDO",
@@ -187,9 +187,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $tareas = $info_num_tareas[0]["tareas"];
-        $pendientes = $info_num_tareas[0]["pendientes"];
+        $pendientes = $tareas - $info_num_tareas[0]["pendientes"];
+
+        $r = [];
 
         foreach ($info_ticket as $row) {
+
 
             $id_ticket = $row["id_ticket"];
             $status = $row["status"];
@@ -200,42 +203,93 @@ if (!function_exists('invierte_date_time')) {
             $lista_status = ["Abierto", "Cerrado", "Visto"];
             $asunto = $row["asunto"];
 
+            $resumen = $tareas . "/" . $pendientes;
+            $icon = ($pendientes != $tareas) ? "fa fa-check-circle text-secondary " : "fa fa-check-circle text-dark";
 
-            $r[] = "
-        <table class='table_resumen_ticket'>";
-            $r[] = "
-            <tr>";
-            $r[] = get_td(heading_enid($asunto, 3, ["class" => "white"]));
-            $r[] = get_td("#TAREAS " . $tareas);
-            $r[] = get_td("#PENDIENTES " . $pendientes);
-            $r[] = "
-            </tr>
-            ";
 
-            $r[] = "
-            <tr>";
-            $r[] = get_td($info_ticket[0]["asunto"], ["colspan" => 3]);
-            $r[] = "
-            </tr>
-            ";
+            $x[] = div(heading_enid(add_text("#", $id_ticket, 1), 2));
+            $x[] = div(heading_enid(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
+            $x[] = div(heading_enid(add_text("DEPARTAMENTO", strtoupper($nombre_departamento)), 6));
+            $x[] = div(heading_enid(add_text("PRIORIDAD", strtoupper($lista_prioridad[$prioridad])), 6, "underline"));
 
-            $r[] = "
-            <tr>";
-            $r[] = get_td(div($info_ticket[0]["mensaje"]));
-            $r[] = "
-            </tr>
-            ";
+            $x[] = div($asunto, "top_30 border padding_10 bottom_30");
+            $x[] = div(heading_enid(strtoupper($fecha_registro), 6, "text-right"));
+            $x[] = div(icon("fas fa-2x fa-plus-circle blue_enid"), " btn_agregar_tarea padding_1  cursor_pointer text-right");
 
-            $r[] = get_td("TICKET # " . $id_ticket);
-            $r[] = get_td("DEPARTAMENTO " . strtoupper($nombre_departamento));
-            $r[] = get_td("ESTADO " . strtoupper($lista_status[$status]));
-            $r[] = get_td("PRIORIDAD " . strtoupper($lista_prioridad[$prioridad]));
-            $r[] = get_td("ALTA " . strtoupper($fecha_registro));
-            $r[] = "</tr>";
-            $r[] = "</table>";
+            $r[] = div(append_data($x), "shadow padding_20");
 
         }
-        return append_data($r);
+        $response[] = append_data($r);
+        $response[] = valida_mostrar_tareas($info_num_tareas);
+        return append_data($response);
+
+
     }
 
+    function form_tarea()
+    {
+
+        $x[] = heading_enid("TAREA", 4);
+        $x[] = form_open("", ["class" => 'form_agregar_tarea']);
+        $x[] = div("-", ["id" => "summernote", "class" => "summernote"], 1);
+        $x[] = input_hidden(["class" => 'tarea_pendiente', "name" => 'tarea']);
+        $x[] = guardar("Solicitar", [], 1);
+        $x[] = form_close();
+
+        return div(append_data($x), "seccion_nueva_tarea top_20");
+
+    }
+
+    function format_listado_tareas($info_tareas, $perfil)
+    {
+
+        foreach ($info_tareas as $row) {
+
+            $id_tarea = $row["id_tarea"];
+            $status = $row["status"];
+            $estado_tarea = "";
+
+
+            if ($status == 0) {
+                $valor_actualizar = 1;
+            } else {
+                $valor_actualizar = 0;
+                $estado_tarea = "tarea_pendiente";
+            }
+
+            $input = valida_check_tarea($id_tarea, $valor_actualizar, $status, $perfil);
+
+
+            $text = get_btw(
+                div($input)
+                ,
+                div($row["descripcion"], "text-left")
+                ,
+                "d-flex  justify-content-between"
+
+            );
+
+
+            $r[] = div($text, $estado_tarea . ' top_20 ');
+
+
+        }
+
+        $x[] = heading_enid(text_icon("fa fa-check-square", "Checklist"), 5, "strong underline");
+        $x[] = append_data($r);
+        return div(append_data($x), "top_40 padding_20 contenedor_tareas bottom_50");
+
+
+    }
+
+    function format_tareas($info_ticket, $info_num_tareas, $info_tareas, $perfil)
+    {
+
+        $r[] = crea_tabla_resumen_ticket($info_ticket, $info_num_tareas);
+        $r[] = form_tarea();
+        $r[] = format_listado_tareas($info_tareas, $perfil);
+        return append_data($r);
+
+
+    }
 }
