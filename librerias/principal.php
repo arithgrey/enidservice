@@ -152,65 +152,6 @@ class principal extends CI_Controller
         return $paginacion;
     }
 
-    function crea_historico($tipo, $id_evento = 0, $id_usuario = 0, $id_empresa = 0, $id_servicio = 0)
-    {
-        /*
-        $pagina_url 	=  	base_url(uri_string());
-        $ip 			= 	$this->input->ip_address();
-        $dispositivo  	= 	$this->agent->agent_string();
-        $browser 		= 	$this->agent->browser().' '.$this->agent->version();
-        $robot 			= 	$this->agent->robot();
-        $mobile 		= 	$this->agent->mobile();
-        $platform 		=  	$this->agent->platform();
-        $is_browser		=  	$this->agent->is_browser();
-        $is_robot 		= 	$this->agent->is_robot();
-        $is_mobile 		= 	$this->agent->is_mobile();
-
-        $table 			=	"";
-        $is_robot		=  	$this->get_valor_numerico_bool($is_robot);
-        $is_mobile 		=  	$this->get_valor_numerico_bool($is_mobile);
-
-
-        $url_referencia = "";
-        if(isset( $_SERVER['HTTP_REFERER'] ) ){
-            $url_referencia  = strtolower( $_SERVER['HTTP_REFERER'] );
-        }
-        $flag_enid 		= 1;
-        $dominio 		=  get_dominio($pagina_url);
-
-        if ($dominio != "enidservice.com"){
-            $flag_enid 	=0;
-        }
-
-
-        $params["q"] =  [
-            "url" 				=> $pagina_url,
-            "ip"				=> $ip,
-            "dispositivo"		=> $dispositivo,
-            "tipo"				=> $tipo ,
-            "id_evento"			=> $id_evento  ,
-            "id_usuario"		=> $id_usuario,
-            "id_empresa"		=> $id_empresa ,
-            "url_referencia" 	=> $url_referencia,
-            "dominio"			=> $dominio,
-            "flag_enid"			=> $flag_enid,
-            "browser"			=> $browser,
-            "robot"				=> $robot,
-            "mobile"			=> $mobile,
-            "platform"			=> $platform,
-            "is_browser"		=> $is_browser,
-            "is_robot"			=> $is_robot,
-            "is_mobile"			=> $is_mobile,
-            "id_servicio"		=> $id_servicio
-        ];
-
-        $params["q2"]=  ($is_robot ==  1)? 1 : 0;
-        $api 		=  "pagina_web/index";
-        $this->api($api, $params, 'json', $type='POST');
-        */
-
-    }
-
     function validate_user_sesssion()
     {
 

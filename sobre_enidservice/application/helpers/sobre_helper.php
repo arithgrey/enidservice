@@ -51,16 +51,11 @@ if (!function_exists('invierte_date_time')) {
                     1)
                 ,
                 "col-lg-4 padding_10   text-center top_50 border-bottom"
-            )
+            );
 
-        ;
         $r[] =  div(div(append_data($x),10,1), "row  topicos ");
 
-
-
-
         $r[] = img(["src" => "../img_tema/portafolio/ejemplo-personas.jpg" ,"class" => "mah_500 top_50" ] );
-
         $r[] = heading_enid("Comienza ahora",2,"text-uppercase top_30 text-center top_50 ") ;
         $r[] = div(guardar("Empieza a anunciarte ya mismo! ",[],1,1,0,path_enid("vender")), 4, 1);
         $r[] = br(5);
