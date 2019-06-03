@@ -228,7 +228,6 @@ if (!function_exists('invierte_date_time')) {
                 $text = div(substr($row["asunto"] , 0,30),"black");
                 $text = div(heading_enid(icon(" fas fa-tasks")   , 5). $text, "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
 
-
                 $r[] = anchor_enid($text,
                     [
                         "href" => "../desarrollo/?q=1&ticket=".$id_ticket
@@ -238,9 +237,16 @@ if (!function_exists('invierte_date_time')) {
                 $f++;
             }
 
+
+
+            $agregar =  div(anchor_enid(text_icon("fas fa-plus-circle black" , " TAREA") , path_enid("desarrollo")), "bottom_50 black underline");
+            $tareas =  add_text($agregar ,  append_data($r));
+
+
+
             $response =
                 [
-                    "html" => append_data($r),
+                    "html" => $tareas,
                     "flag" => $f,
 
                 ];

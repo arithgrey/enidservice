@@ -24,8 +24,6 @@ $(document).ready(function () {
     });
 
 
-
-
     $(".depto").change(function () {
 
         let id_depto = get_parameter(".depto");
@@ -34,7 +32,6 @@ $(document).ready(function () {
     });
 
     $(".q").keyup(carga_tikets_usuario);
-
 
 
     $(".form_busqueda_actividad_enid").submit(cargar_productividad);
@@ -386,10 +383,45 @@ let on_load = function () {
 
 
     let action = get_parameter(".ticket", 1);
-    if ( action >  0 ){
+    if (action > 0) {
 
         set_option("id_ticket", action);
         carga_info_detalle_ticket();
     }
+}
+let edita_descripcion_tarea = function (id_tarea) {
+
+    showonehideone("#tarea_" + id_tarea, ".text_tarea_" + id_tarea);
+    $("#tarea_" + id_tarea).keyup(function (e) {
+
+        var code = (e.keyCode ? e.keyCode : e.which);
+
+        if (code == 13) {
+
+            let text_tarea =  get_parameter(".itarea_" + id_tarea );
+            let url = "../q/index.php/api/tarea/descripcion/format/json/";
+            let data_send = {"id_tarea": id_tarea, "descripcion": text_tarea };
+            request_enid("PUT", data_send, url, function () {
+                carga_info_detalle_ticket();
+            });
+
+        }
+
+    });
+}
+let elimina_tarea = function (id_tarea) {
+
+
+    show_confirm("¿DESEAS ELIMINAR LA TAREA?", "Se borrará completamente", "ELIMINAR", function () {
+        
+        let url = "../q/index.php/api/tarea/index/format/json/";
+        let data_send = {"id_tarea": id_tarea };
+        request_enid("DELETE", data_send, url, function () {
+
+            carga_info_detalle_ticket();
+
+        });
+
+    });
 
 }

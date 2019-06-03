@@ -13,14 +13,12 @@ class Home extends CI_Controller
 
     function index()
     {
+
         $data = $this->principal->val_session();
         $this->principal->acceso();
         $data["action"] = $this->input->get("action");
-        $class_departamentos = $this->principal->get_departamentos();
-        $data["clasificaciones_departamentos"] = $class_departamentos;
         $data = $this->principal->getCSSJs($data, "utilidades");
         $this->principal->show_data_page($data, 'home');
-
 
     }
 

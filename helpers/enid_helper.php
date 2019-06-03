@@ -288,6 +288,16 @@ if (!function_exists('div')) {
 
     }
 }
+
+if (!function_exists('del')) {
+    function del($info, $attributes = [], $row = 0, $frow = 0)
+    {
+
+        return get_base_html("del", $info, $attributes, $row, $frow);
+
+    }
+}
+
 if (!function_exists('section')) {
     function section($info, $attributes = [], $row = 0, $frow = 0)
     {
@@ -1931,7 +1941,8 @@ function path_enid($pos, $extra = 0, $link_directo = 0)
         "config_path" => "config/config.php",
         "config_mines" => "config/mimes.php",
         "config_db" => "db/database.php",
-        "config_constants" => "config/constants.php"
+        "config_constants" => "config/constants.php",
+        "desarrollo" => "desarrollo"
     ];
 
     if ($link_directo > 0) {
