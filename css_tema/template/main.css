@@ -331,7 +331,8 @@ a:hover {
 .black {
     color: black !important;
 }
-.black_blue{
+
+.black_blue {
     color: #010121 !important;
 }
 
@@ -943,6 +944,10 @@ table {
 .padding_20 {
     padding: 20px;
 }
+.padding_30 {
+    padding: 30px;
+
+}
 
 .enid_hide {
     display: none;
@@ -951,29 +956,33 @@ table {
 .black_enid_background {
     background: black;
 }
+
 .black_enid_background2 {
     background: #020F29;
 }
 
 
-
-.top_menos_10{
+.top_menos_10 {
     margin-top: -10px;
     display: block;
 }
-.top_menos_20{
+
+.top_menos_20 {
     margin-top: -20px;
     display: block;
 }
-.top_menos_30{
+
+.top_menos_30 {
     margin-top: -30px;
     display: block;
 }
-.top_menos_40{
+
+.top_menos_40 {
     margin-top: -40px;
     display: block;
 }
-.top_menos_50{
+
+.top_menos_50 {
     margin-top: -50px;
     display: block;
 }
@@ -998,6 +1007,7 @@ table {
     margin-top: 30px;
     display: block;
 }
+
 .top_40 {
     margin-top: 40px;
     display: block;
@@ -1008,10 +1018,12 @@ table {
     margin-top: 50px;
     display: block;
 }
+
 .top_80 {
     margin-top: 80px;
     display: block;
 }
+
 .top_100 {
     margin-top: 100px;
     display: block;
@@ -1029,10 +1041,12 @@ table {
     margin-bottom: 20px;
     display: block;
 }
+
 .bottom_30 {
     margin-bottom: 20px;
     display: block;
 }
+
 .bottom_40 {
     margin-bottom: 20px;
     display: block;
@@ -1042,6 +1056,7 @@ table {
     margin-bottom: 50px;
     display: block;
 }
+
 .bottom_80 {
     margin-bottom: 80px;
     display: block;
@@ -1207,9 +1222,11 @@ select {
 .letter-spacing-15 {
     letter-spacing: 1.5px;
 }
+
 .letter-spacing-3 {
     letter-spacing: 1.3px;
 }
+
 .letter-spacing-2 {
     letter-spacing: 1.2px;
 }
@@ -1217,21 +1234,27 @@ select {
 .letter-spacing-10 {
     letter-spacing: 10px;
 }
-.letter-spacing-5{
+
+.letter-spacing-5 {
     letter-spacing: 5px;
 }
-.letter-spacing-3{
+
+.letter-spacing-3 {
     letter-spacing: 3px;
 }
-.letter-spacing-1{
+
+.letter-spacing-1 {
     letter-spacing: 1px;
 }
+
 .producto_enid {
     height: 310px !important;
 }
-.producto_enid_img{
+
+.producto_enid_img {
     height: 230px;
 }
+
 .texto_precio {
     background: #030a27;
     padding: 5px;
@@ -1289,70 +1312,87 @@ h5 {
 .h-400 {
     height: 400px;
 }
-.text_notificacion{
+
+.text_notificacion {
     min-height: 230px;
 }
-.f2{
+
+.f2 {
     font-size: 2em;
 }
-.fp8{
+
+.fp8 {
     font-size: .8em !important;
 }
-.f16{
+
+.f16 {
     font-size: 1.6em;
 }
-.f15{
+
+.f15 {
     font-size: 1.5em;
 }
-.f14{
+
+.f14 {
     font-size: 1.4em;
 }
-.f12{
+
+.f12 {
     font-size: 1.2em;
 }
-.f11{
+
+.f11 {
     font-size: 1.1em;
 }
 
-.img_servicio_def{
- max-height: 260px;
+.img_servicio_def {
+    max-height: 260px;
 }
-.min_block{
+
+.min_block {
     min-height: 220px;
 }
-.form_separador div{
+
+.form_separador div {
     margin-top: 20px;
 }
-.mh_notificaciones{
+
+.mh_notificaciones {
 
     min-height: 40px;
 }
-.mh_350{
+
+.mh_350 {
 
     min-height: 350px;
 }
-.mh_250{
+
+.mh_250 {
 
     min-height: 250px;
 }
-.mh_200{
+
+.mh_200 {
 
     min-height: 200px;
 }
-.mh_150{
+
+.mh_150 {
 
     min-height: 150px;
 }
-.mh_270{
 
-    max-height: 270px!important;
-}
-.mah_500{
+.mh_270 {
 
-    max-height: 500px!important;
+    max-height: 270px !important;
 }
 
-.bloque_general_info{
+.mah_500 {
+
+    max-height: 500px !important;
+}
+
+.bloque_general_info {
     background: #00299c;
     color: white;;
 }

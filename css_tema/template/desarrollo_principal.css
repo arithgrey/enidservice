@@ -260,3 +260,10 @@
 .contenedor_tareas{
     background: #f0f3f6;
 }
+.descripcion_tarea:hover .icon_delete_description{
+
+    display: block!important;
+}
+.input_descripcion{
+    display: none;
+}

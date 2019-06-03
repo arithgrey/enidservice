@@ -24,7 +24,19 @@ class Tarea extends REST_Controller
 		$this->response($response);
 	}
 
-	function index_POST()
+    function descripcion_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (if_ext($param, "descripcion,id_tarea")) {
+            $response = $this->tareasmodel->q_up("descripcion" , $param["descripcion"] , $param["id_tarea"]);
+        }
+        $this->response($response);
+    }
+
+
+    function index_POST()
 	{
 
 		$param = $this->post();
@@ -48,6 +60,19 @@ class Tarea extends REST_Controller
 		}
 		$this->response($response);
 	}
+
+    function index_DELETE()
+    {
+
+        $param = $this->delete();
+        $response = false;
+        if (if_ext($param, "id_tarea")) {
+
+            $response = $this->tareasmodel->q_delete($param["id_tarea"]);
+
+        }
+        $this->response($response);
+    }
 
 	private function set_stado_ticket($q)
 	{

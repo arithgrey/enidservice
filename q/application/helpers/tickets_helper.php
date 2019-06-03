@@ -243,6 +243,7 @@ if (!function_exists('invierte_date_time')) {
     function format_listado_tareas($info_tareas, $perfil)
     {
 
+        $r = [];
         foreach ($info_tareas as $row) {
 
             $id_tarea = $row["id_tarea"];
@@ -251,26 +252,86 @@ if (!function_exists('invierte_date_time')) {
 
 
             if ($status == 0) {
+
                 $valor_actualizar = 1;
+
             } else {
+
                 $valor_actualizar = 0;
                 $estado_tarea = "tarea_pendiente";
+
             }
 
             $input = valida_check_tarea($id_tarea, $valor_actualizar, $status, $perfil);
+            $descripcion = ($status > 0) ? del($row["descripcion"], "descripcion_tarea  cursor_pointer") : $row["descripcion"];
+
+
+            $menu = [];
+            $menu[] = icon(" fa-ellipsis-h ml-3 ", ["data-toggle" => "dropdown"]);
+
+
+            $menu[] = div(
+                append_data(
+                    [
+
+                        div(text_icon("fas fa-minus cursor_pointer", "Quitar"),
+                            [
+                                "class" => "top_5 ml-3 cursor_pointer",
+                                "onClick" => "elimina_tarea({$id_tarea})"
+                            ]
+                        )
+
+                    ]),
+                "dropdown-menu dropdown-menu-right padding_20"
+            );
+
+            $bloque_descripcion = add_text(
+                div(
+                    $descripcion,
+                    [
+                        "class" => "contenedor_descripcion cursor_pointer text_tarea_" . $id_tarea,
+                        "onClick" => "edita_descripcion_tarea({$id_tarea})"
+                    ]
+                ),
+                div(
+                    input(
+                        [
+
+                            "name" => "descripcion",
+                            "value" => $row["descripcion"],
+                            "type" => "text",
+                            "class" => "itarea_" . $id_tarea
+                        ]
+                    )
+                    ,
+                    [
+                        "class" => "input_descripcion",
+                        "id" => "tarea_" . $id_tarea
+                    ]
+
+                )
+            );
+
+
+            $descripcion = get_btw(
+                $bloque_descripcion,
+                div(append_data($menu), "btn-group"),
+                "d-flex align-items-center justify-content-between"
+            );
 
 
             $text = get_btw(
+
                 div($input)
                 ,
-                div($row["descripcion"], "text-left")
+                div($descripcion, "text-left")
                 ,
                 "d-flex  justify-content-between"
 
             );
 
 
-            $r[] = div($text, $estado_tarea . ' top_20 ');
+            $r[] = div($text, $estado_tarea . ' top_30 ');
 
 
         }

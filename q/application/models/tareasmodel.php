@@ -18,6 +18,18 @@ class tareasmodel extends CI_Model
 		return $this->update([$q => $q2], ["id_tarea" => $id]);
 	}
 
+    function q_delete($id)
+    {
+        return $this->delete(["id_tarea" => $id]);
+    }
+    function delete($params_where = [], $limit = 1)
+    {
+        $this->db->limit($limit);
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key, $value);
+        }
+        return $this->db->delete("tarea", $params_where);
+    }
 	function update($data = [], $params_where = [], $limit = 1)
 	{
 		foreach ($params_where as $key => $value) {
