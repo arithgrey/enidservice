@@ -267,3 +267,10 @@
 .input_descripcion{
     display: none;
 }
+.mh_700{
+    min-height: 700px;
+}
+.blue_target{
+    background: #2626b0;
+    color: white;
+}

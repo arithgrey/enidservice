@@ -5,10 +5,10 @@ if (!function_exists('invierte_date_time')) {
         function get_format_charts()
         {
 
-            $r[] = heading_enid("Indicadores", 3);
-            $r[] = get_menu_metricas();
-            $x[] = div(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]);
-            $x[] = div(place("place_metricas_comparativa"), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]);
+            //$r[] = heading_enid("Indicadores", 3);
+            //$r[] = get_menu_metricas();
+            //$x[] = div(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]);
+            //$x[] = div(place("place_metricas_comparativa"), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]);
             $x[] = div(form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
             $r[] = div(append_data($x), "tab-content");
             return append_data($r);
@@ -56,29 +56,17 @@ if (!function_exists('invierte_date_time')) {
 
                 ),
 
-                li(
-                    anchor_enid(
-                        text_icon("fa fa-area-chart", "Métricas"),
-                        [
-                            "href" => "#tab_charts"
-                            , "data-toggle" => "tab"
-                            , "id" => "ver_avances"
-                            , "class" => 'black strong'
-                        ]),
-                    [
-                        "class" => 'black top_20 ' . valida_seccion_activa(2, $activa), "style" => 'background:white;'
-                    ]),
 
 
                 li(
                     anchor_enid(
-                        text_icon('fa fa-check-circle', "Pendientes")
+                        text_icon('fa fa-check-circle', "PENDIENTES")
                         ,
                         [
                             "href" => "#tab_abrir_ticket"
                             , "data-toggle" => "tab"
                             , "id" => 'base_tab_clientes'
-                            , "class" => 'black strong base_tab_clientes'
+                            , "class" => 'black strong base_tab_clientes top_30'
                         ]) . place('place_tareas_pendientes'),
 
 

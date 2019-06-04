@@ -17,8 +17,8 @@ class Home extends CI_Controller
 	{
 
 		$param = $this->input->get();
-		$param["id_clasificacion"] = get_param_def($param, "q2", 1);
-		$param["vendedor"] = get_param_def($param, "q3", 1);
+		$param["id_clasificacion"] = get_param_def($param, "q2" );
+		$param["vendedor"] = get_param_def($param, "q3" );
 		$q = get_param_def($param, "q", "", 1);
 		evita_basura($q);
 		$param["num_hist"] = get_info_servicio($q);

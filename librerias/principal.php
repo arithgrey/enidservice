@@ -370,7 +370,6 @@ class principal extends CI_Controller
             "desarrollo" =>
                 [
 
-
                     "css" =>
                         [
                             "desarrollo_principal.css",
@@ -380,10 +379,13 @@ class principal extends CI_Controller
                     "js" =>
                         [
 
+                            "ui/jquery-ui.js",
                             "desarrollo/principal.js",
                             "alerts/jquery-confirm.js",
                             "js/summernote.js"
-                        ]
+
+                        ],
+
                 ]
             ,
             "faq" => [
