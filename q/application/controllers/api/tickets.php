@@ -23,7 +23,7 @@ class Tickets extends REST_Controller
 
 
             $id_usuario = $param["id_usuario"];
-            $response = $this->tickets_model->get(["id_ticket", "asunto"], ["id_usuario" => $id_usuario , "status" => 0 ] , 10);
+            $response = $this->tickets_model->get(["id_ticket", "asunto"], ["id_usuario" => $id_usuario , "status" => 1 ] , 10);
 
         }
         $this->response($response);
@@ -218,10 +218,14 @@ class Tickets extends REST_Controller
 
             $data = [];
             $modulo = $param["modulo"];
+
             switch ($modulo) {
                 case 1:
                     /*Cargamos data tickets desde la versión del vendedor y por producto*/
                     $data = $this->tickets_por_servicio($param);
+
+                    return $this->load->view("tickets/principal_desarollo", $data);
+
                     break;
 
                 case 2:
@@ -233,13 +237,23 @@ class Tickets extends REST_Controller
                     $data["info_tickets"] = $tickets;
                     $data["status_solicitado"] = $param["status"];
                     $data["info_get"] = $param;
+
+                    return $this->load->view("tickets/principal_desarollo", $data);
+
                     break;
+                case 3:
+
+                    $tickets = $this->tickets_model->get_tickets($param);
+                    $response =  format_tablero($tickets);
+
+                    break;
+
 
                 default:
 
                     break;
             }
-            return $this->load->view("tickets/principal_desarollo", $data);
+
 
         }
         $this->response($response);

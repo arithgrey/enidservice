@@ -156,13 +156,14 @@ let response_registro_ticket = function (data) {
     carga_info_detalle_ticket();
 }
 
-let set_estatus_ticket = function (e) {
+let set_estatus_ticket = function (id_ticket, status) {
 
     let nuevo_estado = get_parameter_enid($(this), "id");
-    let url = "../q/index.php/api/tickets/status/format/json/";
-    let data_send = {"id_ticket": get_option("id_ticket"), "status": nuevo_estado};
+    let url = "../q/index.php/api/tickets/estado/format/json/";
+    let data_send = {"id_ticket": id_ticket, "status": status};
     request_enid("PUT", data_send, url, function () {
-    }, ".place_proyectos");
+        carga_tikets_usuario();
+    });
 }
 let carga_info_detalle_ticket = function () {
 
@@ -178,7 +179,7 @@ let response_carga_ticket = function (data) {
     render_enid(".place_proyectos", data);
     display_elements([".seccion_nueva_tarea"], 0);
     $(".mostrar_tareas_pendientes").hide();
-    $(".btn_mod_ticket").click(set_estatus_ticket);
+    //$(".btn_mod_ticket").click(set_estatus_ticket);
     $(".btn_agregar_tarea").click(agregar_tarea);
 
 
@@ -284,7 +285,7 @@ let carga_tikets_usuario = function () {
         "status": status_ticket,
         "id_departamento": get_option("id_depto"),
         "keyword": get_option("keyword"),
-        "modulo": get_option("modulo")
+        "modulo": 3
     };
     request_enid("GET", data_send, url, response_carga_tickets);
 
@@ -293,16 +294,33 @@ let carga_tikets_usuario = function () {
 let response_carga_tickets = function (data) {
 
     render_enid(".place_proyectos", data);
-    $(".ver_detalle_ticket").click(function (e) {
+
+    $( ".draggable" ).draggable({
+        drag: function( event, ui ) {
+            let id = $( this ).attr("id");
+            set_option("ticket_drag", id);
+
+        }
+
+    });
+    $( ".droppable" ).droppable({
+        drop: function( event, ui ) {
+             let status = $( this ).attr("id");
+            set_estatus_ticket(get_option("ticket_drag") , status);
+        }
+    });
+
+    $(".ver_detalle_ticket").dblclick(function (e) {
+
 
         set_option("id_ticket", get_parameter_enid($(this), "id"));
         carga_info_detalle_ticket();
+
     });
 
     $(".btn_refresh").click(carga_tikets_usuario);
-
     $(".estatus_tickets").change(carga_tikets_usuario);
-    carga_num_pendientes();
+
 
 }
 let actualiza_tareas = function (e) {

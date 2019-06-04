@@ -51,13 +51,15 @@ if (!function_exists('li')) {
 
     }
 }
-if (!function_exists('add_input')) {
-    function add_input($attributes = '')
+
+if (!function_exists('check')) {
+    function check($attributes = [])
     {
         $attr = add_attributes($attributes);
         return "<input " . $attr . ">";
     }
 }
+
 
 if (!function_exists('span')) {
     function span($info, $attributes = [], $row = 0)
@@ -1414,84 +1416,73 @@ if (!function_exists('microtime_float')) {
     }
 }
 if (!function_exists('lista_horarios')) {
-    function lista_horarios()
+    function lista_horarios($dia_busqueda = 0)
     {
 
         $fecha = horario_enid();
+        $hoy = $fecha->format('Y-m-d');
         $hora_actual = date_format($fecha, 'H');
         $minuto_actual = date_format($fecha, 'i');
         $hora_actual = intval($hora_actual);
         $minuto_actual = intval($minuto_actual);
         $nuevo_dia = 0;
-
-        $base = [
-            "09:00",
-            "09:30",
-            "10:00",
-            "10:30",
-            "11:00",
-            "11:30",
-            "12:00",
-            "12:30",
-            "13:00",
-            "13:30",
-            "14:00",
-            "14:30",
-            "15:00",
-            "15:30",
-            "16:00",
-            "16:30",
-            "17:00",
-            "17:30",
-            "18:00"
-        ];
-
+        $base = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00",  "12:30",  "13:00",  "13:30",  "14:00",  "14:30",  "15:00",  "15:30",  "16:00",  "16:30",  "17:00",  "17:30",  "18:00"];
         $horarios = [];
-        if ($hora_actual < 9 || $hora_actual >= 18) {
 
-            $horarios = $base;
-            if ($hora_actual > 18) {
-                $nuevo_dia++;
-            }
+        /*Dia distonto horario completo  */
+        $hora_actual =  ( $dia_busqueda != 0 && $dia_busqueda !=  $hoy  ) ? 19 : $hora_actual;
 
+        switch ($hora_actual) {
 
-        } else if ($hora_actual == 17) {
-
-            if ($minuto_actual < 10) {
-
-                $horarios[] = "18:00";
-
-            } else {
+            case ($hora_actual < 9 || $hora_actual >= 18):
 
                 $horarios = $base;
-                if ($hora_actual > 18) {
-                    $nuevo_dia++;
+                $nuevo_dia = ( $hora_actual > 18 ) ?  ($nuevo_dia = $nuevo_dia + 1 ) : $nuevo_dia;
+
+                break;
+
+            case 17:
+
+                if ($minuto_actual < 10) {
+
+                    $horarios[] = "18:00";
+
+                } else {
+
+                    $horarios = $base;
+                    $nuevo_dia = ($hora_actual > 18) ?  ($nuevo_dia = $nuevo_dia + 1 ) : $nuevo_dia;
                 }
-            }
 
-        } else {
+                break;
 
-            for ($a = 0; $a < count($base); $a++) {
+            default:
 
-                $hora = intval(substr($base[$a], 0, 2));
-                if ($hora > $hora_actual) {
+                for ($a = 0; $a < count($base); $a++) {
 
-                    $horarios[] = $base[$a];
+                    $hora = intval(substr($base[$a], 0, 2));
+                    if ($hora > $hora_actual) {
 
+                        $horarios[] = $base[$a];
+
+                    }
                 }
-            }
+
+                break;
         }
 
-
-        $select = "<select name='horario_entrega' class='form-control input-sm '  > ";
+        $select = "<select name='horario_entrega' class='form-control input-sm horario_entrega'  > ";
         foreach ($horarios as $row) {
+
             $select .= "<option value='" . $row . "'>" . $row . "</option>";
+
         }
+
         $select .= "</select>";
         $response = [
             "select" => $select,
             "nuevo_dia" => $nuevo_dia
         ];
+
         return $response;
 
     }
@@ -1980,13 +1971,12 @@ function horario_enid()
 
 }
 
-function add_text($a, $b ,$f = 0 )
+function add_text($a, $b, $f = 0)
 {
 
 
-    $response  =  ( $f > 0) ?  $a.$b : $a . " " . $b ;
+    $response = ($f > 0) ? $a . $b : $a . " " . $b;
     return $response;
-
 
 
 }

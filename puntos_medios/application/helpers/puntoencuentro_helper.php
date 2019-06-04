@@ -89,11 +89,12 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "data-date-format" => "yyyy-mm-dd",
                     "name" => 'fecha_entrega',
-                    "class" => "form-control input-sm ",
+                    "class" => "form-control input-sm fecha_entrega",
                     "type" => 'date',
                     "value" => $minimo,
                     "min" => $minimo,
-                    "max" => $maximo
+                    "max" => $maximo,
+                    "onChange" => "horarios_disponibles()"
                 ]), "col-lg-10 mt-3");
 
 
@@ -197,9 +198,6 @@ if (!function_exists('invierte_date_time')) {
             $minimo =  add_date($minimo,1);
         }
 
-
-
-
         $r[] = form_open("", ["class" => "form_punto_encuentro_horario top_50"]);
         $r[] = append_data($extra);
         $r[] = div(heading_enid("¿En qué horario te gustaría recibir tu pedido?", 2, "bottom_50"), 12);
@@ -210,11 +208,12 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "data-date-format" => "yyyy-mm-dd",
                     "name" => 'fecha_entrega',
-                    "class" => "form-control input-sm ",
+                    "class" => "form-control input-sm fecha_entrega",
                     "type" => 'date',
                     "value" => $minimo,
                     "min" => $minimo,
-                    "max" => $maximo
+                    "max" => $maximo,
+                    "onChange" => "horarios_disponibles()"
                 ]),
             8);
 

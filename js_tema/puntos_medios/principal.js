@@ -348,6 +348,20 @@ let valida_accion_retorno = function () {
 
             break;
     }
+}
+
+let horarios_disponibles =  function () {
 
 
+    let dia = get_parameter(".fecha_entrega");
+    let url = "../q/index.php/api/punto_encuentro/horario_disponible/format/json/";
+    let data_send = {"dia" : dia};
+    request_enid("GET", data_send, url, response_horario);
+
+}
+let response_horario =  function(data){
+
+    if (!isArray(data)){
+        render_enid(".horario_entrega", data);
+    }
 }
