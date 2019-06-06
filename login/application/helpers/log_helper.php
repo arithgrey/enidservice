@@ -36,7 +36,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = place("place_acceso_sistema top_20 bottom_20");
 
-        $x[] = anchor_enid("¿ERES NUEVO?   REGISTRATE!", 'registrar-cuenta registrar_cuenta');
+        $x[] = anchor_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'registrar-cuenta registrar_cuenta']);
         $x[] = anchor_enid(
             "¿OLVIDASTE TU CONTRASEÑA?",
             [

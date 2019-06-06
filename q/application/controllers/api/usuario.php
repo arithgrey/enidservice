@@ -374,17 +374,6 @@ class usuario extends REST_Controller
 		$this->response($response);
 
 	}
-
-	/*
-	function social_icons_GET(){
-
-		//$this->load->view("servicio/social_icons");
-		$response  = get_social_icons();
-		$this->response($response);
-
-
-	}
-	*/
 	function es_POST()
 	{
 		$param = $this->post();

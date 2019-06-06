@@ -83,7 +83,7 @@ class Costo_operacion_model extends CI_Model
                         FROM 
                         proyecto_persona_forma_pago  p  
                         WHERE
-                        id_usuario =  $id_usuario
+                        id_usuario_venta =  $id_usuario
                         AND 
                         saldo_cubierto >  0 
                         AND 

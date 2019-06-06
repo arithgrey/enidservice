@@ -376,7 +376,7 @@ class recibo extends REST_Controller
 
         $deuda = get_saldo_pendiente($monto_a_pagar, $num_ciclos_contratados, $saldo_cubierto, $costo_envio_cliente, $costo_envio_sistema, $tipo_entrega);
         $saldo_pendiente = $deuda["total_mas_envio"];
-        //$url_img_servicio = link_imagen_servicio($id_servicio);
+
         $data["recibo"] = $recibo;
         $text_forma_compra = ($tipo_entrega) ? "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
 

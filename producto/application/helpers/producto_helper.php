@@ -148,10 +148,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $url_facebook = get_url_facebook($url_actual);
-        $url_twitter = get_url_twitter($url_actual, $desc_web);
-        $url_pinterest = get_url_pinterest($url_actual, $desc_web);
-        $url_tumblr = get_url_tumblr($url_actual, $desc_web);
 
 
         $r[] = get_solicitud_informacion($proceso_compra, $id_servicio);
@@ -179,7 +175,7 @@ if (!function_exists('invierte_date_time')) {
                 12
             ), 13);
         }
-        $r[] = get_social($url_actual, $url_facebook, $url_twitter, $url_pinterest, $url_tumblr, $proceso_compra);
+        $r[] = get_social($proceso_compra,$desc_web);
         $r[] = get_tienda_vendedor($proceso_compra, $id_publicador);
         $r[] = place("", ["style" => "border: solid 1px"]);
 
@@ -277,55 +273,6 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_social($url_actual, $url_facebook, $url_twitter, $url_pinterest, $url_tumblr, $proceso_compra)
-    {
-
-        $response = "";
-        if ($proceso_compra < 1) {
-
-
-            $r[] = anchor_enid("",
-                [
-                    "href" => $url_facebook,
-                    "target" => "_black",
-                    "class" => "fa fa-facebook black"
-                ]);
-
-            $r[] = anchor_enid("",
-                [
-                    "href" => "https://www.instagram.com/enid_service/",
-                    "class" => "fa fa-instagram  black",
-                    "title" => "Tumblr"
-                ]);
-
-            $r[] = anchor_enid("",
-                [
-                    "class" => "fa fa-twitter black",
-                    "title" => "Tweet",
-                    "target" => "_black",
-                    "data-size" => "large",
-                    "href" => $url_twitter,
-                ]);
-            $r[] = anchor_enid("",
-                [
-                    "href" => $url_pinterest,
-                    "class" => "fa fa-pinterest-p black",
-                    "title" => "Pin it"
-                ]);
-
-            $r[] = anchor_enid("",
-                [
-                    "href" => $url_tumblr,
-                    "class" => "fa fa-tumblr black",
-                    "title" => "Tumblr"
-                ]);
-
-            $social = append_data($r);
-            $response = div($social, "contenedor_social display_flex_enid mt-5");
-        }
-        return div($response, 1);
-
-    }
 
     function get_form_compra($id_servicio, $flag_servicio, $existencia, $in_session, $q2)
     {

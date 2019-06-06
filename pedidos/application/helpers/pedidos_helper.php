@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo)
+    function get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo, $path, $costos_operacion)
     {
 
 
@@ -26,11 +26,22 @@ if (!function_exists('invierte_date_time')) {
             "contenedor_costos_registrados"
         );
 
-        $r[] = div(get_form_costos($tipo_costos, $id_recibo), "display_none contenedor_form_costos_operacion");
+        $r[] = div(get_form_costos($tipo_costos, $id_recibo, $costos_operacion), "display_none contenedor_form_costos_operacion");
 
-        $response = div(append_data($r), 8, 1);
-        return div($response, "top_50");
+        $response[] = div(append_data($r), 8);
+        $response[] = div(format_img_recibo($path, $id_recibo), 4);
 
+        return div(div(append_data($response), 10, 1), "row top_40");
+
+
+    }
+
+    function format_img_recibo($path, $id_recibo)
+    {
+
+        $r[] = div(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), "max-height: 250px;", 1);
+        $r[] = heading_enid(anchor_enid("Pedidos", path_enid("pedidos")), 3);
+        return append_data($r);
 
     }
 
@@ -554,39 +565,73 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_form_costos')) {
 
 
-        function get_form_costos($tipo_costos, $id_recibo)
+        function get_form_costos($tipo_costos, $id_recibo, $costos_registrados)
         {
 
-            $r[] = div(heading_enid("Gasto", 3), "col-lg-12 bottom_50");
-            $r[] = form_open("", ["class" => "form_costos letter-spacing-5"], ["recibo" => $id_recibo]);
+            $costos_por_registro = [];
+            foreach ($tipo_costos as $row) {
 
-            $a = div("MONTO GASTADO", 4);
+                $repetible = $row["repetible"];
+                $id = $row["id_tipo_costo"];
+                $f = 1;
+                foreach ($costos_registrados as $row2) {
 
-            $b = div(
-                input(
-                    [
-                        "type" => "number",
-                        "required" => true,
-                        "class" => "form-control input precio",
-                        "name" => "costo"
-                    ]
-                ), 8);
+                    if ($id == $row2["id_tipo_costo"]) {
+                        $f = 0;
+                        if($repetible > 0 ){
+                            $f = 1;
+                        }
+                        break;
+                    }
+                }
+                if ($f > 0){
 
-            $r[] = get_btw($a, $b, "top_30");
+                    $costos_por_registro[] =  $row;
 
-            $r[] = div(
-                create_select(
-                    $tipo_costos,
-                    "tipo",
-                    "id_tipo_costo form-control",
-                    "tipo",
-                    "tipo",
-                    "id_tipo_costo"), "col-lg-12 top_30");
+                }
+
+            }
 
 
-            $r[] = div(guardar("AGREGAR", ["class" => "top_30"]), 12);
-            $r[] = form_close(place("notificacion_registro_costo"));
-            return div(append_data($r), 10, 1);
+
+
+            $response  = div(heading_enid("Ya registraste todos los costos de operación para esta venta!",3),8,1);
+            if (count($costos_por_registro) > 0 ) {
+
+                $r[] = div(heading_enid("Gasto", 3), "col-lg-12 bottom_50");
+                $r[] = form_open("", ["class" => "form_costos letter-spacing-5"], ["recibo" => $id_recibo]);
+                $a = div("MONTO GASTADO", 4);
+                $b = div(
+                    input(
+                        [
+                            "type" => "number",
+                            "required" => true,
+                            "class" => "form-control input precio",
+                            "name" => "costo"
+                        ]
+                    ), 8);
+
+                $r[] = get_btw($a, $b, "top_30");
+                $r[] = div(
+                    create_select(
+                        $costos_por_registro,
+                        "tipo",
+                        "id_tipo_costo form-control",
+                        "tipo",
+                        "tipo",
+                        "id_tipo_costo"), "col-lg-12 top_30");
+
+
+                $r[] = div(guardar("AGREGAR", ["class" => "top_30"]), 12);
+                $r[] = form_close(place("notificacion_registro_costo"));
+                $response = div(append_data($r), 10, 1);
+            }
+            return $response;
+
+
+
+
+
 
         }
 
@@ -1238,9 +1283,10 @@ if (!function_exists('invierte_date_time')) {
                 $cambio_fecha = $recibo[0]["modificacion_fecha"];
                 $class = 'nula';
                 $text_probabilidad = "PROBABILIDAD NULA DE COMPRA";
+
                 switch ($cambio_fecha) {
 
-                    case 0:
+                    case 0  :
                         $class = 'alta';
                         $text_probabilidad = "PROBABILIDAD ALTA DE COMPRA";
                         break;
@@ -1265,6 +1311,13 @@ if (!function_exists('invierte_date_time')) {
                         }
 
                         break;
+                }
+
+                if ($recibo[0]["status"] == 10) {
+
+                    $class = 'baja';
+                    $text_probabilidad = "PROBABILIDAD BAJA NULA (SE CANCELÓ)";
+
                 }
 
                 return div($text_probabilidad, $class . " border shadow row", 1);

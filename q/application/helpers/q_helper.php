@@ -617,18 +617,12 @@ if (!function_exists('invierte_date_time')) {
             $id_servicio = $row["id_servicio"];
             $id_usuario = $row["id_usuario"];
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
-            $pregunta = div($pregunta, ["class" => "black"]);
+            $pregunta = div($pregunta, "black" );
 
 
-            $imagenes = get_btw(
-
-                div(get_img_servicio($id_servicio), ["style" => "width:50px"]),
-                get_img_usuario($id_usuario),
-                "display_flex_enid"
-
-            );
+            $imagenes =   div(get_img_servicio($id_servicio), ["style" => "width:50px"]);
             $t = [];
-            $t[] = get_btw($imagenes, $pregunta, "display_flex_enid");
+            $t[] = get_btw($imagenes, $pregunta, "columna ->   d-flex flex-column justify-content-between");
             $text = append_data($t);
 
             $id = "#pregunta" . $id_pregunta;
@@ -666,16 +660,9 @@ if (!function_exists('invierte_date_time')) {
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
             $pregunta = div($pregunta, ["class" => "black"]);
 
-
-            $imagenes = get_btw(
-
-                div(get_img_servicio($id_servicio), ["style" => "width:50px"]),
-                get_img_usuario($id_usuario),
-                "display_flex_enid"
-
-            );
+            $imagenes =  div(get_img_servicio($id_servicio), ["style" => "width:50px"]);
             $t = [];
-            $t[] = get_btw($imagenes, $pregunta, "display_flex_enid");
+            $t[] = get_btw($imagenes, $pregunta, "columna ->   d-flex flex-column justify-content-between");
             $text = append_data($t);
 
             $id = "#pregunta" . $id_pregunta;
