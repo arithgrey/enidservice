@@ -1980,6 +1980,68 @@ function add_text($a, $b, $f = 0)
 
 
 }
+function get_social( $proceso_compra, $desc_web)
+{
+
+    $url_share = current_url() . '?' . $_SERVER['QUERY_STRING'];
+    $url_facebook = get_url_facebook($url_share);
+    $url_twitter = get_url_twitter($url_share, $desc_web);
+    $url_pinterest = get_url_pinterest($url_share, $desc_web);
+    $url_tumblr = get_url_tumblr($url_share, $desc_web);
+
+
+    $response = "";
+    if ($proceso_compra < 1 ) {
+
+
+        $r[] = anchor_enid("",
+            [
+                "href" => $url_facebook,
+                "target" => "_black",
+                "class" => "fa fa-facebook black",
+
+            ]);
+
+        $r[] = anchor_enid("",
+            [
+                "href" => "https://www.instagram.com/enid_service/",
+                "class" => "fa fa-instagram  black",
+                "title" => "Tumblr",
+                "target" => "_black",
+            ]);
+
+        $r[] = anchor_enid("",
+            [
+                "target" => "_black",
+                "class" => "fa fa-twitter black",
+                "title" => "Tweet",
+                "target" => "_black",
+                "data-size" => "large",
+                "href" => $url_twitter,
+            ]);
+        $r[] = anchor_enid("",
+            [
+                "href" => $url_pinterest,
+                "target" => "_black",
+                "class" => "fa fa-pinterest-p black",
+                "title" => "Pin it"
+            ]);
+
+        $r[] = anchor_enid("",
+            [
+                "href" => $url_tumblr,
+                "class" => "fa fa-tumblr black",
+                "target" => "_black",
+                "title" => "Tumblr"
+            ]);
+
+        $social = append_data($r);
+        $response = div($social, "contenedor_social display_flex_enid mt-5");
+    }
+    return div($response, 1);
+
+}
+
 
 /*
 if (!function_exists('get_param_def')) {

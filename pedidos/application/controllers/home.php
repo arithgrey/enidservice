@@ -210,14 +210,18 @@ class Home extends CI_Controller
         return $this->principal->api($api, $q);
     }
 
+    private function get_servicio_ppfp($id_recibo){
+
+        $q["id_recibo"] = $id_recibo;
+        $api = "recibo/servicio_ppfp/format/json/";
+        return $this->principal->api($api, $q);
+
+    }
     function carga_vista_costos_operacion($param, $data)
     {
 
         $data = $this->principal->getCssJs($data, "pedidos");
-
         $costos_operacion = $this->get_costo_operacion($param["costos_operacion"]);
-
-
         $this->table->set_heading(array('MONTO', 'CONCEPTO', 'REGISTO', ''));
         $total = 0;
         foreach ($costos_operacion as $row) {
@@ -240,10 +244,17 @@ class Home extends CI_Controller
 
         $this->table->set_template(template_table_enid());
 
+
+        $path  = $this->principal->get_imagenes_productos($this->get_servicio_ppfp($param["costos_operacion"]), 1,1,1);
+
+
+
         $response = get_format_costo_operacion(
             $this->table->generate(),
             $this->get_tipo_costo_operacion(),
-            $param["costos_operacion"]
+            $param["costos_operacion"],
+            $path,
+            $costos_operacion
         );
 
         $this->principal->show_data_page($data, $response, 1);

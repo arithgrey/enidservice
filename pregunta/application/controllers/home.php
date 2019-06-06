@@ -34,7 +34,7 @@ class Home extends CI_Controller
         if ($servicio > 0 && ctype_digit($servicio)) {
 
             $send["in_session"] = $data["in_session"];
-            if ($send["in_session"] === false) {
+            if ($send["in_session"] < 1) {
 
                 $session_data = [ "servicio_pregunta" => $servicio ];
                 $this->principal->set_userdata($session_data);

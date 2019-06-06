@@ -60,7 +60,7 @@ if (!function_exists('invierte_date_time')) {
         ]);
         $r[] = place("nuevo");
         $r[] = get_btw(
-            div("Tu reseña*", "text-valoracion strong"),
+            div("Tu reseña (comentarios)*", "text-valoracion strong"),
             div(
                 input(
                     [
@@ -121,8 +121,15 @@ if (!function_exists('invierte_date_time')) {
         $r[] = br(3);
 
 
-        $response = div(div(append_data($r), 10, 1), "col-lg-6 col-lg-offset-3 shadow padding_10");
-        return $response;
+        $social = get_social(0, "Mira lo que compré en Enid service!");
+        $encuesta[] =  div(div(append_data($r), 10, 1),1);
+        $encuesta[] =  div(div($social , "col-lg-10 col-lg-offtse-1 bottom_50"),1);
+
+
+        $response[] = div( append_data($encuesta), "col-lg-6 col-lg-offset-3 shadow padding_10 bottom_50");
+
+
+        return append_data($response);
 
     }
 
