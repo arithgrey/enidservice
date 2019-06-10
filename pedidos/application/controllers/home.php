@@ -210,10 +210,10 @@ class Home extends CI_Controller
         return $this->principal->api($api, $q);
     }
 
-    private function get_servicio_ppfp($id_recibo){
+    private function get_ppfp($id_recibo){
 
-        $q["id_recibo"] = $id_recibo;
-        $api = "recibo/servicio_ppfp/format/json/";
+        $q["id"] = $id_recibo;
+        $api = "recibo/id/format/json/";
         return $this->principal->api($api, $q);
 
     }
@@ -245,7 +245,9 @@ class Home extends CI_Controller
         $this->table->set_template(template_table_enid());
 
 
-        $path  = $this->principal->get_imagenes_productos($this->get_servicio_ppfp($param["costos_operacion"]), 1,1,1);
+        $recibo =  $this->get_ppfp($param["costos_operacion"]);
+        $id_servicio =  (is_array($recibo) &&  count($recibo) >  0 )  ? $recibo[0]["id_servicio"] :  0;
+        $path  = $this->principal->get_imagenes_productos($id_servicio , 1,1,1);
 
 
 
@@ -254,7 +256,8 @@ class Home extends CI_Controller
             $this->get_tipo_costo_operacion(),
             $param["costos_operacion"],
             $path,
-            $costos_operacion
+            $costos_operacion,
+            $recibo
         );
 
         $this->principal->show_data_page($data, $response, 1);

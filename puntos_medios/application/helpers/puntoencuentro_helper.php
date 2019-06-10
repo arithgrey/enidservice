@@ -134,7 +134,7 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         if ($in_session < 1) {
 
-            $x[] = heading_enid("YA TIENES UN USUARIO REGISTRADO", 2, "display_none text_usuario_registrado");
+            $x[] = heading_enid("YA TIENES UN USUARIO REGISTRADO", 2, "display_none text_usuario_registrado underline");
             $x[] = heading_enid("¿Ya tienes una cuenta? ", 3, " text_usuario_registrado_pregunta text-center text-uppercase letter-spacing-10");
 
             $x[] = div(

@@ -151,7 +151,7 @@ let guarda_nuevo_estado = function () {
 
             case 6:
                 /*Cuando no ha registrado algún pago*/
-                verifica_pago_previo();
+                verifica_pago_previo(6);
                 break;
 
             case 7:
@@ -166,6 +166,12 @@ let guarda_nuevo_estado = function () {
             case 11:
                 modifica_status(status_venta);
                 break;
+
+            case 15:
+
+                modifica_status(status_venta);
+                break;
+
             default:
                 break;
         }
@@ -173,7 +179,7 @@ let guarda_nuevo_estado = function () {
 }
 let modifica_status = function (status_venta, es_proceso_compra_sin_filtro = 0) {
 
-    debugger;
+
     let saldo_cubierto = get_parameter(".saldo_actual_cubierto");
 
     if (es_proceso_compra_sin_filtro == 0) {
@@ -390,16 +396,22 @@ let pre_tipo_entrega = function () {
     let tipo_entrega_actual = get_parameter(".tipo_entrega_def");
     selecciona_valor_select(".form_edicion_tipo_entrega .tipo_entrega", tipo_entrega_actual);
 }
-let verifica_pago_previo = function () {
+let verifica_pago_previo = function (id_status) {
+
+    debugger;
     let saldo_cubierto = get_parameter(".saldo_actual_cubierto");
     if (saldo_cubierto > 0) {
+
         let text = "ESTA ORDEN  CUENTA CON UN SALDO REGISTRADO DE " + saldo_cubierto + "MXN ¿AUN ASÍ DESEAS NOTIFICAR SU FALTA DE PAGO?";
         let text_complemento = "EL SALDO DE LA ORDEN PASARÁ A 0 MXN AL REALIZAR ESTA ACCIÓN";
         let text_continuar = "DEJAR EN 0MXN";
         show_confirm(text, text_complemento, text_continuar, procesa_cambio_estado, oculta_opciones_estados);
+
     } else {
-        modifica_status(6, 1);
+
+        modifica_status(id_status, 1);
     }
+
 }
 let oculta_opciones_estados = function () {
     display_elements([".selector_estados_ventas", 0]);
@@ -423,7 +435,7 @@ let registra_data_nuevo_estado = function (status_venta) {
 }
 let confirma_cambio_horario = function (id_recibo, status, saldo_cubierto_envio, monto_a_pagar, se_cancela, fecha_entrega) {
 
-    debugger;
+
     let text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
     let text_confirmacion = "";
     switch (parseInt(status)) {

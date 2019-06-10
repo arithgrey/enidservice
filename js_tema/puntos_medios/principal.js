@@ -139,6 +139,7 @@ let response_estaciones = function (data) {
 };
 let muestra_horarios = function () {
 
+
     $(".search").hide();
     let id = get_parameter_enid($(this), "id");
     let nombre_estacion = get_parameter_enid($(this), "nombre_estacion");
@@ -167,20 +168,34 @@ let muestra_horarios = function () {
         $(".contenedor_estaciones").hide();
 
 
-        if (flag_envio_gratis < 1) {
+        let paso = 0;
+        if ( flag_envio_gratis < 1   ) {
 
-            let text = "Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " + costo_envio + " pesos por concepto de gastos de envío";
-            render_enid(".mensaje_cobro_envio", text);
-            $(".mensaje_cobro_envio").show();
+            if (costo_envio > 0 ){
+
+                paso ++ ;
+                let text = "Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " + costo_envio + " pesos por concepto de gastos de envío";
+                render_enid(".mensaje_cobro_envio", text);
+                $(".mensaje_cobro_envio").show();
+            }
+
         }
 
 
 
-        $(".resumen_encuentro").show();
-        showonehideone( ".resumen_encuentro", ".contenedor_estaciones");
+        if (paso >  0 ){
 
-        $(".btn_continuar_punto_encuentro").show();
-        $(".btn_continuar_punto_encuentro").click(muestra_quien_recibe);
+            $(".resumen_encuentro").show();
+            showonehideone( ".resumen_encuentro", ".contenedor_estaciones");
+
+            $(".btn_continuar_punto_encuentro").show();
+            $(".btn_continuar_punto_encuentro").click(muestra_quien_recibe);
+
+        } else{
+
+            muestra_quien_recibe();
+        }
+
 
     }
 

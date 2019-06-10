@@ -88,7 +88,9 @@ class recibo extends REST_Controller
         $response = false;
         if (if_ext($param, "id_recibo")) {
 
-            $response = $this->recibo_model->q_get(["id_servicio"], $param["id_recibo"])[0]["id_servicio"];
+            $recibo =  $this->recibo_model->q_get(["id_servicio"], $param["id_recibo"]);
+            $response = (is_array($recibo) &&  count($recibo) > 0) ?  $recibo[0]["id_servicio"] :  0 ;
+
         }
         $this->response($response);
     }
@@ -806,14 +808,13 @@ class recibo extends REST_Controller
         $param = $this->get();
         $response = false;
         if (if_ext($param, "fecha_inicio,fecha_termino,tipo")) {
-            $response = $this->recibo_model->get_compras_tipo_periodo($param);
-            $compras = $response;
-            $tipo = $param["tipo"];
+
+            $compras = $this->recibo_model->get_compras_tipo_periodo($param);
             $status_enid_service = $this->get_status_enid_service();
 
-            $v = $param["v"];
-            if ($v == 1) {
-                $response = get_view_compras($status_enid_service, $compras, $tipo);
+            if ($param["v"] == 1) {
+
+                $response = get_view_compras($status_enid_service, $compras, $param["tipo"]);
 
             }
         }

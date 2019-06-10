@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo, $path, $costos_operacion)
+    function get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo, $path, $costos_operacion, $recibo)
     {
 
 
@@ -29,19 +29,48 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(get_form_costos($tipo_costos, $id_recibo, $costos_operacion), "display_none contenedor_form_costos_operacion");
 
         $response[] = div(append_data($r), 8);
-        $response[] = div(format_img_recibo($path, $id_recibo), 4);
+        $response[] = div(format_img_recibo($path,  $recibo), 4);
 
         return div(div(append_data($response), 10, 1), "row top_40");
 
 
     }
 
-    function format_img_recibo($path, $id_recibo)
+    function format_img_recibo($path, $recibo)
     {
 
-        $r[] = div(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), "max-height: 250px;", 1);
-        $r[] = heading_enid(anchor_enid("Pedidos", path_enid("pedidos")), 3);
-        return append_data($r);
+
+        $response =  "";
+        if (is_array($recibo) && count($recibo) >  0 ){
+
+            $recibo =  $recibo[0];
+            $id_recibo =  $recibo["id_proyecto_persona_forma_pago"];
+            $saldo_cubierto =  $recibo["saldo_cubierto"];
+            $articulos  = $recibo["num_ciclos_contratados"];
+            $monto_a_pagar =  $recibo["monto_a_pagar"] * $articulos;
+            $cancela_cliente =  $recibo["cancela_cliente"];
+            $se_cancela  =  $recibo["se_cancela"];
+            $status  =  $recibo["status"];
+
+
+
+            $r[] = div(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), "max-height: 250px;", 1);
+
+            $r[] = heading_enid(add_text( "TOTAL ", $monto_a_pagar."MXN") , 5);
+            $r[]=  heading_enid(add_text("CUBIERTO", $saldo_cubierto ."MXN") , 5);
+            $r[]=  heading_enid(add_text("ARTÍCULOS", $articulos ) , 5);
+
+            if($cancela_cliente  > 0 || $se_cancela >  0 || $status == 10){
+
+                $r[]=  heading_enid("ORDEN CANCELADA" , 3 , "red_enid strong");
+
+            }
+
+            $response =  append_data($r);
+
+        }
+
+        return $response;
 
     }
 
