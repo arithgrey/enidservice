@@ -1885,6 +1885,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0)
 {
 
 
+
     $base_url = [
         "forma_pago" => "forma_pago/?info=1",
         "forma_pago_search" => "forma_pago/?recibo=",
@@ -1936,14 +1937,23 @@ function path_enid($pos, $extra = 0, $link_directo = 0)
         "desarrollo" => "desarrollo"
     ];
 
-    if ($link_directo > 0) {
 
-        $path = ($extra !== 0) ? $base_url[$pos] . $extra : $base_url[$pos];
 
-    } else {
+    if ( array_key_exists($pos , $base_url) ){
 
-        $path = ($extra !== 0) ? "../" . $base_url[$pos] . $extra : "../" . $base_url[$pos];
+        if ($link_directo > 0) {
 
+            $path = ($extra !== 0) ? $base_url[$pos] . $extra : $base_url[$pos];
+
+        } else {
+
+            $path = ($extra !== 0) ? "../" . $base_url[$pos] . $extra : "../" . $base_url[$pos];
+
+        }
+
+
+    }else{
+        echo "NO EXISTE ->  ".$pos;
     }
 
     return $path;
