@@ -128,8 +128,9 @@ let  set_password = function(e){
 	let flag3 			=  valida_text_form("#pw_nueva_confirm" , ".place_pw_3" , 7 , "Texto " );			
 	let n_password  	= 0;
 	
-	if (flag == flag2 && flag ==  flag3) {	
-		/*Ahora validamos que no sean las mismas que la antigua*/		
+	if (flag === flag2 && flag ===  flag3) {
+		/*Ahora validamos que no sean las mismas que la antigua*/
+
 		let n_password = (get_parameter("#password") !=  get_parameter("#pw_nueva") ) ? 1: 2;
 		if (get_parameter("#password") !=  get_parameter("#pw_nueva_confirm") ){
 			let n_password  =  1;
