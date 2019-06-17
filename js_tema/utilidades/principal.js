@@ -5,7 +5,7 @@ $(document).ready(function(){
 
 
 });
-let parsea_text = function (e) {
+let parsea_text =  (e) =>  {
 
     $(".texto_convertido").empty();
     let text =  get_parameter(".tags_text");
@@ -48,7 +48,7 @@ let parsea_text = function (e) {
     e.preventDefault();
 
 }
-let copia_texto = function () {
+let copia_texto = () => {
 
     var clipboard = new Clipboard('.copy_text');
 

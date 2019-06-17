@@ -49,12 +49,8 @@ class Inicio extends CI_Controller
 				$module = "location:../desarrollo";
 				break;
 
-
-
 			case 20:
-
 				$module = "location:../area_cliente";
-
 				break;
 
 			default:
@@ -67,8 +63,8 @@ class Inicio extends CI_Controller
 
 	private function carga_categorias_destacadas($q=[])
 	{
-		$api = "clasificacion/categorias_destacadas/format/json/";
-		return $this->principal->api($api, $q);
+
+		return $this->principal->api("clasificacion/categorias_destacadas/format/json/", $q);
 	}
 
 }

@@ -1,12 +1,12 @@
 "use strict";
 
-function simula_envio_categoria(e) {
+let simula_envio_categoria = e =>  {
 
     valida_existencia_clasificacion();
     e.preventDefault();
 }
 
-let valida_existencia_clasificacion = function () {
+let valida_existencia_clasificacion = () => {
 
     let data_send = $(".form_categoria").serialize();
     let url = "../q/index.php/api/clasificacion/existencia/format/json/";
@@ -19,18 +19,19 @@ let valida_existencia_clasificacion = function () {
     }).done(next_step_add_clasificacion).fail(function () {
     });
 }
-let next_step_add_clasificacion = function (data) {
+let next_step_add_clasificacion = data  => {
 
-    if (data.existencia == 0) {
+    if (data.existencia < 1 ) {
         /**Se cargan los padres*/
         load_niveles();
+
     } else {
 
         render_enid(".msj_existencia", "<span class='alerta_enid'>ÉSTA CATEGORÍA YA SE ENCUENTRA REGISTRADA</span>");
     }
 }
 
-let load_niveles = function () {
+let load_niveles = () =>  {
 
     $(".msj_existencia").empty();
     $(".form_categoria").hide();
@@ -50,13 +51,13 @@ let load_niveles = function () {
 
 }
 
-let muestra_sugerencias_primer_nivel = function (data) {
+let muestra_sugerencias_primer_nivel = (data)  => {
 
     render_enid(".primer_nivel", data);
     $(".primer_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones);
 }
 
-let muestra_mas_opciones = function (e) {
+let muestra_mas_opciones = (e)  => {
 
     clean_categorias(0);
 
@@ -75,7 +76,7 @@ let muestra_mas_opciones = function (e) {
 
     }
 }
-let muestra_sugerencias_segundo_nivel = function (data) {
+let muestra_sugerencias_segundo_nivel = (data)  => {
 
 
     render_enid(".segundo_nivel", data);
@@ -85,7 +86,7 @@ let muestra_sugerencias_segundo_nivel = function (data) {
     $(".segundo_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_segundo);
 }
 
-let muestra_mas_opciones_segundo = function (e) {
+let muestra_mas_opciones_segundo = (e) =>  {
 
     clean_categorias(1);
 
@@ -105,7 +106,7 @@ let muestra_mas_opciones_segundo = function (e) {
     }
 }
 
-let muestra_sugerencias_tercer_nivel = function (data) {
+let muestra_sugerencias_tercer_nivel = (data) => {
 
     render_enid(".tercer_nivel", data);
     $(".seleccion_3").click(function () {
@@ -115,7 +116,7 @@ let muestra_sugerencias_tercer_nivel = function (data) {
     $(".tercer_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_tercer);
 }
 
-let muestra_mas_opciones_tercer = function (e) {
+let muestra_mas_opciones_tercer = (e) =>  {
 
     clean_categorias(2);
     let padre = e.target.value;
@@ -134,7 +135,7 @@ let muestra_mas_opciones_tercer = function (e) {
     }
 }
 
-let muestra_sugerencias_cuarto = function (data) {
+let muestra_sugerencias_cuarto = (data)  => {
 
     render_enid(".cuarto_nivel", data);
     $(".seleccion_4").click(function () {
@@ -145,7 +146,7 @@ let muestra_sugerencias_cuarto = function (data) {
     $(".cuarto_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_quinto);
 }
 
-let muestra_mas_opciones_quinto = function (e) {
+let muestra_mas_opciones_quinto = (e) =>  {
     clean_categorias(3);
     let padre = e.target.value;
     if (padre > 0) {
@@ -163,7 +164,7 @@ let muestra_mas_opciones_quinto = function (e) {
     }
 }
 
-let muestra_sugerencias_quinto = function (data) {
+let muestra_sugerencias_quinto =  (data)  => {
     clean_categorias(4);
     $(".seleccion_4").hide();
     render_enid(".quinto_nivel", data);
@@ -172,7 +173,7 @@ let muestra_sugerencias_quinto = function (data) {
     });
 }
 
-let clean_categorias = function (inicio) {
+let clean_categorias = (inicio)  => {
 
     let categorias = [".primer_nivel",
         ".segundo_nivel",
@@ -186,7 +187,7 @@ let clean_categorias = function (inicio) {
         }
     }
 }
-let add_categoria = function (nivel, padre, tipo) {
+let add_categoria =  (nivel, padre, tipo) => {
 
 
     let clasificacion = get_parameter(".clasificacion");
@@ -203,7 +204,7 @@ let add_categoria = function (nivel, padre, tipo) {
     });
 }
 
-let next_add = function (data) {
+let next_add =  (data) => {
 
     clean_categorias(-1);
     $(".form_categoria").show();

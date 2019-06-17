@@ -3,7 +3,7 @@ $(document).ready(function(){
 	valida_notificacion_pago();
 	carga_productos_sugeridos();
 });
-let valida_notificacion_pago = function(){
+let valida_notificacion_pago = () =>{
 
 	let proceso =  get_parameter(".notificacion_pago");
 	
@@ -30,14 +30,14 @@ let valida_notificacion_pago = function(){
 		});
 	}
 };
-let notificar_compra =  function(){
+let notificar_compra =  () =>{
 
 	let recibo 	  =  get_parameter(".orden");
 	let data_send =  {recibo : recibo};
 	let url 	  =  "../q/index.php/api/recibo/notificacion_pago/format/json/";  
 	request_enid( "PUT",  data_send, url, procesa_notificacion )
 };
-let procesa_notificacion = function(data){
+let procesa_notificacion =  data =>{
 
 	let text = "RECIBIMOS LA NOTIFICACIÓN DE TU COMPRA!";
 		$.confirm({
@@ -56,14 +56,15 @@ let procesa_notificacion = function(data){
 		    }
 		});
 };
-let carga_productos_sugeridos = function(){
+let carga_productos_sugeridos = () => {
 
 	let url 		=  "../q/index.php/api/servicio/sugerencia/format/json/";
 	let q 			=  get_parameter(".qservicio");
 	let data_send 	= {"id_servicio" :  q};
 	request_enid( "GET",  data_send, url, response_carga_productos);
 }
-let response_carga_productos = function(data){
+let response_carga_productos = data =>{
+
 	if (data["sugerencias"] == undefined ){
 		$(".text_interes").removeClass("hidden");
 		render_enid(".place_tambien_podria_interezar" , data);

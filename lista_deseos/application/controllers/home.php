@@ -13,19 +13,10 @@ class Home extends CI_Controller
     function index()
     {
 
-        $data = $this->principal->val_session();
-        $param = $this->input->get();
+        $data   = $this->principal->val_session();
+        $q = (get_param_def($this->input->get(), "q") === "preferencias")  ? $this->load_preferencias($data) : $this->load_lista_deseos($data);
 
-        if (get_param_def($param, "q") === "preferencias") {
-
-            $this->load_preferencias($data);
-
-        } else {
-
-            $this->load_lista_deseos($data);
-        }
     }
-
     private function load_preferencias($data)
     {
 
@@ -81,5 +72,6 @@ class Home extends CI_Controller
         $q["id_usuario"] = $id_usuario;
         $api = "clasificacion/interes_usuario/format/json/";
         return $this->principal->api($api, $q);
+
     }
 }

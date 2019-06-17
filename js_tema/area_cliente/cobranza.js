@@ -1,5 +1,5 @@
 "use strict";
-let cargar_info_resumen_pago_pendiente = function (e) {
+let cargar_info_resumen_pago_pendiente = function (e ){
 
 
     recorrepage();
@@ -30,27 +30,29 @@ let cargar_info_resumen_pago_pendiente = function (e) {
         request_enid("GET", data_send, url, response_carga_info_resumen_pago_pendiente, ".place_resumen_servicio");
     }
 }
-let response_carga_info_resumen_pago_pendiente = function (data) {
+let response_carga_info_resumen_pago_pendiente = data => {
 
 
     $(".resumen_pagos_pendientes").tab("show");
     render_enid(".place_resumen_servicio", data);
     $(".cancelar_compra").click(confirmar_cancelacion_compra);
     $(".btn_direccion_envio").click(carga_informacion_envio);
+
 }
-let resposponse_confirma_cancelacion = function (data) {
+let resposponse_confirma_cancelacion = data => {
     render_enid(".place_resumen_servicio", data);
     $(".cancelar_orden_compra").click(cancela_compra);
 }
-let cancela_compra = function (e) {
+let cancela_compra = function(e){
 
     let id_recibo = get_parameter_enid($(this), "id");
     set_option(id_recibo);
     let url = "../q/index.php/api/tickets/cancelar/format/json/";
     let data_send = {"id_recibo": get_option("id_recibo"), "modalidad": get_option("modalidad_ventas")};
     request_enid("PUT", data_send, url, response_cancelacion_compra);
+
 }
-let response_cancelacion_compra = function (data) {
+let response_cancelacion_compra = (data) => {
 
 
     if (get_option("modalidad_ventas") == 1) {
@@ -74,7 +76,7 @@ let response_cancelacion_compra = function (data) {
     }
     metricas_perfil();
 }
-let confirmar_cancelacion_compra = function () {
+let confirmar_cancelacion_compra = function() {
 
     set_option("modalidad_ventas", get_attr(this, "modalidad"));
     set_option("id_recibo", get_attr(this, "id"));

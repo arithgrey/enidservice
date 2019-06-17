@@ -24,13 +24,14 @@ $("footer").ready(function () {
 
 
 });
-let set_option = function (key, value) {
+let set_option = (key, value) => {
     option[key] = value;
 }
-let get_option = function (key) {
+let get_option = key => {
+
     return option[key];
 }
-let show_confirm = function (text, text_complemento, text_continuar = 0, on_next = 0, on_cancel = 0) {
+let show_confirm = (text, text_complemento, text_continuar = 0, on_next = 0, on_cancel = 0) => {
 
     if (on_next == 0) {
         on_next = function () {
@@ -58,14 +59,13 @@ let show_confirm = function (text, text_complemento, text_continuar = 0, on_next
         }
     });
 };
-let show_load_enid = function (place) {
-
+let show_load_enid = place => {
 
     let bar = '<div class="progress progress-striped active page-progress-bar">';
     bar += '<div class="progress-bar" style="width: 100%;"></div> </div>';
     render_enid(place, bar);
 }
-let show_response_ok_enid = function (place, msj) {
+let show_response_ok_enid = (place, msj) => {
 
     $(place).show();
     render_enid(place, "<span class='response_ok_enid'>" + msj + "</span>");
@@ -74,12 +74,12 @@ let show_response_ok_enid = function (place, msj) {
         $(place).fadeOut(1500);
     }, 1500);
 }
-let selecciona_valor_select = function (opcion_a_seleccionar, posicion) {
+let selecciona_valor_select = (opcion_a_seleccionar, posicion) => {
 
     $(opcion_a_seleccionar + " option[value='" + posicion + "']").attr("selected", true);
 
 }
-let valida_text_form = function (input, place_msj, len, nom) {
+let valida_text_form = (input, place_msj, len, nom) => {
 
     $(place_msj).show();
     let valor_registrado = $.trim(get_parameter(input));
@@ -101,11 +101,12 @@ let valida_text_form = function (input, place_msj, len, nom) {
     }
     return flag;
 }
-let format_error = function (place_msj, msj) {
+let format_error = (place_msj, msj) => {
 
     render_enid(place_msj, "<div class='col-lg-12 alerta_enid padding_5 top_10 bottom_10'>" + msj + "</div>");
+
 }
-let valida_email_form = function (input, place_msj) {
+let valida_email_form = (input, place_msj) => {
 
     display_elements([place_msj], 1);
     let valor_registrado = $(input).val();
@@ -115,7 +116,7 @@ let valida_email_form = function (input, place_msj) {
         mensaje_user = "Correo electrónico demasiado corto";
         flag = 0;
     }
-    if (valEmail(valor_registrado) == false) {
+    if (!valEmail(valor_registrado)) {
         mensaje_user = "Registre correo electrónico correcto";
         flag = 0;
     }
@@ -133,8 +134,10 @@ let valida_email_form = function (input, place_msj) {
 
     format_error(place_msj, mensaje_user);
     return flag;
+
 }
-let valida_tel_form = function (input, place_msj) {
+let valida_tel_form = (input, place_msj) => {
+
 
     display_elements([place_msj], 1);
     let valor_registrado = get_parameter(input);
@@ -159,14 +162,14 @@ let valida_tel_form = function (input, place_msj) {
     format_error(place_msj, mensaje_user);
     return flag;
 }
-let valEmail = function (valor) {
+let valEmail = valor => {
 
     let re = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
-    let v = (!re.exec(valor)) ? false : true;
-    return v;
+    return !re.exec(valor);
+
 }
 
-function mostrar_img_upload(source, id_section) {
+let mostrar_img_upload = (source, id_section) => {
 
     let list = document.getElementById(id_section);
     $.removeData(list);
@@ -179,30 +182,23 @@ function mostrar_img_upload(source, id_section) {
     list.appendChild(li);
 }
 
-function response_mensaje_contacto(data) {
 
-    show_response_ok_enid(".place_registro_contacto", "<div class='contacto_enviado'> Gracias por enviarnos tu mensaje, pronto sabrás de nosotros. ! </div>");
-    document.getElementById("form_contacto").reset();
-}
 
-function set_places() {
-    let place = [".place_mail_contacto", ".place_tel_contacto"];
-    for (let x in place) {
-        $(place[x]).empty();
-    }
-}
+let showonehideone = (show, hide) => {
 
-function showonehideone(show, hide) {
+
     $(show).show();
-    flex(show);
+    //flex(show);
     $(hide).hide();
 }
 
-function selecciona_select(class_select, valor_a_seleccionar) {
+let selecciona_select = (class_select, valor_a_seleccionar) => {
+
     $(class_select + ' > option[value="' + valor_a_seleccionar + '"]').attr('selected', 'selected');
 }
 
-let metricas_perfil = function () {
+let metricas_perfil = () => {
+
 
     if (get_option("in_session") == 1) {
 
@@ -211,7 +207,7 @@ let metricas_perfil = function () {
         request_enid("GET", data_send, url, response_metricas_perfil);
     }
 }
-let response_metricas_perfil = function (data) {
+let response_metricas_perfil = data => {
 
     render_enid(".num_tareas_dia_pendientes_usr", data.num_tareas_pendientes);
     render_enid(".place_notificaciones_usuario", data.lista_pendientes);
@@ -238,10 +234,9 @@ let response_metricas_perfil = function (data) {
         render_enid(".place_num_pagos_por_realizar", "<span class='notificacion_enid'>" + deuda_cliente + "MXN</span>");
     }
 }
-let termina_session = function () {
-    redirect('../login/index.php/startsession/logout/');
-};
-let notifica_usuario_pendientes = function (num_pendientes) {
+
+let notifica_usuario_pendientes = num_pendientes => {
+
     if (document.visibilityState == 'hidden') {
         if (num_pendientes > 0) {
 
@@ -254,7 +249,7 @@ let notifica_usuario_pendientes = function (num_pendientes) {
         set_titulo_web(get_parameter(".titulo_web"));
     }
 }
-let rotulo_title = function () {
+let rotulo_title = () => {
 
     let num_pendientes = get_option("num_pendientes");
     if (get_option("flag_activa_notificaciones") == 1) {
@@ -274,13 +269,13 @@ let rotulo_title = function () {
     }
 }
 
-let set_titulo_web = function (n_titulo_web) {
+let set_titulo_web = str => {
 
-    let titulo_web = n_titulo_web;
-    set_option("titulo_web", n_titulo_web);
+    let titulo_web = str;
+    set_option("titulo_web", str);
     document.title = titulo_web;
 }
-let registra_respuesta_pregunta = function (e) {
+let registra_respuesta_pregunta = e => {
 
     let url = "../q/index.php/api/respuesta/index/format/json/";
     let data_send = $(".form_respuesta_ticket").serialize();
@@ -289,7 +284,7 @@ let registra_respuesta_pregunta = function (e) {
     request_enid("POST", data_send, url, carga_comentarios_terea_simple);
     e.preventDefault();
 }
-let quitar_espacios_numericos = function (nuevo_valor, texto = 0) {
+let quitar_espacios_numericos = (nuevo_valor, texto = 0) => {
 
 
     let f_punto = 0;
@@ -323,14 +318,14 @@ let quitar_espacios_numericos = function (nuevo_valor, texto = 0) {
     }
 
 }
-let sin_espacios = function (input) {
+let sin_espacios = input => {
 
     let valor = get_parameter(input);
     let nuevo = quitar_espacios_numericos(valor, 1);
     set_parameter(input, nuevo);
 
 }
-let quita_espacios_input = function () {
+let quita_espacios_input = () => {
 
     let valor = get_parameter(".telefono_info_contacto");
     let nuevo = quitar_espacios_numericos(valor);
@@ -338,7 +333,7 @@ let quita_espacios_input = function () {
 
 }
 
-let quita_espacios = function (input) {
+let quita_espacios = input => {
 
     let valor = get_parameter(input);
     let nuevo = quitar_espacios_numericos(valor);
@@ -346,35 +341,28 @@ let quita_espacios = function (input) {
 
 }
 
-let quita_espacios_input_precio = function () {
+let quita_espacios_input_precio = () => {
 
     let valor = get_parameter(".precio");
     let nuevo = quitar_espacios_numericos(valor);
     set_parameter(".precio", nuevo);
 
 }
-let validar_si_numero = function (numero) {
 
-    return (!/^([0-9])*$/.test(numero)) ? false : true;
-}
-let quita_espacios_en_input_num = function (valor) {
+let comparer = index => {
 
-    let nuevo = quitar_espacios_numericos(get_parameter(valor));
-    $(this).val(nuevo);
-}
-
-let comparer = function (index) {
     return function (a, b) {
         let valA = getCellValue(a, index), valB = getCellValue(b, index);
         return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
     }
 }
 
-let getCellValue = function (row, index) {
+let getCellValue = (row, index) => {
 
     return $(row).children('td').eq(index).text()
+
 }
-let ordena_table_general = function () {
+let ordena_table_general = function(){
 
     let table = $(this).parents('table').eq(0);
     let rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
@@ -387,25 +375,20 @@ let ordena_table_general = function () {
     }
 }
 
-function minusculas(e) {
-    e.value = e.value.toLowerCase();
-}
 
-function openNav() {
+let openNav = () => {
+
     document.getElementById("mySidenav").style.width = "70%";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+
 }
 
-let closeNav = function () {
+let closeNav =  () => {
     document.getElementById("mySidenav").style.width = "0";
     document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
-let reset_form = function (id) {
 
-    document.getElementById(id).reset();
-
-}
-let array_key_exists = function (key, array) {
+let array_key_exists =  (key, array) =>  {
 
     let response = 0;
     if (array.hasOwnProperty(key)) {
@@ -418,84 +401,50 @@ let array_key_exists = function (key, array) {
     return response;
 
 }
-let isArray = function (param) {
 
-    return param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
-}
+let getMaxOfArray  =  numArray =>  {
 
-let getObjkeys = function (param) {
-    return Object.keys(param);
-}
-
-function getMaxOfArray(numArray) {
     return Math.max.apply(null, numArray);
+
 }
 
-function display_elements(array, tipo) {
+let  display_elements =  (array, tipo) => {
+
     for (let x in array) {
-        /*Cuando se muestra*/
-        if (tipo == 1) {
-            $(array[x]).css("display", "block");
-        } else {
-            /*Cuando se ocualtan*/
-            $(array[x]).css("display", "none");
-        }
+
+        let display = (tipo == 1) ? "block" : "none";
+        $(array[x]).css("display", display);
+
     }
+
 }
 
 /*SE ELIMINAN EL CONTENIDO LOS ELEMENTOS*/
-function empty_elements(array) {
+let  empty_elements = (array) => {
+
     for (let x in array) {
-        /*Cuando se muestra*/
+
         $(array[x]).empty();
     }
 }
 
 /*Regresa el valor que esta en el nodo html*/
-let get_parameter_enid = function (element, param) {
+let get_parameter_enid = (element, param) => {
 
     let val = element.attr(param);
     if (typeof val !== undefined) {
+
         return val;
+
     } else {
+
         console.log("No existe " + param + " el parametro en el nodo");
         return false;
     }
 }
 
-/*ingresa valor al input*/
-function set_parameter(element, valor) {
-    $(element).val(valor);
-}
+let request_enid =  (method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "")  => {
 
-/*El dispositivo en el que se accede es telefono?*/
-function is_mobile() {
-
-    return get_option("is_mobile");
-}
-
-function render_enid(idelement, data) {
-    $(idelement).html(data);
-}
-
-function valorHTML(idelement, data) {
-    $(idelement).val(data);
-}
-
-function redirect(url) {
-    window.location.replace(url);
-}
-
-function showonehideone(elementomostrar, elementoocultar) {
-    $(elementomostrar).show();
-    $(elementoocultar).hide();
-}
-
-function get_attr(e, elemento) {
-    return $(e).attr(elemento);
-}
-
-let request_enid = function (method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "") {
     if (before_send < 1) {
         if (place_before_send.length > 0) {
             var before_send = function () {
@@ -520,40 +469,30 @@ let request_enid = function (method, data_send, url, call_back, place_before_sen
     }).done(call_back);
 }
 
-let set_black = function (array) {
+let set_black = array => {
+
     for (let x in array) {
+
         set_parameter(array[x], "");
     }
 }
-let focus_input = function (input) {
+let focus_input = input =>  {
 
+    let base = "1px solid rgb(13, 62, 86)";
     if (isArray(input)) {
 
         for (const i in input) {
-            $(input[i]).css("border", "1px solid rgb(13, 62, 86)");
+
+            $(input[i]).css("border", base );
+
         }
+
     } else {
-        $(input).css("border", "1px solid rgb(13, 62, 86)");
+
+        $(input).css("border", base );
     }
 }
-let bloquea_form = function (form) {
-
-    $("*", form).prop('disabled', true);
-
-}
-let desbloqueda_form = function (form) {
-
-    $("*", form).prop('disabled', false);
-
-}
-let flex = function (elemento) {
-
-    $(elemento).css("display", "flex");
-}
-let get_valor_selected = function (select) {
-    return get_parameter(select + " option:selected");
-}
-let randomString = function (len, charSet) {
+let randomString =  (len, charSet) => {
     charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomString = '';
     for (let i = 0; i < len; i++) {
@@ -563,7 +502,7 @@ let randomString = function (len, charSet) {
     return randomString;
 }
 /*Recorre a sección*/
-let recorrepage = function (contenedor) {
+let recorrepage =  contenedor =>  {
 
     if (typeof get_parameter(contenedor) !== 'undefined') {
         let simple = contenedor.substring(1, contenedor.length);
@@ -587,14 +526,16 @@ let recorrepage = function (contenedor) {
     }
 
 
-};
-let transforma_mayusculas = function (x) {
+}
+
+let transforma_mayusculas = x => {
     let text = x.value;
     text.trim();
     let text_mayusculas = text.toUpperCase();
     x.value = text_mayusculas;
-};
-let evita_basura = function () {
+}
+
+let evita_basura =  () => {
 
     let text = get_parameter(".input_busqueda_producto");
     text = text.replace(/["']/g, "");
@@ -602,29 +543,9 @@ let evita_basura = function () {
     text = text.replace(/["=]/g, "");
     text = text.replace(/["|]/g, "");
     set_parameter(".input_busqueda_producto", text);
-};
+}
 
-/*Regresa el valor que esta en el nodo html*/
-let get_parameter = function (element, parse_int = 0) {
-
-    let param = $(element).val();
-    if (parse_int < 1) {
-
-        return param;
-
-    } else {
-
-        return parseInt(param);
-
-    }
-
-
-};
-let reloload_img = function (id, url, flag = 0) {
-
-    window.setInterval(reload_imgs(id, url, flag), 50000);
-};
-let reload_imgs = function (id, url, flag = 0) {
+let reload_imgs = (id, url, flag = 0) => {
 
     if (document.location.hostname != "localhost" && flag > 0) {
 
@@ -633,9 +554,9 @@ let reload_imgs = function (id, url, flag = 0) {
             console.log(url);
         }
     }
-};
+}
 
-let show_error_enid = function () {
+let show_error_enid = () => {
 
     let url = "../bug/index.php/api/reportes/reporte_sistema/format/json/";
     let URLactual = window.location;
@@ -646,26 +567,8 @@ let show_error_enid = function () {
 
     });
 }
-let envia_comentario = function (e) {
 
-    let url = $("#form_contacto").attr("action");
-    let f = valida_email_form("#emp_email", ".place_mail_contacto");
-    if (f == 1) {
-        set_places();
-
-        f = valida_tel_form("#tel", ".place_tel_contacto");
-        if (f == 1) {
-            set_places();
-            recorrepage("#btn_envio_mensaje");
-            let id_empresa = 1;
-            let data_send = $("#form_contacto").serialize() + "&" + $.param({"empresa": id_empresa, "tipo": 2});
-            request_enid("POST", data_send, url, response_mensaje_contacto, ".place_registro_contacto");
-        }
-    }
-    e.preventDefault();
-}
-
-let valida_num_form = function (input, place_msj) {
+let valida_num_form = (input, place_msj) => {
 
     $(place_msj).show();
     let valor_registrado = get_parameter(input);
@@ -684,14 +587,14 @@ let valida_num_form = function (input, place_msj) {
     format_error(place_msj, mensaje_user);
     return f;
 }
-let advierte = function (text) {
+let advierte = text => {
 
     $(".text-order-name-error").text(text);
     $("#modal-error-message").modal("show");
-}
-let div_enid = function (id_padre, text, clase = '') {
 
-    debugger;
+}
+let div_enid = (id_padre, text, clase = '') => {
+
     var newDiv = document.createElement("div");
     var newContent = document.createTextNode(text);
 
@@ -711,3 +614,87 @@ let div_enid = function (id_padre, text, clase = '') {
 
 
 }
+
+let reset_form = id => document.getElementById(id).reset();
+
+let termina_session = () => redirect('../login/index.php/startsession/logout/');
+
+let quita_espacios_en_input_num = v =>  $(this).val(quitar_espacios_numericos(get_parameter(v)));
+
+let desbloqueda_form = form =>  $("*", form).prop('disabled', false);
+
+let flex = elemento => $(elemento).css("display", "flex");
+
+let validar_si_numero = numero => (!/^([0-9])*$/.test(numero)) ? false : true;
+
+let  set_parameter = (element, valor) => $(element).val(valor);
+
+let bloquea_form =  form => $("*", form).prop('disabled', true);
+
+let is_mobile = () => get_option("is_mobile");
+
+let isArray =  (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
+
+/*Regresa el valor que esta en el nodo html*/
+let get_parameter = (element, parse_int = 0) =>  (parse_int < 1) ? $(element).val() : parseInt( $(element).val() );
+
+let getObjkeys = param => Object.keys(param);
+
+let render_enid = (idelement, data) => $(idelement).html(data);
+
+let get_valor_selected = select  =>  get_parameter(select + " option:selected");
+
+let redirect = url =>  window.location.replace(url);
+
+let get_attr =  (e, elemento) => $(e).attr(elemento);
+//let reloload_img = (id, url, flag = 0) => window.setInterval(reload_imgs(id, url, flag), 50000);
+/*
+let minusculas = (e) => {
+
+    e.value = e.value.toLowerCase();
+}
+*/
+
+/*PASAR ESTA PORQUERÍA A DONDE DEBE*/
+let response_mensaje_contacto = data => {
+
+    show_response_ok_enid(".place_registro_contacto", "<div class='contacto_enviado'> Gracias por enviarnos tu mensaje, pronto sabrás de nosotros. ! </div>");
+    document.getElementById("form_contacto").reset();
+}
+let envia_comentario = e => {
+
+    let url = $("#form_contacto").attr("action");
+    let f = valida_email_form("#emp_email", ".place_mail_contacto");
+    if (f == 1) {
+        set_places();
+
+        f = valida_tel_form("#tel", ".place_tel_contacto");
+        if (f == 1) {
+            set_places();
+            recorrepage("#btn_envio_mensaje");
+            let id_empresa = 1;
+            let data_send = $("#form_contacto").serialize() + "&" + $.param({"empresa": id_empresa, "tipo": 2});
+            request_enid("POST", data_send, url, response_mensaje_contacto, ".place_registro_contacto");
+        }
+    }
+    e.preventDefault();
+}
+
+
+let set_places = () => {
+
+    let place = [".place_mail_contacto", ".place_tel_contacto"];
+    place.map(empty_elements);
+
+}
+/*AQUÍ TERMINAN LAS PORQUERIAS*/
+
+
+let submit_enid = (form) => {
+    ///
+    /*Agrgar validaciones sobre si existe el formulario*/
+    $(form).submit();
+
+}
+let go_login = ( data ) => redirect("../login");
+let up_page  =  (data) => redirect("");

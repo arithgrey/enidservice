@@ -13,16 +13,9 @@ class Home extends CI_Controller
     function index()
     {
 
-        $param = $this->input->get();
-        if (array_key_exists("tag", $param)) {
 
-            $this->get_form();
+        $fn = (array_key_exists("tag", $this->input->get())) ? $this->get_form() : $this->get_listado();
 
-        } else {
-
-            $this->get_listado();
-
-        }
     }
 
     private function get_form()
@@ -36,35 +29,40 @@ class Home extends CI_Controller
             $send["in_session"] = $data["in_session"];
             if ($send["in_session"] < 1) {
 
-                $session_data = [ "servicio_pregunta" => $servicio ];
+                $session_data = [
+                    "servicio_pregunta" => $servicio
+                ];
+
                 $this->principal->set_userdata($session_data);
+
                 redirect("../../login");
 
 
             } else {
 
-                
+
                 $send["id_servicio"] = $servicio;
                 $data["id_servicio"] = $servicio;
                 $send["id_usuario"] = ($send["in_session"] == 1) ? $this->principal->get_session("idusuario") : 0;
-                $data = $this->principal->getCssJs($data, "pregunta");
-                $response  = get_format_pregunta($this->carga_formulario_valoracion($send), $send["id_servicio"]);
 
+                $response = get_format_pregunta($this->carga_formulario_valoracion($send), $send["id_servicio"]);
 
-                $this->principal->show_data_page( $data ,  $response , 1);
+                $this->principal->show_data_page($this->principal->getCssJs($data, "pregunta"), $response, 1);
             }
 
 
         } else {
+
             header("location:../?q2=0&q=");
+
         }
     }
 
     private function carga_formulario_valoracion($q)
     {
 
-        $api = "valoracion/pregunta_consumudor_form/format/json/";
-        return $this->principal->api($api, $q);
+
+        return $this->principal->api("valoracion/pregunta_consumudor_form/format/json/", $q);
     }
 
     private function get_listado()
@@ -107,10 +105,8 @@ class Home extends CI_Controller
 
         $preguntas = $this->get_preguntas_hechas_cliente($id_usuario, $id_pregunta);
         $data["preguntas_format"] = get_format_preguntas($preguntas, 0);
-        
-        $data = $this->principal->getCssJs($data, "pregunta_hechas");
         $response = get_format_listado(get_format_preguntas($preguntas, 0));
-        $this->principal->show_data_page($data, $response, 1);
+        $this->principal->show_data_page($this->principal->getCssJs($data, "pregunta_hechas"), $response, 1);
 
 
     }
@@ -118,14 +114,16 @@ class Home extends CI_Controller
     function get_preguntas_hechas_cliente($id_usuario, $id_pregunta)
     {
 
+        $q = [
 
-        $q["id_pregunta"] = $id_pregunta;
-        $q["id_usuario"] = $id_usuario;
-        $q["recepcion"] = 1;
-        $q["num_respuesta"] = 1;
+            "id_pregunta" => $id_pregunta,
+            "id_usuario" => $id_usuario,
+            "recepcion" => 1,
+            "num_respuesta" => 1,
 
-        $api = "pregunta/cliente/format/json/";
-        return $this->principal->api($api, $q);
+        ];
+
+        return $this->principal->api("pregunta/cliente/format/json/", $q);
 
     }
 
@@ -133,10 +131,8 @@ class Home extends CI_Controller
     {
 
         $preguntas = $this->get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta);
-        
-        $data = $this->principal->getCssJs($data, "pregunta_recibida");
         $response = get_format_listado(get_format_preguntas($preguntas, 1));
-        $this->principal->show_data_page($data, $response, 1);
+        $this->principal->show_data_page($this->principal->getCssJs($data, "pregunta_recibida"), $response, 1);
 
 
     }
@@ -144,12 +140,16 @@ class Home extends CI_Controller
     private function get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta)
     {
 
-        $q["id_pregunta"] = $id_pregunta;
-        $q["id_vendedor"] = $id_usuario;
-        $q["recepcion"] = 1;
-        $q["num_respuesta"] = 1;
-        $api = "pregunta/vendedor/format/json/";
-        return $this->principal->api($api, $q);
+        $q = [
+
+            "id_pregunta" => $id_pregunta,
+            "id_vendedor" => $id_usuario,
+            "recepcion" => 1,
+            "num_respuesta" => 1
+
+        ];
+
+        return $this->principal->api("pregunta/vendedor/format/json/", $q);
 
     }
 

@@ -13,11 +13,13 @@ class Home extends CI_Controller
     {
 
         $data = $this->principal->val_session();
+
         $data["respuesta"] = "";
         $data["faqs_categoria"] = "";
         $data["r_sim"] = "";
 
         $param = ($this->input->get() !== false) ? $this->input->get() : [];
+
         $faq = (array_key_exists("faq", $param)) ? $param["faq"] : "";
         $faqs = (array_key_exists("faqs", $param)) ? $param["faqs"] : "";
         $categoria = (array_key_exists("categoria", $param)) ? $param["categoria"] : "";

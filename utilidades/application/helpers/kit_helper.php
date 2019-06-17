@@ -13,9 +13,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] =  form_close();
             $r[] =  div(place("texto_convertido", ["id"=> "texto_convertido"]), "top_50");
 
-            $resposne = div(div(append_data($r),6,1),"row top_50");
-            return $resposne;
-
+            return   div(div(append_data($r),6,1),"row top_50");
 
         }
     }

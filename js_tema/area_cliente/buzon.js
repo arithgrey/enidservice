@@ -1,16 +1,16 @@
 "use strict";
-let carga_buzon = function(){
+let carga_buzon = () =>{
 
 	$(".contenedor_opciones_buzon").show();
 	let url =  "../q/index.php/api/pregunta/buzon/format/json/";		
 	let data_send =  {"modalidad" : get_option("modalidad_ventas")};	
 	request_enid( "GET",  data_send, url, response_buzon, ".place_buzon" );	
 }
-let response_buzon = function(data){
+let response_buzon = data => {
 	render_enid(".place_buzon"  , data);										
 	$(".pregunta").click(carga_respuestas);		
 }
-let carga_respuestas = function(){
+let carga_respuestas = () =>{
 
 	let id_pregunta 		=  	parseInt(get_attr(this, "id"));	
 	let pregunta 			=  	get_attr(this, "pregunta");		
@@ -27,21 +27,21 @@ let carga_respuestas = function(){
 	}
 	
 }
-let carga_respuesta_complete = function(){
+let carga_respuesta_complete = () =>{
 
 	let data_send	 	=  get_option("data_pregunta");
 	console.log(data_send);
 	let url 			=  "../q/index.php/api/respuesta/respuesta_pregunta/format/json/";		
 	request_enid( "GET",  data_send, url, response_respuesta_complete,".place_buzon" );
 }
-let response_respuesta_complete = function(data){
+let response_respuesta_complete = data => {
 
 	$(".contenedor_opciones_buzon").hide();
 	render_enid(".place_buzon" , data);
 	$(".form_valoracion_pregunta").submit(enviar_respuesta);
-	carga_num_preguntas();
+	//carga_num_preguntas();
 }
-let enviar_respuesta = function(e){
+let enviar_respuesta = e  => {
 	
 	let data_send 	=  $(".form_valoracion_pregunta").serialize()+"&"+$.param({"pregunta" : get_option("pregunta") , "modalidad" : get_option("modalidad_ventas")});				
 	let url 		=  "../q/index.php/api/respuesta/respuesta_pregunta/format/json/";			

@@ -2,43 +2,46 @@
 
 class Inicio extends CI_Controller
 {
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->helper("user");
-		$this->load->library(lib_def());
-		$this->principal->acceso();
-	}
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->helper("user");
+        $this->load->library(lib_def());
+        $this->principal->acceso();
+    }
 
-	function index()
-	{
+    function index()
+    {
 
-		$data = $this->principal->val_session("Grupo ventas - Enid Service - ");
-		$num_perfil = $this->principal->getperfiles();
+        $data = $this->principal->val_session("Grupo ventas - Enid Service - ");
 
-		if ($num_perfil == 20) {
+        if ($this->principal->getperfiles() === 20) {
 
-			header("location:".path_enid("area_cliente"));
-		}
+            header("location:" . path_enid("area_cliente"));
+        }
 
-		$data["departamentos"] = $this->get_departamentos_enid();
-		$data["perfiles_enid_service"] = $this->get_perfiles_enid_service();
-		
-		$data = $this->principal->getCssJs($data, "usuarios_enid_service");
-		$this->principal->show_data_page($data, 'empresas_enid');
-	}
-	private function get_perfiles_enid_service()
-	{
 
-		$api = "perfiles/get/format/json/";
-		return $this->principal->api($api, []);
-	}
+        $data += [
 
-	private function get_departamentos_enid()
-	{
+            "departamentos" => $this->get_departamentos_enid(),
+            "perfiles_enid_service" => $this->get_perfiles_enid_service()
 
-		$q["estado"] = 1;
-		$api = "departamento/index/format/json/";
-		return $this->principal->api($api, $q);
-	}
+        ];
+
+
+        $this->principal->show_data_page($this->principal->getCssJs($data, "usuarios_enid_service"), 'empresas_enid');
+    }
+
+    private function get_perfiles_enid_service()
+    {
+
+        return $this->principal->api("perfiles/get/format/json/");
+    }
+
+    private function get_departamentos_enid()
+    {
+
+        $q["estado"] = 1;
+        return $this->principal->api("departamento/index/format/json/", $q);
+    }
 }

@@ -53,7 +53,6 @@ if (!function_exists('invierte_date_time')) {
 
             $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
             $x[] = div($valoraciones, "top_30");
-
             $x[] = div(
                 anchor_enid(
                     "VER COMENTARIOS",
@@ -104,12 +103,10 @@ if (!function_exists('invierte_date_time')) {
     function valida_active_tab($nombre_seccion, $estatus)
     {
 
-        if (strlen($estatus) > 0) {
-            $status = ($nombre_seccion == $estatus) ? " active " : "";
-        } else {
-            $status = ($nombre_seccion == "compras") ? " active " : "";
-        }
-        return $status;
+        $a = ($nombre_seccion == $estatus) ? " active " : "";
+        $b = ($nombre_seccion == "compras") ? " active " : "";
+        return  (strlen($estatus) > 0) ? $a :  $b;
+
     }
 
     function get_menu($action)
@@ -178,7 +175,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         $list = [
-
             $a_vendedor,
             $a_mis_ventas,
             $place_ventas,

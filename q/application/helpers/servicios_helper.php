@@ -1191,7 +1191,7 @@ if (!function_exists('invierte_date_time')) {
 
         array_push($r, anchor_enid(
                 $text_precio_unidad,
-                "a_precio_unidad text_costo informacion_precio_unidad"
+                ["class" => "a_precio_unidad text_costo informacion_precio_unidad"]
                 ,
                 1)
         );

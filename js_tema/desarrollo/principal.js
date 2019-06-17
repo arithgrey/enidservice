@@ -57,16 +57,17 @@ $(document).ready(function () {
 
 });
 
-let cargar_productividad = function (e) {
+let cargar_productividad = e => {
 
     let url = "../q/index.php/api/productividad/usuario/format/json/";
     request_enid("GET", data_send, url, 1, ".place_productividad", 0, ".place_productividad");
     e.preventDefault();
+
 }
-let recorre_web_version_movil = function () {
-    recorrepage(".tab-content");
-}
-let carga_metricas_desarrollo = function (e) {
+
+let recorre_web_version_movil = () => recorrepage(".tab-content");
+
+let carga_metricas_desarrollo = (e) => {
 
 
     if (get_parameter(".form_busqueda_desarrollo #datetimepicker4").length > 5 && get_parameter(".form_busqueda_desarrollo #datetimepicker5").length > 5) {
@@ -83,14 +84,13 @@ let carga_metricas_desarrollo = function (e) {
     }
     e.preventDefault();
 }
-let response_carga_metricas = function (data) {
+let response_carga_metricas = (data) => {
 
     render_enid(".place_metricas_desarrollo", data);
     $('th').click(ordena_table_general);
 }
-let carga_comparativas = function () {
+let carga_comparativas = () => {
 
-    debugger;
     let url = "../q/index.php/api/desarrollo/comparativas/format/json/";
     let data_send = {tiempo: 1};
 
@@ -100,7 +100,7 @@ let carga_comparativas = function () {
 
     }, ".place_metricas_comparativa");
 }
-let carga_solicitudes_cliente = function (e) {
+let carga_solicitudes_cliente = e => {
 
 
     if (get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker4").length > 5 && get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker5").length > 5) {
@@ -116,31 +116,33 @@ let carga_solicitudes_cliente = function (e) {
     }
     e.preventDefault();
 }
-let response_carga_solicitudes = function (data) {
+let response_carga_solicitudes = data => {
+
     render_enid(".place_metricas_servicio", data);
     $('th').click(ordena_table_general);
 }
 
-let carga_num_pendientes = function () {
+let carga_num_pendientes = () => {
 
     let url = "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";
     let data_send = {"id_usuario": get_option("id_usuario"), "id_departamento": get_option("id_depto")};
     request_enid("GET", data_send, url, 1, ".place_tareas_pendientes", ".place_tareas_pendientes");
 }
 
-let form_nuevo_ticket = function () {
+let form_nuevo_ticket = () => {
 
     let url = "../q/index.php/api/tickets/form/format/json/";
     let data_send = {};
     request_enid("GET", data_send, url, response_form_nuevo_ticket, ".place_form_tickets");
 }
 
-let response_form_nuevo_ticket = function (data) {
+let response_form_nuevo_ticket = data => {
+
     render_enid(".place_form_tickets", data);
     $(".form_ticket").submit(registra_ticket);
 }
 
-let registra_ticket = function (e) {
+let registra_ticket = e => {
 
     let url = "../q/index.php/api/tickets/index/format/json/";
     let data_send = $(".form_ticket").serialize();
@@ -148,7 +150,7 @@ let registra_ticket = function (e) {
     e.preventDefault();
 
 }
-let response_registro_ticket = function (data) {
+let response_registro_ticket = data => {
     render_enid(".place_registro_ticket", "A la brevedad se realizará su solicitud!");
     set_option("id_ticket", data);
     $("#ver_avances").tab("show");
@@ -165,7 +167,7 @@ let set_estatus_ticket = function (id_ticket, status) {
         carga_tikets_usuario();
     });
 }
-let carga_info_detalle_ticket = function () {
+let carga_info_detalle_ticket = () => {
 
     set_option("s", 1);
     let url = "../q/index.php/api/tickets/detalle/format/json/";
@@ -173,13 +175,12 @@ let carga_info_detalle_ticket = function () {
     request_enid("GET", data_send, url, response_carga_ticket);
 }
 
-let response_carga_ticket = function (data) {
+let response_carga_ticket = (data) => {
 
 
     render_enid(".place_proyectos", data);
     display_elements([".seccion_nueva_tarea"], 0);
     $(".mostrar_tareas_pendientes").hide();
-    //$(".btn_mod_ticket").click(set_estatus_ticket);
     $(".btn_agregar_tarea").click(agregar_tarea);
 
 
@@ -225,7 +226,7 @@ let carga_comentarios_tareas = function (e) {
 
 }
 
-let carga_comentarios_terea_simple = function () {
+let carga_comentarios_terea_simple = () => {
 
     let tarea = get_option("tarea");
     let url = "../q/index.php/api/respuesta/respuestas/format/json/";
@@ -247,7 +248,7 @@ let response_carga_comentario_tareas = function (data) {
 
 }
 
-let registra_tarea = function (e) {
+let registra_tarea = e => {
 
     let requerimiento = $(".form_agregar_tarea .note-editable").html();
     let url = "../q/index.php/api/tarea/index/format/json/";
@@ -259,20 +260,20 @@ let registra_tarea = function (e) {
     e.preventDefault();
 
 }
-let muestra_tareas_por_estatus = function () {
+let muestra_tareas_por_estatus = () => {
 
     showonehideone(".mostrar_todas_las_tareas", ".tarea_pendiente");
     $(".mostrar_tareas_pendientes").hide();
     set_option("flag_mostrar_solo_pendientes", 1);
 }
 
-let muestra_todas_las_tareas = function () {
+let muestra_todas_las_tareas = () => {
 
     showonehideone(".tarea_pendiente", ".mostrar_todas_las_tareas");
     $(".mostrar_tareas_pendientes").show();
     set_option("flag_mostrar_solo_pendientes", 0);
 }
-let carga_tikets_usuario = function () {
+let carga_tikets_usuario = () => {
 
     let status_ticket = 0;
     if (document.querySelector(".estatus_tickets")) {
@@ -295,18 +296,18 @@ let response_carga_tickets = function (data) {
 
     render_enid(".place_proyectos", data);
 
-    $( ".draggable" ).draggable({
-        drag: function( event, ui ) {
-            let id = $( this ).attr("id");
+    $(".draggable").draggable({
+        drag: function (event, ui) {
+            let id = $(this).attr("id");
             set_option("ticket_drag", id);
 
         }
 
     });
-    $( ".droppable" ).droppable({
-        drop: function( event, ui ) {
-             let status = $( this ).attr("id");
-            set_estatus_ticket(get_option("ticket_drag") , status);
+    $(".droppable").droppable({
+        drop: function (event, ui) {
+            let status = $(this).attr("id");
+            set_estatus_ticket(get_option("ticket_drag"), status);
         }
     });
 
@@ -336,18 +337,22 @@ let actualiza_tareas = function (e) {
     request_enid("PUT", data_send, url, response_actualiza_tareas, ".place_proyectos");
 }
 
-let response_actualiza_tareas = function (data) {
+let response_actualiza_tareas = data => {
 
-    if (data == "cerrado") {
+    if (data === "cerrado") {
+
         carga_tikets_usuario();
+
     } else {
+
         carga_info_detalle_ticket();
+
     }
 }
-let show_section_dinamic_button = function (seccion) {
-    let x = ($(seccion).is(":visible")) ? $(seccion).hide() : $(seccion).show();
-}
-let agregar_tarea = function () {
+
+let show_section_dinamic_button = seccion => ($(seccion).is(":visible")) ? $(seccion).hide() : $(seccion).show();
+
+let agregar_tarea = () => {
 
     show_section_dinamic_button(".seccion_nueva_tarea");
     show_section_dinamic_button(".btn_agregar_tarea");
@@ -361,7 +366,7 @@ let agregar_tarea = function () {
     });
 
 };
-let cerrar_ticket = function (id) {
+let cerrar_ticket = (id) => {
 
     id = parseInt(id)
     if (id > 0) {
@@ -370,7 +375,7 @@ let cerrar_ticket = function (id) {
     }
 
 }
-let confirmacion_cerrar_ticket = function () {
+let confirmacion_cerrar_ticket = () => {
 
     let id_ticket = get_option("id_ticket");
     let url = "../q/index.php/api/tickets/estado/format/json/";
@@ -378,7 +383,7 @@ let confirmacion_cerrar_ticket = function () {
     request_enid("PUT", data_send, url, carga_tikets_usuario);
 
 }
-let valida_retorno = function () {
+let valida_retorno = () => {
 
     switch (parseInt(get_option("s"))) {
 
@@ -397,7 +402,7 @@ let valida_retorno = function () {
     }
 
 }
-let on_load = function () {
+let on_load = () => {
 
 
     let action = get_parameter(".ticket", 1);
@@ -407,7 +412,7 @@ let on_load = function () {
         carga_info_detalle_ticket();
     }
 }
-let edita_descripcion_tarea = function (id_tarea) {
+let edita_descripcion_tarea = id_tarea => {
 
     showonehideone("#tarea_" + id_tarea, ".text_tarea_" + id_tarea);
     $("#tarea_" + id_tarea).keyup(function (e) {
@@ -416,9 +421,9 @@ let edita_descripcion_tarea = function (id_tarea) {
 
         if (code == 13) {
 
-            let text_tarea =  get_parameter(".itarea_" + id_tarea );
+            let text_tarea = get_parameter(".itarea_" + id_tarea);
             let url = "../q/index.php/api/tarea/descripcion/format/json/";
-            let data_send = {"id_tarea": id_tarea, "descripcion": text_tarea };
+            let data_send = {"id_tarea": id_tarea, "descripcion": text_tarea};
             request_enid("PUT", data_send, url, function () {
                 carga_info_detalle_ticket();
             });
@@ -427,13 +432,13 @@ let edita_descripcion_tarea = function (id_tarea) {
 
     });
 }
-let elimina_tarea = function (id_tarea) {
+let elimina_tarea = id_tarea => {
 
 
     show_confirm("¿DESEAS ELIMINAR LA TAREA?", "Se borrará completamente", "ELIMINAR", function () {
-        
+
         let url = "../q/index.php/api/tarea/index/format/json/";
-        let data_send = {"id_tarea": id_tarea };
+        let data_send = {"id_tarea": id_tarea};
         request_enid("DELETE", data_send, url, function () {
 
             carga_info_detalle_ticket();

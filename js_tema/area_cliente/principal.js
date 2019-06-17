@@ -66,7 +66,7 @@ $(document).ready(function () {
     });
 
 });
-let valida_accion_inicial = function () {
+let valida_accion_inicial =  () =>  {
     debugger;
 
     switch (get_parameter(".action")) {
@@ -94,7 +94,7 @@ let valida_accion_inicial = function () {
             break;
     }
 }
-let alcance_producto = function (e) {
+let alcance_producto =  function (e) {
     let tipo = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/servicio/alcance_producto/format/json/";
     let data_send = {tipo: tipo};
@@ -102,14 +102,14 @@ let alcance_producto = function (e) {
         redirect("../producto/?producto=" + data);
     });
 }
-let notifica_tipo_compra = function (tipo, recibo) {
+let notifica_tipo_compra =  (tipo, recibo) => {
 
     let url = "../q/index.php/api/intento_compra/index/format/json/";
     let data_send = {tipo: tipo, recibo: recibo};
     request_enid("POST", data_send, url);
 
 };
-let valida_retorno = function () {
+let valida_retorno =  () => {
 
     let vista = get_option("vista");
     if (vista < 1 ){

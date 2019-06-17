@@ -1,5 +1,5 @@
 "use strict";
-let carga_form_imagenes_usuario = function () {
+let carga_form_imagenes_usuario = () => {
 
     recorrepage(".contenedor_principal_enid");
     display_elements([".imagen_usuario_completa", ".menu_info_usuario", ".contenedor_lateral", ".registro_telefono_usuario_lada_negocio", ".editar_imagen_perfil"], 0);
@@ -7,13 +7,14 @@ let carga_form_imagenes_usuario = function () {
     let url = "../q/index.php/api/img/form_img_user/format/json/";
     request_enid("GET", data_send, url, response_carga_form_imagenes, ".place_form_img");
 }
-let response_carga_form_imagenes = function (data) {
+
+let response_carga_form_imagenes = data => {
 
     render_enid(".place_form_img", data);
     $(".imagen_img").change(upload_imgs_enid_pre);
 
 }
-let upload_imgs_enid_pre = function () {
+let upload_imgs_enid_pre =  function() {
 
 
     let i = 0, len = this.files.length, img, reader, file;
@@ -26,8 +27,10 @@ let upload_imgs_enid_pre = function () {
         $("#form_img_enid").submit(registra_img_usr);
     };
     reader.readAsDataURL(file);
+
 }
-let registra_img_usr = function (e) {
+
+let registra_img_usr = e => {
 
     e.preventDefault();
     let formData = new FormData(document.getElementById("form_img_enid"));

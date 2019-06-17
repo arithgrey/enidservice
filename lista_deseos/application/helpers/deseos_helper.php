@@ -268,7 +268,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $extra = (array_key_exists("id_usuario", $row) && !is_null($row["id_usuario"])) ? "selected_clasificacion" : "";
-            $preferencia_ = "preferencia_" . $row['id_clasificacion'];
+            $preferencia_ = "preferencia_".$row['id_clasificacion'];
 
             $config = [
                 'class' => 'list-preferencias item_preferencias ' . $preferencia_ . ' ' . $extra . ' ',

@@ -52,8 +52,9 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
 
 		if (if_ext($param, "id_recibo")) {
 
+            $response = [];
 			$punto_encuentro = $this->get_id_proyecto_persona_forma_pago($param["id_recibo"]);
-			if (count($punto_encuentro) > 0 && $punto_encuentro[0]["id_punto_encuentro"]) {
+			if (tiene_data($punto_encuentro)) {
 
 				$id_punto_encuentro = $punto_encuentro[0]["id_punto_encuentro"];
 				$response = $this->get_punto_encuentro($id_punto_encuentro);

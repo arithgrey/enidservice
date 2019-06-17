@@ -1,8 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
     if (!function_exists('crea_repo_categorias_destacadas')) {
-        function get_formar_recomendacion($usuario,$resumen_recomendacion,$paginacion,$resumen_valoraciones_vendedor)
+        function get_formar_recomendacion($data,$resumen_recomendacion,$resumen_valoraciones_vendedor)
         {
+
+            $usuario = $data["usuario"];
+            $paginacion =  $data["paginacion"];
 
             $r[] =  heading_enid("RESEÑAS Y VALORACIONES SOBRE", 3, "underline" ) ;
             $r[] =  anchor_enid(icon('fa fa-shopping-cart') . get_campo($usuario, "nombre"),

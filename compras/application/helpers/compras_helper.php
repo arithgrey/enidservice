@@ -64,7 +64,6 @@ if (!function_exists('invierte_date_time')) {
             $x[] = form_open("", ["class" => "form_compras top_50", "method" => "post"]);
             $x[] = div(append_data($r), 6, 1);
             $x[] = form_close();
-
             $x[] = div(place("place_compras top_50"), 12);
             return append_data($x);
 

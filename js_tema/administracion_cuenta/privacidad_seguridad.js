@@ -1,17 +1,17 @@
 "use strict";
-let get_conceptos = function () {
+let get_conceptos = () => {
 
     let url = "../q/index.php/api/funcionalidad/usuario/format/json/";
     let data_send = {};
     request_enid("GET", data_send, url, response_conceptos)
 }
-let response_conceptos = function (data) {
+let response_conceptos = data => {
 
     render_enid(".contenedor_conceptos_privacidad", data);
     $(".concepto_privacidad").click(update_conceptos_privacidad);
 
 }
-let update_conceptos_privacidad = function (e) {
+let update_conceptos_privacidad = e => {
 
     let concepto = get_parameter_enid($(this), "id");
     let termino_asociado = get_attr(this, "termino_asociado");

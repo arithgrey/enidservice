@@ -822,12 +822,7 @@ if (!function_exists('url_recuperacion_password')) {
         return "../msj/index.php/api/mailrest/recupera_password/format/json/";
     }
 }
-if (!function_exists('url_home')) {
-    function url_home()
-    {
-        return "../../reporte_enid";
-    }
-}
+
 if (!function_exists('get_dominio')) {
     function get_dominio($url)
     {
@@ -1762,11 +1757,16 @@ if (!function_exists('get_format_izquierdo')) {
 
 
         if ($agregar_categoria > 0) {
+
+
             $r[] = div(heading_enid("CATEGORIAS DESTACADAS", 3));
             $r[] = div(anchor_enid(heading_enid("Agregar", 5, "underline top_20"), ["href" => path_enid("nfaq"), "class" => "black"]));
 
         }
-        if (count($categorias_publicas_venta) > 0 || count($categorias_temas_de_ayuda) > 0) {
+
+
+        if (tiene_data($categorias_publicas_venta)  || tiene_data($categorias_temas_de_ayuda) ) {
+
             $r[] = get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda);
         }
 
@@ -1792,6 +1792,7 @@ if (!function_exists('get_format_izquierdo')) {
     }
 
 }
+
 if (!function_exists('get_img_serv')) {
     function get_img_serv($img)
     {
@@ -1884,9 +1885,8 @@ function get_metodos_pago()
 function path_enid($pos, $extra = 0, $link_directo = 0)
 {
 
-
-
     $base_url = [
+        "url_home" => "../reporte_enid",
         "forma_pago" => "forma_pago/?info=1",
         "forma_pago_search" => "forma_pago/?recibo=",
         "nfaq" => "faq/?nueva=1",
@@ -2051,6 +2051,12 @@ function get_social( $proceso_compra, $desc_web)
     return div($response, 1);
 
 }
+function tiene_data($e){
+
+    return  (is_array($e) && count($e) >  0) ? true : false;
+}
+
+
 
 
 /*

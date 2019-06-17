@@ -15,7 +15,7 @@ class Inicio extends CI_Controller
 
         $data = $this->principal->val_session("Enid Service");
         $data["clasificaciones_departamentos"] = "";
-        $data = $this->principal->getCSSJs($data ,  "movimientos");
+        $data = $this->principal->getCSSJs($data, "movimientos");
 
         $param = $this->input->get();
         if ($data["in_session"] == 1) {
@@ -24,7 +24,7 @@ class Inicio extends CI_Controller
             $id_usuario = $data["id_usuario"];
             switch ($action) {
                 case 0:
-                    $this->load_view_general($data, $param, $id_usuario);
+                    $this->load_view_general($data,  $id_usuario);
                     break;
 
                 case 1:
@@ -56,7 +56,7 @@ class Inicio extends CI_Controller
 
                 case 8:
 
-                    $this->saldo_oxxo($data, $param, $id_usuario);
+                    $this->saldo_oxxo($data, $id_usuario);
                     break;
                 case 9:
                     $this->saldo_amigo($data);
@@ -77,33 +77,35 @@ class Inicio extends CI_Controller
     {
 
 
-        $this->principal->show_data_page($this->principal->getCssJs($data , "movimientos_saldo_amigo"), 'solicitar_a_un_amigo');
+        $this->principal->show_data_page($this->principal->getCssJs($data, "movimientos_saldo_amigo"), 'solicitar_a_un_amigo');
 
     }
 
-    private function saldo_oxxo($data, $param, $id_usuario)
+    private function saldo_oxxo($data, $id_usuario)
     {
 
-
+        $param = $this->input->get();
         $data["saldo_disponible"] = $this->get_saldo_usuario($id_usuario);
         $q["id_usuario"] = $id_usuario;
-        $q["id_usuario_venta"] = $this->input->get("operacion");
-        $q["id_recibo"] = $this->input->get("recibo");
+        $q["id_usuario_venta"] = $param["operacion"];
+        $q["id_recibo"] = $param["recibo"];
         $data["recibo"] = $this->get_recibo_por_pagar($q);
 
         if ($data["recibo"]["cuenta_correcta"] == 1) {
+
             $this->principal->show_data_page($data, 'pagar_con_saldo_enid');
+
         } else {
-            redirect("../");
+
+            redirect(path_enid("home"));
+
         }
     }
 
     private function agrega_saldo_oxxo($data)
     {
 
-
-        $data =    $this->principal->getCssJs($data, "movimientos_saldo_oxxo");
-        $this->principal->show_data_page($data, 'agregar_saldo_desde_oxxo');
+        $this->principal->show_data_page($this->principal->getCssJs($data, "movimientos_saldo_oxxo") , 'agregar_saldo_desde_oxxo');
     }
 
     private function crea_cuenta($id_usuario)
@@ -115,16 +117,14 @@ class Inicio extends CI_Controller
             $prm["id_usuario"] = $id_usuario;
             $registro = $this->agregar_cuenta_bancaria($prm);
             $base_transfer = "../../movimientos/?q=transfer";
-            if ($registro["registro_cuenta"] == 1) {
-                redirect($base_transfer . "&action=3");
-            } else {
-                if ($prm["tipo"] == 0) {
-                    redirect($base_transfer . "&action=1&error=1");
-                } else {
-                    redirect($base_transfer . "&action=1&tarjeta=1&error=1");
-                }
-            }
+
+            $ext =  ($prm["tipo"] == 0) ?  "&action=1&error=1" : "&action=1&tarjeta=1&error=1";
+            $fn =  ($registro["registro_cuenta"] > 1) ? redirect($base_transfer . "&action=3") : redirect($base_transfer . $ext);
+
+
+
         } else {
+
             redirect("../../movimientos");
         }
 
@@ -142,14 +142,16 @@ class Inicio extends CI_Controller
     private function load_metodos_transferencia($data, $param, $id_usuario)
     {
 
-        $saldos = $this->get_saldo_usuario($id_usuario);
-        $data["saldo_disponible"] = $saldos;
+
+        $data["saldo_disponible"] = $this->get_saldo_usuario($id_usuario);
         $cuentas_bancarias = $this->get_cuentas_usuario($id_usuario, 0);
         $data["cuentas_gravadas"] = 0;
 
         if (count($cuentas_bancarias) > 0) {
+
             $data["cuentas_gravadas"] = 1;
             $data["cuentas_bancarias"] = $cuentas_bancarias;
+
         }
         $this->principal->show_data_page($data, 'metodos_transferencia');
 
@@ -162,22 +164,19 @@ class Inicio extends CI_Controller
         $data["bancos"] = $this->get_bancos_disponibles($prm);
         $data["usuario"] = $this->principal->get_info_usuario($id_usuario);
         $data["banca"] = get_param_def($param, "tarjeta");
-        $data["error"] = 0;
         $prm = $this->input->get();
-
-        if (get_param_def($prm, "error") > 0) {
-            $data["error"] = 1;
-        }
+        $data["error"] =  (get_param_def($prm, "error") > 0) ?  1 : 0;
         $data["seleccion"] = get_param_def($param, "seleccion");
+
         $this->principal->show_data_page($data, 'metodos_disponibles');
 
     }
 
-    private function load_view_general($data, $param, $id_usuario)
+    private function load_view_general($data, $id_usuario)
     {
 
         $data["saldo_disponible"] = $this->get_saldo_usuario($id_usuario);
-        $data = $this->principal->getCSSJs($data ,  "movimientos_general");
+        $data = $this->principal->getCSSJs($data, "movimientos_general");
         $this->principal->show_data_page($data, 'empresas_enid');
 
     }
@@ -192,9 +191,12 @@ class Inicio extends CI_Controller
     private function get_cuentas_usuario($id_usuario, $tipo)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        $q["tipo"] = $tipo;
-        $q["metodos_disponibles"] = 1;
+        $q  = [
+            "id_usuario" =>  $id_usuario,
+            "tipo" => $tipo,
+            "metodos_disponibles" => 1
+        ];
+
         $api = "cuentas/usuario";
         return $this->principal->api($api, $q, "json", "POST");
     }
