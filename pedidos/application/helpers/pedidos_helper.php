@@ -906,14 +906,14 @@ if (!function_exists('invierte_date_time')) {
 
                 $response = div(
                     guardar("PROCEDER A LA COMPRA " . icon("fa fa-2x fa-shopping-cart"),
-                    [
-                        "style" => "background:blue!important",
-                        "class" => "top_30 f12"
-                    ],
-                    1,
-                    1,
-                    0,
-                    $url
+                        [
+                            "style" => "background:blue!important",
+                            "class" => "top_30 f12"
+                        ],
+                        1,
+                        1,
+                        0,
+                        $url
                     ), 1);
 
             }
