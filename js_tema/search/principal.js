@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(".order").change(filtro);
 });
 
-let filtro = function () {
+let filtro = () => {
 
     let url_actual = window.location;
     let order = get_parameter("#order option:selected");

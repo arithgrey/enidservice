@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 });
 
-let registra_valoracion = function(e) {
+let registra_valoracion = (e) => {
 
     let flag = valida_text_form("#pregunta", ".place_area_pregunta", 5, "Pregunta");
     if (flag == 1) {
@@ -33,42 +33,45 @@ let registra_valoracion = function(e) {
     e.preventDefault();
 }
 
-let response_registro_valoracion = function(data) {
+let response_registro_valoracion = data => {
 
     debugger;
-    if( data !=  false ) {
+    if (data > 0) {
 
-        let url =  "../pregunta/?action=hechas&id="+data+"&#pregunta86";
+        let url = "../pregunta/?action=hechas&id=" + data + "&#pregunta86";
         redirect(url);
     }
 }
 
-let before_registro_valoracion = function() {
+let before_registro_valoracion = () => {
+
     bloquea_form(".form_valoracion");
 }
 
-let carga_productos_sugeridos = function() {
+let carga_productos_sugeridos = () => {
+
     let url = "../q/index.php/api/servicio/sugerencia/format/json/";
     let data_send = {"id_servicio": get_option("servicio")};
     request_enid("GET", data_send, url, response_carga_productos_sugeridos, ".place_tambien_podria_interezar");
 }
 
-let response_carga_productos_sugeridos = function(data) {
+let response_carga_productos_sugeridos = (data) => {
 
     $(".place_tambien_podria_interezar").empty();
-    if (data.sugerencias == undefined && data.sugerencias != 0 ) {
+    if (data.sugerencias == undefined && data.sugerencias != 0) {
 
         render_enid(".place_tambien_podria_interezar", data);
     }
 }
 
-let carga_valoraciones = function() {
+let carga_valoraciones =  () => {
+
     let url = "../q/index.php/api/valoracion/articulo/format/json/";
     let data_send = {"id_servicio": get_option("servicio"), "respuesta_valorada": get_option("respuesta_valorada")};
     request_enid("GET", data_send, url, response_carga_valoraciones, ".place_registro_afiliado");
 }
 
-let response_carga_valoraciones = function(data) {
+let response_carga_valoraciones = (data) => {
 
     render_enid(".place_valoraciones", data);
 
@@ -85,7 +88,7 @@ let response_carga_valoraciones = function(data) {
 
 }
 
-let ordenar_valoraciones = function(e) {
+let ordenar_valoraciones =  function(e) {
 
     let tipo_ordenamiento = get_parameter_enid($(this), "id");
     let div = $(".contenedor_global_recomendaciones");

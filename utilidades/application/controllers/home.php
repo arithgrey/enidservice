@@ -17,8 +17,7 @@ class Home extends CI_Controller
         $data = $this->principal->val_session();
         $this->principal->acceso();
         $data["action"] = $this->input->get("action");
-        $data = $this->principal->getCSSJs($data, "utilidades");
-        $this->principal->show_data_page($data, 'home');
+        $this->principal->show_data_page($this->principal->getCSSJs($data, "utilidades") , 'home');
 
     }
 

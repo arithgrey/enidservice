@@ -5,14 +5,16 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $servicio = $servicio[0];
-        $id_ciclo_facturacion = $servicio["id_ciclo_facturacion"];
-        $precio = $servicio["precio"];
-        $id_servicio = $servicio["id_servicio"];
-
         $response = "";
-        if ($precio > 0 && $id_ciclo_facturacion == 9) {
-            $response = guardar(
+        if (is_array($servicio) && count($servicio) > 0) {
+
+            $servicio = $servicio[0];
+            $id_ciclo_facturacion = $servicio["id_ciclo_facturacion"];
+            $precio = $servicio["precio"];
+            $id_servicio = $servicio["id_servicio"];
+
+
+            $response = ($precio > 0 && $id_ciclo_facturacion == 9) ? guardar(
                 "Pedir más información",
                 [
                     "class" => "bottom_30"
@@ -21,8 +23,11 @@ if (!function_exists('invierte_date_time')) {
                 1,
                 1,
                 path_enid("pregunta_search", $id_servicio . "&disponible=1")
-            );
+            ) : "";
+
         }
+
+
         return $response;
 
 
@@ -66,11 +71,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_ventas_efectivas($deseado)
     {
 
-
-        $text =
-            ($deseado > 0) ? div($deseado . " VENTAS EN LOS ÚLTIMOS 2 MESES", "top_50 ") : "";
-        return $text;
-
+        return ($deseado > 0) ? div($deseado . " VENTAS EN LOS ÚLTIMOS 2 MESES", "top_50 ") : "";
 
     }
 
@@ -100,13 +101,13 @@ if (!function_exists('invierte_date_time')) {
 
         $response = "";
         if ($flag_servicio < 1):
-            if ($existencia > 0):
-                $response = get_form_compra($id_servicio, $flag_servicio, $existencia, $in_session, $q2);
-            endif;
+
+            $response = ($existencia > 0) ? get_form_compra($id_servicio, $flag_servicio, $existencia, $in_session, $q2) : $response;
+
         else:
-            //if ($precio > 0 && $id_ciclo_facturacion != 9): ;
+
             $response = get_form_compra_servicio($id_servicio);
-            //endif;
+
         endif;
         return $response;
     }
@@ -131,8 +132,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(icon('fa fa-truck fa-3x'));
         $r[] = div(heading_enid("POR MENSAJERÍA", 3), "title");
         $r[] = div("QUE LLEGUE A TU CASA U OFICINA", "text");
-        $response = div(
-            append_data($r),
+        $response = div(append_data($r),
             " shadow align-items-center box-part text-center border mh-selector d-flex flex-column justify-content-center "
         );
         $response = div($response, [
@@ -146,8 +146,6 @@ if (!function_exists('invierte_date_time')) {
 
     function get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web, $telefono_visible)
     {
-
-
 
 
         $r[] = get_solicitud_informacion($proceso_compra, $id_servicio);
@@ -175,7 +173,7 @@ if (!function_exists('invierte_date_time')) {
                 12
             ), 13);
         }
-        $r[] = get_social($proceso_compra,$desc_web);
+        $r[] = get_social($proceso_compra, $desc_web);
         $r[] = get_tienda_vendedor($proceso_compra, $id_publicador);
         $r[] = place("", ["style" => "border: solid 1px"]);
 
@@ -207,9 +205,8 @@ if (!function_exists('invierte_date_time')) {
                 );
 
         }
-        $response = div(append_data($r));
-        return $response;
 
+        return div(append_data($r));
 
     }
 
@@ -265,13 +262,11 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["class" => "num_ciclos", "name" => "num_ciclos", "value" => $num_ciclos]);
         $r[] = input_hidden(["class" => "carro_compras", "name" => "carro_compras", "value" => $carro_compras]);
         $r[] = input_hidden(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id_carro_compras]);
-
         $r[] = form_close();
 
         return append_data($r);
 
     }
-
 
 
     function get_form_compra($id_servicio, $flag_servicio, $existencia, $in_session, $q2)
@@ -327,11 +322,8 @@ if (!function_exists('invierte_date_time')) {
     function valida_maximo_compra($flag_servicio, $existencia)
     {
 
-        if ($flag_servicio == 1) {
-            return 100;
-        } else {
-            return $existencia;
-        }
+        return ($flag_servicio == 1) ? 100 : $existencia;
+
     }
 
     if (!function_exists('get_url_imagen_post')) {
@@ -384,9 +376,10 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_text_periodo_compra')) {
         function get_text_periodo_compra($flag_servicio)
         {
-            if ($flag_servicio == 0) {
-                return "Piezas";
-            }
+
+
+            return ($flag_servicio == 0) ? "Piezas" : "";
+
         }
     }
 
@@ -394,9 +387,8 @@ if (!function_exists('invierte_date_time')) {
         function get_text_costo_envio($flag_servicio, $param)
         {
 
-            if ($flag_servicio == 0) {
-                return $param["text_envio"]["cliente"];
-            }
+            return ($flag_servicio == 0 && is_array($param) && array_key_exists("text_envio", $param)) ? $param["text_envio"]["cliente"] : "";
+
         }
     }
     if (!function_exists('get_descripcion_servicio')) {
@@ -457,10 +449,12 @@ if (!function_exists('invierte_date_time')) {
 
             $response = "";
             if ($entregas_en_casa == 1) {
-                $text = ($flag_servicio == 1) ? "EL VENDEDOR TAMBIÉN BRINDA ATENCIÓN EN SU NEGOCIO" : "PUEDES COMPRAR EN EL NEGOCIO DEL VENDEDOR";
 
+                $text = ($flag_servicio == 1) ? "EL VENDEDOR TAMBIÉN BRINDA ATENCIÓN EN SU NEGOCIO" : "PUEDES COMPRAR EN EL NEGOCIO DEL VENDEDOR";
                 $response = text_icon("fa fa-check-circle", $text);
+
             }
+
             return $response;
         }
 
@@ -469,16 +463,21 @@ if (!function_exists('invierte_date_time')) {
         function crea_nombre_publicador_info($usuario, $id_usuario)
         {
 
-            $nombre = $usuario[0]["nombre"];
+            $response  =  "";
+            if (is_array($usuario) && count($usuario) >  0 ){
 
-            $a = anchor_enid(
-                "VENDIDO POR " . span($nombre, "nombre_vendedor underline "),
-                [
-                    "href" => path_enid("search", "/?q3=' . $id_usuario . '&vendedor=' . $nombre"),
-                    'class' => 'informacion_vendedor_descripcion text-justify black '
-                ]);
+                $nombre = $usuario[0]["nombre"];
 
-            return $a;
+                $response = anchor_enid(
+                    "VENDIDO POR " . span($nombre, "nombre_vendedor underline "),
+                    [
+                        "href" => path_enid("search", "/?q3=' . $id_usuario . '&vendedor=' . $nombre"),
+                        'class' => 'informacion_vendedor_descripcion text-justify black '
+                    ]);
+            }
+
+
+            return $response;
 
         }
     }
@@ -487,8 +486,8 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $usado = div(li('- ARTÍCULO USADO'), 1);
-            $text = ($flag_servicio == 0 && $flag_nuevo == 0) ? $usado : "";
-            return $text;
+            return ($flag_servicio == 0 && $flag_nuevo == 0) ? $usado : "";
+
         }
     }
     if (!function_exists('valida_informacion_precio_mayoreo')) {
@@ -591,7 +590,7 @@ if (!function_exists('invierte_date_time')) {
         function valida_editar_servicio($usuario_servicio, $id_usuario, $in_session, $id_servicio, $id_perfil)
         {
 
-            $editar = "";
+            $response  = "";
             if ($in_session == 1) {
                 $href = path_enid("editar_producto", $id_servicio);
                 $editar_button = div(
@@ -604,9 +603,9 @@ if (!function_exists('invierte_date_time')) {
                     ), 'a_enid_black_sm editar_button'
                 );
 
-                $editar = ($id_usuario == $usuario_servicio || $id_perfil != 20) ? $editar_button : "";
+                $response  = ($id_usuario == $usuario_servicio || $id_perfil != 20) ? $editar_button : "";
             }
-            return $editar;
+            return $response ;
         }
     }
     if (!function_exists('valida_text_servicio')) {
@@ -622,6 +621,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $response = ($precio_unidad > 0) ? $precio_unidad . "MXN" : "A CONVENIR";
             }
+
             return $response;
         }
 
@@ -721,9 +721,11 @@ if (!function_exists('invierte_date_time')) {
                         'class' => "a_enid_black d-block"
                     ]
                 );
+
                 $response = div($response, 1);
 
             }
+
             return $response;
         }
 
@@ -737,7 +739,7 @@ if (!function_exists('invierte_date_time')) {
                 anchor_enid(
                     div("SOLICITAR INFORMACIÓN", 'black_enid_background white padding_10', 1),
                     [
-                        "href" => path_enid("pregunta_search",$id_servicio)
+                        "href" => path_enid("pregunta_search", $id_servicio)
                     ]
                 );
 
@@ -752,7 +754,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $btn = anchor_enid(div(
                     text_icon("fa fa-gift fa-x2", "AGREGAR A TU LISTA DE DESEOS ")
-                     ,
+                    ,
                     "a_enid_black"
                     , 1
                 ),
@@ -792,10 +794,7 @@ if (!function_exists('invierte_date_time')) {
         function get_nombre_vendedor($proceso_compra, $usuario, $id_vendedor)
         {
 
-            $response = ($proceso_compra == 0) ? div(crea_nombre_publicador_info($usuario, $id_vendedor), 1) : "";
-
-            return $response;
-
+            return  ($proceso_compra == 0) ? div(crea_nombre_publicador_info($usuario, $id_vendedor), 1) : "";
 
         }
     }

@@ -292,8 +292,8 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(get_form_categorias(), 7);
             $r[] = div(heading("CATEGORÍAS    EN PRODUCTOS Y SERVICIOS", 3), 5);
-            $response = append_data($r);
-            return $response;
+            return  append_data($r);
+
 
 
         }
@@ -334,17 +334,15 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = form_close();
-            $r[] = "
-<table>";
+            $r[] = "<table>";
             $r[] = get_td(place('primer_nivel'));
             $r[] = get_td(place('segundo_nivel'));
             $r[] = get_td(place('tercer_nivel'));
             $r[] = get_td(place('cuarto_nivel'));
             $r[] = get_td(place('quinto_nivel'));
-            $r[] = "
-</table>";
+            $r[] = "</table>";
 
-            $response = append_data($r);
+            return  append_data($r);
 
 
         }
@@ -356,10 +354,8 @@ if (!function_exists('invierte_date_time')) {
         function get_form_agregar_recurso()
         {
 
-
             $r[] = heading_enid("Agregar Recurso", 3);
             $r[] = get_form_recurso();
-
             return append_data($r);
 
         }

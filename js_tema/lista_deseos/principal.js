@@ -61,48 +61,12 @@ $(document).ready(function () {
     });
 
     $(".num_alcance").click(alcance_producto);
-    //$("footer").ready(carga_num_preguntas);
+
 
 
 });
-/*
-let carga_num_preguntas = function () {
 
-    set_option("modalidad_ventas", 1);
-    let url = "../q/index.php/api/pregunta/preguntas_sin_leer/format/json/";
-    let data_send = {"modalidad": get_option("modalidad_ventas")};
-
-    $.ajax({
-        url: url,
-        type: "GET",
-        data: data_send,
-        beforeSend: function () {
-
-        }
-    }).done(function (data) {
-
-        $(".notificacion_preguntas_sin_leer_ventas").empty();
-        $(".notificacion_preguntas_sin_leer_cliente").empty();
-        let total_sin_leer = 0;
-        if (data.modo_vendedor > 0) {
-            render_enid(".notificacion_preguntas_sin_leer_ventas", "<span class='notificacion_preguntas_no_leida'>" + data.modo_vendedor + "</span>");
-            let total_sin_leer = total_sin_leer + parseInt(data.modo_vendedor);
-        }
-        if (data.modo_cliente > 0) {
-            render_enid(".notificacion_preguntas_sin_leer_cliente", "<span class='notificacion_preguntas_no_leida'>" + data.modo_cliente + "</span>");
-            let total_sin_leer = total_sin_leer + parseInt(data.modo_cliente);
-        }
-        if (total_sin_leer > 0) {
-            render_enid(".notificacion_preguntas_sin_leer_cliente_buzon", "<span class='notificacion_preguntas_no_leida white'>" + total_sin_leer + "</span>");
-        }
-
-    }).fail(function () {
-        show_error_enid(".place_buzon", "Error ... ");
-    });
-}
-*/
-
-let valida_accion_inicial = function () {
+let valida_accion_inicial = () => {
 
     let action = get_option("action");
     switch (action) {
@@ -121,7 +85,7 @@ let valida_accion_inicial = function () {
     }
 }
 
-let alcance_producto = function (e) {
+let alcance_producto =  function(e) {
 
     let tipo = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/servicio/alcance_producto/format/json/";

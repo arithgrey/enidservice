@@ -13,8 +13,6 @@ class Home extends CI_Controller
 	{
 		$data = $this->principal->val_session();
 		$data["f_pago"] = 1;
-		
-		
 		$this->principal->show_data_page($data, 'home');
 	}
 

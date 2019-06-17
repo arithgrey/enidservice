@@ -17,11 +17,10 @@ class Sessionclass extends CI_Controller
 
 	function is_logged_in()
 	{
+
 		$is_logged_in = $this->session->userdata('logged_in');
-		if (!isset($is_logged_in) || $is_logged_in != true) {
-			return false;
-		}
-		return true;
+		return (!isset($is_logged_in) || $is_logged_in != true) ? 0 : 1;
+
 	}
 
 	function logout()

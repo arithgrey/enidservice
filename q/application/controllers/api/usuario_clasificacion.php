@@ -41,8 +41,11 @@ class usuario_clasificacion extends REST_Controller
 				"id_clasificacion" => $param["id_clasificacion"]];
 
 			if ($num > 0) {
+
 				$this->usuario_clasificacion_model->delete($params);
+
 			} else {
+
 				$this->usuario_clasificacion_model->insert($params);
 				$response["tipo"] = 1;
 			}

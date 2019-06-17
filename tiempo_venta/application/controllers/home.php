@@ -12,12 +12,10 @@ class Home extends CI_Controller
 
     function index()
     {
+
         $data = $this->principal->val_session();
         $this->principal->acceso();
-        
-        $data = $this->principal->getCssJs($data, "tiempo_venta");
-        $this->principal->show_data_page($data, 'home');
-
+        $this->principal->show_data_page($this->principal->getCssJs($data, "tiempo_venta"), 'home');
 
     }
 

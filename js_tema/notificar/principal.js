@@ -14,7 +14,7 @@ $(document).ready(function(){
 	
 
 });
-let notifica_pago = function(e){
+let notifica_pago = e => {
 
 	let flag 	=  get_option("resultados");
 	if (flag > 0 ){
@@ -38,25 +38,26 @@ let notifica_pago = function(e){
 	e.preventDefault();
 }
 
-let response_notificacion_pago = function(data){
+let response_notificacion_pago = data => {
 
 	render_enid(".placa_notificador_pago" , "<span class='blue_enid_background white' style='padding:10px;'> Recibimos la notificación de tu pago, a la brevedad será procesado!.</span>");
 	recorrepage(".placa_notificador_pago");
 	notifica_registro_pago(data);
 }
 
-let notifica_registro_pago = function(data){
+let notifica_registro_pago = data => {
 
 	let data_send =  {"id_notificacion_pago" : data};	
 	let url = "../msj/index.php/api/emp/notifica_pago/format/json/";
 	request_enid( "POST",  data_send, url, response_notificacion_registro_pago , ".placa_notificador_pago" );	
 }
-let response_notificacion_registro_pago = function(data){
+let response_notificacion_registro_pago =  data => {
+
 	render_enid(".placa_notificador_pago" , "<div class='white' style='background:#04319E;padding:10px;font-size:.9em;'> Su pago ha sido notificado, a continuación será procesado, puede consultar más detalles desde su área de clientes <a href='../login' class='strong' style='color:white!important;'> ingresando aquí</a> </div> ");
 	$(".form_notificacion :input").attr("disabled", true);
 			
 }
-let valida_auto_complete_recibo = function(){
+let valida_auto_complete_recibo = () => {
 	
 	let num_recibo 	=  $(".num_recibo").val();		
 	let url 		=  "../pagos/index.php/api/cobranza/info_saldo_pendiente/format/json/";	
@@ -64,7 +65,7 @@ let valida_auto_complete_recibo = function(){
 	request_enid( "GET",  data_send, url , response_autocomplete);		
 }
 
-let response_autocomplete = function(data){
+let response_autocomplete = data => {
 		
 	let resultados 			=  data.resultados;
 	set_option("resultados" , resultados);
@@ -88,17 +89,18 @@ let response_autocomplete = function(data){
 	set_select_servicio(data.data_servicio);
 			
 }
-let notifica_recibo_en_proceso = function(saldo_cubierto , monto_a_pagar){
+let notifica_recibo_en_proceso = (saldo_cubierto , monto_a_pagar) => {
+
 	if(saldo_cubierto >= monto_a_pagar){
 		$(".place_recibo").show();		
 		render_enid(".place_recibo" , "RECIBIMOS TU NOTIFICACIÓN!");
 	}
 }
 
-let set_id_servicio = function(id_servicio){
-	selecciona_select(".servicio" , id_servicio);	
-}
-let set_select_servicio = function(data_servicio){
+let set_id_servicio = id_servicio => selecciona_select(".servicio" , id_servicio);
+
+
+let set_select_servicio = data_servicio => {
 
 	let select ="<select name='servicio' class='form-control input-sm servicio' id='servicio'>";
 	for (let x in data_servicio) {

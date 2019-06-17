@@ -1,4 +1,4 @@
-let registro_costo_operativo = function (e) {
+let registro_costo_operativo = e => {
 
 
     let data_send = $(".form_costos").serialize();
@@ -9,7 +9,7 @@ let registro_costo_operativo = function (e) {
 
     e.preventDefault();
 }
-let response_costo = function (data) {
+let response_costo = data => {
 
     debugger;
     if (data.num > 0) {
@@ -24,7 +24,7 @@ let response_costo = function (data) {
     }
 
 }
-let muestra_formulario_costo = function () {
+let muestra_formulario_costo = () => {
 
     showonehideone(".contenedor_form_costos_operacion", ".contenedor_costos_registrados");
 }

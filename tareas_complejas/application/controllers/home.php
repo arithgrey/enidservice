@@ -19,9 +19,6 @@ class Home extends CI_Controller
         );
 
 		$data["f_pago"] = 1;
-		
-		
-        $data = $this->principal->getCssJs($data, "tareas_complejas");
-		$this->principal->show_data_page($data, 'home');
+		$this->principal->show_data_page($this->principal->getCssJs($data, "tareas_complejas"), 'home');
 	}
 }

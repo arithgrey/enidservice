@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
             //$data_complete = [];
             foreach ($param as $row) {
 
-                //$primer_nivel = $row["primer_nivel"];
+
                 $total = $row["total"];
                 $nombre_clasificacion = $row["nombre_clasificacion"];
 

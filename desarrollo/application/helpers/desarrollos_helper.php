@@ -5,10 +5,6 @@ if (!function_exists('invierte_date_time')) {
         function get_format_charts()
         {
 
-            //$r[] = heading_enid("Indicadores", 3);
-            //$r[] = get_menu_metricas();
-            //$x[] = div(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]);
-            //$x[] = div(place("place_metricas_comparativa"), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]);
             $x[] = div(form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
             $r[] = div(append_data($x), "tab-content");
             return append_data($r);

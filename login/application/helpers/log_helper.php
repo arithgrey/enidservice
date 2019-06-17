@@ -32,10 +32,9 @@ if (!function_exists('invierte_date_time')) {
             ]
             , 1
         );
+
         $r[] = div(get_form_login(), 1);
-
         $r[] = place("place_acceso_sistema top_20 bottom_20");
-
         $x[] = anchor_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'registrar-cuenta registrar_cuenta']);
         $x[] = anchor_enid(
             "¿OLVIDASTE TU CONTRASEÑA?",

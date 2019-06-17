@@ -11,6 +11,23 @@ class principal extends CI_Controller
     function api($api, $q = [], $format = 'json', $type = 'GET', $debug = 0, $externo = 0, $b = "")
     {
 
+        $e  = 1;
+
+        foreach ($q as $clave => $row ){
+
+            if ( is_null($q[$clave]) ) {
+                $q[$clave] = "";
+                //echo $clave ." va sin valor en ->  " . $api;
+
+            }
+        }
+
+        if( count($q) < 1 ){
+            $q["x"] =  1;
+        }
+
+
+
         if ($externo == 0) {
             $url = "q/index.php/api/";
         } else {
@@ -152,21 +169,14 @@ class principal extends CI_Controller
         return $paginacion;
     }
 
-    function validate_user_sesssion()
-    {
 
-        if ($this->sessionclass->is_logged_in() > 0) {
-            redirect(url_home());
-        }
-    }
 
     function acceso()
     {
 
-        if ($this->sessionclass->is_logged_in() != 1) {
+        $s=  $this->sessionclass->is_logged_in();
+        $fn = ( $this->sessionclass->is_logged_in() > 0  )  ?   "" : $this->logout();
 
-            $this->logout();
-        }
     }
 
     function is_logged_in()
@@ -233,7 +243,7 @@ class principal extends CI_Controller
             $data["info_empresa"] = $this->get_session("info_empresa");
             $data["desc_web"] = $desc;
 
-            return $data;
+
 
         } else {
 
@@ -248,8 +258,9 @@ class principal extends CI_Controller
             $data["desc_web"] = $desc;
             $data["url_img_post"] = (strlen($url_img_post) > 3) ? $url_img_post : create_url_preview("");
 
-            return $data;
+
         }
+        return $data;
     }
 
     function getCSSJs($data, $key)
@@ -979,11 +990,21 @@ class principal extends CI_Controller
         ];
 
 
-        foreach ($response[$key] as $clave => $valor) {
+        if(array_key_exists($key , $response ) ){
 
-            $data[$clave] = $valor;
+            foreach ($response[$key] as $clave => $valor) {
+
+                $data[$clave] = $valor;
+
+            }
+
+        }else{
+
+            echo "NO EXISTE -> " .$key;
 
         }
+
+
 
         return $data;
 

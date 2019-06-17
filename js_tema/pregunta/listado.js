@@ -1,4 +1,4 @@
-let carga_respuestas = function (id, es_vendedor) {
+let carga_respuestas =  (id, es_vendedor) => {
 
     if (id > 0 && es_vendedor.length > 0 ){
         let url = "../q/index.php/api/respon/pregunta/format/json/";
@@ -10,7 +10,7 @@ let carga_respuestas = function (id, es_vendedor) {
 
 
 }
-let response_respuestas = function (data, id) {
+let response_respuestas = (data, id) =>{
 
 
     let p = ".comentarios_" + id;
@@ -30,7 +30,7 @@ let response_respuestas = function (data, id) {
 
 }
 
-let envia_respuesta = function (e) {
+let envia_respuesta =  (e) => {
 
     let l = $(".note-editable").html().trim();
 

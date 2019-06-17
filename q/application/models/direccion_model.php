@@ -8,10 +8,10 @@ class Direccion_model extends CI_Model
 		$this->load->database();
 	}
 
-	function get_data_direccion($param)
+	function get_data_direccion($id_direccion)
 	{
 
-		$id_direccion = $param["id_direccion"];
+
 		$query_get = "SELECT 
                     d.*,
                     cp.* 
@@ -23,6 +23,7 @@ class Direccion_model extends CI_Model
                     cp 
                     ON d.id_codigo_postal =  cp.id_codigo_postal  
                     WHERE d.id_direccion =" . $id_direccion;
+
 		return $this->db->query($query_get)->result_array();
 
 	}

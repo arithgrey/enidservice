@@ -38,7 +38,9 @@ $(document).ready(function(){
 	});
 
 });
-let get_place_usuarios = function(){
+let get_place_usuarios = () => {
+
+
 	let nuevo_place ="";
 	switch(parseFloat(get_option("depto") )){
 		    case 0:
@@ -51,14 +53,14 @@ let get_place_usuarios = function(){
 	} 	
 	return nuevo_place;
 }
-let carga_usuarios = function(){
+let carga_usuarios = () => {
 	
 	let place 		= 	get_place_usuarios();	
 	let url 		=  	"../q/index.php/api/usuario/miembros_activos/format/json/";	
 	let data_send 	= 	{"status": get_option("estado_usuario") , "id_departamento" : get_option("depto") , "page" : get_option("page") };					
 	request_enid( "GET",  data_send, url, response_carga_usuario);
 }
-let response_carga_usuario = function(data){
+let response_carga_usuario = (data) => {
 	let place 		= 	get_place_usuarios();	
 	render_enid(place , data);		
 	$(".pagination > li > a, .pagination > li > span").click(function(e){				
@@ -70,14 +72,16 @@ let response_carga_usuario = function(data){
 	recorrepage(".tab-content");	
 	$(".usuario_enid_service").click(carga_data_usuario);
 }
-let pre_nuevo_usuario = function(){
+let pre_nuevo_usuario = () => {
+
 	get_puestos_por_cargo();
 	$(".email").removeAttr("readonly");	
 	set_option("flag_editar",0);	
 	document.getElementById("form-miembro-enid-service").reset();	
 	$(".place_correo_incorrecto").empty();
+
 }
-let carga_data_usuario = function(e){
+let carga_data_usuario = (e) => {
 
 	document.getElementById("form-miembro-enid-service").reset();	
 	$(".place_correo_incorrecto").empty();
@@ -89,12 +93,12 @@ let carga_data_usuario = function(e){
 	let data_send 	= 	{"id_usuario" : get_option("id_usuario")};					
 	request_enid( "GET",  data_send, url, response_carga_data_usuario);
 }
-let response_carga_data_usuario = function (data){
+let response_carga_data_usuario =  (data) => {
 
 	$(".place_config_usuario").empty();
 	let info_usuario =  data[0];
 
-	nombre 				= 	info_usuario.nombre; 		
+	let nombre 				= 	info_usuario.nombre;
 	let apellido_paterno 	= 	info_usuario.apellido_paterno;
 	let apellido_materno 	= 	info_usuario.apellido_materno;
 	let email 				=  	info_usuario.email;
@@ -122,19 +126,19 @@ let response_carga_data_usuario = function (data){
 
 	get_puestos_por_cargo();
 }
-let get_puestos_por_cargo = function(){
+let get_puestos_por_cargo = () => {
 
 	let url 		=  	"../q/index.php/api/perfiles/puesto_cargo/format/json/";		
 	let depto 		=  	$(".form-miembro-enid-service .depto" ).val();	
 	let data_send 	= 	{id_departamento : depto};					
 	request_enid( "GET", data_send, url, response_puesto_por_cargo);
 }
-let response_puesto_por_cargo = function(data){
+let response_puesto_por_cargo = (data) => {
 
 	render_enid(".place_puestos", data);
 	selecciona_select(".form-miembro-enid-service .puesto" , get_option("perfil"));		
 }
-let actualizacion_usuario = function(e){
+let actualizacion_usuario = (e) => {
 
 	let data_send 	=  $(".form-miembro-enid-service").serialize()+"&"+$.param({"id_usuario" : get_option("id_usuario"), "editar" : get_option("flag_editar") });	
 	let url 		=  "../q/index.php/api/usuario/miembro/format/json/";			
@@ -143,7 +147,7 @@ let actualizacion_usuario = function(e){
 	});	
 	e.preventDefault();
 }
-let response_actualizacion_usuario = function(data , data_send){
+let response_actualizacion_usuario = (data , data_send) => {
 
 	render_enid(".place_correo_incorrecto" , "");		
 	if (data_send.usuario_existente != "0") {
@@ -159,7 +163,7 @@ let response_actualizacion_usuario = function(data , data_send){
 		$("#tab_equipo_enid_service").tab("show");	
 	}	
 }
-let  carga_mapa_menu = function(){
+let  carga_mapa_menu = () => {
 
 	let url 		=  	"../q/index.php/api/recurso/mapa_perfiles_permisos/format/json/";	
 	set_option("id_perfil" , $(".perfil_enid_service").val());  
@@ -167,25 +171,25 @@ let  carga_mapa_menu = function(){
 	request_enid( "GET",  data_send, url, response_carga_mapa);
 	
 }
-let response_carga_mapa = function(data){
+let response_carga_mapa = (data) => {
 	render_enid(".place_perfilles_permisos" , data);		
 	recorrepage(".tab-content");
 	$(".perfil_recurso").click(modifica_accesos_usuario);
 }
-let modifica_accesos_usuario = function(e){
+let modifica_accesos_usuario = (e) => {
 	
 	set_option("id_recurso", get_parameter_enid($(this) , "id"));	
 	let url 		=  	"../q/index.php/api/perfil_recurso/permiso/format/json/";	
 	let data_send 	= 	{"id_perfil" : get_option("id_perfil"),  "id_recurso" : get_option("id_recurso")};					
 	request_enid( "PUT",  data_send, url , carga_mapa_menu );	
 }
-let  registra_recurso = function(e){
+let  registra_recurso = (e) => {
 	let data_send 	=  $(".form_recurso").serialize();	
 	let url 		=  "../q/index.php/api/recurso/index/format/json/";	
 	request_enid( "POST",  data_send, url, response_registro_recurso);
 	e.preventDefault();
 }
-let  response_registro_recurso = function(data){
+let  response_registro_recurso = (data) => {
 
 	$(".place_recurso").empty();
 	document.getElementById("form_recurso").reset();					

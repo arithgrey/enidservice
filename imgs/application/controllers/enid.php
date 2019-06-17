@@ -37,18 +37,20 @@ class Enid extends CI_Controller
 
 		if (count($response) > 0) {
 
-			$id_imagen = $response[0]["id_imagen"];
-			$data = $this->costruye_imagen($id_imagen);
-			return $this->get_img_contents($data);
+			return $this->get_img_contents($this->costruye_imagen($response[0]["id_imagen"]));
 		}
 	}
 
 	function costruye_imagen($id_imagen)
 	{
 
-		foreach ($this->get_img($id_imagen) as $row) {
-			return $row;
-		}
+	    if($id_imagen >  0 ){
+
+            foreach ($this->get_img($id_imagen) as $row) {
+                return $row;
+            }
+        }
+
 	}
 
 	function imagen_servicio($id_servicio = 0)
@@ -64,9 +66,11 @@ class Enid extends CI_Controller
 	function get_img($id_imagen)
 	{
 
-		return $this->img_model->q_get(["nombre_imagen"], $id_imagen);
-	}
+	    if($id_imagen >  0 ){
 
+            return $this->img_model->q_get(["nombre_imagen"], $id_imagen);
+        }
+	}
 	function get_img_usuario($id_usuario)
 	{
 

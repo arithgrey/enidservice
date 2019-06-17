@@ -13,29 +13,43 @@ class Home extends CI_Controller
     {
 
         $param = $this->input->get();
-        if (get_param_def($param, "info") > 0) {
-            $this->crea_info();
-        } else {
-            (ctype_digit($this->input->get("recibo"))) ? $this->crea_orden() : redirect("../../");
+        $i = get_param_def($param, "info");
+
+        switch ($i) {
+
+
+            case $i >  0 :
+
+                $this->crea_info();
+
+                break;
+
+            default:
+
+                $fn = (ctype_digit($this->input->get("recibo"))) ? $this->crea_orden() : redirect("../../");
+
+                break;
+
+
         }
+
     }
 
     private function crea_info()
     {
 
-        $data = $this->principal->getCssJs($this->principal->val_session(""),"forma_pago");
+        $data = $this->principal->getCssJs($this->principal->val_session(), "forma_pago");
         $this->principal->show_data_page($data, get_format_pago(), 1);
     }
 
     private function crea_orden()
     {
 
-        $data = $this->principal->val_session("", "" , "" , create_url_preview("formas_pago_enid.png"));
+        $data = $this->principal->val_session("", "", "", create_url_preview("formas_pago_enid.png"));
         $id_recibo = $this->input->get("recibo");
         $data["recibo"] = $id_recibo;
-        $info_recibo = $this->get_recibo_forma_pago($id_recibo);
-        $data["clasificaciones_departamentos"] = "";
-        $this->principal->show_data_page($data, get_format_orden($info_recibo), 1);
+        $recibo = $this->get_recibo_forma_pago($id_recibo);
+        $this->principal->show_data_page($data, get_format_orden($recibo), 1);
 
     }
 

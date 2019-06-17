@@ -4,7 +4,7 @@ $(document).ready(function () {
 });
 
 
-let busqueda = function (e) {
+let busqueda = (e) => {
 
     let url ="../q/index.php/api/ventas_encuentro/periodo/format/json/";
     let data_send =  $(".form_ventas_encuentro").serialize();
@@ -12,7 +12,4 @@ let busqueda = function (e) {
     e.preventDefault();
 
 }
-let response_ventas_encuentro  = function (data) {
-
-    render_enid(".time_line_ventas_puntos_encuentro", data);
-}
+let response_ventas_encuentro  =  (data) => render_enid(".time_line_ventas_puntos_encuentro", data);

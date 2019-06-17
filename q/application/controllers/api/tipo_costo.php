@@ -13,7 +13,7 @@ class tipo_costo extends REST_Controller
 	function index_GET()
 	{
 
-		$this->response($this->tipo_costo_model->get([] , [] ,  20 ));
+		$this->response($this->tipo_costo_model->get([] , [] ,  20 , "posicion"));
 
 	}
 

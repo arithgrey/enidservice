@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo, $path, $costos_operacion)
+    function get_format_costo_operacion($table_costos, $tipo_costos, $id_recibo, $path, $costos_operacion, $recibo)
     {
 
 
@@ -29,19 +29,47 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(get_form_costos($tipo_costos, $id_recibo, $costos_operacion), "display_none contenedor_form_costos_operacion");
 
         $response[] = div(append_data($r), 8);
-        $response[] = div(format_img_recibo($path, $id_recibo), 4);
+        $response[] = div(format_img_recibo($path, $recibo), 4);
 
         return div(div(append_data($response), 10, 1), "row top_40");
 
 
     }
 
-    function format_img_recibo($path, $id_recibo)
+    function format_img_recibo($path, $recibo)
     {
 
-        $r[] = div(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), "max-height: 250px;", 1);
-        $r[] = heading_enid(anchor_enid("Pedidos", path_enid("pedidos")), 3);
-        return append_data($r);
+
+        $response = "";
+        if (is_array($recibo) && count($recibo) > 0) {
+
+            $recibo = $recibo[0];
+            $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
+            $saldo_cubierto = $recibo["saldo_cubierto"];
+            $articulos = $recibo["num_ciclos_contratados"];
+            $monto_a_pagar = $recibo["monto_a_pagar"] * $articulos;
+            $cancela_cliente = $recibo["cancela_cliente"];
+            $se_cancela = $recibo["se_cancela"];
+            $status = $recibo["status"];
+
+
+            $r[] = div(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), "max-height: 250px;", 1);
+
+            $r[] = heading_enid(add_text("TOTAL ", $monto_a_pagar . "MXN"), 5);
+            $r[] = heading_enid(add_text("CUBIERTO", $saldo_cubierto . "MXN"), 5);
+            $r[] = heading_enid(add_text("ARTÍCULOS", $articulos), 5);
+
+            if ($cancela_cliente > 0 || $se_cancela > 0 || $status == 10) {
+
+                $r[] = heading_enid("ORDEN CANCELADA", 3, "red_enid strong");
+
+            }
+
+            $response = append_data($r);
+
+        }
+
+        return $response;
 
     }
 
@@ -126,9 +154,11 @@ if (!function_exists('invierte_date_time')) {
     }
     if (!function_exists('get_form_busqueda_pedidos')) {
 
-        function get_form_busqueda_pedidos($tipos_entregas, $status_ventas, $param)
+        function get_form_busqueda_pedidos($data, $param)
         {
 
+            $tipos_entregas = $data["tipos_entregas"];
+            $status_ventas = $data["status_ventas"];
 
             $fechas[] = array(
                 "fecha" => "FECHA REGISTRO",
@@ -436,10 +466,11 @@ if (!function_exists('invierte_date_time')) {
     }
 
     if (!function_exists('get_form_fecha_recordatorio')) {
-        function form_fecha_recordatorio($orden, $tipo_recortario)
+        function form_fecha_recordatorio($data, $tipo_recortario)
         {
-            $lista_horarios = lista_horarios()["select"];
 
+            $orden = $data["orden"];
+            $lista_horarios = lista_horarios()["select"];
             $x = heading_enid("RECORDATORIO", 3, "top_50");
             $r[] = form_open("", ["class" => "form_fecha_recordatorio letter-spacing-5 "]);
             $r[] = div(icon("fa fa-calendar-o") . " FECHA ", 4);
@@ -475,7 +506,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(guardar("CONTINUAR", ["class" => "top_menos_40"]), 12);
             $r[] = form_close();
             $r[] = place("place_recordatorio");
-
             $form = div(append_data($r), "top_30 form_separador ");
             $response = div($x . $form, 6, 1);
             return $response;
@@ -531,21 +561,6 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = '<form class="form_cantidad top_20">';
-            /*
-            $r[] = div("SALDO CUBIERTO", "strong", 1);
-            $r[] = div(input(
-                [
-                    "class" => "form-control saldo_cubierto",
-                    "id" => "saldo_cubierto",
-                    "type" => "number",
-                    "step" => "any",
-                    "required" => "true",
-                    "name" => "saldo_cubierto",
-                    "value" => $recibo[0]["saldo_cubierto"]
-
-                ]),
-                10);
-            */
             $r[] = input_hidden(
                 [
                     "name" => "recibo",
@@ -578,25 +593,23 @@ if (!function_exists('invierte_date_time')) {
 
                     if ($id == $row2["id_tipo_costo"]) {
                         $f = 0;
-                        if($repetible > 0 ){
+                        if ($repetible > 0) {
                             $f = 1;
                         }
                         break;
                     }
                 }
-                if ($f > 0){
+                if ($f > 0) {
 
-                    $costos_por_registro[] =  $row;
+                    $costos_por_registro[] = $row;
 
                 }
 
             }
 
 
-
-
-            $response  = div(heading_enid("Ya registraste todos los costos de operación para esta venta!",3),8,1);
-            if (count($costos_por_registro) > 0 ) {
+            $response = div(heading_enid("Ya registraste todos los costos de operación para esta venta!", 3), 8, 1);
+            if (count($costos_por_registro) > 0) {
 
                 $r[] = div(heading_enid("Gasto", 3), "col-lg-12 bottom_50");
                 $r[] = form_open("", ["class" => "form_costos letter-spacing-5"], ["recibo" => $id_recibo]);
@@ -628,13 +641,7 @@ if (!function_exists('invierte_date_time')) {
             }
             return $response;
 
-
-
-
-
-
         }
-
 
     }
     if (!function_exists('get_error_message')) {
@@ -731,6 +738,7 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "id_carro_compras",
                 "value" => 0
             ]);
+
             $r[] = form_close();
 
             return append_data($r);
@@ -755,8 +763,8 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('agregar_nueva_direccion')) {
         function agregar_nueva_direccion($direccion = 1)
         {
-            $response = ($direccion > 0) ? guardar("Agregar ", ["class" => "agregar_punto_encuentro_pedido"]) : guardar("Agregar ", ["class" => "agregar_direccion_pedido"]);
-            return $response;
+            return ($direccion > 0) ? guardar("Agregar ", ["class" => "agregar_punto_encuentro_pedido"]) : guardar("Agregar ", ["class" => "agregar_direccion_pedido"]);
+
         }
     }
     if (!function_exists('get_lista_puntos_encuentro')) {
@@ -778,7 +786,6 @@ if (!function_exists('invierte_date_time')) {
                 $encuentro = [];
                 $encuentro[] = div("#" . $a, ["class" => "f15"], 1);
                 $encuentro[] = div($nombre, 1);
-
                 $modificar_encuentro = ($tipo_entrega < 2) ? " establecer_punto_encuentro " : "";
 
                 $encuentro[] = guardar("ESTABLECER COMO PUNTO DE ENTREGA",
@@ -897,7 +904,8 @@ if (!function_exists('invierte_date_time')) {
                 $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
                 $url = "../area_cliente/?action=compras&ticket=" . $id_recibo;
 
-                $response = div(guardar("PROCEDER A LA COMPRA " . icon("fa fa-2x fa-shopping-cart"),
+                $response = div(
+                    guardar("PROCEDER A LA COMPRA " . icon("fa fa-2x fa-shopping-cart"),
                     [
                         "style" => "background:blue!important",
                         "class" => "top_30 f12"
@@ -905,7 +913,8 @@ if (!function_exists('invierte_date_time')) {
                     1,
                     1,
                     0,
-                    $url), 1);
+                    $url
+                    ), 1);
 
             }
             return $response;
@@ -1075,8 +1084,12 @@ if (!function_exists('invierte_date_time')) {
 
                     break;
             }
-            $response["text"] = $text;
-            $response["estado"] = $estado;
+
+            $response = [
+                "text" => $text,
+                "estado" => $estado,
+            ];
+
             return $response;
 
         }
@@ -1188,8 +1201,8 @@ if (!function_exists('invierte_date_time')) {
 
 
             }
-            if (count($data) > 0) {
 
+            if (count($data) > 0) {
 
                 $r[] = div(heading_enid("MOVIMIENTOS", 4, "row"), " top_30 bottom_30 padding_10  row");
                 $r[] = div($tipificaciones, " top_30 bottom_30 padding_10 border row");
@@ -1262,9 +1275,8 @@ if (!function_exists('invierte_date_time')) {
         {
 
             if (get_param_def($domicilio, "domicilio") > 0 && count($recibo) > 0) {
+
                 $recibo = $recibo[0];
-
-
                 $t[] = div("HORARIO DE ENTREGA", "strong underline");
                 $t[] = div($recibo["fecha_contra_entrega"]);
                 $text = div(append_data($t), "letter-spacing-5 text-right top_30 bottom_30");
@@ -1582,11 +1594,9 @@ if (!function_exists('invierte_date_time')) {
         function create_seccion_recordatorios($recibo)
         {
 
-            $response = "";
-            if (count($recibo) > 0) {
-                $response = ($recibo[0]["status"] == 6) ? div("EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"], "") : "";
-            }
+            $response = (count($recibo) > 0) ? (($recibo[0]["status"] == 6) ? div("EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"], "") : "") : "";
             return $response;
+
         }
     }
 
@@ -1615,6 +1625,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             if (get_param_def($domicilio, "domicilio") > 0 && count($recibo) > 0) {
+
                 $recibo = $recibo[0];
                 $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
                 $status = $recibo["status"];
@@ -1623,12 +1634,14 @@ if (!function_exists('invierte_date_time')) {
                 $se_cancela = $recibo["se_cancela"];
                 $fecha_entrega = $recibo["fecha_entrega"];
 
-                return div(anchor_enid("FECHA DE ENTREGA",
-                    [
-                        "class" => "editar_horario_entrega  text-right ",
-                        "id" => $id_recibo,
-                        "onclick" => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '{$fecha_entrega}' )"
-                    ]), 1);
+                return div(
+                    anchor_enid("FECHA DE ENTREGA",
+                        [
+                            "class" => "editar_horario_entrega  text-right ",
+                            "id" => $id_recibo,
+                            "onclick" => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '{$fecha_entrega}' )"
+                        ]), 1
+                );
 
             }
 
@@ -1640,7 +1653,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $url = path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1");
-            return div(anchor_enid("RECORDATORIO", ["href" => $url]), 1);
+            return div(anchor_enid("RECORDATORIO", $url ), 1);
 
         }
     }

@@ -16,13 +16,13 @@ let id_proyecto_persona_forma_pago =0;
 $(document).ready(function(){	
 	$("footer").ready(cargar_ultimos_movimientos);
 });
-let  metodos_de_envio_disponibles = function(){
+let  metodos_de_envio_disponibles = () =>{
 
 	let url =  "../pagos/index.php/api/afiliados/metodos_disponibles_pago/format/json/";	
 	let data_send = {};	
 	request_enid( method,  data_send, url, response_metodos_envio, ".place_info_cuentas_pago" );
 }
-let response_metodos_envio = function(data){
+let response_metodos_envio = (data) =>{
 		render_enid(".place_info_cuentas_pago" , data);
 		$(".actualizar_form").click(registra_actualizacion_banco_persona);
 		$(".siguiente_banco").click(valida_banco_seleccionado);
@@ -67,7 +67,7 @@ let response_metodos_envio = function(data){
         });
        
 }
-let muestra_imagen_banco = function(){
+let muestra_imagen_banco = () => {
 
 	
 	let banco 		=  get_parameter(".banco_cuenta");
@@ -82,13 +82,13 @@ let muestra_imagen_banco = function(){
 		render_enid(".place_imagen_banco" , "");	
 	}	    
 }
-let registra_actualizacion_banco_persona = function(){
+let registra_actualizacion_banco_persona = () =>{
 
 	let flag_1 =  valida_banco_seleccionado();	
 	let flag_2 =  valida_tarjeta_registrada();
 	let flag_3 =  valida_propietario_tarjeta();
 
-	if (flag_1 ==  1 && flag_2 == 1 && flag_3 == 1) {
+	if (flag_1 >  0 && flag_2 > 0 && flag_3 > 0) {
 		
 		let url =  "../pagos/index.php/api/afiliados/cuenta_afiliado/format/json/";						
 		let data_send = {"numero_tarjeta" : get_numero_tarjeta(), "banco" : get_option("banco"), "propietario" : get_propietario()};	
@@ -96,7 +96,7 @@ let registra_actualizacion_banco_persona = function(){
 	}
 	
 }
-let valida_banco_seleccionado = function(){
+let valida_banco_seleccionado = () =>{
 	
 	banco =  get_parameter(".banco_cuenta");
 	set_option("banco", banco);
@@ -115,13 +115,13 @@ let valida_banco_seleccionado = function(){
 		return 1;
 	}	
 }
-let valida_tarjeta_registrada = function(){
+let valida_tarjeta_registrada = () =>{
 
 	set_option("numero_tarjeta" , get_parameter(".numero_tarjeta"));		
 	return  valida_text_form(".numero_tarjeta" , ".place_numero_tarjeta" , 16 , "Número de tarjeta" );		
 	
 }
-let valida_propietario_tarjeta = function(){
+let valida_propietario_tarjeta = () =>{
 	
 	set_optino("propietario" , get_parameter(".propietario"));
 	return valida_text_form(".propietario" , ".place_propietario_tarjeta" , 5 , "Propietario de la tarjeta" );				

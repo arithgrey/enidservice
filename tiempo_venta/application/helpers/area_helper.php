@@ -63,7 +63,6 @@ if (!function_exists('invierte_date_time')) {
                 ), ["class" => "text-center top_20"]);
             $x[] = div($alcance, " text-center ");
 
-
             $r[] = div(append_data($x), 3);
             $r[] = div(place("place_ventas_usuario"), 9);
 
@@ -103,12 +102,8 @@ if (!function_exists('invierte_date_time')) {
     function valida_active_tab($nombre_seccion, $estatus)
     {
 
-        if (strlen($estatus) > 0) {
-            $status = ($nombre_seccion == $estatus) ? " active " : "";
-        } else {
-            $status = ($nombre_seccion == "compras") ? " active " : "";
-        }
-        return $status;
+        return (strlen($estatus) > 0) ? (($nombre_seccion == $estatus) ? " active " : "") : (($nombre_seccion == "compras") ? " active " : "");
+
     }
 
     function get_menu($action)

@@ -11,7 +11,7 @@ $(document).ready(function(){
 	$(".talla").click(agregar_talla);
 
 });
-let carga_productos_sugeridos = function(){
+let carga_productos_sugeridos = () => {
 
 	let url 		=  "../q/index.php/api/servicio/sugerencia/format/json/";		
 	let q 			=  get_parameter(".qservicio");  	
@@ -19,19 +19,19 @@ let carga_productos_sugeridos = function(){
 	request_enid( "GET",  data_send, url, response_carga_productos);
 }
 
-let response_carga_productos = function(data){
+let response_carga_productos = data => {
 	if (data["sugerencias"] == undefined ){				
 		render_enid(".place_tambien_podria_interezar" , data);						
 	}
 }
 
-let carga_valoraciones = function(){
+let carga_valoraciones = () =>{
 	let url 		=  "../q/index.php/api/valoracion/articulo/format/json/";		
 	let data_send	= {"id_servicio" : get_option("servicio") , "respuesta_valorada" : get_option("respuesta_valorada")};
 	request_enid( "GET",  data_send, url, response_carga_valoraciones);
 }
 
-let response_carga_valoraciones = function(data){
+let response_carga_valoraciones = data => {
 	render_enid(".place_valoraciones" , data);
 
 	if(get_option("desde_valoracion") ==  1){
@@ -46,7 +46,7 @@ let response_carga_valoraciones = function(data){
 			
 }
 
-let agrega_valoracion_respuesta = function(valoracion , num){
+let agrega_valoracion_respuesta = (valoracion , num)=>{
 
 	let url =  "../q/index.php/api/valoracion/utilidad/format/json/";			
 	let data_send = {"valoracion" : valoracion,  "utilidad" :  num};
@@ -54,7 +54,7 @@ let agrega_valoracion_respuesta = function(valoracion , num){
 	request_enid( "PUT",  data_send, url, carga_valoraciones);
 }
 
-let ordenar_valoraciones = function(e){
+let ordenar_valoraciones = function(e) {
 
 	let tipo_ordenamiento=  get_parameter_enid($(this) , "id");
 	let div = $(".contenedor_global_recomendaciones");
@@ -93,7 +93,7 @@ let ordenar_valoraciones = function(e){
 		default:
 	}
 }
-let agregar_a_lista_deseos = function(){
+let agregar_a_lista_deseos = ()=>{
 
 
 	let articulos =  get_valor_selected("#num_ciclos");
@@ -106,7 +106,7 @@ let agregar_a_lista_deseos = function(){
 	}
 }
 
-let respuesta_add_valoracion = function(data){
+let respuesta_add_valoracion = data =>{
 	
 	
 	$("#agregar_a_lista_deseos_add").empty();	

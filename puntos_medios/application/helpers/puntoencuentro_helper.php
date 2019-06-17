@@ -26,11 +26,7 @@ if (!function_exists('invierte_date_time')) {
 
         $minimo = date_format(horario_enid(), 'Y-m-d');
         $maximo = add_date($minimo,4);
-
-        if($nuevo_dia >  0 ){
-
-            $minimo =  add_date($minimo,1);
-        }
+        $minimo =  ( $nuevo_dia >  0 )? add_date($minimo,1) : $minimo;
 
 
         $r[] = heading_enid("¿Quién recibe?", 2, ["class" => "text-uppercase"]);
@@ -115,11 +111,8 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form "]);
         $r[] = input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]);
-
         $r[] = input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras]);
         $r[] = input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]);
-
-
         $r[] = div(guardar("CONTINUAR"), ["class" => "col-lg-12 mt-5"] );
         $r[] = get_formar_usuario_registrado($in_session, $servicio, $num_ciclos);
         $r[] = form_close();
@@ -134,7 +127,7 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         if ($in_session < 1) {
 
-            $x[] = heading_enid("YA TIENES UN USUARIO REGISTRADO", 2, "display_none text_usuario_registrado");
+            $x[] = heading_enid("YA TIENES UN USUARIO REGISTRADO", 2, "display_none text_usuario_registrado underline");
             $x[] = heading_enid("¿Ya tienes una cuenta? ", 3, " text_usuario_registrado_pregunta text-center text-uppercase letter-spacing-10");
 
             $x[] = div(
@@ -158,7 +151,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO", 3, " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10");
-
         return append_data($r);
 
 
@@ -192,11 +184,8 @@ if (!function_exists('invierte_date_time')) {
 
         $minimo = date_format(horario_enid(), 'Y-m-d');
         $maximo = add_date($minimo,4);
+        $minimo = ($nuevo_dia >  0 ) ? add_date($minimo,1) : $minimo;
 
-        if($nuevo_dia >  0 ){
-
-            $minimo =  add_date($minimo,1);
-        }
 
         $r[] = form_open("", ["class" => "form_punto_encuentro_horario top_50"]);
         $r[] = append_data($extra);
@@ -225,8 +214,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_close();
         return append_data($r);
 
-
     }
-
 
 }

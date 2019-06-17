@@ -1,5 +1,5 @@
 "use strict";
-let get_proyectos_persona = function(){
+let get_proyectos_persona = () => {
 	let url =  "../q/index.php/api/portafolio/proyecto_persona/format/json/";
     let data_send =  {"id_persona" : get_persona()};
 
@@ -28,7 +28,7 @@ let get_proyectos_persona = function(){
 	});		
 
 }
-let carga_form_solicitar_desarrollo = function(e){
+let carga_form_solicitar_desarrollo = (e) => {
 
     let url =  "../q/index.php/api/tickets/form/format/json/";
     let  data_send =  {"id_persona" : get_persona() , id_proyecto : get_proyecto()};
@@ -55,7 +55,7 @@ let carga_form_solicitar_desarrollo = function(e){
 	});				
 
 }
-let registra_ticket = function(e){
+let registra_ticket = (e) => {
 
 
 	let url =  "../q/index.php/api/tickets/ticket/format/json/";
@@ -83,7 +83,7 @@ let registra_ticket = function(e){
 					
 	e.preventDefault();
 }
-let carga_tikets_usuario = function(){
+let carga_tikets_usuario = () => {
 	
 	recorre_web_version_movil();
     let status_ticket = 0;
@@ -129,7 +129,7 @@ let carga_tikets_usuario = function(){
 	});				
 }
 
-let carga_info_detalle_ticket = function(){
+let carga_info_detalle_ticket =() => {
 
 	let url =  "../q/index.php/api/tickets/detalle/format/json/";
 	let data_send =  {"id_ticket" : get_id_ticket()};
@@ -172,7 +172,7 @@ let carga_info_detalle_ticket = function(){
 	});		
 }
 
-let  actualizar_estatus_ticket = function(e){
+let  actualizar_estatus_ticket = (e) => {
 	
 	let nuevo_estado= get_parameter_enid($(this) , "id");
 	let url =  "../q/index.php/api/tickets/status/format/json/";
@@ -192,7 +192,7 @@ let  actualizar_estatus_ticket = function(e){
 	});		
 }
 
-let  registra_tarea = function(e){
+let  registra_tarea = (e) => {
 	
 	let requerimiento =  $(".note-editable").html();
 	$(".tarea_pendiente").val(requerimiento);
@@ -216,7 +216,7 @@ let  registra_tarea = function(e){
 	e.preventDefault();
 }
 
-let  actualiza_tareas = function(e){
+let  actualiza_tareas = (e) => {
 		
 
 	set_id_tarea(get_parameter_enid($(this) , "id"));
@@ -244,7 +244,7 @@ let  actualiza_tareas = function(e){
 	});			
 }
 
-let regresar_list_posible_cliente = function(){
+let regresar_list_posible_cliente = () => {
 
 	let menu = get_menu_actual();
 	switch(menu){
@@ -267,15 +267,15 @@ let regresar_list_posible_cliente = function(){
 	}
 }
 
-let  modificar_asunto = function(e){
+let  modificar_asunto = (e) => {
 	
 	recorre_web_version_movil();
-	asunto_ticket = get_parameter_enid($(this) , "id");
+	let asunto_ticket = get_parameter_enid($(this) , "id");
 	$(".mof_asunto").val(asunto_ticket);
 
 	$(".form-actualizar-asunto").submit(actualiza_asunto_ticket);
 }
-let actualiza_asunto_ticket = function(e){
+let actualiza_asunto_ticket = (e) => {
 	
 	let data_send = $(".form-actualizar-asunto").serialize()+"&"+$.param({"id_ticket" : get_id_ticket()});
 	let url =  "../q/index.php/api/tickets/asunto/format/json/";
@@ -332,19 +332,3 @@ let get_flag_mostrar_solo_pendientes = function(){
 let get_flag_estoy_en_agendado = function(){
 	return flag_estoy_en_agendado;
 }
-/*
-function set_flag_estoy_en_agendado(n_flag_estoy_en_agendado){
-    flag_estoy_en_agendado = n_flag_estoy_en_agendado;
-}
-
-function get_id_base_telefonica(){
-	return id_base_telefonica; 
-}
-
-function set_id_base_telefonica(n_id_base_telefonica){
-	id_base_telefonica =  n_id_base_telefonica;
-}
-function set_menu_actual(n_menu_actual){
-    menu_actual =  n_menu_actual;
-}
-*/

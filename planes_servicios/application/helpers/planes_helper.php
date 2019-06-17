@@ -351,6 +351,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             } else {
+
                 $response = ul([
                     place("primer_nivel_seccion"),
                     place("segundo_nivel_seccion"),
@@ -397,16 +398,15 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('valida_active_tab')) {
         function valida_active_tab($seccion, $valor_actual, $considera_segundo = 0)
         {
-            $response = " active ";
-            if ($considera_segundo == 0) {
-                $response = ($seccion == $valor_actual) ? " active " : "";
-            }
-            return $response;
+
+            return  ($considera_segundo == 0) ?  (($seccion == $valor_actual) ? " active " : "") : " active ";
+
         }
     }
     if (!function_exists('get_menu')) {
         function get_menu($perfil, $is_mobile, $action)
         {
+            $response  ="";
             if ($is_mobile == 0) {
                 $list = [
                     li(
@@ -457,7 +457,7 @@ if (!function_exists('invierte_date_time')) {
                             ]
                         );
                 }
-                return ul($list, ["class" => "nav tabs contenedor_menu_enid_service_lateral"]);
+                $response =  ul($list, ["class" => "nav tabs contenedor_menu_enid_service_lateral"]);
             } else {
 
                 $list = [
@@ -485,9 +485,10 @@ if (!function_exists('invierte_date_time')) {
                     )
 
                 ];
-                return ul($list, "nav tabs contenedor_menu_enid_service_lateral");
+                $response =   ul($list, "nav tabs contenedor_menu_enid_service_lateral");
 
             }
+            return $response;
         }
     }
 

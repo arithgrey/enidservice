@@ -762,7 +762,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $t = guardar(
-            text_icon("fa fa-map-signs" ,"RASTREA TU PEDIDO"),
+            text_icon("fa fa-map-signs", "RASTREA TU PEDIDO"),
             [
                 "class" => "top_20 text-left",
                 "style" => "border-style: solid!important;border-width: 2px!important;border-color: black!important;color: black !important;background: #f1f2f5 !important;"
@@ -905,21 +905,21 @@ if (!function_exists('invierte_date_time')) {
     function get_view_compras($status_enid_service, $compras, $tipo)
     {
 
-        $response = [];
-        $info_status = "";
+
+        $tipo_solicitud = "";
         foreach ($status_enid_service as $row) {
             if ($row["id_estatus_enid_service"] == $tipo) {
-                $info_status = strtoupper($row["nombre"]);
+                $tipo_solicitud = strtoupper($row["nombre"]);
                 break;
             }
         }
+        $tipo_solicitud =  heading_enid($tipo_solicitud , 5);
 
-        $l = "";
         $r = [];
         foreach ($compras as $row) {
 
+            $response = [];
             $saldo_cubierto = $row["saldo_cubierto"];
-            $fecha_registro = $row["fecha_registro"];
             $monto_a_pagar = $row["monto_a_pagar"];
             $num_email_recordatorio = $row["num_email_recordatorio"];
             $num_ciclos_contratados = $row["num_ciclos_contratados"];
@@ -927,34 +927,52 @@ if (!function_exists('invierte_date_time')) {
             $id_servicio = $row["id_servicio"];
             $resumen_pedido = $row["resumen_pedido"];
             $url_imagen = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
+            $id_recibo = $row["id_proyecto_persona_forma_pago"];
 
 
-            $response [] = img([
-                "src" => $url_imagen,
-                "style" => 'width: 44px!important',
-                "onerror" => "this.src='../img_tema/portafolio/producto.png'"
-            ]);
-            $response [] = anchor_enid($resumen_pedido, ["href" => "../producto/?producto=" . $id_servicio]);
+            $response[] = img(
+                [
+                    "src" => $url_imagen,
+                    "style" => 'width: 44px!important',
+                    "onerror" => "this.src='../img_tema/portafolio/producto.png'"
+                ]);
 
-            $t = ["PRECIO", $monto_a_pagar, " MXN | COSTO DE ENVIO AL CLIENTE ", "| COSTO DE ENVIO AL VENDEDOR ", $costo_envio_vendedor, "MXN"];
-            $response [] = div(append_data($t));
-            $response [] = div(["ARTICULOS SOLICITADOS ", $num_ciclos_contratados, "|", "SALDO CUBIERTO", $saldo_cubierto, "MXN"]);
-            $response [] = append_data([
+            $response[] = anchor_enid($resumen_pedido, path_enid("pedidos_recibo" , $id_recibo));
+
+            $t = [];
+            $t = [
+                "PRECIO",
+                $monto_a_pagar,
+                " MXN | COSTO DE ENVIO AL CLIENTE ",
+                "| COSTO DE ENVIO AL VENDEDOR ",
+                $costo_envio_vendedor,
+                "MXN"
+            ];
+            $response[] = div(append_data($t));
+            $response[] = div(append_data([
+                "ARTICULOS SOLICITADOS ",
+                $num_ciclos_contratados,
+                "|",
+                "SALDO CUBIERTO",
+                $saldo_cubierto,
+                "MXN"
+            ]));
+            $response[] = append_data([
 
 
-                "LABOR DE COBRANZA",
+                "LABOR DE COBRANZA"
+                ,
                 icon("fa fa-envelope")
                 ,
                 $num_email_recordatorio
             ]);
 
-            $response [] = div($fecha_registro);
-            $r[] = div(div(append_data($response), "popup-head-left pull-left"), "popup-head");
+            $r[] = div(append_data($response), "border shadow top_30 padding_30");
 
         }
 
 
-        $r[] = heading_enid("SOLICITUDES", $info_status);
+        array_unshift($r, $tipo_solicitud);
         return append_data($r);
 
 

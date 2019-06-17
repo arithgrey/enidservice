@@ -15,7 +15,9 @@ class direccion extends REST_Controller
 		$param = $this->get();
 		$response = [];
 		if (if_ext($param, "id_direccion")) {
-			$response = $this->direccion_model->get_data_direccion($param);
+
+			$response = $this->direccion_model->get_data_direccion($param["id_direccion"]);
+
 		}
 		$this->response($response);
 	}

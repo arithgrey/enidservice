@@ -1,12 +1,12 @@
 "use strict";
-let carga_form_img = function(){
+let carga_form_img = () => {
     showonehideone( ".contenedor_agregar_imagenes" , ".contenedor_global_servicio");    
     display_elements([".titulo_articulos_venta" , ".guardar_img_enid"], 0);
 	let url        = "../q/index.php/api/img/form_img_servicio_producto/format/json/";
 	let data_send  = $.param({"id_servicio" : get_option("servicio")});		    
     request_enid("GET", data_send , url , response_cargar_form , ".place_img_producto" );					
 }
-let response_cargar_form = function(data){
+let response_cargar_form = data => {
 
     
     render_enid(".place_img_producto" , data);
@@ -30,7 +30,7 @@ let upload_imgs_enid_pre = function(){
     };
     reader.readAsDataURL(file);
 }
-let registra_img_servicio = function(e){
+let registra_img_servicio = e =>{
     e.preventDefault();
     let formData        = new FormData();
     let q               = get_parameter(".q_imagen");
@@ -66,7 +66,7 @@ let registra_img_servicio = function(e){
     $.removeData(formData);
 
 }
-let response_load_image = function(data){
+let response_load_image =  data =>{
 
     switch(array_key_exists("status_imagen_servicio", data)) {
         case 1:
