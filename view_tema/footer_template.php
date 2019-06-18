@@ -139,7 +139,7 @@ $list_footer = [
 
 <?php if ($in_session == 0): ?>
     <?php if (!isset($proceso_compra) && !is_null($proceso_compra) && $proceso_compra == 0): ?>
-        <?= div(print_footer($list_footer), "base_paginas_extra" , 1) ?>
+        <?= div(append_data($list_footer), "base_paginas_extra" , 1) ?>
     <?php endif ?>
     <?php if (isset($is_mobile) && !is_null($is_mobile) && $is_mobile < 1): ?>
         <?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>

@@ -20,10 +20,11 @@ if (!function_exists('invierte_date_time')) {
     function get_format_enlace_venta_extra($flag_servicio, $url_ml)
     {
 
+        $r = [];
         if ($flag_servicio < 1) {
 
-            $r[] = div(heading_enid("¿CUENTAS CON ALGÚN ENLACE DE PAGO EN MERCADO LIBRE?", 5), 1);
-            $r[] = div(
+            $x[] = div(heading_enid("¿CUENTAS CON ALGÚN ENLACE DE PAGO EN MERCADO LIBRE?", 5), 1);
+            $x[] = div(
                 input([
                     "type" => "url",
                     "name" => "url_mercado_libre",
@@ -33,11 +34,12 @@ if (!function_exists('invierte_date_time')) {
                 , 1
             );
 
-            $r[] = guardar("GUARDAR", ["class" => "btn_url_ml top_50"], 1);
+            $x[] = guardar("GUARDAR", ["class" => "btn_url_ml top_50"], 1);
 
-            return div(div(append_data($r, "contenedor_pago_ml top_50"), " col-lg-12 top_50 "), 6);
+            $r[] = div(div(append_data($r, "contenedor_pago_ml top_50"), " col-lg-12 top_50 "), 6);
 
         }
+        return append_data($r);
 
 
     }
@@ -46,9 +48,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
+        $r = [];
         if ($es_servicio < 1) {
 
-            $r[] = get_btw(
+            $x[] = get_btw(
                 heading_enid($text_envios_mayoreo, 5)
                 ,
                 get_seccion_ventas_mayoreo($venta_mayoreo)
@@ -56,9 +59,10 @@ if (!function_exists('invierte_date_time')) {
                 "contenedor_inf_servicios seccion_ventas_mayoreo top_50"
             );
 
-            return div(div(div(append_data($r), "top_50"), 12), 6);
+            $r[] = div(div(div(append_data($x), "top_50"), 12), 6);
 
         }
+        return append_data($r);
 
     }
 
@@ -111,9 +115,9 @@ if (!function_exists('invierte_date_time')) {
 
             $x[] = div(append_data($r), "contenedor_inf_servicios contenedor_inf_servicios_ciclo_facturacion top_30");
         }
-        if (count($x) > 0) {
-            return div(div(div(append_data($x), 12), "top_50"), 6);
-        }
+
+
+        return (count($x) > 0) ? div(div(div(append_data($x), 12), "top_50"), 6) : "";
 
 
     }
@@ -128,8 +132,8 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(get_seccion_articulos_disponibles($existencia), 6);
             $r[] = div(get_seccion_uso_producto($flag_nuevo), 6);
 
-
         }
+
         return append_data($r);
 
     }
@@ -165,10 +169,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $x[] = div(guardar("GUARDAR", ["class" => "es_disponible btn_guardar_cantidad_productos top_30 "]), 3);
-
-
         $r[] = div(div(append_data($x), 13), "input_cantidad seccion_cantidad");
-
         return div(div(append_data($r), "top_50"), 12);
     }
 
@@ -220,19 +221,13 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session > 0) {
 
 
-            $response[] = div(anchor_enid(
-                append_data($p),
-                [
-                    "href" => get_url_servicio($id_servicio),
-
-                ]
-            ));
+            $response[] = div(anchor_enid(append_data($p), get_url_servicio($id_servicio)));
             $response[] = div(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $servicio["id_usuario_actual"], $id_perfil));
-
             $response = div(append_data($response), "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 ");
 
 
         } else {
+
             $response = anchor_enid(
                 append_data($p),
                 [
@@ -270,23 +265,14 @@ if (!function_exists('invierte_date_time')) {
     function get_text_costo_envio($es_servicio, $costo_envio)
     {
 
-        $text = ($es_servicio == 0) ? div($costo_envio, 'informacion_costo_envio', 1) : "";
-        return $text;
+        return ($es_servicio == 0) ? div($costo_envio, 'informacion_costo_envio', 1) : "";
 
     }
 
     function get_session_color($color, $flag_servicio, $url_info_producto, $extra_color, $existencia, $in_session)
     {
 
-        $response = get_btw(
-            get_numero_colores($color, $flag_servicio, $url_info_producto, $extra_color)
-            ,
-            get_en_existencia($existencia, $flag_servicio, $in_session)
-            ,
-            ""
-        );
-        return $response;
-
+        return add_text(get_numero_colores($color, $flag_servicio, $url_info_producto, $extra_color), get_en_existencia($existencia, $flag_servicio, $in_session));
 
     }
 
@@ -341,10 +327,9 @@ if (!function_exists('invierte_date_time')) {
 
         if ($param["is_mobile"] == 1) {
 
-            $config = array(
-                'class' => 'num_clasificacion ' . $nivel . ' 
-                          num_clasificacion_phone selector_categoria '
-            );
+            $config = [
+                'class' => 'num_clasificacion ' . $nivel . ' num_clasificacion_phone selector_categoria '
+            ];
         }
 
         $info = $data["info_categorias"];
@@ -374,7 +359,7 @@ if (!function_exists('invierte_date_time')) {
     function get_estado_publicacion($status, $id_servicio)
     {
 
-        $text = ($status == 1) ? "PAUSAR PUBLICACIÓN" : "ACTIVAR PUBLICACIÓN";
+        $text = ($status > 0) ? "PAUSAR PUBLICACIÓN" : "ACTIVAR PUBLICACIÓN";
 
         return anchor_enid(
             $text,
@@ -382,7 +367,8 @@ if (!function_exists('invierte_date_time')) {
                 "id" => $id_servicio,
                 "status" => $status,
                 "class" => 'button_enid_eleccion activar_publicacion'
-            ]);
+            ]
+        );
 
 
     }
@@ -445,8 +431,9 @@ if (!function_exists('invierte_date_time')) {
     function create_dropdown_button($id_imagen, $principal = 0)
     {
 
-        $text = ($principal == 0) ? "Definir como principal" : "Imagen principal";
-        $extra_principal = ($principal == 0) ? "" : "blue_enid";
+        $text = menorque($principal, 1, "Definir como principal", "Imagen principal");
+        $extra_principal = menorque($principal, 1, "", "blue_enid");
+
 
         $definir = div(
             icon('fa fa-star', "dropdown-item  " . $extra_principal) .
@@ -477,17 +464,20 @@ if (!function_exists('invierte_date_time')) {
 
     function valida_tipo_promocion($param)
     {
-        $tipo = ($param[0]["flag_servicio"] == 1) ? "SERVICIO" : "PRODUCTO";
-        return $tipo;
+
+        return mayorque($param[0]["flag_servicio"], 0, "SERVICIO", "PRODUCTO");
+
     }
 
     function get_nombre_ciclo_facturacion($ciclos, $id_ciclo)
     {
         $response = "";
         foreach ($ciclos as $row) {
-            $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
-            if ($id_ciclo_facturacion == $id_ciclo) {
+
+            if ($row["id_ciclo_facturacion"] == $id_ciclo) {
+
                 $response = $row["ciclo"];
+                break;
             }
         }
         return $response;
@@ -519,27 +509,18 @@ if (!function_exists('invierte_date_time')) {
         return $text;
     }
 
-    function agrega_data_servicio($data, $key, $valor)
-    {
-
-        $data[$key] = $valor;
-        return $data;
-    }
-
     function evalua_utilidad_mas_envio($flag_envio_gratis, $costo_envio, $utilidad)
     {
 
-        if ($flag_envio_gratis == 1) {
-            return $utilidad - $costo_envio;
-        } else {
-            return $utilidad;
-        }
+        return ($flag_envio_gratis > 0) ? ($utilidad - $costo_envio) : $utilidad;
+
     }
 
     function get_valor_envio($costo_envio, $flag_envio_gratis)
     {
-        $costo = ($flag_envio_gratis == 1) ? -100 : 100;
-        return $costo;
+
+        return ($flag_envio_gratis == 1) ? -100 : 100;
+
     }
 
     function select_producto_usado($valor_actual)
@@ -548,11 +529,13 @@ if (!function_exists('invierte_date_time')) {
         $usado = ["No", "Si"];
         $r[] = "<select class='form-control producto_nuevo'>";
         for ($z = 0; $z < count($usado); $z++) {
+
             if ($z == $valor_actual) {
                 $r[] = "<option value='" . $z . "' selected>" . $usado[$z] . "</option>";
             } else {
                 $r[] = "<option value='" . $z . "'>" . $usado[$z] . "</option>";
             }
+
         }
         $r[] = "</select>";
         $response = append_data($r);
@@ -606,13 +589,6 @@ if (!function_exists('invierte_date_time')) {
         }
         return $list;
 
-    }
-
-    function scroll_terminos($num_terminos)
-    {
-
-        $extra = ($num_terminos > 3) ? "scroll_terms" : "";
-        return $extra;
     }
 
     function get_text_ciclo_facturacion($id_ciclo_facturacion)
@@ -695,8 +671,7 @@ if (!function_exists('invierte_date_time')) {
     function get_precio_producto($url_info_producto, $precio)
     {
 
-        $precio = div(div(anchor_enid($precio . 'MXN', ["href" => $url_info_producto]), "texto_precio"), 1);
-        return $precio;
+        return div(div(anchor_enid($precio . 'MXN', $url_info_producto), "texto_precio"), 1);
 
     }
 
@@ -718,11 +693,8 @@ if (!function_exists('invierte_date_time')) {
     function get_en_existencia($existencia, $flag_servicio, $in_session)
     {
 
-        $response = "";
-        if ($flag_servicio == 0) {
-            $response = informacion_existencia_producto($existencia, $in_session);
-        }
-        return $response;
+        return ($flag_servicio == 0) ? informacion_existencia_producto($existencia, $in_session) : "";
+
     }
 
     function informacion_existencia_producto($existencia, $in_session)
@@ -730,17 +702,19 @@ if (!function_exists('invierte_date_time')) {
 
         $response = "";
         if ($in_session > 0) {
+
             $response = ($existencia > 0) ? span($existencia . " En existencia ") : span("INVENTARIO LIMITADO");
 
         }
+
         return $response;
     }
 
     function muestra_vistas_servicio($in_session, $vistas)
     {
 
-        $response = ($in_session == 1) ? div($vistas . " personas alcanzadas") : "";
-        return $response;
+        return mayorque($in_session, 0, div(add_text($vistas, " personas alcanzadas")));
+
     }
 
     function valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_registro_servicio, $id_perfil)
@@ -828,12 +802,14 @@ if (!function_exists('invierte_date_time')) {
 
             if (strlen($link_dropshipping) > 10) {
 
-                $r[] = anchor_enid("Link", ["href" => $link_dropshipping, "class" => "underline", "target" => "_black"]);
+                $r[] = anchor_enid("Link", [
+                    "href" => $link_dropshipping,
+                    "class" => "underline",
+                    "target" => "_black"
+                ]);
             }
 
             $r[] = div(append_data($x), "input_link_dropshipping");
-
-
             $select = append_data($r);
             $response = get_btw($titulo, $select, "top_30 ");
 
@@ -1016,8 +992,8 @@ if (!function_exists('invierte_date_time')) {
     {
         $titulo_compra_en_casa = ($flag_servicio == 1) ? "OFRECES SERVICIO EN TU NEGOCIO?" : "¿CLIENTES TAMBIÉN PUEDEN RECOGER SUS COMPRAS EN TU NEGOCIO?";
         $atencion_en_casa = ($flag_servicio == 1) ? "NO" : "NO, SOLO HAGO ENVÍOS";
-        $extra_extrega_casa_si = valida_activo_entregas_en_casa(1, $entregas_en_casa);
-        $extra_extrega_casa_no = valida_activo_entregas_en_casa(0, $entregas_en_casa);
+        $extra_extrega_casa_si = val_class(1, $entregas_en_casa, "button_enid_eleccion_active");
+        $extra_extrega_casa_no = val_class(0, $entregas_en_casa, "button_enid_eleccion_active");
 
         $confirmar = anchor_enid(
             "SI",
@@ -1089,8 +1065,8 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) {
 
-            $v = valida_activo_vista_telefono($contra_entrega, 1);
-            $v2 = valida_activo_vista_telefono($contra_entrega, 0);
+            $v = val_class($contra_entrega, 1, "button_enid_eleccion_active");
+            $v2 = val_class($contra_entrega, 0, "button_enid_eleccion_active");
             $si =
                 anchor_enid(
                     "SI",
@@ -1123,13 +1099,14 @@ if (!function_exists('invierte_date_time')) {
     function get_seccion_ventas_mayoreo($venta_mayoreo)
     {
 
-        $activo = valida_activo_ventas_mayoreo(1, $venta_mayoreo);
-        $baja = valida_activo_ventas_mayoreo(0, $venta_mayoreo);
+
+        $activo = val_class(1, $venta_mayoreo, "button_enid_eleccion_active");
+        $baja = val_class(0, $venta_mayoreo, "button_enid_eleccion_active");
 
         $mayoreo
             = anchor_enid("SI",
             [
-                "id" => '1',
+                "id" => 1,
                 "class" => 'button_enid_eleccion venta_mayoreo ' . $activo
             ]);
 
@@ -1191,7 +1168,9 @@ if (!function_exists('invierte_date_time')) {
 
         array_push($r, anchor_enid(
                 $text_precio_unidad,
-                ["class" => "a_precio_unidad text_costo informacion_precio_unidad"]
+                [
+                    "class" => "a_precio_unidad text_costo informacion_precio_unidad"
+                ]
                 ,
                 1)
         );
@@ -1208,7 +1187,7 @@ if (!function_exists('invierte_date_time')) {
                     "value" => $precio
                 ]
             ),
-            div("MXN", "mxn" )
+            div("MXN", "mxn")
             ,
             "display_flex_enid"
         );
@@ -1322,11 +1301,24 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "padding_5 top_10 hover_padding  "
 
             ]);
-            $imagenes[] = div(anchor_enid($img, ["href" => $url_info_producto]), "col-lg-3 producto_enid_img ");
+
+            $imagenes[] = div(anchor_enid($img, $url_info_producto ), "col-lg-3 producto_enid_img ");
+
 
         }
+
         $r[] = div(append_data($imagenes), "contenedor_sugeridos contenedor_sugeridos ");
         return append_data($r);
 
     }
+    /*
+     *
+
+    function scroll_terminos($num_terminos)
+    {
+
+        $extra = ($num_terminos > 3) ? "scroll_terms" : "";
+        return $extra;
+    }
+    */
 }

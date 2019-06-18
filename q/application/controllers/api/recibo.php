@@ -476,7 +476,7 @@ class recibo extends REST_Controller
         $text .= get_saludo($cliente, $config_log, $id_recibo);
         $text .= get_text_saldo_pendiente($resumen_pedido, $num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion, $text_envio_cliente_sistema, $primer_registro, $fecha_vencimiento, $monto_a_pagar, $saldo_pendiente);
         $text .= get_text_forma_pago($img_pago_oxxo, $url_pago_oxxo, $url_pago_paypal, $img_pago_paypal);
-        $text .= get_text_notificacion_pago($url_seguimiento_pago, $url_cancelacion);
+        $text .= get_text_notificacion_pago($url_seguimiento_pago);
 
         return div($text, ["style" => "width: 100%;"]);
 

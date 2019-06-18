@@ -103,16 +103,16 @@ $data["flag_servicio"] = get_campo($servicio, "flag_servicio");
 
 
 $notificacion_imagenes = heading_enid(valida_text_imagenes($tipo_promocion, $num_imagenes), 3);
-$extra_extrega_casa_no = valida_activo_entregas_en_casa(0, $entregas_en_casa);
-$activo_visita_telefono = valida_activo_vista_telefono(1, $telefono_visible);
-$baja_visita_telefono = valida_activo_vista_telefono(0, $telefono_visible);
+$extra_extrega_casa_no = val_class(0, $entregas_en_casa , "button_enid_eleccion_active");
+$activo_visita_telefono = val_class(1, $telefono_visible , "button_enid_eleccion_active");
+$baja_visita_telefono = val_class(0, $telefono_visible, "button_enid_eleccion_active");
 $data["venta_mayoreo"] = $venta_mayoreo;
 
 
-$extra_1 = valida_active_pane($num, 1);
-$extra_2 = valida_active_pane($num, 2);
-$extra_3 = valida_active_pane($num, 3);
-$extra_4 = valida_active_pane($num, 4);
+$extra_1 = val_class($num, 1, ' active ');
+$extra_2 = val_class($num, 2, ' active ');
+$extra_3 = val_class($num, 3, ' active ');
+$extra_4 = val_class($num, 4, ' active ');
 
 
 $text_llamada_accion_youtube = icon('fa fa-youtube-play') . " VIDEO DE YOUTUBE ";

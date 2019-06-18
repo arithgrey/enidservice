@@ -109,7 +109,18 @@ class Home extends CI_Controller
 
         $this->set_option("in_session", 0);
 
-        $data["lista_productos"] = array_map(array('home', 'agrega_vista_servicios'), $servicios["servicios"]);
+
+        $callback = function ($n){
+
+            if (!is_null($n)){
+
+                $v = $this->get_vista_servicio($n);
+                return (!is_null($v)) ? $v : "";
+            }
+
+        };
+
+        $data["lista_productos"] = array_map($callback, $servicios["servicios"]);
 
         $data["q"] = $q;
         $data["categorias_destacadas"] = $this->carga_categorias_destacadas();
@@ -223,11 +234,6 @@ class Home extends CI_Controller
 
     }
 
-    private function agrega_vista_servicios($n)
-    {
-        $v = $this->get_vista_servicio($n);
-        return (!is_null($v)) ? $v : "";
-    }
 
     private function create_keyword($q)
     {

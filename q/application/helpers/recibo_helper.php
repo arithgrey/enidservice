@@ -19,9 +19,7 @@ if (!function_exists('invierte_date_time')) {
                 $id_servicio_totales = $row2["id_servicio"];
                 if ($id_servicio == $id_servicio_totales) {
 
-
                     $solicitudes = $row2["total"];
-
                     break;
                 }
             }
@@ -103,9 +101,8 @@ if (!function_exists('invierte_date_time')) {
                 $utilidad = ($total_pagos - $total_costos);
                 $utilidad_global = $utilidad_global + $utilidad;
             }
+
             $x[] = div(heading_enid("UTILIDAD", 3) . br() . heading_enid($utilidad . " MXN ", 5), "col-lg-3 text-center align-self-center");
-
-
             $response[] = div(append_data($x), "row border  top_30");
 
         }
@@ -120,7 +117,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_transaccion($id_recibo)
     {
 
-        $r[] = div(img_enid(), ["style" => "width: 200px;"]);
+        $r[] = div(img_enid(), "w_200");
         $r[] = heading_enid("Detalles de la transacción", 2);
         $r[] = heading_enid("#Recibo: " . $id_recibo, 3);
         $r[] = hr();
@@ -150,19 +147,27 @@ if (!function_exists('invierte_date_time')) {
     function get_notificacion_solicitud_valoracion($usuario, $id_servicio)
     {
 
-        $nombre = $usuario[0]["nombre"];
-        $email = $usuario[0]["email"];
-        $asunto = "Hola  {$nombre} ¡Tu paquete ya se entregó! ";
+        $serder = [];
 
-        $url = "https://enidservice.com/inicio/valoracion/?servicio=" . $id_servicio;
-        $r[] = img_enid([], 1, 1);
-        $r[] = heading("¿Valorarías tu experiencia de compra en Enid Service?", 3);
-        $r[] = div("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor");
-        $r[] = div(anchor_enid("Déjanos tus comentarios aquí!", ["href" => $url]));
+        if (tiene_data($usuario)) {
 
-        $cuerpo = append_data($r);
-        $sender = get_request_email($email, $asunto, $cuerpo);
+            $nombre = $usuario[0]["nombre"];
+            $email = $usuario[0]["email"];
+            $asunto = "Hola  {$nombre} ¡Tu paquete ya se entregó! ";
+
+            $url = "https://enidservice.com/inicio/valoracion/?servicio=" . $id_servicio;
+            $r[] = img_enid([], 1, 1);
+            $r[] = heading("¿Valorarías tu experiencia de compra en Enid Service?", 3);
+            $r[] = div("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor");
+            $r[] = div(anchor_enid("Déjanos tus comentarios aquí!", ["href" => $url]));
+
+            $cuerpo = append_data($r);
+            $sender = get_request_email($email, $asunto, $cuerpo);
+
+
+        }
         return $sender;
+
 
     }
 
@@ -184,7 +189,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $resumen_pedido = ($resumen_pedido !== null) ? $resumen_pedido : " ";
+        $resumen_pedido = (!is_null($resumen_pedido)) ? $resumen_pedido : " ";
 
         $r[] = div("Concepto");
         $r[] = div($resumen_pedido);
@@ -219,12 +224,12 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_text_notificacion_pago($url_seguimiento_pago, $url_cancelacion)
+    function get_text_notificacion_pago($url_seguimiento_pago)
     {
 
         $r[] = heading_enid("¿Ya realizaste tu pago?", 2);
         $r[] = div("Notifica tu pago para que podamos procesarlo");
-        $r[] = anchor_enid("Dando click aquí", ["href" => $url_seguimiento_pago]);
+        $r[] = anchor_enid("Dando click aquí", $url_seguimiento_pago);
         return append_data($r);
 
     }
@@ -252,9 +257,7 @@ if (!function_exists('invierte_date_time')) {
 
             $recibo = $row["recibo"];
             $saldo_cubierto = $row["saldo_cubierto"];
-            $fecha_registro = $row["fecha_registro"];
             $monto_a_pagar = $row["monto_a_pagar"];
-
             $num_ciclos_contratados = $row["num_ciclos_contratados"];
             $costo_envio_cliente = $row["costo_envio_cliente"];
             $monto_a_pagar = ($monto_a_pagar * $num_ciclos_contratados) + $costo_envio_cliente;
@@ -306,26 +309,33 @@ if (!function_exists('invierte_date_time')) {
     function get_text_status($lista, $estado_compra)
     {
 
+        $response = "";
         foreach ($lista as $row) {
 
-            $id_estatus_enid_service = $row["id_estatus_enid_service"];
-            if ($estado_compra == $id_estatus_enid_service) {
-                return strtoupper($row["text_vendedor"]);
+            if ($estado_compra == $row["id_estatus_enid_service"]) {
+                $response = strtoupper($row["text_vendedor"]);
+                break;
             }
         }
+
+        return $response;
+
     }
 
     function get_link_paypal($saldo_pendiente)
     {
 
+        $response = 0;
         if ($saldo_pendiente > 0) {
+
             /*Aplico la comisión del paypal 3**/
             $comision_paypal = porcentaje($saldo_pendiente, 3.7, 2, 0);
             $saldo = $saldo_pendiente + $comision_paypal;
-            return path_enid("paypal_enid", $saldo, 1);
+            $response = path_enid("paypal_enid", $saldo, 1);
 
         }
-        return 0;
+
+        return $response;
 
     }
 
@@ -340,8 +350,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $url = $url_request . "orden_pago_oxxo/?q=" . $saldo . "&q2=" . $id_recibo . "&q3=" . $id_usuario;
-        $url = ($saldo > 0 && $id_recibo > 0 && $id_usuario > 0) ? $url : "";
-        return $url;
+        return ($saldo > 0 && $id_recibo > 0 && $id_usuario > 0) ? $url : "";
 
     }
 
@@ -395,8 +404,7 @@ if (!function_exists('invierte_date_time')) {
             $precio = $recibo["precio"];
             $num_ciclos_contratados = $recibo["num_ciclos_contratados"];
             $costo_envio_cliente = $recibo["costo_envio_cliente"];
-            $saldo_pendiente =
-                ($precio * $num_ciclos_contratados) + $costo_envio_cliente;
+            $saldo_pendiente = ($precio * $num_ciclos_contratados) + $costo_envio_cliente;
             $response["saldo_pendiente"] = $saldo_pendiente;
             $response["cuenta_correcta"] = 1;
             $response["resumen"] = $recibo["resumen_pedido"];
@@ -407,6 +415,7 @@ if (!function_exists('invierte_date_time')) {
             $response["id_usuario_venta"] = $recibo["id_usuario_venta"];
 
         }
+
         return $response;
 
     }
@@ -431,6 +440,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
         }
+
         return div($texto, 'contenedor-saldo-pendiente');
 
     }
@@ -438,10 +448,9 @@ if (!function_exists('invierte_date_time')) {
     function monto_pendiente_cliente($monto, $saldo_cubierto, $costo, $num_ciclos)
     {
 
-        $total_deuda = $monto * $num_ciclos;
-        return $total_deuda + $costo;
-    }
+        return ($monto * $num_ciclos)  + $costo;
 
+    }
     function evalua_texto_envios_compras($modalidad_ventas, $total, $tipo)
     {
 
@@ -450,13 +459,14 @@ if (!function_exists('invierte_date_time')) {
 
         switch ($tipo) {
             case 1:
-                if ($modalidad_ventas == 1) {
+                if ($modalidad_ventas > 0 ) {
                     $text = "DATE PRISA MANTÉN EXCELENTE REPUTACIÓN ENVIA TU ARTÍCULO EN VENTA DE FORMA PUNTUAL";
 
                     $text_2 = "
                 Date prisa, 
                 mantén una buena reputación enviando 
                 tus  $total articulos vendidos de forma puntual";
+
                     $text = ($total == 1) ? $text : $text_2;
 
                 }
@@ -465,9 +475,8 @@ if (!function_exists('invierte_date_time')) {
 
 
             case 6:
-                if ($modalidad_ventas == 0) {
-                    $text = "DATE PRISA REALIZA TU COMPRA ANTES DE QUE OTRA PERSONA SE LLEVE TU 
-                  PEDIDO!";
+                if ($modalidad_ventas < 1 ) {
+                    $text = "DATE PRISA REALIZA TU COMPRA ANTES DE QUE OTRA PERSONA SE LLEVE TU PEDIDO!";
                 }
                 break;
 
@@ -486,7 +495,8 @@ if (!function_exists('invierte_date_time')) {
         $texto = "";
         if ($modalidad_ventas == 0) {
 
-            if ($direccion_registrada == 1) {
+            $texto = text_icon('fa fa-bus ', "¿DÓNDE ENVIAMOS TU PEDIDO?", ["id" => $id_recibo]);
+            if ($direccion_registrada > 0) {
                 switch ($estado_envio) {
                     case 0:
                         $texto = text_icon("fa fa-bus", "A LA BREVEDAD EL VENDEDOR TE ENVIARÁ TU PEDIDO");
@@ -497,17 +507,12 @@ if (!function_exists('invierte_date_time')) {
                         break;
                 }
 
-            } else {
-                $texto = text_icon('fa fa-bus ', "¿DÓNDE ENVIAMOS TU PEDIDO?", ["id" => $id_recibo]);
             }
+
         } else {
 
-            if ($direccion_registrada == 1) {
+            $texto = ($direccion_registrada == 1) ? text_icon('fa fa-bus ', "VER DIRECCIÓN DE ENVÍO", ["id" => $id_recibo]) : $texto;
 
-
-                $texto = text_icon('fa fa-bus ', "VER DIRECCIÓN DE ENVÍO", ["id" => $id_recibo]);
-
-            }
         }
 
         return div($texto, ["class" => "btn_direccion_envio", "id" => $id_recibo]);
@@ -517,19 +522,18 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $nueva_data = [];
-        $estado_venta = "";
+        $response = "";
         foreach ($data as $row) {
-            $id_estatus_enid_service = $row["id_estatus_enid_service"];
-            if ($id_estatus_enid_service == $indice) {
-                if ($modalidad_ventas == 1) {
-                    $estado_venta = $row["text_vendedor"];
-                } else {
-                    $estado_venta = $row["text_cliente"];
-                }
+
+            if ( $row["id_estatus_enid_service"] == $indice ) {
+
+                $response = ($modalidad_ventas == 1) ? $row["text_vendedor"] : $row["text_cliente"];
+
                 break;
             }
         }
-        return $estado_venta;
+
+        return $response;
     }
 
     function carga_estado_compra($id_recibo, $vendedor = 0)
@@ -551,20 +555,29 @@ if (!function_exists('invierte_date_time')) {
     function texto_costo_envio_info_publico($flag_envio_gratis, $costo_envio_cliente, $costo_envio_vendedor)
     {
 
-        $data_complete = [];
-        if ($flag_envio_gratis > 0) {
+        $response = [];
+        if ($flag_envio_gratis > 0 ) {
 
-            $text = "ENTREGA GRATIS!";
-            $data_complete["cliente"] = $text;
-            $data_complete["cliente_solo_text"] = "ENTREGA GRATIS!";
-            $data_complete["ventas_configuracion"] = "TU PRECIO YA INCLUYE EL ENVÍO";
+
+            $response = [
+                "cliente" => "ENTREGA GRATIS!",
+                "cliente_solo_text" => "ENTREGA GRATIS!",
+                "ventas_configuracion" => "TU PRECIO YA INCLUYE EL ENVÍO",
+            ];
+
+
         } else {
-            $data_complete["ventas_configuracion"] = "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO";
-            $text = "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO";
-            $data_complete["cliente_solo_text"] = "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO";
-            $data_complete["cliente"] = $text;
+
+
+            $response = [
+
+                "ventas_configuracion" => "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO",
+                "cliente_solo_text" => "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO",
+                "cliente" => "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO",
+            ];
         }
-        return $data_complete;
+
+        return $response;
     }
 
     function valida_texto_periodos_contratados($periodos, $flag_servicio, $id_ciclo_facturacion)
@@ -600,6 +613,7 @@ if (!function_exists('invierte_date_time')) {
             $text = "Ciclos contratados: " . $periodos . " " . $text_ciclos;
         } else {
 
+
             $text = ($periodos > 1) ? "Piezas " : "Pieza ";
             $text = heading_enid($periodos . " " . $text, 3);
         }
@@ -609,11 +623,9 @@ if (!function_exists('invierte_date_time')) {
     function get_text_modalidad($modalidad, $ordenes)
     {
 
-        $text = ($modalidad == 1) ? "TUS VENTAS" : "TUS COMPRAS";
-        if ($modalidad == 0 && $ordenes == 0) {
-            return "";
-        }
-        return div(heading_enid($text, 3), 1);
+        $text = mayorque($modalidad, 0, "TUS VENTAS", "TUS COMPRAS");
+        return ($modalidad < 1 && $ordenes < 1) ? "" : div(heading_enid($text, 3), 1);
+
     }
 
     function get_mensaje_compra($modalidad, $num_ordenes)
@@ -633,21 +645,16 @@ if (!function_exists('invierte_date_time')) {
                 "img_center_compra"
             );
 
-            $f = anchor_enid(
-                $final,
-                [
-                    "href" => path_enid("home")
-                ]
-            );
+            $f = anchor_enid($final, path_enid("home"));
+
             $f .= anchor_enid(
                 heading_enid(
                     "EXPLORAR TIENDA"
                     ,
                     3, "text-center text_explorar_tienda"
-                ),
-                [
-                    "href" => path_enid("home")
-                ]);
+                ), path_enid("home")
+            );
+
             $response = $f;
         }
         return $response;
@@ -736,23 +743,28 @@ if (!function_exists('invierte_date_time')) {
     function get_format_punto_encuentro($data_complete, $recibo)
     {
 
-        $p = $data_complete["punto_encuentro"][0];
-        $costo_envio = $p["costo_envio"];
-        $tipo = $p["tipo"];
-        $color = $p["color"];
-        $nombre_estacion = $p["nombre"];
-        $lugar_entrega = $p["lugar_entrega"];
-        $numero = "NÚMERO " . $p["numero"];
+        $r =  [];
+        if (tiene_data($data_complete) && array_key_exists("punto_encuentro",  $data_complete)){
 
-        $r[] = div(heading_enid("LUGAR DE ENCUENTRO", 3, "top_30 underline "), 1);
 
-        $x[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, "top_20", 1);
-        $x[] = div("ESTACIÓN " . $lugar_entrega, "strong", 1);
-        $x[] = div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"], 1);
+            $p = $data_complete["punto_encuentro"][0];
+            $costo_envio = $p["costo_envio"];
+            $tipo = $p["tipo"];
+            $color = $p["color"];
+            $nombre_estacion = $p["nombre"];
+            $lugar_entrega = $p["lugar_entrega"];
+            $numero = "NÚMERO " . $p["numero"];
 
-        $r[] = div(append_data($x), "contenedor_detalle_entrega");
+            $r[] = div(heading_enid("LUGAR DE ENCUENTRO", 3, "top_30 underline "), 1);
 
-        $r[] = div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", "contenedor_text_entrega border");
+            $x[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, "top_20", 1);
+            $x[] = div("ESTACIÓN " . $lugar_entrega, "strong", 1);
+            $x[] = div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"], 1);
+
+            $r[] = div(append_data($x), "contenedor_detalle_entrega");
+            $r[] = div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", "contenedor_text_entrega border");
+
+        }
 
         return append_data($r);
     }
@@ -843,9 +855,9 @@ if (!function_exists('invierte_date_time')) {
     function get_vista_compras_efectivas($data, $modalidad)
     {
 
-        $listado = create_listado_compra_venta($data, $modalidad);
-        $response = div($listado, 1);
-        return $response;
+
+        return div(create_listado_compra_venta($data, $modalidad), 1);
+
 
     }
 
@@ -913,7 +925,7 @@ if (!function_exists('invierte_date_time')) {
                 break;
             }
         }
-        $tipo_solicitud =  heading_enid($tipo_solicitud , 5);
+        $tipo_solicitud = heading_enid($tipo_solicitud, 5);
 
         $r = [];
         foreach ($compras as $row) {
@@ -937,7 +949,7 @@ if (!function_exists('invierte_date_time')) {
                     "onerror" => "this.src='../img_tema/portafolio/producto.png'"
                 ]);
 
-            $response[] = anchor_enid($resumen_pedido, path_enid("pedidos_recibo" , $id_recibo));
+            $response[] = anchor_enid($resumen_pedido, path_enid("pedidos_recibo", $id_recibo));
 
             $t = [];
             $t = [
@@ -970,7 +982,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(append_data($response), "border shadow top_30 padding_30");
 
         }
-
 
         array_unshift($r, $tipo_solicitud);
         return append_data($r);

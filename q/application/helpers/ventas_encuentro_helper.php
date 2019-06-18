@@ -12,10 +12,10 @@ if (!function_exists('invierte_date_time')) {
         $puntos = 0;
         foreach ($data as $row) {
 
-            $linea = $row["linea"];
+            //$linea = $row["linea"];
             $ventas_en_punto = $row["ventas_en_punto"];
             $nombre_punto_encuentro = $row["nombre_punto_encuentro"];
-            $id_linea_metro = $row["id_linea_metro"];
+            //$id_linea_metro = $row["id_linea_metro"];
             $text_entrega = ($ventas_en_punto > 1) ? span("ENTREGAS", "black") : span("ENTREGA", "black");
 
 
@@ -53,10 +53,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = br(2).hr();
         $response[] = heading_enid("VENTAS POR ESTACIÓN ", 4 , "text-left");
         $response[] = heading_enid("ESTACIONES DE REPARTO: ".$puntos, 6 , "text-left underline");
-
         $response[] = div(div(div(append_data($r), "main-timeline2"), 12), 13);
-
-
         $response = div(append_data($response), "container");
         return $response;
 
@@ -117,7 +114,6 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] = heading_enid("VENTAS EN LíNEAS DE METRO: ".$total, 4 , "text-left");
         $x[] = heading_enid("LINEAS DE REPARTO: ".$lineas_reparto, 6 , "text-left underline");
-
         $x[] =  div(div(div(div(append_data($r), "main-timeline12"), "col-md-12 contenedor_general padding_20 "), "row"));
         return append_data($x);
 
@@ -192,10 +188,8 @@ if (!function_exists('invierte_date_time')) {
         $total = 0;
         foreach ($data as $row) {
 
-            $id_linea_metro = $row["id_linea_metro"];
             $ventas_en_punto = $row["ventas_en_punto"];
-
-            if ($linea == $id_linea_metro) {
+            if ($linea == $row["id_linea_metro"]) {
 
                 $total = $total + $ventas_en_punto;
             }

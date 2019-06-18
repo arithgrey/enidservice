@@ -78,8 +78,9 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('valida_total_menos1')) {
         function valida_total_menos1($anterior, $nuevo, $extra = '')
         {
-            $extra_class = ($anterior > $nuevo) ? 'style="background:#ff1b00!important; color:white!important;" ' : "";
-            return get_td($nuevo, $extra_class . " " . $extra);
+
+            $ext = menorque($anterior, $nuevo, 'style="background:#ff1b00!important; color:white!important;" ');
+            return get_td($nuevo, $ext . " " . $extra);
         }
     }
 
@@ -109,7 +110,7 @@ if (!function_exists('invierte_date_time')) {
             $b = 0;
             $estilos2 = "";
             foreach ($lista_fechas as $row) {
-                if ($b == 0) {
+                if ($b < 1) {
 
                     $fechas .= get_td("Horario", $estilos2);
                     $fechas .= get_td("Total", $estilos2);
@@ -146,12 +147,12 @@ if (!function_exists('invierte_date_time')) {
         function get_franja_horaria()
         {
 
-            $info_hora = [];
+            $response = [];
             for ($a = 23; $a >= 0; $a--) {
 
-                $info_hora[$a] = $a;
+                $response[$a] = $a;
             }
-            return $info_hora;
+            return $response;
         }
     }
 
@@ -185,7 +186,8 @@ if (!function_exists('invierte_date_time')) {
                     [
                         "class" => 'notificacion_tareas_pendientes_enid_service',
                         "id" => $f
-                    ]);
+                    ]
+                );
             }
             return $new_flag;
         }
@@ -199,14 +201,19 @@ if (!function_exists('invierte_date_time')) {
             $f = 0;
             if ($num_direccion < 1) {
 
-                $text = 'Registra tu dirección de compra y venta';
-                $lista = base_notificacion(path_enid("administracion_cuenta"), "fa fa-map-marker", $text);
-
+                $lista = base_notificacion(path_enid("administracion_cuenta"), "fa fa-map-marker", 'Registra tu dirección de compra y venta');
 
                 $f++;
+
             }
-            $response["html"] = $lista;
-            $response["flag"] = $f;
+
+            $response = [
+
+                "html" => $lista,
+                "flag" => $f,
+
+            ];
+
             return $response;
 
         }
@@ -223,25 +230,17 @@ if (!function_exists('invierte_date_time')) {
             foreach ($tareas as $row) {
 
 
-
                 $id_ticket = $row["id_ticket"];
-                $text = div(substr($row["asunto"] , 0,30),"black");
-                $text = div(heading_enid(icon(" fas fa-tasks")   , 5). $text, "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
+                $text = div(substr($row["asunto"], 0, 30), "black");
+                $text = div(heading_enid(icon(" fas fa-tasks"), 5) . $text, "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
 
-                $r[] = anchor_enid($text,
-                    [
-                        "href" => "../desarrollo/?q=1&ticket=".$id_ticket
-                    ]
-                );
-
+                $r[] = anchor_enid($text, "../desarrollo/?q=1&ticket=" . $id_ticket);
                 $f++;
             }
 
 
-
-            $agregar =  div(anchor_enid(text_icon("fas fa-plus-circle black" , " TAREA") , path_enid("desarrollo")), "bottom_50 black underline");
-            $tareas =  add_text($agregar ,  append_data($r));
-
+            $agregar = div(anchor_enid(text_icon("fas fa-plus-circle black", " TAREA"), path_enid("desarrollo")), "bottom_50 black underline");
+            $tareas = add_text($agregar, append_data($r));
 
 
             $response =
@@ -270,8 +269,13 @@ if (!function_exists('invierte_date_time')) {
 
                 $f++;
             }
-            $response["html"] = $lista;
-            $response["flag"] = $f;
+
+            $response = [
+                "html" => $lista,
+                "flag" => $f,
+
+            ];
+
             return $response;
         }
 
@@ -283,13 +287,20 @@ if (!function_exists('invierte_date_time')) {
             $lista = "";
             $f = 0;
             if ($meta > $hecho) {
+
                 $restantes = ($meta - $hecho);
                 $text = "Apresúrate completa tu logro sólo hace falta " . $restantes . " venta para completar tus labores del día!";
                 $lista = base_notificacion("../reporte_enid/?q=2", " fa fa-money ", $text);
                 $f++;
             }
-            $response["html"] = $lista;
-            $response["flag"] = $f;
+
+            $response = [
+
+                "html" => $lista,
+                "flag" => $f,
+
+            ];
+
             return $response;
         }
     }
@@ -307,8 +318,13 @@ if (!function_exists('invierte_date_time')) {
                 $lista = base_notificacion("../tareas/?q=2", " fa fa-clock-o ", $text);
                 $f++;
             }
-            $response["html"] = $lista;
-            $response["flag"] = $f;
+
+            $response = [
+
+                "html" => $lista,
+                "flag" => $f,
+
+            ];
             return $response;
         }
     }
@@ -326,8 +342,13 @@ if (!function_exists('invierte_date_time')) {
                 $lista = base_notificacion("../tareas/?q=2", "fa fa-bullhorn ", $text);
                 $f++;
             }
-            $response["html"] = $lista;
-            $response["flag"] = $f;
+            $response = [
+
+                "html" => $lista,
+                "flag" => $f,
+
+            ];
+
             return $response;
         }
     }
@@ -344,8 +365,14 @@ if (!function_exists('invierte_date_time')) {
 
                 $f++;
             }
-            $response["html"] = $lista;
-            $response["flag"] = $f;
+            $response = [
+
+                "html" => $lista,
+                "flag" => $f,
+
+            ];
+
+
             return $response;
         }
     }
@@ -396,8 +423,13 @@ if (!function_exists('invierte_date_time')) {
                 $lista = base_notificacion("../recomendacion/?q=" . $id_usuario, "fa fa-star", $text);
                 $f++;
             }
-            $response["html"] = $lista;
-            $response["flag"] = $f;
+            $response = [
+
+                "html" => $lista,
+                "flag" => $f,
+
+            ];
+
             return $response;
         }
     }
@@ -414,9 +446,16 @@ if (!function_exists('invierte_date_time')) {
             $text = ($sin_direcciones > 1) ? $sin_direcciones . " de tus compras solicitadas, aún no cuentan con tu dirección de envio" : "Tu compra aún,  no cuentan con tu dirección de envio";
             $lista = base_notificacion("../area_cliente/?action=compras", "fa fa-bus ", $text);
             $f++;
+
         }
-        $response["html"] = $lista;
-        $response["flag"] = $f;
+
+        $response = [
+
+            "html" => $lista,
+            "flag" => $f,
+
+        ];
+
         return $response;
     }
 
@@ -430,19 +469,25 @@ if (!function_exists('invierte_date_time')) {
         if ($adeudos_cliente > 0) {
 
             $total_pendiente = round($adeudos_cliente, 2);
-            $text =
-                'Saldo por liquidar ' . span($total_pendiente . 'MXN',
+            $text = 'Saldo por liquidar ' . span($total_pendiente . 'MXN',
                     [
                         "class" => "saldo_pendiente_notificacion",
                         "deuda_cliente" => $total_pendiente
-                    ]);
+                    ]
+                );
 
             $lista = base_notificacion("../area_cliente/?action=compras", "fa fa-credit-card", $text);
 
             $f++;
         }
-        $response["html"] = $lista;
-        $response["flag"] = $f;
+
+        $response = [
+
+            "html" => $lista,
+            "flag" => $f,
+
+        ];
+
         return $response;
     }
 
@@ -461,13 +506,18 @@ if (!function_exists('invierte_date_time')) {
 
         if ($num > 0) {
 
-            $text = ($tipo == 1) ? "Alguien quiere saber más sobre tu producto" : "Tienes una nueva respuesta en tu buzón";
-            $lista = base_notificacion("../area_cliente/?action=preguntas", "fa fa-comments", $text);
+            $text = val_class($tipo, 1, "Alguien quiere saber más sobre tu producto", "Tienes una nueva respuesta en tu buzón");
+            $lista = base_notificacion(path_enid("area_cliente_pregunta"), "fa fa-comments", $text);
             $f++;
 
         }
-        $response["html"] = $lista;
-        $response["flag"] = $f;
+
+        $response = [
+
+            "html" => $lista,
+            "flag" => $f,
+        ];
+
         return $response;
     }
 
@@ -482,28 +532,26 @@ if (!function_exists('invierte_date_time')) {
 
             $fecha_cordatorio = $row["fecha_cordatorio"];
             $id_recibo = $row["id_recibo"];
-            $desc = $row["descripcion"];
+
 
             $text = get_btw(
 
-                div(icon("fa  fa fa-clock-o ") . $fecha_cordatorio),
-                div($desc),
+                div(text_icon("fa  fa fa-clock-o ", $fecha_cordatorio)),
+                div($row["descripcion"]),
                 "col-lg-12 top_10  shadow padding_10 mh_notificaciones"
-
             );
 
 
-            $r[] = anchor_enid($text,
-                [
-                    "href" => "../pedidos/?recibo=" . $id_recibo . "#listado_recordatorios"
-                ]);
+            $r[] = anchor_enid($text, path_enid("pedidos_recibo", $id_recibo . "#listado_recordatorios"));
             $f++;
         }
+
         $response = [
+
             "html" => append_data($r),
             "flag" => $f,
-
         ];
+
         return $response;
     }
 
@@ -514,20 +562,21 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         $f = 0;
 
-        if (is_array($recibos)) {
+        if (tiene_data($recibos)) {
+
             foreach ($recibos as $row) {
 
 
                 $id_recibo = $row["id_recibo"];
-                $total = div($row["total"] . "MXN", ["class" => "text_monto_sin_cierre text-left"]);
+                $total = div($row["total"] . "MXN", "text_monto_sin_cierre text-left");
                 $text = get_btw(
                     div(img($row["url_img_servicio"]), ["style" => "width:50px"]),
                     $total,
                     "display_flex_enid top_10 border padding_10"
                 );
 
-                $url = "../pedidos/?recibo=" . $id_recibo;
-                $r[] = anchor_enid($text, ["href" => $url]);
+                $url = path_enid("pedidos_recibo", $id_recibo);
+                $r[] = anchor_enid($text, $url);
                 $f++;
             }
 
@@ -538,6 +587,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response = [
+
             "html" => append_data($r),
             "flag" => $f,
 
@@ -553,7 +603,6 @@ if (!function_exists('invierte_date_time')) {
         $num_telefonico = $info["info_notificaciones"]["numero_telefonico"];
         $f = 0;
         $inf_notificacion = $info["info_notificaciones"];
-
 
         $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
 
@@ -598,7 +647,8 @@ if (!function_exists('invierte_date_time')) {
 
 
         ];
-        $response["lista_pendientes"] = ul($list, ["class" => "d-flex flex-column justify-content-between text_notificacion"]);
+
+        $response["lista_pendientes"] = ul($list, "d-flex flex-column justify-content-between text_notificacion");
 
         return $response;
 
@@ -615,14 +665,14 @@ if (!function_exists('invierte_date_time')) {
             $id_pregunta = $row["id_pregunta"];
             $pregunta = $row["pregunta"];
             $id_servicio = $row["id_servicio"];
-            $id_usuario = $row["id_usuario"];
+            //$id_usuario = $row["id_usuario"];
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
-            $pregunta = div($pregunta, "black" );
+            $pregunta = div($pregunta, "black");
 
 
-            $imagenes =   div(get_img_servicio($id_servicio), ["style" => "width:50px"]);
+            $imagenes = div(get_img_servicio($id_servicio), ["style" => "width:50px"]);
             $t = [];
-            $t[] = get_btw($imagenes, $pregunta, "columna ->   d-flex flex-column justify-content-between");
+            $t[] = get_btw($imagenes, $pregunta, " d-flex flex-column justify-content-between ");
             $text = append_data($t);
 
             $id = "#pregunta" . $id_pregunta;
@@ -637,10 +687,12 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response = [
+
             "html" => append_data($r),
             "flag" => $f,
 
         ];
+
         return $response;
 
     }
@@ -656,11 +708,11 @@ if (!function_exists('invierte_date_time')) {
             $id_pregunta = $row["id_pregunta"];
             $pregunta = $row["pregunta"];
             $id_servicio = $row["id_servicio"];
-            $id_usuario = $row["id_usuario"];
+            //$id_usuario = $row["id_usuario"];
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
             $pregunta = div($pregunta, ["class" => "black"]);
 
-            $imagenes =  div(get_img_servicio($id_servicio), ["style" => "width:50px"]);
+            $imagenes = div(get_img_servicio($id_servicio), ["style" => "width:50px"]);
             $t = [];
             $t[] = get_btw($imagenes, $pregunta, "columna ->   d-flex flex-column justify-content-between");
             $text = append_data($t);
@@ -695,7 +747,6 @@ if (!function_exists('invierte_date_time')) {
         $ventas_enid_service = $info["ventas_enid_service"];
         $tareas_enid_service = $inf["tareas_enid_service"];
         $num_telefonico = $inf["numero_telefonico"];
-
 
 
         $tareas = add_tareas($info["tareas"]);
@@ -787,9 +838,15 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $response["num_tareas_pendientes_text"] = $f;
-        $response["num_tareas_pendientes"] = $new_flag;
-        $response["lista_pendientes"] = get_mensaje_inicial_notificaciones(1, $f) . $lista;
+
+        $response = [
+
+            "num_tareas_pendientes_text" => $f,
+            "num_tareas_pendientes" => $new_flag,
+            "lista_pendientes" => get_mensaje_inicial_notificaciones(1, $f) . $lista,
+
+        ];
+
         return $response;
 
     }

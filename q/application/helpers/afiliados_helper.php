@@ -5,8 +5,8 @@ if (!function_exists('invierte_date_time')) {
 		{
 			$num = 0;
 			foreach ($data as $row) {
-				$fecha = $row["fecha"];
-				if ($fecha_actual == $fecha) {
+
+				if ($fecha_actual == $row["fecha"]) {
 					$num = $row[$key];
 					break;
 				}

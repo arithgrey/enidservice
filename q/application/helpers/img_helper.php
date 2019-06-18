@@ -5,33 +5,41 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = form_open("", [
+
             "accept-charset" => "utf-8",
             "method" => "POST",
             "id" => "form_img_enid_faq",
             "class" => "form_img_enid_faq",
             "enctype" => "multipart/form-data"
+
         ]);
-        $r[] = input(["type" => "file",
+        $r[] = input([
+            "type" => "file",
             "id" => 'imagen_img_faq',
             "class" => 'imagen_img_faq',
-            "name" => "imagen"]);
-        $r[] = input_hidden(["name" => 'q', "value" => 'faq']);
+            "name" => "imagen"
+        ]);
         $r[] = input_hidden(
-                ["class" => 'dinamic_img_faq',
+            [
+                "name" => 'q',
+                "value" => 'faq'
+            ]);
+        $r[] = input_hidden(
+            ["class" => 'dinamic_img_faq',
                 "id" => 'dinamic_img_faq',
                 "name" => 'id_faq',
                 "value" => $id_faq]
         );
 
         $x[] = place("lista_imagenes_faq", ["id" => 'lista_imagenes_faq']);
-        $x[] = guardar(icon("fa fa-check"). " AGREGAR ",
+        $x[] = guardar(icon("fa fa-check") . " AGREGAR ",
             [
                 "type" => "submit",
                 "id" => 'guardar_img_faq',
                 "style" => 'color:white;'
             ]);
 
-        $r[] =  div(append_data($x),"col-lg-6  col-lg-offset-3  top_30");
+        $r[] = div(append_data($x), "col-lg-6  col-lg-offset-3  top_30");
 
         $r[] = form_close(place("place_load_img_faq"));
 
