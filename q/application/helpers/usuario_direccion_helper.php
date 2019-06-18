@@ -323,7 +323,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r = [];
-        if (get_param_def($param, "externo") == 1) {
+        if (get_param_def($param, "externo") > 0 ) {
 
 
             $r[] = anchor_enid("LIQUIDAR AHORA!",
@@ -342,8 +342,10 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
 
-            return append_data($r);
+
+
         } else {
+
             $r[] = anchor_enid("Liquida ahora!",
                 [
                     'class' => 'resumen_pagos_pendientes ',
@@ -353,7 +355,9 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
         }
+
         return append_data($r);
+
     }
 
 }

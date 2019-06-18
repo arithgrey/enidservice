@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
             $faqs = $row["faqs"];
             $href = "?categoria=" . $id_categoria;
             $text_lista = span($nombre_categoria . "(" . $faqs . ")");
-            $link = anchor_enid($text_lista, ['href' => $href]);
+            $link = anchor_enid($text_lista, $href);
             $r[] = div($link);
         }
         return append_data($r);
@@ -27,11 +27,11 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $tags = explode(",", $string);
-        $lista_tags = "";
+        $response = "";
         foreach ($tags as $row) {
 
-            $icon = icon('fa fa-times');
-            $lista_tags .= div($icon . $row,
+
+            $response .= div(text_icon('fa fa-times', $row),
                 [
                     "class" => 'tag_servicio btn btn-primary btn-sm',
                     "id" => $row,
@@ -40,15 +40,7 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
         }
-        return $lista_tags;
-    }
-
-    function valida_active_pane($num, $num_tab)
-    {
-
-        $response = ($num == $num_tab) ? ' active ' : "";
         return $response;
-
     }
 
     function valida_existencia_imagenes($num_images)
@@ -59,38 +51,12 @@ if (!function_exists('invierte_date_time')) {
     function text_agregar_telefono($has_phone, $telefono_visible)
     {
 
-        $link = "";
-        if ($has_phone == 0) {
-
-            $link = anchor_enid('INDICA TU NÚMERO TELEFÓNICO', ['href' => '../administracion_cuenta/']);
-
-        }
+        $link =  ($has_phone == 0)  ? anchor_enid('INDICA TU NÚMERO TELEFÓNICO',  path_enid("administracion_cuenta") ) : "";
         return div(div($link, 1), "top_30");
-    }
-
-    function valida_activo_ventas_mayoreo($estado_actual, $ventas_mayoreo)
-    {
-
-        $response = ($estado_actual == $ventas_mayoreo) ? " button_enid_eleccion_active" : "";
-        return $response;
 
     }
 
 
-    function valida_activo_vista_telefono($valor, $valor_usuario)
-    {
-
-        $v = ($valor == $valor_usuario) ? "button_enid_eleccion_active" : "";
-        return $v;
-    }
-
-    function valida_activo_entregas_en_casa($valor, $valor_usuario)
-    {
-
-        $response = ($valor == $valor_usuario) ? "button_enid_eleccion_active" : "";
-        return $response;
-
-    }
 
     function valida_text_imagenes($tipo_promocion, $num_images)
     {

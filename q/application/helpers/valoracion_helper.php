@@ -4,7 +4,7 @@ if (!function_exists('invierte_date_time')) {
     function get_form_valoracion($servicio, $extra, $id_servicio)
     {
 
-        $propietario = ($extra["id_usuario"] == $servicio[0]["id_usuario"]) ? 1 : 0;
+        $propietario = ( $extra["id_usuario"] ==  $servicio[0]["id_usuario"]) ? 1 : 0;
         $nombre = "";
         $email = "";
         if ($extra["in_session"] == 1) {
@@ -124,11 +124,7 @@ if (!function_exists('invierte_date_time')) {
         $social = get_social(0, "Mira lo que compré en Enid service!");
         $encuesta[] =  div(div(append_data($r), 10, 1),1);
         $encuesta[] =  div(div($social , "col-lg-10 col-lg-offtse-1 bottom_50"),1);
-
-
         $response[] = div( append_data($encuesta), "col-lg-6 col-lg-offset-3 shadow padding_10 bottom_50");
-
-
         return append_data($response);
 
     }
@@ -136,6 +132,7 @@ if (!function_exists('invierte_date_time')) {
     function get_form_pregunta_consumidor($id_servicio, $propietario, $vendedor, $servicio)
     {
 
+        if (!tiene_data($servicio)){ return ""; }
 
         $r[] = textarea(
             [
@@ -205,29 +202,30 @@ if (!function_exists('invierte_date_time')) {
     function valida_readonly($text)
     {
 
-        $response = (trim(strlen($text)) > 1) ? "readonly" : "";
-        return $response;
+        return mayorque(trim(strlen($text)) ,  1 , "readonly" );
+
     }
 
     function get_texto_por_modalidad($modalidad)
     {
 
-        $response = ($modalidad == 1) ? " TU HISTORIAL DE COMPRAS " : "TU HISTORIAL DE VENTAS";
-        return $response;
-    }
+        return ($modalidad == 1) ? " TU HISTORIAL DE COMPRAS " : "TU HISTORIAL DE VENTAS";
 
+    }
     function ver_totalidad_por_modalidad($modalidad, $total)
     {
 
         $icon = icon("fa fa-shopping-bag");
-        $resposne = ($modalidad == 1) ? $icon . "TUS VENTAS HASTA EL MOMENTO " . $total : $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
-        return $resposne;
+        return   ($modalidad == 1) ? $icon . "TUS VENTAS HASTA EL MOMENTO " . $total : $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
+
     }
 
+    /*
     function create_seccion_saldo_pendiente($saldo_pendiente)
     {
         return $saldo_pendiente;
     }
+    */
 
     function crea_estrellas($calificacion, $sm = 0)
     {
@@ -274,16 +272,15 @@ if (!function_exists('invierte_date_time')) {
             }
             $l[] = div($criterios[$z], $extra_criterios);
         }
-        return div(append_data($l), ["class" => "top_20 bottom_20"]);
+
+        return div(append_data($l),"top_20 bottom_20" );
     }
 
     function crea_resumen_valoracion($numero_valoraciones, $persona = 0)
     {
 
-        $mensaje_final = "de los consumidores recomiendan este producto";
-        if ($persona == 1) {
-            $mensaje_final = "de los consumidores recomiendan";
-        }
+
+        $mensaje_final =  ($persona == 1) ? "de los consumidores recomiendan": "de los consumidores recomiendan este producto";
         $valoraciones = $numero_valoraciones[0];
         $num_valoraciones = $valoraciones["num_valoraciones"];
         $text_comentarios = ($num_valoraciones > 1) ? "COMENTARIOS" : "COMENTARIO";
@@ -340,6 +337,7 @@ if (!function_exists('invierte_date_time')) {
             if ($recomendaria == 1) {
                 $lista_comentario .= div(icon("fa fa-check-circle") . "Recomiendo este producto", ["class" => 'recomendaria_valoracion strong', "style" => "color:#02071a"]);
             }
+
             $lista_comentario .= div($nombre . br() . $fecha_registro, 'nombre_comentario_valoracion');
             $texto_valoracion = "";
             if ($respuesta_valorada == $id_valoracion) {

@@ -6,10 +6,13 @@ if (!function_exists('invierte_date_time')) {
 		$r = [];
 		if ($flag_envio_gratis > 0) {
 
+			$r += [
 
-			$r["cliente"] = "ENTREGA GRATIS!";
-			$r["cliente_solo_text"] = "ENTREGA GRATIS!";
-			$r["ventas_configuracion"] = "TU PRECIO YA INCLUYE EL ENVÍO";
+                "cliente" =>  "ENTREGA GRATIS!",
+                "cliente_solo_text" =>  "ENTREGA GRATIS!",
+                "ventas_configuracion" =>  "TU PRECIO YA INCLUYE EL ENVÍO",
+            ];
+
 
 		} else {
 
@@ -25,8 +28,7 @@ if (!function_exists('invierte_date_time')) {
 	{
 
 		$r = 0;
-		$hoy = date("Y-m-d");
-		$dias_entrega = date_difference($hoy, $fecha_entrega);
+		$dias_entrega = date_difference(date("Y-m-d"), $fecha_entrega);
 		if (strlen($fecha_entrega) == 10 && $dias_entrega >= 0 && $dias_entrega <= 4) {
 			$r = 1;
 		}
@@ -54,6 +56,8 @@ if (!function_exists('invierte_date_time')) {
 			"17:00",
 			"17:30",
 			"18:00",
+            "19:00",
+
 		];
 		return in_array($horario_entrega, $horarios);
 	}

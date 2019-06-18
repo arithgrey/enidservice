@@ -21,8 +21,8 @@ class Home extends CI_Controller
 
         if (get_param_def($param, "proceso_compra", 0, 1) > 0) {
 
-            $data =  $this->principal->getCssJs($data, "contacto_proceso_compra");
-            $this->principal->show_data_page($data, get_format_proceso_compra() , 1);
+
+            $this->principal->show_data_page($this->principal->getCssJs($data, "contacto_proceso_compra"), get_format_proceso_compra() , 1);
 
         } else {
 

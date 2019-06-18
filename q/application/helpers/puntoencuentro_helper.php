@@ -20,9 +20,9 @@ if (!function_exists('invierte_date_time')) {
                     "costo_envio" => $costo_envio,
                     "flag_envio_gratis" => $flag_envio_gratis
 
-                ]);
+                ]
+            );
         }
-
 
 
         $r[] = place("nombre_linea_metro");
@@ -31,7 +31,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("mensaje_cobro_envio");
         $r[] = guardar("CONTINUAR", ["class" => "btn_continuar_punto_encuentro"]);
         $x[] = place("quien_recibe");
-
 
 
         $x[] = div(
@@ -43,12 +42,12 @@ if (!function_exists('invierte_date_time')) {
                 4
                 ,
                 1
-            ),13);
+            ), 13);
 
 
-        $x[] = div(append_data($l),  "contenedor_estaciones ",1);
+        $x[] = div(append_data($l), "contenedor_estaciones ", 1);
 
-        return div(append_data($r), 'resumen_encuentro' ) . div(append_data($x), 'resumen_mensaje_pago' );
+        return div(append_data($r), 'resumen_encuentro') . div(append_data($x), 'resumen_mensaje_pago');
     }
 
 }

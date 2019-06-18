@@ -38,8 +38,8 @@ class Home extends CI_Controller
     private function crea_info()
     {
 
-        $data = $this->principal->getCssJs($this->principal->val_session(), "forma_pago");
-        $this->principal->show_data_page($data, get_format_pago(), 1);
+        $this->principal->show_data_page($this->principal->getCssJs($this->principal->val_session(), "forma_pago") , get_format_pago(), 1);
+
     }
 
     private function crea_orden()

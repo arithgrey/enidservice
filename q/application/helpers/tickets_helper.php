@@ -1,62 +1,64 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function format_tablero($tickets){
+    function format_tablero($tickets)
+    {
 
-        $pendiente[] = div(heading_enid("Por hacer", 3 ,"underline"),1);
-        $haciendo[] = div(heading_enid("En proceso", 3),1,"underline");
-        $hecho[] = div(heading_enid("hecho", 3),1,"underline");
+        $pendiente[] = div(heading_enid("Por hacer", 3, "underline"), 1);
+        $haciendo[] = div(heading_enid("En proceso", 3), 1, "underline");
+        $hecho[] = div(heading_enid("hecho", 3), 1, "underline");
 
-        foreach ($tickets as $row ){
+        foreach ($tickets as $row) {
 
             $id_ticket = $row["id_ticket"];
             $asunto = $row["asunto"];
 
-            switch ($row["status"]){
+            switch ($row["status"]) {
                 case 0:
 
-                    $pendiente[] =  div( div( $asunto , 12 ) ,
+                    $pendiente[] = div(div($asunto, 12),
                         [
-                            "class" =>"row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
                             "id" => $id_ticket
 
-                        ] );
+                        ]);
 
                     break;
 
                 case 1:
 
-                    $haciendo[] =  div( div( $asunto , 12 ) ,
+                    $haciendo[] = div(div($asunto, 12),
                         [
-                            "class" =>"row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
                             "id" => $id_ticket
 
-                        ] );
+                        ]);
 
                     break;
                 case 2:
 
-                    $hecho[] =  div( div( $asunto , 12 ) ,
+                    $hecho[] = div(div($asunto, 12),
                         [
-                            "class" =>"row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
                             "id" => $id_ticket
 
-                        ] );
+                        ]);
 
 
                     break;
 
             }
         }
-        $response[]  =  div(append_data($pendiente) ,["class"=> "col-lg-3 border pading_10 mh_700 droppable" , "id" => 0 ]);
-        $response[]  =  div("" ,"col-lg-1");
-        $response[]  =  div(append_data($haciendo) ,["class"=> "col-lg-3 border pading_10 mh_700 droppable" , "id" => 1 ]);
-        $response[]  =  div("" ,"col-lg-1");
-        $response[]  =  div(append_data($hecho) ,["class"=> "col-lg-3 border pading_10 mh_700 droppable" , "id" => 2 ]);
+        $response[] = div(append_data($pendiente), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 0]);
+        $response[] = div("", "col-lg-1");
+        $response[] = div(append_data($haciendo), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 1]);
+        $response[] = div("", "col-lg-1");
+        $response[] = div(append_data($hecho), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 2]);
 
         return append_data($response);
 
     }
+
     function get_format_tickets($departamentos)
     {
 
@@ -130,8 +132,8 @@ if (!function_exists('invierte_date_time')) {
 
     function valida_tipo_usuario_tarea($id_perfil)
     {
-        $response = ($id_perfil == 20) ? "Cliente" : "Equipo Enid Service";
-        return $response;
+
+        return val_class($id_perfil, 20, "Cliente", "Equipo Enid Service");
 
     }
 
@@ -175,11 +177,7 @@ if (!function_exists('invierte_date_time')) {
             "value" => $valor_actualizar,
         ];
 
-        if ($status == 1) {
-
-            $config["checked"] = true;
-
-        }
+        $f = ($status == 1) ? (array_push($config, true)) : "";
 
         return div(check($config), 1);
 
@@ -189,7 +187,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r = [];
-        if (count($data) > 0) {
+        if (tiene_data($data)) {
 
             $r[] = div("MOSTRAR SÓLO TAREAS PENDIENTES", 'mostrar_tareas_pendientes a_enid_black cursor_pointer');
             $r[] = div("MOSTRAR TODAS LAS TAREAS", 'mostrar_todas_las_tareas a_enid_black cursor_pointer');
@@ -201,100 +199,111 @@ if (!function_exists('invierte_date_time')) {
     function create_notificacion_ticket($info_usuario, $param, $info_ticket)
     {
 
-        $usuario = $info_usuario[0];
-        $nombre_usuario = $usuario["nombre"] . " " . $usuario["apellido_paterno"] . $usuario["apellido_materno"] . " -  " . $usuario["email"];
+
+        if (tiene_data($info_usuario)) {
+
+            $usuario = $info_usuario[0];
+            $nombre_usuario = $usuario["nombre"] . " " . $usuario["apellido_paterno"] . $usuario["apellido_materno"] . " -  " . $usuario["email"];
 
 
-        $asunto_email = "Nuevo ticket abierto [" . $param["ticket"] . "]";
-        $r[] = div("Nuevo ticket abierto [" . $param["ticket"] . "]");
-        $r[] = div("Cliente que solicita " . $nombre_usuario . "");
+            $asunto_email = "Nuevo ticket abierto [" . $param["ticket"] . "]";
+            $r[] = div("Nuevo ticket abierto [" . $param["ticket"] . "]");
+            $r[] = div("Cliente que solicita " . $nombre_usuario . "");
 
-        $lista_prioridades = ["", "Alta", "Media", "Baja"];
+            $lista_prioridades = ["", "Alta", "Media", "Baja"];
 
-        $asunto = "";
-        $mensaje = "";
-        $prioridad = "";
-        $nombre_departamento = "";
+            $asunto = "";
+            $mensaje = "";
+            $prioridad = "";
+            $nombre_departamento = "";
 
-        foreach ($info_ticket as $row) {
+            foreach ($info_ticket as $row) {
 
-            $asunto = $row["asunto"];
-            $mensaje = $row["mensaje"];
-            $prioridad = $row["prioridad"];
-            $nombre_departamento = $row["nombre_departamento"];
+                $asunto = $row["asunto"];
+                $mensaje = $row["mensaje"];
+                $prioridad = $row["prioridad"];
+                $nombre_departamento = $row["nombre_departamento"];
+
+            }
+
+            $r[] = div("Prioridad: " . $lista_prioridades[$prioridad]);
+            $r[] = div("Departamento a quien está dirigido: " . $nombre_departamento);
+            $r[] = div("Asunto:" . $asunto);
+            $r[] = div("Reseña:" . $mensaje);
+
+            $msj_email["info_correo"] = append_data($r);
+            $msj_email["asunto"] = $asunto_email;
+
+            return $msj_email;
+
 
         }
-
-        $r[] = div("Prioridad: " . $lista_prioridades[$prioridad]);
-        $r[] = div("Departamento a quien está dirigido: " . $nombre_departamento);
-        $r[] = div("Asunto:" . $asunto);
-        $r[] = div("Reseña:" . $mensaje);
-
-        $msj_email["info_correo"] = append_data($r);
-        $msj_email["asunto"] = $asunto_email;
-
-        return $msj_email;
 
     }
 
     function crea_tabla_resumen_ticket($info_ticket, $info_num_tareas)
     {
 
-        $tareas = $info_num_tareas[0]["tareas"];
-        $pendientes = $tareas - $info_num_tareas[0]["pendientes"];
 
-        $r = [];
-
-        foreach ($info_ticket as $row) {
+        $response = [];
+        if (tiene_data($info_num_tareas)) {
 
 
-            $id_ticket = $row["id_ticket"];
-            $status = $row["status"];
-            $fecha_registro = $row["fecha_registro"];
-            $prioridad = $row["prioridad"];
-            $nombre_departamento = $row["nombre_departamento"];
-            $lista_prioridad = ["Alta", "Media", "Baja"];
-            $lista_status = ["Abierto", "Cerrado", "Visto"];
-            $asunto = $row["asunto"];
+            $tareas = $info_num_tareas[0]["tareas"];
+            $pendientes = $tareas - $info_num_tareas[0]["pendientes"];
 
-            $resumen =    $pendientes ." / " .$tareas;
-            $cerrar_ticket =
-                guardar(
-                    "CERRAR TICKET",
-                    [
-                        "onClick" => "cerrar_ticket({$id_ticket})",
-                        "class" => "col-lg-3"
-                    ],
-                    0,1,0,1
-                )
-            ;
+            $r = [];
 
-            $icon = ($pendientes != $tareas) ? "fa fa-check-circle text-secondary " : "fa fa-check-circle text-dark";
+            foreach ($info_ticket as $row) {
 
 
-            $x[] = div(
+                $id_ticket = $row["id_ticket"];
 
-                get_btw(
-                    heading_enid(add_text("#", $id_ticket, 1), 2),
-                    $cerrar_ticket ,
-                    "d-flex align-items-center justify-content-between"
-                )
-            );
-            $x[] = div(heading_enid(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
-            $x[] = div(heading_enid(add_text("DEPARTAMENTO", strtoupper($nombre_departamento)), 6));
-            $x[] = div(heading_enid(add_text("PRIORIDAD", strtoupper($lista_prioridad[$prioridad])), 6, "underline"));
+                $fecha_registro = $row["fecha_registro"];
+                $prioridad = $row["prioridad"];
+                $nombre_departamento = $row["nombre_departamento"];
+                $lista_prioridad = ["Alta", "Media", "Baja"];
 
-            $x[] = div($asunto, "top_30 border padding_10 bottom_30");
-            $x[] = div(heading_enid(strtoupper($fecha_registro), 6, "text-right"));
-            $x[] = div(icon("fas fa-2x fa-plus-circle blue_enid"), " btn_agregar_tarea padding_1  cursor_pointer text-right");
+                $asunto = $row["asunto"];
 
-            $r[] = div(append_data($x), "shadow padding_20");
+                $resumen = $pendientes . " / " . $tareas;
+                $cerrar_ticket =
+                    guardar(
+                        "CERRAR TICKET",
+                        [
+                            "onClick" => "cerrar_ticket({$id_ticket})",
+                            "class" => "col-lg-3"
+                        ],
+                        0, 1, 0, 1
+                    );
+
+                $icon = ($pendientes != $tareas) ? "fa fa-check-circle text-secondary " : "fa fa-check-circle text-dark";
+
+
+                $x[] = div(
+
+                    get_btw(
+                        heading_enid(add_text("#", $id_ticket, 1), 2),
+                        $cerrar_ticket,
+                        "d-flex align-items-center justify-content-between"
+                    )
+                );
+                $x[] = div(heading_enid(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
+                $x[] = div(heading_enid(add_text("DEPARTAMENTO", strtoupper($nombre_departamento)), 6));
+                $x[] = div(heading_enid(add_text("PRIORIDAD", strtoupper($lista_prioridad[$prioridad])), 6, "underline"));
+                $x[] = div($asunto, "top_30 border padding_10 bottom_30");
+                $x[] = div(heading_enid(strtoupper($fecha_registro), 6, "text-right"));
+                $x[] = div(icon("fas fa-2x fa-plus-circle blue_enid"), " btn_agregar_tarea padding_1  cursor_pointer text-right");
+                $r[] = div(append_data($x), "shadow padding_20");
+
+            }
+
+            $response[] = append_data($r);
+            $response[] = valida_mostrar_tareas($info_num_tareas);
 
         }
-        $response[] = append_data($r);
-        $response[] = valida_mostrar_tareas($info_num_tareas);
-        return append_data($response);
 
+        return append_data($response);
 
     }
 
@@ -307,7 +316,6 @@ if (!function_exists('invierte_date_time')) {
         $x[] = input_hidden(["class" => 'tarea_pendiente', "name" => 'tarea']);
         $x[] = guardar("Solicitar", [], 1);
         $x[] = form_close();
-
         return div(append_data($x), "seccion_nueva_tarea top_20");
 
     }
@@ -338,7 +346,7 @@ if (!function_exists('invierte_date_time')) {
             $descripcion = ($status > 0) ? del($row["descripcion"], "descripcion_tarea  cursor_pointer") : $row["descripcion"];
 
 
-            $menu   = [];
+            $menu = [];
             $menu[] = icon(" fa-ellipsis-h ml-3 ", ["data-toggle" => "dropdown"]);
             $menu[] = div(
                 append_data(
@@ -393,7 +401,6 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 " d-flex align-items-center justify-content-between  "
             );
-
 
 
             $text = get_btw(

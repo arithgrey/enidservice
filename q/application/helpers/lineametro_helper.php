@@ -1,21 +1,24 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function create_listado_linea_metro($array)
+    function create_listado_linea_metro($data)
     {
         $r = [];
-        foreach ($array as $row) {
+        foreach ($data as $row) {
 
             $nombre = $row["nombre"];
             $id = $row["id"];
             $icon = $row["icon"];
 
-            $img = img([
-                "src" => $icon,
-                "id" => $id,
-                "class" => "cursor_pointer linea_metro",
-                "nombre_linea" => $nombre
-            ]);
+            $img = img(
+                [
+                    "src" => $icon,
+                    "id" => $id,
+                    "class" => "cursor_pointer linea_metro",
+                    "nombre_linea" => $nombre
+                ]
+            );
+
             $r[] = div($img, 3);
         }
         return append_data($r);
@@ -31,14 +34,16 @@ if (!function_exists('invierte_date_time')) {
             $numero = $row["numero"];
 
 
-            $linea = div("LINEA " . $numero, [
-                "id" => $id,
-                "class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
-                "nombre_linea" => $nombre
-            ]);
+            $linea = div("LINEA " . $numero,
+                [
+                    "id" => $id,
+                    "class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
+                    "nombre_linea" => $nombre
+                ]);
 
-             $r[] = div($linea, 3);
+            $r[] = div($linea, 3);
         }
+
         return append_data($r);
     }
 

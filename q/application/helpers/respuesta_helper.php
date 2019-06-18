@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
 
             $respuesta = div($row["respuesta"]);
             $fecha_registro = div(text_icon("fa fa fa-clock-o", $row["fecha_registro"], [], 0));
-            //$id_response = $row["id_pregunta"];
+
             $id_usuario = $row["id_usuario"];
             $sender = $row["nombre"] . " " . $row["apellido_paterno"];
 
@@ -27,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        if (count($respuestas) > 0) {
+        if ( tiene_data($respuestas)) {
 
             $z[] = place("final");
             $r[] = div(append_data($z), "contenedor_respuestas padding_10");
@@ -54,11 +54,12 @@ if (!function_exists('invierte_date_time')) {
             $x[] = span(strtoupper($nombre), "underline");
             $r[] = div(append_data($x), "top_15");
 
-            if (strlen($telefono) > 4) {
+            if (strlen($telefono) > 4) :
+
                 $r[] = strong("TELÉFONO DE CONTACTO:");
                 $r[] = span($telefono, "underline");
 
-            }
+            endif;
         endif;
         return append_data($r);
 
@@ -84,13 +85,6 @@ if (!function_exists('invierte_date_time')) {
             ]);
         $r[] = form_close();
         return append_data($r);
-
-    }
-
-    function verifica_scroll_respuesta($num)
-    {
-        $response = ($num > 4) ? " scroll_chat_enid " : "";
-        return $response;
 
     }
 

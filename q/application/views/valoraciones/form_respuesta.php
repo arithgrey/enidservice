@@ -23,7 +23,7 @@ if ($info_usuario != 0) {
     <div class="panel panel-primary">
         <?= div("Seguimiento", ["class" => "panel-heading"]) ?>
         <div class="panel-body">
-            <div class="<?= verifica_scroll_respuesta(count($respuestas)) ?>">
+            <div class="<?= mayorque(count($respuestas)  , 4 , " scroll_chat_enid " )  ?>">
                 <ul class="chat">
                     <?php foreach ($respuestas as $row) {
                         $respuesta = $row["respuesta"];
