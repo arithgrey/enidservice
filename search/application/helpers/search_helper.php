@@ -26,7 +26,6 @@ if (!function_exists('invierte_date_time')) {
         $response = div(append_data($r), "border padding_20 top_20 col-lg-10 col-lg-offset-1", 1);
         return $response;
 
-
     }
 
     function get_format_sin_resultados_tienda()
@@ -51,12 +50,12 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_filtros_paginacion($filtros, $order, $paginacion, $es_movil)
+    function get_format_filtros_paginacion($filtros, $order, $paginacion, $is_mobile)
     {
 
         $filtro = get_format_filtro($filtros, $order);
 
-        if ($es_movil > 0) {
+        if ($is_mobile > 0) {
 
             $response = div($filtro, 12);
 
@@ -70,28 +69,16 @@ if (!function_exists('invierte_date_time')) {
 
             $response = div($response, 12);
         }
-        return $response;
 
+        return $response;
 
     }
 
     function val_principal_img($q)
     {
 
-        return  (strlen(trim($q)) == 0) ? place("contenedor_img_principal") : "";
+        return (strlen(trim($q)) == 0) ? place("contenedor_img_principal") : "";
 
-    }
-
-    function get_format_listado_productos($lista_productos)
-    {
-        $response = [];
-
-        foreach ($lista_productos as $row) {
-
-            $response[] = $row;
-
-        }
-        return append_data($response);
     }
 
     function get_format_filtro($filtros, $order)
@@ -119,11 +106,11 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_menu_categorias_destacadas($es_movil, $categorias_destacadas)
+    function get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas)
     {
 
         $r = [];
-        if ($es_movil < 1) {
+        if ($is_mobile < 1) {
 
             foreach (crea_menu_principal_web($categorias_destacadas) as $row):
 
@@ -141,11 +128,11 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_formar_menu_sugerencias($es_movil, $bloque_busqueda, $busqueda)
+    function get_formar_menu_sugerencias($is_mobile, $bloque_busqueda, $busqueda)
     {
 
         $response = "";
-        if ($es_movil < 1) {
+        if ($is_mobile < 1) {
 
             $primer_nivel = $bloque_busqueda["primer_nivel"];
             $segundo_nivel = $bloque_busqueda["segundo_nivel"];
@@ -246,27 +233,18 @@ if (!function_exists('invierte_date_time')) {
     function crea_seccion_de_busqueda_extra($info, $busqueda)
     {
 
-        $f = 0;
-        $r = [];
-        for ($z = 0; $z < count($info); $z++ ) {
 
-            foreach ($info[$z] as $row) {
+        $r =  [];
+        foreach ($info as $row) {
 
-                $url = path_enid("search", "?q=" . $busqueda . "&q2=" . $row["id_clasificacion"]);
-                $r[] = anchor_enid($row["nombre_clasificacion"], ["href" => $url, "class" => 'categoria_text black'], 1);
-
-                $f++;
-            }
+            $url = path_enid("search", "?q=" . $busqueda . "&q2=" . $row["id_clasificacion"]);
+            $r[] = anchor_enid($row["nombre_clasificacion"], ["href" => $url, "class" => 'categoria_text black'], 1);
         }
 
-
         $response = [
-
             "html" => append_data($r),
-            "num_categorias" => $f,
-
+            "num_categorias" => count($info),
         ];
-
         return $response;
 
 

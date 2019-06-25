@@ -50,29 +50,22 @@ class Enid extends REST_Controller
 		$data = $this->actividad_web_model->crea_reporte_enid_service($param);
 		$fin = microtime_float();
 
-		$response["envio_usuario"] = $param;
-		$response["tiempo_empleado"] = ($inicio - $fin);
-		$response["actividad_enid_service"] = $data["resumen"];
+		$response = [
+            "envio_usuario" => $param,
+            "tiempo_empleado" => ($inicio - $fin),
+            "actividad_enid_service" => $data["resumen"],
+
+        ];
 
 		if ($param["vista"] == 1) {
+
 			$this->load->view("cotizador/principal", $response);
+
 		} else {
+
 			$this->response($data);
+
 		}
 	}
-	/*
-	function dispositivos_dia_GET(){
-
-		$data["dispositivos"] =   $this->enidmodel->get_dispositivos_dia();
-		$this->load->view("enid/market/dispositivos_visitados" ,  $data);
-	}
-	*/
-	/*
-	function sitios_dia_GET(){
-
-		$data["sitios_visitados"] =   $this->enidmodel->get_sitios_dia();
-		$this->load->view("enid/market/sitios_visitados" ,  $data);
-	}
-	*/
 
 }

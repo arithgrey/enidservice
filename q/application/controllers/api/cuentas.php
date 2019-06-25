@@ -36,13 +36,12 @@ class Cuentas extends REST_Controller
 
 		if ($param["tipo"] == 0) {
 
-			if (if_ext($param, "id_usuario,clabe,banco")) {
-				$response = $this->regitra_cuenta_bancaria($param);
-			}
+            $response =  (if_ext($param, "id_usuario,clabe,banco")) ? $this->regitra_cuenta_bancaria($param) : "";
+
 		} else {
-			if (if_ext($param, "id_usuario,banco,tipo,tipo_tarjeta,numero_tarjeta")) {
-				$response = $this->regitra_cuenta_debito($param);
-			}
+
+			$response =  (if_ext($param, "id_usuario,banco,tipo,tipo_tarjeta,numero_tarjeta")) ? $this->regitra_cuenta_debito($param) : "";
+
 		}
 		$this->response($response);
 

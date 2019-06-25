@@ -41,7 +41,11 @@ class Img extends REST_Controller
 	{
 
 		$param = $this->get();
-		$response =  get_format_faq($param["id_faq"]);
+		$response =  false;
+		if (if_ext($param,"id_faq")){
+
+            $response =  get_format_faq($param["id_faq"]);
+        }
 		$this->response($response);
 	}
 
@@ -79,9 +83,11 @@ class Img extends REST_Controller
 		$param = $this->get();
 		$response = false;
 		if (if_ext($param, "id")) {
-			$id = $param["id"];
-			$response = $this->img_model->get_img_faq($id);
+
+			$response = $this->img_model->get_img_faq($param["id"]);
+
 		}
+
 		$this->response($response);
 	}
 

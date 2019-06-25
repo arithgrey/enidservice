@@ -25,8 +25,7 @@ class Negocio extends REST_Controller
 	private function get_tipo_entregas($id_usuario)
 	{
 		$q["id_usuario"] = $id_usuario;
-		$api = "usuario/entregas_en_casa/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->principal->api("usuario/entregas_en_casa/format/json/", $q);
 	}
 	/*
 	function entregas_en_casa_PUT(){

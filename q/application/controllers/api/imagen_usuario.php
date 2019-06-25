@@ -42,13 +42,17 @@ class Imagen_usuario extends REST_Controller
 	{
 
 
-		$in = ["idusuario" => $param["id_usuario"]];
-		$imagenes = $this->imagen_usuario_model->get(["id_imagen"], $in, 10);
-		foreach ($imagenes as $row) {
+	    if (es_data($param) && get_param_def($param, "id_usuario") > 0 ){
 
-			$this->imagen_usuario_model->delete($in, 10);
-			$this->delete_imagen($row["id_imagen"]);
-		}
+            $in = ["idusuario" => $param["id_usuario"]];
+            $imagenes = $this->imagen_usuario_model->get(["id_imagen"], $in, 10);
+            foreach ($imagenes as $row) {
+
+                $this->imagen_usuario_model->delete($in, 10);
+                $this->delete_imagen($row["id_imagen"]);
+            }
+        }
+
 		return 1;
 	}
 
@@ -56,8 +60,7 @@ class Imagen_usuario extends REST_Controller
 	{
 
 		$q["id_imagen"] = $id_imagen;
-		$api = "img/index";
-		return $this->principal->api($api, $q, "json", "DELETE");
+		return $this->principal->api("img/index", $q, "json", "DELETE");
 	}
 
 	function img_perfil_GET()

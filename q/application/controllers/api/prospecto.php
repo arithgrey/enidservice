@@ -24,8 +24,7 @@ class Prospecto extends REST_Controller
 	function dia_GET()
 	{
 
-		$response = $this->prospecto_model->email_enviados_enid_service();
-		$this->response($response);
+		$this->response($this->prospecto_model->email_enviados_enid_service());
 	}
 
 }

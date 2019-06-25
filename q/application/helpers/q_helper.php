@@ -61,18 +61,8 @@ if (!function_exists('invierte_date_time')) {
         function tareas_realizadas($realizado, $fecha_actual)
         {
 
-            $valor = 0;
-            foreach ($realizado as $row) {
-
-                $fecha_termino = $row["fecha_termino"];
-                if ($fecha_termino == $fecha_actual) {
-                    $tareas_termino = $row["tareas_realizadas"];
-                    $valor = $tareas_termino;
-                    break;
-                }
-            }
-            return $valor;
-
+            $index =  search_bi_array($realizado, "fecha_termino", $fecha_actual);
+            return $realizado[$index]["tareas_realizadas"];
         }
     }
     if (!function_exists('valida_total_menos1')) {
@@ -365,6 +355,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $f++;
             }
+
             $response = [
 
                 "html" => $lista,
@@ -423,6 +414,7 @@ if (!function_exists('invierte_date_time')) {
                 $lista = base_notificacion("../recomendacion/?q=" . $id_usuario, "fa fa-star", $text);
                 $f++;
             }
+
             $response = [
 
                 "html" => $lista,
@@ -533,7 +525,6 @@ if (!function_exists('invierte_date_time')) {
             $fecha_cordatorio = $row["fecha_cordatorio"];
             $id_recibo = $row["id_recibo"];
 
-
             $text = get_btw(
 
                 div(text_icon("fa  fa fa-clock-o ", $fecha_cordatorio)),
@@ -562,7 +553,7 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         $f = 0;
 
-        if (tiene_data($recibos)) {
+        if (es_data($recibos)) {
 
             foreach ($recibos as $row) {
 
@@ -665,7 +656,6 @@ if (!function_exists('invierte_date_time')) {
             $id_pregunta = $row["id_pregunta"];
             $pregunta = $row["pregunta"];
             $id_servicio = $row["id_servicio"];
-            //$id_usuario = $row["id_usuario"];
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
             $pregunta = div($pregunta, "black");
 
@@ -708,7 +698,6 @@ if (!function_exists('invierte_date_time')) {
             $id_pregunta = $row["id_pregunta"];
             $pregunta = $row["pregunta"];
             $id_servicio = $row["id_servicio"];
-            //$id_usuario = $row["id_usuario"];
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
             $pregunta = div($pregunta, ["class" => "black"]);
 
@@ -733,6 +722,7 @@ if (!function_exists('invierte_date_time')) {
             "flag" => $f,
 
         ];
+
         return $response;
 
     }
@@ -840,7 +830,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response = [
-
             "num_tareas_pendientes_text" => $f,
             "num_tareas_pendientes" => $new_flag,
             "lista_pendientes" => get_mensaje_inicial_notificaciones(1, $f) . $lista,
@@ -921,7 +910,6 @@ if (!function_exists('invierte_date_time')) {
 
 
             $info_uso .= '<tr  ' . $style . '>';
-
             $info_uso .= get_td($f_registro);
             $info_uso .= $total_registrado;
             $info_uso .= $faq;
@@ -931,7 +919,6 @@ if (!function_exists('invierte_date_time')) {
             $info_uso .= $afiliados;
             $info_uso .= $nosotros;
             $info_uso .= $procesar_compra;
-
             $info_uso .= '</tr>';
             $b++;
             $x++;

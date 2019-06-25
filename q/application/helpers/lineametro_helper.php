@@ -39,7 +39,8 @@ if (!function_exists('invierte_date_time')) {
                     "id" => $id,
                     "class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
                     "nombre_linea" => $nombre
-                ]);
+                ]
+            );
 
             $r[] = div($linea, 3);
         }

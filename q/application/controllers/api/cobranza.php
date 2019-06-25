@@ -3,659 +3,497 @@ require APPPATH . '../../librerias/REST_Controller.php';
 
 class Cobranza extends REST_Controller
 {
-	public $option;
-	private $id_usuario;
-
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->helper("cobranza");
-		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
-	}
-	/*
-	function recibo_por_enviar_usuario_GET()
-	{
-		$param = $this->get();
-		$data_respose =  $this->cobranzamodel->valida_recibo_por_enviar_usuario($param);
-		$this->response(crea_data_deuda_pendiente($data_respose) );
-	}
-	*/
-	/*
-	function resumen_compras_usuario_GET(){
-
-		$param          = $this->get();
-		$response       = false;
-		if (if_ext($param, "modalidad")){
-			if($param["modalidad"] ==  1){
-				$response   =  $this->cobranzamodel->get_ventas_usuario($param);
-			}else{
-				$response =  $this->cobranzamodel->get_compras_usuario($param);
-			}
-			$response["status_enid_service"] = $this->cobranzamodel->get_estatus_servicio_enid_service();
-		}
-		$this->response($response);
-	}
-	*/
-
-	function calcula_costo_envio_GET()
-	{
-		$param = $this->get();
-		$this->response($this->get_costo_envio($param));
-	}
-
-	function get_costo_envio($param)
-	{
-
-		$costo = get_costo_envio($param);
-		$icon = icon('fas fa-bus');
-		$texto = $costo["text_envio"]["cliente"];
-		$texto_cliente =
-			add_element($icon . " " . $texto, "div", array('class' => 'texto_envio'));
-		$costo["text_envio"]["cliente"] = $texto_cliente;
-		return $costo;
-	}
-
-	/*
-	function notifica_recordatorio_cobranza_PUT(){
-
-		$param = $this->put();
-		$info =  $this->cobranzamodel->notifica_email_enviado_recordatorio($param);
-		$this->response($info);
-	}
-	*/
-
-	function get_pago($q)
-	{
-		$api = "recibo/resumen_desglose_pago";
-		return $this->principal->api($api, $q, "html");
-	}
-
-	function valida_estado_pago_GET()
-	{
-
-		$param = $this->get();
-		$id_proyecto_persona_forma_pago = $param["id_proyecto_persona_forma_pago"];
-		$this->response("<span class='blue_enid white'>" . $id_proyecto_persona_forma_pago . "</span>");
-	}
-
-	/*
-	function comentario_notificacion_pago_POST(){
-
-		$param =  $this->post();
-		$param["id_usuario"] =  $this->id_usuario;
-		$response =  $this->cobranzamodel->registra_comentario_pago_notificado($param);
-		$this->response($response);
-	}
-	*/
-
-	function form_comentario_notificacion_pago_GET()
-	{
-		$this->load->view("pagos_notificados/comentarios_pago");
-	}
-
-	function get_notificacion_pago($q)
-	{
-
-		$api = "notificacion_pago/pago_resumen/format/json/";
-		return $this->principal->api($api, $q);
-	}
-	/*
-	function cuentas_por_cobrar_GET(){
-
-		$recibos =  $this->cobranzamodel->get_usuarios_deuda_pendiente();
-		$nueva_data = [];
-		$x = 0;
-		foreach($recibos as $row){
+    public $option;
+    private $id_usuario;
 
-			$id_usuario                             =   $row["id_usuario"];
-			$usuario                                =
-			$this->principal->get_info_usuario($id_usuario);
-			$nueva_data[$x]["usuario"]              =   $usuario;
-			$nueva_data[$x]["cuenta_por_cobrar"]    =   $row;
-			$prm["id_recibo"]                       =
-			$row["id_proyecto_persona_forma_pago"];
-			$nueva_data[$x]["recibo"]               =   $this->get_pago($prm);
-			$x ++;
-
-		}
-		$this->response($nueva_data);
-
-	}
-	*/
-	/*
-	function resumen_proyecto_persona_GET(){
-
-		$param =  $this->get();
-		$id_proyecto_persona = $param["id_proyecto_persona"];
-		$data["info_proyecto"] =  $this->cobranzamodel->get_resumen_proyecto_persona($param);
-		$data["info_persona"] =
-		$this->cobranzamodel->get_info_persona($data["info_proyecto"][0]);
-		$data["historial_pagos"] =  $this->cobranzamodel->get_historial_pagos($param);
-		$data["info_request"] =  $param;
-		$this->load->view("cobranza/renovaciones" , $data);
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->helper("cobranza");
+        $this->load->library(lib_def());
+        $this->id_usuario = $this->principal->get_session("idusuario");
+    }
 
-	}*/
-
-	/*
-	function notificacion_pago_GET(){
+    function calcula_costo_envio_GET()
+    {
 
-		$param            =  $this->get();
-		$info_notificados =  $this->get_notificacion_pago($param);
+        $this->response($this->get_costo_envio($this->get()));
+    }
 
-		$comentarios =
-		$this->cobranzamodel->get_comentarios_por_pago_notificado($param);
+    function get_costo_envio($param)
+    {
 
-		$data_complete["ficha"] =  get_ficha_pago($info_notificados , $comentarios);
+        $costo = get_costo_envio($param);
+        $texto = key_exists_bi($costo, "text_envio", "cliente");
+        $costo["text_envio"]["cliente"] = div(text_icon('fas fa-bus', $texto), 'texto_envio');
+        return $costo;
 
-		$data_complete["info_pago_notificado"] = $info_notificados;
+    }
 
-		$id_proyecto_persona_forma_pago =  $info_notificados[0]["num_recibo"];
+    function get_pago($q)
+    {
 
-		$id_servicio = $this->cobranzamodel->get_id_servicio_por_ppfp($id_proyecto_persona_forma_pago);
-		$data_complete["id_servicio"] = $id_servicio;
+        return $this->principal->api("recibo/resumen_desglose_pago", $q, "html");
+    }
 
-		$id_proyecto_persona=
-		$this->cobranzamodel->get_id_proyecto_servicio_por_ppfp($id_proyecto_persona_forma_pago);
-		$data_complete["id_proyecto_persona"] = $id_proyecto_persona;
+    function valida_estado_pago_GET()
+    {
 
-		$this->response($data_complete);
-	}
-	*/
-	function verifica_pago_notificado($q)
-	{
+        $param = $this->get();
+        $this->response(span($param["id_proyecto_persona_forma_pago"], "blue_enid white"));
+    }
 
-		$api = "notificacion_pago/es_notificado/format/json/";
-		return $this->principal->api($api, $q);
-	}
+    function form_comentario_notificacion_pago_GET()
+    {
+        $this->load->view("pagos_notificados/comentarios_pago");
+    }
 
-	/*
-	function info_saldo_pendiente_GET(){
+    function get_notificacion_pago($q)
+    {
 
-		$param =  $this->get();
-		$info_saldo_pendiente =
-		$this->cobranzamodel->get_monto_pendiente_proyecto_persona_forma_pago($param);
+        return $this->principal->api("notificacion_pago/pago_resumen/format/json/", $q);
+    }
 
-		$data_complete["info_pago_pendiente"] =  $info_saldo_pendiente;
-		$data_complete["resultados"] =  count($info_saldo_pendiente);
+    function verifica_pago_notificado($q)
+    {
 
-		$data_complete["resultado_notificado"] = $this->verifica_pago_notificado($param);
+        return $this->principal->api("notificacion_pago/es_notificado/format/json/", $q);
 
-		if (count($info_saldo_pendiente) > 0 ) {
+    }
 
-			$id_proyecto_persona_forma_pago = $param["recibo"];
+    function carga_servicio_por_recibo($q)
+    {
 
-			$data_complete["id_servicio"] = $this->cobranzamodel->get_id_servicio_por_ppfp($id_proyecto_persona_forma_pago);
-			$param["id_recibo"] = $id_proyecto_persona_forma_pago;
-			$data_complete["data_servicio"] = $this->carga_servicio_por_recibo($param);
-		}
-		$this->response($data_complete);
+        return $this->principal->api("tickets/servicio_recibo/format/json/", $q);
+    }
 
-	}
-	*/
+    function solicitud_proceso_pago_POST()
+    {
 
-	function carga_servicio_por_recibo($q)
-	{
-		$api = "tickets/servicio_recibo/format/json/";
-		return $this->principal->api($api, $q);
-	}
+        $a = 0;
+        $param = $this->post();
 
-	function solicitud_proceso_pago_POST()
-	{
+        $id_servicio = $param["plan"] = (get_param_def($param, "plan") != 0) ? $param["plan"] : $param["servicio"];
+        $precio = $this->get_precio_id_servicio($id_servicio);
+        $data_orden = [];
+        $data_reporte_compra["articulo_valido"] = 0;
+        if (es_data($precio)) {
 
-		$a = 0;
-		$param = $this->post();
-		$param["plan"] = (!array_key_exists("plan", $param)) ? $param["servicio"] : $param["plan"];
-		$id_servicio = $param["plan"];
-		$precio = $this->get_precio_id_servicio($id_servicio);
-		$data_complete = [];
-		$data_orden = [];
-		$data_reporte_compra = [];
 
-		$data_reporte_compra["articulo_valido"] = 0;
-		/*Si el plan existe y es disponible continuamos*/
-		if (count($precio) > 0) {
+            $data_reporte_compra["articulo_valido"] = 1;
+            /*ahora consultamos que el servicio se encuentre disponible para compra*/
 
-			$data_reporte_compra["articulo_valido"] = 1;
-			/*ahora consultamos que el servicio se encuentre disponible para compra*/
-			$prm["id_servicio"] = $id_servicio;
-			$prm["articulos_solicitados"] = $param["num_ciclos"];
-			$info_existencia = $this->consulta_disponibilidad_servicio($prm);
+            $prm = [
+                "id_servicio" => $id_servicio,
+                "articulos_solicitados" => $param["num_ciclos"]
+            ];
 
 
-			$data_orden["existencia"] = $info_existencia;
-			$data_reporte_compra["articulo_disponible"] = 0;
-			$data_reporte_compra["existencia"] = $info_existencia;
-			/*Si se encuentra en existencia, continuamos*/
+            $data_orden["existencia"] = $info_existencia = $this->consulta_disponibilidad_servicio($prm);
 
-			if ($info_existencia["en_existencia"] == 1) {
 
+            $data_reporte_compra += [
 
-				$new_precio = $precio[0];
-				$data_reporte_compra["articulo_disponible"] = 1;
-				$data_orden["id_ciclo_facturacion"] = $new_precio["id_ciclo_facturacion"];
-				$data_orden["precio"] = $new_precio["precio"];
-				$data_orden["existencia"] = $info_existencia;
+                "articulo_disponible" => 0,
+                "existencia" => $info_existencia,
 
+            ];
 
-				$data_orden["servicio"] = $info_existencia["info_servicio"][0];
 
+            if ($info_existencia["en_existencia"] == 1) {
 
-				if ($data_orden["servicio"]["flag_servicio"] < 1) {
-					if (array_key_exists("tipo_entrega", $param) && $param["tipo_entrega"] == 1) {
 
-						$prm_envio["flag_envio_gratis"] = 0;
-						$data_orden["costo_envio"] =
-							$this->get_costo_envio_punto_encuentro($param);
+                $new_precio = $precio[0];
+                $data_reporte_compra["articulo_disponible"] = 1;
 
+                $data_orden["id_ciclo_facturacion"] = $new_precio["id_ciclo_facturacion"];
+                $data_orden["precio"] = $new_precio["precio"];
+                $data_orden["existencia"] = $info_existencia;
+                $data_orden["servicio"] = $info_existencia["info_servicio"][0];
 
-					} else {
 
-						$prm_envio["flag_envio_gratis"] =
-							$data_orden["servicio"]["flag_envio_gratis"];
+                if (key_exists_bi($data_orden, "servicio", "flag_servicio", 0) < 1) {
+                    if (get_param_def($param, "tipo_entrega") == 1) {
 
-						$data_orden["costo_envio"] =
-							$this->get_costo_envio($prm_envio);
+                        $prm_envio["flag_envio_gratis"] = 0;
+                        $data_orden["costo_envio"] = $this->get_costo_envio_punto_encuentro($param);
 
-					}
 
-					$this->quita_carro_compras($param);
+                    } else {
 
+                        $prm_envio["flag_envio_gratis"] = key_exists_bi($data_orden, "servicio", "flag_envio_gratis", 0);
+                        $data_orden["costo_envio"] = $this->get_costo_envio($prm_envio);
 
-				}
+                    }
 
+                    $this->quita_carro_compras($param);
 
-				$data_orden["es_usuario_nuevo"] = 1;
-				$es_usuario_nuevo = get_param_def($param, "usuario_nuevo");
+                }
 
+                $data_orden["es_usuario_nuevo"] = 1;
+                $es_usuario_nuevo = get_param_def($param, "usuario_nuevo");
 
-				if ($es_usuario_nuevo == 0) {
-					$data_orden["id_usuario"] = $this->id_usuario;
-					$data_orden["es_usuario_nuevo"] = 0;
 
-				} else {
-					$data_orden["id_usuario"] = $param["id_usuario"];
-				}
+                if ($es_usuario_nuevo == 0) {
 
-				$data_orden["data_por_usuario"] = $param;
-				$data_orden["talla"] =
-					(array_key_exists("talla", $param) && $param["talla"] > 0) ? $param["talla"] : 0;
+                    $data_orden["id_usuario"] = $this->id_usuario;
+                    $data_orden["es_usuario_nuevo"] = 0;
 
+                } else {
 
-				$id_recibo = $this->genera_orden_compra($data_orden, $param);
+                    $data_orden["id_usuario"] = $param["id_usuario"];
+                }
 
-				$q["id_servicio"] = $id_servicio;
-				$q["valor"] = 2;
-				$this->gamificacion_deseo($q);
-				$data_acciones_posteriores["id_recibo"] = $id_recibo;
+                $data_orden["data_por_usuario"] = $param;
+                $data_orden["talla"] = get_param_def($param, "talla");
 
 
-				$data_acciones_posteriores["id_usuario_venta"] = $data_orden["servicio"]["id_usuario_venta"];
-				$data_acciones_posteriores["id_servicio"] = $param["plan"];
+                $id_recibo = $this->genera_orden_compra($data_orden, $param);
 
-				if ($es_usuario_nuevo == 0) {
+                $q["id_servicio"] = $id_servicio;
+                $q["valor"] = 2;
+                $this->gamificacion_deseo($q);
+                $data_acciones_posteriores["id_recibo"] = $id_recibo;
+                $data_acciones_posteriores["id_usuario_venta"] = key_exists_bi($data_orden, "servicio", "id_usuario_venta", 0);
+                $data_acciones_posteriores["id_servicio"] = $id_servicio;
 
-					$data_acciones_posteriores["id_usuario"] = $data_orden["id_usuario"];
-					$data_acciones_posteriores["email"] = $this->principal->get_session("email");
+                if ($es_usuario_nuevo == 0) {
 
-				} else {
+                    $data_acciones_posteriores["id_usuario"] = $data_orden["id_usuario"];
+                    $data_acciones_posteriores["email"] = $this->principal->get_session("email");
 
-					$data_acciones_posteriores["id_usuario"] = $param["id_usuario"];
-					$data_acciones_posteriores["telefono"] = $param["telefono"];
-					$data_acciones_posteriores["nombre"] = $param["nombre"];
-					$data_acciones_posteriores["email"] = $param["email"];
+                } else {
 
-				}
+                    $data_acciones_posteriores["id_usuario"] = $param["id_usuario"];
+                    $data_acciones_posteriores["telefono"] = $param["telefono"];
+                    $data_acciones_posteriores["nombre"] = $param["nombre"];
+                    $data_acciones_posteriores["email"] = $param["email"];
 
-				$data_acciones_posteriores["es_usuario_nuevo"] = $es_usuario_nuevo;
-				$this->acciones_posterior_orden_pago($data_acciones_posteriores);
-				if ($param["tipo_entrega"] == 2) {
+                }
 
-					$data_orden["ficha"] =
-						$this->carga_ficha_direccion_envio($data_acciones_posteriores);
-				} else {
-					/* Registro en tabla de encuentros*/
-					$param["id_recibo"] = $id_recibo;
-					$data_orden["id_recibo"] = $id_recibo;
-					$this->create_orden_punto_entrega($param);
-					$param["id_usuario"] = $data_acciones_posteriores["id_usuario"];
-					$this->agrega_punto_encuentro_usuario($param);
-				}
+                $data_acciones_posteriores["es_usuario_nuevo"] = $es_usuario_nuevo;
+                $this->acciones_posterior_orden_pago($data_acciones_posteriores);
+                if ($param["tipo_entrega"] == 2) {
 
-			}
+                    //$data_orden["ficha"] = $this->carga_ficha_direccion_envio($data_acciones_posteriores);
+                    $data_orden["ficha"] = 1;
 
-		}
-		$this->response($data_orden);
-	}
 
-	function get_precio_id_servicio($id_servicio)
-	{
+                } else {
 
-		$q["id_servicio"] = $id_servicio;
-		$api = "recibo/precio_servicio/format/json/";
-		return $this->principal->api($api, $q);
-	}
+                    /* Registro en tabla de encuentros*/
+                    $param["id_recibo"] = $id_recibo;
+                    $data_orden["id_recibo"] = $id_recibo;
+                    $this->create_orden_punto_entrega($param);
+                    $param["id_usuario"] = $data_acciones_posteriores["id_usuario"];
+                    $this->agrega_punto_encuentro_usuario($param);
+                }
 
-	function consulta_disponibilidad_servicio($q)
-	{
-		$api = "servicio/info_disponibilidad_servicio/format/json/";
-		return $this->principal->api($api, $q);
-	}
+            }
 
-	private function get_costo_envio_punto_encuentro($q)
-	{
+        }
+        $this->response($data_orden);
+    }
 
-		$api = "punto_encuentro/costo_entrega/format/json/";
-		$response = $this->principal->api($api, $q);
-		if (is_array($response) && count($response) > 0) {
-			return $response[0]["costo_envio"];
-		} else {
-			return 50;
-		}
-	}
+    function get_precio_id_servicio($id_servicio)
+    {
 
-	private function quita_carro_compras($param)
-	{
+        $q["id_servicio"] = $id_servicio;
+        return $this->principal->api("recibo/precio_servicio/format/json/", $q);
+    }
 
-		if (array_key_exists("carro_compras", $param)
-			&&
-			$param["carro_compras"] > 0
-			&&
-			array_key_exists("id_carro_compras", $param)
-			&&
-			$param["id_carro_compras"] > 0
-		) {
+    function consulta_disponibilidad_servicio($q)
+    {
 
+        return $this->principal->api("servicio/info_disponibilidad_servicio/format/json/", $q);
+    }
 
-			$q["status"] = 1;
-			$q["id"] = $param["id_carro_compras"];
-			$api = "usuario_deseo/status";
-			return $this->principal->api($api, $q , "json", "PUT");
+    private function get_costo_envio_punto_encuentro($q)
+    {
 
+        $response = $this->principal->api("punto_encuentro/costo_entrega/format/json/", $q);
+        return (es_data($response)) ? $response[0]["costo_envio"] : 50;
 
+    }
 
-		}
-	}
+    private function quita_carro_compras($param)
+    {
 
-	private function genera_orden_compra($q, $param)
-	{
-		$api = "recibo/orden_de_compra";
-		$id_recibo = $this->principal->api($api, $q, "json", "POST");
-		if ($id_recibo > 0 && get_param_def($param, "comentarios") !== 0 && strlen(trim($param["comentarios"])) > 5) {
-			$param["id_recibo"] = $id_recibo;
-			$this->agrega_notas_pedido($param);
-		}
-		return $id_recibo;
-	}
+        if (array_key_exists("carro_compras", $param)
+            &&
+            $param["carro_compras"] > 0
+            &&
+            array_key_exists("id_carro_compras", $param)
+            &&
+            $param["id_carro_compras"] > 0
+        ) {
 
-	private function agrega_notas_pedido($q)
-	{
+            $q = [
+                "status" => 1,
+                "id" => $param["id_carro_compras"],
 
-		$api = "recibo_comentario/index";
-		return $this->principal->api($api, $q, "json", "POST");
-	}
+            ];
 
-	private function gamificacion_deseo($q)
-	{
+            return $this->principal->api("usuario_deseo/status", $q, "json", "PUT");
 
-		$api = "servicio/gamificacion_deseo";
-		return $this->principal->api($api, $q, "json", "PUT");
-	}
 
-	function acciones_posterior_orden_pago($param)
-	{
+        }
+    }
 
-		$this->notifica_deuda_cliente($param);
-		$this->crea_comentario_pedido($param);
-	}
+    private function genera_orden_compra($q, $param)
+    {
 
-	function notifica_deuda_cliente($q)
-	{
+        $id_recibo = $this->principal->api("recibo/orden_de_compra", $q, "json", "POST");
 
-		$api = "areacliente/pago_pendiente_web/format/json/";
-		return $this->principal->api($api, $q);
-	}
+        if ($id_recibo > 0 && get_param_def($param, "comentarios") !== 0 && strlen(trim($param["comentarios"])) > 5) {
+            $param["id_recibo"] = $id_recibo;
+            $this->agrega_notas_pedido($param);
+        }
+        return $id_recibo;
+    }
 
-	/*aquí creamos en base de datos*/
+    private function agrega_notas_pedido($q)
+    {
 
-	private function crea_comentario_pedido($param)
-	{
+        return $this->principal->api("recibo_comentario/index", $q, "json", "POST");
+    }
 
-		$id_recibo = $param["id_recibo"];
-		$email = $param["email"];
+    private function gamificacion_deseo($q)
+    {
 
-		$text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $email . " RECIBO NÚMERO " . $id_recibo;
-		if (get_param_def($param, "es_usuario_nuevo") > 0) {
+        return $this->principal->api("servicio/gamificacion_deseo", $q, "json", "PUT");
+    }
 
-			$text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $param["nombre"] . " - " . $param["email"] . " - " . $param["telefono"] . " RECIBO NÚMERO " . $id_recibo;
-		}
-		$asunto = "NUEVA ORDEN DE COMPRA EN PROCESO, RECIBO #" . $id_recibo;
-		$cuerpo = img_enid([], 1, 1) . heading_enid($text, 3);
-		$q = get_request_email("enidservice@gmail.com", $asunto, $cuerpo);
-		$this->principal->send_email_enid($q);
+    function acciones_posterior_orden_pago($param)
+    {
 
-	}
+        $this->notifica_deuda_cliente($param);
+        $this->crea_comentario_pedido($param);
+    }
 
-	function carga_ficha_direccion_envio($q)
-	{
+    function notifica_deuda_cliente($q)
+    {
 
-		$q["text_direccion"] = "Dirección de Envio";
-		$q["externo"] = 1;
-		$api = "usuario_direccion/direccion_envio_pedido";
-		return $this->principal->api($api, $q, "html");
 
-	}
+        return $this->principal->api("areacliente/pago_pendiente_web/format/json/", $q);
+    }
 
-	private function create_orden_punto_entrega($q)
-	{
+    /*aquí creamos en base de datos*/
+    private function crea_comentario_pedido($param)
+    {
 
-		$api = "proyecto_persona_forma_pago_punto_encuentro/index";
-		return $this->principal->api($api, $q, "json", "POST");
-	}
+        $id_recibo = $param["id_recibo"];
+        $email = $param["email"];
 
-	private function agrega_punto_encuentro_usuario($q)
-	{
+        $text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $email . " RECIBO NÚMERO " . $id_recibo;
+        if (get_param_def($param, "es_usuario_nuevo") > 0) {
 
-		$api = "usuario_punto_encuentro/index";
-		return $this->principal->api($api, $q, "json", "POST");
-	}
+            $text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $param["nombre"] . " - " . $param["email"] . " - " . $param["telefono"] . " RECIBO NÚMERO " . $id_recibo;
+        }
+        $asunto = "NUEVA ORDEN DE COMPRA EN PROCESO, RECIBO #" . $id_recibo;
+        $cuerpo = img_enid([], 1, 1) . heading_enid($text, 3);
+        $q = get_request_email("enidservice@gmail.com", $asunto, $cuerpo);
+        $this->principal->send_email_enid($q);
 
-	function solicitud_cambio_punto_entrega_POST()
-	{
+    }
 
-		$param = $this->post();
-		$response = [];
-		if (if_ext($param, "fecha_entrega,horario_entrega,recibo")) {
+    function carga_ficha_direccion_envio($q)
+    {
 
-			/*modifico hora de entrega*/
-			$param["id_recibo"] = $param["recibo"];
-			/*Lo modifico en la orden*/
-			$response = $this->create_orden_punto_entrega($param);
-			/*Lo agrego en el diccionario para el usuario*/
-			$param["id_usuario"] = $this->id_usuario;
-			$response = $this->agrega_punto_encuentro_usuario($param);
-		}
-		$this->response($response);
-	}
+        $q += [
+            "text_direccion" => "Dirección de Envio",
+            "externo" => 1
 
-	function primer_orden_POST()
-	{
+        ];
 
-		$param = $this->post();
 
-		if (array_key_exists("num_ciclos", $param) && ctype_digit($param["num_ciclos"])
-			&& $param["num_ciclos"] > 0 && array_key_exists("ciclo_facturacion", $param)
-			&& $param["num_ciclos"] > 0 && $param["num_ciclos"] < 10 &&
-			ctype_digit($param["plan"])
-			&& $param["plan"] > 0
+        return $this->principal->api("usuario_direccion/direccion_envio_pedido", $q, "html");
 
-			|| (array_key_exists("punto_encuentro", $param) && $param["punto_encuentro"] > 0)
-		) {
+    }
 
-			$usuario = $this->crea_usuario($param);
-			if ($usuario["usuario_registrado"] == 1 && $usuario["id_usuario"] > 0) {
+    private function create_orden_punto_entrega($q)
+    {
 
-				$param["es_usuario_nuevo"] = 1;
-				$param["usuario_nuevo"] = 1;
-				$param["usuario_referencia"] = $usuario["id_usuario"];
-				$param["id_usuario"] = $usuario["id_usuario"];
+        return $this->principal->api("proyecto_persona_forma_pago_punto_encuentro/index", $q, "json", "POST");
+    }
 
-				if (array_key_exists("punto_encuentro", $param) && $param["punto_encuentro"] > 0) {
+    private function agrega_punto_encuentro_usuario($q)
+    {
 
-					/*Para encuentros en puntos de entrega*/
-					$response = $this->crea_orden_punto_entrega($param);
+        return $this->principal->api("usuario_punto_encuentro/index", $q, "json", "POST");
+    }
 
-				} else {
+    function solicitud_cambio_punto_entrega_POST()
+    {
 
-					/*Para ordenes por entrega DHL, FEDEX ETC*/
-					$response = $this->crea_orden($param);
+        $param = $this->post();
+        $response = [];
+        if (if_ext($param, "fecha_entrega,horario_entrega,recibo")) {
 
-				}
-				$response["usuario_existe"] = 0;
-				$session = $this->create_session($param);
-				$this->principal->set_userdata($session);
-				$this->response($response);
+            /*modifico hora de entrega*/
+            $param["id_recibo"] = $param["recibo"];
+            /*Lo modifico en la orden*/
+            $response = $this->create_orden_punto_entrega($param);
+            /*Lo agrego en el diccionario para el usuario*/
+            $param["id_usuario"] = $this->id_usuario;
+            $response = $this->agrega_punto_encuentro_usuario($param);
+        }
+        $this->response($response);
+    }
 
-			}
-			$this->response($usuario);
+    function primer_orden_POST()
+    {
 
-		} else {
-			$this->response(-1);
-		}
-	}
+        $param = $this->post();
 
-	function crea_usuario($q)
-	{
 
-		$api = "usuario/prospecto";
-		return $this->principal->api($api, $q, "json", "POST");
-	}
+        if (array_key_exists("num_ciclos", $param) && ctype_digit($param["num_ciclos"])
+            && $param["num_ciclos"] > 0 && array_key_exists("ciclo_facturacion", $param)
+            && $param["num_ciclos"] > 0 && $param["num_ciclos"] < 10 &&
+            ctype_digit($param["plan"])
+            && $param["plan"] > 0
 
-	private function crea_orden_punto_entrega($param)
-	{
+            || (array_key_exists("punto_encuentro", $param) && $param["punto_encuentro"] > 0)
+        ) {
 
+            $usuario = $this->crea_usuario($param);
+            if ($usuario["usuario_registrado"] == 1 && $usuario["id_usuario"] > 0) {
 
-		if (!ctype_digit($param["servicio"])
-			||
-			!ctype_digit($param["num_ciclos"])
-			||
-			!ctype_digit($param["punto_encuentro"])) {
-			return false;
-		}
+                $param["es_usuario_nuevo"] = 1;
+                $param["usuario_nuevo"] = 1;
+                $param["usuario_referencia"] = $usuario["id_usuario"];
+                $param["id_usuario"] = $usuario["id_usuario"];
 
+                if (get_param_def($param, "punto_encuentro") > 0) {
 
-		if (valida_fecha_entrega($param["fecha_entrega"])
-			&&
-			valida_horario_entrega($param["horario_entrega"])
-		) {
 
-			$param["fecha_entrega"] = $param["fecha_entrega"] . " " . $param["horario_entrega"] . ":00";
-			$param["tipo_entrega"] = 1;
-			$param["plan"] = $param["servicio"];
-			$param["id_ciclo_facturacion"] = 5;
+                    $response = $this->crea_orden_punto_entrega($param);
 
-			return $this->crea_orden($param);
+                } else {
 
-		}
-		return false;
+                    /*Para ordenes por entrega DHL, FEDEX ETC*/
+                    $response = $this->crea_orden($param);
 
-	}
+                }
+                $response["usuario_existe"] = 0;
+                $session = $this->create_session($param);
+                $this->principal->set_userdata($session);
+                $this->response($response);
 
-	function crea_orden($q)
-	{
+            }
+            $this->response($usuario);
 
-		$api = "cobranza/solicitud_proceso_pago";
-		return $this->principal->api($api, $q, "json", "POST");
-	}
+        } else {
+            $this->response(-1);
+        }
+    }
 
-	function create_session($q)
-	{
+    function crea_usuario($q)
+    {
 
-		$api = "sess/start";
-		$q["t"] = $this->config->item('barer');
-		$q["secret"] = $q["password"];
-		return $this->principal->api($api, $q, "json", "POST", 0, 1, "login");
-	}
+        return $this->principal->api("usuario/prospecto", $q, "json", "POST");
+    }
 
+    private function crea_orden_punto_entrega($param)
+    {
 
-	function valida_envio_notificacion_nuevo_usuario($param)
-	{
-		if (get_param_def($param, "usuario_nuevo") > 0) {
-			$this->notifica_registro_usuario($param);
-		}
-	}
 
-	function notifica_registro_usuario($q)
-	{
-		$api = "emp/solicitud_usuario";
-		return $this->principal->api($api, $q);
-	}
-	function agrega_data_cliente($data)
-	{
+        if (!ctype_digit($param["servicio"])
+            ||
+            !ctype_digit($param["num_ciclos"])
+            ||
+            !ctype_digit($param["punto_encuentro"])) {
 
-		$nueva_data = [];
-		$x = 0;
-		foreach ($data as $row) {
+            return false;
 
-			$nueva_data[$x] = $row;
-			$nueva_data[$x]["cliente"] =
-				$this->principal->get_info_usuario($row["id_usuario"]);
-			$x++;
-		}
-		return $nueva_data;
-	}
+        }
 
-	function agrega_estatus_enid_service($saldos)
-	{
 
-		$nueva_data = [];
-		$a = 0;
-		foreach ($saldos as $row) {
-			$nueva_data[$a] = $row;
-			$prm["id_estatus"] = $row["status"];
-			$nueva_data[$a]["estatus_enid_service"] =
-				$this->get_estatus_enid_service($prm);
-			$a++;
+        if (valida_fecha_entrega($param["fecha_entrega"]) && valida_horario_entrega($param["horario_entrega"])) {
 
-		}
-		return $nueva_data;
-	}
 
-	function get_estatus_enid_service($q)
-	{
-		$api = "servicio/nombre_estado_enid/format/json/";
-		return $this->principal->api($api, $q);
-	}
+            $param["fecha_entrega"] = $param["fecha_entrega"] . " " . $param["horario_entrega"] . ":00";
+            $param["tipo_entrega"] = 1;
+            $param["plan"] = $param["servicio"];
+            $param["id_ciclo_facturacion"] = 5;
+            return $this->crea_orden($param);
 
-	function simulamos_datos_creacion_proyecto_maps($param)
-	{
+        }
+        return false;
 
-		$param["proyecto"] = "Registro o renovación de Negocio en Google MAPS";
-		$param["url"] = "";
-		$param["id_servicio"] = $param["servicio"];
-		return $param;
-	}
-	function comision_GET()
-	{
-		$param = $this->get();
-		$this->response(7);
-	}
+    }
 
-	private function set_option($key, $value)
-	{
-		$this->option[$key] = $value;
-	}
+    function crea_orden($q)
+    {
 
-	private function get_option($key)
-	{
-		return $this->option[$key];
-	}
+        return $this->principal->api("cobranza/solicitud_proceso_pago", $q, "json", "POST");
+    }
 
-	private function get_direccion_pedido($id_recibo)
-	{
+    function create_session($q)
+    {
 
-		$q["id_recibo"] = $id_recibo;
-		$api = "portafolio/direccion_pedido/format/json/";
-		return $this->principal->api($api, $q);
-	}
+
+        $q += [
+            "t" => $this->config->item('barer'),
+            "secret" => $q["password"],
+        ];
+
+        return $this->principal->api("sess/start", $q, "json", "POST", 0, 1, "login");
+    }
+
+
+    function valida_envio_notificacion_nuevo_usuario($param)
+    {
+        $fn = (get_param_def($param, "usuario_nuevo") > 0) ? $this->notifica_registro_usuario($param) : "";
+
+    }
+
+    function notifica_registro_usuario($q)
+    {
+
+        return $this->principal->api("emp/solicitud_usuario", $q);
+    }
+
+    function agrega_data_cliente($data)
+    {
+
+        $response = [];
+        $x = 0;
+        foreach ($data as $row) {
+
+            $response[$x] = $row;
+            $response[$x]["cliente"] = $this->principal->get_info_usuario($row["id_usuario"]);
+            $x++;
+        }
+
+        return $response;
+    }
+
+    function agrega_estatus_enid_service($saldos)
+    {
+
+        $response = [];
+        $a = 0;
+        foreach ($saldos as $row) {
+            $response[$a] = $row;
+            $prm["id_estatus"] = $row["status"];
+            $response[$a]["estatus_enid_service"] = $this->get_estatus_enid_service($prm);
+            $a++;
+
+        }
+        return $response;
+    }
+
+    function get_estatus_enid_service($q)
+    {
+
+        return $this->principal->api("servicio/nombre_estado_enid/format/json/", $q);
+    }
+
+    function comision_GET()
+    {
+
+        $this->response(7);
+    }
+
 }

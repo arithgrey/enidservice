@@ -16,9 +16,10 @@ class categoria extends REST_Controller
 		$param = $this->get();
 		$response = [];
 		if (if_ext($param, "tipo")) {
-			$tipo = $param["tipo"];
-			$response = $this->categoria_model->get_categorias_por_tipo($tipo);
+
+			$response = $this->categoria_model->get_categorias_por_tipo($param["tipo"]);
 		}
+
 		$this->response($response);
 	}
 

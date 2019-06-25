@@ -639,10 +639,12 @@ if (!function_exists('create_button_easy_select')) {
                     $attributes["valor_esperado"]) ? 1 : 0;
 
                 $easy_selet .= add_element($text, "a",
-                    array(
+                    [
                         'class' => $class,
                         'id' => $row[$attributes["valor_id"]],
-                        "existencia" => $extra));
+                        "existencia" => $extra
+                    ]
+                );
 
             }
 
@@ -770,7 +772,7 @@ if (!function_exists('img_enid')) {
 
         $conf["src"] = ($external == 0) ? "../img_tema/enid_service_logo.jpg" : "https://enidservice.com/inicio/img_tema/enid_service_logo.jpg";
 
-        if (tiene_data($extra)) {
+        if (es_data($extra)) {
             $conf += $extra;
         }
         /*
@@ -1158,18 +1160,18 @@ if (!function_exists('debug')) {
         function get_costo_envio($param)
         {
 
-            $flag_envio_gratis = $param["flag_envio_gratis"];
+            $gratis = $param["flag_envio_gratis"];
             $response = [];
 
-            if ($flag_envio_gratis == 1) {
+            if ($gratis == 1) {
 
                 $response["costo_envio_cliente"] = 0;
                 $response["costo_envio_vendedor"] = 100;
-                $response["text_envio"] = texto_costo_envio_info_publico($flag_envio_gratis, $response["costo_envio_cliente"], $response["costo_envio_vendedor"]);
+                $response["text_envio"] = texto_costo_envio_info_publico($gratis, $response["costo_envio_cliente"], $response["costo_envio_vendedor"]);
             } else {
                 $response["costo_envio_cliente"] = 100;
                 $response["costo_envio_vendedor"] = 0;
-                $response["text_envio"] = texto_costo_envio_info_publico($flag_envio_gratis, $response["costo_envio_cliente"], $response["costo_envio_vendedor"]);
+                $response["text_envio"] = texto_costo_envio_info_publico($gratis, $response["costo_envio_cliente"], $response["costo_envio_vendedor"]);
             }
             return $response;
         }
@@ -1179,15 +1181,42 @@ if (!function_exists('debug')) {
         {
 
             $keys = explode(",", $k);
-            $z = 1;
+            $z = 0;
+            if (is_array($keys) && is_array($param)){
+                $z = 1;
+                for ($a = 0; $a < count($keys); $a++) {
 
-            for ($a = 0; $a < count($keys); $a++) {
-                if (!array_key_exists(trim($keys[$a]), $param) || strlen(trim($param[$keys[$a]])) < $num) {
-                    $z = 0;
-                    debug("NO se recibió el parametro->" . $keys[$a]);
+                    if ($keys[$a] != null ){
+
+
+                        if (!array_key_exists(trim($keys[$a]), $param) || strlen(trim($param[$keys[$a]])) < $num) {
+                            $z = 0;
+                            debug("NO se recibió el parametro->" . $keys[$a]);
+                            break;
+                        }
+
+
+                    }else{
+
+                        $rr =0;
+                        debug("este parámetro está llegando nulo" . $keys[$a]);
+                        break;
+                    }
+
+
+                }
+
+            }else{
+
+                if (!is_array($keys)){
+                    print_r("No es array ->  ", $keys);
+                }
+                if (!is_array($param)){
+                    print_r("No es array ->  ", $param);
                 }
 
             }
+
             return $z;
         }
     }
@@ -1693,7 +1722,7 @@ if (!function_exists('get_format_izquierdo')) {
         }
 
 
-        if (tiene_data($categorias_publicas_venta) || tiene_data($categorias_temas_de_ayuda)) {
+        if (es_data($categorias_publicas_venta) || es_data($categorias_temas_de_ayuda)) {
 
             $r[] = get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda);
         }
@@ -1725,7 +1754,7 @@ if (!function_exists('get_img_serv')) {
     function get_img_serv($img)
     {
 
-        return (tiene_data($img)) ? get_url_servicio($img[0]["nombre_imagen"], 1) : "";
+        return (es_data($img)) ? get_url_servicio($img[0]["nombre_imagen"], 1) : "";
     }
 }
 function format_phone($number)
@@ -1798,7 +1827,7 @@ function get_metodos_pago()
         ]));
 
 
-    return  div(div(append_data($r), "col-lg-12 d-flex flex-row justify-content-between"), "info_metodos_pago row");
+    return div(div(append_data($r), "col-lg-12 d-flex flex-row justify-content-between"), "info_metodos_pago row");
 
 }
 
@@ -1955,7 +1984,7 @@ function get_social($proceso_compra, $desc_web)
 
 }
 
-function tiene_data($e)
+function es_data($e)
 {
 
     return (is_array($e) && count($e) > 0) ? true : false;
@@ -1977,4 +2006,26 @@ function mayorque($a, $b, $mayor = 1, $menor = "")
 {
 
     return ($a > $b) ? $mayor : $menor;
+}
+
+function search_bi_array($array, $columna, $busqueda, $get = false, $si_false = "")
+{
+
+    $index = array_search($busqueda, array_column($array, $columna));
+    $response = $index;
+
+    if ($get != false) {
+
+        $response = ($index != false) ? $array[$index][$get] : $si_false;
+    }
+
+    return $response;
+}
+function key_exists_bi($data,$k,$sk,$def=""){
+
+    return  (is_array($data) && array_key_exists($k, $data) && is_array($data[$k]) && array_key_exists($sk, $data[$k]) )? $data[$k][$sk] : $def;
+}
+function primer_elemento($data,$index,$def=false){
+
+    return  (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0]) )? $data[0][$index] : $def;
 }

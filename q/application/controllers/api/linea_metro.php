@@ -21,11 +21,20 @@ class Linea_metro extends REST_Controller
 			$params = ["tipo" => $param["tipo"]];
 			$response = $this->linea_metro_model->get([], $params, 100);
 
-			if ($param["v"] == 1 && $param["tipo"] == 1) {
-				$response = create_listado_linea_metro($response);
-			} else if ($param["v"] == 1 && $param["tipo"] == 2) {
-				$response = create_listado_metrobus($response);
-			}
+			if ($param["v"] == 1 ){
+                $t  =  $param["tipo"];
+                switch ($t) {
+                    case 1:
+                        $response = create_listado_linea_metro($response);
+                        break;
+
+                    case 2:
+                        $response = create_listado_metrobus($response);
+                        break;
+                    default:
+                        break;
+                }
+            }
 		}
 		$this->response($response);
 	}

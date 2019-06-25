@@ -20,9 +20,9 @@ class Pagina_web extends REST_Controller
 		$param = $this->post();
 		$response = false;
 		if (if_ext($param, "q,q2")) {
-			$params = $param["q"];
-			$q2 = $param["q2"];
-			if ($q2 == 0) {
+
+		    $params = $param["q"];
+			if ($param["q2"]== 0) {
 				$response = $this->pagina_web_model->insert($params, 1);
 			} else {
 				$response = $this->pagina_web_model->insert($params, 1, 0, "pagina_web_bot");
@@ -34,8 +34,8 @@ class Pagina_web extends REST_Controller
 
 	function dia_GET()
 	{
-		$response = $this->pagina_web_model->accesos_enid_service();
-		$this->response($response);
+
+		$this->response($this->pagina_web_model->accesos_enid_service());
 	}
 
 	function productividad_GET()
@@ -45,15 +45,17 @@ class Pagina_web extends REST_Controller
 		$response = false;
 		if (if_ext($param, "fecha_inicio,fecha_termino")) {
 
-			$f_inicio = $param["fecha_inicio"];
-			$f_termino = $param["fecha_termino"];
+			$fi = $param["fecha_inicio"];
+			$ft = $param["fecha_termino"];
 
-			$response["mobile"] = $this->pagina_web_model->get_num_field($f_inicio, $f_termino, "mobile");
-			$response["is_browser"] = $this->pagina_web_model->get_num_field($f_inicio, $f_termino, "is_browser");
-			$response["is_mobile"] = $this->pagina_web_model->get_num_field($f_inicio, $f_termino, "is_mobile");
-			$response["url"] = $this->pagina_web_model->get_num_field($f_inicio, $f_termino, "url");
-			$response["platform"] = $this->pagina_web_model->get_num_field($f_inicio, $f_termino, "platform");
-			$response["url_referencia"] = $this->pagina_web_model->get_num_field($f_inicio, $f_termino, "url_referencia");
+			$response  =  [
+                "mobile" => $this->pagina_web_model->get_num_field($fi, $ft, "mobile"),
+                "is_browser" => $this->pagina_web_model->get_num_field($fi, $ft, "is_browser"),
+                "is_mobile" => $this->pagina_web_model->get_num_field($fi, $ft, "is_mobile"),
+                "url" => $this->pagina_web_model->get_num_field($fi, $ft, "url"),
+                "platform" => $this->pagina_web_model->get_num_field($fi, $ft, "platform"),
+                "url_referencia" => $this->pagina_web_model->get_num_field($fi, $ft, "url_referencia")
+            ];
 
 			if ($param["v"] == 1) {
 				$response = $this->genera_reporte($response);

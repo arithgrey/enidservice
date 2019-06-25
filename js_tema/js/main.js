@@ -9,7 +9,7 @@ $("footer").ready(function () {
 
     let in_session = get_parameter(".in_session");
     set_option("in_session", in_session);
-    set_option("is_mobile", get_parameter(".es_movil"));
+    set_option("is_mobile", get_parameter(".is_mobile"));
     $("#form_contacto").submit(envia_comentario);
     $(".menu_notificaciones_progreso_dia").click(metricas_perfil);
     metricas_perfil();
@@ -186,9 +186,7 @@ let mostrar_img_upload = (source, id_section) => {
 
 let showonehideone = (show, hide) => {
 
-
     $(show).show();
-    //flex(show);
     $(hide).hide();
 }
 

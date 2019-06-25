@@ -177,7 +177,7 @@ let solicitud_cotizacion = e => {
                         "talla": "",
                         "tipo_entrega": 2
                     };
-                    debugger;
+
                     $(".informacion_extra").hide();
                     request_enid("POST", data_send, url, respuesta_registro_cotizacion, 0, before_registro_afiliado);
                 }
@@ -196,7 +196,7 @@ let registro_cotizacion = (e) => {
     let data_send = $(".form_cotizacion_enid_service").serialize();
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
     bloquea_form(".form_cotizacion_enid_service");
-    request_enid("POST", data_send, url, respuesta_proceso_cotizacion_usuario_activo, ".place_config_usuario");
+    request_enid("POST", data_send, url, respuesta_proceso_usuario_activo, ".place_config_usuario");
 
     e.preventDefault();
 
@@ -225,10 +225,8 @@ let respuesta_registro = (data) => {
 
         } else {
 
-            set_option("data_registro", data);
-            set_option("registro", 1);
-            set_option("usuario_nuevo", 1);
-            config_direccion();
+            redirect("../area_cliente/?action=compras");
+
         }
 
     } else {
@@ -258,23 +256,18 @@ let procesar_pedido_usuario_activo = () => {
         "carro_compras": get_parameter(".carro_compras"),
     };
 
-    request_enid("POST", data_send, url, respuesta_proceso_venta_usuario_activo, "", before_procesar_pedido_activo);
+    request_enid("POST", data_send, url, () => { redirect("../area_cliente/?action=compras"); } ,0, before_pedido_activo);
 
 }
 
-let before_procesar_pedido_activo = () => {
+let before_pedido_activo = () => {
+
     $('.btn_procesar_pedido_cliente').prop('disabled', true);
     show_load_enid(".place_proceso_compra", "Validando datos ", 1);
+
 }
 
-let respuesta_proceso_venta_usuario_activo = (data) => {
-
-    set_option("data_registro", data);
-    set_option("registro", 0);
-    set_option("usuario_nuevo", 0);
-    config_direccion();
-}
-let respuesta_proceso_cotizacion_usuario_activo = (data) => {
+let respuesta_proceso_usuario_activo = (data) => {
 
     div_enid("place_config_usuario", "TU SOLICITUD SE ENVIÓ!", "texto_solicitud_enviada top_30  border white padding_5 shadow ");
     redirect("../area_cliente");
@@ -285,31 +278,6 @@ let quita_espacios_en_telefono = () => {
     let valor = get_parameter(".telefono");
     let nuevo = quitar_espacios_numericos(valor);
     $(".telefono").val(nuevo);
-}
-let config_direccion = () => {
-
-    let data_registro = get_option("data_registro");
-    let ficha = "";
-    if (get_option("usuario_nuevo") == 1) {
-
-        ficha = data_registro.ficha;
-    } else {
-        data_registro = get_option("data_registro");
-        ficha = data_registro.ficha;
-    }
-
-    $(".contenedo_compra_info").show();
-    render_enid(".contenedo_compra_info", ficha);
-    recorrepage(".contenedor_compra");
-    $(".codigo_postal").keyup(auto_completa_direccion);
-    $(".numero_exterior").keyup(function () {
-        quita_espacios(".numero_exterior");
-    });
-    $(".numero_interior").keyup(function () {
-        quita_espacios(".numero_interior");
-    });
-    $(".form_direccion_envio").submit(registra_nueva_direccion);
-
 }
 let set_link = function() {
 

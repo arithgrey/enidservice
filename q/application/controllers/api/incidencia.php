@@ -21,8 +21,8 @@ class incidencia extends REST_Controller
 			"idcalificacion" => 1,
 			"id_user" => 1,
 		];
-		$response = $this->incidencia_model->insert($params, 1);
-		$this->response($response);
+
+		$this->response($this->incidencia_model->insert($params, 1));
 	}
 
 }

@@ -58,6 +58,7 @@ class Fq extends REST_Controller
 		$param = $this->post();
 		$response = false;
 		if (if_ext($param, "editar_respuesta,id_faq,respuesta,categoria,titulo,status")) {
+
 			$param["id_usuario"] = $this->principal->get_session("idusuario");
 			$editar_respuesta = $param["editar_respuesta"];
 			$id_faq = $param["id_faq"];
@@ -114,8 +115,8 @@ class Fq extends REST_Controller
 			$perfil = $this->principal->getperfiles();
 			switch ($perfil) {
 				case 20:
-					$categorias = $this->get_categorias_por_tipo(3);
-					$response = lista_categorias($categorias);
+
+					$response = lista_categorias($this->get_categorias_por_tipo(3));
 					break;
 
 				default:
@@ -135,7 +136,6 @@ class Fq extends REST_Controller
 	{
 
 		$q["tipo"] = $tipo;
-		$api = "categoria/categorias_por_tipo/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->principal->api("categoria/categorias_por_tipo/format/json/", $q);
 	}
 }

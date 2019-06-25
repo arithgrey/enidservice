@@ -30,33 +30,31 @@ class Mail extends REST_Controller
 	function agrega_ventas($email)
 	{
 
-		$nueva_data = [];
+		$response = [];
 		$a = 0;
 		foreach ($email as $row) {
 
-			$nueva_data[$a] = $row;
+			$response[$a] = $row;
 			$fecha_registro = $row["fecha_registro"];
-			$nueva_data[$a]["ventas"] = $this->get_ventas_dia($fecha_registro);
-			$nueva_data[$a]["solicitudes"] = $this->get_solicitudes_ventas_dia($fecha_registro);
+			$response[$a]["ventas"] = $this->get_ventas_dia($fecha_registro);
+			$response[$a]["solicitudes"] = $this->get_solicitudes_ventas_dia($fecha_registro);
 
 			$a++;
 		}
-		return $nueva_data;
+		return $response;
 	}
 
 	function get_solicitudes_ventas_dia($fecha)
 	{
 
 		$q["fecha"] = $fecha;
-		$api = "ganancias/solicitudes_fecha/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->principal->api("ganancias/solicitudes_fecha/format/json/", $q);
 	}
 
 	function get_ventas_dia($fecha)
 	{
 		$q["fecha"] = $fecha;
-		$api = "ganancias/ganancias_fecha/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->principal->api("ganancias/ganancias_fecha/format/json/", $q);
 	}
 
 }

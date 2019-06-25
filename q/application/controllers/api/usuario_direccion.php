@@ -92,15 +92,15 @@ class usuario_direccion extends REST_Controller
             $domicilio = $this->get_direccion_pedido($param);
             $data["registro_direccion"] = 0;
 
-            if (tiene_data($domicilio)) {
+            if (es_data($domicilio)) {
 
                 $domicilio = $this->get_domicilio_cliente($param);
-                $data["registro_direccion"] = (tiene_data($domicilio)) ? 1 : 0;
+                $data["registro_direccion"] = (es_data($domicilio)) ? 1 : 0;
 
 
             }
 
-            if (tiene_data($domicilio)) {
+            if (es_data($domicilio)) {
 
                 $domicilio = $this->get_data_direccion($domicilio[0]["id_direccion"]);
 
@@ -168,7 +168,7 @@ class usuario_direccion extends REST_Controller
 
                 case 1:
 
-                    if (count($domicilio) > 0) {
+                    if (es_data($domicilio)) {
                         return $this->load->view("proyecto/domicilio_resumen", $data);
                     } else {
 
@@ -206,7 +206,7 @@ class usuario_direccion extends REST_Controller
             foreach ($direcciones as $row) {
 
                 $direccion = $this->get_data_direccion($row["id_direccion"]);
-                if (tiene_data($direccion)) {
+                if (es_data($direccion)) {
 
                     $response[] = $direccion[0];
                 }

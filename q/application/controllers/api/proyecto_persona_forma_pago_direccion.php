@@ -55,7 +55,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
 				$this->set_tipo_entrega($param["id_recibo"]);
 
 			}
-			/*Agrego la nueva dirección*/
+
 			$response = $this->proyecto_persona_forma_pago_direccion_model->insert($params);
 		}
 		$this->response($response);
@@ -63,17 +63,17 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
 
 	private function delete_direccion_punto_encuentro($id_recibo)
 	{
-
-		$api = "proyecto_persona_forma_pago_punto_encuentro/index";
 		$q["id_recibo"] = $id_recibo;
-		return $this->principal->api($api, $q, "json", "DELETE");
+		return $this->principal->api("proyecto_persona_forma_pago_punto_encuentro/index", $q, "json", "DELETE");
 	}
 	private function  set_tipo_entrega($id_recibo){
 
-		$api = "recibo/tipo_entrega";
-		$q["recibo"] = $id_recibo;
-		$q["tipo_entrega"] = 2;
-		return $this->principal->api($api, $q, "json", "PUT");
+		$q=  [
+            "recibo" => $id_recibo,
+            "tipo_entrega" => 2,
+
+            ];
+		return $this->principal->api("recibo/tipo_entrega", $q, "json", "PUT");
 
 	}
 

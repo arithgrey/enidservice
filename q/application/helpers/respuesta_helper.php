@@ -27,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        if ( tiene_data($respuestas)) {
+        if ( es_data($respuestas)) {
 
             $z[] = place("final");
             $r[] = div(append_data($z), "contenedor_respuestas padding_10");
