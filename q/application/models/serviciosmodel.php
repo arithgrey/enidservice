@@ -407,17 +407,15 @@ class serviciosmodel extends CI_Model
 
 	function busqueda($param)
 	{
-
-	    $data_complete["num_servicios"] = $this->get_resultados_posibles($param);
+        $response["total_busqueda"] = $this->get_resultados_posibles($param);
 		$_num = get_random();
 		$this->create_productos_disponibles(0, $_num, $param);
-		$data_complete["sql"] = $this->get_option("sql");
-		$data_complete["servicios"] = $this->db->get("tmp_producto_$_num")->result_array();
+		$response["servicios"] = $this->db->get("tmp_producto_$_num")->result_array();
 		if ($param["agrega_clasificaciones"] > 0 ) {
-			$data_complete["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
+			$response["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
 		}
 		$this->create_productos_disponibles(1, $_num, $param);
-		return $data_complete;
+		return $response;
 	}
 
 	function get_clasificaciones_disponibles($_num)
@@ -439,12 +437,10 @@ class serviciosmodel extends CI_Model
 	function get_limit($param)
 	{
 
-		$page = (isset($param["extra"]['page']) && !empty($param["extra"]['page'])) ?
-			$param["extra"]['page'] : 1;
+		$page = (isset($param["extra"]['page']) && !empty($param["extra"]['page'])) ? $param["extra"]['page'] : 1;
 		$per_page = $param["resultados_por_pagina"]; //la cantidad de registros que desea mostrar
 		$adjacents = 4; //brecha entre páginas después de varios adyacentes
 		$offset = ($page - 1) * $per_page;
-
 		return " LIMIT $offset , $per_page ";
 	}
 
@@ -463,22 +459,14 @@ class serviciosmodel extends CI_Model
 		$extra_clasificacion = $this->get_extra_clasificacion($param);
 		$num_q = strlen(trim($q));
 		$id_usuario = $param["id_usuario"];
-		$sql_extra = "";
+
 
 		$extra_existencia = ( $id_usuario > 0 ) ? " " : " AND existencia > 0  ";
-
-
 		$sql_considera_imagenes = ($id_usuario > 0) ? " " : " AND flag_imagen = 1 ";
-
 		$extra_empresa = ($id_usuario > 0) ? " AND id_usuario = " . $id_usuario : "";
         $extra_empresa  = ( get_param_def($param , "global") >  0  ) ? " " : $extra_empresa;
-
-
-
 		$vendedor = $param["vendedor"];
 		$extra_vendedor = ( $vendedor > 0 ) ? " AND id_usuario =  '" . $vendedor . "'" : "";
-
-
 		$orden = $this->get_orden($param);
 
 		$sql_match = ($num_q > 0) ?
@@ -579,27 +567,6 @@ class serviciosmodel extends CI_Model
 				break;
 		}
 	}
-
-	/*
-	function get_informacion_basica_servicio_disponible($param){
-
-		$params  =  [   "id_servicio",
-						"nombre_servicio" ,
-						"status" ,
-						"existencia" ,
-						"flag_envio_gratis",
-						"flag_servicio" ,
-						"flag_nuevo" ,
-						"id_usuario id_usuario_venta" ,
-						"precio" ,
-						"id_ciclo_facturacion"
-					];
-
-		return  $this->q_get($params, $param["id_servicio"] );
-
-	}
-	*/
-
 	function agrega_elemento_distinto($distinto)
 	{
 		$nuevo = " AND id_servicio != $distinto";
@@ -703,7 +670,6 @@ class serviciosmodel extends CI_Model
                             AND 
                         flag_imagen = 1
                         LIMIT 1";
-		//debug($query_get);
 
 		return $this->db->query($query_get)->result_array();
 
@@ -718,13 +684,6 @@ class serviciosmodel extends CI_Model
 
 		return $this->db->query($query_get)->result_array();
 	}
-
-	/*
-	function es_servicio_usuario($param){
-
-
-	}
-	*/
 	function get_clasificaciones_por_id_servicio($id_servicio)
 	{
 
@@ -755,20 +714,6 @@ class serviciosmodel extends CI_Model
 		return $this->db->query($query_get)->result_array();
 
 	}
-
-	function get_usuario_por_servicio($param)
-	{
-
-		/*
-		$id_servicio =  $param["id_servicio"];
-		$query_get ="SELECT id_usuario FROM servicio WHERE id_servicio = $id_servicio LIMIT 1";
-		$result = $this->db->query($query_get);
-		return $result->result_array();
-		*/
-
-
-	}
-
 	function get_resumen($param)
 	{
 
@@ -789,7 +734,7 @@ class serviciosmodel extends CI_Model
 	function busqueda_producto($param)
 	{
 
-		$data_complete["num_servicios"] = $this->get_resultados_posibles($param);
+		$data_complete["total_busqueda"] = $this->get_resultados_posibles($param);
 		$_num = get_random();
 		$this->create_productos_disponibles(0, $_num, $param);
 		$data_complete["sql"] = $this->get_option("sql");
@@ -797,13 +742,14 @@ class serviciosmodel extends CI_Model
 		$result = $this->db->query($query_get);
 		$servicios = $result->result_array();
 		$data_complete["servicio"] = $servicios;
-		if ($param["agrega_clasificaciones"] == 1) {
+		if ($param["agrega_clasificaciones"] > 0 ) {
 			$data_complete["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
 		}
 		$this->create_productos_disponibles(1, $_num, $param);
 		return $data_complete;
 
 	}
+
 
 	function get_resultados_posibles($param)
 	{
@@ -817,15 +763,17 @@ class serviciosmodel extends CI_Model
 
 	}
 
+
 	function create_productos_disponibles($flag, $_num, $param)
 	{
-		$query_drop = "DROP TABLE IF exists tmp_producto_$_num";
-		$this->db->query($query_drop);
+
+		$this->db->query("DROP TABLE IF exists tmp_producto_$_num");
 		if ($flag == 0) {
-			$query_where = $this->get_sql_servicio($param, 0);
+
+		    $where = $this->get_sql_servicio($param, 0);
 
 
-			$param_extra = ($param["agrega_clasificaciones"] == 1) ?
+			$param_extra = ($param["agrega_clasificaciones"] > 0 ) ?
 				",primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 
             , quinto_nivel" : "";
 
@@ -847,8 +795,8 @@ class serviciosmodel extends CI_Model
                                 deseado      
                                 " . $param_extra . "                       
                             FROM 
-                            servicio" . $query_where;
-			$this->set_option("sql", $query_create);
+                            servicio" . $where;
+
 			$this->db->query($query_create);
 		}
 	}

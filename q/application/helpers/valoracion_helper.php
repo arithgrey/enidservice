@@ -121,7 +121,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = br(3);
 
 
-        $social = get_social(0, "Mira lo que compré en Enid service!");
+        $social     = get_social(0, "Mira lo que compré en Enid service!");
         $encuesta[] =  div(div(append_data($r), 10, 1),1);
         $encuesta[] =  div(div($social , "col-lg-10 col-lg-offtse-1 bottom_50"),1);
         $response[] = div( append_data($encuesta), "col-lg-6 col-lg-offset-3 shadow padding_10 bottom_50");
@@ -132,7 +132,7 @@ if (!function_exists('invierte_date_time')) {
     function get_form_pregunta_consumidor($id_servicio, $propietario, $vendedor, $servicio)
     {
 
-        if (!tiene_data($servicio)){ return ""; }
+        if (!es_data($servicio)){ return ""; }
 
         $r[] = textarea(
             [
@@ -169,7 +169,6 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = heading_enid("VALORACIONES Y RESEÑAS", 3);
         $r[] = div(
-
             anchor_enid(text_icon("fa fa-chevron-right ir", "MÁS SOBRE EL VENDEDOR", 0, 0)
                 ,
                 [
@@ -180,22 +179,27 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $response = append_data($r);
-        return $response;
+        return  append_data($r);
 
     }
 
     function get_notificacion_valoracion($usuario, $id_servicio)
     {
 
-        $nombre = $usuario[0]["nombre"];
-        $email = $usuario[0]["email"];
-        $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
-        $text = "Que tal {$nombre}  un nuevo cliente dejó una reseña sobre uno de tus artículos 
-          puedes consultarla aquí " . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/producto/?producto={$id_servicio}&valoracion=1"]);
-        $cuerpo = img_enid([], 1, 1) . heading_enid($text, 5);
-        $sender = get_request_email($email, $asunto, $cuerpo);
-        return $sender;
+        if (es_data($usuario)){
+
+            $usuario =  $usuario[0];
+            $nombre = $usuario["nombre"];
+            $email = $usuario["email"];
+
+            $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
+            $text = "Que tal {$nombre}  un nuevo cliente dejó una reseña sobre uno de tus artículos 
+            puedes consultarla aquí " . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/producto/?producto={$id_servicio}&valoracion=1"]);
+            $cuerpo = img_enid([], 1, 1) . heading_enid($text, 5);
+            $sender = get_request_email($email, $asunto, $cuerpo);
+            return $sender;
+
+        }
 
     }
 
@@ -220,13 +224,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    /*
-    function create_seccion_saldo_pendiente($saldo_pendiente)
-    {
-        return $saldo_pendiente;
-    }
-    */
-
     function crea_estrellas($calificacion, $sm = 0)
     {
 
@@ -249,8 +246,8 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
         }
-        $estrellas = $estrellas_valoraciones . $restantes;
-        return $estrellas;
+        return $estrellas_valoraciones . $restantes;
+
     }
 
     function get_criterios_busqueda()
@@ -412,7 +409,6 @@ if (!function_exists('invierte_date_time')) {
             $id_input = "radio" . $x;
             $num_estrella = "estrella_" . $x;
 
-
             $response[] = input(
                 [
                     "id" => $id_input,
@@ -431,6 +427,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
         }
+
         return append_data($response);
 
     }

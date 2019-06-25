@@ -17,8 +17,6 @@ class principal extends CI_Controller
 
             if ( is_null($q[$clave]) ) {
                 $q[$clave] = "";
-                //echo $clave ." va sin valor en ->  " . $api;
-
             }
         }
 
@@ -164,9 +162,8 @@ class principal extends CI_Controller
     function create_pagination($q)
     {
 
-        $api = "paginacion/create/format/json/";
-        $paginacion = $this->api($api, $q);
-        return $paginacion;
+        return  $this->api("paginacion/create/format/json/", $q);
+
     }
 
 

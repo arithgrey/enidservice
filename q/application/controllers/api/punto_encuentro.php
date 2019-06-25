@@ -20,7 +20,7 @@ class Punto_encuentro extends REST_Controller
         $response =  [];
         if(if_ext($param , "dia")){
 
-            $response = get_param_def( lista_horarios($param["dia"]) , "select", array());
+            $response = get_param_def( lista_horarios($param["dia"]) , "select", []);
 
         }
 
@@ -36,8 +36,8 @@ class Punto_encuentro extends REST_Controller
         $response = [];
         if (if_ext($param, "id")) {
 
-            $params_where = ["id_tipo_punto_encuentro" => $param["id"]];
-            $response = $this->punto_encuentro_model->get([], $params_where, 100);
+            $in = ["id_tipo_punto_encuentro" => $param["id"]];
+            $response = $this->punto_encuentro_model->get([], $in, 100);
         }
         $this->response($response);
     }
@@ -63,13 +63,13 @@ class Punto_encuentro extends REST_Controller
 
             if ($param["v"] == 1) {
 
-                $flag_envio_gratis = $this->get_flag_envio_gratis($param["servicio"]);
-                $response = create_estaciones($response, $flag_envio_gratis);
+                $response = create_estaciones($response, $this->envio_gratis($param["servicio"]));
+
             } else {
 
-                $id_servicio = $this->get_servicio_por_recibo($param["recibo"]);
-                $flag_envio_gratis = $this->get_flag_envio_gratis($id_servicio);
-                $response = create_estaciones($response, $flag_envio_gratis);
+
+                $gratis = $this->envio_gratis($this->get_servicio_por_recibo($param["recibo"]));
+                $response = create_estaciones($response, $gratis);
 
             }
         }
@@ -101,15 +101,14 @@ class Punto_encuentro extends REST_Controller
         $this->response($response);
     }
 
-    private function get_flag_envio_gratis($id_servicio)
+    private function envio_gratis($id_servicio)
     {
 
         $q = ["id" => $id_servicio];
-        $api = "servicio/envio_gratis/format/json/";
-        $response = $this->principal->api($api, $q);
-        return $response[0]["flag_envio_gratis"];
-    }
+        $envio =  $this->principal->api("servicio/envio_gratis/format/json/", $q);
+        return primer_elemento($envio,"flag_envio_gratis", 0 );
 
+    }
     private function get_servicio_por_recibo($id_recibo)
     {
 

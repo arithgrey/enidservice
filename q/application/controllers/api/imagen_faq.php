@@ -30,9 +30,7 @@ class Imagen_faq extends REST_Controller
         $response = [];
         if (if_ext($param, "id_faq")) {
 
-            $id         = $param["id_faq"];
-            $response   = $this->imagen_faq_model->get_img($id);
-
+            $response   = $this->imagen_faq_model->get_img($param["id_faq"]);
 
         }
         $this->response($response);

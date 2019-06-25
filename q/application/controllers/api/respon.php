@@ -79,11 +79,12 @@ class Respon extends REST_Controller
 	private function notifica_lectura_cliente($id_usuario, $id_pregunta)
 	{
 
+	    $q = [
+            "id_pregunta" => $id_pregunta,
+            "id_usuario" => $id_usuario,
+        ];
 
-		$q["id_pregunta"] = $id_pregunta;
-		$q["id_usuario"] = $id_usuario;
-		$api = "pregunta/notifica_lectura_cliente";
-		return $this->principal->api($api, $q, "json", "PUT");
+		return $this->principal->api("pregunta/notifica_lectura_cliente", $q, "json", "PUT");
 
 	}
 

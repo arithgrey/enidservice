@@ -48,15 +48,19 @@ if (!function_exists('invierte_date_time')) {
     function get_notificacion_pregunta($usuario)
     {
 
-        $nombre = $usuario[0]["nombre"];
-        $email = $usuario[0]["email"];
-        $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
-        $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu artículos, puedes ver la pregunta que 
-            te envió en tu !" . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
-        $cuerpo = img_enid([], 1, 1) . heading_enid($text, 5);
-        $sender = get_request_email($email, $asunto, $cuerpo);
-        return $sender;
+        if (es_data($usuario)){
 
+            $usuario =  $usuario[0];
+            $nombre = $usuario["nombre"];
+            $email = $usuario["email"];
+
+            $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
+            $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu artículos, puedes ver la pregunta que 
+            te envió en tu !" . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
+            $cuerpo = img_enid([], 1, 1) . heading_enid($text, 5);
+            $sender = get_request_email($email, $asunto, $cuerpo);
+            return $sender;
+        }
     }
 
     function get_titulo_modalidad($modalidad)

@@ -305,7 +305,7 @@ if (!function_exists('invierte_date_time')) {
 
                     "name" => "version_movil",
                     "value" => $is_mobile,
-                    "class" => 'es_movil'
+                    "class" => 'is_mobile'
                 ]
             );
             $r[] = input_hidden(

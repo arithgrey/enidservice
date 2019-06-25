@@ -39,8 +39,7 @@ class clasificacion_model extends CI_Model
 	function get_intereses_usuario($param)
 	{
 
-		$query_get = "
-                          SELECT 
+		$query_get = "SELECT 
                           c.id_clasificacion,
                           c.nombre_clasificacion,
                           uc.id_usuario 
@@ -165,4 +164,10 @@ class clasificacion_model extends CI_Model
 		return $this->db->query($query_get)->result_array();
 
 	}
+	function in($in){
+
+	    $query = "SELECT id_clasificacion, nombre_clasificacion FROM clasificacion WHERE id_clasificacion IN({$in})";
+	    return $this->db->query($query)->result_array();
+
+    }
 }

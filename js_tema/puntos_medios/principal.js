@@ -269,7 +269,7 @@ let focus_inputs_form = (nombre, correo, telefono, pwlength) => {
 let response_registro_usuario = (data) => {
 
     display_elements([".place_notificacion_punto_encuentro_registro"], 0);
-    if (data.usuario_existe == 1) {
+    if ( data.usuario_existe > 0 ) {
 
         $(".text_usuario_registrado_pregunta").hide();
         display_elements([".text_usuario_registrado", ".contenedor_ya_tienes_cuenta"], 1);

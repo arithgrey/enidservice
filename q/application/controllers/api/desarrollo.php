@@ -17,15 +17,25 @@ class desarrollo extends REST_Controller
 		$param = $this->get();
 		$response = false;
 		if (if_ext($param, "id_departamento,id_usuario")) {
-			$num_tareas_pendientes = $this->desarrollomodel->get_tareas_pendientes_usuario($param);
+			$num = $this->desarrollomodel->get_tareas_pendientes_usuario($param);
 
-			$response = span($num_tareas_pendientes . icon('fa fa-terminal'), ["class" => 'alerta_pendientes_blue']);
-			if ($num_tareas_pendientes > 5) {
-				$response = span($num_tareas_pendientes . " " . icon('fa fa-terminal'), ["class" => 'alerta_pendientes']);
-			}
-			if ($num_tareas_pendientes == 0) {
-				$response = "";
-			}
+
+            switch ($num) {
+                case ( $num >  5 ):
+
+                    $response = span($num . " " . icon('fa fa-terminal'), 'alerta_pendientes' );
+
+                    break;
+                case 0:
+                    $response = "";
+                    break;
+
+                default:
+
+                    $response = span($num . icon('fa fa-terminal'), 'alerta_pendientes_blue' );
+                    break;
+
+            }
 
 		}
 		$this->response($response);

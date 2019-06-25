@@ -42,35 +42,4 @@ class notificacion_pago extends REST_Controller
 		}
 		$this->response($response);
 	}
-	/*
-	function resumen_GET(){
-
-	  $param    = $this->get();
-	  $response = false;
-	  if(if_ext($param , "id_notificacion_pago")){
-		  $response = $this->notificacion_pago_model->get_notificacion_pago($param);
-	  }
-	  $this->response($response);
-	}
-	function es_notificado_GET(){
-
-	  $param      = $this->get();
-	  $response   = false;
-	  if(if_ext($param , "recibo")) {
-		  $response = $this->notificacion_pago_model->verifica_pago_notificado($param);
-	  }
-	  $this->response($response);
-
-	}
-	function pago_resumen_GET(){
-
-	  $param    = $this->get();
-	  $response = false;
-	  if(if_ext($param , "id_notificacion_pago")) {
-		  $response = $this->notificacion_pago_model->get_notificacion_pago_resumen($param);
-	  }
-	  $this->response($response);
-
-	}
-	*/
 }

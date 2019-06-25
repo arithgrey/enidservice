@@ -19,24 +19,9 @@ class Privacidad extends REST_Controller
 		$param = $this->get();
 		$response = false;
 		if (if_ext($param, "id_funcionalidad,id_usuario")) {
-			$response =
-				$this->privacidad_model->get_conceptos_por_funcionalidad_usuario($param["id_funcionalidad"], $param["id_usuario"]);
+			$response = $this->privacidad_model->get_conceptos_por_funcionalidad_usuario($param["id_funcionalidad"], $param["id_usuario"]);
 		}
 
 		$this->response($response);
 	}
-	/*
-	function conceptos_GET(){
-	  $param                =  $this->get();
-	  $param["id_usuario"]  =  $this->id_usuario;
-	  $data["conceptos"]    = $this->get_conceptos_usuario($param);
-	  $this->load->view("privacidad/conceptos" , $data);
-	}
-	function get_conceptos_usuario($param){
-
-
-		  return $this->add_conceptos($funcionalidades , $id_usuario);
-	  }
-	*/
-
 }

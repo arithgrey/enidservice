@@ -42,10 +42,9 @@ class Home extends CI_Controller
         );
 
         $q = (array_key_exists("q", $param)) ? $param["q"] : "";
-        $per_page = 20;
+        $per_page = 16;
 
         $data_send = [
-
             "q" => $q,
             "vendedor" => $param["vendedor"],
             "id_clasificacion" => $param["id_clasificacion"],
@@ -59,7 +58,7 @@ class Home extends CI_Controller
 
         $data["servicios"] = $servicios = $this->busqueda_producto_por_palabra_clave($data_send);
 
-        $fn = (array_key_exists("num_servicios", $servicios) && $servicios["num_servicios"] > 0) ?
+        $fn = (get_param_def($servicios, "total_busqueda") > 0) ?
             $this->muetra_servicios($data, $param, $q, $data_send, $servicios, $per_page) :
             $this->muestra_sin_resultados($param, $data);
 
@@ -79,41 +78,36 @@ class Home extends CI_Controller
     {
 
         $data["url_request"] = get_url_request("");
-        $totales_elementos = (array_key_exists("servicios", $data_send) && array_key_exists("num_servicios", $data["servicios"])) ? $data["servicios"]["num_servicios"] : 0;
-
+        $total = key_exists_bi($data, "servicios", "num_servicios", 0);
         $data += [
-
             "busqueda" => $q,
-            "num_servicios" => $totales_elementos,
+            "num_servicios" => $total,
             "bloque_busqueda" => "",
-            "es_movil" => 1,
         ];
 
+        if ($data["is_mobile"] < 1) {
+            $data["bloque_busqueda"] = $this->crea_menu_lateral($data);
 
-        if ($this->agent->is_mobile() == FALSE) {
-
-            $this->crea_menu_lateral($data["servicios"]["clasificaciones_niveles"]);
-            $data["bloque_busqueda"] = $this->get_option("bloque_busqueda");
-            $data["es_movil"] = 0;
         }
 
-        $npage = get_param_def($param, "page");
-        $data["paginacion"] = $this->create_pagination($totales_elementos,
-            $per_page,
-            $q,
-            $param["id_clasificacion"],
-            $param["vendedor"],
-            $data_send["order"],
-            $npage
-        );
+
+        $data["paginacion"] =
+            $this->create_pagination(
+                $total,
+                $per_page,
+                $q,
+                $param["id_clasificacion"],
+                $param["vendedor"],
+                $data_send["order"],
+                get_param_def($param, "page")
+            );
 
         $this->set_option("in_session", 0);
 
 
-        $callback = function ($n){
+        $callback = function ($n) {
 
-            if (!is_null($n)){
-
+            if (!is_null($n)) {
                 $v = $this->get_vista_servicio($n);
                 return (!is_null($v)) ? $v : "";
             }
@@ -121,10 +115,8 @@ class Home extends CI_Controller
         };
 
         $data["lista_productos"] = array_map($callback, $servicios["servicios"]);
-
         $data["q"] = $q;
         $data["categorias_destacadas"] = $this->carga_categorias_destacadas();
-
         $data = $this->principal->getCssJs($data, "search");
         $data["filtros"] = $this->get_orden();
         $data["order"] = $data_send["order"];
@@ -150,12 +142,10 @@ class Home extends CI_Controller
         return $this->principal->api("servicio/crea_vista_producto/format/json/", $servicio);
     }
 
+
     private function create_pagination($totales_elementos, $per_page, $q, $id_clasificacion, $vendedor, $order, $page)
     {
-
-
         $config = [
-
             "totales_elementos" => $totales_elementos,
             "per_page" => $per_page,
             "q" => $q,
@@ -169,31 +159,63 @@ class Home extends CI_Controller
         return $this->principal->create_pagination($config);
     }
 
-    private function crea_menu_lateral($n)
+
+    private function crea_menu_lateral($data)
     {
 
-        $this->set_option("bloque_busqueda"
-            ,
-            [
+        $n = key_exists_bi($data, "servicios", "clasificaciones_niveles", []);
+        $primer = array_map(["home", "get_bloque"], (array_key_exists("primer_nivel", $n)) ? $n["primer_nivel"] : []);
+        $segundo_nivel = array_map(["home", "get_bloque"], (array_key_exists("segundo_nivel", $n)) ? $n["segundo_nivel"] : []);
+        $tercer_nivel = array_map(["home", "get_bloque"], (array_key_exists("tercer_nivel", $n)) ? $n["tercer_nivel"] : []);
+        $cuarto_nivel = array_map(["home", "get_bloque"], (array_key_exists("cuarto_nivel", $n)) ? $n["cuarto_nivel"] : []);
+        $quinto_nivel = array_map(["home", "get_bloque"], (array_key_exists("quinto_nivel", $n)) ? $n["quinto_nivel"] : []);
 
 
-                "primer_nivel" => array_map(["home", "get_bloque"], (array_key_exists("primer_nivel", $n)) ? $n["primer_nivel"] : []),
-                "segundo_nivel" => array_map(["home", "get_bloque"], (array_key_exists("segundo_nivel", $n)) ? $n["segundo_nivel"] : []),
-                "tercer_nivel" => array_map(["home", "get_bloque"], (array_key_exists("tercer_nivel", $n)) ? $n["tercer_nivel"] : []),
-                "cuarto_nivel" => array_map(["home", "get_bloque"], (array_key_exists("cuarto_nivel", $n)) ? $n["cuarto_nivel"] : []),
-                "quinto_nivel" => array_map(["home", "get_bloque"], (array_key_exists("quinto_nivel", $n)) ? $n["quinto_nivel"] : []),
-
-            ]
+        $clasificaciones = array_merge(
+            $primer,
+            $segundo_nivel,
+            $tercer_nivel,
+            $cuarto_nivel,
+            $quinto_nivel
         );
+
+
+        $data = $this->get_clasificaciones(array_unique($clasificaciones));
+
+        $response =  [
+            "primer_nivel" => $this->filter_nivel($primer, $data),
+            "segundo_nivel" => $this->filter_nivel($segundo_nivel, $data),
+            "tercer_nivel" => $this->filter_nivel($tercer_nivel, $data),
+            "cuarto_nivel" => $this->filter_nivel($cuarto_nivel, $data),
+            "quinto_nivel" => $this->filter_nivel($quinto_nivel, $data)
+        ];
+        return $response;
+    }
+
+    private function filter_nivel($nivel, $data)
+    {
+
+        $response = [];
+        if (es_data($nivel) && es_data($data)) {
+
+            foreach ($nivel as $row) {
+
+                $i = search_bi_array($data, "id_clasificacion", $row);
+                if ($i != false ) {
+
+                    $response[] = $data[$i];
+                }
+            }
+        }
+
+        return $response;
 
     }
 
     private function get_bloque($data)
     {
 
-        $id = get_param_def($data, "id_clasificacion");
-        return   ($id > 0) ?  $this->get_info_clasificacion($id) : [];
-
+        return get_param_def($data, "id_clasificacion");
     }
 
     private function busqueda_producto_por_palabra_clave($q)
@@ -202,12 +224,17 @@ class Home extends CI_Controller
         return $this->principal->api("servicio/q/format/json/", $q);
     }
 
-    private function get_info_clasificacion($id)
+    private function get_clasificaciones($clasificaciones)
     {
 
-        $q["id_clasificacion"] = $id;
-        return $this->principal->api("clasificacion/id/format/json/", $q);
+        $response =  [];
+        if (es_data($clasificaciones)){
 
+            $q["clasificaciones"] =  implode("," , $clasificaciones);
+            $response =  $this->principal->api("clasificacion/in/format/json/", $q);
+
+        }
+        return $response;
     }
 
     private function carga_categorias_destacadas()

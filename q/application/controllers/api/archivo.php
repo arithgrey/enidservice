@@ -3,214 +3,187 @@ require APPPATH . '../../librerias/REST_Controller.php';
 
 class Archivo extends REST_Controller
 {
-	private $id_usuario;
+    private $id_usuario;
 
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->model("img_model");
-		$this->load->library('upload');
-		$this->load->library('image_lib');
-		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
-	}
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model("img_model");
+        $this->load->library('upload');
+        $this->load->library('image_lib');
+        $this->load->library(lib_def());
+        $this->id_usuario = $this->principal->get_session("idusuario");
+    }
 
-	function extension($str)
-	{
-		$str = implode("", explode("\\", $str));
-		$str = explode(".", $str);
-		$str = strtolower(end($str));
-		return $str;
-	}
+    function extension($str)
+    {
+        $str = implode("", explode("\\", $str));
+        $str = explode(".", $str);
+        $str = strtolower(end($str));
+        return $str;
+    }
 
-	function imgs_POST()
-	{
-		$config['upload_path'] = APPPATH . '../../img_tema/productos/';
-		$config['allowed_types'] = "*";
-		$config['max_size'] = 3500;
-		$config['max_width'] = 4024;
-		$config['max_height'] = 7680;
-		$this->upload->initialize($config);
+    function imgs_POST()
+    {
 
-		if (!$this->upload->do_upload('imagen')) {
+        $config =  [
+            'upload_path' => APPPATH . '../../img_tema/productos/',
+            'allowed_types' => "*",
+            'max_size' => 3500,
+            'max_width' => 4024,
+            'max_height' => 7680
+        ];
 
-			$error['error'] = $this->upload->display_errors();
-			$this->response($error);
+        $this->upload->initialize($config);
 
-		} else {
-			$nombre_imagen = $this->upload->file_name;
-			$upload_data = $this->upload->data();
-			$image_width = $upload_data["image_width"];
-			$image_height = $upload_data["image_height"];
-			$nuevo_width = (int)porcentaje($image_width, 70, 0, 0);
-			$nuevo_height = (int)porcentaje($image_height, 70, 0, 0);
-			$source_image = $this->upload->upload_path . $nombre_imagen;
+        if (!$this->upload->do_upload('imagen')) {
 
+            $error['error'] = $this->upload->display_errors();
+            $this->response($error);
 
-			$config_resizing['maintain_ratio'] = TRUE;
-			$config_resizing['width'] = $nuevo_width;
-			$config_resizing['height'] = $nuevo_height;
+        } else {
 
+            $nombre_imagen = $this->upload->file_name;
+            $upload_data = $this->upload->data();
+            $image_width = $upload_data["image_width"];
+            $image_height = $upload_data["image_height"];
+            $source_image = $this->upload->upload_path . $nombre_imagen;
 
-			$config_resizing['image_library'] = 'gd2';
-			$config_resizing['source_image'] = $source_image;
-			$this->image_lib->initialize($config_resizing);
-
-
-			$param = $this->post();
-			$param["nombre_archivo"] = $nombre_imagen;
-			$param["extension"] = $upload_data["file_ext"];
-			$param["imagenBinaria"] = $source_image;
-			$response = $this->gestiona_imagenes($param);
-			if (!$this->image_lib->resize()) {
-				$response["error"] = $this->image_lib->display_errors('', '');
-			}
-			$this->response($response);
-		}
-	}
-
-	function gestiona_imagenes($param)
-	{
-
-		$param["id_empresa"] = $this->principal->get_session("idempresa");
-		$param["id_usuario"] = $this->id_usuario;
-		$param["id_usuario"] = $this->id_usuario;
-
-        $response =  "";
-		switch ($param["q"]) {
-			case 'faq':
-
-				$response = $this->create_imagen_faq($param);
-				break;
+            $config_resizing = [
+                'maintain_ratio' => TRUE,
+                'width' => (int)porcentaje($image_width, 70, 0, 0),
+                'height' => (int)porcentaje($image_height, 70, 0, 0),
+                'image_library' => 'gd2',
+                'source_image' => $source_image,
+            ];
 
 
-			case 'perfil_usuario':
+            $this->image_lib->initialize($config_resizing);
+            $param = $this->post();
 
-				$response =   $this->create_perfil_usuario($param);
-				break;
+            $param += [
+                "nombre_archivo" => $nombre_imagen,
+                "extension" => $upload_data["file_ext"],
+                "imagenBinaria" => $source_image,
+            ];
 
-			case 'servicio':
+            $response = $this->gestiona_imagenes($param);
+
+            if (!$this->image_lib->resize()) {
+                $response["error"] = $this->image_lib->display_errors('', '');
+            }
+
+            $this->response($response);
+        }
+    }
+
+    function gestiona_imagenes($param)
+    {
+
+        $param +=  [
+            "id_empresa" => $this->principal->get_session("idempresa"),
+            "id_usuario" => $this->id_usuario,
+        ];
+
+        $response = "";
+        switch ($param["q"]) {
+            case 'faq':
+
+                $response = $this->create_imagen_faq($param);
+                break;
+
+
+            case 'perfil_usuario':
+
+                $response = $this->create_perfil_usuario($param);
+                break;
+
+            case 'servicio':
                 $response = $this->create_imagen_servicio($param);
-				break;
+                break;
 
 
-			default:
+            default:
 
-				break;
-		}
-		return $response;
-	}
+                break;
+        }
+        return $response;
+    }
 
-	function response_status_img($status)
-	{
-		$response = "Error al cargar la image";
-		if ($status == 1) {
-			$response = "Imagen guardada .!";
-		}
-		return $response;
-	}
+    function response_status_img($status)
+    {
 
-	function notifica_producto_imagen($q)
-	{
-		$api = "servicio/status_imagen/format/json/";
-		return $this->principal->api($api, $q, "json", "PUT");
-	}
+        return  ($status == 1) ? "Error al cargar la image" : "Imagen guardada .!";
 
-	function insert_imagen_servicio($q)
-	{
+    }
 
-		$api = "imagen_servicio/index";
-		return $this->principal->api($api, $q, "json", "POST");
-	}
-    function  create_imagen_faq($param){
+    function notifica_producto_imagen($q)
+    {
 
-        $param["id_imagen"]= $this->img_model->insert_img($param, 1);
+        return $this->principal->api("servicio/status_imagen/format/json/", $q, "json", "PUT");
+    }
 
-        if ($param["id_imagen"] > 0 ) {
+    function insert_imagen_servicio($q)
+    {
 
-            $api = "imagen_faq/index";
-            $this->principal->api($api, $param, "json", "POST");
+        return $this->principal->api("imagen_servicio/index", $q, "json", "POST");
+    }
+
+    function create_imagen_faq($param)
+    {
+
+        $param["id_imagen"] = $this->img_model->insert_img($param, 1);
+
+        if ($param["id_imagen"] > 0) {
+
+            $this->principal->api("imagen_faq/index", $param, "json", "POST");
             return $param["id_faq"];
         }
     }
-	function create_imagen_usuario($q)
-	{
 
-		$api = "imagen_usuario/index";
-		return $this->principal->api($api, $q, "json", "POST");
-	}
+    function create_imagen_usuario($q)
+    {
 
-	private function create_perfil_usuario($param)
-	{
+        return $this->principal->api("imagen_usuario/index", $q, "json", "POST");
+    }
 
-		$id_imagen = $this->img_model->insert_img($param, 1);
-		if ($id_imagen > 0 && $this->id_usuario > 0) {
-			$prm["id_imagen"] = $id_imagen;
-			$prm["id_usuario"] = $this->id_usuario;
-			return $this->create_imagen_usuario($prm);
-		}
-	}
+    private function create_perfil_usuario($param)
+    {
 
-	private function create_imagen_servicio($param)
-	{
+        $id_imagen = $this->img_model->insert_img($param, 1);
+        if ($id_imagen > 0 && $this->id_usuario > 0) {
+            $prm["id_imagen"] = $id_imagen;
+            $prm["id_usuario"] = $this->id_usuario;
+            return $this->create_imagen_usuario($prm);
+        }
+    }
 
-		$response = [];
-		if ($param["id_usuario"] > 0) {
-			$existen = "nombre_archivo,id_usuario,id_empresa,imagenBinaria,extension,servicio";
-			if (if_ext($param, $existen)) {
-				$id_imagen = $this->img_model->insert_img($param, 1);
+    private function create_imagen_servicio($param)
+    {
 
-				if ($id_imagen > 0) {
+        $response = [];
+        if ($param["id_usuario"] > 0) {
+            $existen = "nombre_archivo,id_usuario,id_empresa,imagenBinaria,extension,servicio";
+            if (if_ext($param, $existen)) {
+                $id_imagen = $this->img_model->insert_img($param, 1);
+                if ($id_imagen > 0) {
 
-					$prm["id_imagen"] = $id_imagen;
-					$prm["id_servicio"] = $param["servicio"];
-					$response["status_imagen_servicio"] = $this->insert_imagen_servicio($prm);
-					if ($response["status_imagen_servicio"] == true) {
-						$prm["existencia"] = 1;
-						$response["status_notificacion"] = $this->notifica_producto_imagen($prm);
-					}
-					$response["status_notificacion"] = 2;
-				}
-				return $response;
-			}
-			$response["params_error"] = 1;
-			return $response;
-		}
-		$response["session_exp"] = 1;
-		return $response;
-	}
-	/*
-	function imgs_POST(){
-
-		$param          =   $this->post();
-		$extensiones    =   ["jpg","jpeg","gif","png","bmp","image/jpg","image/jpeg","image/gif","image/png"];
-
-		if($_FILES['imagen']['error'] === 4) {
-			$this->response( false);
-
-		}else if($_FILES['imagen']['error'] === 0 ){
-
-			$this->proceso_registro_imagen($param, $extensiones);
-
-		} else if($_FILES['imagen']['error'] === 1 ){
-			$this->response(2);
-		}
-	}
-	private function proceso_registro_imagen($param , $extensiones){
-
-		$binario                =   addslashes(file_get_contents($_FILES['imagen']['tmp_name']));
-		$nombre                 =   $_FILES['imagen']['name'];
-		$extension              =   $this->extension($nombre);
-
-		if(!in_array($extension, $extensiones)) {
-			$msj =  'Sólo se permiten archivos con las siguientes extensiones: ';
-			$this->response( $msj.implode(', ', $extensiones) );
-		}
-		$param["imagenBinaria"]   =   $binario;
-		$param["nombre_archivo"]  =   $nombre;
-		$param["extension"]       =   $extension;
-		$this->response($this->gestiona_imagenes($param));
-	}
-	*/
+                    $prm["id_imagen"] = $id_imagen;
+                    $prm["id_servicio"] = $param["servicio"];
+                    $response["status_imagen_servicio"] = $this->insert_imagen_servicio($prm);
+                    if ($response["status_imagen_servicio"] == true) {
+                        $prm["existencia"] = 1;
+                        $response["status_notificacion"] = $this->notifica_producto_imagen($prm);
+                    }
+                    $response["status_notificacion"] = 2;
+                }
+                return $response;
+            }
+            $response["params_error"] = 1;
+            return $response;
+        }
+        $response["session_exp"] = 1;
+        return $response;
+    }
 
 }

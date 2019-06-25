@@ -8,11 +8,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = img(["src" => "../img_tema/portafolio/bte.png" ,"class" => "mah_500"]) ;
         $x[] = heading_enid("¿Por qué Enid Service?",2,"strong text-uppercase top_30 bottom_30 text-center") ;
 
-
-
-
         $x[] =
-
             get_btw(
                 div(heading_enid("Relaciones" ,3 , "strong"),1)
                 ,

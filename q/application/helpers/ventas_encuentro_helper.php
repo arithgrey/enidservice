@@ -12,14 +12,9 @@ if (!function_exists('invierte_date_time')) {
         $puntos = 0;
         foreach ($data as $row) {
 
-            //$linea = $row["linea"];
             $ventas_en_punto = $row["ventas_en_punto"];
             $nombre_punto_encuentro = $row["nombre_punto_encuentro"];
-            //$id_linea_metro = $row["id_linea_metro"];
             $text_entrega = ($ventas_en_punto > 1) ? span("ENTREGAS", "black") : span("ENTREGA", "black");
-
-
-
 
             $r[] =
                 div(
@@ -54,9 +49,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = heading_enid("VENTAS POR ESTACIÓN ", 4 , "text-left");
         $response[] = heading_enid("ESTACIONES DE REPARTO: ".$puntos, 6 , "text-left underline");
         $response[] = div(div(div(append_data($r), "main-timeline2"), 12), 13);
-        $response = div(append_data($response), "container");
-        return $response;
-
+        return  div(append_data($response), "container");
 
     }
 
@@ -122,10 +115,7 @@ if (!function_exists('invierte_date_time')) {
     function get_resumen($data)
     {
 
-
-        $total = 0;
         $response = [];
-
         foreach ($data as $row) {
 
             $id_linea_metro = $row["id_linea_metro"];
@@ -157,15 +147,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $b = 0;
-
-        for ($a = 0; $a < count($response); $a++) {
-
-
-            if ($response[$a]["id_linea_metro"] == $id_linea_metro) {
-
-                $response[$a]["num"] = $response[$a]["num"] + 1;
-                $b++;
-            }
+        $index =  search_bi_array($response, "id_linea_metro",  $id_linea_metro);
+        if ($index !=  false ){
+            $response[$index]["num"] = $response[$index]["num"] + 1;
+            $b ++;
         }
 
         if ($b < 1) {
@@ -179,23 +164,6 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return $response;
-
-    }
-
-    function get_total_linea($linea, $data)
-    {
-
-        $total = 0;
-        foreach ($data as $row) {
-
-            $ventas_en_punto = $row["ventas_en_punto"];
-            if ($linea == $row["id_linea_metro"]) {
-
-                $total = $total + $ventas_en_punto;
-            }
-        }
-        return $total;
-
     }
 
 }

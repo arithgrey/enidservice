@@ -20,13 +20,16 @@ class Privacidad_usuario extends REST_Controller
 		$id_usuario = $this->id_usuario;
 		$response = false;
 
-		if (if_ext($param, 'concepto,termino_asociado') == 1 && $id_usuario > 0) {
+		if (if_ext($param, 'concepto,termino_asociado') > 0 && $id_usuario > 0) {
 
 			$q = ["id_privacidad" => $param["concepto"], "id_usuario" => $id_usuario];
 
-			if ($param["termino_asociado"] == 0) {
+			if ($param["termino_asociado"] < 1 ) {
+
 				$response = $this->privacidad_usuario_model->insert($q);
+
 			} else {
+
 				$response = $this->privacidad_usuario_model->delete($q);
 			}
 		}
@@ -35,9 +38,7 @@ class Privacidad_usuario extends REST_Controller
 
 	function servicio_GET()
 	{
-
-		$param = $this->get();
-		$response = $this->privacidad_usuario_model->get_terminos_privacidad_usuario($param);
+		$response = $this->privacidad_usuario_model->get_terminos_privacidad_usuario($this->get());
 		$this->response($response);
 	}
 

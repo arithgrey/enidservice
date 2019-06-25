@@ -22,10 +22,14 @@ if (!function_exists('invierte_date_time')) {
 
                 } else {
 
-                    for ($a = 0; $a < count($response); $a++) {
-                        if ($response[$a]["id_servicio"] == $id_servicio) {
-                            $response[$a]["pedidos"] = $response[$a]["pedidos"] + $row["num_ciclos_contratados"];
-                        }
+
+                    $index =  search_bi_array($response, "id_servicio", $id_servicio);
+                    $a  = 0;
+                    if ($index != false ){
+
+                        $response[$a]["pedidos"] = $response[$index]["pedidos"] + $row["num_ciclos_contratados"];
+
+                        $a ++ ;
                     }
 
                 }

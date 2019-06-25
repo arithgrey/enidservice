@@ -65,8 +65,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(div("ABRIR SOLICITUD", "titulo_enid"), 6, 1);
         $r[] = div(get_form_ticket($departamentos), 6, 1);
         $r[] = place("place_registro_ticket");
-        return append_data($r);
 
+        return append_data($r);
 
     }
 
@@ -124,7 +124,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = end_row();
         $r[] = guardar("ABRIR TICKET");
         $r[] = form_close();
-
         return append_data($r);
 
 
@@ -187,7 +186,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r = [];
-        if (tiene_data($data)) {
+        if (es_data($data)) {
 
             $r[] = div("MOSTRAR SÓLO TAREAS PENDIENTES", 'mostrar_tareas_pendientes a_enid_black cursor_pointer');
             $r[] = div("MOSTRAR TODAS LAS TAREAS", 'mostrar_todas_las_tareas a_enid_black cursor_pointer');
@@ -200,7 +199,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        if (tiene_data($info_usuario)) {
+        if (es_data($info_usuario)) {
 
             $usuario = $info_usuario[0];
             $nombre_usuario = $usuario["nombre"] . " " . $usuario["apellido_paterno"] . $usuario["apellido_materno"] . " -  " . $usuario["email"];
@@ -231,10 +230,14 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div("Asunto:" . $asunto);
             $r[] = div("Reseña:" . $mensaje);
 
-            $msj_email["info_correo"] = append_data($r);
-            $msj_email["asunto"] = $asunto_email;
 
-            return $msj_email;
+            $response = [
+                "info_correo" => append_data($r),
+                "asunto" => $asunto_email,
+            ];
+
+
+            return $response;
 
 
         }
@@ -246,7 +249,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response = [];
-        if (tiene_data($info_num_tareas)) {
+        if (es_data($info_num_tareas)) {
 
 
             $tareas = $info_num_tareas[0]["tareas"];
@@ -288,6 +291,7 @@ if (!function_exists('invierte_date_time')) {
                         "d-flex align-items-center justify-content-between"
                     )
                 );
+
                 $x[] = div(heading_enid(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
                 $x[] = div(heading_enid(add_text("DEPARTAMENTO", strtoupper($nombre_departamento)), 6));
                 $x[] = div(heading_enid(add_text("PRIORIDAD", strtoupper($lista_prioridad[$prioridad])), 6, "underline"));

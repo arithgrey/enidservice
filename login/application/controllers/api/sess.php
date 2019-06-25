@@ -20,7 +20,7 @@ class Sess extends REST_Controller
 			if (if_ext($param, "email,secret")) {
 				$usuario = $this->get_es_usuario($param);
 				$response = 0;
-				if (tiene_data($usuario) ) {
+				if (es_data($usuario) ) {
 
 					$usuario = $usuario[0];
 					$id_usuario = $usuario["idusuario"];
@@ -86,11 +86,11 @@ class Sess extends REST_Controller
 		$empresa_recurso = $this->get_empresa_recursos($id_empresa);
 
 
-		if (tiene_data($perfiles) ) {
+		if (es_data($perfiles) ) {
 
 			$navegacion = $this->get_recursos_perfiles($perfiles);
 
-			if (tiene_data($navegacion) ) {
+			if (es_data($navegacion) ) {
 
 				$session = [
 					"idusuario" => $id_usuario,

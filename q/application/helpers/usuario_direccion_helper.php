@@ -3,8 +3,18 @@ if (!function_exists('invierte_date_time')) {
 
 
     function get_format_direccion_envio_pedido($nombre_receptor,
-                                               $telefono_receptor, $cp, $id_usuario, $entre_calles, $calle, $numero_exterior,
-                                               $numero_interior, $direccion_visible, $asentamiento, $municipio, $estado, $id_recibo)
+                                               $telefono_receptor,
+                                               $cp,
+                                               $id_usuario,
+                                               $entre_calles,
+                                               $calle,
+                                               $numero_exterior,
+                                               $numero_interior,
+                                               $direccion_visible,
+                                               $asentamiento,
+                                               $municipio,
+                                               $estado,
+                                               $id_recibo)
     {
 
         $r[] = form_open("", ["class" => "d-flex justify-content-between flex-column shadow form_direccion_envio  border form_direccion_envio padding_20"]);
@@ -97,7 +107,6 @@ if (!function_exists('invierte_date_time')) {
             6
         );
         $b = get_btw(
-
             div("Número Interior"),
             input([
                 "class" => "numero_interior",
@@ -199,13 +208,12 @@ if (!function_exists('invierte_date_time')) {
                 "value" => $id_recibo,
                 "class" => "id_recibo"
             ]);
+
         $r[] = guardar("Registrar dirección ", ['class' => "text_btn_direccion_envio top_30 bottom_20"]);
-
         $r[] = place("notificacion_direccion");
-
         $r[] = form_close();
-        $response = append_data($r);
-        return div($response, "contenedor_form_envio top_30");
+
+        return div(append_data($r), "contenedor_form_envio top_30");
 
     }
 
@@ -313,7 +321,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_campo($info_envio_direccion, "municipio", " Delegación/Municipio ", 1);
         $r[] = get_campo($info_envio_direccion, "ciudad", " Ciudad ", 1);
         $r[] = get_campo($info_envio_direccion, "estado", " Estado ", 1);
-
         return append_data($r);
 
     }

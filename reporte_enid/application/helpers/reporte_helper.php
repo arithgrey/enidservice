@@ -49,7 +49,6 @@ if (!function_exists('invierte_date_time')) {
         function crea_repo_categorias_destacadas($param)
         {
             $z = 0;
-            //$data_complete = [];
             foreach ($param as $row) {
 
 

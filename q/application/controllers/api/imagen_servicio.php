@@ -19,19 +19,13 @@ class Imagen_servicio extends REST_Controller
 
 			$id_servicio = $param["id_servicio"];
 
-			if (array_key_exists("c" , $param ) &&  $param["c"] >  0 ){
+			if (get_param_def($param, "c") >  0){
 
-
-
-				$limit =  (array_key_exists("l" , $param) && $param["l"] > 0) ? $param["l"] :  1;
-				$response =  $this->imagen_servicio_model->get_imagen_servicio($id_servicio, $limit );
+				$response =  $this->imagen_servicio_model->get_imagen_servicio($id_servicio, get_param_def($param,"l",1));
 
 			}else{
 
-				$limit = 8;
-				if (get_param_def($param, "limit") > 0) {
-					$limit = $param["limit"];
-				}
+				$limit = (get_param_def($param, "limit") > 0) ? $param["limit"] : 8;
 				$in = ["id_servicio" => $id_servicio];
 				$f = ["id_imagen", "principal"];
 				$response = $this->imagen_servicio_model->get($f, $in, $limit, "principal");
@@ -64,19 +58,18 @@ class Imagen_servicio extends REST_Controller
 		if (if_ext($param, "id_imagen,id_servicio")) {
 
 			$id_servicio = $param["id_servicio"];
-			$id_imagen = $param["id_imagen"];
-
 			$set = ["principal" => 0];
 			$in = ["id_servicio" => $id_servicio];
 			$response = false;
 			if ($this->imagen_servicio_model->update($set, $in, 10)) {
 
 				$set = ["principal" => 1];
-				$in = ["id_servicio" => $id_servicio, "id_imagen" => $id_imagen];
+				$in = ["id_servicio" => $id_servicio, "id_imagen" => $param["id_imagen"]];
 				$response = $this->imagen_servicio_model->update($set, $in);
 			}
 
 		}
+
 		$this->response($response);
 	}
 
@@ -88,13 +81,15 @@ class Imagen_servicio extends REST_Controller
 		if (if_ext($param, 'id_imagen')) {
 
 			$q = ["id_imagen" => $param["id_imagen"]];
-			$status = $this->imagen_servicio_model->delete($q, 20);
 
-			if ($status) {
+			if ($this->imagen_servicio_model->delete($q, 20)) {
 
-				$response["status_imagen_servicio"] = 1;
-				$response["status_img"] = $this->delete_imagen($param);
-				$response["evento"] = $this->valida_existencia_servicio($param);
+                $response = [
+                    "status_imagen_servicio" =>  1,
+                    "status_img" =>  $this->delete_imagen($param),
+                    "evento" =>  $this->valida_existencia_servicio($param),
+                ];
+
 			}
 		}
 
@@ -103,8 +98,8 @@ class Imagen_servicio extends REST_Controller
 
 	private function delete_imagen($q)
 	{
-		$api = "img/index";
-		return $this->principal->api($api, $q, "json", "DELETE");
+
+		return $this->principal->api("img/index", $q, "json", "DELETE");
 	}
 
 	private function valida_existencia_servicio($q)
@@ -126,9 +121,8 @@ class Imagen_servicio extends REST_Controller
 	private function notifica_existencia_servicio($q)
 	{
 
-		$api = "servicio/status_imagen";
 		$q["existencia"] = 0;
-		return $this->principal->api($api, $q, "json", "PUT");
+		return $this->principal->api("servicio/status_imagen", $q, "json", "PUT");
 	}
 
 }

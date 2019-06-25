@@ -24,35 +24,6 @@ class objetivos extends REST_Controller
 		}
 		$this->response($response);
 	}
-	/*
-	function usuario_GET(){
-		$param                  =   $this->get();
-		$param["id_usuario"]    =   $this->id_usuario;
-		$data["metas"]          =   $this->productividad_model->metas_usuario($param);
-		$this->load->view("productividad/metas" , $data );
-	}
 
-	function presentaciones_GET(){
-
-		$param =  $this->get();
-		$data["info_presentaciones"] =  $this->productividad_model->get_presentaciones($param);
-		$this->load->view("presentaciones/principal" , $data );
-	}
-	function meta_POST(){
-
-		$param =  $this->post();
-		$response = $this->productividad_model->insert_metas($param);
-		$this->response($response);
-	}
-
-	function ingresos_GET(){
-
-		$param = $this->get();
-		$param["id_usuario"] =  $this->id_usuario;
-		$data["metas"] = $this->productividad_model->relacion_ingresos($param);
-		$this->load->view("productividad/ingresos" , $data );
-	}
-
-	*/
 }
 

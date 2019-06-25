@@ -20,9 +20,8 @@ class Metakeyword extends REST_Controller
 		$param = $this->post();
 		$response = false;
 		if (if_ext($param, "q,id_usuario")) {
-			$q = $param["q"];
-			$id_usuario = $param["id_usuario"];
-			$params = ["keyword" => $q, "id_usuario" => $id_usuario];
+
+			$params = ["keyword" => $param["q"], "id_usuario" => $param["id_usuario"]];
 			$response = $this->metakeyword_model->insert($params);
 
 		}
@@ -64,40 +63,30 @@ class Metakeyword extends REST_Controller
 
 		$param = $this->post();
 		$metakeyword = $this->metakeyword_model->get_metakeyword_catalogo_usuario($param);
-
-		if (count($metakeyword) > 0) {
+        $response =  false;
+		if ( es_data($metakeyword) ) {
 			$json_meta = $metakeyword[0]["metakeyword"];
 			$arr_meta = json_decode($json_meta, true);
 
-			if ($this->existe_meta($arr_meta, $param["metakeyword_usuario"]) == 0) {
-				if (if_ext($param, "metakeyword_usuario,metakeyword,id_usuario")) {
-					$this->response($this->add_metakeyword($param, $arr_meta));
-				} else {
-					$this->response(false);
-				}
-			}
-		} else {
-			$this->response($this->create($param));
-		}
-	}
+			if (!in_array($arr_meta, $param["metakeyword_usuario"])) {
 
-	function existe_meta($param, $val)
-	{
-		$existe = 0;
-		for ($a = 0; $a < count($param); $a++) {
-			if ($param[$a] == $val) {
-				$existe = 1;
-				break;
+                $e =  if_ext($param, "metakeyword_usuario,metakeyword,id_usuario");
+                $response =  ($e) ? $this->add_metakeyword($param, $arr_meta) : "";
+
 			}
+
+		} else {
+
+			$response =  $this->create($param);
 		}
-		return $existe;
+
+		$this->response($response);
 	}
 
 	function add_metakeyword($param, $arr_meta)
 	{
-		array_push($arr_meta, strtoupper($param["metakeyword_usuario"]));
-		$meta = json_encode($arr_meta);
-		$param["metakeyword"] = $meta;
+        $arr_meta[] =  get_param_def($param,"metakeyword_usuario", "");
+		$param["metakeyword"] = json_encode($arr_meta);
 		return $this->metakeyword_model->update(["metakeyword" => $param["metakeyword"]], ["id_usuario" => $param["id_usuario"]]);
 	}
 
@@ -109,8 +98,7 @@ class Metakeyword extends REST_Controller
 		$response = $this->metakeyword_model->get_metakeyword_catalogo_usuario($param);
 		if ($param["v"] == 1) {
 
-			$catalogo = create_arr_tags($response);
-			$response = get_catalogo_metakeyword($catalogo);
+			$response = get_catalogo_metakeyword(create_arr_tags($response));
 
 		}
 		$this->response($response);
@@ -121,11 +109,10 @@ class Metakeyword extends REST_Controller
 	{
 		$response = false;
 		if (if_ext($param, "metakeyword_usuario,id_usuario")) {
-			$arr = array();
-			array_push($arr, strtoupper($param["metakeyword_usuario"]));
-			$id_usuario = $param["id_usuario"];
+
+			$arr[] =  strtoupper($param["metakeyword_usuario"]);
 			$meta = json_encode($arr);
-			$params = ["metakeyword" => $meta, "id_usuario" => $id_usuario];
+			$params = ["metakeyword" => $meta, "id_usuario" => $param["id_usuario"]];
 			$response = $this->metakeyword_model->insert($params);
 		}
 		return $response;

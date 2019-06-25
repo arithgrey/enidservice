@@ -85,7 +85,7 @@ class Home extends CI_Controller
 
         $response = [];
 
-        if (tiene_data($recibo)) {
+        if (es_data($recibo)) {
 
             $recibo = $recibo[0];
             $tipo_entrega = $recibo["tipo_entrega"];
