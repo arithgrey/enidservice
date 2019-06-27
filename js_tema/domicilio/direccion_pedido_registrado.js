@@ -28,7 +28,7 @@ function registro_direccion(){
 		let url =  	"../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
 		request_enid( "POST",  data_send , url , response_registro_direccion);
 	}else{
-		recorrepage("#asentamiento");										
+		recorre("#asentamiento");										
 		render_enid( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");
 	}
 }
@@ -38,7 +38,7 @@ function muestra_error_codigo(flag_error){
 		$(".codigo_postal").css("border" , "1px solid rgb(13, 62, 86)");			
 		let mensaje_user =  "Codigo postal invalido, verifique"; 		
 		render_enid( ".place_codigo_postal" ,  "<span class='alerta_enid'>" + mensaje_user + "</span>");
-		recorrepage("#codigo_postal");
+		recorre("#codigo_postal");
 	}
 }
 let  response_registro_direccion = function(data){
@@ -51,7 +51,7 @@ let  response_registro_direccion = function(data){
 	}else{
 
 		format_error( ".notificacion_direccion", "VERIFICA LOS DATOS DE TU DIRECCIÓN");
-		recorrepage(".notificacion_direccion");
+		recorre(".notificacion_direccion");
 	}	
 }
 */

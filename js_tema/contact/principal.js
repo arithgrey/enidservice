@@ -1,5 +1,5 @@
 "use strict";
-$(document).ready(function () {
+$(document).ready(() => {
     $(".selector").click(muestra_opciones);
     $(".form_correo").submit(envia_correo);
     $(".form_whatsapp").submit(envia_whatsapp);
@@ -37,7 +37,7 @@ let envia_correo = e => {
         let data_send = $(".form_correo").serialize() + "&" + $.param({"password": password});
         let url = "../q/index.php/api/usuario/vendedor/format/json/";
         bloquea_form(".form_correo");
-        request_enid("POST", data_send, url, response_send_email);
+        request_enid("POST", data_send, url, r_send_email);
 
     } else {
 
@@ -46,7 +46,7 @@ let envia_correo = e => {
     e.preventDefault();
 
 };
-let response_send_email = data => redirect("../contact/?ubicacion=1#direccion");
+let r_send_email = data => redirect("../contact/?ubicacion=1#direccion");
 
 let envia_whatsapp = (e) => {
 
@@ -60,7 +60,7 @@ let envia_whatsapp = (e) => {
         let data_send = $(".form_whatsapp").serialize() + "&" + $.param({"password": password});
         let url = "../q/index.php/api/usuario/whatsapp/format/json/";
         bloquea_form(".form_whatsapp");
-        request_enid("POST", data_send, url, response_send_whatsApp);
+        request_enid("POST", data_send, url, r_send_whatsApp);
 
     } else {
         let inputs = [".tel", ".nombre_whatsapp"];
@@ -70,7 +70,7 @@ let envia_whatsapp = (e) => {
 
     e.preventDefault();
 };
-let response_send_whatsApp = data => {
+let r_send_whatsApp = data => {
 
     let usuario = data.id_usuario;
     set_parameter(".usuario", usuario);

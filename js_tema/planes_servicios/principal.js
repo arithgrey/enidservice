@@ -1,20 +1,29 @@
 "use strict";
-$(document).ready(function () {
+window.history.pushState({page: 1}, "", "");
+window.history.pushState({page: 2}, "", "");
+window.onpopstate = event => {
+    if (event) {
+        retorno();
+    }
+}
+$(document).ready(() => {
+
+    set_option("s", 1);
     set_option("page", 1);
     set_option("modalidad", 0);
     $("footer").ready(valida_action_inicial);
     $(".btn_servicios").click(carga_servicios);
     $(".tipo_promocion").click(configuracion_inicial);
     $(".form_nombre_producto").submit(simula_envio);
-    $(".btn_agregar_servicios").click(function () {
+    $(".btn_agregar_servicios").click(() => {
         showonehideone(".contenedor_nombre", ".contenedor_categorias");
         set_option("nuevo", 1);
-        display_elements([".texto_ventas_titulo"], 1);
+        despliega([".texto_ventas_titulo"], 1);
     });
-    $(".li_menu_servicio").click(function () {
-        display_elements([".btn_agregar_servicios", ".contenedor_top"], 1);
+    $(".li_menu_servicio").click(() => {
+        despliega([".btn_agregar_servicios", ".contenedor_top"], 1);
     });
-    display_elements([".contenedor_busqueda_global_enid_service"], 0);
+    despliega([".contenedor_busqueda_global_enid_service"], 0);
     $(".ci_facturacion").change(evalua_precio);
     $(".cancelar_registro").click(cancelar_registro);
     def_contenedores();
@@ -37,16 +46,14 @@ let cancelar_registro = () => {
     showonehideone(".contenedor_agregar_servicio_form", ".contenedor_categorias_servicios");
 }
 
-let carga_servicios = function() {
+let carga_servicios = function () {
 
-
+    set_option("s", 1);
     let global = (get_parameter_enid($(this), "id" || get_option("global")) > 0) ? 1 : 0;
-    if (global > 0) {
-        set_option("global", 1);
-    } else {
-        set_option("global", 0);
-    }
-    display_elements([".texto_ventas_titulo", ".contenedor_busqueda", ".contenedor_busqueda_articulos"], 1);
+    set_option("global", global);
+    let e =  [".texto_ventas_titulo", ".contenedor_busqueda", ".contenedor_busqueda_articulos"];
+    despliega(e, 1);
+
     let url = "../q/index.php/api/servicio/empresa/format/json/";
     let orden = get_parameter("#orden");
     let data_send = {
@@ -57,17 +64,18 @@ let carga_servicios = function() {
         "global": global
     };
 
-    request_enid("GET", data_send, url, respuesta_carga_servicios, ".place_servicios", function () {
-
-        show_load_enid(".place_servicios", "", "");
-        recorrepage(".contenedor_principal_enid");
+    request_enid("GET", data_send, url, respuesta_carga_servicios, ".place_servicios", () => {
+        sload(".place_servicios", "", "");
+        recorre(".contenedor_principal_enid");
     });
 }
 
 let respuesta_carga_servicios = data => {
 
     if (data.num_servicios != undefined) {
+
         render_enid(".place_servicios", data.info_servicios);
+
     } else {
 
         render_enid(".place_servicios", data);
@@ -84,11 +92,11 @@ let respuesta_carga_servicios = data => {
             carga_servicios();
             e.preventDefault();
         });
-        recorrepage(".contenedor_principal_enid");
+        recorre(".contenedor_principal_enid");
     }
 }
 
-let carga_info_servicio = function (e ) {
+let carga_info_servicio = function (e) {
 
     set_option("servicio", get_parameter_enid($(this), "id"));
     if (get_option("servicio") > 0) {
@@ -98,12 +106,13 @@ let carga_info_servicio = function (e ) {
 
 let carga_informacion_servicio = (num = 1) => {
 
-    display_elements([".contenedor_busqueda"], 0);
+    set_option("s", 2);
+    despliega([".contenedor_busqueda"], 0);
     let url = "../q/index.php/api/servicio/especificacion/format/json/";
     let data_send = {id_servicio: get_option("servicio"), "num": num};
     request_enid("GET", data_send, url, respuesta_informacion_servicio, ".place_servicios", function () {
 
-        recorrepage(".contenedor_principal_enid");
+        recorre(".contenedor_principal_enid");
 
     });
 }
@@ -156,19 +165,19 @@ let respuesta_informacion_servicio = (data) => {
 
     $(".form_dropshipping").submit(modifica_dropshipping);
     if (get_option("flag_nueva_categoria") == 1) {
-        recorrepage("#seccion_metakeywords_servicio");
+        recorre("#seccion_metakeywords_servicio");
     }
     if (get_option("flag_recorrido") != undefined) {
-        recorrepage(get_option("seccion_a_recorrer"));
+        recorre(get_option("seccion_a_recorrer"));
     }
     $(".descartar_promocion").click(descartar_promocion);
     $(".stock").change(set_cantidad_en_stock);
     $('#summernote').summernote();
-    display_elements([".contenedor_busqueda_articulos", ".agregar_servicio btn_agregar_servicios", ".titulo_articulos_venta"], 0);
+    despliega([".contenedor_busqueda_articulos", ".agregar_servicio btn_agregar_servicios", ".titulo_articulos_venta"], 0);
 
 
 }
-let actualiza_entregas_en_casa = function (e ) {
+let actualiza_entregas_en_casa = function (e) {
 
     let url = "../q/index.php/api/servicio/entregas_en_casa/format/json/";
     let data_send = {entregas_en_casa: get_parameter_enid($(this), "id"), id_servicio: get_option("servicio")};
@@ -178,7 +187,7 @@ let actualiza_entregas_en_casa = function (e ) {
 }
 
 
-let actualiza_telefono_visible = function() {
+let actualiza_telefono_visible = function () {
     let url = "../q/index.php/api/servicio/telefono_visible/format/json/";
     let data_send = {telefono_visible: get_parameter_enid($(this), "id"), id_servicio: get_option("servicio")};
     request_enid("PUT", data_send, url, function () {
@@ -187,7 +196,7 @@ let actualiza_telefono_visible = function() {
 }
 
 
-let actualiza_ventas_mayoreo = function(e) {
+let actualiza_ventas_mayoreo = function (e) {
 
     let url = "../q/index.php/api/servicio/ventas_mayoreo/format/json/";
     let data_send = {venta_mayoreo: get_parameter_enid($(this), "id"), id_servicio: get_option("servicio")};
@@ -243,7 +252,7 @@ let muestra_input_incluye_envio = () => {
 }
 
 
-let muestra_select_ciclo_facturacion = function (e ) {
+let muestra_select_ciclo_facturacion = function (e) {
 
     set_option("id_ciclo_facturacion", get_parameter_enid($(this), "id"));
     let visible = $(".text_ciclo_facturacion").is(":visible");
@@ -495,7 +504,7 @@ let respuestas_cargar_lista_servicios = (data) => {
 }
 
 
-let agrega_quita_servicio_grupo = function (e ) {
+let agrega_quita_servicio_grupo = function (e) {
     let id_servicio = get_parameter_enid($(this), "id");
     set_option("servicio", id_servicio);
     let data_send = $.param({
@@ -541,7 +550,7 @@ let muestra_seccion_porcentaje_ganancia_afiliados = () => {
     }
 }
 
-let configuracion_inicial = function() {
+let configuracion_inicial = function () {
 
 
     set_option("modalidad", get_parameter_enid($(this), "id"));
@@ -552,8 +561,8 @@ let configuracion_inicial = function() {
         $(".tipo_servicio").css("color", "blue");
         selecciona_select(".ci_facturacion", 9);
         $(".precio").val(0);
-        display_elements([".contenedor_ciclo_facturacion", ".siguiente_btn"], 1);
-        display_elements([".contenedor_precio"], 0);
+        despliega([".contenedor_ciclo_facturacion", ".siguiente_btn"], 1);
+        despliega([".contenedor_precio"], 0);
 
     } else {
 
@@ -561,8 +570,8 @@ let configuracion_inicial = function() {
         $(".text_modalidad").text("Artículo/Producto");
         $(".tipo_producto").css("color", "blue");
         $(".tipo_servicio").css("color", "black");
-        display_elements([".contenedor_precio"], 1);
-        display_elements([".contenedor_ciclo_facturacion"], 0);
+        despliega([".contenedor_precio"], 1);
+        despliega([".contenedor_ciclo_facturacion"], 0);
 
 
     }
@@ -577,7 +586,7 @@ let simula_envio = (e) => {
     if (next) {
 
         showonehideone(".contenedor_categorias", ".contenedor_nombre");
-        display_elements([".contenedor_top"], 0);
+        despliega([".contenedor_top"], 0);
         set_nombre_servicio_html(get_parameter(".nuevo_producto_nombre"));
         set_option("costo", costo);
         $(".extra_precio").text("");
@@ -590,7 +599,7 @@ let simula_envio = (e) => {
 }
 let verifica_existencia_categoria = () => {
 
-
+    set_option("s",4);
     let url = "../q/index.php/api/servicio/verifica_existencia_clasificacion/format/json/";
     let nombre = get_parameter(".nuevo_producto_nombre");
     let data_send = {"clasificacion": nombre, "id_servicio": get_option("modalidad")};
@@ -816,7 +825,7 @@ let muestras_c_nivel = (data) => {
     }
     $(".cuarto_nivel_seccion .nivel_4").change(carga_listado_categorias_quinto_nivel);
     $(".nueva_categoria_producto").click(agregar_categoria_servicio);
-    recorrepage(".cuarto_nivel_seccion");
+    recorre(".cuarto_nivel_seccion");
 
     if (array_key_exists("agregar_categoria_4", option) && get_option("agregar_categoria_4") == 1) {
         carga_listado_categorias_quinto_nivel();
@@ -851,7 +860,7 @@ let muestra_q_nivel = (data) => {
     render_enid(".quinto_nivel_seccion", data);
     $(".quinto_nivel_seccion .nivel_5").change(carga_listado_categorias_sexto_nivel);
     $(".nueva_categoria_producto").click(agregar_categoria_servicio);
-    recorrepage(".quinto_nivel_seccion");
+    recorre(".quinto_nivel_seccion");
     if (array_key_exists("agregar_categoria_5", option) && get_option("agregar_categoria_5") == 1) {
         carga_listado_categorias_sexto_nivel();
         set_option("agregar_categoria_5", 0);
@@ -919,14 +928,14 @@ let response_registro = (data) => {
         $(".btn_serv").tab("show");
         if (is_mobile() != 1) {
             reset_form("form_nombre_producto");
-            display_elements([".btn_agregar_servicios"], 1);
+            despliega([".btn_agregar_servicios"], 1);
         }
     } else {
         redirect("../planes_servicios/?action=nuevo&mensaje=" + data.registro.mensaje);
     }
 
 }
-let elimina_foto_producto = function(e) {
+let elimina_foto_producto = function (e) {
 
     let url = "../q/index.php/api/imagen_servicio/index/format/json/";
     if (get_parameter_enid($(this), "id") > 0) {
@@ -1036,7 +1045,7 @@ let respuesta_actualiza_cantidad = () => {
 }
 
 
-let agrega_color_servicio = function(e){
+let agrega_color_servicio = function (e) {
 
     let color = get_parameter_enid($(this), "id");
     set_option("color", color);
@@ -1063,9 +1072,9 @@ let carga_listado_colores = () => {
 let respuesta_listado_colores = (data) => {
     render_enid(".place_colores_disponibles", data);
     $(".colores").click(agrega_color_servicio);
-    recorrepage("#seccion_colores_info");
+    recorre("#seccion_colores_info");
 }
-let elimina_color_servicio = function() {
+let elimina_color_servicio = function () {
     let color = get_parameter_enid($(this), "id");
     set_option("color", color);
     let data_send = $.param({
@@ -1087,16 +1096,16 @@ let evalua_precio = () => {
     switch (parseInt(get_parameter(".ci_facturacion"))) {
         case 9:
 
-            display_elements([".contenedor_precio"], 0);
+            despliega([".contenedor_precio"], 0);
             $(".precio").val(0);
             break;
         case 5:
-            display_elements([".contenedor_precio"], 0);
+            despliega([".contenedor_precio"], 0);
             $(".precio").val(0);
             break;
         default:
 
-            display_elements([".contenedor_precio"], 1);
+            despliega([".contenedor_precio"], 1);
     }
 }
 
@@ -1115,12 +1124,12 @@ let valida_action_inicial = () => {
         case 1:
             /*Si es version movil recorre pantalla*/
             if (is_mobile() == 1) {
-                recorrepage(".contenedor_agregar_servicio_form")
+                recorre(".contenedor_agregar_servicio_form")
             }
-            let x = (is_mobile() == 1) ? display_elements([".btn_agregar_servicios", ".btn_servicios"], 0) : "";
+            let x = (is_mobile() == 1) ? despliega([".btn_agregar_servicios", ".btn_servicios"], 0) : "";
             set_option("modalidad", 0);
             set_option("nuevo", 1);
-            display_elements([".contenedor_articulos_mobil"], 0);
+            despliega([".contenedor_articulos_mobil"], 0);
             break;
         case 0:
 
@@ -1150,7 +1159,7 @@ let carga_sugerencias_meta_key_words = () => {
 }
 
 
-let muestra_sugerencias_meta_key_words = function(data) {
+let muestra_sugerencias_meta_key_words = function (data) {
 
     render_enid(".contenedor_sugerencias_tags", data);
     let tag_servicio_registrados = $('.tag_servicio');
@@ -1168,14 +1177,14 @@ let muestra_sugerencias_meta_key_words = function(data) {
             for (let i = 0; i < arr_registros.length; i++) {
 
                 if (get_parameter_enid($(this), "id") == arr_registros[i]) {
-                    display_elements([val], 0);
+                    despliega([val], 0);
                 }
             }
         });
     }
     $(".tag_catalogo").click(auto_complete_metakeyword);
 }
-let auto_complete_metakeyword = function(e) {
+let auto_complete_metakeyword = function (e) {
 
     let tag = get_parameter_enid($(this), "id");
     $(".metakeyword_usuario").val(tag);
@@ -1197,7 +1206,7 @@ let muestra_clasificaciones_servicio = (data) => {
     }
 }
 
-let actualiza_talla_servicio = function() {
+let actualiza_talla_servicio = function () {
 
     let id = get_parameter_enid($(this), "id");
     let existencia = get_parameter_enid($(this), "existencia");
@@ -1222,7 +1231,7 @@ let respuesta_tiempo_entrega = (data) => {
     $(".response_tiempo_entrega").empty();
 
 };
-let set_imagen_principal = function() {
+let set_imagen_principal = function () {
     let id = get_parameter_enid($(this), "id");
     if (id > 0) {
 
@@ -1240,7 +1249,7 @@ let set_url_ml = () => {
         let data_send = {"id_servicio": get_option("servicio"), "url": url_ml};
 
         request_enid("PUT", data_send, url, carga_informacion_servicio(4), ".place_servicios", function () {
-            recorrepage(".url_mercado_libre");
+            recorre(".url_mercado_libre");
 
         });
     } else {
@@ -1248,7 +1257,7 @@ let set_url_ml = () => {
     }
 
 };
-let activa_publicacion = function() {
+let activa_publicacion = function () {
     let status = get_parameter_enid($(this), "status");
     let id_servicio = get_parameter_enid($(this), "id");
     let data_send = {"status": status, "id_servicio": id_servicio};
@@ -1258,7 +1267,7 @@ let activa_publicacion = function() {
     });
 
 };
-let descartar_promocion = function()  {
+let descartar_promocion = function () {
 
     let id_servicio = get_parameter_enid($(this), "id");
 
@@ -1311,4 +1320,38 @@ let contra_entrega = (opcion, servicio) => {
         carga_informacion_servicio(4);
     });
 
+}
+let retorno = () => {
+
+    let s = get_option("s");
+    switch (s) {
+
+        case 1:
+
+            window.location =  document.referrer;
+
+            break;
+
+        case 2:
+
+            carga_servicios();
+            break;
+
+        case 3:
+
+            carga_informacion_servicio();
+
+            break;
+
+        case 4:
+
+            window.location =  "";
+
+            break;
+
+
+        default:
+
+            break;
+    }
 }

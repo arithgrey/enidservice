@@ -32,14 +32,14 @@ function response_carga_num_clientes_restantes(data){
 	render_enid(".place_num_productividad" , data);
 }
 /**/
-function carga_num_pendientes(){
+function num_pendientes(){
 
 	var url	 		=  "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";		
 	var data_send 	=  {"id_usuario" : get_option("id_usuario") , "id_departamento" :  get_depto() };				
-	request_enid( "GET",  data_send , url , response_carga_num_pendientes);
+	request_enid( "GET",  data_send , url , response_num_pendientes);
 }
 /**/
-function response_carga_num_pendientes(data){
+function response_num_pendientes(data){
 	render_enid(".place_tareas_pendientes" , data);
 }
 /**/

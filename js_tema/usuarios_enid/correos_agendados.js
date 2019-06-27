@@ -5,8 +5,8 @@ let agenda_correo =  (e) =>  {
     if (get_flag_estoy_en_agendado() == 1) {
         marca_llama_hecha_comentario();
     }
-    let flag_fecha_agenda = valida_text_form(".contenedor_persona_registrada_correo .input_f_agenda", ".contenedor_persona_registrada_correo .place_place_validador_fecha_agenda", 5, "Formato de fecha");
-    let flag_hora_agenda = valida_text_form(".contenedor_persona_registrada_correo .input_h_agenda", ".contenedor_persona_registrada_correo .place_place_validador_hora_agenda", 3, "Formato de hora");
+    let flag_fecha_agenda = val_text_form(".contenedor_persona_registrada_correo .input_f_agenda", ".contenedor_persona_registrada_correo .place_place_validador_fecha_agenda", 5, "Formato de fecha");
+    let flag_hora_agenda = val_text_form(".contenedor_persona_registrada_correo .input_h_agenda", ".contenedor_persona_registrada_correo .place_place_validador_hora_agenda", 3, "Formato de hora");
 
     if (flag_fecha_agenda == 1) {
 
@@ -21,13 +21,13 @@ let agenda_correo =  (e) =>  {
                 type: "POST",
                 data: data_send,
                 beforeSend: function () {
-                    show_load_enid(".place_info_registro_agenda_correo", "Cargando ... ", 1);
+                    sload(".place_info_registro_agenda_correo", "Cargando ... ", 1);
                 }
             }).done(function (data) {
 
 
                 cargar_num_agendados_email();
-                show_response_ok_enid(".place_info_registro_agenda_correo", "Correo Agendado con éxito!");
+                seccess_enid(".place_info_registro_agenda_correo", "Correo Agendado con éxito!");
                 $('.tab_base_marcacion').tab('show');
                 $(".base_tab_posiblies_clientes").tab("show");
 

@@ -19,7 +19,7 @@ window.onpopstate = function (event) {
     }
 }
 
-$(document).ready(function () {
+$(document).ready(() => {
 
 
     $(".form_punto_encuentro").submit(registra_usuario);
@@ -201,8 +201,8 @@ let muestra_horarios = function() {
 let muestra_quien_recibe = () => {
 
 
-    display_elements([".resumen_encuentro", ".titulo_principal_puntos_encuentro"], 0);
-    display_elements([".formulario_quien_recibe"], 1);
+    despliega([".resumen_encuentro", ".titulo_principal_puntos_encuentro"], 0);
+    despliega([".formulario_quien_recibe"], 1);
     set_option("vista", 4);
 
 
@@ -268,15 +268,15 @@ let focus_inputs_form = (nombre, correo, telefono, pwlength) => {
 }
 let response_registro_usuario = (data) => {
 
-    display_elements([".place_notificacion_punto_encuentro_registro"], 0);
+    despliega([".place_notificacion_punto_encuentro_registro"], 0);
     if ( data.usuario_existe > 0 ) {
 
         $(".text_usuario_registrado_pregunta").hide();
-        display_elements([".text_usuario_registrado", ".contenedor_ya_tienes_cuenta"], 1);
-        recorrepage(".text_usuario_registrado");
+        despliega([".text_usuario_registrado", ".contenedor_ya_tienes_cuenta"], 1);
+        recorre(".text_usuario_registrado");
 
     } else {
-        display_elements([".contenedor_eleccion_correo_electronico", ".formulario_quien_recibe"], 0);
+        despliega([".contenedor_eleccion_correo_electronico", ".formulario_quien_recibe"], 0);
         redirect("../area_cliente/?action=compras&ticket=" + data.id_recibo);
     }
 
@@ -310,7 +310,7 @@ let notifica_punto_entrega = e => {
     e.preventDefault();
 };
 let response_notificacion_punto_entrega = (data) => {
-    display_elements([".place_notificacion_punto_encuentro", ".form_punto_encuentro_horario"], 0);
+    despliega([".place_notificacion_punto_encuentro", ".form_punto_encuentro_horario"], 0);
     if (get_parameter(".primer_registro") == 1) {
         redirect("../area_cliente/?action=compras&ticket=" + data.id_recibo);
     } else {
@@ -319,7 +319,7 @@ let response_notificacion_punto_entrega = (data) => {
 };
 let agregar_nota = () => {
 
-    recorrepage(".comentarios");
+    recorre(".comentarios");
     showonehideone(".input_notas", ".text_agregar_nota");
 
 }
@@ -350,8 +350,8 @@ let valida_accion_retorno = function () {
         case 4:
 
             set_option("vista", 3);
-            display_elements([".resumen_encuentro", ".titulo_principal_puntos_encuentro"], 1);
-            display_elements([".formulario_quien_recibe"], 0);
+            despliega([".resumen_encuentro", ".titulo_principal_puntos_encuentro"], 1);
+            despliega([".formulario_quien_recibe"], 0);
 
             break;
 

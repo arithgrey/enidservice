@@ -1,5 +1,5 @@
 "use strict";
-$(document).ready(function () {
+$(document).ready(() => {
     $(".btn_direccion").click(function () {
         set_option("v", 1);
         carga_direccion_usuario();
@@ -8,18 +8,15 @@ $(document).ready(function () {
     $(".f_nombre_usuario").submit(actualiza_nombre_usuario);
     $(".tab_privacidad_seguridad").click(get_conceptos);
     $(".nombre_usuario").keyup(quita_espacios_nombre_usuario);
-    $(".tel2").keyup(function () {
+    $(".tel2").keyup(() => {
         quita_espacios(".tel2");
     });
-    $(".lada2").keyup(function () {
+    $(".lada2").keyup(() => {
         quita_espacios(".lada2");
     });
     $("#form_update_password").submit(set_password);
     $(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
-
     $(".form_telefono_usuario").submit(actualiza_telefono);
-
-
     $(".f_telefono_usuario_negocio").submit(set_telefono_usuario_negocio);
 
 
@@ -33,17 +30,16 @@ let carga_direccion_usuario = () => {
 }
 let response_direccion_usuario = data => {
 
-
     render_enid(".direcciones", data);
     $(".codigo_postal").keyup(auto_completa_direccion);
-    $(".numero_exterior").keyup(function () {
+    $(".numero_exterior").keyup(() => {
         quita_espacios(".numero_exterior");
     });
-    $(".numero_interior").keyup(function () {
+    $(".numero_interior").keyup(() => {
         quita_espacios(".numero_interior");
     });
     $(".form_direccion_envio").submit(registra_direccion_usuario);
-    $(".editar_direccion_persona").click(function () {
+    $(".editar_direccion_persona").click(() => {
         set_option("v", 2);
         carga_direccion_usuario();
 
@@ -51,7 +47,6 @@ let response_direccion_usuario = data => {
 
 }
 let registra_direccion_usuario = e => {
-    debugger;
 
     if (get_option("existe_codigo_postal") == 1) {
 
@@ -62,7 +57,7 @@ let registra_direccion_usuario = e => {
             request_enid("POST", data_send, url, response_registra_direccion_usuario, ".place_proyectos");
             $(".place_asentamiento").empty();
         } else {
-            recorrepage("#asentamiento");
+            recorre("#asentamiento");
             render_enid(".place_asentamiento", "<span class='alerta_enid'>Seleccione</span>");
         }
     }
@@ -77,7 +72,7 @@ let actualiza_nombre_usuario = e => {
     let data_send = $(".f_nombre_usuario").serialize();
     let url = "../q/index.php/api/usuario/nombre_usuario/format/json/";
     request_enid("PUT", data_send, url, function () {
-        show_response_ok_enid(".registro_nombre_usuario", "Tu nombre de usuario fue actualizado!");
+        seccess_enid(".registro_nombre_usuario", "Tu nombre de usuario fue actualizado!");
     }, ".registro_nombre_usuario");
     e.preventDefault();
 }
@@ -86,7 +81,7 @@ let actualiza_telefono = e => {
     let data_send = $(".form_telefono_usuario").serialize();
     let url = "../q/index.php/api/usuario/telefono/format/json/";
     request_enid("PUT", data_send, url, function () {
-        show_response_ok_enid(".registro_telefono_usuario", "Tu teléfono fue actualizado!");
+        seccess_enid(".registro_telefono_usuario", "Tu teléfono fue actualizado!");
     }, ".registro_telefono_usuario");
 
     e.preventDefault();
@@ -99,7 +94,7 @@ let set_telefono_usuario_negocio = e => {
         let data_send = $(".f_telefono_usuario_negocio").serialize();
         let url = "../q/index.php/api/usuario/telefono_negocio/format/json/";
         request_enid("PUT", data_send, url, function () {
-            show_response_ok_enid(".registro_telefono_usuario_negocio", "Tu teléfono fue actualizado!");
+            seccess_enid(".registro_telefono_usuario_negocio", "Tu teléfono fue actualizado!");
         }, ".registro_telefono_usuario_negocio");
 
     } else {
@@ -110,9 +105,8 @@ let set_telefono_usuario_negocio = e => {
 }
 let quita_espacios_nombre_usuario = () => {
 
-    let nombre_usuario = $(this).val();
-    let nuevo_text = nombre_usuario.toLowerCase();
-    $(this).val(quita_espacios_text(nuevo_text));
+    let nombre_usuario = $(this).val().toLowerCase();
+    $(this).val(quita_espacios_text(nombre_usuario));
 
 }
 let quita_espacios_text = v => {
@@ -127,9 +121,9 @@ let quita_espacios_text = v => {
 }
 let set_password = e => {
 
-    let flag = valida_text_form("#password", ".place_pw_1", 7, "Texto ");
-    let flag2 = valida_text_form("#pw_nueva", ".place_pw_2", 7, "Texto ");
-    let flag3 = valida_text_form("#pw_nueva_confirm", ".place_pw_3", 7, "Texto ");
+    let flag = val_text_form("#password", ".place_pw_1", 7, "Texto ");
+    let flag2 = val_text_form("#pw_nueva", ".place_pw_2", 7, "Texto ");
+    let flag3 = val_text_form("#pw_nueva_confirm", ".place_pw_3", 7, "Texto ");
     let n_password = 0;
 
     if (flag === flag2 && flag === flag3) {
@@ -176,7 +170,7 @@ let resp_actualizacion_pass = data => {
 
     if (data) {
 
-        show_response_ok_enid(".msj_password", "Contraseña actualizada, inicia sessión para verificar el cambio.");
+        seccess_enid(".msj_password", "Contraseña actualizada, inicia sessión para verificar el cambio.");
         setInterval('termina_session()', 3000);
 
     } else {

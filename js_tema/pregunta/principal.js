@@ -1,5 +1,5 @@
 "use strict";
-$(document).ready(function () {
+$(document).ready(() => {
 
     set_option("recomendaria", 3);
     set_option("calificacion", 5);
@@ -17,7 +17,7 @@ $(document).ready(function () {
 
 let registra_valoracion = (e) => {
 
-    let flag = valida_text_form("#pregunta", ".place_area_pregunta", 5, "Pregunta");
+    let flag = val_text_form("#pregunta", ".place_area_pregunta", 5, "Pregunta");
     if (flag == 1) {
 
         let url = "../q/index.php/api/pregunta/index/format/json/";
@@ -25,7 +25,7 @@ let registra_valoracion = (e) => {
 
         $(".registro_pregunta").show();
         $(".place_registro_valoracion").empty();
-        recorrepage(".place_valoraciones");
+        recorre(".place_valoraciones");
         bloquea_form(".form_valoracion");
 
         request_enid("POST", data_send, url, response_registro_valoracion, ".place_registro_valoracion");
@@ -76,7 +76,7 @@ let response_carga_valoraciones = (data) => {
     render_enid(".place_valoraciones", data);
 
     if (get_option("desde_valoracion") == 1) {
-        recorrepage(".place_valoraciones");
+        recorre(".place_valoraciones");
         set_option("desde_valoracion", 0);
 
     }

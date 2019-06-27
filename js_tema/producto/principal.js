@@ -35,7 +35,7 @@ let response_carga_valoraciones = data => {
 	render_enid(".place_valoraciones" , data);
 
 	if(get_option("desde_valoracion") ==  1){
-		recorrepage(".place_valoraciones");				
+		recorre(".place_valoraciones");				
 		set_option("desde_valoracion" , 0);
 	}
 	$(".ordenar_valoraciones_button").click(ordenar_valoraciones);			

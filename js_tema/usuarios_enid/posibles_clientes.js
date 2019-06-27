@@ -9,7 +9,7 @@ function carga_info_persona(){
 			type: "GET",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_info_posibles_clientes" , "Cargando ... ", 1 );
+				sload(".place_info_posibles_clientes" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){			
 

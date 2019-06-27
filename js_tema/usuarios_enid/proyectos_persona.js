@@ -8,7 +8,7 @@ let get_proyectos_persona = () => {
 			type: "GET",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+				sload(".place_proyectos" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){							
 
@@ -17,7 +17,7 @@ let get_proyectos_persona = () => {
 		$(".solicitar_desarrollo").click(function(e){
 			id_proyecto =  get_parameter_enid($(this) , "id");	
 			set_proyecto(id_proyecto);
-			carga_tikets_usuario();
+			tikets_usuario();
 		});
 
 		$(".btn_clientes").click(carga_clientes);
@@ -39,14 +39,14 @@ let carga_form_solicitar_desarrollo = (e) => {
 				type: "GET",
 				data: data_send, 
 				beforeSend: function(){
-					show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+					sload(".place_proyectos" , "Cargando ... ", 1 );
 				}
 		}).done(function(data){													
 			render_enid(".place_proyectos" , data);							
 			$(".form_ticket").submit(registra_ticket);
 			
 			$(".regresar_tickets_usuario").click(function(){
-				carga_tikets_usuario();
+				tikets_usuario();
 			});
 			$('.summernote').summernote();
 
@@ -66,7 +66,7 @@ let registra_ticket = (e) => {
 				type: "POST",
 				data: data_send, 
 				beforeSend: function(){
-					show_load_enid(".place_registro_ticket" , "Cargando ... ", 1 );
+					sload(".place_registro_ticket" , "Cargando ... ", 1 );
 				}
 		}).done(function(data){																
 
@@ -83,7 +83,7 @@ let registra_ticket = (e) => {
 					
 	e.preventDefault();
 }
-let carga_tikets_usuario = () => {
+let tikets_usuario = () => {
 	
 	recorre_web_version_movil();
     let status_ticket = 0;
@@ -101,7 +101,7 @@ let carga_tikets_usuario = () => {
 				type: "GET",
 				data: data_send, 
 				beforeSend: function(){
-					show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+					sload(".place_proyectos" , "Cargando ... ", 1 );
 				}
 		}).done(function(data){													
 
@@ -115,11 +115,11 @@ let carga_tikets_usuario = () => {
 			});
 
 			$(".btn_refresh").click(function(){
-				carga_tikets_usuario();
+				tikets_usuario();
 			});
 
 			$(".estatus_tickets").change(function(){
-				carga_tikets_usuario();
+				tikets_usuario();
 			});
 			$(".regresar_serivicios_cliente").click(get_proyectos_persona);	
 
@@ -139,7 +139,7 @@ let carga_info_detalle_ticket =() => {
 			type: "GET",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+				sload(".place_proyectos" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){							
 
@@ -149,19 +149,19 @@ let carga_info_detalle_ticket =() => {
 		$(".btn_mod_ticket").click(actualizar_estatus_ticket);
 		$(".form_agregar_tarea").submit(registra_tarea);
 		$(".tarea").click(actualiza_tareas);
-		recorrepage("#asunto_ticket");
+		recorre("#asunto_ticket");
 
 			$(".mostrar_tareas_pendientes").click(muestra_tareas_por_estatus);
 			$(".mostrar_todas_las_tareas").click(muestra_todas_las_tareas);
 
 		$(".ver_tickets").click(function(){
-			carga_tikets_usuario();
+			tikets_usuario();
 		});
 
 		if (get_flag_mostrar_solo_pendientes() ==  1) {
 			muestra_tareas_por_estatus();
 		}
-		recorrepage(".mostrar_todas_las_tareas");
+		recorre(".mostrar_todas_las_tareas");
 		
 
 
@@ -183,10 +183,10 @@ let  actualizar_estatus_ticket = (e) => {
 			type: "PUT",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+				sload(".place_proyectos" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){									
-		carga_tikets_usuario();		
+		tikets_usuario();		
 	}).fail(function(){			
 		show_error_enid(".place_proyectos" , "Error ... ");
 	});		
@@ -205,7 +205,7 @@ let  registra_tarea = (e) => {
 			type: "POST",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+				sload(".place_proyectos" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){									
 		carga_info_detalle_ticket();				
@@ -230,11 +230,11 @@ let  actualiza_tareas = (e) => {
 			type: "PUT",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+				sload(".place_proyectos" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){									
 		if (data ==  "cerrado") {
-			carga_tikets_usuario();
+			tikets_usuario();
 		}else{
 			carga_info_detalle_ticket();					
 		}
@@ -285,7 +285,7 @@ let actualiza_asunto_ticket = (e) => {
 			type: "PUT",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_proyectos" , "Cargando ... ", 1 );
+				sload(".place_proyectos" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){							
 

@@ -49,7 +49,7 @@ class Archivo extends REST_Controller
             $image_height = $upload_data["image_height"];
             $source_image = $this->upload->upload_path . $nombre_imagen;
 
-            $config_resizing = [
+            $config = [
                 'maintain_ratio' => TRUE,
                 'width' => (int)porcentaje($image_width, 70, 0, 0),
                 'height' => (int)porcentaje($image_height, 70, 0, 0),
@@ -58,7 +58,7 @@ class Archivo extends REST_Controller
             ];
 
 
-            $this->image_lib->initialize($config_resizing);
+            $this->image_lib->initialize($config);
             $param = $this->post();
 
             $param += [
@@ -168,12 +168,18 @@ class Archivo extends REST_Controller
                 $id_imagen = $this->img_model->insert_img($param, 1);
                 if ($id_imagen > 0) {
 
-                    $prm["id_imagen"] = $id_imagen;
-                    $prm["id_servicio"] = $param["servicio"];
+                    $prm = [
+                        "id_imagen" => $id_imagen,
+                        "id_servicio" => $param["servicio"],
+                    ];
+
                     $response["status_imagen_servicio"] = $this->insert_imagen_servicio($prm);
                     if ($response["status_imagen_servicio"] == true) {
+
+
                         $prm["existencia"] = 1;
                         $response["status_notificacion"] = $this->notifica_producto_imagen($prm);
+
                     }
                     $response["status_notificacion"] = 2;
                 }

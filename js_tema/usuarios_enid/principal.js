@@ -69,7 +69,7 @@ let response_carga_usuario = (data) => {
 			e.preventDefault();				
 	});
 	$(".pagination > li > a, .pagination > li > span").css("color" , "white");
-	recorrepage(".tab-content");	
+	recorre(".tab-content");	
 	$(".usuario_enid_service").click(carga_data_usuario);
 }
 let pre_nuevo_usuario = () => {
@@ -85,7 +85,7 @@ let carga_data_usuario = (e) => {
 
 	document.getElementById("form-miembro-enid-service").reset();	
 	$(".place_correo_incorrecto").empty();
-	recorrepage(".tab-content");
+	recorre(".tab-content");
 	set_option("id_usuario", get_parameter_enid($(this) , "id"));
 	set_option("flag_editar",1);
 
@@ -173,7 +173,7 @@ let  carga_mapa_menu = () => {
 }
 let response_carga_mapa = (data) => {
 	render_enid(".place_perfilles_permisos" , data);		
-	recorrepage(".tab-content");
+	recorre(".tab-content");
 	$(".perfil_recurso").click(modifica_accesos_usuario);
 }
 let modifica_accesos_usuario = (e) => {

@@ -21,76 +21,59 @@ let menu_actual = "clientes";
 let id_servicio = 0;
 let id_persona = 0;
 
-$(document).ready(function () {
+$(document).ready(() => {
 
     set_option("vista",1);
     set_option("estado_compra", 6);
     set_option("interno", 1);
-    valida_accion_inicial();
+    retorno();
 
-
-    $(".btn_mis_ventas").click(function () {
-
+    $(".btn_mis_ventas").click(() => {
         set_option("estado_compra", 1);
         set_option("modalidad_ventas", 1);
-        carga_compras_usuario();
-
+        compras_usuario();
     });
-
-    $(".btn_cobranza").click(function () {
-
+    $(".btn_cobranza").click(() => {
         set_option("estado_compra", 6);
         set_option("modalidad_ventas", 0);
-        carga_compras_usuario();
+        compras_usuario();
     });
-
-
     $(".num_alcance").click(alcance_producto);
-
-    $("#mis_ventas").click(function () {
-
-
+    $("#mis_ventas").click(() => {
         $("#mis_compras").tab("show");
         $("#mis_ventas").tab("show");
-
-
     });
-
-
-    $("#mis_compras").click(function () {
-
-
+    $("#mis_compras").click(() => {
         $("#mis_ventas").tab("show");
         $("#mis_compras").tab("show");
-
     });
 
 });
-let valida_accion_inicial =  () =>  {
-    debugger;
+let retorno =  () =>  {
 
     switch (get_parameter(".action")) {
         case "ventas":
 
             set_option("modalidad_ventas", 1);
             set_option("estado_compra", 1);
-            carga_compras_usuario();
+            compras_usuario();
+
             break;
         case "compras":
 
             set_option("modalidad_ventas", 0);
             if (get_parameter(".ticket") > 0) {
                 /*Cargo la información del ticket*/
-                cargar_info_resumen_pago_pendiente();
+                inf_ticket();
             } else {
-                carga_compras_usuario();
+                compras_usuario();
             }
 
             break;
 
         default:
             set_option("modalidad_ventas", 0);
-            carga_compras_usuario();
+            compras_usuario();
             break;
     }
 }
@@ -122,7 +105,7 @@ let valida_retorno =  () => {
 
                 set_option("modalidad_ventas", 1);
                 set_option("estado_compra", 1);
-                carga_compras_usuario();
+                compras_usuario();
                 break;
 
             case "compras":
@@ -130,13 +113,13 @@ let valida_retorno =  () => {
                 $("#mis_ventas").tab("show");
                 $("#mis_compras").tab("show");
                 set_option("modalidad_ventas", 0);
-                carga_compras_usuario();
+                compras_usuario();
 
                 break;
 
             default:
                 set_option("modalidad_ventas", 0);
-                carga_compras_usuario();
+                compras_usuario();
                 break;
         }
 
@@ -151,7 +134,7 @@ let valida_retorno =  () => {
                 $("#mis_compras").tab("show");
                 $("#mis_ventas").tab("show");
 
-                cargar_info_resumen_pago_pendiente();
+                inf_ticket();
 
 
                 break;

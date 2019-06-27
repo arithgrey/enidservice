@@ -281,16 +281,4 @@ class Home extends CI_Controller
         $this->principal->show_data_page($this->principal->getCSSJs($data, "producto_recibo_registrado"), 'pre');
 
     }
-
-    /*
-    function get_nombre_servicio()
-    {
-        return $this->nombre_servicio;
-    }
-
-    function set_mensaje_descripcion($mensaje_descripcion)
-    {
-        $this->mensaje_descripcion = $mensaje_descripcion;
-    }
-    */
 }

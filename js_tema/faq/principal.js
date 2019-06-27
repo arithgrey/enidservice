@@ -1,7 +1,7 @@
 "use strict";
 let editar_respuesta = 0;
 let faq = 0;
-$(document).ready(function () {
+$(document).ready(() => {
 
 
     if ($(".in_session").val() == 1) {
@@ -30,7 +30,7 @@ let registra_respuesta = (e) => {
 let response_registro_respuesta = (data) => {
 
     debugger;
-    show_response_ok_enid(".place_refitro_respuesta", "Respuesta registrada!");
+    seccess_enid(".place_refitro_respuesta", "Respuesta registrada!");
     document.getElementById("form_respuesta").reset();
     let new_url = "../faq/?faq=" + data;
     redirect(new_url);
@@ -80,8 +80,8 @@ let agrega_img_faq = () => {
 
 let response_carga_form_imagenes = (data) => {
 
-    display_elements([".form_respuesta"], 0);
-    recorrepage(".text_agregar_img");
+    despliega([".form_respuesta"], 0);
+    recorre(".text_agregar_img");
 
     render_enid(".place_load_img_faq", data);
     $("#guardar_img_faq").hide();
@@ -96,7 +96,7 @@ let upload_imgs_enid_faq = function() {
     reader = new FileReader();
     reader.onloadend = function (e) {
 
-        display_elements([".text_agregar_img", ".imagen_img_faq"], 0);
+        despliega([".text_agregar_img", ".imagen_img_faq"], 0);
         mostrar_img_upload(e.target.result, 'lista_imagenes_faq');
         $("#guardar_img_faq").show();
         $("#form_img_enid_faq").submit(registra_img_faq);
@@ -118,7 +118,7 @@ let registra_img_faq = (e) => {
         contentType: false,
         processData: false,
         beforeSend: function () {
-            show_load_enid(".place_load_img_faq", "Cargando ... ", 2);
+            sload(".place_load_img_faq", "Cargando ... ", 2);
             $(".guardar_img_enid").hide();
         }
     }).done(function (data) {

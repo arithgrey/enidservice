@@ -1,5 +1,5 @@
 "use strict";
-$(document).ready(function () {
+$(document).ready(() => {
     $(".agregar_direccion_pedido").click(() => {
 
         submit_enid(".form_registro_direccion");

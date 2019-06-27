@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 
 	$("footer").ready(function() {
-		recorrepage("#info_articulo");		
+		recorre("#info_articulo");		
 	});
 	$(".num_recibo").keyup(function(){
 		quita_espacios_en_input_num(".num_recibo");
@@ -28,12 +28,12 @@ let notifica_pago = e => {
 
 			$(".num_recibo").css("border" , "1px solid rgb(13, 62, 86)");
 			render_enid(".place_recibo" , "<span class='alerta_enid'>Este pago ya ha sido notificado previamente</span>");
-			recorrepage(".num_recibo");	
+			recorre(".num_recibo");	
 		}
 
 	}else{
 		$(".num_recibo").css("border" , "1px solid rgb(13, 62, 86)");
-		recorrepage(".num_recibo");
+		recorre(".num_recibo");
 	}
 	e.preventDefault();
 }
@@ -41,7 +41,7 @@ let notifica_pago = e => {
 let response_notificacion_pago = data => {
 
 	render_enid(".placa_notificador_pago" , "<span class='blue_enid_background white' style='padding:10px;'> Recibimos la notificación de tu pago, a la brevedad será procesado!.</span>");
-	recorrepage(".placa_notificador_pago");
+	recorre(".placa_notificador_pago");
 	notifica_registro_pago(data);
 }
 

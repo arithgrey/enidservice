@@ -13,6 +13,7 @@ class Inicio extends CI_Controller
     function index()
     {
 
+
         $param = $this->input->get();
         $data = $this->principal->val_session();
 

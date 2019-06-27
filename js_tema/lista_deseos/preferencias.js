@@ -1,5 +1,5 @@
 "use strict";
-$(document).ready(function () {
+$(document).ready(() => {
 
     $(".item_preferencias").click(agrega_interes);
     let slider = $('#slider');

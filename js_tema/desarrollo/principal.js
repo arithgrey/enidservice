@@ -8,7 +8,7 @@ window.onpopstate = function (event) {
         valida_retorno();
     }
 }
-$(document).ready(function () {
+$(document).ready(() => {
 
 
     set_option("s", 0);
@@ -16,32 +16,32 @@ $(document).ready(function () {
     set_option("modulo", 2);
 
 
-    $("footer").ready(function () {
+    $("footer").ready(() => {
 
         let id_depto = get_parameter(".num_departamento");
         set_option("id_depto", id_depto);
-        carga_num_pendientes();
+        num_pendientes();
     });
 
 
-    $(".depto").change(function () {
+    $(".depto").change(() => {
 
         let id_depto = get_parameter(".depto");
         set_option("id_depto", id_depto);
-        carga_tikets_usuario();
+        tikets_usuario();
     });
 
-    $(".q").keyup(carga_tikets_usuario);
+    $(".q").keyup(tikets_usuario);
 
 
-    $(".form_busqueda_actividad_enid").submit(cargar_productividad);
+    $(".form_busqueda_actividad_enid").submit(productividad);
 
     set_option("id_usuario", get_parameter(".id_usuario"));
 
     $(".li_menu").click(recorre_web_version_movil);
-    $(".base_tab_clientes").click(carga_tikets_usuario);
-    $(".form_busqueda_desarrollo").submit(carga_metricas_desarrollo);
-    $(".form_busqueda_desarrollo_solicitudes").submit(carga_solicitudes_cliente);
+    $(".base_tab_clientes").click(tikets_usuario);
+    $(".form_busqueda_desarrollo").submit(metricas_desarrollo);
+    $(".form_busqueda_desarrollo_solicitudes").submit(solicitudes_cliente);
 
     if (num_departamento == 4) {
 
@@ -51,13 +51,13 @@ $(document).ready(function () {
     }
 
     $(".comparativa").click(carga_comparativas);
-    $(".abrir_ticket").click(form_nuevo_ticket);
+    $(".abrir_ticket").click(form_n_ticket);
 
     on_load();
 
 });
 
-let cargar_productividad = e => {
+let productividad = e => {
 
     let url = "../q/index.php/api/productividad/usuario/format/json/";
     request_enid("GET", data_send, url, 1, ".place_productividad", 0, ".place_productividad");
@@ -65,9 +65,9 @@ let cargar_productividad = e => {
 
 }
 
-let recorre_web_version_movil = () => recorrepage(".tab-content");
+let recorre_web_version_movil = () => recorre(".tab-content");
 
-let carga_metricas_desarrollo = (e) => {
+let metricas_desarrollo = (e) => {
 
 
     if (get_parameter(".form_busqueda_desarrollo #datetimepicker4").length > 5 && get_parameter(".form_busqueda_desarrollo #datetimepicker5").length > 5) {
@@ -87,20 +87,20 @@ let carga_metricas_desarrollo = (e) => {
 let response_carga_metricas = (data) => {
 
     render_enid(".place_metricas_desarrollo", data);
-    $('th').click(ordena_table_general);
+    $('th').click(ordena_tabla);
 }
 let carga_comparativas = () => {
 
     let url = "../q/index.php/api/desarrollo/comparativas/format/json/";
     let data_send = {tiempo: 1};
 
-    request_enid("GET", data_send, url, function () {
+    request_enid("GET", data_send, url, () => {
         render_enid(".place_metricas_comparativa", data);
-        $('th').click(ordena_table_general);
+        $('th').click(ordena_tabla);
 
     }, ".place_metricas_comparativa");
 }
-let carga_solicitudes_cliente = e => {
+let solicitudes_cliente = e => {
 
 
     if (get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker4").length > 5 && get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker5").length > 5) {
@@ -119,24 +119,23 @@ let carga_solicitudes_cliente = e => {
 let response_carga_solicitudes = data => {
 
     render_enid(".place_metricas_servicio", data);
-    $('th').click(ordena_table_general);
+    $('th').click(ordena_tabla);
 }
 
-let carga_num_pendientes = () => {
+let num_pendientes = () => {
 
     let url = "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";
     let data_send = {"id_usuario": get_option("id_usuario"), "id_departamento": get_option("id_depto")};
     request_enid("GET", data_send, url, 1, ".place_tareas_pendientes", ".place_tareas_pendientes");
 }
 
-let form_nuevo_ticket = () => {
+let form_n_ticket = () => {
 
     let url = "../q/index.php/api/tickets/form/format/json/";
-    let data_send = {};
-    request_enid("GET", data_send, url, response_form_nuevo_ticket, ".place_form_tickets");
+    request_enid("GET", {}, url, r_form_ticket, ".place_form_tickets");
 }
 
-let response_form_nuevo_ticket = data => {
+let r_form_ticket = data => {
 
     render_enid(".place_form_tickets", data);
     $(".form_ticket").submit(registra_ticket);
@@ -163,8 +162,8 @@ let set_estatus_ticket = function (id_ticket, status) {
     let nuevo_estado = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/tickets/estado/format/json/";
     let data_send = {"id_ticket": id_ticket, "status": status};
-    request_enid("PUT", data_send, url, function () {
-        carga_tikets_usuario();
+    request_enid("PUT", data_send, url, () => {
+        tikets_usuario();
     });
 }
 let carga_info_detalle_ticket = () => {
@@ -179,7 +178,7 @@ let response_carga_ticket = (data) => {
 
 
     render_enid(".place_proyectos", data);
-    display_elements([".seccion_nueva_tarea"], 0);
+    despliega([".seccion_nueva_tarea"], 0);
     $(".mostrar_tareas_pendientes").hide();
     $(".btn_agregar_tarea").click(agregar_tarea);
 
@@ -190,7 +189,7 @@ let response_carga_ticket = (data) => {
     $(".tarea").click(actualiza_tareas);
     $(".mostrar_tareas_pendientes").click(muestra_tareas_por_estatus);
     $(".mostrar_todas_las_tareas").click(muestra_todas_las_tareas);
-    $(".ver_tickets").click(carga_tikets_usuario);
+    $(".ver_tickets").click(tikets_usuario);
     if (get_option("flag_mostrar_solo_pendientes") == 1) {
         muestra_tareas_por_estatus();
     }
@@ -273,7 +272,7 @@ let muestra_todas_las_tareas = () => {
     $(".mostrar_tareas_pendientes").show();
     set_option("flag_mostrar_solo_pendientes", 0);
 }
-let carga_tikets_usuario = () => {
+let tikets_usuario = () => {
 
     let status_ticket = 0;
     if (document.querySelector(".estatus_tickets")) {
@@ -319,8 +318,8 @@ let response_carga_tickets = function (data) {
 
     });
 
-    $(".btn_refresh").click(carga_tikets_usuario);
-    $(".estatus_tickets").change(carga_tikets_usuario);
+    $(".btn_refresh").click(tikets_usuario);
+    $(".estatus_tickets").change(tikets_usuario);
 
 
 }
@@ -341,7 +340,7 @@ let response_actualiza_tareas = data => {
 
     if (data === "cerrado") {
 
-        carga_tikets_usuario();
+        tikets_usuario();
 
     } else {
 
@@ -356,9 +355,9 @@ let agregar_tarea = () => {
 
     show_section_dinamic_button(".seccion_nueva_tarea");
     show_section_dinamic_button(".btn_agregar_tarea");
-    recorrepage(".seccion_nueva_tarea");
+    recorre(".seccion_nueva_tarea");
 
-    display_elements([".listado_pendientes", ".mostrar_todas_las_tareas", ".table_resumen_ticket"], 0);
+    despliega([".listado_pendientes", ".mostrar_todas_las_tareas", ".table_resumen_ticket"], 0);
     $('.summernote').summernote({
         placeholder: 'Tarea pendiente',
         tabsize: 2,
@@ -380,7 +379,7 @@ let confirmacion_cerrar_ticket = () => {
     let id_ticket = get_option("id_ticket");
     let url = "../q/index.php/api/tickets/estado/format/json/";
     let data_send = {"status": 2, "id_ticket": id_ticket};
-    request_enid("PUT", data_send, url, carga_tikets_usuario);
+    request_enid("PUT", data_send, url, tikets_usuario);
 
 }
 let valida_retorno = () => {
@@ -389,7 +388,7 @@ let valida_retorno = () => {
 
         case 1:
 
-            carga_tikets_usuario();
+            tikets_usuario();
             break;
 
         case 2:
@@ -424,7 +423,7 @@ let edita_descripcion_tarea = id_tarea => {
             let text_tarea = get_parameter(".itarea_" + id_tarea);
             let url = "../q/index.php/api/tarea/descripcion/format/json/";
             let data_send = {"id_tarea": id_tarea, "descripcion": text_tarea};
-            request_enid("PUT", data_send, url, function () {
+            request_enid("PUT", data_send, url, () => {
                 carga_info_detalle_ticket();
             });
 
@@ -435,11 +434,11 @@ let edita_descripcion_tarea = id_tarea => {
 let elimina_tarea = id_tarea => {
 
 
-    show_confirm("¿DESEAS ELIMINAR LA TAREA?", "Se borrará completamente", "ELIMINAR", function () {
+    show_confirm("¿DESEAS ELIMINAR LA TAREA?", "Se borrará completamente", "ELIMINAR", () => {
 
         let url = "../q/index.php/api/tarea/index/format/json/";
         let data_send = {"id_tarea": id_tarea};
-        request_enid("DELETE", data_send, url, function () {
+        request_enid("DELETE", data_send, url, () => {
 
             carga_info_detalle_ticket();
 

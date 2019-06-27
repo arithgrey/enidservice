@@ -1,8 +1,8 @@
 "use strict";
-let cargar_info_resumen_pago_pendiente = function (e ){
+let inf_ticket = function (e ){
 
 
-    recorrepage();
+    recorre();
     let id_recibo = get_parameter_enid($(this), "id");
 
     if (id_recibo == undefined) {
@@ -36,7 +36,7 @@ let response_carga_info_resumen_pago_pendiente = data => {
     $(".resumen_pagos_pendientes").tab("show");
     render_enid(".place_resumen_servicio", data);
     $(".cancelar_compra").click(confirmar_cancelacion_compra);
-    $(".btn_direccion_envio").click(carga_informacion_envio);
+    $(".btn_direccion_envio").click(inf_envio);
 
 }
 let resposponse_confirma_cancelacion = data => {
@@ -58,7 +58,7 @@ let response_cancelacion_compra = (data) => {
     if (get_option("modalidad_ventas") == 1) {
         $("#mi_buzon").tab("show");
         $("#mis_ventas").tab("show");
-        carga_compras_usuario();
+        compras_usuario();
     } else {
 
         let id_servicio = data.registro.id_servicio;
@@ -71,7 +71,7 @@ let response_cancelacion_compra = (data) => {
 
         let response = "<div class='col-lg-8 col-lg-offset-2 text-center'>" + div2 + "" + div + "</div>";
         render_enid(".place_resumen_servicio", response);
-        $(".mis_compras_btn").click(carga_compras_usuario);
+        $(".mis_compras_btn").click(compras_usuario);
 
     }
     metricas_perfil();

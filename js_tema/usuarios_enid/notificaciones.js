@@ -47,7 +47,7 @@ let   cargar_num_agendados = () => {
 			type: "GET",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_llamada_hecha" , "Cargando ... ", 1 );
+				sload(".place_llamada_hecha" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){																						
 
@@ -72,7 +72,7 @@ let   cargar_num_clientes_restantes = () => {
 			type: "GET",
 			data: data_send, 
 			beforeSend: function(){
-				show_load_enid(".place_llamada_hecha" , "Cargando ... ", 1 );
+				sload(".place_llamada_hecha" , "Cargando ... ", 1 );
 			}
 	}).done(function(data){																						
 		render_enid(".place_num_productividad" , data);

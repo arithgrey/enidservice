@@ -8,7 +8,7 @@ function agregas_comentio_a_usuario(){
 function response_agregar_comentario_a_usuario(data){
 
 	document.getElementById("form_comentarios").reset(); 
-	show_response_ok_enid(".place_nuevo_comentario" , "Comentario registrado!");						
+	seccess_enid(".place_nuevo_comentario" , "Comentario registrado!");						
 	$(".tab_ejemplos_disponibles").tab("show");
 	$(".base_tab_clientes").tab("show");			
 	carga_info_persona();
@@ -52,7 +52,7 @@ function muestra_formularios_busqueda(){
 }
 /**/
 function recorre_web_version_movil(){
-	recorrepage(".tab-content");
+	recorre(".tab-content");
 }
 /**/
 function convertir_cliente(e){
@@ -75,7 +75,7 @@ function response_convertir_cliente(data){
 			/**/				
 		}else{
 
-			show_response_ok_enid(".place_convertir_cliente" , "Información actualizada!");										
+			seccess_enid(".place_convertir_cliente" , "Información actualizada!");										
 			$(".base_tab_clientes").tab("show");
 			$(".base_tab_posiblies_clientes").tab('show'); 					
 			$(".form_busqueda_posibles_clientes").submit();

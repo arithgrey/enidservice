@@ -118,11 +118,11 @@ let valida_banco_seleccionado = () =>{
 let valida_tarjeta_registrada = () =>{
 
 	set_option("numero_tarjeta" , get_parameter(".numero_tarjeta"));		
-	return  valida_text_form(".numero_tarjeta" , ".place_numero_tarjeta" , 16 , "Número de tarjeta" );		
+	return  val_text_form(".numero_tarjeta" , ".place_numero_tarjeta" , 16 , "Número de tarjeta" );		
 	
 }
 let valida_propietario_tarjeta = () =>{
 	
 	set_optino("propietario" , get_parameter(".propietario"));
-	return valida_text_form(".propietario" , ".place_propietario_tarjeta" , 5 , "Propietario de la tarjeta" );				
+	return val_text_form(".propietario" , ".place_propietario_tarjeta" , 5 , "Propietario de la tarjeta" );				
 }
