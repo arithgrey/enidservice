@@ -4,7 +4,7 @@ let flag_titulo_web = 0;
 let tarea = 0;
 let tipo_negocio = 0;
 let option = [];
-$("footer").ready(function () {
+$("footer").ready(() => {
 
 
     let in_session = get_parameter(".in_session");
@@ -59,13 +59,13 @@ let show_confirm = (text, text_complemento, text_continuar = 0, on_next = 0, on_
         }
     });
 };
-let show_load_enid = place => {
+let sload = place => {
 
     let bar = '<div class="progress progress-striped active page-progress-bar">';
     bar += '<div class="progress-bar" style="width: 100%;"></div> </div>';
     render_enid(place, bar);
 }
-let show_response_ok_enid = (place, msj) => {
+let seccess_enid = (place, msj) => {
 
     $(place).show();
     render_enid(place, "<span class='response_ok_enid'>" + msj + "</span>");
@@ -79,7 +79,7 @@ let selecciona_valor_select = (opcion_a_seleccionar, posicion) => {
     $(opcion_a_seleccionar + " option[value='" + posicion + "']").attr("selected", true);
 
 }
-let valida_text_form = (input, place_msj, len, nom) => {
+let val_text_form = (input, place_msj, len, nom) => {
 
     $(place_msj).show();
     let valor_registrado = $.trim(get_parameter(input));
@@ -108,7 +108,7 @@ let format_error = (place_msj, msj) => {
 }
 let valida_email_form = (input, place_msj) => {
 
-    display_elements([place_msj], 1);
+    despliega([place_msj], 1);
     let valor_registrado = $(input).val();
     let mensaje_user = "";
     let flag = 1;
@@ -139,7 +139,7 @@ let valida_email_form = (input, place_msj) => {
 let valida_tel_form = (input, place_msj) => {
 
 
-    display_elements([place_msj], 1);
+    despliega([place_msj], 1);
     let valor_registrado = get_parameter(input);
     let mensaje_user = "";
     let flag = 1;
@@ -181,8 +181,6 @@ let mostrar_img_upload = (source, id_section) => {
     li.appendChild(img);
     list.appendChild(li);
 }
-
-
 
 let showonehideone = (show, hide) => {
 
@@ -360,7 +358,7 @@ let getCellValue = (row, index) => {
     return $(row).children('td').eq(index).text()
 
 }
-let ordena_table_general = function(){
+let ordena_tabla = function(){
 
     let table = $(this).parents('table').eq(0);
     let rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
@@ -406,7 +404,7 @@ let getMaxOfArray  =  numArray =>  {
 
 }
 
-let  display_elements =  (array, tipo) => {
+let  despliega =  (array, tipo) => {
 
     for (let x in array) {
 
@@ -446,7 +444,7 @@ let request_enid =  (method, data_send, url, call_back, place_before_send = 0, b
     if (before_send < 1) {
         if (place_before_send.length > 0) {
             var before_send = function () {
-                show_load_enid(place_before_send, "", "");
+                sload(place_before_send, "", "");
             }
         } else {
             var before_send = function () {
@@ -456,7 +454,7 @@ let request_enid =  (method, data_send, url, call_back, place_before_send = 0, b
     if (call_back > 0) {
         var call_back = function (data) {
             render_enid(place_render, data);
-            $('th').click(ordena_table_general);
+            $('th').click(ordena_tabla);
         }
     }
     $.ajax({
@@ -500,7 +498,7 @@ let randomString =  (len, charSet) => {
     return randomString;
 }
 /*Recorre a sección*/
-let recorrepage =  contenedor =>  {
+let recorre =  contenedor =>  {
 
     if (typeof get_parameter(contenedor) !== 'undefined') {
         let simple = contenedor.substring(1, contenedor.length);
@@ -656,7 +654,7 @@ let minusculas = (e) => {
 /*PASAR ESTA PORQUERÍA A DONDE DEBE*/
 let response_mensaje_contacto = data => {
 
-    show_response_ok_enid(".place_registro_contacto", "<div class='contacto_enviado'> Gracias por enviarnos tu mensaje, pronto sabrás de nosotros. ! </div>");
+    seccess_enid(".place_registro_contacto", "<div class='contacto_enviado'> Gracias por enviarnos tu mensaje, pronto sabrás de nosotros. ! </div>");
     document.getElementById("form_contacto").reset();
 }
 let envia_comentario = e => {
@@ -669,7 +667,7 @@ let envia_comentario = e => {
         f = valida_tel_form("#tel", ".place_tel_contacto");
         if (f == 1) {
             set_places();
-            recorrepage("#btn_envio_mensaje");
+            recorre("#btn_envio_mensaje");
             let id_empresa = 1;
             let data_send = $("#form_contacto").serialize() + "&" + $.param({"empresa": id_empresa, "tipo": 2});
             request_enid("POST", data_send, url, response_mensaje_contacto, ".place_registro_contacto");

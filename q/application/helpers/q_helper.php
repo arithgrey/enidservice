@@ -743,6 +743,11 @@ if (!function_exists('invierte_date_time')) {
         $f = $f + $tareas["flag"];
         $lista .= $tareas["html"];
 
+
+        $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
+        $lista .= div($compras_sin_cierre["html"], "top_20");
+        $f = $f + $compras_sin_cierre["flag"];
+
         $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);
         $f = $f + $recibos_sin_costos_operacion["flag"];
         $lista .= $recibos_sin_costos_operacion["html"];
@@ -753,9 +758,7 @@ if (!function_exists('invierte_date_time')) {
         $f = $f + $recordatorios["flag"];
 
 
-        $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
-        $lista .= div($compras_sin_cierre["html"], "top_20");
-        $f = $f + $compras_sin_cierre["flag"];
+
 
 
         $preguntas = add_preguntas_sin_lectura($info["preguntas"]);

@@ -18,7 +18,13 @@ class Blog extends REST_Controller
 		$response = false;
 		if (if_ext($param, "fecha")) {
 
-			$f = ["id_faq", "titulo", "id_categoria", "fecha_registro"];
+			$f = [
+			    "id_faq",
+                "titulo",
+                "id_categoria",
+                "fecha_registro"
+            ];
+
 			$data = $this->blog_model->get($f, ["DATE(fecha_registro) " => $param["fecha"]], 1000);
 			$response = create_table_blog($data);
 

@@ -7,7 +7,7 @@
 
 
 //sticky header
-$(document).ready(function () {
+$(document).ready(() => {
     $(window).resize(function () {
         $(".navbar-collapse").css({maxHeight: $(window).height() - $(".navbar-header").height() + "px"});
     });
@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 });
 //smooth scroll
-$(document).ready(function () {
+$(document).ready(() => {
     $(function() {
   $('.scroll-to a[href*="#"]:not([href="#"])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -33,7 +33,7 @@ $(document).ready(function () {
 });
 });
 //Auto Close Responsive Navbar on Click
-$(document).ready(function () {
+$(document).ready(() => {
 
     function close_toggle() {
         if ($(window).width() <= 768) {
@@ -63,7 +63,7 @@ jQuery(document).ready(function ($) {
 /* -------------------
  Parallax Sections
  ---------------------*/
-$(document).ready(function () {
+$(document).ready(() => {
     if (!Modernizr.touch) {
         $('.numbers').parallax("50%", 0.5);
         $('.process').parallax("50%", 0.5);
@@ -83,7 +83,7 @@ var wow = new WOW(
 wow.init();
 
 //flex slider
-$(document).ready(function () {
+$(document).ready(() => {
     $('.main-flex-slider,.testi-slide').flexslider({
         slideshowSpeed: 5000,
         directionNav: false,
@@ -94,7 +94,7 @@ $(document).ready(function () {
 
 //News owl carousel
 
-$(document).ready(function () {
+$(document).ready(() => {
 
     $("#owl-news").owlCarousel({
         loop:true,
@@ -118,7 +118,7 @@ $(document).ready(function () {
 
 
 //back to top
-$(document).ready(function () {
+$(document).ready(() => {
     $(window).scroll(function (event) {
         var scroll = $(window).scrollTop();
         if (scroll >= 250) {

@@ -9,7 +9,7 @@ let actualiza_info_campo = (valor, id_persona, name) => {
 }
 let response_actualiza_info_campo = data => {
 
-    show_response_ok_enid(".place_campo_editado", "Información actualizada!");
+    seccess_enid(".place_campo_editado", "Información actualizada!");
     carga_info_persona();
 
 }

@@ -74,7 +74,7 @@ let registra_valoracion = (e) => {
 	e.preventDefault();
 }
 let before_registro_valoracion = () => {
-	show_load_enid(".place_registro_valoracion" ,  "Validando datos " , 1 );
+	sload(".place_registro_valoracion" ,  "Validando datos " , 1 );
 	bloquea_form(".form_valoracion");
 }
 let response_registro_valoracion = (data) => {
@@ -97,7 +97,7 @@ let response_registro_valoracion = (data) => {
 		$(".registro_cuenta").css("text-decoration-line", "underline");
 
 	}
-	recorrepage(".place_registro_valoracion");
+	recorre(".place_registro_valoracion");
 }
 let evalua_propietario = () => {
 

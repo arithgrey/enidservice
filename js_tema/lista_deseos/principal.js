@@ -14,25 +14,25 @@ let id_servicio = 0;
 let id_proyecto_persona_forma_pago = 0;
 let id_persona = 0;
 
-$(document).ready(function () {
+$(document).ready(() => {
 
     set_option("action", $(".action").val());
     set_option("estado_compra", 6);
     set_option("interno", 1);
-    valida_accion_inicial();
+    retorno();
 
 
     $(".btn_mis_ventas").click(function () {
         set_option("estado_compra", 1);
         set_option("modalidad_ventas", 1);
-        carga_compras_usuario();
+        compras_usuario();
     });
 
     $(".btn_cobranza").click(function () {
 
         set_option("estado_compra", 6);
         set_option("modalidad_ventas", 0);
-        carga_compras_usuario();
+        compras_usuario();
     });
     $(".btn_buzon").click(function () {
 
@@ -66,21 +66,21 @@ $(document).ready(function () {
 
 });
 
-let valida_accion_inicial = () => {
+let retorno = () => {
 
     let action = get_option("action");
     switch (action) {
         case "ventas":
             set_option("modalidad_ventas", 1);
-            carga_compras_usuario();
+            compras_usuario();
             break;
         case "compras":
             set_option("modalidad_ventas", 0);
-            carga_compras_usuario();
+            compras_usuario();
             break;
         default:
             set_option("modalidad_ventas", 0);
-            carga_compras_usuario();
+            compras_usuario();
             break;
     }
 }

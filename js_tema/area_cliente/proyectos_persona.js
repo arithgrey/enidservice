@@ -23,16 +23,16 @@ let get_lugar_por_stus_compra = () => {
     }
     return nuevo_place;
 }
-let carga_compras_usuario = () => {
+let compras_usuario = () => {
 
-    recorrepage();
+    recorre();
     let modalidad = get_option("modalidad_ventas");
     let url = "../q/index.php/api/recibo/proyecto_persona_info/format/json/";
     let data_send = {"status": get_option("estado_compra"), "modalidad": modalidad};
-    request_enid("GET", data_send, url, response_carga_compras_usuario);
+    request_enid("GET", data_send, url, r_compras_usuario);
 
 }
-let response_carga_compras_usuario = function (data) {
+let r_compras_usuario = function (data) {
 
     let place = get_lugar_por_stus_compra();
     render_enid(place, data);
@@ -40,41 +40,40 @@ let response_carga_compras_usuario = function (data) {
 
         let id_proyecto = get_parameter_enid($(this), "id");
         set_option("id_proyecto", id_proyecto);
-        carga_tikets_usuario_servicio();
+        tikets_usuario_servicio();
     });
     $(".form_q_servicios").submit();
-    $(".resumen_pagos_pendientes").click(cargar_info_resumen_pago_pendiente);
-    $(".btn_direccion_envio").click(carga_informacion_envio);
-    $(".ver_mas_compras_o_ventas").click(carga_compras_o_ventas_concluidas);
-    //carga_num_preguntas();
+    $(".resumen_pagos_pendientes").click(inf_ticket);
+    $(".btn_direccion_envio").click(inf_envio);
+    $(".ver_mas_compras_o_ventas").click(compras_ventas_concluidas);
 }
-let carga_informacion_envio = function (e) {
+let inf_envio = function (e) {
 
     let id_recibo = get_parameter_enid($(this), "id");
     set_option("recibo", id_recibo);
-    carga_informacion_envio_complete();
+    inf_envio_complete();
 }
-let carga_compras_o_ventas_concluidas = () => {
+let compras_ventas_concluidas = () => {
 
     let modalidad = get_option("modalidad_ventas");
     let page = get_option("page");
     let url = "../q/index.php/api/recibo/compras_efectivas/format/json/";
     let data_send = {"modalidad": modalidad, "page": page};
-    request_enid("GET", data_send, url, reponse_carga_compras_o_ventas_concluidas);
+    request_enid("GET", data_send, url, r_compras_ventas_concluidas);
 }
-let reponse_carga_compras_o_ventas_concluidas = (data) => {
+let r_compras_ventas_concluidas = (data) => {
 
 
     let place = get_lugar_por_stus_compra();
     render_enid(place, data);
-    $(".resumen_pagos_pendientes").click(cargar_info_resumen_pago_pendiente);
+    $(".resumen_pagos_pendientes").click(inf_ticket);
     $(".pagination > li > a, .pagination > li > span").css("color", "white");
     $(".pagination > li > a, .pagination > li > span").click(function (e) {
         set_option("page", $(this).text());
-        carga_compras_o_ventas_concluidas();
+        compras_ventas_concluidas();
         e.preventDefault();
     });
 
-    recorrepage(place);
+    recorre(place);
 
 }

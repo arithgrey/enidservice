@@ -1,10 +1,10 @@
 "use strict";
-$(document).ready(function () {
+$(document).ready(() => {
 
     $(".base_compras").hide();
     $(".nav-sidebar").hide();
     $(".base_paginas_extra").hide();
-    recorrepage(".contenedor_compra");
+    recorre(".contenedor_compra");
     $(".form-miembro-enid-service").submit(registro);
     $(".form-cotizacion-enid-service").submit(solicitud_cotizacion);
     $(".form_cotizacion_enid_service").submit(registro_cotizacion);
@@ -65,12 +65,12 @@ let registro = (e) => {
             $(".place_password_afiliado").empty();
             let flag = valida_num_form(".telefono", ".place_telefono");
             if (flag == 1) {
-                let flag2 = valida_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
+                let flag2 = val_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
                 if (flag2 == 1) {
 
 
                     $(".resumen_productos_solicitados").hide();
-                    recorrepage(".contenedor_formulario_compra");
+                    recorre(".contenedor_formulario_compra");
                     bloquea_form(".form-miembro-enid-service");
                     let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
                     let pw = $.trim($(".password").val());
@@ -150,10 +150,10 @@ let solicitud_cotizacion = e => {
             $(".place_password_afiliado").empty();
             let flag = valida_num_form(".telefono", ".place_telefono");
             if (flag == 1) {
-                let flag2 = valida_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
+                let flag2 = val_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
                 if (flag2 == 1) {
 
-                    recorrepage(".contenedor_formulario_compra");
+                    recorre(".contenedor_formulario_compra");
                     bloquea_form(".form-cotizacion-enid-service");
                     let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
                     let pw = $.trim($(".password").val());
@@ -207,7 +207,7 @@ let registro_cotizacion = (e) => {
 let before_registro_afiliado = () => {
 
     bloquea_form(".form-miembro-enid-service");
-    show_load_enid(".place_registro_afiliado", "Validando datos ", 1);
+    sload(".place_registro_afiliado", "Validando datos ", 1);
 }
 
 let respuesta_registro = (data) => {
@@ -220,7 +220,7 @@ let respuesta_registro = (data) => {
 
             flex(".usuario_existente");
             $(".place_registro_afiliado").empty();
-            recorrepage(".usuario_existente");
+            recorre(".usuario_existente");
             $(".informacion_extra").show();
 
         } else {
@@ -263,7 +263,7 @@ let procesar_pedido_usuario_activo = () => {
 let before_pedido_activo = () => {
 
     $('.btn_procesar_pedido_cliente').prop('disabled', true);
-    show_load_enid(".place_proceso_compra", "Validando datos ", 1);
+    sload(".place_proceso_compra", "Validando datos ", 1);
 
 }
 

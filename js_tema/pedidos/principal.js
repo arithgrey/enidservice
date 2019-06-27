@@ -1,8 +1,8 @@
 "use strict";
-$(document).ready(function () {
+$(document).ready(() => {
 
 
-    display_elements([".selector_estados_ventas", ".form_cantidad", ".form_cantidad_post_venta"], 0);
+    despliega([".selector_estados_ventas", ".form_cantidad", ".form_cantidad_post_venta"], 0);
 
     $(".form_busqueda_pedidos").submit(busqueda_pedidos);
     $(".form_fecha_entrega").submit(editar_horario_entrega);
@@ -23,7 +23,7 @@ $(document).ready(function () {
     });
     $(".form_edicion_tipo_entrega").change(cambio_tipo_entrega);
     $(".form_notas").submit(registrar_nota);
-    valida_accion_inicial();
+    retorno();
 
 });
 let editar_horario_entrega = function (e) {
@@ -86,7 +86,7 @@ let busqueda_pedidos = function (e) {
 let response_pedidos = function (data) {
 
     render_enid(".place_pedidos", data);
-    $('th').click(ordena_table_general);
+    $('th').click(ordena_tabla);
     $(".desglose_orden").click(function () {
         let recibo = get_parameter_enid($(this), "id");
         $(".numero_recibo").val(recibo);
@@ -417,7 +417,7 @@ let verifica_pago_previo =  id_status =>{
 }
 let oculta_opciones_estados =  () => {
 
-    display_elements([".selector_estados_ventas", 0]);
+    despliega([".selector_estados_ventas", 0]);
 
 }
 let procesa_cambio_estado =  () => {
@@ -472,7 +472,7 @@ let confirma_cambio_horario =  (id_recibo, status, saldo_cubierto_envio, monto_a
 let agregar_nota =  () => {
 
     showonehideone(".form_notas", ".agregar_comentario");
-    recorrepage(".form_notas");
+    recorre(".form_notas");
 }
 let registrar_nota =  e  => {
 
@@ -538,7 +538,7 @@ let elimina_costo_operacion =  id => {
     });
 
 }
-let valida_accion_inicial =  () => {
+let retorno =  () => {
     let sender = get_parameter(".consulta");
     if (sender > 0) {
         let type = get_parameter(".type");

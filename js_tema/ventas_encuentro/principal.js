@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(() => {
 
     $(".form_ventas_encuentro").submit(busqueda);
 });

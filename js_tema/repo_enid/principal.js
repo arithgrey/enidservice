@@ -1,6 +1,6 @@
 "use strict";
 let incidencia = 0;
-$(document).ready(function () {
+$(document).ready(() => {
     set_option("page", 0);
     $("#nuevos_miembros").click(carga_nuevos_miembros);
     $(".mail_marketing").click(carga_metricas_mail_marketing);
@@ -12,8 +12,8 @@ $(document).ready(function () {
 
     $(".form_busqueda_global_enid").submit(indicadores);
     $("#form_metas").submit(registra_metas);
-    $(".form_busqueda_desarrollo").submit(carga_metricas_desarrollo);
-    $(".form_busqueda_desarrollo_solicitudes").submit(carga_solicitudes_cliente);
+    $(".form_busqueda_desarrollo").submit(metricas_desarrollo);
+    $(".form_busqueda_desarrollo_solicitudes").submit(solicitudes_cliente);
     $(".comparativa").click(carga_comparativas);
     $(".form_busqueda_afiliacion").submit(carga_repo_afiliacion);
     $(".form_busqueda_afiliacion_productividad").submit(carga_repo_afiliacion_productividad);
@@ -47,7 +47,7 @@ let carga_uso_sistema = function(e) {
 let response_carga_uso_sistema = function(data) {
 
     render_enid(".place_usabilidad_general", data);
-    $('th').click(ordena_table_general);
+    $('th').click(ordena_tabla);
 
 }
 let response_comparativa_dia = function(data) {
@@ -126,18 +126,18 @@ let registra_metas = function(e) {
 }
 let response_registro_metas = function(data) {
 
-    show_response_ok_enid(".place_registro_metas", "Meta registrada!");
+    seccess_enid(".place_registro_metas", "Meta registrada!");
     $("#fijar_metas_equipo").modal("hide");
 
 }
-let carga_metricas_desarrollo = function(e) {
+let metricas_desarrollo = function(e) {
 
     let url = "../q/index.php/api/desarrollo/global/format/json/";
     let data_send = $(".form_busqueda_desarrollo").serialize();
 
 
     if (get_parameter(".form_busqueda_desarrollo #datetimepicker4").length > 5 && get_parameter(".form_busqueda_desarrollo #datetimepicker5").length > 5) {
-        request_enid("GET", data_send, url, response_carga_metricas_desarrollo, ".place_metricas_desarrollo");
+        request_enid("GET", data_send, url, response_metricas_desarrollo, ".place_metricas_desarrollo");
     } else {
         focus_input(".form_busqueda_desarrollo #datetimepicker5");
         focus_input(".form_busqueda_desarrollo #datetimepicker5");
@@ -146,10 +146,10 @@ let carga_metricas_desarrollo = function(e) {
 
     e.preventDefault();
 }
-let response_carga_metricas_desarrollo = function(data) {
+let response_metricas_desarrollo = function(data) {
 
     render_enid(".place_metricas_desarrollo", data);
-    $('th').click(ordena_table_general);
+    $('th').click(ordena_tabla);
 }
 let carga_comparativas = function() {
 
@@ -160,19 +160,19 @@ let carga_comparativas = function() {
 }
 let response_carga_comparativa = function(data) {
     render_enid(".place_metricas_comparativa", data);
-    $('th').click(ordena_table_general);
+    $('th').click(ordena_tabla);
 }
-let  carga_solicitudes_cliente = function(e) {
+let  solicitudes_cliente = function(e) {
 
     let url = "../q/index.php/api/desarrollo/global_calidad/format/json/";
     let data_send = $(".form_busqueda_desarrollo_solicitudes").serialize();
-    request_enid("GET", data_send, url, response_carga_solicitudes_cliente, ".place_metricas_servicio", 0, ".place_metricas_servicio");
+    request_enid("GET", data_send, url, response_solicitudes_cliente, ".place_metricas_servicio", 0, ".place_metricas_servicio");
     e.preventDefault();
 }
-let response_carga_solicitudes_cliente = function(data) {
+let response_solicitudes_cliente = function(data) {
 
     render_enid(".place_metricas_servicio", data);
-    $('th').click(ordena_table_general);
+    $('th').click(ordena_tabla);
 }
 let carga_repo_afiliacion = function(e) {
 
@@ -325,7 +325,7 @@ let carga_repo_tipos_entregas = function (e) {
 
     if (get_parameter(".form_tipos_entregas #datetimepicker4").length > 5 && get_parameter(".form_tipos_entregas #datetimepicker5").length > 5) {
         request_enid("GET", data_send, url, 1, ".place_tipos_entregas", 0, ".place_tipos_entregas");
-        $('th').click(ordena_table_general);
+        $('th').click(ordena_tabla);
     } else {
         focus_input(".form_tipos_entregas #datetimepicker4");
         focus_input(".form_tipos_entregas #datetimepicker5");

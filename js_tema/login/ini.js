@@ -14,8 +14,8 @@ $(document).on("ready", function () {
     $(".nombre_persona").keyup(function () {
         transforma_mayusculas(this);
     });
-    display_elements([".extra_menu_simple"], 1);
-    display_elements([".base_compras", ".base_paginas_extra", ".info_metodos_pago"], 0);
+    despliega([".extra_menu_simple"], 1);
+    despliega([".base_compras", ".base_paginas_extra", ".info_metodos_pago"], 0);
     $("#mail").keyup(function () {
         sin_espacios("#mail");
     });
@@ -41,7 +41,7 @@ let inicio_session = () => {
 }
 let before_inicio_session = () => {
     desabilita_botones();
-    show_load_enid(".place_acceso_sistema", "Validando datos ", 1);
+    sload(".place_acceso_sistema", "Validando datos ", 1);
 }
 let response_inicio_session = data => {
 
@@ -88,7 +88,7 @@ let response_recupera_password = data => {
         let newContent = document.createTextNode("El correo de recuperación se ha enviado con éxito.!");
         newDiv.appendChild(newContent);
         render_enid(".place_recuperacion_pw", newDiv);
-        show_response_ok_enid(".place_status_inicio", newDiv);
+        seccess_enid(".place_status_inicio", newDiv);
     }
 
 }
@@ -132,8 +132,8 @@ let desabilita_botones = () => {
 }
 let mostrar_seccion_nuevo_usuario = () => {
 
-    display_elements([".contenedor_recuperacion_password", ".wrapper_login"], 0);
-    display_elements([".seccion_registro_nuevo_usuario_enid_service"], 1);
+    despliega([".contenedor_recuperacion_password", ".wrapper_login"], 0);
+    despliega([".seccion_registro_nuevo_usuario_enid_service"], 1);
 
 }
 let agrega_usuario = (e) => {
@@ -144,7 +144,7 @@ let agrega_usuario = (e) => {
     let nombre = get_parameter(".form-miembro-enid-service .nombre");
 
     if (valida_formato_email(email) == valida_formato_pass(password)) {
-        if (valida_text_form(".nombre", ".place_registro_miembro", 5, "Nombre") == 1) {
+        if (val_text_form(".nombre", ".place_registro_miembro", 5, "Nombre") == 1) {
 
             let tmp_password = "" + CryptoJS.SHA1(password);
             set_option("tmp_password", tmp_password);
@@ -175,13 +175,13 @@ let response_usuario_registro = data => {
 }
 let muestra_seccion_acceso = () => {
 
-    display_elements([".wrapper_login"], 1);
-    display_elements([".contenedor_recuperacion_password", ".seccion_registro_nuevo_usuario_enid_service"], 0);
+    despliega([".wrapper_login"], 1);
+    despliega([".contenedor_recuperacion_password", ".seccion_registro_nuevo_usuario_enid_service"], 0);
 }
 let muestra_contenedor_recuperacion = () => {
 
-    display_elements([".wrapper_login", ".seccion_registro_nuevo_usuario_enid_service"], 0);
-    display_elements([".contenedor_recuperacion_password"], 1);
+    despliega([".wrapper_login", ".seccion_registro_nuevo_usuario_enid_service"], 0);
+    despliega([".contenedor_recuperacion_password"], 1);
 }
 let valida_seccion_inicial = () => {
     switch (get_parameter(".action")) {
@@ -201,5 +201,5 @@ let facilita_acceso = () => {
 
     alert();
     let secciones = [".olvide_pass", ".registrar_cuenta", ".btn_soy_nuevo", ".iniciar_sesion_lateral", ".call_to_action_anuncio", ".contenedor-lateral-menu"];
-    display_elements(secciones, 0);
+    despliega(secciones, 0);
 };

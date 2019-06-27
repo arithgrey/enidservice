@@ -129,16 +129,13 @@ class Home extends CI_Controller
         $this->options[$key] = $value;
     }
 
-    private function get_option($key)
-    {
-        return $this->options[$key];
-    }
-
     private function get_vista_servicio($servicio)
     {
 
-        $servicio["in_session"] = 0;
-        $servicio["id_usuario_actual"] = 0;
+        $servicio +=  [
+            "in_session" => 0,
+            "id_usuario_actual" => 0,
+        ];
         return $this->principal->api("servicio/crea_vista_producto/format/json/", $servicio);
     }
 
@@ -226,10 +223,8 @@ class Home extends CI_Controller
 
     private function get_clasificaciones($clasificaciones)
     {
-
         $response =  [];
         if (es_data($clasificaciones)){
-
             $q["clasificaciones"] =  implode("," , $clasificaciones);
             $response =  $this->principal->api("clasificacion/in/format/json/", $q);
 

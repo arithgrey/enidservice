@@ -43,7 +43,7 @@ function muestra_error_codigo(flag_error){
 		$(".codigo_postal").css("border" , "1px solid rgb(13, 62, 86)");			
 		var mensaje_user =  "Codigo postal invalido, verifique"; 		
 		render_enid( ".place_codigo_postal" ,  "<span class='alerta_enid'>" + mensaje_user + "</span>");
-		recorrepage("#codigo_postal");
+		recorre("#codigo_postal");
 	}
 }
 
@@ -66,7 +66,7 @@ function registro_direccion(){
 		var url 			=  	"../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
 		request_enid( "POST",  data_send , url , response_registro_direccion);
 	}else{
-		recorrepage("#asentamiento");										
+		recorre("#asentamiento");										
 		render_enid( ".place_asentamiento" ,  "<span class='alerta_enid'>Seleccione</span>");
 	}
 }
@@ -83,10 +83,10 @@ var  response_registro_direccion = function(data){
 	}else{
 
 		format_error( ".notificacion_direccion", "VERIFICA LOS DATOS DE TU DIRECCIÓN");
-		recorrepage(".notificacion_direccion");	
+		recorre(".notificacion_direccion");	
 	}	
 };
-function carga_informacion_envio_complete(){
+function inf_envio_complete(){
 	
 	var url 		=  	"../q/index.php/api/usuario_direccion/direccion_envio_pedido/format/json/";		
 	var data_send 	=  	{id_recibo : get_option("recibo")};				
@@ -95,13 +95,13 @@ function carga_informacion_envio_complete(){
 		place_info =".place_servicios_contratados";
 	}	
 	request_enid( "GET",  data_send , url , function(data){
-		response_carga_informacion_envio_complete(data , place_info)	
+		response_inf_envio_complete(data , place_info)	
 	});	
 }
-function response_carga_informacion_envio_complete(data , place_info){
+function response_inf_envio_complete(data , place_info){
 
 		render_enid(place_info , data);				
-		$(".resumen_pagos_pendientes").click(cargar_info_resumen_pago_pendiente);		
+		$(".resumen_pagos_pendientes").click(inf_ticket);		
 		$(".editar_envio_btn").click(function(){
 			showonehideone(".contenedor_form_envio" ,  ".contenedor_form_envio_text" );
 		});
@@ -123,7 +123,7 @@ function informacion_envio_complete(){
 	var data_send 	=  {id_recibo : get_option("id_proyecto_persona_forma_pago")};				
 	request_enid( "GET",  data_send , url , function(){
 		render_enid(".place_direccion_envio" , data);		
-		recorrepage(".contenedo_compra_info");
+		recorre(".contenedo_compra_info");
 	}  , ".place_direccion_envio");
 }
 function oculta_delegacion_estado_pais(flag){

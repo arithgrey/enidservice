@@ -18,12 +18,14 @@ class Clasificacion extends REST_Controller
         $response = [];
 
         if (if_ext($param, 'padre,modalidad,nivel')) {
+
             $in =
                 [
                     "padre" => $param["padre"],
                     "flag_servicio" => $param["modalidad"],
                     "nivel" => $param["nivel"]
                 ];
+
             $response = $this->clasificacion_model->get([], $in, 100);
         }
         $this->response($response);
@@ -211,8 +213,10 @@ class Clasificacion extends REST_Controller
         if ($param["v"] > 0) {
 
             $data["talla"] = $response;
-            if (count($response) > 0) {
+            if (es_data($response)) {
+
                 $data = $this->get_data_clasificaciones($response, $data);
+
             }
 
             return $this->load->view("tallas/principal", $data);
@@ -229,8 +233,8 @@ class Clasificacion extends REST_Controller
 
         if (es_data($response)) {
 
-            $array_clasificiones = get_array_json($response[0]["clasificacion"]);
-            $clasificaciones_existentes = $this->get_clasificaciones_por_id($array_clasificiones);
+            $clasificaciones_existentes = $this->get_clasificaciones_por_id(get_array_json( primer_elemento($response, "clasificacion")));
+
             $tags = create_tag(
                 $clasificaciones_existentes,
                 'a_enid_black_sm input-sm',
@@ -242,9 +246,7 @@ class Clasificacion extends REST_Controller
                 "num_clasificaciones" => count($clasificaciones_existentes),
             ];
 
-
         }
-
         return $data;
 
     }
@@ -257,7 +259,10 @@ class Clasificacion extends REST_Controller
 
             $param = [
 
-                "fields" => ["id_clasificacion", "nombre_clasificacion"],
+                "fields" => [
+                    "id_clasificacion",
+                    "nombre_clasificacion"
+                ],
                 "id" => $array[$a]
 
             ];
@@ -313,7 +318,8 @@ class Clasificacion extends REST_Controller
             } else {
 
                 $response =
-                    select_vertical($response,
+                    select_vertical(
+                        $response,
                         "id_clasificacion",
                         "nombre_clasificacion",
                         [
@@ -341,9 +347,12 @@ class Clasificacion extends REST_Controller
         $param = $this->get();
         $response = false;
         if (if_ext($param, "id_servicio")) {
+
+
             $tallas_servicio = $this->get_tallas_servicio($param);
-            $tallas_servicio_json = (count($tallas_servicio) > 0 && $tallas_servicio[0]["talla"] != null) ? $tallas_servicio[0]["talla"] : "";
+            $tallas_servicio_json =  primer_elemento($tallas_servicio,"talla","");
             $tallas_servicio = $this->quita_cero_clasificacacion($tallas_servicio);
+
             $v = (get_param_def($param, "v") > 0) ? $param["v"] : 0;
             $data_complete = [];
             $tipo_tallas = $this->get_tipo_talla();
