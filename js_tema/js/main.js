@@ -108,6 +108,7 @@ let format_error = (place_msj, msj) => {
 }
 let valida_email_form = (input, place_msj) => {
 
+    debugger;
     despliega([place_msj], 1);
     let valor_registrado = $(input).val();
     let mensaje_user = "";
@@ -314,11 +315,15 @@ let quitar_espacios_numericos = (nuevo_valor, texto = 0) => {
     }
 
 }
-let sin_espacios = input => {
+let sin_espacios = (input , es_correo = 0  )=> {
 
     let valor = get_parameter(input);
     let nuevo = quitar_espacios_numericos(valor, 1);
     set_parameter(input, nuevo);
+    if(es_correo >  0){
+        set_parameter(input, nuevo.toLocaleLowerCase());
+        valida_email_form(input, "");
+    }
 
 }
 let quita_espacios_input = () => {

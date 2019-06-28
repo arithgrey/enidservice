@@ -48,6 +48,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_resumen_cliente($next, $nombre, $telefono)
     {
 
+
         $r = [];
         if ($next > 0):
             $x[] = strong("CLIENTE:");

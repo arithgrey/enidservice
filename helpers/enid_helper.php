@@ -1141,10 +1141,10 @@ if (!function_exists('debug')) {
 
             if ($array == 0) {
                 $message .=
-                    'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . $msg;
+                    'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . $msg."\n";
             } else {
                 $message .=
-                    'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . print_r($msg, true);
+                    'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . print_r($msg, true)."\n";
             }
 
             flock($fp, LOCK_EX);
@@ -1182,11 +1182,11 @@ if (!function_exists('debug')) {
 
             $keys = explode(",", $k);
             $z = 0;
-            if (is_array($keys) && is_array($param)){
+            if (is_array($keys) && is_array($param)) {
                 $z = 1;
                 for ($a = 0; $a < count($keys); $a++) {
 
-                    if ($keys[$a] != null ){
+                    if ($keys[$a] != null) {
 
 
                         if (!array_key_exists(trim($keys[$a]), $param) || strlen(trim($param[$keys[$a]])) < $num) {
@@ -1196,9 +1196,9 @@ if (!function_exists('debug')) {
                         }
 
 
-                    }else{
+                    } else {
 
-                        $rr =0;
+                        $rr = 0;
                         debug("este parámetro está llegando nulo" . $keys[$a]);
                         break;
                     }
@@ -1206,12 +1206,12 @@ if (!function_exists('debug')) {
 
                 }
 
-            }else{
+            } else {
 
-                if (!is_array($keys)){
+                if (!is_array($keys)) {
                     print_r("No es array ->  ", $keys);
                 }
-                if (!is_array($param)){
+                if (!is_array($param)) {
                     print_r("No es array ->  ", $param);
                 }
 
@@ -1489,14 +1489,28 @@ if (!function_exists('append_data')) {
     function append_data($array, $col = 0, $num_col = 0)
     {
 
+
         if (is_array($array)) {
 
-            $callback = function ($a, $b) {
+            if ( es_local() > 0) {
+                $f = 0;
+                foreach ($array  as $clave  => $row){
 
-                if (!is_null($b)) {
-                    return " " . $a . $b;
+                    if( $row ==  null && $row != ""  && $clave != 0 ){
+                        echo " la clave  ". $clave . " va  null \n";
+                        $f  ++;
+                    }
+                }
+                if( $f > 0 ){
+                    print_r($array);
                 }
 
+            }
+
+            $callback = function ($a, $b) {
+                if (!is_null($b) && $b != "") {
+                    return " " . $a . $b;
+                }
             };
 
 
@@ -2021,11 +2035,22 @@ function search_bi_array($array, $columna, $busqueda, $get = false, $si_false = 
 
     return $response;
 }
-function key_exists_bi($data,$k,$sk,$def=""){
 
-    return  (is_array($data) && array_key_exists($k, $data) && is_array($data[$k]) && array_key_exists($sk, $data[$k]) )? $data[$k][$sk] : $def;
-}
-function primer_elemento($data,$index,$def=false){
+function key_exists_bi($data, $k, $sk, $def = "")
+{
 
-    return  (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0]) )? $data[0][$index] : $def;
+    return (is_array($data) && array_key_exists($k, $data) && is_array($data[$k]) && array_key_exists($sk, $data[$k])) ? $data[$k][$sk] : $def;
 }
+
+function primer_elemento($data, $index, $def = false)
+{
+
+    return (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0])) ? $data[0][$index] : $def;
+}
+
+function es_null($data, $index, $def = "")
+{
+
+    return (is_array($data) && array_key_exists($index, $data) && $data[$index] != null) ? $data[$index] : $def;
+}
+

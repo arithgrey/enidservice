@@ -127,10 +127,8 @@ class Recibo_model extends CI_Model
         $ext_contra_entrega = ($tipo_entrega == 0) ? "" : " AND  p.tipo_entrega = '" . $tipo_entrega . "'";
         $extra_extatus_venta = ($status_venta == 0) ? "" : "  AND p.status = '" . $status_venta . "' ";
         $extra_extatus_venta = ($status_venta == 14) ? "AND p.saldo_cubierto >  0 " : $extra_extatus_venta;
-
         $ext_fecha = $this->get_fecha($param);
         $ext_servicio = $this->get_servicio($param);
-
         $query_get .= $ext_usuario . $ext_contra_entrega . $extra_extatus_venta . $ext_fecha . $ext_servicio . " ORDER BY p.fecha_registro DESC";
         return $this->db->query($query_get)->result_array();
 

@@ -27,7 +27,7 @@ $(document).ready(() => {
     $(".link_acceso").click(set_link);
     $(".telefono").keyup(quita_espacios_en_telefono);
     $(".correo").keyup( () => {
-        sin_espacios(".correo");
+        sin_espacios(".correo" , 1);
     });
     $(".linea_metro").click(muestra_estaciones);
     set_option("vista", 1);

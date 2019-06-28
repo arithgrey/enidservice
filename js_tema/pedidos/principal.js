@@ -506,11 +506,13 @@ let modifica_status_recordatorio = (id_recordatorio, status) =>{
         request_enid("PUT", data_send, url);
     }
 }
-let registro_usuario =  (e) => {
+let registro_usuario =  function(e) {
 
+    debugger;
     let url = $(".form_set_usuario").attr("action");
     let data_send = $(".form_set_usuario").serialize();
-    request_enid("PUT", data_send, url, response_usuario, ".place_form_set_usuario", bloquea_form(".form_set_usuario"), ".form_set_usuario");
+    bloquea_form(".form_set_usuario");
+    request_enid("PUT", data_send, url, response_usuario);
     e.preventDefault();
 }
 

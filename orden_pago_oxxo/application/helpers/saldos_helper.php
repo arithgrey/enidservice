@@ -103,8 +103,7 @@ if (!function_exists('invierte_date_time')) {
                 guardar(
                     "IMPRIMIR",
                     [
-                        "class" => " imprimir",
-                        "style" => "background:#0a0e39!important;"
+                        "class" => " imprimir top_50"
                     ]
                     ,
                     1
