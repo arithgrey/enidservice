@@ -239,6 +239,7 @@ if (!function_exists('invierte_date_time')) {
         $ops_tipo_orden = ["", "fecha_registro", "fecha_entrega", "fecha_cancelacion", "fecha_pago", "fecha_contra_entrega"];
         $ops_tipo_orden_text = ["", "FECHA REGISTRO", "FECHA ENTREGA", "FECHA CANCELACIÓN", "FECHA DE PAGO", "FECHA CONTRA ENTREGA"];
 
+
         $default = ["class" => "header_table_recibos"];
         $tb = hr() . "<table class='table_enid_service top_20 table ' ><thead>";
         $tb .= "<tr class='header_table'>";
@@ -300,8 +301,37 @@ if (!function_exists('invierte_date_time')) {
         $tb .= "</tbody>";
         $tb .= "</table>";
 
+
+        $tb_fechas =  tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
+
         $inicio = div(heading_enid(count($recibos) . "Elemtos encontrados ", 5));
-        return $inicio . $tb;
+        return $tb_fechas .$inicio . $tb;
+    }
+
+    function tb_fechas($recibos, $ops_tipo_orden, $tipo_orden)
+    {
+
+        $fechas = array_column($recibos, $ops_tipo_orden[$tipo_orden]);
+        $calback = function ($n) {
+            return substr($n, 0, 10);
+        };
+
+        $fechas = array_map($calback, $fechas);
+        $ventas_fecha = array_count_values($fechas);
+        $fechas_keys = array_keys($ventas_fecha);
+        $cb = function ($a, $b) {
+            return " " . $a . get_td($b);
+        };
+
+        $titulos = "<td>" . implode("</td><td>", $fechas_keys) . "</td>";
+        $valores = array_reduce($ventas_fecha, $cb, '');
+
+        $r[] = "<table class='text-center padding_10' border='1'>";
+        $r[] =  "<tr>".$titulos."</tr>";
+        $r[] =  "<tr>".$valores."</tr>";
+        $r[] = "</tr>";
+        $r[] = "</table>";
+        return append_data($r);
     }
 
     function get_text_status($lista, $estado_compra)

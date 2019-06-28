@@ -127,10 +127,8 @@
 
 .contenedor_opciones_pedido {
 
-    width: 240px;
-    padding: 10px !important;
+    padding: 50px!important;
 }
-
 .contenedor_opciones_pedido div a {
     color: black;
     text-decoration: underline;
@@ -174,7 +172,7 @@
 .btn_opciones {
     display: scroll;
     position: fixed;
-    bottom: 320px;
+    bottom: 385px;
     right: 0px;
     margin-right: 80px!important;
 

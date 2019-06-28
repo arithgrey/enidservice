@@ -76,6 +76,8 @@ if (!function_exists('invierte_date_time')) {
     function get_format_resumen_cliente_compra($recibo, $tipos_entregas, $domicilio, $num_compras, $usuario, $id_recibo)
     {
 
+
+
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
         $r[] = div(
             create_select(
@@ -420,9 +422,10 @@ if (!function_exists('invierte_date_time')) {
             $x[] = get_link_recordatorio($id_recibo);
             $x[] = get_link_nota();
             $x[] = get_link_costo($id_recibo, $recibo);
+
             $r[] = div(icon("fa fa-plus-circle fa-3x"), ["class" => " dropdown-toggle", "data-toggle" => "dropdown"]);
-            $r[] = div(append_data($x), ["class" => "dropdown-menu contenedor_opciones_pedido", "aria-labelledby" => "dropdownMenuButton"]);
-            return div(append_data($r), "dropdown pull-right  mr-5 btn_opciones");
+            $r[] = div(append_data($x), ["class" => "dropdown-menu  w_300 contenedor_opciones_pedido top_menos_10", "aria-labelledby" => "dropdownMenuButton"]);
+            return div(append_data($r), "dropdown pull-right  mr-5 btn_opciones  ");
 
 
         }
@@ -1484,21 +1487,20 @@ if (!function_exists('invierte_date_time')) {
         function create_seccion_usuario($usuario)
         {
 
-
             $text = [];
             foreach ($usuario as $row) {
 
-                $nombre = $row["nombre"];
-                $apellido_paterno = $row["apellido_paterno"];
-                $apellido_materno = $row["apellido_materno"];
                 $email = $row["email"];
                 $tel_contacto = $row["tel_contacto"];
                 $tel_contacto_alterno = $row["tel_contacto_alterno"];
-
                 $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
 
+                $nombre_completo = append_data([
+                    es_null($row, "nombre"),
+                    es_null($row, "apellido_paterno"),
+                    es_null($row, "apellido_materno")
+                ]);
 
-                $nombre_completo = append_data([$nombre, $apellido_paterno, $apellido_materno]);
 
                 $text[] = div($nombre_completo);
                 $text[] = div($email);
@@ -1652,8 +1654,7 @@ if (!function_exists('invierte_date_time')) {
         function get_link_recordatorio($id_recibo)
         {
 
-            $url = path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1");
-            return div(anchor_enid("RECORDATORIO", $url ), 1);
+            return div(anchor_enid("RECORDATORIO", path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1")), 1);
 
         }
     }
