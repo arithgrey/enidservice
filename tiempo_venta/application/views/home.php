@@ -20,11 +20,11 @@ $r[] =  div(get_format_fecha_busqueda(),8);
 
 
 $r[] = form_close();
-$form = div(append_data($r),1);
+$form = div(append($r),1);
 ?>
 <?=br(3)?>
 <?= div(
-    get_btw(
+    btw(
         div(heading_enid("ARTÍCULO", 3, ["class"=> "col-lg-12"]),1)
         ,
         $form

@@ -39,7 +39,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = "</table>";
         }
 
-        return append_data($r);
+        return append($r);
 
     }
 

@@ -8,7 +8,6 @@ class codigo_postal extends REST_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->helper("codigo_postal");
         $this->load->model("codigo_postal_model");
         $this->load->library(lib_def());
         $this->id_usuario = $this->principal->get_session("idusuario");
@@ -113,7 +112,7 @@ class codigo_postal extends REST_Controller
             if (count($codigos_postales) > 1) {
 
 
-                $data_complete["colonias"] = create_select_colonia(
+                $data_complete["colonias"] = create_select(
                     $codigos_postales,
                     "asentamiento",
                     "asentamiento",
@@ -136,7 +135,7 @@ class codigo_postal extends REST_Controller
 
             $municipios = unique_multidim_array($codigos_postales, "municipio");
             if (count($municipios) > 1) {
-                $select_delegacion = create_select_colonia(
+                $select_delegacion = create_select(
                     $municipios,
                     "municipio",
                     "municipio",
@@ -161,7 +160,7 @@ class codigo_postal extends REST_Controller
 
             $estados = unique_multidim_array($codigos_postales, "estado");
             if (count($estados) > 1) {
-                $select_estado = create_select_colonia(
+                $select_estado = create_select(
                     $estados,
                     "estado",
                     "estado",
@@ -184,7 +183,7 @@ class codigo_postal extends REST_Controller
 
             if (count($pais) > 1) {
 
-                $select_pais = create_select_colonia(
+                $select_pais = create_select(
                     $pais,
                     "pais",
                     "pais",

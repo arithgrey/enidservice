@@ -26,4 +26,4 @@ $r[] = anchor_enid(
 
 
 ?>
-<?= append_data($r) ?>
+<?= append($r) ?>

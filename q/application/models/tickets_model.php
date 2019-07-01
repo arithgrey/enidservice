@@ -41,9 +41,9 @@ class Tickets_model extends CI_Model
     function create_tmp_tareas_tickets($flag, $_num, $param)
     {
 
-        $result = $this->db->query(get_drop("tmp_tareas_ticket_$_num"));
+        $this->db->query(get_drop("tmp_tareas_ticket_$_num"));
 
-        if ($flag == 0) {
+        if ($flag < 1) {
 
             $query_create = "CREATE TABLE tmp_tareas_ticket_$_num AS 
                         SELECT 
@@ -52,11 +52,11 @@ class Tickets_model extends CI_Model
                         FROM  
                         tarea 
                         WHERE 
-                        status =0 
+                        status = 0 
                         GROUP BY
                         id_ticket";
 
-            $result = $this->db->query($query_create);
+            $this->db->query($query_create);
         }
 
     }
@@ -129,12 +129,12 @@ class Tickets_model extends CI_Model
                         tmp_tareas_ticket_$_num tp
                       ON 
                         t.id_ticket =  tp.id_ticket
+                    WHERE t.status < 4
                         ORDER BY                                                         
                         t.status ";
 
 
-        $result = $this->db->query($query_get);
-        $data = $result->result_array();
+        $data  = $this->db->query($query_get)->result_array();
         $this->create_tmp_tareas_tickets(1, $_num, $param);
         return $data;
 

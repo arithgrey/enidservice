@@ -29,7 +29,7 @@ if (!function_exists('invierte_date_time')) {
                     "style" => "color: white!important"
                 ]);
 
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -107,7 +107,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = heading_enid("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR ", 3);
             $r[] = get_format_pago_efectivo();
             $r[] = get_format_solicitud_amigo();
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -115,7 +115,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_solicitud_amigo()
         {
 
-            return anchor_enid(get_btw(
+            return anchor_enid(btw(
 
                 div("SOLICITA SALDO A UN AMIGO",
 
@@ -147,7 +147,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_pago_efectivo()
         {
 
-            return anchor_enid(get_btw(
+            return anchor_enid(btw(
 
                 div("UN PAGO EN EFECTIVO EN OXXO ",
                     [
@@ -178,13 +178,13 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = '<form method="GET" action="../orden_pago_oxxo">';
-            $r[] = append_data([
+            $r[] = append([
                 input_hidden(["name" => "q2", "value" => $id_usuario]),
                 input_hidden(["name" => "concepto", "value" => "1"]),
                 input_hidden(["name" => "q3", "value" => $id_usuario])
             ]);
 
-            $r[] = get_btw(
+            $r[] = btw(
 
                 input([
                     "type" => "number",
@@ -207,7 +207,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = br();
             $r[] = guardar("Generar órden");
             $r[] = form_close();
-            return append_data($r);
+            return append($r);
 
         }
 

@@ -11,7 +11,7 @@
 
                 ]), 13) ?>
             <?= div(
-                get_btw(
+                btw(
                     div(heading_enid("# ORDEN " . $orden, 3), "numero_orden encabezado_numero_orden row")
                     ,
                     div(
@@ -33,7 +33,7 @@
             <div class="selector_estados_ventas top_20 bottom_20">
 
 
-                <?= get_btw(
+                <?= btw(
 
                     div(strong("STATUS DE LA COMPRA"))
                     ,
@@ -57,13 +57,13 @@
                 <?= place("place_tipificaciones") ?>
 
 
-                <?= get_btw(
+                <?= btw(
 
                     div(strong("SALDO CUBIERTO "))
                     ,
                     div(
 
-                        get_btw(
+                        btw(
 
                             div(input(
 

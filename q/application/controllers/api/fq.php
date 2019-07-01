@@ -123,7 +123,7 @@ class Fq extends REST_Controller
 
 					$r[] = lista_categorias($this->get_categorias_por_tipo(3));
 					$r[] = lista_categorias($this->get_categorias_por_tipo(4));
-					$response = append_data($r);
+					$response = append($r);
 					break;
 
 			}

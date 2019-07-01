@@ -41,7 +41,7 @@ foreach ($miembros as $row) {
 						<?= ul(
 							[
 								anchor_enid(
-									append_data([icon('fa fa-pencil'), "Editar información"]),
+									append([icon('fa fa-pencil'), "Editar información"]),
 									[
 										"class" => 'usuario_enid_service',
 										"data-toggle" => 'tab',

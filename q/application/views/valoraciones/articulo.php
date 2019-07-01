@@ -16,13 +16,13 @@
 <div class="col-lg-8 ">
 
     <?= div("", ["class" => "table_orden_1"]) ?>
-    <?= get_btw(
+    <?= btw(
         div(heading_enid("ORDENAR POR", 4), 4),
         div(get_criterios_busqueda(), 8),
         " mb-5"
 
     ) ?>
-    <?= get_btw(
+    <?= btw(
         crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada),
         div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio),  "btn_escribir_valoracion" ),
         "contenedor_comentarios"

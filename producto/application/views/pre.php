@@ -1,6 +1,6 @@
 <?= div(heading_enid("¿CÓMO PREFIERES TU ENTREGA?", 3, "titulo_preferencia text-center border-bottom padding_10" ), 4, 1,1) ?>
 
-<?= get_btw(
+<?= btw(
 
     get_format_eleccion_mensajeria($id_servicio, $orden_pedido)
     ,

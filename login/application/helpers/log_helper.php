@@ -14,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        $response = div(append_data($r), 4, 1);
+        $response = div(append($r), 4, 1);
 
         return div($response, 1);
 
@@ -45,9 +45,9 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        $r[] = div(append_data($x), "text-center top_50 bottom_100");
+        $r[] = div(append($x), "text-center top_50 bottom_100");
         $r[] = ($action === "registro") ? div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", "mensaje_bienvenida") : "";
-        $response = div(append_data($r));
+        $response = div(append($r));
         return div($response, "wrapper_login", 1);
 
     }
@@ -80,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "btn_nnuevo recupera_password  a_enid_blue top_20"
             ]);
 
-        $r[] = form_close(append_data([place("place_recuperacion_pw"), place("recuperacion_pw")]));
+        $r[] = form_close(append([place("place_recuperacion_pw"), place("recuperacion_pw")]));
         $r[] = div(
             anchor_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
                 [
@@ -90,7 +90,7 @@ if (!function_exists('invierte_date_time')) {
             ),
             "text-center"
         );
-        $response = append_data($r);
+        $response = append($r);
         $response = div($response, "contenedor_recuperacion_password display_none", 1);
         return $response;
 
@@ -112,7 +112,7 @@ if (!function_exists('invierte_date_time')) {
             "text-center"
         );
 
-        $response = append_data($r);
+        $response = append($r);
         $response = div($response, "seccion_registro_nuevo_usuario_enid_service", 1);
         return $response;
 
@@ -157,7 +157,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "top_20"
             ]);
         $r[] = form_close(place("place_registro_miembro"));
-        return append_data($r);
+        return append($r);
 
 
     }
@@ -209,7 +209,7 @@ if (!function_exists('invierte_date_time')) {
                 1);
 
             $r[] = form_close();
-            return append_data($r);
+            return append($r);
 
         }
 

@@ -13,7 +13,7 @@
 <div class='col-lg-9'>
     <div class="tab-content">
 
-        <?= div(append_data([
+        <?= div(append([
             heading_enid("Recurso", 3),
 
             anchor_enid("+ Agregar Recurso",

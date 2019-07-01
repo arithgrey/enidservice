@@ -1,4 +1,4 @@
-<?= get_btw(
+<?= btw(
 
     div(icon("fa  fa-fighter-jet"), 3)
     ,
@@ -6,7 +6,7 @@
     ,
     4
 ) ?>
-<?= get_btw(
+<?= btw(
 
     div(icon("fa fa-clock-o "), ["class" => 3])
     ,
@@ -16,7 +16,7 @@
     4
 
 ) ?>
-<?= get_btw(
+<?= btw(
 
     div(icon("fa fa-tachometer "), ["class" => 3])
     ,

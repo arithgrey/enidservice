@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] =  get_format_fecha_busqueda() ;
             $r[] =  form_close(place("place_usabilidad top_50")) ;
 
-            $form = append_data($r);
+            $form = append($r);
             return div(div($form ,8, 1),13);
 
         }

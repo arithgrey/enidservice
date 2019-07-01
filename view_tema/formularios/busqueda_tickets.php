@@ -10,7 +10,7 @@
                 4
             ) ?>
             <?= div(
-                    append_data([
+                    append([
 
                             create_select(
                                     $departamentos,

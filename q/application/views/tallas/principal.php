@@ -18,7 +18,7 @@ $msj_clasificaciones = ($num_clasificaciones > 0) ? $msj_exists : "";
 
 ?>
 <?= div(
-    append_data([
+    append([
 
     heading_enid(
         $tipo,
@@ -29,7 +29,7 @@ $msj_clasificaciones = ($num_clasificaciones > 0) ? $msj_exists : "";
     ,
     "agregadas col-lg-9"
 ) ?>
-<?= get_btw(
+<?= btw(
     heading_enid("CLASIFICACIONES", 3),
     get_form_clasificacion_talla(),
     " sugerencias col-lg-3"

@@ -42,15 +42,13 @@ class Home extends CI_Controller
     function load_pre()
     {
 
-        $data = $this->principal->val_session();
-        $data = $this->principal->getCSSJs($data, "producto_pre");
+        $data = $this->principal->getCSSJs($this->principal->val_session(), "producto_pre");
         $data["id_servicio"] = $this->input->get("producto");
         $data["proceso_compra"] = 1;
         $param = $this->input->post();
 
 
         $data += [
-
             "plan" => $param["plan"],
             "extension_dominio" => $param["extension_dominio"],
             "ciclo_facturacion" => $param["ciclo_facturacion"],
@@ -58,14 +56,12 @@ class Home extends CI_Controller
             "q2" => $param["q2"],
             "num_ciclos" => $param["num_ciclos"],
             "orden_pedido" => 1,
-            "carro_compras" => (array_key_exists("carro_compras", $param)) ? $param["carro_compras"] : 0,
-            "id_carro_compras" => (array_key_exists("id_carro_compras", $param)) ? $param["id_carro_compras"] : 0,
+            "carro_compras" => get_param_def($data , "carro_compras"),
+            "id_carro_compras" => get_param_def($data , "id_carro_compras"),
+            "url_imagen_servicio" => get_img_serv($this->principal->get_imagenes_productos($param["plan"], 1, 1))
 
         ];
 
-
-        $img = $this->principal->get_imagenes_productos($param["plan"], 1, 1);
-        $data["url_imagen_servicio"] = get_img_serv($img);
         $this->principal->show_data_page($data, 'pre');
 
     }
@@ -78,7 +74,6 @@ class Home extends CI_Controller
         $this->set_option("id_servicio", $id_servicio);
         $data = $this->principal->val_session();
         $data["proceso_compra"] = ($data["in_session"] == 1) ? 1 : get_param_def($param, "proceso");
-
 
         if ($id_servicio < 1) {
 
@@ -108,41 +103,30 @@ class Home extends CI_Controller
         $data["q2"] = get_param_def($param, "q2");
         $servicio = $this->principal->get_base_servicio($id_servicio);
         $data["tallas"] = $this->get_tallas($id_servicio);
-        $id_usuario = 0;
-        $usuario = 0;
+        $usuario =  (es_data($servicio)) ? $this->principal->get_info_usuario(primer_elemento($servicio, "id_usuario")) : redirect(path_enid("go_home"));
+        $fn  =   (!es_data($usuario)) ? redirect(path_enid("go_home")) : "";
 
-
-        if (count($servicio) > 0) {
-
-            $usuario = $this->principal->get_info_usuario($servicio[0]["id_usuario"]);
-
-        } else {
-
-            redirect("../../?q=");
-        }
-
-        if (count($usuario) < 1) {
-
-            redirect("../../?q=");
-        }
 
 
         $data["usuario"] = $usuario;
-        $data["id_publicador"] = $id_usuario;
+        $data["id_publicador"] = key_exists_bi($servicio,0,"id_usuario",0);
+
+
         $this->set_option("servicio", $servicio);
         $data["info_servicio"]["servicio"] = $servicio;
         $data["costo_envio"] = "";
         $data["tiempo_entrega"] = "";
         $data["ciclos"] = "";
-        if ($servicio[0]["flag_servicio"] == 0) {
+
+        if (primer_elemento($servicio,"flag_servicio") == 0) {
+
             $data["costo_envio"] = $this->calcula_costo_envio($this->crea_data_costo_envio());
             $tiempo_promedio_entrega = $servicio[0]["tiempo_promedio_entrega"];
             $data["tiempo_entrega"] = $this->valida_tiempo_entrega($tiempo_promedio_entrega);
 
         }
+
         $this->set_option("flag_precio_definido", 0);
-
-
         $data["imgs"] = $this->principal->get_imagenes_productos($id_servicio, 1, 10);
         $this->set_option("meta_keywords", costruye_meta_keyword($this->get_option("servicio")[0]));
 
@@ -154,7 +138,7 @@ class Home extends CI_Controller
         $data["meta_keywords"] = $this->get_option("meta_keywords");
 
         $data["url_img_post"] = "";
-        if (count($data["imgs"]) > 0) {
+        if (es_data($data["imgs"]) > 0) {
 
             $data["url_img_post"] = get_url_imagen_post($data["imgs"][0]["nombre_imagen"]);
         }
@@ -193,7 +177,7 @@ class Home extends CI_Controller
     {
 
         $servicio = $this->get_option("servicio");
-        $param["flag_envio_gratis"] = (count($servicio) > 0) ? $servicio[0]["flag_envio_gratis"] : 0;
+        $param["flag_envio_gratis"] = (es_data($servicio)) ? primer_elemento($servicio, "flag_envio_gratis") : 0;
         return $param;
     }
 
@@ -231,19 +215,16 @@ class Home extends CI_Controller
     private function costruye_descripcion_producto()
     {
 
-        $servicio = $this->get_option("servicio")[0];
-        $nombre_servicio = $servicio["nombre_servicio"];
-        $descripcion = $servicio["descripcion"];
+        $servicio =  $this->get_option("servicio");
+        if(es_data($servicio)){
 
-        $precio_unidad = "";
-        if ($this->get_option("flag_precio_definido") > 0) {
-
-            $precio_unidad = $this->get_option("precio_unidad");
-            $precio_unidad = $precio_unidad . " MXN ";
+            $servicio  =  $servicio[0];
+            $nombre_servicio = $servicio["nombre_servicio"];
+            $descripcion = $servicio["descripcion"];
+            $precio_unidad = ($this->get_option("flag_precio_definido") > 0) ? $this->get_option("precio_unidad") . " MXN " :  "";
+            $text = strip_tags($nombre_servicio) . " " . strip_tags($precio_unidad) . " " . strip_tags($descripcion);
+            $this->set_option("desc_web", $text);
         }
-
-        $text = strip_tags($nombre_servicio) . " " . strip_tags($precio_unidad) . " " . strip_tags($descripcion);
-        $this->set_option("desc_web", $text);
     }
 
     private function crea_historico_vista_servicio($id_servicio)
@@ -265,9 +246,7 @@ class Home extends CI_Controller
 
         $data = $this->principal->val_session();
         $param = $this->input->get();
-
         $data += [
-
             "meta_keywords" => "",
             "desc_web" => "",
             "url_img_post" => "",

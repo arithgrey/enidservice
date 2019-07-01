@@ -21,11 +21,11 @@ if (!function_exists('invierte_date_time')) {
             $x[] = div("3.- Adicionalmente aceptamos pagos en tiendas de ".strong("autoservicio (OXXO y 7Eleven)")." y transferencia bancaria en línea para los bancos BBVA Bancomer.", 1);
             $x[] = div("El pago realizado en tiendas de autoservicio tendrá una comisión adicional al monto de la compra por transacción fijada por el proveedor y no es imputable a Enid Service.", 1);
             $x[] = div(hr(),1);
-            $r[] = div(append_data($x)," d-flex flex-column justify-content-between mh_350");
+            $r[] = div(append($x)," d-flex flex-column justify-content-between mh_350");
             $r[] = get_img_pago();
             $r[] = get_format_tipos_entrega();
 
-            return div(div(append_data($r), 6, 1),"top_30",1);
+            return div(div(append($r), 6, 1),"top_30",1);
 
         }
     }
@@ -59,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
                 );
             }
 
-            $x[] =  div(append_data($bloque),"row top_30 bottom_30");
+            $x[] =  div(append($bloque),"row top_30 bottom_30");
 
 
             for ($a = 0; $a < count($r); $a ++ ){
@@ -71,9 +71,9 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
             }
-            $x[] =  div(append_data($bloque_entregas),"col-lg-6 col-lg-offset-3 top_30 bottom_30");
+            $x[] =  div(append($bloque_entregas),"col-lg-6 col-lg-offset-3 top_30 bottom_30");
 
-            return div(append_data($x),"top_10");
+            return div(append($x),"top_10");
 
 
         }
@@ -104,7 +104,7 @@ if (!function_exists('invierte_date_time')) {
                 ]);
             }
 
-            return div(div(append_data($response), "text-center justify-content-center   top_20 px-3"),1);
+            return div(div(append($response), "text-center justify-content-center   top_20 px-3"),1);
 
         }
     }

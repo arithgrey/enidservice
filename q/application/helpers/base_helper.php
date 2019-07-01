@@ -2,10 +2,9 @@
 if (!function_exists('invierte_date_time')) {
     function valida_active($num, $num_tab)
     {
-        $response = ($num == $num_tab) ? ' class="active" ' : "";
-        return $response;
-    }
+        return  ($num == $num_tab) ? ' class="active" ' : "";
 
+    }
     function lista_categorias($categorias)
     {
 
@@ -20,7 +19,7 @@ if (!function_exists('invierte_date_time')) {
             $link = anchor_enid($text_lista, $href);
             $r[] = div($link);
         }
-        return append_data($r);
+        return append($r);
     }
 
     function create_meta_tags($string, $id_servicio)
@@ -55,9 +54,6 @@ if (!function_exists('invierte_date_time')) {
         return div(div($link, 1), "top_30");
 
     }
-
-
-
     function valida_text_imagenes($tipo_promocion, $num_images)
     {
 
@@ -84,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 1);
 
-            return append_data($text);
+            return append($text);
         }
     }
 

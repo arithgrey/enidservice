@@ -21,7 +21,7 @@
         <?= form_close() ?>
 
         <?php if ($in_session < 1): ?>
-            <?= get_btw(
+            <?= btw(
                 anchor_enid("INICIAR SESSION",
                     [
                         "class" => "iniciar_sesion_lateral",

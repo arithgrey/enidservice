@@ -26,7 +26,7 @@ $li = [
     <li class="dropdown  menu_notificaciones_progreso_dia">
         <?php $class_notificacion = ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid "; ?>
         <?= anchor_enid(
-            get_btw(icon("fa fa-bell white"), div("", "num_tareas_dia_pendientes_usr"), "display_flex_enid"),
+            btw(icon("fa fa-bell white"), div("", "num_tareas_dia_pendientes_usr"), "display_flex_enid"),
             [
                 "class" => "blue_enid dropdown-toggle",
                 "data-toggle" => "dropdown"

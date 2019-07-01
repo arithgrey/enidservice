@@ -2,11 +2,69 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('render_user')) {
+
+
+        function render_user($data)
+        {
+
+
+            $valoraciones = $data["valoraciones"];
+            $id_usuario = $data["id_usuario"];
+            $alcance = $data["alcance"];
+            $ticket = $data["ticket"];
+            $action = $data["action"];
+
+            $r[] = div(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']);
+            $r[] = div(place("place_ventas_usuario"), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_mis_ventas']);
+            $r[] = div(get_format_valoraciones($valoraciones, $id_usuario, $alcance), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_valoraciones']);
+            $r[] = div(place("place_pagar_ahora"), ["class" => "tab-pane", "id" => "tab_pagos"]);
+            $r[] = div(place("place_resumen_servicio"), ["class" => "tab-pane", "id" => "tab_renovar_servicio"]);
+            $r[] = get_hiddens_tickects($action, $ticket);
+            $r[] = div("",
+                [
+                    "class" => "resumen_pagos_pendientes",
+                    "href" => "#tab_renovar_servicio",
+                    "data-toggle" => "tab"
+                ]);
+
+            $response[] = div(get_menu($action), 2);
+            $response[] = div(div(append($r), "tab-content"), 10);
+            return div(append($response), "contenedor_principal_enid");
+
+
+            /*
+            <div class="contenedor_principal_enid">
+    <?= div(get_menu($action), 2) ?>
+    <?php
+
+    $r[] = div(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']);
+    $r[] = div(place("place_ventas_usuario"), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_mis_ventas']);
+    $r[] = div(get_format_valoraciones($valoraciones, $id_usuario, $alcance), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_valoraciones']);
+    $r[] = div(place("place_pagar_ahora"), ["class" => "tab-pane", "id" => "tab_pagos"]);
+    $r[] = div(place("place_resumen_servicio"), ["class" => "tab-pane", "id" => "tab_renovar_servicio"]);
+
+    ?>
+    <?= div(div(append($r), "tab-content"), 10) ?>
+</div>
+<?= get_hiddens_tickects($action, $ticket) ?>
+<?= div("",
+    [
+        "class" => "resumen_pagos_pendientes",
+        "href" => "#tab_renovar_servicio",
+        "data-toggle" => "tab"
+    ]) ?>
+            */
+
+
+        }
+
+    }
     if (!function_exists('get_hiddens_tickects')) {
 
         function get_hiddens_tickects($action, $ticket)
         {
-            return append_data([
+            return append([
                 input_hidden(["class" => "action", "value" => $action]),
                 input_hidden(["class" => "ticket", "value" => $ticket])
             ]);
@@ -18,7 +76,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = heading_enid("BUZÓN", 3);
-            $r[] = div(append_data(
+            $r[] = div(append(
 
                 anchor_enid("HECHAS" .
                     span("", 'notificacion_preguntas_sin_leer_cliente'),
@@ -42,7 +100,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = place("place_buzon");
 
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -66,7 +124,7 @@ if (!function_exists('invierte_date_time')) {
 
             $x[] = div($alcance, " text-center top_30");
 
-            $response = div(div(append_data($x), 6, 1), "text-center");
+            $response = div(div(append($x), 6, 1), "text-center");
             return $response;
 
         }
@@ -94,7 +152,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_td("Mínimo", ["class" => 'num_alcance']);
             $r[] = "</tr>";
             $r[] = "</table>";
-            $response = append_data($r);
+            $response = append($r);
         }
         return $response;
 
@@ -105,7 +163,7 @@ if (!function_exists('invierte_date_time')) {
 
         $a = ($nombre_seccion == $estatus) ? " active " : "";
         $b = ($nombre_seccion == "compras") ? " active " : "";
-        return  (strlen($estatus) > 0) ? $a :  $b;
+        return (strlen($estatus) > 0) ? $a : $b;
 
     }
 

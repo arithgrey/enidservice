@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div($img, 3);
         }
-        return append_data($r);
+        return append($r);
     }
 
     function create_listado_metrobus($array)
@@ -45,7 +45,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div($linea, 3);
         }
 
-        return append_data($r);
+        return append($r);
     }
 
 

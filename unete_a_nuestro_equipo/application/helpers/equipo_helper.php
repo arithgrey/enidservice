@@ -44,7 +44,7 @@ if (!function_exists('invierte_date_time')) {
                 "2.- Conocimientos básicos en informática. "]);
 
             $r[] = p("En caso de cumplir con los requisitos solicitados, enviar curriculum a empleo@enidservice.com");
-            return append_data($r);
+            return append($r);
         }
     }
     if (!function_exists('get_format_temas_ayuda')) {
@@ -75,7 +75,7 @@ if (!function_exists('invierte_date_time')) {
                 1
             );
 
-            return append_data($r);
+            return append($r);
 
         }
     }

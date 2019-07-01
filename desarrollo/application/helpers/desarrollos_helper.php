@@ -6,8 +6,8 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $x[] = div(form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
-            $r[] = div(append_data($x), "tab-content");
-            return append_data($r);
+            $r[] = div(append($x), "tab-content");
+            return append($r);
 
 
         }
@@ -20,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = form_open("", ["class" => 'form_busqueda_desarrollo_solicitudes']);
             $r[] = get_format_fecha_busqueda();
             $r[] = form_close(place("place_metricas_servicio"));
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -31,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = form_open("", ["class" => 'form_busqueda_desarrollo']);
             $r[] = get_format_fecha_busqueda();
             $r[] = form_close(place("place_metricas_desarrollo"));
-            return append_data($r);
+            return append($r);
 
         }
     }

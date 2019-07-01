@@ -45,7 +45,7 @@ if ($info_usuario != 0) {
 
                             ) ?>
                             <div class="chat-body clearfix">
-                                <?= get_btw(
+                                <?= btw(
                                     strong($nombre . $apellido_paterno),
                                     small(icon("fa fa-clock") . $fecha_registro, "pull-right text-muted" ),
                                     "header"

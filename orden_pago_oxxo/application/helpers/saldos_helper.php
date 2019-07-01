@@ -7,7 +7,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $beneficiario = append_data([
+            $beneficiario = append([
 
                 get_campo($usuario, "nombre"),
                 " ",
@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(get_form_saldos($beneficiario, $folio, $monto, $concepto, $numero_cuenta), 1);
 
 
-            $contendor_oxoo = get_btw(
+            $contendor_oxoo = btw(
 
                 img(
                     [
@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = div($contendor_oxoo, ["style" => "background: #02223e;color: white;"]);
-            $text_beneficiario = strtoupper(append_data([
+            $text_beneficiario = strtoupper(append([
                     $concepto,
                     "Beneficiario",
                     $beneficiario,
@@ -51,7 +51,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div($text_beneficiario, ["style" => "background: #d7d7ff;padding: 5px;"]);
             $r[] = get_monto_pago($monto);
             $r[] = get_instruccion_pago($numero_cuenta);
-            return div(append_data($r), 6, 1);
+            return div(append($r), 6, 1);
 
 
         }
@@ -65,7 +65,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = heading("MONTO A PAGAR");
             $r[] = heading("$" . $info_pago["q"] . "MXN");
             $r[] = div("OXXO Cobrará una comisión adicional al momento de realizar el pago");
-            return append_data($r);
+            return append($r);
         }
 
     }
@@ -118,7 +118,7 @@ if (!function_exists('invierte_date_time')) {
             );
             $r[] = br();
             $r[] = form_close();
-            return append_data($r);
+            return append($r);
 
 
         }
@@ -162,7 +162,7 @@ if (!function_exists('invierte_date_time')) {
                 , 1
             );
 
-            return div(append_data($r));
+            return div(append($r));
 
 
         }
@@ -183,7 +183,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_instrucciones();
             return addNRow(
                 div(
-                    append_data($r), "border padding_20 top_20"
+                    append($r), "border padding_20 top_20"
                 )
             );
 
@@ -196,7 +196,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = heading("MONTO A PAGAR");
             $r[] = heading("$" . $monto . "MXN", 2);
             $r[] = div("OXXO Cobrará una comisión adicional al momento de realizar el pago", 1);
-            return div(append_data($r));
+            return div(append($r));
 
         }
     }

@@ -18,32 +18,31 @@ class Home extends CI_Controller
 
         } else {
 
+            $valocaciones =  $this->resumen_valoraciones($data["id_usuario"]);
+
             $this->principal->acceso();
+            $data +=  [
+                "action" => $param["action"],
+                "valoraciones" => get_param_def($valocaciones,"info_valoraciones",[]),
+                "alcance" => crea_alcance($this->get_alcance($data["id_usuario"])),
+                "ticket" => get_param_def($param , "ticket"),
+            ];
 
-            $data["action"] = $param["action"];
-            $data["valoraciones"] = $this->resumen_valoraciones($data["id_usuario"])["info_valoraciones"];
-            
-            $alcance = $this->get_alcance($data["id_usuario"]);
-            $data["alcance"] = crea_alcance($alcance);
-            $data["ticket"] = get_param_def($param , "ticket");
             $data   =  $this->principal->getCSSJs($data, "area_cliente");
-            $this->principal->show_data_page($data, 'home');
+            $this->principal->show_data_page($data, render_user($data),1);
         }
-
     }
     private function resumen_valoraciones($id_usuario)
     {
 
         $q["id_usuario"] = $id_usuario;
-        $api = "valoracion/usuario/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->principal->api("valoracion/usuario/format/json/", $q);
     }
 
     private function get_alcance($id_usuario)
     {
 
         $q["id_usuario"] = $id_usuario;
-        $api = "servicio/alcance_usuario/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->principal->api("servicio/alcance_usuario/format/json/", $q);
     }
 }

@@ -396,7 +396,7 @@ class recibo extends REST_Controller
                 $deuda
             );
 
-            $r = div(div(append_data($r), 10, 1), "col-lg-8  shadow padding_10");
+            $r = div(div(append($r), 10, 1), "col-lg-8  shadow padding_10");
             $response = div($r . $f, 1);
         endif;
         return $response;
@@ -477,7 +477,7 @@ class recibo extends REST_Controller
 
             $r[] = get_text_notificacion_pago($url_seguimiento_pago);
 
-            $response = div(append_data($r), ["style" => "width: 100%;"]);
+            $response = div(append($r), ["style" => "width: 100%;"]);
         }
         return $response;
 

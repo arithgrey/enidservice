@@ -9,8 +9,8 @@ if (!function_exists('invierte_date_time')) {
         $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu artículos, puedes ver la pregunta que 
             te envió en tu !" . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
 
-        $img = get_img_servicio($id_servicio, 1);
-        $cuerpo = append_data(
+        $img = img_servicio($id_servicio, 1);
+        $cuerpo = append(
             [
                 img_enid([], 1, 1),
                 heading_enid($text, 3),
@@ -31,8 +31,8 @@ if (!function_exists('invierte_date_time')) {
         $text = "Que tal {$nombre} el vendedor a contestado tu pregunta, puedes ver la respuesta que 
             te envió en tu !" . anchor_enid("buzón aquí", "https://enidservice.com/inicio/login/");
 
-        $img = get_img_servicio($id_servicio, 1);
-        $cuerpo = append_data([
+        $img = img_servicio($id_servicio, 1);
+        $cuerpo = append([
 
             img_enid([], 1, 1),
             heading_enid($text, 3),
@@ -107,8 +107,10 @@ if (!function_exists('invierte_date_time')) {
         $fecha_registro = $param["fecha_registro"];
         $id_usuario = $param["id_usuario"];
         $leido_vendedor = $param["leido_vendedor"];
-        $respuestas = $param["respuestas"][0];
-        $num = $respuestas["respuestas"];
+
+        $num  = (es_data($param["respuestas"])) ? $param["respuestas"][0]["respuestas"]:0;
+
+
         $nombre_servicio = $param["nombre_servicio"];
         $id_servicio = $param["id_servicio"];
 
@@ -155,8 +157,8 @@ if (!function_exists('invierte_date_time')) {
 
         $id_pregunta = $param["id_pregunta"];
         $leido_cliente = $param["leido_cliente"];
-        $respuestas = $param["respuestas"][0];
-        $num = $respuestas["respuestas"];
+        $num  = (es_data($param["respuestas"])) ? $param["respuestas"][0]["respuestas"]:0;
+
         $text = "";
         $base_servicio = [
             "pregunta" => $param["pregunta"],

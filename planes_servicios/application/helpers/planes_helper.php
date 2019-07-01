@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
                 heading_enid("¿QUÉ DESEAS ANUNCIAR?", 4, 1)
                 .
                 div(
-                    get_btw(
+                    btw(
 
                         anchor_enid('UN PRODUCTO',
                             [
@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $r[] = get_btw(
+            $r[] = btw(
 
                 heading_enid(
                     text_icon('fa fa-shopping-bag', " ARTÍCULO")
@@ -66,7 +66,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(
 
 
-                append_data([
+                append([
                     heading_enid(
                         "CICLO DE FACTURACIÓN",
                         4,
@@ -92,7 +92,7 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
             $r[] = div(
-                append_data([
+                append([
 
                     heading_enid(
                         text_icon('fa fa-money', " PRECIO"),
@@ -123,9 +123,9 @@ if (!function_exists('invierte_date_time')) {
             );
             $r[] = div(guardar("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]), ["class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50']);
             $r[] = form_close();
-            $re[] = div(append_data($r), "contenedor_agregar_servicio_form top_30");
+            $re[] = div(append($r), "contenedor_agregar_servicio_form top_30");
             $re[] = get_selector_categoria($is_mobile);
-            return append_data($re);
+            return append($re);
 
 
         }
@@ -154,7 +154,7 @@ if (!function_exists('invierte_date_time')) {
                         );
 
 
-                    $response[] = get_btw(
+                    $response[] = btw(
                         $link_articulo,
                         $row["vistas"],
                         "display_flex_enid"
@@ -162,7 +162,7 @@ if (!function_exists('invierte_date_time')) {
 
                 }
             }
-            return append_data($response);
+            return append($response);
 
 
         }
@@ -176,7 +176,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = heading_enid("TUS ARTÍCULOS EN VENTA", 3);
             $r[] = div(get_format_busqueda($list_orden), "contenedor_busqueda_articulos row top_50");
             $r[] = div(place("place_servicios top_50"), 1);
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -194,7 +194,7 @@ if (!function_exists('invierte_date_time')) {
                 "onkeyup" => "onkeyup_colfield_check(event);"
             ]),
                 4);
-            return div(append_data($r), ["class" => "--"]);
+            return div(append($r), ["class" => "--"]);
 
         }
 
@@ -213,7 +213,7 @@ if (!function_exists('invierte_date_time')) {
             }
             $r[] = '</select>';
 
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -240,7 +240,7 @@ if (!function_exists('invierte_date_time')) {
 
 
                     $r[] = anchor_enid(
-                        append_data($r),
+                        append($r),
                         [
                             "href" => path_enid("producto", $row['id_servicio'])
                         ]
@@ -254,7 +254,7 @@ if (!function_exists('invierte_date_time')) {
                     array_pop($r, heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 2));
                 }
 
-                $response = div(append_data($r), "card contenedor_articulos_mobil");
+                $response = div(append($r), "card contenedor_articulos_mobil");
 
             }
             return $response;
@@ -290,7 +290,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
-            return div(append_data($r), ["class" => "contenedor_categorias_servicios"]);
+            return div(append($r), ["class" => "contenedor_categorias_servicios"]);
 
         }
     }
@@ -324,7 +324,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -335,7 +335,7 @@ if (!function_exists('invierte_date_time')) {
             $response = "";
             if ($class > 0) {
 
-                $text = append_data(
+                $text = append(
                     [
                         div(place("primer_nivel_seccion"), ["class" => "info_categoria"]),
                         div(place("segundo_nivel_seccion"), ["class" => "info_categoria"]),

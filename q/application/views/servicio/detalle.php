@@ -159,7 +159,7 @@ $text_envios_mayoreo = "¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?";
         </div>
         <div class="tab-pane <?= $extra_4 ?>" id="tab_info_precios">
 
-            <?= div(div(get_estado_publicacion($status, $id_servicio), "col-lg-4 top_30 bottom_20", 1), 12) ?>
+            <?= div(div(estado_publicacion($status, $id_servicio), "col-lg-4 top_30 bottom_20", 1), 12) ?>
             <?= get_form_rango_entrega($flag_servicio , $id_perfil , $stock) ?>
             <?= div(get_rango_entrega(
                     $id_perfil,

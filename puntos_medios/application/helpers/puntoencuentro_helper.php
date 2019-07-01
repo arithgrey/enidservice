@@ -106,7 +106,7 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "comentarios",
                 "class" => "mt-3"
             ]);
-        $r[] = div(append_data($x), "input_notas  col-lg-12 mt-3");
+        $r[] = div(append($x), "input_notas  col-lg-12 mt-3");
 
 
         $r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form "]);
@@ -116,7 +116,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(guardar("CONTINUAR"), ["class" => "col-lg-12 mt-5"] );
         $r[] = get_formar_usuario_registrado($in_session, $servicio, $num_ciclos);
         $r[] = form_close();
-        return div(append_data($r), 10, 1);
+        return div(append($r), 10, 1);
 
 
     }
@@ -139,11 +139,11 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $r[] = div(append_data($x), "contenedor_ya_tienes_cuenta col-lg-12 top_50");
+            $r[] = div(append($x), "contenedor_ya_tienes_cuenta col-lg-12 top_50");
             $r[] = place("place_notificacion_punto_encuentro_registro");
 
         }
-        return append_data($r);
+        return append($r);
 
     }
 
@@ -151,7 +151,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO", 3, " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10");
-        return append_data($r);
+        return append($r);
 
 
     }
@@ -169,7 +169,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         ), 6, 1);
 
-        $response = div(append_data($r), 'formulario_quien_recibe display_none');
+        $response = div(append($r), 'formulario_quien_recibe display_none');
 
         return $response;
 
@@ -188,7 +188,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = form_open("", ["class" => "form_punto_encuentro_horario top_50"]);
-        $r[] = append_data($extra);
+        $r[] = append($extra);
         $r[] = div(heading_enid("¿En qué horario te gustaría recibir tu pedido?", 2, "bottom_50"), 12);
         $r[] = div(icon("fa fa-calendar-o") . " FECHA ", 4);
 
@@ -212,7 +212,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(guardar("CONTINUAR", ["class" => "top_50"]), 12);
         $r[] = place("place_notificacion_punto_encuentro");
         $r[] = form_close();
-        return append_data($r);
+        return append($r);
 
     }
 

@@ -633,7 +633,7 @@ class Servicio extends REST_Controller
                             margin-left: 10px;padding: 3px;margin-top: 3px;"
                     ]);
 
-                $img_preview = div(append_data([$interior, $img]));
+                $img_preview = div(append([$interior, $img]));
                 $images_complete[$num_imgs] = $img_preview;
 
             }
@@ -655,7 +655,7 @@ class Servicio extends REST_Controller
             'onerror' => "reloload_img( '" . $id_error . "','" . $url_imagen . "', 1);"
         ]);
 
-        $config_imagen = create_dropdown_button($id_imagen, $row["principal"]);
+        $config_imagen = dropdown_button($id_imagen, $row["principal"]);
         $extra_principal = ["class" => "selector_principal"];
         $informacion_imagen = $config_imagen . $img;
         $contenedor_imagen = ($row["principal"] == 0) ? $informacion_imagen : div($informacion_imagen, $extra_principal);
@@ -688,7 +688,7 @@ class Servicio extends REST_Controller
             } else {
 
                 $data_complete["num_servicios"] = 0;
-                $data_complete["info_servicios"] = get_btw(
+                $data_complete["info_servicios"] = btw(
                     icon("fa fa-search")
                     ,
                     "Tu búsqueda de " . $param["q"] . " (0 Productos) ",

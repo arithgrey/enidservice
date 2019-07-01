@@ -4,7 +4,7 @@
         <div class="tab-content">
             <?= div(get_format_foto_usuario($id_usuario, $usuario), ["class" => "tab-pane active", "id" => "tab_mis_datos"]) ?>
             <div class="tab-pane " id="tab_privacidad">
-                <?= get_btw(
+                <?= btw(
 
                     heading_enid("ACTUALIZAR DATOS DE ACCESO", 3)
                     ,

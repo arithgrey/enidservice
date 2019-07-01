@@ -33,7 +33,7 @@ if (!function_exists('invierte_date_time')) {
             );
         }
 
-        return append_data($response);
+        return append($response);
 
     }
 

@@ -27,7 +27,7 @@ foreach ($info_respuestas as $row) {
 $oculta_comentarios = (count($info_respuestas) > 0) ? div("Ocultar ", ["class" => 'ocultar_comentarios strong blue_enid', "id" => $id_tarea]) : "";
 
 ?>
-<?= get_btw(
+<?= btw(
 	$oculta_comentarios,
 	div(
 		div($respuestas,  "msg-wrap" )

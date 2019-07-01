@@ -231,6 +231,11 @@ if (!function_exists('get_base_html')) {
 
                     break;
 
+                case 11:
+                    $response = "<{$tipo} class='col-lg-11'>" . $info . "</{$tipo}>";
+                    break;
+
+
                 case 12:
 
 
@@ -616,7 +621,6 @@ if (!function_exists('unset_element_array')) {
                 $b++;
             }
         }
-
         return $new_array;
 
     }
@@ -1463,14 +1467,15 @@ if (!function_exists('get_url_servicio')) {
 
     }
 }
-if (!function_exists('get_img_servicio')) {
-    function get_img_servicio($id, $external = 0)
+if (!function_exists('img_servicio')) {
+    function img_servicio($id, $external = 0)
     {
         $url = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
+
         if ($external > 0) {
+            
             $url = "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id;
         }
-
 
         $id_error = "imagen_" . $id;
         $img = [
@@ -1484,12 +1489,11 @@ if (!function_exists('get_img_servicio')) {
     }
 }
 
-if (!function_exists('append_data')) {
 
-    function append_data($array, $col = 0, $num_col = 0)
+if (!function_exists('append')) {
+
+    function append($array, $col = 0, $num_col = 0)
     {
-
-
         if (is_array($array)) {
 
             if ( es_local() > 0) {
@@ -1508,7 +1512,7 @@ if (!function_exists('append_data')) {
             }
 
             $callback = function ($a, $b) {
-                if (!is_null($b) && $b != "") {
+                if (!is_null($b)) {
                     return " " . $a . $b;
                 }
             };
@@ -1531,6 +1535,41 @@ if (!function_exists('append_data')) {
     }
 }
 
+
+/*
+if (!function_exists('append')) {
+
+    function append($array, $col = 0, $num_col = 0)
+    {
+
+        if (is_array($array)) {
+
+            $callback = function ($a, $b) {
+
+                if (!is_null($b)) {
+                    return " " . $a . $b;
+                }
+
+            };
+
+
+            $response = array_reduce($array, $callback, '');
+
+            if ($col > 0) {
+
+                $response = ($num_col > 0) ? div($response, $num_col) : div($response);
+            }
+
+            return $response;
+
+        } else {
+
+            echo "No es array -> " . print_r($array);
+        }
+
+    }
+}
+*/
 if (!function_exists('get_request_email')) {
     function get_request_email($email, $asunto, $cuerpo)
     {
@@ -1570,7 +1609,7 @@ if (!function_exists('get_menu_session')) {
         if ($in_session < 1) {
 
 
-            $text = get_btw(
+            $text = btw(
                 div("Vender", ["style" => "font-size:.8em;"]),
                 icon("fa fa-shopping-cart", ["style" => "margin-left:5px;font-size:1.1em;"]),
                 "display_flex_enid"
@@ -1587,7 +1626,7 @@ if (!function_exists('get_menu_session')) {
             );
 
 
-            $text = get_btw(
+            $text = btw(
                 div(" Iniciar sesión ", ["style" => "font-size:.8em;"]),
                 icon("fa fa-user", ["style" => "margin-left:5px;font-size:1.1em;"]),
                 "display_flex_enid"
@@ -1602,7 +1641,7 @@ if (!function_exists('get_menu_session')) {
 
 
             $type_display = ($is_mobile > 0) ? " d-flex flex-column justify-content-between " : " display_flex_enid ";
-            $list = div(append_data([$vender, $l_session]), ["class" => $type_display]);
+            $list = div(append([$vender, $l_session]), ["class" => $type_display]);
 
             if ($proceso_compra < 1) {
                 return div(ul($list, ["class" => "largenav "]), ["class" => "text-right"]);
@@ -1613,8 +1652,8 @@ if (!function_exists('get_menu_session')) {
 
     }
 }
-if (!function_exists('get_btw')) {
-    function get_btw($a, $b, $class = '', $row = 0, $frow = 0)
+if (!function_exists('btw')) {
+    function btw($a, $b, $class = '', $row = 0, $frow = 0)
     {
 
 
@@ -1649,18 +1688,18 @@ if (!function_exists('get_btw')) {
                 $class = $class . " col-lg-offset-" . $offset;
             }
 
-            $response = div(append_data([$a, $b]), ["class" => $class]);
+            $response = div(append([$a, $b]), ["class" => $class]);
 
             if ($frow > 0) {
 
-                $response = div(div(append_data([$a, $b]), ["class" => $class]), 13);
+                $response = div(div(append([$a, $b]), ["class" => $class]), 13);
             }
 
 
         } else {
 
 
-            $response = ($row > 0) ? div(div(append_data([$a, $b]), $class), 1) : div(append_data([$a, $b]), $class);
+            $response = ($row > 0) ? div(div(append([$a, $b]), $class), 1) : div(append([$a, $b]), $class);
 
         }
 
@@ -1676,7 +1715,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
         $vfin = ($def_fin != 0) ? $def_fin : date("Y-m-d");
 
 
-        $r[] = get_btw(
+        $r[] = btw(
             div("Inicio", 'strong top_30 '),
             div(input([
                 "name" => 'fecha_inicio',
@@ -1689,7 +1728,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
         );
 
 
-        $r[] = get_btw(
+        $r[] = btw(
             div("Fin", 'strong top_30'),
             div(input(
                 [
@@ -1707,7 +1746,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
 
         $r[] = div(guardar(text_icon("fa fa-chevron-right", "Búsqueda ")), 'col-lg-4 top_30');
 
-        return append_data($r);
+        return append($r);
 
 
     }
@@ -1742,7 +1781,7 @@ if (!function_exists('get_format_izquierdo')) {
         }
 
 
-        $r[] = div(append_data([
+        $r[] = div(append([
             heading_enid("¿TIENES ALGUNA DUDA?", 3),
             anchor_enid("ENVIA TU MENSAJE",
                 [
@@ -1757,7 +1796,7 @@ if (!function_exists('get_format_izquierdo')) {
             ]
         );
 
-        return append_data($r);
+        return append($r);
 
 
     }
@@ -1841,7 +1880,7 @@ function get_metodos_pago()
         ]));
 
 
-    return div(div(append_data($r), "col-lg-12 d-flex flex-row justify-content-between"), "info_metodos_pago row");
+    return div(div(append($r), "col-lg-12 d-flex flex-row justify-content-between"), "info_metodos_pago row");
 
 }
 
@@ -1898,7 +1937,8 @@ function path_enid($pos, $extra = 0, $link_directo = 0)
         "config_mines" => "config/mimes.php",
         "config_db" => "db/database.php",
         "config_constants" => "config/constants.php",
-        "desarrollo" => "desarrollo"
+        "desarrollo" => "desarrollo",
+        "go_home" => "../"
     ];
 
 
@@ -1936,7 +1976,7 @@ function add_text($a, $b, $f = 0)
 
 }
 
-function get_social($proceso_compra, $desc_web)
+function get_social($proceso_compra, $desc_web, $black=1)
 {
 
     $url_share = current_url() . '?' . $_SERVER['QUERY_STRING'];
@@ -1945,6 +1985,7 @@ function get_social($proceso_compra, $desc_web)
     $url_pinterest = get_url_pinterest($url_share, $desc_web);
     $url_tumblr = get_url_tumblr($url_share, $desc_web);
 
+    $color = ($black > 0) ? "black":  "white";
 
     $response = "";
     if ($proceso_compra < 1) {
@@ -1954,14 +1995,14 @@ function get_social($proceso_compra, $desc_web)
             [
                 "href" => $url_facebook,
                 "target" => "_black",
-                "class" => "fa fa-facebook black",
+                "class" => "fa fa-facebook ".$color,
 
             ]);
 
         $r[] = anchor_enid("",
             [
                 "href" => "https://www.instagram.com/enid_service/",
-                "class" => "fa fa-instagram  black",
+                "class" => "fa fa-instagram ".$color,
                 "title" => "Tumblr",
                 "target" => "_black",
             ]);
@@ -1969,7 +2010,7 @@ function get_social($proceso_compra, $desc_web)
         $r[] = anchor_enid("",
             [
                 "target" => "_black",
-                "class" => "fa fa-twitter black",
+                "class" => "fa fa-twitter ".$color,
                 "title" => "Tweet",
                 "target" => "_black",
                 "data-size" => "large",
@@ -1979,19 +2020,19 @@ function get_social($proceso_compra, $desc_web)
             [
                 "href" => $url_pinterest,
                 "target" => "_black",
-                "class" => "fa fa-pinterest-p black",
+                "class" => "fa fa-pinterest-p ".$color,
                 "title" => "Pin it"
             ]);
 
         $r[] = anchor_enid("",
             [
                 "href" => $url_tumblr,
-                "class" => "fa fa-tumblr black",
+                "class" => "fa fa-tumblr ".$color,
                 "target" => "_black",
                 "title" => "Tumblr"
             ]);
 
-        $social = append_data($r);
+        $social = append($r);
         $response = div($social, "contenedor_social display_flex_enid mt-5");
     }
     return div($response, 1);
@@ -2025,7 +2066,8 @@ function mayorque($a, $b, $mayor = 1, $menor = "")
 function search_bi_array($array, $columna, $busqueda, $get = false, $si_false = "")
 {
 
-    $index = array_search($busqueda, array_column($array, $columna));
+    $arr_col=  array_column($array, $columna);
+    $index = array_search($busqueda, $arr_col);
     $response = $index;
 
     if ($get != false) {
@@ -2047,7 +2089,12 @@ function primer_elemento($data, $index, $def = false)
 
     return (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0])) ? $data[0][$index] : $def;
 }
+function ajustar($a,$b,$horizontal = 1){
 
+    $class = ($horizontal > 0 ) ?  "d-flex align-items-center justify-content-between" :  "d-flex flex-column justify-content-between";
+    return  div(div($a) . div($b) , $class);
+
+}
 function es_null($data, $index, $def = "")
 {
 

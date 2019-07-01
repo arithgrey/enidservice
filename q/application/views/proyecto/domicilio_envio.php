@@ -49,7 +49,7 @@ if ($registro_direccion == 0) {
 
 <div class="col-lg-8 col-lg-offset-2">
 
-    <?= get_btw(
+    <?= btw(
         heading_enid("DIRECCIÓN DE ENVÍO", 2, ["class" => "letter-spacing-5"])
         ,
         get_format_direccion_envio_pedido(

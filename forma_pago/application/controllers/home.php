@@ -26,7 +26,7 @@ class Home extends CI_Controller
 
             default:
 
-                $fn = (ctype_digit($this->input->get("recibo"))) ? $this->crea_orden() : redirect("../../");
+                $fn = (ctype_digit($this->input->get("recibo"))) ? $this->crea_orden() : redirect(path_enid("go_home"));
 
                 break;
 
@@ -57,8 +57,7 @@ class Home extends CI_Controller
     {
 
         $q = ['id_recibo' => $id_recibo];
-        $api = "recibo/resumen_desglose_pago";
-        return $this->principal->api($api, $q, "html");
+        return $this->principal->api("recibo/resumen_desglose_pago", $q, "html");
     }
 
 }

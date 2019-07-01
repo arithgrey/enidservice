@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(img(["src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg", "style" => "width: 100%"]));
             $r[] = div("Observamos un cambio de contraseña en tu cuenta. ¿Fuiste tú?");
             $r[] = div("Si es así ignora este correo, en caso contrario notificanos aquí http://enidservice.com/inicio/contact/");
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -45,7 +45,7 @@ if (!function_exists('invierte_date_time')) {
                     "style" => "background: #001936;padding: 10px;color: white;margin-top: 23px;text-decoration: none;"
                 ]);
 
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -230,7 +230,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $agregar = div(anchor_enid(text_icon("fas fa-plus-circle black", " TAREA"), path_enid("desarrollo")), "bottom_50 black underline");
-            $tareas = add_text($agregar, append_data($r));
+            $tareas = add_text($agregar, append($r));
 
 
             $response =
@@ -391,7 +391,7 @@ if (!function_exists('invierte_date_time')) {
 
             $response =
                 [
-                    "html" => append_data($r),
+                    "html" => append($r),
                     "flag" => $f,
 
                 ];
@@ -525,7 +525,7 @@ if (!function_exists('invierte_date_time')) {
             $fecha_cordatorio = $row["fecha_cordatorio"];
             $id_recibo = $row["id_recibo"];
 
-            $text = get_btw(
+            $text = btw(
 
                 div(text_icon("fa  fa fa-clock-o ", $fecha_cordatorio)),
                 div($row["descripcion"]),
@@ -539,7 +539,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response = [
 
-            "html" => append_data($r),
+            "html" => append($r),
             "flag" => $f,
         ];
 
@@ -560,8 +560,12 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_recibo = $row["id_recibo"];
                 $total = div($row["total"] . "MXN", "text_monto_sin_cierre text-left");
-                $text = get_btw(
-                    div(img($row["url_img_servicio"]), ["style" => "width:50px"]),
+                $text = btw(
+                    div(
+                        img($row["url_img_servicio"])
+                        ,
+                        "w_50"
+                    ),
                     $total,
                     "display_flex_enid top_10 border padding_10"
                 );
@@ -571,15 +575,17 @@ if (!function_exists('invierte_date_time')) {
                 $f++;
             }
 
-            if (count($r) > 0) {
+            if (es_data($r)) {
+
                 array_unshift($r, br(2) . div(heading_enid("VENTAS EN PROCESO", 5, ["class" => "top_20"])));
+
             }
 
         }
 
         $response = [
 
-            "html" => append_data($r),
+            "html" => append($r),
             "flag" => $f,
 
         ];
@@ -660,10 +666,10 @@ if (!function_exists('invierte_date_time')) {
             $pregunta = div($pregunta, "black");
 
 
-            $imagenes = div(get_img_servicio($id_servicio), ["style" => "width:50px"]);
+            $imagenes = div(img_servicio($id_servicio), ["style" => "width:50px"]);
             $t = [];
-            $t[] = get_btw($imagenes, $pregunta, " d-flex flex-column justify-content-between ");
-            $text = append_data($t);
+            $t[] = btw($imagenes, $pregunta, " d-flex flex-column justify-content-between ");
+            $text = append($t);
 
             $id = "#pregunta" . $id_pregunta;
             $url = "../pregunta/?action=recepcion&id=" . $id_pregunta . "&id_servicio=" . $id_servicio . $id;
@@ -672,13 +678,13 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        if (count($r) > 0) {
+        if (es_data($r) ) {
             array_unshift($r, "LO QUE COMPRADORES TE PREGUNTAN");
         }
 
         $response = [
 
-            "html" => append_data($r),
+            "html" => append($r),
             "flag" => $f,
 
         ];
@@ -701,10 +707,10 @@ if (!function_exists('invierte_date_time')) {
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
             $pregunta = div($pregunta, ["class" => "black"]);
 
-            $imagenes = div(get_img_servicio($id_servicio), ["style" => "width:50px"]);
+            $imagenes = div(img_servicio($id_servicio), ["style" => "width:50px"]);
             $t = [];
-            $t[] = get_btw($imagenes, $pregunta, "columna ->   d-flex flex-column justify-content-between");
-            $text = append_data($t);
+            $t[] = btw($imagenes, $pregunta, "columna ->   d-flex flex-column justify-content-between");
+            $text = append($t);
 
             $id = "#pregunta" . $id_pregunta;
             $url = "../pregunta/?action=hechas&id=" . $id_pregunta . "&id_servicio=" . $id_servicio . $id;
@@ -712,13 +718,13 @@ if (!function_exists('invierte_date_time')) {
             $f++;
         }
 
-        if (count($r) > 0) {
+        if (es_data($r)) {
 
             array_unshift($r, "TU BUZÓN");
         }
 
         $response = [
-            "html" => append_data($r),
+            "html" => append($r),
             "flag" => $f,
 
         ];
@@ -954,7 +960,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = get_td($total_procesar_compra);
         $t[] = "</tr>";
 
-        $t = " <table class='table' >" . append_data($t) . "</table>";
+        $t = " <table class='table' >" . append($t) . "</table>";
         return $t;
 
     }

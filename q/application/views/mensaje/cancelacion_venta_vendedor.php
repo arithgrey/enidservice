@@ -23,4 +23,4 @@ $r[] = anchor_enid(img([
     ]);
 
 ?>
-<?= append_data($r) ?>
+<?= append($r) ?>

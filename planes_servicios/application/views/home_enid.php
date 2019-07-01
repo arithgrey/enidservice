@@ -2,7 +2,7 @@
     <div class='col-lg-2'>
     <?= get_menu($id_perfil ,$is_mobile, $action) ?>
     <?php $extra_estilos = ($action == 1) ? " display_none " : " "; ?>
-    <?= get_btw(
+    <?= btw(
         heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 3)
         ,
         get_top_ventas($top_servicios)
