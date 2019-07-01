@@ -4,7 +4,7 @@
         <?php $resumen_clabe = get_resumen_cuenta($row["clabe"]); ?>
 
         <?= div(
-                append_data(
+                append(
             [
                 $row["nombre"],
                 icon("fa fa-credit-card "),
@@ -35,7 +35,7 @@
 
     <?= heading_enid("TARJETAS DE CRÉDITO Y DÉBITO", 3) ?>
     <?php foreach ($tarjetas as $row): ?>
-        <?= div(append_data([
+        <?= div(append([
             $row["nombre"],
             icon("fa fa-credit-card "),
             div(substr($row["numero_tarjeta"], 0, 4) . "********")

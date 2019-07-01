@@ -23,7 +23,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = form_close(place("info_tags"));
-        return append_data($r);
+        return append($r);
 
     }
 

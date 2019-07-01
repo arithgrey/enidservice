@@ -10,7 +10,6 @@ window.onpopstate = function (event) {
 }
 $(document).ready(() => {
 
-
     set_option("s", 0);
     let num_departamento = get_parameter(".num_departamento");
     set_option("modulo", 2);
@@ -159,7 +158,6 @@ let response_registro_ticket = data => {
 
 let set_estatus_ticket = function (id_ticket, status) {
 
-    let nuevo_estado = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/tickets/estado/format/json/";
     let data_send = {"id_ticket": id_ticket, "status": status};
     request_enid("PUT", data_send, url, () => {
@@ -294,6 +292,7 @@ let tikets_usuario = () => {
 let response_carga_tickets = function (data) {
 
     render_enid(".place_proyectos", data);
+    $(".hecho").click(marcar_como_hecho);
 
     $(".draggable").draggable({
         drag: function (event, ui) {
@@ -446,4 +445,11 @@ let elimina_tarea = id_tarea => {
 
     });
 
+}
+let marcar_como_hecho = function (e) {
+
+    let  id =  get_parameter_enid($(this), "id");
+    if(id > 0 ){
+        set_estatus_ticket(id, 4);
+    }
 }

@@ -1,4 +1,4 @@
-<?= get_btw(
+<?= btw(
     get_format_saldo_disponible($saldo_disponible),
     div(get_submenu(), "card" ),
     3

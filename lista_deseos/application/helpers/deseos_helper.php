@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
                 "slides"
             );
 
-            $r[] = get_btw(
+            $r[] = btw(
 
                 div(img(["src" => "../img_tema/preferencias/up-arrow.png"]), "slide-nav-up")
                 ,
@@ -26,7 +26,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $response = div(append_data($r), ["id" => "slider"]);
+            $response = div(append($r), ["id" => "slider"]);
             return div($response, 8, 1);
 
 
@@ -45,7 +45,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_format_temporadas')) {
         function get_format_temporadas()
         {
-            $response = append_data([
+            $response = append([
                 div("Apparel", "slide-label"),
 
                 div(
@@ -73,7 +73,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_images_preferencias()
         {
 
-            $response = append_data([
+            $response = append([
                 div("Bags", "slide-label"),
                 div(
                     img(
@@ -116,7 +116,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $r[] = div(append_data([
+            $r[] = div(append([
                 div(
                     heading_enid("Encuentra entre múltiples opciones", 3, ["class" => "from-bottom"])
                     ,
@@ -135,7 +135,7 @@ if (!function_exists('invierte_date_time')) {
             ]),
                 "slide-content");
 
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -177,7 +177,7 @@ if (!function_exists('invierte_date_time')) {
             if ($is_mobile == 1) {
                 $r[] = $tmp;
             }
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -196,7 +196,7 @@ if (!function_exists('invierte_date_time')) {
 
                 ],1,1,0, path_enid("home")
             );
-            return div(append_data($r), 4, 1);
+            return div(append($r), 4, 1);
 
 
         }
@@ -208,7 +208,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(get_menu(), 2);
             $r[] = div(get_lista_deseo($productos_deseados), 7);
-            $r[] = get_btw(
+            $r[] = btw(
                 heading_enid("TU LISTA DE DESEOS", 3, 'titulo_lista_deseos')
                 ,
                 anchor_enid("EXPLORAR MÁS ARTÍCULOS", ["href" => "../search/?q2=0&q="], 1)
@@ -216,7 +216,7 @@ if (!function_exists('invierte_date_time')) {
                 3
             );
 
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -228,7 +228,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(div("Accesorios", "product-type from-bottom"), "animate");
             $r[] = div(heading_enid("Lo que usas en viajes", 2, "from-bottom"), "animate");
             $r[] = heading_enid("Explorar tienda", 3, ["class" => "shop-now", "href" => path_enid("search") ]);
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -244,7 +244,7 @@ if (!function_exists('invierte_date_time')) {
                 ["class" => "animate"]);
 
             $r[] = heading_enid("EXPLORAR TIENDA", 2, "from-bottom");
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -252,7 +252,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_preferencias()
         {
 
-            $text = append_data([
+            $text = append([
                 heading_enid("TUS PREFERENCIAS E INTERESES"),
                 p("CUÉNTANOS TUS INTERESES PARA  MEJORAR TU EXPERIENCIA")
             ]);
@@ -276,7 +276,7 @@ if (!function_exists('invierte_date_time')) {
             ];
 
             $extraIcon = (array_key_exists("id_usuario", $row) && !is_null($row["id_usuario"])) ? icon("fa fa-check-circle-o ") : "";
-            $clasificacion = div(append_data([$extraIcon, $row["nombre_clasificacion"]]), $config);
+            $clasificacion = div(append([$extraIcon, $row["nombre_clasificacion"]]), $config);
             return div($clasificacion, 1);
 
 
@@ -362,7 +362,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $x[] = br(3);
                 $x[] = p($descripcion);
-                $r[] = div(append_data($x), 6);
+                $r[] = div(append($x), 6);
 
 
                 $z = [];
@@ -375,12 +375,12 @@ if (!function_exists('invierte_date_time')) {
                 $z[] = br();
 
                 $z[] = guardar("Detalles", [], 1, 1, 0, get_url_servicio($id_producto));
-                $r[] = div(append_data($z), 3);
+                $r[] = div(append($z), 3);
 
-                $response[] = addNRow(append_data($r), ["class" => "card "], ["class" => "border top_20"]);
+                $response[] = addNRow(append($r), ["class" => "card "], ["class" => "border top_20"]);
 
             }
-            return append_data($response);
+            return append($response);
         }
     }
 
@@ -401,7 +401,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = guardar("Comprar ", [], 1, 1, 0, get_url_servicio($id_servicio));
         $r[] = form_close();
 
-        return append_data($r);
+        return append($r);
 
     }
 

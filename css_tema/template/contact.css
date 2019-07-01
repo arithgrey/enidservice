@@ -19,11 +19,27 @@
 .contenedor_eleccion_correo_electronico {
     display: none;
 }
-.imagen_principal{
+
+.imagen_principal {
     width: 100%;
     height: 300px;
     background-image: url('../../img_tema/portafolio/llamada_gratis_2.png');
 }
-.saber_mas{
-    background: #000 !important;opacity: .85;padding: .1px;opacity: .8;
+
+.saber_mas {
+    background: #000 !important;
+    opacity: .85;
+    padding: .1px;
+    opacity: .8;
+}
+
+body {
+    background: #0030ff !important;
+}
+
+.contenedor_form {
+    background: #000712 !important;
+}
+.social_contact{
+    background: #0030ff;
 }

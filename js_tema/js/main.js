@@ -443,7 +443,6 @@ let get_parameter_enid = (element, param) => {
         return false;
     }
 }
-
 let request_enid =  (method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "")  => {
 
     if (before_send < 1) {

@@ -59,7 +59,7 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 <?= n_row_12() ?>
     <div class="product-detail contenedor_info_producto mt-5">
         <div class="col-lg-6 left-col contenedor_izquierdo">
-            <?= get_btw(
+            <?= btw(
 
                 div($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"])
                 ,

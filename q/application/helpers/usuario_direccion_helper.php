@@ -19,7 +19,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_open("", ["class" => "d-flex justify-content-between flex-column shadow form_direccion_envio  border form_direccion_envio padding_20"]);
 
-        $a = get_btw(
+        $a = btw(
 
             div("Persona que recibe")
             ,
@@ -39,7 +39,7 @@ if (!function_exists('invierte_date_time')) {
             6
         );
 
-        $b = get_btw(
+        $b = btw(
 
 
             div("Teléfono"),
@@ -57,7 +57,7 @@ if (!function_exists('invierte_date_time')) {
             ),
             6
         );
-        $r[] = get_btw($a, $b, "row mt-5");
+        $r[] = btw($a, $b, "row mt-5");
         $r[] = div("Código postal");
         $r[] = input([
             "maxlength" => "5",
@@ -93,7 +93,7 @@ if (!function_exists('invierte_date_time')) {
             "type" => "text"
         ]);
 
-        $a = get_btw(
+        $a = btw(
             div("Número Exterior"),
             input([
                 "class" => "required numero_exterior",
@@ -106,7 +106,7 @@ if (!function_exists('invierte_date_time')) {
             ]),
             6
         );
-        $b = get_btw(
+        $b = btw(
             div("Número Interior"),
             input([
                 "class" => "numero_interior",
@@ -122,7 +122,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $r[] = get_btw($a, $b, "row");
+        $r[] = btw($a, $b, "row");
         $r[] = '<div  ' . $direccion_visible . ' class="parte_colonia_delegacion">';
 
         $r[] = div("Colonia");
@@ -141,7 +141,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = place('place_asentamiento');
-        $r[] = get_btw(
+        $r[] = btw(
 
             div("Delegación o Municipio"),
             div(
@@ -157,7 +157,7 @@ if (!function_exists('invierte_date_time')) {
             ,
             " district delegacion_c"
         );
-        $r[] = get_btw(
+        $r[] = btw(
             div("Estado"),
             div(input([
                 "type" => "text",
@@ -168,7 +168,7 @@ if (!function_exists('invierte_date_time')) {
             "district  estado_c"
         );
 
-        $r[] = get_btw(
+        $r[] = btw(
             div("País"),
             place("place_pais_info"),
             " district pais_c display_none"
@@ -189,7 +189,7 @@ if (!function_exists('invierte_date_time')) {
         $select = create_select($options, 'direccion_principal', 'direccion_principal', 'direccion_principal', 'text', 'val');
 
         $r[] =
-            get_btw(
+            btw(
 
                 div("Esta es mi dirección principal ", 5)
 
@@ -213,7 +213,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("notificacion_direccion");
         $r[] = form_close();
 
-        return div(append_data($r), "contenedor_form_envio top_30");
+        return div(append($r), "contenedor_form_envio top_30");
 
     }
 
@@ -240,7 +240,7 @@ if (!function_exists('invierte_date_time')) {
             "value" => $param['id_usuario']
 
         ]);
-        $r[] = get_btw(
+        $r[] = btw(
             div("Calle", "label-off"),
 
             input(
@@ -257,7 +257,7 @@ if (!function_exists('invierte_date_time')) {
                 ]),
             "value"
         );
-        $r[] = get_btw(
+        $r[] = btw(
             div("Entre la calle y la calle, o información adicional", "label-off")
             ,
             input(
@@ -272,7 +272,7 @@ if (!function_exists('invierte_date_time')) {
             ,
             "value"
         );
-        $r[] = get_btw(
+        $r[] = btw(
             div("Número Exterior", "label-off")
             ,
             input(
@@ -288,7 +288,7 @@ if (!function_exists('invierte_date_time')) {
             ,
             "value"
         );
-        $r[] = get_btw(
+        $r[] = btw(
             div("Número Interior", "label-off")
             ,
             input(
@@ -304,28 +304,28 @@ if (!function_exists('invierte_date_time')) {
             ,
             "value"
         );
-        return append_data($r);
+        return append($r);
 
     }
 
-    function get_format_domicilio($info_envio_direccion)
+    function get_format_domicilio($direccion)
     {
 
-        $r[] = get_campo($info_envio_direccion, "direccion", "Dirección", 1);
-        $r[] = get_campo($info_envio_direccion, "calle", "Calle", 1);
-        $r[] = get_campo($info_envio_direccion, "numero_exterior", " Número exterior ", 1);
-        $r[] = get_campo($info_envio_direccion, "numero_interior", " Número interior ", 1);
-        $r[] = get_campo($info_envio_direccion, "entre_calles", "Entre ", 1);
-        $r[] = get_campo($info_envio_direccion, "cp", " C.P. ", 1);
-        $r[] = get_campo($info_envio_direccion, "asentamiento", " Colonia ", 1);
-        $r[] = get_campo($info_envio_direccion, "municipio", " Delegación/Municipio ", 1);
-        $r[] = get_campo($info_envio_direccion, "ciudad", " Ciudad ", 1);
-        $r[] = get_campo($info_envio_direccion, "estado", " Estado ", 1);
-        return append_data($r);
+        $r[] = get_campo($direccion, "direccion", "Dirección", 1);
+        $r[] = get_campo($direccion, "calle", "Calle", 1);
+        $r[] = get_campo($direccion, "numero_exterior", " Número exterior ", 1);
+        $r[] = get_campo($direccion, "numero_interior", " Número interior ", 1);
+        $r[] = get_campo($direccion, "entre_calles", "Entre ", 1);
+        $r[] = get_campo($direccion, "cp", " C.P. ", 1);
+        $r[] = get_campo($direccion, "asentamiento", " Colonia ", 1);
+        $r[] = get_campo($direccion, "municipio", " Delegación/Municipio ", 1);
+        $r[] = get_campo($direccion, "ciudad", " Ciudad ", 1);
+        $r[] = get_campo($direccion, "estado", " Estado ", 1);
+        return append($r);
 
     }
 
-    function val_btn_pago($param, $id_proyecto_persona_forma_pago)
+    function val_btn_pago($param, $id_recibo)
     {
 
 
@@ -333,18 +333,19 @@ if (!function_exists('invierte_date_time')) {
         if (get_param_def($param, "externo") > 0 ) {
 
 
-            $r[] = anchor_enid("LIQUIDAR AHORA!",
+            $r[] = anchor_enid(
+                "LIQUIDAR AHORA!",
                 [
                     'class' => 'resumen_pagos_pendientes top_20',
-                    'id' => $id_proyecto_persona_forma_pago,
-                    'href' => path_enid("forma_pago_search",$id_proyecto_persona_forma_pago)
+                    'id' => $id_recibo,
+                    'href' => path_enid("forma_pago_search", $id_recibo)
                 ]);
 
             $r[] = anchor_enid("ACCEDE A TU CUENTA PARA VER EL ESTADO DE TU PEDIDO"
                 ,
                 [
                     'class' => 'resumen_pagos_pendientes black top_20',
-                    'id' => $id_proyecto_persona_forma_pago,
+                    'id' => $id_recibo,
                     'href' => '../area_cliente/?action=compras'
                 ]);
 
@@ -356,14 +357,14 @@ if (!function_exists('invierte_date_time')) {
             $r[] = anchor_enid("Liquida ahora!",
                 [
                     'class' => 'resumen_pagos_pendientes ',
-                    'id' => $id_proyecto_persona_forma_pago,
+                    'id' => $id_recibo,
                     'href' => '#tab_renovar_servicio',
                     'data-toggle' => 'tab'
                 ]);
 
         }
 
-        return append_data($r);
+        return append($r);
 
     }
 

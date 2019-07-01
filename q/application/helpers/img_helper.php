@@ -39,11 +39,11 @@ if (!function_exists('invierte_date_time')) {
                 "style" => 'color:white;'
             ]);
 
-        $r[] = div(append_data($x), "col-lg-6  col-lg-offset-3  top_30");
+        $r[] = div(append($x), "col-lg-6  col-lg-offset-3  top_30");
 
         $r[] = form_close(place("place_load_img_faq"));
 
-        return append_data($r);
+        return append($r);
 
 
     }
@@ -84,7 +84,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("place_load_img", ["id" => "place_load_img"]);
         $r[] = form_close();
 
-        return append_data($r);
+        return append($r);
 
     }
 
@@ -132,7 +132,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = form_close(place("previsualizacion", ["id" => "previsualizacion"]));
-        return append_data($r);
+        return append($r);
 
     }
 

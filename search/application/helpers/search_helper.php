@@ -23,7 +23,7 @@ if (!function_exists('invierte_date_time')) {
             ,
             "col-lg-5 top_20", 1);
 
-        $response = div(append_data($r), "border padding_20 top_20 col-lg-10 col-lg-offset-1", 1);
+        $response = div(append($r), "border padding_20 top_20 col-lg-10 col-lg-offset-1", 1);
         return $response;
 
     }
@@ -31,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_sin_resultados_tienda()
     {
         $r[] = place("separador_inicial");
-        $r[] = get_btw(
+        $r[] = btw(
 
             heading_enid("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA", 1),
             guardar("ANUNCIA TU PRIMER PRODUCTO " . icon('fa fa-chevron-right ir'),
@@ -46,7 +46,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = place("separador_final");
 
-        return append_data($r);
+        return append($r);
 
     }
 
@@ -61,7 +61,7 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-            $response = get_btw(
+            $response = btw(
                 div(div($filtro, "pull-left"), 6),
                 div(div($paginacion, "pull-right"), 6),
                 "row d-flex align-items-center justify-content-between"
@@ -102,7 +102,7 @@ if (!function_exists('invierte_date_time')) {
         endforeach;
         $r[] = '</select>';
 
-        return append_data($r);
+        return append($r);
 
     }
 
@@ -123,7 +123,7 @@ if (!function_exists('invierte_date_time')) {
             endforeach;
 
         }
-        return append_data($r);
+        return append($r);
 
 
     }
@@ -166,7 +166,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = hr();
                 $r[] = $bloque_quinto_nivel["html"];
             }
-            $response = div(append_data($r), ["class" => "contenedor_sub_categorias"]);
+            $response = div(append($r), ["class" => "contenedor_sub_categorias"]);
             $response = div($response, ["class" => 'contenedor_menu_productos_sugeridos']);
 
         }
@@ -192,7 +192,7 @@ if (!function_exists('invierte_date_time')) {
                 $response [] = "</ul>";
             }
         }
-        return append_data($response);
+        return append($response);
     }
 
     function crea_menu_principal_web($param)
@@ -242,7 +242,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response = [
-            "html" => append_data($r),
+            "html" => append($r),
             "num_categorias" => count($info),
         ];
         return $response;

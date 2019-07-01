@@ -1,5 +1,5 @@
 <div class="contenedor_principal_enid">
-    <?= div(append_data([
+    <?= div(append([
         ul(li("TEMAS DE AYUDA")),
         ul([
             "Realizar pedidos"

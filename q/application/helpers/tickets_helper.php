@@ -37,7 +37,11 @@ if (!function_exists('invierte_date_time')) {
                     break;
                 case 2:
 
-                    $hecho[] = div(div($asunto, 12),
+                    $text =  ajustar($asunto, icon("fas fa-check-circle hecho", ["id" => $id_ticket]));
+                    $hecho[] = div(
+                        div(
+                            $text , 12
+                        ),
                         [
                             "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
                             "id" => $id_ticket
@@ -49,13 +53,13 @@ if (!function_exists('invierte_date_time')) {
 
             }
         }
-        $response[] = div(append_data($pendiente), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 0]);
+        $response[] = div(append($pendiente), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 0]);
         $response[] = div("", "col-lg-1");
-        $response[] = div(append_data($haciendo), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 1]);
+        $response[] = div(append($haciendo), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 1]);
         $response[] = div("", "col-lg-1");
-        $response[] = div(append_data($hecho), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 2]);
+        $response[] = div(append($hecho), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 2]);
 
-        return append_data($response);
+        return append($response);
 
     }
 
@@ -66,7 +70,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(get_form_ticket($departamentos), 6, 1);
         $r[] = place("place_registro_ticket");
 
-        return append_data($r);
+        return append($r);
 
     }
 
@@ -84,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => "tarea", "value" => $tarea]);
         $r[] = guardar("Enviar");
         $r[] = form_close();
-        return append_data($r);
+        return append($r);
 
     }
 
@@ -124,7 +128,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = end_row();
         $r[] = guardar("ABRIR TICKET");
         $r[] = form_close();
-        return append_data($r);
+        return append($r);
 
 
     }
@@ -141,7 +145,7 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] = heading_enid("¿REALMENTE DESEAS CANCELAR LA COMPRA?", 3);
         $x[] = div($recibo["resumen"]);
-        $r[] = div(div(append_data($x), "padding_20"));
+        $r[] = div(div(append($x), "padding_20"));
 
         $url = path_enid("area_cliente_compras", $recibo['id_recibo']);
         $r[] = guardar("SEGUIR COMPRANDO",
@@ -163,7 +167,7 @@ if (!function_exists('invierte_date_time')) {
             1);
 
 
-        return div(append_data($r), 6, 1);
+        return div(append($r), 6, 1);
     }
 
     function valida_check_tarea($id_tarea, $valor_actualizar, $status)
@@ -192,7 +196,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div("MOSTRAR TODAS LAS TAREAS", 'mostrar_todas_las_tareas a_enid_black cursor_pointer');
 
         }
-        return append_data($r);
+        return append($r);
     }
 
     function create_notificacion_ticket($info_usuario, $param, $info_ticket)
@@ -232,7 +236,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $response = [
-                "info_correo" => append_data($r),
+                "info_correo" => append($r),
                 "asunto" => $asunto_email,
             ];
 
@@ -285,7 +289,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $x[] = div(
 
-                    get_btw(
+                    btw(
                         heading_enid(add_text("#", $id_ticket, 1), 2),
                         $cerrar_ticket,
                         "d-flex align-items-center justify-content-between"
@@ -298,16 +302,16 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = div($asunto, "top_30 border padding_10 bottom_30");
                 $x[] = div(heading_enid(strtoupper($fecha_registro), 6, "text-right"));
                 $x[] = div(icon("fas fa-2x fa-plus-circle blue_enid"), " btn_agregar_tarea padding_1  cursor_pointer text-right");
-                $r[] = div(append_data($x), "shadow padding_20");
+                $r[] = div(append($x), "shadow padding_20");
 
             }
 
-            $response[] = append_data($r);
+            $response[] = append($r);
             $response[] = valida_mostrar_tareas($info_num_tareas);
 
         }
 
-        return append_data($response);
+        return append($response);
 
     }
 
@@ -320,7 +324,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = input_hidden(["class" => 'tarea_pendiente', "name" => 'tarea']);
         $x[] = guardar("Solicitar", [], 1);
         $x[] = form_close();
-        return div(append_data($x), "seccion_nueva_tarea top_20");
+        return div(append($x), "seccion_nueva_tarea top_20");
 
     }
 
@@ -353,7 +357,7 @@ if (!function_exists('invierte_date_time')) {
             $menu = [];
             $menu[] = icon(" fa-ellipsis-h ml-3 ", ["data-toggle" => "dropdown"]);
             $menu[] = div(
-                append_data(
+                append(
                     [
 
                         div(
@@ -369,7 +373,7 @@ if (!function_exists('invierte_date_time')) {
                 "dropdown-menu  padding_20"
             );
 
-            $bloque_descripcion = append_data(
+            $bloque_descripcion = append(
                 [
                     div(
                         $descripcion,
@@ -398,16 +402,16 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $descripcion = get_btw(
+            $descripcion = btw(
                 div($bloque_descripcion)
                 ,
-                div(append_data($menu), "btn-group")
+                div(append($menu), "btn-group")
                 ,
                 " d-flex align-items-center justify-content-between  "
             );
 
 
-            $text = get_btw(
+            $text = btw(
 
                 $input
                 ,
@@ -424,8 +428,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $x[] = heading_enid(text_icon("fa fa-check-square", "Checklist"), 5, "strong underline");
-        $x[] = div(append_data($r), 1);
-        return div(append_data($x), "top_40 padding_20 contenedor_tareas bottom_50");
+        $x[] = div(append($r), 1);
+        return div(append($x), "top_40 padding_20 contenedor_tareas bottom_50");
 
 
     }
@@ -436,7 +440,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = crea_tabla_resumen_ticket($info_ticket, $info_num_tareas);
         $r[] = form_tarea();
         $r[] = format_listado_tareas($info_tareas);
-        return append_data($r);
+        return append($r);
 
 
     }

@@ -4,7 +4,7 @@ if (!function_exists('invierte_date_time')) {
     function get_form_valoracion($servicio, $extra, $id_servicio)
     {
 
-        $propietario = ( $extra["id_usuario"] ==  $servicio[0]["id_usuario"]) ? 1 : 0;
+        $propietario = ($extra["id_usuario"] == $servicio[0]["id_usuario"]) ? 1 : 0;
         $nombre = "";
         $email = "";
         if ($extra["in_session"] == 1) {
@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div("Sobre  " . $servicio[0]["nombre_servicio"]);
         $r[] = form_open("", ["class" => "form_valoracion"]);
         $r[] = place("nuevo");
-        $r[] = get_btw(
+        $r[] = btw(
             div("Valoración*", "text-valoracion"),
             get_posibles_calificaciones([
                 "",
@@ -30,7 +30,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = place("nuevo");
         $r[] = div("¿Recomendarías este producto?*", "text-valoracion strong");
-        $r[] = get_btw(
+        $r[] = btw(
             anchor_enid("SI", ["class" => 'recomendaria', "id" => 1]),
             anchor_enid("NO", ["class" => 'recomendaria', "id" => 0]),
             "display_flex_enid top_30 bottom_20"
@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = place("place_recomendaria");
         $r[] = place("nuevo");
-        $r[] = get_btw(
+        $r[] = btw(
             div("Tu opinión en una frase*", "text-valoracion strong"),
             div(
                 input(
@@ -59,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
             "value" => $propietario
         ]);
         $r[] = place("nuevo");
-        $r[] = get_btw(
+        $r[] = btw(
             div("Tu reseña (comentarios)*", "text-valoracion strong"),
             div(
                 input(
@@ -84,7 +84,7 @@ if (!function_exists('invierte_date_time')) {
 	        class="input form-control"
             required>');
 
-        $r[] = get_btw(
+        $r[] = btw(
             div("Nombre*", "text-valoracion strong"),
             $input,
 
@@ -105,7 +105,7 @@ if (!function_exists('invierte_date_time')) {
         placeholder="Por ejemplo: jmedrano@enidservice.com" 
         required ' . valida_readonly($email) . ' value="' . $email . '">');
 
-        $r[] = get_btw(
+        $r[] = btw(
             div(
                 "Tu correo electrónico*", "text-valoracion strong"
             ),
@@ -121,18 +121,20 @@ if (!function_exists('invierte_date_time')) {
         $r[] = br(3);
 
 
-        $social     = get_social(0, "Mira lo que compré en Enid service!");
-        $encuesta[] =  div(div(append_data($r), 10, 1),1);
-        $encuesta[] =  div(div($social , "col-lg-10 col-lg-offtse-1 bottom_50"),1);
-        $response[] = div( append_data($encuesta), "col-lg-6 col-lg-offset-3 shadow padding_10 bottom_50");
-        return append_data($response);
+        $social = get_social(0, "Mira lo que compré en Enid service!");
+        $encuesta[] = div(div(append($r), 10, 1), 1);
+        $encuesta[] = div(div($social, "col-lg-10 col-lg-offtse-1 bottom_50"), 1);
+        $response[] = div(append($encuesta), "col-lg-6 col-lg-offset-3 shadow padding_10 bottom_50");
+        return append($response);
 
     }
 
     function get_form_pregunta_consumidor($id_servicio, $propietario, $vendedor, $servicio)
     {
 
-        if (!es_data($servicio)){ return ""; }
+        if (!es_data($servicio) || !es_data($vendedor)) {
+            return "";
+        }
 
         $r[] = textarea(
             [
@@ -157,10 +159,10 @@ if (!function_exists('invierte_date_time')) {
         $nombre = anchor_enid($servicio[0]["nombre_servicio"], ["class" => "underline black strong", "href" => $url]);
         $z[] = div("SOBRE SU " . $nombre, "top_30  bottom_30");
         $z[] = form_open("", ["class" => "form_valoracion top_30"]);
-        $z[] = append_data($r);
+        $z[] = append($r);
         $z[] = form_close();
 
-        return append_data($z);
+        return append($z);
 
     }
 
@@ -169,7 +171,8 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = heading_enid("VALORACIONES Y RESEÑAS", 3);
         $r[] = div(
-            anchor_enid(text_icon("fa fa-chevron-right ir", "MÁS SOBRE EL VENDEDOR", 0, 0)
+            anchor_enid(
+                text_icon("fa fa-chevron-right ir", "MÁS SOBRE EL VENDEDOR", 0, 0)
                 ,
                 [
                     "class" => "a_enid_black hover_padding",
@@ -179,16 +182,16 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        return  append_data($r);
+        return append($r);
 
     }
 
     function get_notificacion_valoracion($usuario, $id_servicio)
     {
 
-        if (es_data($usuario)){
+        if (es_data($usuario)) {
 
-            $usuario =  $usuario[0];
+            $usuario = $usuario[0];
             $nombre = $usuario["nombre"];
             $email = $usuario["email"];
 
@@ -206,7 +209,7 @@ if (!function_exists('invierte_date_time')) {
     function valida_readonly($text)
     {
 
-        return mayorque(trim(strlen($text)) ,  1 , "readonly" );
+        return mayorque(trim(strlen($text)), 1, "readonly");
 
     }
 
@@ -216,11 +219,12 @@ if (!function_exists('invierte_date_time')) {
         return ($modalidad == 1) ? " TU HISTORIAL DE COMPRAS " : "TU HISTORIAL DE VENTAS";
 
     }
+
     function ver_totalidad_por_modalidad($modalidad, $total)
     {
 
         $icon = icon("fa fa-shopping-bag");
-        return   ($modalidad == 1) ? $icon . "TUS VENTAS HASTA EL MOMENTO " . $total : $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
+        return ($modalidad == 1) ? $icon . "TUS VENTAS HASTA EL MOMENTO " . $total : $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
 
     }
 
@@ -270,14 +274,14 @@ if (!function_exists('invierte_date_time')) {
             $l[] = div($criterios[$z], $extra_criterios);
         }
 
-        return div(append_data($l),"top_20 bottom_20" );
+        return div(append($l), "top_20 bottom_20");
     }
 
     function crea_resumen_valoracion($numero_valoraciones, $persona = 0)
     {
 
 
-        $mensaje_final =  ($persona == 1) ? "de los consumidores recomiendan": "de los consumidores recomiendan este producto";
+        $mensaje_final = ($persona == 1) ? "de los consumidores recomiendan" : "de los consumidores recomiendan este producto";
         $valoraciones = $numero_valoraciones[0];
         $num_valoraciones = $valoraciones["num_valoraciones"];
         $text_comentarios = ($num_valoraciones > 1) ? "COMENTARIOS" : "COMENTARIO";
@@ -383,12 +387,15 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         if (count($comentarios) > 5) {
 
-            if ($numero_valoraciones[0]["num_valoraciones"] > 6) {
+            if (primer_elemento($numero_valoraciones, "num_valoraciones") > 6) {
 
-                $response = anchor_enid(text_icon("fa fa-chevron-right ir", "CARGAR MÁS"), "cargar_mas_valoraciones");
+                $response = anchor_enid(
+                    text_icon("fa fa-chevron-right ir", "CARGAR MÁS"), "cargar_mas_valoraciones");
 
             } else {
-                $response = anchor_enid(text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA "),
+
+                $response = anchor_enid(
+                    text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA "),
                     [
                         "class" => "escribir_valoracion",
                         "href" => "../valoracion?servicio=" . $servicio
@@ -428,7 +435,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        return append_data($response);
+        return append($response);
 
     }
 }

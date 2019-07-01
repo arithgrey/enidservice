@@ -31,10 +31,10 @@ if (!function_exists('invierte_date_time')) {
 		);
 
 
-		$response[] = div(append_data($r), ["class" => "jumbotron", "style" => "padding: 2rem 1rem;margin-bottom: 2rem;background-color: #fbfbfb;border-radius: .3rem;"]);
+		$response[] = div(append($r), ["class" => "jumbotron", "style" => "padding: 2rem 1rem;margin-bottom: 2rem;background-color: #fbfbfb;border-radius: .3rem;"]);
 		$respónse[] = div(img("http://enidservice.com/inicio/img_tema/enid_service_logo.jpg"), ["style" => "width: 30%;margin: 0 auto;"]);
 
-		return append_data($response);
+		return append($response);
 
 	}
 
@@ -59,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
                 "style" => "width: 30%;margin: 0 auto;"
             ]
         );
-		return append_data($r);
+		return append($r);
 
 
 	}
@@ -84,7 +84,7 @@ if (!function_exists('invierte_date_time')) {
 				"style" => "width: 30%;margin: 0 auto;"
 			]);
 
-		return append_data($r);
+		return append($r);
 
 	}
 	function get_format_notificacion_subscrito($nombre)
@@ -111,6 +111,6 @@ if (!function_exists('invierte_date_time')) {
 				"style" => "background: #015ec8;padding: 5px;color: white;margin-top: 23px;"
 			]);
 
-		return append_data($r);
+		return append($r);
 	}
 }

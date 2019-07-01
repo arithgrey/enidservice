@@ -26,7 +26,7 @@ if (!function_exists('invierte_date_time')) {
             $r = [];
             if ($in_session < 1) {
 
-                $x[] = get_btw(
+                $x[] = btw(
                     div("Nombre *")
                     ,
                     div(
@@ -44,7 +44,7 @@ if (!function_exists('invierte_date_time')) {
                     6
                 );
 
-                $x[] = div(append_data([
+                $x[] = div(append([
 
                     div("Correo Electrónico  *")
                     ,
@@ -64,7 +64,7 @@ if (!function_exists('invierte_date_time')) {
                 ]), 6);
 
 
-                $r[] = div(append_data($x), 13);
+                $r[] = div(append($x), 13);
 
                 $r[] = div(text_icon('fa fa-unlock-alt', "Escribe una contraseña"));
                 $r[] = input(
@@ -110,7 +110,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = form_close();
             }
 
-            return append_data($r);
+            return append($r);
 
 
         }
@@ -129,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
             if ($in_session < 1) {
 
                 $x[] = form_open("", ["class" => "form-cotizacion-enid-service"]);
-                $x[] = get_btw(
+                $x[] = btw(
                     div("Nombre *")
                     ,
                     div(input(
@@ -146,7 +146,7 @@ if (!function_exists('invierte_date_time')) {
                     " col-lg-6 top_10 "
                 );
 
-                $x[] = div(append_data([
+                $x[] = div(append([
 
                     div("Correo Electrónico  *")
                     ,
@@ -165,7 +165,7 @@ if (!function_exists('invierte_date_time')) {
                 ]), " col-lg-6  top_10");
 
 
-                $r[] = div(append_data($x), 13);
+                $r[] = div(append($x), 13);
 
                 $r[] = div(icon('fa fa-unlock-alt') . "Escribe una contraseña", "top_20");
                 $r[] = input([
@@ -288,7 +288,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
-            return append_data($r);
+            return append($r);
 
 
         }
@@ -321,7 +321,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = div("Precios expresados en Pesos Mexicanos.", "bottom_10");
 
 
-            $r[] = div(append_data($x), "text-right top_20");
+            $r[] = div(append($x), "text-right top_20");
 
 
             if ($in_session > 0) {
@@ -331,7 +331,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
             $r[] = hr();
-            return append_data($r);
+            return append($r);
         }
 
     }
@@ -341,7 +341,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            return append_data([
+            return append([
 
                 input_hidden([
                     "name" => "descripcion",

@@ -9,7 +9,7 @@
     <?= div(
         div(
 
-            get_btw(
+            btw(
 
                 heading("ORDEN #" . $recibo[0]["id_proyecto_persona_forma_pago"], 3)
 

@@ -11,9 +11,9 @@ if (!function_exists('invierte_date_time')) {
             $r[] = form_open("", ["class" => 'form_busqueda_productos_solicitados']);
             $r[] = get_format_fecha_busqueda();
             $r[] = form_close();
-            $z[] = addNRow(append_data($r));
+            $z[] = addNRow(append($r));
             $z[] = addNRow(place("place_keywords top_50"));
-            return append_data($z);
+            return append($z);
 
         }
     }
@@ -24,9 +24,9 @@ if (!function_exists('invierte_date_time')) {
             $f[] = form_open("", ["class" => 'form_busqueda_desarrollo_solicitudes']);
             $f[] = get_format_fecha_busqueda();
             $f[] = form_close();
-            $r[] = addNRow(append_data($f));
+            $r[] = addNRow(append($f));
             $r[] = addNRow(place("place_metricas_servicio"));
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -38,9 +38,9 @@ if (!function_exists('invierte_date_time')) {
             $f[] = form_open("", ["class" => 'form_busqueda_desarrollo']);
             $f[] = get_format_fecha_busqueda();
             $f[] = form_close();
-            $r[] = addNRow(append_data($f));
+            $r[] = addNRow(append($f));
             $r[] = addNRow(place(" top_50 place_metricas_desarrollo"));
-            return append_data($r);
+            return append($r);
 
         }
 

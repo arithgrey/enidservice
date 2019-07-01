@@ -135,7 +135,7 @@ class Home extends CI_Controller
         $response = $this->principal->api("usuario_direccion/direccion_envio_pedido", $q, "html");
 
         if ($v > 0) {
-            $response = append_data([$response, input_hidden(["class" => "es_seguimiento", "value" => 1])]);
+            $response = append([$response, input_hidden(["class" => "es_seguimiento", "value" => 1])]);
         }
         return $response;
     }

@@ -34,7 +34,7 @@ foreach ($info_envio_direccion as $row) {
 }
 ?>
 
-<?= div(append_data([
+<?= div(append([
     icon('fa fa-bus'),
     "Dirección de envio "
 ])) ?>
@@ -42,7 +42,7 @@ foreach ($info_envio_direccion as $row) {
     <?= form_open("", ["class" => "form-horizontal form_direccion_envio"]) ?>
     <?= get_parte_direccion_envio($cp, $param, $calle, $entre_calles, $numero_exterior, $numero_interior) ?>
     <div <?= $direccion_visible ?> class="parte_colonia_delegacion">
-        <?= get_btw(
+        <?= btw(
 
             div("Colonia", ["class" => "label-off", "for" => "dwfrm_profile_address_colony"])
             ,
@@ -59,7 +59,7 @@ foreach ($info_envio_direccion as $row) {
 
 
         <?= div(
-                get_btw(
+                btw(
             div("Delegación o Municipio", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
             ,
             div(input([
@@ -76,7 +76,7 @@ foreach ($info_envio_direccion as $row) {
 
 
 
-        <?= div(get_btw(
+        <?= div(btw(
             div("Estado", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
             ,
             div(
@@ -95,7 +95,7 @@ foreach ($info_envio_direccion as $row) {
             "value"
         ),  " district  estado_c") ?>
 
-        <?= get_btw(
+        <?= btw(
             div("País", ["class" => "label-off", "for" => "dwfrm_profile_address_district"]),
             $pais,
             "district pais_c"

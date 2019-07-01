@@ -17,4 +17,4 @@ $r[] = anchor_enid("Le recordamos que puede acceder a su cuenta Enid Service a t
         "style" => "background: blue;color: white;padding: 5px;"
     ]);
 ?>
-<?= append_data($r) ?>
+<?= append($r) ?>

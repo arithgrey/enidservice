@@ -1,13 +1,41 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    if (!function_exists('render_contacto')) {
+        function render_contacto($data)
+        {
+
+
+            $ubicacion =  $data["ubicacion"];
+            $departamentos =  $data["departamentos"];
+            $nombre =  $data["nombre"];
+            $email =  $data["email"];
+            $telefono =  $data["telefono"];
+            $r[] = div(div(
+                heading_enid(get_social(0, "", 0), 3, "social_contact padding_20")
+                , 3), "imagen_principal");
+
+            $r[] = div(format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono),
+                [
+                    "class" => "padding_15  bottom_100 text-uppercase container inner contenedor_form shadow ",
+                    "id" => "direccion",
+                    "style" => "margin-top:-100px;"
+                ]);
+            $r[] = input_hidden(["value" => $ubicacion, "class" => "ubicacion"]);
+
+            return append($r);
+
+
+        }
+    }
+
     if (!function_exists('get_format_recibe_ubicacion')) {
         function get_format_recibe_ubicacion($servicio)
         {
 
 
             $r[] = div(
-                get_btw(
+                btw(
 
                     heading_enid("Recibe nuestra ubicación", 2, "strong")
                     ,
@@ -25,7 +53,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(div(div(get_form_ubicacion($servicio), "contendor_in_correo top_20"), 6, 1), "contenedor_eleccion_correo_electronico");
             $r[] = div(div(div(get_form_whatsapp($servicio), "contendor_in_correo top_20"), 6, 1), "contenedor_eleccion_whatsapp");
             $r[] = get_form_proceso_compra();
-            return append_data($r);
+            return append($r);
 
 
         }
@@ -36,7 +64,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(heading_enid("¿Quieres aparta tu pedido?", 2, "strong"), 1);
             $r[] = div(get_selector_direccion(), 1);
-            return div(append_data($r), 10, 1);
+            return div(append($r), 10, 1);
 
 
         }
@@ -60,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
                     "id" => 2
                 ]);
 
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -90,7 +118,7 @@ if (!function_exists('invierte_date_time')) {
                     "href" => path_enid("contact")
                 ]);
 
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -102,7 +130,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = '<form action="../contact/?w=1" method="post" class="form_proceso_compra">';
             $r[] = input_hidden(["class" => "proceso_compra", "value" => 1, "name" => "proceso_compra"]);
             $r[] = form_close();
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -116,7 +144,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = format_direccion_map($ubicacion);
             $r[] = get_form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono);
 
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -132,7 +160,7 @@ if (!function_exists('invierte_date_time')) {
                 "height" => "380"
             ]);
 
-            return div(append_data($r), 6);
+            return div(append($r), 6);
         }
     }
     if (!function_exists('get_formar_direccion')) {
@@ -170,7 +198,7 @@ if (!function_exists('invierte_date_time')) {
 
                 );
 
-                $response = div(append_data($r), 6);
+                $response = div(append($r), 6);
             }
             return $response;
 
@@ -204,7 +232,7 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
             $r[] = div(
-                append_data([
+                append([
 
                     input([
                         "id" => "correo",
@@ -224,7 +252,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = guardar("RECIBIR  UBICACIÓN", ["class" => "top_20"]);
             $r[] = form_close();
-            return append_data($r);
+            return append($r);
 
 
         }
@@ -270,7 +298,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = guardar("RECIBIR  UBICACIÓN", ["class" => "top_20"]);
             $r[] = form_close();
-            return append_data($r);
+            return append($r);
 
 
         }
@@ -343,7 +371,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = addNRow(guardar("Enviar mensaje", ["id" => 'btn_envio_mensaje'], 1));
                 $r[] = form_close();
 
-                $response = div(append_data($r), 6);
+                $response = div(append($r), 6);
 
             }
             return $response;
@@ -413,7 +441,7 @@ if (!function_exists('invierte_date_time')) {
                 6);
             $r[] = form_close();
 
-            return append_data($r);
+            return append($r);
 
         }
 

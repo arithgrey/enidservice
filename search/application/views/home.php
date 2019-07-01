@@ -1,7 +1,7 @@
 <?php
 $x = [];
 $x[] = get_format_filtros_paginacion($filtros, $order, $paginacion, $is_mobile);
-$x[] = append_data($lista_productos);
+$x[] = append($lista_productos);
 
 ?>
 
@@ -21,12 +21,12 @@ $x[] = append_data($lista_productos);
             ["class" => "text_filtro bg_black"]);
         $r[] = get_formar_menu_sugerencias($is_mobile, $bloque_busqueda, $busqueda);
         ?>
-        <?= div(append_data($r), 10, 1) ?>
+        <?= div(append($r), 10, 1) ?>
     </div>
 
-    <?= get_btw(
+    <?= btw(
 
-        div(append_data($x), 12)
+        div(append($x), 12)
         ,
         div($paginacion, 12)
         ,
@@ -36,7 +36,7 @@ $x[] = append_data($lista_productos);
 </div>
 <div class="row white top_30" style="background:  #080221;;">
     <?= div("", 2) ?>
-    <?= div(get_btw(
+    <?= div(btw(
         heading(
             "CATEGORIAS DESTACADAS",
             3

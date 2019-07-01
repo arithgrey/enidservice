@@ -45,9 +45,9 @@ if (!function_exists('invierte_date_time')) {
             ), 13);
 
 
-        $x[] = div(append_data($l), "contenedor_estaciones ", 1);
+        $x[] = div(append($l), "contenedor_estaciones ", 1);
 
-        return div(append_data($r), 'resumen_encuentro') . div(append_data($x), 'resumen_mensaje_pago');
+        return div(append($r), 'resumen_encuentro') . div(append($x), 'resumen_mensaje_pago');
     }
 
 }

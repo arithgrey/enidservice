@@ -106,28 +106,6 @@ class actividad_web_model extends CI_Model
                     " . $where;
 		return $query_get;
 	}
-
-	/*
-	function crea_conversaciones($param)
-	{
-		$where = $this->get_where_tiempo($param, 1);
-		$query_get = "SELECT
-                      DATE(fecha_registro) fecha ,
-                      COUNT(0)total,
-                        SUM(CASE WHEN leido_vendedor =1 THEN 1 ELSE 0 END)leidas_por_vendedor,
-                        SUM(CASE WHEN leido_cliente =1 THEN 1 ELSE 0 END)leidas_por_cliente
-                      FROM
-                      pregunta
-                      WHERE
-                       1=1
-                      AND
-                      " . $where . "
-                      GROUP BY
-                      DATE(fecha_registro)";
-		return $query_get;
-	}
-	*/
-
 	function crea_servicios_creados($param)
 	{
 		$where = $this->get_where_tiempo($param, 1);
@@ -440,12 +418,6 @@ class actividad_web_model extends CI_Model
 			$this->db->query($query_create);
 		}
 	}
-
-	/**
-	 * @param $param
-	 * @param $tipo
-	 * @return string
-	 */
 	function get_where_tiempo($param, $tipo)
 	{
 		$fecha_inicio = $param["fecha_inicio"];

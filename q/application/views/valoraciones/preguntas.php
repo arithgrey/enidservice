@@ -16,7 +16,7 @@ foreach ($preguntas as $row) {
     <div class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
         <div class="popup-head">
             <div class="popup-head-left pull-left">
-                <?= append_data([
+                <?= append([
                     $img,
                     get_texto_sobre_el_producto($modalidad, $row),
                     div($pregunta),

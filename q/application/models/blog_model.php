@@ -7,7 +7,6 @@ class blog_model extends CI_Model
 		parent::__construct();
 		$this->load->database();
 	}
-
 	function insert($params, $return_id = 0)
 	{
 		$insert = $this->db->insert("blog", $params);

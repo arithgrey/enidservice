@@ -92,37 +92,37 @@ $list_footer = [
 
                 $x = [];
                 $x[] = div(icon('fa fa-clock-o '), 2);
-                $x[] = div(append_data([
+                $x[] = div(append([
                     div("+ ENTREGAS PUNTUALES", 'strong', 1),
                     div("Recibe lo que deseas en tiempo y forma", 1)
                 ]));
                 ?>
-                <?= div(append_data($x), 3) ?>
+                <?= div(append($x), 3) ?>
 
 
                 <?php
                 $c = [];
                 $c[] = div(icon('fa fa-lock '), 2);
-                $c[] = div(append_data([
+                $c[] = div(append([
                     div(" COMPRAS SEGURAS", 'strong', 1),
                     div("Tu dinero se entregará cuando confirmes tu entrega!", 1)
                 ]));
 
                 ?>
-                <?= div(append_data($c), 3) ?>
+                <?= div(append($c), 3) ?>
 
 
                 <?php
 
                 $c = [];
                 $c[] = div(icon('fa fa-angle-right'), 2);
-                $c[] = div(append_data([
+                $c[] = div(append([
                     div(" FAQS", 'strong', 1),
                     div("Lo que te intereza saver!", 1)
                 ]));
 
                 ?>
-                <?= div(anchor_enid(append_data($c),
+                <?= div(anchor_enid(append($c),
                     [
                         "href" => path_enid("faqs"),
                         "class" => "white"
@@ -139,7 +139,7 @@ $list_footer = [
 
 <?php if ($in_session == 0): ?>
     <?php if (!isset($proceso_compra) && !is_null($proceso_compra) && $proceso_compra == 0): ?>
-        <?= div(append_data($list_footer), "base_paginas_extra" , 1) ?>
+        <?= div(append($list_footer), "base_paginas_extra" , 1) ?>
     <?php endif ?>
     <?php if (isset($is_mobile) && !is_null($is_mobile) && $is_mobile < 1): ?>
         <?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>
@@ -147,7 +147,7 @@ $list_footer = [
         <?php endif ?>
     <?php endif ?>
     <?= div(
-        get_btw(
+        btw(
             div("© 2019 ENID SERVICE.")
             ,
             div(

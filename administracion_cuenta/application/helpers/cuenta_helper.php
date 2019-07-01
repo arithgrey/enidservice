@@ -6,16 +6,16 @@ if (!function_exists('invierte_date_time')) {
         function get_format_foto_usuario($id_usuario, $usuario)
         {
 
-            $r[] = get_btw(
+            $r[] = btw(
                 get_format_perfil_usuario($id_usuario),
                 place("place_form_img"),
                 "col-lg-5 shadow padding_20"
             );
             $r[] = div(get_format_user($usuario), "page-header menu_info_usuario");
             $r[] = div("Mantén la calma esta información será solo será visible si tú lo permites ", 'registro_telefono_usuario_lada_negocio blue_enid3  white padding_1', 1);
-            $x[] = div(append_data($r), 8);
+            $x[] = div(append($r), 8);
             $x[] = div(get_format_resumen_cuenta($usuario), 4);
-            return append_data($x);
+            return append($x);
         }
     }
     if (!function_exists('get_format_privacidad_seguridad')) {
@@ -27,10 +27,10 @@ if (!function_exists('invierte_date_time')) {
             $x[] = hr();
             $x[] = place("place_registro_conceptos");
             $x[] = place("contenedor_conceptos_privacidad");
-            $r[] = div(append_data($x), 7);
+            $r[] = div(append($x), 7);
             $r[] = div(heading_enid("PRIVACIDAD Y SEGURIDAD", 3), 5);
 
-            return append_data($r);
+            return append($r);
         }
     }
 
@@ -40,7 +40,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = div(
-                append_data(
+                append(
                     [
                         heading_enid("MANTEN LA CALMA!", 3),
                         div("Tu dirección NO  se mostrará públicamente y solo podrán tener acceso a ella, personas que han comprado tus productos o las personas que te enviarán tus compras", 1),
@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = div(
-                append_data([
+                append([
                     heading_enid("DIRECCIÓN DE ENVÍO O RECEPCIÓN", 3),
                     div("El lugar donde compras o recibes tus compras o ventas", 1),
                     hr()
@@ -61,7 +61,7 @@ if (!function_exists('invierte_date_time')) {
                 5
             );
 
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -82,7 +82,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = guardar("MODIFICAR", ["class" => "editar_imagen_perfil top_20"]);
 
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -107,7 +107,7 @@ if (!function_exists('invierte_date_time')) {
                 1);
             $r[] = hr();
 
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -149,7 +149,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = guardar("Actualizar", ["id" => "inbutton", "class" => "btn btn_save input-sm"]);
             $r[] = form_close(place("msj_password"));
 
-            return append_data($r);
+            return append($r);
         }
 
     }
@@ -175,7 +175,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = get_campo($usuario, "apellido_materno", "Tu prime apellido");
 
             }
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -186,7 +186,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = form_open("", ["class" => "f_telefono_usuario_negocio"]);
             $r[] = div("Teléfono de negocio", "col-lg-3 strong");
-            $r[] = get_btw(
+            $r[] = btw(
                 input(
                     [
                         'name' => 'lada_negocio',
@@ -207,7 +207,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $r[] = get_btw(
+            $r[] = btw(
                 input(
                     [
                         'name' => 'telefono_negocio',
@@ -228,7 +228,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(guardar("Actualizar", ["class" => "input_enid"]), 2);
             $r[] = form_close();
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -238,7 +238,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r = [];
             $r[] = div("Teléfon Movil1", 3);
-            $r[] = get_btw(
+            $r[] = btw(
                 input(
                     [
                         "id" => "lada",
@@ -259,7 +259,7 @@ if (!function_exists('invierte_date_time')) {
 
             );
 
-            $r[] = get_btw(
+            $r[] = btw(
                 input([
                     "id" => "telefono",
                     "name" => "tel_contacto",
@@ -279,7 +279,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = guardar("Actualizar", ["class" => "input_enid"], 2);
 
 
-            $response = form_open("", ["class" => "form_telefono_usuario"]) . append_data($r) . form_close();
+            $response = form_open("", ["class" => "form_telefono_usuario"]) . append($r) . form_close();
             return $response;
 
         }
@@ -304,7 +304,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div('El correo electrónico NO se mostrará públicamente', 'blue_enid ', 1);
             $r[] = form_close();
-            return append_data($r);
+            return append($r);
 
 
         }
@@ -329,7 +329,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = place("registro_nombre_usuario");
             $r[] = form_close();
 
-            return append_data($r);
+            return append($r);
 
         }
     }

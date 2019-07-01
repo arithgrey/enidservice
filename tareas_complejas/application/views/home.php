@@ -29,8 +29,8 @@
                     $x[] = p("Es ideal cuando donde los requisitos son cambiantes y se necesita capacidad de reacción ante la competencia.");
                     ?>
 
-                    <?= div(append_data($x), 6) ?>
-                    <?= get_btw(
+                    <?= div(append($x), 6) ?>
+                    <?= btw(
                         img(
                             ["src" =>
                                 "../img_tema/metodologias/xpprogramming.png"

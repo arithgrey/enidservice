@@ -9,7 +9,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = heading_enid("¿Por qué Enid Service?",2,"strong text-uppercase top_30 bottom_30 text-center") ;
 
         $x[] =
-            get_btw(
+            btw(
                 div(heading_enid("Relaciones" ,3 , "strong"),1)
                 ,
                 div("Facilitamos la comunicación entre negocios y consumidores,  por lo tanto el éxito de las personas a quienes ayudamos, define nuestro propio éxito ",
@@ -25,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] =
 
-            get_btw(
+            btw(
                 div(heading_enid("Conexiones " ,3 ,"strong"),1)
                 ,
                 div("Te Acompañamos directamente  en una de tus actividades claves vinculadas a generan valor y que resulta necesarias para establecer ventajas competitivas ",
@@ -39,7 +39,7 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] =
 
-            get_btw(
+            btw(
                 div(heading_enid("Resultados " ,3 , "strong"),1)
                 ,
                 div("Te ayudamos a que crees planes y optimices tus estrategias de marketing para lograr resultados. ",
@@ -49,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
                 "col-lg-4 padding_10   text-center top_50 border-bottom"
             );
 
-        $r[] =  div(div(append_data($x),10,1), "row  topicos ");
+        $r[] =  div(div(append($x),10,1), "row  topicos ");
 
         $r[] = img(["src" => "../img_tema/portafolio/ejemplo-personas.jpg" ,"class" => "mah_500 top_50" ] );
         $r[] = heading_enid("Comienza ahora",2,"text-uppercase top_30 text-center top_50 ") ;
@@ -57,7 +57,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = br(5);
 
 
-        return append_data($r);
+        return append($r);
     }
 
 }

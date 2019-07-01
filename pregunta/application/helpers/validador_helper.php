@@ -7,7 +7,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(heading_enid("TUS PREGUNTAS ENVIADAS"), "col-lg-8 col-lg-offset-2 top_20" );
             $r[] = $preguntas_format;
-            return append_data($r);
+            return append($r);
 
 
         }
@@ -52,14 +52,14 @@ if (!function_exists('invierte_date_time')) {
 
                 }
 
-                $texto = div(append_data($p), "bloque_texto top_20" );
-                $img_servicio = anchor_enid(get_img_servicio($id_servicio),
+                $texto = div(append($p), "bloque_texto top_20" );
+                $img_servicio = anchor_enid(img_servicio($id_servicio),
                     [
                         "href" => get_url_servicio($id_servicio),
                         "class" => "anchor_imagen_servicio"
 
                     ]);
-                $principal_seccion = get_btw(
+                $principal_seccion = btw(
                     div($img_servicio, 2)
                     ,
                     div($texto, 10)
@@ -84,7 +84,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
 
-            return div(append_data($r), "contenedor_pregunta");
+            return div(append($r), "contenedor_pregunta");
 
         }
     }
@@ -108,7 +108,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = div(place("place_tambien_podria_interezar", ["id" => "place_tambien_podria_interezar"]), 8, 1);
         $r[] = div(place("place_valoraciones top_50", ["id" => "place_valoraciones"]), 8, 1);
 
-        return div(append_data($r),1);
+        return div(append($r),1);
     }
 
 }

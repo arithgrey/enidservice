@@ -6,7 +6,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = div(get_format_izquierdo($data["categorias_publicas_venta"], $data["categorias_temas_de_ayuda"], 1), 3);
         $r[] = div(get_format_listado_fq($data), 9);
-        return div(append_data($r), 1);
+        return div(append($r), 1);
 
     }
 
@@ -49,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
                 $titulo = $row["titulo"];
                 $url_img = $row["url_img"];
 
-                $bloque = get_btw(
+                $bloque = btw(
                     div(
                         img(
                             [
@@ -70,7 +70,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -91,7 +91,7 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = div(heading_enid($extra . $titulo, 4, "black text-uppercase underline"), 1);
                 $x[] = div(p($respuesta, "black top_30"), 1);
                 $x[] = div(p($fecha_registro, "top_30"), 1);
-                $response = append_data($x);
+                $response = append($x);
 
 
                 $r[] = div(
@@ -102,7 +102,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
-            return append_data($r);
+            return append($r);
         }
 
         function valida_format_respuestas_menu($in_session, $lista_categorias)
@@ -135,7 +135,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $r[] = get_formar_respuesta($respuesta, $in_session, $perfil);
             }
-            return append_data($r);
+            return append($r);
 
         }
 
@@ -145,7 +145,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(lista_categorias($categorias_publicas_venta));
             $r[] = div(place("place_categorias_extras"));
             $r[] = div(lista_categorias($categorias_temas_de_ayuda));
-            return div(append_data($r), "categorias_frecuentes padding_10 shadow top_30 border ");
+            return div(append($r), "categorias_frecuentes padding_10 shadow top_30 border ");
 
         }
 
@@ -259,7 +259,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
-            return div(div(append_data($r), 8, 1), "top_30");
+            return div(div(append($r), 8, 1), "top_30");
         }
 
         function get_format_faq_categorias($faqs_categoria)
@@ -277,12 +277,12 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = div($z, "day");
                 $x[] = img($source);
                 $x[] = heading($titulo);
-                $text = ul(li(append_data($x)), "event-list");
+                $text = ul(li(append($x)), "event-list");
                 $r[] = anchor_enid($text, ["href" => $href]);
                 $z++;
             }
 
-            return div(append_data($r));
+            return div(append($r));
         }
 
         function get_formar_respuesta($respuesta, $in_session, $perfil)
@@ -309,7 +309,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = $respuesta;
 
             }
-            return div(append_data($r));
+            return div(append($r));
 
         }
 
@@ -334,8 +334,9 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $response = "";
+            $n = [20 ,19 ,17];
+            if ($in_session == 1 && !in_array($perfil,$n)) {
 
-            if ($in_session == 1 && $perfil != 20 && $perfil != 19 && $perfil != 17) {
                 $response = anchor_enid(
                     text_icon("fa fa-plus-circle", "AGREGAR")
                     ,
@@ -347,7 +348,6 @@ if (!function_exists('invierte_date_time')) {
                 );
 
             }
-
             return $response;
         }
 
@@ -364,7 +364,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $l[] = div(anchor_enid(div($nombre_categoria . "(" . $faqs . ")"), ["href" => $href]));
             }
-            return append_data($l);
+            return append($l);
         }
 
 }

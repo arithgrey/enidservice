@@ -17,7 +17,7 @@ foreach ($contactos as $row) {
     <div class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
         <div class="popup-head">
             <div class="popup-head-left pull-left">
-                <?= append_data([
+                <?= append([
                     img([
                         "src" => "../img_tema/user/user.png",
                         "style" => 'width: 44px!important;',

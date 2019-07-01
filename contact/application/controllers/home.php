@@ -15,14 +15,14 @@ class Home extends CI_Controller
     {
 
         $data = $this->principal->val_session("Solicita una llamada aquí");
-        $data["departamentos"] = $this->get_departamentos_enid();
-        $data =  $this->principal->getCssJs($data , "contacto");
+        $data["departamentos"] = $this->principal->api("departamento/index/format/json/");
+        $data = $this->principal->getCssJs($data, "contacto");
         $param = $this->input->post();
 
         if (get_param_def($param, "proceso_compra", 0, 1) > 0) {
 
 
-            $this->principal->show_data_page($this->principal->getCssJs($data, "contacto_proceso_compra"), get_format_proceso_compra() , 1);
+            $this->principal->show_data_page($this->principal->getCssJs($data, "contacto_proceso_compra"), get_format_proceso_compra(), 1);
 
         } else {
 
@@ -39,25 +39,16 @@ class Home extends CI_Controller
 
         if ($data["in_session"] == 0 && get_param_def($param, "servicio", 0, 1) > 0) {
 
-            $data =  $this->principal->getCssJs($data, "contacto_ubicacion");
-            $this->principal->show_data_page($data, get_format_recibe_ubicacion($param["servicio"]) , 1);
-
+            $data = $this->principal->getCssJs($data, "contacto_ubicacion");
+            $this->principal->show_data_page($data, get_format_recibe_ubicacion($param["servicio"]), 1);
 
         } else {
 
-
             $param = $this->input->get();
             $data["ubicacion"] = exists_array_def($param, "ubicacion");
-            $this->principal->show_data_page($data, 'home');
+            $this->principal->show_data_page($data, render_contacto($data), 1);
 
         }
-    }
-
-    private function get_departamentos_enid()
-    {
-
-        $api = "departamento/index/format/json/";
-        return $this->principal->api($api);
     }
 
 }

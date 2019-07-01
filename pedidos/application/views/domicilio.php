@@ -25,7 +25,7 @@ $tipo_entrega = $recibo["tipo_entrega"];
         ),
         5
     ) ?>
-    <?= get_btw(
+    <?= btw(
 
         div(get_forms_domicilio_entrega($id_recibo, $lista_direcciones), 6)
         ,

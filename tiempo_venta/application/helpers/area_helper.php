@@ -6,7 +6,7 @@ if (!function_exists('invierte_date_time')) {
 
         function get_hiddens_tickects($action, $ticket)
         {
-            return append_data([
+            return append([
                 input_hidden(["class" => "action", "value" => $action]),
                 input_hidden(["class" => "ticket", "value" => $ticket])
             ]);
@@ -18,7 +18,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = heading_enid("BUZÓN", 3);
-            $r[] = div(append_data(
+            $r[] = div(append(
 
                 anchor_enid("HECHAS" .
                     span("", ['class' => 'notificacion_preguntas_sin_leer_cliente']),
@@ -42,7 +42,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = place("place_buzon");
 
-            return append_data($r);
+            return append($r);
 
         }
     }
@@ -63,10 +63,10 @@ if (!function_exists('invierte_date_time')) {
                 ), ["class" => "text-center top_20"]);
             $x[] = div($alcance, " text-center ");
 
-            $r[] = div(append_data($x), 3);
+            $r[] = div(append($x), 3);
             $r[] = div(place("place_ventas_usuario"), 9);
 
-            return div(append_data($r), "text-center");
+            return div(append($r), "text-center");
 
         }
     }
@@ -93,7 +93,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_td("Mínimo", ["class" => 'num_alcance']);
             $r[] = "</tr>";
             $r[] = "</table>";
-            $response = append_data($r);
+            $response = append($r);
         }
         return $response;
 
