@@ -12,7 +12,7 @@ class Home extends CI_Controller
     function index()
     {
 
-        $data = $this->principal->val_session();
+        $data = $this->app->session();
 
         $data["respuesta"] = "";
         $data["faqs_categoria"] = "";
@@ -66,15 +66,15 @@ class Home extends CI_Controller
 
         $data["param"] = $this->input->get();
         
-        $data = $this->principal->getCssJs($data,"faq");
-        $this->principal->show_data_page($data,   get_format_faqs($data) , 1);
+        $data = $this->app->cssJs($data,"faq");
+        $this->app->pagina($data,   get_format_faqs($data) , 1);
 
     }
     private function get_recientes($q){
 
 
         $api = "fq/index/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
 
     }
     private function get_categorias_por_tipo($tipo)
@@ -82,7 +82,7 @@ class Home extends CI_Controller
 
         $q["tipo"] = $tipo;
         $api = "categoria/categorias_por_tipo/format/json/";
-        $response = $this->principal->api($api, $q);
+        $response = $this->app->api($api, $q);
 
         return $response;
     }
@@ -101,7 +101,7 @@ class Home extends CI_Controller
         $q["extra"] = $extra;
 
         $api = "fq/qsearch/format/json/";
-        $response = $this->principal->api($api, $q);
+        $response = $this->app->api($api, $q);
         $response =  $this->append_imgs($response);
 
         return $response;
@@ -136,7 +136,7 @@ class Home extends CI_Controller
 
         $q["id_faq"] = $id_faq;
         $api = "imagen_faq/img/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
 
     }
     private function get_categorias_tipo($tipo = 1)
@@ -144,7 +144,7 @@ class Home extends CI_Controller
 
         $q["tipo"] = $tipo;
         $api = "categoria/categorias_por_tipo/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     private function get_faq($faq)
@@ -152,7 +152,7 @@ class Home extends CI_Controller
 
         $q["id"] = $faq;
         $api = "fq/id/format/json/";
-        $response = $this->principal->api($api, $q);
+        $response = $this->app->api($api, $q);
         return $response;
 
     }
@@ -161,7 +161,7 @@ class Home extends CI_Controller
     {
         $param["q"] = $q;
         $api = "fq/search/format/json/";
-        return $this->principal->api($api, $param);
+        return $this->app->api($api, $param);
     }
 
 }

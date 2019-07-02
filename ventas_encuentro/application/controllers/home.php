@@ -8,15 +8,15 @@ class Home extends CI_Controller
 
         $this->load->helper("ventasencuentro");
         $this->load->library(lib_def());
-        $this->principal->acceso();
+        $this->app->acceso();
     }
 
     function index()
     {
-        $data = $this->principal->val_session();
-        $this->principal->acceso();
+        $data = $this->app->session();
+        $this->app->acceso();
         $data["action"] = $this->input->get("action");
-        $this->principal->show_data_page($this->principal->getCSSJs($data, "ventas_encuentro"), 'home');
+        $this->app->pagina($this->app->cssJs($data, "ventas_encuentro"), 'home');
 
     }
 

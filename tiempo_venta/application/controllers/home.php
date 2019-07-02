@@ -7,15 +7,15 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->helper("area");
         $this->load->library(lib_def());
-        $this->principal->acceso();
+        $this->app->acceso();
     }
 
     function index()
     {
 
-        $data = $this->principal->val_session();
-        $this->principal->acceso();
-        $this->principal->show_data_page($this->principal->getCssJs($data, "tiempo_venta"), 'home');
+        $data = $this->app->session();
+        $this->app->acceso();
+        $this->app->pagina($this->app->cssJs($data, "tiempo_venta"), 'home');
 
     }
 

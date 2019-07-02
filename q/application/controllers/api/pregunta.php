@@ -66,13 +66,13 @@ class pregunta extends REST_Controller
             $pregunta = $pregunta[0];
 			$id_usuario = $pregunta["id_usuario"];
 			if ($id_usuario > 0) {
-				$usuario = $this->principal->get_info_usuario($id_usuario);
+				$usuario = $this->app->usuario($id_usuario);
 				if (es_data($usuario) > 0) {
 
 					$cliente = $usuario[0];
 					$nombre = strtoupper($cliente["nombre"] . " " . $cliente["apellido_paterno"]);
 					$sender = get_format_respuesta_cliente($cliente["email"], $nombre, $pregunta["id_servicio"]);
-					$response = $this->principal->send_email_enid($sender, 1);
+					$response = $this->app->send_email($sender, 1);
 				}
 			}
 		}
@@ -89,13 +89,13 @@ class pregunta extends REST_Controller
 		    $pregunta=  $pregunta[0];
 			$id_usuario = $pregunta["id_vendedor"];
 			if ($id_usuario > 0) {
-				$usuario = $this->principal->get_info_usuario($id_usuario);
+				$usuario = $this->app->usuario($id_usuario);
 				if (es_data($usuario) > 0) {
 
 					$cliente = $usuario[0];
 					$nombre = strtoupper($cliente["nombre"] . " " . $cliente["apellido_paterno"]);
 					$sender = get_format_respuesta_vendedor($cliente["email"], $nombre, $pregunta["id_servicio"]);
-					$response = $this->principal->send_email_enid($sender, 1);
+					$response = $this->app->send_email($sender, 1);
 				}
 			}
 		}
@@ -119,9 +119,9 @@ class pregunta extends REST_Controller
 
 		$param = $this->post();
 		$response["in_session"] = 0;
-		if ($this->principal->is_logged_in()) {
+		if ($this->app->is_logged_in()) {
 			$response = false;
-			$param["usuario"] = $this->principal->get_session("idusuario");
+			$param["usuario"] = $this->app->get_session("idusuario");
 			if (if_ext($param, 'pregunta,usuario,servicio')) {
 
 				$id_servicio = $param["servicio"];
@@ -149,13 +149,13 @@ class pregunta extends REST_Controller
 	private function get_usuario_servicio($id_servicio)
 	{
 		$q["id_servicio"] = $id_servicio;
-		return $this->principal->api("usuario/usuario_servicio/format/json/", $q);
+		return $this->app->api("usuario/usuario_servicio/format/json/", $q);
 	}
 
 	private function notifica_vendedor($usuario)
 	{
 
-		$this->principal->send_email_enid(get_notificacion_pregunta($usuario));
+		$this->app->send_email(get_notificacion_pregunta($usuario));
 	}
 
 	function periodo_GET()
@@ -173,7 +173,7 @@ class pregunta extends REST_Controller
 	{
 
 		$param = $this->get();
-		$param["id_usuario"] = $this->principal->get_session("idusuario");
+		$param["id_usuario"] = $this->app->get_session("idusuario");
 		$data_complete["modalidad"] = $param["modalidad"];
 		if ($param["modalidad"] >  0 ) {
 
@@ -207,20 +207,20 @@ class pregunta extends REST_Controller
 	{
 
 		$q["id_pregunta"] = $id_pregunta;
-		return $this->principal->api("respuesta/num_respuestas_sin_leer/format/json/", $q);
+		return $this->app->api("respuesta/num_respuestas_sin_leer/format/json/", $q);
 	}
 
 	function preguntas_sin_leer_GET()
 	{
 
 		$param = $this->get();
-		$param["id_usuario"] = $this->principal->get_session("idusuario");
+		$param["id_usuario"] = $this->app->get_session("idusuario");
 
         $response =  "";
 		if ($param["modalidad"] == 1) {
 
 			if (get_param_def($param,"id_usuario") > 0 ) {
-				$param["id_usuario"] = $this->principal->get_session("idusuario");
+				$param["id_usuario"] = $this->app->get_session("idusuario");
 			}
 
 			$response =  [

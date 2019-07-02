@@ -11,7 +11,7 @@ class Cobranza extends REST_Controller
         parent::__construct();
         $this->load->helper("cobranza");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->principal->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("idusuario");
     }
 
     function calcula_costo_envio_GET()
@@ -33,7 +33,7 @@ class Cobranza extends REST_Controller
     function get_pago($q)
     {
 
-        return $this->principal->api("recibo/resumen_desglose_pago", $q, "html");
+        return $this->app->api("recibo/resumen_desglose_pago", $q, "html");
     }
 
     function valida_estado_pago_GET()
@@ -51,20 +51,20 @@ class Cobranza extends REST_Controller
     function get_notificacion_pago($q)
     {
 
-        return $this->principal->api("notificacion_pago/pago_resumen/format/json/", $q);
+        return $this->app->api("notificacion_pago/pago_resumen/format/json/", $q);
     }
 
     function verifica_pago_notificado($q)
     {
 
-        return $this->principal->api("notificacion_pago/es_notificado/format/json/", $q);
+        return $this->app->api("notificacion_pago/es_notificado/format/json/", $q);
 
     }
 
     function carga_servicio_por_recibo($q)
     {
 
-        return $this->principal->api("tickets/servicio_recibo/format/json/", $q);
+        return $this->app->api("tickets/servicio_recibo/format/json/", $q);
     }
 
     function solicitud_proceso_pago_POST()
@@ -160,7 +160,7 @@ class Cobranza extends REST_Controller
                 if ($es_usuario_nuevo == 0) {
 
                     $data_acciones_posteriores["id_usuario"] = $data_orden["id_usuario"];
-                    $data_acciones_posteriores["email"] = $this->principal->get_session("email");
+                    $data_acciones_posteriores["email"] = $this->app->get_session("email");
 
                 } else {
 
@@ -199,19 +199,19 @@ class Cobranza extends REST_Controller
     {
 
         $q["id_servicio"] = $id_servicio;
-        return $this->principal->api("recibo/precio_servicio/format/json/", $q);
+        return $this->app->api("recibo/precio_servicio/format/json/", $q);
     }
 
     function consulta_disponibilidad_servicio($q)
     {
 
-        return $this->principal->api("servicio/info_disponibilidad_servicio/format/json/", $q);
+        return $this->app->api("servicio/info_disponibilidad_servicio/format/json/", $q);
     }
 
     private function get_costo_envio_punto_encuentro($q)
     {
 
-        $response = $this->principal->api("punto_encuentro/costo_entrega/format/json/", $q);
+        $response = $this->app->api("punto_encuentro/costo_entrega/format/json/", $q);
         return (es_data($response)) ? $response[0]["costo_envio"] : 50;
 
     }
@@ -234,7 +234,7 @@ class Cobranza extends REST_Controller
 
             ];
 
-            return $this->principal->api("usuario_deseo/status", $q, "json", "PUT");
+            return $this->app->api("usuario_deseo/status", $q, "json", "PUT");
 
 
         }
@@ -243,7 +243,7 @@ class Cobranza extends REST_Controller
     private function genera_orden_compra($q, $param)
     {
 
-        $id_recibo = $this->principal->api("recibo/orden_de_compra", $q, "json", "POST");
+        $id_recibo = $this->app->api("recibo/orden_de_compra", $q, "json", "POST");
 
         if ($id_recibo > 0 && get_param_def($param, "comentarios") !== 0 && strlen(trim($param["comentarios"])) > 5) {
             $param["id_recibo"] = $id_recibo;
@@ -255,13 +255,13 @@ class Cobranza extends REST_Controller
     private function agrega_notas_pedido($q)
     {
 
-        return $this->principal->api("recibo_comentario/index", $q, "json", "POST");
+        return $this->app->api("recibo_comentario/index", $q, "json", "POST");
     }
 
     private function gamificacion_deseo($q)
     {
 
-        return $this->principal->api("servicio/gamificacion_deseo", $q, "json", "PUT");
+        return $this->app->api("servicio/gamificacion_deseo", $q, "json", "PUT");
     }
 
     function acciones_posterior_orden_pago($param)
@@ -275,7 +275,7 @@ class Cobranza extends REST_Controller
     {
 
 
-        return $this->principal->api("areacliente/pago_pendiente_web/format/json/", $q);
+        return $this->app->api("areacliente/pago_pendiente_web/format/json/", $q);
     }
 
     /*aquí creamos en base de datos*/
@@ -293,7 +293,7 @@ class Cobranza extends REST_Controller
         $asunto = "NUEVA ORDEN DE COMPRA EN PROCESO, RECIBO #" . $id_recibo;
         $cuerpo = img_enid([], 1, 1) . heading_enid($text, 3);
         $q = get_request_email("enidservice@gmail.com", $asunto, $cuerpo);
-        $this->principal->send_email_enid($q);
+        $this->app->send_email($q);
 
     }
 
@@ -307,20 +307,20 @@ class Cobranza extends REST_Controller
         ];
 
 
-        return $this->principal->api("usuario_direccion/direccion_envio_pedido", $q, "html");
+        return $this->app->api("usuario_direccion/direccion_envio_pedido", $q, "html");
 
     }
 
     private function create_orden_punto_entrega($q)
     {
 
-        return $this->principal->api("proyecto_persona_forma_pago_punto_encuentro/index", $q, "json", "POST");
+        return $this->app->api("proyecto_persona_forma_pago_punto_encuentro/index", $q, "json", "POST");
     }
 
     private function agrega_punto_encuentro_usuario($q)
     {
 
-        return $this->principal->api("usuario_punto_encuentro/index", $q, "json", "POST");
+        return $this->app->api("usuario_punto_encuentro/index", $q, "json", "POST");
     }
 
     function solicitud_cambio_punto_entrega_POST()
@@ -377,7 +377,7 @@ class Cobranza extends REST_Controller
                 }
                 $response["usuario_existe"] = 0;
                 $session = $this->create_session($param);
-                $this->principal->set_userdata($session);
+                $this->app->set_userdata($session);
                 $this->response($response);
 
             }
@@ -391,7 +391,7 @@ class Cobranza extends REST_Controller
     function crea_usuario($q)
     {
 
-        return $this->principal->api("usuario/prospecto", $q, "json", "POST");
+        return $this->app->api("usuario/prospecto", $q, "json", "POST");
     }
 
     private function crea_orden_punto_entrega($param)
@@ -426,7 +426,7 @@ class Cobranza extends REST_Controller
     function crea_orden($q)
     {
 
-        return $this->principal->api("cobranza/solicitud_proceso_pago", $q, "json", "POST");
+        return $this->app->api("cobranza/solicitud_proceso_pago", $q, "json", "POST");
     }
 
     function create_session($q)
@@ -438,7 +438,7 @@ class Cobranza extends REST_Controller
             "secret" => $q["password"],
         ];
 
-        return $this->principal->api("sess/start", $q, "json", "POST", 0, 1, "login");
+        return $this->app->api("sess/start", $q, "json", "POST", 0, 1, "login");
     }
 
 
@@ -451,7 +451,7 @@ class Cobranza extends REST_Controller
     function notifica_registro_usuario($q)
     {
 
-        return $this->principal->api("emp/solicitud_usuario", $q);
+        return $this->app->api("emp/solicitud_usuario", $q);
     }
 
     function agrega_data_cliente($data)
@@ -462,7 +462,7 @@ class Cobranza extends REST_Controller
         foreach ($data as $row) {
 
             $response[$x] = $row;
-            $response[$x]["cliente"] = $this->principal->get_info_usuario($row["id_usuario"]);
+            $response[$x]["cliente"] = $this->app->usuario($row["id_usuario"]);
             $x++;
         }
 
@@ -487,7 +487,7 @@ class Cobranza extends REST_Controller
     function get_estatus_enid_service($q)
     {
 
-        return $this->principal->api("servicio/nombre_estado_enid/format/json/", $q);
+        return $this->app->api("servicio/nombre_estado_enid/format/json/", $q);
     }
 
     function comision_GET()

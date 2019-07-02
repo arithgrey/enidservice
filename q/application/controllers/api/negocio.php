@@ -10,7 +10,7 @@ class Negocio extends REST_Controller
 		parent::__construct();
 		$this->load->model('negocio_model');
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("idusuario");
 	}
 
 	function index_GET()
@@ -25,7 +25,7 @@ class Negocio extends REST_Controller
 	private function get_tipo_entregas($id_usuario)
 	{
 		$q["id_usuario"] = $id_usuario;
-		return $this->principal->api("usuario/entregas_en_casa/format/json/", $q);
+		return $this->app->api("usuario/entregas_en_casa/format/json/", $q);
 	}
 	/*
 	function entregas_en_casa_PUT(){

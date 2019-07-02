@@ -15,8 +15,8 @@ class productividad extends REST_Controller
     {
 
         $param = $this->get();
-        $id_usuario = $this->principal->get_session('idusuario');
-        $id_perfil = $param["id_perfil"] = $this->principal->getperfiles();
+        $id_usuario = $this->app->get_session('idusuario');
+        $id_perfil = $param["id_perfil"] = $this->app->getperfiles();
         $param["id_usuario"] = $id_usuario;
 
 
@@ -76,7 +76,7 @@ class productividad extends REST_Controller
             "se_lee" => 0,
             "se_ve_cliente" => 0,
         ];
-        return $this->principal->api("pregunta/cliente/format/json/", $q);
+        return $this->app->api("pregunta/cliente/format/json/", $q);
 
     }
 
@@ -88,26 +88,26 @@ class productividad extends REST_Controller
             "se_responde" => 0,
         ];
 
-        return $this->principal->api("pregunta/vendedor/format/json/", $q);
+        return $this->app->api("pregunta/vendedor/format/json/", $q);
 
     }
 
     private function get_objetivos_perfil($q)
     {
 
-        return $this->principal->api("objetivos/perfil/format/json/", $q);
+        return $this->app->api("objetivos/perfil/format/json/", $q);
     }
 
     private function valida_producto_anunciado($q)
     {
 
-        return $this->principal->api("servicio/num_anuncios/format/json/", $q);
+        return $this->app->api("servicio/num_anuncios/format/json/", $q);
     }
 
     private function verifica_direccion_registrada_usuario($q)
     {
 
-        return $this->principal->api("usuario_direccion/num/format/json/", $q);
+        return $this->app->api("usuario_direccion/num/format/json/", $q);
     }
 
     function get_notificaciones_usuario_perfil($param)
@@ -156,20 +156,20 @@ class productividad extends REST_Controller
 
     private function get_adeudo_cliente($q)
     {
-        return $this->principal->api("recibo/deuda_cliente/format/json/", $q);
+        return $this->app->api("recibo/deuda_cliente/format/json/", $q);
     }
 
     private function get_num_lectura_valoraciones($q)
     {
 
-        return $this->principal->api("servicio/num_lectura_valoraciones/format/json/", $q);
+        return $this->app->api("servicio/num_lectura_valoraciones/format/json/", $q);
     }
 
     private function email_enviados_enid_service()
     {
 
         $q["info"] = 1;
-        return $this->principal->api("prospecto/dia/format/json/", $q);
+        return $this->app->api("prospecto/dia/format/json/", $q);
 
     }
 
@@ -177,35 +177,35 @@ class productividad extends REST_Controller
     {
 
         $q["info"] = 1;
-        return $this->principal->api("pagina_web/dia/format/json/", $q);
+        return $this->app->api("pagina_web/dia/format/json/", $q);
     }
 
     private function tareas_enid_service()
     {
 
         $q["info"] = 1;
-        return $this->principal->api("tarea/tareas_enid_service/format/json/", $q);
+        return $this->app->api("tarea/tareas_enid_service/format/json/", $q);
     }
 
     private function verifica_registro_telefono($q)
     {
 
-        return $this->principal->api("usuario/verifica_registro_telefono/format/json/", $q);
+        return $this->app->api("usuario/verifica_registro_telefono/format/json/", $q);
     }
 
     function get_recordatorios($id_usuario)
     {
 
         $q["id_usuario"] = $id_usuario;
-        return $this->principal->api("recordatorio/usuario/format/json/", $q);
+        return $this->app->api("recordatorio/usuario/format/json/", $q);
 
     }
 
     private function pendientes_ventas_usuario($id_usuario)
     {
         $q["id_usuario"] = $id_usuario;
-        $response = $this->principal->api("recibo/pendientes_sin_cierre/format/json/", $q);
-        $response = $this->principal->get_imagenes_productos(0, 1, 1, 1, $response);
+        $response = $this->app->api("recibo/pendientes_sin_cierre/format/json/", $q);
+        $response = $this->app->imgs_productos(0, 1, 1, 1, $response);
         return $response;
     }
 
@@ -214,14 +214,14 @@ class productividad extends REST_Controller
 
         $q["fecha"] = 1;
 
-        return $this->principal->api("recibo/dia/format/json/", $q);
+        return $this->app->api("recibo/dia/format/json/", $q);
     }
 
     private function get_scostos($id_usuario)
     {
 
         $q["id_usuario"] = $id_usuario;
-        return $this->principal->api("costo_operacion/scostos/format/json/", $q);
+        return $this->app->api("costo_operacion/scostos/format/json/", $q);
 
     }
 
@@ -229,7 +229,7 @@ class productividad extends REST_Controller
     {
 
         $q["id_usuario"] = $id_usuario;
-        return $this->principal->api("tickets/pendientes/format/json/", $q);
+        return $this->app->api("tickets/pendientes/format/json/", $q);
     }
 
 }

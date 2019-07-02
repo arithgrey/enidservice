@@ -99,7 +99,7 @@ class Imagen_servicio extends REST_Controller
 	private function delete_imagen($q)
 	{
 
-		return $this->principal->api("img/index", $q, "json", "DELETE");
+		return $this->app->api("img/index", $q, "json", "DELETE");
 	}
 
 	private function valida_existencia_servicio($q)
@@ -122,7 +122,7 @@ class Imagen_servicio extends REST_Controller
 	{
 
 		$q["existencia"] = 0;
-		return $this->principal->api("servicio/status_imagen", $q, "json", "PUT");
+		return $this->app->api("servicio/status_imagen", $q, "json", "PUT");
 	}
 
 }

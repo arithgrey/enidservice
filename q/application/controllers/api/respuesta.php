@@ -11,7 +11,7 @@ class Respuesta extends REST_Controller
         $this->load->helper("respuesta");
         $this->load->model("respuesta_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->principal->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("idusuario");
     }
 
     function respuesta_pregunta_POST()
@@ -80,7 +80,7 @@ class Respuesta extends REST_Controller
             "info_usuario" => 0,
         ];
         if ($param["modalidad"] == 1) {
-            $response["info_usuario"] = $this->principal->get_info_usuario($param["usuario_pregunta"]);
+            $response["info_usuario"] = $this->app->usuario($param["usuario_pregunta"]);
         }
         $this->load->view("valoraciones/form_respuesta", $response);
 
@@ -106,19 +106,19 @@ class Respuesta extends REST_Controller
     private function notifica_respuesta_email($q)
     {
 
-        return $this->principal->api("pregunta/respuesta_vendedor/format/json/", $q);
+        return $this->app->api("pregunta/respuesta_vendedor/format/json/", $q);
 
     }
 
     private function get_respuestas_pregunta($q)
     {
 
-        return $this->principal->api("respon/respuestas_pregunta/format/json/", $q);
+        return $this->app->api("respon/respuestas_pregunta/format/json/", $q);
     }
 
     private function set_visto_pregunta($q)
     {
-        return $this->principal->api("pregunta/visto_pregunta", $q, "json", "PUT");
+        return $this->app->api("pregunta/visto_pregunta", $q, "json", "PUT");
     }
 
 }

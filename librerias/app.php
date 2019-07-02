@@ -1,29 +1,28 @@
 <?php if (!defined('BASEPATH')) exit('No permitir el acceso directo al script');
 
-class principal extends CI_Controller
+class app extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->library('../../librerias/sessionclass');
+        $this->load->library("session");
     }
 
     function api($api, $q = [], $format = 'json', $type = 'GET', $debug = 0, $externo = 0, $b = "")
     {
 
-        $e  = 1;
+        $e = 1;
 
-        foreach ($q as $clave => $row ){
+        foreach ($q as $clave => $row) {
 
-            if ( is_null($q[$clave]) ) {
+            if (is_null($q[$clave])) {
                 $q[$clave] = "";
             }
         }
 
-        if( count($q) < 1 ){
-            $q["x"] =  1;
+        if (count($q) < 1) {
+            $q["x"] = 1;
         }
-
 
 
         if ($externo == 0) {
@@ -67,17 +66,7 @@ class principal extends CI_Controller
         return $result->response;
     }
 
-    function get_session($key)
-    {
-        return $this->sessionclass->get_session($key);
-    }
-
-    function logout()
-    {
-        $this->sessionclass->logout();
-    }
-
-    function get_imagenes_productos($id_servicio, $completo = 0, $limit = 1, $path = 0, $data = [])
+    function imgs_productos($id_servicio, $completo = 0, $limit = 1, $path = 0, $data = [])
     {
         $response = [];
         $a = 0;
@@ -132,11 +121,11 @@ class principal extends CI_Controller
 
     function calcula_costo_envio($q)
     {
-        $api = "cobranza/calcula_costo_envio/format/json/";
-        return $this->api($api, $q);
+
+        return $this->api("cobranza/calcula_costo_envio/format/json/", $q);
     }
 
-    function send_email_enid($q, $test = 0)
+    function send_email($q, $test = 0)
     {
 
         $api = "sender/index";
@@ -144,53 +133,39 @@ class principal extends CI_Controller
         return $this->api($api, $q, 'json', "POST", 0, 1, "msj");
     }
 
-    function get_info_usuario($id_usuario)
+    function usuario($id_usuario, $completo = 0)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        $api = "usuario/q/format/json/";
-        return $this->api($api, $q);
+        $q = [
+            "id_usuario" => $id_usuario,
+            "c" => $completo
+        ];
+        return $this->api("usuario/q/format/json/", $q);
     }
 
-    function get_base_servicio($id_servicio)
-    {
-        $q["id_servicio"] = $id_servicio;
-        $api = "servicio/base/format/json/";
-        return $this->api($api, $q);
-    }
-
-    function create_pagination($q)
+    function servicio($id_servicio, $completo = 0)
     {
 
-        return  $this->api("paginacion/create/format/json/", $q);
-
+        $q = [
+            "id_servicio" => $id_servicio,
+            "c" => $completo
+        ];
+        return $this->api("servicio/base/format/json/", $q);
     }
 
+    function paginacion($q)
+    {
 
+        return $this->api("paginacion/create/format/json/", $q);
+    }
 
     function acceso()
     {
 
-        $s=  $this->sessionclass->is_logged_in();
-        $fn = ( $this->sessionclass->is_logged_in() > 0  )  ?   "" : $this->logout();
-
+        $fn = ($this->is_logged_in() > 0) ? "" : $this->logout();
     }
 
-    function is_logged_in()
-    {
-
-        return $this->sessionclass->is_logged_in();
-
-    }
-
-    function set_userdata($session_data)
-    {
-
-        $this->sessionclass->set_userdata($session_data);
-
-    }
-
-    function show_data_page($data, $center_page, $pagina_base = 0)
+    function pagina($data, $center_page, $pagina_base = 0)
     {
 
 
@@ -211,35 +186,37 @@ class principal extends CI_Controller
 
     function getperfiles()
     {
-        return $this->sessionclass->getperfiles();
+        return $this->session->userdata('perfiles')[0]["idperfil"];
     }
 
-    function val_session($titulo = "", $meta_keywords = "", $desc = "", $url_img_post = "")
+    function session($titulo = "", $meta_keywords = "", $desc = "", $url_img_post = "")
     {
 
         $data["is_mobile"] = ($this->agent->is_mobile() == FALSE) ? 0 : 1;
         $data["proceso_compra"] = 0;
         $data["clasificaciones_departamentos"] = $this->get_departamentos();
 
-        if ($this->sessionclass->is_logged_in() > 0) {
+        if ($this->is_logged_in() > 0) {
 
-            $menu = $this->sessionclass->create_contenido_menu();
-            $nombre = $this->get_session("nombre");
+
+            $session = $this->get_session();
+            $menu = create_contenido_menu($session);
+
+            $nombre = $session["nombre"];
             $data['titulo'] = $titulo;
             $data["menu"] = $menu;
             $data["nombre"] = $nombre;
-            $data["email"] = $this->get_session("email");
-            $data["perfilactual"] = $this->sessionclass->get_nombre_perfil();
-            $data["id_perfil"] = $this->getperfiles();
+            $data["email"] = $session["email"];
+            $data["perfilactual"] = primer_elemento($session["perfildata"], "nombreperfil", "");
+            $data["id_perfil"] = primer_elemento($session['perfiles'], "idperfil", "");
             $data["in_session"] = 1;
             $data["no_publics"] = 1;
             $data["meta_keywords"] = $meta_keywords;
             $data["url_img_post"] = "";
-            $data["id_usuario"] = $this->get_session("idusuario");
-            $data["id_empresa"] = $this->get_session("idempresa");
-            $data["info_empresa"] = $this->get_session("info_empresa");
+            $data["id_usuario"] = $session["idusuario"];
+            $data["id_empresa"] = $session["idempresa"];
+            $data["info_empresa"] = $session["info_empresa"];
             $data["desc_web"] = $desc;
-
 
 
         } else {
@@ -260,7 +237,7 @@ class principal extends CI_Controller
         return $data;
     }
 
-    function getCSSJs($data, $key)
+    function cSSJs($data, $key)
     {
 
         $response = [
@@ -987,7 +964,7 @@ class principal extends CI_Controller
         ];
 
 
-        if(array_key_exists($key , $response ) ){
+        if (array_key_exists($key, $response)) {
 
             foreach ($response[$key] as $clave => $valor) {
 
@@ -995,16 +972,49 @@ class principal extends CI_Controller
 
             }
 
-        }else{
+        } else {
 
-            echo "NO EXISTE -> " .$key;
+            echo "NO EXISTE -> " . $key;
 
         }
-
 
 
         return $data;
 
     }
 
+    function set_userdata($newdata = array(), $newval = '')
+    {
+
+        $this->session->set_userdata($newdata, $newval);
+
+    }
+
+    function set_flashdata($newdata = array(), $newval = '')
+    {
+
+        $this->session->set_flashdata($newdata, $newval);
+    }
+
+    function is_logged_in()
+    {
+
+        $is_logged_in = $this->session->userdata('logged_in');
+        return (!isset($is_logged_in) || $is_logged_in != true) ? 0 : 1;
+
+    }
+
+    function out()
+    {
+        $this->session->unset_userdata($this->session);
+        $this->session->sess_destroy();
+        redirect(path_enid("_login"));
+    }
+
+    function get_session($key = [])
+    {
+
+        return (is_string($key)) ? $this->session->userdata($key) : $this->session->all_userdata();
+
+    }
 }

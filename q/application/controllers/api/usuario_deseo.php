@@ -10,7 +10,7 @@ class usuario_deseo extends REST_Controller
 		parent::__construct();
 		$this->load->model("usuario_deseo_model");
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("idusuario");
 	}
 
 	private function get_num_deseo_servicio_usuario($param)
@@ -151,19 +151,19 @@ class usuario_deseo extends REST_Controller
 	{
 
 		$api = "usuario_clasificacion/interes";
-		return $this->principal->api($api, $q, "json", "POST");
+		return $this->app->api($api, $q, "json", "POST");
 	}
 
 	private function gamificacion_deseo($q)
 	{
 		$api = "servicio/gamificacion_deseo";
-		return $this->principal->api($api, $q, "json", "PUT");
+		return $this->app->api($api, $q, "json", "PUT");
 	}
 
 	/*
 	function add_lista_deseos($q){
 		$api    =  "usuario_deseo/add_lista_deseos/format/json/";
-		return $this->principal->api( $api , $q , "json" , "PUT");
+		return $this->app->api( $api , $q , "json" , "PUT");
 	}
 	*/
 }

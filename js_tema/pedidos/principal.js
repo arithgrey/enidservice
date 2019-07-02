@@ -1,7 +1,6 @@
 "use strict";
 $(document).ready(() => {
 
-
     despliega([".selector_estados_ventas", ".form_cantidad", ".form_cantidad_post_venta"], 0);
 
     $(".form_busqueda_pedidos").submit(busqueda_pedidos);
@@ -13,9 +12,10 @@ $(document).ready(() => {
     $(".form_cantidad").submit(registra_saldo_cubierto);
     $(".configurara_informacion_cliente").click(muestra_form_usuario);
     $(".form_set_usuario").submit(registro_usuario);
-
     $(".form_costos").submit(registro_costo_operativo);
-    $(".saldo_cubierto_pos_venta").keyup(function (e) {
+
+    $(".agenda_compra").click(agenda_compra);
+    $(".saldo_cubierto_pos_venta").keyup((e) => {
         let code = (e.keyCode ? e.keyCode : e.which);
         if (code == 13) {
             modifica_status(get_valor_selected(".status_venta"));
@@ -568,4 +568,24 @@ let retorno =  () => {
         $(".form_busqueda_pedidos").submit();
     }
 
+}
+let agenda_compra =  function () {
+
+    let id =  get_parameter_enid($(this),"id");
+    if (id > 0 ){
+
+        let data_send = {id: id};
+        let url = "../q/index.php/api/recibo/agenda/format/json/";
+        request_enid("POST", data_send, url, r_agenda);
+    }
+
+
+
+}
+let r_agenda = function (data) {
+
+    if (data!=false){
+
+        redirect("../");
+    }
 }

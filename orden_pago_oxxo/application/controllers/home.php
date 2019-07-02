@@ -12,7 +12,7 @@ class Home extends CI_Controller
 	function index()
 	{
 
-		$data = $this->principal->val_session("Orden de compra");
+		$data = $this->app->session("Orden de compra");
 		$param = $this->input->get();
 
 		$q = get_param_def($param, "q", 1);
@@ -24,11 +24,11 @@ class Home extends CI_Controller
 
 			$data += [
                 "concepto" => get_param_def($param, "concepto"),
-                "usuario"  => $this->principal->get_info_usuario($id_usuario)
+                "usuario"  => $this->app->usuario($id_usuario)
             ];
 
-			$data =  $this->principal->getCSSJs($data, "pago_oxxo");
-			$this->principal->show_data_page($data, get_format_orden_compra($data["usuario"], $param,$this->config->item('numero_cuenta')) , 1);
+			$data =  $this->app->cssJs($data, "pago_oxxo");
+			$this->app->pagina($data, get_format_orden_compra($data["usuario"], $param,$this->config->item('numero_cuenta')) , 1);
 
 		} else {
 			redirect("../../movimientos/?q=transfer&action=7");

@@ -11,7 +11,7 @@ class funcionalidad extends REST_Controller
 		$this->load->model("funcionalidad_model");
 		$this->load->helper("funcionalidad");
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("idusuario");
 	}
 
 	function add_usuario_PUT()
@@ -60,7 +60,7 @@ class funcionalidad extends REST_Controller
             "id_funcionalidad" => $id_funcionalidad,
         ];
 
-		return $this->principal->api("privacidad/conceptos_por_funcionalidad_usuario/format/json/", $q);
+		return $this->app->api("privacidad/conceptos_por_funcionalidad_usuario/format/json/", $q);
 	}
 
 }

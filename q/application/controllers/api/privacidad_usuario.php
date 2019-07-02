@@ -10,7 +10,7 @@ class Privacidad_usuario extends REST_Controller
 		parent::__construct();
 		$this->load->model("privacidad_usuario_model");
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("idusuario");
 	}
 
 	function index_PUT()

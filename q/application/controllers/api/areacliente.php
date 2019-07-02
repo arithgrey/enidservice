@@ -22,7 +22,7 @@ class Areacliente extends REST_Controller
             if (strlen($cuerpo) > 30) {
 
                 $q = get_request_email($param["email"], "Notificacion de compra o renovación pendiente", $cuerpo);
-                $this->principal->send_email_enid($q, 1);
+                $this->app->send_email($q, 1);
             }
 
         }
@@ -34,6 +34,6 @@ class Areacliente extends REST_Controller
     {
 
         $q["id_recibo"] = $id_recibo;
-        return $this->principal->api("recibo/resumen_desglose_pago/format/json/", $q);
+        return $this->app->api("recibo/resumen_desglose_pago/format/json/", $q);
     }
 }

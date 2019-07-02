@@ -39,6 +39,6 @@ class contacto extends REST_Controller
             "id_usuario" => 180,
         ];
 
-        return $this->principal->api("tickets/index", $q, "json", "POST");
+        return $this->app->api("tickets/index", $q, "json", "POST");
     }
 }

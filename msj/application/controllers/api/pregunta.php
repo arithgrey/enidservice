@@ -16,7 +16,7 @@ class Pregunta extends REST_Controller
 		$param = $this->get();
 		$id_pregunta = $param["pregunta"];
 		$id_usuario = $this->get_id_usuario_por_pregunta($id_pregunta);
-		$usuario = $this->principal->get_info_usuario($id_usuario);
+		$usuario = $this->app->usuario($id_usuario);
 
 		if (count($usuario) > 0) {
 
@@ -62,14 +62,14 @@ class Pregunta extends REST_Controller
 	private function crea_vista_notificacion_pregunta($q)
 	{
 		$api = "presentacion/notificacion_duda_vendedor/format/html/";
-		return $this->principal->api($api, $q, "html");
+		return $this->app->api($api, $q, "html");
 	}
 
 	private function crea_vista_notificacion_respuesta($q)
 	{
 
 		$api = "presentacion/notificacion_respuesta_a_cliente/format/html/";
-		return $this->principal->api($api, $q, "html");
+		return $this->app->api($api, $q, "html");
 	}
 
 	private function get_info_vendedor_por_servicio($id_servicio)
@@ -77,7 +77,7 @@ class Pregunta extends REST_Controller
 
 		$q["id_servicio"] = $id_servicio;
 		$api = "usuario/usuario_servicio/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_id_usuario_por_pregunta($id_pregunta)
@@ -85,6 +85,6 @@ class Pregunta extends REST_Controller
 
 		$q["id_pregunta"] = $id_pregunta;
 		$api = "pregunta/usuario_por_pregunta/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 }

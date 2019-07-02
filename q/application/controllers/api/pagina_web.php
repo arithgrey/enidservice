@@ -11,7 +11,7 @@ class Pagina_web extends REST_Controller
 		$this->load->model("pagina_web_model");
 		$this->load->library('table');
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("idusuario");
 	}
 
 	function index_POST()

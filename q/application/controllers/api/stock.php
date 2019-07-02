@@ -292,7 +292,7 @@ class Stock extends REST_Controller
 	{
 		$q["id_servicio"] = $id_servicio;
 		$api = "servicio/stock/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_solicitudes_servicio_pasado($id_servicio, $tipo = 1)
@@ -300,7 +300,7 @@ class Stock extends REST_Controller
 		$q["id_servicio"] = $id_servicio;
 		$q["tipo"] = $tipo;
 		$api = "recibo/solicitudes_periodo_servicio/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_solicitudes_contra_entrega($param)
@@ -317,7 +317,7 @@ class Stock extends REST_Controller
 		$q["fecha_termino"] = $param["fecha_inicio"];
 
 		$api = "recibo/pedidos/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 
 	}
 
@@ -326,7 +326,7 @@ class Stock extends REST_Controller
 
 		$q[1] = 1;
 		$api = "recibo/compras_por_enviar/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 
 	}
 }

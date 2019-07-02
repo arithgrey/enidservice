@@ -12,7 +12,7 @@ class Archivo extends REST_Controller
         $this->load->library('upload');
         $this->load->library('image_lib');
         $this->load->library(lib_def());
-        $this->id_usuario = $this->principal->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("idusuario");
     }
 
     function extension($str)
@@ -81,7 +81,7 @@ class Archivo extends REST_Controller
     {
 
         $param +=  [
-            "id_empresa" => $this->principal->get_session("idempresa"),
+            "id_empresa" => $this->app->get_session("idempresa"),
             "id_usuario" => $this->id_usuario,
         ];
 
@@ -120,13 +120,13 @@ class Archivo extends REST_Controller
     function notifica_producto_imagen($q)
     {
 
-        return $this->principal->api("servicio/status_imagen/format/json/", $q, "json", "PUT");
+        return $this->app->api("servicio/status_imagen/format/json/", $q, "json", "PUT");
     }
 
     function insert_imagen_servicio($q)
     {
 
-        return $this->principal->api("imagen_servicio/index", $q, "json", "POST");
+        return $this->app->api("imagen_servicio/index", $q, "json", "POST");
     }
 
     function create_imagen_faq($param)
@@ -136,7 +136,7 @@ class Archivo extends REST_Controller
 
         if ($param["id_imagen"] > 0) {
 
-            $this->principal->api("imagen_faq/index", $param, "json", "POST");
+            $this->app->api("imagen_faq/index", $param, "json", "POST");
             return $param["id_faq"];
         }
     }
@@ -144,7 +144,7 @@ class Archivo extends REST_Controller
     function create_imagen_usuario($q)
     {
 
-        return $this->principal->api("imagen_usuario/index", $q, "json", "POST");
+        return $this->app->api("imagen_usuario/index", $q, "json", "POST");
     }
 
     private function create_perfil_usuario($param)

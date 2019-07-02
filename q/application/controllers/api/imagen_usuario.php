@@ -60,7 +60,7 @@ class Imagen_usuario extends REST_Controller
 	{
 
 		$q["id_imagen"] = $id_imagen;
-		return $this->principal->api("img/index", $q, "json", "DELETE");
+		return $this->app->api("img/index", $q, "json", "DELETE");
 	}
 
 	function img_perfil_GET()

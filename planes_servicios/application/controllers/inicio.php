@@ -7,7 +7,7 @@ class Inicio extends CI_Controller
         parent::__construct();
         $this->load->helper("planes");
         $this->load->library(lib_def());
-        $this->principal->acceso();
+        $this->app->acceso();
     }
 
     function index()
@@ -15,7 +15,7 @@ class Inicio extends CI_Controller
 
 
         $param = $this->input->get();
-        $data = $this->principal->val_session();
+        $data = $this->app->session();
 
 		$data += [
             "action" => valida_action($param, "action"),
@@ -30,11 +30,11 @@ class Inicio extends CI_Controller
 		$data["ciclo_facturacion"] = $this->create_ciclo_facturacion();
 		$data["is_mobile"] = ($this->agent->is_mobile() === FALSE) ? 0 : 1;
 
-		$data = $this->principal->getCssJs($data, "planes_servicios");
+		$data = $this->app->cssJs($data, "planes_servicios");
 
 		$data["list_orden"] = $this->get_orden();
-        $data["id_perfil"] = $this->principal->getperfiles();
-		$this->principal->show_data_page($data, 'home_enid');
+        $data["id_perfil"] = $this->app->getperfiles();
+		$this->app->pagina($data, 'home_enid');
 
 	}
 
@@ -51,12 +51,12 @@ class Inicio extends CI_Controller
 
                 if ($this->valida_servicio_usuario($param) != 1) {
 
-                    $fn = ($data["id_perfil"] == 20) ? $this->principal->logout() : "";
+                    $fn = ($data["id_perfil"] == 20) ? $this->app->out() : "";
 
                 }
                 $data["extra_servicio"] = $param["servicio"];
             } else {
-                $this->principal->logout();
+                $this->app->out();
             }
         }
         return $data;
@@ -65,14 +65,14 @@ class Inicio extends CI_Controller
     private function valida_servicio_usuario($q)
     {
 
-        return $this->principal->api("servicio/es_servicio_usuario/format/json/", $q);
+        return $this->app->api("servicio/es_servicio_usuario/format/json/", $q);
     }
 
     private function get_top_servicios_usuario($id_usuario)
     {
 
         $q["id_usuario"] = $id_usuario;
-        return $this->principal->api("servicio/top_semanal_vendedor/format/json/" , $q);
+        return $this->app->api("servicio/top_semanal_vendedor/format/json/" , $q);
     }
 
     private function get_orden()
@@ -95,6 +95,6 @@ class Inicio extends CI_Controller
     private function create_ciclo_facturacion($q = [])
     {
 
-        return $this->principal->api("ciclo_facturacion/not_ciclo_facturacion/format/json/", $q);
+        return $this->app->api("ciclo_facturacion/not_ciclo_facturacion/format/json/", $q);
     }
 }

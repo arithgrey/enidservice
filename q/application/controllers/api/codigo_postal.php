@@ -10,7 +10,7 @@ class codigo_postal extends REST_Controller
         parent::__construct();
         $this->load->model("codigo_postal_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->principal->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("idusuario");
     }
 
     function direccion_usuario_POST()
@@ -209,13 +209,13 @@ class codigo_postal extends REST_Controller
     private function get_colonia_delegacion($q)
     {
 
-        return $this->principal->api("codigo_postal/colonia_delegacion/format/json/", $q);
+        return $this->app->api("codigo_postal/colonia_delegacion/format/json/", $q);
     }
 
     private function get_id_usuario($param)
     {
 
-        return ($this->principal->is_logged_in() == 1) ? $this->id_usuario : $param["id_usuario"];
+        return ($this->app->is_logged_in() == 1) ? $this->id_usuario : $param["id_usuario"];
 
     }
 
@@ -229,7 +229,7 @@ class codigo_postal extends REST_Controller
 
         ];
 
-        return $this->principal->api("usuario_direccion/index", $q, "json", "PUT");
+        return $this->app->api("usuario_direccion/index", $q, "json", "PUT");
     }
 
     private function registra_direccion_usuario($id_usuario, $id_direccion)
@@ -240,25 +240,25 @@ class codigo_postal extends REST_Controller
             "id_direccion" => $id_direccion
         ];
 
-        return $this->principal->api("usuario_direccion/index", $q, "json", "POST");
+        return $this->app->api("usuario_direccion/index", $q, "json", "POST");
     }
 
     private function elimina_direccion_previa_envio($q)
     {
 
 
-        return $this->principal->api("proyecto_persona_forma_pago_direccion/index", $q, "json", "DELETE");
+        return $this->app->api("proyecto_persona_forma_pago_direccion/index", $q, "json", "DELETE");
     }
 
     private function agrega_direccion_a_compra($q)
     {
 
-        return $this->principal->api("proyecto_persona_forma_pago_direccion/index", $q, "json", "POST");
+        return $this->app->api("proyecto_persona_forma_pago_direccion/index", $q, "json", "POST");
     }
 
     private function crea_direccion($q)
     {
 
-        return $this->principal->api("direccion/index", $q, "json", "POST");
+        return $this->app->api("direccion/index", $q, "json", "POST");
     }
 }

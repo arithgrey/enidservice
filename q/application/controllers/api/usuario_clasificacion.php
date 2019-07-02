@@ -10,7 +10,7 @@ class usuario_clasificacion extends REST_Controller
 		parent::__construct();
 		$this->load->model("usuario_clasificacion_model");
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("idusuario");
 	}
 
 	function agregan_clasificaciones_periodo_GET()
@@ -74,7 +74,7 @@ class usuario_clasificacion extends REST_Controller
 	 * private function get_clasificaciones_servicio($q){
 
 		$api =  "servicio/tallas/format/json/";
-		return $this->principal->api( $api , $q);
+		return $this->app->api( $api , $q);
 	}
    function interes_POST(){
 

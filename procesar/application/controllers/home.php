@@ -45,14 +45,14 @@ class Home extends CI_Controller
     private function crea_orden_compra($param)
     {
 
-        $data = $this->principal->val_session(
+        $data = $this->app->session(
             "",
             "",
             "Registra tu cuenta  y recibe  asistencia al momento.",
             create_url_preview("recomendacion.jpg")
         );
 
-        $num_usuario_referencia = get_info_usuario($this->input->get("q2"));
+        $num_usuario_referencia = usuario($this->input->get("q2"));
         $data["q2"] = $num_usuario_referencia;
         $data["servicio"] = $this->resumen_servicio($param["plan"]);
         $data["costo_envio"] = "";
@@ -68,21 +68,21 @@ class Home extends CI_Controller
         $data["vendedor"] = "";
         if ($data["servicio"][0]["telefono_visible"] == 1) {
             $data["vendedor"] =
-                $this->principal->get_info_usuario($data["servicio"][0]["id_usuario"]);
+                $this->app->usuario($data["servicio"][0]["id_usuario"]);
         }
 
-        $data = $this->principal->getCSSJs($data, "procesar");
+        $data = $this->app->cssJs($data, "procesar");
         $data["carro_compras"] = $param["carro_compras"];
         $data["id_carro_compras"] = $param["id_carro_compras"];
 
-        $this->principal->show_data_page($data, 'home');
+        $this->app->pagina($data, 'home');
 
     }
 
     function crea_orden_compra_servicio($param)
     {
 
-        $data = $this->principal->val_session(
+        $data = $this->app->session(
             "",
             "",
             "Registra tu cuenta  y recibe  asistencia al momento.",
@@ -91,38 +91,38 @@ class Home extends CI_Controller
 
         $data["servicio"] = $this->resumen_servicio($param["id_servicio"]);
 
-        $this->principal->show_data_page($this->principal->getCSSJs($data, "procesar_crear"), 'procesar_contacto');
+        $this->app->pagina($this->app->cssJs($data, "procesar_crear"), 'procesar_contacto');
 
     }
 
     private function add_domicilio_entrega($param)
     {
 
-        $data = $this->principal->val_session("", "", "Registra tu cuenta  y recibe  asistencia al momento.");
-        $data = $this->principal->getCSSJs($data, "procesar_domicilio");
+        $data = $this->app->session("", "", "Registra tu cuenta  y recibe  asistencia al momento.");
+        $data = $this->app->cssJs($data, "procesar_domicilio");
 
         $param += [
 
             "id_recibo"  =>  $param["recibo"],
-            "id_usuario" => $this->principal->get_session("idusuario")
+            "id_usuario" => $this->app->get_session("idusuario")
         ];
 
         $response = $this->carga_ficha_direccion_envio($param, 1);
-        $this->principal->show_data_page($data, $response, 1);
+        $this->app->pagina($data, $response, 1);
 
     }
 
     private function calcula_costo_envio($q)
     {
 
-        return $this->principal->api("cobranza/calcula_costo_envio/format/json/", $q);
+        return $this->app->api("cobranza/calcula_costo_envio/format/json/", $q);
     }
 
     private function resumen_servicio($id_servicio)
     {
 
         $q["id_servicio"] = $id_servicio;
-        return $this->principal->api("servicio/resumen/format/json/", $q);
+        return $this->app->api("servicio/resumen/format/json/", $q);
     }
 
     private function carga_ficha_direccion_envio($q, $v = 0)
@@ -132,7 +132,7 @@ class Home extends CI_Controller
             "externo" => 1
         ];
 
-        $response = $this->principal->api("usuario_direccion/direccion_envio_pedido", $q, "html");
+        $response = $this->app->api("usuario_direccion/direccion_envio_pedido", $q, "html");
 
         if ($v > 0) {
             $response = append([$response, input_hidden(["class" => "es_seguimiento", "value" => 1])]);

@@ -10,7 +10,7 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->helper("search");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->principal->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("idusuario");
     }
 
     function index()
@@ -34,7 +34,7 @@ class Home extends CI_Controller
     {
 
 
-        $data = $this->principal->val_session(
+        $data = $this->app->session(
             "",
             "Comprar y vender tus artículos y servicios",
             "",
@@ -70,7 +70,7 @@ class Home extends CI_Controller
 
         $data["css"] = ["search_sin_encontrar.css"];
         $response = (get_param_def($param, "tienda") < 1) ? get_format_sin_resultados() : get_format_sin_resultados_tienda();
-        $this->principal->show_data_page($data, $response, 1);
+        $this->app->pagina($data, $response, 1);
 
     }
 
@@ -92,7 +92,7 @@ class Home extends CI_Controller
 
 
         $data["paginacion"] =
-            $this->create_pagination(
+            $this->paginacion(
                 $total,
                 $per_page,
                 $q,
@@ -117,11 +117,11 @@ class Home extends CI_Controller
         $data["lista_productos"] = array_map($callback, $servicios["servicios"]);
         $data["q"] = $q;
         $data["categorias_destacadas"] = $this->carga_categorias_destacadas();
-        $data = $this->principal->getCssJs($data, "search");
+        $data = $this->app->cssJs($data, "search");
         $data["filtros"] = $this->get_orden();
         $data["order"] = $data_send["order"];
         $this->create_keyword($param);
-        $this->principal->show_data_page($data, 'home');
+        $this->app->pagina($data, 'home');
     }
 
     private function set_option($key, $value)
@@ -136,11 +136,11 @@ class Home extends CI_Controller
             "in_session" => 0,
             "id_usuario_actual" => 0,
         ];
-        return $this->principal->api("servicio/crea_vista_producto/format/json/", $servicio);
+        return $this->app->api("servicio/crea_vista_producto/format/json/", $servicio);
     }
 
 
-    private function create_pagination($totales_elementos, $per_page, $q, $id_clasificacion, $vendedor, $order, $page)
+    private function paginacion($totales_elementos, $per_page, $q, $id_clasificacion, $vendedor, $order, $page)
     {
         $config = [
             "totales_elementos" => $totales_elementos,
@@ -153,7 +153,7 @@ class Home extends CI_Controller
 
         ];
 
-        return $this->principal->create_pagination($config);
+        return $this->app->paginacion($config);
     }
 
 
@@ -218,7 +218,7 @@ class Home extends CI_Controller
     private function busqueda_producto_por_palabra_clave($q)
     {
 
-        return $this->principal->api("servicio/q/format/json/", $q);
+        return $this->app->api("servicio/q/format/json/", $q);
     }
 
     private function get_clasificaciones($clasificaciones)
@@ -226,7 +226,7 @@ class Home extends CI_Controller
         $response =  [];
         if (es_data($clasificaciones)){
             $q["clasificaciones"] =  implode("," , $clasificaciones);
-            $response =  $this->principal->api("clasificacion/in/format/json/", $q);
+            $response =  $this->app->api("clasificacion/in/format/json/", $q);
 
         }
         return $response;
@@ -235,7 +235,7 @@ class Home extends CI_Controller
     private function carga_categorias_destacadas()
     {
 
-        return $this->principal->api("clasificacion/categorias_destacadas/format/json/");
+        return $this->app->api("clasificacion/categorias_destacadas/format/json/");
     }
 
     private function get_orden()
@@ -266,7 +266,7 @@ class Home extends CI_Controller
                 $q["id_usuario"] = $this->id_usuario;
             }
 
-            return $this->principal->api("keyword/index", $q, "json", "POST");
+            return $this->app->api("keyword/index", $q, "json", "POST");
         }
 
     }
