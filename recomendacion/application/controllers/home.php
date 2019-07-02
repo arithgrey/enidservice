@@ -18,9 +18,9 @@ class Home extends CI_Controller
 
 
             $id_usuario = $this->input->get("q");
-            $data = $this->principal->val_session();
+            $data = $this->app->session();
             $prm["id_usuario"] = $id_usuario;
-            $data["usuario"] = $this->principal->get_info_usuario($id_usuario);
+            $data["usuario"] = $this->app->usuario($id_usuario);
             $fn = (count($data["usuario"]) > 0) ? $this->create_vista($data, $id_usuario, $prm) : $this->go_home();
 
 
@@ -54,16 +54,16 @@ class Home extends CI_Controller
         }
 
 
-        $data = $this->principal->getCSSJs($data, "recomendacion_vista");
+        $data = $this->app->cssJs($data, "recomendacion_vista");
         $response = get_formar_recomendacion($data, $resumen_recomendacion, $resumen_valoraciones_vendedor);
-        $this->principal->show_data_page($data, $response, 1);
+        $this->app->pagina($data, $response, 1);
 
     }
 
     private function busqueda_recomendacion($q)
     {
 
-        return $this->principal->api("valoracion/usuario/format/json/", $q);
+        return $this->app->api("valoracion/usuario/format/json/", $q);
 
     }
 
@@ -73,20 +73,20 @@ class Home extends CI_Controller
         if ($id_usuario === $id_usuario_valoracion) {
 
             $q["id_usuario"] = $id_usuario;
-            $this->principal->api("valoracion/lectura/format/json/", $q, 'json', 'PUT');
+            $this->app->api("valoracion/lectura/format/json/", $q, 'json', 'PUT');
         }
     }
 
     private function resumen_valoraciones_vendedor($q)
     {
 
-        return $this->principal->api("valoracion/resumen_valoraciones_vendedor/format/json/", $q);
+        return $this->app->api("valoracion/resumen_valoraciones_vendedor/format/json/", $q);
     }
 
     private function get_paginacion($q)
     {
 
-        return $this->principal->api("producto/paginacion/format/json/", $q);
+        return $this->app->api("producto/paginacion/format/json/", $q);
     }
 
     private function go_home()

@@ -77,7 +77,7 @@ class Enid extends CI_Controller
 
         $this->load->library(lib_def());
         $q["id_usuario"] = $id_usuario;
-        return $this->principal->api("imagen_usuario/usuario/format/json/", $q);
+        return $this->app->api("imagen_usuario/usuario/format/json/", $q);
     }
 
     function img_servicio($id_servicio)
@@ -90,6 +90,6 @@ class Enid extends CI_Controller
             "limit" => 1
         ];
 
-        return $this->principal->api("imagen_servicio/servicio/format/json/", $q);
+        return $this->app->api("imagen_servicio/servicio/format/json/", $q);
     }
 }

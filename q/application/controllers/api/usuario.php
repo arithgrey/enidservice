@@ -12,7 +12,7 @@ class usuario extends REST_Controller
 		$this->load->model('usuario_model');
 		$this->load->library('table');
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("idusuario");
 	}
 
 	function index_PUT()
@@ -242,7 +242,7 @@ class usuario extends REST_Controller
 			$nuevo = $param['nuevo'];
 			$confirm = $param['confirma'];
 			if ($nuevo == $confirm) {
-				$id_usuario = $this->principal->get_session("idusuario");
+				$id_usuario = $this->app->get_session("idusuario");
 				$existe = $this->usuario_model->valida_pass($anterior, $id_usuario);
 				if ($existe != 1) {
 					$response = "La contraseña ingresada no corresponde a su contraseña actual";
@@ -535,7 +535,7 @@ class usuario extends REST_Controller
 			$asunto = "TU USUARIO SE REGISTRÓ!";
 			$cuerpo = get_mensaje_bienvenida($param);
 			$q = get_request_email($email, $asunto, $cuerpo);
-			$response = $this->principal->send_email_enid($q);
+			$response = $this->app->send_email($q);
 
 		}
 		return $response;
@@ -547,7 +547,7 @@ class usuario extends REST_Controller
 
 		$this->agrega_lista_deseos($id_usuario, $id_servicio);
 		$session = $this->create_session($param);
-		$this->principal->set_userdata($session);
+		$this->app->set_userdata($session);
 	}
 
 	private function agrega_usuario_whatsApp($param)
@@ -601,7 +601,7 @@ class usuario extends REST_Controller
 			$config_paginacion["per_page"] = $per_page;
 			$config_paginacion["q"] = "";
 			$config_paginacion["q2"] = "";
-			$paginacion = $this->principal->create_pagination($config_paginacion);
+			$paginacion = $this->app->paginacion($config_paginacion);
 			$data["paginacion"] = $paginacion;
 			$data["modo_edicion"] = 1;
 			return $this->load->view("equipo/miembros", $data);
@@ -623,7 +623,7 @@ class usuario extends REST_Controller
 		$config_paginacion["per_page"] = $per_page;
 		$config_paginacion["q"] = "";
 		$config_paginacion["q2"] = "";
-		$paginacion = $this->principal->create_pagination($config_paginacion);
+		$paginacion = $this->app->paginacion($config_paginacion);
 		$data["paginacion"] = $paginacion;
 		$data["modo_edicion"] = 0;
 		$this->load->view("equipo/miembros", $data);
@@ -806,7 +806,7 @@ class usuario extends REST_Controller
 		$api = "sess/start";
 		$q["t"] = $this->config->item('barer');
 		$q["secret"] = $q["password"];
-		return $this->principal->api($api, $q, "json", "POST", 0, 1, "login");
+		return $this->app->api($api, $q, "json", "POST", 0, 1, "login");
 	}
 
 	private function get_num_registros_periodo($q)
@@ -881,19 +881,19 @@ class usuario extends REST_Controller
 	{
 
 
-		$email = $this->principal->get_session("email");
-		$nombre = $this->principal->get_session("nombre");
+		$email = $this->app->get_session("email");
+		$nombre = $this->app->get_session("nombre");
 		$asunto = "Alerta de cambio de contraseña";
 		$cuerpo = get_mensaje_modificacion_pwd($nombre);
 		$q = get_request_email($email, $asunto, $cuerpo);
-		return $this->principal->send_email_enid($q, 1);
+		return $this->app->send_email($q, 1);
 
 	}
 
 	private function notifica_registro_exitoso($q)
 	{
 		$api = "emp/solicitud_afiliado/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function agrega_lista_deseos($id_usuario, $id_servicio)
@@ -902,34 +902,34 @@ class usuario extends REST_Controller
 		$q["id_usuario"] = $id_usuario;
 		$q["id_servicio"] = $id_servicio;
 		$api = "usuario_deseo/add_lista_deseos";
-		return $this->principal->api($api, $q, "json", "PUT");
+		return $this->app->api($api, $q, "json", "PUT");
 	}
 
 	private function get_usuario_por_servicio($q)
 	{
 
 		$api = "servicio/usuario_por_servicio/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_nun_activos_con_direcciones($q)
 	{
 		$api = "usuarios_direccion/activos_con_direcciones/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_agregan_clasificaciones_periodo($q)
 	{
 
 		$api = "usuario_clasificacion/agregan_clasificaciones_periodo/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function agregan_lista_deseos_periodo($q)
 	{
 
 		$api = "usuario_deseo/agregan_lista_deseos_periodo/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_publican_periodo($q)
@@ -941,7 +941,7 @@ class usuario extends REST_Controller
 	{
 
 		$api = "imagen_usuario/img_perfil/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 
 	}
 
@@ -949,18 +949,18 @@ class usuario extends REST_Controller
 	{
 
 		$api = "usuario_perfil/permisos_usuario";
-		return $this->principal->api($api, $q, "json", "POST");
+		return $this->app->api($api, $q, "json", "POST");
 	}
 
 	private function get_preguntas($q)
 	{
 		$api = "pregunta/periodo/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_num_servicios_periodo($q)
 	{
 		$api = "servicio/num_periodo/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 }

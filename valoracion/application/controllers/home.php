@@ -12,7 +12,7 @@ class Home extends CI_Controller
     function index()
     {
 
-        $data = $this->principal->val_session(
+        $data = $this->app->session(
             "",
             "",
             "",
@@ -45,9 +45,9 @@ class Home extends CI_Controller
 
             }
 
-            $data = $this->principal->getCssJs($data, "valoracion");
+            $data = $this->app->cssJs($data, "valoracion");
             $response = div($this->carga_formulario_valoracion($prm), "top_20", 1);
-            $this->principal->show_data_page($data, $response, 1);
+            $this->app->pagina($data, $response, 1);
 
 
         } else {
@@ -60,7 +60,7 @@ class Home extends CI_Controller
     private function carga_formulario_valoracion($q)
     {
 
-        return $this->principal->api("valoracion/valoracion_form/format/json/", $q);
+        return $this->app->api("valoracion/valoracion_form/format/json/", $q);
 
     }
 }

@@ -11,7 +11,7 @@ class Tickets extends REST_Controller
         $this->load->helper("tickets");
         $this->load->model("tickets_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->principal->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("idusuario");
     }
 
     function pendientes_GET()
@@ -52,7 +52,7 @@ class Tickets extends REST_Controller
             $info_ticket = $this->tickets_model->get_info_ticket($param);
             $info_tareas = $this->get_tareas_ticket($param);
             $info_num_tareas = $this->get_tareas_ticket_num($param);
-            $perfil = $this->principal->getperfiles();
+            $perfil = $this->app->getperfiles();
             $response = format_tareas($info_ticket, $info_num_tareas, $info_tareas, $perfil);
             $this->response($response);
 
@@ -98,7 +98,7 @@ class Tickets extends REST_Controller
 
 
         $id_usuario = $param["id_usuario"];
-        $usuario = $this->principal->get_info_usuario($id_usuario);
+        $usuario = $this->app->usuario($id_usuario);
         $id_ticket = $param["ticket"];
         $ticket = $this->tickets_model->get_resumen_id($id_ticket);
         $q["usuario"] = $usuario;
@@ -180,7 +180,7 @@ class Tickets extends REST_Controller
                 $usuario_notificado = $data["recibo"]["id_usuario"];
                 $prm["id_recibo"] = $param["id_recibo"];
                 $prm["usuario_notificado"] =
-                $data_complete["info_cliente"] = $this->principal->get_info_usuario($usuario_notificado);
+                $data_complete["info_cliente"] = $this->app->usuario($usuario_notificado);
                 $data_complete["info_email"] = $this->notifica_venta_cancelada_a_cliente($prm);
 
 
@@ -283,14 +283,14 @@ class Tickets extends REST_Controller
     {
 
         $api = "areacliente/enviar/";
-        return $this->principal->api($api, $q, "json", "POST");
+        return $this->app->api($api, $q, "json", "POST");
     }
 
     private function get_mensaje_notificacion($q)
     {
 
         $api = "cron/ticket_soporte/";
-        return $this->principal->api($api, $q, "html", "GET");
+        return $this->app->api($api, $q, "html", "GET");
 
     }
 
@@ -298,7 +298,7 @@ class Tickets extends REST_Controller
     {
 
         $api = "tarea/ticket/format/json/";
-        $tareas = $this->principal->api($api, $q, "json", "GET", 1);
+        $tareas = $this->app->api($api, $q, "json", "GET", 1);
         return $tareas;
     }
 
@@ -306,7 +306,7 @@ class Tickets extends REST_Controller
     {
 
         $api = "tarea/tareas_ticket_num/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
 
     }
 
@@ -314,7 +314,7 @@ class Tickets extends REST_Controller
     {
 
         $api = "recibo/cancelar";
-        return $this->principal->api($api, $q, "json", "PUT");
+        return $this->app->api($api, $q, "json", "PUT");
     }
 
     private function get_servicio_ppfp($id_recibo)
@@ -322,7 +322,7 @@ class Tickets extends REST_Controller
 
         $q["id_recibo"] = $id_recibo;
         $api = "recibo/servicio_ppfp/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     private function gamificacion_negativa($id_servicio, $id_usuario)
@@ -333,28 +333,28 @@ class Tickets extends REST_Controller
         $q["id"] = $id_servicio;
         $q["id_usuario"] = $id_usuario;
         $api = "servicio/add_gamification_servicio";
-        return $this->principal->api($api, $q, "json", "PUT");
+        return $this->app->api($api, $q, "json", "PUT");
     }
 
     private function get_recibo_por_pagar($q)
     {
 
         $api = "recibo/recibo_por_pagar_usuario/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     private function get_recibo_por_enviar($q)
     {
 
         $api = "recibo/recibo_por_enviar_usuario/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     private function notifica_venta_cancelada_a_cliente($q)
     {
 
         $api = "cobranza/cancelacion_venta/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
 
     }
 
@@ -362,7 +362,7 @@ class Tickets extends REST_Controller
     {
 
         $api = "departamento/index/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
 
     }
 
@@ -371,7 +371,7 @@ class Tickets extends REST_Controller
 
         $q["id_usuario"] = $id_usuario;
         $api = "usuario_perfil/es_cliente/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
 

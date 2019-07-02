@@ -105,7 +105,7 @@ class Punto_encuentro extends REST_Controller
     {
 
         $q = ["id" => $id_servicio];
-        $envio =  $this->principal->api("servicio/envio_gratis/format/json/", $q);
+        $envio =  $this->app->api("servicio/envio_gratis/format/json/", $q);
         return primer_elemento($envio,"flag_envio_gratis", 0 );
 
     }
@@ -114,7 +114,7 @@ class Punto_encuentro extends REST_Controller
 
         $q = ["id_recibo" => $id_recibo];
         $api = "recibo/servicio_ppfp/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
 
     }
 

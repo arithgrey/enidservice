@@ -11,7 +11,7 @@ class Valoracion extends REST_Controller
         $this->load->helper("valoracion");
         $this->load->model("valoracion_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->principal->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("idusuario");
     }
 
     function num_GET()
@@ -56,9 +56,9 @@ class Valoracion extends REST_Controller
 
         $param = $this->get();
         $id_servicio = $param["id_servicio"];
-        $servicio = $this->principal->get_base_servicio($id_servicio);
+        $servicio = $this->app->servicio($id_servicio);
         $data["servicio"] = $servicio;
-        $vendedor = $this->principal->get_info_usuario($servicio[0]["id_usuario"]);
+        $vendedor = $this->app->usuario($servicio[0]["id_usuario"]);
         $propietario = ($servicio[0]["id_usuario"] != $id_servicio) ? 0 : 1;
         $response = get_form_pregunta_consumidor($id_servicio, $propietario, $vendedor, $servicio);
         $this->response($response);
@@ -162,7 +162,7 @@ class Valoracion extends REST_Controller
 
         $param = $this->get();
         $id_servicio = $param["id_servicio"];
-        $servicio = $this->principal->get_base_servicio($id_servicio);
+        $servicio = $this->app->servicio($id_servicio);
         $extra = $param;
         $response = get_form_valoracion($servicio, $extra, $id_servicio);
         $this->response($response);
@@ -207,7 +207,7 @@ class Valoracion extends REST_Controller
 
         $usuario = $this->get_usuario_servicio($id_servicio);
         $sender = get_notificacion_valoracion($usuario, $id_servicio);
-        $this->principal->send_email_enid($sender, 1);
+        $this->app->send_email($sender, 1);
 
     }
 
@@ -216,33 +216,33 @@ class Valoracion extends REST_Controller
 
         $q["id_servicio"] = $id_servicio;
         $api = "usuario/usuario_servicio/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     function valida_existencia_usuario($q)
     {
         $api = "usuario/usuario_existencia/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     private function get_usuario_por_servicio($q)
     {
 
         $api = "servicio/usuario_por_servicio/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     private function get_producto_por_id($q)
     {
 
         $api = "producto/producto_por_id/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
     /*
     private function set_visto_pregunta($q)
     {
         $api = "pregunta/visto_pregunta";
-        return $this->principal->api($api, $q, "json", "PUT");
+        return $this->app->api($api, $q, "json", "PUT");
 
     }
 
@@ -279,7 +279,7 @@ class Valoracion extends REST_Controller
     /*
     function registro_pregunta($q){
         $api = "pregunta/index";
-        return $this->principal->api( $api , $q , "json" , "POST");
+        return $this->app->api( $api , $q , "json" , "POST");
     }
     function pregunta_POST(){
 

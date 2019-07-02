@@ -7,16 +7,16 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->helper("cuenta");
         $this->load->library(lib_def());
-        $this->principal->acceso();
+        $this->app->acceso();
     }
 
     function index()
     {
 
-        $data = $this->principal->val_session();
-        $data["usuario"] = $this->principal->get_info_usuario($this->principal->get_session("idusuario"));
-        $data = $this->principal->getCssJs($data, "administracion_cuenta");
-        $this->principal->show_data_page($data, 'home');
+        $data = $this->app->session();
+        $data["usuario"] = $this->app->usuario($this->app->get_session("idusuario"));
+        $data = $this->app->cssJs($data, "administracion_cuenta");
+        $this->app->pagina($data, 'home');
 
     }
 

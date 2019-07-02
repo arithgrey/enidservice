@@ -12,7 +12,7 @@ class Home extends CI_Controller
 	function index()
 	{
 
-		$data = $this->principal->val_session(
+		$data = $this->app->session(
 		    "",
             "",
             "",
@@ -20,6 +20,6 @@ class Home extends CI_Controller
         );
 
 		$data["f_pago"] = 1;
-		$this->principal->show_data_page($this->principal->getCssJs($data, "sobre_enid") , get_format_descripcion() , 1);
+		$this->app->pagina($this->app->cssJs($data, "sobre_enid") , get_format_descripcion() , 1);
 	}
 }

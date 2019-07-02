@@ -127,7 +127,7 @@ class Clasificacion extends REST_Controller
     private function get_clasificaciones_destacadas($q)
     {
 
-        return $this->principal->api("servicio/clasificaciones_destacadas/format/json/", $q);
+        return $this->app->api("servicio/clasificaciones_destacadas/format/json/", $q);
     }
 
     function clasificaciones_nivel_GET()
@@ -195,13 +195,13 @@ class Clasificacion extends REST_Controller
     {
 
         $q["info"] = 1;
-        return $this->principal->api("tipo_talla/index/format/json/", $q);
+        return $this->app->api("tipo_talla/index/format/json/", $q);
     }
 
     private function set_clasificacion_talla($q)
     {
 
-        return $this->principal->api("tipo_talla/clasificacion", $q, "json", "PUT");
+        return $this->app->api("tipo_talla/clasificacion", $q, "json", "PUT");
     }
 
     function tipo_talla_GET()
@@ -391,7 +391,7 @@ class Clasificacion extends REST_Controller
     function get_tallas_servicio($q)
     {
 
-        return $this->principal->api("servicio/tallas/format/json/", $q);
+        return $this->app->api("servicio/tallas/format/json/", $q);
     }
 
     private function quita_cero_clasificacacion($clasificaciones)
@@ -413,7 +413,7 @@ class Clasificacion extends REST_Controller
     function get_tallas_countries($q)
     {
 
-        return $this->principal->api("talla/tallas_countries/format/json/", $q);
+        return $this->app->api("talla/tallas_countries/format/json/", $q);
 
     }
 

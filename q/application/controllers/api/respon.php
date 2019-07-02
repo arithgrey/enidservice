@@ -12,7 +12,7 @@ class Respon extends REST_Controller
 		$this->load->helper("respuesta");
 		$this->load->model("response_model");
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->principal->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("idusuario");
 	}
 
 	function pregunta_GET()
@@ -73,7 +73,7 @@ class Respon extends REST_Controller
 		$q["id_pregunta"] = $id_pregunta;
 		$q["es_vendedor"] = $es_vendedor;
 		$api = "pregunta/noficacion_respuesta";
-		return $this->principal->api($api, $q, "json", "POST");
+		return $this->app->api($api, $q, "json", "POST");
 
 	}
 	private function notifica_lectura_cliente($id_usuario, $id_pregunta)
@@ -84,7 +84,7 @@ class Respon extends REST_Controller
             "id_usuario" => $id_usuario,
         ];
 
-		return $this->principal->api("pregunta/notifica_lectura_cliente", $q, "json", "PUT");
+		return $this->app->api("pregunta/notifica_lectura_cliente", $q, "json", "PUT");
 
 	}
 

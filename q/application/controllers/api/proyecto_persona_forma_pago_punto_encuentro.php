@@ -63,7 +63,7 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
 	private function get_punto_encuentro($id_recibo)
 	{
 		$q["id"] = $id_recibo;
-		return $this->principal->api("punto_encuentro/id/format/json/", $q);
+		return $this->app->api("punto_encuentro/id/format/json/", $q);
 	}
 
 	private function get_id_proyecto_persona_forma_pago($id_recibo)

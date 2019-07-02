@@ -77,7 +77,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
         $r[] = div(
             create_select(
@@ -99,13 +98,13 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_format_menu($domicilio, $recibo, $id_recibo);
         $r[] = tiene_domilio($domicilio);
         $r[] = resumen_compras_cliente($num_compras);
-        $r[] = create_seccion_usuario($usuario);
+        $r[] = create_seccion_usuario($usuario, $recibo);
         $r[] = get_form_usuario($usuario);
         $r[] = create_seccion_domicilio($domicilio);
         $r[] = addNRow(create_seccion_saldos($recibo));
         $r[] = div(create_seccion_recordatorios($recibo), "top_30 underline text-right");
-        $response = div(append($r));
-        return $response;
+
+        return div(append($r));
 
     }
 
@@ -1484,10 +1483,11 @@ if (!function_exists('invierte_date_time')) {
         }
     }
     if (!function_exists('create_seccion_usuario')) {
-        function create_seccion_usuario($usuario)
+        function create_seccion_usuario( $usuario, $recibo )
         {
 
-            $text = [];
+            $r = [];
+            $id_usuario = primer_elemento($recibo, "id_usuario");
             foreach ($usuario as $row) {
 
                 $email = $row["email"];
@@ -1495,31 +1495,39 @@ if (!function_exists('invierte_date_time')) {
                 $tel_contacto_alterno = $row["tel_contacto_alterno"];
                 $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
 
-                $nombre_completo = append([
-                    es_null($row, "nombre"),
-                    es_null($row, "apellido_paterno"),
-                    es_null($row, "apellido_materno")
-                ]);
+                $nombre_completo =
+                    append([
+                        es_null($row, "nombre"),
+                        es_null($row, "apellido_paterno"),
+                        es_null($row, "apellido_materno")
+                    ]);
 
 
-                $text[] = div($nombre_completo);
-                $text[] = div($email);
-                $text[] = div($tel_contacto);
-                $text[] = div($tel_contacto_alterno);
-                $text[] = div($opt[$row["sexo"]]);
+                $r[] = div($nombre_completo);
+                $r[] = div($email);
+                $r[] = div($tel_contacto);
+                $r[] = div($tel_contacto_alterno);
 
+                if ($row["sexo"] != 2) {
+
+                    $r[] = div($opt[$row["sexo"]]);
+                }
 
                 $icon = icon("fa-pencil configurara_informacion_cliente black");
-                $text[] = div($icon, "pull-right dropdown", 1);
+                $r[] = div($icon, "pull-right dropdown", 1);
 
             }
 
 
             $response = btw(
 
-                div("CLIENTE", "encabezado_cliente")
+                ajustar("CLIENTE",
+
+                        icon("fa fa-cart-plus agenda_compra" , [ "id" => $id_usuario ])
+
+                )
                 ,
-                div(append($text), "contenido_domicilio top_10")
+                div(append($r), "contenido_domicilio top_10")
                 ,
 
                 "shadow border padding_20 top_40"

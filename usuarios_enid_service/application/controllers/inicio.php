@@ -7,15 +7,15 @@ class Inicio extends CI_Controller
         parent::__construct();
         $this->load->helper("user");
         $this->load->library(lib_def());
-        $this->principal->acceso();
+        $this->app->acceso();
     }
 
     function index()
     {
 
-        $data = $this->principal->val_session("Grupo ventas - Enid Service - ");
+        $data = $this->app->session("Grupo ventas - Enid Service - ");
 
-        if ($this->principal->getperfiles() === 20) {
+        if ($this->app->getperfiles() === 20) {
 
             header("location:" . path_enid("area_cliente"));
         }
@@ -29,19 +29,19 @@ class Inicio extends CI_Controller
         ];
 
 
-        $this->principal->show_data_page($this->principal->getCssJs($data, "usuarios_enid_service"), 'empresas_enid');
+        $this->app->pagina($this->app->cssJs($data, "usuarios_enid_service"), 'empresas_enid');
     }
 
     private function get_perfiles_enid_service()
     {
 
-        return $this->principal->api("perfiles/get/format/json/");
+        return $this->app->api("perfiles/get/format/json/");
     }
 
     private function get_departamentos_enid()
     {
 
         $q["estado"] = 1;
-        return $this->principal->api("departamento/index/format/json/", $q);
+        return $this->app->api("departamento/index/format/json/", $q);
     }
 }

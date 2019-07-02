@@ -12,7 +12,7 @@ class recibo extends REST_Controller
         $this->load->helper("recibo");
         $this->load->library('table');
         $this->load->library(lib_def());
-        $this->id_usuario = $this->principal->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("idusuario");
     }
 
     function pendientes_sin_cierre_GET()
@@ -41,7 +41,7 @@ class recibo extends REST_Controller
             if (es_data($response)) {
 
                 $total = $this->recibo_model->get_tiempo_venta($param, 1);
-                $response = $this->principal->get_imagenes_productos(0, 1, 1, 1, $response);
+                $response = $this->app->imgs_productos(0, 1, 1, 1, $response);
                 $response = $this->get_costos_operativos($response, $param["fecha_inicio"], $param["fecha_termino"]);
                 $response = get_format_tiempo_entrega($response, $total, $param);
 
@@ -159,7 +159,7 @@ class recibo extends REST_Controller
 
 
             $compras = $this->recibo_model->compras_ventas_efectivas_usuario($param);
-            $compras = $this->principal->get_imagenes_productos(0, 1, 1, 1, $compras);
+            $compras = $this->app->imgs_productos(0, 1, 1, 1, $compras);
             $response = get_vista_compras_efectivas($compras, $param["modalidad"]);
         }
 
@@ -168,7 +168,7 @@ class recibo extends REST_Controller
 
     function get_estatus_servicio_enid_service($q)
     {
-        return $this->principal->api("status_enid_service/servicio/format/json/", $q);
+        return $this->app->api("status_enid_service/servicio/format/json/", $q);
     }
 
     function proyecto_persona_info_GET()
@@ -190,7 +190,7 @@ class recibo extends REST_Controller
                     "id_usuario" => $id_usuario,
                     "ordenes" => $ordenes,
                     "modalidad" => $modalidad,
-                    "id_perfil" => $this->principal->getperfiles(),
+                    "id_perfil" => $this->app->getperfiles(),
                 ];
 
                 $response = get_vista_cliente($data);
@@ -234,8 +234,8 @@ class recibo extends REST_Controller
                 ];
 
 
-                $url_img = $this->principal->get_imagenes_productos($id_servicio, 1, 1, 1);
-                $dc["servicio"] = $this->principal->get_base_servicio($id_servicio);
+                $url_img = $this->app->imgs_productos($id_servicio, 1, 1, 1);
+                $dc["servicio"] = $this->app->servicio($id_servicio);
 
 
                 if ($r["monto_a_pagar"] > $r["saldo_cubierto"]) {
@@ -246,7 +246,7 @@ class recibo extends REST_Controller
 
 
                     $dc += [
-                        "usuario_venta" => $this->principal->get_info_usuario($r["id_usuario_venta"]),
+                        "usuario_venta" => $this->app->usuario($r["id_usuario_venta"]),
                         "modalidad" => 1,
                     ];
 
@@ -279,9 +279,9 @@ class recibo extends REST_Controller
                     $dc["es_punto_encuentro"] = 0;
                     $response = $this->get_mensaje_pago_al_memento($dc, $url_img);
 
-                }else{
+                } else {
 
-                    $usuario = $this->principal->get_info_usuario($r["id_usuario"]);
+                    $usuario = $this->app->usuario($r["id_usuario"]);
                     $response = $this->get_mensaje_no_aplica($recibo, get_costo_envio($r), $usuario, $dc);
                 }
 
@@ -315,7 +315,7 @@ class recibo extends REST_Controller
 
             else:
 
-                $usuario = $this->principal->get_info_usuario($r["id_usuario"]);
+                $usuario = $this->app->usuario($r["id_usuario"]);
                 $response = $this->get_mensaje_no_aplica($recibo, get_costo_envio($r[0]), $usuario, $dc);
             endif;
 
@@ -328,7 +328,7 @@ class recibo extends REST_Controller
     {
 
         $q["id_recibo"] = $id_recibo;
-        $ppfppe = $this->principal->api("proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/", $q);
+        $ppfppe = $this->app->api("proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/", $q);
         return primer_elemento($ppfppe, "id_punto_encuentro", 0);
 
     }
@@ -337,7 +337,7 @@ class recibo extends REST_Controller
     {
 
         $q["id"] = $id_punto_encuentro;
-        return $this->principal->api("punto_encuentro/id/format/json/", $q);
+        return $this->app->api("punto_encuentro/id/format/json/", $q);
     }
 
     private function get_mensaje_pago_al_memento($dc, $url_img)
@@ -562,7 +562,7 @@ class recibo extends REST_Controller
     function get_estatus_enid_service($q)
     {
 
-        return $this->principal->api("status_enid_service/index/format/json/", $q);
+        return $this->app->api("status_enid_service/index/format/json/", $q);
     }
 
     function fecha_entrega_PUT()
@@ -708,7 +708,7 @@ class recibo extends REST_Controller
     private function add_tipificacion($q)
     {
 
-        return $this->principal->api("tipificacion_recibo/index", $q, "json", "POST");
+        return $this->app->api("tipificacion_recibo/index", $q, "json", "POST");
     }
 
     function set_default_orden($param)
@@ -763,11 +763,11 @@ class recibo extends REST_Controller
             $r = $recibo[0];
             if ($r["notificacion_encuesta"] < 1) {
                 $id_usuario = $r["id_usuario"];
-                $usuario = $this->principal->get_info_usuario($id_usuario);
+                $usuario = $this->app->usuario($id_usuario);
                 if (es_data($usuario)) {
                     if (es_email_valido($usuario[0]["email"]) > 0) {
                         $sender = get_notificacion_solicitud_valoracion($usuario, $r["id_servicio"]);
-                        $this->principal->send_email_enid($sender, 1);
+                        $this->app->send_email($sender, 1);
                         $this->recibo_model->q_up("notificacion_encuesta", 1, $id_recibo);
                     }
                 }
@@ -821,7 +821,7 @@ class recibo extends REST_Controller
 
     private function status_enid($q = [])
     {
-        return $this->principal->api("status_enid_service/index/format/json/", $q);
+        return $this->app->api("status_enid_service/index/format/json/", $q);
     }
 
     function solicitudes_periodo_servicio_GET()
@@ -912,7 +912,7 @@ class recibo extends REST_Controller
 
             $orden = $row;
             $id_servicio = $ordenes[$a]["id_servicio"];
-            $orden["url_img_servicio"] = $this->principal->get_imagenes_productos($id_servicio, 1, 1, 1);
+            $orden["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
             $a++;
             $response[] = $orden;
         }
@@ -924,7 +924,7 @@ class recibo extends REST_Controller
     {
 
         $q["in"] = $in;
-        return $this->principal->api("costo_operacion/qsum/format/json/", $q);
+        return $this->app->api("costo_operacion/qsum/format/json/", $q);
 
     }
 
@@ -972,4 +972,19 @@ class recibo extends REST_Controller
 
         return $res;
     }
+
+    function agenda_POST()
+    {
+
+        $param = $this->post();
+        $response = false;
+        if (if_ext($param, "id", 1)) {
+
+            $this->app->set_userdata("agenda_pedido", $param["id"]);
+            $response = true;
+
+        }
+        $this->response($response);
+    }
+
 }

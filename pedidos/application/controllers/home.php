@@ -16,8 +16,8 @@ class Home extends CI_Controller
 
 
         $param = $this->input->get();
-        $data = $this->principal->val_session();
-        $this->principal->acceso();
+        $data = $this->app->session();
+        $this->app->acceso();
 
         if (get_param_def($param, "seguimiento") > 0 && ctype_digit($param["seguimiento"])) {
 
@@ -33,7 +33,7 @@ class Home extends CI_Controller
     private function carga_vista_seguimiento($param, $data)
     {
 
-        $data = $this->principal->getCSSJs($data, "pedidos_seguimiento");
+        $data = $this->app->cssJs($data, "pedidos_seguimiento");
         $id_recibo = $this->input->get("seguimiento");
 
 
@@ -69,11 +69,11 @@ class Home extends CI_Controller
 
         $q["id"] = $id_recibo;
 
-        $response = $this->principal->api("recibo/id/format/json/", $q);
+        $response = $this->app->api("recibo/id/format/json/", $q);
 
         if (is_array($response) && count($response) > 0 & $add_img > 0) {
 
-            $response[0]["url_img_servicio"] = $this->principal->get_imagenes_productos($response[0]["id_servicio"], 1, 1, 1);
+            $response[0]["url_img_servicio"] = $this->app->imgs_productos($response[0]["id_servicio"], 1, 1, 1);
 
         }
 
@@ -102,14 +102,14 @@ class Home extends CI_Controller
     private function get_punto_encuentro($id_recibo)
     {
         $q["id_recibo"] = $id_recibo;
-        return $this->principal->api("proyecto_persona_forma_pago_punto_encuentro/complete/format/json/", $q);
+        return $this->app->api("proyecto_persona_forma_pago_punto_encuentro/complete/format/json/", $q);
     }
 
     private function get_domicilio_recibo($id_recibo)
     {
 
         $q["id_recibo"] = $id_recibo;
-        $direccion = $this->principal->api("proyecto_persona_forma_pago_direccion/recibo/format/json/", $q);
+        $direccion = $this->app->api("proyecto_persona_forma_pago_direccion/recibo/format/json/", $q);
         $domicilio = [];
 
         if (count($direccion) > 0 && $direccion[0]["id_direccion"] > 0) {
@@ -124,7 +124,7 @@ class Home extends CI_Controller
     {
         $q["id_direccion"] = $id;
         $api = "direccion/data_direccion/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     private function load_view_domicilios_pedidos($data)
@@ -137,7 +137,7 @@ class Home extends CI_Controller
             "puntos_encuentro" => $this->get_puntos_encuentro($id_usuario)
         ];
 
-        $this->principal->show_data_page($this->principal->getCSSJs($data, "pedidos_domicilios_pedidos"), 'domicilio');
+        $this->app->pagina($this->app->cssJs($data, "pedidos_domicilios_pedidos"), 'domicilio');
     }
 
     private function get_direcciones_usuario($id_usuario)
@@ -145,14 +145,14 @@ class Home extends CI_Controller
 
         $q["id_usuario"] = $id_usuario;
         $api = "usuario_direccion/all/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     private function get_puntos_encuentro($id_usuario)
     {
 
         $q["id_usuario"] = $id_usuario;
-        return $this->principal->api("usuario_punto_encuentro/usuario/format/json/", $q);
+        return $this->app->api("usuario_punto_encuentro/usuario/format/json/", $q);
     }
 
     private function load_view_seguimiento($data, $param, $recibo, $id_recibo)
@@ -175,13 +175,13 @@ class Home extends CI_Controller
 
         }
 
-        $this->principal->show_data_page($data, 'seguimiento');
+        $this->app->pagina($data, 'seguimiento');
     }
 
     private function get_estatus_enid_service($q = [])
     {
 
-        return $this->principal->api("status_enid_service/index/format/json/", $q);
+        return $this->app->api("status_enid_service/index/format/json/", $q);
     }
 
     private function verifica_evaluacion($id_usuario, $id_servicio)
@@ -193,7 +193,7 @@ class Home extends CI_Controller
             "id_servicio" => $id_servicio
         ];
 
-        return $this->principal->api("valoracion/num/format/json/", $q);
+        return $this->app->api("valoracion/num/format/json/", $q);
 
     }
 
@@ -201,21 +201,21 @@ class Home extends CI_Controller
     {
 
         $q["recibo"] = $id_recibo;
-        return $this->principal->api("tipificacion_recibo/recibo/format/json/", $q);
+        return $this->app->api("tipificacion_recibo/recibo/format/json/", $q);
     }
 
     private function get_ppfp($id_recibo)
     {
 
         $q["id"] = $id_recibo;
-        return $this->principal->api("recibo/id/format/json/", $q);
+        return $this->app->api("recibo/id/format/json/", $q);
 
     }
 
     function carga_vista_costos_operacion($param, $data)
     {
 
-        $data = $this->principal->getCssJs($data, "pedidos");
+        $data = $this->app->cssJs($data, "pedidos");
         $costos_operacion = $this->get_costo_operacion($param["costos_operacion"]);
         $this->table->set_heading(array('MONTO', 'CONCEPTO', 'REGISTO', ''));
         $total = 0;
@@ -242,7 +242,7 @@ class Home extends CI_Controller
 
         $recibo = $this->get_ppfp($param["costos_operacion"]);
         $id_servicio = (is_array($recibo) && count($recibo) > 0) ? $recibo[0]["id_servicio"] : 0;
-        $path = $this->principal->get_imagenes_productos($id_servicio, 1, 1, 1);
+        $path = $this->app->imgs_productos($id_servicio, 1, 1, 1);
 
 
         $response = get_format_costo_operacion(
@@ -254,7 +254,7 @@ class Home extends CI_Controller
             $recibo
         );
 
-        $this->principal->show_data_page($data, $response, 1);
+        $this->app->pagina($data, $response, 1);
 
 
     }
@@ -263,7 +263,7 @@ class Home extends CI_Controller
     {
 
         $q["recibo"] = $id_recibo;
-        return $this->principal->api("costo_operacion/recibo/format/json/", $q);
+        return $this->app->api("costo_operacion/recibo/format/json/", $q);
 
     }
 
@@ -271,7 +271,7 @@ class Home extends CI_Controller
     {
 
         $q["x"] = 1;
-        return $this->principal->api("tipo_costo/index/format/json/", $q);
+        return $this->app->api("tipo_costo/index/format/json/", $q);
 
     }
 
@@ -279,13 +279,13 @@ class Home extends CI_Controller
     {
 
 
-        if ($this->principal->getperfiles() != 3) {
+        if ($this->app->getperfiles() != 3) {
 
             header("location:" . path_enid("area_cliente"));
 
         }
 
-        $data = $this->principal->getCssJs($data, "pedidos");
+        $data = $this->app->cssJs($data, "pedidos");
 
         $data += [
             "tipos_entregas" => $this->get_tipos_entregas([]),
@@ -293,14 +293,14 @@ class Home extends CI_Controller
         ];
 
 
-        $fn = (get_param_def($param, "recibo") < 1) ? $this->principal->show_data_page($data, get_form_busqueda_pedidos($data, $param), 1) : $this->load_detalle_pedido($param, $data);
+        $fn = (get_param_def($param, "recibo") < 1) ? $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1) : $this->load_detalle_pedido($param, $data);
 
     }
 
     private function get_tipos_entregas($q)
     {
 
-        return $this->principal->api("tipo_entrega/index/format/json/", $q);
+        return $this->app->api("tipo_entrega/index/format/json/", $q);
     }
 
     private function load_detalle_pedido($param, $data)
@@ -329,13 +329,13 @@ class Home extends CI_Controller
             if (get_param_def($param, "fecha_entrega") > 0) {
 
 
-                $this->principal->show_data_page($data, get_form_fecha_entrega($data), 1);
+                $this->app->pagina($data, get_form_fecha_entrega($data), 1);
 
 
             } elseif (get_param_def($param, "recordatorio") > 0) {
 
 
-                $this->principal->show_data_page($data, form_fecha_recordatorio($data, $this->get_tipo_recordatorio()), 1);
+                $this->app->pagina($data, form_fecha_recordatorio($data, $this->get_tipo_recordatorio()), 1);
 
             } else {
 
@@ -355,13 +355,13 @@ class Home extends CI_Controller
 
                 ];
 
-                $this->principal->show_data_page($data, 'detalle');
+                $this->app->pagina($data, 'detalle');
             }
 
 
         } else {
 
-            $this->principal->show_data_page($data, get_error_message(), 1);
+            $this->app->pagina($data, get_error_message(), 1);
         }
 
     }
@@ -369,19 +369,19 @@ class Home extends CI_Controller
     private function get_tipo_recordatorio()
     {
 
-        return $this->principal->api("tipo_recordatorio/index/format/json/");
+        return $this->app->api("tipo_recordatorio/index/format/json/");
     }
 
     private function get_usuario($id_usuario)
     {
-        return $this->principal->get_info_usuario($id_usuario);
+        return $this->app->usuario($id_usuario);
     }
 
     private function get_recibo_comentarios($id_recibo)
     {
 
         $q["id_recibo"] = $id_recibo;
-        return $this->principal->api("recibo_comentario/index/format/json/", $q);
+        return $this->app->api("recibo_comentario/index/format/json/", $q);
 
     }
 
@@ -389,14 +389,14 @@ class Home extends CI_Controller
     {
 
         $q["id_recibo"] = $id_recibo;
-        return $this->principal->api("recordatorio/index/format/json/", $q);
+        return $this->app->api("recordatorio/index/format/json/", $q);
     }
 
     private function get_num_compras($id_usuario)
     {
 
         $q["id_usuario"] = $id_usuario;
-        return $this->principal->api("recibo/num_compras_usuario/format/json/", $q);
+        return $this->app->api("recibo/num_compras_usuario/format/json/", $q);
 
     }
 

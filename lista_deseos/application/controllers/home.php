@@ -7,13 +7,13 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->library(lib_def());
         $this->load->helper("deseos");
-        $this->principal->acceso();
+        $this->app->acceso();
     }
 
     function index()
     {
 
-        $data = $this->principal->val_session();
+        $data = $this->app->session();
         $q = (get_param_def($this->input->get(), "q") === "preferencias") ? $this->load_preferencias($data) : $this->load_lista_deseos($data);
 
     }
@@ -23,8 +23,8 @@ class Home extends CI_Controller
 
         $data["preferencias"] = $this->get_preferencias($data["id_usuario"]);
         $data["tmp"] = get_format_preferencias();
-        $data = $this->principal->getCSSJs($data, "lista_deseos_preferencias");
-        $this->principal->show_data_page($data, 'home_preferencias');
+        $data = $this->app->cssJs($data, "lista_deseos_preferencias");
+        $this->app->pagina($data, 'home_preferencias');
     }
 
     private function load_lista_deseos($data)
@@ -34,13 +34,13 @@ class Home extends CI_Controller
         $data["productos_deseados"] = $this->add_imagenes($this->get_lista_deseos($data["id_usuario"]));
         if (count($data["productos_deseados"]) > 0) {
 
-            $data = $this->principal->getCSSJs($data, "lista_deseos_productos_deseados");
-            $this->principal->show_data_page($data, get_productos_deseados($data["productos_deseados"]), 1);
+            $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
+            $this->app->pagina($data, get_productos_deseados($data["productos_deseados"]), 1);
 
 
         } else {
 
-            $this->principal->show_data_page($data, get_format_sin_productos(), 1);
+            $this->app->pagina($data, get_format_sin_productos(), 1);
 
         }
     }
@@ -53,7 +53,7 @@ class Home extends CI_Controller
 
             $servicio = $row;
             $id_servicio = $servicios[$a]["id_servicio"];
-            $servicio["url_img_servicio"] = $this->principal->get_imagenes_productos($id_servicio, 1, 1, 1);
+            $servicio["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
             $a++;
             $response[] = $servicio;
         }
@@ -68,11 +68,11 @@ class Home extends CI_Controller
             "id_usuario" => $id_usuario,
             "c" => 1,
         ];
-        return $this->principal->api("usuario_deseo/usuario/format/json/", $q);
+        return $this->app->api("usuario_deseo/usuario/format/json/", $q);
     }
 
     private function get_preferencias($id_usuario)
     {
-        return $this->principal->api("clasificacion/interes_usuario/format/json/", ["id_usuario" => $id_usuario]);
+        return $this->app->api("clasificacion/interes_usuario/format/json/", ["id_usuario" => $id_usuario]);
     }
 }

@@ -7,13 +7,13 @@ class Inicio extends CI_Controller
 		parent::__construct();
 		$this->load->helper("reporte");
 		$this->load->library(lib_def());
-		$this->principal->acceso();
+		$this->app->acceso();
 	}
 
 	function index()
 	{
-		$data = $this->principal->val_session("Métricas Enid Service");
-		$num_perfil = $this->principal->getperfiles();
+		$data = $this->app->session("Métricas Enid Service");
+		$num_perfil = $this->app->getperfiles();
 		$module = $this->module_redirect($num_perfil);
 
 		if ($module != 1) {
@@ -21,8 +21,8 @@ class Inicio extends CI_Controller
 		}
 
 		$data["categorias_destacadas"] = $this->carga_categorias_destacadas();
-		$data = $this->principal->getCssJs($data, "reporte_enid");
-		$this->principal->show_data_page($data, 'empresas_enid');
+		$data = $this->app->cssJs($data, "reporte_enid");
+		$this->app->pagina($data, 'empresas_enid');
 
 	}
 	private function module_redirect($num_perfil)
@@ -64,7 +64,7 @@ class Inicio extends CI_Controller
 	private function carga_categorias_destacadas($q=[])
 	{
 
-		return $this->principal->api("clasificacion/categorias_destacadas/format/json/", $q);
+		return $this->app->api("clasificacion/categorias_destacadas/format/json/", $q);
 	}
 
 }

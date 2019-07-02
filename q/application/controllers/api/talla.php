@@ -51,7 +51,7 @@ class Talla extends REST_Controller
 	function get_tipo_talla($q){
 		$q["info"]  = 1;
 		$api        =  "tipo_talla/index/format/json/";
-		return      $this->principal->api( $api, $q);
+		return      $this->app->api( $api, $q);
 	}
 	*/
 	/*

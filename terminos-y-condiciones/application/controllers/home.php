@@ -13,7 +13,7 @@ class Home extends CI_Controller
     function index()
     {
 
-        $data = $this->principal->val_session();
+        $data = $this->app->session();
 
         $data += [
 
@@ -22,6 +22,6 @@ class Home extends CI_Controller
 
         ];
 
-        $this->principal->show_data_page($data, 'home');
+        $this->app->pagina($data, 'home');
     }
 }

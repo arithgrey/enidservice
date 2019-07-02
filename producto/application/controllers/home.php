@@ -42,7 +42,7 @@ class Home extends CI_Controller
     function load_pre()
     {
 
-        $data = $this->principal->getCSSJs($this->principal->val_session(), "producto_pre");
+        $data = $this->app->cssJs($this->app->session(), "producto_pre");
         $data["id_servicio"] = $this->input->get("producto");
         $data["proceso_compra"] = 1;
         $param = $this->input->post();
@@ -58,11 +58,11 @@ class Home extends CI_Controller
             "orden_pedido" => 1,
             "carro_compras" => get_param_def($data , "carro_compras"),
             "id_carro_compras" => get_param_def($data , "id_carro_compras"),
-            "url_imagen_servicio" => get_img_serv($this->principal->get_imagenes_productos($param["plan"], 1, 1))
+            "url_imagen_servicio" => get_img_serv($this->app->imgs_productos($param["plan"], 1, 1))
 
         ];
 
-        $this->principal->show_data_page($data, 'pre');
+        $this->app->pagina($data, 'pre');
 
     }
 
@@ -72,12 +72,12 @@ class Home extends CI_Controller
 
         $id_servicio = get_param_def($param, "producto", 0, 1);
         $this->set_option("id_servicio", $id_servicio);
-        $data = $this->principal->val_session();
+        $data = $this->app->session();
         $data["proceso_compra"] = ($data["in_session"] == 1) ? 1 : get_param_def($param, "proceso");
 
         if ($id_servicio < 1) {
 
-            $this->principal->show_data_page($data, $this->get_vista_no_encontrado());
+            $this->app->pagina($data, $this->get_vista_no_encontrado());
 
         } else {
 
@@ -101,9 +101,9 @@ class Home extends CI_Controller
 
         $id_servicio = $this->get_option("id_servicio");
         $data["q2"] = get_param_def($param, "q2");
-        $servicio = $this->principal->get_base_servicio($id_servicio);
+        $servicio = $this->app->servicio($id_servicio);
         $data["tallas"] = $this->get_tallas($id_servicio);
-        $usuario =  (es_data($servicio)) ? $this->principal->get_info_usuario(primer_elemento($servicio, "id_usuario")) : redirect(path_enid("go_home"));
+        $usuario =  (es_data($servicio)) ? $this->app->usuario(primer_elemento($servicio, "id_usuario")) : redirect(path_enid("go_home"));
         $fn  =   (!es_data($usuario)) ? redirect(path_enid("go_home")) : "";
 
 
@@ -127,7 +127,7 @@ class Home extends CI_Controller
         }
 
         $this->set_option("flag_precio_definido", 0);
-        $data["imgs"] = $this->principal->get_imagenes_productos($id_servicio, 1, 10);
+        $data["imgs"] = $this->app->imgs_productos($id_servicio, 1, 10);
         $this->set_option("meta_keywords", costruye_meta_keyword($this->get_option("servicio")[0]));
 
 
@@ -149,9 +149,9 @@ class Home extends CI_Controller
         $data["existencia"] = $this->get_existencia($id_servicio);
 
 
-        $data = $this->principal->getCSSJs($data, "producto");
+        $data = $this->app->cssJs($data, "producto");
 
-        $this->principal->show_data_page($data, 'home');
+        $this->app->pagina($data, 'home');
 
     }
 
@@ -165,12 +165,12 @@ class Home extends CI_Controller
             "id_servicio" => $id_servicio
 
         ];
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     private function calcula_costo_envio($q)
     {
-        return $this->principal->api("cobranza/calcula_costo_envio/format/json/", $q);
+        return $this->app->api("cobranza/calcula_costo_envio/format/json/", $q);
     }
 
     function crea_data_costo_envio()
@@ -231,20 +231,20 @@ class Home extends CI_Controller
     {
 
         $q["id_servicio"] = $id_servicio;
-        $this->principal->api("servicio/visitas", $q, 'json', 'PUT');
+        $this->app->api("servicio/visitas", $q, 'json', 'PUT');
     }
 
     private function get_existencia($id_servicio)
     {
         $q["id_servicio"] = $id_servicio;
         $api = "servicio/existencia/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     function view_recibo_registrado()
     {
 
-        $data = $this->principal->val_session();
+        $data = $this->app->session();
         $param = $this->input->get();
         $data += [
             "meta_keywords" => "",
@@ -257,7 +257,7 @@ class Home extends CI_Controller
 
         ];
 
-        $this->principal->show_data_page($this->principal->getCSSJs($data, "producto_recibo_registrado"), 'pre');
+        $this->app->pagina($this->app->cssJs($data, "producto_recibo_registrado"), 'pre');
 
     }
 }

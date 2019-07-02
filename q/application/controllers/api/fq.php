@@ -59,7 +59,7 @@ class Fq extends REST_Controller
 		$response = false;
 		if (if_ext($param, "editar_respuesta,id_faq,respuesta,categoria,titulo,status")) {
 
-			$param["id_usuario"] = $this->principal->get_session("idusuario");
+			$param["id_usuario"] = $this->app->get_session("idusuario");
 			$editar_respuesta = $param["editar_respuesta"];
 			$id_faq = $param["id_faq"];
 			$respuesta = $param["respuesta"];
@@ -108,11 +108,11 @@ class Fq extends REST_Controller
 	function categorias_extras_GET()
 	{
 
-		$in_session = $this->principal->is_logged_in();
+		$in_session = $this->app->is_logged_in();
 		$response = "";
 		if ($in_session != false) {
 
-			$perfil = $this->principal->getperfiles();
+			$perfil = $this->app->getperfiles();
 			switch ($perfil) {
 				case 20:
 
@@ -136,6 +136,6 @@ class Fq extends REST_Controller
 	{
 
 		$q["tipo"] = $tipo;
-		return $this->principal->api("categoria/categorias_por_tipo/format/json/", $q);
+		return $this->app->api("categoria/categorias_por_tipo/format/json/", $q);
 	}
 }

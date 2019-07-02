@@ -46,14 +46,14 @@ class Sess extends REST_Controller
 	{
 
 
-		$pregunta = $this->principal->get_session("servicio_pregunta");
-		if ($this->principal->get_session("plan") > 0) {
-			$plan = $this->principal->get_session("plan");
-			$extension_dominio = $this->principal->get_session("extension_dominio");
-			$ciclo_facturacion = $this->principal->get_session("ciclo_facturacion");
-			$is_servicio = $this->principal->get_session("is_servicio");
-			$q2 = $this->principal->get_session("q2");
-			$num_ciclos = $this->principal->get_session("num_ciclos");
+		$pregunta = $this->app->get_session("servicio_pregunta");
+		if ($this->app->get_session("plan") > 0) {
+			$plan = $this->app->get_session("plan");
+			$extension_dominio = $this->app->get_session("extension_dominio");
+			$ciclo_facturacion = $this->app->get_session("ciclo_facturacion");
+			$is_servicio = $this->app->get_session("is_servicio");
+			$q2 = $this->app->get_session("q2");
+			$num_ciclos = $this->app->get_session("num_ciclos");
 
 			$url =
 				"../procesar/?plan=" . $plan . "&extension_dominio=" . $extension_dominio . "&ciclo_facturacion=" . $ciclo_facturacion . "&is_servicio=" . $is_servicio . "&q2=" . $q2 . "&num_ciclos=" . $num_ciclos;
@@ -73,7 +73,7 @@ class Sess extends REST_Controller
 	private function get_es_usuario($q)
 	{
 		$api = "usuario/es";
-		return $this->principal->api($api, $q, "json", "POST");
+		return $this->app->api($api, $q, "json", "POST");
 	}
 
 	private function crea_session($id_usuario, $nombre, $email, $id_empresa)
@@ -106,7 +106,7 @@ class Sess extends REST_Controller
 					'logged_in' => 1
 				];
 
-				$this->principal->set_userdata($session);
+				$this->app->set_userdata($session);
 				return $session;
 			}
 			return 0;
@@ -118,7 +118,7 @@ class Sess extends REST_Controller
 	{
 		$q["id_empresa"] = $id_empresa;
 		$api = "empresa/id/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_perfil_user($id_usuario)
@@ -126,7 +126,7 @@ class Sess extends REST_Controller
 
 		$q["id_usuario"] = $id_usuario;
 		$api = "usuario_perfil/usuario/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_perfil_data($id_usuario)
@@ -134,7 +134,7 @@ class Sess extends REST_Controller
 
 		$q["id_usuario"] = $id_usuario;
 		$api = "perfiles/data_usuario/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_empresa_permiso($id_empresa)
@@ -142,14 +142,14 @@ class Sess extends REST_Controller
 
 		$q["id_empresa"] = $id_empresa;
 		$api = "empresa_permiso/empresa/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_empresa_recursos($id_empresa)
 	{
 		$q["id_empresa"] = $id_empresa;
 		$api = "empresa_recurso/recursos/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 
 	private function get_recursos_perfiles($q)
@@ -157,13 +157,13 @@ class Sess extends REST_Controller
 
 		$q["id_perfil"] = $q[0]["idperfil"];
 		$api = "recurso/navegacion/format/json/";
-		return $this->principal->api($api, $q);
+		return $this->app->api($api, $q);
 	}
 	function servicio_POST()
 	{
 
 		$param = $this->post();
-		$this->principal->set_userdata($param);
+		$this->app->set_userdata($param);
 		$this->response(1);
 	}
 }

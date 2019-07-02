@@ -834,8 +834,8 @@ if (!function_exists('get_random')) {
         return mt_rand();
     }
 }
-if (!function_exists('get_info_usuario')) {
-    function get_info_usuario($q2)
+if (!function_exists('usuario')) {
+    function usuario($q2)
     {
         $id_usuario_envio = 0;
         if (isset($q2) && $q2 != null) {
@@ -943,6 +943,7 @@ if (!function_exists('get_url_tienda')) {
     {
 
         return "http://" . $_SERVER['HTTP_HOST'] . "/inicio/search/?q3=" . $id_usuario;
+
     }
 }
 
@@ -992,7 +993,7 @@ if (!function_exists('create_url_preview')) {
 if (!function_exists('lib_def')) {
     function lib_def()
     {
-        return "../../librerias/principal";
+        return "../../librerias/app";
     }
 }
 if (!function_exists('valida_num')) {
@@ -1145,10 +1146,10 @@ if (!function_exists('debug')) {
 
             if ($array == 0) {
                 $message .=
-                    'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . $msg."\n";
+                    'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . $msg . "\n";
             } else {
                 $message .=
-                    'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . print_r($msg, true)."\n";
+                    'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . print_r($msg, true) . "\n";
             }
 
             flock($fp, LOCK_EX);
@@ -1473,7 +1474,7 @@ if (!function_exists('img_servicio')) {
         $url = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
 
         if ($external > 0) {
-            
+
             $url = "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id;
         }
 
@@ -1496,16 +1497,16 @@ if (!function_exists('append')) {
     {
         if (is_array($array)) {
 
-            if ( es_local() > 0) {
+            if (es_local() > 0) {
                 $f = 0;
-                foreach ($array  as $clave  => $row){
+                foreach ($array as $clave => $row) {
 
-                    if( $row ==  null && $row != ""  && $clave != 0 ){
-                        echo " la clave  ". $clave . " va  null \n";
-                        $f  ++;
+                    if ($row == null && $row != "" && $clave != 0) {
+                        echo " la clave  " . $clave . " va  null \n";
+                        $f++;
                     }
                 }
-                if( $f > 0 ){
+                if ($f > 0) {
                     print_r($array);
                 }
 
@@ -1896,6 +1897,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0)
         "img_faq" => "img_tema/productos/",
         "faqs" => "faq",
         "login" => "login",
+        "_login" => "../login",
         "vender" => "planes_servicios",
         "vender_nuevo" => "planes_servicios/?action=nuevo",
         "editar_producto" => "planes_servicios/?action=editar&servicio=",
@@ -1976,7 +1978,7 @@ function add_text($a, $b, $f = 0)
 
 }
 
-function get_social($proceso_compra, $desc_web, $black=1)
+function get_social($proceso_compra, $desc_web, $black = 1)
 {
 
     $url_share = current_url() . '?' . $_SERVER['QUERY_STRING'];
@@ -1985,7 +1987,7 @@ function get_social($proceso_compra, $desc_web, $black=1)
     $url_pinterest = get_url_pinterest($url_share, $desc_web);
     $url_tumblr = get_url_tumblr($url_share, $desc_web);
 
-    $color = ($black > 0) ? "black":  "white";
+    $color = ($black > 0) ? "black" : "white";
 
     $response = "";
     if ($proceso_compra < 1) {
@@ -1995,14 +1997,14 @@ function get_social($proceso_compra, $desc_web, $black=1)
             [
                 "href" => $url_facebook,
                 "target" => "_black",
-                "class" => "fa fa-facebook ".$color,
+                "class" => "fa fa-facebook " . $color,
 
             ]);
 
         $r[] = anchor_enid("",
             [
                 "href" => "https://www.instagram.com/enid_service/",
-                "class" => "fa fa-instagram ".$color,
+                "class" => "fa fa-instagram " . $color,
                 "title" => "Tumblr",
                 "target" => "_black",
             ]);
@@ -2010,7 +2012,7 @@ function get_social($proceso_compra, $desc_web, $black=1)
         $r[] = anchor_enid("",
             [
                 "target" => "_black",
-                "class" => "fa fa-twitter ".$color,
+                "class" => "fa fa-twitter " . $color,
                 "title" => "Tweet",
                 "target" => "_black",
                 "data-size" => "large",
@@ -2020,14 +2022,14 @@ function get_social($proceso_compra, $desc_web, $black=1)
             [
                 "href" => $url_pinterest,
                 "target" => "_black",
-                "class" => "fa fa-pinterest-p ".$color,
+                "class" => "fa fa-pinterest-p " . $color,
                 "title" => "Pin it"
             ]);
 
         $r[] = anchor_enid("",
             [
                 "href" => $url_tumblr,
-                "class" => "fa fa-tumblr ".$color,
+                "class" => "fa fa-tumblr " . $color,
                 "target" => "_black",
                 "title" => "Tumblr"
             ]);
@@ -2066,7 +2068,7 @@ function mayorque($a, $b, $mayor = 1, $menor = "")
 function search_bi_array($array, $columna, $busqueda, $get = false, $si_false = "")
 {
 
-    $arr_col=  array_column($array, $columna);
+    $arr_col = array_column($array, $columna);
     $index = array_search($busqueda, $arr_col);
     $response = $index;
 
@@ -2089,15 +2091,39 @@ function primer_elemento($data, $index, $def = false)
 
     return (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0])) ? $data[0][$index] : $def;
 }
-function ajustar($a,$b,$horizontal = 1){
 
-    $class = ($horizontal > 0 ) ?  "d-flex align-items-center justify-content-between" :  "d-flex flex-column justify-content-between";
-    return  div(div($a) . div($b) , $class);
+function ajustar($a, $b, $horizontal = 1)
+{
+
+    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between" : "d-flex flex-column justify-content-between";
+    return div(div($a) . div($b), $class);
 
 }
+
 function es_null($data, $index, $def = "")
 {
 
     return (is_array($data) && array_key_exists($index, $data) && $data[$index] != null) ? $data[$index] : $def;
 }
+
+function create_contenido_menu($data)
+{
+
+    $navegacion = get_param_def($data, "data_navegacion", []);
+    $id_empresa = get_param_def($data, "idempresa");
+    $menu = [];
+
+    foreach ($navegacion as $row) {
+
+        $menu[] = li(anchor_enid(icon($row["iconorecurso"]) . $row["nombre"],
+            [
+                "href" => ($row["idrecurso"] == 18) ? base_url($row["urlpaginaweb"]) . "/?q=" . $id_empresa : base_url($row["urlpaginaweb"]),
+                "class" => 'black'
+            ]));
+
+
+    }
+    return append($menu);
+}
+
 

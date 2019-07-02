@@ -81,7 +81,7 @@ class Emp extends REST_Controller
     {
 
         $api = "notificacion_pago/resumen/format/json/";
-        return $this->principal->api($api, $q);
+        return $this->app->api($api, $q);
     }
 
     function mensaje_inicial_afiliado_GET()
@@ -113,7 +113,7 @@ class Emp extends REST_Controller
         $data_send["id_usuario"] = 180;
 
         return $param["id_ticket"];
-        $this->principal->api("tarea/buzon", $data_send, "json", "POST");
+        $this->app->api("tarea/buzon", $data_send, "json", "POST");
 
     }
 
@@ -126,7 +126,7 @@ class Emp extends REST_Controller
         $uri_request = "equipo/cancelar_envio_recordatorio";
         $param["v"] = rand();
         $this->aplica_gamification_servicio($param);
-        $this->principal->api($uri_request, $param, "json", "PUT");
+        $this->app->api($uri_request, $param, "json", "PUT");
         $this->load->view("mensaje/evaluacion", $param);
     }
 
@@ -137,7 +137,7 @@ class Emp extends REST_Controller
         $param["in_session"] = 0;
         $uri_request = "cobranza/cancelar_envio_recordatorio";
         $param["v"] = rand();
-        $this->principal->api($uri_request, $param, "json", "PUT");
+        $this->app->api($uri_request, $param, "json", "PUT");
         $this->aplica_gamification_servicio($param);
         $this->load->view("mensaje/evaluacion", $param);
     }
@@ -145,7 +145,7 @@ class Emp extends REST_Controller
     private function salir_list_email($q)
     {
         $api = "prospecto/salir_list_email";
-        return $this->principal->api($api, $q, "json", "PUT");
+        return $this->app->api($api, $q, "json", "PUT");
     }
 
 }
