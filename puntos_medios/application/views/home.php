@@ -1,6 +1,6 @@
-<div class="row"  >
+<div class="row" >
     <div class="col-lg-8 col-lg-offset-2">
-        <?= get_format_identificacion($tipos_puntos_encuentro) ?>
+        <?= heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO", 3, " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10") ?>
         <?= div(div($leneas_metro, ["class" => "place_lineas col-lg-12"]), 13) ?>
         <?= place("place_estaciones_metro") ?>
 

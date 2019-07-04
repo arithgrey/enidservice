@@ -75,7 +75,6 @@ let muestra_estaciones = function() {
 
 
         set_option("id_linea", id);
-
         if (get_parameter(".primer_registro") == 1) {
 
             let servicio = get_parameter(".servicio");

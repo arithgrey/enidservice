@@ -23,6 +23,8 @@ $(document).ready(() => {
     $(".li_menu_servicio").click(() => {
         despliega([".btn_agregar_servicios", ".contenedor_top"], 1);
     });
+    $(".puntos_venta").click(puntos_venta);
+
     despliega([".contenedor_busqueda_global_enid_service"], 0);
     $(".ci_facturacion").change(evalua_precio);
     $(".cancelar_registro").click(cancelar_registro);
@@ -1354,4 +1356,68 @@ let retorno = () => {
 
             break;
     }
+}
+let puntos_venta = () => {
+
+    let url = "../q/index.php/api/linea_metro/disponibilidad/format/json/";
+    let data_send = {};
+    request_enid("GET", data_send, url, r_lineas);
+}
+let r_lineas = function (data) {
+
+    render_enid(".place_puntos_venta", data);
+    $(".agregar_linea").click(agregar_linea);
+    $(".quitar_linea").click(quitar_linea);
+    $(".puntos_encuentro").click(puntos_encuentro);
+
+
+}
+let agregar_linea = function () {
+
+    let id =  get_parameter_enid($(this),"id");
+    let url = "../q/index.php/api/linea_lista_negra/index/format/json/";
+    let data_send = {"lista_negra" : 0 , "id" : id};
+    request_enid("PUT", data_send, url, puntos_venta);
+}
+let quitar_linea = function () {
+
+    let id =  get_parameter_enid($(this),"id");
+    let url = "../q/index.php/api/linea_lista_negra/index/format/json/";
+    let data_send = {"lista_negra" : 1 , "id" : id};
+    request_enid("PUT", data_send, url, puntos_venta);
+}
+let puntos_encuentro = function () {
+
+    let id =  get_parameter_enid($(this),"id");
+
+    if (id >  0){
+
+        let url = "../q/index.php/api/punto_encuentro/disponibilidad/format/json/";
+        let data_send = {"id": id, "v": 1};
+        request_enid("GET", data_send, url, r_puntos_encuentro);
+    }
+}
+let r_puntos_encuentro  = function (data) {
+
+    render_enid(".place_puntos_venta", data);
+    $(".quitar_punto").click(quitar_punto);
+    $(".agregar_linea").click(agregar_punto);
+
+
+}
+let quitar_punto = function () {
+
+
+    let id =  get_parameter_enid($(this),"id");
+    let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
+    let data_send = {"lista_negra" : 1 , "id" : id};
+    request_enid("PUT", data_send, url, puntos_venta);
+
+}
+let agregar_punto = function () {
+
+    let id =  get_parameter_enid($(this),"id");
+    let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
+    let data_send = {"lista_negra" : 0 , "id" : id};
+    request_enid("PUT", data_send, url, puntos_venta);
 }

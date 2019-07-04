@@ -151,12 +151,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_identificacion($tipos_puntos_encuentro)
-    {
 
-        return  heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO", 3, " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10");
-
-    }
 
     function get_form_quien_recibe($primer_registro, $punto_encuentro, $recibo)
     {
