@@ -21,8 +21,8 @@ if (!function_exists('invierte_date_time')) {
             $r[] =  div($resumen_valoraciones_vendedor, 1) ;
             $r[] =  div($paginacion, 1) ;
 
-            $response =  div(append($r),  "top_30 col-lg-6 col-lg-offset-3 shadow padding_10");
-            return $response;
+
+            return div(append($r),  "top_30 col-lg-6 col-lg-offset-3 shadow padding_10");
         }
     }
 

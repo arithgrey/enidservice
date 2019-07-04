@@ -27,7 +27,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $asunto = "HOLA {$nombre} TIENES UNA NUEVA RESPUESTA EN TU BUZÓN";
-
         $text = "Que tal {$nombre} el vendedor a contestado tu pregunta, puedes ver la respuesta que 
             te envió en tu !" . anchor_enid("buzón aquí", "https://enidservice.com/inicio/login/");
 
@@ -107,10 +106,7 @@ if (!function_exists('invierte_date_time')) {
         $fecha_registro = $param["fecha_registro"];
         $id_usuario = $param["id_usuario"];
         $leido_vendedor = $param["leido_vendedor"];
-
-        $num  = (es_data($param["respuestas"])) ? $param["respuestas"][0]["respuestas"]:0;
-
-
+        //$num  = (es_data($param["respuestas"])) ? $param["respuestas"][0]["respuestas"]:0;
         $nombre_servicio = $param["nombre_servicio"];
         $id_servicio = $param["id_servicio"];
 
@@ -132,7 +128,7 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-            $num = ($num < 1) ? "" : $num;
+            //$num = ($num < 1) ? "" : $num;
 
             $text = div("Nueva", [
 

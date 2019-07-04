@@ -5,11 +5,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = get_form_punto_encuentro_horario([
-            input_hidden([
-                "class" => "recibo",
-                "name" => "recibo",
-                "value" => $recibo
-            ]),
+            input_hidden(
+                [
+                    "class" => "recibo",
+                    "name" => "recibo",
+                    "value" => $recibo
+                ]),
 
             input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro])
         ]);
@@ -20,27 +21,30 @@ if (!function_exists('invierte_date_time')) {
 
     function get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras)
     {
-        $horarios =  lista_horarios();
-        $lista_horarios =  $horarios["select"];
-        $nuevo_dia =   $horarios["nuevo_dia"];
+        $horarios = lista_horarios();
+        $lista_horarios = $horarios["select"];
+        $nuevo_dia = $horarios["nuevo_dia"];
 
         $minimo = date_format(horario_enid(), 'Y-m-d');
-        $maximo = add_date($minimo,4);
-        $minimo =  ( $nuevo_dia >  0 )? add_date($minimo,1) : $minimo;
+        $maximo = add_date($minimo, 4);
+        $minimo = ($nuevo_dia > 0) ? add_date($minimo, 1) : $minimo;
 
 
         $r[] = heading_enid("¿Quién recibe?", 2, ["class" => "text-uppercase"]);
         $r[] = form_open("", ["class" => "form-horizontal form_punto_encuentro mt-5"]);
         $r[] = label(" NOMBRE ", "col-lg-3 mt-3");
 
-        $r[] = div(input([
-            "id" => "nombre",
-            "name" => "nombre",
-            "type" => "text",
-            "placeholder" => "Persona que recibe",
-            "class" => "form-control input-md nombre ",
-            "required" => true
-        ]), "col-lg-9 mt-3");
+        $r[] = div(
+            input(
+                [
+                    "id" => "nombre",
+                    "name" => "nombre",
+                    "type" => "text",
+                    "placeholder" => "Persona que recibe",
+                    "class" => "form-control input-md nombre ",
+                    "required" => true
+                ]), "col-lg-9 mt-3"
+        );
 
         $r[] = label("CORREO ", "col-lg-3 mt-3");
         $r[] = div(
@@ -113,7 +117,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]);
         $r[] = input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras]);
         $r[] = input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]);
-        $r[] = div(guardar("CONTINUAR"), ["class" => "col-lg-12 mt-5"] );
+        $r[] = div(guardar("CONTINUAR"), ["class" => "col-lg-12 mt-5"]);
         $r[] = get_formar_usuario_registrado($in_session, $servicio, $num_ciclos);
         $r[] = form_close();
         return div(append($r), 10, 1);
@@ -150,9 +154,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_identificacion($tipos_puntos_encuentro)
     {
 
-        $r[] = heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO", 3, " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10");
-        return append($r);
-
+        return  heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO", 3, " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10");
 
     }
 
@@ -178,13 +180,11 @@ if (!function_exists('invierte_date_time')) {
     function get_form_punto_encuentro_horario($extra = [])
     {
 
-        $horarios =  lista_horarios();
-        $lista_horarios =  $horarios["select"];
-        $nuevo_dia =   $horarios["nuevo_dia"];
-
+        $horarios = lista_horarios();
+        $nuevo_dia = $horarios["nuevo_dia"];
         $minimo = date_format(horario_enid(), 'Y-m-d');
-        $maximo = add_date($minimo,4);
-        $minimo = ($nuevo_dia >  0 ) ? add_date($minimo,1) : $minimo;
+        $maximo = add_date($minimo, 4);
+        $minimo = ($nuevo_dia > 0) ? add_date($minimo, 1) : $minimo;
 
 
         $r[] = form_open("", ["class" => "form_punto_encuentro_horario top_50"]);
@@ -206,9 +206,8 @@ if (!function_exists('invierte_date_time')) {
                 ]),
             8);
 
-
         $r[] = div(icon("fa fa-clock-o") . " HORA DE ENCUENTRO", "col-lg-4 top_30");
-        $r[] = div($lista_horarios, "col-lg-8 top_30");
+        $r[] = div($horarios["select"], "col-lg-8 top_30");
         $r[] = div(guardar("CONTINUAR", ["class" => "top_50"]), 12);
         $r[] = place("place_notificacion_punto_encuentro");
         $r[] = form_close();

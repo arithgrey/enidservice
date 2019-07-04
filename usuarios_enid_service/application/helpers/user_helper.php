@@ -7,14 +7,20 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = heading_enid("Afiliados Enid Service", 3);
-            $r[] = addNRow(ul(li(anchor_enid("Miembros Afiliados" . icon('fa fa-trophy'),
-                [
-                    "href" => "#tab_afiliados_activos",
-                    "data-toggle" => "tab",
-                    "id" => '1'
-                ])),
-                ["class" => "nav nav-tabs"]
-            ));
+            $r[] = addNRow(ul(li(
+                    anchor_enid(
+                        text_icon('fa fa-trophy', "Miembros Afiliados")
+                        ,
+                        [
+                            "href" => "#tab_afiliados_activos",
+                            "data-toggle" => "tab",
+                            "id" => '1'
+                        ]
+                    )
+                ),
+                    "nav nav-tabs"
+                )
+            );
             $r[] = place("usuarios_enid_service_afiliados");
             return append($r);
 
@@ -147,11 +153,9 @@ if (!function_exists('invierte_date_time')) {
                 "readonly" => true
             ]);
             $x[] = place("place_correo_incorrecto");
-
+            
 
             $r[] = div(append($x), 4);
-
-
             $r[] = btw(
                 div("Departamento"),
                 create_select(
@@ -277,7 +281,7 @@ if (!function_exists('invierte_date_time')) {
                     input(["type" => "text", "name" => "tipo_talla", "required" => true]),
                     form_close()
                 ]
-            ), 9 );
+            ), 9);
 
             $r[] = div(div(append($x), 6, 1), 13);
             $r[] = place("place_tallas");
@@ -292,8 +296,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(get_form_categorias(), 7);
             $r[] = div(heading("CATEGORÍAS    EN PRODUCTOS Y SERVICIOS", 3), 5);
-            return  append($r);
-
+            return append($r);
 
 
         }
@@ -342,7 +345,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_td(place('quinto_nivel'));
             $r[] = "</table>";
 
-            return  append($r);
+            return append($r);
 
 
         }

@@ -44,28 +44,31 @@ if (!function_exists('invierte_date_time')) {
                     6
                 );
 
-                $x[] = div(append([
+                $x[] = div(
+                    append(
+                        [
 
-                    div("Correo Electrónico  *")
-                    ,
-                    div(
-                        input(
-                            [
-                                "name" => "email",
-                                "placeholder" => "email",
-                                "class" => " input-sm  email",
-                                "type" => "email",
-                                "required" => "true",
-                                "onkeypress" => "minusculas(this);"
-                            ]))
-                    ,
-                    place('place_correo_incorrecto')
+                            div("Correo Electrónico  *")
+                            ,
+                            div(
+                                input(
+                                    [
+                                        "name" => "email",
+                                        "placeholder" => "email",
+                                        "class" => " input-sm  email",
+                                        "type" => "email",
+                                        "required" => "true",
+                                        "onkeypress" => "minusculas(this);"
+                                    ]))
+                            ,
+                            place('place_correo_incorrecto')
 
-                ]), 6);
+                        ]
+                    ), 6
+                );
 
 
                 $r[] = div(append($x), 13);
-
                 $r[] = div(text_icon('fa fa-unlock-alt', "Escribe una contraseña"));
                 $r[] = input(
                     [
@@ -76,9 +79,7 @@ if (!function_exists('invierte_date_time')) {
                     ]);
 
                 $r[] = place("place_password_afiliado");
-
                 $r[] = div(text_icon('fa fa-phone', "Teléfono *"));
-
                 $r[] = input(
                     [
                         "id" => "telefono",
@@ -92,12 +93,13 @@ if (!function_exists('invierte_date_time')) {
                     ]);
                 $r[] = place("place_telefono");
                 $r[] = guardar("CREA UNA CUENTA");
-                $r[] = div(anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
-                    [
-                        'class' => "white",
-                        "href" => path_enid("login")
+                $r[] = div(
+                    anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
+                        [
+                            'class' => "white",
+                            "href" => path_enid("login")
 
-                    ]),
+                        ]),
 
                     "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
                     ,
@@ -111,11 +113,8 @@ if (!function_exists('invierte_date_time')) {
             }
 
             return append($r);
-
-
         }
     }
-
 
     if (!function_exists('get_form_contacto_servicio')) {
 
@@ -166,7 +165,6 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $r[] = div(append($x), 13);
-
                 $r[] = div(icon('fa fa-unlock-alt') . "Escribe una contraseña", "top_20");
                 $r[] = input([
                     "id" => "password",
@@ -200,7 +198,6 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $r[] = div(textarea(["name" => "comentarios", "class" => "comentario"]), "top_30");
-
                 $r[] = place("place_telefono");
                 $r[] = guardar("CREA UNA CUENTA", ["class" => "top_30"]);
                 $r[] = div(
@@ -225,10 +222,8 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = form_open("", ["class" => "form_cotizacion_enid_service"]);
                 $r[] = heading_enid("SOLICITAR COTIZACIÓN", 3, "top_80 text-center");
                 $r[] = div(p(span("ME GUSTARÍA OPTENER UNA COTIZACIÓN SOBRE: ", "underline") . $servicio["nombre_servicio"]));
-
                 $r[] = div(p(span("¿TIENES ALGUNA PREGUNTA ADICIONAL?")), "top_30");
                 $r[] = textarea(["name" => "descripcion"]);
-
                 $r[] = input_hidden(
                     [
                         "id" => "id_servicio",
@@ -281,7 +276,6 @@ if (!function_exists('invierte_date_time')) {
                         "value" => $servicio["id_servicio"]
                     ]);
 
-
                 $r[] = guardar("SOLICITAR COTIZACIÓN", ["class" => "top_30", "name" => "comentarios"], 1, 1, 1);
                 $r[] = place("place_config_usuario");
                 $r[] = form_close();
@@ -319,11 +313,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = heading_enid("CARGOS DE ENVÍO $" . $costo_envio_cliente . "MXN", 4);
             $x[] = heading_enid("TOTAL $" . $monto_total_con_envio . "MXN", 3);
             $x[] = div("Precios expresados en Pesos Mexicanos.", "bottom_10");
-
-
             $r[] = div(append($x), "text-right top_20");
-
-
             if ($in_session > 0) {
 
                 $r[] = guardar("ORDENAR COMPRA", ["class" => 'btn_procesar_pedido_cliente'], 1, 1);
@@ -454,12 +444,18 @@ if (!function_exists('invierte_date_time')) {
             }
             $text_ciclos_contratados = get_text_duracion($id_ciclo_facturacion, $duracion, $is_servicio);
             $base = 'col-lg-4 tex-center';
-            $resumen_completo = div(div("PRODUCTO") . $resumen_servicio, ["class" => $base]);
-            $resumen_completo .= div($text_label . " " . $text_ciclos_contratados, ['class' => $base]);
-            $resumen_completo .= div(div("PRECIO") . $precio, 'col-lg-4');
-            $response["resumen_producto"] = $resumen_completo;
-            $response["monto_total"] = $precio;
-            $response["resumen_servicio_info"] = $info_servicio;
+
+
+            $r[] = div(div("PRODUCTO") . $resumen_servicio, $base);
+            $r[] = div($text_label . " " . $text_ciclos_contratados, $base);
+            $r[] = div(div("PRECIO") . $precio, 'col-lg-4');
+
+
+            $response = [
+                "resumen_producto" => append($r),
+                "monto_total" => $precio,
+                "resumen_servicio_info" => $info_servicio
+            ];
             return $response;
         }
     }
@@ -467,31 +463,21 @@ if (!function_exists('invierte_date_time')) {
         function get_text_acceder_cuenta($is_mobile, $param)
         {
 
-            $plan = $param["plan"];
-            $num_ciclos = $param["num_ciclos"];
-            $ciclo_facturacion = $param["ciclo_facturacion"];
-            $is_servicio = $param["is_servicio"];
-            $q2 = $param["q2"];
-
-
             $extra =
                 [
-                    "plan" => $plan,
+                    "plan" => $param["plan"],
                     "extension_dominio" => "",
-                    "ciclo_facturacion" => $ciclo_facturacion,
-                    "is_servicio" => $is_servicio,
-                    "q2" => $q2,
-                    "num_ciclos" => $num_ciclos,
+                    "ciclo_facturacion" => $param["ciclo_facturacion"],
+                    "is_servicio" => $param["is_servicio"],
+                    "q2" => $param["q2"],
+                    "num_ciclos" => $param["num_ciclos"],
                     "class" => "link_acceso cursor_pointer    white  padding_10 link_acceso cursor_pointer text-center col-lg-4 col-lg-offset-4 text-center text-uppercase letter-spacing-10  top_30 mb-5 white bg_black"
                 ];
 
 
-            $text = heading_enid("¿Ya tienes una cuenta? ", 3, " text_usuario_registrado_pregunta text-center text-uppercase letter-spacing-10");
-            $text .= div("ACCEDE AHORA!", $extra, 1);
-            return $text;
-
+            $text[] = heading_enid("¿Ya tienes una cuenta? ", 3, " text_usuario_registrado_pregunta text-center text-uppercase letter-spacing-10");
+            $text[] = div("ACCEDE AHORA!", $extra, 1);
+            return append($text);
         }
     }
-
-
 }

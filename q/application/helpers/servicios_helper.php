@@ -25,12 +25,14 @@ if (!function_exists('invierte_date_time')) {
 
             $x[] = div(heading_enid("¿CUENTAS CON ALGÚN ENLACE DE PAGO EN MERCADO LIBRE?", 5), 1);
             $x[] = div(
-                input([
-                    "type" => "url",
-                    "name" => "url_mercado_libre",
-                    "class" => "form-control url_mercado_libre",
-                    "value" => $url_ml
-                ])
+                input(
+                    [
+                        "type" => "url",
+                        "name" => "url_mercado_libre",
+                        "class" => "form-control url_mercado_libre",
+                        "value" => $url_ml
+                    ]
+                )
                 , 1
             );
 
@@ -65,7 +67,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_utilidad( $flag_servicio , $text_comision_venta, $utilidad)
+    function get_format_utilidad($flag_servicio, $text_comision_venta, $utilidad)
     {
 
         $r[] = btw(
@@ -124,13 +126,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r =  [];
+        $r = [];
 
         if ($flag_servicio < 1) {
 
             $r[] = div(get_seccion_articulos_disponibles($existencia), 6);
             $r[] = div(get_seccion_uso_producto($flag_nuevo), 6);
-
         }
 
         return append($r);
@@ -149,7 +150,6 @@ if (!function_exists('invierte_date_time')) {
             ,
             ""
         );
-
 
         $x[] = div(
             input(
@@ -263,7 +263,7 @@ if (!function_exists('invierte_date_time')) {
     function get_text_costo_envio($es_servicio, $costo_envio)
     {
 
-        return ($es_servicio < 1 ) ? div($costo_envio, 'informacion_costo_envio', 1) : "";
+        return ($es_servicio < 1) ? div($costo_envio, 'informacion_costo_envio', 1) : "";
 
     }
 
@@ -323,7 +323,7 @@ if (!function_exists('invierte_date_time')) {
             'size' => '20'
         ];
 
-        if ($param["is_mobile"] >  0 ) {
+        if ($param["is_mobile"] > 0) {
 
             $config = [
                 'class' => 'num_clasificacion ' . $nivel . ' num_clasificacion_phone selector_categoria '
@@ -369,6 +369,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
     }
+
     function une_data($data_servicios, $data_intentos_entregas)
     {
 
@@ -450,10 +451,9 @@ if (!function_exists('invierte_date_time')) {
 
         $quitar =
             div(
-                icon('fa fa-times',
-                    "dropdown-item "
 
-                ) . "Quitar"
+                icon('fa fa-times', "dropdown-item ") . "Quitar"
+
                 , ["class" => "top_20 cursor_pointer foto_producto", "id" => $id_imagen]);
 
 
@@ -468,14 +468,14 @@ if (!function_exists('invierte_date_time')) {
     function valida_tipo_promocion($param)
     {
 
-        return mayorque(primer_elemento($param,"flag_servicio",0) , 0, "SERVICIO", "PRODUCTO");
+        return mayorque(primer_elemento($param, "flag_servicio", 0), 0, "SERVICIO", "PRODUCTO");
 
     }
 
     function get_nombre_ciclo_facturacion($ciclos, $id_ciclo)
     {
 
-        return search_bi_array($ciclos, "id_ciclo_facturacion",  $id_ciclo, "ciclos");
+        return search_bi_array($ciclos, "id_ciclo_facturacion", $id_ciclo, "ciclos");
     }
 
     function create_colores_disponibles($text_colores)
@@ -519,11 +519,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = "<select class='form-control producto_nuevo'>";
         for ($z = 0; $z < count($usado); $z++) {
 
-            if ($z == $valor_actual) {
-                $r[] = "<option value='" . $z . "' selected>" . $usado[$z] . "</option>";
-            } else {
-                $r[] = "<option value='" . $z . "'>" . $usado[$z] . "</option>";
-            }
+            $r[] =  ($z == $valor_actual) ? "<option value='" . $z . "' selected>" . $usado[$z] . "</option>": "<option value='" . $z . "'>" . $usado[$z] . "</option>";
 
         }
         $r[] = "</select>";
@@ -623,12 +619,8 @@ if (!function_exists('invierte_date_time')) {
         switch ($flag_servicio) {
             case 1:
 
-                if ($flag_precio_definido == 1) {
+                $extra = ($flag_precio_definido == 1) ? "" : "A convenir";
 
-                    $extra = "";
-                } else {
-                    $extra = "A convenir";
-                }
                 break;
             case 0:
 
@@ -688,7 +680,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = "";
-        if ($in_session > 0  && $id_usuario == $id_usuario_registro_servicio || ($id_perfil > 0 && $id_perfil != 20)) {
+        if ($in_session > 0 && $id_usuario == $id_usuario_registro_servicio || ($id_perfil > 0 && $id_perfil != 20)) {
             $response = icon("top_40  bottom_40 servicio fa fa-pencil", ["id" => $id_servicio]);
         }
 
@@ -710,11 +702,7 @@ if (!function_exists('invierte_date_time')) {
 
             for ($a = $minimo; $a < $maximo; $a++) {
 
-                if ($a == $actual) {
-                    $select[] = "<option value='" . $a . "' selected>" . $a . "</option>";
-                } else {
-                    $select[] = "<option value='" . $a . "'>" . $a . "</option>";
-                }
+                $select[] = ($a == $actual) ? "<option value='" . $a . "' selected>" . $a . "</option>" : "<option value='" . $a . "'>" . $a . "</option>";
 
             }
 
@@ -751,14 +739,17 @@ if (!function_exists('invierte_date_time')) {
 
 
             $x[] = div(
-                input([
-                    "class" => "form-control ",
-                    "name" => "link_dropshipping",
-                    "required" => "true",
-                    "placeholder" => "Link de compra",
-                    "type" => "url",
-                    "value" => $link_dropshipping
-                ]),
+                input(
+                    [
+                        "class" => "form-control ",
+                        "name" => "link_dropshipping",
+                        "required" => "true",
+                        "placeholder" => "Link de compra",
+                        "type" => "url",
+                        "value" => $link_dropshipping
+
+                    ]
+                ),
                 1
             );
 
@@ -794,19 +785,24 @@ if (!function_exists('invierte_date_time')) {
     function agregar_imgs()
     {
 
-        $r[] = div(div(
-            anchor_enid(
-                icon('fa fa fa-times white')
-                ,
+        $r[] = div(
+            div(
+
+                anchor_enid(
+
+                    icon('fa fa fa-times white')
+
+                    ,
 
                 'btn_enid_blue cancelar_carga_imagen cancelar_img pull-right white bottom_30',
 
                 1
-            ),
+                ),
             4
             ,
             1
-        ), 1);
+        ),
+            1);
 
         $x[] = div(heading_enid("AGREGAR IMAGENES", 5), 4, 1);
         $x[] = div(place("place_img_producto"), 4, 1);
@@ -833,7 +829,7 @@ if (!function_exists('invierte_date_time')) {
             $text .= $url[$b];
         }
 
-        return  path_enid("youtube_embebed", $text, 0, 1);
+        return path_enid("youtube_embebed", $text, 0, 1);
 
     }
 
@@ -841,14 +837,18 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = [];
-        $ie_nombre = input([
-            "type" => "text",
-            "name" => "q2",
-            "class" => "nuevo_producto_nombre",
-            "onkeyup" => "transforma_mayusculas(this)",
-            "value" => get_campo($servicio, 'nombre_servicio'),
-            "required" => true],
-            1);
+        $ie_nombre = input(
+            [
+
+                "type" => "text",
+                "name" => "q2",
+                "class" => "nuevo_producto_nombre",
+                "onkeyup" => "transforma_mayusculas(this)",
+                "value" => get_campo($servicio, 'nombre_servicio'),
+                "required" => true
+            ],
+            1
+        );
 
         $h = append([icon('fa fa-pencil text_nombre_servicio'), $tipo_promocion, $nuevo_nombre_servicio]);
         $respons[] = heading_enid($h, 4);
@@ -857,7 +857,7 @@ if (!function_exists('invierte_date_time')) {
         $respons[] = div($ie_nombre, 9);
         $respons[] = div(guardar("GUARDAR", ["class" => "info_guardar_nombre_servicio"], 1), 3);
         $respons[] = form_close();
-        return  addNRow(append($response));
+        return addNRow(append($response));
 
     }
 
@@ -1059,7 +1059,8 @@ if (!function_exists('invierte_date_time')) {
             [
                 "id" => 1,
                 "class" => 'button_enid_eleccion venta_mayoreo ' . $activo
-            ]);
+            ]
+        );
 
         $mm = anchor_enid("NO",
             [
@@ -1255,45 +1256,5 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
 
     }
-    /*
-    function get_valor_envio($costo_envio, $flag_envio_gratis)
-    {
 
-        return ($flag_envio_gratis == 1) ? -100 : 100;
-
-    }
-    */
-    /*
-    function create_url_procesar_compra($producto_text,
-                                        $id_servicio,
-                                        $total,
-                                        $ciclo_facturacion,
-                                        $num_ciclos,
-                                        $dominio = "",
-                                        $extension_dominio = ""
-    )
-    {
-
-
-
-        $r[] = "../procesar/?producto=";
-        $r[] = $producto_text;
-        $r[] = "&plan=";
-        $r[] = $id_servicio;
-        $r[] = "&ciclo_facturacion=";
-        $r[] = $ciclo_facturacion;
-        $r[] = "&num_ciclos=";
-        $r[] = $num_ciclos;
-        $r[] = "&total=";
-        $r[] = $total;
-        $r[] = "&dominio=";
-        $r[] = $dominio;
-        $r[] = "&extension_dominio=";
-        $r[] = $extension_dominio;
-
-        return append($r);
-
-
-    }
-    */
 }

@@ -80,9 +80,8 @@ if (!function_exists('invierte_date_time')) {
 
             $num_visitas_web = 0;
             foreach ($lista_fechas as $row) {
-                $fecha = $row["fecha"];
-                $hora = $row["hora"];
-                if ($fecha == $fecha_actual && $hora == $franja_horaria) {
+
+                if ($row["fecha"]== $fecha_actual && $row["hora"] == $franja_horaria) {
                     $num_visitas_web = $row["total"];
                     break;
                 }
@@ -320,18 +319,19 @@ if (!function_exists('invierte_date_time')) {
     }
 
     if (!function_exists('add_email_pendientes_por_enviar')) {
-        function add_email_pendientes_por_enviar($meta_email, $email_enviados_enid_service)
+        function add_email_pendientes_por_enviar($meta_email, $email_enviados)
         {
 
             $lista = "";
             $f = 0;
-            if ($meta_email > $email_enviados_enid_service) {
+            if ($meta_email > $email_enviados) {
 
-                $email_restantes = ($meta_email - $email_enviados_enid_service);
+                $email_restantes = ($meta_email - $email_enviados);
                 $text = 'Te hacen falta enviar ' . $email_restantes . ' correos a posibles clientes para cumplir tu meta de prospección';
                 $lista = base_notificacion("../tareas/?q=2", "fa fa-bullhorn ", $text);
                 $f++;
             }
+
             $response = [
 
                 "html" => $lista,
@@ -460,11 +460,11 @@ if (!function_exists('invierte_date_time')) {
         $f = 0;
         if ($adeudos_cliente > 0) {
 
-            $total_pendiente = round($adeudos_cliente, 2);
-            $text = 'Saldo por liquidar ' . span($total_pendiente . 'MXN',
+            $pendiente = round($adeudos_cliente, 2);
+            $text = 'Saldo por liquidar ' . span($pendiente . 'MXN',
                     [
                         "class" => "saldo_pendiente_notificacion",
-                        "deuda_cliente" => $total_pendiente
+                        "deuda_cliente" => $pendiente
                     ]
                 );
 
@@ -548,11 +548,8 @@ if (!function_exists('invierte_date_time')) {
 
     function add_compras_sin_cierre($recibos)
     {
-
-
         $r = [];
         $f = 0;
-
         if (es_data($recibos)) {
 
             foreach ($recibos as $row) {
@@ -666,7 +663,7 @@ if (!function_exists('invierte_date_time')) {
             $pregunta = div($pregunta, "black");
 
 
-            $imagenes = div(img_servicio($id_servicio), ["style" => "width:50px"]);
+            $imagenes = div(img_servicio($id_servicio), "w_50");
             $t = [];
             $t[] = btw($imagenes, $pregunta, " d-flex flex-column justify-content-between ");
             $text = append($t);
@@ -683,10 +680,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response = [
-
             "html" => append($r),
             "flag" => $f,
-
         ];
 
         return $response;
@@ -707,9 +702,9 @@ if (!function_exists('invierte_date_time')) {
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
             $pregunta = div($pregunta, ["class" => "black"]);
 
-            $imagenes = div(img_servicio($id_servicio), ["style" => "width:50px"]);
+            $imagenes = div(img_servicio($id_servicio), "w_50");
             $t = [];
-            $t[] = btw($imagenes, $pregunta, "columna ->   d-flex flex-column justify-content-between");
+            $t[] = btw($imagenes, $pregunta, "d-flex flex-column justify-content-between");
             $text = append($t);
 
             $id = "#pregunta" . $id_pregunta;
@@ -738,8 +733,9 @@ if (!function_exists('invierte_date_time')) {
 
 
         $inf = $info["info_notificaciones"];
-        $lista = "";
+        $lista = [];
         $f = 0;
+
         $ventas_enid_service = $info["ventas_enid_service"];
         $tareas_enid_service = $inf["tareas_enid_service"];
         $num_telefonico = $inf["numero_telefonico"];
@@ -747,51 +743,49 @@ if (!function_exists('invierte_date_time')) {
 
         $tareas = add_tareas($info["tareas"]);
         $f = $f + $tareas["flag"];
-        $lista .= $tareas["html"];
+        $lista[] = $tareas["html"];
 
 
         $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
-        $lista .= div($compras_sin_cierre["html"], "top_20");
+        $lista[] = div($compras_sin_cierre["html"], "top_20");
         $f = $f + $compras_sin_cierre["flag"];
 
         $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);
         $f = $f + $recibos_sin_costos_operacion["flag"];
-        $lista .= $recibos_sin_costos_operacion["html"];
+        $lista[] = $recibos_sin_costos_operacion["html"];
 
 
         $recordatorios = add_recordatorios($info["recordatorios"]);
-        $lista .= $recordatorios["html"];
+        $lista[] = $recordatorios["html"];
         $f = $f + $recordatorios["flag"];
 
 
 
-
-
         $preguntas = add_preguntas_sin_lectura($info["preguntas"]);
-        $lista .= $preguntas["html"];
+        $lista[] = $preguntas["html"];
         $f = $f + $preguntas["flag"];
 
 
         $respuestas = add_respuestas_sin_lectura($info["respuestas"]);
-        $lista .= $respuestas["html"];
+        $lista[] = $respuestas["html"];
         $f = $f + $respuestas["flag"];
 
 
         $deuda = add_saldo_pendiente($inf["adeudos_cliente"]);
         $f = $f + $deuda["flag"];
-        $lista .= $deuda["html"];
+        $lista[] = $deuda["html"];
 
         $deuda = add_pedidos_sin_direccion($inf["adeudos_cliente"]);
         $f = $f + $deuda["flag"];
-        $lista .= $deuda["html"];
+        $lista[] = $deuda["html"];
 
         $deuda = add_valoraciones_sin_leer($inf["valoraciones_sin_leer"], $info["id_usuario"]);
         $f = $f + $deuda["flag"];
-        $lista .= $deuda["html"];
+        $lista[] = $deuda["html"];
 
         $num_telefonico = add_numero_telefonico($num_telefonico);
         $f = $f + $num_telefonico["flag"];
-        $lista .= $num_telefonico["html"];
+        $lista[] = $num_telefonico["html"];
 
 
         if (is_array($inf) && array_key_exists("objetivos_perfil", $inf)) {
@@ -801,9 +795,8 @@ if (!function_exists('invierte_date_time')) {
                     case "Ventas":
 
                         $meta_ventas = $row["cantidad"];
-                        $notificacion =
-                            add_envios_a_ventas($meta_ventas, $ventas_enid_service);
-                        $lista .= $notificacion["html"];
+                        $notificacion = add_envios_a_ventas($meta_ventas, $ventas_enid_service);
+                        $lista[] = $notificacion["html"];
                         $f = $f + $notificacion["flag"];
 
                         break;
@@ -812,9 +805,8 @@ if (!function_exists('invierte_date_time')) {
                     case "Desarrollo_web":
 
                         $meta_tareas = $row["cantidad"];
-                        $notificacion =
-                            add_tareas_pendientes($meta_tareas, $tareas_enid_service);
-                        $lista .= $notificacion["html"];
+                        $notificacion = add_tareas_pendientes($meta_tareas, $tareas_enid_service);
+                        $lista[] = $notificacion["html"];
                         $f = $f + $notificacion["flag"];
                         break;
                     default:
@@ -841,7 +833,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [
             "num_tareas_pendientes_text" => $f,
             "num_tareas_pendientes" => $new_flag,
-            "lista_pendientes" => get_mensaje_inicial_notificaciones(1, $f) . $lista,
+            "lista_pendientes" => get_mensaje_inicial_notificaciones(1, $f) . append($lista),
 
         ];
 
@@ -852,6 +844,7 @@ if (!function_exists('invierte_date_time')) {
     function get_valor_fecha_solicitudes($solicitudes, $fecha_actual)
     {
 
+        /*
         $valor = 0;
         foreach ($solicitudes as $row) {
 
@@ -863,6 +856,8 @@ if (!function_exists('invierte_date_time')) {
             }
         }
         return $valor;
+        */
+        return search_bi_array($solicitudes, "fecha_registro", $fecha_actual, "tareas_solicitadas",0 );
     }
 
     function get_comparativa($info_sistema)

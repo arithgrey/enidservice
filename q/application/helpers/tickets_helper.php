@@ -37,10 +37,10 @@ if (!function_exists('invierte_date_time')) {
                     break;
                 case 2:
 
-                    $text =  ajustar($asunto, icon("fas fa-check-circle hecho", ["id" => $id_ticket]));
+                    $text = ajustar($asunto, icon("fas fa-check-circle hecho", ["id" => $id_ticket]));
                     $hecho[] = div(
                         div(
-                            $text , 12
+                            $text, 12
                         ),
                         [
                             "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
@@ -97,34 +97,38 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = form_open("", ["class" => 'form_ticket']);
-        $r[] = input_hidden([
-            "name" => "prioridad",
-            "value" => "1"
-        ]);
-        $r[] = input_hidden([
-            "name" => "mensaje",
-            "id" => "mensaje",
-            "class" => "mensaje"
-        ]);
+        $r[] = input_hidden(
+            [
+                "name" => "prioridad",
+                "value" => "1"
+            ]);
+        $r[] = input_hidden(
+            [
+                "name" => "mensaje",
+                "id" => "mensaje",
+                "class" => "mensaje"
+            ]);
         $r[] = div("DEPARTAMENTO AL CUAL SOLICITAS", 1);
-        $r[] = addNRow(create_select(
-            $departamentos,
-            "departamento",
-            "form-control",
-            "departamento",
-            "nombre",
-            "id_departamento"
-        ));
+        $r[] = addNRow(
+            create_select(
+                $departamentos,
+                "departamento",
+                "form-control",
+                "departamento",
+                "nombre",
+                "id_departamento"
+            ));
         $r[] = n_row_12();
         $r[] = div("MODULO, ASUNTO, TÓPICO", "input-group-addon");
-        $r[] = input([
-            "id" => "asunto",
-            "name" => "asunto",
-            "class" => "form-control",
-            "placeholder" => "MODULO, ASUNTO, TÓPICO",
-            "required" => "true",
-            "type" => "text"
-        ]);
+        $r[] = input(
+            [
+                "id" => "asunto",
+                "name" => "asunto",
+                "class" => "form-control",
+                "placeholder" => "MODULO, ASUNTO, TÓPICO",
+                "required" => "true",
+                "type" => "text"
+            ]);
         $r[] = end_row();
         $r[] = guardar("ABRIR TICKET");
         $r[] = form_close();
@@ -146,7 +150,6 @@ if (!function_exists('invierte_date_time')) {
         $x[] = heading_enid("¿REALMENTE DESEAS CANCELAR LA COMPRA?", 3);
         $x[] = div($recibo["resumen"]);
         $r[] = div(div(append($x), "padding_20"));
-
         $url = path_enid("area_cliente_compras", $recibo['id_recibo']);
         $r[] = guardar("SEGUIR COMPRANDO",
             [

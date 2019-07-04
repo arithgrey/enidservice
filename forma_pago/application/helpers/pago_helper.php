@@ -24,7 +24,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(append($x)," d-flex flex-column justify-content-between mh_350");
             $r[] = get_img_pago();
             $r[] = get_format_tipos_entrega();
-
             return div(div(append($r), 6, 1),"top_30",1);
 
         }

@@ -115,25 +115,25 @@ if (!function_exists('guardar')) {
     function guardar($info, $attributes = [], $row = 1, $type_button = 1, $submit = 1, $anchor = 0)
     {
         if ($submit == 1) {
+
             $attributes["type"] = "submit";
         }
+
         if ($type_button == 1) {
+
             $existe = array_key_exists("class", $attributes) ? 1 : 0;
-            if ($existe == 1) {
-                $attributes["class"] = $attributes["class"] . " " . " a_enid_blue white completo btn_guardar";
-            } else {
-                $attributes["class"] = "a_enid_blue white completo btn_guardar";
-            }
+            $attributes["class"] = ($existe == 1) ? $attributes["class"] . " " . " a_enid_blue white completo btn_guardar" : "a_enid_blue white completo btn_guardar";
         }
+
         $attr = add_attributes($attributes);
         if ($row == 0) {
+
             return "<button " . $attr . ">" . $info . "</button>";
+
         } else {
-            if ($anchor !== 0) {
-                $b = "<a href='" . $anchor . "'> <button " . $attr . ">" . $info . "</button></a>";
-            } else {
-                $b = "<button " . $attr . ">" . $info . "</button>";
-            }
+
+            $b = ($anchor !== 0) ? "<a href='" . $anchor . "'> <button " . $attr . ">" . $info . "</button></a>" : "<button " . $attr . ">" . $info . "</button>";
+
             return div($b, 1);
         }
     }
@@ -151,7 +151,7 @@ function sub_categorias_destacadas($param)
 {
 
     $z = 0;
-    $data_complete = [];
+    $response = [];
 
     foreach ($param["clasificaciones"] as $row) {
 
@@ -165,15 +165,15 @@ function sub_categorias_destacadas($param)
                 break;
             }
         }
-        $data_complete[$z]["primer_nivel"] = $primer_nivel;
-        $data_complete[$z]["total"] = $total;
-        $data_complete[$z]["nombre_clasificacion"] = $nombre_clasificacion;
+        $response[$z]["primer_nivel"] = $primer_nivel;
+        $response[$z]["total"] = $total;
+        $response[$z]["nombre_clasificacion"] = $nombre_clasificacion;
         if ($z == 29) {
             break;
         }
         $z++;
     }
-    return $data_complete;
+    return $response;
 
 }
 
@@ -351,24 +351,16 @@ if (!function_exists('add_attributes')) {
 if (!function_exists('add_fields')) {
     function add_fields($fields)
     {
-        if (is_array($fields) && count($fields) > 0) {
-
-            $text_fields = "";
+        $r = [];
+        if (es_data($fields)) {
             $b = 0;
             for ($i = 0; $i < count($fields); $i++) {
-
-                if ($b == count($fields) - 1) {
-
-                    $text_fields .= $fields[$i];
-                } else {
-                    $text_fields .= $fields[$i] . ",";
-                }
+                $r[] = ($b == count($fields) - 1) ? $fields[$i] : $fields[$i] . ",";
                 $b++;
             }
-            return $text_fields;
-        } else {
-            return "*";
+
         }
+        return append($r);
     }
 }
 
@@ -448,6 +440,7 @@ if (!function_exists('select_enid')) {
 
         $select = "<select " . add_attributes($attributes) . "> ";
         foreach ($data as $row) {
+
             $select .= "<option value='" . $row[$val] . "'>" . $row[$text_option] . " </option>";
         }
 
@@ -519,7 +512,7 @@ if (!function_exists('icon')) {
     {
 
         $attr = add_attributes($attributes);
-        $base = "<i class='fa " . $class . "' " . $attr . " ></i>";
+        $base = "<i class='fa " . $class . "'" . $attr . " ></i>";
         $base2 = span($extra_text, $attributes);
         return ($row_12 == 0) ? $base . $base2 : addNRow($base) . $base2;
 
@@ -561,11 +554,13 @@ if (!function_exists('create_tag')) {
 
             $info = $row[$text];
             $id = $row[$val_id];
-            $tags .= add_element($info, "button",
+            $tags .= add_element(
+                $info, "button",
                 [
                     'class' => $class,
                     'id' => $id
-                ]);
+                ]
+            );
         }
         $new_tags = add_element($tags, "div", array('class' => 'tags'));
         return $new_tags;
@@ -587,6 +582,7 @@ if (!function_exists('get_array_json')) {
 if (!function_exists('get_json_array')) {
     function get_json_array($arr)
     {
+
 
         return (count($arr) > 0) ? json_encode($arr) : json_encode([]);
 
@@ -779,12 +775,6 @@ if (!function_exists('img_enid')) {
         if (es_data($extra)) {
             $conf += $extra;
         }
-        /*
-        foreach ($extra as $key => $value) {
-
-            $conf[$key] = $value;
-        }
-        */
         $img = img($conf);
         return ($row_12 == 0) ? $img : addNRow($img);
     }
@@ -855,13 +845,8 @@ if (!function_exists('porcentaje')) {
     function porcentaje($cantidad, $porciento, $decimales = 2, $numeric_format = 0)
     {
         if (is_numeric($cantidad) == is_numeric($porciento)) {
-            if ($numeric_format == 1) {
-                $total = number_format($cantidad * $porciento / 100, $decimales);
-                return $total;
-            } else {
-                $total = $cantidad * $porciento / 100;
-                return $total;
-            }
+
+            return ($numeric_format == 1) ? (number_format($cantidad * $porciento / 100, $decimales)) : ($cantidad * $porciento / 100);
 
         }
     }
@@ -926,8 +911,7 @@ if (!function_exists('get_url_facebook')) {
     function get_url_facebook($url, $icon = 0)
     {
 
-        $url_facebook =
-            "https://www.facebook.com/sharer/sharer.php?u=" . $url . ";src=sdkpreparse";
+        $url_facebook = "https://www.facebook.com/sharer/sharer.php?u=" . $url . ";src=sdkpreparse";
         if ($icon > 0) {
             return anchor_enid(icon('fa fa-facebook-square'),
                 [
@@ -1166,19 +1150,18 @@ if (!function_exists('debug')) {
         {
 
             $gratis = $param["flag_envio_gratis"];
-            $response = [];
-
+            $r = [];
             if ($gratis == 1) {
 
-                $response["costo_envio_cliente"] = 0;
-                $response["costo_envio_vendedor"] = 100;
-                $response["text_envio"] = texto_costo_envio_info_publico($gratis, $response["costo_envio_cliente"], $response["costo_envio_vendedor"]);
+                $r["costo_envio_cliente"] = 0;
+                $r["costo_envio_vendedor"] = 100;
+                $r["text_envio"] = texto_costo_envio_info_publico($gratis, $r["costo_envio_cliente"], $r["costo_envio_vendedor"]);
             } else {
-                $response["costo_envio_cliente"] = 100;
-                $response["costo_envio_vendedor"] = 0;
-                $response["text_envio"] = texto_costo_envio_info_publico($gratis, $response["costo_envio_cliente"], $response["costo_envio_vendedor"]);
+                $r["costo_envio_cliente"] = 100;
+                $r["costo_envio_vendedor"] = 0;
+                $r["text_envio"] = texto_costo_envio_info_publico($gratis, $r["costo_envio_cliente"], $r["costo_envio_vendedor"]);
             }
-            return $response;
+            return $r;
         }
     }
     if (!function_exists('if_ext')) {
@@ -1203,7 +1186,6 @@ if (!function_exists('debug')) {
 
                     } else {
 
-                        $rr = 0;
                         debug("este parámetro está llegando nulo" . $keys[$a]);
                         break;
                     }
@@ -1248,10 +1230,7 @@ if (!function_exists('iframe')) {
     function iframe($attributes = '', $row_12 = 0)
     {
         $base = "<iframe " . add_attributes($attributes) . " ></iframe>";
-        $e = ($row_12 == 0) ? $base : addNRow($base);
-        return $e;
-
-
+        return  ($row_12 == 0) ? $base : addNRow($base);
     }
 }
 if (!function_exists('center')) {
@@ -1259,8 +1238,7 @@ if (!function_exists('center')) {
     {
 
         $base = "<center " . add_attributes($attributes) . " ></center>";
-        $e = ($row_12 == 0) ? $base : addNRow($base);
-        return $e;
+        return  ($row_12 == 0) ? $base : addNRow($base);
 
     }
 }
@@ -1292,9 +1270,7 @@ if (!function_exists('sksort')) {
 if (!function_exists('date_difference')) {
     function date_difference($date_1, $date_2, $differenceFormat = '%a')
     {
-        $datetime1 = date_create($date_1);
-        $datetime2 = date_create($date_2);
-        $interval = date_diff($datetime1, $datetime2);
+        $interval = date_diff(date_create($date_1), date_create($date_2));
         return $interval->format($differenceFormat);
     }
 }
@@ -1360,7 +1336,7 @@ if (!function_exists('get_logo')) {
 
             $img_enid = img_enid(["style" => "width: 50px!important;"]);
             $en_pc = anchor_enid($img_enid, ["href" => "../"]);
-            return div($en_pc, ["class" => "padding_10"]);
+            return div($en_pc, "padding_10");
         }
 
     }
@@ -1471,17 +1447,11 @@ if (!function_exists('get_url_servicio')) {
 if (!function_exists('img_servicio')) {
     function img_servicio($id, $external = 0)
     {
-        $url = get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
+        $url = ($external > 0) ? "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id : get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
 
-        if ($external > 0) {
-
-            $url = "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id;
-        }
-
-        $id_error = "imagen_" . $id;
         $img = [
             'src' => $url,
-            'id' => $id_error,
+            'id' => "imagen_" . $id,
             'class' => 'imagen-producto'
         ];
 
@@ -1618,7 +1588,8 @@ if (!function_exists('get_menu_session')) {
             );
 
 
-            $vender = anchor_enid($text,
+            $vender = anchor_enid(
+                $text,
                 [
                     "href" => "../login/?action=nuevo",
                     "class" => ' white text-uppercase letter-spacing-15',
@@ -1633,7 +1604,8 @@ if (!function_exists('get_menu_session')) {
                 "display_flex_enid"
 
             );
-            $l_session = anchor_enid($text,
+            $l_session = anchor_enid(
+                $text,
                 [
                     "href" => "../login",
                     "class" => " white text-uppercase letter-spacing-15"
@@ -1642,10 +1614,10 @@ if (!function_exists('get_menu_session')) {
 
 
             $type_display = ($is_mobile > 0) ? " d-flex flex-column justify-content-between " : " display_flex_enid ";
-            $list = div(append([$vender, $l_session]), ["class" => $type_display]);
+            $list = div(append([$vender, $l_session]),  $type_display);
 
             if ($proceso_compra < 1) {
-                return div(ul($list, ["class" => "largenav "]), ["class" => "text-right"]);
+                return div(ul($list,  "largenav " ), "text-right");
             }
 
 
@@ -1693,7 +1665,7 @@ if (!function_exists('btw')) {
 
             if ($frow > 0) {
 
-                $response = div(div(append([$a, $b]), ["class" => $class]), 13);
+                $response = div(div(append([$a, $b]),  $class), 13);
             }
 
 
@@ -1940,7 +1912,9 @@ function path_enid($pos, $extra = 0, $link_directo = 0)
         "config_db" => "db/database.php",
         "config_constants" => "config/constants.php",
         "desarrollo" => "desarrollo",
-        "go_home" => "../"
+        "go_home" => "../",
+        "valoracion_servicio"=> "valoracion/?servicio="
+
     ];
 
 

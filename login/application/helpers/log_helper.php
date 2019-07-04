@@ -15,7 +15,6 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $response = div(append($r), 4, 1);
-
         return div($response, 1);
 
 
@@ -90,8 +89,8 @@ if (!function_exists('invierte_date_time')) {
             ),
             "text-center"
         );
-        $response = append($r);
-        $response = div($response, "contenedor_recuperacion_password display_none", 1);
+
+        $response = div(append($r), "contenedor_recuperacion_password display_none", 1);
         return $response;
 
     }
@@ -112,8 +111,8 @@ if (!function_exists('invierte_date_time')) {
             "text-center"
         );
 
-        $response = append($r);
-        $response = div($response, "seccion_registro_nuevo_usuario_enid_service", 1);
+
+        $response = div(append($r), "seccion_registro_nuevo_usuario_enid_service", 1);
         return $response;
 
 

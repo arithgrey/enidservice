@@ -10,8 +10,11 @@ if (!function_exists('invierte_date_time')) {
         foreach ($data as $row) {
 
             $response[$a] = $row;
+            /*
             $index = search_bi_array($servicios, "id_servicio", $row["id_servicio"]);
             $solicitudes = ($index !== false) ? $servicios[$index]["total"] : 0;
+            */
+            $solicitudes  = search_bi_array($servicios, "id_servicio", $row["id_servicio"], "total",0);
             $response[$a]["solicitudes"] = $solicitudes;
             $porcentaje = porcentaje_total($row["total"], $solicitudes);
             $response[$a]["porcentaje"] = substr($porcentaje, 0, 5);
@@ -70,17 +73,15 @@ if (!function_exists('invierte_date_time')) {
 
             $text[] = append($form);
 
-
             $x[] = div(append($text), "col-lg-3 d-flex flex-column justify-content-between");
-
-
             $texto = heading_enid("Tiempo promedio de venta " . substr($dias, 0, 5) . "días", 4);
             $x[] = div($texto, "col-lg-3 text-center align-self-center");
 
 
             $total_costos_operativos = $row["total_costos_operativos"];
             $utilidad = heading_enid("Sin costos operativos registrados", 5);
-            if (count($total_costos_operativos) > 0) {
+
+            if (es_data($total_costos_operativos)) {
 
                 $total_costos = $total_costos_operativos["total_costos"];
                 $total_pagos = $total_costos_operativos["total_pagos"];
@@ -232,16 +233,16 @@ if (!function_exists('invierte_date_time')) {
 
 
         $default = ["class" => "header_table_recibos"];
-        $tb = hr() . "<table class='table_enid_service top_20 table ' ><thead>";
-        $tb .= "<tr class='header_table'>";
-        $tb .= get_th("ORDEN", $default);
-        $tb .= get_th("", $default);
-        $tb .= get_th("STATUS", $default);
-        $tb .= get_th("TIPO ENTREGA", $default);
-        $tb .= get_th("SALDO CUBIERTO", $default);
-        $tb .= get_th("MONTO COMPRA", $default);
-        $tb .= get_th($ops_tipo_orden_text[$tipo_orden], $default);
-        $tb .= "</thead></tr><tbody>";
+        $tb[] = hr() . "<table class='table_enid_service top_20 table ' ><thead>";
+        $tb[] = "<tr class='header_table'>";
+        $tb[] = get_th("ORDEN", $default);
+        $tb[] = get_th("", $default);
+        $tb[] = get_th("STATUS", $default);
+        $tb[] = get_th("TIPO ENTREGA", $default);
+        $tb[] = get_th("SALDO CUBIERTO", $default);
+        $tb[] = get_th("MONTO COMPRA", $default);
+        $tb[] = get_th($ops_tipo_orden_text[$tipo_orden], $default);
+        $tb[] = "</thead></tr><tbody>";
         foreach ($recibos as $row) {
 
 
@@ -267,7 +268,7 @@ if (!function_exists('invierte_date_time')) {
             $extra = ($status == 10) ? " cancelado " : $extra;
 
 
-            $tb .= "<tr id='" . $recibo . "' class='desglose_orden cursor_pointer  " . $extra . "' >";
+            $tb[] = "<tr id='" . $recibo . "' class='desglose_orden cursor_pointer  " . $extra . "' >";
 
             $id_servicio = $row["id_servicio"];
             $url_img = $row["url_img_servicio"];
@@ -277,26 +278,26 @@ if (!function_exists('invierte_date_time')) {
                 "id" => $id_error,
                 "style" => "width:40px!important;height:40px!important;",
             ]);
-            $tb .= get_td($recibo);
-            $tb .= get_td($img);
-            $tb .= get_td($estado_compra);
-            $tb .= get_td($tipo_entrega);
-            $tb .= get_td($saldo_cubierto . "MXN");
-            $tb .= get_td($monto_a_pagar . "MXN");
-            $tb .= get_td($entrega);
+            $tb[] = get_td($recibo);
+            $tb[] = get_td($img);
+            $tb[] = get_td($estado_compra);
+            $tb[] = get_td($tipo_entrega);
+            $tb[] = get_td($saldo_cubierto . "MXN");
+            $tb[] = get_td($monto_a_pagar . "MXN");
+            $tb[] = get_td($entrega);
 
-            $tb .= "</tr>";
+            $tb[] = "</tr>";
 
         }
 
-        $tb .= "</tbody>";
-        $tb .= "</table>";
+        $tb[] = "</tbody>";
+        $tb[] = "</table>";
 
 
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
 
         $inicio = div(heading_enid(count($recibos) . "Elemtos encontrados ", 5), "top_10");
-        return $tb_fechas . $inicio . $tb;
+        return $tb_fechas . $inicio . append($tb);
     }
 
     function tb_fechas($recibos, $ops_tipo_orden, $tipo_orden)
@@ -372,7 +373,8 @@ if (!function_exists('invierte_date_time')) {
                                  $cubierto,
                                  $envio_cliente,
                                  $envio_sistema,
-                                 $tipo_entrega)
+                                 $tipo_entrega
+    )
     {
 
 
@@ -411,7 +413,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response["cuenta_correcta"] = 0;
-        if (count($param) > 0) {
+        if (es_data($param)) {
 
             $recibo = $param[0];
             $precio = $recibo["precio"];
@@ -442,16 +444,17 @@ if (!function_exists('invierte_date_time')) {
         $texto = "";
         if ($modalidad_ventas == 1) {
 
-            if ($monto_a_liquidar > 0) {
-                $text = div("MONTO DE LA COMPRA", 'text-saldo-pendiente') . div($monto_a_pagar . "MXN", "text-saldo-pendiente-monto");
-            }
+             $texto = ($monto_a_liquidar > 0) ? div("MONTO DE LA COMPRA", 'text-saldo-pendiente') . div($monto_a_pagar . "MXN", "text-saldo-pendiente-monto"): $texto;
+
         } else {
 
-            if ($monto_a_liquidar > 0) {
+            $texto =  ($monto_a_liquidar > 0) ?
+                add_text(
+                    div("SALDO PENDIENTE", 'text-saldo-pendiente')
+                    ,
+                    div($monto_a_liquidar . "MXN", "text-saldo-pendiente-monto")
+                ) : $texto;
 
-                $text = div("SALDO PENDIENTE", 'text-saldo-pendiente');
-                $text .= div($monto_a_liquidar . "MXN", "text-saldo-pendiente-monto");
-            }
 
         }
 
@@ -473,13 +476,9 @@ if (!function_exists('invierte_date_time')) {
         switch ($tipo) {
             case 1:
                 if ($modalidad_ventas > 0) {
+
                     $text = "DATE PRISA MANTÉN EXCELENTE REPUTACIÓN ENVIA TU ARTÍCULO EN VENTA DE FORMA PUNTUAL";
-
-                    $text_2 = "
-                Date prisa, 
-                mantén una buena reputación enviando 
-                tus  $total articulos vendidos de forma puntual";
-
+                    $text_2 = "Date prisa, mantén una buena reputación enviando tus  $total articulos vendidos de forma puntual";
                     $text = ($total == 1) ? $text : $text_2;
 
                 }
@@ -489,7 +488,9 @@ if (!function_exists('invierte_date_time')) {
 
             case 6:
                 if ($modalidad_ventas < 1) {
+
                     $text = "DATE PRISA REALIZA TU COMPRA ANTES DE QUE OTRA PERSONA SE LLEVE TU PEDIDO!";
+
                 }
                 break;
 
@@ -567,27 +568,20 @@ if (!function_exists('invierte_date_time')) {
     function texto_costo_envio_info_publico($flag_envio_gratis, $costo_envio_cliente, $costo_envio_vendedor)
     {
 
-        $response = [];
-        if ($flag_envio_gratis > 0) {
-
-
-            $response = [
+        $response = ($flag_envio_gratis > 0) ?
+             [
                 "cliente" => "ENTREGA GRATIS!",
                 "cliente_solo_text" => "ENTREGA GRATIS!",
-                "ventas_configuracion" => "TU PRECIO YA INCLUYE EL ENVÍO",
-            ];
-
-
-        } else {
-
-
-            $response = [
+                "ventas_configuracion" => "TU PRECIO YA INCLUYE EL ENVÍO"
+             ]
+        :
+            [
 
                 "ventas_configuracion" => "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO",
                 "cliente_solo_text" => "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO",
                 "cliente" => "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO",
             ];
-        }
+
 
         return $response;
     }
@@ -703,13 +697,13 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_campo($inf, "ciudad");
         $r[] = get_campo($inf, "estado");
 
-        $resumen .= div(append($r), 'texto_direccion_envio_pedido top_20');
-        $resumen .= div("¿Quíen más puede recibir tu pedido?");
-        $resumen .= div(get_campo($inf, "nombre_receptor"));
-        $resumen .= div(get_campo($inf, "telefono_receptor"));
-        $text = div($resumen, ["class" => "informacion_resumen_envio"]);
+        $resumen[] =  div(append($r), 'texto_direccion_envio_pedido top_20');
+        $resumen[] =  div("¿Quíen más puede recibir tu pedido?");
+        $resumen[] =  div(get_campo($inf, "nombre_receptor"));
+        $resumen[] =  div(get_campo($inf, "telefono_receptor"));
 
-        return $text;
+        return  div(append($resumen), ["class" => "informacion_resumen_envio"]);
+
     }
 
     function agregar_direccion_envio($id_recibo)
@@ -753,7 +747,6 @@ if (!function_exists('invierte_date_time')) {
         $monto[] = heading_enid("Monto total pendiente-", 3, 'strong');
         $monto[] = heading_enid($saldo_pendiente . "MXN", 2, 'blue_enid ');
         $monto[] = heading_enid("Pesos Mexicanos", 4, 'strong');
-
         $text[] = div(append($monto), ["style" => "text-align: center;", "class" => "top_50"]);
         $text[] = div(img($url_img_servicio), "max-height: 250px;", 1);
 
@@ -791,7 +784,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $t = guardar(
+        $t[] = guardar(
             text_icon("fa fa-map-signs", "RASTREA TU PEDIDO"),
             [
                 "class" => "top_20 text-left",
@@ -804,7 +797,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $t .= div(
+        $t[] = div(
             anchor_enid('CANCELAR COMPRA',
                 [
                     "class" => "cancelar_compra",
@@ -815,7 +808,7 @@ if (!function_exists('invierte_date_time')) {
             "top_20",
             1);
 
-        return $t;
+        return append($t);
 
     }
 
@@ -827,7 +820,7 @@ if (!function_exists('invierte_date_time')) {
         $url_pago_paypal = get_link_paypal($saldo_pendiente);
         $url_pago_saldo_enid = get_link_saldo_enid($id_usuario_venta, $id_recibo);
 
-        $t = guardar(
+        $t[] = guardar(
             "PAGOS EN TIENDAS DE AUTOSERVICIO (OXXO)",
             [
                 "class" => "top_10 text-left",
@@ -841,7 +834,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $t .= guardar(
+        $t[] = guardar(
             "A TRAVÉS DE PAYPAL",
             [
                 "class" => "top_20 text-left",
@@ -854,7 +847,7 @@ if (!function_exists('invierte_date_time')) {
             $url_pago_paypal
         );
 
-        $t .= guardar(
+        $t[] = guardar(
             "SALDO  ENID SERVICE",
             [
                 "class" => "top_30 text-left",
@@ -866,7 +859,7 @@ if (!function_exists('invierte_date_time')) {
             $url_pago_saldo_enid
         );
 
-        return $t;
+        return append($t);
 
     }
 
@@ -903,13 +896,15 @@ if (!function_exists('invierte_date_time')) {
             $url_imagen_servicio = $row["url_img_servicio"];
 
             $t = anchor_enid(
-                img([
-                    "src" => $url_imagen_servicio,
-                    "class" => 'imagen_articulo',
-                ]),
-                [
-                    "href" => path_enid("producto", $id_servicio)
-                ]
+                img(
+                    [
+                        "src" => $url_imagen_servicio,
+                        "class" => 'imagen_articulo'
+                    ]
+                )
+                ,
+                path_enid("producto", $id_servicio)
+
             );
 
 
