@@ -22,7 +22,6 @@ if (!function_exists('invierte_date_time')) {
         function get_format_privacidad_seguridad()
         {
 
-
             $x[] = heading_enid("INFORMACIÓN PERSONAL", 3);
             $x[] = hr();
             $x[] = place("place_registro_conceptos");
@@ -52,12 +51,13 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = div(
-                append([
-                    heading_enid("DIRECCIÓN DE ENVÍO O RECEPCIÓN", 3),
-                    div("El lugar donde compras o recibes tus compras o ventas", 1),
-                    hr()
-
-                ]),
+                append(
+                    [
+                        heading_enid("DIRECCIÓN DE ENVÍO O RECEPCIÓN", 3),
+                        div("El lugar donde compras o recibes tus compras o ventas", 1),
+                        hr()
+                    ]
+                ),
                 5
             );
 
@@ -118,13 +118,14 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = form_open("", ["id" => "form_update_password", "class" => "form-horizontal", "method" => "POST"]);
             $r[] = div("CONTRASEÑA ACTUAL", 1);
-            $r[] = input([
-                "name" => "password",
-                "id" => "password",
-                "class" => "form-control input-sm",
-                "type" => "password",
-                "required" => "true"
-            ]);
+            $r[] = input(
+                [
+                    "name" => "password",
+                    "id" => "password",
+                    "class" => "form-control input-sm",
+                    "type" => "password",
+                    "required" => "true"
+                ]);
             $r[] = place('place_pw_1');
             $r[] = div("NUEVA", 1);
             $r[] = input([
@@ -161,10 +162,10 @@ if (!function_exists('invierte_date_time')) {
 
             $r = [];
             if ($vista < 1) {
+
                 $r[] = heading_enid("Cuenta", 1, 'strong', 1);
                 $r[] = addNRow(get_form_nombre($usuario));
                 $r[] = addNRow(get_form_email($usuario));
-
                 $r[] = addNRow(div(get_form_telefono($usuario), "row"));
                 $r[] = addNRow(div(get_form_negocio($usuario), "row"));
 
@@ -325,7 +326,8 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "text",
                     "value" => get_campo($usuario, 'nombre_usuario'),
                     "maxlength" => "15"
-                ]);
+                ]
+            );
             $r[] = place("registro_nombre_usuario");
             $r[] = form_close();
 
@@ -337,14 +339,12 @@ if (!function_exists('invierte_date_time')) {
         function get_menu($id_usuario)
         {
 
-
-            $final =
-                get_url_facebook(get_url_tienda($id_usuario), 1) .
-                get_url_twitter(get_url_tienda($id_usuario), "VISITA MI TIENDA EN LÍNEA!", 1) .
-                get_url_pinterest(get_url_tienda($id_usuario), 1) .
-                get_url_tumblr(get_url_tienda($id_usuario), 1) .
-                div("COMPARTIR ");
-
+            $f[] = get_url_facebook(get_url_tienda($id_usuario), 1);
+            $f[] = get_url_twitter(get_url_tienda($id_usuario), "VISITA MI TIENDA EN LÍNEA!", 1);
+            $f[] = get_url_pinterest(get_url_tienda($id_usuario), 1);
+            $f[] = get_url_tumblr(get_url_tienda($id_usuario), 1);
+            $f[] = div("COMPARTIR ");
+            $final = append($f);
 
             $list = [
                 li(

@@ -330,7 +330,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r = [];
-        if (get_param_def($param, "externo") > 0 ) {
+        if (get_param_def($param, "externo") > 0) {
 
 
             $r[] = anchor_enid(
@@ -339,7 +339,8 @@ if (!function_exists('invierte_date_time')) {
                     'class' => 'resumen_pagos_pendientes top_20',
                     'id' => $id_recibo,
                     'href' => path_enid("forma_pago_search", $id_recibo)
-                ]);
+                ]
+            );
 
             $r[] = anchor_enid("ACCEDE A TU CUENTA PARA VER EL ESTADO DE TU PEDIDO"
                 ,
@@ -347,9 +348,8 @@ if (!function_exists('invierte_date_time')) {
                     'class' => 'resumen_pagos_pendientes black top_20',
                     'id' => $id_recibo,
                     'href' => '../area_cliente/?action=compras'
-                ]);
-
-
+                ]
+            );
 
 
         } else {
@@ -360,7 +360,8 @@ if (!function_exists('invierte_date_time')) {
                     'id' => $id_recibo,
                     'href' => '#tab_renovar_servicio',
                     'data-toggle' => 'tab'
-                ]);
+                ]
+            );
 
         }
 

@@ -8,7 +8,6 @@ if (!function_exists('invierte_date_time')) {
         function render_user($data)
         {
 
-
             $valoraciones = $data["valoraciones"];
             $id_usuario = $data["id_usuario"];
             $alcance = $data["alcance"];
@@ -26,36 +25,12 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "resumen_pagos_pendientes",
                     "href" => "#tab_renovar_servicio",
                     "data-toggle" => "tab"
-                ]);
+                ]
+            );
 
             $response[] = div(get_menu($action), 2);
             $response[] = div(div(append($r), "tab-content"), 10);
             return div(append($response), "contenedor_principal_enid");
-
-
-            /*
-            <div class="contenedor_principal_enid">
-    <?= div(get_menu($action), 2) ?>
-    <?php
-
-    $r[] = div(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']);
-    $r[] = div(place("place_ventas_usuario"), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_mis_ventas']);
-    $r[] = div(get_format_valoraciones($valoraciones, $id_usuario, $alcance), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_valoraciones']);
-    $r[] = div(place("place_pagar_ahora"), ["class" => "tab-pane", "id" => "tab_pagos"]);
-    $r[] = div(place("place_resumen_servicio"), ["class" => "tab-pane", "id" => "tab_renovar_servicio"]);
-
-    ?>
-    <?= div(div(append($r), "tab-content"), 10) ?>
-</div>
-<?= get_hiddens_tickects($action, $ticket) ?>
-<?= div("",
-    [
-        "class" => "resumen_pagos_pendientes",
-        "href" => "#tab_renovar_servicio",
-        "data-toggle" => "tab"
-    ]) ?>
-            */
-
 
         }
 
@@ -133,10 +108,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = "";
-        if (is_array($alcance) && count($alcance) > 0) {
-            $maximo = $alcance[0]["maximo"];
-            $minimo = $alcance[0]["minimo"];
-            $promedio = $alcance[0]["promedio"];
+        if (es_data($alcance)) {
+
+            $alcance = $alcance[0];
+            $maximo = $alcance["maximo"];
+            $minimo = $alcance["minimo"];
+            $promedio = $alcance["promedio"];
 
             $r[] = heading_enid("ALCANCE DE TUS PRODUCTOS", 3);
             $r[] = "<table>";
@@ -145,7 +122,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_td($promedio, ["class" => 'num_alcance']);
             $r[] = get_td($minimo, ["class" => 'num_alcance', "id" => $maximo]);
             $r[] = "</tr>";
-
             $r[] = "<tr>";
             $r[] = get_td("Tope", ["class" => 'num_alcance']);
             $r[] = get_td("Promedio", ["class" => 'num_alcance']);
@@ -169,28 +145,30 @@ if (!function_exists('invierte_date_time')) {
 
     function get_menu($action)
     {
-        $a_tab_pagos = anchor_enid("",
-            [
-                "href" => "#tab_pagos",
-                "data-toggle" => "tab",
-                "class" => 'black strong tab_pagos',
-                "id" => 'btn_pagos'
-            ]);
-
-        $a_vendedor = anchor_enid(div(
-                text_icon("fa fa-flag", " VENDER"),
+        $a_tab_pagos =
+            anchor_enid("",
                 [
-                    "href" => path_enid("vender_nuevo")
+                    "href" => "#tab_pagos",
+                    "data-toggle" => "tab",
+                    "class" => 'black strong tab_pagos',
+                    "id" => 'btn_pagos'
+                ]);
 
-                ]
-            )
-        );
+        $a_vendedor =
+            anchor_enid(
+                div(
+                    text_icon("fa fa-flag", " VENDER"),
+                    [
+                        "href" => path_enid("vender_nuevo")
+
+                    ]
+                )
+            );
 
 
         $a_mis_ventas = anchor_enid(
 
             text_icon('fa fa-shopping-bag', "VENTAS")
-
             ,
             [
                 "id" => "mis_ventas",
@@ -198,6 +176,7 @@ if (!function_exists('invierte_date_time')) {
                 "data-toggle" => "tab",
                 "class" => 'btn_mis_ventas'
             ]);
+
         $place_ventas = place("place_num_pagos_notificados");
 
 

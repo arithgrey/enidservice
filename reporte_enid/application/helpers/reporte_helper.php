@@ -53,7 +53,6 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $total = $row["total"];
-                $nombre_clasificacion = $row["nombre_clasificacion"];
 
                 if ($z == 0) {
                     echo "<ul class='clasificaciones_sub_menu_ul'>";
@@ -62,7 +61,7 @@ if (!function_exists('invierte_date_time')) {
                 echo "<table>
                   <tr>
                     " . get_td($total) . "
-                    " . get_td(anchor_enid($nombre_clasificacion),
+                    " . get_td(anchor_enid($row["nombre_clasificacion"]),
                         [
                             "href" => $href,
                             "class" => 'text_categoria_sub_menu'

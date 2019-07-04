@@ -6,14 +6,12 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response = "";
-        if (is_array($servicio) && count($servicio) > 0) {
+        if (es_data($servicio)) {
 
             $servicio = $servicio[0];
             $id_ciclo_facturacion = $servicio["id_ciclo_facturacion"];
             $precio = $servicio["precio"];
             $id_servicio = $servicio["id_servicio"];
-
-
             $response = ($precio > 0 && $id_ciclo_facturacion == 9) ? guardar(
                 "Pedir más información",
                 [
@@ -76,7 +74,11 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
-                                       $flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion, $tallas, $texto_en_existencia, $entregas_en_casa, $proceso_compra,
+                                       $flag_servicio, $existencia, $id_servicio, $in_session, $q2,
+                                       $precio, $id_ciclo_facturacion, $tallas,
+                                       $texto_en_existencia,
+                                       $entregas_en_casa,
+                                       $proceso_compra,
                                        $telefono_visible, $usuario, $venta_mayoreo, $deseado)
     {
 
@@ -153,8 +155,6 @@ if (!function_exists('invierte_date_time')) {
         if ($proceso_compra == 1) {
             $r[] = get_tiempo_entrega(0, $tiempo_entrega);
         }
-
-
         $r[] = creta_tabla_colores($color, $flag_servicio);
         $r[] = get_tipo_articulo($flag_nuevo, $flag_servicio);
         $r[] = get_nombre_vendedor($proceso_compra, $usuario, $id_publicador);
@@ -244,7 +244,6 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = input_hidden(["class" => "carro_compras", "name" => "carro_compras", "value" => $carro_compras]);
         $r[] = input_hidden(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id_carro_compras]);
-
         $r[] = form_close();
         return append($r);
 
@@ -263,7 +262,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["class" => "carro_compras", "name" => "carro_compras", "value" => $carro_compras]);
         $r[] = input_hidden(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id_carro_compras]);
         $r[] = form_close();
-
         return append($r);
 
     }
@@ -303,7 +301,6 @@ if (!function_exists('invierte_date_time')) {
         $url = "../procesar/?w=1";
         $r[] = '<form action="' . $url . '" method="POST" >';
         $r[] = form_hidden(["id_servicio" => $id_servicio, "es_servicio" => 1]);
-
         $r[] = guardar(
             "INICIAR COTIZACIÓN ",
             [
@@ -336,18 +333,15 @@ if (!function_exists('invierte_date_time')) {
         function costruye_meta_keyword($servicio)
         {
 
-            $metakeyword = $servicio["metakeyword"];
-            $metakeyword_usuario = $servicio["metakeyword_usuario"];
-            $nombre_servicio = $servicio["nombre_servicio"];
-            $descripcion = $servicio["descripcion"];
 
-
-            $array = explode(",", $metakeyword);
-            array_push($array, $nombre_servicio);
-            array_push($array, $descripcion);
+            $meta_usuario = $servicio["metakeyword_usuario"];
+            $array = explode(",", $servicio["metakeyword"]);
+            array_push($array, $servicio["nombre_servicio"]);
+            array_push($array, $servicio["descripcion"]);
             array_push($array, " precio ");
-            if (strlen(trim($metakeyword_usuario)) > 0) {
-                array_push($array, $metakeyword_usuario);
+            if (strlen(trim($meta_usuario)) > 0) {
+
+                array_push($array, $meta_usuario);
             }
             $meta_keyword = implode(",", $array);
             return strip_tags($meta_keyword);
@@ -363,20 +357,18 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "num_ciclos"
             ];
 
-            $select = "<select " . add_attributes($config) . ">";
-
+            $select[] = "<select " . add_attributes($config) . ">";
             for ($a = 1; $a < valida_maximo_compra($flag_servicio, $existencia); $a++) {
 
-                $select .= "<option value=" . $a . ">" . $a . "</option>";
+                $select[] = "<option value=" . $a . ">" . $a . "</option>";
             }
-            $select .= "</select>";
-            return $select;
+            $select[] = "</select>";
+            return append($select);
         }
     }
     if (!function_exists('get_text_periodo_compra')) {
         function get_text_periodo_compra($flag_servicio)
         {
-
 
             return ($flag_servicio == 0) ? "Piezas" : "";
 
@@ -387,7 +379,7 @@ if (!function_exists('invierte_date_time')) {
         function get_text_costo_envio($flag_servicio, $param)
         {
 
-            return ($flag_servicio == 0 && is_array($param) && array_key_exists("text_envio", $param)) ? $param["text_envio"]["cliente"] : "";
+            return ($flag_servicio == 0 && es_data($param) && array_key_exists("text_envio", $param)) ? $param["text_envio"]["cliente"] : "";
 
         }
     }
@@ -419,7 +411,9 @@ if (!function_exists('invierte_date_time')) {
 
             $inf = "";
             $response = "";
+
             if ($tel_visible == 1 && $proceso_compra == 0) {
+
                 $usr = $usuario[0];
                 $ftel = 1;
                 $ftel2 = 1;
@@ -463,8 +457,8 @@ if (!function_exists('invierte_date_time')) {
         function crea_nombre_publicador_info($usuario, $id_usuario)
         {
 
-            $response  =  "";
-            if (is_array($usuario) && count($usuario) >  0 ){
+            $response = "";
+            if (es_data($usuario)) {
 
                 $nombre = $usuario[0]["nombre"];
 
@@ -473,9 +467,9 @@ if (!function_exists('invierte_date_time')) {
                     [
                         "href" => path_enid("search", "/?q3=' . $id_usuario . '&vendedor=' . $nombre"),
                         'class' => 'informacion_vendedor_descripcion text-justify black '
-                    ]);
+                    ]
+                );
             }
-
 
             return $response;
 
@@ -485,8 +479,8 @@ if (!function_exists('invierte_date_time')) {
         function get_tipo_articulo($flag_nuevo, $flag_servicio)
         {
 
-            $usado = div(li('- ARTÍCULO USADO'), 1);
-            return ($flag_servicio == 0 && $flag_nuevo == 0) ? $usado : "";
+
+            return ($flag_servicio == 0 && $flag_nuevo == 0) ? div(li('- ARTÍCULO USADO'), 1) : "";
 
         }
     }
@@ -590,7 +584,7 @@ if (!function_exists('invierte_date_time')) {
         function valida_editar_servicio($usuario_servicio, $id_usuario, $in_session, $id_servicio, $id_perfil)
         {
 
-            $response  = "";
+            $response = "";
             if ($in_session == 1) {
                 $href = path_enid("editar_producto", $id_servicio);
                 $editar_button = div(
@@ -603,9 +597,9 @@ if (!function_exists('invierte_date_time')) {
                     ), 'a_enid_black_sm editar_button'
                 );
 
-                $response  = ($id_usuario == $usuario_servicio || $id_perfil != 20) ? $editar_button : "";
+                $response = ($id_usuario == $usuario_servicio || $id_perfil != 20) ? $editar_button : "";
             }
-            return $response ;
+            return $response;
         }
     }
     if (!function_exists('valida_text_servicio')) {
@@ -670,7 +664,8 @@ if (!function_exists('invierte_date_time')) {
                         [
                             'src' => $url,
                             "class" => "imagen_producto_completa"
-                        ]),
+                        ]
+                    ),
                     [
                         "id" => $producto_tab_s,
                         "class" => "tab-pane fade zoom " . $extra_class_contenido . " "
@@ -679,9 +674,12 @@ if (!function_exists('invierte_date_time')) {
                 $z++;
 
             }
-            $response["preview"] = append($preview);
-            $response["num_imagenes"] = count($param);
-            $response["imagenes_contenido"] = append($imgs_grandes);
+
+            $response = [
+                "preview" => append($preview),
+                "num_imagenes" => count($param),
+                "imagenes_contenido" => append($imgs_grandes)
+            ];
             return $response;
 
         }
@@ -735,13 +733,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            return
-                anchor_enid(
-                    div("SOLICITAR INFORMACIÓN", 'black_enid_background white padding_10', 1),
-                    [
-                        "href" => path_enid("pregunta_search", $id_servicio)
-                    ]
-                );
+            return anchor_enid(div("SOLICITAR INFORMACIÓN", 'black_enid_background white padding_10', 1), path_enid("pregunta_search", $id_servicio));
 
         }
     }
@@ -794,7 +786,7 @@ if (!function_exists('invierte_date_time')) {
         function get_nombre_vendedor($proceso_compra, $usuario, $id_vendedor)
         {
 
-            return  ($proceso_compra == 0) ? div(crea_nombre_publicador_info($usuario, $id_vendedor), 1) : "";
+            return ($proceso_compra == 0) ? div(crea_nombre_publicador_info($usuario, $id_vendedor), 1) : "";
 
         }
     }

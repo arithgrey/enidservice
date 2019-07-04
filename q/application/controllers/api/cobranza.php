@@ -81,8 +81,6 @@ class Cobranza extends REST_Controller
 
 
             $data_reporte_compra["articulo_valido"] = 1;
-            /*ahora consultamos que el servicio se encuentre disponible para compra*/
-
             $prm = [
                 "id_servicio" => $id_servicio,
                 "articulos_solicitados" => $param["num_ciclos"]
@@ -131,19 +129,8 @@ class Cobranza extends REST_Controller
                 }
 
                 $data_orden["es_usuario_nuevo"] = 1;
-                $es_usuario_nuevo = get_param_def($param, "usuario_nuevo");
-
-
-                if ($es_usuario_nuevo == 0) {
-
-                    $data_orden["id_usuario"] = $this->id_usuario;
-                    $data_orden["es_usuario_nuevo"] = 0;
-
-                } else {
-
-                    $data_orden["id_usuario"] = $param["id_usuario"];
-                }
-
+                $es_nuevo = get_param_def($param, "usuario_nuevo");
+                $data_orden = $this->tipo_usuario($data_orden , $es_nuevo, $param);
                 $data_orden["data_por_usuario"] = $param;
                 $data_orden["talla"] = get_param_def($param, "talla");
 
@@ -157,7 +144,7 @@ class Cobranza extends REST_Controller
                 $data_acciones_posteriores["id_usuario_venta"] = key_exists_bi($data_orden, "servicio", "id_usuario_venta", 0);
                 $data_acciones_posteriores["id_servicio"] = $id_servicio;
 
-                if ($es_usuario_nuevo == 0) {
+                if ($es_nuevo < 1 ) {
 
                     $data_acciones_posteriores["id_usuario"] = $data_orden["id_usuario"];
                     $data_acciones_posteriores["email"] = $this->app->get_session("email");
@@ -171,13 +158,11 @@ class Cobranza extends REST_Controller
 
                 }
 
-                $data_acciones_posteriores["es_usuario_nuevo"] = $es_usuario_nuevo;
+                $data_acciones_posteriores["es_usuario_nuevo"] = $es_nuevo;
                 $this->acciones_posterior_orden_pago($data_acciones_posteriores);
                 if ($param["tipo_entrega"] == 2) {
 
-                    //$data_orden["ficha"] = $this->carga_ficha_direccion_envio($data_acciones_posteriores);
                     $data_orden["ficha"] = 1;
-
 
                 } else {
 
@@ -195,11 +180,30 @@ class Cobranza extends REST_Controller
         $this->response($data_orden);
     }
 
+    private function tipo_usuario($data, $es_nuevo, $param){
+
+
+        $data["id_usuario"] =  ($es_nuevo == 0 ) ? $this->id_usuario : $param["id_usuario"];
+        $data["es_usuario_nuevo"] =  ($es_nuevo == 0 ) ? 0 : 1;
+
+        if($es_nuevo < 1){
+
+            $obj_session =  $this->app->session_enid();
+            $session =  $obj_session->all_userdata();
+
+            if ( get_param_def($session, "agenda_pedido") >  0 ){
+
+                $data["id_usuario"] =  get_param_def($session, "agenda_pedido");
+                $obj_session->unset_userdata("agenda_pedido");
+            }
+        }
+        return $data;
+
+    }
     function get_precio_id_servicio($id_servicio)
     {
 
-        $q["id_servicio"] = $id_servicio;
-        return $this->app->api("recibo/precio_servicio/format/json/", $q);
+        return $this->app->api("recibo/precio_servicio/format/json/", ["id_servicio" => $id_servicio] );
     }
 
     function consulta_disponibilidad_servicio($q)

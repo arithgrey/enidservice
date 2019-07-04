@@ -18,14 +18,16 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("nuevo");
         $r[] = btw(
             div("Valoración*", "text-valoracion"),
-            get_posibles_calificaciones([
-                "",
-                "Insuficiente",
-                "Aceptable",
-                "Promedio",
-                "Bueno",
-                "Excelente"
-            ]),
+            get_posibles_calificaciones(
+                [
+                    "",
+                    "Insuficiente",
+                    "Aceptable",
+                    "Promedio",
+                    "Bueno",
+                    "Excelente"
+                ]
+            ),
             "displa_flex_enid"
         );
         $r[] = place("nuevo");
@@ -178,7 +180,8 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "a_enid_black hover_padding",
                     "href" => "../recomendacion/?q=" . $id_usuario,
                     "style" => "color: white!important"
-                ]), "mt-5 mb-5"
+                ]
+            ), "mt-5 mb-5"
         );
 
 
@@ -265,11 +268,12 @@ if (!function_exists('invierte_date_time')) {
             ];
             if ($z == 0) {
 
-                $extra_criterios = [
-                    "style" => 'background:#04013c;color:white',
-                    "class" => 'criterio_busqueda ordenar_valoraciones_button col-lg-6 padding_5 white',
-                    "id" => $z
-                ];
+                $extra_criterios =
+                    [
+                        "style" => 'background:#04013c;color:white',
+                        "class" => 'criterio_busqueda ordenar_valoraciones_button col-lg-6 padding_5 white',
+                        "id" => $z
+                    ];
             }
             $l[] = div($criterios[$z], $extra_criterios);
         }
@@ -321,13 +325,15 @@ if (!function_exists('invierte_date_time')) {
             $nombre = $row["nombre"];
             $fecha_registro = $row["fecha_registro"];
 
-            $config_comentarios = [
+            $config_comentarios =
+                [
 
-                "class" => 'contenedor_valoracion_info ',
-                "numero_utilidad" => $num_util,
-                "fecha_info_registro" => $fecha_registro
+                    "class" => 'contenedor_valoracion_info ',
+                    "numero_utilidad" => $num_util,
+                    "fecha_info_registro" => $fecha_registro
 
-            ];
+                ];
+
             $extra_config_comentarios = add_attributes($config_comentarios);
             $lista_comentario .= "<div class='contenedor_global_recomendaciones'>
                             <div " . $extra_config_comentarios . ">" . div(crea_estrellas($valoracion, 1));
@@ -389,13 +395,11 @@ if (!function_exists('invierte_date_time')) {
 
             if (primer_elemento($numero_valoraciones, "num_valoraciones") > 6) {
 
-                $response = anchor_enid(
-                    text_icon("fa fa-chevron-right ir", "CARGAR MÁS"), "cargar_mas_valoraciones");
+                $response = anchor_enid(text_icon("fa fa-chevron-right ir", "CARGAR MÁS"), "cargar_mas_valoraciones");
 
             } else {
 
-                $response = anchor_enid(
-                    text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA "),
+                $response = anchor_enid(text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA "),
                     [
                         "class" => "escribir_valoracion",
                         "href" => "../valoracion?servicio=" . $servicio

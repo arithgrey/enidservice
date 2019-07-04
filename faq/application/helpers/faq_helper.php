@@ -21,7 +21,8 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-            if (array_key_exists("respuesta", $data) && $data["respuesta"] > 0) {
+
+            if (get_param_def($data, "respuesta") > 0) {
 
 
                 $response = (array_key_exists("param", $data) && array_key_exists("config", $data["param"])) ? get_form_respuesta($data, 1) : get_lista_faq($data["respuesta"], $data);
@@ -86,16 +87,13 @@ if (!function_exists('invierte_date_time')) {
                 $respuesta = $row["respuesta"];
                 $fecha_registro = $row["fecha_registro"];
 
-
                 $extra = ($data["in_session"] > 0) ? anchor_enid(icon("fa fa-cogs"), ["href" => path_enid("editar_faq", $id_faq . "&config=1")]) : "";
                 $x[] = div(heading_enid($extra . $titulo, 4, "black text-uppercase underline"), 1);
                 $x[] = div(p($respuesta, "black top_30"), 1);
                 $x[] = div(p($fecha_registro, "top_30"), 1);
-                $response = append($x);
-
 
                 $r[] = div(
-                    $response
+                    append($x)
                     ,
                     "col-lg-12 top_30 padding_10 "
                 );
@@ -124,17 +122,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_fq($flag_categoria, $flag_busqueda_q, $faqs_categoria, $respuesta, $in_session, $perfil)
         {
 
-
-            $r = [];
-            if ($flag_categoria > 0) {
-
-                $r[] = get_format_faq_categorias($faqs_categoria);
-
-            }
-            if ($flag_busqueda_q > 0) {
-
-                $r[] = get_formar_respuesta($respuesta, $in_session, $perfil);
-            }
+            $r[] = ($flag_categoria > 0) ?   get_format_faq_categorias($faqs_categoria) : "";
+            $r[] = ($flag_busqueda_q > 0) ? get_formar_respuesta($respuesta, $in_session, $perfil) : "";
             return append($r);
 
         }
@@ -153,7 +142,6 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $lista_categorias = $data["lista_categorias"];
-
             $id_faq = 0;
             $respuesta = "";
             $titulo = "";
@@ -201,8 +189,6 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = div("TIPO", "col-lg-3 top_20");
-
-
             $opt[] = [
                 "val" => 1,
                 "text" => "Pública"

@@ -15,21 +15,23 @@ if (!function_exists('invierte_date_time')) {
                 $id_servicio = $row["id_servicio"];
                 if (!in_array($row["id_servicio"], $ids_servicio)) {
                     $ids_servicio[] = $row["id_servicio"];
-                    $response[] = [
-                        "id_servicio" => $row["id_servicio"],
-                        "pedidos" => $row["num_ciclos_contratados"]
-                    ];
+
+                    $response[] =
+                        [
+                            "id_servicio" => $row["id_servicio"],
+                            "pedidos" => $row["num_ciclos_contratados"]
+                        ];
 
                 } else {
 
 
-                    $index =  search_bi_array($response, "id_servicio", $id_servicio);
-                    $a  = 0;
-                    if ($index != false ){
+                    $index = search_bi_array($response, "id_servicio", $id_servicio);
+                    $a = 0;
+                    if ($index != false) {
 
                         $response[$a]["pedidos"] = $response[$index]["pedidos"] + $row["num_ciclos_contratados"];
 
-                        $a ++ ;
+                        $a++;
                     }
 
                 }

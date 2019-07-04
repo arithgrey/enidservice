@@ -295,7 +295,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => 'btn_mis_ventas'
                 ]);
 
-            $articulos_deseados
+            $deseos
                 = anchor_enid(
                 "TU LISTA DE ARTÍCULOS DESEADOS",
                 [
@@ -304,7 +304,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => 'btn_cobranza mis_compras'
                 ]);
 
-            $list = [$preferencias, $articulos_deseados];
+            $list = [$preferencias, $deseos];
             return ul($list);
         }
 
@@ -357,26 +357,21 @@ if (!function_exists('invierte_date_time')) {
                     [
                         "class" => "cursor_pointer hover_black",
                         "onclick" => "cancela_productos('{$id}');"
-                    ]);
+                    ]
+                );
                 $x[] = div($opiniones, "label-rating");
-
                 $x[] = br(3);
                 $x[] = p($descripcion);
                 $r[] = div(append($x), 6);
-
-
                 $z = [];
-
                 $text_precio = $precio * $articulos;
                 $z[] = heading_enid($text_precio . "MXN");
                 $z[] = div($text_envio, "text-success text-center" );
                 $z[] = br();
                 $z[] = get_form_pre_pedido($id, $id_producto, "", 5, 0, 1, $articulos);
                 $z[] = br();
-
                 $z[] = guardar("Detalles", [], 1, 1, 0, get_url_servicio($id_producto));
                 $r[] = div(append($z), 3);
-
                 $response[] = addNRow(append($r), ["class" => "card "], ["class" => "border top_20"]);
 
             }

@@ -6,10 +6,12 @@ if (!function_exists('invierte_date_time')) {
 
         function get_hiddens_tickects($action, $ticket)
         {
-            return append([
-                input_hidden(["class" => "action", "value" => $action]),
-                input_hidden(["class" => "ticket", "value" => $ticket])
-            ]);
+            return append(
+                [
+                    input_hidden(["class" => "action", "value" => $action]),
+                    input_hidden(["class" => "ticket", "value" => $ticket])
+                ]
+            );
         }
     }
     if (!function_exists('get_format_buzon')) {
@@ -60,7 +62,9 @@ if (!function_exists('invierte_date_time')) {
                         "href" => $url,
                         "class" => "a_enid_blue "
                     ]
-                ), ["class" => "text-center top_20"]);
+                ),
+                "text-center top_20"
+            );
             $x[] = div($alcance, " text-center ");
 
             $r[] = div(append($x), 3);
@@ -74,7 +78,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = "";
-        if (is_array($alcance) && count($alcance) > 0) {
+        if (es_data($alcance)) {
+
             $maximo = $alcance[0]["maximo"];
             $minimo = $alcance[0]["minimo"];
             $promedio = $alcance[0]["promedio"];
@@ -124,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
             ]);
 
 
-        $a_mis_ventas = anchor_enid( text_icon('fa fa-shopping-bag', "TUS VENTAS") ,
+        $a_mis_ventas = anchor_enid(text_icon('fa fa-shopping-bag', "TUS VENTAS"),
             [
                 "id" => "mis_ventas",
                 "href" => "#tab_mis_ventas",
@@ -153,7 +158,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         $list = [
-
             li($a_vendedor, "li_menu menu_vender " . valida_active_tab('ventas', $action)),
             li($a_mis_ventas, 'li_menu'),
             li($place_ventas, 'li_menu'),

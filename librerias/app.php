@@ -983,6 +983,11 @@ class app extends CI_Controller
 
     }
 
+    function session_enid(){
+
+        return $this->session;
+
+    }
     function set_userdata($newdata = array(), $newval = '')
     {
 
@@ -1017,4 +1022,5 @@ class app extends CI_Controller
         return (is_string($key)) ? $this->session->userdata($key) : $this->session->all_userdata();
 
     }
+
 }

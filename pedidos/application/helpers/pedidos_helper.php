@@ -52,9 +52,7 @@ if (!function_exists('invierte_date_time')) {
             $se_cancela = $recibo["se_cancela"];
             $status = $recibo["status"];
 
-
-            $r[] = div(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), "max-height: 250px;", 1);
-
+            $r[] = div(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), 1);
             $r[] = heading_enid(add_text("TOTAL ", $monto_a_pagar . "MXN"), 5);
             $r[] = heading_enid(add_text("CUBIERTO", $saldo_cubierto . "MXN"), 5);
             $r[] = heading_enid(add_text("ARTÍCULOS", $articulos), 5);
@@ -115,7 +113,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = heading_enid("DOMICILIOS DE ENTREGA ", 3);
             $r[] = agregar_nueva_direccion(0);
             $r[] = ul(create_lista_direcciones($lista_direcciones, $id_recibo), "list-group list-group-flush");
-
             return append($r);
 
         }
@@ -421,7 +418,6 @@ if (!function_exists('invierte_date_time')) {
             $x[] = get_link_recordatorio($id_recibo);
             $x[] = get_link_nota();
             $x[] = get_link_costo($id_recibo, $recibo);
-
             $r[] = div(icon("fa fa-plus-circle fa-3x"), ["class" => " dropdown-toggle", "data-toggle" => "dropdown"]);
             $r[] = div(append($x), ["class" => "dropdown-menu  w_300 contenedor_opciones_pedido top_menos_10", "aria-labelledby" => "dropdownMenuButton"]);
             return div(append($r), "dropdown pull-right  mr-5 btn_opciones  ");
@@ -442,21 +438,17 @@ if (!function_exists('invierte_date_time')) {
             if ($recibo[0]["status"] == 9 && $es_vendedor < 1 && $evaluacion == 0) {
 
                 $id_servicio = $recibo[0]["id_servicio"];
-                $url = "../valoracion/?servicio=" . $id_servicio;
+
                 $t[] = guardar("ESCRIBE UNA RESEÑA");
                 $t[] = div(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
-                $response = anchor_enid(append($t), ["href" => $url]);
+                $response = anchor_enid(append($t), ["href" => path_enid("valoracion_servicio", $id_servicio)]);
 
             } elseif ($recibo[0]["status"] == 9 && $es_vendedor < 1 && $evaluacion > 0) {
 
                 $id_servicio = $recibo[0]["id_servicio"];
-
-                $url = "../producto/?producto=" . $id_servicio . "&valoracion=1";
-
                 $t[] = guardar("ESCRIBE UNA RESEÑA");
                 $t[] = div(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
-
-                $response = anchor_enid(append($t), ["href" => $url]);
+                $response = anchor_enid(append($t), ["href" => path_enid("producto", $id_servicio . "&valoracion=1")]);
 
             } else {
 
@@ -661,7 +653,7 @@ if (!function_exists('invierte_date_time')) {
             );
             $r[] = div(anchor_enid("ENCUENTRA TU ORDEN AQUÍ",
                 [
-                    "href" => "../pedidos",
+                    "href" => path_enid("pedidos"),
                     "class" => "busqueda_mensaje"
                 ]),
                 "busqueda_mensaje_text"
@@ -904,10 +896,12 @@ if (!function_exists('invierte_date_time')) {
             if ($recibo["saldo_cubierto"] < 1) {
 
                 $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
-                $url = "../area_cliente/?action=compras&ticket=" . $id_recibo;
+
 
                 $response = div(
-                    guardar("PROCEDER A LA COMPRA " . icon("fa fa-2x fa-shopping-cart"),
+                    guardar(
+                        text_icon("fa fa-2x fa-shopping-cart", "PROCEDER A LA COMPRA ", [], 0)
+                        ,
                         [
                             "style" => "background:blue!important",
                             "class" => "top_30 f12"
@@ -915,8 +909,9 @@ if (!function_exists('invierte_date_time')) {
                         1,
                         1,
                         0,
-                        $url
-                    ), 1);
+                        path_enid("area_cliente_compras", $id_recibo)
+                    ), 1
+                );
 
             }
             return $response;
@@ -1101,7 +1096,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $nota = [];
-            if (count($data) > 0) {
+            if (es_data($data)) {
                 $nota[] = div(heading_enid("NOTAS", 4), 13);
             }
 
@@ -1192,10 +1187,10 @@ if (!function_exists('invierte_date_time')) {
 
                 $tipificaciones = btw(
 
-                    div(icon("fa fa-clock-o") . $row["fecha_registro"], 3)
+                    div(
+                        text_icon("fa fa-clock-o", $row["fecha_registro"]), 3)
 
                     ,
-
                     div($row["nombre_tipificacion"], 9)
                     ,
                     "row"
@@ -1204,7 +1199,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
-            if (count($data) > 0) {
+            if (es_data($data)) {
 
                 $r[] = div(heading_enid("MOVIMIENTOS", 4, "row"), " top_30 bottom_30 padding_10  row");
                 $r[] = div($tipificaciones, " top_30 bottom_30 padding_10 border row");
@@ -1259,7 +1254,7 @@ if (!function_exists('invierte_date_time')) {
                     ),
 
                     [
-                        "href" => "../producto/?producto=" . $id_servicio,
+                        "href" => path_enid("producto", $id_servicio),
                         "target" => "_black",
                     ]
                 );
@@ -1276,7 +1271,7 @@ if (!function_exists('invierte_date_time')) {
         function create_fecha_contra_entrega($recibo, $domicilio)
         {
 
-            if (get_param_def($domicilio, "domicilio") > 0 && count($recibo) > 0) {
+            if (get_param_def($domicilio, "domicilio") > 0 && es_data($recibo)) {
 
                 $recibo = $recibo[0];
                 $t[] = div("HORARIO DE ENTREGA", "strong underline");
@@ -1292,6 +1287,9 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
+            if (es_data($recibo)) {
+                return "";
+            }
             $tipo = $recibo[0]["tipo_entrega"];
             if ($tipo == 1 && $saldo_cubierto < 1) {
                 $cambio_fecha = $recibo[0]["modificacion_fecha"];
@@ -1312,8 +1310,6 @@ if (!function_exists('invierte_date_time')) {
                             $class = 'alta';
                             $text_probabilidad = "PROBABILIDAD ALTA DE COMPRA";
                         }
-
-
                         break;
                     case 2:
                         $class = 'baja';
@@ -1333,12 +1329,8 @@ if (!function_exists('invierte_date_time')) {
                     $text_probabilidad = "PROBABILIDAD BAJA NULA (SE CANCELÓ)";
 
                 }
-
                 return div($text_probabilidad, $class . " border shadow row", 1);
-
             }
-
-
         }
     }
 
@@ -1397,35 +1389,38 @@ if (!function_exists('invierte_date_time')) {
         function create_seccion_tipo_entrega($recibo, $tipos_entregas)
         {
 
-            $tipo = "";
-            $id_tipo_entrega = $recibo[0]["tipo_entrega"];
-            foreach ($tipos_entregas as $row) {
+            if (es_data($recibo)):
+                $tipo = "";
+                $id_tipo_entrega = $recibo[0]["tipo_entrega"];
+                foreach ($tipos_entregas as $row) {
 
-                if ($row["id"] == $id_tipo_entrega) {
-                    $tipo = $row["nombre"];
-                    echo input_hidden(
-                        [
-                            "class" => "text_tipo_entrega",
-                            "value" => $tipo
-                        ]
-                    );
-                    break;
+                    if ($row["id"] == $id_tipo_entrega) {
+                        $tipo = $row["nombre"];
+                        echo input_hidden(
+                            [
+                                "class" => "text_tipo_entrega",
+                                "value" => $tipo
+                            ]
+                        );
+                        break;
+                    }
                 }
-            }
 
 
-            $encabezado = btw(
+                $encabezado = btw(
 
-                heading_enid("TIPO DE ENTREGA", 3)
-                ,
-                div(icon("fa fa fa-pencil"), "editar_tipo_entrega text-right")
-                ,
-                "d-flex align-items-center justify-content-between bottom_30"
+                    heading_enid("TIPO DE ENTREGA", 3)
+                    ,
+                    div(icon("fa fa fa-pencil"), "editar_tipo_entrega text-right")
+                    ,
+                    "d-flex align-items-center justify-content-between bottom_30"
 
-            );
+                );
 
-            $tipo = div($tipo, "encabezado_tipo_entrega letter-spacing-5  text-right bottom_20", 1);
-            return div($encabezado . $tipo, "contenedor_tipo_entrega", 1);
+                $tipo = div($tipo, "encabezado_tipo_entrega letter-spacing-5  text-right bottom_20", 1);
+                return div($encabezado . $tipo, "contenedor_tipo_entrega", 1);
+
+            endif;
 
         }
 
@@ -1435,67 +1430,58 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $response = "";
-            if (count($recibo) > 0) {
+            if (es_data($recibo)):
                 $recibo = $recibo[0];
-
-
                 $t[] = div(icon("fa fa-check-circle") . "PEDIDO ENTREGADO", "strong");
                 $t[] = div($recibo["fecha_entrega"]);
                 $text = ($recibo["saldo_cubierto"] > 0 && $recibo["status"] == 9) ? append($t) : "";
 
-
-                if ($recibo["saldo_cubierto"] > 0 && $recibo["status"] == 9) {
-
+                if ($recibo["saldo_cubierto"] > 0 && $recibo["status"] == 9):
                     $response = div($text, "letter-spacing-5 top_30 border padding_10 botttom_20 contenedor_entregado", 1);
+                endif;
 
-                }
-
-            }
+            endif;
             return $response;
         }
     }
+    /**NO canceladas*/
     if (!function_exists('crea_estado_venta')) {
         function crea_estado_venta($status_ventas, $recibo)
         {
 
             $response = "";
-            /**NO canceladas*/
-            if ($recibo[0]["se_cancela"] < 1 && $recibo[0]["status"] != 10 && $recibo[0]["cancela_cliente"] < 1) {
+            if (es_data($recibo)):
+                if ($recibo[0]["se_cancela"] < 1 && $recibo[0]["status"] != 10 && $recibo[0]["cancela_cliente"] < 1) {
 
-                $status = $recibo[0]["status"];
-                $text_status = "";
-                foreach ($status_ventas as $row) {
+                    $status = $recibo[0]["status"];
+                    $text_status = "";
+                    foreach ($status_ventas as $row) {
 
-                    $id_estatus = $row["id_estatus_enid_service"];
-                    $text_vendedor = $row["text_vendedor"];
+                        $id_estatus = $row["id_estatus_enid_service"];
+                        $text_vendedor = $row["text_vendedor"];
 
-                    if ($status == $id_estatus) {
-                        $text_status = $text_vendedor;
-                        break;
+                        if ($status == $id_estatus) {
+                            $text_status = $text_vendedor;
+                            break;
+                        }
                     }
+                    $response = div($text_status, "status_compra padding_20 white letter-spacing-5 bottom_20 row");
                 }
-                $response = div($text_status, "status_compra padding_20 white letter-spacing-5 bottom_20 row");
-            }
-
+            endif;
             return $response;
-
 
         }
     }
     if (!function_exists('create_seccion_usuario')) {
-        function create_seccion_usuario( $usuario, $recibo )
+        function create_seccion_usuario($usuario, $recibo)
         {
 
             $r = [];
             $id_usuario = primer_elemento($recibo, "id_usuario");
             foreach ($usuario as $row) {
 
-                $email = $row["email"];
-                $tel_contacto = $row["tel_contacto"];
-                $tel_contacto_alterno = $row["tel_contacto_alterno"];
                 $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
-
-                $nombre_completo =
+                $nombre =
                     append([
                         es_null($row, "nombre"),
                         es_null($row, "apellido_paterno"),
@@ -1503,10 +1489,10 @@ if (!function_exists('invierte_date_time')) {
                     ]);
 
 
-                $r[] = div($nombre_completo);
-                $r[] = div($email);
-                $r[] = div($tel_contacto);
-                $r[] = div($tel_contacto_alterno);
+                $r[] = div($nombre);
+                $r[] = div($row["email"]);
+                $r[] = div($row["tel_contacto"]);
+                $r[] = div($row["tel_contacto_alterno"]);
 
                 if ($row["sexo"] != 2) {
 
@@ -1518,14 +1504,9 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
-
             $response = btw(
 
-                ajustar("CLIENTE",
-
-                        icon("fa fa-cart-plus agenda_compra" , [ "id" => $id_usuario ])
-
-                )
+                ajustar("CLIENTE", icon("fa fa-cart-plus agenda_compra", ["id" => $id_usuario]))
                 ,
                 div(append($r), "contenido_domicilio top_10")
                 ,
@@ -1559,22 +1540,18 @@ if (!function_exists('invierte_date_time')) {
         function tiene_domilio($domicilio, $numero = 0)
         {
 
-            $final_text = "";
-            $final_numeric = 0;
-            if (array_key_exists("domicilio", $domicilio)
-                &&
-                is_array($domicilio["domicilio"])
-                &&
-                count($domicilio["domicilio"]) > 0) {
+            $f_text = "";
+            $f_numeric = 0;
+            if (es_data($domicilio["domicilio"])) {
 
-                $final_numeric++;
+                $f_numeric++;
 
             } else {
-                $final_text = div("SIN DOMICIO REGISTRADO", "sin_domicilio padding_10 white", 1);
+
+                $f_text = div("SIN DOMICIO REGISTRADO", "sin_domicilio padding_10 white", 1);
             }
 
-            $response = ($numero == 0) ? $final_text : $final_numeric;
-            return $response;
+            return ($numero == 0) ? $f_text : $f_numeric;
         }
     }
     if (!function_exists('create_seccion_domicilio')) {
@@ -1582,16 +1559,10 @@ if (!function_exists('invierte_date_time')) {
         {
             $response = "";
 
-            if (array_key_exists("domicilio", $domicilio) && is_array($domicilio["domicilio"]) && count($domicilio["domicilio"]) > 0) {
+            if (es_data($domicilio, "domicilio")) {
 
                 $data_domicilio = $domicilio["domicilio"];
-                if ($domicilio["tipo_entrega"] != 1) {
-
-                    $response = create_domicilio_entrega($data_domicilio);
-                } else {
-
-                    $response = create_punto_entrega($data_domicilio);
-                }
+                $response = ($domicilio["tipo_entrega"] != 1) ? create_domicilio_entrega($data_domicilio) : create_punto_entrega($data_domicilio);
 
             } else {
                 /*solicita dirección de envio*/
@@ -1604,8 +1575,7 @@ if (!function_exists('invierte_date_time')) {
         function create_seccion_recordatorios($recibo)
         {
 
-            $response = (count($recibo) > 0) ? (($recibo[0]["status"] == 6) ? div("EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"], "") : "") : "";
-            return $response;
+            return (es_data($recibo)) ? (($recibo[0]["status"] == 6) ? div("EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"], "") : "") : "";
 
         }
     }
@@ -1621,20 +1591,20 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $recibo = $recibo[0];
-            $saldo_cubierto = $recibo["saldo_cubierto"];
-            $url = path_enid("pedidos", "/?costos_operacion=" . $id_recibo . "&saldado=" . $saldo_cubierto);
-            return div(anchor_enid("COSTO DE OPERACIÓN", ["href" => $url]), 1);
-
+            if (es_data($recibo)):
+                $recibo = $recibo[0];
+                $saldo_cubierto = $recibo["saldo_cubierto"];
+                $url = path_enid("pedidos", "/?costos_operacion=" . $id_recibo . "&saldado=" . $saldo_cubierto);
+                return div(anchor_enid("COSTO DE OPERACIÓN", ["href" => $url]), 1);
+            endif;
         }
     }
-
 
     if (!function_exists('get_link_cambio_fecha')) {
         function get_link_cambio_fecha($domicilio, $recibo)
         {
 
-            if (get_param_def($domicilio, "domicilio") > 0 && count($recibo) > 0) {
+            if (get_param_def($domicilio, "domicilio") != 0 && count($recibo) > 0) {
 
                 $recibo = $recibo[0];
                 $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
@@ -1737,7 +1707,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            if (count($usuario) > 0) {
+            if (es_data($usuario)) {
 
                 $usuario = $usuario[0];
                 $nombre = $usuario["nombre"];
@@ -1747,36 +1717,28 @@ if (!function_exists('invierte_date_time')) {
                 $telefono = $usuario["tel_contacto"];
                 $id_usuario = $usuario["id_usuario"];
                 $sexo = $usuario["sexo"];
-
-
                 $action = "../../q/index.php/api/usuario/index/format/json/";
                 $attr = ["METHOD" => "PUT", "id" => "form_set_usuario", "class" => "border form_set_usuario padding_10 shadow"];
-
-                $form = form_open($action, $attr);
-                $form .= div(heading_enid("Cliente", 3), 1);
-                $form .= div("NOMBRE:", "top_10", 1);
-                $form .= input(["name" => "nombre", "value" => $nombre, "type" => "text", "required" => "true"]);
-
-                $form .= div("APELLIDO PATERNO:", "top_10", 1);
-                $form .= input(["name" => "apellido_paterno", "value" => $apellido_paterno, "type" => "text"]);
-
-                $form .= div("APELLIDO MATERNO:", "top_10", 1);
-                $form .= input(["name" => "apellido_materno", "value" => $apellido_materno, "type" => "text"]);
-                $form .= div("EMAIL:", "top_10", 1);
+                $form[] = form_open($action, $attr);
+                $form[] = div(heading_enid("Cliente", 3), 1);
+                $form[] = div("NOMBRE:", "top_10", 1);
+                $form[] = input(["name" => "nombre", "value" => $nombre, "type" => "text", "required" => "true"]);
+                $form[] = div("APELLIDO PATERNO:", "top_10", 1);
+                $form[] = input(["name" => "apellido_paterno", "value" => $apellido_paterno, "type" => "text"]);
+                $form[] = div("APELLIDO MATERNO:", "top_10", 1);
+                $form[] = input(["name" => "apellido_materno", "value" => $apellido_materno, "type" => "text"]);
+                $form[] = div("EMAIL:", "top_10", 1);
 
 
-                $form .= input([
+                $form[] = input([
                     'name' => 'email',
                     'value' => $email,
                     "required" => "true",
                     "class" => "input-sm email email",
                     "onkeypress" => "minusculas(this);"
                 ]);
-
-
-                $form .= div("TELÉFONO:", " top_10", 1);
-
-                $form .= input([
+                $form[] = div("TELÉFONO:", " top_10", 1);
+                $form[] = input([
                     'name' => 'tel_contacto',
                     'value' => $telefono,
                     "required" => "true",
@@ -1785,14 +1747,12 @@ if (!function_exists('invierte_date_time')) {
                     "minlength" => 8,
                     "class" => "form-control input-sm  telefono telefono_info_contacto"
                 ]);
-
-                $form .= input([
+                $form[] = input([
                     "value" => $id_usuario,
                     "name" => "id_usuario",
                     "type" => "hidden"
 
                 ]);
-
                 $opt[] = array(
 
                     "text" => "Femenino",
@@ -1808,12 +1768,10 @@ if (!function_exists('invierte_date_time')) {
                     "text" => "Indefinido",
                     "val" => 2
                 );
-
-
-                $form .= div(create_select($opt, "sexo", "sexo", "sexo", "text", "val", 1, $sexo), "top_20");
-                $form .= guardar("GUARDAR", ["class" => "top_30 bottom_50"]);
-                $form .= form_close(place("place_form_set_usuario"));
-                $f = addNRow($form, ["id" => "contenedor_form_usuario"]);
+                $form[] = div(create_select($opt, "sexo", "sexo", "sexo", "text", "val", 1, $sexo), "top_20");
+                $form[] = guardar("GUARDAR", ["class" => "top_30 bottom_50"]);
+                $form[] = form_close(place("place_form_set_usuario"));
+                $f = addNRow(append($form), ["id" => "contenedor_form_usuario"]);
                 return $f;
             }
 

@@ -17,6 +17,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 ),
                 ["href" => "?q=transfer&action=1&tarjeta=1", "class" => "black"]);
+
             $r[] = anchor_enid(div("Asociar cuenta bancaria",
                 [
                     "style" => "border-style: solid;border-width: .9px;padding: 10px;

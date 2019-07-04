@@ -133,29 +133,30 @@ if (!function_exists('invierte_date_time')) {
     }
 
     if (!function_exists('get_top_ventas')) {
-        function get_top_ventas($top_servicios)
+        function get_top_ventas($top)
         {
 
             $response = [];
-            if (is_array($top_servicios)) {
+            if (es_data($top)) {
 
-                foreach ($top_servicios as $row) {
+                foreach ($top as $row) {
 
-                    $url = path_enid("producto", $row['id_servicio']);
+
                     $nombre = $row["nombre_servicio"];
                     $titulo_corto = substr($nombre, 0, 18) . "...";
                     $articulo = (strlen($nombre) > 18) ? $titulo_corto : $nombre;
-                    $link_articulo =
+
+                    $link =
                         anchor_enid($articulo,
                             [
-                                'href' => $url,
+                                'href' => path_enid("producto", $row['id_servicio']),
                                 'class' => 'black'
                             ], 1
                         );
 
 
                     $response[] = btw(
-                        $link_articulo,
+                        $link,
                         $row["vistas"],
                         "display_flex_enid"
                     );
@@ -186,13 +187,15 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div("BUSCAR ENTRE TUS ARTÍCULOS", "col-lg-4 align-self-center");
             $r[] = div(get_list_orden($list_orden), 4);
-            $r[] = div(input([
-                "id" => "textinput",
-                "name" => "textinput",
-                "placeholder" => "Nombre de tu producto o servicio",
-                "class" => "form-control input-sm q_emp",
-                "onkeyup" => "onkeyup_colfield_check(event);"
-            ]),
+            $r[] = div(
+                input([
+                        "id" => "textinput",
+                        "name" => "textinput",
+                        "placeholder" => "Nombre de tu producto o servicio",
+                        "class" => "form-control input-sm q_emp",
+                        "onkeyup" => "onkeyup_colfield_check(event);"
+                    ]
+                ),
                 4);
             return div(append($r), ["class" => "--"]);
 
@@ -212,7 +215,6 @@ if (!function_exists('invierte_date_time')) {
                 $a++;
             }
             $r[] = '</select>';
-
             return append($r);
 
         }
@@ -220,14 +222,14 @@ if (!function_exists('invierte_date_time')) {
 
     }
     if (!function_exists('get_top_articulos')) {
-        function get_top_articulos($top_servicios, $is_mobile)
+        function get_top_articulos($top, $is_mobile)
         {
 
             $response = "";
-            if (is_array($top_servicios) && count($top_servicios) > 0 && $is_mobile > 0) {
+            if (es_data($top) && $is_mobile > 0) {
 
                 $r = [];
-                foreach ($top_servicios as $row):
+                foreach ($top as $row):
 
                     $r[] = icon("fa fa-angle-right");
                     $articulo = (trim(strlen($row["nombre_servicio"])) > 22) ? substr($row["nombre_servicio"], 0, 22) . "..." : strlen($row["nombre_servicio"]);
@@ -249,10 +251,9 @@ if (!function_exists('invierte_date_time')) {
                 endforeach;
 
 
-                if (count($top_servicios) > 0) {
-
+                if (es_data($top)):
                     array_pop($r, heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 2));
-                }
+                endif;
 
                 $response = div(append($r), "card contenedor_articulos_mobil");
 
@@ -280,13 +281,12 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = anchor_enid(
                     "CANCELAR",
                     [
-                        "class" => "cancelar_registro",
-                        "style" => "color: white!important"
+                        "class" => "cancelar_registro white",
+
                     ],
                     1);
                 $r[] = hr();
                 $r[] = get_places();
-
 
             }
 
@@ -362,7 +362,6 @@ if (!function_exists('invierte_date_time')) {
 
                 ]);
             }
-
             return $response;
 
         }
@@ -399,19 +398,20 @@ if (!function_exists('invierte_date_time')) {
         function valida_active_tab($seccion, $valor_actual, $considera_segundo = 0)
         {
 
-            return  ($considera_segundo == 0) ?  (($seccion == $valor_actual) ? " active " : "") : " active ";
+            return ($considera_segundo == 0) ? (($seccion == $valor_actual) ? " active " : "") : " active ";
 
         }
     }
     if (!function_exists('get_menu')) {
         function get_menu($perfil, $is_mobile, $action)
         {
-            $response  ="";
+            $response = "";
             if ($is_mobile == 0) {
                 $list = [
                     li(
                         anchor_enid(
-                            icon('fa fa-cart-plus') . " VENDER PRODUCTOS ",
+                            text_icon('fa fa-cart-plus', " VENDER PRODUCTOS ")
+                            ,
                             [
                                 "href" => "../planes_servicios/?action=nuevo",
                                 "class" => "agregar_servicio btn_agregar_servicios"
@@ -421,12 +421,12 @@ if (!function_exists('invierte_date_time')) {
                     ),
                     li(
                         anchor_enid(
-                            icon("fa fa-shopping-cart") . " TUS ARTÍCULOS EN VENTA",
+                            text_icon("fa fa-shopping-cart", " TUS ARTÍCULOS EN VENTA")
+                            ,
                             [
                                 'data-toggle' => "tab",
                                 'class' => "black  btn_serv",
                                 'href' => "#tab_servicios",
-
                             ]
                         ),
                         [
@@ -457,7 +457,7 @@ if (!function_exists('invierte_date_time')) {
                             ]
                         );
                 }
-                $response =  ul($list, ["class" => "nav tabs contenedor_menu_enid_service_lateral"]);
+                $response = ul($list, ["class" => "nav tabs contenedor_menu_enid_service_lateral"]);
             } else {
 
                 $list = [
@@ -485,7 +485,8 @@ if (!function_exists('invierte_date_time')) {
                     )
 
                 ];
-                $response =   ul($list, "nav tabs contenedor_menu_enid_service_lateral");
+
+                $response = ul($list, "nav tabs contenedor_menu_enid_service_lateral");
 
             }
             return $response;

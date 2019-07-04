@@ -18,7 +18,8 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] =
                 div(
-                    span("", "icon fa fa-space-shuttle black") .
+                    icon("icon fa fa-space-shuttle black")
+                     .
                     anchor_enid(
 
                         heading_enid($nombre_punto_encuentro, 3, "title") .
@@ -95,13 +96,14 @@ if (!function_exists('invierte_date_time')) {
                     p($num, "text-center strong underline f15"),
                     "timeline-content"
                 );
+
                 $r[] = div(append($text), "col-lg-2 top_20 text-center");
             }
         }
 
         $x[] = heading_enid("VENTAS EN LíNEAS DE METRO: ".$total, 4 , "text-left");
         $x[] = heading_enid("LINEAS DE REPARTO: ".$lineas_reparto, 6 , "text-left underline");
-        $x[] =  div(div(div(div(append($r), "main-timeline12"), "col-md-12 contenedor_general padding_20 "), "row"));
+        $x[] = div(div(div(div(append($r), "main-timeline12"), "col-md-12 contenedor_general padding_20 "), "row"));
         return append($x);
 
     }

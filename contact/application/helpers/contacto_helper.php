@@ -6,21 +6,29 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $ubicacion =  $data["ubicacion"];
-            $departamentos =  $data["departamentos"];
-            $nombre =  $data["nombre"];
-            $email =  $data["email"];
-            $telefono =  $data["telefono"];
-            $r[] = div(div(
-                heading_enid(get_social(0, "", 0), 3, "social_contact padding_20")
-                , 3), "imagen_principal");
+            $ubicacion = $data["ubicacion"];
+            $departamentos = $data["departamentos"];
+            $nombre = $data["nombre"];
+            $email = $data["email"];
+            $telefono = $data["telefono"];
+            $r[] = div
+            (
+                div(
+                    heading_enid(
+                        get_social(0, "", 0)
+                        , 3, "social_contact padding_20"
+                    )
+                    , 3
+                ), "imagen_principal");
 
-            $r[] = div(format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono),
+            $r[] = div(
+                format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono),
                 [
                     "class" => "padding_15  bottom_100 text-uppercase container inner contenedor_form shadow ",
                     "id" => "direccion",
                     "style" => "margin-top:-100px;"
-                ]);
+                ]
+            );
             $r[] = input_hidden(["value" => $ubicacion, "class" => "ubicacion"]);
 
             return append($r);
@@ -103,9 +111,8 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "easy_select_enid cursor_pointer selector selector_proceso",
                         "id" => 1
                     ]),
-                [
-                    "href" => path_enid("lista_deseos")
-                ]);
+                path_enid("lista_deseos")
+            );
 
             $r[] = anchor_enid(div(
                 text_icon("fa fa-map-marker", "NO, VER DIRECCIÓN DE COMPRA")
@@ -114,9 +121,8 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "easy_select_enid cursor_pointer selector selector_proceso",
                     "id" => 2
                 ]),
-                [
-                    "href" => path_enid("contact")
-                ]);
+                path_enid("contact")
+            );
 
             return append($r);
 
