@@ -71,14 +71,15 @@ class Home extends CI_Controller
     private function load_vistas_punto_encuentro($param, $data)
     {
 
-        $data += [
 
+
+        $data += [
             "carro_compras" => $param["carro_compras"],
             "id_carro_compras" => $param["id_carro_compras"],
-            "leneas_metro" => $this->get_lineas_metro(1),
+            "leneas_metro" => $this->get_lineas_metro(1, $param),
         ];
 
-        if (get_param_def($param, "avanzado", 0, 1) > 0 && get_param_def($param, "punto_encuentro", 0, 1)) {
+        if (get_param_def($param, "avanzado") > 0 && get_param_def($param, "punto_encuentro") > 0 ) {
 
             /*solo tomamos la hora del pedido*/
             $this->app->pagina($data, get_format_pagina_form_horario($data["recibo"], $param["punto_encuentro"]), 1);
@@ -91,14 +92,19 @@ class Home extends CI_Controller
         }
     }
 
-    private function get_lineas_metro($tipo)
+    private function get_lineas_metro($tipo, $param)
     {
+
 
         $q = [
             "v" => 1,
-            "tipo" => $tipo
+            "tipo" => $tipo,
         ];
+        $id_usuario =  $this->get_usuario_por_servicio($param["servicio"]);
+        if ($id_usuario >0 ){
 
+            $q["id_usuario"] =  $id_usuario;
+        }
         return $this->app->api("linea_metro/index/format/json/", $q);
 
     }
@@ -108,5 +114,9 @@ class Home extends CI_Controller
 
         return $this->app->api("tipo_punto_encuentro/index/format/json/", $q);
     }
+    private  function  get_usuario_por_servicio($id_servicio){
 
+        $usuario =  $this->app->api("servicio/usuario_por_servicio/format/json/", ["id_servicio" => $id_servicio]);
+        return primer_elemento($usuario, "id_usuario");
+    }
 }

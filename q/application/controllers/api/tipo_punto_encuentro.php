@@ -14,8 +14,7 @@ class Tipo_punto_encuentro extends REST_Controller
 	{
 
 		$in = ["status" => 1];
-		$response = $this->tipo_punto_encuentro_model->get([], $in, 10);
-		$this->response($response);
+		$this->response($this->tipo_punto_encuentro_model->get([], $in, 10));
 	}
 
 }

@@ -2,26 +2,93 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    function create_estaciones($array, $flag_envio_gratis)
+
+    function create_estaciones_configurador($array, $lista_negra)
     {
 
         $l = [];
+        $negra = [];
         foreach ($array as $row) {
 
             $nombre = $row["nombre"];
             $id = $row["id"];
-            $costo_envio = $row["costo_envio"];
 
-            $l[] = div($nombre,
-                [
-                    "class" => "nombre_estacion cursor_pointer punto_encuentro",
-                    "id" => $id,
-                    "nombre_estacion" => $nombre,
-                    "costo_envio" => $costo_envio,
-                    "flag_envio_gratis" => $flag_envio_gratis
 
-                ]
-            );
+            $index =  search_bi_array($lista_negra, "id_punto_encuentro", $id);
+
+            if ($index != false){
+
+                $l[] = ajustar(div($nombre,
+                    [
+                        "class" => "nombre_estacion cursor_pointer punto_encuentro",
+                        "id" => $id,
+                        "nombre_estacion" => $nombre
+
+                    ]
+                ), icon("fa agregar_punto  fas fa-plus-square ", ["id" => $id ] ));
+
+            }else{
+
+                $l[] = ajustar(div($nombre,
+                    [
+                        "class" => "nombre_estacion cursor_pointer punto_encuentro",
+                        "id" => $id,
+                        "nombre_estacion" => $nombre
+                    ]
+                ), icon("fa quitar_punto  fa fa-minus ", ["id" => $id ] ));
+
+
+
+            }
+
+
+        }
+
+        return div(append($l));
+    }
+
+    function create_estaciones($array, $flag_envio_gratis, $lista_negra)
+    {
+
+        $l = [];
+        $negra = [];
+        foreach ($array as $row) {
+
+            $nombre = $row["nombre"];
+            $id = $row["id"];
+
+
+            $index =  search_bi_array($lista_negra, "id_punto_encuentro", $id);
+
+            if ($index != false){
+
+                $negra[] = div($nombre,
+                    [
+                        "class" => "nombre_estacion cursor_pointer punto_encuentro",
+                        "id" => $id,
+                        "nombre_estacion" => $nombre,
+                        "costo_envio" => $row["costo_envio"],
+                        "flag_envio_gratis" => $flag_envio_gratis
+
+                    ]
+                );
+
+            }else{
+
+                $l[] = div($nombre,
+                    [
+                        "class" => "nombre_estacion cursor_pointer punto_encuentro",
+                        "id" => $id,
+                        "nombre_estacion" => $nombre,
+                        "costo_envio" => $row["costo_envio"],
+                        "flag_envio_gratis" => $flag_envio_gratis
+
+                    ]
+                );
+
+            }
+
+
         }
 
 

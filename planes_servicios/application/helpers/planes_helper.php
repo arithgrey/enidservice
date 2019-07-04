@@ -1,8 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    if (!function_exists('get_form_ventas')) {
-        function get_form_ventas($ciclo_facturacion, $error_registro, $is_mobile)
+    if (!function_exists('form_ventas')) {
+        function form_ventas($ciclo_facturacion, $error_registro, $is_mobile)
         {
 
             $r[] = heading_enid("DA A CONOCER TU PRODUCTO Ó SERVICIO", 3, 1);
@@ -169,14 +169,26 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('get_format_articulos_venta')) {
+    if (!function_exists('format_articulos_venta')) {
 
-        function get_format_articulos_venta($list_orden)
+        function format_articulos_venta($list_orden)
         {
+
 
             $r[] = heading_enid("TUS ARTÍCULOS EN VENTA", 3);
             $r[] = div(get_format_busqueda($list_orden), "contenedor_busqueda_articulos row top_50");
             $r[] = div(place("place_servicios top_50"), 1);
+            return append($r);
+
+        }
+    }
+    if (!function_exists('format_puntos_venta')) {
+
+        function format_puntos_venta()
+        {
+
+            $r[] = heading_enid("PUNTOS DE VENTA", 3);
+            $r[] = div(place("place_puntos_venta top_50"), 1);
             return append($r);
 
         }
@@ -408,6 +420,7 @@ if (!function_exists('invierte_date_time')) {
             $response = "";
             if ($is_mobile == 0) {
                 $list = [
+
                     li(
                         anchor_enid(
                             text_icon('fa fa-cart-plus', " VENDER PRODUCTOS ")
@@ -419,6 +432,19 @@ if (!function_exists('invierte_date_time')) {
                         ),
                         valida_active_tab('nuevo', $action) . "  "
                     ),
+                    li(
+                        anchor_enid(
+                            text_icon('fa fa-map', " PUNTOS DE VENTA ")
+                            ,
+                            [
+                                'data-toggle' => "tab",
+                                'class' => "black puntos_venta",
+                                'href' => "#tab_puntos_venta",
+                            ]
+                        ),
+                        valida_active_tab('puntos_venta', $action) . "  "
+                    ),
+
                     li(
                         anchor_enid(
                             text_icon("fa fa-shopping-cart", " TUS ARTÍCULOS EN VENTA")

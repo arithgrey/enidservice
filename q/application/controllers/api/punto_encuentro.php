@@ -16,11 +16,11 @@ class Punto_encuentro extends REST_Controller
     function horario_disponible_GET()
     {
 
-        $param  = $this->get();
-        $response =  [];
-        if(if_ext($param , "dia")){
+        $param = $this->get();
+        $response = [];
+        if (if_ext($param, "dia")) {
 
-            $response = get_param_def( lista_horarios($param["dia"]) , "select", []);
+            $response = get_param_def(lista_horarios($param["dia"]), "select", []);
 
         }
 
@@ -42,6 +42,20 @@ class Punto_encuentro extends REST_Controller
         $this->response($response);
     }
 
+    function disponibilidad_GET()
+    {
+
+        $param = $this->get();
+        $param +=  [
+            "configurador" => 1,
+            "q" => 1,
+            "id_usuario" => $this->app->get_session("idusuario")
+        ];
+
+        $this->response( $this->app->api("punto_encuentro/linea_metro/format/json/", $param));
+
+    }
+
     function linea_metro_GET()
     {
 
@@ -61,20 +75,58 @@ class Punto_encuentro extends REST_Controller
             }
 
 
+            $lista_negra = [];
+            $id_usuario = 0;
+            if (get_param_def($param, "servicio") > 0) {
+
+                $id_usuario = $this->get_usuario_por_servicio($param["servicio"]);
+            }
+            if ($id_usuario > 0 || get_param_def($param,"id_usuario") > 0) {
+
+                if ($id_usuario < 1 ){
+
+                    $id_usuario =  get_param_def($param,"id_usuario") ;
+
+                }
+                $lista_negra = $this->get_lista_negra($id_usuario);
+
+            }
+
             if ($param["v"] == 1) {
 
-                $response = create_estaciones($response, $this->envio_gratis($param["servicio"]));
+                if (get_param_def($param, "configurador") >  0 ){
+
+                    $response = create_estaciones_configurador($response, $lista_negra);
+
+                }else{
+
+                    $response = create_estaciones($response, $this->envio_gratis($param["servicio"]), $lista_negra);
+                }
+
 
             } else {
 
 
                 $gratis = $this->envio_gratis($this->get_servicio_por_recibo($param["recibo"]));
-                $response = create_estaciones($response, $gratis);
+                $response = create_estaciones($response, $gratis, $lista_negra);
 
             }
         }
         $this->response($response);
 
+    }
+
+    private function get_usuario_por_servicio($id_servicio)
+    {
+
+        $usuario = $this->app->api("servicio/usuario_por_servicio/format/json/", ["id_servicio" => $id_servicio]);
+        return primer_elemento($usuario, "id_usuario");
+    }
+
+    private function get_lista_negra($id_usuario)
+    {
+
+        return $this->app->api("lista_negra_encuentro/index/format/json/", ["id_usuario" => $id_usuario]);
     }
 
     function costo_entrega_GET()
@@ -105,10 +157,11 @@ class Punto_encuentro extends REST_Controller
     {
 
         $q = ["id" => $id_servicio];
-        $envio =  $this->app->api("servicio/envio_gratis/format/json/", $q);
-        return primer_elemento($envio,"flag_envio_gratis", 0 );
+        $envio = $this->app->api("servicio/envio_gratis/format/json/", $q);
+        return primer_elemento($envio, "flag_envio_gratis", 0);
 
     }
+
     private function get_servicio_por_recibo($id_recibo)
     {
 
@@ -117,5 +170,4 @@ class Punto_encuentro extends REST_Controller
         return $this->app->api($api, $q);
 
     }
-
 }

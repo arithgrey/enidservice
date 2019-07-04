@@ -61,7 +61,7 @@ class Punto_encuentro_model extends CI_Model
         $query_get ="SELECT  * FROM  punto_encuentro WHERE id_linea_metro = $id_linea AND nombre like '%{$like}%' ";
         $response =   $this->db->query($query_get)->result_array();
 
-        if ( count($response) < 1 ){
+        if ( es_data($response) ){
 
             $query_get ="SELECT  * FROM  punto_encuentro WHERE  nombre like '%{$like}%' ";
             $response =   $this->db->query($query_get)->result_array();
