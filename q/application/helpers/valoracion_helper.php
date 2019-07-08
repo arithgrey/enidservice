@@ -1,6 +1,47 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    function render_articulo($data)
+    {
+
+        $id_usuario =  $data["id_usuario"];
+        $servicio =  $data["servicio"];
+        $numero_valoraciones =  $data["numero_valoraciones"];
+        $comentarios =  $data["comentarios"];
+        $respuesta_valorada =  $data["respuesta_valorada"];
+
+        $r[] = get_title_valoraciones($id_usuario);
+        $r[] = btw(
+            anchor_enid("ESCRIBE UNA RESEÑA" . icon("fa fa-chevron-right ir"),
+                [
+                    "class" => "escribir_valoracion white escribir",
+                    "href" => "../valoracion?servicio=" . $servicio,
+
+                ])
+            ,
+            crea_resumen_valoracion($numero_valoraciones)
+            ,
+            "col-lg-4 h-400 d-flex flex-column justify-content-center text-center"
+        );
+
+        $z[] = div("", "table_orden_1" );
+        $z[] = btw(
+            div(heading_enid("ORDENAR POR", 4), 4),
+            div(get_criterios_busqueda(), 8),
+            " mb-5"
+        );
+        $z[] = btw(
+            crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada),
+            div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio), "btn_escribir_valoracion"),
+            "contenedor_comentarios"
+        );
+
+        $r[] = div(append($z),8);
+        return append($r);
+
+    }
+
     function get_form_valoracion($servicio, $extra, $id_servicio)
     {
 

@@ -106,7 +106,7 @@ foreach ($info_envio_direccion as $row) {
         ]) ?>
 
         <div class="direccion_principal_c">
-            <?= div("Esta es mi dirección principal", ["class" => "strong"]) ?>
+            <?= div("Esta es mi dirección principal",  "strong") ?>
             <?php
 
             $opt[] = array(

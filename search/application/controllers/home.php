@@ -121,7 +121,7 @@ class Home extends CI_Controller
         $data["filtros"] = $this->get_orden();
         $data["order"] = $data_send["order"];
         $this->create_keyword($param);
-        $this->app->pagina($data, 'home');
+        $this->app->pagina($data, render_search($data),1);
     }
 
     private function set_option($key, $value)

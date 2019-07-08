@@ -7,25 +7,23 @@ foreach ($talla as $row) {
     $clasificacion = $row["clasificacion"];
 }
 
-$msj_exists = heading_enid(
+$str = ($num_clasificaciones > 0) ? heading_enid(
     "CLASIFICACIONES AGREGADAS RECIENTEMENTE",
-    "5"
+    5
     ,
-    ['class' => 'titulo-tags-ingresos']
-);
-
-$msj_clasificaciones = ($num_clasificaciones > 0) ? $msj_exists : "";
+    'titulo-tags-ingresos'
+) : "";
 
 ?>
 <?= div(
     append([
 
-    heading_enid(
-        $tipo,
-        2,
-        'info-tipo-talla'
-    )
-    , $msj_clasificaciones, $clasificaciones_existentes])
+        heading_enid(
+            $tipo,
+            2,
+            'info-tipo-talla'
+        )
+        , $str, $clasificaciones_existentes])
     ,
     "agregadas col-lg-9"
 ) ?>
