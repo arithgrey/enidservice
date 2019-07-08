@@ -1,6 +1,213 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    function render_seguimiento($data)
+    {
+
+        $recibo = $data["recibo"];
+        $es_vendedor = $data["es_vendedor"];
+        $evaluacion = $data["evaluacion"];
+        $status_ventas = $data["status_ventas"];
+        $domicilio = $data["domicilio"];
+        $notificacion_pago = $data["notificacion_pago"];
+        $orden = $data["orden"];
+        $id_servicio = $data["id_servicio"];
+
+        $z[] = format_resumen_seguimiento($recibo, $es_vendedor, $evaluacion, $status_ventas, $domicilio);
+        $z[] = format_heading_orden($recibo, $id_servicio);
+        $z[] = div("", 4);
+        $r[] = div(append($z), "top_50");
+        $r[] = div(heading_enid("También te podría interezar", 3), "col-lg-12 top_50 hidden text_interes");
+        $r[] = div(place("place_tambien_podria_interezar"), "col-lg-12 top_50");
+        $r[] = input_hidden(["value" => $notificacion_pago, "class" => "notificacion_pago"]);
+        $r[] = input_hidden(["value" => $orden, "class" => "orden"]);
+        $r[] = input_hidden(["value" => $id_servicio, "class" => "qservicio"]);
+        return append($r);
+
+
+    }
+
+    function format_resumen_seguimiento($recibo, $es_vendedor, $evaluacion, $status_ventas, $domicilio)
+    {
+
+        $r[] = div(get_motificacion_evaluacion($recibo, $es_vendedor, $evaluacion), 1);
+        $r[] = div(heading_enid("RASTREAR PEDIDO" . icon("fa fa-map-signs"), 3), 1);
+        $r[] = div(create_linea_tiempo($status_ventas, $recibo, $domicilio, $es_vendedor), "timeline top_40", 1);
+
+        return div(append($r), 5);
+
+    }
+
+    function format_heading_orden($recibo, $id_servicio)
+    {
+
+
+        return
+            div(
+
+                btw(
+
+                    heading("ORDEN #" . primer_elemento($recibo, "id_proyecto_persona_forma_pago"), 3)
+
+                    ,
+
+                    anchor_enid(
+
+                        img(
+                            [
+                                "src" => primer_elemento($recibo, "url_img_servicio")
+                            ]
+                        )
+                        ,
+                        get_url_servicio($id_servicio)
+
+                    )
+                    ,
+                    "",
+                    1
+
+                ),
+                3
+            );
+
+
+    }
+
+    function render_domicilio($data)
+    {
+        $recibo = $data["recibo"];
+        $domicilio = $data["domicilio"];
+        $lista_direcciones = $data["lista_direcciones"];
+        $puntos_encuentro = $data["puntos_encuentro"];
+
+        $recibo = $recibo[0];
+        $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
+        $id_servicio = $recibo["id_servicio"];
+        $id_error = "imagen_" . $id_servicio;
+        $tipo_entrega = $recibo["tipo_entrega"];
+
+
+        $r[] = div(
+            div(
+                get_format_pre_orden(
+                    $id_servicio,
+                    $id_error,
+                    $recibo,
+                    $domicilio,
+                    $id_recibo,
+                    $lista_direcciones
+                )
+                ,
+
+                " padding_20 shadow"
+            ),
+            5
+        );
+        $r[] = btw(
+
+            div(get_forms_domicilio_entrega($id_recibo, $lista_direcciones), 6)
+            ,
+            div(get_format_listado_puntos_encuentro($tipo_entrega, $puntos_encuentro, $id_recibo, $domicilio), 6)
+            ,
+
+            7
+        );
+
+        return append($r);
+
+    }
+
+
+    function format_resumen_pedidos($orden)
+    {
+
+        $r[] = div(anchor_enid("MIS PEDIDOS",
+            [
+                "href" => path_enid("pedidos"),
+                "class" => "black underline"
+
+
+            ]), 13);
+        $r[] = div(
+            btw(
+                div(heading_enid("# ORDEN " . $orden, 3), "numero_orden encabezado_numero_orden row")
+                ,
+                div(
+                    icon("fa fa-pencil"),
+                    [
+                        "class" => "text-right editar_estado",
+                        "id" => $orden
+                    ]
+                ),
+                "d-flex align-items-center justify-content-between bottom_30"
+                ,
+                1
+            )
+            ,
+            1
+        );
+        return append($r);
+
+    }
+
+    function format_estados_venta($status_ventas, $recibo, $orden)
+    {
+
+
+        $r[] = btw(
+            div(strong("STATUS DE LA COMPRA"))
+            ,
+            create_select(
+                $status_ventas,
+                "status_venta",
+                "status_venta form-control ",
+                "status_venta",
+                "text_vendedor",
+                "id_estatus_enid_service",
+                1,
+                1,
+                0,
+                "-"
+            )
+            ,
+            "d-flex align-items-center justify-content-between bottom_30", 1
+        );
+        $r[] = place("place_tipificaciones");
+
+
+        $r[] = btw(
+            div(strong("SALDO CUBIERTO "))
+            ,
+            div(
+                btw(
+                    div(input(
+                            [
+                                "class" => "form-control saldo_cubierto_pos_venta",
+                                "id" => "saldo_cubierto_pos_venta",
+                                "type" => "number",
+                                "step" => "any",
+                                "required" => "true",
+                                "name" => "saldo_cubierto",
+                                "value" => $recibo[0]["saldo_cubierto"]
+                            ]
+                        )
+                    ),
+                    div("MXN", "ml-4 mxn ")
+                    ,
+                    "d-flex align-items-center justify-content-between "
+                )
+            )
+            ,
+            "d-flex align-items-center justify-content-between bottom_30 form_cantidad_post_venta top_20", 1
+        );
+        $r[] = place("mensaje_saldo_cubierto_post_venta");
+        $r[] = get_form_cantidad($recibo, $orden);
+        return div(append($r), "selector_estados_ventas top_20 bottom_20");
+
+
+    }
+
     function crea_seccion_solicitud($recibo)
     {
 

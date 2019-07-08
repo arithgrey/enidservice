@@ -3,15 +3,12 @@
         <?= heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO", 3, " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10") ?>
         <?= div(div($leneas_metro, ["class" => "place_lineas col-lg-12"]), 13) ?>
         <?= place("place_estaciones_metro") ?>
-
         <?php if ($primer_registro > 0): ?>
             <?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $servicio]) ?>
             <div class='formulario_quien_recibe display_none'>
                 <?php if ($in_session < 1): ?>
                     <?= div(get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras), "contenedor_eleccion_correo_electronico" ) ?>
-
                 <?php else: ?>
-
                     <?= div(get_form_punto_encuentro_horario([
                         input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro]),
                         input_hidden(["class" => "servicio", "name" => "servicio", "value" => $servicio]),
@@ -20,17 +17,12 @@
                         input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras])
 
                     ]), 8, 1) ?>
-
                 <?php endif; ?>
             </div>
         <?php else: ?>
-
             <?= get_form_quien_recibe($primer_registro, $punto_encuentro, $recibo) ?>
             <?= input_hidden(["class" => "recibo", "name" => "recibo", "value" => $recibo]) ?>
-
         <?php endif; ?>
-
         <?= input_hidden(["class" => "primer_registro", "value" => $primer_registro]) ?>
-
     </div>
 </div>

@@ -198,7 +198,7 @@ class Home extends CI_Controller
             foreach ($nivel as $row) {
 
                 $i = search_bi_array($data, "id_clasificacion", $row);
-                if ($i != false ) {
+                if ($i !== false ) {
 
                     $response[] = $data[$i];
                 }

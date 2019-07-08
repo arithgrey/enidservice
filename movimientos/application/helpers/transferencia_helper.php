@@ -2,6 +2,93 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('render_empresas')) {
+
+        function render_empresas($data)
+        {
+
+            $saldo_disponible =  $data["saldo_disponible"];
+            $r[] = btw(
+                get_format_saldo_disponible($saldo_disponible),
+                div(get_submenu(), "card"),
+                3
+
+            );
+            $r[] = div(place("place_movimientos"), 9);
+            return append($r);
+        }
+    }
+
+    if (!function_exists('render_cuentas_asociadas')) {
+
+        function render_cuentas_asociadas($data)
+        {
+
+            $cuentas_bancarias = $data["cuentas_bancarias"];
+            $tarjetas = $data["tarjetas"];
+
+            $r[] = heading_enid("TUS CUENTAS " . br() . " CUENTAS BANCARIAS", 3);
+            foreach ($cuentas_bancarias as $row):
+                $r[] = div(
+                    append(
+                        [
+                            $row["nombre"],
+                            icon("fa fa-credit-card "),
+                            div(get_resumen_cuenta($row["clabe"]))
+                        ]
+                    )
+                    ,
+                    "info_cuenta top_10"
+                );
+
+            endforeach;
+            $r[] = guardar(
+                "Agregar cuenta " . icon("fa fa-plus-circle ")
+                ,
+                [
+                    "class" => "top_20"
+                ]
+                ,
+
+                1
+                ,
+                1
+                ,
+                0
+                ,
+                "?q=transfer&action=1"
+            );
+
+            $r[] = heading_enid("TARJETAS DE CRÉDITO Y DÉBITO", 3);
+            foreach ($tarjetas as $row):
+                $r[] = div(append([
+                    $row["nombre"],
+                    icon("fa fa-credit-card "),
+                    div(substr($row["numero_tarjeta"], 0, 4) . "********")
+
+                ]), ["class" => "info_cuenta"]);
+            endforeach;
+            $r[] = guardar(
+                "Agregar cuenta " . icon("fa fa-plus-circle ")
+                ,
+                [
+                    "class" => "top_20"
+                ]
+                ,
+                1
+                ,
+                1
+                ,
+                0
+                ,
+                "?q=transfer&action=1&tarjeta=1"
+            );
+
+            return append($r);
+
+        }
+    }
+
     if (!function_exists('get_format_asociar_cuenta_bancaria')) {
 
         function get_format_asociar_cuenta_bancaria()
@@ -101,17 +188,32 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_format_agregar_saldo_cuenta')) {
-        function get_format_agregar_saldo_cuenta()
+    if (!function_exists('render_agregar_saldo_cuenta')) {
+        function render_agregar_saldo_cuenta()
         {
 
             $r[] = heading_enid("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR ", 3);
             $r[] = get_format_pago_efectivo();
             $r[] = get_format_solicitud_amigo();
-            return append($r);
+            return div(append($r), 4, 1);
 
         }
     }
+    if (!function_exists('render_agregar_saldo_oxoo')) {
+        function render_agregar_saldo_oxoo($data)
+        {
+            $id_usuario = $data["id_usuario"];
+            return btw(
+                heading_enid("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR DEPÓSITO DESDE CUALQUIER SUCURSAL OXXO", 3),
+                get_form_pago_oxxo($id_usuario),
+                4, 1
+
+            );
+
+        }
+    }
+
+
     if (!function_exists('get_format_solicitud_amigo')) {
         function get_format_solicitud_amigo()
         {
@@ -166,7 +268,7 @@ if (!function_exists('invierte_date_time')) {
                 "option_ingresar_saldo tipo_pago"
 
             ), [
-                "href" => "?q=transfer&action=7"
+                    "href" => "?q=transfer&action=7"
                 ]
             );
 

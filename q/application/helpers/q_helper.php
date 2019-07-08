@@ -844,19 +844,6 @@ if (!function_exists('invierte_date_time')) {
     function get_valor_fecha_solicitudes($solicitudes, $fecha_actual)
     {
 
-        /*
-        $valor = 0;
-        foreach ($solicitudes as $row) {
-
-            $fecha_registro = $row["fecha_registro"];
-            if ($fecha_registro == $fecha_actual) {
-                $tareas_solicitadas = $row["tareas_solicitadas"];
-                $valor = $tareas_solicitadas;
-                break;
-            }
-        }
-        return $valor;
-        */
         return search_bi_array($solicitudes, "fecha_registro", $fecha_actual, "tareas_solicitadas",0 );
     }
 

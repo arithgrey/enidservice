@@ -5,7 +5,6 @@ class Home extends CI_Controller
     function __construct()
     {
         parent::__construct();
-
         $this->load->helper("pedidos");
         $this->load->library("table");
         $this->load->library(lib_def());
@@ -13,7 +12,6 @@ class Home extends CI_Controller
 
     function index()
     {
-
 
         $param = $this->input->get();
         $data = $this->app->session();
@@ -71,7 +69,7 @@ class Home extends CI_Controller
 
         $response = $this->app->api("recibo/id/format/json/", $q);
 
-        if (is_array($response) && count($response) > 0 & $add_img > 0) {
+        if (es_data($response) && $add_img > 0) {
 
             $response[0]["url_img_servicio"] = $this->app->imgs_productos($response[0]["id_servicio"], 1, 1, 1);
 
@@ -101,8 +99,8 @@ class Home extends CI_Controller
 
     private function get_punto_encuentro($id_recibo)
     {
-        $q["id_recibo"] = $id_recibo;
-        return $this->app->api("proyecto_persona_forma_pago_punto_encuentro/complete/format/json/", $q);
+
+        return $this->app->api("proyecto_persona_forma_pago_punto_encuentro/complete/format/json/", ["id_recibo" => $id_recibo]);
     }
 
     private function get_domicilio_recibo($id_recibo)
@@ -122,9 +120,8 @@ class Home extends CI_Controller
 
     private function get_direccion($id)
     {
-        $q["id_direccion"] = $id;
-        $api = "direccion/data_direccion/format/json/";
-        return $this->app->api($api, $q);
+
+        return $this->app->api("direccion/data_direccion/format/json/", ["id_direccion" => $id]);
     }
 
     private function load_view_domicilios_pedidos($data)
@@ -137,22 +134,19 @@ class Home extends CI_Controller
             "puntos_encuentro" => $this->get_puntos_encuentro($id_usuario)
         ];
 
-        $this->app->pagina($this->app->cssJs($data, "pedidos_domicilios_pedidos"), 'domicilio');
+        $this->app->pagina($this->app->cssJs($data, "pedidos_domicilios_pedidos"), render_domicilio($data), 1);
     }
 
     private function get_direcciones_usuario($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        $api = "usuario_direccion/all/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("usuario_direccion/all/format/json/", ["id_usuario" => $id_usuario]);
     }
 
     private function get_puntos_encuentro($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("usuario_punto_encuentro/usuario/format/json/", $q);
+        return $this->app->api("usuario_punto_encuentro/usuario/format/json/", ["id_usuario" => $id_usuario]);
     }
 
     private function load_view_seguimiento($data, $param, $recibo, $id_recibo)
@@ -175,7 +169,7 @@ class Home extends CI_Controller
 
         }
 
-        $this->app->pagina($data, 'seguimiento');
+        $this->app->pagina($data, render_seguimiento($data),1);
     }
 
     private function get_estatus_enid_service($q = [])
@@ -200,15 +194,15 @@ class Home extends CI_Controller
     private function get_tipificaciones($id_recibo)
     {
 
-        $q["recibo"] = $id_recibo;
-        return $this->app->api("tipificacion_recibo/recibo/format/json/", $q);
+
+        return $this->app->api("tipificacion_recibo/recibo/format/json/", ["recibo" => $id_recibo]);
     }
 
     private function get_ppfp($id_recibo)
     {
 
-        $q["id"] = $id_recibo;
-        return $this->app->api("recibo/id/format/json/", $q);
+
+        return $this->app->api("recibo/id/format/json/", ["id" => $id_recibo]);
 
     }
 
@@ -262,16 +256,14 @@ class Home extends CI_Controller
     private function get_costo_operacion($id_recibo)
     {
 
-        $q["recibo"] = $id_recibo;
-        return $this->app->api("costo_operacion/recibo/format/json/", $q);
+        return $this->app->api("costo_operacion/recibo/format/json/", ["recibo" => $id_recibo]);
 
     }
 
     private function get_tipo_costo_operacion()
     {
 
-        $q["x"] = 1;
-        return $this->app->api("tipo_costo/index/format/json/", $q);
+        return $this->app->api("tipo_costo/index/format/json/", ["x" => 1]);
 
     }
 
@@ -380,24 +372,20 @@ class Home extends CI_Controller
     private function get_recibo_comentarios($id_recibo)
     {
 
-        $q["id_recibo"] = $id_recibo;
-        return $this->app->api("recibo_comentario/index/format/json/", $q);
+        return $this->app->api("recibo_comentario/index/format/json/", ["id_recibo" => $id_recibo]);
 
     }
 
     private function get_recordatorios($id_recibo)
     {
 
-        $q["id_recibo"] = $id_recibo;
-        return $this->app->api("recordatorio/index/format/json/", $q);
+        return $this->app->api("recordatorio/index/format/json/", ["id_recibo" => $id_recibo]);
     }
 
     private function get_num_compras($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("recibo/num_compras_usuario/format/json/", $q);
+        return $this->app->api("recibo/num_compras_usuario/format/json/", ["id_usuario" => $id_usuario]);
 
     }
-
 }
