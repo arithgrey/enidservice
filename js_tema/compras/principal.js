@@ -1,7 +1,6 @@
 "use strict";
 $(document).ready(() => {
 
-
     $(".form_compras").submit(busqueda);
 
 });
