@@ -62,13 +62,7 @@ let retorno =  () =>  {
         case "compras":
 
             set_option("modalidad_ventas", 0);
-            if (get_parameter(".ticket") > 0) {
-                /*Cargo la información del ticket*/
-                inf_ticket();
-            } else {
-                compras_usuario();
-            }
-
+            let fn =  (get_parameter(".ticket") > 0) ? inf_ticket() : compras_usuario();
             break;
 
         default:
@@ -78,9 +72,9 @@ let retorno =  () =>  {
     }
 }
 let alcance_producto =  function (e) {
-    let tipo = get_parameter_enid($(this), "id");
+
     let url = "../q/index.php/api/servicio/alcance_producto/format/json/";
-    let data_send = {tipo: tipo};
+    let data_send = {tipo: get_parameter_enid($(this), "id")};
     request_enid("GET", data_send, url, function (data) {
         redirect("../producto/?producto=" + data);
     });
@@ -100,9 +94,7 @@ let valida_retorno =  () => {
 
             case "ventas":
 
-                $("#mis_compras").tab("show");
-                $("#mis_ventas").tab("show");
-
+                show_tabs(["#mis_compras", "#mis_ventas"]);
                 set_option("modalidad_ventas", 1);
                 set_option("estado_compra", 1);
                 compras_usuario();
@@ -110,8 +102,7 @@ let valida_retorno =  () => {
 
             case "compras":
 
-                $("#mis_ventas").tab("show");
-                $("#mis_compras").tab("show");
+                show_tabs(["#mis_compras", "#mis_ventas"]);
                 set_option("modalidad_ventas", 0);
                 compras_usuario();
 
@@ -131,16 +122,8 @@ let valida_retorno =  () => {
 
             case 2:
 
-                $("#mis_compras").tab("show");
-                $("#mis_ventas").tab("show");
-
+                show_tabs(["#mis_compras", "#mis_ventas"]);
                 inf_ticket();
-
-
-                break;
-
-            case 3:
-
 
                 break;
 

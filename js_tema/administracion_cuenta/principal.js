@@ -4,10 +4,9 @@ $(document).ready(() => {
         set_option("v", 1);
         carga_direccion_usuario();
     });
-
-    $(".f_nombre_usuario").submit(actualiza_nombre_usuario);
+    $(".f_nombre_usuario").submit(u_nombre);
     $(".tab_privacidad_seguridad").click(get_conceptos);
-    $(".nombre_usuario").keyup(quita_espacios_nombre_usuario);
+    $(".nombre_usuario").keyup(elimina_espacio);
     $(".tel2").keyup(() => {
         quita_espacios(".tel2");
     });
@@ -17,7 +16,7 @@ $(document).ready(() => {
     $("#form_update_password").submit(set_password);
     $(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
     $(".form_telefono_usuario").submit(actualiza_telefono);
-    $(".f_telefono_usuario_negocio").submit(set_telefono_usuario_negocio);
+    $(".f_telefono_usuario_negocio").submit(set_tel);
 
 
 });
@@ -67,7 +66,7 @@ let response_registra_direccion_usuario = data => {
     set_option("v", 1);
     carga_direccion_usuario();
 }
-let actualiza_nombre_usuario = e => {
+let u_nombre = e => {
 
     let data_send = $(".f_nombre_usuario").serialize();
     let url = "../q/index.php/api/usuario/nombre_usuario/format/json/";
@@ -86,8 +85,7 @@ let actualiza_telefono = e => {
 
     e.preventDefault();
 }
-let set_telefono_usuario_negocio = e => {
-
+let set_tel = e => {
 
     if (get_parameter(".tel2").length > 4 && get_parameter(".lada2").length > 1) {
 
@@ -98,16 +96,14 @@ let set_telefono_usuario_negocio = e => {
         }, ".registro_telefono_usuario_negocio");
 
     } else {
-        let inputs = [".tel2", ".lada2"];
-        focus_input(inputs);
+
+        focus_input([".tel2", ".lada2"]);
     }
     e.preventDefault();
 }
-let quita_espacios_nombre_usuario = () => {
+let elimina_espacio = function () {
 
-    let nombre_usuario = $(this).val().toLowerCase();
-    $(this).val(quita_espacios_text(nombre_usuario));
-
+    $(this).val(quita_espacios_text($(this).val().toLowerCase()));
 }
 let quita_espacios_text = v => {
 
@@ -124,32 +120,21 @@ let set_password = e => {
     let flag = val_text_form("#password", ".place_pw_1", 7, "Texto ");
     let flag2 = val_text_form("#pw_nueva", ".place_pw_2", 7, "Texto ");
     let flag3 = val_text_form("#pw_nueva_confirm", ".place_pw_3", 7, "Texto ");
-    let n_password = 0;
+    let npw = 0;
 
     if (flag === flag2 && flag === flag3) {
-        /*Ahora validamos que no sean las mismas que la antigua*/
-
-        let n_password = (get_parameter("#password") != get_parameter("#pw_nueva")) ? 1 : 2;
-        if (get_parameter("#password") != get_parameter("#pw_nueva_confirm")) {
-            let n_password = 1;
-        } else {
-            let n_password = 2;
-        }
-
+        let npw = (get_parameter("#password") != get_parameter("#pw_nueva")) ? 1 : 2;
+        npw = (get_parameter("#password") != get_parameter("#pw_nueva_confirm")) ? 1 : 2;
     }
 
-
-    switch (n_password) {
+    switch (npw) {
         case 1:
 
-            let a = get_parameter("#password");
-            let b = get_parameter("#pw_nueva");
-            let c = get_parameter("#pw_nueva_confirm");
+            let anterior = "" + CryptoJS.SHA1(get_parameter("#password"));
+            let nuevo = "" + CryptoJS.SHA1(get_parameter("#pw_nueva"));
+            let confirma = "" + CryptoJS.SHA1(get_parameter("#pw_nueva_confirm"));
+            s_password(anterior, nuevo, confirma);
 
-            let anterior = "" + CryptoJS.SHA1(a);
-            let nuevo = "" + CryptoJS.SHA1(b);
-            let confirma = "" + CryptoJS.SHA1(c);
-            actualiza_password(anterior, nuevo, confirma);
             break;
         case 2:
             render_enid(".msj_password", "La nueva contraseña no puede ser igual a la actual ");
@@ -160,13 +145,13 @@ let set_password = e => {
 
     e.preventDefault();
 }
-let actualiza_password = (anterior, nuevo, confirma) => {
+let s_password = (anterior, nuevo, confirma) => {
 
     let url = "../q/index.php/api/usuario/pass/format/json/";
     let data_send = {"nuevo": nuevo, "anterior": anterior, "confirma": confirma, "type": 2};
-    request_enid("PUT", data_send, url, resp_actualizacion_pass, ".msj_password");
+    request_enid("PUT", data_send, url, r_password, ".msj_password");
 }
-let resp_actualizacion_pass = data => {
+let r_password = data => {
 
     if (data) {
 
