@@ -15,7 +15,7 @@ class Home extends CI_Controller
 
         $data = $this->app->session();
         $this->app->acceso();
-        $this->app->pagina($this->app->cssJs($data, "tiempo_venta"), 'home');
+        $this->app->pagina($this->app->cssJs($data, "tiempo_venta"), render_tv($data),1);
 
     }
 

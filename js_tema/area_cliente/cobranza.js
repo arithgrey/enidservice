@@ -1,13 +1,27 @@
 "use strict";
-let inf_ticket = function (e) {
+let inf_ticket = function (e ){
 
 
     recorre();
     let id_recibo = get_parameter_enid($(this), "id");
 
     if (id_recibo == undefined) {
-        id = (get_parameter(".ticket") != undefined) ? get_parameter(".ticket") : get_option("id_recibo");
+
+
+        if (get_parameter(".ticket") != undefined) {
+
+            id_recibo = get_parameter(".ticket");
+
+        } else {
+
+            id_recibo = get_option("id_recibo");
+
+        }
+
+
     }
+
+
     if (id_recibo > 0) {
 
         set_option("id_recibo", id_recibo);
@@ -21,7 +35,7 @@ let response_carga_info_resumen_pago_pendiente = data => {
 
     $(".resumen_pagos_pendientes").tab("show");
     render_enid(".place_resumen_servicio", data);
-    $(".cancelar_compra").click(conf_cancelacion_compra);
+    $(".cancelar_compra").click(confirmar_cancelacion_compra);
     $(".btn_direccion_envio").click(inf_envio);
 
 }
@@ -29,7 +43,7 @@ let resposponse_confirma_cancelacion = data => {
     render_enid(".place_resumen_servicio", data);
     $(".cancelar_orden_compra").click(cancela_compra);
 }
-let cancela_compra = function () {
+let cancela_compra = function(e){
 
     let id_recibo = get_parameter_enid($(this), "id");
     set_option(id_recibo);
@@ -42,10 +56,9 @@ let response_cancelacion_compra = (data) => {
 
 
     if (get_option("modalidad_ventas") == 1) {
-
-        show_tabs(["#mi_buzon","#mis_ventas"]);
+        $("#mi_buzon").tab("show");
+        $("#mis_ventas").tab("show");
         compras_usuario();
-
     } else {
 
         let id_servicio = data.registro.id_servicio;
@@ -63,7 +76,7 @@ let response_cancelacion_compra = (data) => {
     }
     metricas_perfil();
 }
-let conf_cancelacion_compra = function () {
+let confirmar_cancelacion_compra = function() {
 
     set_option("modalidad_ventas", get_attr(this, "modalidad"));
     set_option("id_recibo", get_attr(this, "id"));

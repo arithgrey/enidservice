@@ -1,1 +1,0 @@
-<?=get_form_tags()?>

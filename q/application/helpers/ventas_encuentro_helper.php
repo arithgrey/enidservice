@@ -143,7 +143,7 @@ if (!function_exists('invierte_date_time')) {
 
         $b = 0;
         $index =  search_bi_array($response, "id_linea_metro",  $id_linea_metro);
-        if ($index !=  false ){
+        if ($index !==  false ){
             $response[$index]["num"] = $response[$index]["num"] + 1;
             $b ++;
         }

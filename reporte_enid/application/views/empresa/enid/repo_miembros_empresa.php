@@ -29,8 +29,7 @@ foreach ($miembros as $row) {
 
 	$lis_miembros .= "<tr>";
 	$lis_miembros .= get_td($idusuario);
-	$lis_miembros .=
-		get_td($nombre . " " . $apellido_paterno . " " . $apellido_materno);
+	$lis_miembros .= get_td($nombre . " " . $apellido_paterno . " " . $apellido_materno);
 	$lis_miembros .= get_td($email);
 	$lis_miembros .= get_td($email_alterno);
 	$lis_miembros .= get_td($tel_contacto);
@@ -49,7 +48,7 @@ foreach ($miembros as $row) {
 }
 
 ?>
-<?= div("# Miembros" . count($miembros), ["class" => 'num_registros_encontrados']) ?>
+<?= div("# Miembros" . count($miembros), 'num_registros_encontrados' ) ?>
 <div <?= $height ?> >
 	<table class='table_enid_service' border=1>
 		<tr class="table_enid_service_header">

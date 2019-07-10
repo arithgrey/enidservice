@@ -1,6 +1,68 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function render_search($data)
+    {
+
+        $filtros  = $data["filtros"];
+        $order  = $data["order"];
+        $paginacion  = $data["paginacion"];
+        $is_mobile = $data["is_mobile"];
+        $lista_productos = $data["lista_productos"];
+        $q = $data["q"];
+        $categorias_destacadas = $data["categorias_destacadas"];
+        $busqueda = $data["busqueda"];
+        $num_servicios = $data["num_servicios"];
+        $bloque_busqueda = $data["bloque_busqueda"];
+
+        $x = [];
+        $x[] = get_format_filtros_paginacion($filtros, $order, $paginacion, $is_mobile);
+        $x[] = append($lista_productos);
+
+        $r[] = val_principal_img($q);
+        $r[] = div(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 'contenedor_anuncios_home');
+
+
+        $z = [];
+        $z[] = heading("FILTRA TU BÚSQUEDA"
+            .
+            small($busqueda . "(" . $num_servicios . "PRODUCTOS)")
+            ,
+            3,
+            ["class" => "text_filtro bg_black"]);
+        $z[] = get_formar_menu_sugerencias($is_mobile, $bloque_busqueda, $busqueda);
+
+        $fil[] = div(div(append($z), 10, 1), 3);
+        $fil[] = btw(
+
+            div(append($x), 12)
+            ,
+            div($paginacion, 12)
+            ,
+            9
+        );
+
+        $r[] = div(append($fil), "row mt-3");
+
+
+        $cat[] = div("", 2);
+        $cat[] = div(btw(
+            heading(
+                "CATEGORIAS DESTACADAS",
+                3
+            )
+            ,
+            div(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)), 1)
+            ,
+            ""
+        ), 10);
+
+        $r[] = append($cat, ["class" => "row white top_30", "style" => "background:  #080221;"]);
+        return append($r);
+
+
+    }
+
     function get_format_sin_resultados()
     {
         $r[] = heading_enid("NO HAY PRODUCTOS QUE COINCIDAN CON TU BÚSQUEDA", 3, "info_sin_encontrar");
@@ -174,7 +236,7 @@ if (!function_exists('invierte_date_time')) {
             $response = div($response, ["class" => 'contenedor_menu_productos_sugeridos']);
 
         }
-        return div($response,  "border-right padding_5");
+        return div($response, "border-right padding_5");
     }
 
     function crea_sub_menu_categorias_destacadas($param)
@@ -182,7 +244,6 @@ if (!function_exists('invierte_date_time')) {
         $z = 0;
         $response = [];
         foreach ($param as $row) {
-
 
 
             if ($z == 0) {
@@ -221,7 +282,6 @@ if (!function_exists('invierte_date_time')) {
 
 
             }
-
 
 
             $response[$z]["primer_nivel"] = $primer_nivel;

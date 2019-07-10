@@ -1,6 +1,39 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    if (!function_exists('render_empleo')) {
+
+        function render_empleo()
+        {
+
+
+            $z[] = div("", 2);
+            $z[] = div(heading_enid(
+                "Estamos en búsqueda de 4 talentos con experiencia en ventas.",
+                3),
+                8
+            );
+            $z[] = hr();
+            $z[] = div(icon("fa fa-usd "), 2);
+            $z[] = div("", 2);
+            $z[] = div(get_format_descripction(), 8);
+            $z[] = div("", 2);
+            $z[] = hr();
+
+            $r[] = place("info_articulo", ["id" => 'info_articulo']);
+            $r[] = div(append($z), ["class" => "tab-pane active text-style", "id" => "tab2"]);
+
+
+            $response[] = div(get_format_temas_ayuda(), 2);
+            $response[] = div(div(append($r),"tab-content"),10);
+            return append($response);
+
+
+        }
+
+    }
+
     if (!function_exists('get_format_descripction')) {
 
         function get_format_descripction()

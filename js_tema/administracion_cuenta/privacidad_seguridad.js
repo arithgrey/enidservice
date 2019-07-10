@@ -10,15 +10,13 @@ let r_conceptos = data => {
     $(".concepto_privacidad").click(u_conceptos_privacidad);
 
 }
-let u_conceptos_privacidad = function (e) {
+let u_conceptos_privacidad = e => {
 
-    let data_send = {
-        "concepto": get_parameter_enid($(this), "id"),
-        "termino_asociado": get_attr(this, "termino_asociado")
-    };
-    
+    let concepto = get_parameter_enid($(this), "id");
+    let termino_asociado = get_attr(this, "termino_asociado");
+    let data_send = {"concepto": concepto, "termino_asociado": termino_asociado};
     let url = "../q/index.php/api/privacidad_usuario/index/format/json/";
-    request_enid("PUT", data_send, url, get_conceptos, ".place_registro_conceptos", () => {
+    request_enid("PUT", data_send, url, get_conceptos, ".place_registro_conceptos", function () {
         seccess_enid(".place_registro_conceptos", "Terminos de privacidad actualizados!")
     });
 }

@@ -58,21 +58,24 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 ?>
 <?= n_row_12() ?>
     <div class="product-detail contenedor_info_producto mt-5">
-        <div class="col-lg-6 left-col contenedor_izquierdo">
-            <?= btw(
+
+
+        <?=
+        div(
+            btw(
 
                 div($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"])
                 ,
-                div(div($imagenes["imagenes_contenido"],  "tab-content" ), "big" )
+                div(div($imagenes["imagenes_contenido"], "tab-content"), "big")
                 ,
                 ""
                 ,
                 1
-            ) ?>
-        </div>
+            ), "col-lg-6 left-col contenedor_izquierdo") ?>
+
 
         <?= div(
-                get_contenedor_central(
+            get_contenedor_central(
                 $proceso_compra,
                 $id_servicio,
                 $tiempo_entrega,
@@ -85,7 +88,7 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
                 $desc_web,
                 $telefono_visible
 
-        ), 3
+            ), 3
         ) ?>
 
         <div class="col-lg-3  border shadow">
@@ -93,25 +96,25 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
                 <?php if ($existencia > 0): ?>
 
                     <?= get_format_venta_producto(
-                            $boton_editar,
-                            $estrellas,
-                            $nombre_producto,
-                            $nuevo_nombre_servicio,
-                            $flag_servicio,
-                            $existencia,
-                            $id_servicio,
-                            $in_session,
-                            $q2,
-                            $precio,
-                            $id_ciclo_facturacion,
-                            $tallas,
-                            $texto_en_existencia,
-                            $entregas_en_casa,
-                            $proceso_compra,
-                            $telefono_visible,
-                            $usuario,
-                            $venta_mayoreo,
-                            $deseado) ?>
+                        $boton_editar,
+                        $estrellas,
+                        $nombre_producto,
+                        $nuevo_nombre_servicio,
+                        $flag_servicio,
+                        $existencia,
+                        $id_servicio,
+                        $in_session,
+                        $q2,
+                        $precio,
+                        $id_ciclo_facturacion,
+                        $tallas,
+                        $texto_en_existencia,
+                        $entregas_en_casa,
+                        $proceso_compra,
+                        $telefono_visible,
+                        $usuario,
+                        $venta_mayoreo,
+                        $deseado) ?>
 
                 <?php else: ?>
                     <?= get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio) ?>
@@ -120,7 +123,7 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
             <?php else: ?>
 
                 <div class="card box-shadow">
-                    <?= div(heading_enid(substr(strtoupper($nombre_servicio), 0, 70), 1),  "card-header top_20") ?>
+                    <?= div(heading_enid(substr(strtoupper($nombre_servicio), 0, 70), 1), "card-header top_20") ?>
                     <?= heading_enid(
                         valida_text_servicio(
                             $flag_servicio,

@@ -6,16 +6,16 @@ $(document).ready(() => {
 
 });
 let muestra_opciones = function() {
-
+    let id = get_parameter_enid($(this), "id");
     $(".text_selector").hide();
-    switch (get_parameter_enid($(this), "id")) {
+    switch (id) {
 
-        case 1:
+        case "1":
 
             showonehideone(".contenedor_eleccion_correo_electronico", ".contenedor_eleccion");
 
             break;
-        case 2:
+        case "2":
 
             showonehideone(".contenedor_eleccion_whatsapp", ".contenedor_eleccion");
             break;
@@ -33,8 +33,8 @@ let envia_correo = e => {
 
     if (nombre.length > 5 && correo.length > 5) {
 
-        let pw = "" + CryptoJS.SHA1(randomString(8));
-        let data_send = $(".form_correo").serialize() + "&" + $.param({"password": pw});
+        let password = "" + CryptoJS.SHA1(randomString(8));
+        let data_send = $(".form_correo").serialize() + "&" + $.param({"password": password});
         let url = "../q/index.php/api/usuario/vendedor/format/json/";
         bloquea_form(".form_correo");
         request_enid("POST", data_send, url, r_send_email);
@@ -63,11 +63,11 @@ let envia_whatsapp = (e) => {
         request_enid("POST", data_send, url, r_send_whatsApp);
 
     } else {
-
         let inputs = [".tel", ".nombre_whatsapp"];
         focus_input(inputs);
 
     }
+
     e.preventDefault();
 };
 let r_send_whatsApp = data => {

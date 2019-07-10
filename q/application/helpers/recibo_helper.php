@@ -10,10 +10,6 @@ if (!function_exists('invierte_date_time')) {
         foreach ($data as $row) {
 
             $response[$a] = $row;
-            /*
-            $index = search_bi_array($servicios, "id_servicio", $row["id_servicio"]);
-            $solicitudes = ($index !== false) ? $servicios[$index]["total"] : 0;
-            */
             $solicitudes  = search_bi_array($servicios, "id_servicio", $row["id_servicio"], "total",0);
             $response[$a]["solicitudes"] = $solicitudes;
             $porcentaje = porcentaje_total($row["total"], $solicitudes);

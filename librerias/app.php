@@ -162,7 +162,7 @@ class app extends CI_Controller
     function acceso()
     {
 
-        $fn = ($this->is_logged_in() > 0) ? "" : $this->logout();
+        $fn = ($this->is_logged_in() > 0) ? "" : $this->out();
     }
 
     function pagina($data, $center_page, $pagina_base = 0)
@@ -237,7 +237,7 @@ class app extends CI_Controller
         return $data;
     }
 
-    function cSSJs($data, $key)
+    function cSSJs($data, $key='')
     {
 
         $response = [
@@ -921,16 +921,6 @@ class app extends CI_Controller
 
                 ]
             ,
-            "movimientos_saldo_oxxo" =>
-                [
-                    "js" =>
-                        [
-                            base_url('application/js/solicitud_oxxo.js')
-
-                        ]
-
-                ],
-
             "utilidades" =>
                 [
 

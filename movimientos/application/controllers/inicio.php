@@ -47,11 +47,12 @@ class Inicio extends CI_Controller
 
                     break;
                 case 6:
-                    $this->app->pagina($data, 'agregar_saldo');
+                    $this->app->pagina($data, render_agregar_saldo_cuenta(),1);
+
                     break;
                 case 7:
 
-                    $this->agrega_saldo_oxxo($data);
+                    $this->app->pagina($data , render_agregar_saldo_oxoo($data) , 1);
                     break;
 
                 case 8:
@@ -86,12 +87,15 @@ class Inicio extends CI_Controller
 
         $param = $this->input->get();
         $data["saldo_disponible"] = $this->get_saldo_usuario($id_usuario);
-        $q["id_usuario"] = $id_usuario;
-        $q["id_usuario_venta"] = $param["operacion"];
-        $q["id_recibo"] = $param["recibo"];
+        $q  = [
+            "id_usuario" => $id_usuario,
+            "id_usuario_venta" => $param["operacion"],
+            "id_recibo" => $param["recibo"],
+        ];
+
         $data["recibo"] = $this->get_recibo_por_pagar($q);
 
-        if ($data["recibo"]["cuenta_correcta"] == 1) {
+        if (search_bi_array($data,"recibo","cuenta_correcta","cuenta_correcta" ,0 ) >  0  ) {
 
             $this->app->pagina($data, 'pagar_con_saldo_enid');
 
@@ -101,13 +105,6 @@ class Inicio extends CI_Controller
 
         }
     }
-
-    private function agrega_saldo_oxxo($data)
-    {
-
-        $this->app->pagina($this->app->cssJs($data, "movimientos_saldo_oxxo") , 'agregar_saldo_desde_oxxo');
-    }
-
     private function crea_cuenta($id_usuario)
     {
 
@@ -133,10 +130,13 @@ class Inicio extends CI_Controller
     private function load_view_cuentas_asociadas($data, $param, $id_usuario)
     {
 
-        $data["cuentas_bancarias"] = $this->get_cuentas_usuario($id_usuario, 0);
-        $data["tarjetas"] = $this->get_cuentas_usuario($id_usuario, 1);
-        $data["css"] = ["cuentas_asociadas.css"];
-        $this->app->pagina($data, 'cuentas_asociadas');
+        $data +=  [
+            "cuentas_bancarias" => $this->get_cuentas_usuario($id_usuario, 0),
+            "tarjetas" => $this->get_cuentas_usuario($id_usuario, 1),
+            "css" => ["cuentas_asociadas.css"]
+        ];
+
+        $this->app->pagina($data, render_cuentas_asociadas($data) , 1 );
     }
 
     private function load_metodos_transferencia($data, $param, $id_usuario)
@@ -168,7 +168,7 @@ class Inicio extends CI_Controller
         $data["error"] =  (get_param_def($prm, "error") > 0) ?  1 : 0;
         $data["seleccion"] = get_param_def($param, "seleccion");
 
-        $this->app->pagina($data, 'metodos_disponibles');
+        $this->app->pagina($data, render_metodos_disponibles($data) ,1 );
 
     }
 
@@ -177,7 +177,7 @@ class Inicio extends CI_Controller
 
         $data["saldo_disponible"] = $this->get_saldo_usuario($id_usuario);
         $data = $this->app->cssJs($data, "movimientos_general");
-        $this->app->pagina($data, 'empresas_enid');
+        $this->app->pagina($data, render_empresas($data),1);
 
     }
 

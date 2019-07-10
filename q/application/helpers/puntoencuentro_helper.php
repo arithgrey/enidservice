@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
 
             $index =  search_bi_array($lista_negra, "id_punto_encuentro", $id);
 
-            if ($index != false){
+            if ($index !== false){
 
                 $l[] = ajustar(div($nombre,
                     [
@@ -60,7 +60,7 @@ if (!function_exists('invierte_date_time')) {
 
             $index =  search_bi_array($lista_negra, "id_punto_encuentro", $id);
 
-            if ($index != false){
+            if ($index !== false){
 
                 $negra[] = div($nombre,
                     [

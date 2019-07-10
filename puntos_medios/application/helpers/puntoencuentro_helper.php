@@ -1,6 +1,55 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function render_pm($data)
+    {
+
+        $leneas_metro = $data["leneas_metro"];
+        $primer_registro = $data["primer_registro"];
+        $servicio = $data["servicio"];
+        $in_session = $data["in_session"];
+        $num_ciclos = $data["num_ciclos"];
+        $carro_compras = $data["carro_compras"];
+        $id_carro_compras = $data["id_carro_compras"];
+        $punto_encuentro = $data["punto_encuentro"];
+
+
+        $r[] = heading_enid("IDENTIFICA TU PUNTO MÁS CERCANO", 3, " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10");
+        $r[] = div(div($leneas_metro, ["class" => "place_lineas col-lg-12"]), 13);
+        $r[] = place("place_estaciones_metro");
+        if ($primer_registro > 0) {
+            $r[] = input_hidden(["name" => "servicio", "class" => "servicio", "value" => $servicio]);
+
+            if ($in_session < 1) {
+
+                $z[] = div(get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras), "contenedor_eleccion_correo_electronico");
+
+            } else {
+
+                $z[] = div(get_form_punto_encuentro_horario([
+                    input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro]),
+                    input_hidden(["class" => "servicio", "name" => "servicio", "value" => $servicio]),
+                    input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]),
+                    input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]),
+                    input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras])
+
+                ]), 8, 1);
+            }
+
+            $r[] = div(append($z), 'formulario_quien_recibe display_none');
+
+        } else {
+
+            $recibo = $data["recibo"];
+            $r[] = get_form_quien_recibe($primer_registro, $punto_encuentro, $recibo);
+            $r[] = input_hidden(["class" => "recibo", "name" => "recibo", "value" => $recibo]);
+        }
+        $r[] = input_hidden(["class" => "primer_registro", "value" => $primer_registro]);
+
+        return div(div(append($r), 8, 1), 13);
+
+    }
+
     function get_format_pagina_form_horario($recibo, $punto_encuentro)
     {
 
@@ -150,7 +199,6 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
 
     }
-
 
 
     function get_form_quien_recibe($primer_registro, $punto_encuentro, $recibo)

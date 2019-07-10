@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
 
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_linea_metro", $id);
-            if ($index != false) {
+            if ($index !== false ) {
 
 
                 $img =
@@ -49,14 +49,10 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = heading_enid("LINEAS DE METRO DISPONIBLES",3);
         $response[] = append($r);
-
         $response[] = br(7);
         $response[] = hr();
         $response[] = heading_enid("LINEAS DE METRO EN PAUSA",3);
-
         $response[] = append($negra);
-
-
         return append($response);
     }
 
@@ -69,7 +65,7 @@ if (!function_exists('invierte_date_time')) {
 
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_linea_metro", $id);
-            if ($index != false) {
+            if ($index !== false) {
 
 
                 $img =

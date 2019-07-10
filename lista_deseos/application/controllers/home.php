@@ -14,17 +14,18 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session();
-        $q = (get_param_def($this->input->get(), "q") === "preferencias") ? $this->load_preferencias($data) : $this->load_lista_deseos($data);
+        $q = (get_param_def($this->input->get(), "q") === "preferencias") ? $this->render_preferencias($data) : $this->load_lista_deseos($data);
 
     }
 
-    private function load_preferencias($data)
+    private function render_preferencias($data)
     {
 
-        $data["preferencias"] = $this->get_preferencias($data["id_usuario"]);
-        $data["tmp"] = get_format_preferencias();
-        $data = $this->app->cssJs($data, "lista_deseos_preferencias");
-        $this->app->pagina($data, 'home_preferencias');
+        $data += [
+            "preferencias" => $this->get_preferencias($data["id_usuario"]),
+            "tmp" => get_format_preferencias()
+        ];
+        $this->app->pagina($this->app->cssJs($data, "lista_deseos_preferencias"), render_deseos($data), 1);
     }
 
     private function load_lista_deseos($data)

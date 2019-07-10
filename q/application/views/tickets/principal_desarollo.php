@@ -25,23 +25,24 @@ foreach ($info_tickets as $row) {
     ?>
     <div class="popup-box chat-popup" id="qnimate">
         <div class="popup-head">
-            <div class="popup-head-left pull-left">
-                <?= get_img_usuario($id_usuario) ?>
-                <?= div($asunto) ?>
-                <?= div("#Tareas pendientes:" . $num_tareas_pendientes,
-                    $tareas_pendientes,
-                    ["class" => "cursor_pointer"]) ?>
-            </div>
-            <div class="dropdown pull-right">
-                <?= guardar(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]) ?>
-                <?= div(
-                        anchor_enid("CERRAR TICKET",
+
+            <?php $t[] = get_img_usuario($id_usuario) ?>
+            <?php $t[] = div($asunto) ?>
+            <?php $t[] = div("#Tareas pendientes:" . $num_tareas_pendientes,
+                $tareas_pendientes,
+                ["class" => "cursor_pointer"]) ?>
+
+            <?= div(append($t), "popup-head-left pull-left") ?>
+            <?php $z[] = guardar(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]) ?>
+            <?php $z[] = div(
+                anchor_enid("CERRAR TICKET",
                     [
                         "class" => "cerrar_ticket",
                         "onClick" => "cerrar_ticket({$id_ticket})"
                     ]
-                        ), "dropdown-menu acciones_ticket" ); ?>
-            </div>
+                ), "dropdown-menu acciones_ticket"); ?>
+
+            <?= div(append($z), "dropdown pull-right") ?>
         </div>
     </div>
     <?php

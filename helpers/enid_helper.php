@@ -855,7 +855,11 @@ if (!function_exists('porcentaje_total')) {
     function porcentaje_total($cantidad, $total, $decimales = 2)
     {
 
-        return $cantidad * 100 / $total;
+        if ($total  > 0 ){
+
+            return $cantidad * 100 / $total;
+        }
+
 
     }
 }

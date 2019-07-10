@@ -14,7 +14,7 @@ class Inicio extends CI_Controller
     {
 
         $data = $this->app->session();
-        $param =  $this->input->get();
+        $param = $this->input->get();
 
         $data["num_departamento"] = $this->get_id_departamento_by_id_perfil($this->app->getperfiles(2, "idperfil"));
         $data["departamentos"] = $this->get_departamentos_enid();
@@ -25,7 +25,7 @@ class Inicio extends CI_Controller
 
         $data["activa"] = ($activa === "") ? 1 : $activa;
         $data = $this->app->cssJs($data, "desarrollo");
-        $this->app->pagina($data, 'empresas_enid');
+        $this->app->pagina($data, render_ticket_empresa($data), 1);
 
     }
 
