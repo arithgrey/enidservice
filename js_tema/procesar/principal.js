@@ -1,24 +1,27 @@
 "use strict";
 $(document).ready(() => {
 
-    $(".base_compras").hide();
-    $(".nav-sidebar").hide();
-    $(".base_paginas_extra").hide();
+    despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
     recorre(".contenedor_compra");
+
     $(".form-miembro-enid-service").submit(registro);
     $(".form-cotizacion-enid-service").submit(solicitud_cotizacion);
     $(".form_cotizacion_enid_service").submit(registro_cotizacion);
 
-    set_option("plan", $(".plan").val());
-    set_option("dominio", $(".dominio").val());
-    set_option("num_ciclos", $(".num_ciclos").val());
-    set_option("ciclo_facturacion", $(".ciclo_facturacion").val());
-    set_option("descripcion_servicio", $(".resumen_producto").val());
+    set_option({
+
+        "plan": $(".plan").val(),
+        "dominio": $(".dominio").val(),
+        "num_ciclos": $(".num_ciclos").val(),
+        "ciclo_facturacion": $(".ciclo_facturacion").val(),
+        "descripcion_servicio": $(".resumen_producto").val(),
+    });
+
 
     $(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
     $(".telefono").keyup(quita_espacios_en_telefono);
     $(".link_acceso").click(set_link);
-    $(".email").keyup(function () {
+    $(".email").keyup(() => {
         sin_espacios(".email");
     });
 
@@ -29,13 +32,16 @@ let registro = (e) => {
 
 
     let flag = 0;
-    let clases = [".form-miembro-enid-service .telefono", ".form-miembro-enid-service .email", ".form-miembro-enid-service .password", ".form-miembro-enid-service .nombre"];
+    let clases = [
+        ".form-miembro-enid-service .telefono",
+        ".form-miembro-enid-service .email",
+        ".form-miembro-enid-service .password",
+        ".form-miembro-enid-service .nombre"
+    ];
 
-    for (var x in clases) {
-
-        $(clases[x]).removeClass("focus_error");
-
-    }
+    clases.forEach(function (element) {
+        $(element).removeClass("focus_error");
+    });
 
     if (get_parameter(".form-miembro-enid-service .telefono").length < 8) {
         $(".form-miembro-enid-service .telefono").addClass("focus_error");
@@ -76,11 +82,14 @@ let registro = (e) => {
                     let pw = $.trim($(".password").val());
                     let pwpost = "" + CryptoJS.SHA1(pw);
 
-                    set_option("email", $(".email").val());
-                    set_option("nombre", $(".nombre").val());
-                    set_option("telefono", $(".telefono").val());
-                    set_option("usuario_referencia", $(".q2").val());
-                    set_option("talla", $(".talla").val());
+                    set_option({
+                        "email": $(".email").val(),
+                        "nombre": $(".nombre").val(),
+                        "telefono": $(".telefono").val(),
+                        "usuario_referencia": $(".q2").val(),
+                        "talla": $(".talla").val(),
+                    });
+
                     let data_send = {
                         "password": pwpost,
                         "email": get_option("email"),
@@ -156,8 +165,7 @@ let solicitud_cotizacion = e => {
                     recorre(".contenedor_formulario_compra");
                     bloquea_form(".form-cotizacion-enid-service");
                     let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
-                    let pw = $.trim($(".password").val());
-                    let pwpost = "" + CryptoJS.SHA1(pw);
+                    let pwpost = "" + CryptoJS.SHA1($.trim($(".password").val()));
 
                     set_option("email", $(".email").val());
                     set_option("nombre", $(".nombre").val());
@@ -197,13 +205,9 @@ let registro_cotizacion = (e) => {
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
     bloquea_form(".form_cotizacion_enid_service");
     request_enid("POST", data_send, url, respuesta_proceso_usuario_activo, ".place_config_usuario");
-
     e.preventDefault();
 
-
 }
-
-
 let before_registro_afiliado = () => {
 
     bloquea_form(".form-miembro-enid-service");
@@ -219,7 +223,8 @@ let respuesta_registro = (data) => {
         if (data.usuario_existe > 0) {
 
             flex(".usuario_existente");
-            $(".place_registro_afiliado").empty();
+            empty_elements(".place_registro_afiliado")
+
             recorre(".usuario_existente");
             $(".informacion_extra").show();
 
@@ -230,6 +235,7 @@ let respuesta_registro = (data) => {
         }
 
     } else {
+
         redirect("../");
     }
 
@@ -256,7 +262,9 @@ let procesar_pedido_usuario_activo = () => {
         "carro_compras": get_parameter(".carro_compras"),
     };
 
-    request_enid("POST", data_send, url, () => { redirect("../area_cliente/?action=compras"); } ,0, before_pedido_activo);
+    request_enid("POST", data_send, url, () => {
+        redirect("../area_cliente/?action=compras");
+    }, 0, before_pedido_activo);
 
 }
 
@@ -275,11 +283,10 @@ let respuesta_proceso_usuario_activo = (data) => {
 }
 let quita_espacios_en_telefono = () => {
 
-    let valor = get_parameter(".telefono");
-    let nuevo = quitar_espacios_numericos(valor);
-    $(".telefono").val(nuevo);
+    $(".telefono").val(quitar_espacios_numericos(get_parameter(".telefono")));
+
 }
-let set_link = function() {
+let set_link = function () {
 
     let plan = get_parameter_enid($(this), "plan");
     let extension_dominio = get_parameter_enid($(this), "extension_dominio");

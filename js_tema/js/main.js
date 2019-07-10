@@ -24,8 +24,18 @@ $("footer").ready(() => {
 
 
 });
-let set_option = (key, value) => {
-    option[key] = value;
+let set_option = (key, value = 0) => {
+
+    if (isArray(key)) {
+
+
+    } else if (isJson(key)) {
+
+    } else {
+
+        option[key] = value;
+    }
+
 }
 let get_option = key => {
 
@@ -414,9 +424,10 @@ let despliega = (array, tipo = 1) => {
     let display = (tipo > 0) ? "block" : "none";
     if (isArray(array)) {
 
-        for (let x in array) {
-            $(array[x]).css("display", display);
-        }
+        array.forEach(function(element) {
+            $(element).css("display", display);
+        });
+
     } else {
 
         $(array).css("display", display);
@@ -429,11 +440,9 @@ let empty_elements = (array) => {
 
     if (isArray(array)) {
 
-        for (let x in array) {
-
-            $(array[x]).empty();
-        }
-
+        array.forEach(function(element) {
+            $(element).empty();
+        });
     } else {
 
         $(array).empty();
@@ -645,6 +654,7 @@ let bloquea_form = form => $("*", form).prop('disabled', true);
 let is_mobile = () => get_option("is_mobile");
 
 let isArray = (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
+let isJson = (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Json]';
 
 /*Regresa el valor que esta en el nodo html*/
 let get_parameter = (element, parse_int = 0) => (parse_int < 1) ? $(element).val() : parseInt($(element).val());
@@ -692,8 +702,6 @@ let set_places = () => {
 
 }
 /*AQUÍ TERMINAN LAS PORQUERIAS*/
-
-
 let submit_enid = (form) => {
 
     $(form).submit();
@@ -701,13 +709,11 @@ let submit_enid = (form) => {
 let show_tabs = (str, tipo = 1) => {
 
     let type = (tipo > 0) ? "show" : "hide";
-
     if (isArray(str)) {
 
-        for (const i in str) {
-
-            $(input[i]).tab(type);
-        }
+        str.forEach(function(element) {
+            $(element).tab(type);
+        });
 
     } else {
 

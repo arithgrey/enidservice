@@ -27,7 +27,6 @@ let registra_valoracion = (e) => {
         $(".place_registro_valoracion").empty();
         recorre(".place_valoraciones");
         bloquea_form(".form_valoracion");
-
         request_enid("POST", data_send, url, response_registro_valoracion, ".place_registro_valoracion");
     }
     e.preventDefault();
@@ -35,12 +34,8 @@ let registra_valoracion = (e) => {
 
 let response_registro_valoracion = data => {
 
-    debugger;
-    if (data > 0) {
+    let fn = (data > 0) ? redirect("../pregunta/?action=hechas&id=" + data + "&#pregunta86") : "";
 
-        let url = "../pregunta/?action=hechas&id=" + data + "&#pregunta86";
-        redirect(url);
-    }
 }
 
 let before_registro_valoracion = () => {
@@ -61,10 +56,11 @@ let response_carga_productos_sugeridos = (data) => {
     if (data.sugerencias == undefined && data.sugerencias != 0) {
 
         render_enid(".place_tambien_podria_interezar", data);
+
     }
 }
 
-let carga_valoraciones =  () => {
+let carga_valoraciones = () => {
 
     let url = "../q/index.php/api/valoracion/articulo/format/json/";
     let data_send = {"id_servicio": get_option("servicio"), "respuesta_valorada": get_option("respuesta_valorada")};
@@ -88,7 +84,7 @@ let response_carga_valoraciones = (data) => {
 
 }
 
-let ordenar_valoraciones =  function(e) {
+let ordenar_valoraciones = function (e) {
 
     let tipo_ordenamiento = get_parameter_enid($(this), "id");
     let div = $(".contenedor_global_recomendaciones");

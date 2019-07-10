@@ -1,47 +1,44 @@
-$(document).ready(function(){
+$(document).ready(() => {
 
     $(".form_tags").submit(parsea_text);
 
-
-
 });
-let parsea_text =  (e) =>  {
+let parsea_text = (e) => {
 
     $(".texto_convertido").empty();
-    let text =  get_parameter(".tags_text");
-    if (text.length >  10 ){
+    let text = get_parameter(".tags_text");
+    if (text.length > 10) {
 
 
         $(".notificacion_tags").empty();
-        let arrayText =  text.split(" ");
-        let texto_tags_array =  [];
-        let texto =  "";
-        for (var a in arrayText ){
+        let arrayText = text.split(" ");
+        let texto_tags_array = [];
+        let texto = "";
+        for (var a in arrayText) {
 
-            let  tag ="#"+arrayText[a].trim();
+            let tag = "#" + arrayText[a].trim();
 
-            if(texto_tags_array.indexOf(tag) == -1 && tag.length >  3 ){
+            if (texto_tags_array.indexOf(tag) == -1 && tag.length > 3) {
 
                 texto_tags_array.push(tag);
-                texto +=  tag + "<br>";
+                texto += tag + "<br>";
             }
         }
 
-        if (texto.length > 6){
+        if (texto.length > 6) {
 
 
-            let nuevo  = "<button class='btn btn-info copy_text pull-right' data-clipboard-action='copy' data-clipboard-target='#copy-target'>Copiar</button>" + "<div id='copy-target'>"+ texto+ "</div>";
+            let nuevo = "<button class='btn btn-info copy_text pull-right' data-clipboard-action='copy' data-clipboard-target='#copy-target'>Copiar</button>" + "<div id='copy-target'>" + texto + "</div>";
             $(".texto_convertido").addClass("shadow padding_10  cursor_pointer");
-            render_enid(".texto_convertido" , nuevo);
+            render_enid(".texto_convertido", nuevo);
             $(".copy_text").click(copia_texto);
 
         }
 
 
+    } else {
 
-    }else{
-
-        format_error(".notificacion_tags", "INGRESA TEXTO A CONVERTIR" );
+        format_error(".notificacion_tags", "INGRESA TEXTO A CONVERTIR");
 
     }
 
