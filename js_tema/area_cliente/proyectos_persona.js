@@ -38,9 +38,9 @@ let r_compras_usuario = function (data) {
     render_enid(place, data);
     $(".solicitar_desarrollo").click(function (e) {
 
-        let id_proyecto = get_parameter_enid($(this), "id");
-        set_option("id_proyecto", id_proyecto);
+        set_option("id_proyecto", get_parameter_enid($(this), "id"));
         tikets_usuario_servicio();
+
     });
     $(".form_q_servicios").submit();
     $(".resumen_pagos_pendientes").click(inf_ticket);
@@ -49,16 +49,13 @@ let r_compras_usuario = function (data) {
 }
 let inf_envio = function (e) {
 
-    let id_recibo = get_parameter_enid($(this), "id");
-    set_option("recibo", id_recibo);
+    set_option("recibo", get_parameter_enid($(this), "id"));
     inf_envio_complete();
 }
 let compras_ventas_concluidas = () => {
 
-    let modalidad = get_option("modalidad_ventas");
-    let page = get_option("page");
     let url = "../q/index.php/api/recibo/compras_efectivas/format/json/";
-    let data_send = {"modalidad": modalidad, "page": page};
+    let data_send = {"modalidad": get_option("modalidad_ventas"), "page": get_option("page")};
     request_enid("GET", data_send, url, r_compras_ventas_concluidas);
 }
 let r_compras_ventas_concluidas = (data) => {
@@ -73,7 +70,6 @@ let r_compras_ventas_concluidas = (data) => {
         compras_ventas_concluidas();
         e.preventDefault();
     });
-
     recorre(place);
 
 }
