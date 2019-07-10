@@ -40,8 +40,10 @@ let response_opcion_entrega = (data) => {
 };
 let agrega_lista_deseos = () => {
 
-    let servicio = get_parameter(".form_pre_pedido_contact  .servicio");
-    let data_send = {servicio: servicio};
+
+    let data_send = {
+        servicio: get_parameter(".form_pre_pedido_contact  .servicio")
+    };
     let url = "../q/index.php/api/usuario_deseo/servicio/format/json/";
     request_enid("POST", data_send, url, response_lista_deseos)
 }

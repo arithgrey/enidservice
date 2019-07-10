@@ -9,7 +9,6 @@ let carga_form_img = () => {
 }
 let response_cargar_form = data => {
 
-    
     render_enid(".place_img_producto" , data);
     despliega([".guardar_img_enid" , "#guardar_img"]);
     $(".imagen_img").change(upload_imgs_enid_pre);
@@ -85,7 +84,7 @@ let response_load_image =  data =>{
 
         case 3:
 
-            alert(3);
+
             break;
 
         default:

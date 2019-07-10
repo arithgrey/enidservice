@@ -6,7 +6,6 @@ $(document).ready(() => {
 let filtro = () => {
 
     let url_actual = window.location;
-    let order = get_parameter("#order option:selected");
-    let new_url = url_actual + "&order=" + order;
+    let new_url = url_actual + "&order=" + get_parameter("#order option:selected");
     redirect(new_url);
 }
