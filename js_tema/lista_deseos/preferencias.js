@@ -57,7 +57,6 @@ let response_agrega_interes = data => {
 
 
     let preferencia = ".preferencia_" + get_option("id_clasificacion");
-
     let x = (data.tipo > 0 ) ? $(preferencia).addClass("selected_clasificacion") : $(preferencia).removeClass("selected_clasificacion");
 
 }
