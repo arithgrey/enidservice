@@ -721,6 +721,11 @@ let show_tabs = (str, tipo = 1) => {
     }
 
 }
+let append_enid = (array) => {
+
+    return  array.join(",");
+}
+
 
 let go_login = (data) => redirect("../login");
 let up_page = (data) => redirect("");

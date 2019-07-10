@@ -2,8 +2,6 @@ $(document).ready(() => {
 
     $(".form_ventas_encuentro").submit(busqueda);
 });
-
-
 let busqueda = (e) => {
 
     let url ="../q/index.php/api/ventas_encuentro/periodo/format/json/";

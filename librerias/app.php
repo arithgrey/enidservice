@@ -901,7 +901,6 @@ class app extends CI_Controller
                         [
 
                             'movimientos/principal.js',
-                            'movimientos/notificaciones.js',
                             'movimientos/movimientos.js'
                         ],
 

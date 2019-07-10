@@ -32,7 +32,7 @@ let proceso_asignar_direccion = (id_direccion, id_recibo) => {
     request_enid("POST", data_send, url, response_proceso_asignacion);
 
 };
-let response_proceso_asignacion = (data) => redirect("");
+let response_proceso_asignacion = data => redirect("");
 
 let asignar_punto_encuentro_existente_pedido = function () {
 
@@ -42,16 +42,17 @@ let asignar_punto_encuentro_existente_pedido = function () {
     show_confirm("¿DESEAS QUE TU ENTREGA SEA EN ESTE PUNTO DE ENCUENTRO?", "", "CONTINUAR", function () {
         proceso_asignar_punto_encuentro(id_punto_encuentro, id_recibo)
     });
-
 };
 
 let proceso_asignar_punto_encuentro = (id_punto_encuentro, id_recibo) => {
 
     if (id_punto_encuentro > 0) {
 
-        set_parameter(".punto_encuentro_asignado", id_punto_encuentro);
-        set_parameter(".id_recibo", id_recibo);
+        set_parameter({
+            ".punto_encuentro_asignado": id_punto_encuentro,
+            ".id_recibo": id_recibo,
+        });
+        submit_enid(".form_puntos_medios_avanzado");
 
-        $(".form_puntos_medios_avanzado").submit();
     }
 };

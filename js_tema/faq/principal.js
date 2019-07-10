@@ -3,13 +3,12 @@ let editar_respuesta = 0;
 let faq = 0;
 $(document).ready(() => {
 
-
-    if ($(".in_session").val() == 1) {
+    if (get_parameter(".in_session") == 1) {
         $('#summernote').summernote();
         $(".form_respuesta").submit(registra_respuesta);
     }
+
     $(".btn_edicion_respuesta").click(pre_editar_respuesta);
-    //$(".btn_img_avanzado").click(carga_form_imagenes_faq);
     $(".btn_registro_respuesta").click(pre_registro_respuesta);
     $("footer").ready(carga_categocias_extras);
     $("footer").ready(valida_registro_respuesta);
@@ -20,27 +19,29 @@ $(document).ready(() => {
 let registra_respuesta = (e) => {
 
 
-    let respuesta = $(".note-editable").html();
-    let data_send = $(".form_respuesta").serialize() + "&" + $.param({"respuesta": respuesta});
+    let data_send = $(".form_respuesta").serialize() + "&" + $.param({"respuesta": $(".note-editable").html()});
     let url = "../q/index.php/api/fq/respuesta/format/json/";
-    request_enid("POST", data_send, url, response_registro_respuesta, ".place_refitro_respuesta");
+    request_enid("POST", data_send, url, r_registro_respuesta, ".place_refitro_respuesta");
     e.preventDefault();
 }
 
-let response_registro_respuesta = (data) => {
+let r_registro_respuesta = (data) => {
 
-    debugger;
     seccess_enid(".place_refitro_respuesta", "Respuesta registrada!");
     document.getElementById("form_respuesta").reset();
-    let new_url = "../faq/?faq=" + data;
-    redirect(new_url);
+    redirect("../faq/?faq=" + data);
 }
 
-let pre_editar_respuesta = function(e) {
+let pre_editar_respuesta = function (e) {
 
     document.getElementById("form_respuesta").reset();
-    set_option("faq", get_parameter_enid($(this), "id"));
-    set_option("editar_respuesta", 1);
+    set_option({
+        "faq": get_parameter_enid($(this), "id"),
+        "editar_respuesta": 1,
+
+    });
+
+
     carga_info_faq();
     $(".btn_img_avanzado").show();
 }
@@ -80,7 +81,7 @@ let agrega_img_faq = () => {
 
 let response_carga_form_imagenes = (data) => {
 
-    despliega([".form_respuesta"], 0);
+    despliega(".form_respuesta", 0);
     recorre(".text_agregar_img");
 
     render_enid(".place_load_img_faq", data);
@@ -89,7 +90,7 @@ let response_carga_form_imagenes = (data) => {
 }
 
 
-let upload_imgs_enid_faq = function() {
+let upload_imgs_enid_faq = function () {
 
     let i = 0, len = this.files.length, img, reader, file;
     file = this.files[i];

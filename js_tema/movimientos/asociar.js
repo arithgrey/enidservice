@@ -1,12 +1,8 @@
 "use strict";
-$(document).ready(function(){
-	$(".numero_tarjeta").keyup(function(){
+$(document).ready(() => {
 
-		let valor = get_parameter(".numero_tarjeta");
-		console.log(valor.length);
-		let nuevo =  quitar_espacios_numericos(valor);
-		$(".numero_tarjeta").val(nuevo);
-
-	});
+    $(".numero_tarjeta").keyup(() => {
+        set_parameter(".numero_tarjeta", quitar_espacios_numericos(get_parameter(".numero_tarjeta")))
+    });
 
 });
