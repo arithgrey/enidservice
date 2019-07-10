@@ -27,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
 
                     $index = search_bi_array($response, "id_servicio", $id_servicio);
                     $a = 0;
-                    if ($index != false) {
+                    if ($index !== false) {
 
                         $response[$a]["pedidos"] = $response[$index]["pedidos"] + $row["num_ciclos_contratados"];
 

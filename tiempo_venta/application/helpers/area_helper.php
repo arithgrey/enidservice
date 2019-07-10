@@ -2,6 +2,51 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('render_tv')) {
+
+        function render_tv($data)
+        {
+
+
+            $r[] = form_open("", ["class" => "form_tiempo_entrega", "id" => "form_tiempo_entrega"]);
+            $r[] = div(
+
+                div(input(
+
+                    [
+                        "name" => "q",
+                        "placeholder" => "id, nombre",
+                        "class" => "top_30 col-lg-12"
+                    ]
+                ), 12)
+
+                ,
+                4
+            );
+
+            $r[] = div(get_format_fecha_busqueda(), 8);
+            $r[] = form_close();
+            $form = div(append($r), 1);
+
+            $z[] = br(3);
+            $z[] = div(
+                btw(
+                    div(heading_enid("ARTÍCULO", 3, "col-lg-12"), 1)
+                    ,
+                    $form
+                    ,
+                    8, 1
+
+                )
+                ,
+                13
+            );
+            $z[] = div(place("place_tiempo_entrega"), 8, 1);
+
+            return append($z);
+
+        }
+    }
     if (!function_exists('get_hiddens_tickects')) {
 
         function get_hiddens_tickects($action, $ticket)

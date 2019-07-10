@@ -173,6 +173,7 @@ class usuario_direccion extends REST_Controller
                     } else {
 
                         return $this->load->view("proyecto/domicilio", $data);
+
                     }
                     break;
                 case 2:

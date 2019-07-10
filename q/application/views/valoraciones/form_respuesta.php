@@ -23,7 +23,7 @@ if ($info_usuario != 0) {
     <div class="panel panel-primary">
         <?= div("Seguimiento", ["class" => "panel-heading"]) ?>
         <div class="panel-body">
-            <div class="<?= mayorque(count($respuestas)  , 4 , " scroll_chat_enid " )  ?>">
+            <div class="<?= mayorque(count($respuestas), 4, " scroll_chat_enid ") ?>">
                 <ul class="chat">
                     <?php foreach ($respuestas as $row) {
                         $respuesta = $row["respuesta"];
@@ -35,19 +35,20 @@ if ($info_usuario != 0) {
                         ?>
                         <li class="left clearfix">
                             <?= span(
-                                img([
-                                    "src" => path_enid("imagen_usuario" , $id_usuario),
-                                    "onerror" => "this.src='../img_tema/user/user.png'",
-                                    "style" => "width: 40px!important;height: 32px!important;",
-                                    "class" => "img-circle"
-                                ]),
-                                ["class" => "chat-img pull-left"]
-
+                                img(
+                                    [
+                                        "src" => path_enid("imagen_usuario", $id_usuario),
+                                        "onerror" => "this.src='../img_tema/user/user.png'",
+                                        "style" => "width: 40px!important;height: 32px!important;",
+                                        "class" => "img-circle"
+                                    ]
+                                ),
+                                "chat-img pull-left"
                             ) ?>
                             <div class="chat-body clearfix">
                                 <?= btw(
                                     strong($nombre . $apellido_paterno),
-                                    small(icon("fa fa-clock") . $fecha_registro, "pull-right text-muted" ),
+                                    small(text_icon("fa fa-clock", $fecha_registro), "pull-right text-muted"),
                                     "header"
                                 ) ?>
                                 <?= p($respuesta) ?>

@@ -17,18 +17,21 @@ $(document).ready(() => {
 
     $("footer").ready(() => {
 
-        set_option("id_depto", get_parameter(".num_departamento"));
+        let id_depto = get_parameter(".num_departamento");
+        set_option("id_depto", id_depto);
         num_pendientes();
     });
 
 
     $(".depto").change(() => {
 
-        set_option("id_depto", get_parameter(".depto"));
+        let id_depto = get_parameter(".depto");
+        set_option("id_depto", id_depto);
         tikets_usuario();
     });
 
     $(".q").keyup(tikets_usuario);
+
 
     $(".form_busqueda_actividad_enid").submit(productividad);
 
@@ -104,7 +107,6 @@ let solicitudes_cliente = e => {
         let url = "../q/index.php/api/desarrollo/global_calidad/format/json/";
         let data_send = $(".form_busqueda_desarrollo_solicitudes").serialize();
         request_enid("GET", data_send, url, response_carga_solicitudes, ".place_metricas_servicio");
-
     } else {
 
         let inputs = [".form_busqueda_desarrollo_solicitudes #datetimepicker4", ".form_busqueda_desarrollo_solicitudes #datetimepicker5"];
@@ -149,7 +151,8 @@ let registra_ticket = e => {
 let response_registro_ticket = data => {
     render_enid(".place_registro_ticket", "A la brevedad se realizará su solicitud!");
     set_option("id_ticket", data);
-    show_tabs(["#ver_avances", "#base_tab_clientes"]);
+    $("#ver_avances").tab("show");
+    $("#base_tab_clientes").tab("show");
     carga_info_detalle_ticket();
 }
 
@@ -171,9 +174,13 @@ let carga_info_detalle_ticket = () => {
 
 let response_carga_ticket = (data) => {
 
+
     render_enid(".place_proyectos", data);
-    despliega([".seccion_nueva_tarea", ".mostrar_tareas_pendientes"], 0);
+    despliega([".seccion_nueva_tarea"], 0);
+    $(".mostrar_tareas_pendientes").hide();
     $(".btn_agregar_tarea").click(agregar_tarea);
+
+
     $(".agregar_respuesta").click(carga_formulario_respuesta_ticket);
     $(".comentarios_tarea").click(carga_comentarios_tareas);
     $(".form_agregar_tarea").submit(registra_tarea);
@@ -181,9 +188,10 @@ let response_carga_ticket = (data) => {
     $(".mostrar_tareas_pendientes").click(muestra_tareas_por_estatus);
     $(".mostrar_todas_las_tareas").click(muestra_todas_las_tareas);
     $(".ver_tickets").click(tikets_usuario);
-    if (get_option("flag_mostrar_solo_pendientes") > 0) {
+    if (get_option("flag_mostrar_solo_pendientes") == 1) {
         muestra_tareas_por_estatus();
     }
+
 }
 let carga_formulario_respuesta_ticket = function (e) {
 
@@ -202,6 +210,7 @@ let carga_formulario_respuesta_ticket = function (e) {
 
 let carga_comentarios_tareas = function (e) {
 
+
     showonehideone(".ocultar_comentarios", ".comentarios_tarea");
     let tarea = get_parameter_enid($(this), "id");
     set_option("tarea", tarea);
@@ -210,6 +219,7 @@ let carga_comentarios_tareas = function (e) {
     let seccion = ".seccion_respuesta_" + get_option("tarea");
     set_option("seccion", seccion);
     request_enid("GET", data_send, url, response_carga_comentario_tareas);
+
 
 }
 
@@ -230,18 +240,18 @@ let response_carga_comentario_tareas = function (data) {
     render_enid(seccion, data);
     $(".ocultar_comentarios").click(function (e) {
         set_option("tarea", get_parameter_enid($(this), "id"));
-        empty_elements(seccion);
+        $(seccion).empty();
     });
 
 }
 
 let registra_tarea = e => {
 
-
+    let requerimiento = $(".form_agregar_tarea .note-editable").html();
     let url = "../q/index.php/api/tarea/index/format/json/";
     let data_send = $(".form_agregar_tarea").serialize() + "&" + $.param({
         "id_ticket": get_option("id_ticket"),
-        "tarea": $(".form_agregar_tarea .note-editable").html()
+        "tarea": requerimiento
     });
     request_enid("POST", data_send, url, carga_info_detalle_ticket, ".place_proyectos");
     e.preventDefault();
@@ -438,8 +448,8 @@ let elimina_tarea = id_tarea => {
 }
 let marcar_como_hecho = function (e) {
 
-    let id = get_parameter_enid($(this), "id");
-    if (id > 0) {
+    let  id =  get_parameter_enid($(this), "id");
+    if(id > 0 ){
         set_estatus_ticket(id, 4);
     }
 }

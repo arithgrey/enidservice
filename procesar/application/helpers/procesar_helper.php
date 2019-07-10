@@ -1,6 +1,79 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    if (!function_exists('render_procesar_contacto')) {
+        function render_procesar_contacto($data)
+        {
+
+            $in_session = $data["in_session"];
+            $is_mobile = $data["is_mobile"];
+            $servicio = $data["servicio"];
+
+            $r[] = place("info_articulo", ["id" => 'info_articulo']);
+            $z[] = validate_text_title($in_session, $is_mobile, 1);
+            $z[] = get_form_contacto_servicio($in_session, $servicio);
+            $z[] = place("place_registro_afiliado");
+            $r[] = div(div(append($z), "contenedo_compra_info"), "contenedor_compra");
+
+            return addNRow(div(append($r), 6, 1));
+
+        }
+    }
+    if (!function_exists('render_procesar')) {
+        function render_procesar($data)
+        {
+
+
+            $servicio = $data["servicio"];
+            $info_solicitud_extra = $data["info_solicitud_extra"];
+            $costo_envio = $data["costo_envio"];
+            $is_mobile = $data["is_mobile"];
+            $carro_compras = $data["carro_compras"];
+            $id_carro_compras = $data["id_carro_compras"];
+            $email = $data["email"];
+            $q2 = $data["q2"];
+
+
+            $producto = create_resumen_servicio($servicio, $info_solicitud_extra);
+            $ciclos_solicitados = $info_solicitud_extra["num_ciclos"];
+            $resumen_producto = $producto["resumen_producto"];
+            $resumen_servicio_info = $producto["resumen_servicio_info"];
+            $monto_total = floatval(primer_elemento($servicio, "precio")) * floatval($ciclos_solicitados);
+            $costo_envio_cliente = 0;
+            $text_envio = "";
+            if (primer_elemento($servicio, "flag_servicio") < 1) {
+                $costo_envio_cliente = $costo_envio["costo_envio_cliente"];
+                $text_envio = $costo_envio["text_envio"]["cliente"];
+            }
+            $monto_total_con_envio = $monto_total + $costo_envio_cliente;
+
+            $info_ext = $info_solicitud_extra;
+            $plan = $info_ext["plan"];
+            $num_ciclos = $info_ext["num_ciclos"];
+            $ciclo_facturacion = $info_ext["ciclo_facturacion"];
+            $talla = (array_key_exists("talla", $info_solicitud_extra)) ? $info_solicitud_extra["talla"] : 0;
+
+
+            $r[] = n_row_12();
+            $r[] = place("info_articulo", ["id" => 'info_articulo']);
+            $z[] = get_format_resumen($resumen_producto, $text_envio, $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session);
+            $z[] = validate_text_title($in_session, $is_mobile);
+            $z[] = form_open("", ["class" => "form-miembro-enid-service", "id" => "form-miembro-enid-service"]);
+            $z[] = get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla, $carro_compras, $id_carro_compras);
+            $z[] = get_format_form_primer_registro($in_session, $is_mobile, $info_ext);
+            $z[] = place("place_registro_afiliado");
+            $z[] = hr();
+            $z[] = input_hidden(["value" => $email, "class" => 'email_s']);
+            $r[] = div(div(div(append($z), "contenedo_compra_info"), "contenedor_compra"), 6, 1);
+            $r[] = end_row();
+            return append($r);
+
+        }
+
+    }
+
+
     if (!function_exists('validate_text_title')) {
         function validate_text_title($in_session, $is_mobile, $es_servicio = 0)
         {

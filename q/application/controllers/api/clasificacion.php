@@ -218,9 +218,7 @@ class Clasificacion extends REST_Controller
                 $data = $this->get_data_clasificaciones($response, $data);
 
             }
-
-            return $this->load->view("tallas/principal", $data);
-
+            $response = render_tallas($data);
 
         }
         $this->response($response);

@@ -1,6 +1,42 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    if (!function_exists('render_ventas')) {
+        function render_ventas($data)
+        {
+
+            $id_perfil = $data["id_perfil"];
+            $is_mobile = $data["is_mobile"];
+            $action = $data["action"];
+            $top_servicios = $data["top_servicios"];
+            $list_orden = $data["list_orden"];
+            $ciclo_facturacion = $data["ciclo_facturacion"];
+            $error_registro = $data["error_registro"];
+            $extra_servicio = $data["extra_servicio"];
+            $considera_segundo = $data["considera_segundo"];
+
+
+            $t[] = get_menu($id_perfil, $is_mobile, $action);
+            $t[] = btw(
+                heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 3)
+                ,
+                get_top_ventas($top_servicios)
+                ,
+                "contenedor_top " . ($action == 1) ? " display_none " : " "
+            );
+            $r[] = div(append($t), 2);
+
+            $z[] = div(format_articulos_venta($list_orden), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_servicios']);
+            $z[] = div(format_puntos_venta(), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_puntos_venta']);
+            $z[] = div(form_ventas($ciclo_facturacion, $error_registro, $is_mobile), ["class" => "tab-pane  " . valida_active_tab(1, $action), "id" => 'tab_form_servicio']);
+
+            $r[] = div(div(append($z), "tab-content"), 10);
+            $r[] = div(get_top_articulos($top_servicios, $is_mobile), 2);
+            $r[] = get_formar_hiddens($is_mobile, $action, $extra_servicio, $id_perfil);
+
+            return append($r);
+        }
+    }
     if (!function_exists('form_ventas')) {
         function form_ventas($ciclo_facturacion, $error_registro, $is_mobile)
         {

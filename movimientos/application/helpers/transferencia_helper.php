@@ -1,6 +1,211 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    if (!function_exists('render_metodos_disponibles')) {
+
+        function render_metodos_disponibles($data)
+        {
+
+
+            $usuario = $data["usuario"];
+            $banca = $data["banca"];
+            $bancos = $data["bancos"];
+            $error = $data["error"];
+            $seleccion = $data["seleccion"];
+
+
+            $nombre = primer_elemento($usuario, "nombre");
+            $apellido_paterno = primer_elemento($usuario, "apellido_paterno");
+            $apellido_materno = primer_elemento($usuario, "apellido_materno");
+            $nombre_persona = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
+            $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJETA DE DÉDITO O CRÉDITO";
+
+            $x[] = heading($text_tipo_ingreso, 3);
+            $x[] = div("Enid Service protege y garantiza la seguridad de la información de su cuenta bancaria. Nunca revelaremos su información financiera y, cada vez que inicie una transacción con esta cuenta bancaria, Enid Service se lo notificará por correo electrónico.");
+            $x[] = form_asociar_cuenta($error, $nombre_persona, $bancos, $banca);
+
+            $response = [];
+            if ($seleccion < 1) {
+
+                $response[] = div(append($x), ["class" => "col-lg-4 col-lg-offset-4", "style" => "background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;"]);
+            } else {
+
+                $response[] = div(get_format_asociar_cuenta_bancaria(), "col-lg-4 col-lg-offset-4 contenedor_asociar_cuenta");
+            }
+
+            return div(append($response), "contenedor_asociar_cuenta");
+        }
+    }
+
+    if (!function_exists('form_asociar_cuenta')) {
+
+        function form_asociar_cuenta($error, $nombre_persona, $bancos, $banca)
+        {
+
+
+            if ($error == 1):
+                $r[] = div(
+                    "SE PRESENTARON ERRORES AL ASOCIAR CUENTA, VERIFIQUE SU INFORMACIÓN ENVIADA",
+                    ["style" => "background: #004bff; color: white;padding: 5px;"]);
+            endif;
+            $r[] = div(heading($nombre_persona, 4), ["style" => "border-bottom-style: solid;border-width: 1px;"]);
+            $r[] = heading("1.- PAÍS", 4);
+            $r[] = create_select(array(
+                "text" => "México",
+                "v" => 1
+            ), "pais", "form-control", "pais", "text", "v");
+            $r[] = heading("2.- SELECCIONA TU BANCO", 4);
+            $r[] = create_select(
+                $bancos,
+                "banco",
+                "banco_cuenta",
+                "sel1",
+                "nombre",
+                "id_banco",
+                1);
+
+            if ($banca == 0):
+
+                $r[] = heading("3.-NÚMERO CLABE(18 dígitos)", 4);
+                $r[] = input([
+                    "class" => "form-control numero_tarjeta",
+                    "id" => "input-1",
+                    "name" => "clabe",
+                    "placeholder" => "Número clabe de tu banco",
+                    "required" => true,
+                    "maxlength" => "18",
+                    "minlength" => "18"
+                ]);
+
+            else:
+                $r[] = heading("4.- TIPO DE TARJETA ", 4);
+
+                $opt = array(
+                    "text" => "Débito",
+                    "v" => 0
+                );
+                $opt = array(
+                    "text" => "Crédito",
+                    "v" => 1
+                );;
+                $r[] = create_select($opt, "tipo_tarjeta", "form-control", "tipo_tarjeta", "text", "v");
+                $r[] = heading("5.- NÚMERO DE TARJETA " . icon("fa fa-credit-card-alt"), 4);
+                $r[] = input([
+                    "class" => "form-control numero_tarjeta",
+                    "id" => "input-1",
+                    "name" => "numero_tarjeta",
+                    "placeholder" => "Número de tarjeta",
+                    "required" => true,
+                    "minlength" => "16",
+                    "maxlength" => "16"
+                ]);
+
+            endif;
+            $r[] = input_hidden(["name" => "tipo", "value" => $banca]);
+            $r[] = guardar("ASOCIAR" . icon("fa fa-chevron-right"));
+            $r[] = div(
+                p(
+                    "Al asociar tu cuenta, podrás transferir tu saldo de Enid Service a tu cuenta personal", "white"
+                )
+                ,
+                ["style" => "margin-top: 35px;background: #213668;padding: 10px;"]
+            );
+
+            $response[] = form_open("", ["class" => "form_asociar_cuenta", "method" => "POST", "action" => "?action=4"]);
+            $response[] = div(div(append($r), "page-header"));
+            $response[] = form_close();
+            return append($response);
+
+
+        }
+    }
+
+    if (!function_exists('render_empresas')) {
+
+        function render_empresas($data)
+        {
+
+            $saldo_disponible = $data["saldo_disponible"];
+            $r[] = btw(
+                get_format_saldo_disponible($saldo_disponible),
+                div(get_submenu(), "card"),
+                3
+
+            );
+            $r[] = div(place("place_movimientos"), 9);
+            return append($r);
+        }
+    }
+
+    if (!function_exists('render_cuentas_asociadas')) {
+
+        function render_cuentas_asociadas($data)
+        {
+
+            $cuentas_bancarias = $data["cuentas_bancarias"];
+            $tarjetas = $data["tarjetas"];
+
+            $r[] = heading_enid("TUS CUENTAS " . br() . " CUENTAS BANCARIAS", 3);
+            foreach ($cuentas_bancarias as $row):
+                $r[] = div(
+                    append(
+                        [
+                            $row["nombre"],
+                            icon("fa fa-credit-card "),
+                            div(get_resumen_cuenta($row["clabe"]))
+                        ]
+                    )
+                    ,
+                    "info_cuenta top_10"
+                );
+
+            endforeach;
+            $r[] = guardar(
+                "Agregar cuenta " . icon("fa fa-plus-circle ")
+                ,
+                [
+                    "class" => "top_20"
+                ]
+                ,
+
+                1
+                ,
+                1
+                ,
+                0
+                ,
+                "?q=transfer&action=1"
+            );
+
+            $r[] = heading_enid("TARJETAS DE CRÉDITO Y DÉBITO", 3);
+            foreach ($tarjetas as $row):
+                $r[] = div(append([
+                    $row["nombre"],
+                    icon("fa fa-credit-card "),
+                    div(substr($row["numero_tarjeta"], 0, 4) . "********")
+
+                ]), ["class" => "info_cuenta"]);
+            endforeach;
+            $r[] = guardar(
+                "Agregar cuenta " . icon("fa fa-plus-circle ")
+                ,
+                [
+                    "class" => "top_20"
+                ]
+                ,
+                1
+                ,
+                1
+                ,
+                0
+                ,
+                "?q=transfer&action=1&tarjeta=1"
+            );
+
+            return append($r);
+
+        }
+    }
 
     if (!function_exists('get_format_asociar_cuenta_bancaria')) {
 
@@ -101,17 +306,32 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_format_agregar_saldo_cuenta')) {
-        function get_format_agregar_saldo_cuenta()
+    if (!function_exists('render_agregar_saldo_cuenta')) {
+        function render_agregar_saldo_cuenta()
         {
 
             $r[] = heading_enid("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR ", 3);
             $r[] = get_format_pago_efectivo();
             $r[] = get_format_solicitud_amigo();
-            return append($r);
+            return div(append($r), 4, 1);
 
         }
     }
+    if (!function_exists('render_agregar_saldo_oxoo')) {
+        function render_agregar_saldo_oxoo($data)
+        {
+            $id_usuario = $data["id_usuario"];
+            return btw(
+                heading_enid("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR DEPÓSITO DESDE CUALQUIER SUCURSAL OXXO", 3),
+                get_form_pago_oxxo($id_usuario),
+                4, 1
+
+            );
+
+        }
+    }
+
+
     if (!function_exists('get_format_solicitud_amigo')) {
         function get_format_solicitud_amigo()
         {
@@ -166,7 +386,7 @@ if (!function_exists('invierte_date_time')) {
                 "option_ingresar_saldo tipo_pago"
 
             ), [
-                "href" => "?q=transfer&action=7"
+                    "href" => "?q=transfer&action=7"
                 ]
             );
 

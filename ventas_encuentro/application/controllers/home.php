@@ -16,7 +16,7 @@ class Home extends CI_Controller
         $data = $this->app->session();
         $this->app->acceso();
         $data["action"] = $this->input->get("action");
-        $this->app->pagina($this->app->cssJs($data, "ventas_encuentro"), 'home');
+        $this->app->pagina($this->app->cssJs($data, "ventas_encuentro"), render($data) ,1);
 
     }
 

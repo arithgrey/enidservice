@@ -2,6 +2,50 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('format_cuenta')) {
+        function render_cuenta($data)
+        {
+
+            $id_usuario =  $data["id_usuario"];
+            $usuario =  $data["usuario"];
+            $r[] = div(get_menu($id_usuario), 2);
+            $r[] = div(format_cuenta($id_usuario, $usuario),10);
+            return append($r,"contenedor_principal_enid" );
+
+        }
+
+    }
+
+    if (!function_exists('format_cuenta')) {
+        function format_cuenta($id_usuario, $usuario)
+        {
+
+            $r[] = div(get_format_foto_usuario($id_usuario, $usuario), ["class" => "tab-pane active", "id" => "tab_mis_datos"]);
+            $r[] =
+                div(
+                    btw(
+
+                        heading_enid("ACTUALIZAR DATOS DE ACCESO", 3)
+                        ,
+                        get_form_set_password()
+                        ,
+                        4,
+                        1
+
+                    )
+                    ,
+                    [
+                        "class" => "tab-pane ",
+                        "id" => "tab_privacidad"
+                    ]
+                );
+
+            $r[] = div(get_format_privacidad_seguridad(), ["class" => "tab-pane ", "id" => "tab_privacidad_seguridad"]);
+            $r[] = div(get_format_calma(), ["class" => "tab-pane ", "id" => "tab_direccion"]);
+            return div(append($r), "tab-content");
+
+        }
+    }
     if (!function_exists('get_format_foto_usuario')) {
         function get_format_foto_usuario($id_usuario, $usuario)
         {

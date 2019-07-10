@@ -17,26 +17,26 @@ class Inicio extends CI_Controller
         $param = $this->input->get();
         $data = $this->app->session();
 
-		$data += [
+        $data += [
             "action" => valida_action($param, "action"),
             "considera_segundo" => 0,
             "extra_servicio" => 0,
         ];
 
 
-		$data = $this->prevenir_acceso($param, $data);
-		$data["error_registro"] = valida_extension(get_param_def($param, "mensaje", ""), 5, "");
-		$data["top_servicios"] = $this->get_top_servicios_usuario($data["id_usuario"]);
-		$data["ciclo_facturacion"] = $this->create_ciclo_facturacion();
-		$data["is_mobile"] = ($this->agent->is_mobile() === FALSE) ? 0 : 1;
+        $data = $this->prevenir_acceso($param, $data);
+        $data["error_registro"] = valida_extension(get_param_def($param, "mensaje", ""), 5, "");
+        $data["top_servicios"] = $this->get_top_servicios_usuario($data["id_usuario"]);
+        $data["ciclo_facturacion"] = $this->create_ciclo_facturacion();
+        $data["is_mobile"] = ($this->agent->is_mobile() === FALSE) ? 0 : 1;
 
-		$data = $this->app->cssJs($data, "planes_servicios");
+        $data = $this->app->cssJs($data, "planes_servicios");
 
-		$data["list_orden"] = $this->get_orden();
+        $data["list_orden"] = $this->get_orden();
         $data["id_perfil"] = $this->app->getperfiles();
-		$this->app->pagina($data, 'home_enid');
+        $this->app->pagina($data, render_ventas($data), 1);
 
-	}
+    }
 
     private function prevenir_acceso($param, $data)
     {
@@ -72,7 +72,7 @@ class Inicio extends CI_Controller
     {
 
         $q["id_usuario"] = $id_usuario;
-        return $this->app->api("servicio/top_semanal_vendedor/format/json/" , $q);
+        return $this->app->api("servicio/top_semanal_vendedor/format/json/", $q);
     }
 
     private function get_orden()

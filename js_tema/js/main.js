@@ -315,12 +315,12 @@ let quitar_espacios_numericos = (nuevo_valor, texto = 0) => {
     }
 
 }
-let sin_espacios = (input, es_correo = 0) => {
+let sin_espacios = (input , es_correo = 0  )=> {
 
     let valor = get_parameter(input);
     let nuevo = quitar_espacios_numericos(valor, 1);
     set_parameter(input, nuevo);
-    if (es_correo > 0) {
+    if(es_correo >  0){
         set_parameter(input, nuevo.toLocaleLowerCase());
         valida_email_form(input, "");
     }
@@ -363,7 +363,7 @@ let getCellValue = (row, index) => {
     return $(row).children('td').eq(index).text()
 
 }
-let ordena_tabla = function () {
+let ordena_tabla = function(){
 
     let table = $(this).parents('table').eq(0);
     let rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()));
@@ -384,12 +384,12 @@ let openNav = () => {
 
 }
 
-let closeNav = () => {
+let closeNav =  () => {
     document.getElementById("mySidenav").style.width = "0";
     document.body.style.backgroundColor = "rgba(0,0,0,0)";
 }
 
-let array_key_exists = (key, array) => {
+let array_key_exists =  (key, array) =>  {
 
     let response = 0;
     if (array.hasOwnProperty(key)) {
@@ -403,40 +403,29 @@ let array_key_exists = (key, array) => {
 
 }
 
-let getMaxOfArray = numArray => {
+let getMaxOfArray  =  numArray =>  {
 
     return Math.max.apply(null, numArray);
 
 }
 
-let despliega = (array, tipo = 1) => {
+let  despliega =  (array, tipo) => {
 
-    let display = (tipo > 0) ? "block" : "none";
-    if (isArray(array)) {
+    for (let x in array) {
 
-        for (let x in array) {
-            $(array[x]).css("display", display);
-        }
-    } else {
+        let display = (tipo == 1) ? "block" : "none";
+        $(array[x]).css("display", display);
 
-        $(array).css("display", display);
     }
 
 }
 
 /*SE ELIMINAN EL CONTENIDO LOS ELEMENTOS*/
-let empty_elements = (array) => {
+let  empty_elements = (array) => {
 
-    if (isArray(array)) {
+    for (let x in array) {
 
-        for (let x in array) {
-
-            $(array[x]).empty();
-        }
-
-    } else {
-
-        $(array).empty();
+        $(array[x]).empty();
     }
 }
 
@@ -454,7 +443,7 @@ let get_parameter_enid = (element, param) => {
         return false;
     }
 }
-let request_enid = (method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "") => {
+let request_enid =  (method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "")  => {
 
     if (before_send < 1) {
         if (place_before_send.length > 0) {
@@ -487,23 +476,23 @@ let set_black = array => {
         set_parameter(array[x], "");
     }
 }
-let focus_input = input => {
+let focus_input = input =>  {
 
     let base = "1px solid rgb(13, 62, 86)";
     if (isArray(input)) {
 
         for (const i in input) {
 
-            $(input[i]).css("border", base);
+            $(input[i]).css("border", base );
 
         }
 
     } else {
 
-        $(input).css("border", base);
+        $(input).css("border", base );
     }
 }
-let randomString = (len, charSet) => {
+let randomString =  (len, charSet) => {
     charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomString = '';
     for (let i = 0; i < len; i++) {
@@ -513,7 +502,7 @@ let randomString = (len, charSet) => {
     return randomString;
 }
 /*Recorre a sección*/
-let recorre = contenedor => {
+let recorre =  contenedor =>  {
 
     if (typeof get_parameter(contenedor) !== 'undefined') {
         let simple = contenedor.substring(1, contenedor.length);
@@ -546,7 +535,7 @@ let transforma_mayusculas = x => {
     x.value = text_mayusculas;
 }
 
-let evita_basura = () => {
+let evita_basura =  () => {
 
     let text = get_parameter(".input_busqueda_producto");
     text = text.replace(/["']/g, "");
@@ -630,34 +619,41 @@ let reset_form = id => document.getElementById(id).reset();
 
 let termina_session = () => redirect('../login/index.php/startsession/logout/');
 
-let quita_espacios_en_input_num = v => $(this).val(quitar_espacios_numericos(get_parameter(v)));
+let quita_espacios_en_input_num = v =>  $(this).val(quitar_espacios_numericos(get_parameter(v)));
 
-let desbloqueda_form = form => $("*", form).prop('disabled', false);
+let desbloqueda_form = form =>  $("*", form).prop('disabled', false);
 
 let flex = elemento => $(elemento).css("display", "flex");
 
 let validar_si_numero = numero => (!/^([0-9])*$/.test(numero)) ? false : true;
 
-let set_parameter = (element, valor) => $(element).val(valor);
+let  set_parameter = (element, valor) => $(element).val(valor);
 
-let bloquea_form = form => $("*", form).prop('disabled', true);
+let bloquea_form =  form => $("*", form).prop('disabled', true);
 
 let is_mobile = () => get_option("is_mobile");
 
-let isArray = (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
+let isArray =  (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
 
 /*Regresa el valor que esta en el nodo html*/
-let get_parameter = (element, parse_int = 0) => (parse_int < 1) ? $(element).val() : parseInt($(element).val());
+let get_parameter = (element, parse_int = 0) =>  (parse_int < 1) ? $(element).val() : parseInt( $(element).val() );
 
 let getObjkeys = param => Object.keys(param);
 
 let render_enid = (idelement, data) => $(idelement).html(data);
 
-let get_valor_selected = select => get_parameter(select + " option:selected");
+let get_valor_selected = select  =>  get_parameter(select + " option:selected");
 
-let redirect = url => window.location.replace(url);
+let redirect = url =>  window.location.replace(url);
 
-let get_attr = (e, elemento) => $(e).attr(elemento);
+let get_attr =  (e, elemento) => $(e).attr(elemento);
+//let reloload_img = (id, url, flag = 0) => window.setInterval(reload_imgs(id, url, flag), 50000);
+/*
+let minusculas = (e) => {
+
+    e.value = e.value.toLowerCase();
+}
+*/
 
 /*PASAR ESTA PORQUERÍA A DONDE DEBE*/
 let response_mensaje_contacto = data => {
@@ -695,26 +691,10 @@ let set_places = () => {
 
 
 let submit_enid = (form) => {
-
+    ///
+    /*Agrgar validaciones sobre si existe el formulario*/
     $(form).submit();
-}
-let show_tabs = (str, tipo = 1) => {
-
-    let type = (tipo > 0) ? "show" : "hide";
-
-    if (isArray(str)) {
-
-        for (const i in str) {
-
-            $(input[i]).tab(type);
-        }
-
-    } else {
-
-        $(type).tab(type);
-    }
 
 }
-
-let go_login = (data) => redirect("../login");
-let up_page = (data) => redirect("");
+let go_login = ( data ) => redirect("../login");
+let up_page  =  (data) => redirect("");

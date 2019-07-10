@@ -1388,8 +1388,8 @@ let quitar_linea = function () {
 }
 let puntos_encuentro = function () {
 
-    let id =  get_parameter_enid($(this),"id");
-
+    let id =  ( get_parameter_enid($(this),"id") >  0 ) ?  get_parameter_enid($(this),"id")  : get_option("id_punto_encuentro");
+    set_option("id_punto_encuentro" , id);
     if (id >  0){
 
         let url = "../q/index.php/api/punto_encuentro/disponibilidad/format/json/";
@@ -1401,7 +1401,7 @@ let r_puntos_encuentro  = function (data) {
 
     render_enid(".place_puntos_venta", data);
     $(".quitar_punto").click(quitar_punto);
-    $(".agregar_linea").click(agregar_punto);
+    $(".agregar_punto").click(agregar_punto);
 
 
 }
@@ -1411,13 +1411,14 @@ let quitar_punto = function () {
     let id =  get_parameter_enid($(this),"id");
     let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
     let data_send = {"lista_negra" : 1 , "id" : id};
-    request_enid("PUT", data_send, url, puntos_venta);
+    request_enid("PUT", data_send, url, puntos_encuentro);
 
 }
 let agregar_punto = function () {
 
+    alert();
     let id =  get_parameter_enid($(this),"id");
     let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
     let data_send = {"lista_negra" : 0 , "id" : id};
-    request_enid("PUT", data_send, url, puntos_venta);
+    request_enid("PUT", data_send, url, puntos_encuentro);
 }

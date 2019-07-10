@@ -2,6 +2,34 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('render_atencion_cliente')) {
+
+        function render_atencion_cliente()
+        {
+
+            $r[] = div(
+                ul(
+                    [
+                        li(anchor_enid("Atención al cliente", ["href" => "#tab_1_actividad", "data-toggle" => "tab"]), ["class" => "active"]),
+                        li(anchor_enid("Comparativa", ["href" => "#tab_2_comparativa", "data-toggle" => "tab"]), ["class" => "comparativa"]),
+                        li(anchor_enid("Calidad y servicio", ["href" => "#tab_3_comparativa", "data-toggle" => "tab"]), ["class" => "calidad_servicio"])
+
+                    ],
+                    ["class" => "nav nav-tabs"]
+                ), "panel-heading"
+            );
+            $z[] = div(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]);
+            $z[] = div(addNRow(place("place_metricas_comparativa top_50")), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]);
+            $z[] = div(get_form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
+
+            $r[] = div(append(z), "tab-content");
+            return append($r);
+
+
+        }
+    }
+
+
     if (!function_exists('get_form_busqueda_productos_solicitados')) {
 
         function get_form_busqueda_productos_solicitados()

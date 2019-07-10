@@ -14,17 +14,22 @@ foreach ($preguntas as $row) {
 
     ?>
     <div class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
-        <div class="popup-head">
-            <div class="popup-head-left pull-left">
-                <?= append([
-                    $img,
-                    get_texto_sobre_el_producto($modalidad, $row),
-                    div($pregunta),
-                    div($fecha_registro)
-                ]) ?>
-            </div>
-            <?= valida_respuestas_nuevas($modalidad, $row) ?>
-        </div>
+        <?= btw(
+            div(
+                append(
+                    [
+                        $img,
+                        get_texto_sobre_el_producto($modalidad, $row),
+                        div($pregunta),
+                        div($fecha_registro)
+                    ]
+                ), "popup-head-left pull-left"
+            )
+            ,
+            valida_respuestas_nuevas($modalidad, $row)
+            ,
+            "popup-head"
+        ) ?>
     </div>
     <?php
 }

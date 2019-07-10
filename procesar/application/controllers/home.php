@@ -75,7 +75,7 @@ class Home extends CI_Controller
         $data["carro_compras"] = $param["carro_compras"];
         $data["id_carro_compras"] = $param["id_carro_compras"];
 
-        $this->app->pagina($data, 'home');
+        $this->app->pagina($data, render_procesar($data), 1);
 
     }
 
@@ -91,7 +91,7 @@ class Home extends CI_Controller
 
         $data["servicio"] = $this->resumen_servicio($param["id_servicio"]);
 
-        $this->app->pagina($this->app->cssJs($data, "procesar_crear"), 'procesar_contacto');
+        $this->app->pagina($this->app->cssJs($data, "procesar_crear"), render_procesar_contacto($data), 1);
 
     }
 
@@ -103,7 +103,7 @@ class Home extends CI_Controller
 
         $param += [
 
-            "id_recibo"  =>  $param["recibo"],
+            "id_recibo" => $param["recibo"],
             "id_usuario" => $this->app->get_session("idusuario")
         ];
 

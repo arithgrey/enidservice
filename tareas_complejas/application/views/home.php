@@ -6,7 +6,10 @@
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <?= anchor_enid("Desarrollo de software ",
-                        ["href" => "#home", "data-toggle" => "tab"]) ?>
+                        [
+                            "href" => "#home",
+                            "data-toggle" => "tab"
+                        ]) ?>
                 </li>
             </ul>
             <div class="tab-content">
@@ -18,17 +21,13 @@
                     <?= $this->load->view("secciones_2/beneficios") ?>
                     <?= p("y ... ya que empleamos metodologías ágiles, le brindamos alta capacidad de reacción ") ?>
                     <?= p("y ... ya que empleamos metodologías ágiles, le brindamos alta capacidad de reacción ante los cambios de requerimientos generados por necesidades del cliente o evoluciones de su mercado.") ?>
-
                     <?= n_row_12() ?>
-
                     <?php
-
                     $x = [];
                     $x[] = img(["src" => "../img_tema/metodologias/scrum.png"]);
                     $x[] = p("Proceso que integra las mejores prácticas para realizar la calendarización de entregas parciales dentro de un proyecto.");
                     $x[] = p("Es ideal cuando donde los requisitos son cambiantes y se necesita capacidad de reacción ante la competencia.");
                     ?>
-
                     <?= div(append($x), 6) ?>
                     <?= btw(
                         img(
@@ -43,7 +42,7 @@
 
                     ) ?>
                     <?= end_row() ?>
-                    <?= anchor_enid("Iniciemos conversación", ["href" => "../contact"]) ?>
+                    <?= anchor_enid("Iniciemos conversación", path_enid("contact")) ?>
                     <?= hr() ?>
                 </div>
             </div>

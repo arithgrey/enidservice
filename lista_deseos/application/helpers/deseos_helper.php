@@ -2,6 +2,23 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('render_deseos')) {
+        function render_deseos($data)
+        {
+
+            $r[] = div(get_menu(), 2);
+            $r[] = div(get_list_clasificaciones($data), 10);
+            $r[] = hr();
+            $r[] = get_format_slider_preferencias();
+            $r[] = hr();
+            return append($r);
+
+
+        }
+
+    }
+
+
     if (!function_exists('get_format_slider_preferencias')) {
         function get_format_slider_preferencias()
         {
@@ -142,8 +159,11 @@ if (!function_exists('invierte_date_time')) {
     }
     if (!function_exists('get_list_clasificaciones')) {
 
-        function get_list_clasificaciones($is_mobile, $preferencias, $tmp)
+        function get_list_clasificaciones($data)
         {
+            $is_mobile =  $data["is_mobile"];
+            $preferencias =  $data["preferencias"];
+            $tmp =  $data["tmp"];
 
             $r = [];
             if ($is_mobile == 1) {
@@ -194,7 +214,7 @@ if (!function_exists('invierte_date_time')) {
 
                     "class" => "top_20"
 
-                ],1,1,0, path_enid("home")
+                ], 1, 1, 0, path_enid("home")
             );
             return div(append($r), 4, 1);
 
@@ -227,7 +247,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(div("Accesorios", "product-type from-bottom"), "animate");
             $r[] = div(heading_enid("Lo que usas en viajes", 2, "from-bottom"), "animate");
-            $r[] = heading_enid("Explorar tienda", 3, ["class" => "shop-now", "href" => path_enid("search") ]);
+            $r[] = heading_enid("Explorar tienda", 3, ["class" => "shop-now", "href" => path_enid("search")]);
             return append($r);
 
         }
@@ -268,7 +288,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $extra = (array_key_exists("id_usuario", $row) && !is_null($row["id_usuario"])) ? "selected_clasificacion" : "";
-            $preferencia_ = "preferencia_".$row['id_clasificacion'];
+            $preferencia_ = "preferencia_" . $row['id_clasificacion'];
 
             $config = [
                 'class' => 'list-preferencias item_preferencias ' . $preferencia_ . ' ' . $extra . ' ',
@@ -366,7 +386,7 @@ if (!function_exists('invierte_date_time')) {
                 $z = [];
                 $text_precio = $precio * $articulos;
                 $z[] = heading_enid($text_precio . "MXN");
-                $z[] = div($text_envio, "text-success text-center" );
+                $z[] = div($text_envio, "text-success text-center");
                 $z[] = br();
                 $z[] = get_form_pre_pedido($id, $id_producto, "", 5, 0, 1, $articulos);
                 $z[] = br();

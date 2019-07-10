@@ -11,17 +11,18 @@ let carga_form_imagenes_usuario = () => {
 let response_carga_form_imagenes = data => {
 
     render_enid(".place_form_img", data);
-    $(".imagen_img").change(upload_pre);
+    $(".imagen_img").change(upload_imgs_enid_pre);
 
 }
-let upload_pre = function () {
+let upload_imgs_enid_pre =  function() {
 
 
     let i = 0, len = this.files.length, img, reader, file;
     file = this.files[i];
     reader = new FileReader();
     reader.onloadend = function (e) {
-        showonehideone(".guardar_img_enid", ".imagen_img");
+
+        showonehideone(".guardar_img_enid" , ".imagen_img");
         mostrar_img_upload(e.target.result, 'place_load_img');
         $("#form_img_enid").submit(registra_img_usr);
     };
@@ -45,7 +46,7 @@ let registra_img_usr = e => {
         beforeSend: function () {
 
         }
-    }).done((data) => {
+    }).done(function (data) {
 
         redirect("");
 

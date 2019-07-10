@@ -50,7 +50,7 @@ foreach ($miembros as $row) {
 									]
 								)
 							],
-							["class" => "dropdown-menu pull-right"]) ?>
+						"dropdown-menu pull-right") ?>
 					</div>
 				</div>
 			<?php endif; ?>
