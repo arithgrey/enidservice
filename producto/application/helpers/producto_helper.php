@@ -281,14 +281,16 @@ if (!function_exists('invierte_date_time')) {
         ]);
         $r[] = btw(div("PIEZAS", "text_piezas mr-3"), select_cantidad_compra($flag_servicio, $existencia), "display_flex_enid");
 
-        $r[] = guardar("ORDENAR ",
+        $r[] = guardar("AGENDA TU ENTREGA",
             [
-                'id' => 'AddToCart',
-                'class' => "top_30"
+
+                'class' => "top_30 shadow",
+                "style" => "background:#0076f6 !important;"
             ],
             1,
             1);
         $r[] = form_close();
+        $r[] =  br(3);
         $r[] = div(agregar_lista_deseos(0, $in_session), "top_30");
         return div(append($r), "contenedor_form");
 

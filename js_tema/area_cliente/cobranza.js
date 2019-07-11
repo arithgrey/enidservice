@@ -1,13 +1,14 @@
 "use strict";
 let inf_ticket = function (e) {
 
-
+    debugger;
     recorre();
     let id_recibo = get_parameter_enid($(this), "id");
-
     if (id_recibo == undefined) {
-        id = (get_parameter(".ticket") != undefined) ? get_parameter(".ticket") : get_option("id_recibo");
+        id_recibo = (get_parameter(".ticket") != undefined) ? get_parameter(".ticket") : get_option("id_recibo");
     }
+
+
     if (id_recibo > 0) {
 
         set_option("id_recibo", id_recibo);
@@ -43,7 +44,7 @@ let response_cancelacion_compra = (data) => {
 
     if (get_option("modalidad_ventas") == 1) {
 
-        show_tabs(["#mi_buzon","#mis_ventas"]);
+        show_tabs(["#mi_buzon", "#mis_ventas"]);
         compras_usuario();
 
     } else {

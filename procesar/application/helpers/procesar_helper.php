@@ -33,7 +33,7 @@ if (!function_exists('invierte_date_time')) {
             $id_carro_compras = $data["id_carro_compras"];
             $email = $data["email"];
             $q2 = $data["q2"];
-
+            $in_session =  $data["in_session"];
 
             $producto = create_resumen_servicio($servicio, $info_solicitud_extra);
             $ciclos_solicitados = $info_solicitud_extra["num_ciclos"];
@@ -57,7 +57,15 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = n_row_12();
             $r[] = place("info_articulo", ["id" => 'info_articulo']);
-            $z[] = get_format_resumen($resumen_producto, $text_envio, $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session);
+            $z[] = get_format_resumen(
+                $resumen_producto,
+                $text_envio,
+                $resumen_servicio_info,
+                $monto_total,
+                $costo_envio_cliente,
+                $monto_total_con_envio,
+                $in_session
+            );
             $z[] = validate_text_title($in_session, $is_mobile);
             $z[] = form_open("", ["class" => "form-miembro-enid-service", "id" => "form-miembro-enid-service"]);
             $z[] = get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla, $carro_compras, $id_carro_compras);

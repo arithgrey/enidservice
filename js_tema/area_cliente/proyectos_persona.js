@@ -25,6 +25,7 @@ let get_lugar_por_stus_compra = () => {
 }
 let compras_usuario = () => {
 
+
     recorre();
     let modalidad = get_option("modalidad_ventas");
     let url = "../q/index.php/api/recibo/proyecto_persona_info/format/json/";
