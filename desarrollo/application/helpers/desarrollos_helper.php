@@ -5,14 +5,9 @@ if (!function_exists('invierte_date_time')) {
         function render_ticket_empresa($data)
         {
 
-            $departamentos = $data["departamentos"];
-            $num_departamento = $data["num_departamento"];
-            $id_usuario = $data["id_usuario"];
             $activa = $data["activa"];
-            $ticket = $data["ticket"];
-
-            $r[] = input_hidden(["type" => 'hidden', "class" => 'id_usuario', "value" => $id_usuario]);
-            $z[] = form_ticket_dep($departamentos, $num_departamento);
+            $r[] = input_hidden(["type" => 'hidden', "class" => 'id_usuario', "value" => $data["id_usuario"]]);
+            $z[] = form_ticket_dep($data["departamentos"], $data["num_departamento"]);
             $z[] = div(div(place('place_proyectos'), "top_50"), 1);
             $z[] = div(place('place_tickets'), 1);
             $r[] = div(append($z), ["class" => "tab-pane " . valida_seccion_activa(1, $activa), "id" => 'tab_abrir_ticket']);
@@ -30,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = div(div(append($r), "tab-content"), 10);
             $response[] = input_hidden([
                 "class" => "ticket",
-                "value" => $ticket,
+                "value" => $data["ticket"],
             ]);
 
             return append($response, "contenedor_principal_enid_service");
@@ -39,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
         }
     }
     if (!function_exists('form_ticket_dep')) {
-        function form_ticket_dep($departamentos, $num_departamento)
+        function form_ticket_dep($departamentos, $total)
         {
 
 
@@ -70,7 +65,7 @@ if (!function_exists('invierte_date_time')) {
                             input_hidden(
                                 [
                                     "name" => "departamento",
-                                    "value" => $num_departamento,
+                                    "value" => $total,
                                     "id" => 'num_departamento',
                                     "class" => 'num_departamento'
                                 ]
@@ -154,7 +149,7 @@ if (!function_exists('invierte_date_time')) {
 
                     [
                         "class" => 'black  ' . valida_seccion_activa(1, $activa),
-                        "style" => 'background:white;'
+                        //"style" => 'background:white;'
                     ]
                 )
 
@@ -164,6 +159,7 @@ if (!function_exists('invierte_date_time')) {
             return ul($list);
         }
     }
+    /*
     if (!function_exists('get_menu_metricas')) {
 
         function get_menu_metricas()
@@ -198,5 +194,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
+    */
 }
 

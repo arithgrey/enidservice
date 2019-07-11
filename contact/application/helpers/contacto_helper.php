@@ -7,10 +7,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $ubicacion = $data["ubicacion"];
-            $departamentos = $data["departamentos"];
-            $nombre = $data["nombre"];
-            $email = $data["email"];
-            $telefono = $data["telefono"];
+
             $r[] = div
             (
                 div(
@@ -22,15 +19,19 @@ if (!function_exists('invierte_date_time')) {
                 ), "imagen_principal");
 
             $r[] = div(
-                format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono),
+                format_direccion(
+                    $ubicacion,
+                    $data["departamentos"],
+                    $data["nombre"],
+                    $data["email"],
+                    $data["telefono"]
+                ),
                 [
-                    "class" => "padding_15  bottom_100 text-uppercase container inner contenedor_form shadow ",
+                    "class" => "top_menos_100  padding_15  bottom_100 text-uppercase container inner contenedor_form shadow ",
                     "id" => "direccion",
-                    "style" => "margin-top:-100px;"
                 ]
             );
             $r[] = input_hidden(["value" => $ubicacion, "class" => "ubicacion"]);
-
             return append($r);
 
 
@@ -106,11 +107,13 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = anchor_enid(
                 div(
-                    icon("fa fa-shopping-cart") . " SI",
+                    text_icon("fa fa-shopping-cart", " SI")
+                    ,
                     [
                         "class" => "easy_select_enid cursor_pointer selector selector_proceso",
                         "id" => 1
-                    ]),
+                    ]
+                ),
                 path_enid("lista_deseos")
             );
 
@@ -149,7 +152,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_format_visitanos($ubicacion);
             $r[] = format_direccion_map($ubicacion);
             $r[] = get_form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono);
-
             return append($r);
 
         }
@@ -238,22 +240,23 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
             $r[] = div(
-                append([
+                append(
+                    [
 
-                    input([
-                        "id" => "correo",
-                        "name" => "email",
-                        "type" => "email",
-                        "placeholder" => "@",
-                        "class" => "form-control input-md correo_electronico"
-                    ])
-                    ,
+                        input(
+                            [
+                                "id" => "correo",
+                                "name" => "email",
+                                "type" => "email",
+                                "placeholder" => "@",
+                                "class" => "form-control input-md correo_electronico"
+                            ]
+                        )
+                        ,
+                        div("INGRESA TU EMAIL  PARA RECIBIR NUESTRA UBICACIÓN")
 
 
-                    div("INGRESA TU EMAIL  PARA RECIBIR NUESTRA UBICACIÓN")
-
-
-                ]), 8);
+                    ]), 8);
 
 
             $r[] = guardar("RECIBIR  UBICACIÓN", ["class" => "top_20"]);
