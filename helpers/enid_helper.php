@@ -3,51 +3,24 @@
 if (!function_exists('heading')) {
     function heading($data = '', $h = '1', $attributes = '')
     {
-        if (is_string($attributes)) {
-
-            $att["class"] = $attributes;
-            $attr = add_attributes($att);
-            return "<h" . $h . $attr . ">" . $data . "</h" . $h . ">";
-
-        } else {
-
-
-            return "<h" . $h . add_attributes($attributes) . ">" . $data . "</h" . $h . ">";
-        }
+        return (is_string($attributes)) ?
+            "<h" . $h . add_attributes(["class" => $attributes]) . ">" . $data . "</h" . $h . ">" :
+            "<h" . $h . add_attributes($attributes) . ">" . $data . "</h" . $h . ">";
 
     }
 }
 if (!function_exists('ul')) {
     function ul($list, $attributes = [])
     {
-        if (is_string($attributes)) {
 
-            $attr["class"] = $attributes;
-            return _list('ul', $list, $attr);
-
-        } else {
-
-            return _list('ul', $list, $attributes);
-        }
+        return _list('ul', $list, (is_string($attributes)) ? ["class" => $attributes] : $attributes);
 
     }
 }
 if (!function_exists('li')) {
     function li($info, $attributes = [], $row_12 = 0)
     {
-
-
-        if (is_string($attributes)) {
-
-            $att["class"] = $attributes;
-
-            return add_element($info, "li", $att, $row_12);
-
-        } else {
-
-            return add_element($info, "li", $attributes, $row_12);
-        }
-
+        return add_element($info, "li", (is_string($attributes)) ? ["class" => $attributes] : $attributes, $row_12);
     }
 }
 
@@ -64,7 +37,7 @@ if (!function_exists('span')) {
     {
 
         $attr = "";
-        if (is_array($attributes) && count($attributes) > 0) {
+        if (es_data($attributes)) {
 
             $attr = add_attributes($attributes);
 
@@ -87,26 +60,12 @@ if (!function_exists('span')) {
     }
 }
 if (!function_exists('p')) {
-    function p($info, $attributes = [], $row = 0)
+    function p($str, $attributes = [], $row = 0)
     {
 
-        $e = "";
-        if (is_string($attributes)) {
-
-            $att["class"] = $attributes;
-            $attr = add_attributes($att);
-            $base = "<p " . $attr . ">" . $info . "</p>";
-            $e = ($row == 0) ? $base : addNRow($base);
-
-
-        } else {
-
-            $attr = add_attributes($attributes);
-            $base = "<p " . $attr . ">" . $info . "</p>";
-            $e = ($row == 0) ? $base : addNRow($base);
-
-        }
-
+        $attributes = (is_string($attributes)) ? add_attributes(["class" => $attributes]) : add_attributes($attributes);
+        $base = "<p " . $attributes . ">" . $str . "</p>";
+        $e = ($row == 0) ? $base : addNRow($base);
         return $e;
 
     }
@@ -121,8 +80,7 @@ if (!function_exists('guardar')) {
 
         if ($type_button == 1) {
 
-            $existe = array_key_exists("class", $attributes) ? 1 : 0;
-            $attributes["class"] = ($existe == 1) ? $attributes["class"] . " " . " a_enid_blue white completo btn_guardar" : "a_enid_blue white completo btn_guardar";
+            $attributes["class"] = (array_key_exists("class", $attributes) ? 1 : 0 == 1) ? $attributes["class"] . " " . " a_enid_blue white completo btn_guardar" : "a_enid_blue white completo btn_guardar";
         }
 
         $attr = add_attributes($attributes);
@@ -143,7 +101,7 @@ if (!function_exists('add_element')) {
     {
 
         $base = "<" . $type . " " . add_attributes($attributes) . " >" . $info . "</" . $type . ">";
-        return ($row == 0) ? $base : addNRow($base);
+        return ($row < 1) ? $base : addNRow($base);
 
     }
 }
@@ -156,18 +114,19 @@ function sub_categorias_destacadas($param)
     foreach ($param["clasificaciones"] as $row) {
 
         $primer_nivel = $row["primer_nivel"];
-        $total = $row["total"];
-        $nombre_clasificacion = "";
-        foreach ($param["nombres_primer_nivel"] as $row2) {
-            $id_clasificacion = $row2["id_clasificacion"];
-            if ($primer_nivel == $id_clasificacion) {
-                $nombre_clasificacion = $row2["nombre_clasificacion"];
-                break;
-            }
-        }
+
+        $clasificacion = search_bi_array(
+            $param["nombres_primer_nivel"],
+            "id_clasificacion",
+            $primer_nivel,
+            "nombre_clasificacion",
+            ""
+        );
+
         $response[$z]["primer_nivel"] = $primer_nivel;
-        $response[$z]["total"] = $total;
-        $response[$z]["nombre_clasificacion"] = $nombre_clasificacion;
+        $response[$z]["total"] = $row["total"];
+        $response[$z]["nombre_clasificacion"] = $clasificacion;
+
         if ($z == 29) {
             break;
         }
@@ -182,7 +141,7 @@ if (!function_exists('get_base_html')) {
     {
 
         if (is_numeric($attributes)) {
-
+            $response = "";
             switch ($attributes) {
                 case 1:
 
@@ -195,12 +154,17 @@ if (!function_exists('get_base_html')) {
 
                     break;
                 case 3:
+
                     $response = "<{$tipo} class='col-lg-3'>" . $info . "</{$tipo}>";
+
                     break;
+
                 case 4:
+
                     $response = ($row > 0) ? "<{$tipo} class='col-lg-4 col-lg-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-4'>" . $info . "</{$tipo}>";
                     break;
                 case 5:
+
                     $response = "<{$tipo} class='col-lg-5'>" . $info . "</{$tipo}>";
                     break;
                 case 6:
@@ -252,26 +216,18 @@ if (!function_exists('get_base_html')) {
 
             }
 
-            if ($frow > 0) {
-                $response = $tipo($response, 13);
-            }
-            return $response;
+            return ($frow > 0) ? $tipo($response, 13) : "";
 
         } else {
 
-            if (is_array($attributes)) {
 
-                $base = "<{$tipo}" . add_attributes($attributes) . ">" . $info . "</{$tipo}>";
-                $d = ($row > 0) ? addNRow($base) : $base;
-                return $d;
+            $base = (is_array($attributes)) ?
+                "<{$tipo}" . add_attributes($attributes) . ">" . $info . "</{$tipo}>"
+                :
+                "<{$tipo} class='{$attributes}'>" . $info . "</{$tipo}>";
 
-            } else {
 
-                $base = "<{$tipo} class='{$attributes}'>" . $info . "</{$tipo}>";
-                $d = ($row > 0) ? addNRow($base) : $base;
-                return $d;
-            }
-
+            return ($row > 0) ? addNRow($base) : $base;
 
         }
 
@@ -328,7 +284,7 @@ if (!function_exists('input_hidden')) {
 if (!function_exists('add_attributes')) {
     function add_attributes($attributes = '')
     {
-        $response = "";
+
 
         if (is_array($attributes)) {
 
@@ -382,18 +338,11 @@ if (!function_exists('anchor_enid')) {
     function anchor_enid($title = '', $attributes = [], $row_12 = 0, $type_button = 0)
     {
 
-        if (is_string($attributes)) {
 
-            $attr["href"] = $attributes;
-            $attributes = _parse_attributes($attr);
-
-        } else {
-
-            $attributes = _parse_attributes($attributes);
-
-        }
-
-        $base = "<a" . $attributes . ">" . $title . "</a>";
+        $base = "<a" .
+            _parse_attributes((is_string($attributes)) ? ["href" => $attributes] : $attributes) . ">" .
+            $title
+            . "</a>";
         $e = ($row_12 == 0) ? $base : addNRow($base);
         return $e;
 
@@ -409,18 +358,9 @@ if (!function_exists('get_td')) {
 
         } else {
 
-            if (is_string($attributes) && strlen($attributes) > 0) {
-
-                $att["class"] = $attributes;
-
-                return "<td " . add_attributes($att) . " NOWRAP >" . $val . "</td>";
-
-
-            } else {
-
-                return "<td " . add_attributes($attributes) . " NOWRAP >" . $val . "</td>";
-
-            }
+            return (is_string($attributes) && strlen($attributes) > 0) ?
+                "<td " . add_attributes(["class" => $attributes]) . " NOWRAP >" . $val . "</td>" :
+                "<td " . add_attributes($attributes) . " NOWRAP >" . $val . "</td>";
 
         }
 
@@ -437,15 +377,12 @@ if (!function_exists('select_enid')) {
     function select_enid($data, $text_option, $val, $attributes = '')
     {
 
-
-        $select = "<select " . add_attributes($attributes) . "> ";
+        $select[] = "<select " . add_attributes($attributes) . "> ";
         foreach ($data as $row) {
-
-            $select .= "<option value='" . $row[$val] . "'>" . $row[$text_option] . " </option>";
+            $select[] = "<option value='" . $row[$val] . "'>" . $row[$text_option] . " </option>";
         }
-
-        $select .= "</select>";
-        return $select;
+        $select[] = "</select>";
+        return append($select);
     }
 }
 if (!function_exists('remove_comma')) {
@@ -461,24 +398,23 @@ if (!function_exists('heading_enid')) {
 
         if (is_numeric($attributes) && $attributes > 0) {
 
-            $label = "<h$h>" . $data . "</h$h>";
-            $e = addNRow($label);
-            return $e;
+
+            return addNRow("<h$h>" . $data . "</h$h>");
 
         } else {
 
             if (is_string($attributes)) {
 
-                $att["class"] = $attributes;
-                $label = "<h$h " . add_attributes($att) . ">" . $data . "</h$h>";
-                $e = ($row_12 > 0) ? addNRow($label) : $label;
-                return $e;
+
+                $label = "<h$h " . add_attributes(["class" => $attributes]) . ">" . $data . "</h$h>";
+                return ($row_12 > 0) ? addNRow($label) : $label;
+
 
             } else {
 
                 $label = "<h$h " . add_attributes($attributes) . ">" . $data . "</h$h>";
-                $e = ($row_12 > 0) ? addNRow($label) : $label;
-                return $e;
+                return ($row_12 > 0) ? addNRow($label) : $label;
+
             }
 
 
@@ -593,7 +529,7 @@ if (!function_exists('push_element_json')) {
     {
 
         $exists = 0;
-        if (is_array($arr)) {
+        if (es_data($arr)) {
 
             if (in_array($element, $arr)) {
                 $exists = 1;
@@ -625,8 +561,9 @@ if (!function_exists('create_button_easy_select')) {
     function create_button_easy_select($arr, $attributes, $comparador = 1)
     {
         sort($arr);
+        $easy_selet = "";
         if ($comparador == 1) {
-            $easy_selet = "";
+
             foreach ($arr as $row) {
 
                 $text = $row[$attributes["text_button"]];
@@ -648,20 +585,19 @@ if (!function_exists('create_button_easy_select')) {
 
             }
 
-            return $easy_selet;
+
         } else {
 
             $extra = $attributes["extra"];
             $campo_id = $attributes["campo_id"];
-            $easy_selet = "";
-
             foreach ($arr as $row) {
                 $attr = add_attributes($extra);
                 $id = $row[$campo_id];
                 $easy_selet .= "<a " . $attr . " id=" . $id . "  >" . $row["talla"] . "</a>";
             }
-            return $easy_selet;
+
         }
+        return $easy_selet;
 
     }
 }
@@ -670,19 +606,19 @@ if (!function_exists('create_select')) {
     function create_select($data, $name, $class, $id, $text_option, $val, $row = 0, $def = 0, $valor = 0, $text_def = "")
     {
 
-        $select = "<select name='" . $name . "'  class='" . $class . "'  id='" . $id . "'> ";
+        $select[] = "<select name='" . $name . "'  class='" . $class . "'  id='" . $id . "'> ";
 
         if ($def == 1) {
 
-            $select .= "<option value='" . $valor . "'>" . strtoupper($text_def) . " </option>";
-
+            $select[] = "<option value='" . $valor . "'>" . strtoupper($text_def) . " </option>";
         }
         foreach ($data as $item) {
-            $select .= "<option value='" . $item[$val] . "'>" . strtoupper($item[$text_option]) . " </option>";
-        }
-        $select .= "</select>";
 
-        return ($row < 1) ? $select : addNRow($select);
+            $select[] = "<option value='" . $item[$val] . "'>" . strtoupper($item[$text_option]) . " </option>";
+        }
+
+        $select[] = "</select>";
+        return ($row < 1) ? append($select) : addNRow(append($select));
 
     }
 }
@@ -716,20 +652,11 @@ if (!function_exists('label')) {
     {
 
 
-        if (is_string($attributes)) {
+        $base = (is_string($attributes)) ?
+            "<label" . add_attributes(["class" => $attributes]) . ">" . $label_text . "</label>" :
+            "<label" . add_attributes($attributes) . ">" . $label_text . "</label>";
 
-            $att["class"] = $attributes;
-            $base = "<label" . add_attributes($att) . ">" . $label_text . "</label>";
-            $label = ($row == 0) ? $base : addNRow($base);
-            return $label;
-
-        } else {
-
-
-            $base = "<label" . add_attributes($attributes) . ">" . $label_text . "</label>";
-            $label = ($row == 0) ? $base : addNRow($base);
-            return $label;
-        }
+        return ($row == 0) ? $base : addNRow($base);
 
 
     }
@@ -738,16 +665,9 @@ if (!function_exists('addNRow')) {
     function addNRow($e, $attributes = [])
     {
 
-        if (is_string($attributes)) {
-
-            $att["class"] = $attributes;
-            return n_row_12($att) . $e . end_row();
-
-
-        } else {
-
-            return n_row_12($attributes) . $e . end_row();
-        }
+        return (is_string($attributes)) ?
+            n_row_12(["class" => $attributes]) . $e . end_row() :
+            n_row_12($attributes) . $e . end_row();
 
 
     }
@@ -770,7 +690,8 @@ if (!function_exists('img_enid')) {
     {
 
 
-        $conf["src"] = ($external == 0) ? "../img_tema/enid_service_logo.jpg" : "https://enidservice.com/inicio/img_tema/enid_service_logo.jpg";
+        $conf["src"] = ($external == 0) ?
+            "../img_tema/enid_service_logo.jpg" : "https://enidservice.com/inicio/img_tema/enid_service_logo.jpg";
 
         if (es_data($extra)) {
             $conf += $extra;
@@ -791,7 +712,7 @@ if (!function_exists('url_recuperacion_password')) {
 if (!function_exists('get_dominio')) {
     function get_dominio($url)
     {
-        $protocolos = array('http://', 'https://', 'ftp://', 'www.');
+        $protocolos = ['http://', 'https://', 'ftp://', 'www.'];
         $url = explode('/', str_replace($protocolos, '', $url));
         return $url[0];
     }
@@ -855,7 +776,7 @@ if (!function_exists('porcentaje_total')) {
     function porcentaje_total($cantidad, $total, $decimales = 2)
     {
 
-        if ($total  > 0 ){
+        if ($total > 0) {
 
             return $cantidad * 100 / $total;
         }
@@ -1234,7 +1155,7 @@ if (!function_exists('iframe')) {
     function iframe($attributes = '', $row_12 = 0)
     {
         $base = "<iframe " . add_attributes($attributes) . " ></iframe>";
-        return  ($row_12 == 0) ? $base : addNRow($base);
+        return ($row_12 == 0) ? $base : addNRow($base);
     }
 }
 if (!function_exists('center')) {
@@ -1242,7 +1163,7 @@ if (!function_exists('center')) {
     {
 
         $base = "<center " . add_attributes($attributes) . " ></center>";
-        return  ($row_12 == 0) ? $base : addNRow($base);
+        return ($row_12 == 0) ? $base : addNRow($base);
 
     }
 }
@@ -1618,10 +1539,10 @@ if (!function_exists('get_menu_session')) {
 
 
             $type_display = ($is_mobile > 0) ? " d-flex flex-column justify-content-between " : " display_flex_enid ";
-            $list = div(append([$vender, $l_session]),  $type_display);
+            $list = div(append([$vender, $l_session]), $type_display);
 
             if ($proceso_compra < 1) {
-                return div(ul($list,  "largenav " ), "text-right");
+                return div(ul($list, "largenav "), "text-right");
             }
 
 
@@ -1669,7 +1590,7 @@ if (!function_exists('btw')) {
 
             if ($frow > 0) {
 
-                $response = div(div(append([$a, $b]),  $class), 13);
+                $response = div(div(append([$a, $b]), $class), 13);
             }
 
 
@@ -1917,7 +1838,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0)
         "config_constants" => "config/constants.php",
         "desarrollo" => "desarrollo",
         "go_home" => "../",
-        "valoracion_servicio"=> "valoracion/?servicio="
+        "valoracion_servicio" => "valoracion/?servicio="
 
     ];
 
@@ -2073,7 +1994,8 @@ function primer_elemento($data, $index, $def = false)
 function ajustar($a, $b, $horizontal = 1)
 {
 
-    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between" : "d-flex flex-column justify-content-between";
+    $extra = (is_string($horizontal)) ? $horizontal : "";
+    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
     return div(div($a) . div($b), $class);
 
 }

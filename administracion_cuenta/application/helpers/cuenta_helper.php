@@ -6,11 +6,10 @@ if (!function_exists('invierte_date_time')) {
         function render_cuenta($data)
         {
 
-            $id_usuario =  $data["id_usuario"];
-            $usuario =  $data["usuario"];
+            $id_usuario = $data["id_usuario"];
             $r[] = div(get_menu($id_usuario), 2);
-            $r[] = div(format_cuenta($id_usuario, $usuario),10);
-            return append($r,"contenedor_principal_enid" );
+            $r[] = div(format_cuenta($id_usuario, $data["usuario"]), 10);
+            return append($r, "contenedor_principal_enid");
 
         }
 
@@ -141,7 +140,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_format_user($usuario, 1);
             $r[] = addNRow(div(get_campo($usuario, "email", ""), "top_20", 1));
             $r[] = addNRow(get_campo($usuario, "tel_contacto", "Tu prime apellido", 1));
-            $r[] = anchor_enid("MI DIRECCIÓN" . icon('fa  fa-fighter-jet'),
+            $r[] = anchor_enid(text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"),
                 [
                     "class" => "a_enid_black btn_direccion top_20",
                     "href" => "#tab_direccion",
@@ -442,7 +441,7 @@ if (!function_exists('invierte_date_time')) {
                 ),
 
 
-                li(icon("fa fa-gift", ["style" => "font-size:1.2em!important;"]) . anchor_enid(
+                li(icon("fa fa-gift f12 ") . anchor_enid(
                         "INTERESES Y PREFERENCIAS",
                         [
                             "class" => "btn_intereses",

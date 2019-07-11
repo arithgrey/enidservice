@@ -1,6 +1,6 @@
 "use strict";
 $(document).ready(() => {
-    $(".btn_direccion").click(function () {
+    $(".btn_direccion").click(() =>{
         set_option("v", 1);
         carga_direccion_usuario();
     });

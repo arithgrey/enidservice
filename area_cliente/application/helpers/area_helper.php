@@ -83,7 +83,6 @@ if (!function_exists('invierte_date_time')) {
         function get_format_valoraciones($valoraciones, $id_usuario, $alcance)
         {
 
-
             $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
             $x[] = div($valoraciones, "top_30");
             $x[] = div(
@@ -145,7 +144,7 @@ if (!function_exists('invierte_date_time')) {
 
     function get_menu($action)
     {
-        $a_tab_pagos =
+        $_pagos =
             anchor_enid("",
                 [
                     "href" => "#tab_pagos",
@@ -154,7 +153,7 @@ if (!function_exists('invierte_date_time')) {
                     "id" => 'btn_pagos'
                 ]);
 
-        $a_vendedor =
+        $_vendedor =
             anchor_enid(
                 div(
                     text_icon("fa fa-flag", " VENDER"),
@@ -180,7 +179,7 @@ if (!function_exists('invierte_date_time')) {
         $place_ventas = place("place_num_pagos_notificados");
 
 
-        $a_mis_compras = anchor_enid(text_icon('fa fa-credit-card-alt', " COMPRAS"),
+        $_compras = anchor_enid(text_icon('fa fa-credit-card-alt', " COMPRAS"),
             [
                 "id" => "mis_compras",
                 "href" => "#tab_mis_pagos",
@@ -196,7 +195,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $a_mis_valoraciones = anchor_enid(
+        $_valoraciones = anchor_enid(
             text_icon("fa fa-star", " VALORACIONES"),
             [
                 "id" => "mis_valoraciones",
@@ -204,22 +203,18 @@ if (!function_exists('invierte_date_time')) {
                 "data-toggle" => "tab"
             ]);
 
-        $a_lista_deseo = anchor_enid(icon("fa fa-gift") . "LISTA DE DESEOS",
-            [
-                "href" => path_enid("lista_deseos")
-            ]
-        );
+        $_lista_deseo = anchor_enid(text_icon("fa fa-gift" ,  "LISTA DE DESEOS")  , path_enid("lista_deseos"));
 
 
         $list = [
-            $a_vendedor,
+            $_vendedor,
             $a_mis_ventas,
             $place_ventas,
-            $a_mis_compras,
+            $_compras,
             $notificacion,
-            $a_mis_valoraciones,
-            $a_lista_deseo,
-            li($a_tab_pagos, ["class" => 'li_menu', "style" => "display: none;"]),
+            $_valoraciones,
+            $_lista_deseo,
+            li($_pagos, ["class" => 'li_menu', "style" => "display: none;"]),
 
         ];
         return ul($list, ["class" => "shadow border padding_10 d-flex flex-column justify-content-between", "style" => "min-height: 220px;"]);

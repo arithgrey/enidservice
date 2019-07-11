@@ -2,13 +2,14 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    if (!function_exists('get_form_entrega')) {
+    if (!function_exists('form_entrega')) {
 
-        function get_form_entrega()
+        function form_entrega()
         {
-            return btw(
 
-                div("FECHA DE ENTREGA", 'strong'),
+            return ajustar(
+                div("FECHA DE ENTREGA", 'strong')
+                ,
                 div(
                     input([
                         "data-date-format" => "yyyy-mm-dd",
@@ -18,10 +19,10 @@ if (!function_exists('invierte_date_time')) {
                         "value" => date("Y-m-d"),
 
                     ])
-                ),
-                "col-lg-6  d-flex align-items-center justify-content-between"
+                )
+                ,
+                "col-lg-6"
             );
-
         }
     }
     if (!function_exists('get_format_compras')) {
@@ -47,17 +48,17 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $r[] = get_form_entrega();
+            $r[] = form_entrega();
 
-            $r[] = btw(
-                div("FECHA REFERENCIA", 'strong' )
+            $r[] = ajustar(
+                div("FECHA REFERENCIA", 'strong')
                 ,
                 div(
                     create_select($opt_turnos, "tipo", "form-control", "tipo", "opcion", "val")
                 )
                 ,
 
-                "col-lg-6  d-flex align-items-center justify-content-between"
+                " d-flex align-items-center justify-content-between"
             );
 
 

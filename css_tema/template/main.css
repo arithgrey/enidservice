@@ -986,7 +986,10 @@ table {
     margin-top: -50px;
     display: block;
 }
-
+.top_menos_100 {
+    margin-top: -100px;
+    display: block;
+}
 
 .top_10 {
     margin-top: 10px;
