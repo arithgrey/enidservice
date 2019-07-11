@@ -8,12 +8,9 @@ window.onpopstate = event => {
 }
 $(document).ready(() => {
 
-    set_option({
-        "s": 1,
-        "page": 1,
-        "modalidad": 0
-    });
-
+    set_option("s", 1);
+    set_option("page", 1);
+    set_option("modalidad", 0);
     $("footer").ready(valida_action_inicial);
     $(".btn_servicios").click(carga_servicios);
     $(".tipo_promocion").click(configuracion_inicial);
@@ -36,24 +33,10 @@ $(document).ready(() => {
 
 let def_contenedores = () => {
 
-    let secciones = [
-        "selected_2",
-        "selected_3",
-        "selected_4",
-        "selected_5",
-        "selected_6",
-        "selected_7",
-        "primer_nivel",
-        "segundo_nivel",
-        "tercer_nivel",
-        "cuarto_nivel",
-        "quinto_nivel"
-    ];
-    secciones.forEach(function (element) {
-        set_option(element, 0);
-    });
-
-
+    let secciones = ["selected_2", "selected_3", "selected_4", "selected_5", "selected_6", "selected_7", "primer_nivel", "segundo_nivel", "tercer_nivel", "cuarto_nivel", "quinto_nivel"];
+    for (let x in secciones) {
+        set_option(secciones[x], 0);
+    }
 }
 let cancelar_carga_imagen = () => {
 
@@ -70,7 +53,7 @@ let carga_servicios = function () {
     set_option("s", 1);
     let global = (get_parameter_enid($(this), "id" || get_option("global")) > 0) ? 1 : 0;
     set_option("global", global);
-    let e = [".texto_ventas_titulo", ".contenedor_busqueda", ".contenedor_busqueda_articulos"];
+    let e =  [".texto_ventas_titulo", ".contenedor_busqueda", ".contenedor_busqueda_articulos"];
     despliega(e, 1);
 
     let url = "../q/index.php/api/servicio/empresa/format/json/";
@@ -100,7 +83,6 @@ let respuesta_carga_servicios = data => {
         render_enid(".place_servicios", data);
         $(".servicio").click(carga_info_servicio);
         $(".pagination > li > a, .pagination > li > span").click(function (e) {
-
             let page_html = $(this);
             let num_paginacion = $(page_html).attr("data-ci-pagination-page");
             if (validar_si_numero(num_paginacion) == true) {
@@ -129,12 +111,11 @@ let carga_informacion_servicio = (num = 1) => {
     set_option("s", 2);
     despliega([".contenedor_busqueda"], 0);
     let url = "../q/index.php/api/servicio/especificacion/format/json/";
-    let data_send = {
-        id_servicio: get_option("servicio"),
-        "num": num
-    };
+    let data_send = {id_servicio: get_option("servicio"), "num": num};
     request_enid("GET", data_send, url, respuesta_informacion_servicio, ".place_servicios", function () {
+
         recorre(".contenedor_principal_enid");
+
     });
 }
 
@@ -201,10 +182,7 @@ let respuesta_informacion_servicio = (data) => {
 let actualiza_entregas_en_casa = function (e) {
 
     let url = "../q/index.php/api/servicio/entregas_en_casa/format/json/";
-    let data_send = {
-        entregas_en_casa: get_parameter_enid($(this), "id"),
-        id_servicio: get_option("servicio")
-    };
+    let data_send = {entregas_en_casa: get_parameter_enid($(this), "id"), id_servicio: get_option("servicio")};
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
     }, ".place_sobre_el_negocio");
@@ -213,11 +191,7 @@ let actualiza_entregas_en_casa = function (e) {
 
 let actualiza_telefono_visible = function () {
     let url = "../q/index.php/api/servicio/telefono_visible/format/json/";
-    let data_send = {
-        telefono_visible: get_parameter_enid($(this), "id"),
-        id_servicio: get_option("servicio")
-    };
-
+    let data_send = {telefono_visible: get_parameter_enid($(this), "id"), id_servicio: get_option("servicio")};
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
     }, ".place_sobre_el_negocio");
@@ -233,66 +207,85 @@ let actualiza_ventas_mayoreo = function (e) {
     }, ".place_sobre_el_negocio");
 }
 
+
 let muestra_input_visible = (visible, i, t) => (visible === true) ? showonehideone(i, t) : showonehideone(i, t);
+
+
 let muestra_input_costo = () => {
 
-    muestra_input_visible($(".text_costo").is(":visible"), ".input_costo", ".text_costo");
+    let visible = $(".text_costo").is(":visible");
+    muestra_input_visible(visible, ".input_costo", ".text_costo");
+
 
 }
 
+
 let muestra_input_producto_nuevo = () => {
 
-    muestra_input_visible($(".text_nuevo").is(":visible"), ".input_nuevo", ".text_nuevo");
+    let visible = $(".text_nuevo").is(":visible");
+    muestra_input_visible(visible, ".input_nuevo", ".text_nuevo");
 }
 
 let muestra_input_ciclo_facturacion = () => {
 
-    muestra_input_visible($(".text_ciclo_facturacion").is(":visible"), ".input_ciclo_facturacion", ".text_ciclo_facturacion");
+    let visible = $(".text_ciclo_facturacion").is(":visible");
+    muestra_input_visible(visible, ".input_ciclo_facturacion", ".text_ciclo_facturacion");
 
 }
 
 let muestra_input_cantidad = () => {
 
-    let fn = ($(".text_cantidad").is(":visible") == true) ? showonehideone(".input_cantidad", ".text_cantidad") : showonehideone(".input_cantidad", ".text_cantidad");
 
+    if ($(".text_cantidad").is(":visible") == true) {
+        showonehideone(".input_cantidad", ".text_cantidad");
+    } else {
+        showonehideone(".input_cantidad", ".text_cantidad");
+    }
 }
 
 let muestra_input_incluye_envio = () => {
 
 
-    let fn = ($(".contenedor_informacion_envio").is(":visible") == true) ? showonehideone(".input_envio", ".contenedor_informacion_envio") : showonehideone(".input_envio", ".contenedor_informacion_envio");
-
+    if ($(".contenedor_informacion_envio").is(":visible") == true) {
+        showonehideone(".input_envio", ".contenedor_informacion_envio");
+    } else {
+        showonehideone(".input_envio", ".contenedor_informacion_envio");
+    }
 }
+
+
 let muestra_select_ciclo_facturacion = function (e) {
 
     set_option("id_ciclo_facturacion", get_parameter_enid($(this), "id"));
-    let x = ($(".text_ciclo_facturacion").is(":visible") == true) ? showonehideone(".input_ciclo_facturacion", ".text_ciclo_facturacion") : showonehideone(".input_ciclo_facturacion", ".text_ciclo_facturacion");
+    let visible = $(".text_ciclo_facturacion").is(":visible");
+    let x = (visible == true) ? showonehideone(".input_ciclo_facturacion", ".text_ciclo_facturacion") : showonehideone(".input_ciclo_facturacion", ".text_ciclo_facturacion");
 }
 
 
 let muestra_seccion_nombre_servicio = e => {
 
-
-    let x = ($(".text_nombre_servicio").is(":visible") == true) ? showonehideone(".input_nombre_servicio_facturacion", ".text_nombre_servicio") : showonehideone(".input_nombre_servicio_facturacion", ".text_nombre_servicio");
+    let visible = $(".text_nombre_servicio").is(":visible");
+    let x = (visible == true) ? showonehideone(".input_nombre_servicio_facturacion", ".text_nombre_servicio") : showonehideone(".input_nombre_servicio_facturacion", ".text_nombre_servicio");
 }
 
 
 let muestra_seccion_video_servicio = () => {
 
-    let x = ($(".text_video_servicio").is(":visible") == true) ? showonehideone(".input_url_youtube", ".text_video_servicio") : showonehideone(".input_url_youtube", ".text_video_servicio");
+    let visible = $(".text_video_servicio").is(":visible");
+    let x = (visible == true) ? showonehideone(".input_url_youtube", ".text_video_servicio") : showonehideone(".input_url_youtube", ".text_video_servicio");
 }
 
 
 let muestra_seccion_video_servicio_facebook = () => {
-
-    let x = ($(".text_video_servicio_facebook").is(":visible") == true) ? showonehideone(".input_url_facebook", ".text_video_servicio_facebook") : showonehideone(".input_url_facebook", ".text_video_servicio_facebook");
+    let visible = $(".text_video_servicio_facebook").is(":visible");
+    let x = (visible == true) ? showonehideone(".input_url_facebook", ".text_video_servicio_facebook") : showonehideone(".input_url_facebook", ".text_video_servicio_facebook");
 }
 
 
 let muestra_seccion_desc_servicio = e => {
     $(".note-codable").hide();
-
-    let x = ($(".text_desc_servicio").is(":visible") == true) ? showonehideone(".input_desc_servicio_facturacion", ".text_desc_servicio") : showonehideone(".input_desc_servicio_facturacion", ".text_desc_servicio");
+    let visible = $(".text_desc_servicio").is(":visible");
+    let x = (visible == true) ? showonehideone(".input_desc_servicio_facturacion", ".text_desc_servicio") : showonehideone(".input_desc_servicio_facturacion", ".text_desc_servicio");
 }
 
 
@@ -361,18 +354,14 @@ let valida_url_youtube = () => {
 
     let url = get_parameter(".url_youtube");
     let text_youtube = "youtu";
+
     let input = ".url_youtube";
     let place_msj = ".place_url_youtube";
-    let mensaje_user = "Url no valida!, ingrese url de youtube " +
-        "<div class='url_youtube_alert'>" +
-        "<i class='fa fa-youtube-play'></i> " +
-        "Youtube! " +
-        "</div>";
+    let mensaje_user = "Url no valida!, ingrese url de youtube <div class='url_youtube_alert'><i class='fa fa-youtube-play'></i> Youtube! </div>";
 
     if (url.indexOf(text_youtube) != -1) {
         $(place_msj).empty();
         return 1;
-
     } else {
 
         $(input).css("border", "1px solid rgb(13, 62, 86)");
@@ -384,7 +373,7 @@ let valida_url_youtube = () => {
 
 let actualiza_dato_servicio_youtube = e => {
     if (valida_url_youtube() == 1) {
-
+        /* Validamos que la url realmente sea de youtube */
         let url = "../q/index.php/api/servicio/q/format/json/";
         let data_send = $(".form_servicio_youtube").serialize() + "&" + $.param({
             "id_servicio": get_option("servicio")
@@ -398,7 +387,6 @@ let actualiza_dato_servicio_youtube = e => {
 
 
 let actualiza_dato_servicio_facebook = e => {
-
     let url = "../q/index.php/api/servicio/q/format/json/";
     let data_send = $(".form_servicio_facebook").serialize() + "&" + $.param({
         "id_servicio": get_option("servicio")
@@ -436,9 +424,9 @@ let registrar_ciclo_facturacion = e => {
 }
 
 let carga_grupos = () => {
-
     let url = "../q/index.php/api/servicio/grupos/format/json/";
-    request_enid("GET", {}, url, respuesta_grupos);
+    let data_send = {};
+    request_enid("GET", data_send, url, respuesta_grupos);
 }
 
 
@@ -452,6 +440,7 @@ let respuesta_grupos = data => {
     });
     carga_info_grupos();
 }
+
 
 let carga_info_grupos = () => {
 
@@ -476,24 +465,20 @@ let respuesta_info_grupos = data => {
 let carga_form_nuevo_grupo = () => {
 
     let url = "../q/index.php/api/servicio/grupo_form/format/json/";
-    request_enid("GET", {}, url, respuesta_nuevo_grupo, ".place_info_grupos");
+    let data_send = {};
+    request_enid("GET", data_send, url, respuesta_nuevo_grupo, ".place_info_grupos");
 }
 let respuesta_nuevo_grupo = data => {
-
     render_enid(".place_grupos", data);
     $(".form_grupo_sistema").submit(agregar_grupo_sistema);
-
 }
 let agregar_grupo_sistema = e => {
-
     let url = "../q/index.php/api/servicio/grupo_form/format/json/";
     let data_send = $(".form_grupo_sistema").serialize();
     request_enid("POST", data_send, url, respuesta_grupo_sistema, ".place_info_grupos", "Cargando ... ");
     e.preventDefault();
-
 }
 let respuesta_grupo_sistema = data => {
-
     set_option("grupo", data);
     carga_grupos();
     carga_info_grupos();
@@ -536,21 +521,35 @@ let agrega_quita_servicio_grupo = function (e) {
 
 let muestra_seccion_url_pagina_web = () => {
 
-    let fn = ($(".text_pagina_venta").is(":visible") == true) ? showonehideone(".input_url_pagina_web", ".text_pagina_venta") : showonehideone(".input_url_pagina_web", ".text_pagina_venta");
+    if ($(".text_pagina_venta").is(":visible") == true) {
+        showonehideone(".input_url_pagina_web", ".text_pagina_venta");
+    } else {
+        showonehideone(".input_url_pagina_web", ".text_pagina_venta");
+    }
 }
+
 let muestra_seccion_porcentaje_ganancia = () => {
 
-    let fn = ($(".text_porcentaje_ganancia").is(":visible") == true) ? showonehideone(".input_porcentaje_ganancia", ".text_porcentaje_ganancia") : showonehideone(".input_porcentaje_ganancia", ".text_porcentaje_ganancia");
 
+    if ($(".text_porcentaje_ganancia").is(":visible") == true) {
+        showonehideone(".input_porcentaje_ganancia",
+            ".text_porcentaje_ganancia");
+    } else {
+        showonehideone(".input_porcentaje_ganancia",
+            ".text_porcentaje_ganancia");
+    }
 }
 
 let muestra_seccion_porcentaje_ganancia_afiliados = () => {
 
 
-    let fn = ($(".text_porcentaje_ganancias_afiliados").is(":visible") == true) ? showonehideone(".input_porcentaje_ganancia_afiliados",
-        ".text_porcentaje_ganancias_afiliados") : showonehideone(".input_porcentaje_ganancia_afiliados",
-        ".text_porcentaje_ganancias_afiliados");
-
+    if ($(".text_porcentaje_ganancias_afiliados").is(":visible") == true) {
+        showonehideone(".input_porcentaje_ganancia_afiliados",
+            ".text_porcentaje_ganancias_afiliados");
+    } else {
+        showonehideone(".input_porcentaje_ganancia_afiliados",
+            ".text_porcentaje_ganancias_afiliados");
+    }
 }
 
 let configuracion_inicial = function () {
@@ -558,7 +557,6 @@ let configuracion_inicial = function () {
 
     set_option("modalidad", get_parameter_enid($(this), "id"));
     if (get_option("modalidad") == 1) {
-
         set_option("id_ciclo_facturacion", 9);
         $(".text_modalidad").text("Servicio");
         $(".tipo_producto").css("color", "black");
@@ -603,12 +601,10 @@ let simula_envio = (e) => {
 }
 let verifica_existencia_categoria = () => {
 
-    set_option("s", 4);
+    set_option("s",4);
     let url = "../q/index.php/api/servicio/verifica_existencia_clasificacion/format/json/";
-    let data_send = {
-        "clasificacion": get_parameter(".nuevo_producto_nombre"),
-        "id_servicio": get_option("modalidad")
-    };
+    let nombre = get_parameter(".nuevo_producto_nombre");
+    let data_send = {"clasificacion": nombre, "id_servicio": get_option("modalidad")};
     request_enid("GET", data_send, url, listar_categorias);
 }
 
@@ -624,7 +620,6 @@ let listar_categorias = (data) => {
 
 
     def_categorias();
-    let f = 0;
     if (array_key_exists("total", data) == true && data.total > 0) {
         let categorias = data.categorias;
         if (array_key_exists(1, categorias) == true && categorias[1].nivel != undefined && categorias[1].nivel == 1) {
@@ -643,109 +638,76 @@ let listar_categorias = (data) => {
                 switch (nivel) {
 
                     case 1:
-
-
-                        set_option({
-                            "selected_1": 1,
-                            "selected_num_1": id_clasificacion,
-                        });
+                        set_option("selected_1", 1);
+                        set_option("selected_num_1", id_clasificacion);
                         carga_listado_categorias();
                         set_option("padre", id_clasificacion);
+
                         break;
 
                     case 2:
 
-                        set_option({
-                            "selected_2": 1,
-                            "selected_num_2": id_clasificacion,
-                        });
+                        set_option("selected_2", 1);
+                        set_option("selected_num_2", id_clasificacion);
                         carga_listado_categorias_segundo_nivel();
-
-                        set_option({
-                            "padre": id_clasificacion,
-                            "segundo_nivel": id_clasificacion
-                        });
-
+                        set_option("padre", id_clasificacion);
+                        set_option("segundo_nivel", id_clasificacion);
                         break;
 
                     case 3:
-
-
-                        set_option({
-                            "selected_3": 1,
-                            "selected_num_3": id_clasificacion,
-                        });
-
+                        set_option("selected_3", 1);
+                        set_option("selected_num_3", id_clasificacion);
                         carga_listado_categorias_tercer_nivel();
-
-                        set_option({
-                            "selected_3": 1,
-                            "selected_num_3": id_clasificacion,
-                        });
-
-
+                        set_option("padre", id_clasificacion);
+                        set_option("tercer_nivel", id_clasificacion);
                         break;
 
                     case 4:
 
-                        set_option({
-                            "selected_4": 1,
-                            "selected_num_4": id_clasificacion
-                        });
-
-
+                        set_option("selected_4", 1);
+                        set_option("selected_num_4", id_clasificacion);
                         carga_listado_categorias_cuarto_nivel();
-
-                        set_option({
-                            "padre": id_clasificacion,
-                            "cuarto_nivel": id_clasificacion,
-                        });
-
-
+                        set_option("padre", id_clasificacion);
+                        set_option("cuarto_nivel", id_clasificacion);
                         break;
                     default:
                 }
             }
-            f++;
+        } else {
+            carga_listado_categorias();
         }
+    } else {
+        carga_listado_categorias();
     }
-    let fn = (f > 0) ? carga_listado_categorias() : "";
 
 }
 
-let set_nombre_servicio_html = n_nombre_servicio => {
 
+let set_nombre_servicio_html = n_nombre_servicio => {
     set_option("nombre_servicio", n_nombre_servicio);
+    let nombre_servicio = n_nombre_servicio;
     $(".nombre_producto").val(n_nombre_servicio);
 }
 
 let clean_data_categorias = () => {
 
-    empty_elements([
-        ".segundo_nivel_seccion",
-        ".tercer_nivel_seccion",
-        ".cuarto_nivel_seccion",
-        ".quinto_nivel_seccion",
-        ".sexto_nivel_seccion"
-    ]);
-    set_option({
-        "nivel": 1,
-        "padre": 0
-    });
-
+    empty_elements([".segundo_nivel_seccion", ".tercer_nivel_seccion", ".cuarto_nivel_seccion", ".quinto_nivel_seccion", ".sexto_nivel_seccion"]);
+    set_option("nivel", 1);
+    set_option("padre", 0);
     showonehideone(".contenedor_categorias_servicios", ".contenedor_agregar_servicio_form");
 }
 
 let carga_listado_categorias = () => {
 
-
+    debugger;
+    let nombre = get_parameter(".nuevo_producto_nombre");
     clean_data_categorias();
     let data_send = {
         "modalidad": get_option("modalidad"),
         "padre": 0,
         "nivel": get_option("nivel"),
         "is_mobile": is_mobile(),
-        "nombre": get_parameter(".nuevo_producto_nombre")
+        "nombre": nombre
     };
     let url = "../q/index.php/api/servicio/lista_categorias_servicios/format/json/";
     request_enid("GET", data_send, url, respuestas_primer_nivel, ".primer_nivel_seccion");
@@ -910,15 +872,10 @@ let muestra_q_nivel = (data) => {
 
 
 let carga_listado_categorias_sexto_nivel = () => {
-
     let url = "../q/index.php/api/servicio/lista_categorias_servicios/format/json/";
-    set_option({
-        "padre": padre,
-        "nivel": 6,
-    });
-
-
-    empty_elements(".sexto_nivel");
+    set_option("padre", padre);
+    set_option("nivel", 6);
+    empty_elements([".sexto_nivel"]);
     let data_send = {
         "modalidad": get_option("modalidad"),
         "padre": get_option("padre"),
@@ -940,10 +897,10 @@ let muestra_sexo_nivel = (data) => {
 
 let agregar_categoria_servicio = function () {
 
-    set_option({
-        "id_clasificacion": get_parameter_enid($(this), "id"),
-        "id_ciclo_facturacion": (get_option("modalidad") == 0) ? 5 : get_parameter("#ciclo")
-    });
+    let id_clasificacion = get_parameter_enid($(this), "id");
+    set_option("id_clasificacion", id_clasificacion);
+    let id_ciclo_facturacion = (get_option("modalidad") == 0) ? 5 : get_parameter("#ciclo");
+    set_option("id_ciclo_facturacion", id_ciclo_facturacion);
     registra_nuevo_servicio();
 }
 
@@ -969,7 +926,8 @@ let response_registro = (data) => {
     if (data.registro != 0 && data.registro.servicio > 0) {
         set_option("servicio", data.registro.servicio);
         carga_informacion_servicio(1);
-        show_tabs([".btn_serv", "#tab_productividad"])
+        $("#tab_productividad").tab("show");
+        $(".btn_serv").tab("show");
         if (is_mobile() != 1) {
             reset_form("form_nombre_producto");
             despliega([".btn_agregar_servicios"], 1);
@@ -1051,12 +1009,9 @@ let actualiza_envio_incluido = () => {
 
 
 let respuestas_actualiza_envio_incluido = (data) => {
-
     carga_informacion_servicio(4);
-    set_option({
-        "flag_recorrido": 1,
-        "seccion_a_recorrer": ".text_info_envio",
-    });
+    set_option("flag_recorrido", 1);
+    set_option("seccion_a_recorrer", ".text_info_envio");
 }
 
 
@@ -1087,16 +1042,15 @@ let actualiza_cantidad = () => {
 
 let respuesta_actualiza_cantidad = () => {
     carga_informacion_servicio(4);
-
-    set_option({
-        "seccion_a_recorrer": ".text_cantidad",
-        "flag_recorrido": 1,
-    });
+    set_option("seccion_a_recorrer", ".text_cantidad");
+    set_option("flag_recorrido", 1);
 }
+
 
 let agrega_color_servicio = function (e) {
 
-    set_option("color", get_parameter_enid($(this), "id"));
+    let color = get_parameter_enid($(this), "id");
+    set_option("color", color);
     let data_send = $.param({
         "id_servicio": get_option("servicio"),
         "color": get_option("color")
@@ -1105,12 +1059,11 @@ let agrega_color_servicio = function (e) {
     request_enid("POST", data_send, url, respuesta_agregar_color);
 }
 
+
 let respuesta_agregar_color = (data) => {
     carga_informacion_servicio(2);
-    set_option({
-        "seccion_a_recorrer":  "#contenedor_colores_disponibles",
-        "flag_recorrido":  1
-    });
+    set_option("seccion_a_recorrer", "#contenedor_colores_disponibles");
+    set_option("flag_recorrido", 1);
 }
 
 let carga_listado_colores = () => {
@@ -1124,8 +1077,8 @@ let respuesta_listado_colores = (data) => {
     recorre("#seccion_colores_info");
 }
 let elimina_color_servicio = function () {
-
-    set_option("color", get_parameter_enid($(this), "id"));
+    let color = get_parameter_enid($(this), "id");
+    set_option("color", color);
     let data_send = $.param({
         "id_servicio": get_option("servicio"),
         "color": get_option("color")
@@ -1134,29 +1087,27 @@ let elimina_color_servicio = function () {
     request_enid("DELETE", data_send, url, respuesta_eliminar_color);
 }
 let respuesta_eliminar_color = (data) => {
-
     carga_informacion_servicio(2);
-    set_option({
-        "seccion_a_recorrer": "#contenedor_colores_disponibles",
-        "flag_recorrido": 1,
-    });
-
+    set_option("seccion_a_recorrer", "#contenedor_colores_disponibles");
+    set_option("flag_recorrido", 1);
 }
+
+
 let evalua_precio = () => {
 
     switch (parseInt(get_parameter(".ci_facturacion"))) {
         case 9:
 
-            despliega(".contenedor_precio", 0);
+            despliega([".contenedor_precio"], 0);
             $(".precio").val(0);
             break;
         case 5:
-            despliega(".contenedor_precio", 0);
+            despliega([".contenedor_precio"], 0);
             $(".precio").val(0);
             break;
         default:
 
-            despliega(".contenedor_precio");
+            despliega([".contenedor_precio"], 1);
     }
 }
 
@@ -1168,31 +1119,25 @@ let valida_action_inicial = () => {
         case 2:
             set_option("servicio", get_parameter(".extra_servicio"));
             carga_informacion_servicio(1);
-            set_option({
-                "modalidad":  1,
-                "nuevo":  0,
-            });
+            set_option("modalidad", 1);
+            set_option("nuevo", 0);
             break;
 
         case 1:
             /*Si es version movil recorre pantalla*/
-            if (is_mobile() == 1) {recorre(".contenedor_agregar_servicio_form")}
+            if (is_mobile() == 1) {
+                recorre(".contenedor_agregar_servicio_form")
+            }
             let x = (is_mobile() == 1) ? despliega([".btn_agregar_servicios", ".btn_servicios"], 0) : "";
-
-            set_option({
-                "modalidad":  0,
-                "nuevo":  1,
-            });
+            set_option("modalidad", 0);
+            set_option("nuevo", 1);
             despliega([".contenedor_articulos_mobil"], 0);
             break;
         case 0:
 
             carga_servicios();
-            set_option({
-                "modalidad": 1,
-                "nuevo": 0,
-
-            });
+            set_option("modalidad", 1);
+            set_option("nuevo", 0);
             break;
         default:
             break;
@@ -1227,6 +1172,9 @@ let muestra_sugerencias_meta_key_words = function (data) {
 
     if (arr_registros.length > 0) {
         let tag_sugerencias = $('.tag_catalogo');
+        let arr_sugerencias = [];
+        let x = 0;
+
         $.each(tag_sugerencias, function (i, val) {
             for (let i = 0; i < arr_registros.length; i++) {
 
@@ -1240,8 +1188,9 @@ let muestra_sugerencias_meta_key_words = function (data) {
 }
 let auto_complete_metakeyword = function (e) {
 
-    set_parameter(".metakeyword_usuario", get_parameter_enid($(this), "id"));
-    submit_enid(".form_tag");
+    let tag = get_parameter_enid($(this), "id");
+    $(".metakeyword_usuario").val(tag);
+    $(".form_tag").submit();
 }
 
 let carga_tallas = () => {
@@ -1279,8 +1228,11 @@ let set_tiempo_entrega = () => {
 
 }
 
-let respuesta_tiempo_entrega = (data) => $(".response_tiempo_entrega").empty();
+let respuesta_tiempo_entrega = (data) => {
 
+    $(".response_tiempo_entrega").empty();
+
+};
 let set_imagen_principal = function () {
     let id = get_parameter_enid($(this), "id");
     if (id > 0) {
@@ -1308,7 +1260,6 @@ let set_url_ml = () => {
 
 };
 let activa_publicacion = function () {
-
     let status = get_parameter_enid($(this), "status");
     let id_servicio = get_parameter_enid($(this), "id");
     let data_send = {"status": status, "id_servicio": id_servicio};
@@ -1379,7 +1330,7 @@ let retorno = () => {
 
         case 1:
 
-            window.location = document.referrer;
+            window.location =  document.referrer;
 
             break;
 
@@ -1396,7 +1347,7 @@ let retorno = () => {
 
         case 4:
 
-            window.location = "";
+            window.location =  "";
 
             break;
 
@@ -1409,7 +1360,8 @@ let retorno = () => {
 let puntos_venta = () => {
 
     let url = "../q/index.php/api/linea_metro/disponibilidad/format/json/";
-    request_enid("GET", {}, url, r_lineas);
+    let data_send = {};
+    request_enid("GET", data_send, url, r_lineas);
 }
 let r_lineas = function (data) {
 
@@ -1417,51 +1369,56 @@ let r_lineas = function (data) {
     $(".agregar_linea").click(agregar_linea);
     $(".quitar_linea").click(quitar_linea);
     $(".puntos_encuentro").click(puntos_encuentro);
+
+
 }
 let agregar_linea = function () {
 
-    let id = get_parameter_enid($(this), "id");
+    let id =  get_parameter_enid($(this),"id");
     let url = "../q/index.php/api/linea_lista_negra/index/format/json/";
-    let data_send = {"lista_negra": 0, "id": id};
+    let data_send = {"lista_negra" : 0 , "id" : id};
     request_enid("PUT", data_send, url, puntos_venta);
 }
 let quitar_linea = function () {
 
-    let id = get_parameter_enid($(this), "id");
+    let id =  get_parameter_enid($(this),"id");
     let url = "../q/index.php/api/linea_lista_negra/index/format/json/";
-    let data_send = {"lista_negra": 1, "id": id};
+    let data_send = {"lista_negra" : 1 , "id" : id};
     request_enid("PUT", data_send, url, puntos_venta);
 }
 let puntos_encuentro = function () {
 
-    let id = (get_parameter_enid($(this), "id") > 0) ? get_parameter_enid($(this), "id") : get_option("id_punto_encuentro");
-    set_option("id_punto_encuentro", id);
-    if (id > 0) {
+    let id =  ( get_parameter_enid($(this),"id") >  0 ) ?  get_parameter_enid($(this),"id")  : get_option("id_punto_encuentro");
+    set_option("id_punto_encuentro" , id);
+    if (id >  0){
 
         let url = "../q/index.php/api/punto_encuentro/disponibilidad/format/json/";
         let data_send = {"id": id, "v": 1};
         request_enid("GET", data_send, url, r_puntos_encuentro);
     }
 }
-let r_puntos_encuentro = function (data) {
+let r_puntos_encuentro  = function (data) {
 
     render_enid(".place_puntos_venta", data);
     $(".quitar_punto").click(quitar_punto);
     $(".agregar_punto").click(agregar_punto);
 
+
 }
 let quitar_punto = function () {
 
-    let id = get_parameter_enid($(this), "id");
+
+    let id =  get_parameter_enid($(this),"id");
     let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
-    let data_send = {"lista_negra": 1, "id": id};
+    let data_send = {"lista_negra" : 1 , "id" : id};
     request_enid("PUT", data_send, url, puntos_encuentro);
 
 }
 let agregar_punto = function () {
 
-    let id = get_parameter_enid($(this), "id");
+    alert();
+    let id =  get_parameter_enid($(this),"id");
     let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
-    let data_send = {"lista_negra": 0, "id": id};
+    let data_send = {"lista_negra" : 0 , "id" : id};
     request_enid("PUT", data_send, url, puntos_encuentro);
 }

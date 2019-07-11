@@ -26,14 +26,26 @@ $("footer").ready(() => {
 });
 let set_option = (key, value = 0) => {
 
+
     if (isArray(key)) {
 
+        for (var i = 0; i < key.length; i++) {
+            let indice = key[i];
+            i++;
+            let valor = key[i];
+            option[indice] = valor;
+        }
 
-    } else if (isJson(key)) {
+
+    } else if (typeof key === 'string' ) {
+
+        option[key] = value;
 
     } else {
 
-        option[key] = value;
+        $.each(key, function(k, val) {
+            option[k] = val;
+        });
     }
 
 }
@@ -424,7 +436,7 @@ let despliega = (array, tipo = 1) => {
     let display = (tipo > 0) ? "block" : "none";
     if (isArray(array)) {
 
-        array.forEach(function(element) {
+        array.forEach(function (element) {
             $(element).css("display", display);
         });
 
@@ -440,7 +452,7 @@ let empty_elements = (array) => {
 
     if (isArray(array)) {
 
-        array.forEach(function(element) {
+        array.forEach(function (element) {
             $(element).empty();
         });
     } else {
@@ -654,7 +666,16 @@ let bloquea_form = form => $("*", form).prop('disabled', true);
 let is_mobile = () => get_option("is_mobile");
 
 let isArray = (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
-let isJson = (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Json]';
+let isJson = (str) =>{
+
+    try {
+
+        return (typeof JSON.parse(str) === 'object');
+
+    } catch (e) {
+        return false;
+    }
+};
 
 /*Regresa el valor que esta en el nodo html*/
 let get_parameter = (element, parse_int = 0) => (parse_int < 1) ? $(element).val() : parseInt($(element).val());
@@ -711,7 +732,7 @@ let show_tabs = (str, tipo = 1) => {
     let type = (tipo > 0) ? "show" : "hide";
     if (isArray(str)) {
 
-        str.forEach(function(element) {
+        str.forEach(function (element) {
             $(element).tab(type);
         });
 
@@ -723,7 +744,7 @@ let show_tabs = (str, tipo = 1) => {
 }
 let append_enid = (array) => {
 
-    return  array.join(",");
+    return array.join(",");
 }
 
 

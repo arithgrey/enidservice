@@ -5,12 +5,10 @@ $(document).ready(function () {
         "servicio", get_parameter(".servicio"),
         "respuesta_valorada", 0,
         "desde_valoracion", get_parameter(".desde_valoracion"),
-        "orden", "desc"
+        "orden", "desc",
     ]);
-
     $("footer").ready(carga_productos_sugeridos);
     $("footer").ready(carga_valoraciones);
-
     $(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);
     $(".talla").click(agregar_talla);
 

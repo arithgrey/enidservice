@@ -176,7 +176,7 @@ let response_carga_mapa = (data) => {
 	recorre(".tab-content");
 	$(".perfil_recurso").click(modifica_accesos_usuario);
 }
-let modifica_accesos_usuario = (e) => {
+let modifica_accesos_usuario = function(e) {
 	
 	set_option("id_recurso", get_parameter_enid($(this) , "id"));	
 	let url 		=  	"../q/index.php/api/perfil_recurso/permiso/format/json/";	
