@@ -347,7 +347,7 @@ class Home extends CI_Controller
 
                 ];
 
-                $this->app->pagina($data, 'detalle');
+                $this->app->pagina($data, render_pendidos($data) ,1);
             }
 
 

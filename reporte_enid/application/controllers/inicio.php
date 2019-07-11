@@ -22,7 +22,7 @@ class Inicio extends CI_Controller
 
 		$data["categorias_destacadas"] = $this->carga_categorias_destacadas();
 		$data = $this->app->cssJs($data, "reporte_enid");
-		$this->app->pagina($data, 'empresas_enid');
+		$this->app->pagina($data, render_reporte($data) ,1);
 
 	}
 	private function module_redirect($num_perfil)

@@ -1425,15 +1425,13 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $tipificaciones = "";
-
+            $r =  [];
             foreach ($data as $row) {
 
 
                 $tipificaciones = btw(
 
-                    div(
-                        text_icon("fa fa-clock-o", $row["fecha_registro"]), 3)
-
+                    div(text_icon("fa fa-clock-o", $row["fecha_registro"]), 3)
                     ,
                     div($row["nombre_tipificacion"], 9)
                     ,
@@ -1444,13 +1442,10 @@ if (!function_exists('invierte_date_time')) {
             }
 
             if (es_data($data)) {
-
                 $r[] = div(heading_enid("MOVIMIENTOS", 4, "row"), " top_30 bottom_30 padding_10  row");
                 $r[] = div($tipificaciones, " top_30 bottom_30 padding_10 border row");
-                return append($r);
-
             }
-
+            return append($r);
         }
     }
     if (!function_exists('crea_seccion_productos')) {
@@ -1633,6 +1628,7 @@ if (!function_exists('invierte_date_time')) {
         function create_seccion_tipo_entrega($recibo, $tipos_entregas)
         {
 
+            $r =  [];
             if (es_data($recibo)):
                 $tipo = "";
                 $id_tipo_entrega = $recibo[0]["tipo_entrega"];
@@ -1640,7 +1636,7 @@ if (!function_exists('invierte_date_time')) {
 
                     if ($row["id"] == $id_tipo_entrega) {
                         $tipo = $row["nombre"];
-                        echo input_hidden(
+                        $r[] =  input_hidden(
                             [
                                 "class" => "text_tipo_entrega",
                                 "value" => $tipo
@@ -1662,7 +1658,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
                 $tipo = div($tipo, "encabezado_tipo_entrega letter-spacing-5  text-right bottom_20", 1);
-                return div($encabezado . $tipo, "contenedor_tipo_entrega", 1);
+                return div($encabezado . $tipo.append($r), "contenedor_tipo_entrega", 1);
 
             endif;
 
@@ -1695,7 +1691,10 @@ if (!function_exists('invierte_date_time')) {
 
             $response = "";
             if (es_data($recibo)):
-                if ($recibo[0]["se_cancela"] < 1 && $recibo[0]["status"] != 10 && $recibo[0]["cancela_cliente"] < 1) {
+                if (
+                    primer_elemento($recibo , "se_cancela" ) < 1 &&
+                    primer_elemento($recibo , "status")  != 10 &&
+                    primer_elemento($recibo, "cancela_cliente" ) < 1) {
 
                     $status = $recibo[0]["status"];
                     $text_status = "";
