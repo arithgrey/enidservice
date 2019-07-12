@@ -17,7 +17,11 @@ if (!function_exists('invierte_date_time')) {
                                                $id_recibo)
     {
 
-        $r[] = form_open("", ["class" => "d-flex justify-content-between flex-column shadow form_direccion_envio  border form_direccion_envio padding_20"]);
+        $r[] = form_open("",
+            [
+                "class" => "d-flex justify-content-between flex-column shadow form_direccion_envio  border form_direccion_envio padding_20"
+            ]
+        );
 
         $a = btw(
 
@@ -186,7 +190,14 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $select = create_select($options, 'direccion_principal', 'direccion_principal', 'direccion_principal', 'text', 'val');
+        $select = create_select(
+            $options,
+            'direccion_principal',
+            'direccion_principal',
+            'direccion_principal',
+            'text',
+            'val'
+        );
 
         $r[] =
             btw(

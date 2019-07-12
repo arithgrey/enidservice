@@ -69,7 +69,7 @@ class Home extends CI_Controller
     {
 
         $data["css"] = ["search_sin_encontrar.css"];
-        $response = (get_param_def($param, "tienda") < 1) ? get_format_sin_resultados() : get_format_sin_resultados_tienda();
+        $response = (get_param_def($param, "tienda") < 1) ? sin_resultados() : sin_resultados_tienda();
         $this->app->pagina($data, $response, 1);
 
     }
