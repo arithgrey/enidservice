@@ -135,7 +135,110 @@ function sub_categorias_destacadas($param)
     return $response;
 
 }
+if (!function_exists('get_base_html')) {
+    function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
+    {
 
+        if (is_numeric($attributes)) {
+
+            switch ($attributes) {
+                case 1:
+
+                    return addNRow($info);
+
+                    break;
+                case 2:
+
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-2 col-lg-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-2'>" . $info . "</{$tipo}>";
+
+                    break;
+                case 3:
+                    $response = "<{$tipo} class='col-lg-3'>" . $info . "</{$tipo}>";
+                    break;
+                case 4:
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-4 col-lg-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-4'>" . $info . "</{$tipo}>";
+                    break;
+                case 5:
+                    $response = "<{$tipo} class='col-lg-5'>" . $info . "</{$tipo}>";
+                    break;
+                case 6:
+
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-6 col-lg-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-6'>" . $info . "</{$tipo}>";
+
+                    break;
+
+                case 7:
+
+                    $response = "<{$tipo} class='col-lg-7'>" . $info . "</{$tipo}>";
+                    break;
+
+
+                case 8:
+
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-8 col-lg-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-8'>" . $info . "</{$tipo}>";
+
+                    break;
+                case 9:
+                    $response = "<{$tipo} class='col-lg-9'>" . $info . "</{$tipo}>";
+                    break;
+
+                case 10:
+
+
+                    $response = ($row > 0) ? "<{$tipo} class='col-lg-10 col-lg-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-10'>" . $info . "</{$tipo}>";
+
+                    break;
+
+                case 11:
+                    $response = "<{$tipo} class='col-lg-11'>" . $info . "</{$tipo}>";
+                    break;
+
+
+                case 12:
+
+
+                    $response = "<{$tipo} class='col-lg-12'>" . $info . "</{$tipo}>";
+
+                    break;
+
+                case 13:
+
+                    $response = "<{$tipo} class='row'>" . $info . "</{$tipo}>";
+
+                    break;
+
+
+            }
+
+            if ($frow > 0) {
+                $response = $tipo($response, 13);
+            }
+            return $response;
+
+        } else {
+
+            if (is_array($attributes)) {
+
+                $base = "<{$tipo}" . add_attributes($attributes) . ">" . $info . "</{$tipo}>";
+                $d = ($row > 0) ? addNRow($base) : $base;
+                return $d;
+
+            } else {
+
+                $base = "<{$tipo} class='{$attributes}'>" . $info . "</{$tipo}>";
+                $d = ($row > 0) ? addNRow($base) : $base;
+                return $d;
+            }
+
+
+        }
+
+    }
+}
+
+
+
+/*
 if (!function_exists('get_base_html')) {
     function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
     {
@@ -233,7 +336,7 @@ if (!function_exists('get_base_html')) {
 
     }
 }
-
+*/
 
 if (!function_exists('div')) {
     function div($info, $attributes = [], $row = 0, $frow = 0)
@@ -715,13 +818,6 @@ if (!function_exists('get_dominio')) {
         $protocolos = ['http://', 'https://', 'ftp://', 'www.'];
         $url = explode('/', str_replace($protocolos, '', $url));
         return $url[0];
-    }
-}
-if (!function_exists('get_info_servicio')) {
-    function get_info_servicio($q = '')
-    {
-        $num_hist = 9990890;
-        return $num_hist;
     }
 }
 if (!function_exists('mayus')) {
