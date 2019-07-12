@@ -5,39 +5,41 @@ if (!function_exists('invierte_date_time')) {
     function render_articulo($data)
     {
 
-        $id_usuario =  $data["id_usuario"];
-        $servicio =  $data["servicio"];
-        $numero_valoraciones =  $data["numero_valoraciones"];
-        $comentarios =  $data["comentarios"];
-        $respuesta_valorada =  $data["respuesta_valorada"];
 
-        $r[] = get_title_valoraciones($id_usuario);
+        $servicio = $data["servicio"];
+        $numero_valoraciones = $data["numero_valoraciones"];
+        $comentarios = $data["comentarios"];
+
+        $r[] = titulo_valoraciones($data["id_usuario"]);
         $r[] = btw(
-            anchor_enid("ESCRIBE UNA RESEÑA" . icon("fa fa-chevron-right ir"),
+            anchor_enid(
+                text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑA")
+                ,
                 [
                     "class" => "escribir_valoracion white escribir",
                     "href" => "../valoracion?servicio=" . $servicio,
 
-                ])
+                ]
+            )
             ,
             crea_resumen_valoracion($numero_valoraciones)
             ,
             "col-lg-4 h-400 d-flex flex-column justify-content-center text-center"
         );
 
-        $z[] = div("", "table_orden_1" );
+        $z[] = div("", "table_orden_1");
         $z[] = btw(
             div(heading_enid("ORDENAR POR", 4), 4),
-            div(get_criterios_busqueda(), 8),
+            div(criterios_busqueda(), 8),
             " mb-5"
         );
         $z[] = btw(
-            crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada),
+            crea_resumen_valoracion_comentarios($comentarios, $data["respuesta_valorada"]),
             div(get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio), "btn_escribir_valoracion"),
             "contenedor_comentarios"
         );
 
-        $r[] = div(append($z),8);
+        $r[] = div(append($z), 8);
         return append($r);
 
     }
@@ -54,12 +56,12 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $r[] = heading_enid("ESCRIBE UNA RESEÑA", 3, "underline");
-        $r[] = div("Sobre  " . $servicio[0]["nombre_servicio"]);
+        $r[] = div("Sobre  " . primer_elemento($servicio, "nombre_servicio"));
         $r[] = form_open("", ["class" => "form_valoracion"]);
         $r[] = place("nuevo");
         $r[] = btw(
             div("Valoración*", "text-valoracion"),
-            get_posibles_calificaciones(
+            posibilidades(
                 [
                     "",
                     "Insuficiente",
@@ -195,11 +197,19 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("place_registro_valoracion");
 
 
-        $text = strtoupper($vendedor[0]["nombre"] . " " . $vendedor[0]["apellido_paterno"]);
+        $text = strtoupper(
+            primer_elemento($vendedor, "nombre")
+            . " " .
+            primer_elemento($vendedor, "apellido_paterno")
+        );
+
         $z[] = heading_enid("ESCRIBE UNA PREGUNTA " . $text, 3);
 
         $url = get_url_servicio($id_servicio);
-        $nombre = anchor_enid($servicio[0]["nombre_servicio"], ["class" => "underline black strong", "href" => $url]);
+        $nombre = anchor_enid(primer_elemento($servicio, "nombre_servicio"), [
+            "class" => "underline black strong",
+            "href" => $url
+        ]);
         $z[] = div("SOBRE SU " . $nombre, "top_30  bottom_30");
         $z[] = form_open("", ["class" => "form_valoracion top_30"]);
         $z[] = append($r);
@@ -209,7 +219,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_title_valoraciones($id_usuario)
+    function titulo_valoraciones($id_usuario)
     {
 
         $r[] = heading_enid("VALORACIONES Y RESEÑAS", 3);
@@ -268,7 +278,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $icon = icon("fa fa-shopping-bag");
-        return ($modalidad == 1) ? $icon . "TUS VENTAS HASTA EL MOMENTO " . $total : $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
+        return ($modalidad == 1) ? $icon . "TUS VENTAS HASTA EL MOMENTO " . $total :
+            $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
 
     }
 
@@ -280,10 +291,11 @@ if (!function_exists('invierte_date_time')) {
         $num_restantes = 1;
 
         for ($x = 1; $x <= $calificacion; $x++) {
-            $extra = "font-size: 2em;";
-            $estrellas_valoraciones .= label("★", ["class" => 'estrella', "style" => $extra]);
+
+            $estrellas_valoraciones .= label("★", ["class" => 'estrella f2']);
             $num_restantes++;
         }
+
         for ($num_restantes; $num_restantes <= 5; $num_restantes++) {
             $extra = "font-size: 2em;-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);";
 
@@ -298,7 +310,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_criterios_busqueda()
+    function criterios_busqueda()
     {
         $criterios = ["RELEVANTE", "RECIENTE"];
         $l = [];
@@ -325,28 +337,33 @@ if (!function_exists('invierte_date_time')) {
     function crea_resumen_valoracion($numero_valoraciones, $persona = 0)
     {
 
+        if (es_data($numero_valoraciones)){
 
-        $mensaje_final = ($persona == 1) ? "de los consumidores recomiendan" : "de los consumidores recomiendan este producto";
-        $valoraciones = $numero_valoraciones[0];
-        $num_valoraciones = $valoraciones["num_valoraciones"];
-        $text_comentarios = ($num_valoraciones > 1) ? "COMENTARIOS" : "COMENTARIO";
-        $comentarios = $num_valoraciones . $text_comentarios;
-        $promedio = $valoraciones["promedio"];
-        $personas_recomendarian = $valoraciones["personas_recomendarian"];
+            $valoraciones = $numero_valoraciones[0];
+            $num_valoraciones = $valoraciones["num_valoraciones"];
+            $text_comentarios = ($num_valoraciones > 1) ? "COMENTARIOS" : "COMENTARIO";
+            $comentarios = $num_valoraciones . $text_comentarios;
+            $promedio = $valoraciones["promedio"];
+            $personas_recomendarian = $valoraciones["personas_recomendarian"];
 
-        $promedio_general = number_format($promedio, 1, '.', '');
-        $parte_promedio = div(crea_estrellas($promedio_general) . span($promedio_general, ["class" => 'promedio_num']), ["class" => 'contenedor_promedios']);
+            $promedio_general = number_format($promedio, 1, '.', '');
+            $parte_promedio = div(crea_estrellas($promedio_general) . span($promedio_general, ["class" => 'promedio_num']), ["class" => 'contenedor_promedios']);
 
-        $config = ["class" => 'info_comentarios'];
-        $parte_promedio .= "<table>
+            $config = ["class" => 'info_comentarios'];
+            $parte_promedio .= "<table>
                             <tr>
                               " . get_td($comentarios, $config) . "
                             </tr>
                           </table>";
 
-        $parte_promedio .= div(porcentaje($num_valoraciones, $personas_recomendarian, 1) . "%", ["class" => 'porcentaje_recomiendan']);
-        $parte_promedio .= div($mensaje_final);
-        return $parte_promedio;
+            $parte_promedio .= div(porcentaje($num_valoraciones, $personas_recomendarian, 1) . "%", ["class" => 'porcentaje_recomiendan']);
+            $parte_promedio .= div(
+                ($persona == 1) ? "de los consumidores recomiendan" : "de los consumidores recomiendan este producto"
+            );
+            return $parte_promedio;
+
+        }
+
     }
 
     function crea_resumen_valoracion_comentarios($comentarios, $respuesta_valorada)
@@ -451,7 +468,7 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
-    function get_posibles_calificaciones($calificacion)
+    function posibilidades($calificacion)
     {
 
 

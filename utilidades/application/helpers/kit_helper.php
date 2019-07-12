@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] =  guardar("GENERAR TAGS",["class"=>"top_20"]);
             $r[] =  form_close();
             $r[] =  div(place("texto_convertido", ["id"=> "texto_convertido"]), "top_50");
-            return   div(div(append($r),6,1),"row top_50");
+            return  div(div(append($r),6,1),"row top_50");
 
         }
     }

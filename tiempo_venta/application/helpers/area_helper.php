@@ -68,7 +68,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = div(append(
 
                 anchor_enid("HECHAS" .
-                    span("", ['class' => 'notificacion_preguntas_sin_leer_cliente']),
+                    span("",  'notificacion_preguntas_sin_leer_cliente'),
                     [
                         "class" => "a_enid_black preguntas btn_preguntas_compras",
                         "id" => '0'
@@ -78,7 +78,7 @@ if (!function_exists('invierte_date_time')) {
 
                 anchor_enid(
                     "RECIBIDAS" .
-                    span("", ['class' => 'notificacion_preguntas_sin_leer_ventas'])
+                    span("", 'notificacion_preguntas_sin_leer_ventas' )
                     ,
                     [
                         "class" => "a_enid_blue preguntas ",
@@ -114,7 +114,6 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = div(append($x), 3);
             $r[] = div(place("place_ventas_usuario"), 9);
-
             return div(append($r), "text-center");
 
         }

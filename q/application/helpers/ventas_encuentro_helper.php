@@ -12,9 +12,9 @@ if (!function_exists('invierte_date_time')) {
         $puntos = 0;
         foreach ($data as $row) {
 
-            $ventas_en_punto = $row["ventas_en_punto"];
-            $nombre_punto_encuentro = $row["nombre_punto_encuentro"];
-            $text_entrega = ($ventas_en_punto > 1) ? span("ENTREGAS", "black") : span("ENTREGA", "black");
+            $ventas_pe = $row["ventas_en_punto"];
+            $entrega =
+                ($ventas_pe > 1) ? span("ENTREGAS", "black") : span("ENTREGA", "black");
 
             $r[] =
                 div(
@@ -22,10 +22,10 @@ if (!function_exists('invierte_date_time')) {
                      .
                     anchor_enid(
 
-                        heading_enid($nombre_punto_encuentro, 3, "title") .
+                        heading_enid($row["nombre_punto_encuentro"], 3, "title") .
                         p(
-                            span($ventas_en_punto, "f2 strong rounded shadow rounded padding_10 border black top_20") .
-                            $text_entrega
+                            span($ventas_pe, "f2 strong rounded shadow rounded padding_10 border black top_20") .
+                            $entrega
 
 
                             , "description"

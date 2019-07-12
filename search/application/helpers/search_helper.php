@@ -4,33 +4,29 @@ if (!function_exists('invierte_date_time')) {
     function render_search($data)
     {
 
-        $filtros  = $data["filtros"];
-        $order  = $data["order"];
-        $paginacion  = $data["paginacion"];
+
+        $paginacion = $data["paginacion"];
         $is_mobile = $data["is_mobile"];
-        $lista_productos = $data["lista_productos"];
-        $q = $data["q"];
         $categorias_destacadas = $data["categorias_destacadas"];
         $busqueda = $data["busqueda"];
-        $num_servicios = $data["num_servicios"];
-        $bloque_busqueda = $data["bloque_busqueda"];
+
 
         $x = [];
-        $x[] = get_format_filtros_paginacion($filtros, $order, $paginacion, $is_mobile);
-        $x[] = append($lista_productos);
+        $x[] = get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile);
+        $x[] = append($data["lista_productos"]);
 
-        $r[] = val_principal_img($q);
+        $r[] = val_principal_img($data["q"]);
         $r[] = div(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 'contenedor_anuncios_home');
 
 
         $z = [];
         $z[] = heading("FILTRA TU BÚSQUEDA"
             .
-            small($busqueda . "(" . $num_servicios . "PRODUCTOS)")
+            small($busqueda . "(" . $data["num_servicios"] . "PRODUCTOS)")
             ,
             3,
             ["class" => "text_filtro bg_black"]);
-        $z[] = get_formar_menu_sugerencias($is_mobile, $bloque_busqueda, $busqueda);
+        $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
 
         $fil[] = div(div(append($z), 10, 1), 3);
         $fil[] = btw(
@@ -63,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_sin_resultados()
+    function sin_resultados()
     {
         $r[] = heading_enid("NO HAY PRODUCTOS QUE COINCIDAN CON TU BÚSQUEDA", 3, "info_sin_encontrar");
         $r[] = div("SUGERENCIAS", "contenedor_sugerencias sugerencias");
@@ -77,7 +73,9 @@ if (!function_exists('invierte_date_time')) {
 
             ]);
         $r[] = div(
-            guardar("ANUNCIA ESTE PRODUCTO!" . icon('fa fa-chevron-right ir'),
+            guardar(
+                text_icon('fa fa-chevron-right ir', "ANUNCIA ESTE PRODUCTO!")
+                ,
                 [],
                 1,
                 1,
@@ -86,12 +84,13 @@ if (!function_exists('invierte_date_time')) {
             ,
             "col-lg-5 top_20", 1);
 
-        $response = div(append($r), "border padding_20 top_20 col-lg-10 col-lg-offset-1", 1);
-        return $response;
+        return
+            div(append($r), "border padding_20 top_20 col-lg-10 col-lg-offset-1", 1);
+
 
     }
 
-    function get_format_sin_resultados_tienda()
+    function sin_resultados_tienda()
     {
         $r[] = place("separador_inicial");
         $r[] = btw(

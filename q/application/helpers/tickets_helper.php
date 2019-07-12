@@ -79,12 +79,13 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_open("", ["class" => "form_respuesta_ticket top_20"]);
         $r[] = heading_enid("COMENTARIO", 3);
-        $r[] = textarea([
-            "class" => "form-control",
-            "id" => "mensaje",
-            "name" => "mensaje",
-            "required" => ""
-        ]);
+        $r[] = textarea(
+            [
+                "class" => "form-control",
+                "id" => "mensaje",
+                "name" => "mensaje",
+                "required" => ""
+            ]);
         $r[] = input_hidden(["name" => "tarea", "value" => $tarea]);
         $r[] = guardar("Enviar");
         $r[] = form_close();
@@ -144,7 +145,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_form_cancelar_compra($recibo, $modalidad)
+    function form_cancelar_compra($recibo, $modalidad)
     {
 
         $x[] = heading_enid("¿REALMENTE DESEAS CANCELAR LA COMPRA?", 3);

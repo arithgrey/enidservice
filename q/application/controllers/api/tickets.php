@@ -142,7 +142,7 @@ class Tickets extends REST_Controller
                 $recibo = $this->get_recibo_por_pagar($param);
             }
 
-            $response = get_form_cancelar_compra($recibo, $modalidad);
+            $response = form_cancelar_compra($recibo, $modalidad);
         }
         $this->response($response);
 
