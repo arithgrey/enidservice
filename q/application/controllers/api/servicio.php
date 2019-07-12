@@ -1720,6 +1720,17 @@ class Servicio extends REST_Controller
         $api = "cobranza/calcula_costo_envio/format/json/";
         return $this->app->api($api, $q);
     }
+    function restablecer_PUT(){
 
+        $param =  $this->put();
+        $response =  false;
+        if (if_ext($param , "id")){
+
+            $response =  $this->serviciosmodel->restablecer($param["id"]);
+
+        }
+        $this->response($response);
+
+    }
 
 }

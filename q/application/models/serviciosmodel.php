@@ -863,7 +863,12 @@ class serviciosmodel extends CI_Model
 		$query_update = "UPDATE servicio SET " . $tipo . " = " . $tipo . " + 1 WHERE id_servicio = $id_servicio LIMIT 1";
 		return $this->db->query($query_update);
 	}
+    function restablecer($id){
 
+
+        $query_update = "UPDATE servicio SET  vista = 0  , valoracion = 0 , deseado = 0  WHERE id_servicio = $id LIMIT 1";
+		return $this->db->query($query_update);
+    }
 	/*
 
 
