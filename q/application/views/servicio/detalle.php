@@ -171,6 +171,8 @@ $text_envios_mayoreo = "¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?";
             ,
             6
         ) ?>
+
+
         <?php $t[] = div(get_seccion_compras_casa($flag_servicio, $entregas_en_casa), 6) ?>
         <?php $t[] = div(get_seccion_telefono_publico($has_phone, $telefono_visible, $activo_visita_telefono, $baja_visita_telefono, $flag_servicio), 6) ?>
         <?php $t[] = get_configuracion_contra_entrega($flag_servicio, $contra_entrega, $id_servicio) ?>
@@ -181,6 +183,11 @@ $text_envios_mayoreo = "¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?";
         <?php $t[] = get_form_costo_unidad($precio, $flag_servicio, $costo_envio) ?>
         <?php $t[] = get_format_utilidad($flag_servicio, $text_comision_venta, $utilidad) ?>
         <?= div(append($t), ["class" => "tab-pane " . $extra_4, "id" => "tab_info_precios"]) ?>
-        <?= div(get_form_tags($id_servicio, $metakeyword_usuario), ["class" => "tab-pane " . $extra_3, "id" => "tab_terminos_de_busqueda"]) ?>
+
+
+        <?php $f[] = format_restablecer($servicio,$id_perfil) ?>
+        <?php $f[] = get_form_tags($id_servicio, $metakeyword_usuario); ?>
+        <?= div(append($f), ["class" => "tab-pane " . $extra_3, "id" => "tab_terminos_de_busqueda"]) ?>
+
     </div>
 </div>

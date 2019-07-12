@@ -164,6 +164,8 @@ let respuesta_informacion_servicio = (data) => {
     $(".tiempo_entrega").change(set_tiempo_entrega);
     $(".btn_url_ml").click(set_url_ml);
     $(".activar_publicacion").click(activa_publicacion);
+    $(".restablecer").click(restablecer);
+
 
     $(".form_dropshipping").submit(modifica_dropshipping);
     if (get_option("flag_nueva_categoria") == 1) {
@@ -1289,7 +1291,7 @@ let descarta_promocion = () => {
         carga_servicios();
     });
 
-};
+}
 let muestra_cambio_link_dropshipping = (id_servicio) => {
     showonehideone(".input_link_dropshipping", ".text_link_dropshipping");
 
@@ -1416,9 +1418,31 @@ let quitar_punto = function () {
 }
 let agregar_punto = function () {
 
-    alert();
+
     let id =  get_parameter_enid($(this),"id");
     let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
     let data_send = {"lista_negra" : 0 , "id" : id};
     request_enid("PUT", data_send, url, puntos_encuentro);
+}
+let restablecer = function(){
+
+    let id =  get_parameter_enid($(this),"id");
+    if(id > 0 ){
+        set_option("id_servicio", id);
+        show_confirm("SE RE INICIARÁN LOS VALORES DE LA PUBLICACIÓN ¿ESTAS DE ACUERTO?", "", "SI, RE INICIAR PROMOCIÓN", restablecer_promocion);
+
+    }
+
+
+
+}
+let restablecer_promocion = function () {
+
+
+    let id = get_option("id_servicio");
+    let url = "../q/index.php/api/servicio/restablecer/format/json/";
+    let data_send = {"id": id};
+    request_enid("PUT", data_send, url, ()=> {carga_informacion_servicio();});
+
+
 }

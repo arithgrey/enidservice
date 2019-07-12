@@ -1,5 +1,15 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
+
+
+    function format_restablecer($servicio, $id_perfil){
+
+        if (es_data($servicio) && $id_perfil == 3){
+
+            return
+                div(guardar("RESTABLECER PUBLICACIÓN", ["class" => "restablecer" , "id" => primer_elemento($servicio, "id_servicio")]), "row pull-right bottom_100");
+        }
+    }
     function get_format_colores($es_servicio, $info_colores)
     {
 
