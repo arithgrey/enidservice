@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = append($data["lista_productos"]);
 
         $r[] = val_principal_img($data["q"]);
-        $r[] = div(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 'contenedor_anuncios_home');
+        $r[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 'contenedor_anuncios_home');
 
 
         $z = [];
@@ -28,27 +28,27 @@ if (!function_exists('invierte_date_time')) {
             ["class" => "text_filtro bg_black"]);
         $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
 
-        $fil[] = div(div(append($z), 10, 1), 3);
+        $fil[] = d(d(append($z), 10, 1), 3);
         $fil[] = btw(
 
-            div(append($x), 12)
+            d(append($x), 12)
             ,
-            div($paginacion, 12)
+            d($paginacion, 12)
             ,
             9
         );
 
-        $r[] = div(append($fil), "row mt-3");
+        $r[] = d(append($fil), "row mt-3");
 
 
-        $cat[] = div("", 2);
-        $cat[] = div(btw(
+        $cat[] = d("", 2);
+        $cat[] = d(btw(
             heading(
                 "CATEGORIAS DESTACADAS",
                 3
             )
             ,
-            div(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)), 1)
+            d(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)), 1)
             ,
             ""
         ), 10);
@@ -61,8 +61,8 @@ if (!function_exists('invierte_date_time')) {
 
     function sin_resultados()
     {
-        $r[] = heading_enid("NO HAY PRODUCTOS QUE COINCIDAN CON TU BÚSQUEDA", 3, "info_sin_encontrar");
-        $r[] = div("SUGERENCIAS", "contenedor_sugerencias sugerencias");
+        $r[] = h("NO HAY PRODUCTOS QUE COINCIDAN CON TU BÚSQUEDA", 3, "info_sin_encontrar");
+        $r[] = d("SUGERENCIAS", "contenedor_sugerencias sugerencias");
 
         $r[] = ul(
             [
@@ -72,8 +72,8 @@ if (!function_exists('invierte_date_time')) {
 
 
             ]);
-        $r[] = div(
-            guardar(
+        $r[] = d(
+            btn(
                 text_icon('fa fa-chevron-right ir', "ANUNCIA ESTE PRODUCTO!")
                 ,
                 [],
@@ -85,7 +85,7 @@ if (!function_exists('invierte_date_time')) {
             "col-lg-5 top_20", 1);
 
         return
-            div(append($r), "border padding_20 top_20 col-lg-10 col-lg-offset-1", 1);
+            d(append($r), "border padding_20 top_20 col-lg-10 col-lg-offset-1", 1);
 
 
     }
@@ -95,8 +95,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("separador_inicial");
         $r[] = btw(
 
-            heading_enid("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA", 1),
-            guardar("ANUNCIA TU PRIMER PRODUCTO " . icon('fa fa-chevron-right ir'),
+            h("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA", 1),
+            btn("ANUNCIA TU PRIMER PRODUCTO " . icon('fa fa-chevron-right ir'),
                 ["class" => "top_30"],
                 1,
                 1,
@@ -119,18 +119,18 @@ if (!function_exists('invierte_date_time')) {
 
         if ($is_mobile > 0) {
 
-            $response = div($filtro, 12);
+            $response = d($filtro, 12);
 
         } else {
 
 
             $response = btw(
-                div(div($filtro, "pull-left"), 6),
-                div(div($paginacion, "pull-right"), 6),
+                d(d($filtro, "pull-left"), 6),
+                d(d($paginacion, "pull-right"), 6),
                 "row d-flex align-items-center justify-content-between"
             );
 
-            $response = div($response, 12);
+            $response = d($response, 12);
         }
 
         return $response;
@@ -231,11 +231,11 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = hr();
                 $r[] = $bloque_quinto_nivel["html"];
             }
-            $response = div(append($r), ["class" => "contenedor_sub_categorias"]);
-            $response = div($response, ["class" => 'contenedor_menu_productos_sugeridos']);
+            $response = d(append($r), ["class" => "contenedor_sub_categorias"]);
+            $response = d($response, ["class" => 'contenedor_menu_productos_sugeridos']);
 
         }
-        return div($response, "border-right padding_5");
+        return d($response, "border-right padding_5");
     }
 
     function crea_sub_menu_categorias_destacadas($param)

@@ -103,7 +103,7 @@ class Home extends CI_Controller
         $data["q2"] = get_param_def($param, "q2");
         $servicio = $this->app->servicio($id_servicio);
         $data["tallas"] = $this->get_tallas($id_servicio);
-        $usuario =  (es_data($servicio)) ? $this->app->usuario(primer_elemento($servicio, "id_usuario")) : redirect(path_enid("go_home"));
+        $usuario =  (es_data($servicio)) ? $this->app->usuario(pr($servicio, "id_usuario")) : redirect(path_enid("go_home"));
         $fn  =   (!es_data($usuario)) ? redirect(path_enid("go_home")) : "";
 
 
@@ -118,7 +118,7 @@ class Home extends CI_Controller
         $data["tiempo_entrega"] = "";
         $data["ciclos"] = "";
 
-        if (primer_elemento($servicio,"flag_servicio") == 0) {
+        if (pr($servicio,"flag_servicio") == 0) {
 
             $data["costo_envio"] = $this->calcula_costo_envio($this->crea_data_costo_envio());
             $tiempo_promedio_entrega = $servicio[0]["tiempo_promedio_entrega"];
@@ -177,7 +177,7 @@ class Home extends CI_Controller
     {
 
         $servicio = $this->get_option("servicio");
-        $param["flag_envio_gratis"] = (es_data($servicio)) ? primer_elemento($servicio, "flag_envio_gratis") : 0;
+        $param["flag_envio_gratis"] = (es_data($servicio)) ? pr($servicio, "flag_envio_gratis") : 0;
         return $param;
     }
 
@@ -209,7 +209,7 @@ class Home extends CI_Controller
         $fecha_entrega_promedio = $trans->translate($source, $target, strtoupper($fecha_entrega_promedio));
         $text_tiempo = span($fecha_entrega_promedio, ["class" => 'tiempo_promedio']);
         $tiempo_entrega = "REALIZA HOY TU PEDIDO Y TENLO EL" . $text_tiempo;
-        return div($tiempo_entrega, "tiempo_entrega_promedio text-justify");
+        return d($tiempo_entrega, "tiempo_entrega_promedio text-justify");
     }
 
     private function costruye_descripcion_producto()

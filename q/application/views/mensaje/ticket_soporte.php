@@ -21,7 +21,7 @@ foreach ($ticket as $row) {
 
 ?>
 <?= label("Nuevo ticket abierto" . $extra["ticket"]) ?>
-<?= div("Cliente que solicita " . $nombre_usuario) ?>
+<?= d("Cliente que solicita " . $nombre_usuario) ?>
 <div>
 	<?= strong("Prioridad:") ?>
 	<?= $lista_prioridades[$prioridad] ?>

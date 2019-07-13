@@ -39,9 +39,9 @@ foreach ($info_envio_direccion as $row) {
 <?php $response[] = get_parte_direccion_envio($cp, $param, $calle, $entre_calles, $numero_exterior, $numero_interior) ?>
 <?php $r[] = btw(
 
-    div("Colonia", ["class" => "label-off", "for" => "dwfrm_profile_address_colony"])
+    d("Colonia", ["class" => "label-off", "for" => "dwfrm_profile_address_colony"])
     ,
-    div(input([
+    d(input([
         "type" => "text",
         "name" => "colonia",
         "value" => $asentamiento,
@@ -51,11 +51,11 @@ foreach ($info_envio_direccion as $row) {
     "value"
 ) ?>
 <?php $r[] = place("place_asentamiento") ?>
-<?php $r[] = div(
+<?php $r[] = d(
     btw(
-        div("Delegación o Municipio", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
+        d("Delegación o Municipio", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
         ,
-        div(input([
+        d(input([
             "type" => "text",
             "name" => "delegacion",
             "value" => $municipio,
@@ -68,10 +68,10 @@ foreach ($info_envio_direccion as $row) {
     ), "district delegacion_c") ?>
 
 
-<?php $r[] = div(btw(
-    div("Estado", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
+<?php $r[] = d(btw(
+    d("Estado", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
     ,
-    div(
+    d(
         input(
             [
                 "type" => "text",
@@ -88,7 +88,7 @@ foreach ($info_envio_direccion as $row) {
 ), " district  estado_c") ?>
 
 <?php $r[] = btw(
-    div("País", ["class" => "label-off", "for" => "dwfrm_profile_address_district"]),
+    d("País", ["class" => "label-off", "for" => "dwfrm_profile_address_district"]),
     $pais,
     "district pais_c"
 ) ?>
@@ -96,7 +96,7 @@ foreach ($info_envio_direccion as $row) {
     "name" => "pais",
     "value" => $id_pais
 ]) ?>
-<?php $z[] = div("Esta es mi dirección principal", "strong"); ?>
+<?php $z[] = d("Esta es mi dirección principal", "strong"); ?>
 <?php
 $opt[] = array(
     "text" => "SI",
@@ -108,9 +108,9 @@ $opt[] = array(
 );
 ?>
 <?php $z[] = create_select($opt, "direccion_principal", "direccion_principal", "direccion_principal", "text", "val"); ?>
-<?php $r[] = div(append($z), "direccion_principal_c") ?>
-<?php $r[] = guardar("Registrar dirección", ["class" => "btn text_btn_direccion_envio"]) ?>
-<?php $response[] = div(append($r), ["style" => $direccion_visible, "class" => "parte_colonia_delegacion"]) ?>
+<?php $r[] = d(append($z), "direccion_principal_c") ?>
+<?php $r[] = btn("Registrar dirección", ["class" => "btn text_btn_direccion_envio"]) ?>
+<?php $response[] = d(append($r), ["style" => $direccion_visible, "class" => "parte_colonia_delegacion"]) ?>
 <?php $response[] = form_close() ?>
-<?= div(text_icon('fa fa-bus', "Dirección de envio ")) ?>
-<?= div(append($response), ["id" => 'modificar_direccion_seccion', "class" => "contenedor_form_envio"]) ?>
+<?= d(text_icon('fa fa-bus', "Dirección de envio ")) ?>
+<?= d(append($response), ["id" => 'modificar_direccion_seccion', "class" => "contenedor_form_envio"]) ?>

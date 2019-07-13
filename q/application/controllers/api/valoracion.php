@@ -81,7 +81,7 @@ class Valoracion extends REST_Controller
 
         if (count($comentarios["data"]) > 0) {
 
-            $response = hr() . div("RESEÑAS HECHAS POR OTROS CLIENTES", ["class" => 'text_resumen']) . hr() . $response;
+            $response = hr() . d("RESEÑAS HECHAS POR OTROS CLIENTES", ["class" => 'text_resumen']) . hr() . $response;
         }
         $this->response($response);
     }
@@ -150,7 +150,7 @@ class Valoracion extends REST_Controller
 
         $data = [
             "servicio" => $param["id_servicio"],
-            "id_usuario" => primer_elemento($usuario,"id_usuario"),
+            "id_usuario" => pr($usuario,"id_usuario"),
             "comentarios" => $this->valoracion_model->get_valoraciones($param),
             "numero_valoraciones" => $valoraciones,
             "respuesta_valorada" => $param["respuesta_valorada"],

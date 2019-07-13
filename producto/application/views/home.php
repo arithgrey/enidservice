@@ -48,11 +48,11 @@ foreach ($info_servicio["servicio"] as $row) {
 $imagenes = construye_seccion_imagen_lateral($imgs, $nombre_servicio, $url_vide_youtube);
 $vendedor_valoracion = anchor_enid("", ['class' => 'valoracion_persona_principal valoracion_persona']);
 $nombre_servicio = substr(strtoupper($nombre_servicio), 0, 70);
-$nombre_producto = heading_enid($nombre_servicio, 1, ['class' => "text-justify nombre_producto_carrito strong"]);
+$nombre_producto = h($nombre_servicio, 1, ['class' => "text-justify nombre_producto_carrito strong"]);
 $nuevo_nombre_servicio = valida_text_servicio($flag_servicio, $precio, $id_ciclo_facturacion);
 $boton_editar = valida_editar_servicio($id_usuario_servicio, $id_usuario, $in_session, $id_servicio, $id_perfil);
 $texto_en_existencia = get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml);
-$estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valoracion_persona']), ['class' => 'lee_valoraciones text-right', 'href' => '../search/?q3=' . $id_publicador]);
+$estrellas = anchor_enid(d("", ['class' => 'valoracion_persona_principal valoracion_persona']), ['class' => 'lee_valoraciones text-right', 'href' => '../search/?q3=' . $id_publicador]);
 
 
 ?>
@@ -61,12 +61,12 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 
 
         <?=
-        div(
+        d(
             btw(
 
-                div($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"])
+                d($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"])
                 ,
-                div(div($imagenes["imagenes_contenido"], "tab-content"), "big")
+                d(d($imagenes["imagenes_contenido"], "tab-content"), "big")
                 ,
                 ""
                 ,
@@ -74,7 +74,7 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
             ), "col-lg-6 left-col contenedor_izquierdo") ?>
 
 
-        <?= div(
+        <?= d(
             get_contenedor_central(
                 $proceso_compra,
                 $id_servicio,
@@ -123,8 +123,8 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
             <?php else: ?>
 
                 <div class="card box-shadow">
-                    <?= div(heading_enid(substr(strtoupper($nombre_servicio), 0, 70), 1), "card-header top_20") ?>
-                    <?= heading_enid(
+                    <?= d(h(substr(strtoupper($nombre_servicio), 0, 70), 1), "card-header top_20") ?>
+                    <?= h(
                         valida_text_servicio(
                             $flag_servicio,
                             $precio,
@@ -141,7 +141,7 @@ $estrellas = anchor_enid(div("", ['class' => 'valoracion_persona_principal valor
 <?= hr("mr-50 mb-5") ?>
 <?= place("place_valoraciones col-lg-12") ?>
 <?= get_descripcion_servicio($descripcion, $flag_servicio, $url_vide_youtube, $is_mobile) ?>
-<?= addNRow(div(place("place_tambien_podria_interezar"), 10, 1)) ?>
+<?= addNRow(d(place("place_tambien_podria_interezar"), 10, 1)) ?>
 <?= input_hidden(["class" => "qservicio", "value" => $nombre_servicio]) ?>
 <?= input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]) ?>
 <?= input_hidden(["name" => "desde_valoracion", "value" => $desde_valoracion, "class" => 'desde_valoracion']) ?>

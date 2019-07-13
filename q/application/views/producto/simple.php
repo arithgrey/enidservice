@@ -1,4 +1,4 @@
-<?= heading_enid("SERVICIOS POSTULADOS", 3) ?>
+<?= h("SERVICIOS POSTULADOS", 3) ?>
 <?php
 $l = "";
 $url_imagen = "";
@@ -17,13 +17,13 @@ foreach ($servicios as $row) {
         "src" => $url_imagen,
         "style" => 'width: 44px!important;height: 44px;',
     ]);
-    $r[] = div("alcance" . $vista);
+    $r[] = d("alcance" . $vista);
 
     ?>
 
     <a href="../producto/?producto=<?= $id_servicio ?>" class='contenedor_resumen_servicio'>
         <div class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
-            <?= div(div(append($r),  "popup-head-left pull-left"),  "popup-head") ?>
+            <?= d(d(append($r),  "popup-head-left pull-left"),  "popup-head") ?>
         </div>
     </a>
 <?php } ?>

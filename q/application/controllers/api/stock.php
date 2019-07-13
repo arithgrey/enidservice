@@ -189,7 +189,7 @@ class Stock extends REST_Controller
 		$min = (count($completo) > 0) ? $completo[0] : 0;
 		$max = $totales_casos["max"];
 		$text_resumen = count($relevante);
-		$text = div($text_resumen . div($table . $tabla_porcentaje["table"], ["class" => "dropdown-menu"]), ["class" => "dropdown"]);
+		$text = d($text_resumen . d($table . $tabla_porcentaje["table"], ["class" => "dropdown-menu"]), ["class" => "dropdown"]);
 		$response = ["text" => $text, "promedios" => $promedio, "media" => $media, "sugerencia" => $max, "sugerencias_b" => $min];
 
 		return $response;

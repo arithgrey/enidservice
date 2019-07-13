@@ -8,9 +8,9 @@ if (!function_exists('invierte_date_time')) {
         {
 
             return ajustar(
-                div("FECHA DE ENTREGA", 'strong')
+                d("FECHA DE ENTREGA", 'strong')
                 ,
-                div(
+                d(
                     input([
                         "data-date-format" => "yyyy-mm-dd",
                         "name" => 'fecha_inicio',
@@ -51,9 +51,9 @@ if (!function_exists('invierte_date_time')) {
             $r[] = form_entrega();
 
             $r[] = ajustar(
-                div("FECHA REFERENCIA", 'strong')
+                d("FECHA REFERENCIA", 'strong')
                 ,
-                div(
+                d(
                     create_select($opt_turnos, "tipo", "form-control", "tipo", "opcion", "val")
                 )
                 ,
@@ -63,9 +63,9 @@ if (!function_exists('invierte_date_time')) {
 
 
             $x[] = form_open("", ["class" => "form_compras top_50", "method" => "post"]);
-            $x[] = div(append($r), 6, 1);
+            $x[] = d(append($r), 6, 1);
             $x[] = form_close();
-            $x[] = div(place("place_compras top_50"), 12);
+            $x[] = d(place("place_compras top_50"), 12);
             return append($x);
 
 

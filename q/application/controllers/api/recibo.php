@@ -84,7 +84,7 @@ class recibo extends REST_Controller
         if (if_ext($param, "id_recibo")) {
 
             $recibo = $this->recibo_model->q_get(["id_servicio"], $param["id_recibo"]);
-            $response = primer_elemento($recibo, "id_servicio", 0);
+            $response = pr($recibo, "id_servicio", 0);
 
         }
         $this->response($response);
@@ -329,7 +329,7 @@ class recibo extends REST_Controller
 
         $q["id_recibo"] = $id_recibo;
         $ppfppe = $this->app->api("proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/", $q);
-        return primer_elemento($ppfppe, "id_punto_encuentro", 0);
+        return pr($ppfppe, "id_punto_encuentro", 0);
 
     }
 
@@ -380,7 +380,7 @@ class recibo extends REST_Controller
 
 
             $r[] = ($tipo_entrega > 0) ? get_format_punto_encuentro($dc, $r) : "";
-            $r[] = heading_enid(text_icon("fa fa-credit-card", $text_compra), 4, 'top_50 letter-spacing-5 uderline');
+            $r[] = h(text_icon("fa fa-credit-card", $text_compra), 4, 'top_50 letter-spacing-5 uderline');
             $r[] = getPayButtons($id_recibo, $url_request, $saldo_pendiente, $id_usuario_venta);
             $r[] = get_botones_seguimiento($id_recibo);
 
@@ -396,8 +396,8 @@ class recibo extends REST_Controller
                 $deuda
             );
 
-            $r = div(div(append($r), 10, 1), "col-lg-8  shadow padding_10");
-            $response = div($r . $f, 1);
+            $r = d(d(append($r), 10, 1), "col-lg-8  shadow padding_10");
+            $response = d($r . $f, 1);
         endif;
         return $response;
 
@@ -477,7 +477,7 @@ class recibo extends REST_Controller
 
             $r[] = get_text_notificacion_pago($url_seguimiento_pago);
 
-            $response = div(append($r), ["style" => "width: 100%;"]);
+            $response = d(append($r), ["style" => "width: 100%;"]);
         }
         return $response;
 

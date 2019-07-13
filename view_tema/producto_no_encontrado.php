@@ -6,5 +6,5 @@ $l = [
 ];
 ?>
 <div class="container">
-    <?= div(div(heading_enid("No hay productos que coincidan con tu búsqueda.", 3) . ul($l)), "caption" ) ?>
+    <?= d(d(h("No hay productos que coincidan con tu búsqueda.", 3) . ul($l)), "caption" ) ?>
 </div>

@@ -16,7 +16,7 @@ class Home extends CI_Controller
 
         $data = $this->app->session();
         $this->app->acceso();
-        $this->app->pagina($this->app->cssJs($data, "utilidades") , get_form_tags($data),1);
+        $this->app->pagina($this->app->cssJs($data, "utilidades") , form_tags($data),1);
 
     }
 

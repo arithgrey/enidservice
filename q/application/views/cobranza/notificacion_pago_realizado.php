@@ -15,8 +15,8 @@ $url_seguimiento =  "../pedidos/?seguimiento=".$id_recibo;
 	<?=get_format_transaccion($id_recibo)?>
 	<table>
 		<tr class='tb_pagos'>
-			<?= get_td(heading_enid("Pago enviado a ", 4)) ?>
-			<?= get_td(heading_enid("Importe ", 4)) ?>
+			<?= get_td(h("Pago enviado a ", 4)) ?>
+			<?= get_td(h("Importe ", 4)) ?>
 		</tr>
 		<tr>
 			<td>
@@ -54,6 +54,6 @@ $url_seguimiento =  "../pedidos/?seguimiento=".$id_recibo;
 			<?= get_td("$" . $monto_a_pagar . "MXN") ?>
 		</tr>
 	</table>
-	<?=guardar("RASTREAR PEDIDO",["href"=> $url_seguimiento , "class"=> "top_50 bottom_50"],1,1,0,$url_seguimiento)?>
+	<?=btn("RASTREAR PEDIDO",["href"=> $url_seguimiento , "class"=> "top_50 bottom_50"],1,1,0,$url_seguimiento)?>
 </div>
 

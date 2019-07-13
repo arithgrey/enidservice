@@ -1,6 +1,6 @@
 <div class="col-lg-4 col-lg-offset-4">
     <?= heading("SOLICITA SALDO A UN AMIGO", 3) ?>
-    <?= div(
+    <?= d(
         "Ingresa el monto y correo que solicitas a tu amigo para contar con saldo en tu cuenta."
         ,
         "desc_solicitud"
@@ -37,6 +37,6 @@
             <?= get_td("Email", 'strong') ?>
         </tr>
     </table>
-    <?= guardar("SOLICITAR SALDO", ["class" => "btn_solicitud_saldo"]) ?>
+    <?= btn("SOLICITAR SALDO", ["class" => "btn_solicitud_saldo"]) ?>
     <?= form_close(place("place_solicitud_amigo")) ?>
 </div>

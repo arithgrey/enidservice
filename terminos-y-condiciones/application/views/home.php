@@ -1,5 +1,5 @@
 <div class="contenedor_principal_enid">
-    <?= div(append([
+    <?= d(append([
         ul(li("TEMAS DE AYUDA")),
         ul([
             "Realizar pedidos"
@@ -15,7 +15,7 @@
         3) ?>
 
     <div class="col-lg-9">
-        <?= heading_enid($titulo) ?>
+        <?= h($titulo) ?>
         <?= $this->load->view($vista); ?>
     </div>
 </div>

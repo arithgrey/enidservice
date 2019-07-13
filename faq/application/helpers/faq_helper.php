@@ -4,9 +4,9 @@ if (!function_exists('invierte_date_time')) {
     function get_format_faqs($data)
     {
 
-        $r[] = div(get_format_izquierdo($data["categorias_publicas_venta"], $data["categorias_temas_de_ayuda"], 1), 3);
-        $r[] = div(get_format_listado_fq($data), 9);
-        return div(append($r), 1);
+        $r[] = d(get_format_izquierdo($data["categorias_publicas_venta"], $data["categorias_temas_de_ayuda"], 1), 3);
+        $r[] = d(get_format_listado_fq($data), 9);
+        return d(append($r), 1);
 
     }
 
@@ -51,7 +51,7 @@ if (!function_exists('invierte_date_time')) {
                 $url_img = $row["url_img"];
 
                 $bloque = btw(
-                    div(
+                    d(
                         img(
                             [
                                 "src" => $url_img,
@@ -61,7 +61,7 @@ if (!function_exists('invierte_date_time')) {
                         3
                     )
                     ,
-                    div(heading_enid($titulo, 4, "black text-uppercase"), 9)
+                    d(h($titulo, 4, "black text-uppercase"), 9)
                     ,
                     "row mh_200 border top_30 "
 
@@ -88,11 +88,11 @@ if (!function_exists('invierte_date_time')) {
                 $fecha_registro = $row["fecha_registro"];
 
                 $extra = ($data["in_session"] > 0) ? anchor_enid(icon("fa fa-cogs"), ["href" => path_enid("editar_faq", $id_faq . "&config=1")]) : "";
-                $x[] = div(heading_enid($extra . $titulo, 4, "black text-uppercase underline"), 1);
-                $x[] = div(p($respuesta, "black top_30"), 1);
-                $x[] = div(p($fecha_registro, "top_30"), 1);
+                $x[] = d(h($extra . $titulo, 4, "black text-uppercase underline"), 1);
+                $x[] = d(p($respuesta, "black top_30"), 1);
+                $x[] = d(p($fecha_registro, "top_30"), 1);
 
-                $r[] = div(
+                $r[] = d(
                     append($x)
                     ,
                     "col-lg-12 top_30 padding_10 "
@@ -107,7 +107,7 @@ if (!function_exists('invierte_date_time')) {
         {
             $response = "";
             if ($in_session > 0) {
-                $response = div(
+                $response = d(
                     get_form_respuesta($lista_categorias),
                     [
                         "class" => "tab-pane fade",
@@ -131,10 +131,10 @@ if (!function_exists('invierte_date_time')) {
         function get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda)
         {
 
-            $r[] = div(lista_categorias($categorias_publicas_venta));
-            $r[] = div(place("place_categorias_extras"));
-            $r[] = div(lista_categorias($categorias_temas_de_ayuda));
-            return div(append($r), "categorias_frecuentes padding_10 shadow top_30 border ");
+            $r[] = d(lista_categorias($categorias_publicas_venta));
+            $r[] = d(place("place_categorias_extras"));
+            $r[] = d(lista_categorias($categorias_temas_de_ayuda));
+            return d(append($r), "categorias_frecuentes padding_10 shadow top_30 border ");
 
         }
 
@@ -160,11 +160,11 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = form_open("", ["class" => "form_respuesta", "id" => 'form_respuesta']);
-            $r[] = div("CATEGORÍA", 3);
+            $r[] = d("CATEGORÍA", 3);
 
             if ($editar > 0) {
 
-                $r[] = div(create_select_selected(
+                $r[] = d(create_select_selected(
                     $lista_categorias,
                     "id_categoria",
                     "nombre_categoria",
@@ -176,7 +176,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             } else {
-                $r[] = div(create_select(
+                $r[] = d(create_select(
                     $lista_categorias,
                     "categoria",
                     "form-control categoria",
@@ -188,7 +188,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
 
-            $r[] = div("TIPO", "col-lg-3 top_20");
+            $r[] = d("TIPO", "col-lg-3 top_20");
             $opt[] = [
                 "val" => 1,
                 "text" => "Pública"
@@ -209,18 +209,18 @@ if (!function_exists('invierte_date_time')) {
 
             if ($editar > 0) {
 
-                $r[] = div(create_select_selected($opt, "val", "text", $status, "status", "form-control tipo_respuesta top_20"), 9);
+                $r[] = d(create_select_selected($opt, "val", "text", $status, "status", "form-control tipo_respuesta top_20"), 9);
 
             } else {
 
-                $r[] = div(create_select($opt, "status", "form-control tipo_respuesta top_20", "tipo_respuesta", "text", "val"), 9);
+                $r[] = d(create_select($opt, "status", "form-control tipo_respuesta top_20", "tipo_respuesta", "text", "val"), 9);
             }
 
 
-            $r[] = div("TITULO", "col-lg-4 top_20");
-            $r[] = div(input(["type" => "text", "name" => "titulo", "class" => 'form-control titulo  top_20', "required" => true, "value" => $titulo]), 8);
-            $r[] = div(place("", ["id" => "summernote"]), "col-lg-12 top_40");
-            $r[] = div(guardar("Registrar", ["class" => "btn", "type" => "submit"]), "col-lg-12 top_20");
+            $r[] = d("TITULO", "col-lg-4 top_20");
+            $r[] = d(input(["type" => "text", "name" => "titulo", "class" => 'form-control titulo  top_20', "required" => true, "value" => $titulo]), 8);
+            $r[] = d(place("", ["id" => "summernote"]), "col-lg-12 top_40");
+            $r[] = d(btn("Registrar", ["class" => "btn", "type" => "submit"]), "col-lg-12 top_20");
             $r[] = input_hidden(
                 [
                     "class" => "id_faq",
@@ -236,16 +236,16 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = form_close();
-            $r[] = div(place("place_refitro_respuesta"), "col-lg-12 top_40");
+            $r[] = d(place("place_refitro_respuesta"), "col-lg-12 top_40");
 
             if ($editar > 0) {
 
-                $r[] = div(heading_enid("+ imagen", 4, ["class" => "cursor_pointer text_agregar_img", "onclick" => "agrega_img_faq()"]), "col-lg-12 top_40");
-                $r[] = div(div("", "place_load_img_faq"), "col-lg-12 top_40");
+                $r[] = d(h("+ imagen", 4, ["class" => "cursor_pointer text_agregar_img", "onclick" => "agrega_img_faq()"]), "col-lg-12 top_40");
+                $r[] = d(d("", "place_load_img_faq"), "col-lg-12 top_40");
 
             }
 
-            return div(div(append($r), 8, 1), "top_30");
+            return d(d(append($r), 8, 1), "top_30");
         }
 
         function get_format_faq_categorias($faqs_categoria)
@@ -260,7 +260,7 @@ if (!function_exists('invierte_date_time')) {
                 $href = "?faq=" . $id_faq;
                 $source = "../imgs/index.php/enid/img_faq/" . $id_faq;
 
-                $x[] = div($z, "day");
+                $x[] = d($z, "day");
                 $x[] = img($source);
                 $x[] = heading($titulo);
                 $text = ul(li(append($x)), "event-list");
@@ -268,7 +268,7 @@ if (!function_exists('invierte_date_time')) {
                 $z++;
             }
 
-            return div(append($r));
+            return d(append($r));
         }
 
         function get_formar_respuesta($respuesta, $in_session, $perfil)
@@ -290,12 +290,12 @@ if (!function_exists('invierte_date_time')) {
                         "id" => $id_faq
                     ]);
                 }
-                $response = div(div($btn_conf . $titulo), "row");
+                $response = d(d($btn_conf . $titulo), "row");
                 $r[] = $response;
                 $r[] = $respuesta;
 
             }
-            return div(append($r));
+            return d(append($r));
 
         }
 
@@ -348,7 +348,7 @@ if (!function_exists('invierte_date_time')) {
                 $faqs = $row["faqs"];
                 $href = "?categoria=" . $id_categoria;
 
-                $l[] = div(anchor_enid(div($nombre_categoria . "(" . $faqs . ")"), ["href" => $href]));
+                $l[] = d(anchor_enid(d($nombre_categoria . "(" . $faqs . ")"), ["href" => $href]));
             }
             return append($l);
         }

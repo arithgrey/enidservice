@@ -14,26 +14,26 @@ if (!function_exists('invierte_date_time')) {
             $seleccion = $data["seleccion"];
 
 
-            $nombre = primer_elemento($usuario, "nombre");
-            $apellido_paterno = primer_elemento($usuario, "apellido_paterno");
-            $apellido_materno = primer_elemento($usuario, "apellido_materno");
+            $nombre = pr($usuario, "nombre");
+            $apellido_paterno = pr($usuario, "apellido_paterno");
+            $apellido_materno = pr($usuario, "apellido_materno");
             $nombre_persona = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
             $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJETA DE DÉDITO O CRÉDITO";
 
             $x[] = heading($text_tipo_ingreso, 3);
-            $x[] = div("Enid Service protege y garantiza la seguridad de la información de su cuenta bancaria. Nunca revelaremos su información financiera y, cada vez que inicie una transacción con esta cuenta bancaria, Enid Service se lo notificará por correo electrónico.");
+            $x[] = d("Enid Service protege y garantiza la seguridad de la información de su cuenta bancaria. Nunca revelaremos su información financiera y, cada vez que inicie una transacción con esta cuenta bancaria, Enid Service se lo notificará por correo electrónico.");
             $x[] = form_asociar_cuenta($error, $nombre_persona, $bancos, $banca);
 
             $response = [];
             if ($seleccion < 1) {
 
-                $response[] = div(append($x), ["class" => "col-lg-4 col-lg-offset-4", "style" => "background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;"]);
+                $response[] = d(append($x), ["class" => "col-lg-4 col-lg-offset-4", "style" => "background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;"]);
             } else {
 
-                $response[] = div(get_format_asociar_cuenta_bancaria(), "col-lg-4 col-lg-offset-4 contenedor_asociar_cuenta");
+                $response[] = d(get_format_asociar_cuenta_bancaria(), "col-lg-4 col-lg-offset-4 contenedor_asociar_cuenta");
             }
 
-            return div(append($response), "contenedor_asociar_cuenta");
+            return d(append($response), "contenedor_asociar_cuenta");
         }
     }
 
@@ -44,11 +44,11 @@ if (!function_exists('invierte_date_time')) {
 
 
             if ($error == 1):
-                $r[] = div(
+                $r[] = d(
                     "SE PRESENTARON ERRORES AL ASOCIAR CUENTA, VERIFIQUE SU INFORMACIÓN ENVIADA",
                     ["style" => "background: #004bff; color: white;padding: 5px;"]);
             endif;
-            $r[] = div(heading($nombre_persona, 4), ["style" => "border-bottom-style: solid;border-width: 1px;"]);
+            $r[] = d(heading($nombre_persona, 4), ["style" => "border-bottom-style: solid;border-width: 1px;"]);
             $r[] = heading("1.- PAÍS", 4);
             $r[] = create_select(array(
                 "text" => "México",
@@ -102,8 +102,8 @@ if (!function_exists('invierte_date_time')) {
 
             endif;
             $r[] = input_hidden(["name" => "tipo", "value" => $banca]);
-            $r[] = guardar("ASOCIAR" . icon("fa fa-chevron-right"));
-            $r[] = div(
+            $r[] = btn("ASOCIAR" . icon("fa fa-chevron-right"));
+            $r[] = d(
                 p(
                     "Al asociar tu cuenta, podrás transferir tu saldo de Enid Service a tu cuenta personal", "white"
                 )
@@ -112,7 +112,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $response[] = form_open("", ["class" => "form_asociar_cuenta", "method" => "POST", "action" => "?action=4"]);
-            $response[] = div(div(append($r), "page-header"));
+            $response[] = d(d(append($r), "page-header"));
             $response[] = form_close();
             return append($response);
 
@@ -128,11 +128,11 @@ if (!function_exists('invierte_date_time')) {
             $saldo_disponible = $data["saldo_disponible"];
             $r[] = btw(
                 get_format_saldo_disponible($saldo_disponible),
-                div(get_submenu(), "card"),
+                d(get_submenu(), "card"),
                 3
 
             );
-            $r[] = div(place("place_movimientos"), 9);
+            $r[] = d(place("place_movimientos"), 9);
             return append($r);
         }
     }
@@ -145,14 +145,14 @@ if (!function_exists('invierte_date_time')) {
             $cuentas_bancarias = $data["cuentas_bancarias"];
             $tarjetas = $data["tarjetas"];
 
-            $r[] = heading_enid("TUS CUENTAS " . br() . " CUENTAS BANCARIAS", 3);
+            $r[] = h("TUS CUENTAS " . br() . " CUENTAS BANCARIAS", 3);
             foreach ($cuentas_bancarias as $row):
-                $r[] = div(
+                $r[] = d(
                     append(
                         [
                             $row["nombre"],
                             icon("fa fa-credit-card "),
-                            div(get_resumen_cuenta($row["clabe"]))
+                            d(get_resumen_cuenta($row["clabe"]))
                         ]
                     )
                     ,
@@ -160,7 +160,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
             endforeach;
-            $r[] = guardar(
+            $r[] = btn(
                 "Agregar cuenta " . icon("fa fa-plus-circle ")
                 ,
                 [
@@ -177,16 +177,16 @@ if (!function_exists('invierte_date_time')) {
                 "?q=transfer&action=1"
             );
 
-            $r[] = heading_enid("TARJETAS DE CRÉDITO Y DÉBITO", 3);
+            $r[] = h("TARJETAS DE CRÉDITO Y DÉBITO", 3);
             foreach ($tarjetas as $row):
-                $r[] = div(append([
+                $r[] = d(append([
                     $row["nombre"],
                     icon("fa fa-credit-card "),
-                    div(substr($row["numero_tarjeta"], 0, 4) . "********")
+                    d(substr($row["numero_tarjeta"], 0, 4) . "********")
 
                 ]), ["class" => "info_cuenta"]);
             endforeach;
-            $r[] = guardar(
+            $r[] = btn(
                 "Agregar cuenta " . icon("fa fa-plus-circle ")
                 ,
                 [
@@ -214,7 +214,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = heading("ASOCIAR CUENTA BANCARIA Ó TARJETA DE CRÉDITO O DÉBITO", 3);
             $r[] = anchor_enid(
-                div("Asociar  tarjeta de crédito o débito",
+                d("Asociar  tarjeta de crédito o débito",
 
                     [
                         "class" => "asociar_cuenta_bancaria",
@@ -223,7 +223,7 @@ if (!function_exists('invierte_date_time')) {
                 ),
                 ["href" => "?q=transfer&action=1&tarjeta=1", "class" => "black"]);
 
-            $r[] = anchor_enid(div("Asociar cuenta bancaria",
+            $r[] = anchor_enid(d("Asociar cuenta bancaria",
                 [
                     "style" => "border-style: solid;border-width: .9px;padding: 10px;
 	                            margin-top: 10px;color: white!important!important",
@@ -244,7 +244,7 @@ if (!function_exists('invierte_date_time')) {
 
         function get_format_cuentas_existentes($cuentas_gravadas)
         {
-            return div(anchor_enid(agrega_cuentas_existencia($cuentas_gravadas),
+            return d(anchor_enid(agrega_cuentas_existencia($cuentas_gravadas),
                 [
                     "href" => "?q=transfer&action=1&seleccion=1",
                     "class" => "white",
@@ -261,8 +261,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_fondos($saldo_disponible)
         {
 
-            $response = div(
-                div("AUN NO CUENTAS CON FONDOS EN TU CUENTA",
+            $response = d(
+                d("AUN NO CUENTAS CON FONDOS EN TU CUENTA",
                     [
                         "style" => "border-radius:20px;background: black;padding:10px;color: white;"
                     ]),
@@ -273,7 +273,7 @@ if (!function_exists('invierte_date_time')) {
 
             if ($saldo_disponible > 100) {
 
-                $response = div(div(text_icon("fa fa-chevron-right", "CONTINUAR "),
+                $response = d(d(text_icon("fa fa-chevron-right", "CONTINUAR "),
                     [
                         "class" => "btn_transfer",
                         "style" => "border-radius: 20px;background: black;padding: 10px;color: white;"
@@ -296,13 +296,13 @@ if (!function_exists('invierte_date_time')) {
 
             $response = ul(
                 [
-                    div(icon('icon fa fa-money'), "icon"),
-                    div("Saldo disponible"),
-                    heading_enid("$" . number_format(get_data_saldo($saldo_disponible), 2) . "MXN", 2, "value white"),
-                    div("Monto expresado en Pesos Mexicanos")
+                    d(icon('icon fa fa-money'), "icon"),
+                    d("Saldo disponible"),
+                    h("$" . number_format(get_data_saldo($saldo_disponible), 2) . "MXN", 2, "value white"),
+                    d("Monto expresado en Pesos Mexicanos")
                 ]
             );
-            return div($response, "panel income db mbm");
+            return d($response, "panel income db mbm");
 
         }
     }
@@ -310,10 +310,10 @@ if (!function_exists('invierte_date_time')) {
         function render_agregar_saldo_cuenta()
         {
 
-            $r[] = heading_enid("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR ", 3);
+            $r[] = h("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR ", 3);
             $r[] = get_format_pago_efectivo();
             $r[] = get_format_solicitud_amigo();
-            return div(append($r), 4, 1);
+            return d(append($r), 4, 1);
 
         }
     }
@@ -322,7 +322,7 @@ if (!function_exists('invierte_date_time')) {
         {
             $id_usuario = $data["id_usuario"];
             return btw(
-                heading_enid("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR DEPÓSITO DESDE CUALQUIER SUCURSAL OXXO", 3),
+                h("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR DEPÓSITO DESDE CUALQUIER SUCURSAL OXXO", 3),
                 get_form_pago_oxxo($id_usuario),
                 4, 1
 
@@ -338,7 +338,7 @@ if (!function_exists('invierte_date_time')) {
 
             return anchor_enid(btw(
 
-                div("SOLICITA SALDO A UN AMIGO",
+                d("SOLICITA SALDO A UN AMIGO",
 
                     "tipo_pago underline"
 
@@ -346,7 +346,7 @@ if (!function_exists('invierte_date_time')) {
                     1
                 ),
 
-                div(
+                d(
                     "Pide a un amigo que te transfira saldo desde su cuenta",
                     [
                         "style" => "text-decoration: underline;",
@@ -370,14 +370,14 @@ if (!function_exists('invierte_date_time')) {
 
             return anchor_enid(btw(
 
-                div("UN PAGO EN EFECTIVO EN OXXO ",
+                d("UN PAGO EN EFECTIVO EN OXXO ",
                     [
                         "class" => "tipo_pago",
                         "style" => "text-decoration: underline;color: black"
                     ],
                     1),
 
-                div(
+                d(
                     "Depositas 
 						saldo a tu cuenta de Enid service desde  cualquier sucursal de oxxo ",
                     ["class" => "tipo_pago_descripcion"],
@@ -414,19 +414,19 @@ if (!function_exists('invierte_date_time')) {
                     "required" => true
                 ])
                 ,
-                heading_enid("MXN", 2)
+                h("MXN", 2)
                 ,
                 "contenedor_form display_flex_enid"
 
             );
-            $r[] = div("¿MONTO QUÉ DESEAS INGRESAR A TU SALDO ENID SERVICE?",
+            $r[] = d("¿MONTO QUÉ DESEAS INGRESAR A TU SALDO ENID SERVICE?",
                 [
                     "colspan" => "2",
                     "class" => "underline"
                 ]
             );
             $r[] = br();
-            $r[] = guardar("Generar órden");
+            $r[] = btn("Generar órden");
             $r[] = form_close();
             return append($r);
 

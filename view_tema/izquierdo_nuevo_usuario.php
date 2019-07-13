@@ -1,8 +1,8 @@
 <?php
-$menu = [li(heading_enid("¿Tienes alguna duda?", ["class" => 'strong'])),
-    li(div("Lunes a Viernes de 08:00 a 19:00 y  Sábados de 09:00 a 18:00", 1)),
+$menu = [li(h("¿Tienes alguna duda?", ["class" => 'strong'])),
+    li(d("Lunes a Viernes de 08:00 a 19:00 y  Sábados de 09:00 a 18:00", 1)),
 
-    li(div("Síguenos en", 1)),
+    li(d("Síguenos en", 1)),
 
     li(anchor_enid("", [
         "href" => $url_facebook,

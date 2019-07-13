@@ -1,6 +1,6 @@
 <?php
 $list = [
-    heading_enid("ASISTENCIA", 4, "strong"),
+    h("ASISTENCIA", 4, "strong"),
     anchor_enid("- Servicio al cliente",
         [
             "class" => 'black ',
@@ -15,7 +15,7 @@ $list = [
 ];
 
 $list2 = [
-    heading_enid(
+    h(
         "TEMAS RELACIONADOS"
         ,
         4
@@ -31,7 +31,7 @@ $list2 = [
 ];
 
 $list3 = [
-    heading_enid("ESPECIALES", 4, "strong"),
+    h("ESPECIALES", 4, "strong"),
     anchor_enid("- Trabaja en nuestro equipo",
         [
             "class" => 'black ',
@@ -39,7 +39,7 @@ $list3 = [
         ])];
 
 $list4 = [
-    heading_enid("ACERCA DE NOSOTROS", 4, "strong"),
+    h("ACERCA DE NOSOTROS", 4, "strong"),
     anchor_enid(
         img(
             [
@@ -56,10 +56,10 @@ $list4 = [
 $base = "col-lg-3 col-sm-6 inner";
 
 $list_footer = [
-    div(ul($list), $base),
-    div(ul($list2), $base),
-    div(ul($list3), $base),
-    div(ul($list4), $base)
+    d(ul($list), $base),
+    d(ul($list2), $base),
+    d(ul($list3), $base),
+    d(ul($list4), $base)
 ];
 ?>
 
@@ -78,9 +78,9 @@ $list_footer = [
         <div class="row shadow bloque_general_info ">
             <div class="base_compras col-lg-12 top_50 bottom_50 text-center">
                 <div class='col-lg-3'>
-                    <?= div(icon('fa  fa-fighter-jet'), 2) ?>
-                    <?= div("FACILIDAD DE COMPRA", 'strong') ?>
-                    <?= div("Compras seguras al momento") ?>
+                    <?= d(icon('fa  fa-fighter-jet'), 2) ?>
+                    <?= d("FACILIDAD DE COMPRA", 'strong') ?>
+                    <?= d("Compras seguras al momento") ?>
                     <?php if (!is_null($id_usuario) && isset($id_usuario)): ?>
                         <?= input_hidden([
                             "class" => 'id_usuario',
@@ -91,38 +91,38 @@ $list_footer = [
                 <?php
 
                 $x = [];
-                $x[] = div(icon('fa fa-clock-o '), 2);
-                $x[] = div(append([
-                    div("+ ENTREGAS PUNTUALES", 'strong', 1),
-                    div("Recibe lo que deseas en tiempo y forma", 1)
+                $x[] = d(icon('fa fa-clock-o '), 2);
+                $x[] = d(append([
+                    d("+ ENTREGAS PUNTUALES", 'strong', 1),
+                    d("Recibe lo que deseas en tiempo y forma", 1)
                 ]));
                 ?>
-                <?= div(append($x), 3) ?>
+                <?= d(append($x), 3) ?>
 
 
                 <?php
                 $c = [];
-                $c[] = div(icon('fa fa-lock '), 2);
-                $c[] = div(append([
-                    div(" COMPRAS SEGURAS", 'strong', 1),
-                    div("Tu dinero se entregará cuando confirmes tu entrega!", 1)
+                $c[] = d(icon('fa fa-lock '), 2);
+                $c[] = d(append([
+                    d(" COMPRAS SEGURAS", 'strong', 1),
+                    d("Tu dinero se entregará cuando confirmes tu entrega!", 1)
                 ]));
 
                 ?>
-                <?= div(append($c), 3) ?>
+                <?= d(append($c), 3) ?>
 
 
                 <?php
 
                 $c = [];
-                $c[] = div(icon('fa fa-angle-right'), 2);
-                $c[] = div(append([
-                    div(" FAQS", 'strong', 1),
-                    div("Lo que te intereza saver!", 1)
+                $c[] = d(icon('fa fa-angle-right'), 2);
+                $c[] = d(append([
+                    d(" FAQS", 'strong', 1),
+                    d("Lo que te intereza saver!", 1)
                 ]));
 
                 ?>
-                <?= div(anchor_enid(append($c),
+                <?= d(anchor_enid(append($c),
                     [
                         "href" => path_enid("faqs"),
                         "class" => "white"
@@ -139,18 +139,18 @@ $list_footer = [
 
 <?php if ($in_session == 0): ?>
     <?php if (!isset($proceso_compra) && !is_null($proceso_compra) && $proceso_compra == 0): ?>
-        <?= div(append($list_footer), "base_paginas_extra" , 1) ?>
+        <?= d(append($list_footer), "base_paginas_extra" , 1) ?>
     <?php endif ?>
     <?php if (isset($is_mobile) && !is_null($is_mobile) && $is_mobile < 1): ?>
         <?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>
-            <?= div(get_metodos_pago(), 1) ?>
+            <?= d(get_metodos_pago(), 1) ?>
         <?php endif ?>
     <?php endif ?>
-    <?= div(
+    <?= d(
         btw(
-            div("© 2019 ENID SERVICE.")
+            d("© 2019 ENID SERVICE.")
             ,
-            div(
+            d(
                 anchor_enid("FAQS", ["class" => "white", "href" => path_enid("faqs")]) .
                 anchor_enid("NOSOTROS", ["class" => "white ml-5", "href" => path_enid("sobre_enid")])
             )
@@ -220,7 +220,7 @@ $list_footer = [
 <div class="modal" tabindex="-1" role="dialog" id="modal-error-message">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-                <?=div(
+                <?=d(
                         p(
                                 span(
                                         "", "text-order-name-error"

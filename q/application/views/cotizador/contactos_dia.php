@@ -1,4 +1,4 @@
-<?= heading_enid("MENSAJES ENVIADOS A ENID SERVICE", 3) ?>
+<?= h("MENSAJES ENVIADOS A ENID SERVICE", 3) ?>
 
 <?php
 $l = "";
@@ -23,8 +23,8 @@ foreach ($contactos as $row) {
                         "style" => 'width: 44px!important;',
                         "onerror" => "../img_tema/user/user.png"
                     ]),
-                    div($nombre . "|" . $email),
-                    div($mensaje . $telefono . $fecha_registro)
+                    d($nombre . "|" . $email),
+                    d($mensaje . $telefono . $fecha_registro)
                 ]) ?>
             </div>
         </div>

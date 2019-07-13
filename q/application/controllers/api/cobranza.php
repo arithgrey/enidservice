@@ -25,7 +25,7 @@ class Cobranza extends REST_Controller
 
         $costo = get_costo_envio($param);
         $texto = key_exists_bi($costo, "text_envio", "cliente");
-        $costo["text_envio"]["cliente"] = div(text_icon('fas fa-bus', $texto), 'texto_envio');
+        $costo["text_envio"]["cliente"] = d(text_icon('fas fa-bus', $texto), 'texto_envio');
         return $costo;
 
     }
@@ -295,7 +295,7 @@ class Cobranza extends REST_Controller
             $text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $param["nombre"] . " - " . $param["email"] . " - " . $param["telefono"] . " RECIBO NÚMERO " . $id_recibo;
         }
         $asunto = "NUEVA ORDEN DE COMPRA EN PROCESO, RECIBO #" . $id_recibo;
-        $cuerpo = img_enid([], 1, 1) . heading_enid($text, 3);
+        $cuerpo = img_enid([], 1, 1) . h($text, 3);
         $q = get_request_email("enidservice@gmail.com", $asunto, $cuerpo);
         $this->app->send_email($q);
 

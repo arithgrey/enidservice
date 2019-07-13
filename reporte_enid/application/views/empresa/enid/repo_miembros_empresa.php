@@ -48,7 +48,7 @@ foreach ($miembros as $row) {
 }
 
 ?>
-<?= div("# Miembros" . count($miembros), 'num_registros_encontrados' ) ?>
+<?= d("# Miembros" . count($miembros), 'num_registros_encontrados' ) ?>
 <div <?= $height ?> >
 	<table class='table_enid_service' border=1>
 		<tr class="table_enid_service_header">

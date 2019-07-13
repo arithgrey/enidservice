@@ -53,7 +53,7 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
             $response = [];
 			$pe = $this->get_id_proyecto_persona_forma_pago($param["id_recibo"]);
 			if (es_data($pe)) {
-				$id_pe = primer_elemento($pe,"id_punto_encuentro");
+				$id_pe = pr($pe,"id_punto_encuentro");
 				$response = $this->get_punto_encuentro($id_pe);
 			}
 		}

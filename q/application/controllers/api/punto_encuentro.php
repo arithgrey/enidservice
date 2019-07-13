@@ -120,7 +120,7 @@ class Punto_encuentro extends REST_Controller
     {
 
         $usuario = $this->app->api("servicio/usuario_por_servicio/format/json/", ["id_servicio" => $id_servicio]);
-        return primer_elemento($usuario, "id_usuario");
+        return pr($usuario, "id_usuario");
     }
 
     private function get_lista_negra($id_usuario)
@@ -158,7 +158,7 @@ class Punto_encuentro extends REST_Controller
 
         $q = ["id" => $id_servicio];
         $envio = $this->app->api("servicio/envio_gratis/format/json/", $q);
-        return primer_elemento($envio, "flag_envio_gratis", 0);
+        return pr($envio, "flag_envio_gratis", 0);
 
     }
 

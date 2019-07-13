@@ -9,75 +9,75 @@ if (!function_exists('invierte_date_time')) {
 
 
             $categorias_destacadas = $data["categorias_destacadas"];
-            $response[] = div(place("place_reporte"), ["class" => "tab-pane", "id" => 'reporte']);
+            $response[] = d(place("place_reporte"), ["class" => "tab-pane", "id" => 'reporte']);
             $i[] = n_row_12();
-            $i[] = div("INDICADORES ENID SERVICE", "titulo_enid_sm", 1);
+            $i[] = d("INDICADORES ENID SERVICE", "titulo_enid_sm", 1);
             $i[] = form_open("", ["class" => 'form_busqueda_global_enid']);
             $i[] = get_format_fecha_busqueda();
             $i[] = form_close();
             $i[] = end_row();
             $i[] = addNRow(place("place_usabilidad top_50"));
-            $response[] = div(append($i), ["class" => "tab-pane active", "id" => 'tab_default_1']);
+            $response[] = d(append($i), ["class" => "tab-pane active", "id" => 'tab_default_1']);
 
             $ds[] = n_row_12();
-            $ds[] = div("DISPOSITIVOS ", "titulo_enid_sm", 1);
+            $ds[] = d("DISPOSITIVOS ", "titulo_enid_sm", 1);
             $ds[] = form_open("", ["class" => 'f_dipositivos ']);
             $ds[] = get_format_fecha_busqueda();
             $ds[] = form_close();
             $ds[] = end_row();
             $ds[] = addNRow(place("top_50 repo_dispositivos"));
-            $response[] = div(append($ds), ["class" => "tab-pane", "id" => 'tab_dispositivos']);
+            $response[] = d(append($ds), ["class" => "tab-pane", "id" => 'tab_dispositivos']);
 
             $v[] = n_row_12();
-            $v[] = div("VISITAS WEB ", "titulo_enid_sm", 1);
+            $v[] = d("VISITAS WEB ", "titulo_enid_sm", 1);
             $v[] = form_open("", ["class" => 'f_usabilidad']);
             $v[] = get_format_fecha_busqueda();
             $v[] = form_close();
             $v[] = end_row();
             $v[] = place("top_50 place_usabilidad_general");
 
-            $response[] = div(append($v), ["class" => "tab-pane", "id" => 'tab_default_2']);
+            $response[] = d(append($v), ["class" => "tab-pane", "id" => 'tab_default_2']);
 
 
             $p[] = n_row_12();
-            $p[] = div("TIPOS DE ENTREGAS ", "titulo_enid_sm", 1);
+            $p[] = d("TIPOS DE ENTREGAS ", "titulo_enid_sm", 1);
             $p[] = form_open("", ["class" => 'form_tipos_entregas']);
             $p[] = get_format_fecha_busqueda();
             $p[] = form_close();
             $p[] = end_row();
             $p[] = addNRow(place("place_tipos_entregas top_50"));
-            $response[] = div(append($p), ["class" => "tab-pane", "id" => 'tab_tipos_entregas']);
+            $response[] = d(append($p), ["class" => "tab-pane", "id" => 'tab_tipos_entregas']);
 
             $ac[] = n_row_12();
-            $ac[] = div("ACTIVIDAD ", "titulo_enid_sm", 1);
+            $ac[] = d("ACTIVIDAD ", "titulo_enid_sm", 1);
             $ac[] = form_open("", ["class" => 'f_actividad_productos_usuarios ']);
             $ac[] = get_format_fecha_busqueda();
             $ac[] = form_close();
             $ac[] = end_row();
             $ac[] = addNRow(place("top_50 repo_usabilidad"));
 
-            $response[] = div(append($ac), ["class" => "tab-pane", "id" => 'tab_usuarios']);
+            $response[] = d(append($ac), ["class" => "tab-pane", "id" => 'tab_usuarios']);
 
-            $t[] = div("TAREAS RESUELTAS", "titulo_enid_sm", 1);
+            $t[] = d("TAREAS RESUELTAS", "titulo_enid_sm", 1);
             $t[] = render_atencion_cliente();
-            $response[] = div(append($t), ["class" => "tab-pane", "id" => "tab_atencion_cliente"]);
+            $response[] = d(append($t), ["class" => "tab-pane", "id" => "tab_atencion_cliente"]);
 
-            $response[] = div(div("PERSONAS QUE PROMOCIONAN LOS PRODUCTOS Y SERVICIOS", "titulo_enid_sm", 1), ["class" => "tab-pane", "id" => "tab_afiliaciones"]);
+            $response[] = d(d("PERSONAS QUE PROMOCIONAN LOS PRODUCTOS Y SERVICIOS", "titulo_enid_sm", 1), ["class" => "tab-pane", "id" => "tab_afiliaciones"]);
 
-            $b[] = div("PRODUCTOS MÁS BUSCADOS POR CLIENTES", "titulo_enid_sm", 1);
+            $b[] = d("PRODUCTOS MÁS BUSCADOS POR CLIENTES", "titulo_enid_sm", 1);
             $b[] = get_form_busqueda_productos_solicitados();
-            $response[] = div(append($b), ["class" => "tab-pane", "id" => "tab_busqueda_productos"]);
+            $response[] = d(append($b), ["class" => "tab-pane", "id" => "tab_busqueda_productos"]);
 
 
 
-            $dest[] = div("CATEGORÍAS DESTACADAS ", "titulo_enid_sm", 1);
+            $dest[] = d("CATEGORÍAS DESTACADAS ", "titulo_enid_sm", 1);
             $dest[] = crea_repo_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
-            $response[] = div(append($dest), ["class" => "tab-pane", "id" => "tab_productos_publicos"]);
+            $response[] = d(append($dest), ["class" => "tab-pane", "id" => "tab_productos_publicos"]);
 
 
-            $res[] = div(get_menu(), 2);
-            $res[] = div(div(append($response), "tab-content"), 10);
-            return div(div(append($res), 'contenedor_principal_enid_service'), "contenedor_principal_enid");
+            $res[] = d(get_menu(), 2);
+            $res[] = d(d(append($response), "tab-content"), 10);
+            return d(d(append($res), 'contenedor_principal_enid_service'), "contenedor_principal_enid");
 
         }
     }
@@ -88,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
         function render_atencion_cliente()
         {
 
-            $r[] = div(
+            $r[] = d(
                 ul(
                     [
                         li(anchor_enid("Atención al cliente", ["href" => "#tab_1_actividad", "data-toggle" => "tab"]), ["class" => "active"]),
@@ -99,11 +99,11 @@ if (!function_exists('invierte_date_time')) {
                     "nav nav-tabs"
                 ), "panel-heading"
             );
-            $z[] = div(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]);
-            $z[] = div(addNRow(place("place_metricas_comparativa top_50")), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]);
-            $z[] = div(get_form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
+            $z[] = d(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]);
+            $z[] = d(addNRow(place("place_metricas_comparativa top_50")), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]);
+            $z[] = d(get_form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
 
-            $r[] = div(append($z), "tab-content");
+            $r[] = d(append($z), "tab-content");
             return append($r);
 
 

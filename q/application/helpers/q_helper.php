@@ -7,10 +7,10 @@ if (!function_exists('invierte_date_time')) {
         function get_mensaje_modificacion_pwd($nombre)
         {
 
-            $r[] = heading_enid("HOLA, " . strtoupper($nombre), 3);
-            $r[] = div(img(["src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg", "style" => "width: 100%"]));
-            $r[] = div("Observamos un cambio de contraseña en tu cuenta. ¿Fuiste tú?");
-            $r[] = div("Si es así ignora este correo, en caso contrario notificanos aquí http://enidservice.com/inicio/contact/");
+            $r[] = h("HOLA, " . strtoupper($nombre), 3);
+            $r[] = d(img(["src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg", "style" => "width: 100%"]));
+            $r[] = d("Observamos un cambio de contraseña en tu cuenta. ¿Fuiste tú?");
+            $r[] = d("Si es así ignora este correo, en caso contrario notificanos aquí http://enidservice.com/inicio/contact/");
             return append($r);
 
         }
@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
             $email = $param["email"];
 
             $r[] = heading("Buen día " . $nombre . " " . $email);
-            $r[] = div(
+            $r[] = d(
                 img(
                     [
                         "src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg",
@@ -34,9 +34,9 @@ if (!function_exists('invierte_date_time')) {
                     "style" => "width: 30%;margin: 0 auto;"
                 ]);
 
-            $r[] = div("TU USUARIO SE HA REGISTRADO!", ["style" => "font-size: 1.4em;font-weight: bold"]);
+            $r[] = d("TU USUARIO SE HA REGISTRADO!", ["style" => "font-size: 1.4em;font-weight: bold"]);
             $r[] = hr();
-            $r[] = div("Desde ahora podrás adquirir y vender las mejores promociones a lo largo de México");
+            $r[] = d("Desde ahora podrás adquirir y vender las mejores promociones a lo largo de México");
             $r[] = br();
             $r[] = anchor_enid("ACCEDE A TU CUENTA AHORA!",
                 [
@@ -154,7 +154,7 @@ if (!function_exists('invierte_date_time')) {
             if ($num_tareas > 0) {
                 switch ($tipo) {
                     case 1:
-                        $seccion = div(heading_enid("NOTIFICACIONES ", 5), 1);
+                        $seccion = d(h("NOTIFICACIONES ", 5), 1);
                         break;
                     default:
                         break;
@@ -171,7 +171,7 @@ if (!function_exists('invierte_date_time')) {
             $new_flag = "";
             if ($f > 0) {
 
-                $new_flag = div($f,
+                $new_flag = d($f,
                     [
                         "class" => 'notificacion_tareas_pendientes_enid_service',
                         "id" => $f
@@ -220,15 +220,15 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $id_ticket = $row["id_ticket"];
-                $text = div(substr($row["asunto"], 0, 30), "black");
-                $text = div(heading_enid(icon(" fas fa-tasks"), 5) . $text, "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
+                $text = d(substr($row["asunto"], 0, 30), "black");
+                $text = d(h(icon(" fas fa-tasks"), 5) . $text, "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
 
                 $r[] = anchor_enid($text, "../desarrollo/?q=1&ticket=" . $id_ticket);
                 $f++;
             }
 
 
-            $agregar = div(anchor_enid(text_icon("fas fa-plus-circle black", " TAREA"), path_enid("desarrollo")), "bottom_50 black underline");
+            $agregar = d(anchor_enid(text_icon("fas fa-plus-circle black", " TAREA"), path_enid("desarrollo")), "bottom_50 black underline");
             $tareas = add_text($agregar, append($r));
 
 
@@ -377,7 +377,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_recibo = $row["id_recibo"];
                 $saldo_cubierto = $row["saldo_cubierto"];
-                $text = div(heading_enid(icon(" fa fa-ticket ") . $saldo_cubierto . " MXN ", 3), "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
+                $text = d(h(icon(" fa fa-ticket ") . $saldo_cubierto . " MXN ", 3), "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
 
 
                 $r[] = anchor_enid($text,
@@ -408,8 +408,8 @@ if (!function_exists('invierte_date_time')) {
             $f = 0;
             if ($num > 0) {
 
-                $text_comentario = div("Alguien han agregado sus comentarios sobre uno de tus artículos en venta ", 1) . base_valoracion();
-                $text = div($num . " personas han agregado sus comentarios sobre tus artículos", 1) . base_valoracion();
+                $text_comentario = d("Alguien han agregado sus comentarios sobre uno de tus artículos en venta ", 1) . base_valoracion();
+                $text = d($num . " personas han agregado sus comentarios sobre tus artículos", 1) . base_valoracion();
                 $text = ($num > 1) ? $text : $text_comentario;
                 $lista = base_notificacion("../recomendacion/?q=" . $id_usuario, "fa fa-star", $text);
                 $f++;
@@ -527,8 +527,8 @@ if (!function_exists('invierte_date_time')) {
 
             $text = btw(
 
-                div(text_icon("fa  fa fa-clock-o ", $fecha_cordatorio)),
-                div($row["descripcion"]),
+                d(text_icon("fa  fa fa-clock-o ", $fecha_cordatorio)),
+                d($row["descripcion"]),
                 "col-lg-12 top_10  shadow padding_10 mh_notificaciones"
             );
 
@@ -556,9 +556,9 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $id_recibo = $row["id_recibo"];
-                $total = div($row["total"] . "MXN", "text_monto_sin_cierre text-left");
+                $total = d($row["total"] . "MXN", "text_monto_sin_cierre text-left");
                 $text = btw(
-                    div(
+                    d(
                         img($row["url_img_servicio"])
                         ,
                         "w_50"
@@ -574,7 +574,7 @@ if (!function_exists('invierte_date_time')) {
 
             if (es_data($r)) {
 
-                array_unshift($r, br(2) . div(heading_enid("VENTAS EN PROCESO", 5, ["class" => "top_20"])));
+                array_unshift($r, br(2) . d(h("VENTAS EN PROCESO", 5, ["class" => "top_20"])));
 
             }
 
@@ -637,7 +637,7 @@ if (!function_exists('invierte_date_time')) {
             $numtelefonico["html"],
             $preguntas["html"],
             $respuestas["html"],
-            div($compras_sin_cierre["html"], "top_20")
+            d($compras_sin_cierre["html"], "top_20")
 
 
         ];
@@ -660,10 +660,10 @@ if (!function_exists('invierte_date_time')) {
             $pregunta = $row["pregunta"];
             $id_servicio = $row["id_servicio"];
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
-            $pregunta = div($pregunta, "black");
+            $pregunta = d($pregunta, "black");
 
 
-            $imagenes = div(img_servicio($id_servicio), "w_50");
+            $imagenes = d(img_servicio($id_servicio), "w_50");
             $t = [];
             $t[] = btw($imagenes, $pregunta, " d-flex flex-column justify-content-between ");
             $text = append($t);
@@ -700,9 +700,9 @@ if (!function_exists('invierte_date_time')) {
             $pregunta = $row["pregunta"];
             $id_servicio = $row["id_servicio"];
             $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
-            $pregunta = div($pregunta, ["class" => "black"]);
+            $pregunta = d($pregunta, ["class" => "black"]);
 
-            $imagenes = div(img_servicio($id_servicio), "w_50");
+            $imagenes = d(img_servicio($id_servicio), "w_50");
             $t = [];
             $t[] = btw($imagenes, $pregunta, "d-flex flex-column justify-content-between");
             $text = append($t);
@@ -747,7 +747,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
-        $lista[] = div($compras_sin_cierre["html"], "top_20");
+        $lista[] = d($compras_sin_cierre["html"], "top_20");
         $f = $f + $compras_sin_cierre["flag"];
 
         $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);
@@ -821,7 +821,7 @@ if (!function_exists('invierte_date_time')) {
         $new_flag = "";
         if ($f > 0) {
 
-            $new_flag = div($f,
+            $new_flag = d($f,
                 [
                     "id" => $f,
                     "class" => 'notificacion_tareas_pendientes_enid_service'

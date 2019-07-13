@@ -169,6 +169,7 @@ class pregunta extends REST_Controller
 		$this->response($response);
 	}
 
+	/*FIXME Table 'enidserv_web.pregunta_servicio' doesn't exist*/
 	function buzon_GET()
 	{
 
@@ -240,7 +241,7 @@ class pregunta extends REST_Controller
 		if (if_ext($param, "id_pregunta")) {
 
 			$usuario = $this->pregunta_model->get_usuario_por_id_pregunta($param);
-			$response = primer_elemento($usuario ,"id_usuario");
+			$response = pr($usuario ,"id_usuario");
 
 		}
 		$this->response($response);

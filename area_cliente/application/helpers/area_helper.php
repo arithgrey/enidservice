@@ -14,13 +14,13 @@ if (!function_exists('invierte_date_time')) {
             $ticket = $data["ticket"];
             $action = $data["action"];
 
-            $r[] = div(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']);
-            $r[] = div(place("place_ventas_usuario"), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_mis_ventas']);
-            $r[] = div(get_format_valoraciones($valoraciones, $id_usuario, $alcance), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_valoraciones']);
-            $r[] = div(place("place_pagar_ahora"), ["class" => "tab-pane", "id" => "tab_pagos"]);
-            $r[] = div(place("place_resumen_servicio"), ["class" => "tab-pane", "id" => "tab_renovar_servicio"]);
+            $r[] = d(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']);
+            $r[] = d(place("place_ventas_usuario"), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_mis_ventas']);
+            $r[] = d(get_format_valoraciones($valoraciones, $id_usuario, $alcance), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_valoraciones']);
+            $r[] = d(place("place_pagar_ahora"), ["class" => "tab-pane", "id" => "tab_pagos"]);
+            $r[] = d(place("place_resumen_servicio"), ["class" => "tab-pane", "id" => "tab_renovar_servicio"]);
             $r[] = get_hiddens_tickects($action, $ticket);
-            $r[] = div("",
+            $r[] = d("",
                 [
                     "class" => "resumen_pagos_pendientes",
                     "href" => "#tab_renovar_servicio",
@@ -28,9 +28,9 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $response[] = div(get_menu($action), 2);
-            $response[] = div(div(append($r), "tab-content"), 10);
-            return div(append($response), "contenedor_principal_enid");
+            $response[] = d(get_menu($action), 2);
+            $response[] = d(d(append($r), "tab-content"), 10);
+            return d(append($response), "contenedor_principal_enid");
 
         }
 
@@ -50,8 +50,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_buzon()
         {
 
-            $r[] = heading_enid("BUZÓN", 3);
-            $r[] = div(append(
+            $r[] = h("BUZÓN", 3);
+            $r[] = d(append(
 
                 anchor_enid("HECHAS" .
                     span("", 'notificacion_preguntas_sin_leer_cliente'),
@@ -83,9 +83,9 @@ if (!function_exists('invierte_date_time')) {
         function get_format_valoraciones($valoraciones, $id_usuario, $alcance)
         {
 
-            $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
-            $x[] = div($valoraciones, "top_30");
-            $x[] = div(
+            $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
+            $x[] = d($valoraciones, "top_30");
+            $x[] = d(
                 anchor_enid(
                     "VER COMENTARIOS",
                     [
@@ -96,9 +96,9 @@ if (!function_exists('invierte_date_time')) {
                 "text-center top_20"
             );
 
-            $x[] = div($alcance, " text-center top_30");
+            $x[] = d($alcance, " text-center top_30");
 
-            $response = div(div(append($x), 6, 1), "text-center");
+            $response = d(d(append($x), 6, 1), "text-center");
             return $response;
 
         }
@@ -114,7 +114,7 @@ if (!function_exists('invierte_date_time')) {
             $minimo = $alcance["minimo"];
             $promedio = $alcance["promedio"];
 
-            $r[] = heading_enid("ALCANCE DE TUS PRODUCTOS", 3);
+            $r[] = h("ALCANCE DE TUS PRODUCTOS", 3);
             $r[] = "<table>";
             $r[] = "<tr>";
             $r[] = get_td($maximo, ["class" => 'num_alcance', "id" => $maximo]);
@@ -155,7 +155,7 @@ if (!function_exists('invierte_date_time')) {
 
         $_vendedor =
             anchor_enid(
-                div(
+                d(
                     text_icon("fa fa-flag", " VENDER"),
                     [
                         "href" => path_enid("vender_nuevo")

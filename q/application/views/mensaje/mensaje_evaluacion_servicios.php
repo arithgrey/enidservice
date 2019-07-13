@@ -1,11 +1,11 @@
 <?php
 
-$r[] = div("Primero que nada un cordial saludo ");
-$r[] = div("Equipo Enid Service.");
-$r[] = div("El motivo por el cual nos estamos poniendo en contacto con usted, es con la finalidad de saber si hasta este momento el servicio que le hemos brindado, está satisfaciendo, simplificando o mejorando sus labores, para nosotros es muy importante conocer su experiencia y entender a qué obstáculos se está enfrentando, con esto juntos podríamos idear una solución oportuna que satisfaga las dos partes. 
+$r[] = d("Primero que nada un cordial saludo ");
+$r[] = d("Equipo Enid Service.");
+$r[] = d("El motivo por el cual nos estamos poniendo en contacto con usted, es con la finalidad de saber si hasta este momento el servicio que le hemos brindado, está satisfaciendo, simplificando o mejorando sus labores, para nosotros es muy importante conocer su experiencia y entender a qué obstáculos se está enfrentando, con esto juntos podríamos idear una solución oportuna que satisfaga las dos partes. 
 	");
 
-$r[] = div("No me queda más que pedirle que nos envíe sus comentarios o si así lo prefiere evalúe nuestros servicios ");
+$r[] = d("No me queda más que pedirle que nos envíe sus comentarios o si así lo prefiere evalúe nuestros servicios ");
 $r[] = anchor_enid("en este enlace.",
     ["href" => "https://goo.gl/DTHQid",
         "style" => "background: blue;color: white;padding: 5px;"

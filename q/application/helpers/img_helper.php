@@ -32,14 +32,14 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $x[] = place("lista_imagenes_faq", ["id" => 'lista_imagenes_faq']);
-        $x[] = guardar(icon("fa fa-check") . " AGREGAR ",
+        $x[] = btn(icon("fa fa-check") . " AGREGAR ",
             [
                 "type" => "submit",
                 "id" => 'guardar_img_faq',
                 "style" => 'color:white;'
             ]);
 
-        $r[] = div(append($x), "col-lg-6  col-lg-offset-3  top_30");
+        $r[] = d(append($x), "col-lg-6  col-lg-offset-3  top_30");
 
         $r[] = form_close(place("place_load_img_faq"));
 
@@ -72,7 +72,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => 'q', "value" => $nombre_archivo]);
         $r[] = input_hidden(["class" => 'dinamic_img', "id" => 'dinamic_img', "name" => 'dinamic_img']);
 
-        $r[] = guardar("AGREGAR IMAGEN" . icon("fa fa-check"),
+        $r[] = btn("AGREGAR IMAGEN" . icon("fa fa-check"),
             [
                 "class" => 'guardar_img_enid display_none bottom_30',
                 "id" => 'guardar_img'
@@ -122,7 +122,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("place_load_img", ["id" => 'place_load_img']);
         $r[] = place("separate-enid");
 
-        $r[] = guardar("AGREGAR IMAGEN" . icon("fa fa-check"),
+        $r[] = btn("AGREGAR IMAGEN" . icon("fa fa-check"),
             [
                 "class" => 'guardar_img_enid bottom_30 letter-spacing-5 top_30',
                 "id" => 'guardar_img'

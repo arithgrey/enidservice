@@ -20,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
     function get_catalogo_metakeyword($catalogo)
     {
 
-        $response[] = div("ÚLTIMAS EMPLEADAS ", "item-content-block");
+        $response[] = d("ÚLTIMAS EMPLEADAS ", "item-content-block");
         foreach ($catalogo as $row) {
 
             array_push($response,

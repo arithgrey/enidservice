@@ -1,4 +1,4 @@
-<?= div(
+<?= d(
     anchor_enid(icon("fa fa-pencil"),
         ["class" => "a_enid_blue editar_direccion_persona"]
     )
@@ -7,6 +7,6 @@
     ,
     1
 ) ?>
-<?= div(
+<?= d(
     get_format_domicilio($info_envio_direccion)
 ) ?>

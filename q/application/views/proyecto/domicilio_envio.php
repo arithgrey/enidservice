@@ -50,8 +50,8 @@ if ($registro_direccion == 0) {
 
 
 <?=
-div(btw(
-    heading_enid("DIRECCIÓN DE ENVÍO", 2, "letter-spacing-5")
+d(btw(
+    h("DIRECCIÓN DE ENVÍO", 2, "letter-spacing-5")
     ,
     get_format_direccion_envio_pedido(
         $nombre_receptor,

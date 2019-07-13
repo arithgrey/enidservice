@@ -71,7 +71,7 @@ if (!function_exists('p')) {
     }
 }
 if (!function_exists('guardar')) {
-    function guardar($info, $attributes = [], $row = 1, $type_button = 1, $submit = 1, $anchor = 0)
+    function btn($info, $attributes = [], $row = 1, $type_button = 1, $submit = 1, $anchor = 0)
     {
         if ($submit == 1) {
 
@@ -92,7 +92,7 @@ if (!function_exists('guardar')) {
 
             $b = ($anchor !== 0) ? "<a href='" . $anchor . "'> <button " . $attr . ">" . $info . "</button></a>" : "<button " . $attr . ">" . $info . "</button>";
 
-            return div($b, 1);
+            return d($b, 1);
         }
     }
 }
@@ -339,7 +339,7 @@ if (!function_exists('get_base_html')) {
 */
 
 if (!function_exists('div')) {
-    function div($info, $attributes = [], $row = 0, $frow = 0)
+    function d($info, $attributes = [], $row = 0, $frow = 0)
     {
 
         return get_base_html("div", $info, $attributes, $row, $frow);
@@ -496,7 +496,7 @@ if (!function_exists('remove_comma')) {
     }
 }
 if (!function_exists('heading_enid')) {
-    function heading_enid($data = '', $h = 1, $attributes = '', $row_12 = 0)
+    function h($data = '', $h = 1, $attributes = '', $row_12 = 0)
     {
 
         if (is_numeric($attributes) && $attributes > 0) {
@@ -784,7 +784,7 @@ if (!function_exists('place')) {
         if (!array_key_exists("id", $attributes)) {
             $attributes["id"] = $class;
         }
-        return div("", $attributes, $row);
+        return d("", $attributes, $row);
 
     }
 }
@@ -1337,7 +1337,7 @@ if (!function_exists('get_logo')) {
 
         if ($is_mobile == 1) {
 
-            $en_mobile = div("☰ ENID SERVICE", ["class" => "smallnav menu white", "onclick" => "openNav()"]);
+            $en_mobile = d("☰ ENID SERVICE", ["class" => "smallnav menu white", "onclick" => "openNav()"]);
             $class = "col-lg-12";
             switch ($tipo) {
                 case 0:
@@ -1351,13 +1351,13 @@ if (!function_exists('get_logo')) {
                     break;
             }
 
-            return div($en_mobile, ["class" => $class]);
+            return d($en_mobile, ["class" => $class]);
 
         } else {
 
             $img_enid = img_enid(["style" => "width: 50px!important;"]);
             $en_pc = anchor_enid($img_enid, ["href" => "../"]);
-            return div($en_pc, "padding_10");
+            return d($en_pc, "padding_10");
         }
 
     }
@@ -1514,7 +1514,7 @@ if (!function_exists('append')) {
 
             if ($col > 0) {
 
-                $response = ($num_col > 0) ? div($response, $num_col) : div($response);
+                $response = ($num_col > 0) ? d($response, $num_col) : d($response);
             }
 
             return $response;
@@ -1549,7 +1549,7 @@ if (!function_exists('append')) {
 
             if ($col > 0) {
 
-                $response = ($num_col > 0) ? div($response, $num_col) : div($response);
+                $response = ($num_col > 0) ? d($response, $num_col) : d($response);
             }
 
             return $response;
@@ -1602,7 +1602,7 @@ if (!function_exists('get_menu_session')) {
 
 
             $text = btw(
-                div("Vender", ["style" => "font-size:.8em;"]),
+                d("Vender", ["style" => "font-size:.8em;"]),
                 icon("fa fa-shopping-cart", ["style" => "margin-left:5px;font-size:1.1em;"]),
                 "display_flex_enid"
 
@@ -1620,7 +1620,7 @@ if (!function_exists('get_menu_session')) {
 
 
             $text = btw(
-                div(" Iniciar sesión ", ["style" => "font-size:.8em;"]),
+                d(" Iniciar sesión ", ["style" => "font-size:.8em;"]),
                 icon("fa fa-user", ["style" => "margin-left:5px;font-size:1.1em;"]),
                 "display_flex_enid"
 
@@ -1635,10 +1635,10 @@ if (!function_exists('get_menu_session')) {
 
 
             $type_display = ($is_mobile > 0) ? " d-flex flex-column justify-content-between " : " display_flex_enid ";
-            $list = div(append([$vender, $l_session]), $type_display);
+            $list = d(append([$vender, $l_session]), $type_display);
 
             if ($proceso_compra < 1) {
-                return div(ul($list, "largenav "), "text-right");
+                return d(ul($list, "largenav "), "text-right");
             }
 
 
@@ -1682,18 +1682,18 @@ if (!function_exists('btw')) {
                 $class = $class . " col-lg-offset-" . $offset;
             }
 
-            $response = div(append([$a, $b]), ["class" => $class]);
+            $response = d(append([$a, $b]), ["class" => $class]);
 
             if ($frow > 0) {
 
-                $response = div(div(append([$a, $b]), $class), 13);
+                $response = d(d(append([$a, $b]), $class), 13);
             }
 
 
         } else {
 
 
-            $response = ($row > 0) ? div(div(append([$a, $b]), $class), 1) : div(append([$a, $b]), $class);
+            $response = ($row > 0) ? d(d(append([$a, $b]), $class), 1) : d(append([$a, $b]), $class);
 
         }
 
@@ -1710,8 +1710,8 @@ if (!function_exists('get_format_fecha_busqueda')) {
 
 
         $r[] = btw(
-            div("Inicio", 'strong top_30 '),
-            div(input([
+            d("Inicio", 'strong top_30 '),
+            d(input([
                 "name" => 'fecha_inicio',
                 "class" => "form-control input-sm top_30",
                 "id" => 'datetimepicker4',
@@ -1723,8 +1723,8 @@ if (!function_exists('get_format_fecha_busqueda')) {
 
 
         $r[] = btw(
-            div("Fin", 'strong top_30'),
-            div(input(
+            d("Fin", 'strong top_30'),
+            d(input(
                 [
 
                     "name" => 'fecha_termino',
@@ -1738,7 +1738,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
             'col-lg-4 d-flex align-items-center justify-content-between '
         );
 
-        $r[] = div(guardar(text_icon("fa fa-chevron-right", "Búsqueda ")), 'col-lg-4 top_30');
+        $r[] = d(btn(text_icon("fa fa-chevron-right", "Búsqueda ")), 'col-lg-4 top_30');
 
         return append($r);
 
@@ -1763,8 +1763,8 @@ if (!function_exists('get_format_izquierdo')) {
         if ($agregar_categoria > 0) {
 
 
-            $r[] = div(heading_enid("CATEGORIAS DESTACADAS", 3));
-            $r[] = div(anchor_enid(heading_enid("Agregar", 5, "underline top_20"), ["href" => path_enid("nfaq"), "class" => "black"]));
+            $r[] = d(h("CATEGORIAS DESTACADAS", 3));
+            $r[] = d(anchor_enid(h("Agregar", 5, "underline top_20"), ["href" => path_enid("nfaq"), "class" => "black"]));
 
         }
 
@@ -1775,8 +1775,8 @@ if (!function_exists('get_format_izquierdo')) {
         }
 
 
-        $r[] = div(append([
-            heading_enid("¿TIENES ALGUNA DUDA?", 3),
+        $r[] = d(append([
+            h("¿TIENES ALGUNA DUDA?", 3),
             anchor_enid("ENVIA TU MENSAJE",
                 [
                     "href" => "../contact/#envio_msj",
@@ -1824,49 +1824,49 @@ function format_phone($number)
 function get_metodos_pago()
 {
 
-    $r[] = div(img([
+    $r[] = d(img([
         'class' => "logo_pago",
         'style' => 'width:95px!important',
         'src' => "../img_tema/bancos/masterDebito.png"]));
 
-    $r[] = div(img([
+    $r[] = d(img([
         'class' => "logo_pago",
         'style' => 'width:65px!important',
         'src' => "../img_tema/bancos/paypal2.png"]));
 
-    $r[] = div(img([
+    $r[] = d(img([
         'class' => "logo_pago",
         'style' => 'width:95px!important',
         'src' => "../img_tema/bancos/visaDebito.png"]));
 
-    $r[] = div(img([
+    $r[] = d(img([
         'class' => "logo_pago",
         'style' => 'width:65px!important',
         'src' => "../img_tema/bancos/oxxo-logo.png"]));
 
-    $r[] = div(img([
+    $r[] = d(img([
         'class' => "logo_pago",
         'style' => 'width:85px!important',
         'src' => "../img_tema/bancos/bancomer2.png"]));
 
-    $r[] = div(img([
+    $r[] = d(img([
         'class' => "logo_pago",
         'style' => 'width:85px!important',
         'src' => "../img_tema/bancos/santander.png"]));
 
 
-    $r[] = div(img([
+    $r[] = d(img([
         'class' => "logo_pago",
         'style' => 'width:95px!important',
         'src' => "../img_tema/bancos/banamex.png"]));
 
 
-    $r[] = div(img([
+    $r[] = d(img([
         'class' => "logo_pago",
         'style' => 'width:65px!important',
         'src' => "../img_tema/bancos/fedex.png"]));
 
-    $r[] = div(img(
+    $r[] = d(img(
         [
             'class' => "logo_pago",
             'style' => 'width:75px!important',
@@ -1874,7 +1874,7 @@ function get_metodos_pago()
         ]));
 
 
-    return div(div(append($r), "col-lg-12 d-flex flex-row justify-content-between"), "info_metodos_pago row");
+    return d(d(append($r), "col-lg-12 d-flex flex-row justify-content-between"), "info_metodos_pago row");
 
 }
 
@@ -2030,9 +2030,9 @@ function get_social($proceso_compra, $desc_web, $black = 1)
             ]);
 
         $social = append($r);
-        $response = div($social, "contenedor_social display_flex_enid mt-5");
+        $response = d($social, "contenedor_social display_flex_enid mt-5");
     }
-    return div($response, 1);
+    return d($response, 1);
 
 }
 
@@ -2081,7 +2081,7 @@ function key_exists_bi($data, $k, $sk, $def = "")
     return (is_array($data) && array_key_exists($k, $data) && is_array($data[$k]) && array_key_exists($sk, $data[$k])) ? $data[$k][$sk] : $def;
 }
 
-function primer_elemento($data, $index, $def = false)
+function pr($data, $index, $def = false)
 {
 
     return (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0])) ? $data[0][$index] : $def;
@@ -2092,7 +2092,7 @@ function ajustar($a, $b, $horizontal = 1)
 
     $extra = (is_string($horizontal)) ? $horizontal : "";
     $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
-    return div(div($a) . div($b), $class);
+    return d(d($a) . d($b), $class);
 
 }
 

@@ -8,25 +8,25 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $z[] = div("", 2);
-            $z[] = div(heading_enid(
+            $z[] = d("", 2);
+            $z[] = d(h(
                 "Estamos en búsqueda de 4 talentos con experiencia en ventas.",
                 3),
                 8
             );
             $z[] = hr();
-            $z[] = div(icon("fa fa-usd "), 2);
-            $z[] = div("", 2);
-            $z[] = div(get_format_descripction(), 8);
-            $z[] = div("", 2);
+            $z[] = d(icon("fa fa-usd "), 2);
+            $z[] = d("", 2);
+            $z[] = d(get_format_descripction(), 8);
+            $z[] = d("", 2);
             $z[] = hr();
 
             $r[] = place("info_articulo", ["id" => 'info_articulo']);
-            $r[] = div(append($z), ["class" => "tab-pane active text-style", "id" => "tab2"]);
+            $r[] = d(append($z), ["class" => "tab-pane active text-style", "id" => "tab2"]);
 
 
-            $response[] = div(get_format_temas_ayuda(), 2);
-            $response[] = div(div(append($r),"tab-content"),10);
+            $response[] = d(get_format_temas_ayuda(), 2);
+            $response[] = d(d(append($r),"tab-content"),10);
             return append($response);
 
 
@@ -83,8 +83,8 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_format_temas_ayuda')) {
         function get_format_temas_ayuda()
         {
-            $r[] = heading_enid("TEMAS DE AYUDA", 3);
-            $r[] = heading_enid("¿Tienes alguna duda?", 4);
+            $r[] = h("TEMAS DE AYUDA", 3);
+            $r[] = h("¿Tienes alguna duda?", 4);
             $r[] = p("¡Llámanos! Podemos ayudarte." . icon('fa icon-mobile contact'));
             $r[] = anchor_enid(
                 "",
@@ -93,9 +93,9 @@ if (!function_exists('invierte_date_time')) {
                     "target" => "_blank",
                     "href" => "tel:5552967027"
                 ]);
-            $r[] = div("De Lunes a Viernes de 8:00 a 19:00 y Sábados de 09:00 a 18:00.", 1);
-            $r[] = div("Podemos utilizar tu correo para mantenerte informado..", 1);
-            $r[] = div("O si lo prefieres Comunícate directamente", 1);
+            $r[] = d("De Lunes a Viernes de 8:00 a 19:00 y Sábados de 09:00 a 18:00.", 1);
+            $r[] = d("Podemos utilizar tu correo para mantenerte informado..", 1);
+            $r[] = d("O si lo prefieres Comunícate directamente", 1);
 
             $r[] = anchor_enid(
                 "FAQS",

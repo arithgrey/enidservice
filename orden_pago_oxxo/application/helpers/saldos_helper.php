@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
             $monto = $pago["q"];
             $concepto = "Saldo a cuenta Enid Service";
 
-            $r[] = div(get_form_saldos($beneficiario, $folio, $monto, $concepto, $numero_cuenta), 1);
+            $r[] = d(get_form_saldos($beneficiario, $folio, $monto, $concepto, $numero_cuenta), 1);
 
 
             $contendor_oxoo = btw(
@@ -33,11 +33,11 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 ),
 
-                div("ORDEN DE PAGO EN SUCURSALES OXXO"), "display_flex_enid"
+                d("ORDEN DE PAGO EN SUCURSALES OXXO"), "display_flex_enid"
             );
 
 
-            $r[] = div($contendor_oxoo, ["style" => "background: #02223e;color: white;"]);
+            $r[] = d($contendor_oxoo, ["style" => "background: #02223e;color: white;"]);
             $text_beneficiario = strtoupper(append([
                     $concepto,
                     "Beneficiario",
@@ -48,10 +48,10 @@ if (!function_exists('invierte_date_time')) {
                 ])
             );
 
-            $r[] = div($text_beneficiario, ["style" => "background: #d7d7ff;padding: 5px;"]);
+            $r[] = d($text_beneficiario, ["style" => "background: #d7d7ff;padding: 5px;"]);
             $r[] = get_monto_pago($monto);
             $r[] = get_instruccion_pago($numero_cuenta);
-            return div(append($r), 6, 1);
+            return d(append($r), 6, 1);
 
 
         }
@@ -64,7 +64,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = heading("MONTO A PAGAR");
             $r[] = heading("$" . $info_pago["q"] . "MXN");
-            $r[] = div("OXXO Cobrará una comisión adicional al momento de realizar el pago");
+            $r[] = d("OXXO Cobrará una comisión adicional al momento de realizar el pago");
             return append($r);
         }
 
@@ -99,8 +99,8 @@ if (!function_exists('invierte_date_time')) {
                 "value" => $concepto
 
             ]);
-            $r[] = div(
-                guardar(
+            $r[] = d(
+                btn(
                     "IMPRIMIR",
                     [
                         "class" => " imprimir top_50"
@@ -129,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r [] = div(
+            $r [] = d(
                 "INSTRUCCIONES",
                 [
                     "style" => "background: #000b39;color: white;padding: 5px;"
@@ -137,23 +137,23 @@ if (!function_exists('invierte_date_time')) {
                 1);
 
 
-            $r [] = div("1.-Acude a la tienda OXXO más cencana ");
-            $r [] = div("2.- Indica en caja que quieres realizar un
+            $r [] = d("1.-Acude a la tienda OXXO más cencana ");
+            $r [] = d("2.- Indica en caja que quieres realizar un
                                                 depósito en cuenta BBVA Bancomer ");
-            $r [] = div("3.- Proporciona el número de cuenta señalado");
-            $r [] = div("4.-Realiza el 
+            $r [] = d("3.- Proporciona el número de cuenta señalado");
+            $r [] = d("4.-Realiza el 
                         pago exacto correspondiente, que se indica en el monto a pagar");
-            $r [] = div("5.-Al confirmar tu pago, el cajero te entregará un comprobante impreso.");
-            $r [] = div("En el podrás verificar que se haya realizado correctamente, conserva este comprobante.");
+            $r [] = d("5.-Al confirmar tu pago, el cajero te entregará un comprobante impreso.");
+            $r [] = d("En el podrás verificar que se haya realizado correctamente, conserva este comprobante.");
 
-            $r [] = div("6.- Notifica tu pago desde tu área de cliente");
+            $r [] = d("6.- Notifica tu pago desde tu área de cliente");
             $r [] = anchor_enid("http://enidservice.com/inicio/login/",
                 [
                     "href" => "http://enidservice.com/inicio/login/"
                 ]);
-            $r [] = div("ó", 1);
-            $r [] = div("Notifica tu pago  al área de ventas ventas@enidservice.com", 1);
-            $r [] = div(
+            $r [] = d("ó", 1);
+            $r [] = d("Notifica tu pago  al área de ventas ventas@enidservice.com", 1);
+            $r [] = d(
                 img([
                         "src" => path_enid("img_logo"),
                     ]
@@ -162,7 +162,7 @@ if (!function_exists('invierte_date_time')) {
                 , 1
             );
 
-            return div(append($r));
+            return d(append($r));
 
 
         }
@@ -179,10 +179,10 @@ if (!function_exists('invierte_date_time')) {
 
                 ]);
 
-            $r[] = heading_enid($numero_cuenta, 4, ["style" => "color:blue;margin-bottom:30px;"]);
+            $r[] = h($numero_cuenta, 4, ["style" => "color:blue;margin-bottom:30px;"]);
             $r[] = get_instrucciones();
             return addNRow(
-                div(
+                d(
                     append($r), "border padding_20 top_20"
                 )
             );
@@ -195,8 +195,8 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = heading("MONTO A PAGAR");
             $r[] = heading("$" . $monto . "MXN", 2);
-            $r[] = div("OXXO Cobrará una comisión adicional al momento de realizar el pago", 1);
-            return div(append($r));
+            $r[] = d("OXXO Cobrará una comisión adicional al momento de realizar el pago", 1);
+            return d(append($r));
 
         }
     }
