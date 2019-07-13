@@ -6,8 +6,8 @@ if (!function_exists('invierte_date_time')) {
         function render_deseos($data)
         {
 
-            $r[] = div(get_menu(), 2);
-            $r[] = div(get_list_clasificaciones($data), 10);
+            $r[] = d(get_menu(), 2);
+            $r[] = d(get_list_clasificaciones($data), 10);
             $r[] = hr();
             $r[] = get_format_slider_preferencias();
             $r[] = hr();
@@ -35,16 +35,16 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = btw(
 
-                div(img(["src" => "../img_tema/preferencias/up-arrow.png"]), "slide-nav-up")
+                d(img(["src" => "../img_tema/preferencias/up-arrow.png"]), "slide-nav-up")
                 ,
-                div(img(["src" => "../img_tema/preferencias/up-arrow.png"]), "slide-nav-down")
+                d(img(["src" => "../img_tema/preferencias/up-arrow.png"]), "slide-nav-down")
                 ,
                 "slider-nav"
             );
 
 
-            $response = div(append($r), ["id" => "slider"]);
-            return div($response, 8, 1);
+            $response = d(append($r), ["id" => "slider"]);
+            return d($response, 8, 1);
 
 
         }
@@ -53,7 +53,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_productos_deseados')) {
         function get_productos_deseados($productos_deseados)
         {
-            return div(get_format_productos_deseados($productos_deseados), "top_20");
+            return d(get_format_productos_deseados($productos_deseados), "top_20");
 
         }
 
@@ -63,9 +63,9 @@ if (!function_exists('invierte_date_time')) {
         function get_format_temporadas()
         {
             $response = append([
-                div("Apparel", "slide-label"),
+                d("Apparel", "slide-label"),
 
-                div(
+                d(
                     img(
                         [
                             "src" => "../img_tema/preferencias/preferencias-1.jpg",
@@ -74,7 +74,7 @@ if (!function_exists('invierte_date_time')) {
                     ), "slide-image animate"
                 ),
 
-                div(
+                d(
                     get_format_temporada()
                     ,
                     "slide-content"
@@ -91,8 +91,8 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $response = append([
-                div("Bags", "slide-label"),
-                div(
+                d("Bags", "slide-label"),
+                d(
                     img(
                         [
 
@@ -104,7 +104,7 @@ if (!function_exists('invierte_date_time')) {
                     "slide-image animate"
                 ),
 
-                div(
+                d(
                     get_format_slide_accesorios()
                     ,
                     "slide-content"
@@ -120,8 +120,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_images()
         {
 
-            $r[] = div("Diferentes estilos", "slide-label");
-            $r[] = div(
+            $r[] = d("Diferentes estilos", "slide-label");
+            $r[] = d(
                 img(
                     [
                         "src" => "../img_tema/preferencias/preferencias-4.jpg",
@@ -133,16 +133,16 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $r[] = div(append([
-                div(
-                    heading_enid("Encuentra entre múltiples opciones", 3, ["class" => "from-bottom"])
+            $r[] = d(append([
+                d(
+                    h("Encuentra entre múltiples opciones", 3, ["class" => "from-bottom"])
                     ,
                     "animate"
                 ),
 
                 p("Para Dama y Caballero"),
 
-                heading_enid(
+                h(
                     "Mira las opciones", 3,
                     [
                         "class" => "shop-now",
@@ -207,16 +207,16 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = div(get_msj_busqueda_error(), 1);
-            $r[] = heading_enid("UPS AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
-            $r[] = guardar("Explorar ahora!",
+            $r[] = d(get_msj_busqueda_error(), 1);
+            $r[] = h("UPS AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
+            $r[] = btn("Explorar ahora!",
                 [
 
                     "class" => "top_20"
 
                 ], 1, 1, 0, path_enid("home")
             );
-            return div(append($r), 4, 1);
+            return d(append($r), 4, 1);
 
 
         }
@@ -226,10 +226,10 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = div(get_menu(), 2);
-            $r[] = div(get_lista_deseo($productos_deseados), 7);
+            $r[] = d(get_menu(), 2);
+            $r[] = d(get_lista_deseo($productos_deseados), 7);
             $r[] = btw(
-                heading_enid("TU LISTA DE DESEOS", 3, 'titulo_lista_deseos')
+                h("TU LISTA DE DESEOS", 3, 'titulo_lista_deseos')
                 ,
                 anchor_enid("EXPLORAR MÁS ARTÍCULOS", ["href" => "../search/?q2=0&q="], 1)
                 ,
@@ -245,9 +245,9 @@ if (!function_exists('invierte_date_time')) {
         function get_format_slide_accesorios()
         {
 
-            $r[] = div(div("Accesorios", "product-type from-bottom"), "animate");
-            $r[] = div(heading_enid("Lo que usas en viajes", 2, "from-bottom"), "animate");
-            $r[] = heading_enid("Explorar tienda", 3, ["class" => "shop-now", "href" => path_enid("search")]);
+            $r[] = d(d("Accesorios", "product-type from-bottom"), "animate");
+            $r[] = d(h("Lo que usas en viajes", 2, "from-bottom"), "animate");
+            $r[] = h("Explorar tienda", 3, ["class" => "shop-now", "href" => path_enid("search")]);
             return append($r);
 
         }
@@ -256,14 +256,14 @@ if (!function_exists('invierte_date_time')) {
         function get_format_temporada()
         {
 
-            $r[] = div(div("Nueva temporada", "product-type from-bottom"), "animate");
-            $r[] = div(heading_enid("ENCUENTRA", 2, "from-bottom"), "animate");
-            $r[] = div(heading_enid(
+            $r[] = d(d("Nueva temporada", "product-type from-bottom"), "animate");
+            $r[] = d(h("ENCUENTRA", 2, "from-bottom"), "animate");
+            $r[] = d(h(
                 "ROPA PARA CADA OCACIÓN", 2,
                 ["class" => "from-bottom"]),
                 ["class" => "animate"]);
 
-            $r[] = heading_enid("EXPLORAR TIENDA", 2, "from-bottom");
+            $r[] = h("EXPLORAR TIENDA", 2, "from-bottom");
             return append($r);
 
         }
@@ -273,11 +273,11 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $text = append([
-                heading_enid("TUS PREFERENCIAS E INTERESES"),
+                h("TUS PREFERENCIAS E INTERESES"),
                 p("CUÉNTANOS TUS INTERESES PARA  MEJORAR TU EXPERIENCIA")
             ]);
 
-            return div($text, 4);
+            return d($text, 4);
 
         }
 
@@ -296,8 +296,8 @@ if (!function_exists('invierte_date_time')) {
             ];
 
             $extraIcon = (array_key_exists("id_usuario", $row) && !is_null($row["id_usuario"])) ? icon("fa fa-check-circle-o ") : "";
-            $clasificacion = div(append([$extraIcon, $row["nombre_clasificacion"]]), $config);
-            return div($clasificacion, 1);
+            $clasificacion = d(append([$extraIcon, $row["nombre_clasificacion"]]), $config);
+            return d($clasificacion, 1);
 
 
         }
@@ -356,42 +356,42 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $r = [];
-                $r[] = div(img($src_img), "col-sm-3 border");
+                $r[] = d(img($src_img), "col-sm-3 border");
                 $x = [];
 
 
                 $url_servicio = get_url_servicio($id_producto);
                 $title = anchor_enid($nombre_servicio, ["href" => $url_servicio, "target" => "_blank", "class" => "black"]);
-                $x[] = heading_enid($title, 4);
+                $x[] = h($title, 4);
                 $x[] = str_repeat(icon("fa fa-star"), 5);
 
-                $x[] = div($deseado . " veces comprado", "label-rating");
+                $x[] = d($deseado . " veces comprado", "label-rating");
 
 
                 $opiniones = anchor_enid($valoracion . " reseñas", ["href" => $url_servicio . "#opiniones"]);
-                $x[] = div($opiniones, "label-rating");
+                $x[] = d($opiniones, "label-rating");
 
 
                 $text_productos = ($articulos > 1) ? $articulos . " productos " : " un producto";
-                $opiniones = div(" Cancelar " . $text_productos,
+                $opiniones = d(" Cancelar " . $text_productos,
                     [
                         "class" => "cursor_pointer hover_black",
                         "onclick" => "cancela_productos('{$id}');"
                     ]
                 );
-                $x[] = div($opiniones, "label-rating");
+                $x[] = d($opiniones, "label-rating");
                 $x[] = br(3);
                 $x[] = p($descripcion);
-                $r[] = div(append($x), 6);
+                $r[] = d(append($x), 6);
                 $z = [];
                 $text_precio = $precio * $articulos;
-                $z[] = heading_enid($text_precio . "MXN");
-                $z[] = div($text_envio, "text-success text-center");
+                $z[] = h($text_precio . "MXN");
+                $z[] = d($text_envio, "text-success text-center");
                 $z[] = br();
                 $z[] = get_form_pre_pedido($id, $id_producto, "", 5, 0, 1, $articulos);
                 $z[] = br();
-                $z[] = guardar("Detalles", [], 1, 1, 0, get_url_servicio($id_producto));
-                $r[] = div(append($z), 3);
+                $z[] = btn("Detalles", [], 1, 1, 0, get_url_servicio($id_producto));
+                $r[] = d(append($z), 3);
                 $response[] = addNRow(append($r), ["class" => "card "], ["class" => "border top_20"]);
 
             }
@@ -413,7 +413,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["class" => "num_ciclos", "name" => "num_ciclos", "value" => $num_ciclos]);
         $r[] = input_hidden(["class" => "carro_compras", "name" => "carro_compras", "value" => 1]);
         $r[] = input_hidden(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id]);
-        $r[] = guardar("Comprar ", [], 1, 1, 0, get_url_servicio($id_servicio));
+        $r[] = btn("Comprar ", [], 1, 1, 0, get_url_servicio($id_servicio));
         $r[] = form_close();
 
         return append($r);

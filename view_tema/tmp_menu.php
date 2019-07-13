@@ -13,7 +13,7 @@ $li = [
     $menu,
     anchor_enid(
         "Mis reseñas y valoraciones" .
-        div($estrellas, ["class" => "contenedor_promedios"]),
+        d($estrellas, ["class" => "contenedor_promedios"]),
         ["href" => "../recomendacion/?q=" . $id_usuario]
     ),
     anchor_enid("Configuración y privacidad", ["href" => path_enid("administracion_cuenta") ]),
@@ -26,7 +26,7 @@ $li = [
     <li class="dropdown  menu_notificaciones_progreso_dia">
         <?php $class_notificacion = ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid "; ?>
         <?= anchor_enid(
-            btw(icon("fa fa-bell white"), div("", "num_tareas_dia_pendientes_usr"), "display_flex_enid"),
+            btw(icon("fa fa-bell white"), d("", "num_tareas_dia_pendientes_usr"), "display_flex_enid"),
             [
                 "class" => "blue_enid dropdown-toggle",
                 "data-toggle" => "dropdown"

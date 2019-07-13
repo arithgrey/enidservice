@@ -1,4 +1,4 @@
-<?= heading_enid("USUARIOS", 3) ?>
+<?= h("USUARIOS", 3) ?>
 <?= $paginacion ?>
 <?php
 $l = "";
@@ -23,14 +23,14 @@ foreach ($miembros as $row) {
 					"style" => 'width: 44px!important;',
 					"onerror" => "this.src='../img_tema/user/user.png'"
 				]) ?>
-				<?= div($afiliado) ?>
-				<?= div($fecha_registro) ?>
+				<?= d($afiliado) ?>
+				<?= d($fecha_registro) ?>
 			</div>
 			<?php if ($modo_edicion == 1): ?>
 				<div class="popup-head-right pull-right">
-					<?= div(icon("fa fa-envelope"), ["title" => "Email de recordatorio enviados"]) ?>
+					<?= d(icon("fa fa-envelope"), ["title" => "Email de recordatorio enviados"]) ?>
 					<div class="btn-group">
-						<?= guardar(
+						<?= btn(
 							icon('fa fa-plus'),
 							[
 								"class" => "chat-header-button",

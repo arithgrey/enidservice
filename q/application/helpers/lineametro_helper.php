@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     );
 
-                $negra[] = div(ajustar($img, icon("agregar_linea fa fa-plus-square fa-2x" ,["id" => $id])), 3);
+                $negra[] = d(ajustar($img, icon("agregar_linea fa fa-plus-square fa-2x" ,["id" => $id])), 3);
 
             } else {
 
@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     );
 
-                $r[] = div(ajustar($img, icon("quitar_linea  fa fa-minus fa-2x", ["id" => $id])), 3);
+                $r[] = d(ajustar($img, icon("quitar_linea  fa fa-minus fa-2x", ["id" => $id])), 3);
 
 
             }
@@ -47,11 +47,11 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        $response[] = heading_enid("LINEAS DE METRO DISPONIBLES",3);
+        $response[] = h("LINEAS DE METRO DISPONIBLES",3);
         $response[] = append($r);
         $response[] = br(7);
         $response[] = hr();
-        $response[] = heading_enid("LINEAS DE METRO EN PAUSA",3);
+        $response[] = h("LINEAS DE METRO EN PAUSA",3);
         $response[] = append($negra);
         return append($response);
     }
@@ -78,7 +78,7 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     );
 
-                $negra[] = div($img, 3);
+                $negra[] = d($img, 3);
 
             } else {
 
@@ -92,7 +92,7 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     );
 
-                $r[] = div($img, 3);
+                $r[] = d($img, 3);
 
 
             }
@@ -112,7 +112,7 @@ if (!function_exists('invierte_date_time')) {
             $numero = $row["numero"];
 
 
-            $linea = div("LINEA " . $numero,
+            $linea = d("LINEA " . $numero,
                 [
                     "id" => $id,
                     "class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
@@ -120,7 +120,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $r[] = div($linea, 3);
+            $r[] = d($linea, 3);
         }
 
         return append($r);

@@ -17,7 +17,7 @@ for ($a = 0; $a < count($franja_horaria); $a++) {
 
 
 <div class="col-lg-6 col-lg-offset-3">
-	<?= div("Comparativa atención al cliente y tareas resueltas",
+	<?= d("Comparativa atención al cliente y tareas resueltas",
 		["class" => "blue_enid_background white pading_10"]) ?>
 	<table class='table_enid_service text-center' border="1">
 		<tr class='f-enid' style="background: #0022B7;color: white;">

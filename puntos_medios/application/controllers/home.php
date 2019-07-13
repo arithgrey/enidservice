@@ -117,6 +117,6 @@ class Home extends CI_Controller
     private  function  get_usuario_por_servicio($id_servicio){
 
         $usuario =  $this->app->api("servicio/usuario_por_servicio/format/json/", ["id_servicio" => $id_servicio]);
-        return primer_elemento($usuario, "id_usuario");
+        return pr($usuario, "id_usuario");
     }
 }

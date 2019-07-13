@@ -40,9 +40,9 @@ if (!function_exists('invierte_date_time')) {
             $porcentaje = $row["porcentaje"];
 
             $x = [];
-            $x[] = div(anchor_enid(img(["src" => $url_img_servicio, "class" => "img_servicio_def padding_10"]), ["href" => get_url_servicio($id_servicio)]), 3);
+            $x[] = d(anchor_enid(img(["src" => $url_img_servicio, "class" => "img_servicio_def padding_10"]), ["href" => get_url_servicio($id_servicio)]), 3);
             $text = [];
-            $text[] = div(heading_enid($porcentaje . "%", 3), "text-center");
+            $text[] = d(h($porcentaje . "%", 3), "text-center");
 
 
             $form = [];
@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
             $form[] = input_hidden(["name" => "fecha_termino", "value" => $fecha_termino]);
             $form[] = input_hidden(["name" => "type", "value" => 13]);
             $form[] = input_hidden(["name" => "servicio", "value" => $id_servicio]);
-            $form[] = guardar($solicitudes . " SOLICITUDES ");
+            $form[] = btn($solicitudes . " SOLICITUDES ");
             $form[] = form_close();
             $text[] = append($form);
 
@@ -64,18 +64,18 @@ if (!function_exists('invierte_date_time')) {
             $form[] = input_hidden(["name" => "fecha_termino", "value" => $fecha_termino]);
             $form[] = input_hidden(["name" => "type", "value" => 14]);
             $form[] = input_hidden(["name" => "servicio", "value" => $id_servicio]);
-            $form[] = guardar($total . " VENTAS");
+            $form[] = btn($total . " VENTAS");
             $form[] = form_close();
 
             $text[] = append($form);
 
-            $x[] = div(append($text), "col-lg-3 d-flex flex-column justify-content-between");
-            $texto = heading_enid("Tiempo promedio de venta " . substr($dias, 0, 5) . "días", 4);
-            $x[] = div($texto, "col-lg-3 text-center align-self-center");
+            $x[] = d(append($text), "col-lg-3 d-flex flex-column justify-content-between");
+            $texto = h("Tiempo promedio de venta " . substr($dias, 0, 5) . "días", 4);
+            $x[] = d($texto, "col-lg-3 text-center align-self-center");
 
 
             $total_costos_operativos = $row["total_costos_operativos"];
-            $utilidad = heading_enid("Sin costos operativos registrados", 5);
+            $utilidad = h("Sin costos operativos registrados", 5);
 
             if (es_data($total_costos_operativos)) {
 
@@ -85,12 +85,12 @@ if (!function_exists('invierte_date_time')) {
                 $utilidad_global = $utilidad_global + $utilidad;
             }
 
-            $x[] = div(heading_enid("UTILIDAD", 3) . br() . heading_enid($utilidad . " MXN ", 5), "col-lg-3 text-center align-self-center");
-            $response[] = div(append($x), "row border  top_30");
+            $x[] = d(h("UTILIDAD", 3) . br() . h($utilidad . " MXN ", 5), "col-lg-3 text-center align-self-center");
+            $response[] = d(append($x), "row border  top_30");
 
         }
 
-        $r[] = heading_enid("UTILIDAD TOTAL: " . $utilidad_global . "MXN ", 4);
+        $r[] = h("UTILIDAD TOTAL: " . $utilidad_global . "MXN ", 4);
         $r[] = append($response);
         return $r;
 
@@ -100,9 +100,9 @@ if (!function_exists('invierte_date_time')) {
     function get_format_transaccion($id_recibo)
     {
 
-        $r[] = div(img_enid(), "w_200");
-        $r[] = heading_enid("Detalles de la transacción", 2);
-        $r[] = heading_enid("#Recibo: " . $id_recibo, 3);
+        $r[] = d(img_enid(), "w_200");
+        $r[] = h("Detalles de la transacción", 2);
+        $r[] = h("#Recibo: " . $id_recibo, 3);
         $r[] = hr();
         return append($r);
 
@@ -139,8 +139,8 @@ if (!function_exists('invierte_date_time')) {
             $url = "https://enidservice.com/inicio/valoracion/?servicio=" . $id_servicio;
             $r[] = img_enid([], 1, 1);
             $r[] = heading("¿Valorarías tu experiencia de compra en Enid Service?", 3);
-            $r[] = div("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor");
-            $r[] = div(anchor_enid("Déjanos tus comentarios aquí!", ["href" => $url]));
+            $r[] = d("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor");
+            $r[] = d(anchor_enid("Déjanos tus comentarios aquí!", ["href" => $url]));
 
             $cuerpo = append($r);
             $sender = get_request_email($email, $asunto, $cuerpo);
@@ -155,11 +155,11 @@ if (!function_exists('invierte_date_time')) {
     function get_saludo($cliente, $config_log, $id_recibo)
     {
 
-        $r[] = heading_enid("Buen día " . $cliente . ", Primeramente un cordial saludo. ", 3);
-        $r[] = div("El presente mensaje es para informar que el servicio solicitado ahora (Nueva Compra) o previamente (Recordatorio de Renovación) tiene los siguientes detalles:");
-        $r[] = div("Detalles de Orden de Compra");
-        $r[] = div(img($config_log));
-        $r[] = heading_enid("#Recibo: " . $id_recibo);
+        $r[] = h("Buen día " . $cliente . ", Primeramente un cordial saludo. ", 3);
+        $r[] = d("El presente mensaje es para informar que el servicio solicitado ahora (Nueva Compra) o previamente (Recordatorio de Renovación) tiene los siguientes detalles:");
+        $r[] = d("Detalles de Orden de Compra");
+        $r[] = d(img($config_log));
+        $r[] = h("#Recibo: " . $id_recibo);
         return append($r);
     }
 
@@ -177,14 +177,14 @@ if (!function_exists('invierte_date_time')) {
 
 
         $resumen_pedido = (!is_null($resumen_pedido)) ? $resumen_pedido : " ";
-        $r[] = div("Concepto");
-        $r[] = div($resumen_pedido);
+        $r[] = d("Concepto");
+        $r[] = d($resumen_pedido);
         $r[] = valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion);
-        $r[] = div("Precio " . $monto_a_pagar);
-        $r[] = div($text_envio_cliente_sistema);
-        $r[] = div("Ordén de compra {$primer_registro } Límite de pago  {$fecha_vencimiento} ");
-        $r[] = div("Monto total pendiente");
-        $r[] = heading_enid($saldo_pendiente . " Pesos Mexicanos", 2);
+        $r[] = d("Precio " . $monto_a_pagar);
+        $r[] = d($text_envio_cliente_sistema);
+        $r[] = d("Ordén de compra {$primer_registro } Límite de pago  {$fecha_vencimiento} ");
+        $r[] = d("Monto total pendiente");
+        $r[] = h($saldo_pendiente . " Pesos Mexicanos", 2);
         $r[] = hr();
 
         return append($r);
@@ -195,15 +195,15 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = heading_enid("Formas de pago Enid Service", 2);
-        $r[] = heading_enid("NINGÚN CARGO A TARJETA ES AUTOMÁTICO. SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO ", 2);
-        $r[] = div("1.- Podrás compra en línea de forma segura con tu con tu tarjeta bancaria (tarjeta de crédito o débito) a través de");
+        $r[] = h("Formas de pago Enid Service", 2);
+        $r[] = h("NINGÚN CARGO A TARJETA ES AUTOMÁTICO. SÓLO PUEDE SER PAGADO POR ACCIÓN DEL USUARIO ", 2);
+        $r[] = d("1.- Podrás compra en línea de forma segura con tu con tu tarjeta bancaria (tarjeta de crédito o débito) a través de");
         $r[] = anchor($url_pago_paypal, "PayPal");
         $r[] = anchor($url_pago_paypal, img($img_pago_paypal));
         $r[] = anchor($url_pago_paypal, "Comprar ahora!");
         $r[] = hr();
-        $r[] = div("2.- Aceptamos pagos en tiendas de autoservicio OXXO y transferencia bancaria en línea para bancos BBVA Bancomer", 1);
-        $r[] = anchor($url_pago_oxxo, heading_enid("OXXO", 4));
+        $r[] = d("2.- Aceptamos pagos en tiendas de autoservicio OXXO y transferencia bancaria en línea para bancos BBVA Bancomer", 1);
+        $r[] = anchor($url_pago_oxxo, h("OXXO", 4));
         $r[] = anchor($url_pago_oxxo, "Imprimir órden de pago");
         $r[] = anchor($url_pago_oxxo, img($img_pago_oxxo));
         return append($r);
@@ -213,8 +213,8 @@ if (!function_exists('invierte_date_time')) {
     function get_text_notificacion_pago($url_seguimiento_pago)
     {
 
-        $r[] = heading_enid("¿Ya realizaste tu pago?", 2);
-        $r[] = div("Notifica tu pago para que podamos procesarlo");
+        $r[] = h("¿Ya realizaste tu pago?", 2);
+        $r[] = d("Notifica tu pago para que podamos procesarlo");
         $r[] = anchor_enid("Dando click aquí", $url_seguimiento_pago);
         return append($r);
 
@@ -292,7 +292,7 @@ if (!function_exists('invierte_date_time')) {
 
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
 
-        $inicio = div(heading_enid(count($recibos) . "Elemtos encontrados ", 5), "top_10");
+        $inicio = d(h(count($recibos) . "Elemtos encontrados ", 5), "top_10");
         return $tb_fechas . $inicio . append($tb);
     }
 
@@ -321,7 +321,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = "<tr>" . $valores . "</tr>";
         $r[] = "</tr>";
         $r[] = "</table>";
-        return div(append($r, 1), "bottom_50");
+        return d(append($r, 1), "bottom_50");
     }
 
     function get_text_status($lista, $estado_compra)
@@ -440,21 +440,21 @@ if (!function_exists('invierte_date_time')) {
         $texto = "";
         if ($modalidad_ventas == 1) {
 
-             $texto = ($monto_a_liquidar > 0) ? div("MONTO DE LA COMPRA", 'text-saldo-pendiente') . div($monto_a_pagar . "MXN", "text-saldo-pendiente-monto"): $texto;
+             $texto = ($monto_a_liquidar > 0) ? d("MONTO DE LA COMPRA", 'text-saldo-pendiente') . d($monto_a_pagar . "MXN", "text-saldo-pendiente-monto"): $texto;
 
         } else {
 
             $texto =  ($monto_a_liquidar > 0) ?
                 add_text(
-                    div("SALDO PENDIENTE", 'text-saldo-pendiente')
+                    d("SALDO PENDIENTE", 'text-saldo-pendiente')
                     ,
-                    div($monto_a_liquidar . "MXN", "text-saldo-pendiente-monto")
+                    d($monto_a_liquidar . "MXN", "text-saldo-pendiente-monto")
                 ) : $texto;
 
 
         }
 
-        return div($texto, 'contenedor-saldo-pendiente');
+        return d($texto, 'contenedor-saldo-pendiente');
 
     }
 
@@ -495,7 +495,7 @@ if (!function_exists('invierte_date_time')) {
                 break;
         }
 
-        $text = div($text, ['class' => 'alert alert-info', 'style' => 'margin-top: 10px;background: #001541;color: white']);
+        $text = d($text, ['class' => 'alert alert-info', 'style' => 'margin-top: 10px;background: #001541;color: white']);
         return $text;
     }
 
@@ -525,7 +525,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        return div($texto, ["class" => "btn_direccion_envio", "id" => $id_recibo]);
+        return d($texto, ["class" => "btn_direccion_envio", "id" => $id_recibo]);
     }
 
     function get_estados_ventas($data, $indice, $modalidad_ventas)
@@ -551,14 +551,14 @@ if (!function_exists('invierte_date_time')) {
 
         $text_icono = ($vendedor == 1) ? "DETALLES DE LA COMPRA " : text_icon('fa fa-credit-card-alt', "DETALLES DE TU COMPRA ");
 
-        $text = guardar($text_icono,
+        $text = btn($text_icono,
             [
                 "class" => 'resumen_pagos_pendientes',
                 "id" => $id_recibo,
                 "href" => "#tab_renovar_servicio",
                 "data-toggle" => "tab"
             ]);
-        return div($text);
+        return d($text);
     }
 
     function texto_costo_envio_info_publico($flag_envio_gratis, $costo_envio_cliente, $costo_envio_vendedor)
@@ -618,7 +618,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $text = ($periodos > 1) ? "Piezas " : "Pieza ";
-            $text = heading_enid($periodos . " " . $text, 3);
+            $text = h($periodos . " " . $text, 3);
 
         }
         return $text;
@@ -628,7 +628,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $text = mayorque($modalidad, 0, "TUS VENTAS", "TUS COMPRAS");
-        return ($modalidad < 1 && $ordenes < 1) ? "" : div(heading_enid($text, 3), 1);
+        return ($modalidad < 1 && $ordenes < 1) ? "" : d(h($text, 3), 1);
 
     }
 
@@ -638,7 +638,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response = "";
         if ($modalidad == 0 && $num_ordenes == 0) {
-            $final = div(
+            $final = d(
                 img(
                     [
                         "src" => "../img_tema/tienda_en_linea/carrito_compra.jpg",
@@ -652,7 +652,7 @@ if (!function_exists('invierte_date_time')) {
             $f = anchor_enid($final, path_enid("home"));
 
             $f .= anchor_enid(
-                heading_enid(
+                h(
                     "EXPLORAR TIENDA"
                     ,
                     3, "text-center text_explorar_tienda"
@@ -667,7 +667,7 @@ if (!function_exists('invierte_date_time')) {
     function format_direccion_envio($inf, $id_recibo, $recibo)
     {
         $resumen = "";
-        $resumen .= div(
+        $resumen .= d(
             icon("fa fa-pencil",
                 [
                     "class" => "btn_direccion_envio ",
@@ -693,19 +693,19 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_campo($inf, "ciudad");
         $r[] = get_campo($inf, "estado");
 
-        $resumen[] =  div(append($r), 'texto_direccion_envio_pedido top_20');
-        $resumen[] =  div("¿Quíen más puede recibir tu pedido?");
-        $resumen[] =  div(get_campo($inf, "nombre_receptor"));
-        $resumen[] =  div(get_campo($inf, "telefono_receptor"));
+        $resumen[] =  d(append($r), 'texto_direccion_envio_pedido top_20');
+        $resumen[] =  d("¿Quíen más puede recibir tu pedido?");
+        $resumen[] =  d(get_campo($inf, "nombre_receptor"));
+        $resumen[] =  d(get_campo($inf, "telefono_receptor"));
 
-        return  div(append($resumen), ["class" => "informacion_resumen_envio"]);
+        return  d(append($resumen), ["class" => "informacion_resumen_envio"]);
 
     }
 
     function agregar_direccion_envio($id_recibo)
     {
 
-        return div(
+        return d(
             text_icon("fa fa-bus", " Agrega la dirección de envío de tu pedido!")
             ,
             [
@@ -731,22 +731,22 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = "";
-        $r[] = heading_enid("#Recibo: " . $id_recibo);
-        $r[] = div("Concepto");
-        $r[] = div($resumen_pedido);
+        $r[] = h("#Recibo: " . $id_recibo);
+        $r[] = d("Concepto");
+        $r[] = d($resumen_pedido);
         $r[] = valida_texto_periodos_contratados($num_ciclos_contratados, $flag_servicio, $id_ciclo_facturacion);
-        $r[] = div("PRECIO " . span("$" . $monto_a_pagar, "strong"), "top_30");
-        $r[] = div($deuda["text_envio"]);
+        $r[] = d("PRECIO " . span("$" . $monto_a_pagar, "strong"), "top_30");
+        $r[] = d($deuda["text_envio"]);
 
-        $text[] = div(append($r));
+        $text[] = d(append($r));
 
-        $monto[] = heading_enid("Monto total pendiente-", 3, 'strong');
-        $monto[] = heading_enid($saldo_pendiente . "MXN", 2, 'blue_enid ');
-        $monto[] = heading_enid("Pesos Mexicanos", 4, 'strong');
-        $text[] = div(append($monto), ["style" => "text-align: center;", "class" => "top_50"]);
-        $text[] = div(img($url_img_servicio), "max-height: 250px;", 1);
+        $monto[] = h("Monto total pendiente-", 3, 'strong');
+        $monto[] = h($saldo_pendiente . "MXN", 2, 'blue_enid ');
+        $monto[] = h("Pesos Mexicanos", 4, 'strong');
+        $text[] = d(append($monto), ["style" => "text-align: center;", "class" => "top_50"]);
+        $text[] = d(img($url_img_servicio), "max-height: 250px;", 1);
 
-        return div(append($text), 4);
+        return d(append($text), 4);
 
     }
 
@@ -765,12 +765,12 @@ if (!function_exists('invierte_date_time')) {
             $lugar_entrega = $p["lugar_entrega"];
             $numero = "NÚMERO " . $p["numero"];
 
-            $r[] = div(heading_enid("LUGAR DE ENCUENTRO", 3, "top_30 underline "), 1);
-            $x[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, "top_20", 1);
-            $x[] = div("ESTACIÓN " . $lugar_entrega, "strong", 1);
-            $x[] = div("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"], 1);
-            $r[] = div(append($x), "contenedor_detalle_entrega");
-            $r[] = div("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", "contenedor_text_entrega border");
+            $r[] = d(h("LUGAR DE ENCUENTRO", 3, "top_30 underline "), 1);
+            $x[] = d($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, "top_20", 1);
+            $x[] = d("ESTACIÓN " . $lugar_entrega, "strong", 1);
+            $x[] = d("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"], 1);
+            $r[] = d(append($x), "contenedor_detalle_entrega");
+            $r[] = d("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", "contenedor_text_entrega border");
         }
 
         return append($r);
@@ -780,7 +780,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $t[] = guardar(
+        $t[] = btn(
             text_icon("fa fa-map-signs", "RASTREA TU PEDIDO"),
             [
                 "class" => "top_20 text-left",
@@ -793,7 +793,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $t[] = div(
+        $t[] = d(
             anchor_enid('CANCELAR COMPRA',
                 [
                     "class" => "cancelar_compra",
@@ -816,7 +816,7 @@ if (!function_exists('invierte_date_time')) {
         $url_pago_paypal = get_link_paypal($saldo_pendiente);
         $url_pago_saldo_enid = get_link_saldo_enid($id_usuario_venta, $id_recibo);
 
-        $t[] = guardar(
+        $t[] = btn(
             "PAGOS EN TIENDAS DE AUTOSERVICIO (OXXO)",
             [
                 "class" => "top_10 text-left",
@@ -830,7 +830,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $t[] = guardar(
+        $t[] = btn(
             "A TRAVÉS DE PAYPAL",
             [
                 "class" => "top_20 text-left",
@@ -843,7 +843,7 @@ if (!function_exists('invierte_date_time')) {
             $url_pago_paypal
         );
 
-        $t[] = guardar(
+        $t[] = btn(
             "SALDO  ENID SERVICE",
             [
                 "class" => "top_30 text-left",
@@ -862,7 +862,7 @@ if (!function_exists('invierte_date_time')) {
     function get_vista_compras_efectivas($data, $modalidad)
     {
 
-        return div(create_listado_compra_venta($data, $modalidad), 1);
+        return d(create_listado_compra_venta($data, $modalidad), 1);
 
     }
 
@@ -874,10 +874,10 @@ if (!function_exists('invierte_date_time')) {
         $id_perfil = $data["id_perfil"];
         $r[] = get_text_modalidad($modalidad, $ordenes);
         $text = ($modalidad == 1) ? "VE TUS ÚLTIMAS VENTAS" : "VE TUS ÚLTIMAS COMPRAS";
-        $r[] = guardar($text, ["class" => "ver_mas_compras_o_ventas top_30 bottom_30"]);
+        $r[] = btn($text, ["class" => "ver_mas_compras_o_ventas top_30 bottom_30"]);
         $r[] = create_listado_compra_venta($ordenes, $modalidad, $id_perfil);
-        $r[] = div(place("contenedor_ventas_compras_anteriores"), 13);
-        return div(append($r), 10, 1);
+        $r[] = d(place("contenedor_ventas_compras_anteriores"), 13);
+        return d(append($r), 10, 1);
     }
 
     function create_listado_compra_venta($ordenes, $modalidad, $id_perfil = 0)
@@ -908,10 +908,10 @@ if (!function_exists('invierte_date_time')) {
 
             if ($id_perfil == 3) {
                 $url = path_enid("pedidos_recibo", $id_recibo);
-                $t .= guardar("AVANZADO", [], 1, 1, 0, $url);
+                $t .= btn("AVANZADO", [], 1, 1, 0, $url);
             }
 
-            $list[] = div(div($t, "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block "), 1);
+            $list[] = d(d($t, "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block "), 1);
         }
 
         $response = append($list);
@@ -925,7 +925,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $nombre = search_bi_array($status_enid_service, "id_estatus_enid_service", $tipo, "nombre");
-        $tipo_solicitud = heading_enid($nombre, 5);
+        $tipo_solicitud = h($nombre, 5);
 
 
         $r = [];
@@ -962,9 +962,9 @@ if (!function_exists('invierte_date_time')) {
                 "MXN"
             ];
 
-            $response[] = div(append($t));
+            $response[] = d(append($t));
 
-            $response[] = div(append([
+            $response[] = d(append([
                 "ARTICULOS SOLICITADOS ",
                 $num_ciclos_contratados,
                 "|",
@@ -983,7 +983,7 @@ if (!function_exists('invierte_date_time')) {
                 $num_email_recordatorio
             ]);
 
-            $r[] = div(append($response), "border shadow top_30 padding_30");
+            $r[] = d(append($response), "border shadow top_30 padding_30");
 
         }
 

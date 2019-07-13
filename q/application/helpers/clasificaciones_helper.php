@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
         $tipo = get_param_def($talla, "tipo");
 
 
-        $str = ($num_clasificaciones > 0) ? heading_enid(
+        $str = ($num_clasificaciones > 0) ? h(
             "CLASIFICACIONES AGREGADAS RECIENTEMENTE",
             5
             ,
@@ -18,10 +18,10 @@ if (!function_exists('invierte_date_time')) {
         ) : "";
 
 
-        $r[] = div(
+        $r[] = d(
             append([
 
-                heading_enid(
+                h(
                     $tipo,
                     2,
                     'info-tipo-talla'
@@ -31,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
             "agregadas col-lg-9"
         );
         $r[] = btw(
-            heading_enid("CLASIFICACIONES", 3),
+            h("CLASIFICACIONES", 3),
             get_form_clasificacion_talla(),
             " sugerencias col-lg-3"
         );
@@ -44,7 +44,7 @@ if (!function_exists('invierte_date_time')) {
         $mas_nivel = "mas_" . $param["nivel"];
         $seleccion = "seleccion_" . $param["nivel"];
         $btn = "<button class='button-op " . $seleccion . "'>AGREGAR A LA LISTA</button>";
-        return div($btn, $mas_nivel);
+        return d($btn, $mas_nivel);
 
     }
 

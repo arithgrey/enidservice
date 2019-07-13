@@ -1,17 +1,17 @@
 <div class="contenedor_principal_enid">
-    <?= div(get_menu($in_session), 2) ?>
+    <?= d(get_menu($in_session), 2) ?>
     <div class='col-lg-10'>
         <div class="tab-content">
             <?= input_hidden([
                 "class" => 'id_usuario',
                 "value" => $id_usuario
             ]) ?>
-            <?= div(get_format_info_usuario(), ["class" => "tab-pane active ", "id" => "tab1"]) ?>
-            <?= div(get_format_afiliados(), ["class" => "tab-pane", "id" => 'tab_productividad_ventas']); ?>
+            <?= d(get_format_info_usuario(), ["class" => "tab-pane active ", "id" => "tab1"]) ?>
+            <?= d(get_format_afiliados(), ["class" => "tab-pane", "id" => 'tab_productividad_ventas']); ?>
             <div class="tab-pane" id='tab_perfiles_permisos'>
-                <?= heading_enid("Perfiles / permisos", 3) ?>
+                <?= h("Perfiles / permisos", 3) ?>
                 <div class="col-lg-3">
-                    <?= heading_enid("Perfil" . icon("fa fa-space-shuttle"), 4) ?>
+                    <?= h("Perfil" . icon("fa fa-space-shuttle"), 4) ?>
                     <?= create_select(
                         $perfiles_enid_service,
                         "perfil",
@@ -22,8 +22,8 @@
                 </div>
                 <div class='col-lg-9'>
                     <div class="tab-content">
-                        <?= div(append([
-                            heading_enid("Recurso", 3),
+                        <?= d(append([
+                            h("Recurso", 3),
 
                             anchor_enid("+ Agregar Recurso",
                                 [
@@ -38,10 +38,10 @@
                     </div>
                 </div>
             </div>
-            <?= div(get_form_agregar_recurso(), ["class" => "tab-pane", "id" => 'tab_agregar_recursos']) ?>
-            <?= div(get_format_categorias(), ["class" => "tab-pane", "id" => 'tab_agregar_categorias']) ?>
-            <?= div(get_format_tipo_clasificacion(), ["class" => "tab-pane", "id" => 'agregar_tallas']) ?>
-            <?= div(get_format_view_usuario($departamentos), ["class" => "tab-pane", "id" => 'tab_mas_info_usuario']) ?>
+            <?= d(get_form_agregar_recurso(), ["class" => "tab-pane", "id" => 'tab_agregar_recursos']) ?>
+            <?= d(get_format_categorias(), ["class" => "tab-pane", "id" => 'tab_agregar_categorias']) ?>
+            <?= d(get_format_tipo_clasificacion(), ["class" => "tab-pane", "id" => 'agregar_tallas']) ?>
+            <?= d(get_format_view_usuario($departamentos), ["class" => "tab-pane", "id" => 'tab_mas_info_usuario']) ?>
         </div>
     </div>
 </div>

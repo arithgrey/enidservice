@@ -13,7 +13,7 @@ if (!function_exists('invierte_date_time')) {
         $cuerpo = append(
             [
                 img_enid([], 1, 1),
-                heading_enid($text, 3),
+                h($text, 3),
                 $img
             ]
         );
@@ -34,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
         $cuerpo = append([
 
             img_enid([], 1, 1),
-            heading_enid($text, 3),
+            h($text, 3),
             $img
 
         ]);
@@ -56,7 +56,7 @@ if (!function_exists('invierte_date_time')) {
             $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
             $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu artículos, puedes ver la pregunta que 
             te envió en tu !" . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
-            $cuerpo = img_enid([], 1, 1) . heading_enid($text, 5);
+            $cuerpo = img_enid([], 1, 1) . h($text, 5);
             $sender = get_request_email($email, $asunto, $cuerpo);
             return $sender;
         }
@@ -66,7 +66,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $texto = ($modalidad == 1) ? " LO QUE TE HAN PREGUNTADO" : "LO QUE PREGUNTASTÉ A VENDEDORES";
-        return heading_enid($texto, 3);
+        return h($texto, 3);
     }
 
     function get_url_imagen_pregunta($modalidad, $param)
@@ -77,7 +77,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_texto_sobre_el_producto($modalidad, $param)
+    function sobre_el_producto($modalidad, $param)
     {
 
 
@@ -90,7 +90,7 @@ if (!function_exists('invierte_date_time')) {
         return $text;
     }
 
-    function valida_respuestas_nuevas($modalidad, $param)
+    function val_respuestas($modalidad, $param)
     {
 
         return ($modalidad == 0) ? carga_iconos_buzon_compras($param) : carga_iconos_buzon_ventas($param);
@@ -113,7 +113,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($leido_vendedor == 0) {
 
-            $text = div("Nueva", [
+            $text = d("Nueva", [
 
                     "class" => 'blue_enid_background white pregunta fa fa-envelope',
                     "id" => $id_pregunta,
@@ -130,7 +130,7 @@ if (!function_exists('invierte_date_time')) {
 
             //$num = ($num < 1) ? "" : $num;
 
-            $text = div("Nueva", [
+            $text = d("Nueva", [
 
                     "class" => 'pregunta fa fa-envelope',
                     "id" => $id_pregunta,
@@ -174,7 +174,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => $id_pregunta,
             ];
 
-            $text = div("Nueva respuesta", $base_servicio);
+            $text = d("Nueva respuesta", $base_servicio);
 
         } else {
 
@@ -186,7 +186,7 @@ if (!function_exists('invierte_date_time')) {
                     "id" => $id_pregunta,
                 ];
 
-                $text = div($num, $base_servicio);
+                $text = d($num, $base_servicio);
             }
         }
         return $text;

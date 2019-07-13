@@ -16,21 +16,21 @@ foreach ($info_respuestas as $row) {
 
 	$r = anchor_enid(img(["class" => 'media-object']), ["class" => 'pull-left']);
 	$r .= small(icon('fa fa-clock-o') . $fecha_registro, ["class" => 'pull-right time']);
-	$r .= div($usuario_respuesta . "  | " . $text_perfil, ["class" => 'media-heading']);
-	$r .= div($respuesta);
+	$r .= d($usuario_respuesta . "  | " . $text_perfil, ["class" => 'media-heading']);
+	$r .= d($respuesta);
 
-	$respuestas .= div($r, ["class" => "contenedor_respuestas_tickect_tarea"]);
+	$respuestas .= d($r, ["class" => "contenedor_respuestas_tickect_tarea"]);
 	$respuestas .= hr();
 
 }
 
-$oculta_comentarios = (count($info_respuestas) > 0) ? div("Ocultar ", ["class" => 'ocultar_comentarios strong blue_enid', "id" => $id_tarea]) : "";
+$oculta_comentarios = (count($info_respuestas) > 0) ? d("Ocultar ", ["class" => 'ocultar_comentarios strong blue_enid', "id" => $id_tarea]) : "";
 
 ?>
 <?= btw(
 	$oculta_comentarios,
-	div(
-		div($respuestas,  "msg-wrap" )
+	d(
+		d($respuestas,  "msg-wrap" )
 		,
 		"Message-wrap"
 	),

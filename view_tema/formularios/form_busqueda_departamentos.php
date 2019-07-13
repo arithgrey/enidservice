@@ -9,7 +9,7 @@
                 "name" => "q",
                 "onKeyup" => "evita_basura();"
             ]) ?>
-        <?= guardar(icon("fa fa-search "),
+        <?= btn(icon("fa fa-search "),
             [
                 "class" => " button_busqueda_producto  flipkart-navbar-button"
             ],

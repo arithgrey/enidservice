@@ -8,11 +8,11 @@ if (!function_exists('invierte_date_time')) {
             $activa = $data["activa"];
             $r[] = input_hidden(["type" => 'hidden', "class" => 'id_usuario', "value" => $data["id_usuario"]]);
             $z[] = form_ticket_dep($data["departamentos"], $data["num_departamento"]);
-            $z[] = div(div(place('place_proyectos'), "top_50"), 1);
-            $z[] = div(place('place_tickets'), 1);
-            $r[] = div(append($z), ["class" => "tab-pane " . valida_seccion_activa(1, $activa), "id" => 'tab_abrir_ticket']);
-            $r[] = div(
-                div(
+            $z[] = d(d(place('place_proyectos'), "top_50"), 1);
+            $z[] = d(place('place_tickets'), 1);
+            $r[] = d(append($z), ["class" => "tab-pane " . valida_seccion_activa(1, $activa), "id" => 'tab_abrir_ticket']);
+            $r[] = d(
+                d(
                     place("place_form_tickets"), 1)
                 ,
                 [
@@ -21,8 +21,8 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $response[] = div(ul(get_menu($activa), "nav tabs"), 2);
-            $response[] = div(div(append($r), "tab-content"), 10);
+            $response[] = d(ul(get_menu($activa), "nav tabs"), 2);
+            $response[] = d(d(append($r), "tab-content"), 10);
             $response[] = input_hidden([
                 "class" => "ticket",
                 "value" => $data["ticket"],
@@ -38,9 +38,9 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = div(text_icon("fa fa-search", "Ticket"), 4);
+            $r[] = d(text_icon("fa fa-search", "Ticket"), 4);
             $r[] = btw(
-                div(
+                d(
                     input(
                         [
                             "name" => "q",
@@ -50,7 +50,7 @@ if (!function_exists('invierte_date_time')) {
                     ),
                     4
                 ),
-                div(
+                d(
                     append(
                         [
                             create_select(
@@ -87,8 +87,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_charts()
         {
 
-            $x[] = div(form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
-            $r[] = div(append($x), "tab-content");
+            $x[] = d(form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
+            $r[] = d(append($x), "tab-content");
             return append($r);
 
 

@@ -18,20 +18,20 @@ if (!function_exists('invierte_date_time')) {
 
             $t[] = get_menu($id_perfil, $is_mobile, $action);
             $t[] = btw(
-                heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 3)
+                h("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 3)
                 ,
                 get_top_ventas($top_servicios)
                 ,
                 "contenedor_top " . ($action == 1) ? " display_none " : " "
             );
-            $r[] = div(append($t), 2);
+            $r[] = d(append($t), 2);
 
-            $z[] = div(format_articulos_venta($list_orden), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_servicios']);
-            $z[] = div(format_puntos_venta(), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_puntos_venta']);
-            $z[] = div(form_ventas($ciclo_facturacion, $error_registro, $is_mobile), ["class" => "tab-pane  " . valida_active_tab(1, $action), "id" => 'tab_form_servicio']);
+            $z[] = d(format_articulos_venta($list_orden), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_servicios']);
+            $z[] = d(format_puntos_venta(), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_puntos_venta']);
+            $z[] = d(form_ventas($ciclo_facturacion, $error_registro, $is_mobile), ["class" => "tab-pane  " . valida_active_tab(1, $action), "id" => 'tab_form_servicio']);
 
-            $r[] = div(div(append($z), "tab-content"), 10);
-            $r[] = div(get_top_articulos($top_servicios, $is_mobile), 2);
+            $r[] = d(d(append($z), "tab-content"), 10);
+            $r[] = d(get_top_articulos($top_servicios, $is_mobile), 2);
             $r[] = get_formar_hiddens($is_mobile, $action, $extra_servicio, $id_perfil);
 
             return append($r);
@@ -41,12 +41,12 @@ if (!function_exists('invierte_date_time')) {
         function form_ventas($ciclo_facturacion, $error_registro, $is_mobile)
         {
 
-            $r[] = heading_enid("DA A CONOCER TU PRODUCTO Ó SERVICIO", 3, 1);
+            $r[] = h("DA A CONOCER TU PRODUCTO Ó SERVICIO", 3, 1);
             $r[] = form_open('', ['class' => "form_nombre_producto ", "id" => 'form_nombre_producto']);
-            $r[] = div(
-                heading_enid("¿QUÉ DESEAS ANUNCIAR?", 4, 1)
+            $r[] = d(
+                h("¿QUÉ DESEAS ANUNCIAR?", 4, 1)
                 .
-                div(
+                d(
                     btw(
 
                         anchor_enid('UN PRODUCTO',
@@ -76,7 +76,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = btw(
 
-                heading_enid(
+                h(
                     text_icon('fa fa-shopping-bag', " ARTÍCULO")
                     ,
                     4,
@@ -99,11 +99,11 @@ if (!function_exists('invierte_date_time')) {
 
 
             );
-            $r[] = div(
+            $r[] = d(
 
 
                 append([
-                    heading_enid(
+                    h(
                         "CICLO DE FACTURACIÓN",
                         4,
                         [
@@ -127,10 +127,10 @@ if (!function_exists('invierte_date_time')) {
                     "style" => "display: none;"
                 ]);
 
-            $r[] = div(
+            $r[] = d(
                 append([
 
-                    heading_enid(
+                    h(
                         text_icon('fa fa-money', " PRECIO"),
                         4,
                         [
@@ -151,15 +151,15 @@ if (!function_exists('invierte_date_time')) {
                         ], 1
                     )
                     ,
-                    div($error_registro, "extra_precio", 1)
+                    d($error_registro, "extra_precio", 1)
 
                 ])
                 ,
                 "col-lg-3 contenedor_precio seccion_menu_tipo_servicio top_30"
             );
-            $r[] = div(guardar("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]), ["class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50']);
+            $r[] = d(btn("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]), ["class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50']);
             $r[] = form_close();
-            $re[] = div(append($r), "contenedor_agregar_servicio_form top_30");
+            $re[] = d(append($r), "contenedor_agregar_servicio_form top_30");
             $re[] = get_selector_categoria($is_mobile);
             return append($re);
 
@@ -211,9 +211,9 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = heading_enid("TUS ARTÍCULOS EN VENTA", 3);
-            $r[] = div(get_format_busqueda($list_orden), "contenedor_busqueda_articulos row top_50");
-            $r[] = div(place("place_servicios top_50"), 1);
+            $r[] = h("TUS ARTÍCULOS EN VENTA", 3);
+            $r[] = d(get_format_busqueda($list_orden), "contenedor_busqueda_articulos row top_50");
+            $r[] = d(place("place_servicios top_50"), 1);
             return append($r);
 
         }
@@ -223,8 +223,8 @@ if (!function_exists('invierte_date_time')) {
         function format_puntos_venta()
         {
 
-            $r[] = heading_enid("PUNTOS DE VENTA", 3);
-            $r[] = div(place("place_puntos_venta top_50"), 1);
+            $r[] = h("PUNTOS DE VENTA", 3);
+            $r[] = d(place("place_puntos_venta top_50"), 1);
             return append($r);
 
         }
@@ -233,9 +233,9 @@ if (!function_exists('invierte_date_time')) {
         function get_format_busqueda($list_orden)
         {
 
-            $r[] = div("BUSCAR ENTRE TUS ARTÍCULOS", "col-lg-4 align-self-center");
-            $r[] = div(get_list_orden($list_orden), 4);
-            $r[] = div(
+            $r[] = d("BUSCAR ENTRE TUS ARTÍCULOS", "col-lg-4 align-self-center");
+            $r[] = d(get_list_orden($list_orden), 4);
+            $r[] = d(
                 input([
                         "id" => "textinput",
                         "name" => "textinput",
@@ -245,7 +245,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 ),
                 4);
-            return div(append($r), ["class" => "--"]);
+            return d(append($r), ["class" => "--"]);
 
         }
 
@@ -282,7 +282,7 @@ if (!function_exists('invierte_date_time')) {
                     $r[] = icon("fa fa-angle-right");
                     $articulo = (trim(strlen($row["nombre_servicio"])) > 22) ? substr($row["nombre_servicio"], 0, 22) . "..." : strlen($row["nombre_servicio"]);
                     $r[] = $articulo;
-                    $r[] = div(span($row["vistas"], "a_enid_black_sm_sm"),
+                    $r[] = d(span($row["vistas"], "a_enid_black_sm_sm"),
                         [
                             "class" => "pull-right",
                             "title" => "Personas que han visualizado este  producto"
@@ -300,10 +300,10 @@ if (!function_exists('invierte_date_time')) {
 
 
                 if (es_data($top)):
-                    array_pop($r, heading_enid("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 2));
+                    array_pop($r, h("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 2));
                 endif;
 
-                $response = div(append($r), "card contenedor_articulos_mobil");
+                $response = d(append($r), "card contenedor_articulos_mobil");
 
             }
             return $response;
@@ -317,7 +317,7 @@ if (!function_exists('invierte_date_time')) {
             if ($is_mobile > 0) {
 
 
-                $r[] = heading_enid('SELECIONA LAS CATEGORÍAS', 3);
+                $r[] = h('SELECIONA LAS CATEGORÍAS', 3);
                 $r[] = hr();
                 $r[] = get_places(0);
 
@@ -325,7 +325,7 @@ if (!function_exists('invierte_date_time')) {
             } else {
 
 
-                $r[] = heading_enid("GRUPO AL CUAL PERTENECE TU PRODUCTO", 3);
+                $r[] = h("GRUPO AL CUAL PERTENECE TU PRODUCTO", 3);
                 $r[] = anchor_enid(
                     "CANCELAR",
                     [
@@ -338,7 +338,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
-            return div(append($r), ["class" => "contenedor_categorias_servicios"]);
+            return d(append($r), ["class" => "contenedor_categorias_servicios"]);
 
         }
     }
@@ -385,12 +385,12 @@ if (!function_exists('invierte_date_time')) {
 
                 $text = append(
                     [
-                        div(place("primer_nivel_seccion"), ["class" => "info_categoria"]),
-                        div(place("segundo_nivel_seccion"), ["class" => "info_categoria"]),
-                        div(place("tercer_nivel_seccion"), ["class" => "info_categoria"]),
-                        div(place("cuarto_nivel_seccion"), ["class" => "info_categoria"]),
-                        div(place("quinto_nivel_seccion"), ["class" => "info_categoria"]),
-                        div(place("sexto_nivel_seccion"), ["class" => "info_categoria"])
+                        d(place("primer_nivel_seccion"), ["class" => "info_categoria"]),
+                        d(place("segundo_nivel_seccion"), ["class" => "info_categoria"]),
+                        d(place("tercer_nivel_seccion"), ["class" => "info_categoria"]),
+                        d(place("cuarto_nivel_seccion"), ["class" => "info_categoria"]),
+                        d(place("quinto_nivel_seccion"), ["class" => "info_categoria"]),
+                        d(place("sexto_nivel_seccion"), ["class" => "info_categoria"])
                     ]
 
                 );

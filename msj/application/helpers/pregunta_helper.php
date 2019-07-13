@@ -10,8 +10,8 @@ if (!function_exists('invierte_date_time')) {
 		$nombre_vendedor = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
 
 
-		$r[] = heading_enid("Buen día" . $nombre_vendedor, 1, "display-4" );
-		$r[] = div("Un cliente está interesado en uno de tus productos que tienes en venta en");
+		$r[] = h("Buen día" . $nombre_vendedor, 1, "display-4" );
+		$r[] = d("Un cliente está interesado en uno de tus productos que tienes en venta en");
 		$r[] = anchor_enid("Enid Service",
 			[
 				"class" => "btn btn-primary btn-lg",
@@ -31,8 +31,8 @@ if (!function_exists('invierte_date_time')) {
 		);
 
 
-		$response[] = div(append($r), ["class" => "jumbotron", "style" => "padding: 2rem 1rem;margin-bottom: 2rem;background-color: #fbfbfb;border-radius: .3rem;"]);
-		$respónse[] = div(img("http://enidservice.com/inicio/img_tema/enid_service_logo.jpg"), ["style" => "width: 30%;margin: 0 auto;"]);
+		$response[] = d(append($r), ["class" => "jumbotron", "style" => "padding: 2rem 1rem;margin-bottom: 2rem;background-color: #fbfbfb;border-radius: .3rem;"]);
+		$respónse[] = d(img("http://enidservice.com/inicio/img_tema/enid_service_logo.jpg"), ["style" => "width: 30%;margin: 0 auto;"]);
 
 		return append($response);
 
@@ -53,7 +53,7 @@ if (!function_exists('invierte_date_time')) {
 		$r[] = hr();
 		$r[] = p("Apresúrate, estás a un paso de tener tu pedido!");
 		$r[] = anchor_enid("Mira la respuesta aquí!", ["href" => "http://enidservice.com/inicio/login/"]);
-		$r[] = div(
+		$r[] = d(
 		    img("http://enidservice.com/inicio/img_tema/enid_service_logo.jpg"),
             [
                 "style" => "width: 30%;margin: 0 auto;"
@@ -72,11 +72,11 @@ if (!function_exists('invierte_date_time')) {
 		$email = $q["email"];
 		$password_legible = $q["password_legible"];
 
-		$r[] = div(get_format_notificacion_subscrito($nombre), ["style" => "padding: 2rem 1rem;margin-bottom: 2rem;background-color: #fbfbfb;border-radius: .3rem;"]);
-		$r[] = div("Usuario: " . $email);
-		$r[] = div("Acceso:" . $password_legible);
+		$r[] = d(get_format_notificacion_subscrito($nombre), ["style" => "padding: 2rem 1rem;margin-bottom: 2rem;background-color: #fbfbfb;border-radius: .3rem;"]);
+		$r[] = d("Usuario: " . $email);
+		$r[] = d("Acceso:" . $password_legible);
 
-		$r[] = div(img([
+		$r[] = d(img([
 			"src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg",
 			"style" => "width: 100%"
 		]),
@@ -91,7 +91,7 @@ if (!function_exists('invierte_date_time')) {
 	{
 
 		$r[] = heading("Buen día" . $nombre);
-		$r[] = div("Te notificamos que desde este momento puedes consultar más productos y servicios a través de ");
+		$r[] = d("Te notificamos que desde este momento puedes consultar más productos y servicios a través de ");
 		$r[] = anchor_enid("Enid Service",
 			[
 				"class" => "btn btn-primary btn-lg",
@@ -102,7 +102,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 		$r[] = hr();
-		$r[] = div("Desde ahora podrás comprar y vender tus productos o servicios ");
+		$r[] = d("Desde ahora podrás comprar y vender tus productos o servicios ");
 		$r[] = anchor_enid("Accede a tu cuenta aquí!",
 			[
 				"class" => "btn btn-primary btn-lg",

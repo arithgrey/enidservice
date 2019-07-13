@@ -25,9 +25,9 @@ if (!function_exists('invierte_date_time')) {
 
         $a = btw(
 
-            div("Persona que recibe")
+            d("Persona que recibe")
             ,
-            div(
+            d(
                 input(
                     [
                         "maxlength" => "80",
@@ -46,7 +46,7 @@ if (!function_exists('invierte_date_time')) {
         $b = btw(
 
 
-            div("Teléfono"),
+            d("Teléfono"),
             input(
                 [
                     "maxlength" => "12",
@@ -62,7 +62,7 @@ if (!function_exists('invierte_date_time')) {
             6
         );
         $r[] = btw($a, $b, "row mt-5");
-        $r[] = div("Código postal");
+        $r[] = d("Código postal");
         $r[] = input([
             "maxlength" => "5",
             "name" => "cp",
@@ -76,7 +76,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place('place_codigo_postal');
         $r[] = input_hidden(["name" => "id_usuario", "value" => $id_usuario]);
 
-        $r[] = div("Calle");
+        $r[] = d("Calle");
         $r[] = input([
             "class" => "textinput address1",
             "name" => "calle",
@@ -86,7 +86,7 @@ if (!function_exists('invierte_date_time')) {
             "autocorrect" => "off",
             "type" => "text"
         ]);
-        $r[] = heading_enid("Entre la calle y la calle, o información adicional", 5, 1);
+        $r[] = h("Entre la calle y la calle, o información adicional", 5, 1);
         $r[] = input([
             "required" => true,
             "class" => "textinput address3 ",
@@ -98,7 +98,7 @@ if (!function_exists('invierte_date_time')) {
         ]);
 
         $a = btw(
-            div("Número Exterior"),
+            d("Número Exterior"),
             input([
                 "class" => "required numero_exterior",
                 "name" => "numero_exterior",
@@ -111,7 +111,7 @@ if (!function_exists('invierte_date_time')) {
             6
         );
         $b = btw(
-            div("Número Interior"),
+            d("Número Interior"),
             input([
                 "class" => "numero_interior",
                 "name" => "numero_interior",
@@ -129,9 +129,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = btw($a, $b, "row");
         $r[] = '<div  ' . $direccion_visible . ' class="parte_colonia_delegacion">';
 
-        $r[] = div("Colonia");
+        $r[] = d("Colonia");
 
-        $r[] = div(
+        $r[] = d(
             input(
                 [
                     "type" => "text",
@@ -147,8 +147,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place('place_asentamiento');
         $r[] = btw(
 
-            div("Delegación o Municipio"),
-            div(
+            d("Delegación o Municipio"),
+            d(
                 input(
                     [
                         "type" => "text",
@@ -162,8 +162,8 @@ if (!function_exists('invierte_date_time')) {
             " district delegacion_c"
         );
         $r[] = btw(
-            div("Estado"),
-            div(input([
+            d("Estado"),
+            d(input([
                 "type" => "text",
                 "name" => "estado",
                 "value" => $estado,
@@ -173,7 +173,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = btw(
-            div("País"),
+            d("País"),
             place("place_pais_info"),
             " district pais_c display_none"
 
@@ -202,11 +202,11 @@ if (!function_exists('invierte_date_time')) {
         $r[] =
             btw(
 
-                div("Esta es mi dirección principal ", 5)
+                d("Esta es mi dirección principal ", 5)
 
                 ,
 
-                div($select, 7)
+                d($select, 7)
 
                 ,
                 'direccion_principal_c row top_30 align-items-center '
@@ -220,18 +220,18 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "id_recibo"
             ]);
 
-        $r[] = guardar("Registrar dirección ", ['class' => "text_btn_direccion_envio top_30 bottom_20"]);
+        $r[] = btn("Registrar dirección ", ['class' => "text_btn_direccion_envio top_30 bottom_20"]);
         $r[] = place("notificacion_direccion");
         $r[] = form_close();
 
-        return div(append($r), "contenedor_form_envio top_30");
+        return d(append($r), "contenedor_form_envio top_30");
 
     }
 
     function get_parte_direccion_envio($cp, $param, $calle, $entre_calles, $numero_exterior, $numero_interior)
     {
 
-        $r[] = div("Código postal", "label-off");
+        $r[] = d("Código postal", "label-off");
         $r[] = input(
             [
                 "maxlength" => "5",
@@ -252,7 +252,7 @@ if (!function_exists('invierte_date_time')) {
 
         ]);
         $r[] = btw(
-            div("Calle", "label-off"),
+            d("Calle", "label-off"),
 
             input(
                 [
@@ -269,7 +269,7 @@ if (!function_exists('invierte_date_time')) {
             "value"
         );
         $r[] = btw(
-            div("Entre la calle y la calle, o información adicional", "label-off")
+            d("Entre la calle y la calle, o información adicional", "label-off")
             ,
             input(
                 [
@@ -284,7 +284,7 @@ if (!function_exists('invierte_date_time')) {
             "value"
         );
         $r[] = btw(
-            div("Número Exterior", "label-off")
+            d("Número Exterior", "label-off")
             ,
             input(
                 [
@@ -300,7 +300,7 @@ if (!function_exists('invierte_date_time')) {
             "value"
         );
         $r[] = btw(
-            div("Número Interior", "label-off")
+            d("Número Interior", "label-off")
             ,
             input(
                 [

@@ -6,7 +6,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_afiliados()
         {
 
-            $r[] = heading_enid("Afiliados Enid Service", 3);
+            $r[] = h("Afiliados Enid Service", 3);
             $r[] = addNRow(ul(li(
                     anchor_enid(
                         text_icon('fa fa-trophy', "Miembros Afiliados")
@@ -91,10 +91,10 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $r[] = heading_enid("+ Nuevo miembro", 3);
+            $r[] = h("+ Nuevo miembro", 3);
             $r[] = form_open("", ["class" => "form-miembro-enid-service", "id" => 'form-miembro-enid-service']);
-            $r[] = div(btw(
-                div("Estatus"),
+            $r[] = d(btw(
+                d("Estatus"),
                 create_select($options, "status", "form-control input-sm estado_usuario", "estado_usuario", "opcion", "val"),
                 4
 
@@ -103,7 +103,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $y[] = btw(
-                div("Nombre"),
+                d("Nombre"),
                 input([
                     "name" => "nombre",
                     "placeholder" => "Nombre",
@@ -117,7 +117,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $y[] = btw(
-                div("A.paterno"),
+                d("A.paterno"),
                 input([
                     "name" => "apellido_paterno",
                     "placeholder" => "placeholder",
@@ -130,7 +130,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $y[] = btw(
-                div("A.Materno"),
+                d("A.Materno"),
                 input(
                     ["name" => "apellido_materno",
                         "placeholder" => "placeholder",
@@ -141,9 +141,9 @@ if (!function_exists('invierte_date_time')) {
                 4
             );
 
-            $r[] = div(append($y), 13);
+            $r[] = d(append($y), 13);
 
-            $x[] = div("Email");
+            $x[] = d("Email");
             $x[] = input([
                 "name" => "email",
                 "placeholder" => "email",
@@ -155,9 +155,9 @@ if (!function_exists('invierte_date_time')) {
             $x[] = place("place_correo_incorrecto");
 
 
-            $r[] = div(append($x), 4);
+            $r[] = d(append($x), 4);
             $r[] = btw(
-                div("Departamento"),
+                d("Departamento"),
                 create_select(
                     $departamentos,
                     "departamento",
@@ -171,7 +171,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $r[] = btw(
-                div("Puesto")
+                d("Puesto")
                 ,
                 place("place_puestos")
                 ,
@@ -180,38 +180,38 @@ if (!function_exists('invierte_date_time')) {
 
 
             $l[] = btw(
-                div("Inicio de labores")
+                d("Inicio de labores")
                 ,
                 create_select($opt, "inicio_labor", "form-control inicio_labor", "inicio_labor", "opcion", "val")
                 , 4
             );
 
             $l[] = btw(
-                div("Fin de labores"),
-                div(create_select($opt, "fin_labor", "form-control fin_labor", "fin_labor", "opcion", "val"))
+                d("Fin de labores"),
+                d(create_select($opt, "fin_labor", "form-control fin_labor", "fin_labor", "opcion", "val"))
                 , 4
             );
 
 
             $l[] = btw(
-                div("Turno"),
+                d("Turno"),
                 create_select($opt_sexo, "turno", "form-control input-sm turno", "turno", "opcion", "val")
                 , 4
 
 
             );
 
-            $r[] = div(append($l), 13);
+            $r[] = d(append($l), 13);
 
 
             $t[] = btw(
-                div("Sexo"),
+                d("Sexo"),
                 create_select($opt_sexo, "sexo", "form-control input-sm sexo", "sexo", "opcion", "val"),
                 4
             );
 
             $t[] = btw(
-                div("Teléfono"),
+                d("Teléfono"),
                 input([
                     "type" => "text",
                     "name" => "tel_contacto"
@@ -219,8 +219,8 @@ if (!function_exists('invierte_date_time')) {
                 4
             );
 
-            $r[] = div(append($t), 13);
-            $r[] = guardar("Registrar");
+            $r[] = d(append($t), 13);
+            $r[] = btn("Registrar");
             $r[] = place("place_config_usuario");
             $r[] = form_close();
             return append($r);
@@ -253,10 +253,10 @@ if (!function_exists('invierte_date_time')) {
             ];
 
 
-            $r[] = heading_enid("Equipo Enid Service", 3);
-            $r[] = div(ul($l, ["class" => "nav nav-tabs"]), ["class" => "panel-heading"]);
-            $r[] = div(append([
-                guardar("Agregar nuevo",
+            $r[] = h("Equipo Enid Service", 3);
+            $r[] = d(ul($l, ["class" => "nav nav-tabs"]), ["class" => "panel-heading"]);
+            $r[] = d(append([
+                btn("Agregar nuevo",
                     [
                         "class" => "btn input-sm btn_nuevo_usuario",
                         "data-toggle" => "tab",
@@ -274,9 +274,9 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_format_tipo_clasificacion')) {
         function get_format_tipo_clasificacion()
         {
-            $x[] = div("TIPO CLASIFICACIÓN", 3);
+            $x[] = d("TIPO CLASIFICACIÓN", 3);
 
-            $x[] = div(append(
+            $x[] = d(append(
                 [
                     form_open("", ["class" => "form-tipo-talla"]),
                     input(["type" => "text", "name" => "tipo_talla", "required" => true]),
@@ -284,7 +284,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             ), 9);
 
-            $r[] = div(div(append($x), 6, 1), 13);
+            $r[] = d(d(append($x), 6, 1), 13);
             $r[] = place("place_tallas");
             return append($r);
 
@@ -295,8 +295,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_categorias()
         {
 
-            $r[] = div(get_form_categorias(), 7);
-            $r[] = div(heading("CATEGORÍAS    EN PRODUCTOS Y SERVICIOS", 3), 5);
+            $r[] = d(get_form_categorias(), 7);
+            $r[] = d(heading("CATEGORÍAS    EN PRODUCTOS Y SERVICIOS", 3), 5);
             return append($r);
 
 
@@ -318,10 +318,10 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $r[] = form_open("", ["class" => "form-horizontal form_categoria", "id" => "form_categoria"]);
-            $r[] = div("¿ES SERVICIO?", 4);
-            $r[] = div(create_select($options, "form-control servicio", "servicio", "servicio", "opcion", "val"), 8);
-            $r[] = div("CATEGORÍA", 4);
-            $r[] = div(input([
+            $r[] = d("¿ES SERVICIO?", 4);
+            $r[] = d(create_select($options, "form-control servicio", "servicio", "servicio", "opcion", "val"), 8);
+            $r[] = d("CATEGORÍA", 4);
+            $r[] = d(input([
                 "id" => "textinput",
                 "name" => "clasificacion",
                 "placeholder" => "CATEGORÍA",
@@ -331,7 +331,7 @@ if (!function_exists('invierte_date_time')) {
             ]), 8);
 
             $r[] = btw(
-                guardar("SIGUIENTE", ["class" => "a_enid_blue add_categoria"]),
+                btn("SIGUIENTE", ["class" => "a_enid_blue add_categoria"]),
                 place("msj_existencia"),
                 "form-group"
             );
@@ -358,7 +358,7 @@ if (!function_exists('invierte_date_time')) {
         function get_form_agregar_recurso()
         {
 
-            $r[] = heading_enid("Agregar Recurso", 3);
+            $r[] = h("Agregar Recurso", 3);
             $r[] = get_form_recurso();
             return append($r);
 
@@ -374,7 +374,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = form_open("", ["class" => "form_recurso", "id" => 'form_recurso']);
             $r[] = btw(
 
-                div("Nombre"),
+                d("Nombre"),
                 input([
                     "type" => "text",
                     "name" => "nombre",
@@ -387,7 +387,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = btw(
 
-                div("../Url recurso"),
+                d("../Url recurso"),
                 input([
                     "type" => "text",
                     "name" => "urlpaginaweb",
@@ -397,7 +397,7 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 6
             );
-            $r[] = guardar("Registrar");
+            $r[] = btn("Registrar");
             $r[] = place("place_recurso");
             $r[] = form_close();
 

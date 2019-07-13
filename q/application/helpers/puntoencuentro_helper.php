@@ -18,7 +18,7 @@ if (!function_exists('invierte_date_time')) {
 
             if ($index !== false){
 
-                $l[] = ajustar(div($nombre,
+                $l[] = ajustar(d($nombre,
                     [
                         "class" => "nombre_estacion cursor_pointer punto_encuentro",
                         "id" => $id,
@@ -29,7 +29,7 @@ if (!function_exists('invierte_date_time')) {
 
             }else{
 
-                $l[] = ajustar(div($nombre,
+                $l[] = ajustar(d($nombre,
                     [
                         "class" => "nombre_estacion cursor_pointer punto_encuentro",
                         "id" => $id,
@@ -44,7 +44,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        return div(append($l));
+        return d(append($l));
     }
 
     function create_estaciones($array, $flag_envio_gratis, $lista_negra)
@@ -62,7 +62,7 @@ if (!function_exists('invierte_date_time')) {
 
             if ($index !== false){
 
-                $negra[] = div($nombre,
+                $negra[] = d($nombre,
                     [
                         "class" => "nombre_estacion cursor_pointer punto_encuentro",
                         "id" => $id,
@@ -75,7 +75,7 @@ if (!function_exists('invierte_date_time')) {
 
             }else{
 
-                $l[] = div($nombre,
+                $l[] = d($nombre,
                     [
                         "class" => "nombre_estacion cursor_pointer punto_encuentro",
                         "id" => $id,
@@ -96,12 +96,12 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("nombre_estacion_punto_encuentro");
         $r[] = place("cargos_por_entrega");
         $r[] = place("mensaje_cobro_envio");
-        $r[] = guardar("CONTINUAR", ["class" => "btn_continuar_punto_encuentro"]);
+        $r[] = btn("CONTINUAR", ["class" => "btn_continuar_punto_encuentro"]);
         $x[] = place("quien_recibe");
 
 
-        $x[] = div(
-            div(
+        $x[] = d(
+            d(
                 input([
                     "class" => "search",
                     "name" => "q"
@@ -112,9 +112,9 @@ if (!function_exists('invierte_date_time')) {
             ), 13);
 
 
-        $x[] = div(append($l), "contenedor_estaciones ", 1);
+        $x[] = d(append($l), "contenedor_estaciones ", 1);
 
-        return div(append($r), 'resumen_encuentro') . div(append($x), 'resumen_mensaje_pago');
+        return d(append($r), 'resumen_encuentro') . d(append($x), 'resumen_mensaje_pago');
     }
 
 }

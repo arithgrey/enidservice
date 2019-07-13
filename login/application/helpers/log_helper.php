@@ -14,8 +14,8 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        $response = div(append($r), 4, 1);
-        return div($response, 1);
+        $response = d(append($r), 4, 1);
+        return d($response, 1);
 
 
     }
@@ -32,7 +32,7 @@ if (!function_exists('invierte_date_time')) {
             , 1
         );
 
-        $r[] = div(get_form_login(), 1);
+        $r[] = d(get_form_login(), 1);
         $r[] = place("place_acceso_sistema top_20 bottom_20");
         $x[] = anchor_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'registrar-cuenta registrar_cuenta']);
         $x[] = anchor_enid(
@@ -44,10 +44,10 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        $r[] = div(append($x), "text-center top_50 bottom_100");
-        $r[] = ($action === "registro") ? div("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", "mensaje_bienvenida") : "";
-        $response = div(append($r));
-        return div($response, "wrapper_login", 1);
+        $r[] = d(append($x), "text-center top_50 bottom_100");
+        $r[] = ($action === "registro") ? d("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", "mensaje_bienvenida") : "";
+        $response = d(append($r));
+        return d($response, "wrapper_login", 1);
 
     }
 
@@ -73,14 +73,14 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "form-control input-sm top_10",
                 "required" => true
             ]);
-        $r[] = div("Ingresa tu correo electrónico para que tu contraseña pueda ser enviada", 'msj-recuperacion top_10', 1);
-        $r[] = guardar("Enviar",
+        $r[] = d("Ingresa tu correo electrónico para que tu contraseña pueda ser enviada", 'msj-recuperacion top_10', 1);
+        $r[] = btn("Enviar",
             [
                 "class" => "btn_nnuevo recupera_password  a_enid_blue top_20"
             ]);
 
         $r[] = form_close(append([place("place_recuperacion_pw"), place("recuperacion_pw")]));
-        $r[] = div(
+        $r[] = d(
             anchor_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
                 [
                     'class' => 'btn_acceder_cuenta_enid top_50 bottom_100  ',
@@ -90,7 +90,7 @@ if (!function_exists('invierte_date_time')) {
             "text-center"
         );
 
-        $response = div(append($r), "contenedor_recuperacion_password display_none", 1);
+        $response = d(append($r), "contenedor_recuperacion_password display_none", 1);
         return $response;
 
     }
@@ -101,8 +101,8 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = anchor_enid(img_enid(), ["href" => "../", "class" => "col-lg-8 col-lg-offset-2"], 1);
         $r[] = heading('ÚNETE A ENID SERVICE', 3, 1);
-        $r[] = div(get_form_registro(), 1);
-        $r[] = div(
+        $r[] = d(get_form_registro(), 1);
+        $r[] = d(
             anchor_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
                 [
                     'class' => 'btn_acceder_cuenta_enid top_50 inline-block bottom_100',
@@ -112,7 +112,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $response = div(append($r), "seccion_registro_nuevo_usuario_enid_service", 1);
+        $response = d(append($r), "seccion_registro_nuevo_usuario_enid_service", 1);
         return $response;
 
 
@@ -151,7 +151,7 @@ if (!function_exists('invierte_date_time')) {
                 "required" => true]);
 
         $r[] = place("place_password_afiliado");
-        $r[] = guardar('Registrar',
+        $r[] = btn('Registrar',
             [
                 "class" => "top_20"
             ]);

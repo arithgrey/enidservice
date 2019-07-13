@@ -207,8 +207,8 @@ class app extends CI_Controller
             $data["menu"] = $menu;
             $data["nombre"] = $nombre;
             $data["email"] = $session["email"];
-            $data["perfilactual"] = primer_elemento($session["perfildata"], "nombreperfil", "");
-            $data["id_perfil"] = primer_elemento($session['perfiles'], "idperfil", "");
+            $data["perfilactual"] = pr($session["perfildata"], "nombreperfil", "");
+            $data["id_perfil"] = pr($session['perfiles'], "idperfil", "");
             $data["in_session"] = 1;
             $data["no_publics"] = 1;
             $data["meta_keywords"] = $meta_keywords;

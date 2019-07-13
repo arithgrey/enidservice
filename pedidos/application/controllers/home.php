@@ -221,15 +221,15 @@ class Home extends CI_Controller
             $this->table->add_row(array($row["monto"] . " MXN", $row["tipo"], $row["fecha_registro"], $icon));
         }
 
-        $gastos = div(span("TOTAL EN GASTOS: ", " strong ") . $total . " MXN", "top_50 f12");
-        $this->table->add_row(array(div($gastos), "", ""));
-        $gastos = div(span("SALDADO: ", "strong") . $param["saldado"] . " MXN", "top_5 f12");
+        $gastos = d(span("TOTAL EN GASTOS: ", " strong ") . $total . " MXN", "top_50 f12");
+        $this->table->add_row(array(d($gastos), "", ""));
+        $gastos = d(span("SALDADO: ", "strong") . $param["saldado"] . " MXN", "top_5 f12");
 
-        $this->table->add_row(array(div($gastos), "", ""));
+        $this->table->add_row(array(d($gastos), "", ""));
 
         $utilidad = $param["saldado"] - $total;
-        $total = div(span("UTILIDAD:", " underline text-utilidad strong ") . $utilidad . "MXN", "top_20 ");
-        $this->table->add_row(array(heading_enid($total, 4), "", ""));
+        $total = d(span("UTILIDAD:", " underline text-utilidad strong ") . $utilidad . "MXN", "top_20 ");
+        $this->table->add_row(array(h($total, 4), "", ""));
 
         $this->table->set_template(template_table_enid());
 

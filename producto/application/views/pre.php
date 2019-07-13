@@ -1,4 +1,4 @@
-<?= div(heading_enid("¿CÓMO PREFIERES TU ENTREGA?", 3, "titulo_preferencia text-center border-bottom padding_10" ), 4, 1,1) ?>
+<?= d(h("¿CÓMO PREFIERES TU ENTREGA?", 3, "titulo_preferencia text-center border-bottom padding_10" ), 4, 1,1) ?>
 
 <?= btw(
 
@@ -10,7 +10,7 @@
     8, 1 ,1
 ) ?>
 
-<?= div(
+<?= d(
     get_seccion_pre_pedido(
         $url_imagen_servicio,
         $orden_pedido,

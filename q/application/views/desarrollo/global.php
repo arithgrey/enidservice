@@ -27,7 +27,7 @@ foreach ($franja_horaria as $row) {
 
 }
 ?>
-<?= div("Atención al cliente/ tareas resueltas", "blue_enid_background white padding_10", 1) ?>
+<?= d("Atención al cliente/ tareas resueltas", "blue_enid_background white padding_10", 1) ?>
 <table class='table_enid_service text-center' border="1">
     <?= $fechas; ?>
     <?= $list ?>

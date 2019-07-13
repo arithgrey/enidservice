@@ -9,9 +9,9 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = form_open("", ["class" => "form_tiempo_entrega", "id" => "form_tiempo_entrega"]);
-            $r[] = div(
+            $r[] = d(
 
-                div(input(
+                d(input(
 
                     [
                         "name" => "q",
@@ -24,14 +24,14 @@ if (!function_exists('invierte_date_time')) {
                 4
             );
 
-            $r[] = div(get_format_fecha_busqueda(), 8);
+            $r[] = d(get_format_fecha_busqueda(), 8);
             $r[] = form_close();
-            $form = div(append($r), 1);
+            $form = d(append($r), 1);
 
             $z[] = br(3);
-            $z[] = div(
+            $z[] = d(
                 btw(
-                    div(heading_enid("ARTÍCULO", 3, "col-lg-12"), 1)
+                    d(h("ARTÍCULO", 3, "col-lg-12"), 1)
                     ,
                     $form
                     ,
@@ -41,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 13
             );
-            $z[] = div(place("place_tiempo_entrega"), 8, 1);
+            $z[] = d(place("place_tiempo_entrega"), 8, 1);
 
             return append($z);
 
@@ -64,8 +64,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_buzon()
         {
 
-            $r[] = heading_enid("BUZÓN", 3);
-            $r[] = div(append(
+            $r[] = h("BUZÓN", 3);
+            $r[] = d(append(
 
                 anchor_enid("HECHAS" .
                     span("",  'notificacion_preguntas_sin_leer_cliente'),
@@ -98,10 +98,10 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $x[] = heading_enid("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
+            $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
             $x[] = $valoraciones;
             $url = path_enid("recomendacion", $id_usuario);
-            $x[] = div(
+            $x[] = d(
                 anchor_enid("VER COMENTARIOS",
                     [
                         "href" => $url,
@@ -110,11 +110,11 @@ if (!function_exists('invierte_date_time')) {
                 ),
                 "text-center top_20"
             );
-            $x[] = div($alcance, " text-center ");
+            $x[] = d($alcance, " text-center ");
 
-            $r[] = div(append($x), 3);
-            $r[] = div(place("place_ventas_usuario"), 9);
-            return div(append($r), "text-center");
+            $r[] = d(append($x), 3);
+            $r[] = d(place("place_ventas_usuario"), 9);
+            return d(append($r), "text-center");
 
         }
     }
@@ -128,7 +128,7 @@ if (!function_exists('invierte_date_time')) {
             $minimo = $alcance[0]["minimo"];
             $promedio = $alcance[0]["promedio"];
 
-            $r[] = heading_enid("ALCANCE DE TUS PRODUCTOS", 3);
+            $r[] = h("ALCANCE DE TUS PRODUCTOS", 3);
             $r[] = "<table>";
             $r[] = "<tr>";
             $r[] = get_td($maximo, ["class" => 'num_alcance', "id" => $maximo]);
@@ -165,7 +165,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => 'btn_pagos'
             ]);
 
-        $a_vendedor = anchor_enid(div("VENDER"),
+        $a_vendedor = anchor_enid(d("VENDER"),
             [
                 "href" => path_enid("vender", "/?action=nuevo"),
                 "class" => 'black strong tab_pagos',

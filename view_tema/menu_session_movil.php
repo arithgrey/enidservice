@@ -6,7 +6,7 @@
             "onclick" => "closeNav()"
         ]) ?>
 
-    <?= div(
+    <?= d(
         anchor_enid(img_enid([]),
             [
                     "href" => path_enid("home")
@@ -17,7 +17,7 @@
 
     <form class="form" action="../search">
         <?= input(["name" => "q", "placeholder" => "Articulo ó servicio", "class" => "input_search"]) ?>
-        <?= guardar("BUSCAR", ['class' => 'boton-busqueda'], 1) ?>
+        <?= btn("BUSCAR", ['class' => 'boton-busqueda'], 1) ?>
         <?= form_close() ?>
 
         <?php if ($in_session < 1): ?>

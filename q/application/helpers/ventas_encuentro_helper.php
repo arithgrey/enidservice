@@ -17,12 +17,12 @@ if (!function_exists('invierte_date_time')) {
                 ($ventas_pe > 1) ? span("ENTREGAS", "black") : span("ENTREGA", "black");
 
             $r[] =
-                div(
+                d(
                     icon("icon fa fa-space-shuttle black")
                      .
                     anchor_enid(
 
-                        heading_enid($row["nombre_punto_encuentro"], 3, "title") .
+                        h($row["nombre_punto_encuentro"], 3, "title") .
                         p(
                             span($ventas_pe, "f2 strong rounded shadow rounded padding_10 border black top_20") .
                             $entrega
@@ -48,10 +48,10 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = format_linea(get_resumen($data));
         $response[] = br(2).hr();
-        $response[] = heading_enid("VENTAS POR ESTACIÓN ", 4 , "text-left");
-        $response[] = heading_enid("ESTACIONES DE REPARTO: ".$puntos, 6 , "text-left underline");
-        $response[] = div(div(div(append($r), "main-timeline2"), 12), 13);
-        return  div(append($response), "container");
+        $response[] = h("VENTAS POR ESTACIÓN ", 4 , "text-left");
+        $response[] = h("ESTACIONES DE REPARTO: ".$puntos, 6 , "text-left underline");
+        $response[] = d(d(d(append($r), "main-timeline2"), 12), 13);
+        return  d(append($response), "container");
 
     }
 
@@ -75,35 +75,35 @@ if (!function_exists('invierte_date_time')) {
                 $text = [];
                 $text[] = btw(
 
-                    heading_enid($nombre_linea, 9, "letter-spacing-1")
+                    h($nombre_linea, 9, "letter-spacing-1")
                     ,
                     p($num, "text-center strong underline f15")
                     ,
                     "timeline-content"
 
                 );
-                $text[] = div("", "border");
-                $r[] = div(append($text), "col-lg-2  top_20 text-center");
+                $text[] = d("", "border");
+                $r[] = d(append($text), "col-lg-2  top_20 text-center");
                 $b  = 1;
 
             }else{
 
                 $b = 0;
                 $text = [];
-                $text[] = div("","border");
+                $text[] = d("","border");
                 $text[] = btw(
-                    heading_enid($nombre_linea, 9,"letter-spacing-1" ),
+                    h($nombre_linea, 9,"letter-spacing-1" ),
                     p($num, "text-center strong underline f15"),
                     "timeline-content"
                 );
 
-                $r[] = div(append($text), "col-lg-2 top_20 text-center");
+                $r[] = d(append($text), "col-lg-2 top_20 text-center");
             }
         }
 
-        $x[] = heading_enid("VENTAS EN LíNEAS DE METRO: ".$total, 4 , "text-left");
-        $x[] = heading_enid("LINEAS DE REPARTO: ".$lineas_reparto, 6 , "text-left underline");
-        $x[] = div(div(div(div(append($r), "main-timeline12"), "col-md-12 contenedor_general padding_20 "), "row"));
+        $x[] = h("VENTAS EN LíNEAS DE METRO: ".$total, 4 , "text-left");
+        $x[] = h("LINEAS DE REPARTO: ".$lineas_reparto, 6 , "text-left underline");
+        $x[] = d(d(d(d(append($r), "main-timeline12"), "col-md-12 contenedor_general padding_20 "), "row"));
         return append($x);
 
     }

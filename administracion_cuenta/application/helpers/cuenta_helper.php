@@ -7,8 +7,8 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $id_usuario = $data["id_usuario"];
-            $r[] = div(get_menu($id_usuario), 2);
-            $r[] = div(format_cuenta($id_usuario, $data["usuario"]), 10);
+            $r[] = d(get_menu($id_usuario), 2);
+            $r[] = d(format_cuenta($id_usuario, $data["usuario"]), 10);
             return append($r, "contenedor_principal_enid");
 
         }
@@ -19,12 +19,12 @@ if (!function_exists('invierte_date_time')) {
         function format_cuenta($id_usuario, $usuario)
         {
 
-            $r[] = div(get_format_foto_usuario($id_usuario, $usuario), ["class" => "tab-pane active", "id" => "tab_mis_datos"]);
+            $r[] = d(get_format_foto_usuario($id_usuario, $usuario), ["class" => "tab-pane active", "id" => "tab_mis_datos"]);
             $r[] =
-                div(
+                d(
                     btw(
 
-                        heading_enid("ACTUALIZAR DATOS DE ACCESO", 3)
+                        h("ACTUALIZAR DATOS DE ACCESO", 3)
                         ,
                         get_form_set_password()
                         ,
@@ -39,9 +39,9 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
-            $r[] = div(get_format_privacidad_seguridad(), ["class" => "tab-pane ", "id" => "tab_privacidad_seguridad"]);
-            $r[] = div(get_format_calma(), ["class" => "tab-pane ", "id" => "tab_direccion"]);
-            return div(append($r), "tab-content");
+            $r[] = d(get_format_privacidad_seguridad(), ["class" => "tab-pane ", "id" => "tab_privacidad_seguridad"]);
+            $r[] = d(get_format_calma(), ["class" => "tab-pane ", "id" => "tab_direccion"]);
+            return d(append($r), "tab-content");
 
         }
     }
@@ -54,10 +54,10 @@ if (!function_exists('invierte_date_time')) {
                 place("place_form_img"),
                 "col-lg-5 shadow padding_20"
             );
-            $r[] = div(get_format_user($usuario), "page-header menu_info_usuario");
-            $r[] = div("Mantén la calma esta información será solo será visible si tú lo permites ", 'registro_telefono_usuario_lada_negocio blue_enid3  white padding_1', 1);
-            $x[] = div(append($r), 8);
-            $x[] = div(get_format_resumen_cuenta($usuario), 4);
+            $r[] = d(get_format_user($usuario), "page-header menu_info_usuario");
+            $r[] = d("Mantén la calma esta información será solo será visible si tú lo permites ", 'registro_telefono_usuario_lada_negocio blue_enid3  white padding_1', 1);
+            $x[] = d(append($r), 8);
+            $x[] = d(get_format_resumen_cuenta($usuario), 4);
             return append($x);
         }
     }
@@ -65,12 +65,12 @@ if (!function_exists('invierte_date_time')) {
         function get_format_privacidad_seguridad()
         {
 
-            $x[] = heading_enid("INFORMACIÓN PERSONAL", 3);
+            $x[] = h("INFORMACIÓN PERSONAL", 3);
             $x[] = hr();
             $x[] = place("place_registro_conceptos");
             $x[] = place("contenedor_conceptos_privacidad");
-            $r[] = div(append($x), 7);
-            $r[] = div(heading_enid("PRIVACIDAD Y SEGURIDAD", 3), 5);
+            $r[] = d(append($x), 7);
+            $r[] = d(h("PRIVACIDAD Y SEGURIDAD", 3), 5);
 
             return append($r);
         }
@@ -81,11 +81,11 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = div(
+            $r[] = d(
                 append(
                     [
-                        heading_enid("MANTEN LA CALMA!", 3),
-                        div("Tu dirección NO  se mostrará públicamente y solo podrán tener acceso a ella, personas que han comprado tus productos o las personas que te enviarán tus compras", 1),
+                        h("MANTEN LA CALMA!", 3),
+                        d("Tu dirección NO  se mostrará públicamente y solo podrán tener acceso a ella, personas que han comprado tus productos o las personas que te enviarán tus compras", 1),
                         hr(),
                         place("direcciones")
                     ]
@@ -93,11 +93,11 @@ if (!function_exists('invierte_date_time')) {
                 ), 7);
 
 
-            $r[] = div(
+            $r[] = d(
                 append(
                     [
-                        heading_enid("DIRECCIÓN DE ENVÍO O RECEPCIÓN", 3),
-                        div("El lugar donde compras o recibes tus compras o ventas", 1),
+                        h("DIRECCIÓN DE ENVÍO O RECEPCIÓN", 3),
+                        d("El lugar donde compras o recibes tus compras o ventas", 1),
                         hr()
                     ]
                 ),
@@ -114,7 +114,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = div(
+            $r[] = d(
                 img(
                     [
                         "src" => path_enid("imagen_usuario", $id_usuario),
@@ -123,7 +123,7 @@ if (!function_exists('invierte_date_time')) {
                 ), "imagen_usuario_completa"
             );
 
-            $r[] = guardar("MODIFICAR", ["class" => "editar_imagen_perfil top_20"]);
+            $r[] = btn("MODIFICAR", ["class" => "editar_imagen_perfil top_20"]);
 
             return append($r);
 
@@ -136,9 +136,9 @@ if (!function_exists('invierte_date_time')) {
         function get_format_resumen_cuenta($usuario)
         {
 
-            $r[] = heading_enid("TU CUENTA ENID SERVICE", 3);
+            $r[] = h("TU CUENTA ENID SERVICE", 3);
             $r[] = get_format_user($usuario, 1);
-            $r[] = addNRow(div(get_campo($usuario, "email", ""), "top_20", 1));
+            $r[] = addNRow(d(get_campo($usuario, "email", ""), "top_20", 1));
             $r[] = addNRow(get_campo($usuario, "tel_contacto", "Tu prime apellido", 1));
             $r[] = anchor_enid(text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"),
                 [
@@ -160,7 +160,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = form_open("", ["id" => "form_update_password", "class" => "form-horizontal", "method" => "POST"]);
-            $r[] = div("CONTRASEÑA ACTUAL", 1);
+            $r[] = d("CONTRASEÑA ACTUAL", 1);
             $r[] = input(
                 [
                     "name" => "password",
@@ -170,7 +170,7 @@ if (!function_exists('invierte_date_time')) {
                     "required" => "true"
                 ]);
             $r[] = place('place_pw_1');
-            $r[] = div("NUEVA", 1);
+            $r[] = d("NUEVA", 1);
             $r[] = input([
                 "name" => "pw_nueva",
                 "id" => "pw_nueva",
@@ -179,7 +179,7 @@ if (!function_exists('invierte_date_time')) {
                 "required" => "true"
             ]);
             $r[] = place('place_pw_2');
-            $r[] = div("CONFIRMAR NUEVA", 1);
+            $r[] = d("CONFIRMAR NUEVA", 1);
             $r[] = input([
                 "name" => "pw_nueva_confirm",
                 "id" => "pw_nueva_confirm",
@@ -189,8 +189,8 @@ if (!function_exists('invierte_date_time')) {
             ]);
             $r[] = input_hidden(["name" => "secret", "id" => "secret"]);
             $r[] = place('place_pw_3');
-            $r[] = div("", ["id" => "reportesession", "class" => "reportesession"]);
-            $r[] = guardar("Actualizar", ["id" => "inbutton", "class" => "btn btn_save input-sm"]);
+            $r[] = d("", ["id" => "reportesession", "class" => "reportesession"]);
+            $r[] = btn("Actualizar", ["id" => "inbutton", "class" => "btn btn_save input-sm"]);
             $r[] = form_close(place("msj_password"));
 
             return append($r);
@@ -206,11 +206,11 @@ if (!function_exists('invierte_date_time')) {
             $r = [];
             if ($vista < 1) {
 
-                $r[] = heading_enid("Cuenta", 1, 'strong', 1);
+                $r[] = h("Cuenta", 1, 'strong', 1);
                 $r[] = addNRow(get_form_nombre($usuario));
                 $r[] = addNRow(get_form_email($usuario));
-                $r[] = addNRow(div(get_form_telefono($usuario), "row"));
-                $r[] = addNRow(div(get_form_negocio($usuario), "row"));
+                $r[] = addNRow(d(get_form_telefono($usuario), "row"));
+                $r[] = addNRow(d(get_form_negocio($usuario), "row"));
 
             } else {
 
@@ -229,7 +229,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = form_open("", ["class" => "f_telefono_usuario_negocio"]);
-            $r[] = div("Teléfono de negocio", "col-lg-3 strong");
+            $r[] = d("Teléfono de negocio", "col-lg-3 strong");
             $r[] = btw(
                 input(
                     [
@@ -270,7 +270,7 @@ if (!function_exists('invierte_date_time')) {
                 5
             );
 
-            $r[] = div(guardar("Actualizar", ["class" => "input_enid"]), 2);
+            $r[] = d(btn("Actualizar", ["class" => "input_enid"]), 2);
             $r[] = form_close();
             return append($r);
 
@@ -281,7 +281,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r = [];
-            $r[] = div("Teléfon Movil1", 3);
+            $r[] = d("Teléfon Movil1", 3);
             $r[] = btw(
                 input(
                     [
@@ -320,7 +320,7 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 5
             );
-            $r[] = guardar("Actualizar", ["class" => "input_enid"], 2);
+            $r[] = btn("Actualizar", ["class" => "input_enid"], 2);
 
 
             $response = form_open("", ["class" => "form_telefono_usuario"]) . append($r) . form_close();
@@ -333,7 +333,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = form_open("");
-            $r[] = div('Correo electrónico', 'strong', 1);
+            $r[] = d('Correo electrónico', 'strong', 1);
             $r[] = input(
                 [
                     "id" => "correo_electronico",
@@ -346,7 +346,7 @@ if (!function_exists('invierte_date_time')) {
                     "readonly" => true
                 ]);
 
-            $r[] = div('El correo electrónico NO se mostrará públicamente', 'blue_enid ', 1);
+            $r[] = d('El correo electrónico NO se mostrará públicamente', 'blue_enid ', 1);
             $r[] = form_close();
             return append($r);
 
@@ -358,7 +358,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = form_open("", ["class" => "f_nombre_usuario"]);
-            $r[] = div('Nombre de usuario', 'strong', 1);
+            $r[] = d('Nombre de usuario', 'strong', 1);
             $r[] = input(
                 [
                     "id" => "nombre_usuario",
@@ -386,7 +386,7 @@ if (!function_exists('invierte_date_time')) {
             $f[] = get_url_twitter(get_url_tienda($id_usuario), "VISITA MI TIENDA EN LÍNEA!", 1);
             $f[] = get_url_pinterest(get_url_tienda($id_usuario), 1);
             $f[] = get_url_tumblr(get_url_tienda($id_usuario), 1);
-            $f[] = div("COMPARTIR ");
+            $f[] = d("COMPARTIR ");
             $final = append($f);
 
             $list = [
@@ -460,7 +460,7 @@ if (!function_exists('invierte_date_time')) {
                     ))
                 ),
 
-                li(div($final, "contenedor_compartir_redes_sociales"))
+                li(d($final, "contenedor_compartir_redes_sociales"))
 
             ];
 

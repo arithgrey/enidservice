@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
             $href = "?categoria=" . $id_categoria;
             $text_lista = span($nombre_categoria . "(" . $faqs . ")");
             $link = anchor_enid($text_lista, $href);
-            $r[] = div($link);
+            $r[] = d($link);
         }
         return append($r);
     }
@@ -30,7 +30,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($tags as $row) {
 
 
-            $response .= div(text_icon('fa fa-times', $row),
+            $response .= d(text_icon('fa fa-times', $row),
                 [
                     "class" => 'tag_servicio btn btn-primary btn-sm',
                     "id" => $row,
@@ -51,7 +51,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $link =  ($has_phone == 0)  ? anchor_enid('INDICA TU NÚMERO TELEFÓNICO',  path_enid("administracion_cuenta") ) : "";
-        return div(div($link, 1), "top_30");
+        return d(d($link, 1), "top_30");
 
     }
     function valida_text_imagenes($tipo_promocion, $num_images)
@@ -61,7 +61,7 @@ if (!function_exists('invierte_date_time')) {
         if ($num_images == 0) {
 
 
-            $text[] = heading_enid(
+            $text[] = h(
                 "MUESTRA IMAGENES SOBRE TU " . $tipo_promocion . " A TUS CLIENTES"
                 ,
                 5
@@ -72,7 +72,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $text[] = div(
+            $text[] = d(
                 "TU " . $tipo_promocion . " NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES"
 
                 ,
@@ -88,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = ($num_images == 0 || $id_perfil != 20 && $id_perfil > 0) ?
-            div(
+            d(
                 anchor_enid(
                     "DESCARTAR PROMOCIÓN",
                     [

@@ -1,6 +1,6 @@
 <?= get_titulo_modalidad($modalidad) ?>
 <?php
-$l = "";
+
 foreach ($preguntas as $row) {
 
     $pregunta = $row["pregunta"];
@@ -13,25 +13,27 @@ foreach ($preguntas as $row) {
     ]);
 
     ?>
-    <div class="popup-box chat-popup" id="qnimate" style="margin-top: 4px;">
-        <?= btw(
-            div(
-                append(
-                    [
-                        $img,
-                        get_texto_sobre_el_producto($modalidad, $row),
-                        div($pregunta),
-                        div($fecha_registro)
-                    ]
-                ), "popup-head-left pull-left"
-            )
-            ,
-            valida_respuestas_nuevas($modalidad, $row)
-            ,
-            "popup-head"
-        ) ?>
-    </div>
+
+    <?= d(btw(
+        d(
+            append(
+                [
+                    $img,
+                    sobre_el_producto($modalidad, $row),
+                    d($pregunta),
+                    d($fecha_registro)
+                ]
+            ), "popup-head-left pull-left"
+        )
+        ,
+        val_respuestas($modalidad, $row)
+        ,
+        "popup-head"
+    ),
+        ["class" => "popup-box chat-popup", "id" => "qnimate", "style" => "margin-top: 4px;"]
+
+    ) ?>
+
     <?php
 }
 ?>
-<?= $l; ?>

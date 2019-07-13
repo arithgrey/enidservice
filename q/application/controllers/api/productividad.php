@@ -142,7 +142,7 @@ class productividad extends REST_Controller
                 $response += [
                     "email_enviados_enid_service" => $this->email_enviados_enid_service(),
                     "accesos_enid_service" => $this->accesos_enid_service(),
-                    "tareas_enid_service" => primer_elemento($this->tareas_enid_service(), "num_pendientes_desarrollo", 0),
+                    "tareas_enid_service" => pr($this->tareas_enid_service(), "num_pendientes_desarrollo", 0),
                 ];
 
                 break;

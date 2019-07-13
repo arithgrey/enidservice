@@ -82,7 +82,7 @@ class Respuesta extends REST_Controller
         if ($param["modalidad"] == 1) {
             $response["info_usuario"] = $this->app->usuario($param["usuario_pregunta"]);
         }
-        $this->load->view("valoraciones/form_respuesta", $response);
+        $this->response(render_form_respuestas($response));
 
     }
 

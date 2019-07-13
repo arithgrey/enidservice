@@ -76,7 +76,7 @@ class Pagina_web extends REST_Controller
 			$this->table->set_heading('#', $titulo[$a]);
 			$table = $this->table->generate($param[$search[$a]]);
 
-			$l .= div($table, ["class" => "col-lg-4", "style" => "margin-top:50px!important;"]) . "<hr>";
+			$l .= d($table, ["class" => "col-lg-4", "style" => "margin-top:50px!important;"]) . "<hr>";
 
 		}
 		return $l;

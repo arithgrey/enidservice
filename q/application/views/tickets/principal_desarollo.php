@@ -1,4 +1,4 @@
-<?= heading_enid("# Resultados " . count($info_tickets), 3) ?>
+<?= h("# Resultados " . count($info_tickets), 3) ?>
 <?php
 $l = "";
 $estilos_estra = "";
@@ -27,14 +27,14 @@ foreach ($info_tickets as $row) {
         <div class="popup-head">
 
             <?php $t[] = get_img_usuario($id_usuario) ?>
-            <?php $t[] = div($asunto) ?>
-            <?php $t[] = div("#Tareas pendientes:" . $num_tareas_pendientes,
+            <?php $t[] = d($asunto) ?>
+            <?php $t[] = d("#Tareas pendientes:" . $num_tareas_pendientes,
                 $tareas_pendientes,
                 ["class" => "cursor_pointer"]) ?>
 
-            <?= div(append($t), "popup-head-left pull-left") ?>
-            <?php $z[] = guardar(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]) ?>
-            <?php $z[] = div(
+            <?= d(append($t), "popup-head-left pull-left") ?>
+            <?php $z[] = btn(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]) ?>
+            <?php $z[] = d(
                 anchor_enid("CERRAR TICKET",
                     [
                         "class" => "cerrar_ticket",
@@ -42,7 +42,7 @@ foreach ($info_tickets as $row) {
                     ]
                 ), "dropdown-menu acciones_ticket"); ?>
 
-            <?= div(append($z), "dropdown pull-right") ?>
+            <?= d(append($z), "dropdown pull-right") ?>
         </div>
     </div>
     <?php

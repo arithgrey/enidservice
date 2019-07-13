@@ -26,7 +26,7 @@ class tipificacion extends REST_Controller
 		}
 		if (array_key_exists("v", $param) && $param["v"] == 1) {
 
-			$extra = (array_key_exists("text", $param)) ? div(strong($param["text"]), 1) : "";
+			$extra = (array_key_exists("text", $param)) ? d(strong($param["text"]), 1) : "";
 			$response =
 				$extra . create_select($response,
 					"tipificacion",

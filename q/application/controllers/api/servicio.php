@@ -489,12 +489,12 @@ class Servicio extends REST_Controller
             $data["servicio"] = $servicio;
             $this->set_option("servicio", $servicio);
             $data["costo_envio"] = 0;
-            if ($servicio[0]["flag_servicio"] == 0) {
+            if (pr($servicio, "flag_servicio") == 0) {
                 $this->crea_data_costo_envio();
                 $data["costo_envio"] = $this->app->calcula_costo_envio($this->crea_data_costo_envio());
             }
 
-            $data["clasificaciones"] = $this->carga_clasificaciones($data["servicio"]);
+
             $data["ciclos"] = $this->get_not_ciclo_facturacion($param);
             $data["id_usuario"] = $this->id_usuario;
             $imagenes = $this->app->imgs_productos($id_servicio, 1, 10);
@@ -508,7 +508,7 @@ class Servicio extends REST_Controller
             $data["num_imagenes"] = count($imagenes);
             $data["images"] = $this->create_table_images($imagenes, $data["is_mobile"]);
             $data["id_perfil"] = $this->app->getperfiles();
-            $this->load->view("servicio/detalle", $data);
+            $this->response(render_configurador($data));
 
         } else {
             $this->response($response);
@@ -625,7 +625,7 @@ class Servicio extends REST_Controller
             for ($num_imgs = $num_imgs; $num_imgs < 7; $num_imgs++) {
 
                 $icon = icon("fa fa-camera agregar_img_servicio");
-                $interior = div($icon,
+                $interior = d($icon,
                     [
                         "class" => "agregar_img_servicio",
                         "style" =>
@@ -633,7 +633,7 @@ class Servicio extends REST_Controller
                             margin-left: 10px;padding: 3px;margin-top: 3px;"
                     ]);
 
-                $img_preview = div(append([$interior, $img]));
+                $img_preview = d(append([$interior, $img]));
                 $images_complete[$num_imgs] = $img_preview;
 
             }
@@ -658,7 +658,7 @@ class Servicio extends REST_Controller
         $config_imagen = dropdown_button($id_imagen, $row["principal"]);
         $extra_principal = ["class" => "selector_principal"];
         $informacion_imagen = $config_imagen . $img;
-        $contenedor_imagen = ($row["principal"] == 0) ? $informacion_imagen : div($informacion_imagen, $extra_principal);
+        $contenedor_imagen = ($row["principal"] == 0) ? $informacion_imagen : d($informacion_imagen, $extra_principal);
         return $contenedor_imagen;
     }
 
@@ -816,9 +816,9 @@ class Servicio extends REST_Controller
         ];
 
         $icon = icon('fa fa-angle-right ');
-        $boton_seleccion = div($icon, $config);
-        $contenedor = div($easy_butons, ["class" => "dropdown-menu "]);
-        $menu = div($boton_seleccion . $contenedor, ['class' => 'dropdown boton-tallas-disponibles']);
+        $boton_seleccion = d($icon, $config);
+        $contenedor = d($easy_butons, ["class" => "dropdown-menu "]);
+        $menu = d($boton_seleccion . $contenedor, ['class' => 'dropdown boton-tallas-disponibles']);
 
         return $menu;
     }

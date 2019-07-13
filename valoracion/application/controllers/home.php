@@ -46,7 +46,7 @@ class Home extends CI_Controller
             }
 
             $data = $this->app->cssJs($data, "valoracion");
-            $response = div($this->carga_formulario_valoracion($prm), "top_20", 1);
+            $response = d($this->carga_formulario_valoracion($prm), "top_20", 1);
             $this->app->pagina($data, $response, 1);
 
 

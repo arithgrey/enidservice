@@ -14,8 +14,8 @@ class Mensajeria
 
 		$cuerpo = "<html>";
 		$cuerpo .= "<meta charset='utf-8' >";
-		$cuerpo .= div("Excelente día  " . $email_contacto . " - " . $nombre);
-		$cuerpo .= div($info);
+		$cuerpo .= d("Excelente día  " . $email_contacto . " - " . $nombre);
+		$cuerpo .= d($info);
 		$cuerpo .= "</html>";
 
 		$headers = get_headers_e($email_contacto);
@@ -27,8 +27,8 @@ class Mensajeria
 	function get_mensaje_base_agradecimiento()
 	{
 
-		$cuerpo = heading_enid("Gracias por contactarse!");
-		$cuerpo .= heading_enid("A la brevedad nos pondremos en contacto", 2);
+		$cuerpo = h("Gracias por contactarse!");
+		$cuerpo .= h("A la brevedad nos pondremos en contacto", 2);
 		return $cuerpo;
 	}
 }

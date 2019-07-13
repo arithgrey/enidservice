@@ -231,7 +231,7 @@ class Clasificacion extends REST_Controller
 
         if (es_data($response)) {
 
-            $clasificaciones_existentes = $this->get_clasificaciones_por_id(get_array_json( primer_elemento($response, "clasificacion")));
+            $clasificaciones_existentes = $this->get_clasificaciones_por_id(get_array_json( pr($response, "clasificacion")));
 
             $tags = create_tag(
                 $clasificaciones_existentes,
@@ -348,7 +348,7 @@ class Clasificacion extends REST_Controller
 
 
             $tallas_servicio = $this->get_tallas_servicio($param);
-            $tallas_servicio_json =  primer_elemento($tallas_servicio,"talla","");
+            $tallas_servicio_json =  pr($tallas_servicio,"talla","");
             $tallas_servicio = $this->quita_cero_clasificacacion($tallas_servicio);
 
             $v = (get_param_def($param, "v") > 0) ? $param["v"] : 0;
@@ -450,10 +450,10 @@ class Clasificacion extends REST_Controller
 
 
             $easy_butons = create_button_easy_select($response["tallas_servicio"], $config);
-            $easy_butons = div($easy_butons,   'contenedor_tallas_disponibles');
-            $titulo = div("TALLAS QUE TIENES DISPONIBLES",  'titulo_talla');
+            $easy_butons = d($easy_butons,   'contenedor_tallas_disponibles');
+            $titulo = d("TALLAS QUE TIENES DISPONIBLES",  'titulo_talla');
 
-            $response["options"] = div($titulo . $easy_butons,  'contenedor_tallas');;
+            $response["options"] = d($titulo . $easy_butons,  'contenedor_tallas');;
         }
         return $response;
     }

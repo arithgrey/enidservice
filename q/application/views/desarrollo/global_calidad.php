@@ -22,7 +22,7 @@ foreach ($info_global["lista_fechas"] as $row) {
 
 }
 ?>
-<?= div("Atención al cliente/ tareas resueltas", ["class" => "blue_enid_background white"], 1) ?>
+<?= d("Atención al cliente/ tareas resueltas", ["class" => "blue_enid_background white"], 1) ?>
 <table class='table_enid_service text-center' border="1" width="100%">
     <tr class='f-enid' style="background: #0022B7;color: white;">
         <?= $lista_fechas_text ?>

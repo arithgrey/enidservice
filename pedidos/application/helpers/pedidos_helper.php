@@ -20,22 +20,22 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = format_resumen_pedidos($orden);
-        $r[] = div(crea_estado_venta($status_ventas, $recibo), 1);
+        $r[] = d(crea_estado_venta($status_ventas, $recibo), 1);
         $r[] = format_estados_venta($status_ventas, $recibo, $orden);
         $r[] = crea_seccion_solicitud($recibo);
         $r[] = crea_seccion_productos($recibo);
         $r[] = crea_fecha_entrega($recibo);
         $r[] = create_fecha_contra_entrega($recibo, $domicilio);
-        $r[] = notificacion_por_cambio_fecha($recibo, $num_compras, primer_elemento($recibo, "saldo_cubierto"));
+        $r[] = notificacion_por_cambio_fecha($recibo, $num_compras, pr($recibo, "saldo_cubierto"));
         $r[] = addNRow(crea_seccion_recordatorios($recordatorios, $tipo_recortario));
         $r[] = create_seccion_tipificaciones($tipificaciones);
         $r[] = addNRow(get_form_nota($id_recibo));
         $r[] = addNRow(create_seccion_comentarios($comentarios, $id_recibo));
 
-        $response[] = div(div(append($r), 12), 8);
-        $response[] = div(get_format_resumen_cliente_compra($recibo, $tipos_entregas, $domicilio, $num_compras, $usuario, $id_recibo), 4);
+        $response[] = d(d(append($r), 12), 8);
+        $response[] = d(get_format_resumen_cliente_compra($recibo, $tipos_entregas, $domicilio, $num_compras, $usuario, $id_recibo), 4);
         $response[] = get_hiddens_detalle($recibo);
-        return div(append($response), "col-lg-10 col-lg-offset-1 top_50 bottom_100");
+        return d(append($response), "col-lg-10 col-lg-offset-1 top_50 bottom_100");
 
     }
 
@@ -53,10 +53,10 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = format_resumen_seguimiento($recibo, $es_vendedor, $evaluacion, $status_ventas, $domicilio);
         $z[] = format_heading_orden($recibo, $id_servicio);
-        $z[] = div("", 4);
-        $r[] = div(append($z), "top_50");
-        $r[] = div(heading_enid("También te podría interezar", 3), "col-lg-12 top_50 hidden text_interes");
-        $r[] = div(place("place_tambien_podria_interezar"), "col-lg-12 top_50");
+        $z[] = d("", 4);
+        $r[] = d(append($z), "top_50");
+        $r[] = d(h("También te podría interezar", 3), "col-lg-12 top_50 hidden text_interes");
+        $r[] = d(place("place_tambien_podria_interezar"), "col-lg-12 top_50");
         $r[] = input_hidden(["value" => $notificacion_pago, "class" => "notificacion_pago"]);
         $r[] = input_hidden(["value" => $orden, "class" => "orden"]);
         $r[] = input_hidden(["value" => $id_servicio, "class" => "qservicio"]);
@@ -68,11 +68,11 @@ if (!function_exists('invierte_date_time')) {
     function format_resumen_seguimiento($recibo, $es_vendedor, $evaluacion, $status_ventas, $domicilio)
     {
 
-        $r[] = div(get_motificacion_evaluacion($recibo, $es_vendedor, $evaluacion), 1);
-        $r[] = div(heading_enid("RASTREAR PEDIDO" . icon("fa fa-map-signs"), 3), 1);
-        $r[] = div(create_linea_tiempo($status_ventas, $recibo, $domicilio, $es_vendedor), "timeline top_40", 1);
+        $r[] = d(get_motificacion_evaluacion($recibo, $es_vendedor, $evaluacion), 1);
+        $r[] = d(h("RASTREAR PEDIDO" . icon("fa fa-map-signs"), 3), 1);
+        $r[] = d(create_linea_tiempo($status_ventas, $recibo, $domicilio, $es_vendedor), "timeline top_40", 1);
 
-        return div(append($r), 5);
+        return d(append($r), 5);
 
     }
 
@@ -81,11 +81,11 @@ if (!function_exists('invierte_date_time')) {
 
 
         return
-            div(
+            d(
 
                 btw(
 
-                    heading("ORDEN #" . primer_elemento($recibo, "id_proyecto_persona_forma_pago"), 3)
+                    heading("ORDEN #" . pr($recibo, "id_proyecto_persona_forma_pago"), 3)
 
                     ,
 
@@ -93,7 +93,7 @@ if (!function_exists('invierte_date_time')) {
 
                         img(
                             [
-                                "src" => primer_elemento($recibo, "url_img_servicio")
+                                "src" => pr($recibo, "url_img_servicio")
                             ]
                         )
                         ,
@@ -125,8 +125,8 @@ if (!function_exists('invierte_date_time')) {
         $tipo_entrega = $recibo["tipo_entrega"];
 
 
-        $r[] = div(
-            div(
+        $r[] = d(
+            d(
                 get_format_pre_orden(
                     $id_servicio,
                     $id_error,
@@ -143,9 +143,9 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = btw(
 
-            div(get_forms_domicilio_entrega($id_recibo, $lista_direcciones), 6)
+            d(get_forms_domicilio_entrega($id_recibo, $lista_direcciones), 6)
             ,
-            div(get_format_listado_puntos_encuentro($tipo_entrega, $puntos_encuentro, $id_recibo, $domicilio), 6)
+            d(get_format_listado_puntos_encuentro($tipo_entrega, $puntos_encuentro, $id_recibo, $domicilio), 6)
             ,
 
             7
@@ -159,18 +159,18 @@ if (!function_exists('invierte_date_time')) {
     function format_resumen_pedidos($orden)
     {
 
-        $r[] = div(anchor_enid("MIS PEDIDOS",
+        $r[] = d(anchor_enid("MIS PEDIDOS",
             [
                 "href" => path_enid("pedidos"),
                 "class" => "black underline"
 
 
             ]), 13);
-        $r[] = div(
+        $r[] = d(
             btw(
-                div(heading_enid("# ORDEN " . $orden, 3), "numero_orden encabezado_numero_orden row")
+                d(h("# ORDEN " . $orden, 3), "numero_orden encabezado_numero_orden row")
                 ,
-                div(
+                d(
                     icon("fa fa-pencil"),
                     [
                         "class" => "text-right editar_estado",
@@ -193,7 +193,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = btw(
-            div(strong("STATUS DE LA COMPRA"))
+            d(strong("STATUS DE LA COMPRA"))
             ,
             create_select(
                 $status_ventas,
@@ -214,11 +214,11 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = btw(
-            div(strong("SALDO CUBIERTO "))
+            d(strong("SALDO CUBIERTO "))
             ,
-            div(
+            d(
                 btw(
-                    div(input(
+                    d(input(
                             [
                                 "class" => "form-control saldo_cubierto_pos_venta",
                                 "id" => "saldo_cubierto_pos_venta",
@@ -230,7 +230,7 @@ if (!function_exists('invierte_date_time')) {
                             ]
                         )
                     ),
-                    div("MXN", "ml-4 mxn ")
+                    d("MXN", "ml-4 mxn ")
                     ,
                     "d-flex align-items-center justify-content-between "
                 )
@@ -240,7 +240,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = place("mensaje_saldo_cubierto_post_venta");
         $r[] = get_form_cantidad($recibo, $orden);
-        return div(append($r), "selector_estados_ventas top_20 bottom_20");
+        return d(append($r), "selector_estados_ventas top_20 bottom_20");
 
 
     }
@@ -249,9 +249,9 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = div("SOLICITUD  ", "strong");
-        $r[] = div($recibo[0]["fecha_registro"]);
-        return div(append($r), "letter-spacing-5 bottom_30 row");
+        $r[] = d("SOLICITUD  ", "strong");
+        $r[] = d($recibo[0]["fecha_registro"]);
+        return d(append($r), "letter-spacing-5 bottom_30 row");
 
 
     }
@@ -262,7 +262,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = btw(
 
-            heading_enid("COSTOS DE OPERACIÓN", 3)
+            h("COSTOS DE OPERACIÓN", 3)
             ,
             get_formar_add_pedidos($table_costos)
             ,
@@ -270,12 +270,12 @@ if (!function_exists('invierte_date_time')) {
             "contenedor_costos_registrados"
         );
 
-        $r[] = div(get_form_costos($tipo_costos, $id_recibo, $costos_operacion), "display_none contenedor_form_costos_operacion");
+        $r[] = d(get_form_costos($tipo_costos, $id_recibo, $costos_operacion), "display_none contenedor_form_costos_operacion");
 
-        $response[] = div(append($r), 8);
-        $response[] = div(format_img_recibo($path, $recibo), 4);
+        $response[] = d(append($r), 8);
+        $response[] = d(format_img_recibo($path, $recibo), 4);
 
-        return div(div(append($response), 10, 1), "row top_40");
+        return d(d(append($response), 10, 1), "row top_40");
 
 
     }
@@ -296,14 +296,14 @@ if (!function_exists('invierte_date_time')) {
             $se_cancela = $recibo["se_cancela"];
             $status = $recibo["status"];
 
-            $r[] = div(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), 1);
-            $r[] = heading_enid(add_text("TOTAL ", $monto_a_pagar . "MXN"), 5);
-            $r[] = heading_enid(add_text("CUBIERTO", $saldo_cubierto . "MXN"), 5);
-            $r[] = heading_enid(add_text("ARTÍCULOS", $articulos), 5);
+            $r[] = d(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), 1);
+            $r[] = h(add_text("TOTAL ", $monto_a_pagar . "MXN"), 5);
+            $r[] = h(add_text("CUBIERTO", $saldo_cubierto . "MXN"), 5);
+            $r[] = h(add_text("ARTÍCULOS", $articulos), 5);
 
             if ($cancela_cliente > 0 || $se_cancela > 0 || $status == 10) {
 
-                $r[] = heading_enid("ORDEN CANCELADA", 3, "red_enid strong");
+                $r[] = h("ORDEN CANCELADA", 3, "red_enid strong");
 
             }
 
@@ -320,7 +320,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
-        $r[] = div(
+        $r[] = d(
             create_select(
                 $tipos_entregas,
                 "tipo_entrega",
@@ -344,9 +344,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_form_usuario($usuario);
         $r[] = create_seccion_domicilio($domicilio);
         $r[] = addNRow(create_seccion_saldos($recibo));
-        $r[] = div(create_seccion_recordatorios($recibo), "top_30 underline text-right");
+        $r[] = d(create_seccion_recordatorios($recibo), "top_30 underline text-right");
 
-        return div(append($r));
+        return d(append($r));
 
     }
 
@@ -354,7 +354,7 @@ if (!function_exists('invierte_date_time')) {
         function get_forms_domicilio_entrega($id_recibo, $lista_direcciones)
         {
 
-            $r[] = heading_enid("DOMICILIOS DE ENTREGA ", 3);
+            $r[] = h("DOMICILIOS DE ENTREGA ", 3);
             $r[] = agregar_nueva_direccion(0);
             $r[] = ul(create_lista_direcciones($lista_direcciones, $id_recibo), "list-group list-group-flush");
             return append($r);
@@ -423,7 +423,7 @@ if (!function_exists('invierte_date_time')) {
                 "val" => 4
             );
 
-            $r[] = heading_enid("ORDENES DE COMPRA", 3);
+            $r[] = h("ORDENES DE COMPRA", 3);
             $r[] = form_open("", ["class" => "form_busqueda_pedidos ", "method" => "post"]);
             $r[] = form_busqueda_pedidos($tipos_entregas, $status_ventas, $fechas);
 
@@ -437,7 +437,7 @@ if (!function_exists('invierte_date_time')) {
 
             ) {
 
-                $r[] = div(get_format_fecha_busqueda($param["fecha_inicio"], $param["fecha_termino"]));
+                $r[] = d(get_format_fecha_busqueda($param["fecha_inicio"], $param["fecha_termino"]));
                 $r[] = input_hidden(["name" => "consulta", "class" => "consulta", "value" => 1]);
                 $r[] = input_hidden(["name" => "servicio", "class" => "servicio", "value" => $param["servicio"]]);
                 $r[] = input_hidden(["name" => "type", "class" => "type", "value" => $param["type"]]);
@@ -445,16 +445,16 @@ if (!function_exists('invierte_date_time')) {
 
             } else {
 
-                $r[] = div(get_format_fecha_busqueda());
+                $r[] = d(get_format_fecha_busqueda());
             }
 
 
             $r[] = form_close();
-            $z[] = div(append($r), " border padding_10 shadow row seccion_form_pedidos top_50");
-            $z[] = div(place("place_pedidos top_50 bottom_50"), 1);
-            $z[] = div(form_form_search(), 1);
+            $z[] = d(append($r), " border padding_10 shadow row seccion_form_pedidos top_50");
+            $z[] = d(place("place_pedidos top_50 bottom_50"), 1);
+            $z[] = d(form_form_search(), 1);
 
-            $response = div(append($z), 10, 1);
+            $response = d(append($z), 10, 1);
             return $response;
 
 
@@ -480,8 +480,8 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = btw(
-                div("CLIENTE", "strong"),
-                div(input([
+                d("CLIENTE", "strong"),
+                d(input([
                     "name" => "cliente",
                     "class" => "form-control",
                     "placeholder" => "Nombre, correo, telefono ..."
@@ -494,8 +494,8 @@ if (!function_exists('invierte_date_time')) {
 
             ]);
             $r[] = btw(
-                div("#RECIBO", "strong"),
-                div(input([
+                d("#RECIBO", "strong"),
+                d(input([
                     "name" => "recibo",
                     "class" => "form-control"
                 ])),
@@ -503,9 +503,9 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $r[] = btw(
-                div("TIPO ENTREGA", "strong"),
+                d("TIPO ENTREGA", "strong"),
 
-                div(
+                d(
                     create_select(
                         $tipos_entregas,
                         "tipo_entrega",
@@ -521,8 +521,8 @@ if (!function_exists('invierte_date_time')) {
 
             );
             $r[] = btw(
-                div("STATUS", "strong"),
-                div(create_select(
+                d("STATUS", "strong"),
+                d(create_select(
                     $status_ventas,
                     "status_venta",
                     "status_venta  form-control",
@@ -540,7 +540,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = btw(
-                div("ORDENAR", "strong"),
+                d("ORDENAR", "strong"),
                 create_select(
                     $fechas,
                     "tipo_orden",
@@ -562,7 +562,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_pre_orden($id_servicio, $id_error, $recibo, $domicilio, $id_recibo, $lista_direcciones)
         {
 
-            $r[] = div(heading_enid(
+            $r[] = d(h(
                 "ORDEN #" . $recibo["id_proyecto_persona_forma_pago"],
                 1
             ),
@@ -570,7 +570,7 @@ if (!function_exists('invierte_date_time')) {
 
             );
 
-            $x[] = div(img(
+            $x[] = d(img(
                 [
                     "src" => link_imagen_servicio($id_servicio),
                     "class" => "imagen_servicio top_30"
@@ -578,19 +578,19 @@ if (!function_exists('invierte_date_time')) {
                 ]
             ), 4
             );
-            $x[] = div("", 8);
-            $r[] = div(append($x), 13);
-            $r[] = div(
-                heading_enid("DIRECCIÓN ENTREGA ESTABLECIDA", 3)
+            $x[] = d("", 8);
+            $r[] = d(append($x), 13);
+            $r[] = d(
+                h("DIRECCIÓN ENTREGA ESTABLECIDA", 3)
                 ,
                 "top_30"
                 ,
                 1
             );
-            $r[] = div(create_descripcion_direccion_entrega($domicilio), " border-bottom padding_10 top_30 f12", 1);
-            $r[] = div(valida_accion_pago($recibo), 1);
+            $r[] = d(create_descripcion_direccion_entrega($domicilio), " border-bottom padding_10 top_30 f12", 1);
+            $r[] = d(valida_accion_pago($recibo), 1);
 
-            $r[] = div(get_forms($id_recibo, $lista_direcciones), 1);
+            $r[] = d(get_forms($id_recibo, $lista_direcciones), 1);
             return append($r);
 
 
@@ -602,7 +602,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = heading_enid("TUS PUNTOS DE ENCUENTRO ", 3);
+            $r[] = h("TUS PUNTOS DE ENCUENTRO ", 3);
             $r[] = agregar_nueva_direccion(1);
             $list = get_lista_puntos_encuentro($tipo_entrega, $puntos_encuentro, $id_recibo, $domicilio);
 
@@ -662,9 +662,9 @@ if (!function_exists('invierte_date_time')) {
             $x[] = get_link_recordatorio($id_recibo);
             $x[] = get_link_nota();
             $x[] = get_link_costo($id_recibo, $recibo);
-            $r[] = div(icon("fa fa-plus-circle fa-3x"), ["class" => " dropdown-toggle", "data-toggle" => "dropdown"]);
-            $r[] = div(append($x), ["class" => "dropdown-menu  w_300 contenedor_opciones_pedido top_menos_10", "aria-labelledby" => "dropdownMenuButton"]);
-            return div(append($r), "dropdown pull-right  mr-5 btn_opciones  ");
+            $r[] = d(icon("fa fa-plus-circle fa-3x"), ["class" => " dropdown-toggle", "data-toggle" => "dropdown"]);
+            $r[] = d(append($x), ["class" => "dropdown-menu  w_300 contenedor_opciones_pedido top_menos_10", "aria-labelledby" => "dropdownMenuButton"]);
+            return d(append($r), "dropdown pull-right  mr-5 btn_opciones  ");
 
 
         }
@@ -683,15 +683,15 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_servicio = $recibo[0]["id_servicio"];
 
-                $t[] = guardar("ESCRIBE UNA RESEÑA");
-                $t[] = div(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
+                $t[] = btn("ESCRIBE UNA RESEÑA");
+                $t[] = d(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
                 $response = anchor_enid(append($t), ["href" => path_enid("valoracion_servicio", $id_servicio)]);
 
             } elseif ($recibo[0]["status"] == 9 && $es_vendedor < 1 && $evaluacion > 0) {
 
                 $id_servicio = $recibo[0]["id_servicio"];
-                $t[] = guardar("ESCRIBE UNA RESEÑA");
-                $t[] = div(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
+                $t[] = btn("ESCRIBE UNA RESEÑA");
+                $t[] = d(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
                 $response = anchor_enid(append($t), ["href" => path_enid("producto", $id_servicio . "&valoracion=1")]);
 
             } else {
@@ -709,11 +709,11 @@ if (!function_exists('invierte_date_time')) {
 
             $orden = $data["orden"];
             $lista_horarios = lista_horarios()["select"];
-            $x = heading_enid("RECORDATORIO", 3, "top_50");
+            $x = h("RECORDATORIO", 3, "top_50");
             $r[] = form_open("", ["class" => "form_fecha_recordatorio letter-spacing-5 "]);
-            $r[] = div(icon("fa fa-calendar-o") . " FECHA ", 4);
+            $r[] = d(icon("fa fa-calendar-o") . " FECHA ", 4);
 
-            $r[] = div(
+            $r[] = d(
                 input(
                     [
                         "data-date-format" => "yyyy-mm-dd",
@@ -727,9 +727,9 @@ if (!function_exists('invierte_date_time')) {
                 8
             );
 
-            $r[] = div(icon("fa fa-clock-o") . " HORA", 3);
+            $r[] = d(icon("fa fa-clock-o") . " HORA", 3);
 
-            $r[] = div($lista_horarios, 9);
+            $r[] = d($lista_horarios, 9);
             $r[] = input_hidden(
                 [
                     "class" => "recibo",
@@ -737,15 +737,15 @@ if (!function_exists('invierte_date_time')) {
                     "value" => $orden
                 ]);
 
-            $r[] = div(" TIPO", 3);
-            $r[] = div(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo", "idtipo_recordatorio"), 9);
-            $r[] = div(textarea(["name" => "descripcion", "class" => "descripcion_recordatorio"]), 12);
+            $r[] = d(" TIPO", 3);
+            $r[] = d(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo", "idtipo_recordatorio"), 9);
+            $r[] = d(textarea(["name" => "descripcion", "class" => "descripcion_recordatorio"]), 12);
             $r[] = section(place("nota_recordatorio display_none"), 12);
-            $r[] = div(guardar("CONTINUAR", ["class" => "top_menos_40"]), 12);
+            $r[] = d(btn("CONTINUAR", ["class" => "top_menos_40"]), 12);
             $r[] = form_close();
             $r[] = place("place_recordatorio");
-            $form = div(append($r), "top_30 form_separador ");
-            $response = div($x . $form, 6, 1);
+            $form = d(append($r), "top_30 form_separador ");
+            $response = d($x . $form, 6, 1);
             return $response;
 
 
@@ -758,10 +758,10 @@ if (!function_exists('invierte_date_time')) {
             $lista_horarios = lista_horarios()["select"];
             $orden = $data["orden"];
             $r[] = form_open("", ["class" => "form_fecha_entrega"]);
-            $r[] = heading_enid("FECHA DE ENTREGA", 4, "strong titulo_horario_entra");
+            $r[] = h("FECHA DE ENTREGA", 4, "strong titulo_horario_entra");
             $r[] = br();
             $r[] = label(icon("fa fa-calendar-o") . " FECHA ", "col-lg-4 control-label");
-            $r[] = div(
+            $r[] = d(
                 input(
                     [
                         "data-date-format" => "yyyy-mm-dd",
@@ -775,18 +775,18 @@ if (!function_exists('invierte_date_time')) {
                 8);
 
             $r[] = label(icon("fa fa-clock-o") . " HORA DE ENCUENTRO", "col-lg-4 control-label");
-            $r[] = div($lista_horarios, 8);
+            $r[] = d($lista_horarios, 8);
             $r[] = input_hidden(
                 [
                     "class" => "recibo",
                     "name" => "recibo",
                     "value" => $orden
                 ]);
-            $r[] = div(guardar("CONTINUAR", ["class" => "top_20"]), 12);
+            $r[] = d(btn("CONTINUAR", ["class" => "top_20"]), 12);
             $r[] = place("place_notificacion_punto_encuentro");
             $r[] = form_close(place("place_fecha_entrega"));
             $response = append($r);
-            $response = div($response, 6, 1);
+            $response = d($response, 6, 1);
             return $response;
 
 
@@ -805,7 +805,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "recibo",
                     "value" => $orden
                 ]);
-            $r[] = div("MXN", "mxn col-lg-2");
+            $r[] = d("MXN", "mxn col-lg-2");
             $r[] = place("mensaje_saldo_cubierto");
             $r[] = form_close();
 
@@ -846,13 +846,13 @@ if (!function_exists('invierte_date_time')) {
             }
 
 
-            $response = div(heading_enid("Ya registraste todos los costos de operación para esta venta!", 3), 8, 1);
+            $response = d(h("Ya registraste todos los costos de operación para esta venta!", 3), 8, 1);
             if (count($costos_por_registro) > 0) {
 
-                $r[] = div(heading_enid("Gasto", 3), "col-lg-12 bottom_50");
+                $r[] = d(h("Gasto", 3), "col-lg-12 bottom_50");
                 $r[] = form_open("", ["class" => "form_costos letter-spacing-5"], ["recibo" => $id_recibo]);
-                $a = div("MONTO GASTADO", 4);
-                $b = div(
+                $a = d("MONTO GASTADO", 4);
+                $b = d(
                     input(
                         [
                             "type" => "number",
@@ -863,7 +863,7 @@ if (!function_exists('invierte_date_time')) {
                     ), 8);
 
                 $r[] = btw($a, $b, "top_30");
-                $r[] = div(
+                $r[] = d(
                     create_select(
                         $costos_por_registro,
                         "tipo",
@@ -873,9 +873,9 @@ if (!function_exists('invierte_date_time')) {
                         "id_tipo_costo"), "col-lg-12 top_30");
 
 
-                $r[] = div(guardar("AGREGAR", ["class" => "top_30"]), 12);
+                $r[] = d(btn("AGREGAR", ["class" => "top_30"]), 12);
                 $r[] = form_close(place("notificacion_registro_costo"));
-                $response = div(append($r), 10, 1);
+                $response = d(append($r), 10, 1);
             }
             return $response;
 
@@ -887,22 +887,22 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = div(heading_enid("UPS! NO ENCONTRAMOS EL NÚMERO DE ORDEN", 1, "funny_error_message"), "text-center");
-            $r[] = div(
+            $r[] = d(h("UPS! NO ENCONTRAMOS EL NÚMERO DE ORDEN", 1, "funny_error_message"), "text-center");
+            $r[] = d(
                 img(
                     [
                         "src" => "../img_tema/gif/funny_error.gif"
                     ]
                 )
             );
-            $r[] = div(anchor_enid("ENCUENTRA TU ORDEN AQUÍ",
+            $r[] = d(anchor_enid("ENCUENTRA TU ORDEN AQUÍ",
                 [
                     "href" => path_enid("pedidos"),
                     "class" => "busqueda_mensaje"
                 ]),
                 "busqueda_mensaje_text"
             );
-            $response = div(append($r));
+            $response = d(append($r));
 
             return $response;
         }
@@ -989,10 +989,10 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = form_open("", ["class" => "form_notas row top_80 bottom_80 ", "style" => "display:none;"]);
-            $r[] = div("NOTA", "letter-spacing-10");
+            $r[] = d("NOTA", "letter-spacing-10");
             $r[] = textarea(["name" => "comentarios", "class" => "comentarios form-control top_30 bottom_30"]);
             $r[] = input_hidden(["name" => "id_recibo", "value" => $id_recibo]);
-            $r[] = guardar("AGREGAR", ["name" => "comentarios"]);
+            $r[] = btn("AGREGAR", ["name" => "comentarios"]);
             $r[] = form_close(place("place_nota"));
             return append($r);
 
@@ -1001,7 +1001,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('agregar_nueva_direccion')) {
         function agregar_nueva_direccion($direccion = 1)
         {
-            return ($direccion > 0) ? guardar("Agregar ", ["class" => "agregar_punto_encuentro_pedido"]) : guardar("Agregar ", ["class" => "agregar_direccion_pedido"]);
+            return ($direccion > 0) ? btn("Agregar ", ["class" => "agregar_punto_encuentro_pedido"]) : btn("Agregar ", ["class" => "agregar_direccion_pedido"]);
 
         }
     }
@@ -1022,11 +1022,11 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $encuentro = [];
-                $encuentro[] = div("#" . $a, ["class" => "f15"], 1);
-                $encuentro[] = div($nombre, 1);
+                $encuentro[] = d("#" . $a, ["class" => "f15"], 1);
+                $encuentro[] = d($nombre, 1);
                 $modificar_encuentro = ($tipo_entrega < 2) ? " establecer_punto_encuentro " : "";
 
-                $encuentro[] = guardar("ESTABLECER COMO PUNTO DE ENTREGA",
+                $encuentro[] = btn("ESTABLECER COMO PUNTO DE ENTREGA",
                     [
                         "class" => "h6 text-muted text-right  cursor_pointer  btn_direccion  " . $modificar_encuentro,
                         "id" => $id,
@@ -1034,7 +1034,7 @@ if (!function_exists('invierte_date_time')) {
 
                     ]
                 );
-                $r[] = div(append($encuentro), "top_50 border padding_10 contenedor_listado d-flex flex-column justify-content-between " . $extra);
+                $r[] = d(append($encuentro), "top_50 border padding_10 contenedor_listado d-flex flex-column justify-content-between " . $extra);
 
                 $a++;
             }
@@ -1063,10 +1063,10 @@ if (!function_exists('invierte_date_time')) {
 
                 $direccion = $calle . " " . " NÚMERO " . $numero_exterior . " NÚMERO INTERIOR " . $numero_interior . " COLONIA " . $asentamiento . " DELEGACIÓN/MUNICIPIO " . $municipio . " ESTADO " . $estado . " CÓDIGO POSTAL " . $cp;
                 $text = [];
-                $text[] = div("#" . $a, "f15", 1);
-                $text[] = div($direccion, 1);
+                $text[] = d("#" . $a, "f15", 1);
+                $text[] = d($direccion, 1);
                 $text[] =
-                    guardar("ESTABLECER COMO DIRECCIÓN DE ENTREGA",
+                    btn("ESTABLECER COMO DIRECCIÓN DE ENTREGA",
                         [
                             "class" => " establecer_direccion cursor_pointer",
                             "id" => $id_direccion,
@@ -1075,7 +1075,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $a++;
 
-                $r[] = div(append($text), "top_50 border padding_10 contenedor_listado d-flex flex-column justify-content-between");
+                $r[] = d(append($text), "top_50 border padding_10 contenedor_listado d-flex flex-column justify-content-between");
 
 
             }
@@ -1118,9 +1118,9 @@ if (!function_exists('invierte_date_time')) {
                         $lugar_entrega = $punto_encuentro["lugar_entrega"];
                         $numero = "NÚMERO " . $punto_encuentro["numero"];
 
-                        $text[] = heading_enid("LUGAR DE ENCUENTRO", 3, ["class" => "top_20"]);
-                        $text[] = div($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, 1);
-                        $text[] = div("ESTACIÓN " . $lugar_entrega, "strong", 1);
+                        $text[] = h("LUGAR DE ENCUENTRO", 3, ["class" => "top_20"]);
+                        $text[] = d($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, 1);
+                        $text[] = d("ESTACIÓN " . $lugar_entrega, "strong", 1);
 
 
                     }
@@ -1142,8 +1142,8 @@ if (!function_exists('invierte_date_time')) {
                 $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
 
 
-                $response = div(
-                    guardar(
+                $response = d(
+                    btn(
                         text_icon("fa fa-2x fa-shopping-cart", "PROCEDER A LA COMPRA ", [], 0)
                         ,
                         [
@@ -1208,8 +1208,8 @@ if (!function_exists('invierte_date_time')) {
                         break;
 
                 }
-                $seccion = div(icon("fa fa-check-circle-o"), $class);
-                $linea[] = div($seccion . $seccion_2, "timeline__item");
+                $seccion = d(icon("fa fa-check-circle-o"), $class);
+                $linea[] = d($seccion . $seccion_2, "timeline__item");
 
 
             }
@@ -1219,7 +1219,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_seccion_base')) {
         function get_seccion_base($status)
         {
-            $seccion = div(p($status["text"], "timeline__item__content__description"), "timeline__item__content");
+            $seccion = d(p($status["text"], "timeline__item__content__description"), "timeline__item__content");
 
             return $seccion;
 
@@ -1233,7 +1233,7 @@ if (!function_exists('invierte_date_time')) {
             $url = "../area_cliente/?action=compras&ticket=" . $id_recibo;
             $url = ($es_vendedor > 0) ? "" : $url;
 
-            $seccion = div(
+            $seccion = d(
                 p(
                     anchor_enid(
 
@@ -1271,7 +1271,7 @@ if (!function_exists('invierte_date_time')) {
             $url = "../pedidos/?seguimiento=" . $id_recibo . "&domicilio=1";
             $url = ($es_vendedor > 0) ? "" : $url;
 
-            $seccion = div(
+            $seccion = d(
                 p(
                     anchor_enid($texto_entrega,
                         [
@@ -1341,7 +1341,7 @@ if (!function_exists('invierte_date_time')) {
 
             $nota = [];
             if (es_data($data)) {
-                $nota[] = div(heading_enid("NOTAS", 4), 13);
+                $nota[] = d(h("NOTAS", 4), 13);
             }
 
             foreach ($data as $row) {
@@ -1349,22 +1349,22 @@ if (!function_exists('invierte_date_time')) {
 
                 $n = btw(
 
-                    div(icon("fa fa-clock-o") . " " . $row["fecha_registro"], 4)
+                    d(icon("fa fa-clock-o") . " " . $row["fecha_registro"], 4)
                     ,
 
-                    div($row["comentario"], 8)
+                    d($row["comentario"], 8)
                     ,
                     "row"
 
                 );
 
 
-                $nota[] = div($n, "seccion_tipificacion top_30 bottom_30 padding_10 border row");
+                $nota[] = d($n, "seccion_tipificacion top_30 bottom_30 padding_10 border row");
 
             }
 
 
-            $response = div(append($nota), 1);
+            $response = d(append($nota), 1);
             return $response;
 
         }
@@ -1395,9 +1395,9 @@ if (!function_exists('invierte_date_time')) {
                 $r[] =
                     btw(
 
-                        div($row["descripcion"], 9)
+                        d($row["descripcion"], 9)
                         ,
-                        div(input($config), 3)
+                        d(input($config), 3)
                         ,
                         "row"
 
@@ -1406,18 +1406,18 @@ if (!function_exists('invierte_date_time')) {
 
                 $r[] = btw(
 
-                    div(icon("fa fa-clock-o") . $fecha_cordatorio, 1)
+                    d(icon("fa fa-clock-o") . $fecha_cordatorio, 1)
                     ,
-                    div($text_tipo, 1)
+                    d($text_tipo, 1)
                     ,
                     "row"
                 );
 
 
-                $list[] = div(append($r), "row border padding_10 top_30");
+                $list[] = d(append($r), "row border padding_10 top_30");
 
             }
-            return div(append($list), ["id" => "listado_recordatorios bottom_40"]);
+            return d(append($list), ["id" => "listado_recordatorios bottom_40"]);
         }
     }
     if (!function_exists('create_seccion_tipificaciones')) {
@@ -1431,9 +1431,9 @@ if (!function_exists('invierte_date_time')) {
 
                 $tipificaciones = btw(
 
-                    div(text_icon("fa fa-clock-o", $row["fecha_registro"]), 3)
+                    d(text_icon("fa fa-clock-o", $row["fecha_registro"]), 3)
                     ,
-                    div($row["nombre_tipificacion"], 9)
+                    d($row["nombre_tipificacion"], 9)
                     ,
                     "row"
                 );
@@ -1442,8 +1442,8 @@ if (!function_exists('invierte_date_time')) {
             }
 
             if (es_data($data)) {
-                $r[] = div(heading_enid("MOVIMIENTOS", 4, "row"), " top_30 bottom_30 padding_10  row");
-                $r[] = div($tipificaciones, " top_30 bottom_30 padding_10 border row");
+                $r[] = d(h("MOVIMIENTOS", 4, "row"), " top_30 bottom_30 padding_10  row");
+                $r[] = d($tipificaciones, " top_30 bottom_30 padding_10 border row");
             }
             return append($r);
         }
@@ -1464,7 +1464,7 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $text_producto =
-                    div(
+                    d(
                         $precio . "MXN",
                         "text_precio_producto"
 
@@ -1473,7 +1473,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $r = [];
 
-                $r[] = div(
+                $r[] = d(
                     img(
                         [
                             "src" => $link,
@@ -1483,12 +1483,12 @@ if (!function_exists('invierte_date_time')) {
                     4
                 );
 
-                $r[] = div($text_producto, "col-lg-8 align-middle  align-self-center text-center");
+                $r[] = d($text_producto, "col-lg-8 align-middle  align-self-center text-center");
 
 
                 $x = anchor_enid(
 
-                    div(
+                    d(
                         append($r), "border row "
                     ),
 
@@ -1501,7 +1501,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $response[] = $x;
             }
-            return div(append($response), 1);
+            return d(append($response), 1);
 
         }
     }
@@ -1513,9 +1513,9 @@ if (!function_exists('invierte_date_time')) {
             if (get_param_def($domicilio, "domicilio") > 0 && es_data($recibo)) {
 
                 $recibo = $recibo[0];
-                $t[] = div("HORARIO DE ENTREGA", "strong underline");
-                $t[] = div($recibo["fecha_contra_entrega"]);
-                $text = div(append($t), "letter-spacing-5 text-right top_30 bottom_30");
+                $t[] = d("HORARIO DE ENTREGA", "strong underline");
+                $t[] = d($recibo["fecha_contra_entrega"]);
+                $text = d(append($t), "letter-spacing-5 text-right top_30 bottom_30");
                 $fecha = ($recibo["tipo_entrega"] == 1) ? $text : "";
                 return $fecha;
             }
@@ -1568,7 +1568,7 @@ if (!function_exists('invierte_date_time')) {
                     $text_probabilidad = "PROBABILIDAD BAJA NULA (SE CANCELÓ)";
 
                 }
-                return div($text_probabilidad, $class . " border shadow row", 1);
+                return d($text_probabilidad, $class . " border shadow row", 1);
             }
         }
     }
@@ -1587,9 +1587,9 @@ if (!function_exists('invierte_date_time')) {
 
 
             $text[] = btw(
-                div("ENVIO", "strong")
+                d("ENVIO", "strong")
                 ,
-                div($cargos_envio . "MXN")
+                d($cargos_envio . "MXN")
                 ,
                 4
             );
@@ -1597,9 +1597,9 @@ if (!function_exists('invierte_date_time')) {
 
             $text[] =
                 btw(
-                    div("ENVIO", "strong")
+                    d("ENVIO", "strong")
                     ,
-                    div($total_a_pagar . "MXN")
+                    d($total_a_pagar . "MXN")
                     ,
                     4
                 );
@@ -1611,7 +1611,7 @@ if (!function_exists('invierte_date_time')) {
 
             $text[] = btw(
 
-                div("CUBIERTO", "strong")
+                d("CUBIERTO", "strong")
                 ,
                 $saldo_cubierto
                 ,
@@ -1620,7 +1620,7 @@ if (!function_exists('invierte_date_time')) {
 
             );
 
-            return div(div(append($text), "row"), "shadow border padding_20 top_40 ");
+            return d(d(append($text), "row"), "shadow border padding_20 top_40 ");
 
         }
     }
@@ -1649,16 +1649,16 @@ if (!function_exists('invierte_date_time')) {
 
                 $encabezado = btw(
 
-                    heading_enid("TIPO DE ENTREGA", 3)
+                    h("TIPO DE ENTREGA", 3)
                     ,
-                    div(icon("fa fa fa-pencil"), "editar_tipo_entrega text-right")
+                    d(icon("fa fa fa-pencil"), "editar_tipo_entrega text-right")
                     ,
                     "d-flex align-items-center justify-content-between bottom_30"
 
                 );
 
-                $tipo = div($tipo, "encabezado_tipo_entrega letter-spacing-5  text-right bottom_20", 1);
-                return div($encabezado . $tipo.append($r), "contenedor_tipo_entrega", 1);
+                $tipo = d($tipo, "encabezado_tipo_entrega letter-spacing-5  text-right bottom_20", 1);
+                return d($encabezado . $tipo.append($r), "contenedor_tipo_entrega", 1);
 
             endif;
 
@@ -1672,12 +1672,12 @@ if (!function_exists('invierte_date_time')) {
             $response = "";
             if (es_data($recibo)):
                 $recibo = $recibo[0];
-                $t[] = div(icon("fa fa-check-circle") . "PEDIDO ENTREGADO", "strong");
-                $t[] = div($recibo["fecha_entrega"]);
+                $t[] = d(icon("fa fa-check-circle") . "PEDIDO ENTREGADO", "strong");
+                $t[] = d($recibo["fecha_entrega"]);
                 $text = ($recibo["saldo_cubierto"] > 0 && $recibo["status"] == 9) ? append($t) : "";
 
                 if ($recibo["saldo_cubierto"] > 0 && $recibo["status"] == 9):
-                    $response = div($text, "letter-spacing-5 top_30 border padding_10 botttom_20 contenedor_entregado", 1);
+                    $response = d($text, "letter-spacing-5 top_30 border padding_10 botttom_20 contenedor_entregado", 1);
                 endif;
 
             endif;
@@ -1692,9 +1692,9 @@ if (!function_exists('invierte_date_time')) {
             $response = "";
             if (es_data($recibo)):
                 if (
-                    primer_elemento($recibo , "se_cancela" ) < 1 &&
-                    primer_elemento($recibo , "status")  != 10 &&
-                    primer_elemento($recibo, "cancela_cliente" ) < 1) {
+                    pr($recibo , "se_cancela" ) < 1 &&
+                    pr($recibo , "status")  != 10 &&
+                    pr($recibo, "cancela_cliente" ) < 1) {
 
                     $status = $recibo[0]["status"];
                     $text_status = "";
@@ -1708,7 +1708,7 @@ if (!function_exists('invierte_date_time')) {
                             break;
                         }
                     }
-                    $response = div($text_status, "status_compra padding_20 white letter-spacing-5 bottom_20 row");
+                    $response = d($text_status, "status_compra padding_20 white letter-spacing-5 bottom_20 row");
                 }
             endif;
             return $response;
@@ -1720,7 +1720,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r = [];
-            $id_usuario = primer_elemento($recibo, "id_usuario");
+            $id_usuario = pr($recibo, "id_usuario");
             foreach ($usuario as $row) {
 
                 $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
@@ -1732,18 +1732,18 @@ if (!function_exists('invierte_date_time')) {
                     ]);
 
 
-                $r[] = div($nombre);
-                $r[] = div($row["email"]);
-                $r[] = div($row["tel_contacto"]);
-                $r[] = div($row["tel_contacto_alterno"]);
+                $r[] = d($nombre);
+                $r[] = d($row["email"]);
+                $r[] = d($row["tel_contacto"]);
+                $r[] = d($row["tel_contacto_alterno"]);
 
                 if ($row["sexo"] != 2) {
 
-                    $r[] = div($opt[$row["sexo"]]);
+                    $r[] = d($opt[$row["sexo"]]);
                 }
 
                 $icon = icon("fa-pencil configurara_informacion_cliente black");
-                $r[] = div($icon, "pull-right dropdown", 1);
+                $r[] = d($icon, "pull-right dropdown", 1);
 
             }
 
@@ -1751,7 +1751,7 @@ if (!function_exists('invierte_date_time')) {
 
                 ajustar("CLIENTE", icon("fa fa-cart-plus agenda_compra", ["id" => $id_usuario]))
                 ,
-                div(append($r), "contenido_domicilio top_10")
+                d(append($r), "contenido_domicilio top_10")
                 ,
 
                 "shadow border padding_20 top_40"
@@ -1774,7 +1774,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => 'estrella',
                 ]) : "";
 
-            return div($text . $starts, ["class" => "shadow border padding_20"]);
+            return d($text . $starts, ["class" => "shadow border padding_20"]);
 
         }
     }
@@ -1791,7 +1791,7 @@ if (!function_exists('invierte_date_time')) {
 
             } else {
 
-                $f_text = div("SIN DOMICIO REGISTRADO", "sin_domicilio padding_10 white", 1);
+                $f_text = d("SIN DOMICIO REGISTRADO", "sin_domicilio padding_10 white", 1);
             }
 
             return ($numero == 0) ? $f_text : $f_numeric;
@@ -1818,7 +1818,7 @@ if (!function_exists('invierte_date_time')) {
         function create_seccion_recordatorios($recibo)
         {
 
-            return (es_data($recibo)) ? (($recibo[0]["status"] == 6) ? div("EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"], "") : "") : "";
+            return (es_data($recibo)) ? (($recibo[0]["status"] == 6) ? d("EMAIL RECORDATORIOS COMPRA " . $recibo[0]["num_email_recordatorio"], "") : "") : "";
 
         }
     }
@@ -1826,7 +1826,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_link_nota')) {
         function get_link_nota()
         {
-            return div(anchor_enid("NOTA", ["class" => "agregar_comentario", "onClick" => "agregar_nota();"]), 1);
+            return d(anchor_enid("NOTA", ["class" => "agregar_comentario", "onClick" => "agregar_nota();"]), 1);
         }
     }
     if (!function_exists('get_link_costo')) {
@@ -1838,7 +1838,7 @@ if (!function_exists('invierte_date_time')) {
                 $recibo = $recibo[0];
                 $saldo_cubierto = $recibo["saldo_cubierto"];
                 $url = path_enid("pedidos", "/?costos_operacion=" . $id_recibo . "&saldado=" . $saldo_cubierto);
-                return div(anchor_enid("COSTO DE OPERACIÓN", ["href" => $url]), 1);
+                return d(anchor_enid("COSTO DE OPERACIÓN", ["href" => $url]), 1);
             endif;
         }
     }
@@ -1857,7 +1857,7 @@ if (!function_exists('invierte_date_time')) {
                 $se_cancela = $recibo["se_cancela"];
                 $fecha_entrega = $recibo["fecha_entrega"];
 
-                return div(
+                return d(
                     anchor_enid("FECHA DE ENTREGA",
                         [
                             "class" => "editar_horario_entrega  text-right ",
@@ -1875,7 +1875,7 @@ if (!function_exists('invierte_date_time')) {
         function get_link_recordatorio($id_recibo)
         {
 
-            return div(anchor_enid("RECORDATORIO", path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1")), 1);
+            return d(anchor_enid("RECORDATORIO", path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1")), 1);
 
         }
     }
@@ -1917,9 +1917,9 @@ if (!function_exists('invierte_date_time')) {
                 }
 
             }
-            $encabezado = div("PUNTO DE ENCUENTRO", "encabezado_domicilio", 1);
-            $encuentro = div(strtoupper($punto_encuentro), "contenido_domicilio", 1);
-            return div($encabezado . $encuentro, "contenedor_domicilio shadow border padding_20 top_40");
+            $encabezado = d("PUNTO DE ENCUENTRO", "encabezado_domicilio", 1);
+            $encuentro = d(strtoupper($punto_encuentro), "contenido_domicilio", 1);
+            return d($encabezado . $encuentro, "contenedor_domicilio shadow border padding_20 top_40");
 
         }
     }
@@ -1940,9 +1940,9 @@ if (!function_exists('invierte_date_time')) {
                 $direccion = $calle . " " . " NÚMERO " . $numero_exterior . " NÚMERO INTERIOR " . $numero_interior . " COLONIA " . $asentamiento . " DELEGACIÓN/MUNICIPIO " . $municipio . " ESTADO " . $estado . " CÓDIGO POSTAL " . $cp;
 
             }
-            $encabezado = div("DOMICIO DEL ENVIO", "encabezado_domicilio", 1);
-            $direccion = div(strtoupper($direccion), "contenido_domicilio top_10", 1);
-            return div($encabezado . $direccion, "shadow border padding_20 top_40", 1);
+            $encabezado = d("DOMICIO DEL ENVIO", "encabezado_domicilio", 1);
+            $direccion = d(strtoupper($direccion), "contenido_domicilio top_10", 1);
+            return d($encabezado . $direccion, "shadow border padding_20 top_40", 1);
         }
     }
     if (!function_exists('get_form_usuario')) {
@@ -1963,14 +1963,14 @@ if (!function_exists('invierte_date_time')) {
                 $action = "../../q/index.php/api/usuario/index/format/json/";
                 $attr = ["METHOD" => "PUT", "id" => "form_set_usuario", "class" => "border form_set_usuario padding_10 shadow"];
                 $form[] = form_open($action, $attr);
-                $form[] = div(heading_enid("Cliente", 3), 1);
-                $form[] = div("NOMBRE:", "top_10", 1);
+                $form[] = d(h("Cliente", 3), 1);
+                $form[] = d("NOMBRE:", "top_10", 1);
                 $form[] = input(["name" => "nombre", "value" => $nombre, "type" => "text", "required" => "true"]);
-                $form[] = div("APELLIDO PATERNO:", "top_10", 1);
+                $form[] = d("APELLIDO PATERNO:", "top_10", 1);
                 $form[] = input(["name" => "apellido_paterno", "value" => $apellido_paterno, "type" => "text"]);
-                $form[] = div("APELLIDO MATERNO:", "top_10", 1);
+                $form[] = d("APELLIDO MATERNO:", "top_10", 1);
                 $form[] = input(["name" => "apellido_materno", "value" => $apellido_materno, "type" => "text"]);
-                $form[] = div("EMAIL:", "top_10", 1);
+                $form[] = d("EMAIL:", "top_10", 1);
 
 
                 $form[] = input([
@@ -1980,7 +1980,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "input-sm email email",
                     "onkeypress" => "minusculas(this);"
                 ]);
-                $form[] = div("TELÉFONO:", " top_10", 1);
+                $form[] = d("TELÉFONO:", " top_10", 1);
                 $form[] = input([
                     'name' => 'tel_contacto',
                     'value' => $telefono,
@@ -2011,8 +2011,8 @@ if (!function_exists('invierte_date_time')) {
                     "text" => "Indefinido",
                     "val" => 2
                 );
-                $form[] = div(create_select($opt, "sexo", "sexo", "sexo", "text", "val", 1, $sexo), "top_20");
-                $form[] = guardar("GUARDAR", ["class" => "top_30 bottom_50"]);
+                $form[] = d(create_select($opt, "sexo", "sexo", "sexo", "text", "val", 1, $sexo), "top_20");
+                $form[] = btn("GUARDAR", ["class" => "top_30 bottom_50"]);
                 $form[] = form_close(place("place_form_set_usuario"));
                 $f = addNRow(append($form), ["id" => "contenedor_form_usuario"]);
                 return $f;
