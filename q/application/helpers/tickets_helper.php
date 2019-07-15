@@ -1,6 +1,55 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
+    function format_ticket_desarrollo($data)
+    {
+
+        $info_tickets = $data["info_tickets"];
+        $r[] = h("# Resultados " . count($info_tickets), 3);
+        $response = [];
+        foreach ($info_tickets as $row) {
+
+            $id_ticket = $row["id_ticket"];
+            $asunto = $row["asunto"];
+
+            $num_tareas_pendientes = $row["num_tareas_pendientes"];
+            $tareas_pendientes = [
+                "class" => 'strong white ver_detalle_ticket a_enid_black_sm',
+                "id" => $id_ticket
+            ];
+
+            $id_usuario = $row["id_usuario"];
+
+            $t[] = get_img_usuario($id_usuario);
+            $t[] = d($asunto);
+            $t[] = d("#Tareas pendientes:" . $num_tareas_pendientes,
+                $tareas_pendientes,
+                ["class" => "cursor_pointer"]
+            );
+
+            $r[] = d(append($t), "popup-head-left pull-left");;
+
+            $z[] = btn(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]);
+            $z[] = d(
+                anchor_enid("CERRAR TICKET",
+                    [
+                        "class" => "cerrar_ticket",
+                        "onClick" => "cerrar_ticket({$id_ticket})"
+                    ]
+                ), "dropdown-menu acciones_ticket");;
+
+            $r[] = d(append($z), "dropdown pull-right");
+
+            $response[] = div(div(append($r), "popup-head"), ["class" => "popup-box chat-popup", "id" => "qnimate"]);
+
+
+        }
+        return append($response);
+
+
+    }
+
     function format_tablero($tickets)
     {
 

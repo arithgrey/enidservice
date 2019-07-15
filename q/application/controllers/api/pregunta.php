@@ -155,7 +155,7 @@ class pregunta extends REST_Controller
 	private function notifica_vendedor($usuario)
 	{
 
-		$this->app->send_email(get_notificacion_pregunta($usuario));
+		$this->app->send_email(get_notificalista_respuestascion_pregunta($usuario));
 	}
 
 	function periodo_GET()
@@ -188,7 +188,9 @@ class pregunta extends REST_Controller
 		}
 
 		$data_complete["preguntas"] = $this->add_num_respuestas_preguntas($preguntas);
-		$this->load->view("valoraciones/preguntas", $data_complete);
+        $this->response(lista_respuestas($data_complete));
+
+
 	}
 
 	function add_num_respuestas_preguntas($data)

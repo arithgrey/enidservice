@@ -2,6 +2,52 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    function listado($data)
+    {
+
+        $info_respuestas = $data["info_respuestas"];
+        $respuestas = [];
+        foreach ($info_respuestas as $row) {
+
+            $respuesta = $row["respuesta"];
+            $fecha_registro = $row["fecha_registro"];
+
+            $id_tarea = $row["id_tarea"];
+            $nombre = $row["nombre"];
+            $apellido_paterno = $row["apellido_paterno"];
+            $apellido_materno = $row["apellido_materno"];
+            $usuario_respuesta = $nombre . " " . $apellido_paterno;
+            $idperfil = $row["idperfil"];
+            $text_perfil = ($idperfil != 20) ? "Equipo Enid Service" : "Cliente";
+
+            $r = [];
+            $r[] = anchor_enid(img(["class" => 'media-object']), ["class" => 'pull-left']);
+            $r[] = small(icon('fa fa-clock-o') . $fecha_registro, ["class" => 'pull-right time']);
+            $r[] = d($usuario_respuesta . "  | " . $text_perfil, ["class" => 'media-heading']);
+            $r[] = d($respuesta);
+
+            $respuestas[] = d(append($r), ["class" => "contenedor_respuestas_tickect_tarea"]);
+            $respuestas[] = hr();
+
+        }
+
+        $oculta_comentarios = (es_data($info_respuestas)) ?
+            d("Ocultar ", ["class" => 'ocultar_comentarios strong blue_enid', "id" => $id_tarea]) : "";
+
+
+        return btw(
+            $oculta_comentarios,
+            d(
+                d(append($respuestas), "msg-wrap")
+                ,
+                "Message-wrap"
+            ),
+            12
+        );
+
+
+    }
+
     function render_form_respuestas($data)
     {
 
@@ -53,7 +99,7 @@ if (!function_exists('invierte_date_time')) {
                 small(text_icon("fa fa-clock", $row["fecha_registro"]), "pull-right text-muted"),
                 "header"
             );
-            
+
             $t[] = p($row["respuesta"]);
             $r[] = li(d(append($t), "chat-body clearfix"), "left clearfix");
 
