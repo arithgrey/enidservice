@@ -39,7 +39,8 @@ class Respuesta extends REST_Controller
         if (if_ext($param, "tarea")) {
             $response = $this->respuesta_model->get_respuestas($param);
             $response["info_respuestas"] = $response;
-            return $this->load->view("tickets/respuestas", $response);
+            //return $this->load->view("tickets/respuestas", $response);
+            $response = listado($response);
         }
         $this->response($response);
 

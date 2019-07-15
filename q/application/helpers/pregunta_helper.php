@@ -1,6 +1,47 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function lista_respuestas($data)
+    {
+
+        $modalidad = $data["modalidad"];
+        $preguntas = $data["preguntas"];
+
+        $r[] = get_titulo_modalidad($modalidad);
+
+        foreach ($preguntas as $row) {
+
+            $img = img([
+                'style' => 'width: 44px!important;',
+                'src' => get_url_imagen_pregunta($modalidad, $row),
+                'onerror' => "this.src='../img_tema/user/user.png'"
+            ]);
+
+
+            $r[] = d(btw(
+                d(
+                    append(
+                        [
+                            $img,
+                            sobre_el_producto($modalidad, $row),
+                            d($row["pregunta"]),
+                            d($row["fecha_registro"])
+                        ]
+                    ), "popup-head-left pull-left"
+                )
+                ,
+                val_respuestas($modalidad, $row)
+                ,
+                "popup-head"
+            ),
+                ["class" => "popup-box chat-popup", "id" => "qnimate", "style" => "margin-top: 4px;"]
+
+            );
+        }
+
+        return append($r);
+
+    }
 
     function get_format_respuesta_vendedor($email, $nombre, $id_servicio)
     {
@@ -47,9 +88,9 @@ if (!function_exists('invierte_date_time')) {
     function get_notificacion_pregunta($usuario)
     {
 
-        if (es_data($usuario)){
+        if (es_data($usuario)) {
 
-            $usuario =  $usuario[0];
+            $usuario = $usuario[0];
             $nombre = $usuario["nombre"];
             $email = $usuario["email"];
 
@@ -153,7 +194,7 @@ if (!function_exists('invierte_date_time')) {
 
         $id_pregunta = $param["id_pregunta"];
         $leido_cliente = $param["leido_cliente"];
-        $num  = (es_data($param["respuestas"])) ? $param["respuestas"][0]["respuestas"]:0;
+        $num = (es_data($param["respuestas"])) ? $param["respuestas"][0]["respuestas"] : 0;
 
         $text = "";
         $base_servicio = [

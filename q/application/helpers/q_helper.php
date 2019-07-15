@@ -3,6 +3,49 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    if (!function_exists('format_contactos_dia')) {
+        function format_contactos_dia($data)
+        {
+
+
+            $contactos = $data["contactos"];
+            $r[] = h("MENSAJES ENVIADOS A ENID SERVICE", 3);
+
+
+            foreach ($contactos as $row) {
+
+
+                $nombre = $row["nombre"];
+                $email = $row["email"];
+                $mensaje = $row["mensaje"];
+                $fecha_registro = $row["fecha_registro"];
+                $telefono = $row["telefono"];
+
+
+                $r[] = d(d(
+                    d(
+                        append(
+                            [
+                                img([
+                                    "src" => "../img_tema/user/user.png",
+                                    "style" => 'width: 44px!important;',
+                                    "onerror" => "../img_tema/user/user.png"
+                                ]),
+                                d($nombre . "|" . $email),
+                                d($mensaje . $telefono . $fecha_registro)
+                            ]
+                        ), "popup-head-left pull-left"),
+                    "popup-head"), [
+                        "class" => "popup-box chat-popup", "id" => "qnimate", "style" => "margin-top: 4px;"
+                    ]
+                );
+
+            }
+            return append($r);
+        }
+    }
+
+
     if (!function_exists('get_mensaje_modificacion_pwd')) {
         function get_mensaje_modificacion_pwd($nombre)
         {
@@ -61,7 +104,7 @@ if (!function_exists('invierte_date_time')) {
         function tareas_realizadas($realizado, $fecha_actual)
         {
 
-            $index =  search_bi_array($realizado, "fecha_termino", $fecha_actual);
+            $index = search_bi_array($realizado, "fecha_termino", $fecha_actual);
             return $realizado[$index]["tareas_realizadas"];
         }
     }
@@ -81,7 +124,7 @@ if (!function_exists('invierte_date_time')) {
             $num_visitas_web = 0;
             foreach ($lista_fechas as $row) {
 
-                if ($row["fecha"]== $fecha_actual && $row["hora"] == $franja_horaria) {
+                if ($row["fecha"] == $fecha_actual && $row["hora"] == $franja_horaria) {
                     $num_visitas_web = $row["total"];
                     break;
                 }
@@ -675,7 +718,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        if (es_data($r) ) {
+        if (es_data($r)) {
             array_unshift($r, "LO QUE COMPRADORES TE PREGUNTAN");
         }
 
@@ -758,7 +801,6 @@ if (!function_exists('invierte_date_time')) {
         $recordatorios = add_recordatorios($info["recordatorios"]);
         $lista[] = $recordatorios["html"];
         $f = $f + $recordatorios["flag"];
-
 
 
         $preguntas = add_preguntas_sin_lectura($info["preguntas"]);
@@ -844,7 +886,7 @@ if (!function_exists('invierte_date_time')) {
     function get_valor_fecha_solicitudes($solicitudes, $fecha_actual)
     {
 
-        return search_bi_array($solicitudes, "fecha_registro", $fecha_actual, "tareas_solicitadas",0 );
+        return search_bi_array($solicitudes, "fecha_registro", $fecha_actual, "tareas_solicitadas", 0);
     }
 
     function get_comparativa($info_sistema)

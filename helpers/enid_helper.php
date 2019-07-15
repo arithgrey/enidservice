@@ -338,11 +338,11 @@ if (!function_exists('get_base_html')) {
 }
 */
 
-if (!function_exists('div')) {
+if (!function_exists('d')) {
     function d($info, $attributes = [], $row = 0, $frow = 0)
     {
 
-        return get_base_html("div", $info, $attributes, $row, $frow);
+        return get_base_html("d", $info, $attributes, $row, $frow);
 
     }
 }
@@ -601,7 +601,7 @@ if (!function_exists('create_tag')) {
                 ]
             );
         }
-        $new_tags = add_element($tags, "div", array('class' => 'tags'));
+        $new_tags = add_element($tags, "d", array('class' => 'tags'));
         return $new_tags;
     }
 }
