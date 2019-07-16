@@ -28,21 +28,21 @@ foreach ($miembros as $row) {
 
 
 	$lis_miembros .= "<tr>";
-	$lis_miembros .= get_td($idusuario);
-	$lis_miembros .= get_td($nombre . " " . $apellido_paterno . " " . $apellido_materno);
-	$lis_miembros .= get_td($email);
-	$lis_miembros .= get_td($email_alterno);
-	$lis_miembros .= get_td($tel_contacto);
-	$lis_miembros .= get_td($tel_contacto_alterno);
-	$lis_miembros .= get_td($fecha_registro);
-	$lis_miembros .= get_td($puesto);
-	$lis_miembros .= get_td($edad);
-	$lis_miembros .= get_td($cargo);
-	$lis_miembros .= get_td($url_fb);
-	$lis_miembros .= get_td($url_tw);
-	$lis_miembros .= get_td($url_www);
-	$lis_miembros .= get_td($sexo);
-	$lis_miembros .= get_td($status);
+	$lis_miembros .= td($idusuario);
+	$lis_miembros .= td($nombre . " " . $apellido_paterno . " " . $apellido_materno);
+	$lis_miembros .= td($email);
+	$lis_miembros .= td($email_alterno);
+	$lis_miembros .= td($tel_contacto);
+	$lis_miembros .= td($tel_contacto_alterno);
+	$lis_miembros .= td($fecha_registro);
+	$lis_miembros .= td($puesto);
+	$lis_miembros .= td($edad);
+	$lis_miembros .= td($cargo);
+	$lis_miembros .= td($url_fb);
+	$lis_miembros .= td($url_tw);
+	$lis_miembros .= td($url_www);
+	$lis_miembros .= td($sexo);
+	$lis_miembros .= td($status);
 	$lis_miembros .= "</tr>";
 
 }
@@ -52,21 +52,21 @@ foreach ($miembros as $row) {
 <div <?= $height ?> >
 	<table class='table_enid_service' border=1>
 		<tr class="table_enid_service_header">
-			<?= get_td("#") ?>
-			<?= get_td("Nombre") ?>
-			<?= get_td("email") ?>
-			<?= get_td("email_alterno") ?>
-			<?= get_td("Tel.") ?>
-			<?= get_td("Tel. 2") ?>
-			<?= get_td("Fecha registro") ?>
-			<?= get_td("Puesto") ?>
-			<?= get_td("Edad") ?>
-			<?= get_td("Cargo") ?>
-			<?= get_td("Fb") ?>
-			<?= get_td("Tw") ?>
-			<?= get_td("www") ?>
-			<?= get_td("Sexo") ?>
-			<?= get_td("Estatus") ?>
+			<?= td("#") ?>
+			<?= td("Nombre") ?>
+			<?= td("email") ?>
+			<?= td("email_alterno") ?>
+			<?= td("Tel.") ?>
+			<?= td("Tel. 2") ?>
+			<?= td("Fecha registro") ?>
+			<?= td("Puesto") ?>
+			<?= td("Edad") ?>
+			<?= td("Cargo") ?>
+			<?= td("Fb") ?>
+			<?= td("Tw") ?>
+			<?= td("www") ?>
+			<?= td("Sexo") ?>
+			<?= td("Estatus") ?>
 		</tr>
 		<?= $lis_miembros; ?>
 	</table>

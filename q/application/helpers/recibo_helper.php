@@ -21,16 +21,16 @@ if (!function_exists('invierte_date_time')) {
         $_response[] = validate_format_cancelacion($total_cubierto, $id_recibo, $modalidad);
 
         $respose[] = get_format_transaccion($id_recibo);
-        $pg[] = get_td(h("Pago enviado a ", 4));
-        $pg[] = get_td(h("Importe ", 4));
+        $pg[] = td(h("Pago enviado a ", 4));
+        $pg[] = td(h("Importe ", 4));
 
         $pa[] = tr(append($pg));
 
         $t[] = strtoupper(get_campo($usuario_venta, "nombre"));
         $t[] = strtoupper(get_campo($usuario_venta, "apellido_materno"));
         $t[] = strtoupper(get_campo($usuario_venta, "apellido_paterno"));
-        $rr[] = get_td(append($t));
-        $rr[] = get_td($total_cubierto . " MXN");
+        $rr[] = td(append($t));
+        $rr[] = td($total_cubierto . " MXN");
         $pa[] = tr(append($rr));
 
         $respose[] = "<table>";
@@ -38,31 +38,31 @@ if (!function_exists('invierte_date_time')) {
         $respose[] = "</table>";
 
 
-        $es[] = get_td("Estado: " .
+        $es[] = td("Estado: " .
             span("COMPLETADO"), [
             "style" => "border-style: solid;border-color: #000506;padding: 2px;"
         ]);
 
-        $es[] = get_td();
+        $es[] = td();
         tr(append($es));
         $respose[] = "</table>";
 
         $response[] = tr();
 
-        $a[] = get_td("Detalles del pedido");
-        $a[] = get_td("Cantidad");
-        $a[] = get_td("Precio");
-        $a[] = get_td("Subtotal");
+        $a[] = td("Detalles del pedido");
+        $a[] = td("Cantidad");
+        $a[] = td("Precio");
+        $a[] = td("Subtotal");
 
-        $b[] = get_td($resumen_pedido);
-        $b[] = get_td($cantidad);
-        $b[] = get_td("$" . $precio . "MXN");
-        $b[] = get_td("$" . $monto_a_pagar . "MXN");
+        $b[] = td($resumen_pedido);
+        $b[] = td($cantidad);
+        $b[] = td("$" . $precio . "MXN");
+        $b[] = td("$" . $monto_a_pagar . "MXN");
 
-        $c[] = get_td("");
-        $c[] = get_td("");
-        $c[] = get_td("Total de la compra");
-        $c[] = get_td("$" . $monto_a_pagar . "MXN");
+        $c[] = td("");
+        $c[] = td("");
+        $c[] = td("Total de la compra");
+        $c[] = td("$" . $monto_a_pagar . "MXN");
 
         $t[] = tr(append($a), 'tb_pagos');
         $t[] = tr(append($b));
@@ -352,13 +352,13 @@ if (!function_exists('invierte_date_time')) {
                 "id" => $id_error,
                 "style" => "width:40px!important;height:40px!important;",
             ]);
-            $tb[] = get_td($recibo);
-            $tb[] = get_td($img);
-            $tb[] = get_td($estado_compra);
-            $tb[] = get_td($tipo_entrega);
-            $tb[] = get_td($saldo_cubierto . "MXN");
-            $tb[] = get_td($monto_a_pagar . "MXN");
-            $tb[] = get_td($entrega);
+            $tb[] = td($recibo);
+            $tb[] = td($img);
+            $tb[] = td($estado_compra);
+            $tb[] = td($tipo_entrega);
+            $tb[] = td($saldo_cubierto . "MXN");
+            $tb[] = td($monto_a_pagar . "MXN");
+            $tb[] = td($entrega);
 
             $tb[] = "</tr>";
 
@@ -388,7 +388,7 @@ if (!function_exists('invierte_date_time')) {
         $ventas_fecha = array_count_values($fechas);
         $fechas_keys = array_keys($ventas_fecha);
         $cb = function ($a, $b) {
-            return " " . $a . get_td($b);
+            return " " . $a . td($b);
         };
         $titulos = "<td>" . implode("</td><td>", $fechas_keys) . "</td>";
         $valores = array_reduce($ventas_fecha, $cb, '');

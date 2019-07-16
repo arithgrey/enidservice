@@ -8,7 +8,7 @@
     <?= form_open("", ["class" => 'solicitar_saldo_amigo_form']) ?>
     <table>
         <tr>
-            <?= get_td(input([
+            <?= td(input([
                 "placeholder" => "Ejemplo 200",
                 "type" => "number",
                 "name" => "monto",
@@ -16,17 +16,17 @@
                 "required" => true
             ]))
             ?>
-            <?= get_td("MXN", "strong top_10" ) ?>
+            <?= td("MXN", "strong top_10" ) ?>
         </tr>
         <tr>
-            <?= get_td("¿MONTO?",
+            <?= td("¿MONTO?",
                 [
                     "colspan" => 2,
                     "style" => "color: black;text-decoration: underline;font-size: 2em;"]
             ) ?>
         </tr>
         <tr>
-            <?= get_td(input([
+            <?= td(input([
 
                 "type" => "email",
                 "name" => "email_amigo",
@@ -34,7 +34,7 @@
                 "placeholder" => "Ejemplo jmedrano@enidservice.com",
                 "required" => true
             ])) ?>
-            <?= get_td("Email", 'strong') ?>
+            <?= td("Email", 'strong') ?>
         </tr>
     </table>
     <?= btn("SOLICITAR SALDO", ["class" => "btn_solicitud_saldo"]) ?>
