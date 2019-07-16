@@ -250,7 +250,7 @@ class recibo extends REST_Controller
                         "modalidad" => 1,
                     ];
 
-                    return $this->load->view("cobranza/notificacion_pago_realizado", $dc);
+                    //return $this->load->view("cobranza/notificacion_pago_realizado", $dc);
 
                 }
             }

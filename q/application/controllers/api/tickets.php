@@ -206,7 +206,8 @@ class Tickets extends REST_Controller
         $param = $this->get();
         $param["id_usuario"] = $this->id_usuario;
         $response["solicitud_saldo"] = $this->tickets_model->get_solicitudes_saldo($param);
-        $this->load->view("tickets/solicitudes_saldo", $response);
+        $this->response(solicitudes_saldo($response));
+
     }
 
     function ticket_desarrollo_GET()

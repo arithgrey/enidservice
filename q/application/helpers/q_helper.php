@@ -3,6 +3,195 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    function format_miembros($data)
+    {
+
+        $paginacion = $data["paginacion"];
+        $miembros = $data["miembros"];
+        $modo_edicion = $data["modo_edicion"];
+
+        $_response[] = h("USUARIOS", 3);
+        $_response[] = $paginacion;
+
+        foreach ($miembros as $row) {
+
+            $id_usuario = $row["id_usuario"];
+            $nombre = $row["nombre"];
+            
+            $apellido_paterno = $row["apellido_paterno"];
+            $apellido_materno = $row["apellido_materno"];
+            $afiliado = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
+
+
+            $fecha_registro = $row["fecha_registro"];
+
+
+            $re[] = img([
+                "src" => "../imgs/index.php/enid/imagen_usuario/" . $id_usuario,
+                "style" => 'width: 44px!important;',
+                "onerror" => "this.src='../img_tema/user/user.png'"
+            ]);
+            $re[] = d($afiliado);
+            $re[] = d($fecha_registro);
+            $response[] = d(append($re), "popup-head-left pull-left");
+
+            if ($modo_edicion == 1):
+                $res[] = d(icon("fa fa-envelope"), ["title" => "Email de recordatorio enviados"]);
+                $m[] = btn(
+                    icon('fa fa-plus'),
+                    [
+                        "class" => "chat-header-button",
+                        "data-toggle" => "dropdown"
+                    ]
+                );
+
+                $m[] = ul(
+                    [
+                        anchor_enid(
+                            append([icon('fa fa-pencil'), "Editar información"]),
+                            [
+                                "class" => 'usuario_enid_service',
+                                "data-toggle" => 'tab',
+                                "href" => '#tab_mas_info_usuario',
+                                "id" => $id_usuario
+                            ]
+                        )
+                    ],
+                    "dropdown-menu pull-right");
+                $res[] = d(append($m), "btn-group");
+                $response[] = div(append($res), "popup-head-right pull-right");
+            endif;
+
+            $_response[] = d(d(append($response), "popup-head"), ["class" => "popup-box chat-popup", "id" => "qnimate"]);
+
+        }
+        return append($_response);
+
+    }
+
+    function gb_calidad($data)
+    {
+
+        $info_global = $data["info_global"];
+
+        $style = [];
+        $style_terminos = ["style" => 'background:#024d8d;color:white;'];
+        $style_solicitudes = ["style" => 'font-size:.8em;background:#ea330c;color:white;'];
+        $lista_fechas_text = get_td("Periodo", $style);
+        $lista_fechas_text .= get_td("Total", $style);
+        $lista_solicitudes = "";
+
+        $lista_terminos = "";
+        $totales_solicitudes = 0;
+        $totales_realizadas = 0;
+        foreach ($info_global["lista_fechas"] as $row) {
+
+            $fecha = $row["fecha"];
+            $lista_fechas_text .= get_td($fecha, $style);
+            $valor_solicitudes = get_valor_fecha_solicitudes($info_global["solicitudes"], $fecha);
+            $totales_solicitudes = $totales_solicitudes + $valor_solicitudes;
+            $lista_solicitudes .= get_td($valor_solicitudes, $style);
+            $valor_terminos = tareas_realizadas($info_global["terminos"], $fecha);
+            $totales_realizadas = $totales_realizadas + $valor_terminos;
+            $lista_terminos .= get_td($valor_terminos, $style);
+
+        }
+
+        $response[] = d("Atención al cliente/ tareas resueltas", ["class" => "blue_enid_background white"], 1);
+
+
+        $r[] = tr($lista_fechas_text);
+
+        $sl[] = get_td("Solicitudes", $style_solicitudes);
+        $sl[] = get_td($totales_solicitudes, $style_solicitudes);
+        $sl[] = $lista_solicitudes;
+
+        $r[] = tr(append($sl));
+
+        $tr[] = get_td("Términos", $style_terminos);
+        $tr[] = get_td($totales_realizadas, $style_terminos);
+        $tr[] = $lista_terminos;
+
+        $r[] = tr(append($tr));
+        $response[] = tb(append($r));
+        return append($response);
+
+
+    }
+
+    function comparativa_gb($data)
+    {
+
+
+        $info_global = $data["info_global"];
+        $franja_horaria = get_franja_horaria();
+        $lista_fechas = get_arreglo_valor($info_global, "fecha");
+
+
+        $list = [];
+        foreach ($franja_horaria as $row) {
+
+            $franja_h = $row;
+
+            $list[] = "<tr>";
+            $list[] = get_td($franja_h);
+
+            $total_tareas = 0;
+            $lista2 = "";
+            foreach ($lista_fechas as $row) {
+
+                $fecha_actual = $row;
+                $tareas_realizadas = valida_tareas_fecha($info_global, $fecha_actual, $franja_h);
+                $total_tareas = $total_tareas + $tareas_realizadas;
+                $lista2 .= get_td($tareas_realizadas);
+            }
+            $list[] = get_td($total_tareas);
+            $list[] = $lista2;
+            $list[] = "</tr>";
+
+        }
+
+        $response[] = d("Atención al cliente/ tareas resueltas", "blue_enid_background white padding_10", 1);
+        $response[] = get_fechas_global($lista_fechas);
+        $response[] = append($list);
+        return tb(append($response), 'table_enid_service text-center');
+
+    }
+
+    function format_comparativa($data)
+    {
+
+
+        $info_global = $data["info_global"];
+
+        $lista = [];
+        $franja_horaria = get_franja_horaria();
+        for ($a = 0; $a < count($franja_horaria); $a++) {
+
+            $lista[] = "
+<tr>";
+            $lista[] = get_td($franja_horaria[$a]);
+            $lista[] = get_comparativas_metricas($franja_horaria[$a], $info_global);
+            $lista[] = "
+</tr>";
+        }
+
+        $response[] = d("Comparativa atención al cliente y tareas resueltas", "blue_enid_background white pading_10");
+        $t[] = get_td("Franja horaria");
+        $t[] = get_td("Hace 7 días");
+        $t[] = get_td("Ayer");
+        $t[] = get_td("Hoy");
+        tr($t, 'f - enid');
+        $response[] = "
+<table>";
+        $response[] = append($lista);
+        $response[] = "
+</table>";
+        return div(append($response), 6, 1);
+
+
+    }
+
     if (!function_exists('format_contactos_dia')) {
         function format_contactos_dia($data)
         {
@@ -112,7 +301,7 @@ if (!function_exists('invierte_date_time')) {
         function valida_total_menos1($anterior, $nuevo, $extra = '')
         {
 
-            $ext = menorque($anterior, $nuevo, 'style="background:#ff1b00!important; color:white!important;" ');
+            $ext = menorque($anterior, $nuevo, 'style = "background:#ff1b00!important; color:white!important;" ');
             return get_td($nuevo, $ext . " " . $extra);
         }
     }
@@ -138,7 +327,8 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $dias = ["", 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
-            $fechas = "<tr>";
+            $fechas = "
+<tr>";
             $b = 0;
             $estilos2 = "";
             foreach ($lista_fechas as $row) {
@@ -152,7 +342,8 @@ if (!function_exists('invierte_date_time')) {
                 $text_fecha = $fecha_text . "" . $row;
                 $fechas .= get_td($text_fecha, $estilos2);
             }
-            $fechas .= "</tr>";
+            $fechas .= "
+</tr>";
             return $fechas;
 
         }
@@ -942,7 +1133,8 @@ if (!function_exists('invierte_date_time')) {
             $style = "";
 
 
-            $info_uso .= '<tr  ' . $style . '>';
+            $info_uso .= '
+    < tr  ' . $style . ' > ';
             $info_uso .= get_td($f_registro);
             $info_uso .= $total_registrado;
             $info_uso .= $faq;
@@ -952,13 +1144,14 @@ if (!function_exists('invierte_date_time')) {
             $info_uso .= $afiliados;
             $info_uso .= $nosotros;
             $info_uso .= $procesar_compra;
-            $info_uso .= '</tr>';
+            $info_uso .= '</tr > ';
             $b++;
             $x++;
         }
 
         $t = [];
-        $t[] = "<tr  style=\"background: #000;color: white;text-align: center!important;\">";
+        $t[] = "
+<tr style=\"background: #000;color: white;text-align: center!important;\">";
         $t[] = get_td("Horario");
         $t[] = get_td("Total");
         $t[] = get_td("FAQ");
@@ -972,7 +1165,8 @@ if (!function_exists('invierte_date_time')) {
 
         $t[] = $info_uso;
 
-        $t[] = "<tr style=\"background: #000;color: white;text-align: center!important;\">";
+        $t[] = "
+<tr style=\"background: #000;color: white;text-align: center!important;\">";
         $t[] = get_td("Total");
         $t[] = get_td($total_visitas);
         $t[] = get_td($total_faqs);
@@ -984,7 +1178,8 @@ if (!function_exists('invierte_date_time')) {
         $t[] = get_td($total_procesar_compra);
         $t[] = "</tr>";
 
-        $t = " <table class='table' >" . append($t) . "</table>";
+        $t = "
+<table class='table'>" . append($t) . "</table>";
         return $t;
 
     }

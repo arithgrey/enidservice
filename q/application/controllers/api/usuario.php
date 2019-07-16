@@ -604,7 +604,7 @@ class usuario extends REST_Controller
 			$paginacion = $this->app->paginacion($config_paginacion);
 			$data["paginacion"] = $paginacion;
 			$data["modo_edicion"] = 1;
-			return $this->load->view("equipo/miembros", $data);
+            $response =  format_miembros($data);
 		}
 		$this->response($response);
 
