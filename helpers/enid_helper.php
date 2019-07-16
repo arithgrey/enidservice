@@ -452,7 +452,7 @@ if (!function_exists('anchor_enid')) {
     }
 }
 if (!function_exists('get_td')) {
-    function get_td($val = '', $attributes = [])
+    function td($val = '', $attributes = [])
     {
 
         if (is_array($attributes)) {

@@ -855,9 +855,9 @@ if (!function_exists('invierte_date_time')) {
 
             $list .= "
 <tr>";
-            $list .= get_td($especificacion, ["class" => 'especificacion_servicio']);
-            $list .= get_td($nombre_servicio, $extra);
-            $list .= get_td($text_estatus, ["class" => 'text-center strong']);
+            $list .= td($especificacion, ["class" => 'especificacion_servicio']);
+            $list .= td($nombre_servicio, $extra);
+            $list .= td($text_estatus, ["class" => 'text-center strong']);
             $list .= "
 </tr>";
             $z++;

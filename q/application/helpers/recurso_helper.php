@@ -15,11 +15,11 @@ if (!function_exists('invierte_date_time')) {
             $id_recurso = $row["id_recurso"];
 
 
-            $tr[] = get_td($b . ".-");
+            $tr[] = td($b . ".-");
 
             if ($idperfil > 0) {
                 $tr[] =
-                    get_td(input(
+                    td(input(
                         [
                             "type" => 'checkbox',
                             "class" => 'perfil_recurso',
@@ -27,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
                             "checked" => true
                         ]));
             } else {
-                $tr[] = get_td(
+                $tr[] = td(
                     input([
                             "type" => 'checkbox',
                             "class" => 'perfil_recurso',
@@ -36,8 +36,8 @@ if (!function_exists('invierte_date_time')) {
                     ));
             }
 
-            $tr[] = get_td($row["nombre"]);
-            $tr[] = get_td(anchor_enid("Ver sitio",
+            $tr[] = td($row["nombre"]);
+            $tr[] = td(anchor_enid("Ver sitio",
                 [
                     "href" => $row["urlpaginaweb"],
                     "class" => 'blue_enid_background white ',

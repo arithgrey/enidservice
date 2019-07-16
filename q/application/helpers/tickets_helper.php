@@ -17,22 +17,22 @@ if (!function_exists('invierte_date_time')) {
 
         foreach ($solicitud_saldo as $row):
 
-            $response[] = tr(get_td(d("Folio # " . $row["id_solicitud"], ["class" => 'folio']), ["colspan" => "2"]));
+            $response[] = tr(td(d("Folio # " . $row["id_solicitud"], ["class" => 'folio']), ["colspan" => "2"]));
 
-            $y[] = get_td(
+            $y[] = td(
                 d(
                     span("SOLICITUD DE SALDO A" . $row["email_solicitado"], 'monto_solicitado')
                     ,
                     "desc_solicitud"
                 )
             );
-            $y[] = get_td($row["monto_solicitado"] . "MXN", ["class" => 'monto_solicitud_text']);
+            $y[] = td($row["monto_solicitado"] . "MXN", ["class" => 'monto_solicitud_text']);
 
             $response[] = tr(append($y));
 
 
             $r[] =
-                get_td(
+                td(
                     d(
                         span("SOLICITUD DE SALDO A" . $row["email_solicitado"], 'monto_solicitado')
                         ,
@@ -40,7 +40,7 @@ if (!function_exists('invierte_date_time')) {
                     )
                 );
 
-            $r[] = get_td($row["monto_solicitado"] . "MXN", ["class" => 'monto_solicitud_text']);
+            $r[] = td($row["monto_solicitado"] . "MXN", ["class" => 'monto_solicitud_text']);
 
 
             $response[] = tr(append($r));

@@ -31,8 +31,8 @@ if (!function_exists('invierte_date_time')) {
                         "termino_asociado" => $termino_asociado,
                         "type" => 'checkbox'
                     ]);
-                $r[] = get_td("<input " . $attr . " " . $extra_seleccion . ">");
-                $r[] = get_td(strtoupper($privacidad));
+                $r[] = td("<input " . $attr . " " . $extra_seleccion . ">");
+                $r[] = td(strtoupper($privacidad));
                 $r[] = "</tr>";
 
             }

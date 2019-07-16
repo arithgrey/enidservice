@@ -339,11 +339,11 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = form_close();
             $r[] = "<table>";
-            $r[] = get_td(place('primer_nivel'));
-            $r[] = get_td(place('segundo_nivel'));
-            $r[] = get_td(place('tercer_nivel'));
-            $r[] = get_td(place('cuarto_nivel'));
-            $r[] = get_td(place('quinto_nivel'));
+            $r[] = td(place('primer_nivel'));
+            $r[] = td(place('segundo_nivel'));
+            $r[] = td(place('tercer_nivel'));
+            $r[] = td(place('cuarto_nivel'));
+            $r[] = td(place('quinto_nivel'));
             $r[] = "</table>";
 
             return append($r);

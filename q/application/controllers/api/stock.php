@@ -130,9 +130,9 @@ class Stock extends REST_Controller
 
 		$table = "<table  border='1' class='text-center' >";
 		$table .= "<tr>";
-		$table .= get_td("FECHA");
-		$table .= get_td("SOLICITUDES");
-		$table .= get_td("VENTAS");
+		$table .= td("FECHA");
+		$table .= td("SOLICITUDES");
+		$table .= td("VENTAS");
 		$table .= "</tr>";
 
 		$promedio = [];
@@ -148,10 +148,10 @@ class Stock extends REST_Controller
 
 			$class = ($pedidos_contra_entrega == $solicitud) ? "caso_exacto" : "";
 			$t = "<tr class='" . $class . "'>";
-			$t .= get_td($fecha_contra_entrega);
+			$t .= td($fecha_contra_entrega);
 			$ventas_efectivas = $this->get_ventas_fecha($fecha_contra_entrega, $entregas);
-			$t .= get_td($solicitud);
-			$t .= get_td($ventas_efectivas);
+			$t .= td($solicitud);
+			$t .= td($ventas_efectivas);
 
 			$t .= "</tr>";
 
@@ -219,13 +219,13 @@ class Stock extends REST_Controller
 		$table = "<table border='1' class='text-center'>";
 
 		$table .= "<tr>";
-		$table .= get_td("SOLICITUDES " . $pedidos_contra_entrega, ["colspan" => 3]);
+		$table .= td("SOLICITUDES " . $pedidos_contra_entrega, ["colspan" => 3]);
 		$table .= "</tr>";
 
 		$table .= "<tr>";
-		$table .= get_td("CASOS");
-		$table .= get_td("PORCENTAJE");
-		$table .= get_td("COMPRAS");
+		$table .= td("CASOS");
+		$table .= td("PORCENTAJE");
+		$table .= td("COMPRAS");
 		$table .= "</tr>";
 
 		$totales = [];
@@ -233,9 +233,9 @@ class Stock extends REST_Controller
 		foreach ($media as $key => $value) {
 			$totales[$z] = ["casos" => $value, "compras" => $key];
 			$table .= "<tr>";
-			$table .= get_td($value);
-			$table .= get_td(porcentaje_total($value, $total) . "%");
-			$table .= get_td($key);
+			$table .= td($value);
+			$table .= td(porcentaje_total($value, $total) . "%");
+			$table .= td($key);
 			$table .= "</tr>";
 			$z++;
 		}

@@ -2,6 +2,444 @@
 
 if (!function_exists('invierte_date_time')) {
 
+    function actividad_mail_marketing($data)
+    {
+
+        $email =  $data["email"];
+
+        $seccion_fechas = "";
+        $seccion_envios = "";
+        $seccion_solicitudes = "";
+        $seccion_ventas = "";
+
+        $total_envios = 0;
+        $total_solicitudes = 0;
+        $total_ventas = 0;
+        $num_dias = 0;
+        $flag = 0;
+        $dias = ["", 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+
+        $l_fechas = [];
+        $l_fecha_texto = [];
+        $l_envios = [];
+        $l_solicitudes = [];
+        $l_ventas = [];
+
+        foreach ($email as $row) {
+            $fecha_texto = $dias[date('N', strtotime($row["fecha_registro"]))];
+            array_push($l_fechas, $row["fecha_registro"]);
+            array_push($l_envios, $row["envios"]);
+            array_push($l_solicitudes, $row["solicitudes"]);
+            array_push($l_ventas, $row["ventas"]);
+            array_push($l_fecha_texto, $fecha_texto);
+
+
+        }
+
+        $a = 0;
+        foreach ($l_fechas as $row) {
+
+            $fecha_registro_texto = $l_fecha_texto[$a];
+            $fecha_registro = $l_fechas[$a];
+            $ft = $fecha_registro_texto . "" . $fecha_registro;
+
+            $envios = valida_num($l_envios[$a]);
+            $solicitudes = valida_num($l_solicitudes[$a]);
+            $ventas = valida_num($l_ventas[$a]);
+
+            $total_envios = $total_envios + $envios;
+            $total_solicitudes = $total_solicitudes + $solicitudes;
+            $total_ventas = $total_ventas + $ventas;
+            $num_dias++;
+            $a++;
+
+            $seccion_fechas .= td($ft);
+            $seccion_envios .= td($envios);
+            $seccion_solicitudes .= td($solicitudes);
+            $seccion_ventas .= td($ventas);
+
+        }
+
+
+        $a[] = td("Periodo");
+        $a[] = td("Totales  Días " . $num_dias);
+        $a[] = $seccion_fechas;
+
+        $response[] = tr(append($a));
+
+        $b[] = td("Envios");
+        $b[] = td($total_envios);
+        $b[] = $seccion_envios;
+        $response[] = tr(append($b));
+
+        $c[] = td("Solicitudes");
+        $c[] = td($total_solicitudes);
+        $c[] = $seccion_solicitudes;
+
+        $response[] = tr(append($c));
+
+        $d[] = td("Ventas");
+        $d[] = td($total_ventas);
+        $d[] = $seccion_ventas;
+        $response[] = tr(append($d));
+
+        return tb(append($response), ["border" => "1", "class" => "text-center"]);
+
+
+    }
+
+    function metricas($data)
+    {
+
+        $envio_usuario = $data["envio_usuario"];
+        $actividad_enid_service = $data["actividad_enid_service"];
+
+        $ext_periodo = ["style" => 'background:#02316f;color:white!important;'];
+        $ext_valoraciones = ["style" => 'background: #000;color: white !important;text-align: center;'];
+
+        $accesos = "";
+        $transacciones = "";
+        $contacto = "";
+        $labores_resueltas = "";
+        $total_valoraciones = "";
+
+        $fecha_inicio = $envio_usuario["fecha_inicio"];
+        $fecha_termino = $envio_usuario["fecha_termino"];
+        $conversaciones = "";
+        $lista_deseos = "";
+
+
+        foreach ($actividad_enid_service as $row) {
+
+
+            $ext_td_usablidad = "title ='Personas que acceden al sistema para emplearlo' ";
+            $table = "<table width='100%' border=1  style='text-align: center;'>";
+            $table .= "<tr>";
+            $table .= td("Usuarios", "class='strong' ");
+            $table .= td("Servicios postulados", "class='strong' ");
+            $table .= td("Ingresos a Enid", $ext_td_usablidad);
+            $table .= "</tr>";
+            $table .= "<tr>";
+            $table .= td($row["usuarios"], [
+                "class" => 'usuarios',
+                "fecha_inicio" => $fecha_inicio,
+                "fecha_termino" => $fecha_termino,
+                "href" => '#reporte',
+                "data-toggle" => 'tab',
+                "title" => 'Personas que se registran en el sistema'
+            ]);
+            $table .= td($row["servicios_creados"], [
+                "class" => 'servicios',
+                "fecha_inicio" => $fecha_inicio,
+                "fecha_termino" => $fecha_termino,
+                "href" => '#reporte',
+                "data-toggle" => 'tab',
+                "title" => 'Servicios postulados'
+            ]);
+            $table .= td($row["accesos_area_cliente"],
+                ["title" => 'Personas que acceden a Enid Service desde su área de cliente']);
+            $table .= "</tr>";
+            $table .= "</table>";
+            $nuevos_usuarios = td($table);
+
+
+            $accesos_enid = $row["accesos"];
+            $accesos_a_intento_compra = $row["accesos_a_intento_compra"];
+            $accesos_contacto = $row["accesos_contacto"];
+            $contacto = $row["contacto"];
+
+            $table = "<table width='100%' border=1  style='text-align: center;'>";
+            $table .= "<tr>";
+            $table .= td("Total");
+            $table .= td("Acesso a procesar compra");
+            $table .= td("Accesos a contacto");
+            $table .= td("Mensajes recibidos");
+            $table .= "</tr>";
+            $table .= "<tr>";
+            $table .= td($accesos_enid);
+            $table .= td($accesos_a_intento_compra);
+            $table .= td($accesos_contacto);
+            $table .= td($contacto, [
+                "class" => 'contactos',
+                "fecha_inicio" => $fecha_inicio,
+                "fecha_termino" => $fecha_termino,
+                "href" => '#reporte',
+                "data-toggle" => 'tab',
+                "title" => 'Mensajes enviados por personas a Enid Service'
+            ]);
+            $table .= "</tr>";
+            $table .= "</table>";
+            $accesos .= td($table);
+
+
+            if (count($row["ventas"]) > 0) {
+
+
+                $ventas = $row["ventas"][0];
+                $num_transacciones = $ventas["total"];
+                $compras_efectivas = $ventas["compras_efectivas"];
+                $solicitudes = $ventas["solicitudes"];
+                $envios = $ventas["envios"];
+                $cancelaciones = $ventas["cancelaciones"];
+
+                $table = "<table width='100%' border=1  style='text-align: center;'>";
+                $table .= "<tr>";
+                $table .= td("Transacciones");
+                $table .= td("Ventas");
+                $table .= td("Cancelaciones");
+                $table .= td("Solicitudes");
+                $table .= td("Envíos");
+                $table .= "</tr>";
+                $table .= "<tr>";
+                $table .= td($num_transacciones);
+                $table .= td($compras_efectivas, [
+
+                    "class" => 'solicitudes',
+                    "fecha_inicio" => $fecha_inicio,
+                    "fecha_termino" => $fecha_termino,
+                    "tipo_compra" => '9',
+                    "href" => '#reporte',
+                    "data-toggle" => 'tab',
+                    "title" => 'COMPRAS SATISFACTORIAS'
+                ]);
+                $table .= td($cancelaciones, [
+                    "class" => 'solicitudes',
+                    "fecha_inicio" => $fecha_inicio,
+                    "fecha_termino" => $fecha_termino,
+                    "tipo_compra" => '10',
+                    "href" => '#reporte',
+                    "data-toggle" => 'tab',
+                    "title" => 'Solicitudes de compra'
+                ]);
+                $table .= td($solicitudes, [
+                    "class" => 'solicitudes',
+                    "fecha_inicio" => $fecha_inicio,
+                    "fecha_termino" => $fecha_termino,
+                    "tipo_compra" => '6',
+                    "href" => '#reporte',
+                    "data-toggle" => 'tab',
+                    "title" => 'Solicitudes de compra'
+                ]);
+                $table .= td($envios, [
+                    "class" => 'solicitudes',
+                    "fecha_inicio" => $fecha_inicio,
+                    "fecha_termino" => $fecha_termino,
+                    "tipo_compra" => '7',
+                    "href" => '#reporte',
+                    "data-toggle" => 'tab',
+                    "title" => 'Se han enviado'
+                ]);
+                $table .= "</tr>";
+                $table .= "</table>";
+                $transacciones .= td($table);
+
+
+            } else {
+
+                $table = "<table width='100%' border=1  style='text-align: center;'>";
+                $table .= "<tr>";
+                $table .= td("Transacciones");
+                $table .= td("Ventas");
+                $table .= td("Cancelaciones");
+                $table .= td("Solicitudes");
+                $table .= td("Envíos");
+                $table .= "</tr>";
+                $table .= "<tr>";
+                $table .= td(0);
+                $table .= td(0);
+                $table .= td(0);
+                $table .= td(0);
+                $table .= td(0);
+                $table .= "</tr>";
+                $table .= "</table>";
+                $transacciones .= td($table);
+
+            }
+
+            $contacto .= td($row["contacto"]);
+
+            $table = "<table width='100%' border=1  style='text-align: center;'>";
+            $table .= "<tr>";
+            $table .= td("Labores");
+            $table .= td("Prospección email");
+            $table .= "</tr>";
+            $table .= "<tr>";
+            $table .= td(
+                anchor_enid($row["labores_resueltas"],
+                    [
+                        "href" => '../desarrollo/',
+                        "target" => '_blank',
+                        "class" => 'strong',
+                        "style" => 'color:blue !important;'
+                    ]));
+
+
+            if ($row["correos"] > 0) {
+                $table .= td($row["correos"]);
+            } else {
+                $table .= td(0);
+            }
+
+
+            $table .= "</tr>";
+            $table .= "</table>";
+            $labores_resueltas .= td($table);
+
+            $productos_valorados =
+                ($row["valoraciones_productos"] > 0) ? $row["valoraciones_productos"][0]["productos_valorados"] : 0;
+
+            if (es_data($row["valoraciones"])) {
+
+
+                $valoraciones = $row["valoraciones"][0];
+                $total_val = $valoraciones["num_valoraciones"];
+                $si_recomendarian = $valoraciones["si_recomendarian"];
+                $no_recomendarian = $valoraciones["no_recomendarian"];
+
+
+                $ext_si_recomendaria = ["title" => "Personas que SI recomendarían la compra  " . $si_recomendarian];
+                $ext_no_recomendaria = ["title" => "Personas que NO recondarían la compra " . $no_recomendarian];
+
+                $porcentaje_si = porcentaje($total_val, intval($si_recomendarian));
+                $porcentaje_no = porcentaje($total_val, intval($no_recomendarian));
+
+                $table = "<table width='100%' border=1  style='text-align: center;'>";
+                $table .= "<tr>";
+                $table .= td("Valoraciones");
+                $table .= td("Productos distintos valorados");
+                $table .= td("Recomendarian");
+                $table .= td("NO recomendarían");
+
+                $table .= "</tr>";
+                $table .= "<tr>";
+                $table .= td($total_val, [
+                    "class" => 'valoraciones',
+                    "fecha_inicio" => $fecha_inicio,
+                    "fecha_termino" => $fecha_termino,
+                    "href" => '#reporte',
+                    "data-toggle" => 'tab',
+                    "title" => 'Valoraciones que se han hecho en Enid Service'
+                ]);
+                $table .= td($productos_valorados, [
+                    "class" => 'productos_valorados_distintos',
+                    "fecha_inicio" => $fecha_inicio,
+                    "fecha_termino" => $fecha_termino,
+                    "href" => '#reporte',
+                    "data-toggle" => 'tab',
+                    "title" => 'Productos distintos valorados'
+                ]);
+                $table .= td($porcentaje_si . "%", $ext_si_recomendaria);
+                $table .= td($porcentaje_no . "%", $ext_no_recomendaria);
+                $table .= "</tr>";
+                $table .= "</table>";
+
+                $total_valoraciones .= td($table);
+
+            } else {
+
+
+                $table = "<table width='100%' border=1>";
+                $table .= "<tr>";
+                $table .= td("Total");
+                $table .= td("Productos distintos valorados");
+                $table .= td("Recomendarian");
+                $table .= td("NO recomendarían");
+
+                $table .= "</tr>";
+                $table .= "<tr>";
+                $table .= td("0");
+                $table .= td("0");
+                $table .= td("0%");
+                $table .= td("0%");
+                $table .= "</tr>";
+                $table .= "</table>";
+
+                $total_valoraciones .= td($table);
+
+            }
+
+
+            if (es_data($row["lista_deseo"])) {
+
+                $ext_lista_deseos = " 
+				fecha_inicio = '" . $fecha_inicio . "' 
+				fecha_termino ='" . $fecha_termino . "' 
+				class='lista_deseos lista_deseos_num'
+				href='#reporte' data-toggle='tab' ";
+
+                $num_lista_deseos = $row["lista_deseo"][0]["num"];
+                $table = "<table width='100%' border=1  style='text-align: center;'>";
+                $table .= "<tr>";
+                $table .= td("Agregados a la lista");
+                $table .= "</tr>";
+                $table .= "<tr>";
+                $table .= td($num_lista_deseos, $ext_lista_deseos);
+                $table .= "</tr>";
+                $table .= "</table>";
+                $lista_deseos .= td($table);
+
+            } else {
+
+                $table = "<table width='100%' border=1  style='text-align: center;'>";
+                $table .= "<tr>";
+                $table .= td("Agregados a la lista");
+                $table .= "</tr>";
+                $table .= "<tr>";
+                $table .= td(0);
+                $table .= "</tr>";
+                $table .= "</table>";
+                $lista_deseos .= td($table);
+            }
+
+        }
+
+        $a[] = td("PERIODO", $ext_periodo);
+        $a[] = td($fecha_inicio . " al " . $fecha_termino, $ext_periodo);
+
+
+        $b[] = td("USUARIOS NUEVOS", ["style" => 'background: #2372e9;color: white !important;text-align: center;']);
+        $b[] = $nuevos_usuarios;
+
+        $c[] = td("CONVERSACIONES", ["style" => 'background: #006475;color: white !important;text-align: center;']);
+        $c[] = $conversaciones;
+
+        $d[] = td("TRANSACCIONES", ["style" => 'background: #002763;color: white !important;text-align: center;']);
+        $d[] = $transacciones;
+
+        $e[] = td("VALORACIONES", $ext_valoraciones);
+        $e[] = $total_valoraciones;
+
+        $f[] = td("VALORACIONES", $ext_valoraciones);
+        $f[] = $total_valoraciones;
+
+
+        $g[] = td("ACCESOS", ["style" => 'background: #00b7ff;color: white !important;text-align:center;']);
+        $g[] = $accesos;
+
+        $h[] = td("CONTACTO", ["style" => 'text-align: center;']);
+        $h[] = $contacto;
+
+        $i[] = td("LABORES RESUELTAS", ["style" => 'text-align: center;background: #1c404e;color: white !important;']);
+        $i[] = $labores_resueltas;
+
+        $j[] = td("LISTA DE DESEOS", ["style" => 'text-align: center;background: #ff0048;color: white !important;']);
+        $j[] = $lista_deseos;
+
+
+        $response[] = tr(append($a));
+        $response[] = tr(append($b));
+        $response[] = tr(append($c));
+        $response[] = tr(append($d));
+        $response[] = tr(append($e));
+        $response[] = tr(append($f));
+        $response[] = tr(append($g));
+        $response[] = tr(append($h));
+        $response[] = tr(append($i));
+        $response[] = tr(append($j));
+        return tb(append($response), ["width" => "100%", "border" => "1"]);
+
+
+    }
 
     function format_miembros($data)
     {
@@ -17,7 +455,7 @@ if (!function_exists('invierte_date_time')) {
 
             $id_usuario = $row["id_usuario"];
             $nombre = $row["nombre"];
-            
+
             $apellido_paterno = $row["apellido_paterno"];
             $apellido_materno = $row["apellido_materno"];
             $afiliado = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
@@ -77,8 +515,8 @@ if (!function_exists('invierte_date_time')) {
         $style = [];
         $style_terminos = ["style" => 'background:#024d8d;color:white;'];
         $style_solicitudes = ["style" => 'font-size:.8em;background:#ea330c;color:white;'];
-        $lista_fechas_text = get_td("Periodo", $style);
-        $lista_fechas_text .= get_td("Total", $style);
+        $lista_fechas_text = td("Periodo", $style);
+        $lista_fechas_text .= td("Total", $style);
         $lista_solicitudes = "";
 
         $lista_terminos = "";
@@ -87,13 +525,13 @@ if (!function_exists('invierte_date_time')) {
         foreach ($info_global["lista_fechas"] as $row) {
 
             $fecha = $row["fecha"];
-            $lista_fechas_text .= get_td($fecha, $style);
+            $lista_fechas_text .= td($fecha, $style);
             $valor_solicitudes = get_valor_fecha_solicitudes($info_global["solicitudes"], $fecha);
             $totales_solicitudes = $totales_solicitudes + $valor_solicitudes;
-            $lista_solicitudes .= get_td($valor_solicitudes, $style);
+            $lista_solicitudes .= td($valor_solicitudes, $style);
             $valor_terminos = tareas_realizadas($info_global["terminos"], $fecha);
             $totales_realizadas = $totales_realizadas + $valor_terminos;
-            $lista_terminos .= get_td($valor_terminos, $style);
+            $lista_terminos .= td($valor_terminos, $style);
 
         }
 
@@ -102,14 +540,14 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = tr($lista_fechas_text);
 
-        $sl[] = get_td("Solicitudes", $style_solicitudes);
-        $sl[] = get_td($totales_solicitudes, $style_solicitudes);
+        $sl[] = td("Solicitudes", $style_solicitudes);
+        $sl[] = td($totales_solicitudes, $style_solicitudes);
         $sl[] = $lista_solicitudes;
 
         $r[] = tr(append($sl));
 
-        $tr[] = get_td("Términos", $style_terminos);
-        $tr[] = get_td($totales_realizadas, $style_terminos);
+        $tr[] = td("Términos", $style_terminos);
+        $tr[] = td($totales_realizadas, $style_terminos);
         $tr[] = $lista_terminos;
 
         $r[] = tr(append($tr));
@@ -134,7 +572,7 @@ if (!function_exists('invierte_date_time')) {
             $franja_h = $row;
 
             $list[] = "<tr>";
-            $list[] = get_td($franja_h);
+            $list[] = td($franja_h);
 
             $total_tareas = 0;
             $lista2 = "";
@@ -143,9 +581,9 @@ if (!function_exists('invierte_date_time')) {
                 $fecha_actual = $row;
                 $tareas_realizadas = valida_tareas_fecha($info_global, $fecha_actual, $franja_h);
                 $total_tareas = $total_tareas + $tareas_realizadas;
-                $lista2 .= get_td($tareas_realizadas);
+                $lista2 .= td($tareas_realizadas);
             }
-            $list[] = get_td($total_tareas);
+            $list[] = td($total_tareas);
             $list[] = $lista2;
             $list[] = "</tr>";
 
@@ -170,17 +608,17 @@ if (!function_exists('invierte_date_time')) {
 
             $lista[] = "
 <tr>";
-            $lista[] = get_td($franja_horaria[$a]);
+            $lista[] = td($franja_horaria[$a]);
             $lista[] = get_comparativas_metricas($franja_horaria[$a], $info_global);
             $lista[] = "
 </tr>";
         }
 
         $response[] = d("Comparativa atención al cliente y tareas resueltas", "blue_enid_background white pading_10");
-        $t[] = get_td("Franja horaria");
-        $t[] = get_td("Hace 7 días");
-        $t[] = get_td("Ayer");
-        $t[] = get_td("Hoy");
+        $t[] = td("Franja horaria");
+        $t[] = td("Hace 7 días");
+        $t[] = td("Ayer");
+        $t[] = td("Hoy");
         tr($t, 'f - enid');
         $response[] = "
 <table>";
@@ -302,7 +740,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $ext = menorque($anterior, $nuevo, 'style = "background:#ff1b00!important; color:white!important;" ');
-            return get_td($nuevo, $ext . " " . $extra);
+            return td($nuevo, $ext . " " . $extra);
         }
     }
 
@@ -334,13 +772,13 @@ if (!function_exists('invierte_date_time')) {
             foreach ($lista_fechas as $row) {
                 if ($b < 1) {
 
-                    $fechas .= get_td("Horario", $estilos2);
-                    $fechas .= get_td("Total", $estilos2);
+                    $fechas .= td("Horario", $estilos2);
+                    $fechas .= td("Total", $estilos2);
                     $b++;
                 }
                 $fecha_text = $dias[date('N', strtotime($row))];
                 $text_fecha = $fecha_text . "" . $row;
-                $fechas .= get_td($text_fecha, $estilos2);
+                $fechas .= td($text_fecha, $estilos2);
             }
             $fechas .= "
 </tr>";
@@ -1135,11 +1573,11 @@ if (!function_exists('invierte_date_time')) {
 
             $info_uso .= '
     < tr  ' . $style . ' > ';
-            $info_uso .= get_td($f_registro);
+            $info_uso .= td($f_registro);
             $info_uso .= $total_registrado;
             $info_uso .= $faq;
             $info_uso .= $formas_pago;
-            $info_uso .= get_td($contacto);
+            $info_uso .= td($contacto);
             $info_uso .= $sobre_enid;
             $info_uso .= $afiliados;
             $info_uso .= $nosotros;
@@ -1152,30 +1590,30 @@ if (!function_exists('invierte_date_time')) {
         $t = [];
         $t[] = "
 <tr style=\"background: #000;color: white;text-align: center!important;\">";
-        $t[] = get_td("Horario");
-        $t[] = get_td("Total");
-        $t[] = get_td("FAQ");
-        $t[] = get_td("Formas de pago");
-        $t[] = get_td("Contacto");
-        $t[] = get_td("Sobre Enid");
-        $t[] = get_td("Afiliados");
-        $t[] = get_td("Home");
-        $t[] = get_td("Procesar compra");
+        $t[] = td("Horario");
+        $t[] = td("Total");
+        $t[] = td("FAQ");
+        $t[] = td("Formas de pago");
+        $t[] = td("Contacto");
+        $t[] = td("Sobre Enid");
+        $t[] = td("Afiliados");
+        $t[] = td("Home");
+        $t[] = td("Procesar compra");
         $t[] = "</tr>";
 
         $t[] = $info_uso;
 
         $t[] = "
 <tr style=\"background: #000;color: white;text-align: center!important;\">";
-        $t[] = get_td("Total");
-        $t[] = get_td($total_visitas);
-        $t[] = get_td($total_faqs);
-        $t[] = get_td($total_formas_pago);
-        $t[] = get_td($total_contacto);
-        $t[] = get_td($total_principal);
-        $t[] = get_td($total_afiliado);
-        $t[] = get_td($total_home);
-        $t[] = get_td($total_procesar_compra);
+        $t[] = td("Total");
+        $t[] = td($total_visitas);
+        $t[] = td($total_faqs);
+        $t[] = td($total_formas_pago);
+        $t[] = td($total_contacto);
+        $t[] = td($total_principal);
+        $t[] = td($total_afiliado);
+        $t[] = td($total_home);
+        $t[] = td($total_procesar_compra);
         $t[] = "</tr>";
 
         $t = "

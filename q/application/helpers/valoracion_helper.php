@@ -352,7 +352,7 @@ if (!function_exists('invierte_date_time')) {
             $config = ["class" => 'info_comentarios'];
             $parte_promedio .= "<table>
                             <tr>
-                              " . get_td($comentarios, $config) . "
+                              " . td($comentarios, $config) . "
                             </tr>
                           </table>";
 
@@ -429,11 +429,11 @@ if (!function_exists('invierte_date_time')) {
                             <div class='contenedor_utilidad'>
                               <table>
                                 <tr>
-                                  " . get_td(h("¿Te ha resultado útil?", 5, "letter-spacing-5 strong")) . "
-                                  " . get_td($btn_es_util . $btn_no_util) . "
+                                  " . td(h("¿Te ha resultado útil?", 5, "letter-spacing-5 strong")) . "
+                                  " . td($btn_es_util . $btn_no_util) . "
                                 </tr>
                                 <tr>
-                                    " . get_td($texto_valoracion) . "
+                                    " . td($texto_valoracion) . "
                                 </tr>
                               </table>
                             </div>
