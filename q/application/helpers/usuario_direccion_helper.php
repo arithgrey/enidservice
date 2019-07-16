@@ -2,6 +2,228 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    function format_domicilio_resumen($data)
+    {
+
+        $info_envio_direccion = $data["info_envio_direccion"];
+
+        $r[] = d(
+            anchor_enid(icon("fa fa-pencil"),
+                ["class" => "a_enid_blue editar_direccion_persona"]
+            )
+            ,
+            "text-right"
+            ,
+            1
+        );
+        $r[] = d(
+            get_format_domicilio($info_envio_direccion)
+        );
+
+        return append($r);
+
+    }
+
+    function format_direccion_envio($data)
+    {
+
+
+        $param = $data["param"];
+        $id_recibo = $param["id_recibo"];
+        $info_envio_direccion = $data["info_envio_direccion"];
+        $registro_direccion = $data["registro_direccion"];
+        $info_usuario = $data["info_usuario"];
+        $id_usuario = $data["id_usuario"];
+
+
+        $calle = "";
+        $entre_calles = "";
+        $numero_exterior = "";
+        $numero_interior = "";
+        $cp = "";
+        $asentamiento = "";
+        $municipio = "";
+        $estado = "";
+        $flag_existe_direccion_previa = 0;
+        $direccion_visible = "style='display:none;'";
+        $nombre_receptor = "";
+        $telefono_receptor = "";
+
+        foreach ($info_envio_direccion as $row) {
+
+            $direccion = $row["direccion"];
+            $calle = $row["calle"];
+            $entre_calles = $row["entre_calles"];
+            $numero_exterior = $row["numero_exterior"];
+            $numero_interior = $row["numero_interior"];
+            $cp = $row["cp"];
+            $asentamiento = $row["asentamiento"];
+            $municipio = $row["municipio"];
+            $estado = $row["estado"];
+            $flag_existe_direccion_previa++;
+            $direccion_visible = "";
+            $id_codigo_postal = $row["id_codigo_postal"];
+            $pais = "";
+            $nombre_receptor = $row["nombre_receptor"];
+            $telefono_receptor = $row["telefono_receptor"];
+        }
+
+
+        if ($registro_direccion == 0) {
+
+            $nombre = get_campo($info_usuario, "nombre");
+            $apellido_paterno = get_campo($info_usuario, "apellido_paterno");
+            $apellido_materno = get_campo($info_usuario, "apellido_materno");
+            $nombre_receptor = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
+            $telefono_receptor = get_campo($info_usuario, "tel_contacto");
+        }
+
+
+        $r[] =
+            d(btw(
+                h("DIRECCIÓN DE ENVÍO", 2, "letter-spacing-5")
+                ,
+                get_format_direccion_envio_pedido(
+                    $nombre_receptor,
+                    $telefono_receptor,
+                    $cp,
+                    $id_usuario,
+                    $entre_calles,
+                    $calle,
+                    $numero_exterior,
+                    $numero_interior,
+                    $direccion_visible,
+                    $asentamiento,
+                    $municipio,
+                    $estado,
+                    $id_recibo
+                )
+                ,
+                "contenedor_informacion_envio top_30"
+
+            ), 8, 1);
+
+
+        return append($r);
+    }
+
+    function format_direccion($data)
+    {
+
+        $info_envio_direccion = $data["info_envio_direccion"];
+        $param = $data["param"];
+
+        $calle = "";
+        $entre_calles = "";
+        $numero_exterior = "";
+        $numero_interior = "";
+        $cp = "";
+        $asentamiento = "";
+        $municipio = "";
+        $estado = "";
+        $flag_existe_direccion_previa = 0;
+        $pais = "";
+        $direccion_visible = "display:none;";
+        $id_pais = 0;
+        foreach ($info_envio_direccion as $row) {
+
+
+            $calle = $row["calle"];
+            $entre_calles = $row["entre_calles"];
+            $numero_exterior = $row["numero_exterior"];
+            $numero_interior = $row["numero_interior"];
+            $cp = $row["cp"];
+            $asentamiento = $row["asentamiento"];
+            $municipio = $row["municipio"];
+            $estado = $row["estado"];
+            $flag_existe_direccion_previa++;
+            $pais = $row["pais"];
+            $id_pais = $row["id_pais"];
+        }
+
+
+        $response[] = form_open("", ["class" => "form-horizontal form_direccion_envio"]);
+        $response[] = get_parte_direccion_envio($cp, $param, $calle, $entre_calles, $numero_exterior, $numero_interior);
+        $r[] = btw(
+
+            d("Colonia", ["class" => "label-off", "for" => "dwfrm_profile_address_colony"])
+            ,
+            d(input([
+                "type" => "text",
+                "name" => "colonia",
+                "value" => $asentamiento,
+                "readonly" => true
+            ]), ["class" => "place_colonias_info"])
+            ,
+            "value"
+        );
+        $r[] = place("place_asentamiento");
+        $r[] = d(
+            btw(
+                d("Delegación o Municipio", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
+                ,
+                d(input([
+                    "type" => "text",
+                    "name" => "delegacion",
+                    "value" => $municipio,
+                    "readonly" => "true"
+                ]), ["class" => "place_delegaciones_info"])
+                ,
+                "value"
+
+
+            ), "district delegacion_c");
+
+
+        $r[] = d(btw(
+            d("Estado", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
+            ,
+            d(
+                input(
+                    [
+                        "type" => "text",
+                        "name" => "estado",
+                        "value" => $estado,
+                        "readonly" => "true"
+                    ]
+                ),
+                ["class" => "place_estado_info"]
+
+            )
+            ,
+            "value"
+        ), " district  estado_c");
+
+        $r[] = btw(
+            d("País", ["class" => "label-off", "for" => "dwfrm_profile_address_district"]),
+            $pais,
+            "district pais_c"
+        );
+        $r[] = input_hidden([
+            "name" => "pais",
+            "value" => $id_pais
+        ]);
+        $z[] = d("Esta es mi dirección principal", "strong");
+
+        $opt[] = array(
+            "text" => "SI",
+            "val" => 1
+        );
+        $opt[] = array(
+            "text" => "NO",
+            "val" => 0
+        );
+        $z[] = create_select($opt, "direccion_principal", "direccion_principal", "direccion_principal", "text", "val");
+        $r[] = d(append($z), "direccion_principal_c");
+        $r[] = btn("Registrar dirección", ["class" => "btn text_btn_direccion_envio"]);
+        $response[] = d(append($r), ["style" => $direccion_visible, "class" => "parte_colonia_delegacion"]);
+        $response[] = form_close();
+        $f[] = d(text_icon('fa fa-bus', "Dirección de envio "));
+        $f[] = d(append($response), ["id" => 'modificar_direccion_seccion', "class" => "contenedor_form_envio"]);
+        return append($f);
+
+    }
+
     function get_format_direccion_envio_pedido($nombre_receptor,
                                                $telefono_receptor,
                                                $cp,

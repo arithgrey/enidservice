@@ -1090,7 +1090,7 @@ class Servicio extends REST_Controller
         $servicios = $this->serviciosmodel->busqueda($param);
         $servicios += [
             "url_request" => get_url_request(""),
-            "num_servicios" =>   $servicios["total_busqueda"],
+            "num_servicios" => $servicios["total_busqueda"],
         ];
         if (array_key_exists("es_empresa", $param) != false) {
             $this->add_gamificacion_search($param);
@@ -1221,7 +1221,7 @@ class Servicio extends REST_Controller
             $servicios = $this->serviciosmodel->busqueda_producto($param);
 
             $response = [];
-            if (es_data($servicios) && array_key_exists("servicio" , $servicios)) {
+            if (es_data($servicios) && array_key_exists("servicio", $servicios)) {
                 $response = $this->agrega_costo_envio($servicios["servicio"]);
             }
 
@@ -1266,11 +1266,11 @@ class Servicio extends REST_Controller
                 "deseado"
             ];
 
-            if($param["c"] < 0 ){
+            if ($param["c"] < 0) {
 
                 $response = $this->serviciosmodel->get($params, ["id_servicio" => $id_servicio]);
 
-            }else{
+            } else {
 
                 $response = $this->serviciosmodel->get([], ["id_servicio" => $id_servicio]);
 
@@ -1292,7 +1292,8 @@ class Servicio extends REST_Controller
                 case 1:
                     $data["servicios"] = $response;
                     $data["css"] = ["productos_periodo.css"];
-                    return $this->load->view("producto/simple", $data);
+                    $response = format_simple($data);
+
 
                     break;
 
@@ -1720,13 +1721,15 @@ class Servicio extends REST_Controller
         $api = "cobranza/calcula_costo_envio/format/json/";
         return $this->app->api($api, $q);
     }
-    function restablecer_PUT(){
 
-        $param =  $this->put();
-        $response =  false;
-        if (if_ext($param , "id")){
+    function restablecer_PUT()
+    {
 
-            $response =  $this->serviciosmodel->restablecer($param["id"]);
+        $param = $this->put();
+        $response = false;
+        if (if_ext($param, "id")) {
+
+            $response = $this->serviciosmodel->restablecer($param["id"]);
 
         }
         $this->response($response);

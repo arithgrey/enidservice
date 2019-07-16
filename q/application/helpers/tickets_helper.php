@@ -2,6 +2,60 @@
 if (!function_exists('invierte_date_time')) {
 
 
+
+    function solicitudes_saldo($data)
+    {
+
+
+        $solicitud_saldo = $data["solicitud_saldo"];
+
+        $_response[] = d(h("ULTIMOS MOVIMIENTOS", 1, ["class" => "titulo_enid"]), ["class" => "jumbotron"]);
+        if (count($solicitud_saldo) > 0):
+            $_response[] = d("SOLICITUDES DE SALDO A TUS AMIGOS", 'titulo_enid_sm_sm');
+        endif;
+
+
+        foreach ($solicitud_saldo as $row):
+
+            $response[] = tr(get_td(d("Folio # " . $row["id_solicitud"], ["class" => 'folio']), ["colspan" => "2"]));
+
+            $y[] = get_td(
+                d(
+                    span("SOLICITUD DE SALDO A" . $row["email_solicitado"], 'monto_solicitado')
+                    ,
+                    "desc_solicitud"
+                )
+            );
+            $y[] = get_td($row["monto_solicitado"] . "MXN", ["class" => 'monto_solicitud_text']);
+
+            $response[] = tr(append($y));
+
+
+            $r[] =
+                get_td(
+                    d(
+                        span("SOLICITUD DE SALDO A" . $row["email_solicitado"], 'monto_solicitado')
+                        ,
+                        "desc_solicitud"
+                    )
+                );
+
+            $r[] = get_td($row["monto_solicitado"] . "MXN", ["class" => 'monto_solicitud_text']);
+
+
+            $response[] = tr(append($r));
+            $re[] = "<table>";
+            $re[] = append($response);
+            $re[] = "</table>";
+            $_response[] = div(append($re), 'list-group-item-movimiento');
+
+
+        endforeach;
+        return append($_response);
+
+
+    }
+
     function format_ticket_desarrollo($data)
     {
 

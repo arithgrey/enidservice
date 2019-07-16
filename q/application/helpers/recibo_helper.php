@@ -1,6 +1,84 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function notificacion_pago_realizado($data)
+    {
+
+
+        $recibo = $data["recibo"];
+        $id_recibo = $data["id_recibo"];
+        $modalidad = $data["modalidad"];
+        $usuario_venta = $data["usuario_venta"];
+
+        $saldo_cubierto = get_campo($recibo, "saldo_cubierto");
+        $costo_envio_cliente = get_campo($recibo, "costo_envio_cliente");
+        $total_cubierto = $saldo_cubierto + $costo_envio_cliente;
+        $resumen_pedido = get_campo($recibo, "resumen_pedido");
+        $cantidad = get_campo($recibo, "num_ciclos_contratados");
+        $precio = get_campo($recibo, "precio");
+        $monto_a_pagar = get_campo($recibo, "monto_a_pagar");
+        $url_seguimiento = "../pedidos/?seguimiento=" . $id_recibo;
+        $_response[] = validate_format_cancelacion($total_cubierto, $id_recibo, $modalidad);
+
+        $respose[] = get_format_transaccion($id_recibo);
+        $pg[] = get_td(h("Pago enviado a ", 4));
+        $pg[] = get_td(h("Importe ", 4));
+
+        $pa[] = tr(append($pg));
+
+        $t[] = strtoupper(get_campo($usuario_venta, "nombre"));
+        $t[] = strtoupper(get_campo($usuario_venta, "apellido_materno"));
+        $t[] = strtoupper(get_campo($usuario_venta, "apellido_paterno"));
+        $rr[] = get_td(append($t));
+        $rr[] = get_td($total_cubierto . " MXN");
+        $pa[] = tr(append($rr));
+
+        $respose[] = "<table>";
+        $respose[] = append($pa);
+        $respose[] = "</table>";
+
+
+        $es[] = get_td("Estado: " .
+            span("COMPLETADO"), [
+            "style" => "border-style: solid;border-color: #000506;padding: 2px;"
+        ]);
+
+        $es[] = get_td();
+        tr(append($es));
+        $respose[] = "</table>";
+
+        $response[] = tr();
+
+        $a[] = get_td("Detalles del pedido");
+        $a[] = get_td("Cantidad");
+        $a[] = get_td("Precio");
+        $a[] = get_td("Subtotal");
+
+        $b[] = get_td($resumen_pedido);
+        $b[] = get_td($cantidad);
+        $b[] = get_td("$" . $precio . "MXN");
+        $b[] = get_td("$" . $monto_a_pagar . "MXN");
+
+        $c[] = get_td("");
+        $c[] = get_td("");
+        $c[] = get_td("Total de la compra");
+        $c[] = get_td("$" . $monto_a_pagar . "MXN");
+
+        $t[] = tr(append($a), 'tb_pagos');
+        $t[] = tr(append($b));
+        $t[] = tr(append($c));
+
+        $respose[] = "<table style=\"width: 100%;margin-top: 20px;\" class=\"padding_10\">";
+        $respose[] = append($t);
+        $respose[] = "</table>";
+        $respose[] = btn("RASTREAR PEDIDO", ["href" => $url_seguimiento, "class" => "top_50 bottom_50"], 1, 1, 0, $url_seguimiento);
+
+        $_response[] = append($respose, ["style" => "margin: 0 auto;width: 66%;", "class" => "border padding_10 shadow"]);
+        return append($_response);
+
+
+    }
+
     function get_format_tiempo_entrega($data, $servicios, $param)
     {
 
@@ -10,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($data as $row) {
 
             $response[$a] = $row;
-            $solicitudes  = search_bi_array($servicios, "id_servicio", $row["id_servicio"], "total",0);
+            $solicitudes = search_bi_array($servicios, "id_servicio", $row["id_servicio"], "total", 0);
             $response[$a]["solicitudes"] = $solicitudes;
             $porcentaje = porcentaje_total($row["total"], $solicitudes);
             $response[$a]["porcentaje"] = substr($porcentaje, 0, 5);
@@ -440,11 +518,11 @@ if (!function_exists('invierte_date_time')) {
         $texto = "";
         if ($modalidad_ventas == 1) {
 
-             $texto = ($monto_a_liquidar > 0) ? d("MONTO DE LA COMPRA", 'text-saldo-pendiente') . d($monto_a_pagar . "MXN", "text-saldo-pendiente-monto"): $texto;
+            $texto = ($monto_a_liquidar > 0) ? d("MONTO DE LA COMPRA", 'text-saldo-pendiente') . d($monto_a_pagar . "MXN", "text-saldo-pendiente-monto") : $texto;
 
         } else {
 
-            $texto =  ($monto_a_liquidar > 0) ?
+            $texto = ($monto_a_liquidar > 0) ?
                 add_text(
                     d("SALDO PENDIENTE", 'text-saldo-pendiente')
                     ,
@@ -513,7 +591,7 @@ if (!function_exists('invierte_date_time')) {
                         break;
 
                     default:
-                        $texto = text_icon('fa fa-bus', "DIRECCIÓN DE ENVÍO", ["id" => $id_recibo]);;
+                        $texto = text_icon('fa fa-bus', "DIRECCIÓN DE ENVÍO", ["id" => $id_recibo]);
                         break;
                 }
 
@@ -565,12 +643,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = ($flag_envio_gratis > 0) ?
-             [
+            [
                 "cliente" => "ENTREGA GRATIS!",
                 "cliente_solo_text" => "ENTREGA GRATIS!",
                 "ventas_configuracion" => "TU PRECIO YA INCLUYE EL ENVÍO"
-             ]
-        :
+            ]
+            :
             [
 
                 "ventas_configuracion" => "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO",
@@ -693,12 +771,12 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_campo($inf, "ciudad");
         $r[] = get_campo($inf, "estado");
 
-        $resumen[] =  d(append($r), 'texto_direccion_envio_pedido top_20');
-        $resumen[] =  d("¿Quíen más puede recibir tu pedido?");
-        $resumen[] =  d(get_campo($inf, "nombre_receptor"));
-        $resumen[] =  d(get_campo($inf, "telefono_receptor"));
+        $resumen[] = d(append($r), 'texto_direccion_envio_pedido top_20');
+        $resumen[] = d("¿Quíen más puede recibir tu pedido?");
+        $resumen[] = d(get_campo($inf, "nombre_receptor"));
+        $resumen[] = d(get_campo($inf, "telefono_receptor"));
 
-        return  d(append($resumen), ["class" => "informacion_resumen_envio"]);
+        return d(append($resumen), ["class" => "informacion_resumen_envio"]);
 
     }
 

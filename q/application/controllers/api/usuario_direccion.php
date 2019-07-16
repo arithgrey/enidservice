@@ -82,10 +82,8 @@ class usuario_direccion extends REST_Controller
 
         $param = $this->get();
         $id_usuario = $this->get_id_usuario($param);
-
         $response = "";
         if ($id_usuario > 0) {
-
 
             $data["id_usuario"] = $id_usuario;
             $param["id_usuario"] = $data["id_usuario"];
@@ -96,8 +94,6 @@ class usuario_direccion extends REST_Controller
 
                 $domicilio = $this->get_domicilio_cliente($param);
                 $data["registro_direccion"] = (es_data($domicilio)) ? 1 : 0;
-
-
             }
 
             if (es_data($domicilio)) {
@@ -113,12 +109,11 @@ class usuario_direccion extends REST_Controller
                 $data["info_usuario"] = $this->app->usuario($id_usuario);
             }
 
-            $this->load->view("proyecto/domicilio_envio", $data);
-        }else{
-
-            $this->response($response);
+            $response = format_direccion_envio($data);
 
         }
+
+        $this->response($response);
 
     }
 
@@ -169,18 +164,22 @@ class usuario_direccion extends REST_Controller
                 case 1:
 
                     if (es_data($domicilio)) {
-                        return $this->load->view("proyecto/domicilio_resumen", $data);
+
+
+                        $response = format_domicilio_resumen($data);
+
                     } else {
 
-                        return $this->load->view("proyecto/domicilio", $data);
+                        $response = format_direccion($data);
 
                     }
                     break;
                 case 2:
-                    return $this->load->view("proyecto/domicilio", $data);
+
+                    $response = format_direccion($data);
                     break;
                 default:
-                    return $this->load->view("proyecto/domicilio", $data);
+                    $response = format_direccion($data);
                     break;
             }
         }
@@ -222,8 +221,9 @@ class usuario_direccion extends REST_Controller
     {
 
         $direccion = $this->usuario_direccion_model->get_usuario_direccion($param["id_usuario"]);
-        if (count($direccion) > 0) {
-            return $this->get_data_direccion($direccion[0]["id_direccion"]);
+        if (es_data($direccion)) {
+
+            return $this->get_data_direccion(pr($direccion, "id_direccion"));
         }
         return $direccion;
     }
@@ -231,9 +231,13 @@ class usuario_direccion extends REST_Controller
     private function get_data_direccion($id_direccion)
     {
 
-        $q["id_direccion"] = $id_direccion;
-        $api = "direccion/data_direccion/format/json/";
-        return $this->app->api($api, $q);
+
+        return $this->app->api(
+            "direccion/data_direccion/format/json/",
+            [
+                "id_direccion" => $id_direccion
+            ]
+        );
     }
 
     private function get_direccion_pedido($q)

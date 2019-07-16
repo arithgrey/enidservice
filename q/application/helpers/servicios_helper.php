@@ -1,6 +1,42 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function format_simple($data)
+    {
+
+        $servicios = $data["servicios"];
+        $_response[] = h("SERVICIOS POSTULADOS", 3);
+
+        foreach ($servicios as $row) {
+
+            $id_servicio = $row["id_servicio"];
+            $url_imagen = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
+            $vista = $row["vista"];
+
+            $r = [];
+            $r[] = img([
+                "src" => $url_imagen,
+                "style" => 'width: 44px!important;height: 44px;',
+            ]);
+            $r[] = d("alcance" . $vista);
+
+
+            $_response[] = anchor_enid(d(
+                d(
+                    d(
+                        append($r), "popup-head-left pull-left"), "popup-head"),
+                [
+                    "class" => "popup-box chat-popup", "id" => "qnimate", "style" => "margin-top: 4px;"
+                ]
+            ), ["href" => "../producto/?producto=" . $id_servicio, "class" => 'contenedor_resumen_servicio']);
+
+        }
+
+        return append($_response);
+
+
+    }
+
     function render_configurador($data)
     {
         $servicio = $data["servicio"];
@@ -731,7 +767,7 @@ if (!function_exists('invierte_date_time')) {
     /*function valida_tipo_promocion($param)
     {
 
-        return mayorque(pr($param, "flag_servicio", 0), 0, "SERVICIO", "PRODUCTO");
+    return mayorque(pr($param, "flag_servicio", 0), 0, "SERVICIO", "PRODUCTO");
 
     }
     */
@@ -783,7 +819,11 @@ if (!function_exists('invierte_date_time')) {
         $r[] = "<select class='form-control producto_nuevo'>";
         for ($z = 0; $z < count($usado); $z++) {
 
-            $r[] = ($z == $valor_actual) ? "<option value='" . $z . "' selected>" . $usado[$z] . "</option>" : "<option value='" . $z . "'>" . $usado[$z] . "</option>";
+            $r[] = ($z == $valor_actual) ? "
+    <option value='" . $z . "' selected>" . $usado[$z] . "</option>
+    " : "
+    <option value='" . $z . "'>" . $usado[$z] . "</option>
+    ";
 
         }
         $r[] = "</select>";
@@ -813,11 +853,13 @@ if (!function_exists('invierte_date_time')) {
             $text_estatus = ($status == 0) ? "Inactivo" : "Activo";
 
 
-            $list .= "<tr>";
+            $list .= "
+<tr>";
             $list .= get_td($especificacion, ["class" => 'especificacion_servicio']);
             $list .= get_td($nombre_servicio, $extra);
             $list .= get_td($text_estatus, ["class" => 'text-center strong']);
-            $list .= "</tr>";
+            $list .= "
+</tr>";
             $z++;
         }
         return $list;
@@ -866,7 +908,7 @@ if (!function_exists('invierte_date_time')) {
                 break;
 
             default:
-                # code...
+# code...
                 break;
         }
         return $nuevo_text;
@@ -966,7 +1008,9 @@ if (!function_exists('invierte_date_time')) {
 
             for ($a = $minimo; $a < $maximo; $a++) {
 
-                $select[] = ($a == $actual) ? "<option value='" . $a . "' selected>" . $a . "</option>" : "<option value='" . $a . "'>" . $a . "</option>";
+                $select[] = ($a == $actual) ? "
+<option value='" . $a . "' selected>" . $a . "</option>" : "
+<option value='" . $a . "'>" . $a . "</option>";
 
             }
 

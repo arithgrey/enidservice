@@ -476,6 +476,23 @@ if (!function_exists('get_th')) {
         return "<th " . add_attributes($attributes) . " NOWRAP >" . $val . "</th>";
     }
 }
+if (!function_exists('tr')) {
+    function tr($val = '', $attributes = '')
+    {
+
+        return "<tr " . add_attributes($attributes) . " >" . $val . "</tr>";
+    }
+}
+
+if (!function_exists('tb')) {
+    function tb($val = '', $attributes = '')
+    {
+
+        return "<table " . add_attributes($attributes) . " >" . $val . "</table>";
+    }
+}
+
+
 if (!function_exists('select_enid')) {
     function select_enid($data, $text_option, $val, $attributes = '')
     {
