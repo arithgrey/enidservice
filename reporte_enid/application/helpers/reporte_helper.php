@@ -8,12 +8,11 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $categorias_destacadas = $data["categorias_destacadas"];
             $response[] = d(place("place_reporte"), ["class" => "tab-pane", "id" => 'reporte']);
             $i[] = n_row_12();
             $i[] = d("INDICADORES ENID SERVICE", "titulo_enid_sm", 1);
             $i[] = form_open("", ["class" => 'form_busqueda_global_enid']);
-            $i[] = get_format_fecha_busqueda();
+            $i[] = frm_fecha_busqueda();
             $i[] = form_close();
             $i[] = end_row();
             $i[] = addNRow(place("place_usabilidad top_50"));
@@ -22,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
             $ds[] = n_row_12();
             $ds[] = d("DISPOSITIVOS ", "titulo_enid_sm", 1);
             $ds[] = form_open("", ["class" => 'f_dipositivos ']);
-            $ds[] = get_format_fecha_busqueda();
+            $ds[] = frm_fecha_busqueda();
             $ds[] = form_close();
             $ds[] = end_row();
             $ds[] = addNRow(place("top_50 repo_dispositivos"));
@@ -31,7 +30,7 @@ if (!function_exists('invierte_date_time')) {
             $v[] = n_row_12();
             $v[] = d("VISITAS WEB ", "titulo_enid_sm", 1);
             $v[] = form_open("", ["class" => 'f_usabilidad']);
-            $v[] = get_format_fecha_busqueda();
+            $v[] = frm_fecha_busqueda();
             $v[] = form_close();
             $v[] = end_row();
             $v[] = place("top_50 place_usabilidad_general");
@@ -42,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
             $p[] = n_row_12();
             $p[] = d("TIPOS DE ENTREGAS ", "titulo_enid_sm", 1);
             $p[] = form_open("", ["class" => 'form_tipos_entregas']);
-            $p[] = get_format_fecha_busqueda();
+            $p[] = frm_fecha_busqueda();
             $p[] = form_close();
             $p[] = end_row();
             $p[] = addNRow(place("place_tipos_entregas top_50"));
@@ -51,7 +50,7 @@ if (!function_exists('invierte_date_time')) {
             $ac[] = n_row_12();
             $ac[] = d("ACTIVIDAD ", "titulo_enid_sm", 1);
             $ac[] = form_open("", ["class" => 'f_actividad_productos_usuarios ']);
-            $ac[] = get_format_fecha_busqueda();
+            $ac[] = frm_fecha_busqueda();
             $ac[] = form_close();
             $ac[] = end_row();
             $ac[] = addNRow(place("top_50 repo_usabilidad"));
@@ -62,16 +61,19 @@ if (!function_exists('invierte_date_time')) {
             $t[] = render_atencion_cliente();
             $response[] = d(append($t), ["class" => "tab-pane", "id" => "tab_atencion_cliente"]);
 
-            $response[] = d(d("PERSONAS QUE PROMOCIONAN LOS PRODUCTOS Y SERVICIOS", "titulo_enid_sm", 1), ["class" => "tab-pane", "id" => "tab_afiliaciones"]);
+            $response[] = d(d("PERSONAS QUE PROMOCIONAN LOS PRODUCTOS Y SERVICIOS", "titulo_enid_sm", 1),
+                [
+                    "class" => "tab-pane", "id" => "tab_afiliaciones"
+                ]
+            );
 
             $b[] = d("PRODUCTOS MÁS BUSCADOS POR CLIENTES", "titulo_enid_sm", 1);
             $b[] = get_form_busqueda_productos_solicitados();
             $response[] = d(append($b), ["class" => "tab-pane", "id" => "tab_busqueda_productos"]);
 
 
-
             $dest[] = d("CATEGORÍAS DESTACADAS ", "titulo_enid_sm", 1);
-            $dest[] = crea_repo_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
+            $dest[] = crea_repo_categorias_destacadas(sub_categorias_destacadas($data["categorias_destacadas"]));
             $response[] = d(append($dest), ["class" => "tab-pane", "id" => "tab_productos_publicos"]);
 
 
@@ -91,9 +93,9 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d(
                 ul(
                     [
-                        li(anchor_enid("Atención al cliente", ["href" => "#tab_1_actividad", "data-toggle" => "tab"]), ["class" => "active"]),
-                        li(anchor_enid("Comparativa", ["href" => "#tab_2_comparativa", "data-toggle" => "tab"]), ["class" => "comparativa"]),
-                        li(anchor_enid("Calidad y servicio", ["href" => "#tab_3_comparativa", "data-toggle" => "tab"]), ["class" => "calidad_servicio"])
+                        li(a_enid("Atención al cliente", ["href" => "#tab_1_actividad", "data-toggle" => "tab"]), ["class" => "active"]),
+                        li(a_enid("Comparativa", ["href" => "#tab_2_comparativa", "data-toggle" => "tab"]), ["class" => "comparativa"]),
+                        li(a_enid("Calidad y servicio", ["href" => "#tab_3_comparativa", "data-toggle" => "tab"]), ["class" => "calidad_servicio"])
 
                     ],
                     "nav nav-tabs"
@@ -116,9 +118,8 @@ if (!function_exists('invierte_date_time')) {
         function get_form_busqueda_productos_solicitados()
         {
 
-
             $r[] = form_open("", ["class" => 'form_busqueda_productos_solicitados']);
-            $r[] = get_format_fecha_busqueda();
+            $r[] = frm_fecha_busqueda();
             $r[] = form_close();
             $z[] = addNRow(append($r));
             $z[] = addNRow(place("place_keywords top_50"));
@@ -131,7 +132,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $f[] = form_open("", ["class" => 'form_busqueda_desarrollo_solicitudes']);
-            $f[] = get_format_fecha_busqueda();
+            $f[] = frm_fecha_busqueda();
             $f[] = form_close();
             $r[] = addNRow(append($f));
             $r[] = addNRow(place("place_metricas_servicio"));
@@ -145,7 +146,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $f[] = form_open("", ["class" => 'form_busqueda_desarrollo']);
-            $f[] = get_format_fecha_busqueda();
+            $f[] = frm_fecha_busqueda();
             $f[] = form_close();
             $r[] = addNRow(append($f));
             $r[] = addNRow(place(" top_50 place_metricas_desarrollo"));
@@ -170,7 +171,7 @@ if (!function_exists('invierte_date_time')) {
                 echo "<table>
                   <tr>
                     " . td($total) . "
-                    " . td(anchor_enid($row["nombre_clasificacion"]),
+                    " . td(a_enid($row["nombre_clasificacion"]),
                         [
                             "href" => $href,
                             "class" => 'text_categoria_sub_menu'
@@ -191,7 +192,7 @@ if (!function_exists('invierte_date_time')) {
         function get_menu()
         {
             $list = [
-                li(anchor_enid(text_icon("fa fa-money", "PEDIDOS"),
+                li(a_enid(text_icon("fa fa-money", "PEDIDOS"),
                         [
                             "id" => "btn_servicios",
                             "href" => path_enid("pedidos"),
@@ -199,7 +200,7 @@ if (!function_exists('invierte_date_time')) {
                         ])
                 ),
 
-                li(anchor_enid(text_icon("fa-shopping-bag", "COMPRAS"),
+                li(a_enid(text_icon("fa-shopping-bag", "COMPRAS"),
                         [
                             "id" => "btn_servicios",
                             "href" => path_enid("compras"),
@@ -207,7 +208,7 @@ if (!function_exists('invierte_date_time')) {
                         ])
                 ),
                 li(
-                    anchor_enid(text_icon('fa fa-globe', "INDICADORES"),
+                    a_enid(text_icon('fa fa-globe', "INDICADORES"),
                         [
                             "href" => "#tab_default_1",
                             "data-toggle" => "tab",
@@ -216,7 +217,7 @@ if (!function_exists('invierte_date_time')) {
                     )
                 ),
                 li(
-                    anchor_enid(text_icon('fa fa-clock-o', "TIEMPO DE VENTA"),
+                    a_enid(text_icon('fa fa-clock-o', "TIEMPO DE VENTA"),
                         [
                             "href" => path_enid("tiempo_venta"),
                             "class" => ' black  '
@@ -225,7 +226,7 @@ if (!function_exists('invierte_date_time')) {
 
                 ),
                 li(
-                    anchor_enid(text_icon('fa fa-exchange', "VENTAS PUNTOS DE ENCUENTRO"),
+                    a_enid(text_icon('fa fa-exchange', "VENTAS PUNTOS DE ENCUENTRO"),
                         [
                             "href" => path_enid("ventas_encuentro"),
                             "class" => ' black  '
@@ -234,7 +235,7 @@ if (!function_exists('invierte_date_time')) {
                     "active"
                 ),
                 li(
-                    anchor_enid(text_icon("fa fa-shopping-cart", "PRODUCTOS SOLICITADOS"),
+                    a_enid(text_icon("fa fa-shopping-cart", "PRODUCTOS SOLICITADOS"),
                         [
                             "href" => "#tab_busqueda_productos",
                             "data-toggle" => "tab",
@@ -243,7 +244,7 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     )
                 ),
-                li(anchor_enid(text_icon("fa fa-fighter-jet", "TIPOS ENTREGAS"),
+                li(a_enid(text_icon("fa fa-fighter-jet", "TIPOS ENTREGAS"),
                         [
                             "href" => "#tab_tipos_entregas",
                             "data-toggle" => "tab",
@@ -253,7 +254,7 @@ if (!function_exists('invierte_date_time')) {
                     )
                 ),
 
-                li(anchor_enid(text_icon("fa fa-user", "ACTIVIDAD USUARIOS"),
+                li(a_enid(text_icon("fa fa-user", "ACTIVIDAD USUARIOS"),
                         [
                             "id" => "btn_usuarios",
                             "href" => "#tab_usuarios",
@@ -261,7 +262,7 @@ if (!function_exists('invierte_date_time')) {
                             "class" => "black   btn_repo_afiliacion"
                         ])
                 ),
-                li(anchor_enid(text_icon("fa-check-circle", "CATEGORÍAS DESTACADAS"),
+                li(a_enid(text_icon("fa-check-circle", "CATEGORÍAS DESTACADAS"),
                         [
                             "id" => "btn_repo_afiliacion",
                             "href" => "#tab_productos_publicos",
@@ -271,7 +272,7 @@ if (!function_exists('invierte_date_time')) {
                     )
                 ),
 
-                li(anchor_enid(text_icon("fa fa-handshake-o", "ATENCIÓ AL CLIENTE"),
+                li(a_enid(text_icon("fa fa-handshake-o", "ATENCIÓ AL CLIENTE"),
                         [
                             "id" => "btn_repo_atencion_cliente",
                             "href" => "#tab_atencion_cliente",
@@ -279,7 +280,7 @@ if (!function_exists('invierte_date_time')) {
                             "class" => "black   btn_repo_atencion_cliente"
                         ])
                 ),
-                li(anchor_enid(text_icon("fa fa-flag", "ACTIVIDAD"),
+                li(a_enid(text_icon("fa fa-flag", "ACTIVIDAD"),
                         [
                             "id" => "btn_servicios",
                             "href" => "#tab_default_2",
@@ -287,7 +288,7 @@ if (!function_exists('invierte_date_time')) {
                             "class" => "black   usabilidad_btn"
                         ])
                 ),
-                li(anchor_enid(text_icon("fa fa-mobile", "DISPOSITIVOS"),
+                li(a_enid(text_icon("fa fa-mobile", "DISPOSITIVOS"),
                         [
                             "id" => "btn_servicios",
                             "href" => "#tab_dispositivos",

@@ -7,7 +7,7 @@
                 <?php $i[] = n_row_12() ?>
                 <?php $i[] = d("INDICADORES ENID SERVICE", "titulo_enid_sm", 1) ?>
                 <?php $i[] = form_open("", ["class" => 'form_busqueda_global_enid']) ?>
-                <?php $i[] = get_format_fecha_busqueda() ?>
+                <?php $i[] = frm_fecha_busqueda() ?>
                 <?php $i[] = form_close() ?>
                 <?php $i[] = end_row() ?>
                 <?php $i[] = addNRow(place("place_usabilidad top_50")) ?>
@@ -16,7 +16,7 @@
                 <?php $ds[] = n_row_12() ?>
                 <?php $ds[] = d("DISPOSITIVOS ", "titulo_enid_sm", 1) ?>
                 <?php $ds[] = form_open("", ["class" => 'f_dipositivos ']) ?>
-                <?php $ds[] = get_format_fecha_busqueda() ?>
+                <?php $ds[] = frm_fecha_busqueda() ?>
                 <?php $ds[] = form_close() ?>
                 <?php $ds[] = end_row() ?>
                 <?php $ds[] = addNRow(place("top_50 repo_dispositivos")) ?>
@@ -25,7 +25,7 @@
                 <?php $v[] = n_row_12() ?>
                 <?php $v[] = d("VISITAS WEB ", "titulo_enid_sm", 1) ?>
                 <?php $v[] = form_open("", ["class" => 'f_usabilidad']) ?>
-                <?php $v[] = get_format_fecha_busqueda() ?>
+                <?php $v[] = frm_fecha_busqueda() ?>
                 <?php $v[] = form_close() ?>
                 <?php $v[] = end_row() ?>
                 <?php $v[] = place("top_50 place_usabilidad_general") ?>
@@ -36,7 +36,7 @@
                 <?php $p[] = n_row_12() ?>
                 <?php $p[] = d("TIPOS DE ENTREGAS ", "titulo_enid_sm", 1) ?>
                 <?php $p[] = form_open("", ["class" => 'form_tipos_entregas']) ?>
-                <?php $p[] = get_format_fecha_busqueda() ?>
+                <?php $p[] = frm_fecha_busqueda() ?>
                 <?php $p[] = form_close() ?>
                 <?php $p[] = end_row() ?>
                 <?php $p[] = addNRow(place("place_tipos_entregas top_50")) ?>
@@ -45,7 +45,7 @@
                 <?php $ac[] = n_row_12() ?>
                 <?php $ac[] = d("ACTIVIDAD ", "titulo_enid_sm", 1) ?>
                 <?php $ac[] = form_open("", ["class" => 'f_actividad_productos_usuarios ']) ?>
-                <?php $ac[] = get_format_fecha_busqueda() ?>
+                <?php $ac[] = frm_fecha_busqueda() ?>
                 <?php $ac[] = form_close() ?>
                 <?php $ac[] = end_row() ?>
                 <?php $ac[] = addNRow(place("top_50 repo_usabilidad")) ?>

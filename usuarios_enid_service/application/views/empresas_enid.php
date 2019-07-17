@@ -25,7 +25,7 @@
                         <?= d(append([
                             h("Recurso", 3),
 
-                            anchor_enid("+ Agregar Recurso",
+                            a_enid("+ Agregar Recurso",
                                 [
                                     "href" => "#tab_agregar_recursos",
                                     "data-toggle" => "tab",

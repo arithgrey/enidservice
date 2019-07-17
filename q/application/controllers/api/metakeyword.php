@@ -85,7 +85,7 @@ class Metakeyword extends REST_Controller
 
 	function add_metakeyword($param, $arr_meta)
 	{
-        $arr_meta[] =  get_param_def($param,"metakeyword_usuario", "");
+        $arr_meta[] =  prm_def($param,"metakeyword_usuario", "");
 		$param["metakeyword"] = json_encode($arr_meta);
 		return $this->metakeyword_model->update(["metakeyword" => $param["metakeyword"]], ["id_usuario" => $param["id_usuario"]]);
 	}

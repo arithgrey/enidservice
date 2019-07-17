@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
             $z[] = hr();
             $z[] = d(icon("fa fa-usd "), 2);
             $z[] = d("", 2);
-            $z[] = d(get_format_descripction(), 8);
+            $z[] = d(frm_desc(), 8);
             $z[] = d("", 2);
             $z[] = hr();
 
@@ -34,9 +34,9 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    if (!function_exists('get_format_descripction')) {
+    if (!function_exists('frm_desc')) {
 
-        function get_format_descripction()
+        function frm_desc()
         {
             $r[] = p("Como parte de nuestro equipo, influirás en el futuro de negocios
         que se encuentran en crecimiento a lo largo de la ciudad de México, 
@@ -86,7 +86,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = h("TEMAS DE AYUDA", 3);
             $r[] = h("¿Tienes alguna duda?", 4);
             $r[] = p("¡Llámanos! Podemos ayudarte." . icon('fa icon-mobile contact'));
-            $r[] = anchor_enid(
+            $r[] = a_enid(
                 "",
                 [
                     "class" => "black strong",
@@ -97,7 +97,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d("Podemos utilizar tu correo para mantenerte informado..", 1);
             $r[] = d("O si lo prefieres Comunícate directamente", 1);
 
-            $r[] = anchor_enid(
+            $r[] = a_enid(
                 "FAQS",
                 [
                     "href" => path_enid("faqs", "/?categoria=5"),

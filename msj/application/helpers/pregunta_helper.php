@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
 
 		$r[] = h("Buen día" . $nombre_vendedor, 1, "display-4" );
 		$r[] = d("Un cliente está interesado en uno de tus productos que tienes en venta en");
-		$r[] = anchor_enid("Enid Service",
+		$r[] = a_enid("Enid Service",
 			[
 				"class" => "btn btn-primary btn-lg",
 				"href" => "http://enidservice.com/",
@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
 			]);
 		$r[] = hr("my-4" );
 		$r[] = p("Apresúrate, estás a un paso de realizar una nueva venta!");
-		$r[] = anchor_enid("Responde a tu cliente aquí!",
+		$r[] = a_enid("Responde a tu cliente aquí!",
 			[
 				"class" => "btn btn-primary btn-lg",
 				"href" => "http://enidservice.com/inicio/login/",
@@ -49,10 +49,10 @@ if (!function_exists('invierte_date_time')) {
 
 		$r[] = heading("Buen día " . $nombre_cliente);
 		$r[] = p("Tienes una nueva respuesta en tu buzón");
-		$r[] = anchor_enid("Enid Service", ["href" => "http://enidservice.com/"]);
+		$r[] = a_enid("Enid Service", ["href" => "http://enidservice.com/"]);
 		$r[] = hr();
 		$r[] = p("Apresúrate, estás a un paso de tener tu pedido!");
-		$r[] = anchor_enid("Mira la respuesta aquí!", ["href" => "http://enidservice.com/inicio/login/"]);
+		$r[] = a_enid("Mira la respuesta aquí!", ["href" => "http://enidservice.com/inicio/login/"]);
 		$r[] = d(
 		    img("http://enidservice.com/inicio/img_tema/enid_service_logo.jpg"),
             [
@@ -92,7 +92,7 @@ if (!function_exists('invierte_date_time')) {
 
 		$r[] = heading("Buen día" . $nombre);
 		$r[] = d("Te notificamos que desde este momento puedes consultar más productos y servicios a través de ");
-		$r[] = anchor_enid("Enid Service",
+		$r[] = a_enid("Enid Service",
 			[
 				"class" => "btn btn-primary btn-lg",
 				"href" => "http://enidservice.com/",
@@ -103,7 +103,7 @@ if (!function_exists('invierte_date_time')) {
 
 		$r[] = hr();
 		$r[] = d("Desde ahora podrás comprar y vender tus productos o servicios ");
-		$r[] = anchor_enid("Accede a tu cuenta aquí!",
+		$r[] = a_enid("Accede a tu cuenta aquí!",
 			[
 				"class" => "btn btn-primary btn-lg",
 				"href" => "http://enidservice.com/inicio/login/",

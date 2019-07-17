@@ -14,7 +14,7 @@ class Home extends CI_Controller
     {
         $data = $this->app->session();
         $param =  $this->input->get();
-        if (get_param_def($param, "transfer") > 0) {
+        if (prm_def($param, "transfer") > 0) {
 
         } else {
 
@@ -23,9 +23,9 @@ class Home extends CI_Controller
             $this->app->acceso();
             $data +=  [
                 "action" => $param["action"],
-                "valoraciones" => get_param_def($valocaciones,"info_valoraciones",[]),
+                "valoraciones" => prm_def($valocaciones,"info_valoraciones",[]),
                 "alcance" => crea_alcance($this->get_alcance($data["id_usuario"])),
-                "ticket" => get_param_def($param , "ticket"),
+                "ticket" => prm_def($param , "ticket"),
             ];
 
             $data   =  $this->app->cssJs($data, "area_cliente");

@@ -56,7 +56,7 @@ class tipo_talla extends REST_Controller
 		foreach ($param as $row) {
 
 			$id = $row["id"];
-			$config = anchor_enid(
+			$config = a_enid(
 				icon("fa fa-cog"),
 				[
 					'class' => 'configurar_talla',
@@ -65,7 +65,7 @@ class tipo_talla extends REST_Controller
 
 			$array_clasificiones = get_array_json($row["clasificacion"]);
 			$tipo = $row["tipo"];
-			$num_clasificaciones = anchor_enid(
+			$num_clasificaciones = a_enid(
 				count($array_clasificiones),
 				array(
 					'class' => 'configurar_talla',

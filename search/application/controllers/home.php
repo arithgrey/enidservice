@@ -19,13 +19,13 @@ class Home extends CI_Controller
         $param = $this->input->get();
         $param += [
 
-            "id_clasificacion" => get_param_def($param, "q2"),
-            "vendedor" => get_param_def($param, "q3"),
+            "id_clasificacion" => prm_def($param, "q2"),
+            "vendedor" => prm_def($param, "q3"),
             "num_hist" => 9990890
 
         ];
 
-        evita_basura(get_param_def($param, "q", "", 1));
+        evita_basura(prm_def($param, "q", "", 1));
 
         $this->load_data($param);
     }
@@ -49,7 +49,7 @@ class Home extends CI_Controller
             "vendedor" => $param["vendedor"],
             "id_clasificacion" => $param["id_clasificacion"],
             "extra" => $param,
-            "order" => get_param_def($param, "order", 11, 1),
+            "order" => prm_def($param, "order", 11, 1),
             "resultados_por_pagina" => $per_page,
             "agrega_clasificaciones" => ($this->agent->is_mobile()) ? 0 : 1,
             "in_session" => 0
@@ -58,7 +58,7 @@ class Home extends CI_Controller
 
         $data["servicios"] = $servicios = $this->busqueda_producto_por_palabra_clave($data_send);
 
-        $fn = (get_param_def($servicios, "total_busqueda") > 0) ?
+        $fn = (prm_def($servicios, "total_busqueda") > 0) ?
             $this->muetra_servicios($data, $param, $q, $data_send, $servicios, $per_page) :
             $this->muestra_sin_resultados($param, $data);
 
@@ -69,7 +69,7 @@ class Home extends CI_Controller
     {
 
         $data["css"] = ["search_sin_encontrar.css"];
-        $response = (get_param_def($param, "tienda") < 1) ? sin_resultados() : sin_resultados_tienda();
+        $response = (prm_def($param, "tienda") < 1) ? sin_resultados() : sin_resultados_tienda();
         $this->app->pagina($data, $response, 1);
 
     }
@@ -99,7 +99,7 @@ class Home extends CI_Controller
                 $param["id_clasificacion"],
                 $param["vendedor"],
                 $data_send["order"],
-                get_param_def($param, "page")
+                prm_def($param, "page")
             );
 
         $this->set_option("in_session", 0);
@@ -212,7 +212,7 @@ class Home extends CI_Controller
     private function get_bloque($data)
     {
 
-        return get_param_def($data, "id_clasificacion");
+        return prm_def($data, "id_clasificacion");
     }
 
     private function busqueda_producto_por_palabra_clave($q)

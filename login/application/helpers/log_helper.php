@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = anchor_enid(img_enid(),
+        $r[] = a_enid(img_enid(),
             [
                 "href" => path_enid("home"),
                 "class" => "col-lg-8 col-lg-offset-2"
@@ -34,8 +34,8 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d(get_form_login(), 1);
         $r[] = place("place_acceso_sistema top_20 bottom_20");
-        $x[] = anchor_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'registrar-cuenta registrar_cuenta']);
-        $x[] = anchor_enid(
+        $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'registrar-cuenta registrar_cuenta']);
+        $x[] = a_enid(
             "¿OLVIDASTE TU CONTRASEÑA?",
             [
                 "id" => "olvide-pass",
@@ -54,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_recuperacion_pw()
     {
 
-        $r[] = anchor_enid(img_enid(),
+        $r[] = a_enid(img_enid(),
             [
                 "href" => path_enid("home"),
                 "class" => "col-lg-8 col-lg-offset-2"
@@ -81,7 +81,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_close(append([place("place_recuperacion_pw"), place("recuperacion_pw")]));
         $r[] = d(
-            anchor_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
+            a_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
                 [
                     'class' => 'btn_acceder_cuenta_enid top_50 bottom_100  ',
                     "id" => "btn_acceder_cuenta_enid"
@@ -99,11 +99,11 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = anchor_enid(img_enid(), ["href" => "../", "class" => "col-lg-8 col-lg-offset-2"], 1);
+        $r[] = a_enid(img_enid(), ["href" => "../", "class" => "col-lg-8 col-lg-offset-2"], 1);
         $r[] = heading('ÚNETE A ENID SERVICE', 3, 1);
         $r[] = d(get_form_registro(), 1);
         $r[] = d(
-            anchor_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
+            a_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
                 [
                     'class' => 'btn_acceder_cuenta_enid top_50 inline-block bottom_100',
                     "id" => "btn_acceder_cuenta_enid"

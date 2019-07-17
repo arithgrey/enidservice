@@ -273,7 +273,7 @@ class recibo extends REST_Controller
 
             } else {
 
-                if (get_param_def($param, "cobranza") > 0) {
+                if (prm_def($param, "cobranza") > 0) {
 
                     $dc = $this->get_data_saldo($param, $recibo, $dc);
                     $dc["es_punto_encuentro"] = 0;
@@ -302,7 +302,7 @@ class recibo extends REST_Controller
         if (es_data($recibo)):
 
             $r = $recibo[0];
-            if (get_param_def($param, "cobranza") == 1) :
+            if (prm_def($param, "cobranza") == 1) :
 
                 if ($r["entregado"] == 0 && $r["se_cancela"] == 0):
 
@@ -454,7 +454,7 @@ class recibo extends REST_Controller
             $url_seguimiento_pago = $url_request . "pedidos/?seguimiento=$id_recibo&notificar=1";
 
 
-            $r[] = get_saludo($cliente, $config_log, $id_recibo);
+            $r[] = saludo($cliente, $config_log, $id_recibo);
 
             $r[] = get_text_saldo_pendiente(
                 $resumen_pedido,

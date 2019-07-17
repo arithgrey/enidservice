@@ -37,7 +37,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $tr[] = td($row["nombre"]);
-            $tr[] = td(anchor_enid("Ver sitio",
+            $tr[] = td(a_enid("Ver sitio",
                 [
                     "href" => $row["urlpaginaweb"],
                     "class" => 'blue_enid_background white ',

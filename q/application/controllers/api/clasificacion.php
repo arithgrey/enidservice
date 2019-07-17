@@ -351,7 +351,7 @@ class Clasificacion extends REST_Controller
             $tallas_servicio_json =  pr($tallas_servicio,"talla","");
             $tallas_servicio = $this->quita_cero_clasificacacion($tallas_servicio);
 
-            $v = (get_param_def($param, "v") > 0) ? $param["v"] : 0;
+            $v = (prm_def($param, "v") > 0) ? $param["v"] : 0;
             $data_complete = [];
             $tipo_tallas = $this->get_tipo_talla();
 
@@ -372,12 +372,12 @@ class Clasificacion extends REST_Controller
             }
 
 
-            if (get_param_def($data_complete, "id_tipo_talla") > 0) {
+            if (prm_def($data_complete, "id_tipo_talla") > 0) {
 
                 $tallas_disponibles_categoria = $this->get_tallas_countries($param);
                 $data_complete["tallas_servicio"] = $this->get_tallas_en_servicio($tallas_disponibles_categoria, $tallas_servicio_json);
 
-                if ($v == 1 && get_param_def($data_complete, "tallas_servicio") !== 0) {
+                if ($v == 1 && prm_def($data_complete, "tallas_servicio") !== 0) {
                     $response = $this->create_easy_buttons_tallas($data_complete);
                 }
             }

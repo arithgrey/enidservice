@@ -122,7 +122,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("place_load_img", ["id" => 'place_load_img']);
         $r[] = place("separate-enid");
 
-        $r[] = btn("AGREGAR IMAGEN" . icon("fa fa-check"),
+        $r[] = btn(text_icon("fa fa-check" , "AGREGAR IMAGEN"),
             [
                 "class" => 'guardar_img_enid bottom_30 letter-spacing-5 top_30',
                 "id" => 'guardar_img'

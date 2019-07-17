@@ -5,7 +5,7 @@
         <div class="row">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <?= anchor_enid("Desarrollo de software ",
+                    <?= a_enid("Desarrollo de software ",
                         [
                             "href" => "#home",
                             "data-toggle" => "tab"
@@ -42,7 +42,7 @@
 
                     ) ?>
                     <?= end_row() ?>
-                    <?= anchor_enid("Iniciemos conversación", path_enid("contact")) ?>
+                    <?= a_enid("Iniciemos conversación", path_enid("contact")) ?>
                     <?= hr() ?>
                 </div>
             </div>

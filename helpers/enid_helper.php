@@ -437,8 +437,8 @@ if (!function_exists('n_row_12')) {
 
     }
 }
-if (!function_exists('anchor_enid')) {
-    function anchor_enid($title = '', $attributes = [], $row_12 = 0, $type_button = 0)
+if (!function_exists('a_enid')) {
+    function a_enid($title = '', $attributes = [], $row_12 = 0, $type_button = 0)
     {
 
 
@@ -742,8 +742,8 @@ if (!function_exists('create_select')) {
 
     }
 }
-if (!function_exists('get_param_def')) {
-    function get_param_def($data, $key, $val_def = 0, $valida_basura = 0)
+if (!function_exists('prm_def')) {
+    function prm_def($data, $key, $val_def = 0, $valida_basura = 0)
     {
 
         $val = (is_array($data) && array_key_exists($key, $data) && $data[$key] !== null) ? $data[$key] : $val_def;
@@ -904,7 +904,7 @@ if (!function_exists('get_url_tumblr')) {
 
         $url_tumblr = "http://tumblr.com/widgets/share/tool?canonicalUrl=" . $url;
         if ($icon > 0) {
-            return anchor_enid(icon('a fa-tumblr'),
+            return a_enid(icon('a fa-tumblr'),
                 [
                     'target' => "_black",
                     'href' => $url_tumblr
@@ -919,7 +919,7 @@ if (!function_exists('get_url_pinterest')) {
 
         $url_pinterest = "https://www.pinterest.com/pin/create/button/?url=" . $url;
         if ($icon > 0) {
-            return anchor_enid(icon('fa fa-pinterest-p'),
+            return a_enid(icon('fa fa-pinterest-p'),
                 [
                     'target' => "_black",
                     'href' => $url_pinterest
@@ -936,7 +936,7 @@ if (!function_exists('get_url_twitter')) {
 
         $url_twitter = "https://twitter.com/intent/tweet?text=" . $mensaje . $url;
         if ($icon > 0) {
-            return anchor_enid(icon('fa fa-twitter'),
+            return a_enid(icon('fa fa-twitter'),
                 [
                     'target' => "_black",
                     'href' => $url_twitter
@@ -951,7 +951,7 @@ if (!function_exists('get_url_facebook')) {
 
         $url_facebook = "https://www.facebook.com/sharer/sharer.php?u=" . $url . ";src=sdkpreparse";
         if ($icon > 0) {
-            return anchor_enid(icon('fa fa-facebook-square'),
+            return a_enid(icon('fa fa-facebook-square'),
                 [
                     'target' => "_black",
                     'href' => $url_facebook
@@ -1373,7 +1373,7 @@ if (!function_exists('get_logo')) {
         } else {
 
             $img_enid = img_enid(["style" => "width: 50px!important;"]);
-            $en_pc = anchor_enid($img_enid, ["href" => "../"]);
+            $en_pc = a_enid($img_enid, ["href" => "../"]);
             return d($en_pc, "padding_10");
         }
 
@@ -1626,7 +1626,7 @@ if (!function_exists('get_menu_session')) {
             );
 
 
-            $vender = anchor_enid(
+            $vender = a_enid(
                 $text,
                 [
                     "href" => "../login/?action=nuevo",
@@ -1642,7 +1642,7 @@ if (!function_exists('get_menu_session')) {
                 "display_flex_enid"
 
             );
-            $l_session = anchor_enid(
+            $l_session = a_enid(
                 $text,
                 [
                     "href" => "../login",
@@ -1717,9 +1717,9 @@ if (!function_exists('btw')) {
         return $response;
     }
 }
-if (!function_exists('get_format_fecha_busqueda')) {
+if (!function_exists('frm_fecha_busqueda')) {
 
-    function get_format_fecha_busqueda($def_inicio = 0, $def_fin = 0)
+    function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0)
     {
 
         $vinicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
@@ -1765,7 +1765,7 @@ if (!function_exists('get_format_fecha_busqueda')) {
 if (!function_exists('get_format_izquierdo')) {
     function get_format_izquierdo($categorias_publicas_venta = [], $categorias_temas_de_ayuda = [], $agregar_categoria = 0)
     {
-        $r[] = anchor_enid(
+        $r[] = a_enid(
             img(
                 [
                     "src" => '../img_tema/enid_service_logo.jpg', 'width' => '100%'
@@ -1781,7 +1781,7 @@ if (!function_exists('get_format_izquierdo')) {
 
 
             $r[] = d(h("CATEGORIAS DESTACADAS", 3));
-            $r[] = d(anchor_enid(h("Agregar", 5, "underline top_20"), ["href" => path_enid("nfaq"), "class" => "black"]));
+            $r[] = d(a_enid(h("Agregar", 5, "underline top_20"), ["href" => path_enid("nfaq"), "class" => "black"]));
 
         }
 
@@ -1794,7 +1794,7 @@ if (!function_exists('get_format_izquierdo')) {
 
         $r[] = d(append([
             h("¿TIENES ALGUNA DUDA?", 3),
-            anchor_enid("ENVIA TU MENSAJE",
+            a_enid("ENVIA TU MENSAJE",
                 [
                     "href" => "../contact/#envio_msj",
                     'style' => 'color:black!important;text-decoration:underline;'
@@ -2005,7 +2005,7 @@ function get_social($proceso_compra, $desc_web, $black = 1)
     if ($proceso_compra < 1) {
 
 
-        $r[] = anchor_enid("",
+        $r[] = a_enid("",
             [
                 "href" => $url_facebook,
                 "target" => "_black",
@@ -2013,7 +2013,7 @@ function get_social($proceso_compra, $desc_web, $black = 1)
 
             ]);
 
-        $r[] = anchor_enid("",
+        $r[] = a_enid("",
             [
                 "href" => "https://www.instagram.com/enid_service/",
                 "class" => "fa fa-instagram " . $color,
@@ -2021,7 +2021,7 @@ function get_social($proceso_compra, $desc_web, $black = 1)
                 "target" => "_black",
             ]);
 
-        $r[] = anchor_enid("",
+        $r[] = a_enid("",
             [
                 "target" => "_black",
                 "class" => "fa fa-twitter " . $color,
@@ -2030,7 +2030,7 @@ function get_social($proceso_compra, $desc_web, $black = 1)
                 "data-size" => "large",
                 "href" => $url_twitter,
             ]);
-        $r[] = anchor_enid("",
+        $r[] = a_enid("",
             [
                 "href" => $url_pinterest,
                 "target" => "_black",
@@ -2038,7 +2038,7 @@ function get_social($proceso_compra, $desc_web, $black = 1)
                 "title" => "Pin it"
             ]);
 
-        $r[] = anchor_enid("",
+        $r[] = a_enid("",
             [
                 "href" => $url_tumblr,
                 "class" => "fa fa-tumblr " . $color,
@@ -2122,13 +2122,13 @@ function es_null($data, $index, $def = "")
 function create_contenido_menu($data)
 {
 
-    $navegacion = get_param_def($data, "data_navegacion", []);
-    $id_empresa = get_param_def($data, "idempresa");
+    $navegacion = prm_def($data, "data_navegacion", []);
+    $id_empresa = prm_def($data, "idempresa");
     $menu = [];
 
     foreach ($navegacion as $row) {
 
-        $menu[] = li(anchor_enid(icon($row["iconorecurso"]) . $row["nombre"],
+        $menu[] = li(a_enid(icon($row["iconorecurso"]) . $row["nombre"],
             [
                 "href" => ($row["idrecurso"] == 18) ? base_url($row["urlpaginaweb"]) . "/?q=" . $id_empresa : base_url($row["urlpaginaweb"]),
                 "class" => 'black'

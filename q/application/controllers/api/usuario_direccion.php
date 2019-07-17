@@ -258,6 +258,6 @@ class usuario_direccion extends REST_Controller
     private function get_id_usuario($param)
     {
 
-        return ($this->app->is_logged_in() > 0) ? $this->id_usuario : (get_param_def($param, "id_usuario"));
+        return ($this->app->is_logged_in() > 0) ? $this->id_usuario : (prm_def($param, "id_usuario"));
     }
 }

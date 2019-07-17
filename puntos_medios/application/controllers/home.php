@@ -23,7 +23,7 @@ class Home extends CI_Controller
             (
                 $method_request === 'POST'
                 &&
-                get_param_def($param, "servicio", 0, 1) > 0
+                prm_def($param, "servicio", 0, 1) > 0
             )
 
             ||
@@ -31,7 +31,7 @@ class Home extends CI_Controller
             (
                 $method_request === 'POST'
                 &&
-                get_param_def($param, "recibo", 0, 1) > 0
+                prm_def($param, "recibo", 0, 1) > 0
             )
 
         ) {
@@ -42,7 +42,7 @@ class Home extends CI_Controller
 
             $data = $this->app->cssJs($data, "puntos_medios");
 
-            $primer_registro = (get_param_def($param, "recibo") == 0) ? 1 : 0;
+            $primer_registro = (prm_def($param, "recibo") == 0) ? 1 : 0;
             $data["primer_registro"] = $primer_registro;
 
             if ($primer_registro > 0) {
@@ -79,7 +79,7 @@ class Home extends CI_Controller
             "leneas_metro" => $this->get_lineas_metro(1, $param),
         ];
 
-        if (get_param_def($param, "avanzado") > 0 && get_param_def($param, "punto_encuentro") > 0 ) {
+        if (prm_def($param, "avanzado") > 0 && prm_def($param, "punto_encuentro") > 0 ) {
 
             /*solo tomamos la hora del pedido*/
             $this->app->pagina($data, get_format_pagina_form_horario($data["recibo"], $param["punto_encuentro"]), 1);

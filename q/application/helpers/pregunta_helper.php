@@ -5,15 +5,15 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $modalidad = $data["modalidad"];
-        $preguntas = $data["preguntas"];
 
-        $r[] = get_titulo_modalidad($modalidad);
 
-        foreach ($preguntas as $row) {
+        $r[] = titulo_modalidad($modalidad);
+
+        foreach ($data["preguntas"] as $row) {
 
             $img = img([
                 'style' => 'width: 44px!important;',
-                'src' => get_url_imagen_pregunta($modalidad, $row),
+                'src' => url_img_pregunta($modalidad, $row),
                 'onerror' => "this.src='../img_tema/user/user.png'"
             ]);
 
@@ -43,12 +43,12 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_respuesta_vendedor($email, $nombre, $id_servicio)
+    function frm_respuesta_vendedor($email, $nombre, $id_servicio)
     {
 
         $asunto = "HOLA {$nombre} TIENES UNA NUEVA PREGUNTA SOBRE UNO DE TUS ARTÍCULOS EN VENTA";
         $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu artículos, puedes ver la pregunta que 
-            te envió en tu !" . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
+            te envió en tu !" . a_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
 
         $img = img_servicio($id_servicio, 1);
         $cuerpo = append(
@@ -59,8 +59,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $sender = get_request_email($email, $asunto, $cuerpo);
-        return $sender;
+        return get_request_email($email, $asunto, $cuerpo);
 
     }
 
@@ -69,7 +68,7 @@ if (!function_exists('invierte_date_time')) {
 
         $asunto = "HOLA {$nombre} TIENES UNA NUEVA RESPUESTA EN TU BUZÓN";
         $text = "Que tal {$nombre} el vendedor a contestado tu pregunta, puedes ver la respuesta que 
-            te envió en tu !" . anchor_enid("buzón aquí", "https://enidservice.com/inicio/login/");
+            te envió en tu !" . a_enid("buzón aquí", "https://enidservice.com/inicio/login/");
 
         $img = img_servicio($id_servicio, 1);
         $cuerpo = append([
@@ -80,8 +79,7 @@ if (!function_exists('invierte_date_time')) {
 
         ]);
 
-        $sender = get_request_email($email, $asunto, $cuerpo);
-        return $sender;
+        return  get_request_email($email, $asunto, $cuerpo);
 
     }
 
@@ -96,24 +94,24 @@ if (!function_exists('invierte_date_time')) {
 
             $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
             $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu artículos, puedes ver la pregunta que 
-            te envió en tu !" . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
+            te envió en tu !" . a_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
             $cuerpo = img_enid([], 1, 1) . h($text, 5);
-            $sender = get_request_email($email, $asunto, $cuerpo);
-            return $sender;
+            return get_request_email($email, $asunto, $cuerpo);
+
         }
     }
 
-    function get_titulo_modalidad($modalidad)
+    function titulo_modalidad($modalidad)
     {
 
         $texto = ($modalidad == 1) ? " LO QUE TE HAN PREGUNTADO" : "LO QUE PREGUNTASTÉ A VENDEDORES";
         return h($texto, 3);
     }
 
-    function get_url_imagen_pregunta($modalidad, $param)
+    function url_img_pregunta($modalidad, $param)
     {
 
-        $id_usuario = ($modalidad == 0) ? get_param_def($param, "id_usuario_venta") : get_param_def($param, "id_usuario");
+        $id_usuario = ($modalidad == 0) ? prm_def($param, "id_usuario_venta") : prm_def($param, "id_usuario");
         return "../imgs/index.php/enid/imagen_usuario/" . $id_usuario;
 
     }
@@ -122,7 +120,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $text = anchor_enid("Sobre -" . $param["nombre_servicio"],
+        $text = a_enid("Sobre -" . $param["nombre_servicio"],
             [
                 "href" => path_enid("producto", $param["id_servicio"])
             ]
@@ -193,8 +191,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $id_pregunta = $param["id_pregunta"];
-        $leido_cliente = $param["leido_cliente"];
-        $num = (es_data($param["respuestas"])) ? $param["respuestas"][0]["respuestas"] : 0;
+        $num = (es_data($param["respuestas"])) ? pr($param["respuestas"], "respuestas") : 0;
 
         $text = "";
         $base_servicio = [
@@ -207,7 +204,7 @@ if (!function_exists('invierte_date_time')) {
         ];
 
 
-        if ($leido_cliente < 1 && $num > 0) {
+        if ($param["leido_cliente"] < 1 && $num > 0) {
 
 
             $base_servicio += [

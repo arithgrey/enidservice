@@ -48,7 +48,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
 				"id_direccion" => $param["id_direccion"]
 			];
 
-			if (get_param_def($param, "asignacion") > 0) {
+			if (prm_def($param, "asignacion") > 0) {
 				/*elimino la dirección previa*/
 				$this->proyecto_persona_forma_pago_direccion_model->delete_por_id_recibo($param["id_recibo"]);
 				$this->delete_direccion_punto_encuentro($param["id_recibo"]);

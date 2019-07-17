@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d("alcance" . $vista);
 
 
-            $_response[] = anchor_enid(d(
+            $_response[] = a_enid(d(
                 d(
                     d(
                         append($r), "popup-head-left pull-left"), "popup-head"),
@@ -498,7 +498,7 @@ if (!function_exists('invierte_date_time')) {
         $url_img_servicio = $servicio["url_img_servicio"];
         $in_session = $servicio["in_session"];
         $id_usuario = $servicio["id_usuario"];
-        $id_perfil = (get_param_def($servicio, "id_perfil") > 0) ? $servicio["id_perfil"] : 0;
+        $id_perfil = (prm_def($servicio, "id_perfil") > 0) ? $servicio["id_perfil"] : 0;
 
 
         $p[] =
@@ -515,14 +515,14 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session > 0) {
 
 
-            $response[] = d(anchor_enid(append($p), get_url_servicio($id_servicio)));
+            $response[] = d(a_enid(append($p), get_url_servicio($id_servicio)));
             $response[] = d(valida_botton_editar_servicio($in_session, $id_servicio, $id_usuario, $servicio["id_usuario_actual"], $id_perfil));
             $response = d(append($response), "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 ");
 
 
         } else {
 
-            $response = anchor_enid(
+            $response = a_enid(
                 append($p),
                 [
                     "href" => get_url_servicio($id_servicio),
@@ -594,13 +594,13 @@ if (!function_exists('invierte_date_time')) {
         $meta_inf = ['href' => "#tab_terminos_de_busqueda", 'data-toggle' => "tab"];
 
         $list = [
-            li(anchor_enid(icon('fa fa-picture-o'), $foto_config), ["class" => valida_active($num, 1)]),
-            li(anchor_enid(icon('fa fa-credit-card'), $precios_config), ["class" => valida_active($num, 4), "style" => valida_existencia_imagenes($num_imagenes)]),
-            li(anchor_enid(icon('fa fa-info detalle'), $precios_inf), ["style" => valida_existencia_imagenes($num_imagenes)]),
-            li(anchor_enid(icon('fa fa-fighter-jet menu_meta_key_words'), $meta_inf),
+            li(a_enid(icon('fa fa-picture-o'), $foto_config), ["class" => valida_active($num, 1)]),
+            li(a_enid(icon('fa fa-credit-card'), $precios_config), ["class" => valida_active($num, 4), "style" => valida_existencia_imagenes($num_imagenes)]),
+            li(a_enid(icon('fa fa-info detalle'), $precios_inf), ["style" => valida_existencia_imagenes($num_imagenes)]),
+            li(a_enid(icon('fa fa-fighter-jet menu_meta_key_words'), $meta_inf),
                 ["class" => valida_active($num, 3), "style" => valida_existencia_imagenes($num_imagenes)]
             ),
-            li(anchor_enid(icon("fa fa-shopping-bag") . "VER PUBLICACIÓN",
+            li(a_enid(icon("fa fa-shopping-bag") . "VER PUBLICACIÓN",
                 [
                     "href" => $url_productos_publico,
                     "target" => "_blank",
@@ -659,7 +659,7 @@ if (!function_exists('invierte_date_time')) {
 
         $text = ($status > 0) ? "PAUSAR PUBLICACIÓN" : "ACTIVAR PUBLICACIÓN";
 
-        return anchor_enid(
+        return a_enid(
             $text,
             [
                 "id" => $id_servicio,
@@ -942,7 +942,7 @@ if (!function_exists('invierte_date_time')) {
     function get_precio_producto($url_info_producto, $precio)
     {
 
-        return d(d(anchor_enid($precio . 'MXN', $url_info_producto), "texto_precio"), 1);
+        return d(d(a_enid($precio . 'MXN', $url_info_producto), "texto_precio"), 1);
 
     }
 
@@ -1068,7 +1068,7 @@ if (!function_exists('invierte_date_time')) {
 
             if (strlen($link_dropshipping) > 10) {
 
-                $r[] = anchor_enid("Link", [
+                $r[] = a_enid("Link", [
                     "href" => $link_dropshipping,
                     "class" => "underline",
                     "target" => "_black"
@@ -1096,7 +1096,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(
             d(
 
-                anchor_enid(
+                a_enid(
 
                     icon('fa fa fa-times white')
 
@@ -1265,7 +1265,7 @@ if (!function_exists('invierte_date_time')) {
         $extra_extrega_casa_si = val_class(1, $entregas_en_casa, "button_enid_eleccion_active");
         $extra_extrega_casa_no = val_class(0, $entregas_en_casa, "button_enid_eleccion_active");
 
-        $confirmar = anchor_enid(
+        $confirmar = a_enid(
             "SI",
             [
                 "id" => '1',
@@ -1274,7 +1274,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $omitir = anchor_enid(
+        $omitir = a_enid(
             $atencion_en_casa,
             [
                 "id" => '0',
@@ -1293,7 +1293,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $ver_telefono = ($es_servicio == 1) ? "¿PERSONAS PUEDEN VER TU NÚMERO TELEFÓNICO PARA SOLICITARTE MÁS INFORMES?" : "¿PERSONAS PUEDEN SOLICITARTE MÁS INFORMES POR TELÉFONO?";
-        $v = anchor_enid(
+        $v = a_enid(
             "SI",
             [
                 'id' => 1,
@@ -1303,7 +1303,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $nov = anchor_enid(
+        $nov = a_enid(
             "NO, OCULTAR MI TELÉFONO",
             [
                 'id' => 0,
@@ -1329,7 +1329,7 @@ if (!function_exists('invierte_date_time')) {
             $v = val_class($es_entrega, 1, "button_enid_eleccion_active");
             $v2 = val_class($es_entrega, 0, "button_enid_eleccion_active");
             $si =
-                anchor_enid(
+                a_enid(
                     "SI",
                     [
                         'id' => 1,
@@ -1339,7 +1339,7 @@ if (!function_exists('invierte_date_time')) {
 
                 );
 
-            $no = anchor_enid("NO, SOLO ENVÍOS A DOMICILIO POR PAQUETERÍA",
+            $no = a_enid("NO, SOLO ENVÍOS A DOMICILIO POR PAQUETERÍA",
                 [
                     'id' => 0,
                     'class' => 'button_enid_eleccion ' . $v2,
@@ -1363,14 +1363,14 @@ if (!function_exists('invierte_date_time')) {
         $baja = val_class(0, $venta_mayoreo, "button_enid_eleccion_active");
 
         $m
-            = anchor_enid("SI",
+            = a_enid("SI",
             [
                 "id" => 1,
                 "class" => 'button_enid_eleccion venta_mayoreo ' . $activo
             ]
         );
 
-        $mm = anchor_enid("NO",
+        $mm = a_enid("NO",
             [
                 "id" => '0',
                 "class" =>
@@ -1426,7 +1426,7 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
 
         array_push($r, h("PRECIO POR UNIDAD", 5));
-        array_push($r, anchor_enid(
+        array_push($r, a_enid(
                 $text_precio_unidad,
                 [
                     "class" => "a_precio_unidad text_costo informacion_precio_unidad"
@@ -1555,7 +1555,7 @@ if (!function_exists('invierte_date_time')) {
 
             ]);
 
-            $imagenes[] = d(anchor_enid($img, $url_info_producto), "col-lg-3 producto_enid_img ");
+            $imagenes[] = d(a_enid($img, $url_info_producto), "col-lg-3 producto_enid_img ");
 
 
         }

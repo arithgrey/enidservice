@@ -49,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
                 d(
                     btw(
 
-                        anchor_enid('UN PRODUCTO',
+                        a_enid('UN PRODUCTO',
                             [
                                 "class" => "tipo_promocion tipo_producto easy_select_enid mr-1",
                                 "id" => "0",
@@ -57,7 +57,7 @@ if (!function_exists('invierte_date_time')) {
                             ]),
 
 
-                        anchor_enid(
+                        a_enid(
                             "UN SERVICIO",
                             [
                                 "class" => "tipo_promocion tipo_servicio",
@@ -183,7 +183,7 @@ if (!function_exists('invierte_date_time')) {
                     $articulo = (strlen($nombre) > 18) ? $titulo_corto : $nombre;
 
                     $link =
-                        anchor_enid($articulo,
+                        a_enid($articulo,
                             [
                                 'href' => path_enid("producto", $row['id_servicio']),
                                 'class' => 'black'
@@ -289,7 +289,7 @@ if (!function_exists('invierte_date_time')) {
                         ]);
 
 
-                    $r[] = anchor_enid(
+                    $r[] = a_enid(
                         append($r),
                         [
                             "href" => path_enid("producto", $row['id_servicio'])
@@ -326,7 +326,7 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $r[] = h("GRUPO AL CUAL PERTENECE TU PRODUCTO", 3);
-                $r[] = anchor_enid(
+                $r[] = a_enid(
                     "CANCELAR",
                     [
                         "class" => "cancelar_registro white",
@@ -420,7 +420,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $action = 0;
-            if (get_param_def($param, $key) !== 0) {
+            if (prm_def($param, $key) !== 0) {
                 $action = $param[$key];
                 switch ($action) {
                     case 'nuevo':
@@ -458,7 +458,7 @@ if (!function_exists('invierte_date_time')) {
                 $list = [
 
                     li(
-                        anchor_enid(
+                        a_enid(
                             text_icon('fa fa-cart-plus', " VENDER PRODUCTOS ")
                             ,
                             [
@@ -469,7 +469,7 @@ if (!function_exists('invierte_date_time')) {
                         valida_active_tab('nuevo', $action) . "  "
                     ),
                     li(
-                        anchor_enid(
+                        a_enid(
                             text_icon('fa fa-map', " PUNTOS DE VENTA ")
                             ,
                             [
@@ -482,7 +482,7 @@ if (!function_exists('invierte_date_time')) {
                     ),
 
                     li(
-                        anchor_enid(
+                        a_enid(
                             text_icon("fa fa-shopping-cart", " TUS ARTÍCULOS EN VENTA")
                             ,
                             [
@@ -503,7 +503,7 @@ if (!function_exists('invierte_date_time')) {
 
                     $list[] =
                         li(
-                            anchor_enid(
+                            a_enid(
                                 icon("fa fa-globe") . " ARTÍCULOS EN VENTA",
                                 [
                                     'data-toggle' => "tab",
@@ -524,7 +524,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $list = [
                     li(
-                        anchor_enid(
+                        a_enid(
                             "",
                             [
                                 "href" => "../planes_servicios/?action=nuevo",
@@ -534,7 +534,7 @@ if (!function_exists('invierte_date_time')) {
                         ["class" => valida_active_tab('nuevo', $action)]
                     ),
 
-                    li(anchor_enid(
+                    li(a_enid(
                         "",
                         [
                             'data-toggle' => "tab",

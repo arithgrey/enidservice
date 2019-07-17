@@ -105,7 +105,7 @@ if (!function_exists('invierte_date_time')) {
         function get_selector_direccion()
         {
 
-            $r[] = anchor_enid(
+            $r[] = a_enid(
                 d(
                     text_icon("fa fa-shopping-cart", " SI")
                     ,
@@ -117,7 +117,7 @@ if (!function_exists('invierte_date_time')) {
                 path_enid("lista_deseos")
             );
 
-            $r[] = anchor_enid(d(
+            $r[] = a_enid(d(
                 text_icon("fa fa-map-marker", "NO, VER DIRECCIÓN DE COMPRA")
                 ,
                 [

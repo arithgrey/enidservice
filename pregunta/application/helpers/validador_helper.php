@@ -54,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
                 }
 
                 $texto = d(append($p), "bloque_texto top_20");
-                $img = anchor_enid(img_servicio($id_servicio),
+                $img = a_enid(img_servicio($id_servicio),
                     [
                         "href" => get_url_servicio($id_servicio),
                         "class" => "anchor_imagen_servicio"
@@ -95,7 +95,7 @@ if (!function_exists('invierte_date_time')) {
         function get_call_to_action_registro($in_session)
         {
             if ($in_session != 1) {
-                return anchor_enid("ACCEDE A TU CUENTA PARA SOLICITAR INFORMACIÓN!", 1);
+                return a_enid("ACCEDE A TU CUENTA PARA SOLICITAR INFORMACIÓN!", 1);
             }
         }
     }

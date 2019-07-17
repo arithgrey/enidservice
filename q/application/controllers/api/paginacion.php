@@ -17,9 +17,9 @@ class Paginacion extends REST_Controller
 		if (if_ext($param, "totales_elementos,per_page,q")) {
 
 			$base_url = "?q=" . $param["q"];
-            $base_url .= (get_param_def($param, "q2", 0, 1) > 0) ? "&q2=".$param["q2"] : "";
-            $base_url .= (get_param_def($param, "q3", 0, 1) > 0) ? "&q3=".$param["q3"] :"";
-            $base_url .= (get_param_def($param, "order", 0, 1) > 0) ? "&order=" . $param["order"] : "";
+            $base_url .= (prm_def($param, "q2", 0, 1) > 0) ? "&q2=".$param["q2"] : "";
+            $base_url .= (prm_def($param, "q3", 0, 1) > 0) ? "&q3=".$param["q3"] :"";
+            $base_url .= (prm_def($param, "order", 0, 1) > 0) ? "&order=" . $param["order"] : "";
 
 			$config = [
                 'full_tag_open' => '<div class="pagination">',

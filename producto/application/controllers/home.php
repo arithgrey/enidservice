@@ -56,8 +56,8 @@ class Home extends CI_Controller
             "q2" => $param["q2"],
             "num_ciclos" => $param["num_ciclos"],
             "orden_pedido" => 1,
-            "carro_compras" => get_param_def($data , "carro_compras"),
-            "id_carro_compras" => get_param_def($data , "id_carro_compras"),
+            "carro_compras" => prm_def($data , "carro_compras"),
+            "id_carro_compras" => prm_def($data , "id_carro_compras"),
             "url_imagen_servicio" => get_img_serv($this->app->imgs_productos($param["plan"], 1, 1))
 
         ];
@@ -70,10 +70,10 @@ class Home extends CI_Controller
     {
 
 
-        $id_servicio = get_param_def($param, "producto", 0, 1);
+        $id_servicio = prm_def($param, "producto", 0, 1);
         $this->set_option("id_servicio", $id_servicio);
         $data = $this->app->session();
-        $data["proceso_compra"] = ($data["in_session"] == 1) ? 1 : get_param_def($param, "proceso");
+        $data["proceso_compra"] = ($data["in_session"] == 1) ? 1 : prm_def($param, "proceso");
 
         if ($id_servicio < 1) {
 
@@ -81,7 +81,7 @@ class Home extends CI_Controller
 
         } else {
 
-            $data["desde_valoracion"] = get_param_def($param, "valoracion");
+            $data["desde_valoracion"] = prm_def($param, "valoracion");
             $this->vista($param, $data);
         }
     }
@@ -100,7 +100,7 @@ class Home extends CI_Controller
     {
 
         $id_servicio = $this->get_option("id_servicio");
-        $data["q2"] = get_param_def($param, "q2");
+        $data["q2"] = prm_def($param, "q2");
         $servicio = $this->app->servicio($id_servicio);
         $data["tallas"] = $this->get_tallas($id_servicio);
         $usuario =  (es_data($servicio)) ? $this->app->usuario(pr($servicio, "id_usuario")) : redirect(path_enid("go_home"));

@@ -20,7 +20,7 @@ class Inicio extends CI_Controller
         $param = $this->input->get();
         if ($data["in_session"] == 1) {
 
-            $action = get_param_def($param, "action");
+            $action = prm_def($param, "action");
             $id_usuario = $data["id_usuario"];
             switch ($action) {
                 case 0:
@@ -163,10 +163,10 @@ class Inicio extends CI_Controller
         $prm["id_usuario"] = $id_usuario;
         $data["bancos"] = $this->get_bancos_disponibles($prm);
         $data["usuario"] = $this->app->usuario($id_usuario);
-        $data["banca"] = get_param_def($param, "tarjeta");
+        $data["banca"] = prm_def($param, "tarjeta");
         $prm = $this->input->get();
-        $data["error"] =  (get_param_def($prm, "error") > 0) ?  1 : 0;
-        $data["seleccion"] = get_param_def($param, "seleccion");
+        $data["error"] =  (prm_def($prm, "error") > 0) ?  1 : 0;
+        $data["seleccion"] = prm_def($param, "seleccion");
 
         $this->app->pagina($data, render_metodos_disponibles($data) ,1 );
 

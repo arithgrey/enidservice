@@ -1,5 +1,5 @@
 <div id="mySidenav" class="sidenav">
-    <?= anchor_enid("×",
+    <?= a_enid("×",
         [
             "href" => "javascript:void(0)",
             "class" => "closebtn closebtn_lateral",
@@ -7,7 +7,7 @@
         ]) ?>
 
     <?= d(
-        anchor_enid(img_enid([]),
+        a_enid(img_enid([]),
             [
                     "href" => path_enid("home")
             ]
@@ -22,7 +22,7 @@
 
         <?php if ($in_session < 1): ?>
             <?= btw(
-                anchor_enid("INICIAR SESSION",
+                a_enid("INICIAR SESSION",
                     [
                         "class" => "iniciar_sesion_lateral",
                         "style" => "color: white!important;",
@@ -30,7 +30,7 @@
                     ],
                     1)
                 ,
-                anchor_enid("ANUNCIA TU NEGOCIO AQUÍ" . icon('fa fa-user'),
+                a_enid("ANUNCIA TU NEGOCIO AQUÍ" . icon('fa fa-user'),
                     [
                         "class" => "call_to_action_anuncio",
                         "style" => "color: white!important;",

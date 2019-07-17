@@ -20,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
                 d(
                     icon("icon fa fa-space-shuttle black")
                      .
-                    anchor_enid(
+                    a_enid(
 
                         h($row["nombre_punto_encuentro"], 3, "title") .
                         p(

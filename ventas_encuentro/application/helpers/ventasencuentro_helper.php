@@ -6,7 +6,7 @@ if (!function_exists('invierte_date_time')) {
         {
             $r[] = format_form();
             $r[] = br(2);
-            $r[] = d("", "time_line_ventas_puntos_encuentro", 4, 1);;
+            $r[] = d("", "time_line_ventas_puntos_encuentro", 4, 1);
             return append($r);
 
         }
@@ -18,11 +18,10 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d("VENTAS PUNTO ENCUENTRO", "titulo_enid_sm", 1);
             $r[] = form_open("", ["class" => 'form_ventas_encuentro']);
-            $r[] = get_format_fecha_busqueda();
+            $r[] = frm_fecha_busqueda();
             $r[] = form_close(place("place_usabilidad top_50"));
 
-            $form = append($r);
-            return d(d($form, 8, 1), 13);
+            return d(d(append($r), 8, 1), 13);
 
         }
     }

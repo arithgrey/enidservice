@@ -14,7 +14,7 @@ class Home extends CI_Controller
 
         $param = $this->input->get();
 
-        if (ctype_digit(get_param_def($param, "q"))) {
+        if (ctype_digit(prm_def($param, "q"))) {
 
 
             $id_usuario = $this->input->get("q");
@@ -40,7 +40,7 @@ class Home extends CI_Controller
         }
 
         $resumen_recomendacion = $data_recomendacion["info_valoraciones"];
-        $prm["page"] = get_param_def($this->input->get(), "page");
+        $prm["page"] = prm_def($this->input->get(), "page");
         $prm["resultados_por_pagina"] = 5;
         $resumen_valoraciones_vendedor = $this->resumen_valoraciones_vendedor($prm);
         $prm["totales_elementos"] = $data_recomendacion["data"][0]["num_valoraciones"];

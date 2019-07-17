@@ -1,12 +1,12 @@
 <?php
 $list = [
     h("ASISTENCIA", 4, "strong"),
-    anchor_enid("- Servicio al cliente",
+    a_enid("- Servicio al cliente",
         [
             "class" => 'black ',
             "href" => path_enid("contacto")
         ]),
-    anchor_enid("-Términos y condiciones",
+    a_enid("-Términos y condiciones",
         [
             "class" => 'black ',
             "href" => path_enid("terminos-y-condiciones")
@@ -22,7 +22,7 @@ $list2 = [
         ,
         "strong"
     ),
-    anchor_enid(
+    a_enid(
         "- Temas de ayuda",
         [
             "class" => 'black ',
@@ -32,7 +32,7 @@ $list2 = [
 
 $list3 = [
     h("ESPECIALES", 4, "strong"),
-    anchor_enid("- Trabaja en nuestro equipo",
+    a_enid("- Trabaja en nuestro equipo",
         [
             "class" => 'black ',
             "href" => "../unete_a_nuestro_equipo"
@@ -40,7 +40,7 @@ $list3 = [
 
 $list4 = [
     h("ACERCA DE NOSOTROS", 4, "strong"),
-    anchor_enid(
+    a_enid(
         img(
             [
                 "src" => path_enid("img_logo")
@@ -122,7 +122,7 @@ $list_footer = [
                 ]));
 
                 ?>
-                <?= d(anchor_enid(append($c),
+                <?= d(a_enid(append($c),
                     [
                         "href" => path_enid("faqs"),
                         "class" => "white"
@@ -151,8 +151,8 @@ $list_footer = [
             d("© 2019 ENID SERVICE.")
             ,
             d(
-                anchor_enid("FAQS", ["class" => "white", "href" => path_enid("faqs")]) .
-                anchor_enid("NOSOTROS", ["class" => "white ml-5", "href" => path_enid("sobre_enid")])
+                a_enid("FAQS", ["class" => "white", "href" => path_enid("faqs")]) .
+                a_enid("NOSOTROS", ["class" => "white ml-5", "href" => path_enid("sobre_enid")])
             )
             ,
             'white footer-enid page-footer  d-flex align-items-center justify-content-between'

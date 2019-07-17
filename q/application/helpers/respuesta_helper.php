@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
             $text_perfil = ($idperfil != 20) ? "Equipo Enid Service" : "Cliente";
 
             $r = [];
-            $r[] = anchor_enid(img(["class" => 'media-object']), ["class" => 'pull-left']);
+            $r[] = a_enid(img(["class" => 'media-object']), ["class" => 'pull-left']);
             $r[] = small(icon('fa fa-clock-o') . $fecha_registro, ["class" => 'pull-right time']);
             $r[] = d($usuario_respuesta . "  | " . $text_perfil, ["class" => 'media-heading']);
             $r[] = d($respuesta);
@@ -66,7 +66,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $g[] = h($data_send["pregunta"], 2);
-        $g[] = anchor_enid(strong("SOBRE") . strtoupper($data_send["nombre_servicio"]),
+        $g[] = a_enid(strong("SOBRE") . strtoupper($data_send["nombre_servicio"]),
             [
                 "href" => get_url_servicio($data_send["id_servicio"]),
                 "class" => 'a_enid_blue_sm'

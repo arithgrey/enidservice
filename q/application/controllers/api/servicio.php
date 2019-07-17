@@ -56,7 +56,7 @@ class Servicio extends REST_Controller
         $response = false;
         if (if_ext($param, "id_servicio,stock")) {
             $id_servicio = $param["id_servicio"];
-            if (get_param_def($param, "compra") > 0) {
+            if (prm_def($param, "compra") > 0) {
 
                 $response = $this->serviciosmodel->set_compra_stock($param["stock"], $id_servicio);
             } else {
@@ -348,7 +348,7 @@ class Servicio extends REST_Controller
             (array_key_exists("quinto_nivel", $param)) ? $param["quinto_nivel"] : 0;
 
         $nombre_servicio = $param["nombre_servicio"];
-        $valor_precio = get_param_def($param, "precio");
+        $valor_precio = prm_def($param, "precio");
 
         $lista_clasificaciones = [$primer_nivel, $segundo_nivel, $tercer_nivel, $cuarto_nivel, $quinto_nivel];
 
@@ -671,7 +671,7 @@ class Servicio extends REST_Controller
             $param = $this->get();
             $param["q"] = $this->get("q");
             $param["id_usuario"] = $this->id_usuario;
-            $param["id_clasificacion"] = get_param_def($param, "q2");
+            $param["id_clasificacion"] = prm_def($param, "q2");
             $param["extra"] = $param;
             $param["resultados_por_pagina"] = 12;
             $param["agrega_clasificaciones"] = 0;
@@ -716,7 +716,7 @@ class Servicio extends REST_Controller
         $config["per_page"] = 12;
         $config["q"] = $param["q"];
         $config["q2"] = 0;
-        $config["page"] = get_param_def($this->input->get(), "page");
+        $config["page"] = prm_def($this->input->get(), "page");
         $busqueda = $param["q"];
         $num_servicios = $servicios["num_servicios"];
         $this->set_option("in_session", 1);
@@ -1086,7 +1086,7 @@ class Servicio extends REST_Controller
     {
 
         $param = $this->get();
-        $param["id_usuario"] = ($this->app->is_logged_in() && $this->id_usuario > 0) ? $this->id_usuario : get_param_def($param, "id_usuario");
+        $param["id_usuario"] = ($this->app->is_logged_in() && $this->id_usuario > 0) ? $this->id_usuario : prm_def($param, "id_usuario");
         $servicios = $this->serviciosmodel->busqueda($param);
         $servicios += [
             "url_request" => get_url_request(""),
@@ -1526,7 +1526,7 @@ class Servicio extends REST_Controller
 
 
                     $array =
-                        [anchor_enid($img,
+                        [a_enid($img,
                             [
                                 "href" => "../producto/?producto=" . $id_servicio,
                                 "target" => "_black"

@@ -22,7 +22,7 @@ if (!function_exists('invierte_date_time')) {
         } else {
 
 
-            if (get_param_def($data, "respuesta") > 0) {
+            if (prm_def($data, "respuesta") > 0) {
 
 
                 $response = (array_key_exists("param", $data) && array_key_exists("config", $data["param"])) ? get_form_respuesta($data, 1) : get_lista_faq($data["respuesta"], $data);
@@ -67,7 +67,7 @@ if (!function_exists('invierte_date_time')) {
 
                 );
 
-                $r[] = anchor_enid($bloque, path_enid("editar_faq", $id_faq));
+                $r[] = a_enid($bloque, path_enid("editar_faq", $id_faq));
 
             }
 
@@ -87,7 +87,7 @@ if (!function_exists('invierte_date_time')) {
                 $respuesta = $row["respuesta"];
                 $fecha_registro = $row["fecha_registro"];
 
-                $extra = ($data["in_session"] > 0) ? anchor_enid(icon("fa fa-cogs"), ["href" => path_enid("editar_faq", $id_faq . "&config=1")]) : "";
+                $extra = ($data["in_session"] > 0) ? a_enid(icon("fa fa-cogs"), ["href" => path_enid("editar_faq", $id_faq . "&config=1")]) : "";
                 $x[] = d(h($extra . $titulo, 4, "black text-uppercase underline"), 1);
                 $x[] = d(p($respuesta, "black top_30"), 1);
                 $x[] = d(p($fecha_registro, "top_30"), 1);
@@ -264,7 +264,7 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = img($source);
                 $x[] = heading($titulo);
                 $text = ul(li(append($x)), "event-list");
-                $r[] = anchor_enid($text, ["href" => $href]);
+                $r[] = a_enid($text, ["href" => $href]);
                 $z++;
             }
 
@@ -283,7 +283,7 @@ if (!function_exists('invierte_date_time')) {
                 $btn_conf = "";
                 if ($in_session > 0 && $perfil != 20 && $perfil != 19 && $perfil != 17) {
 
-                    $btn_conf = anchor_enid("", [
+                    $btn_conf = a_enid("", [
                         "href" => '#tab2default',
                         "data-toggle" => 'tab',
                         "class" => 'btn_edicion_respuesta fa fa-cog',
@@ -303,7 +303,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             return ul([
-                    anchor_enid(
+                    a_enid(
                         path_enid("fa fa-question-circle", "PREGUNTAS FRECUENTES")
                         ,
                         [
@@ -323,7 +323,7 @@ if (!function_exists('invierte_date_time')) {
             $n = [20 ,19 ,17];
             if ($in_session == 1 && !in_array($perfil,$n)) {
 
-                $response = anchor_enid(
+                $response = a_enid(
                     text_icon("fa fa-plus-circle", "AGREGAR")
                     ,
                     [
@@ -348,7 +348,7 @@ if (!function_exists('invierte_date_time')) {
                 $faqs = $row["faqs"];
                 $href = "?categoria=" . $id_categoria;
 
-                $l[] = d(anchor_enid(d($nombre_categoria . "(" . $faqs . ")"), ["href" => $href]));
+                $l[] = d(a_enid(d($nombre_categoria . "(" . $faqs . ")"), ["href" => $href]));
             }
             return append($l);
         }

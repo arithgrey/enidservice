@@ -464,7 +464,7 @@ class serviciosmodel extends CI_Model
 		$extra_existencia = ( $id_usuario > 0 ) ? " " : " AND existencia > 0  ";
 		$sql_considera_imagenes = ($id_usuario > 0) ? " " : " AND flag_imagen = 1 ";
 		$extra_empresa = ($id_usuario > 0) ? " AND id_usuario = " . $id_usuario : "";
-        $extra_empresa  = ( get_param_def($param , "global") >  0  ) ? " " : $extra_empresa;
+        $extra_empresa  = ( prm_def($param , "global") >  0  ) ? " " : $extra_empresa;
 		$vendedor = $param["vendedor"];
 		$extra_vendedor = ( $vendedor > 0 ) ? " AND id_usuario =  '" . $vendedor . "'" : "";
 		$orden = $this->get_orden($param);

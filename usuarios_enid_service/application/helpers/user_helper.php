@@ -8,7 +8,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = h("Afiliados Enid Service", 3);
             $r[] = addNRow(ul(li(
-                    anchor_enid(
+                    a_enid(
                         text_icon('fa fa-trophy', "Miembros Afiliados")
                         ,
                         [
@@ -61,7 +61,6 @@ if (!function_exists('invierte_date_time')) {
                 "val" => 2
             );
 
-
             $opt[] = array(
                 "opcion" => "2PM",
                 "val" => "2PM"
@@ -79,7 +78,6 @@ if (!function_exists('invierte_date_time')) {
                 "opcion" => "7PM",
                 "val" => "7PM"
             );
-
 
             $opt_sexo[] = array(
                 "opcion" => "Masculino",
@@ -142,7 +140,6 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $r[] = d(append($y), 13);
-
             $x[] = d("Email");
             $x[] = input([
                 "name" => "email",
@@ -232,7 +229,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_info_usuario()
         {
             $l = [
-                li(anchor_enid("Miembros activos" . icon("fa fa-trophy"),
+                li(a_enid(text_icon("fa fa-trophy",  "Miembros activos") ,
                     [
                         "href" => "#tab_usuarios_activos",
                         "data-toggle" => "tab",
@@ -240,7 +237,7 @@ if (!function_exists('invierte_date_time')) {
                         "id" => '1'
                     ]), ["class" => "active", "id" => "1"]),
 
-                li(anchor_enid(
+                li(a_enid(
                     "Bajas" . icon("fa fa-chevron-circle-down"),
                     [
                         "href" => "#tab_usuarios_baja",
@@ -295,15 +292,15 @@ if (!function_exists('invierte_date_time')) {
         function get_format_categorias()
         {
 
-            $r[] = d(get_form_categorias(), 7);
+            $r[] = d(frm_categorias(), 7);
             $r[] = d(heading("CATEGORÍAS    EN PRODUCTOS Y SERVICIOS", 3), 5);
             return append($r);
 
 
         }
     }
-    if (!function_exists('get_form_categorias')) {
-        function get_form_categorias()
+    if (!function_exists('frm_categorias')) {
+        function frm_categorias()
         {
 
 
@@ -338,16 +335,14 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = form_close();
-            $r[] = "<table>";
+
             $r[] = td(place('primer_nivel'));
             $r[] = td(place('segundo_nivel'));
             $r[] = td(place('tercer_nivel'));
             $r[] = td(place('cuarto_nivel'));
             $r[] = td(place('quinto_nivel'));
-            $r[] = "</table>";
 
-            return append($r);
-
+            return tb(append($r));
 
         }
 
@@ -359,7 +354,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = h("Agregar Recurso", 3);
-            $r[] = get_form_recurso();
+            $r[] = frm_recurso();
             return append($r);
 
         }
@@ -367,8 +362,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    if (!function_exists('get_form_recurso')) {
-        function get_form_recurso()
+    if (!function_exists('frm_recurso')) {
+        function frm_recurso()
         {
 
             $r[] = form_open("", ["class" => "form_recurso", "id" => 'form_recurso']);
@@ -415,33 +410,33 @@ if (!function_exists('invierte_date_time')) {
             $config["class"] = 'black strong tab_equipo_enid_service';
             $config["href"] = "#tab1";
 
-            $l1 = li(anchor_enid(icon("fa fa-space-shuttle") . 'EQUIPO  ENID  SERVICE', $config));
+            $l1 = li(a_enid( text_icon("fa fa-space-shuttle",  'EQUIPO  ENID  SERVICE'), $config));
 
             $config["id"] = 'tab_afiliados';
             $config["class"] = 'black strong tab_afiliados btn_ventas_mes_usuario';
             $config["href"] = "#tab_productividad_ventas";
 
-            $l2 = li(anchor_enid(text_icon("fa fa-handshake-o", "AFILIADOS") . place("place_num_productividad"), $config));
+            $l2 = li(a_enid(text_icon("fa fa-handshake-o", "AFILIADOS") . place("place_num_productividad"), $config));
 
             $config["id"] = 'tab_perfiles';
             $config["class"] = 'black strong perfiles_permisos';
             $config["href"] = "#tab_perfiles_permisos";
 
-            $l3 = li(anchor_enid(text_icon("fa fa-unlock-alt" ,  "PERFILES / PERMISOS "), $config));
+            $l3 = li(a_enid(text_icon("fa fa-unlock-alt" ,  "PERFILES / PERMISOS "), $config));
 
             $config3["id"] = 'agregar_categorias';
             $config3["class"] = 'black strong tab_agregar_categorias';
             $config3["data-toggle"] = 'tab';
             $config3["href"] = "#tab_agregar_categorias";
 
-            $l4 = li(anchor_enid(text_icon("fa fa-circle", "CATEGORÍAS / SERVICIOS"), $config3));
+            $l4 = li(a_enid(text_icon("fa fa-circle", "CATEGORÍAS / SERVICIOS"), $config3));
 
             $config4["id"] = 'agregar_tallas_menu';
             $config4["class"] = 'black strong agregar_tallas';
             $config4["data-toggle"] = 'tab';
             $config4["href"] = "#agregar_tallas";
 
-            $l5 = li(anchor_enid(icon("fa fa-percent") . "TALLAS", $config4));
+            $l5 = li(a_enid(icon("fa fa-percent") . "TALLAS", $config4));
             $list = [$l1, $l2, $l3 . $l4, $l5];
             return ul($list, ["class" => "nav tabs"]);
 

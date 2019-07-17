@@ -20,7 +20,7 @@ class Punto_encuentro extends REST_Controller
         $response = [];
         if (if_ext($param, "dia")) {
 
-            $response = get_param_def(lista_horarios($param["dia"]), "select", []);
+            $response = prm_def(lista_horarios($param["dia"]), "select", []);
 
         }
 
@@ -77,15 +77,15 @@ class Punto_encuentro extends REST_Controller
 
             $lista_negra = [];
             $id_usuario = 0;
-            if (get_param_def($param, "servicio") > 0) {
+            if (prm_def($param, "servicio") > 0) {
 
                 $id_usuario = $this->get_usuario_por_servicio($param["servicio"]);
             }
-            if ($id_usuario > 0 || get_param_def($param,"id_usuario") > 0) {
+            if ($id_usuario > 0 || prm_def($param,"id_usuario") > 0) {
 
                 if ($id_usuario < 1 ){
 
-                    $id_usuario =  get_param_def($param,"id_usuario") ;
+                    $id_usuario =  prm_def($param,"id_usuario") ;
 
                 }
                 $lista_negra = $this->get_lista_negra($id_usuario);
@@ -94,7 +94,7 @@ class Punto_encuentro extends REST_Controller
 
             if ($param["v"] == 1) {
 
-                if (get_param_def($param, "configurador") >  0 ){
+                if (prm_def($param, "configurador") >  0 ){
 
                     $response = create_estaciones_configurador($response, $lista_negra);
 

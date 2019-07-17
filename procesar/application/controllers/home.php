@@ -36,7 +36,7 @@ class Home extends CI_Controller
         } else {
 
 
-            $fb = (get_param_def($param, "recibo", 0, 1) > 0) ? $this->add_domicilio_entrega($param) : redirect("../../");
+            $fb = (prm_def($param, "recibo", 0, 1) > 0) ? $this->add_domicilio_entrega($param) : redirect("../../");
 
 
         }

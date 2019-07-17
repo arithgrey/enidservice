@@ -482,7 +482,7 @@ class usuario extends REST_Controller
 						$response["usuario_registrado"] = 1;
 					}
 
-					$simple = (get_param_def($param, "simple") > 0) ? 1 : 0;
+					$simple = (prm_def($param, "simple") > 0) ? 1 : 0;
 					if ($simple == 0) {
 						$id_servicio = $param["servicio"];
 						$this->inicia_proceso_compra($param, $response["id_usuario"], $id_servicio);
@@ -596,7 +596,7 @@ class usuario extends REST_Controller
 			$per_page = 10;
 			$param["resultados_por_pagina"] = $per_page;
 			$data["miembros"] = $this->usuario_model->get_equipo_enid_service($param);
-			$config_paginacion["page"] = get_param_def($param, "page");
+			$config_paginacion["page"] = prm_def($param, "page");
 			$config_paginacion["totales_elementos"] = $total;
 			$config_paginacion["per_page"] = $per_page;
 			$config_paginacion["q"] = "";
@@ -618,7 +618,7 @@ class usuario extends REST_Controller
 		$per_page = 10;
 		$param["resultados_por_pagina"] = $per_page;
 		$data["miembros"] = $this->usuario_model->get_usuarios_periodo($param);
-		$config_paginacion["page"] = get_param_def($param, "page");
+		$config_paginacion["page"] = prm_def($param, "page");
 		$config_paginacion["totales_elementos"] = $total;
 		$config_paginacion["per_page"] = $per_page;
 		$config_paginacion["q"] = "";
@@ -696,7 +696,7 @@ class usuario extends REST_Controller
 		$password = $param["password"];
 		$nombre = $param["nombre"];
 		$telefono = $param["telefono"];
-		$id_usuario_referencia = get_param_def($param, "usuario_referencia",1);
+		$id_usuario_referencia = prm_def($param, "usuario_referencia",1);
 
 		$params = [
 			"email" => $email,
@@ -837,7 +837,7 @@ class usuario extends REST_Controller
 				'title' => "Servicios postulados"
 			);
 
-			$num = ($num > 0) ? anchor_enid($num, $config) : 0;
+			$num = ($num > 0) ? a_enid($num, $config) : 0;
 			$config = array('class' => 'usuarios',
 				'fecha_inicio' => $fecha,
 				'fecha_termino' => $fecha,
@@ -848,7 +848,7 @@ class usuario extends REST_Controller
 
 			$num_registros = $this->search_element_array($param["usuarios_nuevos"],
 				"fecha", $fecha, "num");
-			$num_registros = ($num_registros > 0) ? anchor_enid($num_registros, $config) : 0;
+			$num_registros = ($num_registros > 0) ? a_enid($num_registros, $config) : 0;
 			if ($a < $total) {
 				array_push($publicaciones, $num);
 				array_push($registros, $num_registros);

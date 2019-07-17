@@ -41,7 +41,7 @@ class Linea_metro extends REST_Controller
             $params = ["tipo" => $param["tipo"]];
             $response = $this->linea_metro_model->get([], $params, 100);
             $lista_negra = [];
-            if (get_param_def($param, "id_usuario") > 0) {
+            if (prm_def($param, "id_usuario") > 0) {
 
                 $lista_negra = $this->get_lista_negra($param["id_usuario"]);
             }
@@ -51,7 +51,7 @@ class Linea_metro extends REST_Controller
                     case 1:
 
 
-                        if (get_param_def($param,"configurador") < 1 ){
+                        if (prm_def($param,"configurador") < 1 ){
 
                             $response = create_listado_linea_metro($response, $lista_negra);
                         }else{
