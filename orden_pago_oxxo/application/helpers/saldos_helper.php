@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
             ]);
 
 
-            $folio = get_param_def($pago, "q2", "");
+            $folio = prm_def($pago, "q2", "");
             $monto = $pago["q"];
             $concepto = "Saldo a cuenta Enid Service";
 
@@ -147,7 +147,7 @@ if (!function_exists('invierte_date_time')) {
             $r [] = d("En el podrás verificar que se haya realizado correctamente, conserva este comprobante.");
 
             $r [] = d("6.- Notifica tu pago desde tu área de cliente");
-            $r [] = anchor_enid("http://enidservice.com/inicio/login/",
+            $r [] = a_enid("http://enidservice.com/inicio/login/",
                 [
                     "href" => "http://enidservice.com/inicio/login/"
                 ]);

@@ -8,7 +8,7 @@ if (!function_exists('invierte_date_time')) {
             $paginacion =  $data["paginacion"];
 
             $r[] =  h("RESEÑAS Y VALORACIONES SOBRE", 3, "underline" ) ;
-            $r[] =  anchor_enid(icon('fa fa-shopping-cart') . get_campo($usuario, "nombre"),
+            $r[] =  a_enid(icon('fa fa-shopping-cart') . get_campo($usuario, "nombre"),
                 [
 
                     "href" => "../search/?q3=" . get_campo($usuario, "id_usuario"),

@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($catalogo as $row) {
 
             array_push($response,
-                anchor_enid($row,
+                a_enid($row,
                     [
                         'class' => 'white tag_catalogo',
                         'id' => $row

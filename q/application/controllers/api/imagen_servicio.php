@@ -19,13 +19,13 @@ class Imagen_servicio extends REST_Controller
 
 			$id_servicio = $param["id_servicio"];
 
-			if (get_param_def($param, "c") >  0){
+			if (prm_def($param, "c") >  0){
 
-				$response =  $this->imagen_servicio_model->get_imagen_servicio($id_servicio, get_param_def($param,"l",1));
+				$response =  $this->imagen_servicio_model->get_imagen_servicio($id_servicio, prm_def($param,"l",1));
 
 			}else{
 
-				$limit = (get_param_def($param, "limit") > 0) ? $param["limit"] : 8;
+				$limit = (prm_def($param, "limit") > 0) ? $param["limit"] : 8;
 				$in = ["id_servicio" => $id_servicio];
 				$f = ["id_imagen", "principal"];
 				$response = $this->imagen_servicio_model->get($f, $in, $limit, "principal");

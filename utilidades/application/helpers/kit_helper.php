@@ -5,7 +5,6 @@ if (!function_exists('invierte_date_time')) {
         function form_tags()
         {
 
-
             $r[] =  form_open("", ["class"=>"form_tags"]);
             $r[] =  d(textarea(["class" => "tags_text", "name"  => "tags_text"]),1);
             $r[] =  place("notificacion_tags");

@@ -11,13 +11,9 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         foreach ($categorias as $row) {
 
-            $id_categoria = $row["id_categoria"];
-            $nombre_categoria = $row["nombre_categoria"];
-            $faqs = $row["faqs"];
-            $href = "?categoria=" . $id_categoria;
-            $text_lista = span($nombre_categoria . "(" . $faqs . ")");
-            $link = anchor_enid($text_lista, $href);
-            $r[] = d($link);
+            $href = "?categoria=" . $row["id_categoria"];
+            $text_lista = span($row["nombre_categoria"] . "(" . $row["faqs"]. ")");
+            $r[] = d(a_enid($text_lista, $href));
         }
         return append($r);
     }
@@ -50,7 +46,7 @@ if (!function_exists('invierte_date_time')) {
     function text_agregar_telefono($has_phone, $telefono_visible)
     {
 
-        $link =  ($has_phone == 0)  ? anchor_enid('INDICA TU NÚMERO TELEFÓNICO',  path_enid("administracion_cuenta") ) : "";
+        $link =  ($has_phone == 0)  ? a_enid('INDICA TU NÚMERO TELEFÓNICO',  path_enid("administracion_cuenta") ) : "";
         return d(d($link, 1), "top_30");
 
     }
@@ -89,7 +85,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response = ($num_images == 0 || $id_perfil != 20 && $id_perfil > 0) ?
             d(
-                anchor_enid(
+                a_enid(
                     "DESCARTAR PROMOCIÓN",
                     [
                         "class" => 'descartar_promocion border descartar_promocion padding_10 ',

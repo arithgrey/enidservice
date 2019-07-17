@@ -27,7 +27,7 @@ class Stock extends REST_Controller
 			$response = $this->asocia_servicio_solicitudes($pedidos_servicio, $param["tipo"]);
 			$compras_por_enviar = $this->get_compras_por_enviar();
 
-			if (get_param_def($param, "v") > 0) {
+			if (prm_def($param, "v") > 0) {
 
 				$response = $this->create_table_compras($response, $compras_por_enviar);
 
@@ -70,7 +70,7 @@ class Stock extends REST_Controller
 				"src" => $url_imagen,
 			]);
 
-			$img = anchor_enid($img, ["href" => get_url_servicio($id_servicio)]);
+			$img = a_enid($img, ["href" => get_url_servicio($id_servicio)]);
 			$total_enid = $this->get_ventas_tipo(1, $compras_por_enviar, $id_servicio);
 			$total_otras = $this->get_ventas_tipo(2, $compras_por_enviar, $id_servicio);
 			$total_compras = ($sugerencia + $total_enid + $total_otras) - $stock;
@@ -124,7 +124,7 @@ class Stock extends REST_Controller
 	private function get_format_resumen($resumen, $pedidos, $pedidos_contra_entrega)
 	{
 
-		//$resumen        =  anchor_enid($resumen , ["class"    =>  "dropdown-toggle" , "href"=>"#",  "id"=>"dropdownMenuLink"]);
+		//$resumen        =  a_enid($resumen , ["class"    =>  "dropdown-toggle" , "href"=>"#",  "id"=>"dropdownMenuLink"]);
 		$solicitudes = $pedidos["solicitudes"];
 		$entregas = $pedidos["entregas"];
 

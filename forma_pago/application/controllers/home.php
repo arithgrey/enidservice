@@ -13,7 +13,7 @@ class Home extends CI_Controller
     {
 
         $param = $this->input->get();
-        $i = get_param_def($param, "info");
+        $i = prm_def($param, "info");
 
         switch ($i) {
 

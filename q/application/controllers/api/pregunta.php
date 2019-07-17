@@ -94,7 +94,7 @@ class pregunta extends REST_Controller
 
 					$cliente = $usuario[0];
 					$nombre = strtoupper($cliente["nombre"] . " " . $cliente["apellido_paterno"]);
-					$sender = get_format_respuesta_vendedor($cliente["email"], $nombre, $pregunta["id_servicio"]);
+					$sender = frm_respuesta_vendedor($cliente["email"], $nombre, $pregunta["id_servicio"]);
 					$response = $this->app->send_email($sender, 1);
 				}
 			}
@@ -132,7 +132,7 @@ class pregunta extends REST_Controller
 					    "pregunta" => $param["pregunta"],
 						"id_usuario" => $param["usuario"],
 						"id_servicio" => $id_servicio,
-						"id_vendedor" => get_param_def($usuario,0) ?  $usuario[0]["id_usuario"] : 0,
+						"id_vendedor" => prm_def($usuario,0) ?  $usuario[0]["id_usuario"] : 0,
 						"se_responde"   => 0,
 						"se_lee"        => 1,
 						"se_ve_cliente"  => 1,
@@ -222,7 +222,7 @@ class pregunta extends REST_Controller
         $response =  "";
 		if ($param["modalidad"] == 1) {
 
-			if (get_param_def($param,"id_usuario") > 0 ) {
+			if (prm_def($param,"id_usuario") > 0 ) {
 				$param["id_usuario"] = $this->app->get_session("idusuario");
 			}
 
@@ -266,7 +266,7 @@ class pregunta extends REST_Controller
 				$in = ["id_vendedor" => $id_vendedor];
 
 			}
-			if (get_param_def($param,"id_pregunta") >  0) {
+			if (prm_def($param,"id_pregunta") >  0) {
 
 				$in["id_pregunta"] = $param["id_pregunta"];
 
@@ -332,7 +332,7 @@ class pregunta extends REST_Controller
 
 			}
 
-            $id_pregunta =  get_param_def($param, "id_pregunta");
+            $id_pregunta =  prm_def($param, "id_pregunta");
 			if ($id_pregunta >  0) {
 
 			    $in["id_pregunta"] = $id_pregunta;

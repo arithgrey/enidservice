@@ -53,7 +53,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = h("BUZÓN", 3);
             $r[] = d(append(
 
-                anchor_enid("HECHAS" .
+                a_enid("HECHAS" .
                     span("", 'notificacion_preguntas_sin_leer_cliente'),
                     [
                         "class" => "a_enid_black preguntas btn_preguntas_compras",
@@ -62,7 +62,7 @@ if (!function_exists('invierte_date_time')) {
                 )
                 ,
 
-                anchor_enid(
+                a_enid(
                     "RECIBIDAS" .
                     span("", 'notificacion_preguntas_sin_leer_ventas')
                     ,
@@ -86,7 +86,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
             $x[] = d($valoraciones, "top_30");
             $x[] = d(
-                anchor_enid(
+                a_enid(
                     "VER COMENTARIOS",
                     [
                         "href" => path_enid("recomendacion", $id_usuario),
@@ -145,7 +145,7 @@ if (!function_exists('invierte_date_time')) {
     function get_menu($action)
     {
         $_pagos =
-            anchor_enid("",
+            a_enid("",
                 [
                     "href" => "#tab_pagos",
                     "data-toggle" => "tab",
@@ -154,7 +154,7 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
         $_vendedor =
-            anchor_enid(
+            a_enid(
                 d(
                     text_icon("fa fa-flag", " VENDER"),
                     [
@@ -165,7 +165,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-        $a_mis_ventas = anchor_enid(
+        $a_mis_ventas = a_enid(
 
             text_icon('fa fa-shopping-bag', "VENTAS")
             ,
@@ -179,7 +179,7 @@ if (!function_exists('invierte_date_time')) {
         $place_ventas = place("place_num_pagos_notificados");
 
 
-        $_compras = anchor_enid(text_icon('fa fa-credit-card-alt', " COMPRAS"),
+        $_compras = a_enid(text_icon('fa fa-credit-card-alt', " COMPRAS"),
             [
                 "id" => "mis_compras",
                 "href" => "#tab_mis_pagos",
@@ -187,7 +187,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'btn_cobranza mis_compras'
             ]);
 
-        $notificacion = anchor_enid(place("place_num_pagos_por_realizar"), [
+        $notificacion = a_enid(place("place_num_pagos_por_realizar"), [
                 "id" => "mis_compras",
                 "href" => "#tab_mis_pagos",
                 "data-toggle" => "tab",
@@ -195,7 +195,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $_valoraciones = anchor_enid(
+        $_valoraciones = a_enid(
             text_icon("fa fa-star", " VALORACIONES"),
             [
                 "id" => "mis_valoraciones",
@@ -203,7 +203,7 @@ if (!function_exists('invierte_date_time')) {
                 "data-toggle" => "tab"
             ]);
 
-        $_lista_deseo = anchor_enid(text_icon("fa fa-gift" ,  "LISTA DE DESEOS")  , path_enid("lista_deseos"));
+        $_lista_deseo = a_enid(text_icon("fa fa-gift" ,  "LISTA DE DESEOS")  , path_enid("lista_deseos"));
 
 
         $list = [

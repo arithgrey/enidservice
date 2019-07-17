@@ -140,7 +140,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_format_user($usuario, 1);
             $r[] = addNRow(d(get_campo($usuario, "email", ""), "top_20", 1));
             $r[] = addNRow(get_campo($usuario, "tel_contacto", "Tu prime apellido", 1));
-            $r[] = anchor_enid(text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"),
+            $r[] = a_enid(text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"),
                 [
                     "class" => "a_enid_black btn_direccion top_20",
                     "href" => "#tab_direccion",
@@ -391,7 +391,7 @@ if (!function_exists('invierte_date_time')) {
 
             $list = [
                 li(
-                    anchor_enid(
+                    a_enid(
                         text_icon("fa fa-address-book-o", "CUENTA")
 
                         ,
@@ -404,7 +404,7 @@ if (!function_exists('invierte_date_time')) {
                     )
                 ),
 
-                li(anchor_enid(
+                li(a_enid(
                         text_icon("fa  fa-fighter-jet", "DIRECCIÓN DE ENVÍO")
                         ,
                         [
@@ -418,7 +418,7 @@ if (!function_exists('invierte_date_time')) {
                 ),
 
 
-                li(anchor_enid(
+                li(a_enid(
                         text_icon("fa fa-unlock-alt", "CONTRASEÑA")
                         ,
                         [
@@ -430,7 +430,7 @@ if (!function_exists('invierte_date_time')) {
                 ),
 
 
-                li(anchor_enid(
+                li(a_enid(
 
                         text_icon("fa fa-shield", "PRIVACIDAD Y SEGURIDAD"),
                         [
@@ -441,7 +441,7 @@ if (!function_exists('invierte_date_time')) {
                 ),
 
 
-                li(icon("fa fa-gift f12 ") . anchor_enid(
+                li(icon("fa fa-gift f12 ") . a_enid(
                         "INTERESES Y PREFERENCIAS",
                         [
                             "class" => "btn_intereses",
@@ -452,7 +452,7 @@ if (!function_exists('invierte_date_time')) {
 
                 li(
 
-                    text_icon("fa fa-credit-card-alt", anchor_enid("TUS PRODUCTOS EN VENTA",
+                    text_icon("fa fa-credit-card-alt", a_enid("TUS PRODUCTOS EN VENTA",
                         [
                             "class" => "btn_cuenta_personal",
                             "href" => "../search/?q3=" . $id_usuario . "&tienda=1"

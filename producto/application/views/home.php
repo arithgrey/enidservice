@@ -46,13 +46,13 @@ foreach ($info_servicio["servicio"] as $row) {
 }
 
 $imagenes = construye_seccion_imagen_lateral($imgs, $nombre_servicio, $url_vide_youtube);
-$vendedor_valoracion = anchor_enid("", ['class' => 'valoracion_persona_principal valoracion_persona']);
+$vendedor_valoracion = a_enid("", ['class' => 'valoracion_persona_principal valoracion_persona']);
 $nombre_servicio = substr(strtoupper($nombre_servicio), 0, 70);
 $nombre_producto = h($nombre_servicio, 1, ['class' => "text-justify nombre_producto_carrito strong"]);
 $nuevo_nombre_servicio = valida_text_servicio($flag_servicio, $precio, $id_ciclo_facturacion);
 $boton_editar = valida_editar_servicio($id_usuario_servicio, $id_usuario, $in_session, $id_servicio, $id_perfil);
 $texto_en_existencia = get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml);
-$estrellas = anchor_enid(d("", ['class' => 'valoracion_persona_principal valoracion_persona']), ['class' => 'lee_valoraciones text-right', 'href' => '../search/?q3=' . $id_publicador]);
+$estrellas = a_enid(d("", ['class' => 'valoracion_persona_principal valoracion_persona']), ['class' => 'lee_valoraciones text-right', 'href' => '../search/?q3=' . $id_publicador]);
 
 
 ?>

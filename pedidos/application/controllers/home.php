@@ -17,13 +17,13 @@ class Home extends CI_Controller
         $data = $this->app->session();
         $this->app->acceso();
 
-        if (get_param_def($param, "seguimiento") > 0 && ctype_digit($param["seguimiento"])) {
+        if (prm_def($param, "seguimiento") > 0 && ctype_digit($param["seguimiento"])) {
 
             $this->carga_vista_seguimiento($param, $data);
 
         } else {
 
-            $fn = (get_param_def($param, "costos_operacion") > 0 && ctype_digit($param["costos_operacion"])) ? $this->carga_vista_costos_operacion($param, $data) : $this->seguimiento_pedido($param, $data);
+            $fn = (prm_def($param, "costos_operacion") > 0 && ctype_digit($param["costos_operacion"])) ? $this->carga_vista_costos_operacion($param, $data) : $this->seguimiento_pedido($param, $data);
 
         }
     }
@@ -53,7 +53,7 @@ class Home extends CI_Controller
 
             ];
 
-            $fn = (get_param_def($param, "domicilio") > 0) ? $this->load_view_domicilios_pedidos($data) : $this->load_view_seguimiento($data, $param, $recibo, $id_recibo);
+            $fn = (prm_def($param, "domicilio") > 0) ? $this->load_view_domicilios_pedidos($data) : $this->load_view_seguimiento($data, $param, $recibo, $id_recibo);
 
 
         } else {
@@ -152,7 +152,7 @@ class Home extends CI_Controller
     private function load_view_seguimiento($data, $param, $recibo, $id_recibo)
     {
 
-        $notificacion_pago = (get_param_def($param, "notificar") > 0) ? 1 : 0;
+        $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
 
         $data += [
             "notificacion_pago" => ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago,
@@ -285,7 +285,7 @@ class Home extends CI_Controller
         ];
 
 
-        $fn = (get_param_def($param, "recibo") < 1) ? $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1) : $this->load_detalle_pedido($param, $data);
+        $fn = (prm_def($param, "recibo") < 1) ? $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1) : $this->load_detalle_pedido($param, $data);
 
     }
 
@@ -318,13 +318,13 @@ class Home extends CI_Controller
 
             ];
 
-            if (get_param_def($param, "fecha_entrega") > 0) {
+            if (prm_def($param, "fecha_entrega") > 0) {
 
 
                 $this->app->pagina($data, get_form_fecha_entrega($data), 1);
 
 
-            } elseif (get_param_def($param, "recordatorio") > 0) {
+            } elseif (prm_def($param, "recordatorio") > 0) {
 
 
                 $this->app->pagina($data, form_fecha_recordatorio($data, $this->get_tipo_recordatorio()), 1);

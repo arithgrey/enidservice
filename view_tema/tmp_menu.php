@@ -11,13 +11,13 @@ $estrellas .= span('★',
 $li = [
     "",
     $menu,
-    anchor_enid(
+    a_enid(
         "Mis reseñas y valoraciones" .
         d($estrellas, ["class" => "contenedor_promedios"]),
         ["href" => "../recomendacion/?q=" . $id_usuario]
     ),
-    anchor_enid("Configuración y privacidad", ["href" => path_enid("administracion_cuenta") ]),
-    anchor_enid("Cerrar sessión", ["href" => path_enid("logout")])
+    a_enid("Configuración y privacidad", ["href" => path_enid("administracion_cuenta") ]),
+    a_enid("Cerrar sessión", ["href" => path_enid("logout")])
 ];
 
 ?>
@@ -25,7 +25,7 @@ $li = [
 <div class="text-right d-flex flex-row">
     <li class="dropdown  menu_notificaciones_progreso_dia">
         <?php $class_notificacion = ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid "; ?>
-        <?= anchor_enid(
+        <?= a_enid(
             btw(icon("fa fa-bell white"), d("", "num_tareas_dia_pendientes_usr"), "display_flex_enid"),
             [
                 "class" => "blue_enid dropdown-toggle",

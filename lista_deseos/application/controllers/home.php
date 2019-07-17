@@ -14,7 +14,7 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session();
-        $q = (get_param_def($this->input->get(), "q") === "preferencias") ? $this->render_preferencias($data) : $this->load_lista_deseos($data);
+        $q = (prm_def($this->input->get(), "q") === "preferencias") ? $this->render_preferencias($data) : $this->load_lista_deseos($data);
 
     }
 

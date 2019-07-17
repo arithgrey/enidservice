@@ -8,7 +8,7 @@ if (!function_exists('invierte_date_time')) {
         $info_envio_direccion = $data["info_envio_direccion"];
 
         $r[] = d(
-            anchor_enid(icon("fa fa-pencil"),
+            a_enid(icon("fa fa-pencil"),
                 ["class" => "a_enid_blue editar_direccion_persona"]
             )
             ,
@@ -563,10 +563,10 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r = [];
-        if (get_param_def($param, "externo") > 0) {
+        if (prm_def($param, "externo") > 0) {
 
 
-            $r[] = anchor_enid(
+            $r[] = a_enid(
                 "LIQUIDAR AHORA!",
                 [
                     'class' => 'resumen_pagos_pendientes top_20',
@@ -575,7 +575,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $r[] = anchor_enid("ACCEDE A TU CUENTA PARA VER EL ESTADO DE TU PEDIDO"
+            $r[] = a_enid("ACCEDE A TU CUENTA PARA VER EL ESTADO DE TU PEDIDO"
                 ,
                 [
                     'class' => 'resumen_pagos_pendientes black top_20',
@@ -587,7 +587,7 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-            $r[] = anchor_enid("Liquida ahora!",
+            $r[] = a_enid("Liquida ahora!",
                 [
                     'class' => 'resumen_pagos_pendientes ',
                     'id' => $id_recibo,

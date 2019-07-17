@@ -15,15 +15,15 @@ class Home extends CI_Controller
 		$data = $this->app->session("Orden de compra");
 		$param = $this->input->get();
 
-		$q = get_param_def($param, "q", 1);
+		$q = prm_def($param, "q", 1);
 
 		if ($q > 0) {
 
 			$data["info_pago"] = $param;
-			$id_usuario = get_param_def($param, "q3");
+			$id_usuario = prm_def($param, "q3");
 
 			$data += [
-                "concepto" => get_param_def($param, "concepto"),
+                "concepto" => prm_def($param, "concepto"),
                 "usuario"  => $this->app->usuario($id_usuario)
             ];
 

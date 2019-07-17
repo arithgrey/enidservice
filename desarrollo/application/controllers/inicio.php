@@ -20,8 +20,8 @@ class Inicio extends CI_Controller
         $data["departamentos"] = $this->get_departamentos_enid();
         $data["clasificaciones_departamentos"] = $this->app->get_departamentos(1);
 
-        $activa = get_param_def($param, "q");
-        $data["ticket"] = get_param_def($param, "ticket");
+        $activa = prm_def($param, "q");
+        $data["ticket"] = prm_def($param, "ticket");
 
         $data["activa"] = ($activa === "") ? 1 : $activa;
         $data = $this->app->cssJs($data, "desarrollo");

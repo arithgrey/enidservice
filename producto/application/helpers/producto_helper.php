@@ -50,7 +50,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = ul([
             "Artículo temporalmente agotado",
-            anchor_enid(
+            a_enid(
                 "Preguntar cuando estará disponible",
                 [
                     path_enid("pregunta_search", $id_servicio . "&disponible=1")
@@ -464,7 +464,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $nombre = $usuario[0]["nombre"];
 
-                $response = anchor_enid(
+                $response = a_enid(
                     "VENDIDO POR " . span($nombre, "nombre_vendedor underline "),
                     [
                         "href" => path_enid("search", "/?q3=' . $id_usuario . '&vendedor=' . $nombre"),
@@ -505,7 +505,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = d(icon("fa fa-shopping-cart") .
-                anchor_enid(
+                a_enid(
                     "FORMAS PAGO",
                     [
                         "href" => path_enid("forma_pago"),
@@ -570,7 +570,7 @@ if (!function_exists('invierte_date_time')) {
                 $text = d("APRESÚRATE! SOLO HAY 2 EN EXISTENCIA ", "mt-3 bottom_20 text_existencia");
                 $text = d($text, 'text-en-existencia');
                 if (strlen($url_ml) > 10) {
-                    $text .= anchor_enid(
+                    $text .= a_enid(
                         text_icon('fa fa-check-circle', "ADQUIÉRELO EN MERCADO LIBRE")
                         ,
                         [
@@ -590,7 +590,7 @@ if (!function_exists('invierte_date_time')) {
             if ($in_session == 1) {
                 $href = path_enid("editar_producto", $id_servicio);
                 $editar_button = d(
-                    anchor_enid(
+                    a_enid(
                         text_icon('fa fa-pencil', "EDITAR"),
                         [
                             "href" => $href,
@@ -714,7 +714,7 @@ if (!function_exists('invierte_date_time')) {
             $response = "";
             if ($proceso_compra == 0) {
 
-                $response = anchor_enid(
+                $response = a_enid(
                     "Ir a la tienda del vendedor",
                     [
                         'href' => path_enid("search_q3", $id_vendedor),
@@ -735,7 +735,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            return anchor_enid(d("SOLICITAR INFORMACIÓN", 'black_enid_background white padding_10', 1), path_enid("pregunta_search", $id_servicio));
+            return a_enid(d("SOLICITAR INFORMACIÓN", 'black_enid_background white padding_10', 1), path_enid("pregunta_search", $id_servicio));
 
         }
     }
@@ -746,7 +746,7 @@ if (!function_exists('invierte_date_time')) {
 
             if ($proceso_compra == 0) {
 
-                $btn = anchor_enid(d(
+                $btn = a_enid(d(
                     text_icon("fa fa-gift fa-x2", "AGREGAR A TU LISTA DE DESEOS ")
                     ,
                     "a_enid_black"

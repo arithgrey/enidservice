@@ -4,14 +4,14 @@ $menu = [li(h("¿Tienes alguna duda?", ["class" => 'strong'])),
 
     li(d("Síguenos en", 1)),
 
-    li(anchor_enid("", [
+    li(a_enid("", [
         "href" => $url_facebook,
         "target" => "_black",
         "class" => "fa fa-facebook black",
         "title" => "Compartir en Facebook"
     ])),
 
-    li(anchor_enid("",
+    li(a_enid("",
         [
             "class" => "fa fa-twitter black",
             "title" => "Tweet",
@@ -20,13 +20,13 @@ $menu = [li(h("¿Tienes alguna duda?", ["class" => 'strong'])),
             "href" => $url_twitter,
         ])),
 
-    li(anchor_enid("", [
+    li(a_enid("", [
         "href" => $url_pinterest,
         "class" => "fa fa-pinterest-p black",
         "title" => "Pin it"
     ])),
 
-    li(anchor_enid("", [
+    li(a_enid("", [
         "href" => $url_tumblr,
         "class" => "fa fa-tumblr black",
         "title" => "Tumblr"

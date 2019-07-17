@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = titulo_valoraciones($data["id_usuario"]);
         $r[] = btw(
-            anchor_enid(
+            a_enid(
                 text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑA")
                 ,
                 [
@@ -76,8 +76,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("nuevo");
         $r[] = d("¿Recomendarías este producto?*", "text-valoracion strong");
         $r[] = btw(
-            anchor_enid("SI", ["class" => 'recomendaria', "id" => 1]),
-            anchor_enid("NO", ["class" => 'recomendaria', "id" => 0]),
+            a_enid("SI", ["class" => 'recomendaria', "id" => 1]),
+            a_enid("NO", ["class" => 'recomendaria', "id" => 0]),
             "display_flex_enid top_30 bottom_20"
 
         );
@@ -206,7 +206,7 @@ if (!function_exists('invierte_date_time')) {
         $z[] = h("ESCRIBE UNA PREGUNTA " . $text, 3);
 
         $url = get_url_servicio($id_servicio);
-        $nombre = anchor_enid(pr($servicio, "nombre_servicio"), [
+        $nombre = a_enid(pr($servicio, "nombre_servicio"), [
             "class" => "underline black strong",
             "href" => $url
         ]);
@@ -224,7 +224,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = h("VALORACIONES Y RESEÑAS", 3);
         $r[] = d(
-            anchor_enid(
+            a_enid(
                 text_icon("fa fa-chevron-right ir", "MÁS SOBRE EL VENDEDOR", 0, 0)
                 ,
                 [
@@ -251,7 +251,7 @@ if (!function_exists('invierte_date_time')) {
 
             $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
             $text = "Que tal {$nombre}  un nuevo cliente dejó una reseña sobre uno de tus artículos 
-            puedes consultarla aquí " . anchor_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/producto/?producto={$id_servicio}&valoracion=1"]);
+            puedes consultarla aquí " . a_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/producto/?producto={$id_servicio}&valoracion=1"]);
             $cuerpo = img_enid([], 1, 1) . h($text, 5);
             $sender = get_request_email($email, $asunto, $cuerpo);
             return $sender;
@@ -410,14 +410,14 @@ if (!function_exists('invierte_date_time')) {
             }
 
 
-            $btn_es_util = anchor_enid("SI" . span("[" . $num_util . "]", 'num_respuesta'),
+            $btn_es_util = a_enid("SI" . span("[" . $num_util . "]", 'num_respuesta'),
                 [
                     "class" => 'respuesta_util respuesta_ok valorar_respuesta mr-4 blue_enid',
                     "id" => $id_valoracion,
                     "onclick" => "agrega_valoracion_respuesta('" . $id_valoracion . "' , 1)"
                 ]);
 
-            $btn_no_util = anchor_enid("NO" . span("[" . $num_no_util . "]", 'num_respuesta'),
+            $btn_no_util = a_enid("NO" . span("[" . $num_no_util . "]", 'num_respuesta'),
                 [
                     "class" => 'respuesta_no valorar_respuesta mr-4 blue_enid',
                     "id" => $id_valoracion,
@@ -453,11 +453,11 @@ if (!function_exists('invierte_date_time')) {
 
             if (pr($numero_valoraciones, "num_valoraciones") > 6) {
 
-                $response = anchor_enid(text_icon("fa fa-chevron-right ir", "CARGAR MÁS"), "cargar_mas_valoraciones");
+                $response = a_enid(text_icon("fa fa-chevron-right ir", "CARGAR MÁS"), "cargar_mas_valoraciones");
 
             } else {
 
-                $response = anchor_enid(text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA "),
+                $response = a_enid(text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA "),
                     [
                         "class" => "escribir_valoracion",
                         "href" => "../valoracion?servicio=" . $servicio

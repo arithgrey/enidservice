@@ -42,7 +42,7 @@ class Imagen_usuario extends REST_Controller
 	{
 
 
-	    if (es_data($param) && get_param_def($param, "id_usuario") > 0 ){
+	    if (es_data($param) && prm_def($param, "id_usuario") > 0 ){
 
             $in = ["idusuario" => $param["id_usuario"]];
             $imagenes = $this->imagen_usuario_model->get(["id_imagen"], $in, 10);

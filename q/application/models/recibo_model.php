@@ -746,7 +746,7 @@ class Recibo_model extends CI_Model
 
 
         $id_usuario_referencia =
-            (get_param_def($data_usuario, "usuario_referencia") == 0)
+            (prm_def($data_usuario, "usuario_referencia") == 0)
                 ? $id_usuario : $data_usuario["usuario_referencia"];
 
 

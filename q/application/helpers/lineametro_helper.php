@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
 
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_linea_metro", $id);
-            if ($index !== false ) {
+            if ($index !== false) {
 
 
                 $img =
@@ -24,7 +24,8 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     );
 
-                $negra[] = d(ajustar($img, icon("agregar_linea fa fa-plus-square fa-2x" ,["id" => $id])), 3);
+                $negra[] = d(ajustar(
+                    $img, icon("agregar_linea fa fa-plus-square fa-2x", ["id" => $id])), 3);
 
             } else {
 
@@ -47,11 +48,11 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        $response[] = h("LINEAS DE METRO DISPONIBLES",3);
+        $response[] = h("LINEAS DE METRO DISPONIBLES", 3);
         $response[] = append($r);
         $response[] = br(7);
         $response[] = hr();
-        $response[] = h("LINEAS DE METRO EN PAUSA",3);
+        $response[] = h("LINEAS DE METRO EN PAUSA", 3);
         $response[] = append($negra);
         return append($response);
     }
@@ -107,16 +108,11 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         foreach ($array as $row) {
 
-            $nombre = $row["nombre"];
-            $id = $row["id"];
-            $numero = $row["numero"];
-
-
-            $linea = d("LINEA " . $numero,
+            $linea = d(add_text("LINEA ", $row["numero"]),
                 [
-                    "id" => $id,
+                    "id" => $row["id"],
                     "class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
-                    "nombre_linea" => $nombre
+                    "nombre_linea" => $row["nombre"]
                 ]
             );
 

@@ -213,7 +213,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = heading("ASOCIAR CUENTA BANCARIA Ó TARJETA DE CRÉDITO O DÉBITO", 3);
-            $r[] = anchor_enid(
+            $r[] = a_enid(
                 d("Asociar  tarjeta de crédito o débito",
 
                     [
@@ -223,7 +223,7 @@ if (!function_exists('invierte_date_time')) {
                 ),
                 ["href" => "?q=transfer&action=1&tarjeta=1", "class" => "black"]);
 
-            $r[] = anchor_enid(d("Asociar cuenta bancaria",
+            $r[] = a_enid(d("Asociar cuenta bancaria",
                 [
                     "style" => "border-style: solid;border-width: .9px;padding: 10px;
 	                            margin-top: 10px;color: white!important!important",
@@ -244,7 +244,7 @@ if (!function_exists('invierte_date_time')) {
 
         function get_format_cuentas_existentes($cuentas_gravadas)
         {
-            return d(anchor_enid(agrega_cuentas_existencia($cuentas_gravadas),
+            return d(a_enid(agrega_cuentas_existencia($cuentas_gravadas),
                 [
                     "href" => "?q=transfer&action=1&seleccion=1",
                     "class" => "white",
@@ -336,7 +336,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_solicitud_amigo()
         {
 
-            return anchor_enid(btw(
+            return a_enid(btw(
 
                 d("SOLICITA SALDO A UN AMIGO",
 
@@ -368,7 +368,7 @@ if (!function_exists('invierte_date_time')) {
         function get_format_pago_efectivo()
         {
 
-            return anchor_enid(btw(
+            return a_enid(btw(
 
                 d("UN PAGO EN EFECTIVO EN OXXO ",
                     [
@@ -482,7 +482,7 @@ if (!function_exists('invierte_date_time')) {
         function get_data_saldo($saldo)
         {
 
-            $text = (get_param_def($saldo, "saldo") > 0) ? $saldo["saldo"] : 0;
+            $text = (prm_def($saldo, "saldo") > 0) ? $saldo["saldo"] : 0;
             return $text;
         }
     }
@@ -492,11 +492,11 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $list = [
-                li(anchor_enid("Añadir ó solicitar saldo", ["href" => "?q=transfer&action=6", "class" => "black"]), ["class" => "list-group-item"]),
-                li(anchor_enid("Trasnferir fondos " . icon("fa fa-fighter-jet"), ["href" => "?q=transfer&action=2", "class" => "black"]), ["class" => "list-group-item"]),
-                li(anchor_enid("Mis tarjetas y cuentas", ["href" => "?q=transfer&action=3", "class" => "black"]), ["class" => "list-group-item metodo_pago_disponible"]),
-                li(anchor_enid("Asociar cuenta bancaria", ["href" => "?q=transfer&action=1", "class" => "black"]), ["class" => "list-group-item metodo_pago_disponible"]),
-                li(anchor_enid("Asociar tarjeta de crédito o débito" . icon("fa fa-credit-card-alt"), ["href" => "?q=transfer&action=1&tarjeta=1", "class" => "black"]), ["class" => "list-group-item metodo_pago_disponible"])
+                li(a_enid("Añadir ó solicitar saldo", ["href" => "?q=transfer&action=6", "class" => "black"]), ["class" => "list-group-item"]),
+                li(a_enid("Trasnferir fondos " . icon("fa fa-fighter-jet"), ["href" => "?q=transfer&action=2", "class" => "black"]), ["class" => "list-group-item"]),
+                li(a_enid("Mis tarjetas y cuentas", ["href" => "?q=transfer&action=3", "class" => "black"]), ["class" => "list-group-item metodo_pago_disponible"]),
+                li(a_enid("Asociar cuenta bancaria", ["href" => "?q=transfer&action=1", "class" => "black"]), ["class" => "list-group-item metodo_pago_disponible"]),
+                li(a_enid("Asociar tarjeta de crédito o débito" . icon("fa fa-credit-card-alt"), ["href" => "?q=transfer&action=1&tarjeta=1", "class" => "black"]), ["class" => "list-group-item metodo_pago_disponible"])
 
             ];
 

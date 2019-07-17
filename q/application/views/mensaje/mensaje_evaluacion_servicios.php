@@ -6,12 +6,12 @@ $r[] = d("El motivo por el cual nos estamos poniendo en contacto con usted, es c
 	");
 
 $r[] = d("No me queda más que pedirle que nos envíe sus comentarios o si así lo prefiere evalúe nuestros servicios ");
-$r[] = anchor_enid("en este enlace.",
+$r[] = a_enid("en este enlace.",
     ["href" => "https://goo.gl/DTHQid",
         "style" => "background: blue;color: white;padding: 5px;"
     ]);
 
-$r[] = anchor_enid("Le recordamos que puede acceder a su cuenta Enid Service a través de este enlace",
+$r[] = a_enid("Le recordamos que puede acceder a su cuenta Enid Service a través de este enlace",
     [
         "href" => "http://enidservice.com/inicio/login",
         "style" => "background: blue;color: white;padding: 5px;"

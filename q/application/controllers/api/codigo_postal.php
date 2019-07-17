@@ -49,13 +49,13 @@ class codigo_postal extends REST_Controller
             $response["id_direccion"] = $param["id_direccion"] = $id_direccion;
 
 
-            if ($id_direccion > 0 && get_param_def($param, "direccion_principal", false) != false) {
+            if ($id_direccion > 0 && prm_def($param, "direccion_principal", false) != false) {
 
                 $id_usuario = $this->get_id_usuario($param);
                 $response["registro_direccion_usuario"] = $this->set_direcciones_usuario($id_usuario, $id_direccion, $param["direccion_principal"]);
             }
 
-            $response["externo"] = get_param_def($param, "externo");
+            $response["externo"] = prm_def($param, "externo");
         }
 
         $this->response($response);

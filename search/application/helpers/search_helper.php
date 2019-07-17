@@ -69,9 +69,8 @@ if (!function_exists('invierte_date_time')) {
                 "- REVISA LA " . strong("ORTOGRAFÍA DE LA PALABRA"),
                 "- UTILIZA PALABRAS" . strong("MÁS SIMPLES"),
                 "- NAVEGA POR CATEGORÍAS"
-
-
-            ]);
+            ]
+        );
         $r[] = d(
             btn(
                 text_icon('fa fa-chevron-right ir', "ANUNCIA ESTE PRODUCTO!")
@@ -96,8 +95,12 @@ if (!function_exists('invierte_date_time')) {
         $r[] = btw(
 
             h("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA", 1),
-            btn("ANUNCIA TU PRIMER PRODUCTO " . icon('fa fa-chevron-right ir'),
-                ["class" => "top_30"],
+            btn(
+                text_icon('fa fa-chevron-right ir', "ANUNCIA TU PRIMER PRODUCTO ")
+                ,
+                [
+                    "class" => "top_30"
+                ],
                 1,
                 1,
                 1,
@@ -117,21 +120,16 @@ if (!function_exists('invierte_date_time')) {
 
         $filtro = get_format_filtro($filtros, $order);
 
-        if ($is_mobile > 0) {
+        $response = ($is_mobile > 0) ? d($filtro, 12) :
 
-            $response = d($filtro, 12);
-
-        } else {
-
-
-            $response = btw(
-                d(d($filtro, "pull-left"), 6),
-                d(d($paginacion, "pull-right"), 6),
-                "row d-flex align-items-center justify-content-between"
-            );
-
-            $response = d($response, 12);
-        }
+            d(
+                btw(
+                    d(
+                        d($filtro, "pull-left"), 6),
+                    d(
+                        d($paginacion, "pull-right"), 6),
+                    "row d-flex align-items-center justify-content-between"
+                ), 12);
 
         return $response;
 
@@ -178,7 +176,7 @@ if (!function_exists('invierte_date_time')) {
             foreach (crea_menu_principal_web($categorias_destacadas) as $row):
 
                 $r[] =
-                    anchor_enid(
+                    a_enid(
                         mayus($row["nombre_clasificacion"]),
                         [
                             "href" => "?q=&q2=" . $row['primer_nivel'],
@@ -231,11 +229,10 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = hr();
                 $r[] = $bloque_quinto_nivel["html"];
             }
-            $response = d(append($r), ["class" => "contenedor_sub_categorias"]);
-            $response = d($response, ["class" => 'contenedor_menu_productos_sugeridos']);
+            $response = d(append($r), "contenedor_sub_categorias");
 
         }
-        return d($response, "border-right padding_5");
+        return d(d($response, 'contenedor_menu_productos_sugeridos'), "border-right padding_5");
     }
 
     function crea_sub_menu_categorias_destacadas($param)
@@ -249,7 +246,13 @@ if (!function_exists('invierte_date_time')) {
                 $response [] = "<ul class='clasificaciones_sub_menu_ul'>";
             }
             $href = "?q=&q2=" . $row["primer_nivel"];
-            $response [] = li(anchor_enid($row["nombre_clasificacion"], ["href" => $href, "class" => 'text_categoria_sub_menu white text-uppercase']));
+            $response [] = li(
+                a_enid($row["nombre_clasificacion"],
+                    [
+                        "href" => $href,
+                        "class" => 'text_categoria_sub_menu white text-uppercase'
+                    ]
+                ));
             $z++;
             if ($z == 5) {
                 $z = 0;
@@ -269,22 +272,18 @@ if (!function_exists('invierte_date_time')) {
         foreach ($param["clasificaciones"] as $row) {
 
             $primer_nivel = $row["primer_nivel"];
-            $total = $row["total"];
-            $nombre_clasificacion = "";
-            foreach ($param["nombres_primer_nivel"] as $row2) {
 
-                $id_clasificacion = $row2["id_clasificacion"];
-                if ($primer_nivel == $id_clasificacion) {
-                    $nombre_clasificacion = $row2["nombre_clasificacion"];
-                    break;
-                }
-
-
-            }
+            $nombre_clasificacion = search_bi_array(
+                $param["nombres_primer_nivel"],
+                "id_clasificacion",
+                $primer_nivel,
+                "nombre_clasificacion",
+                ""
+            );
 
 
             $response[$z]["primer_nivel"] = $primer_nivel;
-            $response[$z]["total"] = $total;
+            $response[$z]["total"] = $row["total"];
             $response[$z]["nombre_clasificacion"] = $nombre_clasificacion;
 
             if ($z == 4) {
@@ -304,7 +303,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($info as $row) {
 
             $url = path_enid("search", "?q=" . $busqueda . "&q2=" . $row["id_clasificacion"]);
-            $r[] = anchor_enid($row["nombre_clasificacion"], ["href" => $url, "class" => 'categoria_text black'], 1);
+            $r[] = a_enid($row["nombre_clasificacion"], ["href" => $url, "class" => 'categoria_text black'], 1);
         }
 
         $response = [

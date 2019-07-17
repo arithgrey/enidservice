@@ -24,11 +24,11 @@ class Home extends CI_Controller
         $faqs = (array_key_exists("faqs", $param)) ? $param["faqs"] : "";
         $categoria = (array_key_exists("categoria", $param)) ? $param["categoria"] : "";
 
-        $data["es_form"] =  ( get_param_def($param , "nueva") > 0 ) ?  1 : 0 ;
+        $data["es_form"] =  ( prm_def($param , "nueva") > 0 ) ?  1 : 0 ;
         $data["categorias_publicas_venta"] = $this->get_categorias_por_tipo(1);
         $data["categorias_temas_de_ayuda"] = $this->get_categorias_por_tipo(5);
 
-        $flag_busqueda_q = get_param_def($param , "faq");
+        $flag_busqueda_q = prm_def($param , "faq");
         $data["flag_busqueda_q"] = $flag_busqueda_q;
         $data["lista_categorias"] = $this->get_categorias_tipo(1);
 
@@ -40,7 +40,7 @@ class Home extends CI_Controller
 
         }
 
-        if ( get_param_def($param, "categoria")>  0 ) {
+        if ( prm_def($param, "categoria")>  0 ) {
 
             $data["faqs_categoria"] = $this->get_faqs_categoria($categoria, $data);
             $f ++ ;
@@ -48,7 +48,7 @@ class Home extends CI_Controller
 
         }
 
-        $flag_busqueda_personalidaza = get_param_def($param, "faqs");
+        $flag_busqueda_personalidaza = prm_def($param, "faqs");
         $data["flag_busqueda_personalidaza"] = $flag_busqueda_personalidaza;
 
         if ($flag_busqueda_personalidaza > 0 ) {

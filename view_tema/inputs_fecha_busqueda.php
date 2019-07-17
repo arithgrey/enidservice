@@ -1,1 +1,1 @@
-<?=get_format_fecha_busqueda()?>
+<?=frm_fecha_busqueda()?>

@@ -73,7 +73,7 @@ class Cobranza extends REST_Controller
         $a = 0;
         $param = $this->post();
 
-        $id_servicio = $param["plan"] = (get_param_def($param, "plan") != 0) ? $param["plan"] : $param["servicio"];
+        $id_servicio = $param["plan"] = (prm_def($param, "plan") != 0) ? $param["plan"] : $param["servicio"];
         $precio = $this->get_precio_id_servicio($id_servicio);
         $data_orden = [];
         $data_reporte_compra["articulo_valido"] = 0;
@@ -111,7 +111,7 @@ class Cobranza extends REST_Controller
 
 
                 if (key_exists_bi($data_orden, "servicio", "flag_servicio", 0) < 1) {
-                    if (get_param_def($param, "tipo_entrega") == 1) {
+                    if (prm_def($param, "tipo_entrega") == 1) {
 
                         $prm_envio["flag_envio_gratis"] = 0;
                         $data_orden["costo_envio"] = $this->get_costo_envio_punto_encuentro($param);
@@ -129,10 +129,10 @@ class Cobranza extends REST_Controller
                 }
 
                 $data_orden["es_usuario_nuevo"] = 1;
-                $es_nuevo = get_param_def($param, "usuario_nuevo");
+                $es_nuevo = prm_def($param, "usuario_nuevo");
                 $data_orden = $this->tipo_usuario($data_orden , $es_nuevo, $param);
                 $data_orden["data_por_usuario"] = $param;
-                $data_orden["talla"] = get_param_def($param, "talla");
+                $data_orden["talla"] = prm_def($param, "talla");
 
 
                 $id_recibo = $this->genera_orden_compra($data_orden, $param);
@@ -191,9 +191,9 @@ class Cobranza extends REST_Controller
             $obj_session =  $this->app->session_enid();
             $session =  $obj_session->all_userdata();
 
-            if ( get_param_def($session, "agenda_pedido") >  0 ){
+            if ( prm_def($session, "agenda_pedido") >  0 ){
 
-                $data["id_usuario"] =  get_param_def($session, "agenda_pedido");
+                $data["id_usuario"] =  prm_def($session, "agenda_pedido");
                 $obj_session->unset_userdata("agenda_pedido");
             }
         }
@@ -249,7 +249,7 @@ class Cobranza extends REST_Controller
 
         $id_recibo = $this->app->api("recibo/orden_de_compra", $q, "json", "POST");
 
-        if ($id_recibo > 0 && get_param_def($param, "comentarios") !== 0 && strlen(trim($param["comentarios"])) > 5) {
+        if ($id_recibo > 0 && prm_def($param, "comentarios") !== 0 && strlen(trim($param["comentarios"])) > 5) {
             $param["id_recibo"] = $id_recibo;
             $this->agrega_notas_pedido($param);
         }
@@ -290,7 +290,7 @@ class Cobranza extends REST_Controller
         $email = $param["email"];
 
         $text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $email . " RECIBO NÚMERO " . $id_recibo;
-        if (get_param_def($param, "es_usuario_nuevo") > 0) {
+        if (prm_def($param, "es_usuario_nuevo") > 0) {
 
             $text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $param["nombre"] . " - " . $param["email"] . " - " . $param["telefono"] . " RECIBO NÚMERO " . $id_recibo;
         }
@@ -368,7 +368,7 @@ class Cobranza extends REST_Controller
                 $param["usuario_referencia"] = $usuario["id_usuario"];
                 $param["id_usuario"] = $usuario["id_usuario"];
 
-                if (get_param_def($param, "punto_encuentro") > 0) {
+                if (prm_def($param, "punto_encuentro") > 0) {
 
 
                     $response = $this->crea_orden_punto_entrega($param);
@@ -448,7 +448,7 @@ class Cobranza extends REST_Controller
 
     function valida_envio_notificacion_nuevo_usuario($param)
     {
-        $fn = (get_param_def($param, "usuario_nuevo") > 0) ? $this->notifica_registro_usuario($param) : "";
+        $fn = (prm_def($param, "usuario_nuevo") > 0) ? $this->notifica_registro_usuario($param) : "";
 
     }
 

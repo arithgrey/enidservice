@@ -89,7 +89,7 @@ if (!function_exists('invierte_date_time')) {
 
                     ,
 
-                    anchor_enid(
+                    a_enid(
 
                         img(
                             [
@@ -159,7 +159,7 @@ if (!function_exists('invierte_date_time')) {
     function format_resumen_pedidos($orden)
     {
 
-        $r[] = d(anchor_enid("MIS PEDIDOS",
+        $r[] = d(a_enid("MIS PEDIDOS",
             [
                 "href" => path_enid("pedidos"),
                 "class" => "black underline"
@@ -296,7 +296,7 @@ if (!function_exists('invierte_date_time')) {
             $se_cancela = $recibo["se_cancela"];
             $status = $recibo["status"];
 
-            $r[] = d(anchor_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), 1);
+            $r[] = d(a_enid(img($path), path_enid("pedidos_recibo", $id_recibo)), 1);
             $r[] = h(add_text("TOTAL ", $monto_a_pagar . "MXN"), 5);
             $r[] = h(add_text("CUBIERTO", $saldo_cubierto . "MXN"), 5);
             $r[] = h(add_text("ARTÍCULOS", $articulos), 5);
@@ -380,7 +380,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = $table_costos;
 
-            $r[] = anchor_enid("Agregar",
+            $r[] = a_enid("Agregar",
                 [
                     "class" => "underline top_50",
                     "style" => "font-size: 1.4em;color: #031326;",
@@ -437,7 +437,7 @@ if (!function_exists('invierte_date_time')) {
 
             ) {
 
-                $r[] = d(get_format_fecha_busqueda($param["fecha_inicio"], $param["fecha_termino"]));
+                $r[] = d(frm_fecha_busqueda($param["fecha_inicio"], $param["fecha_termino"]));
                 $r[] = input_hidden(["name" => "consulta", "class" => "consulta", "value" => 1]);
                 $r[] = input_hidden(["name" => "servicio", "class" => "servicio", "value" => $param["servicio"]]);
                 $r[] = input_hidden(["name" => "type", "class" => "type", "value" => $param["type"]]);
@@ -445,7 +445,7 @@ if (!function_exists('invierte_date_time')) {
 
             } else {
 
-                $r[] = d(get_format_fecha_busqueda());
+                $r[] = d(frm_fecha_busqueda());
             }
 
 
@@ -685,14 +685,14 @@ if (!function_exists('invierte_date_time')) {
 
                 $t[] = btn("ESCRIBE UNA RESEÑA");
                 $t[] = d(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
-                $response = anchor_enid(append($t), ["href" => path_enid("valoracion_servicio", $id_servicio)]);
+                $response = a_enid(append($t), ["href" => path_enid("valoracion_servicio", $id_servicio)]);
 
             } elseif ($recibo[0]["status"] == 9 && $es_vendedor < 1 && $evaluacion > 0) {
 
                 $id_servicio = $recibo[0]["id_servicio"];
                 $t[] = btn("ESCRIBE UNA RESEÑA");
                 $t[] = d(str_repeat("★", 5), ["class" => "text-center f2", "style" => "color: #010148;"]);
-                $response = anchor_enid(append($t), ["href" => path_enid("producto", $id_servicio . "&valoracion=1")]);
+                $response = a_enid(append($t), ["href" => path_enid("producto", $id_servicio . "&valoracion=1")]);
 
             } else {
 
@@ -895,7 +895,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 )
             );
-            $r[] = d(anchor_enid("ENCUENTRA TU ORDEN AQUÍ",
+            $r[] = d(a_enid("ENCUENTRA TU ORDEN AQUÍ",
                 [
                     "href" => path_enid("pedidos"),
                     "class" => "busqueda_mensaje"
@@ -1235,7 +1235,7 @@ if (!function_exists('invierte_date_time')) {
 
             $seccion = d(
                 p(
-                    anchor_enid(
+                    a_enid(
 
                         $text,
 
@@ -1273,7 +1273,7 @@ if (!function_exists('invierte_date_time')) {
 
             $seccion = d(
                 p(
-                    anchor_enid($texto_entrega,
+                    a_enid($texto_entrega,
                         [
                             "href" => $url,
                             "class" => "text-line-tiempo"
@@ -1486,7 +1486,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = d($text_producto, "col-lg-8 align-middle  align-self-center text-center");
 
 
-                $x = anchor_enid(
+                $x = a_enid(
 
                     d(
                         append($r), "border row "
@@ -1510,7 +1510,7 @@ if (!function_exists('invierte_date_time')) {
         function create_fecha_contra_entrega($recibo, $domicilio)
         {
 
-            if (get_param_def($domicilio, "domicilio") > 0 && es_data($recibo)) {
+            if (prm_def($domicilio, "domicilio") > 0 && es_data($recibo)) {
 
                 $recibo = $recibo[0];
                 $t[] = d("HORARIO DE ENTREGA", "strong underline");
@@ -1826,7 +1826,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('get_link_nota')) {
         function get_link_nota()
         {
-            return d(anchor_enid("NOTA", ["class" => "agregar_comentario", "onClick" => "agregar_nota();"]), 1);
+            return d(a_enid("NOTA", ["class" => "agregar_comentario", "onClick" => "agregar_nota();"]), 1);
         }
     }
     if (!function_exists('get_link_costo')) {
@@ -1838,7 +1838,7 @@ if (!function_exists('invierte_date_time')) {
                 $recibo = $recibo[0];
                 $saldo_cubierto = $recibo["saldo_cubierto"];
                 $url = path_enid("pedidos", "/?costos_operacion=" . $id_recibo . "&saldado=" . $saldo_cubierto);
-                return d(anchor_enid("COSTO DE OPERACIÓN", ["href" => $url]), 1);
+                return d(a_enid("COSTO DE OPERACIÓN", ["href" => $url]), 1);
             endif;
         }
     }
@@ -1847,7 +1847,7 @@ if (!function_exists('invierte_date_time')) {
         function get_link_cambio_fecha($domicilio, $recibo)
         {
 
-            if (get_param_def($domicilio, "domicilio") != 0 && count($recibo) > 0) {
+            if (prm_def($domicilio, "domicilio") != 0 && count($recibo) > 0) {
 
                 $recibo = $recibo[0];
                 $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
@@ -1858,7 +1858,7 @@ if (!function_exists('invierte_date_time')) {
                 $fecha_entrega = $recibo["fecha_entrega"];
 
                 return d(
-                    anchor_enid("FECHA DE ENTREGA",
+                    a_enid("FECHA DE ENTREGA",
                         [
                             "class" => "editar_horario_entrega  text-right ",
                             "id" => $id_recibo,
@@ -1875,7 +1875,7 @@ if (!function_exists('invierte_date_time')) {
         function get_link_recordatorio($id_recibo)
         {
 
-            return d(anchor_enid("RECORDATORIO", path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1")), 1);
+            return d(a_enid("RECORDATORIO", path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1")), 1);
 
         }
     }

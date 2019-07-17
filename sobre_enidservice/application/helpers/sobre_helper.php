@@ -56,7 +56,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(btn("Empieza a anunciarte ya mismo! ",[],1,1,0,path_enid("vender")), 4, 1);
         $r[] = br(5);
 
-
         return append($r);
     }
 

@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($data as $row) {
             $r[] = "<tr>";
             $r[] = td($z);
-            $r[] = td(anchor_enid($row["titulo"]));
+            $r[] = td(a_enid($row["titulo"]));
             $r[] = "</tr>";
             $z++;
         }

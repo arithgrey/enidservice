@@ -5,7 +5,7 @@ if (!function_exists('invierte_date_time')) {
     function actividad_mail_marketing($data)
     {
 
-        $email =  $data["email"];
+        $email = $data["email"];
 
         $seccion_fechas = "";
         $seccion_envios = "";
@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
         $total_solicitudes = 0;
         $total_ventas = 0;
         $num_dias = 0;
-        $flag = 0;
+        //$flag = 0;
         $dias = ["", 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
 
         $l_fechas = [];
@@ -26,14 +26,13 @@ if (!function_exists('invierte_date_time')) {
         $l_ventas = [];
 
         foreach ($email as $row) {
+
             $fecha_texto = $dias[date('N', strtotime($row["fecha_registro"]))];
             array_push($l_fechas, $row["fecha_registro"]);
             array_push($l_envios, $row["envios"]);
             array_push($l_solicitudes, $row["solicitudes"]);
             array_push($l_ventas, $row["ventas"]);
             array_push($l_fecha_texto, $fecha_texto);
-
-
         }
 
         $a = 0;
@@ -265,7 +264,7 @@ if (!function_exists('invierte_date_time')) {
             $table .= "</tr>";
             $table .= "<tr>";
             $table .= td(
-                anchor_enid($row["labores_resueltas"],
+                a_enid($row["labores_resueltas"],
                     [
                         "href" => '../desarrollo/',
                         "target" => '_blank',
@@ -454,11 +453,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($miembros as $row) {
 
             $id_usuario = $row["id_usuario"];
-            $nombre = $row["nombre"];
-
-            $apellido_paterno = $row["apellido_paterno"];
-            $apellido_materno = $row["apellido_materno"];
-            $afiliado = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
+            $afiliado = $row["nombre"] . " " . $row["apellido_paterno"] . " " . $row["apellido_materno"];
 
 
             $fecha_registro = $row["fecha_registro"];
@@ -485,7 +480,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $m[] = ul(
                     [
-                        anchor_enid(
+                        a_enid(
                             append([icon('fa fa-pencil'), "Editar información"]),
                             [
                                 "class" => 'usuario_enid_service',
@@ -641,14 +636,6 @@ if (!function_exists('invierte_date_time')) {
 
             foreach ($contactos as $row) {
 
-
-                $nombre = $row["nombre"];
-                $email = $row["email"];
-                $mensaje = $row["mensaje"];
-                $fecha_registro = $row["fecha_registro"];
-                $telefono = $row["telefono"];
-
-
                 $r[] = d(d(
                     d(
                         append(
@@ -658,8 +645,8 @@ if (!function_exists('invierte_date_time')) {
                                     "style" => 'width: 44px!important;',
                                     "onerror" => "../img_tema/user/user.png"
                                 ]),
-                                d($nombre . "|" . $email),
-                                d($mensaje . $telefono . $fecha_registro)
+                                d($row["nombre"] . "|" . $row["email"]),
+                                d($row["mensaje"] . $row["telefono"] . $row["fecha_registro"])
                             ]
                         ), "popup-head-left pull-left"),
                     "popup-head"), [
@@ -677,7 +664,7 @@ if (!function_exists('invierte_date_time')) {
         function get_mensaje_modificacion_pwd($nombre)
         {
 
-            $r[] = h("HOLA, " . strtoupper($nombre), 3);
+            $r[] = h(add_text("HOLA, ", strtoupper($nombre)), 3);
             $r[] = d(img(["src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg", "style" => "width: 100%"]));
             $r[] = d("Observamos un cambio de contraseña en tu cuenta. ¿Fuiste tú?");
             $r[] = d("Si es así ignora este correo, en caso contrario notificanos aquí http://enidservice.com/inicio/contact/");
@@ -690,10 +677,8 @@ if (!function_exists('invierte_date_time')) {
         function get_mensaje_bienvenida($param)
         {
 
-            $nombre = $param["nombre"];
-            $email = $param["email"];
 
-            $r[] = heading("Buen día " . $nombre . " " . $email);
+            $r[] = heading("Buen día " . $param["nombre"] . " " . $param["email"]);
             $r[] = d(
                 img(
                     [
@@ -708,7 +693,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = hr();
             $r[] = d("Desde ahora podrás adquirir y vender las mejores promociones a lo largo de México");
             $r[] = br();
-            $r[] = anchor_enid("ACCEDE A TU CUENTA AHORA!",
+            $r[] = a_enid("ACCEDE A TU CUENTA AHORA!",
                 [
                     "href" => "http://enidservice.com/inicio/login/",
                     "target" => "_blank",
@@ -722,7 +707,7 @@ if (!function_exists('invierte_date_time')) {
 
 
     if (!function_exists('base_valoracion')) {
-        function base_valoracion()
+        function b_valoracion()
         {
             return str_repeat("\n" . label("★", 'estrella') . "\n", 5);
         }
@@ -731,16 +716,18 @@ if (!function_exists('invierte_date_time')) {
         function tareas_realizadas($realizado, $fecha_actual)
         {
 
-            $index = search_bi_array($realizado, "fecha_termino", $fecha_actual);
-            return $realizado[$index]["tareas_realizadas"];
+            return $realizado[search_bi_array($realizado, "fecha_termino", $fecha_actual)]["tareas_realizadas"];
         }
     }
     if (!function_exists('valida_total_menos1')) {
         function valida_total_menos1($anterior, $nuevo, $extra = '')
         {
 
-            $ext = menorque($anterior, $nuevo, 'style = "background:#ff1b00!important; color:white!important;" ');
-            return td($nuevo, $ext . " " . $extra);
+
+            return td(
+                $nuevo,
+                menorque($anterior, $nuevo, 'style = "background:#ff1b00!important; color:white!important;" ') . " " .
+                $extra);
         }
     }
 
@@ -818,8 +805,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    if (!function_exists('get_mensaje_inicial_notificaciones')) {
-        function get_mensaje_inicial_notificaciones($tipo, $num_tareas)
+    if (!function_exists('m_b_notificaciones')) {
+        function m_b_notificaciones($tipo, $num_tareas)
         {
 
             $seccion = "";
@@ -862,7 +849,7 @@ if (!function_exists('invierte_date_time')) {
             $f = 0;
             if ($num_direccion < 1) {
 
-                $lista = base_notificacion(path_enid("administracion_cuenta"), "fa fa-map-marker", 'Registra tu dirección de compra y venta');
+                $lista = b_notificacion(path_enid("administracion_cuenta"), "fa fa-map-marker", 'Registra tu dirección de compra y venta');
 
                 $f++;
 
@@ -891,16 +878,15 @@ if (!function_exists('invierte_date_time')) {
             foreach ($tareas as $row) {
 
 
-                $id_ticket = $row["id_ticket"];
                 $text = d(substr($row["asunto"], 0, 30), "black");
                 $text = d(h(icon(" fas fa-tasks"), 5) . $text, "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
 
-                $r[] = anchor_enid($text, "../desarrollo/?q=1&ticket=" . $id_ticket);
+                $r[] = a_enid($text, "../desarrollo/?q=1&ticket=" . $row["id_ticket"]);
                 $f++;
             }
 
 
-            $agregar = d(anchor_enid(text_icon("fas fa-plus-circle black", " TAREA"), path_enid("desarrollo")), "bottom_50 black underline");
+            $agregar = d(a_enid(text_icon("fas fa-plus-circle black", " TAREA"), path_enid("desarrollo")), "bottom_50 black underline");
             $tareas = add_text($agregar, append($r));
 
 
@@ -924,17 +910,14 @@ if (!function_exists('invierte_date_time')) {
             $f = 0;
             if ($meta > $hecho) {
 
-                $restantes = ($meta - $hecho);
-                $text = "Hace falta por resolver " . $restantes . " tareas!";
-                $lista = base_notificacion("../desarrollo/?q=1", "fa fa-credit-card ", $text);
-
+                $text = "Hace falta por resolver " . ($meta - $hecho) . " tareas!";
+                $lista = b_notificacion("../desarrollo/?q=1", "fa fa-credit-card ", $text);
                 $f++;
             }
 
             $response = [
                 "html" => $lista,
                 "flag" => $f,
-
             ];
 
             return $response;
@@ -949,9 +932,10 @@ if (!function_exists('invierte_date_time')) {
             $f = 0;
             if ($meta > $hecho) {
 
-                $restantes = ($meta - $hecho);
-                $text = "Apresúrate completa tu logro sólo hace falta " . $restantes . " venta para completar tus labores del día!";
-                $lista = base_notificacion("../reporte_enid/?q=2", " fa fa-money ", $text);
+
+                $text = "Apresúrate completa tu logro sólo hace falta 
+                " . ($meta - $hecho) . " venta para completar tus labores del día!";
+                $lista = b_notificacion("../reporte_enid/?q=2", " fa fa-money ", $text);
                 $f++;
             }
 
@@ -973,10 +957,12 @@ if (!function_exists('invierte_date_time')) {
             $lista = "";
             $f = 0;
             if ($meta > $hecho) {
-                $restantes = ($meta - $hecho);
 
-                $text = "Otros usuarios ya han compartido sus productos en redes sociales, alcanza a tu competencia sólo te hacen falta  " . $restantes . " vistas a tus productos";
-                $lista = base_notificacion("../tareas/?q=2", " fa fa-clock-o ", $text);
+                $text = "Otros usuarios ya han compartido sus productos en redes sociales, alcanza a tu
+                 competencia sólo te hacen falta 
+                 " . ($meta - $hecho) . " 
+                 vistas a tus productos";
+                $lista = b_notificacion("../tareas/?q=2", " fa fa-clock-o ", $text);
                 $f++;
             }
 
@@ -998,9 +984,11 @@ if (!function_exists('invierte_date_time')) {
             $f = 0;
             if ($meta_email > $email_enviados) {
 
-                $email_restantes = ($meta_email - $email_enviados);
-                $text = 'Te hacen falta enviar ' . $email_restantes . ' correos a posibles clientes para cumplir tu meta de prospección';
-                $lista = base_notificacion("../tareas/?q=2", "fa fa-bullhorn ", $text);
+
+                $text = 'Te hacen falta enviar ' . ($meta_email - $email_enviados) . ' correos a 
+                posibles clientes para cumplir tu 
+                meta de prospección';
+                $lista = b_notificacion("../tareas/?q=2", "fa fa-bullhorn ", $text);
                 $f++;
             }
 
@@ -1023,7 +1011,7 @@ if (!function_exists('invierte_date_time')) {
             if ($num > 0) {
 
                 $text = "Agrega un número para compras o ventas";
-                $lista = base_notificacion("../administracion_cuenta/", "fa fa-mobile-alt", $text);
+                $lista = b_notificacion("../administracion_cuenta/", "fa fa-mobile-alt", $text);
 
                 $f++;
             }
@@ -1034,7 +1022,6 @@ if (!function_exists('invierte_date_time')) {
                 "flag" => $f,
 
             ];
-
 
             return $response;
         }
@@ -1049,10 +1036,12 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_recibo = $row["id_recibo"];
                 $saldo_cubierto = $row["saldo_cubierto"];
-                $text = d(h(icon(" fa fa-ticket ") . $saldo_cubierto . " MXN ", 3), "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
+                $text = d(h(
+                    icon(" fa fa-ticket ") . $saldo_cubierto . " MXN ", 3),
+                    "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
 
 
-                $r[] = anchor_enid($text,
+                $r[] = a_enid($text,
                     [
                         "href" => "../pedidos/?costos_operacion=" . $id_recibo . "&saldado=" . $saldo_cubierto
                     ]
@@ -1080,10 +1069,16 @@ if (!function_exists('invierte_date_time')) {
             $f = 0;
             if ($num > 0) {
 
-                $text_comentario = d("Alguien han agregado sus comentarios sobre uno de tus artículos en venta ", 1) . base_valoracion();
-                $text = d($num . " personas han agregado sus comentarios sobre tus artículos", 1) . base_valoracion();
+                $text_comentario =
+
+                    add_text(
+                        d("Alguien han agregado sus comentarios sobre uno de tus artículos en venta ", 1),
+                        b_valoracion()
+                    );
+
+                $text = d($num . " personas han agregado sus comentarios sobre tus artículos", 1) . b_valoracion();
                 $text = ($num > 1) ? $text : $text_comentario;
-                $lista = base_notificacion("../recomendacion/?q=" . $id_usuario, "fa fa-star", $text);
+                $lista = b_notificacion("../recomendacion/?q=" . $id_usuario, "fa fa-star", $text);
                 $f++;
             }
 
@@ -1108,7 +1103,7 @@ if (!function_exists('invierte_date_time')) {
         if ($sin_direcciones > 0) {
 
             $text = ($sin_direcciones > 1) ? $sin_direcciones . " de tus compras solicitadas, aún no cuentan con tu dirección de envio" : "Tu compra aún,  no cuentan con tu dirección de envio";
-            $lista = base_notificacion("../area_cliente/?action=compras", "fa fa-bus ", $text);
+            $lista = b_notificacion("../area_cliente/?action=compras", "fa fa-bus ", $text);
             $f++;
 
         }
@@ -1140,7 +1135,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
-            $lista = base_notificacion("../area_cliente/?action=compras", "fa fa-credit-card", $text);
+            $lista = b_notificacion("../area_cliente/?action=compras", "fa fa-credit-card", $text);
 
             $f++;
         }
@@ -1155,9 +1150,14 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
-    function base_notificacion($url = '', $class_icono = '', $text = '')
+    function b_notificacion($url = '', $class_icono = '', $text = '')
     {
-        return li(anchor_enid(icon($class_icono) . $text, ["href" => $url, "class" => "black notificacion_restante top_10"]));
+        return li(a_enid(text_icon($class_icono, $text),
+                [
+                    "href" => $url,
+                    "class" => "black notificacion_restante top_10"
+                ])
+        );
     }
 
     function add_mensajes_respuestas_vendedor($param, $tipo)
@@ -1171,7 +1171,7 @@ if (!function_exists('invierte_date_time')) {
         if ($num > 0) {
 
             $text = val_class($tipo, 1, "Alguien quiere saber más sobre tu producto", "Tienes una nueva respuesta en tu buzón");
-            $lista = base_notificacion(path_enid("area_cliente_pregunta"), "fa fa-comments", $text);
+            $lista = b_notificacion(path_enid("area_cliente_pregunta"), "fa fa-comments", $text);
             $f++;
 
         }
@@ -1193,19 +1193,15 @@ if (!function_exists('invierte_date_time')) {
         $f = 0;
         foreach ($recordatorios as $row) {
 
-
-            $fecha_cordatorio = $row["fecha_cordatorio"];
-            $id_recibo = $row["id_recibo"];
-
             $text = btw(
 
-                d(text_icon("fa  fa fa-clock-o ", $fecha_cordatorio)),
+                d(text_icon("fa  fa fa-clock-o ", $row["fecha_cordatorio"])),
                 d($row["descripcion"]),
                 "col-lg-12 top_10  shadow padding_10 mh_notificaciones"
             );
 
 
-            $r[] = anchor_enid($text, path_enid("pedidos_recibo", $id_recibo . "#listado_recordatorios"));
+            $r[] = a_enid($text, path_enid("pedidos_recibo", $row["id_recibo"] . "#listado_recordatorios"));
             $f++;
         }
 
@@ -1227,20 +1223,18 @@ if (!function_exists('invierte_date_time')) {
             foreach ($recibos as $row) {
 
 
-                $id_recibo = $row["id_recibo"];
-                $total = d($row["total"] . "MXN", "text_monto_sin_cierre text-left");
                 $text = btw(
                     d(
                         img($row["url_img_servicio"])
                         ,
                         "w_50"
                     ),
-                    $total,
+                    d($row["total"] . "MXN", "text_monto_sin_cierre text-left"),
                     "display_flex_enid top_10 border padding_10"
                 );
 
-                $url = path_enid("pedidos_recibo", $id_recibo);
-                $r[] = anchor_enid($text, $url);
+                $url = path_enid("pedidos_recibo", $row["id_recibo"]);
+                $r[] = a_enid($text, $url);
                 $f++;
             }
 
@@ -1263,7 +1257,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_tareas_pendienetes_usuario_cliente($info)
+    function pendientes_cliente($info)
     {
 
         $num_telefonico = $info["info_notificaciones"]["numero_telefonico"];
@@ -1314,7 +1308,8 @@ if (!function_exists('invierte_date_time')) {
 
         ];
 
-        $response["lista_pendientes"] = ul($list, "d-flex flex-column justify-content-between text_notificacion");
+        $response["lista_pendientes"] =
+            ul($list, "d-flex flex-column justify-content-between text_notificacion");
 
         return $response;
 
@@ -1331,18 +1326,22 @@ if (!function_exists('invierte_date_time')) {
             $id_pregunta = $row["id_pregunta"];
             $pregunta = $row["pregunta"];
             $id_servicio = $row["id_servicio"];
-            $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
-            $pregunta = d($pregunta, "black");
+            $pregunta =
+                d(((strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta), "black");
 
-
-            $imagenes = d(img_servicio($id_servicio), "w_50");
             $t = [];
-            $t[] = btw($imagenes, $pregunta, " d-flex flex-column justify-content-between ");
-            $text = append($t);
+            $t[] = ajustar(
+                d(img_servicio($id_servicio), "w_50"),
+                $pregunta,
+                0
+            );
 
-            $id = "#pregunta" . $id_pregunta;
-            $url = "../pregunta/?action=recepcion&id=" . $id_pregunta . "&id_servicio=" . $id_servicio . $id;
-            $r[] = anchor_enid($text, ["href" => $url]) . hr();
+
+            $r[] = a_enid(
+                    append($t),
+                    "../pregunta/?action=recepcion&id=" . $id_pregunta . "&id_servicio=" . $id_servicio . "#pregunta" . $id_pregunta
+                ) .
+                hr();
             $f++;
         }
 
@@ -1371,17 +1370,21 @@ if (!function_exists('invierte_date_time')) {
             $id_pregunta = $row["id_pregunta"];
             $pregunta = $row["pregunta"];
             $id_servicio = $row["id_servicio"];
-            $pregunta = (strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta;
-            $pregunta = d($pregunta, ["class" => "black"]);
+            $pregunta = d(((strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta), "black");
 
-            $imagenes = d(img_servicio($id_servicio), "w_50");
+
             $t = [];
-            $t[] = btw($imagenes, $pregunta, "d-flex flex-column justify-content-between");
-            $text = append($t);
+            $t[] = ajustar(
+                d(img_servicio($id_servicio), "w_50"),
+                $pregunta,
+                0
+            );
 
-            $id = "#pregunta" . $id_pregunta;
-            $url = "../pregunta/?action=hechas&id=" . $id_pregunta . "&id_servicio=" . $id_servicio . $id;
-            $r[] = anchor_enid($text, ["href" => $url]) . hr();
+
+            $r[] = a_enid(
+                    append($t),
+                    "../pregunta/?action=hechas&id=" . $id_pregunta . "&id_servicio=" . $id_servicio . "#pregunta" . $id_pregunta
+                ) . hr();
             $f++;
         }
 
@@ -1465,8 +1468,7 @@ if (!function_exists('invierte_date_time')) {
                 switch ($row["nombre_objetivo"]) {
                     case "Ventas":
 
-                        $meta_ventas = $row["cantidad"];
-                        $notificacion = add_envios_a_ventas($meta_ventas, $ventas_enid_service);
+                        $notificacion = add_envios_a_ventas($row["cantidad"], $ventas_enid_service);
                         $lista[] = $notificacion["html"];
                         $f = $f + $notificacion["flag"];
 
@@ -1475,8 +1477,7 @@ if (!function_exists('invierte_date_time')) {
 
                     case "Desarrollo_web":
 
-                        $meta_tareas = $row["cantidad"];
-                        $notificacion = add_tareas_pendientes($meta_tareas, $tareas_enid_service);
+                        $notificacion = add_tareas_pendientes($row["cantidad"], $tareas_enid_service);
                         $lista[] = $notificacion["html"];
                         $f = $f + $notificacion["flag"];
                         break;
@@ -1504,7 +1505,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [
             "num_tareas_pendientes_text" => $f,
             "num_tareas_pendientes" => $new_flag,
-            "lista_pendientes" => get_mensaje_inicial_notificaciones(1, $f) . append($lista),
+            "lista_pendientes" => m_b_notificaciones(1, $f) . append($lista),
 
         ];
 
@@ -1603,8 +1604,7 @@ if (!function_exists('invierte_date_time')) {
 
         $t[] = $info_uso;
 
-        $t[] = "
-<tr style=\"background: #000;color: white;text-align: center!important;\">";
+        $t[] = "<tr style=\"background: #000;color: white;text-align: center!important;\">";
         $t[] = td("Total");
         $t[] = td($total_visitas);
         $t[] = td($total_faqs);
@@ -1616,8 +1616,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = td($total_procesar_compra);
         $t[] = "</tr>";
 
-        $t = "
-<table class='table'>" . append($t) . "</table>";
+        $t = tb(append($t));
         return $t;
 
     }

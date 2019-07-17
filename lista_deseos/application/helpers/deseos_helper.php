@@ -231,7 +231,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = btw(
                 h("TU LISTA DE DESEOS", 3, 'titulo_lista_deseos')
                 ,
-                anchor_enid("EXPLORAR MÁS ARTÍCULOS", ["href" => "../search/?q2=0&q="], 1)
+                a_enid("EXPLORAR MÁS ARTÍCULOS", ["href" => "../search/?q2=0&q="], 1)
                 ,
                 3
             );
@@ -307,7 +307,7 @@ if (!function_exists('invierte_date_time')) {
 
         function get_menu()
         {
-            $preferencias = anchor_enid(
+            $preferencias = a_enid(
                 "TUS PREFERENCIAS E INTERESES",
                 [
                     "id" => "mis_ventas",
@@ -316,7 +316,7 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
             $deseos
-                = anchor_enid(
+                = a_enid(
                 "TU LISTA DE ARTÍCULOS DESEADOS",
                 [
                     "id" => "mis_compras",
@@ -361,14 +361,14 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $url_servicio = get_url_servicio($id_producto);
-                $title = anchor_enid($nombre_servicio, ["href" => $url_servicio, "target" => "_blank", "class" => "black"]);
+                $title = a_enid($nombre_servicio, ["href" => $url_servicio, "target" => "_blank", "class" => "black"]);
                 $x[] = h($title, 4);
                 $x[] = str_repeat(icon("fa fa-star"), 5);
 
                 $x[] = d($deseado . " veces comprado", "label-rating");
 
 
-                $opiniones = anchor_enid($valoracion . " reseñas", ["href" => $url_servicio . "#opiniones"]);
+                $opiniones = a_enid($valoracion . " reseñas", ["href" => $url_servicio . "#opiniones"]);
                 $x[] = d($opiniones, "label-rating");
 
 

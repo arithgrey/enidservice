@@ -175,7 +175,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = place("place_telefono");
                 $r[] = btn("CREA UNA CUENTA");
                 $r[] = d(
-                    anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
+                    a_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
                         [
                             'class' => "white",
                             "href" => path_enid("login")
@@ -282,7 +282,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = place("place_telefono");
                 $r[] = btn("CREA UNA CUENTA", ["class" => "top_30"]);
                 $r[] = d(
-                    anchor_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
+                    a_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
                         [
                             'class' => "white",
                             "href" => path_enid("login")

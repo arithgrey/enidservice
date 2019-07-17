@@ -58,7 +58,7 @@ class productividad extends REST_Controller
 
             case 20:
 
-                $response = get_tareas_pendienetes_usuario_cliente($response);
+                $response = pendientes_cliente($response);
 
                 break;
             default:

@@ -19,7 +19,7 @@ class Home extends CI_Controller
         $data = $this->app->cssJs($data, "contacto");
         $param = $this->input->post();
 
-        if (get_param_def($param, "proceso_compra", 0, 1) > 0) {
+        if (prm_def($param, "proceso_compra", 0, 1) > 0) {
 
 
             $this->app->pagina($this->app->cssJs($data, "contacto_proceso_compra"), get_format_proceso_compra(), 1);
@@ -37,7 +37,7 @@ class Home extends CI_Controller
 
         $data["telefono"] = ($data["id_usuario"] > 0) ? $this->app->usuario($data["id_usuario"])[0]["tel_contacto"] : "";
 
-        if ($data["in_session"] == 0 && get_param_def($param, "servicio", 0, 1) > 0) {
+        if ($data["in_session"] == 0 && prm_def($param, "servicio", 0, 1) > 0) {
 
             $data = $this->app->cssJs($data, "contacto_ubicacion");
             $this->app->pagina($data, get_format_recibe_ubicacion($param["servicio"]), 1);

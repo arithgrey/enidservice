@@ -86,7 +86,7 @@ if (!function_exists('invierte_date_time')) {
 
             $z[] = btn(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]);
             $z[] = d(
-                anchor_enid("CERRAR TICKET",
+                a_enid("CERRAR TICKET",
                     [
                         "class" => "cerrar_ticket",
                         "onClick" => "cerrar_ticket({$id_ticket})"

@@ -100,7 +100,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = form_open("", ["class" => 'form_busqueda_desarrollo_solicitudes']);
-            $r[] = get_format_fecha_busqueda();
+            $r[] = frm_fecha_busqueda();
             $r[] = form_close(place("place_metricas_servicio"));
             return append($r);
 
@@ -111,7 +111,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = form_open("", ["class" => 'form_busqueda_desarrollo']);
-            $r[] = get_format_fecha_busqueda();
+            $r[] = frm_fecha_busqueda();
             $r[] = form_close(place("place_metricas_desarrollo"));
             return append($r);
 
@@ -124,7 +124,7 @@ if (!function_exists('invierte_date_time')) {
 
             $list = [
                 li(
-                    anchor_enid("ABRIR TICKET",
+                    a_enid("ABRIR TICKET",
                         [
                             "href" => "#tab_nuevo_ticket",
                             "data-toggle" => "tab",
@@ -136,7 +136,7 @@ if (!function_exists('invierte_date_time')) {
 
 
                 li(
-                    anchor_enid(
+                    a_enid(
                         text_icon('fa fa-check-circle', "PENDIENTES")
                         ,
                         [
@@ -167,7 +167,7 @@ if (!function_exists('invierte_date_time')) {
 
             $list = [
                 li(
-                    anchor_enid("Atención al cliente",
+                    a_enid("Atención al cliente",
                         [
                             "href" => "#tab_1_actividad",
                             "data-toggle" => "tab"
@@ -175,14 +175,14 @@ if (!function_exists('invierte_date_time')) {
                     "active"
                 ),
                 li(
-                    anchor_enid("Comparativa",
+                    a_enid("Comparativa",
                         [
                             "href" => "#tab_2_comparativa",
                             "data-toggle" => "tab"
                         ]), "comparativa"
                 ),
                 li(
-                    anchor_enid("Calidad y servicio",
+                    a_enid("Calidad y servicio",
                         [
                             "href" => "#tab_3_comparativa",
                             "data-toggle" => "tab"
