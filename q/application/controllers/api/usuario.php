@@ -19,7 +19,7 @@ class usuario extends REST_Controller
 	{
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "nombre,apellido_paterno,apellido_materno,email,tel_contacto,id_usuario,sexo")) {
+		if (fx($param, "nombre,apellido_paterno,apellido_materno,email,tel_contacto,id_usuario,sexo")) {
 
 
 			$id_usuario = $param["id_usuario"];
@@ -36,7 +36,7 @@ class usuario extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$response = $this->usuario_model->set_ultima_publicacion($param);
 		}
 		$this->response($response);
@@ -54,7 +54,7 @@ class usuario extends REST_Controller
 	{
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$response = $this->usuario_model->get_miembro($param);
 		}
 		$this->response($response);
@@ -72,7 +72,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$response = $this->usuario_model->q_get(["idempresa"], $param["id_usuario"])[0]["idempresa"];
 		}
 		$this->response($response);
@@ -83,7 +83,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_perfil")) {
+		if (fx($param, "id_perfil")) {
 
 			$response = $this->usuario_model->get_usuarios_perfil($param);
 		}
@@ -117,7 +117,7 @@ class usuario extends REST_Controller
 
 		$param = $this->put();
 		$response = [];
-		if (if_ext($param, "tel_contacto,lada")) {
+		if (fx($param, "tel_contacto,lada")) {
 
 			$params = [
 				"tel_contacto" => $param["tel_contacto"],
@@ -136,7 +136,7 @@ class usuario extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$response = $this->usuario_model->q_up("num_cancelaciones", "num_cancelaciones + 1 ", $param["id_usuario"]);
 		}
 		$this->response($response);
@@ -147,7 +147,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_servicio")) {
+		if (fx($param, "id_servicio")) {
 
 			$usuario = $this->get_usuario_por_servicio($param);
 			$id_usuario = $usuario[0]["id_usuario"];
@@ -173,7 +173,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$params = ["idusuario id_usuario",
 				"nombre",
 				"apellido_paterno",
@@ -196,7 +196,7 @@ class usuario extends REST_Controller
 	{
 
 		$response = false;
-		if (if_ext($param, "mail")) {
+		if (fx($param, "mail")) {
 			$new_pass = randomString();
 			$params = ["password" => sha1($new_pass)];
 			$params_where = ["email" => trim($param["mail"])];
@@ -212,7 +212,7 @@ class usuario extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "type")) {
+		if (fx($param, "type")) {
 			switch ($param["type"]) {
 				case 1:
 
@@ -237,7 +237,7 @@ class usuario extends REST_Controller
 	{
 
 		$response = false;
-		if (if_ext($param, "anterior,nuevo,confirma")) {
+		if (fx($param, "anterior,nuevo,confirma")) {
 			$anterior = $param['anterior'];
 			$nuevo = $param['nuevo'];
 			$confirm = $param['confirma'];
@@ -267,7 +267,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "value")) {
+		if (fx($param, "value")) {
 			$response = $this->usuario_model->num_q($param);
 		}
 		$this->response($response);
@@ -289,7 +289,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_servicio")) {
+		if (fx($param, "id_servicio")) {
 			$response = $this->get_usuario_por_servicio($param);
 		}
 		$this->response($response);
@@ -299,7 +299,7 @@ class usuario extends REST_Controller
 	{
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 
 			$response = $this->usuario_model->q_get(["tipo_entregas", "entregas_en_casa"], $param["id_usuario"]);
 
@@ -322,7 +322,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$response = $this->usuario_model->q_get(["informes_telefono"], $param["id_usuario"]);
 		}
 		$this->response($response);
@@ -333,7 +333,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$response = $this->usuario_model->has_phone($param);
 		}
 		$this->response($response);
@@ -344,7 +344,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->usuario_model->num_registros_periodo($param);
 		}
 
@@ -356,7 +356,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->usuario_model->publican_periodo($param);
 		}
 
@@ -368,7 +368,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->usuario_model->registros($param);
 		}
 		$this->response($response);
@@ -378,7 +378,7 @@ class usuario extends REST_Controller
 	{
 		$param = $this->post();
 		$response = [];
-		if (if_ext($param, "email,secret")) {
+		if (fx($param, "email,secret")) {
 			$params = ["idusuario", "nombre", "email", "fecha_registro", "idempresa"];
 			$params_where = ["email" => $param["email"], "password" => $param["secret"]];
 			$response = $this->usuario_model->get($params, $params_where);
@@ -392,7 +392,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->usuario_model->num_registros_preriodo($param);
 		}
 		$this->response($response);
@@ -403,7 +403,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->usuario_model->registros_periodo($param);
 		}
 		$this->response($response);
@@ -437,7 +437,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$response = $this->usuario_model->verifica_registro_telefono($param);
 		}
 		$this->response($response);
@@ -529,7 +529,7 @@ class usuario extends REST_Controller
 	{
 
 		$response = false;
-		if (if_ext($param, "nombre,email")) {
+		if (fx($param, "nombre,email")) {
 
 			$email = $param["email"];
 			$asunto = "TU USUARIO SE REGISTRÓ!";
@@ -591,7 +591,7 @@ class usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_departamento")) {
+		if (fx($param, "id_departamento")) {
 			$total = $this->usuario_model->num_total($param);
 			$per_page = 10;
 			$param["resultados_por_pagina"] = $per_page;
@@ -626,7 +626,8 @@ class usuario extends REST_Controller
 		$paginacion = $this->app->paginacion($config_paginacion);
 		$data["paginacion"] = $paginacion;
 		$data["modo_edicion"] = 0;
-		$this->load->view("equipo/miembros", $data);
+        $this->response(format_miembros($data));
+
 	}
 
 	function miembro_POST()
@@ -634,7 +635,7 @@ class usuario extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "editar,nombre,email,apellido_paterno,apellido_materno,inicio_labor,fin_labor,turno,sexo,departamento")) {
+		if (fx($param, "editar,nombre,email,apellido_paterno,apellido_materno,inicio_labor,fin_labor,turno,sexo,departamento")) {
 			$editar = $param["editar"];
 			$response["usuario_existente"] = 0;
 
@@ -661,7 +662,7 @@ class usuario extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "email,password,nombre,telefono")) {
+		if (fx($param, "email,password,nombre,telefono")) {
 			$response = $this->usuario_model->registrar_afiliado($param);
 			if ($response["usuario_existe"] == 0 && $response["usuario_registrado"] == 1) {
 				$param["id_usuario"] = $response["id_usuario"];
@@ -677,7 +678,7 @@ class usuario extends REST_Controller
 		$param = $this->post();
 		$response = false;
 
-		if (if_ext($param, "email,password,nombre,telefono")) {
+		if (fx($param, "email,password,nombre,telefono")) {
 			$response["usuario_existe"] = $this->usuario_model->evalua_usuario_existente($param);
 			$response["usuario_registrado"] = 0;
 			if ($response["usuario_existe"] == 0) {
@@ -729,7 +730,7 @@ class usuario extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "id")) {
+		if (fx($param, "id")) {
 			$response = $this->usuario_model->q_up('recordatorio_publicacion', 0, $param["id"]);
 		}
 		$this->response($response);
@@ -741,7 +742,7 @@ class usuario extends REST_Controller
 		$param = $this->get();
 		$response = false;
 
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 
 			$param["usuarios_nuevos"] = $this->get_num_registros_periodo($param);
 			$param["usuarios_direcciones"] = $this->get_nun_activos_con_direcciones($param);

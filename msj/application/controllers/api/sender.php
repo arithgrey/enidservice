@@ -16,7 +16,7 @@ class Sender extends REST_Controller
 		$param = $this->post();
 		$response = false;
 		$test = $param["test"];
-		if (if_ext($param, "para,asunto,cuerpo")) {
+		if (fx($param, "para,asunto,cuerpo")) {
 			$response = 2;
 			if (filter_var($param["para"], FILTER_VALIDATE_EMAIL)) {
 				$response = 0;

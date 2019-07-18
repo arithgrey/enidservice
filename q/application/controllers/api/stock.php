@@ -19,7 +19,7 @@ class Stock extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,tipo")) {
+		if (fx($param, "fecha_inicio,tipo")) {
 
 			$pedidos_contra_entrega = $this->get_solicitudes_contra_entrega($param);
 			$pedidos_servicio = crea_resumen_servicios_solicitados($pedidos_contra_entrega);

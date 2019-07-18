@@ -36,7 +36,7 @@ class tipo_talla extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "id")) {
+		if (fx($param, "id")) {
 			$response = $this->tipo_talla_model->q_up("clasificacion", $param["clasificaciones"], $param["id"]);
 		}
 		$this->response($response);

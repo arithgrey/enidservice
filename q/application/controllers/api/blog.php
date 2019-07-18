@@ -16,7 +16,7 @@ class Blog extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha")) {
+		if (fx($param, "fecha")) {
 
 			$f = [
 			    "id_faq",

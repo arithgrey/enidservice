@@ -21,7 +21,7 @@ class Perfiles extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_perfil")) {
+		if (fx($param, "id_perfil")) {
 			$response = $this->perfil_model->get(["id_departamento"], ["idperfil" => $param["id_perfil"]])[0]["id_departamento"];
 		}
 		$this->response($response);
@@ -32,7 +32,7 @@ class Perfiles extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 
 			$response = $this->perfil_model->get_usuario($param["id_usuario"]);
 
@@ -45,7 +45,7 @@ class Perfiles extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 
 			$response = create_select(
 			    $this->perfil_model->get([], ["id_departamento" => $param["id_departamento"]], 100),

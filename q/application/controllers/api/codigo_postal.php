@@ -18,7 +18,7 @@ class codigo_postal extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "cp")) {
+        if (fx($param, "cp")) {
 
             $param["id_codigo_postal"] = $this->codigo_postal_model->get_id_codigo_postal_por_patron($param);
             $id_direccion = $this->crea_direccion($param);
@@ -39,7 +39,7 @@ class codigo_postal extends REST_Controller
         $response = false;
 
 
-        if (if_ext($param, "cp")) {
+        if (fx($param, "cp")) {
             $id_direccion = $this->registra_direccion_envio($param);
             if ($id_direccion == 0) {
 
@@ -82,7 +82,7 @@ class codigo_postal extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "cp")) {
+        if (fx($param, "cp")) {
             $response = $this->codigo_postal_model->get_id_codigo_postal_por_patron($param);
         }
         $this->response($response);
@@ -92,7 +92,7 @@ class codigo_postal extends REST_Controller
     {
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "cp")) {
+        if (fx($param, "cp")) {
             $response = $this->codigo_postal_model->get_colonia_delegacion($param);
         }
         $this->response($response);

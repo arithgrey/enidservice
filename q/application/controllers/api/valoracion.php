@@ -21,7 +21,7 @@ class Valoracion extends REST_Controller
         $param = $this->get();
         $response = false;
 
-        if (if_ext($param, "id_usuario,id_servicio")) {
+        if (fx($param, "id_usuario,id_servicio")) {
 
 
             $id_servicio = $param["id_servicio"];
@@ -39,7 +39,7 @@ class Valoracion extends REST_Controller
     {
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->valoracion_model->lectura_usuario($param);
         }
         $this->response($response);
@@ -176,7 +176,7 @@ class Valoracion extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "id_servicio,calificacion,titulo,comentario,email,nombre")) {
+        if (fx($param, "id_servicio,calificacion,titulo,comentario,email,nombre")) {
 
 
             $id_servicio = $param["id_servicio"];

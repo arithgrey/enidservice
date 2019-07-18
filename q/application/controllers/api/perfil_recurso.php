@@ -15,7 +15,7 @@ class perfil_recurso extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "id_recurso,id_perfil")) {
+		if (fx($param, "id_recurso,id_perfil")) {
 			$params = [
 				"idrecurso" => $param["id_recurso"],
 				"idperfil" => $param["id_perfil"]

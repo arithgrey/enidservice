@@ -15,7 +15,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
 
 		$param = $this->delete();
 		$response = false;
-		if (if_ext($param, "id_recibo")) {
+		if (fx($param, "id_recibo")) {
 			$response = $this->proyecto_persona_forma_pago_direccion_model->delete_por_id_recibo($param["id_recibo"]);
 		}
 		$this->response($response);
@@ -26,7 +26,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, 'id_recibo')) {
+		if (fx($param, 'id_recibo')) {
 
 			$response =
 				$this->proyecto_persona_forma_pago_direccion_model->get(
@@ -42,7 +42,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
 		$param = $this->post();
 		$response = false;
 
-		if (if_ext($param, 'id_recibo,id_direccion')) {
+		if (fx($param, 'id_recibo,id_direccion')) {
 			$params = [
 				"id_proyecto_persona_forma_pago" => $param["id_recibo"],
 				"id_direccion" => $param["id_direccion"]

@@ -19,7 +19,7 @@ class funcionalidad extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 
 			$response = $this->add_conceptos($this->funcionalidad_model->get([], [], 100), $param["id_usuario"]);
 		}

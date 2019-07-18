@@ -17,7 +17,7 @@ class Mail extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, 'fecha_inicio,fecha_termino')) {
+        if (fx($param, 'fecha_inicio,fecha_termino')) {
             $email = $this->email_model->get_correos_enviados_accesos($param);
             $data["email"] = $this->agrega_ventas($email);
             $response = actividad_mail_marketing($data);

@@ -18,7 +18,7 @@ class Punto_encuentro extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (if_ext($param, "dia")) {
+        if (fx($param, "dia")) {
 
             $response = prm_def(lista_horarios($param["dia"]), "select", []);
 
@@ -34,7 +34,7 @@ class Punto_encuentro extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (if_ext($param, "id")) {
+        if (fx($param, "id")) {
 
             $in = ["id_tipo_punto_encuentro" => $param["id"]];
             $response = $this->punto_encuentro_model->get([], $in, 100);
@@ -62,7 +62,7 @@ class Punto_encuentro extends REST_Controller
         $param = $this->get();
         $response = [];
 
-        if (if_ext($param, "id,v")) {
+        if (fx($param, "id,v")) {
 
 
             if (strlen($param["q"]) > 2) {
@@ -134,7 +134,7 @@ class Punto_encuentro extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (if_ext($param, "punto_encuentro")) {
+        if (fx($param, "punto_encuentro")) {
             $response = $this->punto_encuentro_model->q_get(["costo_envio"], $param["punto_encuentro"]);
         }
         $this->response($response);
@@ -145,7 +145,7 @@ class Punto_encuentro extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id")) {
+        if (fx($param, "id")) {
 
             $response = $this->punto_encuentro_model->get_tipo($param);
 

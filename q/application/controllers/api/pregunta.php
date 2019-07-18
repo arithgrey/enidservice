@@ -18,7 +18,7 @@ class pregunta extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "id_pregunta,es_vendedor" , 1)) {
+		if (fx($param, "id_pregunta,es_vendedor" , 1)) {
 
 			$id_pregunta = $param["id_pregunta"];
 			if ($param["es_vendedor"] > 0) {
@@ -107,7 +107,7 @@ class pregunta extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "id_pregunta,modalidad")) {
+		if (fx($param, "id_pregunta,modalidad")) {
 
 			$response = $this->pregunta_model->set_visto_pregunta($param);
 		}
@@ -122,7 +122,7 @@ class pregunta extends REST_Controller
 		if ($this->app->is_logged_in()) {
 			$response = false;
 			$param["usuario"] = $this->app->get_session("idusuario");
-			if (if_ext($param, 'pregunta,usuario,servicio')) {
+			if (fx($param, 'pregunta,usuario,servicio')) {
 
 				$id_servicio = $param["servicio"];
 				$usuario = $this->get_usuario_servicio($id_servicio);
@@ -163,7 +163,7 @@ class pregunta extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->pregunta_model->num_periodo($param);
 		}
 		$this->response($response);
@@ -240,7 +240,7 @@ class pregunta extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_pregunta")) {
+		if (fx($param, "id_pregunta")) {
 
 			$usuario = $this->pregunta_model->get_usuario_por_id_pregunta($param);
 			$response = pr($usuario ,"id_usuario");
@@ -254,7 +254,7 @@ class pregunta extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_vendedor")) {
+		if (fx($param, "id_vendedor")) {
 
 			$id_vendedor = $param["id_vendedor"];
 
@@ -316,7 +316,7 @@ class pregunta extends REST_Controller
 	{
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 
 			$id_usuario = $param["id_usuario"];
 
@@ -371,7 +371,7 @@ class pregunta extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "id_pregunta,id_usuario")) {
+		if (fx($param, "id_pregunta,id_usuario")) {
 
 			$response = $this->pregunta_model->update(["se_ve_cliente" => 1], ["id_pregunta" => $param["id_pregunta"]]);
 

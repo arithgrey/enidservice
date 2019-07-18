@@ -332,7 +332,7 @@ class Cobranza extends REST_Controller
 
         $param = $this->post();
         $response = [];
-        if (if_ext($param, "fecha_entrega,horario_entrega,recibo")) {
+        if (fx($param, "fecha_entrega,horario_entrega,recibo")) {
 
             /*modifico hora de entrega*/
             $param["id_recibo"] = $param["recibo"];

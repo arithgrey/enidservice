@@ -15,7 +15,7 @@ class Linea_lista_negra extends REST_Controller
 
         $param =  $this->get();
         $response  = false;
-        if (if_ext($param, "id_usuario",1)){
+        if (fx($param, "id_usuario",1)){
 
             $response =  $this->linea_lista_negra_model->get([], ["id_usuario" => $param["id_usuario"]], 100 );
 
@@ -29,7 +29,7 @@ class Linea_lista_negra extends REST_Controller
         $response  = false;
         $id_usuario =  $this->app->get_session("idusuario");
 
-        if (if_ext($param, "id,lista_negra",1) && $id_usuario > 0 ){
+        if (fx($param, "id,lista_negra",1) && $id_usuario > 0 ){
 
 
             $params =  [

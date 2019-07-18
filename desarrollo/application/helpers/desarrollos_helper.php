@@ -76,7 +76,7 @@ if (!function_exists('invierte_date_time')) {
                     4
                 )
                 ,
-                "formulario_busqueda_tickets"
+                "formulario_busqueda_tickets row"
             );
 
             return append($r);

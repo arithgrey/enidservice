@@ -22,7 +22,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id")) {
+        if (fx($param, "id")) {
             $id_servicio = $param["id"];
             $response = $this->serviciosmodel->q_get(["flag_envio_gratis"], $id_servicio);
         }
@@ -42,7 +42,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
 
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
 
             $id_servicio = $param["id_servicio"];
             $response = $this->serviciosmodel->q_get(["stock"], $id_servicio)[0]["stock"];
@@ -54,7 +54,7 @@ class Servicio extends REST_Controller
     {
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "id_servicio,stock")) {
+        if (fx($param, "id_servicio,stock")) {
             $id_servicio = $param["id_servicio"];
             if (prm_def($param, "compra") > 0) {
 
@@ -72,7 +72,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "servicio,opcion")) {
+        if (fx($param, "servicio,opcion")) {
 
             $id_servicio = $param["servicio"];
             $opcion = $param["opcion"];
@@ -86,7 +86,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id")) {
+        if (fx($param, "id")) {
             $response = $this->serviciosmodel->q_get(["nombre_servicio"], $param["id"]);
         }
         $this->response($response);
@@ -97,7 +97,7 @@ class Servicio extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $response = $this->serviciosmodel->agrega_color_servicio($param);
         }
         $this->response($response);
@@ -108,7 +108,7 @@ class Servicio extends REST_Controller
 
         $param = $this->delete();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $response = $this->serviciosmodel->elimina_color_servicio($param);
         }
         $this->response($response);
@@ -119,7 +119,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $id_servicio = $param["id_servicio"];
             $response = $this->serviciosmodel->get_clasificaciones_por_id_servicio($id_servicio);
         }
@@ -131,7 +131,7 @@ class Servicio extends REST_Controller
 
         $param = $this->delete();
         $response = false;
-        if (if_ext($param, "tag,id_servicio")) {
+        if (fx($param, "tag,id_servicio")) {
             $response = $this->delete_tag_servicio($param);
             $response = $this->set_metakeyword_usuario($response);
         }
@@ -195,7 +195,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "clasificacion,id_servicio")) {
+        if (fx($param, "clasificacion,id_servicio")) {
 
             $response = $this->get_coincidencias_busqueda($param);
         }
@@ -258,7 +258,7 @@ class Servicio extends REST_Controller
         $param = $this->put();
         $response = false;
 
-        if (if_ext($param, "status,id_servicio")) {
+        if (fx($param, "status,id_servicio")) {
 
             $status = ($param["status"] == 1) ? 0 : 1;
             $id_servicio = $param["id_servicio"];
@@ -274,7 +274,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $params =
                 [
                     "primer_nivel",
@@ -297,7 +297,7 @@ class Servicio extends REST_Controller
         $response = false;
         if ($this->input->is_ajax_request()) {
             $param = $this->post();
-            if (if_ext($param, "precio,flag_servicio")) {
+            if (fx($param, "precio,flag_servicio")) {
                 $response["registro"] = (ctype_digit($param["precio"]) && $param["precio"] >= 0) ? $this->registra_data_servicio($param) : 0;
             }
         }
@@ -458,7 +458,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->serviciosmodel->get_top_semanal_vendedor($param);
             $data_complete = [];
             $a = 0;
@@ -481,7 +481,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
 
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
 
             $this->set_option("id_servicio", $param["id_servicio"]);
             $id_servicio = $this->get_option("id_servicio");
@@ -758,7 +758,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $id_servicio = $param["id_servicio"];
             $servicio = $this->serviciosmodel->q_get(["talla"], $id_servicio);
             $servicio_tallas = $this->add_tallas($servicio);
@@ -828,7 +828,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "id_servicio,url")) {
+        if (fx($param, "id_servicio,url")) {
 
             $response = $this->serviciosmodel->q_up("url_ml", $param["url"], $param["id_servicio"]);
         }
@@ -840,7 +840,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "servicio,link_dropshipping")) {
+        if (fx($param, "servicio,link_dropshipping")) {
 
             $response = $this->serviciosmodel->q_up("link_dropshipping", $param["link_dropshipping"], $param["servicio"]);
         }
@@ -871,7 +871,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "id_ciclo_facturacion,id_servicio")) {
+        if (fx($param, "id_ciclo_facturacion,id_servicio")) {
             $id_ciclo_facturacion = $param["id_ciclo_facturacion"];
             $id_servicio = $param["id_servicio"];
             $response = $this->serviciosmodel->q_up("id_ciclo_facturacion", $id_ciclo_facturacion, $id_servicio);
@@ -885,7 +885,7 @@ class Servicio extends REST_Controller
         $param = $this->put();
         $response = false;
 
-        if (if_ext($param, "existencia,id_servicio")) {
+        if (fx($param, "existencia,id_servicio")) {
             $response = $this->serviciosmodel->q_up("flag_imagen", $param["existencia"], $param["id_servicio"]);
         }
         $this->response($response);
@@ -896,7 +896,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = [];
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $response = $this->serviciosmodel->set_vista($param);
         }
         $this->response($response);
@@ -907,7 +907,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "entregas_en_casa,id_servicio")) {
+        if (fx($param, "entregas_en_casa,id_servicio")) {
             $response = $this->serviciosmodel->q_up("entregas_en_casa", $param["entregas_en_casa"], $param["id_servicio"]);
         }
         $this->response($response);
@@ -918,7 +918,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "q,q2,id_servicio")) {
+        if (fx($param, "q,q2,id_servicio")) {
 
 
             if ($param["q"] === "url_vide_youtube") {
@@ -937,7 +937,7 @@ class Servicio extends REST_Controller
         $param = $this->put();
         $response = false;
 
-        if (if_ext($param, "id_servicio,telefono_visible")) {
+        if (fx($param, "id_servicio,telefono_visible")) {
 
             $id_servicio = $param["id_servicio"];
             $response = $this->serviciosmodel->q_up("telefono_visible", $param["telefono_visible"], $id_servicio);
@@ -950,7 +950,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "id_servicio,venta_mayoreo")) {
+        if (fx($param, "id_servicio,venta_mayoreo")) {
 
             $id_servicio = $param["id_servicio"];
             $response = $this->serviciosmodel->q_up("venta_mayoreo", $param["venta_mayoreo"], $id_servicio);
@@ -998,7 +998,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "type")) {
+        if (fx($param, "type")) {
             $response = [];
             switch ($param["type"]) {
 
@@ -1076,7 +1076,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->serviciosmodel->get_num_en_venta_usuario($param);
         }
         $this->response($response);
@@ -1115,7 +1115,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $id_servicio = $param["id_servicio"];
             $params = [
                 "id_servicio",
@@ -1149,7 +1149,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
 
             $response = $this->serviciosmodel->q_get(["existencia"], $param["id_servicio"])[0]["existencia"];
 
@@ -1162,7 +1162,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $params = ["nombre_servicio", "telefono_visible", "id_usuario"];
             $id_servicio = $param["id_servicio"];
             $response = $this->serviciosmodel->q_get($params, $id_servicio);
@@ -1175,7 +1175,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel")) {
+        if (fx($param, "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel")) {
             $response = $this->agrega_costo_envio($this->serviciosmodel->get_producto_por_clasificacion($param));
         }
         $this->response($response);
@@ -1207,7 +1207,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
 
-        if (if_ext($param, "limit")) {
+        if (fx($param, "limit")) {
 
             $q = (array_key_exists("q", $param)) ? $param["q"] : "";
             $param["q2"] = 0;
@@ -1235,7 +1235,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
 
-        if (if_ext($param, "id_servicio,c")) {
+        if (fx($param, "id_servicio,c")) {
 
             $id_servicio = $param["id_servicio"];
             $params = [
@@ -1285,7 +1285,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "fecha_inicio", "fecha_termino")) {
+        if (fx($param, "fecha_inicio", "fecha_termino")) {
             $response = $this->serviciosmodel->periodo($param);
             $v = (array_key_exists("v", $param) && $param["v"] > 0) ? $param["v"] : 0;
             switch ($v) {
@@ -1311,7 +1311,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario,id_servicio")) {
+        if (fx($param, "id_usuario,id_servicio")) {
             $params_where = [
                 "id_usuario" => $param["id_usuario"],
                 "id_servicio" => $param["id_servicio"]
@@ -1325,7 +1325,7 @@ class Servicio extends REST_Controller
     {
 
         $param = $this->get();
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $response = $this->serviciosmodel->get_resumen($param);
         }
         $this->response($response);
@@ -1336,7 +1336,7 @@ class Servicio extends REST_Controller
 
         if ($this->input->is_ajax_request()) {
             $param = $this->post();
-            if (if_ext($param, "metakeyword_usuario,id_servicio")) {
+            if (fx($param, "metakeyword_usuario,id_servicio")) {
 
                 $param["id_usuario"] = $this->id_usuario;
                 $param["metakeyword_usuario"] = remove_comma($param["metakeyword_usuario"]);
@@ -1363,7 +1363,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "fecha_inicio,fecha_termino")) {
+        if (fx($param, "fecha_inicio,fecha_termino")) {
             $response = $this->serviciosmodel->num_periodo($param);
         }
         $this->response($response);
@@ -1375,7 +1375,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->serviciosmodel->get_num_anuncios($param);
         }
         $this->response($response);
@@ -1405,7 +1405,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "fecha_inicio,fecha_termino")) {
+        if (fx($param, "fecha_inicio,fecha_termino")) {
 
             $articulos = $this->serviciosmodel->get_productos_solicitados($param);
 
@@ -1431,7 +1431,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->serviciosmodel->get_num_lectura_valoraciones($param);
         }
         $this->response($response);
@@ -1442,7 +1442,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = [];
-        if (if_ext($param, "tiempo_entrega,id_servicio")) {
+        if (fx($param, "tiempo_entrega,id_servicio")) {
             $response = $this->serviciosmodel->q_up("tiempo_promedio_entrega", $param["tiempo_entrega"], $param["id_servicio"]);
         }
         $this->response($response);
@@ -1453,7 +1453,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "tipo,id_servicio")) {
+        if (fx($param, "tipo,id_servicio")) {
 
 
             $tipo = "";
@@ -1483,7 +1483,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (if_ext($param, "fecha_inicio,fecha_termino")) {
+        if (fx($param, "fecha_inicio,fecha_termino")) {
             if ($param["v"] == 1) {
 
                 $servicios = $this->serviciosmodel->get_tipos_entregas($param);
@@ -1595,7 +1595,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $response = $this->serviciosmodel->q_get(["id_usuario"], $param["id_servicio"]);
         }
         $this->response($response);
@@ -1606,7 +1606,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
 
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
 
             $clasificaciones = $this->serviciosmodel->get_clasificaciones_por_id_servicio($param["id_servicio"]);
 
@@ -1727,7 +1727,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "id")) {
+        if (fx($param, "id")) {
 
             $response = $this->serviciosmodel->restablecer($param["id"]);
 

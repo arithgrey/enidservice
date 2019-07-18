@@ -15,7 +15,7 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "id_recibo,punto_encuentro")) {
+		if (fx($param, "id_recibo,punto_encuentro")) {
 
             $id_recibo =  $param["id_recibo"];
 			$in = ["id_proyecto_persona_forma_pago" => $id_recibo];
@@ -38,7 +38,7 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
 		$param = $this->get();
 		$response = false;
 
-		if (if_ext($param, "id_recibo")) {
+		if (fx($param, "id_recibo")) {
 			$response = $this->get_id_proyecto_persona_forma_pago($param["id_recibo"]);
 		}
 		$this->response($response);
@@ -49,7 +49,7 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_recibo")) {
+		if (fx($param, "id_recibo")) {
             $response = [];
 			$pe = $this->get_id_proyecto_persona_forma_pago($param["id_recibo"]);
 			if (es_data($pe)) {
@@ -76,7 +76,7 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
 
 		$param = $this->delete();
 		$response = false;
-		if (if_ext($param, "id_recibo")) {
+		if (fx($param, "id_recibo")) {
 
 			$in       =  ["id_proyecto_persona_forma_pago" => $param["id_recibo"]];
 			$response = $this->proyecto_persona_forma_pago_punto_encuentro_model->delete($in,  10);

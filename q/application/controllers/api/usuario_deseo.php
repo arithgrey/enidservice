@@ -17,7 +17,7 @@ class usuario_deseo extends REST_Controller
 	{
 
 		$response = false;
-		if (if_ext($param, "id_usuario,id_servicio")) {
+		if (fx($param, "id_usuario,id_servicio")) {
 			$q = [
 				"id_usuario" => $param["id_usuario"],
 				"id_servicio" => $param["id_servicio"]
@@ -32,7 +32,7 @@ class usuario_deseo extends REST_Controller
 	{
 
 		$param = $this->get();
-		if (if_ext($param, "id_usuario,id_servicio")) {
+		if (fx($param, "id_usuario,id_servicio")) {
 			$response = $this->get_num_deseo_servicio_usuario($param);
 		}
 		$this->response($response);
@@ -42,7 +42,7 @@ class usuario_deseo extends REST_Controller
 	{
 		$param    = $this->put();
 		$response = false;
-		if (if_ext($param, "id")) {
+		if (fx($param, "id")) {
 
 
 			$response =  $this->usuario_deseo_model->q_up("status", 2, $param["id"]);
@@ -64,7 +64,7 @@ class usuario_deseo extends REST_Controller
 	{
 
 		$param = $this->post();
-		if (if_ext($param, "servicio") > 0 && $this->id_usuario > 0) {
+		if (fx($param, "servicio") > 0 && $this->id_usuario > 0) {
 
 			$params = [
 				"id_usuario" => $this->id_usuario,
@@ -79,7 +79,7 @@ class usuario_deseo extends REST_Controller
 	{
 
 		$response = false;
-		if (if_ext($param, "id_usuario,id_servicio")) {
+		if (fx($param, "id_usuario,id_servicio")) {
 			$response = 0;
 			/*if ($this->get_num_deseo_servicio_usuario($param) == 0) {*/
 
@@ -108,7 +108,7 @@ class usuario_deseo extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->usuario_deseo_model->agregan_lista_deseos_periodo($param);
 		}
 		$this->response($response);
@@ -130,7 +130,7 @@ class usuario_deseo extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 
 			$id_usuario =  $param["id_usuario"];
 			if (array_key_exists("c" , $param) && $param["c"] >  0) {

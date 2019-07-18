@@ -15,7 +15,7 @@ class estado_republica extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_estado")) {
+		if (fx($param, "id_estado")) {
 			$response = $this->estado_republica_model->q_get([], $param["id_estado"]);
 		}
 		$this->response($response);

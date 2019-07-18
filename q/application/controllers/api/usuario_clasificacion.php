@@ -18,7 +18,7 @@ class usuario_clasificacion extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->usuario_clasificacion_model->agregan_clasificaciones_periodo($param);
 		}
 		$this->response($response);
@@ -57,7 +57,7 @@ class usuario_clasificacion extends REST_Controller
 	{
 
 		$response = false;
-		if (if_ext($param, "id_usuario,id_clasificacion")) {
+		if (fx($param, "id_usuario,id_clasificacion")) {
 			$q = [
 				"tipo" => 2,
 				"id_usuario" => $param["id_usuario"],

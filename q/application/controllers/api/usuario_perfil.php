@@ -15,7 +15,7 @@ class usuario_perfil extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$id_usuario = $param["id_usuario"];
 			$params = ["idusuario" => $id_usuario, "status" => 1];
 			$response = $this->usuario_perfil_model->get(["idperfil"], $params);
@@ -28,7 +28,7 @@ class usuario_perfil extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "id_usuario,puesto")) {
+		if (fx($param, "id_usuario,puesto")) {
 
 			$id_usuario = $param["id_usuario"];
 			$id_perfil = $param["puesto"];
@@ -47,7 +47,7 @@ class usuario_perfil extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$response = $this->usuario_perfil_model->get_es_cliente($param["id_usuario"]);
 		}
 		$this->response($response);

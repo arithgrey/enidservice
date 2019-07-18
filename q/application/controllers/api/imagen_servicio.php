@@ -15,7 +15,7 @@ class Imagen_servicio extends REST_Controller
 
 		$param = $this->get();
 		$response = 2;
-		if (if_ext($param, "id_servicio")) {
+		if (fx($param, "id_servicio")) {
 
 			$id_servicio = $param["id_servicio"];
 
@@ -41,7 +41,7 @@ class Imagen_servicio extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "id_imagen,id_servicio")) {
+		if (fx($param, "id_imagen,id_servicio")) {
 			$params = [
 				"id_imagen" => $param["id_imagen"],
 				"id_servicio" => $param["id_servicio"]
@@ -55,7 +55,7 @@ class Imagen_servicio extends REST_Controller
 	{
 		$param = $this->put();
 		$response = 2;
-		if (if_ext($param, "id_imagen,id_servicio")) {
+		if (fx($param, "id_imagen,id_servicio")) {
 
 			$id_servicio = $param["id_servicio"];
 			$set = ["principal" => 0];
@@ -78,7 +78,7 @@ class Imagen_servicio extends REST_Controller
 
 		$param = $this->delete();
 		$response = [];
-		if (if_ext($param, 'id_imagen')) {
+		if (fx($param, 'id_imagen')) {
 
 			$q = ["id_imagen" => $param["id_imagen"]];
 
@@ -107,7 +107,7 @@ class Imagen_servicio extends REST_Controller
 
 		/*Ahora valido que el servicio no se quede sin imagenes, de ser así pasar a 0 el status del servicio*/
 		$response = [];
-		if (if_ext($q, "id_servicio")) {
+		if (fx($q, "id_servicio")) {
 
 			$response["num_imagenes"] = $this->imagen_servicio_model->get_num_servicio($q["id_servicio"]);
 			if ($response["num_imagenes"] == 0) {

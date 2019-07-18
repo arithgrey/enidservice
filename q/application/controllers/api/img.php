@@ -16,7 +16,7 @@ class Img extends REST_Controller
 
 		$param = $this->delete();
 		$response = false;
-		if (if_ext($param, "id_imagen")) {
+		if (fx($param, "id_imagen")) {
 			$response = [];
 			if ($param["id_imagen"] > 0) {
 				$params = ['idimagen' => $param["id_imagen"]];
@@ -31,7 +31,7 @@ class Img extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_servicio")) {
+		if (fx($param, "id_servicio")) {
 			$response = $this->img_model->get_imagenes_por_servicio($param);
 		}
 		$this->response($response);
@@ -42,7 +42,7 @@ class Img extends REST_Controller
 
 		$param = $this->get();
 		$response =  false;
-		if (if_ext($param,"id_faq")){
+		if (fx($param,"id_faq")){
 
             $response =  get_format_faq($param["id_faq"]);
         }
@@ -61,7 +61,7 @@ class Img extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_servicio")) {
+		if (fx($param, "id_servicio")) {
 
 			$response = form_img("servicio", "servicio", $param["id_servicio"]);
 		}
@@ -82,7 +82,7 @@ class Img extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id")) {
+		if (fx($param, "id")) {
 
 			$response = $this->img_model->get_img_faq($param["id"]);
 
@@ -96,7 +96,7 @@ class Img extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_imagen")) {
+		if (fx($param, "id_imagen")) {
 			$response = $this->img_model->q_get(["img"], $param["id_imagen"]);
 		}
 		$this->response($response);

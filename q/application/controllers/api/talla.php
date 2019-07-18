@@ -15,7 +15,7 @@ class Talla extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id")) {
+		if (fx($param, "id")) {
 			$id_talla = $param["id"];
 			$response = $this->talla_model->q_get(["id_talla", "talla", "id_country"], $id_talla);
 		}
@@ -35,7 +35,7 @@ class Talla extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_tipo_talla")) {
+		if (fx($param, "id_tipo_talla")) {
 			$response = $this->talla_model->get_tallas_countries($param);
 		}
 		$this->response($response);
@@ -59,7 +59,7 @@ class Talla extends REST_Controller
 
 	  $param        =   $this->put();
 	  $response     =   false;
-	  if (if_ext($param , "id")){
+	  if (fx($param , "id")){
 		  $response     = $this->talla_model->q_up("clasificacion" ,  $param["clasificaciones"] ,  $param["id"]);
 	  }
 	  $this->response($response);

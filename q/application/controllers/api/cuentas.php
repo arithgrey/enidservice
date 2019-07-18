@@ -18,7 +18,7 @@ class Cuentas extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "metodos_disponibles")) {
+		if (fx($param, "metodos_disponibles")) {
 			if ($param["metodos_disponibles"] == 1) {
 
 				$response = $this->cuenta_pago_model->get_cuentas_usuario($param);
@@ -36,11 +36,11 @@ class Cuentas extends REST_Controller
 
 		if ($param["tipo"] == 0) {
 
-            $response =  (if_ext($param, "id_usuario,clabe,banco")) ? $this->regitra_cuenta_bancaria($param) : "";
+            $response =  (fx($param, "id_usuario,clabe,banco")) ? $this->regitra_cuenta_bancaria($param) : "";
 
 		} else {
 
-			$response =  (if_ext($param, "id_usuario,banco,tipo,tipo_tarjeta,numero_tarjeta")) ? $this->regitra_cuenta_debito($param) : "";
+			$response =  (fx($param, "id_usuario,banco,tipo,tipo_tarjeta,numero_tarjeta")) ? $this->regitra_cuenta_debito($param) : "";
 
 		}
 		$this->response($response);

@@ -14,7 +14,7 @@ class costo_operacion extends REST_Controller
     {
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "recibo")) {
+        if (fx($param, "recibo")) {
             $response = $this->costo_operacion_model->get_recibo($param["recibo"]);
         }
         $this->response($response);
@@ -26,7 +26,7 @@ class costo_operacion extends REST_Controller
         $param = $this->post();
         $response = false;
         $num = 0;
-        if (if_ext($param, "recibo,costo,tipo")) {
+        if (fx($param, "recibo,costo,tipo")) {
 
 
             $num = $this->costo_operacion_model->get_num_type($param["recibo"], $param["tipo"]);
@@ -60,7 +60,7 @@ class costo_operacion extends REST_Controller
 
         $param = $this->delete();
         $response = false;
-        if (if_ext($param, "id")) {
+        if (fx($param, "id")) {
 
             $response = $this->costo_operacion_model->q_delete($param["id"]);
 
@@ -72,7 +72,7 @@ class costo_operacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "in")) {
+        if (fx($param, "in")) {
 
             $response = $this->costo_operacion_model->get_qsum($param["in"]);
 
@@ -85,7 +85,7 @@ class costo_operacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
 
            $response =  $this->costo_operacion_model->get_recibos_sin_costos($param["id_usuario"]);
         }

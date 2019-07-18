@@ -14,7 +14,7 @@ class Paginacion extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "totales_elementos,per_page,q")) {
+		if (fx($param, "totales_elementos,per_page,q")) {
 
 			$base_url = "?q=" . $param["q"];
             $base_url .= (prm_def($param, "q2", 0, 1) > 0) ? "&q2=".$param["q2"] : "";

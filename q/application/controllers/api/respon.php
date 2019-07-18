@@ -20,7 +20,7 @@ class Respon extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_pregunta,v,es_vendedor")) {
+		if (fx($param, "id_pregunta,v,es_vendedor")) {
 			$id_pregunta = $param["id_pregunta"];
 			$response = $this->response_model->get_respuestas_pregunta($id_pregunta);
 			$es_vendedor = $param["es_vendedor"];
@@ -43,7 +43,7 @@ class Respon extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "id_pregunta,respuesta,es_vendedor")) {
+		if (fx($param, "id_pregunta,respuesta,es_vendedor")) {
 			$es_vendedor  =  $param["es_vendedor"];
 			$id_pregunta = $param["id_pregunta"];
 

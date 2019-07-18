@@ -16,7 +16,7 @@ class cotizaciones extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "fecha_inicio,fecha_termino")) {
+        if (fx($param, "fecha_inicio,fecha_termino")) {
 
             $data["contactos"] = $this->contactosmodel->get_contactos($param);
             $response = format_contactos_dia($data);

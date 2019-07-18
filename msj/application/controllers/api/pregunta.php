@@ -39,7 +39,7 @@ class Pregunta extends REST_Controller
 		$param = $this->get();
 		$response = false;
 
-		if (if_ext($param, "servicio")) {
+		if (fx($param, "servicio")) {
 			$prm = $this->get_info_vendedor_por_servicio($param["servicio"]);
 			$response = "No se envió el mensaje";
 			if (count($prm) > 0) {

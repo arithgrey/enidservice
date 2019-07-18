@@ -164,7 +164,7 @@ class Archivo extends REST_Controller
         $response = [];
         if ($param["id_usuario"] > 0) {
             $existen = "nombre_archivo,id_usuario,id_empresa,imagenBinaria,extension,servicio";
-            if (if_ext($param, $existen)) {
+            if (fx($param, $existen)) {
                 $id_imagen = $this->img_model->insert_img($param, 1);
                 if ($id_imagen > 0) {
 

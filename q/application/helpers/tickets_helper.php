@@ -355,16 +355,15 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function crea_tabla_resumen_ticket($info_ticket, $info_num_tareas)
+    function crea_tabla_resumen_ticket($info_ticket, $num_tareas)
     {
 
 
         $response = [];
-        if (es_data($info_num_tareas)) {
+        if (es_data($num_tareas)) {
 
-
-            $tareas = $info_num_tareas[0]["tareas"];
-            $pendientes = $tareas - $info_num_tareas[0]["pendientes"];
+            $tareas = pr($num_tareas, "tareas");
+            $pendientes = $tareas - pr($num_tareas , "pendientes");
 
             $r = [];
 
@@ -373,8 +372,6 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_ticket = $row["id_ticket"];
 
-                $fecha_registro = $row["fecha_registro"];
-                $prioridad = $row["prioridad"];
                 $nombre_departamento = $row["nombre_departamento"];
                 $lista_prioridad = ["Alta", "Media", "Baja"];
 
@@ -405,16 +402,16 @@ if (!function_exists('invierte_date_time')) {
 
                 $x[] = d(h(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
                 $x[] = d(h(add_text("DEPARTAMENTO", strtoupper($nombre_departamento)), 6));
-                $x[] = d(h(add_text("PRIORIDAD", strtoupper($lista_prioridad[$prioridad])), 6, "underline"));
+                $x[] = d(h(add_text("PRIORIDAD", strtoupper($lista_prioridad[$row["prioridad"]])), 6, "underline"));
                 $x[] = d($asunto, "top_30 border padding_10 bottom_30");
-                $x[] = d(h(strtoupper($fecha_registro), 6, "text-right"));
+                $x[] = d(h(strtoupper( $row["fecha_registro"]), 6, "text-right"));
                 $x[] = d(icon("fas fa-2x fa-plus-circle blue_enid"), " btn_agregar_tarea padding_1  cursor_pointer text-right");
                 $r[] = d(append($x), "shadow padding_20");
 
             }
 
             $response[] = append($r);
-            $response[] = valida_mostrar_tareas($info_num_tareas);
+            $response[] = valida_mostrar_tareas($num_tareas);
 
         }
 
@@ -541,12 +538,17 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_tareas($info_ticket, $info_num_tareas, $info_tareas, $perfil)
+    function format_tareas($data)
     {
 
-        $r[] = crea_tabla_resumen_ticket($info_ticket, $info_num_tareas);
+
+
+
+
+
+        $r[] = crea_tabla_resumen_ticket($data['info_ticket'], $data['info_num_tareas']);
         $r[] = form_tarea();
-        $r[] = format_listado_tareas($info_tareas);
+        $r[] = format_listado_tareas($data['info_tareas']);
         return append($r);
 
 

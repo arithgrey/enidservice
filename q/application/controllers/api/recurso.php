@@ -16,7 +16,7 @@ class recurso extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "nombre,urlpaginaweb")) {
+        if (fx($param, "nombre,urlpaginaweb")) {
             $params = [
                 "nombre" => $param["nombre"],
                 "urlpaginaweb" => $param["urlpaginaweb"],
@@ -33,7 +33,7 @@ class recurso extends REST_Controller
     {
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_perfil")) {
+        if (fx($param, "id_perfil")) {
             $response = $this->recurso_model->recursos_perfiles($param);
         }
         $this->response($response);
@@ -44,7 +44,7 @@ class recurso extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_perfil")) {
+        if (fx($param, "id_perfil")) {
             $data["recursos"] = $this->recurso_model->get_perfiles_permisos($param);
             $response = render_lista($data);
         }

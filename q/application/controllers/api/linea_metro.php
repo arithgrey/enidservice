@@ -37,7 +37,7 @@ class Linea_metro extends REST_Controller
         $param = $this->get();
         $response = false;
 
-        if (if_ext($param, "v,tipo")) {
+        if (fx($param, "v,tipo")) {
             $params = ["tipo" => $param["tipo"]];
             $response = $this->linea_metro_model->get([], $params, 100);
             $lista_negra = [];

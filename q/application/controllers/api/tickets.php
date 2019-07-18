@@ -19,7 +19,7 @@ class Tickets extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
 
 
             $id_usuario = $param["id_usuario"];
@@ -35,7 +35,7 @@ class Tickets extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_ticket")) {
+        if (fx($param, "id_ticket")) {
             $response = $this->tickets_model->get_num($param);
         }
         $this->response($response);
@@ -46,15 +46,16 @@ class Tickets extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_ticket")) {
+        if (fx($param, "id_ticket")) {
 
 
-            $info_ticket = $this->tickets_model->get_info_ticket($param);
-            $info_tareas = $this->get_tareas_ticket($param);
-            $info_num_tareas = $this->get_tareas_ticket_num($param);
-            $perfil = $this->app->getperfiles();
-            $response = format_tareas($info_ticket, $info_num_tareas, $info_tareas, $perfil);
-            $this->response($response);
+            $data =  [
+                "info_ticket" => $this->tickets_model->get_info_ticket($param),
+                "info_tareas" => $this->get_tareas_ticket($param),
+                "info_num_tareas" => $this->get_tareas_ticket_num($param)
+
+            ];
+            $this->response(format_tareas($data));
 
         }
 
@@ -66,7 +67,7 @@ class Tickets extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "prioridad,departamento,asunto")) {
+        if (fx($param, "prioridad,departamento,asunto")) {
             $id_usuario = (array_key_exists("id_usuario", $param)) ? $param["id_usuario"] : $this->id_usuario;
             $param["id_usuario"] = $id_usuario;
             $prioridad = $param["prioridad"];
@@ -131,7 +132,7 @@ class Tickets extends REST_Controller
         $param = $this->get();
         $param["id_usuario"] = $this->id_usuario;
         $response = false;
-        if (if_ext($param, "id_recibo,modalidad")) {
+        if (fx($param, "id_recibo,modalidad")) {
             $modalidad = $param["modalidad"];
 
             if ($modalidad == 1) {
@@ -215,7 +216,7 @@ class Tickets extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "modulo")) {
+        if (fx($param, "modulo")) {
 
             $data = [];
             $modulo = $param["modulo"];
@@ -274,7 +275,7 @@ class Tickets extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "status,id_ticket")) {
+        if (fx($param, "status,id_ticket")) {
             $response = $this->tickets_model->q_up("status", $param["status"], $param["id_ticket"]);
         }
         $this->response($response);
@@ -298,16 +299,15 @@ class Tickets extends REST_Controller
     private function get_tareas_ticket($q)
     {
 
-        $api = "tarea/ticket/format/json/";
-        $tareas = $this->app->api($api, $q, "json", "GET", 1);
-        return $tareas;
+
+        return  $this->app->api("tarea/ticket/format/json/", $q, "json", "GET", 1);
+
     }
 
     private function get_tareas_ticket_num($q)
     {
 
-        $api = "tarea/tareas_ticket_num/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("tarea/tareas_ticket_num/format/json/", $q);
 
     }
 

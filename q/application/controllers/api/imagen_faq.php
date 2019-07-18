@@ -14,7 +14,7 @@ class Imagen_faq extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "id_imagen,id_faq")) {
+        if (fx($param, "id_imagen,id_faq")) {
             $params = [
                 "id_imagen" => $param["id_imagen"],
                 "id_faq" => $param["id_faq"]
@@ -28,7 +28,7 @@ class Imagen_faq extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (if_ext($param, "id_faq")) {
+        if (fx($param, "id_faq")) {
 
             $response   = $this->imagen_faq_model->get_img($param["id_faq"]);
 

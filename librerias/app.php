@@ -56,7 +56,9 @@ class app extends CI_Controller
 
 
         if ($debug == 1) {
+
             debug($result->response, 1);
+
         }
         if ($format == "json") {
             $response = $result->response;

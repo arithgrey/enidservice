@@ -20,7 +20,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->recibo_model->pendientes_sin_cierre($param["id_usuario"]);
         }
         $this->response($response);
@@ -35,7 +35,7 @@ class recibo extends REST_Controller
         $response = false;
 
 
-        if (if_ext($param, "id_usuario,q,fecha_inicio,fecha_termino")) {
+        if (fx($param, "id_usuario,q,fecha_inicio,fecha_termino")) {
 
             $response = $this->recibo_model->get_tiempo_venta($param);
             if (es_data($response)) {
@@ -58,7 +58,7 @@ class recibo extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->recibo_model->get_saldo_usuario($param);
         }
         $this->response($response);
@@ -69,7 +69,7 @@ class recibo extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "id")) {
+        if (fx($param, "id")) {
 
             $response = $this->recibo_model->q_up("cancela_email", 1, $param["id"]);
         }
@@ -81,7 +81,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_recibo")) {
+        if (fx($param, "id_recibo")) {
 
             $recibo = $this->recibo_model->q_get(["id_servicio"], $param["id_recibo"]);
             $response = pr($recibo, "id_servicio", 0);
@@ -95,7 +95,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_recibo")) {
+        if (fx($param, "id_recibo")) {
             $response = $this->get_saldo_pendiente_recibo($param);
         }
         $this->response($response);
@@ -131,7 +131,7 @@ class recibo extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "id_usuario,id_ciclo_facturacion,talla")) {
+        if (fx($param, "id_usuario,id_ciclo_facturacion,talla")) {
 
             $response = $this->recibo_model->crea_orden_de_compra($param);
         }
@@ -143,7 +143,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
             $response = $this->recibo_model->get_precio_servicio($param);
         }
         $this->response($response);
@@ -155,7 +155,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $param["id_usuario"] = $this->id_usuario;
-        if (if_ext($param, "modalidad,id_usuario")) {
+        if (fx($param, "modalidad,id_usuario")) {
 
 
             $compras = $this->recibo_model->compras_ventas_efectivas_usuario($param);
@@ -176,7 +176,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "modalidad")) {
+        if (fx($param, "modalidad")) {
 
             $response = "";
             $modalidad = $param["modalidad"];
@@ -221,7 +221,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_recibo")) {
+        if (fx($param, "id_recibo")) {
             $recibo = $this->recibo_model->q_get([], $param["id_recibo"]);
             if (es_data($recibo)) {
 
@@ -503,7 +503,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (if_ext($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v")) {
+        if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v")) {
 
             $params = [
                 "p.id_proyecto_persona_forma_pago recibo",
@@ -570,7 +570,7 @@ class recibo extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "fecha_entrega,horario_entrega,recibo")) {
+        if (fx($param, "fecha_entrega,horario_entrega,recibo")) {
 
             $fecha_contra_entrega = $param["fecha_entrega"] . " " . $param["horario_entrega"] . ":00";
             $response = $this->recibo_model->set_fecha_contra_entrega($param["recibo"], $fecha_contra_entrega);
@@ -584,7 +584,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $respose = false;
-        if (if_ext($param, "id_recibo")) {
+        if (fx($param, "id_recibo")) {
             $respose = $this->recibo_model->valida_recibo_por_pagar_usuario($param);
             $respose = crea_data_deuda_pendiente($respose);
         }
@@ -596,7 +596,7 @@ class recibo extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "id_recibo")) {
+        if (fx($param, "id_recibo")) {
             $respose = $this->recibo_model->cancela_orden_compra($param);
         }
         $this->response($respose);
@@ -608,7 +608,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->recibo_model->get_adeudo_cliente($param);
         }
         $this->response($response);
@@ -619,7 +619,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (if_ext($param, 'fecha')) {
+        if (fx($param, 'fecha')) {
             if ($param["fecha"] == 1) {
                 $param["fecha"] = date("Y-m-d");
             }
@@ -634,7 +634,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (if_ext($param, "id")) {
+        if (fx($param, "id")) {
 
             $id_recibo = $param["id"];
             $response = $this->recibo_model->q_get([], $id_recibo);
@@ -647,7 +647,7 @@ class recibo extends REST_Controller
 
         $param = $this->put();
         $response = [];
-        if (if_ext($param, "saldo_cubierto,recibo")) {
+        if (fx($param, "saldo_cubierto,recibo")) {
             $response = $this->set_saldo_cubierto($param);
         }
         $this->response($response);
@@ -678,7 +678,7 @@ class recibo extends REST_Controller
             $this->response($this->set_default_orden($param));
         }
         $response = false;
-        if (if_ext($param, "saldo_cubierto,recibo,status")) {
+        if (fx($param, "saldo_cubierto,recibo,status")) {
 
             $this->response($this->set_status($param));
 
@@ -695,7 +695,7 @@ class recibo extends REST_Controller
 
         $response = [];
 
-        if (if_ext($param, "status,tipificacion,recibo")) {
+        if (fx($param, "status,tipificacion,recibo")) {
 
             $response = $this->recibo_model->cancela_orden(0, $param["status"], $param["recibo"], 'fecha_cancelacion');
             if ($response == true) {
@@ -715,7 +715,7 @@ class recibo extends REST_Controller
     {
         $response = [];
 
-        if (if_ext($param, "status,recibo")) {
+        if (fx($param, "status,recibo")) {
 
             $params = [
                 "status" => $param["status"],
@@ -780,7 +780,7 @@ class recibo extends REST_Controller
 
         $param = $this->put();
         $response = [];
-        if (if_ext($param, "recibo,tipo_entrega")) {
+        if (fx($param, "recibo,tipo_entrega")) {
             $response = $this->recibo_model->q_up("tipo_entrega", $param["tipo_entrega"], $param["recibo"]);
             if ($response) {
                 $param["tipificacion"] = 31;
@@ -796,7 +796,7 @@ class recibo extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "recibo")) {
+        if (fx($param, "recibo")) {
             $response = $this->recibo_model->q_up("notificacion_pago", 1, $param["recibo"]);
         }
         $this->response($response);
@@ -807,7 +807,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "fecha_inicio,fecha_termino,tipo")) {
+        if (fx($param, "fecha_inicio,fecha_termino,tipo")) {
 
             $compras = $this->recibo_model->get_compras_tipo_periodo($param);
             if ($param["v"] == 1) {
@@ -829,7 +829,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio,tipo")) {
+        if (fx($param, "id_servicio,tipo")) {
 
             $interval = "";
             switch ($param["tipo"]) {
@@ -883,7 +883,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
 
             $response = $this->recibo_model->get_total_compras_usuario($param["id_usuario"]);
         }
@@ -894,7 +894,7 @@ class recibo extends REST_Controller
     {
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_recibo,id_usuario")) {
+        if (fx($param, "id_recibo,id_usuario")) {
 
             $this->response(crea_data_deuda_pendiente($this->recibo_model->valida_recibo_por_enviar_usuario($param)));
         }
@@ -978,7 +978,7 @@ class recibo extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "id", 1)) {
+        if (fx($param, "id", 1)) {
 
             $this->app->set_userdata("agenda_pedido", $param["id"]);
             $response = true;

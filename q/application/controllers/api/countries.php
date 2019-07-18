@@ -15,7 +15,7 @@ class countries extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id")) {
+		if (fx($param, "id")) {
 
 			$response = $this->countries_model->get([], ["idCountry" => $param["id"] ]);
 

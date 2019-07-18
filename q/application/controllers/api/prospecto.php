@@ -15,7 +15,7 @@ class Prospecto extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "email")) {
+		if (fx($param, "email")) {
 			$response = $this->prospecto_model->salir_list_email($param);
 		}
 		$this->response($response);

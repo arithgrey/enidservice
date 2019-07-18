@@ -15,7 +15,7 @@ class Solicitud_pago_usuario extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "id_usuario,id_solicitud", 1)) {
+		if (fx($param, "id_usuario,id_solicitud", 1)) {
 			$params = [
 				"id_usuario" => $param["id_usuario"],
 				"id_solicitud" => $param["id_solicitud"]

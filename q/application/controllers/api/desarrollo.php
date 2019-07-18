@@ -16,7 +16,7 @@ class desarrollo extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_departamento,id_usuario")) {
+		if (fx($param, "id_departamento,id_usuario")) {
 			$num = $this->desarrollomodel->get_tareas_pendientes_usuario($param);
 
 
@@ -46,7 +46,7 @@ class desarrollo extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$data["info_global"] = $this->desarrollomodel->get_resumen_desarrollo($param);
             $response = comparativa_gb($data);
 		}
@@ -58,7 +58,7 @@ class desarrollo extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$data["info_global"] = $this->desarrollomodel->get_comparativa_desarrollo_calidad($param);
             $response = gb_calidad($data);
 		}
@@ -71,7 +71,7 @@ class desarrollo extends REST_Controller
 		$param = $this->get();
 		$response = false;
 
-		if (if_ext($param, "tiempo")) {
+		if (fx($param, "tiempo")) {
 			$data["info_global"] = $this->desarrollomodel->get_comparativa_desarrollo($param);
 			//return $this->load->view("desarrollo/comparativa", $data);
             $response =  format_comparativa($data);

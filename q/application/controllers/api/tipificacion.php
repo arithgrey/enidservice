@@ -15,7 +15,7 @@ class tipificacion extends REST_Controller
 
 		$param = $this->get();
 		$response = [];
-		if (if_ext($param, "tipo")) {
+		if (fx($param, "tipo")) {
 
 			$in = ["tipo" => $param["tipo"]];
 

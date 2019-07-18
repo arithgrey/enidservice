@@ -15,7 +15,7 @@ class Intento_compra extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "tipo,recibo")) {
+		if (fx($param, "tipo,recibo")) {
 			$params = [
 				"id_recibo" => $param["recibo"],
 				"id_forma_pago" => $param["tipo"]

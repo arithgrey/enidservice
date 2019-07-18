@@ -15,7 +15,7 @@ class recordatorio extends REST_Controller
 	{
 		$response = false;
 		$param = $this->get();
-		if (if_ext($param, "id_recibo")) {
+		if (fx($param, "id_recibo")) {
 			$response = $this->recordatorio_model->get_complete($param["id_recibo"]);
 		}
 		$this->response($response);
@@ -25,7 +25,7 @@ class recordatorio extends REST_Controller
 	{
 		$response = false;
 		$param = $this->post();
-		if (if_ext($param, "fecha_cordatorio,horario_entrega,recibo,tipo,descripcion")) {
+		if (fx($param, "fecha_cordatorio,horario_entrega,recibo,tipo,descripcion")) {
 
 			$params = [
 				"fecha_cordatorio" =>  $param["fecha_cordatorio"] . " " . $param["horario_entrega"] . ":00",
@@ -44,7 +44,7 @@ class recordatorio extends REST_Controller
 	{
 		$response = false;
 		$param = $this->put();
-		if (if_ext($param, "id_recordatorio,status")) {
+		if (fx($param, "id_recordatorio,status")) {
 			$response = $this->recordatorio_model->q_up("status", $param["status"], $param["id_recordatorio"]);
 		}
 		$this->response($response);
@@ -53,7 +53,7 @@ class recordatorio extends REST_Controller
 
 		$param      =  $this->get();
 		$response   =  false;
-		if (if_ext($param, "id_usuario")){
+		if (fx($param, "id_usuario")){
 			$in  = ["id_usuario" =>  $param["id_usuario"] , "status" => 0];
 			$response =  $this->recordatorio_model->get([], $in, 10, 'fecha_registro', 'ASC');
 		}

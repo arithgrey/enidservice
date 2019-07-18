@@ -19,7 +19,7 @@ class objetivos extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_perfil")) {
+		if (fx($param, "id_perfil")) {
 			$response = $this->objetivos_model->get([], ["id_perfil" => $param["id_perfil"]], 100);
 		}
 		$this->response($response);

@@ -15,7 +15,7 @@ class Empresa extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_empresa")) {
+		if (fx($param, "id_empresa")) {
 
 			$response = $this->empresa_model->q_get([], $param["id_empresa"]);
 		}

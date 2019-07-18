@@ -14,7 +14,7 @@ class contacto extends REST_Controller
     {
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "nombre,email,mensaje,empresa,tipo,tel")) {
+        if (fx($param, "nombre,email,mensaje,empresa,tipo,tel")) {
             $params = [
                 "nombre" => $param["nombre"],
                 "email" => $param["email"],

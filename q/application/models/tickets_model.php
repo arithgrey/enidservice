@@ -29,8 +29,8 @@ class Tickets_model extends CI_Model
                     t.id_ticket = '" . $id_ticket . "' 
                     LIMIT 1";
 
-        $result = $this->db->query($query_get);
-        return $result->result_array();
+        return $this->db->query($query_get)->result_array();
+
     }
 
     function q_up($q, $q2, $id)

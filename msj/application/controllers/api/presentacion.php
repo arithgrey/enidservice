@@ -32,7 +32,7 @@ class Presentacion extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "q")) {
+		if (fx($param, "q")) {
 
 			$response = get_accesos($param["q"]);
 

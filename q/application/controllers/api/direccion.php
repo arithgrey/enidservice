@@ -14,7 +14,7 @@ class direccion extends REST_Controller
 	{
 		$param = $this->get();
 		$response = [];
-		if (if_ext($param, "id_direccion")) {
+		if (fx($param, "id_direccion")) {
 
 			$response = $this->direccion_model->get_data_direccion($param["id_direccion"]);
 
@@ -29,7 +29,7 @@ class direccion extends REST_Controller
 		$receptor = prm_def($param, "nombre_receptor", "");
 		$tel_receptor = prm_def($param, "telefono_receptor", 0);
 
-		if (if_ext($param, "calle,referencia,numero_exterior,numero_interior,id_codigo_postal")) {
+		if (fx($param, "calle,referencia,numero_exterior,numero_interior,id_codigo_postal")) {
 			$params = [
 				"calle" => $param["calle"],
 				"entre_calles" => $param["referencia"],

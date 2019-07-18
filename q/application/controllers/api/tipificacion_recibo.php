@@ -15,7 +15,7 @@ class tipificacion_recibo extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "recibo,tipificacion")) {
+		if (fx($param, "recibo,tipificacion")) {
 
 			/*paso a 0 las tipificaciones previas*/
 			$id_recibo = $param["recibo"];
@@ -46,7 +46,7 @@ class tipificacion_recibo extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "recibo")) {
+		if (fx($param, "recibo")) {
 
 			$response = $this->tipificacion_recibo_model->get_recibo($param);
 		}

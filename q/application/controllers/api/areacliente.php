@@ -15,7 +15,7 @@ class Areacliente extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_recibo, email")) {
+        if (fx($param, "id_recibo, email")) {
 
             $respose = true;
             $cuerpo = $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);

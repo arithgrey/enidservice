@@ -19,7 +19,7 @@ class Pagina_web extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "q,q2")) {
+		if (fx($param, "q,q2")) {
 
 		    $params = $param["q"];
 			if ($param["q2"]== 0) {
@@ -43,7 +43,7 @@ class Pagina_web extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 
 			$fi = $param["fecha_inicio"];
 			$ft = $param["fecha_termino"];

@@ -36,7 +36,7 @@ class Respuesta extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "tarea")) {
+        if (fx($param, "tarea")) {
             $response = $this->respuesta_model->get_respuestas($param);
             $response["info_respuestas"] = $response;
             //return $this->load->view("tickets/respuestas", $response);
@@ -52,7 +52,7 @@ class Respuesta extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "tarea")) {
+        if (fx($param, "tarea")) {
             $num = $this->respuesta_model->get_num_respuestas($param);
             $response = "Comentarios (" . $num . ")";
         }
@@ -64,7 +64,7 @@ class Respuesta extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_pregunta")) {
+        if (fx($param, "id_pregunta")) {
             $response = $this->respuesta_model->get_num_respuestas_sin_leer($param);
         }
         $this->response($response);
@@ -92,7 +92,7 @@ class Respuesta extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "mensaje,tarea") && $this->id_usuario > 0) {
+        if (fx($param, "mensaje,tarea") && $this->id_usuario > 0) {
             $params = [
                 "respuesta" => $param["mensaje"],
                 "id_tarea" => $param["tarea"],

@@ -19,7 +19,7 @@ class Keyword extends REST_Controller
 		$param = $this->post();
 		$response = false;
 
-		if (if_ext($param, "q")) {
+		if (fx($param, "q")) {
 			$response = [];
 			$params = ["keyword" => $param["q"]];
 			if (array_key_exists("id_usuario", $param)) {

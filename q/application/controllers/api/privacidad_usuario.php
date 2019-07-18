@@ -20,7 +20,7 @@ class Privacidad_usuario extends REST_Controller
 		$id_usuario = $this->id_usuario;
 		$response = false;
 
-		if (if_ext($param, 'concepto,termino_asociado') > 0 && $id_usuario > 0) {
+		if (fx($param, 'concepto,termino_asociado') > 0 && $id_usuario > 0) {
 
 			$q = ["id_privacidad" => $param["concepto"], "id_usuario" => $id_usuario];
 

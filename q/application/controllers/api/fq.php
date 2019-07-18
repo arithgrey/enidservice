@@ -21,7 +21,7 @@ class Fq extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id")) {
+		if (fx($param, "id")) {
 
 			$response = $this->faqsmodel->q_get([], $param["id"]);
 		}
@@ -33,7 +33,7 @@ class Fq extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_categoria,extra")) {
+		if (fx($param, "id_categoria,extra")) {
 
 			$response = $this->faqsmodel->qsearch($param);
 
@@ -45,7 +45,7 @@ class Fq extends REST_Controller
 	{
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "q")) {
+		if (fx($param, "q")) {
 			$response = $this->faqsmodel->search($param);
 		}
 		$this->response($response);
@@ -57,7 +57,7 @@ class Fq extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "editar_respuesta,id_faq,respuesta,categoria,titulo,status")) {
+		if (fx($param, "editar_respuesta,id_faq,respuesta,categoria,titulo,status")) {
 
 			$param["id_usuario"] = $this->app->get_session("idusuario");
 			$editar_respuesta = $param["editar_respuesta"];
@@ -99,7 +99,7 @@ class Fq extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_faq")) {
+		if (fx($param, "id_faq")) {
 			$response = $this->faqsmodel->get_respuesta($param);
 		}
 		$this->response($response);

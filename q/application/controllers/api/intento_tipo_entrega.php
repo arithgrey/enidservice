@@ -15,7 +15,7 @@ class intento_tipo_entrega extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "id_servicio,tipo")) {
+		if (fx($param, "id_servicio,tipo")) {
 
 			$params = [
 				"id_servicio" => $param["id_servicio"],
@@ -32,7 +32,7 @@ class intento_tipo_entrega extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->intento_tipo_entrega_model->get_pediodo($param);
 		}
 		$this->response($response);

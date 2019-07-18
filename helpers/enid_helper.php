@@ -1203,7 +1203,7 @@ if (!function_exists('debug')) {
         }
     }
     if (!function_exists('if_ext')) {
-        function if_ext($param, $k = '', $num = 0)
+        function fx($param, $k = '', $num = 0)
         {
 
             $keys = explode(",", $k);
@@ -2138,5 +2138,3 @@ function create_contenido_menu($data)
     }
     return append($menu);
 }
-
-

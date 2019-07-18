@@ -20,7 +20,7 @@ class usuario_direccion extends REST_Controller
         $param = $this->put();
         $response = [];
 
-        if (if_ext($param, "id_usuario,id_direccion,principal")) {
+        if (fx($param, "id_usuario,id_direccion,principal")) {
 
             $id_usuario = $param["id_usuario"];
 
@@ -42,7 +42,7 @@ class usuario_direccion extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (if_ext($param, "id_usuario,id_direccion")) {
+        if (fx($param, "id_usuario,id_direccion")) {
             if ($param["id_usuario"] > 0 && $param["id_direccion"] > 0) {
 
                 $params_where = ["id_usuario" => $param["id_usuario"]];
@@ -60,7 +60,7 @@ class usuario_direccion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->usuario_direccion_model->get_usuario_direccion($param["id_usuario"]);
         }
         $this->response($response);
@@ -71,7 +71,7 @@ class usuario_direccion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
             $response = $this->usuario_direccion_model->get_num($param);
         }
         $this->response($response);
@@ -122,7 +122,7 @@ class usuario_direccion extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "id_usuario,id_direccion")) {
+        if (fx($param, "id_usuario,id_direccion")) {
             $params = ["id_usuario" => $param["id_usuario"], 'id_direccion' => $param["id_direccion"]];
             $response = $this->usuario_direccion_model->insert($params);
         }
@@ -135,7 +135,7 @@ class usuario_direccion extends REST_Controller
         $param = $this->get();
         $response = false;
 
-        if (if_ext($param, 'fecha_inicio,fecha_termino')) {
+        if (fx($param, 'fecha_inicio,fecha_termino')) {
             $response = $this->usuario_direccion_model->activos_con_direcciones($param);
 
         }
@@ -193,7 +193,7 @@ class usuario_direccion extends REST_Controller
         $param = $this->get();
         $response = [];
 
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
 
             $id_usuario = $param["id_usuario"];
             $params_where = ["id_usuario" => $id_usuario, "status" => 1];

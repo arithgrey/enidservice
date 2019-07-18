@@ -16,7 +16,7 @@ class Solicitud_pago extends REST_Controller
 		$param = $this->post();
 		$response = false;
 
-		if (if_ext($param, "monto,email_amigo")) {
+		if (fx($param, "monto,email_amigo")) {
 			$params = [
 				"email_solicitado" => $param["email_amigo"],
 				"monto_solicitado" => $param["monto"]

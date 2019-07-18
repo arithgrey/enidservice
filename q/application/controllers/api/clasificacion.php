@@ -17,7 +17,7 @@ class Clasificacion extends REST_Controller
         $param = $this->get();
         $response = [];
 
-        if (if_ext($param, 'padre,modalidad,nivel')) {
+        if (fx($param, 'padre,modalidad,nivel')) {
 
             $in =
                 [
@@ -66,7 +66,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_usuario")) {
+        if (fx($param, "id_usuario")) {
 
             $response = $this->clasificacion_model->get_intereses_usuario($param);
 
@@ -80,7 +80,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_clasificacion")) {
+        if (fx($param, "id_clasificacion")) {
             $response = $this->clasificacion_model->get_nombre_clasificacion_por_id_clasificacion($param);
         }
         $this->response($response);
@@ -92,7 +92,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_clasificacion")) {
+        if (fx($param, "id_clasificacion")) {
             $response = $this->clasificacion_model->get_clasificaciones_por_id_clasificacion($param);
         }
         $this->response($response);
@@ -102,7 +102,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "clasificaciones")) {
+        if (fx($param, "clasificaciones")) {
 
             $response = $this->clasificacion_model->in($param["clasificaciones"]);
 
@@ -135,7 +135,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "nivel")) {
+        if (fx($param, "nivel")) {
             $response = $this->clasificacion_model->get_clasificaciones_por_nivel($param);
         }
         $this->response($response);
@@ -146,7 +146,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (if_ext($param, 'padre', 0)) {
+        if (fx($param, 'padre', 0)) {
             $f = ["id_clasificacion", "padre", "nivel"];
             $response = $this->clasificacion_model->get($f, $param["padre"]);
 
@@ -171,7 +171,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "id_clasificacion")) {
+        if (fx($param, "id_clasificacion")) {
             $tipo_talla = $this->get_tipo_talla($param);
             $response = [];
             if (es_data($tipo_talla)) {
@@ -275,7 +275,7 @@ class Clasificacion extends REST_Controller
     {
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "servicio,clasificacion")) {
+        if (fx($param, "servicio,clasificacion")) {
 
             $response["existencia"] = $this->clasificacion_model->num_servicio_nombre($param);
         }
@@ -289,7 +289,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (if_ext($param, "clasificacion,tipo,padre,nivel")) {
+        if (fx($param, "clasificacion,tipo,padre,nivel")) {
             $params = [
                 "nombre_clasificacion" => $param["clasificacion"],
                 "flag_servicio" => $param["tipo"],
@@ -306,7 +306,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "es_servicio,nivel,padre")) {
+        if (fx($param, "es_servicio,nivel,padre")) {
             $response = $this->clasificacion_model->get_servicio_nivel($param);
 
             if (array_key_exists('v', $param) && $param["v"] == 1) {
@@ -344,7 +344,7 @@ class Clasificacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "id_servicio")) {
+        if (fx($param, "id_servicio")) {
 
 
             $tallas_servicio = $this->get_tallas_servicio($param);
@@ -462,7 +462,7 @@ class Clasificacion extends REST_Controller
     {
         $param = $this->get();
         $response = false;
-        if (if_ext($param, "clasificacion")) {
+        if (fx($param, "clasificacion")) {
 
             $response = $this->clasificacion_model->get_coincidencia($param);
         }

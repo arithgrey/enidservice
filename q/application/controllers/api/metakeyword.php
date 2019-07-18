@@ -19,7 +19,7 @@ class Metakeyword extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "q,id_usuario")) {
+		if (fx($param, "q,id_usuario")) {
 
 			$params = ["keyword" => $param["q"], "id_usuario" => $param["id_usuario"]];
 			$response = $this->metakeyword_model->insert($params);
@@ -33,7 +33,7 @@ class Metakeyword extends REST_Controller
 
 		$param = $this->put();
 		$response = false;
-		if (if_ext($param, "metakeyword_usuario,id_usuario")) {
+		if (fx($param, "metakeyword_usuario,id_usuario")) {
 			$response = $this->metakeyword_model->set_metakeyword_usuario($param);
 		}
 		$this->response($response);
@@ -45,7 +45,7 @@ class Metakeyword extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "q,id_usuario")) {
+		if (fx($param, "q,id_usuario")) {
 
 			$params = [
 				"keyword" => $param["q"],
@@ -70,7 +70,7 @@ class Metakeyword extends REST_Controller
 
 			if (!in_array($arr_meta, $param["metakeyword_usuario"])) {
 
-                $e =  if_ext($param, "metakeyword_usuario,metakeyword,id_usuario");
+                $e =  fx($param, "metakeyword_usuario,metakeyword,id_usuario");
                 $response =  ($e) ? $this->add_metakeyword($param, $arr_meta) : "";
 
 			}
@@ -108,7 +108,7 @@ class Metakeyword extends REST_Controller
 	private function create($param)
 	{
 		$response = false;
-		if (if_ext($param, "metakeyword_usuario,id_usuario")) {
+		if (fx($param, "metakeyword_usuario,id_usuario")) {
 
 			$arr[] =  strtoupper($param["metakeyword_usuario"]);
 			$meta = json_encode($arr);

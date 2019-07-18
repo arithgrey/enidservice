@@ -14,7 +14,7 @@ class Imagen_usuario extends REST_Controller
 	{
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 			$response = $this->imagen_usuario_model->get_img_usuario($param["id_usuario"]);
 		}
 		$this->response($response);
@@ -25,7 +25,7 @@ class Imagen_usuario extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "id_imagen,id_usuario")) {
+		if (fx($param, "id_imagen,id_usuario")) {
 			if ($this->delete_usuario($param) == 1) {
 
 				$params = [
@@ -68,7 +68,7 @@ class Imagen_usuario extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "fecha_inicio,fecha_termino")) {
+		if (fx($param, "fecha_inicio,fecha_termino")) {
 			$response = $this->imagen_usuario_model->img_perfil($param);
 		}
 		$this->response($response);

@@ -15,7 +15,7 @@ class Usuario_punto_encuentro extends REST_Controller
 
 		$param = $this->post();
 		$response = false;
-		if (if_ext($param, "punto_encuentro,id_usuario")) {
+		if (fx($param, "punto_encuentro,id_usuario")) {
 
 			$id_usuario = $param["id_usuario"];
 			$id_punto_encuentro = $param["punto_encuentro"];
@@ -35,7 +35,7 @@ class Usuario_punto_encuentro extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
-		if (if_ext($param, "id_usuario")) {
+		if (fx($param, "id_usuario")) {
 
 			$id_usuario = $param["id_usuario"];
 			$response = $this->usuario_punto_encuentro_model->get_usuario($id_usuario);
