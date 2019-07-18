@@ -15,7 +15,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile);
         $x[] = append($data["lista_productos"]);
 
-        $r[] = val_principal_img($data["q"]);
+        $r[] = val_principal_img($data);
         $r[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 'contenedor_anuncios_home');
 
 
@@ -135,10 +135,10 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function val_principal_img($q)
+    function val_principal_img($data)
     {
 
-        return (strlen(trim($q)) == 0) ? place("contenedor_img_principal") : "";
+        return (prm_def($data,  "q") === "") ? img(["src" => "../img_tema/portafolio/llamada_gratis_2.png"]) : "";
 
     }
 

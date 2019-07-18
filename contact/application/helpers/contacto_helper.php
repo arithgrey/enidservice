@@ -8,7 +8,7 @@ if (!function_exists('invierte_date_time')) {
 
             $ubicacion = $data["ubicacion"];
 
-            $r[] = div
+            $r[] = d
             (
                 d(
                     h(

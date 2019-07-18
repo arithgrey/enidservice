@@ -48,7 +48,7 @@ foreach ($info_servicio["servicio"] as $row) {
 $imagenes = construye_seccion_imagen_lateral($imgs, $nombre_servicio, $url_vide_youtube);
 $vendedor_valoracion = a_enid("", ['class' => 'valoracion_persona_principal valoracion_persona']);
 $nombre_servicio = substr(strtoupper($nombre_servicio), 0, 70);
-$nombre_producto = h($nombre_servicio, 1, ['class' => "text-justify nombre_producto_carrito strong"]);
+$nombre_producto = d(h($nombre_servicio, 1, "text-justify nombre_producto_carrito strong "), "top_50 bottom_30");
 $nuevo_nombre_servicio = valida_text_servicio($flag_servicio, $precio, $id_ciclo_facturacion);
 $boton_editar = valida_editar_servicio($id_usuario_servicio, $id_usuario, $in_session, $id_servicio, $id_perfil);
 $texto_en_existencia = get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml);
@@ -130,7 +130,7 @@ $estrellas = a_enid(d("", ['class' => 'valoracion_persona_principal valoracion_p
                             $precio,
                             $id_ciclo_facturacion),
                         3,
-                        'card-title pricing-card-title'
+                        'card-title pricing-card-title '
                     ) ?>
                     <?= validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion) ?>
                 </div>

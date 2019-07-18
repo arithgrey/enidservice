@@ -88,11 +88,13 @@ if (!function_exists('invierte_date_time')) {
         $r[] = h($nuevo_nombre_servicio, 3);
         $r[] = validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion);
         $r[] = $tallas;
-        $r[] = get_format_ventas_efectivas($deseado);
+
         $r[] = $texto_en_existencia;
+        $r[] = get_format_ventas_efectivas($deseado);
         $r[] = get_info_vendedor($entregas_en_casa, $flag_servicio, $proceso_compra, $telefono_visible, $in_session, $usuario);
         $r[] = d(valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo), 1);
         $r[] = d(valida_formas_pago(), 1);
+        $r[] = d(agregar_lista_deseos(0, $in_session), "top_20 bottom_20");
 
         return append($r);
 
@@ -285,13 +287,13 @@ if (!function_exists('invierte_date_time')) {
             [
 
                 'class' => "top_30 shadow",
-                "style" => "background:#0076f6 !important;"
+                "style" => "background:#062548 !important;"
             ],
             1,
             1);
         $r[] = form_close();
         $r[] =  br(3);
-        $r[] = d(agregar_lista_deseos(0, $in_session), "top_30");
+        //$r[] = d(agregar_lista_deseos(0, $in_session), "top_30");
         return d(append($r), "contenedor_form");
 
 
@@ -467,7 +469,7 @@ if (!function_exists('invierte_date_time')) {
                 $response = a_enid(
                     "VENDIDO POR " . span($nombre, "nombre_vendedor underline "),
                     [
-                        "href" => path_enid("search", "/?q3=' . $id_usuario . '&vendedor=' . $nombre"),
+                        "href" => path_enid("search", "/?q3=" . $id_usuario . "&vendedor=" . $nombre) ,
                         'class' => 'informacion_vendedor_descripcion text-justify black '
                     ]
                 );
@@ -714,15 +716,15 @@ if (!function_exists('invierte_date_time')) {
             $response = "";
             if ($proceso_compra == 0) {
 
-                $response = a_enid(
+                $response = d(a_enid(
                     "Ir a la tienda del vendedor",
                     [
                         'href' => path_enid("search_q3", $id_vendedor),
                         'class' => "a_enid_black d-block"
                     ]
-                );
+                ),1);
 
-                $response = d($response, 1);
+
 
             }
 

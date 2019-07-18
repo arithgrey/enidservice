@@ -1,4 +1,4 @@
-<div class="contenedor_principal_enid">
+¿<div class="contenedor_principal_enid">
     <div class="contenedor_principal_enid_service">
         <?= d(get_menu(), 2) ?>
         <div class='col-lg-10'>

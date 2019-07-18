@@ -944,6 +944,7 @@ table {
 .padding_20 {
     padding: 20px;
 }
+
 .padding_30 {
     padding: 30px;
 
@@ -986,6 +987,7 @@ table {
     margin-top: -50px;
     display: block;
 }
+
 .top_menos_100 {
     margin-top: -100px;
     display: block;
@@ -1197,6 +1199,14 @@ h2 {
     font-size: 2em;
 }
 
+.f21 {
+    font-size: 2.1em;
+}
+
+.cblue {
+    color: #020262;
+}
+
 .hover_black:hover {
     color: black;
     font-weight: bold;
@@ -1399,18 +1409,22 @@ h5 {
     background: #00299c;
     color: white;;
 }
-.w_50{
+
+.w_50 {
 
     width: 50px;
 }
-.w_200{
+
+.w_200 {
 
     width: 200px;
 }
-.w_300{
-    width: 300px!important;
-}
-.w_400{
 
-    width: 400px!important;
+.w_300 {
+    width: 300px !important;
+}
+
+.w_400 {
+
+    width: 400px !important;
 }

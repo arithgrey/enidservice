@@ -211,7 +211,7 @@ if (!function_exists('get_base_html')) {
             }
 
             if ($frow > 0) {
-                $response = $tipo($response, 13);
+                $response = d($response, 13);
             }
             return $response;
 
@@ -342,7 +342,7 @@ if (!function_exists('d')) {
     function d($info, $attributes = [], $row = 0, $frow = 0)
     {
 
-        return get_base_html("d", $info, $attributes, $row, $frow);
+        return get_base_html("div", $info, $attributes, $row, $frow);
 
     }
 }
