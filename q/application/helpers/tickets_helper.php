@@ -2,7 +2,6 @@
 if (!function_exists('invierte_date_time')) {
 
 
-
     function solicitudes_saldo($data)
     {
 
@@ -47,7 +46,7 @@ if (!function_exists('invierte_date_time')) {
             $re[] = "<table>";
             $re[] = append($response);
             $re[] = "</table>";
-            $_response[] = div(append($re), 'list-group-item-movimiento');
+            $_response[] = d(append($re), 'list-group-item-movimiento');
 
 
         endforeach;
@@ -95,7 +94,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d(append($z), "dropdown pull-right");
 
-            $response[] = div(div(append($r), "popup-head"), ["class" => "popup-box chat-popup", "id" => "qnimate"]);
+            $response[] = d(d(append($r), "popup-head"), ["class" => "popup-box chat-popup", "id" => "qnimate"]);
 
 
         }
@@ -363,7 +362,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($num_tareas)) {
 
             $tareas = pr($num_tareas, "tareas");
-            $pendientes = $tareas - pr($num_tareas , "pendientes");
+            $pendientes = $tareas - pr($num_tareas, "pendientes");
 
             $r = [];
 
@@ -404,7 +403,7 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = d(h(add_text("DEPARTAMENTO", strtoupper($nombre_departamento)), 6));
                 $x[] = d(h(add_text("PRIORIDAD", strtoupper($lista_prioridad[$row["prioridad"]])), 6, "underline"));
                 $x[] = d($asunto, "top_30 border padding_10 bottom_30");
-                $x[] = d(h(strtoupper( $row["fecha_registro"]), 6, "text-right"));
+                $x[] = d(h(strtoupper($row["fecha_registro"]), 6, "text-right"));
                 $x[] = d(icon("fas fa-2x fa-plus-circle blue_enid"), " btn_agregar_tarea padding_1  cursor_pointer text-right");
                 $r[] = d(append($x), "shadow padding_20");
 
@@ -432,11 +431,12 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_listado_tareas($info_tareas)
+    function format_listado_tareas($data)
     {
 
+        $tareas = $data['info_tareas'];
         $r = [];
-        foreach ($info_tareas as $row) {
+        foreach ($tareas as $row) {
 
             $id_tarea = $row["id_tarea"];
             $status = $row["status"];
@@ -541,16 +541,10 @@ if (!function_exists('invierte_date_time')) {
     function format_tareas($data)
     {
 
-
-
-
-
-
         $r[] = crea_tabla_resumen_ticket($data['info_ticket'], $data['info_num_tareas']);
         $r[] = form_tarea();
-        $r[] = format_listado_tareas($data['info_tareas']);
+        $r[] = format_listado_tareas($data);
         return append($r);
-
 
     }
 }

@@ -140,14 +140,13 @@ class Tarea extends REST_Controller
     private function clean($array)
     {
 
-        $list = [];
-        $a = 0;
+        $response = [];
+
         foreach ($array as $row) {
 
-
-            $list[] = [
+            $response[] = [
                 "id_tarea" => $row["id_tarea"],
-                "descripcion" =>
+                "descripcion" => /*$row["descripcion"],*/
                     str_replace("-", "", $this->security->entity_decode($row["descripcion"])),
                 "fecha_registro" => $row["fecha_registro"],
                 "status" => $row["status"],
@@ -161,8 +160,7 @@ class Tarea extends REST_Controller
                 "num_comentarios" => $row["num_comentarios"]
             ];
 
-            $a++;
         }
-        return $list;
+        return $response;
     }
 }

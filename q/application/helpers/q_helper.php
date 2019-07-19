@@ -492,7 +492,7 @@ if (!function_exists('invierte_date_time')) {
                     ],
                     "dropdown-menu pull-right");
                 $res[] = d(append($m), "btn-group");
-                $response[] = div(append($res), "popup-head-right pull-right");
+                $response[] = d(append($res), "popup-head-right pull-right");
             endif;
 
             $_response[] = d(d(append($response), "popup-head"), ["class" => "popup-box chat-popup", "id" => "qnimate"]);
@@ -620,7 +620,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = append($lista);
         $response[] = "
 </table>";
-        return div(append($response), 6, 1);
+        return d(append($response), 6, 1);
 
 
     }
