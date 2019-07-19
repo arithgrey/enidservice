@@ -4,38 +4,25 @@ if (!function_exists('invierte_date_time')) {
 
     function render_lista($data)
     {
-
-
         $b = 1;
         foreach ($data["recursos"] as $row) {
 
-
-            $idperfil = $row["idperfil"];
-
             $id_recurso = $row["id_recurso"];
-
-
+            $tr = [];
             $tr[] = td($b . ".-");
 
-            if ($idperfil > 0) {
-                $tr[] =
-                    td(input(
-                        [
-                            "type" => 'checkbox',
-                            "class" => 'perfil_recurso',
-                            "id" => $id_recurso,
-                            "checked" => true
-                        ]));
-            } else {
-                $tr[] = td(
-                    input([
-                            "type" => 'checkbox',
-                            "class" => 'perfil_recurso',
-                            "id" => $id_recurso
-                        ]
-                    ));
+            $conf = [
+                "type" => 'checkbox',
+                "class" => 'perfil_recurso',
+                "id" => $id_recurso
+            ];
+
+            if ($row["idperfil"] > 0) {
+                $conf += ["checked" => true];
+
             }
 
+            $tr[] = td(input($conf));
             $tr[] = td($row["nombre"]);
             $tr[] = td(a_enid("Ver sitio",
                 [
@@ -47,10 +34,6 @@ if (!function_exists('invierte_date_time')) {
             $l[] = tr(append($tr));
             $b++;
         }
-
         return tb(append($l));
-
     }
-
 }
-

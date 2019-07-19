@@ -1076,7 +1076,7 @@ if (!function_exists('link_imagen_servicio')) {
     function link_imagen_servicio($id)
     {
 
-        return ($id > 0) ? "../imgs/index.php/enid/imagen_servicio/$id" : "";
+        return ($id > 0) ? "../imgs/index.php/enid/imagen_servicio/".$id : "";
     }
 }
 if (!function_exists('select_vertical')) {
@@ -1208,7 +1208,7 @@ if (!function_exists('debug')) {
 
             $keys = explode(",", $k);
             $z = 0;
-            if (is_array($keys) && is_array($param)) {
+            if (es_data($keys)) {
                 $z = 1;
                 for ($a = 0; $a < count($keys); $a++) {
 
@@ -1234,7 +1234,9 @@ if (!function_exists('debug')) {
             } else {
 
                 if (!is_array($keys)) {
+
                     print_r("No es array ->  ", $keys);
+
                 }
                 if (!is_array($param)) {
                     print_r("No es array ->  ", $param);

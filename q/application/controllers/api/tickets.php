@@ -295,7 +295,7 @@ class Tickets extends REST_Controller
     {
 
 
-        return $this->app->api("tarea/ticket/format/json/", $q, "json", "GET", 1);
+        return $this->app->api("tarea/ticket/format/json/", $q);
 
     }
 

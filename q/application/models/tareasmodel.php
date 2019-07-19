@@ -103,11 +103,12 @@ class tareasmodel extends CI_Model
                     t.id_tarea =  r.id_tarea
 
                   WHERE 
-                    t.id_ticket = '" . $param["id_ticket"] . "'
+                    t.id_ticket = '".$param["id_ticket"]. "'
                   GROUP BY t.id_tarea
                   ORDER BY 
                   t.fecha_registro 
                   ASC";
+
 
 		return $this->db->query($query_get)->result_array();
 

@@ -1557,7 +1557,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver
 
 		$this->_reset_write();
 		if ($debug == 1) {
-			debug($sql);
+			//debug($sql);
 		}
 		return $this->query($sql);
 	}
@@ -1914,7 +1914,7 @@ abstract class CI_DB_query_builder extends CI_DB_driver
 
 		$sql = $this->_delete($table);
 		$this->_reset_write();
-		debug($sql);
+		//debug($sql);
 		return $this->query($sql);
 	}
 
