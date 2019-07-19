@@ -120,7 +120,7 @@ class Tarea extends REST_Controller
         $response = [];
         if (fx($param, "id_ticket")) {
 
-            $response = $this->clean($this->tareasmodel->get_tareas_ticket($param));
+            $response = $this->tareasmodel->get_tareas_ticket($param);
         }
         $this->response($response);
     }
@@ -135,32 +135,5 @@ class Tarea extends REST_Controller
     {
 
         $this->response($this->tareasmodel->tareas_enid_service($this->get()));
-    }
-
-    private function clean($array)
-    {
-
-        $response = [];
-
-        foreach ($array as $row) {
-
-            $response[] = [
-                "id_tarea" => $row["id_tarea"],
-                "descripcion" => /*$row["descripcion"],*/
-                    str_replace("-", "", $this->security->entity_decode($row["descripcion"])),
-                "fecha_registro" => $row["fecha_registro"],
-                "status" => $row["status"],
-                "id_ticket" => $row["id_ticket"],
-                "fecha_termino" => $row["fecha_termino"],
-                "usuario_registro" => $row["usuario_registro"],
-                "idusuario" => $row["idusuario"],
-                "nombre" => $row["nombre"],
-                "apellido_paterno" => $row["apellido_paterno"],
-                "apellido_materno" => $row["apellido_materno"],
-                "num_comentarios" => $row["num_comentarios"]
-            ];
-
-        }
-        return $response;
     }
 }

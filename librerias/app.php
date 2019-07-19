@@ -55,17 +55,38 @@ class app extends CI_Controller
         }
 
 
-        if ($debug == 1) {
-            print_r($result->response);
-            //debug($result->response, 1);
+        if ($debug == 1 && es_local() > 0) {
 
+            print_r($result->response);
+            debug($result->response, 1);
         }
         if ($format == "json") {
-            $response = $result->response;
-            return json_decode($response, true);
+
+            $response = $this->json_decode_nice($result->response, TRUE);
+            //$response = json_decode(, true);
+            if (es_data($response)) {
+
+                return $response;
+
+            } else {
+
+                if (es_local()) {
+
+                    print_r("Algo falló" . $response);
+                }
+
+            }
         }
 
         return $result->response;
+    }
+
+    function json_decode_nice($json, $assoc = FALSE)
+    {
+        $json = str_replace(array("\n", "\r"), "", $json);
+        $json = preg_replace('/([{,]+)(\s*)([^"]+?)\s*:/', '$1"$3":', $json);
+        $json = preg_replace('/(,)\s*}$/', '}', $json);
+        return json_decode($json, $assoc);
     }
 
     function imgs_productos($id_servicio, $completo = 0, $limit = 1, $path = 0, $data = [])
@@ -239,7 +260,7 @@ class app extends CI_Controller
         return $data;
     }
 
-    function cSSJs($data, $key='')
+    function cSSJs($data, $key = '')
     {
 
         $response = [
@@ -974,11 +995,13 @@ class app extends CI_Controller
 
     }
 
-    function session_enid(){
+    function session_enid()
+    {
 
         return $this->session;
 
     }
+
     function set_userdata($newdata = array(), $newval = '')
     {
 
