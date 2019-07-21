@@ -62,20 +62,10 @@ class app extends CI_Controller
         }
         if ($format == "json") {
 
-            $response = $this->json_decode_nice($result->response, TRUE);
-            //$response = json_decode(, true);
-            if (es_data($response)) {
+            return   $this->json_decode_nice($result->response, TRUE);
 
-                return $response;
 
-            } else {
 
-                if (es_local()) {
-
-                    print_r("Algo falló" . $response);
-                }
-
-            }
         }
 
         return $result->response;
