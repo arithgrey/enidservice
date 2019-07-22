@@ -12,6 +12,11 @@ window.onpopstate = function (event) {
 $(document).ready(() => {
 
 
+    $(".botton_enviar_solicitud").click(()=>{
+        rm_class([".informacion_del_cliente", ".form_primer_registro"] , "display_none");
+    });
+
+
     $(".form_punto_encuentro").submit(registra_usuario);
     $(".form_punto_encuentro_horario").submit(notifica_punto_entrega);
     $(".link_acceso").click(set_link);
@@ -25,7 +30,6 @@ $(document).ready(() => {
 
 });
 let muestra_estaciones = function () {
-    debugger;
 
     let q = "";
     let contenedor = ".search";
@@ -138,6 +142,7 @@ let muestra_horarios = function () {
 
     if (id > 0) {
 
+        alert();
         let text = "";
         let costo_envio = get_parameter_enid($(this), "costo_envio");
         let flag_envio_gratis = get_parameter_enid($(this), "flag_envio_gratis");

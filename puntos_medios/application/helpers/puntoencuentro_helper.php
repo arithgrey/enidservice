@@ -4,7 +4,6 @@ if (!function_exists('invierte_date_time')) {
     function render_pm($data)
     {
 
-        $leneas_metro = $data["leneas_metro"];
         $primer_registro = $data["primer_registro"];
         $servicio = $data["servicio"];
         $in_session = $data["in_session"];
@@ -15,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = h("IDENTIFICA TU PUNTO MÁS CERCANO", 3, " titulo_punto_encuentro letter-spacing-10  text-justify  border-bottom padding_10");
-        $r[] = d(d($leneas_metro, ["class" => "place_lineas col-lg-12"]), 13);
+        $r[] = d(d($data["leneas_metro"], ["class" => "place_lineas col-lg-12"]), 13);
         $r[] = place("place_estaciones_metro");
         if ($primer_registro > 0) {
             $r[] = input_hidden(["name" => "servicio", "class" => "servicio", "value" => $servicio]);
@@ -64,8 +63,8 @@ if (!function_exists('invierte_date_time')) {
             input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro])
         ]);
 
-        $response = d($response, 6, 1);
-        return $response;
+        return  d($response, 6, 1);
+
     }
 
     function get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras)
@@ -78,12 +77,10 @@ if (!function_exists('invierte_date_time')) {
         $maximo = add_date($minimo, 4);
         $minimo = ($nuevo_dia > 0) ? add_date($minimo, 1) : $minimo;
 
+        $z[] = form_open("", ["class" => "form-horizontal form_punto_encuentro mt-5"]);
+        $z[] = label(" NOMBRE ", "col-lg-3 mt-3");
 
-        $r[] = h("¿Quién recibe?", 2, ["class" => "text-uppercase"]);
-        $r[] = form_open("", ["class" => "form-horizontal form_punto_encuentro mt-5"]);
-        $r[] = label(" NOMBRE ", "col-lg-3 mt-3");
-
-        $r[] = d(
+        $z[] = d(
             input(
                 [
                     "id" => "nombre",
@@ -95,8 +92,8 @@ if (!function_exists('invierte_date_time')) {
                 ]), "col-lg-9 mt-3"
         );
 
-        $r[] = label("CORREO ", "col-lg-3 mt-3");
-        $r[] = d(
+        $z[] = label("CORREO ", "col-lg-3 mt-3");
+        $z[] = d(
             input(
                 [
                     "id" => "correo",
@@ -107,9 +104,9 @@ if (!function_exists('invierte_date_time')) {
                     "required" => true
                 ]), "col-lg-9 mt-3");
 
-        $r[] = label(" TELÉFONO ", "col-lg-3 mt-3");
+        $z[] = label(" TELÉFONO ", "col-lg-3 mt-3");
 
-        $r[] = d(input([
+        $z[] = d(input([
             "id" => "tel",
             "name" => "telefono",
             "type" => "tel",
@@ -117,21 +114,21 @@ if (!function_exists('invierte_date_time')) {
             "required" => true
         ]), "col-lg-9 mt-3");
 
-        $r[] = label(" CONTRASEÑA", "col-lg-3 mt-3");
+        $z[] = label("REGISTRA UNA CONTRASEÑA", "col-lg-4 mt-3");
 
-        $r[] = d(input([
+        $z[] = d(input([
             "id" => "pw",
             "name" => "password",
             "type" => "password",
             "class" => "form-control input-md  pw ",
             "required" => true
-        ]), "col-lg-9 mt-3");
+        ]), "col-lg-8 mt-3");
 
 
-        $r[] = h("¿En qué horario te gustaría recibir tu pedido?", 4, "col-lg-12 mt-3");
+        $r[] = d(append($z) , "display_none informacion_del_cliente top_50" );
 
-        $r[] = label(icon("fa fa-calendar-o") . " FECHA ", "col-lg-2 mt-3");
-
+        $r[] = h("¿En qué horario te gustaría recibir tu pedido?", 2, "col-lg-12 mt-3 top_30 text-uppercase text_horarios");
+        $r[] = label(text_icon("fa fa-calendar-o" ,   " FECHA "), "col-lg-2 mt-3");
 
         $r[] = d(
             input(
@@ -151,7 +148,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d($lista_horarios, "col-lg-8 mt-3");
 
-        $r[] = d("+ agregar nota", ["class" => "col-lg-12  mt-5 cursor_pointer text_agregar_nota", "onclick" => "agregar_nota();"]);
+        $r[] = d("+ ¿ALGUNA INDICACIÓN?", ["class" => "col-lg-12  mt-5 cursor_pointer text_agregar_nota", "onclick" => "agregar_nota();"]);
 
         $x[] = d("NOTAS", "strong mt-3");
         $x[] = textarea(
@@ -166,7 +163,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]);
         $r[] = input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras]);
         $r[] = input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]);
-        $r[] = d(btn("CONTINUAR"), ["class" => "col-lg-12 mt-5"]);
+        $r[] = d(btn("CONTINUAR"), ["class" => "col-lg-12 mt-5 botton_enviar_solicitud"]);
         $r[] = get_formar_usuario_registrado($in_session, $servicio, $num_ciclos);
         $r[] = form_close();
         return d(append($r), 10, 1);
@@ -196,7 +193,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = place("place_notificacion_punto_encuentro_registro");
 
         }
-        return append($r);
+        return d(append($r),  "form_primer_registro display_none");
 
     }
 
@@ -214,9 +211,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         ), 6, 1);
 
-        $response = d(append($r), 'formulario_quien_recibe display_none');
-
-        return $response;
+        return d(append($r), 'formulario_quien_recibe display_none');
 
     }
 

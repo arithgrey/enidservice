@@ -64,8 +64,6 @@ class app extends CI_Controller
 
             return   $this->json_decode_nice($result->response, TRUE);
 
-
-
         }
 
         return $result->response;

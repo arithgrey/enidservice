@@ -1,3 +1,7 @@
+.text_horarios {
+    background: #c8d6ff;
+}
+
 .contenedor_estaciones {
     display: flex;
     flex-wrap: wrap;
