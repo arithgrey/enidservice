@@ -8,18 +8,13 @@ if (!function_exists('invierte_date_time')) {
         function render_user($data)
         {
 
-            $valoraciones = $data["valoraciones"];
-            $id_usuario = $data["id_usuario"];
-            $alcance = $data["alcance"];
-            $ticket = $data["ticket"];
             $action = $data["action"];
-
             $r[] = d(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']);
             $r[] = d(place("place_ventas_usuario"), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_mis_ventas']);
-            $r[] = d(get_format_valoraciones($valoraciones, $id_usuario, $alcance), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_valoraciones']);
+            $r[] = d(get_format_valoraciones($data["valoraciones"], $data["id_usuario"], $data["alcance"]), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_valoraciones']);
             $r[] = d(place("place_pagar_ahora"), ["class" => "tab-pane", "id" => "tab_pagos"]);
             $r[] = d(place("place_resumen_servicio"), ["class" => "tab-pane", "id" => "tab_renovar_servicio"]);
-            $r[] = get_hiddens_tickects($action, $ticket);
+            $r[] = get_hiddens_tickects($action, $data["ticket"]);
             $r[] = d("",
                 [
                     "class" => "resumen_pagos_pendientes",
@@ -98,8 +93,7 @@ if (!function_exists('invierte_date_time')) {
 
             $x[] = d($alcance, " text-center top_30");
 
-            $response = d(d(append($x), 6, 1), "text-center");
-            return $response;
+            return  d(d(append($x), 6, 1), "text-center");
 
         }
     }
@@ -203,7 +197,7 @@ if (!function_exists('invierte_date_time')) {
                 "data-toggle" => "tab"
             ]);
 
-        $_lista_deseo = a_enid(text_icon("fa fa-gift" ,  "LISTA DE DESEOS")  , path_enid("lista_deseos"));
+        $_lista_deseo = a_enid(text_icon("fa fa-gift", "LISTA DE DESEOS"), path_enid("lista_deseos"));
 
 
         $list = [

@@ -6,6 +6,7 @@ class Emp extends REST_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->helper("correos");
         $this->load->library("mensajeria");
         $this->load->library(lib_def());
     }
@@ -123,11 +124,10 @@ class Emp extends REST_Controller
 
         $param["url_request"] = get_url_request("");
         $param["in_session"] = 0;
-        $uri_request = "equipo/cancelar_envio_recordatorio";
         $param["v"] = rand();
         $this->aplica_gamification_servicio($param);
-        $this->app->api($uri_request, $param, "json", "PUT");
-        $this->load->view("mensaje/evaluacion", $param);
+        $this->app->api("equipo/cancelar_envio_recordatorio", $param, "json", "PUT");
+        $this->response(evaluacion($param));
     }
 
     private function cancela_recordatorio($param)
@@ -135,17 +135,15 @@ class Emp extends REST_Controller
 
         $param["url_request"] = get_url_request("");
         $param["in_session"] = 0;
-        $uri_request = "cobranza/cancelar_envio_recordatorio";
         $param["v"] = rand();
-        $this->app->api($uri_request, $param, "json", "PUT");
+        $this->app->api("cobranza/cancelar_envio_recordatorio", $param, "json", "PUT");
         $this->aplica_gamification_servicio($param);
-        $this->load->view("mensaje/evaluacion", $param);
+        $this->response(evaluacion($param));
     }
 
     private function salir_list_email($q)
     {
-        $api = "prospecto/salir_list_email";
-        return $this->app->api($api, $q, "json", "PUT");
+        return $this->app->api("prospecto/salir_list_email", $q, "json", "PUT");
     }
 
 }

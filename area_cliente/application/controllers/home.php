@@ -13,36 +13,34 @@ class Home extends CI_Controller
     function index()
     {
         $data = $this->app->session();
-        $param =  $this->input->get();
+        $param = $this->input->get();
         if (prm_def($param, "transfer") > 0) {
 
         } else {
 
-            $valocaciones =  $this->resumen_valoraciones($data["id_usuario"]);
-
             $this->app->acceso();
-            $data +=  [
+            $data += [
                 "action" => $param["action"],
-                "valoraciones" => prm_def($valocaciones,"info_valoraciones",[]),
+                "valoraciones" =>
+                    prm_def($this->resumen_valoraciones($data["id_usuario"]), "info_valoraciones", []),
                 "alcance" => crea_alcance($this->get_alcance($data["id_usuario"])),
-                "ticket" => prm_def($param , "ticket"),
+                "ticket" => prm_def($param, "ticket"),
             ];
 
-            $data   =  $this->app->cssJs($data, "area_cliente");
-            $this->app->pagina($data, render_user($data),1);
+            $data = $this->app->cssJs($data, "area_cliente");
+            $this->app->pagina($data, render_user($data), 1);
         }
     }
+
     private function resumen_valoraciones($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("valoracion/usuario/format/json/", $q);
+        return $this->app->api("valoracion/usuario/format/json/", ["id_usuario" => $id_usuario]);
     }
 
     private function get_alcance($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("servicio/alcance_usuario/format/json/", $q);
+        return $this->app->api("servicio/alcance_usuario/format/json/", ["id_usuario" => $id_usuario]);
     }
 }
