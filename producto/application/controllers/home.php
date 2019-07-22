@@ -106,8 +106,6 @@ class Home extends CI_Controller
         $usuario =  (es_data($servicio)) ? $this->app->usuario(pr($servicio, "id_usuario")) : redirect(path_enid("go_home"));
         $fn  =   (!es_data($usuario)) ? redirect(path_enid("go_home")) : "";
 
-
-
         $data["usuario"] = $usuario;
         $data["id_publicador"] = key_exists_bi($servicio,0,"id_usuario",0);
 
@@ -150,8 +148,7 @@ class Home extends CI_Controller
 
 
         $data = $this->app->cssJs($data, "producto");
-
-        $this->app->pagina($data, 'home');
+        $this->app->pagina($data , render_producto($data) , 1);
 
     }
 

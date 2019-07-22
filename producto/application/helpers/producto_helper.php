@@ -1,6 +1,163 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function render_producto($data)
+    {
+
+
+        $info_servicio = $data["info_servicio"];
+        $imgs = $data["imgs"];
+        $id_usuario = $data["id_usuario"];
+        $in_session = $data["in_session"];
+        $id_perfil = $data["id_perfil"];
+        $proceso_compra = $data["proceso_compra"];
+        $tiempo_entrega =  $data["tiempo_entrega"];
+        $usuario =  $data["usuario"];
+        $desc_web =  $data["desc_web"];
+        $q2  = $data["q2"];
+        $tallas =  $data["tallas"];
+        $is_mobile =  $data["is_mobile"];
+        $desde_valoracion =  $data["desde_valoracion"];
+        $id_publicador = $data["id_publicador"];
+
+
+        foreach ($info_servicio["servicio"] as $row) {
+
+            $id_servicio = $row["id_servicio"];
+            $nombre_servicio = $row["nombre_servicio"];
+            $descripcion = $row["descripcion"];
+            $flag_servicio = $row["flag_servicio"];
+            $flag_nuevo = $row["flag_nuevo"];
+            $url_vide_youtube = $row["url_vide_youtube"];
+            $existencia = $row["existencia"];
+            $color = $row["color"];
+            $precio = $row["precio"];
+            $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
+            $entregas_en_casa = $row["entregas_en_casa"];
+            $id_usuario_servicio = $row["id_usuario"];
+            $telefono_visible = $row["telefono_visible"];
+            $venta_mayoreo = $row["venta_mayoreo"];
+            $url_ml = $row["url_ml"];
+            $deseado = $row["deseado"];
+
+        }
+
+        $imagenes = construye_seccion_imagen_lateral($imgs, $nombre_servicio, $url_vide_youtube);
+        $nombre_servicio = substr(strtoupper($nombre_servicio), 0, 70);
+        $nombre_producto = d(h($nombre_servicio, 1, "text-justify nombre_producto_carrito strong "), "top_50 bottom_30");
+        $boton_editar = valida_editar_servicio($id_usuario_servicio, $id_usuario, $in_session, $id_servicio, $id_perfil);
+
+
+        $c[] =
+            d(
+                btw(
+
+                    d($imagenes["preview"], ["class" => "thumbs padding_10 bg_black"])
+                    ,
+                    d(d($imagenes["imagenes_contenido"], "tab-content"), "big")
+                    ,
+                    ""
+                    ,
+                    1
+                ), "col-lg-6 left-col contenedor_izquierdo");
+
+
+        $c[] = get_contenedor_central(
+                $proceso_compra,
+                $id_servicio,
+                $tiempo_entrega,
+                $color,
+                $flag_servicio,
+                $flag_nuevo,
+                $usuario,
+                $id_publicador,
+                $desc_web,
+                $telefono_visible,
+                $is_mobile,
+                0
+            );
+
+
+        $r[] = append($c);
+
+
+        if ($flag_servicio < 1):
+            if ($existencia > 0):
+
+                $nuevo_nombre_servicio = valida_text_servicio($flag_servicio, $precio, $id_ciclo_facturacion);
+
+                $x[] = get_format_venta_producto(
+                    $boton_editar,
+                    $nombre_producto,
+                    $nuevo_nombre_servicio,
+                    $flag_servicio,
+                    $existencia,
+                    $id_servicio,
+                    $in_session,
+                    $q2,
+                    $precio,
+                    $id_ciclo_facturacion,
+                    $tallas,
+                    $url_ml,
+                    $entregas_en_casa,
+                    $proceso_compra,
+                    $telefono_visible,
+                    $usuario,
+                    $venta_mayoreo,
+                    $deseado,
+                    $id_publicador,
+                    $is_mobile);
+
+            else:
+                $x[] = get_format_no_visible($nombre_producto, $precio, $existencia, $flag_servicio, $url_ml, $id_servicio);
+            endif;
+
+        else:
+
+            $f[] = d(h(substr(strtoupper($nombre_servicio), 0, 70), 1), "card-header top_20");
+            $f[] = h(
+                valida_text_servicio(
+                    $flag_servicio,
+                    $precio,
+                    $id_ciclo_facturacion),
+                3,
+                'card-title pricing-card-title '
+            );
+            $f[] = validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion);
+            $x[] = d(append($f), "card box-shadow");
+
+        endif;
+
+        $r[] = d(append($x), "col-lg-3  border shadow");
+        $r[] = get_contenedor_central(
+            $proceso_compra,
+            $id_servicio,
+            $tiempo_entrega,
+            $color,
+            $flag_servicio,
+            $flag_nuevo,
+            $usuario,
+            $id_publicador,
+            $desc_web,
+            $telefono_visible,
+            $is_mobile, 1
+        );
+
+
+
+        $response[] = addNRow(d(append($r), "product-detail contenedor_info_producto mt-5"));
+        $response[] = hr("mr-50 mb-5");
+        $response[] = place("place_valoraciones col-lg-12");
+        $response[] = get_descripcion_servicio($descripcion, $flag_servicio, $url_vide_youtube, $is_mobile);
+        $response[] = addNRow(d(place("place_tambien_podria_interezar"), 10, 1));
+        $response[] = input_hidden(["class" => "qservicio", "value" => $nombre_servicio]);
+        $response[] = input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]);
+        $response[] = input_hidden(["name" => "desde_valoracion", "value" => $desde_valoracion, "class" => 'desde_valoracion']);
+        return append($response);
+
+
+    }
+
     function get_format_info_servicio($servicio, $ciclos)
     {
 
@@ -73,23 +230,34 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_venta_producto($boton_editar, $estrellas, $nombre_producto, $nuevo_nombre_servicio,
+    function get_format_venta_producto($boton_editar, $nombre_producto, $nuevo_nombre_servicio,
                                        $flag_servicio, $existencia, $id_servicio, $in_session, $q2,
                                        $precio, $id_ciclo_facturacion, $tallas,
-                                       $texto_en_existencia,
+                                       $url_ml,
                                        $entregas_en_casa,
                                        $proceso_compra,
-                                       $telefono_visible, $usuario, $venta_mayoreo, $deseado)
+                                       $telefono_visible,
+                                       $usuario,
+                                       $venta_mayoreo,
+                                       $deseado,
+                                       $id_publicador,
+                                       $es_mobile
+)
     {
 
+
+
+
+
+
         $r[] = $boton_editar;
-        $r[] = $nombre_producto;
-        $r[] = $estrellas;
+        $r[] = ($es_mobile >  0 ) ?  "" : $nombre_producto;
+        $r[] = a_enid(d("", ['class' => 'valoracion_persona_principal valoracion_persona']), ['class' => 'lee_valoraciones text-right', 'href' => '../search/?q3=' . $id_publicador]);
         $r[] = h($nuevo_nombre_servicio, 3);
         $r[] = validate_form_compra($flag_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion);
         $r[] = $tallas;
 
-        $r[] = $texto_en_existencia;
+        $r[] = get_text_diponibilidad_articulo($existencia, $flag_servicio, $url_ml);
         $r[] = get_format_ventas_efectivas($deseado);
         $r[] = get_info_vendedor($entregas_en_casa, $flag_servicio, $proceso_compra, $telefono_visible, $in_session, $usuario);
         $r[] = d(valida_informacion_precio_mayoreo($flag_servicio, $venta_mayoreo), 1);
@@ -148,7 +316,10 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_contenedor_central($proceso_compra, $id_servicio, $tiempo_entrega, $color, $flag_servicio, $flag_nuevo, $usuario, $id_publicador, $url_actual, $desc_web, $telefono_visible)
+    function get_contenedor_central($proceso_compra, $id_servicio,
+                                    $tiempo_entrega, $color, $flag_servicio,
+                                    $flag_nuevo, $usuario, $id_publicador,
+                                    $desc_web, $telefono_visible, $es_mobile , $pos)
     {
 
 
@@ -179,11 +350,19 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_tienda_vendedor($proceso_compra, $id_publicador);
         $r[] = place("", ["style" => "border: solid 1px"]);
 
-        return d(append($r),
-            [
-                "class" => " d-flex flex-column justify-content-between ",
-                "style" => "height: 450px;"
-            ], 1);
+        $response =  [];
+        if (($pos < 1 && $es_mobile < 1) ||  ($pos >  0  && $es_mobile >  0)){
+
+            $response[] =  d(d(append($r),
+                [
+                    "class" => " d-flex flex-column justify-content-between ",
+                    "style" => "height: 450px;"
+                ], 1),3);
+
+        }
+
+        return append($response);
+
 
     }
 
@@ -292,7 +471,7 @@ if (!function_exists('invierte_date_time')) {
             1,
             1);
         $r[] = form_close();
-        $r[] =  br(3);
+        $r[] = br(3);
         //$r[] = d(agregar_lista_deseos(0, $in_session), "top_30");
         return d(append($r), "contenedor_form");
 
@@ -469,7 +648,7 @@ if (!function_exists('invierte_date_time')) {
                 $response = a_enid(
                     "VENDIDO POR " . span($nombre, "nombre_vendedor underline "),
                     [
-                        "href" => path_enid("search", "/?q3=" . $id_usuario . "&vendedor=" . $nombre) ,
+                        "href" => path_enid("search", "/?q3=" . $id_usuario . "&vendedor=" . $nombre),
                         'class' => 'informacion_vendedor_descripcion text-justify black '
                     ]
                 );
@@ -722,8 +901,7 @@ if (!function_exists('invierte_date_time')) {
                         'href' => path_enid("search_q3", $id_vendedor),
                         'class' => "a_enid_black d-block"
                     ]
-                ),1);
-
+                ), 1);
 
 
             }
