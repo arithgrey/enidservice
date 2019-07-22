@@ -203,7 +203,7 @@ class app extends CI_Controller
     function session($titulo = "", $meta_keywords = "", $desc = "", $url_img_post = "")
     {
 
-        $data["is_mobile"] = ($this->agent->is_mobile() == FALSE) ? 0 : 1;
+        $data["is_mobile"] = (dispositivo() ===1 ) ? 1 : 0;
         $data["proceso_compra"] = 0;
         $data["clasificaciones_departamentos"] = $this->get_departamentos();
 
@@ -211,11 +211,9 @@ class app extends CI_Controller
 
 
             $session = $this->get_session();
-            $menu = create_contenido_menu($session);
-
             $nombre = $session["nombre"];
             $data['titulo'] = $titulo;
-            $data["menu"] = $menu;
+            $data["menu"] = create_contenido_menu($session);
             $data["nombre"] = $nombre;
             $data["email"] = $session["email"];
             $data["perfilactual"] = pr($session["perfildata"], "nombreperfil", "");
