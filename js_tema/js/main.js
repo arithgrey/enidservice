@@ -742,6 +742,22 @@ let show_tabs = (str, tipo = 1) => {
     }
 
 }
+let rm_class = (arr_class, class_rm) => {
+
+
+    if (isArray(arr_class)) {
+
+        arr_class.forEach(function (element) {
+            $(element).removeClass(class_rm);
+        });
+
+    } else {
+
+        $(arr_class).removeClass(class_rm);
+    }
+
+}
+
 let append_enid = (array) => {
 
     return array.join(",");

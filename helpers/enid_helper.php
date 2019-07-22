@@ -135,6 +135,7 @@ function sub_categorias_destacadas($param)
     return $response;
 
 }
+
 if (!function_exists('get_base_html')) {
     function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
     {
@@ -235,7 +236,6 @@ if (!function_exists('get_base_html')) {
 
     }
 }
-
 
 
 /*
@@ -1076,7 +1076,7 @@ if (!function_exists('link_imagen_servicio')) {
     function link_imagen_servicio($id)
     {
 
-        return ($id > 0) ? "../imgs/index.php/enid/imagen_servicio/".$id : "";
+        return ($id > 0) ? "../imgs/index.php/enid/imagen_servicio/" . $id : "";
     }
 }
 if (!function_exists('select_vertical')) {
@@ -2006,6 +2006,21 @@ function get_social($proceso_compra, $desc_web, $black = 1)
     $response = "";
     if ($proceso_compra < 1) {
 
+
+        $r[] = a_enid(
+            img(
+                [
+                    "src" => "../img_tema/productos/messenger.png",
+                    "style" => "width:15px!important;"
+                ]
+            ),
+            [
+                "href" => "https://www.m.me/enidservicemx",
+                "target" => "_black",
+
+
+            ]
+        );
 
         $r[] = a_enid("",
             [

@@ -5,15 +5,18 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .colores {
     width: 200px;
     height: 100px;
     margin: auto;
 }
+
 .colores:hover {
     opacity: 0.85;
     cursor: pointer;
 }
+
 .colores p {
     font-size: 1em;
     position: absolute;
@@ -22,13 +25,15 @@
     margin-bottom: 0.3em;
     text-transform: uppercase;
 }
+
 .foto_producto, .imagen_principal {
     margin-top: 3px;
     margin-bottom: 3px;
     text-decoration: underline !important;
 }
-.input_link_dropshipping{
-    display:none;
+
+.input_link_dropshipping {
+    display: none;
 }
 
 .selector_principal {
@@ -54,19 +59,20 @@
 .easy_select_enid {
 
 }
+
 .seccion_compras_casa {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-.seccion_telefono_publico{
+
+.seccion_telefono_publico {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
-
 
 
 .text_numero_existencia {
@@ -206,9 +212,11 @@
 .contenedor_imagenes_info {
     border: solid 1px;
 }
+
 .well {
     background: #fefefe !important;
 }
+
 .campo_avanzado {
     display: none;
 }
