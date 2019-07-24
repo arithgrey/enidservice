@@ -2125,8 +2125,8 @@ function ajustar($a, $b, $horizontal = 1)
 {
 
     $extra = (is_string($horizontal)) ? $horizontal : "";
-    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
-    return d(d($a) . d($b), $class);
+    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between row" . $extra : "d-flex flex-column justify-content-between " . $extra;
+    return d(d($a, 6) . d($b , 6), $class);
 
 }
 
