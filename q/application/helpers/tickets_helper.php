@@ -286,7 +286,11 @@ if (!function_exists('invierte_date_time')) {
             "value" => $valor_actualizar,
         ];
 
-        $f = ($status == 1) ? (array_push($config, true)) : "";
+
+        if ($status > 0) {
+            $config += ["checked" => 1];
+        }
+
 
         return d(check($config), 1);
 

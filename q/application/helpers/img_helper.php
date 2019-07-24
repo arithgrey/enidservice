@@ -74,7 +74,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = btn("AGREGAR IMAGEN" . icon("fa fa-check"),
             [
-                "class" => 'guardar_img_enid display_none bottom_30',
+                "class" => 'guardar_img_enid display_none bottom_30 display_none',
                 "id" => 'guardar_img'
             ],
             1,
