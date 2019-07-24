@@ -139,10 +139,8 @@ let muestra_horarios = function () {
     $(".search").hide();
     let id = get_parameter_enid($(this), "id");
 
-
     if (id > 0) {
 
-        alert();
         let text = "";
         let costo_envio = get_parameter_enid($(this), "costo_envio");
         let flag_envio_gratis = get_parameter_enid($(this), "flag_envio_gratis");
