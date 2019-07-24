@@ -21,7 +21,7 @@ let upload_imgs_enid_pre = function(){
     file = this.files[i];    
     reader = new FileReader();
     reader.onloadend = function(e){
-        showonehideone(".guardar_img_enid" , ".imagen_img");
+        showonehideone(".btn_guardar_imagen" , ".imagen_img");
         let im =e.target.result;
         mostrar_img_upload(im , 'place_load_img');
 
@@ -58,7 +58,7 @@ let registra_img_servicio = e =>{
                 sload(".place_load_img");
             }
 
-    }).done(response_load_image).fail(function(){
+    }).done(response_load_image).fail(() =>{
 
         carga_informacion_servicio(1);
     });
