@@ -33,7 +33,7 @@ if (!function_exists('invierte_date_time')) {
             $id_carro_compras = $data["id_carro_compras"];
             $email = $data["email"];
             $q2 = $data["q2"];
-            $in_session =  $data["in_session"];
+            $in_session = $data["in_session"];
 
             $producto = create_resumen_servicio($servicio, $info_solicitud_extra);
             $ciclos_solicitados = $info_solicitud_extra["num_ciclos"];
@@ -85,10 +85,9 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('validate_text_title')) {
         function validate_text_title($in_session, $is_mobile, $es_servicio = 0)
         {
-            $text = ($in_session == 0 && $is_mobile == 0) ? h("¿QUIEN ERES?", 3) : "";
+            $text = ($in_session == 0 && $is_mobile == 0) ? h("¿CON QUIEN NOS COMUNICAMOS?", 3) : "";
             if ($es_servicio > 0) {
                 $text = ($in_session == 0 && $is_mobile == 0) ?
-                    h("INICIEMOS TU COTIZACIÓN! ", 2, "top_20") .
                     h("¿QUIEN ERES?", 4, "top_30 bottom_30") : "";
             }
 
@@ -209,10 +208,12 @@ if (!function_exists('invierte_date_time')) {
             if ($in_session < 1) {
 
                 $x[] = form_open("", ["class" => "form-cotizacion-enid-service"]);
-                $x[] = btw(
-                    d("Nombre *")
-                    ,
-                    d(input(
+
+
+                $x[] = d(
+                    ajustar(
+                        "Nombre *",
+                        input(
                             [
                                 "name" => "nombre",
                                 "placeholder" => "Nombre",
@@ -221,28 +222,30 @@ if (!function_exists('invierte_date_time')) {
                                 "required" => "true"
                             ]
                         )
-                    )
-                    ,
-                    " col-lg-6 top_10 "
+                    ),6
                 );
 
-                $x[] = d(append([
+                $x[] = d(
+                    ajustar(
+                        "email*",
+                        add_text(
+                            input(
+                                [
+                                    "name" => "email",
+                                    "placeholder" => "email",
+                                    "class" => " input-sm  email",
+                                    "type" => "email",
+                                    "required" => "true",
+                                    "onkeypress" => "minusculas(this);"
+                                ]
+                            )
+                            ,
+                            place('place_correo_incorrecto')
 
-                    d("Correo Electrónico  *")
-                    ,
-                    d(input(
-                        [
-                            "name" => "email",
-                            "placeholder" => "email",
-                            "class" => " input-sm  email",
-                            "type" => "email",
-                            "required" => "true",
-                            "onkeypress" => "minusculas(this);"
-                        ]))
-                    ,
-                    place('place_correo_incorrecto')
-
-                ]), " col-lg-6  top_10");
+                        )
+                    )
+                    , 6
+                );
 
 
                 $r[] = d(append($x), 13);
@@ -280,7 +283,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $r[] = d(textarea(["name" => "comentarios", "class" => "comentario"]), "top_30");
                 $r[] = place("place_telefono");
-                $r[] = btn("CREA UNA CUENTA", ["class" => "top_30"]);
+                $r[] = btn("COTIZAR", ["class" => "top_30"]);
                 $r[] = d(
                     a_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
                         [
