@@ -1,1 +1,0 @@
-<?=frm_fecha_busqueda()?>

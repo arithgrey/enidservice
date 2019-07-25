@@ -93,7 +93,8 @@ class Home extends CI_Controller
 
     private function get_vista_no_encontrado()
     {
-        return "../../../view_tema/producto_no_encontrado";
+        return no_encontrado();
+
     }
 
     private function vista($param, $data)

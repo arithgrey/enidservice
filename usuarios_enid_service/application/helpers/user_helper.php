@@ -238,7 +238,8 @@ if (!function_exists('invierte_date_time')) {
                     ]), ["class" => "active", "id" => "1"]),
 
                 li(a_enid(
-                    "Bajas" . icon("fa fa-chevron-circle-down"),
+                    text_icon("fa fa-chevron-circle-down", "Bajas")
+                    ,
                     [
                         "href" => "#tab_usuarios_baja",
                         "data-toggle" => "tab",
@@ -251,7 +252,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = h("Equipo Enid Service", 3);
-            $r[] = d(ul($l, ["class" => "nav nav-tabs"]), ["class" => "panel-heading"]);
+            $r[] = d(ul($l, "nav nav-tabs"), "panel-heading");
             $r[] = d(append([
                 btn("Agregar nuevo",
                     [
@@ -303,7 +304,6 @@ if (!function_exists('invierte_date_time')) {
         function frm_categorias()
         {
 
-
             $options[] = array(
                 "opcion" => "NO",
                 "val" => 0
@@ -335,7 +335,6 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = form_close();
-
             $r[] = td(place('primer_nivel'));
             $r[] = td(place('segundo_nivel'));
             $r[] = td(place('tercer_nivel'));

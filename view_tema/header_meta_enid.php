@@ -23,9 +23,6 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta name="ICBM" content="23.634501, -102.552784"/>
 <meta name="revisit-after" content="1 days"/>
 <meta name="p:domain_verify" content="ed4f86be0c9d41f8889e945d5b65a701"/>
-
-<link rel="publisher" href="https://plus.google.com/u/0/117684782897236574265"/>
-
 <meta property="og:locale" content="es_ES"/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="<?= $desc_web; ?>"/>

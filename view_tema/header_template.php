@@ -17,15 +17,15 @@
                 <?= get_logo($is_mobile, $in_session) ?>
             <?php elseif ($is_mobile > 0 && $in_session > 0): ?>
                 <?= get_logo($is_mobile, $in_session) ?>
-                <?= $this->load->view("../../../view_tema/tmp_menu") ?>
+                <?= tmp_menu($is_mobile, $id_usuario, $menu) ?>
             <?php elseif ($is_mobile < 1 && $in_session > 0): ?>
                 <?= get_logo($is_mobile, $in_session) ?>
                 <?= $this->load->view("../../../view_tema/formularios/form_busqueda_departamentos") ?>
-                <?= $this->load->view("../../../view_tema/tmp_menu") ?>
+                <?= tmp_menu($is_mobile, $id_usuario, $menu) ?>
             <?php endif; ?>
         </div>
     </div>
 </head>
 <body>
-<?= $this->load->view("../../../view_tema/menu_session_movil") ?>
+<?= menu_session_mobil($in_session) ?>
 

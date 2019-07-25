@@ -46,7 +46,7 @@ class Home extends CI_Controller
             }
 
             $data = $this->app->cssJs($data, "valoracion");
-            $response = d($this->carga_formulario_valoracion($prm), "top_20", 1);
+            $response = d($this->form_valoracion($prm), "top_20", 1);
             $this->app->pagina($data, $response, 1);
 
 
@@ -57,7 +57,7 @@ class Home extends CI_Controller
         }
     }
 
-    private function carga_formulario_valoracion($q)
+    private function form_valoracion($q)
     {
 
         return $this->app->api("valoracion/valoracion_form/format/json/", $q);

@@ -1897,6 +1897,83 @@ function get_metodos_pago()
 
 }
 
+/*
+
+function metodos_mobile()
+{
+
+    $y[] = td("MÉTODOS DE PAGO",
+        ['colspan' => 7, "class" => "black"]);
+
+    $r[] = tr(append($y));;
+
+
+    $z[] = td(img([
+        'class' => "logo_pago_mb",
+        'src' => "../img_tema/bancos/masterDebito.png"
+    ]));
+
+    $z[] = td(img([
+        'class' => "logo_pago_mb",
+        'src' => "../img_tema/bancos/paypal2.png"
+    ]));
+
+    $z[] = td(img([
+        'class' => "logo_pago_mb",
+        'src' => "../img_tema/bancos/visaDebito.png"
+    ]));
+
+    $z[] = td(img([
+        'class' => "logo_pago_mb",
+        'src' => "../img_tema/bancos/oxxo-logo.png"
+    ]));
+
+    $z[] = td(img([
+        'class' => "logo_pago_mb",
+        'src' => "../img_tema/bancos/bancomer2.png"
+    ]));
+
+    $z[] = td(img([
+        'class' => "logo_pago_mb",
+        'src' => "../img_tema/bancos/santander.png"
+    ]));
+
+
+    $z[] = td(img([
+        'class' => "logo_pago_mb",
+        'src' => "../img_tema/bancos/banamex.png"
+    ]));
+
+    $r[] = tr(append($z));
+
+    $response[] = d(tb(append($r), ["style" => "width: 100%;"]), "container inner");
+
+
+    $g[] = tr(td("MÉTODOS DE ENVÍO",
+        [
+            'colspan' => 2,
+            "class" => "black"
+        ]));
+
+    $f[] = td(img(
+        [
+            'class' => "logo_pago_mb",
+            'src' => "../img_tema/bancos/fedex.png"
+        ]));
+    $f[] = td(img(
+        [
+            'class' => "logo_pago_mb",
+            'src' => "../img_tema/bancos/dhl2.png"
+        ]));
+
+    $g[] = tr(append($f));
+
+    $response[] = d(tb($g), "container inner");
+    return append($response);
+
+}
+*/
+
 function path_enid($pos, $extra = 0, $link_directo = 0)
 {
 
@@ -2155,7 +2232,9 @@ function create_contenido_menu($data)
     }
     return append($menu);
 }
-function dispositivo(){
+
+function dispositivo()
+{
 
     $tablet_browser = 0;
     $mobile_browser = 0;
@@ -2168,30 +2247,30 @@ function dispositivo(){
         $mobile_browser++;
     }
 
-    if ((strpos(strtolower($_SERVER['HTTP_ACCEPT']),'application/vnd.wap.xhtml+xml') > 0) or ((isset($_SERVER['HTTP_X_WAP_PROFILE']) or isset($_SERVER['HTTP_PROFILE'])))) {
+    if ((strpos(strtolower($_SERVER['HTTP_ACCEPT']), 'application/vnd.wap.xhtml+xml') > 0) or ((isset($_SERVER['HTTP_X_WAP_PROFILE']) or isset($_SERVER['HTTP_PROFILE'])))) {
         $mobile_browser++;
     }
 
     $mobile_ua = strtolower(substr($_SERVER['HTTP_USER_AGENT'], 0, 4));
     $mobile_agents = array(
-        'w3c ','acs-','alav','alca','amoi','audi','avan','benq','bird','blac',
-        'blaz','brew','cell','cldc','cmd-','dang','doco','eric','hipt','inno',
-        'ipaq','java','jigs','kddi','keji','leno','lg-c','lg-d','lg-g','lge-',
-        'maui','maxo','midp','mits','mmef','mobi','mot-','moto','mwbp','nec-',
-        'newt','noki','palm','pana','pant','phil','play','port','prox',
-        'qwap','sage','sams','sany','sch-','sec-','send','seri','sgh-','shar',
-        'sie-','siem','smal','smar','sony','sph-','symb','t-mo','teli','tim-',
-        'tosh','tsm-','upg1','upsi','vk-v','voda','wap-','wapa','wapi','wapp',
-        'wapr','webc','winw','winw','xda ','xda-');
+        'w3c ', 'acs-', 'alav', 'alca', 'amoi', 'audi', 'avan', 'benq', 'bird', 'blac',
+        'blaz', 'brew', 'cell', 'cldc', 'cmd-', 'dang', 'doco', 'eric', 'hipt', 'inno',
+        'ipaq', 'java', 'jigs', 'kddi', 'keji', 'leno', 'lg-c', 'lg-d', 'lg-g', 'lge-',
+        'maui', 'maxo', 'midp', 'mits', 'mmef', 'mobi', 'mot-', 'moto', 'mwbp', 'nec-',
+        'newt', 'noki', 'palm', 'pana', 'pant', 'phil', 'play', 'port', 'prox',
+        'qwap', 'sage', 'sams', 'sany', 'sch-', 'sec-', 'send', 'seri', 'sgh-', 'shar',
+        'sie-', 'siem', 'smal', 'smar', 'sony', 'sph-', 'symb', 't-mo', 'teli', 'tim-',
+        'tosh', 'tsm-', 'upg1', 'upsi', 'vk-v', 'voda', 'wap-', 'wapa', 'wapi', 'wapp',
+        'wapr', 'webc', 'winw', 'winw', 'xda ', 'xda-');
 
-    if (in_array($mobile_ua,$mobile_agents)) {
+    if (in_array($mobile_ua, $mobile_agents)) {
         $mobile_browser++;
     }
 
-    if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']),'opera mini') > 0) {
+    if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'opera mini') > 0) {
         $mobile_browser++;
         //Check for tablets on opera mini alternative headers
-        $stock_ua = strtolower(isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA'])?$_SERVER['HTTP_X_OPERAMINI_PHONE_UA']:(isset($_SERVER['HTTP_DEVICE_STOCK_UA'])?$_SERVER['HTTP_DEVICE_STOCK_UA']:''));
+        $stock_ua = strtolower(isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA']) ? $_SERVER['HTTP_X_OPERAMINI_PHONE_UA'] : (isset($_SERVER['HTTP_DEVICE_STOCK_UA']) ? $_SERVER['HTTP_DEVICE_STOCK_UA'] : ''));
         if (preg_match('/(tablet|ipad|playbook)|(android(?!.*mobile))/i', $stock_ua)) {
             $tablet_browser++;
         }
@@ -2201,13 +2280,159 @@ function dispositivo(){
         // do something for tablet devices
         //print 'is tablet';
         return 0;
-    }
-    else if ($mobile_browser > 0) {
+    } else if ($mobile_browser > 0) {
         // do something for mobile devices
         return 1;
-    }
-    else {
+    } else {
 
         return 2;
     }
+}
+
+function gb_modal()
+{
+
+
+    $mod[] = d(
+        p(
+            span(
+                "", "text-order-name-error"
+            )
+            , "font-weight-bold text-dark"
+        ), "modal-body"
+    );
+
+    $mod[] = d(form_button([
+        "type" => "button",
+        "class" => "btn btn-secondary",
+        "data-dismiss" => "modal"
+    ], "Cerrar"), "modal-footer");
+
+    d(d(d(append($mod), "modal-content"),
+        [
+            "class" => "modal-dialog",
+            "role" => "document"
+
+        ]), [
+        "class" => "modal",
+        "tabindex" => "-1",
+        "role" => "dialog",
+        "id" => "modal-error-message"
+
+    ]);
+
+    return append($mod);
+
+}
+
+function menu_session_mobil($in_session)
+{
+
+    $r[] = a_enid("×",
+        [
+            "href" => "javascript:void(0)",
+            "class" => "closebtn closebtn_lateral",
+            "onclick" => "closeNav()"
+        ]);
+
+    $r[] = d(
+        a_enid(img_enid([]),
+            [
+                "href" => path_enid("home")
+            ]
+        ), "logo_lateral_login"
+    );
+
+    $r[] = '<form class="form" action="../search">';
+    $r[] = input(["name" => "q", "placeholder" => "Articulo ó servicio", "class" => "input_search"]);
+    $r[] = btn("BUSCAR", ['class' => 'boton-busqueda'], 1);
+    $r[] = form_close();
+    if ($in_session < 1) {
+
+        $r[] = btw(
+            a_enid("INICIAR SESSION",
+                [
+                    "class" => "iniciar_sesion_lateral",
+                    "style" => "color: white!important;",
+                    "href" => "../login"
+                ],
+                1)
+            ,
+            a_enid("ANUNCIA TU NEGOCIO AQUÍ" . icon('fa fa-user'),
+                [
+                    "class" => "call_to_action_anuncio",
+                    "style" => "color: white!important;",
+                    "href" => path_enid("nuevo_usuario")
+                ],
+                1),
+            "contenedor-lateral-menu"
+
+        );
+    }
+
+    return d(append($r), ["id" => "mySidenav", "class" => "sidenav"]);
+
+}
+
+function tmp_menu($is_mobile, $id_usuario, $menu)
+{
+
+    $r[] = li(btw(
+
+        a_enid(
+            btw(icon("fa fa-bell white"), d("", "num_tareas_dia_pendientes_usr"), "display_flex_enid"),
+            [
+                "class" => "blue_enid dropdown-toggle",
+                "data-toggle" => "dropdown"
+            ]
+        )
+        ,
+
+        ul(
+            [
+                place("place_notificaciones_usuario padding_10 shadow border")],
+            add_text("dropdown-menu shadow ", ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid ")
+        )
+    ), "dropdown  menu_notificaciones_progreso_dia");
+
+
+    $r[] = li(btw(
+        get_img_usuario($id_usuario),
+        ul(
+            [
+                "",
+                $menu,
+                a_enid(
+                    "Mis reseñas y valoraciones" .
+                    d(
+
+
+                        add_text(
+                            str_repeat(span('★', ["class" => "estrella", "style" => "color: #0070dd;"]), 4)
+                            ,
+                            span('★',
+                                [
+                                    "class" => "estrella",
+                                    "style" => "-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);"
+                                ])
+
+                        )
+
+
+                        , "contenedor_promedios"
+                    )
+                    ,
+                    path_enid("recomendacion", $id_usuario)
+
+                ),
+                a_enid("Configuración y privacidad", path_enid("administracion_cuenta")),
+                a_enid("Cerrar sessión", path_enid("logout"))
+            ],
+            "dropdown-menu menu_usuario "
+        ), ""
+    ), "dropdown ");
+
+    return d(append($r), "text-right d-flex flex-row");
+
+
 }
