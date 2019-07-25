@@ -385,6 +385,7 @@ class Cobranza extends REST_Controller
                 $this->response($response);
 
             }
+
             $this->response($usuario);
 
         } else {

@@ -101,7 +101,8 @@ let registro = (e) => {
                         "ciclo_facturacion": get_option("ciclo_facturacion"),
                         "usuario_referencia": get_option("usuario_referencia"),
                         "talla": get_option("talla"),
-                        "tipo_entrega": 2
+                        "tipo_entrega": 2,
+                        "fecha_servicio" : get_option("fecha_servicio"),
                     };
                     $(".informacion_extra").hide();
                     request_enid("POST", data_send, url, respuesta_registro, 0, before_registro_afiliado);
@@ -183,9 +184,10 @@ let solicitud_cotizacion = e => {
                         "ciclo_facturacion": get_parameter(".id_ciclo_facturacion"),
                         "usuario_referencia": get_option("usuario_referencia"),
                         "talla": "",
-                        "tipo_entrega": 2
-                    };
+                        "tipo_entrega": 2,
+                        "fecha_servicio": get_parameter(".fecha_servicio"),
 
+                    };
                     $(".informacion_extra").hide();
                     request_enid("POST", data_send, url, respuesta_registro_cotizacion, 0, before_registro_afiliado);
                 }

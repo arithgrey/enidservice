@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
             d(
                 btw(
 
-                    d($imagenes["preview"], "thumbs padding_10 bg_black" )
+                    d($imagenes["preview"], "thumbs padding_10 bg_black")
                     ,
                     d(d($imagenes["imagenes_contenido"], "tab-content"), "big")
                     ,
@@ -323,7 +323,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = get_solicitud_informacion($proceso_compra, $id_servicio);
+        $r[] = get_solicitud_informacion($id_servicio, $flag_servicio);
 
         if ($proceso_compra == 1) {
             $r[] = get_tiempo_entrega(0, $tiempo_entrega);
@@ -911,11 +911,24 @@ if (!function_exists('invierte_date_time')) {
 
     }
     if (!function_exists('get_solicitud_informacion')) {
-        function get_solicitud_informacion($proceso_compra, $id_servicio)
+        function get_solicitud_informacion($id_servicio, $es_servicio)
         {
 
 
-            return a_enid(d("SOLICITAR INFORMACIÓN", 'black_enid_background white padding_10', 1), path_enid("pregunta_search", $id_servicio));
+            $r = [];
+            if ($es_servicio < 1) {
+
+                $r[] =
+                    a_enid(d(
+                        "SOLICITAR INFORMACIÓN",
+                        'black_enid_background white padding_10',
+                        1),
+                        path_enid("pregunta_search", $id_servicio
+                        )
+                    );
+            }
+
+            return append($r);
 
         }
     }
