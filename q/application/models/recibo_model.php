@@ -184,11 +184,6 @@ class Recibo_model extends CI_Model
         $extra = " AND DATE(p." . $ops_tipo_orden[$tipo_orden] . ") BETWEEN '" . $fecha_inicio . "' AND '" . $fecha_termino . "' ";
 
 
-
-
-
-
-
         switch ($tipo_orden) {
             case 0:
 
@@ -196,15 +191,14 @@ class Recibo_model extends CI_Model
             case 1:
 
 
-                if ( (array_key_exists("servicio", $param) && $param["servicio"] > 0) && $fecha_inicio === $fecha_termino  ){
+                if ((array_key_exists("servicio", $param) && $param["servicio"] > 0) && $fecha_inicio === $fecha_termino) {
 
                     $extra = "";
 
-                }else{
+                } else {
 
                     $extra = " AND DATE(p." . $ops_tipo_orden[$tipo_orden] . ") BETWEEN '" . $fecha_inicio . "' AND DATE_ADD('" . $fecha_termino . "' ,  INTERVAL 1 DAY)  ";
                 }
-
 
 
                 break;
@@ -757,14 +751,12 @@ class Recibo_model extends CI_Model
         $id_usuario_venta = $servicio["id_usuario_venta"];
         $precio = $servicio["precio"];
 
-        $resumen_compra =
-            $this->crea_resumen_compra($servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega);
-
+        $resumen_compra = $this->crea_resumen_compra($servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega);
         $costo_envio_cliente = 0;
         $costo_envio_vendedor = 0;
         $flag_servicio = ($tipo_entrega < 5) ? 0 : $servicio["flag_servicio"];
-        if ($servicio["flag_servicio"] > 0 ){
-            $flag_servicio  =  1;
+        if ($servicio["flag_servicio"] > 0) {
+            $flag_servicio = 1;
         }
 
         $monto_a_pagar = $precio;
@@ -776,14 +768,14 @@ class Recibo_model extends CI_Model
 
         } else {
 
-            if (array_key_exists("costo_envio" , $param) && $param["costo_envio"] != null && $param["costo_envio"]  > 0 ){
+            if (array_key_exists("costo_envio", $param) && $param["costo_envio"] != null && $param["costo_envio"] > 0) {
 
                 $costo_envio_cliente = $param["costo_envio"];
                 $costo_envio_vendedor = 0;
             }
         }
         $id_ciclo_facturacion = $param["id_ciclo_facturacion"];
-        $talla = $param["talla"];
+        $talla = (strlen($param["talla"]) < 1) ? 1 : $param["talla"];
 
 
         $array_keys = [
@@ -831,14 +823,30 @@ class Recibo_model extends CI_Model
             ];
 
 
-        if ($tipo_entrega == 1) {
-            array_push($array_keys, "fecha_contra_entrega");
-            array_push($array_values, "'" . $data_usuario["fecha_entrega"] . "'");
+        switch ($tipo_entrega) {
+            case 1:
+
+                array_push($array_keys, "fecha_contra_entrega");
+                array_push($array_values, "'" . $data_usuario["fecha_entrega"] . "'");
+                break;
+            case 2:
+
+                array_push($array_keys, "fecha_servicio");
+                array_push($array_values, "'" . $data_usuario["fecha_servicio"] . "'");
+
+
+                break;
+
+            default:
+
+
         }
 
-        $keys = get_keys($array_keys);
-        $values = get_keys($array_values);
-        $query_insert = "INSERT INTO proyecto_persona_forma_pago(" . $keys . ") VALUES(" . $values . ")";
+
+        $query_insert = "INSERT INTO 
+                        proyecto_persona_forma_pago(" . get_keys($array_keys) . ") 
+                        VALUES(" . get_keys($array_values) . ")";
+
 
         $this->db->query($query_insert);
         return $this->db->insert_id();
@@ -962,8 +970,6 @@ class Recibo_model extends CI_Model
                 ";
 
 
-
-
         }
 
         return $this->db->query($query_get)->result_array();
@@ -973,11 +979,11 @@ class Recibo_model extends CI_Model
     function get_recibo_ventas_pagas_servicio($id_servicio, $fecha_inicio, $fecha_termino)
     {
 
-        $extra_fecha =  "";
+        $extra_fecha = "";
 
-        if (strlen($fecha_inicio) > 3  && strlen($fecha_termino) >  3){
+        if (strlen($fecha_inicio) > 3 && strlen($fecha_termino) > 3) {
 
-            $extra_fecha =  "  
+            $extra_fecha = "  
                             AND  
                             DATE(p.fecha_registro) 
                             BETWEEN '{$fecha_inicio}'
@@ -993,7 +999,6 @@ class Recibo_model extends CI_Model
                             AND 
                                  id_servicio = {$id_servicio}                         
                             " . $extra_fecha;
-
 
 
         return $this->db->query($query_get)->result_array();

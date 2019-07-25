@@ -7,16 +7,12 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $in_session = $data["in_session"];
-            $is_mobile = $data["is_mobile"];
-            $servicio = $data["servicio"];
-
             $r[] = place("info_articulo", ["id" => 'info_articulo']);
-            $z[] = validate_text_title($in_session, $is_mobile, 1);
-            $z[] = get_form_contacto_servicio($in_session, $servicio);
+            $z[] = d(validate_text_title($in_session, $data["is_mobile"], 1), "top_100");
+            $z[] = d(get_form_contacto_servicio($in_session, $data["servicio"]), "bottom_100 top_50");
             $z[] = place("place_registro_afiliado");
             $r[] = d(d(append($z), "contenedo_compra_info"), "contenedor_compra");
-
-            return addNRow(d(append($r), 6, 1));
+            return addNRow(d(d(append($r), 6, 1), "bottom_100"));
 
         }
     }
@@ -88,7 +84,7 @@ if (!function_exists('invierte_date_time')) {
             $text = ($in_session == 0 && $is_mobile == 0) ? h("¿CON QUIEN NOS COMUNICAMOS?", 3) : "";
             if ($es_servicio > 0) {
                 $text = ($in_session == 0 && $is_mobile == 0) ?
-                    h("¿QUIEN ERES?", 4, "top_30 bottom_30") : "";
+                    h("¿QUIEN ERES?", 3, "top_30 bottom_30") : "";
             }
 
             return $text;
@@ -207,67 +203,122 @@ if (!function_exists('invierte_date_time')) {
             $r = [];
             if ($in_session < 1) {
 
-                $x[] = form_open("", ["class" => "form-cotizacion-enid-service"]);
+                $r[] = form_open("", ["class" => "form-cotizacion-enid-service"]);
 
 
-                $x[] = d(
-                    ajustar(
-                        "Nombre *",
-                        input(
-                            [
-                                "name" => "nombre",
-                                "placeholder" => "Nombre",
-                                "class" => " input-sm  nombre",
-                                "type" => "text",
-                                "required" => "true"
-                            ]
-                        )
-                    ),6
-                );
-
-                $x[] = d(
-                    ajustar(
-                        "email*",
-                        add_text(
+                $x[] =
+                    d(
+                        ajustar(
+                            "Nombre ",
                             input(
                                 [
-                                    "name" => "email",
-                                    "placeholder" => "email",
-                                    "class" => " input-sm  email",
-                                    "type" => "email",
-                                    "required" => "true",
-                                    "onkeypress" => "minusculas(this);"
+                                    "name" => "nombre",
+                                    "placeholder" => "Nombre",
+                                    "class" => " input-sm  nombre",
+                                    "type" => "text",
+                                    "required" => "true"
                                 ]
                             )
-                            ,
-                            place('place_correo_incorrecto')
+
+
+                        ));
+
+
+                $x[] =
+                    d(
+                        ajustar(
+                            "Email",
+                            add_text(
+
+                                d(
+                                    input(
+                                        [
+                                            "name" => "email",
+                                            "placeholder" => "email",
+                                            "class" => " input-sm  email",
+                                            "type" => "email",
+                                            "required" => "true",
+                                            "onkeypress" => "minusculas(this);"
+                                        ]
+
+                                    )
+                                )
+                                ,
+                                d(
+                                    place('place_correo_incorrecto')
+                                )
+                            )
+
+                        ), "top_30");
+
+
+                $x[] =
+                    d(
+                        ajustar(
+                            text_icon('fa fa-unlock-alt', "Una contraseña"),
+                            input(
+                                [
+                                    "id" => "password",
+                                    "class" => " input-sm password",
+                                    "type" => "password",
+                                    "required" => "true",
+                                    "placeholder" => "contraseña"
+                                ]
+                            )
 
                         )
-                    )
-                    , 6
-                );
+                        ,
+                        "top_30"
+                    );
 
 
-                $r[] = d(append($x), 13);
-                $r[] = d(icon('fa fa-unlock-alt') . "Escribe una contraseña", "top_20");
-                $r[] = input([
-                    "id" => "password",
-                    "class" => " input-sm password",
-                    "type" => "password",
-                    "required" => "true"
-                ]);
-                $r[] = place("place_password_afiliado");
-                $r[] = d(icon('fa fa-phone') . "Teléfono *", "top_20");
-                $r[] = input([
-                    "id" => "telefono",
-                    "class" => "telefono form-control",
-                    "type" => "tel",
-                    "pattern" => "^[0-9-+s()]*$",
-                    "maxlength" => 13,
-                    "minlength" => 8,
-                    "name" => "telefono",
-                    "required" => "true"
-                ]);
+                $x[] = place("place_password_afiliado");
+
+
+                $x[] =
+                    d(
+                        ajustar(
+                            text_icon('fa fa-phone', "Teléfono "),
+                            input([
+                                "id" => "telefono",
+                                "class" => "telefono form-control",
+                                "type" => "tel",
+                                "pattern" => "^[0-9-+s()]*$",
+                                "maxlength" => 13,
+                                "minlength" => 8,
+                                "name" => "telefono",
+                                "required" => "true",
+                                "placeholder" => "55"
+
+                            ])
+                        )
+                        ,
+                        "top_30"
+                    );
+
+
+                $x[] =
+                    d(
+                        ajustar(
+                            text_icon('fa-calendar', "En que fecha te interesa"),
+                            input([
+                                "data-date-format" => "yyyy-mm-dd",
+                                "name" => 'fecha_servicio',
+                                "class" => "form-control input-sm fecha_servicio",
+                                "type" => 'date',
+                                "value" => date("Y-m-d"),
+                                "min" => date("Y-m-d"),
+                                "max" => add_date(date("Y-m-d"), 35)
+                            ])
+                        )
+                        ,
+                        "top_30"
+                    );
+
+
+
+                $r[] = append($x);
+
                 $r[] = input_hidden([
                     "id" => "id_servicio",
                     "class" => "id_servicio form-control",
@@ -281,7 +332,13 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
 
-                $r[] = d(textarea(["name" => "comentarios", "class" => "comentario"]), "top_30");
+                $r[] = d(textarea(
+                    [
+                        "name" => "comentarios",
+                        "class" => "comentario"
+
+                    ]), "top_30");
+
                 $r[] = place("place_telefono");
                 $r[] = btn("COTIZAR", ["class" => "top_30"]);
                 $r[] = d(
@@ -295,9 +352,6 @@ if (!function_exists('invierte_date_time')) {
                     "usuario_existente display_none  black_enid_background padding_1 white top_20 enid_hide"
                     ,
                     1);
-
-                $r[] = "</div >";
-                $r[] = "</div >";
                 $r[] = place("place_config_usuario");
                 $r[] = form_close();
 
@@ -306,8 +360,29 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = form_open("", ["class" => "form_cotizacion_enid_service"]);
                 $r[] = h("SOLICITAR COTIZACIÓN", 3, "top_80 text-center");
                 $r[] = d(p(span("ME GUSTARÍA OPTENER UNA COTIZACIÓN SOBRE: ", "underline") . $servicio["nombre_servicio"]));
+
+                $r[] =
+                    d(
+                        ajustar(
+                            text_icon('fa-calendar', "En que fecha te interesa"),
+                            input([
+                                "data-date-format" => "yyyy-mm-dd",
+                                "name" => 'fecha_servicio',
+                                "class" => "form-control input-sm fecha_servicio",
+                                "type" => 'date',
+                                "value" => date("Y-m-d"),
+                                "min" => date("Y-m-d"),
+                                "max" => add_date(date("Y-m-d"), 35)
+                            ])
+                        )
+                        ,
+                        "top_30"
+                    );
+
+
                 $r[] = d(p(span("¿TIENES ALGUNA PREGUNTA ADICIONAL?")), "top_30");
                 $r[] = textarea(["name" => "descripcion"]);
+                
                 $r[] = input_hidden(
                     [
                         "id" => "id_servicio",

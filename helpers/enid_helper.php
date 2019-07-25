@@ -1253,7 +1253,7 @@ if (!function_exists('textarea')) {
     function textarea($attributes = [], $row_12 = 0, $def = '')
     {
 
-        $attributes["rows"] = "5";
+        $attributes["rows"] = "2";
 
         if (array_key_exists("class", $attributes)) {
             $attributes["class"] = $attributes["class"] . " form-control rounded-0";
@@ -2125,8 +2125,8 @@ function ajustar($a, $b, $horizontal = 1)
 {
 
     $extra = (is_string($horizontal)) ? $horizontal : "";
-    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between row" . $extra : "d-flex flex-column justify-content-between " . $extra;
-    return d(d($a, 6) . d($b , 6), $class);
+    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
+    return d(d($a) . d($b), $class);
 
 }
 
