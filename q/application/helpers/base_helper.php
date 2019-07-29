@@ -11,9 +11,11 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         foreach ($categorias as $row) {
 
-            $href = "?categoria=" . $row["id_categoria"];
-            $text_lista = span($row["nombre_categoria"] . "(" . $row["faqs"]. ")");
-            $r[] = d(a_enid($text_lista, $href));
+            $r[] = d(
+                a_enid(
+                span($row["nombre_categoria"] . "(" . $row["faqs"]. ")")
+                , "?categoria=" . $row["id_categoria"])
+            );
         }
         return append($r);
     }

@@ -2031,7 +2031,6 @@ function path_enid($pos, $extra = 0, $link_directo = 0)
         "desarrollo" => "desarrollo",
         "go_home" => "../",
         "valoracion_servicio" => "valoracion/?servicio="
-
     ];
 
 

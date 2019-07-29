@@ -4,21 +4,19 @@ if (!function_exists('invierte_date_time')) {
     function format_simple($data)
     {
 
-        $servicios = $data["servicios"];
+
         $_response[] = h("SERVICIOS POSTULADOS", 3);
 
-        foreach ($servicios as $row) {
+        foreach ($data["servicios"] as $row) {
 
             $id_servicio = $row["id_servicio"];
-            $url_imagen = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
-            $vista = $row["vista"];
 
             $r = [];
             $r[] = img([
-                "src" => $url_imagen,
+                "src" => "../imgs/index.php/enid/imagen_servicio/" . $id_servicio,
                 "style" => 'width: 44px!important;height: 44px;',
             ]);
-            $r[] = d("alcance" . $vista);
+            $r[] = d("alcance" . $row["vista"]);
 
 
             $_response[] = a_enid(d(
@@ -42,8 +40,8 @@ if (!function_exists('invierte_date_time')) {
         $servicio = $data["servicio"];
         if (es_data($servicio)) {
 
-            $id_usuario = $data["id_usuario"];
-            $id_perfil = $data["id_perfil"];
+
+
             $num = $data["num"];
             $num_imagenes = $data["num_imagenes"];
             $s = $servicio[0];
@@ -51,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
             $es_servicio = $s["flag_servicio"];
             $telefono_visible = $s["telefono_visible"];
             $precio = $s["precio"];
-            $url_productos_publico = "../producto/?producto=" . $id_servicio . "&q2=" . $id_usuario;
+            $url_productos_publico = "../producto/?producto=" . $id_servicio . "&q2=" .  $data["id_usuario"];
             $costo_envio = $data["costo_envio"];
 
             $comision = 0;
@@ -69,18 +67,20 @@ if (!function_exists('invierte_date_time')) {
 
             $tipo_promocion = ($es_servicio > 0) ? "SERVICIO" : "PRODUCTO";
             $valor_youtube = get_campo($servicio, "url_vide_youtube");
-            $val_youtube = icon('fa fa-pencil text_url_youtube') . $valor_youtube;
-            $nuevo_nombre_servicio = get_campo($servicio, "nombre_servicio");
+            $val_youtube =  icon('fa fa-pencil text_url_youtube') . $valor_youtube;
+
+
+            $_nombre_servicio = get_campo($servicio, "nombre_servicio");
             $nueva_descripcion = get_campo($servicio, 'descripcion');
 
             $text_comision_venta = "COMISIÓN POR VENTA" . $comision . "MXN";
             $text_envios_mayoreo = "¿TAMBIÉN VENDES ESTE PRODUCTO A PRECIOS DE MAYOREO?";
 
-            $r[] = get_heading_servicio($tipo_promocion, $nuevo_nombre_servicio, $servicio);
+            $r[] = get_heading_servicio($tipo_promocion, $_nombre_servicio, $servicio);
             $r[] = addNRow(get_menu_config($num, $num_imagenes, $url_productos_publico));
             $r[] = configurador($s, $data, $num,
                 $num_imagenes, $id_servicio,
-                $id_perfil,
+                $data["id_perfil"],
                 $tipo_promocion,
                 $val_youtube,
                 $valor_youtube,
@@ -93,7 +93,7 @@ if (!function_exists('invierte_date_time')) {
                 $text_comision_venta,
                 $utilidad,
                 $servicio,
-                $nuevo_nombre_servicio
+                $_nombre_servicio
             );
 
             $response[] = agregar_imgs();
@@ -121,8 +121,8 @@ if (!function_exists('invierte_date_time')) {
 
         $text_titulo_seccion_producto = h("INFORMACIÓN SOBRE TU " . $nuevo_nombre_servicio . icon('fa fa-pencil text_desc_servicio icon-pencil'), 5);
         $nuevo_titulo_seleccion_producto = d($text_titulo_seccion_producto, "top_50 titulo_seccion_producto titulo_producto_servicio", 1);
-        $ciclos = $data["ciclos"];
-        $has_phone = $data["has_phone"];
+
+
         $images = $data["images"];
         $status = $s["status"];
         $stock = $s["stock"];
@@ -131,7 +131,7 @@ if (!function_exists('invierte_date_time')) {
         $es_entrega = $s["contra_entrega"];
         $existencia = $s["existencia"];
         $es_nuevo = $s["flag_nuevo"];
-        $id_ciclo_facturacion = $s["id_ciclo_facturacion"];
+
         $venta_mayoreo = $s["venta_mayoreo"];
         $info_colores = create_colores_disponibles($s["color"]);
         $extra_2 = val_class($num, 2, ' active ');
@@ -167,7 +167,10 @@ if (!function_exists('invierte_date_time')) {
             $pronostico_entrega,
             $entregas_en_casa, $telefono_visible, /*$activo_visita_telefono, $baja_visita_telefono,*/
             $es_entrega, $existencia, $es_nuevo,
-            $ciclos, $id_ciclo_facturacion, $has_phone, $text_envios_mayoreo, $venta_mayoreo,
+            $data["ciclos"],
+            $s["id_ciclo_facturacion"],
+            $data["has_phone"],
+            $text_envios_mayoreo, $venta_mayoreo,
             $url_ml, $precio, $costo_envio, $link_dropshipping, $text_comision_venta, $utilidad, $extra_4
 
         );

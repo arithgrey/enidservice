@@ -7,7 +7,6 @@ if (!function_exists('invierte_date_time')) {
 		if ($flag_envio_gratis > 0) {
 
 			$r += [
-
                 "cliente" =>  "ENTREGA GRATIS!",
                 "cliente_solo_text" =>  "ENTREGA GRATIS!",
                 "ventas_configuracion" =>  "TU PRECIO YA INCLUYE EL ENVÍO",

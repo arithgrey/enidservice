@@ -160,7 +160,7 @@ class recibo extends REST_Controller
 
             $compras = $this->recibo_model->compras_ventas_efectivas_usuario($param);
             $compras = $this->app->imgs_productos(0, 1, 1, 1, $compras);
-            $response = get_vista_compras_efectivas($compras, $param["modalidad"]);
+            $response = d(create_listado_compra_venta($compras, $param["modalidad"]), 1);
         }
 
         $this->response($response);
@@ -251,6 +251,7 @@ class recibo extends REST_Controller
                     ];
 
                     //return $this->load->view("cobranza/notificacion_pago_realizado", $dc);
+                    $response =  notificacion_pago_realizado($dc);
 
                 }
             }

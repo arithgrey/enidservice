@@ -114,13 +114,13 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => 'q', "value" => $q, "class" => "q_imagen"]);
         $r[] = input_hidden(["name" => $q2, "value" => $q3, "class" => "q2_imagen"]);
         $r[] = input_hidden(["class" => 'dinamic_img', "id" => 'dinamic_img', "name" => 'dinamic_img']);
-
-
         $r[] = place("separate-enid");
         $r[] = place("place_load_img", ["id" => 'place_load_img']);
         $r[] = place("separate-enid");
 
-        $r[] = d(btn(text_icon("fa fa-check" , "AGREGAR IMAGEN"),
+        $r[] = d(
+            btn(
+                text_icon("fa fa-check" , "AGREGAR IMAGEN"),
             [
                 "class" => 'guardar_img_enid bottom_30 letter-spacing-5 top_30 ',
                 "id" => 'guardar_img'

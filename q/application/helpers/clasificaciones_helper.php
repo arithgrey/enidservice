@@ -3,13 +3,9 @@ if (!function_exists('invierte_date_time')) {
 
     function render_tallas($data)
     {
-
-
-
         $tipo = prm_def($data["talla"], "tipo");
 
-
-        $str = ($data["num_clasificaciones"]> 0) ? h(
+        $str = ($data["num_clasificaciones"] > 0) ? h(
             "CLASIFICACIONES AGREGADAS RECIENTEMENTE",
             5
             ,
@@ -20,12 +16,14 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(
             append([
 
-                h(
-                    $tipo,
-                    2,
-                    'info-tipo-talla'
-                )
-                , $str, $data["clasificaciones_existentes"]])
+                    h(
+                        $tipo,
+                        2,
+                        'info-tipo-talla'
+                    )
+                    , $str, $data["clasificaciones_existentes"]
+                ]
+            )
             ,
             "agregadas col-lg-9"
         );
@@ -40,10 +38,9 @@ if (!function_exists('invierte_date_time')) {
 
     function formatAgregar($param)
     {
-        $mas_nivel = "mas_" . $param["nivel"];
-        $seleccion = "seleccion_" . $param["nivel"];
-        $btn = "<button class='button-op " . $seleccion . "'>AGREGAR A LA LISTA</button>";
-        return d($btn, $mas_nivel);
+
+        $btn = "<button class='button-op " . add_text("seleccion_" , $param["nivel"]) . "'>AGREGAR A LA LISTA</button>";
+        return d($btn, "mas_" . $param["nivel"]);
 
     }
 

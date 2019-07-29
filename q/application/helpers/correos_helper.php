@@ -61,7 +61,10 @@ if (!function_exists('invierte_date_time')) {
                 'width' => '100%'
             ]
         ),
-            ['href' => $url_request . "contact/#envio_msj"]), 4, 1);
+            [
+                'href' => $url_request . "contact/#envio_msj"
+            ]
+        ), 4, 1);
         $r[] = d(h('RECIBIMOS TU NOTIFICACIÓN!', 3, ["style" => "font-size: 2em;"]), 6, 1);
         $r[] = hr();
         $r[] = d(a_enid(
@@ -105,13 +108,13 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $nombre = $data["nombre"];
-        $email = $data["email"];
-        $url_cancelar_envio = $data["url_cancelar_envio"];
+
+
+
 
 
         $r[] = d("Hemos tenido pocas noticias sobre ti!, ");
-        $r[] = d("Excelente día " . $nombre . "-" . $email . " hemos tenido pocas noticias sobre ti, ahora
+        $r[] = d("Excelente día " . $data["nombre"] . "-" . $data["email"] . " hemos tenido pocas noticias sobre ti, ahora
          hay más personas que están vendiendo y comprando sus productos a través de Enid Service, la plataforma 
          de comercio electrónico de México, apresurate y anuncia tus artículos y servicios para llegas a más personas
           que están en busca de lo que ofreces! ");
@@ -133,7 +136,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = a_enid(
             "YA NO QUIERO RECIBIR ESTE CORREO",
             [
-                'href' => $url_cancelar_envio,
+                'href' => $data["url_cancelar_envio"],
                 'style' => 'color:black;font-size:.9em;font-weight:bold'
             ]);
 

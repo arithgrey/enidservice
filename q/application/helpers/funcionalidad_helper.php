@@ -11,13 +11,10 @@ if (!function_exists('invierte_date_time')) {
             $r[] = "<table style='width:100%;margin-top:30px;' >";
             foreach ($conceptos as $row2) {
 
-                $privacidad = $row2["privacidad"];
-                $id_privacidad = $row2["id_privacidad"];
-                $id_usuario = $row2["id_usuario"];
 
                 $extra_seleccion = "";
                 $termino_asociado = 0;
-                if (!is_null($id_usuario)) {
+                if (!is_null($row2["id_usuario"])) {
                     $extra_seleccion = "checked";
                     $termino_asociado = 1;
                 }
@@ -26,13 +23,14 @@ if (!function_exists('invierte_date_time')) {
 
                 $attr = add_attributes(
                     [
-                        "id" => $id_privacidad,
+                        "id" => $row2["id_privacidad"],
                         "class" => 'concepto_privacidad',
                         "termino_asociado" => $termino_asociado,
                         "type" => 'checkbox'
-                    ]);
+                    ]
+                );
                 $r[] = td("<input " . $attr . " " . $extra_seleccion . ">");
-                $r[] = td(strtoupper($privacidad));
+                $r[] = td(strtoupper($row2["privacidad"]));
                 $r[] = "</tr>";
 
             }

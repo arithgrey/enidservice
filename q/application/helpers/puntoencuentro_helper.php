@@ -7,7 +7,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $l = [];
-        $negra = [];
         foreach ($array as $row) {
 
             $nombre = $row["nombre"];
@@ -56,8 +55,6 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre = $row["nombre"];
             $id = $row["id"];
-
-
             $index =  search_bi_array($lista_negra, "id_punto_encuentro", $id);
 
             if ($index !== false){

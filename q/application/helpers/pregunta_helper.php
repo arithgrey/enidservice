@@ -5,17 +5,18 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $modalidad = $data["modalidad"];
-
-
         $r[] = titulo_modalidad($modalidad);
 
         foreach ($data["preguntas"] as $row) {
 
-            $img = img([
+            $img = img(
+                [
                 'style' => 'width: 44px!important;',
                 'src' => url_img_pregunta($modalidad, $row),
                 'onerror' => "this.src='../img_tema/user/user.png'"
-            ]);
+
+                ]
+            );
 
 
             $r[] = d(btw(
@@ -121,9 +122,8 @@ if (!function_exists('invierte_date_time')) {
 
 
         $text = a_enid("Sobre -" . $param["nombre_servicio"],
-            [
-                "href" => path_enid("producto", $param["id_servicio"])
-            ]
+             path_enid("producto", $param["id_servicio"])
+
         );
 
         return $text;

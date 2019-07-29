@@ -10,29 +10,23 @@ if (!function_exists('invierte_date_time')) {
         foreach ($info_respuestas as $row) {
 
             $respuesta = $row["respuesta"];
-            $fecha_registro = $row["fecha_registro"];
-
-            $id_tarea = $row["id_tarea"];
-            $nombre = $row["nombre"];
-            $apellido_paterno = $row["apellido_paterno"];
-            $apellido_materno = $row["apellido_materno"];
-            $usuario_respuesta = $nombre . " " . $apellido_paterno;
+            $usuario_respuesta = $row["nombre"] . " " . $row["apellido_paterno"];
             $idperfil = $row["idperfil"];
             $text_perfil = ($idperfil != 20) ? "Equipo Enid Service" : "Cliente";
 
             $r = [];
             $r[] = a_enid(img(["class" => 'media-object']), ["class" => 'pull-left']);
-            $r[] = small(icon('fa fa-clock-o') . $fecha_registro, ["class" => 'pull-right time']);
+            $r[] = small(icon('fa fa-clock-o') . $row["fecha_registro"], ["class" => 'pull-right time']);
             $r[] = d($usuario_respuesta . "  | " . $text_perfil, ["class" => 'media-heading']);
             $r[] = d($respuesta);
 
-            $respuestas[] = d(append($r), ["class" => "contenedor_respuestas_tickect_tarea"]);
+            $respuestas[] = d(append($r),  "contenedor_respuestas_tickect_tarea" );
             $respuestas[] = hr();
 
         }
 
         $oculta_comentarios = (es_data($info_respuestas)) ?
-            d("Ocultar ", ["class" => 'ocultar_comentarios strong blue_enid', "id" => $id_tarea]) : "";
+            d("Ocultar ", ["class" => 'ocultar_comentarios strong blue_enid', "id" => $row["id_tarea"]]) : "";
 
 
         return btw(
@@ -108,10 +102,10 @@ if (!function_exists('invierte_date_time')) {
         $response[] =
 
             d(d(
-                ul(append($r), "chat"),
-                [
-                    "class" => mayorque(count($respuestas), 4, " scroll_chat_enid ")
-                ]
+                ul(
+                    append($r), "chat"),
+                 mayorque(count($respuestas), 4, " scroll_chat_enid ")
+
             ), "panel-body");
 
 

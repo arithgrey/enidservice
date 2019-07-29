@@ -408,7 +408,6 @@ if (!function_exists('invierte_date_time')) {
         $response = 0;
         if ($saldo_pendiente > 0) {
 
-
             $response = path_enid(
                 "paypal_enid",
                 $saldo_pendiente + porcentaje($saldo_pendiente, 3.7, 2, 0),
@@ -467,11 +466,11 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $total_mas_envio = $total + $cargo_envio;
+
         $response = [
             'saldo_pendiente' => $total,
             'text_envio' => $text_envio,
-            'total_mas_envio' => $total_mas_envio
+            'total_mas_envio' => ($total + $cargo_envio)
         ];
         return $response;
 
@@ -499,6 +498,7 @@ if (!function_exists('invierte_date_time')) {
 
         return $response;
 
+
     }
 
     function get_texto_saldo_pendiente($monto_a_liquidar, $monto_a_pagar, $modalidad_ventas)
@@ -515,7 +515,7 @@ if (!function_exists('invierte_date_time')) {
                 add_text(
                     d("SALDO PENDIENTE", 'text-saldo-pendiente')
                     ,
-                    d($monto_a_liquidar . "MXN", "text-saldo-pendiente-monto")
+                    d(add_text($monto_a_liquidar,  "MXN") , "text-saldo-pendiente-monto")
                 ) : $texto;
 
 
@@ -566,6 +566,7 @@ if (!function_exists('invierte_date_time')) {
         return $text;
     }
 
+    /*
     function get_text_direccion_envio($id_recibo, $modalidad_ventas, $direccion_registrada, $estado_envio)
     {
 
@@ -594,7 +595,8 @@ if (!function_exists('invierte_date_time')) {
 
         return d($texto, ["class" => "btn_direccion_envio", "id" => $id_recibo]);
     }
-
+    */
+    /*
     function get_estados_ventas($data, $indice, $modalidad_ventas)
     {
 
@@ -611,12 +613,14 @@ if (!function_exists('invierte_date_time')) {
 
         return $response;
     }
-
+    */
     function carga_estado_compra($id_recibo, $vendedor = 0)
     {
 
 
-        $text_icono = ($vendedor == 1) ? "DETALLES DE LA COMPRA " : text_icon('fa fa-credit-card-alt', "DETALLES DE TU COMPRA ");
+        $text_icono =
+            ($vendedor == 1) ?
+                "DETALLES DE LA COMPRA " : text_icon('fa fa-credit-card-alt', "DETALLES DE TU COMPRA ");
 
         $text = btn($text_icono,
             [
@@ -699,6 +703,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    /*
     function get_mensaje_compra($modalidad, $num_ordenes)
     {
 
@@ -730,6 +735,25 @@ if (!function_exists('invierte_date_time')) {
         }
         return $response;
     }
+
+    function agregar_direccion_envio($id_recibo)
+    {
+
+        return d(
+            text_icon("fa fa-bus", " Agrega la dirección de envío de tu pedido!")
+            ,
+            [
+                "class" => "btn_direccion_envio contenedor_agregar_direccion_envio_pedido a_enid_black cursor_pointer",
+                "id" => $id_recibo,
+                "href" => "#tab_mis_pagos",
+                "data-toggle" => "tab"
+            ],
+            1
+        );
+
+    }
+
+    */
 
     function format_direccion_envio($inf, $id_recibo, $recibo)
     {
@@ -765,24 +789,7 @@ if (!function_exists('invierte_date_time')) {
         $resumen[] = d(get_campo($inf, "nombre_receptor"));
         $resumen[] = d(get_campo($inf, "telefono_receptor"));
 
-        return d(append($resumen), ["class" => "informacion_resumen_envio"]);
-
-    }
-
-    function agregar_direccion_envio($id_recibo)
-    {
-
-        return d(
-            text_icon("fa fa-bus", " Agrega la dirección de envío de tu pedido!")
-            ,
-            [
-                "class" => "btn_direccion_envio contenedor_agregar_direccion_envio_pedido a_enid_black cursor_pointer",
-                "id" => $id_recibo,
-                "href" => "#tab_mis_pagos",
-                "data-toggle" => "tab"
-            ],
-            1
-        );
+        return d(append($resumen),  "informacion_resumen_envio" );
 
     }
 
@@ -926,23 +933,16 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_vista_compras_efectivas($data, $modalidad)
-    {
-
-        return d(create_listado_compra_venta($data, $modalidad), 1);
-
-    }
-
     function get_vista_cliente($data)
     {
 
         $modalidad = $data["modalidad"];
         $ordenes = $data["ordenes"];
-        $id_perfil = $data["id_perfil"];
+
         $r[] = get_text_modalidad($modalidad, $ordenes);
         $text = ($modalidad == 1) ? "VE TUS ÚLTIMAS VENTAS" : "VE TUS ÚLTIMAS COMPRAS";
         $r[] = btn($text, ["class" => "ver_mas_compras_o_ventas top_30 bottom_30"]);
-        $r[] = create_listado_compra_venta($ordenes, $modalidad, $id_perfil);
+        $r[] = create_listado_compra_venta($ordenes, $modalidad, $data["id_perfil"]);
         $r[] = d(place("contenedor_ventas_compras_anteriores"), 13);
         return d(append($r), 10, 1);
     }
@@ -955,18 +955,18 @@ if (!function_exists('invierte_date_time')) {
 
 
             $id_recibo = $row["id_proyecto_persona_forma_pago"];
-            $id_servicio = $row["id_servicio"];
-            $url_imagen_servicio = $row["url_img_servicio"];
+
+
 
             $t = a_enid(
                 img(
                     [
-                        "src" => $url_imagen_servicio,
+                        "src" => $row["url_img_servicio"],
                         "class" => 'imagen_articulo'
                     ]
                 )
                 ,
-                path_enid("producto", $id_servicio)
+                path_enid("producto", $row["id_servicio"])
 
             );
 
@@ -981,10 +981,7 @@ if (!function_exists('invierte_date_time')) {
             $list[] = d(d($t, "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block "), 1);
         }
 
-        $response = append($list);
-
-
-        return $response;
+        return append($list);
 
     }
 
@@ -1015,7 +1012,8 @@ if (!function_exists('invierte_date_time')) {
                     "src" => $url_imagen,
                     "style" => 'width: 44px!important',
                     "onerror" => "this.src='../img_tema/portafolio/producto.png'"
-                ]);
+                ]
+            );
 
             $response[] = a_enid($resumen_pedido, path_enid("pedidos_recibo", $id_recibo));
 
@@ -1056,7 +1054,6 @@ if (!function_exists('invierte_date_time')) {
 
         array_unshift($r, $tipo_solicitud);
         return append($r);
-
 
     }
 
