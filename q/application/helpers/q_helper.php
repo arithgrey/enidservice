@@ -6,17 +6,14 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $email = $data["email"];
-
         $seccion_fechas = "";
         $seccion_envios = "";
         $seccion_solicitudes = "";
         $seccion_ventas = "";
-
         $total_envios = 0;
         $total_solicitudes = 0;
         $total_ventas = 0;
         $num_dias = 0;
-        //$flag = 0;
         $dias = ["", 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
 
         $l_fechas = [];

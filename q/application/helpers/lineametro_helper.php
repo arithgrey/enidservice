@@ -108,7 +108,10 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         foreach ($array as $row) {
 
-            $linea = d(add_text("LINEA ", $row["numero"]),
+            $linea = d(
+                add_text(
+                    "LINEA ", $row["numero"]
+                ),
                 [
                     "id" => $row["id"],
                     "class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
