@@ -150,14 +150,14 @@ class usuario_deseo extends REST_Controller
 	private function agrega_interes_usuario($q)
 	{
 
-		$api = "usuario_clasificacion/interes";
-		return $this->app->api($api, $q, "json", "POST");
+		return $this->app->api("usuario_clasificacion/interes", $q, "json", "POST");
 	}
 
 	private function gamificacion_deseo($q)
 	{
-		$api = "servicio/gamificacion_deseo";
-		return $this->app->api($api, $q, "json", "PUT");
+
+		return $this->app->api("servicio/gamificacion_deseo", $q, "json", "PUT");
+
 	}
 
 	/*

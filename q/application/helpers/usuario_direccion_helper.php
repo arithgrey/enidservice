@@ -4,9 +4,6 @@ if (!function_exists('invierte_date_time')) {
 
     function format_domicilio_resumen($data)
     {
-
-        $info_envio_direccion = $data["info_envio_direccion"];
-
         $r[] = d(
             a_enid(icon("fa fa-pencil"),
                 ["class" => "a_enid_blue editar_direccion_persona"]
@@ -17,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
             1
         );
         $r[] = d(
-            get_format_domicilio($info_envio_direccion)
+            get_format_domicilio($data["info_envio_direccion"])
         );
 
         return append($r);
@@ -51,7 +48,7 @@ if (!function_exists('invierte_date_time')) {
 
         foreach ($info_envio_direccion as $row) {
 
-            $direccion = $row["direccion"];
+            //$direccion = $row["direccion"];
             $calle = $row["calle"];
             $entre_calles = $row["entre_calles"];
             $numero_exterior = $row["numero_exterior"];
@@ -62,8 +59,8 @@ if (!function_exists('invierte_date_time')) {
             $estado = $row["estado"];
             $flag_existe_direccion_previa++;
             $direccion_visible = "";
-            $id_codigo_postal = $row["id_codigo_postal"];
-            $pais = "";
+            //$id_codigo_postal = $row["id_codigo_postal"];
+            //$pais = "";
             $nombre_receptor = $row["nombre_receptor"];
             $telefono_receptor = $row["telefono_receptor"];
         }

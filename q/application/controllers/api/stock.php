@@ -21,8 +21,7 @@ class Stock extends REST_Controller
 		$response = false;
 		if (fx($param, "fecha_inicio,tipo")) {
 
-			$pedidos_contra_entrega = $this->get_solicitudes_contra_entrega($param);
-			$pedidos_servicio = crea_resumen_servicios_solicitados($pedidos_contra_entrega);
+			$pedidos_servicio = crea_resumen_servicios_solicitados($this->get_solicitudes_contra_entrega($param));
 			$pedidos_servicio = $this->agrega_stock_servicios($pedidos_servicio);
 			$response = $this->asocia_servicio_solicitudes($pedidos_servicio, $param["tipo"]);
 			$compras_por_enviar = $this->get_compras_por_enviar();
@@ -56,7 +55,6 @@ class Stock extends REST_Controller
 
 			$id_servicio = $servicios[$a]["id_servicio"];
 			$stock = $servicios[$a]["stock"];
-			$url_imagen = link_imagen_servicio($id_servicio);
 			$pedidos_contra_entrega = $servicios[$a]["pedidos_contra_entrega"];
 
 			$total_pedidos_contra_entrega = $servicios[$a]["total_pedidos_contra_entrega"];
@@ -67,10 +65,10 @@ class Stock extends REST_Controller
 			$sugerencia_b = $resumen["sugerencias_b"];
 			$img = img([
 				"class" => "img-responsive img_servicio_compras",
-				"src" => $url_imagen,
+				"src" => link_imagen_servicio($id_servicio),
 			]);
 
-			$img = a_enid($img, ["href" => get_url_servicio($id_servicio)]);
+			$img = a_enid($img,  get_url_servicio($id_servicio));
 			$total_enid = $this->get_ventas_tipo(1, $compras_por_enviar, $id_servicio);
 			$total_otras = $this->get_ventas_tipo(2, $compras_por_enviar, $id_servicio);
 			$total_compras = ($sugerencia + $total_enid + $total_otras) - $stock;
@@ -160,18 +158,13 @@ class Stock extends REST_Controller
 				$relevante[] = $t;
 				$promedio [] = ["solicitud" => $solicitud, "ventas_efectivas" => $ventas_efectivas];
 
-				if (!array_key_exists($ventas_efectivas, $media)) {
-					$media[$ventas_efectivas] = 1;
-				} else {
-					$media[$ventas_efectivas] = $media[$ventas_efectivas] + 1;
-				}
+                $media[$ventas_efectivas]  =  (!array_key_exists($ventas_efectivas, $media)) ? 1 : ( $media[$ventas_efectivas] + 1);
+
 
 			} else {
-				if (!array_key_exists($ventas_efectivas, $secundaria)) {
-					$secundaria[$ventas_efectivas] = 1;
-				} else {
-					$secundaria[$ventas_efectivas] = $secundaria[$ventas_efectivas] + 1;
-				}
+
+                $secundaria[$ventas_efectivas] =  (!array_key_exists($ventas_efectivas, $secundaria))  ?  1 : ( $secundaria[$ventas_efectivas] + 1);
+
 			}
 		}
 
@@ -186,7 +179,7 @@ class Stock extends REST_Controller
 		$totales_casos = $this->get_max_min($tabla_porcentaje["totales"]);
 		$completo = $totales_casos["completo"];
 		asort($completo);
-		$min = (count($completo) > 0) ? $completo[0] : 0;
+		$min = (es_data($completo) ) ? $completo[0] : 0;
 		$max = $totales_casos["max"];
 		$text_resumen = count($relevante);
 		$text = d($text_resumen . d($table . $tabla_porcentaje["table"], ["class" => "dropdown-menu"]), ["class" => "dropdown"]);
@@ -244,12 +237,6 @@ class Stock extends REST_Controller
 		$response = ["table" => $table, "totales" => $totales];
 		return $response;
 	}
-
-	private function get_comparativa_solicitudes($solicitudes, $entregas_efectivas, $pedidos_contra_entrega)
-	{
-
-	}
-
 	private function asocia_servicio_solicitudes($pedidos_servicio, $tipo)
 	{
 		$response = [];
@@ -290,17 +277,16 @@ class Stock extends REST_Controller
 
 	private function get_stock_servicio($id_servicio)
 	{
-		$q["id_servicio"] = $id_servicio;
-		$api = "servicio/stock/format/json/";
-		return $this->app->api($api, $q);
+
+		return $this->app->api("servicio/stock/format/json/", ["id_servicio" => $id_servicio]);
 	}
 
 	private function get_solicitudes_servicio_pasado($id_servicio, $tipo = 1)
 	{
-		$q["id_servicio"] = $id_servicio;
+
 		$q["tipo"] = $tipo;
-		$api = "recibo/solicitudes_periodo_servicio/format/json/";
-		return $this->app->api($api, $q);
+        $q["id_servicio"]   =  $id_servicio;
+		return $this->app->api("recibo/solicitudes_periodo_servicio/format/json/", $q);
 	}
 
 	private function get_solicitudes_contra_entrega($param)
@@ -316,8 +302,7 @@ class Stock extends REST_Controller
 		$q["fecha_inicio"] = $param["fecha_inicio"];
 		$q["fecha_termino"] = $param["fecha_inicio"];
 
-		$api = "recibo/pedidos/format/json/";
-		return $this->app->api($api, $q);
+		return $this->app->api("recibo/pedidos/format/json/", $q);
 
 	}
 
@@ -325,8 +310,7 @@ class Stock extends REST_Controller
 	{
 
 		$q[1] = 1;
-		$api = "recibo/compras_por_enviar/format/json/";
-		return $this->app->api($api, $q);
+		return $this->app->api("recibo/compras_por_enviar/format/json/", $q);
 
 	}
 }

@@ -8,7 +8,7 @@ if (!function_exists('invierte_date_time')) {
 
         $solicitud_saldo = $data["solicitud_saldo"];
 
-        $_response[] = d(h("ULTIMOS MOVIMIENTOS", 1, ["class" => "titulo_enid"]), ["class" => "jumbotron"]);
+        $_response[] = d(h("ULTIMOS MOVIMIENTOS", 1,  "titulo_enid" ),  "jumbotron");
         if (count($solicitud_saldo) > 0):
             $_response[] = d("SOLICITUDES DE SALDO A TUS AMIGOS", 'titulo_enid_sm_sm');
         endif;
@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
 
         foreach ($solicitud_saldo as $row):
 
-            $response[] = tr(td(d("Folio # " . $row["id_solicitud"], ["class" => 'folio']), ["colspan" => "2"]));
+            $response[] = tr(td(d("Folio # " . $row["id_solicitud"],  'folio'), ["colspan" => "2"]));
 
             $y[] = td(
                 d(
@@ -25,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
                     "desc_solicitud"
                 )
             );
-            $y[] = td($row["monto_solicitado"] . "MXN", ["class" => 'monto_solicitud_text']);
+            $y[] = td($row["monto_solicitado"] . "MXN",  'monto_solicitud_text');
 
             $response[] = tr(append($y));
 
@@ -41,11 +41,8 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = td($row["monto_solicitado"] . "MXN", ["class" => 'monto_solicitud_text']);
 
-
             $response[] = tr(append($r));
-            $re[] = "<table>";
-            $re[] = append($response);
-            $re[] = "</table>";
+            $re[] = tb(append($response));
             $_response[] = d(append($re), 'list-group-item-movimiento');
 
 
@@ -64,19 +61,19 @@ if (!function_exists('invierte_date_time')) {
         foreach ($info_tickets as $row) {
 
             $id_ticket = $row["id_ticket"];
-            $asunto = $row["asunto"];
 
-            $num_tareas_pendientes = $row["num_tareas_pendientes"];
+
+
             $tareas_pendientes = [
                 "class" => 'strong white ver_detalle_ticket a_enid_black_sm',
                 "id" => $id_ticket
             ];
 
-            $id_usuario = $row["id_usuario"];
 
-            $t[] = get_img_usuario($id_usuario);
-            $t[] = d($asunto);
-            $t[] = d("#Tareas pendientes:" . $num_tareas_pendientes,
+
+            $t[] = get_img_usuario($row["id_usuario"]);
+            $t[] = d($row["asunto"]);
+            $t[] = d("#Tareas pendientes:" . $row["num_tareas_pendientes"],
                 $tareas_pendientes,
                 ["class" => "cursor_pointer"]
             );
@@ -315,8 +312,8 @@ if (!function_exists('invierte_date_time')) {
 
         if (es_data($info_usuario)) {
 
-            $usuario = $info_usuario[0];
-            $nombre_usuario = $usuario["nombre"] . " " . $usuario["apellido_paterno"] . $usuario["apellido_materno"] . " -  " . $usuario["email"];
+            $u = $info_usuario[0];
+            $nombre_usuario = $u["nombre"] . " " . $u["apellido_paterno"] . $u["apellido_materno"] . " -  " . $u["email"];
 
 
             $asunto_email = "Nuevo ticket abierto [" . $param["ticket"] . "]";
@@ -374,12 +371,7 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $id_ticket = $row["id_ticket"];
-
-                $nombre_departamento = $row["nombre_departamento"];
                 $lista_prioridad = ["Alta", "Media", "Baja"];
-
-                $asunto = $row["asunto"];
-
                 $resumen = $pendientes . " / " . $tareas;
                 $cerrar_ticket =
                     btn(
@@ -404,9 +396,9 @@ if (!function_exists('invierte_date_time')) {
                 );
 
                 $x[] = d(h(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
-                $x[] = d(h(add_text("DEPARTAMENTO", strtoupper($nombre_departamento)), 6));
+                $x[] = d(h(add_text("DEPARTAMENTO", strtoupper($row["nombre_departamento"])), 6));
                 $x[] = d(h(add_text("PRIORIDAD", strtoupper($lista_prioridad[$row["prioridad"]])), 6, "underline"));
-                $x[] = d($asunto, "top_30 border padding_10 bottom_30");
+                $x[] = d($row["asunto"], "top_30 border padding_10 bottom_30");
                 $x[] = d(h(strtoupper($row["fecha_registro"]), 6, "text-right"));
                 $x[] = d(icon("fas fa-2x fa-plus-circle blue_enid"), " btn_agregar_tarea padding_1  cursor_pointer text-right");
                 $r[] = d(append($x), "shadow padding_20");

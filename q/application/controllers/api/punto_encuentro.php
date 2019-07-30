@@ -166,8 +166,7 @@ class Punto_encuentro extends REST_Controller
     {
 
         $q = ["id_recibo" => $id_recibo];
-        $api = "recibo/servicio_ppfp/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("recibo/servicio_ppfp/format/json/", $q);
 
     }
 }
