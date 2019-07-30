@@ -48,7 +48,6 @@ class recibo extends REST_Controller
             }
 
         }
-
         $this->response($response);
 
     }

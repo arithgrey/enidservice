@@ -16,19 +16,13 @@ class Valoracion extends REST_Controller
 
     function num_GET()
     {
-
-
         $param = $this->get();
         $response = false;
 
         if (fx($param, "id_usuario,id_servicio")) {
 
-
-            $id_servicio = $param["id_servicio"];
-            $id_usuario = $param["id_usuario"];
-
             $params = ["COUNT(0)num"];
-            $params_where = ["id_servicio" => $id_servicio, "id_usuario" => $id_usuario];
+            $params_where = ["id_servicio" =>  $param["id_servicio"], "id_usuario" => $param["id_usuario"]];
             $response = $this->valoracion_model->get($params, $params_where)[0]["num"];
 
         }
@@ -55,13 +49,18 @@ class Valoracion extends REST_Controller
     {
 
         $param = $this->get();
-        $id_servicio = $param["id_servicio"];
-        $servicio = $this->app->servicio($id_servicio);
-        $data["servicio"] = $servicio;
-        $vendedor = $this->app->usuario($servicio[0]["id_usuario"]);
-        $propietario = ($servicio[0]["id_usuario"] != $id_servicio) ? 0 : 1;
-        $response = get_form_pregunta_consumidor($id_servicio, $propietario, $vendedor, $servicio);
+        if (fx($param ,"id_servicio")){
+
+            $id_servicio = $param["id_servicio"];
+            $servicio = $this->app->servicio($id_servicio);
+            $data["servicio"] = $servicio;
+            $vendedor = $this->app->usuario($servicio[0]["id_usuario"]);
+            $propietario = ($servicio[0]["id_usuario"] != $id_servicio) ? 0 : 1;
+            $response = get_form_pregunta_consumidor($id_servicio, $propietario, $vendedor, $servicio);
+
+        }
         $this->response($response);
+
     }
 
     function gamificacion_pregunta_PUT()
@@ -79,7 +78,7 @@ class Valoracion extends REST_Controller
         $comentarios = $this->valoracion_model->get_desglose_valoraciones_vendedor($param);
         $response = crea_resumen_valoracion_comentarios($comentarios["data"], "");
 
-        if (count($comentarios["data"]) > 0) {
+        if (es_data($comentarios["data"]) ) {
 
             $response = hr() . d("RESEÑAS HECHAS POR OTROS CLIENTES", ["class" => 'text_resumen']) . hr() . $response;
         }
@@ -94,7 +93,13 @@ class Valoracion extends REST_Controller
         $data_comentarios = crea_resumen_valoracion_comentarios($comentarios["data"], "");
         if (count($comentarios["data"]) > 0) {
 
-            $data_comentarios = "<div class='col-lg-6 col-lg-offset-3'><hr><div class='text_resumen'> RESEÑAS HECHAS POR OTROS CLIENTES </div><hr>" . $data_comentarios . "</div>";
+
+            $r[]  = hr();
+            $r[]  = d("RESEÑAS HECHAS POR OTROS CLIENTES", 'text_resumen');
+            $r[]  = hr();
+            $r[]   = $data_comentarios;
+            $data_comentarios = d(append($r), 6,1);
+
         }
         $this->response($data_comentarios);
     }
@@ -130,11 +135,12 @@ class Valoracion extends REST_Controller
         $param = $this->get();
         $valoraciones = $this->valoracion_model->get_valoraciones_usuario($param);
         $response = [];
-        if (count($valoraciones) > 0) {
-            $info_valoraciones = crea_resumen_valoracion($valoraciones, 1);
+        if (es_data($valoraciones)) {
 
-            $data["info_valoraciones"] = $info_valoraciones;
-            $data["data"] = $valoraciones;
+            $data =  [
+                "info_valoraciones" => crea_resumen_valoracion($valoraciones, 1),
+                "data" => $valoraciones
+            ];
             $response = $data;
         }
         $this->response($response);
@@ -166,8 +172,8 @@ class Valoracion extends REST_Controller
         $param = $this->get();
         $id_servicio = $param["id_servicio"];
         $servicio = $this->app->servicio($id_servicio);
-        $extra = $param;
-        $response = get_form_valoracion($servicio, $extra, $id_servicio);
+        //$extra = $param;
+        $response = get_form_valoracion($servicio, $param, $id_servicio);
         $this->response($response);
     }
 
@@ -177,7 +183,6 @@ class Valoracion extends REST_Controller
         $param = $this->post();
         $response = false;
         if (fx($param, "id_servicio,calificacion,titulo,comentario,email,nombre")) {
-
 
             $id_servicio = $param["id_servicio"];
             $params = [
@@ -189,7 +194,6 @@ class Valoracion extends REST_Controller
                 "nombre" => $param["nombre"],
                 "id_servicio" => $id_servicio
             ];
-
 
             if ($this->id_usuario > 0) {
                 $params["id_usuario"] = $this->id_usuario;
@@ -208,8 +212,7 @@ class Valoracion extends REST_Controller
     private function notifica_vendedor($id_servicio)
     {
 
-        $usuario = $this->get_usuario_servicio($id_servicio);
-        $sender = get_notificacion_valoracion($usuario, $id_servicio);
+        $sender = get_notificacion_valoracion($this->get_usuario_servicio($id_servicio), $id_servicio);
         $this->app->send_email($sender, 1);
 
     }
@@ -217,29 +220,25 @@ class Valoracion extends REST_Controller
     private function get_usuario_servicio($id_servicio)
     {
 
-        $q["id_servicio"] = $id_servicio;
-        $api = "usuario/usuario_servicio/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("usuario/usuario_servicio/format/json/", ["id_servicio" => $id_servicio]);
     }
 
     function valida_existencia_usuario($q)
     {
-        $api = "usuario/usuario_existencia/format/json/";
-        return $this->app->api($api, $q);
+
+        return $this->app->api("usuario/usuario_existencia/format/json/", $q);
     }
 
     private function get_usuario_por_servicio($q)
     {
 
-        $api = "servicio/usuario_por_servicio/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("servicio/usuario_por_servicio/format/json/", $q);
     }
 
     private function get_producto_por_id($q)
     {
 
-        $api = "producto/producto_por_id/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("producto/producto_por_id/format/json/", $q);
     }
     /*
     private function set_visto_pregunta($q)

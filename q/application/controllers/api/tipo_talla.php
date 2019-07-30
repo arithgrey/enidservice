@@ -61,7 +61,8 @@ class tipo_talla extends REST_Controller
 				[
 					'class' => 'configurar_talla',
 					'id' => $id
-				]);
+				]
+            );
 
 			$array_clasificiones = get_array_json($row["clasificacion"]);
 			$tipo = $row["tipo"];

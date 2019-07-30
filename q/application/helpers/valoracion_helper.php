@@ -193,7 +193,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => "propietario", "class" => "propietario", "value" => $propietario]);
         $r[] = place("place_area_pregunta");
         $r[] = place("nuevo");
-        $r[] = btn("ENVIAR PREGUNTA" . icon("fa fa-chevron-right ir"));
+        $r[] = btn(text_icon("fa fa-chevron-right ir", "ENVIAR PREGUNTA" ) );
         $r[] = place("place_registro_valoracion");
 
 
@@ -205,10 +205,10 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = h("ESCRIBE UNA PREGUNTA " . $text, 3);
 
-        $url = get_url_servicio($id_servicio);
+
         $nombre = a_enid(pr($servicio, "nombre_servicio"), [
             "class" => "underline black strong",
-            "href" => $url
+            "href" => get_url_servicio($id_servicio)
         ]);
         $z[] = d("SOBRE SU " . $nombre, "top_30  bottom_30");
         $z[] = form_open("", ["class" => "form_valoracion top_30"]);
@@ -292,7 +292,7 @@ if (!function_exists('invierte_date_time')) {
 
         for ($x = 1; $x <= $calificacion; $x++) {
 
-            $estrellas_valoraciones .= label("★", ["class" => 'estrella f2']);
+            $estrellas_valoraciones .= label("★",  'estrella f2');
             $num_restantes++;
         }
 
@@ -303,7 +303,8 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "class" => 'estrella',
                     "style" => $extra
-                ]);
+                ]
+            );
 
         }
         return $estrellas_valoraciones . $restantes;
@@ -349,14 +350,10 @@ if (!function_exists('invierte_date_time')) {
             $promedio_general = number_format($promedio, 1, '.', '');
             $parte_promedio = d(crea_estrellas($promedio_general) . span($promedio_general, ["class" => 'promedio_num']), ["class" => 'contenedor_promedios']);
 
-            $config = ["class" => 'info_comentarios'];
-            $parte_promedio .= "<table>
-                            <tr>
-                              " . td($comentarios, $config) . "
-                            </tr>
-                          </table>";
 
-            $parte_promedio .= d(porcentaje($num_valoraciones, $personas_recomendarian, 1) . "%", ["class" => 'porcentaje_recomiendan']);
+            $parte_promedio .=  tb(tr(td($comentarios, 'info_comentarios')) );
+
+            $parte_promedio .= d(porcentaje($num_valoraciones, $personas_recomendarian, 1) . "%",  'porcentaje_recomiendan');
             $parte_promedio .= d(
                 ($persona == 1) ? "de los consumidores recomiendan" : "de los consumidores recomiendan este producto"
             );
@@ -400,12 +397,12 @@ if (!function_exists('invierte_date_time')) {
             $lista_comentario .= d($comentario, 'comentario_valoracion');
 
             if ($recomendaria == 1) {
-                $lista_comentario .= d(icon("fa fa-check-circle") . "Recomiendo este producto", ["class" => 'recomendaria_valoracion strong', "style" => "color:#02071a"]);
+                $lista_comentario .= d(text_icon("fa fa-check-circle",  "Recomiendo este producto"), ["class" => 'recomendaria_valoracion strong', "style" => "color:#02071a"]);
             }
 
             $lista_comentario .= d($nombre . br() . $fecha_registro, 'nombre_comentario_valoracion');
             $texto_valoracion = "";
-            if ($respuesta_valorada == $id_valoracion) {
+            if ($respuesta_valorada === $id_valoracion) {
                 $texto_valoracion = d("Recibimos tu valoracion! ", 'text_recibimos_valoracion');
             }
 
@@ -453,7 +450,8 @@ if (!function_exists('invierte_date_time')) {
 
             if (pr($numero_valoraciones, "num_valoraciones") > 6) {
 
-                $response = a_enid(text_icon("fa fa-chevron-right ir", "CARGAR MÁS"), "cargar_mas_valoraciones");
+                $response = a_enid(text_icon("fa fa-chevron-right ir", "CARGAR MÁS"),
+                    "cargar_mas_valoraciones");
 
             } else {
 
@@ -476,7 +474,7 @@ if (!function_exists('invierte_date_time')) {
         for ($x = 1; $x <= 5; $x++) {
 
             $id_input = "radio" . $x;
-            $num_estrella = "estrella_" . $x;
+
 
             $response[] = input(
                 [
@@ -488,7 +486,7 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] = label("★",
                 [
-                    "class" => 'estrella ' . $num_estrella,
+                    "class" => 'estrella ' . "estrella_" . $x,
                     "for" => "$id_input",
                     "id" => $x,
                     "title" => $x . " - " . $calificacion[$x]
@@ -496,7 +494,6 @@ if (!function_exists('invierte_date_time')) {
             );
 
         }
-
         return append($response);
 
     }

@@ -13,12 +13,12 @@ if (!function_exists('invierte_date_time')) {
             foreach ($data as $row) {
 
                 $id_servicio = $row["id_servicio"];
-                if (!in_array($row["id_servicio"], $ids_servicio)) {
-                    $ids_servicio[] = $row["id_servicio"];
+                if (!in_array($id_servicio, $ids_servicio)) {
+                    $ids_servicio[] = $id_servicio;
 
                     $response[] =
                         [
-                            "id_servicio" => $row["id_servicio"],
+                            "id_servicio" => $id_servicio,
                             "pedidos" => $row["num_ciclos_contratados"]
                         ];
 

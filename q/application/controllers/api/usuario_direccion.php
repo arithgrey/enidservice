@@ -45,7 +45,10 @@ class usuario_direccion extends REST_Controller
         if (fx($param, "id_usuario,id_direccion")) {
             if ($param["id_usuario"] > 0 && $param["id_direccion"] > 0) {
 
-                $params_where = ["id_usuario" => $param["id_usuario"]];
+                $params_where = [
+                    "id_usuario" => $param["id_usuario"]
+                ];
+
                 $response =
                     $this->usuario_direccion_model->delete($params_where, 10);
 
@@ -98,7 +101,7 @@ class usuario_direccion extends REST_Controller
 
             if (es_data($domicilio)) {
 
-                $domicilio = $this->get_data_direccion($domicilio[0]["id_direccion"]);
+                $domicilio = $this->get_data_direccion(pr($domicilio, "id_direccion"));
 
             }
 
@@ -163,21 +166,15 @@ class usuario_direccion extends REST_Controller
 
                 case 1:
 
-                    if (es_data($domicilio)) {
+                    $response = (es_data($domicilio)) ? format_domicilio_resumen($data) : format_direccion($data);
 
-
-                        $response = format_domicilio_resumen($data);
-
-                    } else {
-
-                        $response = format_direccion($data);
-
-                    }
                     break;
                 case 2:
 
                     $response = format_direccion($data);
+
                     break;
+
                 default:
                     $response = format_direccion($data);
                     break;
@@ -195,8 +192,11 @@ class usuario_direccion extends REST_Controller
 
         if (fx($param, "id_usuario")) {
 
-            $id_usuario = $param["id_usuario"];
-            $params_where = ["id_usuario" => $id_usuario, "status" => 1];
+            $params_where = [
+                "id_usuario" => $param["id_usuario"],
+                "status" => 1
+            ];
+
             $direcciones = $this->usuario_direccion_model->get(
                 [],
                 $params_where,
@@ -243,16 +243,14 @@ class usuario_direccion extends REST_Controller
     private function get_direccion_pedido($q)
     {
 
-        $api = "proyecto_persona_forma_pago_direccion/recibo/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("proyecto_persona_forma_pago_direccion/recibo/format/json/", $q);
 
     }
 
     private function get_recibo_saldo_pendiente($q)
     {
 
-        $api = "recibo/saldo_pendiente_recibo/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("recibo/saldo_pendiente_recibo/format/json/", $q);
     }
 
     private function get_id_usuario($param)

@@ -35,7 +35,8 @@ class Solicitud_pago extends REST_Controller
 
 	private function registra_solicitud_usuario($q)
 	{
-		$api = "solicitud_pago_usuario/index";
-		return $this->app->api($api, $q, "json", "POST");
+
+		return $this->app->api("solicitud_pago_usuario/index", $q, "json", "POST");
+
 	}
 }

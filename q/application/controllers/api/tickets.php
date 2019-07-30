@@ -72,18 +72,16 @@ class Tickets extends REST_Controller
         $param = $this->post();
         $response = false;
         if (fx($param, "prioridad,departamento,asunto")) {
-            $id_usuario = (array_key_exists("id_usuario", $param)) ? $param["id_usuario"] : $this->id_usuario;
+            $id_usuario = prm_def($param, "id_usuario" , $this->id_usuario);
+
             $param["id_usuario"] = $id_usuario;
-            $prioridad = $param["prioridad"];
-            $departamento = $param["departamento"];
-            $asunto = $param["asunto"];
-            $id_usuario = $param["id_usuario"];
+
             $params =
                 [
-                    "asunto" => $asunto,
-                    "prioridad" => $prioridad,
-                    "id_usuario" => $id_usuario,
-                    "id_departamento" => $departamento
+                    "asunto" => $param["asunto"],
+                    "prioridad" => $param["prioridad"],
+                    "id_usuario" => $param["id_usuario"],
+                    "id_departamento" => $param["departamento"]
                 ];
 
             $param["ticket"] = $this->tickets_model->insert($params, 1);
@@ -264,7 +262,13 @@ class Tickets extends REST_Controller
     {
 
         $param = $this->get();
-        $this->response(get_form_respuesta($param["tarea"]));
+        $response = false;
+        if (fx($param, "tarea")){
+
+            $response =  get_form_respuesta($param["tarea"]);
+        }
+        $this->response($response);
+
     }
 
     function estado_PUT()
@@ -320,9 +324,6 @@ class Tickets extends REST_Controller
 
     private function gamificacion_negativa($id_servicio, $id_usuario)
     {
-
-
-
         $q =  [
             "id_servicio" => $id_servicio,
             "type" => 2,
@@ -352,7 +353,6 @@ class Tickets extends REST_Controller
         return $this->app->api("cobranza/cancelacion_venta/format/json/", $q);
 
     }
-
     private function get_departamentos($q)
     {
 
@@ -363,9 +363,8 @@ class Tickets extends REST_Controller
     private function get_es_cliente($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        $api = "usuario_perfil/es_cliente/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("usuario_perfil/es_cliente/format/json/",
+            ["id_usuario" => $id_usuario]);
     }
 
 

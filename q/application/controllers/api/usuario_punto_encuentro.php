@@ -19,13 +19,13 @@ class Usuario_punto_encuentro extends REST_Controller
 
 			$id_usuario = $param["id_usuario"];
 			$id_punto_encuentro = $param["punto_encuentro"];
-			$params = ["id_punto_encuentro" => $id_punto_encuentro, "id_usuario" => $id_usuario];
+			$params = [
+			    "id_punto_encuentro" => $id_punto_encuentro,
+                "id_usuario" => $id_usuario
+            ];
 			$num = $this->usuario_punto_encuentro_model->get_num($id_usuario, $id_punto_encuentro);
-			if ($num == 0) {
-				$response = $this->usuario_punto_encuentro_model->insert($params);
-			} else {
-				$response = true;
-			}
+            $response = ($num == 0)  ? $response = $this->usuario_punto_encuentro_model->insert($params) :  true;
+
 		}
 		$this->response($response);
 	}
@@ -37,8 +37,8 @@ class Usuario_punto_encuentro extends REST_Controller
 		$response = false;
 		if (fx($param, "id_usuario")) {
 
-			$id_usuario = $param["id_usuario"];
-			$response = $this->usuario_punto_encuentro_model->get_usuario($id_usuario);
+			$response =
+                $this->usuario_punto_encuentro_model->get_usuario($param["id_usuario"]);
 		}
 		$this->response($response);
 	}
