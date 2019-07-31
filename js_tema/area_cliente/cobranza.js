@@ -1,7 +1,6 @@
 "use strict";
 let inf_ticket = function (e) {
 
-    debugger;
     recorre();
     let id_recibo = get_parameter_enid($(this), "id");
     if (id_recibo == undefined) {

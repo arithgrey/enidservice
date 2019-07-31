@@ -828,7 +828,9 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r = [];
-        if (es_data($data_complete) && array_key_exists("punto_encuentro", $data_complete) && es_data($data_complete["punto_encuentro"])) {
+        if (es_data($data_complete) &&
+            array_key_exists("punto_encuentro", $data_complete) &&
+            es_data($data_complete["punto_encuentro"])) {
 
 
             $p = $data_complete["punto_encuentro"][0];

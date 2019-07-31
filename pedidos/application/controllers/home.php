@@ -19,7 +19,7 @@ class Home extends CI_Controller
 
         if (prm_def($param, "seguimiento") > 0 && ctype_digit($param["seguimiento"])) {
 
-            $this->carga_vista_seguimiento($param, $data);
+            $this->vista_seguimiento($param, $data);
 
         } else {
 
@@ -28,21 +28,26 @@ class Home extends CI_Controller
         }
     }
 
-    private function carga_vista_seguimiento($param, $data)
+    private function vista_seguimiento($param, $data)
     {
 
         $data = $this->app->cssJs($data, "pedidos_seguimiento");
         $id_recibo = $this->input->get("seguimiento");
 
-
         $recibo = $this->get_recibo($id_recibo, 1);
+
+        $data += [
+            "servicio" => $this->app->servicio(pr($recibo, "id_servicio"))
+        ];
+
+
         $drecibo = $recibo[0];
         $id_usuario_compra = $drecibo["id_usuario"];
         $id_usuario_venta = $drecibo["id_usuario_venta"];
 
 
         $acceso = ($id_usuario_compra == $data["id_usuario"] || $id_usuario_venta == $data["id_usuario"]) ? 1 : 0;
-        if (count($recibo) > 0 && $data["in_session"] == 1 && $data["id_usuario"] > 0 && $acceso > 0) {
+        if (es_data($recibo) && $data["in_session"] == 1 && $data["id_usuario"] > 0 && $acceso > 0) {
 
 
             $data["es_vendedor"] = ($id_usuario_venta == $data["id_usuario"]) ? 1 : 0;
@@ -160,7 +165,7 @@ class Home extends CI_Controller
             "status_ventas" => $this->get_estatus_enid_service(),
             "evaluacion" => 1,
             "tipificaciones" => $this->get_tipificaciones($id_recibo),
-            "id_servicio" => $recibo[0]["id_servicio"]
+            "id_servicio" => pr($recibo, "id_servicio")
         ];
 
         if ($recibo[0]["saldo_cubierto"] > 0 && $recibo[0]["se_cancela"] == 0 && $data["es_vendedor"] < 1) {
@@ -331,7 +336,8 @@ class Home extends CI_Controller
 
             } else {
 
-                $id_usuario = $recibo[0]["id_usuario"];
+                $id_usuario = pr($recibo, "id_usuario");
+
 
                 $data += [
 
@@ -344,6 +350,7 @@ class Home extends CI_Controller
                     "id_recibo" => $id_recibo,
                     "tipo_recortario" => $this->get_tipo_recordatorio(),
                     "num_compras" => $this->get_num_compras($id_usuario),
+                    "servicio" => $this->app->servicio(pr($recibo, "id_servicio"))
 
                 ];
 
