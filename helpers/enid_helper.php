@@ -2301,18 +2301,30 @@ function gb_modal()
         ), "modal-body"
     );
 
-    $mod[] = d(form_button([
-        "type" => "button",
-        "class" => "btn btn-secondary",
-        "data-dismiss" => "modal"
-    ], "Cerrar"), "modal-footer");
+    $mod[] = d(
+        form_button(
 
-    d(d(d(append($mod), "modal-content"),
+            [
+                "type" => "button",
+                "class" => "btn btn-secondary",
+                "data-dismiss" => "modal"
+            ]
+            ,
+            "Cerrar"
+        ), "modal-footer");
+
+
+
+
+   $r[] =  d(d(
+        d(append($mod), "modal-content"),
         [
             "class" => "modal-dialog",
             "role" => "document"
 
-        ]), [
+        ]
+    ), [
+
         "class" => "modal",
         "tabindex" => "-1",
         "role" => "dialog",
@@ -2320,7 +2332,7 @@ function gb_modal()
 
     ]);
 
-    return append($mod);
+    return append($r);
 
 }
 

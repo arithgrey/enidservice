@@ -824,16 +824,17 @@ class Recibo_model extends CI_Model
 
 
         switch ($tipo_entrega) {
+
             case 1:
 
                 array_push($array_keys, "fecha_contra_entrega");
                 array_push($array_values, "'" . $data_usuario["fecha_entrega"] . "'");
                 break;
-            case 2:
+
+            case (2 && $servicio["flag_servicio"] > 0):
 
                 array_push($array_keys, "fecha_servicio");
                 array_push($array_values, "'" . $data_usuario["fecha_servicio"] . "'");
-
 
                 break;
 

@@ -6,6 +6,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $orden = $data["orden"];
+        $servicio = $data["servicio"];
         $status_ventas = $data["status_ventas"];
         $recibo = $data["recibo"];
         $domicilio = $data["domicilio"];
@@ -25,7 +26,10 @@ if (!function_exists('invierte_date_time')) {
         $r[] = crea_seccion_solicitud($recibo);
         $r[] = crea_seccion_productos($recibo);
         $r[] = crea_fecha_entrega($recibo);
+
         $r[] = create_fecha_contra_entrega($recibo, $domicilio);
+        $r[] = fecha_espera_servicio($recibo, $servicio);
+
         $r[] = notificacion_por_cambio_fecha($recibo, $num_compras, pr($recibo, "saldo_cubierto"));
         $r[] = addNRow(crea_seccion_recordatorios($recordatorios, $tipo_recortario));
         $r[] = create_seccion_tipificaciones($tipificaciones);
@@ -52,7 +56,7 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio = $data["id_servicio"];
 
         $z[] = format_resumen_seguimiento($recibo, $es_vendedor, $evaluacion, $status_ventas, $domicilio);
-        $z[] = format_heading_orden($recibo, $id_servicio);
+        $z[] = format_heading_orden($data["servicio"], $recibo, $id_servicio);
         $z[] = d("", 4);
         $r[] = d(append($z), "top_50");
         $r[] = d(h("También te podría interezar", 3), "col-lg-12 top_50 hidden text_interes");
@@ -76,38 +80,51 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_heading_orden($recibo, $id_servicio)
+    function format_heading_orden($servicio, $recibo, $id_servicio)
     {
 
 
-        return
-            d(
+        $recibo = $recibo[0];
 
-                btw(
 
-                    heading("ORDEN #" . pr($recibo, "id_proyecto_persona_forma_pago"), 3)
+        $z = [];
+        if ($recibo["cancela_cliente"] > 0 || $recibo["se_cancela"] > 0) {
 
-                    ,
+            $z[] = d(h("ORDEN CANCELADA", 4));
 
-                    a_enid(
+        } else if ($recibo["status"] == 15) {
 
-                        img(
-                            [
-                                "src" => pr($recibo, "url_img_servicio")
-                            ]
-                        )
-                        ,
-                        get_url_servicio($id_servicio)
+            $z[] = d(h("ORDEN ENTREGADA!", 4));
 
-                    )
-                    ,
-                    "",
-                    1
+        } else {
 
-                ),
-                3
-            );
+            $fecha = (pr($servicio, "flag_servicio") > 0) ? prm_def($recibo, "fecha_servicio") :
+                (prm_def($recibo, "tipo_entrega") == 2) ? prm_def($recibo, "fecha_contra_entrega") : prm_def($recibo, "fecha_vencimiento");
 
+            $text = (pr($servicio, "flag_servicio") ) ?  "PLANEADO PARA EL DÍA " :"FECHA EN QUE SE  ESTIMADA LLEGARÁ TU PEDIDO";
+            $z[] = d(h(add_text($text, $fecha), 4));
+
+        }
+
+
+        $a[] = btw(
+
+            heading("ORDEN #" . prm_def($recibo, "id_proyecto_persona_forma_pago"), 3)
+            ,
+            a_enid(
+
+                img(
+                    [
+                        "src" => prm_def($recibo, "url_img_servicio")
+                    ]
+                )
+                ,
+                get_url_servicio($id_servicio)
+            )
+        );
+        $a[] = append($z);
+        $r[] = d(append($a), 3);
+        return append($r);
 
     }
 
@@ -1425,7 +1442,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $tipificaciones = "";
-            $r =  [];
+            $r = [];
             foreach ($data as $row) {
 
 
@@ -1521,6 +1538,26 @@ if (!function_exists('invierte_date_time')) {
             }
         }
     }
+    if (!function_exists('fecha_servicio')) {
+        function fecha_espera_servicio($recibo, $servicio)
+        {
+
+            $r = [];
+            if (es_data($recibo) && es_data($servicio) && pr($servicio, "flag_servicio")) {
+
+                $recibo = $recibo[0];
+                $t[] = d("FECHA EN QUE SE ESPERA EL SERVICIO ", "strong underline");
+                $t[] = d($recibo["fecha_servicio"]);
+                $text = d(append($t), "letter-spacing-5 text-right top_30 bottom_30");
+                $fecha = ($recibo["tipo_entrega"] > 1) ? $text : "";
+                return $fecha;
+
+            }
+            return append($r);
+
+        }
+    }
+
     if (!function_exists('notificacion_por_cambio_fecha')) {
         function notificacion_por_cambio_fecha($recibo, $num_compras, $saldo_cubierto)
         {
@@ -1628,7 +1665,7 @@ if (!function_exists('invierte_date_time')) {
         function create_seccion_tipo_entrega($recibo, $tipos_entregas)
         {
 
-            $r =  [];
+            $r = [];
             if (es_data($recibo)):
                 $tipo = "";
                 $id_tipo_entrega = $recibo[0]["tipo_entrega"];
@@ -1636,7 +1673,7 @@ if (!function_exists('invierte_date_time')) {
 
                     if ($row["id"] == $id_tipo_entrega) {
                         $tipo = $row["nombre"];
-                        $r[] =  input_hidden(
+                        $r[] = input_hidden(
                             [
                                 "class" => "text_tipo_entrega",
                                 "value" => $tipo
@@ -1658,7 +1695,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
                 $tipo = d($tipo, "encabezado_tipo_entrega letter-spacing-5  text-right bottom_20", 1);
-                return d($encabezado . $tipo.append($r), "contenedor_tipo_entrega", 1);
+                return d($encabezado . $tipo . append($r), "contenedor_tipo_entrega", 1);
 
             endif;
 
@@ -1692,9 +1729,9 @@ if (!function_exists('invierte_date_time')) {
             $response = "";
             if (es_data($recibo)):
                 if (
-                    pr($recibo , "se_cancela" ) < 1 &&
-                    pr($recibo , "status")  != 10 &&
-                    pr($recibo, "cancela_cliente" ) < 1) {
+                    pr($recibo, "se_cancela") < 1 &&
+                    pr($recibo, "status") != 10 &&
+                    pr($recibo, "cancela_cliente") < 1) {
 
                     $status = $recibo[0]["status"];
                     $text_status = "";

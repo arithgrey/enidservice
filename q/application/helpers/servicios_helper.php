@@ -775,7 +775,8 @@ if (!function_exists('invierte_date_time')) {
     function get_nombre_ciclo_facturacion($ciclos, $id_ciclo)
     {
 
-        return search_bi_array($ciclos, "id_ciclo_facturacion", $id_ciclo, "ciclos");
+        return search_bi_array($ciclos, "id_ciclo_facturacion", $id_ciclo, "ciclo");
+
     }
 
     function create_colores_disponibles($text_colores)
