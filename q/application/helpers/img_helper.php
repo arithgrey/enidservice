@@ -108,7 +108,8 @@ if (!function_exists('invierte_date_time')) {
             "class" => "imagen_img",
             "name" => "imagen",
             "enctype" => "multipart/form-data",
-            "size" => "20"
+            "size" => "20",
+            "multiple" => true
         ]);
 
         $r[] = input_hidden(["name" => 'q', "value" => $q, "class" => "q_imagen"]);

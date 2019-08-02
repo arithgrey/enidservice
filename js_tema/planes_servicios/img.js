@@ -32,37 +32,32 @@ let upload_imgs_enid_pre = function(){
 }
 let registra_img_servicio = e =>{
     e.preventDefault();
-    let formData        = new FormData();
-    let q               = get_parameter(".q_imagen");
-    let q2              = get_parameter(".q2_imagen");
-    let dinamic_img     = get_parameter(".dinamic_img");
 
+    let  f = $('input[type=file]')[0].files;
+    $(".guardar_img_enid").hide();
+    sload(".place_load_img");
 
-    formData.append("imagen", $('input[type=file]')[0].files[0] );
-    formData.append("q", q);
-    formData.append("servicio", q2);
-    formData.append("dinamic_img", dinamic_img);
+    for (var x in f ){
 
-    let url         = "../q/index.php/api/archivo/imgs";
-    $.ajax({
-            url: url,
+        let formData        = new FormData();
+        formData.append("imagen", f[x] );
+        formData.append("q", get_parameter(".q_imagen"));
+        formData.append("servicio", get_parameter(".q2_imagen"));
+        formData.append("dinamic_img", get_parameter(".dinamic_img"));
+
+        $.ajax({
+            url: "../q/index.php/api/archivo/imgs",
             type: "POST",
             dataType: "json",
             data: formData,
             cache: false,
             contentType: false,
-            processData: false ,
-            beforeSend : function(){
-                $(".guardar_img_enid").hide();
+            processData: false
+        });
+    }
 
-                sload(".place_load_img");
-            }
-
-    }).done(response_load_image).fail(() =>{
-
-        carga_informacion_servicio(1);
-    });
-
+    response_load_image("true");
+    carga_informacion_servicio(1);
     $.removeData(formData);
 
 }
