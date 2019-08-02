@@ -171,6 +171,7 @@ let carga_info_detalle_ticket = () => {
 
 let response_carga_ticket = (data) => {
 
+
     render_enid(".place_proyectos", data);
     despliega([".seccion_nueva_tarea", ".mostrar_tareas_pendientes"], 0);
     $(".btn_agregar_tarea").click(agregar_tarea);
@@ -181,6 +182,9 @@ let response_carga_ticket = (data) => {
     $(".mostrar_tareas_pendientes").click(muestra_tareas_por_estatus);
     $(".mostrar_todas_las_tareas").click(muestra_todas_las_tareas);
     $(".ver_tickets").click(tikets_usuario);
+    $(".asunto").click(t_nombre_asunto);
+
+
     if (get_option("flag_mostrar_solo_pendientes") > 0) {
         muestra_tareas_por_estatus();
     }
@@ -280,6 +284,7 @@ let tikets_usuario = () => {
 
 }
 let response_carga_tickets = function (data) {
+
 
     render_enid(".place_proyectos", data);
     $(".hecho").click(marcar_como_hecho);
@@ -441,5 +446,35 @@ let marcar_como_hecho = function (e) {
     let id = get_parameter_enid($(this), "id");
     if (id > 0) {
         set_estatus_ticket(id, 4);
+    }
+}
+let t_nombre_asunto = function () {
+    let id = get_parameter_enid($(this), "id");
+    if (id > 0) {
+
+        showonehideone(".i_desc_asunto", ".s_desc_asunto");
+        $(".i_asunto").keyup(function (e) {
+
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 13) {
+                let asunto = get_parameter(".i_asunto");
+                if (asunto.length > 3) {
+
+                    rm_class(".i_asunto");
+                    let url = "../q/index.php/api/tickets/asunto/format/json/";
+                    let data_send = {"id_ticket": id, "asunto": asunto};
+                    request_enid("PUT", data_send, url, () => {
+                        carga_info_detalle_ticket();
+                    });
+
+                } else {
+
+                    focus_input(".i_asunto");
+                }
+
+            }
+
+
+        });
     }
 }

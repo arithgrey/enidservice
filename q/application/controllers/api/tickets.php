@@ -281,6 +281,16 @@ class Tickets extends REST_Controller
         }
         $this->response($response);
     }
+    function asunto_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_ticket,asunto")) {
+            $response = $this->tickets_model->q_up("asunto", $param["asunto"], $param["id_ticket"]);
+        }
+        $this->response($response);
+    }
 
     private function enviar($q)
     {
