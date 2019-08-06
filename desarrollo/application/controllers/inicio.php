@@ -15,8 +15,8 @@ class Inicio extends CI_Controller
 
         $data = $this->app->session();
         $param = $this->input->get();
-        $data["num_departamento"] = $this->get_id_departamento_by_id_perfil($this->app->getperfiles(2, "idperfil"));
-        $data["departamentos"] = $this->get_departamentos_enid();
+        $data["num_departamento"] = $this->id_deptop_id_perfil($this->app->getperfiles(2, "idperfil"));
+        $data["departamentos"] = $this->deptos_enid();
         $data["clasificaciones_departamentos"] = $this->app->get_departamentos(1);
         $activa = prm_def($param, "q");
         $data["ticket"] = prm_def($param, "ticket");
@@ -26,14 +26,19 @@ class Inicio extends CI_Controller
 
     }
 
-    private function get_id_departamento_by_id_perfil($id_perfil)
+    private function id_deptop_id_perfil($id_perfil)
     {
 
-        return $this->app->api("perfiles/id_departamento_by_id_perfil/format/json/", ["id_perfil" => $id_perfil]);
+        return $this->app->api(
+            "perfiles/id_departamento_by_id_perfil/format/json/",
+            [
+                "id_perfil" => $id_perfil
+            ]
+        );
 
     }
 
-    private function get_departamentos_enid()
+    private function deptos_enid()
     {
 
         return $this->app->api("departamento/index/format/json/", ["info" => 1]);

@@ -26,7 +26,7 @@ if (!function_exists('invierte_date_time')) {
         }
     }
     if (!function_exists('get_format_compras')) {
-        function get_format_compras()
+        function format_compras()
         {
             $opt_turnos[] = array(
                 "opcion" => "-1 MES",

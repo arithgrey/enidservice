@@ -16,7 +16,7 @@ class Emp extends REST_Controller
     {
 
         $param = $this->post();
-        $response = $this->insert_contacto($param);
+        $this->insert_contacto($param);
         $param["url_registro"] = $_SERVER['HTTP_REFERER'];
         $ticket = $this->abre_ticket($param);
         $this->response($ticket);
@@ -25,8 +25,8 @@ class Emp extends REST_Controller
 
         if ($param["tipo"] == 2) {
             $email = "enidservice@gmail.com";
-            $info = $this->mensajeria->notifica_nuevo_contacto($param, $email);
-            $info = $this->mensajeria->notifica_agradecimiento_contacto($param);
+            $this->mensajeria->notifica_nuevo_contacto($param, $email);
+            $this->mensajeria->notifica_agradecimiento_contacto($param);
         }
         $this->response($response);
     }
@@ -36,10 +36,9 @@ class Emp extends REST_Controller
 
         $param = $this->post();
         $response = $this->get_notificacion_pago($param);
-        $msj_result = $this->mensajeria_lead->notifica_registro_de_pago_efectuado($response);
-        $msj_result2 =
-            $this->mensajeria_lead->notifica_registro_de_pago_efectuado_cliente($response);
-        $this->response($msj_result2);
+        $this->mensajeria_lead->notifica_registro_de_pago_efectuado($response);
+        $response = $this->mensajeria_lead->notifica_registro_de_pago_efectuado_cliente($response);
+        $this->response($response);
     }
 
 
@@ -56,12 +55,12 @@ class Emp extends REST_Controller
                 break;
 
             case 2:
-                return $this->cancela_recordatorio($param);
+                $response = $this->cancela_recordatorio($param);
                 break;
 
             case 3:
                 /*Se cancelan los recordatorios de publicacion servicio*/
-                return $this->cancelar_recordatorio_servicio($param);
+                $response = $this->cancelar_recordatorio_servicio($param);
                 break;
 
             default:
@@ -74,8 +73,8 @@ class Emp extends REST_Controller
     private function aplica_gamification_servicio($param)
     {
 
-        $url = "servicio/add_gamification_servicio/format/json/";
-        return $this->put_service_enid($param, "base", $url);
+
+        return $this->put_service_enid($param, "base", "servicio/add_gamification_servicio/format/json/");
     }
 
     private function get_notificacion_pago($q)

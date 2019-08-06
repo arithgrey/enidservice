@@ -37,7 +37,8 @@ if (!function_exists('invierte_date_time')) {
             return append([
                 input_hidden(["class" => "action", "value" => $action]),
                 input_hidden(["class" => "ticket", "value" => $ticket])
-            ]);
+            ]
+            );
         }
     }
     if (!function_exists('get_format_buzon')) {
@@ -108,22 +109,27 @@ if (!function_exists('invierte_date_time')) {
             $minimo = $alcance["minimo"];
             $promedio = $alcance["promedio"];
 
-            $r[] = h("ALCANCE DE TUS PRODUCTOS", 3);
-            $r[] = "<table>";
-            $r[] = "<tr>";
-            $r[] = td($maximo, ["class" => 'num_alcance', "id" => $maximo]);
-            $r[] = td($promedio, ["class" => 'num_alcance']);
-            $r[] = td($minimo, ["class" => 'num_alcance', "id" => $maximo]);
-            $r[] = "</tr>";
-            $r[] = "<tr>";
-            $r[] = td("Tope", ["class" => 'num_alcance']);
-            $r[] = td("Promedio", ["class" => 'num_alcance']);
-            $r[] = td("Mínimo", ["class" => 'num_alcance']);
-            $r[] = "</tr>";
-            $r[] = "</table>";
-            $response = append($r);
+
+
+            $a   =  [];
+            $a[] = td($maximo, ["class" => 'num_alcance', "id" => $maximo]);
+            $a[] = td($promedio, ["class" => 'num_alcance']);
+            $a[] = td($minimo, ["class" => 'num_alcance', "id" => $maximo]);
+
+            $r[] = tr(append($a));
+
+
+            $a   =  [];
+            $a[] = td("Tope", ["class" => 'num_alcance']);
+            $a[] = td("Promedio", ["class" => 'num_alcance']);
+            $a[] = td("Mínimo", ["class" => 'num_alcance']);
+
+            $r[] = tr( append($a));
+
+            $response[] = h("ALCANCE DE TUS PRODUCTOS", 3);
+            $response[] = tb(append($r));
         }
-        return $response;
+        return append($response);
 
     }
 
@@ -151,10 +157,7 @@ if (!function_exists('invierte_date_time')) {
             a_enid(
                 d(
                     text_icon("fa fa-flag", " VENDER"),
-                    [
-                        "href" => path_enid("vender_nuevo")
-
-                    ]
+                     path_enid("vender_nuevo")
                 )
             );
 

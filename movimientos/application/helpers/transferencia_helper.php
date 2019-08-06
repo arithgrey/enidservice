@@ -6,26 +6,16 @@ if (!function_exists('invierte_date_time')) {
         function render_metodos_disponibles($data)
         {
 
-
             $usuario = $data["usuario"];
             $banca = $data["banca"];
-            $bancos = $data["bancos"];
-            $error = $data["error"];
-            $seleccion = $data["seleccion"];
+            $nombre = pr($usuario, "nombre") . " " . pr($usuario, "apellido_paterno") . " " . pr($usuario, "apellido_materno");
 
-
-            $nombre = pr($usuario, "nombre");
-            $apellido_paterno = pr($usuario, "apellido_paterno");
-            $apellido_materno = pr($usuario, "apellido_materno");
-            $nombre_persona = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
-            $text_tipo_ingreso = ($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJETA DE DÉDITO O CRÉDITO";
-
-            $x[] = heading($text_tipo_ingreso, 3);
+            $x[] = heading(($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJETA DE DÉDITO O CRÉDITO", 3);
             $x[] = d("Enid Service protege y garantiza la seguridad de la información de su cuenta bancaria. Nunca revelaremos su información financiera y, cada vez que inicie una transacción con esta cuenta bancaria, Enid Service se lo notificará por correo electrónico.");
-            $x[] = form_asociar_cuenta($error, $nombre_persona, $bancos, $banca);
+            $x[] = form_asociar_cuenta($data["error"], $nombre, $data["bancos"], $banca);
 
             $response = [];
-            if ($seleccion < 1) {
+            if ($data["seleccion"] < 1) {
 
                 $response[] = d(append($x), ["class" => "col-lg-4 col-lg-offset-4", "style" => "background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;"]);
             } else {
@@ -46,7 +36,10 @@ if (!function_exists('invierte_date_time')) {
             if ($error == 1):
                 $r[] = d(
                     "SE PRESENTARON ERRORES AL ASOCIAR CUENTA, VERIFIQUE SU INFORMACIÓN ENVIADA",
-                    ["style" => "background: #004bff; color: white;padding: 5px;"]);
+                    [
+                        "style" => "background: #004bff; color: white;padding: 5px;"
+                    ]
+                );
             endif;
             $r[] = d(heading($nombre_persona, 4), ["style" => "border-bottom-style: solid;border-width: 1px;"]);
             $r[] = heading("1.- PAÍS", 4);
@@ -80,11 +73,11 @@ if (!function_exists('invierte_date_time')) {
             else:
                 $r[] = heading("4.- TIPO DE TARJETA ", 4);
 
-                $opt = array(
+                $opt[] = array(
                     "text" => "Débito",
                     "v" => 0
                 );
-                $opt = array(
+                $opt[] = array(
                     "text" => "Crédito",
                     "v" => 1
                 );;
@@ -142,17 +135,14 @@ if (!function_exists('invierte_date_time')) {
         function render_cuentas_asociadas($data)
         {
 
-            $cuentas_bancarias = $data["cuentas_bancarias"];
-            $tarjetas = $data["tarjetas"];
-
             $r[] = h("TUS CUENTAS " . br() . " CUENTAS BANCARIAS", 3);
-            foreach ($cuentas_bancarias as $row):
+            foreach ($data["cuentas_bancarias"] as $row):
                 $r[] = d(
                     append(
                         [
                             $row["nombre"],
                             icon("fa fa-credit-card "),
-                            d(get_resumen_cuenta($row["clabe"]))
+                            d(resumen_cuenta($row["clabe"]))
                         ]
                     )
                     ,
@@ -178,7 +168,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $r[] = h("TARJETAS DE CRÉDITO Y DÉBITO", 3);
-            foreach ($tarjetas as $row):
+            foreach ($data["tarjetas"] as $row):
                 $r[] = d(append([
                     $row["nombre"],
                     icon("fa fa-credit-card "),
@@ -187,7 +177,8 @@ if (!function_exists('invierte_date_time')) {
                 ]), ["class" => "info_cuenta"]);
             endforeach;
             $r[] = btn(
-                "Agregar cuenta " . icon("fa fa-plus-circle ")
+                text_icon( "fa fa-plus-circle ", "Agregar cuenta "  )
+
                 ,
                 [
                     "class" => "top_20"
@@ -221,7 +212,11 @@ if (!function_exists('invierte_date_time')) {
                         "style" => "border-style: solid;border-width: .9px;padding: 10px;margin-top: 50px;"
                     ]
                 ),
-                ["href" => "?q=transfer&action=1&tarjeta=1", "class" => "black"]);
+                [
+                    "href" => "?q=transfer&action=1&tarjeta=1",
+                    "class" => "black"
+                ]
+            );
 
             $r[] = a_enid(d("Asociar cuenta bancaria",
                 [
@@ -265,7 +260,8 @@ if (!function_exists('invierte_date_time')) {
                 d("AUN NO CUENTAS CON FONDOS EN TU CUENTA",
                     [
                         "style" => "border-radius:20px;background: black;padding:10px;color: white;"
-                    ]),
+                    ]
+                ),
                 [
                     "style" => "width: 80%;margin: 0 auto;margin-top: 20px;"
                 ]);
@@ -312,7 +308,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = h("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR ", 3);
             $r[] = get_format_pago_efectivo();
-            $r[] = get_format_solicitud_amigo();
+            $r[] = format_solicitud_amigo();
             return d(append($r), 4, 1);
 
         }
@@ -323,7 +319,7 @@ if (!function_exists('invierte_date_time')) {
             $id_usuario = $data["id_usuario"];
             return btw(
                 h("AÑADE SALDO A TU CUENTA DE ENID SERVICE AL REALIZAR DEPÓSITO DESDE CUALQUIER SUCURSAL OXXO", 3),
-                get_form_pago_oxxo($id_usuario),
+                form_pago_oxxo($id_usuario),
                 4, 1
 
             );
@@ -332,11 +328,12 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    if (!function_exists('get_format_solicitud_amigo')) {
-        function get_format_solicitud_amigo()
+    if (!function_exists('format_solicitud_amigo')) {
+        function format_solicitud_amigo()
         {
 
-            return a_enid(btw(
+            return a_enid(
+                btw(
 
                 d("SOLICITA SALDO A UN AMIGO",
 
@@ -357,9 +354,10 @@ if (!function_exists('invierte_date_time')) {
 
                 "option_ingresar_saldo"
 
-            ), [
-                "href" => "?q=transfer&action=9"
-            ]);
+            ),
+                "?q=transfer&action=9"
+            )
+                ;
 
         }
     }
@@ -368,7 +366,8 @@ if (!function_exists('invierte_date_time')) {
         function get_format_pago_efectivo()
         {
 
-            return a_enid(btw(
+            return a_enid(
+                btw(
 
                 d("UN PAGO EN EFECTIVO EN OXXO ",
                     [
@@ -385,17 +384,15 @@ if (!function_exists('invierte_date_time')) {
 
                 "option_ingresar_saldo tipo_pago"
 
-            ), [
-                    "href" => "?q=transfer&action=7"
-                ]
+            ), "?q=transfer&action=7"
             );
 
 
         }
 
     }
-    if (!function_exists('get_form_pago_oxxo')) {
-        function get_form_pago_oxxo($id_usuario)
+    if (!function_exists('form_pago_oxxo')) {
+        function form_pago_oxxo($id_usuario)
         {
 
             $r[] = '<form method="GET" action="../orden_pago_oxxo">';
@@ -406,13 +403,14 @@ if (!function_exists('invierte_date_time')) {
             ]);
 
             $r[] = btw(
-
-                input([
+                input(
+                    [
                     "type" => "number",
                     "name" => "q",
                     "class" => "form-control input-sm input monto_a_ingresar",
                     "required" => true
-                ])
+                ]
+                )
                 ,
                 h("MXN", 2)
                 ,
@@ -435,8 +433,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    if (!function_exists('get_resumen_cuenta')) {
-        function get_resumen_cuenta($text)
+    if (!function_exists('resumen_cuenta')) {
+        function resumen_cuenta($text)
         {
             return substr($text, 0, 4) . "********";
         }
@@ -444,15 +442,16 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('agrega_cuentas_existencia')) {
         function agrega_cuentas_existencia($flag_cuentas)
         {
-            $text = ($flag_cuentas == 0) ? "Asociar nueva cuenta" : "Asociar otra cuenta";
-            return $text;
+            return ($flag_cuentas == 0) ? "Asociar nueva cuenta" : "Asociar otra cuenta";
+
         }
     }
     if (!function_exists('valida_siguiente_paso_cuenta_existente')) {
         function valida_siguiente_paso_cuenta_existente($flag_cuentas_registradas)
         {
-            $text = ($flag_cuentas_registradas == 0) ? "readonly" : "";
-            return $text;
+
+            return ($flag_cuentas_registradas == 0) ? "readonly" : "";
+
         }
 
     }
@@ -462,11 +461,8 @@ if (!function_exists('invierte_date_time')) {
             $option = "";
             foreach ($cuentas as $row) {
 
-                $id_cuenta_pago = $row["id_cuenta_pago"];
-                $numero_tarjeta = $row["numero_tarjeta"];
-                $nuevo_numero_tarjeta = substr($numero_tarjeta, 0, 4);
-                $nombre = "Cuenta - " . $row["nombre"] . " " . $nuevo_numero_tarjeta . "************";
-                $option .= add_option_select($nombre, $id_cuenta_pago);
+                $nombre = "Cuenta - " . $row["nombre"] . " " . substr($row["numero_tarjeta"], 0, 4) . "************";
+                $option .= add_option_select($nombre, $row["id_cuenta_pago"]);
             }
             return $option;
         }
@@ -482,8 +478,8 @@ if (!function_exists('invierte_date_time')) {
         function get_data_saldo($saldo)
         {
 
-            $text = (prm_def($saldo, "saldo") > 0) ? $saldo["saldo"] : 0;
-            return $text;
+            return (prm_def($saldo, "saldo") > 0) ? $saldo["saldo"] : 0;
+
         }
     }
 

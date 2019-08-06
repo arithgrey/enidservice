@@ -1,12 +1,12 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function get_page_sigin($action)
+    function page_sigin($action)
     {
 
-        $r[] = get_format_nuevo_usuario();
-        $r[] = get_format_recuperacion_pw();
-        $r[] = get_form_acceso($action);
+        $r[] = format_nuevo_usuario();
+        $r[] = format_recuperacion_pw();
+        $r[] = frm_acceso($action);
         $r[] = input_hidden(
             [
                 "class" => "action",
@@ -20,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_form_acceso($action)
+    function frm_acceso($action)
     {
 
 
@@ -32,7 +32,7 @@ if (!function_exists('invierte_date_time')) {
             , 1
         );
 
-        $r[] = d(get_form_login(), 1);
+        $r[] = d(frm_login(), 1);
         $r[] = place("place_acceso_sistema top_20 bottom_20");
         $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'registrar-cuenta registrar_cuenta']);
         $x[] = a_enid(
@@ -51,7 +51,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_recuperacion_pw()
+    function format_recuperacion_pw()
     {
 
         $r[] = a_enid(img_enid(),
@@ -95,7 +95,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_nuevo_usuario()
+    function format_nuevo_usuario()
     {
 
 
@@ -161,9 +161,9 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    if (!function_exists('get_form_login')) {
+    if (!function_exists('frm_login')) {
 
-        function get_form_login()
+        function frm_login()
         {
 
             $attr = add_attributes([

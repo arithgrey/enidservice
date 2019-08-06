@@ -19,7 +19,6 @@ class Home extends CI_Controller
         $data["r_sim"] = "";
 
         $param = ($this->input->get() !== false) ? $this->input->get() : [];
-
         $faq = (array_key_exists("faq", $param)) ? $param["faq"] : "";
         $faqs = (array_key_exists("faqs", $param)) ? $param["faqs"] : "";
         $categoria = (array_key_exists("categoria", $param)) ? $param["categoria"] : "";
@@ -44,8 +43,6 @@ class Home extends CI_Controller
 
             $data["faqs_categoria"] = $this->get_faqs_categoria($categoria, $data);
             $f ++ ;
-
-
         }
 
         $flag_busqueda_personalidaza = prm_def($param, "faqs");
@@ -73,18 +70,16 @@ class Home extends CI_Controller
     private function get_recientes($q){
 
 
-        $api = "fq/index/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("fq/index/format/json/", $q);
 
     }
     private function get_categorias_por_tipo($tipo)
     {
 
         $q["tipo"] = $tipo;
-        $api = "categoria/categorias_por_tipo/format/json/";
-        $response = $this->app->api($api, $q);
+        return  $this->app->api("categoria/categorias_por_tipo/format/json/", $q);
 
-        return $response;
+
     }
 
     private function get_faqs_categoria($id_categoria, $data)
@@ -99,12 +94,8 @@ class Home extends CI_Controller
 
         $q["id_categoria"] = $id_categoria;
         $q["extra"] = $extra;
+        return   $this->append_imgs($this->app->api("fq/qsearch/format/json/", $q));
 
-        $api = "fq/qsearch/format/json/";
-        $response = $this->app->api($api, $q);
-        $response =  $this->append_imgs($response);
-
-        return $response;
 
     }
     private function append_imgs($data){
@@ -119,10 +110,9 @@ class Home extends CI_Controller
             $img_faq    =  $this->get_img_faq($id_faq);
 
             $url_img  = "";
-            if ( count($img_faq) >  0 ){
+            if ( es_data($img_faq) ){
 
                 $url_img = path_enid("img_faq", $img_faq[0]["nombre_imagen"]);
-
             }
 
             $response[$a]["url_img"] =  $url_img;
@@ -135,33 +125,28 @@ class Home extends CI_Controller
     private function  get_img_faq($id_faq){
 
         $q["id_faq"] = $id_faq;
-        $api = "imagen_faq/img/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("imagen_faq/img/format/json/", $q);
 
     }
     private function get_categorias_tipo($tipo = 1)
     {
 
         $q["tipo"] = $tipo;
-        $api = "categoria/categorias_por_tipo/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api( "categoria/categorias_por_tipo/format/json/", $q);
     }
 
     private function get_faq($faq)
     {
 
         $q["id"] = $faq;
-        $api = "fq/id/format/json/";
-        $response = $this->app->api($api, $q);
-        return $response;
+        return  $this->app->api("fq/id/format/json/", $q);
 
     }
 
     private function search_faqs($q)
     {
         $param["q"] = $q;
-        $api = "fq/search/format/json/";
-        return $this->app->api($api, $param);
+        return $this->app->api("fq/search/format/json/", $param);
     }
 
 }

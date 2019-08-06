@@ -1,9 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    if (!function_exists('get_format_orden')) {
+    if (!function_exists('format_orden')) {
 
-        function get_format_orden($data)
+        function format_orden($data)
         {
 
             return d($data, "col-lg-8 col-lg-offset-2 contenedor_principal_enid");
@@ -22,15 +22,15 @@ if (!function_exists('invierte_date_time')) {
             $x[] = d("El pago realizado en tiendas de autoservicio tendrá una comisión adicional al monto de la compra por transacción fijada por el proveedor y no es imputable a Enid Service.", 1);
             $x[] = d(hr(), 1);
             $r[] = d(append($x), " d-flex flex-column justify-content-between mh_350");
-            $r[] = get_img_pago();
-            $r[] = get_format_tipos_entrega();
+            $r[] = img_pago();
+            $r[] = format_tipos_entrega();
             return d(d(append($r), 6, 1), "top_30", 1);
 
         }
     }
-    if (!function_exists('get_format_tipos_entrega')) {
+    if (!function_exists('format_tipos_entrega')) {
 
-        function get_format_tipos_entrega()
+        function format_tipos_entrega()
         {
 
             $x[] = d(heading("TIPOS DE ENTREGA", 3), 1);
@@ -75,9 +75,9 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    if (!function_exists('get_img_pago')) {
+    if (!function_exists('img_pago')) {
 
-        function get_img_pago()
+        function img_pago()
         {
 
             $cb = function ($n) {

@@ -28,7 +28,7 @@ class Home extends CI_Controller
             ];
 
 			$data =  $this->app->cssJs($data, "pago_oxxo");
-			$this->app->pagina($data, get_format_orden_compra($data["usuario"], $param,$this->config->item('numero_cuenta')) , 1);
+			$this->app->pagina($data, format_orden_compra($data["usuario"], $param,$this->config->item('numero_cuenta')) , 1);
 
 		} else {
 			redirect("../../movimientos/?q=transfer&action=7");
