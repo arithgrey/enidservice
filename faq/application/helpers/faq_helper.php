@@ -25,17 +25,17 @@ if (!function_exists('invierte_date_time')) {
             if (prm_def($data, "respuesta") > 0) {
 
 
-                $response = (array_key_exists("param", $data) && array_key_exists("config", $data["param"])) ? get_form_respuesta($data, 1) : get_lista_faq($data["respuesta"], $data);
-
+                $response =
+                    (array_key_exists("param", $data) && array_key_exists("config", $data["param"])) ? form_respuesta($data, 1) : get_lista_faq($data["respuesta"], $data);
 
             } else {
 
-                $response = ($data["es_form"] > 0) ? get_form_respuesta($data) : $response;
+                $response = ($data["es_form"] > 0) ? form_respuesta($data) : $response;
 
             }
-            return $response;
 
         }
+        return $response;
     }
 
         function get_cat($faqs)
@@ -45,29 +45,23 @@ if (!function_exists('invierte_date_time')) {
 
             foreach ($faqs as $row) {
 
-
-                $id_faq = $row["id_faq"];
-                $titulo = $row["titulo"];
-                $url_img = $row["url_img"];
-
                 $bloque = btw(
                     d(
                         img(
                             [
-                                "src" => $url_img,
+                                "src" => $row["url_img"],
                                 "class" => "mh_270"
                             ]
                         ),
                         3
                     )
                     ,
-                    d(h($titulo, 4, "black text-uppercase"), 9)
+                    d(h($row["titulo"], 4, "black text-uppercase"), 9)
                     ,
                     "row mh_200 border top_30 "
-
                 );
 
-                $r[] = a_enid($bloque, path_enid("editar_faq", $id_faq));
+                $r[] = a_enid($bloque, path_enid("editar_faq", $row["id_faq"]));
 
             }
 
@@ -81,16 +75,11 @@ if (!function_exists('invierte_date_time')) {
             $r = [];
 
             foreach ($respuestas as $row) {
-
-                $id_faq = $row["id_faq"];
-                $titulo = $row["titulo"];
-                $respuesta = $row["respuesta"];
-                $fecha_registro = $row["fecha_registro"];
-
-                $extra = ($data["in_session"] > 0) ? a_enid(icon("fa fa-cogs"), ["href" => path_enid("editar_faq", $id_faq . "&config=1")]) : "";
-                $x[] = d(h($extra . $titulo, 4, "black text-uppercase underline"), 1);
-                $x[] = d(p($respuesta, "black top_30"), 1);
-                $x[] = d(p($fecha_registro, "top_30"), 1);
+                
+                $extra = ($data["in_session"] > 0) ? a_enid(icon("fa fa-cogs"), ["href" => path_enid("editar_faq", $row["id_faq"] . "&config=1")]) : "";
+                $x[] = d(h($extra . $row["titulo"], 4, "black text-uppercase underline"), 1);
+                $x[] = d(p($row["respuesta"], "black top_30"), 1);
+                $x[] = d(p($row["fecha_registro"], "top_30"), 1);
 
                 $r[] = d(
                     append($x)
@@ -103,30 +92,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
         }
 
-        function valida_format_respuestas_menu($in_session, $lista_categorias)
-        {
-            $response = "";
-            if ($in_session > 0) {
-                $response = d(
-                    get_form_respuesta($lista_categorias),
-                    [
-                        "class" => "tab-pane fade",
-                        "id" => "tab2default"
-                    ]
-                );
-            }
-            return $response;
 
-        }
-
-        function get_format_fq($flag_categoria, $flag_busqueda_q, $faqs_categoria, $respuesta, $in_session, $perfil)
-        {
-
-            $r[] = ($flag_categoria > 0) ?   get_format_faq_categorias($faqs_categoria) : "";
-            $r[] = ($flag_busqueda_q > 0) ? get_formar_respuesta($respuesta, $in_session, $perfil) : "";
-            return append($r);
-
-        }
 
         function get_format_listado_categorias($categorias_publicas_venta, $categorias_temas_de_ayuda)
         {
@@ -138,7 +104,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        function get_form_respuesta($data, $editar = 0)
+        function form_respuesta($data, $editar = 0)
         {
 
             $lista_categorias = $data["lista_categorias"];
@@ -247,7 +213,33 @@ if (!function_exists('invierte_date_time')) {
 
             return d(d(append($r), 8, 1), "top_30");
         }
+        /*
+  function valida_format_respuestas_menu($in_session, $lista_categorias)
+  {
+      $response = "";
+      if ($in_session > 0) {
+          $response = d(
+              form_respuesta($lista_categorias),
+              [
+                  "class" => "tab-pane fade",
+                  "id" => "tab2default"
+              ]
+          );
+      }
+      return $response;
 
+  }
+  function get_format_fq($flag_categoria, $flag_busqueda_q, $faqs_categoria, $respuesta, $in_session, $perfil)
+  {
+
+      $r[] = ($flag_categoria > 0) ?   get_format_faq_categorias($faqs_categoria) : "";
+      $r[] = ($flag_busqueda_q > 0) ? get_formar_respuesta($respuesta, $in_session, $perfil) : "";
+      return append($r);
+
+  }
+
+  */
+        /*
         function get_format_faq_categorias($faqs_categoria)
         {
 
@@ -269,8 +261,9 @@ if (!function_exists('invierte_date_time')) {
             }
 
             return d(append($r));
-        }
+        }*/
 
+        /*
         function get_formar_respuesta($respuesta, $in_session, $perfil)
         {
 
@@ -298,24 +291,6 @@ if (!function_exists('invierte_date_time')) {
             return d(append($r));
 
         }
-
-        function get_format_menu($in_session, $perfil)
-        {
-
-            return ul([
-                    a_enid(
-                        path_enid("fa fa-question-circle", "PREGUNTAS FRECUENTES")
-                        ,
-                        [
-                            "href" => "#tab1default"
-                        ]
-                    )
-                ]
-                ,
-                "nav nav-tabs"
-            );
-        }
-
         function get_btn_registro_faq($in_session, $perfil)
         {
 
@@ -337,18 +312,35 @@ if (!function_exists('invierte_date_time')) {
             return $response;
         }
 
+        */
+
+        function get_format_menu($in_session, $perfil)
+        {
+
+            return ul([
+                    a_enid(
+                        path_enid("fa fa-question-circle", "PREGUNTAS FRECUENTES")
+                        ,
+                        [
+                            "href" => "#tab1default"
+                        ]
+                    )
+                ]
+                ,
+                "nav nav-tabs"
+            );
+        }
+
+
         function lista_categorias($categorias)
         {
 
             $l = [];
             foreach ($categorias as $row) {
-
-                $id_categoria = $row["id_categoria"];
-                $nombre_categoria = $row["nombre_categoria"];
-                $faqs = $row["faqs"];
-                $href = "?categoria=" . $id_categoria;
-
-                $l[] = d(a_enid(d($nombre_categoria . "(" . $faqs . ")"), ["href" => $href]));
+                $l[] = d(a_enid(
+                    d($row["nombre_categoria"] . "(" . $row["faqs"] . ")"),
+                    "?categoria=" . $row["id_categoria"])
+                );
             }
             return append($l);
         }

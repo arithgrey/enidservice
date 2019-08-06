@@ -14,7 +14,9 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session();
-        $q = (prm_def($this->input->get(), "q") === "preferencias") ? $this->render_preferencias($data) : $this->load_lista_deseos($data);
+        $q = (prm_def($this->input->get(), "q") === "preferencias") ?
+            $this->render_preferencias($data) :
+            $this->load_lista_deseos($data);
 
     }
 
@@ -23,9 +25,13 @@ class Home extends CI_Controller
 
         $data += [
             "preferencias" => $this->get_preferencias($data["id_usuario"]),
-            "tmp" => get_format_preferencias()
+            "tmp" => format_preferencias()
         ];
-        $this->app->pagina($this->app->cssJs($data, "lista_deseos_preferencias"), render_deseos($data), 1);
+        $this->app->pagina(
+            $this->app->cssJs($data, "lista_deseos_preferencias"),
+            render_deseos($data),
+            1
+        );
     }
 
     private function load_lista_deseos($data)
@@ -36,12 +42,12 @@ class Home extends CI_Controller
         if (count($data["productos_deseados"]) > 0) {
 
             $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
-            $this->app->pagina($data, get_productos_deseados($data["productos_deseados"]), 1);
+            $this->app->pagina($data, productos_deseados($data["productos_deseados"]), 1);
 
 
         } else {
 
-            $this->app->pagina($data, get_format_sin_productos(), 1);
+            $this->app->pagina($data, sin_productos(), 1);
 
         }
     }

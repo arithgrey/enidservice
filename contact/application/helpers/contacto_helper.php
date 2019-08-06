@@ -5,7 +5,6 @@ if (!function_exists('invierte_date_time')) {
         function render_contacto($data)
         {
 
-
             $ubicacion = $data["ubicacion"];
 
             $r[] = d
@@ -38,10 +37,9 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    if (!function_exists('get_format_recibe_ubicacion')) {
-        function get_format_recibe_ubicacion($servicio)
+    if (!function_exists('format_recibe_ubicacion')) {
+        function format_recibe_ubicacion($servicio)
         {
-
 
             $r[] = d(
                 btw(
@@ -58,28 +56,31 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 1
             );
-            $r[] = d(d(get_format_eleccion(), "contenedor_eleccion"), 6, 1);
-            $r[] = d(d(d(get_form_ubicacion($servicio), "contendor_in_correo top_20"), 6, 1), "contenedor_eleccion_correo_electronico");
-            $r[] = d(d(d(get_form_whatsapp($servicio), "contendor_in_correo top_20"), 6, 1), "contenedor_eleccion_whatsapp");
-            $r[] = get_form_proceso_compra();
+            $r[] = d(d(format_eleccion(), "contenedor_eleccion"), 6, 1);
+            $r[] = d(d(d(form_ubicacion($servicio), "contendor_in_correo top_20"), 6, 1), "contenedor_eleccion_correo_electronico");
+            $r[] = d(d(d(form_whatsapp($servicio), "contendor_in_correo top_20"), 6, 1), "contenedor_eleccion_whatsapp");
+            $r[] = form_proceso_compra();
             return append($r);
 
 
         }
     }
-    if (!function_exists('get_format_proceso_compra')) {
-        function get_format_proceso_compra()
+    if (!function_exists('format_proceso_compra')) {
+        function format_proceso_compra()
         {
 
-            $r[] = d(h("¿Quieres aparta tu pedido?", 2, "strong"), 1);
-            $r[] = d(get_selector_direccion(), 1);
+            $r =  [
+                 d(h("¿Quieres aparta tu pedido?", 2, "strong"), 1),
+                 d(selector_direccion(), 1)
+            ];
+
             return d(append($r), 10, 1);
 
 
         }
     }
-    if (!function_exists('get_format_eleccion')) {
-        function get_format_eleccion()
+    if (!function_exists('format_eleccion')) {
+        function format_eleccion()
         {
 
             $config = [
@@ -101,8 +102,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_selector_direccion')) {
-        function get_selector_direccion()
+    if (!function_exists('selector_direccion')) {
+        function selector_direccion()
         {
 
             $r[] = a_enid(
@@ -123,7 +124,8 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "class" => "easy_select_enid cursor_pointer selector selector_proceso",
                     "id" => 2
-                ]),
+                ]
+            ),
                 path_enid("contact")
             );
 
@@ -131,9 +133,9 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_form_proceso_compra')) {
+    if (!function_exists('form_proceso_compra')) {
 
-        function get_form_proceso_compra()
+        function form_proceso_compra()
         {
 
             $r[] = '<form action="../contact/?w=1" method="post" class="form_proceso_compra">';
@@ -149,9 +151,9 @@ if (!function_exists('invierte_date_time')) {
         function format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono)
         {
 
-            $r[] = get_format_visitanos($ubicacion);
+            $r[] = format_visitanos($ubicacion);
             $r[] = format_direccion_map($ubicacion);
-            $r[] = get_form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono);
+            $r[] = form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono);
             return append($r);
 
         }
@@ -189,9 +191,9 @@ if (!function_exists('invierte_date_time')) {
             return $response;
         }
     }
-    if (!function_exists('get_format_visitanos')) {
+    if (!function_exists('format_visitanos')) {
 
-        function get_format_visitanos($ubicacion)
+        function format_visitanos($ubicacion)
         {
 
             $response = "";
@@ -214,9 +216,9 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('get_form_ubicacion')) {
+    if (!function_exists('form_ubicacion')) {
 
-        function get_form_ubicacion($servicio)
+        function form_ubicacion($servicio)
         {
 
             $r[] = form_open("", ["class" => "form-horizontal form_correo"]);
@@ -267,9 +269,9 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    if (!function_exists('get_form_whatsapp')) {
+    if (!function_exists('form_whatsapp')) {
 
-        function get_form_whatsapp($servicio)
+        function form_whatsapp($servicio)
         {
 
             $r[] = form_open("", ["class" => "form-horizontal form_whatsapp"]);
@@ -312,14 +314,12 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_form_contactar')) {
-        function get_form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono)
+    if (!function_exists('form_contactar')) {
+        function form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono)
         {
-
 
             $response = "";
             if ($ubicacion < 1) {
-
 
                 $r[] = '<form id="form_contacto" action="../q/index.php/api/contacto/format/json/" method="post" class="top_100">';
                 $r[] = d(p("Departamento ", 'white'), 3);
@@ -449,7 +449,6 @@ if (!function_exists('invierte_date_time')) {
                 ]),
                 6);
             $r[] = form_close();
-
             return append($r);
 
         }

@@ -26,7 +26,9 @@ class Home extends CI_Controller
 
             default:
 
-                $fn = (ctype_digit($this->input->get("recibo"))) ? $this->crea_orden() : redirect(path_enid("go_home"));
+                $fn = (ctype_digit($this->input->get("recibo"))) ?
+                    $this->crea_orden() :
+                    redirect(path_enid("go_home"));
 
                 break;
 
@@ -48,16 +50,20 @@ class Home extends CI_Controller
         $data = $this->app->session("", "", "", create_url_preview("formas_pago_enid.png"));
         $id_recibo = $this->input->get("recibo");
         $data["recibo"] = $id_recibo;
-        $recibo = $this->get_recibo_forma_pago($id_recibo);
-        $this->app->pagina($data, get_format_orden($recibo), 1);
+
+        $this->app->pagina(
+            $data,
+            format_orden($this->get_recibo_forma_pago($id_recibo)),
+            1
+        );
 
     }
 
     private function get_recibo_forma_pago($id_recibo)
     {
 
-        $q = ['id_recibo' => $id_recibo];
-        return $this->app->api("recibo/resumen_desglose_pago", $q, "html");
+        return $this->app->api("recibo/resumen_desglose_pago", ['id_recibo' => $id_recibo], "html");
+
     }
 
 }

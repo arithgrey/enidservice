@@ -3,17 +3,16 @@ if (!function_exists('invierte_date_time')) {
 
 
     if (!function_exists('get_format_orden_compra')) {
-        function get_format_orden_compra($usuario, $pago, $numero_cuenta)
+        function format_orden_compra($usuario, $pago, $numero_cuenta)
         {
 
 
             $beneficiario = append([
-
-                get_campo($usuario, "nombre"),
+                pr($usuario, "nombre"),
                 " ",
-                get_campo($usuario, "apellido_paterno"),
+                pr($usuario, "apellido_paterno"),
                 " ",
-                get_campo($usuario, "apellido_materno")
+                pr($usuario, "apellido_materno")
             ]);
 
 
@@ -177,7 +176,8 @@ if (!function_exists('invierte_date_time')) {
                     "src" => "http://enidservice.com/inicio/img_tema/portafolio/logo-bbv.png",
                     "style" => "width:300px!important;"
 
-                ]);
+                ]
+            );
 
             $r[] = h($numero_cuenta, 4, ["style" => "color:blue;margin-bottom:30px;"]);
             $r[] = get_instrucciones();

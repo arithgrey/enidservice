@@ -24,29 +24,30 @@ class Inicio extends CI_Controller
             $id_usuario = $data["id_usuario"];
             switch ($action) {
                 case 0:
-                    $this->load_view_general($data,  $id_usuario);
+                    $this->general($data,  $id_usuario);
                     break;
 
                 case 1:
 
-                    $this->load_view_cuentas_usuario($data, $param, $id_usuario);
+                    $this->cuentas_usuario($data, $param, $id_usuario);
                     break;
                 case 2:
 
-                    $this->load_metodos_transferencia($data, $param, $id_usuario);
+                    $this->metodos_transferencia($data, $param, $id_usuario);
                     break;
 
                 case 3:
-                    $this->load_view_cuentas_asociadas($data, $param, $id_usuario);
+
+                    $this->cuentas_asociadas($data, $id_usuario);
                     break;
 
                 case 4:
+
                     $this->crea_cuenta($id_usuario);
                     break;
-                case 5:
 
-                    break;
                 case 6:
+
                     $this->app->pagina($data, render_agregar_saldo_cuenta(),1);
 
                     break;
@@ -114,7 +115,6 @@ class Inicio extends CI_Controller
             $prm["id_usuario"] = $id_usuario;
             $registro = $this->agregar_cuenta_bancaria($prm);
             $base_transfer = "../../movimientos/?q=transfer";
-
             $ext =  ($prm["tipo"] == 0) ?  "&action=1&error=1" : "&action=1&tarjeta=1&error=1";
             $fn =  ($registro["registro_cuenta"] > 1) ? redirect($base_transfer . "&action=3") : redirect($base_transfer . $ext);
 
@@ -127,7 +127,7 @@ class Inicio extends CI_Controller
 
     }
 
-    private function load_view_cuentas_asociadas($data, $param, $id_usuario)
+    private function cuentas_asociadas($data, $id_usuario)
     {
 
         $data +=  [
@@ -139,7 +139,7 @@ class Inicio extends CI_Controller
         $this->app->pagina($data, render_cuentas_asociadas($data) , 1 );
     }
 
-    private function load_metodos_transferencia($data, $param, $id_usuario)
+    private function metodos_transferencia($data, $param, $id_usuario)
     {
 
 
@@ -147,7 +147,7 @@ class Inicio extends CI_Controller
         $cuentas_bancarias = $this->get_cuentas_usuario($id_usuario, 0);
         $data["cuentas_gravadas"] = 0;
 
-        if (count($cuentas_bancarias) > 0) {
+        if (es_data($cuentas_bancarias) ) {
 
             $data["cuentas_gravadas"] = 1;
             $data["cuentas_bancarias"] = $cuentas_bancarias;
@@ -157,7 +157,7 @@ class Inicio extends CI_Controller
 
     }
 
-    private function load_view_cuentas_usuario($data, $param, $id_usuario)
+    private function cuentas_usuario($data, $param, $id_usuario)
     {
 
         $prm["id_usuario"] = $id_usuario;
@@ -167,12 +167,11 @@ class Inicio extends CI_Controller
         $prm = $this->input->get();
         $data["error"] =  (prm_def($prm, "error") > 0) ?  1 : 0;
         $data["seleccion"] = prm_def($param, "seleccion");
-
         $this->app->pagina($data, render_metodos_disponibles($data) ,1 );
 
     }
 
-    private function load_view_general($data, $id_usuario)
+    private function general($data, $id_usuario)
     {
 
         $data["saldo_disponible"] = $this->get_saldo_usuario($id_usuario);
@@ -183,9 +182,8 @@ class Inicio extends CI_Controller
 
     private function get_saldo_usuario($id_usuario)
     {
-        $q["id_usuario"] = $id_usuario;
-        $api = "recibo/saldo";
-        return $this->app->api($api, $q, "json", "POST");
+
+        return $this->app->api("recibo/saldo", ["id_usuario" => $id_usuario] , "json", "POST");
     }
 
     private function get_cuentas_usuario($id_usuario, $tipo)
@@ -197,27 +195,25 @@ class Inicio extends CI_Controller
             "metodos_disponibles" => 1
         ];
 
-        $api = "cuentas/usuario";
-        return $this->app->api($api, $q, "json", "POST");
+        return $this->app->api("cuentas/usuario", $q, "json", "POST");
     }
 
     private function get_bancos_disponibles($q)
     {
 
-        $api = "banco/index/format/json/";
-        return $this->app->api($api, $q);
+        return $this->app->api("banco/index/format/json/", $q);
     }
 
     private function get_recibo_por_pagar($q)
     {
-        $api = "cobranza/recibo_por_pagar/format/json/";
-        return $this->app->api($api, $q);
+
+        return $this->app->api("cobranza/recibo_por_pagar/format/json/", $q);
+
     }
 
     private function agregar_cuenta_bancaria($q)
     {
 
-        $api = "cuentas/bancaria";
-        return $this->app->api($api, $q, "json", "POST");
+        return $this->app->api("cuentas/bancaria", $q, "json", "POST");
     }
 }

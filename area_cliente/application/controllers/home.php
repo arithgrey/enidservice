@@ -14,9 +14,7 @@ class Home extends CI_Controller
     {
         $data = $this->app->session();
         $param = $this->input->get();
-        if (prm_def($param, "transfer") > 0) {
-
-        } else {
+        if (prm_def($param, "transfer") < 0) {
 
             $this->app->acceso();
             $data += [
@@ -29,6 +27,8 @@ class Home extends CI_Controller
 
             $data = $this->app->cssJs($data, "area_cliente");
             $this->app->pagina($data, render_user($data), 1);
+
+
         }
     }
 

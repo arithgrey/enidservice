@@ -19,14 +19,14 @@ if (!function_exists('invierte_date_time')) {
         function format_cuenta($id_usuario, $usuario)
         {
 
-            $r[] = d(get_format_foto_usuario($id_usuario, $usuario), ["class" => "tab-pane active", "id" => "tab_mis_datos"]);
+            $r[] = d(format_foto_usuario($id_usuario, $usuario), ["class" => "tab-pane active", "id" => "tab_mis_datos"]);
             $r[] =
                 d(
                     btw(
 
                         h("ACTUALIZAR DATOS DE ACCESO", 3)
                         ,
-                        get_form_set_password()
+                        form_set_password()
                         ,
                         4,
                         1
@@ -39,14 +39,14 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
-            $r[] = d(get_format_privacidad_seguridad(), ["class" => "tab-pane ", "id" => "tab_privacidad_seguridad"]);
+            $r[] = d(format_privacidad_seguridad(), ["class" => "tab-pane ", "id" => "tab_privacidad_seguridad"]);
             $r[] = d(get_format_calma(), ["class" => "tab-pane ", "id" => "tab_direccion"]);
             return d(append($r), "tab-content");
 
         }
     }
-    if (!function_exists('get_format_foto_usuario')) {
-        function get_format_foto_usuario($id_usuario, $usuario)
+    if (!function_exists('format_foto_usuario')) {
+        function format_foto_usuario($id_usuario, $usuario)
         {
 
             $r[] = btw(
@@ -61,8 +61,8 @@ if (!function_exists('invierte_date_time')) {
             return append($x);
         }
     }
-    if (!function_exists('get_format_privacidad_seguridad')) {
-        function get_format_privacidad_seguridad()
+    if (!function_exists('format_privacidad_seguridad')) {
+        function format_privacidad_seguridad()
         {
 
             $x[] = h("INFORMACIÓN PERSONAL", 3);
@@ -155,8 +155,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('get_form_set_password')) {
-        function get_form_set_password()
+    if (!function_exists('form_set_password')) {
+        function form_set_password()
         {
 
             $r[] = form_open("", ["id" => "form_update_password", "class" => "form-horizontal", "method" => "POST"]);
@@ -235,7 +235,7 @@ if (!function_exists('invierte_date_time')) {
                     [
                         'name' => 'lada_negocio',
                         'id' => 'lada',
-                        'value' => get_campo($usuario, 'lada_negocio'),
+                        'value' => pr($usuario, 'lada_negocio'),
                         'maxlength' => '3',
                         'minlength' => '2',
                         'class' => 'form-control input-sm input_enid lada_negocio lada2',
@@ -256,7 +256,7 @@ if (!function_exists('invierte_date_time')) {
                     [
                         'name' => 'telefono_negocio',
                         'id' => 'telefono',
-                        'value' => get_campo($usuario, 'tel_contacto_alterno'),
+                        'value' => pr($usuario, 'tel_contacto_alterno'),
                         'maxlength' => '13',
                         'minlength' => '8',
                         'class' => 'form-control input-sm input_enid telefono telefono_info_contacto_negocio tel2',
@@ -293,7 +293,7 @@ if (!function_exists('invierte_date_time')) {
                         "type" => "text",
                         "maxlength" => "3",
                         "minlength" => "2",
-                        "value" => get_campo($usuario, 'tel_lada')
+                        "value" => pr($usuario, 'tel_lada')
                     ]
                 )
                 ,
@@ -313,7 +313,7 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "text",
                     "maxlength" => "13",
                     "minlength" => "8",
-                    "value" => get_campo($usuario, 'tel_contacto')
+                    "value" => pr($usuario, 'tel_contacto')
                 ])
                 ,
                 place("registro_telefono_usuario")
@@ -321,10 +321,8 @@ if (!function_exists('invierte_date_time')) {
                 5
             );
             $r[] = btn("Actualizar", ["class" => "input_enid"], 2);
+            return form_open("", ["class" => "form_telefono_usuario"]) . append($r) . form_close();
 
-
-            $response = form_open("", ["class" => "form_telefono_usuario"]) . append($r) . form_close();
-            return $response;
 
         }
     }
@@ -342,9 +340,10 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "form-control input-sm input_enid correo_electronico",
                     "required" => "",
                     "type" => "text",
-                    "value" => get_campo($usuario, 'email'),
+                    "value" => pr($usuario, 'email'),
                     "readonly" => true
-                ]);
+                ]
+            );
 
             $r[] = d('El correo electrónico NO se mostrará públicamente', 'blue_enid ', 1);
             $r[] = form_close();
@@ -367,7 +366,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "form-control input-sm input_enid nombre_usuario",
                     "required" => true,
                     "type" => "text",
-                    "value" => get_campo($usuario, 'nombre_usuario'),
+                    "value" => pr($usuario, 'nombre_usuario'),
                     "maxlength" => "15"
                 ]
             );
@@ -393,7 +392,6 @@ if (!function_exists('invierte_date_time')) {
                 li(
                     a_enid(
                         text_icon("fa fa-address-book-o", "CUENTA")
-
                         ,
                         [
                             "href" => "#tab_mis_datos",
@@ -428,8 +426,6 @@ if (!function_exists('invierte_date_time')) {
                             "class" => 'black  base_tab_privacidad'
                         ])
                 ),
-
-
                 li(a_enid(
 
                         text_icon("fa fa-shield", "PRIVACIDAD Y SEGURIDAD"),
