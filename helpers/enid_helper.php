@@ -204,7 +204,7 @@ if (!function_exists('get_base_html')) {
 
                 case 13:
 
-                    $response = "<{$tipo} class='row'>" . $info . "</{$tipo}>";
+                    $response = "<{$tipo} class='row '>" . $info . "</{$tipo}>";
 
                     break;
 
@@ -237,106 +237,6 @@ if (!function_exists('get_base_html')) {
     }
 }
 
-
-/*
-if (!function_exists('get_base_html')) {
-    function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
-    {
-
-        if (is_numeric($attributes)) {
-            $response = "";
-            switch ($attributes) {
-                case 1:
-
-                    return addNRow($info);
-
-                    break;
-                case 2:
-
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-2 col-lg-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-2'>" . $info . "</{$tipo}>";
-
-                    break;
-                case 3:
-
-                    $response = "<{$tipo} class='col-lg-3'>" . $info . "</{$tipo}>";
-
-                    break;
-
-                case 4:
-
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-4 col-lg-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-4'>" . $info . "</{$tipo}>";
-                    break;
-                case 5:
-
-                    $response = "<{$tipo} class='col-lg-5'>" . $info . "</{$tipo}>";
-                    break;
-                case 6:
-
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-6 col-lg-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-6'>" . $info . "</{$tipo}>";
-
-                    break;
-
-                case 7:
-
-                    $response = "<{$tipo} class='col-lg-7'>" . $info . "</{$tipo}>";
-                    break;
-
-
-                case 8:
-
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-8 col-lg-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-8'>" . $info . "</{$tipo}>";
-
-                    break;
-                case 9:
-                    $response = "<{$tipo} class='col-lg-9'>" . $info . "</{$tipo}>";
-                    break;
-
-                case 10:
-
-
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-10 col-lg-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-10'>" . $info . "</{$tipo}>";
-
-                    break;
-
-                case 11:
-                    $response = "<{$tipo} class='col-lg-11'>" . $info . "</{$tipo}>";
-                    break;
-
-
-                case 12:
-
-
-                    $response = "<{$tipo} class='col-lg-12'>" . $info . "</{$tipo}>";
-
-                    break;
-
-                case 13:
-
-                    $response = "<{$tipo} class='row'>" . $info . "</{$tipo}>";
-
-                    break;
-
-
-            }
-
-            return ($frow > 0) ? $tipo($response, 13) : "";
-
-        } else {
-
-
-            $base = (is_array($attributes)) ?
-                "<{$tipo}" . add_attributes($attributes) . ">" . $info . "</{$tipo}>"
-                :
-                "<{$tipo} class='{$attributes}'>" . $info . "</{$tipo}>";
-
-
-            return ($row > 0) ? addNRow($base) : $base;
-
-        }
-
-    }
-}
-*/
 
 if (!function_exists('d')) {
     function d($info, $attributes = [], $row = 0, $frow = 0)
@@ -531,6 +431,7 @@ if (!function_exists('heading_enid')) {
 
 
             } else {
+
 
                 $label = "<h$h " . add_attributes($attributes) . ">" . $data . "</h$h>";
                 return ($row_12 > 0) ? addNRow($label) : $label;
@@ -2064,7 +1965,7 @@ function horario_enid()
 function add_text($a, $b, $f = 0)
 {
 
-    return ($f > 0) ? $a . $b : $a . " " . $b;
+    return ($f  < 0) ? $a . $b : $a . " " . $b;
 
 }
 
@@ -2197,12 +2098,76 @@ function pr($data, $index, $def = false)
     return (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0])) ? $data[0][$index] : $def;
 }
 
-function ajustar($a, $b, $horizontal = 1)
+function ajustar($a, $b, $col=0, $extra_class = '', $horizontal = 1)
 {
 
     $extra = (is_string($horizontal)) ? $horizontal : "";
-    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
-    return d(d($a) . d($b), $class);
+    $extra = ($horizontal ==  1 && $col > 0 ) ? $extra . " row " : $extra;
+    $extra =  $extra . $extra_class;
+    $class = ($horizontal > 0 ) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
+
+    switch ($col){
+
+        case 2:
+
+            $response = d(d($a ,2 ) . d($b,10), $class);
+
+            break;
+        case 3:
+
+            $response = d(d($a ,3 ) . d($b,9), $class);
+
+            break;
+
+        case 4:
+
+            $response = d(d($a ,4 ) . d($b,8), $class);
+
+            break;
+
+        case 5:
+
+            $response = d(d($a ,5 ) . d($b,7), $class);
+
+            break;
+
+        case 6:
+
+            $response = d(d($a ,6 ) . d($b,6), $class);
+
+            break;
+
+        case 7:
+
+            $response = d(d($a ,7 ) . d($b,5), $class);
+
+            break;
+
+        case 8:
+
+            $response = d(d($a ,8 ) . d($b,4), $class);
+
+            break;
+
+        case 9:
+
+            $response = d(d($a ,9 ) . d($b,3), $class);
+
+            break;
+
+        case 10:
+
+            $response = d(d($a ,10 ) . d($b,2), $class);
+
+            break;
+
+
+        default:
+
+            $response = d(d($a) . d($b), $class);
+
+    }
+    return $response;
 
 }
 

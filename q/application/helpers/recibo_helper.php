@@ -1,6 +1,60 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function notificacion_cotizacion($data)
+    {
+
+
+        $recibo = $data["recibo"];
+        $id_recibo = $data["id_recibo"];
+        $usuario_venta = $data["usuario_venta"];
+        $resumen_pedido = pr($recibo, "resumen_pedido");
+        $precio = pr($recibo, "precio");
+        $monto_a_pagar = pr($recibo, "monto_a_pagar");
+        $url_seguimiento = "../pedidos/?seguimiento=" . $id_recibo;
+
+
+        $respose[] = get_format_transaccion($id_recibo ,1);
+        $respose[] = h("VENDEDOR" ,4,"text-center");
+
+
+        $rr[]   = h(add_text(
+            strtoupper(pr($usuario_venta, "nombre"))
+            ,
+            strtoupper(pr($usuario_venta, "apellido_materno"))
+            ,
+            1
+        ),5, "top_50 letter-spacing-10 underline strong");
+
+
+        if (strlen(pr($usuario_venta, "tel_contacto")) > 4){
+
+            $respose[] = h("INFORMACIÓN DE CONTACTO" ,4,"text-center");
+            $rr[]   = h(pr($usuario_venta, "tel_contacto"),5, "top_10 ");
+        }
+
+
+        $pa[]   = d(append($rr));
+        $respose[] = d(append($pa));
+
+        $b[] = ajustar("DETALLES"  ,  $resumen_pedido,3 , "top_30 strong");
+        $b[] = ($precio > 0) ?  ajustar("PRECIO", "$" . $precio . "MXN",3,"top_10") : ajustar("PRECIO ", "SOLICITADO AL VENDEDOR",3,"top_10");
+        $b[] = ($precio > 0) ? ajustar("MONTO A PAGAR", "$" . $monto_a_pagar . "MXN",3,"top_10") : "";
+
+        $c[] = d("Total de la compra", "top_40 strong text-uppercase");
+        $c[] = ($monto_a_pagar >  0 ) ? d("$" . $monto_a_pagar . "MXN") : "COTIZACIÍÓN EN PROCESO";
+
+        $t[] = d(append($b));
+        $t[] = d(append($c));
+        $respose[] = append($t);
+        $respose[] = btn("RASTREAR COTIZACIÓN", ["href" => $url_seguimiento, "class" => "top_50 bottom_50"], 1, 1, 0, $url_seguimiento);
+
+        $_response[] = append($respose, ["style" => "margin: 0 auto;width: 66%;", "class" => "border padding_10 shadow"]);
+        return d(append($_response),6,1);
+
+
+    }
+
     function notificacion_pago_realizado($data)
     {
 
@@ -171,13 +225,25 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_transaccion($id_recibo)
+    function get_format_transaccion($id_recibo, $es_servicio=0)
     {
 
-        $r[] = d(img_enid(), "w_200");
-        $r[] = h("Detalles de la transacción", 2);
-        $r[] = h("#Recibo: " . $id_recibo, 3);
-        $r[] = hr();
+        if ($es_servicio  < 1){
+
+            $r[] = d(img_enid(), "w_200");
+            $r[] = h("Detalles de la transacción", 2);
+            $r[] = h("#Recibo: " . $id_recibo, 3);
+            $r[] = hr();
+
+        }else{
+
+            $r[] = d(d(img_enid(), "w_200 " ),"row row d-flex justify-content-center");
+            $r[] = h("Detalles ", 2, "text-center");
+            $r[] = h("#Recibo: " . $id_recibo, 3 , "text-center bottom_40");
+            $r[] = hr();
+
+        }
+
         return append($r);
 
     }
@@ -515,7 +581,7 @@ if (!function_exists('invierte_date_time')) {
                 add_text(
                     d("SALDO PENDIENTE", 'text-saldo-pendiente')
                     ,
-                    d(add_text($monto_a_liquidar,  "MXN") , "text-saldo-pendiente-monto")
+                    d(add_text($monto_a_liquidar, "MXN"), "text-saldo-pendiente-monto")
                 ) : $texto;
 
 
@@ -789,7 +855,7 @@ if (!function_exists('invierte_date_time')) {
         $resumen[] = d(get_campo($inf, "nombre_receptor"));
         $resumen[] = d(get_campo($inf, "telefono_receptor"));
 
-        return d(append($resumen),  "informacion_resumen_envio" );
+        return d(append($resumen), "informacion_resumen_envio");
 
     }
 
@@ -832,23 +898,21 @@ if (!function_exists('invierte_date_time')) {
             array_key_exists("punto_encuentro", $data_complete) &&
             es_data($data_complete["punto_encuentro"])) {
 
-
             $p = $data_complete["punto_encuentro"][0];
             $costo_envio = $p["costo_envio"];
-            $tipo = $p["tipo"];
-            $color = $p["color"];
-            $nombre_estacion = $p["nombre"];
-            $lugar_entrega = $p["lugar_entrega"];
-            $numero = "NÚMERO " . $p["numero"];
 
             $r[] = d(h("LUGAR DE ENCUENTRO", 3, "top_30 underline "), 1);
-            $x[] = d($tipo . " " . $nombre_estacion . " " . $numero . " COLOR " . $color, "top_20", 1);
-            $x[] = d("ESTACIÓN " . $lugar_entrega, "strong", 1);
+            $x[] = d($p["tipo"] . " " . $p["nombre"] . " " . "NÚMERO " . $p["numero"] . " COLOR " . $p["color"], "top_20", 1);
+            $x[] = d("ESTACIÓN " . $p["lugar_entrega"], "strong", 1);
             $x[] = d("HORARIO DE ENTREGA: " . $recibo["fecha_contra_entrega"], 1);
             $r[] = d(append($x), "contenedor_detalle_entrega");
-            $r[] = d("Recuerda que previo a la entrega de tu producto, deberás realizar el pago de " . $costo_envio . " pesos por concepto de gastos de envío", "contenedor_text_entrega border");
-        }
 
+            if ($costo_envio > 0) {
+                $r[] = d("Recuerda que previo a la entrega de tu producto, deberás realizar el 
+                pago de " . $costo_envio . " pesos por concepto 
+                de gastos de envío", "contenedor_text_entrega border");
+            }
+        }
         return append($r);
     }
 
@@ -957,7 +1021,6 @@ if (!function_exists('invierte_date_time')) {
 
 
             $id_recibo = $row["id_proyecto_persona_forma_pago"];
-
 
 
             $t = a_enid(

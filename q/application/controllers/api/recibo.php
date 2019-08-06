@@ -237,9 +237,23 @@ class recibo extends REST_Controller
                 $dc["servicio"] = $this->app->servicio($id_servicio);
 
 
-                if ($r["monto_a_pagar"] > $r["saldo_cubierto"]) {
+                if (($r["monto_a_pagar"] > $r["saldo_cubierto"]   ) || pr($dc["servicio"], "flag_servicio") >  0) {
 
-                    $response = $this->ticket_pendiente_pago($param, $recibo, $dc, $url_img);
+                    if (pr($dc["servicio"], "flag_servicio") >  0 ){
+
+                        $dc += [
+                            "usuario_venta" => $this->app->usuario($r["id_usuario_venta"]),
+                            "modalidad" => 1,
+                        ];
+
+                        $response =  notificacion_cotizacion($dc);
+
+                    }else{
+
+                        $response = $this->ticket_pendiente_pago($param, $recibo, $dc, $url_img);
+
+                    }
+
 
                 } else {
 
@@ -249,7 +263,6 @@ class recibo extends REST_Controller
                         "modalidad" => 1,
                     ];
 
-                    //return $this->load->view("cobranza/notificacion_pago_realizado", $dc);
                     $response =  notificacion_pago_realizado($dc);
 
                 }
