@@ -8,6 +8,7 @@ if (!function_exists('invierte_date_time')) {
         function render_user($data)
         {
 
+
             $action = $data["action"];
             $r[] = d(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']);
             $r[] = d(place("place_ventas_usuario"), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_mis_ventas']);
@@ -101,15 +102,13 @@ if (!function_exists('invierte_date_time')) {
     function crea_alcance($alcance)
     {
 
-        $response = "";
+        $response = [];
         if (es_data($alcance)) {
 
             $alcance = $alcance[0];
             $maximo = $alcance["maximo"];
             $minimo = $alcance["minimo"];
             $promedio = $alcance["promedio"];
-
-
 
             $a   =  [];
             $a[] = td($maximo, ["class" => 'num_alcance', "id" => $maximo]);
@@ -119,14 +118,14 @@ if (!function_exists('invierte_date_time')) {
             $r[] = tr(append($a));
 
 
-            $a   =  [];
-            $a[] = td("Tope", ["class" => 'num_alcance']);
-            $a[] = td("Promedio", ["class" => 'num_alcance']);
-            $a[] = td("Mínimo", ["class" => 'num_alcance']);
+            $b   =  [];
+            $b[] = td("Tope", ["class" => 'num_alcance']);
+            $b[] = td("Promedio", ["class" => 'num_alcance']);
+            $b[] = td("Mínimo", ["class" => 'num_alcance']);
 
-            $r[] = tr( append($a));
+            $r[] = tr( append($b) );
 
-            $response[] = h("ALCANCE DE TUS PRODUCTOS", 3);
+            $response[] = h("ALCANCE DE TUS PRODUCTOS", 3 ,[] );
             $response[] = tb(append($r));
         }
         return append($response);

@@ -13,7 +13,6 @@ if (!function_exists('invierte_date_time')) {
         $id_recibo = $data["id_recibo"];
 
 
-
         $r[] = format_resumen_pedidos($orden);
         $r[] = d(crea_estado_venta($status_ventas, $recibo), 1);
         $r[] = format_estados_venta($status_ventas, $recibo, $orden);
@@ -87,7 +86,7 @@ if (!function_exists('invierte_date_time')) {
             $fecha = (pr($servicio, "flag_servicio") > 0) ? prm_def($recibo, "fecha_servicio") :
                 (prm_def($recibo, "tipo_entrega") == 2) ? prm_def($recibo, "fecha_contra_entrega") : prm_def($recibo, "fecha_vencimiento");
 
-            $text = (pr($servicio, "flag_servicio") ) ?  "PLANEADO PARA EL DÍA " :"FECHA EN QUE SE  ESTIMADA LLEGARÁ TU PEDIDO";
+            $text = (pr($servicio, "flag_servicio")) ? "PLANEADO PARA EL DÍA " : "FECHA EN QUE SE  ESTIMADA LLEGARÁ TU PEDIDO";
             $z[] = d(h(add_text($text, $fecha), 4));
 
         }
@@ -565,9 +564,9 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d(
                 h(
-                "ORDEN #" . $recibo["id_proyecto_persona_forma_pago"],
-                1
-            ),
+                    "ORDEN #" . $recibo["id_proyecto_persona_forma_pago"],
+                    1
+                ),
                 1
 
             );
@@ -618,7 +617,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r = [];
 
-            if (es_data($recibo)){
+            if (es_data($recibo)) {
                 $rb = $recibo[0];
 
                 $r[] = input_hidden(
@@ -684,7 +683,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $response = "";
-            if (es_data($recibo)){
+            if (es_data($recibo)) {
 
 
                 if ($recibo[0]["status"] == 9 && $es_vendedor < 1 && $evaluacion == 0) {
@@ -768,7 +767,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = form_open("", ["class" => "form_fecha_entrega"]);
             $r[] = h("FECHA DE ENTREGA", 4, "strong titulo_horario_entra");
             $r[] = br();
-            $r[] = label(text_icon("fa fa-calendar-o",  " FECHA ") , "col-lg-4 control-label");
+            $r[] = label(text_icon("fa fa-calendar-o", " FECHA "), "col-lg-4 control-label");
             $r[] = d(
                 input(
                     [
@@ -782,7 +781,7 @@ if (!function_exists('invierte_date_time')) {
                     ]),
                 8);
 
-            $r[] = label(text_icon("fa fa-clock-o" , " HORA DE ENCUENTRO"), "col-lg-4 control-label");
+            $r[] = label(text_icon("fa fa-clock-o", " HORA DE ENCUENTRO"), "col-lg-4 control-label");
             $r[] = d(lista_horarios()["select"], 8);
             $r[] = input_hidden(
                 [
@@ -1097,7 +1096,7 @@ if (!function_exists('invierte_date_time')) {
                     $t = $calle . " " . " NÚMERO " .
                         $domicilio["numero_exterior"] . " NÚMERO INTERIOR " . $domicilio["numero_interior"] .
                         " COLONIA " . $domicilio["asentamiento"] . " DELEGACIÓN/MUNICIPIO " . $domicilio["municipio"] .
-                        " ESTADO " . $domicilio["estado"] . " CÓDIGO POSTAL " .  $domicilio["cp"];
+                        " ESTADO " . $domicilio["estado"] . " CÓDIGO POSTAL " . $domicilio["cp"];
 
                     $text[] = $t;
 
@@ -1212,7 +1211,7 @@ if (!function_exists('invierte_date_time')) {
         function seccion_base($status)
         {
 
-            return  d(p($status["text"], "timeline__item__content__description"), "timeline__item__content");
+            return d(p($status["text"], "timeline__item__content__description"), "timeline__item__content");
 
         }
     }
@@ -1220,7 +1219,7 @@ if (!function_exists('invierte_date_time')) {
         function get_seccion_compra($recibo, $id_recibo, $es_vendedor)
         {
 
-            $text = ($recibo["saldo_cubierto"] > 0) ? text_icon("fa fa-check" , "REALIZASTE TU COMPRA")   : "REALIZA TU COMPRA";
+            $text = ($recibo["saldo_cubierto"] > 0) ? text_icon("fa fa-check", "REALIZASTE TU COMPRA") : "REALIZA TU COMPRA";
             $url = "../area_cliente/?action=compras&ticket=" . $id_recibo;
             $url = ($es_vendedor > 0) ? "" : $url;
 
@@ -1291,7 +1290,7 @@ if (!function_exists('invierte_date_time')) {
                     break;
 
                 case 1:
-                    $text = text_icon("fa fa-check", "ORDEN REALIZADA" ) ;
+                    $text = text_icon("fa fa-check", "ORDEN REALIZADA");
                     $estado = 6;
                     break;
 
@@ -1331,6 +1330,7 @@ if (!function_exists('invierte_date_time')) {
 
             $nota = [];
             if (es_data($data)) {
+                $nota[] = br(2);
                 $nota[] = d(h("NOTAS", 4), 13);
             }
 
@@ -1338,11 +1338,9 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $n = btw(
-
-                    d(icon("fa fa-clock-o") . " " . $row["fecha_registro"], 4)
+                    d(ajustar(d(icon("fa fa-clock-o"), 6), d($row["fecha_registro"], 6)), 5)
                     ,
-
-                    d($row["comentario"], 8)
+                    d($row["comentario"], 7)
                     ,
                     "row"
 
@@ -1381,24 +1379,20 @@ if (!function_exists('invierte_date_time')) {
 
                 $r = [];
 
-                $r[] =
-                    btw(
-
-                        d($row["descripcion"], 9)
-                        ,
-                        d(input($config), 3)
-                        ,
-                        "row"
-
-                    );
+                $r[] = d(ajustar(
+                    d(p($row["descripcion"],"text-justify"), 9)
+                    ,
+                    d(input($config), 3)
+                ), 13);
 
                 $r[] = btw(
 
-                    d(text_icon("fa fa-clock-o", $row["fecha_cordatorio"])    , 1)
+                    d(text_icon("fa fa-clock-o", $row["fecha_cordatorio"]), 1)
                     ,
                     d($row["tipo"], 1)
                     ,
-                    "row"
+                    "top_30 bottom_10"
+
                 );
 
 
@@ -1449,7 +1443,7 @@ if (!function_exists('invierte_date_time')) {
                 $text_producto =
                     d(
 
-                        add_text($recibo["precio"] , "MXN"),
+                        add_text($recibo["precio"], "MXN"),
                         "text_precio_producto"
 
                     );
@@ -1832,7 +1826,7 @@ if (!function_exists('invierte_date_time')) {
             if (es_data($recibo)):
                 $recibo = $recibo[0];
 
-                $url = path_enid("pedidos", "/?costos_operacion=" . $id_recibo . "&saldado=" .  $recibo["saldo_cubierto"]);
+                $url = path_enid("pedidos", "/?costos_operacion=" . $id_recibo . "&saldado=" . $recibo["saldo_cubierto"]);
                 return d(a_enid("COSTO DE OPERACIÓN", ["href" => $url]), 1);
             endif;
         }
