@@ -5,8 +5,7 @@ if (!function_exists('invierte_date_time')) {
     function format_domicilio_resumen($data)
     {
         $r[] = d(
-            a_enid(icon("fa fa-pencil"),
-                ["class" => "a_enid_blue editar_direccion_persona"]
+            a_enid(icon("fa fa-pencil"), ["class" => "a_enid_blue editar_direccion_persona"]
             )
             ,
             "text-right"
@@ -48,7 +47,6 @@ if (!function_exists('invierte_date_time')) {
 
         foreach ($info_envio_direccion as $row) {
 
-            //$direccion = $row["direccion"];
             $calle = $row["calle"];
             $entre_calles = $row["entre_calles"];
             $numero_exterior = $row["numero_exterior"];
@@ -59,8 +57,6 @@ if (!function_exists('invierte_date_time')) {
             $estado = $row["estado"];
             $flag_existe_direccion_previa++;
             $direccion_visible = "";
-            //$id_codigo_postal = $row["id_codigo_postal"];
-            //$pais = "";
             $nombre_receptor = $row["nombre_receptor"];
             $telefono_receptor = $row["telefono_receptor"];
         }
@@ -159,12 +155,13 @@ if (!function_exists('invierte_date_time')) {
             btw(
                 d("Delegación o Municipio", ["class" => "label-off", "for" => "dwfrm_profile_address_district"])
                 ,
-                d(input([
+                d(
+                    input([
                     "type" => "text",
                     "name" => "delegacion",
                     "value" => $municipio,
                     "readonly" => "true"
-                ]), ["class" => "place_delegaciones_info"])
+                ]),  "place_delegaciones_info")
                 ,
                 "value"
 
@@ -184,8 +181,7 @@ if (!function_exists('invierte_date_time')) {
                         "readonly" => "true"
                     ]
                 ),
-                ["class" => "place_estado_info"]
-
+                 "place_estado_info"
             )
             ,
             "value"
@@ -437,7 +433,8 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "id_recibo",
                 "value" => $id_recibo,
                 "class" => "id_recibo"
-            ]);
+            ]
+        );
 
         $r[] = btn("Registrar dirección ", ['class' => "text_btn_direccion_envio top_30 bottom_20"]);
         $r[] = place("notificacion_direccion");
@@ -555,6 +552,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    /*
     function val_btn_pago($param, $id_recibo)
     {
 
@@ -598,5 +596,6 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
 
     }
+    */
 
 }

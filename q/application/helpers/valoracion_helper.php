@@ -214,7 +214,6 @@ if (!function_exists('invierte_date_time')) {
         $z[] = form_open("", ["class" => "form_valoracion top_30"]);
         $z[] = append($r);
         $z[] = form_close();
-
         return append($z);
 
     }
@@ -267,13 +266,13 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    /*
     function get_texto_por_modalidad($modalidad)
     {
 
         return ($modalidad == 1) ? " TU HISTORIAL DE COMPRAS " : "TU HISTORIAL DE VENTAS";
 
     }
-
     function ver_totalidad_por_modalidad($modalidad, $total)
     {
 
@@ -282,6 +281,7 @@ if (!function_exists('invierte_date_time')) {
             $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
 
     }
+    */
 
     function crea_estrellas($calificacion, $sm = 0)
     {
@@ -482,7 +482,8 @@ if (!function_exists('invierte_date_time')) {
                     "value" => $x,
                     "class" => 'input-start',
                     "type" => "radio"
-                ]);
+                ]
+            );
 
             $response[] = label("★",
                 [

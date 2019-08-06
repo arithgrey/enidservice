@@ -7,10 +7,12 @@ if (!function_exists('invierte_date_time')) {
 
 
         $solicitud_saldo = $data["solicitud_saldo"];
-
         $_response[] = d(h("ULTIMOS MOVIMIENTOS", 1, "titulo_enid"), "jumbotron");
+
         if (count($solicitud_saldo) > 0):
+
             $_response[] = d("SOLICITUDES DE SALDO A TUS AMIGOS", 'titulo_enid_sm_sm');
+
         endif;
 
 
@@ -39,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
                     )
                 );
 
-            $r[] = td($row["monto_solicitado"] . "MXN", ["class" => 'monto_solicitud_text']);
+            $r[] = td($row["monto_solicitado"] . "MXN",  'monto_solicitud_text');
 
             $response[] = tr(append($r));
             $re[] = tb(append($response));
@@ -52,51 +54,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_ticket_desarrollo($data)
-    {
-
-        $info_tickets = $data["info_tickets"];
-        $r[] = h("# Resultados " . count($info_tickets), 3);
-        $response = [];
-        foreach ($info_tickets as $row) {
-
-            $id_ticket = $row["id_ticket"];
-
-
-            $tareas_pendientes = [
-                "class" => 'strong white ver_detalle_ticket a_enid_black_sm',
-                "id" => $id_ticket
-            ];
-
-
-            $t[] = get_img_usuario($row["id_usuario"]);
-            $t[] = d($row["asunto"]);
-            $t[] = d("#Tareas pendientes:" . $row["num_tareas_pendientes"],
-                $tareas_pendientes,
-                ["class" => "cursor_pointer"]
-            );
-
-            $r[] = d(append($t), "popup-head-left pull-left");;
-
-            $z[] = btn(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]);
-            $z[] = d(
-                a_enid("CERRAR TICKET",
-                    [
-                        "class" => "cerrar_ticket",
-                        "onClick" => "cerrar_ticket({$id_ticket})"
-                    ]
-                ), "dropdown-menu acciones_ticket");;
-
-            $r[] = d(append($z), "dropdown pull-right");
-
-            $response[] = d(d(append($r), "popup-head"), ["class" => "popup-box chat-popup", "id" => "qnimate"]);
-
-
-        }
-        return append($response);
-
-
-    }
 
     function format_tablero($tickets)
     {
@@ -235,12 +192,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function valida_tipo_usuario_tarea($id_perfil)
-    {
-
-        return val_class($id_perfil, 20, "Cliente", "Equipo Enid Service");
-
-    }
 
     function form_cancelar_compra($recibo, $modalidad)
     {
@@ -302,55 +253,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
         return append($r);
-    }
-
-    function create_notificacion_ticket($info_usuario, $param, $info_ticket)
-    {
-
-
-        if (es_data($info_usuario)) {
-
-            $u = $info_usuario[0];
-            $nombre_usuario = $u["nombre"] . " " . $u["apellido_paterno"] . $u["apellido_materno"] . " -  " . $u["email"];
-
-
-            $asunto_email = "Nuevo ticket abierto [" . $param["ticket"] . "]";
-            $r[] = d("Nuevo ticket abierto [" . $param["ticket"] . "]");
-            $r[] = d("Cliente que solicita " . $nombre_usuario . "");
-
-            $lista_prioridades = ["", "Alta", "Media", "Baja"];
-
-            $asunto = "";
-            $mensaje = "";
-            $prioridad = "";
-            $nombre_departamento = "";
-
-            foreach ($info_ticket as $row) {
-
-                $asunto = $row["asunto"];
-                $mensaje = $row["mensaje"];
-                $prioridad = $row["prioridad"];
-                $nombre_departamento = $row["nombre_departamento"];
-
-            }
-
-            $r[] = d("Prioridad: " . $lista_prioridades[$prioridad]);
-            $r[] = d("Departamento a quien está dirigido: " . $nombre_departamento);
-            $r[] = d("Asunto:" . $asunto);
-            $r[] = d("Reseña:" . $mensaje);
-
-
-            $response = [
-                "info_correo" => append($r),
-                "asunto" => $asunto_email,
-            ];
-
-
-            return $response;
-
-
-        }
-
     }
 
     function crea_tabla_resumen_ticket($info_ticket, $num_tareas)
@@ -556,4 +458,109 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
 
     }
+    /*
+ *
+function format_ticket_desarrollo($data)
+{
+
+    $info_tickets = $data["info_tickets"];
+    $r[] = h("# Resultados " . count($info_tickets), 3);
+    $response = [];
+    foreach ($info_tickets as $row) {
+
+        $id_ticket = $row["id_ticket"];
+
+
+        $tareas_pendientes = [
+            "class" => 'strong white ver_detalle_ticket a_enid_black_sm',
+            "id" => $id_ticket
+        ];
+
+
+        $t[] = get_img_usuario($row["id_usuario"]);
+        $t[] = d($row["asunto"]);
+        $t[] = d("#Tareas pendientes:" . $row["num_tareas_pendientes"],
+            $tareas_pendientes,
+            ["class" => "cursor_pointer"]
+        );
+
+        $r[] = d(append($t), "popup-head-left pull-left");;
+
+        $z[] = btn(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]);
+        $z[] = d(
+            a_enid("CERRAR TICKET",
+                [
+                    "class" => "cerrar_ticket",
+                    "onClick" => "cerrar_ticket({$id_ticket})"
+                ]
+            ), "dropdown-menu acciones_ticket");;
+
+        $r[] = d(append($z), "dropdown pull-right");
+
+        $response[] = d(d(append($r), "popup-head"), ["class" => "popup-box chat-popup", "id" => "qnimate"]);
+
+
+    }
+    return append($response);
+
+
+}
+function valida_tipo_usuario_tarea($id_perfil)
+{
+
+    return val_class($id_perfil, 20, "Cliente", "Equipo Enid Service");
+
+}
+        function create_notificacion_ticket($info_usuario, $param, $info_ticket)
+    {
+
+
+        if (es_data($info_usuario)) {
+
+            $u = $info_usuario[0];
+            $nombre_usuario = $u["nombre"] . " " . $u["apellido_paterno"] . $u["apellido_materno"] . " -  " . $u["email"];
+
+
+            $asunto_email = "Nuevo ticket abierto [" . $param["ticket"] . "]";
+            $r[] = d("Nuevo ticket abierto [" . $param["ticket"] . "]");
+            $r[] = d("Cliente que solicita " . $nombre_usuario . "");
+
+            $lista_prioridades = ["", "Alta", "Media", "Baja"];
+
+            $asunto = "";
+            $mensaje = "";
+            $prioridad = "";
+            $nombre_departamento = "";
+
+            foreach ($info_ticket as $row) {
+
+                $asunto = $row["asunto"];
+                $mensaje = $row["mensaje"];
+                $prioridad = $row["prioridad"];
+                $nombre_departamento = $row["nombre_departamento"];
+
+            }
+
+            $r[] = d("Prioridad: " . $lista_prioridades[$prioridad]);
+            $r[] = d("Departamento a quien está dirigido: " . $nombre_departamento);
+            $r[] = d("Asunto:" . $asunto);
+            $r[] = d("Reseña:" . $mensaje);
+
+
+            $response = [
+                "info_correo" => append($r),
+                "asunto" => $asunto_email,
+            ];
+
+
+            return $response;
+
+
+        }
+
+    }
+
+
+*/
+
 }
