@@ -33,29 +33,32 @@ class Home extends CI_Controller
 
     private function create_vista($data, $id_usuario, $prm)
     {
-        $data_recomendacion = $this->busqueda_recomendacion($prm);
+        $recomendacion = $this->busqueda_recomendacion($prm);
         if ($data["in_session"] == 1) {
             $id_usuario_actual = $data["id_usuario"];
             $this->notifica_lectura($id_usuario, $id_usuario_actual);
         }
 
-        $resumen_recomendacion = $data_recomendacion["info_valoraciones"];
-        $prm["page"] = prm_def($this->input->get(), "page");
-        $prm["resultados_por_pagina"] = 5;
-        $resumen_valoraciones_vendedor = $this->resumen_valoraciones_vendedor($prm);
-        $prm["totales_elementos"] = $data_recomendacion["data"][0]["num_valoraciones"];
+        $prm =  [
+            "page" => prm_def($this->input->get(), "page"),
+            "resultados_por_pagina" => 5
+        ];
+
+        $prm["totales_elementos"] = $recomendacion["data"][0]["num_valoraciones"];
 
         $data["paginacion"] = "";
         if ($prm["totales_elementos"] > $prm["resultados_por_pagina"]) {
-
             $prm["per_page"] = 5;
             $prm["q"] = $id_usuario;
             $data["paginacion"] = $this->get_paginacion($prm);
         }
 
 
-        $data = $this->app->cssJs($data, "recomendacion_vista");
-        $response = get_formar_recomendacion($data, $resumen_recomendacion, $resumen_valoraciones_vendedor);
+        $response = format_recomendacion(
+            $this->app->cssJs($data, "recomendacion_vista"),
+            $recomendacion["info_valoraciones"],
+            $this->resumen_valoraciones_vendedor($prm)
+        );
         $this->app->pagina($data, $response, 1);
 
     }
@@ -72,8 +75,7 @@ class Home extends CI_Controller
 
         if ($id_usuario === $id_usuario_valoracion) {
 
-            $q["id_usuario"] = $id_usuario;
-            $this->app->api("valoracion/lectura/format/json/", $q, 'json', 'PUT');
+            $this->app->api("valoracion/lectura/format/json/", ["id_usuario" => $id_usuario], 'json', 'PUT');
         }
     }
 

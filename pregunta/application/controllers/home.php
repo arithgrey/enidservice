@@ -104,8 +104,8 @@ class Home extends CI_Controller
     {
 
         $preguntas = $this->get_preguntas_hechas_cliente($id_usuario, $id_pregunta);
-        $data["preguntas_format"] = get_format_preguntas($preguntas, 0);
-        $response = get_format_listado(get_format_preguntas($preguntas, 0));
+        $data["preguntas_format"] = format_preguntas($preguntas, 0);
+        $response = get_format_listado(format_preguntas($preguntas, 0));
         $this->app->pagina($this->app->cssJs($data, "pregunta_hechas"), $response, 1);
 
 
@@ -131,7 +131,7 @@ class Home extends CI_Controller
     {
 
         $preguntas = $this->get_preguntas_recibidas_vendedor($id_usuario, $id_pregunta);
-        $response = get_format_listado(get_format_preguntas($preguntas, 1));
+        $response = get_format_listado(format_preguntas($preguntas, 1));
         $this->app->pagina($this->app->cssJs($data, "pregunta_recibida"), $response, 1);
 
 

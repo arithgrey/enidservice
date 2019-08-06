@@ -54,6 +54,7 @@ class Inicio extends CI_Controller
                     $fn = ($data["id_perfil"] == 20) ? $this->app->out() : "";
 
                 }
+
                 $data["extra_servicio"] = $param["servicio"];
             } else {
                 $this->app->out();
@@ -71,8 +72,8 @@ class Inicio extends CI_Controller
     private function get_top_servicios_usuario($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("servicio/top_semanal_vendedor/format/json/", $q);
+        return $this->app->api("servicio/top_semanal_vendedor/format/json/", ["id_usuario" => $id_usuario]);
+
     }
 
     private function get_orden()

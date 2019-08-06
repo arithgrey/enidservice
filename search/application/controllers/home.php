@@ -41,7 +41,7 @@ class Home extends CI_Controller
             create_url_preview("promo.png")
         );
 
-        $q = (array_key_exists("q", $param)) ? $param["q"] : "";
+        $q = prm_def($param, "q", "");
         $per_page = 16;
 
         $data_send = [
@@ -59,13 +59,13 @@ class Home extends CI_Controller
         $data["servicios"] = $servicios = $this->busqueda_producto_por_palabra_clave($data_send);
 
         $fn = (prm_def($servicios, "total_busqueda") > 0) ?
-            $this->muetra_servicios($data, $param, $q, $data_send, $servicios, $per_page) :
-            $this->muestra_sin_resultados($param, $data);
+            $this->servicios($data, $param, $q, $data_send, $servicios, $per_page) :
+            $this->sin_resultados($param, $data);
 
 
     }
 
-    private function muestra_sin_resultados($param, $data)
+    private function sin_resultados($param, $data)
     {
 
         $data["css"] = ["search_sin_encontrar.css"];
@@ -74,7 +74,7 @@ class Home extends CI_Controller
 
     }
 
-    private function muetra_servicios($data, $param, $q, $data_send, $servicios, $per_page)
+    private function servicios($data, $param, $q, $data_send, $servicios, $per_page)
     {
 
         $data["url_request"] = get_url_request("");
@@ -103,7 +103,6 @@ class Home extends CI_Controller
             );
 
         $this->set_option("in_session", 0);
-
 
         $callback = function ($n) {
 
@@ -225,8 +224,12 @@ class Home extends CI_Controller
     {
         $response =  [];
         if (es_data($clasificaciones)){
-            $q["clasificaciones"] =  implode("," , $clasificaciones);
-            $response =  $this->app->api("clasificacion/in/format/json/", $q);
+
+            $response =  $this->app->api("clasificacion/in/format/json/",
+                [
+                    "clasificaciones" => implode("," , $clasificaciones)
+                ]
+            );
 
         }
         return $response;
@@ -255,7 +258,6 @@ class Home extends CI_Controller
         ];
 
     }
-
 
     private function create_keyword($q)
     {

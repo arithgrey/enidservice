@@ -12,8 +12,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('get_format_preguntas')) {
-        function get_format_preguntas($preguntas, $es_vendedor)
+    if (!function_exists('format_preguntas')) {
+        function format_preguntas($preguntas, $es_vendedor)
         {
 
             $r = [];
@@ -22,8 +22,6 @@ if (!function_exists('invierte_date_time')) {
                 $pregunta = $row["pregunta"];
                 $fecha_registro = $row["fecha_registro"];
                 $id_servicio = $row["id_servicio"];
-                //$id_vendedor = $row["id_vendedor"];
-                //$id_usuario = $row["id_usuario"];
                 $id_pregunta = $row["id_pregunta"];
                 $num = $row["num"];
 

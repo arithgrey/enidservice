@@ -1919,14 +1919,11 @@ if (!function_exists('invierte_date_time')) {
             $direccion = "";
             foreach ($domicilio as $row) {
 
-                $calle = $row["calle"];
-                $numero_exterior = $row["numero_exterior"];
-                $numero_interior = $row["numero_interior"];
-                $cp = $row["cp"];
-                $asentamiento = $row["asentamiento"];
-                $municipio = $row["municipio"];
-                $estado = $row["estado"];
-                $direccion = $calle . " " . " NÚMERO " . $numero_exterior . " NÚMERO INTERIOR " . $numero_interior . " COLONIA " . $asentamiento . " DELEGACIÓN/MUNICIPIO " . $municipio . " ESTADO " . $estado . " CÓDIGO POSTAL " . $cp;
+                $direccion = $row["calle"] . " " .
+                    " NÚMERO " . $row["numero_exterior"] .
+                    " NÚMERO INTERIOR " . $row["numero_interior"] .
+                    " COLONIA " . $row["asentamiento"] . " DELEGACIÓN/MUNICIPIO " .
+                    $row["municipio"] . " ESTADO " . $row["estado"] . " CÓDIGO POSTAL " . $row["cp"];
 
             }
             $encabezado = d("DOMICIO DEL ENVIO", "encabezado_domicilio", 1);
@@ -1942,29 +1939,22 @@ if (!function_exists('invierte_date_time')) {
             if (es_data($usuario)) {
 
                 $usuario = $usuario[0];
-                $nombre = $usuario["nombre"];
-                $apellido_paterno = $usuario["apellido_paterno"];
-                $apellido_materno = $usuario["apellido_materno"];
-                $email = $usuario["email"];
-                $telefono = $usuario["tel_contacto"];
-                $id_usuario = $usuario["id_usuario"];
-                $sexo = $usuario["sexo"];
                 $action = "../../q/index.php/api/usuario/index/format/json/";
                 $attr = ["METHOD" => "PUT", "id" => "form_set_usuario", "class" => "border form_set_usuario padding_10 shadow"];
                 $form[] = form_open($action, $attr);
                 $form[] = d(h("Cliente", 3), 1);
                 $form[] = d("NOMBRE:", "top_10", 1);
-                $form[] = input(["name" => "nombre", "value" => $nombre, "type" => "text", "required" => "true"]);
+                $form[] = input(["name" => "nombre", "value" => $usuario["nombre"], "type" => "text", "required" => "true"]);
                 $form[] = d("APELLIDO PATERNO:", "top_10", 1);
-                $form[] = input(["name" => "apellido_paterno", "value" => $apellido_paterno, "type" => "text"]);
+                $form[] = input(["name" => "apellido_paterno", "value" => $usuario["apellido_paterno"], "type" => "text"]);
                 $form[] = d("APELLIDO MATERNO:", "top_10", 1);
-                $form[] = input(["name" => "apellido_materno", "value" => $apellido_materno, "type" => "text"]);
+                $form[] = input(["name" => "apellido_materno", "value" => $usuario["apellido_materno"], "type" => "text"]);
                 $form[] = d("EMAIL:", "top_10", 1);
 
 
                 $form[] = input([
                     'name' => 'email',
-                    'value' => $email,
+                    'value' => $usuario["email"],
                     "required" => "true",
                     "class" => "input-sm email email",
                     "onkeypress" => "minusculas(this);"
@@ -1972,7 +1962,7 @@ if (!function_exists('invierte_date_time')) {
                 $form[] = d("TELÉFONO:", " top_10", 1);
                 $form[] = input([
                     'name' => 'tel_contacto',
-                    'value' => $telefono,
+                    'value' => $usuario["tel_contacto"],
                     "required" => "true",
                     'type' => "tel",
                     "maxlength" => 13,
@@ -1980,7 +1970,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "form-control input-sm  telefono telefono_info_contacto"
                 ]);
                 $form[] = input([
-                    "value" => $id_usuario,
+                    "value" =>  $usuario["id_usuario"],
                     "name" => "id_usuario",
                     "type" => "hidden"
 
@@ -2000,7 +1990,7 @@ if (!function_exists('invierte_date_time')) {
                     "text" => "Indefinido",
                     "val" => 2
                 );
-                $form[] = d(create_select($opt, "sexo", "sexo", "sexo", "text", "val", 1, $sexo), "top_20");
+                $form[] = d(create_select($opt, "sexo", "sexo", "sexo", "text", "val", 1, $usuario["sexo"]), "top_20");
                 $form[] = btn("GUARDAR", ["class" => "top_30 bottom_50"]);
                 $form[] = form_close(place("place_form_set_usuario"));
                 $f = addNRow(append($form), ["id" => "contenedor_form_usuario"]);

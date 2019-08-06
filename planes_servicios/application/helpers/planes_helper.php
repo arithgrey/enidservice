@@ -9,10 +9,6 @@ if (!function_exists('invierte_date_time')) {
             $is_mobile = $data["is_mobile"];
             $action = $data["action"];
             $top_servicios = $data["top_servicios"];
-            $list_orden = $data["list_orden"];
-            $ciclo_facturacion = $data["ciclo_facturacion"];
-            $error_registro = $data["error_registro"];
-            $extra_servicio = $data["extra_servicio"];
             $considera_segundo = $data["considera_segundo"];
 
 
@@ -26,13 +22,12 @@ if (!function_exists('invierte_date_time')) {
             );
             $r[] = d(append($t), 2);
 
-            $z[] = d(format_articulos_venta($list_orden), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_servicios']);
+            $z[] = d(format_articulos_venta($data["list_orden"]), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_servicios']);
             $z[] = d(format_puntos_venta(), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_puntos_venta']);
-            $z[] = d(form_ventas($ciclo_facturacion, $error_registro, $is_mobile), ["class" => "tab-pane  " . valida_active_tab(1, $action), "id" => 'tab_form_servicio']);
-
+            $z[] = d(form_ventas($data["ciclo_facturacion"], $data["error_registro"], $is_mobile), ["class" => "tab-pane  " . valida_active_tab(1, $action), "id" => 'tab_form_servicio']);
             $r[] = d(d(append($z), "tab-content"), 10);
             $r[] = d(get_top_articulos($top_servicios, $is_mobile), 2);
-            $r[] = get_formar_hiddens($is_mobile, $action, $extra_servicio, $id_perfil);
+            $r[] = get_formar_hiddens($is_mobile, $action, $data["extra_servicio"], $id_perfil);
 
             return append($r);
         }
@@ -101,7 +96,6 @@ if (!function_exists('invierte_date_time')) {
             );
             $r[] = d(
 
-
                 append([
                     h(
                         "CICLO DE FACTURACIÓN",
@@ -157,7 +151,10 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 "col-lg-3 contenedor_precio seccion_menu_tipo_servicio top_30"
             );
-            $r[] = d(btn("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]), ["class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50']);
+            $r[] = d(btn("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]),
+                [
+                    "class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50'
+                ]);
             $r[] = form_close();
             $re[] = d(append($r), "contenedor_agregar_servicio_form top_30");
             $re[] = get_selector_categoria($is_mobile);
@@ -177,10 +174,8 @@ if (!function_exists('invierte_date_time')) {
 
                 foreach ($top as $row) {
 
-
                     $nombre = $row["nombre_servicio"];
-                    $titulo_corto = substr($nombre, 0, 18) . "...";
-                    $articulo = (strlen($nombre) > 18) ? $titulo_corto : $nombre;
+                    $articulo = (strlen($nombre) > 18) ? substr($nombre, 0, 18) . "..." : $nombre;
 
                     $link =
                         a_enid($articulo,
@@ -191,11 +186,7 @@ if (!function_exists('invierte_date_time')) {
                         );
 
 
-                    $response[] = btw(
-                        $link,
-                        $row["vistas"],
-                        "display_flex_enid"
-                    );
+                    $response[] = ajustar($link, $row["vistas"]);
 
                 }
             }
@@ -234,7 +225,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $r[] = d("BUSCAR ENTRE TUS ARTÍCULOS", "col-lg-4 align-self-center");
-            $r[] = d(get_list_orden($list_orden), 4);
+            $r[] = d(list_orden($list_orden), 4);
             $r[] = d(
                 input([
                         "id" => "textinput",
@@ -250,8 +241,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('get_list_orden')) {
-        function get_list_orden($list_orden)
+    if (!function_exists('list_orden')) {
+        function list_orden($list_orden)
         {
 
             $r[] = '<select class="form-control" name="orden" id="orden">';
@@ -289,12 +280,7 @@ if (!function_exists('invierte_date_time')) {
                         ]);
 
 
-                    $r[] = a_enid(
-                        append($r),
-                        [
-                            "href" => path_enid("producto", $row['id_servicio'])
-                        ]
-                    );
+                    $r[] = a_enid(append($r), path_enid("producto", $row['id_servicio']));
 
                 endforeach;
 
@@ -319,7 +305,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $r[] = h('SELECIONA LAS CATEGORÍAS', 3);
                 $r[] = hr();
-                $r[] = get_places(0);
+                $r[] = places(0);
 
 
             } else {
@@ -334,11 +320,11 @@ if (!function_exists('invierte_date_time')) {
                     ],
                     1);
                 $r[] = hr();
-                $r[] = get_places();
+                $r[] = places();
 
             }
 
-            return d(append($r), ["class" => "contenedor_categorias_servicios"]);
+            return d(append($r), "contenedor_categorias_servicios" );
 
         }
     }
@@ -376,8 +362,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_places')) {
-        function get_places($class = 1)
+    if (!function_exists('places')) {
+        function places($class = 1)
         {
 
             $response = "";

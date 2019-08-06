@@ -8,8 +8,8 @@ if (!function_exists('invierte_date_time')) {
 
             $in_session = $data["in_session"];
             $r[] = place("info_articulo", ["id" => 'info_articulo']);
-            $z[] = d(validate_text_title($in_session, $data["is_mobile"], 1), "top_100");
-            $z[] = d(get_form_contacto_servicio($in_session, $data["servicio"]), "bottom_100 top_50");
+            $z[] = d(str_title($in_session, $data["is_mobile"], 1), "top_100");
+            $z[] = d(frm_contacto_servicio($in_session, $data["servicio"]), "bottom_100 top_50");
             $z[] = place("place_registro_afiliado");
             $r[] = d(d(append($z), "contenedo_compra_info"), "contenedor_compra");
             return addNRow(d(d(append($r), 6, 1), "bottom_100"));
@@ -22,53 +22,48 @@ if (!function_exists('invierte_date_time')) {
 
 
             $servicio = $data["servicio"];
-            $info_solicitud_extra = $data["info_solicitud_extra"];
+            $inf_ext = $data["info_solicitud_extra"];
             $costo_envio = $data["costo_envio"];
             $is_mobile = $data["is_mobile"];
-            $carro_compras = $data["carro_compras"];
-            $id_carro_compras = $data["id_carro_compras"];
-            $email = $data["email"];
             $q2 = $data["q2"];
             $in_session = $data["in_session"];
-
-            $producto = create_resumen_servicio($servicio, $info_solicitud_extra);
-            $ciclos_solicitados = $info_solicitud_extra["num_ciclos"];
-            $resumen_producto = $producto["resumen_producto"];
-            $resumen_servicio_info = $producto["resumen_servicio_info"];
-            $monto_total = floatval(pr($servicio, "precio")) * floatval($ciclos_solicitados);
+            $producto = desglose_servicio($servicio, $inf_ext);
+            $monto_total = floatval(pr($servicio, "precio")) * floatval($inf_ext["num_ciclos"]);
             $costo_envio_cliente = 0;
             $text_envio = "";
             if (pr($servicio, "flag_servicio") < 1) {
                 $costo_envio_cliente = $costo_envio["costo_envio_cliente"];
                 $text_envio = $costo_envio["text_envio"]["cliente"];
             }
-            $monto_total_con_envio = $monto_total + $costo_envio_cliente;
 
-            $info_ext = $info_solicitud_extra;
-            $plan = $info_ext["plan"];
-            $num_ciclos = $info_ext["num_ciclos"];
-            $ciclo_facturacion = $info_ext["ciclo_facturacion"];
-            $talla = (array_key_exists("talla", $info_solicitud_extra)) ? $info_solicitud_extra["talla"] : 0;
-
-
+            $ext = $inf_ext;
+            $talla = (array_key_exists("talla", $inf_ext)) ? $inf_ext["talla"] : 0;
             $r[] = n_row_12();
             $r[] = place("info_articulo", ["id" => 'info_articulo']);
             $z[] = get_format_resumen(
-                $resumen_producto,
+                $producto["resumen_producto"],
                 $text_envio,
-                $resumen_servicio_info,
+                $producto["resumen_servicio_info"],
                 $monto_total,
                 $costo_envio_cliente,
-                $monto_total_con_envio,
+                ($monto_total + $costo_envio_cliente),
                 $in_session
             );
-            $z[] = validate_text_title($in_session, $is_mobile);
+            $z[] = str_title($in_session, $is_mobile);
             $z[] = form_open("", ["class" => "form-miembro-enid-service", "id" => "form-miembro-enid-service"]);
-            $z[] = get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla, $carro_compras, $id_carro_compras);
-            $z[] = get_format_form_primer_registro($in_session, $is_mobile, $info_ext);
+            $z[] = frm_miembro_enid_service_hidden(
+                $q2,
+                $ext["plan"],
+                $ext["num_ciclos"],
+                $ext["ciclo_facturacion"],
+                $talla,
+                $data["carro_compras"],
+                $data["id_carro_compras"]
+            );
+            $z[] = frm_primer_registro($in_session, $is_mobile, $ext);
             $z[] = place("place_registro_afiliado");
             $z[] = hr();
-            $z[] = input_hidden(["value" => $email, "class" => 'email_s']);
+            $z[] = input_hidden(["value" => $data["email"], "class" => 'email_s']);
             $r[] = d(d(d(append($z), "contenedo_compra_info"), "contenedor_compra"), 6, 1);
             $r[] = end_row();
             return append($r);
@@ -78,8 +73,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    if (!function_exists('validate_text_title')) {
-        function validate_text_title($in_session, $is_mobile, $es_servicio = 0)
+    if (!function_exists('str_title')) {
+        function str_title($in_session, $is_mobile, $es_servicio = 0)
         {
             $text = ($in_session == 0 && $is_mobile == 0) ? h("¿CON QUIEN NOS COMUNICAMOS?", 3) : "";
             if ($es_servicio > 0) {
@@ -92,13 +87,11 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    if (!function_exists('get_format_form_primer_registro')) {
+    if (!function_exists('frm_primer_registro')) {
 
 
-        function get_format_form_primer_registro($in_session, $is_mobile, $info_ext)
+        function frm_primer_registro($in_session, $is_mobile, $info_ext)
         {
-
-
             $r = [];
             if ($in_session < 1) {
 
@@ -123,7 +116,6 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = d(
                     append(
                         [
-
                             d("Correo Electrónico  *")
                             ,
                             d(
@@ -181,7 +173,7 @@ if (!function_exists('invierte_date_time')) {
                     ,
                     1);
 
-                $r[] = get_text_acceder_cuenta($is_mobile, $info_ext);
+                $r[] = text_acceder_cuenta($info_ext);
                 $r[] = "</div >";
                 $r[] = "</div >";
                 $r[] = place("place_config_usuario");
@@ -192,10 +184,10 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    if (!function_exists('get_form_contacto_servicio')) {
+    if (!function_exists('frm_contacto_servicio')) {
 
 
-        function get_form_contacto_servicio($in_session, $servicio)
+        function frm_contacto_servicio($in_session, $servicio)
         {
 
             $servicio = $servicio[0];
@@ -484,9 +476,9 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('get_form_miembro_enid_service_hidden')) {
+    if (!function_exists('frm_miembro_enid_service_hidden')) {
 
-        function get_form_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla, $carro_compras, $id_carro_compras)
+        function frm_miembro_enid_service_hidden($q2, $plan, $num_ciclos, $ciclo_facturacion, $talla, $carro_compras, $id_carro_compras)
         {
 
 
@@ -575,13 +567,13 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('create_resumen_servicio')) {
-        function create_resumen_servicio($servicio, $info_solicitud_extra)
+    if (!function_exists('desglose_servicio')) {
+        function desglose_servicio($servicio, $inf_ext)
         {
 
 
             $resumen_servicio = "";
-            $duracion = $info_solicitud_extra["num_ciclos"];
+            $duracion = $inf_ext["num_ciclos"];
             $info_servicio = "";
             $id_ciclo_facturacion = "";
             $precio = 0;
@@ -597,7 +589,7 @@ if (!function_exists('invierte_date_time')) {
 
             $is_servicio = 0;
             $text_label = "PIEZAS";
-            if ($info_solicitud_extra["is_servicio"] == 1) {
+            if ($inf_ext["is_servicio"] == 1) {
                 $text_label = "DURACIÓN";
                 $is_servicio = 1;
             }
@@ -618,11 +610,11 @@ if (!function_exists('invierte_date_time')) {
             return $response;
         }
     }
-    if (!function_exists('get_text_acceder_cuenta')) {
-        function get_text_acceder_cuenta($is_mobile, $param)
+    if (!function_exists('text_acceder_cuenta')) {
+        function text_acceder_cuenta($param)
         {
 
-            $extra =
+            $ext =
                 [
                     "plan" => $param["plan"],
                     "extension_dominio" => "",
@@ -635,7 +627,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $text[] = h("¿Ya tienes una cuenta? ", 3, " text_usuario_registrado_pregunta text-center text-uppercase letter-spacing-10");
-            $text[] = d("ACCEDE AHORA!", $extra, 1);
+            $text[] = d("ACCEDE AHORA!", $ext, 1);
             return append($text);
         }
     }

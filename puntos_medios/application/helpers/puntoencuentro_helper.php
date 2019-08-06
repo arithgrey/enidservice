@@ -21,11 +21,11 @@ if (!function_exists('invierte_date_time')) {
 
             if ($in_session < 1) {
 
-                $z[] = d(get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras), "contenedor_eleccion_correo_electronico");
+                $z[] = d(frm_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras), "contenedor_eleccion_correo_electronico");
 
             } else {
 
-                $z[] = d(get_form_punto_encuentro_horario([
+                $z[] = d(frm_punto_encuentro_horario([
                     input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro]),
                     input_hidden(["class" => "servicio", "name" => "servicio", "value" => $servicio]),
                     input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]),
@@ -40,7 +40,7 @@ if (!function_exists('invierte_date_time')) {
         } else {
 
             $recibo = $data["recibo"];
-            $r[] = get_form_quien_recibe($primer_registro, $punto_encuentro, $recibo);
+            $r[] = frm_quien_recibe( $punto_encuentro, $recibo);
             $r[] = input_hidden(["class" => "recibo", "name" => "recibo", "value" => $recibo]);
         }
         $r[] = input_hidden(["class" => "primer_registro", "value" => $primer_registro]);
@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_pagina_form_horario($recibo, $punto_encuentro)
     {
 
-        $response = get_form_punto_encuentro_horario([
+        $response = frm_punto_encuentro_horario([
             input_hidden(
                 [
                     "class" => "recibo",
@@ -67,7 +67,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_form_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras)
+    function frm_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras)
     {
         $horarios = lista_horarios();
         $lista_horarios = $horarios["select"];
@@ -164,14 +164,14 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras]);
         $r[] = input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]);
         $r[] = d(btn("CONTINUAR"), ["class" => "col-lg-12 mt-5 botton_enviar_solicitud"]);
-        $r[] = get_formar_usuario_registrado($in_session, $servicio, $num_ciclos);
+        $r[] = format_usuario_registrado($in_session, $servicio, $num_ciclos);
         $r[] = form_close();
         return d(append($r), 10, 1);
 
 
     }
 
-    function get_formar_usuario_registrado($in_session, $servicio, $num_ciclos)
+    function format_usuario_registrado($in_session, $servicio, $num_ciclos)
     {
 
         $r = [];
@@ -198,15 +198,15 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_form_quien_recibe($primer_registro, $punto_encuentro, $recibo)
+    function frm_quien_recibe($pe, $recibo)
     {
 
 
         $r = [];
 
-        $r[] = d(get_form_punto_encuentro_horario(
+        $r[] = d(frm_punto_encuentro_horario(
             [
-                input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro]),
+                input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $pe]),
                 input_hidden(["class" => "recibo", "name" => "recibo", "value" => $recibo])
             ]
         ), 6, 1);
@@ -215,7 +215,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_form_punto_encuentro_horario($extra = [])
+    function frm_punto_encuentro_horario($extra = [])
     {
 
         $horarios = lista_horarios();
