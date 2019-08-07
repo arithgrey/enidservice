@@ -88,8 +88,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $envio_usuario = $data["envio_usuario"];
-        $actividad_enid_service = $data["actividad_enid_service"];
-
         $ext_periodo = ["style" => 'background:#02316f;color:white!important;'];
         $ext_valoraciones = ["style" => 'background: #000;color: white !important;text-align: center;'];
 
@@ -105,7 +103,7 @@ if (!function_exists('invierte_date_time')) {
         $lista_deseos = "";
 
 
-        foreach ($actividad_enid_service as $row) {
+        foreach ($data["actividad_enid_service"] as $row) {
 
 
             $ext_td_usablidad = "title ='Personas que acceden al sistema para emplearlo' ";
@@ -440,20 +438,13 @@ if (!function_exists('invierte_date_time')) {
     function format_miembros($data)
     {
 
-        $paginacion = $data["paginacion"];
-        $miembros = $data["miembros"];
-        $modo_edicion = $data["modo_edicion"];
-
         $_response[] = h("USUARIOS", 3);
-        $_response[] = $paginacion;
+        $_response[] = $data["paginacion"];
 
-        foreach ($miembros as $row) {
+        foreach ($data["miembros"] as $row) {
 
             $id_usuario = $row["id_usuario"];
             $afiliado = $row["nombre"] . " " . $row["apellido_paterno"] . " " . $row["apellido_materno"];
-
-
-            $fecha_registro = $row["fecha_registro"];
 
 
             $re[] = img([
@@ -462,10 +453,10 @@ if (!function_exists('invierte_date_time')) {
                 "onerror" => "this.src='../img_tema/user/user.png'"
             ]);
             $re[] = d($afiliado);
-            $re[] = d($fecha_registro);
+            $re[] = d($row["fecha_registro"]);
             $response[] = d(append($re), "popup-head-left pull-left");
 
-            if ($modo_edicion == 1):
+            if ($data["modo_edicion"] == 1):
                 $res[] = d(icon("fa fa-envelope"), ["title" => "Email de recordatorio enviados"]);
                 $m[] = btn(
                     icon('fa fa-plus'),
@@ -503,7 +494,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $info_global = $data["info_global"];
-
         $style = [];
         $style_terminos = ["style" => 'background:#024d8d;color:white;'];
         $style_solicitudes = ["style" => 'font-size:.8em;background:#ea330c;color:white;'];
@@ -552,17 +542,12 @@ if (!function_exists('invierte_date_time')) {
     function comparativa_gb($data)
     {
 
-
         $info_global = $data["info_global"];
-        $franja_horaria = get_franja_horaria();
         $lista_fechas = get_arreglo_valor($info_global, "fecha");
-
-
         $list = [];
-        foreach ($franja_horaria as $row) {
+        foreach ( get_franja_horaria() as $row) {
 
             $franja_h = $row;
-
             $list[] = "<tr>";
             $list[] = td($franja_h);
 

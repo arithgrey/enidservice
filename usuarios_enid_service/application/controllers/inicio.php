@@ -36,12 +36,13 @@ class Inicio extends CI_Controller
     {
 
         return $this->app->api("perfiles/get/format/json/");
+
     }
 
     private function get_departamentos_enid()
     {
 
-        $q["estado"] = 1;
-        return $this->app->api("departamento/index/format/json/", $q);
+        return $this->app->api("departamento/index/format/json/", ["estado"=> 1]);
+
     }
 }

@@ -8,11 +8,9 @@ if (!function_exists('invierte_date_time')) {
         $negra = [];
         foreach ($data as $row) {
 
-
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_linea_metro", $id);
             if ($index !== false) {
-
 
                 $img =
                     img(
@@ -62,7 +60,6 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         $negra = [];
         foreach ($data as $row) {
-
 
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_linea_metro", $id);

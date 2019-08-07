@@ -15,7 +15,7 @@ let carga_respuestas = () => {
     let id_pregunta = parseInt(get_attr(this, "id"));
     if (id_pregunta > 0) {
 
-        set_option("pregunta", id_pregunta);
+
         let data_send = {
             "id_pregunta": id_pregunta,
             "pregunta": get_attr(this, "pregunta"),
@@ -26,12 +26,15 @@ let carga_respuestas = () => {
             "id_servicio": get_attr(this, "servicio")
         };
 
-        set_option("data_pregunta", data_send);
-        carga_respuesta_complete();
+        set_option({
+            "pregunta": id_pregunta,
+            "data_pregunta": data_send
+        });
+        respuesta();
     }
 
 }
-let carga_respuesta_complete = () => {
+let respuesta = () => {
 
     let url = "../q/index.php/api/respuesta/respuesta_pregunta/format/json/";
     request_enid("GET", get_option("data_pregunta"), url, r_complete, ".place_buzon");
@@ -51,6 +54,6 @@ let enviar_respuesta = e => {
         "modalidad": get_option("modalidad_ventas")
     });
     let url = "../q/index.php/api/respuesta/respuesta_pregunta/format/json/";
-    request_enid("POST", data_send, url, carga_respuesta_complete);
+    request_enid("POST", data_send, url, respuesta);
     e.preventDefault();
 }

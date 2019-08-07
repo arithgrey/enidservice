@@ -124,17 +124,18 @@ if (!function_exists('invierte_date_time')) {
         foreach ($respuestas as $row) {
 
 
-            $respuesta = d($row["respuesta"]);
-            $fecha_registro = d(text_icon("fa fa fa-clock-o", $row["fecha_registro"], [], 0));
 
+            $fecha_registro = d(text_icon("fa fa fa-clock-o", $row["fecha_registro"], [], 0));
             $id_usuario = $row["id_usuario"];
             $sender = $row["nombre"] . " " . $row["apellido_paterno"];
-
-
             $pick = get_img_usuario($id_usuario);
             $l = [];
             $l[] = btw($pick, $sender, "descripcion_usuario col-lg-3");
-            $l[] = btw($respuesta, $fecha_registro, "descripcion_respuesta col-lg-9 text-right");
+            $l[] = btw(
+                d($row["respuesta"]),
+                $fecha_registro
+                ,
+                "descripcion_respuesta col-lg-9 text-right");
 
             $z[] = d(append($l), 1) . br(2);
 

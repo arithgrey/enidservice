@@ -91,13 +91,13 @@ if (!function_exists('invierte_date_time')) {
 
             $usuario = $usuario[0];
             $nombre = $usuario["nombre"];
-            $email = $usuario["email"];
+
 
             $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
             $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu artículos, puedes ver la pregunta que 
             te envió en tu !" . a_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
             $cuerpo = img_enid([], 1, 1) . h($text, 5);
-            return get_request_email($email, $asunto, $cuerpo);
+            return get_request_email($usuario["email"], $asunto, $cuerpo);
 
         }
     }
@@ -141,11 +141,10 @@ if (!function_exists('invierte_date_time')) {
 
 
         $id_pregunta = $param["id_pregunta"];
-        $pregunta = $param["pregunta"];
+
         $fecha_registro = $param["fecha_registro"];
         $id_usuario = $param["id_usuario"];
         $leido_vendedor = $param["leido_vendedor"];
-        //$num  = (es_data($param["respuestas"])) ? $param["respuestas"][0]["respuestas"]:0;
         $nombre_servicio = $param["nombre_servicio"];
         $id_servicio = $param["id_servicio"];
 
@@ -167,13 +166,11 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-            //$num = ($num < 1) ? "" : $num;
-
             $text = d("Nueva", [
 
                     "class" => 'pregunta fa fa-envelope',
                     "id" => $id_pregunta,
-                    "pregunta" => $pregunta,
+                    "pregunta" => $param["pregunta"],
                     "registro" => $fecha_registro,
                     "usuario" => $id_usuario,
                     "leido_vendedor" => $leido_vendedor,

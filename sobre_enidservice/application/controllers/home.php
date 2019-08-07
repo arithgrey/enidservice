@@ -20,6 +20,6 @@ class Home extends CI_Controller
         );
 
 		$data["f_pago"] = 1;
-		$this->app->pagina($this->app->cssJs($data, "sobre_enid") , get_format_descripcion() , 1);
+		$this->app->pagina($this->app->cssJs($data, "sobre_enid") , format_descripcion() , 1);
 	}
 }

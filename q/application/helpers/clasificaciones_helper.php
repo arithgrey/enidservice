@@ -3,7 +3,7 @@ if (!function_exists('invierte_date_time')) {
 
     function render_tallas($data)
     {
-        $tipo = prm_def($data["talla"], "tipo");
+
 
         $str = ($data["num_clasificaciones"] > 0) ? h(
             "CLASIFICACIONES AGREGADAS RECIENTEMENTE",
@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
             append([
 
                     h(
-                        $tipo,
+                        prm_def($data["talla"], "tipo"),
                         2,
                         'info-tipo-talla'
                     )

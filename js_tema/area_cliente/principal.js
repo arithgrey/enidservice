@@ -29,15 +29,23 @@ $(document).ready(() => {
     retorno();
 
     $(".btn_mis_ventas").click(() => {
-        set_option("estado_compra", 1);
-        set_option("modalidad_ventas", 1);
+
+        set_option({
+            "estado_compra":  1,
+            "modalidad_ventas": 1
+        });
         compras_usuario();
     });
     $(".btn_cobranza").click(() => {
-        set_option("estado_compra", 6);
-        set_option("modalidad_ventas", 0);
+
+
+        set_option({
+            "estado_compra": 6,
+            "modalidad_ventas": 0,
+        });
         compras_usuario();
     });
+
     $(".num_alcance").click(alcance_producto);
     $("#mis_ventas").click(() => {
         $("#mis_compras").tab("show");
@@ -54,8 +62,11 @@ let retorno =  () =>  {
     switch (get_parameter(".action")) {
         case "ventas":
 
-            set_option("modalidad_ventas", 1);
-            set_option("estado_compra", 1);
+            set_option({
+                "modalidad_ventas": 1,
+                "estado_compra": 1,
+            });
+
             compras_usuario();
 
             break;
@@ -95,8 +106,12 @@ let valida_retorno =  () => {
             case "ventas":
 
                 show_tabs(["#mis_compras", "#mis_ventas"]);
-                set_option("modalidad_ventas", 1);
-                set_option("estado_compra", 1);
+
+                set_option({
+                    "modalidad_ventas": 1,
+                    "estado_compra": 1,
+                });
+
                 compras_usuario();
                 break;
 

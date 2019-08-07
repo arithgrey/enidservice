@@ -65,9 +65,7 @@ class actividad_web_model extends CI_Model
 
 	function get_num_registros_templal_table_fecha($fecha, $tabla)
 	{
-
-		$query_get = "SELECT COUNT(0)num FROM $tabla ";
-		$result = $this->db->query($query_get);
+		$result = $this->db->query("SELECT COUNT(0)num FROM $tabla ");
 		return $result->result_array()[0]["num"];
 	}
 

@@ -2,7 +2,7 @@
 $(document).ready(() => {
     $(".btn_direccion").click(() =>{
         set_option("v", 1);
-        carga_direccion_usuario();
+        direccion_usuario();
     });
     $(".f_nombre_usuario").submit(u_nombre);
     $(".tab_privacidad_seguridad").click(get_conceptos);
@@ -20,7 +20,7 @@ $(document).ready(() => {
 
 
 });
-let carga_direccion_usuario = () => {
+let direccion_usuario = () => {
 
     let url = "../q/index.php/api/usuario_direccion/index/format/json/";
     let data_send = $(".form_notificacion").serialize() + "&" + $.param({"v": get_option("v")});
@@ -40,7 +40,7 @@ let response_direccion_usuario = data => {
     $(".form_direccion_envio").submit(registra_direccion_usuario);
     $(".editar_direccion_persona").click(() => {
         set_option("v", 2);
-        carga_direccion_usuario();
+        direccion_usuario();
 
     });
 
@@ -64,7 +64,7 @@ let registra_direccion_usuario = e => {
 }
 let response_registra_direccion_usuario = data => {
     set_option("v", 1);
-    carga_direccion_usuario();
+    direccion_usuario();
 }
 let u_nombre = e => {
 

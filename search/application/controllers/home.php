@@ -115,9 +115,9 @@ class Home extends CI_Controller
 
         $data["lista_productos"] = array_map($callback, $servicios["servicios"]);
         $data["q"] = $q;
-        $data["categorias_destacadas"] = $this->carga_categorias_destacadas();
+        $data["categorias_destacadas"] = $this->categorias_destacadas();
         $data = $this->app->cssJs($data, "search");
-        $data["filtros"] = $this->get_orden();
+        $data["filtros"] = get_orden();
         $data["order"] = $data_send["order"];
         $this->create_keyword($param);
         $this->app->pagina($data, render_search($data),1);
@@ -235,28 +235,10 @@ class Home extends CI_Controller
         return $response;
     }
 
-    private function carga_categorias_destacadas()
+    private function categorias_destacadas()
     {
 
         return $this->app->api("clasificacion/categorias_destacadas/format/json/");
-    }
-
-    private function get_orden()
-    {
-        return [
-            "ORDENAR POR",
-            "LAS NOVEDADES PRIMERO",
-            "LO MÁS VENDIDO",
-            "LOS MÁS VOTADOS",
-            "LOS MÁS POPULARES ",
-            "PRECIO  [de mayor a menor]",
-            "PRECIO  [de menor a mayor]",
-            "NOMBRE DEL PRODUCTO [A-Z]",
-            "NOMBRE DEL PRODUCTO [Z-A]",
-            "SÓLO  SERVICIO",
-            "SÓLO PRODUCTOS"
-        ];
-
     }
 
     private function create_keyword($q)

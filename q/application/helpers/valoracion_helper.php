@@ -297,8 +297,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
         for ($num_restantes; $num_restantes <= 5; $num_restantes++) {
-            $extra = "font-size: 2em;-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);";
 
+            $extra = "font-size: 2em;-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);";
             $restantes .= label("★",
                 [
                     "class" => 'estrella',
@@ -342,17 +342,11 @@ if (!function_exists('invierte_date_time')) {
 
             $valoraciones = $numero_valoraciones[0];
             $num_valoraciones = $valoraciones["num_valoraciones"];
-            $text_comentarios = ($num_valoraciones > 1) ? "COMENTARIOS" : "COMENTARIO";
-            $comentarios = $num_valoraciones . $text_comentarios;
-            $promedio = $valoraciones["promedio"];
+            $comentarios = $num_valoraciones . ($num_valoraciones > 1) ? "COMENTARIOS" : "COMENTARIO";
             $personas_recomendarian = $valoraciones["personas_recomendarian"];
-
-            $promedio_general = number_format($promedio, 1, '.', '');
+            $promedio_general = number_format($valoraciones["promedio"], 1, '.', '');
             $parte_promedio = d(crea_estrellas($promedio_general) . span($promedio_general, ["class" => 'promedio_num']), ["class" => 'contenedor_promedios']);
-
-
             $parte_promedio .=  tb(tr(td($comentarios, 'info_comentarios')) );
-
             $parte_promedio .= d(porcentaje($num_valoraciones, $personas_recomendarian, 1) . "%",  'porcentaje_recomiendan');
             $parte_promedio .= d(
                 ($persona == 1) ? "de los consumidores recomiendan" : "de los consumidores recomiendan este producto"
@@ -446,7 +440,7 @@ if (!function_exists('invierte_date_time')) {
     function get_redactar_valoracion($comentarios, $numero_valoraciones, $servicio)
     {
         $response = "";
-        if (count($comentarios) > 5) {
+        if (es_data($comentarios) && count($comentarios) > 5) {
 
             if (pr($numero_valoraciones, "num_valoraciones") > 6) {
 
@@ -474,8 +468,6 @@ if (!function_exists('invierte_date_time')) {
         for ($x = 1; $x <= 5; $x++) {
 
             $id_input = "radio" . $x;
-
-
             $response[] = input(
                 [
                     "id" => $id_input,

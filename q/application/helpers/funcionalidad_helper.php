@@ -7,9 +7,8 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         foreach ($conceptos as $row) {
 
-            $conceptos = $row["conceptos"];
             $r[] = "<table style='width:100%;margin-top:30px;' >";
-            foreach ($conceptos as $row2) {
+            foreach ($row["conceptos"] as $row2) {
 
 
                 $extra_seleccion = "";

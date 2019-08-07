@@ -1,6 +1,24 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function get_orden()
+    {
+        return [
+            "ORDENAR POR",
+            "LAS NOVEDADES PRIMERO",
+            "LO MÁS VENDIDO",
+            "LOS MÁS VOTADOS",
+            "LOS MÁS POPULARES ",
+            "PRECIO  [de mayor a menor]",
+            "PRECIO  [de menor a mayor]",
+            "NOMBRE DEL PRODUCTO [A-Z]",
+            "NOMBRE DEL PRODUCTO [Z-A]",
+            "SÓLO  SERVICIO",
+            "SÓLO PRODUCTOS"
+        ];
+
+    }
+
     function render_search($data)
     {
 
@@ -197,17 +215,11 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         if ($is_mobile < 1) {
 
-            $primer_nivel = $b_busqueda["primer_nivel"];
-            $segundo_nivel = $b_busqueda["segundo_nivel"];
-            $tercer_nivel = $b_busqueda["tercer_nivel"];
-            $cuarto_nivel = $b_busqueda["cuarto_nivel"];
-            $quinto_nivel = $b_busqueda["quinto_nivel"];
-
-            $bloque_primer_nivel = crea_seccion_de_busqueda_extra($primer_nivel, $busqueda);
-            $bloque_segundo_nivel = crea_seccion_de_busqueda_extra($segundo_nivel, $busqueda);
-            $bloque_tercer_nivel = crea_seccion_de_busqueda_extra($tercer_nivel, $busqueda);
-            $bloque_cuarto_nivel = crea_seccion_de_busqueda_extra($cuarto_nivel, $busqueda);
-            $bloque_quinto_nivel = crea_seccion_de_busqueda_extra($quinto_nivel, $busqueda);
+            $bloque_primer_nivel = crea_seccion_de_busqueda_extra($b_busqueda["primer_nivel"], $busqueda);
+            $bloque_segundo_nivel = crea_seccion_de_busqueda_extra($b_busqueda["segundo_nivel"], $busqueda);
+            $bloque_tercer_nivel = crea_seccion_de_busqueda_extra($b_busqueda["tercer_nivel"], $busqueda);
+            $bloque_cuarto_nivel = crea_seccion_de_busqueda_extra($b_busqueda["cuarto_nivel"], $busqueda);
+            $bloque_quinto_nivel = crea_seccion_de_busqueda_extra($b_busqueda["quinto_nivel"], $busqueda);
 
             $r = [];
             if ($bloque_primer_nivel["num_categorias"] > 0) {
@@ -245,14 +257,16 @@ if (!function_exists('invierte_date_time')) {
             if ($z == 0) {
                 $response [] = "<ul class='clasificaciones_sub_menu_ul'>";
             }
-            $href = "?q=&q2=" . $row["primer_nivel"];
+
             $response [] = li(
+
                 a_enid($row["nombre_clasificacion"],
                     [
-                        "href" => $href,
+                        "href" => "?q=&q2=" . $row["primer_nivel"],
                         "class" => 'text_categoria_sub_menu white text-uppercase'
                     ]
-                ));
+                )
+            );
             $z++;
             if ($z == 5) {
                 $z = 0;

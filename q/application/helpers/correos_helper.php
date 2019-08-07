@@ -52,9 +52,10 @@ if (!function_exists('invierte_date_time')) {
     function evaluacion($data)
     {
 
-        $url_request = $data["url_request"];
+        $url = $data["url_request"];
 
-        $r[] = d(a_enid(img(
+        $r[] = d(
+            a_enid(img(
             [
                 "src" => '../img_tema/enid_service_logo.jpg'
                 ,
@@ -62,7 +63,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         ),
             [
-                'href' => $url_request . "contact/#envio_msj"
+                'href' => $url . "contact/#envio_msj"
             ]
         ), 4, 1);
         $r[] = d(h('RECIBIMOS TU NOTIFICACIÓN!', 3, ["style" => "font-size: 2em;"]), 6, 1);
@@ -72,9 +73,9 @@ if (!function_exists('invierte_date_time')) {
                 "Ver más promociones", "button",
                 ["class" => "btn a_enid_black"]),
 
-            ["href" => $url_request]
+            ["href" => $url]
         ), 6, 1);
-        $r[] = d(a_enid("Anuncia tus artículos", ["href" => $url_request . "login", "class" => "anunciar_productos"]), 6, 1);
+        $r[] = d(a_enid("Anuncia tus artículos", ["href" => $url . "login", "class" => "anunciar_productos"]), 6, 1);
 
         return d(append($r), 6, 1);
 
@@ -106,11 +107,6 @@ if (!function_exists('invierte_date_time')) {
 
     function recordar_publicaciones($data)
     {
-
-
-
-
-
 
 
         $r[] = d("Hemos tenido pocas noticias sobre ti!, ");

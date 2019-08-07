@@ -11,8 +11,6 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre = $row["nombre"];
             $id = $row["id"];
-
-
             $index =  search_bi_array($lista_negra, "id_punto_encuentro", $id);
 
             if ($index !== false){
@@ -46,7 +44,7 @@ if (!function_exists('invierte_date_time')) {
         return d(append($l));
     }
 
-    function create_estaciones($array, $flag_envio_gratis, $lista_negra)
+    function create_estaciones($array, $es_envio_gratis, $lista_negra)
     {
 
         $l = [];
@@ -65,7 +63,7 @@ if (!function_exists('invierte_date_time')) {
                         "id" => $id,
                         "nombre_estacion" => $nombre,
                         "costo_envio" => $row["costo_envio"],
-                        "flag_envio_gratis" => $flag_envio_gratis
+                        "flag_envio_gratis" => $es_envio_gratis
 
                     ]
                 );
@@ -78,7 +76,7 @@ if (!function_exists('invierte_date_time')) {
                         "id" => $id,
                         "nombre_estacion" => $nombre,
                         "costo_envio" => $row["costo_envio"],
-                        "flag_envio_gratis" => $flag_envio_gratis
+                        "flag_envio_gratis" => $es_envio_gratis
 
                     ]
                 );

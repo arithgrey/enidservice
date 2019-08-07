@@ -109,8 +109,8 @@ if (!function_exists('invierte_date_time')) {
                 ),
                 "text-center top_20"
             );
-            $x[] = d($alcance, " text-center ");
 
+            $x[] = d($alcance, " text-center ");
             $r[] = d(append($x), 3);
             $r[] = d(place("place_ventas_usuario"), 9);
             return d(append($r), "text-center");

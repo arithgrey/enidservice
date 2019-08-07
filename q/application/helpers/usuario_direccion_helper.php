@@ -64,11 +64,11 @@ if (!function_exists('invierte_date_time')) {
 
         if ($registro_direccion == 0) {
 
-            $nombre = get_campo($info_usuario, "nombre");
-            $apellido_paterno = get_campo($info_usuario, "apellido_paterno");
-            $apellido_materno = get_campo($info_usuario, "apellido_materno");
+            $nombre = pr($info_usuario, "nombre");
+            $apellido_paterno = pr($info_usuario, "apellido_paterno");
+            $apellido_materno = pr($info_usuario, "apellido_materno");
             $nombre_receptor = $nombre . " " . $apellido_paterno . " " . $apellido_materno;
-            $telefono_receptor = get_campo($info_usuario, "tel_contacto");
+            $telefono_receptor = pr($info_usuario, "tel_contacto");
         }
 
 
