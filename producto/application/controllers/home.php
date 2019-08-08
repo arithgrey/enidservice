@@ -206,8 +206,8 @@ class Home extends CI_Controller
         $fecha_entrega_promedio = $fecha->format('l, d M Y');
         $fecha_entrega_promedio = $trans->translate($source, $target, strtoupper($fecha_entrega_promedio));
         $text_tiempo = span($fecha_entrega_promedio, ["class" => 'tiempo_promedio']);
-        $tiempo_entrega = "REALIZA HOY TU PEDIDO Y TENLO EL" . $text_tiempo;
-        return d($tiempo_entrega, "tiempo_entrega_promedio text-justify");
+
+        return br(3).d("REALIZA HOY TU PEDIDO Y TENLO EL" . $text_tiempo, "tiempo_entrega_promedio text-justify");
     }
 
     private function costruye_descripcion_producto()

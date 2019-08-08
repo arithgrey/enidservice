@@ -7,66 +7,6 @@
     "class" => "titulo_web",
     "value" => $titulo
 ]) ?>
-<?php if (!is_null($in_session) && $in_session < 1): ?>
-    <?php if (!is_null($proceso_compra) && !isset($proceso_compra) || $proceso_compra == 0): ?>
-
-        <?php $f[] = d(icon('fa  fa-fighter-jet'), 2) ?>
-        <?php $f[] = d("FACILIDAD DE COMPRA", 'strong') ?>
-        <?php $f[] = d("Compras seguras al momento") ?>
-        <?php if (!is_null($id_usuario) && isset($id_usuario)): ?>
-            <?= $f[] = input_hidden([
-                "class" => 'id_usuario',
-                "value" => $id_usuario
-            ]) ?>
-        <?php endif; ?>
-        <?php $bloque[] = d(append($f), 3) ?>
-
-        <?php
-
-        $x = [];
-        $x[] = d(icon('fa fa-clock-o '), 2);
-        $x[] = d(append([
-            d("+ ENTREGAS PUNTUALES", 'strong', 1),
-            d("Recibe lo que deseas en tiempo y forma", 1)
-        ]));
-        ?>
-        <?php $bloque[] = d(append($x), 3) ?>
-
-
-        <?php
-        $c = [];
-        $c[] = d(icon('fa fa-lock '), 2);
-        $c[] = d(append([
-            d(" COMPRAS SEGURAS", 'strong', 1),
-            d("Tu dinero se entregará cuando confirmes tu entrega!", 1)
-        ]));
-
-        ?>
-        <?php $bloque[] = d(append($c), 3) ?>
-
-
-        <?php
-
-        $c = [];
-        $c[] = d(icon('fa fa-angle-right'), 2);
-        $c[] = d(append([
-            d(" FAQS", 'strong', 1),
-            d("Lo que te intereza saver!", 1)
-        ]));
-
-        ?>
-        <?php $bloque[] = d(a_enid(append($c),
-            [
-                "href" => path_enid("faqs"),
-                "class" => "white"
-            ]), 3) ?>
-        <?= d(append($bloque, "base_compras col-lg-12 top_50 bottom_50 text-center"), "row shadow bloque_general_info ") ?>
-
-
-        <?= hr() ?>
-    <?php endif; ?>
-<?php endif; ?>
-
 
 
 <?php if ($in_session == 0): ?>

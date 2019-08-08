@@ -125,7 +125,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input(
             [
                 "name" => "email",
-                "placeholder" => "CORREO ELECTRÓNICO",
+                "placeholder" => "CORREO",
                 "class" => "form-control input-sm email email",
                 "type" => "email",
                 "required" => true,
@@ -211,7 +211,5 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-
     }
-
 }

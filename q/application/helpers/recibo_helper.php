@@ -702,8 +702,8 @@ if (!function_exists('invierte_date_time')) {
             [
 
                 "ventas_configuracion" => "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO",
-                "cliente_solo_text" => "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO",
-                "cliente" => "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO",
+                "cliente_solo_text" =>  $costo_envio_cliente . " MXN DE ENVÍO",
+                "cliente" =>  $costo_envio_cliente . " MXN DE ENVÍO",
             ];
 
 
