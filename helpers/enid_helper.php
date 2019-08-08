@@ -70,7 +70,7 @@ if (!function_exists('p')) {
 
     }
 }
-if (!function_exists('guardar')) {
+if (!function_exists('btn')) {
     function btn($info, $attributes = [], $row = 1, $type_button = 1, $submit = 1, $anchor = 0)
     {
         if ($submit == 1) {

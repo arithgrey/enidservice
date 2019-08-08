@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
 		} else {
 
 			$r["ventas_configuracion"] = "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO";
-			$text = "MÁS " . $costo_envio_cliente . " MXN DE ENVÍO";
+			$text =  $costo_envio_cliente . " MXN DE ENVÍO";
 			$r["cliente_solo_text"] = "MÁS " . $costo_envio_cliente . " MXN DE TU ENTREGA";
 			$r["cliente"] = $text;
 		}

@@ -14,6 +14,8 @@ $(document).ready(() => {
 
     $(".botton_enviar_solicitud").click(()=>{
         rm_class([".informacion_del_cliente", ".form_primer_registro"] , "display_none");
+        $(".seccion_horarios").addClass("display_none");
+
     });
 
 

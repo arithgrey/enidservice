@@ -1,5 +1,5 @@
-<?= d(h("¿CÓMO PREFIERES TU ENTREGA?", 3, "titulo_preferencia text-center border-bottom padding_10" ), 4, 1,1) ?>
-
+<?=br(4)?>
+<?= d(h("¿CÓMO PREFIERES TU ENTREGA?", 3, "titulo_preferencia text-center border-bottom padding_10 strong" ), 4, 1,1) ?>
 <?= btw(
 
     get_format_eleccion_mensajeria($id_servicio, $orden_pedido)
@@ -29,4 +29,4 @@
     1,
     1
 ) ?>
-
+<?=br(4)?>

@@ -24,6 +24,7 @@ $(document).ready(() => {
     $(".email").keyup(() => {
         sin_espacios(".email");
     });
+    $(".continuar_pedido").click(continuar_compra);
 
 });
 
@@ -309,4 +310,7 @@ let set_link = function () {
     request_enid("POST", data_send, url, response_set_link);
 
 };
+let continuar_compra = function(){
+    showonehideone(".pr_compra",  ".compra_resumen");
+}
 let response_set_link = (data) => redirect("../login");

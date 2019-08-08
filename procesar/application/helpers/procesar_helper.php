@@ -40,15 +40,15 @@ if (!function_exists('invierte_date_time')) {
             $talla = (array_key_exists("talla", $inf_ext)) ? $inf_ext["talla"] : 0;
             $r[] = n_row_12();
             $r[] = place("info_articulo", ["id" => 'info_articulo']);
-            $z[] = get_format_resumen(
+            $z[] = format_resumen(
                 $producto["resumen_producto"],
-                $text_envio,
                 $producto["resumen_servicio_info"],
                 $monto_total,
                 $costo_envio_cliente,
                 ($monto_total + $costo_envio_cliente),
                 $in_session
             );
+
             $z[] = str_title($in_session, $is_mobile);
             $z[] = form_open("", ["class" => "form-miembro-enid-service", "id" => "form-miembro-enid-service"]);
             $z[] = frm_miembro_enid_service_hidden(
@@ -62,9 +62,9 @@ if (!function_exists('invierte_date_time')) {
             );
             $z[] = frm_primer_registro($in_session, $is_mobile, $ext);
             $z[] = place("place_registro_afiliado");
-            $z[] = hr();
+
             $z[] = input_hidden(["value" => $data["email"], "class" => 'email_s']);
-            $r[] = d(d(d(append($z), "contenedo_compra_info"), "contenedor_compra"), 6, 1);
+            $r[] = d(d(d(append($z), "contenedo_compra_info"), "contenedor_compra"), "col-lg-6 col-lg-offset-3 top_100");
             $r[] = end_row();
             return append($r);
 
@@ -76,7 +76,8 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('str_title')) {
         function str_title($in_session, $is_mobile, $es_servicio = 0)
         {
-            $text = ($in_session == 0 && $is_mobile == 0) ? h("¿CON QUIEN NOS COMUNICAMOS?", 3) : "";
+            //$text = ($in_session == 0 && $is_mobile == 0) ? h("DATOS DE COMPRA", 3) : "";
+            $text = "";
             if ($es_servicio > 0) {
                 $text = ($in_session == 0 && $is_mobile == 0) ?
                     h("¿QUIEN ERES?", 3, "top_30 bottom_30") : "";
@@ -94,9 +95,9 @@ if (!function_exists('invierte_date_time')) {
         {
             $r = [];
             if ($in_session < 1) {
-
-                $x[] = btw(
-                    d("Nombre *")
+                $r[]= h("DATOS DE COMPRA",3,"bottom_50 strong top_100");
+                $a = ajustar(
+                    d("Nombre")
                     ,
                     d(
                         input(
@@ -110,16 +111,14 @@ if (!function_exists('invierte_date_time')) {
                         )
                     )
                     ,
-                    6
+                    3
                 );
 
-                $x[] = d(
-                    append(
-                        [
-                            d("Correo Electrónico  *")
+                $b = ajustar(
+
+                            d("Correo")
                             ,
-                            d(
-                                input(
+input(
                                     [
                                         "name" => "email",
                                         "placeholder" => "email",
@@ -127,40 +126,48 @@ if (!function_exists('invierte_date_time')) {
                                         "type" => "email",
                                         "required" => "true",
                                         "onkeypress" => "minusculas(this);"
-                                    ]))
-                            ,
-                            place('place_correo_incorrecto')
+                                    ]
 
-                        ]
-                    ), 6
+                                )
+,3
                 );
 
 
-                $r[] = d(append($x), 13);
-                $r[] = d(text_icon('fa fa-unlock-alt', "Escribe una contraseña"));
-                $r[] = input(
-                    [
-                        "id" => "password",
-                        "class" => " input-sm password",
-                        "type" => "password",
-                        "required" => "true"
-                    ]);
+                $r[] = ajustar($a,$b,6);
+                $r[] = place('place_correo_incorrecto');
 
-                $r[] = place("place_password_afiliado");
-                $r[] = d(text_icon('fa fa-phone', "Teléfono *"));
-                $r[] = input(
-                    [
-                        "id" => "telefono",
-                        "class" => "telefono form-control",
-                        "type" => "tel",
-                        "pattern" => "^[0-9-+s()]*$",
-                        "maxlength" => 13,
-                        "minlength" => 8,
-                        "name" => "telefono",
-                        "required" => "true"
-                    ]);
-                $r[] = place("place_telefono");
-                $r[] = btn("CREA UNA CUENTA");
+                $a = ajustar(
+                     "password",
+                    input(
+                        [
+                            "id" => "password",
+                            "class" => " input-sm password",
+                            "type" => "password",
+                            "required" => "true"
+                        ])
+                    ,4
+
+                );
+
+
+                $b =  ajustar(
+                    text_icon('fa fa-phone', "Tel. "),
+                    input(
+                        [
+                            "id" => "telefono",
+                            "class" => "telefono form-control",
+                            "type" => "tel",
+                            "pattern" => "^[0-9-+s()]*$",
+                            "maxlength" => 13,
+                            "minlength" => 8,
+                            "name" => "telefono",
+                            "required" => "true"
+                        ]
+                    ),4
+                );
+
+                $r[] =  ajustar($a, $b, 6);
+                $r[] = ajustar("", btn("CONTINUAR",["class"=> "top_30"]),8);
                 $r[] = d(
                     a_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
                         [
@@ -174,13 +181,12 @@ if (!function_exists('invierte_date_time')) {
                     1);
 
                 $r[] = text_acceder_cuenta($info_ext);
-                $r[] = "</div >";
-                $r[] = "</div >";
                 $r[] = place("place_config_usuario");
                 $r[] = form_close();
+                $r[] = br(5);
             }
 
-            return append($r);
+            return d(append($r), "pr_compra display_none top_100");
         }
     }
 
@@ -308,7 +314,6 @@ if (!function_exists('invierte_date_time')) {
                     );
 
 
-
                 $r[] = append($x);
 
                 $r[] = input_hidden([
@@ -374,7 +379,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $r[] = d(p(span("¿TIENES ALGUNA PREGUNTA ADICIONAL?")), "top_30");
                 $r[] = textarea(["name" => "descripcion"]);
-                
+
                 $r[] = input_hidden(
                     [
                         "id" => "id_servicio",
@@ -439,40 +444,41 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    if (!function_exists('get_format_resumen')) {
+    if (!function_exists('format_resumen')) {
 
-        function get_format_resumen($resumen_producto, $text_envio, $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session)
+        function format_resumen($resumen,  $resumen_servicio_info, $monto_total, $costo_envio_cliente, $monto_total_con_envio, $in_session)
         {
-            $r[] = d(
-                h(
-                    text_icon("fa fa-shopping-bag", 'RESUMEN DE TU PEDIDO')
-                    ,
-                    2,
-                    ' letter-spacing-5'
+            $r[] = h(
+                text_icon("fa fa-shopping-bag", 'ORDEN')
 
-                ), 1);
+                ,
+                3,
+                ' letter-spacing-5 strong bottom_30'
+            );
 
-            $r[] = d($resumen_producto, "mt-3", 1);
-            $r[] = d($text_envio, "mt-3", 1);
+            $r[] = $resumen;
             $r[] = input_hidden([
                 "name" => "resumen_producto",
                 "class" => "resumen_producto",
                 "value" => $resumen_servicio_info
             ]);
-
-            $x[] = h("MONTO $" . $monto_total . "MXN", 4);
-            $x[] = h("CARGOS DE ENVÍO $" . $costo_envio_cliente . "MXN", 4);
-            $x[] = h("TOTAL $" . $monto_total_con_envio . "MXN", 3);
-            $x[] = d("Precios expresados en Pesos Mexicanos.", "bottom_10");
+            $x[] = h("MONTO " . $monto_total . "MXN", 5,"strong");
+            $x[] = h("ENVÍO " . $costo_envio_cliente . "MXN", 5,"strong");
+            $x[] = h("TOTAL " . $monto_total_con_envio . "MXN", 3 ,"strong");
             $r[] = d(append($x), "text-right top_20");
-            if ($in_session > 0) {
 
+
+            if ($in_session > 0) {
                 $r[] = btn("ORDENAR COMPRA", ["class" => 'btn_procesar_pedido_cliente'], 1, 1);
                 $r[] = place('place_proceso_compra');
-
             }
-            $r[] = hr();
-            return append($r);
+
+            if ($in_session < 1) {
+                $r[] = d(d("", 6) . d(btn("CONTINUAR", ["class" => "continuar_pedido"]), 6), "row top_30");
+            }
+            $r[] = br(30);
+            return d(append($r),"compra_resumen");
+
         }
 
     }
@@ -532,8 +538,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_text_duracion')) {
-        function get_text_duracion($id_ciclo_facturacion, $num_ciclos, $is_servicio)
+    if (!function_exists('duracion')) {
+        function duracion($id_ciclo_facturacion, $num_ciclos, $is_servicio)
         {
 
             $text = "";
@@ -572,40 +578,21 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $resumen_servicio = "";
             $duracion = $inf_ext["num_ciclos"];
-            $info_servicio = "";
-            $id_ciclo_facturacion = "";
-            $precio = 0;
+            $nombre_servicio = pr($servicio, "nombre_servicio");
+            $id_ciclo_facturacion = pr($servicio, "id_ciclo_facturacion");
+            $precio = pr($servicio, "precio");
+            $text = ($inf_ext["is_servicio"] == 1) ? "DURACIÓN" : "PIEZAS";
 
-            foreach ($servicio as $row) {
+            $r[] = ajustar(d("ARTÍCULO", "strong f14") , d( $nombre_servicio, "text-right"), 4,"top_50");
+            $r[] = h($text .   duracion($id_ciclo_facturacion, $duracion, $inf_ext["is_servicio"]) , 5 , "top_10 text-right strong");
 
-                $nombre_servicio = $row["nombre_servicio"];
-                $info_servicio = $nombre_servicio;
-                $resumen_servicio = $nombre_servicio;
-                $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
-                $precio = $row["precio"];
-            }
-
-            $is_servicio = 0;
-            $text_label = "PIEZAS";
-            if ($inf_ext["is_servicio"] == 1) {
-                $text_label = "DURACIÓN";
-                $is_servicio = 1;
-            }
-            $text_ciclos_contratados = get_text_duracion($id_ciclo_facturacion, $duracion, $is_servicio);
-            $base = 'col-lg-4 tex-center';
-
-
-            $r[] = d(d("PRODUCTO") . $resumen_servicio, $base);
-            $r[] = d($text_label . " " . $text_ciclos_contratados, $base);
-            $r[] = d(d("PRECIO") . $precio, 'col-lg-4');
 
 
             $response = [
                 "resumen_producto" => append($r),
                 "monto_total" => $precio,
-                "resumen_servicio_info" => $info_servicio
+                "resumen_servicio_info" => $nombre_servicio
             ];
             return $response;
         }
@@ -622,12 +609,13 @@ if (!function_exists('invierte_date_time')) {
                     "is_servicio" => $param["is_servicio"],
                     "q2" => $param["q2"],
                     "num_ciclos" => $param["num_ciclos"],
-                    "class" => "link_acceso cursor_pointer    white  padding_10 link_acceso cursor_pointer text-center col-lg-4 col-lg-offset-4 text-center text-uppercase letter-spacing-10  top_30 mb-5 white bg_black"
+                    "class" => "text-right link_acceso cursor_pointer  underline link_acceso cursor_pointer   text-uppercase letter-spacing-5   mb-5 "
                 ];
 
 
-            $text[] = h("¿Ya tienes una cuenta? ", 3, " text_usuario_registrado_pregunta text-center text-uppercase letter-spacing-10");
-            $text[] = d("ACCEDE AHORA!", $ext, 1);
+            $text[] = br(5);
+            $text[] = h("¿Tienes una cuenta? ", 5 , $ext);
+
             return append($text);
         }
     }
