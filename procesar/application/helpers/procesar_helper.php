@@ -95,9 +95,9 @@ if (!function_exists('invierte_date_time')) {
         {
             $r = [];
             if ($in_session < 1) {
-                $r[]= h("DATOS DE COMPRA",3,"bottom_50 strong top_100");
+                $r[]= h("DATOS DE COMPRA",3,"bottom_50  top_100 text_total");
                 $a = ajustar(
-                    d("Nombre")
+                    d("Nombre", "strong")
                     ,
                     d(
                         input(
@@ -116,7 +116,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $b = ajustar(
 
-                            d("Correo")
+                            d("Correo", "strong")
                             ,
 input(
                                     [
@@ -137,7 +137,7 @@ input(
                 $r[] = place('place_correo_incorrecto');
 
                 $a = ajustar(
-                     "password",
+                     d("password", "strong"),
                     input(
                         [
                             "id" => "password",
@@ -151,7 +151,7 @@ input(
 
 
                 $b =  ajustar(
-                    text_icon('fa fa-phone', "Tel. "),
+                    d(text_icon('fa fa-phone', "Tel. "), "strong letter-spacing-5"),
                     input(
                         [
                             "id" => "telefono",
@@ -453,7 +453,7 @@ input(
 
                 ,
                 3,
-                ' letter-spacing-5 strong bottom_30'
+                ' letter-spacing-5  bottom_30 text_total'
             );
 
             $r[] = $resumen;
@@ -464,7 +464,7 @@ input(
             ]);
             $x[] = h("MONTO " . $monto_total . "MXN", 5,"strong");
             $x[] = h("ENVÍO " . $costo_envio_cliente . "MXN", 5,"strong");
-            $x[] = h("TOTAL " . $monto_total_con_envio . "MXN", 3 ,"strong");
+            $x[] = h("TOTAL " . $monto_total_con_envio . "MXN", 3, "text_total underline letter-spacing-15");
             $r[] = d(append($x), "text-right top_20");
 
 
@@ -474,7 +474,7 @@ input(
             }
 
             if ($in_session < 1) {
-                $r[] = d(d("", 6) . d(btn("CONTINUAR", ["class" => "continuar_pedido"]), 6), "row top_30");
+                $r[] = d(d("", 6) . d(btn("CONTINUAR", ["class" => "continuar_pedido mt-3"]), 6), "row top_30");
             }
             $r[] = br(30);
             return d(append($r),"compra_resumen");
@@ -584,7 +584,7 @@ input(
             $precio = pr($servicio, "precio");
             $text = ($inf_ext["is_servicio"] == 1) ? "DURACIÓN" : "PIEZAS";
 
-            $r[] = ajustar(d("ARTÍCULO", "strong f14") , d( $nombre_servicio, "text-right"), 4,"top_50");
+            $r[] = ajustar(d("ARTÍCULO", "f14") , d( $nombre_servicio, "text-right"), 4,"top_50");
             $r[] = h($text .   duracion($id_ciclo_facturacion, $duracion, $inf_ext["is_servicio"]) , 5 , "top_10 text-right strong");
 
 
@@ -609,7 +609,7 @@ input(
                     "is_servicio" => $param["is_servicio"],
                     "q2" => $param["q2"],
                     "num_ciclos" => $param["num_ciclos"],
-                    "class" => "text-right link_acceso cursor_pointer  underline link_acceso cursor_pointer   text-uppercase letter-spacing-5   mb-5 "
+                    "class" => "text-right link_acceso cursor_pointer  underline link_acceso cursor_pointer text_total  text-uppercase letter-spacing-5   mb-5 "
                 ];
 
 

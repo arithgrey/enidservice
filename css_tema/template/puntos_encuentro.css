@@ -1,17 +1,14 @@
+.img_linea:hover{
+    cursor: pointer;
+    padding: 10px;
+}
 .text_horarios {
     background: #011140;
     color: white;
 }
-
-.contenedor_estaciones {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
 .nombre_estacion {
-    padding: 20px;
-    margin-top: 20px;
+
+    padding: 10px;
     border-style: solid;
 }
 
@@ -49,14 +46,6 @@
     font-weight: bold;
     font-size: 1.5em;
 }
-
-.mensaje_cobro_envio {
-    color: #fdfeff;
-    margin-top: 10px;
-    background: #0b3cd8;
-    padding: 10px;
-}
-
 .btn_continuar_punto_encuentro {
     display: none;
     margin-top: 20px;
@@ -80,8 +69,6 @@
 }
 .text_agregar_nota{
     color: #021a35;
-    font-size: 1.3em;
-    text-decoration: underline;
     font-weight: bold
 }
 .input_notas{

@@ -13,9 +13,12 @@ $(document).ready(() => {
 
 
     $(".botton_enviar_solicitud").click(()=>{
-        rm_class([".informacion_del_cliente", ".form_primer_registro"] , "display_none");
+
+        let r =  [".informacion_del_cliente", ".form_primer_registro"];
+        rm_class(r , "display_none");
         $(".seccion_horarios").addClass("display_none");
 
+        set_option("vista", 5);
     });
 
 
@@ -34,7 +37,7 @@ $(document).ready(() => {
 let muestra_estaciones = function () {
 
     let q = "";
-    let contenedor = ".search";
+    let contenedor = ".ksearch";
     if (typeof get_parameter(contenedor) !== undefined) {
         let simple = contenedor.substring(1, contenedor.length);
         let elementoIdW = document.getElementById(simple);
@@ -48,7 +51,13 @@ let muestra_estaciones = function () {
         }
     }
 
-    despliega([".titulo_punto_encuentro", ".tipos_puntos_encuentro"], 0);
+    let f =  [
+        ".titulo_punto_encuentro",
+        ".tipos_puntos_encuentro",
+        ".mensaje_cobro_envio"
+    ];
+    rm_class(".seccion_lm", "bottom_100");
+    despliega(f, 0);
 
 
     let id = 0;
@@ -92,7 +101,7 @@ let muestra_estaciones = function () {
 };
 let response_estaciones = (data) => {
 
-    $(".search").show();
+    $(".ksearch").show();
     let texto_centro = "";
     switch (parseInt(get_option("tipo"))) {
         case 0:
@@ -123,7 +132,7 @@ let response_estaciones = (data) => {
 
 
     $(".punto_encuentro").click(muestra_horarios);
-    $(".search").keypress(function (e) {
+    $(".ksearch").keypress(function (e) {
 
         let code = (e.keyCode ? e.keyCode : e.which);
         if (code == 13) {
@@ -138,7 +147,9 @@ let response_estaciones = (data) => {
 let muestra_horarios = function () {
 
 
-    $(".search").hide();
+
+    let r  = [".ksearch", ".titulo_punto_cercano"];
+    despliega(r,0);
     let id = get_parameter_enid($(this), "id");
 
     if (id > 0) {
@@ -319,9 +330,7 @@ let agregar_nota = () => {
 }
 let valida_accion_retorno = function () {
 
-    let vista = parseInt(get_option("vista"));
-
-    switch (vista) {
+    switch (parseInt(get_option("vista"))) {
         case 2:
 
             set_option(["id_linea", 0,  "vista", 1]);
@@ -332,19 +341,28 @@ let valida_accion_retorno = function () {
             break;
         case 3:
 
-
             set_option("vista", 2);
             $(".resumen_encuentro").hide();
+            despliega(".titulo_punto_cercano", 1);
             showonehideone(".contenedor_estaciones", ".resumen_encuentro");
-            $(".search").show();
+            $(".ksearch").show();
 
 
             break;
         case 4:
 
             set_option("vista", 3);
-            despliega([".resumen_encuentro", ".titulo_principal_puntos_encuentro"], 1);
+            despliega([".resumen_encuentro", ".titulo_principal_puntos_encuentro",".titulo_punto_cercano"], 1);
             despliega([".formulario_quien_recibe"], 0);
+
+            break;
+
+        case 5:
+
+            set_option("vista", 4);
+            let r =  [".informacion_del_cliente", ".form_primer_registro"];
+            add_class(r , "display_none");
+            rm_class(".seccion_horarios" , "display_none");
 
             break;
 
