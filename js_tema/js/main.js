@@ -757,6 +757,21 @@ let rm_class = (arr_class, class_rm) => {
     }
 
 }
+let add_class = (arr_class, class_add) => {
+
+
+    if (isArray(arr_class)) {
+
+        arr_class.forEach(function (element) {
+            $(element).addClass(class_add);
+        });
+
+    } else {
+
+        $(arr_class).addClass(class_add);
+    }
+
+}
 
 let append_enid = (array) => {
 

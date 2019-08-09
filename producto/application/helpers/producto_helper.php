@@ -294,8 +294,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = d(img(["src" => "../img_tema/linea_metro/metro.jpg", "class" => "icono_metro"]));
-        $r[] = d(h("PAGO CONTRA ENTREGA", 3), "title");
-        $r[] = d(d("UN PUNTO MEDIO "), "text");
+        $r[] = d(h("UN PUNTO MEDIO", 4), "title");
+        $r[] = d(d("PAGO CONTRA ENTREGA "), "text");
         $response = d(append($r), "shadow  align-items-center box-part text-center border mh-selector d-flex flex-column justify-content-center");
         return d($response, [
             "class" => "col-lg-6 cursor_pointer",
@@ -308,7 +308,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = d(icon('fa fa-truck fa-3x'));
-        $r[] = d(h("POR MENSAJERÍA", 3), "title");
+        $r[] = d(h("MENSAJERÍA", 4), "title");
         $r[] = d("QUE LLEGUE A TU CASA U OFICINA", "text");
         $response = d(append($r),
             " shadow align-items-center box-part text-center border mh-selector d-flex flex-column justify-content-center "

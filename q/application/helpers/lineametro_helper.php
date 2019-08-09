@@ -71,7 +71,7 @@ if (!function_exists('invierte_date_time')) {
                         [
                             "src" => $row["icon"],
                             "id" => $id,
-                            "class" => "cursor_pointer linea_metro",
+                            "class" => "cursor_pointer linea_metro lm",
                             "nombre_linea" => $row["nombre"]
                         ]
                     );
@@ -85,19 +85,19 @@ if (!function_exists('invierte_date_time')) {
                         [
                             "src" => $row["icon"],
                             "id" => $id,
-                            "class" => "cursor_pointer linea_metro",
+                            "class" => "cursor_pointer linea_metro lm",
                             "nombre_linea" => $row["nombre"]
                         ]
                     );
 
-                $r[] = d($img, 3);
+                $r[] = d($img,"mt-2 img_linea");
 
 
             }
 
 
         }
-        return append($r);
+        return d(append($r),4,1);
     }
 
     function create_listado_metrobus($array)

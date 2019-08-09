@@ -2,7 +2,6 @@
 if (!function_exists('invierte_date_time')) {
 
 
-
     function create_estaciones_configurador($array, $lista_negra)
     {
 
@@ -11,9 +10,9 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre = $row["nombre"];
             $id = $row["id"];
-            $index =  search_bi_array($lista_negra, "id_punto_encuentro", $id);
+            $index = search_bi_array($lista_negra, "id_punto_encuentro", $id);
 
-            if ($index !== false){
+            if ($index !== false) {
 
                 $l[] = ajustar(d($nombre,
                     [
@@ -22,9 +21,9 @@ if (!function_exists('invierte_date_time')) {
                         "nombre_estacion" => $nombre
 
                     ]
-                ), icon("fa agregar_punto  fas fa-plus-square ", ["id" => $id ] ));
+                ), icon("fa agregar_punto  fas fa-plus-square ", ["id" => $id]));
 
-            }else{
+            } else {
 
                 $l[] = ajustar(d($nombre,
                     [
@@ -32,8 +31,7 @@ if (!function_exists('invierte_date_time')) {
                         "id" => $id,
                         "nombre_estacion" => $nombre
                     ]
-                ), icon("fa quitar_punto  fa fa-minus ", ["id" => $id ] ));
-
+                ), icon("fa quitar_punto  fa fa-minus ", ["id" => $id]));
 
 
             }
@@ -53,13 +51,13 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre = $row["nombre"];
             $id = $row["id"];
-            $index =  search_bi_array($lista_negra, "id_punto_encuentro", $id);
+            $index = search_bi_array($lista_negra, "id_punto_encuentro", $id);
 
-            if ($index !== false){
+            if ($index !== false) {
 
                 $negra[] = d($nombre,
                     [
-                        "class" => "nombre_estacion cursor_pointer punto_encuentro",
+                        "class" => "nombre_estacion cursor_pointer punto_encuentro ",
                         "id" => $id,
                         "nombre_estacion" => $nombre,
                         "costo_envio" => $row["costo_envio"],
@@ -68,11 +66,11 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
-            }else{
+            } else {
 
                 $l[] = d($nombre,
                     [
-                        "class" => "nombre_estacion cursor_pointer punto_encuentro",
+                        "class" => "nombre_estacion cursor_pointer punto_encuentro mt-2 ",
                         "id" => $id,
                         "nombre_estacion" => $nombre,
                         "costo_envio" => $row["costo_envio"],
@@ -95,21 +93,12 @@ if (!function_exists('invierte_date_time')) {
         $x[] = place("quien_recibe");
 
 
-        $x[] = d(
-            d(
-                input([
-                    "class" => "search",
-                    "name" => "q"
-                ]),
-                4
-                ,
-                1
-            ), 13);
 
 
-        $x[] = d(append($l), "contenedor_estaciones ", 1);
-
-        return d(append($r), 'resumen_encuentro') . d(append($x), 'resumen_mensaje_pago');
+        $x[] = d(append($l), "contenedor_estaciones ");
+        $response[] = d(append($r), 'resumen_encuentro');
+        $response[] = d(append($x), 'resumen_mensaje_pago');
+        return append($response);
     }
 
 }

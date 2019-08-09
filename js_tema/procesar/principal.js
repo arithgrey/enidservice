@@ -1,4 +1,12 @@
-"use strict";
+window.history.pushState({page: 1}, "", "");
+window.history.pushState({page: 2}, "", "");
+window.onpopstate = function (event) {
+
+    if (event) {
+
+        let fn = (parseInt(get_option("vista")) == 1) ? window.history.back() : valida_retorno();
+    }
+}
 $(document).ready(() => {
 
     despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
@@ -9,12 +17,12 @@ $(document).ready(() => {
     $(".form_cotizacion_enid_service").submit(registro_cotizacion);
 
     set_option({
-
         "plan": $(".plan").val(),
         "dominio": $(".dominio").val(),
         "num_ciclos": $(".num_ciclos").val(),
         "ciclo_facturacion": $(".ciclo_facturacion").val(),
         "descripcion_servicio": $(".resumen_producto").val(),
+        "vista": 1,
     });
 
 
@@ -311,6 +319,22 @@ let set_link = function () {
 
 };
 let continuar_compra = function(){
+
     showonehideone(".pr_compra",  ".compra_resumen");
+    set_option("vista",2)
 }
 let response_set_link = (data) => redirect("../login");
+let valida_retorno = ()=>{
+    let vista = parseInt(get_option("vista"));
+    switch (vista) {
+
+        case 2:
+            showonehideone(  ".compra_resumen",".pr_compra");
+            set_option("vista",1)
+            break;
+
+        default:
+
+            break;
+    }
+}
