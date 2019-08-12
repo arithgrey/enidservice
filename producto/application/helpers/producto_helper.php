@@ -100,7 +100,6 @@ if (!function_exists('invierte_date_time')) {
             $es_nuevo,
             $usuario,
             $id_publicador,
-            $desc_web,
             $tel_visible,
             $is_mobile,
             0
@@ -162,27 +161,10 @@ if (!function_exists('invierte_date_time')) {
         endif;
 
         $r[] = d(append($x), "col-lg-3  ");
-        $r[] = central(
-            $proceso_compra,
-            $id_servicio,
-            $tiempo_entrega,
-            $color,
-            $es_servicio,
-            $es_nuevo,
-            $usuario,
-            $id_publicador,
-            $desc_web,
-            $tel_visible,
-            $is_mobile, 1
-        );
-
-
         $response[] = addNRow(d(append($r), "product-detail contenedor_info_producto mt-5 col-lg-12"));
         $response[] = addNRow(d("", "place_valoraciones" ) , "top_100");
         $response[] = addNRow(d(d("","place_tambien_podria_interezar top_100") , 8,1));
         $response[] = addNRow(d(desc_servicio(pr($s, "descripcion"), $es_servicio, $url_yt, $is_mobile),8,1));
-
-
         $response[] = input_hidden(["class" => "qservicio", "value" => $nombre]);
         $response[] = input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]);
         $response[] = input_hidden(["name" => "desde_valoracion", "value" => $data["desde_valoracion"], "class" => 'desde_valoracion']);
@@ -308,7 +290,7 @@ if (!function_exists('invierte_date_time')) {
     function central($proceso_compra,
                      $tiempo_entrega, $color, $es_servicio,
                      $es_nuevo, $usuario, $id_publicador,
-                     $desc_web, $tel_visible, $es_mobile, $pos)
+                      $tel_visible, $es_mobile, $pos)
     {
 
 
@@ -336,7 +318,7 @@ if (!function_exists('invierte_date_time')) {
                 12
             ), 13);
         }
-        $r[] = social($proceso_compra, $desc_web);
+        $r[] = social($proceso_compra, 1);
         $r[] = place("solid_1 bottom_100 top_15");
 
         $response = [];
@@ -558,7 +540,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            return ($es_servicio == 0 && $es_nuevo == 0) ? d(li('- ARTÍCULO USADO'), 1) : "";
+            return ($es_servicio == 0 && $es_nuevo == 0) ? d(li('ARTÍCULO USADO'), 1) : "";
 
         }
     }

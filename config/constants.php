@@ -11,5 +11,5 @@ define('FOPEN_WRITE_CREATE', 'ab');
 define('FOPEN_READ_WRITE_CREATE', 'a+b');
 define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
-define('version_enid', 'v=1.9.25');
+define('version_enid', 'v=1.9.26');
 define('ICONV_ENABLED', TRUE);

@@ -799,21 +799,6 @@ if (!function_exists('porcentaje_total')) {
     }
 }
 
-if (!function_exists('get_url_tumblr')) {
-    function get_url_tumblr($url, $icon = 0)
-    {
-
-        $url_tumblr = "http://tumblr.com/widgets/share/tool?canonicalUrl=" . $url;
-        if ($icon > 0) {
-            return a_enid(icon('a fa-tumblr'),
-                [
-                    'target' => "_black",
-                    'href' => $url_tumblr
-                ]);
-        }
-        return $url_tumblr;
-    }
-}
 if (!function_exists('get_url_pinterest')) {
     function get_url_pinterest($url, $icon = 0)
     {
@@ -823,7 +808,8 @@ if (!function_exists('get_url_pinterest')) {
             return a_enid(icon('fa fa-pinterest-p'),
                 [
                     'target' => "_black",
-                    'href' => $url_pinterest
+                    'href' => $url_pinterest,
+                    'class' => 'black'
                 ]);
         }
 
@@ -1975,8 +1961,8 @@ function social($proceso_compra, $desc_web, $black = 1)
     $url_share = current_url() . '?' . $_SERVER['QUERY_STRING'];
     $url_facebook = get_url_facebook($url_share);
     $url_twitter = get_url_twitter($url_share, $desc_web);
-    $url_pinterest = get_url_pinterest($url_share, $desc_web);
-    $url_tumblr = get_url_tumblr($url_share, $desc_web);
+
+
 
     $color = ($black > 0) ? "black" : "white";
 
@@ -2024,24 +2010,10 @@ function social($proceso_compra, $desc_web, $black = 1)
                 "data-size" => "large",
                 "href" => $url_twitter,
             ]);
-        $r[] = a_enid("",
-            [
-                "href" => $url_pinterest,
-                "target" => "_black",
-                "class" => "fa fa-pinterest-p " . $color,
-                "title" => "Pin it"
-            ]);
+        $r[] = get_url_pinterest($url_share, $desc_web);
 
-        $r[] = a_enid("",
-            [
-                "href" => $url_tumblr,
-                "class" => "fa fa-tumblr " . $color,
-                "target" => "_black",
-                "title" => "Tumblr"
-            ]);
 
-        $social = append($r);
-        $response = d($social, "contenedor_social display_flex_enid mt-5");
+        $response = d(append($r), "contenedor_social display_flex_enid mt-5");
     }
     return d($response, 1);
 
