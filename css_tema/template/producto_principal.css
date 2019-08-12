@@ -1,3 +1,6 @@
+.l_deseos{
+    background: #0568ac !important;
+}
 .escribir:hover{
     color:blue!important;
 }
@@ -46,8 +49,8 @@
 }
 
 .tiempo_promedio {
-    background: #051224;
-    padding: 3px;
+    background: #77b0ff;
+    padding: 2px;
     color: white;
     line-height: 1.7em
 }
@@ -206,10 +209,6 @@
       */
 }
 
-.contenedor_info_producto {
-    width: 95% !important;
-    margin: 0 auto;
-}
 
 .contenedor_izquierdo {
     width: 100% !important;
@@ -351,11 +350,6 @@
 .table_orden_3 {
     width: 10%;
 }
-
-.agregar_a_lista_deseos {
-    margin-bottom: 30px;
-}
-
 .agregar_a_lista {
     margin-bottom: 20px;
 }
@@ -399,7 +393,6 @@
         text-align: right;
     }
 
-    .contenedor_comentarios {
-        margin-top: 50px;
-    }
+
+
 }

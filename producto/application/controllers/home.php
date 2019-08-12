@@ -62,7 +62,8 @@ class Home extends CI_Controller
 
         ];
 
-        $this->app->pagina($data, 'pre');
+
+        $this->app->pagina($data, render_tipo_entrega($data),1);
 
     }
 
@@ -139,7 +140,7 @@ class Home extends CI_Controller
         $data["url_img_post"] = "";
         if (es_data($data["imgs"]) > 0) {
 
-            $data["url_img_post"] = get_url_imagen_post($data["imgs"][0]["nombre_imagen"]);
+            $data["url_img_post"] = url_post($data["imgs"][0]["nombre_imagen"]);
         }
 
 
@@ -255,7 +256,8 @@ class Home extends CI_Controller
 
         ];
 
-        $this->app->pagina($this->app->cssJs($data, "producto_recibo_registrado"), 'pre');
+
+        $this->app->pagina($this->app->cssJs($data, "producto_recibo_registrado"), render_tipo_entrega($data));
 
     }
 }

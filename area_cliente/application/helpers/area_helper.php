@@ -12,6 +12,7 @@ if (!function_exists('invierte_date_time')) {
             $action = $data["action"];
             $r[] = d(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']);
             $r[] = d(place("place_ventas_usuario"), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_mis_ventas']);
+
             $r[] = d(get_format_valoraciones($data["valoraciones"], $data["id_usuario"], $data["alcance"]), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_valoraciones']);
             $r[] = d(place("place_pagar_ahora"), ["class" => "tab-pane", "id" => "tab_pagos"]);
             $r[] = d(place("place_resumen_servicio"), ["class" => "tab-pane", "id" => "tab_renovar_servicio"]);
@@ -80,22 +81,28 @@ if (!function_exists('invierte_date_time')) {
         function get_format_valoraciones($valoraciones, $id_usuario, $alcance)
         {
 
-            $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
-            $x[] = d($valoraciones, "top_30");
-            $x[] = d(
-                a_enid(
-                    "VER COMENTARIOS",
-                    [
-                        "href" => path_enid("recomendacion", $id_usuario),
-                        "class" => "a_enid_blue  top_30"
-                    ]
-                ),
-                "text-center top_20"
-            );
+            $r =  [];
+            if (es_data($valoraciones)){
 
-            $x[] = d($alcance, " text-center top_30");
+                $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
+                $x[] = d($valoraciones, "top_30");
+                $x[] = d(
+                    a_enid(
+                        "VER COMENTARIOS",
+                        [
+                            "href" => path_enid("recomendacion", $id_usuario),
+                            "class" => "a_enid_blue  top_30"
+                        ]
+                    ),
+                    "text-center top_20"
+                );
 
-            return  d(d(append($x), 6, 1), "text-center");
+                $x[] = d($alcance, " text-center top_30");
+
+
+                $r[] =   d(d(append($x), 6, 1), "text-center");
+            }
+            return append($r);
 
         }
     }

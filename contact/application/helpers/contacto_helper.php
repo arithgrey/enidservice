@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
             (
                 d(
                     h(
-                        get_social(0, "", 0)
+                        social(0, "", 0)
                         , 3, "social_contact padding_20"
                     )
                     , 3

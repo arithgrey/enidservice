@@ -1562,7 +1562,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $r[] = d(append($imagenes), "contenedor_sugeridos contenedor_sugeridos ");
+        $r[] = d(append($imagenes), "contenedor_sugeridos contenedor_sugeridos  row justify-content-center");
         return append($r);
 
     }

@@ -383,7 +383,7 @@ class Servicio extends REST_Controller
     {
 
         $nombre_servicio = $param["nombre_servicio"];
-        $flag_servicio = $param["flag_servicio"];
+        $es_servicio = $param["flag_servicio"];
 
         $primer_nivel =
             (array_key_exists("primer_nivel", $param)) ? $param["primer_nivel"] : 0;
@@ -408,14 +408,14 @@ class Servicio extends REST_Controller
 
         $precio = $param["precio"];
         $id_ciclo_facturacion = 5;
-        if ($flag_servicio == 1) {
+        if ($es_servicio == 1) {
             $id_ciclo_facturacion = $param["ciclo_facturacion"];
         }
 
 
         $params = [
             "nombre_servicio" => $nombre_servicio,
-            "flag_servicio" => $flag_servicio,
+            "flag_servicio" => $es_servicio,
             "primer_nivel" => $primer_nivel,
             "segundo_nivel" => $segundo_nivel,
             "tercer_nivel" => $tercer_nivel,
@@ -1172,9 +1172,9 @@ class Servicio extends REST_Controller
         foreach ($servicios as $row) {
 
             $nueva_data[$a] = $row;
-            $flag_servicio = $row["flag_servicio"];
+            $es_servicio = $row["flag_servicio"];
 
-            if ($flag_servicio == 0) {
+            if ($es_servicio == 0) {
                 $prm["flag_envio_gratis"] = $row["flag_envio_gratis"];
                 $nueva_data[$a]["costo_envio"] = $this->app->calcula_costo_envio($prm);
             }

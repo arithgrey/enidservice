@@ -1428,3 +1428,11 @@ h5 {
 
     width: 400px !important;
 }
+
+.h_450 {
+
+    height: 450px !important;
+}
+.solid_1{
+    border: solid 1px;
+}

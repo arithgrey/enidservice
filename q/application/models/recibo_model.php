@@ -754,13 +754,13 @@ class Recibo_model extends CI_Model
         $resumen_compra = $this->crea_resumen_compra($servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega);
         $costo_envio_cliente = 0;
         $costo_envio_vendedor = 0;
-        $flag_servicio = ($tipo_entrega < 5) ? 0 : $servicio["flag_servicio"];
+        $es_servicio = ($tipo_entrega < 5) ? 0 : $servicio["flag_servicio"];
         if ($servicio["flag_servicio"] > 0) {
-            $flag_servicio = 1;
+            $es_servicio = 1;
         }
 
         $monto_a_pagar = $precio;
-        if ($flag_servicio == 0 && $tipo_entrega > 1) {
+        if ($es_servicio == 0 && $tipo_entrega > 1) {
 
             $costo_envio = $param["costo_envio"];
             $costo_envio_cliente = $costo_envio["costo_envio_cliente"];

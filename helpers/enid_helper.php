@@ -1969,7 +1969,7 @@ function add_text($a, $b, $f = 0)
 
 }
 
-function get_social($proceso_compra, $desc_web, $black = 1)
+function social($proceso_compra, $desc_web, $black = 1)
 {
 
     $url_share = current_url() . '?' . $_SERVER['QUERY_STRING'];

@@ -376,7 +376,7 @@ class recibo extends REST_Controller
             $num_ciclos_contratados = $r["num_ciclos_contratados"];
             $resumen_pedido = $r["resumen_pedido"];
             $servicio = $servicio[0];
-            $flag_servicio = $servicio["flag_servicio"];
+            $es_servicio = $servicio["flag_servicio"];
             $tipo_entrega = $r["tipo_entrega"];
 
             $deuda = get_saldo_pendiente(
@@ -401,7 +401,7 @@ class recibo extends REST_Controller
                 $id_recibo,
                 $resumen_pedido,
                 $num_ciclos_contratados,
-                $flag_servicio,
+                $es_servicio,
                 $id_ciclo_facturacion,
                 $saldo_pendiente,
                 $url_img,
@@ -450,9 +450,9 @@ class recibo extends REST_Controller
 
 
             $servicio = $data_complete["servicio"][0];
-            $flag_servicio = $servicio["flag_servicio"];
+            $es_servicio = $servicio["flag_servicio"];
             $text_envio_cliente_sistema = "";
-            if ($flag_servicio == 0) {
+            if ($es_servicio == 0) {
                 $saldo_pendiente = $saldo_pendiente + $envio_cliente;
                 $text_envio_cliente_sistema = key_exists_bi($costo_envio_sistema, "text_envio", "cliente");
             }
@@ -472,7 +472,7 @@ class recibo extends REST_Controller
             $r[] = get_text_saldo_pendiente(
                 $resumen_pedido,
                 $num_ciclos_contratados,
-                $flag_servicio,
+                $es_servicio,
                 $id_ciclo_facturacion,
                 $text_envio_cliente_sistema,
                 $fecha_registro,

@@ -710,11 +710,11 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
-    function text_periodos_contratados($periodos, $flag_servicio, $id_ciclo_facturacion)
+    function text_periodos_contratados($periodos, $es_servicio, $id_ciclo_facturacion)
     {
 
         $text = "";
-        if ($flag_servicio == 1) {
+        if ($es_servicio == 1) {
 
             $ciclos = [
                 "",
@@ -855,7 +855,7 @@ if (!function_exists('invierte_date_time')) {
     function format_concepto($id_recibo,
                              $resumen_pedido,
                              $num_ciclos,
-                             $flag_servicio,
+                             $es_servicio,
                              $id_ciclo_facturacion,
                              $saldo_pendiente,
                              $url_img_servicio,
@@ -867,7 +867,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = h("#Recibo: " . $id_recibo);
         $r[] = d("Concepto");
         $r[] = d($resumen_pedido);
-        $r[] = text_periodos_contratados($num_ciclos, $flag_servicio, $id_ciclo_facturacion);
+        $r[] = text_periodos_contratados($num_ciclos, $es_servicio, $id_ciclo_facturacion);
         $r[] = d("PRECIO " . span("$" . $monto_a_pagar, "strong"), "top_30");
         $r[] = d($deuda["text_envio"]);
         $text[] = d(append($r));

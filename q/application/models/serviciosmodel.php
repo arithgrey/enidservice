@@ -939,10 +939,10 @@ class serviciosmodel extends CI_Model
 
 	function get_clasificacion($param){
 
-		$flag_servicio = $param["flag_servicio"];
+		$es_servicio = $param["flag_servicio"];
 		$query_get = "SELECT * FROM clasificacion
 					  WHERE
-						flag_servicio = '".$flag_servicio."' ";
+						flag_servicio = '".$es_servicio."' ";
 		$result=  $this->db->query($query_get);
 		return $result->result_array();
 	}
