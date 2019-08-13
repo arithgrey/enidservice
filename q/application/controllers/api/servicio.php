@@ -237,7 +237,7 @@ class Servicio extends REST_Controller
     private function get_coincidencia_servicio($q)
     {
 
-        return $this->app->api( "clasificacion/coincidencia_servicio/format/json/", $q);
+        return $this->app->api("clasificacion/coincidencia_servicio/format/json/", $q);
 
     }
 
@@ -1159,7 +1159,9 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel")) {
-            $response = $this->agrega_costo_envio($this->serviciosmodel->get_producto_por_clasificacion($param));
+
+            $response = $this->serviciosmodel->get_producto_por_clasificacion($param);
+
         }
         $this->response($response);
     }
@@ -1196,17 +1198,14 @@ class Servicio extends REST_Controller
             $param["q2"] = 0;
             $param["q"] = $q;
             $param["order"] = 1;
-            $param["id_clasificacion"] = 1;
+            $param["id_clasificacion"] = prm_def($param, "id_clasificacion");
             $param["id_usuario"] = 0;
             $param["vendedor"] = 0;
             $param["resultados_por_pagina"] = $param["limit"];
             $param["agrega_clasificaciones"] = 0;
             $servicios = $this->serviciosmodel->busqueda_producto($param);
 
-            $response = [];
-            if (es_data($servicios) && array_key_exists("servicio", $servicios)) {
-                $response = $this->agrega_costo_envio($servicios["servicio"]);
-            }
+            $response = prm_def($servicios, "servicio", []);
 
         }
         $this->response($response);
@@ -1369,7 +1368,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_usuario")){
+        if (fx($param, "id_usuario")) {
 
             $response = $this->serviciosmodel->get_alcance_productos_usuario($param);
         }
@@ -1596,18 +1595,16 @@ class Servicio extends REST_Controller
         if (fx($param, "id_servicio")) {
 
             $clasificaciones = $this->serviciosmodel->get_clasificaciones_por_id_servicio($param["id_servicio"]);
-
-            if (count($clasificaciones) > 0) {
-                $response = $this->get_servicios_por_clasificaciones($clasificaciones[0]);
-            }
+            $response = (es_data($clasificaciones)) ? $response = $this->get_servicios_por_clasificaciones($clasificaciones[0]) : [];
             $servicios = $this->completa_servicios_sugeridos($response, $param);
-            if (count($servicios) > 0) {
+            $servicios = $this->extra_sugerencias($servicios);
+
+            if (es_data($servicios) ) {
 
 
-                $is_mobile = $this->get_option("is_mobile");
-                $servicios = $this->add_imgs_sugerencias($servicios);
-
-                $response = get_view_sugerencias($servicios, $is_mobile);
+                $response = get_view_sugerencias(
+                    $this->add_imgs_sugerencias($servicios)
+                );
 
             } else {
                 $data_response["sugerencias"] = 0;
@@ -1623,9 +1620,8 @@ class Servicio extends REST_Controller
         $response = [];
         $a = 0;
         foreach ($servicios as $row) {
-
             $servicio = $row;
-            $id_servicio = $servicios[$a]["id_servicio"];
+            $id_servicio = $row["id_servicio"];
             $servicio["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
             $a++;
             $response[] = $servicio;
@@ -1644,36 +1640,52 @@ class Servicio extends REST_Controller
     {
 
         $in_session = $this->app->is_logged_in();
-        $n_servicios = [];
         $existentes = count($servicios);
-        if ($existentes > 0) {
-            $n_servicios = $servicios;
-        }
-        $limit = "";
-        if ($existentes < 7) {
+        $sugerencia = ($existentes > 0) ? $servicios : [];
 
+        if ($existentes < 8) {
 
-            $limit = 7 - $existentes;
-            $param["limit"] = $limit;
-            if ($in_session != false) {
+            $param["limit"] = (8 - $existentes);
+
+            if ($in_session) {
+
                 $param["id_usuario"] = $this->app->get_session("idusuario");
-                $sugerencias = $this->get_servicios_lista_deseos($param);
-                $sugerencias = $this->agrega_costo_envio($sugerencias);
-                foreach ($sugerencias as $row) {
-                    array_push($n_servicios, $row);
-                }
+                $nuevo = $this->get_servicios_lista_deseos($param);
+
             } else {
 
-                $sugerencias = $this->busqueda_producto_por_palabra_clave($param);
-                if ($sugerencias != NULL) {
-                    foreach ($sugerencias as $row) {
-                        array_push($n_servicios, $row);
-                    }
-                }
-
+                $nuevo = $this->busqueda_producto_por_palabra_clave($param);
             }
+
+            foreach ($nuevo as $row) {
+                $sugerencia[] = $row;
+            }
+
+
+            $sugerencia =
+                array_intersect_key($sugerencia, array_unique(array_column($sugerencia, 'id_servicio')));
+
         }
-        return $n_servicios;
+        return $sugerencia;
+    }
+
+    function extra_sugerencias($servicios)
+    {
+
+        if (es_data($servicios) && count($servicios) < 8) {
+
+            $existentes = count($servicios);
+            if ($existentes < 8) {
+
+                $param["limit"] = (8 - $existentes);
+                foreach ($this->busqueda_producto_por_palabra_clave($param)  as $row ){
+                    $servicios[] =  $row;
+                }
+            }
+
+        }
+
+        return $servicios;
     }
 
     function get_servicios_lista_deseos($q)

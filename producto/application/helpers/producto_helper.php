@@ -160,7 +160,7 @@ if (!function_exists('invierte_date_time')) {
 
         endif;
 
-        $r[] = d(append($x), "col-lg-3  ");
+        $r[] = d(append($x), "col-lg-3  "); 
         $response[] = addNRow(d(append($r), "product-detail contenedor_info_producto mt-5 col-lg-12"));
         $response[] = addNRow(d("", "place_valoraciones" ) , "top_100");
         $response[] = addNRow(d(d("","place_tambien_podria_interezar top_100") , 8,1));

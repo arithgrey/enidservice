@@ -737,7 +737,6 @@ class serviciosmodel extends CI_Model
 		$data_complete["total_busqueda"] = $this->get_resultados_posibles($param);
 		$_num = get_random();
 		$this->create_productos_disponibles(0, $_num, $param);
-		$data_complete["sql"] = $this->get_option("sql");
 		$query_get = "SELECT * FROM tmp_producto_$_num ";
 		$result = $this->db->query($query_get);
 		$servicios = $result->result_array();
@@ -780,19 +779,20 @@ class serviciosmodel extends CI_Model
 
 			$query_create = "CREATE TABLE tmp_producto_$_num AS 
                             SELECT  
-                                id_servicio ,  
-                                id_usuario,
-                                nombre_servicio, 
-                                flag_servicio, 
+                                id_servicio ,                              
+                                nombre_servicio,
+                                id_usuario,                         
+                                metakeyword                                 
+                                /*
+                                flag_servicio,                                                     
                                 flag_envio_gratis,
-                                metakeyword,                                 
                                 color,   
                                 precio , 
                                 existencia,
                                 id_ciclo_facturacion,
                                 vista,
                                 valoracion,
-                                deseado      
+                                deseado*/      
                                 " . $param_extra . "                       
                             FROM 
                             servicio" . $where;

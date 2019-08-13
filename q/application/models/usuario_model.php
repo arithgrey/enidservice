@@ -341,18 +341,13 @@ class usuario_model extends CI_Model
 		$limit = $param["limit"];
 		$query_get = "SELECT                         
                         s.id_servicio ,  
-                        s.nombre_servicio, 
-                        s.flag_servicio, 
-                        s.flag_envio_gratis,
+                        s.nombre_servicio,                         
                         s.metakeyword, 
                         s.primer_nivel , 
                         s.segundo_nivel ,
                         s.tercer_nivel ,
                         s.cuarto_nivel , 
-                        s.quinto_nivel, 
-                        s.color,
-                        s.precio,
-                        s.id_ciclo_facturacion
+                        s.quinto_nivel             
                     FROM usuario_deseo us
                     INNER JOIN servicio s  
                     ON us.id_servicio =  s.id_servicio

@@ -1540,13 +1540,14 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_view_sugerencias($servicios, $is_mobile)
+    function get_view_sugerencias($servicios)
     {
 
-
         $r = [];
+        $s = array_intersect_key($servicios, array_unique(array_column($servicios, 'id_servicio')));
+
         $imagenes = [];
-        foreach ($servicios as $row) {
+        foreach ($s as $row) {
 
 
             $img = img([
