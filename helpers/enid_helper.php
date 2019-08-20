@@ -712,7 +712,7 @@ if (!function_exists('img_enid')) {
 
 
         $conf["src"] = ($external == 0) ?
-            "../img_tema/enid_service_logo.jpg" : "https://enidservice.com/inicio/img_tema/enid_service_logo.jpg";
+            "../img_tema/enid_service_logo.jpg" : "https://enidservices.com/inicio/img_tema/enid_service_logo.jpg";
 
         if (es_data($extra)) {
             $conf += $extra;
@@ -1374,7 +1374,7 @@ if (!function_exists('get_url_servicio')) {
 if (!function_exists('img_servicio')) {
     function img_servicio($id, $external = 0)
     {
-        $url = ($external > 0) ? "http://enidservice.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id : get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
+        $url = ($external > 0) ? "http://enidservices.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id : get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
 
         $img = [
             'src' => $url,
@@ -1526,7 +1526,7 @@ if (!function_exists('get_menu_session')) {
 
 
             $text = btw(
-                d(" Iniciar sesión ", ["style" => "font-size:.8em;"]),
+                d(" acceder ", ["style" => "font-size:.8em;"]),
                 icon("fa fa-user", ["style" => "margin-left:5px;font-size:1.1em;"]),
                 "display_flex_enid"
 

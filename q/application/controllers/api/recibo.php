@@ -458,12 +458,12 @@ class recibo extends REST_Controller
             }
 
 
-            $url_request = "https://enidservice.com/inicio/";
+            $url_request = "https://enidservices.com/inicio/";
             $url_pago_oxxo = $url_request . "orden_pago_oxxo/?q=" . $saldo_pendiente . "&q2=" . $id_recibo . "&q3=" . $id_usuario;
             $url_pago_paypal = "https://www.paypal.me/eniservice/" . $saldo_pendiente;
-            $config_log = ['src' => "https://enidservice.com/inicio/img_tema/enid_service_logo.jpg", 'width' => '100'];
-            $img_oxxo = "https://enidservice.com/inicio/img_tema/pago-oxxo.jpeg";
-            $img_paypal = "https://enidservice.com/inicio/img_tema/explicacion-pago-en-linea.png";
+            $config_log = ['src' => "https://enidservices.com/inicio/img_tema/enid_service_logo.jpg", 'width' => '100'];
+            $img_oxxo = "https://enidservices.com/inicio/img_tema/pago-oxxo.jpeg";
+            $img_paypal = "https://enidservices.com/inicio/img_tema/explicacion-pago-en-linea.png";
             $url_seguimiento_pago = $url_request . "pedidos/?seguimiento=$id_recibo&notificar=1";
 
 

@@ -603,7 +603,7 @@ div.pagination li.active span:hover {
 
 #flipkart-navbar {
 
-    background-color: #02111e;
+    background-color: #001891;
     color: #FFFFFF;
 }
 
@@ -1116,17 +1116,7 @@ h2 {
     box-shadow: 2px 2px 5px 0px rgba(131, 136, 150, 1);
 }
 
-.categorias_mas_vistas:hover {
-    color: white !important;
-}
 
-.categoria_text {
-    text-transform: uppercase;
-    text-transform: uppercase;
-    letter-spacing: 1.3px;
-    display: block;
-    margin-top: 5px;
-}
 
 .nombre_servicio {
     font-size: 1em;
@@ -1261,11 +1251,7 @@ select {
 }
 
 .producto_enid {
-    height: 310px !important;
-}
-
-.producto_enid_img {
-    height: 230px;
+    height: 290px !important;
 }
 
 .texto_precio {
@@ -1329,7 +1315,9 @@ h5 {
 .text_notificacion {
     min-height: 230px;
 }
-
+.fp_5{
+    font-size: .5em;
+}
 .f2 {
     font-size: 2em;
 }
