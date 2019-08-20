@@ -34,16 +34,19 @@ if (!function_exists('invierte_date_time')) {
         $x[] = append($data["lista_productos"]);
 
         $r[] = val_principal_img($data);
-        $r[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 'contenedor_anuncios_home');
+        $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
 
 
         $z = [];
-        $z[] = heading("FILTRA TU BÚSQUEDA"
+
+
+        $z[] = heading(span("FILTRA TU BÚSQUEDA")
             .
-            small($busqueda . "(" . $data["num_servicios"] . "PRODUCTOS)")
+            small($busqueda . "(" . $data["num_servicios"] . "PRODUCTOS)", "fp_5")
             ,
-            3,
-            ["class" => "text_filtro bg_black"]);
+            3
+        );
+        $z[] = img(["src" => "../img_tema/productos/ejemplo.png"]);
         $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
 
         $fil[] = d(d(append($z), 10, 1), 3);
@@ -59,19 +62,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(append($fil), "row mt-3");
 
 
-        $cat[] = d("", 2);
-        $cat[] = d(btw(
-            heading(
-                "CATEGORIAS DESTACADAS",
-                3
-            )
-            ,
-            d(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)), 1)
-            ,
-            ""
-        ), 10);
+        $cat[] = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
 
-        $r[] = append($cat, ["class" => "row white top_30", "style" => "background:  #080221;"]);
+        $r[] = append($cat);
         return append($r);
 
 
@@ -156,7 +149,8 @@ if (!function_exists('invierte_date_time')) {
     function val_principal_img($data)
     {
 
-        return (prm_def($data,  "q") === "") ? img(["src" => "../img_tema/portafolio/llamada_gratis_2.png"]) : "";
+        //return (prm_def($data,  "q") === "") ? img(["src" => "../img_tema/portafolio/llamada_gratis_2.png"]) : "";
+        return "";
 
     }
 
@@ -189,22 +183,36 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r = [];
+
         if ($is_mobile < 1) {
+
+            $r[] =
+                d(a_enid(
+                    "Audio",
+                    [
+                        "href" => "../../repros",
+                        "class" => 'categorias_mas_vistas ',
+                        "target" => "_black"
+                    ]
+                ), 2);
 
             foreach (crea_menu_principal_web($categorias_destacadas) as $row):
 
                 $r[] =
-                    a_enid(
-                        mayus($row["nombre_clasificacion"]),
-                        [
-                            "href" => "?q=&q2=" . $row['primer_nivel'],
-                            "class" => 'categorias_mas_vistas'
-                        ]
+                    d(
+                        a_enid(
+                            $row["nombre_clasificacion"],
+                            [
+                                "href" => "?q=&q2=" . $row['primer_nivel'],
+                                "class" => 'categorias_mas_vistas '
+                            ]
+                        ),
+                        2
                     );
             endforeach;
 
         }
-        return append($r);
+        return d(d(append($r), "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"), 'contenedor_anuncios_home row  mb-5 p-3 bg-light');
 
 
     }
@@ -244,7 +252,7 @@ if (!function_exists('invierte_date_time')) {
             $response = d(append($r), "contenedor_sub_categorias");
 
         }
-        return d(d($response, 'contenedor_menu_productos_sugeridos'), "border-right padding_5");
+        return d(d($response, 'contenedor_menu_productos_sugeridos'), " padding_5 mt-5");
     }
 
     function crea_sub_menu_categorias_destacadas($param)
@@ -253,27 +261,34 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         foreach ($param as $row) {
 
+            $response [] = d(a_enid($row["nombre_clasificacion"],
+                [
+                    "href" => "?q=&q2=" . $row["primer_nivel"],
+                    "class" => ' text-uppercase black '
+                ]
 
-            if ($z == 0) {
-                $response [] = "<ul class='clasificaciones_sub_menu_ul'>";
-            }
+            ));
 
-            $response [] = li(
-
-                a_enid($row["nombre_clasificacion"],
-                    [
-                        "href" => "?q=&q2=" . $row["primer_nivel"],
-                        "class" => 'text_categoria_sub_menu white text-uppercase'
-                    ]
-                )
-            );
-            $z++;
-            if ($z == 5) {
-                $z = 0;
-                $response [] = "</ul>";
-            }
         }
-        return append($response);
+
+
+        $t[] = d(
+            img(
+                [
+                    "src" => "../img_tema/productos/ejemplo2.jpg",
+                    "class" => "card-img"
+                ]
+            ), 4);
+
+        $s[] =  h("Más categorías", 3, "card-title mb-5");
+        $s[] =  p(append($response) , "card-text");
+        $sec[] =  d(d(append($s), "card-body"), 8);
+
+        $r[] = append($t);
+        $r[] = append($sec);
+        $res  = d(d( append($r), " no-gutters  no-gutters d-flex  flex-row justify-content-center align-items-center"), "card mb-3 border-0" );
+        $f  = d( $res, 8,1);
+        return d($f,"row top_100 bottom_100");
     }
 
     function crea_menu_principal_web($param)

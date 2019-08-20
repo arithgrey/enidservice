@@ -49,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
 
         $asunto = "HOLA {$nombre} TIENES UNA NUEVA PREGUNTA SOBRE UNO DE TUS ARTÍCULOS EN VENTA";
         $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu artículos, puedes ver la pregunta que 
-            te envió en tu !" . a_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
+            te envió en tu !" . a_enid("buzón aquí", ["href" => "https://enidservices.com/inicio/login/"]);
 
         $img = img_servicio($id_servicio, 1);
         $cuerpo = append(
@@ -69,7 +69,7 @@ if (!function_exists('invierte_date_time')) {
 
         $asunto = "HOLA {$nombre} TIENES UNA NUEVA RESPUESTA EN TU BUZÓN";
         $text = "Que tal {$nombre} el vendedor a contestado tu pregunta, puedes ver la respuesta que 
-            te envió en tu !" . a_enid("buzón aquí", "https://enidservice.com/inicio/login/");
+            te envió en tu !" . a_enid("buzón aquí", "https://enidservices.com/inicio/login/");
 
         $img = img_servicio($id_servicio, 1);
         $cuerpo = append([
@@ -95,7 +95,7 @@ if (!function_exists('invierte_date_time')) {
 
             $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
             $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu artículos, puedes ver la pregunta que 
-            te envió en tu !" . a_enid("buzón aquí", ["href" => "https://enidservice.com/inicio/login/"]);
+            te envió en tu !" . a_enid("buzón aquí", ["href" => "https://enidservices.com/inicio/login/"]);
             $cuerpo = img_enid([], 1, 1) . h($text, 5);
             return get_request_email($usuario["email"], $asunto, $cuerpo);
 

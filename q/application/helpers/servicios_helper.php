@@ -529,8 +529,8 @@ if (!function_exists('invierte_date_time')) {
                 img([
                     'src' => $s["url_img_servicio"],
                     'alt' => $s["metakeyword"],
-                    'style' => "max-height: 270px !important",
-                    'class' => "padding_5 top_10 hover_padding"
+                    'style' => "max-height: 250px !important",
+                    'class' => "padding_5  hover_padding"
                 ])
             );
 
@@ -548,7 +548,7 @@ if (!function_exists('invierte_date_time')) {
                 append($p),
                 [
                     "href" => get_url_servicio($id_servicio),
-                    "class" => "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3 "
+                    "class" => "producto_enid d-flex flex-column justify-content-center col-lg-3  px-3  "
 
                 ]
             );

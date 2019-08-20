@@ -96,11 +96,7 @@
     <?php if (!isset($proceso_compra) && !is_null($proceso_compra) && $proceso_compra == 0): ?>
         <?= d(append($list_footer), "base_paginas_extra", 1) ?>
     <?php endif ?>
-    <?php if (isset($is_mobile) && !is_null($is_mobile) && $is_mobile < 1): ?>
-        <?php if (!isset($proceso_compra) || $proceso_compra == 0): ?>
-            <?= d(get_metodos_pago(), 1) ?>
-        <?php endif ?>
-    <?php endif ?>
+
     <?= d(
         btw(
             d("© 2019 ENID SERVICE.")
