@@ -58,9 +58,11 @@ if (!function_exists('invierte_date_time')) {
     function format_tablero($tickets)
     {
 
-        $pendiente[] = d(h("Por hacer", 3, "underline"), 1);
-        $haciendo[] = d(h("En proceso", 3), 1, "underline");
-        $hecho[] = d(h("hecho", 3), 1, "underline");
+        $backlog[] =  d(h("Backlog", 5, " text-uppercase "));
+        $pendiente[] = d(h("Pendiente", 5, " text-uppercase "));
+        $haciendo[] = d(h("Proceso", 5, " text-uppercase "));
+        $hecho[] = d(h("hecho", 5," text-uppercase ") );
+        $revision[] = d(h("Revisión", 5," text-uppercase ") );
 
         foreach ($tickets as $row) {
 
@@ -68,6 +70,22 @@ if (!function_exists('invierte_date_time')) {
             $asunto = $row["asunto"];
 
             switch ($row["status"]) {
+
+
+                case 5:
+
+                    $backlog[] = d(d($asunto, 12),
+                        [
+                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "id" => $id_ticket
+
+                        ]);
+
+                    break;
+
+
+
+
                 case 0:
 
                     $pendiente[] = d(d($asunto, 12),
@@ -105,13 +123,26 @@ if (!function_exists('invierte_date_time')) {
 
                     break;
 
+                case 6:
+
+                    $revision[] = d(d($asunto, 12),
+                        [
+                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "id" => $id_ticket
+
+                        ]);
+
+                    break;
+
+
             }
         }
-        $response[] = d(append($pendiente), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 0]);
-        $response[] = d("", "col-lg-1");
-        $response[] = d(append($haciendo), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 1]);
-        $response[] = d("", "col-lg-1");
-        $response[] = d(append($hecho), ["class" => "col-lg-3 border pading_10 mh_700 droppable", "id" => 2]);
+
+        $response[] = d(append($backlog), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 5]);
+        $response[] = d(append($pendiente), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 0]);
+        $response[] = d(append($haciendo), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 1]);
+        $response[] = d(append($hecho), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 2]);
+        $response[] = d(append($revision), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 6 ]);
 
         return append($response);
 
