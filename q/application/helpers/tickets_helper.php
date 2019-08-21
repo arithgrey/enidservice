@@ -41,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
                     )
                 );
 
-            $r[] = td($row["monto_solicitado"] . "MXN",  'monto_solicitud_text');
+            $r[] = td($row["monto_solicitado"] . "MXN", 'monto_solicitud_text');
 
             $response[] = tr(append($r));
             $re[] = tb(append($response));
@@ -58,11 +58,11 @@ if (!function_exists('invierte_date_time')) {
     function format_tablero($tickets)
     {
 
-        $backlog[] =  d(h("Backlog", 5, " text-uppercase "));
+        $backlog[] = d(h("Backlog", 5, " text-uppercase "));
         $pendiente[] = d(h("Pendiente", 5, " text-uppercase "));
         $haciendo[] = d(h("Proceso", 5, " text-uppercase "));
-        $hecho[] = d(h("hecho", 5," text-uppercase ") );
-        $revision[] = d(h("Revisión", 5," text-uppercase ") );
+        $hecho[] = d(h("hecho", 5, " text-uppercase "));
+        $revision[] = d(h("Revisión", 5, " text-uppercase "));
 
         foreach ($tickets as $row) {
 
@@ -82,8 +82,6 @@ if (!function_exists('invierte_date_time')) {
                         ]);
 
                     break;
-
-
 
 
                 case 0:
@@ -142,7 +140,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(append($pendiente), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 0]);
         $response[] = d(append($haciendo), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 1]);
         $response[] = d(append($hecho), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 2]);
-        $response[] = d(append($revision), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 6 ]);
+        $response[] = d(append($revision), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 6]);
 
         return append($response);
 
@@ -304,7 +302,7 @@ if (!function_exists('invierte_date_time')) {
                 $id_ticket = $row["id_ticket"];
                 $lista_prioridad = ["Alta", "Media", "Baja"];
                 $resumen = $pendientes . " / " . $tareas;
-                $asunto  = $row["asunto"];
+                $asunto = $row["asunto"];
 
                 $cerrar =
                     btn(
@@ -328,9 +326,22 @@ if (!function_exists('invierte_date_time')) {
                     )
                 );
 
-                $x[] = d(h(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
+
+
+                $calendario[] = form_open("", ["class" => 'frm_agendar_google']);
+                $calendario[] = d(h(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
+                $calendario[] = input_hidden(["class" => "descripcion_google" , "value" => $asunto]);
+                $agendar = ajustar(input_hour_date(), btn("Agendar"), 4);
+                $calendario[] = d("AGENDAR EN GOOGLE", "cursor_pointer  underline agendar_google");
+                $calendario[] = ajustar($agendar, "", 8, "hidden seccion_agendar");
+                $calendario[] = form_close();
+
+
+
+                $x[] = append($calendario);
                 $x[] = d(h(add_text("DEPARTAMENTO", strtoupper($row["nombre_departamento"])), 6));
                 $x[] = d(h(add_text("PRIORIDAD", strtoupper($lista_prioridad[$row["prioridad"]])), 6, "underline"));
+
                 $x[] = d(add_text(icon("fa fa-pencil asunto", ["id" => $id_ticket]), $asunto), "top_30 border padding_10 bottom_30 s_desc_asunto");
 
 
@@ -342,7 +353,7 @@ if (!function_exists('invierte_date_time')) {
                                 "value" => $asunto
                             ]
                         )
-                    ), "col-lg-6 display_none i_desc_asunto" );
+                    ), "col-lg-6 display_none i_desc_asunto");
 
 
                 $x[] = d(h(strtoupper($row["fecha_registro"]), 6, "text-right"));
@@ -486,6 +497,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = crea_tabla_resumen_ticket($data['info_ticket'], $data['info_num_tareas']);
         $r[] = form_tarea();
         $r[] = format_listado_tareas($data);
+
         return append($r);
 
     }

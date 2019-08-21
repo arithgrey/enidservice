@@ -184,6 +184,21 @@ let response_carga_ticket = (data) => {
     $(".ver_tickets").click(tikets_usuario);
     $(".asunto").click(t_nombre_asunto);
 
+    $('.form_datetime').datetimepicker({
+        language: 'es',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1,
+        leftArrow: '<i class="fa fa-long-arrow-left"></i>',
+        rightArrow: '<i class="fa fa-long-arrow-right"></i>'
+    });
+
+    $(".agendar_google").click(agendar_google);
+    $(".frm_agendar_google").submit(google_path);
 
     if (get_option("flag_mostrar_solo_pendientes") > 0) {
         muestra_tareas_por_estatus();
@@ -477,4 +492,36 @@ let t_nombre_asunto = function () {
 
         });
     }
+}
+let agendar_google = () => $(".seccion_agendar").removeClass("hidden");
+let google_path = function (e) {
+    e.preventDefault();
+    let base = "https://calendar.google.com/calendar/r/eventedit";
+    let desc_google =  get_parameter(".descripcion_google");
+    let hora_fecha =  get_parameter(".hora_fecha");
+    if (desc_google.length > 5 ){
+        base += "?text=Enid Service "+desc_google;
+    }
+    if (hora_fecha.length > 5 ){
+        let format_google =  "";
+        let eliminar = ['-',  ':'];
+        for (let x in hora_fecha){
+
+            if ( eliminar.includes(hora_fecha[x]) == false ){
+                if (hora_fecha[x] != ' '){
+
+                    format_google +=  hora_fecha[x];
+
+                }else{
+
+                    format_google +=  "T";
+                }
+
+            }
+
+        }
+
+        base += "&dates="+format_google+"/"+format_google;
+    }
+    window.open(base, '_blank');
 }
