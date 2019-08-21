@@ -129,7 +129,7 @@ class Tickets_model extends CI_Model
                         tmp_tareas_ticket_$_num tp
                       ON 
                         t.id_ticket =  tp.id_ticket
-                    WHERE t.status < 4
+                    WHERE t.status != 4
                         ORDER BY                                                         
                         t.status ";
 
