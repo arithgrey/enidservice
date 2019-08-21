@@ -34,6 +34,8 @@ $(document).ready(() => {
     });
 
 
+
+
 });
 /*Aquí se carga la data de las métricas del visitas(día)*/
 let carga_uso_sistema = function (e) {

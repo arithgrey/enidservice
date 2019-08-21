@@ -57,7 +57,16 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta itemprop="url" content="<?= base_url() ?>">
 <meta itemprop="photo" content="<?= $url_img_post ?>">
 <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">
-<script src="../js_tema/jquery.min.js?<?= version_enid ?>">
+<script type="text/javascript" src="../js_tema/jquery.min.js?<?= version_enid ?>">
 </script>
-<script src="../js_tema/bootstrap.min.js?<?= version_enid ?>">
-</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../js_tema/js/main.js?<?= version_enid ?>"></script>
+<script src="http://localhost/eje/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../css_tema/template/main.css?<?= version_enid ?>">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="../css_tema/template/bootstrap.min.css?<?= version_enid ?>" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css?<?= version_enid ?>">
+<link rel="stylesheet" href="../js_tema/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+<script src="../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="../js_tema/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.es.js"></script>
+

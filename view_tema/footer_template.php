@@ -9,6 +9,11 @@
 ]) ?>
 
 
+
+
+
+
+
 <?php if ($in_session == 0): ?>
     <?php
 
@@ -97,6 +102,7 @@
         <?= d(append($list_footer), "base_paginas_extra", 1) ?>
     <?php endif ?>
 
+
     <?= d(
         btw(
             d("© 2019 ENID SERVICE.")
@@ -110,17 +116,6 @@
 
         )) ?>
 <?php endif; ?>
-
-
-<link rel="stylesheet" type="text/css" href="../css_tema/template/font.css">
-<style>
-    body {
-        font-family: 'Ubuntu', sans-serif !important;
-    }
-</style>
-<link rel="stylesheet" type="text/css" href="../css_tema/template/main.css?<?= version_enid ?>">
-<link rel="stylesheet" type="text/css" href="../css_tema/template/4bootstrap.min.css">
-<link href="../css_tema/template/bootstrap.min.css?<?= version_enid ?>" rel="stylesheet" id="bootstrap-css">
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
     <?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>
 
@@ -144,7 +139,7 @@
     <?php endforeach; ?>
 <?php endif; ?>
 
-<script src="../js_tema/js/main.js?<?= version_enid ?>"></script>
+
 <?php if (isset($js) && !is_null($js) && is_array($js)): ?>
     <?php $s = "../js_tema/";
     foreach ($js as $script): ?>
@@ -158,6 +153,11 @@
     <?php endforeach; ?>
 <?php endif; ?>
 
+
+
+
+
+
 <?php if (isset($js_extra) && !is_null($js_extra) && is_array($js_extra)): ?>
     <?php foreach ($js_extra as $script): ?>
         <?php if (file_exists($script)): ?>
@@ -167,7 +167,6 @@
         <?php endif; ?>
     <?php endforeach; ?>
 <?php endif; ?>
-<link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css?<?= version_enid ?>">
 <?= gb_modal() ?>
 </body>
 </html>

@@ -725,7 +725,7 @@ if (!function_exists('invierte_date_time')) {
                     [
                         "data-date-format" => "yyyy-mm-dd",
                         "name" => 'fecha_cordatorio',
-                        "class" => "form-control input-sm ",
+                        "class" => "form-control input-sm fecha_cordatorio",
                         "type" => 'date',
                         "value" => date("Y-m-d"),
                         "min" => add_date(date("Y-m-d"), -15),

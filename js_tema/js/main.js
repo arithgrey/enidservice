@@ -777,7 +777,7 @@ let append_enid = (array) => {
 
     return array.join(",");
 }
-
+let  minusculas =  function (e){ e.value = e.value.toLowerCase() }
 
 let go_login = (data) => redirect("../login");
 let up_page = (data) => redirect("");

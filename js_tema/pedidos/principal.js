@@ -39,18 +39,56 @@ let crea_recordatorio = function (e) {
 
     let descripcion = get_parameter(".descripcion_recordatorio").trim();
     if (descripcion.length > 5) {
+
         let data_send = $(".form_fecha_recordatorio").serialize();
         let url = "../q/index.php/api/recordatorio/index/format/json/";
         bloquea_form(".form_fecha_recordatorio");
+        let hora_fecha =  get_parameter(".form_fecha_recordatorio .fecha_cordatorio")+" "+ get_valor_selected(".form_fecha_recordatorio .horario_entrega")+"00";
+        let orden  = get_parameter(".recibo");
+        google_path("orden de compra "+orden , hora_fecha , descripcion);
         request_enid("POST", data_send, url, response_recordatorio, ".place_recordatorio");
+
     } else {
 
         format_error(".nota_recordatorio", "Ingresa un  recordatorio");
         $(".nota_recordatorio").show();
+
     }
 
     e.preventDefault();
 
+}
+let google_path = function (desc_google,  hora_fecha, details) {
+
+    let base = "https://calendar.google.com/calendar/r/eventedit";
+    base += (desc_google.length > 5 )? "?text=Recodatorio Enid Service "+desc_google : "";
+    if (hora_fecha.length > 5 ){
+        let format_google =  "";
+        let eliminar = ['-',  ':'];
+        for (let x in hora_fecha){
+
+            if ( eliminar.includes(hora_fecha[x]) == false ){
+                if (hora_fecha[x] != ' '){
+
+                    format_google +=  hora_fecha[x];
+
+                }else{
+
+                    format_google +=  "T";
+                }
+
+            }
+
+        }
+
+
+        if (details.length > 5){
+            base += "&details="+ details;
+        }
+
+        base += "&dates="+format_google+"/"+format_google;
+    }
+    window.open(base, '_blank');
 }
 let response_recordatorio = function (data) {
 

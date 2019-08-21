@@ -1651,6 +1651,28 @@ if (!function_exists('frm_fecha_busqueda')) {
 
     }
 }
+if (!function_exists('input_hour_date')) {
+
+    function input_hour_date()
+    {
+        $r[] = input([
+            "class" => "form-control",
+            "size" => "16",
+            "type" => "text",
+            "value" => "",
+            "readonly" => true
+        ]);
+        $r[] = span(span("","fa fa-clock-o") , "input-group-addon");
+        $r[] = input_hidden(["id"=>"dtp_input1", "name" => "hora_fecha" , "class" => "hora_fecha"]);
+        return d(append($r) ,
+            [
+                "class"=>"input-group date form_datetime ",
+                "data-date-format"=>"dd MM yyyy - HH:ii p",
+                "data-link-field"=>"dtp_input1"
+            ]);
+
+    }
+}
 if (!function_exists('get_format_izquierdo')) {
     function get_format_izquierdo($categorias_publicas_venta = [], $categorias_temas_de_ayuda = [], $agregar_categoria = 0)
     {
@@ -1951,7 +1973,7 @@ function horario_enid()
 function add_text($a, $b, $f = 0)
 {
 
-    return ($f  < 0) ? $a . $b : $a . " " . $b;
+    return ($f < 0) ? $a . $b : $a . " " . $b;
 
 }
 
@@ -1961,7 +1983,6 @@ function social($proceso_compra, $desc_web, $black = 1)
     $url_share = current_url() . '?' . $_SERVER['QUERY_STRING'];
     $url_facebook = get_url_facebook($url_share);
     $url_twitter = get_url_twitter($url_share, $desc_web);
-
 
 
     $color = ($black > 0) ? "black" : "white";
@@ -2070,66 +2091,66 @@ function pr($data, $index, $def = false)
     return (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0])) ? $data[0][$index] : $def;
 }
 
-function ajustar($a, $b, $col=0, $extra_class = '', $horizontal = 1)
+function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1)
 {
 
     $extra = (is_string($horizontal)) ? $horizontal : "";
-    $extra = ($horizontal ==  1 && $col > 0 ) ? $extra . " row " : $extra;
-    $extra =  $extra . $extra_class;
-    $class = ($horizontal > 0 ) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
+    $extra = ($horizontal == 1 && $col > 0) ? $extra . " row " : $extra;
+    $extra = $extra . $extra_class;
+    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
 
-    switch ($col){
+    switch ($col) {
 
         case 2:
 
-            $response = d(d($a ,2 ) . d($b,10), $class);
+            $response = d(d($a, 2) . d($b, 10), $class);
 
             break;
         case 3:
 
-            $response = d(d($a ,3 ) . d($b,9), $class);
+            $response = d(d($a, 3) . d($b, 9), $class);
 
             break;
 
         case 4:
 
-            $response = d(d($a ,4 ) . d($b,8), $class);
+            $response = d(d($a, 4) . d($b, 8), $class);
 
             break;
 
         case 5:
 
-            $response = d(d($a ,5 ) . d($b,7), $class);
+            $response = d(d($a, 5) . d($b, 7), $class);
 
             break;
 
         case 6:
 
-            $response = d(d($a ,6 ) . d($b,6), $class);
+            $response = d(d($a, 6) . d($b, 6), $class);
 
             break;
 
         case 7:
 
-            $response = d(d($a ,7 ) . d($b,5), $class);
+            $response = d(d($a, 7) . d($b, 5), $class);
 
             break;
 
         case 8:
 
-            $response = d(d($a ,8 ) . d($b,4), $class);
+            $response = d(d($a, 8) . d($b, 4), $class);
 
             break;
 
         case 9:
 
-            $response = d(d($a ,9 ) . d($b,3), $class);
+            $response = d(d($a, 9) . d($b, 3), $class);
 
             break;
 
         case 10:
 
-            $response = d(d($a ,10 ) . d($b,2), $class);
+            $response = d(d($a, 10) . d($b, 2), $class);
 
             break;
 
@@ -2251,9 +2272,7 @@ function gb_modal()
         ), "modal-footer");
 
 
-
-
-   $r[] =  d(d(
+    $r[] = d(d(
         d(append($mod), "modal-content"),
         [
             "class" => "modal-dialog",
