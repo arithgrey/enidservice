@@ -708,7 +708,8 @@ if (!function_exists('invierte_date_time')) {
                     img(
                         [
                             'src' => $url,
-                            "class" => "imagen_producto_completa"
+                            "class" => "imagen_producto_completa mh_500 mah_450"
+
                         ]
                     ),
                     [

@@ -1,5 +1,7 @@
 <?php
 
+use function Sodium\add;
+
 if (!function_exists('heading')) {
     function heading($data = '', $h = '1', $attributes = '')
     {
@@ -1262,8 +1264,8 @@ if (!function_exists('get_logo')) {
         } else {
 
             $img_enid = img_enid(["style" => "width: 50px!important;"]);
-            $en_pc = a_enid($img_enid, ["href" => "../"]);
-            return d($en_pc, "padding_10");
+            $en_pc = a_enid($img_enid, ["href" => "../", "class" => "ml-5"]);
+            return $en_pc;
         }
 
     }
@@ -1506,45 +1508,41 @@ if (!function_exists('get_menu_session')) {
 
         if ($in_session < 1) {
 
-
-            $text = btw(
-                d("Vender", ["style" => "font-size:.8em;"]),
-                icon("fa fa-shopping-cart", ["style" => "margin-left:5px;font-size:1.1em;"]),
-                "display_flex_enid"
-
-            );
-
-
             $vender = a_enid(
-                $text,
+                "Agiliza tus ventas",
                 [
                     "href" => "../login/?action=nuevo",
-                    "class" => ' white text-uppercase letter-spacing-15',
+                    "class" => ' white text-uppercase strong text_agilizar',
 
                 ]
             );
 
 
-            $text = btw(
-                d(" acceder ", ["style" => "font-size:.8em;"]),
-                icon("fa fa-user", ["style" => "margin-left:5px;font-size:1.1em;"]),
-                "display_flex_enid"
+            $session = a_enid(
+                text_icon(
 
-            );
-            $l_session = a_enid(
-                $text,
+                    "fa fa-user"
+                    ,
+                    " INICIAR SESIÓN ",
+                    [
+
+                    ], 0
+
+                )
+                ,
                 [
-                    "href" => "../login",
-                    "class" => " white text-uppercase letter-spacing-15"
+                    "href" => path_enid('login'),
+                    "class" => "text_iniciar_session text-decoration-none"
                 ]
             );
 
-
-            $type_display = ($is_mobile > 0) ? " d-flex flex-column justify-content-between " : " display_flex_enid ";
-            $list = d(append([$vender, $l_session]), $type_display);
 
             if ($proceso_compra < 1) {
-                return d(ul($list, "largenav "), "text-right");
+
+                $response = flex($vender, $session, "", "mr-3 ");
+                return flex("", $response, ' justify-content-between', '', 'mr-5 fp9 mt-2');
+
+
             }
 
 
@@ -1662,13 +1660,13 @@ if (!function_exists('input_hour_date')) {
             "value" => "",
             "readonly" => true
         ]);
-        $r[] = span(span("","fa fa-clock-o") , "input-group-addon");
-        $r[] = input_hidden(["id"=>"dtp_input1", "name" => "hora_fecha" , "class" => "hora_fecha"]);
-        return d(append($r) ,
+        $r[] = span(span("", "fa fa-clock-o"), "input-group-addon");
+        $r[] = input_hidden(["id" => "dtp_input1", "name" => "hora_fecha", "class" => "hora_fecha"]);
+        return d(append($r),
             [
-                "class"=>"input-group date form_datetime ",
-                "data-date-format"=>"dd MM yyyy - HH:ii p",
-                "data-link-field"=>"dtp_input1"
+                "class" => "input-group date form_datetime ",
+                "data-date-format" => "dd MM yyyy - HH:ii p",
+                "data-link-field" => "dtp_input1"
             ]);
 
     }
@@ -2091,11 +2089,13 @@ function pr($data, $index, $def = false)
     return (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0])) ? $data[0][$index] : $def;
 }
 
-function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1)
+function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row = 0)
 {
 
     $extra = (is_string($horizontal)) ? $horizontal : "";
-    $extra = ($horizontal == 1 && $col > 0) ? $extra . " row " : $extra;
+    $srow = ($sin_row > 0) ? "" : " row ";
+
+    $extra = ($horizontal == 1 && $col > 0) ? $extra . $srow : $extra;
     $extra = $extra . $extra_class;
     $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
 
@@ -2401,5 +2401,69 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
 
     return d(append($r), "text-right d-flex flex-row");
 
+}
 
+function frm_search($clasificaciones_departamentos)
+{
+
+    $r[] = '<form action="../search" class="search_principal_form d-flex">';
+    $r[] = d($clasificaciones_departamentos, "display_none");
+    $r[] = d(input(
+        [
+            "class" => "input_busqueda_producto ",
+            "type" => "text",
+            "placeholder" => "Búsqueda",
+            "name" => "q",
+            "onKeyup" => "evita_basura();"
+        ]));
+    $r[] = d(btn(icon("fa fa-search "),
+        [
+            "class" => " button_busqueda_producto  flipkart-navbar-button"
+        ],
+        0,
+        0));
+    $r[] = form_close();
+
+
+    $carrito = btw(
+        d(
+            icon("fa fa-shopping-bag"),
+            [
+                "class" => "dropdown-toggle",
+                "data-toggle" => "dropdown"
+            ]
+
+        ),
+        d(heading("TU CARRITO",4 ,"strong "), [
+
+                "class" => "dropdown-menu top_100 border-0 shadow-sm bg-white p-2 "
+            ]
+        )
+        ,
+        " dropleft white"
+
+    );
+
+
+    return d(
+        append(
+            [
+
+                d("", 5),
+                d(append($r), 5),
+                d($carrito, "col-lg-2 align-self-center")
+            ]
+
+        ),
+
+        "row"
+    );
+
+
+}
+
+function flex($d, $d1, $ext = '', $ext_left = '', $ext_right = '')
+{
+
+    return d(add_text(d($d, $ext_left), d($d1, $ext_right)), "d-flex " . $ext);
 }

@@ -787,23 +787,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    if (!function_exists('m_b_notificaciones')) {
-        function m_b_notificaciones($tipo, $num_tareas)
-        {
 
-            $seccion = "";
-            if ($num_tareas > 0) {
-                switch ($tipo) {
-                    case 1:
-                        $seccion = d(h("NOTIFICACIONES ", 5), 1);
-                        break;
-                    default:
-                        break;
-                }
-            }
-            return $seccion;
-        }
-    }
 
     if (!function_exists('crea_tareas_pendientes_info')) {
         function crea_tareas_pendientes_info($f)
@@ -868,7 +852,11 @@ if (!function_exists('invierte_date_time')) {
             }
 
 
-            $agregar = d(a_enid(text_icon("fas fa-plus-circle black", " TAREA"), path_enid("desarrollo")), "bottom_50 black underline");
+            $agregar = d(a_enid(text_icon("fas fa-plus-circle black", " TAREA"),
+                [
+                    "href" => path_enid("desarrollo"),
+                    "target" => "black"
+                ]), "bottom_50 black underline");
             $tareas = add_text($agregar, append($r));
 
 
@@ -1487,7 +1475,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [
             "num_tareas_pendientes_text" => $f,
             "num_tareas_pendientes" => $new_flag,
-            "lista_pendientes" => m_b_notificaciones(1, $f) . append($lista),
+            "lista_pendientes" =>  append($lista),
 
         ];
 

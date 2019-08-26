@@ -1,7 +1,14 @@
+/*
+body *{
+    border: 1px solid!important;
+}
+
+
+ */
+
 .navbar .searchbox .dropdown-menu {
     width: 270px
 }
-
 .search {
     position: relative;
     margin: 15px;
@@ -42,7 +49,6 @@ footer .newsletter .btn-submit {
 #response .btn i {
     font-size: 12px
 }
-
 
 .sidenav li a:after {
     position: absolute;
@@ -356,13 +362,9 @@ li {
 /*Todo lo que pertenece a medios*/
 @media only screen and (max-width: 991px) {
 
-
-    /**/
     .btn_whatsApp {
         display: block !important;
     }
-
-    /**/
     .tel_contacto_btn {
         display: block;
     }
@@ -599,8 +601,10 @@ div.pagination li.active span:hover {
 
 #flipkart-navbar {
 
-    background-color: #001891;
-    color: #FFFFFF;
+    //background: linear-gradient(to right, #000000, #081a54);
+    background: linear-gradient(to right, #000000, #010f3e);
+    min-height: 90px;
+
 }
 
 .row1 {
@@ -620,10 +624,9 @@ div.pagination li.active span:hover {
 }
 
 .flipkart-navbar-button {
-
-    background-color: #ffe11b;
-    border: 1px solid #ffe11b;
-    color: #565656;
+    background-color: #010915;
+    border: 1px solid #d8d9da;
+    color: #ffffff;
     cursor: pointer;
 }
 
@@ -866,9 +869,19 @@ div.pagination li.active span:hover {
 
 img {
 
+
+    object-fit: cover !important;
+    max-width: 100%;
+    width: auto\9;
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+    /*
     object-fit: cover !important;
     width: 100% !important;
     height: 100% !important;
+
+     */
 
 }
 
@@ -1100,6 +1113,7 @@ table {
 
 h2 {
     text-transform: uppercase;
+    color: black!important;
 }
 
 .links:hover {
@@ -1111,7 +1125,6 @@ h2 {
     -moz-box-shadow: 2px 2px 5px 0px rgba(131, 136, 150, 1);
     box-shadow: 2px 2px 5px 0px rgba(131, 136, 150, 1);
 }
-
 
 
 .nombre_servicio {
@@ -1166,11 +1179,6 @@ h2 {
 .menu_usuario {
     left: -180px !important;
     min-height: 310px;
-}
-
-.search_principal_form {
-    display: flex;
-    flex-direction: row;
 }
 
 .input_select_busqueda {
@@ -1246,9 +1254,12 @@ select {
     letter-spacing: 1px;
 }
 
+/*
 .producto_enid {
     height: 290px !important;
 }
+
+ */
 
 .texto_precio {
     background: #030a27;
@@ -1275,22 +1286,12 @@ select {
 html {
     height: 100%;
     box-sizing: border-box;
-}
-
-body {
-    position: relative;
-    margin: 0;
-    padding-bottom: 6rem;
-    min-height: 100%;
-    font-family: "Helvetica Neue", Arial, sans-serif;
-}
-
-.hover_padding:hover {
-    padding: 10px;
-    border: 1px solid #dee2e6 !important;
 
 }
 
+.hps:hover {
+    border: 1px solid #000000 !important;
+}
 h3 {
     letter-spacing: 10px;
 }
@@ -1311,15 +1312,23 @@ h5 {
 .text_notificacion {
     min-height: 230px;
 }
-.fp_5{
+
+.fp_5 {
     font-size: .5em;
 }
+
 .f2 {
     font-size: 2em;
 }
 
 .fp8 {
     font-size: .8em !important;
+}
+.fp85 {
+    font-size: .85em !important;
+}
+.fp9 {
+    font-size: .9em !important;
 }
 
 .f16 {
@@ -1359,6 +1368,11 @@ h5 {
     min-height: 40px;
 }
 
+.mh_25 {
+
+    min-height: 25px;
+}
+
 .mh_350 {
 
     min-height: 350px;
@@ -1384,6 +1398,14 @@ h5 {
     max-height: 270px !important;
 }
 
+.mh_500 {
+    min-height:500px!important;
+}
+
+.mah_450 {
+
+    max-height: 450px !important;
+}
 .mah_500 {
 
     max-height: 500px !important;
@@ -1412,11 +1434,44 @@ h5 {
 
     width: 400px !important;
 }
-
 .h_450 {
 
     height: 450px !important;
 }
-.solid_1{
+.solid_1 {
     border: solid 1px;
+}
+
+.text_agilizar:hover{
+    background: #e8e9ec;
+    padding: 5px 15px;
+    color: #020c1f!important;
+}
+a{
+    text-decoration: none!important;
+}
+.menu_acceso_enid{
+    background: linear-gradient(to right, #00040e, #0a1a50);
+}
+.text_iniciar_session{
+    color: #e0e9ea;
+
+}
+.text_iniciar_session:hover{
+    color: #e0e9ea;
+}
+
+.frecuentes{
+    padding: 0px 10px;
+}
+.border-right-enid {
+    border-right: 1px solid #565d65!important;
+}
+.dropleft .dropdown-menu {
+    height: 100px;
+    width: 300px;
+    top: 43px!important;
+}
+.pagination{
+    margin: 0!important;
 }
