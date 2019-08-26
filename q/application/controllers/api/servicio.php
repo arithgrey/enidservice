@@ -1380,8 +1380,7 @@ class Servicio extends REST_Controller
 
         $servicio = $this->get();
         $servicio["url_img_servicio"] = $this->app->imgs_productos($servicio["id_servicio"], 1, 1, 1);
-        $response = create_vista($servicio);
-        $this->response($response);
+        $this->response(create_vista($servicio));
 
     }
 

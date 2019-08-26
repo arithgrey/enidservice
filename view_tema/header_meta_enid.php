@@ -59,6 +59,9 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">
 <script type="text/javascript" src="../js_tema/jquery.min.js?<?= version_enid ?>">
 </script>
+
+<script src="../js_tema/bootstrap.min.js?<?= version_enid ?>">
+</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="../js_tema/js/main.js?<?= version_enid ?>"></script>
 <script src="http://localhost/eje/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
@@ -69,4 +72,5 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <link rel="stylesheet" href="../js_tema/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 <script src="../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <script src="../js_tema/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.es.js"></script>
+
 

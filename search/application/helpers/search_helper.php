@@ -29,41 +29,37 @@ if (!function_exists('invierte_date_time')) {
         $busqueda = $data["busqueda"];
 
 
-        $x = [];
         $x[] = get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile);
-        $x[] = append($data["lista_productos"]);
+        $x[] = d(append($data["lista_productos"]) , 13);
 
         $r[] = val_principal_img($data);
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
-
-
-        $z = [];
 
 
         $z[] = heading(span("FILTRA TU BÚSQUEDA")
             .
             small($busqueda . "(" . $data["num_servicios"] . "PRODUCTOS)", "fp_5")
             ,
-            3
+            2, "strong"
         );
         $z[] = img(["src" => "../img_tema/productos/ejemplo.png"]);
         $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
 
         $fil[] = d(d(append($z), 10, 1), 3);
-        $fil[] = btw(
 
-            d(append($x), 12)
+
+        $seccion = add_text(
+
+            append($x)
             ,
-            d($paginacion, 12)
-            ,
-            9
+            d($paginacion,"row mt-5")
         );
 
-        $r[] = d(append($fil), "row mt-3");
 
 
+        $fil[] = d(d($seccion,12) , 9);
+        $r[] = d(append($fil), "col-lg-12 mt-5");
         $cat[] = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
-
         $r[] = append($cat);
         return append($r);
 
@@ -130,17 +126,17 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $filtro = get_format_filtro($filtros, $order);
-
         $response = ($is_mobile > 0) ? d($filtro, 12) :
 
-            d(
+
                 btw(
                     d(
-                        d($filtro, "pull-left"), 6),
+                        $filtro, 6),
                     d(
-                        d($paginacion, "pull-right"), 6),
+                       $paginacion, "text-right col-lg-6"
+                    ),
                     "row d-flex align-items-center justify-content-between"
-                ), 12);
+                );
 
         return $response;
 
@@ -157,7 +153,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_filtro($filtros, $order)
     {
 
-        $r[] = '<select class="form-control order" name="order" id="order">';
+        $r[] = '<select class="form-control order row col-lg-6" name="order" id="order">';
         $a = 0;
         foreach ($filtros as $row):
             if ($a == $order):
@@ -198,10 +194,11 @@ if (!function_exists('invierte_date_time')) {
 
             foreach (crea_menu_principal_web($categorias_destacadas) as $row):
 
+                $nombre = explode(' ', $row["nombre_clasificacion"])[0];
                 $r[] =
                     d(
                         a_enid(
-                            $row["nombre_clasificacion"],
+                            $nombre,
                             [
                                 "href" => "?q=&q2=" . $row['primer_nivel'],
                                 "class" => 'categorias_mas_vistas '
@@ -212,7 +209,7 @@ if (!function_exists('invierte_date_time')) {
             endforeach;
 
         }
-        return d(d(append($r), "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"), 'contenedor_anuncios_home row  mb-5 p-3 bg-light');
+        return d(d(append($r), "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"), 'contenedor_anuncios_home col-lg-12  mb-5 p-3 bg-light');
 
 
     }
@@ -287,8 +284,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = append($t);
         $r[] = append($sec);
         $res  = d(d( append($r), " no-gutters  no-gutters d-flex  flex-row justify-content-center align-items-center"), "card mb-3 border-0" );
-        $f  = d( $res, 8,1);
-        return d($f,"row top_100 bottom_100");
+        $f  = d( $res,13);
+        return d($f,"col-lg-12 top_50 bottom_50");
     }
 
     function crea_menu_principal_web($param)
