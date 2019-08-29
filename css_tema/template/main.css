@@ -1171,12 +1171,6 @@ h2 {
     border: 1px solid rgb(13, 62, 86) !important;
 }
 
-.notificaciones_enid {
-    left: -200px !important;
-    min-height: 250px;
-}
-
-
 .menu_usuario {
     left: -180px !important;
     min-height: 310px;
@@ -1366,10 +1360,6 @@ h5 {
     margin-top: 20px;
 }
 
-.mh_notificaciones {
-
-    min-height: 40px;
-}
 
 .mh_25 {
 
@@ -1450,7 +1440,7 @@ h5 {
     border: solid 1px;
 }
 .solid_bottom_2{
-    border: solid 2px black!important;
+    border-bottom: solid 2px black!important;
 }
 .solid_bottom_hover_3:hover{
     border-bottom: solid 3px black!important;
@@ -1482,9 +1472,9 @@ a{
     border-right: 1px solid #565d65!important;
 }
 .dropleft .dropdown-menu {
-    height: 100px;
-    width: 300px;
-    top: 43px!important;
+
+    min-width: 400px;
+
 }
 .pagination{
     margin: 0!important;

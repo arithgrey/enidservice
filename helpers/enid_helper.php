@@ -1245,7 +1245,7 @@ if (!function_exists('get_logo')) {
 
         if ($is_mobile == 1) {
 
-            $en_mobile = d(br(2)."☰ ENID SERVICE", ["class" => "smallnav menu white f12 ", "onclick" => "openNav()"]);
+            $en_mobile = d(br(2) . "☰ ENID SERVICE", ["class" => "smallnav menu white f12 ", "onclick" => "openNav()"]);
             $class = "col-lg-12";
             switch ($tipo) {
                 case 0:
@@ -2301,7 +2301,6 @@ function menu_session_mobil($in_session)
 {
 
 
-
     $a = d(
         a_enid(img_enid([]),
             [
@@ -2317,20 +2316,18 @@ function menu_session_mobil($in_session)
             "onclick" => "closeNav()"
         ]);
 
-    $r[]  =  flex("" , $b );
+    $r[] = flex("", $b);
 
     $form[] = '<form class="form col-lg-12" action="../search">';
     $form[] = flex(
 
-        input(["name" => "q", "placeholder" => "artículo", "class" => "input_search ",  'style' => 'height: 41px!important;']),
-        btn("BUSCAR", ['class' => 'boton-busqueda' ]),
+        input(["name" => "q", "placeholder" => "artículo", "class" => "input_search ", 'style' => 'height: 41px!important;']),
+        btn("BUSCAR", ['class' => 'boton-busqueda']),
         " align-items-center justify-content-between ",
         "align-self-end"
     );
     $form[] = form_close();
-    $r[]  = d(append($form), "top_150");
-
-
+    $r[] = d(append($form), "top_150");
 
 
     if ($in_session < 1) {
@@ -2356,31 +2353,37 @@ function menu_session_mobil($in_session)
 function tmp_menu($is_mobile, $id_usuario, $menu)
 {
 
-    $notificaciones = li(btw(
+    $notificaciones = btw(
 
-        a_enid(
 
-            flex(
-                icon("fa fa-bell white"),
-                d("", "num_tareas_dia_pendientes_usr"),
-                "",
-                "align-self-center"
-            )
+                a_enid(
+
+
+                    flex(
+                        icon("fa fa-bell white"),
+                        d("", "num_tareas_dia_pendientes_usr"),
+                        "",
+                        "align-self-center"
+                    )
+
+                    ,
+                    [
+                        "class" => "blue_enid dropdown-toggle mr-3",
+                        "data-toggle" => "dropdown"
+                    ]
+                )
 
             ,
-            [
-                "class" => "blue_enid dropdown-toggle",
-                "data-toggle" => "dropdown"
-            ]
-        )
-        ,
 
-        ul(
-            [
-                place("place_notificaciones_usuario padding_10 shadow border")],
-            add_text("dropdown-menu shadow ", ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid ")
-        )
-    ), "dropdown  menu_notificaciones_progreso_dia ");
+                d(
+
+                    place("place_notificaciones_usuario padding_10 shadow border")
+                    ,
+                    add_text("dropdown-menu shadow ", ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid ")
+                )
+            ,
+        "dropdown dropleft  menu_notificaciones_progreso_dia "
+);
 
 
     $menu = li(
@@ -2466,14 +2469,13 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
     );
 
 
-
     if ($in_session < 1) {
 
         $response = append(
             [
 
-                d("", 5),
-                d(append($r), 5),
+                d("", "col-lg-5 busqueda_izquierda"),
+                d(append($r), "col-lg-5 busqueda_derecho"),
                 d($carrito, "col-lg-2 align-self-center")
             ]
         );
@@ -2482,7 +2484,7 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
 
     } else {
 
-        return add_text(d(append($r)) , d(tmp_menu($is_mobile, $id_usuario, $menu)));
+        return add_text(d(append($r)), d(tmp_menu($is_mobile, $id_usuario, $menu)));
 
     }
 
@@ -2493,4 +2495,11 @@ function flex($d, $d1, $ext = '', $ext_left = '', $ext_right = '')
 {
 
     return d(add_text(d($d, $ext_left), d($d1, $ext_right)), "d-flex " . $ext);
+
+}
+
+function is_mobile()
+{
+
+    return (dispositivo() === 1) ? 1 : 0;
 }

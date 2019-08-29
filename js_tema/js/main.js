@@ -7,9 +7,14 @@ let option = [];
 $("footer").ready(() => {
 
 
-    let in_session = get_parameter(".in_session");
-    set_option("in_session", in_session);
-    set_option("is_mobile", get_parameter(".is_mobile"));
+    set_option({
+        "in_session": get_parameter(".in_session"),
+        "is_mobile": get_parameter(".is_mobile"),
+        "disparador_buscados" :  0,
+    });
+
+
+
     $("#form_contacto").submit(envia_comentario);
     $(".menu_notificaciones_progreso_dia").click(metricas_perfil);
     metricas_perfil();
@@ -17,10 +22,13 @@ $("footer").ready(() => {
     $(".telefono_info_contacto").keyup(quita_espacios_input);
     $(".precio").keyup(quita_espacios_input_precio);
 
-
     $(".email").keyup(function () {
         sin_espacios(".email");
     });
+
+    $(".input_busqueda_producto").click(anima_busqueda);
+    $(".input_busqueda_producto").blur(anima_busqueda);
+
 
 
 });
@@ -781,3 +789,19 @@ let  minusculas =  function (e){ e.value = e.value.toLowerCase() }
 
 let go_login = (data) => redirect("../login");
 let up_page = (data) => redirect("");
+let anima_busqueda = function (e) {
+
+
+    if(get_option("disparador_buscados") < 1  ){
+
+        $(".busqueda_izquierda").removeClass("col-lg-5").addClass("col-lg-3");
+        $(".busqueda_derecho").removeClass("col-lg-5").addClass("col-lg-7");
+        set_option("disparador_buscados" , 1);
+
+    }else{
+
+        $(".busqueda_izquierda").removeClass("col-lg-3").addClass("col-lg-5");
+        $(".busqueda_derecho").removeClass("col-lg-7").addClass("col-lg-5");
+        set_option("disparador_buscados" , 0);
+    }
+}

@@ -203,7 +203,7 @@ class app extends CI_Controller
     function session($titulo = "", $meta_keywords = "", $desc = "", $url_img_post = "")
     {
 
-        $data["is_mobile"] = (dispositivo() ===1 ) ? 1 : 0;
+        $data["is_mobile"] = (dispositivo() === 1 ) ? 1 : 0;
         $data["proceso_compra"] = 0;
         $data["clasificaciones_departamentos"] = $this->get_departamentos();
 

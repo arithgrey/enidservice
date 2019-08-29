@@ -75,14 +75,15 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function sin_resultados($param  )
+    function sin_resultados($param)
     {
 
         $r[] = d(h("LO SENTIMOS, NO HAY NINGÚN RESULTADO PARA ", 4, "strong letter-spacing-15 fz_30"));
         $r[] = d(h('"'. prm_def($param, "q") .'".', 4, "strong letter-spacing-15 fz_30"));
         $r[] = d(d("¡No te desanimes! Revisa el texto o intenta buscar algo menos específico. ", "mt-5 fp9 mb-5"));
-        $r[] = "<form action='../search'>";
-        $r[] =  d(
+
+        $z[] = "<form action='../search' class='mt-5'>";
+        $z[] =  d(
             add_text(
                 icon('fa fa-search icon') ,
                 input([
@@ -92,8 +93,10 @@ if (!function_exists('invierte_date_time')) {
                 ])
             )
             , "input-icons col-lg-6 row");
-        $r[] =  form_close();
-        
+        $z[] =  form_close();
+        $ext  = (is_mobile()  < 1  ) ?  "" : "top_200";
+        $r[] =  d(append($z) , "mt-5 ".$ext );
+
         return
             d(append($r), " top_20 col-lg-10 col-lg-offset-1", 1);
 
