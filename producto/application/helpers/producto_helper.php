@@ -76,7 +76,7 @@ if (!function_exists('invierte_date_time')) {
         $tel_visible = pr($s, "telefono_visible");
         $nombre = substr(strtoupper($nombre), 0, 70);
         $boton_editar = editar(pr($s, "id_usuario"), $data["id_usuario"], $in_session, $id_servicio, $data["id_perfil"]);
-        $imagenes = img_lateral($imgs, $nombre, $url_yt);
+        $imagenes = img_lateral($imgs, $nombre, $is_mobile ,  $url_yt);
 
         $c[] =
             d(
@@ -168,7 +168,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = input_hidden(["class" => "qservicio", "value" => $nombre]);
         $response[] = input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]);
         $response[] = input_hidden(["name" => "desde_valoracion", "value" => $data["desde_valoracion"], "class" => 'desde_valoracion']);
-        return d(append($response), "top_30");
+        return d(append($response), "top_100");
 
 
     }
@@ -669,7 +669,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
     if (!function_exists('img_lateral')) {
-        function img_lateral($param, $nombre_servicio, $url_youtube = "")
+        function img_lateral($param, $nombre_servicio, $is_mobile, $url_youtube = "")
         {
 
             $preview = [];
@@ -704,11 +704,12 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
+                $ext =  ( $is_mobile < 1) ? "mh_500 mah_450" : "";
                 $imgs_grandes[] = d(
                     img(
                         [
                             'src' => $url,
-                            "class" => "imagen_producto_completa mh_500 mah_450"
+                            "class" => "imagen_producto_completa ".$ext
 
                         ]
                     ),

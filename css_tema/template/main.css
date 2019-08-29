@@ -1,10 +1,3 @@
-/*
-body *{
-    border: 1px solid!important;
-}
-
-
- */
 
 .navbar .searchbox .dropdown-menu {
     width: 270px
@@ -132,12 +125,13 @@ th:hover {
 }
 
 .notificacion_tareas_pendientes_enid_service {
-    background: white;
-    padding: 5px 5px 3px;
-    margin-right: 5px;
-    height: 35px;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #bdddff;
 }
-
+.dropdown-toggle::after{
+    display: none!important;
+}
 .alerta_notificacion_ok {
     background: #0a399b;
     padding: 5px;
@@ -800,8 +794,8 @@ div.pagination li.active span:hover {
 }
 
 .logo_lateral_login {
-    width: 50%;
-    margin: 0 auto;
+    width: 25%;
+
 }
 
 .contenedor_header {
@@ -818,6 +812,7 @@ div.pagination li.active span:hover {
         width: 100%;
         height: 40px;
         z-index: 178211;
+
     }
 
     .sidenav a {
@@ -826,10 +821,10 @@ div.pagination li.active span:hover {
 
     .closebtn_lateral {
         position: absolute;
-        top: 5px;
-        right: 25px;
-        color: #fff;
-        background: blue;
+        top: 15px;
+        right: 15px;
+        padding: 5px;
+        background: black;
 
     }
 
@@ -841,7 +836,7 @@ div.pagination li.active span:hover {
 }
 
 .boton-busqueda {
-    margin-top: 10px;
+
     width: 100%;
     background: black !important;
     color: white !important;
@@ -851,10 +846,6 @@ div.pagination li.active span:hover {
     border-radius: 0 !important;
 }
 
-.iniciar_sesion_lateral {
-    font-size: 1em !important;
-    color: white !important;
-}
 
 .call_to_action_anuncio {
     font-size: 1em !important;
@@ -1042,6 +1033,16 @@ table {
     margin-top: 100px;
     display: block;
 }
+.top_150 {
+    margin-top: 150px;
+    display: block;
+}
+
+.top_200 {
+    margin-top: 200px;
+    display: block;
+}
+
 
 .bottom_10 {
     margin-bottom: 10px;

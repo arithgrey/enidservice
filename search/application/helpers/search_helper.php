@@ -42,7 +42,12 @@ if (!function_exists('invierte_date_time')) {
             ,
             2, "strong"
         );
-        $z[] = img(["src" => "../img_tema/productos/ejemplo.png"]);
+
+        if ($is_mobile < 1){
+            $z[] = img(["src" => "../img_tema/productos/ejemplo.png"]);
+        }
+
+
         $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
 
         $fil[] = d(d(append($z), 10, 1), 3);
@@ -57,9 +62,11 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-        $fil[] = d(d($seccion,12) , 9);
+        $fil[] = d(d($seccion, ["style" => "width:96%!important;" , "class"=> "col-lg-12"]) , 9);
         $r[] = d(append($fil), "col-lg-12 mt-5");
         $cat[] = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
+
+
         $r[] = append($cat);
         return append($r);
 
@@ -251,10 +258,9 @@ if (!function_exists('invierte_date_time')) {
         }
         return d(d($response, 'contenedor_menu_productos_sugeridos'), " padding_5 mt-5");
     }
-
     function crea_sub_menu_categorias_destacadas($param)
     {
-        $z = 0;
+
         $response = [];
         foreach ($param as $row) {
 
@@ -285,7 +291,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = append($sec);
         $res  = d(d( append($r), " no-gutters  no-gutters d-flex  flex-row justify-content-center align-items-center"), "card mb-3 border-0" );
         $f  = d( $res,13);
-        return d($f,"col-lg-12 top_50 bottom_50");
+        return d($f,"col-lg-6 top_50 bottom_50");
     }
 
     function crea_menu_principal_web($param)

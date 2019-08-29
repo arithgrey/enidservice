@@ -9,11 +9,6 @@
 ]) ?>
 
 
-
-
-
-
-
 <?php if ($in_session == 0): ?>
     <?php
 
@@ -104,17 +99,12 @@
 
 
     <?= d(
-        btw(
-            d("© 2019 ENID SERVICE.")
-            ,
-            d(
-                a_enid("FAQS", ["class" => "white", "href" => path_enid("faqs")]) .
-                a_enid("NOSOTROS", ["class" => "white ml-5", "href" => path_enid("sobre_enid")])
+            d("© 2019 ENID SERVICE." ,
+                'white footer-enid page-footer  d-flex align-items-center justify-content-between '
             )
-            ,
-            'white footer-enid page-footer  d-flex align-items-center justify-content-between fixed-bottom'
 
-        ),"col-lg-12 ") ?>
+        ,"col-lg-12 "
+    ) ?>
 <?php endif; ?>
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
     <?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>

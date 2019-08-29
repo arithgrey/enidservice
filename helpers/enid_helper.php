@@ -1245,7 +1245,7 @@ if (!function_exists('get_logo')) {
 
         if ($is_mobile == 1) {
 
-            $en_mobile = d("☰ ENID SERVICE", ["class" => "smallnav menu white", "onclick" => "openNav()"]);
+            $en_mobile = d(br(2)."☰ ENID SERVICE", ["class" => "smallnav menu white f12 ", "onclick" => "openNav()"]);
             $class = "col-lg-12";
             switch ($tipo) {
                 case 0:
@@ -2295,14 +2295,9 @@ function gb_modal()
 function menu_session_mobil($in_session)
 {
 
-    $r[] = a_enid("×",
-        [
-            "href" => "javascript:void(0)",
-            "class" => "closebtn closebtn_lateral",
-            "onclick" => "closeNav()"
-        ]);
 
-    $r[] = d(
+
+    $a = d(
         a_enid(img_enid([]),
             [
                 "href" => path_enid("home")
@@ -2310,29 +2305,41 @@ function menu_session_mobil($in_session)
         ), "logo_lateral_login"
     );
 
-    $r[] = '<form class="form" action="../search">';
-    $r[] = input(["name" => "q", "placeholder" => "Articulo ó servicio", "class" => "input_search"]);
-    $r[] = btn("BUSCAR", ['class' => 'boton-busqueda'], 1);
-    $r[] = form_close();
+    $b = a_enid("×",
+        [
+            "href" => "javascript:void(0)",
+            "class" => "closebtn closebtn_lateral f15  white p-3 border",
+            "onclick" => "closeNav()"
+        ]);
+
+    $r[]  =  flex("" , $b );
+
+    $form[] = '<form class="form col-lg-12" action="../search">';
+    $form[] = flex(
+
+        input(["name" => "q", "placeholder" => "artículo", "class" => "input_search ",  'style' => 'height: 41px!important;']),
+        btn("BUSCAR", ['class' => 'boton-busqueda' ]),
+        " align-items-center justify-content-between ",
+        "align-self-end"
+    );
+    $form[] = form_close();
+    $r[]  = d(append($form), "top_150");
+
+
+
+
     if ($in_session < 1) {
 
-        $r[] = btw(
+        $r[] = d(
             a_enid("INICIAR SESSION",
                 [
-                    "class" => "iniciar_sesion_lateral",
-                    "style" => "color: white!important;",
+                    "class" => " white top_10 strong fp9",
                     "href" => "../login"
-                ],
-                1)
-            ,
-            a_enid("ANUNCIA TU NEGOCIO AQUÍ" . icon('fa fa-user'),
-                [
-                    "class" => "call_to_action_anuncio",
-                    "style" => "color: white!important;",
-                    "href" => path_enid("nuevo_usuario")
-                ],
-                1),
-            "contenedor-lateral-menu"
+                ]
+            ),
+
+
+            "contenedor-lateral-menu "
 
         );
     }
@@ -2344,10 +2351,18 @@ function menu_session_mobil($in_session)
 function tmp_menu($is_mobile, $id_usuario, $menu)
 {
 
-    $r[] = li(btw(
+    $notificaciones = li(btw(
 
         a_enid(
-            btw(icon("fa fa-bell white"), d("", "num_tareas_dia_pendientes_usr"), "display_flex_enid"),
+
+            flex(
+                icon("fa fa-bell white"),
+                d("", "num_tareas_dia_pendientes_usr"),
+                "",
+                "align-self-center"
+            )
+
+            ,
             [
                 "class" => "blue_enid dropdown-toggle",
                 "data-toggle" => "dropdown"
@@ -2360,50 +2375,51 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
                 place("place_notificaciones_usuario padding_10 shadow border")],
             add_text("dropdown-menu shadow ", ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid ")
         )
-    ), "dropdown  menu_notificaciones_progreso_dia");
+    ), "dropdown  menu_notificaciones_progreso_dia ");
 
 
-    $r[] = li(btw(
-        get_img_usuario($id_usuario),
-        ul(
-            [
-                "",
-                $menu,
-                a_enid(
-                    "Mis reseñas y valoraciones" .
-                    d(
+    $menu = li(
+        btw(
+            get_img_usuario($id_usuario),
+            ul(
+                [
+                    "",
+                    $menu,
+                    a_enid(
+                        "Mis reseñas y valoraciones" .
+                        d(
 
 
-                        add_text(
-                            str_repeat(span('★', ["class" => "estrella", "style" => "color: #0070dd;"]), 4)
-                            ,
-                            span('★',
-                                [
-                                    "class" => "estrella",
-                                    "style" => "-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);"
-                                ])
+                            add_text(
+                                str_repeat(span('★', ["class" => "estrella", "style" => "color: #0070dd;"]), 4)
+                                ,
+                                span('★',
+                                    [
+                                        "class" => "estrella",
+                                        "style" => "-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);"
+                                    ])
 
+                            )
+
+
+                            , "contenedor_promedios"
                         )
+                        ,
+                        path_enid("recomendacion", $id_usuario)
 
+                    ),
+                    a_enid("Configuración y privacidad", path_enid("administracion_cuenta")),
+                    a_enid("Cerrar sessión", path_enid("logout"))
+                ],
+                "dropdown-menu menu_usuario "
+            ), ""
+        ), "dropdown ");
 
-                        , "contenedor_promedios"
-                    )
-                    ,
-                    path_enid("recomendacion", $id_usuario)
-
-                ),
-                a_enid("Configuración y privacidad", path_enid("administracion_cuenta")),
-                a_enid("Cerrar sessión", path_enid("logout"))
-            ],
-            "dropdown-menu menu_usuario "
-        ), ""
-    ), "dropdown ");
-
-    return d(append($r), "text-right d-flex flex-row");
+    return flex($notificaciones, $menu, "mr-5");
 
 }
 
-function frm_search($clasificaciones_departamentos)
+function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile = 0, $id_usuario = 0, $menu = 0)
 {
 
     $r[] = '<form action="../search" class="search_principal_form d-flex">';
@@ -2434,7 +2450,7 @@ function frm_search($clasificaciones_departamentos)
             ]
 
         ),
-        d(heading("TU CARRITO",4 ,"strong "), [
+        d(heading("TU CARRITO", 4, "strong "), [
 
                 "class" => "dropdown-menu top_100 border-0 shadow-sm bg-white p-2 "
             ]
@@ -2445,19 +2461,25 @@ function frm_search($clasificaciones_departamentos)
     );
 
 
-    return d(
-        append(
+
+    if ($in_session < 1) {
+
+        $response = append(
             [
 
                 d("", 5),
                 d(append($r), 5),
                 d($carrito, "col-lg-2 align-self-center")
             ]
+        );
 
-        ),
+        return d($response, "row");
 
-        "row"
-    );
+    } else {
+
+        return add_text(d(append($r)) , d(tmp_menu($is_mobile, $id_usuario, $menu)));
+
+    }
 
 
 }

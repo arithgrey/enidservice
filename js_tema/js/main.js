@@ -401,7 +401,7 @@ let ordena_tabla = function () {
 
 let openNav = () => {
 
-    document.getElementById("mySidenav").style.width = "70%";
+    document.getElementById("mySidenav").style.width = "100%";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 
 }
