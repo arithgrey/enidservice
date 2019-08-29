@@ -1226,7 +1226,9 @@ select {
     text-align: center;
     width: 100%;
 }
-
+.fz_30{
+    font-size: 30px!important;
+}
 .letter-spacing-15 {
     letter-spacing: 1.5px;
 }
@@ -1374,6 +1376,11 @@ h5 {
     min-height: 25px;
 }
 
+.mh_50 {
+
+    min-height: 50px!important;
+}
+
 .mh_350 {
 
     min-height: 350px;
@@ -1441,6 +1448,12 @@ h5 {
 }
 .solid_1 {
     border: solid 1px;
+}
+.solid_bottom_2{
+    border: solid 2px black!important;
+}
+.solid_bottom_hover_3:hover{
+    border-bottom: solid 3px black!important;
 }
 
 .text_agilizar:hover{

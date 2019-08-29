@@ -2101,6 +2101,11 @@ function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row 
 
     switch ($col) {
 
+        case 1:
+
+            $response = d(d($a, 1) . d($b, 11), $class);
+            break;
+
         case 2:
 
             $response = d(d($a, 2) . d($b, 10), $class);

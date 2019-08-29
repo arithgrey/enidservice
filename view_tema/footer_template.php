@@ -103,7 +103,7 @@
                 'white footer-enid page-footer  d-flex align-items-center justify-content-between '
             )
 
-        ,"col-lg-12 "
+        ,"fixed-bottom"
     ) ?>
 <?php endif; ?>
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
@@ -141,11 +141,6 @@
     <?php endforeach; ?>
 <?php endif; ?>
 
-
-
-
-
-
 <?php if (isset($js_extra) && !is_null($js_extra) && is_array($js_extra)): ?>
     <?php foreach ($js_extra as $script): ?>
         <?php if (file_exists($script)): ?>
@@ -156,5 +151,14 @@
     <?php endforeach; ?>
 <?php endif; ?>
 <?= gb_modal() ?>
+<?php if(prm_def($this->input->get(), "debug")): ?>
+
+<style>
+    body * {
+        border:solid 1px blue !important
+    }
+</style>
+<?php endif; ?>
+
 </body>
 </html>

@@ -40,15 +40,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function no_encontrado()
-    {
-        $l = [
-            "- Revisa la " . strong("ortografía de la palabra."),
-            "- Utiliza palabras " . strong("más simples o menos palabras."),
-            "- Navega por categorías"
-        ];
-        return d(d(d(h("No hay productos que coincidan con tu búsqueda.", 3) . ul($l)), "caption"), "container");
-    }
 
     function render_producto($data)
     {
