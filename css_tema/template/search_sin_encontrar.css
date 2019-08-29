@@ -1,3 +1,20 @@
+.input-icons i {
+    position: absolute;
+}
+.input-icons {
+    width: 100%;
+}
+.icon {
+    padding: 15px;
+    min-width: 40px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: right;
+}
+
 .separador_inicial {
     margin-top: 30px;
 }

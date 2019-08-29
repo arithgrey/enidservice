@@ -1,3 +1,6 @@
+.contenedor-lateral-menu{
+    display: none!important;
+}
 .acceder_btn {
     padding: 10px;
     background: #1040A1;

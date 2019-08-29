@@ -845,18 +845,20 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $text = d(substr($row["asunto"], 0, 30), "black");
-                $text = d(h(icon(" fas fa-tasks"), 5) . $text, "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
-
+                $text =  flex(icon(" fa fa-check-square bg-dark white padding_10") ,  $text, "top_10 mh_notificaciones align-items-center border-bottom", "" , "ml-2");
                 $r[] = a_enid($text, "../desarrollo/?q=1&ticket=" . $row["id_ticket"]);
                 $f++;
             }
 
 
-            $agregar = d(a_enid(text_icon("fas fa-plus-circle black", " TAREA"),
+            $agregar = d(
+                a_enid(
+                    text_icon("fas fa-plus-circle black", " TAREA"),
                 [
                     "href" => path_enid("desarrollo"),
-                    "target" => "black"
-                ]), "bottom_50 black underline");
+                    "target" => "black",
+                    "class" => "black"
+                ]), "bottom_50 black strong f14 black");
             $tareas = add_text($agregar, append($r));
 
 
@@ -1006,9 +1008,16 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_recibo = $row["id_recibo"];
                 $saldo_cubierto = $row["saldo_cubierto"];
-                $text = d(h(
-                    icon(" fa fa-ticket ") . $saldo_cubierto . " MXN ", 3),
-                    "col-lg-12 top_10  shadow padding_10 mh_notificaciones");
+
+
+
+                $text =  flex(
+                    icon(" fa fa-ticket  padding_10 white blue_enid2") ,
+                    $saldo_cubierto . " MXN " , "top_10  justify-content-between padding_10 mh_notificaciones border-bottom",
+                    "",
+                "text-primary strong");
+
+
 
 
                 $r[] = a_enid($text,
@@ -1098,12 +1107,14 @@ if (!function_exists('invierte_date_time')) {
         if ($adeudos_cliente > 0) {
 
             $pendiente = round($adeudos_cliente, 2);
-            $text = 'Saldo por liquidar ' . span($pendiente . 'MXN',
-                    [
-                        "class" => "saldo_pendiente_notificacion",
-                        "deuda_cliente" => $pendiente
-                    ]
-                );
+            $text = ajustar(
+                'Saldo por liquidar ' ,
+                span($pendiente . 'MXN',
+                [
+                    "class" => "saldo_pendiente_notificacion strong f15",
+                    "deuda_cliente" => $pendiente
+                ]
+            )) ;
 
             $lista = b_notificacion("../area_cliente/?action=compras", "fa fa-credit-card", $text);
 
@@ -1122,11 +1133,15 @@ if (!function_exists('invierte_date_time')) {
 
     function b_notificacion($url = '', $class_icono = '', $text = '')
     {
-        return li(a_enid(text_icon($class_icono, $text),
-                [
-                    "href" => $url,
-                    "class" => "black notificacion_restante top_10"
-                ])
+        return a_enid(
+
+
+            d(add_text(icon($class_icono), $text), " top_10   padding_10 mh_notificaciones border-bottom black")
+
+
+            ,
+
+                    $url
         );
     }
 
@@ -1165,9 +1180,9 @@ if (!function_exists('invierte_date_time')) {
 
             $text = btw(
 
-                d(text_icon("fa  fa fa-clock-o ", $row["fecha_cordatorio"])),
+                d(text_icon("fa  fa fa-clock-o strong", $row["fecha_cordatorio"])),
                 d($row["descripcion"]),
-                "col-lg-12 top_10  shadow padding_10 mh_notificaciones"
+                " top_10   padding_10 mh_notificaciones border-bottom black"
             );
 
 
@@ -1199,18 +1214,21 @@ if (!function_exists('invierte_date_time')) {
                         ,
                         "w_50"
                     ),
-                    d($row["total"] . "MXN", "text_monto_sin_cierre text-left"),
-                    "display_flex_enid top_10 border padding_10"
+                    d(
+                        $row["total"] . "MXN",
+                        "text_monto_sin_cierre text-left"
+                    ),
+                    "display_flex_enid top_10 border-0 solid_bottom_2 padding_10"
                 );
 
                 $url = path_enid("pedidos_recibo", $row["id_recibo"]);
-                $r[] = a_enid($text, $url);
+                $r[] = d(a_enid($text, $url), "border-bottom");
                 $f++;
             }
 
             if (es_data($r)) {
 
-                array_unshift($r, br(2) . d(h("VENTAS EN PROCESO", 5, ["class" => "top_20"])));
+                array_unshift($r, br(2) . d(h("VENTAS EN PROCESO", 3, ["class" => "strong top_20"])));
 
             }
 
@@ -1279,7 +1297,7 @@ if (!function_exists('invierte_date_time')) {
         ];
 
         $response["lista_pendientes"] =
-            ul($list, "d-flex flex-column justify-content-between text_notificacion");
+            d($list, "d-flex flex-column justify-content-between text_notificacion");
 
         return $response;
 

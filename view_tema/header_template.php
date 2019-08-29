@@ -36,9 +36,13 @@
 
         <?php elseif ($is_mobile > 0 && $in_session > 0): ?>
 
-                <?= get_logo($is_mobile, $in_session) ?>
-                <?= tmp_menu($is_mobile, $id_usuario, $menu) ?>
-            <?php elseif ($is_mobile < 1 && $in_session > 0): ?>
+                <?= ajustar(
+                        get_logo($is_mobile, $in_session) ,
+                    tmp_menu($is_mobile, $id_usuario, $menu)
+                )?>
+
+
+        <?php elseif ($is_mobile < 1 && $in_session > 0): ?>
 
                 <?=flex(
                     ajustar(get_logo($is_mobile), $frecuentes, 2)  ,

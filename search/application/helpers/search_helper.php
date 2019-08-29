@@ -1,4 +1,6 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php use function Sodium\add;
+
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
     function get_orden()
@@ -73,32 +75,30 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function sin_resultados()
+    function sin_resultados($param)
     {
-        $r[] = h("NO HAY PRODUCTOS QUE COINCIDAN CON TU BÚSQUEDA", 3, "info_sin_encontrar");
-        $r[] = d("SUGERENCIAS", "contenedor_sugerencias sugerencias");
 
-        $r[] = ul(
-            [
-                "- REVISA LA " . strong("ORTOGRAFÍA DE LA PALABRA"),
-                "- UTILIZA PALABRAS" . strong("MÁS SIMPLES"),
-                "- NAVEGA POR CATEGORÍAS"
-            ]
-        );
-        $r[] = d(
-            btn(
-                text_icon('fa fa-chevron-right ir', "ANUNCIA ESTE PRODUCTO!")
-                ,
-                [],
-                1,
-                1,
-                1, path_enid("login")
+        $r[] = d(h("LO SENTIMOS, NO HAY NINGÚN RESULTADO PARA ", 4, "strong letter-spacing-15 fz_30"));
+        $r[] = d(h('"'. prm_def($param, "q") .'".', 4, "strong letter-spacing-15 fz_30"));
+        $r[] = d(d("¡No te desanimes! Revisa el texto o intenta buscar algo menos específico. ", "mt-5 fp9 mb-5"));
+
+        $z[] = "<form action='../search' class='mt-5'>";
+        $z[] =  d(
+            add_text(
+                icon('fa fa-search icon') ,
+                input([
+                    "class" => "input-field  mh_50 border border-dark  solid_bottom_hover_3  " ,
+                    "placeholder"=> "buscar",
+                    "name" =>"q"
+                ])
             )
-            ,
-            "col-lg-5 top_20", 1);
+            , "input-icons col-lg-6 row");
+        $z[] =  form_close();
+        $ext  = (is_mobile()  < 1  ) ?  "" : "top_200";
+        $r[] =  d(append($z) , "mt-5 ".$ext );
 
         return
-            d(append($r), "border padding_20 top_20 col-lg-10 col-lg-offset-1", 1);
+            d(append($r), " top_20 col-lg-10 col-lg-offset-1", 1);
 
 
     }
