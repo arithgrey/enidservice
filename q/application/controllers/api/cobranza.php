@@ -349,27 +349,25 @@ class Cobranza extends REST_Controller
     {
 
         $param = $this->post();
+        $prevent = 0;
+        $es_pe =  prm_def($param , "punto_encuentro") >  0;
+        foreach (["num_ciclos" , "ciclo_facturacion", "plan"] as $row ){
+            if(prm_def($param , $row) ===  0){
+                $prevent ++;
+            };
+        }
 
-
-        if (array_key_exists("num_ciclos", $param) && ctype_digit($param["num_ciclos"])
-            && $param["num_ciclos"] > 0 && array_key_exists("ciclo_facturacion", $param)
-            && $param["num_ciclos"] > 0 && $param["num_ciclos"] < 10 &&
-            ctype_digit($param["plan"])
-            && $param["plan"] > 0
-
-            || (array_key_exists("punto_encuentro", $param) && $param["punto_encuentro"] > 0)
-        ) {
+        if ($prevent <  1 || $es_pe) {
 
             $usuario = $this->crea_usuario($param);
-            if ($usuario["usuario_registrado"] == 1 && $usuario["id_usuario"] > 0) {
+            if ($usuario["usuario_registrado"] > 1 && $usuario["id_usuario"] > 0) {
 
                 $param["es_usuario_nuevo"] = 1;
                 $param["usuario_nuevo"] = 1;
                 $param["usuario_referencia"] = $usuario["id_usuario"];
                 $param["id_usuario"] = $usuario["id_usuario"];
 
-                if (prm_def($param, "punto_encuentro") > 0) {
-
+                if ($es_pe){
 
                     $response = $this->crea_orden_punto_entrega($param);
 
