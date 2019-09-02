@@ -98,13 +98,7 @@
     <?php endif ?>
 
 
-    <?= d(
-            d("© 2019 ENID SERVICE." ,
-                'white footer-enid page-footer  d-flex align-items-center justify-content-between '
-            )
 
-        ,"fixed-bottom"
-    ) ?>
 <?php endif; ?>
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
     <?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>
@@ -159,6 +153,12 @@
     }
 </style>
 <?php endif; ?>
+<?= d(
+    "© 2019 ENID SERVICE."
 
+
+
+    ,"col-lg-12 blue_enid blue_enid3 white p-2 "
+) ?>
 </body>
 </html>
