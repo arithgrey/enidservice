@@ -25,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
             ,
             [
                 "href" => "../recomendacion/?q=" . $data["id_usuario"] ,
-                "class" => "link_vendedor mt-5 f11 black underline bottom_100"
+                "class" => "link_vendedor mt-5 f11 black underline bottom_100 strong"
         ]
 
 
@@ -148,7 +148,7 @@ if (!function_exists('invierte_date_time')) {
         $in = d('<input type="email" 
         name="email" 
         	        class="input form-control"
-        placeholder="Por ejemplo: jmedrano@enidservice.com" 
+        placeholder="Por ejemplo: jmedrano@enidservices.com" 
         required ' . valida_readonly($email) . ' value="' . $email . '">');
 
         $r[] = btw(
@@ -279,11 +279,11 @@ if (!function_exists('invierte_date_time')) {
 
         for ($num_restantes; $num_restantes <= 5; $num_restantes++) {
 
-            $extra = "font-size: 2em;-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);";
+            $extra = "azul_estrella_simple";
             $restantes .= label("★",
                 [
-                    "class" => 'estrella',
-                    "style" => $extra
+                    "class" => 'estrella azul_estrella_simple f2'
+
                 ]
             );
 
@@ -326,7 +326,7 @@ if (!function_exists('invierte_date_time')) {
             $comentarios = $num_valoraciones . ($num_valoraciones > 1) ? "COMENTARIOS" : "COMENTARIO";
             $personas_recomendarian = $valoraciones["personas_recomendarian"];
             $promedio_general = number_format($valoraciones["promedio"], 1, '.', '');
-            $parte_promedio = d(crea_estrellas($promedio_general) . span($promedio_general, ["class" => 'promedio_num']), ["class" => 'contenedor_promedios']);
+            $parte_promedio = d(crea_estrellas($promedio_general) . span($promedio_general, ["class" => 'promedio_num f15 strong black']), ["class" => 'contenedor_promedios']);
             $parte_promedio .= tb(tr(td($comentarios, 'info_comentarios')));
             $parte_promedio .= d(porcentaje($num_valoraciones, $personas_recomendarian, 1) . "%", 'porcentaje_recomiendan');
             $parte_promedio .= d(

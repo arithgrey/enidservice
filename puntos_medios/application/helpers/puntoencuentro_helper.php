@@ -27,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(place("place_estaciones_metro"),4,1);
 
         if ($primer_registro > 0) {
-            $r[] = input_hidden(["name" => "servicio", "class" => "servicio", "value" => $servicio]);
+            $r[] = input_hidden(["name" => "servicio", "class" => "servicio id_servicio", "value" => $servicio]);
 
             if ($in_session < 1) {
 
@@ -37,7 +37,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $z[] = d(frm_punto_encuentro_horario([
                     input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro]),
-                    input_hidden(["class" => "servicio", "name" => "servicio", "value" => $servicio]),
+                    input_hidden(["class" => "id_servicio servicio", "name" => "id_servicio", "value" => $servicio]),
                     input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]),
                     input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]),
                     input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras])

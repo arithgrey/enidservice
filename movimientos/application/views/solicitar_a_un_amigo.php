@@ -31,7 +31,7 @@
                 "type" => "email",
                 "name" => "email_amigo",
                 "class" => "form-control input-sm input email_solicitud",
-                "placeholder" => "Ejemplo jmedrano@enidservice.com",
+                "placeholder" => "Ejemplo jmedrano@enidservices.com",
                 "required" => true
             ])) ?>
             <?= td("Email", 'strong') ?>

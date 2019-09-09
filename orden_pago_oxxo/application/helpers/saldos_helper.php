@@ -27,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
 
                 img(
                     [
-                        'src' => "http://enidservice.com/inicio/img_tema/portafolio/oxxo-logo.png",
+                        'src' => "http://enidservices.com/inicio/img_tema/portafolio/oxxo-logo.png",
                         'style' => "width:100px!important;"
                     ]
                 ),
@@ -146,12 +146,12 @@ if (!function_exists('invierte_date_time')) {
             $r [] = d("En el podrás verificar que se haya realizado correctamente, conserva este comprobante.");
 
             $r [] = d("6.- Notifica tu pago desde tu área de cliente");
-            $r [] = a_enid("http://enidservice.com/inicio/login/",
+            $r [] = a_enid("http://enidservices.com/inicio/login/",
                 [
-                    "href" => "http://enidservice.com/inicio/login/"
+                    "href" => "http://enidservices.com/inicio/login/"
                 ]);
             $r [] = d("ó", 1);
-            $r [] = d("Notifica tu pago  al área de ventas ventas@enidservice.com", 1);
+            $r [] = d("Notifica tu pago  al área de ventas ventas@enidservices.com", 1);
             $r [] = d(
                 img([
                         "src" => path_enid("img_logo"),
@@ -173,7 +173,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = img(
                 [
-                    "src" => "http://enidservice.com/inicio/img_tema/portafolio/logo-bbv.png",
+                    "src" => "http://enidservices.com/inicio/img_tema/portafolio/logo-bbv.png",
                     "style" => "width:300px!important;"
 
                 ]

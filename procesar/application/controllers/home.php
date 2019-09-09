@@ -23,7 +23,12 @@ class Home extends CI_Controller
 
 
         $param = $this->input->post();
-        if (array_key_exists("num_ciclos", $param) && ctype_digit($param["num_ciclos"]) && $param["num_ciclos"] > 0 && array_key_exists("ciclo_facturacion", $param) && $param["num_ciclos"] > 0 && $param["num_ciclos"] < 10 && ctype_digit($param["plan"]) && $param["plan"] > 0
+        if (array_key_exists("num_ciclos", $param) &&
+            ctype_digit($param["num_ciclos"]) &&
+            $param["num_ciclos"] > 0 &&
+            array_key_exists("ciclo_facturacion", $param) &&
+            $param["num_ciclos"] > 0 &&
+            $param["num_ciclos"] < 10 && ctype_digit($param["plan"]) && $param["plan"] > 0
             ||
             array_key_exists("es_servicio", $param)
 
@@ -54,7 +59,7 @@ class Home extends CI_Controller
 
         $num_usuario_referencia = usuario($this->input->get("q2"));
         $data["q2"] = $num_usuario_referencia;
-        $data["servicio"] = $this->resumen_servicio($param["plan"]);
+        $data["servicio"] = $this->resumen_servicio($param["id_servicio"]);
         $data["costo_envio"] = "";
 
         if ($data["servicio"][0]["flag_servicio"] == 0) {

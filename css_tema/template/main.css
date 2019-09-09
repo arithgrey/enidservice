@@ -325,7 +325,7 @@ a:hover {
 }
 
 .black {
-    color: black !important;
+    color: #000 !important;
 }
 
 .black_blue {
@@ -879,6 +879,7 @@ img {
 
 h1 {
     margin: 0 !important;
+    color: #000!important;
 }
 
 .texto_envio {
@@ -1082,11 +1083,6 @@ table {
 .cursor_pointer:hover, .cursor:hover {
     cursor: pointer;
 }
-
-.completo {
-    width: 100% !important;
-}
-
 .underline {
     text-decoration: underline;
 }
@@ -1111,7 +1107,7 @@ table {
 
 h2 {
     text-transform: uppercase;
-    color: black!important;
+    color: #000!important;
 }
 
 .links:hover {
@@ -1181,6 +1177,10 @@ h2 {
     height: 30px !important;
 }
 
+.f19{
+
+    font-size: 1.9em !important;
+}
 .f2 {
     font-size: 2em;
 }
@@ -1288,14 +1288,17 @@ html {
 }
 h3 {
     letter-spacing: 10px;
+    color: #000!important;
 }
 
 h4 {
     letter-spacing: 10px;
+    color: #000!important;
 }
 
 h5 {
     letter-spacing: 10px;
+    color: #000!important;
 }
 
 
@@ -1405,6 +1408,10 @@ h5 {
 
     max-height: 500px !important;
 }
+.mah_50 {
+
+    max-height: 50px !important;
+}
 
 .bloque_general_info {
     background: #00299c;
@@ -1439,6 +1446,7 @@ h5 {
 .solid_bottom_2{
     border-bottom: solid 2px black!important;
 }
+
 .solid_bottom_hover_3:hover{
     border-bottom: solid 3px black!important;
 }
@@ -1475,4 +1483,28 @@ a{
 }
 .pagination{
     margin: 0!important;
+}
+.completo:hover{
+    color: #d8e1e2!important;
+}
+.completo{
+    height: 50px!important;
+}
+.solid_bottom_3{
+    border-bottom: solid 3px #000!important;
+}
+.border_enid{
+    border: 1px solid;
+    border-bottom: 2px solid #000;
+}
+.azul_estrella{
+    //color: #0070dd;
+    color: #000;
+    font-size: 1.5em;
+}
+.azul_estrella_simple{
+
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+
 }

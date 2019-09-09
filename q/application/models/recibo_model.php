@@ -768,7 +768,8 @@ class Recibo_model extends CI_Model
 
         } else {
 
-            if (array_key_exists("costo_envio", $param) && $param["costo_envio"] != null && $param["costo_envio"] > 0) {
+
+            if (prm_def($param, "costo_envio") > 0) {
 
                 $costo_envio_cliente = $param["costo_envio"];
                 $costo_envio_vendedor = 0;
@@ -850,7 +851,8 @@ class Recibo_model extends CI_Model
 
 
         $this->db->query($query_insert);
-        return $this->db->insert_id();
+        $id_recibo = $this->db->insert_id();
+        return $id_recibo;
 
 
     }

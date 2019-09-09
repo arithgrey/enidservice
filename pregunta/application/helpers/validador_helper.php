@@ -105,8 +105,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = input_hidden(["class" => "servicio", "value" => $id_servicio]);
         $r[] = addNRow(d(d("ENVIAMOS TU PREGUNTA AL VENDEDOR!", "registro_pregunta display_none padding_10 top_30"), 8, 1));
         $r[] = d("", "top_50");
-        $r[] = d(h("TAMBIÉN TE PODRÍA INTEREZAR", 3), 8, 1);
-        $r[] = d(place("place_tambien_podria_interezar", ["id" => "place_tambien_podria_interezar"]), 8, 1);
+        $r[] = d(place("place_tambien_podria_interezar", ["id" => "place_tambien_podria_interezar"]), 10, 1);
         $r[] = d(place("place_valoraciones top_50", ["id" => "place_valoraciones"]), 8, 1);
         return d(append($r), 1);
     }

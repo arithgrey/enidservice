@@ -53,7 +53,7 @@ if (!function_exists('invierte_date_time')) {
             $z[] = form_open("", ["class" => "form-miembro-enid-service", "id" => "form-miembro-enid-service"]);
             $z[] = frm_miembro_enid_service_hidden(
                 $q2,
-                $ext["plan"],
+                $ext["id_servicio"],
                 $ext["num_ciclos"],
                 $ext["ciclo_facturacion"],
                 $talla,
@@ -318,7 +318,7 @@ input(
 
                 $r[] = input_hidden([
                     "id" => "id_servicio",
-                    "class" => "id_servicio form-control",
+                    "class" => "id_servicio servicio form-control",
                     "name" => "id_servicio",
                     "value" => $servicio["id_servicio"]
                 ]);
@@ -383,8 +383,8 @@ input(
                 $r[] = input_hidden(
                     [
                         "id" => "id_servicio",
-                        "class" => "id_servicio form-control",
-                        "name" => "plan",
+                        "class" => "id_servicio  servicio form-control",
+                        "name" => "id_servicio",
                         "value" => $servicio["id_servicio"]
                     ]);
                 $r[] = input_hidden(
@@ -425,12 +425,7 @@ input(
                         "value" => ""
                     ]);
 
-                $r[] = input_hidden(
-                    [
-                        "class" => "servicio",
-                        "name" => "servicio",
-                        "value" => $servicio["id_servicio"]
-                    ]);
+
 
                 $r[] = btn("SOLICITAR COTIZACIÓN", ["class" => "top_30", "name" => "comentarios"], 1, 1, 1);
                 $r[] = place("place_config_usuario");

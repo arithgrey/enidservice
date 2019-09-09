@@ -124,6 +124,7 @@ class Home extends CI_Controller
             $tiempo_promedio_entrega = $servicio[0]["tiempo_promedio_entrega"];
             $data["tiempo_entrega"] = $this->valida_tiempo_entrega($tiempo_promedio_entrega);
 
+
         }
 
         $this->set_option("flag_precio_definido", 0);
@@ -206,9 +207,9 @@ class Home extends CI_Controller
 
         $fecha_entrega_promedio = $fecha->format('l, d M Y');
         $fecha_entrega_promedio = $trans->translate($source, $target, strtoupper($fecha_entrega_promedio));
-        $text_tiempo = span($fecha_entrega_promedio, ["class" => 'tiempo_promedio']);
+        $text_tiempo = span($fecha_entrega_promedio,  'strong ml-1  mb-2 bg-light  p-1');
 
-        return br(3).d("REALIZA HOY TU PEDIDO Y TENLO EL" . $text_tiempo, "tiempo_entrega_promedio text-justify");
+        return d("REALIZA HOY TU PEDIDO Y TENLO EL" . $text_tiempo, "mt-5 tiempo_entrega_promedio ");
     }
 
     private function costruye_descripcion_producto()

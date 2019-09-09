@@ -220,7 +220,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_recibo")) {
+        if (fx($param, "id_recibo",1)) {
             $recibo = $this->recibo_model->q_get([], $param["id_recibo"]);
             if (es_data($recibo)) {
 

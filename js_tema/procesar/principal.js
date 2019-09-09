@@ -17,7 +17,7 @@ $(document).ready(() => {
     $(".form_cotizacion_enid_service").submit(registro_cotizacion);
 
     set_option({
-        "plan": $(".plan").val(),
+        "id_servicio": $(".plan").val(),
         "dominio": $(".dominio").val(),
         "num_ciclos": $(".num_ciclos").val(),
         "ciclo_facturacion": $(".ciclo_facturacion").val(),
@@ -104,7 +104,7 @@ let registro = (e) => {
                         "email": get_option("email"),
                         "nombre": get_option("nombre"),
                         "telefono": get_option("telefono"),
-                        "plan": get_option("plan"),
+                        "id_servicio": get_option("plan"),
                         "num_ciclos": get_option("num_ciclos"),
                         "descripcion_servicio": get_option("descripcion_servicio"),
                         "ciclo_facturacion": get_option("ciclo_facturacion"),
@@ -187,7 +187,7 @@ let solicitud_cotizacion = e => {
                         "email": get_option("email"),
                         "nombre": get_option("nombre"),
                         "telefono": get_option("telefono"),
-                        "plan": get_parameter(".id_servicio"),
+                        "id_servicio": get_parameter(".id_servicio"),
                         "num_ciclos": 1,
                         "descripcion_servicio": get_parameter(".comentario"),
                         "ciclo_facturacion": get_parameter(".id_ciclo_facturacion"),
@@ -252,8 +252,8 @@ let respuesta_registro = (data) => {
 
 };
 
-let respuesta_registro_cotizacion = () => {
-
+let respuesta_registro_cotizacion = (data) => {
+    debugger;
     $(".place_registro_afiliado").empty();
     redirect("../area_cliente");
 
@@ -263,7 +263,7 @@ let procesar_pedido_usuario_activo = () => {
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
 
     let data_send = {
-        "plan": get_option("plan"),
+        "id_servicio": get_option("plan"),
         "num_ciclos": get_option("num_ciclos"),
         "descripcion_servicio": get_option("descripcion_servicio"),
         "ciclo_facturacion": get_option("ciclo_facturacion"),
@@ -287,7 +287,7 @@ let before_pedido_activo = () => {
 }
 
 let respuesta_proceso_usuario_activo = (data) => {
-
+    debugger;
     div_enid("place_config_usuario", "TU SOLICITUD SE ENVIÓ!", "texto_solicitud_enviada top_30  border white padding_5 shadow ");
     redirect("../area_cliente");
 
@@ -307,7 +307,7 @@ let set_link = function () {
     let num_ciclos = get_parameter_enid($(this), "num_ciclos");
 
     let data_send = $.param({
-        "plan": plan,
+        "id_servicio": plan,
         "extension_dominio": extension_dominio,
         "ciclo_facturacion": ciclo_facturacion,
         is_servicio: is_servicio,

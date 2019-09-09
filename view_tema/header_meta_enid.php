@@ -30,7 +30,7 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta property="og:site_name" content="Enid Service"/>
 <meta property="og:image" content="<?= $url_img_post ?>"/>
 <meta property="og:description" content="<?= $desc_web; ?>"/>
-<meta property="business:contact_data:email" content="ventas@enidservice.com"/>
+<meta property="business:contact_data:email" content="ventas@enidservices.com"/>
 <meta property="business:contact_data:phone_number" content="5552967027"/>
 <meta property="business:contact_data:website" content="<?= $enlace_actual; ?>"/>
 <meta property="article:publisher" content="https://www.facebook.com/enidservicemx"/>
@@ -51,7 +51,7 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta itemprop="name" content="Enid Service">
 <meta itemprop="description" content="<?= $desc_web; ?>">
 <meta itemprop="image logo" content="<?= $url_img_post ?>">
-<meta itemprop="email" content="ventas@enidservice.com">
+<meta itemprop="email" content="ventas@enidservices.com">
 <meta itemprop="telephone" content="5552967027">
 <meta itemprop="address" content="Centro Histórico, Centro, 06000 Ciudad de México, CDMX, Local 406">
 <meta itemprop="url" content="<?= base_url() ?>">

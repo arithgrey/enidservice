@@ -227,7 +227,7 @@ let registra_usuario = (e) => {
         let password = "" + CryptoJS.SHA1(pw);
         let data_send = $(".form_punto_encuentro").serialize() + "&" + $.param({
             "password": password,
-            "servicio": get_parameter(".servicio")
+            "id_servicio": get_parameter(".servicio")
         });
 
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
