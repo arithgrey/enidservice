@@ -46,8 +46,8 @@ let response_carga_valoraciones = data => {
     $(".ordenar_valoraciones_button").click(ordenar_valoraciones);
     let valoracion_persona = $(".contenedor_promedios").html();
     render_enid(".valoracion_persona", valoracion_persona);
-    $(".valoracion_persona_principal .valoracion_persona .estrella").css("font-size", "1.2em");
-    $(".valoracion_persona_principal .valoracion_persona .promedio_num").css("font-size", "1.2em");
+
+
 
 }
 

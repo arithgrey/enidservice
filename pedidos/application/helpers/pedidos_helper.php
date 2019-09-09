@@ -44,7 +44,7 @@ if (!function_exists('invierte_date_time')) {
         $z[] = format_heading_orden($data["servicio"], $recibo, $id_servicio);
         $z[] = d("", 4);
         $r[] = d(append($z), "top_50");
-        $r[] = d(h("También te podría interezar", 3), "col-lg-12 top_50 hidden text_interes");
+
         $r[] = d(place("place_tambien_podria_interezar"), "col-lg-12 top_50");
         $r[] = input_hidden(["value" => $data["notificacion_pago"], "class" => "notificacion_pago"]);
         $r[] = input_hidden(["value" => $data["orden"], "class" => "orden"]);

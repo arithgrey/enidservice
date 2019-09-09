@@ -63,7 +63,7 @@ class usuario_model extends CI_Model
 
 	function get_usuario_ventas()
 	{
-		return $this->get(["idusuario"], ["email" => 'ventas@enidservice.com']);
+		return $this->get(["idusuario"], ["email" => 'ventas@enidservices.com']);
 	}
 
 	function get_miembro($param)

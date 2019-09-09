@@ -703,9 +703,9 @@ class app extends CI_Controller
                     "css" =>
                         [
                             "css_tienda.css",
-                            "producto_principal.css",
-                            "sugerencias.css",
-                            "producto.css"
+                            //"producto_principal.css",
+                            //"sugerencias.css",
+                            //"producto.css"
 
 
                         ],

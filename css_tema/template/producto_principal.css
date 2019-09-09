@@ -1,5 +1,16 @@
-.l_deseos{
-    background: #0568ac !important;
+/*
+body > div:nth-child(4) > div:nth-child(1) > div > div > div.col-lg-4 > div:nth-child(1) > a > div > span{
+    color: black!important;
+    font-size: 1.35em;
+}
+.select_cantidad{
+    height: 44px;
+}
+
+.inf_right .promedio_num{
+
+    font-size: 2.5em!important;
+    color: black;
 }
 .escribir:hover{
     color:blue!important;
@@ -47,20 +58,9 @@
     background: #fbfbfb;
 
 }
-
-.tiempo_promedio {
-    background: #77b0ff;
-    padding: 2px;
-    color: white;
-    line-height: 1.7em
-}
-
-
-
 .product-detail .left-col .thumbs {
-    width: 15.25424%;
+    width: 7.25424%;
     float: left;
-    margin-right: 1.69492%;
 }
 
 .product-detail .left-col .thumbs a.active {
@@ -75,16 +75,6 @@
     border-color: #b5b6bd;
 }
 
-.product-detail .left-col .thumbs img {
-    display: block;
-    width: 100%;
-}
-
-.product-detail .left-col .big {
-    width: 83.05085%;
-    float: right;
-    margin-right: 0;
-}
 
 .imagen_producto_completa {
     width: 95%;
@@ -189,30 +179,8 @@
     padding: 10px;
 }
 
-@media only screen and (max-width: 500px) {
-
-    /*
-      .product-detail .left-col {
-        width: 100%;
-        float: left;
-        margin-right: 3.44828%;
-
-      }
-      .product-detail .right-col {
-        width: 100%;
-        float: right;
-        margin-right: 0;
-      }
-      .nombre_servicio_info{
-        display: block !important;
-      }
-      */
-}
 
 
-.contenedor_izquierdo {
-    width: 100% !important;
-}
 
 .contenedor_derecho {
     width: 100% !important;
@@ -304,17 +272,10 @@
 
 .editar_button {
     text-align: right;
-    z-index: 2878787;
-
 }
 
 .separador {
     margin-top: 20px;
-}
-
-.informacion_vendedor_descripcion a {
-    color: black;
-    font-weight: bold;
 }
 
 .text_en_existencia {
@@ -350,13 +311,8 @@
 .table_orden_3 {
     width: 10%;
 }
-.agregar_a_lista {
-    margin-bottom: 20px;
-}
 
-.agregar_a_lista_deseos:hover {
-    cursor: pointer;
-}
+
 
 .btn_add_list {
     background: #16308a !important;
@@ -366,10 +322,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .contenedor_info_producto {
-        width: 100% !important;
-        margin: 0 auto;
-    }
+
 
     .contenedor_central_info {
         margin: 0 auto;
@@ -392,7 +345,25 @@
         width: 50%;
         text-align: right;
     }
-
-
-
 }
+*/
+@media only screen and (max-width: 500px) {
+
+    /*
+      .product-detail .left-col {
+        width: 100%;
+        float: left;
+        margin-right: 3.44828%;
+
+      }
+      .product-detail .right-col {
+        width: 100%;
+        float: right;
+        margin-right: 0;
+      }
+      .nombre_servicio_info{
+        display: block !important;
+      }
+      */
+}
+

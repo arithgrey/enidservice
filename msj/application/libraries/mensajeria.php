@@ -8,7 +8,7 @@ class Mensajeria
 
 		$nombre = $param["nombre"];
 		$email_contacto = $param["email"];
-		$destinatario = "ventas@enidservice.com";
+		$destinatario = "ventas@enidservices.com";
 		$asunto = "Gracias por contactarte " . $nombre;
 		$info = $this->get_mensaje_base_agradecimiento();
 

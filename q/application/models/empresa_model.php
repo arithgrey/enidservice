@@ -111,7 +111,7 @@ class Empresa_model extends CI_Model
 	  
 	function get_usuario_ventas(){
 	  
-	  $query_insert = "SELECT idusuario FROM usuario WHERE email ='ventas@enidservice.com' LIMIT 1"; 
+	  $query_insert = "SELECT idusuario FROM usuario WHERE email ='ventas@enidservices.com' LIMIT 1"; 
 	  $result = $this->db->query($query_insert);
 	  return $result->result_array()[0]["idusuario"];
 	}

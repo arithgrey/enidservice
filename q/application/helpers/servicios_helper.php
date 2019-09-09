@@ -1554,15 +1554,26 @@ if (!function_exists('invierte_date_time')) {
             $img = img([
                 'src' => $row["url_img_servicio"],
                 'alt' => $row["metakeyword"],
+                'class' => ' mx-auto d-block p-1',
+                'style' => 'max-height: 100%!important;min-height:270px;'
 
             ]);
 
-            $imagenes[] = d(a_enid($img, path_enid("producto", $row["id_servicio"])), "col-lg-3 producto_enid_img ");
+            $imagenes[] = a_enid(
+                $img,
+                [
+                    "href"  => path_enid("producto", $row["id_servicio"] ),
+                    "class" => "col-lg-3   hps  top_50 p-1 d-flex align-content-center flex-wrap ",
+                    "style" => "height: 310px !important;"
+
+
+                ]
+            );
 
 
         }
 
-        $r[] = d(append($imagenes), "contenedor_sugeridos contenedor_sugeridos  row justify-content-center");
+        $r[] = append($imagenes);
         return append($r);
 
     }

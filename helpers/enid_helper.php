@@ -19,6 +19,7 @@ if (!function_exists('ul')) {
 
     }
 }
+
 if (!function_exists('li')) {
     function li($info, $attributes = [], $row_12 = 0)
     {
@@ -82,8 +83,10 @@ if (!function_exists('btn')) {
 
         if ($type_button == 1) {
 
-            $attributes["class"] = (array_key_exists("class", $attributes) ? 1 : 0 == 1) ? $attributes["class"] . " " . " a_enid_blue white completo btn_guardar" : "a_enid_blue white completo btn_guardar";
+            $attributes["class"] = (array_key_exists("class", $attributes) ? 1 : 0 == 1) ? $attributes["class"] . " " . " a_enid_blue white w-100 btn_guardar strong" : "a_enid_blue white completo btn_guardar strong";
         }
+
+
 
         $attr = add_attributes($attributes);
         if ($row == 0) {
@@ -248,6 +251,16 @@ if (!function_exists('d')) {
 
     }
 }
+
+if (!function_exists('u')) {
+    function u($info, $attributes = [], $row = 0, $frow = 0)
+    {
+
+        return get_base_html("u", $info, $attributes, $row, $frow);
+
+    }
+}
+
 
 if (!function_exists('del')) {
     function del($info, $attributes = [], $row = 0, $frow = 0)
@@ -1985,7 +1998,7 @@ function social($proceso_compra, $desc_web, $black = 1)
 
     $color = ($black > 0) ? "black" : "white";
 
-    $response = "";
+    $r =  [];
     if ($proceso_compra < 1) {
 
 
@@ -2032,9 +2045,9 @@ function social($proceso_compra, $desc_web, $black = 1)
         $r[] = get_url_pinterest($url_share, $desc_web);
 
 
-        $response = d(append($r), "contenedor_social display_flex_enid mt-5");
+
     }
-    return d($response, 1);
+    return append($r);
 
 }
 
@@ -2399,12 +2412,12 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
 
 
                             add_text(
-                                str_repeat(span('★', ["class" => "estrella", "style" => "color: #0070dd;"]), 4)
+                                str_repeat(span('★', ["class" => "estrella azul_estrella"]), 4)
                                 ,
                                 span('★',
                                     [
-                                        "class" => "estrella",
-                                        "style" => "-webkit-text-fill-color: white;-webkit-text-stroke: 0.5px rgb(0, 74, 252);"
+                                        "class" => "azul_estrella_simple",
+
                                     ])
 
                             )

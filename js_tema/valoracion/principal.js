@@ -19,6 +19,7 @@ let configura_recomendaria = function (e) {
 }
 let configura_calificacion = function (e) {
 
+
     let calificacion = get_parameter_enid($(this), "id");
     set_option("calificacion", parseInt(calificacion));
 

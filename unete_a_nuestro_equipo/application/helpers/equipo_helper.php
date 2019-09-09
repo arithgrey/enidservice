@@ -76,7 +76,7 @@ if (!function_exists('invierte_date_time')) {
                 "1.- Ventas en Call center: 1 año.",
                 "2.- Conocimientos básicos en informática. "]);
 
-            $r[] = p("En caso de cumplir con los requisitos solicitados, enviar curriculum a empleo@enidservice.com");
+            $r[] = p("En caso de cumplir con los requisitos solicitados, enviar curriculum a empleo@enidservices.com");
             return append($r);
         }
     }

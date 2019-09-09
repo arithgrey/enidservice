@@ -24,7 +24,7 @@ class Sender extends REST_Controller
 
 				$sender_email = $this->config->item('senderEmail');
 				$this->email->initialize($sender_email);
-				$this->email->from('hola@enidservice.com', 'Enid Service', 'arithgrey@gmail.com');
+				$this->email->from('hola@enidservices.com', 'Enid Service', 'arithgrey@gmail.com');
 
 				$para = $param["para"];
 				$subject = $param["asunto"];
