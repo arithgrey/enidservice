@@ -287,7 +287,7 @@ let response_registro_usuario = (data) => {
 let set_link = function () {
 
     let data_send = $.param({
-        "plan": get_parameter_enid($(this), "plan"),
+        "id_servicio": get_parameter_enid($(this), "id_servicio"),
         "num_ciclos": get_parameter_enid($(this), "num_ciclos"),
         "punto_encuentro": get_option("punto_encuentro")
     });

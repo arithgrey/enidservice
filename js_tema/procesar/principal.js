@@ -17,11 +17,11 @@ $(document).ready(() => {
     $(".form_cotizacion_enid_service").submit(registro_cotizacion);
 
     set_option({
-        "id_servicio": $(".plan").val(),
-        "dominio": $(".dominio").val(),
-        "num_ciclos": $(".num_ciclos").val(),
-        "ciclo_facturacion": $(".ciclo_facturacion").val(),
-        "descripcion_servicio": $(".resumen_producto").val(),
+        "id_servicio": get_parameter(".id_servicio"),
+        "dominio": get_parameter(".dominio"),
+        "num_ciclos": get_parameter(".num_ciclos"),
+        "ciclo_facturacion": get_parameter(".ciclo_facturacion"),
+        "descripcion_servicio": get_parameter(".resumen_producto"),
         "vista": 1,
     });
 
@@ -104,7 +104,7 @@ let registro = (e) => {
                         "email": get_option("email"),
                         "nombre": get_option("nombre"),
                         "telefono": get_option("telefono"),
-                        "id_servicio": get_option("plan"),
+                        "id_servicio": get_parameter(".id_servicio"),
                         "num_ciclos": get_option("num_ciclos"),
                         "descripcion_servicio": get_option("descripcion_servicio"),
                         "ciclo_facturacion": get_option("ciclo_facturacion"),
@@ -263,7 +263,7 @@ let procesar_pedido_usuario_activo = () => {
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
 
     let data_send = {
-        "id_servicio": get_option("plan"),
+        "id_servicio": get_option("id_servicio"),
         "num_ciclos": get_option("num_ciclos"),
         "descripcion_servicio": get_option("descripcion_servicio"),
         "ciclo_facturacion": get_option("ciclo_facturacion"),
@@ -299,7 +299,7 @@ let quita_espacios_en_telefono = () => {
 }
 let set_link = function () {
 
-    let plan = get_parameter_enid($(this), "plan");
+    let plan = get_parameter_enid($(this), "id_servicio");
     let extension_dominio = get_parameter_enid($(this), "extension_dominio");
     let ciclo_facturacion = get_parameter_enid($(this), "ciclo_facturacion");
     let is_servicio = get_parameter_enid($(this), "is_servicio");

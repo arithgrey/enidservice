@@ -158,7 +158,7 @@
 
 
 
-    ,"col-lg-12 blue_enid blue_enid3 white p-2 "
+    ,"col-lg-12  blue_enid3 white p-2 "
 ) ?>
 </body>
 </html>

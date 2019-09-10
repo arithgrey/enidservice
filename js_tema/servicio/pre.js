@@ -14,6 +14,7 @@ let carga_opcion_entrega = (id, id_servicio, orden_pedido) => {
 };
 
 let response_opcion_entrega = (data) => {
+
     set_option("flag_carga", 1);
     switch (get_option("tipo")) {
         case 1:

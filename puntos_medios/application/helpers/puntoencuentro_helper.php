@@ -212,7 +212,7 @@ if (!function_exists('invierte_date_time')) {
 
             [
                 "class" => "text-right text_usuario_registrado_pregunta  text-uppercase link_acceso cursor_pointer",
-                "plan" => $servicio,
+                "id_servicio" => $servicio,
                 "num_ciclos" => $num_ciclos,
             ]
 

@@ -47,8 +47,8 @@ class Sess extends REST_Controller
 
 
 		$pregunta = $this->app->get_session("servicio_pregunta");
-		if ($this->app->get_session("plan") > 0) {
-			$plan = $this->app->get_session("plan");
+		if ($this->app->get_session("id_servicio") > 0) {
+			$plan = $this->app->get_session("id_servicio");
 			$extension_dominio = $this->app->get_session("extension_dominio");
 			$ciclo_facturacion = $this->app->get_session("ciclo_facturacion");
 			$is_servicio = $this->app->get_session("is_servicio");
