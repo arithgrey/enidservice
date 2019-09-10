@@ -34,14 +34,17 @@ if (!function_exists('invierte_date_time')) {
 
 
         $z[] = d("", "table_orden_1");
-        $z[] = ajustar("", criterios_busqueda(), 8);
+        //$z[] = flex("", criterios_busqueda(), "row","col-lg-8 row", "col-lg-4  row");
+        $z[] = d(criterios_busqueda(), "d-flex row  justify-content-end");
+
+
         $z[] = add_text(
             valoraciones_comentarios($comentarios, $data["respuesta_valorada"]),
             d(redacta_valoracion($comentarios, $num_valoraciones, $servicio), "btn_escribir_valoracion")
         );
 
         $b = d(append($z),12);
-        return ajustar($a , $b , 4, "top_100");
+        return ajustar($a , $b , 4, "top_100 ");
 
     }
 
@@ -298,15 +301,15 @@ if (!function_exists('invierte_date_time')) {
         $l = [];
         for ($z = 0; $z < count($criterios); $z++) {
             $extra_criterios = [
-                "class" => 'criterio_busqueda ordenar_valoraciones_button col-lg-6 padding_5 border ',
+                "class" => 'criterio_busqueda ordenar_valoraciones_button  padding_5 border ',
                 "id" => $z
             ];
             if ($z == 0) {
 
                 $extra_criterios =
                     [
-                        "style" => 'background:#04013c;color:white',
-                        "class" => 'criterio_busqueda ordenar_valoraciones_button col-lg-6 padding_5 white',
+                        "style" => 'background:#04013c;',
+                        "class" => 'criterio_busqueda white ordenar_valoraciones_button  padding_5 white text-center',
                         "id" => $z
                     ];
             }

@@ -49,7 +49,7 @@ class Home extends CI_Controller
 
 
         $data += [
-            "plan" => $param["plan"],
+            "id_servicio" => $param["id_servicio"],
             "extension_dominio" => $param["extension_dominio"],
             "ciclo_facturacion" => $param["ciclo_facturacion"],
             "is_servicio" => $param["is_servicio"],
@@ -58,7 +58,7 @@ class Home extends CI_Controller
             "orden_pedido" => 1,
             "carro_compras" => prm_def($data , "carro_compras"),
             "id_carro_compras" => prm_def($data , "id_carro_compras"),
-            "url_imagen_servicio" => get_img_serv($this->app->imgs_productos($param["plan"], 1, 1))
+            "url_imagen_servicio" => get_img_serv($this->app->imgs_productos($param["id_servicio"], 1, 1))
 
         ];
 

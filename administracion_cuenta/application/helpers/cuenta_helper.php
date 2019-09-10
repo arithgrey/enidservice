@@ -384,7 +384,6 @@ if (!function_exists('invierte_date_time')) {
             $f[] = get_url_facebook(get_url_tienda($id_usuario), 1);
             $f[] = get_url_twitter(get_url_tienda($id_usuario), "VISITA MI TIENDA EN LÍNEA!", 1);
             $f[] = get_url_pinterest(get_url_tienda($id_usuario), 1);
-            $f[] = get_url_tumblr(get_url_tienda($id_usuario), 1);
             $f[] = d("COMPARTIR ");
             $final = append($f);
 

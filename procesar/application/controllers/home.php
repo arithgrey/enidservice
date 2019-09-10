@@ -28,7 +28,7 @@ class Home extends CI_Controller
             $param["num_ciclos"] > 0 &&
             array_key_exists("ciclo_facturacion", $param) &&
             $param["num_ciclos"] > 0 &&
-            $param["num_ciclos"] < 10 && ctype_digit($param["plan"]) && $param["plan"] > 0
+            $param["num_ciclos"] < 10 && ctype_digit($param["id_servicio"]) && $param["id_servicio"] > 0
             ||
             array_key_exists("es_servicio", $param)
 

@@ -495,8 +495,8 @@ input(
                     "class" => 'q2'
                 ]),
                 input_hidden([
-                    "name" => "plan",
-                    "class" => "plan",
+                    "name" => "id_servicio",
+                    "class" => "id_servicio",
                     "value" => $plan
                 ]),
                 input_hidden([
@@ -598,7 +598,7 @@ input(
 
             $ext =
                 [
-                    "plan" => $param["plan"],
+                    "id_servicio" => $param["is_servicio"],
                     "extension_dominio" => "",
                     "ciclo_facturacion" => $param["ciclo_facturacion"],
                     "is_servicio" => $param["is_servicio"],

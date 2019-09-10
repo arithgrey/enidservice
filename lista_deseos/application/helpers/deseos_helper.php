@@ -391,7 +391,7 @@ if (!function_exists('invierte_date_time')) {
         $url = "../producto/?producto=" . $id_servicio . "&pre=1";
         $r[] = '<form action="' . $url . '" method="POST" >';
 
-        $r[] = input_hidden(["class" => "plan", "name" => "plan", "value" => $id_servicio]);
+        $r[] = input_hidden(["class" => "id_servicio", "name" => "id_servicio", "value" => $id_servicio]);
         $r[] = input_hidden(["class" => "extension_dominio", "name" => "extension_dominio", "value" => $extension_dominio]);
         $r[] = input_hidden(["class" => "ciclo_facturacion", "name" => "ciclo_facturacion", "value" => $ciclo_facturacion]);
         $r[] = input_hidden(["class" => "is_servicio", "name" => "is_servicio", "value" => $is_servicio]);

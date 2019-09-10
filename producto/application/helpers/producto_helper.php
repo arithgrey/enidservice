@@ -5,38 +5,34 @@ if (!function_exists('invierte_date_time')) {
     {
         $orden_pedido = $data["orden_pedido"];
         $id_servicio = $data["id_servicio"];
-        $r[] = br(3);
-        $r[] = d(h("SELECCIONA TU TIPO DE ENTREGA", 3, "text-center"), "col-lg-4 col-lg-offset-4 mb-5", 1);
-        $r[] = btw(
-            mensajeria($id_servicio, $orden_pedido)
-            ,
-            punto_entrega($id_servicio, $orden_pedido)
-            ,
+        $a = append(
+            [
 
-            8, 1, 1
+                mensajeria($id_servicio, $orden_pedido)
+                ,
+                punto_entrega($id_servicio, $orden_pedido)
+            ]
         );
 
-        $r[] = d(
+        $b =
             pre_pedido(
                 $data["url_imagen_servicio"],
                 $orden_pedido,
-                $data["plan"],
+                $id_servicio,
                 $data["extension_dominio"],
                 $data["ciclo_facturacion"],
                 $data["is_servicio"],
                 $data["q2"],
                 $data["num_ciclos"],
-                $id_servicio,
+
                 $data["carro_compras"],
                 $data["id_carro_compras"]
-            )
-            ,
-            2,
-            1,
-            1
-        );
-        $r[] = br(4);
+            );
+
+
+        $r[] = flex($a , $b, "col-lg-8 col-lg-offset-2 mb-5 justify-content-between align-items-center");
         return append($r);
+
 
     }
 
@@ -171,11 +167,12 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response[] = d(h("DESCRIPCIÓN DEL PRODUCTO", 1, "strong"), 10, 1);
-        $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5", "border_enid text-center p-3 w-100 strong ", "border text-center p-3 w-100 strong"), 10, 1);
+        $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"), 10, 1);
         $response[] = d(desc_servicio($s, $proceso_compra, $tiempo_entrega, $data, $imagenes), 10, 1);
 
         $response[] = d(d("", "place_valoraciones"), 10,1);
-        $response[] = d(d("", "place_tambien_podria_interezar top_100 bottom_100"), 10, 1);
+        $response[] = d(h("TAMBIÉN TE PODRÍA  INTERESAR", 2 , "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none");
+        $response[] = d(d("", "place_tambien_podria_interezar  bottom_100"), 10, 1);
 
         $response[] = input_hidden(["class" => "qservicio", "value" => $nombre]);
         $response[] = input_hidden(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]);
@@ -256,7 +253,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = frm_compra($es_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion);
-        $r[] = d(agregar_lista_deseos(0, $in_session), "l_deseos padding_10 border border-dark mt-3");
+        $r[] = agregar_lista_deseos(0, $in_session) ;
 
 
         $r[] = $tallas;
@@ -295,15 +292,18 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = d(icon('fa fa-truck fa-3x'));
-        $r[] = d(h("MENSAJERÍA", 4), "title");
-        $r[] = d("QUE LLEGUE A TU CASA U OFICINA", "text");
+        $r[] = h("MENSAJERÍA", 4, "strong black");
+        $r[] = d("LO ENVIAMOS A CASA U OFICINA", "text");
+
         $response = d(append($r),
-            " shadow align-items-center box-part text-center border mh-selector d-flex flex-column justify-content-center "
+            [
+                "class" => "  cursor_pointer  p-4 mt-5 bg-light  mb-5  mh-selector d-flex flex-column justify-content-center selector_entrega ",
+                "onclick" => "carga_opcion_entrega(2, " . $id_servicio . "  ,  " . $orden_pedido . " );"
+
+            ]
+
         );
-        $response = d($response, [
-            "class" => "col-lg-6 cursor_pointer",
-            "onclick" => "carga_opcion_entrega(2, " . $id_servicio . "  ,  " . $orden_pedido . " );"
-        ]);
+
         return $response;
 
 
@@ -354,9 +354,9 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $url = "../producto/?producto=" . $id_servicio . "&pre=1";
-        $r[] = '<form action="' . $url . '" id="AddToCartForm" method="POST" >';
+        $r[] = '<form action="' . $url . '"  method="POST" >';
         $r[] = form_hidden([
-            "plan" => $id_servicio,
+            "id_servicio" => $id_servicio,
             "extension_dominio" => "",
             "ciclo_facturacion" => "",
             "is_servicio" => $es_servicio,
@@ -384,9 +384,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = '<form action="../procesar/?w=1" method="POST" >';
         $r[] = form_hidden(["id_servicio" => $id_servicio, "es_servicio" => 1]);
         $r[] = btn(
-            "COTIZAR ",
+            text_icon("fa fa fa-long-arrow-right", "COTIZAR ",[], 0)  ,
             [
-                'class' => "top_30 shadow bottom_30"
+                'class' => "top_30 bottom_30"
 
             ],
             1,
@@ -729,7 +729,7 @@ if (!function_exists('invierte_date_time')) {
                     [
                         'src' => $url,
                         'alt' => $nombre_servicio,
-                        'class' => 'col-lg-8 mt-2 border  ' . $extra_class,
+                        'class' => 'col-lg-8 mt-2 border  cursor_pointer ' . $extra_class,
                         'id' => $z,
                         'data-toggle' => 'tab',
                         'href' => "#imagen_tab_" . $z
@@ -848,26 +848,35 @@ if (!function_exists('invierte_date_time')) {
             if ($proceso_compra == 0) {
 
                 $btn = a_enid(
-                    text_icon("fa fa-long-arrow-right", "AGREGAR A TU LISTA DE DESEOS ", [], 0)
+
+
+                    d(
+                        text_icon("fa fa-long-arrow-right", "AGREGAR A TU LISTA DE DESEOS ", [], 0)
                     ,
                     [
-                        'class' => 'agregar_a_lista black strong',
-                        'href' => path_enid("login")
+                        'class' => 'agregar_a_lista black strong strong p-3 mt-3 border  l_deseos padding_10  border-dark mt-3',
+
                     ]
+
+                    )
+                    ,
+                         path_enid("login")
+
                 );
 
                 if ($in_session == 1) {
-                    $btn = d(
+                    $btn =
                         d(
-                            text_icon("fa fa-gift", "AGREGAR A TU LISTA DE DESEOS"),
+                            text_icon("fa fa-long-arrow-right", "AGREGAR A TU LISTA DE DESEOS",[] , 0),
+                            [
+                                "id" => 'agregar_a_lista_deseos_add',
+                                "class" => "cursor_pointer  border agregar_a_lista_deseos l_deseos padding_10  border-dark mt-3"
 
-                            "agregar_a_lista_deseos black"
-                            , 1
-                        ),
-                        [
-                            "id" => 'agregar_a_lista_deseos_add'
-                        ]
-                    );
+                            ]
+
+
+
+                        );
 
                 }
                 return $btn;
@@ -907,17 +916,21 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = d(img(["src" => "../img_tema/linea_metro/metro.jpg", "class" => "icono_metro"]));
-        $r[] = d(h("UN PUNTO MEDIO", 4), "title");
+        $r[] = h("PUNTO MEDIO", 4 , "strong");
         $r[] = d(d("PAGO CONTRA ENTREGA "), "text");
-        $response = d(append($r), "shadow  align-items-center box-part text-center border mh-selector d-flex flex-column justify-content-center");
-        return d($response, [
-            "class" => "col-lg-6 cursor_pointer",
-            "onclick" => "carga_opcion_entrega(1, " . $id_servicio . "  ,  " . $orden_pedido . " );"
-        ]);
+        $response = d(append($r),
+            [
+                "class" => " cursor_pointer     p-4 bg-light mh-selector d-flex flex-column justify-content-center selector_entrega",
+                "onclick" => "carga_opcion_entrega(1, " . $id_servicio . "  ,  " . $orden_pedido . " );"
+            ]
+        );
+        return $response;
 
     }
 
-    function pre_pedido($url_imagen_servicio, $orden_pedido, $plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $id_servicio, $carro_compras, $id_carro_compras)
+    function pre_pedido($url_imagen_servicio, $orden_pedido, $id_servicio, $extension_dominio,
+                        $ciclo_facturacion, $is_servicio, $q2, $num_ciclos,
+                         $carro_compras, $id_carro_compras)
     {
 
         $r = [];
@@ -925,9 +938,10 @@ if (!function_exists('invierte_date_time')) {
         if ($orden_pedido > 0) {
 
 
-            $r[] = frm_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $carro_compras, $id_carro_compras);
-            $r[] = frm_pre_contact($plan, $num_ciclos, $carro_compras, $id_carro_compras);
-            $r[] = form_pre_puntos_medios($plan, $num_ciclos, $carro_compras, $id_carro_compras);
+            $r[] = frm_pre_pedido($id_servicio, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $carro_compras, $id_carro_compras);
+            $r[] = frm_pre_contact($id_servicio, $num_ciclos, $carro_compras, $id_carro_compras);
+            $r[] = form_pre_puntos_medios($id_servicio, $num_ciclos, $carro_compras, $id_carro_compras);
+
             $r[] =
                 img(
                     [
@@ -935,18 +949,19 @@ if (!function_exists('invierte_date_time')) {
                     ]
 
                 );
+            $r[] = h("Selecciona un tipo de entrega", 3, "strong text-uppercase ");
 
         }
 
-        return d(append($r));
+        return append($r);
 
     }
 
-    function frm_pre_pedido($plan, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $carro_compras, $id_carro_compras)
+    function frm_pre_pedido($id_servicio, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $carro_compras, $id_carro_compras)
     {
 
         $r[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
-        $r[] = input_hidden(["class" => "plan", "name" => "plan", "value" => $plan]);
+        $r[] = input_hidden(["class" => "id_servicio", "name" => "id_servicio", "value" => $id_servicio]);
         $r[] = input_hidden(["class" => "extension_dominio", "name" => "extension_dominio", "value" => $extension_dominio]);
         $r[] = input_hidden(["class" => "ciclo_facturacion", "name" => "ciclo_facturacion", "value" => $ciclo_facturacion]);
         $r[] = input_hidden(["class" => "is_servicio", "name" => "is_servicio", "value" => $is_servicio]);
@@ -959,12 +974,12 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function frm_pre_contact($plan, $num_ciclos, $carro_compras, $id_carro_compras)
+    function frm_pre_contact($id_servicio, $num_ciclos, $carro_compras, $id_carro_compras)
     {
 
 
         $r[] = '<form class="frm_pre_contact" action="../contact/?w=1" method="POST">';
-        $r[] = input_hidden(["class" => "servicio", "name" => "servicio", "value" => $plan]);
+        $r[] = input_hidden(["class" => "servicio", "name" => "servicio", "value" => $id_servicio]);
         $r[] = input_hidden(["class" => "num_ciclos", "name" => "num_ciclos", "value" => $num_ciclos]);
         $r[] = input_hidden(["class" => "carro_compras", "name" => "carro_compras", "value" => $carro_compras]);
         $r[] = input_hidden(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id_carro_compras]);
@@ -973,15 +988,20 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function form_pre_puntos_medios($plan, $num_ciclos, $carro_compras, $id_carro_compras)
+    function form_pre_puntos_medios($id_servicio, $num_ciclos, $carro_compras, $id_carro_compras)
     {
 
-        $url = "../puntos_medios/?producto=" . $plan;
+        $url = "../puntos_medios/?producto=" . $id_servicio;
         $r[] = '<form class="form_pre_puntos_medios" action="' . $url . '"  method="POST">';
         $r[] = input_hidden([
             "class" => "servicio",
             "name" => "servicio",
-            "value" => $plan
+            "value" => $id_servicio
+        ]);
+        $r[] = input_hidden([
+            "class" => "id_servicio",
+            "name" => "id_servicio",
+            "value" => $id_servicio
         ]);
 
         $r[] = input_hidden([

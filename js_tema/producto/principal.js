@@ -11,6 +11,9 @@ $(document).ready(function () {
     $("footer").ready(carga_valoraciones);
     $(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);
     $(".talla").click(agregar_talla);
+    $(".descripcion_producto ").click(tab_descripcion);
+    $(".descripcion_detallada ").click(tab_descripcion_avanzada);
+
 
 });
 let carga_productos_sugeridos = () => {
@@ -22,7 +25,9 @@ let carga_productos_sugeridos = () => {
 
 let response_carga_productos = data => {
 
+
     if (data["sugerencias"] == undefined) {
+        $(".text_sugerencias").removeClass("d-none");
         render_enid(".place_tambien_podria_interezar", data);
     }
 }
@@ -129,4 +134,20 @@ let agregar_talla = function () {
             $(".producto_talla").val(id_seleccion);
         }
     });
+}
+let tab_descripcion = function () {
+
+    $(".descripcion_producto").addClass("border_enid");
+    $(".descripcion_producto").removeClass("border");
+    $(".descripcion_detallada").removeClass("border_enid");
+    $(".descripcion_detallada").addClass("border");
+
+
+}
+let tab_descripcion_avanzada = function () {
+
+    $(".descripcion_producto").removeClass("border_enid").addClass("border");
+    $(".descripcion_detallada").addClass("border_enid");
+    $(".descripcion_detallada").removeClass("border");
+
 }
