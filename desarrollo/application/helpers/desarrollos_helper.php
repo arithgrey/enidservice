@@ -21,8 +21,14 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $response[] = d(ul(get_menu($activa), "nav tabs"), 2);
-            $response[] = d(d(append($r), "tab-content"), 10);
+
+
+            $response[] =  hrz(
+                ul(get_menu($activa), "nav tabs"),
+                d(append($r), "tab-content"),
+                2
+            );
+
             $response[] = input_hidden([
                 "class" => "ticket",
                 "value" => $data["ticket"],
@@ -83,6 +89,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
+    /*
     if (!function_exists('get_format_charts')) {
         function get_format_charts()
         {
@@ -95,7 +102,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('get_form_busqueda_desarrollo_solicitudes')) {
+    */
+    if (!function_exists('frm_busqueda_desarrollo')) {
         function form_busqueda_desarrollo_solicitudes()
         {
 
@@ -148,8 +156,8 @@ if (!function_exists('invierte_date_time')) {
 
 
                     [
-                        "class" => 'black  ' . valida_seccion_activa(1, $activa),
-                        //"style" => 'background:white;'
+                        "class" => 'black  ' . valida_seccion_activa(1, $activa)
+
                     ]
                 )
 

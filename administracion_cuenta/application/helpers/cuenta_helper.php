@@ -7,10 +7,12 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $id_usuario = $data["id_usuario"];
-            $r[] = d(get_menu($id_usuario), 2);
-            $r[] = d(format_cuenta($id_usuario, $data["usuario"]), 10);
-            return append($r, "contenedor_principal_enid");
-
+            return  hrz(
+                menu($id_usuario) ,
+                format_cuenta($id_usuario, $data["usuario"]),
+                2,
+                "contenedor_principal_enid"
+            );
         }
 
     }
@@ -19,14 +21,18 @@ if (!function_exists('invierte_date_time')) {
         function format_cuenta($id_usuario, $usuario)
         {
 
-            $r[] = d(format_foto_usuario($id_usuario, $usuario), ["class" => "tab-pane active", "id" => "tab_mis_datos"]);
+            $r[] = d(foto($id_usuario, $usuario),
+                [
+                    "class" => "tab-pane active",
+                    "id" => "tab_mis_datos"
+                ]);
             $r[] =
                 d(
                     btw(
 
                         h("ACTUALIZAR DATOS DE ACCESO", 3)
                         ,
-                        form_set_password()
+                        frm_set_pw()
                         ,
                         4,
                         1
@@ -39,30 +45,29 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
-            $r[] = d(format_privacidad_seguridad(), ["class" => "tab-pane ", "id" => "tab_privacidad_seguridad"]);
-            $r[] = d(get_format_calma(), ["class" => "tab-pane ", "id" => "tab_direccion"]);
+            $r[] = d(privacidad(), ["class" => "tab-pane ", "id" => "tab_privacidad_seguridad"]);
+            $r[] = d(calma(), ["class" => "tab-pane ", "id" => "tab_direccion"]);
             return d(append($r), "tab-content");
 
         }
     }
-    if (!function_exists('format_foto_usuario')) {
-        function format_foto_usuario($id_usuario, $usuario)
+    if (!function_exists('foto')) {
+        function foto($id_usuario, $usuario)
         {
 
             $r[] = btw(
-                get_format_perfil_usuario($id_usuario),
+                perfil_usuario($id_usuario),
                 place("place_form_img"),
                 "col-lg-5 shadow padding_20"
             );
-            $r[] = d(get_format_user($usuario), "page-header menu_info_usuario");
+            $r[] = d(format_user($usuario), "page-header menu_info_usuario");
             $r[] = d("Mantén la calma esta información será solo será visible si tú lo permites ", 'registro_telefono_usuario_lada_negocio blue_enid3  white padding_1', 1);
-            $x[] = d(append($r), 8);
-            $x[] = d(get_format_resumen_cuenta($usuario), 4);
-            return append($x);
+            return hrz(append($r) ,  resumen_cuenta($usuario) , 4);
+
         }
     }
-    if (!function_exists('format_privacidad_seguridad')) {
-        function format_privacidad_seguridad()
+    if (!function_exists('privacidad_seguridad')) {
+        function privacidad()
         {
 
             $x[] = h("INFORMACIÓN PERSONAL", 3);
@@ -76,8 +81,8 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    if (!function_exists('get_format_calma')) {
-        function get_format_calma()
+    if (!function_exists('calma')) {
+        function calma()
         {
 
 
@@ -108,9 +113,9 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_format_perfil_usuario')) {
+    if (!function_exists('perfil_usuario')) {
 
-        function get_format_perfil_usuario($id_usuario)
+        function perfil_usuario($id_usuario)
         {
 
 
@@ -131,13 +136,13 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    if (!function_exists('get_format_resumen_cuenta')) {
+    if (!function_exists('resumen_cuenta')) {
 
-        function get_format_resumen_cuenta($usuario)
+        function resumen_cuenta($usuario)
         {
 
             $r[] = h("TU CUENTA ENID SERVICE", 3);
-            $r[] = get_format_user($usuario, 1);
+            $r[] = format_user($usuario, 1);
             $r[] = addNRow(d(get_campo($usuario, "email", ""), "top_20", 1));
             $r[] = addNRow(get_campo($usuario, "tel_contacto", "Tu prime apellido", 1));
             $r[] = a_enid(text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"),
@@ -155,8 +160,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('form_set_password')) {
-        function form_set_password()
+    if (!function_exists('frm_set_pw')) {
+        function frm_set_pw()
         {
 
             $r[] = form_open("", ["id" => "form_update_password", "class" => "form-horizontal", "method" => "POST"]);
@@ -198,19 +203,19 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    if (!function_exists('get_format_user')) {
+    if (!function_exists('format_user')) {
 
-        function get_format_user($usuario, $vista = 0)
+        function format_user($usuario, $vista = 0)
         {
 
             $r = [];
             if ($vista < 1) {
 
                 $r[] = h("Cuenta", 1, 'strong', 1);
-                $r[] = addNRow(get_form_nombre($usuario));
-                $r[] = addNRow(get_form_email($usuario));
-                $r[] = addNRow(d(get_form_telefono($usuario), "row"));
-                $r[] = addNRow(d(get_form_negocio($usuario), "row"));
+                $r[] = addNRow(frm_nombre($usuario));
+                $r[] = addNRow(frm_email($usuario));
+                $r[] = addNRow(d(frm_telefono($usuario), "row"));
+                $r[] = addNRow(d(frm_negocio($usuario), "row"));
 
             } else {
 
@@ -223,9 +228,9 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_form_negocio')) {
+    if (!function_exists('frm_negocio')) {
 
-        function get_form_negocio($usuario)
+        function frm_negocio($usuario)
         {
 
             $r[] = form_open("", ["class" => "f_telefono_usuario_negocio"]);
@@ -276,8 +281,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_form_telefono')) {
-        function get_form_telefono($usuario)
+    if (!function_exists('frm_telefono')) {
+        function frm_telefono($usuario)
         {
 
             $r = [];
@@ -326,8 +331,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_form_email')) {
-        function get_form_email($usuario)
+    if (!function_exists('frm_email')) {
+        function frm_email($usuario)
         {
 
             $r[] = form_open("");
@@ -352,8 +357,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_form_nombre')) {
-        function get_form_nombre($usuario)
+    if (!function_exists('frm_nombre')) {
+        function frm_nombre($usuario)
         {
 
             $r[] = form_open("", ["class" => "f_nombre_usuario"]);
@@ -377,8 +382,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_menu')) {
-        function get_menu($id_usuario)
+    if (!function_exists('menu')) {
+        function menu($id_usuario)
         {
 
             $f[] = get_url_facebook(get_url_tienda($id_usuario), 1);

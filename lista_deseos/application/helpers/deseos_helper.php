@@ -6,8 +6,7 @@ if (!function_exists('invierte_date_time')) {
         function render_deseos($data)
         {
 
-            $r[] = d(get_menu(), 2);
-            $r[] = d(list_clasificaciones($data), 10);
+            $r[] = hrz(get_menu(), list_clasificaciones($data), 2);
             $r[] = hr();
             $r[] = format_slider_preferencias();
             $r[] = hr();
@@ -134,7 +133,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d(append([
                 d(
-                    h("Encuentra entre múltiples opciones", 3,  "from-bottom")
+                    h("Encuentra entre múltiples opciones", 3, "from-bottom")
                     ,
                     "animate"
                 ),
@@ -160,9 +159,9 @@ if (!function_exists('invierte_date_time')) {
 
         function list_clasificaciones($data)
         {
-            $is_mobile =  $data["is_mobile"];
-            $preferencias =  $data["preferencias"];
-            $tmp =  $data["tmp"];
+            $is_mobile = $data["is_mobile"];
+            $preferencias = $data["preferencias"];
+            $tmp = $data["tmp"];
 
             $r = [];
             if ($is_mobile == 1) {
@@ -354,7 +353,7 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = str_repeat(icon("fa fa-star"), 5);
                 $x[] = d($row["deseado"] . " veces comprado", "label-rating");
 
-                $opiniones = a_enid($row["valoracion"] . " reseñas",$url_servicio . "#opiniones"   );
+                $opiniones = a_enid($row["valoracion"] . " reseñas", $url_servicio . "#opiniones");
                 $x[] = d($opiniones, "label-rating");
 
 

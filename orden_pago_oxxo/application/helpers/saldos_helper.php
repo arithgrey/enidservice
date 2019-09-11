@@ -24,7 +24,6 @@ if (!function_exists('invierte_date_time')) {
 
 
             $contendor_oxoo = btw(
-
                 img(
                     [
                         'src' => "http://enidservices.com/inicio/img_tema/portafolio/oxxo-logo.png",
@@ -37,7 +36,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = d($contendor_oxoo, ["style" => "background: #02223e;color: white;"]);
-            $text_beneficiario = strtoupper(append([
+            $str_beneficiario = strtoupper(append([
                     $concepto,
                     "Beneficiario",
                     $beneficiario,
@@ -47,8 +46,8 @@ if (!function_exists('invierte_date_time')) {
                 ])
             );
 
-            $r[] = d($text_beneficiario, ["style" => "background: #d7d7ff;padding: 5px;"]);
-            $r[] = get_monto_pago($monto);
+            $r[] = d($str_beneficiario, ["style" => "background: #d7d7ff;padding: 5px;"]);
+            $r[] = monto_pago($monto);
             $r[] = get_instruccion_pago($numero_cuenta);
             return d(append($r), 6, 1);
 
@@ -189,8 +188,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_monto_pago')) {
-        function get_monto_pago($monto)
+    if (!function_exists('monto_pago')) {
+        function monto_pago($monto)
         {
 
             $r[] = heading("MONTO A PAGAR");

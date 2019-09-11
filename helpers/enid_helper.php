@@ -2102,6 +2102,81 @@ function pr($data, $index, $def = false)
     return (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0])) ? $data[0][$index] : $def;
 }
 
+
+
+function hrz($a, $b, $col = 0, $class = '')
+{
+
+    switch ($col) {
+
+        case 1:
+
+            $response = d(d($a, 1) . d($b, 11), $class);
+            break;
+
+        case 2:
+
+            $response = d(d($a, 2) . d($b, 10), $class);
+
+            break;
+        case 3:
+
+            $response = d(d($a, 3) . d($b, 9), $class);
+
+            break;
+
+        case 4:
+
+            $response = d(d($a, 4) . d($b, 8), $class);
+
+            break;
+
+        case 5:
+
+            $response = d(d($a, 5) . d($b, 7), $class);
+
+            break;
+
+        case 6:
+
+            $response = d(d($a, 6) . d($b, 6), $class);
+
+            break;
+
+        case 7:
+
+            $response = d(d($a, 7) . d($b, 5), $class);
+
+            break;
+
+        case 8:
+
+            $response = d(d($a, 8) . d($b, 4), $class);
+
+            break;
+
+        case 9:
+
+            $response = d(d($a, 9) . d($b, 3), $class);
+
+            break;
+
+        case 10:
+
+            $response = d(d($a, 10) . d($b, 2), $class);
+
+            break;
+
+
+        default:
+
+            $response = d(d($a) . d($b), $class);
+
+    }
+    return $response;
+
+}
+
 function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row = 0)
 {
 

@@ -20,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
                 $response[] = d(append($x), ["class" => "col-lg-4 col-lg-offset-4", "style" => "background: #fbfbfb;border-right-style: solid;border-width: .9px;border-left-style: solid;"]);
             } else {
 
-                $response[] = d(get_format_asociar_cuenta_bancaria(), "col-lg-4 col-lg-offset-4 contenedor_asociar_cuenta");
+                $response[] = d(asociar_cuenta_bancaria(), "col-lg-4 col-lg-offset-4 contenedor_asociar_cuenta");
             }
 
             return d(append($response), "contenedor_asociar_cuenta");
@@ -80,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
                 $opt[] = array(
                     "text" => "Crédito",
                     "v" => 1
-                );;
+                );
                 $r[] = create_select($opt, "tipo_tarjeta", "form-control", "tipo_tarjeta", "text", "v");
                 $r[] = heading("5.- NÚMERO DE TARJETA " . icon("fa fa-credit-card-alt"), 4);
                 $r[] = input([
@@ -118,10 +118,10 @@ if (!function_exists('invierte_date_time')) {
         function render_empresas($data)
         {
 
-            $saldo_disponible = $data["saldo_disponible"];
+
             $r[] = btw(
-                get_format_saldo_disponible($saldo_disponible),
-                d(get_submenu(), "card"),
+                format_saldo_disponible($data["saldo_disponible"]),
+                d(submenu(), "card"),
                 3
 
             );
@@ -198,9 +198,9 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    if (!function_exists('get_format_asociar_cuenta_bancaria')) {
+    if (!function_exists('asociar_cuenta_bancaria')) {
 
-        function get_format_asociar_cuenta_bancaria()
+        function asociar_cuenta_bancaria()
         {
 
             $r[] = heading("ASOCIAR CUENTA BANCARIA Ó TARJETA DE CRÉDITO O DÉBITO", 3);
@@ -286,8 +286,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
     }
-    if (!function_exists('get_format_saldo_disponible')) {
-        function get_format_saldo_disponible($saldo_disponible)
+    if (!function_exists('format_saldo_disponible')) {
+        function format_saldo_disponible($saldo_disponible)
         {
 
             $response = ul(
@@ -483,8 +483,8 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    if (!function_exists('get_submenu')) {
-        function get_submenu()
+    if (!function_exists('submenu')) {
+        function submenu()
         {
 
             $list = [

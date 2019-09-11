@@ -4,8 +4,8 @@ if (!function_exists('invierte_date_time')) {
     function page_sigin($action)
     {
 
-        $r[] = format_nuevo_usuario();
-        $r[] = format_recuperacion_pw();
+        $r[] = nuevo_usuario();
+        $r[] = recuperacion();
         $r[] = frm_acceso($action);
         $r[] = input_hidden(
             [
@@ -51,7 +51,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_recuperacion_pw()
+    function recuperacion()
     {
 
         $r[] = a_enid(img_enid(),
@@ -95,13 +95,13 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_nuevo_usuario()
+    function nuevo_usuario()
     {
 
 
         $r[] = a_enid(img_enid(), ["href" => "../", "class" => "col-lg-8 col-lg-offset-2"], 1);
         $r[] = heading('ÚNETE A ENID SERVICE', 3, 1);
-        $r[] = d(get_form_registro(), 1);
+        $r[] = d(frm_registro(), 1);
         $r[] = d(
             a_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
                 [
@@ -118,7 +118,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_form_registro()
+    function frm_registro()
     {
 
         $r[] = '<form class="form-miembro-enid-service" id="form-miembro-enid-service">';

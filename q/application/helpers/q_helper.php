@@ -671,7 +671,7 @@ if (!function_exists('invierte_date_time')) {
                     "style" => "width: 30%;margin: 0 auto;"
                 ]);
 
-            $r[] = d("TU USUARIO SE HA REGISTRADO!", ["style" => "font-size: 1.4em;font-weight: bold"]);
+            $r[] = d("TU USUARIO SE HA REGISTRADO!", "f14 strong");
             $r[] = hr();
             $r[] = d("Desde ahora podrás adquirir y vender las mejores promociones a lo largo de México");
             $r[] = br();

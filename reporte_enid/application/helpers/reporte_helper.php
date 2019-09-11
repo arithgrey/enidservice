@@ -103,7 +103,7 @@ if (!function_exists('invierte_date_time')) {
             );
             $z[] = d(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]);
             $z[] = d(addNRow(place("place_metricas_comparativa top_50")), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]);
-            $z[] = d(get_form_busqueda_desarrollo_solicitudes(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
+            $z[] = d(frm_busqueda_desarrollo(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
 
             $r[] = d(append($z), "tab-content");
             return append($r);
@@ -127,8 +127,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('get_form_busqueda_desarrollo_solicitudes')) {
-        function get_form_busqueda_desarrollo_solicitudes()
+    if (!function_exists('frm_busqueda_desarrollo')) {
+        function frm_busqueda_desarrollo()
         {
 
             $f[] = form_open("", ["class" => 'form_busqueda_desarrollo_solicitudes']);
