@@ -7,12 +7,12 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $in_session = $data["in_session"];
-            $r[] = place("info_articulo", ["id" => 'info_articulo']);
-            $z[] = d(str_title($in_session, $data["is_mobile"], 1), "top_100");
-            $z[] = d(frm_contacto_servicio($in_session, $data["servicio"]), "bottom_100 top_50");
-            $z[] = place("place_registro_afiliado");
-            $r[] = d(d(append($z), "contenedo_compra_info"), "contenedor_compra");
-            return addNRow(d(d(append($r), 6, 1), "bottom_100"));
+            //$r[] = place("info_articulo", ["id" => 'info_articulo']);
+            $z[] = str_title($in_session, $data["is_mobile"], 1);
+            $z[] = frm_contacto_servicio($in_session, $data["servicio"]);
+            //$z[] = place("place_registro_afiliado");
+            //$r[] = d(d(append($z), "contenedo_compra_info"), "contenedor_compra");
+            return d(append($z), 8, 1);
 
         }
     }
@@ -76,11 +76,11 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('str_title')) {
         function str_title($in_session, $is_mobile, $es_servicio = 0)
         {
-            //$text = ($in_session == 0 && $is_mobile == 0) ? h("DATOS DE COMPRA", 3) : "";
+
             $text = "";
             if ($es_servicio > 0) {
                 $text = ($in_session == 0 && $is_mobile == 0) ?
-                    h("¿QUIEN ERES?", 3, "top_30 bottom_30") : "";
+                    h("SOLICITA TU PRESUPUESTO", 3, " strong") : "";
             }
 
             return $text;
@@ -201,117 +201,109 @@ input(
             $r = [];
             if ($in_session < 1) {
 
-                $r[] = form_open("", ["class" => "form-cotizacion-enid-service"]);
+                $r[] = form_open("", ["class" => "form-cotizacion-enid-service row"]);
 
+                $x[] = d(
+                    btw(
+                        input(
+                            [
+                                "id" => "nombre",
+                                "name" => "nombre",
+                                "type" => "text",
+                                "placeholder" => "Quien solicita",
+                                "class" => "nombre",
+                                "minlength" => 3,
+                                "required" => true
+                            ], 0, 0
+                        ),
+                        label("Nombre", ["for" => "nombre"]),
+                        "input_enid"
+                    ), "col-lg-6 "
+                );
 
-                $x[] =
-                    d(
-                        ajustar(
-                            "Nombre ",
-                            input(
-                                [
-                                    "name" => "nombre",
-                                    "placeholder" => "Nombre",
-                                    "class" => " input-sm  nombre",
-                                    "type" => "text",
-                                    "required" => "true"
-                                ]
-                            )
-
-
-                        ));
-
-
-                $x[] =
-                    d(
-                        ajustar(
-                            "Email",
-                            add_text(
-
-                                d(
-                                    input(
-                                        [
-                                            "name" => "email",
-                                            "placeholder" => "email",
-                                            "class" => " input-sm  email",
-                                            "type" => "email",
-                                            "required" => "true",
-                                            "onkeypress" => "minusculas(this);"
-                                        ]
-
-                                    )
-                                )
-                                ,
-                                d(
-                                    place('place_correo_incorrecto')
-                                )
-                            )
-
-                        ), "top_30");
-
-
-                $x[] =
-                    d(
-                        ajustar(
-                            text_icon('fa fa-unlock-alt', "Una contraseña"),
-                            input(
-                                [
-                                    "id" => "password",
-                                    "class" => " input-sm password",
-                                    "type" => "password",
-                                    "required" => "true",
-                                    "placeholder" => "contraseña"
-                                ]
-                            )
-
-                        )
-                        ,
-                        "top_30"
-                    );
-
-
-                $x[] = place("place_password_afiliado");
-
-
-                $x[] =
-                    d(
-                        ajustar(
-                            text_icon('fa fa-phone', "Teléfono "),
-                            input([
-                                "id" => "telefono",
-                                "class" => "telefono form-control",
-                                "type" => "tel",
-                                "pattern" => "^[0-9-+s()]*$",
-                                "maxlength" => 13,
-                                "minlength" => 8,
-                                "name" => "telefono",
+                $x[] = d(
+                    btw(
+                        input(
+                            [
+                                "name" => "email",
+                                "placeholder" => "Ej. jonathan@enidservice.com",
+                                "class" => "email",
+                                "type" => "email",
                                 "required" => "true",
-                                "placeholder" => "55"
+                                "id"=> "correo"
+                            ], 0, 0
+                        ),
+                        label("Email", ["for" => "email"]),
+                        "input_enid"
+                    ), "col-lg-6 "
+                );
 
-                            ])
-                        )
-                        ,
-                        "top_30"
-                    );
+                $x[] = d(
+                    btw(
+                        input(
+                            [
+                                "name" => "password",
+                                "placeholder" => "***",
+                                "class" => "password",
+                                "type" => "password",
+                                "required" => true,
+                                "id"=> "password"
+                            ], 0, 0
+                        ),
+                        label("Password", ["for" => "password"]),
+                        "input_enid"
+                    ), "col-lg-6"
+                );
 
 
-                $x[] =
-                    d(
-                        ajustar(
-                            text_icon('fa-calendar', "En que fecha te interesa"),
-                            input([
+
+                $x[] = d(
+                    btw(
+                        input(
+                            [
+                                "name" => "telefono",
+                                "placeholder" => "555296...",
+                                "class" => "telefono",
+                                "type" => "tel",
+                                "required" => true,
+                                "id"=> "telefono",
+                                "maxlength" => 10,
+                                "minlength" => 8,
+                            ], 0, 0
+                        ),
+                        label("Teléfono", ["for" => "password"]),
+                        "input_enid"
+                    ), "col-lg-6"
+                );
+
+
+                $x[] = d(
+                    btw(
+                        input(
+                            [
                                 "data-date-format" => "yyyy-mm-dd",
                                 "name" => 'fecha_servicio',
-                                "class" => "form-control input-sm fecha_servicio",
+                                "class" => "fecha_servicio",
                                 "type" => 'date',
                                 "value" => date("Y-m-d"),
                                 "min" => date("Y-m-d"),
-                                "max" => add_date(date("Y-m-d"), 35)
-                            ])
-                        )
-                        ,
-                        "top_30"
-                    );
+                                "max" => add_date(date("Y-m-d"), 35),
+                                "id" => "fecha_servicio"
+                            ], 0, 0
+                        ),
+                        label("Fecha de interés", ["for" => "fecha_servicio"]),
+                        "input_enid"
+                    ), "col-lg-6"
+                );
+
+
+                $x[] = d("", 6);
+                $x[] = d("¿Deseas agregar algún comentario?", "col-lg-12 strong underline top_50 agregar_commentario cursor_pointer");
+
+
+
+
+
 
 
                 $r[] = append($x);
@@ -334,10 +326,11 @@ input(
                         "name" => "comentarios",
                         "class" => "comentario"
 
-                    ]), "top_30");
+                    ]), "col-lg-12 mt-3 d-none text_comentarios");
 
-                $r[] = place("place_telefono");
-                $r[] = btn("COTIZAR", ["class" => "top_30"]);
+
+                $r[] = d("", 9);
+                $r[] = d(btn("COTIZAR"), "col-lg-3 mt-5");
                 $r[] = d(
                     a_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
                         [
@@ -354,14 +347,14 @@ input(
 
             } else {
 
-                $r[] = form_open("", ["class" => "form_cotizacion_enid_service"]);
-                $r[] = h("SOLICITAR COTIZACIÓN", 3, "top_80 text-center");
-                $r[] = d(p(span("ME GUSTARÍA OPTENER UNA COTIZACIÓN SOBRE: ", "underline") . $servicio["nombre_servicio"]));
+                $r[] = form_open("", ["class" => "form_cotizacion_enid_service col-lg-8 col-lg-offset-2"]);
+                $r[] = h("SOLICITA TU PRESUPUESTO", 3, "strong");
+                $r[] = d(span("SOBRE: ", "underline") . $servicio["nombre_servicio"], "mt-5");
 
                 $r[] =
-                    d(
-                        ajustar(
-                            text_icon('fa-calendar', "En que fecha te interesa"),
+
+                        flex(
+                            text_icon('fa-calendar mr-3', "Fecha de interés"),
                             input([
                                 "data-date-format" => "yyyy-mm-dd",
                                 "name" => 'fecha_servicio',
@@ -370,15 +363,16 @@ input(
                                 "value" => date("Y-m-d"),
                                 "min" => date("Y-m-d"),
                                 "max" => add_date(date("Y-m-d"), 35)
-                            ])
+                            ]),
+                            "justify-content-between mt-5",
+                            "col-lg-6 row",
+                            "col-lg-6 row"
                         )
-                        ,
-                        "top_30"
-                    );
+                        ;
 
 
-                $r[] = d(p(span("¿TIENES ALGUNA PREGUNTA ADICIONAL?")), "top_30");
-                $r[] = textarea(["name" => "descripcion"]);
+                $r[] = d("¿Deseas agregar algún comentario?", "top_30 strong text_agregar_comentario cursor_pointer");
+                $r[] = textarea(["name" => "descripcion" , "class"=>"d-none descripcion_comentario"]);
 
                 $r[] = input_hidden(
                     [
@@ -427,8 +421,9 @@ input(
 
 
 
-                $r[] = btn("SOLICITAR COTIZACIÓN", ["class" => "top_30", "name" => "comentarios"], 1, 1, 1);
-                $r[] = place("place_config_usuario");
+
+                $r[] = d(btn("ENVIAR", ["class" => "top_30", "name" => "comentarios"]),"col-lg-6 row");
+                //$r[] = place("place_config_usuario");
                 $r[] = form_close();
 
             }

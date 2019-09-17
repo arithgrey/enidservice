@@ -111,6 +111,7 @@ let valida_formato_pass = text => {
     }
     return estado;
 }
+
 let valida_formato_email = email => {
 
     let estado = 1;

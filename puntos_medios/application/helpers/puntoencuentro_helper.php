@@ -13,25 +13,41 @@ if (!function_exists('invierte_date_time')) {
         $punto_encuentro = $data["punto_encuentro"];
 
 
-        $r[] = d(d(h("TU PUNTO MÁS CERCANO", 3, " text-center"),4,1),"row top_50 bottom_30 titulo_punto_cercano");
-        $r[] = d(d($data["leneas_metro"],  "place_lineas col-lg-12"), "row bottom_100 seccion_lm");
+        $att = (is_mobile()) ? "" : "strong w-75 mx-auto ";
+        $r[] = d(flex(
+            h("SELECCIONA UNA LINEA ", 2, $att),
+            $data["leneas_metro"],
+            ["d-lg-flex align-items-center contenedor_estaciones"],
+            "col-lg-5 text_seleccion_linea",
+            "col-lg-7 place_lineas bg-light p-5 "
 
-        $r[] = d(
+        ), 13);
+
+        /*
+        $r[] = d(d(
 
             input([
-                "class" => "ksearch",
+                "class" => "ksearch d-none ibusqueda_estaciones ",
                 "name" => "q"
             ]),4,1
-        );
+        ), 13);
+        */
 
-        $r[] = d(place("place_estaciones_metro"),4,1);
+        $r[] =
+            flex(
+                h("SELECCIONA UNA ESTACIÓN ", 2, $att),
+
+                "", ["d-lg-flex align-items-center row desglose_estaciones"],
+                "col-lg-5 text_seleccion_estacion",
+                "place_estaciones_metro col-lg-7 bg-light p-5"
+            );
 
         if ($primer_registro > 0) {
             $r[] = input_hidden(["name" => "servicio", "class" => "servicio id_servicio", "value" => $servicio]);
 
             if ($in_session < 1) {
 
-                $z[] = d(frm_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras), "contenedor_eleccion_correo_electronico");
+                $z[] = frm_punto_encuentro($num_ciclos, $in_session, $servicio, $carro_compras, $id_carro_compras);
 
             } else {
 
@@ -42,20 +58,20 @@ if (!function_exists('invierte_date_time')) {
                     input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]),
                     input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras])
 
-                ]), 8, 1);
+                ]));
             }
 
-            $r[] = d(append($z), 'formulario_quien_recibe display_none');
+            $r[] = d(append($z), 'formulario_quien_recibe row');
 
         } else {
 
             $recibo = $data["recibo"];
-            $r[] = frm_quien_recibe( $punto_encuentro, $recibo);
+            $r[] = frm_quien_recibe($punto_encuentro, $recibo);
             $r[] = input_hidden(["class" => "recibo", "name" => "recibo", "value" => $recibo]);
         }
         $r[] = input_hidden(["class" => "primer_registro", "value" => $primer_registro]);
 
-        return d(d(append($r), 8, 1), 13);
+        return d(append($r), "col-lg-8 col-lg-offset-2 mt-5 mb-5 proceso_compra_pe");
 
     }
 
@@ -73,7 +89,7 @@ if (!function_exists('invierte_date_time')) {
             input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form", "value" => $punto_encuentro])
         ]);
 
-        return  d($response, 6, 1);
+        return d($response, 6, 1);
 
     }
 
@@ -82,121 +98,151 @@ if (!function_exists('invierte_date_time')) {
         $horarios = lista_horarios();
         $lista_horarios = $horarios["select"];
         $nuevo_dia = $horarios["nuevo_dia"];
-
         $minimo = date_format(horario_enid(), 'Y-m-d');
         $maximo = add_date($minimo, 4);
         $minimo = ($nuevo_dia > 0) ? add_date($minimo, 1) : $minimo;
 
-        $z[] = form_open("", ["class" => "form-horizontal form_punto_encuentro mt-5"]);
+        $z[] = form_open("", ["class" => "form_punto_encuentro mt-5 row"]);
 
-
-        $a = " NOMBRE ";
-        $b =
-            input(
-                [
-                    "id" => "nombre",
-                    "name" => "nombre",
-                    "type" => "text",
-                    "placeholder" => "Persona que recibe",
-                    "class" => "form-control input-md nombre ",
-                    "required" => true
-                ]);
-
-        $a1 = ajustar($a,$b,4);
-
-        $a = "CORREO ";
-        $b =
-            input(
-                [
-                    "id" => "correo",
-                    "name" => "email",
-                    "type" => "email",
-                    "placeholder" => "@",
-                    "class" => "form-control input-md correo",
-                    "required" => true
-                ]);
-
-
-        $b1= ajustar($a,$b,4);
-        $z[]=  ajustar($a1,$b1,6);
-
-        $a = " TELÉFONO ";
-        $b = input([
-            "id" => "tel",
-            "name" => "telefono",
-            "type" => "tel",
-            "class" => "form-control input-md  telefono ",
-            "required" => true
-        ]);
-
-        $a2 =  ajustar($a,$b,4);
-        $b2 =  ajustar(
-            "PASSWORD",
-            input([
-                "id" => "pw",
-                "name" => "password",
-                "type" => "password",
-                "class" => "form-control input-md  pw ",
-                "required" => true
-            ]),4
+        $z[] = h("¿Quién recibe?", 3, " strong text-uppercase col-lg-12 ");
+        $z[] = d(
+            btw(
+                input(
+                    [
+                        "id" => "nombre",
+                        "name" => "nombre",
+                        "type" => "text",
+                        "placeholder" => "Persona que recibe",
+                        "class" => "nombre",
+                        "minlength" => 3,
+                        "required" => true
+                    ], 0, 0
+                ),
+                label("NOMBRE", ["for" => "nombre"]),
+                "input_enid"
+            ), 6
         );
-        $z[] =  ajustar($a2,$b2,6,"top_30 bottom_30");
 
 
-        $r[] = d(append($z) , "display_none informacion_del_cliente top_100" );
+        $z[] = d(
+            btw(
+
+                input(
+                    [
+                        "id" => "correo",
+                        "name" => "email",
+                        "type" => "email",
+                        "placeholder" => "jonathan@gmail.com",
+                        "class" => "correo",
+                        "minlength" => 5,
+                        "required" => true
+                    ], 0, 0
+                ),
+                label("CORREO", ["for" => "correo"])
+                ,
+                "input_enid"
+            )
+            ,
+            6
+        );
 
 
+        $z[] = d(
+            btw(
+
+                input([
+                    "id" => "tel",
+                    "name" => "telefono",
+                    "type" => "tel",
+                    "class" => "telefono ",
+                    "required" => true,
+                    "placeholder" => "5552...",
+                    "maxlength" => 10,
+                    "minlength" => 8
+                ], 0, 0),
+                label("TELÉFONO ", ["for" => "tel"])
+                ,
+                "input_enid"
+            )
+            ,
+            6
+        );
 
 
+        $z[] = d(
+            btw(
 
-        $sec[] = addNRow(h("¿En qué horario te gustaría recibir tu pedido?", 4, "top_100 text-uppercase  "));
-        $a = ajustar(
-            text_icon("fa fa-calendar-o" ,   " FECHA "),
-            input(
-                [
+                input([
+                    "id" => "pw",
+                    "type" => "password",
+                    "class" => "pw",
+                    "required" => true,
+                    "placeholder" => "***"
+                ], 0, 0),
+                label("PASSWORD", ["for" => "pw"])
+                ,
+                "input_enid"
+            )
+            ,
+            6
+        );
+
+        $r[] = d(append($z), "informacion_del_cliente  col-lg-12");
+
+
+        $sec[] = h("¿En qué horario te gustaría recibir tu pedido?", 3, " strong text-uppercase  col-lg-12 ");
+
+        $a = d(
+            btw(
+                input([
                     "data-date-format" => "yyyy-mm-dd",
                     "name" => 'fecha_entrega',
-                    "class" => "form-control input-sm fecha_entrega",
+                    "class" => "fecha_entrega",
                     "type" => 'date',
                     "value" => $minimo,
                     "min" => $minimo,
                     "max" => $maximo,
-                    "onChange" => "horarios_disponibles()"
-                ]),4
-
+                    "onChange" => "horarios_disponibles()",
+                    "id" => "fecha"
+                ], 0, 0),
+                label("FECHA", ["for" => "fecha"])
+                ,
+                "input_enid"
+            )
+            ,
+            "col-lg-6 mt-5"
         );
-        $b = ajustar(
 
-            text_icon("fa fa-clock-o", " HORA "),
-            $lista_horarios,
-            4
-        );
-        $sec[] = ajustar($a,$b,6, "top_50");
-        $sec[] = d("+ ¿ALGUNA INDICACIÓN?", ["class" => " top_50 bottom_50 cursor_pointer text_agregar_nota", "onclick" => "agregar_nota();"]);
-        $x[] = d("NOTAS", "mt-3");
+
+        $b[] = d(text_icon("fa fa-clock-o", " HORA "), "strong");
+        $b[] = d($lista_horarios, "mt-2");
+        $horas = d(append($b), "col-lg-6 mt-5");
+
+        $sec[] = $a;
+        $sec[] = $horas;
+
+        $sec[] = d("¿ALGUNA INDICACIÓN?", ["class" => " top_50 bottom_50 cursor_pointer text_agregar_nota col-lg-3 underline", "onclick" => "agregar_nota();"]);
+        $x[] = d("¿ALGUNA INDICACIÓN?", "mt-3 strong");
         $x[] = textarea(
             [
                 "name" => "comentarios",
                 "class" => "mt-3"
             ]);
-        $sec[] = d(append($x), "input_notas   top_50 bottom_50");
+        $sec[] = d(append($x), "input_notas   top_50 bottom_50 col-lg-12");
 
-        $r[] = d(append($sec),"seccion_horarios");
-
-
+        $r[] = d(append($sec), "seccion_horarios_entrega");
 
 
-        $r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form "]);
+        $r[] = input_hidden(["name" => "punto_encuentro", "class" => "punto_encuentro_form punto_encuentro"]);
         $r[] = input_hidden(["name" => "num_ciclos", "class" => "num_ciclos", "value" => $num_ciclos]);
         $r[] = input_hidden(["name" => "carro_compras", "class" => "carro_compras", "value" => $carro_compras]);
         $r[] = input_hidden(["name" => "id_carro_compras", "class" => "id_carro_compras", "value" => $id_carro_compras]);
+        $r[] = d("", 9);
+        $r[] = d(btn("CONTINUAR", ["class" => "botton_enviar_solicitud "]), "col-lg-3 continuar");
 
-
-        $r[] = ajustar("", btn("CONTINUAR"), 8," mt-5 botton_enviar_solicitud ");
-
-        $r[] = format_usuario_registrado($in_session, $servicio, $num_ciclos);
+        //$r[] = format_usuario_registrado($in_session, $servicio, $num_ciclos);
         $r[] = form_close();
-        return d(append($r), 10, 1);
+        return append($r);
 
 
     }
@@ -210,22 +256,21 @@ if (!function_exists('invierte_date_time')) {
             $x[] = h("YA TIENES UN USUARIO REGISTRADO", 2, "display_none text_usuario_registrado underline");
             $x[] = h("¿tienes una cuenta? ", 5,
 
-            [
-                "class" => "text-right text_usuario_registrado_pregunta  text-uppercase link_acceso cursor_pointer",
-                "id_servicio" => $servicio,
-                "num_ciclos" => $num_ciclos,
-            ]
+                [
+                    "class" => "text-right text_usuario_registrado_pregunta  text-uppercase link_acceso cursor_pointer",
+                    "id_servicio" => $servicio,
+                    "num_ciclos" => $num_ciclos,
+                ]
 
 
             );
 
 
-            $r[] = d(append($x), "contenedor_ya_tienes_cuenta  top_50");
-            $r[] = place("place_notificacion_punto_encuentro_registro");
-            $r[] = br(10);
+
+
 
         }
-        return d(append($r),  "form_primer_registro display_none");
+        return d(append($r), "form_primer_registro display_none");
 
     }
 
@@ -243,7 +288,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         ), 6, 1);
 
-        return d(append($r), 'formulario_quien_recibe display_none');
+        return d(append($r), 'formulario_quien_recibe ');
 
     }
 
@@ -257,28 +302,40 @@ if (!function_exists('invierte_date_time')) {
         $minimo = ($nuevo_dia > 0) ? add_date($minimo, 1) : $minimo;
 
 
-        $r[] = form_open("", ["class" => "form_punto_encuentro_horario top_50"]);
+        $r[] = form_open("", ["class" => "form_punto_encuentro_horario"]);
         $r[] = append($extra);
-        $r[] = d(h("¿En qué horario te gustaría recibir tu pedido?", 2, "bottom_50"), 12);
-        $r[] = d(icon("fa fa-calendar-o") . " FECHA ", 4);
+        $r[] = h("¿En qué horario te gustaría recibir tu pedido?", 3, " strong text-uppercase  col-lg-12 ");
 
         $r[] = d(
-            input(
-                [
+            btw(
+                input([
                     "data-date-format" => "yyyy-mm-dd",
                     "name" => 'fecha_entrega',
-                    "class" => "form-control input-sm fecha_entrega",
+                    "class" => "fecha_entrega",
                     "type" => 'date',
                     "value" => $minimo,
                     "min" => $minimo,
                     "max" => $maximo,
-                    "onChange" => "horarios_disponibles()"
-                ]),
-            8);
+                    "onChange" => "horarios_disponibles()",
+                    "id" => "fecha"
+                ], 0, 0),
+                label("FECHA", ["for" => "fecha"])
+                ,
+                "input_enid"
+            )
+            ,
+            "col-lg-6 mt-5"
+        );
 
-        $r[] = d(icon("fa fa-clock-o") . " HORA DE ENCUENTRO", "col-lg-4 top_30");
-        $r[] = d($horarios["select"], "col-lg-8 top_30");
-        $r[] = d(btn("CONTINUAR", ["class" => "top_50"]), 12);
+
+
+        $b[] = d(text_icon("fa fa-clock-o", " HORA "), "strong");
+        $b[] = d($horarios["select"], "mt-2");
+        $r[] = d(append($b), "col-lg-6 mt-5");
+
+        $r[] = d("", 9);
+        $r[] = d(btn("CONTINUAR", ["class" => "mt-5 "]), "col-lg-3");
+
         $r[] = place("place_notificacion_punto_encuentro");
         $r[] = form_close();
         return append($r);

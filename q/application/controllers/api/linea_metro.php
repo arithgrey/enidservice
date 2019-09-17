@@ -53,7 +53,7 @@ class Linea_metro extends REST_Controller
 
                         if (prm_def($param,"configurador") < 1 ){
 
-                            $response = create_listado_linea_metro($response, $lista_negra);
+                            $response = create_listado_linea_metro($response, $lista_negra, $param);
                         }else{
 
                             $response = create_listado_linea_metro_configurador($response, $lista_negra);

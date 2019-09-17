@@ -55,10 +55,11 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function create_listado_linea_metro($data, $lista_negra)
+    function create_listado_linea_metro($data, $lista_negra, $param)
     {
         $r = [];
         $negra = [];
+
         foreach ($data as $row) {
 
             $id = $row["id"];
@@ -80,24 +81,26 @@ if (!function_exists('invierte_date_time')) {
 
             } else {
 
+
+                $ext =  (prm_def($param, "is_mobile") > 0 ) ? "w-100" : "w-50";
                 $img =
                     img(
                         [
                             "src" => $row["icon"],
                             "id" => $id,
-                            "class" => "cursor_pointer linea_metro lm",
+                            "class" => "cursor_pointer linea_metro lm bb_hv filter_g",
                             "nombre_linea" => $row["nombre"]
                         ]
                     );
 
-                $r[] = d($img,"mt-2 img_linea");
+                $r[] = d($img, " mx-auto mt-2 " . $ext);
 
 
             }
 
 
         }
-        return d(append($r),4,1);
+        return append($r);
     }
 
     function create_listado_metrobus($array)
