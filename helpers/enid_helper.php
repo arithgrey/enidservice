@@ -87,8 +87,6 @@ if (!function_exists('btn')) {
         }
 
 
-
-
         $attr = add_attributes($attributes);
         if ($row == 0) {
 
@@ -286,10 +284,52 @@ if (!function_exists('input')) {
     {
 
         $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " ") : "  ";
-        $attributes["autocomplete"] ="off";
-        if($bootstrap){
+        $attributes["autocomplete"] = "off";
+
+        if ($bootstrap) {
 
             $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " form-control ") : " form-control ";
+        }
+
+        if (prm_def($attributes, "type") !== 0) {
+
+            $type = $attributes["type"];
+
+            switch ($type) {
+
+                case "tel":
+
+                    $attributes["onpaste"] = "paste_telefono();";
+                    $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " telefono ") : " telefono ";
+                    $attributes["minlength"] = 8;
+                    $attributes["maxlength"] = 10;
+                    $attributes["required"] = true;
+
+                    break;
+
+                case "email":
+
+                    $attributes["onpaste"] = "paste_email();";
+                    $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " correo ") : " correo ";
+
+                    break;
+
+
+                case "text":
+
+                    if(prm_def($attributes, "name") ===  "nombre"){
+                        $attributes["onpaste"] = "paste_nombre();";
+                        $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " validar_nombre ") : " validar_nombre ";
+                        $attributes["minlength"] = 3;
+                    }
+                    break;
+
+
+                default:
+
+
+            }
+
         }
 
         $attr = add_attributes($attributes);
@@ -1456,40 +1496,6 @@ if (!function_exists('append')) {
 }
 
 
-/*
-if (!function_exists('append')) {
-
-    function append($array, $col = 0, $num_col = 0)
-    {
-
-        if (is_array($array)) {
-
-            $callback = function ($a, $b) {
-
-                if (!is_null($b)) {
-                    return " " . $a . $b;
-                }
-
-            };
-
-
-            $response = array_reduce($array, $callback, '');
-
-            if ($col > 0) {
-
-                $response = ($num_col > 0) ? d($response, $num_col) : d($response);
-            }
-
-            return $response;
-
-        } else {
-
-            echo "No es array -> " . print_r($array);
-        }
-
-    }
-}
-*/
 if (!function_exists('get_request_email')) {
     function get_request_email($email, $asunto, $cuerpo)
     {
@@ -1824,83 +1830,6 @@ function get_metodos_pago()
 
 }
 
-/*
-
-function metodos_mobile()
-{
-
-    $y[] = td("MÉTODOS DE PAGO",
-        ['colspan' => 7, "class" => "black"]);
-
-    $r[] = tr(append($y));;
-
-
-    $z[] = td(img([
-        'class' => "logo_pago_mb",
-        'src' => "../img_tema/bancos/masterDebito.png"
-    ]));
-
-    $z[] = td(img([
-        'class' => "logo_pago_mb",
-        'src' => "../img_tema/bancos/paypal2.png"
-    ]));
-
-    $z[] = td(img([
-        'class' => "logo_pago_mb",
-        'src' => "../img_tema/bancos/visaDebito.png"
-    ]));
-
-    $z[] = td(img([
-        'class' => "logo_pago_mb",
-        'src' => "../img_tema/bancos/oxxo-logo.png"
-    ]));
-
-    $z[] = td(img([
-        'class' => "logo_pago_mb",
-        'src' => "../img_tema/bancos/bancomer2.png"
-    ]));
-
-    $z[] = td(img([
-        'class' => "logo_pago_mb",
-        'src' => "../img_tema/bancos/santander.png"
-    ]));
-
-
-    $z[] = td(img([
-        'class' => "logo_pago_mb",
-        'src' => "../img_tema/bancos/banamex.png"
-    ]));
-
-    $r[] = tr(append($z));
-
-    $response[] = d(tb(append($r), ["style" => "width: 100%;"]), "container inner");
-
-
-    $g[] = tr(td("MÉTODOS DE ENVÍO",
-        [
-            'colspan' => 2,
-            "class" => "black"
-        ]));
-
-    $f[] = td(img(
-        [
-            'class' => "logo_pago_mb",
-            'src' => "../img_tema/bancos/fedex.png"
-        ]));
-    $f[] = td(img(
-        [
-            'class' => "logo_pago_mb",
-            'src' => "../img_tema/bancos/dhl2.png"
-        ]));
-
-    $g[] = tr(append($f));
-
-    $response[] = d(tb($g), "container inner");
-    return append($response);
-
-}
-*/
-
 function path_enid($pos, $extra = 0, $link_directo = 0)
 {
 
@@ -2005,7 +1934,7 @@ function social($proceso_compra, $desc_web, $black = 1)
 
     $color = ($black > 0) ? "black" : "white";
 
-    $r =  [];
+    $r = [];
     if ($proceso_compra < 1) {
 
 
@@ -2050,7 +1979,6 @@ function social($proceso_compra, $desc_web, $black = 1)
                 "href" => $url_twitter,
             ]);
         $r[] = get_url_pinterest($url_share, $desc_web);
-
 
 
     }
@@ -2108,7 +2036,6 @@ function pr($data, $index, $def = false)
 
     return (is_array($data) && count($data) > 0 && array_key_exists($index, $data[0])) ? $data[0][$index] : $def;
 }
-
 
 
 function hrz($a, $b, $col = 0, $class = '')
@@ -2451,34 +2378,34 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
     $notificaciones = btw(
 
 
-                a_enid(
+        a_enid(
 
 
-                    flex(
-                        icon("fa fa-bell white"),
-                        d("", "num_tareas_dia_pendientes_usr"),
-                        "",
-                        "align-self-center"
-                    )
-
-                    ,
-                    [
-                        "class" => "blue_enid dropdown-toggle mr-3",
-                        "data-toggle" => "dropdown"
-                    ]
-                )
+            flex(
+                icon("fa fa-bell white"),
+                d("", "num_tareas_dia_pendientes_usr"),
+                "",
+                "align-self-center"
+            )
 
             ,
+            [
+                "class" => "blue_enid dropdown-toggle mr-3",
+                "data-toggle" => "dropdown"
+            ]
+        )
 
-                d(
+        ,
 
-                    place("place_notificaciones_usuario padding_10 shadow border")
-                    ,
-                    add_text("dropdown-menu shadow ", ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid ")
-                )
+        d(
+
+            place("place_notificaciones_usuario padding_10 shadow border")
             ,
+            add_text("dropdown-menu shadow ", ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid ")
+        )
+        ,
         "dropdown dropleft  menu_notificaciones_progreso_dia "
-);
+    );
 
 
     $menu = li(
@@ -2533,7 +2460,8 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
             "type" => "text",
             "placeholder" => "Búsqueda",
             "name" => "q",
-            "onKeyup" => "evita_basura();"
+            "onpaste" => "paste_search();"
+
         ]));
     $r[] = d(btn(icon("fa fa-search "),
         [
@@ -2588,10 +2516,10 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
 
 function flex($d, $d1, $ext = '', $ext_left = '', $ext_right = '')
 {
-    $att  =  "d-flex ";
-    if(is_array($ext)){
+    $att = "d-flex ";
+    if (is_array($ext)) {
         $att = $ext[0];
-    }else{
+    } else {
         $att .= $ext;
     }
 

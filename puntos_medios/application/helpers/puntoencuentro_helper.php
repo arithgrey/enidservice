@@ -158,7 +158,7 @@ if (!function_exists('invierte_date_time')) {
                     "required" => true,
                     "placeholder" => "5552...",
                     "maxlength" => 10,
-                    "minlength" => 8
+                    "minlength" => 8,
                 ], 0, 0),
                 label("TELÉFONO ", ["for" => "tel"])
                 ,

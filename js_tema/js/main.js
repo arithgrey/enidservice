@@ -10,25 +10,24 @@ $("footer").ready(() => {
     set_option({
         "in_session": get_parameter(".in_session"),
         "is_mobile": get_parameter(".is_mobile"),
-        "disparador_buscados" :  0,
+        "disparador_buscados": 0,
     });
-
-
 
     $("#form_contacto").submit(envia_comentario);
     $(".menu_notificaciones_progreso_dia").click(metricas_perfil);
     metricas_perfil();
     set_titulo_web(get_parameter(".titulo_web"));
-    $(".telefono_info_contacto").keyup(quita_espacios_input);
     $(".precio").keyup(quita_espacios_input_precio);
-
-    $(".email").keyup(function () {
-        sin_espacios(".email");
-    });
 
     $(".input_busqueda_producto").click(anima_busqueda);
     $(".input_busqueda_producto").blur(anima_busqueda);
+    $('.input_busqueda_producto').keypress(valida_formato_search);
 
+    $(".telefono").keypress(valida_formato_telefono);
+    $(".telefono").focus(valida_formato_telefono);
+    $(".telefono").blur(valida_formato_telefono);
+    $(".validar_nombre").keypress(valida_formato_nombre);
+    $(".correo").keypress(valida_formato_correo);
 
 
 });
@@ -45,13 +44,13 @@ let set_option = (key, value = 0) => {
         }
 
 
-    } else if (typeof key === 'string' ) {
+    } else if (typeof key === 'string') {
 
         option[key] = value;
 
     } else {
 
-        $.each(key, function(k, val) {
+        $.each(key, function (k, val) {
             option[k] = val;
         });
     }
@@ -138,7 +137,7 @@ let format_error = (place_msj, msj) => {
 }
 let valida_email_form = (input, place_msj) => {
 
-    
+
     despliega([place_msj], 1);
     let valor_registrado = $(input).val();
     let mensaje_user = "";
@@ -317,21 +316,13 @@ let registra_respuesta_pregunta = e => {
 }
 let quitar_espacios_numericos = (nuevo_valor, texto = 0) => {
 
-
-    let f_punto = 0;
     if (texto == 0) {
         let valor_numerico = "";
         for (let a = 0; a < nuevo_valor.length; a++) {
             if (nuevo_valor[a] != " ") {
 
-                let is_num = validar_si_numero(nuevo_valor[a]);
-                if (is_num == true || (nuevo_valor[a] == "." && f_punto < 1)) {
-                    if (nuevo_valor[a] == ".") {
-                        f_punto++;
-                    }
-                    if (a < 13) {
-                        valor_numerico += nuevo_valor[a];
-                    }
+                if (validar_si_numero(nuevo_valor[a]) == true) {
+                    valor_numerico += nuevo_valor[a];
                 }
             }
         }
@@ -450,10 +441,10 @@ let despliega = (array, tipo = 1) => {
 
         array.forEach(function (element) {
 
-            if (tipo >  0){
+            if (tipo > 0) {
                 $(element).show();
 
-            }else{
+            } else {
                 $(element).hide();
             }
 
@@ -462,10 +453,10 @@ let despliega = (array, tipo = 1) => {
 
     } else {
 
-        if (tipo >  0){
+        if (tipo > 0) {
             $(element).show();
 
-        }else{
+        } else {
             $(element).hide();
         }
     }
@@ -591,17 +582,6 @@ let transforma_mayusculas = x => {
     let text_mayusculas = text.toUpperCase();
     x.value = text_mayusculas;
 }
-
-let evita_basura = () => {
-
-    let text = get_parameter(".input_busqueda_producto");
-    text = text.replace(/["']/g, "");
-    text = text.replace(/["?]/g, "");
-    text = text.replace(/["=]/g, "");
-    text = text.replace(/["|]/g, "");
-    set_parameter(".input_busqueda_producto", text);
-}
-
 let reload_imgs = (id, url, flag = 0) => {
 
     if (document.location.hostname != "localhost" && flag > 0) {
@@ -691,7 +671,7 @@ let bloquea_form = form => $("*", form).prop('disabled', true);
 let is_mobile = () => get_option("is_mobile");
 
 let isArray = (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
-let isJson = (str) =>{
+let isJson = (str) => {
 
     try {
 
@@ -802,24 +782,26 @@ let append_enid = (array) => {
 
     return array.join(",");
 }
-let  minusculas =  function (e){ e.value = e.value.toLowerCase() }
+let minusculas = function (e) {
+    e.value = e.value.toLowerCase()
+}
 
 let go_login = (data) => redirect("../login");
 let up_page = (data) => redirect("");
 let anima_busqueda = function (e) {
 
 
-    if(get_option("disparador_buscados") < 1  ){
+    if (get_option("disparador_buscados") < 1) {
 
         $(".busqueda_izquierda").removeClass("col-lg-5").addClass("col-lg-3");
         $(".busqueda_derecho").removeClass("col-lg-5").addClass("col-lg-7");
-        set_option("disparador_buscados" , 1);
+        set_option("disparador_buscados", 1);
 
-    }else{
+    } else {
 
         $(".busqueda_izquierda").removeClass("col-lg-3").addClass("col-lg-5");
         $(".busqueda_derecho").removeClass("col-lg-7").addClass("col-lg-5");
-        set_option("disparador_buscados" , 0);
+        set_option("disparador_buscados", 0);
     }
 }
 let valida_formato_nombre = function (e) {
@@ -827,7 +809,14 @@ let valida_formato_nombre = function (e) {
         e.preventDefault();
     }
 }
+
+let valida_formato_search = function (e) {
+    if (!/^[A-Za-záéíóúñ0-9 ]*$/.test(String.fromCharCode(e.keyCode))) {
+        e.preventDefault();
+    }
+}
 let valida_formato_correo = function (e) {
+
     let c = String.fromCharCode(e.keyCode);
     let format = /^([A-z0-9@._])*$/.test(c);
     let fn = (!format) ? e.preventDefault() : '';
@@ -838,11 +827,69 @@ let valida_formato_correo = function (e) {
         let times = ($text.match(/@/g) || []).length;
         const formatTimes = (times > 0) ? e.preventDefault() : '';
     }
+
 }
 let valida_formato_telefono = function (e) {
 
+    this.value = quitar_espacios_numericos(this.value);
     if (!/^([0-9])*$/.test(String.fromCharCode(e.keyCode))) {
         e.preventDefault();
     }
-
 }
+
+let paste_telefono = function () {
+
+    event.preventDefault();
+    if (event.clipboardData) {
+        let str = event.clipboardData.getData("text/plain");
+        event.target.value = quitar_espacios_numericos(str.trim());
+    }
+}
+let paste_email = function () {
+
+    event.preventDefault();
+    if (event.clipboardData) {
+        let str = event.clipboardData.getData("text/plain");
+        let text = '';
+        for (let x in str) {
+
+            let format = /^([A-z0-9@._])*$/.test(str[x]);
+            text += (!format) ? '' : str[x];
+
+        }
+        event.target.value = text;
+    }
+}
+let paste_nombre = function () {
+
+    event.preventDefault();
+    if (event.clipboardData) {
+        let str = event.clipboardData.getData("text/plain");
+        let text = '';
+        for (let x in str) {
+            let format = /^[A-Za-záéíóúñ ]*$/.test(str[x]);
+            text += (!format) ? '' : str[x];
+        }
+        event.target.value = text;
+    }
+}
+let paste_search = function () {
+
+    event.preventDefault();
+    if (event.clipboardData) {
+        let str = event.clipboardData.getData("text/plain");
+        let text = '';
+        for (let x in str) {
+
+            let format = /^([A-z0-9ñ])*$/.test(str[x]);
+            text += (!format) ? '' : str[x];
+
+        }
+        event.target.value = text;
+    }
+}
+
+
+
+
+

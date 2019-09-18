@@ -185,8 +185,8 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "secret"]);
 
             $r[] = input([
-                "class" => 'form-control input-sm top_10',
-                "type" => "mail",
+                "class" => 'input-sm top_10',
+                "type" => "email",
                 "name" => 'mail',
                 "id" => "mail",
                 "onkeypress" => "minusculas(this);",

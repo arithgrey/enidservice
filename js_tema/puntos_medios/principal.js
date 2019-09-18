@@ -113,12 +113,6 @@ $(document).ready(() => {
     }
 
 
-    $(".form_punto_encuentro .nombre").keypress(valida_formato_nombre);
-    $(".form_punto_encuentro .correo").keypress(valida_formato_correo);
-    $(".telefono").keypress(valida_formato_telefono);
-
-
-
 
 });
 let muestra_estaciones = function () {
@@ -137,7 +131,7 @@ let muestra_estaciones = function () {
             }
         }
     }
-    //rm_class(".seccion_lm", "bottom_100");
+
 
     let id = 0;
     let nombre_linea = "";

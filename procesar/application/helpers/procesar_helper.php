@@ -157,11 +157,11 @@ input(
                             "id" => "telefono",
                             "class" => "telefono form-control",
                             "type" => "tel",
-                            "pattern" => "^[0-9-+s()]*$",
-                            "maxlength" => 13,
+                            "maxlength" => 10,
                             "minlength" => 8,
                             "name" => "telefono",
                             "required" => "true"
+
                         ]
                     ),4
                 );
