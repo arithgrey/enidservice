@@ -83,8 +83,9 @@ if (!function_exists('btn')) {
 
         if ($type_button == 1) {
 
-            $attributes["class"] = (array_key_exists("class", $attributes) ? 1 : 0 == 1) ? $attributes["class"] . " " . " a_enid_blue white w-100 btn_guardar strong" : "a_enid_blue white completo btn_guardar strong";
+            $attributes["class"] = (array_key_exists("class", $attributes) ? 1 : 0 == 1) ? $attributes["class"] . " " . " a_enid_blue white w-100 btn_guardar strong cursor_pointer" : "a_enid_blue white completo btn_guardar strong cursor_pointer";
         }
+
 
 
 
@@ -281,10 +282,16 @@ if (!function_exists('section')) {
 }
 
 if (!function_exists('input')) {
-    function input($attributes = [], $e = 0)
+    function input($attributes = [], $e = 0, $bootstrap = 1)
     {
 
-        $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " form-control ") : " form-control ";
+        $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " ") : "  ";
+        $attributes["autocomplete"] ="off";
+        if($bootstrap){
+
+            $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " form-control ") : " form-control ";
+        }
+
         $attr = add_attributes($attributes);
         return ($e < 1) ? "<input " . $attr . " >" : addNRow("<input " . $attr . " >");
 
@@ -1361,7 +1368,7 @@ if (!function_exists('lista_horarios')) {
                 break;
         }
 
-        $select = "<select name='horario_entrega' class='form-control input-sm horario_entrega'  > ";
+        $select = "<select name='horario_entrega' class='form-control  horario_entrega'  > ";
         foreach ($horarios as $row) {
 
             $select .= "<option value='" . $row . "'>" . $row . "</option>";
@@ -2581,8 +2588,14 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
 
 function flex($d, $d1, $ext = '', $ext_left = '', $ext_right = '')
 {
+    $att  =  "d-flex ";
+    if(is_array($ext)){
+        $att = $ext[0];
+    }else{
+        $att .= $ext;
+    }
 
-    return d(add_text(d($d, $ext_left), d($d1, $ext_right)), "d-flex " . $ext);
+    return d(add_text(d($d, $ext_left), d($d1, $ext_right)), $att);
 
 }
 

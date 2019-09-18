@@ -1,11 +1,13 @@
 window.history.pushState({page: 1}, "", "");
 window.history.pushState({page: 2}, "", "");
 window.history.pushState({page: 3}, "", "");
+window.history.pushState({page: 4}, "", "");
+window.history.pushState({page: 5}, "", "");
 window.onpopstate = function (event) {
 
     if (event) {
 
-        let fn = (parseInt(get_option("vista")) == 1) ? window.history.back() : valida_accion_retorno();
+        valida_retorno();
     }
 }
 
@@ -14,23 +16,108 @@ $(document).ready(() => {
 
     $(".botton_enviar_solicitud").click(()=>{
 
-        let r =  [".informacion_del_cliente", ".form_primer_registro"];
-        rm_class(r , "display_none");
-        $(".seccion_horarios").addClass("display_none");
 
-        set_option("vista", 5);
+        despliega([".seccion_horarios_entrega"] , 0);
+        despliega([".informacion_del_cliente"] ,1);
+        add_class(".continuar", "mt-5");
+        set_option("vista", 4);
     });
 
 
     $(".form_punto_encuentro").submit(registra_usuario);
     $(".form_punto_encuentro_horario").submit(notifica_punto_entrega);
     $(".link_acceso").click(set_link);
-    $(".telefono").keyup(quita_espacios_en_telefono);
-    $(".correo").keyup(() => {
-        sin_espacios(".correo", 1);
-    });
+
     $(".linea_metro").click(muestra_estaciones);
     set_option(["vista", 1, "punto_encuentro_previo", 0]);
+
+    $("#nombre").focus(function () {
+        $('#nombre').next('label').addClass('focused_input');
+        $(this).addClass('input_focus');
+    });
+    $("#nombre").focusout(function () {
+        if ($('#nombre').val() === '') {
+            $('#nombre').next('label').removeClass('focused_input');
+            $(this).removeClass('input_focus');
+        }
+    });
+
+    $("#correo").focus(function () {
+        $('#correo').next('label').addClass('focused_input');
+        $(this).addClass('input_focus');
+    });
+    $("#correo").focusout(function () {
+        if ($('#correo').val() === '') {
+            $('#correo').next('label').removeClass('focused_input');
+            $(this).removeClass('input_focus');
+        }
+    });
+
+
+    $("#tel").focus(function () {
+        $('#tel').next('label').addClass('focused_input');
+        $(this).addClass('input_focus');
+    });
+    $("#tel").focusout(function () {
+        if ($('#tel').val() === '') {
+            $('#tel').next('label').removeClass('focused_input');
+            $(this).removeClass('input_focus');
+        }
+    });
+
+    $("#pw").focus(function () {
+        $('#pw').next('label').addClass('focused_input');
+        $(this).addClass('input_focus');
+    });
+    $("#pw").focusout(function () {
+        if ($('#pw').val() === '') {
+            $('#pw').next('label').removeClass('focused_input');
+            $(this).removeClass('input_focus');
+        }
+    });
+
+
+    $("#fecha").focus(function () {
+        $('#fecha').next('label').addClass('focused_input');
+        $(this).addClass('input_focus');
+
+    });
+    $("#fecha").focusout(function () {
+        if ($('#fecha').val() === '') {
+            $('#fecha').next('label').removeClass('focused_input');
+            $(this).removeClass('input_focus');
+        }
+    });
+
+    if(option["in_session"] < 1){
+
+        if ($('#nombre').val().length > 0) {
+            $('#nombre').next('label').addClass('focused_input');
+        }
+        if ($('#correo').val().length > 0) {
+            $('#correo').next('label').addClass('focused_input');
+        }
+        if ($('#tel').val().length > 0) {
+            $('#tel').next('label').addClass('focused_input');
+        }
+        if ($('#pw').val().length > 0) {
+            $('#pw').next('label').addClass('focused_input');
+        }
+
+
+        despliega([".informacion_del_cliente",".seccion_horarios_entrega", ".desglose_estaciones", ".formulario_quien_recibe"], 0);
+        rm_class(".desglose_estaciones", "d-lg-flex");
+    }
+    if ($('#fecha').val().length > 0) {
+        $('#fecha').next('label').addClass('focused_input');
+    }
+
+
+    $(".form_punto_encuentro .nombre").keypress(valida_formato_nombre);
+    $(".form_punto_encuentro .correo").keypress(valida_formato_correo);
+    $(".telefono").keypress(valida_formato_telefono);
+
+
 
 
 });
@@ -50,15 +137,7 @@ let muestra_estaciones = function () {
             }
         }
     }
-
-    let f =  [
-        ".titulo_punto_encuentro",
-        ".tipos_puntos_encuentro",
-        ".mensaje_cobro_envio"
-    ];
-    rm_class(".seccion_lm", "bottom_100");
-    despliega(f, 0);
-
+    //rm_class(".seccion_lm", "bottom_100");
 
     let id = 0;
     let nombre_linea = "";
@@ -98,37 +177,18 @@ let muestra_estaciones = function () {
         }
 
     }
+
 };
 let response_estaciones = (data) => {
 
-    $(".ksearch").show();
-    let texto_centro = "";
-    switch (parseInt(get_option("tipo"))) {
-        case 0:
 
-            break;
-
-        case 1:
-            texto_centro = "LÍNEA DEL METRO: " + get_option("nombre_linea");
-            break;
-        case 2:
-            texto_centro = "LÍNEA DEL METROBUS: " + get_option("nombre_linea");
-            break;
-
-        case 3:
-
-            break;
-
-        default:
-
-            break;
-    }
     set_option("vista", 2);
-
-
-    showonehideone(".place_estaciones_metro", ".place_lineas");
+    despliega([".place_lineas", ".contenedor_estaciones", ".text_seleccion_linea"],0);
+    //despliega([".place_estaciones_metro",".ksearch", ".text_seleccion_estacion"],1);
+    despliega([".seccion_horarios_entrega", ".desglose_estaciones", ".place_estaciones_metro", ".place_estaciones_metro", ".text_seleccion_estacion"], 1);
+    add_class(".desglose_estaciones", "d-lg-flex");
     render_enid(".place_estaciones_metro", data);
-    render_enid(".nombre_linea_metro", texto_centro);
+
 
 
     $(".punto_encuentro").click(muestra_horarios);
@@ -147,69 +207,17 @@ let response_estaciones = (data) => {
 let muestra_horarios = function () {
 
 
-
-    let r  = [".ksearch", ".titulo_punto_cercano"];
-    despliega(r,0);
+    //despliega([".ksearch", ".titulo_punto_cercano"],0);
     let id = get_parameter_enid($(this), "id");
 
     if (id > 0) {
-
-        let text = "";
-        let costo_envio = get_parameter_enid($(this), "costo_envio");
-        let flag_envio_gratis = get_parameter_enid($(this), "flag_envio_gratis");
         set_option(["punto_encuentro_previo", id, "vista", 3, "id_punto_encuentro", id]);
+        set_parameter(".punto_encuentro" , id);
 
-        despliega([".mensaje_cobro_envio", ".contenedor_estaciones"], 0)
-        set_parameter(".punto_encuentro_form", id);
-        render_enid(".nombre_estacion_punto_encuentro", "<span class='strong'>ESTACIÓN:</span> " + get_parameter_enid($(this), "nombre_estacion"));
-        $(".nombre_estacion_punto_encuentro").addClass("nombre_estacion_punto_encuentro_extra");
+        rm_class(".desglose_estaciones", "d-lg-flex");
 
-        let texto_cargos_entrega = "<span class='text_costo_envio'>" + costo_envio + "MXN</span>";
-        let texto_cargos_gratis = "<span class='text_costo_envio_gratis'>ENVÍO GRATIS!</span>";
-
-        texto_cargos_entrega = (flag_envio_gratis > 0) ? texto_cargos_gratis : texto_cargos_entrega;
-        render_enid(".cargos_por_entrega", "<span class='strong'>CARGO POR ENTREGA:</span>" + texto_cargos_entrega);
-        $(".cargos_por_entrega").addClass("cargos_por_entrega_extra");
-
-        let paso = 0;
-        if (flag_envio_gratis < 1) {
-            if (costo_envio > 0) {
-
-                paso++;
-                let str = "Recuerda que previo a " +
-                    "la entrega de tu producto, deberás realizar " +
-                    "el pago de " + costo_envio + " pesos por " +
-                    "concepto de gastos de envío";
-
-                render_enid(".mensaje_cobro_envio", str);
-                despliega(".mensaje_cobro_envio")
-            }
-
-        }
-
-
-        if (paso > 0) {
-
-            despliega([".resumen_encuentro", ".btn_continuar_punto_encuentro"])
-            showonehideone(".resumen_encuentro", ".contenedor_estaciones");
-            $(".btn_continuar_punto_encuentro").click(muestra_quien_recibe);
-
-        } else {
-
-            muestra_quien_recibe();
-        }
-
-
+        showonehideone(".formulario_quien_recibe", ".desglose_estaciones" );
     }
-
-};
-let muestra_quien_recibe = () => {
-
-
-    despliega([".resumen_encuentro", ".titulo_principal_puntos_encuentro"], 0);
-    despliega([".formulario_quien_recibe"], 1);
-    set_option("vista", 4);
-
 
 };
 
@@ -220,19 +228,18 @@ let registra_usuario = (e) => {
     let telefono = get_parameter(".form_punto_encuentro .telefono").length;
     let pwlength = get_parameter(".form_punto_encuentro .pw").length;
 
-    if (nombre > 4 && correo > 7 && telefono > 7 && pwlength > 5) {
+    if (nombre > 2 && correo > 5 && telefono > 7 && pwlength > 5) {
 
 
         let pw = get_parameter(".form_punto_encuentro #pw");
         let password = "" + CryptoJS.SHA1(pw);
+
         let data_send = $(".form_punto_encuentro").serialize() + "&" + $.param({
             "password": password,
             "id_servicio": get_parameter(".servicio")
         });
-
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
         bloquea_form(".form_punto_encuentro");
-        $(".contenedor_ya_tienes_cuenta").hide();
         request_enid("POST", data_send, url, response_registro_usuario, ".place_notificacion_punto_encuentro_registro");
 
 
@@ -243,7 +250,7 @@ let registra_usuario = (e) => {
     }
     e.preventDefault();
 
-};
+}
 let focus_inputs_form = (nombre, correo, telefono, pwlength) => {
 
     let clases = [".form_punto_encuentro .nombre", ".form_punto_encuentro .correo", ".form_punto_encuentro .telefono", ".form_punto_encuentro .pw"];
@@ -251,14 +258,14 @@ let focus_inputs_form = (nombre, correo, telefono, pwlength) => {
         $(clases[x]).removeClass("focus_error");
     }
 
-    if (nombre < 5) {
+    if (nombre < 3) {
         $(".form_punto_encuentro .nombre").addClass("focus_error");
     }
     if (correo < 8) {
 
         $(".form_punto_encuentro .correo").addClass("focus_error");
     }
-    if (telefono < 8) {
+    if (telefono !=  8  ||  telefono !=  10) {
 
         $(".form_punto_encuentro .telefono").addClass("focus_error");
     }
@@ -270,16 +277,16 @@ let focus_inputs_form = (nombre, correo, telefono, pwlength) => {
 }
 let response_registro_usuario = (data) => {
 
-    despliega(".place_notificacion_punto_encuentro_registro", 0);
+
     if (data.usuario_existe > 0) {
 
         $(".text_usuario_registrado_pregunta").hide();
-        despliega([".text_usuario_registrado", ".contenedor_ya_tienes_cuenta"]);
+        despliega([".text_usuario_registrado"]);
         recorre(".text_usuario_registrado");
 
     } else {
 
-        despliega([".contenedor_eleccion_correo_electronico", ".formulario_quien_recibe"], 0);
+
         redirect("../area_cliente/?action=compras&ticket=" + data.id_recibo);
     }
 
@@ -296,10 +303,6 @@ let set_link = function () {
 
 }
 
-let quita_espacios_en_telefono = () => {
-
-    $(".telefono").val(quitar_espacios_numericos(get_parameter(".telefono")));
-};
 let notifica_punto_entrega = e => {
 
 
@@ -328,41 +331,32 @@ let agregar_nota = () => {
     showonehideone(".input_notas", ".text_agregar_nota");
 
 }
-let valida_accion_retorno = function () {
+let valida_retorno = function () {
+    let v =  parseInt(get_option("vista"));
 
-    switch (parseInt(get_option("vista"))) {
+    switch (v) {
+        case 1:
+
+            break;
         case 2:
 
-            set_option(["id_linea", 0,  "vista", 1]);
-            showonehideone(".place_lineas", ".place_estaciones_metro");
-            $(".titulo_punto_encuentro").show();
-
-
+            despliega([".place_lineas", ".contenedor_estaciones", ".text_seleccion_linea"],1);
+            despliega([".place_estaciones_metro", ".ksearch", ".text_seleccion_estacion"],0);
             break;
         case 3:
 
             set_option("vista", 2);
-            $(".resumen_encuentro").hide();
-            despliega(".titulo_punto_cercano", 1);
-            showonehideone(".contenedor_estaciones", ".resumen_encuentro");
-            $(".ksearch").show();
-
+            add_class(".desglose_estaciones", "d-lg-flex");
+            showonehideone(".contenedor_estaciones", ".formulario_quien_recibe");
 
             break;
+
         case 4:
 
             set_option("vista", 3);
-            despliega([".resumen_encuentro", ".titulo_principal_puntos_encuentro",".titulo_punto_cercano"], 1);
-            despliega([".formulario_quien_recibe"], 0);
-
-            break;
-
-        case 5:
-
-            set_option("vista", 4);
-            let r =  [".informacion_del_cliente", ".form_primer_registro"];
-            add_class(r , "display_none");
-            rm_class(".seccion_horarios" , "display_none");
+            despliega([".seccion_horarios_entrega"] , 1);
+            despliega([".informacion_del_cliente"] ,0);
+            rm_class(".continuar", "mt-5");
 
             break;
 

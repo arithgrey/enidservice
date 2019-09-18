@@ -146,7 +146,6 @@
 <?php endif; ?>
 <?= gb_modal() ?>
 <?php if(prm_def($this->input->get(), "debug")): ?>
-
 <style>
     body * {
         border:solid 1px blue !important
@@ -158,7 +157,7 @@
 
 
 
-    ,"col-lg-12  blue_enid3 white p-2 "
+    ,"  blue_enid3 white p-2  col-lg-12 top_400"
 ) ?>
 </body>
 </html>

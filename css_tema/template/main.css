@@ -1022,6 +1022,11 @@ table {
     display: block;
 }
 
+.top_70 {
+    margin-top: 70px;
+    display: block;
+}
+
 .top_80 {
     margin-top: 80px;
     display: block;
@@ -1040,6 +1045,16 @@ table {
     margin-top: 200px;
     display: block;
 }
+.top_400 {
+    margin-top: 400px;
+    display: block;
+}
+
+.top_500 {
+    margin-top: 500px;
+    display: block;
+}
+
 
 
 .bottom_10 {

@@ -99,11 +99,14 @@ class Home extends CI_Controller
         $q = [
             "v" => 1,
             "tipo" => $tipo,
+            "is_mobile" =>  is_mobile()
         ];
+
         $id_usuario =  $this->get_usuario_por_servicio($param["servicio"]);
         if ($id_usuario >0 ){
 
             $q["id_usuario"] =  $id_usuario;
+
         }
         return $this->app->api("linea_metro/index/format/json/", $q);
 

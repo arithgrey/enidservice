@@ -34,6 +34,86 @@ $(document).ready(() => {
     });
     $(".continuar_pedido").click(continuar_compra);
 
+
+    if (option["in_session"] < 1) {
+
+        if ($('.form-cotizacion-enid-service #nombre').val().length > 0) {
+            $('.form-cotizacion-enid-service #nombre').next('label').addClass('focused_input');
+        }
+        if ($('.form-cotizacion-enid-service .email').val().length > 0) {
+            $('.form-cotizacion-enid-service .email').next('label').addClass('focused_input');
+        }
+        if ($('.form-cotizacion-enid-service  #password ').val().length > 0) {
+            $('.form-cotizacion-enid-service  #password ').next('label').addClass('focused_input');
+        }
+        if ($('.form-cotizacion-enid-service  #telefono').val().length > 0) {
+            $('.form-cotizacion-enid-service  #telefono').next('label').addClass('focused_input');
+        }
+        if ($('.form-cotizacion-enid-service  #fecha_servicio').val().length > 0) {
+            $('.form-cotizacion-enid-service  #fecha_servicio').next('label').addClass('focused_input');
+        }
+
+        $(".form-cotizacion-enid-service #nombre").focus(function () {
+            $('.form-cotizacion-enid-service #nombre').next('label').addClass('focused_input');
+            $(this).addClass('input_focus');
+        });
+        $(".form-cotizacion-enid-service #nombre").focusout(function () {
+            if ($('.form-cotizacion-enid-service #nombre').val() === '') {
+                $('.form-cotizacion-enid-service #nombre').next('label').removeClass('focused_input');
+                $(this).removeClass('input_focus');
+            }
+        });
+
+        $(".form-cotizacion-enid-service .email").focus(function () {
+            $('.form-cotizacion-enid-service .email').next('label').addClass('focused_input');
+            $(this).addClass('input_focus');
+        });
+        $(".form-cotizacion-enid-service .email").focusout(function () {
+            if ($('.form-cotizacion-enid-service .email').val() === '') {
+                $('.form-cotizacion-enid-service .email').next('label').removeClass('focused_input');
+                $(this).removeClass('input_focus');
+            }
+        });
+
+        $(".form-cotizacion-enid-service .password").focus(function () {
+            $('.form-cotizacion-enid-service .password').next('label').addClass('focused_input');
+            $(this).addClass('input_focus');
+        });
+        $(".form-cotizacion-enid-service .password").focusout(function () {
+            if ($('.form-cotizacion-enid-service .password').val() === '') {
+                $('.form-cotizacion-enid-service .password').next('label').removeClass('focused_input');
+                $(this).removeClass('input_focus');
+            }
+        });
+
+        $(".form-cotizacion-enid-service .telefono").focus(function () {
+            $('.form-cotizacion-enid-service .telefono').next('label').addClass('focused_input');
+            $(this).addClass('input_focus');
+        });
+        $(".form-cotizacion-enid-service .telefono").focusout(function () {
+            if ($('.form-cotizacion-enid-service .telefono').val() === '') {
+                $('.form-cotizacion-enid-service .telefono').next('label').removeClass('focused_input');
+                $(this).removeClass('input_focus');
+            }
+        });
+
+        $('.agregar_commentario').click(function () {
+            $('.text_comentarios').removeClass('d-none');
+        });
+
+        $(".form-cotizacion-enid-service #nombre").keypress(valida_formato_nombre);
+        $(".form-cotizacion-enid-service .email").keypress(valida_formato_correo);
+        $(".form-cotizacion-enid-service .telefono").keypress(valida_formato_telefono);
+
+
+    } else {
+
+        $(".text_agregar_comentario").click(function () {
+            $('.descripcion_comentario').removeClass("d-none").addClass("mt-5");
+        });
+    }
+
+
 });
 
 
@@ -111,7 +191,7 @@ let registro = (e) => {
                         "usuario_referencia": get_option("usuario_referencia"),
                         "talla": get_option("talla"),
                         "tipo_entrega": 2,
-                        "fecha_servicio" : get_option("fecha_servicio"),
+                        "fecha_servicio": get_option("fecha_servicio"),
                     };
                     $(".informacion_extra").hide();
                     request_enid("POST", data_send, url, respuesta_registro, 0, before_registro_afiliado);
@@ -215,7 +295,7 @@ let registro_cotizacion = (e) => {
     let data_send = $(".form_cotizacion_enid_service").serialize();
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
     bloquea_form(".form_cotizacion_enid_service");
-    request_enid("POST", data_send, url, respuesta_proceso_usuario_activo, ".place_config_usuario");
+    request_enid("POST", data_send, url, respuesta_proceso_usuario_activo);
     e.preventDefault();
 
 }
@@ -253,7 +333,7 @@ let respuesta_registro = (data) => {
 };
 
 let respuesta_registro_cotizacion = (data) => {
-    debugger;
+
     $(".place_registro_afiliado").empty();
     redirect("../area_cliente");
 
@@ -287,8 +367,8 @@ let before_pedido_activo = () => {
 }
 
 let respuesta_proceso_usuario_activo = (data) => {
-    debugger;
-    div_enid("place_config_usuario", "TU SOLICITUD SE ENVIÓ!", "texto_solicitud_enviada top_30  border white padding_5 shadow ");
+    //debugger;
+    //div_enid("place_config_usuario", "TU SOLICITUD SE ENVIÓ!", "texto_solicitud_enviada top_30  border white padding_5 shadow ");
     redirect("../area_cliente");
 
 }
@@ -318,19 +398,19 @@ let set_link = function () {
     request_enid("POST", data_send, url, response_set_link);
 
 };
-let continuar_compra = function(){
+let continuar_compra = function () {
 
-    showonehideone(".pr_compra",  ".compra_resumen");
-    set_option("vista",2)
+    showonehideone(".pr_compra", ".compra_resumen");
+    set_option("vista", 2)
 }
 let response_set_link = (data) => redirect("../login");
-let valida_retorno = ()=>{
+let valida_retorno = () => {
     let vista = parseInt(get_option("vista"));
     switch (vista) {
 
         case 2:
-            showonehideone(  ".compra_resumen",".pr_compra");
-            set_option("vista",1)
+            showonehideone(".compra_resumen", ".pr_compra");
+            set_option("vista", 1)
             break;
 
         default:

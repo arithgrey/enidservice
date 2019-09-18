@@ -5,3 +5,61 @@
     background: #0060ce;
 
 }
+.input_enid{
+    align-self: flex-end;
+    position: relative;
+    margin-top: 45px;
+}
+.input_enid input{
+
+    border: none!important;
+    border-bottom: solid 1px grey!important;
+    height: 40px!important;
+    width: 100%;
+    appearance: none!important;
+    margin: 0;
+    -webkit-appearance: none!important;
+    outline: none;
+}
+.input_enid input:hover{
+
+    border: none!important;
+    border-bottom: solid 1px grey!important;
+}
+.input_enid:hover{
+
+    border: none!important;
+    border-bottom: solid 1px grey!important;
+}
+
+
+.input_enid input::-webkit-outer-spin-button, -webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+}
+.input_enid input::placeholder{
+    color: transparent;
+
+}
+.input_enid input::focus{
+    outline: none !important;
+    -webkit-appearance: none !important;
+}
+.input_enid label{
+    bottom: 0;
+    color: silver;
+    left: 3px;
+    position: absolute;
+}
+.focused_input {
+    color: #000 !important;
+    font-weight: bold;
+    top: -25px;
+    transition: all 1s ease;
+    left: 0px !important
+}
+.input_focus::-webkit-input-placeholder { color: silver!important; }
+.input_focus:-moz-placeholder { color: silver!important; }
+.input_focus:-ms-input-placeholder { color: silver!important; }
+.horario_entrega{
+    height: 40px!important;
+}

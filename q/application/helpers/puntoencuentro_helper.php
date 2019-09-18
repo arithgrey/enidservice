@@ -10,9 +10,8 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre = $row["nombre"];
             $id = $row["id"];
-            $index = search_bi_array($lista_negra, "id_punto_encuentro", $id);
 
-            if ($index !== false) {
+            if (search_bi_array($lista_negra, "id_punto_encuentro", $id) !== false) {
 
                 $l[] = ajustar(d($nombre,
                     [
@@ -57,7 +56,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $negra[] = d($nombre,
                     [
-                        "class" => "nombre_estacion cursor_pointer punto_encuentro ",
+                        "class" => "nombre_estacion cursor_pointer punto_encuentro   mx-auto mt-2 w-50",
                         "id" => $id,
                         "nombre_estacion" => $nombre,
                         "costo_envio" => $row["costo_envio"],
@@ -70,7 +69,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $l[] = d($nombre,
                     [
-                        "class" => "nombre_estacion cursor_pointer punto_encuentro mt-2 ",
+                        "class" => "nombre_estacion cursor_pointer punto_encuentro  mx-auto mt-2 w-50 ",
                         "id" => $id,
                         "nombre_estacion" => $nombre,
                         "costo_envio" => $row["costo_envio"],
@@ -85,20 +84,22 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        $r[] = place("nombre_linea_metro");
-        $r[] = place("nombre_estacion_punto_encuentro");
-        $r[] = place("cargos_por_entrega");
-        $r[] = place("mensaje_cobro_envio");
+        //$r[] = place("nombre_linea_metro");
+        //$r[] = place("nombre_estacion_punto_encuentro");
+        //$r[] = place("cargos_por_entrega");
+        //$r[] = place("mensaje_cobro_envio");
         $r[] = btn("CONTINUAR", ["class" => "btn_continuar_punto_encuentro"]);
-        $x[] = place("quien_recibe");
+        //$x[] = place("quien_recibe");
 
 
 
 
-        $x[] = d(append($l), "contenedor_estaciones ");
-        $response[] = d(append($r), 'resumen_encuentro');
-        $response[] = d(append($x), 'resumen_mensaje_pago');
-        return append($response);
+        $x[] = append($l);
+        //$response[] = d(append($r), 'resumen_encuentro');
+        //$response[] = d(append($x), 'resumen_mensaje_pago');
+        //return append($response);
+        return append($x);
+
     }
 
 }

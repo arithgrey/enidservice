@@ -138,7 +138,7 @@ let format_error = (place_msj, msj) => {
 }
 let valida_email_form = (input, place_msj) => {
 
-    debugger;
+    
     despliega([place_msj], 1);
     let valor_registrado = $(input).val();
     let mensaje_user = "";
@@ -216,7 +216,11 @@ let mostrar_img_upload = (source, id_section) => {
 let showonehideone = (show, hide) => {
 
     $(show).show();
+    $(show).removeClass("d-none");
     $(hide).hide();
+    $(hide).addClass("d-none");
+
+
 }
 
 let selecciona_select = (class_select, valor_a_seleccionar) => {
@@ -441,16 +445,29 @@ let getMaxOfArray = numArray => {
 
 let despliega = (array, tipo = 1) => {
 
-    let display = (tipo > 0) ? "block" : "none";
+    //let display = (tipo > 0) ? "block" : "none";
     if (isArray(array)) {
 
         array.forEach(function (element) {
-            $(element).css("display", display);
+
+            if (tipo >  0){
+                $(element).show();
+
+            }else{
+                $(element).hide();
+            }
+
+
         });
 
     } else {
 
-        $(array).css("display", display);
+        if (tipo >  0){
+            $(element).show();
+
+        }else{
+            $(element).hide();
+        }
     }
 
 }
@@ -804,4 +821,28 @@ let anima_busqueda = function (e) {
         $(".busqueda_derecho").removeClass("col-lg-7").addClass("col-lg-5");
         set_option("disparador_buscados" , 0);
     }
+}
+let valida_formato_nombre = function (e) {
+    if (!/^[A-Za-záéíóúñ ]*$/.test(String.fromCharCode(e.keyCode))) {
+        e.preventDefault();
+    }
+}
+let valida_formato_correo = function (e) {
+    let c = String.fromCharCode(e.keyCode);
+    let format = /^([A-z0-9@._])*$/.test(c);
+    let fn = (!format) ? e.preventDefault() : '';
+
+    let $text = $(this).val();
+    let formatStart = ($text.length < 1 && /^([@._])*$/.test(c)) ? e.preventDefault() : '';
+    if (/^([@])*$/.test(c)) {
+        let times = ($text.match(/@/g) || []).length;
+        const formatTimes = (times > 0) ? e.preventDefault() : '';
+    }
+}
+let valida_formato_telefono = function (e) {
+
+    if (!/^([0-9])*$/.test(String.fromCharCode(e.keyCode))) {
+        e.preventDefault();
+    }
+
 }
