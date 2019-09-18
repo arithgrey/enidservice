@@ -101,9 +101,8 @@ $(document).ready(() => {
             $('.text_comentarios').removeClass('d-none');
         });
 
-        $(".form-cotizacion-enid-service #nombre").keypress(valida_formato_nombre);
-        $(".form-cotizacion-enid-service .email").keypress(valida_formato_correo);
-        $(".form-cotizacion-enid-service .telefono").keypress(valida_formato_telefono);
+
+
 
 
     } else {
@@ -367,8 +366,7 @@ let before_pedido_activo = () => {
 }
 
 let respuesta_proceso_usuario_activo = (data) => {
-    //debugger;
-    //div_enid("place_config_usuario", "TU SOLICITUD SE ENVIÓ!", "texto_solicitud_enviada top_30  border white padding_5 shadow ");
+
     redirect("../area_cliente");
 
 }
