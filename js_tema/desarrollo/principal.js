@@ -200,9 +200,14 @@ let response_carga_ticket = (data) => {
     $(".agendar_google").click(agendar_google);
     $(".frm_agendar_google").submit(google_path);
 
+    $(".nota_monetaria").click(muestra_nota_motenaria);
+    $('.frm_nota_monetaria').submit(registra_nota_monetaria);
+    $('.estrella').click(registra_efecto_monetario);
+
     if (get_option("flag_mostrar_solo_pendientes") > 0) {
         muestra_tareas_por_estatus();
     }
+
 }
 let carga_formulario_respuesta_ticket = function (e) {
 
@@ -320,7 +325,6 @@ let response_carga_tickets = function (data) {
     });
 
     $(".ver_detalle_ticket").dblclick(function (e) {
-
 
         set_option("id_ticket", get_parameter_enid($(this), "id"));
         carga_info_detalle_ticket();
@@ -524,4 +528,31 @@ let google_path = function (e) {
         base += "&dates="+format_google+"/"+format_google;
     }
     window.open(base, '_blank');
+}
+let muestra_nota_motenaria = function () {
+
+    $(".nota_monetaria_area").removeClass("d-none");
+}
+let registra_nota_monetaria = function (e) {
+
+    e.preventDefault();
+    let url = "../q/index.php/api/tickets/nota_monetaria/format/json/";
+    let data_send = $(this).serialize() +"&"+$.param({"id_ticket": get_option("id_ticket")});
+    set_option("s", 1);
+    request_enid("PUT", data_send, url, carga_info_detalle_ticket);
+
+}
+let registra_efecto_monetario = function (e) {
+
+
+    let  efecto_monetario = e.target.id;
+    if (efecto_monetario > 0){
+
+        let url = "../q/index.php/api/tickets/efecto_monetario/format/json/";
+        let data_send = $.param({"id_ticket": get_option("id_ticket") ,  "efecto_monetario" : efecto_monetario });
+        set_option("s", 1);
+        request_enid("PUT", data_send, url, carga_info_detalle_ticket);
+
+    }
+
 }

@@ -1521,5 +1521,8 @@ a{
 
     -webkit-text-fill-color: white;
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
+}
 
+.azul_estrella_simple:hover{
+    -webkit-text-fill-color: black
 }

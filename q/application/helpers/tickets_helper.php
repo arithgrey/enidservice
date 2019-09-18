@@ -1,4 +1,6 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php use function Sodium\add;
+
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
 
@@ -68,6 +70,8 @@ if (!function_exists('invierte_date_time')) {
 
             $id_ticket = $row["id_ticket"];
             $asunto = $row["asunto"];
+            $efecto_monetario =  $row["efecto_monetario"];
+            $asunto =  flex($asunto, crea_estrellas($efecto_monetario,1), "flex-column ");
 
             switch ($row["status"]) {
 
@@ -284,9 +288,12 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
-    function crea_tabla_resumen_ticket($info_ticket, $num_tareas)
+    function crea_tabla_resumen_ticket($data)
     {
 
+
+        $info_ticket = $data['info_ticket'];
+        $num_tareas = $data['info_num_tareas'];
 
         $response = [];
         if (es_data($num_tareas)) {
@@ -300,13 +307,15 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $id_ticket = $row["id_ticket"];
-                $lista_prioridad = ["Alta", "Media", "Baja"];
                 $resumen = $pendientes . " / " . $tareas;
                 $asunto = $row["asunto"];
+                $efecto_monetario = $row["efecto_monetario"];
+                $nota_monetaria = $row["nota_monetaria"];
+
 
                 $cerrar =
                     btn(
-                        "CERRAR TICKET",
+                        "CERRAR",
                         [
                             "onClick" => "cerrar_ticket({$id_ticket})",
                             "class" => "col-lg-3"
@@ -327,27 +336,23 @@ if (!function_exists('invierte_date_time')) {
                 );
 
 
-
                 $calendario[] = form_open("", ["class" => 'frm_agendar_google']);
                 $calendario[] = d(h(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
-                $calendario[] = input_hidden(["class" => "descripcion_google" , "value" => $asunto]);
+                $calendario[] = input_hidden(["class" => "descripcion_google", "value" => $asunto]);
                 $agendar = ajustar(input_hour_date(), btn("Agendar"), 4);
-                $calendario[] = d("AGENDAR EN GOOGLE", "cursor_pointer  underline agendar_google");
+                $calendario[] = d("AGENDAR", "cursor_pointer  underline agendar_google");
                 $calendario[] = ajustar($agendar, "", 8, "hidden seccion_agendar");
                 $calendario[] = form_close();
 
 
-
                 $x[] = append($calendario);
-                $x[] = d(h(add_text("DEPARTAMENTO", strtoupper($row["nombre_departamento"])), 6));
-                $x[] = d(h(add_text("PRIORIDAD", strtoupper($lista_prioridad[$row["prioridad"]])), 6, "underline"));
-
+                //$x[] = d(h(add_text("DEPARTAMENTO", strtoupper($row["nombre_departamento"])), 6));
                 $x[] = d(add_text(icon("fa fa-pencil asunto", ["id" => $id_ticket]), $asunto), "top_30 border padding_10 bottom_30 s_desc_asunto");
 
 
                 $x[] = d(
                     ajustar(
-                        d("Asunto: "),
+                        d("TAREA: "),
                         input([
                                 "class" => "i_asunto",
                                 "value" => $asunto
@@ -356,7 +361,29 @@ if (!function_exists('invierte_date_time')) {
                     ), "col-lg-6 display_none i_desc_asunto");
 
 
-                $x[] = d(h(strtoupper($row["fecha_registro"]), 6, "text-right"));
+                $x[] = crea_estrellas($efecto_monetario);
+                $x[] = d("Nota monetaria", "strong nota_monetaria underline cursor_pointer");
+                $x[] = d($nota_monetaria, " nota_monetaria ");
+
+                $x[] = form_open("", ["class" => "frm_nota_monetaria nota_monetaria_area d-none mb-5"]);
+                $x[] =
+                    hrz(
+                        textarea(
+                            [
+                                "name" => "nota_monetaria",
+                                "value" => $nota_monetaria
+                            ],
+                            0,
+                            $nota_monetaria
+                        ),
+                        btn("AGREGAR")
+                        ,
+                        9
+                        ,
+                        "strong  underline cursor_pointer mt-5 mb-5"
+
+                    );
+                $x[] = form_close();
                 $x[] = d(icon("fas fa-2x fa-plus-circle blue_enid"), " btn_agregar_tarea padding_1  cursor_pointer text-right");
                 $r[] = d(append($x), "shadow padding_20");
 
@@ -494,116 +521,11 @@ if (!function_exists('invierte_date_time')) {
     function format_tareas($data)
     {
 
-        $r[] = crea_tabla_resumen_ticket($data['info_ticket'], $data['info_num_tareas']);
+        $r[] = crea_tabla_resumen_ticket($data);
         $r[] = form_tarea();
         $r[] = format_listado_tareas($data);
-
         return append($r);
 
     }
-    /*
- *
-function format_ticket_desarrollo($data)
-{
-
-    $info_tickets = $data["info_tickets"];
-    $r[] = h("# Resultados " . count($info_tickets), 3);
-    $response = [];
-    foreach ($info_tickets as $row) {
-
-        $id_ticket = $row["id_ticket"];
-
-
-        $tareas_pendientes = [
-            "class" => 'strong white ver_detalle_ticket a_enid_black_sm',
-            "id" => $id_ticket
-        ];
-
-
-        $t[] = get_img_usuario($row["id_usuario"]);
-        $t[] = d($row["asunto"]);
-        $t[] = d("#Tareas pendientes:" . $row["num_tareas_pendientes"],
-            $tareas_pendientes,
-            ["class" => "cursor_pointer"]
-        );
-
-        $r[] = d(append($t), "popup-head-left pull-left");;
-
-        $z[] = btn(icon("fa fa-plus"), ["class" => "btn btn-secondary dropdown-toggle", "data-toggle" => "dropdown"]);
-        $z[] = d(
-            a_enid("CERRAR TICKET",
-                [
-                    "class" => "cerrar_ticket",
-                    "onClick" => "cerrar_ticket({$id_ticket})"
-                ]
-            ), "dropdown-menu acciones_ticket");;
-
-        $r[] = d(append($z), "dropdown pull-right");
-
-        $response[] = d(d(append($r), "popup-head"), ["class" => "popup-box chat-popup", "id" => "qnimate"]);
-
-
-    }
-    return append($response);
-
-
-}
-function valida_tipo_usuario_tarea($id_perfil)
-{
-
-    return val_class($id_perfil, 20, "Cliente", "Equipo Enid Service");
-
-}
-        function create_notificacion_ticket($info_usuario, $param, $info_ticket)
-    {
-
-
-        if (es_data($info_usuario)) {
-
-            $u = $info_usuario[0];
-            $nombre_usuario = $u["nombre"] . " " . $u["apellido_paterno"] . $u["apellido_materno"] . " -  " . $u["email"];
-
-
-            $asunto_email = "Nuevo ticket abierto [" . $param["ticket"] . "]";
-            $r[] = d("Nuevo ticket abierto [" . $param["ticket"] . "]");
-            $r[] = d("Cliente que solicita " . $nombre_usuario . "");
-
-            $lista_prioridades = ["", "Alta", "Media", "Baja"];
-
-            $asunto = "";
-            $mensaje = "";
-            $prioridad = "";
-            $nombre_departamento = "";
-
-            foreach ($info_ticket as $row) {
-
-                $asunto = $row["asunto"];
-                $mensaje = $row["mensaje"];
-                $prioridad = $row["prioridad"];
-                $nombre_departamento = $row["nombre_departamento"];
-
-            }
-
-            $r[] = d("Prioridad: " . $lista_prioridades[$prioridad]);
-            $r[] = d("Departamento a quien está dirigido: " . $nombre_departamento);
-            $r[] = d("Asunto:" . $asunto);
-            $r[] = d("Reseña:" . $mensaje);
-
-
-            $response = [
-                "info_correo" => append($r),
-                "asunto" => $asunto_email,
-            ];
-
-
-            return $response;
-
-
-        }
-
-    }
-
-
-*/
 
 }

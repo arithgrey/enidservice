@@ -250,51 +250,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    /*
-    function get_texto_por_modalidad($modalidad)
-    {
-
-        return ($modalidad == 1) ? " TU HISTORIAL DE COMPRAS " : "TU HISTORIAL DE VENTAS";
-
-    }
-    function ver_totalidad_por_modalidad($modalidad, $total)
-    {
-
-        $icon = icon("fa fa-shopping-bag");
-        return ($modalidad == 1) ? $icon . "TUS VENTAS HASTA EL MOMENTO " . $total :
-            $icon . "TUS COMPRAS HASTA EL MOMENTO " . $total;
-
-    }
-    */
-
-    function crea_estrellas($calificacion, $sm = 0)
-    {
-
-        $estrellas_valoraciones = "";
-        $restantes = "";
-        $num_restantes = 1;
-
-        for ($x = 1; $x <= $calificacion; $x++) {
-
-            $estrellas_valoraciones .= label("★", 'estrella f2');
-            $num_restantes++;
-        }
-
-        for ($num_restantes; $num_restantes <= 5; $num_restantes++) {
-
-            $extra = "azul_estrella_simple";
-            $restantes .= label("★",
-                [
-                    "class" => 'estrella azul_estrella_simple f2'
-
-                ]
-            );
-
-        }
-        return $estrellas_valoraciones . $restantes;
-
-    }
-
     function criterios_busqueda()
     {
         $criterios = ["RELEVANTE", "RECIENTE"];

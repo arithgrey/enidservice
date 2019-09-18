@@ -281,6 +281,26 @@ class Tickets extends REST_Controller
         }
         $this->response($response);
     }
+    function nota_monetaria_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "nota_monetaria,id_ticket")) {
+            $response = $this->tickets_model->q_up("nota_monetaria", $param["nota_monetaria"], $param["id_ticket"]);
+        }
+        $this->response($response);
+    }
+    function efecto_monetario_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "efecto_monetario,id_ticket")) {
+            $response = $this->tickets_model->q_up("efecto_monetario", $param["efecto_monetario"], $param["id_ticket"]);
+        }
+        $this->response($response);
+    }
     function asunto_PUT()
     {
 

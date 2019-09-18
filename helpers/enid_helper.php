@@ -1209,7 +1209,7 @@ if (!function_exists('textarea')) {
         } else {
             $attributes["class"] = " form-control rounded-0";
         }
-        $base = "<textarea " . add_attributes($attributes) . " ></textarea>";
+        $base = "<textarea " . add_attributes($attributes) . " >".$def."</textarea>";
         $e = ($row_12 == 0) ? $base : addNRow($base);
         return $e;
 
@@ -2531,4 +2531,32 @@ function is_mobile()
 {
 
     return (dispositivo() === 1) ? 1 : 0;
+}
+function crea_estrellas($calificacion, $sm = 0)
+{
+    $valoraciones = "";
+    $restantes =  "";
+    $a  = 1;
+    if($calificacion > 0){
+
+        for ($a; $a <= $calificacion; $a ++ ){
+            $ext  = ($sm > 0 ) ? "" : "f2";
+            $valoraciones .=  label("★", ["class"=>'estrella black '.$ext , "id" => $a]);
+        }
+    }
+
+    for ($a; $a <= 5; $a ++ ){
+        $ext  = ($sm > 0 ) ? "" : "f2";
+
+        $restantes .=
+            label("★",
+                [
+                    "class" => 'estrella azul_estrella_simple  cursor_pointer '.$ext,
+                    "id" => $a
+                ]
+            );
+    }
+
+    return add_text($valoraciones , $restantes);
+
 }
