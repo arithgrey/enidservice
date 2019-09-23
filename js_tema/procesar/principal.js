@@ -37,116 +37,125 @@ $(document).ready(() => {
 
     if (option["in_session"] < 1) {
 
+        if ($(".form-cotizacion-enid-service")) {
+            $(".form-cotizacion-enid-service #nombre").focus(function () {
+                $('.form-cotizacion-enid-service #nombre').next('label').addClass('focused_input');
 
-        $(".form-cotizacion-enid-service #nombre").focus(function () {
-            $('.form-cotizacion-enid-service #nombre').next('label').addClass('focused_input');
+            });
+            $(".form-cotizacion-enid-service #nombre").focusout(function () {
+                if ($('.form-cotizacion-enid-service #nombre').val() === '') {
+                    $('.form-cotizacion-enid-service #nombre').next('label').removeClass('focused_input');
 
-        });
-        $(".form-cotizacion-enid-service #nombre").focusout(function () {
-            if ($('.form-cotizacion-enid-service #nombre').val() === '') {
-                $('.form-cotizacion-enid-service #nombre').next('label').removeClass('focused_input');
+                }
+            });
+
+            $(".form-cotizacion-enid-service .email").focus(function () {
+                $('.form-cotizacion-enid-service .email').next('label').addClass('focused_input');
+
+            });
+            $(".form-cotizacion-enid-service .email").focusout(function () {
+                if ($('.form-cotizacion-enid-service .email').val() === '') {
+                    $('.form-cotizacion-enid-service .email').next('label').removeClass('focused_input');
+
+                }
+            });
+
+            $(".form-cotizacion-enid-service .password").focus(function () {
+                $('.form-cotizacion-enid-service .password').next('label').addClass('focused_input');
+
+            });
+            $(".form-cotizacion-enid-service .password").focusout(function () {
+                if ($('.form-cotizacion-enid-service .password').val() === '') {
+                    $('.form-cotizacion-enid-service .password').next('label').removeClass('focused_input');
+
+                }
+            });
+
+            $(".form-cotizacion-enid-service .telefono").focus(function () {
+                $('.form-cotizacion-enid-service .telefono').next('label').addClass('focused_input');
+
+            });
+            $(".form-cotizacion-enid-service .telefono").focusout(function () {
+                if ($('.form-cotizacion-enid-service .telefono').val() === '') {
+                    $('.form-cotizacion-enid-service .telefono').next('label').removeClass('focused_input');
+
+                }
+            });
+        }
+
+        if ($(".form-miembro-enid-service ")){
+
+            /*
+            $(".form-cotizacion-enid-service .fecha_servicio ").focus(function () {
+                $('.form-cotizacion-enid-service .fecha_servicio ').next('label').addClass('focused_input');
+
+            });
+            $(".form-cotizacion-enid-service .fecha_servicio ").focusout(function () {
+                if ($('.form-cotizacion-enid-service .fecha_servicio ').val() === '') {
+                    $('.form-cotizacion-enid-service .fecha_servicio ').next('label').removeClass('focused_input');
+
+                }
+            });
+
+            if ($('.form-cotizacion-enid-service .fecha_servicio ').val().length > 0) {
+                $('.form-cotizacion-enid-service .fecha_servicio ').next('label').addClass('focused_input');
 
             }
-        });
 
-        $(".form-cotizacion-enid-service .email").focus(function () {
-            $('.form-cotizacion-enid-service .email').next('label').addClass('focused_input');
-
-        });
-        $(".form-cotizacion-enid-service .email").focusout(function () {
-            if ($('.form-cotizacion-enid-service .email').val() === '') {
-                $('.form-cotizacion-enid-service .email').next('label').removeClass('focused_input');
-
-            }
-        });
-
-        $(".form-cotizacion-enid-service .password").focus(function () {
-            $('.form-cotizacion-enid-service .password').next('label').addClass('focused_input');
-
-        });
-        $(".form-cotizacion-enid-service .password").focusout(function () {
-            if ($('.form-cotizacion-enid-service .password').val() === '') {
-                $('.form-cotizacion-enid-service .password').next('label').removeClass('focused_input');
-
-            }
-        });
-
-        $(".form-cotizacion-enid-service .telefono").focus(function () {
-            $('.form-cotizacion-enid-service .telefono').next('label').addClass('focused_input');
-
-        });
-        $(".form-cotizacion-enid-service .telefono").focusout(function () {
-            if ($('.form-cotizacion-enid-service .telefono').val() === '') {
-                $('.form-cotizacion-enid-service .telefono').next('label').removeClass('focused_input');
-
-            }
-        });
+             */
 
 
-        $(".form-cotizacion-enid-service .fecha_servicio ").focus(function () {
-            $('.form-cotizacion-enid-service .fecha_servicio ').next('label').addClass('focused_input');
-
-        });
-        $(".form-cotizacion-enid-service .fecha_servicio ").focusout(function () {
-            if ($('.form-cotizacion-enid-service .fecha_servicio ').val() === '') {
-                $('.form-cotizacion-enid-service .fecha_servicio ').next('label').removeClass('focused_input');
-
-            }
-        });
 
 
-        if ($('.form-cotizacion-enid-service .fecha_servicio ').val().length >  0) {
-            $('.form-cotizacion-enid-service .fecha_servicio ').next('label').addClass('focused_input');
+            $(".form-miembro-enid-service .nombre").focus(function () {
+                $('.form-miembro-enid-service .nombre').next('label').addClass('focused_input');
+
+            });
+
+            $(".form-miembro-enid-service .nombre").focusout(function () {
+                if ($('.form-miembro-enid-service .nombre').val() === '') {
+                    $('.form-miembro-enid-service .nombre').next('label').removeClass('focused_input');
+                }
+            });
+
+
+            $(".form-miembro-enid-service .correo").focus(function () {
+                $('.form-miembro-enid-service .correo').next('label').addClass('focused_input');
+
+            });
+
+            $(".form-miembro-enid-service .correo").focusout(function () {
+                if ($('.form-miembro-enid-service .correo').val() === '') {
+                    $('.form-miembro-enid-service .correo').next('label').removeClass('focused_input');
+                }
+            });
+
+
+            $(".form-miembro-enid-service .password").focus(function () {
+                $('.form-miembro-enid-service .password').next('label').addClass('focused_input');
+
+            });
+
+            $(".form-miembro-enid-service .password").focusout(function () {
+                if ($('.form-miembro-enid-service .password').val() === '') {
+                    $('.form-miembro-enid-service .password').next('label').removeClass('focused_input');
+                }
+            });
+
+
+            $(".form-miembro-enid-service .telefono").focus(function () {
+                $('.form-miembro-enid-service .telefono').next('label').addClass('focused_input');
+
+            });
+
+            $(".form-miembro-enid-service .telefono").focusout(function () {
+                if ($('.form-miembro-enid-service .telefono').val() === '') {
+                    $('.form-miembro-enid-service .telefono').next('label').removeClass('focused_input');
+                }
+            });
 
         }
 
-
-        $(".form-miembro-enid-service .input_enid_format .nombre").focus(function () {
-            $('.form-miembro-enid-service .input_enid_format .nombre').next('label').addClass('focused_input');
-
-        });
-
-        $(".form-miembro-enid-service .input_enid_format .nombre").focusout(function () {
-            if ($('.form-miembro-enid-service .input_enid_format .nombre').val() === '') {
-                $('.form-miembro-enid-service .input_enid_format .nombre').next('label').removeClass('focused_input');
-            }
-        });
-
-
-        $(".form-miembro-enid-service .input_enid_format .correo").focus(function () {
-            $('.form-miembro-enid-service .input_enid_format .correo').next('label').addClass('focused_input');
-
-        });
-
-        $(".form-miembro-enid-service .input_enid_format .correo").focusout(function () {
-            if ($('.form-miembro-enid-service .input_enid_format .correo').val() === '') {
-                $('.form-miembro-enid-service .input_enid_format .correo').next('label').removeClass('focused_input');
-            }
-        });
-
-
-        $(".form-miembro-enid-service .input_enid_format .password").focus(function () {
-            $('.form-miembro-enid-service .input_enid_format .password').next('label').addClass('focused_input');
-
-        });
-
-        $(".form-miembro-enid-service .input_enid_format .password").focusout(function () {
-            if ($('.form-miembro-enid-service .input_enid_format .password').val() === '') {
-                $('.form-miembro-enid-service .input_enid_format .password').next('label').removeClass('focused_input');
-            }
-        });
-
-
-        $(".form-miembro-enid-service .input_enid_format .telefono").focus(function () {
-            $('.form-miembro-enid-service .input_enid_format .telefono').next('label').addClass('focused_input');
-
-        });
-
-        $(".form-miembro-enid-service .input_enid_format .telefono").focusout(function () {
-            if ($('.form-miembro-enid-service .input_enid_format .telefono').val() === '') {
-                $('.form-miembro-enid-service .input_enid_format .telefono').next('label').removeClass('focused_input');
-            }
-        });
 
         $('.agregar_commentario').click(function () {
             $('.text_comentarios').removeClass('d-none');
@@ -159,7 +168,7 @@ $(document).ready(() => {
             $('.descripcion_comentario').removeClass("d-none").addClass("mt-5");
         });
 
-        if ($('.form_cotizacion_enid_service .fecha_servicio ').val().length >  0) {
+        if ($('.form_cotizacion_enid_service .fecha_servicio ').val().length > 0) {
             $('.form_cotizacion_enid_service .fecha_servicio ').next('label').addClass('focused_input');
 
         }

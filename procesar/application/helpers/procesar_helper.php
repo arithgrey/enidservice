@@ -50,7 +50,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $z[] = str_title($in_session, $is_mobile);
-            $z[] = form_open("", ["class" => "form-miembro-enid-service row", "id" => "form-miembro-enid-service"]);
+            $z[] = form_open("", ["class" => "form-miembro-enid-service ", "id" => "form-miembro-enid-service"]);
             $z[] = frm_miembro_enid_service_hidden(
                 $q2,
                 $ext["id_servicio"],
@@ -95,11 +95,11 @@ if (!function_exists('invierte_date_time')) {
         {
             $r = [];
             if ($in_session < 1) {
-                $r[] = d(h("DATOS DE COMPRA", 3), 12);
+                $r[] = contaiter(h("DATOS DE COMPRA", 3),1);
 
 
-                $r[] = input_frm(
-                    6, "Nombre",
+                $z[] = input_frm(
+                    "col-lg-6 mt-5", "Nombre",
                     [
                         "name" => "nombre",
                         "id" => "nombre",
@@ -111,7 +111,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
 
-                $r[] = input_frm(6, "Email",
+                $z[] = input_frm("col-lg-6 mt-5", "Email",
                     [
                         "name" => "email",
                         "placeholder" => "ej. jonathan@enidservices.com",
@@ -125,7 +125,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
 
-                $r[] = input_frm(6, "password",
+                $z[] = input_frm("col-lg-6 mt-5", "password",
                     [
                         "id" => "password",
                         "class" => " input-sm password",
@@ -135,7 +135,7 @@ if (!function_exists('invierte_date_time')) {
                     ]);
 
 
-                $r[] = input_frm(6, "Tel. ",
+                $z[] = input_frm("col-lg-6 mt-5", "Tel. ",
                     [
                         "id" => "telefono",
                         "class" => "telefono",
@@ -150,6 +150,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
 
+                $r[] =  contaiter(append($z));
                 $r[] = d("", 9);
                 $r[] = d(btn("CONTINUAR", [], 0), "col-lg-3 mt-5");
                 $r[] = d(a_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
