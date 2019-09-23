@@ -60,11 +60,12 @@ if (!function_exists('invierte_date_time')) {
     function format_tablero($tickets)
     {
 
-        $backlog[] = d(h("Backlog", 5, " text-uppercase "));
-        $pendiente[] = d(h("Pendiente", 5, " text-uppercase "));
-        $haciendo[] = d(h("Proceso", 5, " text-uppercase "));
-        $hecho[] = d(h("hecho", 5, " text-uppercase "));
-        $revision[] = d(h("Revisión", 5, " text-uppercase "));
+        $ab[] = d(h(text_icon('fa fa-angle-up up_ab', "[AB]"), 5, " text-uppercase "));
+        $backlog[] = d(h(text_icon('fa fa-angle-up up_backlog',"Backlog"), 5, " text-uppercase "));
+        $pendiente[] = d(h(text_icon('fa fa-angle-up up_pendiente', "Pendiente"), 5, " text-uppercase "));
+        $haciendo[] = d(h(text_icon('fa fa-angle-up up_proceso', "Proceso"), 5, " text-uppercase "));
+        $hecho[] = d(h(text_icon('fa fa-angle-up up_hecho' , "hecho"), 5, " text-uppercase "));
+        $revision[] = d(h(text_icon('fa fa-angle-up up_revision' ,"Revisión"), 5, " text-uppercase "));
 
         foreach ($tickets as $row) {
 
@@ -76,11 +77,27 @@ if (!function_exists('invierte_date_time')) {
             switch ($row["status"]) {
 
 
+                case 7:
+
+                    $ab[] = d(d(
+                        $asunto
+                        , 12),
+                        [
+                            "class" => "row ui-widget-content border draggable padding_10 
+                            shadow ab_target cursor_pointer ver_detalle_ticket top_5",
+                            "id" => $id_ticket
+
+                        ]);
+
+                    break;
+
+
                 case 5:
 
                     $backlog[] = d(d($asunto, 12),
                         [
-                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "class" => "row ui-widget-content border draggable padding_10 shadow  backlog_target 
+                            cursor_pointer ver_detalle_ticket top_5",
                             "id" => $id_ticket
 
                         ]);
@@ -103,7 +120,9 @@ if (!function_exists('invierte_date_time')) {
 
                     $haciendo[] = d(d($asunto, 12),
                         [
-                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "class" => "row ui-widget-content border draggable padding_10 shadow 
+                            proceso_target 
+                            cursor_pointer ver_detalle_ticket top_5",
                             "id" => $id_ticket
 
                         ]);
@@ -117,7 +136,8 @@ if (!function_exists('invierte_date_time')) {
                             $text, 12
                         ),
                         [
-                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "class" => "row ui-widget-content border draggable padding_10
+                             shadow hecho_target cursor_pointer ver_detalle_ticket top_5",
                             "id" => $id_ticket
 
                         ]);
@@ -129,7 +149,7 @@ if (!function_exists('invierte_date_time')) {
 
                     $revision[] = d(d($asunto, 12),
                         [
-                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "class" => "row ui-widget-content border draggable padding_10 shadow revision_target cursor_pointer ver_detalle_ticket top_5",
                             "id" => $id_ticket
 
                         ]);
@@ -140,11 +160,12 @@ if (!function_exists('invierte_date_time')) {
             }
         }
 
-        $response[] = d(append($backlog), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 5]);
-        $response[] = d(append($pendiente), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 0]);
-        $response[] = d(append($haciendo), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 1]);
-        $response[] = d(append($hecho), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 2]);
-        $response[] = d(append($revision), ["class" => "col-lg-2 border pading_10 mh_700 droppable ml-4", "id" => 6]);
+        $response[] = d(append($ab), ["class" => "col-lg-2 border pading_10 mh_700 droppable bloque_ab", "id" => 7]);
+        $response[] = d(append($backlog), ["class" => "col-lg-2 border pading_10 mh_700 droppable bloque_backlog", "id" => 5]);
+        $response[] = d(append($pendiente), ["class" => "col-lg-2 border pading_10 mh_700 droppable bloque_pendiente", "id" => 0]);
+        $response[] = d(append($haciendo), ["class" => "col-lg-2 border pading_10 mh_700 droppable bloque_haciendo", "id" => 1]);
+        $response[] = d(append($hecho), ["class" => "col-lg-2 border pading_10 mh_700 droppable bloque_hecho", "id" => 2]);
+        $response[] = d(append($revision), ["class" => "col-lg-2 border pading_10 mh_700 droppable bloque_revision", "id" => 6]);
 
         return append($response);
 
@@ -311,7 +332,7 @@ if (!function_exists('invierte_date_time')) {
                 $asunto = $row["asunto"];
                 $efecto_monetario = $row["efecto_monetario"];
                 $nota_monetaria = $row["nota_monetaria"];
-                $efectivo_resultante =  $row["efectivo_resultante"];
+                $efectivo_resultante = $row["efectivo_resultante"];
 
 
                 $cerrar =
@@ -410,28 +431,28 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_open("", ["class" => "frm_efectivo_resultante mt-5 mb-5 col-md-5"]);
 
         $r[] = flex(
-            input_frm(0,"MXN",
-            [
-                "type" => "number",
-                "step" => "any",
-                "id" => "efectivo_resultante",
-                "efectivo_resultante" =>"efectivo_resultante",
-                "name" =>"efectivo_resultante",
-                "placeholder"=>"1000",
-                "min" => 0,
-                "maxlength" => 6,
-                "value" => $efectivo_resultante
+            input_frm(0, "MXN",
+                [
+                    "type" => "number",
+                    "step" => "any",
+                    "id" => "efectivo_resultante",
+                    "efectivo_resultante" => "efectivo_resultante",
+                    "name" => "efectivo_resultante",
+                    "placeholder" => "1000",
+                    "min" => 0,
+                    "maxlength" => 6,
+                    "value" => $efectivo_resultante
 
-            ],
-            [
-                "id"=> "label_efectivo_resultante"
-            ]
-        ),
-            btn("GUARDAR",[],0),
-            "d-flex justify-content-between","row mr-auto","row"
+                ],
+                [
+                    "id" => "label_efectivo_resultante"
+                ]
+            ),
+            btn("GUARDAR", [], 0),
+            "d-flex justify-content-between", "row mr-auto", "row"
         );
 
-        $r[] = hiddens(["name" =>"id_ticket", "value"=>$id_ticket]);
+        $r[] = hiddens(["name" => "id_ticket", "value" => $id_ticket]);
         $r[] = form_close();
         $response[] = contaiter(d("EFECTIVO RESULTANTE", "col-lg-12 strong m-0 p-0"), "mt-5");
         $response[] = contaiter(append($r), "mb-5");

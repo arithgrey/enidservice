@@ -186,9 +186,9 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "comentarios",
                 "class" => "mt-3"
             ]);
-        $sec[] = d(append($x), "input_notas   top_50 bottom_50 col-lg-12");
+        $sec[] = d(append($x), "input_notas   top_50 bottom_50");
 
-        $r[] = d(append($sec), "seccion_horarios_entrega col-lg-12");
+        $r[] = d(append($sec), "seccion_horarios_entrega ");
 
 
         $r[] = hiddens(["name" => "punto_encuentro", "class" => "punto_encuentro_form punto_encuentro"]);

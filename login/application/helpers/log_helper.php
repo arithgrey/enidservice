@@ -26,7 +26,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = contaiter(
             d(a_enid(
-                img_enid(["class" => "w-50"]),
+                img_enid(["class" => "w-75"]),
 
                 path_enid("home")
 
@@ -53,10 +53,10 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        $r[] = d(append($x), "text-center top_50 bottom_100");
+        $r[] = d(append($x), "text-center  wrapper_login ");
 
-        $response = d(append($r));
-        return contaiter($response, "wrapper_login");
+        return d(append($r),13);
+
 
     }
 

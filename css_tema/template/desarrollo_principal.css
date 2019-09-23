@@ -274,3 +274,25 @@
     background: #2626b0;
     color: white;
 }
+.ab_target{
+    background: #004d50;
+    color: white;
+}
+.backlog_target{
+    background: #2c9e7f;
+    color: white;
+}
+.hecho_target{
+    background: #011d3c;
+    color: white;
+}
+.proceso_target{
+
+    background: orangered;
+    color: white;
+}
+.revision_target{
+
+    background: darkslategray;
+    color: white;
+}
