@@ -11,7 +11,7 @@ $(document).on("ready", () => {
     $(".form-miembro-enid-service").submit(agrega_usuario);
     $(".recupara-pass").click(muestra_contenedor_recuperacion);
     $(".btn_acceder_cuenta_enid").click(muestra_seccion_acceso);
-    $(".nombre_persona").keyup(() => {
+    $(".nombre_persona").keyup(function () {
         transforma_mayusculas(this);
     });
     despliega(".extra_menu_simple", 1);
@@ -25,18 +25,29 @@ $(document).on("ready", () => {
         sin_espacios("#email_recuperacion");
     });
 
-    $(".input_enid_format .correo").focus(function () {
-        $('.input_enid_format .correo').next('label').addClass('focused_input');
+
+    /*Registro*/
+    $(".registro_email").focus(function () {
+        $(this).next('label').addClass('focused_input');
+    });
+    $(".nombre_persona").focus(function () {
+        $(this).next('label').addClass('focused_input');
+    });
+    $(".registro_pw").focus(function () {
+        $(this).next('label').addClass('focused_input');
+    });
+
+
+    /*Acceso*/
+    $("#mail_acceso").focus(function () {
+        $('#mail_acceso').next('label').addClass('focused_input');
 
     });
-    $(".input_enid_format .correo").focusout(function () {
-        if ($('.input_enid_format .correo').val() === '') {
-            $('.input_enid_format .correo').next('label').removeClass('focused_input');
-
+    $("#mail_acceso").focusout(function () {
+        if ($('#mail_acceso').val() === '') {
+            $('#mail_acceso').next('label').removeClass('focused_input');
         }
     });
-
-
     $(".input_enid_format #pw").focus(function () {
         $('.input_enid_format #pw').next('label').addClass('focused_input');
 
@@ -47,13 +58,15 @@ $(document).on("ready", () => {
 
         }
     });
+
+
 });
 let inicio_session = () => {
 
 
     let url = get_option("url");
     let data_send = {secret: get_option("tmp_password"), "email": get_option("email")};
-    if (get_parameter("#mail").length > 5 && get_parameter("#pw").length > 5) {
+    if (get_parameter("#mail_acceso").length > 5 && get_parameter("#pw").length > 5) {
 
         request_enid("POST", data_send, url, response_inicio_session, 1, before_inicio_session);
 
@@ -75,13 +88,15 @@ let response_inicio_session = data => {
     } else {
 
         habilita_botones();
-        format_error(".place_acceso_sistema", "Error en los datos de acceso");
+        format_error(".place_acceso_sistema", "Verifica tus datos de acceso");
+        empty_elements(".inf_usuario_registrado");
+        $(".inf_usuario_registrado").removeClass();
     }
 }
 let valida_form_session = e => {
 
     let pw = $.trim(get_parameter("#pw"));
-    let email = get_parameter('#mail');
+    let email = get_parameter('#mail_acceso');
     if (valida_formato_pass(pw) == valida_formato_email(email)) {
 
         let tmp_password = "" + CryptoJS.SHA1(pw);
@@ -166,12 +181,12 @@ let mostrar_seccion_nuevo_usuario = () => {
 let agrega_usuario = (e) => {
 
     let url = "../q/index.php/api/usuario/vendedor/format/json/";
-    let password = get_parameter(".form-miembro-enid-service .password");
-    let email = get_parameter(".form-miembro-enid-service .email");
-    let nombre = get_parameter(".form-miembro-enid-service .nombre");
+    let password = get_parameter(".registro_pw");
+    let email = get_parameter(".registro_email");
+    let nombre = get_parameter(".nombre_persona");
 
     if (valida_formato_email(email) == valida_formato_pass(password)) {
-        if (val_text_form(".nombre", ".place_registro_miembro", 5, "Nombre") == 1) {
+        if (val_text_form(".nombre_persona", ".place_registro_miembro", 3, "Nombre") == 1) {
 
             let tmp_password = "" + CryptoJS.SHA1(password);
             set_option({
@@ -189,13 +204,10 @@ let agrega_usuario = (e) => {
 }
 let response_usuario_registro = data => {
 
-
     if (data.usuario_registrado == 1) {
 
-        let srt = "<a class='acceder_btn'> Registro correcto! ahora puedes acceder aquí!</a>";
-        render_enid(".place_acceso_sistema", str);
-        habilita_botones();
         redirect("?action=registro");
+
     } else {
 
         if (data.usuario_existe == 1) {

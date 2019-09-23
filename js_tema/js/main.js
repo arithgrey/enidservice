@@ -185,6 +185,7 @@ let valida_email_form = (input, place_msj) => {
     return flag;
 
 }
+
 let valida_tel_form = (input, place_msj) => {
 
 
@@ -499,11 +500,14 @@ let empty_elements = (array) => {
     if (isArray(array)) {
 
         array.forEach(function (element) {
-            $(element).empty();
+            if ($(element)) {
+                $(element).empty();
+            }
         });
     } else {
-
-        $(array).empty();
+        if ($(array)) {
+            $(array).empty();
+        }
     }
 }
 
@@ -777,6 +781,7 @@ let show_tabs = (str, tipo = 1) => {
     }
 
 }
+
 let rm_class = (arr_class, class_rm) => {
 
 
