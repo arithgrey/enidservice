@@ -81,31 +81,16 @@ $(document).ready(() => {
 
                 }
             });
+
+
+            if ($('.fecha_servicio').length) {
+                if ($('.fecha_servicio').val().length > 0) {
+                    $('.fecha_servicio ').next('label').addClass('focused_input');
+                }
+            }
         }
 
-        if ($(".form-miembro-enid-service ")){
-
-            /*
-            $(".form-cotizacion-enid-service .fecha_servicio ").focus(function () {
-                $('.form-cotizacion-enid-service .fecha_servicio ').next('label').addClass('focused_input');
-
-            });
-            $(".form-cotizacion-enid-service .fecha_servicio ").focusout(function () {
-                if ($('.form-cotizacion-enid-service .fecha_servicio ').val() === '') {
-                    $('.form-cotizacion-enid-service .fecha_servicio ').next('label').removeClass('focused_input');
-
-                }
-            });
-
-            if ($('.form-cotizacion-enid-service .fecha_servicio ').val().length > 0) {
-                $('.form-cotizacion-enid-service .fecha_servicio ').next('label').addClass('focused_input');
-
-            }
-
-             */
-
-
-
+        if ($(".form-miembro-enid-service ")) {
 
             $(".form-miembro-enid-service .nombre").focus(function () {
                 $('.form-miembro-enid-service .nombre').next('label').addClass('focused_input');
@@ -117,7 +102,6 @@ $(document).ready(() => {
                     $('.form-miembro-enid-service .nombre').next('label').removeClass('focused_input');
                 }
             });
-
 
             $(".form-miembro-enid-service .correo").focus(function () {
                 $('.form-miembro-enid-service .correo').next('label').addClass('focused_input');
@@ -168,10 +152,12 @@ $(document).ready(() => {
             $('.descripcion_comentario').removeClass("d-none").addClass("mt-5");
         });
 
-        if ($('.form_cotizacion_enid_service .fecha_servicio ').val().length > 0) {
-            $('.form_cotizacion_enid_service .fecha_servicio ').next('label').addClass('focused_input');
-
+        if ($('.fecha_servicio').length) {
+            if ($('.fecha_servicio').val().length > 0) {
+                $('.fecha_servicio ').next('label').addClass('focused_input');
+            }
         }
+        
     }
 
 

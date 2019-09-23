@@ -24,16 +24,25 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = a_enid(img_enid(),
-            [
-                "href" => path_enid("home"),
-                "class" => "col-lg-8 col-lg-offset-2"
-            ]
-            , 1
+        $r[] = contaiter(
+            d(a_enid(
+                img_enid(["class" => "w-50"]),
+
+                path_enid("home")
+
+
+            ), "text-center")
         );
 
-        $r[] = d(frm_login(), 1);
-        $r[] = place("place_acceso_sistema top_20 bottom_20");
+        $r[] = contaiter(frm_login());
+
+        if (($action === "registro")){
+
+            $r[] =  contaiter(d("Tu usuario fué registrado, accede ahora!", "inf_usuario_registrado strong mt-5 bg-light p-2 text-right"),1);
+        }
+
+
+        $r[] = contaiter(place("place_acceso_sistema mt-5 mb-5", 1), 1);
         $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'registrar-cuenta registrar_cuenta']);
         $x[] = a_enid(
             "¿OLVIDASTE TU CONTRASEÑA?",
@@ -45,9 +54,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = d(append($x), "text-center top_50 bottom_100");
-        $r[] = ($action === "registro") ? d("COMPRA O VENDE ACCEDIENDO A TU CUENTA!", "mensaje_bienvenida") : "";
+
         $response = d(append($r));
-        return d($response, "wrapper_login", 1);
+        return contaiter($response, "wrapper_login");
 
     }
 
@@ -70,7 +79,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "email_recuperacion",
                 "name" => 'mail',
                 "placeholder" => "Email",
-                "class" => "form-control input-sm top_10",
+                "class" => " top_10",
                 "required" => true
             ]);
         $r[] = d("Ingresa tu correo electrónico para que tu contraseña pueda ser enviada", 'msj-recuperacion top_10', 1);
@@ -100,7 +109,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = a_enid(img_enid(), ["href" => "../", "class" => "col-lg-8 col-lg-offset-2"], 1);
-        $r[] = heading('ÚNETE A ENID SERVICE', 3, 1);
+        $r[] = heading('ÚNETE', 3, 1);
         $r[] = d(frm_registro(), 1);
         $r[] = d(
             a_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",
@@ -122,33 +131,42 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = '<form class="form-miembro-enid-service" id="form-miembro-enid-service">';
-        $r[] = input(
+        $r[] = input_frm("mt-5", "CORREO ELECTRÓNICO",
             [
                 "name" => "email",
                 "placeholder" => "CORREO",
-                "class" => "form-control input-sm email email",
+                "class"=> "email registro_email ",
                 "type" => "email",
                 "required" => true,
-                "onkeypress" => "minusculas(this);"]);
+                "onkeypress" => "minusculas(this);",
+                "id" => "registro_email"
+            ]);
 
         $r[] = place("place_correo_incorrecto");
 
-        $r[] = input(
+        $r[] = input_frm(
+            "mt-5", "TU NOMBRE",
             [
                 "name" => "nombre",
                 "placeholder" => "TU NOMBRE",
-                "class" => "form-control input-sm  nombre nombre_persona top_10",
+                "class"=> "nombre_persona",
                 "type" => "text",
-                "required" => true]);
+                "required" => true,
+                "id" => "registro_email"
+            ]);
         $r[] = place("place_nombre_info");
 
-        $r[] = input(
+        $r[] = input_frm(
+            "mt-5", "UNA CONTRASEÑA",
             [
                 "id" => "password",
                 "placeholder" => "UNA CONTRASEÑA ",
-                "class" => "form-control input-sm password top_10",
+                "class"=>"password registro_pw",
                 "type" => "password",
-                "required" => true]);
+                "required" => true,
+                "id" => "registro_pw"
+
+            ]);
 
         $r[] = place("place_password_afiliado");
         $r[] = btn('Registrar',
@@ -167,7 +185,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
             $attr = add_attributes([
-                "class" => "form_sesion_enid",
+                "class" => "form_sesion_enid col-lg-12",
                 "id" => "in",
                 "method" => "POST",
                 "action" => base_url('index.php/api/sess/start/format/json')]);
@@ -185,32 +203,27 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "secret"]);
 
             $r[] = input_frm(
-                12, "CORREO ELECTRÓNICO",
+                " mt-4", "CORREO ELECTRÓNICO",
                 [
-                    "class" => 'input-sm top_10',
+
                     "type" => "email",
                     "name" => 'mail',
-                    "id" => "mail",
+                    "id" => "mail_acceso",
                     "onkeypress" => "minusculas(this);",
                     "placeholder" => "ej. jonathan@gmail.com"
                 ]);
 
-            $r[] = input_frm(12, "Password", [
-                "type" => "password",
-                "placeholder" => "Tu contraseña",
-                "name" => 'pw',
-                "id" => "pw",
-                "class" => "top_10",
-                "placeholder" => "****"
-            ]
+            $r[] = input_frm(" mt-5", "Password", [
+                    "type" => "password",
+                    "placeholder" => "Tu contraseña",
+                    "name" => 'pw',
+                    "id" => "pw",
+
+                    "placeholder" => "****"
+                ]
             );
 
-            $r[] = add_element(
-                "INICIAR SESIÓN",
-                "button",
-                ['class' => 'a_enid_blue top_20'],
-                1);
-
+            $r[] = btn("INICIAR", ["class" => "mt-5"]);
             $r[] = form_close();
             return append($r);
 
