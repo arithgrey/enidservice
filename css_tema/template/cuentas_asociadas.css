@@ -1,0 +1,62 @@
+.contenedor_cuentas_bancarias {
+    background: #fbfbfb;
+    border-right-style: solid;
+    border-width: .9px;
+    border-left-style: solid;
+}
+
+.info_cuenta {
+    
+    color: #00137d;
+    border-style: solid;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+.contenedor_info_trasnfer {
+    background: white;
+    color: black;
+    border-width: .5px;
+    border-style: dotted;
+    padding: 10px;
+    height: 90px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.contenedor_agregar_cuenta {
+    position: absolute;
+    top: 40px;
+    margin: 0 auto;
+}
+
+.contenedor_agregar_cuenta_2 {
+    background: white;
+    color: black;
+    border-width: .5px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    height: 90px;
+    margin-top: 20px;
+}
+
+.agregar_cuenta_text {
+    background: #003d99;
+    color: white;
+
+    padding: 3px;
+}
+
+.contenedir_agregar_tarjeta {
+    background: white;
+    color: black;
+    border-width: .5px;
+    border-style: dotted;
+    padding: 10px;
+    height: 90px;
+    border-radius: 10px;
+    margin-top: 20px;
+"
+}

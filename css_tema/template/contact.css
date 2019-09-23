@@ -1,0 +1,45 @@
+.base_compras, .base_paginas_extra, .info_metodos_pago, .contenedor_eleccion_whatsapp {
+    display: none;
+}
+
+.contenedor_eleccion {
+    display: flex;
+    justify-content: center;
+}
+
+.selector:hover {
+    color: blue;
+}
+
+.contendor_in_correo {
+    background: #f6f6f6;
+    padding: 10px;
+}
+
+.contenedor_eleccion_correo_electronico {
+    display: none;
+}
+
+.imagen_principal {
+    width: 100%;
+    height: 300px;
+    background-image: url('../../img_tema/portafolio/llamada_gratis_2.png');
+}
+
+.saber_mas {
+    background: #000 !important;
+    opacity: .85;
+    padding: .1px;
+    opacity: .8;
+}
+
+body {
+    background: #0030ff !important;
+}
+
+.contenedor_form {
+    background: #000712 !important;
+}
+.social_contact{
+    background: #0030ff;
+}

@@ -1,0 +1,25 @@
+.establecer_direccion, .establecer_punto_encuentro , .btn_direccion{
+    color: #f7f7ff !important;
+    background: #000312;
+    padding: 5px;
+}
+
+
+.asignado_actualmente {
+    background: #fbfbfb;
+    color: #000208;
+}
+.asignado_actualmente .text-muted {
+    color: #eaf2f6;!important;
+}
+.list-group-item{
+    margin-top: 30px;
+    height: 215px;
+}
+.contenedor_listado{
+    min-height: 160px;
+}
+.imagen_servicio{
+    max-height: 230px;
+
+}

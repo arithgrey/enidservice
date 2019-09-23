@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:5.6-apache-browsers-legacy
+    steps:
+      - run:
+          name: Update packages ...
+          command: sudo apt-get update
+      - run:
+          name: Check lint syntaxis LINT ENID...
+          command: find . -name \*.php -exec php -l "{}" \;

@@ -1,0 +1,90 @@
+
+.text_precio:hover {
+    color: white !important;
+}
+
+.contenedor_categorias_y_anuncio {
+    width: 95%;
+}
+.categorias_mas_vistas {
+    color: #000 !important;
+    text-transform: uppercase;
+    font-size: .9em;
+}
+
+/*
+.contenedor_anuncios_home {
+    background: #02111e;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 4px;
+}
+*/
+.anuncia_articulos, .btn_formas_pago {
+    font-size: 1em;
+    color: white;
+    background: #05757a;
+    padding: 2px;
+    margin-top: 5px;
+}
+
+.informacion_busqueda_productos_encontrados {
+    font-size: 1em;
+}
+
+.clasificaciones_sub_menu_ul {
+    display: inline-table;
+}
+
+.titulo_categorias {
+    font-size: 1.7em;
+    color: #0a1339;
+    font-weight: bold;
+}
+
+.text_categoria_sub_menu {
+    color: black;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .contenedor_anuncios_home {
+        width: 100%;
+        margin: 0 auto;
+    / / background: #00223f;
+        background: #10171d;
+    }
+
+    .contenedor_anunciate {
+        background: #0231fc;
+        color: white !important;
+        padding: 5px;
+    }
+
+    .contenedor_anunciate a {
+        color: white !important;
+    }
+
+    .contenedor_formas_pago {
+        display: none;
+    }
+
+    .contenedor_menu_productos_sugeridos {
+        display: none;
+    }
+
+    .informacion_busqueda_productos_encontrados {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    .categorias_mas_vistas {
+        display: none;
+    }
+
+    .anuncia_articulos {
+        background: #0231fc !important;
+
+    }
+}

@@ -1,0 +1,48 @@
+.text_total{
+    color: #040426;
+}
+.resumen_productos_solicitados{
+    background: #004dfb;
+    color: white;
+    padding: 20px;
+    margin-top: 30px
+}
+.contenedor_busqueda_global_enid_service {
+    display: none !important;
+}
+.largenav {
+    display: none;
+}
+
+.form_direccion_envio{
+    text-transform: uppercase;
+    min-height: 400px;
+}
+
+.contenedor_deuda_para_envio {
+    width: 60%;
+    margin: 0 auto;
+}
+
+
+.info_metodos_pago {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .contenedor_informacion_envio {
+        margin-top: 25px !important;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .contenedor_deuda_para_envio {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+.form-miembro-enid-service div{
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}

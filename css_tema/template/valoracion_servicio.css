@@ -1,0 +1,36 @@
+input[type="radio"] {
+    display: none;
+}
+
+.estrella:hover {
+    cursor: pointer;
+}
+
+label:hover, label:hover ~ label {
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-color: #004afc;
+    -webkit-text-stroke-width: .5px;
+
+}
+
+
+.recomendaria {
+    background: white;
+    color: black;
+    border: solid 1px;
+    padding: 10px;
+}
+
+.text-valoracion {
+
+}
+
+.nuevo {
+    margin-top: 20px;
+}
+
+.nota_recomendarias {
+    background: red;
+    padding: 5px;
+    color: white;
+}

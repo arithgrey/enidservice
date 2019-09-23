@@ -1,0 +1,237 @@
+.l_deseos:hover{
+    border:2px solid!important;
+}
+.btn-ventas-mayoreo {
+    margin-top: 20px;
+}
+
+.config_precio_envio {
+    display: none;
+    margin-top: 20px;
+}
+
+
+.tutulo_compras_en_casa {
+    margin-top: 20px;
+}
+
+.selector_compras_en_casa {
+    margin-top: 20px;
+}
+
+.selector_telefono_visible {
+    margin-top: 20px;
+}
+.contenedor-articulo:hover {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(15, 51, 158, 0.1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(15, 51, 158, 0.1);
+    box-shadow: 10px 10px 5px 0px rgba(15, 51, 158, 0.1);
+}
+
+.categoria_text:hover {
+    text-decoration: block !important;
+    color: black !important;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: white !important;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background: black !important;
+    padding: 7px;
+}
+
+.texto_existencia {
+    font-size: 1.3em;
+}
+
+
+@media only screen and (max-width: 400px) {
+    .productos_sugeridos {
+        width: 100%;
+    }
+
+    .info_producto {
+        width: 285px !important;
+    }
+}
+
+.img_sugerencia{
+    min-height: 270px;
+}
+.text_existencia{
+    font-size: 1.3em;
+    color: #000045;
+    font-weight: bold;
+}
+
+.nombre_producto_carrito{
+    font-size: 1.5em;
+}
+
+.text_ventas{
+    background: #003e84;
+    padding: 3px;
+    margin-top: 50px;
+    font-size: 1.2em;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.base_paginas_extra {
+    display: none;
+}
+
+.base_compras {
+    display: none;
+}
+
+.info_metodos_pago {
+    display: none;
+}
+
+.telefono_info_contacto {
+    border: 2px solid rgb(13, 62, 86) !important;
+}
+
+
+.contenedor_agregar_imagenes {
+    display: none;
+}
+
+.contenedor_tallas_disponibles {
+    padding: 20px;
+}
+
+.titulo_talla {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.contenedor_tallas {
+    border: solid 1px;
+    padding: 5px;
+    margin-top: 20px;
+}
+
+.talla_disponible {
+    background: white;
+    color: black;
+    border: solid 1px;
+    padding: 10px;
+}
+
+.talla_seleccionada {
+    background: white;
+    color: blue;
+    border: solid 2px;
+    padding: 10px;
+}
+
+.imagen_producto {
+    width: 95%;
+    height: 98%;
+    margin-top: 10px;
+}
+
+.contenedor_principal_imagen_producto {
+    height: 330px;
+}
+
+.contenedor_principal_informacion_producto {
+    height: 280px;
+}
+
+.info_producto {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+    height: 420px !important;
+    width: 95%;
+}
+
+.informacion_costo_envio {
+    background: black;
+    color: white;
+    font-size: .8em;
+    text-align: left !important;
+    padding: 3px;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .imagen_producto {
+        width: 99% !important;
+        height: 100%;
+        margin-top: 10px;
+    }
+
+    .contenedor_principal_imagen_producto {
+        height: 370px;
+    }
+
+    .contenedor_principal_informacion_producto {
+        height: 270px;
+    }
+
+    .info_producto {
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, .125);
+        border-radius: .25rem;
+        height: 510px !important;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .informacion_costo_envio {
+        background: black;
+        color: white;
+        font-size: .95em !important;
+        padding: 5px;
+    }
+}
+.sobre_el_producto{
+    height: 500px;
+    min-height: 400px;
+}
+.iconos_social a{
+    letter-spacing: 15px;
+}
+.iconos_social a img{
+    margin-right: 10px;
+}
+.escribir_valoracion {
+    background: #000;
+    padding: 10px;
+    font-weight: bold;
+}
+.escribir_valoracion:hover{
+    color:#ccc;
+
+}
+.estrella{
+    color: #000;
+}

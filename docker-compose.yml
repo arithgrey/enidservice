@@ -1,0 +1,41 @@
+version: '3'
+services:
+  web:
+      build: .
+      tty: true                         
+      ports:
+          - "80:80"            
+          - "443:443"
+      volumes:
+           - ./:/var/www/html
+           - ../docker_template/php.ini:/usr/local/etc/php          
+      networks:
+        - default                                   
+      extra_hosts:
+          - "backend.de.com:127.0.0.1"      
+      environment:
+        PHP_XDEBUG_ENABLED: 1      
+        XDEBUG_CONFIG: remote_host=<ip local machine>
+        PHP_IDE_CONFIG: "serverName=Backend"
+        #PHP_IDE_CONFIG: "serverName=developer"
+        WEBSERVER_USER: www-data 
+        
+      links:
+        - db      
+      container_name: enid_web
+      
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: dbtest
+      MYSQL_USER: root
+      MYSQL_PASSWORD: mysql
+    volumes:
+      - ../mysql/config:/etc/mysql/conf.d
+      - ../mysql/databasedata:/var/lib/mysql
+    ports:
+        - 3306:3306      
+    container_name: enid_db
