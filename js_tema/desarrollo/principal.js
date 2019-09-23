@@ -365,7 +365,24 @@ let response_carga_tickets = function (data) {
     $(".estatus_tickets").change(tikets_usuario);
 
 
-
+    $('.up_ab').click(function () {
+        $('.bloque_ab').addClass('d-none');
+    });
+    $('.up_backlog').click(function () {
+        $('.bloque_backlog').addClass('d-none');
+    });
+    $('.up_pendiente').click(function () {
+        $('.bloque_pendiente').addClass('d-none');
+    });
+    $('.up_proceso').click(function () {
+        $('.bloque_haciendo').addClass('d-none');
+    });
+    $('.up_hecho').click(function () {
+        $('.bloque_hecho').addClass('d-none');
+    });
+    $('.up_revision').click(function () {
+        $('.bloque_revision').addClass('d-none');
+    });
 
 
 }
