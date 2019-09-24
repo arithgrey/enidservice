@@ -153,61 +153,61 @@ if (!function_exists('get_base_html')) {
                     break;
                 case 2:
 
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-2 col-lg-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-2'>" . $info . "</{$tipo}>";
+                    $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-2 col-lg-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-2'>" . $info . "</{$tipo}>";
 
                     break;
                 case 3:
-                    $response = "<{$tipo} class='col-lg-3'>" . $info . "</{$tipo}>";
+                    $response = "<{$tipo} class='p-0 col-lg-3'>" . $info . "</{$tipo}>";
                     break;
                 case 4:
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-4 col-lg-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-4'>" . $info . "</{$tipo}>";
+                    $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-4 col-lg-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-4'>" . $info . "</{$tipo}>";
                     break;
                 case 5:
-                    $response = "<{$tipo} class='col-lg-5'>" . $info . "</{$tipo}>";
+                    $response = "<{$tipo} class='p-0 col-lg-5'>" . $info . "</{$tipo}>";
                     break;
                 case 6:
 
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-6 col-lg-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-6'>" . $info . "</{$tipo}>";
+                    $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-6 col-lg-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-6'>" . $info . "</{$tipo}>";
 
                     break;
 
                 case 7:
 
-                    $response = "<{$tipo} class='col-lg-7'>" . $info . "</{$tipo}>";
+                    $response = "<{$tipo} class='p-0 col-lg-7'>" . $info . "</{$tipo}>";
                     break;
 
 
                 case 8:
 
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-8 col-lg-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-8'>" . $info . "</{$tipo}>";
+                    $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-8 col-lg-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-8'>" . $info . "</{$tipo}>";
 
                     break;
                 case 9:
-                    $response = "<{$tipo} class='col-lg-9'>" . $info . "</{$tipo}>";
+                    $response = "<{$tipo} class='p-0 col-lg-9'>" . $info . "</{$tipo}>";
                     break;
 
                 case 10:
 
 
-                    $response = ($row > 0) ? "<{$tipo} class='col-lg-10 col-lg-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class='col-lg-10'>" . $info . "</{$tipo}>";
+                    $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-10 col-lg-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-10'>" . $info . "</{$tipo}>";
 
                     break;
 
                 case 11:
-                    $response = "<{$tipo} class='col-lg-11'>" . $info . "</{$tipo}>";
+                    $response = "<{$tipo} class='p-0 col-lg-11'>" . $info . "</{$tipo}>";
                     break;
 
 
                 case 12:
 
 
-                    $response = "<{$tipo} class='col-lg-12'>" . $info . "</{$tipo}>";
+                    $response = "<{$tipo} class='p-0 col-lg-12'>" . $info . "</{$tipo}>";
 
                     break;
 
                 case 13:
 
-                    $response = "<{$tipo} class='row '>" . $info . "</{$tipo}>";
+                    $response = "<{$tipo} class=' row '>" . $info . "</{$tipo}>";
 
                     break;
 
@@ -399,7 +399,7 @@ if (!function_exists('n_row_12')) {
     function n_row_12($attributes = '')
     {
 
-        return "<div class='row'><div class='col-lg-12' " . _parse_attributes($attributes) . ">";
+        return "<div class='row'><div class='col-lg-12 ' " . _parse_attributes($attributes) . ">";
 
     }
 }
@@ -2210,8 +2210,83 @@ function dd($a, $b, $col = 0)
     return $response;
 
 }
+function dd_p($a, $b, $col = 0, $extra_left ='' , $extra_right='')
+{
+    switch ($col) {
 
-function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row = 0)
+        case 1:
+
+            $response = d($a, "p-0 col-lg-1 ".$extra_left) . d($b, "p-0 col-lg-11 ".$extra_right);
+            break;
+
+        case 2:
+
+            $response = d($a, "p-0 col-lg-2 ".$extra_left) . d($b, "p-0 col-lg-10 ".$extra_right);
+
+            break;
+        case 3:
+
+            $response = d($a, "p-0 col-lg-3 ".$extra_left) . d($b, "p-0 col-lg-9 ".$extra_right);
+
+            break;
+
+        case 4:
+
+            $response = d($a, "p-0 col-lg-4 ".$extra_left) . d($b, "p-0 col-lg-8 ".$extra_right);
+
+            break;
+
+        case 5:
+
+            $response = d($a, "p-0 col-lg-5 ".$extra_left) . d($b, "p-0 col-lg-7 ".$extra_right);
+
+            break;
+
+        case 6:
+
+            $response = d($a, "p-0 col-lg-6 ".$extra_left) . d($b, "p-0 col-lg-6 ".$extra_right);
+
+            break;
+
+        case 7:
+
+            $response = d($a, "p-0 col-lg-7 ".$extra_left) . d($b, "p-0 col-lg-5 ".$extra_right);
+
+            break;
+
+        case 8:
+
+            $response =d($a, "p-0 col-lg-8 ".$extra_left) . d($b, "p-0 col-lg-4 ".$extra_right);
+
+            break;
+
+        case 9:
+
+            $response = d($a, "p-0 col-lg-9 ".$extra_left) . d($b, "p-0 col-lg-3 ".$extra_right);
+
+            break;
+
+        case 10:
+
+            $response = d($a, "p-0 col-lg-10 ".$extra_left) . d($b, "p-0 col-lg-2 ".$extra_right);
+
+            break;
+
+
+        default:
+
+            $response = d($a) . d($b);
+
+    }
+    return $response;
+
+}
+
+
+
+
+
+function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row = 1)
 {
 
     $extra = (is_string($horizontal)) ? $horizontal : "";

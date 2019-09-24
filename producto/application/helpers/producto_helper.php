@@ -357,7 +357,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = ajustar(
             d("PIEZAS", "f15 strong"),
             select_cantidad_compra($es_servicio, $existencia)
-            , 8
+            ,
+            8
 
         );
         //$r[] = text_diponibilidad($existencia, $es_servicio);

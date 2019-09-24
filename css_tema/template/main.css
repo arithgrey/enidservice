@@ -1481,6 +1481,14 @@ h5 {
 
     max-height: 50px !important;
 }
+.mah_250 {
+    max-height: 250px !important;
+}
+.mah_200 {
+    max-height: 200px !important;
+}
+
+
 
 .bloque_general_info {
     background: #00299c;
