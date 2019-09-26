@@ -423,7 +423,6 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "underline"
                 ]
             );
-            $r[] = br();
             $r[] = btn("Generar órden");
             $r[] = form_close();
             return append($r);

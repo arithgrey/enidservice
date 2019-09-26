@@ -1533,7 +1533,7 @@ class Servicio extends REST_Controller
                 $this->table->set_template(template_table_enid());
                 $tb_general = $this->table->generate();
                 $tb_headers = $this->get_headers_tipo_entrega($servicios);
-                $total = $tb_headers . br() . hr() . br() . $tb_general;
+                $total = $tb_headers .  hr() . $tb_general;
                 $response = $total;
 
 

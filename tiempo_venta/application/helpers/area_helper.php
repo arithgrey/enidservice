@@ -2,121 +2,115 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    if (!function_exists('render_tv')) {
+    function render_tv($data)
+    {
 
-        function render_tv($data)
-        {
+        $r[] = form_open("", ["class" => "form_tiempo_entrega", "id" => "form_tiempo_entrega"]);
+        $r[] = d(
 
-
-            $r[] = form_open("", ["class" => "form_tiempo_entrega", "id" => "form_tiempo_entrega"]);
-            $r[] = d(
-
-                d(input(
+            d(
+                input(
 
                     [
                         "name" => "q",
                         "placeholder" => "id, nombre",
                         "class" => "top_30 col-lg-12"
                     ]
-                ), 12)
+                ), 12
+            )
 
+            ,
+            4
+        );
+
+        $r[] = d(frm_fecha_busqueda(), 8);
+        $r[] = form_close();
+        $form = d(append($r), 1);
+        $z[] = d(
+            btw(
+                d(h("ARTÍCULO", 3), 1)
                 ,
-                4
-            );
-
-            $r[] = d(frm_fecha_busqueda(), 8);
-            $r[] = form_close();
-            $form = d(append($r), 1);
-
-            $z[] = br(3);
-            $z[] = d(
-                btw(
-                    d(h("ARTÍCULO", 3, "col-lg-12"), 1)
-                    ,
-                    $form
-                    ,
-                    8, 1
-
-                )
+                $form
                 ,
-                13
-            );
-            $z[] = d(place("place_tiempo_entrega"), 8, 1);
+                8, 1
 
-            return append($z);
+            )
+            ,
+            13
+        );
+        $z[] = d(place("place_tiempo_entrega"), 8, 1);
 
-        }
+        return append($z);
+
     }
-    if (!function_exists('get_hiddens_tickects')) {
 
-        function get_hiddens_tickects($action, $ticket)
-        {
-            return append(
+    function get_hiddens_tickects($action, $ticket)
+    {
+        return append(
+            [
+                hiddens(["class" => "action", "value" => $action]),
+                hiddens(["class" => "ticket", "value" => $ticket])
+            ]
+        );
+    }
+
+    /*
+    function get_format_buzon()
+    {
+
+        $r[] = h("BUZÓN", 3);
+        $r[] = d(append(
+
+            a_enid("HECHAS" .
+                span("", 'notificacion_preguntas_sin_leer_cliente'),
                 [
-                    hiddens(["class" => "action", "value" => $action]),
-                    hiddens(["class" => "ticket", "value" => $ticket])
+                    "class" => "a_enid_black preguntas btn_preguntas_compras",
+                    "id" => '0'
                 ]
-            );
-        }
-    }
-    if (!function_exists('get_format_buzon')) {
+            )
+            ,
 
-        function get_format_buzon()
-        {
-
-            $r[] = h("BUZÓN", 3);
-            $r[] = d(append(
-
-                a_enid("HECHAS" .
-                    span("", 'notificacion_preguntas_sin_leer_cliente'),
-                    [
-                        "class" => "a_enid_black preguntas btn_preguntas_compras",
-                        "id" => '0'
-                    ]
-                )
+            a_enid(
+                add_text("RECIBIDAS", span("", 'notificacion_preguntas_sin_leer_ventas'))
                 ,
+                [
+                    "class" => "a_enid_blue preguntas ",
+                    "id" => "1"
+                ])
 
-                a_enid(
-                    add_text("RECIBIDAS", span("", 'notificacion_preguntas_sin_leer_ventas'))
-                    ,
-                    [
-                        "class" => "a_enid_blue preguntas ",
-                        "id" => "1"
-                    ])
+        ));
 
-            ));
+        $r[] = place("place_buzon");
 
-            $r[] = place("place_buzon");
+        return append($r);
 
-            return append($r);
-
-        }
     }
-    if (!function_exists('get_format_valoraciones')) {
-        function get_format_valoraciones($valoraciones, $id_usuario, $alcance)
-        {
+     *
+     */
 
+    function get_format_valoraciones($valoraciones, $id_usuario, $alcance)
+    {
 
-            $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
-            $x[] = $valoraciones;
-            $url = path_enid("recomendacion", $id_usuario);
-            $x[] = d(
-                a_enid("VER COMENTARIOS",
-                    [
-                        "href" => $url,
-                        "class" => "a_enid_blue "
-                    ]
-                ),
-                "text-center top_20"
-            );
+        $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
+        $x[] = $valoraciones;
+        $url = path_enid("recomendacion", $id_usuario);
+        $x[] = d(
+            a_enid("VER COMENTARIOS",
+                [
+                    "href" => $url,
+                    "class" => "a_enid_blue "
+                ]
+            ),
+            "text-center top_20"
+        );
 
-            $x[] = d($alcance, " text-center ");
-            $r[] = d(append($x), 3);
-            $r[] = d(place("place_ventas_usuario"), 9);
-            return d(append($r), "text-center");
+        $x[] = d($alcance, " text-center ");
+        $r[] = d(append($x), 3);
+        $r[] = d(place("place_ventas_usuario"), 9);
+        return d(append($r), "text-center");
 
-        }
     }
+
     function crea_alcance($alcance)
     {
 
@@ -125,22 +119,17 @@ if (!function_exists('invierte_date_time')) {
 
             $alcance = $alcance[0];
             $maximo = $alcance["maximo"];
+            $z[] = td($maximo, ["class" => 'num_alcance', "id" => $maximo]);
+            $z[] = td($alcance["promedio"], ["class" => 'num_alcance']);
+            $z[] = td($alcance["minimo"], ["class" => 'num_alcance', "id" => $maximo]);
+            $r[] = tr(append($z));
 
-            $r[] = h("ALCANCE DE TUS PRODUCTOS", 3);
-            $r[] = "<table>";
-            $r[] = "<tr>";
-            $r[] = td($maximo, ["class" => 'num_alcance', "id" => $maximo]);
-            $r[] = td($alcance["promedio"], ["class" => 'num_alcance']);
-            $r[] = td($alcance["minimo"], ["class" => 'num_alcance', "id" => $maximo]);
-            $r[] = "</tr>";
+            $x[] = td("Tope", ["class" => 'num_alcance']);
+            $x[] = td("Promedio", ["class" => 'num_alcance']);
+            $x[] = td("Mínimo", ["class" => 'num_alcance']);
+            $r[] = tr(append($x));
 
-            $r[] = "<tr>";
-            $r[] = td("Tope", ["class" => 'num_alcance']);
-            $r[] = td("Promedio", ["class" => 'num_alcance']);
-            $r[] = td("Mínimo", ["class" => 'num_alcance']);
-            $r[] = "</tr>";
-            $r[] = "</table>";
-            $response = append($r);
+            $response = add_text(h("ALCANCE DE TUS PRODUCTOS", 3), tb(append($r)));
         }
         return $response;
 

@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] =  place("notificacion_tags");
             $r[] =  btn("GENERAR TAGS",["class"=>"top_20"]);
             $r[] =  form_close();
-            $r[] =  d(place("texto_convertido", ["id"=> "texto_convertido"]), "top_50");
+            $r[] =  d(place("texto_convertido", ["id"=> "texto_convertido"]), "mt-5");
             return  d(d(append($r),6,1),"row top_50");
 
         }

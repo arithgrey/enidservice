@@ -198,7 +198,7 @@ if (!function_exists('invierte_date_time')) {
                 $utilidad_global = $utilidad_global + $utilidad;
             }
 
-            $x[] = d(h("UTILIDAD", 3) . br() . h($utilidad . " MXN ", 5), "col-lg-3 text-center align-self-center");
+            $x[] = d(h("UTILIDAD", 3) .  h($utilidad . " MXN ", 5), "col-lg-3 text-center align-self-center");
             $response[] = d(append($x), "row border  top_30");
 
         }

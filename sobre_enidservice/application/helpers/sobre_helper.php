@@ -7,10 +7,10 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = img(["src" => "../img_tema/portafolio/bte.png" ,"class" => "mah_500"]) ;
         $x[] = h("¿Por qué Enid Service?",2,"strong text-uppercase top_30 bottom_30 text-center") ;
-
         $x[] =
             btw(
-                d(h("Relaciones" ,3 , "strong"),1)
+                d(
+                    h("Relaciones" ,3 , "strong"),1)
                 ,
                 d("Facilitamos la comunicación entre negocios y consumidores,  por lo tanto el éxito de las personas a quienes ayudamos, define nuestro propio éxito ",
                     "f16  top_10 letter-spacing-2 text-muted"
@@ -54,8 +54,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = img(["src" => "../img_tema/portafolio/ejemplo-personas.jpg" ,"class" => "mah_500 top_50" ] );
         $r[] = h("Comienza ahora",2,"text-uppercase top_30 text-center top_50 ") ;
         $r[] = d(btn("Empieza a anunciarte ya mismo! ",[],1,1,0,path_enid("vender")), 4, 1);
-        $r[] = br(5);
-
         return append($r);
     }
 

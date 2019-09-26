@@ -365,16 +365,13 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
                 $x[] = d($opiniones, "label-rating");
-                $x[] = br(3);
                 $x[] = p($descripcion);
                 $r[] = d(append($x), 6);
                 $z = [];
                 $text_precio = $precio * $articulos;
                 $z[] = h($text_precio . "MXN");
                 $z[] = d($text_envio, "text-success text-center");
-                $z[] = br();
                 $z[] = frm_pre_pedido($id, $id_producto, "", 5, 0, 1, $articulos);
-                $z[] = br();
                 $z[] = btn("Detalles", [], 1, 1, 0, get_url_servicio($id_producto));
                 $r[] = d(append($z), 3);
                 $response[] = addNRow(append($r), ["class" => "card "], ["class" => "border top_20"]);

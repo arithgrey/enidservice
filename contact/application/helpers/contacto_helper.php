@@ -199,7 +199,6 @@ if (!function_exists('invierte_date_time')) {
             $response = "";
             if ($ubicacion > 0) {
                 $r[] = heading("VISÍTANOS!", 1, "white");
-                $r[] = br();
                 $r[] = heading(
                     "Eje Central Lázaro Cárdenas 38, Centro Histórico C.P. 06000 CDMX, local número 406",
                     4,

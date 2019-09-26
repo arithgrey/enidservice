@@ -147,9 +147,6 @@ if (!function_exists('invierte_date_time')) {
             $z[] = place("final");
             $r[] = d(append($z), "contenedor_respuestas padding_10");
         }
-
-
-        $r[] = br();
         $r[] = form_open("", ["class" => 'form_comentario']);
         $r[] = d("-", ["id" => "summernote", "class" => "summernote", "name" => "respuesta"], 1);
         $r[] = hiddens(["class" => 'id_pregunta', "name" => 'id_pregunta', "value" => $id_pregunta]);

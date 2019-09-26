@@ -10,7 +10,6 @@ if (!function_exists('invierte_date_time')) {
         $num_compras = $data["num_compras"];
         $id_recibo = $data["id_recibo"];
 
-
         $re[] = frm_pedidos($orden);
         $re[] = d(crea_estado_venta($status, $r), 1);
         $re[] = format_estados_venta($status, $r, $orden);

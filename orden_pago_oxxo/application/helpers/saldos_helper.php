@@ -114,7 +114,7 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 1
             );
-            $r[] = br();
+
             $r[] = form_close();
             return append($r);
 
