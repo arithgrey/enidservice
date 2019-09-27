@@ -195,21 +195,21 @@ class Home extends CI_Controller
         $fechaT = date("Y-m-d e");
         $fecha = new DateTime($fecha);
         $fechaTest = new DateTime($fechaT);
-        $fechaTest->add(new DateInterval('P' . $tiempo . 'D'));
+        $fechaTest->add(new DateInterval('P1D'));
 
         if ($fechaTest->format("D") == "Sat") {
-            $fecha->add(new DateInterval('P2D'));
+            $fecha->add(new DateInterval('P1D'));
         } else if ($fechaTest->format("D") == "Sun") {
             $fecha->add(new DateInterval('P1D'));
         } else {
-            $fecha->add(new DateInterval('P' . $tiempo . 'D'));
+            $fecha->add(new DateInterval('P1D'));
         }
 
         $fecha_entrega_promedio = $fecha->format('l, d M Y');
         $fecha_entrega_promedio = $trans->translate($source, $target, strtoupper($fecha_entrega_promedio));
 
 
-        return d("REALIZA HOY TU PEDIDO Y TENLO EL" . $fecha_entrega_promedio, "mt-5 tiempo_entrega_promedio ");
+        return d("REALIZA HOY TU PEDIDO Y " . strong(add_text("TENLO EL ", $fecha_entrega_promedio)) , "mt-5 tiempo_entrega_promedio ");
     }
 
     private function costruye_descripcion_producto()

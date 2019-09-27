@@ -13,15 +13,15 @@ if (!function_exists('invierte_date_time')) {
         $punto_encuentro = $data["punto_encuentro"];
 
 
-        $att = (is_mobile()) ? "" : "strong w-75 mx-auto ";
-        $r[] = d(flex(
-            h("SELECCIONA UNA LINEA ", 2, $att),
+        $att = (is_mobile()) ? "strong" : "strong  mx-auto ";
+        $r[] = flex(
+            h("SELECCIONA TU LINEA MÁS CERCANA ", 2, $att),
             $data["leneas_metro"],
             ["d-lg-flex align-items-center contenedor_estaciones"],
-            "col-lg-5 text_seleccion_linea",
+            "col-lg-5 text_seleccion_linea p-0",
             "col-lg-7 place_lineas bg-light p-5 "
 
-        ), 13);
+        );
 
         /*
         $r[] = d(d(
@@ -35,10 +35,10 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] =
             flex(
-                h("SELECCIONA UNA ESTACIÓN ", 2, $att),
+                h("¿CUAL ESTACIÓN SE TE FACILITA? ", 2,"strong"),
 
-                "", ["d-lg-flex align-items-center row desglose_estaciones"],
-                "col-lg-5 text_seleccion_estacion",
+                "", ["d-lg-flex align-items-center desglose_estaciones"],
+                "col-lg-5 text_seleccion_estacion p-0",
                 "place_estaciones_metro col-lg-7 bg-light p-5"
             );
 
@@ -61,7 +61,7 @@ if (!function_exists('invierte_date_time')) {
                 ]));
             }
 
-            $r[] = d(append($z), 'formulario_quien_recibe ');
+            $r[] = d(append($z), 'formulario_quien_recibe');
 
         } else {
 
@@ -290,7 +290,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d("", 9);
         $r[] = d(btn("CONTINUAR", ["class" => "mt-5 "]), "col-lg-3");
 
-        $r[] = place("place_notificacion_punto_encuentro");
+        $r[] = place("place_notificacion_punto_encuentro ");
         $r[] = form_close();
         return append($r);
 

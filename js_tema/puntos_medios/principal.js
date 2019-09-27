@@ -13,12 +13,11 @@ window.onpopstate = function (event) {
 
 $(document).ready(() => {
 
+    $(".botton_enviar_solicitud").click(() => {
 
-    $(".botton_enviar_solicitud").click(()=>{
 
-
-        despliega([".seccion_horarios_entrega"] , 0);
-        despliega([".informacion_del_cliente"] ,1);
+        despliega([".seccion_horarios_entrega"], 0);
+        despliega([".informacion_del_cliente"], 1);
         add_class(".continuar", "mt-5");
         set_option("vista", 4);
     });
@@ -89,15 +88,14 @@ $(document).ready(() => {
         }
     });
 
-    if(option["in_session"] < 1){
 
-        despliega([".informacion_del_cliente",".seccion_horarios_entrega", ".desglose_estaciones", ".formulario_quien_recibe"], 0);
-        rm_class(".desglose_estaciones", "d-lg-flex");
-    }
+    despliega([".informacion_del_cliente", ".seccion_horarios_entrega", ".desglose_estaciones", ".formulario_quien_recibe"], 0);
+    rm_class(".desglose_estaciones", "d-lg-flex");
+
+
     if ($('#fecha').val().length > 0) {
         $('#fecha').next('label').addClass('focused_input');
     }
-
 
 
 });
@@ -163,12 +161,11 @@ let response_estaciones = (data) => {
 
 
     set_option("vista", 2);
-    despliega([".place_lineas", ".contenedor_estaciones", ".text_seleccion_linea"],0);
+    despliega([".place_lineas", ".contenedor_estaciones", ".text_seleccion_linea"], 0);
     //despliega([".place_estaciones_metro",".ksearch", ".text_seleccion_estacion"],1);
     despliega([".seccion_horarios_entrega", ".desglose_estaciones", ".place_estaciones_metro", ".place_estaciones_metro", ".text_seleccion_estacion"], 1);
     add_class(".desglose_estaciones", "d-lg-flex");
     render_enid(".place_estaciones_metro", data);
-
 
 
     $(".punto_encuentro").click(muestra_horarios);
@@ -192,11 +189,11 @@ let muestra_horarios = function () {
 
     if (id > 0) {
         set_option(["punto_encuentro_previo", id, "vista", 3, "id_punto_encuentro", id]);
-        set_parameter(".punto_encuentro" , id);
+        set_parameter(".punto_encuentro", id);
 
         rm_class(".desglose_estaciones", "d-lg-flex");
 
-        showonehideone(".formulario_quien_recibe", ".desglose_estaciones" );
+        showonehideone(".formulario_quien_recibe", ".desglose_estaciones");
     }
 
 };
@@ -245,7 +242,7 @@ let focus_inputs_form = (nombre, correo, telefono, pwlength) => {
 
         $(".form_punto_encuentro .correo").addClass("focus_error");
     }
-    if (telefono !=  8  ||  telefono !=  10) {
+    if (telefono != 8 || telefono != 10) {
 
         $(".form_punto_encuentro .telefono").addClass("focus_error");
     }
@@ -285,7 +282,6 @@ let set_link = function () {
 
 let notifica_punto_entrega = e => {
 
-
     let url = "../q/index.php/api/cobranza/solicitud_cambio_punto_entrega/format/json/";
     if (get_parameter(".primer_registro") > 0) {
         url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
@@ -296,6 +292,7 @@ let notifica_punto_entrega = e => {
     e.preventDefault();
 };
 let response_notificacion_punto_entrega = (data) => {
+
 
     despliega([".place_notificacion_punto_encuentro", ".form_punto_encuentro_horario"], 0);
     let url = (get_parameter(".primer_registro") == 1) ?
@@ -312,7 +309,7 @@ let agregar_nota = () => {
 
 }
 let valida_retorno = function () {
-    let v =  parseInt(get_option("vista"));
+    let v = parseInt(get_option("vista"));
 
     switch (v) {
         case 1:
@@ -320,8 +317,8 @@ let valida_retorno = function () {
             break;
         case 2:
 
-            despliega([".place_lineas", ".contenedor_estaciones", ".text_seleccion_linea"],1);
-            despliega([".place_estaciones_metro", ".ksearch", ".text_seleccion_estacion"],0);
+            despliega([".place_lineas", ".contenedor_estaciones", ".text_seleccion_linea"], 1);
+            despliega([".place_estaciones_metro", ".ksearch", ".text_seleccion_estacion"], 0);
             break;
         case 3:
 
@@ -334,8 +331,8 @@ let valida_retorno = function () {
         case 4:
 
             set_option("vista", 3);
-            despliega([".seccion_horarios_entrega"] , 1);
-            despliega([".informacion_del_cliente"] ,0);
+            despliega([".seccion_horarios_entrega"], 1);
+            despliega([".informacion_del_cliente"], 0);
             rm_class(".continuar", "mt-5");
 
             break;
