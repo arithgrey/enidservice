@@ -46,7 +46,6 @@ if (!function_exists('invierte_date_time')) {
         $proceso_compra = $data["proceso_compra"];
         $tiempo_entrega = $data["tiempo_entrega"];
         $usuario = $data["usuario"];
-        $desc_web = $data["desc_web"];
         $q2 = $data["q2"];
         $is_mobile = $data["is_mobile"];
         $id_publicador = $data["id_publicador"];
@@ -54,10 +53,7 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio = pr($s, "id_servicio");
         $nombre = pr($s, "nombre_servicio");
         $es_servicio = pr($s, "flag_servicio");
-        $es_nuevo = pr($s, "flag_nuevo");
-        $url_yt = pr($s, "url_vide_youtube");
         $existencia = pr($s, "existencia");
-        $color = pr($s, "color");
         $precio = pr($s, "precio");
         $id_ciclo_facturacion = pr($s, "id_ciclo_facturacion");
         $entregas_en_casa = pr($s, "entregas_en_casa");
@@ -67,55 +63,17 @@ if (!function_exists('invierte_date_time')) {
         $imagenes = img_lateral($imgs, $nombre, $is_mobile);
 
 
-        $r[] = d(
-            btw(
-                d($imagenes["preview"], " align-self-center col-lg-2  d-none d-lg-block d-xl-block d-md-block d-xl-none row"),
-                d($imagenes["imagenes_contenido"], "tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0   col-lg-6 col-lg-offset-3 align-self-center"),
-                "d-flex"
-            )
-            .
-            d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row bg-light ")
-            ,
-            "col-lg-9 mb-5"
+        $r[] = btw(
 
-
+            d($imagenes["preview"], " align-self-center col-lg-2  d-none d-lg-block d-xl-block d-md-block d-xl-none p-0"),
+            d($imagenes["imagenes_contenido"], "p-0 tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0   col-lg-6 col-lg-offset-3 align-self-center"),
+            "d-flex col-lg-9 mb-5"
         );
-
-
-        /*
-        $c[] =
-                btw(
-
-                    d($imagenes["preview"], "thumbs align-self-center")
-                    ,
-                    d($imagenes["imagenes_contenido"], "tab-content  col-lg-6 col-lg-offset-3 align-self-center")
-                    ,
-                    "d-flex col-lg-9 left-col "
-
-                );
-        */
-
-
-        /*
-        $c[] = central(
-            $proceso_compra,
-            $tiempo_entrega,
-            $color,
-            $es_servicio,
-            $es_nuevo,
-            $usuario,
-            $id_publicador,
-            $tel_visible,
-            $is_mobile,
-            0
-        );
-        */
+        $r[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row bg-light ");
 
 
         if ($es_servicio < 1):
             $nombre_producto = d(h(substr($nombre, 0, 60), 1, "f19  strong "));
-            //if ($existencia > 0):
-
             $x[] = venta_producto(
                 $nombre,
                 $nombre_producto,
@@ -138,41 +96,36 @@ if (!function_exists('invierte_date_time')) {
                 $tiempo_entrega);
 
 
-        //else:
-
-        //$x[] = no_visible($nombre_producto, $precio, $existencia, $es_servicio,/* */ $id_servicio);
-
-
-        //endif;
-
         else:
 
-            $f[] = d(h(substr(strtoupper($nombre), 0, 70), 2), "top_50");
-            $f[] = h(
-                text_servicio(
-                    $es_servicio,
-                    $precio,
-                    $id_ciclo_facturacion
-                ),
-                3,
-                'card-title pricing-card-title '
+            $f[] = h(substr(strtoupper($nombre), 0, 70), 2);
+
+            $str_servicio = text_servicio(
+                $es_servicio,
+                $precio,
+                $id_ciclo_facturacion
             );
+
+            if (strlen($str_servicio) > 0) {
+                $f[] = h($str_servicio, 3, 'card-title pricing-card-title ');
+            }
+
 
             $f[] = frm_compra($es_servicio, $existencia, $id_servicio, $in_session, $q2, $precio, $id_ciclo_facturacion);
             $x[] = d(append($f));
 
         endif;
 
-        $r[] = d(append($x), "col-lg-3 inf_right");
-        $response[] = append($r);
+        $r[] = d(append($x), 3);
+        $producto =  append($r);
 
 
-        $response[] = d(h("DESCRIPCIÓN DEL PRODUCTO", 1, "strong"), 10, 1);
-        $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"), 10, 1);
+        $response[] = d(h("DESCRIPCIÓN DEL PRODUCTO", 1, "strong"), "col-lg-10 col-lg-offset-1 mt-lg-5 p-0 top_sm_100");
+        $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"),"col-lg-10 col-lg-offset-1 mt-5 p-0 ");
         $response[] = d(desc_servicio($s, $proceso_compra, $tiempo_entrega, $data, $imagenes), 10, 1);
 
         $response[] = d(d("", "place_valoraciones"), 10, 1);
-        $response[] = d(h("TAMBIÉN TE PODRÍA  INTERESAR", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none");
+        $response[] = d(h("TAMBIÉN TE PODRÍA  INTERESAR", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none p-0");
         $response[] = d(d("", "place_tambien_podria_interezar  bottom_100"), 10, 1);
 
         $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);
@@ -182,7 +135,9 @@ if (!function_exists('invierte_date_time')) {
 
         $xx[] = $boton_editar;
         $xx[] = append($response);
-        return append($xx);
+        $compra = append($xx);
+        return dd($producto, $compra);
+
 
 
     }
@@ -357,12 +312,13 @@ if (!function_exists('invierte_date_time')) {
         $r[] = ajustar(
             d("PIEZAS", "f15 strong"),
             select_cantidad_compra($es_servicio, $existencia)
-            , 8
+            ,
+            8
 
         );
         //$r[] = text_diponibilidad($existencia, $es_servicio);
-        $r[] = d(btn("COMPRAR", ["class" => "text-left"]), "mt-3");
-        $r[] = d(btn("CONTRA ENTREGA", ["class" => "text-left"]), "mt-3");
+        $r[] = btn("COMPRAR", ["class" => "text-left mt-3"]);
+        $r[] = btn("CONTRA ENTREGA", ["class" => "text-left mt-3"]);
         $r[] = form_close();
 
         return d(append($r), "contenedor_form");
@@ -374,21 +330,14 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $ext =  (prm_def($_GET, "debug")) ? "&debug=1" : "";
+        $ext = (prm_def($_GET, "debug")) ? "&debug=1" : "";
         $url = "../procesar/?w=1" . $ext;
 
-        $r[] = '<form action="'.$url.'" method="POST" >';
+        $r[] = '<form action="' . $url . '" method="POST" >';
         $r[] = form_hidden(["id_servicio" => $id_servicio, "es_servicio" => 1]);
-        $r[] = btn(
-            text_icon("fa fa fa-long-arrow-right", "COTIZAR ", [], 0),
-            [
-                'class' => "top_30 bottom_30"
-
-            ],
-            1,
-            1);
+        $r[] = btn(text_icon("fa fa fa-long-arrow-right", "COTIZAR ", [], 0), ["class"=>"pt-sm-5 " ]);
         $r[] = form_close();
-        return d(append($r), "contenedor_form");
+        return d(append($r), "contenedor_form mt-5");
 
 
     }
@@ -490,10 +439,10 @@ if (!function_exists('invierte_date_time')) {
 
 
             $i = pre_youtube($imgs, $yt);
-            $izquierdo = ($i["es_imagen"] > 0) ? "col-lg-7" : "col-lg-6 col-sm-12";
-            $derecha = ($i["es_imagen"] > 0) ? "col-lg-5" : "col-lg-6 col-sm-12";
+            $izquierdo = ($i["es_imagen"] > 0) ? "col-lg-7 p-0" : "col-lg-6 col-sm-12";
+            $derecha = ($i["es_imagen"] > 0) ? "col-lg-5 p-0" : "col-lg-6 col-sm-12";
 
-            $flex = ($i["es_imagen"] > 0) ? "" : ["d-lg-flex"];
+            $flex = ($i["es_imagen"] > 0) ? "align-items-center" : ["d-lg-flex "];
 
             $r[] = flex(
                 append($z),
@@ -726,7 +675,8 @@ if (!function_exists('invierte_date_time')) {
                 }
 
 
-                $preview[] = img(
+                $preview[] =
+                    img(
                     [
                         'src' => $url,
                         'alt' => $nombre_servicio,
@@ -737,15 +687,16 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
-                $preview_mb[] = img(
-                    [
-                        'src' => $url,
-                        'alt' => $nombre_servicio,
-                        'class' => 'col-xs-3 col-sm-3 mt-2 border  mh_50 mah_50 mr-1 mb-1' . $extra_class,
-                        'id' => $z,
-                        'data-toggle' => 'tab',
-                        'href' => "#imagen_tab_" . $z
-                    ]
+                $preview_mb[] =img(
+                        [
+                            'src' => $url,
+                            'alt' => $nombre_servicio,
+                            'class' => 'col-xs-3 col-sm-3 mt-2 border  mh_50 mah_50 mr-1 mb-1' . $extra_class,
+                            'id' => $z,
+                            'data-toggle' => 'tab',
+                            'href' => "#imagen_tab_" . $z
+                        ]
+
                 );
 
 
@@ -894,7 +845,7 @@ if (!function_exists('invierte_date_time')) {
         function tiempo_entrega($proceso_compra, $tiempo_entrega)
         {
 
-            return ($proceso_compra == 0) ? d($tiempo_entrega, 1) : "";
+            return ($proceso_compra == 0) ? $tiempo_entrega : "";
         }
     }
     if (!function_exists('nombre_vendedor')) {
@@ -1000,7 +951,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $ext = prm_def($_GET, "debug") ? "&debug=1" : "";
-        $url = "../puntos_medios/?producto=" . $id_servicio.$ext;
+        $url = "../puntos_medios/?producto=" . $id_servicio . $ext;
         $r[] = '<form class="form_pre_puntos_medios" action="' . $url . '"  method="POST">';
         $r[] = hiddens([
             "class" => "servicio",

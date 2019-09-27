@@ -32,14 +32,14 @@ if (!function_exists('invierte_date_time')) {
         );
         $a = d(append($f), "d-flex flex-column justify-content-center text-center");
         $z[] = place("table_orden_1");
-        $z[] = d(criterios(), "d-flex row  justify-content-end");
+        $z[] = criterios();
         $z[] = add_text(
             comentarios($comentarios, $data["respuesta_valorada"]),
             d(redactar($comentarios, $num, $servicio), "mt-1")
         );
 
         $b = d(append($z), 12);
-        return ajustar($a, $b, 4, "top_100 ");
+        return d($a,4).d("","col-lg-1"). d($b, 7);
 
     }
 
@@ -162,7 +162,7 @@ if (!function_exists('invierte_date_time')) {
 
         );
         $r[] = place("nuevo");
-        $r[] = btn(text_icon('fa fa-chevron-right ir', "ENVIAR RESEÑA "), "top_40 bottom_40");
+        $r[] = btn(text_icon('fa fa-chevron-right ir', "ENVIAR RESEÑA "), ["class"=> "top_40 bottom_40"]);
         $r[] = place("place_registro_valoracion");
         $r[] = form_close();
 
@@ -170,6 +170,8 @@ if (!function_exists('invierte_date_time')) {
         $encuesta[] = d(d(append($r), 10, 1), 1);
         $encuesta[] = d(d($social, "col-lg-10 col-lg-offtse-1 bottom_50"), 1);
         $response[] = d(append($encuesta), "col-lg-6 col-lg-offset-3 shadow padding_10 bottom_50");
+
+
         return append($response);
 
     }
@@ -253,15 +255,14 @@ if (!function_exists('invierte_date_time')) {
 
                 $extra_criterios =
                     [
-                        "style" => 'background:#04013c;',
-                        "class" => 'criterio_busqueda white ordenar_valoraciones_button  padding_5 white text-center',
+                        "class" => 'criterio_busqueda white ordenar_valoraciones_button  padding_5 white text-center bg-dark',
                         "id" => $z
                     ];
             }
             $r[] = d($criterios[$z], $extra_criterios);
         }
 
-        return append($r);
+        return d(append($r), "d-flex   justify-content-end");
     }
 
     function resumem_valoracion($numero_valoraciones, $persona = 0)
