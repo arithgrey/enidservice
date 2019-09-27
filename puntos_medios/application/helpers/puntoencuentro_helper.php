@@ -71,7 +71,7 @@ if (!function_exists('invierte_date_time')) {
         }
         $r[] = hiddens(["class" => "primer_registro", "value" => $primer_registro]);
 
-        return d(append($r), "col-lg-8 col-lg-offset-2 mt-5 mb-5 proceso_compra_pe");
+        return d(append($r), "col-lg-8 col-lg-offset-2 mt-5 mb-5 proceso_compra_pe p-0");
 
     }
 

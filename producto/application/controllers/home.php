@@ -207,9 +207,9 @@ class Home extends CI_Controller
 
         $fecha_entrega_promedio = $fecha->format('l, d M Y');
         $fecha_entrega_promedio = $trans->translate($source, $target, strtoupper($fecha_entrega_promedio));
-        $text_tiempo = span($fecha_entrega_promedio,  'strong ml-1  mb-2 bg-light  p-1');
 
-        return d("REALIZA HOY TU PEDIDO Y TENLO EL" . $text_tiempo, "mt-5 tiempo_entrega_promedio ");
+
+        return d("REALIZA HOY TU PEDIDO Y TENLO EL" . $fecha_entrega_promedio, "mt-5 tiempo_entrega_promedio ");
     }
 
     private function costruye_descripcion_producto()

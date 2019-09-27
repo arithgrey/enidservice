@@ -2,6 +2,7 @@
 .navbar .searchbox .dropdown-menu {
     width: 270px
 }
+
 .search {
     position: relative;
     margin: 15px;
@@ -129,9 +130,11 @@ th:hover {
     font-size: 1.5em;
     color: #bdddff;
 }
-.dropdown-toggle::after{
-    display: none!important;
+
+.dropdown-toggle::after {
+    display: none !important;
 }
+
 .alerta_notificacion_ok {
     background: #0a399b;
     padding: 5px;
@@ -359,6 +362,7 @@ li {
     .btn_whatsApp {
         display: block !important;
     }
+
     .tel_contacto_btn {
         display: block;
     }
@@ -490,49 +494,57 @@ input {
     height: 30px !important;
     width: 100%;
 }
-.input_enid_format{
+
+.input_enid_format {
     align-self: flex-end;
     position: relative;
 }
-.input_enid_format input{
 
-    border: none!important;
-    border-bottom: solid 1px grey!important;
-    height: 40px!important;
-    appearance: none!important;
+.input_enid_format input {
+
+    border: none !important;
+    border-bottom: solid 1px grey !important;
+    height: 40px !important;
+    appearance: none !important;
     margin: 0;
-    -webkit-appearance: none!important;
+    -webkit-appearance: none !important;
     outline: none;
 }
-.input_enid_format input:hover{
 
-    border: none!important;
-    border-bottom: solid 1px grey!important;
-}
-.input_enid_format:hover{
+.input_enid_format input:hover {
 
-    border: none!important;
-    border-bottom: solid 1px grey!important;
+    border: none !important;
+    border-bottom: solid 1px grey !important;
 }
 
+.input_enid_format:hover {
 
-.input_enid_format input::-webkit-outer-spin-button, -webkit-inner-spin-button{
+    border: none !important;
+    border-bottom: solid 1px grey !important;
+}
+
+
+.input_enid_format input::-webkit-outer-spin-button, -webkit-inner-spin-button {
     -webkit-appearance: none !important;
 }
-.input_enid_format input::placeholder{
+
+.input_enid_format input::placeholder {
     color: transparent;
 
 }
-.input_enid_format input::focus{
+
+.input_enid_format input::focus {
     outline: none !important;
     -webkit-appearance: none !important;
 }
-.input_enid_format label{
+
+.input_enid_format label {
     bottom: 0;
     color: silver;
     left: 3px;
     position: absolute;
 }
+
 .focused_input {
     color: #000 !important;
     font-weight: bold;
@@ -540,9 +552,19 @@ input {
     transition: all 1s ease;
     left: 0px !important
 }
-.input_focus::-webkit-input-placeholder { color: silver!important; }
-.input_focus:-moz-placeholder { color: silver!important; }
-.input_focus:-ms-input-placeholder { color: silver!important; }
+
+.input_focus::-webkit-input-placeholder {
+    color: silver !important;
+}
+
+.input_focus:-moz-placeholder {
+    color: silver !important;
+}
+
+.input_focus:-ms-input-placeholder {
+    color: silver !important;
+}
+
 /*
 .input_enid_format {
 
@@ -645,7 +667,7 @@ div.pagination li.active span:hover {
 
 #flipkart-navbar {
 
-    //background: linear-gradient(to right, #000000, #081a54);
+/ / background: linear-gradient(to right, #000000, #081a54);
     background: linear-gradient(to right, #000000, #010f3e);
     min-height: 90px;
 
@@ -913,7 +935,7 @@ img {
 
     object-fit: cover !important;
     max-width: 100%;
-    width: auto\9;
+    width: auto \9;
     height: auto;
     vertical-align: middle;
     border: 0;
@@ -932,7 +954,7 @@ img {
 
 h1 {
     margin: 0 !important;
-    color: #000!important;
+    color: #000 !important;
 }
 
 .texto_envio {
@@ -1089,6 +1111,7 @@ table {
     margin-top: 100px;
     display: block;
 }
+
 .top_150 {
     margin-top: 150px;
     display: block;
@@ -1098,6 +1121,7 @@ table {
     margin-top: 200px;
     display: block;
 }
+
 .top_400 {
     margin-top: 400px;
     display: block;
@@ -1107,7 +1131,6 @@ table {
     margin-top: 500px;
     display: block;
 }
-
 
 
 .bottom_10 {
@@ -1151,6 +1174,7 @@ table {
 .cursor_pointer:hover, .cursor:hover {
     cursor: pointer;
 }
+
 .underline {
     text-decoration: underline;
 }
@@ -1176,7 +1200,7 @@ table {
 
 h2 {
     text-transform: uppercase;
-    color: #000!important;
+    color: #000 !important;
 }
 
 .links:hover {
@@ -1246,10 +1270,11 @@ h2 {
     height: 30px !important;
 }
 
-.f19{
+.f19 {
 
     font-size: 1.9em !important;
 }
+
 .f2 {
     font-size: 2em;
 }
@@ -1286,9 +1311,11 @@ select {
     text-align: center;
     width: 100%;
 }
-.fz_30{
-    font-size: 30px!important;
+
+.fz_30 {
+    font-size: 30px !important;
 }
+
 .letter-spacing-15 {
     letter-spacing: 1.5px;
 }
@@ -1355,19 +1382,20 @@ html {
 .hps:hover {
     border: 1px solid #000000 !important;
 }
+
 h3 {
 
-    color: #000!important;
+    color: #000 !important;
 }
 
 h4 {
 
-    color: #000!important;
+    color: #000 !important;
 }
 
 h5 {
 
-    color: #000!important;
+    color: #000 !important;
 }
 
 
@@ -1390,9 +1418,11 @@ h5 {
 .fp8 {
     font-size: .8em !important;
 }
+
 .fp85 {
     font-size: .85em !important;
 }
+
 .fp9 {
     font-size: .9em !important;
 }
@@ -1437,7 +1467,7 @@ h5 {
 
 .mh_50 {
 
-    min-height: 50px!important;
+    min-height: 50px !important;
 }
 
 .mh_350 {
@@ -1466,28 +1496,31 @@ h5 {
 }
 
 .mh_500 {
-    min-height:500px!important;
+    min-height: 500px !important;
 }
 
 .mah_450 {
 
     max-height: 450px !important;
 }
+
 .mah_500 {
 
     max-height: 500px !important;
 }
+
 .mah_50 {
 
     max-height: 50px !important;
 }
+
 .mah_250 {
     max-height: 250px !important;
 }
+
 .mah_200 {
     max-height: 200px !important;
 }
-
 
 
 .bloque_general_info {
@@ -1513,103 +1546,154 @@ h5 {
 
     width: 400px !important;
 }
+
 .h_450 {
 
     height: 450px !important;
 }
+
 .solid_1 {
     border: solid 1px;
 }
-.solid_bottom_2{
-    border-bottom: solid 2px black!important;
+
+.solid_bottom_2 {
+    border-bottom: solid 2px black !important;
 }
 
-.solid_bottom_hover_3:hover{
-    border-bottom: solid 3px black!important;
+.solid_bottom_hover_3:hover {
+    border-bottom: solid 3px black !important;
 }
 
-.text_agilizar:hover{
+.text_agilizar:hover {
     background: #e8e9ec;
     padding: 5px 15px;
-    color: #020c1f!important;
+    color: #020c1f !important;
 }
-a{
-    text-decoration: none!important;
+
+a {
+    text-decoration: none !important;
 }
-.menu_acceso_enid{
+
+.menu_acceso_enid {
     background: linear-gradient(to right, #00040e, #0a1a50);
 }
-.text_iniciar_session{
+
+.text_iniciar_session {
     color: #e0e9ea;
 
 }
-.text_iniciar_session:hover{
+
+.text_iniciar_session:hover {
     color: #e0e9ea;
 }
 
-.frecuentes{
+.frecuentes {
     padding: 0px 10px;
 }
+
 .border-right-enid {
-    border-right: 1px solid #565d65!important;
+    border-right: 1px solid #565d65 !important;
 }
+
 .dropleft .dropdown-menu {
 
     min-width: 400px;
 
 }
-.pagination{
-    margin: 0!important;
+
+.pagination {
+    margin: 0 !important;
 }
-.completo:hover{
-    color: #d8e1e2!important;
+
+.completo:hover {
+    color: #d8e1e2 !important;
 }
-.completo{
-    height: 50px!important;
+
+.completo {
+    height: 50px !important;
 }
-.solid_bottom_3{
-    border-bottom: solid 3px #000!important;
+
+.solid_bottom_3 {
+    border-bottom: solid 3px #000 !important;
 }
-.border_enid{
+
+.border_enid {
     border: 1px solid;
     border-bottom: 2px solid #000;
 }
-.azul_estrella{
-    //color: #0070dd;
+
+.azul_estrella {
+/ / color: #0070dd;
     color: #000;
     font-size: 1.5em;
 }
-.azul_estrella_simple{
+
+.azul_estrella_simple {
 
     -webkit-text-fill-color: white;
     -webkit-text-stroke: 0.5px rgb(0, 0, 0);
 }
 
-.azul_estrella_simple:hover{
+.azul_estrella_simple:hover {
     -webkit-text-fill-color: black
 }
-.custom_time_line{
-    background:#f5f5f5!important;
+
+.custom_time_line {
+    background: #f5f5f5 !important;
 }
-.color_recomendaria{
-    color:#02071a
+
+.color_recomendaria {
+    color: #02071a
 }
-.checkbox_enid{
-    width: 15px!important;
-    background-color: white!important;
-    height: 15px!important;
+
+.checkbox_enid {
+    width: 15px !important;
+    background-color: white !important;
+    height: 15px !important;
     appearance: none;
     -webkit-appearance: none !important;
-    outline: none!important;
+    outline: none !important;
 
 }
+
 .checkbox_enid:checked {
-    background-color: #000!important;
+    background-color: #000 !important;
     appearance: none;
     -webkit-appearance: none !important;
-    outline: none!important;
+    outline: none !important;
 }
+
 .checkbox_enid:focus {
     outline: none;
 }
 
+/*Extra small devices(portrait phones, less than576px)*/
+@media (max-width: 575.98px) {
+
+    .top_sm_100{
+        margin-top: 100px;
+    }
+    .padding_sm_20{
+        padding: 0px!important;
+    }
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+}
+
+/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+
+}

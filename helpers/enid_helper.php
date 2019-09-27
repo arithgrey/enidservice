@@ -65,7 +65,7 @@ if (!function_exists('p')) {
     }
 }
 if (!function_exists('btn')) {
-    function btn($info, $attributes = [], $row = 1, $type_button = 1, $submit = 1, $anchor = 0)
+    function btn($info, $attributes = [], $row = 0, $type_button = 1, $submit = 1, $anchor = 0)
     {
 
         if (is_string($attributes)) {
@@ -762,7 +762,7 @@ if (!function_exists('addNRow')) {
 }
 
 if (!function_exists('place')) {
-    function place($class, $attributes = [], $row = 1)
+    function place($class, $attributes = [], $row = 0)
     {
 
         if (is_numeric($attributes) && $attributes > 0) {
@@ -1326,7 +1326,7 @@ if (!function_exists('get_logo')) {
 
         if ($is_mobile == 1) {
 
-            $en_mobile = d(br(2) . "☰ ENID SERVICE", ["class" => "smallnav menu white f12 ", "onclick" => "openNav()"]);
+            $en_mobile = d("☰ ENID SERVICE", ["class" => "smallnav menu white f12 ", "onclick" => "openNav()"]);
             $class = "col-lg-12";
             switch ($tipo) {
                 case 0:
@@ -1579,15 +1579,15 @@ if (!function_exists('get_menu_session')) {
                 ,
                 [
                     "href" => path_enid('login'),
-                    "class" => "text_iniciar_session text-decoration-none"
+                    "class" => "text_iniciar_session text-decoration-none mr-4"
                 ]
             );
 
 
             if ($proceso_compra < 1) {
 
-                $response = flex($vender, $session, "", "mr-3 ");
-                return flex("", $response, ' justify-content-between', '', 'mr-5 fp9 mt-2');
+                $response = flex($vender, $session, "flex-row-reverse bd-highlight", "mr-3 ");
+                return $response;
 
 
             }
@@ -2003,7 +2003,7 @@ function social($proceso_compra, $desc_web, $black = 1)
                 "data-size" => "large",
                 "href" => $url_twitter,
             ]);
-        $r[] = get_url_pinterest($url_share, $desc_web);
+        $r[] = get_url_pinterest($url_share, 1);
 
 
     }
@@ -2139,6 +2139,7 @@ function hrz($a, $b, $col = 0, $class = '')
     return $response;
 
 }
+
 function dd($a, $b, $col = 0)
 {
     switch ($col) {
@@ -2185,7 +2186,7 @@ function dd($a, $b, $col = 0)
 
         case 8:
 
-            $response =d($a, 8) . d($b, 4);
+            $response = d($a, 8) . d($b, 4);
 
             break;
 
@@ -2210,65 +2211,66 @@ function dd($a, $b, $col = 0)
     return $response;
 
 }
-function dd_p($a, $b, $col = 0, $extra_left ='' , $extra_right='')
+
+function dd_p($a, $b, $col = 0, $extra_left = '', $extra_right = '')
 {
     switch ($col) {
 
         case 1:
 
-            $response = d($a, "p-0 col-lg-1 ".$extra_left) . d($b, "p-0 col-lg-11 ".$extra_right);
+            $response = d($a, "p-0 col-lg-1 " . $extra_left) . d($b, "p-0 col-lg-11 " . $extra_right);
             break;
 
         case 2:
 
-            $response = d($a, "p-0 col-lg-2 ".$extra_left) . d($b, "p-0 col-lg-10 ".$extra_right);
+            $response = d($a, "p-0 col-lg-2 " . $extra_left) . d($b, "p-0 col-lg-10 " . $extra_right);
 
             break;
         case 3:
 
-            $response = d($a, "p-0 col-lg-3 ".$extra_left) . d($b, "p-0 col-lg-9 ".$extra_right);
+            $response = d($a, "p-0 col-lg-3 " . $extra_left) . d($b, "p-0 col-lg-9 " . $extra_right);
 
             break;
 
         case 4:
 
-            $response = d($a, "p-0 col-lg-4 ".$extra_left) . d($b, "p-0 col-lg-8 ".$extra_right);
+            $response = d($a, "p-0 col-lg-4 " . $extra_left) . d($b, "p-0 col-lg-8 " . $extra_right);
 
             break;
 
         case 5:
 
-            $response = d($a, "p-0 col-lg-5 ".$extra_left) . d($b, "p-0 col-lg-7 ".$extra_right);
+            $response = d($a, "p-0 col-lg-5 " . $extra_left) . d($b, "p-0 col-lg-7 " . $extra_right);
 
             break;
 
         case 6:
 
-            $response = d($a, "p-0 col-lg-6 ".$extra_left) . d($b, "p-0 col-lg-6 ".$extra_right);
+            $response = d($a, "p-0 col-lg-6 " . $extra_left) . d($b, "p-0 col-lg-6 " . $extra_right);
 
             break;
 
         case 7:
 
-            $response = d($a, "p-0 col-lg-7 ".$extra_left) . d($b, "p-0 col-lg-5 ".$extra_right);
+            $response = d($a, "p-0 col-lg-7 " . $extra_left) . d($b, "p-0 col-lg-5 " . $extra_right);
 
             break;
 
         case 8:
 
-            $response =d($a, "p-0 col-lg-8 ".$extra_left) . d($b, "p-0 col-lg-4 ".$extra_right);
+            $response = d($a, "p-0 col-lg-8 " . $extra_left) . d($b, "p-0 col-lg-4 " . $extra_right);
 
             break;
 
         case 9:
 
-            $response = d($a, "p-0 col-lg-9 ".$extra_left) . d($b, "p-0 col-lg-3 ".$extra_right);
+            $response = d($a, "p-0 col-lg-9 " . $extra_left) . d($b, "p-0 col-lg-3 " . $extra_right);
 
             break;
 
         case 10:
 
-            $response = d($a, "p-0 col-lg-10 ".$extra_left) . d($b, "p-0 col-lg-2 ".$extra_right);
+            $response = d($a, "p-0 col-lg-10 " . $extra_left) . d($b, "p-0 col-lg-2 " . $extra_right);
 
             break;
 
@@ -2281,9 +2283,6 @@ function dd_p($a, $b, $col = 0, $extra_left ='' , $extra_right='')
     return $response;
 
 }
-
-
-
 
 
 function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row = 1)
@@ -2634,15 +2633,18 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
 
     $r[] = '<form action="../search" class="search_principal_form d-flex">';
     $r[] = d($clasificaciones_departamentos, "display_none");
-    $r[] = d(input(
-        [
-            "class" => "input_busqueda_producto ",
-            "type" => "text",
-            "placeholder" => "Búsqueda",
-            "name" => "q",
-            "onpaste" => "paste_search();"
+    $r[] = d(
+        input(
+            [
+                "class" => "input_busqueda_producto ",
+                "type" => "text",
+                "placeholder" => "Búsqueda",
+                "name" => "q",
+                "onpaste" => "paste_search();"
 
-        ]));
+            ]
+        )
+    );
     $r[] = d(btn(icon("fa fa-search "),
         [
             "class" => " button_busqueda_producto  flipkart-navbar-button"
@@ -2654,36 +2656,30 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
 
     $carrito = btw(
         d(
-            icon("fa fa-shopping-bag"),
+            icon("fa fa-shopping-bag  white")
+            ,
             [
-                "class" => "dropdown-toggle",
+                "class"=>"dropdown-toggle",
                 "data-toggle" => "dropdown"
             ]
 
         ),
-        d(heading("TU CARRITO", 4, "strong "), [
+        d(
+            heading("TU CARRITO", 4, "strong "),
+            [
 
-                "class" => "dropdown-menu top_100 border-0 shadow-sm bg-white p-2 "
+                "class" => "dropdown-menu mt-5 border-0  bg-white p-2 "
             ]
         )
-        ,
-        " dropleft white"
 
     );
 
 
     if ($in_session < 1) {
 
-        $response = append(
-            [
 
-                d("", "col-lg-5 busqueda_izquierda"),
-                d(append($r), "col-lg-5 busqueda_derecho"),
-                d($carrito, "col-lg-2 align-self-center")
-            ]
-        );
+        return flex(append($r), $carrito,"d-flex justify-content-end mr-3","","ml-4 ");
 
-        return d($response, "row");
 
     } else {
 
